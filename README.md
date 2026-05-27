@@ -2,7 +2,7 @@
 
 A Progressive Web App for Dhirubhai Ambani University, enriched with AI.
 
-> **Project checklist (Notion):** https://www.notion.so/Dhirubhai-Ambani-University-PWA-Checklist-36d37054896680329226c5b61049b176
+> **Project Status (Notion):** https://www.notion.so/Dhirubhai-Ambani-University-PWA-Checklist-36d37054896680329226c5b61049b176
 
 ---
 
