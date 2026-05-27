@@ -1,7 +1,7 @@
 # DAU PWA — Claude Code Ruleset
 
 Progressive Web App for Dhirubhai Ambani University, enriched with AI.
-Team lead: Aditya Vaish. Domain-based teams, 10–20 developers.
+Team lead: Aditya Vaish and Vedant Shah. Domain-based teams, 10–20 developers.
 
 ---
 
