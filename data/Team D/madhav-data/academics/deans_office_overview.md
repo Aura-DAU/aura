@@ -1,7 +1,7 @@
 ﻿---
 title: "Dean's Office"
 url: "https://daiict.ac.in/deans-office-0"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"

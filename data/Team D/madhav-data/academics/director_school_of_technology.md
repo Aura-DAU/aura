@@ -1,7 +1,7 @@
 ﻿---
 title: "Director, School of Technology"
 url: "https://www.daiict.ac.in/director-school-technology"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -15,7 +15,7 @@ This page provides information about the Director of the School of Technology at
 
 ## Main Content
 
-![Dr. G. Venkatesh](https://www.daiict.ac.in/sites/default/files/inline-images/Dr-G_Venkatesh.jpg)
+[Image Present: Dr. G. Venkatesh]
 
 > **Note:** The content of this page could not be extracted due to a URL fetch permission timeout during scraping. The DA-IICT website uses dynamic rendering (JavaScript/Drupal) which limits static HTML extraction. Please visit the original URL for complete and up-to-date information.
 

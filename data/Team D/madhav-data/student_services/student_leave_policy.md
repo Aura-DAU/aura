@@ -5,6 +5,8 @@ category: "Student Services"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
+source_type: "PDF"
+pdf_name: "Student_Leave_Policy_wef_AY2021-22"
 ---
 
 ## Overview

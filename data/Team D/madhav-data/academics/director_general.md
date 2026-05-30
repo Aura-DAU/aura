@@ -1,7 +1,7 @@
 ﻿---
 title: "Director General"
 url: "https://daiict.ac.in/director"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -13,7 +13,7 @@ Dr. Tathagata Bandyopadhyay serves as the Director General of Dhirubhai Ambani U
 
 ## Main Content
 
-![Dr. Tathagata Bandyopadhyay](https://daiict.ac.in/sites/default/files/other-images/Dr_Tathagata-Bandyopadhyay.jpg)
+[Image Present: Dr. Tathagata Bandyopadhyay]
 
 ### Dr. Tathagata Bandyopadhyay
 

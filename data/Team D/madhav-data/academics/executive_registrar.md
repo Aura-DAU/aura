@@ -1,7 +1,7 @@
 ﻿---
 title: "Executive Registrar"
 url: "https://daiict.ac.in/executive-registrar"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -13,7 +13,7 @@ Profile of Mr. Siddharth Swaminarayan, the Executive Registrar of Dhirubhai Amba
 
 ## Main Content
 
-![Siddharth Swaminarayan](https://daiict.ac.in/sites/default/files/other-images/Siddharth-Swaminarayan_Registrar.jpg)
+[Image Present: Siddharth Swaminarayan]
 
 ### Mr. Siddharth Swaminarayan
 

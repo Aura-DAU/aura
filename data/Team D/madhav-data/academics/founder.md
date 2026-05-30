@@ -1,7 +1,7 @@
 ﻿---
 title: "Founder"
 url: "https://daiict.ac.in/founder"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -13,7 +13,7 @@ A tribute to the late Shri Dhirubhai H. Ambani (1932â€“2002), founder of Re
 
 ## Main Content
 
-![Late Dhirubhai H Ambani (1932-2002)](https://daiict.ac.in/themes/daiict/images/dhirubhai-ambani.jpg)
+[Image Present: Late Dhirubhai H Ambani (1932-2002)]
 
 ### Late Dhirubhai H. Ambani (1932â€“2002)
 

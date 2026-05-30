@@ -1,7 +1,7 @@
 ﻿---
 title: "Dean (Students)"
 url: "https://www.daiict.ac.in/dean-students"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -14,7 +14,7 @@ The Dean of Students at DAU oversees holistic student development through extra-
 ## Main Content
 
 
-![Dr. P S Kalyan Sasidhar - Dean of Students](https://www.daiict.ac.in/sites/default/files/other-images/Prof_Kalyan_Sasidhar.jpg)
+[Image Present: Dr. P S Kalyan Sasidhar - Dean of Students]
 
 ### Message from the Dean (Students)
 

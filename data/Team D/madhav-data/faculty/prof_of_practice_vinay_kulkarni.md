@@ -1,7 +1,7 @@
 ﻿---
 title: "Vinay Kulkarni"
 url: "https://www.daiict.ac.in/professor-practice/vinay-kulkarni"
-category: "Professor of Practice"
+category: "Faculty"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"

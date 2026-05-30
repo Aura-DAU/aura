@@ -1,7 +1,7 @@
 ﻿---
 title: "President"
 url: "https://daiict.ac.in/president"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -13,7 +13,7 @@ Profile of Mrs. Tina Anil Ambani, President of Dhirubhai Ambani University (DAU)
 
 ## Main Content
 
-![Mrs. Tina Anil Ambani](https://daiict.ac.in/sites/default/files/other-images/Tina_Anil_Ambani.jpg)
+[Image Present: Mrs. Tina Anil Ambani]
 
 ### Mrs. Tina Anil Ambani
 

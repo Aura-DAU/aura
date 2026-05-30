@@ -1,7 +1,7 @@
 ﻿---
 title: "Academic Calendar"
 url: "https://daiict.ac.in/academic-calendar"
-category: "Academics"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"

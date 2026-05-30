@@ -1,7 +1,7 @@
 ﻿---
 title: "Admissions"
 url: "https://daiict.ac.in/admissions"
-category: "Admissions"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"

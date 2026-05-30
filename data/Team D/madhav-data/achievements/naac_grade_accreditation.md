@@ -14,7 +14,7 @@ DA-IICT (now Dhirubhai Ambani University) achieved the prestigious NAAC Grade A+
 ## Main Content
 
 
-![NAAC Grade Award 2023](https://www.daiict.ac.in/sites/default/files/inline-images/NAAC_Banner_Page-2025.jpg)
+[Image Present: NAAC Grade Award 2023]
 
 ### DA-IICT Achieves NAAC Grade A+ Accreditation
 

@@ -1,7 +1,7 @@
 ﻿---
 title: "Prof. S.C. Sahasrabudhe - A Memoir"
 url: "https://www.daiict.ac.in/prof-sc-sahasrabudhe-memoir"
-category: "News"
+category: "Announcements"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -14,7 +14,7 @@ A memoir page dedicated to Prof. S.C. Sahasrabudhe, former Director of DA-IICT (
 ## Main Content
 
 
-![Prof SC Sahasrabudhe - A Memoir](https://www.daiict.ac.in/themes/daiict/images/SC-Sahasrabudhe.jpg)
+[Image Present: Prof SC Sahasrabudhe - A Memoir]
 
 ### Prof. S.C. Sahasrabudhe - A Memoir
 

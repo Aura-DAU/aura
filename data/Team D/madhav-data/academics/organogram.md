@@ -1,7 +1,7 @@
 ﻿---
 title: "Organogram"
 url: "https://daiict.ac.in/organogram"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -13,7 +13,7 @@ The Organogram page presents the organizational hierarchy of Dhirubhai Ambani Un
 
 ## Main Content
 
-![DAU Organogram 2025](https://daiict.ac.in/sites/default/files/inline-images/Organogram-Sep-2025.jpg)
+[Image Present: DAU Organogram 2025]
 
 ### Organizational Hierarchy
 

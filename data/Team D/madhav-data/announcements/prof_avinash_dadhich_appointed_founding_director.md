@@ -1,7 +1,7 @@
 ﻿---
 title: "Press Release"
 url: "https://www.daiict.ac.in/prof-avinash-dadhich-appointed-founding-director-establish-proposed-school-law"
-category: "News"
+category: "Announcements"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -43,7 +43,7 @@ For further information, please write to us at:Â communication_office[at]daiic
 
 ## Images
 
-- ![Prof. (Dr.) Avinash Dadhich](https://www.daiict.ac.in/sites/default/files/other-images/Dr_Avinash-Dadhich.jpeg)
+- [Image Present: Prof. (Dr.) Avinash Dadhich]
 
 ## Related Links
 

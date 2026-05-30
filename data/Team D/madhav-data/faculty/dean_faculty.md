@@ -1,7 +1,7 @@
 ﻿---
 title: "Dean (Faculty)"
 url: "https://www.daiict.ac.in/dean-faculty"
-category: "Governance"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
@@ -14,7 +14,7 @@ The Dean of Faculty Affairs at DAU oversees academic excellence through research
 ## Main Content
 
 
-![Dean (Academic Programs)](https://www.daiict.ac.in/sites/default/files/other-images/Dean_Faculty_Dr_Manikl.jpg)
+[Image Present: Dean (Academic Programs)]
 
 ### Message from the Dean of Faculty Affairs
 

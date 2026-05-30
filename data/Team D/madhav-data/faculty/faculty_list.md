@@ -1,7 +1,7 @@
 ﻿---
 title: "Faculty"
 url: "https://daiict.ac.in/faculty"
-category: "Faculty Pages"
+category: "Faculty"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"

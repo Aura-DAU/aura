@@ -1,7 +1,7 @@
 ﻿---
 title: "Anil Maheshwari"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/anil-maheshwari"
-category: "International Adjunct Faculty"
+category: "Faculty"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"

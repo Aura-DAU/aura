@@ -1,7 +1,7 @@
 ﻿---
 title: "Examination Rules"
 url: "https://daiict.ac.in/examination-rules"
-category: "Academics"
+category: "Academic"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
