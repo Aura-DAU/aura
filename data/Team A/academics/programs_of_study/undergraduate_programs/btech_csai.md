@@ -3,9 +3,15 @@ title: "B.Tech. (CS and AI)"
 url: "https://www.daiict.ac.in/btech-csai"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+DAU's **B.Tech. in Computer Science and Artificial Intelligence (CSAI)** is a four-year undergraduate program designed for students who want strong foundations in Computer Science together with modern Artificial Intelligence. Computing systems now drive innovation across technological sectors, and AI increasingly enables pattern discovery, prediction, and decision-making across domains such as vision, speech, natural language processing, robotics, healthcare, business, and finance.
+
+# Main Content
 
 ## Program Overview
 

@@ -3,9 +3,15 @@ title: "Doctoral Program"
 url: "https://www.daiict.ac.in/programs-of-study"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scared_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+**Dhirubhai Ambani University** (Formerly DA-IICT) offers an intense Doctoral of Philosophy (Ph.D.) program in ICT and allied disciplines, Mathematical and Computational Sciences and Humanities and Social Sciences. Admission to the Ph.D. program is possible through the following channel:
+
+# Main Content
 
 **Dhirubhai Ambani University** (Formerly DA-IICT) offers an intense Doctoral of Philosophy (Ph.D.) program in ICT and allied disciplines, Mathematical and Computational Sciences and Humanities and Social Sciences. Admission to the Ph.D. program is possible through the following channel:
 

@@ -3,9 +3,15 @@ title: "B.Tech. (Honours) in ICT with minor in Computational Science"
 url: "https://www.daiict.ac.in/btech-honours-ict-minor-computational-science"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+DAU’s **B.Tech. in ICT (Hons) with minor in Computational Science (ICT-CS)** is a four-year undergraduate program designed for students who wish to combine strong foundations in Information and Communication Technology (ICT) with the power of computational and scientific problem solving. As modern science, engineering, industry, and society increasingly rely on data-driven modelling, simulation, optimization, and high-performance computing, computational science has emerged as a key interdisciplinary field connecting computing, mathematics, and real-world applications.
+
+# Main Content
 
 ## Program Overview
 

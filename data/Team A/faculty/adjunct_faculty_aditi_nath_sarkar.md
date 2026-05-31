@@ -1,11 +1,17 @@
 ---
 title: "Aditi Nath Sarkar"
 url: "https://www.daiict.ac.in/adjunct-faculty/aditinath-sarkar"
-category: "Adjunct Faculty"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Aditi Nath Sarkar
+
+# Main Content
 
 # Aditi Nath Sarkar
 

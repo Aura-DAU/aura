@@ -3,9 +3,15 @@ title: "P S Kalyan Sasidhar"
 url: "https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of P S Kalyan Sasidhar
+
+# Main Content
 
 # P S Kalyan Sasidhar
 

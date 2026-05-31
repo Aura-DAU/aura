@@ -3,9 +3,15 @@ title: "M.Tech. (ICT)"
 url: "https://www.daiict.ac.in/mtech-ict"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Master of Technology in Information and Communication Technology – MTech (ICT) is a fulltime two-year (four semesters) program. The program has been specially designed to meet the increasing needs of professionals who would be able to respond to the convergence between computers and communication systems. The program aims to provide exposure to students who wish to build a professional career in ICT, working at the intersection of technology, research, and development in the areas of Machine Learning and applications to speech, image and vision, natural language processing and others, Data Analytics, Cyber Security, Distributed Computing, Software Engineering, Embedded Systems, VLSI Subsystem Design, FPGA, Low-power VLSI Design and Nano electronics, advanced wireless communication systems (including 5G and next generation wireless systems), advanced signal processing technologies and the confluence of these two.
+
+# Main Content
 
 ## Program Overview
 

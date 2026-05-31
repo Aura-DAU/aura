@@ -3,9 +3,15 @@ title: "M.Des. (Intelligent User Experience Design) "
 url: "https://www.daiict.ac.in/mdes-intelligent-user-experience-design"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+The M.Des. Program is a full-time Master’s program offering 2 specializations, namely:
+
+# Main Content
 
 ## M.Des. (IUxD) Overview
 

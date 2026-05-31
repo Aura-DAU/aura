@@ -3,9 +3,15 @@ title: "Academic Calendar 2024-25"
 url: "https://www.daiict.ac.in/academic-calendar"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Academic Calendar 2024-25
+
+# Main Content
 
 ## Autumn 2024-25
 

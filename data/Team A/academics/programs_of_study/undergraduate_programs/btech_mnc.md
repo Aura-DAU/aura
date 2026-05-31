@@ -3,9 +3,15 @@ title: "B.Tech. (MnC)"
 url: "https://www.daiict.ac.in/btech-mnc"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Mathematics and Computing (MnC) is a fusion of Mathematics and Computer Science that has obtained wide acceptance as a distinct discipline over the past few years. It arises out of dealing with Mathematics as a fundamental tool in computing and with Computing as a primary component of mathematical problem solving. The program has been specially designed to meet the increasing needs of professionals who would be able to respond to the convergence between mathematical and computational problem solving. The program aims at expanding the mathematical, algorithmic and computational thinking of students and at providing sufficient and solid foundation for skill development in MnC. A strong mathematical foundation would enable the study and analysis of abstract concepts and to model many real life problems mathematically, algorithmic thinking would provide ways to solve these mathematical problems in an automated way and computational thinking would allow for evaluating the efficiency of these solutions.
+
+# Main Content
 
 ## Program Overview
 

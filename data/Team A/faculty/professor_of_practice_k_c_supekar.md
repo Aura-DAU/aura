@@ -1,11 +1,17 @@
 ---
 title: "K C Supekar"
 url: "https://www.daiict.ac.in/professor-practice/kc-supekar"
-category: "Professor of Practice"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of K C Supekar
+
+# Main Content
 
 # K C Supekar
 

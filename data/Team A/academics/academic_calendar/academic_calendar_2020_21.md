@@ -3,9 +3,15 @@ title: "Academic Calendar 2020-21"
 url: "https://www.daiict.ac.in/academic-calendar"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Academic Calendar 2020-21
+
+# Main Content
 
 ## Winter 2020-21 Academic Calendar for UG 2020 batch
 

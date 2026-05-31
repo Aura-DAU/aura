@@ -3,9 +3,15 @@ title: "Archived Calendars"
 url: "https://www.daiict.ac.in/academic-calendar"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Archived Calendars
+
+# Main Content
 
 | **Year** | **Title** | **Download** |
 | --- | --- | --- |

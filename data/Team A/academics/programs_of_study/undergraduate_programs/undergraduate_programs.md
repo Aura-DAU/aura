@@ -3,9 +3,15 @@ title: "Undergraduate Programs"
 url: "https://www.daiict.ac.in/programs-of-study"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scared_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+**Dhirubhai Ambani University (Formerly DA-IICT)** has played a pioneering role in shaping undergraduate education in Information and Communication Technology (ICT) in India, since its establishment in 2001. The University has consistently focused on creating innovative and interdisciplinary academic programs that integrate Information Technology, Communication Technology, Electronics Engineering, Mathematics, Sciences, Humanities, and Social Sciences. This holistic approach reflects the evolving nature of technology-driven disciplines and prepares students to address complex real-world challenges beyond the scope of conventional engineering education.
+
+# Main Content
 
 **Dhirubhai Ambani University (Formerly DA-IICT)** has played a pioneering role in shaping undergraduate education in Information and Communication Technology (ICT) in India, since its establishment in 2001. The University has consistently focused on creating innovative and interdisciplinary academic programs that integrate Information Technology, Communication Technology, Electronics Engineering, Mathematics, Sciences, Humanities, and Social Sciences. This holistic approach reflects the evolving nature of technology-driven disciplines and prepares students to address complex real-world challenges beyond the scope of conventional engineering education.
 

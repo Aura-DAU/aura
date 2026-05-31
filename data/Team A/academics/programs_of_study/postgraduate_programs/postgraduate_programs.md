@@ -3,9 +3,15 @@ title: "Postgraduate Programs"
 url: "https://www.daiict.ac.in/programs-of-study"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scared_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+**(1)** A two-year M.Tech. program in Information and Communication Technology (ICT) with specializations in (a) Machine Learning, (b) Software Systems and (c) VLSI and Embedded systems.
+
+# Main Content
 
 ### DAU offers five programs at the postgraduate level:
 

@@ -1,11 +1,17 @@
 ---
 title: "Subhas Chandra Nandy"
 url: "https://www.daiict.ac.in/adjunct-faculty/subhas-chandra-nandy"
-category: "Adjunct Faculty"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Subhas Chandra Nandy
+
+# Main Content
 
 # Subhas Chandra Nandy
 

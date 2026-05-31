@@ -1,11 +1,17 @@
 ---
 title: "Anirban Dutta Gupta"
 url: "https://www.daiict.ac.in/professor-practice/anirban-dutta-gupta"
-category: "Professor of Practice"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Anirban Dutta Gupta
+
+# Main Content
 
 # Anirban Dutta Gupta
 

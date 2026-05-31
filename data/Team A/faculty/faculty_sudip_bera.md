@@ -3,9 +3,15 @@ title: "Sudip Bera"
 url: "https://www.daiict.ac.in/faculty/sudip-bera"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Sudip Bera
+
+# Main Content
 
 # Sudip Bera
 

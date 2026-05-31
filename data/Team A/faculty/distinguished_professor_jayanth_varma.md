@@ -1,11 +1,17 @@
 ---
 title: "Jayanth Varma"
 url: "https://www.daiict.ac.in/distinguished-professor/jayanth-varma"
-category: "Distinguished Professor"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Jayanth Varma
+
+# Main Content
 
 # Jayanth Varma
 

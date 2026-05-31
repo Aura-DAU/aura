@@ -1,11 +1,17 @@
 ---
 title: "Binay Bhushan Chakrabarti"
 url: "https://www.daiict.ac.in/adjunct-faculty/binay-bhushan-chakrabarti"
-category: "Adjunct Faculty"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Binay Bhushan Chakrabarti
+
+# Main Content
 
 # Binay Bhushan Chakrabarti
 

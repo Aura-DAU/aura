@@ -1,11 +1,17 @@
 ---
 title: "Parth Mehta"
 url: "https://www.daiict.ac.in/adjunct-faculty/parth-mehta"
-category: "Adjunct Faculty"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Parth Mehta
+
+# Main Content
 
 # Parth Mehta
 

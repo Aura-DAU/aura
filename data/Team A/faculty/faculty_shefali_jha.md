@@ -3,9 +3,15 @@ title: "Shefali Jha"
 url: "https://www.daiict.ac.in/faculty/shefali-jha"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Shefali Jha
+
+# Main Content
 
 # Shefali Jha
 

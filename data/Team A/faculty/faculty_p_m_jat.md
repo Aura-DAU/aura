@@ -3,9 +3,15 @@ title: "P M Jat"
 url: "https://www.daiict.ac.in/faculty/p-m-jat"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of P M Jat
+
+# Main Content
 
 # P M Jat
 

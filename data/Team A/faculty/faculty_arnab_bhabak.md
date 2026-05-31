@@ -3,9 +3,15 @@ title: "Arnab Bhabak"
 url: "https://www.daiict.ac.in/faculty/arnab-bhabak"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Arnab Bhabak
+
+# Main Content
 
 # Arnab Bhabak
 

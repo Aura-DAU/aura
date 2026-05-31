@@ -3,9 +3,15 @@ title: "M.Sc. (Agriculture Analytics) "
 url: "https://www.daiict.ac.in/msc-agriculture-analytics"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+The M.Sc. (Agriculture Analytics) is Jointly offered by DA-IICT, Anand Agriculture University and Indian Institute of Remote Sensing (IIRS, Dehradun) with active participation of Industries by offering value added courses. It is a two-year (Four semesters) postgraduate program and the degree will be offered by DA-IICT, Gandhinagar.
+
+# Main Content
 
 ## Program Overview
 

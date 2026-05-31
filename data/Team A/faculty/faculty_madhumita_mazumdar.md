@@ -3,9 +3,15 @@ title: "Madhumita Mazumdar"
 url: "https://www.daiict.ac.in/faculty/madhumita-mazumdar"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Madhumita Mazumdar
+
+# Main Content
 
 # Madhumita Mazumdar
 

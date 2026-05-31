@@ -3,9 +3,15 @@ title: "Ph.D."
 url: "https://www.daiict.ac.in/phd"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+The Doctoral Program leading towards the award of the Degree of Doctor of Philosophy (Ph.D.) provides the students an opportunity for a career in academia or in Research & Development Establishments. A strong foundation and original contribution to knowledge in a chosen area of interest is expected from Ph.D. graduates of DA-IICT.
+
+# Main Content
 
 ## Program Overview
 
@@ -182,6 +188,3 @@ The Tata Consultancy Services (TCS) has recognized DA-IICT as one of the Institu
 #### **Other Fellowships**:
 
 Candidates who have been selected for DST Inspire / PM Scholarship / Visweshvaraya PhD scheme and other appropriate fellowships and admitted to the program can avail their fellowship.
-
-## Academic Requirements
-

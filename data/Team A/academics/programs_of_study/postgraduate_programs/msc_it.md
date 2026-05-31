@@ -3,9 +3,15 @@ title: "M.Sc. (IT)"
 url: "https://www.daiict.ac.in/msc-it"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+The Master of Science (Information Technology) is an intensive two year post-graduate program (4 semesters) designed for students who wish to pursue a professional career in Information Technology. The courses are carefully designed to guide the students through basic concepts to the current practices in industry. Hands-on Laboratory experience is emphasized at every stage of the Program. In the last semester, the students are required to carry out an industry internship. At the end of the program, it is expected that the students attain a sound theoretical foundation; an ability to analyze, conceptualize and design systems; and competence in modern software design and development tools. A typical graduate in IT at DA-IICT can expect to build a career as a software engineer, an analyst or a system designer.
+
+# Main Content
 
 ## Program Overview
 

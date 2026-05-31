@@ -3,9 +3,15 @@ title: "BS–MS in Data Science & Artificial Intelligence (newly launched)"
 url: "https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+A comprehensive five-year dual degree that integrates mathematics, statistics, machine learning, scalable AI systems, and ethical technology practices, enabling graduates to lead in research, innovation, and data-driven transformation.
+
+# Main Content
 
 ## About the Program
 
@@ -99,8 +105,6 @@ Students gain hands-on experience in designing, evaluating, and deploying produc
 ## Structure and Exit Options
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
-
-[Image Present: Structure and Exit Options]
 
 * **After 3 Years – B.Sc. (Bachelor of Science)**  
   Strong grounding in programming, statistics, data science, and core machine learning.

@@ -1,11 +1,17 @@
 ---
 title: "S. Lakshmivarahan"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/s-lakshmivarahan"
-category: "International Adjunct Faculty"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of S. Lakshmivarahan
+
+# Main Content
 
 # S. Lakshmivarahan
 

@@ -3,9 +3,15 @@ title: "Sanjay Srivastava"
 url: "https://www.daiict.ac.in/faculty/sanjay-srivastava"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Sanjay Srivastava
+
+# Main Content
 
 # Sanjay Srivastava
 

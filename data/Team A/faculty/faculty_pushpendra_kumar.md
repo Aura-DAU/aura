@@ -3,9 +3,15 @@ title: "Pushpendra Kumar"
 url: "https://www.daiict.ac.in/faculty/pushpendra-kumar"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Pushpendra Kumar
+
+# Main Content
 
 # Pushpendra Kumar
 

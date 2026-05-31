@@ -3,9 +3,15 @@ title: "B.Tech. (ECE-AI)"
 url: "https://www.daiict.ac.in/btech-ece-ai"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+The **B.Tech in Electronics and Communication Engineering – Artificial Intelligence (ECE-AI)** at Dhirubhai Ambani University is designed to address the growing convergence of electronics, communication technologies, and AI. Modern electronic and communication systems increasingly rely on intelligent algorithms to enhance performance, adaptability, and efficiency. From smart devices and IoT platforms to next-generation wireless networks and autonomous systems, AI is transforming how electronic systems are designed, optimized, and operated.
+
+# Main Content
 
 ## Program Overview
 

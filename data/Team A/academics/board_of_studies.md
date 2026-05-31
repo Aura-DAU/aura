@@ -3,9 +3,15 @@ title: "Board Of Studies"
 url: "https://www.daiict.ac.in/board-studies"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Board of Studies - All Members
+
+# Main Content
 
 ### Chairman
 

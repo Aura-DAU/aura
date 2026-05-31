@@ -1,11 +1,17 @@
 ---
-title: "Computer Networks"
+title: "B.Tech. (ICT)"
 url: "https://www.daiict.ac.in/btech-ict"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+**DA-IICT offers a unique four-year undergraduate program in Information and Communication Technology (ICT) leading to the degree of:**
+
+# Main Content
 
 ## Program Overview
 

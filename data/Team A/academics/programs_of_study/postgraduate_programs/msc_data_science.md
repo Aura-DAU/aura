@@ -3,9 +3,15 @@ title: "M.Sc. (Data Science)"
 url: "https://www.daiict.ac.in/msc-data-science"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+The M.Sc. in Data Science at DA-IICT brings together computational and statistical skills for effective data-driven problem-solving. This full-time program equips students with the analytical tools to design advanced technical solutions, emphasizing modern computational methods and rigorous statistical thinking.
+
+# Main Content
 
 ## About the Program
 

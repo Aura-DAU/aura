@@ -3,9 +3,15 @@ title: "Dual Degree Programs"
 url: "https://www.daiict.ac.in/programs-of-study"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scared_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Welcome to the **Dual Degree Programs** at Dhirubhai Ambani University — transformative, five-year integrated academic journeys that blend deep disciplinary foundations with advanced research and real-world innovation.
+
+# Main Content
 
 ## Integrated Pathways for Future Technology Leaders
 

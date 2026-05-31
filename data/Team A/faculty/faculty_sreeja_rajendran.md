@@ -3,9 +3,15 @@ title: "Sreeja Rajendran"
 url: "https://www.daiict.ac.in/faculty/sreeja-rajendran"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Sreeja Rajendran
+
+# Main Content
 
 # Sreeja Rajendran
 

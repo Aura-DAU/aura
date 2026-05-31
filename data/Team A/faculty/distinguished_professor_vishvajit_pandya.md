@@ -1,11 +1,17 @@
 ---
 title: "Vishvajit Pandya"
 url: "https://www.daiict.ac.in/distinguished-professor/vishvajit-pandya"
-category: "Distinguished Professor"
+category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Vishvajit Pandya
+
+# Main Content
 
 # Vishvajit Pandya
 

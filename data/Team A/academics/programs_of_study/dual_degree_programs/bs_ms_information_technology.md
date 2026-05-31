@@ -3,9 +3,15 @@ title: "BS–MS in Information Technology (newly launched)"
 url: "https://www.daiict.ac.in/bs-ms-information-technology"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-31"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+A rigorous five-year integrated program that combines computational foundations with advanced software systems, cybersecurity, and emerging technologies such as distributed systems, cloud computing, and human-computer interaction.
+
+# Main Content
 
 ## About the Program
 
@@ -110,8 +116,6 @@ Students graduate with experience in building and deploying real systems using m
 ## Structure and Exit Options
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
-
-[Image Present: Structure and Exit Options]
 
 * **After 3 Years – B.Sc. (Bachelor of Science) in Information Technology**  
   Strong foundations in programming, data structures and algorithms, databases, operating systems, computer networks, and full-stack development, along with hands-on projects and practical system-building experience.

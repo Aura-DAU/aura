@@ -3,9 +3,15 @@ title: "Examination Department"
 url: "https://www.daiict.ac.in/examination-department"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+The Examination Department is led by the Controller of Examination. The department plays a crucial role in maintaining the academic integrity of the university. Our team ensures smooth conduct of examinations, timely declaration of results, and adherence to university regulations.
+
+# Main Content
 
 ## Examination Department
 
@@ -49,6 +55,10 @@ To ensure a smooth and fair examination process, students must adhere to the fol
 
 * **Apply for Academic Records, Grade Card, CGR etc**. – [[Click Here](https://documents.daiict.ac.in/student/login)]
 * **Student ID Card** [[Click Here](http://intranet.daiict.ac.in/~daiict_nt01/Announcement/Student ID Card Procedure.pdf)]
+
+## CoE Team
+
+**Meet the team responsible for managing the university's examination system:**
 
 ## Contact Us
 

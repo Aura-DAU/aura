@@ -3,9 +3,15 @@ title: "Tapas Kumar Maiti"
 url: "https://www.daiict.ac.in/faculty/tapas-kumar-maiti"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Tapas Kumar Maiti
+
+# Main Content
 
 # Tapas Kumar Maiti
 

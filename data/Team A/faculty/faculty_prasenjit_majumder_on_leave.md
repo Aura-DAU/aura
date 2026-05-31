@@ -3,9 +3,15 @@ title: "Prasenjit Majumder (On Leave)"
 url: "https://www.daiict.ac.in/faculty/prasenjit-majumder"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+Profile of Prasenjit Majumder (On Leave)
+
+# Main Content
 
 # Prasenjit Majumder (On Leave)
 

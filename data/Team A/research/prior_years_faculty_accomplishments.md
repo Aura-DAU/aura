@@ -1,0 +1,124 @@
+---
+title: "Prior Years (Faculty Accomplishments)"
+url: "https://www.daiict.ac.in/prior-years-faculty-accomplishments"
+category: "Research"
+scraped_by: "Khushi Gandhi"
+scraped_date: "2026-06-01"
+team: "Team A"
+---
+
+# Overview
+
+Prior Years Faculty Accomplishments
+
+# Main Content
+
+Year 2019
+
+|  |  |
+| --- | --- |
+| Prof. Hemant Patil | **Joint Collaboration Between DA-IICT Gandhinagar and Samsung R&D Institute, Bangalore (SRI-B)**  Prof. Hemant A. Patil was invited by Samsung R&D Institute, Bangalore (SRI-B) to spend Sabbatical Leave during May-Aug. 2019 along with three PhD students, namely, Mr. Nirmesh J. Shah, Ms. Madhu R. Kamble, and Mr. Ankur T. Patil, of Speech Research Lab @ DA-IICT. In addition, Prof. Patil took initiative in supervising 05 summer interns (from IIT Hyderabad, IIT BHU, Jadavpur University, IIIT Hyderabad, and Delhi Technological University) of SRI-B. Prof. Patil delivered prestigious Samsung wide tech talk on Generative Adversarial Networks (GANs) for Speech Technology, and other four advanced research-based talks of mutual research interest at SRI-B. Prof. Patil and his team worked very closely with Dr. Vikram Vij (Vice President, Voice Intelligence Group, SRI-B) and other colleagues at SRI-B. This resulted in synergistic and long term collaboration between DA-IICT faculty and students and top notch scientists of SRI-B. We wish Prof. Patil and his team all success for continued future collaboration with SRI-B. |
+
+Year 2018
+
+|  |  |
+| --- | --- |
+| Prof Minal Bhise | Prof Minal Bhise along with Ms Ruchita Shah and Ms Ami Pandat received Best Paper Award at IEEE WIECON-ECE 2018, Pattaya, Thailand for the research paper entitled “Query Processing Framework for Streaming Sensor Data". |
+| Prof Saurabh Tiwari | Prof Saurabh Tiwari received Best Paper Award in (Software Engineering in Practice (SEIP) Track) 25th Asia Pacific Software Engineering Conference [(APSEC 2018)](http://www.apsec2018.org/), December 4-7, 2018 for the research paper entitled “Adopting MBSE in Construction Equipment Industry: An Experience Report”. |
+| Prof K.S. Dasgupta | The Government of Gujarat conferred.  The “Best University in Innovation” award by Government of Gujarat conferred on DA-IICT at the National Student Start-up & Innovation Summit held on 5th October, 2017 at Ahmedabad. Prof K.S. Dasgupta, Director, DA-IICT received the award from Shri Bhupendrasinh Manubha Chudasama, Minister, Education (Primary, Secondary and Adult), Higher and Technical Education, Revenue, Parliamentary Affairs, Government of Gujarat. |
+
+Year 2017
+
+|  |  |
+| --- | --- |
+| Prof Hemant Patil | ‘Distinguished faculty’ award by the Asia-Pacific Signal and Information Processing Association, 2017. |
+
+Year 2016
+
+|  |  |
+| --- | --- |
+| Prof. Saurabh Tiwari | Early career research award from Science and Engineering Research Board, Government of India, 2016. |
+
+Year 2014
+
+|  |  |
+| --- | --- |
+| Prof Ganesh Devy | Literature and Education, Padmashri Award 2014. The Padma Shri award, the nation’s civilian award for literature and education, was given to Professor Ganesh Devy on 26 January 2014. The award is conferred in recognition of his work on education of de-notified and nomadic tribes and on dying-out Indian languages. The ˜Padma Shri’ follows several other awards that he has received, including the Sahitya Akademi Award for a publication of original analysis of literacy criticism in India titled ‘After Amnesia’, SAARC Writers Foundation Award for his work on de-notified tribals and reputed Prince Claus Award by the Prince Clause Fund for his work for the conservation of the history, languages and views of oppressed communities in Gujarat. Civilian Honour of Padmashri, in the field of Literature and Education, 26 January, 2014. |
+| Prof Bhaskar Chaudhury & Prof Mukesh Tiwari | Parallel and Distributed Computing. National Science Foundation, USA, IEE-TCPP CDER Early Adopter Award, 2014. |
+| Prof. Aditi Nath Sarkar | Member, Governing Council, Satyajit Ray Film & Television Institute (SRFTI) Kolkata |
+| Prof. Manik Lal Das | Secretary, IEEE Gujarat Section |
+| Prof. Nagaraj Ramrao | Chief Guest in ISTE Approved Faculty Development Programme on ‘Developing Excellence in Academic & Research Leadership’ at Institute of Pharmacy, Nirma University |
+
+Year 2013
+
+|  |  |
+| --- | --- |
+| Prof Manjunath V. Joshi | Best Paper Award, “Image Denoising Using Redundant Finer Directional Wavelet Transform,” National Conference on Computer Vision, Pattern Recognition, Image Processing and Graphics, Jodhpur, India, 18-21 December, 2013 |
+
+Year 2012
+
+|  |  |
+| --- | --- |
+| Prof Ranendu Ghosh | Team Excellence Award by Indian Space Research Organisation, Government of India, Department of Space, In recognition of his contribution to the “Village Resource Centre (VRC) Programme” |
+| Prof Prabhat Ranjan | Science and Technology. Bihar Gaurav Samman 2012  NCPEDP-Mphasis Universal Design Award, 2012. Bihar Gaurav Samman given by Mr. Narendra Modi, CM, Gujarat during Bihar Shatabdi Samaroh on 29 July, 2012 for contribution to Science and Technology |
+| Prof Anil Roy | Management. IEE MGA Leadership Award, 2012. |
+| Prof. Sanjay Chaudhary | Gujarat Sahitya Academy has awarded second prize to the book ‘Girnar’ under ‘Essays and Travelogue’ category. |
+| Prof Mehul Raval | Asia Pacific Outstanding Student Branch Counselor Award towards leading IEEE DA-IICT SB by IEEE Region, 10 November, 2012 |
+| Dr TS Kumbar | Information Science. Management Libraries Network Best Librarian Award, 2012, HP Innovate, 2009. |
+
+Year 2011
+
+|  |  |
+| --- | --- |
+| Prof Ganesh Devy | Linguapax Award 2011 for Safeguarding Language Diversity, Barcelona, 31st May, 2011 |
+
+Year 2010
+
+|  |  |
+| --- | --- |
+| Prof Tridip Suhrud | Literature, Central Sahitya Academy Award, 2010. |
+
+Year 2009
+
+|  |  |
+| --- | --- |
+| Prof Bhaskar Chaudhury | Oscar Buneman Award (ICNSP), 2009. |
+| Prof Ganesh Devy | Haemony Silver Award 2009 |
+| Prof TS & Kumbar Prabhat Ranjan | HP Innovate, 2009. |
+| Prof Sanjay Chaudhary | Gujarat Sahitya Academy Award, 2009 |
+
+Year 2008
+
+|  |  |
+| --- | --- |
+| Prof Sanjay Chaudhary | Information Technology & Travelogue. Microsoft High Performance Scholar Progam Award, 2008. |
+
+Year 2007
+
+|  |  |
+| --- | --- |
+| Prof Ganesh Devy | Maharashtra Sahitya Award 2007 |
+| Prof Manjunath Joshi | Information Technology. Dr Vikram Sarabhai Award 2007. |
+
+Year 2006
+
+|  |  |
+| --- | --- |
+| Prof Ganesh Devy | Maharashtra Literature and Cultural Award 2006 |
+
+Year 2005
+
+|  |  |
+| --- | --- |
+| Prof Bhaskar Chaudhury | NASI Swarnajayanti Purashkar (Natl. Academy of Sci.), 2005. |
+| Prof R.B. Lenin | Mathematics. Wolfowitz Prize, 2005. |
+
+Year 2003
+
+|  |  |
+| --- | --- |
+| Prof Ganesh Devy | Prince Clause Award, Netherlands, 2003. |
+
+## Related Links
+
+- [(APSEC 2018)](http://www.apsec2018.org/)

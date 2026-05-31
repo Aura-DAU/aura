@@ -3,9 +3,15 @@ title: "Dean's Office"
 url: "https://www.daiict.ac.in/deans-office"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
-scraped_date: "2026-05-30"
-team: "Team 1"
+scraped_date: "2026-06-01"
+team: "Team A"
 ---
+
+# Overview
+
+DA-IICT is a place where academic programmes meet research-driven teaching, faculty with rich experience in research, state of the art ICT infrastructure and a vibrant campus life. Our jubilant student fraternity, highly qualified faculty, interdisciplinary curricula, and vibrant campus ambience are tightly interwoven to provide the highest standards of academic excellence and all-round development of its students. The strength of our academic programs lies in the interdisciplinary teaching-learning process backed by a strong research-driven training. Our graduates are equipped with strong foundational knowledge, skilled in advanced tools and technologies, and carry prodigious personality to aptly represent themselves as successful leaders in our society and contribute towards the betterment of humanity.
+
+# Main Content
 
 ## Message from the Desk of Dean (Academic Programs)
 
