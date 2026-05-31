@@ -1,5 +1,11 @@
-title: "Prof. Manish K. Gupta has been appointed as IEEE Computer Society  Distinguished Visitor for 2022-2024" url: "https://www.daiict.ac.in/news/4094" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Prof. Manish K. Gupta has been appointed as IEEE Computer Society  Distinguished Visitor for 2022-2024"
+url: "https://www.daiict.ac.in/news/4094"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

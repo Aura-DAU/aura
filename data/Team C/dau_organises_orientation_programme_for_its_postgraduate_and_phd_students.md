@@ -1,5 +1,11 @@
-title: "DAU Organises Orientation Programme for its Postgraduate and PhD Students" url: "https://www.daiict.ac.in/news/6835" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "DAU Organises Orientation Programme for its Postgraduate and PhD Students"
+url: "https://www.daiict.ac.in/news/6835"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -16,14 +22,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 28/07/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/PG-Orientation_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/PG-Orientation_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/PG-Orientation_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/PG-Orientation_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/PG-Orientation_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/PG-Orientation_6.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/PG-Orientation_7.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/PG-Orientation_8.jpg)

@@ -1,5 +1,11 @@
-title: "Talk on \"Manage Your Inner World for a Better Future\" at DAU" url: "https://www.daiict.ac.in/news/6716" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Talk on \"Manage Your Inner World for a Better Future\" at DAU"
+url: "https://www.daiict.ac.in/news/6716"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

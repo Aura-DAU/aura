@@ -1,5 +1,11 @@
-title: "ACM SIGAPP STAP Grant" url: "https://www.daiict.ac.in/news/419" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "ACM SIGAPP STAP Grant"
+url: "https://www.daiict.ac.in/news/419"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

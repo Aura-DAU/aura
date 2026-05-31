@@ -1,5 +1,11 @@
-title: "E-Cell, IIT Kharagpur and DCEI Fuel Gujarat's Startup Culture with Entrepreneurship Awareness Drive 2025" url: "https://www.daiict.ac.in/news/6906" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "E-Cell, IIT Kharagpur and DCEI Fuel Gujarat's Startup Culture with Entrepreneurship Awareness Drive 2025"
+url: "https://www.daiict.ac.in/news/6906"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -21,10 +27,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 11/10/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/EAD-2025-1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/EAD-2025-2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/EAD-2025-3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/EAD-2025-4.jpg)

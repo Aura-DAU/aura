@@ -1,5 +1,11 @@
-title: "An Achievement of our PhD Student" url: "https://www.daiict.ac.in/news/4270" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "An Achievement of our PhD Student"
+url: "https://www.daiict.ac.in/news/4270"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

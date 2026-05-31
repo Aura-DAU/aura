@@ -1,5 +1,11 @@
-title: "DAU features in the Gujarat Education Guide published by the Indian Express Group" url: "https://www.daiict.ac.in/news/6703" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "DAU features in the Gujarat Education Guide published by the Indian Express Group"
+url: "https://www.daiict.ac.in/news/6703"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

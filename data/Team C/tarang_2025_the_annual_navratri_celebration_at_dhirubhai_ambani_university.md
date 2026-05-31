@@ -1,5 +1,11 @@
-title: "Tarang 2025, the annual Navratri Celebration at Dhirubhai Ambani University" url: "https://www.daiict.ac.in/news/6905" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Tarang 2025, the annual Navratri Celebration at Dhirubhai Ambani University"
+url: "https://www.daiict.ac.in/news/6905"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -17,12 +23,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 11/10/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Tarang_2025-1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Tarang_2025-2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Tarang_2025-3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Tarang_2025-4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Tarang_2025-5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Tarang_2025-6.jpg)

@@ -1,5 +1,11 @@
-title: "Shaping the Future of Power: DAU Hosts Panel on Technology Adoption in the Power Sector" url: "https://www.daiict.ac.in/news/6947" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Shaping the Future of Power: DAU Hosts Panel on Technology Adoption in the Power Sector"
+url: "https://www.daiict.ac.in/news/6947"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -21,12 +27,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 20/12/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU_Hosts_Panel_on_Technology_Adoption_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU_Hosts_Panel_on_Technology_Adoption_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU_Hosts_Panel_on_Technology_Adoption_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU_Hosts_Panel_on_Technology_Adoption_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU_Hosts_Panel_on_Technology_Adoption_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU_Hosts_Panel_on_Technology_Adoption_6.jpg)

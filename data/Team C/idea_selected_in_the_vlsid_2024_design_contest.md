@@ -1,5 +1,11 @@
-title: "Idea selected in the VLSID-2024 Design Contest" url: "https://www.daiict.ac.in/news/5795" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Idea selected in the VLSID-2024 Design Contest"
+url: "https://www.daiict.ac.in/news/5795"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

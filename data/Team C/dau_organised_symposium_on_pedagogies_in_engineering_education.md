@@ -1,5 +1,11 @@
-title: "DAU organised Symposium on Pedagogies in Engineering Education" url: "https://www.daiict.ac.in/news/6928" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "DAU organised Symposium on Pedagogies in Engineering Education"
+url: "https://www.daiict.ac.in/news/6928"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -20,19 +26,6 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 24/11/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_6.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_7.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_8.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_9.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Symposium-on-Pedagogies-for-Engineering-Education_10.jpg)
 
 # Downloadable Resources
 

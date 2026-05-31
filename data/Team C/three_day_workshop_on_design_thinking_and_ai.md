@@ -1,5 +1,11 @@
-title: "Three-Day Workshop on Design Thinking and AI" url: "https://www.daiict.ac.in/news/6580" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Three-Day Workshop on Design Thinking and AI"
+url: "https://www.daiict.ac.in/news/6580"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -14,10 +20,3 @@ The Continuing Education Program (CEP) at DAIICT conducted a custom-designed ,in
 # Important Information
 
 - Date of Announcement: 18/12/2024
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Welcome-Session.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Prof-Dhaval.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Prof_Sourish.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Certificate_Session.jpg)

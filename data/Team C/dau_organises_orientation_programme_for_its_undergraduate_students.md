@@ -1,5 +1,11 @@
-title: "DAU Organises Orientation Programme for its Undergraduate Students" url: "https://www.daiict.ac.in/news/6859" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "DAU Organises Orientation Programme for its Undergraduate Students"
+url: "https://www.daiict.ac.in/news/6859"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -17,12 +23,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 21/08/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/UG-Orientation_01.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/UG-Orientation_02.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/UG-Orientation_03.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/UG-Orientation_04.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/UG-Orientation_05.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/UG-Orientation_06.jpg)

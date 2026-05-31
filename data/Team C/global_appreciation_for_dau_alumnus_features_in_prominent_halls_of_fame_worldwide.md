@@ -1,5 +1,11 @@
-title: "Global Appreciation for DAU Alumnus: Features in prominent Halls of Fame worldwide" url: "https://www.daiict.ac.in/news/6726" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Global Appreciation for DAU Alumnus: Features in prominent Halls of Fame worldwide"
+url: "https://www.daiict.ac.in/news/6726"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

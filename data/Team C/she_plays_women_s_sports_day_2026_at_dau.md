@@ -1,5 +1,11 @@
-title: "SHE PLAYS – Women’s Sports Day 2026 at DAU" url: "https://www.daiict.ac.in/news/7067" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "SHE PLAYS – Women’s Sports Day 2026 at DAU"
+url: "https://www.daiict.ac.in/news/7067"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -14,10 +20,3 @@ A sincere thank you to the organisers, participants, and everyone behind the sce
 # Important Information
 
 - Date of Announcement: 27/04/2026
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Women_Sports_Day_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Women_Sports_Day_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Women_Sports_Day_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Women_Sports_Day_4.jpg)

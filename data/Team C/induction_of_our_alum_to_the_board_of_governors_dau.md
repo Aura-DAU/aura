@@ -1,5 +1,11 @@
-title: "Induction of our alum to the Board of Governors, DAU" url: "https://www.daiict.ac.in/news/6681" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Induction of our alum to the Board of Governors, DAU"
+url: "https://www.daiict.ac.in/news/6681"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

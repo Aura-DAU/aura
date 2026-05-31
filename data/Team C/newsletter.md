@@ -1,5 +1,11 @@
-title: "Newsletter" url: "https://www.daiict.ac.in/newsletter" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Newsletter"
+url: "https://www.daiict.ac.in/newsletter"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

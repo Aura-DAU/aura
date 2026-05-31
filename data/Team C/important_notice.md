@@ -1,5 +1,11 @@
-title: "IMPORTANT NOTICE" url: "https://www.daiict.ac.in/important-notice" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "IMPORTANT NOTICE"
+url: "https://www.daiict.ac.in/important-notice"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

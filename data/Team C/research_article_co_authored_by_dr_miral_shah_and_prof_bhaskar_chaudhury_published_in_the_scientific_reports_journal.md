@@ -1,5 +1,11 @@
-title: "Research article co-authored by Dr. Miral Shah and Prof. Bhaskar Chaudhury published in the Scientific Reports journal." url: "https://www.daiict.ac.in/news/6039" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Research article co-authored by Dr. Miral Shah and Prof. Bhaskar Chaudhury published in the Scientific Reports journal."
+url: "https://www.daiict.ac.in/news/6039"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

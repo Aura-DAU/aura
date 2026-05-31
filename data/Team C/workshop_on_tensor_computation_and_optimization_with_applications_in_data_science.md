@@ -1,5 +1,11 @@
-title: "Workshop on Tensor Computation and Optimization with Applications in Data Science" url: "https://www.daiict.ac.in/news/6931" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Workshop on Tensor Computation and Optimization with Applications in Data Science"
+url: "https://www.daiict.ac.in/news/6931"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -16,12 +22,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 26/11/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Tensor-Computation_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Tensor-Computation_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Tensor-Computation_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Tensor-Computation_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Tensor-Computation_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Tensor-Computation_6.jpg)

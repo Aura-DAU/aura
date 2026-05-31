@@ -1,5 +1,11 @@
-title: "DAU Silver Jubilee Celebrations and Alumni Reunion 2025" url: "https://www.daiict.ac.in/news/6953" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "DAU Silver Jubilee Celebrations and Alumni Reunion 2025"
+url: "https://www.daiict.ac.in/news/6953"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -17,18 +23,3 @@ Overall, the DAU Silver Jubilee Celebrations & Alumni Reunion 2025 stood as a me
 # Important Information
 
 - Date of Announcement: 02/01/2026
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_2.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_3.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_4.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_5.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_6.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_7.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_8.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_9.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_10.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_11.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_12.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Celebrations-and-Alumni-Reunion-2025_13.JPG)

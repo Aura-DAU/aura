@@ -1,5 +1,11 @@
-title: "IEEE Student Branch, DAU organises the INDGenius AI Summit 2025" url: "https://www.daiict.ac.in/news/6893" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "IEEE Student Branch, DAU organises the INDGenius AI Summit 2025"
+url: "https://www.daiict.ac.in/news/6893"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -21,14 +27,3 @@ INDGenius AI Summit 2025 - Photographs
 # Important Information
 
 - Date of Announcement: 19/09/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/INDGenius-AI-Summit_2025_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/INDGenius-AI-Summit_2025_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/INDGenius-AI-Summit_2025_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/INDGenius-AI-Summit_2025_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/INDGenius-AI-Summit_2025_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/INDGenius-AI-Summit_2025_6.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/INDGenius-AI-Summit_2025_7.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/INDGenius-AI-Summit_2025_8.jpg)

@@ -1,5 +1,11 @@
-title: "Workshop on Mental Wellness and Workplace Harmony Held at DAU" url: "https://www.daiict.ac.in/news/6733" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Workshop on Mental Wellness and Workplace Harmony Held at DAU"
+url: "https://www.daiict.ac.in/news/6733"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -14,12 +20,3 @@ The workshop provided valuable insights into fostering a healthy work environmen
 # Important Information
 
 - Date of Announcement: 21/04/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Mental-Wellness_01.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Mental-Wellness_02.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Mental-Wellness_03.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Mental-Wellness_04.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Mental-Wellness_05.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-on-Mental-Wellness_06.JPG)

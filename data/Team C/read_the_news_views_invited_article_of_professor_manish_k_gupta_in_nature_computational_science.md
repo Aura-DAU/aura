@@ -1,5 +1,11 @@
-title: "Read the news/views invited article of Professor Manish K. Gupta in Nature Computational Science" url: "https://www.daiict.ac.in/news/4093" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Read the news/views invited article of Professor Manish K. Gupta in Nature Computational Science"
+url: "https://www.daiict.ac.in/news/4093"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

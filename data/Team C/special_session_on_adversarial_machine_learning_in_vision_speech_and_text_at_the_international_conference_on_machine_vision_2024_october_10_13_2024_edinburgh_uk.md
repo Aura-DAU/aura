@@ -1,5 +1,11 @@
-title: "Special session on \"Adversarial Machine Learning in Vision, Speech, and Text\" at the International Conference on Machine Vision, 2024 (October 10-13, 2024 | Edinburgh, UK)" url: "https://www.daiict.ac.in/news/6461" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Special session on \"Adversarial Machine Learning in Vision, Speech, and Text\" at the International Conference on Machine Vision, 2024 (October 10-13, 2024 | Edinburgh, UK)"
+url: "https://www.daiict.ac.in/news/6461"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

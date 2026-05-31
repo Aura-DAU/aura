@@ -1,5 +1,11 @@
-title: "DAU organises Defence Innovation Challenge Event with Indian Air Force Veteran" url: "https://www.daiict.ac.in/news/6888" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "DAU organises Defence Innovation Challenge Event with Indian Air Force Veteran"
+url: "https://www.daiict.ac.in/news/6888"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -16,10 +22,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 15/09/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/IEEE-Defence-Innovation-Challenge_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/IEEE-Defence-Innovation-Challenge_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/IEEE-Defence-Innovation-Challenge_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/IEEE-Defence-Innovation-Challenge_4.jpg)

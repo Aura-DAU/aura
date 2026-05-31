@@ -1,5 +1,11 @@
-title: "Book: Nanoelectronics, Physics, technology and applications by Dr. Rutu Parekh (Author), IOP Publishing, Bristol, UK" url: "https://www.daiict.ac.in/news/6209" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Book: Nanoelectronics, Physics, technology and applications by Dr. Rutu Parekh (Author), IOP Publishing, Bristol, UK"
+url: "https://www.daiict.ac.in/news/6209"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

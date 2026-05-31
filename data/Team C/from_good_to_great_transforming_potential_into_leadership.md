@@ -1,5 +1,11 @@
-title: "From Good to Great: Transforming Potential into Leadership" url: "https://www.daiict.ac.in/news/6990" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "From Good to Great: Transforming Potential into Leadership"
+url: "https://www.daiict.ac.in/news/6990"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -17,10 +23,3 @@ Workshop Photographs
 # Important Information
 
 - Date of Announcement: 23/02/2026
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Leadership-Workshop_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Leadership-Workshop_2.jpeg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Leadership-Workshop_3.jpeg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Leadership-Workshop_4.jpeg)

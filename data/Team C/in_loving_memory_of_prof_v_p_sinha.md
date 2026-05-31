@@ -1,5 +1,11 @@
-title: "In Loving Memory of Prof. V P Sinha" url: "https://www.daiict.ac.in/news/6123" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "In Loving Memory of Prof. V P Sinha"
+url: "https://www.daiict.ac.in/news/6123"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -18,9 +24,3 @@ Condolence Photos
 # Important Information
 
 - Date of Announcement: 15/01/2024
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Prof_V-P-Sinha_2.jpeg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Prof_V-P-Sinha_1.jpeg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Prof_V-P-Sinha_3.jpeg)

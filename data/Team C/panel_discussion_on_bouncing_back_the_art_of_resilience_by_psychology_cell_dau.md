@@ -1,5 +1,11 @@
-title: "Panel Discussion on Bouncing Back: The Art of Resilience by Psychology Cell, DAU" url: "https://www.daiict.ac.in/news/6862" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Panel Discussion on Bouncing Back: The Art of Resilience by Psychology Cell, DAU"
+url: "https://www.daiict.ac.in/news/6862"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -16,10 +22,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 29/08/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/The-Art-of-Resilience_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/The-Art-of-Resilience_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/The-Art-of-Resilience_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/The-Art-of-Resilience_4.jpg)

@@ -1,5 +1,11 @@
-title: "News Article Published in Divya Bhaskar ACM India Winter School 2024" url: "https://www.daiict.ac.in/news/6584" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "News Article Published in Divya Bhaskar ACM India Winter School 2024"
+url: "https://www.daiict.ac.in/news/6584"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

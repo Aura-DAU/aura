@@ -1,5 +1,11 @@
-title: "DAU Gandhinagar Awarded 5-Star \"Exemplary\" Status by FSSAI" url: "https://www.daiict.ac.in/news/6779" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "DAU Gandhinagar Awarded 5-Star \"Exemplary\" Status by FSSAI"
+url: "https://www.daiict.ac.in/news/6779"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -15,8 +21,3 @@ DAU remains dedicated to upholding and enhancing these standards in the future.
 # Important Information
 
 - Date of Announcement: 29/05/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Achievement_Awarded%205-Star_Exemplary_Status_FSSAI_2025.png)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Awarded_5-Star_FSSAI_Cert-2025.png)

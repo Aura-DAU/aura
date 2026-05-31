@@ -1,5 +1,11 @@
-title: "Admission Notice for the Applicants of All Programs Amidst COVID-19 Pandemic Situation" url: "https://www.daiict.ac.in/news/416" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Admission Notice for the Applicants of All Programs Amidst COVID-19 Pandemic Situation"
+url: "https://www.daiict.ac.in/news/416"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

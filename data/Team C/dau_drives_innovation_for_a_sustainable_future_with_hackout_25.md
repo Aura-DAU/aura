@@ -1,5 +1,11 @@
-title: "DAU Drives Innovation for a Sustainable Future with HackOut'25" url: "https://www.daiict.ac.in/news/6895" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "DAU Drives Innovation for a Sustainable Future with HackOut'25"
+url: "https://www.daiict.ac.in/news/6895"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -24,12 +30,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 29/09/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Synapse-Hackout_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Synapse-Hackout_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Synapse-Hackout_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Synapse-Hackout_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Synapse-Hackout_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Synapse-Hackout_6.jpg)

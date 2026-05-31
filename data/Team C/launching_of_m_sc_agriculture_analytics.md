@@ -1,5 +1,11 @@
-title: "Launching of M.Sc. Agriculture Analytics" url: "https://www.daiict.ac.in/news/3935" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Launching of M.Sc. Agriculture Analytics"
+url: "https://www.daiict.ac.in/news/3935"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

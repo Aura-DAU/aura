@@ -1,5 +1,11 @@
-title: "Celebrating 25 Years: DAU's Silver Jubilee Sports Day Event" url: "https://www.daiict.ac.in/news/6932" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Celebrating 25 Years: DAU's Silver Jubilee Sports Day Event"
+url: "https://www.daiict.ac.in/news/6932"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -17,12 +23,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 27/11/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Sports-Day-Event_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Sports-Day-Event_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Sports-Day-Event_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Sports-Day-Event_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Sports-Day-Event_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/DAU-Silver-Jubilee-Sports-Day-Event_6.jpg)

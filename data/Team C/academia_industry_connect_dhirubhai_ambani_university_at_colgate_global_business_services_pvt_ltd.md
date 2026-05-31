@@ -1,5 +1,11 @@
-title: "Academia & Industry Connect: Dhirubhai Ambani University at Colgate Global Business Services Pvt Ltd" url: "https://www.daiict.ac.in/news/6943" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Academia & Industry Connect: Dhirubhai Ambani University at Colgate Global Business Services Pvt Ltd"
+url: "https://www.daiict.ac.in/news/6943"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -16,10 +22,3 @@ DAU officials also met Ms Nidhi Somaiya (Batch of 2022-2024), during this visit 
 # Important Information
 
 - Date of Announcement: 16/12/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Academia-and-Industry-Connect_1.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Academia-and-Industry-Connect_3.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Academia-and-Industry-Connect_4.JPG)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Academia-and-Industry-Connect_5.JPG)

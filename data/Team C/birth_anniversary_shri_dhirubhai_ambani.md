@@ -1,5 +1,11 @@
-title: "Birth Anniversary - Shri Dhirubhai Ambani" url: "https://www.daiict.ac.in/news/6087" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Birth Anniversary - Shri Dhirubhai Ambani"
+url: "https://www.daiict.ac.in/news/6087"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

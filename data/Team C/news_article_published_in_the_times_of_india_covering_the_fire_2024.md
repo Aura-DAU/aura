@@ -1,5 +1,11 @@
-title: "News Article Published in The Times of India covering the FIRE 2024" url: "https://www.daiict.ac.in/news/6582" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "News Article Published in The Times of India covering the FIRE 2024"
+url: "https://www.daiict.ac.in/news/6582"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 

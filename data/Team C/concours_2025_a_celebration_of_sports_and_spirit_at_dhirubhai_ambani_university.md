@@ -1,5 +1,11 @@
-title: "Concours 2025: A Celebration of Sports and Spirit at Dhirubhai Ambani University" url: "https://www.daiict.ac.in/news/6942" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Concours 2025: A Celebration of Sports and Spirit at Dhirubhai Ambani University"
+url: "https://www.daiict.ac.in/news/6942"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -19,12 +25,3 @@ Event Photographs
 # Important Information
 
 - Date of Announcement: 15/12/2025
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Concours-2025_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Concours-2025_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Concours-2025_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Concours-2025_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Concours-2025_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/Concours-2025_6.jpg)

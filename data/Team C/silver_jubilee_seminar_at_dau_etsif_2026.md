@@ -1,5 +1,11 @@
-title: "Silver Jubilee Seminar at DAU | ETSIF 2026" url: "https://www.daiict.ac.in/news/7070" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+title: "Silver Jubilee Seminar at DAU | ETSIF 2026"
+url: "https://www.daiict.ac.in/news/7070"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
 
 # Overview
 
@@ -28,12 +34,3 @@ A heartfelt thanks to all the esteemed speakers, guests, DAU faculty, staff, stu
 # Important Information
 
 - Date of Announcement: 29/04/2026
-
-# Related Links
-
-- [](https://www.daiict.ac.in/sites/default/files/other-images/ETSIF_2026_1.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/ETSIF_2026_2.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/ETSIF_2026_3.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/ETSIF_2026_4.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/ETSIF_2026_5.jpg)
-- [](https://www.daiict.ac.in/sites/default/files/other-images/ETSIF_2026_6.jpg)
