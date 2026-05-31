@@ -15,7 +15,6 @@ Faculty profile page for Sujay Kadam at Dhirubhai Ambani University (DAU), Gandh
 
 ### Sujay Kadam
 
-
 Sujay Kadam
 Â 
 PhD (Electrical Engineering), IIT Gandhinagar

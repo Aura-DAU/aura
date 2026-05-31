@@ -15,7 +15,6 @@ Faculty profile page for Yash Agrawal at Dhirubhai Ambani University (DAU), Gand
 
 ### Yash Agrawal
 
-
 Yash Agrawal
 Â 
 PhD (Electronics & Communication), NIT Hamirpur

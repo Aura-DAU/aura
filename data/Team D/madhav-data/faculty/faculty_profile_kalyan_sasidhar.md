@@ -9,11 +9,7 @@ team: "Team D"
 
 ## Overview
 
-![P S Kalyan Sasidhar](/sites/default/files/faculty_image/P-S-Kalyan-Sasidhar.jpg)
-
 ## Main Content
-
-![P S Kalyan Sasidhar](/sites/default/files/faculty_image/P-S-Kalyan-Sasidhar.jpg)
 
 P S Kalyan Sasidhar
 

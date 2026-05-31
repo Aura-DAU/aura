@@ -15,7 +15,6 @@ Faculty profile page for Supantha Pandit at Dhirubhai Ambani University (DAU), G
 
 ### Supantha Pandit
 
-
 Supantha Pandit
 Â 
 PhD (Computer Science), IIT Ropar
@@ -32,14 +31,11 @@ Supantha Pandit is an Assistant Professor at the Dhirubhai Ambani Institute of I
 
 Â 
 
-
 Â  Â  Personal Website: Click me
 Â Â 
 Specialization
 
-
 Theoretical Computer Science
-
 
 Mainly focused on:
 

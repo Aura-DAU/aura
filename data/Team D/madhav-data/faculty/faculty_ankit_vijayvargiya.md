@@ -15,7 +15,6 @@ Faculty profile page for Ankit Vijayvargiya at Dhirubhai Ambani University (DAU)
 
 ### Ankit Vijayvargiya
 
-
 Ankit Vijayvargiya
 Â 
 PhD (Biomedical Signals), Malaviya National Institute of Technology, Jaipur

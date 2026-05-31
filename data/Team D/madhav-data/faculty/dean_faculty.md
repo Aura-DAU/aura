@@ -13,7 +13,6 @@ The Dean of Faculty Affairs at DAU oversees academic excellence through research
 
 ## Main Content
 
-
 [Image Present: Dean (Academic Programs)]
 
 ### Message from the Dean of Faculty Affairs

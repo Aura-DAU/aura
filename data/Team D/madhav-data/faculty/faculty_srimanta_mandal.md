@@ -15,7 +15,6 @@ Faculty profile page for Srimanta Mandal at Dhirubhai Ambani University (DAU), G
 
 ### Srimanta Mandal
 
-
 Srimanta Mandal
 Â 
 PhD (Computing and Electrical Engineering), IIT Mandi

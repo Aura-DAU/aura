@@ -15,7 +15,6 @@ Faculty profile page for Tathagata Bandyopadhyay at Dhirubhai Ambani University 
 
 ### Tathagata Bandyopadhyay
 
-
 Tathagata Bandyopadhyay
 Â 
 PhD (Statistics), University of Calcutta, Kolkata

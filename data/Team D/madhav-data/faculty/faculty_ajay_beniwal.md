@@ -15,7 +15,6 @@ Faculty profile page for Ajay Beniwal at Dhirubhai Ambani University (DAU), Gand
 
 ### Ajay Beniwal
 
-
 Ajay Beniwal
 Â 
 PhD (Electronics and Communication Engineering), IIIT Allahabad

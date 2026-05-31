@@ -15,7 +15,6 @@ Faculty profile page for Sreeja Rajendran at Dhirubhai Ambani University (DAU), 
 
 ### Sreeja Rajendran
 
-
 Sreeja Rajendran
 Â 
 PhD (Electrical and Electronics Engineering), Birla Institute of Technology and Science, Pilani, Dubai Campus

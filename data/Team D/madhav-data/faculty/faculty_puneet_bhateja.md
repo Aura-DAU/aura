@@ -15,7 +15,6 @@ Faculty profile page for Puneet Bhateja at Dhirubhai Ambani University (DAU), Ga
 
 ### Puneet Bhateja
 
-
 Puneet Bhateja
 Â 
 PhD (Computer Science), Chennai Mathematical Institute

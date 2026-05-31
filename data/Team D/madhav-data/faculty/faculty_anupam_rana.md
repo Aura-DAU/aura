@@ -15,7 +15,6 @@ Faculty profile page for Anupam Rana at Dhirubhai Ambani University (DAU), Gandh
 
 ### Anupam Rana
 
-
 Anupam Rana
 Â 
 PhD (Design Management) - Retails Experience-CX, Indus University, Ahmedabad

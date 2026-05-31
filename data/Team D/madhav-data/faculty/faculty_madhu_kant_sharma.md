@@ -15,7 +15,6 @@ Faculty profile page for Madhu Kant Sharma at Dhirubhai Ambani University (DAU),
 
 ### Madhu Kant Sharma
 
-
 Madhu Kant Sharma
 Â 
 PhD (Mathematics), IIT Madras

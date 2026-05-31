@@ -15,7 +15,6 @@ Faculty profile page for Prosenjit Kundu at Dhirubhai Ambani University (DAU), G
 
 ### Prosenjit Kundu
 
-
 Prosenjit Kundu
 Â 
 PhD (Mathematics), National Institute of Technology, Durgapur

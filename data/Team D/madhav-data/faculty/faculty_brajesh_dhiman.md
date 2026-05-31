@@ -15,7 +15,6 @@ Faculty profile page for Brajesh Dhiman at Dhirubhai Ambani University (DAU), Ga
 
 ### Brajesh Dhiman
 
-
 Brajesh Dhiman
 Â 
 PhD, IIT Guwahati

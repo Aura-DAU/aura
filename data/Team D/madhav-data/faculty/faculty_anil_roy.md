@@ -15,7 +15,6 @@ Faculty profile page for Anil Roy at Dhirubhai Ambani University (DAU), Gandhina
 
 ### Anil Roy
 
-
 Anil Roy (On Leave)
 Â 
 PhD (Physics), IIT Delhi

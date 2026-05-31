@@ -49,7 +49,7 @@ team: "Team D"
   * [Y](javascript:void\(0\))
   * [Z](javascript:void\(0\))
 
-  * ![Jayanth Varma](/sites/default/files/faculty_image/Prof_Jayanth-Varma.jpg)
+  * 
 
 ### [Jayanth varma](https://www.daiict.ac.in/distinguished-professor/jayanth-varma)
 
@@ -59,7 +59,7 @@ Doctorate in Management, IIM Ahmedabad
 
 Financial Markets and Pricing Models, The Financial Sector, International Finance, and Quantitative Modeling.
 
-  * ![Vishvajit Pandya](/sites/default/files/faculty_image/Vishvajit-Pandya.jpg)
+  * 
 
 ### [Vishvajit pandya](https://www.daiict.ac.in/distinguished-professor/vishvajit-pandya)
 

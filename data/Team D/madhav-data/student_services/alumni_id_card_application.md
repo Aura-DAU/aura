@@ -13,7 +13,6 @@ This document contains the schema and details of the online request form for the
 
 ## Main Content
 
-
 ### Alumni E-card Request Form
 
 This application is hosted on Google Forms and is used by the university administration and alumni association to collect details and passport-size photographs to issue official digital and physical Alumni E-cards.

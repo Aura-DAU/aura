@@ -17,7 +17,7 @@ team: "Team D"
 * Teaching Fellows
   * Past Teaching Fellows
 
-  * ![Anuj Budhia](/sites/default/files/employee-photo/Anuj-Budhia.jpg)
+  * 
 
 Anuj budhia
 

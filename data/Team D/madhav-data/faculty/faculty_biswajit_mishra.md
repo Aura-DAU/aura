@@ -15,7 +15,6 @@ Faculty profile page for Biswajit Mishra at Dhirubhai Ambani University (DAU), G
 
 ### Biswajit Mishra
 
-
 Biswajit Mishra
 Â 
 PhD (Electrical & Electronics Engineering), University of Southampton, UK

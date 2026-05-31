@@ -23,7 +23,6 @@ Professor of Electrical and Computer Engineering,
 University of Rochester, CSB 725, Box 270231,
 Rochester, NY 14627-0231 USA
 
-
 Â 
 gaurav.sharma@rochester.edu
 Specialization

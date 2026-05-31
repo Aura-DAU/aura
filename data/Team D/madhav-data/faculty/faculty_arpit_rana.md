@@ -15,7 +15,6 @@ Faculty profile page for Arpit Rana at Dhirubhai Ambani University (DAU), Gandhi
 
 ### Arpit Rana
 
-
 Arpit Rana
 Â 
 PhD (Computer Science), University College Cork, Ireland

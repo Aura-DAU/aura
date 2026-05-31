@@ -15,15 +15,11 @@ team: "Team D"
 
 * A Word 4 U
 
-![Welcome](/sites/default/files/other-images/A-Word-4-U-parents-new.jpg)
-
     * [A Word of Guidance](/word-guidance)
     * [First year in campus](/first-year-campus)
     * [Grievance Redressal Cell ](/grievance-redressal-cell)
 
   * Study at DA-IICT
-
-![Study at DA-IICT](/sites/default/files/other-images/Study-at-DA-IICT-parents.JPG)
 
     * [Undergraduate](/programs-of-study)
     * [Postgraduate ](/programs-of-study#tab-2)
@@ -32,16 +28,12 @@ team: "Team D"
 
   * Parent's Handbook
 
-![Parent's Handbook](/sites/default/files/other-images/Queries.JPG)
-
     * [Academic Calendar ](/academic-calendar)
     * [Holidays ](/sites/default/files/other-files/DAU_Holiday-List-2026.pdf)
     * [Medical Assistance](/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf)
     * [Emergency Contact Details](/emergency-contact-details)
 
   * Rules and Regulations
-
-![Rules and Regulations](/sites/default/files/other-images/Rules-and-Regulations.jpg)
 
     * [Disciplinary Rules ](/disciplinary-rules)
     * [Examination Rules ](/examination-rules)
@@ -51,29 +43,21 @@ team: "Team D"
 
   * Admissions
 
-![Admissions](/sites/default/files/other-images/Admissions-parents.JPG)
-
     * [Undergraduate](/admissions#tab-1)
     * [Postgraduate ](/admissions#tab-2)
     * [Doctoral](/admissions#tab-3)
 
   * Careers and Employment
 
-![Events and News](/sites/default/files/other-images/Careers-and-Employment.jpg)
-
     * [Placements](/placements)
     * [Entrepreneurship Cell ](http://ceid.daiict.ac.in/)
 
   * Events and News
 
-![Events and News](/sites/default/files/other-images/Events-and-News.jpg)
-
     * [Events](/events)
     * [Student News](/achievements)
 
   * Campus
-
-![Campus](/sites/default/files/other-images/campus-parents.jpg)
 
     * [Gallery](/photo-gallery)
     * [Location](/contact-0)

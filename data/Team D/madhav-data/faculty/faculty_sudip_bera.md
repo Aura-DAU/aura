@@ -15,7 +15,6 @@ Faculty profile page for Sudip Bera at Dhirubhai Ambani University (DAU), Gandhi
 
 ### Sudip Bera
 
-
 Sudip Bera
 Â 
 PhD (Mathematics), Visva-Bharati University, Shantiniketan, West Bengal

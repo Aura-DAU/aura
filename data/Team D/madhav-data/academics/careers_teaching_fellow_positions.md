@@ -44,7 +44,7 @@ _**If you’re driven by curiosity, research, and teaching, this could be the pe
 
 #### **Apply now and be part of a vibrant academic community.**
 
-[![Teaching Fellow Positions Open at DAU](/sites/default/files/inline-images/Teaching_Fellow_Position_MAY26.png)](https://forms.gle/uz2z4RWWtkRJW8ZE6)
+[Teaching Fellow Positions Open at DAU](https://forms.gle/uz2z4RWWtkRJW8ZE6)
 
 ## Related Links
 

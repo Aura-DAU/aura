@@ -15,7 +15,6 @@ Faculty profile page for Arnab Bhabak at Dhirubhai Ambani University (DAU), Gand
 
 ### Arnab Bhabak
 
-
 Arnab Bhabak
 Â 
 PhD (Mathematics), IIT Guwahati

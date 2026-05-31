@@ -15,7 +15,6 @@ Faculty profile page for Manish Chaturvedi at Dhirubhai Ambani University (DAU),
 
 ### Manish Chaturvedi
 
-
 Manish Chaturvedi
 Â 
 PhD (ICT), DA-IICT, Gandhinagar
@@ -49,7 +48,6 @@ Computer Networks
 Data Structures
 
 ## Contact Information
-
 
 ## Related Links
 

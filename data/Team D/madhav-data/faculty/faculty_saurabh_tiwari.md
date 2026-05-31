@@ -15,7 +15,6 @@ Faculty profile page for Saurabh Tiwari at Dhirubhai Ambani University (DAU), Ga
 
 ### Saurabh Tiwari
 
-
 Saurabh Tiwari
 Â 
 PhD (Computer Science & Engineering), IIITDM, Jabalpur

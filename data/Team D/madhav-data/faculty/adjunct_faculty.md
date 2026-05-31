@@ -53,7 +53,7 @@ team: "Team D"
   * [Y](javascript:void\(0\))
   * [Z](javascript:void\(0\))
 
-  * ![Abhijit Mukherjee](/sites/default/files/faculty_image/Abhijit-Mukherjee.jpg)
+  * 
 
 ### [Abhijit mukherjee](https://www.daiict.ac.in/adjunct-faculty/abhijit-mukherjee)
 
@@ -63,7 +63,7 @@ abhijit_mukherjee[at]dau[dot]ac[dot]in
 
 Enterprise Computing and SAP Systems (IS-U, S/4 HANA), Data Privacy and Compliance (DPDP Act 2023), IT Strategy, Governance, and Data Analytics
 
-  * ![Aditi Nath Sarkar](/sites/default/files/faculty_image/SARKAR-ADITI-NATH.jpg)
+  * 
 
 ### [Aditi nath sarkar](https://www.daiict.ac.in/adjunct-faculty/aditinath-sarkar)
 
@@ -73,7 +73,7 @@ aditinath_sarkar[at]dau[dot]ac[dot]in
 
 Literature, Religious, Cultural History; South Asian Civilization Studies
 
-  * ![Ajeet Kumar Singh](/sites/default/files/faculty_image/Ajeet-Kumar-Singh.jpg)
+  * 
 
 ### [Ajeet kumar singh](https://www.daiict.ac.in/adjunct-faculty/ajeet-kumar-singh)
 
@@ -83,7 +83,7 @@ ajeetkumar_singh[at]dau[dot]ac[dot]in
 
 Computer Vision, Natural Language Processing, Adversarial Machine Learning
 
-  * ![Amishal Modi ](/sites/default/files/faculty_image/Prof.Amishal-Modi.jpg)
+  * 
 
 ### [Amishal modi ](https://www.daiict.ac.in/adjunct-faculty/amishal-modi)
 
@@ -93,7 +93,7 @@ PhD (English), Gujarat University
 
 Indian Literature, The English Novel, Sexuality Studies, 19th Century Literature
 
-  * ![Anjan Ghosh](/sites/default/files/faculty_image/Anjan-Ghosh-1.jpg)
+  * 
 
 ### [Anjan ghosh](https://www.daiict.ac.in/adjunct-faculty/anjan-ghosh)
 
@@ -103,7 +103,7 @@ PhD (Electrical Engineering), Carnegie Mellon University, Pittsburgh, Pennsylvan
 
 Optical Communication - Fiber Optic and Free Space, Photonic Devices and Subsystems, Sensors, Image and Signal Processing, Nonlinear Systems and Chaos, System Dynamics Modelling of Education
 
-  * ![Binay Bhushan Chakrabarti](/sites/default/files/faculty_image/Binay_Bhushan_Chakrabarti.jpg)
+  * 
 
 ### [Binay bhushan chakrabarti](https://www.daiict.ac.in/adjunct-faculty/binay-bhushan-chakrabarti)
 
@@ -113,7 +113,7 @@ binaybhushan_chakrabarti[at]dau[dot]ac[dot]in
 
 Finance
 
-  * ![Deepak Ghodgaonkar](/sites/default/files/faculty_image/Deepak-Ghodgaonkar.jpg)
+  * 
 
 ### [Deepak ghodgaonkar](https://www.daiict.ac.in/adjunct-faculty/deepak-ghodgaonkar)
 
@@ -123,7 +123,7 @@ PhD (Electrical Engineering), University of Utah, USA
 
 RF and Microwave Engineering, Microwave Nondestructive Testing of Composite Materials, Biomedical Applications of Microwaves, Electromagnetic Imaging of Complex Dielectric Bodies, Microwave Measurements and Characterization of Nonlinear Dielectric…
 
-  * ![Dhaval Joshi](/sites/default/files/faculty_image/DHAVAL-JOSHI.jpg)
+  * 
 
 ### [Dhaval joshi](https://www.daiict.ac.in/adjunct-faculty/dhaval-joshi)
 
@@ -133,7 +133,7 @@ dhaval_joshi[at]dau[dot]ac[dot]in
 
 Design Research, Artificial Intelligence, Gaming, Customer engagement
 
-  * ![Dipankar Nagchoudhuri](/sites/default/files/faculty_image/Dipankar-Nagchoudhuri.jpg)
+  * 
 
 ### [Dipankar nagchoudhuri](https://www.daiict.ac.in/adjunct-faculty/dipankar-nagchoudhuri)
 
@@ -143,7 +143,7 @@ PhD (Electrical Engineering), Michigan State University, USA
 
 VLSI Design, CMOS Circuits and Technology, Biomedical Signal Processing Chip Design
 
-  * ![Gangeya Mukherji](/sites/default/files/faculty_image/Prof-Gangeya-Mukherji.jpg)
+  * 
 
 ### [Gangeya mukherji](https://www.daiict.ac.in/adjunct-faculty/gangeya-m)
 
@@ -155,7 +155,7 @@ Adjunct Chair
 
 Intellectual history, 19th century India, Post-colonialism, Vivekananda, Tagore, Gandhi, Mahabharata.
 
-  * ![Jayprakash Lalchandani](/sites/default/files/faculty_image/Jayprakash-Lalchandani.jpg)
+  * 
 
 ### [Jayprakash lalchandani](https://www.daiict.ac.in/adjunct-faculty/jayprakash-lalchandani)
 
@@ -165,7 +165,7 @@ PhD (Computer Science), IIT Kharagpur
 
 Software Engineering
 
-  * ![K Narayana Chandran](/sites/default/files/faculty_image/K-Narayana-Chandran.jpg)
+  * 
 
 ### [K narayana chandran](https://www.daiict.ac.in/adjunct-faculty/k-narayana-chandran)
 
@@ -181,7 +181,7 @@ English Poetry and Theory; English Pedagogy and Politics of the discipline; Indi
 
 Translation; Allusion, intertextuality and interge…
 
-  * ![Kalgi Gandhi](/sites/default/files/faculty_image/Kalgi-Gandhi.jpg)
+  * 
 
 ### [Kalgi gandhi](https://www.daiict.ac.in/adjunct-faculty/kalgi-gandhi)
 
@@ -191,7 +191,7 @@ kalgi_gandhi[at]dau[dot]ac[dot]in
 
 Database Management, Distributed Database Management, Edge Computing
 
-  * ![Kripabandhu Ghosh](/sites/default/files/faculty_image/Kripabandhu_Ghosh.jpg)
+  * 
 
 ### [Kripabandhu ghosh](https://www.daiict.ac.in/adjunct-faculty/kripabandhu-ghosh)
 
@@ -200,7 +200,7 @@ Indian Institute of Science Education and Research (IISER) Kolkata kripaghosh[at
 
 Information Retrieval/Data Mining/AI on Legal Domain
 
-  * ![Kuntala Dasgupta](/sites/default/files/faculty_image/Kuntala-Dasgupta.jpg)
+  * 
 
 ### [Kuntala dasgupta](https://www.daiict.ac.in/adjunct-faculty/kuntala-dasgupta)
 
@@ -210,7 +210,7 @@ sdg[dot]dau[at]gmail[dot]com
 
 Rabindra Sangeet, North Indian, Classical, India Film Music and History
 
-  * ![Nandini Banerjee](/sites/default/files/faculty_image/Nandini-Banerjee.jpg)
+  * 
 
 ### [Nandini banerjee](https://www.daiict.ac.in/adjunct-faculty/nandini-banerjee)
 
@@ -221,7 +221,7 @@ MA, M.Phil, PhD (International Economics), MA psychology in Psychotherapy and Co
 Economics, Psychology, Soft skills.  
 Certifications in Basic counseling course – Counseling development program (CDP), Advanced counseling course (ADP), Theoretical and experiential training on Fundamentals of Cognitive Behavior Therapy (CBT)…
 
-  * ![Nikita Desai](/sites/default/files/faculty_image/Nikita-Desai.jpg)
+  * 
 
 ### [Nikita desai](https://www.daiict.ac.in/adjunct-faculty/nikita-desai)
 
@@ -231,7 +231,7 @@ PhD (Design), DA-IICT Gandhinagar
 
 Interaction Design Immersive Experience Design
 
-  * ![Parth Mehta](/sites/default/files/faculty_image/PARTH-MEHTA.jpg)
+  * 
 
 ### [Parth mehta](https://www.daiict.ac.in/adjunct-faculty/parth-mehta)
 
@@ -241,7 +241,7 @@ parth_mehta[at]dau[dot]ac[dot]in
 
 Natural Language Processing, Large Language Models, Information Retrieval, Deep Learning
 
-  * ![Prashant Grover](/sites/default/files/faculty_image/Prashant-Grover.jpg)
+  * 
 
 ### [Prashant grover](https://www.daiict.ac.in/adjunct-faculty/prashant-grover)
 
@@ -251,7 +251,7 @@ prashant_grover[at]dau[dot]ac[dot]in
 
 Animation
 
-  * ![Prosenjit Ganguly](/sites/default/files/faculty_image/PROSENJIT-GANGULY.jpg)
+  * 
 
 ### [Prosenjit ganguly](https://www.daiict.ac.in/adjunct-faculty/prosenjit-ganguly)
 
@@ -261,7 +261,7 @@ prosenjit_ganguly[at]dau[dot]ac[dot]in
 
 Animation Film Making, Screenwriting, Story-telling, Character Design, Photography, Illustration, Voice Acting
 
-  * ![Rudranil Das](/sites/default/files/faculty_image/RUDRANIL_DAS.jpg)
+  * 
 
 ### [Rudranil das](https://www.daiict.ac.in/adjunct-faculty/rudranil-das)
 
@@ -271,7 +271,7 @@ rudranil_das[at]dau[dot]ac[dot]in
 
 Photography, Traveling, Research & Documentation on various crafts
 
-  * ![Samit Bhattacharya](/sites/default/files/faculty_image/Samit-Bhattacharya.jpg)
+  * 
 
 ### [Samit bhattacharya](https://www.daiict.ac.in/adjunct-faculty/samit-bhattacharya)
 
@@ -284,7 +284,7 @@ samit_bhattacharya[at]dau[dot]ac[dot]in
     * Mobile & wearable systems & interactions
     * ICT applications in education, agriculture, & h…
 
-  * ![Subhas Chandra Nandy](/sites/default/files/faculty_image/Dr-Subhas-C-Nandy.jpg)
+  * 
 
 ### [Subhas chandra nandy](https://www.daiict.ac.in/adjunct-faculty/subhas-chandra-nandy)
 
@@ -296,7 +296,7 @@ Adjunct Chair
 
 Algorithms, Data Structure, Graph Applications, Computational and Combinatorial Geometry
 
-  * ![Swati Priya](/sites/default/files/faculty_image/Swati_Priya.jpg)
+  * 
 
 ### [Swati priya](https://www.daiict.ac.in/adjunct-faculty/swati-priya)
 
@@ -306,7 +306,7 @@ swati_priya[at]dau[dot]ac[dot]in
 
 Remote sensing and GIS, Precision agriculture, and Crop modelling precision agriculture
 
-  * ![Troy Vasanth](/sites/default/files/faculty_image/Troy-Vasanth.jpg)
+  * 
 
 ### [Troy vasanth](https://www.daiict.ac.in/adjunct-faculty/troy-vasanth)
 
@@ -316,7 +316,7 @@ troy_vasanth[at]dau[dot]ac[dot]in
 
 Sound Design, 3D, Animation and Motion Design
 
-  * ![Umang Shah](/sites/default/files/faculty_image/Umang_Shah.jpg)
+  * 
 
 ### [Umang shah](https://www.daiict.ac.in/adjunct-faculty/umang-shah)
 

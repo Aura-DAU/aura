@@ -15,7 +15,6 @@ Faculty profile page for Rachit Chhaya at Dhirubhai Ambani University (DAU), Gan
 
 ### Rachit Chhaya
 
-
 Rachit Chhaya
 Â 
 PhD (Computer Science), IIT Gandhinagar

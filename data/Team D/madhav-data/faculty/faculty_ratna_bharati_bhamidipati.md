@@ -15,7 +15,6 @@ Faculty profile page for Ratna Bharati Bhamidipati at Dhirubhai Ambani Universit
 
 ### Ratna Bharati Bhamidipati
 
-
 Ratna Bharati Bhamidipati
 Â 
 PhD (Sociology), Dr B R Ambedkar University, Delhi

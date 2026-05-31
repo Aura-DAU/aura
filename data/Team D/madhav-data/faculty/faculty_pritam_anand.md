@@ -15,7 +15,6 @@ Faculty profile page for Pritam Anand at Dhirubhai Ambani University (DAU), Gand
 
 ### Pritam Anand
 
-
 Pritam Anand
 Â 
 PhD (Computer Science), South Asian University, New Delhi

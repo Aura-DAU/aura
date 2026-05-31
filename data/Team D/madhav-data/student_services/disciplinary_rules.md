@@ -29,8 +29,6 @@ Curbing Ragging
 
 Rules and Regulations: Halls of Residence
 
-
-
 ## Documents
 
 - [Disciplinary Action Committee (DAC): Act of indiscipline and indicative list of punishment](https://www.daiict.ac.in/sites/default/files/other-files/Punishment-for-act-of-indiscipline_2024.pdf)

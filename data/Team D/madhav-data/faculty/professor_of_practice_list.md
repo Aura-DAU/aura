@@ -49,7 +49,7 @@ team: "Team D"
   * [Y](javascript:void\(0\))
   * [Z](javascript:void\(0\))
 
-  * ![Ajay Tomar](/sites/default/files/faculty_image/AJAY_TOMAR.jpg)
+  * 
 
 ### [Ajay tomar](https://www.daiict.ac.in/professor-practice/ajay-tomar)
 
@@ -59,7 +59,7 @@ ajay_tomar[at]dau[dot]ac[dot]in
 
 Mr. Ajay Tomar was retired as the Commissioner of Police, Surat. He was recipient of Police Medal For Meritorious Service 2005 and also the President's Medal For Distinguished Service-2014. [KNOW MORE](https://www.daiict.ac.in/sites/default/files/other-files/Shri-A-K-TOMAR_Bio-Data.pdf)
 
-  * ![Anirban Dutta Gupta](/sites/default/files/faculty_image/ANIRBAN_DUTTA_GUPTA.jpg)
+  * 
 
 ### [Anirban dutta gupta](https://www.daiict.ac.in/professor-practice/anirban-dutta-gupta)
 
@@ -69,7 +69,7 @@ anirban_dutta[at]dau[dot]ac[dot]in
 
 Natural History & Ethnographic Documentary, Photography, Communication Design, Design for Development & Conservation
 
-  * ![Harpreet Singh Jattana](/sites/default/files/faculty_image/HARPREET_SINGH_JATTANA.jpg)
+  * 
 
 ### [Harpreet singh jattana](https://www.daiict.ac.in/professor-practice/harpreet-singh-jattana)
 
@@ -79,7 +79,7 @@ PhD - Pursuing (Microelectronics – SOI CMOS Process Integration & Modelling), 
 
 CMOS Process Development, Device Reliability, CMOS Design, Compound Semiconductors, VLSI Testing & Packaging, Wafer Fabrication
 
-  * ![K C Supekar](/sites/default/files/faculty_image/K_C_Supekar.jpg)
+  * 
 
 ### [K c supekar](https://www.daiict.ac.in/professor-practice/kc-supekar)
 
@@ -89,7 +89,7 @@ kc_supekar[at]dau[dot]ac[dot]in
 
 Dr. Supekar has an extensive experience of about 40 years of cooperative dairy sector in India which ranges from small and marginal farmers at grassroots level to serving as Managing Director of NCDFI for about 13 years. The key areas of interest include upliftment of the rural farmers & women empowerment to bring social and cultural change and bringing in the digital technologies to revamp the Indian rural ecosystem.
 
-  * ![Vinay Kulkarni](/sites/default/files/faculty_image/Vinay_Kulkarni.jpg)
+  * 
 
 ### [Vinay kulkarni](https://www.daiict.ac.in/professor-practice/vinay-kulkarni)
 

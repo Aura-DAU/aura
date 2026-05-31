@@ -15,7 +15,6 @@ Faculty profile page for Bhaskar Chaudhury at Dhirubhai Ambani University (DAU),
 
 ### Bhaskar Chaudhury
 
-
 Bhaskar Chaudhury
 Â 
 PhD (Computational Plasma Physics), IPR, Gandhinagar

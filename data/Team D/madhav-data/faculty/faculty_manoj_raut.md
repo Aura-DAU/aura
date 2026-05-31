@@ -15,7 +15,6 @@ Faculty profile page for Manoj Raut at Dhirubhai Ambani University (DAU), Gandhi
 
 ### Manoj Raut
 
-
 Manoj Raut
 Â 
 PhD (Mathematics), IIT Madras

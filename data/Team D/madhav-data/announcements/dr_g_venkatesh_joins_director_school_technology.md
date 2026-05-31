@@ -13,7 +13,6 @@ Announcement of Dr. G. Venkatesh joining as the Director of the School of Techno
 
 ## Main Content
 
-
 [Image Present: Dr. G. Venkatesh]
 
 ### Dr. G. Venkatesh Joins as the Director, School of Technology, DAU

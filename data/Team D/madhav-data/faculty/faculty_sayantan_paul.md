@@ -15,7 +15,6 @@ Faculty profile page for Sayantan Paul at Dhirubhai Ambani University (DAU), Gan
 
 ### Sayantan Paul
 
-
 Sayantan Paul
 Â 
 PhD (Statistics) - Thesis Submitted

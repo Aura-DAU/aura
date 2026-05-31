@@ -15,7 +15,6 @@ Faculty profile page for Shruti Bhilare at Dhirubhai Ambani University (DAU), Ga
 
 ### Shruti Bhilare
 
-
 Shruti Bhilare
 Â 
 PhD (Computer Science and Engineering), IIT Indore

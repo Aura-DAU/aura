@@ -33,8 +33,6 @@ To pursue global standards of excellence in all our endeavors, namely, teaching,
 
 The National Assessment and Accreditation Council, Government of India has accredited DA-IICT with an **A + Grade** (CGPA 3.32/4) in 2023.
 
-![History, Dhirubhai Ambani Institute of Information and Communication Technology \(DA-IICT\), Gandhinagar](/themes/daiict/images/historyBanner.png)
-
 ## History
 
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar represents Wave-4 of educational innovation in Gujarat.
@@ -61,33 +59,33 @@ The Act No. 6 of 2003 of the Gujarat Legislature provided for establishing the D
 
 Subsequently, by Act No. 6 of 2024 (The Gujarat Government Gazette Vol. LXV dated May 13, 2024) the above Act is amended by the DA-IICT (Amendment) Act, 2024.
 
-  * [DA-IICT Act](/sites/default/files/other-files/DAIICT_Act-2003.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (166 KB)
-  * [DA-IICT Act (Amendment) 2024](/sites/default/files/other-files/Amended_DA-IICT_Act-Gazette_June-2024.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (588 KB)
+  * [DA-IICT Act](/sites/default/files/other-files/DAIICT_Act-2003.pdf "PDF file that opens in new window.")  (166 KB)
+  * [DA-IICT Act (Amendment) 2024](/sites/default/files/other-files/Amended_DA-IICT_Act-Gazette_June-2024.pdf "PDF file that opens in new window.")  (588 KB)
 
 On 30 November 2004, the DA-IICT was included in the list of Universities maintained by the University Grants Commission under Section 2(f) of the UGC Act, 1956.
 
-  * [Dhirubhai Ambani University Notification UGC 2024](/sites/default/files/other-files/UGC-Notification-Change-of-name_DAU_2F_25-June-2024.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (278 KB)
-  * [UGC Letter of Notification](/themes/daiict/images/UGC-Notification.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (40.2 KB)
+  * [Dhirubhai Ambani University Notification UGC 2024](/sites/default/files/other-files/UGC-Notification-Change-of-name_DAU_2F_25-June-2024.pdf "PDF file that opens in new window.")  (278 KB)
+  * [UGC Letter of Notification](/themes/daiict/images/UGC-Notification.pdf "PDF file that opens in new window.")  (40.2 KB)
 
 DA-IICT is a member of the Association of Indian Universities (AIU) as approved by the AIU at its 84th Annual Meeting held during 12-14 November 2009.
 
 The Institute has been accredited by the NAAC since 2017. The National Assessment and Accreditation Council, Government of India, has accredited DA-IICT with an **A+ Grade** (CGPA 3.32/4) in 2023.
 
-  * [NAAC Accreditation Certificate](/sites/default/files/other-files/NAAC_Accreditation_2023.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (628 KB)
+  * [NAAC Accreditation Certificate](/sites/default/files/other-files/NAAC_Accreditation_2023.pdf "PDF file that opens in new window.")  (628 KB)
 
 The Government of Gujarat has recognized the University as a Centre of Excellence (CoE). This recognition is part of a flagship initiative of the Government of Gujarat to select the best universities in the State and provide them with greater autonomy and regulatory freedom to allow them to achieve global standards in education.
 
-  * [CoE Certificate (January 2022)](/sites/default/files/other-files/CoE-Certificate.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (220 KB)
-  * [CoE Certificate (April 2025)](/sites/default/files/other-files/COE_Notification_28-April-2025.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (0.98 MB)
+  * [CoE Certificate (January 2022)](/sites/default/files/other-files/CoE-Certificate.pdf "PDF file that opens in new window.")  (220 KB)
+  * [CoE Certificate (April 2025)](/sites/default/files/other-files/COE_Notification_28-April-2025.pdf "PDF file that opens in new window.")  (0.98 MB)
 
 The Knowledge Consortium of Gujarat, Department of Education, Government of Gujarat has rated the university as a Five Star Institution in the category of Universities, February 2023 and December 2024.
 
-  * [GSIRF Five Star Rating - 2023-24](/sites/default/files/other-files/GSIRF-Certificate_2023.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (829 KB)
-  * [GSIRF Five Star Rating - 2024-25](/sites/default/files/other-files/GSIRF_2024-2025_Certificate.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (1.93 MB)
+  * [GSIRF Five Star Rating - 2023-24](/sites/default/files/other-files/GSIRF-Certificate_2023.pdf "PDF file that opens in new window.")  (829 KB)
+  * [GSIRF Five Star Rating - 2024-25](/sites/default/files/other-files/GSIRF_2024-2025_Certificate.pdf "PDF file that opens in new window.")  (1.93 MB)
 
 Food Safety and Standards Authority of India (FSSAI) has awarded Five Star ratings to the Institute as the Eat Right Campus.
 
-  * [FSSAI Certificate](/sites/default/files/other-files/FSSAI-Campus-Certificate-DAIICT_2025.pdf "PDF file that opens in new window.") ![PDF file that opens in new window.](/themes/daiict/images/pdf-icon.png) (15.0 MB)
+  * [FSSAI Certificate](/sites/default/files/other-files/FSSAI-Campus-Certificate-DAIICT_2025.pdf "PDF file that opens in new window.")  (15.0 MB)
 
 ## Milestones
 
@@ -219,23 +217,23 @@ M Sc (IT) and MSc (ICT-Agriculture & Rural Development) and PhD launched.
 
 ## Annual Report
 
-[![Newsletter](/sites/default/files/other-images/DAU-Annual-Report_2024-25_Page_1.jpg) Annual Report 2024-25![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 19.5 MB ](/sites/default/files/other-files/annual-report-2024-25-25326.pdf)
+[Annual Report 2024-25 19.5 MB ](/sites/default/files/other-files/annual-report-2024-25-25326.pdf)
 
-[![Newsletter](/sites/default/files/other-images/Annual-Report_2023-24_thumbnail.jpg) Annual Report 2023-24![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 33.5 MB ](/sites/default/files/other-files/DA-IICT_Annual-Report_2023-24_Final_2025.pdf)
+[Annual Report 2023-24 33.5 MB ](/sites/default/files/other-files/DA-IICT_Annual-Report_2023-24_Final_2025.pdf)
 
-[![Newsletter](/sites/default/files/other-images/Annual-Report_2022-23.jpg) Annual Report 2022-23![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 3.80 MB ](/sites/default/files/other-files/Annual-Report_2022-23.pdf)
+[Annual Report 2022-23 3.80 MB ](/sites/default/files/other-files/Annual-Report_2022-23.pdf)
 
-[![Newsletter](https://www.daiict.ac.in/sites/default/files/other-images/DAIICT_AR_2019_20-1.jpg) Annual Report 2019-20 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 39.4 MB ](https://www.daiict.ac.in/sites/default/files/other-files/DAIICT_AR_2019_20.pdf)
+[Annual Report 2019-20  39.4 MB ](https://www.daiict.ac.in/sites/default/files/other-files/DAIICT_AR_2019_20.pdf)
 
-[![Newsletter](/themes/daiict/images/DAIICT-AR-2018-19.jpg) Annual Report 2018-19 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 1.8 MB ](/themes/daiict/images/DAIICT-AR-2018-19.pdf)
+[Annual Report 2018-19  1.8 MB ](/themes/daiict/images/DAIICT-AR-2018-19.pdf)
 
-[![Newsletter](/themes/daiict/images/DAIICT-AR-2017-18.jpg) Annual Report 2017-18 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 2.6 MB ](/themes/daiict/images/DAIICT-AR-2017-18.pdf)
+[Annual Report 2017-18  2.6 MB ](/themes/daiict/images/DAIICT-AR-2017-18.pdf)
 
-[![Newsletter](/themes/daiict/images/DAIICT-AR-2016-17.jpg)Annual Report 2016-17 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 1.9 MB ](/themes/daiict/images/DAIICT-AR-2016-17.pdf)
+[Annual Report 2016-17  1.9 MB ](/themes/daiict/images/DAIICT-AR-2016-17.pdf)
 
-[![Newsletter](/themes/daiict/images/DAIICT-AR-2015-16.jpg)Annual Report 2015-16 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 4.7 MB ](/themes/daiict/images/DAIICT-AR-2015-16.pdf)
+[Annual Report 2015-16  4.7 MB ](/themes/daiict/images/DAIICT-AR-2015-16.pdf)
 
-[![Newsletter](/themes/daiict/images/DAIICT-AR-2014-15.jpg)Annual Report 2014-15 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif) 3.6 MB ](/themes/daiict/images/DAIICT-AR-2014-15.pdf)
+[Annual Report 2014-15  3.6 MB ](/themes/daiict/images/DAIICT-AR-2014-15.pdf)
 
 displayNone
 
@@ -243,11 +241,11 @@ displayNone
 
 Annual Report
 
-  * [Annual Report 2018-19 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif)](/themes/daiict/images/DAIICT-AR-2018-19.pdf "Annual Report 2018-19") 1.8 MB
-  * [Annual Report 2017-18 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif)](/themes/daiict/images/DAIICT-AR-2017-18.pdf "Annual Report 2017-18") 2.6 MB
-  * [Annual Report 2016-17 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif)](/themes/daiict/images/DAIICT-AR-2016-17.pdf "Annual Report 2016-17") 1.9 MB
-  * [Annual Report 2015-16 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif)](/themes/daiict/images/DAIICT-AR-2015-16.pdf "Annual Report 2015-16") 4.7 MB
-  * [Annual Report 2014-15 ![PDF file that opens in new window.](/themes/daiict/images/PDF-icon.gif)](/themes/daiict/images/DAIICT-AR-2014-15.pdf "Annual Report 2014-15") 3.6 MB
+  * [Annual Report 2018-19](/themes/daiict/images/DAIICT-AR-2018-19.pdf "Annual Report 2018-19") 1.8 MB
+  * [Annual Report 2017-18](/themes/daiict/images/DAIICT-AR-2017-18.pdf "Annual Report 2017-18") 2.6 MB
+  * [Annual Report 2016-17](/themes/daiict/images/DAIICT-AR-2016-17.pdf "Annual Report 2016-17") 1.9 MB
+  * [Annual Report 2015-16](/themes/daiict/images/DAIICT-AR-2015-16.pdf "Annual Report 2015-16") 4.7 MB
+  * [Annual Report 2014-15](/themes/daiict/images/DAIICT-AR-2014-15.pdf "Annual Report 2014-15") 3.6 MB
 
 displayNone
 

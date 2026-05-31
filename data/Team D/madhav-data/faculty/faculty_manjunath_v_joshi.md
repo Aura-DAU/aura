@@ -15,7 +15,6 @@ Faculty profile page for Manjunath V. Joshi at Dhirubhai Ambani University (DAU)
 
 ### Manjunath V. Joshi
 
-
 Manjunath V. Joshi
 Â 
 PhD (Electrical Engineering), IIT Bombay

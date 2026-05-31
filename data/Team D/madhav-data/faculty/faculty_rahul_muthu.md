@@ -15,7 +15,6 @@ Faculty profile page for Rahul Muthu at Dhirubhai Ambani University (DAU), Gandh
 
 ### Rahul Muthu
 
-
 Rahul Muthu
 Â 
 PhD (Mathematics), Homi Bhabha National Institute, Mumbai

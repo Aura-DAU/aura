@@ -13,7 +13,6 @@ The Dean of Students at DAU oversees holistic student development through extra-
 
 ## Main Content
 
-
 [Image Present: Dr. P S Kalyan Sasidhar - Dean of Students]
 
 ### Message from the Dean (Students)

@@ -15,7 +15,6 @@ Faculty profile page for Sunitha V at Dhirubhai Ambani University (DAU), Gandhin
 
 ### Sunitha V
 
-
 Sunitha V
 Â 
 PhD (Mathematics), IIT Madras

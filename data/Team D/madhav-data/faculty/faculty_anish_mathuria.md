@@ -15,7 +15,6 @@ Faculty profile page for Anish Mathuria at Dhirubhai Ambani University (DAU), Ga
 
 ### Anish Mathuria
 
-
 Anish Mathuria
 Â 
 PhD (Computer Science), University of Wollongong, Australia

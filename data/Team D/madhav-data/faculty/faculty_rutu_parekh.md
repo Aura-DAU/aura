@@ -15,7 +15,6 @@ Faculty profile page for Rutu Parekh at Dhirubhai Ambani University (DAU), Gandh
 
 ### Rutu Parekh
 
-
 Rutu Parekh
 Â 
 PhD (Electrical Engineering), Sherbrooke University, Canada
