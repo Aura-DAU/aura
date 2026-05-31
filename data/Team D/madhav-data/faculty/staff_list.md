@@ -9,11 +9,11 @@ team: "Team D"
 
 ## Overview
 
-* ![Abhilash Kumar Bhaskaran](/sites/default/files/staff_image/Abhilash-Kumar-Bhaskaran_1.jpg)
+* 
 
 ## Main Content
 
-* ![Abhilash Kumar Bhaskaran](/sites/default/files/staff_image/Abhilash-Kumar-Bhaskaran_1.jpg)
+* 
 
 ### Abhilash Kumar Bhaskaran
 
@@ -21,7 +21,7 @@ Assistant Manager - Faculty Block 2
 
 abhilash_bhaskaran[at]dau[dot]ac[dot]in (+91) 079-68261659
 
-  * ![Abhishek Karli](/sites/default/files/staff_image/Abhishek_Karli.jpg)
+  * 
 
 ### Abhishek Karli
 
@@ -31,7 +31,7 @@ Executive – Finance and Accounts
 
 abhishek_karli[at]dau[dot]ac[dot]in (+91) 079-68261753
 
-  * ![Akash Desai](/sites/default/files/staff_image/Akash_Desai.jpg)
+  * 
 
 ### Akash Desai
 
@@ -41,7 +41,7 @@ Senior Manager - DCEI
 
 akash_desai[at]dau[dot]ac[dot]in (+91) 079-68261686
 
-  * ![Anand Chavan](/sites/default/files/staff_image/Anand-Chavan.jpg)
+  * 
 
 ### Anand Chavan
 
@@ -51,7 +51,7 @@ Senior Library Information Assistant
 
 anand_chavan[at]dau[dot]ac[dot]in (+91) 079-68261633
 
-  * ![Anil Saksena](/sites/default/files/staff_image/ANIL-SAKSENA.jpg)
+  * 
 
 ### Anil Saksena
 
@@ -59,7 +59,7 @@ Electrician
 
 anil_saksena[at]dau[dot]ac[dot]in
 
-  * ![Anirudhsing Raol](/sites/default/files/staff_image/ANIRUDHSING-RAOL.jpg)
+  * 
 
 ### Anirudhsing Raol
 
@@ -67,7 +67,7 @@ Senior Electrician
 
 anirudhsinh_raol[at]dau[dot]ac[dot]in
 
-  * ![Anuradha Srivastava](/sites/default/files/staff_image/Anuradha-Srivastava_0.jpg)
+  * 
 
 ### Anuradha Srivastava
 
@@ -75,7 +75,7 @@ Assistant Manager - Placement
 
 placement_office[at]dau[dot]ac[dot]in (+91) 079-68261646
 
-  * ![Arti Rathod](/sites/default/files/staff_image/Arti_Rathod.jpg)
+  * 
 
 ### Arti Rathod
 
@@ -85,7 +85,7 @@ Junior Civil Engineer
 
 arti_rathod[at]dau[dot]ac[dot]in (+91) 079-68261746
 
-  * ![Ashvin Chaudhari](/sites/default/files/staff_image/Ashvin_Chaudhari.jpg)
+  * 
 
 ### Ashvin Chaudhari
 
@@ -95,7 +95,7 @@ Assistant Manager - IT & SYSTEMS
 
 ashvin_chaudhari[at]dau[dot]ac[dot]in (+91) 079-68261534
 
-  * ![Babulal Kalal](/sites/default/files/staff_image/BABULAL-KALAL.jpg)
+  * 
 
 ### Babulal Kalal
 
@@ -103,7 +103,7 @@ Multi-Tasking Assistant
 
 babulal_kalal[at]dau[dot]ac[dot]in
 
-  * ![Babulal Solanki](/sites/default/files/staff_image/BABULAL-SOLANKI.jpg)
+  * 
 
 ### Babulal Solanki
 
@@ -111,7 +111,7 @@ Plumber
 
 babulal_solanki[at]dau[dot]ac[dot]in
 
-  * ![Bahadursinh M Vaghela](/sites/default/files/staff_image/Bahadursinh-M-Vaghela.jpg)
+  * 
 
 ### Bahadursinh M Vaghela
 
@@ -119,7 +119,7 @@ Multi-Tasking Assistant
 
 bahadursinh_vaghela[at]dau[dot]ac[dot]in
 
-  * ![Bhargav Patel](/sites/default/files/staff_image/Bhargav-Patel.jpg)
+  * 
 
 ### Bhargav Patel
 
@@ -129,7 +129,7 @@ Assistant Manager - Lab
 
 bhargav_patel[at]dau[dot]ac[dot]in (+91) 079-68261514
 
-  * ![Bhavesh Shah](/sites/default/files/staff_image/Bhavesh-Shah.jpg)
+  * 
 
 ### Bhavesh Shah
 
@@ -139,7 +139,7 @@ Assistant Manager - Stores
 
 bhavesh_shah[at]dau[dot]ac[dot]in (+91) 079-68261596
 
-  * ![Chaitanya Bhamare](/sites/default/files/staff_image/Chaitanya-Bhamare.jpg)
+  * 
 
 ### Chaitanya Bhamare
 
@@ -149,7 +149,7 @@ Assistant Manager - IT & SYSTEMS
 
 chaitanya_b[at]dau[dot]ac[dot]in (+91) 079-68261539
 
-  * ![Chirag Nayak](/sites/default/files/staff_image/Chirag-Nayak.jpg)
+  * 
 
 ### Chirag Nayak
 
@@ -159,7 +159,7 @@ Executive - Lab
 
 chirag_nayak[at]dau[dot]ac[dot]in (+91) 079-68261532
 
-  * ![Chirag Patni](/sites/default/files/staff_image/Chirag-Patni.jpg)
+  * 
 
 ### Chirag Patni
 
@@ -169,7 +169,7 @@ Nurse (Male) – Medical Center
 
 chirag_patni[at]dau[dot]ac[dot]in (+91) 079-68261593
 
-  * ![Darshan Prajapati](/sites/default/files/staff_image/Darshan_prajapati.jpg)
+  * 
 
 ### Darshan Prajapati
 
@@ -179,7 +179,7 @@ Sr. Executive - IT & SYSTEMS
 
 darshan_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261539
 
-  * ![Darshan Rajvi](/sites/default/files/staff_image/DARSHAN_RAJVI.jpg)
+  * 
 
 ### Darshan Rajvi
 
@@ -189,7 +189,7 @@ Executive - Stores & Purchase
 
 darshan_rajvi[at]dau[dot]ac[dot]in (+91) 079-68261568
 
-  * ![Dashank Shah](/sites/default/files/staff_image/Dashank-Shah.jpg)
+  * 
 
 ### Dashank Shah
 
@@ -199,7 +199,7 @@ Dy. Chief Financial Officer (Tax & Finance)
 
 dashank_shah[at]dau[dot]ac[dot]in (+91) 079-68261725
 
-  * ![Deepa Jayan Poduval](/sites/default/files/staff_image/Deepa-Jayan-Poduval_0.jpg)
+  * 
 
 ### Deepa Jayan Poduval
 
@@ -207,7 +207,7 @@ Assistant Manager - Dean Faculty Office
 
 deepa_poduval[at]dau[dot]ac[dot]in (+91) 079-68261552
 
-  * ![Deepali Sharma](/sites/default/files/staff_image/DEEPALI-SHARMA.jpg)
+  * 
 
 ### Deepali Sharma
 
@@ -217,7 +217,7 @@ Assistant Manager - Placement
 
 deepali_sharma[at]dau[dot]ac[dot]in (+91) 079-68261616
 
-  * ![Dharmik Mehta](/sites/default/files/staff_image/Dharmik-Mehta.jpg)
+  * 
 
 ### Dharmik Mehta
 
@@ -227,7 +227,7 @@ Sr. Executive - Lab
 
 dharmik_mehta[at]dau[dot]ac[dot]in (+91) 079-68261532
 
-  * ![Dinesh Prajapati](/sites/default/files/staff_image/Dinesh-Prajapati_0.jpg)
+  * 
 
 ### Dinesh Prajapati
 
@@ -237,7 +237,7 @@ Jt. Controller of Examination
 
 dinesh_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261583
 
-  * ![Divyam Mishra](/sites/default/files/staff_image/Divyam-Mishra.jpg)
+  * 
 
 ### Divyam Mishra
 
@@ -247,7 +247,7 @@ Dy. Chief Financial Officer (Accounts)
 
 divyam_mishra[at]dau[dot]ac[dot]in (+91) 079-68261729
 
-  * ![Geeta S Nair](/sites/default/files/staff_image/GEETA_NAIR.jpg)
+  * 
 
 ### Geeta S Nair
 
@@ -255,7 +255,7 @@ Assistant Manager - Faculty Block 4
 
 nair_geeta[at]dau[dot]ac[dot]in (+91) 079-68261573
 
-  * ![Govind Prajapati](/sites/default/files/staff_image/Govind_Prajapati.jpeg)
+  * 
 
 ### Govind Prajapati
 
@@ -265,7 +265,7 @@ Executive - Lab
 
 govind_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261720
 
-  * ![Himatsinh G Rana](/sites/default/files/staff_image/Himatsinh_G_Rana.jpg)
+  * 
 
 ### Himatsinh G Rana
 
@@ -273,7 +273,7 @@ Multi-Tasking Assistant
 
 himatsinh_rana[at]dau[dot]ac[dot]in
 
-  * ![Ishvar Ravat](/sites/default/files/staff_image/ISHVAR-RAVAT.jpg)
+  * 
 
 ### Ishvar Ravat
 
@@ -281,7 +281,7 @@ Multi-Tasking Assistant
 
 ishvar_ravat[at]dau[dot]ac[dot]in
 
-  * ![Jainik Patel](/sites/default/files/staff_image/Jainik-Patel_0.jpg)
+  * 
 
 ### Jainik Patel
 
@@ -289,7 +289,7 @@ Sr. Executive - Exam & Student Support
 
 jainik_patel[at]dau[dot]ac[dot]in (+91) 079-68261574
 
-  * ![Jalpesh Pandya](/sites/default/files/staff_image/Jalpesh-Pandya_0.jpg)
+  * 
 
 ### Jalpesh Pandya
 
@@ -299,7 +299,7 @@ Deputy Registrar (Academic)
 
 jalpesh_pandya[at]dau[dot]ac[dot]in (+91) 079-68261579
 
-  * ![Jashvant Parmar](/sites/default/files/staff_image/JASHVANT-PARMAR.jpg)
+  * 
 
 ### Jashvant Parmar
 
@@ -307,7 +307,7 @@ Multi-Tasking Assistant
 
 jashvant_parmar[at]dau[dot]ac[dot]in
 
-  * ![Jaydeep Panchal](/sites/default/files/staff_image/Jaydeep-Panchal.jpg)
+  * 
 
 ### Jaydeep Panchal
 
@@ -317,7 +317,7 @@ Sr. Executive - Accounts & Finance
 
 jaydeep_panchal[at]dau[dot]ac[dot]in (+91) 079-68261706
 
-  * ![Jigar Yagnik](/sites/default/files/staff_image/Jigar-Yagnik_0.jpg)
+  * 
 
 ### Jigar Yagnik
 
@@ -327,7 +327,7 @@ Controller Of Examination
 
 jigar_yagnik[at]dau[dot]ac[dot]in (+91) 079-68261604
 
-  * ![Jignesh Singh](/sites/default/files/staff_image/Jignesh-Singh.jpg)
+  * 
 
 ### Jignesh Singh
 
@@ -337,7 +337,7 @@ Manager – Admissions and Outreach
 
 jignesh_singh[at]dau[dot]ac[dot]in (+91) 079-68261---
 
-  * ![Jitendra Parmar](/sites/default/files/staff_image/Jitendra-Parmar.jpg)
+  * 
 
 ### Jitendra Parmar
 
@@ -347,7 +347,7 @@ Assistant Manager - Hostel
 
 jitendra_parmar[at]dau[dot]ac[dot]in (+91) 079-68261544
 
-  * ![Juhi Patel](/sites/default/files/staff_image/Juhi-Patel.jpg)
+  * 
 
 ### Juhi Patel
 
@@ -357,7 +357,7 @@ Assistant Manager - PR and Social Media
 
 juhi_patel[at]dau[dot]ac[dot]in (+91) 079-68261722
 
-  * ![Keshurbhai M Zala](/sites/default/files/staff_image/Keshurbhai-M-Zala.jpg)
+  * 
 
 ### Keshurbhai M Zala
 
@@ -365,7 +365,7 @@ General Assistant
 
 kesurbhai_zala[at]dau[dot]ac[dot]in
 
-  * ![Kirit Pandya](/sites/default/files/staff_image/Kirit-Pandya_0.jpg)
+  * 
 
 ### Kirit Pandya
 
@@ -375,7 +375,7 @@ Manager - Administration
 
 kirit_pandya[at]dau[dot]ac[dot]in (+91) 079-68261592
 
-  * ![Kishan Joshi](/sites/default/files/staff_image/Kishan-Joshi.jpg)
+  * 
 
 ### Kishan Joshi
 
@@ -385,7 +385,7 @@ Senior Executive - HR
 
 kishan_joshi[at]dau[dot]ac[dot]in (+91) 079-68261551
 
-  * ![Krunal Patel](/sites/default/files/staff_image/Krunal-Patel.jpg)
+  * 
 
 ### Krunal Patel
 
@@ -395,7 +395,7 @@ Assistant Manager - Lab
 
 krunal_patel[at]dau[dot]ac[dot]in (+91) 079-68261511
 
-  * ![Krutika Raval](/sites/default/files/staff_image/Dr-Krutika-Raval.jpg)
+  * 
 
 ### Krutika Raval
 
@@ -405,7 +405,7 @@ Head - HR & Administration
 
 head_hradmin[at]dau[dot]ac[dot]in (+91) 079-68261591
 
-  * ![Kunjal Patel](/sites/default/files/staff_image/KUNJAL-PATEL.jpg)
+  * 
 
 ### Kunjal Patel
 
@@ -413,7 +413,7 @@ Electrician
 
 kunjal_patel[at]dau[dot]ac[dot]in
 
-  * ![Mahendra Chauhan](/sites/default/files/staff_image/MAHENDRA-CHAUHAN.jpg)
+  * 
 
 ### Mahendra Chauhan
 
@@ -421,7 +421,7 @@ Facility Assistant
 
 mahendra_chauhan[at]dau[dot]ac[dot]in
 
-  * ![Mahendra Solanki](/sites/default/files/staff_image/Mahendra-Solanki.jpg)
+  * 
 
 ### Mahendra Solanki
 
@@ -431,7 +431,7 @@ Sr. Executive - Faculty Block 1
 
 mahendra_solanki[at]dau[dot]ac[dot]in (+91) 079-68261571
 
-  * ![Mahendrasinh Dabhi](/sites/default/files/staff_image/MAHENDRASINH-DABHI.jpg)
+  * 
 
 ### Mahendrasinh Dabhi
 
@@ -441,7 +441,7 @@ Senior Executive-Examination
 
 mahendrasinh_dabhi[at]dau[dot]ac[dot]in (+91) 079-68261576
 
-  * ![Manimaaran Pillai](/sites/default/files/staff_image/Manimaaran-Pillai.jpg)
+  * 
 
 ### Manimaaran Pillai
 
@@ -451,7 +451,7 @@ Executive Assistant to Chief Operating Officer
 
 manimaaran_pillai[at]dau[dot]ac[dot]in (+91) 079-68261731
 
-  * ![Manish Goswami](/sites/default/files/staff_image/manish_goswami.jpg)
+  * 
 
 ### Manish Goswami
 
@@ -461,7 +461,7 @@ Sr. Executive - Resource Centre
 
 manish_goswami[at]dau[dot]ac[dot]in (+91) 079-68261578
 
-  * ![Manoranjan Satpathy](/sites/default/files/staff_image/Manoranjan-Satpathy.jpg)
+  * 
 
 ### Manoranjan Satpathy
 
@@ -471,7 +471,7 @@ Senior Library Information Assistant
 
 manoranjan_s[at]dau[dot]ac[dot]in
 
-  * ![Maulik Shukla](/sites/default/files/staff_image/MAULIK-SHUKLA.jpg)
+  * 
 
 ### Maulik Shukla
 
@@ -479,7 +479,7 @@ Electrician
 
 maulik_shukla[at]dau[dot]ac[dot]in
 
-  * ![Mrigankshekhar Mahapatra](/sites/default/files/staff_image/Mrigankshekhar-Mahapatra_0.jpg)
+  * 
 
 ### Mrigankshekhar Mahapatra
 
@@ -489,7 +489,7 @@ Executive Assistant – Dean (Students)
 
 mrigankshekhar_m[at]dau[dot]ac[dot]in (+91) 079-68261741
 
-  * ![Mukesh Shrimali](/sites/default/files/staff_image/Mukesh-Shrimali.jpg)
+  * 
 
 ### Mukesh Shrimali
 
@@ -499,7 +499,7 @@ Sr. Executive - Resource Centre
 
 mukesh_shrimali[at]dau[dot]ac[dot]in (+91) 079-68261578
 
-  * ![Nandini Banerjee](/sites/default/files/staff_image/Nandini-Banerjee.jpg)
+  * 
 
 ### Nandini Banerjee
 
@@ -509,7 +509,7 @@ Manager - Student Wellbeing and Counselor
 
 nandini_banerjee[at]dau[dot]ac[dot]in (+91) 079-68261620
 
-  * ![Naresh Patel](/sites/default/files/staff_image/Naresh-Patel.jpg)
+  * 
 
 ### Naresh Patel
 
@@ -519,7 +519,7 @@ Assistant Manager - Lab
 
 naresh_patel[at]dau[dot]ac[dot]in (+91) 079-68261517
 
-  * ![Niketa P Raval](/sites/default/files/staff_image/Niketa_P_Raval.jpg)
+  * 
 
 ### Niketa P Raval
 
@@ -529,7 +529,7 @@ Receptionist and Sr. Executive - Administration
 
 niketa_raval[at]dau[dot]ac[dot]in (+91) 079-68261701
 
-  * ![Nimesh Patel](/sites/default/files/staff_image/Nimesh_Patel_26.jpeg)
+  * 
 
 ### Nimesh Patel
 
@@ -539,7 +539,7 @@ Sr. Manager - IT & SYSTEMS
 
 nimesh_bpatel[at]dau[dot]ac[dot]in (+91) 079-68261520
 
-  * ![Nirav Joshi](/sites/default/files/staff_image/Dr_Nirav-Joshi.jpg)
+  * 
 
 ### Nirav Joshi
 
@@ -549,7 +549,7 @@ Manager - Quality and Accreditation Cell
 
 nirav_joshi[at]dau[dot]ac[dot]in (+91) 079-68261676
 
-  * ![Nitu Singh Bhadouria](/sites/default/files/staff_image/Nitu-Singh-Bhadouria.jpg)
+  * 
 
 ### Nitu Singh Bhadouria
 
@@ -559,7 +559,7 @@ Student Counselor
 
 nitusingh_b[at]dau[dot]ac[dot]in (+91) 079-68261698
 
-  * ![Pallavi Kapadane](/sites/default/files/staff_image/PALLAVI-KAPADANE.jpg)
+  * 
 
 ### Pallavi Kapadane
 
@@ -569,7 +569,7 @@ Executive - HR
 
 pallavi_kapadane[at]dau[dot]ac[dot]in (+91) 079-68261575
 
-  * ![Pankit Gandhi](/sites/default/files/staff_image/Pankit-Gandhi.jpg)
+  * 
 
 ### Pankit Gandhi
 
@@ -577,7 +577,7 @@ Sr. Executive - Faculty Block 3
 
 pankit_gandhi[at]dau[dot]ac[dot]in (+91) 079-68261666
 
-  * ![Prabhunath Sharma](/sites/default/files/staff_image/Prabhunath-Sharma.jpg)
+  * 
 
 ### Prabhunath Sharma
 
@@ -587,7 +587,7 @@ Assistant Manager - Design & Systems
 
 prabhunath_sharma[at]dau[dot]ac[dot]in (+91) 079-68261635
 
-  * ![Prakash Chavan](/sites/default/files/staff_image/PRAKASH-CHAVAN.jpg)
+  * 
 
 ### Prakash Chavan
 
@@ -595,7 +595,7 @@ Multi-Tasking Assistant
 
 prakash_chavan[at]dau[dot]ac[dot]in
 
-  * ![Prakash Solanki](/sites/default/files/staff_image/PRAKASH-SOLANKI.jpg)
+  * 
 
 ### Prakash Solanki
 
@@ -603,7 +603,7 @@ Electrician
 
 prakash_solanki[at]dau[dot]ac[dot]in
 
-  * ![Prem Kumar Chopra](/sites/default/files/staff_image/PKC%20Passport%20size%20Photo%20%281%29.jpg)
+  * 
 
 ### Prem Kumar Chopra
 
@@ -613,7 +613,7 @@ Advisor to Director General
 
 pkc[at]dau[dot]ac[dot]in (+91) 079-68261630
 
-  * ![Pritesh Panchal](/sites/default/files/staff_image/Priteshkumar-Panchal.jpg)
+  * 
 
 ### Pritesh Panchal
 
@@ -623,7 +623,7 @@ Executive Assistant – Dean (AP)
 
 pritesh_panchal[at]dau[dot]ac[dot]in (+91) 079-68261733
 
-  * ![Priya Kumari](/sites/default/files/staff_image/Priya-Kumari.jpg)
+  * 
 
 ### Priya Kumari
 
@@ -633,7 +633,7 @@ Resident Warden (Female)
 
 priya_kumari[at]dau[dot]ac[dot]in (+91) 079-68261667
 
-  * ![Priyank Santola](/sites/default/files/staff_image/Priyank-Santola.jpg)
+  * 
 
 ### Priyank Santola
 
@@ -643,7 +643,7 @@ Sr. Executive - IT & SYSTEMS
 
 priyank_santola[at]dau[dot]ac[dot]in (+91) 079-68261539
 
-  * ![Rahul Prajapati](/sites/default/files/staff_image/Rahul-Prajapati.jpg)
+  * 
 
 ### Rahul Prajapati
 
@@ -653,7 +653,7 @@ Assistant Registrar - Student Support & Academic
 
 rahul_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261703
 
-  * ![Rahul Rajput](/sites/default/files/staff_image/Rahul-Rajput.jpg)
+  * 
 
 ### Rahul Rajput
 
@@ -663,7 +663,7 @@ Sports Officer
 
 rahul_rajput[at]dau[dot]ac[dot]in (+91) 079-68261606
 
-  * ![Rajendra Shah](/sites/default/files/staff_image/Rajendra-Shah_0.jpg)
+  * 
 
 ### Rajendra Shah
 
@@ -673,7 +673,7 @@ Sr. Manager - Lab
 
 rajendra_shah[at]dau[dot]ac[dot]in (+91) 079-68261531
 
-  * ![Rajesh Patel](/sites/default/files/staff_image/Rajesh-Patel_0.jpg)
+  * 
 
 ### Rajesh Patel
 
@@ -683,7 +683,7 @@ Sr. Engineer - Estate
 
 rajesh_patel[at]dau[dot]ac[dot]in (+91) 079-68261622
 
-  * ![Ramesh Prajapati](/sites/default/files/staff_image/Ramesh-Prajapati.jpg)
+  * 
 
 ### Ramesh Prajapati
 
@@ -693,7 +693,7 @@ Manager - Lab
 
 ramesh_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261513
 
-  * ![Rashmi T Kumbar](/sites/default/files/staff_image/Dr_Rashmi_Kumbar.jpg)
+  * 
 
 ### Rashmi T Kumbar
 
@@ -703,7 +703,7 @@ Librarian
 
 rashmi_kumbar[at]dau[dot]ac[dot]in (+91) 079-68261550
 
-  * ![Sanjay Bariya](/sites/default/files/staff_image/Sanjay-D-Bariya.jpg)
+  * 
 
 ### Sanjay Bariya
 
@@ -713,7 +713,7 @@ Manager - Lab
 
 sanjay_bariya[at]dau[dot]ac[dot]in (+91) 079-68261742
 
-  * ![Satyabirsingh Yadav](/sites/default/files/staff_image/Satyabirsingh-Yadav.jpg)
+  * 
 
 ### Satyabirsingh Yadav
 
@@ -721,7 +721,7 @@ Assistant Manager - Dean Research Office
 
 satyabir_singh[at]dau[dot]ac[dot]in (+91) 079-68261648
 
-  * ![Savita Joshi](/sites/default/files/staff_image/Savita-Joshi.jpg)
+  * 
 
 ### Savita Joshi
 
@@ -731,7 +731,7 @@ Executive Assistant to Director – School of Technology
 
 savita_joshi[at]dau[dot]ac[dot]in (+91) 079-68261750
 
-  * ![Sawankumar Sachaniya](/sites/default/files/staff_image/Sawankumar-Sachaniya_new.jpg)
+  * 
 
 ### Sawankumar Sachaniya
 
@@ -741,7 +741,7 @@ Assistant Manager - Sports
 
 sawankumar_sachaniya[at]dau[dot]ac[dot]in (+91) 079-68261690
 
-  * ![Shashikumara A A ](/sites/default/files/staff_image/Shashikumara-A-A.jpg)
+  * 
 
 ### Shashikumara A A 
 
@@ -751,7 +751,7 @@ Deputy Librarian
 
 shashi_aa[at]dau[dot]ac[dot]in (+91) 079-68261626
 
-  * ![Shijin Sivankutty](/sites/default/files/staff_image/Shijin-Sivankutty.jpg)
+  * 
 
 ### Shijin Sivankutty
 
@@ -761,7 +761,7 @@ Executive – Alumni Office
 
 shijin_sivankutty[at]dau[dot]ac[dot]in (+91) 079-68261724
 
-  * ![Shirish Varma](/sites/default/files/staff_image/SHIRISH-VARMA_0.jpg)
+  * 
 
 ### Shirish Varma
 
@@ -771,7 +771,7 @@ Sr. Executive – Hostels
 
 shirish_varma[at]dau[dot]ac[dot]in (+91) 079-68261545
 
-  * ![Shivani Vala](/sites/default/files/staff_image/shivani-vala.jpg)
+  * 
 
 ### Shivani Vala
 
@@ -781,7 +781,7 @@ Nurse (Female) – Medical Center
 
 shivani_vala[at]dau[dot]ac[dot]in (+91) 079-68261593
 
-  * ![Siddharth Swaminarayan](/sites/default/files/staff_image/Siddharth-Swaminarayan.jpg)
+  * 
 
 ### Siddharth Swaminarayan
 
@@ -791,7 +791,7 @@ Executive Registrar
 
 registrar[at]dau[dot]ac[dot]in (+91) 079-68261567
 
-  * ![Souvik Sarkar](/sites/default/files/staff_image/Souvik_Sarkar.jpg)
+  * 
 
 ### Souvik Sarkar
 
@@ -801,7 +801,7 @@ Head - Career Planning, Placement & Marketing
 
 head_cpm[at]dau[dot]ac[dot]in (+91) 079-68261609
 
-  * ![Sudhir Dave](/sites/default/files/staff_image/Sudhir_Dave.jpg)
+  * 
 
 ### Sudhir Dave
 
@@ -811,7 +811,7 @@ Manager - Procurement and Commercial
 
 sudhir_dave[at]dau[dot]ac[dot]in (+91) 079-68261569
 
-  * ![Suraj Makwana](/sites/default/files/staff_image/SURAJ-MAKWANA.jpg)
+  * 
 
 ### Suraj Makwana
 
@@ -819,7 +819,7 @@ Plant Operator
 
 suraj_makwana[at]dau[dot]ac[dot]in
 
-  * ![Swati Mitra](/sites/default/files/staff_image/SWATI-MITRA_0.jpg)
+  * 
 
 ### Swati Mitra
 
@@ -829,7 +829,7 @@ Assistant Manager - Resource Centre
 
 swati_mitra[at]dau[dot]ac[dot]in (+91) 079-68261578
 
-  * ![Tanu Sethi](/sites/default/files/staff_image/Tanu-Sethi.jpg)
+  * 
 
 ### Tanu Sethi
 
@@ -839,7 +839,7 @@ Executive Assistant to Director General
 
 tannu_sethi[at]dau[dot]ac[dot]in (+91) 079-68261572
 
-  * ![Umang R Patel](/sites/default/files/staff_image/UMANG-PATEL.jpg)
+  * 
 
 ### Umang R Patel
 
@@ -849,7 +849,7 @@ Research & Development Officer
 
 umang_patel[at]dau[dot]ac[dot]in (+91) 079-68261595
 
-  * ![Varun Joshi](/sites/default/files/staff_image/Varun-Joshi.jpg)
+  * 
 
 ### Varun Joshi
 
@@ -859,7 +859,7 @@ Executive - Registrar's Office
 
 varun_joshi[at]dau[dot]ac[dot]in (+91) 079-68261586
 
-  * ![Vipul P Makwana](/sites/default/files/staff_image/Vipul-Makwana_1.jpg)
+  * 
 
 ### Vipul P Makwana
 
@@ -869,7 +869,7 @@ Sr. Executive - Communications
 
 vipul_makwana[at]dau[dot]ac[dot]in (+91) 079-68261704
 
-  * ![Vishal Kanzariya](/sites/default/files/staff_image/Vishal-Kanzariya.jpg)
+  * 
 
 ### Vishal Kanzariya
 

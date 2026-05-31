@@ -15,7 +15,6 @@ Faculty profile page for Nabin Kumar Sahu at Dhirubhai Ambani University (DAU), 
 
 ### Nabin Kumar Sahu
 
-
 Nabin Kumar Sahu
 Â 
 PhD (Mathematics), IIT Kharagpur

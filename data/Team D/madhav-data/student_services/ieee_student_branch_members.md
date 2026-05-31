@@ -293,7 +293,7 @@ d. Attendance rosters for faculty presentations and general meetings.
 
 ## IEEE WIE, Affinity Group
 
-× ![](images/wie.png)
+× 
 
 WIE is largest international professional group dedicated to promoting women engineers and scientist. The idea is to provide the young women with a platform, encouragement and inspiration to come up with confidence and excellence in the technical career of Engineering.WIE is an effort to motivate the women to be a part of science, Technology and Engineering by bringing all men and women with such ambitions to put a joint effort towards this.   
   
@@ -309,7 +309,7 @@ This year, we intend to take WIE at a different platform by targeting national p
 
 ## SIG Embedded Programming
 
-× ![](images/embedded.png)
+× 
 
 Special Interest Group ~ Embedded (hereafter SIG~Embedded) was established in Jan’ 2011 by IEEE Student Branch, DA-IICT. Embedded Systems are the true products and testaments of ICT for which our institute has been the pioneer. Embedded System combines the nitty-gritty of hardware embedded with the functionalities of software which makes it most custom and customizable products. Embedded Systems have always captured the imaginations of students in DA-IICT. IEEE Student Branch, DA-IICT wanted to promote the cult of embedded systems in the student community and thus the concept and subsequently SIG~Embedded was established.   
   
@@ -317,7 +317,7 @@ SIG~Embedded has been organizing sessions on theory and practical approaches for
 
 ## SIG Mobile Apps
 
-× ![](images/mobile.png)
+× 
 
 SIG Mobile Applications is a group of enthusiasts for developing mobile applications, especially Android apps. SIG Mobile conducts regular sessions every week where we try to cover the basics of Android app development. Apart from that, talks by people working in industry, app competitions, and project mentoring and special talks on Android products are some of the other activities.   
   
@@ -325,7 +325,7 @@ This time we plan to have parallel sessions – one for the beginners for learni
 
 ## SIG Machine Intelligence
 
-× ![](images/machine.png)
+× 
 
 Machine Intelligence-SIG aims to build a community of Machine learning and AI enthusiasts who would engage in discussions and collaborative projects and at the same time, foster a healthy environment and support beginners.   
   

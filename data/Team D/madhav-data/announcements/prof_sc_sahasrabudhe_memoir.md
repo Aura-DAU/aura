@@ -13,7 +13,6 @@ A memoir page dedicated to Prof. S.C. Sahasrabudhe, former Director of DA-IICT (
 
 ## Main Content
 
-
 [Image Present: Prof SC Sahasrabudhe - A Memoir]
 
 ### Prof. S.C. Sahasrabudhe - A Memoir

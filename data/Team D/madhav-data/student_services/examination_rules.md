@@ -21,8 +21,6 @@ Examination Rules for Students
 Rules & Guidelines for Conducting written examination for Person with Benchmark Disabilities
 Guidelines of Exams Malpractices
 
-
-
 ## Documents
 
 - [Examination Rules for Students](https://daiict.ac.in/sites/default/files/other-files/Examination_Rules_for_Students.pdf)

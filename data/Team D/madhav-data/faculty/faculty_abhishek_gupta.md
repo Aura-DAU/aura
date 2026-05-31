@@ -15,7 +15,6 @@ Faculty profile page for Abhishek Gupta at Dhirubhai Ambani University (DAU), Ga
 
 ### Abhishek Gupta
 
-
 Abhishek Gupta
 Â 
 PhD (Electrical and Computer Engineering), Toronto Metropolitan University, Canada

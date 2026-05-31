@@ -15,7 +15,6 @@ Faculty profile page for Aditya Tatu at Dhirubhai Ambani University (DAU), Gandh
 
 ### Aditya Tatu
 
-
 Aditya Tatu
 Â 
 PhD (Computer Science), University of Copenhagen, Denmark

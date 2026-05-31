@@ -15,7 +15,6 @@ Faculty profile page for P S Kalyan Sasidhar at Dhirubhai Ambani University (DAU
 
 ### P S Kalyan Sasidhar
 
-
 P S Kalyan Sasidhar
 Â 
 PhD (Computer Science and Engineering), University of North Texas-Denton, USA

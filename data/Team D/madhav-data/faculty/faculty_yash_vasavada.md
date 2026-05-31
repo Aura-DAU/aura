@@ -15,7 +15,6 @@ Faculty profile page for Yash Vasavada at Dhirubhai Ambani University (DAU), Gan
 
 ### Yash Vasavada
 
-
 Yash Vasavada
 Â 
 PhD (Electrical Engineering), Virginia Polytechnic Institute and State University, USA

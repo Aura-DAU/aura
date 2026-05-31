@@ -15,7 +15,6 @@ Faculty profile page for Gopinath Panda at Dhirubhai Ambani University (DAU), Ga
 
 ### Gopinath Panda
 
-
 Gopinath Panda
 Â 
 PhD (Mathematics), IIT Bhubaneswar

@@ -15,7 +15,6 @@ Faculty profile page for Subhasish Basak at Dhirubhai Ambani University (DAU), G
 
 ### Subhasish Basak
 
-
 Subhasish Basak
 Â 
 PhD (Statistics), Indian Statistical Institute, Kolkata

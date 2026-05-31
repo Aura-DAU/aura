@@ -15,7 +15,6 @@ Faculty profile page for Sourish Dasgupta at Dhirubhai Ambani University (DAU), 
 
 ### Sourish Dasgupta
 
-
 Sourish Dasgupta
 Â 
 PhD (Computer Science), University of Missouri - Kansas City, USA

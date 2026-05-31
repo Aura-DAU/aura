@@ -15,7 +15,6 @@ Faculty profile page for Hemant Patil at Dhirubhai Ambani University (DAU), Gand
 
 ### Hemant Patil
 
-
 Hemant Patil
 Â 
 PhD (Computer Science), IIT Kharagpur

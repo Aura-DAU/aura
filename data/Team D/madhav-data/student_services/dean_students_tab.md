@@ -9,15 +9,11 @@ team: "Team D"
 
 ## Overview
 
-![Dr. P S Kalyan Sasidhar](/sites/default/files/other-images/Prof_Kalyan_Sasidhar.jpg)
-
 ## Main Content
 
 ## **Dean (Students) Message**
 
 ### **Dr. P S Kalyan Sasidhar** , Associate Professor
-
-![Dr. P S Kalyan Sasidhar](/sites/default/files/other-images/Prof_Kalyan_Sasidhar.jpg)
 
 "A vibrant campus life awaits you as a student of DAU (Formerly DA-IICT) once you become a campus resident. Classes, lab sessions research projects, and exams are perfectly balanced with musical performances, sports, theatre, and spending time with friends at cafeteria hangouts. Our students ensure life happens 24*7 on campus. In the process, they become pros in choosing their priorities and managing their time effectively.
 
@@ -39,7 +35,7 @@ As the Dean -Students, I am always reachable to my students and parents, wheneve
 
 ### _**Officials** :_
 
-  * ![Mr. Mrigankshekhar Mahapatra](/sites/default/files/other-images/Mrigankshekhar_Mahapatra_2026.jpg)
+  * 
 
 ### **Mr. Mrigankshekhar Mahapatra**
 
@@ -68,25 +64,25 @@ The students of DAU (Formerly DA-IICT), have constituted a self-governing democr
 
 ## Core Team
 
-  * ![Yash Judal](/sites/default/files/other-images/Yash-Judal_1.jpg)
+  * 
 
 ### **Yash Judal** (Convenor)
 
 _icon_[convener_student_government[at]dau[dot]ac[dot]in](mailto:convener_student_government\[at\]dau\[dot\]ac\[dot\]in)
 
-  * ![Dev Sanghani](/sites/default/files/other-images/Dev-Sanghani.jpg)
+  * 
 
 ### **Dev Sanghani** (Deputy Convenor)
 
 _icon_[dy_convener_student_government[at]dau[dot]ac[dot]in](mailto:dy_convener_student_government\[at\]dau\[dot\]ac\[dot\]in)
 
-  * ![Madhav Bhatt](/sites/default/files/other-images/Madhav-Bhatt.jpg)
+  * 
 
 ### **Madhav Bhatt** (Treasurer)
 
 _icon_[treasurer_student_government[at]dau[dot]ac[dot]in](mailto:treasurer_student_government\[at\]dau\[dot\]ac\[dot\]in)
 
-  * ![Siddh Shah](/sites/default/files/other-images/Siddh-Shah.jpg)
+  * 
 
 ### **Siddh Shah** (Secretary)
 
@@ -118,23 +114,23 @@ A new student body "**Research Body Government (RBG)** " exclusively by and for 
 
 ## Core Team
 
-  * ![Bhavin Makwana](/sites/default/files/other-images/Bhavin-Makwana_RBG_26.jpg)
+  * 
 
 ### **Bhavin Makwana** (Convenor)
 
-  * ![Dhiraj Golhar](/sites/default/files/other-images/Dhiraj-Golhar_RBG_26.jpg)
+  * 
 
 ### **Dhiraj Golhar** (Deputy Convener)
 
-  * ![Adiba Khan](/sites/default/files/other-images/Adiba-Khan_RBG_26.jpg)
+  * 
 
 ### **Adiba Khan** (Secretary)
 
-  * ![Pronay Dey](/sites/default/files/other-images/Pronay-Dey_RBG_26.jpg)
+  * 
 
 ### **Pronay Dey** (Treasurer)
 
-  * ![Himani](/sites/default/files/other-images/Himani_RBG_26.jpg)
+  * 
 
 ### **Himani** (Diversity & Well-Being Officer)
 
@@ -148,10 +144,6 @@ Jas Mehta - Deputy Convener
 
 Email :  [sbg_academics[at]dau[dot]ac[dot]in](mailto:sbg_academics\[at\]dau\[dot\]ac\[dot\]in)
 
-![Academic Committee](/sites/default/files/other-images/Academic-Committee-23.jpg)
-
-![Annual Festival Committee](/sites/default/files/other-images/clube-2.jpg)
-
 ## Annual Festival Committee
 
 Under the Annual Fest Committee, we conduct diverse events ranging from Synapse, The Largest Annual Techno-Cultural Fest of Gujarat, to Social Initiatives, which include Hackathon named HackOut and Marathon named YouthRun.
@@ -162,9 +154,9 @@ Devamm Patel - Deputy Convener
 
 Email :  [synapse[at]dau[dot]ac[dot]in](mailto:synapse\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![world wide web](/sites/default/files/other-images/world-wide-web-clubs.png)](http://synapse.daiict.ac.in)
-  * [![instagram](/sites/default/files/other-images/instagram-clubs.png)](https://www.instagram.com/synapsedaiict/)
-  * [![youtube](/sites/default/files/other-images/youtube-clubs.png)](https://www.youtube.com/user/SynapseDAIICT)
+  * [world wide web](http://synapse.daiict.ac.in)
+  * [instagram](https://www.instagram.com/synapsedaiict/)
+  * [youtube](https://www.youtube.com/user/SynapseDAIICT)
 
 ## Cafeteria Management Committee
 
@@ -176,10 +168,6 @@ Prince Sojitra - Deputy Convener
 
 Email :  [cmc[at]dau[dot]ac[dot]in](mailto:cmc\[at\]dau\[dot\]ac\[dot\]in)
 
-![Cafeteria Management Committee](/sites/default/files/other-images/Cafeteria-Management-Committee_23.jpg)
-
-![Cultural Committee](/sites/default/files/other-images/Cultural-Committee.jpg)
-
 ## Cultural Committee
 
 We are an enthusiastic group of people involved in keeping the Culture of DAU (Formerly DA-IICT) alive. We organize different events where people showcase their talent or, just simply, have fun. We also organize all the festivals, zealously, seeing active participation from our entire student community.
@@ -190,7 +178,7 @@ Kavan Patel - Deputy Convener
 
 Email :  [cultural[at]dau[dot]ac[dot]in](mailto:cultural\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![facebook](/sites/default/files/other-images/facebook-app-clubs.png)](https://www.facebook.com/DaiictCulturalCommittee/)
+  * [facebook](https://www.facebook.com/DaiictCulturalCommittee/)
 
 ## Hostel Management Committee
 
@@ -201,10 +189,6 @@ Dweep Kotecha - Convener
 Anushka Prajapati - Deputy Convener
 
 Email :  [hmc[at]dau[dot]ac[dot]in](mailto:hmc\[at\]dau\[dot\]ac\[dot\]in)
-
-![Hostel Management Committee](/sites/default/files/other-images/Hostel-Management-Committee-23.jpg)
-
-![TechSupport Committee](/sites/default/files/other-images/TechSupport-Committee.jpg)
 
 ## TechSupport Committee
 
@@ -246,10 +230,6 @@ Ved Mungra - Deputy Convener
 
 Email :  [sports[at]dau[dot]ac[dot]in](mailto:sports\[at\]dau\[dot\]ac\[dot\]in)
 
-![Sports Committee](/sites/default/files/other-images/Sports-Committee.jpg)
-
-![Student Placement Cell](/sites/default/files/other-images/Placement_Team_2025_ver1.PNG)
-
 ## Student Placement Cell
 
 The Student Placement Cell (SPC) acts as a crucial bridge between the student community and the placement office, ensuring the smooth functioning of placement drives. The primary objective of the SPC is to facilitate a smooth and efficient process for both students and recruiters.
@@ -264,7 +244,7 @@ Kartavya Akabari - Deputy Convener
 
 Email :  [spc[at]dau[dot]ac[dot]in](mailto:spc\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![world wide web](/sites/default/files/other-images/world-wide-web-clubs.png)](/placements)
+  * [world wide web](/placements)
 
 ## AI Club
 
@@ -276,11 +256,7 @@ Sharvil Oza - Deputy Convener
 
 **Email** :  [ai_club[at]dau[dot]ac[dot]in](mailto:ai_club\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![instagram](/sites/default/files/other-images/instagram-clubs.png)](https://www.instagram.com/aiclub_daiict/)
-
-![AI Club](/sites/default/files/other-images/AI-Club_23_.jpg)
-
-![Press Club](/sites/default/files/other-images/clube-1.jpg)
+  * [instagram](https://www.instagram.com/aiclub_daiict/)
 
 ## Press Club
 
@@ -294,7 +270,7 @@ Hemal Chavda - Deputy Convener
 
 Email:  [pressclub[at]dau[dot]ac[dot]in](mailto:pressclub\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![world wide web](/sites/default/files/other-images/world-wide-web-clubs.png)](http://entelechy.daiict.ac.in)
+  * [world wide web](http://entelechy.daiict.ac.in)
 
 ## The Debating Society
 
@@ -309,10 +285,6 @@ Kkavy Dave - Convener
 Het Panchotiya - Deputy Convener
 
 Email :  [debate_club[at]dau[dot]ac[dot]in](mailto:debate_club\[at\]dau\[dot\]ac\[dot\]in)
-
-![Debate Club](/sites/default/files/other-images/The-Debating-Society.jpg)
-
-![Dance Club](/sites/default/files/other-images/Dance-Club.jpg)
 
 ## Dance Club (DADC)
 
@@ -332,7 +304,7 @@ Anushka Rawat - Deputy Convener
 
 Email :  [danceclub[at]dau[dot]ac[dot]in](mailto:danceclub\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![instagram](/sites/default/files/other-images/instagram-clubs.png)](https://www.instagram.com/__dadc__/)
+  * [instagram](https://www.instagram.com/__dadc__/)
 
 ## Programming Club
 
@@ -352,10 +324,6 @@ Devang S. Vaghani - Deputy Convener
 
 Email :  [programming-club[at]dau[dot]ac[dot]in](programming-club\[at\]dau\[dot\]ac\[dot\]in)
 
-![Programming Club](/sites/default/files/other-images/Programming-Club.jpg)
-
-![Music Club](/sites/default/files/other-images/Music-club_ver1.jpg)
-
 ## Music Club
 
 The Music Club of DAU (Formerly DA-IICT) is a vibrant community of passionate musicians and music enthusiasts who come together to celebrate their love for melodies, rhythms, and creativity. The club serves as a platform for students to showcase their talent, collaborate on performances, and explore diverse musical genres. With regular jam sessions, live performances, and workshops, the Music Club fosters a lively and inclusive environment, inspiring its members to express themselves through the universal language of music. Whether you're a singer, instrumentalist, or simply a music lover, this club is the perfect place to connect and harmonize.
@@ -366,9 +334,9 @@ Varnika Chhawcharia - Deputy Convener
 
 Email :  [music_club[at]dau[dot]ac[dot]in](mailto:music_club\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![facebook](/sites/default/files/other-images/facebook-app-clubs.png)](https://www.facebook.com/musicclubdaiict/)
-  * [![instagram](/sites/default/files/other-images/instagram-clubs.png)](https://www.instagram.com/musicclubdaiict/)
-  * [![youtube](/sites/default/files/other-images/youtube-clubs.png)](http://www.youtube.com/channel/UC688bugvcKm8A2tFklL0U-A)
+  * [facebook](https://www.facebook.com/musicclubdaiict/)
+  * [instagram](https://www.instagram.com/musicclubdaiict/)
+  * [youtube](http://www.youtube.com/channel/UC688bugvcKm8A2tFklL0U-A)
 
 ## DAU Theatres Group
 
@@ -386,10 +354,6 @@ Gantavya Mayal - Deputy Convener
 
 Email :  [theatres[at]dau[dot]ac[dot]in](mailto:theatres\[at\]dau\[dot\]ac\[dot\]in)
 
-![DA-IICT Theatre](/sites/default/files/other-images/DA-IICT_Theatre.jpg)
-
-![Research Club](/sites/default/files/other-images/Research-Club.jpg)
-
 ## Research Club
 
 We are the Research Club of Dhirubhai Ambani University (formerly DA-IICT). Our club brings together students passionate about exploring cutting-edge technologies, scientific research, and interdisciplinary projects. We engage in a variety of activities, including research papers, tech talks, and collaborations with industry experts, to enhance our understanding and contribute to advancements in fields such as artificial intelligence, data science, telecommunications, and more. With a strong focus on critical thinking and problem-solving, we aim to cultivate a research-driven culture at DAU, encouraging curiosity and knowledge-sharing among students.
@@ -400,8 +364,8 @@ Dev Joshi - Deputy Convener
 
 Email :  [research_club[at]dau[dot]ac[dot]in](mailto:research_club\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![instagram](/sites/default/files/other-images/instagram-clubs.png)](https://www.instagram.com/research.club.daiict/)
-  * [![facebook](/sites/default/files/other-images/linkedin.png)](https://in.linkedin.com/company/research-club-daiict)
+  * [instagram](https://www.instagram.com/research.club.daiict/)
+  * [facebook](https://in.linkedin.com/company/research-club-daiict)
 
 ## Chess Club
 
@@ -412,10 +376,6 @@ Aarya Shah - Convener
 Kalp Shah - Deputy Convener
 
 Email :  [chess_club[at]dau[dot]ac[dot]in](mailto:chess_club\[at\]dau\[dot\]ac\[dot\]in)
-
-![Chess Club](/sites/default/files/other-images/chess-club.jpeg)
-
-![Electronics Hobby Club](/sites/default/files/other-images/Electronics_Hobby_Club_1.jpg)
 
 ## Electronics Hobby Club
 
@@ -449,12 +409,8 @@ Jeet Patel - Deputy Convener
 
 Email :  [pmmc[at]dau[dot]ac[dot]in](mailto:pmmc\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![youtube](/sites/default/files/other-images/youtube-clubs.png)](https://www.youtube.com/user/MovieMakinClubDAIICT)
-  * [![facebook](/sites/default/files/other-images/facebook-app-clubs.png)](https://www.facebook.com/PMMCDaiict)
-
-![Photography and Movie Making Club](/sites/default/files/other-images/Photography-and-Movie%20Making-Club_3.jpg)
-
-![Film Club](/sites/default/files/other-images/Film-Club.jpg)
+  * [youtube](https://www.youtube.com/user/MovieMakinClubDAIICT)
+  * [facebook](https://www.facebook.com/PMMCDaiict)
 
 ## Film Club
 
@@ -479,8 +435,8 @@ Ayush Popshetwar - Deputy Convener
 
 Email :  [film_club[at]dau[dot]ac[dot]in](mailto:film_club\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![instagram](/sites/default/files/other-images/instagram-clubs.png)](https://www.instagram.com/filmclub_dau/)
-  * [![world wide web](/sites/default/files/other-images/world-wide-web-clubs.png)](https://letterboxd.com/film_club_da/)
+  * [instagram](https://www.instagram.com/filmclub_dau/)
+  * [world wide web](https://letterboxd.com/film_club_da/)
 
 ## Google Developer Group
 
@@ -496,11 +452,7 @@ Parth Vadodaria - Deputy Convener
 
 Email :  [dsc[at]dau[dot]ac[dot]in](mailto:dsc\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![facebook](/sites/default/files/other-images/facebook-app-clubs.png)](https://www.facebook.com/gdgdaiict/)
-
-![Google Developer Group](/sites/default/files/other-images/Google-Developer-Group-dsc-daiict.jpg)
-
-![IEEE Student Branch](/sites/default/files/other-images/IEEE_Student_Branch.jpg)
+  * [facebook](https://www.facebook.com/gdgdaiict/)
 
 ## IEEE
 
@@ -514,7 +466,7 @@ Shrestha Thakkar - Deputy Convener
 
 Email :  [ieee[at]dau[dot]ac[dot]in](mailto:ieee\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![world wide web](/sites/default/files/other-images/world-wide-web-clubs.png)](http://ieee.daiict.ac.in/)
+  * [world wide web](http://ieee.daiict.ac.in/)
 
 ## Khelaiya Club
 
@@ -526,11 +478,7 @@ Malay Sidapara - Deputy Convener
 
 Email :  [khelaiya_club[at]dau[dot]ac[dot]in](mailto:khelaiya_club\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![instagram](/sites/default/files/other-images/instagram-clubs.png)](https://www.instagram.com/khelaiya.club/)
-
-![Khelaiya Club](/sites/default/files/other-images/Khelaiya-Club.jpg)
-
-![Cubing Club](/sites/default/files/other-images/Cubing-Club-DAU.jpg)
+  * [instagram](https://www.instagram.com/khelaiya.club/)
 
 ## Cubing Club
 
@@ -542,9 +490,9 @@ Dhruvil Mehta - Deputy Convener
 
 Email :  [cubing_club[at]dau[dot]ac[dot]in](mailto:cubing_club\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![instagram](/sites/default/files/other-images/instagram-clubs.png)](https://www.instagram.com/da.cubingclub/)
-  * [![youtube](/sites/default/files/other-images/youtube-clubs.png)](https://www.youtube.com/@dacubingclub)
-  * [![facebook](/sites/default/files/other-images/facebook-app-clubs.png)](https://www.facebook.com/cube221013/)
+  * [instagram](https://www.instagram.com/da.cubingclub/)
+  * [youtube](https://www.youtube.com/@dacubingclub)
+  * [facebook](https://www.facebook.com/cube221013/)
 
 ## The Radio Club
 
@@ -555,10 +503,6 @@ Maulik Khoyani - Convener
 Nandini Gadhvi - Deputy Convener
 
 Email :  [radio[at]dau[dot]ac[dot]in](mailto:radio\[at\]dau\[dot\]ac\[dot\]in)
-
-![Radio Club](/sites/default/files/other-images/Radio-Club.jpg)
-
-![Headrush- Quizzing Club](/sites/default/files/other-images/Headrush.jpg)
 
 ## Headrush: Quizzing Club
 
@@ -593,10 +537,6 @@ Arav Vaitha - Deputy Convener
 
 Email :  [business_club[at]dau[dot]ac[dot]in](mailto:business_club\[at\]dau\[dot\]ac\[dot\]in)
 
-![Business Club](/sites/default/files/other-images/Business-Club.jpg)
-
-![Microsoft Student Club](/sites/default/files/other-images/Microsoft-Student-Club.jpg)
-
 ## Microsoft Student Technical Club - MSTC
 
 We are individuals who come together and share common interest, putting our ideas into existence in order to contribute to the Open Source Community.
@@ -621,7 +561,7 @@ Brinda Sorathiya - Deputy Convener
 
 Email :  [microsoftclub[at]dau[dot]ac[dot]in](mailto:microsoftclub\[at\]dau\[dot\]ac\[dot\]in)
 
-  * [![facebook](/sites/default/files/other-images/facebook-app-clubs.png)](https://www.facebook.com/mstcatdaiict)
+  * [facebook](https://www.facebook.com/mstcatdaiict)
 
 ## Muse- The Designing Club
 
@@ -632,10 +572,6 @@ Preksha Shah - Convener
 Rutvi Chauhan - Deputy Convener
 
 Email :  [muse[at]dau[dot]ac[dot]in](mailto:muse\[at\]dau\[dot\]ac\[dot\]in)
-
-![Muse club](/sites/default/files/other-images/Muse-club.jpg)
-
-![Cyber Information and Network Security Club](/sites/default/files/other-images/Cyber-Information-and-Network-Security-Club.jpg)
 
 ## Cyber Information and Network Security Club
 
@@ -649,7 +585,7 @@ Email :  [cins_club[at]dau[dot]ac[dot]in](mailto:cins_club\[at\]dau\[dot\]ac\[do
 
 ## Wardens
 
-  * ![Dr. Madhu Kant Sharma](/sites/default/files/other-images/Madhu-Kant-Sharma.jpg)
+  * 
 
 ### **Dr. Madhu Kant Sharma**
 
@@ -657,7 +593,7 @@ Email :  [cins_club[at]dau[dot]ac[dot]in](mailto:cins_club\[at\]dau\[dot\]ac\[do
 
 _icon_[resi_warden[at]dau[dot]ac[dot]in](mailto:resi_warden\[at\]dau\[dot\]ac\[dot\]in) _icon_ (+91) 079-68261554 (Off.)
 
-  * ![Dr. Bakul Gohel](/sites/default/files/other-images/Bakul%20Gohel.jpg)
+  * 
 
 ### **Dr. Bakul Gohel**
 
@@ -665,7 +601,7 @@ _icon_[resi_warden[at]dau[dot]ac[dot]in](mailto:resi_warden\[at\]dau\[dot\]ac\[d
 
 _icon_[warden_men[at]dau[dot]ac[dot]in](mailto:warden_men\[at\]dau\[dot\]ac\[dot\]in) _icon_ (+91) 079-68261672 (Off.)
 
-  * ![Dr. Sreeja Rajedran](/sites/default/files/other-images/Dr_Sreeja-Rajedran.jpg)
+  * 
 
 ### **Dr. Sreeja Rajedran**
 
@@ -676,7 +612,7 @@ _icon_[warden_women[at]dau[dot]ac[dot]in](mailto:warden_women\[at\]dau\[dot\]ac\
 
 ## Hostel Supervisors
 
-  * ![Mr. Jitendra Parmar](/sites/default/files/other-images/Jitendra_Parmar_25.jpg)
+  * 
 
 ### **Mr. Jitendra Parmar**
 
@@ -684,7 +620,7 @@ _icon_[warden_women[at]dau[dot]ac[dot]in](mailto:warden_women\[at\]dau\[dot\]ac\
 
 _icon_[hostels[at]dau[dot]ac[dot]in](mailto:hostels\[at\]dau\[dot\]ac\[dot\]in) _icon_ 09328994140, (+91) 079-68261544 (Off.)
 
-  * ![Mr. Shirish Varma](/sites/default/files/other-images/Shirish_Varma-25.jpg)
+  * 
 
 ### **Mr. Shirish Varma**
 
@@ -692,7 +628,7 @@ _icon_[hostels[at]dau[dot]ac[dot]in](mailto:hostels\[at\]dau\[dot\]ac\[dot\]in) 
 
 _icon_[hostels[at]dau[dot]ac[dot]in](mailto:hostels\[at\]dau\[dot\]ac\[dot\]in) _icon_ 09328994142, (+91) 079-68261545 (Off.)
 
-  * ![Ms. Priya Kumari](/sites/default/files/other-images/Ms-Priya-Kumari.jpg)
+  * 
 
 ### **Ms. Priya Kumari**
 
@@ -736,7 +672,7 @@ No, there are multiple cafeterias on the campus where students can avail food as
 
 The Disciplinary Action Committee (DAC) comprising of the Dean Students, Hostel Wardens (Men and Women), and Deputy Registrar strives to establish and enforce policies related to student conduct, ensuring a safe and inclusive campus environment.
 
-  * ![Dr. P S Kalyan Sasidhar](/sites/default/files/other-images/Dr_Kalyan_Sasidhar_0.jpg)
+  * 
 
 ### **Dr. P S Kalyan Sasidhar**
 
@@ -745,7 +681,7 @@ Convener (ex-officio)
 
 _icon_[dean_students[at]dau[dot]ac[dot]in](mailto:dean_students\[at\]dau\[dot\]ac\[dot\]in) _icon_(+91) 079-68261560, Extn: 560
 
-  * ![Dr. Madhu Kant Sharma](/sites/default/files/other-images/Madhu-Kant-Sharma.jpg)
+  * 
 
 ### **Dr. Madhu Kant Sharma**
 
@@ -754,13 +690,13 @@ _icon_[dean_students[at]dau[dot]ac[dot]in](mailto:dean_students\[at\]dau\[dot\]a
 
 _icon_[resi_warden[at]dau[dot]ac[dot]in](mailto:resi_warden\[at\]dau\[dot\]ac\[dot\]in) _icon_ (+91) 079-68261554, Extn: 554
 
-  * ![Dr. Rutu Parekh](/sites/default/files/other-images/Rutu%20Parekh.jpg)
+  * 
 
 ### **Dr. Rutu Parekh**
 
 _icon_[rutu_parekh[at]dau[dot]ac[dot]in](mailto:rutu_parekh\[at\]dau\[dot\]ac\[dot\]in) _icon_(+91) 079-68261553, Extn: 553
 
-  * ![Jigar Yagnik](/sites/default/files/other-images/Jigar-Yagnik.jpg)
+  * 
 
 ### **Jigar Yagnik**
 

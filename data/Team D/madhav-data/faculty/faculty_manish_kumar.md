@@ -15,7 +15,6 @@ Faculty profile page for Manish Kumar at Dhirubhai Ambani University (DAU), Gand
 
 ### Manish Kumar
 
-
 Manish Kumar
 Â 
 PhD (Electrical Engineering), IIT Patna

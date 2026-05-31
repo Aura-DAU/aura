@@ -15,7 +15,6 @@ Faculty profile page for Sanjay Srivastava at Dhirubhai Ambani University (DAU),
 
 ### Sanjay Srivastava
 
-
 Sanjay Srivastava
 Â 
 PhD (Physics), University of California, Los Angeles, USA

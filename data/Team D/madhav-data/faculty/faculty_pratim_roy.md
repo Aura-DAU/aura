@@ -15,7 +15,6 @@ Faculty profile page for Pratim Roy at Dhirubhai Ambani University (DAU), Gandhi
 
 ### Pratim Roy
 
-
 Pratim Roy
 Â 
 PhD (Physics), IIT Kanpur

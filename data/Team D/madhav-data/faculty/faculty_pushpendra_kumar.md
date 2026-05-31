@@ -15,7 +15,6 @@ Faculty profile page for Pushpendra Kumar at Dhirubhai Ambani University (DAU), 
 
 ### Pushpendra Kumar
 
-
 Pushpendra Kumar
 Â 
 PhD (Mathematics), National Institute of Technology Puducherry

@@ -15,7 +15,6 @@ Faculty profile page for Amit Mankodi at Dhirubhai Ambani University (DAU), Gand
 
 ### Amit Mankodi
 
-
 Amit Mankodi
 Â 
 PhD, DA-IICT Gandhinagar

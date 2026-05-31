@@ -15,7 +15,6 @@ Faculty profile page for Maniklal Das at Dhirubhai Ambani University (DAU), Gand
 
 ### Maniklal Das
 
-
 Maniklal Das
 Â 
 PhD (Computer Science), IIT Bombay

@@ -15,7 +15,6 @@ Faculty profile page for Bharani Kollipara at Dhirubhai Ambani University (DAU),
 
 ### Bharani Kollipara
 
-
 Bharani Kollipara
 Â 
 PhD (English), The English and Foreign Languages University, Hyderabad

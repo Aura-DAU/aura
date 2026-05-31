@@ -15,7 +15,6 @@ Faculty profile page for Abhishek Tripathy at Dhirubhai Ambani University (DAU),
 
 ### Abhishek Tripathy
 
-
 Abhishek Tripathy
 Â 
 PhD (Thesis Submitted), Indian Institute of Management Ahmedabad

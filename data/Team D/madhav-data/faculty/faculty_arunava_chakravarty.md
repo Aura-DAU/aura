@@ -15,7 +15,6 @@ Faculty profile page for Arunava Chakravarty at Dhirubhai Ambani University (DAU
 
 ### Arunava Chakravarty
 
-
 Arunava Chakravarty
 Â 
 PhD (Computer Science and Engineering), IIIT Hyderabad

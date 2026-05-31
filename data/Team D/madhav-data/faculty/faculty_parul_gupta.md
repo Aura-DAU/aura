@@ -15,7 +15,6 @@ Faculty profile page for Parul Gupta at Dhirubhai Ambani University (DAU), Gandh
 
 ### Parul Gupta
 
-
 Parul Gupta
 Â 
 PhD (Economics), IIT Delhi

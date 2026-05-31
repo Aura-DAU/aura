@@ -9,13 +9,9 @@ team: "Team D"
 
 ## Overview
 
-![Dhirubhai Ambani University - New Visual Identity](/sites/default/files/inline-images/Dhirubhai-Ambani-University-new-logo.jpg)
-
 ## Main Content
 
 ## Message from the President of Dhirubhai Ambani University - New Visual Identity
-
-![Dhirubhai Ambani University - New Visual Identity](/sites/default/files/inline-images/Dhirubhai-Ambani-University-new-logo.jpg)
 
 #### My dear DAU family,
 

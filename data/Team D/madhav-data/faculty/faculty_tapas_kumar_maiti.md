@@ -15,7 +15,6 @@ Faculty profile page for Tapas Kumar Maiti at Dhirubhai Ambani University (DAU),
 
 ### Tapas Kumar Maiti
 
-
 Tapas Kumar Maiti
 Â 
 PhD (Electronics & Telecommunication Engineering), Jadavpur University, Kolkata

@@ -15,7 +15,6 @@ Faculty profile page for Sandeep Sharma at Dhirubhai Ambani University (DAU), Ga
 
 ### Sandeep Sharma
 
-
 Sandeep Sharma
 Â 
 PhD (Mathematics), Indraprastha Institute of Information Technology, Delhi

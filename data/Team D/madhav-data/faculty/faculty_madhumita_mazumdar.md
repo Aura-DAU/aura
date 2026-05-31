@@ -15,7 +15,6 @@ Faculty profile page for Madhumita Mazumdar at Dhirubhai Ambani University (DAU)
 
 ### Madhumita Mazumdar
 
-
 Madhumita Mazumdar
 Â 
 PhD (Modern History), University of Calcutta, Calcutta

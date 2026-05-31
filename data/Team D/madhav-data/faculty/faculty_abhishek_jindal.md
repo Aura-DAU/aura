@@ -15,7 +15,6 @@ Faculty profile page for Abhishek Jindal at Dhirubhai Ambani University (DAU), G
 
 ### Abhishek Jindal
 
-
 Abhishek Jindal
 Â 
 PhD (Electronics & Communication Engineering), IIT Delhi

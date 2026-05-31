@@ -15,7 +15,6 @@ Faculty profile page for Gautam Dutta at Dhirubhai Ambani University (DAU), Gand
 
 ### Gautam Dutta
 
-
 Gautam Dutta
 Â 
 PhD (Physics), Physical Research Laboratory, Ahmedabad

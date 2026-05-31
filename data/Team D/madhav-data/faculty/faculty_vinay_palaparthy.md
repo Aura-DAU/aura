@@ -15,7 +15,6 @@ Faculty profile page for Vinay Palaparthy at Dhirubhai Ambani University (DAU), 
 
 ### Vinay Palaparthy
 
-
 Vinay Palaparthy
 Â 
 PhD (Electrical Engineering), IIT Bombay

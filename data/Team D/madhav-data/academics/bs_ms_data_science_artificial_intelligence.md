@@ -35,8 +35,6 @@ Data Science and Artificial Intelligence** | **3 Years: Bachelor of Science (B.S
 
 Why This Program?
 
-![Program Overview](/sites/default/files/other-images/B.S.–M.S-DS-AI.jpg)
-
 Artificial Intelligence and data-driven systems are transforming every sector — healthcare, finance, climate science, manufacturing, governance, and digital platforms.
 
 Organisations today need professionals who not only understand algorithms but can design, deploy, and manage responsible AI systems at scale.
@@ -123,8 +121,6 @@ Students learn not only how to build AI systems, but how to deploy them responsi
 Students gain hands-on experience in designing, evaluating, and deploying production-grade AI systems that are explainable, scalable, and human-centered.
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
-
-![Structure and Exit Options](/sites/default/files/inline-images/BS.%E2%80%93MS-Data-Science-and-Artificial-Intelligence_ver2_2026.jpg)
 
   * **After 3 Years – B.Sc. (Bachelor of Science)**  
 Strong grounding in programming, statistics, data science, and core machine learning.

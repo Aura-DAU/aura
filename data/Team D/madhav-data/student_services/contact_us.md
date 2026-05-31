@@ -22,7 +22,7 @@ Gandhinagar 382 007,
 Gujarat (India)
 
   * [facebook](https://www.facebook.com/officialdau "Facebook")
-  * [![X icon](/themes/daiict/images/twitterc.png) X ](https://x.com/dauofficial_ "X")
+  * [X](https://x.com/dauofficial_ "X")
   * [Instagram](https://www.instagram.com/daiictofficial/ "Instagram")
   * [Youtube](https://www.youtube.com/@dau_edu "YouTube")
   * [LinkedIn](https://www.linkedin.com/school/dhirubhaiambaniuniversity/?viewAsMember=true "LinkedIn")
@@ -31,8 +31,6 @@ Gujarat (India)
 ## How To Reach Us
 
 ## DA-IICT Campus Map
-
-![Map](/sites/default/files/other-images/DA-IICT_Campus_Layout.jpg)
 
 ## The City Gandhinagar
 

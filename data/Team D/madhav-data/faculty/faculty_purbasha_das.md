@@ -15,7 +15,6 @@ Faculty profile page for Purbasha Das at Dhirubhai Ambani University (DAU), Gand
 
 ### Purbasha Das
 
-
 Purbasha Das
 Â 
 PhD (History), Jawaharlal Nehru University, New Delhi

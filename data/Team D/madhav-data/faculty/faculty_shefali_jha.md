@@ -15,7 +15,6 @@ Faculty profile page for Shefali Jha at Dhirubhai Ambani University (DAU), Gandh
 
 ### Shefali Jha
 
-
 Shefali Jha
 Â 
 PhD (Anthropology), University of Chicago, USA

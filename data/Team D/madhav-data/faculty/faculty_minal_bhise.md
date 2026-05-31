@@ -15,7 +15,6 @@ Faculty profile page for Minal Bhise at Dhirubhai Ambani University (DAU), Gandh
 
 ### Minal Bhise
 
-
 Minal Bhise
 Â 
 PhD (Computer Science), BITS Pilani

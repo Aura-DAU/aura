@@ -36,8 +36,6 @@ team: "Team D"
 
 ## **Message From Director General**
 
-![Dr. Tathagata Bandyopadhyay](/sites/default/files/other-images/Dr-Tathagata_Bandyopadhyay.jpg)
-
 ### **Dr. Tathagata Bandyopadhyay**
 
 As the alumni of DA-IICT mark two decades of significant contributions to society, we reflect on the visionary ideals of the late Shree Dhirubhai Ambani, an iconic industrialist, the nation's one of the greatest wealth creators, whose everlasting and deep impact resonates in Indian corporate history. Since its inception, our university has been dedicated to pioneering research and innovation in cutting-edge information and communication technology (ICT). Now, we are planning to broaden our scope of activities to other disciplines like law, management and health sciences to name a few leading to the evolution of DA-IICT into a multidisciplinary "Dhirubhai Ambani University (DAU)."
@@ -54,8 +52,6 @@ DA-IICT prides itself on the success of its alumni. Being an ICT Institute that 
 
 Our alumni have been instrumental in strengthening the brand of DA-IICT by distinguishing themselves as entrepreneurs, researchers, academicians, bureaucrats, Analysts, developers, designers, etc. We are proud of remarkable achievements of our Alums.
 
-![Alumni](/sites/default/files/other-images/Alumni-Portal.jpg)
-
 We look forward to welcoming you on campus/meeting in your cities and closely engaging for the shared vision for this unique institution. In the coming months/year, we are planning Alumni Reunions on campus; arranging chapter/city meetings for interaction with the Director/various faculty members; and forming active Special Interest Groups. This year will also see the launch of Alumni Achievers Awards at DA-IICT.
 
 We are planning to launch DA-IICTian Alumni Magazine/Newsletter. We seek your support to update your profile with Alma Mater on this Alumni portal to be able to seamlessly connect with you and keep you posted with relevant information/updates at the Institute. We will welcome the interesting photographs, articles, and news from various Alumni batches as well as cities & country chapters.
@@ -66,8 +62,6 @@ _**For any information contact**_ :
 ## **Message From Dean (Alumni & External Relations)**
 
 ### **Dr. Anil Roy**
-
-![Dr. Anil Roy](/sites/default/files/other-images/Dr-Anil-Roy.jpg)
 
 #### Dear Esteemed Alumni
 
@@ -152,8 +146,6 @@ Looking forward to meeting you all soon.
 
 **Email:** [alumni_office[at]dau[dot]ac[dot]in](mailto:alumni_office\[at\]dau\[dot\]ac\[dot\]in)
 
-![Reunions planned on campus](/sites/default/files/other-images/Alumni-Reunion.jpg)
-
 ## DAU Silver Jubilee Celebrations and Alumni Reunion
 
 **Reunion Alert!_Batches of 2001, 2002, 2003 & 2004_**, **don't miss out!**
@@ -169,10 +161,6 @@ The DAU Silver Jubilee Alumni Reunion on **Dec 27-28, 2025**! Reconnect with fri
 #### [Click here for FAQs regarding the event](/sites/default/files/other-files/FAQs-DAU_Silver-Jubliee-Alumni-Meet_Dec_27-28_2025.pdf).
 
 #### **For any queries regarding the event, the Alumni Office may be reached at** : **alumni_office[at]dau[dot]ac[dot]in**
-
-![DAU Silver Jubilee Celebrations and Alumni Reunion](/sites/default/files/other-images/Alumni-Reunion_DEC-25.JPG)
-
-![Distinguished Alumni Award \(DAA\) 2025–26](/sites/default/files/other-images/Distinguished-Alumni-Award_SM.png)
 
 ## The Distinguished Alumni Awards 2025–26
 
@@ -199,8 +187,6 @@ We invite the University Alumni Committee and our community to nominate exceptio
 
 [Know More](/sites/default/files/other-files/DAA_2025%E2%80%9326.pdf)
 
-![Events on campus](/sites/default/files/other-images/E-Collage-02.jpg)
-
 ## Events on campus
 
 In this section on the Institute’s portal, we are planning to keep you updated with recent and forthcoming events on campus to help plan your visit, whenever feasible. We will also selectively share past events that may revive beautiful memories of your student days.
@@ -219,20 +205,18 @@ Please do share interesting pictures and news on the Alumni office to help post 
 
 [Please share interesting pictures and news](https://forms.gle/jChACvrRgVi9vA8m9)
 
-![Campus Memories](/sites/default/files/other-images/CM-Collage-02.jpg)
-
 ## Alumni Office Team
 
-  * ![Ajit K Motwani](/sites/default/files/other-images/Ajit_K-Motwani.jpg)
+  * 
 
 ### **Ajit K Motwani**  
 (_Principal Advisor_)
 
 ## Alumni Newsletter
 
-[![Newsletter](/sites/default/files/other-images/Alumni-Connect_Vol-1_Oct-Dec_2025.jpg) Vol. 1, No. 1, Oct-Dec. 2025 ](/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf)
+[Vol. 1, No. 1, Oct-Dec. 2025](/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf)
 
-[![Newsletter](/sites/default/files/other-images/Alumni_Connect%20_Vol-1_No-2_Page_01.jpg) Vol. 1, No. 2, Jan-Mar. 2026 ](/sites/default/files/other-files/Alumni_Connect%20_Vol-1_No-2_Jan-Mar_2026.pdf)
+[Vol. 1, No. 2, Jan-Mar. 2026](/sites/default/files/other-files/Alumni_Connect%20_Vol-1_No-2_Jan-Mar_2026.pdf)
 
 ## Other Links
 

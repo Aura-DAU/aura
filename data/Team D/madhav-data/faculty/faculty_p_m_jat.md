@@ -15,7 +15,6 @@ Faculty profile page for P M Jat at Dhirubhai Ambani University (DAU), Gandhinag
 
 ### P M Jat
 
-
 P M Jat
 Â 
 PhD (Computer Science and Engineering), ML Sukhadia University, Udaipur

@@ -15,7 +15,6 @@ Faculty profile page for G. Venkatesh at Dhirubhai Ambani University (DAU), Gand
 
 ### G. Venkatesh
 
-
 G. Venkatesh
 Â 
 PhD (Computer Science), TIFR, Mumbai

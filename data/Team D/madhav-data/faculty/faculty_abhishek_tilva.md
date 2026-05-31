@@ -15,7 +15,6 @@ Faculty profile page for Abhishek Tilva at Dhirubhai Ambani University (DAU), Ga
 
 ### Abhishek Tilva
 
-
 Abhishek Tilva
 Â 
 PhD (Statistics), Columbia University, New York, USA

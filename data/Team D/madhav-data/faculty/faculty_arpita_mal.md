@@ -15,7 +15,6 @@ Faculty profile page for Arpita Mal at Dhirubhai Ambani University (DAU), Gandhi
 
 ### Arpita Mal
 
-
 Arpita Mal
 Â 
 PhD (Mathematics), Jadavpur University, Kolkata

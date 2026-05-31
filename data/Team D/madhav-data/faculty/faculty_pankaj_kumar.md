@@ -15,7 +15,6 @@ Faculty profile page for Pankaj Kumar at Dhirubhai Ambani University (DAU), Gand
 
 ### Pankaj Kumar
 
-
 Pankaj Kumar
 Â 
 PhD (RF & Microwave), NIT Patna

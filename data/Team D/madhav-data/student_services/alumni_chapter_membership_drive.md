@@ -30,7 +30,7 @@ team: "Team D"
 
 [Register Now](https://forms.gle/JWNmexeoaKUsCgui9)
 
-[![DAU Alumni Chapter Membership Drive](/sites/default/files/inline-images/DAU_ALUMNI_CHAPTER_MEMBERSHIP_DRIVE.png)](https://forms.gle/JWNmexeoaKUsCgui9)
+[DAU Alumni Chapter Membership Drive](https://forms.gle/JWNmexeoaKUsCgui9)
 
 ## Related Links
 

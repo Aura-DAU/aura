@@ -15,7 +15,6 @@ Faculty profile page for Rajib Lochan Das at Dhirubhai Ambani University (DAU), 
 
 ### Rajib Lochan Das
 
-
 Rajib Lochan Das
 Â 
 PhD (Electronics & Electrical Communication Engineering), IIT Kharagpur

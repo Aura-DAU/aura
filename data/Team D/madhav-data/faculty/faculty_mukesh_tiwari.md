@@ -15,7 +15,6 @@ Faculty profile page for Mukesh Tiwari at Dhirubhai Ambani University (DAU), Gan
 
 ### Mukesh Tiwari
 
-
 Mukesh Tiwari
 Â 
 PhD (Optical Science & Engineering), University of New Mexico, USA

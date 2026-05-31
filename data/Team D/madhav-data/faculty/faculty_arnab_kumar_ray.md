@@ -15,7 +15,6 @@ Faculty profile page for Arnab Kumar Ray at Dhirubhai Ambani University (DAU), G
 
 ### Arnab Kumar Ray
 
-
 Arnab Kumar Ray
 Â 
 PhD (Physics), Jadavpur University, Kolkata

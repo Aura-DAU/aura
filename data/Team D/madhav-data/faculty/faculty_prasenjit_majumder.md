@@ -15,7 +15,6 @@ Faculty profile page for Prasenjit Majumder at Dhirubhai Ambani University (DAU)
 
 ### Prasenjit Majumder
 
-
 Prasenjit Majumder (On Leave)
 Â 
 PhD (Computer Science), Jadavpur University

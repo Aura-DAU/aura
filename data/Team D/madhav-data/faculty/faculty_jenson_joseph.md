@@ -15,7 +15,6 @@ Faculty profile page for Jenson Joseph at Dhirubhai Ambani University (DAU), Gan
 
 ### Jenson Joseph
 
-
 Jenson Joseph
 Â 
 PhD (Communication), University of Hyderabad, Hyderabad

@@ -15,7 +15,6 @@ Faculty profile page for Sandip Modha at Dhirubhai Ambani University (DAU), Gand
 
 ### Sandip Modha
 
-
 Sandip Modha
 Â 
 PhD, DA-IICT Gandhinagar

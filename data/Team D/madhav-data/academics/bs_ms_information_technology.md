@@ -35,8 +35,6 @@ Information Technology** | **3 Years: Bachelor of Science (B.Sc.)
 
 Why This Program?
 
-![Program Overview](/sites/default/files/other-images/B.S.%E2%80%93M.S.-IT.JPG)
-
 Information Technology is the foundation of today’s digital world — powering financial systems, cloud platforms, e-commerce, healthcare infrastructure, cybersecurity, artificial intelligence, and global digital services. Organisations require professionals who can not only write software, but also design, deploy, secure, and manage large-scale technology systems
 
 Many traditional programs focus primarily on programming or theoretical computing, with limited exposure to real-world system deployment, cloud infrastructure, security, and modern engineering workflows. Few offer an integrated pathway that develops complete technology professionals with both strong foundations and hands-on expertise.
@@ -134,8 +132,6 @@ This prepares students to work effectively in professional and multidisciplinary
 Students graduate with experience in building and deploying real systems using modern technologies.
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
-
-![Structure and Exit Options](/sites/default/files/inline-images/BS-MS_Information-Technolog_2026.jpg)
 
   * **After 3 Years – B.Sc. (Bachelor of Science) in Information Technology**  
 Strong foundations in programming, data structures and algorithms, databases, operating systems, computer networks, and full-stack development, along with hands-on projects and practical system-building experience.
