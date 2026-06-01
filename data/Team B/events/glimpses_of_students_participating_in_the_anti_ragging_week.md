@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Glimpses of students participating in the Anti-Ragging week
 
-## Overview
+# Overview
 
 Glimpses of students participating in the Anti-Ragging week being observed on Campus from Aug 12 to 18 aligned to the initiative led by the University Grants Commission (UGC) and the Centre for Youth (C4Y).
 
-## Main Content
+# Main Content
 
-## Glimpses of students participating in the Anti-Ragging week
+# Glimpses of students participating in the Anti-Ragging week
 
 Glimpses of students participating in the Anti-Ragging week being observed on Campus from Aug 12 to 18 aligned to the initiative led by the University Grants Commission (UGC) and the Centre for Youth (C4Y).
 
@@ -27,25 +27,25 @@ At DA-IICT, we are dedicated to fostering a campus culture built on camaraderie,
 - Anti-Ragging Committee
 - Organization wide awareness and undertakings on policies with zero tolerance
 
-## Images
+# Images
 
 [Image Present: Anti- Ragging week]
 [Image Present: Anti- Ragging week]
 [Image Present: Anti- Ragging week]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - Curbing Ragging
 - Anti-Ragging Committee
 - Organization wide awareness and undertakings on policies with zero tolerance
 
-## Related Links
+# Related Links
 
 - [Curbing Ragging](https://www.daiict.ac.in/curbing-ragging)
 - [Anti-Ragging Committee](https://daiict.ac.in/sites/default/files/other-files/Antiragging-Committee-2024-2025.pdf)
 - [Organization wide awareness and undertakings on policies with zero tolerance](https://www.daiict.ac.in/sites/default/files/other-files/5.1.4_Organisation-wide-awareness-and-undertakings-on-policies-with-zero-tolerance.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | Anti-Ragging Committee | PDF | [https://daiict.ac.in/sites/default/files/other-files/Antiragging-Committee-2024-2025.pdf](https://daiict.ac.in/sites/default/files/other-files/Antiragging-Committee-2024-2025.pdf) | | Organization wide awareness and undertakings on policies with zero tolerance | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/5.1.4_Organisation-wide-awareness-and-undertakings-on-policies-with-zero-tolerance.pdf](https://www.daiict.ac.in/sites/default/files/other-files/5.1.4_Organisation-wide-awareness-and-undertakings-on-policies-with-zero-tolerance.pdf) |

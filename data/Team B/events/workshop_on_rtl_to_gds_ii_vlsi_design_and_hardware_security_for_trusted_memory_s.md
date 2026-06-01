@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Workshop on RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems
 
-## Overview
+# Overview
 
 Dhirubhai Ambani University (DAU) , Gandhinagar, Gujarat, India is hosting a one-week workshop titled “ RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems ” from 06 th to 10 th July 2026 .
 
-## Main Content
+# Main Content
 
-## Workshop on RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems
+# Workshop on RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems
 
 Dhirubhai Ambani University (DAU) , Gandhinagar, Gujarat, India is hosting a one-week workshop titled “ RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems ” from 06 th to 10 th July 2026 .
 
@@ -27,28 +27,28 @@ Register Now
 
 Participants from Gujarat are eligible for a full refund of the ₹5,000 registration fee , subject to maintaining at least 75% attendance during the workshop.
 
-### For any queries, please contact :
+# For any queries, please contact :
 
-#### Workshop Coordinators:
+# Workshop Coordinators:
 
 Prof. Sreeja Rajendran (+91-9074703191 | sreeja_rajendran@dau.ac.in )
 
 Prof. Yash Agrawal (+91-9882114669 | yash_agrawal@dau.ac.in )
 
-#### AIP Cell, DAU:
+# AIP Cell, DAU:
 
 Mr. Pankit Gandhi (+91-079-68261666 | aip@dau.ac.in )
 
-## Images
+# Images
 
 [Image Present: Workshop on RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Contact Information
+# Contact Information
 
 - **Email:** aip@dau.ac.in
 - **Email:** sreeja_rajendran@dau.ac.in

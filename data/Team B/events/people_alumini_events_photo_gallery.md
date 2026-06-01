@@ -9,25 +9,25 @@ team: "Team 2"
 
 # People / Alumini / Events Photo Gallery
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-## DAU - Alumni Reconnect and Reunion
+# DAU - Alumni Reconnect and Reunion
 
-#### 2026
+# 2026
 
-## Alumni Meet 2026 – (Gandhinagar–Ahmedabad Chapter)
+# Alumni Meet 2026 – (Gandhinagar–Ahmedabad Chapter)
 
-#### 2025
+# 2025
 
-#### 2024
+# 2024
 
-### Events on campus
+# Events on campus
 
-## Images
+# Images
 
 [Image Present: Alumni Meet Gandhinagar-Ahmedabad Chapter 2026]
 [Image Present: Alumni Meet Gandhinagar-Ahmedabad Chapter 2026]
@@ -40,7 +40,7 @@ _No overview available._
 [Image Present: Alumni Meet Gandhinagar-Ahmedabad Chapter 2026]
 [Image Present: Alumni Meet Gandhinagar-Ahmedabad Chapter 2026]
 
-## Important Information
+# Important Information
 
 _No important information found._
 

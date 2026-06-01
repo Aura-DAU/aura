@@ -9,14 +9,14 @@ team: "Team 2"
 
 # DAIICT Team comprising of Ganeshsai Garikipati, Roshani, Anish Mathuria and Priyanka Singh won the best student paper award at SPACE ’20
 
-## Overview
+# Overview
 
 https://cse.iitkgp.ac.in/conf/SPACE2020/best_papers.php
 
-## Main Content
+# Main Content
 
 https://cse.iitkgp.ac.in/conf/SPACE2020/best_papers.php
 
-## Important Information
+# Important Information
 
 _No important information found._

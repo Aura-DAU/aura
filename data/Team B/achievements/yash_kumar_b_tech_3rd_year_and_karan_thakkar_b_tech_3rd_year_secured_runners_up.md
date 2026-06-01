@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Yash Kumar (B.Tech 3rd Year) and Karan Thakkar (B.Tech 3rd Year) secured runners up position at TCS Codevita, 2016
 
-## Overview
+# Overview
 
 This event was held at TCS Siruseri campus, Chennai, where 15 teams selected from all over India were invited.
 
-## Main Content
+# Main Content
 
 This event was held at TCS Siruseri campus, Chennai, where 15 teams selected from all over India were invited.
 
-## Important Information
+# Important Information
 
 _No important information found._

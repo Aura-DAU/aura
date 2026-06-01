@@ -9,17 +9,17 @@ team: "Team 2"
 
 # DA-IICT 19th Convocation
 
-## Overview
+# Overview
 
 The President of DA-llCT, Smt Tina Anil Ambani , cordially invites you to the Nineteenth Convocation of Dhirubhai Ambani Institute of Information and Communication Technology to be held on Saturday, 18 th January 2025 .
 
-## Main Content
+# Main Content
 
-## DA-IICT 19th Convocation
+# DA-IICT 19th Convocation
 
-## Exciting News Alert!
+# Exciting News Alert!
 
-### Mark your calendars, everyone! We're thrilled to announce that our 19th Convocation is set to take place on Saturday, 18 th January 2025 at 5 pm on campus.
+# Mark your calendars, everyone! We're thrilled to announce that our 19th Convocation is set to take place on Saturday, 18 th January 2025 at 5 pm on campus.
 
 The President of DA-llCT, Smt Tina Anil Ambani , cordially invites you to the Nineteenth Convocation of Dhirubhai Ambani Institute of Information and Communication Technology to be held on Saturday, 18 th January 2025 .
 
@@ -27,11 +27,11 @@ Dr. S. Somanath, Distinguished Scientist and Secretary, Department of Space and 
 
 The Convocation proceedings will start at 17:00 hours at the Students Activity Centre, DA-llCT Campus, Gandhinagar .
 
-## Short Profile of the Chief Guest
+# Short Profile of the Chief Guest
 
 Dr. S. Somanath
 
-### Dr. S. Somanath , Distinguished Scientist and Secretary, Department of Space and Chairman, Space Commission and Chairman, Indian Space Research Organisation
+# Dr. S. Somanath , Distinguished Scientist and Secretary, Department of Space and Chairman, Space Commission and Chairman, Indian Space Research Organisation
 
 Dr. S. Somanath is a Distinguished Scientist (Apex Grade) and Secretary, Department of Space (DoS), Chairman, Space Commission and Chairman, ISRO since 14 January 2022. Dr. S. Somanath having a career spanning nearly 38 years, is an expert in the field of space technology and systems engineering of launch vehicles and has made significant contributions in many areas.
 
@@ -45,12 +45,12 @@ He is a Fellow of Indian National Academy of Engineering (INAE), Fellow of India
 
 He has published papers in journals and conferences in the area of structural dynamics and control, materials modelling, dynamic analysis of separation mechanisms, vibration and acoustic testing, launch vehicle design and launch services management. Dr. S. Somanath has been a delegate to UN-COPUOS, vice President of International Astronautical Federation (IAF) and participated in International Astronautical Congress (IAC) held at different countries.
 
-## Images
+# Images
 
 [Image Present: 19th Convocation 2025]
 [Image Present: Dr. S. Somanath]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

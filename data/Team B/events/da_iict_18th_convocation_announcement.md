@@ -9,25 +9,25 @@ team: "Team 2"
 
 # DA-IICT 18th Convocation Announcement
 
-## Overview
+# Overview
 
 Stay tuned for further updates regarding the schedule and detailed information about this momentous occasion. Save the date and get ready for an inspiring and memorable Convocation!
 
-## Main Content
+# Main Content
 
-## DA-IICT 18th Convocation Announcement
+# DA-IICT 18th Convocation Announcement
 
-## Exciting News Alert!
+# Exciting News Alert!
 
-### Mark your calendars, everyone! We're thrilled to announce that our 18th Convocation is set to take place on Saturday, January 27th, 2024 at 5 pm on campus.
+# Mark your calendars, everyone! We're thrilled to announce that our 18th Convocation is set to take place on Saturday, January 27th, 2024 at 5 pm on campus.
 
 Stay tuned for further updates regarding the schedule and detailed information about this momentous occasion. Save the date and get ready for an inspiring and memorable Convocation!
 
-## Images
+# Images
 
 [Image Present: 18th Convocation]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

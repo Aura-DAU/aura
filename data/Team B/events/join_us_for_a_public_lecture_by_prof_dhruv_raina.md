@@ -9,15 +9,15 @@ team: "Team 2"
 
 # Join us for a public lecture by Prof. Dhruv Raina
 
-## Overview
+# Overview
 
 Title : "Astride Astronomy and Architecture: Contemporary Reflections on Jai Singh and Cosmopolitan Astronomy"
 
-## Main Content
+# Main Content
 
-## Join us for a public lecture by Prof. Dhruv Raina
+# Join us for a public lecture by Prof. Dhruv Raina
 
-### Join us for a public lecture by Prof. Dhruv Raina on the iconic Jantar Mantar observatory in Jaipur!
+# Join us for a public lecture by Prof. Dhruv Raina on the iconic Jantar Mantar observatory in Jaipur!
 
 - Date: 26th February 2024
 - Time : 4:00 pm
@@ -27,11 +27,11 @@ Title : "Astride Astronomy and Architecture: Contemporary Reflections on Jai Sin
 
 Learn from Prof. Dhruv Raina, a distinguished philosopher and historian of science, as he delves into the intricate connections between astronomy, architecture, and cosmopolitanism culture.
 
-## Images
+# Images
 
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - Date: 26th February 2024
 - Time : 4:00 pm

@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Two-day workshop on Design Thinking for Innovation and Entrepreneurship
 
-## Overview
+# Overview
 
 Dhirubhai Ambani University announces a two-day workshop on Design Thinking for Innovation & Entrepreneurship , scheduled for 30–31 January 2026 at the University campus, Gandhinagar .
 
-## Main Content
+# Main Content
 
-## Two-day workshop on Design Thinking for Innovation and Entrepreneurship
+# Two-day workshop on Design Thinking for Innovation and Entrepreneurship
 
 Dhirubhai Ambani University announces a two-day workshop on Design Thinking for Innovation & Entrepreneurship , scheduled for 30–31 January 2026 at the University campus, Gandhinagar .
 
@@ -23,15 +23,15 @@ Designed for students and working professionals seeking innovation-driven skills
 
 The programme will be led by Dr Snigdha Majumder , an IDEO-certified Design Thinker and Innovation Strategist with over 20 years of experience , offering students practical industry insights and real-world perspectives.
 
-#### Registration is free for all students and working professionals
+# Registration is free for all students and working professionals
 
 Registration URL
 
-## Images
+# Images
 
 [Image Present: Two-day workshop on Design Thinking for Innovation and Entrepreneurship]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

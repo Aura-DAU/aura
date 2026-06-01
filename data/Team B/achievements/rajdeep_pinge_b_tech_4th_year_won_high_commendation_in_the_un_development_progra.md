@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Rajdeep Pinge (B.Tech 4th Year) won High Commendation in the UN Development Programme of the AYMUN.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

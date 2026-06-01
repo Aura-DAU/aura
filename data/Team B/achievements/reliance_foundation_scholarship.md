@@ -9,24 +9,24 @@ team: "Team 2"
 
 # Reliance Foundation Scholarship
 
-## Overview
+# Overview
 
 Congratulations! Abhi Gupta, student of the MSC AA 2022 batch, has received the prestigious Reliance Foundation scholarship for the academic year 2022 - 23.
 
-## Main Content
+# Main Content
 
 Congratulations! Abhi Gupta, student of the MSC AA 2022 batch, has received the prestigious Reliance Foundation scholarship for the academic year 2022 - 23.
 
 For more information, Click here
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [Click here](https://www.daiict.ac.in/sites/default/files/other-files/Reliance-Foundation_Abhi_2023.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | Click here | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Reliance-Foundation_Abhi_2023.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Reliance-Foundation_Abhi_2023.pdf) |

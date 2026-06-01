@@ -9,13 +9,13 @@ team: "Team 2"
 
 # DAU to organise Alumni Meet 2026 – Gandhinagar-Ahmedabad Chapter
 
-## Overview
+# Overview
 
 Dhirubhai Ambani University is pleased to announce the Alumni Meet 2026 for the Gandhinagar-Ahmedabad Chapter on 18 April 2026 . Join us to reconnect with fellow alumni, relive cherished memories and strengthen your professional and personal network.
 
-## Main Content
+# Main Content
 
-## DAU to organise Alumni Meet 2026 – Gandhinagar-Ahmedabad Chapter
+# DAU to organise Alumni Meet 2026 – Gandhinagar-Ahmedabad Chapter
 
 Dhirubhai Ambani University is pleased to announce the Alumni Meet 2026 for the Gandhinagar-Ahmedabad Chapter on 18 April 2026 . Join us to reconnect with fellow alumni, relive cherished memories and strengthen your professional and personal network.
 
@@ -25,11 +25,11 @@ We warmly invite all alumni to be part of this memorable gathering and help make
 
 Register here
 
-## Images
+# Images
 
 [Image Present: DAU to organise Alumni Meet 2026 – Gandhinagar-Ahmedabad Chapter]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

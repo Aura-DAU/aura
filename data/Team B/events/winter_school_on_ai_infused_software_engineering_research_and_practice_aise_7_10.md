@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Winter School on AI-Infused Software Engineering Research and Practice (AISE), 7-10 Januar…
 
-## Overview
+# Overview
 
 1 st Edition of Winter School on AI-Infused Software Engineering - Research and Practice (AISE 2026) will be held at Dhirubhai Ambani University, formerly DA-IICT Gandhinagar from 7-10 January 2026.
 
-## Main Content
+# Main Content
 
-## Winter School on AI-Infused Software Engineering Research and Practice (AISE), 7-10 January 2026.
+# Winter School on AI-Infused Software Engineering Research and Practice (AISE), 7-10 January 2026.
 
 1 st Edition of Winter School on AI-Infused Software Engineering - Research and Practice (AISE 2026) will be held at Dhirubhai Ambani University, formerly DA-IICT Gandhinagar from 7-10 January 2026.
 
@@ -23,19 +23,19 @@ As Software Engineering (SE) evolves, integrating Artificial Intelligence (AI) i
 
 The school features expert talks, practical sessions, and brainstorming discussions with leading researchers and practitioners in AI and Software Engineering.
 
-#### For more details on registration and program, please visit:
+# For more details on registration and program, please visit:
 
-#### https://aise.daiict.ac.in/
+# https://aise.daiict.ac.in/
 
-## Images
+# Images
 
 [Image Present: Winter School on AI-Infused Software Engineering Research and Practice (AISE) 2026]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [https://aise.daiict.ac.in/](https://aise.daiict.ac.in/)

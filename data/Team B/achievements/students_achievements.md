@@ -9,26 +9,13 @@ team: "Team 2"
 
 # Students / Achievements
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-#### Pagination
-
-- Current page 1
-- Page 2
-- Page 3
-- Page 4
-- Page 5
-- Page 6
-- Page 7
-- Page 8
-- Next page ››
-- Last page Last »
-
-## Important Information
+# Pagination
 
 - Current page 1
 - Page 2
@@ -41,7 +28,20 @@ _No overview available._
 - Next page ››
 - Last page Last »
 
-## Related Links
+# Important Information
+
+- Current page 1
+- Page 2
+- Page 3
+- Page 4
+- Page 5
+- Page 6
+- Page 7
+- Page 8
+- Next page ››
+- Last page Last »
+
+# Related Links
 
 - [Read More](https://www.daiict.ac.in/achievements/6914)
 - [Read More](https://www.daiict.ac.in/achievements/6913)

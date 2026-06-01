@@ -9,33 +9,33 @@ team: "Team 2"
 
 # Public Lecture: Robots that learn by physically interacting with their surroundings
 
-## Overview
+# Overview
 
 Robots are being developed for an increasingly wide number of applications including consumer applications and space applications. One of the critical needs for robots in such applications is for the robots to feel their environment and learn and adapt to different types of objects and surfaces. In this talk, the speaker will cover some general principles related to robots physically interacting with the environment, and highlight the latest developments from his lab by showcasing some of the experiments in the lab.
 
-## Main Content
+# Main Content
 
-## Public Lecture: Robots that learn by physically interacting with their surroundings
+# Public Lecture: Robots that learn by physically interacting with their surroundings
 
-### Title : "Robots that learn by physically interacting with their surroundings"
+# Title : "Robots that learn by physically interacting with their surroundings"
 
-#### Venue : LT-1
+# Venue : LT-1
 
-#### Date : 4th April 2024
+# Date : 4th April 2024
 
-#### Time : 4:30 pm
+# Time : 4:30 pm
 
-#### Speaker : Dr. Harish Palanthandalam-Madapusi, IIT Gandhinagar
+# Speaker : Dr. Harish Palanthandalam-Madapusi, IIT Gandhinagar
 
-### Abstract :
+# Abstract :
 
 Robots are being developed for an increasingly wide number of applications including consumer applications and space applications. One of the critical needs for robots in such applications is for the robots to feel their environment and learn and adapt to different types of objects and surfaces. In this talk, the speaker will cover some general principles related to robots physically interacting with the environment, and highlight the latest developments from his lab by showcasing some of the experiments in the lab.
 
-## Images
+# Images
 
 [Image Present: Robots that learn by physically interacting with their surroundings]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

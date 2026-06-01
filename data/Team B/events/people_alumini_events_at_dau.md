@@ -9,37 +9,13 @@ team: "Team 2"
 
 # People / Alumini / Events at DAU
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-#### Pagination
-
-- Current page 1
-- Page 2
-- Page 3
-- Page 4
-- Page 5
-- Page 6
-- Page 7
-- Page 8
-- Page 9
-- …
-- Next page Next ›
-- Last page Last »
-
-## Images
-
-[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
-[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
-[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
-[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
-[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
-[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
-
-## Important Information
+# Pagination
 
 - Current page 1
 - Page 2
@@ -54,7 +30,31 @@ _No overview available._
 - Next page Next ›
 - Last page Last »
 
-## Related Links
+# Images
+
+[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
+[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
+[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
+[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
+[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
+[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
+
+# Important Information
+
+- Current page 1
+- Page 2
+- Page 3
+- Page 4
+- Page 5
+- Page 6
+- Page 7
+- Page 8
+- Page 9
+- …
+- Next page Next ›
+- Last page Last »
+
+# Related Links
 
 - [Artificial Intelligence in Internet of Things (AIoT): Concepts, Architectures, and Hands-o…15/06/2026
  - 20/06/2026](https://www.daiict.ac.in/events/7078)

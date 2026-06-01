@@ -9,33 +9,33 @@ team: "Team 2"
 
 # One-Day Workshop on 5G and Beyond 5G Wireless Technologies
 
-## Overview
+# Overview
 
 ( Registration Deadline: October 29, 2023 2PM, open to candidates working in the area of wireless communication: B. Tech. (4th year), M. Tech. and Ph.D. students are especially encouraged to apply)
 
-## Main Content
+# Main Content
 
-## One-Day Workshop on 5G and Beyond 5G Wireless Technologies
+# One-Day Workshop on 5G and Beyond 5G Wireless Technologies
 
-### DA-IICT GANDHINAGAR & GIGAYASA WIRELESS, IIT MADRAS RESEARCH PARK
+# DA-IICT GANDHINAGAR & GIGAYASA WIRELESS, IIT MADRAS RESEARCH PARK
 
-#### DATE: OCTOBER 30, 2023
+# DATE: OCTOBER 30, 2023
 
-#### TIME: 10AM - 5PM
+# TIME: 10AM - 5PM
 
-#### VENUE: DA-IICT Gandhinagar
+# VENUE: DA-IICT Gandhinagar
 
-#### GOOGLE FORM LINK: Click here to register
+# GOOGLE FORM LINK: Click here to register
 
 ( Registration Deadline: October 29, 2023 2PM, open to candidates working in the area of wireless communication: B. Tech. (4th year), M. Tech. and Ph.D. students are especially encouraged to apply)
 
-### WORKSHOP CONVENOR
+# WORKSHOP CONVENOR
 
 Dr. Manish Kumar Assistant Professor DA-IICT Gandhinagar
 
 Email: manish_kumar@daiict.ac.in Phone: +91 7968261678
 
-### WORKSHOP CO-CONVENOR
+# WORKSHOP CO-CONVENOR
 
 Dr. Abhishek Jindal Assistant Professor DA-IICT Gandhinagar
 
@@ -43,25 +43,25 @@ Email: abhishek_jindal@daiict.ac.in Phone: +91 7968261654
 
 For more information, Click here
 
-## Images
+# Images
 
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [Click here](https://www.daiict.ac.in/sites/default/files/other-files/5G_WorkshopFlyer_Oct-2023.pdf)
 
-## Contact Information
+# Contact Information
 
 - **Email:** abhishek_jindal@daiict.ac.in
 - **Email:** manish_kumar@daiict.ac.in
 - **Phone:** +91 7968261654
 - **Phone:** +91 7968261678
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | Click here | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/5G_WorkshopFlyer_Oct-2023.pdf](https://www.daiict.ac.in/sites/default/files/other-files/5G_WorkshopFlyer_Oct-2023.pdf) |

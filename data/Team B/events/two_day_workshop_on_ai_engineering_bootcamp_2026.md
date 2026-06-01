@@ -9,48 +9,48 @@ team: "Team 2"
 
 # Two-Day Workshop on AI Engineering Bootcamp 2026
 
-## Overview
+# Overview
 
 Register for the Two-Day AI Engineering Bootcamp on GenAI Foundations and Agentic Systems , organized under the CEP at Dhirubhai Ambani University, Gandhinagar.
 
-## Main Content
+# Main Content
 
-## Two-Day Workshop on AI Engineering Bootcamp 2026
+# Two-Day Workshop on AI Engineering Bootcamp 2026
 
 Register for the Two-Day AI Engineering Bootcamp on GenAI Foundations and Agentic Systems , organized under the CEP at Dhirubhai Ambani University, Gandhinagar.
 
-#### Dates: 16th & 17th May, 202 6
+# Dates: 16th & 17th May, 202 6
 
-#### Venue: Dhirubhai Ambani University, Gandhinagar
+# Venue: Dhirubhai Ambani University, Gandhinagar
 
-#### Course Fee: ₹2,000/- (incl. GST)
+# Course Fee: ₹2,000/- (incl. GST)
 
 This hands-on workshop covers key concepts including Natural Language Processing, LLMs, LangChain, RAG Systems, and Agentic AI. Participants will receive a certificate upon successful completion.
 
 Register Now
 
-### For any queries, please contact:
+# For any queries, please contact:
 
-#### Workshop Coordinators:
+# Workshop Coordinators:
 
 Prof. (Dr.) Abhishek Jindal , DAU (formerly DA-IICT) +91-9810644809 | Abhishek_jindal@dau.ac.in
 
-#### CEP Cell, DAU:
+# CEP Cell, DAU:
 
 Mr. Pankit Gandhi (+91) 079-68261666, Mob : 9737755948 | E-mail: pankit_gandhi@dau.ac.in
 
-#### Last date for Registration: 10 th May, 2026
+# Last date for Registration: 10 th May, 2026
 
-## Images
+# Images
 
 [Image Present: Two-Day Workshop on AI Engineering Bootcamp 2026]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Contact Information
+# Contact Information
 
 - **Email:** Abhishek_jindal@dau.ac.in
 - **Email:** pankit_gandhi@dau.ac.in

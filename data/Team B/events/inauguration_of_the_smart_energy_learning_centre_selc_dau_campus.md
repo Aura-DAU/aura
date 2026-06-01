@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Inauguration of the Smart Energy Learning Centre (SELC), DAU campus
 
-## Overview
+# Overview
 
 Dhirubhai Ambani University is happy to announce the inauguration of the Smart Energy Learning Centre (SELC), a state-of-the-art facility to foster research and innovation. This centre represents commitment to advancing knowledge and developing practical solutions to address the global energy challenges of today and tomorrow.
 
-## Main Content
+# Main Content
 
-## Inauguration of the Smart Energy Learning Centre (SELC), DAU campus
+# Inauguration of the Smart Energy Learning Centre (SELC), DAU campus
 
 Dhirubhai Ambani University is happy to announce the inauguration of the Smart Energy Learning Centre (SELC), a state-of-the-art facility to foster research and innovation. This centre represents commitment to advancing knowledge and developing practical solutions to address the global energy challenges of today and tomorrow.
 
@@ -25,11 +25,11 @@ The inaugural ceremony scheduled for April 15, 2025, at 10:30 AM, and will take 
 
 The generous funding support from BSES Rajdhani Power Limited and BSES Yamuna Power Limited, two leading power distribution companies. Their visionary contribution has been instrumental in bringing this project to fruition, enabling us to create a hub that will drive meaningful advancements in the energy sector.
 
-## Images
+# Images
 
 [Image Present: Inauguration of the Smart Energy Learning Centre (SELC), DAU campus]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

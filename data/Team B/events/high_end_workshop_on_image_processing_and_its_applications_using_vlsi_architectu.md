@@ -9,21 +9,21 @@ team: "Team 2"
 
 # High End Workshop on Image Processing and its Applications using VLSI Architectures
 
-## Overview
+# Overview
 
 DA-IICT will be hosting high-end workshop on Image Processing and its Applications using VLSI Architectures from 03rd July 2023 – 8th July 2023. The course aims to introduce the basic concepts of image processing, applications and hands-on training using MATLAB/Python, Verliog and FPGA.
 
-## Main Content
+# Main Content
 
-## High End Workshop on Image Processing and its Applications using VLSI Architectures
+# High End Workshop on Image Processing and its Applications using VLSI Architectures
 
-## High End Workshop
+# High End Workshop
 
-## on
+# on
 
-## Image Processing and its Applications using VLSI Architectures
+# Image Processing and its Applications using VLSI Architectures
 
-### (3 rd – 8 th July 2023)
+# (3 rd – 8 th July 2023)
 
 DA-IICT will be hosting high-end workshop on Image Processing and its Applications using VLSI Architectures from 03rd July 2023 – 8th July 2023. The course aims to introduce the basic concepts of image processing, applications and hands-on training using MATLAB/Python, Verliog and FPGA.
 
@@ -33,25 +33,25 @@ The travelling allowances, fooding and accommodation of the participant will be 
 
 Event Organizers: Dr. Manish Khare and Dr. Yash Agrawal, DA-IICT Gandhinagar
 
-#### The workshop Brochure is available here
+# The workshop Brochure is available here
 
-#### Click here to register
+# Click here to register
 
-#### For more information, Click here
+# For more information, Click here
 
-## Images
+# Images
 
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/Brochure-DA-IICT_KARYASHALA_Workshop_03-08_%20July_2023.pdf)
 - [Click here](https://karyashala-workshop2.daiict.ac.in/)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | here | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Brochure-DA-IICT_KARYASHALA_Workshop_03-08_%20July_2023.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Brochure-DA-IICT_KARYASHALA_Workshop_03-08_%20July_2023.pdf) |

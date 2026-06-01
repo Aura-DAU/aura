@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Vandana Ravindran, a Ph. D. student at DA-IICT successfully defended her thesis on 17th January, 2018.
 
-## Overview
+# Overview
 
 She is now a recipient of The Royal Society’s Newton International Fellowship. We hear that the success ratio of the applications to the fellowship is between 2% and 4%.
 
-## Main Content
+# Main Content
 
 She is now a recipient of The Royal Society’s Newton International Fellowship. We hear that the success ratio of the applications to the fellowship is between 2% and 4%.
 
-## Important Information
+# Important Information
 
 _No important information found._

@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Triumph at CyPhySS-2023 Summit
 
-## Overview
+# Overview
 
 Congratulations to our doctoral Scholar Ms. Neha Arora for presenting a paper titled "IoT Enabled Cardiovascular Disease Detection and Classification Device for Resource Constrained Regions" and selected for best oral presentation at Cyber-Physical System Summit 2023 (CyPhySS-2023) held at IIT Kharagpur.
 
-## Main Content
+# Main Content
 
 Congratulations to our doctoral Scholar Ms. Neha Arora for presenting a paper titled "IoT Enabled Cardiovascular Disease Detection and Classification Device for Resource Constrained Regions" and selected for best oral presentation at Cyber-Physical System Summit 2023 (CyPhySS-2023) held at IIT Kharagpur.
 
-## Important Information
+# Important Information
 
 _No important information found._

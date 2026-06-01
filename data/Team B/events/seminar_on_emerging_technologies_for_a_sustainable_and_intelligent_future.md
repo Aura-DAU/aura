@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Seminar on Emerging Technologies for a Sustainable and Intelligent Future
 
-## Overview
+# Overview
 
 We are pleased to inform you that this year marks a significant milestone for us as DAU celebrates its 25th Anniversary (Silver Jubilee). Since our inception in 2001, the University has remained committed to excellence in ICT education and research in India.
 
-## Main Content
+# Main Content
 
-## Seminar on Emerging Technologies for a Sustainable and Intelligent Future
+# Seminar on Emerging Technologies for a Sustainable and Intelligent Future
 
 We are pleased to inform you that this year marks a significant milestone for us as DAU celebrates its 25th Anniversary (Silver Jubilee). Since our inception in 2001, the University has remained committed to excellence in ICT education and research in India.
 
@@ -35,16 +35,16 @@ These deliberations aim to highlight the role of emerging technologies in shapin
 
 The primary audience will include undergraduate, postgraduate, and PhD students from DAU, along with participants from academic and research institutions in Ahmedabad and Gandhinagar.
 
-#### extension of the deadline of registration till 28 th March 2026
+# extension of the deadline of registration till 28 th March 2026
 
 Click here to know more
 
-## Images
+# Images
 
 [Image Present: Seminar on Emerging Technologies for a Sustainable and Intelligent Future]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - Artificial Intelligence and Machine Learning
 - Natural Language Processing and Large Language Models

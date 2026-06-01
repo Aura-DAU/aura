@@ -9,27 +9,27 @@ team: "Team 2"
 
 # BIRD STORIES: Classification, Conservation and Communication Design seminar!
 
-## Overview
+# Overview
 
 Explore the fascinating world of birds through scholarly and creative lenses. From scientific inquiry to cultural symbolism, we'll delve into diverse perspectives. Mark your calendars for March 15th, 2024, 4:00 PM at CEP Conference Room .
 
-## Main Content
+# Main Content
 
-## BIRD STORIES: Classification, Conservation and Communication Design seminar!
+# BIRD STORIES: Classification, Conservation and Communication Design seminar!
 
-### Join us for " BIRD STORIES : Classification, Conservation & Communication Design" seminar!
+# Join us for " BIRD STORIES : Classification, Conservation & Communication Design" seminar!
 
 Explore the fascinating world of birds through scholarly and creative lenses. From scientific inquiry to cultural symbolism, we'll delve into diverse perspectives. Mark your calendars for March 15th, 2024, 4:00 PM at CEP Conference Room .
 
-#### Meet our speakers : Prof. Madhumita Mazumdar, Prof. Vishvajit Pandya, Prof. Anirban Duttagupta, and Ms. Jahnavi Trivedi.
+# Meet our speakers : Prof. Madhumita Mazumdar, Prof. Vishvajit Pandya, Prof. Anirban Duttagupta, and Ms. Jahnavi Trivedi.
 
-## ALL ARE WELCOME!
+# ALL ARE WELCOME!
 
-## Images
+# Images
 
 [Image Present: BIRD-STORIES_2024]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

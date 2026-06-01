@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Keval Shah, B. Tech. fourth year student got accepted into the SC17 Experiencing HPC for Undergraduates Program and he received full financial support to present a research poster at SC Conference, Denver, USA, November 2017.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

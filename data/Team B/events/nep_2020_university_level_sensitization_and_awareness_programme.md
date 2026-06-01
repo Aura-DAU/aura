@@ -9,31 +9,31 @@ team: "Team 2"
 
 # NEP-2020: University-Level Sensitization and Awareness Programme
 
-## Overview
+# Overview
 
 Dr. Rajesh P. Khambayat is a Fulbright Scholar (2014) and currently serves as Professor in the Department of Technical & Vocational Education and Research (DTVER) at the National Institute of Technical Teachers’ Training and Research (NITTTR), Bhopal. He previously held the position of Joint Director at the PSS Central Institute of Vocational Education (PSSCIVE), NCERT, New Delhi (2017–2022).
 
-## Main Content
+# Main Content
 
-## NEP-2020: University-Level Sensitization and Awareness Programme
+# NEP-2020: University-Level Sensitization and Awareness Programme
 
-## Dhirubhai Ambani University organizing a half-day event on NEP-2020 on 12-Feb-2026.
+# Dhirubhai Ambani University organizing a half-day event on NEP-2020 on 12-Feb-2026.
 
-### The event details are as follows :
+# The event details are as follows :
 
-#### Name : NEP-2020: University-Level Sensitization and Awareness Programme
+# Name : NEP-2020: University-Level Sensitization and Awareness Programme
 
-#### Date : 12-Feb-2026
+# Date : 12-Feb-2026
 
-#### Time : 2:30 PM - 5:30 PM
+# Time : 2:30 PM - 5:30 PM
 
-#### Venue : LT - 1
+# Venue : LT - 1
 
-#### Speaker : Dr. Rajesh P. Khambayat
+# Speaker : Dr. Rajesh P. Khambayat
 
-#### Objective : Strengthening awareness and understanding of the National Education Policy (NEP) 2020 among faculty members and students.
+# Objective : Strengthening awareness and understanding of the National Education Policy (NEP) 2020 among faculty members and students.
 
-## About the Speaker:
+# About the Speaker:
 
 Dr. Rajesh P. Khambayat
 
@@ -43,12 +43,12 @@ Dr. Khambayat has extensive national and international experience in technical a
 
 A Certified International Accreditor (APACC), Dr. Khambayat has collaborated with organizations such as COL, UNESCO-UNEVOC, CPSC, KRIVET, and GIZ. His achievements include the Green Skills International Award (2021), Innovative Trainers’ Award (ISTD, 2021), and the Meritorious Service Award (2012) for outstanding contributions to TVET.
 
-## Images
+# Images
 
 [Image Present: Dr. Rajesh P. Khambayat]
 [Image Present: NEP-2020: University-Level Sensitization and Awareness Programme]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

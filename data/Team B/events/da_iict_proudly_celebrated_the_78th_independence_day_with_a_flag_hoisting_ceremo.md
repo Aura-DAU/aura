@@ -9,13 +9,13 @@ team: "Team 2"
 
 # DA-IICT proudly celebrated the 78th Independence Day with a flag-hoisting ceremony
 
-## Overview
+# Overview
 
 DA-IICT Gandhinagar proudly celebrated the 78th Independence Day with a flag-hoisting ceremony . The tri-colour was hoisted by our Director, Professor Tathagata Bandyopadhyay, and Executive Registrar, Mr. Siddharth Swaminarayan. The Deans, Faculty members, students and staff also attended the flag hoisting ceremony.
 
-## Main Content
+# Main Content
 
-## DA-IICT proudly celebrated the 78th Independence Day with a flag-hoisting ceremony
+# DA-IICT proudly celebrated the 78th Independence Day with a flag-hoisting ceremony
 
 DA-IICT Gandhinagar proudly celebrated the 78th Independence Day with a flag-hoisting ceremony . The tri-colour was hoisted by our Director, Professor Tathagata Bandyopadhyay, and Executive Registrar, Mr. Siddharth Swaminarayan. The Deans, Faculty members, students and staff also attended the flag hoisting ceremony.
 
@@ -25,18 +25,18 @@ On this momentous day, as we celebrate the spirit of unity, diversity, and freed
 
 The DA-IICT community extends its best wishes to all fellow Indians. May our nation continue to prosper and shine on the global stage. Jai Hind!
 
-## Images
+# Images
 
 [Image Present: 78th Independence Day]
 [Image Present: 78th Independence Day]
 [Image Present: 78th Independence Day]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [78th Independence Day](https://www.daiict.ac.in/sites/default/files/other-images/78th-Independence%20Day_1.jpg)
 - [78th Independence Day](https://www.daiict.ac.in/sites/default/files/other-images/78th-Independence%20Day-2.jpg)

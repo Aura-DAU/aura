@@ -9,19 +9,19 @@ team: "Team 2"
 
 # 1st DAAIG Workshop on Modern LLMs and Applications
 
-## Overview
+# Overview
 
 DAU announces the 1st DAAlG Workshop on Modern LLMs and Applications, hosted by Dhirubhai Ambani University, Gandhinagar! This two-day immersive workshop, Designed for hands-on learning, focuses on practical experience with large language models (LLMs) and is open to all skill levels—whether you're a beginner, student, faculty member, researcher, or industry professional.
 
-## Main Content
+# Main Content
 
-## 1st DAAIG Workshop on Modern LLMs and Applications
+# 1st DAAIG Workshop on Modern LLMs and Applications
 
-### Date: 22-23 March 2025
+# Date: 22-23 March 2025
 
-### Time: 9:30 AM - 6:00 PM (both days)
+# Time: 9:30 AM - 6:00 PM (both days)
 
-### Venue: Dhirubhai Ambani University, Gandhinagar
+# Venue: Dhirubhai Ambani University, Gandhinagar
 
 DAU announces the 1st DAAlG Workshop on Modern LLMs and Applications, hosted by Dhirubhai Ambani University, Gandhinagar! This two-day immersive workshop, Designed for hands-on learning, focuses on practical experience with large language models (LLMs) and is open to all skill levels—whether you're a beginner, student, faculty member, researcher, or industry professional.
 
@@ -29,11 +29,11 @@ Participants will dive into key topics such as fine-tuning LLMs for specific tas
 
 The event will also feature renowned speakers like Prof. Preslav Nakov (MBZUAI), Prof. Tanmoy Chakraborty (IIT Delhi), and experts from MS Research, IBM Research, Microsoft, and more.
 
-## Images
+# Images
 
 [Image Present: 1st DAAIG Workshop on Modern LLMs and Applications]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

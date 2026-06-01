@@ -9,13 +9,13 @@ team: "Team 2"
 
 # DAIICT Campus Bird Count
 
-## Overview
+# Overview
 
 GBBC India is the Indian implementation of the global Great Backyard Bird Count These annual snapshots of bird populations help answer a variety of important questions, including how birds are distributed across the country, how they are affected by changes in habitat and weather, and whether populations and distributions might be changing from year to year.
 
-## Main Content
+# Main Content
 
-## DAIICT Campus Bird Count
+# DAIICT Campus Bird Count
 
 GBBC India is the Indian implementation of the global Great Backyard Bird Count These annual snapshots of bird populations help answer a variety of important questions, including how birds are distributed across the country, how they are affected by changes in habitat and weather, and whether populations and distributions might be changing from year to year.
 
@@ -27,7 +27,7 @@ Birders (L to R) : (Chaitanya Dahale, Jenson Joseph, Harsh Gajjar, Vaishnavi Sin
 
 Birds (Clockwise) : Rose-ringed parakeet, Red-naped ibis, Coppersmith barbet, Spotted owlet, White-throated kingfisher, Brahminy starling
 
-## Images
+# Images
 
 [Image Present: Birders]
 [Image Present: Rose-ringed parakeet]
@@ -38,6 +38,6 @@ Birds (Clockwise) : Rose-ringed parakeet, Red-naped ibis, Coppersmith barbet, Sp
 [Image Present: Brahminy starling]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Infrastructure/Sports Complex
 
-## Overview
+# Overview
 
 All students will be physically educated, have motor skills to perform a variety of physical activities and pursue a healthy and active lifestyle in an increasingly changing world.
 
-## Main Content
+# Main Content
 
-### Vision
+# Vision
 
 All students will be physically educated, have motor skills to perform a variety of physical activities and pursue a healthy and active lifestyle in an increasingly changing world.
 
@@ -24,11 +24,11 @@ In DAIICT sports and games are an important and unique part of the daily program
 - PHASE-I=From January to March.
 - PHASE-II=From August to October.
 
-### Infrastructure
+# Infrastructure
 
 Basketball courts -02, Athletic track(400mtrs) -01, Indoor Badminton courts -03, Cricket field -01, Gymnasium with all modern facilities-01, Football ground-01,Volleyball Courts -02, Table Tennis Hall equipped with six tables - 01, Yoga and meditation zone.
 
-## Images
+# Images
 
 [Image Present: Sports Complex]
 [Image Present: Sports Complex]
@@ -41,7 +41,7 @@ Basketball courts -02, Athletic track(400mtrs) -01, Indoor Badminton courts -03,
 [Image Present: Sports Complex]
 [Image Present: Sports Complex]
 
-## Important Information
+# Important Information
 
 - PHASE-I=From January to March.
 - PHASE-II=From August to October.

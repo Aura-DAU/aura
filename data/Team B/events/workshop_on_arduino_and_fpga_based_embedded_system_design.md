@@ -9,15 +9,15 @@ team: "Team 2"
 
 # Workshop on Arduino and FPGA Based Embedded System Design
 
-## Overview
+# Overview
 
 Supported by the Centre for Entrepreneurship Development (CED), a Government of Gujarat Organization under the Anchor Institute Program (AIP), DAU, Gandhinagar
 
-## Main Content
+# Main Content
 
-## Workshop on Arduino and FPGA Based Embedded System Design
+# Workshop on Arduino and FPGA Based Embedded System Design
 
-### 23 rd June – 27 th June 2025 | DAU, Gandhinagar
+# 23 rd June – 27 th June 2025 | DAU, Gandhinagar
 
 Supported by the Centre for Entrepreneurship Development (CED), a Government of Gujarat Organization under the Anchor Institute Program (AIP), DAU, Gandhinagar
 
@@ -28,18 +28,18 @@ Supported by the Centre for Entrepreneurship Development (CED), a Government of 
 - Experience a seamless academic environment — Benefit from campus-based lodging and meals at no additional cost.
 - Who it is meant for — Professionals, Faculties, Ph.D. Scholar, PG and Final year UG Students.
 
-### Register by 15 th June 2025
+# Register by 15 th June 2025
 
-### Program Schedule
+# Program Schedule
 
-#### Contact : Prof. Yash Agrawal / Prof. Rutu Parekh | aip@daiict.ac.in, (+91) 079-68261676, +91-9882114669
+# Contact : Prof. Yash Agrawal / Prof. Rutu Parekh | aip@daiict.ac.in, (+91) 079-68261676, +91-9882114669
 
-## Images
+# Images
 
 [Image Present: Workshop on Arduino and FPGA Based Embedded System Design]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - Design functional embedded systems from the ground up — Integrate microcontrollers and FPGA boards to build robust real-time applications.
 - Strengthen your engineering toolkit — Master Arduino and FPGA coding environments, shaped by engaging demonstrations and structured labs.
@@ -48,16 +48,16 @@ Supported by the Centre for Entrepreneurship Development (CED), a Government of 
 - Experience a seamless academic environment — Benefit from campus-based lodging and meals at no additional cost.
 - Who it is meant for — Professionals, Faculties, Ph.D. Scholar, PG and Final year UG Students.
 
-## Related Links
+# Related Links
 
 - [Program Schedule](https://www.daiict.ac.in/sites/default/files/other-files/Schedule_3_Workshop-on-Arduino-and-FPGA-based_ESD_2025.pdf)
 
-## Contact Information
+# Contact Information
 
 - **Email:** aip@daiict.ac.in
 - **Phone:** +91-9882114669
 - **Phone:** 079-68261676
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | Program Schedule | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Schedule_3_Workshop-on-Arduino-and-FPGA-based_ESD_2025.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Schedule_3_Workshop-on-Arduino-and-FPGA-based_ESD_2025.pdf) |

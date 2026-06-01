@@ -9,14 +9,14 @@ team: "Team 2"
 
 # This prize is globally awarded to the Student Branch Chapter which is very active throughout the year and has been very regular in submitting the event reports.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Three of our B.Tech. students, Abhin Kakkad, Piyush Ajmeria and Rajat Garg are selected for the Postgraduate Management Program at IIM- Ahmedabad.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Sumeet Varma secured 3rd rank in India and 189th rank in the world in the Pre-Final round of Google Code Jam.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Music Club bagged the first prize in the Livewire/Battle of the bands event at Spectrum, NIFT.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

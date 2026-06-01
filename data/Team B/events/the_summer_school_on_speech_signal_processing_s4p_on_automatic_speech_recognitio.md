@@ -9,22 +9,22 @@ team: "Team 2"
 
 # The Summer School on Speech Signal Processing (S4P) on Automatic Speech Recognition at DA-…
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-## The Summer School on Speech Signal Processing (S4P) on Automatic Speech Recognition at DA-IICT, Gandhinagar on 6-10 July, 2024
+# The Summer School on Speech Signal Processing (S4P) on Automatic Speech Recognition at DA-IICT, Gandhinagar on 6-10 July, 2024
 
-### On-Spot Registration for Summer School in ASR is possible during July 06-10, 2024
+# On-Spot Registration for Summer School in ASR is possible during July 06-10, 2024
 
-### For more information , Click here
+# For more information , Click here
 
-## Images
+# Images
 
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

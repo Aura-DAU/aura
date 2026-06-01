@@ -9,14 +9,14 @@ team: "Team 2"
 
 # DA-IICT has been accredited with A grade by NAAC (National Assessment and Accreditation Council) after their visit to the campus from 13th to 15th November, 2017.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

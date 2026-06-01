@@ -9,13 +9,13 @@ team: "Team 2"
 
 # IEEE Lecture Series on 2D Materials for Nanoelectronics
 
-## Overview
+# Overview
 
 DA-IICT and the IEEE Nanotechnology Council Chapter invite you to lecture on “ 2D Materials for Nanoelectronics ” by Dr. Sangeeta Singh , Assistant Professor at NIT Patna. This session will highlight the potential of materials like graphene, transition metal dichalcogenides (TMDs), and hexagonal boron nitride in revolutionizing nanoelectronics.
 
-## Main Content
+# Main Content
 
-## IEEE Lecture Series on 2D Materials for Nanoelectronics
+# IEEE Lecture Series on 2D Materials for Nanoelectronics
 
 DA-IICT and the IEEE Nanotechnology Council Chapter invite you to lecture on “ 2D Materials for Nanoelectronics ” by Dr. Sangeeta Singh , Assistant Professor at NIT Patna. This session will highlight the potential of materials like graphene, transition metal dichalcogenides (TMDs), and hexagonal boron nitride in revolutionizing nanoelectronics.
 
@@ -25,15 +25,15 @@ Register Now : Click Here
 
 For queries, contact Mr. Jayesh Patel at 079-68261662 . Don’t miss this opportunity to engage with cutting-edge research!
 
-## Images
+# Images
 
 [Image Present: IEEE Lecture Series on "2D Materials for Nanoelectronics"]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Contact Information
+# Contact Information
 
 - **Phone:** 079-68261662

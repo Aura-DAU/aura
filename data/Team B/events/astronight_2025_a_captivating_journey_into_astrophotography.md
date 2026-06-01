@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Astronight 2025: A Captivating Journey into Astrophotography
 
-## Overview
+# Overview
 
 The Photography and Movie Making Club ( PMMC ) successfully hosted an inspiring event, Astronight 2025, on January 22, 2025. Designed to introduce participants to the fascinating world of astrophotography, the event provided an immersive experience in capturing celestial wonders. The night was particularly special as it coincided with a rare planetary alignment, allowing participants to witness six planets in the sky, making the experience even more extraordinary.
 
-## Main Content
+# Main Content
 
-## Astronight 2025: A Captivating Journey into Astrophotography
+# Astronight 2025: A Captivating Journey into Astrophotography
 
 The Photography and Movie Making Club ( PMMC ) successfully hosted an inspiring event, Astronight 2025, on January 22, 2025. Designed to introduce participants to the fascinating world of astrophotography, the event provided an immersive experience in capturing celestial wonders. The night was particularly special as it coincided with a rare planetary alignment, allowing participants to witness six planets in the sky, making the experience even more extraordinary.
 
@@ -40,12 +40,12 @@ Below are some of the remarkable photos captured during the session :
 
 PMMC looks forward to organizing more such events in the future, bringing together photography enthusiasts and space lovers for unforgettable experiences under the stars.
 
-## Images
+# Images
 
 [Image Present: Astrophotography event 2025]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - A Dobsonian telescope
 - A 127mm reflector telescope

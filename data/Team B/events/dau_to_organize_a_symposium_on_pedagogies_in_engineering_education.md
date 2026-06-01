@@ -9,32 +9,32 @@ team: "Team 2"
 
 # DAU to organize a Symposium on Pedagogies in Engineering Education
 
-## Overview
+# Overview
 
 As part of the Silver Jubilee celebrations marking 25 years of academic excellence of Dhirubhai Ambani University (DAU), the university is organizing a Symposium on Pedagogies in Engineering Education on November 15, 2025. The symposium will serve as a platform to share pedagogical ideas, experiences, and challenges faced in the field of engineering education today.
 
-## Main Content
+# Main Content
 
-## DAU to organize a Symposium on Pedagogies in Engineering Education
+# DAU to organize a Symposium on Pedagogies in Engineering Education
 
 As part of the Silver Jubilee celebrations marking 25 years of academic excellence of Dhirubhai Ambani University (DAU), the university is organizing a Symposium on Pedagogies in Engineering Education on November 15, 2025. The symposium will serve as a platform to share pedagogical ideas, experiences, and challenges faced in the field of engineering education today.
 
 View the brochure for more information
 
-## Images
+# Images
 
 [Image Present: DAU to organize a Symposium on Pedagogies in Engineering Education]
 [Image Present: DAU to organize a Symposium on Pedagogies in Engineering Education]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [View the brochure](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Symposium-on-Pedagogies-in-Engineering-Education.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | View the brochure | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/DAU-Symposium-on-Pedagogies-in-Engineering-Education.pdf](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Symposium-on-Pedagogies-in-Engineering-Education.pdf) |

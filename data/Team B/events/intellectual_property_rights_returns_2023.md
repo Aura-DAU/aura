@@ -9,24 +9,24 @@ team: "Team 2"
 
 # Intellectual Property Rights Returns 2023
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-## Intellectual Property Rights Returns 2023
+# Intellectual Property Rights Returns 2023
 
 - DA-IICT is organizing an IPR 2023 workshop on 15 April 2023
 
-## Images
+# Images
 
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - DA-IICT is organizing an IPR 2023 workshop on 15 April 2023
 
-## Related Links
+# Related Links
 
 - [DA-IICT is organizing an IPR 2023 workshop on 15 April 2023](https://iprr2023.daiict.ac.in/)

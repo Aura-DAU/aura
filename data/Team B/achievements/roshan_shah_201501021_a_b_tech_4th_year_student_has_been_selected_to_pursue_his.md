@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Roshan Shah (201501021), a B Tech 4th year student has been selected to pursue his MBA at XLRI and Nikita Verma (201501014) has been selected to pursue her MBA at IIM-Kozhikode.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

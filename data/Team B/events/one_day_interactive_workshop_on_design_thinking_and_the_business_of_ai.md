@@ -9,25 +9,25 @@ team: "Team 2"
 
 # One Day Interactive Workshop on Design Thinking and The Business of AI
 
-## Overview
+# Overview
 
 Curious about how AI is really shaping the future of business and design?
 
-## Main Content
+# Main Content
 
-## One Day Interactive Workshop on Design Thinking and The Business of AI
+# One Day Interactive Workshop on Design Thinking and The Business of AI
 
-## Offline. On campus…Experiential learning ..!!!
+# Offline. On campus…Experiential learning ..!!!
 
 Curious about how AI is really shaping the future of business and design?
 
 Want to learn how to cut through the AI noise and use it strategically? Join us for a One-Day Interactive Workshop on
 
-### "Design Thinking and The Business of AI"
+# "Design Thinking and The Business of AI"
 
 Presented by Dhirubhai Ambani Institute of Information and Communication Technology
 
-#### May 3, 2025 | 10:00 AM – 5:00 PM | Rs. 1000/- only
+# May 3, 2025 | 10:00 AM – 5:00 PM | Rs. 1000/- only
 
 This isn’t your typical lecture. Get ready for :
 
@@ -48,20 +48,20 @@ Meet your mentors:
 - @dhaval Joshi Founder, SIMU LABS
 - Prof.(Dr.) Anupam Rana , UX Researcher & Design Educator at DAU
 
-### Registration Deadline: April 30, 2025
+# Registration Deadline: April 30, 2025
 
-### Register here
+# Register here
 
-### For any queries, contact Mr. Jayesh Patel: (+91) 079-68261565
+# For any queries, contact Mr. Jayesh Patel: (+91) 079-68261565
 
-## Seats are limited – let’s go beyond the AI buzzwords and build real understanding!
+# Seats are limited – let’s go beyond the AI buzzwords and build real understanding!
 
-## Images
+# Images
 
 [Image Present: Design Thinking workshop-2025]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - Real-world AI use cases
 - Hands-on Design Thinking exercises
@@ -74,6 +74,6 @@ Meet your mentors:
 - @dhaval Joshi Founder, SIMU LABS
 - Prof.(Dr.) Anupam Rana , UX Researcher & Design Educator at DAU
 
-## Contact Information
+# Contact Information
 
 - **Phone:** 079-68261565

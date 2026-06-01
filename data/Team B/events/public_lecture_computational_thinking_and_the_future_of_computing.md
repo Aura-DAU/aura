@@ -9,25 +9,25 @@ team: "Team 2"
 
 # PUBLIC LECTURE - Computational Thinking ... and the future of computing
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-## PUBLIC LECTURE - Computational Thinking ... and the future of computing
+# PUBLIC LECTURE - Computational Thinking ... and the future of computing
 
-### PUBLIC LECTURE: Computational Thinking ... and the future of computing by Dr. G. Venkatesh
+# PUBLIC LECTURE: Computational Thinking ... and the future of computing by Dr. G. Venkatesh
 
-### Date: 20/03/2025, 04:30 PM
+# Date: 20/03/2025, 04:30 PM
 
-### Venue: LT-1
+# Venue: LT-1
 
-## Images
+# Images
 
 [Image Present: Dr. G. Venkatesh Talk]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

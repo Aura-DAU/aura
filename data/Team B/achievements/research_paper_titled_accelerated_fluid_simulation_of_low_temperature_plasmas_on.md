@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Research paper titled “Accelerated Fluid Simulation of Low Temperature Plasmas on Intel Xeon Phi MIC Architecture” authored by B.Tech (2013 batch)
 
-## Overview
+# Overview
 
 Research paper titled “Accelerated Fluid Simulation of Low Temperature Plasmas on Intel Xeon Phi MIC Architecture” authored by B.Tech (2013 batch) students Henil Shah, Anurag Gupta, Saumya Bhadani and Prof. Bhaskar Chaudhury received the Best Poster Award (SRS) at the 23rd IEEE International Conference on HPC, Data and Analytics (HiPC, 2016).
 
-## Main Content
+# Main Content
 
 Research paper titled “Accelerated Fluid Simulation of Low Temperature Plasmas on Intel Xeon Phi MIC Architecture” authored by B.Tech (2013 batch) students Henil Shah, Anurag Gupta, Saumya Bhadani and Prof. Bhaskar Chaudhury received the Best Poster Award (SRS) at the 23rd IEEE International Conference on HPC, Data and Analytics (HiPC, 2016).
 
-## Important Information
+# Important Information
 
 _No important information found._

@@ -9,25 +9,25 @@ team: "Team 2"
 
 # DAU commemorates the 5-year Milestone of NEP 2020 with Events on Indian Knowledge Systems
 
-## Overview
+# Overview
 
 The Indian Knowledge Systems (IKS) , under the umbrella of National Education Policy (NEP) 2020 , aims to promote, preserve, and propagate the vast and diverse intellectual traditions of India. The key objectives are to
 
-## Main Content
+# Main Content
 
-## DAU commemorates the 5-year Milestone of NEP 2020 with Events on Indian Knowledge Systems
+# DAU commemorates the 5-year Milestone of NEP 2020 with Events on Indian Knowledge Systems
 
-## Stories of the Past : The Indian Knowledge System Quiz Competition
+# Stories of the Past : The Indian Knowledge System Quiz Competition
 
-### Date: 1 st August 2025
+# Date: 1 st August 2025
 
-### Time: 11:00 AM onwards
+# Time: 11:00 AM onwards
 
-### First ten winners will receive a prize and all participants will receive an e-certificate of participation.
+# First ten winners will receive a prize and all participants will receive an e-certificate of participation.
 
-## RSVP: librarian@dau.ac.in
+# RSVP: librarian@dau.ac.in
 
-## Objectives:
+# Objectives:
 
 The Indian Knowledge Systems (IKS) , under the umbrella of National Education Policy (NEP) 2020 , aims to promote, preserve, and propagate the vast and diverse intellectual traditions of India. The key objectives are to
 
@@ -40,11 +40,11 @@ The Indian Knowledge Systems (IKS) , under the umbrella of National Education Po
 - Encourage Teamwork and Healthy Competition Develop collaboration, critical thinking, and problem-solving skills through team-based quizzing.
 - Support NEP 2020 Goals Align with the National Education Policy’s emphasis on integrating Indian Knowledge Systems into education curricula.
 
-## Tables
+# Tables
 
 | Date: 28 July 2025 onwards | Venue: Resource Centre |
 
-## Images
+# Images
 
 [Image Present: DAU commemorates the 5-year Milestone of NEP 2020 with Events on Indian Knowledge Systems]
 [Image Present: DAU commemorates the 5-year Milestone of NEP 2020 with Events on Indian Knowledge Systems]
@@ -52,7 +52,7 @@ The Indian Knowledge Systems (IKS) , under the umbrella of National Education Po
 [Image Present: The Indian Knowledge System Quiz Competition]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - Promote Awareness Introduce students and participants to the rich heritage, science, and philosophy of the Indian Knowledge System, including Vedas, Ayurveda, astronomy, mathematics, literature, and arts.
 - Encourage Appreciation Foster respect and interest in indigenous systems of knowledge and their relevance in modern times.
@@ -63,6 +63,6 @@ The Indian Knowledge Systems (IKS) , under the umbrella of National Education Po
 - Encourage Teamwork and Healthy Competition Develop collaboration, critical thinking, and problem-solving skills through team-based quizzing.
 - Support NEP 2020 Goals Align with the National Education Policy’s emphasis on integrating Indian Knowledge Systems into education curricula.
 
-## Contact Information
+# Contact Information
 
 - **Email:** librarian@dau.ac.in

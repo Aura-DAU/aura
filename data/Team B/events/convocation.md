@@ -9,31 +9,31 @@ team: "Team 2"
 
 # Convocation
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-## DAU Convocations:
+# DAU Convocations:
 
-##### 20th Convocation, DAU (17 January 2026)
+# 20th Convocation, DAU (17 January 2026)
 
-##### 19th Convocation, DAU (18 January 2025)
+# 19th Convocation, DAU (18 January 2025)
 
-##### 18th Convocation, DA-IICT (27 January 2024)
+# 18th Convocation, DA-IICT (27 January 2024)
 
-## Images
+# Images
 
 [Image Present: 20th Convocation, DAU]
 [Image Present: 19Th Convocation, DAU]
 [Image Present: 18th Convocation, DA-IICT]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [20th Convocation, DAU(17 January 2026)](https://www.daiict.ac.in/20th-convocation-dhirubhai-ambani-university)
 - [19th Convocation, DAU(18 January 2025)](https://www.daiict.ac.in/da-iict-19th-convocation)

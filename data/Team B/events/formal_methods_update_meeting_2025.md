@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Formal Methods Update Meeting 2025
 
-## Overview
+# Overview
 
 The Formal Methods Update Meeting 2025 will be held as a physical meeting at Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar during the period 3–4 July, 2025.
 
-## Main Content
+# Main Content
 
-## Formal Methods Update Meeting 2025
+# Formal Methods Update Meeting 2025
 
 The Formal Methods Update Meeting 2025 will be held as a physical meeting at Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar during the period 3–4 July, 2025.
 
@@ -29,9 +29,9 @@ This meeting is sponsored by IARCS, DA-IICT and TCS Research .
 
 Click here for further details.
 
-## Event Photographs
+# Event Photographs
 
-## Images
+# Images
 
 [Image Present: Formal Methods Update Meeting 2025]
 [Image Present: Formal Methods Update Meeting 2025]
@@ -40,6 +40,6 @@ Click here for further details.
 [Image Present: Formal Methods Update Meeting 2025]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

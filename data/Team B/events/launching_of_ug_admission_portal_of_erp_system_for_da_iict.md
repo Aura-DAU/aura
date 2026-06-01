@@ -9,20 +9,20 @@ team: "Team 2"
 
 # Launching of UG Admission Portal of ERP System for DA-IICT
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-## Launching of UG Admission Portal of ERP System for DA-IICT
+# Launching of UG Admission Portal of ERP System for DA-IICT
 
-## Images
+# Images
 
 [Image Present: UG-Admission-Portal_ERP_1]
 [Image Present: UG-Admission-Portal_ERP_2]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

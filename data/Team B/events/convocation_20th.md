@@ -9,15 +9,15 @@ team: "Team 2"
 
 # Convocation/20th
 
-## Overview
+# Overview
 
 Gandhinagar, January 17, 2026 Dhirubhai Ambani University (DAU), formerly DA-IICT, held its 20th Convocation Ceremony on Saturday at its Gandhinagar campus, awarding degrees to 649 students across undergraduate, postgraduate, and doctoral programmes. Prof. Bhaskar Ramamurthi, Professor Emeritus, Department of Electrical Engineering, and former Director of IIT Madras, was the Chief Guest and delivered the Convocation Address.
 
-## Main Content
+# Main Content
 
 Media Coverages | 20th Convocation Booklet
 
-## Dhirubhai Ambani University Confers 649 Degrees at its 20 th Convocation Ceremony
+# Dhirubhai Ambani University Confers 649 Degrees at its 20 th Convocation Ceremony
 
 Gandhinagar, January 17, 2026 Dhirubhai Ambani University (DAU), formerly DA-IICT, held its 20th Convocation Ceremony on Saturday at its Gandhinagar campus, awarding degrees to 649 students across undergraduate, postgraduate, and doctoral programmes. Prof. Bhaskar Ramamurthi, Professor Emeritus, Department of Electrical Engineering, and former Director of IIT Madras, was the Chief Guest and delivered the Convocation Address.
 
@@ -33,19 +33,19 @@ Marking its 25-year journey, the University has instituted the Distinguished Alu
 
 The convocation highlighted DAU’s evolution into a multidisciplinary institution and its role in shaping talent across engineering, data science, agriculture analytics, design, and research domains.
 
-## 20 Th Convocation Photos
+# 20 Th Convocation Photos
 
-## Gold Medalists Photos
+# Gold Medalists Photos
 
-## Dhirubhai Ambani University - 20 th Convocation - Live Broadcast
+# Dhirubhai Ambani University - 20 th Convocation - Live Broadcast
 
-## Exciting News Alert!
+# Exciting News Alert!
 
-## Short Profile of the Chief Guest
+# Short Profile of the Chief Guest
 
 Professor Bhaskar Ramamurthi
 
-### Bhaskar Ramamurthi Professor Emeritus, Department of Electrical Engineering Former Director, Indian Institute of Technology Madras
+# Bhaskar Ramamurthi Professor Emeritus, Department of Electrical Engineering Former Director, Indian Institute of Technology Madras
 
 Professor Bhaskar Ramamurthi is a distinguished academic leader and technologist with exemplary contributions to higher education, advanced research, and national technology initiatives. He obtained his B.Tech in Electronics from Indian Institute of Technology Madras in 1980, followed by an M.S. (1982) and Ph.D. (1985) in Electrical Engineering from the University of California Santa Barbara. After a brief professional engagement with AT&T Bell Laboratories, he joined the faculty of IIT Madras in 1986 and has remained deeply associated with the institution ever since.
 
@@ -55,7 +55,7 @@ Professor Ramamurthi’s academic and research expertise lies in Communications 
 
 He is a Fellow of the Institute of Electrical and Electronics Engineers (IEEE) and the Indian National Academy of Engineering (INAE), a Member of the US National Academy of Engineering, and an Honorary Fellow of RWTH Aachen University, Germany. His contributions extend beyond academia to national policy, standards development, and industry leadership.
 
-#### Major Leadership Positions Held
+# Major Leadership Positions Held
 
 - Director, Indian Institute of Technology Madras (2011–2022)
 - Professor, Department of Electrical Engineering, IIT Madras
@@ -68,11 +68,11 @@ He is a Fellow of the Institute of Electrical and Electronics Engineers (IEEE) a
 - Member of the Board, Tejas Networks Ltd.
 - Member of the Board, Bharat Electronics Ltd.
 
-## Tables
+# Tables
 
 | 20thConvocation of Dhirubhai Ambani UniversityThe 20th Convocation of Dhirubhai Ambani University (DAU) will take place onJanuary 17, 2026, at the DAU campus in Gandhinagar. The ceremony will confer degrees upon students graduating from undergraduate, postgraduate, and PhD programmes. |
 
-## Images
+# Images
 
 [Image Present: 20th Convocation Ceremony]
 [Image Present: 20th Convocation Ceremony]
@@ -85,7 +85,7 @@ He is a Fellow of the Institute of Electrical and Electronics Engineers (IEEE) a
 [Image Present: 20th Convocation Ceremony]
 [Image Present: 20th Convocation Ceremony]
 
-## Important Information
+# Important Information
 
 - Director, Indian Institute of Technology Madras (2011–2022)
 - Professor, Department of Electrical Engineering, IIT Madras
@@ -98,11 +98,11 @@ He is a Fellow of the Institute of Electrical and Electronics Engineers (IEEE) a
 - Member of the Board, Tejas Networks Ltd.
 - Member of the Board, Bharat Electronics Ltd.
 
-## Related Links
+# Related Links
 
 - [Media Coverages](https://www.daiict.ac.in/sites/default/files/other-files/DAU_20th-Convocation_Media-Coverage_2026.pdf)
 - [20th Convocation Booklet](https://www.daiict.ac.in/sites/default/files/other-files/Convocation-Booklet_JAN-26.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | Media Coverages | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/DAU_20th-Convocation_Media-Coverage_2026.pdf](https://www.daiict.ac.in/sites/default/files/other-files/DAU_20th-Convocation_Media-Coverage_2026.pdf) | | 20th Convocation Booklet | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Convocation-Booklet_JAN-26.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Convocation-Booklet_JAN-26.pdf) |

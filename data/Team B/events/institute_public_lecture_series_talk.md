@@ -9,32 +9,32 @@ team: "Team 2"
 
 # Institute Public Lecture Series Talk
 
-## Overview
+# Overview
 
 Prof. Anand Sengupta, IIT Gandhinagar as the distinguished speaker for this month's edition of the DA-IICT Public Lecture Series. Prof. Sengupta's talk "Cosmic Harmonies: Key Discoveries from the Gravitational Wave Songbook" will discuss the remarkable discoveries that have happened since the detection of gravitational waves in 2015 and explore the future of this exciting field. Prof. Sengupta's research areas include the detection of gravitational waves and aspects of CMB data analysis.
 
-## Main Content
+# Main Content
 
-## Institute Public Lecture Series Talk
+# Institute Public Lecture Series Talk
 
-## Cosmic Harmonies: Key Discoveries from the Gravitational Wave Songbook
+# Cosmic Harmonies: Key Discoveries from the Gravitational Wave Songbook
 
-### Venue: LT-1
+# Venue: LT-1
 
-### Date: 6 th November, 2024
+# Date: 6 th November, 2024
 
-### Time: 4:30 pm
+# Time: 4:30 pm
 
-### Abstract:
+# Abstract:
 
 Prof. Anand Sengupta, IIT Gandhinagar as the distinguished speaker for this month's edition of the DA-IICT Public Lecture Series. Prof. Sengupta's talk "Cosmic Harmonies: Key Discoveries from the Gravitational Wave Songbook" will discuss the remarkable discoveries that have happened since the detection of gravitational waves in 2015 and explore the future of this exciting field. Prof. Sengupta's research areas include the detection of gravitational waves and aspects of CMB data analysis.
 
-## ALL ARE WELCOME
+# ALL ARE WELCOME
 
-## Images
+# Images
 
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

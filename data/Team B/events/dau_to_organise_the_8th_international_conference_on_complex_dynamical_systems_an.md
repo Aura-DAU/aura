@@ -9,13 +9,13 @@ team: "Team 2"
 
 # DAU to organise the 8th International Conference on Complex Dynamical Systems and Applicat…
 
-## Overview
+# Overview
 
 The 8 th International Conference on Complex Dynamical Systems and Applications (CDSA) will be held at Dhirubhai Ambani University campus from January 23-26, 2026.
 
-## Main Content
+# Main Content
 
-## DAU to organise the 8th International Conference on Complex Dynamical Systems and Applications
+# DAU to organise the 8th International Conference on Complex Dynamical Systems and Applications
 
 The 8 th International Conference on Complex Dynamical Systems and Applications (CDSA) will be held at Dhirubhai Ambani University campus from January 23-26, 2026.
 
@@ -27,20 +27,20 @@ For more information and to register for the conference, please visit the websit
 
 Brochure
 
-## Images
+# Images
 
 [Image Present: DAU to organise the 8th International Conference on Complex Dynamical Systems and Applications]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [https://cdsa.daiict.ac.in/index.html](https://cdsa.daiict.ac.in/index.html)
 - [Brochure](https://www.daiict.ac.in/sites/default/files/other-files/CDSA2026.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | Brochure | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/CDSA2026.pdf](https://www.daiict.ac.in/sites/default/files/other-files/CDSA2026.pdf) |

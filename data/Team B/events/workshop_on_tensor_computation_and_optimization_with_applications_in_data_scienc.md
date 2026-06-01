@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Workshop on Tensor Computation and Optimization with Applications in Data Science
 
-## Overview
+# Overview
 
 The School of Technology, Dhirubhai Ambani University (DAU), is organizing a workshop on Tensor Computation and Optimization with Application in Data Science on November 20, 2025, at the DAU campus in Gandhinagar.
 
-## Main Content
+# Main Content
 
-## Workshop on Tensor Computation and Optimization with Applications in Data Science
+# Workshop on Tensor Computation and Optimization with Applications in Data Science
 
 The School of Technology, Dhirubhai Ambani University (DAU), is organizing a workshop on Tensor Computation and Optimization with Application in Data Science on November 20, 2025, at the DAU campus in Gandhinagar.
 
@@ -32,23 +32,23 @@ The interested participants can register on or before November 18, 2025, with th
 
 Register Now | Brochure (PDF)
 
-## Images
+# Images
 
 [Image Present: Workshop on Tensor Computation and Optimization with Applications in Data Science]
 [Image Present: Workshop on Tensor Computation and Optimization with Applications in Data Science]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - Prof. Ram Narayan Mahapatra from University of Central Florida, Orlando, USA.
 - Dr. Ratikant Behra from IISc Bangalore, India.
 - Dr. Saroj Kumar Pradhan from VSS University of Technology, India.
 - Dr. Nabin Kumar Sahu from Dhirubhai Ambani University, India.
 
-## Related Links
+# Related Links
 
 - [Brochure (PDF)](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Tensor-Computation-and-optimization-with-Application-in-Data-Science.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | Brochure (PDF) | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Tensor-Computation-and-optimization-with-Application-in-Data-Science.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Tensor-Computation-and-optimization-with-Application-in-Data-Science.pdf) |

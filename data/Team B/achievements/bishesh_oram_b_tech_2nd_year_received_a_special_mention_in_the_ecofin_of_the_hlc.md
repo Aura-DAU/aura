@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Bishesh Oram (B.Tech 2nd Year) received a Special Mention in the Ecofin of the HLCC MUN.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

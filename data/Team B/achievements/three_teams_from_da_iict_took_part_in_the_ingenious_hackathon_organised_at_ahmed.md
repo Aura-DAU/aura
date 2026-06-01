@@ -9,16 +9,16 @@ team: "Team 2"
 
 # Three teams from DA-IICT took part in the Ingenious Hackathon organised at Ahmedabad University by the IEEE Student Branch
 
-## Overview
+# Overview
 
 Three teams from DA-IICT took part in the Ingenious Hackathon organised at Ahmedabad University by the IEEE Student Branch, Ahmedabad University. One of the teams bagged the First Prize in Smart City domain in the Hackathon whereas the other two teams got 2nd position in their respective domains i.e. Internet of Things and Machine Learning .
 
-## Main Content
+# Main Content
 
 Three teams from DA-IICT took part in the Ingenious Hackathon organised at Ahmedabad University by the IEEE Student Branch, Ahmedabad University. One of the teams bagged the First Prize in Smart City domain in the Hackathon whereas the other two teams got 2nd position in their respective domains i.e. Internet of Things and Machine Learning .
 
 Read more.
 
-## Important Information
+# Important Information
 
 _No important information found._

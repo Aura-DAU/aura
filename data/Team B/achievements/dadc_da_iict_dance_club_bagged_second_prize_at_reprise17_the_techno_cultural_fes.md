@@ -9,14 +9,14 @@ team: "Team 2"
 
 # DADC (DA-IICT Dance Club) bagged second prize at Reprise’17, the techno-cultural fest of SPM, PDPU.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

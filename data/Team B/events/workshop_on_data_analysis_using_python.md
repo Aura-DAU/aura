@@ -9,64 +9,64 @@ team: "Team 2"
 
 # Workshop on Data Analysis using Python
 
-## Overview
+# Overview
 
 The Centre for Entrepreneurship Development ( CED )-A Government of Gujarat Organization funded Anchor Institute DA-IICT.
 
-## Main Content
+# Main Content
 
-## Workshop on Data Analysis using Python
+# Workshop on Data Analysis using Python
 
-## Workshop on Data Analysis using Python
+# Workshop on Data Analysis using Python
 
-#### (UNDER THE ANCHOR INSTITUTE PROGRAM)
+# (UNDER THE ANCHOR INSTITUTE PROGRAM)
 
-### Tentative Start Date : 24.06.2024 to 28.06.2024
+# Tentative Start Date : 24.06.2024 to 28.06.2024
 
-### Supported by:
+# Supported by:
 
 The Centre for Entrepreneurship Development ( CED )-A Government of Gujarat Organization funded Anchor Institute DA-IICT.
 
-### Organized by:
+# Organized by:
 
 Dhirubhai Ambani Institute of Information and Communication Technology, Gandhinagar, Gujarat, India ( DA-IICT ).
 
-### Pay online to the below bank account:
+# Pay online to the below bank account:
 
-### Registration on the following link after the payment:
+# Registration on the following link after the payment:
 
 To enroll, please complete the registration form by clicking here . Once you open the registration form, you will find further instructions and details.
 
-#### The last day of registration is 14th June. 2024
+# The last day of registration is 14th June. 2024
 
 For more details, please visit here .
 
-#### The workshop brochure is available here
+# The workshop brochure is available here
 
-### Organizers:
+# Organizers:
 
 Dr. Manish Khare , DA-IICT Gandhinagar
 
  Dr. Bakul Gohel , DA-IICT Gandhinagar
 
-### Address for Correspondence:
+# Address for Correspondence:
 
 Mr. Jayesh Patel CEP Office DA-IICT, Gandhinagar Tel.: (+91) 079-68261676 Email: aip@daiict.ac.in
 
-## Tables
+# Tables
 
 | Tentative Start Date | 24.06.2024 to 28.06.2024 | | Venue | DA-IICT, Gandhinagar | | Program Schedule | Click here | | Course Duration | The duration of the course will be 40 hours, consisting of 20 hours of theory sessions and 20 hours of laboratory sessions. | | Target Audience | Professionals, Faculties, Ph.D. Scholar, PG and Final year UG Students | | Course Fee (Pay Online) | Participants from Gujarat state are charged a fully refundable upfront course fee of 5,000 INR. Please note that this fee is non-refundable for candidates from other states. | | Accommodation | Complimentary accommodation, breakfast, lunch, and snacks will be provided throughout the workshop. Please note that accommodation is currently available only for male participants. | | Refund Policy | Maintain a 75% minimum attendance to be eligible for the refund. | | Certificate | A participation certificate will be conferred to individuals who maintain an attendance record of at least 75%. | | Name of Account Holder | M/S.DHIRUBHAI AMBANI INST OF INFOR & COMM TECHNOLOGY ANCHOR IN | | Bank Name | ICICI Bank Ltd. | | Account Number | 016501021384 | | IFSC Code | ICIC0000165 |
 
-## Images
+# Images
 
 [Image Present: Workshop on Data Analysis using Python]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [DA-IICT](https://www.daiict.ac.in/)
 - [Click here](https://www.daiict.ac.in/sites/default/files/other-files/Program-Schedule_Tentative_DAPython-June24.pdf)
@@ -75,12 +75,12 @@ _No important information found._
 - [Dr. Manish Khare](https://www.daiict.ac.in/faculty/manish-khare)
 - [ Dr. Bakul Gohel](https://www.daiict.ac.in/faculty/bakul-gohel)
 
-## Contact Information
+# Contact Information
 
 - **Email:** aip@daiict.ac.in
 - **Phone:** 079-68261676
 - **Phone:** 6501021384
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | Click here | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Program-Schedule_Tentative_DAPython-June24.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Program-Schedule_Tentative_DAPython-June24.pdf) | | here | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python_June24.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python_June24.pdf) |

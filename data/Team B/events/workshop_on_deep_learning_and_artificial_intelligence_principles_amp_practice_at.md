@@ -9,13 +9,13 @@ team: "Team 2"
 
 # Workshop on Deep Learning and Artificial Intelligence: Principles &amp; Practice at DAU
 
-## Overview
+# Overview
 
 The five-day workshop “Deep Learning and Artificial Intelligence: Principles & Practice (DLAI 2026)” was conducted from 9-13 March 2026 at Dhirubhai Ambani University (DAU) Gandhinagar in collaboration with Indian Statistical Institute Kolkata. The workshop was co-organized by Gujarat Biotechnology University, co-sponsored by Gujarat Council on Science and Technology (GUJCOST), Department of Science and Technology (DST) and Green AI with technical co-sponsorship from MathWorks. In view of the fact that Artificial Intelligence is no longer a futuristic ambition, it is transforming industries, research ecosystems, governance, and everyday life, the workshop aimed to provide intensive training and practical exposure to modern Artificial Intelligence (AI) and deep learning techniques for participants from academia, research, and industry. What makes this transformation even more significant is that AI is no longer confined to a single discipline. It has evolved into a unifying force across domains such as agriculture, business and management, pharmacology, computer science, electronics, information technology, and information & communication technology. This diverse representation strongly signifies that AI today is interdisciplinary, integrative, and essential to modern problem-solving across sectors. In line with this widespread adoption, the workshop attracted enthusiastic participation from over 75 attendees in offline and online modes, enabling participants from multiple institutions to benefit from the program.
 
-## Main Content
+# Main Content
 
-## Workshop on Deep Learning and Artificial Intelligence: Principles &amp; Practice at DAU
+# Workshop on Deep Learning and Artificial Intelligence: Principles &amp; Practice at DAU
 
 The five-day workshop “Deep Learning and Artificial Intelligence: Principles & Practice (DLAI 2026)” was conducted from 9-13 March 2026 at Dhirubhai Ambani University (DAU) Gandhinagar in collaboration with Indian Statistical Institute Kolkata. The workshop was co-organized by Gujarat Biotechnology University, co-sponsored by Gujarat Council on Science and Technology (GUJCOST), Department of Science and Technology (DST) and Green AI with technical co-sponsorship from MathWorks. In view of the fact that Artificial Intelligence is no longer a futuristic ambition, it is transforming industries, research ecosystems, governance, and everyday life, the workshop aimed to provide intensive training and practical exposure to modern Artificial Intelligence (AI) and deep learning techniques for participants from academia, research, and industry. What makes this transformation even more significant is that AI is no longer confined to a single discipline. It has evolved into a unifying force across domains such as agriculture, business and management, pharmacology, computer science, electronics, information technology, and information & communication technology. This diverse representation strongly signifies that AI today is interdisciplinary, integrative, and essential to modern problem-solving across sectors. In line with this widespread adoption, the workshop attracted enthusiastic participation from over 75 attendees in offline and online modes, enabling participants from multiple institutions to benefit from the program.
 
@@ -23,7 +23,7 @@ The Technical sessions were delivered by distinguished researchers and practitio
 
 Workshop coordinators Prof. Srimanta Mandal and Prof. Shruti Bhilare thanked the speakers, the participants, the sponsors, Director General, DAU, Prof. Tathagata Bandyopadhyay, Director, School of Technology, DAU, Prof. G. Venkatesh, organizing committee and student volunteers for making the workshop a success. Prof. Mandal also emphasized on the prevalence of AI across multiple disciplines and application domains. Overall, DLAI 2026 successfully achieved its objective of strengthening participants’ understanding of modern AI methodologies and their practical applications. The interactive format encouraged knowledge exchange and collaboration among participants and experts. The program received positive feedback from participants, who appreciated the balanced combination of theoretical foundations and practical hands-on learning, making the workshop a valuable platform for advancing knowledge and skills in artificial intelligence and deep learning. The workshop concluded with the distribution of participation certificates to attendees, recognizing their successful completion of the training program. The workshop also served as a platform for knowledge exchange and collaboration, allowing participants to interact with experts and peers working in the field of artificial intelligence.
 
-## Images
+# Images
 
 [Image Present: Workshop on Deep Learning and Artificial Intelligence: Principles & Practice at DAU]
 [Image Present: Workshop on Deep Learning and Artificial Intelligence: Principles & Practice at DAU]
@@ -33,6 +33,6 @@ Workshop coordinators Prof. Srimanta Mandal and Prof. Shruti Bhilare thanked the
 [Image Present: Workshop on Deep Learning and Artificial Intelligence: Principles & Practice at DAU]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

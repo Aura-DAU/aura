@@ -9,14 +9,14 @@ team: "Team 2"
 
 # DTG (DA-IICT Theatres Group) bagged 2nd prize in street play competition Aahvaan held at PDPU as a part of their annual cultural fest, Flare.
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Important Information
+# Important Information
 
 _No important information found._

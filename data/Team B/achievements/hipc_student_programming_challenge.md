@@ -9,11 +9,11 @@ team: "Team 2"
 
 # HiPC Student Programming Challenge
 
-## Overview
+# Overview
 
 The following teams of DA-IICT under the guidance of Professor Bhaskar Chaudhury have stood second and third at the HiPC Student Programming Challenge which is a national level parallel programming competition organized for students enrolled in Indian Universities as a part of High Performance Computing (HiPC) conference 2016 ( http://www.hipc.org ).
 
-## Main Content
+# Main Content
 
 HiPC Student Programming Challenge
 
@@ -24,7 +24,7 @@ The following teams of DA-IICT under the guidance of Professor Bhaskar Chaudhury
 
 See the photos here .
 
-## Important Information
+# Important Information
 
 - Yashwant Keswani and Akshar Varma stood 2nd (both BTech 2013 batch)
 - Keval Shah, Abhi Shah and Parshwa Shah stood 3rd (all three BTech 2014 batch)

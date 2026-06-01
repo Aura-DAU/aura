@@ -9,15 +9,15 @@ team: "Team 2"
 
 # Chosen for award of 'Center of Excellence' by the Government of Gujarat
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
 _No main content extracted._
 
-## Images
+# Images
 
 [Image Present: Dhirubhai Ambani Institute of Information and Communication Technology, A Private University Established by The State Government of Gujarat Act]
 [Image Present: banner]
@@ -28,11 +28,11 @@ StatCounter]
 [Image Present: Linkedin]
 [Image Present: Pinterest]
 
-## Important Information
+# Important Information
 
 _No important information found._
 
-## Related Links
+# Related Links
 
 - [Newly Launched Programs](https://www.daiict.ac.in/programs-of-study#tab-4)
 - [Screen Reader Access](https://www.daiict.ac.in/screen-reader-access)
@@ -68,6 +68,6 @@ _No important information found._
 - [Dean (Students)](https://www.daiict.ac.in/dean-students)
 - [Executive Registrar](https://www.daiict.ac.in/executive-registrar)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type | Link | | --- | --- | --- | | SSR & Evaluative Reports Addendum 2017 | PDF | [https://www.daiict.ac.in/sites/default/files/NAAC-Addendum-final.pdf](https://www.daiict.ac.in/sites/default/files/NAAC-Addendum-final.pdf) | | SSR 2015 | PDF | [https://www.daiict.ac.in/sites/default/files/NAAC-Self-Study-Report.pdf](https://www.daiict.ac.in/sites/default/files/NAAC-Self-Study-Report.pdf) | | Evaluative Report 2015 | PDF | [https://www.daiict.ac.in/sites/default/files/NAAC-Evaluative-Report.pdf](https://www.daiict.ac.in/sites/default/files/NAAC-Evaluative-Report.pdf) | | CoE, GoG application submitted | PDF | [https://www.daiict.ac.in/sites/default/files/CoE-GoG-application-submitted.pdf](https://www.daiict.ac.in/sites/default/files/CoE-GoG-application-submitted.pdf) | | Holidays 2026 | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf](https://www.daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf) | | Anti-Ragging Committee | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Anti-Ragging-Committee_2025-26-18082025.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Anti-Ragging-Committee_2025-26-18082025.pdf) |

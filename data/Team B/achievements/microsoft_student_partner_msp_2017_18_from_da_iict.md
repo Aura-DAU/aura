@@ -9,11 +9,11 @@ team: "Team 2"
 
 # Microsoft Student Partner(MSP) 2017-18 From DA-IICT
 
-## Overview
+# Overview
 
 Three of MSTC(Microsoft Student Technical Club) members have been selected as Microsoft Student Partner(MSP) 2017-18:
 
-## Main Content
+# Main Content
 
 Three of MSTC(Microsoft Student Technical Club) members have been selected as Microsoft Student Partner(MSP) 2017-18:
 
@@ -21,7 +21,7 @@ Three of MSTC(Microsoft Student Technical Club) members have been selected as Mi
 - Amey Ghate
 - Roshani
 
-## Important Information
+# Important Information
 
 - Hardik Modi
 - Amey Ghate

@@ -9,19 +9,19 @@ team: "Team 2"
 
 # Recent visit of Shri Jai Anmol Ambani, Ms. Khrisha Ambani, and their team to DA-IICT
 
-## Overview
+# Overview
 
 _No overview available._
 
-## Main Content
+# Main Content
 
-## Recent visit of Shri Jai Anmol Ambani, Ms. Khrisha Ambani, and their team to DA-IICT
+# Recent visit of Shri Jai Anmol Ambani, Ms. Khrisha Ambani, and their team to DA-IICT
 
-#### " It was a pleasure and privilege to host Shri Jai Anmol Ambani, Ms. Khrisha Ambani, Shri Drona Chetri, Dr. Leroy Rebello and Ms. Anugrah Bhat at the DA- IICT campus recently. The group spent the day interacting with the Institute's leadership team and the students .
+# " It was a pleasure and privilege to host Shri Jai Anmol Ambani, Ms. Khrisha Ambani, Shri Drona Chetri, Dr. Leroy Rebello and Ms. Anugrah Bhat at the DA- IICT campus recently. The group spent the day interacting with the Institute's leadership team and the students .
 
-#### A majority of the discussions centered around how to contextualise DA-IICT's programs to the rapidly changing world and prepare our students to be future ready and contribute to a better world. "
+# A majority of the discussions centered around how to contextualise DA-IICT's programs to the rapidly changing world and prepare our students to be future ready and contribute to a better world. "
 
-## Images
+# Images
 
 [Image Present: Visit on 24th Jan 2024]
 [Image Present: Visit on 24th Jan 2024]
@@ -32,6 +32,6 @@ _No overview available._
 [Image Present: Visit on 24th Jan 2024]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._

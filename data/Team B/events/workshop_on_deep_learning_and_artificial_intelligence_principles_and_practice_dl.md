@@ -9,25 +9,25 @@ team: "Team 2"
 
 # Workshop on Deep Learning and Artificial Intelligence: Principles and Practice (DLAI 2026)
 
-## Overview
+# Overview
 
 This workshop provides intensive hands-on training and certification for faculty, researchers, industry professionals, and students to build AI solutions using advanced deep learning techniques in healthcare, retrieval-augmented generation, computer vision, and related domains.
 
-## Main Content
+# Main Content
 
-## Workshop on Deep Learning and Artificial Intelligence: Principles and Practice (DLAI 2026)
+# Workshop on Deep Learning and Artificial Intelligence: Principles and Practice (DLAI 2026)
 
-#### JOINTLY ORGANIZED WORKSHOP ON
+# JOINTLY ORGANIZED WORKSHOP ON
 
-## Deep Learning and Artificial Intelligence: Principles & Practice
+# Deep Learning and Artificial Intelligence: Principles & Practice
 
-### (DLAI 2026)
+# (DLAI 2026)
 
-## About DLAI 2026 Workshop
+# About DLAI 2026 Workshop
 
 This workshop provides intensive hands-on training and certification for faculty, researchers, industry professionals, and students to build AI solutions using advanced deep learning techniques in healthcare, retrieval-augmented generation, computer vision, and related domains.
 
-## Course Content
+# Course Content
 
 - Machine Learning & Deep Learning Fundamentals
 - Reinforcement Learning
@@ -43,24 +43,24 @@ This workshop provides intensive hands-on training and certification for faculty
 
 Register for the Workshop
 
-### Invited Speakers
+# Invited Speakers
 
-### Schedule
+# Schedule
 
-### Committee
+# Committee
 
 Visit the Website for Workshop Details
 
-## Tables
+# Tables
 
 | WhereDhirubhai Ambani University, Gandhinagar(Formerly DA-IICT) | When9th March – 13th March, 2026 |
 
-## Images
+# Images
 
 [Image Present: Deep Learning and Artificial Intelligence: Principles and Practice]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 - Machine Learning & Deep Learning Fundamentals
 - Reinforcement Learning

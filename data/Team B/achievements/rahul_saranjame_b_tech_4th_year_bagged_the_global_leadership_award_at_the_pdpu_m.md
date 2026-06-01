@@ -9,14 +9,14 @@ team: "Team 2"
 
 # Rahul Saranjame (B.Tech 4th year), bagged the Global Leadership Award at the PDPU MUN
 
-## Overview
+# Overview
 
 The committee was the Special Political and Decolonization Committee with the agenda of International cooperation in peaceful uses of outer space.
 
-## Main Content
+# Main Content
 
 The committee was the Special Political and Decolonization Committee with the agenda of International cooperation in peaceful uses of outer space.
 
-## Important Information
+# Important Information
 
 _No important information found._

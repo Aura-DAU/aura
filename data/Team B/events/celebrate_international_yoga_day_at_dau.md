@@ -9,15 +9,15 @@ team: "Team 2"
 
 # Celebrate International Yoga Day at DAU!
 
-## Overview
+# Overview
 
 This special session is being organized with the kind support of the Gandhinagar Municipal Corporation, underscoring our shared commitment to health, mindfulness, and holistic well-being.
 
-## Main Content
+# Main Content
 
-## Celebrate International Yoga Day at DAU!
+# Celebrate International Yoga Day at DAU!
 
-#### DAU Gandhinagar will celebrate International Yoga Day on Saturday, 21st June 2025, at 06:45 AM in SAC-I (Indoor Hall) .
+# DAU Gandhinagar will celebrate International Yoga Day on Saturday, 21st June 2025, at 06:45 AM in SAC-I (Indoor Hall) .
 
 This special session is being organized with the kind support of the Gandhinagar Municipal Corporation, underscoring our shared commitment to health, mindfulness, and holistic well-being.
 
@@ -25,11 +25,11 @@ A certified yoga instructor will conduct the session, guiding participants throu
 
 All students, faculty, and staff are encouraged to join this collective initiative toward a healthier and more balanced lifestyle. Let us come together to honour the spirit of yoga and its enduring benefits for physical, mental, and emotional wellness .
 
-## Images
+# Images
 
 [Image Present: Celebrate International Yoga Day at DAU!]
 [Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]
 
-## Important Information
+# Important Information
 
 _No important information found._
