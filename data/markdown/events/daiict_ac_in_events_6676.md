@@ -38,7 +38,3 @@ Dr. Dubey will talk about the **National Education Policy (NEP) 2020**. The **NE
 
 - **Enhancing Awareness and Implementation** – Educate stakeholders on key NEP 2020 reforms, including **curriculum flexibility, accreditation standards, research initiatives, skill development, and digital transformation** to improve the quality and accessibility of higher education.
 - **Developing Strategic Action Plans** – Facilitate discussions on **practical implementation strategies**, international collaborations, equity and inclusion, and innovative teaching methodologies to align institutions with the policy’s vision for a holistic and multidisciplinary education system.
-
-[Image Present: NEP Workshop 2025]
-
-[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]

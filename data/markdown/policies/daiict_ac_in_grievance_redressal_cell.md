@@ -11,17 +11,11 @@ team: "Team E"
 
 ## Overview
 
-[Image Present: Banner]
-
 ## Main Content
-
-[Image Present: Banner]
 
 # Grievance Redressal Cell (Students and Employees)
 
 ## Grievance Redressal Procedure for Students and Employees
-
-[Image Present: Grievance Redressal Cell]
 
 The community of the Institute should resolve all issues through discussions and negotiations by Grievance Redressal procedure of the Institute in order to smooth functioning of academic and administrative activities of the Institute.
 
@@ -30,7 +24,6 @@ The community of the Institute should resolve all issues through discussions and
 **Student** shall mean a student on the current rolls of the Institute.
 
 **Employee** shall mean a member of faculty or an officer or staff of the Institute on the rolls of the Institute.
-
 
 ### 1\. Scope
 

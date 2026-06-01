@@ -29,8 +29,6 @@ Near Indroda Circle, Gandhinagar, Gujarat, India 382 007. Tel.: +91 79 3052 0000
 
 * * *
 
-[Image Present: The image shows a serene park with a circular water feature surrounded by lush greenery and trees.]
-
 * * *
 
 # Shri. Dhirubhai Hirachand Ambani

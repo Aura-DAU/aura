@@ -99,8 +99,7 @@ inquiries or discussions regarding this proposal.
 Sincerely,
 [Your Name]
 [Designation]
-Basic Guidelines for IFP
-====================
+# Basic Guidelines for IFP
 NT 1: Please note that any course must have at least two instructors.
 NT 2: Please note that any course must have at least one Anchor and utmost two Anchors.
 NT 3: Please note that all Anchors must be the primary instructors.

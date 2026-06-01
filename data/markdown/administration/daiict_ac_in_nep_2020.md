@@ -19,11 +19,7 @@ The **National Education Policy (NEP)** is a visionary framework designed to tra
 
 The **National Education Policy (NEP)** is a visionary framework designed to transform education by making it more **inclusive, holistic, and future-ready**. Our platform is dedicated to facilitating the **seamless implementation of NEP**, ensuring that its key principles— **equity, flexibility, skill-based learning, and multidisciplinary education**—are effectively integrated across all levels of education. Dhirubhai Ambani Univeristy (DAU- _formerly known as DA-IICT_) has taken multiple initiatives towards the implementation of the National Education Policy (NEP) 2020. University Grants Commission (UGC) has divided the policy into ten broad thrust areas to support the implementation of NEP-2020 at ground level.
 
-[Image Present: NEP 2020]Source: UTSAH
-
 Explore our platform to stay informed, participate in discussions, and contribute to shaping the future of education in alignment with the NEP!
-
-
 
 ## Multidisciplinary Holistic Education
 
@@ -66,7 +62,6 @@ The new curriculum includes experiential learning and extra and co-curricular ac
 
 #### **Highlights of the New Curriculum**:
 
-
 Most of the skills are developed through active participations in various student-driven clubs like
 
 - Electronic hobby club
@@ -88,14 +83,12 @@ Most of the skills are developed through active participations in various studen
 - Uploaded Grade Sheets: 2621 (UG and PG: 2021-2023)
 - Students have been oriented to create ABC IDs and the benefits of academic bank.
 
-
 ## Digital Empowerment
 
 - Necessary digital infrastructure such as high speed internet, digital writing pads, camera, microphone, recording studio, etc. are available.
 - Faculties use learning management system such as Moodle, Google Classroom for posting different materials, quizzes, assignments, etc.
 - Faculty members use to conduct different courses for continuing education programme and anchor institute programme in online mode.
 - UG, PG students of a few programmes are allowed to take MOOC courses to fulfil their credit requirement in elective courses.
-
 
 ## Skill Development and Employability
 
@@ -115,7 +108,6 @@ Most of the skills are developed through active participations in various studen
 - Organized a few events jointly with industries.
 - Appointed professor of practice with industry experiences.
 - The value added courses of UG, PG programmes are mostly offered by industries.
-
 
 ## Research Innovation and Entrepreneurship
 
@@ -157,11 +149,9 @@ The research office oversees organization and /or participation by faculty and r
 - **Student Research Excellence Award**: The award (a certificate plaque/medal and a cash prize of Rs. 5000) is presented by the Director annually to the students who have published in top quality journals/conferences.
 - **Support for the Doctoral Students**: Up to Rs.1.5 lakh for presenting a paper abroad, and up to Rs. 50K for presenting a paper within India
 
-
 ## Capacity Building of Teachers for Quality Education
 
 DAU offers courses under continuing education program (CEP) and anchor institute program (AIP) with close collaboration with Center for Entrepreneurship Development (CED). Established a dedicated office for CEP and AIP with 5 faculty members and a secretary. Under the umbrella of these programs, we offer various courses to train the faculty members of other institutes. Some of the topics are Operating Systems, Digital and Analog Communication Systems, Image Processing using VLSI Architectures, Multicore Processor Architecture and parallel Programming, Data Structures, Software Engineering, Programming, .Net and C#, Real-time and Embedded Systems, and others. Faculty members are also encouraged to attend faculty development programs.
-
 
 ## Governance and Autonomy
 
@@ -183,7 +173,6 @@ DAU has created a vision, mission and strategic plan for institute’s developme
 
 DAU has established a grievance redressal cell for students and employees. Grievance Redressal Handling Committee (GRHC) is the main pillar of the cell. GRHC consists of five senior faculty members and a secretary. The chairperson of the committee is a female senior professor. If the student's grievance is not resolved/addressed by the GRHC, the student may raise her/his concern with full details of the complaints to the Ombudsperson.
 
-
 ## Accreditation and Excellence
 
 - NAAC-A+ (Score 3.32): 07/09/2023
@@ -192,7 +181,6 @@ DAU has established a grievance redressal cell for students and employees. Griev
 - Indian Institutional Ranking Framework (IIRF)-2023: Rank 1 under the category of “State-Private Universities”
 - GSIRF Five Star Institution in the category of Universities in 2023 and 2024
 - Institute is awarded the status of Centre of Excellence (COE) by the GoG.
-
 
 ## Equitable and Inclusive Education
 
@@ -220,7 +208,6 @@ DAU has established a grievance redressal cell for students and employees. Griev
 
 Apart from the mentioned courses students are exposed to different types of courses to improve their problem solving skills, critical thinking, creativity, communication skills, etc.
 
-
 ## Indian Knowledge System
 
 DAU offers several courses for the students in the theme of Indian Knowledge System. A few examples are:
@@ -239,7 +226,6 @@ Apart from these courses, DAU is involved in creating IKS course on History in c
 IKS Coordinator: Dr. Purbasha Das
 
 Contact: **iks\[at\]dau\[dot\]ac\[dot\]in**
-
 
 ## Internationalization
 
@@ -310,8 +296,6 @@ DAU has a dedicated alumni office, headed by the Dean (Alumni & external Relatio
 
 ### **Dhruv Shah**    ( _Student Ambassador_)
 
-
-
 - “Academic Bank of Credits" means an academic service mechanism as a digital/virtual/online entity established by University Grants Commission to facilitate students to become its academic accounts holder, thereby paving the way for seamless students’ mobility between or within degree granting HEIs through a formal systems of credit recognition, credit accumulation, credit transfer and credit redemption to promote distributed and flexible teaching learning.
 - ABC is a bank for academic purposes on the pattern of commercial banks for financial purposes with students as academic account holders to whom ABC shall provide a variety of services including credit verification, credit accumulation, credit transfer or redemption and authentication of academic awards.
 - The Procedure of Registration in Academic Bank of Credits is explained below:
@@ -338,7 +322,6 @@ DAU has a dedicated alumni office, headed by the Dean (Alumni & external Relatio
 
 **Contact ABC Cell**: coe\_office\[at\]dau\[dot\]ac\[dot\]in
 
-
 Mahatma Gandhi’s vision in Hind Swaraj critiques the Western model of centralized development, linking it to rising inequality, crime, and environmental degradation. He advocated for self-sufficient "village republics" that utilize local resources and decentralized, eco-friendly technologies to meet essential needs. This vision is crucial for India, where 70% of the population resides in rural areas, yet agriculture, employing 51% of the workforce, contributes only 17% to GDP. Persistent rural-urban disparities in health, education, and employment drive migration to cities, making sustainable rural development essential. The Unnat Bharat Abhiyan (UBA) aims to address these challenges by integrating higher education institutions into rural development efforts.
 
 Under the **[Unnat Bharat Abhiyan (UBA)](https://unnatbharatabhiyan.gov.in/)** scheme of UGC, DAU has identified five villages to engage the faculty and students of Higher Educational Institutions in understanding rural realities. The objective is to identify & select existing innovative technologies, enable customisation of technologies, or devise implementation methods for innovative solutions, as per the local needs. It shall help to leverage the knowledge base of the educational institutions for effective implementation of various government programmes.
@@ -357,9 +340,6 @@ Under the **[Unnat Bharat Abhiyan (UBA)](https://unnatbharatabhiyan.gov.in/)** s
 - **Dr. Yash Agarwal** (Associate Professor)
 - **Dr. Ratna Bharati Bhamidipati** (Assistant Professor)
 - **Dr. Purbasha Das** (Assistant Professor)
-
-
-
 
 1. [UGC](https://www.ugc.gov.in/)
 2. [AICTE](https://www.aicte-india.org/)
