@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Anupam Rana at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Anupam Rana
 
 Anupam Rana
-Â 
+ 
 PhD (Design Management) - Retails Experience-CX, Indus University, Ahmedabad
 Contact Details
-Â 
+ 
 079-68261538
-Â 
+ 
 #3210, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 anupam_rana@dau.ac.in
 Biography
 
@@ -35,18 +35,18 @@ Design Education, Experience Design, Multidisciplinary Research, UIUX, Design Th
 
 Publications
 
-ORCiD ID:Â https://orcid.org/0000-0002-2185-1678
+ORCiD ID: https://orcid.org/0000-0002-2185-1678
 
 Journal Articles: The Significance of Ethical Business Practices in the Creation of Digital User Experience (UX) Design. International Journal of Research Publication and Reviews, Vol 4, no 4, pp 1612-1616, April 2023, ISSN 2582-7421.
 Teaching
 
 Product Design, Interaction Design, Packaging Design, Design Thinking, UX Research
 
-## Contact Information
+# Contact Information
 
 - **Email:** anupam_rana@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/anupam-rana)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Arunava Chakravarty at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Arunava Chakravarty
 
 Arunava Chakravarty
-Â 
+ 
 PhD (Computer Science and Engineering), IIIT Hyderabad
 Contact Details
-Â 
+ 
 079-68261542
-Â 
+ 
 # 1201, FB-1, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 arunava_chakravarty@dau.ac.in
-Â 
+ 
 https://scholar.google.co.in/citations?user=Tk2svbAAAAAJ&hl=en
 https://orcid.org/0000-0003-3646-0650
 https://www.scopus.com/authid/detail.uri?authorId=59102807500
@@ -56,11 +56,11 @@ A. Chakravarty, T. Emre, D. Lachinov, A. Rivail, U. Schmidt-Erfurth, H. Bogunovi
 Teaching
 IE406 Machine Learning (ongoing)
 
-## Contact Information
+# Contact Information
 
 - **Email:** arunava_chakravarty@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/arunava-chakravarty)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

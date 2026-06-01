@@ -7,62 +7,62 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 * A Word 4 U
 
-## Main Content
+# Main Content
 
 * A Word 4 U
 
-    * [A Word of Guidance](/word-guidance)
-    * [First year in campus](/first-year-campus)
-    * [Grievance Redressal Cell ](/grievance-redressal-cell)
+    * [A Word of Guidance](https://www.daiict.ac.in/word-guidance)
+    * [First year in campus](https://www.daiict.ac.in/first-year-campus)
+    * [Grievance Redressal Cell ](https://www.daiict.ac.in/grievance-redressal-cell)
 
   * Study at DA-IICT
 
-    * [Undergraduate](/programs-of-study)
-    * [Postgraduate ](/programs-of-study#tab-2)
-    * [Doctoral](/programs-of-study#tab-3)
-    * [Scholarships ](/admissions#tab-4)
+    * [Undergraduate](https://www.daiict.ac.in/programs-of-study)
+    * [Postgraduate ](https://www.daiict.ac.in/programs-of-study#tab-2)
+    * [Doctoral](https://www.daiict.ac.in/programs-of-study#tab-3)
+    * [Scholarships ](https://www.daiict.ac.in/admissions#tab-4)
 
   * Parent's Handbook
 
-    * [Academic Calendar ](/academic-calendar)
-    * [Holidays ](/sites/default/files/other-files/DAU_Holiday-List-2026.pdf)
-    * [Medical Assistance](/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf)
-    * [Emergency Contact Details](/emergency-contact-details)
+    * [Academic Calendar ](https://www.daiict.ac.in/academic-calendar)
+    * [Holidays ](https://www.daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf)
+    * [Medical Assistance](https://www.daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf)
+    * [Emergency Contact Details](https://www.daiict.ac.in/emergency-contact-details)
 
   * Rules and Regulations
 
-    * [Disciplinary Rules ](/disciplinary-rules)
-    * [Examination Rules ](/examination-rules)
-    * [Student Leave Policy](/sites/default/files/other-files/Student_Leave_Policy_wef_AY2021-22.pdf)
-    * [Halls of Residence](/sites/default/files/other-files/Hostel-Rules-and-Regulations.pdf)
-    * [Vehicle Rules for Students](/sites/default/files/other-files/DA-IICT_Vehicle_Rules_for_Students.pdf)
+    * [Disciplinary Rules ](https://www.daiict.ac.in/disciplinary-rules)
+    * [Examination Rules ](https://www.daiict.ac.in/examination-rules)
+    * [Student Leave Policy](https://www.daiict.ac.in/sites/default/files/other-files/Student_Leave_Policy_wef_AY2021-22.pdf)
+    * [Halls of Residence](https://www.daiict.ac.in/sites/default/files/other-files/Hostel-Rules-and-Regulations.pdf)
+    * [Vehicle Rules for Students](https://www.daiict.ac.in/sites/default/files/other-files/DA-IICT_Vehicle_Rules_for_Students.pdf)
 
   * Admissions
 
-    * [Undergraduate](/admissions#tab-1)
-    * [Postgraduate ](/admissions#tab-2)
-    * [Doctoral](/admissions#tab-3)
+    * [Undergraduate](https://www.daiict.ac.in/admissions#tab-1)
+    * [Postgraduate ](https://www.daiict.ac.in/admissions#tab-2)
+    * [Doctoral](https://www.daiict.ac.in/admissions#tab-3)
 
   * Careers and Employment
 
-    * [Placements](/placements)
+    * [Placements](https://www.daiict.ac.in/placements)
     * [Entrepreneurship Cell ](http://ceid.daiict.ac.in/)
 
   * Events and News
 
-    * [Events](/events)
-    * [Student News](/achievements)
+    * [Events](https://www.daiict.ac.in/events)
+    * [Student News](https://www.daiict.ac.in/achievements)
 
   * Campus
 
-    * [Gallery](/photo-gallery)
-    * [Location](/contact-0)
+    * [Gallery](https://www.daiict.ac.in/photo-gallery)
+    * [Location](https://www.daiict.ac.in/contact-0)
 
-## Related Links
+# Related Links
 
 - [A Word of Guidance](https://www.daiict.ac.in/word-guidance)
 - [First year in campus](https://www.daiict.ac.in/first-year-campus)
@@ -80,7 +80,7 @@ team: "Team D"
 - [Student Leave Policy](https://www.daiict.ac.in/sites/default/files/other-files/Student_Leave_Policy_wef_AY2021-22.pdf)
 - [Halls of Residence](https://www.daiict.ac.in/sites/default/files/other-files/Hostel-Rules-and-Regulations.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

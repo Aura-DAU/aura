@@ -7,27 +7,27 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Hemant Patil at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Hemant Patil
 
 Hemant Patil
-Â 
+ 
 PhD (Computer Science), IIT Kharagpur
 Contact Details
-Â 
+ 
 079-68261650, Lab: 079-68261587
-Â 
+ 
 Office: # 4103, FB-4, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007.
 Lab: CEP 006, Speech Lb, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 hemant_patil@dau.ac.in
 hemant_patil1977@yahoo.com
-Â 
+ 
 https://sites.google.com/site/hemantpatildaiict/
 Biography
 
@@ -45,11 +45,11 @@ Speech Technology (BTech Sem VI elective and Open to MTech and PhD)
 Speech Communication
 Advanced Digital Signal Processing
 
-## Contact Information
+# Contact Information
 
 - **Email:** hemant_patil@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/hemant-patil)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

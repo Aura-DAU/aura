@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Ankit Vijayvargiya at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Ankit Vijayvargiya
 
 Ankit Vijayvargiya
-Â 
+ 
 PhD (Biomedical Signals), Malaviya National Institute of Technology, Jaipur
 Contact Details
-Â 
+ 
 079-68261628
-Â 
+ 
 # 4205, FB-4, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 ankit_vijayvargiya@dau.ac.in
-Â 
+ 
 https://scholar.google.com/citations?hl=en&user=vd5bQocAAAAJ&view_op=list_worksâ€¦
 https://www.linkedin.com/in/ankit-vijayvargiya/
 Biography
@@ -59,11 +59,11 @@ Introduction to Programming
 
 Object Oriented Programming
 
-## Contact Information
+# Contact Information
 
 - **Email:** ankit_vijayvargiya@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/ankit-vijayvargiya)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

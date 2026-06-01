@@ -7,15 +7,15 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 None
 
-## Main Content
+# Main Content
 
 None
 
-### [20th Convocation Booklet](/sites/default/files/other-files/Convocation-Booklet_JAN-26.pdf)
+### [20th Convocation Booklet](https://www.daiict.ac.in/sites/default/files/other-files/Convocation-Booklet_JAN-26.pdf)
 
 [MSc AA programme Open House on 2nd June 2026](https://zoom.us/j/95763574411?pwd=TZinuHRuZddF4JndkaqCb5kmsBNs0s.1)
 
@@ -23,27 +23,27 @@ None
 
 [MTech ICT Open House – 5 June 2026](https://zoom.us/j/99593791683?pwd=D9dSqdaUnB3PEA04w160bdRUTutZfk.1)
 
-[Admissions Open for all programs](/admissions)
+[Admissions Open for all programs](https://www.daiict.ac.in/admissions)
 
-[B. Tech All](/admissions#tab-1)
+[B. Tech All](https://www.daiict.ac.in/admissions#tab-1)
 
-[Ph. D. \(Regular and Part-Time\)](/admissions#tab-3)
+[Ph. D. \(Regular and Part-Time\)](https://www.daiict.ac.in/admissions#tab-3)
 
-[MSc \(IT\)](/admission-msc-it)
+[MSc \(IT\)](https://www.daiict.ac.in/admission-msc-it)
 
-[M. Tech \(All\)](/admission-mtech-ict)
+[M. Tech \(All\)](https://www.daiict.ac.in/admission-mtech-ict)
 
-[M. Sc \(DS\)](/admission-msc-data-science)
+[M. Sc \(DS\)](https://www.daiict.ac.in/admission-msc-data-science)
 
-[MSc \(AA\)](/admissions-msc-agriculture-analytics)
+[MSc \(AA\)](https://www.daiict.ac.in/admissions-msc-agriculture-analytics)
 
-[M. Des. \(IUxD\)](/admissions-mdes)
+[M. Des. \(IUxD\)](https://www.daiict.ac.in/admissions-mdes)
 
-[BS-MS \(IT\)](/bs-ms-information-technology-admissions?_ga=2.177980003.758174048.1774845688-2069747533.1774614839)
+[BS-MS \(IT\)](https://www.daiict.ac.in/bs-ms-information-technology-admissions)
 
-[DA-IICT Achieves NAAC Grade A+ Accreditation](/da-iict-achieves-naac-grade-accreditation)
+[DA-IICT Achieves NAAC Grade A+ Accreditation](https://www.daiict.ac.in/da-iict-achieves-naac-grade-accreditation)
 
-[BS-MS \(DS &amp; AI\)](/bs-ms-data-science-artificial-intelligence-admissions?_ga=2.248702657.758174048.1774845688-2069747533.1774614839)
+[BS-MS \(DS & AI\)](https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence-admissions)
 
   * Programs
   * Research Areas
@@ -53,10 +53,9 @@ None
   * [Faculty](faculty)
   * [Staff](staff)
   * [Doctoral Scholars](doctoral-scholars)
-  * [Parents](/parents)
-  * [Alumni](/alumni)
+  * [Parents](https://www.daiict.ac.in/parents)
+  * [Alumni](https://www.daiict.ac.in/alumni)
 
-play stop
 
   * [B.Tech. (ICT)](btech-ict)
   * [B.Tech. (Honours) in ICT with minor in Computational Science](btech-honours-ict-minor-computational-science)
@@ -72,30 +71,27 @@ play stop
   * [M.Sc. (Data Science)](msc-data-science)
   * [M.Des. (Communication Design) specialization](mdes-communication-design)
   * [M.Des. (Intelligent UX Design) specialization](mdes-intelligent-user-experience-design)
-  * [Ph.D.](/index.php/phd)
+  * [Ph.D.](https://www.daiict.ac.in/index.php/phd)
 
-play stop
 
-  * [AI, ML and Data Science](/ai-ml-and-data-science)
-  * [Algorithms and Theory of Computation](/algorithms-and-theory-of-omputation)
-  * [Communications and Signal Processing](/communications-and-signal-processing)
-  * [Humanities, Social Sciences and Design](/humanities-social-sciences-and-design)
-  * [Physics and Mathematical Sciences](/physics-and-mathematical-sciences)
-  * [Software Systems and Networking](/software-systems-and-networking-0)
-  * [VLSI & Embedded Systems](/vlsi-and-embedded-systems)
+  * [AI, ML and Data Science](https://www.daiict.ac.in/ai-ml-and-data-science)
+  * [Algorithms and Theory of Computation](https://www.daiict.ac.in/algorithms-and-theory-of-omputation)
+  * [Communications and Signal Processing](https://www.daiict.ac.in/communications-and-signal-processing)
+  * [Humanities, Social Sciences and Design](https://www.daiict.ac.in/humanities-social-sciences-and-design)
+  * [Physics and Mathematical Sciences](https://www.daiict.ac.in/physics-and-mathematical-sciences)
+  * [Software Systems and Networking](https://www.daiict.ac.in/software-systems-and-networking-0)
+  * [VLSI & Embedded Systems](https://www.daiict.ac.in/vlsi-and-embedded-systems)
 
-play stop
 
   * [Student Body Government](https://www.daiict.ac.in/dean-students#tab-2)
   * [Student Committees](https://www.daiict.ac.in/dean-students#tab-1)
   * [Student Clubs](https://www.daiict.ac.in/dean-students#tab-3)
   * [IEEE Student Branch](ieee-student-branch)
-  * [Dean's Office](/dean-students)
+  * [Dean's Office](https://www.daiict.ac.in/dean-students)
   * [Achievements](achievements)
 
-play stop
 
-## Events @DA-IICT
+# Events @DA-IICT
 
 [Artificial Intelligence in Internet of Things (AIoT): Concepts, Architectures, a… **Date:** 15/06/2026 \- 20/06/2026](events/7078)
 
@@ -107,7 +103,7 @@ play stop
 
 [DAU to organise Alumni Meet 2026 – Gandhinagar-Ahmedabad Chapter **Date:** 18/04/2026 \- 18/04/2026](events/7055)
 
-[Workshop on Deep Learning and Artificial Intelligence: Principles &amp; Practice… **Date:** 09/03/2026 \- 13/03/2026](events/7038)
+[Workshop on Deep Learning and Artificial Intelligence: Principles & Practice… **Date:** 09/03/2026 \- 13/03/2026](events/7038)
 
 [Seminar on Emerging Technologies for a Sustainable and Intelligent Future **Date:** 10/04/2026 \- 10/04/2026](events/6995)
 
@@ -250,7 +246,7 @@ play stop
 
 [High End Workshop on Image Processing and its Applications using VLSI Architectu… **Date:** 03/07/2023 \- 08/07/2023](events/5636)
 
-[Prof. ?????? ? ????? will be delivering a lecture on the topic “??? ????? ?? ???… **Date:** 25/05/2023 \- 25/05/2023](events/5622)
+[Prof. Manish K Gupta will be delivering a lecture on the topic "Magic of DNA" **Date:** 25/05/2023 \- 25/05/2023](events/5622)
 
 [Launching of UG Admission Portal of ERP System for DA-IICT **Date:** 19/04/2023 \- 19/04/2023](events/5594)
 
@@ -262,19 +258,18 @@ play stop
 
 [View All ](https://www.daiict.ac.in/events)
 
-play stop
 
 ### Announcements
 
-  * [ Post-doctoral Fellow position for project CSR-25/BSES/A10-PK/SELC](/index.php/node/7076)
+  * [ Post-doctoral Fellow position for project CSR-25/BSES/A10-PK/SELC](https://www.daiict.ac.in/index.php/node/7076)
 
-  * [ Newly launched dual degree BS-MS programs 2026-27 admission announced](/index.php/admissions)
+  * [ Newly launched dual degree BS-MS programs 2026-27 admission announced](https://www.daiict.ac.in/index.php/admissions)
 
-  * [ Admissions to the UG, PG and PhD Programs for 2026-27 announced](/index.php/admissions)
+  * [ Admissions to the UG, PG and PhD Programs for 2026-27 announced](https://www.daiict.ac.in/index.php/admissions)
 
-  * [Dhirubhai Ambani University Rated Among India’s Best Engineering Institutes 2025](/index.php/dhirubhai-ambani-university-rated-among-indias-best-engineering-institutes-2025)
+  * [Dhirubhai Ambani University Rated Among India’s Best Engineering Institutes 2025](https://www.daiict.ac.in/index.php/dhirubhai-ambani-university-rated-among-indias-best-engineering-institutes-2025)
 
-  * [Dr. G. Venkatesh joins as the Director, School of Technology, DAU](/index.php/dr-g-venkatesh-joins-director-school-technology-dau)
+  * [Dr. G. Venkatesh joins as the Director, School of Technology, DAU](https://www.daiict.ac.in/index.php/dr-g-venkatesh-joins-director-school-technology-dau)
 
   * [ Prof Avinash Dadhich appointed Founding Director - to establish the proposed School of Law.](https://www.daiict.ac.in/prof-avinash-dadhich-appointed-founding-director-establish-proposed-school-law)
 
@@ -282,19 +277,19 @@ play stop
 
   * [ IIRF University Ranking 2023, places DA-IICT at No. 1 position under the category of overall State Private Universities](https://www.daiict.ac.in/sites/default/files/other-files/IIRF_Ranking-appeared-uder-University-special-edition-of_Education-Post.pdf)
 
-  * [ Rolling Advertisement for Faculty Positions](/index.php/faculty-tenure)
+  * [ Rolling Advertisement for Faculty Positions](https://www.daiict.ac.in/index.php/faculty-tenure)
 
   * [ Prof. S.C. Sahasrabudhe - A Memoir](https://www.daiict.ac.in/prof-sc-sahasrabudhe-memoir)
 
-  * [Chosen for award of 'Center of Excellence' by the Government of Gujarat](/index.php/chosen-award-center-excellence-government-gujarat)
+  * [Chosen for award of 'Center of Excellence' by the Government of Gujarat](https://www.daiict.ac.in/index.php/chosen-award-center-excellence-government-gujarat)
 
-  * [IMPORTANT NOTICE](/index.php/important-notice)
+  * [IMPORTANT NOTICE](https://www.daiict.ac.in/index.php/important-notice)
 
 Pause
 
 [View All ](https://www.daiict.ac.in/announcements)
 
-## DA-IICT Updates
+# DA-IICT Updates
 
  [Silver Jubilee Seminar at DAU | ETSIF 2026](news/7070)
 
@@ -318,15 +313,14 @@ Pause
 
 [News Contribution ](https://www.daiict.ac.in/news-contribution) [View All ](https://www.daiict.ac.in/news)
 
-play stop
 
 Back to Top
 
-## Contact Information
+# Contact Information
 
 - **Phone:** 069747533
 
-## Related Links
+# Related Links
 
 - [20th Convocation Booklet](https://www.daiict.ac.in/sites/default/files/other-files/Convocation-Booklet_JAN-26.pdf)
 - [Link](https://zoom.us/j/95763574411?pwd=TZinuHRuZddF4JndkaqCb5kmsBNs0s.1)
@@ -340,11 +334,11 @@ Back to Top
 - [Link](https://www.daiict.ac.in/admission-msc-data-science)
 - [Link](https://www.daiict.ac.in/admissions-msc-agriculture-analytics)
 - [Link](https://www.daiict.ac.in/admissions-mdes)
-- [Link](https://www.daiict.ac.in/bs-ms-information-technology-admissions?_ga=2.177980003.758174048.1774845688-2069747533.1774614839)
+- [Link](https://www.daiict.ac.in/bs-ms-information-technology-admissions)
 - [Link](https://www.daiict.ac.in/da-iict-achieves-naac-grade-accreditation)
-- [Link](https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence-admissions?_ga=2.248702657.758174048.1774845688-2069747533.1774614839)
+- [Link](https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence-admissions)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

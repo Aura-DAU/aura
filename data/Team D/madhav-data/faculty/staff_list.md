@@ -7,13 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
-* 
 
-## Main Content
+# Main Content
 
-* 
 
 ### Abhilash Kumar Bhaskaran
 
@@ -21,7 +19,6 @@ Assistant Manager - Faculty Block 2
 
 abhilash_bhaskaran[at]dau[dot]ac[dot]in (+91) 079-68261659
 
-  * 
 
 ### Abhishek Karli
 
@@ -31,7 +28,6 @@ Executive – Finance and Accounts
 
 abhishek_karli[at]dau[dot]ac[dot]in (+91) 079-68261753
 
-  * 
 
 ### Akash Desai
 
@@ -41,7 +37,6 @@ Senior Manager - DCEI
 
 akash_desai[at]dau[dot]ac[dot]in (+91) 079-68261686
 
-  * 
 
 ### Anand Chavan
 
@@ -51,7 +46,6 @@ Senior Library Information Assistant
 
 anand_chavan[at]dau[dot]ac[dot]in (+91) 079-68261633
 
-  * 
 
 ### Anil Saksena
 
@@ -59,7 +53,6 @@ Electrician
 
 anil_saksena[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Anirudhsing Raol
 
@@ -67,7 +60,6 @@ Senior Electrician
 
 anirudhsinh_raol[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Anuradha Srivastava
 
@@ -75,7 +67,6 @@ Assistant Manager - Placement
 
 placement_office[at]dau[dot]ac[dot]in (+91) 079-68261646
 
-  * 
 
 ### Arti Rathod
 
@@ -85,7 +76,6 @@ Junior Civil Engineer
 
 arti_rathod[at]dau[dot]ac[dot]in (+91) 079-68261746
 
-  * 
 
 ### Ashvin Chaudhari
 
@@ -95,7 +85,6 @@ Assistant Manager - IT & SYSTEMS
 
 ashvin_chaudhari[at]dau[dot]ac[dot]in (+91) 079-68261534
 
-  * 
 
 ### Babulal Kalal
 
@@ -103,7 +92,6 @@ Multi-Tasking Assistant
 
 babulal_kalal[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Babulal Solanki
 
@@ -111,7 +99,6 @@ Plumber
 
 babulal_solanki[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Bahadursinh M Vaghela
 
@@ -119,7 +106,6 @@ Multi-Tasking Assistant
 
 bahadursinh_vaghela[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Bhargav Patel
 
@@ -129,7 +115,6 @@ Assistant Manager - Lab
 
 bhargav_patel[at]dau[dot]ac[dot]in (+91) 079-68261514
 
-  * 
 
 ### Bhavesh Shah
 
@@ -139,7 +124,6 @@ Assistant Manager - Stores
 
 bhavesh_shah[at]dau[dot]ac[dot]in (+91) 079-68261596
 
-  * 
 
 ### Chaitanya Bhamare
 
@@ -149,7 +133,6 @@ Assistant Manager - IT & SYSTEMS
 
 chaitanya_b[at]dau[dot]ac[dot]in (+91) 079-68261539
 
-  * 
 
 ### Chirag Nayak
 
@@ -159,7 +142,6 @@ Executive - Lab
 
 chirag_nayak[at]dau[dot]ac[dot]in (+91) 079-68261532
 
-  * 
 
 ### Chirag Patni
 
@@ -169,7 +151,6 @@ Nurse (Male) – Medical Center
 
 chirag_patni[at]dau[dot]ac[dot]in (+91) 079-68261593
 
-  * 
 
 ### Darshan Prajapati
 
@@ -179,7 +160,6 @@ Sr. Executive - IT & SYSTEMS
 
 darshan_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261539
 
-  * 
 
 ### Darshan Rajvi
 
@@ -189,7 +169,6 @@ Executive - Stores & Purchase
 
 darshan_rajvi[at]dau[dot]ac[dot]in (+91) 079-68261568
 
-  * 
 
 ### Dashank Shah
 
@@ -199,7 +178,6 @@ Dy. Chief Financial Officer (Tax & Finance)
 
 dashank_shah[at]dau[dot]ac[dot]in (+91) 079-68261725
 
-  * 
 
 ### Deepa Jayan Poduval
 
@@ -207,7 +185,6 @@ Assistant Manager - Dean Faculty Office
 
 deepa_poduval[at]dau[dot]ac[dot]in (+91) 079-68261552
 
-  * 
 
 ### Deepali Sharma
 
@@ -217,7 +194,6 @@ Assistant Manager - Placement
 
 deepali_sharma[at]dau[dot]ac[dot]in (+91) 079-68261616
 
-  * 
 
 ### Dharmik Mehta
 
@@ -227,7 +203,6 @@ Sr. Executive - Lab
 
 dharmik_mehta[at]dau[dot]ac[dot]in (+91) 079-68261532
 
-  * 
 
 ### Dinesh Prajapati
 
@@ -237,7 +212,6 @@ Jt. Controller of Examination
 
 dinesh_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261583
 
-  * 
 
 ### Divyam Mishra
 
@@ -247,7 +221,6 @@ Dy. Chief Financial Officer (Accounts)
 
 divyam_mishra[at]dau[dot]ac[dot]in (+91) 079-68261729
 
-  * 
 
 ### Geeta S Nair
 
@@ -255,7 +228,6 @@ Assistant Manager - Faculty Block 4
 
 nair_geeta[at]dau[dot]ac[dot]in (+91) 079-68261573
 
-  * 
 
 ### Govind Prajapati
 
@@ -265,7 +237,6 @@ Executive - Lab
 
 govind_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261720
 
-  * 
 
 ### Himatsinh G Rana
 
@@ -273,7 +244,6 @@ Multi-Tasking Assistant
 
 himatsinh_rana[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Ishvar Ravat
 
@@ -281,7 +251,6 @@ Multi-Tasking Assistant
 
 ishvar_ravat[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Jainik Patel
 
@@ -289,7 +258,6 @@ Sr. Executive - Exam & Student Support
 
 jainik_patel[at]dau[dot]ac[dot]in (+91) 079-68261574
 
-  * 
 
 ### Jalpesh Pandya
 
@@ -299,7 +267,6 @@ Deputy Registrar (Academic)
 
 jalpesh_pandya[at]dau[dot]ac[dot]in (+91) 079-68261579
 
-  * 
 
 ### Jashvant Parmar
 
@@ -307,7 +274,6 @@ Multi-Tasking Assistant
 
 jashvant_parmar[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Jaydeep Panchal
 
@@ -317,7 +283,6 @@ Sr. Executive - Accounts & Finance
 
 jaydeep_panchal[at]dau[dot]ac[dot]in (+91) 079-68261706
 
-  * 
 
 ### Jigar Yagnik
 
@@ -327,7 +292,6 @@ Controller Of Examination
 
 jigar_yagnik[at]dau[dot]ac[dot]in (+91) 079-68261604
 
-  * 
 
 ### Jignesh Singh
 
@@ -337,7 +301,6 @@ Manager – Admissions and Outreach
 
 jignesh_singh[at]dau[dot]ac[dot]in (+91) 079-68261---
 
-  * 
 
 ### Jitendra Parmar
 
@@ -347,7 +310,6 @@ Assistant Manager - Hostel
 
 jitendra_parmar[at]dau[dot]ac[dot]in (+91) 079-68261544
 
-  * 
 
 ### Juhi Patel
 
@@ -357,7 +319,6 @@ Assistant Manager - PR and Social Media
 
 juhi_patel[at]dau[dot]ac[dot]in (+91) 079-68261722
 
-  * 
 
 ### Keshurbhai M Zala
 
@@ -365,7 +326,6 @@ General Assistant
 
 kesurbhai_zala[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Kirit Pandya
 
@@ -375,7 +335,6 @@ Manager - Administration
 
 kirit_pandya[at]dau[dot]ac[dot]in (+91) 079-68261592
 
-  * 
 
 ### Kishan Joshi
 
@@ -385,7 +344,6 @@ Senior Executive - HR
 
 kishan_joshi[at]dau[dot]ac[dot]in (+91) 079-68261551
 
-  * 
 
 ### Krunal Patel
 
@@ -395,7 +353,6 @@ Assistant Manager - Lab
 
 krunal_patel[at]dau[dot]ac[dot]in (+91) 079-68261511
 
-  * 
 
 ### Krutika Raval
 
@@ -405,7 +362,6 @@ Head - HR & Administration
 
 head_hradmin[at]dau[dot]ac[dot]in (+91) 079-68261591
 
-  * 
 
 ### Kunjal Patel
 
@@ -413,7 +369,6 @@ Electrician
 
 kunjal_patel[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Mahendra Chauhan
 
@@ -421,7 +376,6 @@ Facility Assistant
 
 mahendra_chauhan[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Mahendra Solanki
 
@@ -431,7 +385,6 @@ Sr. Executive - Faculty Block 1
 
 mahendra_solanki[at]dau[dot]ac[dot]in (+91) 079-68261571
 
-  * 
 
 ### Mahendrasinh Dabhi
 
@@ -441,7 +394,6 @@ Senior Executive-Examination
 
 mahendrasinh_dabhi[at]dau[dot]ac[dot]in (+91) 079-68261576
 
-  * 
 
 ### Manimaaran Pillai
 
@@ -451,7 +403,6 @@ Executive Assistant to Chief Operating Officer
 
 manimaaran_pillai[at]dau[dot]ac[dot]in (+91) 079-68261731
 
-  * 
 
 ### Manish Goswami
 
@@ -461,7 +412,6 @@ Sr. Executive - Resource Centre
 
 manish_goswami[at]dau[dot]ac[dot]in (+91) 079-68261578
 
-  * 
 
 ### Manoranjan Satpathy
 
@@ -471,7 +421,6 @@ Senior Library Information Assistant
 
 manoranjan_s[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Maulik Shukla
 
@@ -479,7 +428,6 @@ Electrician
 
 maulik_shukla[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Mrigankshekhar Mahapatra
 
@@ -489,7 +437,6 @@ Executive Assistant – Dean (Students)
 
 mrigankshekhar_m[at]dau[dot]ac[dot]in (+91) 079-68261741
 
-  * 
 
 ### Mukesh Shrimali
 
@@ -499,7 +446,6 @@ Sr. Executive - Resource Centre
 
 mukesh_shrimali[at]dau[dot]ac[dot]in (+91) 079-68261578
 
-  * 
 
 ### Nandini Banerjee
 
@@ -509,7 +455,6 @@ Manager - Student Wellbeing and Counselor
 
 nandini_banerjee[at]dau[dot]ac[dot]in (+91) 079-68261620
 
-  * 
 
 ### Naresh Patel
 
@@ -519,7 +464,6 @@ Assistant Manager - Lab
 
 naresh_patel[at]dau[dot]ac[dot]in (+91) 079-68261517
 
-  * 
 
 ### Niketa P Raval
 
@@ -529,7 +473,6 @@ Receptionist and Sr. Executive - Administration
 
 niketa_raval[at]dau[dot]ac[dot]in (+91) 079-68261701
 
-  * 
 
 ### Nimesh Patel
 
@@ -539,7 +482,6 @@ Sr. Manager - IT & SYSTEMS
 
 nimesh_bpatel[at]dau[dot]ac[dot]in (+91) 079-68261520
 
-  * 
 
 ### Nirav Joshi
 
@@ -549,7 +491,6 @@ Manager - Quality and Accreditation Cell
 
 nirav_joshi[at]dau[dot]ac[dot]in (+91) 079-68261676
 
-  * 
 
 ### Nitu Singh Bhadouria
 
@@ -559,7 +500,6 @@ Student Counselor
 
 nitusingh_b[at]dau[dot]ac[dot]in (+91) 079-68261698
 
-  * 
 
 ### Pallavi Kapadane
 
@@ -569,7 +509,6 @@ Executive - HR
 
 pallavi_kapadane[at]dau[dot]ac[dot]in (+91) 079-68261575
 
-  * 
 
 ### Pankit Gandhi
 
@@ -577,7 +516,6 @@ Sr. Executive - Faculty Block 3
 
 pankit_gandhi[at]dau[dot]ac[dot]in (+91) 079-68261666
 
-  * 
 
 ### Prabhunath Sharma
 
@@ -587,7 +525,6 @@ Assistant Manager - Design & Systems
 
 prabhunath_sharma[at]dau[dot]ac[dot]in (+91) 079-68261635
 
-  * 
 
 ### Prakash Chavan
 
@@ -595,7 +532,6 @@ Multi-Tasking Assistant
 
 prakash_chavan[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Prakash Solanki
 
@@ -603,7 +539,6 @@ Electrician
 
 prakash_solanki[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Prem Kumar Chopra
 
@@ -613,7 +548,6 @@ Advisor to Director General
 
 pkc[at]dau[dot]ac[dot]in (+91) 079-68261630
 
-  * 
 
 ### Pritesh Panchal
 
@@ -623,7 +557,6 @@ Executive Assistant – Dean (AP)
 
 pritesh_panchal[at]dau[dot]ac[dot]in (+91) 079-68261733
 
-  * 
 
 ### Priya Kumari
 
@@ -633,7 +566,6 @@ Resident Warden (Female)
 
 priya_kumari[at]dau[dot]ac[dot]in (+91) 079-68261667
 
-  * 
 
 ### Priyank Santola
 
@@ -643,7 +575,6 @@ Sr. Executive - IT & SYSTEMS
 
 priyank_santola[at]dau[dot]ac[dot]in (+91) 079-68261539
 
-  * 
 
 ### Rahul Prajapati
 
@@ -653,7 +584,6 @@ Assistant Registrar - Student Support & Academic
 
 rahul_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261703
 
-  * 
 
 ### Rahul Rajput
 
@@ -663,7 +593,6 @@ Sports Officer
 
 rahul_rajput[at]dau[dot]ac[dot]in (+91) 079-68261606
 
-  * 
 
 ### Rajendra Shah
 
@@ -673,7 +602,6 @@ Sr. Manager - Lab
 
 rajendra_shah[at]dau[dot]ac[dot]in (+91) 079-68261531
 
-  * 
 
 ### Rajesh Patel
 
@@ -683,7 +611,6 @@ Sr. Engineer - Estate
 
 rajesh_patel[at]dau[dot]ac[dot]in (+91) 079-68261622
 
-  * 
 
 ### Ramesh Prajapati
 
@@ -693,7 +620,6 @@ Manager - Lab
 
 ramesh_prajapati[at]dau[dot]ac[dot]in (+91) 079-68261513
 
-  * 
 
 ### Rashmi T Kumbar
 
@@ -703,7 +629,6 @@ Librarian
 
 rashmi_kumbar[at]dau[dot]ac[dot]in (+91) 079-68261550
 
-  * 
 
 ### Sanjay Bariya
 
@@ -713,7 +638,6 @@ Manager - Lab
 
 sanjay_bariya[at]dau[dot]ac[dot]in (+91) 079-68261742
 
-  * 
 
 ### Satyabirsingh Yadav
 
@@ -721,7 +645,6 @@ Assistant Manager - Dean Research Office
 
 satyabir_singh[at]dau[dot]ac[dot]in (+91) 079-68261648
 
-  * 
 
 ### Savita Joshi
 
@@ -731,7 +654,6 @@ Executive Assistant to Director – School of Technology
 
 savita_joshi[at]dau[dot]ac[dot]in (+91) 079-68261750
 
-  * 
 
 ### Sawankumar Sachaniya
 
@@ -741,7 +663,6 @@ Assistant Manager - Sports
 
 sawankumar_sachaniya[at]dau[dot]ac[dot]in (+91) 079-68261690
 
-  * 
 
 ### Shashikumara A A 
 
@@ -751,7 +672,6 @@ Deputy Librarian
 
 shashi_aa[at]dau[dot]ac[dot]in (+91) 079-68261626
 
-  * 
 
 ### Shijin Sivankutty
 
@@ -761,7 +681,6 @@ Executive – Alumni Office
 
 shijin_sivankutty[at]dau[dot]ac[dot]in (+91) 079-68261724
 
-  * 
 
 ### Shirish Varma
 
@@ -771,7 +690,6 @@ Sr. Executive – Hostels
 
 shirish_varma[at]dau[dot]ac[dot]in (+91) 079-68261545
 
-  * 
 
 ### Shivani Vala
 
@@ -781,7 +699,6 @@ Nurse (Female) – Medical Center
 
 shivani_vala[at]dau[dot]ac[dot]in (+91) 079-68261593
 
-  * 
 
 ### Siddharth Swaminarayan
 
@@ -791,7 +708,6 @@ Executive Registrar
 
 registrar[at]dau[dot]ac[dot]in (+91) 079-68261567
 
-  * 
 
 ### Souvik Sarkar
 
@@ -801,7 +717,6 @@ Head - Career Planning, Placement & Marketing
 
 head_cpm[at]dau[dot]ac[dot]in (+91) 079-68261609
 
-  * 
 
 ### Sudhir Dave
 
@@ -811,7 +726,6 @@ Manager - Procurement and Commercial
 
 sudhir_dave[at]dau[dot]ac[dot]in (+91) 079-68261569
 
-  * 
 
 ### Suraj Makwana
 
@@ -819,7 +733,6 @@ Plant Operator
 
 suraj_makwana[at]dau[dot]ac[dot]in
 
-  * 
 
 ### Swati Mitra
 
@@ -829,7 +742,6 @@ Assistant Manager - Resource Centre
 
 swati_mitra[at]dau[dot]ac[dot]in (+91) 079-68261578
 
-  * 
 
 ### Tanu Sethi
 
@@ -839,7 +751,6 @@ Executive Assistant to Director General
 
 tannu_sethi[at]dau[dot]ac[dot]in (+91) 079-68261572
 
-  * 
 
 ### Umang R Patel
 
@@ -849,7 +760,6 @@ Research & Development Officer
 
 umang_patel[at]dau[dot]ac[dot]in (+91) 079-68261595
 
-  * 
 
 ### Varun Joshi
 
@@ -859,7 +769,6 @@ Executive - Registrar's Office
 
 varun_joshi[at]dau[dot]ac[dot]in (+91) 079-68261586
 
-  * 
 
 ### Vipul P Makwana
 
@@ -869,7 +778,6 @@ Sr. Executive - Communications
 
 vipul_makwana[at]dau[dot]ac[dot]in (+91) 079-68261704
 
-  * 
 
 ### Vishal Kanzariya
 
@@ -879,7 +787,7 @@ Horticulture Supervisor
 
 vishal_kanzariya[at]dau[dot]ac[dot]in
 
-## Contact Information
+# Contact Information
 
 - **Phone:** 079-68261626
 - **Phone:** 079-68261534
@@ -949,7 +857,7 @@ vishal_kanzariya[at]dau[dot]ac[dot]in
 - **Phone:** 079-68261569
 - **Phone:** 079-68261578
 
-## Related Links
+# Related Links
 
 - [People / Staff](https://www.daiict.ac.in/staff)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

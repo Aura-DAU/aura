@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for P S Kalyan Sasidhar at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### P S Kalyan Sasidhar
 
 P S Kalyan Sasidhar
-Â 
+ 
 PhD (Computer Science and Engineering), University of North Texas-Denton, USA
 Contact Details
-Â 
+ 
 079-68261560
-Â 
+ 
 # 2109, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 kalyan_sasidhar@dau.ac.in
-Â 
+ 
 https://sites.google.com/daiict.ac.in/kalyan-sasidhar/bio
 Biography
 
@@ -46,11 +46,11 @@ Computer Networks
 Distributed Systems
 Pervasive Sensing Systems
 
-## Contact Information
+# Contact Information
 
 - **Email:** kalyan_sasidhar@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

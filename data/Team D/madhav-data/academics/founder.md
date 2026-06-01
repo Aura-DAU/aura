@@ -7,13 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 A tribute to the late Shri Dhirubhai H. Ambani (1932â€“2002), founder of Reliance and the visionary behind the establishment of DA-IICT (now Dhirubhai Ambani University).
 
-## Main Content
+# Main Content
 
-[Image Present: Late Dhirubhai H Ambani (1932-2002)]
+
 
 ### Late Dhirubhai H. Ambani (1932â€“2002)
 
@@ -49,13 +49,13 @@ Dhirubhai's vision for education emphasised several key themes:
 
 The **Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)** is inspired by this vision of building intellectual competitiveness for India.
 
-## Important Information
+# Important Information
 
 - Dhirubhai H. Ambani (1932â€“2002) founded Reliance and built India's largest private sector enterprise
 - DA-IICT was established inspired by his vision of building intellectual competitiveness through technology education
 - He believed India needs to create ten times its technology professional resource base to succeed in the knowledge economy
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Founder](https://daiict.ac.in/founder)

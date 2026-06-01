@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Gautam Dutta at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Gautam Dutta
 
 Gautam Dutta
-Â 
+ 
 PhD (Physics), Physical Research Laboratory, Ahmedabad
 Contact Details
-Â 
+ 
 079-68261631
-Â 
+ 
 # 1110, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 gautam_dutta@dau.ac.in
 Biography
 
@@ -50,11 +50,11 @@ Thermodynamics
 Discrete Mathematics
 Probability and Information Theory
 
-## Contact Information
+# Contact Information
 
 - **Email:** gautam_dutta@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/gautam-dutta)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

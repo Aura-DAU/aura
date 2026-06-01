@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 First year in campus page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 The First Year In Campus
 
@@ -51,7 +51,7 @@ The daily schedule of DA-IICT students differs greatly from that of a high schoo
 
 Students will be exposed to many different cultures, perspectives and beliefs once they reach DA-IICT. As a result, they may start to question some of their own values and aspects of their identities. It is important that students have the freedom and opportunity to have new experiences and explore new ways of thinking. Their families should remember that while students may change in significant ways, they are likely to maintain their core values and identities.
 
-## Related Links
+# Related Links
 
 - [Original Page](https://daiict.ac.in/first-year-campus)
 - [Parents](https://daiict.ac.in/parents)

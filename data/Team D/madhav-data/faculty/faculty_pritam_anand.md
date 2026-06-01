@@ -7,29 +7,29 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Pritam Anand at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Pritam Anand
 
 Pritam Anand
-Â 
+ 
 PhD (Computer Science), South Asian University, New Delhi
 Contact Details
-Â 
+ 
 079-68261657
-Â 
+ 
 # 3103, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 pritam_anand@dau.ac.in
-Â 
+ 
 https://scholar.google.com/citations?user=ATYzQhoAAAAJ&hl=en
 Biography
 
-Pritam Anand is currently Assistant Professor at DAIICT. His research interest moves around the Support Vector Machine Algorithms. He has obtained his Master degree in Computer Science from South Asian University, New Delhi (An international university established by SAARC countries).Â  He has obtained his Ph.D. degree in Computer Science from South Asian University, New Delhi.Â  He was the recipient of the prestigious Visvesvaraya Ph.D. fellowship during his doctoral degree.
+Pritam Anand is currently Assistant Professor at DAIICT. His research interest moves around the Support Vector Machine Algorithms. He has obtained his Master degree in Computer Science from South Asian University, New Delhi (An international university established by SAARC countries).  He has obtained his Ph.D. degree in Computer Science from South Asian University, New Delhi.  He was the recipient of the prestigious Visvesvaraya Ph.D. fellowship during his doctoral degree.
 
 Specialization
 
@@ -41,11 +41,11 @@ Teaching
 
 Probability and Statistics
 
-## Contact Information
+# Contact Information
 
 - **Email:** pritam_anand@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/pritam-anand)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

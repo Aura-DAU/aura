@@ -7,26 +7,26 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 International Adjunct Faculty profile page for Nilotpal Chakravarti at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Nilotpal Chakravarti
 
 Nilotpal Chakravarti
-Â 
+ 
 PhD (Combinatorics and Optimization), University of Waterloo, USA
 Contact Details
-Â 
+ 
 nilotpal_chakravarti@dau.ac.in
 
-## Contact Information
+# Contact Information
 
 - **Email:** nilotpal_chakravarti@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty-international/nilotpal-chakravarti)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

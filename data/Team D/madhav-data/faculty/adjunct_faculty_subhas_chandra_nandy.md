@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Subhas Chandra Nandy at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Subhas Chandra Nandy
 
 Subhas Chandra Nandy
-Â 
+ 
 PhD (Computer Science), University of Calcutta
 Contact Details
-Â 
+ 
 079-68261717
-Â 
+ 
 # 4105, FB-4, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 subhas_nandy@dau.ac.in
 Biography
 
@@ -43,11 +43,11 @@ Teaching
 
 Algorithms, Data Structure, Computational Geometry, Graph Algorithms, Optimization, Approximation and Randomized Algorithms
 
-## Contact Information
+# Contact Information
 
 - **Email:** subhas_nandy@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/subhas-chandra-nandy)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

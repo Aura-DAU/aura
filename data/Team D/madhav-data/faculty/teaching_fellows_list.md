@@ -7,17 +7,16 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 * Teaching Fellows
   * Past Teaching Fellows
 
-## Main Content
+# Main Content
 
 * Teaching Fellows
   * Past Teaching Fellows
 
-  * 
 
 Anuj budhia
 
@@ -27,7 +26,7 @@ Joining Date : 27/01/2026
 
 Office : TA/RA Room, FB-2, DAU, Gandhinagar, Gujarat, India – 382007
 
-## Related Links
+# Related Links
 
 - [People / Teaching Fellow](https://www.daiict.ac.in/teaching-fellows)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

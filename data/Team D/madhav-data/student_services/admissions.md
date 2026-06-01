@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Admissions page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 Newly Launched Programs
 Admission Enquiry
@@ -109,7 +109,7 @@ CoE, Government of Gujarat
  CoE, GoG application submitted
  Audited Accounts
 NIRF
- INDIA Ranking 2026Â DCS Submitted
+ INDIA Ranking 2026 DCS Submitted
 Other Links
  UGC proforma/Mandatory disclosure 
  e-Procurement 
@@ -202,26 +202,26 @@ Last Updated: 30-05-2026
 Share it
 About Us
 Governance
-Â 
+ 
 Academics
-Â 
+ 
 Research
-Â 
+ 
 People
-Â 
+ 
 Students
-Â 
+ 
 Admissions
-Â 
+ 
 Infrastructure
-Â 
+ 
 Placements
-Â 
+ 
 Careers
-Â 
+ 
 Navigation
 
-## Related Links
+# Related Links
 
 - [Original Page](https://daiict.ac.in/admissions)
 - [Parents](https://daiict.ac.in/parents)

@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Sudip Bera at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Sudip Bera
 
 Sudip Bera
-Â 
+ 
 PhD (Mathematics), Visva-Bharati University, Shantiniketan, West Bengal
 Contact Details
-Â 
+ 
 079-68261632
-Â 
+ 
 # 4201, FB-4, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 sudip_bera@dau.ac.in
-Â 
+ 
 https://sites.google.com/view/sudipbera
 Biography
 
@@ -37,7 +37,7 @@ Algebraic graph theory, Algebraic combinatorics
 
 Publications
 
-(with H. K. Dey) On the proper enhanced power graphs of finite nilpotent groups,Â  Journal of Group Theory 25 (2022) 1109-1131.
+(with H. K. Dey) On the proper enhanced power graphs of finite nilpotent groups,  Journal of Group Theory 25 (2022) 1109-1131.
 
 Teaching
 Linear Algebra
@@ -45,11 +45,11 @@ An introduction to modern algebra
 Calculus
 Real and complex analysis
 
-## Contact Information
+# Contact Information
 
 - **Email:** sudip_bera@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/sudip-bera)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

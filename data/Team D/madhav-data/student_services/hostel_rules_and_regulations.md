@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "Hostel-Rules-and-Regulations"
 ---
 
-## Overview
+# Overview
 
 Rules and Regulations for Halls of Residence at Dhirubhai Ambani University (DAU) / DA-IICT, Gandhinagar. These rules provide a framework of common understanding and mutual concern for all residents.
 
-## Main Content
+# Main Content
 
 ### 1. Room Allocation
 
@@ -134,7 +134,7 @@ Rules and Regulations for Halls of Residence at Dhirubhai Ambani University (DAU
 - Prof. Rutu Parekh, Warden - Women's HOR
 - Dean (Students)
 
-## Related Links
+# Related Links
 
 - [Hostel Rules and Regulations (PDF)](https://daiict.ac.in/sites/default/files/other-files/Hostel-Rules-and-Regulations.pdf)
 - [Disciplinary Rules](https://daiict.ac.in/disciplinary-rules)

@@ -7,20 +7,20 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 We seek strong candidates in any field of mathematics and statistics as well as in any interdisciplinary areas where innovative and principled use of statistics and/or probability is of vital importance. Candidates must have a Ph.D.
 
-## Main Content
+# Main Content
 
-## Mathematics & Statistics
+# Mathematics & Statistics
 
 We seek strong candidates in any field of mathematics and statistics as well as in any interdisciplinary areas where innovative and principled use of statistics and/or probability is of vital importance. Candidates must have a Ph.D. in Statistics or Probability theory from a reputed institution, and a good research record and background. The following sub-areas are currently of special interest:
 
   * Optimization Technique, Mathematical Modeling and Simulation, Probability and Random Processes
   * Causal Inference, High-dimensional Statistics, Statistics of Networks, Bayesian Inference, Bayesian Computation, Missing Data Analysis, Imputation Methodology, Applied Stochastic Processes, Statistical Modelling of Spatio-temporal Data, Analysis of complex observational data
 
-## **Minimum Eligibility Criteria** (all disciplines except design area candidates)
+# **Minimum Eligibility Criteria** (all disciplines except design area candidates)
 
 (**i**) Ph. D. with a first class or equivalent in the preceding degree and an excellent academic record throughout; and
 
@@ -36,7 +36,7 @@ A minimum of six years post-Ph.D. teaching/research/professional experience of w
 
 We also welcome applications from candidates with a strong research background and relevant industry experience.
 
-## **Application Submission Process**
+# **Application Submission Process**
 
 Prospective candidates should send an email to **dean_faculty[at]daiict[dot]ac[dot]in** with Subject as “ _Faculty position in Disciplines/Areas_ (e.g. Computer Science, Humanities & Social Sciences)". Please attach the following to your email:
 
@@ -48,9 +48,9 @@ Prospective candidates should send an email to **dean_faculty[at]daiict[dot]ac[d
 
 Faculty will be responsible for conducting independent research within their respective fields and teaching both undergraduate and postgraduate courses. Candidates with interdisciplinary expertise are strongly encouraged to apply. They will play an important role in contributing to the Institute’s mission through their teaching, research, and participation in various institutional activities.
 
-We encourage candidates to visit the Institute website for more information about the courses and research groups, in particular, the Faculty page, to get a sense of the **[faculty profile](/faculty)**.
+We encourage candidates to visit the Institute website for more information about the courses and research groups, in particular, the Faculty page, to get a sense of the **[faculty profile](https://www.daiict.ac.in/faculty)**.
 
-## Related Links
+# Related Links
 
 - [faculty profile](https://www.daiict.ac.in/faculty)
 

@@ -7,19 +7,19 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Prashant Grover at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Prashant Grover
 
 Prashant Grover
-Â 
+ 
 B.Sc (Hons) - Animation & Multi., Birla Institute of Technology
 Contact Details
-Â 
+ 
 prashant_grover@dau.ac.in
 Biography
 
@@ -29,11 +29,11 @@ Specialization
 
 Animation
 
-## Contact Information
+# Contact Information
 
 - **Email:** prashant_grover@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/prashant-grover)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

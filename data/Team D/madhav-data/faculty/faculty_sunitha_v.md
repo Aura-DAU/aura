@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Sunitha V at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Sunitha V
 
 Sunitha V
-Â 
+ 
 PhD (Mathematics), IIT Madras
 Contact Details
-Â 
+ 
 079-68261563
-Â 
+ 
 # 1212, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 v_suni@dau.ac.in
 Biography
 
@@ -40,11 +40,11 @@ Discrete Mathematics
 Algorithmic Graph Theory
 Parallel, Distributed and Dynamic Algorithms
 
-## Contact Information
+# Contact Information
 
 - **Email:** v_suni@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/sunitha-v)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

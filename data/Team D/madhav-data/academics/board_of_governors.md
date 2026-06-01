@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 The Board of Governors is the highest governing body of Dhirubhai Ambani University (DAU), comprising distinguished leaders from academia, industry, government, and the university administration.
 
-## Main Content
+# Main Content
 
 ### President
 
@@ -45,13 +45,13 @@ The Board of Governors is the highest governing body of Dhirubhai Ambani Univers
 |------|-------------|
 | Mr. Siddharth Swaminarayan | Executive Registrar, Dhirubhai Ambani University, Gandhinagar (ex-officio) |
 
-## Important Information
+# Important Information
 
 - The Board includes representation from academia, industry, government, and university administration
 - Several members serve in an ex-officio capacity by virtue of their institutional roles
 - Government representation includes the Additional Chief Secretary (Higher & Technical Education) and Principal Secretary (Science & Technology) of Gujarat
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Board of Governors](https://daiict.ac.in/board-governors)

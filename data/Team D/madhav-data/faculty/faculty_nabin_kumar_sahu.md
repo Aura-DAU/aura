@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Nabin Kumar Sahu at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Nabin Kumar Sahu
 
 Nabin Kumar Sahu
-Â 
+ 
 PhD (Mathematics), IIT Kharagpur
 Contact Details
-Â 
+ 
 079-68261642
-Â 
+ 
 # 4212, FB-4, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 nabinkumar_sahu@dau.ac.in
 Biography
 
@@ -40,11 +40,11 @@ Calculus
 Optimization
 Numerical Methods
 
-## Contact Information
+# Contact Information
 
 - **Email:** nabinkumar_sahu@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/nabin-kumar-sahu)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

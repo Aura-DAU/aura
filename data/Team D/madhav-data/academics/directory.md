@@ -7,12 +7,12 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 * Extension List
   * Faculty Rooms
 
-## Main Content
+# Main Content
 
 * Extension List
   * Faculty Rooms
@@ -209,7 +209,7 @@ Room No. | Floor | Name | Extn. No.
 211 | First | - | 627  
 212 | First | Nabin Kumar Sahu | 642
 
-## Related Links
+# Related Links
 
 - [Directory](https://www.daiict.ac.in/directory)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

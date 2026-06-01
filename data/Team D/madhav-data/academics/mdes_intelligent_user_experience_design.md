@@ -7,16 +7,16 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
-[Application Process](/admissions-mdes)
+[Application Process](https://www.daiict.ac.in/admissions-mdes)
 
-## Main Content
+# Main Content
 
-[Application Process](/admissions-mdes)
+[Application Process](https://www.daiict.ac.in/admissions-mdes)
 
-  * displayNone M.Des. (IUxD) Overview
-  * displayNone M.Des. (IUxD) Courses
+  * M.Des. (IUxD) Overview
+  * M.Des. (IUxD) Courses
 
 ### M.Des. Program Overview
 
@@ -37,7 +37,7 @@ IUxD specialization emphasizes design-driven innovation in conjunction with broa
 
 Ultimately, the M.Des. in IUxD fosters a new generation of designers who can bridge the gap between intelligent technologies and human needs. By shaping intuitive, ethical, and user-centered experiences, graduates of this program will lead the transformation of digital interactions into meaningful, adaptive, and future-ready solutions.
 
-The program brochure can be found **[here](/sites/default/files/other-files/MDes_IUxD_2026.pdf)**.
+The program brochure can be found **[here](https://www.daiict.ac.in/sites/default/files/other-files/MDes_IUxD_2026.pdf)**.
 
 ### Graduate Outcome
 
@@ -187,14 +187,14 @@ Intelligent User Experience Design is a rapidly evolving field with applications
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](/admissions-mdes)**
+Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](https://www.daiict.ac.in/admissions-mdes)**
 
-## Related Links
+# Related Links
 
 - [Application Process](https://www.daiict.ac.in/admissions-mdes)
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/MDes_IUxD_2026.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

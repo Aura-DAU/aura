@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 The Alumni Association closely collaborates with the institute for strong alumni connect with Alma Mater.
 
-## Main Content
+# Main Content
 
-## Alumni Association
+# Alumni Association
 
 The Alumni Association closely collaborates with the institute for strong alumni connect with Alma Mater.
 
@@ -41,7 +41,7 @@ Prof Sanjay Srivastava | **Faculty Representative**
   
 Alumni association can be reached on alumni_association[at]daiict[dot]ac[dot]in
 
-## Related Links
+# Related Links
 
 - [People / Alumini / Alumini Association](https://www.daiict.ac.in/alumni-association.html)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

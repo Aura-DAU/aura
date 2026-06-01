@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "SOP-Healthcare-Facilities-and-Medical-Emergencies"
 ---
 
-## Overview
+# Overview
 
 Standard Operating Procedure (SOP) for Student Healthcare Facilities and Medical Emergencies at Dhirubhai Ambani University (DAU), Gandhinagar. Reference: DAU/Dean(S)Off./2025-26/03.
 
-## Main Content
+# Main Content
 
 ### 1. Medical Facilities at the Institute
 
@@ -174,7 +174,7 @@ Basic first aid steps may be administered only by persons trained in first aid f
 - **Call Centre:** Phone-based claim assistance
 - **Webmail:** Email-based claim support
 
-## Related Links
+# Related Links
 
 - [Medical SOP (PDF)](https://daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf)
 - [Emergency Contact Details](https://daiict.ac.in/emergency-contact-details)

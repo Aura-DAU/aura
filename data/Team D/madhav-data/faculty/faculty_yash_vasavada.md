@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Yash Vasavada at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Yash Vasavada
 
 Yash Vasavada
-Â 
+ 
 PhD (Electrical Engineering), Virginia Polytechnic Institute and State University, USA
 Contact Details
-Â 
+ 
 079-68261634
-Â 
+ 
 # 1224, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 yash_vasavada@dau.ac.in
-Â 
+ 
 http://intranet.daiict.ac.in/~yash_vasavada/index.html
 https://scholar.google.co.in/citations?user=9KkhfBgAAAAJ&hl=en
 Biography
@@ -48,11 +48,11 @@ Introduction to Communication Systems
 Advanced Digital Communications
 Next Generation Communication Systems
 
-## Contact Information
+# Contact Information
 
 - **Email:** yash_vasavada@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/yash-vasavada)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Jenson Joseph at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Jenson Joseph
 
 Jenson Joseph
-Â 
+ 
 PhD (Communication), University of Hyderabad, Hyderabad
 Contact Details
-Â 
+ 
 079-68261536
-Â 
+ 
 # 3205, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 jenson_joseph@dau.ac.in
 Biography
 
@@ -42,11 +42,11 @@ Introduction to Narratology
 Indian Cinema: Lineages and the Present
 Communication Skills
 
-## Contact Information
+# Contact Information
 
 - **Email:** jenson_joseph@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/jenson-joseph)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

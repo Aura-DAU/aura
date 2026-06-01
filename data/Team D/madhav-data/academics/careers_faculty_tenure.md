@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) invites applications for full-time faculty positions from highly motivated individuals with a good record of conducting independent, high-quality research and a strong commitment to teaching and educating a diverse group of students at both undergraduate and postgraduate levels.
 
-## Main Content
+# Main Content
 
-## Faculty Recruitment
+# Faculty Recruitment
 
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) invites applications for full-time faculty positions from highly motivated individuals with a good record of conducting independent, high-quality research and a strong commitment to teaching and educating a diverse group of students at both undergraduate and postgraduate levels.
 
@@ -21,9 +21,9 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
 
 DA-IICT seeks highly motivated faculty members at the Assistant and Associate Professor levels in the broad areas of Computer Science, Data Science, Electronics and VLSI Design, Mathematics & Statistics, Humanities and Social Sciences, and Design.
 
-[Computer Science](/faculty-positions-computer-science) | [Data Science](/faculty-positions-data-science) | [Electronics and VLSI Design](/faculty-positions-electronics-and-vlsi-design)
+[Computer Science](https://www.daiict.ac.in/faculty-positions-computer-science) | [Data Science](https://www.daiict.ac.in/faculty-positions-data-science) | [Electronics and VLSI Design](https://www.daiict.ac.in/faculty-positions-electronics-and-vlsi-design)
 
-[Mathematics & Statistics](/faculty-positions-mathematics-statistics) | [Humanities and Social Sciences](/faculty-positions-humanities-and-social-sciences) | [Communication Design](/faculty-positions-communication-design)
+[Mathematics & Statistics](https://www.daiict.ac.in/faculty-positions-mathematics-statistics) | [Humanities and Social Sciences](https://www.daiict.ac.in/faculty-positions-humanities-and-social-sciences) | [Communication Design](https://www.daiict.ac.in/faculty-positions-communication-design)
 
 ### **Minimum Eligibility Criteria** (all disciplines except design area candidates)
 
@@ -41,7 +41,7 @@ A minimum of six years post-Ph.D. teaching/research/professional experience of w
 
 We also welcome applications from candidates with a strong research background and relevant industry experience.
 
-## **Application Submission Process**
+# **Application Submission Process**
 
 Prospective candidates should send an email to **dean_faculty[at]daiict[dot]ac[dot]in** with Subject as “ _Faculty position in Disciplines/Areas_ (e.g. Computer Science, Humanities & Social Sciences)". Please attach the following to your email:
 
@@ -53,7 +53,7 @@ Prospective candidates should send an email to **dean_faculty[at]daiict[dot]ac[d
 
 Faculty will be responsible for conducting independent research within their respective fields and teaching both undergraduate and postgraduate courses. Candidates with interdisciplinary expertise are strongly encouraged to apply. They will play an important role in contributing to the Institute’s mission through their teaching, research, and participation in various institutional activities.
 
-We encourage candidates to visit the Institute website for more information about the courses and research groups, in particular, the Faculty page, to get a sense of the **[faculty profile](/faculty)**.
+We encourage candidates to visit the Institute website for more information about the courses and research groups, in particular, the Faculty page, to get a sense of the **[faculty profile](https://www.daiict.ac.in/faculty)**.
 
 ### **About the Institute**
 
@@ -74,9 +74,9 @@ The Institute has over 1700 undergraduate students and 600 postgraduate students
 
 For details of academic programmes offered by DA-IICT
 
-  * **[Click here for UG](/programs-of-study)**
-  * **[Click here for PG](/programs-of-study#tab-2)**
-  * **[Click here for PhD](/programs-of-study#tab-3)**
+  * **[Click here for UG](https://www.daiict.ac.in/programs-of-study)**
+  * **[Click here for PG](https://www.daiict.ac.in/programs-of-study#tab-2)**
+  * **[Click here for PhD](https://www.daiict.ac.in/programs-of-study#tab-3)**
 
 #### **Academics and Teaching Infrastructure**
 
@@ -86,13 +86,13 @@ Faculty members are engaging in teaching of 3 courses in one academic year. Two 
 
 DA-IICT stands for a confluence of several interrelated disciplines, from technology and basic sciences to humanities and social sciences catering to both academia and industry. Our aim is to encourage basic, applied and developing ‎research conducted both by students and members of faculty alike. Our encouragement clearly reflects in the policies we have set up for research activities and professional development. Although the needs of our faculty are as diverse as the disciplines they represent, they however share the common goal of building their capacities to generate new ideas and ways of understanding the world.
 
-DA-IICT’s infrastructure, ranging from various well-equipped laboratories to Resource Centre (which provides online access to major digital libraries, including those of ACM, IEEE, Springer LNCS, JSTOR) matches the general expectations of inter-disciplinary research. Need-based funding is provided for setting up laboratories and acquiring new equipment. The faculty is also encouraged to seek out latest opportunities for research collaboration and funding. Partnerships with industry are a priority for DA-IICT. Besides, all efforts by faculty to participate in bilateral, international and multi-institutional research grants aimed at solving critical problems will be duly supported. There is provision for consulting work for which faculty members can avail one day per week. For details on our research activities,[visit this page.](/research-overview) Faculty publication list is [here.](/faculty-publications)
+DA-IICT’s infrastructure, ranging from various well-equipped laboratories to Resource Centre (which provides online access to major digital libraries, including those of ACM, IEEE, Springer LNCS, JSTOR) matches the general expectations of inter-disciplinary research. Need-based funding is provided for setting up laboratories and acquiring new equipment. The faculty is also encouraged to seek out latest opportunities for research collaboration and funding. Partnerships with industry are a priority for DA-IICT. Besides, all efforts by faculty to participate in bilateral, international and multi-institutional research grants aimed at solving critical problems will be duly supported. There is provision for consulting work for which faculty members can avail one day per week. For details on our research activities,[visit this page.](https://www.daiict.ac.in/research-overview) Faculty publication list is [here.](https://www.daiict.ac.in/faculty-publications)
 
 #### **Quality of Living**
 
 Gandhinagar is organized into well laid out sectors and, in the sectors adjoining the Institute, a good choice of houses is available for rent. There are several schools in Gandhinagar, including Central Board schools like DPS, Gandhinagar, Hillwoods, Podar, Jamnabai Narsee school. More options for housing and schooling are available in Ahmedabad, which is only 30 km from the campus (within easy driving distance). Healthcare support includes a visiting doctor on the campus, a network of consulting doctors, and arrangement with hospitals, such as the Apollo.
 
-Being a capital city, Gandhinagar enjoys the uninterrupted water and power supply throughout the year. The airport and the railway station, both located in Ahmedabad, are within easy reach from the campus in Gandhinagar (20 minutes drive to the airport and about 50 minutes drive to the railway station). The airport has international connectivity, with direct flights to Europe and the USA. For more on Gandhinagar/Ahmedabad [**click here**.](/contact-0)
+Being a capital city, Gandhinagar enjoys the uninterrupted water and power supply throughout the year. The airport and the railway station, both located in Ahmedabad, are within easy reach from the campus in Gandhinagar (20 minutes drive to the airport and about 50 minutes drive to the railway station). The airport has international connectivity, with direct flights to Europe and the USA. For more on Gandhinagar/Ahmedabad [**click here**.](https://www.daiict.ac.in/contact-0)
 
 #### **Salary per year in Cost to the Institute (CTI) format**
 
@@ -107,12 +107,12 @@ Assistant Professor: Minimum starting salary is **Rs. 17 Lakh** per annum
   * Medical support: Doctors on campus. Basic medicines are disbursed from the Medical Centre.
   * Accident Insurance Coverage ranging from Rs. 4.00 lakh to Rs. 12.00 lakh. Premium paid by the Institute.
   * Leave benefits: Eligible for 8 days of casual leave; 60 days’ vacation in a year – if not availed, converted to 30 days of earned leave. Earned leave is cashable on cessation of employment.
-  * Career Progression: The Institute has a well-articulated career progression **[policy](/sites/default/files/other-files/Faculty-Promotion-Policy.pdf)**.
+  * Career Progression: The Institute has a well-articulated career progression **[policy](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Promotion-Policy.pdf)**.
   * Teaching Load: Three courses teaching load in an academic year. For new joinee, two courses (one in each semester) teaching load for the first year, and then three courses in the subsequent year.
   * Research Incentives: Financial reward of Rs. 1 Lakh for publications in A*/A conferences and Q1 journals.
   * Collaborative Research: Encouraged to do collaborative research with industry and academia in India and abroad.
 
-## Related Links
+# Related Links
 
 - [Computer Science](https://www.daiict.ac.in/faculty-positions-computer-science)
 - [Data Science](https://www.daiict.ac.in/faculty-positions-data-science)
@@ -130,7 +130,7 @@ Assistant Professor: Minimum starting salary is **Rs. 17 Lakh** per annum
 - [click here.](https://www.daiict.ac.in/contact-0)
 - [policy](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Promotion-Policy.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

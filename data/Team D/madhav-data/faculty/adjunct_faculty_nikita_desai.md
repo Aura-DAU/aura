@@ -7,21 +7,21 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Nikita Desai at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Nikita Desai
 
 Nikita Desai
-Â 
+ 
 PhD (Design), DA-IICT Gandhinagar
 Contact Details
-Â 
+ 
 +91 9825169337
-Â 
+ 
 nikita_d@dau.ac.in
 nikitadesai82@gmail.com
 Biography
@@ -44,11 +44,11 @@ Research
 
 Interactive Space Design Immersive Technologies and Strategy Communication, Space, and Design
 
-## Contact Information
+# Contact Information
 
 - **Email:** nikita_d@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/nikita-desai)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

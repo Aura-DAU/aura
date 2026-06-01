@@ -7,19 +7,19 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for K Narayana Chandran at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### K Narayana Chandran
 
 K Narayana Chandran
-Â 
+ 
 PhD, Indian Institute of Technology Bombay
 Contact Details
-Â 
+ 
 knarayana_chandran@dau.ac.in
 Specialization
 
@@ -31,11 +31,11 @@ Minor Specialization:
 
 Translation; Allusion, intertextuality and intergenres; Short Narrative Forms including short fiction; Reading Relations ...
 
-## Contact Information
+# Contact Information
 
 - **Email:** knarayana_chandran@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/k-narayana-chandran)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

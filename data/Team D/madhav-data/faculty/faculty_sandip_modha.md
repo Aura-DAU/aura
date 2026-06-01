@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Sandip Modha at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Sandip Modha
 
 Sandip Modha
-Â 
+ 
 PhD, DA-IICT Gandhinagar
 Contact Details
-Â 
+ 
 079-68261672
-Â 
+ 
 # 2201, FB-2, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 sandip_modha@dau.ac.in
-Â 
+ 
 https://scholar.google.com/citations?user=J0lkcsQAAAAJ
 Biography
 
@@ -53,11 +53,11 @@ Teaching
 Information Retrieval
 Natural Language Processing
 
-## Contact Information
+# Contact Information
 
 - **Email:** sandip_modha@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/sandip-modha)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

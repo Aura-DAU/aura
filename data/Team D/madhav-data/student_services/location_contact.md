@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Contact information, location details, and a comprehensive guide to the city of Gandhinagar and nearby Ahmedabad for students, faculty, and visitors of DA-IICT.
 
-## Contact Information
+# Contact Information
 
 | Detail       | Information                                           |
 |--------------|-------------------------------------------------------|
@@ -28,13 +28,13 @@ Contact information, location details, and a comprehensive guide to the city of 
 - [YouTube](https://www.youtube.com/daboratory)
 - [LinkedIn](https://www.linkedin.com/school/daboratory)
 
-## How to Reach Us
+# How to Reach Us
 
 - **DA-IICT Campus Map** is available on the website
 - **Airport:** ~20 minutes drive from campus (Ahmedabad International Airport with direct flights to Europe and the USA)
 - **Railway Station:** ~50 minutes drive to Kalupur Railway Station (main railway station in Ahmedabad)
 
-## The City â€” Gandhinagar
+# The City â€” Gandhinagar
 
 Gandhinagar is the capital city of Gujarat, established as a modernized twin city for Ahmedabad. It was visualised as a planned city along the lines of:
 
@@ -146,13 +146,13 @@ The climate is normally dry apart from the monsoon season.
 - Gandhi Ashram (Sabarmati)
 - Calico Museum of Textiles (Shahibaugh)
 
-## Important Information
+# Important Information
 
 - DA-IICT is located in Gandhinagar, the capital of Gujarat
 - The campus is ~20 min from the airport and ~50 min from Kalupur Railway Station
 - Gandhinagar and Ahmedabad enjoy uninterrupted water and power supply year-round
 - The airport has international connectivity with direct flights to Europe and the USA
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)

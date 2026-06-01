@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Arpita Mal at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Arpita Mal
 
 Arpita Mal
-Â 
+ 
 PhD (Mathematics), Jadavpur University, Kolkata
 Contact Details
-Â 
+ 
 079-68261660
-Â 
+ 
 # 3104, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 arpita_mal@dau.ac.in
 Biography
 
@@ -42,11 +42,11 @@ Research
 
 Mathematics, Functional Analysis, Geometry of Banach Space.
 
-## Contact Information
+# Contact Information
 
 - **Email:** arpita_mal@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/arpita-mal)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

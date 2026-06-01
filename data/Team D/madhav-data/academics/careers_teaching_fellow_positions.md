@@ -7,11 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Here is your opportunity to be part of an inspiring academic environment at **Dhirubhai Ambani University**.
 
-## Main Content
+# Main Content
 
 ### **Teaching Fellow Positions Open at DAU**
 
@@ -46,7 +46,7 @@ _**If you’re driven by curiosity, research, and teaching, this could be the pe
 
 [Teaching Fellow Positions Open at DAU](https://forms.gle/uz2z4RWWtkRJW8ZE6)
 
-## Related Links
+# Related Links
 
 - [Application form submission link](https://forms.gle/uz2z4RWWtkRJW8ZE6)
 

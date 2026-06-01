@@ -7,13 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Dr. Tathagata Bandyopadhyay serves as the Director General of Dhirubhai Ambani University (formerly DA-IICT), bringing extensive academic and research experience in Statistics.
 
-## Main Content
+# Main Content
 
-[Image Present: Dr. Tathagata Bandyopadhyay]
+
 
 ### Dr. Tathagata Bandyopadhyay
 
@@ -52,14 +52,14 @@ Dr. Bandyopadhyay has extensive teaching experience and has visited several pres
 - Supervised numerous **PhD students**
 - Served as a member of the **PhD Dissertation Committee** at the University of Calcutta and IIMA
 
-## Important Information
+# Important Information
 
 - Dr. Bandyopadhyay is a distinguished statistician with over 70 published research articles
 - He has international academic experience across universities in the USA, Canada, Sweden, and Singapore
 - He previously served as Dean (Faculty) and Professor at IIM Ahmedabad
 - He has been editing the Calcutta Statistical Association Bulletin since 2009
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Director General Page](https://daiict.ac.in/director)

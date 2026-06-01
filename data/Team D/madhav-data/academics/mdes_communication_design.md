@@ -7,16 +7,16 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
-[Application Process](/admissions-mdes)
+[Application Process](https://www.daiict.ac.in/admissions-mdes)
 
-## Main Content
+# Main Content
 
-[Application Process](/admissions-mdes)
+[Application Process](https://www.daiict.ac.in/admissions-mdes)
 
-  * displayNone M.Des. (CD) Overview
-  * displayNone M.Des. (CD) Courses
+  * M.Des. (CD) Overview
+  * M.Des. (CD) Courses
 
 ### M.Des. Program Overview
 
@@ -35,7 +35,7 @@ This distinctive interdisciplinary specialization integrates Visual Design (film
 
 DA-IICT's M.Des. (CD) specialization prepares students to become strategic design thinkers, moving beyond tool-driven approaches. By focusing on critical and contextual understanding, students learn to identify, articulate, and solve context-specific design challenges with effective multimedia interventions, even amidst the rise of advanced AI-driven facilitation tools.
 
-The program brochure can be found **[here](/sites/default/files/other-files/MDes-CD_Brochure-25.pdf)**.
+The program brochure can be found **[here](https://www.daiict.ac.in/sites/default/files/other-files/MDes-CD_Brochure-25.pdf)**.
 
 ### Graduate Outcomes
 
@@ -214,14 +214,14 @@ These comprehensive learning outcomes enable M.Des. (CD) graduates to secure div
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](/admissions-mdes)**
+Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](https://www.daiict.ac.in/admissions-mdes)**
 
-## Related Links
+# Related Links
 
 - [Application Process](https://www.daiict.ac.in/admissions-mdes)
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/MDes-CD_Brochure-25.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

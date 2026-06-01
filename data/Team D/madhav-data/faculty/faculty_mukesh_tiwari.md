@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Mukesh Tiwari at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Mukesh Tiwari
 
 Mukesh Tiwari
-Â 
+ 
 PhD (Optical Science & Engineering), University of New Mexico, USA
 Contact Details
-Â 
+ 
 079-68261614
-Â 
+ 
 # 1112, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 mukesh_tiwari@dau.ac.in
-Â 
+ 
 https://sites.google.com/view/mtiwari
 Biography
 
@@ -44,11 +44,11 @@ Introduction to Complex Networks
 Electromagnetic Theory
 Time Series Analysis
 
-## Contact Information
+# Contact Information
 
 - **Email:** mukesh_tiwari@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/mukesh-tiwari)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

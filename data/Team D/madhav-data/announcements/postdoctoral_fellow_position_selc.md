@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Recruitment announcement for a Post-doctoral Fellow position at the Smart Energy Learning Centre (SELC) at Dhirubhai Ambani University, funded by BSES Delhi. The project focuses on improving efficiency of solar energy harvesting using metasurface design.
 
-## Main Content
+# Main Content
 
 ### Post-doctoral Fellow: RF-Microwave Smart Energy Learning Centre
 
@@ -74,7 +74,7 @@ During the interview, candidates' knowledge will be assessed in the areas of RF-
 | Tentative Interview Date | Week starting from 21st May, 2026 (Hybrid/Online) |
 | Expected Joining Date | 1st June 2026 or after |
 
-## Important Information
+# Important Information
 
 - **Position**: Post-doctoral Fellow (1 post)
 - **Fellowship**: INR 75,000 per month
@@ -85,11 +85,11 @@ During the interview, candidates' knowledge will be assessed in the areas of RF-
 - **Application Deadline**: 20th May, 2026
 - **No age limit** for applicants
 
-## Contact Information
+# Contact Information
 
 - **PI Email**: pankaj_kumar[at]dau[dot]ac[dot]in
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Original Posting](https://www.daiict.ac.in/node/7076)

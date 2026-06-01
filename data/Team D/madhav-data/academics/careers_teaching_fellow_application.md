@@ -7,11 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 This document contains the schema and details of the online application form for Teaching Fellow positions for Academic Year 2026-27 at Dhirubhai Ambani University.
 
-## Main Content
+# Main Content
 
 ### Teaching Fellow Application AY2026-27
 
@@ -37,7 +37,7 @@ This application is hosted on Google Forms and is used by the university adminis
 | **Area of Interest** | Radio Choice | Required. Options:<br>• Computer Science & Information Technology<br>• Data Science & Artificial Intelligence<br>• Electronics & Communication Engineering<br>• Electronics and VLSI<br>• Humanities and Social Sciences (HSS) |
 | **Attach your CV** | File Upload | Required (Max 10 MB) |
 
-## Related Links
+# Related Links
 
 - [Google Form - Teaching Fellow Application AY2026-27](https://forms.gle/uz2z4RWWtkRJW8ZE6)
 - [DAU Teaching Fellow Careers Page](https://www.daiict.ac.in/teaching-fellow-positions-open-dau)

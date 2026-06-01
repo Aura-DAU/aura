@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Achievements page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 An Achievement of recent B.Tech. Graduates Shashank Upadhyay and Natvar Prajapati
 06 Oct, 2025
@@ -50,7 +50,7 @@ Next page
 Last page
 Last Â»
 
-## Related Links
+# Related Links
 
 - [Original Page](https://daiict.ac.in/achievements)
 - [Parents](https://daiict.ac.in/parents)

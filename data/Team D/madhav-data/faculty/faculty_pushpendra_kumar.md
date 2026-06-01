@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Pushpendra Kumar at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Pushpendra Kumar
 
 Pushpendra Kumar
-Â 
+ 
 PhD (Mathematics), National Institute of Technology Puducherry
 Contact Details
-Â 
+ 
 079-68261649
-Â 
+ 
 # 4109, FB-4, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 pushpendra_kumar@dau.ac.in
-Â 
+ 
 https://scholar.google.com/citations?user=qKRnDacAAAAJ&hl=en
 Biography
 
@@ -45,11 +45,11 @@ Differential Equations; B.Tech. (MEC) 1st year, 2023, NIT Puducherry
 Transforms and Complex Analysis; B.Tech. (ECE) 2nd year, 2022, NIT Puducherry
 Differential Equations and Laplace Transforms; B.Tech. (EEE) 1st year, 2022, NIT Puducherry
 
-## Contact Information
+# Contact Information
 
 - **Email:** pushpendra_kumar@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/pushpendra-kumar)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

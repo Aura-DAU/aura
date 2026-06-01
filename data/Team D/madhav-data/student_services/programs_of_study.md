@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Programs of Study at Dhirubhai Ambani University (DAU), formerly DA-IICT, Gandhinagar. The University offers undergraduate, dual degree, postgraduate, and doctoral programs across Information and Communication Technology, Computer Science, Electronics, Mathematics, Data Science, Design, and allied disciplines.
 
-## Main Content
+# Main Content
 
 ### Undergraduate Programs
 
@@ -96,7 +96,7 @@ Dhirubhai Ambani University offers an intense Doctor of Philosophy (Ph.D.) progr
 
 - Financial assistance is provided to **all Ph.D. (Regular) students** who have enrolled as full-time students in the form of Teaching Assistantships
 
-## Important Information
+# Important Information
 
 - **Total UG Programs:** 6 (including 2 new from AY 2026-27)
 - **Total Dual Degree Programs:** 2 (5-year integrated)
@@ -105,7 +105,7 @@ Dhirubhai Ambani University offers an intense Doctor of Philosophy (Ph.D.) progr
 - **University established:** 2001
 - **New programs AY 2026-27:** B.Tech. (CS and AI), B.Tech. (ECE-AI)
 
-## Related Links
+# Related Links
 
 - [Programs of Study](https://daiict.ac.in/programs-of-study)
 - [Admissions](https://daiict.ac.in/admissions)

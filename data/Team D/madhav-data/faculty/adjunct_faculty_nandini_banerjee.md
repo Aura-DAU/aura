@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Nandini Banerjee at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Nandini Banerjee
 
 Nandini Banerjee
-Â 
+ 
 MA, M.Phil, PhD (International Economics), MA psychology in Psychotherapy and Counselling
 Contact Details
-Â 
+ 
 079-68261620
-Â 
+ 
 # 2110, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 nandini_banerjee@dau.ac.in
 Biography
 
@@ -55,11 +55,11 @@ Human Behavior Management
 Soft Skills
 Economics
 
-## Contact Information
+# Contact Information
 
 - **Email:** nandini_banerjee@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/nandini-banerjee)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

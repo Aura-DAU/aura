@@ -7,26 +7,26 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Yash Agrawal at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Yash Agrawal
 
 Yash Agrawal
-Â 
+ 
 PhD (Electronics & Communication), NIT Hamirpur
 Contact Details
-Â 
+ 
 079-68261629, 9882114669
-Â 
+ 
 # 1101, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 yash_agrawal@dau.ac.in
 mr.yashagrawal@gmail.com
-Â 
+ 
 http://www.linkedin.com/in/yash-agrawal-525b021a/
 Biography
 
@@ -52,11 +52,11 @@ Introduction to Digital Design
 Introduction to VLSI Circuits
 Engineering Design Workshop
 
-## Contact Information
+# Contact Information
 
 - **Email:** yash_agrawal@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/yash-agrawal)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

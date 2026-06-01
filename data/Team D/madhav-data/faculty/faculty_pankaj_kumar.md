@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Pankaj Kumar at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Pankaj Kumar
 
 Pankaj Kumar
-Â 
+ 
 PhD (RF & Microwave), NIT Patna
 Contact Details
-Â 
+ 
 079-68261705
-Â 
+ 
 # 3201, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 pankaj_kumar@dau.ac.in
-Â 
+ 
 https://scholar.google.co.in/citations?user=FwCfbOoAAAAJ&hl=en
 https://www.researchgate.net/profile/Pankaj-Kumar-207
 Biography
@@ -45,11 +45,11 @@ Teaching
 https://scholar.google.co.in/citations?user=FwCfbOoAAAAJ&hl=en
 https://www.researchgate.net/profile/Pankaj-Kumar-207
 
-## Contact Information
+# Contact Information
 
 - **Email:** pankaj_kumar@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/pankaj-kumar)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

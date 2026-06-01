@@ -7,21 +7,21 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Gangeya Mukherji at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Gangeya Mukherji
 
 Gangeya Mukherji
-Â 
+ 
 PhD (The Vision of India in Tagore and Vivekananda), University of Allahabad
 Contact Details
-Â 
+ 
 079-68261683
-Â 
+ 
 gangeya_mukherji@dau.ac.in
 Biography
 
@@ -41,17 +41,17 @@ Contributions to Volumes
 Ongoing and Future Projects
 Fifteen thousand-word essay entitled, "Each Oneâ€™s Gandhi: Critiquing, Enlisting, or Recording Gandhiâ€™s Life" [manuscript ID ENGHIS-2025-ART-089] submitted for consideration to The English Historical Review. Oxford: Oxford University Press. Peer Review report awaited.
 Papers
-â€˜Behind Tagoreâ€™s Response to the Poona Pact: Memory. Allegiance. Anxietyâ€™, The Journal of Hindu Studies, Oxford: Oxford University Press. https://doi.org/10.1093/jhs/hiaf004Â 
+â€˜Behind Tagoreâ€™s Response to the Poona Pact: Memory. Allegiance. Anxietyâ€™, The Journal of Hindu Studies, Oxford: Oxford University Press. https://doi.org/10.1093/jhs/hiaf004 
 Book reviews
 Gandhi: The End of Non-Violence,Manash Firaq Bhattacharjee, Gurugram: Vintage, 2025, in Biblio: A Review of Books, New Delhi, Vol. 30, Nos. 7-9, July-September, 2025, p. 8. (forthcoming)
 Commissioned papers
 â€˜Statement of Outstanding Universal Value and Justification of Criteriaâ€™ as Consultant for the team preparing the Dossier for the Ministry of Culture, Government of India, for the nomination of Santiniketan as a UNESCO World Heritage Site in 2009.
 
-## Contact Information
+# Contact Information
 
 - **Email:** gangeya_mukherji@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/gangeya-m)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

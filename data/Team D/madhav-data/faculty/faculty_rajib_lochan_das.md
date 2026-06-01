@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Rajib Lochan Das at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Rajib Lochan Das
 
 Rajib Lochan Das
-Â 
+ 
 PhD (Electronics & Electrical Communication Engineering), IIT Kharagpur
 Contact Details
-Â 
+ 
 079-68261597
-Â 
+ 
 # 4202, FB-4, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 rajib_das@dau.ac.in
-Â 
+ 
 https://sites.google.com/site/rajiblochandasiit/
 https://www.linkedin.com/in/dr-rajib-lochan-das-b69b3041/
 Biography
@@ -43,11 +43,11 @@ Advanced Digital Signal Processing
 Adaptive Signal Processing
 Control Systems
 
-## Contact Information
+# Contact Information
 
 - **Email:** rajib_das@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/rajib-lochan-das)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

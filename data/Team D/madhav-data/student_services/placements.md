@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Placement Cell page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 Why Recruit at DAU? | Team | Placement Events | Placement and Internship Affairs Action Committee | Student Placement Cell | Placement Statistics | Audit Reports as per Indian Placement Reporting Standards | Placement Brochure | Recruiters | Contact us
 
@@ -23,7 +23,7 @@ Placement activities at Dhirubhai Ambani University (DAU) are built on a foundat
 
 DAU is distinguished by its unique Placement and Internship Affairs Action Committee (PIAAC)â€”a dedicated body operating alongside the regular Disciplinary Action Committee (DAC). PIAAC plays a crucial role in ensuring that the placement ecosystem remains fair, ethical, and student-centric, while also supporting employers in smooth engagement.
 
-Â 
+ 
 
 Our students undergo rigorous and continuous preparation, including:
 Training in pre-placement tests, group discussions, debates, and interviews
@@ -61,7 +61,7 @@ Students undergo continuous hands-on learning through summer, winter, and rural 
 
 Recruiters:
 
-Â 
+ 
 
 Placement Cell: Team
 
@@ -249,11 +249,11 @@ Contact
 Mr. Souvik Sarkar
 Head - Career Planning, Placement & Marketing
 
-Email:Â head_cpm[at]dau[dot]ac[dot]in
+Email: head_cpm[at]dau[dot]ac[dot]in
 
 Phone: (+91) 079-68261609, (+91) 9320301228
 
-## Related Links
+# Related Links
 
 - [Original Page](https://daiict.ac.in/placements)
 - [Parents](https://daiict.ac.in/parents)

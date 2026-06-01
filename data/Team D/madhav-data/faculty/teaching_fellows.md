@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Listing of Teaching Fellows at Dhirubhai Ambani University (DAU) / DA-IICT, Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Current Teaching Fellows
 
@@ -23,7 +23,7 @@ Listing of Teaching Fellows at Dhirubhai Ambani University (DAU) / DA-IICT, Gand
 
 The page also has a tab for Past Teaching Fellows (no entries currently listed).
 
-## Related Links
+# Related Links
 
 - [Teaching Fellows Page](https://daiict.ac.in/teaching-fellows)
 - [Faculty](https://daiict.ac.in/faculty)

@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "Student_Leave_Policy_wef_AY2021-22"
 ---
 
-## Overview
+# Overview
 
 Student Leave Policy at Dhirubhai Ambani University (DAU) / DA-IICT, Gandhinagar. Effective from Academic Year 2021-22.
 
-## Main Content
+# Main Content
 
 ### Student Leave Policy
 
@@ -40,7 +40,7 @@ Students who are unable to appear in part or whole of in-semester or end-semeste
 - Instruction or schedule for re-examination/assessment will be communicated to the student by Controller of Examinations or faculty concerned, as appropriate
 - **If a student misses re-examination/assessment, then there will not be any further adjustment**
 
-## Important Information
+# Important Information
 
 - **Effective from:** Academic Year 2021-22
 - **Key rule:** No formal leave concept â€” attendance requirements must be followed
@@ -48,7 +48,7 @@ Students who are unable to appear in part or whole of in-semester or end-semeste
 - **Exam leave deadline:** Application within 3 days of missing exam
 - **No second chances:** Missing a re-examination means no further adjustment
 
-## Related Links
+# Related Links
 
 - [Student Leave Policy (PDF)](https://daiict.ac.in/sites/default/files/other-files/Student_Leave_Policy_wef_AY2021-22.pdf)
 - [Examination Rules](https://daiict.ac.in/examination-rules)

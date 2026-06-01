@@ -7,13 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 The Organogram page presents the organizational hierarchy of Dhirubhai Ambani University (DAU), outlining the governance structure from the President down to the Faculty and Deans.
 
-## Main Content
+# Main Content
 
-[Image Present: DAU Organogram 2025]
+
 
 ### Organizational Hierarchy
 
@@ -79,7 +79,7 @@ Technology    of Law            Registrar
 | **Dean (Students)** | Director General |
 | **Dean (Alumni & External Relations)** | Director General |
 
-## Important Information
+# Important Information
 
 - The university follows a hierarchical governance model headed by the **President**
 - The **Board of Governors** oversees the **Director General**
@@ -88,7 +88,7 @@ Technology    of Law            Registrar
 - Six Deans handle specialized academic and student functions
 - Faculty members serve under the Directors (Technology and Law)
 
-## Related Links
+# Related Links
 
 - [President](https://daiict.ac.in/president)
 - [Board of Governors](https://daiict.ac.in/board-governors)

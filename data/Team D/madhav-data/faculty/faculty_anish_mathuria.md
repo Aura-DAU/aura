@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Anish Mathuria at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Anish Mathuria
 
 Anish Mathuria
-Â 
+ 
 PhD (Computer Science), University of Wollongong, Australia
 Contact Details
-Â 
+ 
 079-68261541
-Â 
+ 
 # 1105, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 anish_mathuria@dau.ac.in
-Â 
+ 
 DAIICT
 Biography
 
@@ -42,11 +42,11 @@ Teaching
 Blockchains and Cryptocurrencies
 Operating Systems
 
-## Contact Information
+# Contact Information
 
 - **Email:** anish_mathuria@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/anish-mathuria)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

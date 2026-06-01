@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Rachit Chhaya at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Rachit Chhaya
 
 Rachit Chhaya
-Â 
+ 
 PhD (Computer Science), IIT Gandhinagar
 Contact Details
-Â 
+ 
 079-68261708
-Â 
+ 
 # 3109, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 rachit_chhaya@dau.ac.in
-Â 
+ 
 https://sites.google.com/view/rachitchhaya/
 https://www.linkedin.com/in/rachit-chhaya-1817a25b/
 Biography
@@ -47,11 +47,11 @@ Teaching
 
 I have been TA for courses like Machine Learning, Scalable Data Science (NPTEL), Algorithms
 
-## Contact Information
+# Contact Information
 
 - **Email:** rachit_chhaya@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/rachit-chhaya)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

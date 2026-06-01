@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Grievance Redressal Cell (Students and Employees) page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 Grievance Redressal Procedure for Students and Employees
 
@@ -38,7 +38,7 @@ Note: Matters related to Disciplinary Action Committee and Gender Cell are out o
 4. Grievance Handling and Resolution Procedure
 5. Confidentiality and Prevention of Grievance
 
-## Related Links
+# Related Links
 
 - [Original Page](https://daiict.ac.in/grievance-redressal-cell)
 - [Parents](https://daiict.ac.in/parents)

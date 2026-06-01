@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Manoj Raut at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Manoj Raut
 
 Manoj Raut
-Â 
+ 
 PhD (Mathematics), IIT Madras
 Contact Details
-Â 
+ 
 079-68261585
-Â 
+ 
 # 4112, FB-4, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 manoj_raut@dau.ac.in
 Specialization
 
@@ -36,11 +36,11 @@ Logic in Computer Science
 Discrete Mathematics
 Coding Theory
 
-## Contact Information
+# Contact Information
 
 - **Email:** manoj_raut@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/manoj-raut)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

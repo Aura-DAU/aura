@@ -7,13 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 The Dean of Students at DAU oversees holistic student development through extra-curricular activities, 8 committees, 22 student clubs, hostel management, and disciplinary matters. The current Dean is Dr. P S Kalyan Sasidhar.
 
-## Main Content
+# Main Content
 
-[Image Present: Dr. P S Kalyan Sasidhar - Dean of Students]
+
 
 ### Message from the Dean (Students)
 
@@ -42,7 +42,7 @@ The Dean of Students at DAU oversees holistic student development through extra-
 
 ---
 
-## Student Body Government (SBG)
+# Student Body Government (SBG)
 
 The students of DAU have constituted a self-governing democratic organization called DAU Student Body Government to achieve the following:
 
@@ -65,7 +65,7 @@ The Student Body Government consists of **8 committees** and **22 hobby-driven c
 
 ---
 
-## Research Body Government (RBG)
+# Research Body Government (RBG)
 
 A student body exclusively by and for the PhD students of DAU SoT and SoL. The RBG is a semi-autonomous representative body that safeguards the academic, professional, and personal well-being of research scholars, promotes inclusion, and ensures transparent communication between scholars, faculty, and administration.
 
@@ -83,7 +83,7 @@ A student body exclusively by and for the PhD students of DAU SoT and SoL. The R
 
 ---
 
-## Student Committees
+# Student Committees
 
 ### Academic Committee
 
@@ -156,7 +156,7 @@ Acts as a bridge between the student community and the placement office. Organiz
 
 ---
 
-## Student Clubs
+# Student Clubs
 
 ### AI Club
 
@@ -338,7 +338,7 @@ Organizes hands-on workshops, Capture The Flag events, and discussions related t
 
 ---
 
-## Hostel Wardens
+# Hostel Wardens
 
 | Name | Designation | Email | Phone |
 |------|-------------|-------|-------|
@@ -356,14 +356,14 @@ Organizes hands-on workshops, Capture The Flag events, and discussions related t
 
 ---
 
-## Anti-Ragging Information
+# Anti-Ragging Information
 
 - [National Ragging Prevention Programme](https://www.daiict.ac.in/dean-students)
 - Anti-Ragging Committee & Squad details available on the university website
 
 ---
 
-## Hostel FAQs
+# Hostel FAQs
 
 **1. How are the hostels of DAU?**
 DAU has Men's Halls of Residence with capacity of almost 1500 residents (double and triple rooms). Women's Halls of Residence has a capacity of 400 residents (twin sharing rooms). Hostel accommodation on campus is only for B.Tech programs. For other UG/PG programs, allocation is subject to availability.
@@ -384,11 +384,11 @@ No. Common washrooms are available on all floors of the hostels.
 Men's HoR are fully covered with CCTVs. Women's HoR has round-the-clock female security guard and CCTV coverage at entry-exit points.
 
 **7. Is there a Mess in the Hostel?**
-No. Multiple cafeterias on campus offer food on an Ã  la carte basis.
+No. Multiple cafeterias on campus offer food on an Ã  la carte basis.
 
 ---
 
-## Disciplinary Action Committee (DAC)
+# Disciplinary Action Committee (DAC)
 
 The DAC comprises the Dean Students, Hostel Wardens (Men and Women), and Deputy Registrar. It strives to establish and enforce policies related to student conduct, ensuring a safe and inclusive campus environment.
 
@@ -406,7 +406,7 @@ The DAC comprises the Dean Students, Hostel Wardens (Men and Women), and Deputy 
 - Curbing Ragging
 - Rules and Regulations: Halls of Residence
 
-## Important Information
+# Important Information
 
 - DAU has **8 student committees** and **22 student clubs** under the SBG
 - The **Research Body Government (RBG)** serves PhD students exclusively
@@ -415,7 +415,7 @@ The DAC comprises the Dean Students, Hostel Wardens (Men and Women), and Deputy 
 - The Dean (Students) is reachable to students and parents at all times
 - Contact Dean (Students): dean_students[at]dau[dot]ac[dot]in
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Dean Students Page](https://www.daiict.ac.in/dean-students)

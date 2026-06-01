@@ -7,14 +7,14 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 * [Faculty](https://www.daiict.ac.in/faculty)
   * [Adjunct Faculty](https://www.daiict.ac.in/adjunct-faculty)
   * [Distinguished Professor](https://www.daiict.ac.in/distinguished-professor)
   * [Professor of Practice](https://www.daiict.ac.in/professor-practice)
 
-## Main Content
+# Main Content
 
 * [Faculty](https://www.daiict.ac.in/faculty)
   * [Adjunct Faculty](https://www.daiict.ac.in/adjunct-faculty)
@@ -22,34 +22,7 @@ team: "Team D"
   * [Professor of Practice](https://www.daiict.ac.in/professor-practice)
 
   * All
-  * [A](javascript:void\(0\))
-  * [B](javascript:void\(0\))
-  * [C](javascript:void\(0\))
-  * [D](javascript:void\(0\))
-  * [E](javascript:void\(0\))
-  * [F](javascript:void\(0\))
-  * [G](javascript:void\(0\))
-  * [H](javascript:void\(0\))
-  * [I](javascript:void\(0\))
-  * [J](javascript:void\(0\))
-  * [K](javascript:void\(0\))
-  * [L](javascript:void\(0\))
-  * [M](javascript:void\(0\))
-  * [N](javascript:void\(0\))
-  * [O](javascript:void\(0\))
-  * [P](javascript:void\(0\))
-  * [Q](javascript:void\(0\))
-  * [R](javascript:void\(0\))
-  * [S](javascript:void\(0\))
-  * [T](javascript:void\(0\))
-  * [U](javascript:void\(0\))
-  * [V](javascript:void\(0\))
-  * [W](javascript:void\(0\))
-  * [X](javascript:void\(0\))
-  * [Y](javascript:void\(0\))
-  * [Z](javascript:void\(0\))
 
-  * 
 
 ### [Ajay tomar](https://www.daiict.ac.in/professor-practice/ajay-tomar)
 
@@ -59,7 +32,6 @@ ajay_tomar[at]dau[dot]ac[dot]in
 
 Mr. Ajay Tomar was retired as the Commissioner of Police, Surat. He was recipient of Police Medal For Meritorious Service 2005 and also the President's Medal For Distinguished Service-2014. [KNOW MORE](https://www.daiict.ac.in/sites/default/files/other-files/Shri-A-K-TOMAR_Bio-Data.pdf)
 
-  * 
 
 ### [Anirban dutta gupta](https://www.daiict.ac.in/professor-practice/anirban-dutta-gupta)
 
@@ -69,7 +41,6 @@ anirban_dutta[at]dau[dot]ac[dot]in
 
 Natural History & Ethnographic Documentary, Photography, Communication Design, Design for Development & Conservation
 
-  * 
 
 ### [Harpreet singh jattana](https://www.daiict.ac.in/professor-practice/harpreet-singh-jattana)
 
@@ -79,7 +50,6 @@ PhD - Pursuing (Microelectronics – SOI CMOS Process Integration & Modelling), 
 
 CMOS Process Development, Device Reliability, CMOS Design, Compound Semiconductors, VLSI Testing & Packaging, Wafer Fabrication
 
-  * 
 
 ### [K c supekar](https://www.daiict.ac.in/professor-practice/kc-supekar)
 
@@ -89,7 +59,6 @@ kc_supekar[at]dau[dot]ac[dot]in
 
 Dr. Supekar has an extensive experience of about 40 years of cooperative dairy sector in India which ranges from small and marginal farmers at grassroots level to serving as Managing Director of NCDFI for about 13 years. The key areas of interest include upliftment of the rural farmers & women empowerment to bring social and cultural change and bringing in the digital technologies to revamp the Indian rural ecosystem.
 
-  * 
 
 ### [Vinay kulkarni](https://www.daiict.ac.in/professor-practice/vinay-kulkarni)
 
@@ -99,11 +68,11 @@ vinay_kulkarni[at]dau[dot]ac[dot]in
 
 Digital Twins, Software Engineering for AI-first world, Complex Adaptive Systems, Modelling & Simulation, Model Driven Engineering, Addressing wicked socio-techno-econo problems through use of purposive technology
 
-## Contact Information
+# Contact Information
 
 - **Phone:** 079-68261718
 
-## Related Links
+# Related Links
 
 - [Faculty](https://www.daiict.ac.in/faculty)
 - [Adjunct Faculty](https://www.daiict.ac.in/adjunct-faculty)
@@ -116,7 +85,7 @@ Digital Twins, Software Engineering for AI-first world, Complex Adaptive Systems
 - [K c supekar](https://www.daiict.ac.in/professor-practice/kc-supekar)
 - [Vinay kulkarni](https://www.daiict.ac.in/professor-practice/vinay-kulkarni)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

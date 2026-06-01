@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Anjan Ghosh at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Anjan Ghosh
 
 Anjan Ghosh
-Â 
+ 
 PhD (Electrical Engineering), Carnegie Mellon University, Pittsburgh, Pennsylvania
 Contact Details
-Â 
+ 
 079-68261645
-Â 
+ 
 # 1111, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 anjan_ghosh@dau.ac.in
 Biography
 
@@ -47,11 +47,11 @@ Basic Electronics
 Linear Algebra
 Random Variables and Processes
 
-## Contact Information
+# Contact Information
 
 - **Email:** anjan_ghosh@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/anjan-ghosh)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

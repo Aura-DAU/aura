@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Arnab Bhabak at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Arnab Bhabak
 
 Arnab Bhabak
-Â 
+ 
 PhD (Mathematics), IIT Guwahati
 Contact Details
-Â 
+ 
 079-68261619
-Â 
+ 
 # 4204, FB-4, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 arnab_bhabak@dau.ac.in
 Biography
 
@@ -36,11 +36,11 @@ Stochastic Control, Stochastic Game Theory, Probability Theory
 Publications
 Arnab Bhabak, Subhamay saha (2024) Partially Observable Discrete-time Discounted Markov Games with General Utility, Operations Research Letters, Volume 54, 107113, DOI: 10.1016/j.orl.2024.107113.
 
-## Contact Information
+# Contact Information
 
 - **Email:** arnab_bhabak@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/arnab-bhabak)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

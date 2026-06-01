@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Brajesh Dhiman at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Brajesh Dhiman
 
 Brajesh Dhiman
-Â 
+ 
 PhD, IIT Guwahati
 Contact Details
-Â 
+ 
 079-68261755
-Â 
+ 
 # 3101, FB-3, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 brajesh_dhiman@dau.ac.in
 Biography
 
@@ -35,11 +35,11 @@ Specialization
 
 Small Scale PV Applications, and AI Enabled Design for Global South
 
-## Contact Information
+# Contact Information
 
 - **Email:** brajesh_dhiman@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/brajesh-dhiman)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

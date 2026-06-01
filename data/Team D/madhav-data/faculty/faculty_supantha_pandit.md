@@ -7,32 +7,32 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Supantha Pandit at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Supantha Pandit
 
 Supantha Pandit
-Â 
+ 
 PhD (Computer Science), IIT Ropar
 Contact Details
-Â 
+ 
 079-68261546
-Â 
+ 
 # 2205, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 supantha_pandit@dau.ac.in
 Biography
 
 Supantha Pandit is an Assistant Professor at the Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar, Gujarat, India. Before joining DA-IICT, he was a SERB Indo-US Post Doctoral Fellow at the SUNY Stony Brook, New York, USA. He was also a SERB National Post Doctoral Fellow at the Indian Statistical Institute Kolkata, India. He obtained his Ph.D. degree in Computer Science and Engineering from the Indian Institute of Technology Ropar, Punjab, India. His current research concentrates on theoretical computer science, mainly focused on computational geometry, approximation algorithms, distributed network algorithms, and graph algorithms.
 
-Â 
+ 
 
-Â  Â  Personal Website: Click me
-Â Â 
+    Personal Website: Click me
+  
 Specialization
 
 Theoretical Computer Science
@@ -62,11 +62,11 @@ Openings
 
 I am looking for Ph.D. and Masters Students. A Ph.D. thesis will have foundational theoretical work possibly supported by experimental studies. The research topics include computational geometry, approximation algorithms, graph algorithms, distributed computing, discrete mathematics, and problems that generally obey the design and analysis framework of discrete algorithms. For a better understanding, I'd like you to please take a look at my publications. If you have any questions, please don't hesitate to contact me.
 
-## Contact Information
+# Contact Information
 
 - **Email:** supantha_pandit@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/supantha-pandit)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

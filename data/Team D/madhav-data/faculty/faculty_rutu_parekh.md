@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Rutu Parekh at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Rutu Parekh
 
 Rutu Parekh
-Â 
+ 
 PhD (Electrical Engineering), Sherbrooke University, Canada
 Contact Details
-Â 
+ 
 079-68261553
-Â 
+ 
 # 2112, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 rutu_parekh@dau.ac.in
-Â 
+ 
 https://sites.google.com/view/rutumparekh/home?authuser=1
 Biography
 
@@ -43,7 +43,7 @@ Publications
 Selected Publications & Patents (Short Version)
 Parekh, R., & Dhavse, R. (2023). Nanoelectronics: Physics, Technology and Applications.
 
-Google Scholar Profile:Â https://scholar.google.com/citations?user=B3RkZQkAAAAJ
+Google Scholar Profile: https://scholar.google.com/citations?user=B3RkZQkAAAAJ
 
 Teaching
 Nanoelectronics
@@ -60,11 +60,11 @@ Opportunities:
 
 I am inviting highly motivated Ph.D. students to join my research group in high-voltage ASIC design, nanoelectronics, embedded systems, and IoT applications. Students will have the opportunity to work on innovative projects spanning chip design for space applications, smart agriculture, and long-distance wireless systems for defense and space, while contributing to high-impact publications and patents.
 
-## Contact Information
+# Contact Information
 
 - **Email:** rutu_parekh@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/rutu-parekh)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

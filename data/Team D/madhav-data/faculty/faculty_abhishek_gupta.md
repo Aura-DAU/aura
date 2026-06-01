@@ -7,23 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Abhishek Gupta at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Abhishek Gupta
 
 Abhishek Gupta
-Â 
+ 
 PhD (Electrical and Computer Engineering), Toronto Metropolitan University, Canada
 Contact Details
-Â 
+ 
 079-68261598
-Â 
+ 
 # 3208, FB-3, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 abhishek_gupta@dau.ac.in
 Biography
 
@@ -40,11 +40,11 @@ Digital Communications
 Network Security
 Probability and Statistics
 
-## Contact Information
+# Contact Information
 
 - **Email:** abhishek_gupta@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/abhishek-gupta)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

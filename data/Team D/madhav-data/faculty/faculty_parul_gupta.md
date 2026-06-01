@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Parul Gupta at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Parul Gupta
 
 Parul Gupta
-Â 
+ 
 PhD (Economics), IIT Delhi
 Contact Details
-Â 
+ 
 079-68261744
-Â 
+ 
 # 4102, FB-4, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 parul_gupta@dau.ac.in
-Â 
+ 
 https://sites.google.com/view/gupta-parul/home
 Biography
 
@@ -50,11 +50,11 @@ Mathematical economics
 Development Economics
 Quantitative methods in economics
 
-## Contact Information
+# Contact Information
 
 - **Email:** parul_gupta@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/parul-gupta)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

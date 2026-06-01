@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Manjunath V. Joshi at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Manjunath V. Joshi
 
 Manjunath V. Joshi
-Â 
+ 
 PhD (Electrical Engineering), IIT Bombay
 Contact Details
-Â 
+ 
 079-68261611
-Â 
+ 
 # 1203, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 mv_joshi@dau.ac.in
-Â 
+ 
 https://sites.google.com/site/manjunathvjoshi/home?overridemobile=true
 http://scholar.google.co.in/citations?user=iDqnnKkAAAAJ&hl=en&oi=ao
 Biography
@@ -45,11 +45,11 @@ Digital Signal Processing
 Computer Vision
 Topics in Deep Learning
 
-## Contact Information
+# Contact Information
 
 - **Email:** mv_joshi@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/manjunath-v-joshi)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

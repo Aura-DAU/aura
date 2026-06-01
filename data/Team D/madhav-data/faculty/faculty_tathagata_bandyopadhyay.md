@@ -7,21 +7,21 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Tathagata Bandyopadhyay at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Tathagata Bandyopadhyay
 
 Tathagata Bandyopadhyay
-Â 
+ 
 PhD (Statistics), University of Calcutta, Kolkata
 Contact Details
-Â 
+ 
 079-68261572
-Â 
+ 
 tathagata_b@dau.ac.in
 Biography
 
@@ -49,11 +49,11 @@ Multivariate Analysis
 Regression Analysis
 Nonparametric Data Analysis
 
-## Contact Information
+# Contact Information
 
 - **Email:** tathagata_b@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/tathagata-bandyopadhyay)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

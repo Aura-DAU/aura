@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Ragging of any nature is strictly prohibited. Ragging is a punishable offence under Central Government Act.
 
-## Main Content
+# Main Content
 
-## Curbing Ragging
+# Curbing Ragging
 
 Ragging of any nature is strictly prohibited. Ragging is a punishable offence under Central Government Act. Violation of this rule will attract any one or more of following possible punishments depending upon the seriousness of the issue:
 
@@ -27,13 +27,13 @@ Ragging of any nature is strictly prohibited. Ragging is a punishable offence un
   * Withholding results.
   * Suspension or expulsion from the Halls of Residence.
 
-[For More Info ..](/sites/default/files/other-files/UGC-Regulations-for-Curbing-Ragging.pdf)
+[For More Info ..](https://www.daiict.ac.in/sites/default/files/other-files/UGC-Regulations-for-Curbing-Ragging.pdf)
 
-## Related Links
+# Related Links
 
 - [For More Info ..](https://www.daiict.ac.in/sites/default/files/other-files/UGC-Regulations-for-Curbing-Ragging.pdf)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

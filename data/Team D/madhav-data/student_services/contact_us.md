@@ -7,15 +7,15 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 _Text_ DA-IICT, DA-IICT Road,  
 Gandhinagar 382 007,  
 Gujarat (India)
 
-## Main Content
+# Main Content
 
-## Contact Information
+# Contact Information
 
 _Text_ DA-IICT, DA-IICT Road,  
 Gandhinagar 382 007,  
@@ -28,11 +28,11 @@ Gujarat (India)
   * [LinkedIn](https://www.linkedin.com/school/dhirubhaiambaniuniversity/?viewAsMember=true "LinkedIn")
   * [blogIcon](https://medium.com/@daiictweb "Blog")
 
-## How To Reach Us
+# How To Reach Us
 
-## DA-IICT Campus Map
+# DA-IICT Campus Map
 
-## The City Gandhinagar
+# The City Gandhinagar
 
 Gandhinagar is the capital city of Gujarat established as a modernized twin city for Ahmedabad. It was visualised as a planned city along the lines of New Delhi (by Edwin Lutyens), Chandigarh (by Le Corbusier) and Bhubaneshwar (by Otto H. Koenigsberger) . Located on the banks of the River Sabarmati, the city is the administrative centre of Gandhinagar and the capital of Gujarat as well. It does not seem to be a prudent concerted effort of creating Gandhinagar a Knowledge Hub by establishing several educational institutions of national and international repute, but it happened in sinusiodal phase during last one century or less.
 
@@ -54,7 +54,7 @@ Apart from the monsoon season, the climate of Gandhinagar is normally dry. Winte
 
 Places to visit in Gandhinagar and Ahmedabad are SiddiSayyedJali, Jumma Masjid, Gujarat Science City, Akshardham (Gandhinagar), Law Garden Market, Vaishnodevi Temple, Kankaria Lake, Sabarmati Riverfront Development Project, SarkhejRoja, Adalaj Wav, Rani Sipri Mosque, Iskon Temple, Sola Temple, CG Road, Gandhi Ashram (Sabarmati), Calico Museum of Textiles (Shahibaugh).
 
-## Related Links
+# Related Links
 
 - [facebook](https://www.facebook.com/officialdau)
 - [X](https://x.com/dauofficial_)

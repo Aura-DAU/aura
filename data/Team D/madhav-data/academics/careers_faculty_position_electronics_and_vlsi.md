@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Candidates must have a Ph.D. in Electronics Engineering or an allied area, from a reputed institution, and a good research record and background.
 
-## Main Content
+# Main Content
 
-## Electronics and VLSI Design
+# Electronics and VLSI Design
 
 Candidates must have a Ph.D. in Electronics Engineering or an allied area, from a reputed institution, and a good research record and background. The following sub-areas are currently of interest:
 
@@ -21,7 +21,7 @@ Candidates must have a Ph.D. in Electronics Engineering or an allied area, from 
   * **Embedded Systems** : Edge Computing, Real Time Operating Systems, Side Channel Analysis and Hardware Security
   * **Robotics** : Autonomous Systems, Human-robot Interaction, Perception-based Controls and Robotics, Drones, Multi-agent Systems, Intelligent Control Systems
 
-## **Minimum Eligibility Criteria** (all disciplines except design area candidates)
+# **Minimum Eligibility Criteria** (all disciplines except design area candidates)
 
 (i) Ph. D. with a first class or equivalent in the preceding degree and an excellent academic record throughout; and
 
@@ -37,7 +37,7 @@ A minimum of six years post-Ph.D. teaching/research/professional experience of w
 
 We also welcome applications from candidates with a strong research background and relevant industry experience.
 
-## **Application Submission Process**
+# **Application Submission Process**
 
 Prospective candidates should send an email to **dean_faculty[at]daiict[dot]ac[dot]in** with Subject as “ _Faculty position in Disciplines/Areas_ (e.g. Computer Science, Humanities & Social Sciences)". Please attach the following to your email:
 
@@ -49,9 +49,9 @@ Prospective candidates should send an email to **dean_faculty[at]daiict[dot]ac[d
 
 Faculty will be responsible for conducting independent research within their respective fields and teaching both undergraduate and postgraduate courses. Candidates with interdisciplinary expertise are strongly encouraged to apply. They will play an important role in contributing to the Institute’s mission through their teaching, research, and participation in various institutional activities.
 
-We encourage candidates to visit the Institute website for more information about the courses and research groups, in particular, the Faculty page, to get a sense of the **[faculty profile](/faculty)**.
+We encourage candidates to visit the Institute website for more information about the courses and research groups, in particular, the Faculty page, to get a sense of the **[faculty profile](https://www.daiict.ac.in/faculty)**.
 
-## Related Links
+# Related Links
 
 - [faculty profile](https://www.daiict.ac.in/faculty)
 
