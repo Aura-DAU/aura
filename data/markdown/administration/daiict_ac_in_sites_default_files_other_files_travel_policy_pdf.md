@@ -2,18 +2,22 @@
 title: "Policies/Travel Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Travel-Policy.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Travel Policy"
 ---
 
+# Policies/Travel Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
+
 Page 1 of 3 
- 
- 
- 
- 
- 
- 
 Policy on Reimbursement of Travel-related Expenses 
  
 From: HR & Admin Department 
@@ -81,9 +85,6 @@ Staff: Group C or D
 Taxi / Bus
 
 Page 2 of 3 
- 
- 
- 
 1. The journey from airport to hotel or from hotel to venue, the local conveyance will be paid 
 as per the car/taxi/autorickshaw mentioned above. The maximum ceiling for the local 
 conveyance per trip will be Rs. 5000/-. 
@@ -151,9 +152,6 @@ By public transport, Taxi
 Ticket, Invoice
 
 Page 3 of 3 
- 
- 
- 
 2. In case of air or rail booking through Institute’s travel agents, the bills must be forwarded to the 
 account section through the Administrative Section only.  
 3. The following charges in respect of travel are reimbursable: 
@@ -202,20 +200,6 @@ Mode of
 Ticket/ 
 Fare (₹) 
 Remarks 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 If own vehicle used: 
  Type: Car / 2-Wheeler | Distance: ______ km | Rate: ₹_____/km | Amount: ₹________ 
 Daily Allowance / Hotel / Food Claims 
@@ -224,36 +208,16 @@ Date
 City 
 Hotel Name 
 Bill Amount (₹) 
- 
- 
- 
- 
 B. Food Expenses 
 Date 
 Bill Amount (₹) 
 Eligible Limit (₹) 
 Claim (₹) 
- 
- 
- 
- 
- 
- 
- 
- 
 C. Daily Allowance (Without Bills) 
 Date 
 City 
 Rate (₹) 
 Claim (₹) 
- 
- 
- 
- 
- 
- 
- 
- 
 D. Local Conveyance 
 Date 
 From 
@@ -261,12 +225,6 @@ To
 Mode 
 Bill Amount (₹) 
 Claim (₹) 
- 
- 
- 
- 
- 
- 
 Summary of Claims 
 Travel Allowance 
  
@@ -285,16 +243,7 @@ official duties, the bills are genuine, and no part of this travel was sponsored
 Employee Sign: ______________   Date: ________ Approving Authority: _____________ 
  
 _______________ 
- 
- 
- 
- 
- 
 ___________________ 
  
 Executive Registrar  
- 
- 
- 
- 
 Director of the School

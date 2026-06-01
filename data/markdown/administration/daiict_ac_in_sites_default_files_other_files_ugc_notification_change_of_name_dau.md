@@ -2,10 +2,20 @@
 title: "DAU Notification UGC 2024"
 url: "https://daiict.ac.in/sites/default/files/other-files/UGC-Notification-Change-of-name_DAU_2F_25-June-2024.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "DAU Notification UGC 2024"
 ---
+
+# DAU Notification UGC 2024
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Erqftelds 3rj<tr 3ndq
 University Grants Commission

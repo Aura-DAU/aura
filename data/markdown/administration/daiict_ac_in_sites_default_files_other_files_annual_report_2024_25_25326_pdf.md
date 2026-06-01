@@ -2,10 +2,20 @@
 title: "AnnualReport 2024-25 pdf"
 url: "https://daiict.ac.in/sites/default/files/other-files/annual-report-2024-25-25326.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "AnnualReport 2024-25 pdf"
 ---
+
+# AnnualReport 2024-25 pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 iversity
 
@@ -15,37 +25,15 @@ ANNUAL
 REPORT
 2024-25
 
-
 ANNUAL  
 REPORT  
 2024 - 25 
 August 2024 – July 2025 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Dhirubhai Ambani University 
 DA-IICT Road, Gandhinagar, Gujarat, India - 382007. 
 Tel.: +91 79 6826 1700 I Web: www.dau.ac.in
 
 3 
- 
- 
- 
- 
 Peacock on the DAU campus, Photo Credits: Mayank Singh (201914001), MDes CD
 
 Shri Dhirubhai Hirachand Ambani 
@@ -56,15 +44,6 @@ Founder Chairman, DA-IICT
 5
 
 6 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Table of Contents 
  
 Board of Governors ................................................. 10 
@@ -110,8 +89,6 @@ areas. To remain accountable in our core and support function, through processes
 and continuous improvement.
 
 9 
-   
- 
 Board Meeting chaired by Tina Anil Ambani, President, DAU.
 
 10 
@@ -167,14 +144,6 @@ Shri Siddharth Swaminarayan
 Executive Registrar, Dhirubhai Ambani University, Gandhinagar
 
 11 
- 
- 
- 
- 
- 
- 
- 
- 
 Photo Credit: Abhishek Karli
 
 12 
@@ -533,10 +502,6 @@ inclusive and globally relevant legal ecosystem in service of Viksit Bharat 2047
 Prof. (Dr.) Avinash Dadhich 
 Founding Director, School of Law 
 Dhirubhai Ambani University, Gandhinagar  
-  
- 
- 
- 
 School of Law team at EXECUTE 2025: Industry–Academia Synergy in Legal Education.
 
 22 
@@ -566,23 +531,6 @@ Assembly of Gujarat passed the DA-IICT
 effect through the Gujarat Government 
 Gazette dated 13th May 2024, paving the way 
 for   the    establishment of    Dhirubhai   Ambani  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 University. The University carries forward the 
 rich academic legacy and values of DA-IICT 
 while embracing a broader multidisciplinary 
@@ -1221,10 +1169,6 @@ The Scholarship Programme for Diaspora children
 scholarships to the NRI students; a total of three 
 students benefited from receiving a scholarship 
 amount of Rs. 6.68 lakhs. 
- 
- 
- 
- 
 SSIP programme organised by Business Club
 
 29 
@@ -1691,15 +1635,6 @@ imaging photon sensor devices
 RAC-ISRO 
 Prof Rutu Parekh - PI  
 Prof D Boolchandani - Co-PI 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Postgraduate students participating in an AI workshop.
 
 35 
@@ -2055,9 +1990,6 @@ DAU&GBU
 Prof. Bhaskar Chaudhury,  
 Prof. Srimanta Mandal, 
 Prof. Pritam Anand 
- 
- 
- 
 SELC Lab inauguration, April 15, 2025, with Shri. Anil Mukim as Chief Guest.
 
 39 
@@ -4164,10 +4096,6 @@ benchmarks of academic excellence.
  
 Dr. Maniklal Das 
 Dean (Faculty) 
- 
- 
- 
- 
 Honorary Work/Positions Held on Professional Bodies
 Prof Anish Mathuria  
  
@@ -4229,9 +4157,6 @@ Technologies,
 Gujarat 
 Technological 
 University (GTU), January 27, 2025. 
- 
- 
- 
 Prof. Srimanta Mandal 
  
 Technical 
@@ -4329,9 +4254,6 @@ Proceedings-Mathematical
 Sciences, 
 often on topics related to operator 
 theory, Banach spaces, and orthogonality. 
- 
- 
- 
 Prof. Bhaskar Chaudhury 
  
 IEEE Transactions on Antennas and 
@@ -4792,9 +4714,6 @@ Nanotechnology Council, Gujarat Section)
 talk on, 2D Materials for Nanoelectronics 
 by Dr. Sangeeta Singh Assistant Professor 
 NIT Patna, 26th December 2024. 
- 
- 
- 
 Prof. Shefali Jha 
  
 "Family Matters: Politics, Publics and 
@@ -4946,9 +4865,6 @@ Technology,
 Gandhinagar, 
 India, 
 December 7–9, 2024. 
- 
- 
- 
 Prof. Bhaskar Chaudhury 
  
 Invited talk titled "Utilizing Deep Neural 
@@ -5101,9 +5017,6 @@ Session Chair, 16 June - 20 June 2025
 One Week Workshop on Arduino and 
 FPGA based Embedded System Design, 
 Session Chair, 23 June - 27 June 2025 
- 
- 
- 
 Prof. Niteesh Kumar Upadhyay 
  
 Presented papers on the topics “Legal 
@@ -5618,9 +5531,6 @@ Prof. Sujay Kadam
 eInfoChips, Ahmedabad (March 13,2025) 
  
 TATA IIS Ahmedabad (March 11, 2025) 
- 
- 
- 
 Prof. Tapas Kumar Maiti 
  
 TATA Indian Institute of Skills (IIS), 
@@ -5682,10 +5592,6 @@ and Systems (MNDCS), 2025. (Awarded to
 Kushal Desai, M.Tech. Student).
 
 67 
- 
- 
- 
- 
 Faculty group photograph during the UG Orientation Programme, 2024.
 
 68 
@@ -7258,9 +7164,6 @@ further strengthening the University’s global
 community.
 
 87 
- 
- 
- 
 Undergraduate and postgraduate group photograph, 19th Convocation.
 
 88 
@@ -7435,19 +7338,6 @@ during the year. DAU congratulates him on this
 achievement.
 
 90 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Mr NiyamSan Chhaya, Vice President at 
 Orbrick Consulting and an alumnus of 
 Dhirubhai Ambani University (DAU), was 
@@ -7486,9 +7376,6 @@ the United States. DAU proudly congratulates
 him on this global achievement.
 
 91 
- 
- 
- 
 Staff members at a communication workshop
 
 92 
@@ -7509,9 +7396,6 @@ institutional excellence
  
 Shri Siddharth Swaminarayan 
 Executive Registrar 
- 
- 
- 
 The strength of Organisation lies in its people. 
 Over the reporting year, the Institute 
 expanded and enriched its academic and 
@@ -7863,23 +7747,6 @@ a
 supportive 
 workplace culture aligned with the University’s 
 values.
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 ICC workshop
 
 98 
@@ -8415,15 +8282,6 @@ premises.
 RFID Implementation was completed in 
 June’25 with the tagging and programming 
 of nearly 35000 books at the RC. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
 Orientation & RC Tour of PG Batch 2025: 
 An orientation programme for the PG 
@@ -10435,50 +10293,12 @@ Annexure 6: Annual Accounts
 146
 
 147 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Annual Report Committee 
 Prof. Yash Vasavada | All Deans | Executive Registrar | Librarian 
 Acknowledgement 
 Ms. Juhi Patel | Mr. Vipul Makwana | Mr. Prabhunath Sharma | Dr. Shashikumara AA
 
 148 
- 
- 
- 
- 
- 
- 
- 
 Dhirubhai Ambani University 
 DA-IICT Road, Gandhinagar, Gujarat, India - 382007. 
 Tel.: +91 79 6826 1700 I Web: www.dau.ac.in

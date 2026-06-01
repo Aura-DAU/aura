@@ -2,10 +2,20 @@
 title: "Research / Reasearch Overview R&D pdf"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Coffee-Table-Booklet.pdf"
 category: "research"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Research / Reasearch Overview R&D pdf"
 ---
+
+# Research / Reasearch Overview R&D pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 ENGINEERS WITH
 SOCIAL RESPONSIBILITY
@@ -13,8 +23,6 @@ RESEARCH
 DEVELOPMENT
 @ DA-IICT
 AND
-
-
 
 The Institute is committed towards developing and 
 maintaining high standards in both research and 
@@ -120,8 +128,6 @@ THE DEAN (R&D)
 i—- fli ar
 
 mu,
-
-
 
 Sponsored Research Labs
 Besides 

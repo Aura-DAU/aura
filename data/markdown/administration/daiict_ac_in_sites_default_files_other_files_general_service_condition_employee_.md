@@ -2,10 +2,20 @@
 title: "Policies/Conduct Rules"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/General-Service-Condition-Employee-Conduct-Rules-and-Disciplinary-Probvisions-Comp.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Conduct Rules"
 ---
+
+# Policies/Conduct Rules
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Dhirubhai Ambani
 Institute of Information and Communication Technology
@@ -48,7 +58,6 @@ institution with the best of talents from anywhere in the world. DA-IICT is comm
 opportunity to its People to achieve excellence.
 
 [{D. des. Page 1 of 13
-
 
 Dhirubhai Ambani
 institute of Information and Communication Technology
@@ -96,7 +105,6 @@ o Such other posts that may be created to assist in academic activities.
 
 lo BY Page 2 of 13
 
-
 Dhirubhai Ambani
 Institute of Information and Communication Technology
 
@@ -138,8 +146,6 @@ For Non — teaching staff -60 years
 
 Page 3 of 13
 
-
-
 Dhirubhai Ambani
 institute of Information and Communication Technology
 
@@ -179,7 +185,6 @@ also be strictly honest and impartial in his official dealings.
 , fii
 
 \e\ Page 4 of 13
-
 
 10.
 
@@ -228,7 +233,6 @@ periodical/publication.
 
 a, Page 5 of 13
 
-
 Dhirubhai Ambani
 Institute of Information and Communication Technology
 
@@ -265,7 +269,6 @@ previous sanction of the competent authority, give evidence in connection with a
 inquiry conducted by any person, committee or authority.
 
 / Page 6 of 13
-
 
 16.
 
@@ -318,7 +321,6 @@ may be laid down by the Board of Governors.
 
 / ¥ aN Page 7 of 13
 
-
 ;
 enol Ines,
 - ys rp,
@@ -364,7 +366,6 @@ higher authority, unless the lower authority has rejected the claim or refused r
 disposal of the matter is delayed by more than three months. No employee shall
 
 \°\ Page 8 of 13
-
 
 22.
 
@@ -412,8 +413,6 @@ furnishes a certificate that she/he is not engaged in any other employment,
 business or vocation.
 
 Page 9 of 13
-
-
 
 25.
 
@@ -470,7 +469,6 @@ a\ Page 10 of 13
 
 ~ FE DS
 
-
 28.
 
 29.
@@ -521,7 +519,6 @@ Director against him shall be entitled to prefer an Appeal to the Executive
 
 Page 11 of 13
 
-
 Dhirubhai Ambani
 Institute of Information and Communication Technology
 
@@ -565,7 +562,6 @@ iv) pass such other orders as he deems fit; provided that an order imposing
 or enhancing a penalty shall not be passed unless the person concerned
 
 Page 12 of 13
-
 
 vi.
 

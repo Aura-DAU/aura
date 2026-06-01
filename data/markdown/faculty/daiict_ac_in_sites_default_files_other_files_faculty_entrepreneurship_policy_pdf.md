@@ -2,10 +2,20 @@
 title: "Policies/Faculty Entrepreneurship Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Entrepreneurship-Policy.pdf"
 category: "faculty"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Faculty Entrepreneurship Policy"
 ---
+
+# Policies/Faculty Entrepreneurship Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Dhirubhai Ambani
 Institute of Information and Communication Technology
@@ -21,7 +31,6 @@ Author(s): Biswajit Mishra and Manish Gupta
 Organization: DA-IICT
 
 Classification: confidential Page 1 of 5
-
 
 TT  SSSSSSSSSSSSFSFSMMmmMhshsFesese
 
@@ -82,8 +91,6 @@ The faculty who want to have an innovation based start-up has to apply formally 
 of DA-IICT through Expression of Interest (EOI): A one page concept note.
 
 Classification: confidential
-
-
 
 —_-eaqoq— jj eee
 
@@ -146,8 +153,6 @@ stage inventions and entrepreneurship.
 
 Classification: confidential
 
-
-
 By working with the labs or start-ups, the students would have an opportunity to develop or
 refine an existing invention, design and make prototypes, explore new applications, and
 evaluate markets. At the same time, the students may have opportunities to work with
@@ -194,8 +199,6 @@ When a faculty is involved in start-ups as a non-promoter and he/she gets stock 
 model for stock options with DA-IICT has to be discussed and agreed upon. Also how these
 
 Classification: confidential Page 4 of 5
-
-
 
 epg nr eerper-eespeegnmmamepss esis
 

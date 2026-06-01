@@ -2,86 +2,49 @@
 title: "Policies/Faculty Handbook"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf"
 category: "faculty"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Faculty Handbook"
 ---
+
+# Policies/Faculty Handbook
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 1
 ENGINEERS WITH
 SOCIAL RESPONSIBILITY
 FACULTY HANDBOOK
 
-
-
 3
 Table of Contents
 The Institute & Governance		
-	
-	
-	
--	
 06-07
 Institute Facilities	
-	
-	
-	
-	
-	
-- 	
 08-12
 Expectations, Terms and Conditions of Service	 	
 -	
 13-16
 Research Incentives		
-	
-	
-	
-	
--	
 17-18
 Consultancy Policy	 	
-	
-	
-	
-	
--	
 19-20
 Faculty Entrepreneurship Policy	
-	
-	
-	
--	
 21-23
 Leave Rules	 	
-	
-	
-	
- 	
-	
--	
 24-27
 Research Policy and Principles	
-	
- 	
-	
--	
 28-31
 Code of Ethics and Conduct for Faculty	  	
-	
--	
 32
 Annexure 1	
-	
-	
-	
-	
- 	
-	
--	
 33
-
-
 
 5
 Vision
@@ -1490,9 +1453,6 @@ A vacation faculty member shall be entitled to vacation
 as follows:
 • Two months in Summer i.e., May and June
 • No vacation in December	
-	
-	
-	
 OR
 1 month in Summer during May and June and 	 	
 1 month in December.

@@ -2,25 +2,29 @@
 title: "Document"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/180_KW-Solar-Roof-Top-Plant_T-C.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Document"
 ---
+
+# Document
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
 TENDER 
 180 KW Solar Power Plant, HoR Men (New) Terrace, DAU, Gandhinagar 
  
  
 Tender No: EE2526009 
- 
- 
- 
 DAU Contact Person: Mr. Rajesh Patel, Sr. Engineer Estate, 
  
 estate_engineer@daiict.ac.in, (M) +91 93287 21608 (Phone: 079-68261622), 
@@ -293,10 +297,6 @@ so notified.
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
- 
 Annexure-2 
  
 1. Primary Information of Bidder Firm: 
@@ -351,10 +351,6 @@ types of work
  
  
 Please submit proofs wherever applicable 
- 
- 
- 
------------------------------------------- 
 Signature of Contractor                                                                                 Date: 
 (with official seal of firm) 
  

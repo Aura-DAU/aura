@@ -2,10 +2,20 @@
 title: "Policies/Academic Integrity Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Plagiarism-Prevention-Framework_rev1-Director-2-EDITEDMM-1.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Academic Integrity Policy"
 ---
+
+# Policies/Academic Integrity Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 o™ Dhirubhai Ambani
 Teea|, Institute of Information and Communication Technology
@@ -55,8 +65,6 @@ updating the policy.
 Approved By
 
 This policy has been approved by the Board of Governors of DAIICT.
-
-
 
 Scope of the Policy
 
@@ -113,8 +121,6 @@ j) “Source” means the published primary and secondary material from any sour
 
 includes written information and opinions gained directly from other people, including Willa
 0
-
-
 
 defined under Section 2 (1) (v) of the Information Technology Act, 2000 and reproduced here in
 Regulation 2 (I);
@@ -179,7 +185,6 @@ the plagiarism check.
 
 The tenure of the members will be 3 years
 
-
 Plagiarism prevention
 
 a) DAIICT has implemented and enforced the technology-based mechanism using TURNITIN software
@@ -239,7 +244,6 @@ Level 3: Similarities above 60% (High level)
 
 oe ee ie ee
 
-
 The parameters of similarity will be decided by the Academic Integrity Committee (AIC)
 
 Redress procedure upon plagiarism detection
@@ -285,8 +289,6 @@ Annexure 2: References
 
 K.S. MARWAN,
 
-
-
 Annexure 1: Plagiarism Check submission forms
 
 FORMA
@@ -322,8 +324,6 @@ considered for submission to the University.
 The software report is attached.
 
 Signature of the Student
-
-
 
 Annexure 2
 

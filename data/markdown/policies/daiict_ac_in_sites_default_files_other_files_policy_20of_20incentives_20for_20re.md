@@ -2,10 +2,20 @@
 title: "Policies/Policy of Incentives for Research"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy%20of%20Incentives%20for%20Research.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Policy of Incentives for Research"
 ---
+
+# Policies/Policy of Incentives for Research
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Policy document detailing scheme of incentives for Research
 

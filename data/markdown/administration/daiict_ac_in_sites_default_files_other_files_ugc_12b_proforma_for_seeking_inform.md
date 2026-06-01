@@ -2,10 +2,20 @@
 title: "UGC Proforma/UGC 12B Proforma"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/UGC_12B_PROFORMA-FOR-SEEKING-INFORMATION-FOR-12-B-STATUS_Form_With_Annexures-1.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "UGC Proforma/UGC 12B Proforma"
 ---
+
+# UGC Proforma/UGC 12B Proforma
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Proforma for Seeking Information
 From State (Public/Private)
@@ -27,14 +37,11 @@ University
 
 GA-NET Ro rath shores
 
-
-
 a —
 
 Ke
 
 Se”
-
 
 INFORMATION FROM STATE (P PRIVATE) UNIVERSITIES
 
@@ -109,8 +116,6 @@ Refer Annexure-2
 
 Dhirubhai Ambani
 i University
-
-
 
 (Mf yes, give details in An nexure-4)
 
@@ -192,8 +197,6 @@ Remote Sensing (IRS, Dehradun). Mobs
 attached a5 Annexure-9.1 and Annexure-9.2
 
 db pb
-
-
 
 Lf.
 
@@ -287,8 +290,6 @@ and Social Sciences, Design)
 
 »
 
-
-
 (It started in 2024, yet to offer any program
 except PHD in Law)
 | li, Number of Programmes/courses School of Technology (SaT)
@@ -345,8 +346,6 @@ pp
 
 Dhirubhai Ambani
 University
-
-
 
 a3.
 
@@ -446,8 +445,6 @@ a»-e
 Dhirubhai Ambani
 University
 
-
-
 26.
 
 | Print journals / Magarines: 39
@@ -505,8 +502,6 @@ Circulation module that fully automates
 | a
 Dhirubhai Ambani
 University
-
-
 
 A
 
@@ -566,8 +561,6 @@ learning, faster content creation, and
 
 Dhirubhai Ambani
 University
-
-
 
 at
 
@@ -635,8 +628,6 @@ brief report on this is attached as Annexure - D,
 Refer Anmexure-E for the details related to,
 ® Publications last 3 years
 © Projects
-
-
 
 « Workshops and Conferences
 orpanised/conducted
@@ -707,8 +698,6 @@ p> er
 Dhirubhai Ambani
 University
 
-
-
 _ NEP Compliance
 
 rr
@@ -771,7 +760,6 @@ pe
 
 10
 
-
 Dhirubhal Ambani
 
 University
@@ -824,8 +812,6 @@ Lakh (8 Lakh) “X" [¥) of them are eligible for
 Tuition fees provided they satisly some merit
 
 pp
-
-
 
 oe
 
@@ -888,7 +874,6 @@ end of their Third Semester with NGOs
 db oe
 
 12
-
 
 located across the country. Details
 provided in Anmexure-O.
@@ -953,8 +938,6 @@ ha 7 ) : Z b> »
 Dhirubhai Ambani
 University
 
-
-
 33. | Details of non-teaching staff (Attach as | Details are provided in the prescribed format.
 
 | Annexure-20). Refer Annexure-20,
@@ -983,8 +966,6 @@ b pd
 
 Dhirubhai Ambani
 University
-
-
 
 p pr
 
@@ -1030,7 +1011,6 @@ Whether university is offering any
 
 learning mode/fonline mode/virtual campus. ff
 
-
 UGC
 Prof A Headi Annexure Page
 roforma nnexure Heading Adin Bier No.
@@ -1072,17 +1052,10 @@ Intake,
 
 33 Details of non-teaching staff, 20 98
 
-
-
 Annexure-1
 
 Date of establishment of
 University.
-
-
-
-
-
 Uhanubhaa
 dome
 
@@ -1135,21 +1108,13 @@ Se Led
 
 ine
 
-
-
 Tee |
-
 
 Annexure-2
 
 Date of commencement /
 operationalisation of
 academic activities.
-
-
-
-
-
 Annexure-2
 Communication Technology Sociely are the members of the first Board of Gevenors
 in terms of Clause 7 of the Memorandum of Association.
@@ -1203,12 +1168,9 @@ WaT
 DAF with the approval of Dhirubhai Ambani Foundation a3 part of the
 Feundation. =
 
-
-
 ie : }
 f = |
 ME, ’ e
-
 
 Annexure-3
 
@@ -1219,11 +1181,6 @@ of university in the UGC list
 of universities under
 section 2(f) of UGC Act,
 1956.
-
-
-
-
-
 SSR Sop at
 Unversity Grants Commission
 
@@ -1282,7 +1239,6 @@ Shastri Bhawan, New Delhi — 1000014
 
 Page doll
 8
-
 
 at fiedi-iio 002
 
@@ -1365,8 +1321,6 @@ oo sb os
 
 -_
 
-
-
 Annexure-4
 
 Amendments in the ACT of
@@ -1375,10 +1329,7 @@ enlisted in the UGC list of
 
 universities.
 
-
-
 4,
-
 
 Annexure-4
 
@@ -1435,8 +1386,6 @@ wnonittiers tit Governonant( Higher ar! Tochiica! Edna ras
 bMS ay
 Pai Ex at
 
-
-
 err “wa 3 wom ; REGISTERED Sn, tO HS
 
 : an
@@ -1480,8 +1429,6 @@ ee oe
 
 *
 
-
-
 a
 
 Atie2 GUJARATOGOVERNMENT GAZETTE, x: 16-3-20¢ PART-IV¥
@@ -1504,8 +1451,6 @@ Trust, Mumbai” shall be substituted,
 Ce
 
 Gavernment Central Press, Candbinsgar.
-
-
 
 Fxvtray en, 6
 
@@ -1545,8 +1490,6 @@ i. This Act may be called the (lirablan Anihani linstitute of Infor i Mihaeeri w
 Coup. & al AHA, Coninmunbcalii Peclenobieey CAbenalenend) Ad, 4,
 
 IVs [ix =f bel
-
-
 
 foe
 
@@ -1643,8 +1586,6 @@ including Information and Communication leehmoloey, Moginesru. Cr
 
 Cup & of fg,
 
-
-
 PART IV]
 
 Cait}
@@ -1715,8 +1656,6 @@ Communlcwion. Aliss Nbedia, Film, (rin aed Entertninmen. Journalian
 Spor, Dairy. Animal Dhishindry, Agncutare, Farming, | lericultany
 Forestry, Fisheries, Skill Dewelopecnt ined any caber field aid! .
 
-
-
 fel GUJARAT GOVERNMENT GAEDE, EX, (7405-2024 | PARE IV
 
 Educational Discipline and interdiseiplinary wrens across fields ¢ disciplines
@@ -1786,8 +1725,6 @@ of Selence. ‘Technology including — Information anal Communicaligie
 ‘Technology, Engineering, Gas, Oi, Mining, lnergy. Lavirannylf
 Sustainability, Medical Science, ealthcure, Dental. Nursing. Physictl
 Parumedical, Pharmacy, Commerce, Manigemem, Law, Tlumaiy
-
-
 
 PART IW |
 
@@ -1860,8 +1797,6 @@ Universitys”:
 
 in ihe marginal mete, for the word “Wnstitune™. the word “Unigtestty
 shill be subbstinuped, ‘
-
-
 
 Gath
 
@@ -1966,7 +1901,6 @@ CUMTT IN bCaLiot
 
 ive lapeliiay
 
-
 PART [TV | OUIAKAT GOWERS IES T GAAEITE, EX. U-05-2024
 
 lkama and [nbertunment,
@@ -2045,8 +1979,6 @@ Tetip & of 2005,
 ‘ntenileernt ef
 sevtlon 19 aif
 Cin]. fof Pod,
-
-
 
 f-k
 
@@ -2173,8 +2105,6 @@ subsstitubed, f
 
 | PART IV
 
-
-
 PART T¥ |
 
 Ciup & of BND.
@@ -2278,8 +2208,6 @@ fio fat MA
 section 34 af
 Com). het JMS,
 
-
-
 =
 
 b- 10 CLIARAT GOW ERNMENT GACT. EX. [3-05-3004
@@ -2332,18 +2260,10 @@ Coup Gol WDE
 
 23
 
-
-
-
 Annexure-5
 
 Territorial jurisdiction of the
 university as per its Act
-
-
-
-
-
 Fuerte t= S
 
 ae | Faure faba feo el detest vel! Ser i Pitre oly, ae
@@ -2415,19 +2335,11 @@ rescunch al the Institute relevant we the needs of the eames. al natinal and
 
 ghabal level.
 
-
-
-
 Annexure-6
 
 Details of accreditation by
 NAAC with grading and
 validity period.
-
-
-
-
-
 ()
 
 J
@@ -2466,11 +2378,6 @@ valid up to September 06, 2028
 date : September G7, 2023
 
 ax
-
-
-
-
-
 Annexure-/
 
 Whether the university has
@@ -2478,22 +2385,12 @@ any other campus other
 than the main campus.
 
 (Not Applicable)
-
-
-
-
-
 Annexure-8
 
 Whether university has any
 off-shore campus.
 
 (Not Applicable)
-
-
-
-
-
 Annexure-9.1
 
 Collaboration with other
@@ -2505,11 +2402,6 @@ Courses.
 MoA with Anand
 Agriculture University,
 Gujarat
-
-
-
-
-
 Annexure-9,1
 
 INDIA NON JUDICIAL
@@ -2558,7 +2450,6 @@ REGISTRAR AAU
 
 31
 
-
 MEMORANDUM OF AGREEMENT
 
 Zisk Mia verde?
@@ -2596,8 +2487,6 @@ agreement ta implement a PG program jointly, The program is for 2 years in M.Sc.
 |
 +
 
-
-
 Objectives
 
 1. Design, develop and deliver programme ensuring required quality which in turn
@@ -2630,8 +2519,6 @@ practical raining to the students.
 
 6. The PARTIES shall market the programmes to make them successful, It shall
 also guide and support the students for proper placement.
-
-
 
 Course Duration and Conduct of course Se
 
@@ -2680,8 +2567,6 @@ Duration and Termination of Agreement
 This agreement shall be effective from the date of signing and shall remain in force
 unless discontinued by any of the two parties,
 
-
-
 The PARTIES has no right to terminate the agreement before ihe completion of all the
 four semesters of a batch. At least three month prior notice is required for termination
 before ihe start of the new batch of the program.
@@ -2722,8 +2607,6 @@ a
 
 —
 
-
-
 IN WITNESS WHEREOF, each of the parties hereto has caused this agreement to be
 duly executed by a duly authorized representative of such party as of the date first
 
@@ -2757,7 +2640,6 @@ Dean PG Studies
 
 46
 
-
 Annexure-9.2
 
 Collaboration with other
@@ -2771,11 +2653,6 @@ Institute of Remote
 sensing (IIRS,
 
 Dehradun) 7
-
-
-
-
-
 Annexure=9.2
 
 11VS
@@ -2798,8 +2675,6 @@ Dept. of Space, Govt. of India
 Dehradun
 
 2022
-
-
 
 MEMORANDUM OF AGREEMENT (MoA)
 
@@ -2838,8 +2713,6 @@ and dissemination of learning with cerlain terms & conditions as contained in th
 Now therefore in continuation of above MoU, the PARTIES hereto enter into Memorandum of
 Agreement (MoA) to implement a Post Graduate (PG) program. This PG program shall be
 referred as M.Sc. in Agriculture Analytics in this document. The M.Sc in Agnculture
-
-
 
 Analytics is a two-year (four semesters) PG program and the degree will be offered by DA-
 ICT, Gandhinagar,
@@ -2894,8 +2767,6 @@ semesters.
 Z Semester - One & Semester Four shall be conducted by the PARTY of First part, ie
 ‘DA-NCT
 
-
-
 3 Semesier - Two shall ba conducted by the PARTY of second part i.e., “IRS”.
 
 | Semester - Three shall be conducted by the Anand Agricultural University “AAU
@@ -2947,7 +2818,6 @@ Ateta-g thé
 
 41
 
-
 10. Promotional costs like seminars. workshops. symposia. conferences and meetings shall
 be borne by the party of first part that is DA-IICT
 11 RS would try to provide hostel facility to the girl students of the program
@@ -2990,8 +2860,6 @@ MoA. nor shall either party have any such claims for damage against the other in
 
 Moccorpe der gt tore! id ha Cae See
 
-
-
 SUCH Mor-performance or delay in performance. The service provided under the MoA shall be
 resummed aS SOON a5 practicable. after such event comes to an end or ceases (o exist Each
 party Shall promptly inform the other of the axistence of Force Majeure event and shall consult
@@ -3031,8 +2899,6 @@ SIGNED. SEALED AND DELIVERED by
 
 SIGNED, SEALED AND DELIVERED by
 
-
-
 A. A
 Wetara TEE
 
@@ -3062,11 +2928,6 @@ WITNESS-2 ——— WITNESS-2_ Gap u? Bidutyng
 Date Date:
 
 Bor © Smee A bleibt Pee bey ees bobs ae wanes ged Coe seepigr ete (ELT ad eh
-
-
-
-
-
 Annexure-10
 
 Whether university is
@@ -3075,11 +2936,6 @@ orogramme/course under
 Open and Distance learning
 mode/online mode/virtual
 Campus.
-
-
-
-
-
 Annexure-11
 
 Whether university have
@@ -3090,10 +2946,7 @@ Campus of university.
 
 (Not Applicable)
 
-
-
 WY
-
 
 Annexure-12
 
@@ -3102,11 +2955,6 @@ Ombudsperson and
 established Students
 
 Grievance Redressal Cell.
-
-
-
-
-
 Annexure-12
 
 Dhirubhai Ambani
@@ -3143,7 +2991,6 @@ Executive Registrar
 
 DA-IKCT Road, Gandhinagar, Gujaral, India 382007 | +91 79 6826 1700 | info@daiictac.in | wew gaiictac.in
 
-
 Brief introduction of Ombudsperson
 
 Prof, Kiran Parmar obtained his B.E (Electronics), M.E (Electrical) and Ph.D (Electrical) degrees
@@ -3171,7 +3018,6 @@ teaching. His research interest areas are 6G Mobile Communications and Satellite
 Communications.
 
 a9
-
 
 emtaned Retr
 
@@ -3255,7 +3101,6 @@ University
 Lith, aah oe ine Port
 for S
 
-
 Dhirubhai r ki
 Java
 
@@ -3324,18 +3169,12 @@ BAC Wales tens digi Aires parte great ra
 
 51
 
-
 Annexure-13
 
 Total Number of students
 and teachers tn the current
 academic session at the
 university
-
-
-
-
-
 Annexure = 13
 
 (See serial number 71)
@@ -3383,18 +3222,10 @@ fo
 
 53
 
-
-
-
 Annexure-14
 
 Details of land utilisation
 and built-up areas
-
-
-
-
-
 Annexure-14
 
 Annexure 14_DAU_Total Built-up Area_as per BU Letter
@@ -3457,7 +3288,6 @@ jz so a |
 
 a5
 
-
 Land Area Utilized for Tar Road DAU (Gandhinagar)
 
 B/h Main Canteen to juction of FC, CEP & HoR Men
@@ -3474,7 +3304,6 @@ Tatal in SqMtr
 
 5G
 
-
 Land Area Utilized for Sports Ground DAU (Gandhinagar)
 
 in SqMtr
@@ -3485,7 +3314,6 @@ Volley Ball Ground
 | og | Basket Ball Ground
 
 SF
-
 
 Land Area Utilized for Walk Way at DAU (Gandhinagar)
 
@@ -3631,16 +3459,10 @@ SSS
 nle
 “ls
 
-
 Annexure-15
 
 Total cost of the equipment
 procured
-
-
-
-
-
 —— ee
 
 Value
@@ -3701,8 +3523,6 @@ rely GRN DATE: an Lt 13. sie PER TWRS.
 STEEL BODY DRINKING WATER COOLER,
 MODEL SDOLX2400FOR HOR MEN, GRN DATE
 MNT FOLA COST A SGST RS. 26123 16 PACH
-
-
 
 1? | FIREPUMPOTY-1 GRN DATE 11/10/2019 Cover? 1141.10.19 375.200.00
 CGST+SGST= RS. 20100/-EACH (HOLD
@@ -3768,7 +3588,6 @@ SPEAKER. MIXER CROSSOVER MAKE MPRO
 MODEL PC 2002/3 WAY PAIR OF MID FREQ
 
 61
-
 
 MITSUBISHI 2TR HI WALL SPLIT AC -5 STAR-MS | 0102014 | 3.04 672.00.
 GK24VAl4 NOSH@ 61743) +INATALLATION
@@ -3840,7 +3659,6 @@ CASSETTE AT CEP 003. (CGST & 5 GST RS.
 13.188.08 EACH
 
 6?
-
 
 CIV? | 15.06.2078
 
@@ -3931,8 +3749,6 @@ Nos, 1.57R-3 Nos & 2TR INVERTER CASSETTE |2i241
 SINGLE COM 4 Nos GRN DATE -07.11.2022 AT [22040
 NEW READING HALL OF LIBRARY.
 
-
-
 . ie
 
 [a tial}
@@ -3989,8 +3805,6 @@ AAD a.
 GENERATION PROCESSORS 3470, MOTHER
 
 150066 HL hi
-
-
 
 7 |LAB VIEWROBOTICS SBRIOACADEMICKN lEnv7?s2 [2007.13 |  1.13.92800
 __|PARTNO. 781-806-017
@@ -4067,8 +3881,6 @@ UAL & A Ce
 DELL WOSTRG 3549 LAPTOPS,10 CARRY 1
 CASES.
 
-
-
 Cs
 
 28 11 APG MAKE 10 KVA UPS Evvioad [7.10.15 2.55,850.00
@@ -4131,8 +3943,6 @@ a7 | TWENTY (20/-) DELL OPTIPLEX 3040 MT EJvis28 |12.08.2016 8,00,000.00
 DESKTOP PC'S. PROCESSOR INTEL CORE i5-
 8500, 4. GA MEMORY, 19.5" WIDE SCREEN LED
 MORWTOR 1 KEYBOARD & MOUS
-
-
 
 EE ——————
 
@@ -4218,7 +4028,6 @@ SAMSUNG 28° 4 K LED MONITOR & TWO
 EJVir4? [20.12.2016 3,40,690.00
 
 GF
-
 
 TEN | (10) DELL OPTIPLEX 3040 MT DESKTOP = [EJwiraz [29.12.2076 3,99.997.00
 PC WITH INTEL CORE 15-6500 & 4 GB MEMORY
@@ -4310,7 +4119,6 @@ READOUT & SCIENTECH 4065 FUNCTION
 = fal = pe th T Chae A
 
 GE
-
 
 7 | RUCKUS THREE (03) ZONEFLEX R 6 (02) 2ONEFLEX R 610 7 CIVi0GG [9.90.17 106,554.00
 ACCESS POINT & THREE (03) MOUNTING
@@ -4410,8 +4218,6 @@ a See a  ee
 
 3,98,959.00
 
-
-
 FINGET ATTEND RECORDER OTY-4,POWER |CGJVO72 /1.10.168
 
 ADAPTOR OTY-4, FINGERP USS READER OTY:
@@ -4508,7 +4314,6 @@ Cuvos? 2.07.19
 
 oe
 
-
 103 [SUPPLY OF RIGOL BRAND DIGITAL STORAGE |Cuvios [i8.0a20 1,52,810.00
 (OSCILLOSCOPE, MODEL D51102E OTY-5 GRN
 ada2Q 4 mol AS ihe
@@ -4595,7 +4400,6 @@ DIGITAL STORAGE OSCILLOSCOPE 3 NOS.
 GRN DATE. 21.12.2021,
 
 1,03,545.00
-
 
 119
 
@@ -4732,7 +4536,6 @@ CAvi22-
 
 fe
 
-
 LASER PROJECTOR 1 Nos. PROJECTOR LENS |CJvira- loa.on2009 6,.75,.300.00
 1 Nos & HDMI CABLE 2Mir& HOMI GABLE 2Mtr |23032
 
@@ -4807,8 +4610,6 @@ SWITCH 2 WITH 3 Yr ONSITE WARR, POWER [23,072
 SUPPLY, CARD, MODULE & FIBER PATCH
 CABLE & ETC OF LAYER 2 & 3 SWITCH IN
 HOS TELUAO BC RN GAT 24 ee
-
-
 
 RUCKUS R650 INDOOR WL AP 15Nos, CIvig2-
 MOUNTING KIT 18Mos, CAT6 CABLE, JECK 23073
@@ -4889,7 +4690,6 @@ CUvid- |030r 2023
 
 147,705.00
 
-
 re
 
 154 |BEING THE CHARGES FOR SUPPLY OF ACER [CJW23- |pomereo23
@@ -4969,7 +4769,6 @@ DATE 26.09.2023 CP2324020 FOR UPCOMING
 28,68.580.00°
 
 12.B7,565.00
-
 
 BEING THE CHARGES FOR SUPPLY EPSON
 LCD PROJECTOR 3400 LUMENS WITH INBUILT
@@ -5053,8 +4852,6 @@ BRIOIS [164.12 1,15.514.00
 EJViA30 (296.72 1,18,633.00_
 EuVvi43 (27.8.1 1,04.016.00
 
-
-
 Library Books EJVida (22.68.12 __ 228,779.00
 
 Library Books: | 1,06,535.00 |
@@ -5106,8 +4903,6 @@ Library Books | 2,83,741,00 |
 
 at |
 42
-
-
 
 . she
 ol ih 2
@@ -5176,7 +4971,6 @@ laedarcaies
 
 fe
 
-
 RAINWATER HARVESTING, PERCOLATION
 WELL BRICK MASONRY WORK, RAM MATERIAL
 SHIFTING ETC, AT HEAR FIRE STATION,
@@ -5188,18 +4982,12 @@ BEHIND LT-3 & BEHIND RE (OW 324778)
 
 #3
 
-
 Annexure-16
 
 Details of Ph.D. and Post-
 Graduate
 programmes/course offered
 by the university
-
-
-
-
-
 | $.No.| Department | Year-wise | No. of existing
 
 Annexure — 16
@@ -5234,19 +5022,12 @@ Law
 
 EE eb
 
-
 ats ef
-
 
 Annexure-17
 
 Programme/Course-wise
 fee structure and Its basis
-
-
-
-
-
 EB
 
 MOQ PAOWOUd BaIyWIWOT BIUEUY JO Sanu - GUNIINS Sea, Jo sISeg
@@ -5272,8 +5053,6 @@ quip FEY q RUG Ayszanur jo awepy
 MUNIN aay as/M-3sN9} /aWLUEITOI
 (OE 49QuInw jeiJas ao)
 iT = ainxauuy
-
-
 
 DHIRUBHAI AMBANI UNIVERSITY, GANDHINAGAR
 
@@ -5323,8 +5102,6 @@ informed the Appellate Committee (AC) about our revised fees for the BTech and
 MTech Programmes vide our letter dated Sth February 2024 (copy attache
 
 vide its letter 14th August 2024 approved our proposed fee stpset
-
-
 
 programs (copy attached). A statement showing the fee structure (increase in
 comparison to the previous year) of our all academic programs and hostel fees for the
@@ -5377,8 +5154,6 @@ month. By this, the proposed annual tuition fees paid by the MTech students. i.e
 Rs.1,60,000/ will be fully repaid by the institute to the sibs sludents by way of
 teaching assistantship stipend amounts to them,
 
-
-
 Name of the | Per Semester | Proposed Revisions per Semester
 Programme tuition fees for | for AY 2025-26 (Rs.)
 
@@ -5389,18 +5164,14 @@ item's, and the meeting ended with a vote of thanks to the Chair.
 
 86
 
-
 Annexure-18
 
 Details of year-wise and
 programme-wise student
 intake
 
-
-
 lee
 ;
-
 
 g | Department
 No.
@@ -5449,22 +5220,14 @@ M Sc {IT}
 
 BE
 
-
-
 ft eee
 
 ae
-
 
 Annexure-19
 
 Details of department-wise
 teaching staff
-
-
-
-
-
 Annexure —19
 
 (See serial number 32)
@@ -5517,7 +5280,6 @@ Caboutta
 Sal MUU UBATH PRO BSS Ph.D [Eheeirical a8 ruil! Time |
 }OSHI Engineering), WT |
 fi = Bombay | |
-
 
 §. | Dep | Employee Name | Designation | Age | Education Exp | Dateof | Full/ad | Fulltime | No.of
 Nex Joining hor f Part publica
@@ -5618,8 +5380,6 @@ Pho
 University of
 California, Davis,
 USA,
-
-
 
 a ——Seeee ee
 
@@ -5748,7 +5508,6 @@ i4
 a
 
 Se
-
 
 oY
 
@@ -5973,8 +5732,6 @@ Full Tene |
 
 Full Time
 
-
-
 Date of Full/Ad | Full Time | No. of
 
 Joining hoc
@@ -6141,7 +5898,6 @@ Full Termin
 15
 
 ee
-
 
 G1 | Sot) ARPITAMAL
 
@@ -6312,7 +6068,6 @@ Full 7 Timer
 
 tions.
 
-
 _
 
 Ocsipn, Mi
@@ -6441,8 +6196,6 @@ Part Tiers
 
 Part Time
 
-
-
 se ee
 
 =
@@ -6521,15 +6274,9 @@ ALO7-2025 | Adhoe | Part Time
 
 g/
 
-
 Annexure-20
 
 Details of non-teaching staff
-
-
-
-
-
 5.Na.
 
 14
@@ -6642,8 +6389,6 @@ rl
 
 1
 
-
-
 1
 §..No. Department/ office | Designation No. of existing
 
@@ -6679,8 +6424,6 @@ A? Repistrar Office Eetutive Registrar - |
 
 4a Registrar Office Executive-Admission And Academics
 
-
-
 No. of existing |
 
 S.No. Department/ office Designation
@@ -6715,8 +6458,6 @@ va | Secretarial Staff fissistant Mi anager - Dean Faculty Office | 1
 74 Secretarial Staff
 
 a5 Secretarial Staff
-
-
 
 _11 | PARMAR
 
@@ -6839,7 +6580,6 @@ OI /OS 2006
 
 +
 
-
 SARWAN KUMAR
 SACHANIVA
 
@@ -6955,7 +6695,6 @@ yowpee?
 
 *1) Is
 
-
 ANNL ABWWEr BVINMINHSaAWe |
 
 WAISWEN
@@ -7061,7 +6800,6 @@ Risa
 ua upeddy “oN
 ae) OPENED | oBy | wonediieog el |
 
-
 7S | VASANAWALA RRUALAL
 
 SHESH NARAYAN
@@ -7164,8 +6902,6 @@ SSC, Certificte in Eleetrical | 01 Age 2025
 SSC, Cortificte in Electrical | Ol Age 2025
 M.LISC 05 May 7025
 
-
-
 ————E =
 
 SS
@@ -7201,7 +6937,6 @@ AKASH AREAL Pr |
 ho | PARMAR LIDRARY TRAINEE M.LISC OF Aup POR
 
 106
-
 
 dp p
 
@@ -7239,8 +6974,6 @@ jlac it Re for 2O274-2 hi
 28 | Details about Gender Sensitization Workshop J 160
 |
 278 | Reporton NEP- Compliance Ke 163 |
-
-
 
 U
 ee Annexure Page
@@ -7280,19 +7013,12 @@ MoU with the engineering institute NSIT.
 
 | Institute Program
 
-
-
 Annexure-A
 
 Academic Bank of Credits
 (ABC) portal and National
 Academic Depository (NAD)
 portal registration details
-
-
-
-
-
 aso 2
 
 a ms
@@ -7314,25 +7040,13 @@ om] PIERS, SENET) [7]
 pecddy aE Ey
 
 Gur Fa}
-
-
-
-
-
 Annexure-B
 
 Photographs of Other
 Infrastructural Facilities
-
-
-
-
-
 Annexure — B
 
 Solar Power Plant,
-
-
 
 ® Sewage Treatment Plant,
 
@@ -7343,8 +7057,6 @@ i
 
 a hs vs
 | # | GPS Mia Conare ss
-
-
 
 Percolation Wells,
 
@@ -7360,22 +7072,14 @@ dia =
 
 ?. Incla
 
-
-
 ® Parking,
-
-
 
 Vermi Compost Sites,
 
 darn-Gujarat, rit
 | ardheaga
 
-
-
 @® Central RO Plant,
-
-
 
 @ Ramp atGF,
 
@@ -7385,27 +7089,19 @@ darn-Gujarat, rit
 dhinagar, Gujarat 2S200¥, india :
 f262 -
 
-
-
 @ Stores,
 
 @ ()G Room,
 
 * Cor i AA
 
-
-
 @® OG Room,
-
-
 
 @ Medical Centre,
 
 arat, India;
 
 in
-
-
 
 ® Creche (under renovation)
 
@@ -7417,15 +7113,9 @@ FE
 
 ® Herb Garden
 
-
-
 ® Sports Facilities (indoor and Quidaor),
 
-
-
 ® Open Air Theatre,
-
-
 
 ® Disabled friendly facilities in Campus like, hand rails, washrooms ete.
 
@@ -7435,17 +7125,11 @@ ee Se
 
 Resou mire, Into imdhinagar, Gujarat
 
-
-
 Annexure-C
 
 Academic Integrity Policy
 
-
-
 a J
-
-
 
 Dhirubhai Ambani
 Institute of Information and Communication Technology
@@ -7504,7 +7188,6 @@ Annexure-C
 
 2
 
-
 Soope af the Policy
 
 Ths policy applies io all DAICT faculty (full-time, adjunct, contractual), students, and research stall,
@@ -7559,8 +7242,6 @@ reports/course work/essays-and answer scripts, ete.;
 i} “Source” means the published primary and secondary material from any source whatsoever a
 includes written information and opinions gained directly fram other people, inchudi il
 scholars, public figures, and practitioners in any form whatsoover as alsa data and init’
-
-
 
 he
 
@@ -7623,8 +7304,6 @@ the plagiarism chatck.
 
 The tenure of the members will bor 2 years fs
 
-
-
 Plagiarism prevention
 
 a) DAICT has implemented and enforced the technology-based mechanism using TURNITIN software
@@ -7682,8 +7361,6 @@ Level 3: Similarities above 60% (High level}
 
 a
 
-
-
 4a
 
 The parameters of similarity witl be decided by the Academic Integrity Committee (AK)
@@ -7727,8 +7404,6 @@ Anogaute DL: Pliagiorise chek submission forms
 
 Annexure 2: References
 
-
-
 Annexure 1; Plagiarism Check submission forms
 
 FORM A
@@ -7771,8 +7446,6 @@ The software ropert is attached.
 
 Signature of the Student
 
-
-
 Annexure 2
 
 Reference
@@ -7784,18 +7457,10 @@ bites] wre lupe. ag. in potion TP TISdS acodemic-integnty-Reguiation 2016. pak
 
 a7
 
-
-
-
 Annexure-D
 
 Report on Special Features
 of Innovation and R&D
-
-
-
-
-
 Annexure-D
 Special features of innovation / R&D
 
@@ -7836,8 +7501,6 @@ and learning in universities undergo a significant change. The questions arise: 
 skills would be relevant in the coming years, and accordingly, how should we prepare
 our students to face the formidable challenges in the future? With this fact in mind,
 the university has recently set up a centre, SPARK (Supporting Pedagogy. Al,
-
-
 
 Resources & Knowledge), to provide a university-wide platform for students and
 teachers to come together and discuss the emerging issues and challenges in
@@ -7881,8 +7544,6 @@ overseas.
 campus. Fourteen such events were organized in AY 2024-25. The list of events is
 given below.
 
-
-
 s The faculty organizes Workshops/Schools/Conferences (National and international)
 on campus: Fourteen such evontsovere organced m AY 2024-25. The list of events
 is given below
@@ -7923,8 +7584,6 @@ Under the theme “Bare to Think Different’, students hosted a TED. event
 eclebrating Innovators, dreamers, and change makers who defied convention and
 inspired fresh perspectives. Five speakers from i “s
 
-
-
 transformative journeys marked by creativity, courage, and the spirit of
 challenging the norm.
 (website Link: httpsy/www.ted.com/tedx/events/60856 |
@@ -7963,8 +7622,6 @@ impacttul ventures. The Centre actively conducts lectures, workshops, and intera
 sessions featuring entrepreneurs and innovators, often in partnership with student
 clubs, to nurture a strong culture of innovation and entrepreneurship on campus.
 
-
-
 i
 
 Two noleworthy innovations emerging from DCE in recent times incluche:
@@ -7985,8 +7642,6 @@ traditional, manually refilled feeders, demonstrating a fusion of environmental
 sensitivity and technological innovation.
 
 Website link: httpsi/ceid.dau.ac.in/
-
-
 
 db b
 
@@ -8036,8 +7691,6 @@ I bach}, 6r
 ~ Full-length books monopraphs texctuding edited bowks a
 chapters inedited buck volumes) ang reputed donestie or
 inftermitnal publishing house with dameste sales regan,
-
-
 
 4.
 
@@ -8098,8 +7751,6 @@ FE ne dof olga
 
 (Tathagata Hand vopadhvan
 
-
-
 HOC: ThE} Intemational Conference ain ConMnunications
 
 ISCAS: IEE International Se pesiun on Circuits and Systerns
@@ -8155,7 +7806,6 @@ IEEE SENSORS
 
 36
 
-
 Dhirubhai Ambani
 University
 
@@ -8209,7 +7859,6 @@ Page Lot d
 
 Li | Th
 
-
 Progress Cometutiee (RPS), comprising intemal and sitemp! experts in the ates of the proposal which
 Wile! tala (ie pigs it thik AE GMa eth Sai tT
 
@@ -8238,7 +7887,6 @@ Cnty 1) Segeqemer 205 Veritas
 (Directs: = Schoo! of Tectwikyy
 
 Page 2 ots
-
 
 Anneaure 1: Format for Seed Grant for the Calegory-4 Proposal
 * Nome of the nwestgatce
@@ -8301,8 +7949,6 @@ aCh Seerualuire: (aay clahe) of ie lei a
 
 Pape 3083
 
-
-
 19 May, 2025
 SPARK — Supporting Pedagogy, Al, Resources & Knowledge
 DAU Centre for Teaching and Learning
@@ -8353,8 +7999,6 @@ experenoes in educathon
 in the Institute educational process. Offer assistance with their course design, syllabus
 preparation, teaching strategies and effective communications.
 
-
-
 Structure:
 
 SPARK will be administered by a Coordinator / Chairand a Joint Coordinator / Vice Chair, suppartind
@@ -8389,8 +8033,6 @@ Budget
 
 An initial budget of Rs 5 lakhs to support (a) External visitors/talk, [b) student volunteers, and (c)
 pnopect expenses consumables.
-
-
 
 SPARK Plans for Autumn, 2025-26
 
@@ -8438,7 +8080,6 @@ innovative and transformative!
 
 Ae
 
-
 PhD and MTech TAship Bootcamp 2025
 
 New PhD and MTech Teaching assistants were invited for a TA boot-camp and
@@ -8464,9 +8105,7 @@ resource for the future TAship orientation session.
 
 44
 
-
 ‘4
-
 
 Email text for the faculty meeting with SPARK
 June 23, 2025
@@ -8485,8 +8124,6 @@ to run every semester and we wish to create documents, recordings etc
 to support the live sessions from our faculty. We request faculty
 members who wish to contribute to this program to reply to this mail. We
 will hold a meeting sometime next week to flesh out the details.
-
-
 
 24 July, 2025
 Dear Students,
@@ -8510,7 +8147,6 @@ questions, you may write to Prof. Sanjay Srivastava
 (sanjay_srivastava) or me (v_suni).
 
 46
-
 
 Annexure-D
 Special features of innovation / R&D
@@ -8551,8 +8187,6 @@ The emergence of new technologies, especially Al, demands that the mode af teach
 and learning in universities undergo a significant change. The questions arise: what
 skills would be relevant in the coming years, and accordingly, how should we prepare
 our students to face the formidable challenges in the future? VVith this fact in mind,
-
-
 
 the university has recently set up a centre, SPARK (Supporting Pedagogy, Al,
 Resources & Knowledge), to provide a university-wide platform for students and
@@ -8595,8 +8229,6 @@ overseas.
 ® Research Incentive Policy
 
 * Seed Grant Policy
-
-
 
 I
 
@@ -8646,8 +8278,6 @@ Hands-on Al Warkshop on Agentic Alin Business (Sep Lé, #075)
 
 IPR Awareness Session (Sep 26, 2025)
 
-
-
 @ TEDx DAICT (Aug 2, 2025):
 Under the theme “Dare to Think Different", students hosted a TEDx event celebrating
 Innovators, Orcamers, and change makers who defied convention and inspired fresh
@@ -8682,8 +8312,6 @@ dialoguc, and networking in Al The event underscored DAU's commitment to
 nurturing a culture of innevation and interdisciplinary engagement in emerging
 technologies.
 
-
-
 Dhirubhai Ambani Centre for Entrepreneurship and Incubation (DCEI)
 
 The university hosts the Dhirubhai Ambani Centre for Entrepreneurship and
@@ -8711,7 +8339,6 @@ sonsitivity and technological innovation.
 Website link: http://ceid.dau.ac.in/
 
 a
-
 
 fcr Dhirubhai Ambani
 SS rs U institute of Information and Communication Technology
@@ -8755,8 +8382,6 @@ financial year and the next two years, Le., until the 30h of March of ¥+3.
 
 * The sggregste CPDA grant on, ¢.9.. the sto April of ¥ will, therefore; be Rs. 3 lakhs
 fone fkh each for, ¥-1 and y-2),
-
-
 
 a ae
 
@@ -8808,8 +8433,6 @@ ao oo
 * | the paper is accepled on the basis of am abstract, the ipcully may initially submit the abstract, and later
 suber the compkiied manuscript when it is submibed te the conkoreance.
 
-
-
 2. Facully members may use their CPDA balance to support the conference travel
 BxPENSes incunngd by their stuckents = the WG, the PG or ihe PhD students. The faculty
 member shovid endorse and send the email application on behalf of thelr student.
@@ -8857,7 +8480,6 @@ Res. 3.(h00V- of Rs. 2,.000/-
 
 54
 
-
 All receipts, bills and boarding passes or train tickels need lo be produced for reimbursement
 of ixpenses,
 
@@ -8869,7 +8491,6 @@ Director
 DA-IICT, Gandhinagar
 
 55
-
 
 95
 
@@ -8904,7 +8525,6 @@ pA | ETL “E TIT!
 
 Co OHS [AE RTT Tes —— ae TT
 sittlau Bd i (PUL) ype pees ey amr
-
 
 z
 
@@ -8974,7 +8594,6 @@ Mechanism
 
 Fd
 
-
 Status of Patent
 Patent t Filed | Published | Publication
 Number /
@@ -9021,7 +8640,6 @@ FPGA
 Driver for Parekh | 2024
 
 Driving Imaging
-
 
 SI. Patent Status of Title of the Applica
 No. | Applicatio | Patent Patent nt/s
@@ -9090,7 +8708,6 @@ Al,
 
 BA,
 
-
 Patent
 
 Patent
@@ -9104,7 +8721,6 @@ Granted
 Number
 
 60)
-
 
 Innovations
 
@@ -9157,13 +8773,10 @@ Fig. 1 Pedometer Sensor and System Overview
 The system is integrated with power saving algorithms which helps to increas
 system. A duty-cycle based approach is adopted such thal the pedometers
 
-
 lransmession is scheduled (hus the average current consumption of the pedometer is only 720A,
 resulting in the battery life of approximately 10.5-11years.
 
 rien = aes ia Se PoE
-
-
 
 F -
 
@@ -9197,12 +8810,9 @@ The pote Ee
 
 =
 
-
 Creating the Prototypes:
 
 ct
-
-
 
 3. Abstract of the invention
 
@@ -9233,8 +8843,6 @@ performance including detecting sudden changes in gail and providing early diagn
 abnornakles The stakeholders would be physiotherapists and orlhopaedics who can use this device
 paired wih a mobile app al their clinics lo make accurale prognoses abou their pabents gant
 
-
-
 PCE :
 
 Helerances:
@@ -9244,8 +8852,6 @@ AfoWwih-asp-decines raportfarticleh? 13268 eced
 
 [2], hilios:/stantordmedicine? 5. stanford edu/the? Sigail. him
 [4]. GaitRile - Temporal Gait Analysis
-
-
 
 4. Abstract of the invention
 
@@ -9279,8 +8885,6 @@ i bea
 
 yee your lexi here
 
-
-
 | te)
 
 Fig. 2 GUI of communication system (a) GUI of Senden/Receiver (b) Monitor screenshot for image
@@ -9290,7 +8894,6 @@ Pid A feran witha Miesthke bell
 miosscenie Well a plone bch cnn
 
 68
-
 
 §. Abstract of the invention
 Prof. Biswajit Mishra
@@ -9351,8 +8954,6 @@ diagnostics without social or cultura! discomfort, encouraging better heallh-see
 likely to be diagnosed or treated for hear disease. This dewice helps clase ihe diagnostic gap
 particularly in maternal health where cardiac issues often go unnoticed.
 
-
-
 innovation and Local Economic Development
 
 * Stimulating Local Innovation Ecosystems: Developing and manufacturing such devices
@@ -9384,7 +8985,6 @@ Anywhere Anytime monitoring wih color coded electrodes (no special skill require
 
 ‘OQ
 
-
 “oe
 
 8
@@ -9403,21 +9003,15 @@ Time based Algorithms running on the mobile as computing device
 
 fi
 
-
-
-
 Annexure-E
 
 Research and Academic
 activities
 
-
-
 i
 
 = “ve
 cael
-
 
 iBatige! 1 Bore
 pecbacar Fe tg Mae ion pd
@@ -9479,9 +9073,6 @@ ere ss ate: {Pree aul Pf rnlogtecr ot “ical la Pa rae ch Ada ittaita ite Twitt
 {px CaP NEC LS igs | Fabane: Cha hasta
 aed |
 
-
-
-
 i , taspe, Howth Matic pablisaad Chaeher _
 Di j leaned Paper TAM i H ' nf! op Jumads of Fonctiemal HRI AL SER
 : i Anaad:
@@ -9525,8 +9116,6 @@ Lev Oh Hae) Cel * _
 . : Haemiek ne fo  — ietertaherial Jute ef Bactieiiad E
 WOES | Wort fast WAR iT Touma ined og samme) Parte raivdn ¥ [p83 qage wae essa
 a: ee ee i cere i 2
-
-
 
 tks Tiga. Gent ta), Oe ee ee
 ERASE (Soa | ed Reape eal ewig SP er fp cearetioe aie Reread dey ace becbiniee
@@ -9586,8 +9175,6 @@ BHRASKA CHAD Ee fantaanent 1h ise aT rc 8
 
 HELA AR CELA AY | Ses et od Pe] a Te S|
 
-
-
 {ih eee aE
 | irra ‘Sharh. Htksowlsr sean ea :
 = 4 al el it a ce +
@@ -9642,7 +9229,6 @@ deere acetal eth a
 
 HA ah A RL | ade be
 
-
 Pooh, G)fnen i iiliry kay Ce atteeter shee! ote | |
 
 | aha abit ih [Reapers 1
@@ -9692,7 +9278,6 @@ Fee bed eile ti
 
 78
 
-
 |Tecergey Thr exser Bowie
 
 thenchep Revell eae
@@ -9726,8 +9311,6 @@ atdietur
 HENAN T A PATE Terre jaa
 
 A 10's esl BST Peo)
-
-
 
 fet Sep ae 1
 
@@ -9817,8 +9400,6 @@ Faeyr died heer (ie Sitch, hee Oe] eet Bere SO
 
 sh _ Thats! Titi: We aS ASL fab)
 
-
-
 PTeerettil. Hieekare
 
 IEMA A PATIL BV is Ar Ade haces Sh.
@@ -9878,7 +9459,6 @@ ia (teen Mpeg Wangiee ASD Pets
 
 81
 
-
 OO _—" Eee.
 Neptcb Marbeal usm ve Pert : , 1 [ |
 DAF [Quakes Pape (ENEWS ARATE Tarrant at gees | en tee Poe ae ere ee Ae Pa eal Tia fi
@@ -9933,8 +9513,6 @@ Higa Rstc in a Ceetanathie ot Patter Reece
 biel lt [Lend Viator etetienerieat "Re
 ee
 
-
-
 GEMANT A TATE Pe 00 beep epecae DT ST
 
 PE terse i |
@@ -9981,7 +9559,6 @@ Patil WisenEerton
 Th ot
 
 ai
-
 
 a ee
 |
@@ -10046,8 +9623,6 @@ Hos ondirsarear 3 Fa Tie AM sg arerciinny nH Reereroos. SPR Mt
 | arabe. eat Seay aaeraia | biel ac tpt a Leia a Sce LLB, bpe Bs] Lhe Sate Sapa Sriegl
 aol Flamer A Tal {Hintachovs aur Naser art val OE |
 
-
-
 —
 
 —— ee
@@ -10102,8 +9677,6 @@ Mit Coe jit WAST A PATH mere iti] I irptharentls Haesbct au visser st Seta
 [Bicmeess  tue arene
 
 SKK
-
-
 
 ee
 T
@@ -10195,8 +9768,6 @@ Shaan red or Lat
 
 (Steer a
 
-
-
 i ices Pues th SHE sinha Cine
 = F fares St Prong. aed iy =] Kina Langa |eacneerryg 1
 1 ANT 1 Tees 108 | F went ,
@@ -10250,8 +9821,6 @@ se —— i seme Mbaborere We emgaleartat- arta Tinie oe el
 BY NS SAE a
 
 FG ODT LES ARTS eS | ey
-
-
 
 [Sata 7 Trsury. Vea ‘rderuewing i a
 Vertreces tune AP VON RANT tue ea beal! [Marys dlaraer Merit jC estat el ace faye oe ee gp ERD ple 0 ice ie
@@ -10324,8 +9893,6 @@ Ladi The i ane
 
 Ve IM ey phere tg |
 
-
-
 pSteergh Ure, Receer
 LAmmeayteun bet Arenieura [eh tea Jo bey
 sama achaartaal
@@ -10369,7 +9936,6 @@ amare earn mith fhe dey arg 10, Pear Tywa Te
 fi BLP
 
 MUANER LAL TAs Tied | bry
-
 
 see ——————
 j Cte! Cedi ce Appr’ |
@@ -10452,8 +10018,6 @@ i | hdependé, Rurstlea= Suerte et Chere
 | Abad umm, het 1 eet Pred Pde bel j
 AE ud [ise ol Boreor tt |
 
-
-
 a Se (ett. dy erst
 eer herr daca bei freice Vag af Aaa
 
@@ -10490,8 +10054,6 @@ Tesnl io Abhene maim jh rnaoneet | ing Cake
 
 eae Sewage Fler Ada arene
 i a sirceaiinis TIT
-
-
 
 2
 
@@ -10550,8 +10112,6 @@ akerdiy Titanic AE ae atiprs er ii
 SU) Lear Theme AILRESSL TPWAHE JaleMattet Apc lrsihaseest erie te Pere ee ey
 | ] lNinetcalcte permennte Fa - |
 
-
-
 VhderiHior of tornalogical
 [Antero ehh phate
 eho e
@@ -10606,8 +10166,6 @@ WA Laat | a Ming anu Tarai arene (piietacl wel aaa asians
 |
 
 ah =—— +
-
-
 
 Pa! TREAD a
 
@@ -10703,8 +10261,6 @@ A asaya
 eel cofacaclst os | Hc ie) ped STS Ue Tritton Thacrites Cathe Hen hal
 ee ee tl
 
-
-
 ol ounce ie
 
 {son Hace 1 tage ls MEET AHATEA 2 oat Few cia Tne MO) [DFARS Bats
@@ -10764,7 +10320,6 @@ TT jp otinhe ct Fact SECT PARE el Phe Snir aaRS Lie lect Placer aetst Weal | MLA
 joer red Mate Pat
 
 95
-
 
 | VPlors Paras teeter re ft Bucci ag
 
@@ -10837,8 +10392,6 @@ HOTU PARERM
 1 Tssth Witnplink
 
 pete] 6 [ele
-
-
 
 —
 
@@ -10916,7 +10469,6 @@ Y ; ms hm Hanan Alara [yay inti Wrester be Seu [hepa wa scrldpeest ate Lith gre]
 A
 Tes ie
 
-
 | | Tv! Are basses
 DES | eure! 1 ANTAN SSIS AN ybogdenpg STM Minette Reads fer ete per je erica | hi oareaenc :
 ~ Suara Sir aetna aria aoe peat bat | Bi Bate STE Lesa | Mihwresla! Traeteceerraties Ese
@@ -10980,8 +10532,6 @@ F
 
 eatita
 uu
-
-
 
 psp eH Ti ABS
 ap oe
@@ -11066,8 +10616,6 @@ ag Samed amd Serre te
 fig BS: pms it eg | TH
 TS tds in Sethe ce Ferg
 Deprcces
-
-
 
 Se Oe
 | | pepe emg Wty Weta Riv a To ina chane tha erat a
@@ -11155,8 +10703,6 @@ ce et re eo en er = fi ldo
 " Micmer Pipe HOY, BSH CRSA, be vie] Naseaich Fesgs wet Eevahcatomy Pigeicteat iret lars ected ty an triie
 | Foner Chgyr 5 be Biren om pte seul [ies
 
-
-
 i!
 wssvietk Malta nk. Natali pecially
 
@@ -11188,7 +10734,6 @@ HO 4 Re EL a Sed 1 SED
 tive Ca jie Peper The ;
 
 Inkl at
-
 
 rr a ee aang iacieeasle
 ee) Sa ha a Hii ]
@@ -11280,7 +10825,6 @@ nu
 
 10 Tk
 
-
 FS via,
 
 j his ecb Ut ‘sparen of pe apy aictanced
@@ -11322,7 +10866,6 @@ Fart [tietet Hope TAPAS KEAASEATTY Wiebe ieckdbeeckde Sikes A Ser ee
 
 i f acai Kas ee OB "bere Rea iy VERS pT
 ittens 1.3 ai pe ape
-
 
 \Hemrmn Peet fo oeebi Wy Ee, SR PY lee: il |e! estore iar |
 CED | Wieesfiemiis Maper PERERA ASAEOT TUTE tae, alder Paul Pemuen: Sateen Mpc inh saith tee Si dete es bert VL fra
@@ -11403,8 +10946,6 @@ Sg Mosc tri (Fothest-Fied Doreeeer! ia
 Soe fbb’ Pima erat 4 a a jaa {ope Foe
 Iba Liefuema! Korgade,
 
-
-
 Aveds : Hoke Tiiuaiet hits
 
 Sv id Whew Tiesaei_ emul V? presi trae Sic
@@ -11480,7 +11021,6 @@ CM gre eaten
 
 Drlrooreget fachreeees fot
 204 | UTh-T 7 epg iota er Plewbte:
-
 
 ,
 Ted Te tle sate
@@ -11570,8 +11110,6 @@ EP SM AS ks
 
 1h, | pty
 
-
-
 [Pears Kaspar. a Tore
 Kacsilesd $ acter Teas | seater .
 tu8 | atemal Bene WORAY'S PADAPABTIOY [DetewHC  [erkae Svenduiemgaan, SO 1 OLSEN 2038 1VEEF Ty
@@ -11643,7 +11181,6 @@ pat G) barra
 
 i" ASH MGRAW AL, mateo [ch bah Toes foie beaten
 
-
 1 Per es eer 7 I
 
 Se Bo ee a ee us
@@ -11712,7 +11249,6 @@ TAXES | Apts hee AAD A A Sel irems « Wiadie(die Hatt Yue: len i 1 LOOT AT RAR l
 
 yam anal Ving 8 Stechabics
 
-
 Wearernal Dern Berd
 Samuaiuh Crogta, Waa [Eee eee ena Seat
 
@@ -11757,7 +11293,6 @@ Fingicala erin: bear Beagertinl Fiona ah
 14 Pap vi ion : 5 i +p) ease La
 Ty [Paar] USE] ALTROAMY AL RE Tatu: Viatoaba ital ate Mier Phang laceetscn 1 ie TR] Sa dy pe sist
 [iar, dl oder Sharia vote ; HL
-
 
 ? - eee
 | Se ee eo | |
@@ -11834,8 +11369,6 @@ Te pC enifterency Paper NSIT VOSA AER Tal ai ait dad unl Sarno Nigeria at seagea
 Fare berang Oatiate tat ‘Thay
 t J [OT hk geste
 
-
-
 Brobhandks Vaden. Bibs [A Spectres: Eiflieerst
 Has Webs Aeuegshy PNESMSET Sie ees with Spaces
 Tava eed Veet Vis ede atti eee
@@ -11871,7 +11404,6 @@ https cde are 1h UCT SF
 iindiaiiateld i oY
 
 lil
-
 
 | Nae of the Principal | ar
 — fovestivagar! Ce Racor of ier et ppm Vear af Poa Deration of} Sanction
@@ -11941,8 +11473,6 @@ priculiune Werslicatieys
 
 BERETS] Sy metbadtiritectis
 
-
-
 Speech Techeodipics mm indian Larges -
 hoa) Legge Translation Mitac
 
@@ -11990,8 +11520,6 @@ ral Samarahh Tiware Ce
 [Al = Prof Sanna This
 
 Prat Vinay 8 Palaparihs
-
-
 
 inna Camas Crier © rope Vel and [Lier anf trate:
 
@@ -12086,8 +11614,6 @@ nits SW oh
 cera the OME) climate peijocs af wa
 level enemas od significant wow heicht
 
-
-
 Tconinh Getines oF
 eiciience (PCL
 
@@ -12100,8 +11626,6 @@ Pou Manish Rurtiar iii Nera veks (etc HET
 2026 SF BES
 
 the cononiliners of nae-akel
-
-
 
 ContenrecesV orkshops Sin posi Schiols Organised
 
@@ -12187,8 +11711,6 @@ The Summer Scho oe — Sia Prous Ted" |
 on Anomatic Speck Reco
 
 [week MTs bo | oremer Seen Otine Jog 5. 303h
-
-
 
 Tea 1 i
 
@@ -12281,8 +11803,6 @@ Hest Paper Award
 
 Idew Aeehectines
 
-
-
 Wied Fhe Rast panier patie biey a WAS DS ySpeed,
 YASHIWASAVADA — [Facult M23 EM icicn SIMO Sastiin with Saree Matery Pruginkiege SES | |W AMIS. eed) [Hest Paster Avan!
 [Wingless Ansenma wid Micronkanie Suites
@@ -12340,7 +11860,6 @@ DE S005 fel ot Womeniver, Caruada
 
 118
 
-
 Seed Grant
 
 Granted Amount
@@ -12350,7 +11869,6 @@ INE
 [28.300
 
 11
-
 
 Memorandum of Understanding: O
 Name of the Organization
@@ -12395,7 +11913,6 @@ LORE. Insitinae of [cechere legs inn) Rescanch
 SSIT, Institue of Forensic Sciemee and Cyber Security (ESCs) 335 202k
 
 170
-
 
 cies sastanget teenvar teazaeelea
 Seen pate:
@@ -12481,13 +11998,11 @@ Serial D neprgi aaa L eery ck |
 swan Pevsrct Puede tee Wes Wag Bade
 Lometod) areal (ISIS ¥ aise Pat
 
-
 fee ach ineiep fe Debrecen eigen
 hevctn., fi-for pupae, anal diana
 backup seartepy fe thew sted om]
 
 122
-
 
 niernathinial Collaboration
 
@@ -12531,7 +12046,6 @@ Mivnasli Liniversity,
 
 lf
 
-
 Pesiece at aL
 
 tencrmar ae
@@ -12570,17 +12084,10 @@ Sac SUP Pg On a ee
 Fil par diet
 i Pepe BAA iy
 
-
-
 Annexure-F
 
 Placement Details of
 2024-25 Graduating Batch
-
-
-
-
-
 Student 1 |
 
 E
@@ -12681,8 +12188,6 @@ TOU1O1 105 [CVG A PRIVANSHU KAMADELAL SNELL SCM UTS.
 JEMOUI LY [PATEL WAIN CMAN DHUCAM T
 “ PATEL YO PINAL HLM
 
-
-
 Sr. Mo.| Student 10 | Same of the Students
 
 a? | SOC OTS | Ss eT
@@ -12770,7 +12275,6 @@ AOAIOAOOF [Ayes Dawe en MulivenduresPytitd, SS
 
 js
 
-
 ee |
 
 ide
@@ -12840,8 +12344,6 @@ rt | MPMOSOSO|PATELVHAISHATLESHOHAT | Mdintech Feehnotagers Limited __ | aoa
 17h | MOPIOL714 HARSERUSHINA TULSIBHADSUMAGIA  [Finkisth Global Center et
 rh [AORIOI71|ARFANWUMARVAGH J Stintoch Technotopes erated
 
-
-
 [Studentit| = Nameatthe Student
 
 SOLS [CAL ANIL TAD WAGE
@@ -12899,14 +12401,11 @@ TORIOIIS) [MGT OOM AAMT RURLAR, DOSC Tech Labs Private Lenited
 
 ATEL RATA PAANESTER LIA AEL
 
-
-
 oo)
 
 gens
 
 130)
-
 
 Chirubhai Ambani Winierity » Placement Betaik A¥ 0a4-25
 
@@ -13013,7 +12512,6 @@ L —
 
 131
 
-
 ita
 
 Y 9) Pai MAREN MMOS [epee
@@ -13074,21 +12572,14 @@ Te | Fog a0 [PATIL PHA THiAM GaLIPRLIMAR ew
 
 132
 
-
-
-
 Annexure-G
 
 Placement Audit Report for
 2023-24 of the UG
 programs
 
-
-
 A
 pa]
-
-
 
 : Annexure-G
 SORAB S. ENGINEER & CO. (Regd.)
@@ -13151,7 +12642,6 @@ SEP SnMber bp, a0 2S
 
 MUMBAI* BENGALURW « KANPUR « SAVARKUNDLA
 
-
 SORAB S. ENGINEER & CO. (Regd.)
 
 Placement Report Highlights
@@ -13196,7 +12686,6 @@ Page 2ofo
 
 135
 
-
 —_—_ _s_
 
 SORAB S. ENGINEER & CO. (Regd.)
@@ -13230,7 +12719,6 @@ J
 y.
 
 Pape 3019
-
 
 ll el ee
 
@@ -13288,7 +12776,6 @@ Page 4 of o
 137
 
 Bea) SS eee ee
-
 
 NN  —————————————————
 
@@ -13351,7 +12838,6 @@ Dhirubhai Ambani University
 Page 5014
 
 138
-
 
 SL Lg a nr
 
@@ -13478,7 +12964,6 @@ bl
 
 at
 
-
 ———————————————
 
 SORAB S. ENGINEER & CO. (Regd.)
@@ -13556,7 +13041,6 @@ Dhirubhai Ary
 Page 7 af
 
 based on location -
-
 
 SORAB S, ENGINEER & CO. (Regd.)
 
@@ -13731,7 +13215,6 @@ au
 i
 ri)
 
-
 {EEE SSO
 
 =
@@ -13871,10 +13354,7 @@ Page Foro
 
 142
 
-
 Sees —s--— i ee
-
-
 
 Annexure-H
 
@@ -13882,10 +13362,7 @@ Placement Audit Report for
 2023-24 of the PG
 programs
 
-
-
 : ale
-
 
 Annexure-H
 SORAB S. ENGINEER & CO, (Regd.)
@@ -13951,7 +13428,6 @@ MUMBAL* BENGALURU « KANPUR * SAVARKUNOLA
 
 144
 
-
 SORAB S$. ENGINEER & CO. (Regd,)
 
 Pl
@@ -13995,7 +13471,6 @@ Median earning ootential (Domestic): Rs 7.02 lakhs per annum.
 Page 2 of 8
 
 145
-
 
 SORAB S. ENGINEER & CO. (Regd.)
 
@@ -14047,7 +13522,6 @@ Classification of maximum ¢aning potential based on location a
 Domestic (INF) '
 
 146
-
 
 eee aaa ee, |
 
@@ -14107,7 +13581,6 @@ aoe Ee
 Page 4 old
 
 ; 147
-
 
 SORAB S. ENGINEER & CO. (Regd.)
 
@@ -14183,8 +13656,6 @@ For Sorab S. Engineer & Co. Dhirubhai Ambani University
 
 Pape S of 8
 
-
-
 SORAB 5. ENGINEER & CO. (Regd.)
 
 aetn
@@ -14240,7 +13711,6 @@ eae
 Page &o0l8
 
 149
-
 
 SORAB S. ENGINEER & CO. (Regd.)
 
@@ -14301,7 +13771,6 @@ Page 7 ol &
 
 150
 
-
 SORAB S. ENGINEER & CO. (Regd.)
 
 = ee = mat EE rh | ie br erie
@@ -14338,16 +13807,10 @@ Pape B of &
 
 {51
 
-
 Annexure-l
 
 Photographs of Green
 Initiatives
-
-
-
-
-
 Annexure — |
 
 ® Single-use plastic-free campus
@@ -14363,27 +13826,17 @@ ae  O9/10
 
 _ Gandhinagar, _Guyarat, India =
 | Gujarat SA200/) India
-
-
-
-
-
 @® Sewage Treatment Plant (STP)
 
 rat, India @=
 
 an, Oana, Gupre
 
-
-
 ® Rainwater harvesting by Percolation Wells,
 
 156
 
-
 Yermi Compost Sites,
-
-
 
 Yerm: Compost Sites,
 
@@ -14397,21 +13850,10 @@ Dey, ij | * | OP Rep Geren
 _lndia
 
 158
-
-
-
-
-
-
 Annexure-J
 
 Details about Gender
 sensitization Workshop
-
-
-
-
-
 Annexure-]
 
 ICC Committee Report for Academic Year 2024-25
@@ -14450,7 +13892,6 @@ J leit oreran Wil ental
 
 161
 
-
 OAC Gengter Semufivadion Season for Porat and Stop! Afemiere
 
 Lh, deed oie
@@ -14461,17 +13902,13 @@ rt
 
 lie
 
-
 Annexure-K
 
 Report on NEP-Compliance
 
-
-
 ! ® sia
 ~ i . ,« ik
 = _ ii
-
 
 Annexure-K
 Dhirubhai Ambani University (DAU)
@@ -14508,8 +13945,6 @@ Online Some continuing education
 Programmes programmes, and anchor institute
 programmes are conducted in online
 mode
-
-
 
 Thrust Areas
 
@@ -14578,8 +14013,6 @@ Institute involves in capacity building
 programmes for faculty members
 through CEP and AIP
 
-
-
 Thrust Areas Sub-Areas Status
 
 Govemance and institutional Institute has created a vision, mission
@@ -14626,8 +14059,6 @@ students.
 ‘Lecture theatres and lab building are
 wheelchair accessible,
 
-
-
 Educational Several courses on global systems,
 Framework for cultural diversity, and environment
 Global Citizenship | follow the Global Citizenship Education
@@ -14667,8 +14098,6 @@ fechnical/cultural events.
 ‘The office conducts regular alurnni
 meetings.
 
-
-
 UNNAT BHARAT
 
 The institute has nominated three
@@ -14696,9 +14125,7 @@ government programmes.
 
 Lt
 
-
 .
-
 
 Annexure-L
 
@@ -14707,8 +14134,6 @@ Ragging
 (Report on Anti-Ragging
 Day & Anti-Ragging Week)
 
-
-
 a
 
 q *
@@ -14716,7 +14141,6 @@ q *
 a
 
 - -"*
-
 
 Annexure-L
 Dhirubhai Ambani University (DAU)
@@ -14754,8 +14178,6 @@ These videos sensitized students about:
 @ The legal provisions and punishments related to ragging.
 
 ® [he rights and responsibilities of students.
-
-
 
 ® Support mechanisms and grievance redressal systems are available in the
 University.
@@ -14798,8 +14220,6 @@ and inclusive environment,
 
 4. Institutional Commitment
 
-
-
 Dhirubhai Ambani University remains vigilant against any form of ragging. The
 administration, faculty, and students collectively ensure a safe and friendly campus
 environment, The university is determined to maintain its ragging-free status in the
@@ -14829,20 +14249,12 @@ Office of the Dean (Students}
 Dhirubhai Ambant University
 Gandhinagar, Gujarat
 
-
-
 173
-
 
 Annexure-M
 
 Initiatives taken for the
 Students Wellbeing
-
-
-
-
-
 Annexure-M
 
 The Dean Students Olice under the leadership of the Dean Students oversees the
@@ -14875,8 +14287,6 @@ on Bouncing Gack: The Art of Resilienee, with alumni. Discussions
 were initiated on dealing with stress during campus placement time.
 preparation required for placement. company expectations and
 employability skills.
-
-
 
 * 3nd party counseling service:
 Subscription to YourDost - Third party 24 hours counselling service
@@ -14918,18 +14328,11 @@ the hostel led by the hostel supervisor.
 Students if found guilty of violating anti-drug rules are immediately
 taken inte DAC proceedings and handed over scrious penalties.
 
-
-
 Annexure-N
 
 Unique Initiative “YourDost”
 as a part of Students
 Wellbeing
-
-
-
-
-
 Annexure-N
 
 YourDOST
@@ -14937,8 +14340,6 @@ YourDOST
 Your Emotional Wellness Coach.
 
 We help leading institutions build Happier communities
-
-
 
 ra ‘,
 ml
@@ -14954,7 +14355,6 @@ engaged with YourDOST who engaged with YourDOST is
 292
 
 179
-
 
 Utilization Summary : Bifurcation
 
@@ -14972,12 +14372,9 @@ Aucio sessions
 
 180
 
-
-
 Distribution
 
 eS
-
 
 52%
 45%
@@ -14985,7 +14382,6 @@ eS
 Gender Wise Breakup ge Wise Breakup
 
 182
-
 
 B6%
 
@@ -14997,14 +14393,11 @@ Session Repetetion
 
 183
 
-
 Distracted Sleepless
 
 Worry tree
 
 +2
-
-
 
 At YourDOST, we use the Subjective Unit of
 Wellness (SUV) as a qualitative metric to assess
@@ -15036,7 +14429,6 @@ Ending
 
 185
 
-
 as,
 — Beat,’
 
@@ -15055,8 +14447,6 @@ not explicitly expressed any threat
 Intent. to themselves or others.
 
 186
-
-
 
 Cor |
 
@@ -15078,7 +14468,6 @@ i
 ~ LGBTQIA+
 
 is?
-
 
 vom ERE T
 ede
@@ -15106,8 +14495,6 @@ ee
 14% of the sessions were with clients discussing about Parents.
 
 9% of the sessions were with clients discussed about GrieF/Bereavement.
-
-
 
 tt
 
@@ -15137,8 +14524,6 @@ a
 
 189
 
-
-
 a,
 f Lt \
 
@@ -15162,13 +14547,9 @@ e 25% of the sessions were with clients who were having Sexual Curiosity.
 
 190
 
-
-
 ee
 
 Activities Undertaken
-
-
 
 \<ee/ YourDOST - Launch Orientation
 
@@ -15198,7 +14579,6 @@ We bein unleash then best verséon of YOU
 
 192
 
-
 Sinn Know Your Personality Bootcamp
 
 Event Date Date: 14th Mar, 2025 et eee BE
@@ -15218,7 +14598,6 @@ We have also briefed them about YourDOST Services
 & how it can helped them in their student journey.
 
 193
-
 
 Ss,
 a _. a
@@ -15253,7 +14632,6 @@ We help unkeash tthe best version of YOU
 
 1o4
 
-
 YourDOST Warrior Stories
 
 "| had a mental breakdown
@@ -15275,8 +14653,6 @@ was double timing me and another person, so | got out of it and moved on, but he
 classmates, blaming me"Sharadha elucidates being anxious about the whole situation, and she also started having mental
 breakdowns as she had nobody to give her emotional support. Every friend she made in college stopped talking to Sharadha
 due to this issue. and she was also facing quarrels with her partner.
-
-
 
 YourDOST Warrior Stories
 
@@ -15305,8 +14681,6 @@ available, Ful) St :
 
 196
 
-
-
 / ers
 
 \xtas Feedback from Community on Counseling Sessions
@@ -15331,8 +14705,6 @@ me a realistic target to work ont"
 
 197
 
-
-
 Always here
 for you!
 
@@ -15340,20 +14712,12 @@ www.yourdost.com
 
 198
 
-
 Ls
-
-
 
 Annexure-O
 
 Activities of Student Clubs
 and Committees
-
-
-
-
-
 Annexure-O
 
 Report on Committees and Clubs
@@ -15395,7 +14759,6 @@ Setups}, and assists in technical ceecution of events.
 Lexis, mack interviews, alunini sessions, and recruiter intoractrons,
 
 AO)
-
 
 3. Student Clubs (22)
 
@@ -15452,8 +14815,6 @@ Dey Ect Le
 « Community Building: Clubs and Committees serve as jong for temniwerk,
 leadership, and social responsibility. :
 
-
-
 5. Conclusion
 
 The Dean (Students) Office at Dhirubhai Ambani University (formerly DA-ICT) effectively
@@ -15464,18 +14825,10 @@ inclusivity in biphior odecition institutions,
 
 202
 
-
-
-
 Annexure-P
 
 Summary of Students’
 sports Activities
-
-
-
-
-
 Annexure-F
 
 Report on Anni ual Sports Events
@@ -15523,8 +14876,6 @@ The [nter-Wing ‘Tournament encourages hostel wings la compete in sports such a
 basketball, volleyball, chess, and carom. Typically caging 300+ students, this event
 creates a friendly rivalry. amonp hostel wings while enhancing unity and participation.
 
-
-
 Freshers’ Weekend intendiuees first-year students to campus sports culture. Activities
 include eecket, foothall, and fun races etc. Around 3006 freshers take part, helping them
 build fritndships ane intepeake inte the QA eommunily,
@@ -15569,8 +14920,6 @@ both physical and mental well-being,
 @ Inchisivige Eyal opportunities for men’s and veomen’s bens ares raed Lipo
 epveer bss.
 
-
-
 5. Conclusion
 
 Threugh its diverse and well-structured annual sports events, Dhirubhai Ambani University
@@ -15582,19 +14931,12 @@ COMMIMUENILY engeee mic.
 
 206
 
-
 7
-
 
 Annexure-Q
 
 Details about Rural
 Internship
-
-
-
-
-
 Annexure-Q
 
 RURAL INTERNSHIPS
@@ -15676,8 +15018,6 @@ a | S|
 
 %.
 
-
-
 Manavadar, Junagadh,
 Dwarkesh Gaushala ee
 Gujarat
@@ -15737,8 +15077,6 @@ fl
 
 m be te,
 oe ha | Bo
-
-
 
 Number of
 
@@ -15856,8 +15194,6 @@ For the academic year 2023-27024, one batch of students were enrolled far these 
 The BTech 2022 batch comprised around 408 students. They were placed in 3 States with
 23 Non-Governmental Organizations. The Rural Internship period was from Decomber,06,
 2023, to December 31, 2023. Details appear in Table 2.  mbe
-
-
 
 Table 2: State and Organization-Wise Student Distribution
 - Number of
@@ -15993,8 +15329,6 @@ The Bicch 7073 batch comprised around 428 students. They were placed in 8 States
 68 Non-Governmental Organizations. The Rural Internship period was from December 04,
 7074, to December 21, 7024. Details appear in Table 3.
 
-
-
 Table 3: State and Organization-Wise Student Distribution
 
 Number of
@@ -16022,19 +15356,12 @@ sre Kanan Fondnion aed cect‘
 
 #i?
 
-
 aor
-
 
 Annexure-R
 
 Details about
 Unnat Bharat Abhiyan
-
-
-
-
-
 Latest Updates § = Episoche-6; “Lifestyie For Environement’= Living Udaharar # = ea Select Linguage LO A- A Ae
 | Ta arent, ae eee er ad ee Annexure-R
 i alle a flagship program of Ministry of Edbuootion (hot), Go MURR an a i
@@ -16074,7 +15401,6 @@ Technology,
 (Chante a
 
 ai 214
-
 
 d|
 LAs
@@ -16151,16 +15477,10 @@ Fo WBA Brochure = July 2025
 
 Contac? us
 
-
 Annexure-S
 
 Students community service
 group - Sambhav Activities
-
-
-
-
-
 Annexure-5
 
 Sambhav Activities
@@ -16177,23 +15497,14 @@ Conducted a book sale drive in which the used books are collected from the
 graduating students and sold to the intaming students at a discounted rate, The
 proceeds from this book sale drive are used to partially fund the orphanage visits
 
-
-
 ih
 1
-
-
 
 Annexure-T
 
 MoU with
 the engineering institute
 LDRP, Gandhinagar
-
-
-
-
-
 J Eh
 
 Tis Mentorship Agreement (Agreement) is enteral into on Dare: 14th Agri! 20194
@@ -16246,8 +15557,6 @@ rescurch tniethadelogy, and data analvens; and dd) Share relevant resources, res
 publications, and industry connections ta support the Mentce’s academic and research
 ein havors.
 
-
-
 4 Responsibilities of the Mentee: (a) Designate a liaison offiews respeamisitile fil
 coamlinating with the Mentor and facilitating the implementation of the masntonsday
 program, (by Parherpate in curiculum revision workshaps, faculty development sessions,
@@ -16290,17 +15599,11 @@ bath April, 2024
 
 221
 
-
 Annexure-U
 
 MoU with
 the engineering institute
 NSIT, Ahmedabad
-
-
-
-
-
 STP Ub Ba Oe
 
 De PR de SS A SE ge ES
@@ -16383,7 +15686,6 @@ A RoW fe
 
 Wu wu
 
-
 i
 
 A pe
@@ -16438,7 +15740,6 @@ ae
 
 a te
 
-
 3. Responsibilities of the Mentor
 
 (a) Collaborate with the Mentes to assess the current curriculum and identify areas for
@@ -16492,20 +15793,10 @@ Gandhinagar Ahmedabad
 Mentor lentee
 
 Date: 22" August, 2025
-
-
-
-
-
 Annexure-V
 
 Activity Report
 LDRP, Gandhinagar
-
-
-
-
-
 Annexure-V
 
 Training Sessions organised by DAILCT Faculties at LORP-TTR
@@ -16525,10 +15816,7 @@ Commdinators: lr. |imani Trivedi
 
 Schedule of the Session : 4 Theory Sessions and 2 Practical Sessions ( Votal @ Sexsias)
 
-
-
 228
-
 
 Event 2: Research and Publication Directions- Expert Talk
 
@@ -16567,11 +15855,8 @@ Publication Directions
 
 Fr i |
 
-
 JE2008, India
 Lat
-
-
 
 Research and
 Publication Directions
@@ -16587,8 +15872,6 @@ Ps pe :
 
 Ansagareh are
 Publicabon Giner toons
-
-
 
 Event 3: FD on “hig ne wil to Hescurch and lnnovation
 
@@ -16631,7 +15914,6 @@ q
 
 eae
 
-
 Lat 23.238887° Long #2.b30208"
 S0/11/24 12:05 PM GMT +0830
 
@@ -16643,9 +15925,7 @@ CaaS TOL A
 
 mf
 
-
 234
-
 
 Gide : (3h December 2024
 
@@ -16684,8 +15964,6 @@ Buclopaulhyay
 3:13 PM to 3:45 PA Chising Ceremony
 
 4:45 2PM to sie Ml
-
-
 
 Savin Vichy aly 7 ‘Li = ny GHIEFP PATARGA
 
@@ -16746,7 +16024,6 @@ Tul
 
 236
 
-
 _” = GPS Map Gamera #
 
 LDORP-ITR, GANDHINAGAR, GUJARAT, INDIA
@@ -16754,8 +16031,6 @@ LDORP-ITR, GANDHINAGAR, GUJARAT, INDIA
 LEARNING
 
 7) Lat 24.238946° Long 72.6390839"
-
-
 
 ii) MATHEMATICS-
 DRIVEN MACHINE
@@ -16772,21 +16047,14 @@ eae
 
 12
 
-
 23g
-
-
-
 
 Annexure-W
 
 Activity Report
 NSIT, Ahmedabad
 
-
-
 ig «
-
 
 Annexure-VW
 
@@ -16854,8 +16122,6 @@ Traditional forensic methods and early detection approaches rely on visual anifa
 handcrafted features, which quickly become obsolete as deeplake generation evolves. State:
 of-the-art research indicates that robust solutions musi i multi- lewg leaming
 
-
-
 Given this background, the proposed project secks lo design and implement a deep learning:
 based framework for reliable deepfake detection and prevention tailored to forensic
 applications. The novelty of this project fies in integrating spatial-spectral convolutional
@@ -16906,7 +16172,6 @@ based verification frameworks to track video authenticity across platforms, By e
 invisible markers during video recording or implementing erypiagraphic authentication
 pipelines, the system can prevent manipulated content from being misused, thereby
 strengthening the reliability of digital media in legal and public contents.
-
 
 6. Brief outline of the project with specific technology lall-outs
 
@@ -16973,7 +16238,6 @@ ee a
 
 243
 
-
 « Noise Rolastiess: Drain with compressed, blurred, or resid videos je handle socked media
 lisiaied nis
 
@@ -17031,7 +16295,6 @@ ALA,
 "
 
 244
-
 
 10. Year-wise breuk-up of physical achievements with specie jntermediate milestunes in terms of
 aims and objectives)
@@ -17154,7 +16417,6 @@ werficalion.
 
 on aa =
 
-
 Al system
 
 ST —
@@ -17241,7 +16503,6 @@ aS 2
 
 246
 
-
 14, a) Contribution of Project Implementing/. & other Organisation in Total udget Outlay:
 Rs. 14.37,0%6
 
@@ -17275,21 +16536,11 @@ and whether in-house R&D unit of the finn is recognised by DSI.
 4. Any other information in suppert of the proposal,
 
 24?
-
-
-
-
-
 Annexure-X
 
 List of programs conducted
 under Anchor Institute
 Program
-
-
-
-
-
 Annexure-*%
 
 ALP Memtar the focal [netituie
@@ -17334,6 +16585,5 @@ Yeh Ape 2a Abomcare! Pant
 Vian. Agrawal) aed Balu Pee
 
 249
-
 
 i®

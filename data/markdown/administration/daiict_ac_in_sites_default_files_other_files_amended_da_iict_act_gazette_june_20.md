@@ -2,19 +2,22 @@
 title: "DAIICT Ammendment ACT 2024"
 url: "https://daiict.ac.in/sites/default/files/other-files/Amended_DA-IICT_Act-Gazette_June-2024.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "DAIICT Ammendment ACT 2024"
 ---
 
+# DAIICT Ammendment ACT 2024
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
+
 Extra No. 6 
- 
- 
- 
- 
- 
- 
- 
  © 
 The Gujarat Government Gazette 
 EXTRAORDINARY 
@@ -26,14 +29,6 @@ PART IV
  
 Acts of Gujarat Legislature and Ordinances promulgated and Regulations 
 made by the Governor. 
- 
- 
- 
- 
- 
- 
- 
- 
 The following Act of the Gujarat Legislature, having been assented to by the 
 Governor on the 22nd March, 2024 is hereby published for general information. 
 K. M. LALA, 
@@ -55,7 +50,6 @@ Short title.
 Guj. 6 of 2003.
 
 6-2 
-    
 GUJARAT GOVERNMENT GAZETTE, EX. 13-05-2024 
 [ PART  IV 
 Amendment of 
@@ -136,18 +130,12 @@ any other field and/or Educational Discipline and interdisciplinary areas across
 fields / disciplines for the advancement of mankind, consistent with the intent, 
 objectives, and substantive guidelines framed under the National Education 
 Policy, 2020. The objects of the University shall be as follows:- 
- 
- 
- 
 (i)  
 to disseminate, create and preserve knowledge and understanding by 
  
 teaching, research, training and extension activities by effective 
  
 demonstration and influence of its corporate life on society in general; 
- 
- 
- 
 (ii)  
 to create centers of excellence for providing knowledge, education, training 
  
@@ -184,9 +172,6 @@ for the advancement of mankind;
 (iii)  to create capabilities for development of multimedia content and its 
  
 distribution; 
- 
- 
- 
 (iv)  to develop patterns of teaching for certificate or diploma courses, 
 undergraduate and post-graduate courses and at doctoral, post-doctoral, 
 vocational or any other level and to maintain a high standard of education, 
@@ -202,9 +187,6 @@ Journalism, Sports, Dairy, Animal Husbandry, Agriculture, Farming,
 Horticulture, Forestry, Fisheries, Skill Development and any other field 
 and/or Educational Discipline and interdisciplinary areas across fields / 
 disciplines for the advancement of mankind; 
- 
- 
- 
 (v)  
 to develop training facilities and to make arrangements for training in 
 higher education, professional education, vocational education and allied 
@@ -221,9 +203,6 @@ Husbandry, Agriculture, Farming, Horticulture, Forestry, Fisheries, Skill
 Development and any other field and/or Educational Discipline and 
 interdisciplinary areas across fields / disciplines for the advancement of 
 mankind; 
- 
- 
- 
 (vi)  to function as a learning resource centre for knowledge management and 
 entrepreneurship development in the areas of Science, Technology 
 including Information and Communication Technology, Engineering, Gas, 
@@ -237,7 +216,6 @@ Sports, Dairy, Animal Husbandry, Agriculture, Farming, Horticulture,
 Forestry, Fisheries, Skill Development and any other field and/or
 
 6-4 
-    
 GUJARAT GOVERNMENT GAZETTE, EX. 13-05-2024 
 [ PART  IV 
 Educational Discipline and interdisciplinary areas across fields / disciplines 
@@ -257,26 +235,14 @@ Journalism, Sports, Dairy, Animal Husbandry, Agriculture, Farming,
 Horticulture, Forestry, Fisheries, Skill Development and any other field 
 and/or Educational Discipline and interdisciplinary areas across fields / 
 disciplines for the advancement of mankind; 
- 
- 
- 
 (viii)  to establish close linkage, with the industry to make teaching, training and 
 research at the University relevant to the needs of the economy, at national 
 and global level; 
- 
- 
- 
 (ix)  to provide consultancy and Research and Development services; 
- 
- 
- 
 (x)  
 to set up online and distance learning facilities, e-learning facilities as per 
  
 the current status and such other modes as may develop in future; 
- 
- 
- 
 (xi)  to set up study centers, examination centers within or outside the State of 
  
 Gujarat, including such centers established overseas, subject to the 
@@ -286,9 +252,6 @@ permission of the regulatory bodies under any law made by the Parliament
 and any regulations, rules made by the regulating bodies and/or the 
  
 Government of India; 
- 
- 
- 
 (xii)  to pursue any other activity, association, partnership, or provide any 
  
 services as are considered by the University to be incidental and ancillary 
@@ -317,9 +280,6 @@ word “University” shall be substituted;
 (iii) in clauses (xxix) to (xxxi), for the word “Institute”, wherever it occurs, the 
 word “University” shall be substituted; 
 (iv) for clauses (ii) to (iv), the following clauses shall be substituted, namely :- 
- 
- 
- 
 “(ii) to provide for instruction, training, research, advancement and 
 dissemination in such branches of knowledge or learning pertaining to fields 
 of Science, Technology including Information and Communication 
@@ -364,9 +324,6 @@ Farming, Horticulture, Forestry, Fisheries, Skill Development and any other
 field and/or Educational Discipline and interdisciplinary areas across fields / 
 disciplines for the advancement of mankind, in order to achieve international 
 standards of such education, training and research; 
- 
- 
- 
 (iv) to prescribe courses and curricula and provide for flexibility in the 
 education system including interdisciplinary courses, Choice Based Credit 
 System (CBCS) and other features or flexibilities as envisaged under the 
@@ -412,7 +369,6 @@ in  the  marginal  note,  for  the  word  “Institute”,  the  word “Univers
 shall be substituted.
 
 6-6 
-    
 GUJARAT GOVERNMENT GAZETTE, EX. 13-05-2024 
 [ PART  IV 
 Amendment of 
@@ -600,7 +556,6 @@ the University shall be appointed in such manner and on such terms and
 conditions as may be prescribed by the Regulations.
 
 6-8 
-    
 GUJARAT GOVERNMENT GAZETTE, EX. 13-05-2024 
 [ PART  IV 
 (2) The Directors shall manage their respective faculties / departments / institutes / 
@@ -623,9 +578,6 @@ Guj. 6 of 2003.
 23. 
 In the principal Act, for section 21, the following section shall be substituted, 
 namely:- 
- 
- 
- 
 Deans. “21.  (1)  The Deans of the University shall be appointed by the Director 
  
  
@@ -636,8 +588,6 @@ department / institute / centre of the University, with approval
  
  
 of the President of the University. 
- 
-  
 (2)  The Deans shall assist the Director General and relevant 
  
 Director/s in managing the academic and / department / institute / 
@@ -782,9 +732,6 @@ Guj. 6 of 2003.
  
 Transitory  “34. Notwithstanding anything contained in this Act,- 
 provisions.  
- 
- 
- 
 (1)  the Director may, with the prior approval of the President and 
  
 subject to availability of funds, discharge all or any of the 
@@ -802,10 +749,6 @@ performed by the Director General or any authority of the
 University until the  Director General or such authority comes into 
  
 existence as provided by this Act and the Regulations; 
- 
- 
- 
- 
 Guj. 6 of 2024. 
  
 (2)  the 
@@ -831,7 +774,6 @@ such constitution shall cease to hold office;
 
 Government Central Press, Gandhinagar.
 6-10 
-    
 GUJARAT GOVERNMENT GAZETTE, EX. 13-05-2024 
 [ PART  IV 
  
@@ -872,9 +814,6 @@ constitution of the Finance Committee under this Act, the
 members of the Finance Committee  holding office before such 
  
 constitution shall cease to hold office; 
- 
- 
- 
 Guj. 6 of 2024. 
  
  
@@ -893,10 +832,6 @@ and Communication Technology (Amendment) Act, 2024, shall
 continue to apply to the University, in so far as they are not 
  
 inconsistent with the provisions of this Act.”. 
- 
- 
- 
- 
 Guj. 6 of 2024. 
 Amendment of 
 section 35 of 
@@ -907,9 +842,6 @@ In the principal Act, in section 35, -
 substituted; 
 (ii) for the word “Director”, wherever it occurs, the words “Director General” 
 shall be substituted. 
- 
----------- 
- 
 Signed by:BHOLUSINGH G THAKUR
 Date: 2024.05.20 16:29:18 +05:30
 Reason: Validate Document

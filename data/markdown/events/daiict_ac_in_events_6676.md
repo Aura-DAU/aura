@@ -2,14 +2,18 @@
 title: "Events"
 url: "https://www.daiict.ac.in/events/6676"
 category: "events"
-scraped_by: "Automated Scraper"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
 ---
 
-- - - - 
-
 # Events
+
+## Overview
+
+19/03/2025 \- 19/03/2025
+
+## Main Content
 
 ## Sensitization Workshop on National Education Policy (NEP) 2020
 
@@ -35,6 +39,6 @@ Dr. Dubey will talk about the **National Education Policy (NEP) 2020**. The **NE
 - **Enhancing Awareness and Implementation** – Educate stakeholders on key NEP 2020 reforms, including **curriculum flexibility, accreditation standards, research initiatives, skill development, and digital transformation** to improve the quality and accessibility of higher education.
 - **Developing Strategic Action Plans** – Facilitate discussions on **practical implementation strategies**, international collaborations, equity and inclusion, and innovative teaching methodologies to align institutions with the policy’s vision for a holistic and multidisciplinary education system.
 
-![NEP Workshop 2025](https://www.daiict.ac.in/sites/default/files/inline-images/NEP_Workshop_2025.jpg)
+[Image Present: NEP Workshop 2025]
 
-![Summer School on Automatic Speech Recognition during July 04-08, 2020](https://www.daiict.ac.in/sites/default/files/styles/events_style/public/event_image/NEP_Workshop_Thumbnail-2025.jpg?itok=DjvjMJWl)
+[Image Present: Summer School on Automatic Speech Recognition during July 04-08, 2020]

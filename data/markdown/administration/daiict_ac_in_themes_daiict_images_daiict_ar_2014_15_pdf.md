@@ -2,10 +2,20 @@
 title: "AnnualReport 2014-15 pdf"
 url: "https://daiict.ac.in/themes/daiict/images/DAIICT-AR-2014-15.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "AnnualReport 2014-15 pdf"
 ---
+
+# AnnualReport 2014-15 pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Annual
 Report
@@ -19,15 +29,11 @@ Tel.: +91 79 3052 0000 | Fax: +91 79 3052 0010 | Web: www.daiict.ac.in
 Dhirubhai Ambani
 Institute of Information and Communication Technology
 
-
-
 3
 Shri. Dhirubhai Hirachand Ambani  
 (28th December, 1932 – 6th July, 2002)
 Founder Chairman, Reliance Group 
 Founder Chairman, DA-IICT
-
-
 
 5
 Board of Governors 	

@@ -2,14 +2,18 @@
 title: "Data Privacy Policy"
 url: "https://www.daiict.ac.in/alumni/data-privacy-policy"
 category: "administration"
-scraped_by: "Automated Scraper"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
 ---
 
-- - - - 
-
 # Data Privacy Policy
+
+## Overview
+
+This policy outlines the guidelines and procedures for the confidentiality and protection of Alumni data at DA-IICT, Gandhinagar. Alumni data includes any information related to former students of the institution, collected during their time as students and afterward. Protecting this data is essenti
+
+## Main Content
 
 ## Data Privacy Policy
 

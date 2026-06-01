@@ -2,10 +2,20 @@
 title: "Policies/E-Governance Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/E-Governance_Policy.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/E-Governance Policy"
 ---
+
+# Policies/E-Governance Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 e-GOVERNANCE POLICY
 (From 2017-18)
@@ -52,7 +62,6 @@ will look after the process of updating, maintaining and working of the website 
 basis. The Committee will also look for other changes that are required on the website. The
 Institute strives to showcase its vibrant self and activeness through its website. All the
 important notifications have to go live on the website as and when they are released.
-
 
 Student Admission: An open and transparent strategy for the admission processis followed
 which is further strengthened by the ethical practices and regulations. The Institute brings

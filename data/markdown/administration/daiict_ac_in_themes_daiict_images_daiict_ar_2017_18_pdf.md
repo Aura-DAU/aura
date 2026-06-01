@@ -2,10 +2,20 @@
 title: "DAIICT_AR_17_18.indd"
 url: "https://daiict.ac.in/themes/daiict/images/DAIICT-AR-2017-18.pdf"
 category: "administration"
-scraped_by: "Automated Scraper"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "DAIICT_AR_17_18.indd"
 ---
+
+# DAIICT_AR_17_18.indd
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 # ANNUAL REPORT 2017 2018
 
@@ -19,7 +29,7 @@ Near Indroda Circle, Gandhinagar, Gujarat, India 382 007. Tel.: +91 79 3052 0000
 
 * * *
 
-![The image shows a serene park with a circular water feature surrounded by lush greenery and trees.](https://daiict.ac.in/themes/daiict/images/DAIICT-AR-2017-18.pdf)
+[Image Present: The image shows a serene park with a circular water feature surrounded by lush greenery and trees.]
 
 * * *
 

@@ -2,10 +2,20 @@
 title: "Newsletter/July - Dec 2020"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Newsletter-july-december-2020-new.pdf"
 category: "announcements"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Newsletter/July - Dec 2020"
 ---
+
+# Newsletter/July - Dec 2020
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 NEWSLETTER
 JULY - DECEMBER
@@ -42,8 +52,6 @@ education and conducting quality research.
 Sincerely,
 Prof K. S. Dasgupta
 Director, DA-IICT
-
-
 
 Obituary- Prof Asim Banerjee
 
@@ -113,8 +121,6 @@ Technology, Dharwad, Karnataka.
 
 02
 
-
-
 PLACEMENT
 
 The placement of students graduating in 2021 is in
@@ -178,8 +184,6 @@ CT scans
 Introduction to Named Entity Recognition Ms. Shweta Bhatt 04/11/2020
 
 Data Scientist, Jupitor
-
-
 
 SPONSORED PROJECTS
 
@@ -271,7 +275,6 @@ and Researchers.
 
 04
 
-
 ALUMNI ACHIEVEMENTS
 
 ’ 7
@@ -349,7 +352,6 @@ September 2020.
 
 05
 
-
 STUDENT ACHIEVEMENTS
 
 Nishant Shah, BTech (ICT) (CS) third year student
@@ -420,7 +422,6 @@ Roku-A as a Senior Software Developer.
 
 06
 
-
 SCIENTIST TALKS
 
 Dr Sumitesh Sarkar from SAC ISRO, Ahmedabad
@@ -470,8 +471,6 @@ Electronics and Information Technology.
 YY, ~ wy]
 
 V
-
-
 
 CAMPUS EVENTS
 

@@ -2,26 +2,30 @@
 title: "Document"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender-for-Security-Services_2026-27_V1_200326.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Document"
 ---
+
+# Document
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
 TENDER 
  
 Security Service, DAU, Gandhinagar 
  
  
 Tender No: Tender/Admin/Security/26-27/001     Date: 20.03.2026 
- 
- 
- 
 DAU Contact Person: Mr. Kirit Pandya, Manager Administration 
  
 (M) +91 93270 43616 (Phone: 079-68261592), 
@@ -269,9 +273,6 @@ instance.
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
 Annexure-2 
  
 1. Primary Information of Bidder Firm: 
@@ -325,15 +326,6 @@ company for the FY 2024-
  
  
 Please submit proofs wherever applicable 
- 
- 
- 
- 
- 
- 
- 
- 
------------------------------------------- 
 Signature of Contractor                                                                                 Date: 
 (with official seal of firm)
 
@@ -346,13 +338,6 @@ Annexure 3
  
  
 Security Personnel Wages Calculation 
- 
- 
- 
- 
- 
- 
- 
 Per Month 
 Security  
 Officer (EXSM) 
@@ -372,121 +357,48 @@ Rs.
 Rs. 
 A 
 Category Of Security Personnel 
-  
-  
- 
- 
 Minimum Wages Per day  
 ZONE-I   
  
  
 Dearness Allowance as applicable in 
 Minimum wages of Gujarat state  
-  
-  
- 
- 
 Total Minimum wages + DA 
-  
-  
- 
- 
 B 
 Basic Wage for 08 Hrs. 
-  
-  
- 
- 
 Over Time for Additional 4 Hours 
 Double 
-  
- 
- 
 Skilled / Special Allowance 
-  
-  
- 
- 
 Conveyance allowance 
-  
-  
- 
- 
 Sub Total  
-  
-  
- 
- 
 C 
 Statutory Obligation 
-  
-  
- 
- 
 PF on Salary 
 13.00%   
  
  
 ESIC/Medical/WC (on Gross Salary) 
 3.25% 
-  
- 
- 
 Leave & National Holiday on Basic Salary 
 % 
-  
- 
- 
 Bonus on Salary  
 8.33% 
-  
- 
- 
 Gratuity on (Basic Salary) 
 4.81% 
-  
- 
- 
 Sub Total  
-  
-  
- 
- 
-  
 Subsidize Uniform & PPE (if applicable) 
 % 
-  
- 
- 
 Sub Total 
-  
-  
- 
- 
 E 
 Reliever Charges (Weekly off) 
 % 
-  
- 
- 
 Sub Total  
-  
-  
- 
- 
 F 
 Company Service Charge / Management 
 Fee 
 % 
-  
- 
- 
 Cost per Month of Security Personnel for  12 
 Hrs. Shift 
-  
-  
- 
- 
 Number of Guards Male & Female, 
 Supervisor, Officer 
  
@@ -501,10 +413,6 @@ F)
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
- 
 Annexure-4 : Experience details 
  
 A) Client details for ongoing service contracts (top five) 

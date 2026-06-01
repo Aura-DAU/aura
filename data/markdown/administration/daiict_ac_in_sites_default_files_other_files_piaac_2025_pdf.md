@@ -2,10 +2,20 @@
 title: "Placement / Placement Cell / PIAAC Document"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/PIAAC-2025.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Placement / Placement Cell / PIAAC Document"
 ---
+
+# Placement / Placement Cell / PIAAC Document
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Dhirubhai Ambani
 University
@@ -101,8 +111,6 @@ respective company until and unless a written approval is given by the Placement
 
 Cell staff members or its office bearers) failing which the student(s) will be referred
 to PIAAC. en td
-
-
 
 IX.
 
@@ -210,8 +218,6 @@ NA
 
 NA
 
-
-
 >» be
 
 Dhirubhai Ambani
@@ -290,8 +296,6 @@ information about student |
 selection process. | ia
 
 NA
-
-
 
 »
 
@@ -391,8 +395,6 @@ NA
 NA
 
 NA
-
-
 
 >a
 

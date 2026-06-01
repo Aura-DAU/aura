@@ -2,14 +2,18 @@
 title: "Table 3 - Grievance Redressal Authority for Staff"
 url: "https://www.daiict.ac.in/table-3-grievance-redressal-authority-staff"
 category: "administration"
-scraped_by: "Automated Scraper"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
 ---
 
-- - - - 
-
 # Table 3 - Grievance Redressal Authority for Staff
+
+## Overview
+
+| Nature of Grievances | Level-I<br> Grievance Handling Authority | Level-II<br> Grievance Handling Authority | Level-III<br> Grievance Handling Authority | | :-: | --- | --- | --- | | Matters related to Human Resources and Administration | Head-HR | Executive Registrar | GRHC | | Matters related to
+
+## Main Content
 
 ## **Table 3:** Grievance Redressal Authority for Staff
 

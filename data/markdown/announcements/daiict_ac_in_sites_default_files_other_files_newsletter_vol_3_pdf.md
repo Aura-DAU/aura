@@ -2,10 +2,20 @@
 title: "Newsletter/Jan - Jun 2021"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Newsletter_Vol-3.pdf"
 category: "announcements"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Newsletter/Jan - Jun 2021"
 ---
+
+# Newsletter/Jan - Jun 2021
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 It is with great sadness that | report the demise of
 Professor Suman Mitra on April 18, 2021.A
@@ -49,8 +59,6 @@ our graduates and they included Google, Microsoft,
 D.E. Shaw India and Sprinklr offering yearly
 
 packages in the range of Rs.30 to Rs.52 lakh.
-
-
 
 02
 
@@ -114,8 +122,6 @@ University, Calcutta. She has over thirteen years of
 experience in working with educational institutions
 in Gandhinagar, Gujarat.
 
-
-
 CENTRE OF EXCELLENCE AWARD
 
 The Government of Gujarat has chosen DA-IICT for Centre of Excellence (CoE) award. The selection
@@ -149,8 +155,6 @@ Assistant Professor, DA-IICT
 
 An Introduction to Generative Dr Ahlad Kumar 16/04/2021
 Adversarial Networks Assistant Professor, DA-IICT
-
-
 
 DA-IICT
 CENTRE FOR ENTREPRENEURSHIP
@@ -227,7 +231,6 @@ Memorandum of Understanding awarded a
 consultancy project titled as ‘Duplicate Object
 Identification from Video Data’ to Professor Avik
 
-
 ALUMNI ACHIEVEMENTS
 
 Anshuman Agarwal, B.Tech (ICT) 2021 graduate.
@@ -281,7 +284,6 @@ Database Systems.’ Prof Pankaj Kumar guided
 them.
 
 05
-
 
 06
 
@@ -342,8 +344,6 @@ at International Supercomputing Conference-2020.
 In his lecture, Dr Kumar talked about Parallel |/O
 and Data-parallel Deductive Databases in the age
 of HPC.
-
-
 
 WORKSHOPS / WEBINARS
 
@@ -429,8 +429,6 @@ PUMA SPORTS
 
 ABHIN KAKKAD
 (IM AHMEDABAD
-
-
 
 The student community organised the much-awaited annual fest Synapse’ 21, ‘Play Beyond Reality’ in a
 virtual format from 26th to 28th March 2021. It covered a range of programs from technical events like

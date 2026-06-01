@@ -2,10 +2,20 @@
 title: "AnnualReport 2019-20 pdf"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/DAIICT_AR_2019_20.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "AnnualReport 2019-20 pdf"
 ---
+
+# AnnualReport 2019-20 pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 ANNUAL
 REPORT
@@ -22,8 +32,6 @@ Tel.: +91 79 3052 0000 | Fax: +91 79 3052 0010 | Web: www.daiict.ac.in
 ENGINEERS WITH
 SOCIAL RESPONSIBILITY
 
-
-
 19 20
 
 August 2019 — July 2020
@@ -37,8 +45,6 @@ Tel.: +91 79 3052 0000 | Fax: +91 79 3052 0010 | Web: www.daiict.ac.in
 ENGINEERS WITH
 SOCIAL RESPONSIBILITY
 
-
-
 a~@ a
 PRY ae
 
@@ -47,18 +53,13 @@ a5 * ‘
 ye! . ug
 ‘ . "i
 
-
-
 Shri Dhirubhai Hirachand Ambani
 (28th December, 1932 — 6th July, 2002)
 
 Founder Chairman, Reliance Group
 Founder Chairman, DA-IICT
 
-
 Annual Report
-
-
 
 Contents
 
@@ -85,8 +86,6 @@ Annexures 76
 3. Faculty
 
 4. Staff
-
-
 
 Annual Report
 
@@ -157,8 +156,6 @@ Gandhinagar
 
 Executive Registrar, DA-IICT, Gandhinagar
 
-
-
 Director's Page
 
 This report covers a year of unprecedented challenges for our institution and for the world at
@@ -200,8 +197,6 @@ endeavours. The collective energy, passion and progressive vision that inspires 
 make this Institution unique among its peers.
 
 |am excited for the year that lies ahead and all that we can achieve together.
-
-
 
 Annual Report
 
@@ -264,8 +259,6 @@ Communication Engineering) are jointly
 conducted with the Indian Institute of Technology,
 Jammu and C.R. Rao Advanced Institute of
 
-
-
 Mathematics, Statistics and Computer Science,
 Hyderabad respectively.
 
@@ -326,8 +319,6 @@ recycled water is used to irrigate campus
 gardens and lawns. The campus is also an
 abode for various species of birds and many rare
 birds are spotted on the campus.
-
-
 
 Annual Report
 
@@ -407,8 +398,6 @@ to the M.Tech (CS) Program with specializations
 in Information Security and Data Sciences. The
 Institute handled the admissions to all other
 postgraduate programs.
-
-
 
 Undergraduate Programs
 
@@ -498,8 +487,6 @@ The orientation for the undergraduate students
 was held from 31st July 2019 to 3rd August 2019
 
 11
-
-
 
 Annual Report
 
@@ -599,8 +586,6 @@ attractive doctoral fellowships and contingency
 grants to full-time students pursuing PhD
 programs in areas of Computer Engineering,
 Computer Science, Information Systems,
-
-
 
 Information Technology and Software
 Engineering. Over and above fellowship, the
@@ -711,8 +696,6 @@ continuing education programs.
 
 13
 
-
-
 Annual Report
 
 14
@@ -816,8 +799,6 @@ following Springer's norms of copyrights and
 editing and market them worldwide through
 Springer's network.
 
-
-
 ICICI Bank: To participate in the ICICI Trinity
 Program. The Program encourages and
 promotes students’ talent to bringing forth
@@ -862,8 +843,6 @@ NDLI for its national project to integrate
 existing digitized and digital contents across
 educational and cultural institutions/bodies
 to facilitate its global dissemination.
-
-
 
 Annual Report
 
@@ -970,11 +949,7 @@ Non-Governmental Organizations. The Rural
 Internship period was from December 01 to
 December 28. Details appear in Table 5.
 
-
-
 Rural Internships
-
-
 
 Annual Report
 
@@ -1027,8 +1002,6 @@ Students
 30 Yuva Unstoppable Gujarat 15
 
 18
-
-
 
 RESEARCH/ INDUSTRIAL INTERNSHIPS
 
@@ -1188,8 +1161,6 @@ MP MM AM HOW OW WWM MY oO —
 
 4
 
-
-
 Annual Report
 
 - Name of the
@@ -1237,8 +1208,6 @@ Technologies Pvt. Ltd.) 66 Tekion India Pvt. Ltd. 12
 (Octro Inc.) 78 ZS Associates 1
 62 Sprinklr India Pvt. Ltd. 20 (Data Science Challenge - 2019)
 63 Sublime Data Systems 2
-
-
 
 Sixteenth Convocation
 
@@ -1295,8 +1264,6 @@ population. He brought out the different levels of
 digital adoption across various businesses and
 stressed the need for the creation of a nationwide
 
-
-
 Annual Report
 
 digital infrastructure encompassing Al, Big Data
@@ -1333,8 +1300,6 @@ to the inclusive growth of India through Digital
 India Mission.
 
 Dr. V. K. Saraswat, The Chief Guest
-
-
 
 Research and Development
 
@@ -1436,8 +1401,6 @@ Features
 
 ISRO-DoS — Prof. Bhaskar Chaudhary
 
-
-
 Annual Report
 
 Title of the Sponsored Project
@@ -1518,8 +1481,6 @@ CED
 Prof. Amit Bhatt
 
 24
-
-
 
 CONSULTANCY PROJECTS
 
@@ -1621,8 +1582,6 @@ DA-IICT, IEEE
 Nanotechnology Council
 Chapter of Gujarat Section
 
-
-
 Annual Report
 
 DA-IICT Centre for Entrepreneurship and Incubation (DCEl)
@@ -1721,8 +1680,6 @@ flagship events of DCEI: Hack Infinity 2.0, and
 Women, with the aim of giving rise to new
 entrepreneurial ventures.
 
-
-
 Workshops, Special Lectures and Visitors
 
 SEMINARS/CONFERENCES/WORKSHOPS interactions with wider academic and research
@@ -1753,8 +1710,6 @@ HHT
 Visit by Shri Jay Anmol Ambani
 
 Visit by the official of McMaster Innovation Park, Canada
-
-
 
 Annual Report
 
@@ -1805,8 +1760,6 @@ General of the Centre for Science
 and Environment (CSE)
 
 Engineering Workshop at DA-IICT
-
-
 
 Faculty Publications
 
@@ -1898,8 +1851,6 @@ and Key
 Establishment
 
 Second Edition
-
-
 
 Annual Report
 
@@ -2020,8 +1971,6 @@ Ghosh, "Modeling the Dynamics of Carbon
 Dioxide Over an Educational Institute," in
 Fong S., Dey N., Joshi A. (eds) /CT Analysis
 and Applications. Lecture Notes in
-
-
 
 15.
 
@@ -2146,8 +2095,6 @@ Kamalesh Kalirathinam, Hari Rathod, Yash
 Agrawal and Rutu Parekh, "Real-Time
 
 31
-
-
 
 Annual Report
 
@@ -2275,8 +2222,6 @@ Jaloa Shah and Biswajit Mishra,
 approach for PM2.5 using artificial neural
 network," SN APPLIED SCIENCES, vol. 2,
 
-
-
 10.
 
 no. 9, Sep. 2020, Art. no. 1516. doi:
@@ -2395,8 +2340,6 @@ Waveguide Filter for Millimeter Wave
 Payload Applications,” International Journal
 
 33
-
-
 
 Annual Report
 
@@ -2517,8 +2460,6 @@ Transactions on Cloud Computing, vol. 9,
 no. 2, pp. 753-762, Jan. 2020. DOI:
 10.1109/TCC.2019.2892116 (Modify
 Website Entry)
-
-
 
 28.
 
@@ -2649,8 +2590,6 @@ j.ejc.2018.02.027
 
 35
 
-
-
 Annual Report
 
 Conference Papers
@@ -2762,8 +2701,6 @@ S. Patel, T. Garg, G. Patel, Roshani,
 Bhaskar Chaudhury and Tapas Kumar
 Maiti, "Motion Retargeting and Machine
 Learning for Humanoid Robotics," in
-
-
 
 12.
 
@@ -2889,8 +2826,6 @@ Conference on Communication Systems
 and NetworkS, (COMSNETS 2020), 7-11
 
 37
-
-
 
 Annual Report
 
@@ -3020,8 +2955,6 @@ Plane," in Li Y., Cardei M., Huang Y. Eds 73th
 Annual International Conference on
 Combinatorial Optimization and
 
-
-
 33.
 
 34.
@@ -3146,8 +3079,6 @@ Women: The Journey of a Woman Artist,” in
 
 39
 
-
-
 Annual Report
 
 43.
@@ -3271,8 +3202,6 @@ VLSI and Embedded Systems (AVES-2019),
 Patel Z., Gupta S., Kumar Y. B. N. eds.,
 lecture notes on electrical engineering, vol.
 676. Springer, Singapore. SVNIT, India.
-
-
 
 53.
 
@@ -3400,8 +3329,6 @@ Hardik Gajera and Manik Lal Das, “PriVC:
 
 At
 
-
-
 Annual Report
 
 63.
@@ -3526,8 +3453,6 @@ implementation of autonomous UAV
 tracking system using GPS and GPRS," In:
 Advances in Intelligent Systems and
 Computing, Gandhinagar, India, 21 - 23
-
-
 
 72.
 
@@ -3655,8 +3580,6 @@ by gabor filtering for the modular FER," In:
 
 43
 
-
-
 Annual Report
 
 83.
@@ -3782,8 +3705,6 @@ Students' Conference on Electrical,
 Electronics and Computer Science
 (SCEECS 2020), 22-23 Feb. 2020, Art. no.
 
-
-
 93.
 
 94.
@@ -3906,8 +3827,6 @@ CONVERSION NETWORK," in /EEE Int.
 Conf. Acoust. Speech and Signal Process.
 
 45
-
-
 
 Annual Report
 
@@ -4041,8 +3960,6 @@ Ankur Patil, Rajul Acharya and Hemant A.
 Patil, "Speech Demodulation-based
 Techniques for Replay and Presentation
 
-
-
 116.
 
 Attack Detection", in Asia-Pacific Signal and
@@ -4126,8 +4043,6 @@ Y Vasavada, "Apparatus and method for
 efficient handover for low earth orbit (LEO)
 satellite systems," US Patent 10,512,018,
 Dec. 17 2019.
-
-
 
 Annual Report
 
@@ -4243,8 +4158,6 @@ Ministry of Electronics and Information
 Technology (MeitY)'s consortia projects,
 Government of India
 
-
-
 Member, Academic Advisory Committee
 Board, Chhotubhai Gopalbhai Patel Institute
 of Technology, Bardoli, Gujarat
@@ -4337,8 +4250,6 @@ Manish Khare
 Member, Institute of Electrical and Electronics
 Engineers (IEEE)
 Member, IEEE Signal Processing Society
-
-
 
 Annual Report
 
@@ -4452,8 +4363,6 @@ Computing Machinery (ACM)
 e Life Member, Academy of Discrete
 Mathematics and Applications (ADMA)
 
-
-
 Tapas Kumar Maiti
 
 ¢ Member, IEEE — Institute of Electrical and
@@ -4563,8 +4472,6 @@ Yash Agrawal
 Research and Application (JERA), Bio-
 Byword Scientific Publishing, Sydney,
 Australia
-
-
 
 Annual Report
 
@@ -4700,8 +4607,6 @@ e Advanced Quantum Technologies, Wiley
 Kalyan Sasidhar
 e IEEE Transactions in Measurement and
 Instrumentation, IEEE
-
-
 
 Manik Lal Das
 
@@ -4842,8 +4747,6 @@ e IEEE Access — Multidisciplinary open access
 journal, reviewed papers related to
 
 53
-
-
 
 Annual Report
 
@@ -4998,8 +4901,6 @@ e IEEE 8th International Conference on
 Advances in Computing, Communications
 and Informatics, ICACCI 2019,
 
-
-
 Thiruvananthapuram, India, 18-21 December
 2019.
 
@@ -5119,8 +5020,6 @@ Speech Technology, Srimad Rajchandra
 Institute of Management and Computer
 Application (SRIMCA), Bardoli, Gujarat, India.
 February 2020.
-
-
 
 Annual Report
 
@@ -5242,8 +5141,6 @@ LPG on Different Sectors. International
 Conference on Liberalization, Globalization
 and Privatization: three decades of
 Experience in India. Organized by
-
-
 
 Gandhigram Rural Institute, Gandhigram,
 Tamil Nadu. 14-15 February 2020.
@@ -5371,8 +5268,6 @@ e 2nd Software Engineering Research in India
 
 57
 
-
-
 Annual Report
 
 Supantha Pandit
@@ -5496,8 +5391,6 @@ on Intelligent Information and Database
 Systems (ACIIDS 2020), Phuket, Thailand, 23-
 26 March 2020
 
-
-
 e Publicity Co-Chair, International Conference
 on Evolving Technologies for Computing,
 Communication and Smart World (ETCCS
@@ -5612,8 +5505,6 @@ System, Sponsor: Govt Of India
 Manish K Gupta
 ¢ Principal Investigator, Archival D Data
 Storage, Sponsor: DST-DAAD (Indo-German)
-
-
 
 Annual Report
 
@@ -5742,8 +5633,6 @@ e PhD-RPS review of PhD Students, Institute of
 Plasma Research (IPR), Department of
 Atomic Energy, Govt. of India, Anmedabad,
 
-
-
 August 1, 2019.
 
 External Expert as Member of Selection
@@ -5871,8 +5760,6 @@ Board of Studies (EC Department) Meeting
 
 61
 
-
-
 Annual Report
 
 (online), Charotar University of Science and
@@ -5963,8 +5850,6 @@ Arabia, July 2020
 e Panjab University, May 2020
 e IIT Madras, November and December
 2019
-
-
 
 Faculty and Staff Updates
 
@@ -6109,8 +5994,6 @@ Trainee, on 31 July 2020
 
 63
 
-
-
 Annual Report
 
 64
@@ -6150,8 +6033,6 @@ Rohit Kumar Singh Junior Research Fellow,
 on 31 October 2020
 
 Book Exhibition at DA-IICT
-
-
 
 Student Activities and Achievements
 
@@ -6226,8 +6107,6 @@ poetry followed by a mesmerizing music
 performance by Prof Kalyan Sasidhar. The
 students also honoured their teachers by
 presenting them with mementos.
-
-
 
 Annual Report
 
@@ -6332,8 +6211,6 @@ beginning of the semester so that the new
 batches could showcase their talent and meet
 the seniors of similar talent.
 
-
-
 Concours 2019: Annual Sports Festival -
 (7-10 November)
 
@@ -6435,8 +6312,6 @@ The first Open Theatre event of the autumn
 semester is the chance for the freshers to
 showcase their talents. According to Theatre
 Group, a play is performed by first-year students
-
-
 
 Annual Report
 
@@ -6547,8 +6422,6 @@ Django Girls Event (13 October 2019 )
 
 e Git & GitHub Hands On session (16 January
 2020)
-
-
 
 ¢ GSoC session by DA alumni, Rajat Talesara,
 (6 February 2020) and
@@ -6677,8 +6550,6 @@ Headrush has won several accolades:
 ¢ 6 students represented DA-IICT in Mood
 
 69
-
-
 
 Annual Report
 
@@ -6818,8 +6689,6 @@ e Lawn Tennis Boys, Runners up
 
 e Volleyball Boys, Semi Finalists
 
-
-
 Football Boys, Round of 16 stage
 Basketball Boys, Semi Finalists
 Basketball Girls, Quarter finalists
@@ -6873,8 +6742,6 @@ F& u
 PRESENT
 
 Winners of Youth Run
-
-
 
 Annual Report
 
@@ -6989,8 +6856,6 @@ University for the Refresher Course in Library
 and Information Science on Building a Next-
 Generation Academic Libraries:
 
-
-
 Perseverance and Transformation for the
 working library professionals.
 
@@ -7086,8 +6951,6 @@ ADINET Quarterly Seminar at DA-IICT, 25 January 2020
 
 73
 
-
-
 Annual Report
 
 Infrastructure
@@ -7171,8 +7034,6 @@ premium edition. The Institute has also upgraded
 Firewall with to support large number of users
 with better features and for better performance.
 
-
-
 The Institute also deployed GSuite for education
 cloud solutions for online classes, assignment
 submission and for online exam.
@@ -7226,8 +7087,6 @@ units with new split AC units in Lab 203 and
 
 Increase the seating capacity of Open Air
 Theater from 970 to 1045
-
-
 
 Annual Report
 
@@ -7344,8 +7203,6 @@ DA-IICT, Gandhinagar
 
 76
 
-
-
 Prof. P M Jat, Member
 Prof. Vishvajit Pandya, Member
 
@@ -7430,8 +7287,6 @@ Alumnus, DA-IICT — Alumni Member
 Ms. Anupama Panchal
 
 Alumnus, DA-IICT — Alumni Member
-
-
 
 Annual Report
 
@@ -7580,8 +7435,6 @@ Prof. Puneet Bhateja, Member
 Prof. Pankaj Kumar, Member
 Prof. Manish Khare, Member
 Prof. Alhad Kumar, Member
-
-
 
 CEP Committee
 
@@ -7736,8 +7589,6 @@ Prof. Rutu Parekh
 Director IQAC
 Prof. Anil K. Roy
 
-
-
 Annual Report
 
 Annexure 2
@@ -7868,8 +7719,6 @@ monitoring solution; viii, 21 p.; 2020.
 (Supervisor: P S Kalyan Sasidhar)
 
 Datta, Anwesha, Verification of multi-PHY
-
-
 
 11.
 
@@ -8054,8 +7903,6 @@ vii, 22 p.; 2020. (Supervisor: Yash Agarwal)
 Misra, Ajita, Analysis of on-chip
 
 81
-
-
 
 Annual Report
 
@@ -8242,8 +8089,6 @@ originating & loan management system; v,
 10p.; 2020. (Supervisor: Aditya Tatu)
 Sompura, Jigar, Counting number of
 
-
-
 71.
 
 72.
@@ -8328,8 +8173,6 @@ Binita Desai)
 Singh, Shivika, Rampuriyat : Culinary
 journey; 28 p.; 2020. (Supervisor:
 Madhumita Mazumdar)
-
-
 
 Annual Report
 
@@ -8440,8 +8283,6 @@ Processing, Particle Physics
 
 84
 
-
-
 Garg, Gagan
 PhD (Computer Science and Automation)
 IISC Bangalore
@@ -8542,8 +8383,6 @@ Hyderabad
 
 Literature and Philosophy, Ancient Greek Philosophy,
 Political Theory, Aesthetics
-
-
 
 Annual Report
 
@@ -8648,8 +8487,6 @@ Astrophysics and Nonlinear Systems
 
 86
 
-
-
 Roy, Anil
 PhD (Physics)
 IIT Delhi
@@ -8735,8 +8572,6 @@ Signal Processing, Detection and Estimation Theory,
 Information Theory and Coding Theory, Machine
 Learning and Al, Cognitive Communications, LTE and
 4G/5G, MIMO Channels
-
-
 
 Annual Report
 
@@ -8843,8 +8678,6 @@ Philosophy
 
 88
 
-
-
 Visiting Faculty
 Name of the Faculty
 
@@ -8891,8 +8724,6 @@ Development of the Cognitive viewpoint in Information
 Science
 
 Information Management
-
-
 
 Annual Report
 
@@ -9028,8 +8859,6 @@ July 2019 [Supervisor: Rajib Lochan Das]
 2. Tilak Nanavati, Junior Research Fellow,
 DSPLM-ISRO Sponsored project wef 15
 July 2019 [Supervisor: Rajib Lochan Das]
-
-
 
 10.
 
@@ -9198,8 +9027,6 @@ Speech to Speech Machine Translation
 
 91
 
-
-
 Annual Report
 
 92
@@ -9210,8 +9037,6 @@ Prof. Ranendu Ghosh | Prof. Asim Banerjee | Shri Manish Mankad
 Prof. Anish Mathuria | Prof. Shweta Garg
 
 Acknowledgment : Shri Prabhunath Sharma
-
-
 
 ENGINEERS WITH
 SOCIAL RESPONSIBILITY

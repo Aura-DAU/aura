@@ -2,10 +2,20 @@
 title: "Students / ANTI-RAGGING Committees & Squad Details"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Anti-Ragging-Committee_2025-26-18082025.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Students / ANTI-RAGGING Committees & Squad Details"
 ---
+
+# Students / ANTI-RAGGING Committees & Squad Details
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 ► ~ ~~· 
 r 
@@ -114,7 +124,6 @@ Building, _ First Floor, 703
 
 079-68261703
 
-
 ANTI-RAGGING VIGILANCE SQUAD 2025-26
 
 Name Room No./ Ext. No. Contact No.
@@ -168,8 +177,6 @@ HOR Women
 9148370832
 
 8368598565.
-
-
 
 ANTI-RAGGING VIGILANCE COMMITTEE (STUDENTS): 2025-26
 

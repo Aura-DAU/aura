@@ -2,10 +2,20 @@
 title: "ICC / DAU Policy against Sexual Harassment"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "ICC / DAU Policy against Sexual Harassment"
 ---
+
+# ICC / DAU Policy against Sexual Harassment
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 1 
  
@@ -120,10 +130,6 @@ environment for DAU students and employees on the basis of their gender will be
 deemed punishable in accordance with this policy.
 
 3 
- 
- 
- 
- 
 2. Definitions 
  
 a) Authority/Authorities 
@@ -264,9 +270,6 @@ confidentiality throughout the process. Any breach of this by the
 Respondent/s and/or any member of the ICC will be subject to action.
 
 6 
- 
- 
- 
 Note: The Inquiry must consider the facts presented by both parties and witnesses in 
 the spirit of this Policy as well as the POSH Act, and exercise their judgement with care 
 and sensitivity in each case.  
@@ -324,9 +327,6 @@ being of the Complainant during the inquiry. This may also require measures like
  
 temporary leave for a fixed duration or other measures on the direct request of the 
 Complainant. 
- 
- 
- 
 6. Inquiry 
  
 6.1  Informal Process (Conciliation) 
@@ -487,9 +487,6 @@ c) When the Respondent is a Service Provider/Outsider
 ● Termination of contract or any other arrangement with DAU
 
 10 
- 
- 
- 
 d) Any combination of the above or other appropriate punishment in keeping with 
 the gravity of the matter may be deliberated on by the ICC and recommended. 
 As noted, the conduct of Respondents will be deemed more serious in proportion 

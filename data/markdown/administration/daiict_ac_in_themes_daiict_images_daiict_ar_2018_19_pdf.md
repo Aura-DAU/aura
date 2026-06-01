@@ -2,10 +2,20 @@
 title: "AnnualReport 2018-19 pdf"
 url: "https://daiict.ac.in/themes/daiict/images/DAIICT-AR-2018-19.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "AnnualReport 2018-19 pdf"
 ---
+
+# AnnualReport 2018-19 pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Near Indroda Circle, Gandhinagar, Gujarat, India 382 007. 
 Tel.: +91 79 3052 0000  |  Fax: +91 79 3052 0010  |  Web: www.daiict.ac.in
@@ -30,8 +40,6 @@ a*
 
 ar
 = of
-
-
 
 Shri. Dhirubhai Hirachand Ambani  
 (28th December, 1932 – 6th July, 2002)

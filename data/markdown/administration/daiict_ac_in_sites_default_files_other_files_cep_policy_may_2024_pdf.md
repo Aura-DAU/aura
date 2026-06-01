@@ -2,10 +2,20 @@
 title: "Courses Through CEP & AIP/CEP Policy pdf"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/CEP_Policy_May-2024.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Courses Through CEP & AIP/CEP Policy pdf"
 ---
+
+# Courses Through CEP & AIP/CEP Policy pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Dhirubhai Ambani Institute of Information and Communication Technology
 
@@ -65,8 +75,6 @@ Surplus < 3 lakhs 20% 80%
 Surplus between 3 - 5 lakhs 30% 70%
 
 Surplus > 5 lakhs 50% 50%
-
-
 
 It is the faculty anchor(s) responsibility to ensure that P is always positive. The
 faculty anchor will decide a reasonable remuneration model for experts

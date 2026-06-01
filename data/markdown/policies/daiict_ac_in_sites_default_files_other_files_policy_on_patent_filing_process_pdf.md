@@ -2,10 +2,20 @@
 title: "Policies/Patent Filing Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-Patent-Filing-Process.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Patent Filing Policy"
 ---
+
+# Policies/Patent Filing Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 >» pe
 
@@ -49,8 +59,6 @@ This applies to faculty members, students, and staff members (including postdocs
 during their sabbatical/research/other institute-approved visits to other academic
 institutions/companies/government, or corporate research labs. In all these cases, the DA i
 
-
-
 involved may proceed toward protecting the IP by initiating the process of filing for
 patents/copyrights, etc., as per the procedure laid down by the respective host institution.
 
@@ -93,7 +101,6 @@ Effective date of this policy document: December 1, 2025
 1 For example, if X = 90000, the Institute will provide an additional support of max[0,100000 — 90000] =
 10000. However, if ¥ = 110000, the Institute will not provide any additional support since
 max[0,100000 — 110000] = 0.
-
 
 Appendix |: Invention Disclosure Form
 
@@ -176,8 +183,6 @@ Are the results consistent and statistically significant (for scientific inventi
 Provide a comparison against five existing prior works as per the format below
 (specifically, comparing the prior arts most closely related to your invention, provide
 the main factors which make your invention the same as these existing arts in the
-
-
 
 aa.
 

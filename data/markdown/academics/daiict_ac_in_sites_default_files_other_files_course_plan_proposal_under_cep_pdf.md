@@ -2,10 +2,20 @@
 title: "Courses Through CEP & AIP/Course Plan under CEP form pdf"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Course-Plan-Proposal-under-CEP.pdf"
 category: "academics"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Courses Through CEP & AIP/Course Plan under CEP form pdf"
 ---
+
+# Courses Through CEP & AIP/Course Plan under CEP form pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Course Plan Proposal under CEP 
 _______________________________________________________________________________ 
@@ -75,23 +85,6 @@ Date
 Instructors Name 
 Topic  
 Lecture Timing 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 C. Lab and Infrastructure Requirements: List the specific requirements, including software, 
 hardware, and other infrastructure necessary for the course. 
  
@@ -108,23 +101,6 @@ Name
 Tutorial/Lab Topics  
 Tutorial/Lab 
 Timing 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 F. Certificate Type: Choose one: (a) Participation, (b) Pass/Fail, or (c) Grade. 
  
 G. Course Notes: 
@@ -165,7 +141,6 @@ B. Faculty Anchor/Proposer(s):
 10% of Net Available Revenue 
 (Table1.E) 
 C. Remuneration of Experts and TA 
-                 
 D. Food  
  
 E. Travel  

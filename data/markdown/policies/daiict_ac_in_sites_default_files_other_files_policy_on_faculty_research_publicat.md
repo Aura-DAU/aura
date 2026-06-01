@@ -2,10 +2,20 @@
 title: "Policies/An Incentive Policy for Faculty Research Publications"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-Faculty-Research-Publication-Incentive.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/An Incentive Policy for Faculty Research Publications"
 ---
+
+# Policies/An Incentive Policy for Faculty Research Publications
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 > pb pr
 
@@ -43,8 +53,6 @@ Aminer rankings of the conferences, Or
 Full-length books/monographs (excluding edited books or
 chapters in edited book volumes) at a reputed international
 publishing house and international circulation.
-
-
 
 Journal that fall in Q2 category in Scimago Journal ranker Bsr 02> lakhs
 
@@ -123,8 +131,6 @@ faculty members of that area, will prepare a list of conferences that they propo
 include in Category II and communicate this list to the Dean of Research by the end of
 september of each year. Dean Research will get this list reviewed and approved as
 
-
-
 recommended by a panel of external experts before the end of the year. The area
 coordinators will provide a list of external experts in their respective areas to Dean
 Research to facilitate this process.
@@ -152,8 +158,6 @@ Director, School of Technology, DAU Director General, DAU
 Date: 24" December 2025 Ci eoayopadhyay
 Dr. G. Venkatesh
 DAU, Gandhinagar
-
-
 
 Annexure A: DAU Approved Conferences
 

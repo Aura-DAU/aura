@@ -2,10 +2,20 @@
 title: "Policies/Internship Policy for Sponsored Projects"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-Internship-for-Sponsored-Projects.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Internship Policy for Sponsored Projects"
 ---
+
+# Policies/Internship Policy for Sponsored Projects
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 >» be
 
@@ -62,8 +72,6 @@ eight hours per week.
 
 1 Refer to a separate policy on Summer Research Internships offered to non-DAU candidates.
 
-
-
 4. DAU UG students in their eighth semester shall be enrolled in on-campus BTP to be eligible
 for this internship. They are expected to work as interns for 40 — X hours per week, where X
 is either 0, 5 or 10 depending on whether they are enrolled in zero, one or two regular courses,
@@ -108,8 +116,6 @@ certificate of completion from DAU.
 
 e The sponsored research internship is entirely a temporary assignment, and DA
 financial responsibility and/or guarantees any employment based on the work u
-
-
 
 especially if the funding agency fails to provide the requisite funding for the Intern’s stipend.
 DAU is not liable for addressing any queries or grievances raised by the interns.

@@ -2,10 +2,20 @@
 title: "vehicle rules for students"
 url: "https://daiict.ac.in/sites/default/files/other-files/DA-IICT_Vehicle_Rules_for_Students.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "vehicle rules for students"
 ---
+
+# vehicle rules for students
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Student Vehicle Regulations 
 Students are permitted to bring and park only two-wheelers on campus (such as bicycles, 

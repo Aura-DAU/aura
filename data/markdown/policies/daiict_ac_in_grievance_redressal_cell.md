@@ -2,19 +2,26 @@
 title: "Grievance Redressal Cell (Students and Employees)"
 url: "https://daiict.ac.in/grievance-redressal-cell"
 category: "policies"
-scraped_by: "Automated Scraper"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
 ---
 
-- - - - 
-![Banner](https://www.daiict.ac.in/sites/default/files/all_comman_banners/image_academic.jpg)
+# Grievance Redressal Cell (Students and Employees)
+
+## Overview
+
+[Image Present: Banner]
+
+## Main Content
+
+[Image Present: Banner]
 
 # Grievance Redressal Cell (Students and Employees)
 
 ## Grievance Redressal Procedure for Students and Employees
 
-![Grievance Redressal Cell](https://www.daiict.ac.in/sites/default/files/other-images/Student_Grievance_Photo.jpg)
+[Image Present: Grievance Redressal Cell]
 
 The community of the Institute should resolve all issues through discussions and negotiations by Grievance Redressal procedure of the Institute in order to smooth functioning of academic and administrative activities of the Institute.
 
@@ -24,11 +31,6 @@ The community of the Institute should resolve all issues through discussions and
 
 **Employee** shall mean a member of faculty or an officer or staff of the Institute on the rolls of the Institute.
 
-- [1\. Scope](https://www.daiict.ac.in/grievance-redressal-cell#tab-1)
-- [2\. Nature of Grievances](https://www.daiict.ac.in/grievance-redressal-cell#tab-2)
-- [3\. Authority and Procedure for Redressal of Grievances](https://www.daiict.ac.in/grievance-redressal-cell#tab-3)
-- [4\. Grievance Handling and Resolution Procedure](https://www.daiict.ac.in/grievance-redressal-cell#tab-4)
-- [5\. Confidentiality and Prevention of Grievance](https://www.daiict.ac.in/grievance-redressal-cell#tab-5)
 
 ### 1\. Scope
 
@@ -115,3 +117,11 @@ Prevention of grievances is also important. All primary complaints, if not atten
 ## Declaration
 
 In case of any false or frivolous complaint, the Designated Authority as mentioned in Table 1, 2, 3, may advise for an appropriate action against the complainant, which the GRHC may or may not follow. However, number of such cases are to be monitored to understand if the students tend to use this privilege to protect their failures for whatsoever reason.
+
+## Related Links
+
+- [1\. Scope](https://www.daiict.ac.in/grievance-redressal-cell#tab-1)
+- [2\. Nature of Grievances](https://www.daiict.ac.in/grievance-redressal-cell#tab-2)
+- [3\. Authority and Procedure for Redressal of Grievances](https://www.daiict.ac.in/grievance-redressal-cell#tab-3)
+- [4\. Grievance Handling and Resolution Procedure](https://www.daiict.ac.in/grievance-redressal-cell#tab-4)
+- [5\. Confidentiality and Prevention of Grievance](https://www.daiict.ac.in/grievance-redressal-cell#tab-5)

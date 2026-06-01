@@ -2,14 +2,18 @@
 title: "Table 1 - Grievance Redressal Authority for Students"
 url: "https://www.daiict.ac.in/table-1-grievance-redressal-authority-students"
 category: "administration"
-scraped_by: "Automated Scraper"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
 ---
 
-- - - - 
-
 # Table 1 - Grievance Redressal Authority for Students
+
+## Overview
+
+| Nature of Grievances | Level-I<br> Grievance Handling Authority | Level-II<br> Grievance Handling Authority | Level-III<br> Grievance Handling Authority | | :-: | --- | --- | --- | | Matters related to Academics, Teaching-Learning and Evaluation | Program Convenor | Dean-Academic Programs | GRHC |
+
+## Main Content
 
 ## **Table 1:** Grievance Redressal Authority for Students
 

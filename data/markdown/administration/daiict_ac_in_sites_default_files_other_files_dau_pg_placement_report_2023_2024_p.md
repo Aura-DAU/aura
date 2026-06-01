@@ -2,10 +2,20 @@
 title: "Placement / Placement Cell / DAU PG Placement Report(2023-2024)"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/DAU-PG-Placement-Report-2023-2024.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Placement / Placement Cell / DAU PG Placement Report(2023-2024)"
 ---
+
+# Placement / Placement Cell / DAU PG Placement Report(2023-2024)
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 SORAB S. ENGINEER & CO. (Regd.)
 
@@ -73,7 +83,6 @@ September 16, 2025
 
 MUMBAI e BENGALURU ¢ KANPUR e SAVARKUNDLA
 
-
 EES 'S Se
 
 SORAB S. ENGINEER & CO. (Regd.)
@@ -114,8 +123,6 @@ Average maximum earning potential (Domestic): Rs 8.17 lakhs per annum.
 Median earning potential (Domestic): Rs 7.02 lakhs per annum.
 
 Page 2 of 8
-
-
 
 SORAB S. ENGINEER & CO. (Regd.)
 
@@ -163,7 +170,6 @@ Compliance Statement
 
 Page 3 of 8
 
-
 SORAB S. ENGINEER & CO. (Regd.)
 
 Placement details as per IPRS
@@ -206,8 +212,6 @@ Table 2: Classification based on Sectors
 For Sorab S. Engineer & Co. Dhirubhai Ambani University
 
 Page 4 of 8
-
-
 
 SORAB S. ENGINEER & CO. (Regd.)
 
@@ -277,7 +281,6 @@ o VA
 Dhirubhai Ambani University
 
 Page 5 of 8
-
 
 SORAB S. ENGINEER & CO. (Regd.)
 
@@ -504,7 +507,6 @@ Dhirubhai Ambani University
 
 Page 6 of 8
 
-
 SORAB S. ENGINEER & CO. (Regd.)
 
 6. Sal I
@@ -571,7 +573,6 @@ aN
 ~ For Sorab S. Engineer & Co. Dhirubhai Ambani University
 
 Page 7 of 8
-
 
 SORAB S. ENGINEER & CO. (Regd.)
 

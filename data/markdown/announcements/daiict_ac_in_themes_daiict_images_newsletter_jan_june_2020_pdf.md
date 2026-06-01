@@ -2,10 +2,20 @@
 title: "Newsletter/Jan - Jun 2020"
 url: "https://www.daiict.ac.in/themes/daiict/images/Newsletter-jan-june-2020.pdf"
 category: "announcements"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Newsletter/Jan - Jun 2020"
 ---
+
+# Newsletter/Jan - Jun 2020
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 “On esyun™
 
@@ -47,8 +57,6 @@ alumni.
 Brie Nee" ieee
 
 oper! Th
-
-
 
 COVID RESPONSE
 
@@ -127,7 +135,6 @@ by Prof. Tathagata Bandyopadhyay, Dean
 Founder of Net Square.
 
 02
-
 
 Placement at DA-IICT
 
@@ -209,8 +216,6 @@ www.sas.com/en_in/news/press-releases/2020/
 march/sas-india-dhirubhai-ambani-institute-Msc-
 data-science.html
 
-
-
 FACULTY ACHIEVEMENTS
 
 Prof Hemant Patil
@@ -261,8 +266,6 @@ faculty members as the Pls/Co-Pis and eight
 JRFs, including five M.Tech students and one
 PhD Scholar.
 
-
-
 CHAIR FACULTY
 
 Prof David Levin
@@ -301,8 +304,6 @@ DA-IICT. Prof Smith taught a module of
 ‘Modeling and Simulation’ offered by Prof Mukesh
 Tiwari.
 
-
-
 Hardik Kotadia
 
 Hardik Kotadia, our M.Sc IT alumnus of
@@ -317,7 +318,6 @@ co-founder and CEO of twoig Ip since 2017, an
 IT company that solves business problems for
 MSMEs. He is working on writing yet another
 success story.
-
 
 A Special Acknowledgment to Staff Members
 
@@ -398,7 +398,6 @@ Sr, Secretary (Registrar)
 Dr Anjana Vaid
 Medical Officer
 
-
 CONFERENCES AND ACADEMIC EVENTS
 
 An exhibition was organized at DA-IICT in
@@ -457,7 +456,6 @@ Bhavesh Manglani Swapnil Khandelwal
 
 08
 
-
 16" CONVOCATION
 
 DA-IICT held its 16"" convocation ceremony on
@@ -503,8 +501,6 @@ n Shah's mothe is $s mother ane ng
 Agam pi
 
 Gold Medal from the Chief tet
-
-
 
 CAMPUS EVENTS
 

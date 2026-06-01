@@ -2,10 +2,20 @@
 title: "Policies/Policy on Institute Thematic Research Areas (TRAs)"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy_on_Institute_Thematic_Research_Areas-Apr_2026.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Policy on Institute Thematic Research Areas (TRAs)"
 ---
+
+# Policies/Policy on Institute Thematic Research Areas (TRAs)
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 >» » be
 
@@ -54,8 +64,6 @@ if ¢ . Collaborative proposals involving external partners
 
 fy
 mf)
-
-
 
 Call for Proposals
 
@@ -107,8 +115,6 @@ cs at i
 '
 
 J 4
-
-
 
 Selected TRAs may receive funding for research activities, support for PhD students or JRFs employed
 on the research project, travel support, etc.1 The maximum annual financial support from the Institute

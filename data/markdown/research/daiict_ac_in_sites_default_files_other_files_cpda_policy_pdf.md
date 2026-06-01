@@ -2,10 +2,20 @@
 title: "Policies/CPDA Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/CPDA_Policy.pdf"
 category: "research"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/CPDA Policy"
 ---
+
+# Policies/CPDA Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 >» be
 
@@ -56,8 +66,6 @@ current Year Y, they can request up to a maximum of Rs. 2 lakhs of advance from 
 Y +1andY + 2. Thus, the negative balance in a faculty’s CPDA can be a maximum of Rs. 2
 lakhs. The faculty members must repay any negative CPDA balance upon termination of
 Employment with the Institute.
-
-
 
 e A faculty member can request support multiple times within a financial year, provided the
 total amount does not exceed the established limit. However, the CPDA funds cannot be
@@ -111,8 +119,6 @@ applicant via email.
 Director - School of Technology Director General
 
 Dhirubhai Ambani University (DAU), Gandhinagar DAU, Gandhinagar
-
-
 
 Effective’ date of this policy document: January 1, 2026
 

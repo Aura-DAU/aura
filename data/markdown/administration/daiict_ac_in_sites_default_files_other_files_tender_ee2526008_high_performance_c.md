@@ -2,10 +2,20 @@
 title: "Document"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender-EE2526008_High-Performance-Computing-R.01_11-12-25.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Document"
 ---
+
+# Document
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 DHIRUBHAI AMBANI 
 INSTITUTE OF INFORMATION AND COMMUNICATION TECHNOLOGY SOCIETY (DA-IICT Society) 
@@ -24,10 +34,6 @@ DAIICT Campus, Gandhinagar
  
  
 Tender No: EE2526008 
- 
- 
- 
- 
 Last date of submission of the tender is 22.12.2025, before 1:00 PM 
 Note: The Tender must be submitted in a sealed envelope mentioning Tender Number and Title on the envelop, 
 marked to  
@@ -177,9 +183,6 @@ Page
 No. 
 1 
 Name of the firm 
- 
- 
- 
 2 
 Date of Establishment 
  
@@ -220,11 +223,6 @@ during last three years.
  
  
 Please submit proofs wherever applicable 
- 
- 
- 
- 
------------------------------------------- 
 Name and Signature of the authorized signatory                                                                                 
 (with official seal of firm) 
  
@@ -350,9 +348,4 @@ distance between Indoor and Outdoor Unit)
  
 8 
 Rackmount KVM Console; Qty:1 
- 
- 
- 
- 
- 
 You may reach out to procurement@dau.ac.in or research_officer@dau.ac.in for any query.

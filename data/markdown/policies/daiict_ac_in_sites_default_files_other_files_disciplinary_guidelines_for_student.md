@@ -2,10 +2,20 @@
 title: "Students / Disciplinary Guidelines for Students"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Disciplinary_guidelines_for_students_2024.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Students / Disciplinary Guidelines for Students"
 ---
+
+# Students / Disciplinary Guidelines for Students
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 DISCIPLINARY GUIDELINES FOR STUDENTS 
  
@@ -47,10 +57,6 @@ behaviour/conduct of students.
 4) 
 The  Disciplinary Committee will  be constituted/reconstituted by  the 
 Director from time to time. 
- 
- 
- 
- 
 The Process 
  
 5) 

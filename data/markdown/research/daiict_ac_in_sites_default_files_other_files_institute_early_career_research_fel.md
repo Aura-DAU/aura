@@ -2,10 +2,20 @@
 title: "Policies/Institute Early Career Research Fellow Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Institute-Early-Career-Research-Fellow-Policy.pdf"
 category: "research"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Institute Early Career Research Fellow Policy"
 ---
+
+# Policies/Institute Early Career Research Fellow Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 > » Pr
 
@@ -51,8 +61,6 @@ two publications as mentioned in the eligibility criteria.
 
 * Monthly Fellowship: A consolidated monthly fellowship of INR 75,000/- (to be
 revised and announced by the institute from time to time). No HRA.
-
-
 
 used to cover registration fees, air travel, visa charges, and daily allowance, in
 accordance with the existing CPDA policy of the institute. Fellows may also combine

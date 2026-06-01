@@ -2,10 +2,20 @@
 title: "NAAC / NAAC Cycle 1"
 url: "https://www.daiict.ac.in/sites/default/files/NAAC-Addendum-final.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "NAAC / NAAC Cycle 1"
 ---
+
+# NAAC / NAAC Cycle 1
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 DA-IICT 
  
@@ -14,8 +24,6 @@ NAAC SELF STUDY & EVALUATIVE
 REPORTS  
  
 MARCH 2017
-
-
 
 TABLE OF CONTENTS 
  
@@ -414,7 +422,6 @@ Any other (please specify)
   
 6. a.  Date of establishment of the university        :            06/08/2001 
 b.  Prior to the establishment of the university,  was it a/an 
-      
  DA-IICT has been a University since its inception.
 
 3 
@@ -571,9 +578,6 @@ o Residential facilities for faculty and non-teaching :
 Four Faculty Blocks for important functionaries of the Institute. 
  
 o Cafeteria  
- 
- 
- 
 : Yes 
  
 o Health centre   
@@ -691,8 +695,6 @@ professional programmes are being offered?
  
 Yes 
  No 
- 
-  
 Exempted from AICTE approval based on relevant Supreme Court judgment. 
 23. Has the university been reviewed by any regulatory authority? If so, furnish a copy 
 of the report and action taken there upon.   
@@ -812,18 +814,9 @@ From other states of India
 NRI Students 
 13 
 8 
-- 
-- 
-- 
-- 
 Foreign students 
 1 
 2 
-- 
-- 
-- 
-- 
- 
 29. ‘Unit cost’ of education  
  
 (Unit cost = total annual recurring expenditure (actual) divided by total number of 
@@ -1059,10 +1052,6 @@ Total credits
 Graduation Requirement: 
  Total Credits ≥ 60  
 Thesis Mode: 
- 
- 
- 
- 
 Project Mode: 
 Course Credits ≥ 38  
  
@@ -1168,21 +1157,9 @@ PhD
 139 
 71 
 MTech(PhD) 
- 
- 
- 
- 
- 
- 
 26 
 18 
 BTech(M.Tech) 
- 
- 
- 
- 
- 
- 
 68 
 47
 
@@ -2748,8 +2725,6 @@ e.g.  Web of Science, Scopus, Humanities International Complete, Dare
 Database - International Social Sciences Directory, EBSCO host, etc.),  
 Citation Index – range / average, SNIP, SJR, Impact Factor – range / average 
 h-index  
- 
-  
 Publication Type 
 2015 
 2016* 
@@ -3286,8 +3261,6 @@ Refurbishing and renovation of Lecture Theatre – 1 has been carried out. It ha
 now been provided with state of the art AV facilities. LT-1 is fully air-
 conditioned and is also equipped with a digital podium comprising of facilities 
 such as document projector, etc. 
-     
- 
 4.1.8  What special facilities are available on campus to promote students’ 
 interest in sports and cultural events/activities? 
 Well-equipped Gymnasium & Yoga hall on the first floor of the sports complex.
@@ -3614,10 +3587,6 @@ Center
 Exclusive 
 55 
 Fully furnished cubicles 
- 
-      
- 
- 
 View of Incubation Centre Annexe
 
 51 
@@ -4201,16 +4170,6 @@ Total Number of Students Not Placed
 63 
 Total Number of Registered Students 
 400 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 282
 337
 240
@@ -4226,22 +4185,6 @@ TOTAL  PLACEMENT
 
 60 
 Percentage of Students placed 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 93
 98
 90
@@ -4400,9 +4343,6 @@ BTech (ICT)
 2015-16 
 Btech (Honours in ICT with Minor 
 in Computational Science) 
-- 
-- 
-- 
 2015-16 
 Mtech (ICT) 
 49 
@@ -4847,8 +4787,6 @@ and regulations are given by TED, together with its name. The activities of the 
 74 
 partner is monitored closely by them. However, the funding has to be organized by the 
 local group itself. TEDx DAIICT is the student run chapter of the TED.  
- 
-  
 TEDx Team 
 The practice: 
 The first edition of TEDx DAIICT was organized on 21 February, 2016. In the spirit of 
@@ -4877,9 +4815,6 @@ Known as the "mother of football", Dr. Shah initiated Kahaani, a sports academy 
 Ahmedabad to nurture the idea of better health and an understanding of the importance 
 of sports in our daily lives. She will be speaking about her journey with Kahaani and 
 how it has impacted the lives of thousands of kids. 
- 
- 
- 
 4. Jazz Sethi: 
 Jazz Sethi is a professional choreographer and performer from Ahmedabad. Along with 
 dance, she founded HEAL, a non-profit initiative which works with children suffering 
@@ -4920,18 +4855,6 @@ Statement of Compliance
 DECLARATION
 
 80 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Appendix – 1
 
 81
@@ -4961,10 +4884,6 @@ Appendix – 1
 93
 
 94 
- 
- 
- 
- 
 Appendix – 2
 
 95
@@ -4974,14 +4893,6 @@ Appendix – 2
 97
 
 98 
- 
- 
- 
- 
- 
- 
- 
- 
 Appendix – 3
 
 99
@@ -4991,15 +4902,6 @@ Appendix – 3
 101
 
 102 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Appendix - 4
 
 103
@@ -5033,12 +4935,6 @@ Appendix - 4
 117
 
 118 
- 
- 
- 
- 
- 
- 
 Appendix - 5
 
 119
@@ -5263,31 +5159,6 @@ NAAC EVALUATIVE REPORT
 ADDENDUM 
  
 MARCH 2017 
- 
- 
- 
- 
- 
-   
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Path to Success
 
 127
@@ -5459,9 +5330,6 @@ Pradesh India
 Sports Officer 
 Sports Psychology Sports Teaching 
 12 
- 
- 
- 
 12. 
 List of Senior Visiting Fellows, Adjunct Faculty, Emeritus Professors  
 Sr.No. Name 
@@ -6069,11 +5937,6 @@ Total
  
 25.  Faculty selected nationally / internationally to visit other laboratories / institutions / industries in India and abroad  
 Institute encourages research visits by faculty to national and international institutes for collaborative research 
- 
- 
- 
- 
- 
 Sr.No 
 Faculty 
 Host   
@@ -6227,9 +6090,6 @@ Governor, Andaman Islands
 Committee
 
 140 
- 
- 
- 
 29.    Awards / recognitions received at the national and international level by  
  
  
@@ -6555,7 +6415,6 @@ Ph D
 6 
 9 
 9 
-            
 Pass Percentage 
 Programs 
 % of Pass 
@@ -6595,11 +6454,6 @@ Ph D
 - 
 100 
 100 
- 
- 
- 
- 
- 
 *Graduating students of UG 2011 (and backlog 2010, 2009). PG 2013 and 2012 
 *Graduating students of UG 2012 (and backlog 2011, 2010). PG 2014 and 2013
 
@@ -6683,12 +6537,8 @@ M Tech (ICT)
 - 
 43.4 
 56.6 
-- 
-- 
 51.61 
 48.39 
-- 
-- 
 58.06 
 41.94 
 - 
@@ -6696,12 +6546,8 @@ M Sc (IT)
 - 
 86.67 
 13.33 
-- 
-- 
 89.36 
 10.64 
-- 
-- 
 85.83 
 14.17 
 - 
@@ -6709,12 +6555,8 @@ M Sc (ICT-ARD)
 - 
 33.33 
 66.67 
-- 
-- 
 80 
 20 
-- 
-- 
 83.33 
 16.67 
 - 
@@ -6722,8 +6564,6 @@ M Des (CD)
 - 
 42.86 
 57.14 
-- 
-- 
 33.33 
 66.67 
 - 

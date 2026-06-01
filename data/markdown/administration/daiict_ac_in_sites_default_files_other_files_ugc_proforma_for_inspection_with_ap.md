@@ -2,10 +2,20 @@
 title: "UGC Proforma/Proforma for Inspection by UGC – 2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/UGC-Proforma-for-inspection-with-Appendices-and-Annexures_2025.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "UGC Proforma/Proforma for Inspection by UGC – 2025"
 ---
+
+# UGC Proforma/Proforma for Inspection by UGC – 2025
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Proforma for Inspection
 
@@ -19,8 +29,6 @@ University
 
 GA-ICT Road, Gandhinagar 282 a Gujarat, (India)
 Ti oS F682 61700 | infoSeda ni | wana! claude in
-
-
 
 UGC Proforma for Inspection
 
@@ -80,8 +88,6 @@ il Mis: Eivyamn shi ikea dycfo_accounts(@day,ac.in
 i he Dhirubhai Ambani
 
 University
-
-
 
 UGC Proforma for Inspec tion
 
@@ -161,8 +167,6 @@ established by a separate State Act?
 Dhirubhai Ambani
 University
 
-
-
 U
 
 GC Proforma for Inspection
@@ -235,8 +239,6 @@ Nic
 
 Ao
 
-
-
 UGC Proforma for Ins pection
 
 a Whether the University has established | No
@@ -285,8 +287,6 @@ pp
 Dhirubhai Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 3,2 | Current number of academic programmes/ | School of Technology details
@@ -323,8 +323,6 @@ Programme
 r
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspection
 
@@ -382,7 +380,6 @@ Semesters
 Dhirubhai Ambani
 University
 
-
 UGC Proforma for Inspection
 
 (Honors) in ICT
@@ -420,8 +417,6 @@ for permission from UGC?
 ir
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspection
 
@@ -485,8 +480,6 @@ Le p pr
 
 a2. Dhirubhai Ambani
 a University
-
-
 
 UGC Proforma for Inspection
 
@@ -569,7 +562,6 @@ M-Male, F-Female, T-Total
 Dhirubhai Ambani
 University
 
-
 UGC Proforma for Inspection
 
 Catepory-wise Wo. of students UG program details are provided.
@@ -621,7 +613,6 @@ course or _opt for the course
 
 a Dhirubhai Ambani
 Sa University
-
 
 UGC Proforma for Inspection
 
@@ -679,8 +670,6 @@ https://dau.ac.in/admissions#tab-4 =
 al
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspection
 
@@ -757,8 +746,6 @@ infrastructure, resource center (Library), co
 curricular activities, placements, and students’
 and faculty achievements.
 
-
-
 UGC Proforma for Inspection
 
 Alumni:
@@ -827,7 +814,6 @@ es i Bi Dhirubhai Ambani
 
 University
 
-
 UGC Proforma for Inspection
 
 or revision,
@@ -887,8 +873,6 @@ Engineering. Furthermore, the curriculum of
 Dhirubhai Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 UG and PG programmes involves innovative
@@ -944,8 +928,6 @@ the Board of Studies (BoS)} and Academie
 p pr
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspecti on
 
@@ -1016,7 +998,6 @@ bp
 * * Dhirubhai Ambani
 University
 
-
 UGC Proforma for Inspection
 
 projects, and case studies embedded in |
@@ -1075,8 +1056,6 @@ and sponsored research projects. |
 
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspection
 
@@ -1152,8 +1131,6 @@ Annexure XV.
 
 Ee ——
 
-
-
 UGC Proforma for Inspection
 
 5.9 Mention the number of malpractice cases |D a provided below
@@ -1217,8 +1194,6 @@ db pb
 Dhirubhai Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 of the course.
@@ -1273,8 +1248,6 @@ will be awarded for the
 b pr
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspection
 
@@ -1339,7 +1312,6 @@ malpractice in the
 b pb
 Dhirubhai Ambani
 University
-
 
 UGC Proforma for Inspection
 
@@ -1414,8 +1386,6 @@ results for the last 3 years. Details to be
 5.14 | How regular and time-bound are conduct |
 provided in the following format:-
 
-
-
 UGC Proforma for Inspection
 
 performance index of students are shown in
@@ -1486,7 +1456,6 @@ pb pb
 Dhirubhai Ambani
 University
 
-
 UGC Proforma for Inspection
 
 Following is the list of In-Semester / Mid-
@@ -1550,7 +1519,6 @@ a a
 «4 Dhirubhai Ambani
 University
 
-
 UGC Proforma for Inspection
 
 2024-25 29-08-2024
@@ -1611,8 +1579,6 @@ JEE (Main) and HSC (12! Marks). |
 \ Dhirubhai Ambani
 A University
 
-
-
 UGC Proforma for Inspection
 
 he nmverit list for admission is
@@ -1661,7 +1627,6 @@ omputer based entrance test at
 
 Dhirubhai Ambani
 University
-
 
 UGC Proforma for Inspection
 
@@ -1729,7 +1694,6 @@ cBT*
 National
 level
 
-
 UGC Proforma for Inspection
 
 a.5
@@ -1785,8 +1749,6 @@ enrolment
 Dhirubhai Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 —
@@ -1840,8 +1802,6 @@ ri-and-foreign-national-catego
 al
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspection
 
@@ -1939,8 +1899,6 @@ Minutes of Finance Committee Meeti
 
 the food and cafeteria charges as per actuals.
 
-
-
 UGC Proforma for Inspection
 
 al attached as Annexure XX
@@ -1998,8 +1956,6 @@ merit-and-mem-scholarships
 Dhirubhal Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 UG-DAFS Merit Scholarship
@@ -2054,7 +2010,6 @@ Lakh (& Lakh) “X" (¥) of them are eligible for
 Dhirubhai Ambani
 University
 
-
 UGC Proforma for Inspection
 
 Tuition fees provided they satisfy same merit
@@ -2108,8 +2063,6 @@ Full Time Faculty
 Dhirubhai Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 | |
@@ -2148,8 +2101,6 @@ No. of teachers with M.Phil as the highest qualification
 br
 Dhirubhal Ambani
 wt University
-
-
 
 i \at
 
@@ -2203,8 +2154,6 @@ __External experts are typically invited fram |
 
 Dhirubhai Ambani
 : University
-
-
 
 UGC Proforma for Inspection
 
@@ -2278,8 +2227,6 @@ MMII. -
 
 36
 
-
-
 UGC Proforma for Inspection
 
 The university follows a Cost-to-Institute (Ctl).
@@ -2342,7 +2289,6 @@ rts and |
 a
 a. © 43) Dhirubhai Ambani
 Me: it University
-
 
 UGC Proforma for Inspection
 
@@ -2426,8 +2372,6 @@ premises
 Yes, all faculty are provided independent office |
 |
 
-
-
 UGC Proforma for Inspection
 
 « Separate website (https://re.dau_ac.in/)
@@ -2488,8 +2432,6 @@ FDR No. Date — Period -
 5 ear eee Dhirubhai Ambani
 eS a University
 
-
-
 UGC Proforma for Inspection
 
 10.2
@@ -2548,8 +2490,6 @@ ap
 Chirubhai Ambani
 “i University
 
-
-
 UGC Proforma for Inspection
 
 I. Governance System
@@ -2606,8 +2546,6 @@ what, when and hew often-are such
 Dhirubhai Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 all Research Profile
@@ -2653,8 +2591,6 @@ bp
 ; Dhirubhal Ambani
 ' University
 
-
-
 UGC Proforma for Inspection
 
 13.2 | Summary of the Non-Teaching Staff | Particulars | Female | Male | Total |
@@ -2698,8 +2634,6 @@ Period Grade: CGPA: A+ (3.32)
 p
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspection
 
@@ -2765,8 +2699,6 @@ db »
 Dhirubhal Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 « The university also draws high-calibre faculty membe
@@ -2824,8 +2756,6 @@ I]
 
 Dhirubhai Ambani
 af University
-
-
 
 UGC Proforma for Inspection
 
@@ -2892,8 +2822,6 @@ address challenges in the energy domain. The total
 Dhirubhai Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 external research funding received by the university
@@ -2950,8 +2878,6 @@ db pr
 
 Dhirubhai Ambani
 University
-
-
 
 UGC Proforma for Inspection
 
@@ -3011,8 +2937,6 @@ Bo)
 Dhirubhai Ambani
 University
 
-
-
 UGC Proforma for Inspection
 
 b
@@ -3036,8 +2960,6 @@ the.UGC Requlation.
 The above information 15: also posted on the
 
 website of the University www.dau.ac.in.
-
-
 
 p pe
 
@@ -3075,7 +2997,6 @@ yay Information about the complaints recemed under 29
 : a |
 B2 30 |
 
-
 UGC Prefarma
 Reference
 
@@ -3090,14 +3011,10 @@ bodies of the University
 Information about the Non-Teaching Staff of the
 University
 
-
-
 Appendix |
 
 Composition of the
 society/Trust
-
-
 
 Appendix-|
 
@@ -3156,14 +3073,10 @@ Majas Depot, Mumbal-
 
 Kulkarni Academy Foundation
 
-
-
 Appendix Il
 
 Information about Members
 of the Society/Trust
-
-
 
 hr. Anil D. Ambani
 
@@ -3258,7 +3171,6 @@ Director
 Director
 Director
 Director
-
 
 S.No.
 
@@ -3355,7 +3267,6 @@ Chairman
 
 Chairman
 
-
 5.Ma,
 
 Mr. Shrenik
@@ -3413,7 +3324,6 @@ Lirnitered
 
 Sasan Power Limited Direehor
 
-
 Name of the Member
 
 Address
@@ -3439,15 +3349,12 @@ Dhirubhai Ambani School of Director
 Designation in the
 Society Trust
 
-
 Appendix Ill
 
 Information about promoting
 Society/Trust — other
 educational institutions
 (Not Applicable)
-
-
 
 University Grants Commission
 
@@ -3462,7 +3369,6 @@ iH
 
 a
 
-
 Appendix IV
 
 Information about promoting
@@ -3470,22 +3376,17 @@ society/Trust — Other
 activities
 (Not Applicable)
 
-
-
 atian about
 
 University Grants Commission
 
 13
 
-
 Appendix V
 
 Information about off-
 Campus centre(s)
 (Not Applicable)
-
-
 
 i Gran missi
 Appendix-V
@@ -3500,14 +3401,11 @@ centre
 
 15
 
-
 Appendix VI
 
 Information about off-Shore
 campus centre(s)
 (Not Applicable)
-
-
 
 ne
 
@@ -3518,16 +3416,12 @@ Infonmation about off-Shore campus centre(s
 §.No. | Address the Off-Shore | Courses Run
 neti rered
 
-
-
 Appendix VII
 
 Information about Courses
 run under distance mode
 and study centre(s)
 (Not Applicable)
-
-
 
 Appendix-Vil
 Information about Co
@@ -3538,8 +3432,6 @@ pag |
 
 az 7 ji oe
 
-
-
 Appendix VIII
 
 Information about the
@@ -3547,8 +3439,6 @@ programmes permitted to be
 offered by the Gazette
 Notification of the State
 Government
-
-
 
 University Grants Commission
 
@@ -3573,13 +3463,10 @@ f Admitted in Academic Year 2024-25
 
 21
 
-
 Appendix IX
 
 Information about the
 programmes now offered
-
-
 
 University Grants Commission
 
@@ -3603,7 +3490,6 @@ a ic Other (pl. $pecity) - -
 
 #4
 
-
 Appendix X
 
 Information about the
@@ -3613,12 +3499,8 @@ council(s)
 
 (Not Applicable)
 
-
-
 ‘Name of the Statutory | | Whether approval has
 Council | been taken
-
-
 
 Appendix X!
 
@@ -3626,8 +3508,6 @@ Information about the
 courses run which are not
 specified by the UGC
 (Not Applicable)
-
-
 
 information about the oo
 
@@ -3649,16 +3529,12 @@ Date of starting
 Whether applied ta
 UGC for specification
 
-
-
 Appendix Xll
 
 Information about the
 complaints received under
 Grievance Redressal
 Mechanism
-
-
 
 University Grants Commission
 Appendix-Kll
@@ -3688,13 +3564,10 @@ Rrades. Case closed.
 
 749
 
-
 Appendix Xlll
 
 Information about the
 teaching staff
-
-
 
 University Grants Commission
 Appendix:XIlt
@@ -3777,7 +3650,6 @@ Engineering
 j, wT
 | Bombay
 
-
 Sr.
 Alia
 
@@ -3851,7 +3723,6 @@ Full
 Time
 
 ae
-
 
 J
 
@@ -4080,7 +3951,6 @@ tans
 
 14
 
-
 Sr.
 No
 
@@ -4184,7 +4054,6 @@ r
 
 19
 
-
 | Sr. Employe | Designat | Ag | Education | Ex | Date of | Full/a | Full cTc No. of
 e Name | ion e p |Jeining dhoc | Time / | PA publica |
 ae tions
@@ -4238,7 +4107,6 @@ PROFESS Pogineering:
 OR (1 UT Patna
 
 a5
-
 
 Sr, | Dept | Employe Designat Ag | Education Date of No. oF
 | Me © Name | ion c Joining publica |
@@ -4339,8 +4207,6 @@ Tine
 
 31/08/2 | Regula
 O71 r
-
-
 
 | Sr. | Dept | Employe Designat | Ag
 No © Name ion 17
@@ -4507,7 +4373,6 @@ Time
 No. of
 publica |
 
-
 Sr. | Dept | Employe
 
 Ne e Name
@@ -4667,7 +4532,6 @@ Gandhinaga
 
 38
 
-
 Sr. | Dept | Employe | Designat | ag | Education | Date of | Full/a | Full cTc No. of
 
 Ne e Name | ion @ Joining | dhoc | Time / | PA publica
@@ -4746,7 +4610,6 @@ OR (University
 
 i=
 ad
-
 
 Full etc
 Time / | PA
@@ -4849,7 +4712,6 @@ Time
 No. of
 publica
 thons
-
 
 Sr,
 No
@@ -5024,7 +4886,6 @@ ho. of
 publica
 tions
 
-
 Sr. | Dept
 Ala
 
@@ -5116,13 +4977,10 @@ an
 
 | tons
 
-
 Appendix XIV
 
 Information about the
 Library
-
-
 
 versity Grants Commission
 
@@ -5167,13 +5025,10 @@ Magazines: 39
 
 Aa
 
-
 Appendix XV
 
 Information about the
 Equipment
-
-
 
 University mimissia
 Appendix-xV
@@ -5310,7 +5165,6 @@ _ 28-01-2011 |
 28-01-2011 + |
 28-01-2017 |
 
-
 S. item Description Make | Model Location Value Date of
 No . rchase
 
@@ -5396,7 +5250,6 @@ U.S SkiaN Computer 31-03-2024
 = (Po bk dition Homputer | | HP 280G9 | LABOD? noe 31-03-2024
 NO\ 96 | Gesiterpitomputer | HP 280 G9 LABOO2 | 53100 |Working 31-03-2024
 hom eS fGomputer | ir WP 280G9| ——LABOOZ | 53100 [Working] 31-03-2074
-
 
 (iia I jin ‘Value
 
@@ -5554,7 +5407,6 @@ ___ Oa. 03-2013
 Sent sm
 
 04-03-2013 |
-
 
 149
 150
@@ -5734,8 +5586,6 @@ _04-03-201; 2013
 
 orking __04-
 
-
-
 ttem Description Value | Status |Dateof
 purshase
 201 ~~ Besktop Comp ter | Lenove es '
@@ -5830,7 +5680,6 @@ Sadi op Computer Lenove AVA 22500 [Working 0403-20013 |
 - - J F =
 
 cu 50
-
 
 "item Description ‘Make Location ball Status
 Desktop Computer | Lenovo —LABOOS | 227500 [Working
@@ -5980,7 +5829,6 @@ at
 28-01-2017
 28-01-2017
 
-
 pi
 
 Item Deseription | Make | Location | Value | Status | Dateof
@@ -6057,7 +5905,6 @@ LABOO? | 26300 (Working | 28-01-2017
 —xawooav | LABO07 | 26300 jiverking | 98-01.7017 |
 
 Fd
-
 
 Desktop Computer
 Desktop Computer
@@ -6179,7 +6026,6 @@ Ava] ___LABOOR | 22500 [Working | 04-03-2013
 Ava 22500 |Working | __04-03-2013
 
 53
-
 
 jee
 
@@ -6317,7 +6163,6 @@ nS: 08-7 2023 | |
 
 a 08-2023 |
 
-
 | or. | iter Description ’ Make Location Value | Status | Date of
 
 {No : [purchase
@@ -6407,7 +6252,6 @@ M-O7-27002
 
 04-07-2022
 
-
 ‘Item Deseription Date of
 —_ purchase
 
@@ -6486,7 +6330,6 @@ fi ey, omputer r AV | LABLOL coring, | - C26 2 2017 |
 Seep Computer HP | LABLOL irk gaa
 
 eo =
-
 
 Sr.
 No
@@ -6605,7 +6448,6 @@ LAB102 | 50000 |Working| 08-06-2015
 
 XS Cain SS ae ip Computer = Hell Optiplex 3020 | LaBi02 | 50000 [Working | 08-06-2015
 
-
 Sr. item Description Make | Model Po ST | Value faa Date of
 No —— ———_— (purchase
 __ 608 Desktop Computer DELL Pell Optiplex 3070 LABIO? | S0000 [Working 08-06-2015 |
@@ -6664,7 +6506,6 @@ Se snins
 O
 
 =
-
 
 j Sr. ” Hem Description Make | Model ‘Location | Date of
 
@@ -6747,7 +6588,6 @@ Computer ~~ LABLOF 26300 Working 78-01-2017
 f) Computer | __LABIO7 | 26300 [Working | 28-01-2017
 
 53
-
 
 __ Desktop Computer
 Deskiop Com puter
@@ -6894,7 +6734,6 @@ T8208 |
 3-08-2018 |
 
 Bo
-
 
 Desktop Computer
 
@@ -7165,7 +7004,6 @@ tao
 
 G1
 
-
 Sr. Item Description
 Noa
 
@@ -7311,7 +7149,6 @@ DELL| Optiplex 3070; ____—-LAB202| A700 [Working | 11-42-2014 |
 DELL| Optiplex 3070; ss LAB2O2 | A2000 [Working | 11-17-2079
 DELL | Optiplex 3070 | LAg202 | 42000.|Working | 04-02-2070 |
 
-
 Sr. Item Description Location Value | Status | Date of
 i, a ae ep = ———— purchase
 863 Desktop Computer Optiplex 3080 — LAB?O AB406 Working 21-10-2021
@@ -7363,7 +7200,6 @@ HP 280 G9 LAB205 42362 [Working 31-03. 2024
 (eW2 obits Seer nel Ava 1nd | 2200 Were
 
 29-10-7015
-
 
 Iter Description
 
@@ -7585,7 +7421,6 @@ _13-062n22 |
 
 25-10-2015 |
 
-
 29-10-7015
 
 : Sr. Item Description | Make il Location Date of
@@ -7658,7 +7493,6 @@ G5) Optiplex 3090
 wy op Computer| — DELL
 
 _— BS
-
 
 No a =
 1016 | Desktop Computer } DEY Optiplex 3090 64900 |Working,
@@ -7806,7 +7640,6 @@ _ 26-01-2011 |
 oe 01-201
 
 7801 a rt
-
 
 LOBE |
 
@@ -7998,7 +7831,6 @@ _31-03- 70294
 
 6/
 
-
 Sr. item Description Make
 
 No ——— == ==
@@ -8171,7 +8003,6 @@ _ 102-2019
 ___41-02:2019 |
 
 Pita 201% |
-
 
 r
 =
@@ -8410,7 +8241,6 @@ atti
 
 Vhorking.
 
-
 7 Times
 
 Lenewe AW Digital Resource LAB
@@ -8427,7 +8257,6 @@ igital Resource LAB 04-03-2013.
 \
 
 FQ)
-
 
 Other Equipment
 
@@ -8614,7 +8443,6 @@ Working
 
 13/8.2024
 
-
 ltem description
 
 with external power adapter - Model : 151008,
@@ -8774,7 +8602,6 @@ Value | Present t [Da Date of
 613.6 ) Working 3.6.24
 613.6 Working 13.8.2024 |
 
-
 | 36
 7
 18
@@ -8889,12 +8716,9 @@ Working
 13.8.2024
 5,9, 7024
 
-
 Appendix XVI
 
 Sports Infrastructure
-
-
 
 Mit
 
@@ -8938,14 +8762,11 @@ Cricket Practice Nets
 
 #5
 
-
 Appendix XVII
 
 Information about the
 composition of the statutory
 bodies of the University
-
-
 
 University Grants Commission
 
@@ -9107,7 +8928,6 @@ Constitution
 
 if
 
-
 5.Mo
 
 10
@@ -9252,7 +9072,6 @@ Gandhinagar
 
 s82007.,
 
-
 Name Profession Full Dette of
 
 5.No
@@ -9312,7 +9131,6 @@ Prof Prabir K. Biswas
 
 Se
 
-
 §.No. | Name Profession Full Postal Date of
 Address Constitution
 aw Indroda Circle,
@@ -9354,8 +9172,6 @@ Programs) ndroda Circle,
 CT, Near
 ndroda Cirche,
 andhinagar
-
-
 
 = 3
 
@@ -9433,7 +9249,6 @@ Ahmedabad,
 N rof, Sanjay Chaudhary
 
 —
-
 
 S.No. | Name
 ha
@@ -9532,7 +9347,6 @@ Constitution
 
 He
 
-
 §.No. | Name
 
 his, Namrata Somani
@@ -9627,7 +9441,6 @@ a4
 
 SS Ee
 
-
 S.No. Name Profession Full Pastal | Date of
 
 Address Constitution
@@ -9690,7 +9503,6 @@ Address Constituthon
 HADRIAN, FINANCE
 OM MITTEE
 
-
 §.No. | Name Profession Full Postal | Date of
 | Address | Constitution
 1 Dr Tathagata Bandyopadhyay Director General, A-IICT, Near a-12-2024
@@ -9744,7 +9556,6 @@ ndirada Cirche, |
 ndhinagar
 | B77.
 ex-officio)
-
 
 | 5.0.
 
@@ -9826,7 +9637,6 @@ andhinagar
 Date of
 Constitution
 
-
 5.No. | Name | Profession Full Pestal Date of
 
 Address Constitution
@@ -9885,7 +9695,6 @@ ASIC, eINFOCHIPS- company,
 row company atna building,
 Infochips Rd,
 
-
 is
 
 Name | Profession ’ Full Postal | Date of
@@ -9920,14 +9729,11 @@ ex-officio}
 
 88
 
-
 Appendix XVIII
 
 Information about the Non-
 Teaching Staff of the
 University
-
-
 
 University Grants Commission
 Appendix-XVII
@@ -10113,7 +9919,6 @@ Taa | B.Com, DISM, |
 
 $0
 
-
 Sr. Name Designation | ¢ Qualification Scale of Fay Date of Trained
 No. | | Appointment Yes/No
 | If yes,
@@ -10174,7 +9979,6 @@ Wellbeing and and Counselling.
 Counselor CERTIFICATIONS: 01/08/2020 Yes
 
 91
-
 
 3B | SWAT! MITRA
 RAMU
@@ -10338,7 +10142,6 @@ ve
 
 a
 
-
 Sr. Name Designation
 
 No.
@@ -10459,7 +10262,6 @@ PhD in Physics P04 ch
 24
 
 a?
-
 
 Sr. Name
 
@@ -10674,7 +10476,6 @@ Ol Aper
 4
 
 tails
-
 
 Sr. Mame
 Wa.
@@ -10902,7 +10703,6 @@ Oh OA F005: Wes
 ves,
 \
 
-
 b pe
 
 Dhirubhai Ambani
@@ -10993,7 +10793,6 @@ Gy
 155
 
 16/
-
 
 Weve
 Proforma
@@ -11093,8 +10892,6 @@ Dates of the meetings of the statutory bodies xxVI 242
 
 Board of Governors (BoG) minutes of meeting MxVII 244
 
-
-
 UGE
 Proforma
 Refercnee
@@ -11187,14 +10984,11 @@ Mle. |
 
 431
 
-
 Annexure |
 
 Date of Establishment
 (Govt. of Gujarat
 Notification)
-
-
 
 “~
 
@@ -11237,16 +11031,12 @@ b Legislative and Parliamentary Affairs Department / E Branch
 
 fa
 
-
-
 Annexure Il
 
 Trust Deed (Memorandum
 of Association & Rules
 and
 Regulations of the Society)
-
-
 
 Annexure Il
 
@@ -11267,8 +11057,6 @@ Notified herewith on the 29" October 2001 by the undersigned
 Sdi-
 Assistant Registrar of Societies
 Abmedabad Section
-
-
 
 = XZ English Translation
 
@@ -11292,8 +11080,6 @@ Designation
 Deputy Charity Commissioner
 Ahmedabad Region
 Ahmedabad
-
-
 
 2 \ x f hey
 id i Ca ba vibe : LY og
@@ -11348,8 +11134,6 @@ places and al such places as deemed fit and proper by the Society;
 
 it} To arrange for interaction and cooperation wilh similar centres of leaming
 and industry bolt within and outside India.
-
-
 
 pd
 
@@ -11406,7 +11190,6 @@ distincions as may be laid down in ihe regquiaions.
 
 10
 
-
 ep
 
 To develop and maintain relationships wilh other institules/organisations!
@@ -11452,7 +11235,6 @@ Ta do such other acts and things as may be necessary to further the
 objects of te Insldule,
 
 11
-
 
 APPLICATION OF INCOME
 
@@ -11511,7 +11293,6 @@ Bandra (E), Mumbai 400 076 |
 — nl
 
 12
-
 
 +0,
 
@@ -11595,7 +11376,6 @@ wt ee
 
 13
 
-
 weet te fon ef: oe
 
 th fat * ’ L] tj
@@ -11654,7 +11434,6 @@ Mov. Subsequently, the members of the Society shall be decided by the
 Ohirubhal Ambani Foundation (DAF) Trust, Mumbai,
 
 =)
-
 
 . i
 
@@ -11721,8 +11500,6 @@ served upon every member of the General Body nol fess then fifleen clear
 
 ss
 
-
-
 es i ae
 . : E
 days before the date of the mecting proveded that the agendenial omission
@@ -11777,8 +11554,6 @@ ie
 
 i. Such olfer auhoribes as may bo prescnbed from time to time.
 
-
-
 (33°
 
 a OFFICERS OF THE INSTITUTE
@@ -11830,8 +11605,6 @@ for renomination thereather,
 The Board of Govemors shall have power of management and administration of the
 ravenue and property of the Institute and ihe conduct of all administrative affairs not
 otherwise proveded for, The Board shal have the iollowing powers, namely:
-
-
 
 i
 
@@ -11888,8 +11661,6 @@ etudentships;
 a. To grant degreadiploma and certificate to the students who fulfil the
 academic requirements prescribed for various courses of studies of Ihe
 brstitute;
-
-
 
 =“
 
@@ -11951,8 +11722,6 @@ meelings of the Sociaty o¢ the Board, as the case may be, without the
 leave of the Presidant of tht Sogely of tha Chainnan of the Board of
 Govemors, he/she shal cease to be a momber thercol,
 
-
-
 1. COMPOSITION OF THE EXECUTIVE BOARD
 There shall tet an Emeculive Board consisting of ite following members, namely
 1 The View President, who shall be ihe Chairman of ihe Executive Soard
@@ -12008,8 +11777,6 @@ persons as il may $clect to Cary on any research investigations or study,
 
 I To propose regulations for consideration and adoption by the Board of
 Govemors;
-
-
 
 be
 
@@ -12068,8 +11835,6 @@ virtue of which he'she is such member.
 
 oh Any vacancy in the membership of Board of Governors oocuming belore
 the next reconstitution or before the expiry of the prescribed ponod shall be
-
-
 
 19
 
@@ -12131,8 +11896,6 @@ Academic council may convene a mecting of council as and when necessary.
 
 cay
 
-
-
 ; exe
 
 21, THE FINANCE AND ALLOCATION COMMITTEE
@@ -12191,8 +11954,6 @@ wal
 
 i 2} Al the: proposals felting to revision of grade, upgradation of the scale and
 | those ihems which are mot included in the budget, shall be examined by ihe
-
-
 
 24.
 
@@ -12258,7 +12019,6 @@ leave, pension and prowdent fund, admissitte to him, shall be such as may
 
 ay
 
-
 ae
 7
 
@@ -12313,7 +12073,6 @@ b. The Execuiive Registrar shall have the following power: ond duties,
 rarer:
 
 25
-
 
 Zu,
 
@@ -12373,8 +12132,6 @@ Any receipt given by the Finance Officer of by the person or persons. duly
 gullyorized in this behall by the Board, shall be sufficient discharge for payment
 of monies to {ne Inshilule
 
-
-
 ‘ar 3!
 
 ai. FUNDS OF THE INSTITUTE
@@ -12426,8 +12183,6 @@ Placing al to the Society,
 All orders and decsrans of the Institute shall be authenticated by the signature of
 the Execuive Registrar or any olher member or officer aulhonzed by the Director
 in this behalf and all ofher insinument: meued by fhe Institute shall fe
-
-
 
 ¢ uy)
 i " ral]
@@ -12483,8 +12238,6 @@ if) The power and duties of the Director and olher officers and employees al
 the Institute;
 
 ta) The management of the properties of the institute;
-
-
 
 ee
 
@@ -12573,8 +12326,6 @@ The authentication of ihe ordors. and decisions of the Execuime Boord:
 Matters relating to hostels and halls of residence including ciscipbnary
 eoninod therenn: and
 
-
-
 —_
 
 #2
@@ -12616,12 +12367,9 @@ damascene eel
 
 30
 
-
 Annexure III-A
 
 Gujarat Act No. 6 of 2003
-
-
 
 S
 
@@ -12637,8 +12385,6 @@ COMMUNICATION TECHNOLOGY ACT,
 2003.
 
 Jelar inneraifteal antes 4" Afi, S00 DY
-
-
 
 (Swe Sd nip. fe
 
@@ -12737,8 +12483,6 @@ Ik
 
 IB
 
-
-
 MIME Gu | Wkrnafeget Lea) Aenean ca Piplarianatieed sitte f Geteeremesetiaes Todds sled, Mitty
 Seclions. Page No.
 7400 Confenment of degrees, diplomas and prant of cenificates m
@@ -12750,8 +12494,6 @@ AZ, Pape ci listeners. ra |
 it, Reread tics ot the eeebtieetioonent. ul
 MM, Dronitciry [riny bien: a4
 35. |mlermnity, uM
-
-
 
 (ULE: Cluj Jdrtited le Dotnet dif defied Cerner Mire ie, OU
 
@@ -12831,8 +12573,6 @@ Phil arcom.
 
 AONE eet | at
 
-
-
 UA Stu. 6] Fibra Lata fide of Enidverimutin acd iarewnigaaver fewtvmileey La ay
 
 ff) Vheere shall tse tahtished a University by the same al The Uhinubliai
@@ -12906,7 +12646,6 @@ kaye ae a
 een
 belek
 
-
 (Tb = Cag 6 Hivnhhe iniwn Dives! Lar awd Cera Foire of, 2d
 
 anerlnap ia ‘=: AH No person shall be excluded Eom any oftice of the University or Ero
@@ -12974,7 +12713,6 @@ Qe te develop ond maintain relationships with teachers, neacurchers. anil
 domain experts in information and communication techrahagy and allied
 areas in any parle the world Ger achieving the objects ol the [nstitute:
 
-
 SIHLE Y tj. | Tinto ncn inna: a nerd rele anernbcoten fonterlagy to Md
 
 co to regulate the expondiiane and bo mamage the fruoces: anal be maintain
@@ -13040,7 +12778,6 @@ Rhee aan,
 havi la insite professorship. dswiciaice peclessawship, asetaril
 Pwisership, readerships, leciureeships. and any ather teaching. acidemic or
 noucarch posts anal toe pececrie qualiticaiaens far then:
-
 
 [RN 5 Cong, & [iirafdi leew frien: of (ior ee aired (eyo Finches fel
 
@@ -13109,7 +12846,6 @@ Direwlor
 
 ‘eee Seercion: to Gower) (ipher and Techaleal Ealoention,
 balucation Deparment, Caevermmemd of Ciara. |. i ;
-
 
 Tel Fd oil alae ha
 ima oa ad,
@@ -13193,8 +12929,6 @@ Eieatomsi ol te
 
 Tetas a
 
-
-
 (en all
 
 Pare, ae
@@ -13273,8 +13007,6 @@ Wthe Diregior of the Institute ex-afficds shall be the Chairman of ihe
 
 flute Mien el the Hoan tie maemienbed be the Presikfent
 
-
-
 [Arrataa
 
 2 Cr 6) rear ieee Meine of fears sia Lenvinioeliony Totaitny! don ane
@@ -13348,8 +13080,6 @@ Swourding ine viene.
 Viewers aol
 
 idee oooh
-
-
 
 aren. ore | dete
 
@@ -13426,8 +13156,6 @@ its feist
 (Hi) he shall be responsible to the Director for the proper discharge
 has Eure tinrrs:
 
-
-
 IM = Geup hf afd clever fui if emaatiog sel Saatimicieey Frode lit Mane
 
 fie he shall, saibjecd te the contrsl at the Cirectir, bse nespeansilyie hor
@@ -13499,8 +13227,6 @@ dishing ol its Tumctivins,
 nnd prepare an mnie! Sen of acenuni, inching (hie incur ard
 eXpURRLE occult and the balance Sliced, if siscly fort aol in wich manner
 wisi he prisserthes! by Us athens
-
-
 
 Loca: ited dee
 
@@ -13596,7 +13322,6 @@ kar
 
 ab
 
-
 Hie; Cou).
 
 Peouiveu lebcnd Invwny af faker ae et vamievritsaeieat Fiilinfiggy fl Wud
@@ -13664,8 +13389,6 @@ Areca a [ety bi
 
 Ord the nike eeeclien a! ceninicts or apreemial by or en belsall
 al the Insitute:
-
-
 
 Bereeaice
 brtiabars al he
@@ -13742,8 +13465,6 @@ before the cemrnencenent ef this Ac shall coritinied Lo sab Timetions itil Uh
 Pinan Cumtiniibed isdonstiited for the Dnstbite under this. Ae, bet en che
 comitathen al the Finance Comoities under thin Awd the mernbers wl the
 
-
-
 TS ; Coy, ey (rie an dannii oy ok ne uu ey tote ley, JMlidd
 
 Finance Committe: holding office before such constitution shall aces to hold
@@ -13779,7 +13500,6 @@ Views eed were sublegilited Ber the mings “the (hirwbhas Ambani Vouniminn” n
 (iauar tea rier panerteal Ay Cre 2? af 20m, a *
 
 au
-
 
 Extra No. 12k REGISTERED Ne. GAGNIED
 
@@ -13823,15 +13543,11 @@ Wieder Sececury 10 beawertarie nt
 
 ch thee UPS
 
-
-
 Annexure III-B
 
 Amendment in 2024 in the
 Original Gujarat Act No. 6 of
 2003
-
-
 
 Extra Wen th
 
@@ -13870,8 +13586,6 @@ lechoology Ac 2003,
 tiuj. & off 1M, Communication Teechewlogy (Amendment) Act, 2024.
 
 IW ext fa-|
-
-
 
 fea
 
@@ -13968,8 +13682,6 @@ including Information and Communication Techraslo
 
 Tenp. & af S00,
 
-
-
 PART IV |
 
 (iliy
@@ -14040,7 +13752,6 @@ Communication, Mass Media, Film, Duma and Eetertainngt
 
 Forestry, Fisheries, Skill Devehyncet ond any
 
-
 bed GLUARAT GOVERNMENT GAALITES, 1X, [305.2024 | PART IV
 
 Hahicational Discipline und interdisciplinary areas aeriss fichds ' disciplines
@@ -14108,8 +13819,6 @@ of Science, ‘Vechnology inchiding Information ari Commuuniggite
 Techoelogy. Lingincering, Cis, O81, Mining, Energy,  lnvingid
 Sustainabiliiy, Siedical Science, Healthcare, Dental, Nursing, Physic
 Paramedical, Pharmacy, Commerce, Management, Low, Ulu
-
-
 
 PART TV |
 
@@ -14185,7 +13894,6 @@ in the narginal mote, for the word “Institute”. the word “1
 shall Ine substituted. |
 
 t-5
-
 
 b-t
 
@@ -14300,8 +14008,6 @@ Miamaponicnd, Law, Iinnoiiies, Litgrine. Social Soicaces. vias,
 Scitnee, Economics. Edweation, Architecture, Urban Plinning, [Pa
 ingluding Vashi
 
-
-
 PART IV |
 
 2D.
@@ -14405,8 +14111,6 @@ Tim). fof PO,
 fennel
 arene 19 of
 Coup. & of 2S,
-
-
 
 h-H
 
@@ -14527,8 +14231,6 @@ sulestitereal,
 
 [PART WV
 
-
-
 PART TW |
 
 Comj. fool INDE
@@ -14634,8 +14336,6 @@ Sebsiiiadion all
 aeglion J of
 Ciuj. Gof Deen,
 
-
-
 f= 10 GAR AT (VER SMENT CaA4E TTI EX, | adhe 2024 | PART EV
 
 (Aithe Academic Cowell functioning as such immediately helore the
@@ -14685,14 +14385,11 @@ shall be subbsqjitgitecal,
 
 Cioveniment Central Press, Camdhinapar,
 
-
 Annexure IV
 
 Section 3 (7) of Gujarat Act
 No. 6 of 2003 —
 Headquarters
-
-
 
 IBGT { Cem), flit clever leanne os! (veer ol tae ten fgets Ave OTE
 
@@ -14768,32 +14465,23 @@ ee Ten
 Wewvts et ida
 beer
 
-
-
 Annexure V
 
 oummer Semester Time-
 tables for last 3 years
 
-
-
 Annexure VW
 
 64
 
-
 65
 
-
 66
-
 
 Annexure VI
 
 Ph.D program Academic
 Requirements
-
-
 
 Annexure V1
 
@@ -14844,7 +14532,6 @@ other fees, including any oulstanding dues. i
 
 e) A student is required to register in the semester in which the final Ph
 evaluation and pay the prescribed tuition and other fees, including an
-
 
 1.2 New entrants to the program, who are awaiting the results of the qualifying examination may
 be allowed ‘provisional registration. Latest by the date given in the Academic Calendar
@@ -14905,7 +14592,6 @@ the course is offered for UG/PG students in the current semester, and|
 and lab sessions in person. This is possible for students having jobs oNete
 nature, or it is feasible for them to do so alongwith the jab.
 
-
 Mode 3: By registering for the course (5xx/7xx, or 4xx if offered for PG students) on-campus if the
 course is offered for UG/PG students in the current semester, but doing it in online mode
 (provided the instructor agrees to conduct it in online mode). The instructor shall conduct
@@ -14960,7 +14646,6 @@ is fulfilled, then the students are advised to register for only 3 research goat
 
 b) Astudentin the external registration program, when registering for res He
 for a maximum of 12 credits or a minimum of 3 credits during the regulq
-
 
 1.6
 
@@ -15047,8 +14732,6 @@ MSc 80 20
 
 Tech/BE/MCA
 
-
-
 2.1.1 A student depending on the category needs to take a certain number of minimum course
 credits, as mentioned in Table-1, The course work can be done following guidelines given in
 section 1.4 (a) above. The fulltime students from semester || onward, and part-time students
@@ -15115,8 +14798,6 @@ in places of repute outside DA-ICT. Based on their performance andy a Q nil! hy
 the course, the PGC may consider (hem equivalent fo some course crea at
 requirements for required course work credits af DA-ICT. Any such wWOrARRr ifs
 
-
-
 permiffed only if the courses being considered have not been counted for any ofher
 degree/dipioma requirement.
 
@@ -15156,8 +14837,6 @@ F | 0 | Fail
 - Pass
 
 *For Pass/Fail and Audit Courses only.
-
-
 
 Marks to Grade mapping for courses done on UGC recognised online platforms
 
@@ -15216,7 +14895,6 @@ although it will not be taken into account while computing the CPI,
 lfa student is on leave for a part of the semester or submits his/her (res
 semester, the PGC may reduce research credits the sludeni hay
 semester. i
-
 
 2.56 Sponsored (Part-Time) / External (Part-Time) Category (Ph D):
 Apart from the general eligibility criteria prescribed by the Institute, sponsored/external candidates
@@ -15287,7 +14965,6 @@ course work credils and research eredits, both
 students enrolled under Sponsored and External category are
 residential while eaming the course work credits and research credit
 
-
 residential. These days can include the RPS. The supervisor maintains the attendance sheet
 and submits the same to the Dean (AP) office al the end of each semester.
 
@@ -15357,7 +15034,6 @@ Stipend is for a maximum duration of five years, The responsibilitiecns
 teaching / research assistantship includes conducting laboratory couks
 undergraduate/postgraduate students. assisting in teaching, research proj
 
-
 administration. The PhD stipend amount is announced in the Admissions Policy (and available
 on the website) of the Institute. A student can clarify stipend related doubts with Dean
 (AP\/PGC.
@@ -15416,7 +15092,6 @@ afier he/she has passed the comprehensive examination (both thal fy
 comprehensive examination shall imply passing both the parts for the full\tigge
 passing Part || for the part-time students. sc
 
-
 6. Supervisor Selection and RPC Formation
 
 Supervisor for a student enrolled in the PhD program under sponsored and Part-lime calegones
@@ -15474,8 +15149,6 @@ Ph D and fulfils the following critena:
 * — Atleast 18 course credits completed.
 : The student should have a minimum CPI of 6.5/10.0.
 
-
-
 #.3 Completion of Requirements for M Tech Program: A student who migrates to the M Tech
 program from the Ph D program must complete all requirements for the M Tech Degree within
 twa years (four semesters) from the time of migration. However, credits earned as a Ph D
@@ -15527,15 +15200,11 @@ weighted average of the grades obtained in that semester.
 DA-NCT, Gandhinagar
 July 2024.
 
-
-
 Annexure VII
 
 UG program Academic
 Process and Practice
 Statement
-
-
 
 Annexure VIl
 
@@ -15557,7 +15226,6 @@ Academic Year 2025-26
 Date: 07 May 2025 (Updated)
 
 81
-
 
 Table of Contents
 
@@ -15609,8 +15277,6 @@ EAB PR UP a ce epee lessee ca ace pa iawn awh eaebttudwnddisactpccpiaddenanca ub
 BMGT Lei PARE: cit decane lace apsaiieatnaarsslcucerapaekessakiniiiacabiscabieees vee 1D
 2.4 12 Important Dates for admissions to NRI and Foreign National category . 20
 2.4.13 For Inquines 2
-
-
 
 1. Objectives
 
@@ -15670,7 +15336,6 @@ Ar Jigga Yagotk (Mombor-Secretary)
 
 83
 
-
 The fotos otlicils will be Spomal invites lo the meeting of ihe Committee
 
 Prot, Bhaskar Chaudhry, Dean AP
@@ -15721,8 +15386,6 @@ iq} Any other matter relating to the acrmassians referrod by the Director,
 Note: The Acimnssians Gormittee members need fo be ovavable funfess unelor soecil
 imunistoooes or witty consent ofthe OrecioniConvena of fie Conmiliee) foravery exencise
 Of Ihe Geass ree ss.
-
-
 
 «. Undergraduate Programs
 DAU offers four unique four-year undergraduate programs leading to the degraas of
@@ -15784,8 +15447,6 @@ subject to availability of seats and in descending ordar from the highes! CPI ob
 
 ir
 
-
-
 Tho program brochure can be found hare.
 <titpedvwwdlalietac.insiies/uetaull files/other-files/Brochure_BTech_ICT-CS_ 25, pcdl>
 
@@ -15838,8 +15499,6 @@ MATLAB; Xilinx etc. and hardware boards viz. FPGA, CPLD, etc. to design inlegrat
 Stutients will also gain direct indusiry expenence through internships. The rural internship during
 thoir course will enable students 10 appreciate the soce-cultural aspect of the Indian semety and
 mativaie to explore electrons based soluiions lo-some prevailing needs. of the rural India, The
-
-
 
 Lote |
 
@@ -15902,8 +15561,6 @@ acimigseans commttee on the basis of the mont list prepared by the Admission Com
 Government of Gujaral, separately, (Website:  htlpsy/acpo.quiaralgovim srinl
 hips: QUulAC C acmHssions. nic.in!)
 
-
-
 MAI Category:
 
 18%. of the seats will be fillod by BA-IGT as NA students from the candidiaies who haw) passe
@@ -15955,8 +15612,6 @@ lechnology/Computer Science/Biolagy. Candidates appearing in the qualifying exam
 olfigred provisional admission will be requined to praduee the proel of having passed the qualihang
 examination (1042 examination or equivalent) to the Institute latest by 20 October 2025. failing
 whech the provisional admussion well stand, cancelled.
-
-
 
 (Relerence: hittps://aicte-india.org/sites/detaulvfiles‘approvalAPH®.20Final.pdl fpage 102
 
@@ -16020,8 +15675,6 @@ age at the time of counselling.
 
 ji
 
-
-
 23.8 Selection Criteria
 
 Arhmgsion to the B. Tech. programs will be based on the All India Hank of Joint Entrance
@@ -16068,8 +15721,6 @@ orontation for those who have boon given confirmed admission.
 
 247 Counselling
 Gaunseting i done aniline
-
-
 
 2.3.0 Fees Structure
 
@@ -16124,8 +15775,6 @@ the stidenis lo obiain details on procedures and terms and conditions of the nan
 can also avail Ioan from banks of thet choo and in cilher of ihe case: the institute will exiored
 Support in completing ihe loan documentation promess.
 
-
-
 390 Aelune Policy
 The refund poticy for the withdrawing candidates is in accordance with the UGC rules.
 
@@ -16174,8 +15823,6 @@ cro Ovesne Khia hbao-Selet ara h hes 1] se Hetamahina Cvfared 66 Studer baal
 fo Pas
 
 Tiie irequenty asked questions (FAQs) for the B.Tech. programs can be found fpere.
-
-
 
 i
 
@@ -16283,8 +15930,6 @@ ACAMC PeNiOance aline end second or fourth semester shall be discontinued frarre
 Inslituie Disputes, if any, relating lo acimission shall be subject la Gandhinagar, Gujarat, Inna
 (UMS crily.
 
-
-
 Ie ined Foreign National Students
 The acmessions for Non-Reselont Indians (NRIs) and Foreign Nationals (FNs) to the Programs
 
@@ -16333,8 +15978,6 @@ Incha) and not having the staius of “NAM,
 2.4.4 Eligibility Criteria
 1, Only those candidates whose date of birth falls on or aller 01 October 2000 are eligible te
 apply. The date of bith as recorded in the 10th or 12th standard ceriihcate, issued by the
-
-
 
 [3
 
@@ -16391,8 +16034,6 @@ school will be accepted).
 
 Apphications successfully received for DAFS category in all aspects tl 18 May @025 will leo
 considered for the tirst round of adnmssions which will be-announced Sy thin week of tday 2025
-
-
 
 li
 
@@ -16451,8 +16092,6 @@ course anid fee wal fe intimated fo the siuciets weil in advance.
 
 *subpect to revision
 
-
-
 ee
 
 24.7 Scholarships al BA-IECT
@@ -16503,8 +16142,6 @@ equivalent transorptsimark sheels are nol available at tha time ol applicabon wi
 have [O upload transcrgys/mank shaels ft the last two yours [1 Tike cianed first
 SGetor a thar Th slardeare)
 SATAIEE Khan Test scores,
-
-
 
 Certificatvdocument fram tic apprapnate aulhony indicating ihe resictency status
 (NALForeign). For NAl candidates for exampla, embassy certificate and for
@@ -16558,8 +16195,6 @@ OC PO! Card.
 Cerificate of Non Aesident Indian Status issued by The Intian
 Embassy(Consulate or a passport of Applicant indicating her/his status as Non
 Resident Indian.
-
-
 
 i)
 
@@ -16621,8 +16256,6 @@ Adimssian
 2.4.11 FAQs
 The frequently asked questions (FAQs) for the B.Tech. programs can be found here
 
-
-
 lyposime Optes for admissions to NRland Foreign Notional catedary
 
 ing of online Application Forms commences ur 08 Aprit 2025
@@ -16682,8 +16315,6 @@ Garihinagar— 382 O07, Giyjarat, Inches,
 Voice call helpline: (+91) 8488875445 (Only for NA! Foreign nabonal category canchrlales}
 Etnall international stuctents[al|daiici{dotjac|dot|in
 
-
-
 Important Notes:
 Tieurniomation on adaussions 2025 provided ant tonfornn the erospeachven candidates aboul Nin
 ograns and achiviiies of DA-ICT and are svbiect lo change fron fire fo lire
@@ -16718,14 +16349,11 @@ bate 24 OF R024
 
 101
 
-
 Annexure VIII
 
 PG program Academic
 Process and Practice
 statement
-
-
 
 Annexure Vil
 
@@ -16745,7 +16373,6 @@ Academic Year 2025-30
 Date: 02 May 2025 (Updates)
 
 103
-
 
 Table of Contents
 ante
@@ -16795,7 +16422,6 @@ AY ans snldaua'vainshindu vans belghiesorrbvetrbep hissed saichasanh eiaenndenii
 2211 important Dates for M.Sc. (IT) Admissions (lentative) 418
 
 104
-
 
 2.2.12 For inquiries... ... cae epee, 18
 
@@ -16851,8 +16477,6 @@ Overview jaan ieeathoal sams ay
 ea 5.5.1 Application farm and Statement of Purpose
 26.5 2 Design Aptitude Test (DAT):
 
-
-
 |
 =
 
@@ -16901,8 +16525,6 @@ SF a FR cia 4 veesciege re eesace cetacean naeta et anaes beac Sees 47
 
 3.2.11 Imporiant Dates for Ph. 0. (Rolling Admissions} ee 47
 
-
-
 1. Objectives
 
 The objective af Admissians Process and Practice Statement (APPS) 1s to follow. admessons
@@ -16949,8 +16571,6 @@ Holhed tothe Diroetor well im advance
 
 Ange number ol supporting stall and facully mombers aro algo oxpoeciod to extend) Whoa recsys
 Int ACIMISSIONS COMMEae as ard when required for execuing the aclnissenn process srt;
-
-
 
 Prot Pili Kure Gabi, Carvengr
 Pet Vash Agri, (Past Convenor)
@@ -17013,8 +16633,6 @@ Noto: The Adivesnas Communities members meed fo be avaiable (unless iador speci
 encunisianees or with poor consent of the DiroglantGanvenor of he Gonuriies) farevery cxarcse
 fist cnt PTAA SS,
 
-
-
 ~*
 
 «. Masters Level Post Graduate Programs APPS
@@ -17068,8 +16686,6 @@ The MTech. progam provides students wilh a mgordus understanding of both fundame
 ALAAINCEN Knowlodge in desired oreas ol specalivation. The gractuates of the program woud! bie
 woll-osdlioned to work in lhe last~yraving (CT indusiry of to pursue a dociaral doyrae
 
-
-
 witty “uel
 
 {dei ed tha M Tork neem are cequenedd to complete acsct of reagan Gort Gore Goer s
@@ -17114,8 +16730,6 @@ with which DAU has signed a MoU satislying the admission critena of the MTech pr
 
 qecited in the Mal.
 
-
-
 4. Instttute has right to conver! vacant seals of GATE category to Non-GATE category
 and vite-a-versa.
 
@@ -17158,8 +16772,6 @@ Non-GATE Qualified candidates
 
 * The aggregaie marks in ibe quabkhying dayree should nat be fess than G5". Gr Aporsal
 AS per the norm set ty ihe degrec awarding Insitute Lineverstly
-
-
 
 Wireless Communication and Signal Processing (WCSP)
 GATE Qualified candidates
@@ -17204,8 +16816,6 @@ UTE anes SACS ns is
 WOSD and Pinbedded Systems ISIE
 
 Winches Communication and Signal Processing cs i |
-
-
 
 Admisseon through Non-GATE Cnannal:
 
@@ -17254,7 +16864,6 @@ CS Syllabus applcable to lofiowing specializabons:
 
 ils
 
-
 For GOS Syllabus click hom < hips: anet ac, in/siesiiefaultliles/other:
 line hiTech, GATE*20 CS 2025, Syliabus,pot>
 
@@ -17297,8 +16906,6 @@ suppor in compleling ihe loan documentation process,
 
 17.2 Belund Palicy
 The refund pobey for the wekkiraweng candidates will be monccondance yall the UGC rules
-
-
 
 18 Financdal Assistance
 
@@ -17357,7 +16964,6 @@ bese change
 
 115
 
-
 « The frequentiy asked quoshons (FAQs) forthe M.Tech. (ICT) priagram can toe fornel tier
 PIT aE Ae mvinboghwt-tacs
 
@@ -17383,7 +16989,6 @@ Cae: po adnseons [nt chniel) colle) thot hie
 Wahiawa tae eet nt
 
 116
-
 
 i iy
 
@@ -17439,8 +17044,6 @@ Tho dotaion of tho concermed authorities of DA-NCT regarding cigibilty of any ca
 Shall
 be final, :
 
-
-
 botn is nao peer oS prea,
 
 he aiotton of candedaios wall bo based on the entrance fost te oe, conduchod al achenig Gorture
@@ -17486,8 +17089,6 @@ Basi: Probability: Galculus — Limits. Dillorentiation, and simple examples ol 
 
 Quantitative Aptitude and Logical Reasoning: Questions drawn from Mathematics upto 10th
 standard and logical reasoning.
-
-
 
 bl
 
@@ -17536,8 +17137,6 @@ The refund policy for the withdrawing candidates will be in accordance with the 
 eae || Figancial = ey
 The Institiie provides: financial support in the fom of scholarships to oligitie stuctents. Moro
 detads of it can be seen hore. <hiipso/ivwww.daiiclac.inimsc-it-scholarships>
-
-
 
 t PTs han a ri Al Fis iJ
 
@@ -17589,7 +17188,6 @@ Waleuie aa iclag
 
 120
 
-
 43 Master of Science (Data Science) -— M. Sc. (DS)
 
 23.1 Program Overview
@@ -17640,8 +17238,6 @@ es Developed s
 
 la * J
 
-
-
 Pete Geogr alruchine Gan te found. hare hyperlinked Piss /daieehac inns cath:
 =f ae es
 
@@ -17689,8 +17285,6 @@ Operational Research OR
 min agyregala ol 60% or as equivalant, as Cetormimned iy the degrec-qnaming institution,
 in discimines such as Computer Smenee, Information Technutoyy. Electromcs, Electron|es
 and Communication on Electneal Engenoornng.
-
-
 
 1
 '
@@ -17744,7 +17338,6 @@ Pastin Syllabus
 <Nips./ www Caiclacin‘sies/cdelaullies/olner-fies/MSe-D5 Enimnce: Toast St
 
 123
-
 
 7%
 
@@ -17800,7 +17393,6 @@ data-science-studenis>
 
 124
 
-
 a pplicaion Precedure
 Candidates submil oniing applicavon by clicking on the link given below. Appheation tec (no-
 retundable) & As. 1500/- plus GST & 18%, (Tolal As. 17 Oy-).
@@ -17854,8 +17446,6 @@ Voene Call: 07S 08 068 08-08
 Email: pg admissions/aljdalic|duijac|dot in
 Wabsala" wiwceiciac.in
 
-
-
 Science (Agrigulture Analytics) — Mi . AAI
 
 1 Progran) Geers
@@ -17901,8 +17491,6 @@ cuTriqulam Gonsess of threo semesiors of course work loflewed by a one-semestor
 pengontresearch work on a specilied top, Quring summer scemesier, Value Added Courses
 (VAC) will be of—gainized al DAU by the indusines(Acadomia. The VAG comes with cerihication
 alter successiul completion
-
-
 
 roe
 
@@ -17960,8 +17548,6 @@ The entrance lest to be conducted al selected centers all over the country. The 
 centers is: DAICT Gandhinagar. Ahmedabad, Bhopal, Bengulury, Chennai, Mungtie)
 Patna, Jaipur, Kolkala, New Delhi, Pune, Rajkot. Surat, Udaipur, Brie
 
-
-
 Hiulianewar, Ghanuigarl, Guwahati, damn Rechi, Luckiow. Mant Magar. Porharike. carts
 reir wipers
 rier all Becher ihe anotligied candidates based on Ine puvlominoe of tht oniainse
@@ -18001,8 +17587,6 @@ action forces. Gravilaton: universal law of gravitation, force of yravilation of
 acceleration dente gravity, mass and weight: freefall Thrust anc pressure. Archamedgs amacin
 Duoyancy, comentary doa of relative density. Wark, power, Sound, Basic pr Loser eT
 Eloctroaragnatic Theory Different forms of cnergy. conventional and non-convegmgg peste erm ‘i
-
-
 
 anergy fossil fuels, solar anergy; biogas: wind, water and tidal energy: nuclear cnargy
 Ronowable versus non-renewable sources,
@@ -18061,7 +17645,6 @@ loruta (enna). Acca ol irhenaghe :
 
 i129
 
-
 wae. Reieiens aries uauntes tamales cl sinlar trangins, arqnerbes ot laa fy
 ) ee elec)
 Lehre ob re We eh, prpenivs G1 ne Tangs Onn io i ich tional per
@@ -18119,8 +17702,6 @@ Viestcs Berl
 
 Finescl
 
-
-
 =~
 
 Ti}
@@ -18176,8 +17757,6 @@ OP erSrtim a bono! Eo Sbmiss cin iether will bo Sond by posi anchor arma io cana
 in case miudtiple candidates have samc-combened scares (al ihe entranvse test and miter) ine
 Ranticals who-has higher marks inmaths and scien will ne aera neypicy garth
 
-
-
 « The fateh wake) cuostions (FAQs) for the MSc (11) pregram can be fous bere
 cTitpes ania inet ac. wT eTSc-Ayrecuiiueg-analy esl
 
@@ -18205,7 +17784,6 @@ Fergal pep aisseos [el flack riotiacd atin
 Wolesitie worrey cladiel ae in
 
 132
-
 
 2.5 Master in Design — M. Des.
 
@@ -18256,7 +17834,6 @@ Natt = DECC Lae Wines COmMmUniGahonTtes ign —
 The program brochure-can be found here. < Atps:)aieac In Shesi eet UNL Ties. i a
 CD Brechure-25, pols i =
 
-
 Tet sais: Ao
 
 The i Des at intelligent Ussr Experience Design (IUD) at Dhunubhar Ambar University i incias
@@ -18302,8 +17879,6 @@ bE tiggetnlirly
 2.5.4.1 Edireational qualification
 A Bachelor's Degree or equivalent from a sialutory university in lhe ficids of Design, Science,
 Engineering. Technology, Humanities. Social Sciences, Fine Arts, Applied Arts. Aigaireimane
-
-
 
 Performing Ars. Professional Diplomas fram nationally recognized institulbons such as NID, NIFT,
 CEPT. IDC will also be considerdd for elginiity, Candidates must have 55%. marks .ar equivalent
@@ -18356,8 +17931,6 @@ condeate shall bo tna
 Allcantidates voll have to submit thor Staremoans of Purpose online, along yah incr appecaho is
 Apes cations wilhoul an SOP wall mot be shang GCandidaios wall have lo decaiapap Eng chareichlay
 
-
-
 rhe carabeies will have ta sciect one of the follovang options in tie Admission form
 fay MDes in Communication Design Mes (CD)
 mh Mes en Imellgent User Experience Design MDes (IUxD)
@@ -18407,7 +17980,6 @@ A camole question paper can be found here (pa) ehilos:idanct.ocin/sites(thofaull
 ficsMtes (Wx Sample OF 25. prits
 
 136
-
 
 2.5.6 Fees Structure
 
@@ -18463,8 +18035,6 @@ exempted fram DAT Test
 ment Counseling will be dene online, Applicants are advised, from ithe date of
 ANNnGuncement of firsiimerit list, io check for website to know about the slops they need io
 fe boone wall Ine GOunSeling process
-
-
 
 in
 
@@ -18522,7 +18092,6 @@ Waobsite: were daliclacin
 
 138
 
-
 3. Doctoral Level Programs
 Admissions in Ph.D. programs at DAU is possible through iwo channos, These arc
 
@@ -18577,7 +18146,6 @@ detailed program structure and graduation requirements can be found here.
 ehtipsaidalicLac.in'phd>
 
 ehttps:iiwwwe.dalict.ac.in/sponsored-projecis> Glick Here for details of Sponsorayyt
-
 
 i lntake
 
@@ -18643,8 +18211,6 @@ Sponsored Pari-time
 A candidate who intends to apply in the External Part-time
 External Part-time Calegory must be curoenily employed atan Aa Organisationor |
 
-
-
 University / Instiviion and must have al least ho yoars of
 fdlevant experience. The candidate should submil a "no objection
 l | certificate’ (NOC) issued by the head of the organisation /
@@ -18699,8 +18265,6 @@ es'PhD. Physics. Sample OF 2025.P0F>
 disaplinas will have a common guestian paper. In line wath DA-NCTs empnasis on
 interdisciplinary pedagogy and research, the question paper is prepared kKegoyeeeepaed
 the full range of the HASSD disciplines. All competent candidates Iroy “ a
-
-
 
 HL
 
@@ -18764,8 +18328,6 @@ There ¢ no age limut applicable to this program.
 At ihe time of admission an amount of As.50,000/- (Ris.25,000/- towards tuition fee for the first
 Semester and As.25, 000). towards caution deposit) is to be paid by way of bank dralt drawn in
 
-
-
 ee
 fer
 
@@ -18818,8 +18380,6 @@ background
 solocied by TCS, al the time of announcement.
 
 Pernod: Fora maximum of four years or submission of thesis, whichever is carlier,
-
-
 
 qa
 
@@ -18877,8 +18437,6 @@ applicant is admitted to the PhD program.
 + The Candidate has to satisly the eligibility criteria in order for her/his application to be
 considered for admission into the PhD, program. 7
 
-
-
 « JApphcanis whe have not been invited directly lor the interview are naquired to appear
 lor DAIICT's PhO Entrance Test,
 
@@ -18927,8 +18485,6 @@ campus for confirmed candidates (as per intimation) | (9:30 hrs. to 13:00 hrs.)
 Onentation Program 1G - 18 July 2025
 
 Commencement of classes. 21 July 2025
-
-
 
 sibel
 
@@ -18988,8 +18544,6 @@ Category Qualification’ Eligitility Eligibility Criteria Selection Criteria
 
 A. Zt anc Altind || MTech M.C.AJM.Sc AGP fl) Sponsored Candidates: Tho chncidates! Tho candirinios, who hull
 Dorrie YB TocriE. or eouvalont |ishouldbe-sposored by an RaDerganiznlion) bw chyanliy  cebere tip
-
-
 
 1h whech OA-CT has
 erm cooporalive! collaboralive research’
@@ -19122,8 +18676,6 @@ Ing oornbings poronreire
 Hoth in theo ero mord dle feted
 th lier vicer
 
-
-
 Note:
 
 » Candidates wih WOS6/M.C.A.. unless thoy have a subsequent Mo Pil, degren will be
@@ -19178,8 +18730,6 @@ consitiered for acimission into the PhD. program.
 followed! by document vantication, payment of fees and on confirmation af admission, the
 Ormenlalion preagram. a
 
-
-
 3.2.49 Admission Offer
 List of candidates selected lor acimission to the Ph.D. Program will be posied on the websile ol
 DAU, and the candidates vall be intimated accordingly through past and/or email
@@ -19228,15 +18778,11 @@ Directar
 
 149
 
-
-
 Annexure IX
 
 Academic Council and
 Board of Studies
 composition
-
-
 
 Academic Council
 
@@ -19296,8 +18842,6 @@ lex-officia}
 10
 ii
 
-
-
 Board of Studies
 
 CHAIRMAN
@@ -19327,8 +18871,6 @@ an hoo
 
 Prof. Tapas Kumar Maiti (Convenor, PG Pragrams),
 DA-ICT fex-Officeo)
-
-
 
 Prof, Ashutosh Saxena (CR Rao Institute of Mathematics,
 Hyderabad
@@ -19377,8 +18919,6 @@ FS |
 
 15
 
-
-
 Prof, Sidharth Tallur IT Bombay
 
 Prof. Pradyumna Vyas President,
@@ -19409,13 +18949,10 @@ DA-1ET
 
 154
 
-
 Annexure X
 
 Board of Studies Minutes
 of Meeting
-
-
 
 Annexure X
 
@@ -19468,8 +19005,6 @@ the discussion.
 
 P rot. Jinwala = asked abet pros iston of iphone one-year ate liw as clarified in
 
-
-
 program objective: otherwise, the proposed structure is a balancing approach for both one-
 vear thesis und one semester internship options,
 
@@ -19481,7 +19016,6 @@ The mecting concluded with acknowledgement and thanks to cveryone.
 Compiled an 20 May 2022
 
 i157
-
 
 Minutes of Board of Studies Meeting
 Dane & Tine: 06 April 2023 | 2) PM - 4:30 PA
@@ -19541,8 +19075,6 @@ driven projects and sponsored projects in the proposed program is a good idea.
 In Sem-1V, there is “Digital Design and Tape-out’. Belore this Le, in Sem-IIl, there should be Verilog
 course! module.
 
-
-
 Minar suggestion: In the Secure [hirdware offered as discipline elective, Quantum encryption,
 Qinintum communications basic should be incluced as this intormation will be relevant vo fucure
 rescurch uncasapening inthis fick
@@ -19593,8 +19125,6 @@ entreprencurship.
 
 NR: The program ts well thought and nicely presented. Relevant and pood Beet: The e curricuiumy is
 sound, it addresses the necessary clements that will make stuclents inchuspes
-
-
 
 ‘The Functional verification module which would cover black box testing, green box testing, white hox
 testing, code coverage, ete. could be added
@@ -19648,7 +19178,6 @@ and Society’ are relevant and good for this purpose. LASS course on ‘Langan 
 
 overall required for improving communication skills,
 
-
 The course of DLP CO is working good in on-going ICT program and the students of this pregram
 will be benefitting from this course,
 
@@ -19697,8 +19226,6 @@ Summary of Common Points:
 * The Chip design tsa very motivating exercise for the students and an USP for the program
 ® Webinars and effective publicity will increase the success al the program
 
-
-
 Recommenclat ions:
 
 The Board of Studies have cleared the proposed curriculum with the following suagest ins
@@ -19711,7 +19238,6 @@ Charges and Fields to be renamed to Magnetics and Electrics
 tammppifca ane EF HE 2003
 
 162
-
 
 Minutes of Board of Studies Meeting
 Date & Time: 20 June 2023 @ 3:00 PM — 4:00 PM
@@ -19775,7 +19301,6 @@ Compiled on 26 June 2023
 
 163
 
-
 Minutes of the mecting of Hoard of Studies (oS) DA-LCT. Gandhinagar,
 Agenda: Curriculum revision of the MSc (DS) Program
 Date: Friday, 14 June 2024
@@ -19826,8 +19351,6 @@ curriculum will be considered approved by the BoS and will be submitted to the A
 Council for ratification and final approval.
 
 Compiled on 21" June 2024
-
-
 
 Minutes of the meeting of Board of Studies (oS) DAU, Gandhinagar,
 Agenda: MDes-(U 51) (proposal for new specialization) and MDes-CD (ouriculum revision
@@ -19888,7 +19411,6 @@ a —
 
 165
 
-
 * ‘The admission brochures for both specializations will highlight the skill sex students
 will dewelop upon completion, The MDes (CD) program should clearly communicate
 ils umicpie Pocus.
@@ -19932,14 +19454,12 @@ Compiled on 15! March 2025
 
 166
 
-
 Annexure Xl
 
 Academic Council Minutes
 of Meeting
 
 Lia
-
 
 DHIRUBHAI AMBANI INSTITUTE OF
 INFORMATION AND COMMUNICATION TECHNOLOGY
@@ -19985,8 +19505,6 @@ Agricultural University (AAU), Anand, has started a two-year MSc degree program 
 Agriculture Analytics. The objective of the program is to introduce the concept of
 satellite technology and data processing, machine learning, mathematical and statistical
 modeling in the program curriculum.
-
-
 
 Presentation on Agriculture Analytics program was made by Prof Ranendu Ghosh.
 He presented the genesis, need, program structure and current status of the new
@@ -20040,7 +19558,6 @@ the industries. ~
 
 The Council endorsed the improvements in the program.
 
-
 Item No. 4
 
 Presentation by Prof Yash Vasavda on the revised M.Tech EC program jointly
@@ -20092,7 +19609,6 @@ August 21, 2022
 
 170
 
-
 DHIRUBHA] AMBANI INSTITUTE OF INFORMATION AND COMMUNICATION
 TECHNOLOGY, GANDHINAGAR
 
@@ -20143,8 +19659,6 @@ and computing. The Indian goverment has recently launched India Semiconductor Mi
 a vision to enable India's emergence as a global hub in electronics manufacturing and design.
 Given ihe increasing interest of nation in semiconductor manufacturing and R&D, both in India
 and worldwide, the sector is likely to witness a spike in demand for engineers with
-
-
 
 semiconductor Knowhow. The objective of the new B.Tech, in Electronics and VLSI Design
 (EVD) at DA-IICT is to create industry ready undergraduate manpower for tho semiconductor
@@ -20207,8 +19721,6 @@ looked at and ways to merge them inte one, if required.
 « As the Math courses lay emphasis on the applications, these should be renamed to
 Engineering Maths.
 
-
-
 ltem Mo. 3
 Nera
 
@@ -20217,7 +19729,6 @@ The mecting ended with a vote of thanks to the Chair.
 April 24, 2023
 
 1¥3
-
 
 DHIRUBHAI AMBANI INSTITUTE OF INFORMATION AND COMMUNICATION
 TECHNOLOGY, GANDHINAGAR
@@ -20269,8 +19780,6 @@ in the draft minutes circulated earlier. With a correction to include Professor
 Madhumita Mazumdar’s name in the list of attendees, theGe
 minutes of the 40th meeting.
 
-
-
 Agenda Item No, 2
 
 Noting of Government of Gujarat Notification Declaring the University as a
@@ -20318,7 +19827,6 @@ Page 2 of 4
 
 175
 
-
 Agenda Item No. 5
 
 Proposal for Revision in Policy on Course Repetition for the grade
@@ -20361,8 +19869,6 @@ including the PhD synopsis exam, in view of personal hardships faced during (he
 
 pandemic,
 
-
-
 Agenda Item No. 8
 Recommendations of the Board of Studies for PhD in Law — School of Law
 
@@ -20384,14 +19890,11 @@ Pape dof a
 
 Lf?
 
-
 Annexure Xll
 
 List of Multidisciplinary
 courses offered in AY
 2024-25
-
-
 
 Multidisciplinary Courses A.¥. 2024-25
 
@@ -20442,8 +19945,6 @@ Ta [es foro acisconenatin
 ae [0 feosictontonobes
 Pa [ane [esimenoen
 
-
-
 Annexure XIll
 
 Students registered for
@@ -20451,7 +19952,6 @@ Internship, Project related
 courses AY 2024-25
 
 180
-
 
 Annexure XL
 
@@ -20507,15 +20007,12 @@ PC334 Tech Research Internship a
 PObAg MS-IT Summer internship
 PCE76 MTech Major Praject-1
 
-
-
 Annexure XIV
 
 Policy on Examination
 System
 
 ith!
-
 
 Annexure XIV
 
@@ -20566,8 +20063,6 @@ examination, Cheating, talking. exchanging materials. or any other form of malpr
 
 |
 
-
-
 6. Disciplinary Actions for Malpractice
 
 a. Detection: Any student found engaging in unfair practices during examinations will
@@ -20616,8 +20111,6 @@ c. Seating Plan and Logistics:
 
 « insuring proper logistics such as availability of examination halls, seating
 arrangements, and examination materials,
-
-
 
 d. Handling Registration Dssucs:
 
@@ -20668,8 +20161,6 @@ Hl. At the start of the examination
 
 commencement of the examination, for the distribution of the exam material to
 the students already seated in the room. The door will be opened, to allow
-
-
 
 latecomers, after the last student already seated in the room in time has recetved
 his/her exam material.
@@ -20731,14 +20222,10 @@ While leaving the examination hall the students should not hang around to
 discuss the paper. As there may be other examinations still in progress,
 quicth leave the building to ensure that you do not disturb the
 
-
-
 Annexure XV
 
 Policy on Evaluation
 Practices
-
-
 
 Annexure XV
 
@@ -20778,8 +20265,6 @@ respective course instructor arranges make up exams/labs within two weeks afler 
 
 missed exams schedule. Dean (AP) and conveners of UG and PG committees oversee the
 
-
-
 (iin @ typical university system which runs many progarmmes under different departments,
 Core courses may involve multiple batches across the departments or affiliated colleges.
 Furthermore, the same course may be taught by many instructors in various departments
@@ -20812,7 +20297,6 @@ and PCr thesis progress evaluation.
 
 189
 
-
 Annexure XVI
 
 Policy on Question Paper
@@ -20820,8 +20304,6 @@ Setters, Board of
 Examinations and
 
 Invigilators
-
-
 
 Annexure AVI
 
@@ -20857,7 +20339,6 @@ task with the support of faculty and staff,
 Intermships and projects provide an opportunity to the student to carry out projects either in-
 
 191
-
 
 campus or off-campus. An in-cimpus intemship/project should have a faculty mentor supervisor
 a DA-NCT, whe would look after the project work of the student and interact closely with the
@@ -20900,8 +20381,6 @@ demand arises.
 
 1
 
-
-
 PhD Theses Evaluation
 
 The PhD evaluation process is similar to other premier institutions. Once a PhD student
@@ -20938,8 +20417,6 @@ which acis as an interface between the student community and the faculty for all
 acudemic matiers. All the suggestions regarding academic issues by students are brought
 
 to this Committee, which, after discussion and consultation, passes on the suggestions to
-
-
 
 the UG andor PG Committee. After the discussions in this committee the matter is
 passed onto Deon-AP for appropriate actions.
@@ -20979,13 +20456,10 @@ course objectives, examination and ¢cvaluation effectively.
 
 194
 
-
 Annexure XVII
 
 Eligibility Criteria for all
 programs.
-
-
 
 Eligibility Criteria for Admissions
 
@@ -21028,7 +20502,6 @@ Board Lin ive rs ity,
 ® Final examination of the tbwo-vear course of the Joint Services
 
 Academy,
-
 
 Age
 
@@ -21080,7 +20553,6 @@ Passport of an applicant indicating his status as ‘Non Resident Indian.’
 Persons who have studied outside India and have passed either 10th or 12th standard (or must
 be appearing for the examination in the year of admission) of equivalent from any en of
 
-
 education subject to the eligibility criteria stipulated below.
 
 Either ofthe parent ofthe applicant residing abroad and submits documentary proofthat he/she
@@ -21131,8 +20603,6 @@ Machine Leaming
 Software Systems
 
 GATE qualified candidates
-
-
 
 A candidate with a qualifying degree in any one of the following:
 
@@ -21188,7 +20658,6 @@ set by the sue iecibie atiute/University.
 
 Candilates appearing in their finaldegree examination and expecting to complete It by Julgg02s may
 
-
 also apply. However, their final admission will be subject to the condition that they obtain an aggregate
 of marks required based on mode of admission i.e. GATE/Non-GATE, of its equivalent as per the norms
 set by the degree granting Institute/University, All admitted candidates have to submit their degree
@@ -21233,7 +20702,6 @@ inarks or its equivalent, as determined by the degree-pronting mstiwie/universit
 griniing Institute/University in Agriculture and allied sciences, Environmental a
 Mathematics. Physics, Computer Scknce, Computer Applications, Information Technoa
 On
-
 
 A Bachelor's degree in Engineering or Technology fram a recognized University with an aggregate of
 60% or its equivalent, as per the norms set by the Degree granting Institute/University in Computer
@@ -21283,7 +20751,6 @@ Engineering Physics / Computational Science / Computer
 
 _ —
 
-
 Discipline Educational qualification
 
 Humanities, Arts, Social
@@ -21319,13 +20786,10 @@ objection certifica te’ (NOC) issued by the head of the organisation / institu
 
 202
 
-
 Annexure XVIII
 
 Fee structure of the
 University
-
-
 
 Annexure XVIII
 
@@ -21354,13 +20818,10 @@ Ea Mi Des (CO) Pas ae ff et a=
 
 # Refundatle amount,
 
-
 Annexure XIX
 
 Tuition Fee Waiver Scheme
 details
-
-
 
 Annexure XIX
 Tuition Fees Waiver students list for AY 2024-25
@@ -21421,8 +20882,6 @@ Tech (ICT) 2023
 [a5 [202401084 KARTI iB Tecrypexsoort EN sofoo |
 z }
 
-
-
 SNe.[ REGNO | StudentName | Batch | Amount Ra. _]
 [a6 [202401111] MALANI MANALI MUKESHBHAL fe Techaicr) 028 | 300000 |
 [as [202401275|RAMANISHYAM BHARATBHAT_____JYech(icr) 2028 | 300000]
@@ -21452,7 +20911,6 @@ SAVIANI PARAM PARESHKUMAR
 
 207
 
-
 Annexure XX
 
 Minutes of Finance
@@ -21460,7 +20918,6 @@ Committee Meeting for
 proposed Fees
 
 708
-
 
 Annexure XX
 
@@ -21509,8 +20966,6 @@ structure accordingly and shall not implement the proposed fee structure.
 
 Accordingly, for the last AY 2024-25, after the due internal process, declared and
 informed the Appellate Committee (AC) about our revised fees for the BTech and
-
-
 
 programs (copy attached). A statement showing the fee structure (increase in
 comparison to the previous year) of our all academic programs and hostel fees for the
@@ -21563,20 +21018,15 @@ month. By this, the proposed annual tuition fees paid by the MTech students, i.e
 Rs.1,60,000/ will be fully repaid by the institute to the MTech students by way of
 teaching assistantship stipend amounts to them.
 
-
-
 As the meeting was called for the above matter only, there were no further agenda
 item/s, and the meeting ended with a vote of thanks to the Chair.
 
 211
 
-
 Annexure XX!
 
 Faculty recruitment
 advertisement
-
-
 
 Annexure XA
 
@@ -21660,8 +21110,6 @@ pliv an imporians role im contributing tc
 the Institue theowyels their
 a a,
 
-
-
 I'h.1), with strong research capabilities and a strong passion teaching, research, and participation in
 for aching at undergraduate and postgraduate levels. vurious institutional activities.
 Postdoctoral experience is preferred.
@@ -21718,8 +21166,6 @@ semester) teaching lad for the first year and then three courses in the subseque
 
 « Research Incentives: Financial reward of Rs. 1 Lakh for publications in A*/A conferences and QU journals.
 
-
-
 Faculty Position Advertisement on LinkedIn
 
 in/dGyee Lad
@@ -21765,13 +21211,9 @@ PRY P ul
 Send your CV and research & teaching
 statements to dean_faculty@dalict.ac.in
 
-
-
 Annexure XAill
 
 Faculty recruitment process
-
-
 
 Annexure Xl
 
@@ -21834,8 +21276,6 @@ FRC for Physics Arca
 Cautam Dutta. Arca Coordinator, Convenor
 Mukesh Tiwari, Member nominated by the area
 
-
-
 Dean (Faculty), Member. ex-ollicio
 Dean (Academic Programs), Member, ex-officio
 Sanjiw Srivastava, Member of FIC
@@ -21884,8 +21324,6 @@ Stage 2: The AC will forward the application to the area members requesting thei
 The quality of journal/conference publications, research statenvent and teaching statement are
 indicative parameters for assessing a candidate. The Arca members will sai their written
 feedback to the AC. The AC will then collate the feedbacks and He PURAERC prior to the
-
-
 
 meeting. The FRC members from the area don’t need to send their feedback prior to the
 meeting.
@@ -21937,8 +21375,6 @@ Stages 3 and 4 usually ina month, However, it may sometimes pet delayed bepage
 
 [rein abrad,
 
-
-
 ape Stokes 2-3 duws at the post.
 
 hlage & fakes a month ai ihe mest,
@@ -21988,14 +21424,11 @@ In case of reversal of a decision of the FRC by the Director the nationale for r
 
 220
 
-
 Annexure XXilll
 
 Faculty Self-Appraisal form,
 mechanism and assessment
 sheet
-
-
 
 Annexure XXIII
 
@@ -22046,8 +21479,6 @@ limit 10 points per article from outside SCOPUS and WOS category.
 
 Paper in Conference Proceedings:
 
-
-
 C2. Conference category 8: 30 points, Maximum &) points can be accumulated,
 
 C3, Conference catepory Below 1) or net indexed in SCOPUS of WOS would not be
@@ -22095,8 +21526,6 @@ Invited sessions for PDP/conferences/workshop: 10 points (ceiling).
 C, Contributions to Administrative Service
 Deans: 40 points (eciling).
 
-
-
 Admissions/Placement Convenor: 25 points (eciling)
 LGV/POIOACICT Convenor: 20 points (eciling)
 Other convenors and members of any committee: 10 points (eciling)
@@ -22114,7 +21543,6 @@ National and International award of repute: 50-200 points based on the level of
 competitiveness.
 
 224
-
 
 DA-IICT
 
@@ -22134,7 +21562,6 @@ R2. Books Published during the sald period (Pl. enclose supporting documents as 
 Psi] Nameof Books | Coauthors | Publishers Whether the isa new
 
 225
-
 
 R3. Research Papers Published In Referred Journals during the said period (Fl, enclase a copy of the research papers published}
 Psi] _PaperTitle | Journal Category
@@ -22158,7 +21585,6 @@ si] Yourrole ‘| Nameofthe | Tenure | Startdate
 
 226
 
-
 Services
 
 i_[Institution Bullding 8t DATICT ——
@@ -22175,7 +21601,6 @@ Psi | _Award/___| Nameofthe | Announcement | Remarks, Irany
 Date: Signature:
 
 fay
-
 
 Faculty appraisal (data from August 2022-July 2023) - Evaluation July 2024
 
@@ -22273,7 +21698,6 @@ a]
 Lod
 a
 
-
 |
 CT siiasn [ee te =
 a ee | |
@@ -22284,12 +21708,9 @@ iver |
 
 Pa
 
-
 Annexure XXIV
 
 Details of the Corpus Fund
-
-
 
 Annexure XXIV
 
@@ -22368,14 +21789,11 @@ Bate : Saptember 28, sO74
 
 Z31
 
-
 Annexure XXV
 
 Audited income and
 expenditure statement for
 the last 3 years
-
-
 
 Annexure XxV
 
@@ -22436,8 +21854,6 @@ a
 i
 
 233
-
-
 
 =
 
@@ -22512,7 +21928,6 @@ Pe PeRITE
 
 234
 
-
 jet = S- ap
 
 DHIRURHAL AMBANT UNIVERSITY
@@ -22566,7 +21981,6 @@ ee
 
 235
 
-
 DHIRUGHAL AMBANM] UNIVERSITY
 pearly Poe a Cred dobar eae of [eientien ind Gonevenabon Gechewteg: |
 Sthedele atohed le and fe relay part od ACDOUnES
@@ -22597,7 +22011,6 @@ aor Berk bee
 Ph eT
 
 236
-
 
 DHIRUBHAL AMBANT [MSTITUTE OF INFORMATION AND COMMUNICATION TLCHNOLOGY
 Income amd Expenditure Account for the year ended March 41,2023
@@ -22647,7 +22060,6 @@ Gate :
 “49 SEP 2073
 
 aa?
-
 
 DPDRUGHAL AMBASD INSTITUTE OF INFORMATION AMD COMMUNICATION TOOHNGLOGY
 Schedule attached to and forming part of Aceeunts
@@ -22712,8 +22124,6 @@ la Soa! Traening 17h .
 Ptrere ee! F
 PRE rea
 
-
-
 (CTR UBMAT AMBAND IMSTITUTE OF [NPRM ATHY 28S COMMUNDCATION TECHNOLOGY
 Schedule attached to and forming part of Account
 
@@ -22738,7 +22148,6 @@ Total
 Ba langle Asses
 
 239
-
 
 CHIRUBHAL AMGARNI INSTITUTE OF INFORMATION AND COMMUNICATION TECHNOLOGY
 STATEMENT OF [INCOME AND EXPENDITURE FOR THE YEAR ENDED MARCH 41, 2022 i
@@ -22797,7 +22206,6 @@ Phaee - Alaa Pliice ; Abie
 Peale Date: Caley fe a
 
 240
-
 
 Se,
 
@@ -22869,14 +22277,10 @@ Menberitie Mn, bay
 Pisce . dderiecdatuad
 Cute |
 
-
-
 Annexure XXVI
 
 Dates of the meetings of the
 statutory bodies
-
-
 
 Annexure XXXVI
 
@@ -22910,14 +22314,10 @@ lo ——————— - =
 1 30-01-7025 (Twenty Third FC mecting
 Z 27-03-2025  |Twenty Forth FC meeting
 
-
-
 Annexure XXVII
 
 Board of Governors (BoG)
 minutes of meeting
-
-
 
 Annexure XXVIII
 
@@ -22986,8 +22386,6 @@ The members were briefed about the detailed schedule of the day,
 The Chairman welcomed all the members and adopted th a items of the
 meeting.
 
-
-
 The Board noted and accepted the request of Professor Abhay Karandikar to accept
 his résignation from the Board on becoming the Seeretary of the Department of
 Science and Technology, Government of India.
@@ -23036,8 +22434,6 @@ of Bachelor of Technology in Information and Communication Technology: 10 studen
 of Doctor of Philosophy; 13 students of Master in Design (Communication Design); 44
 studenis of Master of Science (Data Science); 121 students of Master of Science
 
-
-
 Systems and Machine Leaming): 1 student of Master of Technology (Electronics and
 Communication); and 51 students of Master of Technology (Information and
 Communication Technology) who have completed their graduation requirements and
@@ -23076,8 +22472,6 @@ admitted and the lead time needed to sei up the Jabs. The Institute should
 explore possible collaborations with the relevant industries and check the
 possibilities of Government funding schemes for the_VLSI Design/
 Semiconductor infrastructure. eo =
-
-
 
 ii, Explore the possibilities for MoU with foreign universities collaborating with
 leading semiconductor industries like Foxconn, Micron, etc.
@@ -23127,8 +22521,6 @@ to recruit and retain quality faculty members, it is essential to pay the compen
 least at par with the 7" Central Pay Commission, Besides, the institute needs to create
 incentives for doing good research. =
 
-
-
 The Board approved the recommendations of the Committee to revise the
 Programme-wise Semester Tuition Fees and Hostel Fees as per the following details,
 w.e.f, Academic year 2024-25. The revised fee structure shall apply to the students
@@ -23162,8 +22554,6 @@ process after completing their degree requiremenis. At the same time, they may b
 provided an opportunity to pursue Ph.D. on a part-time basis.
 
 The meeting ended with a vote of thanks to the Chair.
-
-
 
 DHIRUBHAI AMBANI
 
@@ -23244,8 +22634,6 @@ cation, Education Department, Goverment of Gujarat
 Punit Garg
 Anmal Ambani
 
-
-
 Agenda Item No, 2
 
 To confirm the minutes of the Board of Governors meeting held on January 27,
@@ -23289,8 +22677,6 @@ and Bhartiya Sakshya Adhiniyam (BSA). He further suggested that the School of La
 can publish impact analysis of various judgments / legal developments on a weekly
 basis. Professor Dadhich, Director of Schoo! of Law will be requested to have a one-
 on-one meeting with Professor Suhrud to have a detailed discussion in this matter.
-
-
 
 Professor Suhrud also suggested to strengthen DA-IICT’s design education programs
 by introducing information technology based innovative design programs involving
@@ -23338,8 +22724,6 @@ each leading a Higher Education Institution / a School core rehire
 
 rt
 
-
-
 It was further highlighted that the Dhirubhai Ambani University (DAU) will be taking
 steps towards becoming a multidisciplinary university over next few years by adcing
 different disciplines such as law, management, etc. This will entail shaping a strategy
@@ -23384,8 +22768,6 @@ RESOLVED FURTHER THAT any necessary communication or statutory filings to
 effectuate above resolutions be duly undertaken by any member of the Board of
 Governors and/or the Executive Registrar and/or any person authorized by the
 Executive Registrar in this regard. —<—=
-
-
 
 Agenda Item No. 5: To constitute a Board of Governors pursuant to the DA-IICT
 (Amendment) Act, 2024 provisians.
@@ -23449,7 +22831,6 @@ om
 14. Expert appointed by the President: Ambassador T. 5. Babe nui
 15. Expert appointed by the President: Ms. Alpna Doshi
 
-
 16. Expert appointed by the President: Mr. Shrenik Vaishnav
 
 17. Industry Representative appointed by the President: Mr. Shrikant D. Kulkarni
@@ -23502,8 +22883,6 @@ Tathagata Bandyopadhyay
 
 7. Director of the University, by rotation, to be nominated by D
 
-
-
 §. Dean of the University, by rotation, to be nominated by DG: Prof. Maniklai
 Das, Dean (Faculty), DA-IICT
 
@@ -23550,8 +22929,6 @@ Kulkarni, Ex-Chief Business Officer, Reliance Power Limited
 
 a. One Director of the University, by rotation, to be nominated by the
 
-
-
 4. Dean of the University, by rotation, to be nominated by DG: Prof. Maniklal
 Das, Dean (Faculty), DA-IICT
 
@@ -23596,8 +22973,6 @@ been selected for establishing a School of Law. The selection process entailed
 extensive interaction of the shortlisted candidates with Prof J. Ramachandran, who is
 our Advisor and highly renowned Professor of Strategy, retired from |IM-Bangalore;
 Prof. ‘Srividhya Ragavan, Bios tangle Law at Texas AGM oi School of Law,
-
-
 
 Following the above-mentioned process, the Board noted that Prof. (Dr.) Avinash
 Dadhich has been appointed as the Founding Director in July 2024 to lead the
@@ -23656,8 +23031,6 @@ ny, the Founding
 
 Page § of 10
 
-
-
 Director of the School of Law, in coordination with the University's governance bodies
 and authorized personnel,
 
@@ -23684,7 +23057,6 @@ hehe
 Page 10 of 10
 
 209
-
 
 DHIRUBHAI AMBANI UNIVERSITY
 GANDHINAGAR
@@ -23722,7 +23094,6 @@ President Ms. Tina Ambani, welcomed all the members and briefed about
 the broad agenda items to be considered in this meeting.
 
 260
-
 
 Agenda Item No. 1
 To grant leave of absence, if any
@@ -23768,8 +23139,6 @@ identity for each school of the university ts under progress.
 
 ii) Members were apprised of the engagement of a consulting firm
 
-
-
 Agenda Item No. 3:
 Director's Presentation
 
@@ -23813,8 +23182,6 @@ i) Considering the intake (265 students) of B Tech ICT
 
 Programme, recommendation of the Council te a 7)
 
-
-
 medals in place of one, was approved by the Board and to be
 implemented from the 2025 convocation.
 
@@ -23857,8 +23224,6 @@ Technology (Information and Communication Technology) and 43
 students of Bachelor of Technology (Mathematics and Computing) who
 have completed their graduation requirements and whose names
 
-
-
 appearing in the list (total 653 students) placed before the Board, to be
 conferred respective Degrees at the Convocation to be held on 18"
 January 2025"
@@ -23884,7 +23249,6 @@ Student ld Student Name | Program
 202001139 | PORIYA NEEL DHARMESHBHAI 9.35 | B Tech (ICT)
 
 264
-
 
 Agenda Item No. 6
 
@@ -23931,8 +23295,6 @@ The Board approved it in principle and requested to share the final
 version of the report to the members for their observations an
 suggestions if any, before publishing the same.
 
-
-
 Agenda Item No. 8:
 
 Ratification of the decision taken by the Chairman Finance
@@ -23971,8 +23333,6 @@ programmes and Hostel fees.
 The Board perused the background note of the agenda item and
 approved the proposal to convene a meeting of the Finance-Committee
 
-
-
 to suggest revisions in the programme-wise tuition fees for the AY 2025-
 26, to be submitted for further consideration of the Appellate Committee
 on COE, Education Department, Government of Gujarat.
@@ -24002,16 +23362,10 @@ The meeting ended with a vote of thanks to the Chair.
 
 267
 
-
 Annexure XXVIII
 
 Academic Council (AC)
 minutes of meeting
-
-
-
-
-
 Annexure XXVIII
 
 DHIRUBHA! AMBANI INSTITUTE OF INFORMATION AND COMMUNICATION TECHNOLOGY,
@@ -24067,8 +23421,6 @@ Gold Medals in the forthcoming Convocation.
 At the outset, the Executive Registrar briefed the Council on the details of registrations of
 the graduating students, planning, and preparations for the forthcoming-Canvocation event
 
-
-
 and noted the suppestions made by the members on the logistics and smooth proceedings
 of the event.
 
@@ -24105,8 +23457,6 @@ Agenda Item No. 3
 Briefing by Dean-Academic Programme on the Academics
 
 Professor Bhaskar Chaudhury, Dean AP, made a presentation highlighting the existing
-
-
 
 Advanced Institute of Mathematics (AIMSCS) and also discontinuation of MTech in CS&E
 offered in collaboration with the IIT Jammu.
@@ -24150,7 +23500,6 @@ The meeting ended with a vote of thanks to the Chair.
 Pape 3013
 
 2fl
-
 
 DHIRUBHAI AMBANI INSTITUTE OF INFORMATION AND COMMUNICATION
 TECHNOLOGY, GANDHINAGAR
@@ -24211,7 +23560,6 @@ Council, made a presentation with a background note that the Institute has grown
 
 are
 
-
 diversified its program offerings; it was felt that the decision-making processes were
 getting stretched. Thus, a need was felt to thoroughly re-examine the existing structures
 and propose changes to bring faculty participation and decentralized decision-making,
@@ -24258,8 +23606,6 @@ sultability’compatibility of the supervisor with the research area of the
 candidate. Sponsored category candidates shall continue to submil a
 no-objection certificate from the sponsoring organization at the time al
 applying, as per the existing nonmns.
-
-
 
 a)
 b)
@@ -24331,8 +23677,6 @@ Suggested by the Area Committee (in place of courses suggested by the
 Mentors). They will complete all coursework before registering for the
 synopsis. They should register for at least three courses at the 5XX
 
-
-
 and/or 7XX level during Semester |. Courses at 1XX, 2XX, 3XX, or 6XX
 shall not be counted towards course credit requirements.
 
@@ -24378,8 +23722,6 @@ and from the third year and up to the fifth year, the scholar will be paid the F
 Rs. 40,000/ per month.
 
 The meeting ended with a vote of thanks to the Chair.
-
-
 
 DHIRUBHAL AMBANI INSTITUTE OF INFORMATION AND COMMUNICATION TECHNOLOGY,
 GANDHINAGAR
@@ -24444,8 +23786,6 @@ requirements applicable from the academic year 2024-25
 
 Professor dela Rana presented the detailed process adopted to revise ne Seinen
 
-
-
 eal
 
 semester-wise earlier course curiculum structure‘academic requirements and the
@@ -24505,8 +23845,6 @@ Subsequently, he briefed the Council and explained the necessity of making
 minor additions to the revised PhD guidelines (applicable fram AY 24-25)
 approved by the Council in its last meeting. 7
 
-
-
 Minor Additions:
 
 4.
@@ -24561,8 +23899,6 @@ The meeting ended with a vote of thanks to the Chair.
 Professor Manish Kumar Gupta
 Professor Lavneet Singh
 
-
-
 DHIRUBHA! AMBANI INSTITUTE OF INFORMATION AND
 COMMUNICATION TECHNOLOGY, GANDHINAGAR
 
@@ -24608,8 +23944,6 @@ recommendations made in the last meeting and informed that there were no
 changes in the draft minutes of the minutes circulated. The Coun
 minutes of the 39" meeting of the Council.
 
-
-
 Agenda Item No. 2
 
 Consider and recommend the Board of Governors the Programme-
@@ -24648,8 +23982,6 @@ Council recommends as under for further consideration of the Board.
 
 the Council recommends to award three gold me
 
-
-
 and this change is to be implemented from the 2025 Convocation.
 
 ii) The Council noted that the audit courses are Pass/Not Pass
@@ -24687,8 +24019,6 @@ Cs
 
 202001032 HARSH CHIRAG PATEL 936 8B Tech (ICT)
 
-
-
 202001139 PORIYANEEL DHARMESHBHAl 9.35 6B Tech (ICT)
 
 Agenda Item No. 3
@@ -24714,7 +24044,6 @@ members resigned during the above tenure.
 The meeting ended with a vote of thanks to the Chair.
 
 282
-
 
 DHIRUBHA! AMBANI INSTITUTE OF INFORMATION AND COMMUNICATION
 TECHNOLOGY, GANDHINAGAR
@@ -24766,8 +24095,6 @@ in the draft minutes circulated earlier. With a correction to include Professor
 Madhumita Mazumdar’s name in the list of attendees, the CounciLeonfirmed the
 minutes of the 40th meeting. poe
 
-
-
 Agenda ltem No. 2
 
 Noting of Government of Gujarat Notification Declaring the University as a
@@ -24815,7 +24142,6 @@ the academic calendar for the Academic Year 2025-26.
 
 284
 
-
 Agenda Item No. 5
 
 Proposal for Revision in Policy on Course Repetition for the grade
@@ -24857,8 +24183,6 @@ scholar Pramod Tripathi (201721003) to complete his academic raquirements,
 including the PhD synopsis exam, in view of personal hardships faced during the
 pandemic.
 
-
-
 Agenda Item No. 3
 Recommendations of the Board of Studies for PhD in Law = School of Law
 
@@ -24880,13 +24204,10 @@ Page 4 of 4
 
 286
 
-
 Annexure XXIX
 
 Finance Committee (FC)
 minutes of meeting
-
-
 
 Annexure A.ADX
 
@@ -24939,8 +24260,6 @@ MTech Programmes vide our letter dated Sth February 2024 (copy allache
 
 vide its letter 14th August 2024 approved our proposed fee struc
 
-
-
 programs (copy attached). A siatement showing the fee structure (increase in
 comparison to the previous year) of our all academic programs and hostel fees for the
 AY 2024-25 is also attached for reference.
@@ -24992,8 +24311,6 @@ month. By this, the proposed annual tuition fees paid by the MTech students, Le.
 Rs.1.80,000/ will be fully repaid by the institute to the MTech students by way of
 teaching assistantship stipend amounts to them,
 
-
-
 Sr | Name of the | Per Semester | Proposed Revisions per Semester
 Programme tuition fees for | for AY 2025-26 (Rs.)
 
@@ -25001,7 +24318,6 @@ As the meeting was called for the above matter only, there were no further agend
 item/s, and the meeting ended with a vote of thanks to the Chair.
 
 290)
-
 
 DHIRUBHAI AMBANI UNIVERSITY
 
@@ -25036,7 +24352,6 @@ The following items were discussed:
 
 291
 
-
 Agenda Item 1:
 Confirmation of Minutes
 
@@ -25067,8 +24382,6 @@ checked the practices adopted by some of the reputed institutions,
 including other COEs, and authorized the Director General to check the
 
 rate of inflation during the last year and announce the appropriate
-
-
 
 increase in the fees for the 2024-25 batch admitted students in all
 
@@ -25104,7 +24417,6 @@ realistic income from the investments.
 
 293
 
-
 Estimated Capital Budget:
 
 a) For the new construction projects, i.e. construction of one more floor
@@ -25135,8 +24447,6 @@ toilet/washroom blocks in the SAC | building.
 Subject to considering the above mentioned observations, the Committee
 
 approved the budget estimates for the FY 2025-26.
-
-
 
 With the approval of the Chair, the following item was presented for noting of
 
@@ -25171,8 +24481,6 @@ The Committee was appraised with a statements of consolidated accounts of
 
 CSR funding during the above-mentioned period.
 
-
-
 The Committee noted that the university has received a total of Rs.872 lakhs
 funding from the above four companies for CSR Activity A, out of which till
 date we have utilized Rs, 277.64 lakhs. Similarly, for CSR Activity B, the
@@ -25181,14 +24489,10 @@ Rs. 118.56 lakhs.
 
 The meeting ended with a vote of thanks to the Chair.
 
-
-
 Annexure XXX
 
 Board of Studies guidelines
 school of Law
-
-
 
 Annexure 3X
 
@@ -25238,8 +24542,6 @@ for deliberations on particular courses, with the approval of the Director, Co-o
 serve nan advisory capacity fora fixed term or agenda item,
 
 &. Acting, Chairperson:
-
-
 
 db p
 
@@ -25297,8 +24599,6 @@ internal Asscsaments, Maxi marks and passing marks,
 
 Zi Avoca eanicens:
 
-
-
 Dhirubhai Ambani
 University
 Law
@@ -25344,8 +24644,6 @@ meeting and communicaied to the Senate,
 the Chainperson,
 
 . All nominations and changes in membership shall be formally recorded and motilied.
-
-
 
 Dhirubhai Ambani
 University
@@ -25395,8 +24693,6 @@ Lr. Maunuj seis Frofessareal Law  vhenber Dhirubhai Ambani
 [shared wary University — School
 of Law (DALI-Sal.}
 
-
-
 Dhirubhai Ambani
 University
 
@@ -25409,14 +24705,12 @@ Wf Law (DAAL-Sal.)
 
 S07
 
-
 Annexure XXXI
 
 otrategies to review
 academic programs
 
 303
-
 
 Annexure XX
 
@@ -25460,8 +24754,6 @@ account for the susequent updating/upgrading the course
 delivery mechanism, and for the course allocation in se
 sessions.
 
-
-
 The process followed in the curriculum induction or revision in our programme
 is depicted below:
 
@@ -25483,7 +24775,6 @@ Curriculum Review Process
 ng ay Lato
 
 305
-
 
 Annexure XXXIll
 
@@ -25518,8 +24809,6 @@ disciplinary)
 —n,
 =
 
-
-
 Annexure XXAll
 
 Faculty-wise and Department-wise information
@@ -25532,7 +24821,6 @@ Total Full-time Teachers: 83
 Details of full-time Teachers provided at Appendix Ail
 
 307
-
 
 Class Rooms
 
@@ -25564,7 +24852,6 @@ _Lecture Theatre - 2
 =a “Lecture Theatre - 3
 
 308
-
 
 Teaching Labs
 
@@ -25606,7 +24893,6 @@ Msc(DS) Lab LABZTO
 
 309
 
-
 Research Labs
 
 Research laboratory name - signage LAB room na.
@@ -25640,7 +24926,6 @@ JICESD Lab CEP210
 DIDM lab ; fb. 3 meeting re room
 
 310
-
 
 Research Scholars (M.Tech, Ph.D.)
 
@@ -25726,8 +25011,6 @@ SHAH KUN) RAIESHBHAI
 PATEL SMIT SHAILESHKUMAR
 UMANG KARSHAN VAROTARIVA
 
-
-
 Program Student id Student Name
 M Tech (ICT}| 202511025 KHUSHALI DHARMESH MANDALA
 M Tech (ICT}| 202511024 SHAM KALP KINTALKUMAR
@@ -25784,8 +25067,6 @@ M Tech (iCT)| 202411024
 702411070
 . |M Tech 1 aes
 BO |M Tech (ICT)| 202411049
-
-
 
 Sr.No] Program | Student id
 
@@ -25857,8 +25138,6 @@ M Tech (ICT) 202411003
 202411068
 202411085
 
-
-
 123 MT Tech (ICT)) 202411087 DHAIRYA PANDY,
 124 | MTech (ict) 202411051 ATUL MAR VARLA,
 
@@ -25908,7 +25187,6 @@ Pho | 202521008 SATYANARAYANA VENKATA MULA
 
 i163 | Pho | 202521003
 
-
 Sr. Ao.
 
 raés | pho [zozanuois|——~—~=«SAKASINNA
@@ -25944,8 +25222,6 @@ goo | Pho | 202221005 | MAKWANABHVAIN ANILKUMAR |
 PhD
 Pho | 202221007
 
-
-
 Student Ts | Student Name
 20222 1002 AYUSHI SHARMA
 20712 11 SAMEEKSHA, JAIN
@@ -25977,7 +25253,6 @@ PhD
 PhD
 
 316
-
 
 Research Publications
 
@@ -26024,8 +25299,6 @@ Saurya Aphera, Nanaelectrocics,
 3
 3
 =
-
-
 
 Idica Aéattal, Corvall Nanophotonics,
 Sonani, Marnik Nanomateria’s,
@@ -26091,8 +25364,6 @@ Convelutional Neural Networks
 
 IEEE Region 10 Symeasium
 (TENSYMP 2027)
-
-
 
 mS ie i
 "ALT aro ray Priya Patel, CNTFET: Comparative Study of IEEE international
@@ -26164,7 +25435,6 @@ Jeter
 Spatial Maduwlation MIMO
 Systems
 
-
 Caer rrkurscations (sPCOM
 #022)
 
@@ -26206,8 +25476,6 @@ Coefficients For Dysarthric i far Social Good (5456 2077)
 Severity Level Classification
 
 PANKAL ELAS
-
-
 
 an i=
 
@@ -26262,8 +25530,6 @@ af Cloud data using Edge
 
 Computing and Blaerkchain
 
-
-
 eae See
 
 Bursar, aoe Manik Telecammunications.
@@ -26312,7 +25578,6 @@ estimation "or cochieer
 
 a22
 
-
 a_i
 
 cepstral features for syrtnetic
@@ -26359,8 +25624,6 @@ PRALAP AAT AY
 SHH
 
 IEEE Sensors Journal
-
-
 
 Interaepetal Journal of
 Modern Anvsies 8
@@ -26411,8 +25674,6 @@ Kamiosh §.Patle,
 Kajal Kurnar Dey,
 Vash Agrawal,
 
-
-
 Yaahaal Shara,
 Ramovetar, Vinay
 5. Palagarthy and
@@ -26445,7 +25706,6 @@ arid Yiu-Man maasures of wisibelity graphs Scientific
 Wong
 
 325
-
 
 oe fies a ha a a
 for artalyzing trations in
@@ -26508,8 +25768,6 @@ Nieet Shah,
 Srimanta Mavetal_
 
 =
-
-
 
 Shruti Bhilare,
 
@@ -26617,8 +25875,6 @@ IEEE
 Springer,
 Singapore
 
-
-
 re
 
 Pee a ae
@@ -26669,11 +25925,6 @@ decomposition
 SRIVASTAVA, Manish Road Traffic Urater Racey
 Chatunnedi and Conditions
 Sanjay Srivactava
-
-
-
-
-
 7a SARLAY 200291014
 SRIVASTAVA
 Th
@@ -26728,8 +25979,6 @@ Khandelwal, Nanomaterials,
 Marvaniya, and Hanotechnology [SNANO
 Rute Paresh =
 
-
-
 oo.
 
 = SS
@@ -26771,7 +26020,6 @@ Auty Parekh if nHnbinits
 
 331
 
-
 Nanomaterials,
 Nanosigscionce &
 Nanotechnology (SHANG
@@ -26808,8 +26056,6 @@ Kapoor, Pura Study of Resonant Tusaeling Unkversity
 Sengh, Babite Ringe
 
 a32
-
-
 
 re 7 aa) c a] fhe Au r 7 ; = — : = A
 a ho. Je a] aes
@@ -26849,7 +26095,6 @@ Patll
 PALAPARTHY Vehvesh Panchal, | and soll density calibrated sail 2022111708
 
 | AivaSalnl, Yash mokhure profiling sensor with
-
 
 WASH AGRAWAL
 and-Sumian K,
@@ -26908,7 +26153,6 @@ Network daseo Emergent
 
 334
 
-
 avier Mode: for Rooot WLS, Electrical Circuits and
 Cortral Robotics (DISCOVER 2022)
 
@@ -26957,8 +26201,6 @@ And
 Communica
 ion
 Engineering,
-
-
 
 Publication Details Publisher
 
@@ -27025,8 +26267,6 @@ and Tanmoy i F nal
 
 Chakraborty Linguistics
 
-
-
 LAL DAS
 
 20069 1005 Addressing Single Pomt of :
@@ -27068,7 +26308,6 @@ Conferenen (MAPCON
 | | freguarncles
 1G | 'HEMANT A, PATIL | 200792001 Mastin Modi, Aatentions For Snort Quration | iitios/iepexplore iopeor Bist European Signal IEEE
 Maltroya Patel, Soeceh Classification Frecossing Continence
-
 
 Faculty
 
@@ -27133,7 +26372,6 @@ and Vash
 Vasaveda
 
 338
-
 
 HEMANT A. PATIL
 
@@ -27220,8 +26458,6 @@ on Machine Learning and
 Data Enginmering (MOMLOE
 2022); Procedla Garmputer
 
-
-
 ABHISHEX TINDAL 701991008 Rajni Kant,
 
 Design of a Cuasi Elliptic Fiiter | htipsuifieeexplore ieee.or | IEEE Microwaves, Antennas,
@@ -27267,8 +26503,6 @@ Publishing
 
 the anaence of subject's brain
 MRI sean: Persoectie on co
-
-
 
 Ree ee es
 registratian and MAI -selection
@@ -27325,8 +26559,6 @@ RALARARTHY Kraparde, Loa! Wetness Sensing 9145
 Karlesh 5. Pathe Properties of Med2
 Yasn Agrawal,
 
-
-
 —
 
 Sr Employee Authors : Tile
@@ -27370,8 +26602,6 @@ MURESH TIAA) Madhyi Farinest-First Traversal for 10.1007 /978-3-031- The d2th In
 Ramrash ivan, identty sg Multigng inf oential §3499-7_ 34
 Mules® Tiwari, Soreaders |
 and V. Sunitha, j
-
-
 
 — or — - Replies Lary Char toa rc Di arta |i Shar
 gi Esai = a ae
@@ -27440,8 +26670,6 @@ Sanjay Srivastava
 Graph Analytics for Avian
 Science Data
 
-
-
 a
 
 oi
@@ -27485,7 +26713,6 @@ IEEE Appllad Sensing
 uidosumeni/i0100989 Conference (APSCON 2023)
 
 ad4
-
 
 impact of phase fag on
 symchrocization in frustrated
@@ -27557,7 +26784,6 @@ Bandyopadmyay simulations
 
 345
 
-
 HEMANT A PATIL 200797001 Bavert Singh Linear Frequercy Residual bbtos: Meio ore /10. 1007! Book Chapter published Soringer
 Hora, Uthiraa 5,, Cepstral Coeffitierts for acai ae 2024 ir Lecture Notes in
 and Hormant A. Speech Emotion Recognition Camauter Science, 25th
@@ -27595,8 +26821,6 @@ and Minal Bhise of Avallale Resaurces for international Symposium
 Query Processing on Cluster,Cloud and
 
 Inkerriet Caenp ting
-
-
 
 TAPAS KUMAR 2015991005.
 MAITI
@@ -27664,7 +26888,6 @@ Francis
 
 a4?
 
-
 Giulatsha Bhatti, Neural Necwork-based Fast
 Takshashila | anid intelligent Signal Integrity
 
@@ -27719,8 +26942,6 @@ j if Ne Pattern Recognition and
 3468
 
 IEEE Access
-
-
 
 Rea
 
@@ -27823,7 +27044,6 @@ Notes in Comouter Selence
 
 349
 
-
 202291004 Arnit. Mankod:, Performance grecictice from | TO. 1002/ooe. 6433 Concurrency ate
 | Fumit Boats ame | sémulation systems to ahysical Computaiarn: Practice and
 Bhaskar SyATEMS viding machine Experience
@@ -27882,8 +27102,6 @@ Desired Freauency
 10. LOOT /S00607 022-
 Oi066-5
 
-
-
 ABHISHER JENIDVAL Aleshita Jindal, PSO basec UAY Localization for | bttos:/fieeexolore Seee.oc Lith ae SE
 Manish Kumar, interference Codedination in Conference an Acvanced
 and Abhishek Cellular Networks Netwnores ang
@@ -27917,8 +27135,6 @@ Piyushkumar Ki, Phase for Replay Detection in information Processing
 Chadingala, anc Wotce Assiatants (VAs) Association Annual Summit
 Hemant Patil — and Conference (APSIPA
 . ASC 2023)
-
-
 
 HEMANT AL PuATIL 200791004 Priyanka Gupta, Replay Sooo! Detection Using | UO U0L6/) co BO22. 10142 Comauier, Saeeck and Elsevier
 
@@ -27966,7 +27182,6 @@ Chandes iriartion
 a
 
 252
-
 
 =
 
@@ -28066,7 +27281,6 @@ ERevier
 
 353
 
-
 203
 
 Z
@@ -28109,9 +27323,6 @@ KMonil Giarea, Dysartnric Soverity-Level i, Brchne/ inter the International Spee
 i *s Le/ r
 bai r
 J il m8. a Eire
-
-
-
 
 Ee Astuay on Creating Energy | i : i Journal of Sytem and Elsevier
 SRIVASTAVA Effictent Qoud Connectec User | i
@@ -28163,7 +27374,6 @@ a
 
 356
 
-
 a Te
 
 and Akhilosh Conformant wth Requirement | ACM), Mew
@@ -28213,7 +27423,6 @@ o io) 357
 
 #
 
-
 Vi ae ee be een Ma el
 Jakhar, N. Shah, 5. tokamak foe devetosing Al Science and Plasma
 Arora, 0, Ratradia based diaruptian mingation Technology
@@ -28254,8 +27463,6 @@ CHAUDHURY
 
 BHASKAR, 201691001 Dhwanil Shah,
 CHAUDRUAY Krish Shah,
-
-
 
 Supervi
 Oat Extracvioan Syaterns:
@@ -28306,7 +27513,6 @@ Pritira] Rajput
 
 359
 
-
 240 | MANISHKUMAR | 202191006 | — Kandarp DBDCC: Density saved nites //dolor/30.1109/ | Proceedings ARTICLE | IEEE
 | Bevrranrari, Distorted Crele Chuswering for wue2o24- qublished 7 October 2024 |
 | Manish Kumar; Energy Efficient Wireless fall63153. 2024 LOT SE001 in POZ4 IEEE 100th
@@ -28355,7 +27561,6 @@ Ora, Rajiv Gra, for breast cancer ciagmous o03z5-~
 a
 
 260
-
 
 HEMAUNT AL PATIL
 
@@ -28439,8 +27644,6 @@ Intemational Jowrnad
 Scientific
 Connect
 
-
-
 252 SHALT! BRILARE 201991007 | Umang Patel, Avis Ennanching aarecctncnetn Journal Article published Sorirger
 Hati transferanility o” slack-box june 2024 in Pattern Nature
 —_ adversarial atiacss on speaker | Anabytal and Agolicatlons
@@ -28482,7 +27685,6 @@ Manjunath i, Sarde
 Joshi
 
 362
-
 
 “hain = ls
 
@@ -28527,7 +27729,6 @@ Chaudhary, learning-Based Ensersle
 
 363
 
-
 Palaparthy, and
 Ahlad Kurnar
 VINAY §. 202091003 Kamilesn 5. Patio, Imupact of Electrode Patterns 10.1209 /TATE 20244434 IEEE Transactians on
@@ -28561,7 +27762,6 @@ BANDYOPADHYAY Chatterjee, with risclatsified binary
 Tathagata resoose
 
 364
-
 
 ri
 
@@ -28615,7 +27815,6 @@ SULAY 0. RADAR
 
 365
 
-
 Subramanya Freecom Galt Tracer for Cos.
 Karvaje, Sujay DB. Effective Therapy Alred at
 Kadam, Vineet Neuromuscular imaasinments |
@@ -28653,7 +27852,6 @@ and Arun
 Chakraborty
 
 366
-
 
 Millimerer-Wave Quasi-Elilpiic
 
@@ -28711,8 +27909,6 @@ a2 ARPITA MAL 202391009 Norm inequalities in LX )anda | hinsy/eglorm/10.1007/s |
 
 367
 
-
-
 25 ARPT A AL 202391009 | Pintu Ghudia, and | Narminequalities ia Xpand a | LOLDGOT/e4a02 74024: Banach Journal of
 Aroita Mal geometric constant o0s42-0 Mahenatital Analysis
 
@@ -28761,7 +27957,6 @@ Using Comin Vaeveo Squeeze
 aad Excitation Nepwark
 
 368
-
 
 Arth Shah,
 Prathay Kevaciye,
@@ -28815,7 +28010,6 @@ Oza
 
 369
 
-
 i st eo a OE
 
 795 MINALBHISE | 200551008 Mayank Patel, | RAW-HF Framework to moniter | 10.1016/jsimpa.2024.10 Soviware Impacts | Elsevier
@@ -28857,7 +28051,6 @@ Arian | deconensable Caseticatian | Conference on Artificial
 | RathitChnaya | PS |
 
 a70
-
 
 | a ae
 
@@ -28916,7 +28109,6 @@ Arth J, Shah, aad and Conference (APSIPA
 
 Hemant A, Patil ASC)
 
-
 Arth J, Shah, Teager Erergy Cepatral Abpge apsl 4 | bith Asia-Pacific Signal and o
 Savita H. Yadav, Coefficiencs for Spoken gresfles/papers/204 oat Information Processing
 and Hemant A. Language leentitieation Association Annual Summit
@@ -28957,8 +28149,6 @@ Chaudhury
 Sanner, of Porsonalization in Critiguinge |
 Mohamed Reda Based Comversarioial
 Bouadienek, Recommendation
-
-
 
 i:
 
@@ -29001,8 +28191,6 @@ be | Urnar Faroag a as Machinery
 
 a73
 
-
-
 ACM), Mew
 a a es es ee
 ie RAUB LOCHAN DAS | 201591006 A Propartionate Adanive nepasifdalorsilotios! | 2025 Natlonal Conference
@@ -29038,8 +28226,6 @@ Systems
 dire Key-Phrases All That
 Reviewers Care About? A |
 Comprehensive Benchmarking
-
-
 
 Intelligent computing,
 Proceedings of ther 2025
@@ -29095,7 +28281,6 @@ With agdversartal attack ina
 
 B75
 
-
 Publish
 
 Priyanka Weiness Sensor Considering
@@ -29129,8 +28314,6 @@ Agrawal: Harish celis of Ths 1 *,
 HEMANT A. PATIL | 200791001 Kavya Kumar, Dysartiic Severity-Level Awalag arocedings In 20th Miternatianal
 Arth J. Shah, and Classification and Soraker Conference on Asian
 Hemant A. Patil, | identification in Mono-Lingual Language Processing [WLP
-
-
 
 202391001 Existence of a Non-Zero {0.1} journal Article published
 
@@ -29180,7 +28363,6 @@ Cyril Jes PAoVEMenl precictian' 2 study
 
 arF
 
-
 ARPITA WAL 2027910049 Min-—mas relaboans fer dates. Journal Artiche oubliched BIRKHAUSE
 of opereters in tesa! : : October 2025 in finals of Fi
 bal eee ail a Dee pOMeNt spaces | Functional Anmysis
@@ -29216,7 +28398,6 @@ Vinay Palaparthy, | Chavacteranan of Siretchable
 Rohit Shara, interconnects on Utrathin
 
 a7
-
 
 ‘ee a Pi bl Tn
 alts ee
@@ -29257,7 +28438,6 @@ Kinnaree Shan, Application
 
 Vinay Palaparthy
 
-
 201691001
 
 Yash Vasavada; | Saace-Frequency Processor for | hitass/fai, IEEE Signal Processing IEEE Xnfore |
@@ -29297,8 +28477,6 @@ Palaparthy
 202091003 | Pooja Yogi, Ronit | Understanding the Influence of | 10.0109/LSENS 2025.356 IEEE Sensors Letters
 Wacaw, Musirt Film Thickness on nGO-dased 14a, Ue ;
 Kumari, Hitesh Flexible Cagaciiwe Loa! 4
-
-
 
 Borkar, ANIL K,
 ROY and Vinay
@@ -29345,7 +28523,6 @@ Reed
 IEEE, 06-09 Mar, 2025
 
 361
-
 
 Ree ie a
 
@@ -29413,7 +28590,6 @@ Chowdhury
 
 382
 
-
 ok oh , ame
 Hee, Po HE. HEE
 
@@ -29439,7 +28615,6 @@ in Computer Science
 
 383
 
-
 Books Published
 
 DEERAK Hardik Patel, Areast Image IOP
@@ -29454,7 +28629,6 @@ RUTU PAREKH | Rutu Parekh and Nanoelectronics : IOP
 and applications ng
 
 384
-
 
 Patents
 
@@ -29495,8 +28669,6 @@ Maiti
 65°68 For Fault Vinay S& | O8-
 Detection and | Palapart| 2073
 Correction hy
-
-
 
 Sl. Patent
 
@@ -29609,7 +28781,6 @@ MA
 
 a
 
-
 12
 
 11
@@ -29695,8 +28866,6 @@ a
 10- NA NA,
 2024 |
 
-
-
 Title of the Applica | Paten Patent
 Publication
 Number /
@@ -29708,7 +28877,6 @@ Ehectramagnatic
 Waves
 
 488
-
 
 Inter-departmental Research (Inter-disciplinary)
 
@@ -29773,7 +28941,6 @@ PIC-MCC simulations
 
 369
 
-
 Sr. No. rh i Research Work Remark
 
 Fi 2022-
@@ -29837,8 +29004,6 @@ Limited and BSES
 Yamuna Poyer
 
 350)
-
-
 
 13
 
@@ -29908,7 +29073,6 @@ Framework for Real-Time ‘ale scarach
 
 391
 
-
 —————
 
 Sr. Meo, AY Research Work Faculty Names Remark
@@ -29951,7 +29115,6 @@ Reliability SUIAY KADAM | BSES Raidhani Power
 
 352
 
-
 21 2024 to
 2026
 
@@ -29988,7 +29151,6 @@ Yamuna Power
 Limited
 
 393
-
 
 Year Date Title
 
@@ -30038,7 +29200,6 @@ Prof Tathagata | IM Ahmedabad | 128242 4
 Bandapadhya 4 meanths
 
 394
-
 
 Externally funded Research Projects
 
@@ -30093,8 +29254,6 @@ Palaparthy Wetness Microsensor On
 Flexible Substrate for
 Integrated Plant Disease
 5 Management=
-
-
 
 Mame of the
 Principal
@@ -30152,7 +29311,6 @@ in images acquired from
 real time CCTV camera
 
 396
-
 
 Type Year Funds Dura
 
@@ -30228,7 +29386,6 @@ vi
 
 —"_——a077
 
-
 Sr.
 Alo.
 
@@ -30285,7 +29442,6 @@ Kumar Maiti | for Real Time Rescue
 Operation inspired by
 
 Robotics Technolgy
-
 
 Name of the Name Year Funds | Qura
 Principal of the af provided | tion
@@ -30345,7 +29501,6 @@ Prof Vinay S | Impact of Climate Govtof | Govern 1200000) ?y¥
 Palaparthy Change on Crop Yield Gujarat | ment
 and Plant Disease for 7
 27 Major Crops In Gujarat Climat
-
 
 —-—
 Type Year Funds Dura |
@@ -30425,7 +29580,6 @@ Tapas Kumar
 
 400
 
-
 30
 
 31
@@ -30481,8 +29635,6 @@ Machine Learning
 assisted extraction of
 
 1¥
-
-
 
 Sr. | Name of the
 Mo, Principal
@@ -30570,8 +29722,6 @@ Dura
 
 tien
 
-
-
 Sr
 Alo.
 
@@ -30617,7 +29767,6 @@ non-abelian groups
 2025 | 1975700) 3Y
 
 403
-
 
 Educational Programmes Arranged
 
@@ -30666,8 +29815,6 @@ Li
 
 2072-
 2023
-
-
 
 “
 
@@ -30731,8 +29878,6 @@ AY
 
 2074-
 2025
-
-
 
 Sr.
 Mic,
@@ -30802,7 +29947,6 @@ Leadership
 
 Program
 
-
 Tax Law & Regulatory
 Strategy for the Board
 Reom
@@ -30851,14 +29995,11 @@ Offline
 
 4g?
 
-
 Annexure XXXIll
 
 Faculty-wise and course-
 wise academic results of the
 past 3 years
-
-
 
 Annexure X42
 
@@ -30924,8 +30065,6 @@ Design History
 
 Design of Software Systems
 
-
-
 rs FT S| ‘Resist |
 
 — — ee appeared | I
@@ -30975,8 +30114,6 @@ Modern European Philosophy
 MS-IT Prejpeet
 
 Nanoe lect rceanics
-
-
 
 North Indian Classical Music i
 
@@ -31029,8 +30166,6 @@ Analog Circuits
 
 Analog VLSI 3! Design
 Application of ML ta Wireless ¢ Communication Systems
-
-
 
 No. of Candidates
 
@@ -31093,8 +30228,6 @@ Indian Cinema: Lineages and the Present
 ,
 I
 
-
-
 Course
 
 Information Security
@@ -31155,7 +30288,6 @@ Paha el ate na ated ES ar ae
 Real and Complex Analysis
 Recommendation an Systems
 ‘Research Met sch Methodology
-
 
 Course
 
@@ -31220,7 +30352,6 @@ Valuc Added Courses
 
 414
 
-
 Autumn 2023-24 Semester Course wise Results
 
 “Advanced Algorithm
@@ -31280,8 +30411,6 @@ Deeplearning
 
 | Deep Neural NLP & Applications a
 
-
-
 Course
 | Design and Analysis of of Algorithms
 
@@ -31337,8 +30466,6 @@ Introduction t te Wireless Communication
 Language and Literature
 
 Lintar Alpebra
-
-
 
 oye!
 
@@ -31418,7 +30545,6 @@ ere
 Weather and Water Analytic
 Web Design: Applications, Inter-Conmectibility
 
-
 Winter 2023-24 Semester Course wise Results
 
 Course
@@ -31496,8 +30622,6 @@ Econometric Data Analysis Using | R
 
 ‘Einstein’ 5 Physics
 
-
-
 dey
 
 Se a
@@ -31568,7 +30692,6 @@ co |)
 1i6
 129
 
-
 ‘No. of Candidates | |
 
 2 x 1
@@ -31617,8 +30740,6 @@ B Tech Industrial Internship == : LiGG
 
 470
 
-
-
 Course perma tit Result
 Basic Electronic Circuits 2S 24 a
 Calculus 10 10
@@ -31644,7 +30765,6 @@ Ean | Software | Engineering a a
 [Valve A Added Courses a4 _
 
 a
-
 
 Autumn 2024-25 Semester Course wise Results
 
@@ -31695,8 +30815,6 @@ Database Management System — 124 122,
 Database Management Systems
 
 Age
-
-
 
 eq
 
@@ -31756,8 +30874,6 @@ Information Systems Security
 Interactive Data Visualization ‘i
 internet of Things
 
-
-
 COURSE
 eet a appeared
 _Intreduction to Complex Network = = — 96
@@ -31807,7 +30923,6 @@ Programming —
 Quantum Information Theory
 emenns —
 
-
 COURSE Result
 Research 10 a i . |
 Research 11 ;
@@ -31851,8 +30966,6 @@ Signal Processing and Control Systems 19 Led
 Signals and Systems ———=_ 349 347
 Social Network Analysis ‘a x u oe
 Software Design and Testing iv Ail
-
-
 
 ]
 |
@@ -31918,7 +31031,6 @@ B Tech Exploration Project | 409 409
 
 426
 
-
 COURSE No. of Candidates
 
 ae = — _ appeared
@@ -31968,7 +31080,6 @@ a7 45
 Independent Project 1 i
 
 aei
-
 
 COURSE
 
@@ -32030,8 +31141,6 @@ Probability and Statistics a
 
 A#B
 
-
-
 {
 
 pon
@@ -32086,7 +31195,6 @@ Soom 5 yy ar e | «|
 
 429
 
-
 No. of Candidates |
 
 saan sppeerad Result
@@ -32133,7 +31241,6 @@ Signals ond Systems
 
 Software Design and Testing
 
-
 COURSE
 
 Systems Programming
@@ -32148,13 +31255,10 @@ ___ appeared
 
 re |
 
-
 Annexure XXXIV
 
 Other Information with
 Achievements
-
-
 
 DA-IICT Gandhinagar achieved MAAC Grade A+ Accreditation in 2024, recognizing its excellence in
 higher education,

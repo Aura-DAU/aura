@@ -2,10 +2,20 @@
 title: "Document"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/One-Time-Purchase-Open-Inquiry-Oct25.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Document"
 ---
+
+# Document
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 DAIICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
@@ -22,9 +32,6 @@ Inquiry No: EE2425004
  
  
 For any technical clarification, please write to estate_engineer@dau.ac.in and registrar@dau.ac.in 
- 
- 
- 
 Last date of Submission of Bid: 14/11/2025 up to 15:00 hrs. 
  
 Annexure 1: General Terms & Conditions  

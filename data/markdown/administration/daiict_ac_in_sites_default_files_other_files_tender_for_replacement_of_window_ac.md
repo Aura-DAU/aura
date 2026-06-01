@@ -2,15 +2,22 @@
 title: "Tenders/EE2425001 pdf"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender-for-replacement-of-Window-AC-with-Split-AC.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Tenders/EE2425001 pdf"
 ---
 
+# Tenders/EE2425001 pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
+
 Page 1 of 7 
- 
- 
- 
 OPEN TENDER 
  
 For 
@@ -262,12 +269,6 @@ Rate
 in Rs. 
 Amount 
 in Rs. 
-  
-  
-  
-  
-  
-  
 1 
 Mitsubishi Electric 
 Make, 1 TR, 3 Star 
@@ -275,17 +276,8 @@ Inverter Split AC
 MSY-RJS13VF (Indoor) 
 Each 
 86 
-  
-  
 MUY-RJS13VF 
 (Outdoor) 
-  
-  
-  
-  
-  
-  
-  
 2 
 Mitsubishi Electric 
 Make, 1.5 TR, 3 
@@ -294,17 +286,8 @@ AC
 MSY-RJS18VF (Indoor) 
 Each 
 3 
-  
-  
 MUY-RJS18VF 
 (Outdoor) 
-  
-  
-  
-  
-  
-  
-  
 3 
 Mitsubishi Electric 
 Make, 1.9 TR, 3 
@@ -313,8 +296,6 @@ AC
 MSY-RJS22VF (Indoor) 
 Each 
 1 
-  
-  
 MUY-RJS22VF 
 (Outdoor) 
  
@@ -324,10 +305,6 @@ In words and in figure: Total Rs.
 Page 6 of 7 
  
 Supply, Installation, Testing & Commissioning of AC Units 
- 
- 
- 
- 
 Sr. 
 No. 
 Item Description 
@@ -346,18 +323,8 @@ Dia. 9.52mm GAS Pipe
 Mitsubishi Electric (India) Make 
 Rft 
 1000 
-  
-  
 Dia. 6.35mm Liquid Pipe 
 Max Flow (India) Make 
- 
- 
- 
- 
- 
- 
- 
- 
 2 
 Copper Pipe for 1.5TR 
 Split AC Unit 
@@ -365,18 +332,8 @@ Dia. 12.7mm GAS Pipe &
 Mitsubishi Electric (India) Make 
 Rft 
 45 
-  
-  
 Dia. 6.35mm Liquid Pipe 
 Max Flow (India) Make 
- 
- 
- 
- 
- 
- 
- 
- 
 3 
 Copper Pipe for 1.9TR 
 Split AC Unit 
@@ -384,18 +341,8 @@ Dia. 12.7mm GAS Pipe &
 Mitsubishi Electric (India) Make 
 Rft 
 15 
-  
-  
 Dia. 6.35mm Liquid Pipe 
 Max Flow (India) Make 
- 
- 
- 
- 
- 
- 
- 
- 
 4 
 Insulation with 2 
 layers White Covering 
@@ -405,8 +352,6 @@ Unit
 Superlon Make 
 Rft 
 1000 
-  
-  
 5 
 Insulation with 2 
 layers White Covering 
@@ -416,16 +361,6 @@ Split AC Unit
 Superlon Make 
 Rft 
 60 
-  
-  
- 
- 
- 
- 
- 
- 
- 
- 
 6 
 1TR Split AC ODU 
 Stand (Wall / Floor 
@@ -435,8 +370,6 @@ Good qulity Material & Powder
 Coating 
 Each 
 86 
-  
-  
 7 
 1.5TR Split AC ODU 
 Stand (Wall / Floor 
@@ -446,8 +379,6 @@ Good qulity Material & Powder
 Coating 
 Each 
 3 
-  
-  
 8 
 1.9TR Split AC ODU 
 Stand (Wall / Floor 
@@ -457,32 +388,12 @@ Good qulity Material & Powder
 Coating 
 Each 
 1 
-  
-  
- 
- 
- 
- 
- 
- 
- 
- 
 9 
 UPVC Drain Pipe 
 0II" Dia, 40SCH 
 Astral / Suprem 
 Rft 
 1000 
-  
-  
- 
- 
- 
- 
- 
- 
- 
- 
 10 
 3 Core 
 Communication Cable 
@@ -493,13 +404,9 @@ Unarmoured
 Finolex / Polycab / RR 
 Rft 
 1000 
-  
-  
 11 
 Core cutting (RCC) 
 9" to 12" 
-  
-  
 Each 
 10
 
@@ -523,13 +430,6 @@ tools & tackles with safety & security measures and
 shifting at designated place as per EIC 
 Each 
 93 
-  
-  
- 
- 
- 
- 
- 
 2 
 Providing & Fixing of 8mm Exterior (Water / Termite 
 proof) Plywood sheet and batten patti to cover the 
@@ -538,13 +438,6 @@ per sample/EIC (approx. 36" x 24'). Including of
 existing AC frame repairing work if required. 
 Each 
 93 
-  
-  
- 
- 
- 
- 
- 
 3 
 Providing and Laying of Single Core Copper Flexible 
 FR grade 3 wires circuit for AC Power Supply in 
@@ -555,13 +448,6 @@ Wire : 2.5Sqmm Phase, 1.5Sqmm Nutral & Earthing
 Wire Make : Polycab / Finolex / RR 
 Rft 
 1800 
-  
-  
- 
- 
- 
- 
- 
 4 
 Providing and Fixing of 4 Module Switchboard with 
 plate and back box and accessories like 20Amp Switch 
@@ -570,21 +456,10 @@ wiring etc. complete.
 Make : Hi-Fi 
 Each 
 90 
-  
-  
-  
-  
-  
-  
-  
-  
 5 
 Buyback of old window AC unit  
 Each 
 75 
-  
-  
- 
 Buyback – The Bidder/ Contractor are requested to physically check the said units and give final amount 
 of buyback. The University may deduct the buyback amount quoted from the total amount quoted in the 
 financial bid to work out the lowest bid.

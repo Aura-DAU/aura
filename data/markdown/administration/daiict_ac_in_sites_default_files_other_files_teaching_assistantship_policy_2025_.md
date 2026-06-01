@@ -2,10 +2,20 @@
 title: "Policies/Teaching Assistantship Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Teaching_Assistantship_Policy_2025.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Teaching Assistantship Policy"
 ---
+
+# Policies/Teaching Assistantship Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 > pe
 
@@ -63,7 +73,6 @@ MTech Students
 DA-IICT Road, Gandhinagar, Gujarat, India 382007
 T: +91 79 6826 1700 | info@dau.ac.in | www.dau.ac.in
 
-
 Responsibility/Duties of Teaching Assistant (TA)
 * Physical presence during lab/tutorial
 ¢ Lab preparation
@@ -107,7 +116,6 @@ e Contractual Teaching Assistant
 1. Minimum Qualification: Existing full-time PhD student who have been at DAU for 5+ years
 2. Selection Process: Must be recommended by the course instructor or PhD supervisor in the
 beginning of a semester.
-
 
 Extraordinary allocation of TAs
 
@@ -165,7 +173,6 @@ work load. These TAs could be half-time TAs.
 
 HR office addresses all TAship matter related to the attendance policy, leave and how they will get
 stipend in their bank account.
-
 
 Termination and Suspension
 

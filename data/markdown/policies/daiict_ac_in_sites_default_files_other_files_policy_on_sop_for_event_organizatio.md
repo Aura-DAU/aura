@@ -2,10 +2,20 @@
 title: "Policies/Standard Operating Procedure (SOP) for Event Organisation at DAU"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy-on_SOP_for_Event_Organization-Apr_2026.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Standard Operating Procedure (SOP) for Event Organisation at DAU"
 ---
+
+# Policies/Standard Operating Procedure (SOP) for Event Organisation at DAU
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 > pb pe
 
@@ -67,8 +77,6 @@ g Other student-driven activities
 eel
 earth Mba
 
-
-
 Approval Process
 
 A. First Level of Approval
@@ -108,8 +116,6 @@ Y Ne in ue Identification and booking slots for the event
 Bl ‘v,. “Technical arrangements (audio-visual support)
 ey Tea/Snacks arrangement (if proposed)
 vii. Lunch/Dinner arrangement (if proposed)
-
-
 
 viii. Mementoes for the experts
 ix. Specific requirement for the event
@@ -153,8 +159,6 @@ Effective tate oMARKRARRS document: April 1, 2026 Director General
 Director - School of Technology DAU Gandhinagar
 
 Dhirubhai Ambani University (DAU), Gandhinagar
-
-
 
 Appendix 1: Request Form for Organizing On-Campus Events
 
@@ -222,8 +226,6 @@ event
 » | Technical arrangements
 (audio-visual support)
 :' Food & Snacks
-
-
 
 arrangement (if
 proposed)

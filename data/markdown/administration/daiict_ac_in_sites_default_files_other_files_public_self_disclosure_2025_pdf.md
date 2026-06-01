@@ -2,10 +2,20 @@
 title: "UGC Proforma/Public Self-Disclosure"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Public-Self-Disclosure_2025.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "UGC Proforma/Public Self-Disclosure"
 ---
+
+# UGC Proforma/Public Self-Disclosure
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 University Name: Dhirubhai Ambani University, Gandhinagar 
  
@@ -73,9 +83,6 @@ DA-IICT Society
 b) 
 Administration (Profiles with photograph 
 and contact details) 
- 
- 
- 
 Chancellor 
 Name:  Mrs. Tina Anil Ambani 
 Email: –  
@@ -186,9 +193,6 @@ https://www.dau.ac.in/dean-alumni-external-
 relations      
 c) 
 Academics 
- 
- 
- 
 Details of Academic Programs 
 Dhirubhai Ambani University / School of Technology 
 (SoT) 
@@ -263,9 +267,6 @@ https://www.dau.ac.in/about-us (See
 ‘Collaboration & MoUs’ section) 
 d) 
 Admission & Fee 
- 
- 
- 
 Prospectus (including fee 
 structure for various programs 
 Dhirubhai Ambani University / School of Technology 
@@ -291,7 +292,6 @@ https://sol.dau.ac.in/llm/
  
 PhD in Law: 
 https://sol.dau.ac.in/phd-in-law/  
-       
 Admission process and 
 guidelines 
 Undergraduate Admissions:  
@@ -316,9 +316,6 @@ https://www.dau.ac.in/admissions#tab-3
 the 'Fees Structure' section)    
 e) 
 Research 
- 
- 
- 
 Research and Development 
 Cell (including research and 
 Consultancy Projects, Foreign 
@@ -385,17 +382,10 @@ https://lab.dau.ac.in
  
 ICT Infrastructure 
 https://www.dau.ac.in/ict-infrastructure   
- 
- 
- 
 f) 
  
 Student 
 Life 
- 
- 
- 
- 
 Sports facilities 
 https://www.dau.ac.in/sports-complex  
  
@@ -488,9 +478,6 @@ https://www.dau.ac.in/sites/default/files/other-
 images/IMG-5819.JPG  
 g)  
 Alumni 
- 
- 
- 
 Alumni Association with 
 details 
 https://www.dau.ac.in/alumni 
@@ -498,9 +485,6 @@ https://www.dau.ac.in/alumni
 https://www.dau.ac.in/alumni-association.html 
 h) 
 Information Corner 
- 
- 
- 
 RTI : Details of Central Public 
 Information Officer (CPIO) and 
 Appellate Authority (wherever 
@@ -570,9 +554,6 @@ Picture Gallery
 https://www.dau.ac.in/photo-gallery 
 j) 
 Contact us 
- 
- 
- 
 Details with Phone Number, 
 Official Email ID and Address, 
 Location map 

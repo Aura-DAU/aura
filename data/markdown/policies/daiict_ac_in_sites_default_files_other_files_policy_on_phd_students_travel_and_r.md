@@ -2,10 +2,20 @@
 title: "Policies/PhD Student Travel and Research Allowance Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-PhD-Students-Travel-and-Research-Development-Allowance.pdf"
 category: "policies"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/PhD Student Travel and Research Allowance Policy"
 ---
+
+# Policies/PhD Student Travel and Research Allowance Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 >» pb
 
@@ -51,8 +61,6 @@ time benefit).
 
 + This supersedes and replaces the earlier policy for financial assistance to PhD students for participa
 international conferences.
-
-
 
 Incentive for Excellence in Doctoral Research
 
@@ -102,8 +110,6 @@ d. Title of paper, abstract of the paper, and the authors' list
 e. Manuscript draft of the accepted paper
 
 ? Journal ranking is as per Scimago. Conference ranking is as per core.edu.
-
-
 
 f. Requested financial support with a breakdown of the expenses in three categories:
 registration, travel, and accommodation.

@@ -2,10 +2,20 @@
 title: "GSIRF Five Star Rating - 2023-24"
 url: "https://daiict.ac.in/sites/default/files/other-files/GSIRF-Certificate_2023.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "GSIRF Five Star Rating - 2023-24"
 ---
+
+# GSIRF Five Star Rating - 2023-24
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 BY ORDER
 5

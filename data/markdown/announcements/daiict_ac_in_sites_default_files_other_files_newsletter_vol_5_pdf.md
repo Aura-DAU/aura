@@ -2,10 +2,20 @@
 title: "Newsletter/July - Dec 2022"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Newsletter_Vol-5.pdf"
 category: "announcements"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Newsletter/July - Dec 2022"
 ---
+
+# Newsletter/July - Dec 2022
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 NEWSLETTER
 JULY 22 - DECEMBER 22

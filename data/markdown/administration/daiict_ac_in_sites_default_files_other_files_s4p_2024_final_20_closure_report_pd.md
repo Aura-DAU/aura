@@ -2,47 +2,25 @@
 title: "sites/default/files/other-files/S4P-2024_final%20_Closure-Report.pdf"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/S4P-2024_final%20_Closure-Report.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "sites/default/files/other-files/S4P-2024_final%20_Closure-Report.pdf"
 ---
+
+# sites/default/files/other-files/S4P-2024_final%20_Closure-Report.pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab, DA-IICT. 
 1 
  
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
 Gandhinagar, India. 
 URL: https://sites.google.com/view/s4p2024/ 
@@ -63,8 +41,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
  
 Message from Organizing Chair 
- 
-        
  On behalf of the Organizing Committee, I record our appreciation for the valuable contribution made by eminent 
 invited speakers (from academics and industry), participants, international program committee, DA-IICT faculty 
 colleagues, administration, staff, and student volunteers towards conducting the 6th edition of summer school with the 
@@ -115,52 +91,14 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
  
 Invited Speakers 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Hynek Hermansky 
 Johns Hopkins University, 
 USA 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Bhavana Ramabhadran 
 Google Research, USA 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Mathew Magimai Doss 
 Idiap Research Institute, 
 Martigny, Switzerland 
- 
- 
- 
- 
- 
- 
 Chng Eng Soing         
 Nanyang Technological 
 University (NTU),  
@@ -175,20 +113,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 4 
  
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 C. V. Jawahar 
  IIIT, Hyderabad 
  
@@ -198,19 +122,6 @@ IISc, Bengaluru
 Preethi Jyothi 
 Indian Institute of 
 Technology, Bombay 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Aparna Walanj 
 Kokilaben Dhirubhai Ambani 
 Hospitals and Research 
@@ -230,14 +141,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
  
 Industry Perspective Talks 
- 
- 
- 
- 
- 
- 
- 
- 
 Tara N. Sainath  
 Google Research, 
 USA 
@@ -250,37 +153,12 @@ Bengaluru
  
 Harish Arsikere 
 Amazon, Bengaluru 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Hardik B. Sailor 
 A*STAR, 
 Singapore 
- 
- 
- 
- 
-    
- 
- 
 Vikram C. Mathad 
 Samsung Research Institute, 
 Bengaluru 
- 
- 
- 
- 
 Nirmesh J. Shah 
 Sony Research, Mumbai
 
@@ -288,17 +166,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 6 
  
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Sunil Kumar 
 Kopparapu 
 TCS, Mumbai 
@@ -310,18 +177,6 @@ New Delhi
  
 Dipesh K. Singh             
 Augnito, Mumbai 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
         Gauri Prajapati                         Ajay Rajawat 
 Microsoft Research, Bengaluru              Manager (Support & Onboarding),  
               Digital India Bhashini  
@@ -334,33 +189,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
  
 Promotion of Summer School (S4P 2024) 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-                                                                                                
-                                                                                           
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-  
 (a) 
 (b)
 
@@ -534,31 +362,14 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
 Sponsors 
 The Organizing Committee would like to thank the following sponsors for the generous 
 support extended to conduct S4P 2024: 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 International Speech 
 Communication Association 
 (ISCA) 
                    Google 
- 
- 
- 
 Dhirubhai Ambani Institute 
 of Information and 
 Communication Technology 
 (DA-IICT) 
- 
- 
- 
- 
- 
 Indian Speech 
 Communication Association 
 (IndSCA) 
@@ -569,15 +380,6 @@ Division (BHASHINI)
 The Ministry of Electronics 
 and Information Technology 
 (MeitY) 
- 
- 
-                           
- 
- 
- 
- 
- 
- 
                               KLEF 
                       Vaddeswaram
 
@@ -591,19 +393,6 @@ Travel Grants
  
 • 
 Google Travel Grants for selected on a first serve basis in summer school: 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 • 
 IndSCA Travel Grants for selected on a first serve basis in summer school:
 
@@ -641,11 +430,6 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
  
 Inaugural and Welcome Address by Prof. Hemant A. Patil, 
 Organizing Chair, S4P 2024 
- 
-  
- 
- 
-  
 • Prof. Patil expressed appreciation to all the sponsors of S4P 2024. He also 
 encouraged participants to consider attending the International Conference on 
 Acoustics, Speech, and Signal Processing (ICASSP 2025), which will be held in 
@@ -675,22 +459,6 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
 Interaction of Prof. (Dr.) Tathagata Bandyopadhyay (Director, DA-
 IICT) and Prof. (Dr.) Hemant A. Patil (Chair, S4P) with Invited 
 Speakers 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 • During this interaction, the Director appreciated the contribution of invited 
 speakers, organizing committee, student volunteers, faculty, and admin staff 
 to the grand success of S4P 2024.
@@ -712,10 +480,6 @@ and if the progress is demonstrated (the WHAT element). However, one can argue t
 scientific progress could be made when the report also contains an explanation of WHY the 
 processing was effective. Some attempts to follow this advice in our own work are discussed in 
 the talk. 
- 
- 
- 
- 
 Dr. Mathew Magimai Doss 
 Fundamentals of Automatic Speech Recognition – A Symbolic Perspective 
 Over the decades, automatic speech recognition (ASR) approaches have evolved from more 
@@ -747,11 +511,6 @@ to overcome some of the limitations of conventional HMM-based approach (presente
 (b) to unify instance-based approach and HMM-based approach, (c) to model different types of 
 subword units and phonological representations, (d) to deal with data-scarcity issues, and (e) to 
 holistically deal with speech recognition and speech assessment. 
- 
- 
- 
- 
- 
 Prof. (Dr.) Chng Eng Siong  
  Talk1: The NTU Speech Teams Experience in Adapting Whisper 
 Whisper is a speech recognition model released by OpenAI at end of 2022. It is now one of the 
@@ -840,13 +599,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 26 
  
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
- 
- 
- 
- 
-  
- 
- 
 Prof. (Dr.) Bayya Yegnanarayana   
  
 Processing Phase of Speech Signals  
@@ -867,13 +619,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 27 
  
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
- 
- 
- 
- 
- 
- 
-  
 Prof. (Dr.) C. V. Jawahar 
  
  Seeing is Listening  
@@ -902,20 +647,6 @@ ms), capturing semantic content, speech inherently encompasses information at va
 utterance-level non-semantic cues and even recording session-specific channel/ambient 
 characteristics. I will review key aspects of prior works on speech representation learning at frame 
 and utterance levels that are prevalent in the field. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
      This talk will showcase our group's efforts in developing novel techniques for factorized 
 representation learning across these multiple scales, leading to improved performance in various 
 downstream speech processing tasks. The first part of the talk will introduce our approach to self-
@@ -941,9 +672,6 @@ evaluations on various downstream tasks, including those from the SUPERB challen
 demonstrate the superior performance of Learn2Diss. Finally, we will touch upon related work in 
 zero-shot emotion conversion and conclude by outlining future research avenues for these 
 promising research streams. 
- 
- 
- 
 Dr. Aparna Walanj 
  
 Ethics in Research 
@@ -973,15 +701,6 @@ Switching”, this approach yields a significant improvement over state-of-the a
 Speaker Diarization is the task of identifying “who spoke when?” Bottom up clustering where the 
 utterance is split into fixed length segments is standard. Speaker showed that “information rate” is 
 a better measure for initial clustering, in that it leads to much lesser diarization error rates. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Prof. (Dr.) Hemant A. Patil 
  
 Dysarthric ASR: Assistive Speech Technology 
@@ -1018,10 +737,6 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
 Industry Perspective Talks 
 Dr. Tara N. Sainath 
 End-to-End Speech Recognition: The Journey from Research to Production 
- 
- 
- 
- 
 Dr. Sunayana Sitaram 
 Evaluating LLMs on Languages Beyond English: Challenges and Opportunities 
  The assessment of capabilities and limitations of Large Language Models (LLMs) through 
@@ -1039,18 +754,6 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
  
 Dr. Harish Arsikere 
 Bootstrapping ASR for new language 
- 
-       
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Dr. Vikram C. Mathad 
  
 Speech AI: From Command Recognition to Live-Call Translation 
@@ -1143,20 +846,6 @@ Speech to Speech, Text to Text, Speech to Text, OCR, and Transliterations, a cro
 platform known as Bhasha Daan, which invites active data contributions for AI model training. 
 This diverse strategy promotes inclusion, supports different languages, and encourages creativity 
 in products and services. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Mr. Dipesh K. Singh 
  
 Advancements in Multi-Accent and Noise Robust ASR Using Semi-Supervised 
@@ -1185,18 +874,6 @@ technological advancements, particularly in domains, such as ultrasound radiolog
 generation, where accurate and timely transcription of medical professionals' speech is crucial. By 
 the end of the talk, attendees will gain a comprehensive understanding of the state-of-the-art 
 techniques driving the evolution of ASR systems across diverse applications. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Ms. Gauri Prajapati 
  
 Voice Privacy in the Age of AI and Big Data  
@@ -1218,11 +895,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 38 
  
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
- 
- 
- 
- 
- 
 Mr. Ajay Rajawat 
  
  Audio & Speech Processing | What have we been doing? 
@@ -1259,37 +931,6 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
  
 On-spot Poster Presentation: 
- 
-   
-   
- 
- 
- 
- 
-     
- 
- 
- 
- 
- 
-   
- 
-   
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 • We organized on-spot poster presentation session during Tea/Lunch break for all the five 
 days of the S4P 2024. The key motivation of the session is to encourage the participants of
 
@@ -1317,35 +958,9 @@ to interact with eminent researchers both from academia and industry. This helpe
 visibility of their work and improve their communication and presentation skills. 3 doctoral 
 scholars presented their research work within 5 minutes time. The students who participated in ‘5 
 Minutes Ph.D. Thesis’ were: 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-  
 (a) 
 (b) 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 (c) 
- 
- 
- 
- 
- 
 (d)
 
 Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab, DA-IICT. 
@@ -1366,7 +981,6 @@ Organizing Committee:
 (a) Amitabh Nag, Ministry of Electronics & Information Technology (MeitY), New Delhi, 
 India. 
 (b) Mathew Magimai Doss, IDIAP Research Institute, Martigny, Switzerland.  
-                                                
 (c) Vikram C. Mathad, Samsung Research Institute, Bengaluru, India. 
  
 (d) Dr. Samudravijaya K, Koneru Lakshmaiah Education Foundation, Andhra Pradesh, 
@@ -1375,20 +989,6 @@ Note: Dr. Ajay Rajawat (BHASHINI Division, Meity, New Delhi) was kindly requeste
 ordinate the overall evaluation process and announce the winners of 5MPT competition. Based 
 on the reviews by the expert committee, four scholars were awarded ISCA endorsed cash 
 prizes. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 (a) 
 (b) 
 Expert Committee members to evaluate 5 Min Ph.D. Thesis contest. 
@@ -1406,60 +1006,14 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
 Based on the assessment of presentations by the Expert Committee were awarded ISCA 
 endorsed First Prize of Rs. 15,000 /-, second prize of Rs. 10,000 /-, third Prize of Rs. 5,000 /-, 
 and fourth Prize of Rs. 3,000 /-respectively,  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 1st Prize Winner Ms. Gauri Deshpande (University of Augsburg, Germany) and now at TCS, Mumbai 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 2nd Prize Winner Ms. Ankita. (NIT Patna)
 
 Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab, DA-IICT. 
 46 
  
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
- 
- 
- 
- 
- 
- 
- 
 3rd Prize Winner Ms. Akansha Tyagi (IIT Mandi) 
- 
- 
- 
- 
- 
- 
- 
- 
 \ 
 4th Prize Winner Mr. Swapnil Fadte (Discipline of Computer Science & Technology, Goa University)
 
@@ -1471,16 +1025,10 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
 Sponsors Presentation 
  
 1. DA-IICT Gandhinagar (https://www.daiict.ac.in/) 
-  
- 
 Prof. Hemant A. Patil presenting summary of R&D achievements on behalf of DA-IICT 
 Gandhinagar. 
  
 2. indSCA (http://www.apsipa.org/) 
- 
- 
-  
- 
 Prof. Hemant A. Patil presenting about indSCA, Behalf of Prof. Chandra Sekhar 
 Seelamantula (IISc, Bengaluru).
 
@@ -1491,19 +1039,11 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
  
  
 3. BHASINI (http://www.apsipa.org/) 
- 
- 
- 
- 
 Mr. Amitabh Nag (CEO, BHASHINI Division) presenting about BHASINI achievement. 
  
  
 4. KLEF,Vaddeswaram 
            (https://www.kluniversity.in/)    
- 
- 
-  
- 
 Prof. (Dr.) Suryakanth Gangashetty presenting about KLEF.
 
 Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab, DA-IICT. 
@@ -1527,44 +1067,6 @@ Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
 Volunteers of S4P 2024, DA-IICT Gandhinagar 
 Thus, summer school activity strengthens a great bond of team spirit and interpersonal skills 
 within members of Speech Group @ DA-IICT. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Valedictory Function: Prof. Hemant A. Patil appreciated highly independent and immense 
 contribution of student volunteers during the valedictory function for the grand success of 
 S4P 2024.
@@ -1643,8 +1145,6 @@ S. Sudrashan
 ▪ Rajendra Shah   
 ▪ Sudhir Dave 
 ▪ Jitendra Parmar 
-  
- 
 ▪ Sawan Kumar Sachaniya 
 ▪ Nimesh Patel 
 ▪ Rajesh Patel 
@@ -1704,9 +1204,5 @@ Summer School on Speech Signal Processing (S4P-ASR) 2024 by Speech Research Lab,
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) 
  
 ICASSP 2025 
- 
- 
- 
-  
 Note: We have circulated CFP for INTERSPEECH 2024, EUSIPCO 2024, ICPR 2024,  
                        APSIPA ASC 2024, ICASSP 2025 in the participant’s kits of S4P 2024.

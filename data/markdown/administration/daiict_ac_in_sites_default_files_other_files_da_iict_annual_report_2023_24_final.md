@@ -2,16 +2,24 @@
 title: "AnnualReport 2023-24 pdf"
 url: "https://daiict.ac.in/sites/default/files/other-files/DA-IICT_Annual-Report_2023-24_Final_2025.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "AnnualReport 2023-24 pdf"
 ---
+
+# AnnualReport 2023-24 pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 tion Technology
 
 ation and Communica’
-
-
 
 Cover Page Credit: Birds sighted on the Green Campus
 
@@ -24,7 +32,6 @@ photographers and ornithologist in specific and for the DA-IICT community in gen
 
 Parth Mehta, an alumnus of the Institute, during his study as an MTech and PhD
 student at the university, clicked the photographs shown on the cover page.
-
 
 TABLE OF CONTENTS
 
@@ -53,11 +60,6 @@ LT, AIA ACEIVIEIGS ccscssessssnsusscenrenunanerucnsercaanernnvananscneneumannnua
 = Annexure 5 - Lab Equipment Details
 
 » Annexure 6 - Annual Accounts
-
-
-
-
-
 To help build a
 knowledge-led society
 founded on intellectual
@@ -89,18 +91,14 @@ support function, through processes of
 self-evaluation and continuous
 improvement.
 
-
 Shri Dhirubhai Hirachand Ambani
 (28th December, 1932 - 6th July, 2002)
 Founder Chairman, Reliance Group
 Founder Chairman, DA-IICT
 
-
 18th Convocation
 
 BOARD OF GOVERNORS
-
-
 
 BOARD OF
 GOVERNORS
@@ -201,7 +199,6 @@ Dhirubhai Ambani Institute of Information
 and Communication Technology, Gandhinagar
 (ex-officio)
 
-
 DIRECTOR’S MESSAGE
 
 The academic year 2023-24 represents a significant milestone for
@@ -261,8 +258,6 @@ As we embark on the next phase of our journey at DAU, we remain excited and conf
 chart a glorious path filled with success. Dr. Tathagata Bandyopadhyay
 Director 06
 
-
-
 NATIONAL ASSESSMENT AND ACCREDITATION COUNCIL
 
 An Autonomous Institution of the University Grants Commission
@@ -288,11 +283,7 @@ ate - September 07, 2023 7 NaAAC E aaa
 ©
 —_
 
-
-
 ABOUT THE INSTITUTE
-
-
 
 Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) was
 established in 2001 in the dynamic landscape of the state of Gujarat by the visionary industry leader
@@ -317,8 +308,6 @@ Section 2(f) of the UGC Act, 1956. In 2009, DA-IICT became a member of the Assoc
 Universities (AIU).
 
 09
-
-
 
 In a landmark development during the year under review, the Legislative Assembly of Gujarat
 passed the DA-IICT Amendment Act Bill on 28th February 2024 and the DA-IICT Act (Amendment)
@@ -389,8 +378,6 @@ M.Des.
 
 10
 
-
-
 DA-IICT also offers Continuing Education Programs aimed at enhancing the skills of researchers,
 academics, and professionals in industry, private, and government sectors. These programs
 emphasize knowledge sharing and hands-on training. In addition, DA-IICT hosts a Government of
@@ -417,15 +404,6 @@ Admission
 
 Ph.D. (Rolling -
 Fourth Quarter 2024)
-
-
-
-
-
-
-
-
-
 Dr. Bhaskar Chaudhury
 
 Dean (Academic Programs)
@@ -449,7 +427,6 @@ year, reflecting DA-IICT’s ongoing
 commitment to empowering its community.
 
 15
-
 
 ” ACADEMICS
 
@@ -489,7 +466,6 @@ Inclusive of NRI/Foreign Students. Exclusive of supernumerary seats filled in by
 Admission Committee for Professional Courses, Government of Gujarat.
 
 A
-
 
 ADMISSIONS REPORT 2023-24
 
@@ -545,7 +521,6 @@ Of the total seats, 67% were managed by the Institute, including 52% under the A
 category and 15% under the NRI category. The remaining 33% of seats, under the Gujarat
 category, were allocated through the Admission Committee for Professional Courses (ACPC),
 Government of Gujarat.
-
 
 M.Sc. (IT)
 
@@ -605,7 +580,6 @@ academic credentials and interview performance.
 By offering these specialized programs and leveraging a robust admission process, the institute
 upheld its commitment to academic excellence and innovation, empowering students to excel in
 highly sought-after fields. A
-
 
 Master of Science (M.Sc.)
 Programs:
@@ -676,7 +650,6 @@ Ph.D. (Rolling)
 
 presentation followed by an interview.
 
-
 p Table 2: Admission 2023-24 Statistics of UG and PG Programs*
 
 @ miech. (ict) M-Tech. (Ec) @
@@ -690,8 +663,6 @@ B.Tech. (ICT) ¢——_- \ ® eres
 B.Tech. (MnC) @ B.Tech. (EVD) &
 
 # All India Category applications received. * Including ACPC admitted candidates.
-
-
 
 Orientation Overview
 
@@ -743,8 +714,6 @@ higher in their respective semesters. During the academic year
 Autumn semester, with a total disbursement of Rs. 10,65,000.
 In the Winter semester, twenty-two students were awarded,
 with a total of Rs. 16,00,000 distributed.
-
-
 
 PG-Merit Scholarships
 
@@ -814,7 +783,6 @@ elow Rs. 18 lakhs. Four students have benefitte Shalt tberescenrcen din:
 from this scheme with a total amounting of Rs.
 1,72,000
 
-
 |
 
 Government Scholarships:
@@ -866,7 +834,6 @@ Similarly, students in the M.Sc. (IT), M.Sc. (ICT-ARD), and M.Des. (CD) programs
 fourth semester to full-time projects, either at DA-IICT or with leading organizations. The list of
 completed Doctoral and M.Tech theses for the year is provided in Annexure 1.
 
-
 Institutional Collaboration and Student Exchange Programs
 
 The Institute continues to establish partnerships with national and international institutions to
@@ -915,7 +882,6 @@ semi-to-low literacy backgrounds
 
 A
 
-
 y. Indian Institute of Remote Sensing (IIRS)
 Partnering to offer a postgraduate program, enhancing education through curriculum
 development and hands-on learning. The initiative aims to boost student skills via internships
@@ -936,8 +902,6 @@ e Jadavpur University:
 This collaboration enhances academic exchanges and student programs, while offering faculty
 opportunities for teaching and conducting seminars. It also includes facilitating national and
 international scholarships.
-
-
 
 iF e Rishabh Integrated Skill Enhancement (RISE):
 Promotes the exchange of teaching materials, faculty, staff, and students. It also organizes joint
@@ -963,11 +927,6 @@ e TCG CREST:
 Aimed at joint academic and research initiatives, this partnership includes offering PhD and PG
 programs, organizing research workshops, and facilitating the exchange of scholarly
 information, faculty, and students.
-
-
-
-
-
 Visitors and Special Lectures (2023-24)
 
 The Institute actively hosts visitors from diverse organizations, fostering opportunities for
@@ -1005,12 +964,6 @@ This initiative ensures faculty are well-prepared to train the next generation o
 Google
 
 a
-
-
-
-
-
-
 Dr. Yash M. Vasavada
 
 Dean (Research)
@@ -1038,8 +991,6 @@ we've made through sponsored projects,
 entrepreneurship, and interdisciplinary
 collaborations that are helping us stay ahead
 of the curve in a rapidly evolving world.
-
-
 
 RESEARCH AND DEVELOPMENT
 
@@ -1081,7 +1032,6 @@ conferences. In the last decade, numerous sponsored projects have been initiated
 notable increase in international collaborations. These projects demonstrate the institute’s
 commitment to advancing knowledge, fostering innovation, and addressing global challenges.
 
-
 SPONSORED PROJECTS
 
 In 2023-24, the Institute received funding for four exciting new research projects.
@@ -1106,8 +1056,6 @@ In-house loT Enabled Sensor System Govt of Gujarat
 Secure and Energy-efficient Mixed-domain E&IT, MeitY, Prof Vinay S Palaparthy
 Compute in Memory Based Al Accelerator Chip | Govt of India /Prof Yash Agarwal /Prof
 for Edge Applications Sreeja Ravindran
-
-
 
 VW Table 3. New Projects
 
@@ -1176,7 +1124,6 @@ lol Enabled, Self Calibrating and Self Healing ;
 Sensor System for In-Situ Agriculture Applications | TH, IIT Bombay | Vinay S Palaparthy
 
 34
-
 
 14 |Speech Technologies in Indian Languages
 National Language Translation Mission (NLTM)
@@ -1292,7 +1239,6 @@ Sreeja Rajendran
 
 35
 
-
 CONSULTANCY PROJECTS
 
 In the year 2023-24, the faculty took on one consultancy project.
@@ -1316,7 +1262,6 @@ it : FE
 t
 
 ~
-
 
 Conferences, Seminars, Workshops & Summer Schools (2023-24)
 
@@ -1401,7 +1346,6 @@ included a lively discussion with students and
 faculty.
 
 A
-
 
 Title
 
@@ -1494,7 +1438,6 @@ e Dr. Swarn Rathour (Hitachi R&D, Japan)
 
 38
 
-
 An interdisciplinary 15th March DA-IICT’s "Bird Stories" seminar, organized by the
 seminar “Bird Stories,” 2024 M.Des. program, featured experts from diverse
 organized by the M.Des. fields discussing how birds are observed and
@@ -1538,7 +1481,6 @@ Trade Show 2024 2024 innovations at the Vibrant Gujarat Global Trade
 Show 2024, highlighting its leadership in
 
 technology.
-
 
 A special lecture on
 "Education Content
@@ -1586,19 +1528,12 @@ University, covering cluster setup, MPI frameworks,
 performance evaluation, and Raspberry Pi use.
 Students gained hands-on experience in optimizing
 cluster performance.
-
-
-
-
-
 RN),
 
 FACULTY RESEARCH
 & PUBLICATIONS
 
 42
-
-
 
 At DA-IICT, research is not just a
 pursuit—it’s a collaborative journey that brings
@@ -1616,7 +1551,6 @@ remarkable contributions of its faculty and
 students over the past year.
 
 43
-
 
 rEACULTY RESEARCH AND PUBLICATIONS
 
@@ -1667,7 +1601,6 @@ Prediction in HPC Systems," in Parallel and Distributed Computing, Applications 
 PDCAT 2022. Lecture Notes in Computer Science, vol 13798., Takizawa, H., Shen, H., Hanawa, T.,
 Hyuk Park, J., Tian, H., Egawa, R. (eds), Springer, Cham, O08 Apr. 2023, pp. 108-119, doi:
 10.1007/978-3-031-29927-8_9, ISBN: 9783031299278.
-
 
 2. Dhruvil Bhatt, Kirtan Delwadia, Shishir Purohit, and Bhaskar Chaudhury, "Computational Modeling of
 
@@ -1733,7 +1666,6 @@ Dysarthric Automatic Speech Recognition," in Speech and Computer. SPECOM 2023. L
 in Computer Science(), vol 14339., Karpov, A., Samudravijaya, K., Deepak, K.T., Hegde, R.M., Agrawal,
 S.S., Prasanna, S.R.M. (eds), Springer, Cham, 22 Nov. 2023, pp. 579-589. doi:
 10.1007/978-3-031-48309-7_46, ISBN: 9783031483127.
-
 
 LA Uthiraa S., Aditya Pusuluri, and Hemant A. Patil, "Modified Group Delay Features for Emotion
 
@@ -1809,7 +1741,6 @@ Computing and Communication Networks. ACN 2023. Lecture Notes in Networks and Sy
 966., Thampi, S.M., Hu, J., Das, A.K., Mathew, J., Tripathi, S. (eds), Springer, Singapore, 28 Jul. 2024, pp.
 323-333, DOI: 10.1007/978-981-97-2004-0_23, ISBN: 9789819720040.
 
-
 A Prashant Gohel, and Manjunath V. Joshi, "Quantum time series forecasting," in Proceedings Volume
 
 22,
@@ -1879,7 +1810,6 @@ Recommendation for Requirements Non-Conformant with Requirement Templates (RTs),
 Proceedings of the 17th Innovations in Software Engineering Conference, Chakrabarti, Sujit Kumar ...
 [et al.], (eds.), Association for Computing Machinery(ACM), New York, 22 Feb. 2024, article no. 9, pp.
 1-11, doi: 10.1145/3641399.3641412, ISBN: 9798400717673.
-
 
 A Santosh Singh Rathore, Saurabh Tiwari, and Sheikh Umar Farooq, "Workshop Report on Emerging
 
@@ -1954,8 +1884,6 @@ eeooL ng pos
 
 HOP ribishing
 
-
-
 A Kamlesh S. Patle, Priyanka Khaparde, Gulafsha Bhatti, Yash Agrawal, and Vinay S. Palaparthy, "Flexible
 
 39.
@@ -1987,8 +1915,6 @@ CV CTEMS «. RECOGNITION
 
 SOFTWARE
 
-
-
 Journal Papers
 
 FESAPPLIED
@@ -2017,7 +1943,6 @@ Sensor,’ IEEE Sensors Letters, IEEE, ISSN: 2475-1472, vol. 8, no. 3, Mar. 2024
 4. Anjali Diwan and Anil K. Roy, "CNN-Keypoint Based Two-Stage Hybrid Approach for Copy-Move
 Forgery Detection," IEEE Access, IEEE, ISSN: 2169-3536, vol. 12, 21 Mar. 2024, pp. 43809 - 43826,
 doi: 10.1109/ACCESS.2024.3380460.
-
 
 5. Rupal Budhbhatti Anil K. Roy, Marc Muselli, and Daniel Beysens, , "Evolution of Dew and Rain Water
 
@@ -2093,7 +2018,6 @@ Hemant A. Patil, Aastha Kachhi, and Ankur T. Patil, "CQT-Based Cepstral Features
 Normal vs. Pathological Infant Cry," IEEE/ACM Transactions on Audio, Speech, and Language
 Processing, IEEE, ISSN: 2329-9304, pp. 1-14, 27 Oc. 2023, doi: 10.1109/TASLP.2023.3325971 |
 
-
 y Dipesh K. Singh, Gauri P. Prajapati, and Hemant A. Patil, "Voice Privacy Using Time-Scale and Pitch
 Modification," SN Computer Science, Springer, ISSN: 2661-8907, vol. 5, 27 Jan. 2024, Article no.243,
 doi: 10.1007/s42979-023-02549-8.
@@ -2149,9 +2073,6 @@ Topological Algebra (JLTA), Raimag Press, ISSN: 2345-5934, vol. 12, no. 3, 01 Oc
 actions of operators in tensor product spaces," Journal of Pseudo-Differential Operators and
 Applications, Springer, ISSN: 1662- 999X, vol. 14, no. 4, Dec. 2023, Article no. 72, pp. 1-164
 doi:10.1007/s11868-023-00566-y.
-
-
-
 
 A Pritam Anand, Shantanu Jain, and Harsh Savaliya, "New improved wave hybrid models for hourly
 
@@ -2226,8 +2147,6 @@ vol. 40, 08 Apr. 2024, article no. 50, doi:
 
 WILEY
 
-
-
 A Shail Jadav, Karthik Subramanya Karvaje, Sujay D. Kadam, Vineet Vashista, James Sulzer, Ashish
 
 41.
@@ -2296,7 +2215,6 @@ VOLUME Be Nem S ry (aun rare arse
 
 IEEE
 
-
 IEEE
 
 SENSORS JOURNAL
@@ -2323,7 +2241,6 @@ Samaksh Gupta, Yash Agrawal, Anil K. Roy, Ahlad Kumar, and Vinay S. Palaparthy, 
 Derivative Based TVD Smoothening and Baseline Correction for Extracting Leaf Wetness Duration
 From LW Sensor: A Novel Approach," IEEE Sensors Letters, IEEE, vol. 7, no. 12, pp. 1-4, article no.
 6009804, ISSN: 2475-1472, Dec. 2023, doi: 10.1109/LSENS.2023.3334147.
-
 
 Conference Papers
 
@@ -2367,7 +2284,6 @@ Scientific Reports
 iopscience.org/jphysd
 
 1OP Publishing
-
 
 4
 
@@ -2444,7 +2360,6 @@ for Speech Emotion Recognition," In The 25th International Conference on Speech 
 Uthiraa S., Aastha Kacchi, and Hemant A. Patil, "Linear Frequency Residual Features for Infant Cry
 Classification," In The 25th International Conference on Speech and Computer (SPECOM 2023),
 Dharwad, India, Springer, pp. 1-12, 29 Nov.-02 Dec. 2023.
-
 
 Ld Priyanka Gupta, Rajul Acharya, Ankur T. Patil, and Hemant A. Patil, "On the Asymptotic Behaviour of
 
@@ -2524,7 +2439,6 @@ Computing and Communication Networks (ACN 2023), Bengluru, India, 18-20 Dec. 202
 
 4
 
-
 A Ekta Tank, and Manik Lal Das, "On Credit Card Fraud Detection Using Machine Learning Techniques,"
 
 30.
@@ -2600,8 +2514,6 @@ frequencies," In IEEE Microwaves, Antennas, and Propagation
 Conference (MAPCON 2023), Ahmedabad, India, IEEE, 11-14
 Dec. 2023, pp.1-4, DOI:
 10.1109/MAPCON58678.2023.10463923
-
-
 
 A Soumen Paul, Srijoni Majumdar, Ayan Bandyopadhyay, Bhargav Dave, Samiran Chattopadhyay,
 
@@ -2681,7 +2593,6 @@ Engineering Conference (ISEC 2024), Bangalore, India, ACM,
 
 22-24 Feb. 2024, pp. 1-11.
 
-
 A Santosh Singh Rathore, Saurabh Tiwari, and Sheikh Umar Farooq, "Workshop Report on Emerging
 
 51.
@@ -2723,9 +2634,6 @@ Columbia, Vancouver Campus, Vol. 96, No. 2, 01 Sep. 2023.
 Hyderabad : Orient Blackswan, 2022, pp. 432. ISBN 9789354420641. book review in Indian Journal
 of Gender Studies, Sage Journals, Vol. 31, No. 1, 28 Feb. 2024.
 
-
-
-
 Cx
 
 @
@@ -2752,7 +2660,6 @@ Cx
 a
 rd
 
-
 DA-IICT’s core strength lies in the
 outstanding quality of our faculty, students,
 and staff . Their dedication to excellence has
@@ -2769,8 +2676,6 @@ staff, including awards, honors, and leadership
 roles in professional communities, as they
 continue to raise the bar for academic
 excellence.
-
-
 
 A
 
@@ -2819,8 +2724,6 @@ Manik Lal Das
 Senior Member, Institute of Electrical and Electronics Engineers (IEEE)
 Life Member, Cryptology Research Society of India
 e Advisory member, IEEE Gujarat Sectio
-
-
 
 vanish K Gupta
 
@@ -2898,8 +2801,6 @@ e Member, Technical Committee, Indian Mathematical Society, 2021-Present
 
 y.
 
-
-
 Manish Kumar
 
 e Session Chair, 17th IEEE
@@ -2949,8 +2850,6 @@ Yash Agrawal
 
 e |EEE Chapter Chair, Solid-State Devices, IEEE Gujarat Section
 e |EEE Chapter Chair, Electron Devices, IEEE Gujarat Section
-
-
 
 FELLOWSHIPS/VISITING SCHOLARSHIPS
 
@@ -3020,8 +2919,6 @@ conference
 
 4
 
-
-
 4
 
 REVIEWING OF BOOK/JOURNAL/ CONFERENCE PAPERS
@@ -3086,8 +2983,6 @@ International Journal of Modern Physics B
 Modern Physics Letters B
 
 Chaos
-
-
 
 Sudip Bera
 
@@ -3174,8 +3069,6 @@ Technical University-Kanpur, 18h December 2023 to 22nd December 2023.
 e “Opportunities and Challenges in DNA Data Storage” Reliance Life Sciences, Navi
 Mumbai, India, December 11, 2023. y,
 
-
-
 VW e “Coding for Quantum Computing”, Atal (AICTE), Faculty Development Program on
 
 “Quantum Enabled Intelligence - Innovations in Computing and Communications.”,
@@ -3237,8 +3130,6 @@ e M.Tech. Thesis External Examiner at NIT Hamirpur.
 e External expert, Nirma University, Anemdabad for EDA
 tools procurement.
 
-
-
 45 Yash Vasavada
 
 e "Introduction to Wireless Communications," delivered to the class of BTech ICT
@@ -3297,8 +3188,6 @@ e Invited Speaker, “The role of ICT in education”, NEP Orientation and
 Sensitization Virtual Program, UGC-Malaviya Mission Teacher Training
 Center, Jawahar Lal University (JNU), New Delhi, 11th June 2024.
 
-
-
 V e Invited Speaker, “Mathematical Opportunities in DNA Digital Data Storage”,
 
 International Conference on Mathematics and its Applications, Mata Sundri
@@ -3351,8 +3240,6 @@ Prosenjit Kundu
 
 e Member, Technical Program Committee, Complex Networks 2023
 
-
-
 7
 
 SPONSORED RESEARCH PROJECTS
@@ -3404,8 +3291,6 @@ Yash Agrawal
 e Co-Pl, Secure and Energy efficient Mixed domain Compute in
 memory-based Al accelerator Chip for Edge applications, Ministry
 of Electronics and Information Technology.
-
-
 
 7
 
@@ -3470,8 +3355,6 @@ date)
 
 e Invited external expert, IQAC, Nirma University (2018-till date)
 
-
-
 Rutu Parikh
 
 e Selection of team from Level II (Proof of Concept) to Level III (Prototype) for
@@ -3488,8 +3371,6 @@ fn Es
 
 —
 
-
-
 iy
 Wiig
 WN
@@ -3499,8 +3380,6 @@ ANG il
 
 \ ii ii Mi gy \
 ! ‘ti i i
-
-
 
 stions lead to
 /ers. Google Pre
@@ -3538,7 +3417,6 @@ DA-IICT continues to be a launchpad for these
 future leaders.
 
 79
-
 
 PPLACEM ENTS AND INTERNSHIPS
 
@@ -3586,8 +3464,6 @@ opportunities to participate in impactful
 initiatives and excel in prestigious national
 and international competitions, students
 pave their way to diverse career paths.
-
-
 
 ‘4
 
@@ -3693,7 +3569,6 @@ LaROnel OU
 
 4
 
-
 4
 
 SOME OF OUR RECRUITERS
@@ -3796,7 +3671,6 @@ Pinjala
 
 4
 
-
 RURAL INTERNSHIPS
 
 As an integral part of the B.Tech. curriculum, the Rural
@@ -3842,26 +3716,14 @@ A total of 376 students participated in internships, with
 Upon completion, students presented their internship
 outcomes, demonstrating significant exposure to real-world
 ICT applications and problem-solving.
-
-
-
-
-
 >) Placement Cell @ DA-IICT
 
 ee Wer —. —— —
 vy os ey 5
-
-
-
-
-
 STUDENT ACTIVITIES &
 ACHIEVEMENTS
 
 87
-
-
 
 \ ~ f
 
@@ -3897,8 +3759,6 @@ individuals who not only thrive academically
 but also emerge as leaders and innovators,
 making meaningful contributions to society
 and beyond.
-
-
 
 CULTURAL COMMITTEE
 
@@ -3941,8 +3801,6 @@ The cultural committee set the stage for a vibrant celebration of Navratri, the 
 filled with energy and devotion, with the much-awaited Garba Nights. Tarang 2023, held on the 20th
 and 21st of October 2023, was an electrifying event designed to reignite our spirits.
 
-
-
 CULTURAL COMMITTEE
 
 Krishna Leela (17th April 2024)
@@ -3983,14 +3841,10 @@ On Bollywood Day, students transformed the campus into a scene from India’s fi
 as popular Bollywood characters and taking part in themed fashion shows and movie-inspired
 activities.
 
-
-
 |
 il
 
 ANDHINAG
-
-
 
 SPORTS COMMITTEE
 
@@ -4020,8 +3874,6 @@ DA-IICT Cricket League (12th February - 14th April 2024)
 The DCL cricket league kicked off with prospective club owners bidding to form teams using
 allocated points. Eight teams emerged from the auction, competing fiercely over two months to
 claim the championship title.
-
-
 
 ANNUAL FESTIVAL COMMITTEE
 
@@ -4068,11 +3920,6 @@ Dancers lit up the stage with incredible skill and energy, leaving the audience 
 breathtaking performances.
 
 i
-
-
-
-
-
 Al Club
 
 This summer initiative allowed students to work hands-on in Al by contributing to open-source
@@ -4096,11 +3943,6 @@ en 1 ‘
 a 7
 
 aM rT aa ——
-
-
-
-
-
 Business Club
 
 =
@@ -4133,8 +3975,6 @@ Footprints on
 
 Printing Business
 
-
-
 Chess Club
 Chess Team Selection Tournament (12th - 14th September 2023)
 
@@ -4156,11 +3996,6 @@ Intra DA-IICT Blitz Chess Tournament (12th April 2024)
 
 This high-intensity Blitz tournament demanded lightning-fast moves and reflexes, pushing
 participants to think quickly and act decisively in a thrilling, fast-paced environment.
-
-
-
-
-
 Press Club Highlights
 
 This year, Entelechy, DA-IICT’s beloved campus magazine, proudly released its 100th edition. To
@@ -4186,8 +4021,6 @@ Shailee at Synapse (23rd & 25th February 2024)
 As part of Synapse, DA-IICT’s annual cultural festival, the Press Club hosted Shailee, a highly
 competitive literary event featuring slam poetry and prompt-based writing. Students showcase their
 skills in a rigorous contest against peers from prestigious universities, including DU and IITs
-
-
 
 Press Club Highlights
 
@@ -4223,7 +4056,6 @@ practical advice to students and young professionals which was also uploaded on 
 
 101
 
-
 DA-IICT Theatres Group
 
 Stage Play and Street Play (27th - 29th October 2023)
@@ -4238,11 +4070,6 @@ At Synapse ‘24, DTG participated in stage play, street play, and mime competit
 remarkable performances that earned 1st place in both street play and mime. Additionally, in stage
 play, Kunj Bhuva was awarded Best Actor, and Archi Jariwala received Best Actress, both recognized
 for their impressive talent.
-
-
-
-
-
 ‘ 1 ; ’ M
 ry b" IN !
 Zone. ‘i
@@ -4260,8 +4087,6 @@ PY) A Bs BL
 
 ARAN aah Vtah |
 
-
-
 “Bigtnl
 4 °
 
@@ -4271,7 +4096,6 @@ Sa Convoc
 EIGHTEENTH CONVOCATION
 
 105
-
 
 The Dhirubhai Ambani Institute of
 Information and Communication
@@ -4293,7 +4117,6 @@ members, staff, students, alumni, and
 esteemed guests.
 
 106
-
 
 ) : : Dhirubhai Ambani
 Institute of Information and communication Technology
@@ -4320,7 +4143,6 @@ inor
 MSc (IT) MSc (DS) M.Des (CD)
 
 4
-
 
 ‘4
 
@@ -4351,8 +4173,6 @@ friends, capturing moments of joy and promise for the future. The Class of 2024 
 members to the DA-IICT alumni network, now a robust community of 7500 professionals from
 diverse sectors worldwide.
 
-
-
 a
 B
 
@@ -4373,8 +4193,6 @@ _ Convocation \
 =
 4
 
-
-
 ey 4YyNOS a!4D
 
 eljeusny &
@@ -4393,7 +4211,6 @@ KeMiOn
 &
 
 JONASAYd INNATV YNO
-
 
 ® daiictofficial ° eon
 
@@ -4432,8 +4249,6 @@ ALUMNI ACTIVITIES
 
 have
 
-
-
 =
 
 Dr. Anil Roy
@@ -4459,8 +4274,6 @@ building meaningful connections and
 opportunities for the future.
 
 112
-
-
 
 ALUMNI ACTIVITIES
 
@@ -4516,12 +4329,6 @@ As part of our commitment to protecting alumni information, the Alumni Office ha
 comprehensive Data Privacy Policy. This policy ensures that all alumni data is handled with the utmost
 security and transparency, providing our graduates the confidence to share their information with
 the Institute. A
-
-
-
-
-
-
 Mr. Siddharth Swaminarayan
 7 Executive Registrar :
 
@@ -4558,8 +4365,6 @@ people who joined us, the development,
 engagement, and _ wellness initiatives,
 summing up our ever-evolving journey
 towards excellence.
-
-
 
 HUMAN RESOURCE AND TRAINING
 
@@ -4618,7 +4423,6 @@ Shah Dashank Hemantbhai joined as Deputy Chief Finance Officer (Accounts) on 18 
 2024
 Akshay S Hansrajani joined as Assistant Manager-Hr on 5 July 2024 A
 
-
 y PROJECT STAFF APPOINTMENTS: %
 
 e Janvi Bhatt joined as Junior Research Fellow on 4 September 2023
@@ -4662,8 +4466,6 @@ workforce.
 
 “MS-Excel Basic training program was held in April 2024.
 
-
-
 Advanced MS Excel proficiency training was held on May 2024.
 
 New Employee Welcome program
@@ -4692,8 +4494,6 @@ Wi
 7
 
 sr
-
-
 
 Faculty Resignations
 
@@ -4731,8 +4531,6 @@ e Anjana Ved, Visiting Doctor, on 30 June 2024
 
 e Prashant Kumar, Library Trainee, on 31 July 2024
 
-
-
 Project Staff Resignation
 
 Purviben Patel, Junior Research Fellow, on 12 August 2023
@@ -4761,18 +4559,13 @@ Sourav Roy, Junior Research Fellow, on 1 July 2024
 
 Dhruvi Sukhadiya, Junior Research Fellow, on 19 July 2024
 
-
 zt EEE
 : As g SY =DAY-23-
 _ sy 'S © F
 
 © edhe Carade An SS
 
-
-
 tion anda Communication
-
-
 
 DA-IICT’s 50-acre campus in
 Gandhinagar, the capital city of Gujarat, is a
@@ -4797,7 +4590,6 @@ resources to support teaching, learning and
 research.
 
 124
-
 
 W ICT INFRASTRUCTURE
 
@@ -4864,7 +4656,6 @@ Turnitin, Grammarly Microsoft Campus Agreement
 To support academic and research activities, the Institute has also acquired approximately 200
 high-end desktops for its labs, along with ten high-performance laptops for faculty and staff.
 
-
 W RESOURCE CENTRE
 
 The Resource Centre is the hub for the library and information services at the Institute. It serves
@@ -4913,7 +4704,6 @@ project internship.
 
 4
 
-
 Total as of 31 July 2024 Total as of 31 July 2024
 (1020 Added During 2023-24) (1163 Added During 2023-24)
 
@@ -4940,8 +4730,6 @@ Total as of 31 July 2024
 4037
 Total as of 31 July 2024
 (0 Added During 2023-24)
-
-
 
 LABORATORY INFRASTRUCTURE
 
@@ -4975,8 +4763,6 @@ aad
 —_—
 
 ‘
-
-
 
 ” campus INFRASTRUCTURE
 
@@ -5025,13 +4811,6 @@ e Energy-efficient AC Units: Old non-functional window AC
 units in faculty and staff offices were replaced with new,
 energy-efficient split AC units’ featuring inverter
 technology.
-
-
-
-
-
-
-
 4
 
 ANNEXURE 1 - Statutory Authorities
@@ -5073,8 +4852,6 @@ Ahmedabad
 
 Shri Siddharth Swaminarayan, Executive Registrar, DA-IICT, Gandhinagar, (ex-officio)
 Non-Member Secretary
-
-
 
 ‘4
 
@@ -5128,8 +4905,6 @@ Member, DA-IICT
 Prof. P.M. Jat, Member
 
 Convenor, UG Programs, DA-IICT (ex-Officio)
-
-
 
 Common Domain External Experts
 
@@ -5235,7 +5010,6 @@ Texas Instruments (India) Pvt. Ltd., Bangalore
 
 4
 
-
 Internal Quality Assurance Cell
 
 Prof. Tathagata Bandyopadhyay
@@ -5321,8 +5095,6 @@ Quinbay Technologies
 Prof. Mukesh Tiwari
 
 Director, IQAC
-
-
 
 INSTITUTE OFFICIALS
 
@@ -5476,7 +5248,6 @@ MSc(DS) Coordinator, (ex-officio)
 MSc(AA) Coordinator, (ex-officio)
 BSI Coordinator, (ex-officio)
 Placement Officer, (ex-officio) 7.
-
 
 INSTITUTE OFFICIALS
 
@@ -5663,7 +5434,6 @@ Dean (Faculty), (ex-officio)
 
 Director IQAC : Prof. Anil K. Roy
 
-
 W ANNEXURE 2 - Thesis Dissertations
 
 THESIS, DISSERTATIONS AND PROJECT REPORTS
@@ -5814,7 +5584,6 @@ Vatsal Rakeshbhai, Test Case
 Generation using CEGs; xi, 104 p.; 2024.
 (Supervisor: Jay Prakash Lalchandani)
 
-
 THESIS, DISSERTATIONS AND PROJECTREPORTS
 M.Tech.Dissertations
 
@@ -5901,8 +5670,6 @@ Website About The Narikuravar Community;
 53 p.; 2024. (Supervisor: Madhumitha
 Mazumdar)
 
-
-
 W ANNEXURE 3 - Faculty Members
 
 FACULTY WITH AREAS OF INTEREST
@@ -5939,8 +5706,6 @@ Chennai Mathematical Institute
 Bhilare, Shruti Biometrics, Pattern Recognition,
 PhD (Computer Science and Engineering), | Image Processing
 IIT Indore
-
-
 
 ‘4
 
@@ -6000,8 +5765,6 @@ Legal and Social History
 Adaptive Signal Processing,
 Compressive Sensing, Image
 Processing
-
-
 
 4
 
@@ -6077,8 +5840,6 @@ Studies, Feminist Theory, Film
 Studies, Literary and Visual Cultures
 in South Asia
 
-
-
 ‘4
 
 FACULTY WITH AREAS OF INTEREST
@@ -6150,7 +5911,6 @@ Networks, 5G New Radio,
 Optimization Techniques.
 
 4
-
 
 ‘4
 
@@ -6231,7 +5991,6 @@ Computing
 
 4
 
-
 ‘4
 
 FACULTY WITH AREAS OF INTEREST
@@ -6309,7 +6068,6 @@ Optimization
 
 4
 
-
 ‘4
 
 FACULTY WITH AREAS OF INTEREST
@@ -6384,7 +6142,6 @@ Logic in Computer Science
 Astrophysics and Nonlinear Systems
 
 4
-
 
 FACULTY WITH AREAS OF INTEREST
 
@@ -6464,7 +6221,6 @@ Science, Interconnection Networks
 
 4
 
-
 4
 
 FACULTY WITH AREAS OF INTEREST
@@ -6516,8 +6272,6 @@ Information Theory and Coding
 Theory, Machine Learning and Al,
 Cognitive Communications, LTE and
 4G/5G, MIMO Channels
-
-
 
 ‘4
 
@@ -6586,7 +6340,6 @@ Slicing UML Models, Software
 Engineering
 
 4
-
 
 4
 
@@ -6661,7 +6414,6 @@ Colonialism
 
 with specific reference to
 
-
 4
 
 FACULTY WITH AREAS OF INTEREST
@@ -6680,8 +6432,6 @@ Areas of Interest
 Cloud Computing, loT, Software
 Architecture, Design and Engineering,
 Enterprise Software Systems.
-
-
 
 W ANNEXURE 4 - Staff Updates
 ——— ns)
@@ -6817,7 +6567,6 @@ Hostels
 Jitendra Parmar, Senior Hostel Supervisor
 Sawankumar Sachaniya, Hostel Supervisor
 
-
 OFFICERS AND STAFF
 
 Alumnai Affairs
@@ -6867,8 +6616,6 @@ Hemant Patil]
 
 PDJRT wef 19 September 2022
 [Supervisor: Tapas Kumar Maiti]
-
-
 
 W ANNEXURE 5 - Lab Equipment Details
 
@@ -6924,8 +6671,6 @@ Studio master UHF wireless system -
 model : XR-1004H On Set
 
 Audio amplifier One
-
-
 
 W ANNEXURE 6 - Annual Accounts
 
@@ -6991,7 +6736,6 @@ The. Management is responsible for overseeing DAU's financial reporting process.
 
 MUMBAI ¢ BENGALURU « KANPUR * SAVARKUNDLA
 
-
 V
 
 SORAB S. ENGINEER & CO. (Regd.)
@@ -7053,8 +6797,6 @@ __the planned scope and timing of the audit and significant audit findings, incl
 
 significant deficiencies in internal control that we identify during our audit.
 
-
-
 4
 
 SORAB S. ENGINEER & CO. (Regd.)
@@ -7096,7 +6838,6 @@ UDIN:24100892BJZXWL4710 @ VA
 
 Ahmedabad
 September 28, 2024
-
 
 DHIRUBHAI AMBANI UNIVERSITY
 (Formerly known as Dhirubhai Ambani Institute of Information and Communication Technology)
@@ -7153,8 +6894,6 @@ Add: Surplus for the year 85,672,641
 Less: Transfer to Corpus/Capital Fund -
 Total
 
-
-
 Current Liabilities & Provisions
 A. Current Liabilities
 Payable to Students 67,493 86,200
@@ -7207,8 +6946,6 @@ Cash on Hand 103,480 132,708
 Bank Balances
 
 In Savings Bank Account 22,620,263 7,023,405
-
-
 
 DHIRUBHAI AMBANI UNIVERSITY
 
@@ -7337,8 +7074,6 @@ Amount in Rs.
 
 252,132,578 | 229,270,472
 
-
-
 DHIRUBHAI AMBANI UNIVERSITY
 (Formerly known as Dhirubhai Ambani Institute of Information and Communication Technology)
 Schedule attached to and forming part of Accounts
@@ -7401,8 +7136,6 @@ Utilities
 Electricity, Gas and Water Charges 21,470,378 19,828,000
 
 Total _—— ee 470,378 19 ——
-
-
 
 DHIRUBHAI AMBANI UNIVERSITY
 (Formerly known as Dhirubhai Ambani Institute of Information and Communication Technology)
@@ -7481,8 +7214,6 @@ Prior Period Expense
 7,881,750
 1,331,353
 
-
-
 DHIRUBHAI AMBANI UNIVERSITY
 (Formerly known as Dhirubhai Ambani Institute of Information and Communication Technology)
 
@@ -7510,8 +7241,6 @@ NO gS 8D SS AOE GFE BE S62 OF 278 45,738,120 128,663,808 110,570, 36
 (v) Intangible Assets under develooment
 Patent ID (VSP-202321065768)
 Patent ID (VSP-202321067926)
-
-
 
 DHIRUBHAI AMBANI UNIVERSITY
 (Formerly known as Dhirubhai Ambani Institute of Information and Communication Technology)
@@ -7563,8 +7292,6 @@ Date : September 28, 2024
 Place ; Gandhinagar
 Date : September 28, 2024
 
-
-
 DHIRUBHAI AMBANI UNIVERSITY
 (Formerly known as Dhirubhai Ambani Institute of Information and Communication Technology)
 Income and Expenditure Account for the year ended March 31,2024
@@ -7614,8 +7341,6 @@ Date : September 28, 2024
 
 Place : Gandhinagar
 Date : September 28, 2024
-
-
 
 A
 4
@@ -7714,8 +7439,6 @@ Caoital commitments (Wet of Advance)
 S In the opinion of management, all the Assets other than Forced Assats and fon-Current Investments are approximately of the value stated if realised in the ordinary course of business.
 
 6 Previous year's figures have been reyrouped / restated where necessary, to confirm to the presentetun of current period's financial statements,
-
-
 
 Dhirubhai Ambani
 Institute of Information and Communication Technology

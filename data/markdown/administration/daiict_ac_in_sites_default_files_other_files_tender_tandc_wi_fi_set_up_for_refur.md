@@ -2,10 +2,20 @@
 title: "tenders"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender_TandC_Wi-Fi_Set-up_for_Refurbishing_of_CEP_Classrooms_220526.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "tenders"
 ---
+
+# tenders
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Page 1 of 7 
  
@@ -318,10 +328,6 @@ types of work
  
  
 Please submit proofs wherever applicable 
- 
- 
- 
------------------------------------------- 
 Signature of Contractor                                                                                 Date: 
 (with official seal of firm) 
  

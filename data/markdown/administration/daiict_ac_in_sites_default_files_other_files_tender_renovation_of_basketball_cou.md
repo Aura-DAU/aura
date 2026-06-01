@@ -2,26 +2,30 @@
 title: "Tenders/EE2526005 pdf"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender-Renovation-of-Basketball-Courts_TandC_07-08-25.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Tenders/EE2526005 pdf"
 ---
+
+# Tenders/EE2526005 pdf
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
 TENDER 
  
 Renovation of Basketball Courts – 02 Nos., DAU, Gandhinagar 
  
  
 Tender No: EE2526005 
- 
- 
- 
 DAU Contact Person: Mr. Rajesh Patel, Sr. Estate Engineer, 
  
 estate_engineer@daiict.ac.in, (M) +91 93287 21608 (Phone: 079-68261622), 
@@ -37,9 +41,6 @@ Annexure 3 : Technical & Financial Bid
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
 Annexure - 1 
  
 Bid Terms & Conditions: 
@@ -260,10 +261,6 @@ so notified.
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
- 
 Annexure-2 
  
 1. Primary Information of Bidder Firm: 
@@ -314,10 +311,6 @@ types of work
  
  
 Please submit proofs wherever applicable 
- 
- 
- 
------------------------------------------- 
 Signature of Contractor                                                                                 Date: 
 (with official seal of firm) 
  
@@ -333,12 +326,6 @@ their decision shall be final, governing and binding to contractor.
 _______________________________________________________________________________________ 
 DA-IICT Road, Gandhinagar, Gujarat, India 382007 
 T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
- 
- 
- 
- 
 Basic Specification Information - 2 Basketball Courts 
  
 Sr.No 
@@ -370,10 +357,6 @@ Basketball Acrylic board frame
 Dunking ring. 
 Nylon net. 
 2 pair 
- 
- 
- 
-- 
 Basketball Court Markings Standard: As per FIBA (International Basketball Federation) norms.  
 - 
 Paint Type: Synthetic acrylic paint 

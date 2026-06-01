@@ -2,10 +2,20 @@
 title: "hall of residence"
 url: "https://daiict.ac.in/sites/default/files/other-files/Hostel-Rules-and-Regulations.pdf"
 category: "student_services"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "hall of residence"
 ---
+
+# hall of residence
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Dhirubhai Ambani
 Institute of Information and Communication Technology

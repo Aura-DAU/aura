@@ -2,10 +2,20 @@
 title: "Policies/Seed Grant Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Seed-grant-policy_2025.pdf"
 category: "research"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Seed Grant Policy"
 ---
+
+# Policies/Seed Grant Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 pr
 
@@ -61,8 +71,6 @@ of the proposal as applicable. If the proposal is approved, the Dean(R&D) will c
 
 Page 1 of 3
 
-
-
 Progress Committee (RPC), comprising internal and external experts in the area of the proposal, which
 will evaluate the progress of the work once in six months.
 
@@ -95,7 +103,6 @@ Date: 11 September 2025 G Venkatesh
 Page 2 of 3
 
 . “a —
-
 
 Annexure 1: Format for Seed Grant for the Category-A Proposal
 1. Name of the Investigator

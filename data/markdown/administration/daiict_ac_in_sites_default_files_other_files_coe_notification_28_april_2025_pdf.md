@@ -2,10 +2,20 @@
 title: "CoE certificate (April 2025)"
 url: "https://daiict.ac.in/sites/default/files/other-files/COE_Notification_28-April-2025.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "CoE certificate (April 2025)"
 ---
+
+# CoE certificate (April 2025)
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Gujarat
 Professional
@@ -84,7 +94,6 @@ Changa
 10, Pandit Deendayal Energy University, Gandhinagar
 . . )
 
-
 (1)
 
 (2)
@@ -139,7 +148,6 @@ Management Admission Pest (CMAT) / National Aptitude Test in
 
 Architecture (NATA) or others as applicable, for admitting
 
-
 the students into respective professional courses. The admission on
 the 25% Government seats shall be made in accordance with
 the provisions of the said Act.
@@ -186,7 +194,6 @@ To
 2. Chief Principal Secretary to the Hon’ ble Chief Minister,
 3. Personal Secretary to Hon ble Education Minister (Higher and
 Technical lducation)
-
 
 8.
 

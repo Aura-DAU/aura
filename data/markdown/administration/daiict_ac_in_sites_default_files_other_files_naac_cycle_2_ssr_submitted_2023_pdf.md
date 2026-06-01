@@ -2,10 +2,20 @@
 title: "NAAC / NAAC Cycle 2"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/NAAC_Cycle-2_SSR_Submitted_2023.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "NAAC / NAAC Cycle 2"
 ---
+
+# NAAC / NAAC Cycle 2
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Self Study Report of DHIRUBHAI AMBANI INSTITUTE OF INFORMATION AND COMMUNICATION
 TECHNOLOGY (DA-IICT)
@@ -2599,7 +2609,6 @@ developed
 View Document
 Any additional information
 View Document
-    
 Page 50/107
 17-05-2023 03:57:32
 

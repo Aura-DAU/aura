@@ -2,10 +2,20 @@
 title: "Placement / Placement Cell / PLACEMENT BROCHURE 2025-26"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Placement-Brochure_2025-26.pdf"
 category: "placements"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Placement / Placement Cell / PLACEMENT BROCHURE 2025-26"
 ---
+
+# Placement / Placement Cell / PLACEMENT BROCHURE 2025-26
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 PLACEMENT 
 BROCHURE
@@ -215,7 +225,6 @@ sensitive administration, functioning within an atmosphere of innovative researc
 emphasizing academic cooperation and global collaboration. To nurture graduates to be
 civically engaged individuals, who recognize their responsibility and role in their communities
 and the world.
-     
 To help build a knowledge-led society founded on intellectual competitiveness for global
 leadership.
 Mission 

@@ -2,18 +2,25 @@
 title: "Policies/Vision, Mission and Strategic Plan"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/6.1.1_Vision-Mission-Strategic-Plan.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Vision, Mission and Strategic Plan"
 ---
+
+# Policies/Vision, Mission and Strategic Plan
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 VISION, 
 MISSION AND 
 STRATEGIC 
 PLAN 
- 
- 
- 
  AUGUST 2, 2022 
 DHIRUBHAI AMABANI INSTITUTE OF INFORMATION AND COMMUNICATION TECHNOLOGY 
 Gandhinagar
@@ -1416,9 +1423,6 @@ Visit/Exchange with both national and foreign universities of repute.
 33 
 7.0  
 GROWTH IN INFRASTRUCTURE 
- 
- 
- 
 DAIICT wants to continue its excellence in interdisciplinary & multi-
 disciplinary teaching and cutting edge research. The institute 
 aspires to become a locally and globally recognized institute by i) 
@@ -1585,11 +1589,6 @@ Year
 2025-26 
 1.  Infrastructure (Rs. Crores) 
 Proposed additional investment 
- 
- 
- 
- 
- 
 a) Academic Buildings  
 i) New Academic/Faculty 
 Block 
@@ -1599,66 +1598,24 @@ ii) Academic Administration
 Building Extension  
 Built-up area: 120 sq. 
 Meters (G+1)  
- 
- 
- 
- 
- 
- 
- 
- 
 b) New Hostel building (G+3) for 
 Boys 
- 
- 
- 
- 
- 
 c) Extension of one floor in new 
 hostel 
 Built-up area: 2118.98 sq. 
 meter  
- 
- 
- 
- 
- 
 d) Upgradation of ICT and existing 
 laboratories 
- 
- 
- 
- 
- 
- 
 e) Setting up of new laboratories 
- 
- 
- 
- 
- 
- 
 f)  New Classrooms capacity:  
 g)  280 students = 3 class rooms  
 h) 120 students = 7 class rooms 
  
 Provision: G+3 
 Phase 1 : G+1  
- 
- 
- 
- 
- 
- 
 i) Extension of RC (Library) 
 Reading Hall  
 Built-up area: 600 Sq. Mt (G+1)  
- 
- 
- 
- 
- 
- 
 Total Investment  
 (Amount in Crores) 
  
@@ -1696,41 +1653,22 @@ with specialization
 in data Science 
 (CS-DS) or 
 equivalent  
- 
- 
- 
 350 
  
 50 
- 
- 
- 
- 
- 
 460 
  
 60 
- 
- 
- 
- 
- 
 460 
  
 60 
  
 120 
- 
- 
- 
 460 
  
 60 
  
 120 
- 
- 
- 
 460x4 =1840 
  
 60x4    = 240 
@@ -1783,10 +1721,6 @@ Academic Year 2022-23
 40x5   =  200 
  
 30x2 =    60 
- 
- 
- 
- 
 Total 
 3460 
 3.  Scholarship & Financial Aid 
@@ -1849,11 +1783,6 @@ granted (nos.)
 87.00 
 100.00 
 c) Patents / IP (nos.) 
- 
- 
- 
- 
- 
 d) Consultancy  
 (Amount in Lakh) 
 68.90  

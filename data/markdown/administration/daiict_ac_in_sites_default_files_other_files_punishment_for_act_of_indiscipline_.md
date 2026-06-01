@@ -2,10 +2,20 @@
 title: "Students / DAC/ Act of indiscipline and indicative list of punishment"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Punishment-for-act-of-indiscipline_2024.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Students / DAC/ Act of indiscipline and indicative list of punishment"
 ---
+
+# Students / DAC/ Act of indiscipline and indicative list of punishment
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Disciplinary Action Committee (DAC): Act of indiscipline and indicative list of punishment    
 This has reference to: 
@@ -26,10 +36,6 @@ Category
 Punishment 
 1 
 Ragging. 
- 
- 
- 
- 
 Disciplinary probation: until graduation 
 Minimum Punishment: Academic 
 suspension for one Semester   
@@ -112,10 +118,6 @@ misuse of DAIICT computers or computer
 network (like bypassing firewall / security 
 system of the internet in an unauthorized 
 manner Sending offensive email, etc. 
- 
- 
- 
- 
 Disciplinary probation: until graduation 
 Minimum Punishment: Recovery of cost 
 and financial penalty and academic 
@@ -128,11 +130,6 @@ DAIICT
 Disruption or obstruction of teaching, 
 research, administration, or other DA-IICT 
 activities. 
- 
- 
- 
- 
- 
 Disciplinary probation: until graduation 
 Minimum Punishment: Academic 
 suspension for one Semester   

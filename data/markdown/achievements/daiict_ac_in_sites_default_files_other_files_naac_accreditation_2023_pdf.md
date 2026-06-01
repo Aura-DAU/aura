@@ -2,10 +2,20 @@
 title: "NAAC Credition Certificate"
 url: "https://daiict.ac.in/sites/default/files/other-files/NAAC_Accreditation_2023.pdf"
 category: "achievements"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "NAAC Credition Certificate"
 ---
+
+# NAAC Credition Certificate
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 fagatencta S4et Sart pr Marra Fe
 NATIONAL ASSESSMENT AND ACCREDITATION COUNCIL

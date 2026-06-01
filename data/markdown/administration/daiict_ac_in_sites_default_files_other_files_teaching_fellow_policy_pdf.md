@@ -2,10 +2,20 @@
 title: "Policies/Teaching Fellow Policy"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Teaching-Fellow-Policy.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "Policies/Teaching Fellow Policy"
 ---
+
+# Policies/Teaching Fellow Policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 > pb pr
 
@@ -49,7 +59,6 @@ from the monthly stipend will be reserved separately which will be refunded upon
 completion of the semester.
 
 DA-IICT Road, Gandhinagar 382 007, Gujarat, (India)
-
 
 Role Summary: Teaching Fellows (TF) will actively contribute to the teaching-learning process in
 
@@ -101,7 +110,6 @@ Relevant domain knowledge and technical skills as mentioned in the advertisement
 Proficiency in English with excellent written and verbal communication abilities.
 
 Enthusiastic, eager to learn, and approachable with a student-friendly attitude.
-
 
 How to Apply
 
@@ -155,7 +163,6 @@ Some TFs may be assigned the role of a head TF (in consultation with the Instruc
 prospective TF).
 
 Post Graduate Committee allocates TF for the courses.
-
 
 TFs allocation list is announced to all faculty and students. The approved list of TFs in the
 

@@ -2,10 +2,20 @@
 title: "student leave policy"
 url: "https://daiict.ac.in/sites/default/files/other-files/Student_Leave_Policy_wef_AY2021-22.pdf"
 category: "student_services"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "student leave policy"
 ---
+
+# student leave policy
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 Student Leave Policy 
  
@@ -37,8 +47,5 @@ the missing component to the student only after approval of the leave applicatio
 or schedule for re-examination/assessment will be communicated to the student by 
 Controller of Examinations or faculty concerned, as appropriate. If a student misses re-
 examination/assessment, then there will not be any further adjustment.   
- 
- 
- 
 With Effect from AY 2021-22 
 DA-IICT, Gandhinagar

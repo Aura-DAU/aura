@@ -2,57 +2,28 @@
 title: "DAIICT ACT"
 url: "https://daiict.ac.in/sites/default/files/other-files/DAIICT_Act-2003.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "DAIICT ACT"
 ---
 
+# DAIICT ACT
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
+
 GOVERNMENT OF GUJARAT 
- 
- 
- 
- 
- 
- 
- 
 LEGISLATIVE AND PARLIAMENTARY AFFAIRS DEPARTMENT 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 GUJARAT ACT NO. 6 OF 2003 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 THE DHIRUBHAI AMBANI INSTITUTE 
 OF INFORMATION AND 
 COMMUNICATION TECHNOLOGY ACT, 
 2003. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 [As modified upto 31st May, 2012]
 
 [2003 : Guj. 6         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
@@ -65,32 +36,14 @@ CONTENTS.
 PREAMBLE. 
  
 Sections.  
- 
- 
- 
- 
- 
- 
- 
    Page No. 
  
 1. 
 Short title and commencement. 
- 
- 
- 
- 
 1 
   
 2. 
 Definitions. 
- 
- 
- 
- 
- 
- 
- 
 2 
  
 3. 
@@ -101,11 +54,6 @@ Establishment and incorporation of University.
  
 4. 
 Objects of the Institute. 
- 
- 
- 
- 
- 
 4 
  
 5. 
@@ -116,66 +64,30 @@ creed or opinion.
  
 6. 
 Powers and functions of the Institute.  
- 
- 
- 
 5 
  
 7. 
 President. 
- 
- 
- 
- 
- 
- 
- 
 9 
   
 8. 
 Authorities of Institute. 
- 
- 
- 
- 
- 
 9 
  
 9. 
 Officers of Institute. 
- 
- 
- 
- 
- 
- 
 9 
  
 10. 
 Board of Governors. 
- 
- 
- 
- 
- 
- 
 9 
  
 11. 
 Chairman of the Board. 
- 
- 
- 
- 
- 
 10 
  
 12. 
 Powers and functions of the Board. 
- 
- 
- 
- 
 10 
  
 13. 
@@ -184,29 +96,14 @@ Terms of office and vacancies among members of the Board.
  
 14. 
 Academic Council. 
- 
- 
- 
- 
- 
- 
 12 
  
 15. 
 Powers and functions of Academic Council. 
- 
- 
- 
 12 
  
 16. 
 Finance Committee. 
- 
- 
- 
- 
- 
- 
 13 
  
 17. 
@@ -217,43 +114,19 @@ Powers and functions of Finance Committee.
  
 18. 
 Director. 
- 
- 
- 
- 
- 
- 
- 
 14 
  
 19. 
 Powers and duties of the Director. 
- 
- 
- 
- 
 15 
  
  
 20. 
 Executive Registrar. 
- 
- 
- 
- 
- 
- 
 16 
  
 21. 
 The Deans. 
- 
- 
- 
- 
- 
- 
- 
 17 
  
 22. 
@@ -265,40 +138,18 @@ Permanent Endowment Fund of the Institute.
  
 23. 
 Payment to Institute. 
- 
- 
- 
- 
- 
- 
 18 
  
 24. 
 Funds of Institute. 
- 
- 
- 
- 
- 
- 
 18 
  
 25. 
 Accounts and audit 
- 
- 
- 
- 
- 
- 
 18 
  
 26. 
 Pension and Provident Funds.  
- 
- 
- 
- 
 19 
  
 27. 
@@ -307,19 +158,7 @@ Acts and proceedings not to be invalidated by vacancies.
 20
 
 2003 : Guj. 6]         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
- 
- 
- 
- 
- 
 Sections.  
- 
- 
- 
- 
- 
- 
- 
      Page No. 
  
 28. 
@@ -330,11 +169,6 @@ by the Institute.
  
 29. 
 Returns and Information. 
- 
- 
- 
- 
- 
 20 
  
 30. 
@@ -344,21 +178,10 @@ Management of the Institute on dissolution of the Trust.
  
 31. 
 Powers of the State Government. 
- 
- 
- 
- 
 20 
  
 32. 
 Regulations. 
- 
- 
- 
- 
- 
- 
- 
 21 
  
 33. 
@@ -369,22 +192,10 @@ Removal of difficulties at the commencement.
  
 34. 
 Transitory Provisions.  
- 
- 
- 
- 
- 
 23 
  
 35. 
 Indemnity. 
- 
- 
- 
- 
- 
- 
- 
 24
 
 [2003 : Guj. 6         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
@@ -463,11 +274,6 @@ XXI of 1860.
 Bom. 29 of 1950.
 
 2003 : Guj. 6]         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
- 
- 
- 
- 
- 
 3. 
 (1) There shall be established a University by the name of 'The Dhirubhai 
 Ambani Institute of 
@@ -618,11 +424,6 @@ functions of the
 Institute.
 
 2003 : Guj. 6]         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
- 
- 
- 
- 
- 
 (xiii) to regulate the expenditure and to manage the finances and to maintain 
 accounts of the Institute; 
  
@@ -764,12 +565,6 @@ Board of
 Governors.
 
 2003 : Guj. 6]         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
- 
- 
- 
- 
- 
- 
 (v) Secretary to Government, Science and Technology Department, 
 Government of Gujarat ; 
  
@@ -921,10 +716,6 @@ Academic Council.
 Finance Committee.
 
 2003 : Guj. 6]         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
- 
- 
- 
- 
 (iii) one Dean of the Institute by rotation to be nominated by the 
 Director; 
  
@@ -1070,10 +861,6 @@ Executive
 Registrar.
 
 2003 : Guj. 6]         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
- 
- 
- 
- 
 (iv) he shall, subject to the control of the Director, be responsible for 
 the administration and services of the Institute and conduct the 
 examinations and make all other arrangements necessary therefor and 
@@ -1208,10 +995,6 @@ in regular courses of the Institute complete their courses. The expenditure for
 administration of the Institute during taken-over period of its management shall be 
 met out of the Permanent Endowment Fund of the Institute. On dissolution of the 
 Trust, this fund shall be in the form of a corpus fund. 
- 
- 
- 
- 
 31. The State Government shall have powers to issue directions from time to time as 
 may be required to be followed by the Institute under the provisions of this Act, the 
 Regulations made thereunder and under any other law for the time being inforce. 
@@ -1239,10 +1022,6 @@ Powers of the State
 Government.
 
 2003 : Guj. 6]         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
- 
- 
- 
- 
 32. 
 (1) Subject to the provisions of this Act, the Board shall have, in addition to 
 all other powers vested in it, the power to make Regulations to provide for the 
@@ -1384,10 +1163,6 @@ Transitory
 provisions.
 
 2003 : Guj. 6]         Dhirubhai Ambani Institute of Information and Communication Technology Act, 2004 
- 
- 
- 
- 
 Finance Committee holding office before such constitution shall cease to hold 
 office; 
  
@@ -1402,23 +1177,6 @@ the provisions of this Act.
 shall be claimed from the Institute, the Director, the authorities or officers of the 
 Institute or any other person in respect of anything which is done in good faith or 
 purporting to be done in pursuance of this Act or any Regulation made thereunder. 
- 
- 
- 
- 
- 
- 
-------------------- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-                              
 1 For Statement of objects and reasons see Gujarat Government Gazette, Extraordinary, Part V, 
 dated the 21st February, 2003, Pages 5-25 and 26. 
  This Act was assented to by the Governor on the 6th March, 2003. 

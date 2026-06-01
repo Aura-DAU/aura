@@ -2,10 +2,20 @@
 title: "NAAC / NAAC Cycle 1/ Evaluation Report"
 url: "https://www.daiict.ac.in/sites/default/files/NAAC-Evaluative-Report.pdf"
 category: "administration"
-scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
-team: "Knowledge Base Pipeline"
+team: "Team E"
+source_type: PDF
+pdf_name: "NAAC / NAAC Cycle 1/ Evaluation Report"
 ---
+
+# NAAC / NAAC Cycle 1/ Evaluation Report
+
+## Overview
+
+This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+
+## Main Content
 
 asa et NAAC Evaluative Report 2015
 
@@ -32,12 +42,6 @@ Dhirubhai Ambani Institute of Information and Communication Technology Dhirubhai
 Near Indroda Circle, Gandhinagar 382 007, Gujarat (India) Near Indroda Circle, Gandhinagar 382 007, Gujarat (India)
 Telelephone: (+91) 079-3052-0000 Fax: (+91) 079-3052-0010 A Telelephone: (+91) 079-3052-0000 Fax: (+91) 079-3052-0010
 www.daiict.ac.in www.daiict.ac.in
-
-
-
-
-
-
 NAAC Evaluative Report - 2015 
  
  
@@ -230,9 +234,6 @@ TOTAL
 180
 
 NAAC Evaluative Report - 2015 
- 
- 
- 
                                       6 
  
  
@@ -297,8 +298,6 @@ Communication
 Design and 
 Multimedia 
 27 
-- 
-- 
 4 
 B N Hiremath 
 PhD (Agricultural 
@@ -387,9 +386,6 @@ system.
 -
 
 NAAC Evaluative Report - 2015 
- 
- 
- 
                                       7 
  
  
@@ -495,8 +491,6 @@ Mathematics and
 Logic, Modern 
 Fourier Theory 
 47 
-- 
-- 
 14 
 Aditi Nath 
 Sarkar 
@@ -549,9 +543,6 @@ architecture and
 16
 
 NAAC Evaluative Report - 2015 
- 
- 
- 
                                       8 
  
  
@@ -709,13 +700,7 @@ PhD (Special Education),
 Associate 
 Communication, 
 11 
-- 
--
-
 NAAC Evaluative Report - 2015 
- 
- 
- 
                                       9 
  
  
@@ -851,8 +836,6 @@ Victorian
 literature indian 
 poetry in English 
 11 
-- 
-- 
 31 
 Bharani 
 Kollipara 
@@ -863,13 +846,7 @@ Professor
 Literature and 
 Philosophy, 
 10 
-- 
--
-
 NAAC Evaluative Report - 2015 
- 
- 
- 
                                       10 
  
  
@@ -926,8 +903,6 @@ Assistant
 Professor 
 Sports 
 37 
-- 
-- 
 34 
 Gagan Garg 
 PhD (Computer Science), 
@@ -939,8 +914,6 @@ theory,
 cryptography, 
 number theory 
 4 
-- 
-- 
 35 
 Ganesh Bagler 
 PhD (Computational 
@@ -974,8 +947,6 @@ Image
 Processing, 
 Particle Physics 
 17 
-- 
-- 
 37 
 Jaideep 
 Mulherkar 
@@ -991,8 +962,6 @@ Quantum
 Computation and 
 Information 
 15 
-- 
-- 
 38 
 Laxminarayana 
 Pillutla 
@@ -1044,9 +1013,6 @@ Distributed
 10
 
 NAAC Evaluative Report - 2015 
- 
- 
- 
                                       11 
  
  
@@ -1086,8 +1052,6 @@ Quantum
 Transport, 
 Surface Science 
 6 
-- 
-- 
 42 
 Nabin Kumar 
 Sahu 
@@ -1105,8 +1069,6 @@ Variational
 Inclusion 
 Problems 
 1 
-- 
-- 
 43 
 Prasenjit 
 Majumder 
@@ -1134,8 +1096,6 @@ Formal Methods
 used for Testing 
 and Verification 
 5 
-- 
-- 
 45 
 Purushothaman 
 A 
@@ -1204,9 +1164,6 @@ Engineering,
 Evidence-based 
 Software 
 Engineering 
-- 
-- 
-- 
 49 
 Shweta Garg 
 PhD (English), IIT 
@@ -1216,13 +1173,7 @@ Professor
 Food & Cultural 
 Studies, 
 5 
-- 
--
-
 NAAC Evaluative Report - 2015 
- 
- 
- 
                                       12 
  
  
@@ -1360,9 +1311,6 @@ Video and Photography
 5
 
 NAAC Evaluative Report - 2015 
- 
- 
- 
                                       13 
  
  
@@ -1465,10 +1413,6 @@ NAAC Evaluative Report - 2015 
 Dhirubhai Ambani  
 Institute of Information and Communication Technology 
 PhD Teaching Assistants 
- 
- 
- 
- 
 Sr No 
 Name 
 Guide 
@@ -2632,9 +2576,6 @@ Girja Sharan
 2014 
 90,000/- 
 27,000/- 
- 
- 
- 
 13,46,940 
 Sr.No 
 Faculty 
@@ -3145,14 +3086,6 @@ M.Des (CD)
  
 *M.Tech and M.Des curriculum requires students to do their research/project on 
 campus. 
- 
- 
- 
- 
- 
- 
- 
- 
 Programme Name 
 %age of students who have done in-house projects 
 B.Tech (ICT) 
@@ -4569,12 +4502,6 @@ Information Security Consultant
  
 Nadkumar Saravade 
 Independent Security Consultant 
- 
- 
- 
- 
- 
- 
 Nina Godbole 
 Independent Consultant 
  
@@ -4974,8 +4901,6 @@ M Sc (ICT-ARD)
 M Des (CD) 
 100 
 100 
-- 
-- 
 100 
 100 
 100 
@@ -4985,11 +4910,7 @@ PhD
 - 
 100 
 100 
-- 
-- 
 100 
-- 
- 
 *Graduating students of UG 2007 (and backlog 2006, 2005). PG 2009 and 2008 
 #Graduating students of UG 2008 (and backlog 2007, 2006). PG 2010 and 2009 
 $Graduating students of UG 2009 (and backlog 2008, 2007). PG 2011 and 2010 
@@ -6035,9 +5956,6 @@ Lab
 Intel Pentium IV 2.00Ghz 
 / 1GB RAM / 40GB HDD 
 26 
- 
- 
- 
 Intel Core i5 3rd Generation 
 processor 3470 @3.20GHz / 
 4GB RAM / 500GB HDD 
@@ -6067,9 +5985,6 @@ Lab
 Intel Core2Duo 3.00Ghz 
 / 1GBRAM /160GBHDD 
 4 
- 
- 
- 
 Intel dual core 1.60Ghz / 1GB 
 RAM / 80 GB HDD 
 28 
@@ -6286,16 +6201,10 @@ Lab
 Intel P-4 3.00GHz / 2GB RAM 
 / 80 GB HDD 
 28 
- 
- 
- 
 Intel Core i5 3rd Generation 
 processor 3470 @3.20GHz / 
 4GB RAM / 500GB HDD 
 1 
- 
- 
- 
 HP workstation HP XW6600 / 
 Xeon E5205 1.86Ghz / 8GB 
 RAM / 250GB HDD 
@@ -6308,27 +6217,15 @@ Lab
 Intel Core2Duo 3.0Ghz / 
 160GB HDD / 4GB RAM 
 3 
- 
- 
- 
 Intel Core2Duo 1.86GHz / 
 160GB HDD / 1.5GB RAM 
 3 
- 
- 
- 
 Intel P-IV 2Ghz / 40GB HDD / 
 512MB RAM 
 1 
- 
- 
- 
 Intel P-IV 1.7Ghz / 1GB RAM 
 / 40GB HDD 
 1 
- 
- 
- 
 Intel P-IV 1.8Ghz / 1GB RAM 
 / 40GB HDD 
 1 
@@ -6368,45 +6265,24 @@ Room
 Configuration 
 No. of 
 Computers 
- 
- 
- 
 P-IV 1.80Ghz/ 786MB RAM / 
 40GB HDD 
 1 
- 
- 
- 
 P-IV 1.70Ghz / 1GB RAM / 
 80GB HDD 
 2 
- 
- 
- 
 p-IV 2.60Ghz / 512MB RAM / 
 80GB HDD 
 1 
- 
- 
- 
 P-IV 1.80Ghz / 1GB RAM / 
 40GB HDD 
 1 
- 
- 
- 
 P-IV 1.80Ghz / 1GB RAM / 
 80GB HDD 
 2 
- 
- 
- 
 P-IV 2.0Ghz / 1.5GB HDD / 
 80GB HDD 
 1 
- 
- 
- 
 Intel core2Duo 1.86Ghz / 1GB 
 RAM / 160GB HDD 
 1 
@@ -7201,83 +7077,61 @@ Institute of Info
 Nam
 Yea
 Cur
-     
-Nam
-Yea
-Cur
-     
-Nam
-Yea
-Cur
-     
-     
-Nam
-Yea
-Cur
-     
-Nam
-Yea
-Cur
-     
-Nam
-Yea
-Cur
-     
-     
 Nam
 Yea
 Cur
 Nam
 Yea
 Cur
-     
-     
+Nam
+Yea
+Cur
+Nam
+Yea
+Cur
+Nam
+Yea
+Cur
+Nam
+Yea
+Cur
+Nam
+Yea
+Cur
 Nam
 Yea
 Cur
 Report - 2015
-                      
 bani  
 ormation and C
 me :  Ms. A
 ar of Gradu
 rrent Positio
-                  
 me :Mr. Ra
 ar of Gradu
 rrent Positio
-                  
 me : Mr. Pa
 ar of Gradu
 rrent Positio
-                  
-                  
 me : Mr. Si
 ar of Gradu
 rrent Positio
-                  
 me : Mr. Am
 ar of Gradu
 rrent Positio
-                  
 me :Mr. Ra
 ar of Gradu
 rrent Positio
-                  
-                  
 me : Dr. Sa
 ar of Gradu
 rrent Positio
 me : Mr. Vi
 ar of Gradu
 rrent Positio
-                  
-                  
 me : Ms. Am
 ar of Gradu
 rrent Positio
 5 
-                     
 Communication
 Anupama Pa
 uation : B.Te
@@ -7316,7 +7170,6 @@ on      : Vice
 mi Ahalpar
 uation :  M-D
 on      :  Dev
-                      
 n Technology 
 anchal 
 ech-ICT 20
@@ -7353,7 +7206,6 @@ utsche Bank
 ra 
 Des 2007 
 veloper, AC
-                      
 13 
 d CTO, Grid
 006 
@@ -7377,7 +7229,6 @@ ntist, Googl
 Advisory), 
 k, Mumbai 
 COS AS, No
-                     
 ddle.io        
 tch        
 a 
