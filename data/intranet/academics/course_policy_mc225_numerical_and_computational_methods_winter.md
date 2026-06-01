@@ -1,5 +1,5 @@
 ---
-title: "MC225 - Numerical and Computational Methods"
+title: "Numerical and Computational Methods"
 url: "https://intranet.daiict.ac.in/academics/MC225_Numerical and Computational Methods_Winter 2026 - Nabin Sahu.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC225_Numerical and Computational Methods_Winter 2026 - Nabin Sahu.pdf"
 ---
 
-# MC225 - Numerical and Computational Methods
+# Numerical and Computational Methods (MC225)
 
 ## Overview
 
@@ -203,7 +203,7 @@ Tentative Evaluation Policy:
 - **Course Title:** Numerical and Computational Methods
 - **Document Source:** MC225_Numerical and Computational Methods_Winter 2026 - Nabin Sahu.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:25 UTC
+- **Scraped At:** 2026-06-01 07:57:19 UTC
 
 ## Related Links
 

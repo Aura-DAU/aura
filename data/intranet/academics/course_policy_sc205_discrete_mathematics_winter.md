@@ -1,5 +1,5 @@
 ---
-title: "SC205 - Discrete Mathematics"
+title: "Discrete Mathematics"
 url: "https://intranet.daiict.ac.in/academics/SC205_DiscreteMathematics_Winter2025_26 - Aditya Tatu.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC205_DiscreteMathematics_Winter2025_26 - Aditya Tatu.pdf"
 ---
 
-# SC205 - Discrete Mathematics
+# Discrete Mathematics (SC205)
 
 ## Overview
 
@@ -106,7 +106,7 @@ other subsequent courses. |
 - **Course Title:** Discrete Mathematics
 - **Document Source:** SC205_DiscreteMathematics_Winter2025_26 - Aditya Tatu.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:28 UTC
+- **Scraped At:** 2026-06-01 07:57:22 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "SC421 - Introduction to Modern Algebra"
+title: "SC421: Introduction to Modern Algebra"
 url: "https://intranet.daiict.ac.in/academics/SC421-Introduction to Modern Algebra - Gautam Dutta.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC421-Introduction to Modern Algebra - Gautam Dutta.pdf"
 ---
 
-# SC421 - Introduction to Modern Algebra
+# SC421: Introduction to Modern Algebra (SC421)
 
 ## Overview
 
@@ -96,7 +96,7 @@ Thomas W. Hungerford
 - **Course Title:** SC421: Introduction to Modern Algebra
 - **Document Source:** SC421-Introduction to Modern Algebra - Gautam Dutta.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:30 UTC
+- **Scraped At:** 2026-06-01 07:57:23 UTC
 
 ## Related Links
 

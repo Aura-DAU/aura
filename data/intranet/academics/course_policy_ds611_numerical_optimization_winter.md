@@ -1,5 +1,5 @@
 ---
-title: "DS611 - Numerical Optimization"
+title: "Numerical Optimization"
 url: "https://intranet.daiict.ac.in/academics/DS611 - Numerical Optimization.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS611 - Numerical Optimization.pdf"
 ---
 
-# DS611 - Numerical Optimization
+# Numerical Optimization (DS611)
 
 ## Overview
 
@@ -70,7 +70,7 @@ Algorithms |  |  |  |  |  |  |  |  |  |  |
 - **Course Title:** Numerical Optimization
 - **Document Source:** DS611 - Numerical Optimization.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:51 UTC
+- **Scraped At:** 2026-06-01 07:56:56 UTC
 
 ## Related Links
 

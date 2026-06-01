@@ -1,5 +1,5 @@
 ---
-title: "CT437 - Speech Communication"
+title: "Speech Communication"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# CT437 - Speech Communication
+# Speech Communication (CT437)
 
 ## Overview
 
@@ -220,7 +220,7 @@ development of Teager Energy Operator (TEO) and recently proposed variable lengt
 - **Course Title:** Speech Communication
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:36 UTC
+- **Scraped At:** 2026-06-01 07:56:44 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "SC301 - Numerical Linear Algebra"
+title: "SC301 Numerical Linear Algebra"
 url: "https://intranet.daiict.ac.in/academics/SC301 - Numerical_Linear_Algebra - Aditya Tatu.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC301 - Numerical_Linear_Algebra - Aditya Tatu.pdf"
 ---
 
-# SC301 - Numerical Linear Algebra
+# SC301 Numerical Linear Algebra (SC301)
 
 ## Overview
 
@@ -120,7 +120,7 @@ problem and their applications.
 - **Course Title:** SC301 Numerical Linear Algebra
 - **Document Source:** SC301 - Numerical_Linear_Algebra - Aditya Tatu.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:30 UTC
+- **Scraped At:** 2026-06-01 07:57:22 UTC
 
 ## Related Links
 

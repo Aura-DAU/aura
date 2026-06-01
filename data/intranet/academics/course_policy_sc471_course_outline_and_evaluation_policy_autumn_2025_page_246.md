@@ -1,5 +1,5 @@
 ---
-title: "SC471 - Course Outline and Evaluation Policy"
+title: "Course Outline and Evaluation Policy"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# SC471 - Course Outline and Evaluation Policy
+# Course Outline and Evaluation Policy (SC471)
 
 ## Overview
 
@@ -178,7 +178,7 @@ F
 - **Course Title:** Course Outline and Evaluation Policy
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:37 UTC
+- **Scraped At:** 2026-06-01 07:56:46 UTC
 
 ## Related Links
 

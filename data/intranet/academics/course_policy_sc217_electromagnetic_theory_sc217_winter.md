@@ -1,5 +1,5 @@
 ---
-title: "SC217 - Electromagnetic Theory"
+title: "Electromagnetic Theory (SC217)"
 url: "https://intranet.daiict.ac.in/academics/SC217_ElectromagneticTheory_Winter26 - Pratim Roy.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC217_ElectromagneticTheory_Winter26 - Pratim Roy.pdf"
 ---
 
-# SC217 - Electromagnetic Theory
+# Electromagnetic Theory (SC217) (SC217)
 
 ## Overview
 
@@ -211,7 +211,7 @@ tion.
 - **Course Title:** Electromagnetic Theory (SC217)
 - **Document Source:** SC217_ElectromagneticTheory_Winter26 - Pratim Roy.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:29 UTC
+- **Scraped At:** 2026-06-01 07:57:22 UTC
 
 ## Related Links
 

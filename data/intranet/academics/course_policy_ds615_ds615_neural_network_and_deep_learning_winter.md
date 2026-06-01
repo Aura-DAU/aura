@@ -1,5 +1,5 @@
 ---
-title: "DS615 - Neural Network and Deep Learning"
+title: "DS615: Neural Network and Deep Learning"
 url: "https://intranet.daiict.ac.in/academics/DS615_NeuralNetworksandDeepLearning_Winter25 (1) (1) - Sourish Dasgupta.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS615_NeuralNetworksandDeepLearning_Winter25 (1) (1) - Sourish Dasgupta.pdf"
 ---
 
-# DS615 - Neural Network and Deep Learning
+# DS615: Neural Network and Deep Learning (DS615)
 
 ## Overview
 
@@ -263,7 +263,7 @@ Lectures: 36 (tentative)
 - **Course Title:** DS615: Neural Network and Deep Learning
 - **Document Source:** DS615_NeuralNetworksandDeepLearning_Winter25 (1) (1) - Sourish Dasgupta.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:54 UTC
+- **Scraped At:** 2026-06-01 07:56:58 UTC
 
 ## Related Links
 

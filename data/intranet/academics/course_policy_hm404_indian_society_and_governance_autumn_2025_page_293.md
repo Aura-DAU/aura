@@ -1,5 +1,5 @@
 ---
-title: "HM404 - Indian Society and Governance"
+title: "Indian Society and Governance"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# HM404 - Indian Society and Governance
+# Indian Society and Governance (HM404)
 
 ## Overview
 
@@ -176,7 +176,7 @@ ii   https://www.orfonline.org
 - **Course Title:** Indian Society and Governance
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:44 UTC
+- **Scraped At:** 2026-06-01 07:56:51 UTC
 
 ## Related Links
 

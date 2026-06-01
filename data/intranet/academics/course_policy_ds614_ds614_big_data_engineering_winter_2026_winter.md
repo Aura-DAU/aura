@@ -1,5 +1,5 @@
 ---
-title: "DS614 - Big Data Engineering (Winter ’2026)"
+title: "DS614 Big Data Engineering (Winter ’2026)"
 url: "https://intranet.daiict.ac.in/academics/DS614_BigDataEngineering_Winter26 - Ankush Chander.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS614_BigDataEngineering_Winter26 - Ankush Chander.pdf"
 ---
 
-# DS614 - Big Data Engineering (Winter ’2026)
+# DS614 Big Data Engineering (Winter ’2026) (DS614)
 
 ## Overview
 
@@ -125,7 +125,7 @@ Lectures |  |  | 41 |
 - **Course Title:** DS614 Big Data Engineering (Winter ’2026)
 - **Document Source:** DS614_BigDataEngineering_Winter26 - Ankush Chander.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:53 UTC
+- **Scraped At:** 2026-06-01 07:56:57 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "PREREQUISITECOURSES - VLSI Circuits for DSP"
+title: "VLSI Circuits for DSP"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# PREREQUISITECOURSES - VLSI Circuits for DSP
+# VLSI Circuits for DSP (PREREQUISITECOURSES)
 
 ## Overview
 
@@ -73,7 +73,7 @@ Y.T. Chan ~ Wavelet Basics (Kluwer Publishers, Boston, 1993)
 - **Course Title:** VLSI Circuits for DSP
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:40 UTC
+- **Scraped At:** 2026-06-01 07:56:47 UTC
 
 ## Related Links
 

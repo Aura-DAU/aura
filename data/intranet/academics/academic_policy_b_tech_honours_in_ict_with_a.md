@@ -240,7 +240,7 @@ autonomous robots (i.e., ground) that students could eventually use in their fut
 - **Course Title:** B.Tech. (Honours) in ICT with a
 - **Document Source:** Minor_RAS_Policy_Document.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:06 UTC
+- **Scraped At:** 2026-06-01 07:55:23 UTC
 
 ## Related Links
 

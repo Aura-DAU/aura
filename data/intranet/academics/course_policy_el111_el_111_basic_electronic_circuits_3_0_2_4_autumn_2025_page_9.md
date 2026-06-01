@@ -1,5 +1,5 @@
 ---
-title: "EL111 - EL 111-- Basic Electronic Circuits (3-0-2-4)"
+title: "EL 111-- Basic Electronic Circuits (3-0-2-4)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# EL111 - EL 111-- Basic Electronic Circuits (3-0-2-4)
+# EL 111-- Basic Electronic Circuits (3-0-2-4) (EL111)
 
 ## Overview
 
@@ -242,7 +242,7 @@ resistance and gain |  |
 - **Course Title:** EL 111-- Basic Electronic Circuits (3-0-2-4)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:12 UTC
+- **Scraped At:** 2026-06-01 07:56:23 UTC
 
 ## Related Links
 

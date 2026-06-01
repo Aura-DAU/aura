@@ -1,5 +1,5 @@
 ---
-title: "IT112113 - IT112/113 Introduction to"
+title: "IT112/113 Introduction to"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT112113 - IT112/113 Introduction to
+# IT112/113 Introduction to (IT112113)
 
 ## Overview
 
@@ -167,7 +167,7 @@ Other tools will be communicated to the students whenever they are used.
 - **Course Title:** IT112/113 Introduction to
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:13 UTC
+- **Scraped At:** 2026-06-01 07:56:24 UTC
 
 ## Related Links
 

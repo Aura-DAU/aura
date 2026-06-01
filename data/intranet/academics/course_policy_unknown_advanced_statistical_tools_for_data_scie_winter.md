@@ -1,5 +1,5 @@
 ---
-title: "IT590 - Advanced Statistical Tools for Data Science"
+title: "Advanced Statistical Tools for Data Science"
 url: "https://intranet.daiict.ac.in/academics/IT590-Advanced Statistical Tools for Data Science.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "IT590-Advanced Statistical Tools for Data Science.pdf"
 ---
 
-# IT590 - Advanced Statistical Tools for Data Science
+# Advanced Statistical Tools for Data Science (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Advanced Statistical Tools for Data Science (IT590). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Advanced Statistical Tools for Data Science (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -193,11 +193,11 @@ X
 
 ## Important Information
 
-- **Course Code:** IT590
+- **Course Code:** UNKNOWN
 - **Course Title:** Advanced Statistical Tools for Data Science
 - **Document Source:** IT590-Advanced Statistical Tools for Data Science.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:19 UTC
+- **Scraped At:** 2026-06-01 07:57:15 UTC
 
 ## Related Links
 

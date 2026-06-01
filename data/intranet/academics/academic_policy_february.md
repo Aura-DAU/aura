@@ -69,7 +69,7 @@ whichever is less. |
 - **Course Title:** February
 - **Document Source:** Policy for Late Registration or Course Adjustment and Fixation of Fine.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:07 UTC
+- **Scraped At:** 2026-06-01 07:55:24 UTC
 
 ## Related Links
 

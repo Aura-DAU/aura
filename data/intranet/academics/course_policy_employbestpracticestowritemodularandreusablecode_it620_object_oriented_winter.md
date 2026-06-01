@@ -1,5 +1,5 @@
 ---
-title: "EMPLOYBESTPRACTICESTOWRITEMODULARANDREUSABLECODE - IT620: Object Oriented"
+title: "IT620: Object Oriented"
 url: "https://intranet.daiict.ac.in/academics/IT620_ObjectOrientedProgramming_Winter25.docx - Sourish Dasgupta.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT620_ObjectOrientedProgramming_Winter25.docx - Sourish Dasgupta.pdf"
 ---
 
-# EMPLOYBESTPRACTICESTOWRITEMODULARANDREUSABLECODE - IT620: Object Oriented
+# IT620: Object Oriented (EMPLOYBESTPRACTICESTOWRITEMODULARANDREUSABLECODE)
 
 ## Overview
 
@@ -203,7 +203,7 @@ Lectures: 36 (tentative)
 - **Course Title:** IT620: Object Oriented
 - **Document Source:** IT620_ObjectOrientedProgramming_Winter25.docx - Sourish Dasgupta.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:19 UTC
+- **Scraped At:** 2026-06-01 07:57:15 UTC
 
 ## Related Links
 

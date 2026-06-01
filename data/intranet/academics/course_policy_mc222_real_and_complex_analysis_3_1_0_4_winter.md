@@ -1,5 +1,5 @@
 ---
-title: "MC222 - REAL AND COMPLEX ANALYSIS (3-1-0-4)"
+title: "REAL AND COMPLEX ANALYSIS (3-1-0-4)"
 url: "https://intranet.daiict.ac.in/academics/MC222_Real and Complex Analysis_Winter26 - Sudip Bera.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC222_Real and Complex Analysis_Winter26 - Sudip Bera.pdf"
 ---
 
-# MC222 - REAL AND COMPLEX ANALYSIS (3-1-0-4)
+# REAL AND COMPLEX ANALYSIS (3-1-0-4) (MC222)
 
 ## Overview
 
@@ -108,7 +108,7 @@ tion of complex engineering problems (P1).
 - **Course Title:** REAL AND COMPLEX ANALYSIS (3-1-0-4)
 - **Document Source:** MC222_Real and Complex Analysis_Winter26 - Sudip Bera.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:24 UTC
+- **Scraped At:** 2026-06-01 07:57:19 UTC
 
 ## Related Links
 

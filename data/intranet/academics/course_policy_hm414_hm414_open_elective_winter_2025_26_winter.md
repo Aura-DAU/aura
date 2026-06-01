@@ -1,5 +1,5 @@
 ---
-title: "HM414 - (Open Elective, Winter 2025-26)"
+title: "HM414 (Open Elective, Winter 2025-26)"
 url: "https://intranet.daiict.ac.in/academics/HM414_A Beginner_s Introduction to the Psyche _Winter26 - Jenson Joseph.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM414_A Beginner_s Introduction to the Psyche _Winter26 - Jenson Joseph.pdf"
 ---
 
-# HM414 - (Open Elective, Winter 2025-26)
+# HM414 (Open Elective, Winter 2025-26) (HM414)
 
 ## Overview
 
@@ -133,7 +133,7 @@ Project: 30%
 - **Course Title:** HM414 (Open Elective, Winter 2025-26)
 - **Document Source:** HM414_A Beginner_s Introduction to the Psyche _Winter26 - Jenson Joseph.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:01 UTC
+- **Scraped At:** 2026-06-01 07:57:03 UTC
 
 ## Related Links
 

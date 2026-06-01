@@ -1,5 +1,5 @@
 ---
-title: "HMXXX - , Introduction to Speculative Fiction and Films (Autumn 2025)"
+title: "HMXXX, Introduction to Speculative Fiction and Films (Autumn 2025)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# HMXXX - , Introduction to Speculative Fiction and Films (Autumn 2025)
+# HMXXX, Introduction to Speculative Fiction and Films (Autumn 2025) (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course HMXXX, Introduction to Speculative Fiction and Films (Autumn 2025) (HMXXX). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course HMXXX, Introduction to Speculative Fiction and Films (Autumn 2025) (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -156,11 +156,11 @@ lectures |
 
 ## Important Information
 
-- **Course Code:** HMXXX
+- **Course Code:** UNKNOWN
 - **Course Title:** HMXXX, Introduction to Speculative Fiction and Films (Autumn 2025)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:44 UTC
+- **Scraped At:** 2026-06-01 07:56:52 UTC
 
 ## Related Links
 

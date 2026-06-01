@@ -129,7 +129,7 @@ Two Student (Boy & Girl) Representatives (nominated by DAC)
 - **Course Title:** Student
 - **Document Source:** DA-IICT_Student Code of Conduct and DAC Guidelines.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:55 UTC
+- **Scraped At:** 2026-06-01 07:55:17 UTC
 
 ## Related Links
 

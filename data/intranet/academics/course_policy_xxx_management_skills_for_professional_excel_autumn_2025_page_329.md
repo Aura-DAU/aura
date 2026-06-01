@@ -1,5 +1,5 @@
 ---
-title: "XXX - Management Skills for Professional Excellence"
+title: "Management Skills for Professional Excellence"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# XXX - Management Skills for Professional Excellence
+# Management Skills for Professional Excellence (XXX)
 
 ## Overview
 
@@ -88,7 +88,7 @@ Page 2 of 2
 - **Course Title:** Management Skills for Professional Excellence
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:48 UTC
+- **Scraped At:** 2026-06-01 07:56:54 UTC
 
 ## Related Links
 

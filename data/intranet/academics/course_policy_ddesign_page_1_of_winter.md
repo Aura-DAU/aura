@@ -1,5 +1,5 @@
 ---
-title: "DDESIGN - Page 1 of"
+title: "Page 1 of"
 url: "https://intranet.daiict.ac.in/academics/EL527_ ASIC Design_Winter26 - Rutu Parekh.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "EL527_ ASIC Design_Winter26 - Rutu Parekh.pdf"
 ---
 
-# DDESIGN - Page 1 of
+# Page 1 of (DDESIGN)
 
 ## Overview
 
@@ -169,7 +169,7 @@ Page 2 of 2
 - **Course Title:** Page 1 of
 - **Document Source:** EL527_ ASIC Design_Winter26 - Rutu Parekh.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:58 UTC
+- **Scraped At:** 2026-06-01 07:57:01 UTC
 
 ## Related Links
 

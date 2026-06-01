@@ -1,5 +1,5 @@
 ---
-title: "EL495 - Sensors and Instrumentation"
+title: "Sensors and Instrumentation (EL495)"
 url: "https://intranet.daiict.ac.in/academics/EL495_Sensors_and_Instrumentation_Winter26_AB - Ajay Beniwal.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "EL495_Sensors_and_Instrumentation_Winter26_AB - Ajay Beniwal.pdf"
 ---
 
-# EL495 - Sensors and Instrumentation
+# Sensors and Instrumentation (EL495) (EL495)
 
 ## Overview
 
@@ -85,7 +85,7 @@ sensing systems.
 - **Course Title:** Sensors and Instrumentation (EL495)
 - **Document Source:** EL495_Sensors_and_Instrumentation_Winter26_AB - Ajay Beniwal.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:58 UTC
+- **Scraped At:** 2026-06-01 07:57:00 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "COURSENAME - Course"
+title: "Course"
 url: "https://intranet.daiict.ac.in/academics/PC726_MultimodalStorytelling_Winter25 - Jenson Joseph.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "PC726_MultimodalStorytelling_Winter25 - Jenson Joseph.pdf"
 ---
 
-# COURSENAME - Course
+# Course (COURSENAME)
 
 ## Overview
 
@@ -53,7 +53,7 @@ social and cultural contexts. |  |  |  |  |  |  |  |  |
 - **Course Title:** Course
 - **Document Source:** PC726_MultimodalStorytelling_Winter25 - Jenson Joseph.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:26 UTC
+- **Scraped At:** 2026-06-01 07:57:20 UTC
 
 ## Related Links
 

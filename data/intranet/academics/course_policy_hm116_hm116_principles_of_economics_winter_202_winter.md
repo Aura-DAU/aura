@@ -1,5 +1,5 @@
 ---
-title: "HM116 - Principles of Economics (Winter 2026)"
+title: "HM116: Principles of Economics (Winter 2026)"
 url: "https://intranet.daiict.ac.in/academics/HM116_PrinciplesofEconomics_Winter26 - Parul Gupta.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM116_PrinciplesofEconomics_Winter26 - Parul Gupta.pdf"
 ---
 
-# HM116 - Principles of Economics (Winter 2026)
+# HM116: Principles of Economics (Winter 2026) (HM116)
 
 ## Overview
 
@@ -113,7 +113,7 @@ competition, monopoly, oligopoly, monopolistic competition | 3-4 |
 - **Course Title:** HM116: Principles of Economics (Winter 2026)
 - **Document Source:** HM116_PrinciplesofEconomics_Winter26 - Parul Gupta.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:59 UTC
+- **Scraped At:** 2026-06-01 07:57:01 UTC
 
 ## Related Links
 

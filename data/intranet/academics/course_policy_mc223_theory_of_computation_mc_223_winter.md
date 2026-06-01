@@ -1,5 +1,5 @@
 ---
-title: "MC223 - Theory of computation (MC 223)"
+title: "Theory of computation (MC 223)"
 url: "https://intranet.daiict.ac.in/academics/MC223_Theory_of_computation_Winter24.pdf - Puneet Bhateja.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC223_Theory_of_computation_Winter24.pdf - Puneet Bhateja.pdf"
 ---
 
-# MC223 - Theory of computation (MC 223)
+# Theory of computation (MC 223) (MC223)
 
 ## Overview
 
@@ -144,7 +144,7 @@ Class participation: 20 %
 - **Course Title:** Theory of computation (MC 223)
 - **Document Source:** MC223_Theory_of_computation_Winter24.pdf - Puneet Bhateja.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:24 UTC
+- **Scraped At:** 2026-06-01 07:57:19 UTC
 
 ## Related Links
 

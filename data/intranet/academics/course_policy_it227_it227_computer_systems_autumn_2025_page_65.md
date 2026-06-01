@@ -1,5 +1,5 @@
 ---
-title: "IT227 - – Computer Systems"
+title: "IT227 – Computer Systems"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT227 - – Computer Systems
+# IT227 – Computer Systems (IT227)
 
 ## Overview
 
@@ -138,7 +138,7 @@ communication using sockets | 5 |
 - **Course Title:** IT227 – Computer Systems
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:17 UTC
+- **Scraped At:** 2026-06-01 07:56:27 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "PC754 - Course Abstract: PC 754 Introduction to Photography for MDes CD"
+title: "Course Abstract: PC 754 Introduction to Photography for MDes CD"
 url: "https://intranet.daiict.ac.in/academics/PC754-  Introduction to Photography.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "PC754-  Introduction to Photography.pdf"
 ---
 
-# PC754 - Course Abstract: PC 754 Introduction to Photography for MDes CD
+# Course Abstract: PC 754 Introduction to Photography for MDes CD (PC754)
 
 ## Overview
 
@@ -436,7 +436,7 @@ Course Abstract: PC 754 Introduction to Photography for MDes CD
 - **Course Title:** Course Abstract: PC 754 Introduction to Photography for MDes CD
 - **Document Source:** PC754-  Introduction to Photography.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:28 UTC
+- **Scraped At:** 2026-06-01 07:57:21 UTC
 
 ## Related Links
 

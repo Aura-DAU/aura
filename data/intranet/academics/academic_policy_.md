@@ -808,7 +808,7 @@ BTech-III (ICT)
 - **Course Title:** 
 - **Document Source:** Winter 2023-24 First In Sem Exam Schedule Final Version.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:21 UTC
+- **Scraped At:** 2026-06-01 07:55:34 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "MC226 - Environmental Studies"
+title: "Environmental Studies"
 url: "https://intranet.daiict.ac.in/academics/MC226 - Environmental Studies - Nandini Banerjee.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC226 - Environmental Studies - Nandini Banerjee.pdf"
 ---
 
-# MC226 - Environmental Studies
+# Environmental Studies (MC226)
 
 ## Overview
 
@@ -135,7 +135,7 @@ Course Instructor: Dr. Nandini Banerjee
 - **Course Title:** Environmental Studies
 - **Document Source:** MC226 - Environmental Studies - Nandini Banerjee.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:25 UTC
+- **Scraped At:** 2026-06-01 07:57:19 UTC
 
 ## Related Links
 

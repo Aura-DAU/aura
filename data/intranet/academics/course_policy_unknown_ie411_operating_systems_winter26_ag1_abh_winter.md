@@ -1,5 +1,5 @@
 ---
-title: "IE411 - Operating Systems Winter26 Ag1   Abhishek Gupta"
+title: "Ie411 Operating Systems Winter26 Ag1   Abhishek Gupta"
 url: "https://intranet.daiict.ac.in/academics/IE411_Operating Systems_Winter26_AG1 - Abhishek Gupta.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "IE411_Operating Systems_Winter26_AG1 - Abhishek Gupta.pdf"
 ---
 
-# IE411 - Operating Systems Winter26 Ag1   Abhishek Gupta
+# Ie411 Operating Systems Winter26 Ag1   Abhishek Gupta (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Ie411 Operating Systems Winter26 Ag1   Abhishek Gupta (IE411). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Ie411 Operating Systems Winter26 Ag1   Abhishek Gupta (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -33,11 +33,11 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Important Information
 
-- **Course Code:** IE411
+- **Course Code:** UNKNOWN
 - **Course Title:** Ie411 Operating Systems Winter26 Ag1   Abhishek Gupta
 - **Document Source:** IE411_Operating Systems_Winter26_AG1 - Abhishek Gupta.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:10 UTC
+- **Scraped At:** 2026-06-01 07:57:09 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "IE410 - Introduction to Robotics"
+title: "Introduction to Robotics"
 url: "https://intranet.daiict.ac.in/academics/IE410_IntroductionToRobotics_Winter26 - Sujay Kadam.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE410_IntroductionToRobotics_Winter26 - Sujay Kadam.pdf"
 ---
 
-# IE410 - Introduction to Robotics
+# Introduction to Robotics (IE410)
 
 ## Overview
 
@@ -214,7 +214,7 @@ sensor, Accelerometer, GPS, Vision Sensor) | 3 |
 - **Course Title:** Introduction to Robotics
 - **Document Source:** IE410_IntroductionToRobotics_Winter26 - Sujay Kadam.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:09 UTC
+- **Scraped At:** 2026-06-01 07:57:08 UTC
 
 ## Related Links
 

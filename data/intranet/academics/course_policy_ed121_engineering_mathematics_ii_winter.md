@@ -1,5 +1,5 @@
 ---
-title: "ED121 - Engineering Mathematics II"
+title: "Engineering Mathematics II"
 url: "https://intranet.daiict.ac.in/academics/ED121_EngineeringMathematicsII_Winter2026 - Prosenjit Kundu.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "ED121_EngineeringMathematicsII_Winter2026 - Prosenjit Kundu.pdf"
 ---
 
-# ED121 - Engineering Mathematics II
+# Engineering Mathematics II (ED121)
 
 ## Overview
 
@@ -136,7 +136,7 @@ Channel Coding Theorem, Hamming Codes. | 10 |
 - **Course Title:** Engineering Mathematics II
 - **Document Source:** ED121_EngineeringMathematicsII_Winter2026 - Prosenjit Kundu.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:54 UTC
+- **Scraped At:** 2026-06-01 07:56:58 UTC
 
 ## Related Links
 

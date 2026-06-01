@@ -1,5 +1,5 @@
 ---
-title: "HM477 - HM 477 The English Novel: Form and History"
+title: "HM 477 The English Novel: Form and History"
 url: "https://intranet.daiict.ac.in/academics/HM377_TheEnglishNovelFormandHistory_Winter2026 - Amishal Modi.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM377_TheEnglishNovelFormandHistory_Winter2026 - Amishal Modi.pdf"
 ---
 
-# HM477 - HM 477 The English Novel: Form and History
+# HM 477 The English Novel: Form and History (HM477)
 
 ## Overview
 
@@ -82,7 +82,7 @@ Meaninglessness, return to the picaresque mode | 2-3 |
 - **Course Title:** HM 477 The English Novel: Form and History
 - **Document Source:** HM377_TheEnglishNovelFormandHistory_Winter2026 - Amishal Modi.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:59 UTC
+- **Scraped At:** 2026-06-01 07:57:01 UTC
 
 ## Related Links
 

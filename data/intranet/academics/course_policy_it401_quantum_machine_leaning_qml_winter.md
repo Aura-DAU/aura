@@ -1,5 +1,5 @@
 ---
-title: "IT401 - Quantum Machine Leaning (QML)"
+title: "Quantum Machine Leaning (QML)"
 url: "https://intranet.daiict.ac.in/academics/IT401_Quantum_Machine_Learning_II - Manjunath Joshi.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT401_Quantum_Machine_Learning_II - Manjunath Joshi.pdf"
 ---
 
-# IT401 - Quantum Machine Leaning (QML)
+# Quantum Machine Leaning (QML) (IT401)
 
 ## Overview
 
@@ -120,7 +120,7 @@ POs-COs Matrix:
 - **Course Title:** Quantum Machine Leaning (QML)
 - **Document Source:** IT401_Quantum_Machine_Learning_II - Manjunath Joshi.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:13 UTC
+- **Scraped At:** 2026-06-01 07:57:11 UTC
 
 ## Related Links
 

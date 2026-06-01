@@ -1,5 +1,5 @@
 ---
-title: "IE416 - Robot"
+title: "IE416 -Robot"
 url: "https://intranet.daiict.ac.in/academics/IE416_Robot_Programming_Winter26 - Tapas Kumar Maiti.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE416_Robot_Programming_Winter26 - Tapas Kumar Maiti.pdf"
 ---
 
-# IE416 - Robot
+# IE416 -Robot (IE416)
 
 ## Overview
 
@@ -194,7 +194,7 @@ Web-Based Robot Navigation
 - **Course Title:** IE416 -Robot
 - **Document Source:** IE416_Robot_Programming_Winter26 - Tapas Kumar Maiti.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:11 UTC
+- **Scraped At:** 2026-06-01 07:57:09 UTC
 
 ## Related Links
 

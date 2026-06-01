@@ -1,5 +1,5 @@
 ---
-title: "IE422 - Soft Computing"
+title: "Soft Computing (IE422)"
 url: "https://intranet.daiict.ac.in/academics/IE422_Soft Computing_Winter26 - Pushpendra Kumar.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE422_Soft Computing_Winter26 - Pushpendra Kumar.pdf"
 ---
 
-# IE422 - Soft Computing
+# Soft Computing (IE422) (IE422)
 
 ## Overview
 
@@ -216,7 +216,7 @@ o Fuzzy Logic Controlled Genetic Algorithms
 - **Course Title:** Soft Computing (IE422)
 - **Document Source:** IE422_Soft Computing_Winter26 - Pushpendra Kumar.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:11 UTC
+- **Scraped At:** 2026-06-01 07:57:09 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "IE406 - Machine Learning"
+title: "Ie406   Machine Learning"
 url: "https://intranet.daiict.ac.in/academics/IE406 - Machine Learning.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "IE406 - Machine Learning.pdf"
 ---
 
-# IE406 - Machine Learning
+# Ie406   Machine Learning (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Ie406   Machine Learning (IE406). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Ie406   Machine Learning (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -33,11 +33,11 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Important Information
 
-- **Course Code:** IE406
+- **Course Code:** UNKNOWN
 - **Course Title:** Ie406   Machine Learning
 - **Document Source:** IE406 - Machine Learning.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:06 UTC
+- **Scraped At:** 2026-06-01 07:57:06 UTC
 
 ## Related Links
 

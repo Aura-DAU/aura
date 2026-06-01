@@ -1,5 +1,5 @@
 ---
-title: "ED211 - Engineering Mathematics III"
+title: "ED211: Engineering Mathematics III"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# ED211 - Engineering Mathematics III
+# ED211: Engineering Mathematics III (ED211)
 
 ## Overview
 
@@ -102,7 +102,7 @@ they acquire the team-work (P9) and the technical communication (P10) skills.
 - **Course Title:** ED211: Engineering Mathematics III
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:19 UTC
+- **Scraped At:** 2026-06-01 07:56:30 UTC
 
 ## Related Links
 

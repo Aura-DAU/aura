@@ -1,5 +1,5 @@
 ---
-title: "MA612 - Fundamentals of Analytics / Statistical methods"
+title: "MA612: Fundamentals of Analytics / Statistical methods"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MA612 - Fundamentals of Analytics / Statistical methods
+# MA612: Fundamentals of Analytics / Statistical methods (MA612)
 
 ## Overview
 
@@ -156,7 +156,7 @@ Factorial Experiments, Split-plot and Strip-plot designs, Analysis of data from 
 - **Course Title:** MA612: Fundamentals of Analytics / Statistical methods
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:29 UTC
+- **Scraped At:** 2026-06-01 07:56:39 UTC
 
 ## Related Links
 

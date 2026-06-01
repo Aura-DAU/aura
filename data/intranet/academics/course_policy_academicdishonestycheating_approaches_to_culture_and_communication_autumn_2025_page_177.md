@@ -1,5 +1,5 @@
 ---
-title: "ACADEMICDISHONESTYCHEATING - APPROACHES TO CULTURE AND COMMUNICATION"
+title: "APPROACHES TO CULTURE AND COMMUNICATION"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# ACADEMICDISHONESTYCHEATING - APPROACHES TO CULTURE AND COMMUNICATION
+# APPROACHES TO CULTURE AND COMMUNICATION (ACADEMICDISHONESTYCHEATING)
 
 ## Overview
 
@@ -412,7 +412,7 @@ MAN 17(3) 410-91
 - **Course Title:** APPROACHES TO CULTURE AND COMMUNICATION
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:30 UTC
+- **Scraped At:** 2026-06-01 07:56:40 UTC
 
 ## Related Links
 

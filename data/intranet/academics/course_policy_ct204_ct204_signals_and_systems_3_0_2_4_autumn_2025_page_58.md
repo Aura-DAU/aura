@@ -1,5 +1,5 @@
 ---
-title: "CT204 - —Signals and Systems (3-0-2-4)"
+title: "CT204—Signals and Systems (3-0-2-4)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# CT204 - —Signals and Systems (3-0-2-4)
+# CT204—Signals and Systems (3-0-2-4) (CT204)
 
 ## Overview
 
@@ -186,7 +186,7 @@ convolution integral |  | 3 |  |  |
 - **Course Title:** CT204—Signals and Systems (3-0-2-4)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:16 UTC
+- **Scraped At:** 2026-06-01 07:56:27 UTC
 
 ## Related Links
 

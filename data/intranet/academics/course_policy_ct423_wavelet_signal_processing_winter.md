@@ -1,5 +1,5 @@
 ---
-title: "CT423 - Wavelet Signal Processing"
+title: "Wavelet Signal Processing"
 url: "https://intranet.daiict.ac.in/academics/CT423_Wavelet Signal Processing_Winter2026 - hemant patil.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CT423_Wavelet Signal Processing_Winter2026 - hemant patil.pdf"
 ---
 
-# CT423 - Wavelet Signal Processing
+# Wavelet Signal Processing (CT423)
 
 ## Overview
 
@@ -139,7 +139,7 @@ pattern recognition, machine intelligence and signal coding applications. |
 - **Course Title:** Wavelet Signal Processing
 - **Document Source:** CT423_Wavelet Signal Processing_Winter2026 - hemant patil.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:51 UTC
+- **Scraped At:** 2026-06-01 07:56:56 UTC
 
 ## Related Links
 

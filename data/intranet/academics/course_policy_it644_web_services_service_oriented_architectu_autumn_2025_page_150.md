@@ -1,5 +1,5 @@
 ---
-title: "IT644 - Web Services & Service-Oriented Architecture"
+title: "Web Services & Service-Oriented Architecture (IT644)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT644 - Web Services & Service-Oriented Architecture
+# Web Services & Service-Oriented Architecture (IT644) (IT644)
 
 ## Overview
 
@@ -182,7 +182,7 @@ Question types – theory, design, case-study based, application, diagram type.
 - **Course Title:** Web Services & Service-Oriented Architecture (IT644)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:28 UTC
+- **Scraped At:** 2026-06-01 07:56:37 UTC
 
 ## Related Links
 

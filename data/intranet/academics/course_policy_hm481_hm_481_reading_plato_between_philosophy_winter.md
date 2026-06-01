@@ -1,5 +1,5 @@
 ---
-title: "HM481 - HM 481: READING PLATO: BETWEEN PHILOSOPHY AND LITERATURE"
+title: "HM 481: READING PLATO: BETWEEN PHILOSOPHY AND LITERATURE"
 url: "https://intranet.daiict.ac.in/academics/HM481_Reading Plato_Winter 26 - Bharani Kollipara.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM481_Reading Plato_Winter 26 - Bharani Kollipara.pdf"
 ---
 
-# HM481 - HM 481: READING PLATO: BETWEEN PHILOSOPHY AND LITERATURE
+# HM 481: READING PLATO: BETWEEN PHILOSOPHY AND LITERATURE (HM481)
 
 ## Overview
 
@@ -70,7 +70,7 @@ bearing on the evaluation.
 - **Course Title:** HM 481: READING PLATO: BETWEEN PHILOSOPHY AND LITERATURE
 - **Document Source:** HM481_Reading Plato_Winter 26 - Bharani Kollipara.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:01 UTC
+- **Scraped At:** 2026-06-01 07:57:03 UTC
 
 ## Related Links
 

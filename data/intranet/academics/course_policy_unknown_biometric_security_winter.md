@@ -1,5 +1,5 @@
 ---
-title: "IT460 - Biometric Security"
+title: "Biometric Security"
 url: "https://intranet.daiict.ac.in/academics/IT499_BiometricSecurity_Winter26 - Shruti Bhilare.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "IT499_BiometricSecurity_Winter26 - Shruti Bhilare.pdf"
 ---
 
-# IT460 - Biometric Security
+# Biometric Security (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Biometric Security (IT460). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Biometric Security (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -253,11 +253,11 @@ XX
 
 ## Important Information
 
-- **Course Code:** IT460
+- **Course Code:** UNKNOWN
 - **Course Title:** Biometric Security
 - **Document Source:** IT499_BiometricSecurity_Winter26 - Shruti Bhilare.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:15 UTC
+- **Scraped At:** 2026-06-01 07:57:13 UTC
 
 ## Related Links
 

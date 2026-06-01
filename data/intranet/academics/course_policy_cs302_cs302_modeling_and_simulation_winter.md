@@ -1,5 +1,5 @@
 ---
-title: "CS302 - – Modeling and Simulation"
+title: "CS302 – Modeling and Simulation"
 url: "https://intranet.daiict.ac.in/academics/CS302_Modelling_Simulation_Winter25 - Arnab Kumar Ray.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CS302_Modelling_Simulation_Winter25 - Arnab Kumar Ray.pdf"
 ---
 
-# CS302 - – Modeling and Simulation
+# CS302 – Modeling and Simulation (CS302)
 
 ## Overview
 
@@ -128,7 +128,7 @@ models, Rumor spread models etc. |
 - **Course Title:** CS302 – Modeling and Simulation
 - **Document Source:** CS302_Modelling_Simulation_Winter25 - Arnab Kumar Ray.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:50 UTC
+- **Scraped At:** 2026-06-01 07:56:55 UTC
 
 ## Related Links
 

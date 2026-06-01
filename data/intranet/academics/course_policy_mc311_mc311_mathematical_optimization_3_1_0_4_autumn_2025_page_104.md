@@ -1,5 +1,5 @@
 ---
-title: "MC311 - Mathematical Optimization (3-1-0-4)"
+title: "MC311 Mathematical Optimization (3-1-0-4)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MC311 - Mathematical Optimization (3-1-0-4)
+# MC311 Mathematical Optimization (3-1-0-4) (MC311)
 
 ## Overview
 
@@ -113,7 +113,7 @@ linear optimization problem has to satisfy,
 - **Course Title:** MC311 Mathematical Optimization (3-1-0-4)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:22 UTC
+- **Scraped At:** 2026-06-01 07:56:32 UTC
 
 ## Related Links
 

@@ -525,7 +525,7 @@ Elective IV
 - **Course Title:** Academic Requirements for the M. Tech (CS&ML)
 - **Document Source:** Academic Requirements_MTech(CS&ML)_Program_wef 2021-22.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:43 UTC
+- **Scraped At:** 2026-06-01 07:55:08 UTC
 
 ## Related Links
 

@@ -96,7 +96,7 @@ Dy. Registrar (Academic)
 - **Course Title:** December
 - **Document Source:** Registration and Fees Payment Notice Winter 2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:09 UTC
+- **Scraped At:** 2026-06-01 07:55:25 UTC
 
 ## Related Links
 

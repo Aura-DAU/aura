@@ -1,5 +1,5 @@
 ---
-title: "IE423 - AI Literacy, Efficiency, and Ethics"
+title: "AI Literacy, Efficiency, and Ethics"
 url: "https://intranet.daiict.ac.in/academics/IE423_AI Literacy, Efficiency, and Ethics_Winter26 - Sanjay Srivastava.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE423_AI Literacy, Efficiency, and Ethics_Winter26 - Sanjay Srivastava.pdf"
 ---
 
-# IE423 - AI Literacy, Efficiency, and Ethics
+# AI Literacy, Efficiency, and Ethics (IE423)
 
 ## Overview
 
@@ -217,7 +217,7 @@ To earn the completion certificate, students must submit:
 - **Course Title:** AI Literacy, Efficiency, and Ethics
 - **Document Source:** IE423_AI Literacy, Efficiency, and Ethics_Winter26 - Sanjay Srivastava.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:12 UTC
+- **Scraped At:** 2026-06-01 07:57:10 UTC
 
 ## Related Links
 

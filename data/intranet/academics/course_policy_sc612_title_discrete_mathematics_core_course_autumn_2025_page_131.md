@@ -1,5 +1,5 @@
 ---
-title: "SC612 - Title: Discrete Mathematics (core course)"
+title: "Title: Discrete Mathematics (core course)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# SC612 - Title: Discrete Mathematics (core course)
+# Title: Discrete Mathematics (core course) (SC612)
 
 ## Overview
 
@@ -130,7 +130,7 @@ Y
 - **Course Title:** Title: Discrete Mathematics (core course)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:25 UTC
+- **Scraped At:** 2026-06-01 07:56:35 UTC
 
 ## Related Links
 

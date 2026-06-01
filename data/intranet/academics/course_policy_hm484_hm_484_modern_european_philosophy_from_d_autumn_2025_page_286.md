@@ -1,5 +1,5 @@
 ---
-title: "HM484 - HM 484: Modern European Philosophy: From Descartes to Nietzsche"
+title: "HM 484: Modern European Philosophy: From Descartes to Nietzsche"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# HM484 - HM 484: Modern European Philosophy: From Descartes to Nietzsche
+# HM 484: Modern European Philosophy: From Descartes to Nietzsche (HM484)
 
 ## Overview
 
@@ -114,7 +114,7 @@ on the evaluation.
 - **Course Title:** HM 484: Modern European Philosophy: From Descartes to Nietzsche
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:43 UTC
+- **Scraped At:** 2026-06-01 07:56:50 UTC
 
 ## Related Links
 

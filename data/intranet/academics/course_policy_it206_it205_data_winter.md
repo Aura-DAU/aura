@@ -1,5 +1,5 @@
 ---
-title: "IT206 - ​ IT205 / Data"
+title: "​ IT205 / Data"
 url: "https://intranet.daiict.ac.in/academics/IT206_Data_Structure_Lab_using _OOP_Winter26 - Sandip Modha.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT206_Data_Structure_Lab_using _OOP_Winter26 - Sandip Modha.pdf"
 ---
 
-# IT206 - ​ IT205 / Data
+# ​ IT205 / Data (IT206)
 
 ## Overview
 
@@ -172,7 +172,7 @@ expressions | 1 |
 - **Course Title:** ​ IT205 / Data
 - **Document Source:** IT206_Data_Structure_Lab_using _OOP_Winter26 - Sandip Modha.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:13 UTC
+- **Scraped At:** 2026-06-01 07:57:10 UTC
 
 ## Related Links
 

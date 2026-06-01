@@ -867,7 +867,7 @@ term paper, exam etc.
 - **Course Title:** Academic Requirements for the PhD
 - **Document Source:** Academic Requirements_Ph D Program_-HSS&Design_wef 2024-25 as of July 2024.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:46 UTC
+- **Scraped At:** 2026-06-01 07:55:10 UTC
 
 ## Related Links
 

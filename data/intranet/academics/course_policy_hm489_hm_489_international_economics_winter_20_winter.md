@@ -1,5 +1,5 @@
 ---
-title: "HM489 - HM 489- International Economics (Winter 2026)"
+title: "HM 489- International Economics (Winter 2026)"
 url: "https://intranet.daiict.ac.in/academics/HM489_ International Economics_Winter26 - Cyril Jos Nazhicheril.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM489_ International Economics_Winter26 - Cyril Jos Nazhicheril.pdf"
 ---
 
-# HM489 - HM 489- International Economics (Winter 2026)
+# HM 489- International Economics (Winter 2026) (HM489)
 
 ## Overview
 
@@ -146,7 +146,7 @@ X            X                         X
 - **Course Title:** HM 489- International Economics (Winter 2026)
 - **Document Source:** HM489_ International Economics_Winter26 - Cyril Jos Nazhicheril.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:02 UTC
+- **Scraped At:** 2026-06-01 07:57:03 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "IT507 - IT 507—Advanced Image Processing (3-0-2-4)"
+title: "IT 507—Advanced Image Processing (3-0-2-4)"
 url: "https://intranet.daiict.ac.in/academics/IT507_Advanced Image Processing_Winter26 - Srimanta Mandal.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT507_Advanced Image Processing_Winter26 - Srimanta Mandal.pdf"
 ---
 
-# IT507 - IT 507—Advanced Image Processing (3-0-2-4)
+# IT 507—Advanced Image Processing (3-0-2-4) (IT507)
 
 ## Overview
 
@@ -198,7 +198,7 @@ filters, frequency domain filtering |  |
 - **Course Title:** IT 507—Advanced Image Processing (3-0-2-4)
 - **Document Source:** IT507_Advanced Image Processing_Winter26 - Srimanta Mandal.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:16 UTC
+- **Scraped At:** 2026-06-01 07:57:13 UTC
 
 ## Related Links
 

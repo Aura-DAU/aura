@@ -1,5 +1,5 @@
 ---
-title: "HM495 - Technology and the Making of Modern India"
+title: "Technology and the Making of Modern India"
 url: "https://intranet.daiict.ac.in/academics/HM495 - Technology and the Making Modern of India.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM495 - Technology and the Making Modern of India.pdf"
 ---
 
-# HM495 - Technology and the Making of Modern India
+# Technology and the Making of Modern India (HM495)
 
 ## Overview
 
@@ -236,7 +236,7 @@ entrepreneurship | No | - |
 - **Course Title:** Technology and the Making of Modern India
 - **Document Source:** HM495 - Technology and the Making Modern of India.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:04 UTC
+- **Scraped At:** 2026-06-01 07:57:05 UTC
 
 ## Related Links
 

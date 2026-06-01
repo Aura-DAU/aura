@@ -1,5 +1,5 @@
 ---
-title: "REVIEWS - DS-805 (Machine Learning System Engineering)"
+title: "DS-805 (Machine Learning System Engineering)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# REVIEWS - DS-805 (Machine Learning System Engineering)
+# DS-805 (Machine Learning System Engineering) (REVIEWS)
 
 ## Overview
 
@@ -106,7 +106,7 @@ Course structure:
 - **Course Title:** DS-805 (Machine Learning System Engineering)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:28 UTC
+- **Scraped At:** 2026-06-01 07:56:38 UTC
 
 ## Related Links
 

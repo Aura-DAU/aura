@@ -1,5 +1,5 @@
 ---
-title: "CT216 - Introduction to Communication Systems"
+title: "CT216: Introduction to Communication Systems"
 url: "https://intranet.daiict.ac.in/academics/CT216_Introduction_to_Communication_Systems_Winter2026 - Yash Vasavada.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CT216_Introduction_to_Communication_Systems_Winter2026 - Yash Vasavada.pdf"
 ---
 
-# CT216 - Introduction to Communication Systems
+# CT216: Introduction to Communication Systems (CT216)
 
 ## Overview
 
@@ -98,7 +98,7 @@ the technical communication (P10) skills.
 - **Course Title:** CT216: Introduction to Communication Systems
 - **Document Source:** CT216_Introduction_to_Communication_Systems_Winter2026 - Yash Vasavada.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:50 UTC
+- **Scraped At:** 2026-06-01 07:56:56 UTC
 
 ## Related Links
 

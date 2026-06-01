@@ -1,5 +1,5 @@
 ---
-title: "IT580 - Advanced Algorithms (3-0-2-4)"
+title: "IT580-Advanced Algorithms (3-0-2-4)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT580 - Advanced Algorithms (3-0-2-4)
+# IT580-Advanced Algorithms (3-0-2-4) (IT580)
 
 ## Overview
 
@@ -49,7 +49,7 @@ End Semester Exam – 40%.
 - **Course Title:** IT580-Advanced Algorithms (3-0-2-4)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:46 UTC
+- **Scraped At:** 2026-06-01 07:56:53 UTC
 
 ## Related Links
 

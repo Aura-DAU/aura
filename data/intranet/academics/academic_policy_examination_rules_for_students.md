@@ -109,7 +109,7 @@ quietly leave the building to ensure that you do not disturb them.
 - **Course Title:** Examination Rules for students
 - **Document Source:** Examination Rules for Students.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:03 UTC
+- **Scraped At:** 2026-06-01 07:57:48 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "MA615 - Fundamentals of Agricultural Science"
+title: "Fundamentals of Agricultural Science"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MA615 - Fundamentals of Agricultural Science
+# Fundamentals of Agricultural Science (MA615)
 
 ## Overview
 
@@ -116,7 +116,7 @@ Learning and teaching activity:
 - **Course Title:** Fundamentals of Agricultural Science
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:30 UTC
+- **Scraped At:** 2026-06-01 07:56:39 UTC
 
 ## Related Links
 

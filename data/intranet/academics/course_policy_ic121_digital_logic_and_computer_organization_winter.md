@@ -1,5 +1,5 @@
 ---
-title: "IC121 - Digital Logic and Computer Organization"
+title: "Digital Logic and Computer Organization"
 url: "https://intranet.daiict.ac.in/academics/IC121_Digital Logic & Computer Organization_Winter25 - Sreeja Rajendran.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IC121_Digital Logic & Computer Organization_Winter25 - Sreeja Rajendran.pdf"
 ---
 
-# IC121 - Digital Logic and Computer Organization
+# Digital Logic and Computer Organization (IC121)
 
 ## Overview
 
@@ -97,7 +97,7 @@ language instructions and addressing modes and timing analysis of instructions
 - **Course Title:** Digital Logic and Computer Organization
 - **Document Source:** IC121_Digital Logic & Computer Organization_Winter25 - Sreeja Rajendran.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:04 UTC
+- **Scraped At:** 2026-06-01 07:57:05 UTC
 
 ## Related Links
 

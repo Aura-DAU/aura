@@ -69,7 +69,7 @@ arrangement.
 - **Course Title:** EXAMINATION RULES CUM GUIDELINES FOR PHYSICALLY DISABLED STUDENTS
 - **Document Source:** Rules & Guidelines for Conducting written examination for Person with Benchmark Disabilities.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:09 UTC
+- **Scraped At:** 2026-06-01 07:55:25 UTC
 
 ## Related Links
 

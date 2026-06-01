@@ -1,5 +1,5 @@
 ---
-title: "DS4XX - DS 4XX"
+title: "DS 4XX"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# DS4XX - DS 4XX
+# DS 4XX (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course DS 4XX (DS4XX). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course DS 4XX (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -135,11 +135,11 @@ presentations | 4 |
 
 ## Important Information
 
-- **Course Code:** DS4XX
+- **Course Code:** UNKNOWN
 - **Course Title:** DS 4XX
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:47 UTC
+- **Scraped At:** 2026-06-01 07:56:54 UTC
 
 ## Related Links
 

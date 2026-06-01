@@ -298,7 +298,7 @@ Project / Internship: 20 credits
 - **Course Title:** Academic Requirements for the M Sc (IT)
 - **Document Source:** Academic Requirements_M Sc (IT)_wef 2023-24 as of August 2023.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:33 UTC
+- **Scraped At:** 2026-06-01 07:55:03 UTC
 
 ## Related Links
 

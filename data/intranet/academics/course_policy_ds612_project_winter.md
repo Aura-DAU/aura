@@ -1,5 +1,5 @@
 ---
-title: "DS612 - project"
+title: "project"
 url: "https://intranet.daiict.ac.in/academics/DS612-Interactive_Data_Visualization-winter26 - Bhaskar Chaudhury.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS612-Interactive_Data_Visualization-winter26 - Bhaskar Chaudhury.pdf"
 ---
 
-# DS612 - project
+# project (DS612)
 
 ## Overview
 
@@ -163,7 +163,7 @@ thematic paper discussion are also included in the lecture-sessions.
 - **Course Title:** project
 - **Document Source:** DS612-Interactive_Data_Visualization-winter26 - Bhaskar Chaudhury.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:53 UTC
+- **Scraped At:** 2026-06-01 07:56:57 UTC
 
 ## Related Links
 

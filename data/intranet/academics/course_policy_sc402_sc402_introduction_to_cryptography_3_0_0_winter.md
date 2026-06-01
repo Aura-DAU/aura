@@ -1,5 +1,5 @@
 ---
-title: "SC402 - – Introduction to Cryptography (3-0-0-3)"
+title: "SC402 – Introduction to Cryptography (3-0-0-3)"
 url: "https://intranet.daiict.ac.in/academics/SC402 Introduction to Cryptography_Winter 2025-27 - Maniklal Das.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC402 Introduction to Cryptography_Winter 2025-27 - Maniklal Das.pdf"
 ---
 
-# SC402 - – Introduction to Cryptography (3-0-0-3)
+# SC402 – Introduction to Cryptography (3-0-0-3) (SC402)
 
 ## Overview
 
@@ -113,7 +113,7 @@ commitment, Zero-knowledge proof | 3 |
 - **Course Title:** SC402 – Introduction to Cryptography (3-0-0-3)
 - **Document Source:** SC402 Introduction to Cryptography_Winter 2025-27 - Maniklal Das.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:30 UTC
+- **Scraped At:** 2026-06-01 07:57:23 UTC
 
 ## Related Links
 

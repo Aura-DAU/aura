@@ -1,5 +1,5 @@
 ---
-title: "DS604 - , Introduction to Data Management (Autumn’2025)"
+title: "DS604, Introduction to Data Management (Autumn’2025)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# DS604 - , Introduction to Data Management (Autumn’2025)
+# DS604, Introduction to Data Management (Autumn’2025) (DS604)
 
 ## Overview
 
@@ -140,7 +140,7 @@ Lectures |
 - **Course Title:** DS604, Introduction to Data Management (Autumn’2025)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:27 UTC
+- **Scraped At:** 2026-06-01 07:56:36 UTC
 
 ## Related Links
 

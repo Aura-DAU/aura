@@ -1,5 +1,5 @@
 ---
-title: "ED213 - Signal Processing and Control Systems"
+title: "Signal Processing and Control Systems (ED213)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# ED213 - Signal Processing and Control Systems
+# Signal Processing and Control Systems (ED213) (ED213)
 
 ## Overview
 
@@ -296,7 +296,7 @@ Implementation of Group Delay Function
 - **Course Title:** Signal Processing and Control Systems (ED213)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:21 UTC
+- **Scraped At:** 2026-06-01 07:56:31 UTC
 
 ## Related Links
 

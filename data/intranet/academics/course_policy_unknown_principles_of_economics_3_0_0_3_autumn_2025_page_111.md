@@ -1,5 +1,5 @@
 ---
-title: "HM116 - Principles of Economics (3-0-0-3)"
+title: "Principles of Economics (3-0-0-3)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# HM116 - Principles of Economics (3-0-0-3)
+# Principles of Economics (3-0-0-3) (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Principles of Economics (3-0-0-3) (HM116). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Principles of Economics (3-0-0-3) (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -62,11 +62,11 @@ The evaluation will consist of in-semester examination (30 per cent), end-semest
 
 ## Important Information
 
-- **Course Code:** HM116
+- **Course Code:** UNKNOWN
 - **Course Title:** Principles of Economics (3-0-0-3)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:23 UTC
+- **Scraped At:** 2026-06-01 07:56:33 UTC
 
 ## Related Links
 

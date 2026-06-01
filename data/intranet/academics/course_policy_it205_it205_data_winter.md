@@ -1,5 +1,5 @@
 ---
-title: "IT205 - Data"
+title: "IT205: Data"
 url: "https://intranet.daiict.ac.in/academics/IT205_Data_Structures_Winter26 - Arpit Rana.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT205_Data_Structures_Winter26 - Arpit Rana.pdf"
 ---
 
-# IT205 - Data
+# IT205: Data (IT205)
 
 ## Overview
 
@@ -239,7 +239,7 @@ best two scores will be considered.
 - **Course Title:** IT205: Data
 - **Document Source:** IT205_Data_Structures_Winter26 - Arpit Rana.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:12 UTC
+- **Scraped At:** 2026-06-01 07:57:10 UTC
 
 ## Related Links
 

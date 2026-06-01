@@ -1,5 +1,5 @@
 ---
-title: "MODULATION - CT 303: Digital Communication"
+title: "CT 303: Digital Communication"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MODULATION - CT 303: Digital Communication
+# CT 303: Digital Communication (MODULATION)
 
 ## Overview
 
@@ -136,7 +136,7 @@ Lecture Schedule:
 - **Course Title:** CT 303: Digital Communication
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:22 UTC
+- **Scraped At:** 2026-06-01 07:56:32 UTC
 
 ## Related Links
 

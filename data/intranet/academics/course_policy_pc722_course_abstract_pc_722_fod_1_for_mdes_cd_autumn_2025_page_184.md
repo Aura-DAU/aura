@@ -1,5 +1,5 @@
 ---
-title: "PC722 - Course Abstract: PC 722 FOD 1 for MDes CD"
+title: "Course Abstract: PC 722 FOD 1 for MDes CD"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# PC722 - Course Abstract: PC 722 FOD 1 for MDes CD
+# Course Abstract: PC 722 FOD 1 for MDes CD (PC722)
 
 ## Overview
 
@@ -423,7 +423,7 @@ Course Abstract: PC 722 FOD 1 for MDes CD
 - **Course Title:** Course Abstract: PC 722 FOD 1 for MDes CD
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:31 UTC
+- **Scraped At:** 2026-06-01 07:56:40 UTC
 
 ## Related Links
 

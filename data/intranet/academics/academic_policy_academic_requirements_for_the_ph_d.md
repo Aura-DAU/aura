@@ -813,7 +813,7 @@ July 2024.
 - **Course Title:** Academic Requirements for the Ph D
 - **Document Source:** Academic Requirements_Ph D Program_EnggScience_wef 2024-25 as of July 2024.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:50 UTC
+- **Scraped At:** 2026-06-01 07:55:13 UTC
 
 ## Related Links
 

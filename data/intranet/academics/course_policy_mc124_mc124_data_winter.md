@@ -1,5 +1,5 @@
 ---
-title: "MC124 - – Data"
+title: "MC124 – Data"
 url: "https://intranet.daiict.ac.in/academics/MC124 Data Structures and Algorithms_Winter 2025-26 - Maniklal Das.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC124 Data Structures and Algorithms_Winter 2025-26 - Maniklal Das.pdf"
 ---
 
-# MC124 - – Data
+# MC124 – Data (MC124)
 
 ## Overview
 
@@ -73,7 +73,7 @@ End Semester exam – 40%
 - **Course Title:** MC124 – Data
 - **Document Source:** MC124 Data Structures and Algorithms_Winter 2025-26 - Maniklal Das.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:22 UTC
+- **Scraped At:** 2026-06-01 07:57:18 UTC
 
 ## Related Links
 

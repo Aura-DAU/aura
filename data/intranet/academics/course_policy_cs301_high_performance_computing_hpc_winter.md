@@ -1,5 +1,5 @@
 ---
-title: "CS301 - High Performance Computing (HPC)"
+title: "High Performance Computing (HPC)"
 url: "https://intranet.daiict.ac.in/academics/CS301-High-Performance-Computing-winter26 - Bhaskar Chaudhury.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CS301-High-Performance-Computing-winter26 - Bhaskar Chaudhury.pdf"
 ---
 
-# CS301 - High Performance Computing (HPC)
+# High Performance Computing (HPC) (CS301)
 
 ## Overview
 
@@ -156,7 +156,7 @@ Hybrid parallelization with MPI and OpenMP.
 - **Course Title:** High Performance Computing (HPC)
 - **Document Source:** CS301-High-Performance-Computing-winter26 - Bhaskar Chaudhury.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:49 UTC
+- **Scraped At:** 2026-06-01 07:56:55 UTC
 
 ## Related Links
 

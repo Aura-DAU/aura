@@ -1,5 +1,5 @@
 ---
-title: "IT561 - Advanced Software Engineering"
+title: "Advanced Software Engineering (IT561)"
 url: "https://intranet.daiict.ac.in/academics/IT561_ASE_Winter26 - JayPrakash Lalchandani.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT561_ASE_Winter26 - JayPrakash Lalchandani.pdf"
 ---
 
-# IT561 - Advanced Software Engineering
+# Advanced Software Engineering (IT561) (IT561)
 
 ## Overview
 
@@ -127,7 +127,7 @@ ment of enterprise-grade systems.
 - **Course Title:** Advanced Software Engineering (IT561)
 - **Document Source:** IT561_ASE_Winter26 - JayPrakash Lalchandani.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:17 UTC
+- **Scraped At:** 2026-06-01 07:57:14 UTC
 
 ## Related Links
 

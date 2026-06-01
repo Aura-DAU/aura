@@ -1,5 +1,5 @@
 ---
-title: "CT505 - CT 505: Detection & Estimation Theory"
+title: "CT 505: Detection & Estimation Theory"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# CT505 - CT 505: Detection & Estimation Theory
+# CT 505: Detection & Estimation Theory (CT505)
 
 ## Overview
 
@@ -117,7 +117,7 @@ Lecture Schedule:
 - **Course Title:** CT 505: Detection & Estimation Theory
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:38 UTC
+- **Scraped At:** 2026-06-01 07:56:46 UTC
 
 ## Related Links
 

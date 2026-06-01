@@ -1,5 +1,5 @@
 ---
-title: "EL469 - VLSI TECHNOLOGY"
+title: "EL469  VLSI TECHNOLOGY"
 url: "https://intranet.daiict.ac.in/academics/EL469-VLSI_TECHNOLOGY_WINTER2025 26 - Harpreet Singh Jattana.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "EL469-VLSI_TECHNOLOGY_WINTER2025 26 - Harpreet Singh Jattana.pdf"
 ---
 
-# EL469 - VLSI TECHNOLOGY
+# EL469  VLSI TECHNOLOGY (EL469)
 
 ## Overview
 
@@ -293,7 +293,7 @@ POs-COs Matrix:
 - **Course Title:** EL469  VLSI TECHNOLOGY
 - **Document Source:** EL469-VLSI_TECHNOLOGY_WINTER2025 26 - Harpreet Singh Jattana.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:57 UTC
+- **Scraped At:** 2026-06-01 07:57:00 UTC
 
 ## Related Links
 

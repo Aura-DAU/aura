@@ -1,5 +1,5 @@
 ---
-title: "DS605 - Fundamentals of Machine Learning"
+title: "DS605: Fundamentals of Machine Learning"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# DS605 - Fundamentals of Machine Learning
+# DS605: Fundamentals of Machine Learning (DS605)
 
 ## Overview
 
@@ -478,7 +478,7 @@ Page No 6
 - **Course Title:** DS605: Fundamentals of Machine Learning
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:27 UTC
+- **Scraped At:** 2026-06-01 07:56:37 UTC
 
 ## Related Links
 

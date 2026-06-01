@@ -1,5 +1,5 @@
 ---
-title: "EL453 - Page 1 of"
+title: "Page 1 of"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# EL453 - Page 1 of
+# Page 1 of (EL453)
 
 ## Overview
 
@@ -204,7 +204,7 @@ Page 4 of 4
 - **Course Title:** Page 1 of
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:39 UTC
+- **Scraped At:** 2026-06-01 07:56:47 UTC
 
 ## Related Links
 

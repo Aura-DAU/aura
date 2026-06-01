@@ -1,5 +1,5 @@
 ---
-title: "HM467 - Approaches to Globalization"
+title: "Approaches to Globalization"
 url: "https://intranet.daiict.ac.in/academics/HM469_Approaches to Globalization_Winter25 - Madhumita Mazumdar - Madhumita Mazumdar.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM469_Approaches to Globalization_Winter25 - Madhumita Mazumdar - Madhumita Mazumdar.pdf"
 ---
 
-# HM467 - Approaches to Globalization
+# Approaches to Globalization (HM467)
 
 ## Overview
 
@@ -211,7 +211,7 @@ Sassen, S. The global city. Princeton, NJ: Princeton University Press,
 - **Course Title:** Approaches to Globalization
 - **Document Source:** HM469_Approaches to Globalization_Winter25 - Madhumita Mazumdar - Madhumita Mazumdar.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:01 UTC
+- **Scraped At:** 2026-06-01 07:57:03 UTC
 
 ## Related Links
 

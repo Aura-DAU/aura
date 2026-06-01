@@ -1,5 +1,5 @@
 ---
-title: "ED224 - Page 1 of"
+title: "Page 1 of"
 url: "https://intranet.daiict.ac.in/academics/ED224_AnalogElectronics_Winter26 - Rutu Parekh.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "ED224_AnalogElectronics_Winter26 - Rutu Parekh.pdf"
 ---
 
-# ED224 - Page 1 of
+# Page 1 of (ED224)
 
 ## Overview
 
@@ -133,7 +133,7 @@ Page 2 of 2
 - **Course Title:** Page 1 of
 - **Document Source:** ED224_AnalogElectronics_Winter26 - Rutu Parekh.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:55 UTC
+- **Scraped At:** 2026-06-01 07:56:58 UTC
 
 ## Related Links
 

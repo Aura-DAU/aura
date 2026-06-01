@@ -1,5 +1,5 @@
 ---
-title: "HM106 - Approaches to Indian Society"
+title: "Approaches to Indian Society"
 url: "https://intranet.daiict.ac.in/academics/HM106_Approaches to Indian Society_WinterSemester2026 .docx - Ratna Bharati Bhamidipati.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM106_Approaches to Indian Society_WinterSemester2026 .docx - Ratna Bharati Bhamidipati.pdf"
 ---
 
-# HM106 - Approaches to Indian Society
+# Approaches to Indian Society (HM106)
 
 ## Overview
 
@@ -171,7 +171,7 @@ Anti-Arrack Agitation of Women in Andhra Pradesh. 4 March 2024
 - **Course Title:** Approaches to Indian Society
 - **Document Source:** HM106_Approaches to Indian Society_WinterSemester2026 .docx - Ratna Bharati Bhamidipati.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:58 UTC
+- **Scraped At:** 2026-06-01 07:57:01 UTC
 
 ## Related Links
 

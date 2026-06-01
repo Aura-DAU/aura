@@ -1,5 +1,5 @@
 ---
-title: "PC746 - Informa(on Design []"
+title: "Informa(on Design [PC746]"
 url: "https://intranet.daiict.ac.in/academics/PC746 -Information Design.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "PC746 -Information Design.pdf"
 ---
 
-# PC746 - Informa(on Design []
+# Informa(on Design [PC746] (PC746)
 
 ## Overview
 
@@ -137,7 +137,7 @@ Dr. Anupam Rana
 - **Course Title:** Informa(on Design [PC746]
 - **Document Source:** PC746 -Information Design.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:26 UTC
+- **Scraped At:** 2026-06-01 07:57:20 UTC
 
 ## Related Links
 

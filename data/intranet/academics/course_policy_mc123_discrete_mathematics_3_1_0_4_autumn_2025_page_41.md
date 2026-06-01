@@ -1,5 +1,5 @@
 ---
-title: "MC123 - DISCRETE MATHEMATICS (3-1-0-4)"
+title: "DISCRETE MATHEMATICS (3-1-0-4)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MC123 - DISCRETE MATHEMATICS (3-1-0-4)
+# DISCRETE MATHEMATICS (3-1-0-4) (MC123)
 
 ## Overview
 
@@ -101,7 +101,7 @@ under such discrete distributions.
 - **Course Title:** DISCRETE MATHEMATICS (3-1-0-4)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:15 UTC
+- **Scraped At:** 2026-06-01 07:56:26 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "IT694 - Computer Networks (Winter’2026)"
+title: "IT694 Computer Networks (Winter’2026)"
 url: "https://intranet.daiict.ac.in/academics/IT694_ComputerNetworks_Winter2026 - kalyan sasidhar P S.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT694_ComputerNetworks_Winter2026 - kalyan sasidhar P S.pdf"
 ---
 
-# IT694 - Computer Networks (Winter’2026)
+# IT694 Computer Networks (Winter’2026) (IT694)
 
 ## Overview
 
@@ -206,7 +206,7 @@ Networks |  |  |  | 3 |
 - **Course Title:** IT694 Computer Networks (Winter’2026)
 - **Document Source:** IT694_ComputerNetworks_Winter2026 - kalyan sasidhar P S.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:21 UTC
+- **Scraped At:** 2026-06-01 07:57:17 UTC
 
 ## Related Links
 

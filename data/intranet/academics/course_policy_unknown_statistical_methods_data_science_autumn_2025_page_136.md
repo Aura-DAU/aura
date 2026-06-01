@@ -1,5 +1,5 @@
 ---
-title: "SC613 - Statistical methods –Data Science"
+title: "Statistical methods –Data Science"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# SC613 - Statistical methods –Data Science
+# Statistical methods –Data Science (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Statistical methods –Data Science (SC613). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Statistical methods –Data Science (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -153,11 +153,11 @@ Linear Regression & Logistic Regression | 10 |
 
 ## Important Information
 
-- **Course Code:** SC613
+- **Course Code:** UNKNOWN
 - **Course Title:** Statistical methods –Data Science
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:26 UTC
+- **Scraped At:** 2026-06-01 07:56:35 UTC
 
 ## Related Links
 

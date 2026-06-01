@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MC111 - Mathematical, Algorithmic, and
+# MC111 - Mathematical, Algorithmic, and (MC111)
 
 ## Overview
 
@@ -887,7 +887,7 @@ opinions... about the exam.
 - **Course Title:** MC111 - Mathematical, Algorithmic, and
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:14 UTC
+- **Scraped At:** 2026-06-01 07:56:25 UTC
 
 ## Related Links
 

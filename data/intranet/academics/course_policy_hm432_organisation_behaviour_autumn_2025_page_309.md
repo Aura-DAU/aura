@@ -1,5 +1,5 @@
 ---
-title: "HM432 - ORGANISATION BEHAVIOUR"
+title: "ORGANISATION BEHAVIOUR"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# HM432 - ORGANISATION BEHAVIOUR
+# ORGANISATION BEHAVIOUR (HM432)
 
 ## Overview
 
@@ -122,7 +122,7 @@ Hall, 1974
 - **Course Title:** ORGANISATION BEHAVIOUR
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:45 UTC
+- **Scraped At:** 2026-06-01 07:56:52 UTC
 
 ## Related Links
 

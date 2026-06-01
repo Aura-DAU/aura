@@ -1,5 +1,5 @@
 ---
-title: "DINPYTHONANDEXECUTEDUSING - SC444 Game Theory (Winter 2026)"
+title: "SC444 Game Theory (Winter 2026)"
 url: "https://intranet.daiict.ac.in/academics/SC444_GameTheory_Winter2026 - G Venkatesh.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC444_GameTheory_Winter2026 - G Venkatesh.pdf"
 ---
 
-# DINPYTHONANDEXECUTEDUSING - SC444 Game Theory (Winter 2026)
+# SC444 Game Theory (Winter 2026) (DINPYTHONANDEXECUTEDUSING)
 
 ## Overview
 
@@ -126,7 +126,7 @@ a game and submit it as a Jupyter notebook |  |
 - **Course Title:** SC444 Game Theory (Winter 2026)
 - **Document Source:** SC444_GameTheory_Winter2026 - G Venkatesh.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:31 UTC
+- **Scraped At:** 2026-06-01 07:57:23 UTC
 
 ## Related Links
 

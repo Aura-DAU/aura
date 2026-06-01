@@ -1,5 +1,5 @@
 ---
-title: "XXX - Management Skills for Professional Excellence"
+title: "Management Skills for Professional Excellence"
 url: "https://intranet.daiict.ac.in/academics/HM409-Management-skills-professional-excellence.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM409-Management-skills-professional-excellence.pdf"
 ---
 
-# XXX - Management Skills for Professional Excellence
+# Management Skills for Professional Excellence (XXX)
 
 ## Overview
 
@@ -88,7 +88,7 @@ Page 2 of 2
 - **Course Title:** Management Skills for Professional Excellence
 - **Document Source:** HM409-Management-skills-professional-excellence.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:00 UTC
+- **Scraped At:** 2026-06-01 07:57:02 UTC
 
 ## Related Links
 

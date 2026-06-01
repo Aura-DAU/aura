@@ -66,7 +66,7 @@ DA-IICT, Gandhinagar
 - **Course Title:** CERTIFICATE OF ACADEMIC ACCOMPLISHMENT
 - **Document Source:** Certificate of Academic Accomplishment.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:53 UTC
+- **Scraped At:** 2026-06-01 07:57:41 UTC
 
 ## Related Links
 

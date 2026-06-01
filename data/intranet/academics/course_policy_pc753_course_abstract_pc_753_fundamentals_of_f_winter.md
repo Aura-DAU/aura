@@ -1,5 +1,5 @@
 ---
-title: "PC753 - Course Abstract: PC 753 Fundamentals of Filmmaking for MDes CD"
+title: "Course Abstract: PC 753 Fundamentals of Filmmaking for MDes CD"
 url: "https://intranet.daiict.ac.in/academics/PC753 -  Fundamentals of Filmmaking.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "PC753 -  Fundamentals of Filmmaking.pdf"
 ---
 
-# PC753 - Course Abstract: PC 753 Fundamentals of Filmmaking for MDes CD
+# Course Abstract: PC 753 Fundamentals of Filmmaking for MDes CD (PC753)
 
 ## Overview
 
@@ -538,7 +538,7 @@ Course Abstract: PC 753 Fundamentals of Filmmaking for MDes CD
 - **Course Title:** Course Abstract: PC 753 Fundamentals of Filmmaking for MDes CD
 - **Document Source:** PC753 -  Fundamentals of Filmmaking.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:27 UTC
+- **Scraped At:** 2026-06-01 07:57:21 UTC
 
 ## Related Links
 

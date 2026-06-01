@@ -1,5 +1,5 @@
 ---
-title: "IT623 - Data"
+title: "IT623: Data"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT623 - Data
+# IT623: Data (IT623)
 
 ## Overview
 
@@ -167,7 +167,7 @@ gorithms. |
 - **Course Title:** IT623: Data
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:25 UTC
+- **Scraped At:** 2026-06-01 07:56:35 UTC
 
 ## Related Links
 

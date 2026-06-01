@@ -1302,7 +1302,7 @@ Page 4 of 4
 - **Course Title:** BTech-II (ICT)
 - **Document Source:** End Sem Exam Schedule Autumn 2024-25  Final Version_updated.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:59 UTC
+- **Scraped At:** 2026-06-01 07:55:20 UTC
 
 ## Related Links
 

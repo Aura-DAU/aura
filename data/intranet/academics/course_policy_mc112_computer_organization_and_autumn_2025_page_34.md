@@ -1,5 +1,5 @@
 ---
-title: "MC112 - Computer Organization and"
+title: "Computer Organization and"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MC112 - Computer Organization and
+# Computer Organization and (MC112)
 
 ## Overview
 
@@ -121,7 +121,7 @@ X
 - **Course Title:** Computer Organization and
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:14 UTC
+- **Scraped At:** 2026-06-01 07:56:25 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "SC107 - SC 107 Calculus"
+title: "SC 107 Calculus"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# SC107 - SC 107 Calculus
+# SC 107 Calculus (SC107)
 
 ## Overview
 
@@ -126,7 +126,7 @@ Detailed Course Content
 - **Course Title:** SC 107 Calculus
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:13 UTC
+- **Scraped At:** 2026-06-01 07:56:24 UTC
 
 ## Related Links
 

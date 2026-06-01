@@ -109,7 +109,7 @@ Thinking | VS | Lab Exam (63 Registered Studnets) |  |  |  |  |  |  |  |  |
 - **Course Title:** BTech-I (ICT)
 - **Document Source:** UG2024 Autumn 2024-25 Mid Semester Exam Schedule Final Version.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:19 UTC
+- **Scraped At:** 2026-06-01 07:55:32 UTC
 
 ## Related Links
 

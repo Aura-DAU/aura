@@ -333,7 +333,7 @@ ____________________________****************************________________________
 - **Course Title:** Academic Requirements for the MDes
 - **Document Source:** Academic Requirements_MDes(IUxD)_wef 2025-26  .pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:41 UTC
+- **Scraped At:** 2026-06-01 07:55:07 UTC
 
 ## Related Links
 

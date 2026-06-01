@@ -1,5 +1,5 @@
 ---
-title: "EL203 - Embedded Hardware Design"
+title: "Embedded Hardware Design"
 url: "https://intranet.daiict.ac.in/academics/EL203_EmbeddedHardwareDesign_Winter26 - Tapas Kumar Maiti.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "EL203_EmbeddedHardwareDesign_Winter26 - Tapas Kumar Maiti.pdf"
 ---
 
-# EL203 - Embedded Hardware Design
+# Embedded Hardware Design (EL203)
 
 ## Overview
 
@@ -177,7 +177,7 @@ SRAM | 3 |
 - **Course Title:** Embedded Hardware Design
 - **Document Source:** EL203_EmbeddedHardwareDesign_Winter26 - Tapas Kumar Maiti.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:57 UTC
+- **Scraped At:** 2026-06-01 07:56:59 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "HM413 - HM 413: Knowledge and Identity in Three Modern Indian Novels"
+title: "HM 413: Knowledge and Identity in Three Modern Indian Novels"
 url: "https://intranet.daiict.ac.in/academics/HM413_Knowledge and Identity in Three Modern Indian Novels_Winter_2025_26 - Gangeya Mukherji.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM413_Knowledge and Identity in Three Modern Indian Novels_Winter_2025_26 - Gangeya Mukherji.pdf"
 ---
 
-# HM413 - HM 413: Knowledge and Identity in Three Modern Indian Novels
+# HM 413: Knowledge and Identity in Three Modern Indian Novels (HM413)
 
 ## Overview
 
@@ -158,7 +158,7 @@ pervasive principle of life.
 - **Course Title:** HM 413: Knowledge and Identity in Three Modern Indian Novels
 - **Document Source:** HM413_Knowledge and Identity in Three Modern Indian Novels_Winter_2025_26 - Gangeya Mukherji.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:01 UTC
+- **Scraped At:** 2026-06-01 07:57:02 UTC
 
 ## Related Links
 

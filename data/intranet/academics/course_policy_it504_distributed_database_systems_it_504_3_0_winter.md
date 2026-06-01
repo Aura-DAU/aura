@@ -1,5 +1,5 @@
 ---
-title: "IT504 - Distributed Database Systems IT 504 (3‐0‐2‐4)"
+title: "Distributed Database Systems IT 504 (3‐0‐2‐4)"
 url: "https://intranet.daiict.ac.in/academics/IT504_Distributed Database Systems_MTech SS Core II Semester - Minal Bhise.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT504_Distributed Database Systems_MTech SS Core II Semester - Minal Bhise.pdf"
 ---
 
-# IT504 - Distributed Database Systems IT 504 (3‐0‐2‐4)
+# Distributed Database Systems IT 504 (3‐0‐2‐4) (IT504)
 
 ## Overview
 
@@ -118,7 +118,7 @@ spread all over the semester.
 - **Course Title:** Distributed Database Systems IT 504 (3‐0‐2‐4)
 - **Document Source:** IT504_Distributed Database Systems_MTech SS Core II Semester - Minal Bhise.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:16 UTC
+- **Scraped At:** 2026-06-01 07:57:13 UTC
 
 ## Related Links
 

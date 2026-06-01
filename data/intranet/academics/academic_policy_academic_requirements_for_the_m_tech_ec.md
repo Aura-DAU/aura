@@ -498,7 +498,7 @@ Total Credits:
 - **Course Title:** Academic Requirements for the M Tech (EC)
 - **Document Source:** Academic Requirements_M Tech_(EC)_Program_wef 2022-23.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:35 UTC
+- **Scraped At:** 2026-06-01 07:55:04 UTC
 
 ## Related Links
 

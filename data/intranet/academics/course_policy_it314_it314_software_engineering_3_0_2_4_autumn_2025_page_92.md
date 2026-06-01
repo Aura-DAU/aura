@@ -1,5 +1,5 @@
 ---
-title: "IT314 - Software Engineering (3-0-2-4)"
+title: "IT314 Software Engineering (3-0-2-4)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT314 - Software Engineering (3-0-2-4)
+# IT314 Software Engineering (3-0-2-4) (IT314)
 
 ## Overview
 
@@ -100,7 +100,7 @@ group work for students who perform poorly on exams or individual assignments).
 - **Course Title:** IT314 Software Engineering (3-0-2-4)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:21 UTC
+- **Scraped At:** 2026-06-01 07:56:31 UTC
 
 ## Related Links
 

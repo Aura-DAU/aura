@@ -1,5 +1,5 @@
 ---
-title: "HTTPS - MC"
+title: "MC"
 url: "https://intranet.daiict.ac.in/academics/MC122_ObjectOrientedProgramming_Winter25 - Ankit Vijayvargiya.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC122_ObjectOrientedProgramming_Winter25 - Ankit Vijayvargiya.pdf"
 ---
 
-# HTTPS - MC
+# MC (HTTPS)
 
 ## Overview
 
@@ -152,7 +152,7 @@ handling
 - **Course Title:** MC
 - **Document Source:** MC122_ObjectOrientedProgramming_Winter25 - Ankit Vijayvargiya.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:22 UTC
+- **Scraped At:** 2026-06-01 07:57:18 UTC
 
 ## Related Links
 

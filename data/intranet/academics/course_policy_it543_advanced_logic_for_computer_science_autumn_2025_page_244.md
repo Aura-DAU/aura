@@ -1,5 +1,5 @@
 ---
-title: "IT543 - Advanced Logic for Computer Science"
+title: "Advanced Logic for Computer Science"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT543 - Advanced Logic for Computer Science
+# Advanced Logic for Computer Science (IT543)
 
 ## Overview
 
@@ -107,7 +107,7 @@ order calculus | 5 |
 - **Course Title:** Advanced Logic for Computer Science
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:37 UTC
+- **Scraped At:** 2026-06-01 07:56:45 UTC
 
 ## Related Links
 

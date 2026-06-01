@@ -426,7 +426,7 @@ Machine Learning
 - **Course Title:** Academic Requirements for the M Sc (DS)
 - **Document Source:** Academic requirements_MSc(DS)_wef_2024-25 as of October 2024.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:51 UTC
+- **Scraped At:** 2026-06-01 07:55:14 UTC
 
 ## Related Links
 

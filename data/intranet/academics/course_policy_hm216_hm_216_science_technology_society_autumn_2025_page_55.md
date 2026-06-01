@@ -1,5 +1,5 @@
 ---
-title: "HM216 - HM 216 Science, Technology, Society"
+title: "HM 216 Science, Technology, Society"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# HM216 - HM 216 Science, Technology, Society
+# HM 216 Science, Technology, Society (HM216)
 
 ## Overview
 
@@ -215,7 +215,7 @@ GROUP PROJECTS | 12 |
 - **Course Title:** HM 216 Science, Technology, Society
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:16 UTC
+- **Scraped At:** 2026-06-01 07:56:27 UTC
 
 ## Related Links
 

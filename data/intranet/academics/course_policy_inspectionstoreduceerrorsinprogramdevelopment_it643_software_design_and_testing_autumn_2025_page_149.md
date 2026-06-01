@@ -1,5 +1,5 @@
 ---
-title: "INSPECTIONSTOREDUCEERRORSINPROGRAMDEVELOPMENT - IT643 - Software Design and Testing"
+title: "IT643 - Software Design and Testing"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# INSPECTIONSTOREDUCEERRORSINPROGRAMDEVELOPMENT - IT643 - Software Design and Testing
+# IT643 - Software Design and Testing (INSPECTIONSTOREDUCEERRORSINPROGRAMDEVELOPMENT)
 
 ## Overview
 
@@ -89,7 +89,7 @@ is "safe from bugs, easy to understand, and ready for change".
 - **Course Title:** IT643 - Software Design and Testing
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:27 UTC
+- **Scraped At:** 2026-06-01 07:56:37 UTC
 
 ## Related Links
 

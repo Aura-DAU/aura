@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT603 - Introduction to
+# IT603 - Introduction to (IT603)
 
 ## Overview
 
@@ -92,7 +92,7 @@ able to navigate Linux environments fluently and take up new programming languag
 - **Course Title:** IT603 - Introduction to
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:25 UTC
+- **Scraped At:** 2026-06-01 07:56:35 UTC
 
 ## Related Links
 

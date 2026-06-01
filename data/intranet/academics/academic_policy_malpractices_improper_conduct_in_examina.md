@@ -169,7 +169,7 @@ DA-IICT
 - **Course Title:** Malpractices/Improper Conduct in Examinations and Consequences
 - **Document Source:** Guidelines of Exams Malpractices.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:03 UTC
+- **Scraped At:** 2026-06-01 07:55:22 UTC
 
 ## Related Links
 

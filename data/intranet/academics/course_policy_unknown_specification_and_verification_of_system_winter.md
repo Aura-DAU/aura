@@ -1,5 +1,5 @@
 ---
-title: "IT449 - Specification and verification of systems (IT-449)"
+title: "Specification and verification of systems (IT-449)"
 url: "https://intranet.daiict.ac.in/academics/IT449_Specification_And_Verification_of_systems_Winter24.pdf - Puneet Bhateja.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "IT449_Specification_And_Verification_of_systems_Winter24.pdf - Puneet Bhateja.pdf"
 ---
 
-# IT449 - Specification and verification of systems (IT-449)
+# Specification and verification of systems (IT-449) (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Specification and verification of systems (IT-449) (IT449). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Specification and verification of systems (IT-449) (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -113,11 +113,11 @@ Class participation:  10 %
 
 ## Important Information
 
-- **Course Code:** IT449
+- **Course Code:** UNKNOWN
 - **Course Title:** Specification and verification of systems (IT-449)
 - **Document Source:** IT449_Specification_And_Verification_of_systems_Winter24.pdf - Puneet Bhateja.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:14 UTC
+- **Scraped At:** 2026-06-01 07:57:12 UTC
 
 ## Related Links
 

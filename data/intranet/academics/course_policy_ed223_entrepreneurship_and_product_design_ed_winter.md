@@ -1,5 +1,5 @@
 ---
-title: "ED223 - Entrepreneurship and Product Design - ED"
+title: "Entrepreneurship and Product Design - ED"
 url: "https://intranet.daiict.ac.in/academics/ED223_EntrepreneurshipAndProductDesign_Winter26_Updated - Amitava Ghosh.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "ED223_EntrepreneurshipAndProductDesign_Winter26_Updated - Amitava Ghosh.pdf"
 ---
 
-# ED223 - Entrepreneurship and Product Design - ED
+# Entrepreneurship and Product Design - ED (ED223)
 
 ## Overview
 
@@ -108,7 +108,7 @@ projects.
 - **Course Title:** Entrepreneurship and Product Design - ED
 - **Document Source:** ED223_EntrepreneurshipAndProductDesign_Winter26_Updated - Amitava Ghosh.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:55 UTC
+- **Scraped At:** 2026-06-01 07:56:58 UTC
 
 ## Related Links
 

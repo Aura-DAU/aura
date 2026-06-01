@@ -1,5 +1,5 @@
 ---
-title: "PREREQUISITES - Electronic Design Lab"
+title: "Electronic Design Lab"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# PREREQUISITES - Electronic Design Lab
+# Electronic Design Lab (PREREQUISITES)
 
 ## Overview
 
@@ -68,7 +68,7 @@ Web Resources, Datasheets
 - **Course Title:** Electronic Design Lab
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:21 UTC
+- **Scraped At:** 2026-06-01 07:56:31 UTC
 
 ## Related Links
 

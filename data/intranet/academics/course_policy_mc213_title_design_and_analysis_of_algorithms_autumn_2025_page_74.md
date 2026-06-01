@@ -1,5 +1,5 @@
 ---
-title: "MC213 - Title: Design and Analysis of Algorithms (MnC) SEM III core"
+title: "Title: Design and Analysis of Algorithms (MnC) SEM III core"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MC213 - Title: Design and Analysis of Algorithms (MnC) SEM III core
+# Title: Design and Analysis of Algorithms (MnC) SEM III core (MC213)
 
 ## Overview
 
@@ -72,7 +72,7 @@ practical performance.
 - **Course Title:** Title: Design and Analysis of Algorithms (MnC) SEM III core
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:18 UTC
+- **Scraped At:** 2026-06-01 07:56:29 UTC
 
 ## Related Links
 

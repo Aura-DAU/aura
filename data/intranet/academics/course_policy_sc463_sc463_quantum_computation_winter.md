@@ -1,5 +1,5 @@
 ---
-title: "SC463 - Quantum Computation"
+title: "SC463: Quantum Computation"
 url: "https://intranet.daiict.ac.in/academics/SC463_Quantum-Computation - Gautam Dutta.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC463_Quantum-Computation - Gautam Dutta.pdf"
 ---
 
-# SC463 - Quantum Computation
+# SC463: Quantum Computation (SC463)
 
 ## Overview
 
@@ -122,7 +122,7 @@ J. J. Sakurai
 - **Course Title:** SC463: Quantum Computation
 - **Document Source:** SC463_Quantum-Computation - Gautam Dutta.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:31 UTC
+- **Scraped At:** 2026-06-01 07:57:23 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "HM405 - HM 405: The Idea of India: Swami Vivekananda, Rabindranath Tagore, M.K. Gandhi"
+title: "HM 405: The Idea of India: Swami Vivekananda, Rabindranath Tagore, M.K. Gandhi"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# HM405 - HM 405: The Idea of India: Swami Vivekananda, Rabindranath Tagore, M.K. Gandhi
+# HM 405: The Idea of India: Swami Vivekananda, Rabindranath Tagore, M.K. Gandhi (HM405)
 
 ## Overview
 
@@ -260,7 +260,7 @@ importance of this formative and pervasive principle of life.
 - **Course Title:** HM 405: The Idea of India: Swami Vivekananda, Rabindranath Tagore, M.K. Gandhi
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:44 UTC
+- **Scraped At:** 2026-06-01 07:56:51 UTC
 
 ## Related Links
 

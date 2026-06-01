@@ -487,7 +487,7 @@ Any other relevant course
 - **Course Title:** Appendix I
 - **Document Source:** Appendix - Specialization-wise M Tech (ICT) Course struture from 2024-25.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:51 UTC
+- **Scraped At:** 2026-06-01 07:55:14 UTC
 
 ## Related Links
 

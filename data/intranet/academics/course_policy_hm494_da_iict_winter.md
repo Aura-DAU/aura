@@ -1,5 +1,5 @@
 ---
-title: "HM494 - DA-IICT"
+title: "DA-IICT"
 url: "https://intranet.daiict.ac.in/academics/HM494_Indian Diaspora and Transnationalism_WinterSemester2026 - Ratna Bharati Bhamidipati.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM494_Indian Diaspora and Transnationalism_WinterSemester2026 - Ratna Bharati Bhamidipati.pdf"
 ---
 
-# HM494 - DA-IICT
+# DA-IICT (HM494)
 
 ## Overview
 
@@ -369,7 +369,7 @@ Lahiri's The Namesake.” South Asian Review 36 (2): 195-214.
 - **Course Title:** DA-IICT
 - **Document Source:** HM494_Indian Diaspora and Transnationalism_WinterSemester2026 - Ratna Bharati Bhamidipati.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:03 UTC
+- **Scraped At:** 2026-06-01 07:57:04 UTC
 
 ## Related Links
 

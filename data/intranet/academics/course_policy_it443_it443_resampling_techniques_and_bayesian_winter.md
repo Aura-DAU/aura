@@ -1,5 +1,5 @@
 ---
-title: "IT443 - Resampling Techniques and Bayesian Computation (Winter ’2026)"
+title: "IT443 Resampling Techniques and Bayesian Computation (Winter ’2026)"
 url: "https://intranet.daiict.ac.in/academics/IT443_ResamplingTechniquesandBayesianComputation_Winter26 - Subhasish Basak.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT443_ResamplingTechniquesandBayesianComputation_Winter26 - Subhasish Basak.pdf"
 ---
 
-# IT443 - Resampling Techniques and Bayesian Computation (Winter ’2026)
+# IT443 Resampling Techniques and Bayesian Computation (Winter ’2026) (IT443)
 
 ## Overview
 
@@ -126,7 +126,7 @@ solving sessions. | 4 |
 - **Course Title:** IT443 Resampling Techniques and Bayesian Computation (Winter ’2026)
 - **Document Source:** IT443_ResamplingTechniquesandBayesianComputation_Winter26 - Subhasish Basak.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:14 UTC
+- **Scraped At:** 2026-06-01 07:57:12 UTC
 
 ## Related Links
 

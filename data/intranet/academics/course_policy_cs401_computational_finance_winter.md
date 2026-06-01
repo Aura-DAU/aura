@@ -1,5 +1,5 @@
 ---
-title: "CS401 - Computational Finance"
+title: "Computational Finance"
 url: "https://intranet.daiict.ac.in/academics/CS408_ComputationalFinance_Winter26 - Arnab Kumar Ray.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CS408_ComputationalFinance_Winter26 - Arnab Kumar Ray.pdf"
 ---
 
-# CS401 - Computational Finance
+# Computational Finance (CS401)
 
 ## Overview
 
@@ -132,7 +132,7 @@ X
 - **Course Title:** Computational Finance
 - **Document Source:** CS408_ComputationalFinance_Winter26 - Arnab Kumar Ray.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:50 UTC
+- **Scraped At:** 2026-06-01 07:56:55 UTC
 
 ## Related Links
 

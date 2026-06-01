@@ -1,5 +1,5 @@
 ---
-title: "MC221 - Mathematical Statistics"
+title: "Mathematical Statistics"
 url: "https://intranet.daiict.ac.in/academics/MC221_MathematicalStatistics_Winter26 - Gopinath Panda.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC221_MathematicalStatistics_Winter26 - Gopinath Panda.pdf"
 ---
 
-# MC221 - Mathematical Statistics
+# Mathematical Statistics (MC221)
 
 ## Overview
 
@@ -113,7 +113,7 @@ Lecture  Schedule
 - **Course Title:** Mathematical Statistics
 - **Document Source:** MC221_MathematicalStatistics_Winter26 - Gopinath Panda.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:23 UTC
+- **Scraped At:** 2026-06-01 07:57:18 UTC
 
 ## Related Links
 

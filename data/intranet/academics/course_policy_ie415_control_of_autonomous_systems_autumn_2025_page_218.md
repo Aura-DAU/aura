@@ -1,5 +1,5 @@
 ---
-title: "IE415 - Control of Autonomous Systems"
+title: "Control of Autonomous Systems"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IE415 - Control of Autonomous Systems
+# Control of Autonomous Systems (IE415)
 
 ## Overview
 
@@ -318,7 +318,7 @@ world problems. |
 - **Course Title:** Control of Autonomous Systems
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:34 UTC
+- **Scraped At:** 2026-06-01 07:56:43 UTC
 
 ## Related Links
 

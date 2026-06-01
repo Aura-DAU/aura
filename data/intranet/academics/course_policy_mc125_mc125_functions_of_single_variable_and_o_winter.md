@@ -1,5 +1,5 @@
 ---
-title: "MC125 - Functions of Single Variable and ODEs"
+title: "MC125: Functions of Single Variable and ODEs"
 url: "https://intranet.daiict.ac.in/academics/MC125_FunctionsOfSingleVariableAndODEs_Winter25 - MadhuKant Sharma.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC125_FunctionsOfSingleVariableAndODEs_Winter25 - MadhuKant Sharma.pdf"
 ---
 
-# MC125 - Functions of Single Variable and ODEs
+# MC125: Functions of Single Variable and ODEs (MC125)
 
 ## Overview
 
@@ -252,7 +252,7 @@ Variable |  |
 - **Course Title:** MC125: Functions of Single Variable and ODEs
 - **Document Source:** MC125_FunctionsOfSingleVariableAndODEs_Winter25 - MadhuKant Sharma.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:23 UTC
+- **Scraped At:** 2026-06-01 07:57:18 UTC
 
 ## Related Links
 

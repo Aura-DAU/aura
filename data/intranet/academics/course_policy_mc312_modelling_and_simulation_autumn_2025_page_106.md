@@ -1,5 +1,5 @@
 ---
-title: "MC312 - Modelling and Simulation"
+title: "Modelling and Simulation"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MC312 - Modelling and Simulation
+# Modelling and Simulation (MC312)
 
 ## Overview
 
@@ -188,7 +188,7 @@ commitment of the class
 - **Course Title:** Modelling and Simulation
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:23 UTC
+- **Scraped At:** 2026-06-01 07:56:33 UTC
 
 ## Related Links
 

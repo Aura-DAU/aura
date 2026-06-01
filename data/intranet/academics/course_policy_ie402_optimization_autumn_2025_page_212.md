@@ -1,5 +1,5 @@
 ---
-title: "IE402 - Optimization"
+title: "Optimization"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IE402 - Optimization
+# Optimization (IE402)
 
 ## Overview
 
@@ -117,7 +117,7 @@ Conjugate Direction and Conjugate Gradient Methods
 - **Course Title:** Optimization
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:33 UTC
+- **Scraped At:** 2026-06-01 07:56:42 UTC
 
 ## Related Links
 

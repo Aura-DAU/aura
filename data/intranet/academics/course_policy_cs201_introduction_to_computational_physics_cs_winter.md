@@ -1,5 +1,5 @@
 ---
-title: "CS201 - Introduction to Computational Physics"
+title: "Introduction to Computational Physics (CS201)"
 url: "https://intranet.daiict.ac.in/academics/CS201_Introduction to Computational Physics_Winter26 - Pratim Roy.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CS201_Introduction to Computational Physics_Winter26 - Pratim Roy.pdf"
 ---
 
-# CS201 - Introduction to Computational Physics
+# Introduction to Computational Physics (CS201) (CS201)
 
 ## Overview
 
@@ -185,7 +185,7 @@ Lab sessions are compulsory and a record of attendance will be kept. Lab work wi
 - **Course Title:** Introduction to Computational Physics (CS201)
 - **Document Source:** CS201_Introduction to Computational Physics_Winter26 - Pratim Roy.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:48 UTC
+- **Scraped At:** 2026-06-01 07:56:55 UTC
 
 ## Related Links
 

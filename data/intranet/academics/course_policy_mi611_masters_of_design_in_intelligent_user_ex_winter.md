@@ -1,5 +1,5 @@
 ---
-title: "MI611 - Masters of Design in Intelligent User Experience Design – Mdes (IUxD)"
+title: "Masters of Design in Intelligent User Experience Design – Mdes (IUxD)"
 url: "https://intranet.daiict.ac.in/academics/MI611 - Design Thinking Concepts & concerns.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MI611 - Design Thinking Concepts & concerns.pdf"
 ---
 
-# MI611 - Masters of Design in Intelligent User Experience Design – Mdes (IUxD)
+# Masters of Design in Intelligent User Experience Design – Mdes (IUxD) (MI611)
 
 ## Overview
 
@@ -261,7 +261,7 @@ END
 - **Course Title:** Masters of Design in Intelligent User Experience Design – Mdes (IUxD)
 - **Document Source:** MI611 - Design Thinking Concepts & concerns.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:26 UTC
+- **Scraped At:** 2026-06-01 07:57:20 UTC
 
 ## Related Links
 

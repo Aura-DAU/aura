@@ -1,5 +1,5 @@
 ---
-title: "IE407 - Course File  – Internet of Things"
+title: "Course File IE407 – Internet of Things"
 url: "https://intranet.daiict.ac.in/academics/IE407_InternetOfThings_Winter26 - manish chaturvedi.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE407_InternetOfThings_Winter26 - manish chaturvedi.pdf"
 ---
 
-# IE407 - Course File  – Internet of Things
+# Course File IE407 – Internet of Things (IE407)
 
 ## Overview
 
@@ -151,7 +151,7 @@ Healthcare and activity tracking; Android front-ends for IoT applications, etc.
 - **Course Title:** Course File IE407 – Internet of Things
 - **Document Source:** IE407_InternetOfThings_Winter26 - manish chaturvedi.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:07 UTC
+- **Scraped At:** 2026-06-01 07:57:07 UTC
 
 ## Related Links
 

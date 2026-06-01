@@ -1,5 +1,5 @@
 ---
-title: "COMPLETE - Software Project Management (IT414)"
+title: "Software Project Management (IT414)"
 url: "https://intranet.daiict.ac.in/academics/IT414_SoftwareProjectManagement.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT414_SoftwareProjectManagement.pdf"
 ---
 
-# COMPLETE - Software Project Management (IT414)
+# Software Project Management (IT414) (COMPLETE)
 
 ## Overview
 
@@ -147,7 +147,7 @@ application, diagram type.
 - **Course Title:** Software Project Management (IT414)
 - **Document Source:** IT414_SoftwareProjectManagement.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:14 UTC
+- **Scraped At:** 2026-06-01 07:57:11 UTC
 
 ## Related Links
 

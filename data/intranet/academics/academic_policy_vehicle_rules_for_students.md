@@ -69,7 +69,7 @@ Two Student (Boy & Girl) Representatives (nominated by DAC)
 - **Course Title:** Vehicle Rules for Students
 - **Document Source:** DA-IICT_Vehicle Rules for Students.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:55 UTC
+- **Scraped At:** 2026-06-01 07:55:17 UTC
 
 ## Related Links
 

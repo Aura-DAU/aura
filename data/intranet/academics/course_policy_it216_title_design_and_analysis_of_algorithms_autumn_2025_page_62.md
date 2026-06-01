@@ -1,5 +1,5 @@
 ---
-title: "IT216 - Title: Design and Analysis of Algorithms (ICT and CS) SEM III core"
+title: "Title: Design and Analysis of Algorithms (ICT and CS) SEM III core"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT216 - Title: Design and Analysis of Algorithms (ICT and CS) SEM III core
+# Title: Design and Analysis of Algorithms (ICT and CS) SEM III core (IT216)
 
 ## Overview
 
@@ -172,7 +172,7 @@ applicable to this course and will be announced in due course.
 - **Course Title:** Title: Design and Analysis of Algorithms (ICT and CS) SEM III core
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:17 UTC
+- **Scraped At:** 2026-06-01 07:56:27 UTC
 
 ## Related Links
 

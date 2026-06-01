@@ -1,5 +1,5 @@
 ---
-title: "IT582 - Foundations of Machine  Learning"
+title: "Foundations of Machine  Learning"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# IT582 - Foundations of Machine  Learning
+# Foundations of Machine  Learning (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Foundations of Machine  Learning (IT582). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Foundations of Machine  Learning (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -151,11 +151,11 @@ X
 
 ## Important Information
 
-- **Course Code:** IT582
+- **Course Code:** UNKNOWN
 - **Course Title:** Foundations of Machine  Learning
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:24 UTC
+- **Scraped At:** 2026-06-01 07:56:34 UTC
 
 ## Related Links
 

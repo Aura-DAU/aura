@@ -97,7 +97,7 @@ This document presents the detailed policy and syllabus structure for the course
 - **Course Title:** DAIICT Students Document Service
 - **Document Source:** Students Document Service.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:18 UTC
+- **Scraped At:** 2026-06-01 07:55:32 UTC
 
 ## Related Links
 

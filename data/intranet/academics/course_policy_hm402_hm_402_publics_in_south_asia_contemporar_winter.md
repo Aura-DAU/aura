@@ -1,5 +1,5 @@
 ---
-title: "HM402 - HM 402. Publics in South Asia: Contemporary Perspectives"
+title: "HM 402. Publics in South Asia: Contemporary Perspectives"
 url: "https://intranet.daiict.ac.in/academics/HM402_PublicsinSouth Asia_Winter26 - Shefali Jha.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM402_PublicsinSouth Asia_Winter26 - Shefali Jha.pdf"
 ---
 
-# HM402 - HM 402. Publics in South Asia: Contemporary Perspectives
+# HM 402. Publics in South Asia: Contemporary Perspectives (HM402)
 
 ## Overview
 
@@ -166,7 +166,7 @@ Lectures |
 - **Course Title:** HM 402. Publics in South Asia: Contemporary Perspectives
 - **Document Source:** HM402_PublicsinSouth Asia_Winter26 - Shefali Jha.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:59 UTC
+- **Scraped At:** 2026-06-01 07:57:01 UTC
 
 ## Related Links
 

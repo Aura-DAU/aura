@@ -1,5 +1,5 @@
 ---
-title: "SC613 - Mathematical Foundation for Data Science"
+title: "Mathematical Foundation for Data Science (SC613)"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# SC613 - Mathematical Foundation for Data Science
+# Mathematical Foundation for Data Science (SC613) (SC613)
 
 ## Overview
 
@@ -108,7 +108,7 @@ develop the depth understanding of the fundamental statistical concepts required
 - **Course Title:** Mathematical Foundation for Data Science (SC613)
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:26 UTC
+- **Scraped At:** 2026-06-01 07:56:35 UTC
 
 ## Related Links
 

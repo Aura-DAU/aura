@@ -1,5 +1,5 @@
 ---
-title: "HM412 - World Literature in Short Fiction"
+title: "HM412 World Literature in Short Fiction"
 url: "https://intranet.daiict.ac.in/academics/HM412_World_Literature_In_Short_Fiction_Winter26_SG - Satvik Gupta.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM412_World_Literature_In_Short_Fiction_Winter26_SG - Satvik Gupta.pdf"
 ---
 
-# HM412 - World Literature in Short Fiction
+# HM412 World Literature in Short Fiction (HM412)
 
 ## Overview
 
@@ -192,7 +192,7 @@ Lectures |
 - **Course Title:** HM412 World Literature in Short Fiction
 - **Document Source:** HM412_World_Literature_In_Short_Fiction_Winter26_SG - Satvik Gupta.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:01 UTC
+- **Scraped At:** 2026-06-01 07:57:02 UTC
 
 ## Related Links
 

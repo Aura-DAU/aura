@@ -1,5 +1,5 @@
 ---
-title: "GENERATION - Google Colab/Lighting.ai"
+title: "Google Colab/Lighting.ai"
 url: "https://intranet.daiict.ac.in/academics/IT568_GenAI4SoftwareEngineering_Winter26 - Saurabh Tiwari.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT568_GenAI4SoftwareEngineering_Winter26 - Saurabh Tiwari.pdf"
 ---
 
-# GENERATION - Google Colab/Lighting.ai
+# Google Colab/Lighting.ai (GENERATION)
 
 ## Overview
 
@@ -104,7 +104,7 @@ X
 - **Course Title:** Google Colab/Lighting.ai
 - **Document Source:** IT568_GenAI4SoftwareEngineering_Winter26 - Saurabh Tiwari.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:18 UTC
+- **Scraped At:** 2026-06-01 07:57:14 UTC
 
 ## Related Links
 

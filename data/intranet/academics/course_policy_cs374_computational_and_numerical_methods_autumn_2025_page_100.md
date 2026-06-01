@@ -1,5 +1,5 @@
 ---
-title: "CS374 - Computational and Numerical Methods"
+title: "Computational and Numerical Methods"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# CS374 - Computational and Numerical Methods
+# Computational and Numerical Methods (CS374)
 
 ## Overview
 
@@ -171,7 +171,7 @@ undetermined coefficients |
 - **Course Title:** Computational and Numerical Methods
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:22 UTC
+- **Scraped At:** 2026-06-01 07:56:32 UTC
 
 ## Related Links
 

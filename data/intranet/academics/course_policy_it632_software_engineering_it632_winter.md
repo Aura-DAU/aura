@@ -1,5 +1,5 @@
 ---
-title: "IT632 - Software Engineering"
+title: "Software Engineering (IT632)"
 url: "https://intranet.daiict.ac.in/academics/IT632_SoftwareEngg_Winter2026 - JayPrakash Lalchandani.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT632_SoftwareEngg_Winter2026 - JayPrakash Lalchandani.pdf"
 ---
 
-# IT632 - Software Engineering
+# Software Engineering (IT632) (IT632)
 
 ## Overview
 
@@ -143,7 +143,7 @@ their limitations as well as benefits.
 - **Course Title:** Software Engineering (IT632)
 - **Document Source:** IT632_SoftwareEngg_Winter2026 - JayPrakash Lalchandani.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:20 UTC
+- **Scraped At:** 2026-06-01 07:57:16 UTC
 
 ## Related Links
 

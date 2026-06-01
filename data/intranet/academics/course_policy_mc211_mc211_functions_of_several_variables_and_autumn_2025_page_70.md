@@ -1,5 +1,5 @@
 ---
-title: "MC211 - Functions of Several Variables and PDEs"
+title: "MC211: Functions of Several Variables and PDEs"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# MC211 - Functions of Several Variables and PDEs
+# MC211: Functions of Several Variables and PDEs (MC211)
 
 ## Overview
 
@@ -139,7 +139,7 @@ in rectangular regions. |  |
 - **Course Title:** MC211: Functions of Several Variables and PDEs
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:18 UTC
+- **Scraped At:** 2026-06-01 07:56:28 UTC
 
 ## Related Links
 

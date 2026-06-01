@@ -1,5 +1,5 @@
 ---
-title: "IT628 - **Document Source:** IT628_System Programming.pdf"
+title: ""
 url: "https://intranet.daiict.ac.in/academics/IT628_System Programming.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT628_System Programming.pdf"
 ---
 
-# IT628 - **Document Source:** IT628_System Programming.pdf
+#  (IT628)
 
 ## Overview
 
@@ -185,7 +185,7 @@ executable, you will not receive credit.
 - **Course Title:** 
 - **Document Source:** IT628_System Programming.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:20 UTC
+- **Scraped At:** 2026-06-01 07:54:55 UTC
 
 ## Related Links
 

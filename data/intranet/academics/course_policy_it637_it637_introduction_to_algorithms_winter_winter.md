@@ -1,5 +1,5 @@
 ---
-title: "IT637 - Introduction to Algorithms (Winter 2026)"
+title: "IT637 Introduction to Algorithms (Winter 2026)"
 url: "https://intranet.daiict.ac.in/academics/IT637_Introduction_to_Algorithms_Winter26 - Amit Mankodi.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT637_Introduction_to_Algorithms_Winter26 - Amit Mankodi.pdf"
 ---
 
-# IT637 - Introduction to Algorithms (Winter 2026)
+# IT637 Introduction to Algorithms (Winter 2026) (IT637)
 
 ## Overview
 
@@ -131,7 +131,7 @@ Morris-Pratt | 2 |
 - **Course Title:** IT637 Introduction to Algorithms (Winter 2026)
 - **Document Source:** IT637_Introduction_to_Algorithms_Winter26 - Amit Mankodi.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:20 UTC
+- **Scraped At:** 2026-06-01 07:57:16 UTC
 
 ## Related Links
 

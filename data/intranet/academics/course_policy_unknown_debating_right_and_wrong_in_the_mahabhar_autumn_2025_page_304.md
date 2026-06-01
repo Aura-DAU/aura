@@ -1,5 +1,5 @@
 ---
-title: "HM304 - Debating Right and Wrong in the Mahabharata: Style and Context"
+title: "Debating Right and Wrong in the Mahabharata: Style and Context"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,11 +9,11 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# HM304 - Debating Right and Wrong in the Mahabharata: Style and Context
+# Debating Right and Wrong in the Mahabharata: Style and Context (UNKNOWN)
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Debating Right and Wrong in the Mahabharata: Style and Context (HM304). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document presents the detailed policy and syllabus structure for the course Debating Right and Wrong in the Mahabharata: Style and Context (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
@@ -369,11 +369,11 @@ proper course of action in various situations of material existence.
 
 ## Important Information
 
-- **Course Code:** HM304
+- **Course Code:** UNKNOWN
 - **Course Title:** Debating Right and Wrong in the Mahabharata: Style and Context
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:45 UTC
+- **Scraped At:** 2026-06-01 07:56:52 UTC
 
 ## Related Links
 

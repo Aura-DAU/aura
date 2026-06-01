@@ -1,5 +1,5 @@
 ---
-title: "SC224 - Probability and Statistics"
+title: "SC224: Probability and Statistics"
 url: "https://intranet.daiict.ac.in/academics/SC224_Probability_and_Statistics_Winter_26 - MadhuKant Sharma.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC224_Probability_and_Statistics_Winter_26 - MadhuKant Sharma.pdf"
 ---
 
-# SC224 - Probability and Statistics
+# SC224: Probability and Statistics (SC224)
 
 ## Overview
 
@@ -148,7 +148,7 @@ Normal Population |  |
 - **Course Title:** SC224: Probability and Statistics
 - **Document Source:** SC224_Probability_and_Statistics_Winter_26 - MadhuKant Sharma.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:29 UTC
+- **Scraped At:** 2026-06-01 07:57:22 UTC
 
 ## Related Links
 

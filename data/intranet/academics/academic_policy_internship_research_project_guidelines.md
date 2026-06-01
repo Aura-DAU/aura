@@ -221,7 +221,7 @@ Any other Comments/ Suggestion/Feedback: -
 - **Course Title:** Internship/ Research Project Guidelines
 - **Document Source:** M.Sc-DS-Project-Guidelines.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:40:04 UTC
+- **Scraped At:** 2026-06-01 07:55:22 UTC
 
 ## Related Links
 

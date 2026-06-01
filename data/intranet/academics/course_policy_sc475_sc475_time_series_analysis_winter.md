@@ -1,5 +1,5 @@
 ---
-title: "SC475 - – Time Series Analysis"
+title: "SC475 – Time Series Analysis"
 url: "https://intranet.daiict.ac.in/academics/SC475_Time_Series_Analysis_Winter26 - Mukesh Tiwari.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC475_Time_Series_Analysis_Winter26 - Mukesh Tiwari.pdf"
 ---
 
-# SC475 - – Time Series Analysis
+# SC475 – Time Series Analysis (SC475)
 
 ## Overview
 
@@ -199,7 +199,7 @@ of the class
 - **Course Title:** SC475 – Time Series Analysis
 - **Document Source:** SC475_Time_Series_Analysis_Winter26 - Mukesh Tiwari.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:32 UTC
+- **Scraped At:** 2026-06-01 07:57:24 UTC
 
 ## Related Links
 

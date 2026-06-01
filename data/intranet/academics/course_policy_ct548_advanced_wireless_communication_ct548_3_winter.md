@@ -1,5 +1,5 @@
 ---
-title: "CT548 - Advanced Wireless Communication  (3-0-2-4)"
+title: "Advanced Wireless Communication CT548 (3-0-2-4)"
 url: "https://intranet.daiict.ac.in/academics/CT548_ AdvancedWirelessCommunications_Winter2026 - Manish Kumar.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CT548_ AdvancedWirelessCommunications_Winter2026 - Manish Kumar.pdf"
 ---
 
-# CT548 - Advanced Wireless Communication  (3-0-2-4)
+# Advanced Wireless Communication CT548 (3-0-2-4) (CT548)
 
 ## Overview
 
@@ -169,7 +169,7 @@ Lecture Schedule:
 - **Course Title:** Advanced Wireless Communication CT548 (3-0-2-4)
 - **Document Source:** CT548_ AdvancedWirelessCommunications_Winter2026 - Manish Kumar.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:51 UTC
+- **Scraped At:** 2026-06-01 07:56:56 UTC
 
 ## Related Links
 

@@ -1,5 +1,5 @@
 ---
-title: "IT585 - IT 585 : Advanced Machine Learning"
+title: "IT 585 : Advanced Machine Learning"
 url: "https://intranet.daiict.ac.in/academics/IT585_Advanced Machine Learning_Winter2026 - Rachit Chhaya.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT585_Advanced Machine Learning_Winter2026 - Rachit Chhaya.pdf"
 ---
 
-# IT585 - IT 585 : Advanced Machine Learning
+# IT 585 : Advanced Machine Learning (IT585)
 
 ## Overview
 
@@ -95,7 +95,7 @@ ML and other topics depending on time and Mutual interest | 8 |
 - **Course Title:** IT 585 : Advanced Machine Learning
 - **Document Source:** IT585_Advanced Machine Learning_Winter2026 - Rachit Chhaya.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:18 UTC
+- **Scraped At:** 2026-06-01 07:57:15 UTC
 
 ## Related Links
 

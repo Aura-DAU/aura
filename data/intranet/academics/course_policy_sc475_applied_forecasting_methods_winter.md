@@ -1,5 +1,5 @@
 ---
-title: "SC475 - Applied Forecasting Methods"
+title: "Applied Forecasting Methods"
 url: "https://intranet.daiict.ac.in/academics/IT402 _Applied_Forecasting_Methods_Winter_2026 - Pritam Anand.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT402 _Applied_Forecasting_Methods_Winter_2026 - Pritam Anand.pdf"
 ---
 
-# SC475 - Applied Forecasting Methods
+# Applied Forecasting Methods (SC475)
 
 ## Overview
 
@@ -127,7 +127,7 @@ Written Exam: - 40 %. Assignments: -  20 %, Project +Viva - 40 %
 - **Course Title:** Applied Forecasting Methods
 - **Document Source:** IT402 _Applied_Forecasting_Methods_Winter_2026 - Pritam Anand.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:14 UTC
+- **Scraped At:** 2026-06-01 07:57:11 UTC
 
 ## Related Links
 

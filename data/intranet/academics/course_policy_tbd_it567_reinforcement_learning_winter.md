@@ -1,5 +1,5 @@
 ---
-title: "TBD - IT567 – Reinforcement Learning"
+title: "IT567 – Reinforcement Learning"
 url: "https://intranet.daiict.ac.in/academics/IT567_Reinforcement_Learning_Winter_26 - Abhishek Jindal.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT567_Reinforcement_Learning_Winter_26 - Abhishek Jindal.pdf"
 ---
 
-# TBD - IT567 – Reinforcement Learning
+# IT567 – Reinforcement Learning (TBD)
 
 ## Overview
 
@@ -146,7 +146,7 @@ PO10 PO11 PO12
 - **Course Title:** IT567 – Reinforcement Learning
 - **Document Source:** IT567_Reinforcement_Learning_Winter_26 - Abhishek Jindal.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:17 UTC
+- **Scraped At:** 2026-06-01 07:57:14 UTC
 
 ## Related Links
 

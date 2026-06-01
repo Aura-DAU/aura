@@ -1,5 +1,5 @@
 ---
-title: "ED322EL464 - VLSI Testing and Validation"
+title: "VLSI Testing and Validation"
 url: "https://intranet.daiict.ac.in/academics/ED322_EL464 _VLSI Testing and Validation_Winter 2025 - Sreeja Rajendran.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "ED322_EL464 _VLSI Testing and Validation_Winter 2025 - Sreeja Rajendran.pdf"
 ---
 
-# ED322EL464 - VLSI Testing and Validation
+# VLSI Testing and Validation (ED322EL464)
 
 ## Overview
 
@@ -141,7 +141,7 @@ verification and simulation based verification, Verification challenges | 3 |
 - **Course Title:** VLSI Testing and Validation
 - **Document Source:** ED322_EL464 _VLSI Testing and Validation_Winter 2025 - Sreeja Rajendran.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:55 UTC
+- **Scraped At:** 2026-06-01 07:56:59 UTC
 
 ## Related Links
 

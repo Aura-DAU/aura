@@ -1,5 +1,5 @@
 ---
-title: "SCXXX - Introduction to Financial Mathematics (Winter 2026)"
+title: "Introduction to Financial Mathematics (Winter 2026)"
 url: "https://intranet.daiict.ac.in/academics/SC409_Introduction_To_Financial_Mathematics_Winter26 - Abhishek Tilva.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC409_Introduction_To_Financial_Mathematics_Winter26 - Abhishek Tilva.pdf"
 ---
 
-# SCXXX - Introduction to Financial Mathematics (Winter 2026)
+# Introduction to Financial Mathematics (Winter 2026) (SCXXX)
 
 ## Overview
 
@@ -178,7 +178,7 @@ comparison with discrete-time models.
 - **Course Title:** Introduction to Financial Mathematics (Winter 2026)
 - **Document Source:** SC409_Introduction_To_Financial_Mathematics_Winter26 - Abhishek Tilva.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:30 UTC
+- **Scraped At:** 2026-06-01 07:57:23 UTC
 
 ## Related Links
 

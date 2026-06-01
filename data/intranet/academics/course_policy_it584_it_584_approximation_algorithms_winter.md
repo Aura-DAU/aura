@@ -1,5 +1,5 @@
 ---
-title: "IT584 - IT 584 : Approximation Algorithms"
+title: "IT 584 : Approximation Algorithms"
 url: "https://intranet.daiict.ac.in/academics/IT584_Approximation Algorithms_Winter2026 - Rachit Chhaya.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT584_Approximation Algorithms_Winter2026 - Rachit Chhaya.pdf"
 ---
 
-# IT584 - IT 584 : Approximation Algorithms
+# IT 584 : Approximation Algorithms (IT584)
 
 ## Overview
 
@@ -92,7 +92,7 @@ complete problems |
 - **Course Title:** IT 584 : Approximation Algorithms
 - **Document Source:** IT584_Approximation Algorithms_Winter2026 - Rachit Chhaya.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:18 UTC
+- **Scraped At:** 2026-06-01 07:57:14 UTC
 
 ## Related Links
 

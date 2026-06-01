@@ -1,5 +1,5 @@
 ---
-title: "IT549 - Deep Learning"
+title: "IT549: Deep Learning"
 url: "https://intranet.daiict.ac.in/academics/IT549_ Deep_Learning_Winter_26 - Arpit Rana.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT549_ Deep_Learning_Winter_26 - Arpit Rana.pdf"
 ---
 
-# IT549 - Deep Learning
+# IT549: Deep Learning (IT549)
 
 ## Overview
 
@@ -394,7 +394,7 @@ Page No 7 of 7
 - **Course Title:** IT549: Deep Learning
 - **Document Source:** IT549_ Deep_Learning_Winter_26 - Arpit Rana.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:39:17 UTC
+- **Scraped At:** 2026-06-01 07:57:14 UTC
 
 ## Related Links
 

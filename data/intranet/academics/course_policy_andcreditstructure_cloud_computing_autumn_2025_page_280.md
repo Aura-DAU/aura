@@ -1,5 +1,5 @@
 ---
-title: "ANDCREDITSTRUCTURE - Cloud Computing"
+title: "Cloud Computing"
 url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"
@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
 ---
 
-# ANDCREDITSTRUCTURE - Cloud Computing
+# Cloud Computing (ANDCREDITSTRUCTURE)
 
 ## Overview
 
@@ -248,7 +248,7 @@ debugging serverless applications. |
 - **Course Title:** Cloud Computing
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf
 - **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:38:42 UTC
+- **Scraped At:** 2026-06-01 07:56:50 UTC
 
 ## Related Links
 
