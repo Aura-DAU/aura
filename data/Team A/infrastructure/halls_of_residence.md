@@ -17,9 +17,9 @@ There are three Halls of Residence (HoRs), two for Men and the other for Women. 
 
 The women’s hall has 2 wings, viz. the J and K wings, with a total capacity of accommodating 400 residents. The women’s wing has a guest room for mother’s stay during medical issues. The lady security staff on 3 shifts ensures safety and discipline round the clock. They also assist in collecting mail for the residents and registering their complaints to be passed on to the proper maintenance personnel.
 
-[Image Present: HOR Image 1]
 
-[Image Present: HOR Image 2]
+
+
 
 The rooms are furnished with a bed, table, chair and a cupboard for each occupant. For students using their own computers in the room, internet facility is provided free of cost. Hot water (using geysers), Laundry (dhobis come to collect and deliver clothes) and TV Rooms with D2H are available at all halls of residence.
 

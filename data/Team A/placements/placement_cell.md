@@ -9,15 +9,13 @@ team: "Team A"
 
 # Overview
 
-**[Why Recruit at DAU?](#why-recruit)** | **[Team](#place-cell)** | **[Placement Events](#events)** | **[Placement and Internship Affairs Action Committee](#piaac)** | **[Student Placement Cell](#spc-team)** | **[Placement Statistics](#placement-stat)** | **[Audit Reports as per Indian Placement Reporting Standards](#placement-audit)** | **[Placement Brochure](#placement-bro)** | **[Recruiters](#recruiter-s)** | **[Contact us](#cont-us)**
+**[Why Recruit at DAU?](https://www.daiict.ac.in/placements#why-recruit)** | **[Team](https://www.daiict.ac.in/placements#place-cell)** | **[Placement Events](https://www.daiict.ac.in/placements#events)** | **[Placement and Internship Affairs Action Committee](https://www.daiict.ac.in/placements#piaac)** | **[Student Placement Cell](https://www.daiict.ac.in/placements#spc-team)** | **[Placement Statistics](https://www.daiict.ac.in/placements#placement-stat)** | **[Audit Reports as per Indian Placement Reporting Standards](https://www.daiict.ac.in/placements#placement-audit)** | **[Placement Brochure](https://www.daiict.ac.in/placements#placement-bro)** | **[Recruiters](https://www.daiict.ac.in/placements#recruiter-s)** | **[Contact us](https://www.daiict.ac.in/placements#cont-us)**
 
 # Main Content
 
-**[Why Recruit at DAU?](#why-recruit)** | **[Team](#place-cell)** | **[Placement Events](#events)** | **[Placement and Internship Affairs Action Committee](#piaac)** | **[Student Placement Cell](#spc-team)** | **[Placement Statistics](#placement-stat)** | **[Audit Reports as per Indian Placement Reporting Standards](#placement-audit)** | **[Placement Brochure](#placement-bro)** | **[Recruiters](#recruiter-s)** | **[Contact us](#cont-us)**
+**[Why Recruit at DAU?](https://www.daiict.ac.in/placements#why-recruit)** | **[Team](https://www.daiict.ac.in/placements#place-cell)** | **[Placement Events](https://www.daiict.ac.in/placements#events)** | **[Placement and Internship Affairs Action Committee](https://www.daiict.ac.in/placements#piaac)** | **[Student Placement Cell](https://www.daiict.ac.in/placements#spc-team)** | **[Placement Statistics](https://www.daiict.ac.in/placements#placement-stat)** | **[Audit Reports as per Indian Placement Reporting Standards](https://www.daiict.ac.in/placements#placement-audit)** | **[Placement Brochure](https://www.daiict.ac.in/placements#placement-bro)** | **[Recruiters](https://www.daiict.ac.in/placements#recruiter-s)** | **[Contact us](https://www.daiict.ac.in/placements#cont-us)**
 
 ## Message from Placement Cell:
-
-[Image Present: Placement Cell]
 
 ### Placement at Dhirubhai Ambani University (Formerly DA-IICT): A Structured and Transparent Ecosystem
 
@@ -37,71 +35,71 @@ DAU is distinguished by its unique Placement and Internship Affairs Action Commi
 
 ## Placement Events
 
-[Image Present: Placement Events and Updates 63] 
-[Image Present: Placement Events and Updates 1]
-[Image Present: Placement Events and Updates 2]
-[Image Present: Placement Events and Updates 3]
-[Image Present: Placement Events and Updates 4]
-[Image Present: Placement Events and Updates 5]
-[Image Present: Placement Events and Updates 6]
-[Image Present: Placement Events and Updates 7]
-[Image Present: Placement Events and Updates 8]
-[Image Present: Placement Events and Updates 9]
-[Image Present: Placement Events and Updates 10]
-[Image Present: Placement Events and Updates 11]
-[Image Present: Placement Events and Updates 12]
-[Image Present: Placement Events and Updates 13]
-[Image Present: Placement Events and Updates 14]
-[Image Present: Placement Events and Updates 15]
-[Image Present: Placement Events and Updates 16]
-[Image Present: Placement Events and Updates 17]
-[Image Present: Placement Events and Updates 18]
-[Image Present: Placement Events and Updates 19]
-[Image Present: Placement Events and Updates 20]
-[Image Present: Placement Events and Updates 21]
-[Image Present: Placement Events and Updates 22]
-[Image Present: Placement Events and Updates 23]
-[Image Present: Placement Events and Updates 24]
-[Image Present: Placement Events and Updates 25]
-[Image Present: Placement Events and Updates 26]
-[Image Present: Placement Events and Updates 27]
-[Image Present: Placement Events and Updates 28]
-[Image Present: Placement Events and Updates 29]
-[Image Present: Placement Events and Updates 30]
-[Image Present: Placement Events and Updates 31]
-[Image Present: Placement Events and Updates 32]
-[Image Present: Placement Events and Updates 33]
-[Image Present: Placement Events and Updates 34]
-[Image Present: Placement Events and Updates 35]
-[Image Present: Placement Events and Updates 36]
-[Image Present: Placement Events and Updates 37]
-[Image Present: Placement Events and Updates 38]
-[Image Present: Placement Events and Updates 39]
-[Image Present: Placement Events and Updates 40]
-[Image Present: Placement Events and Updates 41]
-[Image Present: Placement Events and Updates 42]
-[Image Present: Placement Events and Updates 43]
-[Image Present: Placement Events and Updates 44]
-[Image Present: Placement Events and Updates 45]
-[Image Present: Placement Events and Updates 46]
-[Image Present: Placement Events and Updates 47]
-[Image Present: Placement Events and Updates 48]
-[Image Present: Placement Events and Updates 49]
-[Image Present: Placement Events and Updates 50]
-[Image Present: Placement Events and Updates 51]
-[Image Present: Placement Events and Updates 52]
-[Image Present: Placement Events and Updates 53]
-[Image Present: Placement Events and Updates 54]
-[Image Present: Placement Events and Updates 55]
-[Image Present: Placement Events and Updates 56]
-[Image Present: Placement Events and Updates 57]
-[Image Present: Placement Events and Updates 58]
-[Image Present: Placement Events and Updates 59]
-[Image Present: Placement Events and Updates 60]
-[Image Present: Placement Events and Updates 61]
-[Image Present: Placement Events and Updates 62]
-[Image Present: Placement Events and Updates 63]
-[Image Present: Placement Events and Updates 1] 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 ## Placement and Internship Affairs Committee (PIAAC)
 
@@ -109,15 +107,15 @@ The Placement and Internship Affairs Committee (PIAAC) oversees policies and ope
 
 ### PIAAC Document
 
-[Download](/sites/default/files/other-files/PIAAC-2025.pdf)
+[Download](https://www.daiict.ac.in/sites/default/files/other-files/PIAAC-2025.pdf)
 
 ## Placement Statistics:
 
-[Image Present: Placement Statistics - UG]
+
 
 #### Undergraduate Programs
 
-[Image Present: Placement Statistics - PG]
+
 
 #### Postgraduate Programs
 
@@ -125,17 +123,17 @@ The Placement and Internship Affairs Committee (PIAAC) oversees policies and ope
 
 ### DAU UG Placement Report
 
-[2023-2024](/sites/default/files/other-files/DAU-UG-Placement-Report-2023-2024.pdf)
+[2023-2024](https://www.daiict.ac.in/sites/default/files/other-files/DAU-UG-Placement-Report-2023-2024.pdf)
 
 ### DAU PG Placement Report
 
-[2023-2024](/sites/default/files/other-files/DAU-PG-Placement-Report-2023-2024.pdf)
+[2023-2024](https://www.daiict.ac.in/sites/default/files/other-files/DAU-PG-Placement-Report-2023-2024.pdf)
 
 ## Placement Brochure:
 
 ### PLACEMENT BROCHURE 2025-26
 
-[Download](/sites/default/files/other-files/Placement-Brochure_2025-26.pdf)
+[Download](https://www.daiict.ac.in/sites/default/files/other-files/Placement-Brochure_2025-26.pdf)
 
 ## Why Recruit at Dhirubhai Ambani University?
 
@@ -147,7 +145,7 @@ Students undergo continuous hands-on learning through summer, winter, and rural 
 
 ## Recruiters:
 
-[Image Present: Major Recruiters 2025]
+
 
 ## Placement Cell: Team
 
@@ -171,19 +169,19 @@ Student Placement Cell - 2025
 
 ### Mr. Souvik Sarkar
 
-Position: [Image Present: Mr. Souvik Sarkar]
+Position: 
 
 ---
 
 ### Ms. Deepali Sharma
 
-Position: [Image Present: Ms. Deepali Sharma]
+Position: 
 
 ---
 
 ### Ms. Anuradha Srivastava
 
-Position: [Image Present: Ms. Anuradha Srivastava]
+Position: 
 
 ---
 
@@ -612,3 +610,4 @@ Position: Member
 - [2023-2024](https://www.daiict.ac.in/sites/default/files/other-files/DAU-UG-Placement-Report-2023-2024.pdf) (PDF)
 - [2023-2024](https://www.daiict.ac.in/sites/default/files/other-files/DAU-PG-Placement-Report-2023-2024.pdf) (PDF)
 - [Download](https://www.daiict.ac.in/sites/default/files/other-files/Placement-Brochure_2025-26.pdf) (PDF)
+

@@ -82,3 +82,4 @@ High-Voltage ASIC Design for Space Applications, Nanoelectronics and Emerging De
 
 I am inviting highly motivated Ph.D. students to join my research group in high-voltage ASIC design, nanoelectronics, embedded systems, and IoT applications. Students will have the opportunity to work on innovative projects spanning chip design for space applications, smart agriculture, and long-distance wireless systems for defense and space, while contributing to high-impact publications and patents.
 
+

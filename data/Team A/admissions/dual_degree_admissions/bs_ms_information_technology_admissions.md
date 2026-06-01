@@ -86,7 +86,7 @@ Detailed program structure can be found **here**.
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
 
-[Image Present: Structure and Exit Options]
+
 
 * **After 3 Years – B.Sc. (Bachelor of Science) in Information Technology**  
   Strong foundations in programming, data structures and algorithms, databases, operating systems, computer networks, and full-stack development, along with hands-on projects and practical system-building experience.
@@ -346,9 +346,9 @@ The Institute provides financial support in the form of scholarships to eligible
 
 ### BS-MS Scholarships - Fellowships
 
-[BS-MS Scholarships at DAU](/bs-ms-scholarships-dau) **|** [BS-MS Institute Fellowships at DAU](/bs-ms-institute-fellowships-dau)
+[BS-MS Scholarships at DAU](https://www.daiict.ac.in/bs-ms-scholarships-dau) **|** [BS-MS Institute Fellowships at DAU](https://www.daiict.ac.in/bs-ms-institute-fellowships-dau)
 
-[UG/PG Cybage Khushboo Scholarships](/ugpg-cybage-khushboo-scholarships) **|** [Scholarships Offered to Students](/scholarships-offered-students)
+[UG/PG Cybage Khushboo Scholarships](https://www.daiict.ac.in/ugpg-cybage-khushboo-scholarships) **|** [Scholarships Offered to Students](https://www.daiict.ac.in/scholarships-offered-students)
 
 ## How to apply
 
@@ -510,3 +510,4 @@ Applications can be submitted through the online admission portal of Dhirubhai A
 ## Downloadable Resources
 
 - [Breadcrumb Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/BS-MS_IT_2026.pdf)
+

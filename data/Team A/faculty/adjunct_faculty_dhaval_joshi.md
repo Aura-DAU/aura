@@ -27,3 +27,4 @@ Masters in Design (PGDPD): National Institute of Design, Gandhinagar
 
 Design Research, Artificial Intelligence, Gaming, Customer engagement
 
+

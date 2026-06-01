@@ -112,7 +112,7 @@ The curriculum accommodates 163 credits, out of which 144 credits for courses an
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](/admissions#tab-1)**
+Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](https://www.daiict.ac.in/admissions#tab-1)**
 
 ### Year 1 (Semester 1 & 2)
 
@@ -162,13 +162,13 @@ In the second year, students will develop knowledge on Advanced Circuits, Solid 
 | 4 | EL203 | Embedded Hardware Design | Core | 3-0-2-4 |
 | 4 | ED221 | Digital IC Design and Tape out | Core | 3-0-0-3 |
 | 4 | ED222 | Digital IC Design and Tape out LAB | Core | 0-0-4-2 |
-| 4 | ED222 | Analog Electronics | Core | 3-0-2-4 |
-| 4 | ED223 | Entrepreneurship and Product Design | Core | 1-0-4-3 |
+| 4 | ED223 | Analog Electronics | Core | 3-0-2-4 |
+| 4 | ED224 | Entrepreneurship and Product Design | Core | 1-0-4-3 |
 | 4 | ED325 | Specialization Elective-1 | Elective | 3-0-0-3 |
 | 4 | CO221 | Co-Curricular Activities IV |  | 0-0-2-1 |
 | **Total Credits** | | | | **13-0-14-20** |
 
-![B.Tech. (EVD)](/sites/default/files/other-images/B.Tech_.EVD_Specialization-Routes.jpg)
+![B.Tech. (EVD)]
 
 ### Year 3 (Semester 5 & 6)
 
@@ -526,7 +526,7 @@ This is a follow up course of PC125.
 
 Course Objective: This is an attempt to bring co-curricular activities within the ambit of the curriculum. It is envisaged that students will be able to internalize the technological perspective in an informal setting and make the campus more vibrant through these courses. The students are free to choose sports or participate in club activities through these courses.
 
-### EL203 Embedded Hardware Design (j3-0-2-4)
+### EL203 Embedded Hardware Design (3-0-2-4)
 
 Course Objective: This course aims to cover computing devices, associated peripherals and networks along with high level language and hardware language viz. Verilog HDL which are used in the design of a modern day embedded system. The objective of the “Embedded Hardware Design” course is to present to the student the computation devices, peripherals and networks along with software (Embedded C) and hardware description language (Verilog HDL), which are used for the development of modern technology in areas of embedded systems. Since peripherals and networks are independent of the computing device used, the course would first only consider the microcontroller as a computing device and build up the concept of peripherals and networks around it.
 
@@ -563,7 +563,7 @@ Course Objective: This is an introductory course in VLSI Systems & Design.
 
 **Resources & Textbooks:**
 
-* [Digital Integrated Circuits ~ Jan M. Rabaey, Anantha Chandrakasan & Borivoje Nikolic (2nd Edition, A Prentice ~ Hall, 2003](http://bwrc.eecs.berkeley.edu/IcBook/))
+* [Digital Integrated Circuits ~ Jan M. Rabaey, Anantha Chandrakasan & Borivoje Nikolic (2nd Edition, A Prentice ~ Hall, 2003](http://bwrc.eecs.berkeley.edu/IcBook/)
 * Digital VLSI Chip Design with Cadence and Synopsys CAD Tools ~ Eric Brunvand (Addison Wesley, 2009)
 * CMOS VLSI Design: Circuits and Systems Perspective ~ N Weste & D. Harris (4th Edition, Addison Wesley, 2010)
 
@@ -868,4 +868,5 @@ Course Objective: This course introduces the basic components of IoT and their i
 
 * The Internet of Things: Enabling Technologies, Platforms, and Use Cases ~ Eethurum Raj & Anupama C. Raman (CRC Press)
 * Internet of Things: A Hands~On Approach ~ Arshdeep Bahga & Vijay Madisetti (Universities Press)
+
 

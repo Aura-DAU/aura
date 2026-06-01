@@ -59,3 +59,4 @@ Diaspora , Transnationalism, Migrant Subjectivity
 * **B, Ratna Bharati**. 2019. “Transmission of cultural codes through language: A Study of Gujarati Diaspora in Lisbon, Portugal”. Paper presented at Global Indian Diaspora: Its Contribution in Retention of Indian Culture and India Connect organised by Banaras Hindu University (BHU), Varanasi (22-23 January).
 * **B, Ratna Bharati**. 2017. “Expressing Self through Movies: A Lacanian understanding of Rituparno Ghosh’s ‘Chitrangada”. Paper presented at Media and Subalterns in India organized by Central University of Rajasthan (16-17 March).
 
+

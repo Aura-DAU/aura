@@ -19,18 +19,18 @@ Machine learning and Data science deals with data-aware mathematical models, alg
 
 ### Faculty
 
-* **[Prof. Aditya Tatu:](/faculty/aditya-tatu)** Shape Modeling
-* **[Prof. Anil Roy:](/faculty/anil-roy)** Assistive Technologies, Sensors and Sensing Applications, AI, ML, NLP
-* **[Prof. Arpit Rana:](/faculty/arpit-rana)** Applied Machine Learning, Recommendation Systems, Multimodality, and their applications in Digital Innovation and Transformation
-* **[Prof. Bhaskar Chaudhury:](/faculty/bhaskar-chaudhury)** Computational Plasma Physics, Data Driven Plasma Engineering, Computational Electromagnetics, High Performance Scientific Computing, Computational Data Science, Applications of AI/ML
-* **[Prof. Manjunath Joshi:](/faculty/manjunath-v-joshi)** Computer Vision, Responsible AI, Quantum Machine Leaning
-* **[Prof. Prasenjit Majumder:](/faculty/prasenjit-majumder)** Natural Language Processing, Information Retrieval, Cognitive Science
-* **[Prof. Pritam Anand:](/faculty/pritam-anand)** Forecasing Methods, Quantile Regression, Loss Function, Support Vector Machines
-* **[Prof. Rachit Chhaya:](/faculty/rachit-chhaya)** Coresets (Provable Sampling Algorithms for ML), Fairness in ML
-* **[Prof. Shruti Bhilare:](/faculty/shruti-bhilare)** Biometrics and adversarial machine learning
-* **[Prof. Sourish Dasgupta:](/faculty/sourish-dasgupta)** Natural Language Processing (Evaluation of LLMs; Personalization of LLMs; Threat Detection; Reviewer Recommendation); Knowledge Graph Inferencing (Neuro-symbolic KG Embedding & Reasoning)
-* **[Prof. Srimanta Mandal:](/faculty/srimanta-mandal)** Digital Image Processing, Computer Vision, Machine Learning
-* **[Prof. Tathagata Bandyopadhyay:](/faculty/tathagata-bandyopadhyay)**Statistical Inference, Survey Sampling, Discrete Data Modeling and Analysis, Applications of Statistical Methodologies in Various Fields
+* **[Prof. Aditya Tatu:](https://www.daiict.ac.in/faculty/aditya-tatu)** Shape Modeling
+* **[Prof. Anil Roy:](https://www.daiict.ac.in/faculty/anil-roy)** Assistive Technologies, Sensors and Sensing Applications, AI, ML, NLP
+* **[Prof. Arpit Rana:](https://www.daiict.ac.in/faculty/arpit-rana)** Applied Machine Learning, Recommendation Systems, Multimodality, and their applications in Digital Innovation and Transformation
+* **[Prof. Bhaskar Chaudhury:](https://www.daiict.ac.in/faculty/bhaskar-chaudhury)** Computational Plasma Physics, Data Driven Plasma Engineering, Computational Electromagnetics, High Performance Scientific Computing, Computational Data Science, Applications of AI/ML
+* **[Prof. Manjunath Joshi:](https://www.daiict.ac.in/faculty/manjunath-v-joshi)** Computer Vision, Responsible AI, Quantum Machine Leaning
+* **[Prof. Prasenjit Majumder:](https://www.daiict.ac.in/faculty/prasenjit-majumder)** Natural Language Processing, Information Retrieval, Cognitive Science
+* **[Prof. Pritam Anand:](https://www.daiict.ac.in/faculty/pritam-anand)** Forecasing Methods, Quantile Regression, Loss Function, Support Vector Machines
+* **[Prof. Rachit Chhaya:](https://www.daiict.ac.in/faculty/rachit-chhaya)** Coresets (Provable Sampling Algorithms for ML), Fairness in ML
+* **[Prof. Shruti Bhilare:](https://www.daiict.ac.in/faculty/shruti-bhilare)** Biometrics and adversarial machine learning
+* **[Prof. Sourish Dasgupta:](https://www.daiict.ac.in/faculty/sourish-dasgupta)** Natural Language Processing (Evaluation of LLMs; Personalization of LLMs; Threat Detection; Reviewer Recommendation); Knowledge Graph Inferencing (Neuro-symbolic KG Embedding & Reasoning)
+* **[Prof. Srimanta Mandal:](https://www.daiict.ac.in/faculty/srimanta-mandal)** Digital Image Processing, Computer Vision, Machine Learning
+* **[Prof. Tathagata Bandyopadhyay:](https://www.daiict.ac.in/faculty/tathagata-bandyopadhyay)**Statistical Inference, Survey Sampling, Discrete Data Modeling and Analysis, Applications of Statistical Methodologies in Various Fields
 
 ### Research Groups and Labs
 
@@ -45,11 +45,11 @@ Machine learning and Data science deals with data-aware mathematical models, alg
 * Pattern Recognition and Image Processing Group
 * Geospatial Lab
 
-  [RESEARCH PROJECTS](/sites/default/files/other-files/Geospatial-Lab_Project_Report.pdf)
+  [RESEARCH PROJECTS](https://www.daiict.ac.in/sites/default/files/other-files/Geospatial-Lab_Project_Report.pdf)
 
 #### *More Information Through Figure*
 
-[Image Present: Sponsored Research Labs]
+
 
 ### Sponsored Research
 
@@ -154,7 +154,7 @@ Machine learning and Data science deals with data-aware mathematical models, alg
 
 ### Events and Activities
 
-* [Two-Day School on AI and Law, DA-IICT, Gandhinagar](/events/6298)
+* [Two-Day School on AI and Law, DA-IICT, Gandhinagar](https://www.daiict.ac.in/events/6298)
 
 ## Related Links
 
@@ -180,3 +180,4 @@ Machine learning and Data science deals with data-aware mathematical models, alg
 
 - [RESEARCH PROJECTS](https://www.daiict.ac.in/sites/default/files/other-files/Geospatial-Lab_Project_Report.pdf) (PDF)
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
+

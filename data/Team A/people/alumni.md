@@ -9,21 +9,19 @@ team: "Team A"
 
 # Overview
 
-**[Alumni](#alumni)** | **[Events on campus](#events-campus)** | **[Campus Memories](#campus-memories)** | **[Alumni Newsletter](#alumni-newsletter)**
+**[Alumni](https://www.daiict.ac.in/alumni#alumni)** | **[Events on campus](https://www.daiict.ac.in/alumni#events-campus)** | **[Campus Memories](https://www.daiict.ac.in/alumni#campus-memories)** | **[Alumni Newsletter](https://www.daiict.ac.in/alumni#alumni-newsletter)**
 
 # Main Content
 
-**[Alumni](#alumni)** | **[Events on campus](#events-campus)** | **[Campus Memories](#campus-memories)** | **[Alumni Newsletter](#alumni-newsletter)**
+**[Alumni](https://www.daiict.ac.in/alumni#alumni)** | **[Events on campus](https://www.daiict.ac.in/alumni#events-campus)** | **[Campus Memories](https://www.daiict.ac.in/alumni#campus-memories)** | **[Alumni Newsletter](https://www.daiict.ac.in/alumni#alumni-newsletter)**
 
 |  |
 | --- |
-| * DAU Alumni Chapter Membership Drive: [Click here](/dau-alumni-chapter-membership-drive) * Alumni Document Service: [Click here](/da-iict-alumni-document-service) * Update your Alumni Profile with Alma Mater: [Click here](https://forms.gle/j4cXEE8G4VYyypT37) * Please provide information for issuance of the Alumni ID Card: [Click here](https://forms.gle/ybqqfjP5rer3KcnN6) * Plan a campus visit: [Please click to schedule](https://forms.gle/U8hoehED2iRTd3i36) |
+| * DAU Alumni Chapter Membership Drive: [Click here](https://www.daiict.ac.in/dau-alumni-chapter-membership-drive) * Alumni Document Service: [Click here](https://www.daiict.ac.in/da-iict-alumni-document-service) * Update your Alumni Profile with Alma Mater: [Click here](https://forms.gle/j4cXEE8G4VYyypT37) * Please provide information for issuance of the Alumni ID Card: [Click here](https://forms.gle/ybqqfjP5rer3KcnN6) * Plan a campus visit: [Please click to schedule](https://forms.gle/U8hoehED2iRTd3i36) |
 
 **[Data Privacy Policy](https://www.daiict.ac.in/alumni/data-privacy-policy)**
 
 ## Message From Director General
-
-[Image Present: Dr. Tathagata Bandyopadhyay]
 
 ### Dr. Tathagata Bandyopadhyay
 
@@ -41,7 +39,7 @@ DA-IICT prides itself on the success of its alumni. Being an ICT Institute that 
 
 Our alumni have been instrumental in strengthening the brand of DA-IICT by distinguishing themselves as entrepreneurs, researchers, academicians, bureaucrats, Analysts, developers, designers, etc. We are proud of remarkable achievements of our Alums.
 
-[Image Present: Alumni]
+
 
 We look forward to welcoming you on campus/meeting in your cities and closely engaging for the shared vision for this unique institution. In the coming months/year, we are planning Alumni Reunions on campus; arranging chapter/city meetings for interaction with the Director/various faculty members; and forming active Special Interest Groups. This year will also see the launch of Alumni Achievers Awards at DA-IICT.
 
@@ -50,15 +48,13 @@ We are planning to launch DA-IICTian Alumni Magazine/Newsletter. We seek your su
 ***For any information contact***:  
 **Email:**  **[alumni\_office[at]dau[dot]ac[dot]in](mailto:alumni_office[at]dau[dot]ac[dot]in)**
 
-[Image Present: Events on campus]
-
 ## Events on campus
 
 In this section on the Institute’s portal, we are planning to keep you updated with recent and forthcoming events on campus to help plan your visit, whenever feasible. We will also selectively share past events that may revive beautiful memories of your student days.
 
 Please do share interesting pictures on the Alumni office email below to help post some of these on this page/portal!
 
-[Events Photo Gallery](/events-campus)
+[Events Photo Gallery](https://www.daiict.ac.in/events-campus)
 
 ## Campus Memories
 
@@ -70,22 +66,16 @@ Please do share interesting pictures and news on the Alumni office to help post 
 
 [Please share interesting pictures and news](https://forms.gle/jChACvrRgVi9vA8m9)
 
-[Image Present: Campus Memories]
-
 ## Alumni Newsletter
 
-[[Image Present: Newsletter]
+[Vol. 1, No. 1, Oct-Dec. 2025](https://www.daiict.ac.in/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf)
 
-Vol. 1, No. 1, Oct-Dec. 2025](/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf)
-
-[[Image Present: Newsletter]
-
-Vol. 1, No. 2, Jan-Mar. 2026](/sites/default/files/other-files/Alumni_Connect%20_Vol-1_No-2_Jan-Mar_2026.pdf)
+[Vol. 1, No. 2, Jan-Mar. 2026](https://www.daiict.ac.in/sites/default/files/other-files/Alumni_Connect%20_Vol-1_No-2_Jan-Mar_2026.pdf)
 
 ## Other Links
 
 * [Alumni Association](https://www.daiict.ac.in/alumni-association.html)
-* [Events at DAU](/events)
+* [Events at DAU](https://www.daiict.ac.in/events)
 
 ## Related Links
 
@@ -106,3 +96,4 @@ Vol. 1, No. 2, Jan-Mar. 2026](/sites/default/files/other-files/Alumni_Connect%20
 
 - [Newsletter Vol. 1, No. 1, Oct-Dec. 2025](https://www.daiict.ac.in/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf) (PDF)
 - [Newsletter Vol. 1, No. 2, Jan-Mar. 2026](https://www.daiict.ac.in/sites/default/files/other-files/Alumni_Connect%2520_Vol-1_No-2_Jan-Mar_2026.pdf) (PDF)
+

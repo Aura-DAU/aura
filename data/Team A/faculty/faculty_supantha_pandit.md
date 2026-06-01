@@ -87,3 +87,4 @@ Mainly focused on:
 
 I am looking for Ph.D. and Masters Students. A Ph.D. thesis will have foundational theoretical work possibly supported by experimental studies. The research topics include computational geometry, approximation algorithms, graph algorithms, distributed computing, discrete mathematics, and problems that generally obey the design and analysis framework of discrete algorithms. For a better understanding, I'd like you to please take a look at my publications. If you have any questions, please don't hesitate to contact me.
 
+

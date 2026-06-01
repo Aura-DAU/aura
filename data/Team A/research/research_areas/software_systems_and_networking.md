@@ -15,16 +15,16 @@ Software Systems and Networking
 
 ### Faculty
 
-* **[Prof. Amit Mankodi:](/faculty/amit-mankodi)** Embedded Systems, Computer Networks, High Performance Computing, Machine Learning
-* [**Prof. Anish Mathuria:**](/faculty/anish-mathuria) Security and Privacy in Computer Systems
-* **[Prof. Kalyan Sasidhar:](/faculty/p-s-kalyan-sasidhar)** Mobile and Pervasive Computing which include Wireless Sensor Networks, Mobile Phone Based Sensing
-* **[Prof. Manik Lal Das:](/faculty/maniklal-das)** Cyber Security, Privacy, Cryptography, Algorithms
-* **[Prof. Manish Chaturvedi:](/faculty/manish-chaturvedi)** Intelligent Transportation Systems, Scalable Protocol Design, Internet of Things
-* **[Prof. Minal Bhise:](/faculty/minal-bhise)**  Analytics for Biodiversity Domain, Resource Estimation for Query Processing, Energy Efficient Edge Computing, Query Optimization
-* **[Prof. Naresh Jotwani:](/faculty/naresh-jotwani)** Solar PV microgrids; 4D spacetime structure.
-* **[Prof. P M Jat](/faculty/p-m-jat):** Databases
-* **[Prof. Sanjay Srivastava:](/faculty/sanjay-srivastava)** Intelligent Transportation Systems, Internet of Things, Protocol Modelling and Analysis, Simulation
-* **[Prof. Saurabh Tiwari:](/faculty/saurabh-tiwari)** Requirements Engineering, Empirical Software Engineering, Mining Software Repositories and their analysis, Applications of NLP in Software Engineering, and HCI.
+* **[Prof. Amit Mankodi:](https://www.daiict.ac.in/faculty/amit-mankodi)** Embedded Systems, Computer Networks, High Performance Computing, Machine Learning
+* [**Prof. Anish Mathuria:**](https://www.daiict.ac.in/faculty/anish-mathuria) Security and Privacy in Computer Systems
+* **[Prof. Kalyan Sasidhar:](https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar)** Mobile and Pervasive Computing which include Wireless Sensor Networks, Mobile Phone Based Sensing
+* **[Prof. Manik Lal Das:](https://www.daiict.ac.in/faculty/maniklal-das)** Cyber Security, Privacy, Cryptography, Algorithms
+* **[Prof. Manish Chaturvedi:](https://www.daiict.ac.in/faculty/manish-chaturvedi)** Intelligent Transportation Systems, Scalable Protocol Design, Internet of Things
+* **[Prof. Minal Bhise:](https://www.daiict.ac.in/faculty/minal-bhise)**  Analytics for Biodiversity Domain, Resource Estimation for Query Processing, Energy Efficient Edge Computing, Query Optimization
+* **[Prof. Naresh Jotwani:](https://www.daiict.ac.in/faculty/naresh-jotwani)** Solar PV microgrids; 4D spacetime structure.
+* **[Prof. P M Jat](https://www.daiict.ac.in/faculty/p-m-jat):** Databases
+* **[Prof. Sanjay Srivastava:](https://www.daiict.ac.in/faculty/sanjay-srivastava)** Intelligent Transportation Systems, Internet of Things, Protocol Modelling and Analysis, Simulation
+* **[Prof. Saurabh Tiwari:](https://www.daiict.ac.in/faculty/saurabh-tiwari)** Requirements Engineering, Empirical Software Engineering, Mining Software Repositories and their analysis, Applications of NLP in Software Engineering, and HCI.
 
 ### Research Groups and Labs
 
@@ -37,7 +37,7 @@ Software Systems and Networking
 
 #### *More Information Through Figure*
 
-[Image Present: Sponsored Research Labs]
+
 
 ### Sponsored Research
 
@@ -138,3 +138,4 @@ Information will be available soon
 ## Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
+

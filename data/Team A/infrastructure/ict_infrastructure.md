@@ -43,7 +43,7 @@ Sophos UTM Enterprise grade Firewall is used for internet authentication, gatewa
 
 ### DA-IICT Network Diagram:
 
-[Image Present: DA-IICT Network Diagram]
+
 
 ### Green Computing:
 

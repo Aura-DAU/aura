@@ -35,7 +35,7 @@ The field of data science has experienced significant growth, particularly with 
 
 With advancements in data storage, cleaning, and computing technologies, data science has evolved beyond traditional mathematics and statistics, incorporating knowledge from computer science. The interdisciplinary nature of data science integrates skills from mathematics, statistics, computer science, and domain expertise to aid organizations in making critical decisions, reducing costs, and exploring new markets. Our Master's program in Data Science started in July 2020, is designed to equip students with foundational knowledge in mathematics, statistics, and computer science, along with domain-specific expertise in multimedia and business. The curriculum includes courses on data processing, database management, machine learning, programming in Python, and solution development to enhance technical and analytical skills. Value-added courses provide hands-on experience and industry-ready skills, ensuring graduates are well-prepared for careers in data science and analytics.
 
-[Image Present: new\_MSc\_Data Science-2022]
+
 
 Detailed program structure can be found **here**.
 
@@ -60,11 +60,11 @@ The primary goal of the M.Sc. in Data Science program is to cultivate a competen
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-**[Image Present: Details\_of\_M.Tech.-ICT\_placed\_students]**
+****
 
 ### **Top Recruiters:**
 
-[Image Present: Top\_Recruiters\_M.Tech]
+
 
 ## Intake
 
@@ -142,7 +142,7 @@ The correct answers for each question will be awarded +4 marks, while each incor
 
 #### **Sample Question Paper**:
 
-[A sample question paper can be found here (pdf)](/sites/default/files/other-files/MSc_DS_Sample_QP_2025_0.PDF)
+[A sample question paper can be found here (pdf)](https://www.daiict.ac.in/sites/default/files/other-files/MSc_DS_Sample_QP_2025_0.PDF)
 
 ### Tie breaker for Merit:
 
@@ -345,3 +345,4 @@ No, we don't offer any certification Program.
 - [Breadcrumb Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/MSc_DS_2026.pdf)
 - [The detailed syllabus can be found here (syllabus.pdf)](https://www.daiict.ac.in/sites/default/files/other-files/MSc-DS_Entrance-Test_Syllabus.pdf)
 - [A sample question paper can be found here (pdf)](https://www.daiict.ac.in/sites/default/files/other-files/MSc_DS_Sample_QP_2025_0.PDF)
+

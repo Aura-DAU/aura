@@ -29,3 +29,4 @@ M.Tech. (ICT), DA-IICT Gandhinagar
 
 Natural Language Processing, Information Retrieval, Operating systems
 
+

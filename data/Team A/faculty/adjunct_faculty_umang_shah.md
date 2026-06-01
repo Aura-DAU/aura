@@ -27,3 +27,4 @@ PDP Programme, Aalto University, Finland
 
 **a.** Integrated Interdisciplinary Design **b.** Design and Technology **c.** Aesthetic Detailings and Manufacturing **d.** Radical and Incremental Innovation.
 
+

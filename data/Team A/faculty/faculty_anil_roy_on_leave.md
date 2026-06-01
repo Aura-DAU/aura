@@ -66,3 +66,4 @@ Applications of Image Processing, Fiber Optics and Optical Communication, High s
 * Electromagnetic Theory (3rd sem BTech Core course)
 * Solid State Devices (6th sem BTech Elective course)
 
+

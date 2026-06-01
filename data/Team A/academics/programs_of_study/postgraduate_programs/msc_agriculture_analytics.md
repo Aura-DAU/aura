@@ -1,5 +1,5 @@
 ---
-title: "M.Sc. (Agriculture Analytics) "
+title: "M.Sc. (Agriculture Analytics)"
 url: "https://www.daiict.ac.in/msc-agriculture-analytics"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
@@ -96,3 +96,4 @@ Projects / Industrial Internship
 
 - [Program Outcomes (POs) & Course Outcomes (COs) of The Program](https://www.daiict.ac.in/sites/default/files/other-files/POs-PSOs-COs_ver2.pdf)
 - [Syllabus of The Program](https://www.daiict.ac.in/sites/default/files/other-files/Syllabus.pdf)
+

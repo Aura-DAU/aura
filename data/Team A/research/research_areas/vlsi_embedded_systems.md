@@ -34,13 +34,13 @@ DA-IICT has a strong research group, relevant curriculum, expertise faculties an
 
 ### Faculty
 
-* **[Prof. Biswajit Mishra:](/faculty/biswajit-mishra)**Ultra Low Power and Sub-threshold Circuit Methodologies, Very Low Voltage Circuits for Wireless Sensor Networks, Digital IC Design, Power Management for Energy Harvesters, Signal Processing Hardware for Color Image Processing, Geometric Algebra and Novel Hardware
-* **[Prof. Rutu Parekh:](/faculty/rutu-parekh)**Micro / Nano electronics, High voltage ASIC design, Design and simulation of hybrid CMOS nano device (logic and memory) circuits, Embedded systems & IOT
-* **[Prof. Sreeja Rajendran:](/faculty/sreeja-rajendran)**Fault Tolerant Circuit Design, Quantum dot Cellular Automata based Circuit Designs and Thermal stability analysis, Hardware Security
-* **[Prof. Sujay Kadam:](/faculty/sujay-kadam)**Control Theory, Robotics (Fixed and Mobile), Computational Neuroscience, Human-Motor-Learning, Human-Gait Measurement and Analysis
-* **[Prof. Tapas Kumar Maiti:](/faculty/tapas-kumar-maiti)**Intelligent Circuits and Systems, Robotics, Cybernetics, Metaverse
-* **[Prof. Vinay Palaparthy:](/faculty/vinay-palaparthy)**Sensors, Data Acquisition Systems, AI/ML, Embedded System Design & Internet of Things, MEMS
-* **[Prof. Yash Agrawal:](/faculty/yash-agrawal)**VLSI on-chip Interconnects, Network-on-chip (NoC), Flexible Electronics and Stretchable Interconnects, Image/Video Processing using VLSI Architectures, Circuit and System Design for Bio-medical Applications, Numerical technqiues - FDTD for signal integrity analysis.
+* **[Prof. Biswajit Mishra:](https://www.daiict.ac.in/faculty/biswajit-mishra)**Ultra Low Power and Sub-threshold Circuit Methodologies, Very Low Voltage Circuits for Wireless Sensor Networks, Digital IC Design, Power Management for Energy Harvesters, Signal Processing Hardware for Color Image Processing, Geometric Algebra and Novel Hardware
+* **[Prof. Rutu Parekh:](https://www.daiict.ac.in/faculty/rutu-parekh)**Micro / Nano electronics, High voltage ASIC design, Design and simulation of hybrid CMOS nano device (logic and memory) circuits, Embedded systems & IOT
+* **[Prof. Sreeja Rajendran:](https://www.daiict.ac.in/faculty/sreeja-rajendran)**Fault Tolerant Circuit Design, Quantum dot Cellular Automata based Circuit Designs and Thermal stability analysis, Hardware Security
+* **[Prof. Sujay Kadam:](https://www.daiict.ac.in/faculty/sujay-kadam)**Control Theory, Robotics (Fixed and Mobile), Computational Neuroscience, Human-Motor-Learning, Human-Gait Measurement and Analysis
+* **[Prof. Tapas Kumar Maiti:](https://www.daiict.ac.in/faculty/tapas-kumar-maiti)**Intelligent Circuits and Systems, Robotics, Cybernetics, Metaverse
+* **[Prof. Vinay Palaparthy:](https://www.daiict.ac.in/faculty/vinay-palaparthy)**Sensors, Data Acquisition Systems, AI/ML, Embedded System Design & Internet of Things, MEMS
+* **[Prof. Yash Agrawal:](https://www.daiict.ac.in/faculty/yash-agrawal)**VLSI on-chip Interconnects, Network-on-chip (NoC), Flexible Electronics and Stretchable Interconnects, Image/Video Processing using VLSI Architectures, Circuit and System Design for Bio-medical Applications, Numerical technqiues - FDTD for signal integrity analysis.
 
 ### Research Groups and Labs
 
@@ -53,7 +53,7 @@ DA-IICT has a strong research group, relevant curriculum, expertise faculties an
 
 #### *More Information Through Figure*
 
-[Image Present: Sponsored Research Labs]
+
 
 ### Sponsored Research
 
@@ -184,3 +184,4 @@ For more details: **[Click here](https://scholar.google.fi/citations?user=EmlIL
 ## Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
+

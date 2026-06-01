@@ -17,7 +17,7 @@ DA-IICT has emphasized and encouraged research right from its founding in the ye
 
 DA-IICT has emphasized and encouraged research right from its founding in the year 2001. Research-oriented M.Tech. and Ph.D. programs were started in 2002, and potential for quality research has always been an important criterion in faculty selection. A fundamental principle followed at DA-IICT from day one is that teaching and research must remain equally vital and important elements in the shaping of an academic institution.
 
-At present active research is being carried out within the institute into various aspects of Information and Communication Technology (ICT), and also into the many ways in which ICT impacts society and culture. Some of the current areas of faculty research are outlined [here](/areas). Further details about specific research activities can be accessed by following the links provided.
+At present active research is being carried out within the institute into various aspects of Information and Communication Technology (ICT), and also into the many ways in which ICT impacts society and culture. Some of the current areas of faculty research are outlined [here](https://www.daiict.ac.in/areas). Further details about specific research activities can be accessed by following the links provided.
 
 An important aim of the research activity at DA-IICT is to enhance the quality of interaction between the institute and industry for solving technical problems in the broad field of ICT. Equally important is the aim of stimulating and enhancing the research ability and potential of DA-IICT students who have the interest and aptitude to carry out innovative research.
 
@@ -46,3 +46,4 @@ For more information, please send e-mail to specific research groups, or to **de
 ## Downloadable Resources
 
 - [Read More - R&D @ DA-IICT](https://www.daiict.ac.in/sites/default/files/other-files/Coffee-Table-Booklet.pdf) (PDF)
+

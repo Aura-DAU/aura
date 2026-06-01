@@ -15,7 +15,7 @@ The first year of any professional academic campus or of a university is a big t
 
 ## The First Year In Campus
 
-[Image Present: DA-IICT Campus]
+
 
 ### 1. What to Expect
 
@@ -39,7 +39,7 @@ Adjusting to academic life in DA-IICT presents challenges for students. It may n
 * Take proper food and sufficient calories on time.
 * Be regular in studies to keep his/her SPI/CPI of first two semesters good. We have observed that if the student slips in attaining a good SPI/CPI in first two semesters, he/she looses self-confidence, thereby never could make up in studies.
 
-[Image Present: Standing Strong]
+
 
 ### 4. Changes in support systems
 

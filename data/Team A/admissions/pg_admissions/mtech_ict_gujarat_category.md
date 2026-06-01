@@ -27,10 +27,10 @@ Master of Technology in Information and Communication Technology – MTech (ICT)
 
 The Program curriculum includes multiple specializations tracks that provide a strong foundation and advanced courses in each track. This program tries to leverage the strength and diversity of our faculty and currently offers the following specialization tracks:
 
-* [**Machine Learning (ML)**](/sites/default/files/other-files/MTech_ML_2026.pdf)
-* [**Software Systems (SS)**](/sites/default/files/other-files/MTech_SS_2026.pdf)
-* [**VLSI and Embedded Systems (VLSI & ES)**](/sites/default/files/other-files/MTech_VLSI_ES_2026.pdf)
-* [**Wireless Communication and Signal Processing (WCSP)**](/sites/default/files/other-files/MTech_WCSP_2026.pdf)
+* [**Machine Learning (ML)**](https://www.daiict.ac.in/sites/default/files/other-files/MTech_ML_2026.pdf)
+* [**Software Systems (SS)**](https://www.daiict.ac.in/sites/default/files/other-files/MTech_SS_2026.pdf)
+* [**VLSI and Embedded Systems (VLSI & ES)**](https://www.daiict.ac.in/sites/default/files/other-files/MTech_VLSI_ES_2026.pdf)
+* [**Wireless Communication and Signal Processing (WCSP)**](https://www.daiict.ac.in/sites/default/files/other-files/MTech_WCSP_2026.pdf)
 
 The M.Tech. program provides students with a rigorous understanding of both fundamentals and advanced knowledge in desired areas of specialization. The graduates of the program would be well-positioned to work in the fast-growing ICT industry or to pursue a doctoral degree.
 
@@ -42,11 +42,11 @@ Students of the M.Tech program are required to complete a set of program core co
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-[Image Present: Details\_of\_M.Tech.-ICT\_placed\_students]
+
 
 ### **Top Recruiters:**
 
-[Image Present: Top\_Recruiters\_M.Tech]
+
 
 ## Intake
 
@@ -132,3 +132,4 @@ Seats under Gujarat Category will be filled as per the guidelines of ACPC. The c
 - [Software Systems (SS)](https://www.daiict.ac.in/sites/default/files/other-files/MTech_SS_2026.pdf)
 - [VLSI and Embedded Systems (VLSI & ES)](https://www.daiict.ac.in/sites/default/files/other-files/MTech_VLSI_ES_2026.pdf)
 - [Wireless Communication and Signal Processing (WCSP)](https://www.daiict.ac.in/sites/default/files/other-files/MTech_WCSP_2026.pdf)
+

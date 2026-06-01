@@ -27,3 +27,4 @@ PhD (Computer Science), University of Rennes, France
 
 Information Retrieval, Information Filtering, Data Science, Fuzzy Logic
 
+

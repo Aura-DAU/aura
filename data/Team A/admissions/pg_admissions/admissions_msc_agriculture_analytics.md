@@ -196,7 +196,7 @@ Standard form of a quadratic equation ??2+??+?=0,(?≠0). Solution of the quadra
 
 #### Sample Question Paper:
 
-[A sample question paper can be found here (PDF).](/sites/default/files/other-files/MSc_AA_Sample_QP_2025.PDF)
+[A sample question paper can be found here (PDF).](https://www.daiict.ac.in/sites/default/files/other-files/MSc_AA_Sample_QP_2025.PDF)
 
 **Note:**  
 The decision of the Competent Authorities of DAU (Formerly DA-IICT) regarding eligibility and selection of any candidate shall be final.
@@ -224,7 +224,7 @@ In case multiple candidates have same combined scores (of the entrance test and 
 
 The M.Sc. Agriculture Analytics Program follows a full time four-semester pattern and the curriculum consists of three semesters of course work followed by a one-semester project/research work on a specified topic. During summer semester, Value Added Courses (VAC) will be organized at DAU (Formerly DA-IICT) by the Industries. The VAC comes with certification after successful completion.
 
-[**Download**](/sites/default/files/other-files/MSc_AA_2026.pdf) the brochure for detailed program structure.
+[**Download**](https://www.daiict.ac.in/sites/default/files/other-files/MSc_AA_2026.pdf) the brochure for detailed program structure.
 
 ### What is selection criteria for M.Sc. (AA)?
 
@@ -387,3 +387,4 @@ No, DAIICT does not offer the MCA.
 
 - [Breadcrumb Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/MSc_AA_2026.pdf)
 - [A sample question paper can be found here (PDF).](https://www.daiict.ac.in/sites/default/files/other-files/MSc_AA_Sample_QP_2025.PDF)
+

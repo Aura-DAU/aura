@@ -27,3 +27,4 @@ Post Graduate Diploma in Textile Design, National Institute of Design (NID), Ahm
 
 Photography, Traveling, Research & Documentation on various crafts
 
+

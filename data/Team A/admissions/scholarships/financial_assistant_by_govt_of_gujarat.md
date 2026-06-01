@@ -13,8 +13,9 @@ Financial Assistance by Govt of Gujarat
 
 # Main Content
 
-Financial Assistance by Govt of Gujarat - [Click here!](/sites/default/files/other-files/KCG-scheme_Govt-of-Gujarat_10-02-25.pdf)
+Financial Assistance by Govt of Gujarat - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/KCG-scheme_Govt-of-Gujarat_10-02-25.pdf)
 
 ## Downloadable Resources
 
 - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/KCG-scheme_Govt-of-Gujarat_10-02-25.pdf) (PDF)
+

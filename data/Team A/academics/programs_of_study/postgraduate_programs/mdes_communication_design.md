@@ -32,7 +32,7 @@ This distinctive interdisciplinary specialization integrates Visual Design (film
 
 DA-IICT's M.Des. (CD) specialization prepares students to become strategic design thinkers, moving beyond tool-driven approaches. By focusing on critical and contextual understanding, students learn to identify, articulate, and solve context-specific design challenges with effective multimedia interventions, even amidst the rise of advanced AI-driven facilitation tools.
 
-The program brochure can be found **[here](/sites/default/files/other-files/MDes-CD_Brochure-25.pdf)**.
+The program brochure can be found **[here](https://www.daiict.ac.in/sites/default/files/other-files/MDes-CD_Brochure-25.pdf)**.
 
 ### Graduate Outcomes
 
@@ -72,16 +72,6 @@ All courses are mandatory.
 * While group work will be encouraged in the early semesters, modules in the third semester (second year) will focus more on individualized work.
 * The final student project must be completed in the fourth semester.
 
-### Course Abstracts
-
-#### **Semester I-Foundation**
-
-#### **Semester II-Extension of Foundation**
-
-#### **Semester III-Joining Concepts and Applications**
-
-#### **Semester IV**
-
 ### Teaching Methodology
 
 In this specialization, each course is not a stand-alone learning experience but it is expected that in the course of study the connections, both vertically and horizontally are made by the student that culminates in their project in the final semester.
@@ -96,7 +86,7 @@ These comprehensive learning outcomes enable M.Des. (CD) graduates to secure div
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](/admissions-mdes)**
+Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](https://www.daiict.ac.in/admissions-mdes)**
 
 ### Semester I
 
@@ -134,6 +124,8 @@ Details on the application process, admission criteria, fee structure and financ
 | Course Name | Course Code | Credit |
 | --- | --- | --- |
 | Final Thesis Project | PC714 | 6-0-24-**18** |
+
+### Courses
 
 ### Approaches to Culture & Communication | PC721 | 2-0-4- 4
 
@@ -219,3 +211,4 @@ It is expected that the individual student will work independently under the gui
 ## Downloadable Resources
 
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/MDes-CD_Brochure-25.pdf)
+

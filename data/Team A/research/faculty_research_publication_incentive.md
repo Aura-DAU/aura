@@ -9,11 +9,11 @@ team: "Team A"
 
 # Overview
 
-An Incentive Policy for Faculty Research Publications: [Click here!](/sites/default/files/other-files/An-Incentive-Policy-for-Faculty-Research-Publications_aug25.pdf)
+An Incentive Policy for Faculty Research Publications: [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/An-Incentive-Policy-for-Faculty-Research-Publications_aug25.pdf)
 
 # Main Content
 
-An Incentive Policy for Faculty Research Publications: [Click here!](/sites/default/files/other-files/An-Incentive-Policy-for-Faculty-Research-Publications_aug25.pdf)
+An Incentive Policy for Faculty Research Publications: [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/An-Incentive-Policy-for-Faculty-Research-Publications_aug25.pdf)
 
 List of Awardees for the Year 2026
 
@@ -50,7 +50,7 @@ List of Awardees for the Year 2026
 
 List of Awardees for the Year 2025
 
-[Image Present: Rank-Statistics-Recipients\_2025]
+
 
 #### ***Q1***
 
@@ -139,7 +139,7 @@ List of Awardees for the Year 2025
 
 List of Awardees for the Year 2024
 
-[Image Present: Rank-Statistics-Recipients\_2024]
+
 
 #### ***Q1***
 
@@ -229,3 +229,4 @@ List of Awardees for the Year 2024
 ## Downloadable Resources
 
 - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/An-Incentive-Policy-for-Faculty-Research-Publications_aug25.pdf) (PDF)
+

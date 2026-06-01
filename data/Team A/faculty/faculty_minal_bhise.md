@@ -44,3 +44,4 @@ Distributed Databases - Query Processing, Application Development for Biodiversi
 * Web Data Management (PG UG Technical Elective)
 * Approaches to Semantic Web (PG Elective)
 
+

@@ -34,14 +34,6 @@ DAU (Formerly DA-IICT) has been consistently performing exceptionally well in te
 * Excellent placements record year on year
 * Hiring by top companies in the technology sector
 
-#### Placement Statistics for the Last Three Years - Undergraduate Programs:
-
-![Details_of_B.Tech-UG_placed_students](/sites/default/files/other-images/Placement_Statistics_UG-2026.png)
-
-#### Placement Statistics for the Last Three Years - Postgraduate Programs:
-
-![Details_of_M.Tech.-ICT_placed_students](/sites/default/files/other-images/Placement_Statistics_PG-2026.png)
-
 ### Innovative programs  and Cutting-edge curriculum
 
 * The Institute offers  **[13 programs](https://www.daiict.ac.in/admissions#tab-1)**  across UG, Dual Degree and PG levels.
@@ -126,3 +118,4 @@ DAU (Formerly DA-IICT) has been consistently performing exceptionally well in te
 ## Related Links
 
 - [13 programs](https://www.daiict.ac.in/admissions#tab-1)
+

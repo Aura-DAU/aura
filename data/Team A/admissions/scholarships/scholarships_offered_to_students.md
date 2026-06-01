@@ -1,5 +1,5 @@
 ---
-title: "Scholarships Offered to Students "
+title: "Scholarships Offered to Students"
 url: "https://www.daiict.ac.in/scholarships-offered-students"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

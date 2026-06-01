@@ -79,11 +79,11 @@ The distribution of courses for M.Tech. (ICT) degree is as under:
 
 **Note:** Each student joining the program will be assigned a faculty advisor who will provide general academic guidance and support to the student.
 
-[Detailed Program Structure](/sites/default/files/other-files/Detailed_Course-Structure_MTech-ICT_2024.pdf)
+[Detailed Program Structure](https://www.daiict.ac.in/sites/default/files/other-files/Detailed_Course-Structure_MTech-ICT_2024.pdf)
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found [**here**](/admission-mtech-ict)
+Details on the application process, admission criteria, fee structure and financial assistance can be found [**here**](https://www.daiict.ac.in/admission-mtech-ict)
 
 ### Semester I
 
@@ -150,3 +150,4 @@ Details on the application process, admission criteria, fee structure and financ
 - [Program Outcomes (POs) & Course Outcomes (COs) of The Program](https://www.daiict.ac.in/sites/default/files/other-files/POs-PSOs-COs_ver2.pdf)
 - [Syllabus of The Program](https://www.daiict.ac.in/sites/default/files/other-files/Syllabus.pdf)
 - [Detailed Program Structure](https://www.daiict.ac.in/sites/default/files/other-files/Detailed_Course-Structure_MTech-ICT_2024.pdf)
+

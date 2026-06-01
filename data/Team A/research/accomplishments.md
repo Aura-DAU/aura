@@ -27,10 +27,11 @@ Noteworthy Contributions - Accomplishments
 | 2021 | Prof Manish Khare | **Professor Manish Khare** received the Best Special Session Award in the 13th Asian Conference on Intelligent Information and Database Systems (ACIIDS 2021), 07-09 April 2021, Phuket, Thailand. The title of the session was 'Special Session on Computational Imaging and Vision (CIV 2021).' |
 | 2020 | Prof. Hemant A. Patil | ISCA Distinguished Lecturer 2020-2022, Prof. Hemant A. Patil to Deliver Keynote address (ISCA DL) on GANs, IALP 2020, Kuala Lumpur, Malaysia. |
 
-View [Prior Years](/prior-years-faculty-accomplishments)
+View [Prior Years](https://www.daiict.ac.in/prior-years-faculty-accomplishments)
 
 ## Related Links
 
 - [Spatial-Spectral Convolutional Learning for Robust Fingerprint Liveness Detection](https://iitrpr.ac.in/cvip2025/awards)
 - [Sparse Matrix Precoded MIMO: A Computationally-Efficient Approach for High Throughput Wireless Links](https://www.linkedin.com/posts/ieee-ants-04636522a_congratulations-to-the-best-paper-awardees-activity-7407697118221488129-k7ba?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAPw_K8BndS3r0j8xnIMSgkB5msG5tc5_80)
 - [Prior Years](https://www.daiict.ac.in/prior-years-faculty-accomplishments)
+

@@ -93,3 +93,4 @@ Computing, Parallel Programming, Data Visualization, Applications of AI/ML
 * Introduction to GPU Programming
 * Accelerated Computing
 
+

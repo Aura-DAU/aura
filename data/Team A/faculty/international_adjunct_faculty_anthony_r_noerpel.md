@@ -27,3 +27,4 @@ MSc (Electrical Engineering), New Jersey Institute of Technology, USA
 
 Cellular and Satellite Communication System Design, RF Propagation, Earth Systems Sciences.
 
+

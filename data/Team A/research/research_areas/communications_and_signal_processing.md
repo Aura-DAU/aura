@@ -21,15 +21,15 @@ Research is being carried out for the development of new circuit topologies for 
 
 ### Faculty
 
-* **[Prof. Abhishek Jindal:](/faculty/abhishek-jindal)** Joint communication and radar for 6G; Multi-target sensing; Design and analysis of Intelligent reflecting surfaces; Massive MIMO and mm-Wave systems
-* **[Prof. Anjan Ghosh:](/adjunct-faculty/anjan-ghosh)** Photonics, Optical Wireless Communication, Medical Imaging
-* **[Prof. Deepak Ghodgaonkar:](/adjunct-faculty/deepak-ghodgaonkar)**Microwave Nondestructive Testing of Composite Materials and Microwave Imaging of Human Body
-* **[Prof. Hemant A. Patil:](/faculty/hemant-patil)** Speech Signal Processing, Anti-Spoofing for Voice Biometrics, Audio Deepfake Detection, Voice Liveliness Detection , Infant Cry Analysis and Classification, Dysarthric Severity-Level Classification
-* **[Prof. Manish Kumar:](/faculty/manish-kumar)** Next Generation Communication Networks, 5G/B5G, Optimization in IoT and Wireless Sensor Networks
-* **[Prof. Manjunath V. Joshi:](/faculty/manjunath-v-joshi)**  Computer Vision, Secured Machine Learning, Responsible AI, Quantum Machine Learning
-* **[Prof. Pankaj Kumar:](/faculty/pankaj-kumar)** Bio-Inspired Metasurface/Metamaterial Devices, Terahertz Devices, Semiconductor Device Modeling and Simulation
-* **[Prof. Rajib Lochan Das:](/faculty/rajib-lochan-das)** Adaptive Signal Processing, Compressive Sensing & Machine Learning
-* **[Prof. Yash Vasavada:](/faculty/yash-vasavada)** Spatial Modulation, Hybrid Beamforming, Nonlinearity Compensation Techniques, Interference Cancellation, NOMA, OTFS
+* **[Prof. Abhishek Jindal:](https://www.daiict.ac.in/faculty/abhishek-jindal)** Joint communication and radar for 6G; Multi-target sensing; Design and analysis of Intelligent reflecting surfaces; Massive MIMO and mm-Wave systems
+* **[Prof. Anjan Ghosh:](https://www.daiict.ac.in/adjunct-faculty/anjan-ghosh)** Photonics, Optical Wireless Communication, Medical Imaging
+* **[Prof. Deepak Ghodgaonkar:](https://www.daiict.ac.in/adjunct-faculty/deepak-ghodgaonkar)**Microwave Nondestructive Testing of Composite Materials and Microwave Imaging of Human Body
+* **[Prof. Hemant A. Patil:](https://www.daiict.ac.in/faculty/hemant-patil)** Speech Signal Processing, Anti-Spoofing for Voice Biometrics, Audio Deepfake Detection, Voice Liveliness Detection , Infant Cry Analysis and Classification, Dysarthric Severity-Level Classification
+* **[Prof. Manish Kumar:](https://www.daiict.ac.in/faculty/manish-kumar)** Next Generation Communication Networks, 5G/B5G, Optimization in IoT and Wireless Sensor Networks
+* **[Prof. Manjunath V. Joshi:](https://www.daiict.ac.in/faculty/manjunath-v-joshi)**  Computer Vision, Secured Machine Learning, Responsible AI, Quantum Machine Learning
+* **[Prof. Pankaj Kumar:](https://www.daiict.ac.in/faculty/pankaj-kumar)** Bio-Inspired Metasurface/Metamaterial Devices, Terahertz Devices, Semiconductor Device Modeling and Simulation
+* **[Prof. Rajib Lochan Das:](https://www.daiict.ac.in/faculty/rajib-lochan-das)** Adaptive Signal Processing, Compressive Sensing & Machine Learning
+* **[Prof. Yash Vasavada:](https://www.daiict.ac.in/faculty/yash-vasavada)** Spatial Modulation, Hybrid Beamforming, Nonlinearity Compensation Techniques, Interference Cancellation, NOMA, OTFS
 
 ### Research Groups and Labs
 
@@ -43,7 +43,7 @@ Research is being carried out for the development of new circuit topologies for 
 
 #### *More Information Through Figure*
 
-[Image Present: Sponsored Research Labs]
+
 
 ### Sponsored Research
 
@@ -170,3 +170,4 @@ Research is being carried out for the development of new circuit topologies for 
 ## Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
+

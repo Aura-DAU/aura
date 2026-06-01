@@ -27,3 +27,4 @@ PhD (Information Science), University of Hildesheim, Germany
 
 Information Science, Cognitive Similarity Learning in Information Retrieval and Information Management
 
+

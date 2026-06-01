@@ -38,3 +38,4 @@ The curricula across all undergraduate programs are carefully structured to prov
 - [B.Tech. (EVD)](https://www.daiict.ac.in/btech-evd)
 - [B.Tech. (CS and AI)](https://www.daiict.ac.in/btech-csai)
 - [B.Tech. (ECE-AI)](https://www.daiict.ac.in/btech-ece-ai)
+

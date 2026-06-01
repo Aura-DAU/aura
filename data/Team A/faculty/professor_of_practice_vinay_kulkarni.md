@@ -35,3 +35,4 @@ Digital Twins, Software Engineering for AI-first world, Complex Adaptive Systems
 
 * **200+ conference & journal, 4 co-authored books, and 40+ patents**
 
+

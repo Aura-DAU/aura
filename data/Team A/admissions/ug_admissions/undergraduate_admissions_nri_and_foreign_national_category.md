@@ -90,11 +90,11 @@ For more details of the program, **click**
 
 ### **Placement Statistics for the Last Three Years - Undergraduate Programs:**
 
-[Image Present: Details\_of\_B.Tech-UG\_placed\_students]
+
 
 ### **Prominent Recruiters:**
 
-[Image Present: Top\_Recruiters\_B.Tech-UG\_01]
+
 
 ## Eligibility Criteria
 
@@ -283,3 +283,4 @@ The candidates will be bound by the rules and regulations of the Institute as ap
 - [B.Tech. Electronics and VLSI Design (EVD) Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/BTech_EVD_2026.pdf)
 - [B.Tech. Computer Science and Artificial Intelligence (CS and AI) Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/BTech_CSandAI_2026.pdf)
 - [B.Tech. Electronics and Communication Engineering – Artificial Intelligence (ECE-AI) Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/BTech_ECE_AI_2026.pdf)
+

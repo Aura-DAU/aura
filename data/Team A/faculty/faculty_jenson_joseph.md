@@ -43,3 +43,4 @@ History and theory of Media, Film Studies, Cultural Studies, Malayalam Cinema, P
 * Indian Cinema: Lineages and the Present
 * Communication Skills
 
+

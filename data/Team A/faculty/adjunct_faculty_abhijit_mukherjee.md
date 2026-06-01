@@ -27,3 +27,4 @@ MBA in Systems from Vinayaka Mission University
 
 Enterprise Computing and SAP Systems (IS-U, S/4 HANA), Data Privacy and Compliance (DPDP Act 2023), IT Strategy, Governance, and Data Analytics
 
+

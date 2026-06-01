@@ -132,3 +132,4 @@ Have taught the following courses to MTech/PhD /Btech students at IIST Trivandru
 
 VLSI Analog Design, CMOS Pro-cess development (SOI, Bipolar, nvm) & Integration, RadHard Technology, Compound semi-conductor – hetero-epi struc-ture growth and bandgap engg
 
+

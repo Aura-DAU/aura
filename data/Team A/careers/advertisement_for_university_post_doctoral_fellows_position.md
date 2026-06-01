@@ -13,7 +13,7 @@ Dhirubhai Ambani University (DAU) invites applications from motivated and eligib
 
 # Main Content
 
-[Image Present: Post-Doctoral Fellow]
+
 
 ## Advertisement for University Post-Doctoral Fellows Position
 

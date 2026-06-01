@@ -19,20 +19,20 @@ For several years, DA-IICT has served as a premier training and research ground 
 
 ### Faculty
 
-* **[Prof. Anil Roy:](/faculty/anil-roy)** Applications of Image Processing, Fiber Optics and Optical Communication, High speed Semiconductor Devices, Nanoscience and Nanotechnology, Quantum Optics, Technologies for Humanitarian Challenges
-* **[Prof. Arnab Ray:](/faculty/arnab-kumar-ray)** Astrophysical Accretion, Fluid Dynamics, Nonlinear Systems
-* **[Prof. Arpita Mal:](/faculty/arpita-mal)** Functional Analysis, Operator Theory, Geometry of Banach Space
-* **[Prof. Bhaskar Chaudhury:](/faculty/bhaskar-chaudhury)** Computational Plasma Physics, Computational Data Science, High Performance Scientific Computing, Parallel Programming, Data Visualization, Applications of AI/ML
-* **[Prof. Gautam Dutta:](/faculty/gautam-dutta)** Quantum mechanics, quantum computation and information and certain aspects of general relativity.
-* **[Prof. Gopinath Panda:](/faculty/gopinath-panda)** Modeling Software-defined Networks, Decision-making under Uncertainty, Queuing Games, Modeling of Healthcare Services
-* **[Prof. Madhukant Sharma:](/faculty/madhu-kant-sharma)** Fractional Differential Equations, Optimization, Numerical Methods for PDEs
-* **[Prof. Manoj Raut:](/faculty/manoj-raut)** Mathematical Logic, Coding Theory
-* **[Prof. Mukesh Tiwari:](/faculty/mukesh-tiwari)** Non-equilibrium statistical mechanics, nonlinear science, complex networks with applications to social systems and complex time series.
-* **[Prof. Nabin Kumar Sahu:](/faculty/nabin-kumar-sahu)** Frames and Wavelets, Tensors, Optimization
-* **[Prof. Pratim Roy:](/faculty/pratim-roy)** Theoretical Physics, ADS/CFT Duality, Quantum Field Theory
-* **[Prof. Prosenjit Kundu:](/faculty/prosenjit-kundu)** Networked dynamical systems which includes studying synchronization, dimension reduction of networked dynamical systems etc.
-* **[Prof. Sudip Bera:](/faculty/sudip-bera)** Algebraic graph theory and Algebraic combinatorics
-* **[Prof. Sunitha V:](/faculty/sunitha-v)** Graph theory, graph algorithms and their applications in Interconnection Networks of HPC, Computer and Communication Networks, Complex Networks
+* **[Prof. Anil Roy:](https://www.daiict.ac.in/faculty/anil-roy)** Applications of Image Processing, Fiber Optics and Optical Communication, High speed Semiconductor Devices, Nanoscience and Nanotechnology, Quantum Optics, Technologies for Humanitarian Challenges
+* **[Prof. Arnab Ray:](https://www.daiict.ac.in/faculty/arnab-kumar-ray)** Astrophysical Accretion, Fluid Dynamics, Nonlinear Systems
+* **[Prof. Arpita Mal:](https://www.daiict.ac.in/faculty/arpita-mal)** Functional Analysis, Operator Theory, Geometry of Banach Space
+* **[Prof. Bhaskar Chaudhury:](https://www.daiict.ac.in/faculty/bhaskar-chaudhury)** Computational Plasma Physics, Computational Data Science, High Performance Scientific Computing, Parallel Programming, Data Visualization, Applications of AI/ML
+* **[Prof. Gautam Dutta:](https://www.daiict.ac.in/faculty/gautam-dutta)** Quantum mechanics, quantum computation and information and certain aspects of general relativity.
+* **[Prof. Gopinath Panda:](https://www.daiict.ac.in/faculty/gopinath-panda)** Modeling Software-defined Networks, Decision-making under Uncertainty, Queuing Games, Modeling of Healthcare Services
+* **[Prof. Madhukant Sharma:](https://www.daiict.ac.in/faculty/madhu-kant-sharma)** Fractional Differential Equations, Optimization, Numerical Methods for PDEs
+* **[Prof. Manoj Raut:](https://www.daiict.ac.in/faculty/manoj-raut)** Mathematical Logic, Coding Theory
+* **[Prof. Mukesh Tiwari:](https://www.daiict.ac.in/faculty/mukesh-tiwari)** Non-equilibrium statistical mechanics, nonlinear science, complex networks with applications to social systems and complex time series.
+* **[Prof. Nabin Kumar Sahu:](https://www.daiict.ac.in/faculty/nabin-kumar-sahu)** Frames and Wavelets, Tensors, Optimization
+* **[Prof. Pratim Roy:](https://www.daiict.ac.in/faculty/pratim-roy)** Theoretical Physics, ADS/CFT Duality, Quantum Field Theory
+* **[Prof. Prosenjit Kundu:](https://www.daiict.ac.in/faculty/prosenjit-kundu)** Networked dynamical systems which includes studying synchronization, dimension reduction of networked dynamical systems etc.
+* **[Prof. Sudip Bera:](https://www.daiict.ac.in/faculty/sudip-bera)** Algebraic graph theory and Algebraic combinatorics
+* **[Prof. Sunitha V:](https://www.daiict.ac.in/faculty/sunitha-v)** Graph theory, graph algorithms and their applications in Interconnection Networks of HPC, Computer and Communication Networks, Complex Networks
 
 ### Research Groups and Labs
 
@@ -43,7 +43,7 @@ For several years, DA-IICT has served as a premier training and research ground 
 
 #### *More Information Through Figure*
 
-[Image Present: Sponsored Research Labs]
+
 
 ### Sponsored Research
 
@@ -177,3 +177,4 @@ Information will be available soon
 ## Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
+

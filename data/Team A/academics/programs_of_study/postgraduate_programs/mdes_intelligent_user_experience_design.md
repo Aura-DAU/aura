@@ -1,5 +1,5 @@
 ---
-title: "M.Des. (Intelligent User Experience Design) "
+title: "M.Des. (Intelligent User Experience Design)"
 url: "https://www.daiict.ac.in/mdes-intelligent-user-experience-design"
 category: "Academics"
 scraped_by: "Khushi Gandhi"
@@ -34,7 +34,7 @@ IUxD specialization emphasizes design-driven innovation in conjunction with broa
 
 Ultimately, the M.Des. in IUxD fosters a new generation of designers who can bridge the gap between intelligent technologies and human needs. By shaping intuitive, ethical, and user-centered experiences, graduates of this program will lead the transformation of digital interactions into meaningful, adaptive, and future-ready solutions.
 
-The program brochure can be found **[here](/sites/default/files/other-files/MDes_IUxD_2026.pdf)**.
+The program brochure can be found **[here](https://www.daiict.ac.in/sites/default/files/other-files/MDes_IUxD_2026.pdf)**.
 
 ### Graduate Outcome
 
@@ -59,16 +59,6 @@ All courses are mandatory.
 * Lecture sequences in a course may be conducted by multiple faculties wherever required.
 * The final student project must be completed in the fourth semester.
 
-### Curriculum
-
-#### **Semester I - Design Fundamentals**
-
-#### **Semester II - IUXD Fundamentals**
-
-#### **Semester III - Specialised Inputs**
-
-#### **Semester IV**
-
 ### Teaching Methodology
 
 In M.Des. program, each course is not a stand-alone learning experience but it is expected that in the course of study the connections, both vertically and horizontally are made by the student that culminates in their project in the final semester.
@@ -81,7 +71,7 @@ Intelligent User Experience Design is a rapidly evolving field with applications
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](/admissions-mdes)**
+Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](https://www.daiict.ac.in/admissions-mdes)**
 
 ### Semester I
 
@@ -120,6 +110,8 @@ Details on the application process, admission criteria, fee structure and financ
 | --- | --- |
 | Final Thesis Project | 6-0-24-**18** |
 
+### Courses
+
 ### Orientation to Intelligent User-Experience Design | 2-0-2- 3
 
 This course offers an insightful introduction to the Master of Design in Intelligent User Experience Design-IUxD. It delves into the rich history of digital design, tracing its evolution and highlighting pivotal practices that have shaped the field. Special emphasis is placed on the current landscape of the design industry in India & abroad, providing students with a comprehensive understanding of potential professional avenues. Through this course, students will gain a deeper appreciation for the objectives of the M. Des- IUxD and explore the diverse contexts in which design thrives today.
@@ -138,7 +130,7 @@ This course introduces students to the fundamentals of intelligent technologies,
 
 ### Basics of UI, UX & IxD | 2-0-4- 4
 
-This course provides a comprehensive introduction to User Experience (UX) and Interaction Design (IxD), focusing on the key stages of the UX design process. Students will learn UX methodologies to understand user needs, followed by paper and digital prototyping techniques for creating intuitive interfaces. The course covers essential UI design principles, including color theory, typography, and UI elements, along with usability testing methods to refine designs. Additionally, students will explore design processes, conceptual models, and non-verbal human-machine interactions, gaining insights into how users interact beyond traditional interfaces. By the end, students will be equipped with the knowledge and skills to research, design, and evaluate user-centered digital
+This course provides a comprehensive introduction to User Experience (UX) and Interaction Design (IxD), focusing on the key stages of the UX design process. Students will learn UX methodologies to understand user needs, followed by paper and digital prototyping techniques for creating intuitive interfaces. The course covers essential UI design principles, including color theory, typography, and UI elements, along with usability testing methods to refine designs. Additionally, students will explore design processes, conceptual models, and non-verbal human-machine interactions, gaining insights into how users interact beyond traditional interfaces. By the end, students will be equipped with the knowledge and skills to research, design, and evaluate user-centered digital systems and applications.
 
 ### Design Thinking: Concepts & concerns | 2-0-2- 3
 
@@ -192,3 +184,4 @@ The Final Thesis Project serves as the culmination of students’ learning, allo
 ## Downloadable Resources
 
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/MDes_IUxD_2026.pdf)
+

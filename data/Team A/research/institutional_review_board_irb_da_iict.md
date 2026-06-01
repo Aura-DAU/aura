@@ -36,3 +36,4 @@ team: "Team A"
 ## Downloadable Resources
 
 - [](https://www.daiict.ac.in/sites/default/files/other-files/DA-IICT_IRB_Policy_and-Other-Details.pdf) (PDF)
+

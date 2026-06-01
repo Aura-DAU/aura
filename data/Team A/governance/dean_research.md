@@ -13,7 +13,7 @@ Dr. Yash M. Vasavada
 
 # Main Content
 
-[Image Present: Yash M. Vasavada]
+
 
 Dr. Yash M. Vasavada
 
@@ -41,3 +41,4 @@ Dr. Yash M. Vasavada
 - [Dr. Yash M. Vasavada](https://www.daiict.ac.in/faculty-details/288)
 - [http://intranet.daiict.ac.in/~ yash_vasavada/index.html](http://intranet.daiict.ac.in/~yash_vasavada/index.html)
 - [http://cspmi.daiict.ac.in/ index.html](http://cspmi.daiict.ac.in/index.html)
+

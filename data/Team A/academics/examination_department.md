@@ -39,7 +39,7 @@ The Examination Department is led by the Controller of Examination. The departme
 
 #### Exam Seat Portal - *Know your exam hall details online* - [[Click Here](https://ssrs.daiict.ac.in/Exam_Seat_Arrangment/)]
 
-#### Upcoming Examinations: Winter 2025-26: End Semester Examination [[Click Here](/sites/default/files/other-files/Schedule-for_Winter_2025-26_End_Semester_Exams_2026.pdf)]
+#### Upcoming Examinations: Winter 2025-26: End Semester Examination [[Click Here](https://www.daiict.ac.in/sites/default/files/other-files/Schedule-for_Winter_2025-26_End_Semester_Exams_2026.pdf)]
 
 #### **Check your Registration:**log in to the ERP portal and visit the “Academic” page for the Winter 2025–26 semester to verify their course registrations.
 
@@ -47,9 +47,9 @@ The Examination Department is led by the Controller of Examination. The departme
 
 To ensure a smooth and fair examination process, students must adhere to the following guidelines:
 
-* [Examination Rules for Students](/sites/default/files/other-files/Examination_Rules_for_Students.pdf)
-* [Rules & Guidelines for Conducting written examination for Person with Benchmark Disabilities](/sites/default/files/other-files/Rules_and_Guidelines_for_Conducting_written_examination_for_Person_with_Benchmark_Disabilities.pdf)
-* [Malpractices/Improper Conduct in Examinations and Consequences](/sites/default/files/other-files/Guidelines_of_Exams_Malpractices.pdf)
+* [Examination Rules for Students](https://www.daiict.ac.in/sites/default/files/other-files/Examination_Rules_for_Students.pdf)
+* [Rules & Guidelines for Conducting written examination for Person with Benchmark Disabilities](https://www.daiict.ac.in/sites/default/files/other-files/Rules_and_Guidelines_for_Conducting_written_examination_for_Person_with_Benchmark_Disabilities.pdf)
+* [Malpractices/Improper Conduct in Examinations and Consequences](https://www.daiict.ac.in/sites/default/files/other-files/Guidelines_of_Exams_Malpractices.pdf)
 
 ### Student Services
 
@@ -117,3 +117,4 @@ Email: coe_office[at]dau[dot]ac[dot]in
 - [Rules & Guidelines for Conducting written examination for Person with Benchmark Disabilities](https://www.daiict.ac.in/sites/default/files/other-files/Rules_and_Guidelines_for_Conducting_written_examination_for_Person_with_Benchmark_Disabilities.pdf) (PDF)
 - [Malpractices/Improper Conduct in Examinations and Consequences](https://www.daiict.ac.in/sites/default/files/other-files/Guidelines_of_Exams_Malpractices.pdf) (PDF)
 - [Student ID Card](http://intranet.daiict.ac.in/~daiict_nt01/Announcement/Student%20ID%20Card%20Procedure.pdf) (PDF)
+

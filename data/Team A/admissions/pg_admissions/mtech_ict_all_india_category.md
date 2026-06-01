@@ -33,10 +33,10 @@ Master of Technology in Information and Communication Technology – MTech (ICT)
 
 The Program curriculum includes multiple specializations tracks that provide a strong foundation and advanced courses in each track. This program tries to leverage the strength and diversity of our faculty and currently offers the following specialization tracks:
 
-* [**Machine Learning (ML)**](/sites/default/files/other-files/MTech_ML_2026.pdf)
-* [**Software Systems (SS)**](/sites/default/files/other-files/MTech_SS_2026.pdf)
-* [**VLSI and Embedded Systems (VLSI & ES)**](/sites/default/files/other-files/MTech_VLSI_ES_2026.pdf)
-* [**Wireless Communication and Signal Processing (WCSP)**](/sites/default/files/other-files/MTech_WCSP_2026.pdf)
+* [**Machine Learning (ML)**](https://www.daiict.ac.in/sites/default/files/other-files/MTech_ML_2026.pdf)
+* [**Software Systems (SS)**](https://www.daiict.ac.in/sites/default/files/other-files/MTech_SS_2026.pdf)
+* [**VLSI and Embedded Systems (VLSI & ES)**](https://www.daiict.ac.in/sites/default/files/other-files/MTech_VLSI_ES_2026.pdf)
+* [**Wireless Communication and Signal Processing (WCSP)**](https://www.daiict.ac.in/sites/default/files/other-files/MTech_WCSP_2026.pdf)
 
 The M.Tech. program provides students with a rigorous understanding of both fundamentals and advanced knowledge in desired areas of specialization. The graduates of the program would be well-positioned to work in the fast-growing ICT industry or to pursue a doctoral degree.
 
@@ -48,11 +48,11 @@ Students of the M.Tech program are required to complete a set of program core co
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-**[Image Present: Details\_of\_M.Tech.-ICT\_placed\_students]**
+****
 
 ### ****Top Recruiters:****
 
-**[Image Present: Top\_Recruiters\_M.Tech]**
+****
 
 ## Intake
 
@@ -147,19 +147,19 @@ The candidates can give up to two preferred specializations based on their eligi
 * VLSI and Embedded Systems **(**VLSI & ES**)**
 * Wireless Communication and Signal Processing **(**WCSP**)**
 
-**For EC Syllabus [click here](/sites/default/files/other-files/MTech_GATE%20_EC_2025_Syllabus.pdf)**
+**For EC Syllabus [click here](https://www.daiict.ac.in/sites/default/files/other-files/MTech_GATE%20_EC_2025_Syllabus.pdf)**
 
 ****CS Syllabus applicable to following specializations**:**
 
 * Machine Learning **(**ML**)**
 * Software Systems **(**SS**)**
 
-**For CS Syllabus [click here](/sites/default/files/other-files/MTech_GATE%20_CS_2025_Syllabus.pdf)**
+**For CS Syllabus [click here](https://www.daiict.ac.in/sites/default/files/other-files/MTech_GATE%20_CS_2025_Syllabus.pdf)**
 
 #### **Sample Question Paper**:
 
-* A sample question paper for EC can be found **[here (PDF)](/sites/default/files/other-files/MTech-ECE_Sample_QP_2025.PDF)**
-* A sample question paper for CS can be found **[here (PDF)](/sites/default/files/other-files/MTech-CSE_Sample_QP_2025.PDF)**
+* A sample question paper for EC can be found **[here (PDF)](https://www.daiict.ac.in/sites/default/files/other-files/MTech-ECE_Sample_QP_2025.PDF)**
+* A sample question paper for CS can be found **[here (PDF)](https://www.daiict.ac.in/sites/default/files/other-files/MTech-CSE_Sample_QP_2025.PDF)**
 
 ### **Tie-breaker for Non-GATE Merit:**
 
@@ -323,14 +323,14 @@ EC Syllabus applicable to following specializations:
 * VLSI and Embedded Systems (VLSI & ES)
 * Wireless Communication and Signal Processing (WCSP)
 
-**For EC Syllabus [click here](/sites/default/files/other-files/MTech_GATE%20_EC_2025_Syllabus.pdf)**
+**For EC Syllabus [click here](https://www.daiict.ac.in/sites/default/files/other-files/MTech_GATE%20_EC_2025_Syllabus.pdf)**
 
 **CS Syllabus applicable to following specializations**:
 
 * Machine Learning (ML
 * Software Systems (SS)
 
-**For CS Syllabus [click here](/sites/default/files/other-files/MTech_GATE%20_CS_2025_Syllabus.pdf)**
+**For CS Syllabus [click here](https://www.daiict.ac.in/sites/default/files/other-files/MTech_GATE%20_CS_2025_Syllabus.pdf)**
 
 ### I have mistakenly selected the wrong specialization in the application form. Can I change my specialization or edit my application form for All India category?
 
@@ -392,3 +392,4 @@ Application fee (non-refundable) is Rs. 1500/- plus GST@ 18%. (Total: Rs. 1770/-
 - [click here](https://www.daiict.ac.in/sites/default/files/other-files/MTech_GATE%20_CS_2025_Syllabus.pdf)
 - [here (PDF)](https://www.daiict.ac.in/sites/default/files/other-files/MTech-ECE_Sample_QP_2025.PDF)
 - [here (PDF)](https://www.daiict.ac.in/sites/default/files/other-files/MTech-CSE_Sample_QP_2025.PDF)
+

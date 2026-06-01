@@ -28,3 +28,4 @@ PhD (Electrical Engineering), Michigan State University, USA
 
 VLSI Design, CMOS Circuits and Technology, Biomedical Signal Processing Chip Design
 
+

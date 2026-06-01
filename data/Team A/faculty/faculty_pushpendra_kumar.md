@@ -58,3 +58,4 @@ Selected Publications: 10 (Citations: 2790, h-index: 30) Total 101 papers can be
 * Transforms and Complex Analysis; B.Tech. (ECE) 2nd year, 2022, NIT Puducherry
 * Differential Equations and Laplace Transforms; B.Tech. (EEE) 1st year, 2022, NIT Puducherry
 
+

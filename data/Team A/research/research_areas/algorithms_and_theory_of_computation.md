@@ -19,19 +19,19 @@ Theoretical Computer Science is a discipline at the interface between Mathematic
 
 ### Faculty
 
-* **[Prof. Manoj Raut:](/faculty/manoj-raut)** Mathematical Logic
-* [**Prof. Puneet Bhateja**:](faculty/puneet-bhateja) Formal verification and testing
-* [**Prof. Rahul Muthu**:](/faculty/rahul-muthu) My research work is broadly in the areas of Algorithms and Graph Theory. Problems I am currently working on are:
+* **[Prof. Manoj Raut:](https://www.daiict.ac.in/faculty/manoj-raut)** Mathematical Logic
+* [**Prof. Puneet Bhateja**:](https://www.daiict.ac.in/faculty/puneet-bhateja) Formal verification and testing
+* [**Prof. Rahul Muthu**:](https://www.daiict.ac.in/faculty/rahul-muthu) My research work is broadly in the areas of Algorithms and Graph Theory. Problems I am currently working on are:
   + Weight Assignment and counting minimum spanning trees in the resulting weighted graphs
   + Realization Graphs an their characterization
-* [**Dr. Supantha Pandit**:](/faculty/supantha-pandit) Theoretical Computer Science, Computational Geometry, Approximation Algorithms, Distributed Computing
-* **[Prof. Sunitha V:](/faculty/sunitha-v)** Theory, Algorithms (Parallel, Distributed, Dynamic), Applications of Graphs
+* [**Dr. Supantha Pandit**:](https://www.daiict.ac.in/faculty/supantha-pandit) Theoretical Computer Science, Computational Geometry, Approximation Algorithms, Distributed Computing
+* **[Prof. Sunitha V:](https://www.daiict.ac.in/faculty/sunitha-v)** Theory, Algorithms (Parallel, Distributed, Dynamic), Applications of Graphs
 
 ### Research Groups and Labs
 
 #### *More Information Through Figure*
 
-[Image Present: Sponsored Research Labs]
+
 
 ### Sponsored Research
 
@@ -105,3 +105,4 @@ Information will be available soon
 ## Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
+

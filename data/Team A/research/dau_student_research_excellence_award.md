@@ -9,13 +9,13 @@ team: "Team A"
 
 # Overview
 
-DAU Student Research Excellence Award - [Click here!](/sites/default/files/other-files/Policy_Student-Research-Excellence-VER_1.pdf)
+DAU Student Research Excellence Award - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/Policy_Student-Research-Excellence-VER_1.pdf)
 
 # Main Content
 
 ## DAU Student Research Excellence Award
 
-DAU Student Research Excellence Award - [Click here!](/sites/default/files/other-files/Policy_Student-Research-Excellence-VER_1.pdf)
+DAU Student Research Excellence Award - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/Policy_Student-Research-Excellence-VER_1.pdf)
 
 ### Award:
 
@@ -189,3 +189,4 @@ List of Awardees for the Year 2023/24
 ## Downloadable Resources
 
 - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/Policy_Student-Research-Excellence-VER_1.pdf) (PDF)
+

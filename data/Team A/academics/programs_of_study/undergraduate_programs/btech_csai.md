@@ -139,3 +139,4 @@ The B.Tech. in Computer Science and Artificial Intelligence (CSAI) program is de
 | PSO2 | AI Model Development and Deployment | Build, evaluate, and deploy machine learning, deep learning, reinforcement learning, and data-intensive solutions using modern software engineering, big data, and computational tools. |
 | PSO3 | Responsible and Applied AI Practice | Develop AI-enabled solutions for real-world and interdisciplinary applications with due attention to fairness, privacy, explainability, robustness, safety, and societal impact. |
 
+

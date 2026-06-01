@@ -61,3 +61,4 @@ VLSI, Embedded Systems and MEMS, Hardware Security, VLSI Test
 * PUF Based Solutions for Security
 * Application of Machine Learning Algorithms for Trojan Detection and Prevention in Logic Circuit Designs
 
+

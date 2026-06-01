@@ -90,11 +90,11 @@ For more details of the program, **click**
 
 ### **Placement Statistics for the Last Three Years - Undergraduate Programs:**
 
-[Image Present: Details\_of\_B.Tech-UG\_placed\_students]
+
 
 ### **Prominent Recruiters:**
 
-[Image Present: Top\_Recruiters\_B.Tech-UG\_01]
+
 
 ## Eligibility Criteria
 
@@ -212,7 +212,7 @@ Students are encouraged to apply for different other scholarships as follows:
 
 ### UG Scholarships
 
-[B.Tech. Institute Fellowships](/btech-institute-fellowships) | [B.Tech. Merit and Merit-cum-Means Scholarships](/btech-merit-and-mcm-scholarships)
+[B.Tech. Institute Fellowships](https://www.daiict.ac.in/btech-institute-fellowships) | [B.Tech. Merit and Merit-cum-Means Scholarships](https://www.daiict.ac.in/btech-merit-and-mcm-scholarships)
 
 [Jai Jhulelal Scholarships for B.Tech. Students](https://daiict.ac.in/jai-jhulelal-scholarships-btech-students) | [The Satnaam WaheGuruji Scholarships](https://daiict.ac.in/satnaam-waheguruji-scholarships-btech-students)
 
@@ -259,3 +259,4 @@ The candidates will be bound by the rules and regulations of the Institute as ap
 - [B. Tech. Electronics and VLSI Design (EVD) Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/BTech_EVD_2026.pdf)
 - [B.Tech. Computer Science and Artificial Intelligence (CS and AI) Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/BTech_CSandAI_2026.pdf)
 - [B.Tech. Electronics and Communication Engineering – Artificial Intelligence (ECE-AI) Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/BTech_ECE_AI_2026.pdf)
+

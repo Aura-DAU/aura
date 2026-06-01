@@ -17,7 +17,7 @@ The Doctoral Program leading towards the award of the Degree of Doctor of Philos
 
 The Doctoral Program leading towards the award of the Degree of Doctor of Philosophy (Ph.D.) provides the students an opportunity for a career in academia or in Research & Development Establishments. A strong foundation and original contribution to knowledge in a chosen area of interest is expected from Ph.D. graduates of DA-IICT.
 
-Broadly, faculty members at DA-IICT are engaged in research activities in Information and Communication Technology (ICT) and related areas, selected areas of Basic and Computational Sciences, and selected areas in the Humanities and Social Sciences. Research interests of faculty at DA-IICT is available [**here**.](/faculty)
+Broadly, faculty members at DA-IICT are engaged in research activities in Information and Communication Technology (ICT) and related areas, selected areas of Basic and Computational Sciences, and selected areas in the Humanities and Social Sciences. Research interests of faculty at DA-IICT is available [**here**.](https://www.daiict.ac.in/faculty)
 
 ### PhD Programme and Disciplines
 
@@ -150,7 +150,7 @@ Research Progress Seminar (RPS) is held twice a year, typically, once in Novembe
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](/admission-phd)**
+Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](https://www.daiict.ac.in/admission-phd)**
 
 ## Fellowship
 
@@ -169,7 +169,7 @@ With effect from July 2024-25 session, all those admitted as full-time PhD stude
 The Tata Consultancy Services (TCS) has recognized DA-IICT as one of the Institutions to administer the TCS Research Scholar Program. This prestigious program provides attractive doctoral fellowships to full-time students pursuing PhD programs in selected areas. The eligibility and other details are as follows:
 
 * Registered for a full-time PhD program.
-* Within 28 years of age at the time of
+* Within 28 years of age as on admission into fellowship.
 * Completed 2 semesters and should be in 2nd year of Ph.D having a brilliant academic background.
 * Research involving computing.
 * Scholars need to declare other Phd scholarships applied for at the time of applying and if selected by TCS, at the time of announcement.

@@ -54,11 +54,11 @@ The detailed course structure consisting of both core courses and elective cours
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-**[Image Present: Details\_of\_M.Tech.-ICT\_placed\_students]**
+****
 
 ### **Top Recruiters:**
 
-[Image Present: Top\_Recruiters\_M.Tech]
+
 
 ## Intake
 
@@ -134,7 +134,7 @@ The Design Aptitude Test for MDes Intelligent User Experience Design (MDes IUxD)
 * **M.Des. (IUxD) Part 2:** Will assess the candidate’s understanding of digital product design and human-computer interaction related challenges.
 * **M.Des. (IUxD) Part 3:** The candidates will be asked to write a subjective response to a user experience design brief, demonstrating their design thinking skills.
 
-[A sample question paper can be found here (pdf)](/sites/default/files/other-files/MDes_IUxD_Sample_QP_25.pdf)
+[A sample question paper can be found here (pdf)](https://www.daiict.ac.in/sites/default/files/other-files/MDes_IUxD_Sample_QP_25.pdf)
 
 ## How to apply
 
@@ -259,7 +259,7 @@ DAU (Formerly DA-IICT) encourages bright young students to join its undergraduat
 
 ### PG Scholarships
 
-[DAU Scholarships to M.Des. Students](/mdes-scholarship) | [UG/PG Cybage Khushboo Scholarships](https://www.daiict.ac.in/ugpg-cybage-khushboo-scholarships)
+[DAU Scholarships to M.Des. Students](https://www.daiict.ac.in/mdes-scholarship) | [UG/PG Cybage Khushboo Scholarships](https://www.daiict.ac.in/ugpg-cybage-khushboo-scholarships)
 
 [Scholarships Offered to Students](https://www.daiict.ac.in/scholarships-offered-students)
 
@@ -288,3 +288,4 @@ DAU (Formerly DA-IICT) encourages bright young students to join its undergraduat
 - [M.Des. (IUxD) Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/MDes_IUxD_2026.pdf)
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/MDes-IUxD_Brochure-25.pdf)
 - [A sample question paper can be found here (pdf)](https://www.daiict.ac.in/sites/default/files/other-files/MDes_IUxD_Sample_QP_25.pdf)
+

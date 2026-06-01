@@ -44,7 +44,7 @@ Gandhinagar Gujarat, India
 
 ### Quick Links:
 
-* [Head CEP](/faculty/manish-kumar)
+* [Head CEP](https://www.daiict.ac.in/faculty/manish-kumar)
 
 ## Documents/Forms
 
@@ -52,7 +52,7 @@ Gandhinagar Gujarat, India
 
 * [Continuing Education Program (CEP) Policy](https://www.daiict.ac.in/sites/default/files/other-files/CEP_Policy_May-2024.pdf)
 * [CEP Office, Intent-for-Proposal (IFP)](https://www.daiict.ac.in/sites/default/files/other-files/Intent-for-Proposal_IFP.pdf)
-* [Form - Course Plan Proposal under CEP](/sites/default/files/other-files/Course-Plan-Proposal-under-CEP.pdf)
+* [Form - Course Plan Proposal under CEP](https://www.daiict.ac.in/sites/default/files/other-files/Course-Plan-Proposal-under-CEP.pdf)
 
 ### AIP Forms
 
@@ -78,9 +78,9 @@ Gandhinagar Gujarat, India
 
 ### 2025-26
 
-* [Workshop on “Arduino and FPGA Based Embedded System Design”](/sites/default/files/other-files/Workshop-on-Arduino-and-FPGA_Course-Outline_2025.pdf)
-* [Workshop on “Speech and Audio Signal Processing using FPGA”](/sites/default/files/other-files/Workshop-on-Speech-and-Audio-Signal-Processing-using-FPGA_Course-Outline_2025.pdf)
-* [Workshop on “Device Modeling and Circuit Simulation for Integrated Circuit Designs"](/sites/default/files/other-files/Workshop-on-Device-Modeling-and-Circuit_Course-Outline_2025.pdf)
+* [Workshop on “Arduino and FPGA Based Embedded System Design”](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Arduino-and-FPGA_Course-Outline_2025.pdf)
+* [Workshop on “Speech and Audio Signal Processing using FPGA”](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Speech-and-Audio-Signal-Processing-using-FPGA_Course-Outline_2025.pdf)
+* [Workshop on “Device Modeling and Circuit Simulation for Integrated Circuit Designs"](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Device-Modeling-and-Circuit_Course-Outline_2025.pdf)
 
 ### 2024-25
 
@@ -89,13 +89,13 @@ Gandhinagar Gujarat, India
 * [Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python.pdf)
 * [Online certificate course on Advance Data Science and Analytics: A Comprehensive Hands-on](https://www.daiict.ac.in/sites/default/files/other-files/Advance-Data-Science-and-Analytics.pdf)
 * [Workshop on Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python_June24.pdf)
-* [Workshop on Artificial Intelligence and its Application in VLSI Design and Technology](/sites/default/files/other-images/AI-Application-in-VLSI-Design-24.jpg)
-* [Online certificate course on Designing Human Experiences: HCI & UX Fundamentals](/sites/default/files/other-images/Designing-Human-Experiences_HCI-UX_Fundamentals.jpg)
+* [Workshop on Artificial Intelligence and its Application in VLSI Design and Technology](https://www.daiict.ac.in/sites/default/files/other-images/AI-Application-in-VLSI-Design-24.jpg)
+* [Online certificate course on Designing Human Experiences: HCI & UX Fundamentals](https://www.daiict.ac.in/sites/default/files/other-images/Designing-Human-Experiences_HCI-UX_Fundamentals.jpg)
 
 ### 2023-24
 
-* [Online Certificate Course on “Introduction to ML with Python”](/sites/default/files/other-files/Introduction-to-ML-with-Python.pdf)
-* [Digital Psychology: Harnessing Smartphone Mediated Tools to Assess Mental Health](/sites/default/files/other-images/Workshop-Digital-Psychology-2024.jpg)
+* [Online Certificate Course on “Introduction to ML with Python”](https://www.daiict.ac.in/sites/default/files/other-files/Introduction-to-ML-with-Python.pdf)
+* [Digital Psychology: Harnessing Smartphone Mediated Tools to Assess Mental Health](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-Digital-Psychology-2024.jpg)
 
 ### 2022-23
 
@@ -105,9 +105,9 @@ Gandhinagar Gujarat, India
 
 ### Head, Continuing Education Program
 
-#### [Prof. Manish Kumar](/faculty/manish-kumar)
+#### [Prof. Manish Kumar](https://www.daiict.ac.in/faculty/manish-kumar)
 
-[Image Present: Prof. Manish Kumar]
+
 
 **Office:** #3102, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
@@ -117,9 +117,9 @@ Gandhinagar Gujarat, India
 
 ### Members
 
-#### [Dr. Sourish Dasgupta](/faculty/sourish-dasgupta)
+#### [Dr. Sourish Dasgupta](https://www.daiict.ac.in/faculty/sourish-dasgupta)
 
-[Image Present: Dr. Sourish Dasgupta]
+
 
 **Office:** #4102, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
@@ -127,9 +127,9 @@ Gandhinagar Gujarat, India
 
 **Email:** sourish\_dasgupta[at]daiict[dot]ac[dot]in
 
-#### [Prof. Gopinath Panda](/faculty/gopinath-panda)
+#### [Prof. Gopinath Panda](https://www.daiict.ac.in/faculty/gopinath-panda)
 
-[Image Present: Prof. Gopinath Panda]
+
 
 **Office:** #3203, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
@@ -137,9 +137,9 @@ Gandhinagar Gujarat, India
 
 **Email:** gopinath\_panda[at]daiict[dot]ac[dot]in
 
-#### [Prof. Jenson Joseph](/faculty/jenson-joseph)
+#### [Prof. Jenson Joseph](https://www.daiict.ac.in/faculty/jenson-joseph)
 
-[Image Present: Prof. Jenson Joseph]
+
 
 **Office:** #3205, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
@@ -147,9 +147,9 @@ Gandhinagar Gujarat, India
 
 **Email:** jenson\_joseph[at]daiict[dot]ac[dot]in
 
-#### [Prof. Bhaskar Chaudhury](/faculty/bhaskar-chaudhury) [Dean (Academic Programs), (ex-officio)](/dean-academic-programs)
+#### [Prof. Bhaskar Chaudhury](https://www.daiict.ac.in/faculty/bhaskar-chaudhury) [Dean (Academic Programs), (ex-officio)](https://www.daiict.ac.in/dean-academic-programs)
 
-[Image Present: Prof. Bhaskar Chaudhury]
+
 
 **Office:** #2204, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
@@ -186,3 +186,4 @@ Gandhinagar Gujarat, India
 - [Workshop on Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python_June24.pdf) (PDF)
 - [Online Certificate Course on “Introduction to ML with Python”](https://www.daiict.ac.in/sites/default/files/other-files/Introduction-to-ML-with-Python.pdf) (PDF)
 - [Introduction to Java Backend](https://www.daiict.ac.in/sites/default/files/other-files/Introduction-to-Java-Backend.pdf) (PDF)
+

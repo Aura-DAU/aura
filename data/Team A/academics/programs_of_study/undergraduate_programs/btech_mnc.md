@@ -109,7 +109,7 @@ Each course is associated with a fixed number of credits. Credits are awarded on
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](/admissions#tab-1)**
+Details on the application process, admission criteria, fee structure and financial assistance can be found **[here](https://www.daiict.ac.in/admissions#tab-1)**
 
 ### Year I
 
@@ -201,3 +201,4 @@ Details on the application process, admission criteria, fee structure and financ
 
 - [Program Outcomes (POs) & Course Outcomes (COs) of The Program](https://www.daiict.ac.in/sites/default/files/other-files/POs-PSOs-COs_ver2.pdf)
 - [Syllabus of The Program](https://www.daiict.ac.in/sites/default/files/other-files/Syllabus.pdf)
+

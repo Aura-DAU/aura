@@ -13,7 +13,7 @@ University or a professional academic campus is an entirely new academic environ
 
 # Main Content
 
-[Image Present: Students]
+
 
 ## Top 9 things every Parent of a 1st year Student should know
 

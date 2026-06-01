@@ -33,7 +33,7 @@ Academic Calendar 2020-21
 
 ## Academic Calendar 2020-21 for UG 2020 Batch
 
-(The Calendaris finalized assuming thatthe online teaching will continue until the end of July 2021. The Calendar is subject to revision as and when we receive directions fromState/Central Government to holdclasses on campus and open hostel for students)
+(The Calendar is finalized assuming that the online teaching will continue until the end of July 2021. The Calendar is subject to revision as and when we receive directions from State/Central Government to hold classes on campus and open hostel for students)
 
 ### Autumn 2020-21
 

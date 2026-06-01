@@ -39,3 +39,4 @@ Financial assistance/Stipend is provided to a majority of the M.Tech. (ICT) stud
 - [M.Sc. (Data Science)](https://www.daiict.ac.in/msc-data-science)
 - [M.Des. (Communication Design)](https://www.daiict.ac.in/mdes-communication-design)
 - [M.Des. (Intelligent User Experience Design)](https://www.daiict.ac.in/mdes-intelligent-user-experience-design)
+

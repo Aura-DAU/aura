@@ -15,16 +15,16 @@ Humanities, Social Sciences and Design
 
 ### Faculty
 
-* [**Prof. Bharani Kollipara**:](/faculty/bharani-kollipara) Phenomenology, Hermeneutics, Modernism
-* [**Prof. Jenson Joseph**:](/faculty/jenson-joseph) Media Studies, New Media Cultures, Digital Media Ecology, Film Studies, Malayalam Cinema, South Asian Popular Culture.  
+* [**Prof. Bharani Kollipara**:](https://www.daiict.ac.in/faculty/bharani-kollipara) Phenomenology, Hermeneutics, Modernism
+* [**Prof. Jenson Joseph**:](https://www.daiict.ac.in/faculty/jenson-joseph) Media Studies, New Media Cultures, Digital Media Ecology, Film Studies, Malayalam Cinema, South Asian Popular Culture.  
   I work in the areas of Media Studies and Film Studies. My current research focuses are on:
   + Contemporary transformations in media cultures in India, and
   + The aesthetic shifts in film cultures in India post 1990s, with a special focus on the new wave of films in Malayalam.In the coming years, I plan to take up a research project that looks at the long history of the notion of privacy in India, and the ways in which it has mutated in the public imagination after the emergence and popularity of **the digital media ecology**. I plan to chart the political and cultural implications of this transformation by paying attention to the shifts in popular practices of media and their impact on longstanding notions about **the private, the interior, and the individual subject** by extension. The project, the results of which I plan to collate in a manuscript, will approach the issue from the vantage points of **data, digital economy, the New Media ecology** and the recent **Digital Personal Data Protection Bill, 2023** that the Indian state passed.
-* **[Prof. Madhumita Mazumdar:](/faculty/madhumita-mazumdar)** Social and Cultural History Science, Technology and Design, History of Modernity and Developmental Practice in Colonial and Post-Colonial India, Economic and Social History of Gujarat
-* [**Prof. Purbasha Das**:](/faculty/purbasha-das) My current research brings together my interest in the history of transport and communication, urban history, economic history and legal history. The aim is to understand the connection between the development of public transport and the standard of living of people in urban areas of India. Some of the issues that the research looks into is the affordability of transport, the legality of monopolies and tgovernment safeguards provided for developing public transport.
-* **[Prof. Ratna Bharati Bhamidipati:](/faculty/ratna-bharati-bhamidipati)** Diaspora , Transnationalism, Migrant Subjectivity
-* **[Prof. Shefali Jha:](/faculty/shefali-jha)** Political Anthropology, Cultural Studies, Feminist Theory, Film Studies, Literary and Visual Cultures in South Asia
-* **[Prof. Vishvajit Pandya:](/faculty/vishvajit-pandya)** Material Culture, Design and Communication Culture, Visual Anthropology, Anthropology of Space, Rituals and History with specific reference to Colonialism South East Asia
+* **[Prof. Madhumita Mazumdar:](https://www.daiict.ac.in/faculty/madhumita-mazumdar)** Social and Cultural History Science, Technology and Design, History of Modernity and Developmental Practice in Colonial and Post-Colonial India, Economic and Social History of Gujarat
+* [**Prof. Purbasha Das**:](https://www.daiict.ac.in/faculty/purbasha-das) My current research brings together my interest in the history of transport and communication, urban history, economic history and legal history. The aim is to understand the connection between the development of public transport and the standard of living of people in urban areas of India. Some of the issues that the research looks into is the affordability of transport, the legality of monopolies and tgovernment safeguards provided for developing public transport.
+* **[Prof. Ratna Bharati Bhamidipati:](https://www.daiict.ac.in/faculty/ratna-bharati-bhamidipati)** Diaspora , Transnationalism, Migrant Subjectivity
+* **[Prof. Shefali Jha:](https://www.daiict.ac.in/faculty/shefali-jha)** Political Anthropology, Cultural Studies, Feminist Theory, Film Studies, Literary and Visual Cultures in South Asia
+* **[Prof. Vishvajit Pandya:](https://www.daiict.ac.in/faculty/vishvajit-pandya)** Material Culture, Design and Communication Culture, Visual Anthropology, Anthropology of Space, Rituals and History with specific reference to Colonialism South East Asia
 
 ### Research Overview
 
@@ -38,7 +38,7 @@ Aside from teaching and research, faculty at HSS & Design also work with civil s
 
 ### Events and Activities
 
-* [BIRD STORIES: Classification, Conservation and Communication Design seminar!](/events/6254)
+* [BIRD STORIES: Classification, Conservation and Communication Design seminar!](https://www.daiict.ac.in/events/6254)
 
 ### Current Publications
 
@@ -78,7 +78,7 @@ For more details: [Click here](https://daiict.academia.edu/JensonJoseph)
 
 #### Prof. Shefali Jha
 
-[Please visit](/faculty/shefali-jha)
+[Please visit](https://www.daiict.ac.in/faculty/shefali-jha)
 
 #### Prof. Vishvajit Pandya
 
@@ -112,3 +112,4 @@ Information will be available soon
 - [https://www.capecomorinjournal.org.in/Special-issue-view?Id=16](https://www.capecomorinjournal.org.in/Special-issue-view?Id=16)
 - [https://grfdt.com/PublicationDetails.aspx?Type=Working%20papers&TabId=10191](https://grfdt.com/PublicationDetails.aspx?Type=Working%20papers&TabId=10191)
 - [Please visit](https://scholar.google.com/citations?user=90N_KdEAAAAJ&hl=en&oi=ao)
+

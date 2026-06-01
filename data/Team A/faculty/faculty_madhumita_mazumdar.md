@@ -57,3 +57,4 @@ Social and Cultural History Science, Technology and Design, History of Modernity
 * Btech (Open Electives) Culture, Politics, Identity and Approaches to Globalization
 * MDes (CD) Introduction to the History of Design, Thematic Seminar and Research Proposal Writing
 
+

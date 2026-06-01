@@ -94,3 +94,4 @@ Medical Image Analysis, Machine Learning for Healthcare, Computer Vision
 
 * IE406 Machine Learning (ongoing)
 
+

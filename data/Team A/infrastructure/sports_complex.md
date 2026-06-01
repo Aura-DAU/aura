@@ -27,60 +27,61 @@ In DAIICT sports and games are an important and unique part of the daily program
 Basketball courts -02, Athletic track(400mtrs) -01, Indoor Badminton courts -03, Cricket field -01, Gymnasium with all modern facilities-01, Football ground-01,Volleyball Courts -02, Table Tennis Hall equipped with six tables - 01, Yoga and meditation zone.
 
 
-[Image Present: Sports Complex image-1]
 
-[Image Present: Sports Complex image-2]
 
-[Image Present: Sports Complex image-3]
 
-[Image Present: Sports Complex image-4]
 
-[Image Present: Sports Complex image-5]
 
-[Image Present: Sports Complex image-6]
 
-[Image Present: Sports Complex image-7]
 
-[Image Present: Sports Complex image-8]
 
-[Image Present: Sports Complex image-9]
 
-[Image Present: Sports Complex image-10]
 
-[Image Present: Sports Complex image-11]
 
-[Image Present: Sports Complex image-12]
 
-[Image Present: Sports Complex image-13]
 
-[Image Present: Sports Complex image-14]
 
-[Image Present: Sports Complex image-15]
 
-[Image Present: Sports Complex image-16]
 
-[Image Present: Sports Complex image-17]
 
-[Image Present: Sports Complex image-18]
 
-[Image Present: Sports Complex image-19]
 
-[Image Present: Sports Complex image-20]
 
-[Image Present: Sports Complex image-21]
 
-[Image Present: Sports Complex image-22]
 
-[Image Present: Sports Complex image-23]
 
-[Image Present: Sports Complex image-24]
 
-[Image Present: Sports Complex image-25]
 
-[Image Present: Sports Complex image-26]
 
-[Image Present: Sports Complex image-27]
 
-[Image Present: Sports Complex image-28]
 
-[Image Present: Sports Complex image-29]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

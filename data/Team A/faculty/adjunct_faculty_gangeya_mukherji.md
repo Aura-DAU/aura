@@ -102,3 +102,4 @@ Intellectual history, 19th century India, Post-colonialism, Vivekananda, Tagore,
 * ‘Statement of Outstanding Universal Value and Justification of Criteria’ as Consultant for the team preparing the Dossier for the Ministry of Culture, Government of India, for the nomination of Santiniketan as a UNESCO World Heritage Site in 2009.
 * ‘South Asian Philosophies of Peace: Tagore and Vivekananda’, as part of syllabi for the Nelson Mandela Center for Peace and Conflict Resolution, Jamia Millia Islamia, Delhi, 2009.
 
+

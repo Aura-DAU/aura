@@ -94,3 +94,4 @@ Statistical Inference, Survey Sampling, Discrete Data Modeling and Analysis, App
 * Regression Analysis
 * Nonparametric Data Analysis
 
+

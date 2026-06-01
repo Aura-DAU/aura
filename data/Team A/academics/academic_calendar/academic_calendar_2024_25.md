@@ -31,7 +31,7 @@ Academic Calendar 2024-25
 | 12 | First In-Semester Examination (except UG 2024 batch) | 29-08-2024 to 02-09-2024 | Thursday to Monday |
 | 13 | Drop of Courses only for the students on Academic Probation (except UG 2024 batch) | 09-09-2024 to 11-09-2024 | Monday to Wednesday |
 | 14 | Mid-Semester Examination for UG 2024 batch | 28-09-2024 to 04-10-2024 | Saturday to Friday |
-| 15 | Second In-Semester Examination and PhD Comprehensive Examination (except UG 2024 batch) | 14-10-2024 to 17-10-20204 | Monday to Thursday |
+| 15 | Second In-Semester Examination and PhD Comprehensive Examination (except UG 2024 batch) | 14-10-2024 to 17-10-2024 | Monday to Thursday |
 | 16 | In-Semester Break | 28-10-2024 to 01-11-2024 | Monday to Friday |
 | 17 | Course Evaluation | 11-11-2024 to 13-11-2024 | Monday to Wednesday |
 | 18 | PhD RPS presentation | 20-11-2024 to 21-11-2024 | Wednesday to Thursday |
@@ -81,7 +81,7 @@ Academic Calendar 2024-25
 | 1 | Commencement of Classes and Internships | 19-05-2025 | Monday |
 | 2 | Research - Industrial Internship period | 19-05-2025 to 11-07-2025 | Monday to Friday |
 | 3 | End-Semester Examination | 12-07-2025 to 16-07-2025 | Saturday to Wednesday |
-| 4 | M.Tech Major Project-1 presentation (Summer) | 14-07-2025 to 17-05-2025 | Monday to Thursday |
+| 4 | M.Tech Major Project-1 presentation (Summer) | 14-07-2025 to 17-07-2025 | Monday to Thursday |
 | 5 | Announcement of Results | 18-07-2025 | Friday |
 | 6 | Registration for Autumn 2025-26 | 07-07-2025 to 18-07-2025 | Monday to Friday |
 | 7 | Commencement of Session for Autumn 2025-26 | 21-07-2025 | Monday |

@@ -27,3 +27,4 @@ PhD (Heavy Metal Detection in Crops and Soil Clay Mineral Abundance Mapping usin
 
 Remote sensing and GIS, Precision agriculture, and Crop modelling precision agriculture
 
+

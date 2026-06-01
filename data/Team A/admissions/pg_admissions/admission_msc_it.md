@@ -41,11 +41,11 @@ The detailed Program structure can be found **here**.
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-[Image Present: Details\_of\_M.Tech.-ICT\_placed\_students]
+
 
 ### **Top Recruiters:**
 
-[Image Present: Top\_Recruiters\_M.Tech]
+
 
 ## Intake
 
@@ -141,7 +141,7 @@ English comprehension.
 
 #### Sample Question Paper:
 
-[A sample question paper can be found here (PDF).](/sites/default/files/other-files/MSc_IT_Sample_QP_2025.PDF)
+[A sample question paper can be found here (PDF).](https://www.daiict.ac.in/sites/default/files/other-files/MSc_IT_Sample_QP_2025.PDF)
 
 ### Tie breaker for Merit:
 
@@ -303,3 +303,4 @@ No, DAU (Formerly DA-IICT) does not offer the MCA.
 
 - [Breadcrumb Program Brochure](https://www.daiict.ac.in/sites/default/files/other-files/MSc_IT_2026.pdf)
 - [A sample question paper can be found here (PDF).](https://www.daiict.ac.in/sites/default/files/other-files/MSc_IT_Sample_QP_2025.PDF)
+

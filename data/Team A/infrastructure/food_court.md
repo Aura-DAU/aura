@@ -15,7 +15,7 @@ DA-IICT campus has 7 food courts offering wide variety of food covering almost a
 
 ## Food Court
 
-[Image Present: Food Court inner]
+
 
 DA-IICT campus has 7 food courts offering wide variety of food covering almost all the cuisine and taste from North India to South India.
 

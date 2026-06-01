@@ -528,11 +528,11 @@ The refund policy for the withdrawing candidates will be in accordance with the 
 
 ### Scholarships / Fellowships
 
-The Institute provides financial support in the form of scholarships to eligible students. More details of it can be seen [**here**.](/scholarships-admission-programs-of-study)
+The Institute provides financial support in the form of scholarships to eligible students. More details of it can be seen [**here**.](https://www.daiict.ac.in/scholarships-admission-programs-of-study)
 
-[BS-MS Scholarships at DAU](/bs-ms-scholarships-dau) **|** [BS-MS Institute Fellowships at DAU](/bs-ms-institute-fellowships-dau)
+[BS-MS Scholarships at DAU](https://www.daiict.ac.in/bs-ms-scholarships-dau) **|** [BS-MS Institute Fellowships at DAU](https://www.daiict.ac.in/bs-ms-institute-fellowships-dau)
 
-[UG/PG Cybage Khushboo Scholarships](/ugpg-cybage-khushboo-scholarships) **|** [Scholarships Offered to Students](/scholarships-offered-students)
+[UG/PG Cybage Khushboo Scholarships](https://www.daiict.ac.in/ugpg-cybage-khushboo-scholarships) **|** [Scholarships Offered to Students](https://www.daiict.ac.in/scholarships-offered-students)
 
 ## FAQs
 
@@ -645,4 +645,5 @@ Applicants can monitor the progress of their application through the **online ad
 ### 20. How can students apply to the program?
 
 Applications can be submitted through the **online admission portal** of Dhirubhai Ambani University. Detailed eligibility criteria, admission processes, and timelines are available on the program admission page.
+
 

@@ -31,3 +31,4 @@ Graduate in Visual Communication Design, NID Ahmedabad
 
 Natural History & Ethnographic Documentary, Photography, Communication Design, Design for Development & Conservation
 
+

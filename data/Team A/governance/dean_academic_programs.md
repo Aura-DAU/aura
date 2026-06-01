@@ -13,7 +13,7 @@ Dr. Bhaskar Chaudhury
 
 # Main Content
 
-[Image Present: Bhaskar chaudhury]
+
 
 Dr. Bhaskar Chaudhury
 
@@ -30,3 +30,4 @@ The detailed information about his research and teaching activities can be found
 ## Related Links
 
 - [https://sites.google.com/site/bhaskarchaudhury/](https://sites.google.com/site/bhaskarchaudhury/)
+

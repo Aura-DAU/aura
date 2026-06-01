@@ -81,7 +81,7 @@ Support will be provided upto 5 years or the Ph.D. duration whichever is lesser.
 
 ### **Interview**:
 
-Candidates short-listed on the basis of the Entrance Test or who have availed a waiver for the entrance test should appear for an interview to be held at DA-IICT on the date mentioned in the ‘Important Dates’ webpage of the Admissions web portal. During the interview, the candidates will be evaluated on foundational as well as specialized topics of their educational background and research interests. For this purpose, the candidates have to submit a one-page statement of purpose (SoP) as a part of their application. A set of guidelines for preparing a SoP is available **[here](/sites/default/files/other-files/Guidelines-for-writing-the-statement-of-purpose.pdf)**
+Candidates short-listed on the basis of the Entrance Test or who have availed a waiver for the entrance test should appear for an interview to be held at DA-IICT on the date mentioned in the ‘Important Dates’ webpage of the Admissions web portal. During the interview, the candidates will be evaluated on foundational as well as specialized topics of their educational background and research interests. For this purpose, the candidates have to submit a one-page statement of purpose (SoP) as a part of their application. A set of guidelines for preparing a SoP is available **[here](https://www.daiict.ac.in/sites/default/files/other-files/Guidelines-for-writing-the-statement-of-purpose.pdf)**
 
 **The Ph.D. interview will be held physically at DA-IICT, Gandhinagar. The shortlisted Ph.D. (Regular) candidates for entrance test / interview will be provided to and from sleeper class train fare from the nearest railway station as per the communication address mentioned in their application. The lodging will be provided at DA-IICT**.
 
@@ -117,3 +117,4 @@ Please write “**Application for Visvesvaraya Ph.D. scheme**” in the subject 
 
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/Guidelines-for-writing-the-statement-of-purpose.pdf)
 - [NO OBJECTION CERTIFICATE](https://www.daiict.ac.in/sites/default/files/other-files/NO_OBJECTION_CERTIFICATE_Visvesvary-%20PhD-Fellowship.pdf)
+

@@ -27,3 +27,4 @@ PGDPD (Animation Film Design), NID, Ahmedabad
 
 Sound Design, 3D, Animation and Motion Design
 
+

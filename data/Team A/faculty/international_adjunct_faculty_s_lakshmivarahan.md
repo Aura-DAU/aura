@@ -27,3 +27,4 @@ PhD (Electrical Engineering), Indian Institute of Science, Bangalore
 
 Big Data Analytics, Dynamic Data Assimilation and Its Applications, Multi-Agent Dynamics and Network Science, Interconnection Networks for Parallel Computers, Learning Algorithms and Computational Finance.
 
+

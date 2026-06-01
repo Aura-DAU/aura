@@ -31,7 +31,7 @@ Academic Calendar 2025-26
 | 12 | Drop of Courses only for the students on Academic Probation | 02-09-2025 to 08-09-2025 | Tuesday to Monday |
 | 13 | To be Treated as Friday | 09-09-2025 | Tuesday |
 | 14 | Second In-Semester Examination and PhD Comprehensive Examination | 03-10-2025 to 07-10-2025 | Friday to Tuesday |
-| 15 | Mid-Semester Examination (UG 2025) |
+| 15 | Mid-Semester Examination (UG 2025) | 03-10-2025 to 07-10-2025 | Friday to Tuesday
 | 16 | In-Semester Break | 20-10-2025 to 24-10-2025 | Monday to Friday |
 | 17 | Course Evaluation | 10-11-2025 to 12-11-2025 | Monday to Wednesday |
 | 18 | PhD RPS presentation | 19-11-2025 to 20-11-2025 | Wednesday to Thursday |

@@ -44,7 +44,7 @@ team: "Team A"
   + No objection certificate from their parent Institute.
   + Optionally, letters of recommendation.
 
-[Download Flyer with QR Code for SRI 2026](/sites/default/files/inline-images/Flyer-SRI2026-DAU.png)
+[Download Flyer with QR Code for SRI 2026](https://www.daiict.ac.in/sites/default/files/inline-images/Flyer-SRI2026-DAU.png)
 
 ## Summer Research Internship Projects 2026 @ DAU
 
@@ -109,7 +109,7 @@ team: "Team A"
 | **57** | **Prof Manish Kumar** | Wireless Networks | Optimizing UAV-Based Data Collection in IoT Networks With Efficient Trajectory Planning | This Project involves developing approaches for energy-efficient, optimized path planning for data collection in UAV-IoT Networks, accounting for critical factors such as IoT nodes energy levels, UAVs energy constraints, and IoT devices dynamic data generation rates.  Reference Link for similar work from the research group (Published in IEEE Communications Letters):  <https://ieeexplore.ieee.org/abstract/document/11193854> | MATLAB/Python Coding | manish\_kumar[at]dau[dot]ac[dot]in | Open |
 | **58** | **Prof Manish Kumar** | Wireless Networks | Energy-Efficient Node Placement and Routing in Dynamic Wireless Sensor Networks | This Project involves developing algorithms for Node placement, routing, and reconfiguration in Wireless sensor networks. The approach considers many key practical constraints of the network to devise an intelligent strategy that focuses on increasing network lifetime and data transmission while decreasing node mortality.  Reference Link for similar work from the research group (Published in IEEE Sensors Journal):  <https://ieeexplore.ieee.org/abstract/document/11091349> | MATLAB/Python Coding | manish\_kumar[at]dau[dot]ac[dot]in | Open |
 
-[Summer Research Internship 2025](/summer-research-internship-2025)
+[Summer Research Internship 2025](https://www.daiict.ac.in/summer-research-internship-2025)
 
 ## Related Links
 
@@ -117,3 +117,4 @@ team: "Team A"
 - [https://ieeexplore.ieee.org/abstract/document/11193854](https://ieeexplore.ieee.org/abstract/document/11193854)
 - [https://ieeexplore.ieee.org/abstract/document/11091349](https://ieeexplore.ieee.org/abstract/document/11091349)
 - [Summer Research Internship 2025](https://www.daiict.ac.in/summer-research-internship-2025)
+

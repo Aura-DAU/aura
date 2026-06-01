@@ -74,9 +74,9 @@ Besides these required courses, selections of elective courses are also offered.
 
 ### Admission Process
 
-Details on the application process, admission criteria, fee structure and financial assistance can be found [here](/admission-msc-it)
+Details on the application process, admission criteria, fee structure and financial assistance can be found [here](https://www.daiict.ac.in/admission-msc-it)
 
-[Courses](#tab-3)
+## Courses
 
 ### Semester - I
 
@@ -123,54 +123,6 @@ Details on the application process, admission criteria, fee structure and financ
 | --- | --- |
 | Project Internship | 0-0-32-16 |
 
-### C Programming
-
-This course introduces basic concepts of computer programming and phases of program development, deployment and testing to solve computational problems. Topics include: problem solving techniques, flow charts, decision tables and C programming. At the end of the course, the student will be able to develop logical analytical ability to perceive and solve computational problems; to write and test computer programs developed with C programming language; and to work effectively with various computer software tools like editors, compilers, office automation, imaging, etc.
-
-### Algorithms and Data Structure
-
-Asymptotic analysis: Big O, little o, omega, and theta notation, worst case and average case analysis, and solving recurrences. Algorithm Design Techniques: Brute-force algorithms, Divide-and-conquer, Dynamic programming, Greedy algorithms, Backtracking and Heuristics. ADTs that covered are Lists, Stacks, Queues, Trees, and Graphs. Sorting and Searching, Binary search trees, Hashing, Graph representations, Graph Algorithms (DFS, BFS, Shortest- path (Dijkstra’s and Floyd’s algorithms), Minimum spanning tree (Prim’s and Kruskal’s algorithms) and Topological sort.
-
-### Database Management Systems
-
-This course is intended to give a solid background in database design and implementation with the focus on relational model. The course covers data modeling, theory of relational model, Functional Dependencies, and Normalization, Querying relational databases using Relational Algebra and SQL. Students also learn and practice creating stored procedures, accessing databases in host programming languages. The course also teaches Storage and Indexing structures, Query Execution and Transaction Processing concept.
-
-### Discrete Mathematics
-
-The objective of the course is to build mathematical background needed for better understanding of computing techniques studied in various courses of the program. This course begins with quick revision of Logic, Sets, Relations and Functions, and provides a detailed discussion of Basics of counting (Permutations, Combinations, Recurrence relations, Solving Linear recurrence relations), Discrete Probability (Basic probability theory, Bayes theorem, expected value and variance), and Graph theory (Graph and graph models, graph representations, basic graph problems like traversals, shortest path and Euler paths).
-
-### Communication Skills
-
-Understanding customer requirements and proposing design solutions is an integral part of an IT professional’s work. Therefore, written and oral communication and presentation skills must be acquired by any person working in the field of IT. This practice-oriented course aims to inculcate in students not only these skills but also habits related to modern work culture.
-
-### Object-Oriented Programming
-
-The objective of this course is to discuss object oriented programming paradigms and implementation of common data structures using OOP language like C++ or Java. Topics include: Objects and Classes, Attributes, Methods, Visibility; Class Relationships, Association, Aggregation, Composition; OOP principles (Abstraction, Information Hiding, Encapsulation, Inheritance, Polymorphism). This course is about programming in Java. Java is the most widely used language for developing open source software systems. With Java, there comes huge library support which reduces the development time and enhances software reuse for faster development.
-
-### Design of Software Systems
-
-The objective of the course is to teach good software design practices at architectural level as well as component level. The prime focus is on designing software systems using object oriented principles. The scope of the course ranges from any given software requirements to producing a detailed design in the software development life cycle. The emphasis would be on learning Unified Modeling Language from the ground; students should be able draw UML diagrams using very basic tools like Dia. Students are encouraged to take a mid-size software design projects, submit detailed design and take up to the implementation. Students also learn and attempt to apply common design patterns.
-
-### Enterprise Computing
-
-Objective of the course is to learn whole array of java technologies for building enterprise applications. The course intends to provide lots of hands, and students are engaged in developing mid-size projects drawn from real world, using J2EE technologies. Technologies that are to be included are Core Java with Collections, Swing, and JDBC API; HTML, XML, JSP/Servlet. Use of MVC frameworks like Apache Struts for building java based web applications. Students are also exposed to various J2EE patterns.
-
-### System Programming
-
-The purpose of this course is to provide the students with an introduction to system-level programming in a UNIX environment. The students will be introduced to the standard Linux commands, memory management, interacting with the operating system by making system calls for file management, file execution, process control, and interprocess communication, shell scripting, Sockets and using TCP/IP, Shell principles, exec family of functions, naming conventions, and so on. A primary goal of the course then is to train the students in a systems programming context to develop a code that is robust.
-
-### Web Programming
-
-The objective of this course is to discuss the structured approaches to identify the needs, interests, and the functionality of a webpage using various technologies such as JavaScript, CSS and HTML. This course covers the most current tools available for developing HTML documents and posting pages on the World Wide Web in order to improve the users experience in different perspectives; use of JavaScript libraries (e.g. JQuery) to create dynamic pages; use JavaScript to access and use web services for dynamic content (AJAX, JSON, etc.).
-
-### Software Engineering
-
-The course intends to teach complete life cycle of software development. The course covers Software Processes and SDLCs; Requirements Engineering; Software Testing, Verification and Validation; Software Evolution; CASE Tools; Introduction to Software Project Management, Appreciate Software Reliability and Risk Assessment; Software Quality Standards and Quality Assurance.
-
-### Computer Networks
-
-This course will cover the fundamental principles of wired networks with focus on layered architecture, protocols, implementation and issues specific to the Internet. The objective is to provide an understanding of how the Internet works. We will discuss real examples the Internet based systems such as Facebook, Google and understand how fundamentals of computer networks are applied on such systems.
-
 ## Courses
 
 ### C Programming
@@ -179,7 +131,7 @@ This course introduces basic concepts of computer programming and phases of prog
 
 ### Algorithms and Data Structure
 
-Asymptotic analysis: Big O, little o, omega, and theta notation, worst case and average case analysis, and solving recurrences. Algorithm Design Techniques: Brute-force algorithms, Divide-and-conquer, Dynamic programming, Greedy algorithms, Backtracking and Heuristics. ADTs that covered are Lists, Stacks, Queues, Trees, and Graphs. Sorting and Searching, Binary search trees, Hashing, Graph representations, Graph Algorithms (DFS, BFS, Shortest- path (Dijkstra’s and Floyd’s algorithms), Minimum spanning tree (Prim’s and Kruskal’s algorithms) and Topological sort.
+Asymptotic analysis: Big O, little o, omega, and theta notation, worst case and average case analysis, and solving recurrences. Algorithm Design Techniques: Brute-force algorithms, Divide-and-conquer, Dynamic programming, Greedy algorithms, Backtracking and Heuristics. ADTs that covered are Lists, Stacks, Queues, Trees, and Graphs. Sorting and Searching, Binary search trees, Hashing, Graph representations, Graph Algorithms (DFS, BFS, Shortest- path (Dijkstra’s and Floyd’s algorithms), Minimum spanning tree (Prim’s and Kruskal’s algorithms) and Topological sort).
 
 ### Database Management Systems
 
@@ -226,3 +178,4 @@ This course will cover the fundamental principles of wired networks with focus o
 
 - [Program Outcomes (POs) & Course Outcomes (COs) of The Program](https://www.daiict.ac.in/sites/default/files/other-files/POs-PSOs-COs_ver2.pdf)
 - [Syllabus of The Program](https://www.daiict.ac.in/sites/default/files/other-files/Syllabus.pdf)
+

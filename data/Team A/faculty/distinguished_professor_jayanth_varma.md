@@ -45,3 +45,4 @@ He is the author of several books including Derivatives and Risk Management, Por
 
 Courses on capital markets, fixed income, alternative investments, risk management, and corporate finance during my tenure at IIMA. List of these courses is available at [HTTPS://WWW.JRVARMA.IN/COURSES.HTML](https://www.jrvarma.in/courses.html)
 
+

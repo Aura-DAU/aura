@@ -43,7 +43,7 @@ The candidate must possess one of the following qualifications.
 ### Additional Requirements
 
 * **Must have passed the 12th standard with Mathematics as a main subject**.
-* Candidates appearing in their final degree examination and expecting to complete it by July 2024 may also apply. However, their final admission will be subject to obtaining a minimum aggregate of 60% marks or its equivalent. All admitted candidates must submit their degree certificates or proof of completion by 30 October 2024. Failure to do so may result in cancellation of their admission.
+* Candidates appearing in their final degree examination and expecting to complete it by July 2024 may also apply. However, their final admission will be subject to obtaining a minimum aggregate of 60% marks or its equivalent. All admitted candidates must submit their degree certificates or proof of completion by 30 October 2024. Failure to do so may result in cancellation of their admission. (***Historial Data**)
 
 ### Notes
 
@@ -218,7 +218,7 @@ The refund policy for the withdrawing candidates will be in accordance with the 
 
 **The Institute provides financial support in the form of scholarships to eligible students. More details of it can be seen** [**here**.](https://www.daiict.ac.in/da-iict-scholarships-msc-data-science-students)
 
-### PG Scholarships - Fellowships: [Click here](/admissions#tab-4)
+### PG Scholarships - Fellowships: [Click here](https://www.daiict.ac.in/admissions#tab-4)
 
 ## How to Apply
 
@@ -233,4 +233,5 @@ The following links will be activated soon.
 * Minor Project Policy
 * Minor Project Poster Template
 * Major Project Thesis Template
+
 
