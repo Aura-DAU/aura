@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Shruti Bhilare at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Shruti Bhilare
 
-
 Shruti Bhilare
-Â 
+ 
 PhD (Computer Science and Engineering), IIT Indore
 Contact Details
-Â 
+ 
 079-68261651
-Â 
+ 
 # 4208, FB-4, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 shruti_bhilare@dau.ac.in
-Â 
+ 
 https://scholar.google.co.in/citations?hl=en&user=zlvqa7IAAAAJ
 https://www.linkedin.com/in/dr-shruti-bhilare-6276222b
 Biography
@@ -39,9 +38,9 @@ Biometrics, Pattern Recognition, Image Processing
 
 Publications
 Journals:
-S. Sharma, R. Joshi, S. Bhilare, M.V. Joshi, â€œRobust Adversarial Defense: An Analysis on Use of Auto-Inpaintingâ€, SN Computer Science 6 (1), pp. 17, 2024.Â doi: 10.1007/s42979-024-03542-5
+S. Sharma, R. Joshi, S. Bhilare, M.V. Joshi, â€œRobust Adversarial Defense: An Analysis on Use of Auto-Inpaintingâ€, SN Computer Science 6 (1), pp. 17, 2024. doi: 10.1007/s42979-024-03542-5
 Conferences:
-K. Shah, N. Shah, S. Bhilare, S. Mandal, "Spatial-Spectral Convolutional Learning for Robust Fingerprint Liveness Detection", Proc. 10th IAPR International Conference on Computer Vision & Image Processing (CVIP), Communications in Computer and Information Science, Ropar, India, Dec 2025.Â Â (Received Best Paper Award).
+K. Shah, N. Shah, S. Bhilare, S. Mandal, "Spatial-Spectral Convolutional Learning for Robust Fingerprint Liveness Detection", Proc. 10th IAPR International Conference on Computer Vision & Image Processing (CVIP), Communications in Computer and Information Science, Ropar, India, Dec 2025.  (Received Best Paper Award).
 Workshops:
 Anchor institute program (AIP) on Introduction to Machine Learning with Python for faculties, professionals and students weekly during January 5 â€“ April 26, 2024.
 Teaching
@@ -64,8 +63,8 @@ Former Students
 
 M.Tech. Thesis:
 
-Dhrumal Patel (co-supervision with Prof. Amit Mankodi): Federated Machine LearningÂ (2026)
-Palak Bera:Â BioGAN: A Robust Cancelable MultimodalÂ Finger Biometric Template ProtectionÂ Scheme Using Conditional GAN and Style
+Dhrumal Patel (co-supervision with Prof. Amit Mankodi): Federated Machine Learning (2026)
+Palak Bera: BioGAN: A Robust Cancelable Multimodal Finger Biometric Template Protection Scheme Using Conditional GAN and Style
 Transfer (2025)
 Shivam Sharma: Fortifying Digital Boundaries: Defending Against Adversarial Patch Threats and Elevating Biometric Authentication (2024)
 Maulik Sarvaiya: Investigating Robustness of Face Recognition System Against Adversarial Attacks (2023)
@@ -77,18 +76,18 @@ Vidit Shah (co-supervision with Dr. Manish Khare): English Handwritten Word Reco
 Kehkasha Sherasiya (co-supervision with Dr. Suman Mitra): Presentation Attack Detection in Face Recognition System (2021)
 M.Tech. Research Projects
 Priya Patel: Privacy-Preserving Face Recognition (2026)
-Rahul Prajapati: Presentation Attack DetectionÂ (2026)
-Monson Verghese: Adversarial DefenseÂ (2026)
+Rahul Prajapati: Presentation Attack Detection (2026)
+Monson Verghese: Adversarial Defense (2026)
 Harshil Shah: Adversarial Machine Learning (2025)
 Aditya Sinh Chauhan: Federated Machine Learning (2025)
 Khushi Dhake: Adversarial Defense (2025)
 Rohan Joshi: Adversarial Machine Learning and Cancelable Biometrics (2024)
 
-## Contact Information
+# Contact Information
 
 - **Email:** shruti_bhilare@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/shruti-bhilare)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

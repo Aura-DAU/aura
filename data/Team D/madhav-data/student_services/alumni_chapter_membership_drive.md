@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 **DAU Alumni Office** , building on this momentum, we are pleased to announce the Membership Drive for our Local Alumni Chapter. An initiative aimed at strengthening our alumni network and creating a platform for sustained engagement.
 
-## Main Content
+# Main Content
 
-## DAU Alumni Chapter Membership Drive
+# DAU Alumni Chapter Membership Drive
 
 #### Gandhinagar–Ahmedabad Region
 
@@ -30,9 +30,9 @@ team: "Team D"
 
 [Register Now](https://forms.gle/JWNmexeoaKUsCgui9)
 
-[![DAU Alumni Chapter Membership Drive](/sites/default/files/inline-images/DAU_ALUMNI_CHAPTER_MEMBERSHIP_DRIVE.png)](https://forms.gle/JWNmexeoaKUsCgui9)
+[DAU Alumni Chapter Membership Drive](https://forms.gle/JWNmexeoaKUsCgui9)
 
-## Related Links
+# Related Links
 
 - [Register Now](https://forms.gle/JWNmexeoaKUsCgui9)
 

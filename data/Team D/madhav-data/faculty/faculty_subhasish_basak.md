@@ -7,24 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Subhasish Basak at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Subhasish Basak
 
-
 Subhasish Basak
-Â 
+ 
 PhD (Statistics), Indian Statistical Institute, Kolkata
 Contact Details
-Â 
+ 
 079-68261671
-Â 
+ 
 # 3206, FB-3, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 subhasish_basak@dau.ac.in
 Biography
 
@@ -46,11 +45,11 @@ Teaching
 
 Design of Experiments
 
-## Contact Information
+# Contact Information
 
 - **Email:** subhasish_basak@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/subhasish-basak)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

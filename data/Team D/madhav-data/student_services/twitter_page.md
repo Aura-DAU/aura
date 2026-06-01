@@ -7,11 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 This document contains the profile details and statistics of the official Twitter/X account of Dhirubhai Ambani University (DAU).
 
-## Main Content
+# Main Content
 
 ### Dhirubhai Ambani University Twitter/X Profile
 
@@ -27,7 +27,7 @@ This document contains the profile details and statistics of the official Twitte
 * **Location:** Gandhinagar, Gujarat
 * **Website Link listed on bio:** [daiict.ac.in](https://www.daiict.ac.in)
 
-## Related Links
+# Related Links
 
 - [Official Twitter/X Account - dauofficial_](https://x.com/dauofficial_)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

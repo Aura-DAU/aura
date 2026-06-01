@@ -7,13 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Profile of Mrs. Tina Anil Ambani, President of Dhirubhai Ambani University (DAU) / DA-IICT, highlighting her leadership roles and contributions across education, healthcare, art, and social initiatives.
 
-## Main Content
+# Main Content
 
-[Image Present: Mrs. Tina Anil Ambani]
+
 
 ### Mrs. Tina Anil Ambani
 
@@ -45,7 +45,7 @@ She is credited with setting up the **Harmony Art Foundation**, an international
 
 She established **Harmony for Silvers Foundation** in 2004 â€” a non-government organisation formed to enhance the quality of life of "Silvers" (Harmony's term for the elderly) in India.
 
-## Important Information
+# Important Information
 
 - Mrs. Tina Anil Ambani serves as President of DAU / DA-IICT
 - Chairperson of Group CSR at Reliance Group
@@ -53,7 +53,7 @@ She established **Harmony for Silvers Foundation** in 2004 â€” a non-govern
 - Founded Kokilaben Dhirubhai Ambani Hospital & Medical Research Institute (2009)
 - Established Harmony Art Foundation and Harmony for Silvers Foundation (2004)
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Organogram](https://daiict.ac.in/organogram)

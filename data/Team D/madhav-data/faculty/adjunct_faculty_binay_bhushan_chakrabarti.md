@@ -7,29 +7,29 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Binay Bhushan Chakrabarti at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Binay Bhushan Chakrabarti
 
 Binay Bhushan Chakrabarti
-Â 
+ 
 PhD (Economics), Jadavpur University Calcutta
 Contact Details
-Â 
+ 
 binaybhushan_chakrabarti@dau.ac.in
 Specialization
 
 Finance
 
-## Contact Information
+# Contact Information
 
 - **Email:** binaybhushan_chakrabarti@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/binay-bhushan-chakrabarti)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

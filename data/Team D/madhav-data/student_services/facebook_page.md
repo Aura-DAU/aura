@@ -7,11 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 This document contains the profile details and statistics of the official Facebook page of Dhirubhai Ambani University (DAU).
 
-## Main Content
+# Main Content
 
 ### Dhirubhai Ambani University Facebook Page
 
@@ -25,7 +25,7 @@ This document contains the profile details and statistics of the official Facebo
   The Official page of Dhirubhai Ambani University. A Leading institute in education, research, and innovation.
 * **Location:** Gandhinagar, Gujarat, 382007
 
-## Related Links
+# Related Links
 
 - [Official Facebook Page - officialdau](https://www.facebook.com/officialdau)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

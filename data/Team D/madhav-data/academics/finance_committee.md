@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Composition of the Finance Committee of Dhirubhai Ambani University (formerly DA-IICT), listing the chairman, members, and non-member secretary responsible for financial governance.
 
-## Main Content
+# Main Content
 
 ### Finance Committee Composition
 
@@ -24,14 +24,14 @@ Composition of the Finance Committee of Dhirubhai Ambani University (formerly DA
 | **Member** | Prof. Maniklal Das | Dean (Faculty), Dhirubhai Ambani University, Gandhinagar *(ex-officio)* |
 | **Non-Member Secretary** | Mr. Siddharth Swaminarayan | Executive Registrar, Dhirubhai Ambani University, Gandhinagar *(ex-officio)* |
 
-## Important Information
+# Important Information
 
 - The Finance Committee is chaired by the Director General (ex-officio)
 - Comprises a mix of external industry experts and internal university leadership
 - External members bring experience from Reliance Power Limited and IIM Ahmedabad
 - The Executive Registrar serves as the Non-Member Secretary
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Finance Committee](https://daiict.ac.in/finance-committee)

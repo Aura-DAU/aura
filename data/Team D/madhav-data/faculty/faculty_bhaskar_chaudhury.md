@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Bhaskar Chaudhury at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Bhaskar Chaudhury
 
-
 Bhaskar Chaudhury
-Â 
+ 
 PhD (Computational Plasma Physics), IPR, Gandhinagar
 Contact Details
-Â 
+ 
 079-68261590
-Â 
+ 
 # 2204, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 bhaskar_chaudhury@dau.ac.in
-Â 
+ 
 Scholar
 https://sites.google.com/site/bhaskarchaudhury/
 Biography
@@ -57,11 +56,11 @@ Interactive Data Visualization
 Introduction to GPU Programming
 Accelerated Computing
 
-## Contact Information
+# Contact Information
 
 - **Email:** bhaskar_chaudhury@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/bhaskar-chaudhury)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

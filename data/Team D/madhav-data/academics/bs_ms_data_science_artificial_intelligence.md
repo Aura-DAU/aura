@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
-[Apply for Admission](/bs-ms-data-science-artificial-intelligence-admissions)
+[Apply for Admission](https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence-admissions)
 
-## Main Content
+# Main Content
 
-[Apply for Admission](/bs-ms-data-science-artificial-intelligence-admissions)
+[Apply for Admission](https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence-admissions)
 
 **Award** | **Duration** | **Study Mode**  
 ---|---|---  
@@ -25,17 +25,15 @@ Data Science and Artificial Intelligence** | **3 Years: Bachelor of Science (B.S
 ---|---|---  
 **120** | **Multiple Channels** | **Yearly in July/ August**  
   
-  * displayNone About the Program
-  * displayNone Structure and Exit Options
-  * displayNone Curriculum Details
-  * displayNone Career Outcomes
-  * displayNone Entry Requirements
-  * displayNone Fees & Scholarships
-  * displayNone FAQs
+  * About the Program
+  * Structure and Exit Options
+  * Curriculum Details
+  * Career Outcomes
+  * Entry Requirements
+  * Fees & Scholarships
+  * FAQs
 
 Why This Program?
-
-![Program Overview](/sites/default/files/other-images/B.S.–M.S-DS-AI.jpg)
 
 Artificial Intelligence and data-driven systems are transforming every sector — healthcare, finance, climate science, manufacturing, governance, and digital platforms.
 
@@ -50,7 +48,7 @@ Many existing undergraduate programs focus either on traditional computer scienc
 
 This five-year integrated program is designed to bridge the gap between theory and deployment, innovation and responsibility, and analytics and intelligent system design.
 
-## Data Science vs. Artificial Intelligence
+# Data Science vs. Artificial Intelligence
 
 **Data Science** focuses on analysing data, uncovering patterns, and enabling informed decision-making.
 
@@ -123,8 +121,6 @@ Students learn not only how to build AI systems, but how to deploy them responsi
 Students gain hands-on experience in designing, evaluating, and deploying production-grade AI systems that are explainable, scalable, and human-centered.
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
-
-![Structure and Exit Options](/sites/default/files/inline-images/BS.%E2%80%93MS-Data-Science-and-Artificial-Intelligence_ver2_2026.jpg)
 
   * **After 3 Years – B.Sc. (Bachelor of Science)**  
 Strong grounding in programming, statistics, data science, and core machine learning.
@@ -572,11 +568,11 @@ The refund policy for the withdrawing candidates will be in accordance with the 
 
 ### Scholarships / Fellowships
 
-The Institute provides financial support in the form of scholarships to eligible students. More details of it can be seen [**here**.](/scholarships-admission-programs-of-study)
+The Institute provides financial support in the form of scholarships to eligible students. More details of it can be seen [**here**.](https://www.daiict.ac.in/scholarships-admission-programs-of-study)
 
-[BS-MS Scholarships at DAU](/bs-ms-scholarships-dau) **|** [BS-MS Institute Fellowships at DAU](/bs-ms-institute-fellowships-dau)
+[BS-MS Scholarships at DAU](https://www.daiict.ac.in/bs-ms-scholarships-dau) **|** [BS-MS Institute Fellowships at DAU](https://www.daiict.ac.in/bs-ms-institute-fellowships-dau)
 
-[UG/PG Cybage Khushboo Scholarships](/ugpg-cybage-khushboo-scholarships) **|** [Scholarships Offered to Students](/scholarships-offered-students)
+[UG/PG Cybage Khushboo Scholarships](https://www.daiict.ac.in/ugpg-cybage-khushboo-scholarships) **|** [Scholarships Offered to Students](https://www.daiict.ac.in/scholarships-offered-students)
 
 ### 1\. What is a BS–MS dual degree program?
 
@@ -688,7 +684,7 @@ Applicants can monitor the progress of their application through the **online ad
 
 Applications can be submitted through the **online admission portal** of Dhirubhai Ambani University. Detailed eligibility criteria, admission processes, and timelines are available on the program admission page.
 
-## Related Links
+# Related Links
 
 - [Apply for Admission](https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence-admissions)
 - [here.](https://www.daiict.ac.in/scholarships-admission-programs-of-study)

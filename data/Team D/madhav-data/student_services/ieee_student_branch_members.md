@@ -1,17 +1,17 @@
 ---
 title: "Students / IEEE Student Branch / Members"
-url: "http://ieee.daiict.ac.in/ieee2018/members.html?_ga=2.38133280.284064789.1779958435-1463653363.1779559366"
+url: "http://ieee.daiict.ac.in/ieee2018/members.html"
 category: "Student_services"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 ×
 
-## Main Content
+# Main Content
 
 # [  
 IEEE Members of DA-IICT](members.html)
@@ -145,7 +145,7 @@ IEEE Members of DA-IICT](members.html)
 125 | Chintan Thakkar | chintanjehani12345@gmail.com | 95127804 | -  
 126 | Jimil Prajapati | jimilprajapati@gmail.com | 95133237 | -  
   
-## DA-IICT
+# DA-IICT
 
 ×
 
@@ -153,7 +153,7 @@ DA-IICT at Gandhinagar represents Wave-4 of educational innovation in Gujarat. T
   
 [More about DAIICT](http://daiict.ac.in)
 
-## IEEE History
+# IEEE History
 
 ×
 
@@ -168,7 +168,7 @@ Through its members, the IEEE is a leading authority in technical areas ranging 
 [IEEE Standards ](https://www.ieee.org/publications_standards/index.html)   
 [IEEE Awards](https://www.ieee.org/about/awards/DF_IEEE_MIG_NAV_86257)
 
-## IEEE Region 10
+# IEEE Region 10
 
 ×
 
@@ -176,13 +176,13 @@ The IEEE Region 10, or sometimes referred to the Asia Pacific Region comprises 4
   
 [More about Region 10](https://www.ieeer10.org)
 
-## IEEE SB DA-IICT
+# IEEE SB DA-IICT
 
 ×
 
 DA-IICT is an academic institution promoted by the Dhirubhai Ambani Foundation and the Reliance Group,primarily aimed to impart Information and Communication Technology (ICT) education of international standards. Established amidst the lush green corridor of Gandhinagar, Gujarat, DA-IICT lives for furtherance of education,research, and training in ICT. DA-IICT commenced activities from August 2001. DA-IICT is a research led institute which houses world class facilities such well equipped labs with latest equipment and software, modern lecture theaters, a multi-cuisine canteen and on campus residence. The Institute of Electrical and Electronic Engineers Student Branch at DA-IICT endeavors to promote student awareness among students on the opportunities that exist in the field of electronics and electrical engineering. Our objective is to bridge the gap between industry and students studying in technology-related fields, while promoting and providing an intellectually stimulating university environment for the student body. IEEE Student Branch, DA-IICT aims to provide an intereactive platform for students to develop proffessional and technical abilities. Since the inception, it is successful in organizing various events with well defined objectives.
 
-## IEEE Gujarat Section
+# IEEE Gujarat Section
 
 ×
 
@@ -198,7 +198,7 @@ Gujarat Section has always been pioneer in organizing programs for professional 
   
 [More about IEEE Gujarat Section](http://ieeegujaratsection.org/)
 
-## Bylaws
+# Bylaws
 
 × Article 1 : General
 
@@ -291,9 +291,9 @@ d. Attendance rosters for faculty presentations and general meetings.
   
 * In case of any discrepancy Branch counselor decision will be final and binding to all.
 
-## IEEE WIE, Affinity Group
+# IEEE WIE, Affinity Group
 
-× ![](images/wie.png)
+× 
 
 WIE is largest international professional group dedicated to promoting women engineers and scientist. The idea is to provide the young women with a platform, encouragement and inspiration to come up with confidence and excellence in the technical career of Engineering.WIE is an effort to motivate the women to be a part of science, Technology and Engineering by bringing all men and women with such ambitions to put a joint effort towards this.   
   
@@ -307,25 +307,25 @@ DA-IICT WIE group had applied for the above mentioned grants for the year 2010 a
   
 This year, we intend to take WIE at a different platform by targeting national participation and helping other IEEE student branches establish WIE affinity groups. Among the various initiatives that the WIE 2011-2012 executive committee intends to take is that of K-sharing or Knowledge sharing. It is live video conferencing with professors, scientists and researchers from other organizations and institutes. WIE Executive Committee hopes to provide benefits of k-sharing to students in rural setup as well. 
 
-## SIG Embedded Programming
+# SIG Embedded Programming
 
-× ![](images/embedded.png)
+× 
 
 Special Interest Group ~ Embedded (hereafter SIG~Embedded) was established in Jan’ 2011 by IEEE Student Branch, DA-IICT. Embedded Systems are the true products and testaments of ICT for which our institute has been the pioneer. Embedded System combines the nitty-gritty of hardware embedded with the functionalities of software which makes it most custom and customizable products. Embedded Systems have always captured the imaginations of students in DA-IICT. IEEE Student Branch, DA-IICT wanted to promote the cult of embedded systems in the student community and thus the concept and subsequently SIG~Embedded was established.   
   
 SIG~Embedded has been organizing sessions on theory and practical approaches for embedded systems since. SIG~Embedded plans to improve and diversify its activities by creating a knowledge bank which will last for the future enthusiasts and will be continuously be built and expanded upon. The knowledge and resources gathered over time will serve the enthusiasts in present and future alike, for future enthusiasts the resources will be a part of glorious legacy whose foundation can only be set in present. The efforts of SIG~Embedded subsequently can be helpful in spreading the knowledge gained, to students of other educational institutions be they higher centres of education or senior secondary schooling and thus also inspire and encourage them to start similar SIGs. 
 
-## SIG Mobile Apps
+# SIG Mobile Apps
 
-× ![](images/mobile.png)
+× 
 
 SIG Mobile Applications is a group of enthusiasts for developing mobile applications, especially Android apps. SIG Mobile conducts regular sessions every week where we try to cover the basics of Android app development. Apart from that, talks by people working in industry, app competitions, and project mentoring and special talks on Android products are some of the other activities.   
   
 This time we plan to have parallel sessions – one for the beginners for learning the basics and another Advanced where students who already know the basics can learn advanced topics like Using APIs, Navigation Drawer, Working with Databases, Fetching Data from/to Server, Material Design etc. Once well versed with such topics, students can pick up projects under the mentoring of SIG Team members. Few upcoming projects include the Webmail app, the Synapse-newsletter, SBG Events Calendar and many more. 
 
-## SIG Machine Intelligence
+# SIG Machine Intelligence
 
-× ![](images/machine.png)
+× 
 
 Machine Intelligence-SIG aims to build a community of Machine learning and AI enthusiasts who would engage in discussions and collaborative projects and at the same time, foster a healthy environment and support beginners.   
   
@@ -333,7 +333,7 @@ Presently, MI-SIG conducts bi-weekly machine learning hands-on sessions for soph
   
 MI-SIG plans to begin exciting group projects with a mentor assigned to each group. This will help the students get a hold of the subject matter by putting their theoretical knowledge into practical use.
 
-## Contact Information
+# Contact Information
 
 - **Email:** harshilgandhi10@gmail.com
 - **Email:** khyati.bhuva2000@gmail.com
@@ -462,7 +462,7 @@ MI-SIG plans to begin exciting group projects with a mentor assigned to each gro
 - **Email:** jaykakadiya19@gmail.com
 - **Email:** pratikpanchal.8491@gmail.com
 
-## Related Links
+# Related Links
 
 - [IEEE Members of DA-IICT](members.html)
 - [More about DAIICT](http://daiict.ac.in)

@@ -7,24 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Aditya Tatu at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Aditya Tatu
 
-
 Aditya Tatu
-Â 
+ 
 PhD (Computer Science), University of Copenhagen, Denmark
 Contact Details
-Â 
+ 
 079-68261540
-Â 
+ 
 #1206, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 aditya_tatu@dau.ac.in
 Biography
 
@@ -49,11 +48,11 @@ Image & Signal Processing
 Shape Modeling, Computer Graphics
 Robotics
 
-## Contact Information
+# Contact Information
 
 - **Email:** aditya_tatu@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/aditya-tatu)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Abhishek Tripathy at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Abhishek Tripathy
 
-
 Abhishek Tripathy
-Â 
+ 
 PhD (Thesis Submitted), Indian Institute of Management Ahmedabad
 Contact Details
-Â 
+ 
 079-68261643
-Â 
+ 
 # 1205, FB-1, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 abhishek_tripathy@dau.ac.in
-Â 
+ 
 https://sites.google.com/view/abhishek-tripathy/home
 Biography
 
@@ -42,11 +41,11 @@ Specialization
 
 Decentralization and Public Policy, Financial Inclusion, Applied Social Networks Analysis
 
-## Contact Information
+# Contact Information
 
 - **Email:** abhishek_tripathy@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/abhishek-tripathy)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

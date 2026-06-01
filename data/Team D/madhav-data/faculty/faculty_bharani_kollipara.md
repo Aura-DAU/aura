@@ -7,24 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Bharani Kollipara at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Bharani Kollipara
 
-
 Bharani Kollipara
-Â 
+ 
 PhD (English), The English and Foreign Languages University, Hyderabad
 Contact Details
-Â 
+ 
 079-68261558
-Â 
+ 
 # 2102, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 bharani_kollipara@dau.ac.in
 Biography
 
@@ -35,17 +34,17 @@ Specialization
 Modern Philosophy, Phenomenology and Hermeneutics, Literary Modernism
 
 Publications
-Bharani Kollipara. A review ofÂ Gadamer on Tradition: Historical Context and the Limits of Reflection: Springer, Cham, 2017, Human Studies 41 (1):157-164 (2018).
+Bharani Kollipara. A review of Gadamer on Tradition: Historical Context and the Limits of Reflection: Springer, Cham, 2017, Human Studies 41 (1):157-164 (2018).
 Teaching
 Approaches to Indian Society
 Modern European Philosophy
 Modernity and Political Theory
 
-## Contact Information
+# Contact Information
 
 - **Email:** bharani_kollipara@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/bharani-kollipara)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

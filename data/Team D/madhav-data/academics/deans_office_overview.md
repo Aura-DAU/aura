@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Dean's Office - Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 Message from the Desk of Dean (Research)
 
@@ -60,7 +60,7 @@ Assistant Manager - Dean Research Office
 
  (+91) 079-68261648
 
-## Related Links
+# Related Links
 
 - [Original Page](https://daiict.ac.in/deans-office-0)
 - [DAU Website](https://www.daiict.ac.in)

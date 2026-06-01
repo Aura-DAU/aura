@@ -7,24 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Ratna Bharati Bhamidipati at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Ratna Bharati Bhamidipati
 
-
 Ratna Bharati Bhamidipati
-Â 
+ 
 PhD (Sociology), Dr B R Ambedkar University, Delhi
 Contact Details
-Â 
+ 
 079-68261589
-Â 
+ 
 # 2202, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 ratna_bharati@dau.ac.in
 Biography
 
@@ -42,11 +41,11 @@ B, Ratna Bharati. 2021. â€œBecoming Indian Through Transnational Investment 
 Conference Proceedings:
 B, Ratna Bharati. 2023. â€œAnalyzing Transnational Engagement of the Patidar Diaspora through Dharmaj Dayâ€. Paper presented at Understanding the Social World: Theories, Methods and Practices conference organised by Dr B R Ambedkar University Delhi, Online (22-23 August).
 
-## Contact Information
+# Contact Information
 
 - **Email:** ratna_bharati@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/ratna-bharati-bhamidipati)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

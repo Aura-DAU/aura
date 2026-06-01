@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Ajay Beniwal at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Ajay Beniwal
 
-
 Ajay Beniwal
-Â 
+ 
 PhD (Electronics and Communication Engineering), IIIT Allahabad
 Contact Details
-Â 
+ 
 079-68261745
-Â 
+ 
 # 3211, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 ajay_beniwal@dau.ac.in
-Â 
+ 
 https://sites.google.com/view/ajay-beniwal/home
 Biography
 
@@ -49,11 +48,11 @@ Teaching
 
 Flexible and Printed Electronics
 
-## Contact Information
+# Contact Information
 
 - **Email:** ajay_beniwal@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/ajay-beniwal)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

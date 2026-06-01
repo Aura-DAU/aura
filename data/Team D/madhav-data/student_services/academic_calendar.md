@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Academic Calendar page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 Academic Calendar 2025-26 Academic Calendar 2024-25 Archived Calendars
 Autumn 2025-26
@@ -87,7 +87,7 @@ Sr.	Event	Date(s)	Day(s)
 DAU, Gandhinagar
 Updated 09 December 2025
 
-## Related Links
+# Related Links
 
 - [Original Page](https://daiict.ac.in/academic-calendar)
 - [Parents](https://daiict.ac.in/parents)

@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Sayantan Paul at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Sayantan Paul
 
-
 Sayantan Paul
-Â 
+ 
 PhD (Statistics) - Thesis Submitted
 Contact Details
-Â 
+ 
 079-68261752
-Â 
+ 
 # 3202, FB-3, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 sayantan_paul@dau.ac.in
-Â 
+ 
 https://scholar.google.com/citations?user=3o6PTmsAAAAJ&hl=en
 Biography
 
@@ -40,16 +39,16 @@ Publications
 Posterior contraction rate and asymptotic Bayes optimality for one group global-local shrinkage priors in sparse normal means problem. Paul, S. and Chakrabarti, A. Ann Inst Stat Math (2025), Volume 77, pages 787â€“819. [DOI: 10.1007/s10463-025-00932-1]
 PREPRINTS:
 Sharp Asymptotic Minimaxity for One-Group Priors in Sparse Normal Means Problem. Paul, S., Ghosh, P. and Chakrabarti, A.
-Â 
+ 
 Teaching
 Time Series
 Bayesian Computation
 
-## Contact Information
+# Contact Information
 
 - **Email:** sayantan_paul@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/sayantan-paul)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

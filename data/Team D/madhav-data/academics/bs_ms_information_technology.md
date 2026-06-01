@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
-[Apply for Admission](/bs-ms-information-technology-admissions)
+[Apply for Admission](https://www.daiict.ac.in/bs-ms-information-technology-admissions)
 
-## Main Content
+# Main Content
 
-[Apply for Admission](/bs-ms-information-technology-admissions)
+[Apply for Admission](https://www.daiict.ac.in/bs-ms-information-technology-admissions)
 
 **Award** | **Duration** | **Study Mode**  
 ---|---|---  
@@ -25,17 +25,15 @@ Information Technology** | **3 Years: Bachelor of Science (B.Sc.)
 ---|---|---  
 **120** | **Multiple Channels** | **Yearly in July/ August**  
   
-  * displayNone About the Program
-  * displayNone Structure and Exit Options
-  * displayNone Curriculum Details
-  * displayNone Career Outcomes
-  * displayNone Entry Requirements
-  * displayNone Fees & Scholarships
-  * displayNone FAQs
+  * About the Program
+  * Structure and Exit Options
+  * Curriculum Details
+  * Career Outcomes
+  * Entry Requirements
+  * Fees & Scholarships
+  * FAQs
 
 Why This Program?
-
-![Program Overview](/sites/default/files/other-images/B.S.%E2%80%93M.S.-IT.JPG)
 
 Information Technology is the foundation of today’s digital world — powering financial systems, cloud platforms, e-commerce, healthcare infrastructure, cybersecurity, artificial intelligence, and global digital services. Organisations require professionals who can not only write software, but also design, deploy, secure, and manage large-scale technology systems
 
@@ -134,8 +132,6 @@ This prepares students to work effectively in professional and multidisciplinary
 Students graduate with experience in building and deploying real systems using modern technologies.
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
-
-![Structure and Exit Options](/sites/default/files/inline-images/BS-MS_Information-Technolog_2026.jpg)
 
   * **After 3 Years – B.Sc. (Bachelor of Science) in Information Technology**  
 Strong foundations in programming, data structures and algorithms, databases, operating systems, computer networks, and full-stack development, along with hands-on projects and practical system-building experience.
@@ -595,11 +591,11 @@ The refund policy for the withdrawing candidates will be in accordance with the 
 
 ### Scholarships / Fellowships
 
-The Institute provides financial support in the form of scholarships to eligible students. More details of it can be seen [**here**.](/scholarships-admission-programs-of-study)
+The Institute provides financial support in the form of scholarships to eligible students. More details of it can be seen [**here**.](https://www.daiict.ac.in/scholarships-admission-programs-of-study)
 
-[BS-MS Scholarships at DAU](/bs-ms-scholarships-dau) **|** [BS-MS Institute Fellowships at DAU](/bs-ms-institute-fellowships-dau)
+[BS-MS Scholarships at DAU](https://www.daiict.ac.in/bs-ms-scholarships-dau) **|** [BS-MS Institute Fellowships at DAU](https://www.daiict.ac.in/bs-ms-institute-fellowships-dau)
 
-[UG/PG Cybage Khushboo Scholarships](/ugpg-cybage-khushboo-scholarships) **|** [Scholarships Offered to Students](/scholarships-offered-students)
+[UG/PG Cybage Khushboo Scholarships](https://www.daiict.ac.in/ugpg-cybage-khushboo-scholarships) **|** [Scholarships Offered to Students](https://www.daiict.ac.in/scholarships-offered-students)
 
 ### 1\. What is the BS–MS Dual Degree in Information Technology?
 
@@ -725,7 +721,7 @@ Applicants can monitor the progress of their application through the online admi
 
 Applications can be submitted through the online admission portal of Dhirubhai Ambani University. Detailed eligibility criteria, admission processes, and timelines are available on the program admission page.
 
-## Related Links
+# Related Links
 
 - [Apply for Admission](https://www.daiict.ac.in/bs-ms-information-technology-admissions)
 - [here.](https://www.daiict.ac.in/scholarships-admission-programs-of-study)

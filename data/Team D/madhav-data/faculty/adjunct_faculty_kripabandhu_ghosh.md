@@ -7,31 +7,31 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Kripabandhu Ghosh at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Kripabandhu Ghosh
 
 Kripabandhu Ghosh
-Â 
+ 
 Contact Details
-Â 
+ 
 Department of Computational and Data Sciences,
 Indian Institute of Science Education and Research (IISER) Kolkata
-Â 
+ 
 kripaghosh@iiserkol.ac.in
 Specialization
 
 Information Retrieval/Data Mining/AI on Legal Domain
 
-## Contact Information
+# Contact Information
 
 - **Email:** kripaghosh@iiserkol.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/kripabandhu-ghosh)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

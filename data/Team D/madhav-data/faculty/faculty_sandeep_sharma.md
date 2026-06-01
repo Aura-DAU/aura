@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Sandeep Sharma at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Sandeep Sharma
 
-
 Sandeep Sharma
-Â 
+ 
 PhD (Mathematics), Indraprastha Institute of Information Technology, Delhi
 Contact Details
-Â 
+ 
 079-68261636
-Â 
+ 
 # 4206, FB-4, DAU, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 sandeep_sharma@dau.ac.in
-Â 
+ 
 https://scholar.google.co.in/citations?user=2DdmJGgAAAAJ
 Biography
 
@@ -54,11 +53,11 @@ Probability Theory
 Differential Equations
 Discrete Mathematics
 
-## Contact Information
+# Contact Information
 
 - **Email:** sandeep_sharma@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/sandeep-sharma)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

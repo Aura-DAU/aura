@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 A Word of Guidance page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 Top 9 things every Parent of a 1st year Student should know
 1. Academic Expectations are High:
@@ -50,7 +50,7 @@ If university hostel is your childâ€™s first experience of living away from
 
 First-year students are exposed to every possible tidbit of advice from student success to campus safety and security. Resident students hear all about fire safety, heating-element regulations, no-smoking rules and alcohol policies. Professors lecture on time management, study skills, plagiarism, keeping good company and the value of good writing. Peer students reach out about campus involvement, leadership skills and making smart choices about finances and health. Meanwhile there are study spaces to find, new transit routes to learn, and many new friends to spend time with. So where do you fit in to all of this? Above all, continue to demonstrate love and patience while your child goes through this major life transition and celebrate their discoveries and successes with them along the way.
 
-## Related Links
+# Related Links
 
 - [Original Page](https://daiict.ac.in/word-guidance)
 - [Parents](https://daiict.ac.in/parents)

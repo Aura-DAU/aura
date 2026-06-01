@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Name of the Project | Name of the Position | No. | Last date for application  
 ---|---|---|---  
 IoT enabled Eco-friendly Multisensor System (CO gas, Temperature and Humidity) for Coal Mine Safety Monitoring: A Recycle and Reuse Approach.
 
-## Main Content
+# Main Content
 
 Name of the Project | Name of the Position | No. | Last date for application  
 ---|---|---|---  
@@ -387,7 +387,7 @@ Project Personnel:
 Category B |  1 | 20/04/2011  
 Project PI – Prof. Prasenjit Majumder **p_majumder[at]dau[dot]ac[dot]in**)
 
-## Related Links
+# Related Links
 
 - [Careers / Current Position / Old Position](https://www.daiict.ac.in/old-positions)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

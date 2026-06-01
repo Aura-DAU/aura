@@ -7,14 +7,14 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 * [Faculty](https://www.daiict.ac.in/faculty)
   * [Adjunct Faculty](https://www.daiict.ac.in/adjunct-faculty)
   * [Distinguished Professor](https://www.daiict.ac.in/distinguished-professor)
   * [Professor of Practice](https://www.daiict.ac.in/professor-practice)
 
-## Main Content
+# Main Content
 
 * [Faculty](https://www.daiict.ac.in/faculty)
   * [Adjunct Faculty](https://www.daiict.ac.in/adjunct-faculty)
@@ -22,34 +22,7 @@ team: "Team D"
   * [Professor of Practice](https://www.daiict.ac.in/professor-practice)
 
   * All
-  * [A](javascript:void\(0\))
-  * [B](javascript:void\(0\))
-  * [C](javascript:void\(0\))
-  * [D](javascript:void\(0\))
-  * [E](javascript:void\(0\))
-  * [F](javascript:void\(0\))
-  * [G](javascript:void\(0\))
-  * [H](javascript:void\(0\))
-  * [I](javascript:void\(0\))
-  * [J](javascript:void\(0\))
-  * [K](javascript:void\(0\))
-  * [L](javascript:void\(0\))
-  * [M](javascript:void\(0\))
-  * [N](javascript:void\(0\))
-  * [O](javascript:void\(0\))
-  * [P](javascript:void\(0\))
-  * [Q](javascript:void\(0\))
-  * [R](javascript:void\(0\))
-  * [S](javascript:void\(0\))
-  * [T](javascript:void\(0\))
-  * [U](javascript:void\(0\))
-  * [V](javascript:void\(0\))
-  * [W](javascript:void\(0\))
-  * [X](javascript:void\(0\))
-  * [Y](javascript:void\(0\))
-  * [Z](javascript:void\(0\))
 
-  * ![Abhishek Gupta](/sites/default/files/faculty_image/Prof-Abhishek-Gupta.JPG)
 
 ### [Abhishek gupta](https://www.daiict.ac.in/faculty/abhishek-gupta)
 
@@ -59,7 +32,6 @@ PhD (Electrical and Computer Engineering), Toronto Metropolitan University, Cana
 
 Machine Learning, Statistical Signal Processing, RF Communications, Computer Vision, Autonomous Vehicles
 
-  * ![Abhishek Jindal](/sites/default/files/faculty_image/Abhishek-Jindal.jpg)
 
 ### [Abhishek jindal](https://www.daiict.ac.in/faculty/abhishek-jindal)
 
@@ -69,7 +41,6 @@ PhD (Electronics & Communication Engineering), IIT Delhi
 
 Reinforcement Learning, Deep Learning for Finance and Cyber Security, Wireless Communication, Cyber-Physical Systems, Information Security
 
-  * ![Abhishek Tilva](/sites/default/files/faculty_image/Abhishek-Tilva.jpg)
 
 ### [Abhishek tilva](https://www.daiict.ac.in/faculty/abhishek-tilva)
 
@@ -79,7 +50,6 @@ PhD (Statistics), Columbia University, New York, USA
 
 Arbitrage Theory, Stochastic Portfolio Theory, Stochastic Analysis
 
-  * ![Abhishek Tripathy](/sites/default/files/faculty_image/Abhishek_Tripathy.jpg)
 
 ### [Abhishek tripathy](https://www.daiict.ac.in/faculty/abhishek-tripathy)
 
@@ -89,7 +59,6 @@ PhD (Thesis Submitted), Indian Institute of Management Ahmedabad
 
 Decentralization and Public Policy, Financial Inclusion, Applied Social Networks Analysis
 
-  * ![Aditya Tatu](/sites/default/files/faculty_image/Aditya-Tatu.jpg)
 
 ### [Aditya tatu](https://www.daiict.ac.in/faculty/aditya-tatu)
 
@@ -99,7 +68,6 @@ PhD (Computer Science), University of Copenhagen, Denmark
 
 Computer Vision, Image Processing, Pattern Recognition, Signal Processing
 
-  * ![Ajay Beniwal](/sites/default/files/faculty_image/Prof-Ajay-Beniwal.jpg)
 
 ### [Ajay beniwal](https://www.daiict.ac.in/faculty/ajay-beniwal)
 
@@ -109,7 +77,6 @@ PhD (Electronics and Communication Engineering), IIIT Allahabad
 
 Flexible and Printable Electronics for Healthcare and Digital Agricultural Applications, Smart Sensing Technologies with Wireless Connectivity, Sensor Materials and Nanocomposites, Sustainable and Green Electronics.
 
-  * ![Amit Mankodi](/sites/default/files/faculty_image/Amit-Mankodi.jpg)
 
 ### [Amit mankodi](https://www.daiict.ac.in/faculty/amit-mankodi)
 
@@ -119,7 +86,6 @@ PhD, DA-IICT Gandhinagar
 
 Embedded Systems, Computer Networks, High Performance Computing, Machine Learning
 
-  * ![Anil Roy \(On Leave\)](/sites/default/files/faculty_image/anil-roy-new.jpg)
 
 ### [Anil roy (on leave)](https://www.daiict.ac.in/faculty/anil-roy)
 
@@ -129,7 +95,6 @@ PhD (Physics), IIT Delhi
 
 Applications of Image Processing, Fiber Optics and Optical Communication, High speed Semiconductor Devices, Nanoscience and Nanotechnology, Quantum Optics, Technologies for Humanitarian Challenges.
 
-  * ![Anish Mathuria](/sites/default/files/faculty_image/Anish-Mathuria.jpg)
 
 ### [Anish mathuria](https://www.daiict.ac.in/faculty/anish-mathuria)
 
@@ -139,7 +104,6 @@ PhD (Computer Science), University of Wollongong, Australia
 
 Network Security, Privacy-Preserving Computation, System and Software Security
 
-  * ![Ankit Vijayvargiya](/sites/default/files/faculty_image/ANKIT-VIJAYVARGIYA.jpg)
 
 ### [Ankit vijayvargiya](https://www.daiict.ac.in/faculty/ankit-vijayvargiya)
 
@@ -149,7 +113,6 @@ PhD (Biomedical Signals), Malaviya National Institute of Technology, Jaipur
 
 Biomedical Signals, Machine Learning, Neural Rehabilitation, Gait Analysis
 
-  * ![Ankush Chander](/sites/default/files/faculty_image/ANKUSH-CHANDER.jpg)
 
 ### [Ankush chander](https://www.daiict.ac.in/adjunct-faculty/ankush-chander)
 
@@ -159,7 +122,6 @@ M.Tech. (ICT), DA-IICT Gandhinagar
 
 Natural Language Processing, Information Retrieval, Operating systems
 
-  * ![Anupam Rana](/sites/default/files/faculty_image/DR-ANUPAM_RANA.jpg)
 
 ### [Anupam rana](https://www.daiict.ac.in/faculty/anupam-rana)
 
@@ -169,7 +131,6 @@ PhD (Design Management) - Retails Experience-CX, Indus University, Ahmedabad
 
 Design Education, Experience Design, Multidisciplinary Research, UIUX, Design Thinking.
 
-  * ![Arnab Bhabak](/sites/default/files/faculty_image/Arnab-Bhabak.jpg)
 
 ### [Arnab bhabak](https://www.daiict.ac.in/faculty/arnab-bhabak)
 
@@ -179,7 +140,6 @@ PhD (Mathematics), IIT Guwahati
 
 Stochastic Control, Stochastic Game Theory, Probability Theory
 
-  * ![Arnab Kumar Ray](/sites/default/files/faculty_image/Arnab-Kumar-Ray.jpg)
 
 ### [Arnab kumar ray](https://www.daiict.ac.in/faculty/arnab-kumar-ray)
 
@@ -189,7 +149,6 @@ PhD (Physics), Jadavpur University, Kolkata
 
 Astrophysical Accretion, Fluid Dynamics, Nonlinear Systems
 
-  * ![Arpit Rana](/sites/default/files/faculty_image/Dr%20Arpit%20Rana_1.jpg)
 
 ### [Arpit rana](https://www.daiict.ac.in/faculty/arpit-rana)
 
@@ -199,7 +158,6 @@ PhD (Computer Science), University College Cork, Ireland
 
 Applied Machine Learning, Recommendation Systems, Multimodality, and their applications in Digital Innovation and Transformation
 
-  * ![Arpita Mal](/sites/default/files/faculty_image/Arpita-Mal.jpg)
 
 ### [Arpita mal](https://www.daiict.ac.in/faculty/arpita-mal)
 
@@ -207,7 +165,6 @@ PhD (Mathematics), Jadavpur University, Kolkata
 
 079-68261660 # 3104, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007 arpita_mal[at]dau[dot]ac[dot]in
 
-  * ![Arunava Chakravarty](/sites/default/files/faculty_image/Arunava-Chakravarty.jpg)
 
 ### [Arunava chakravarty](https://www.daiict.ac.in/faculty/arunava-chakravarty)
 
@@ -217,7 +174,6 @@ PhD (Computer Science and Engineering), IIIT Hyderabad
 
 Medical Image Analysis, Machine Learning for Healthcare, Computer Vision
 
-  * ![Bharani Kollipara](/sites/default/files/faculty_image/Bharani-Kollipara.jpg)
 
 ### [Bharani kollipara](https://www.daiict.ac.in/faculty/bharani-kollipara)
 
@@ -227,7 +183,6 @@ PhD (English), The English and Foreign Languages University, Hyderabad
 
 Modern Philosophy, Phenomenology and Hermeneutics, Literary Modernism
 
-  * ![Bhaskar Chaudhury](/sites/default/files/faculty_image/Bhaskar-Chaudhury_0.jpg)
 
 ### [Bhaskar chaudhury](https://www.daiict.ac.in/faculty/bhaskar-chaudhury)
 
@@ -241,7 +196,6 @@ Computational Plasma Physics, Computational Data Science, High Performance Scien
 
 Computing, Parallel Prog…
 
-  * ![Biswajit Mishra](/sites/default/files/faculty_image/Biswajit-Mishra.jpg)
 
 ### [Biswajit mishra](https://www.daiict.ac.in/faculty/biswajit-mishra)
 
@@ -251,7 +205,6 @@ PhD (Electrical & Electronics Engineering), University of Southampton, UK
 
 Ultra Low Power and Sub-threshold Circuit Methodologies, Very Low Voltage Circuits for Wireless Sensor Networks, Digital IC Design, Power Management for Energy Harvesters, Signal Processing Hardware for Color Image Processing, Geometric Algebra an…
 
-  * ![Brajesh Dhiman](/sites/default/files/faculty_image/Brajesh-Dhiman.jpg)
 
 ### [Brajesh dhiman](https://www.daiict.ac.in/faculty/brajesh-dhiman)
 
@@ -261,7 +214,6 @@ PhD, IIT Guwahati
 
 Small Scale PV Applications, and AI Enabled Design for Global South
 
-  * ![G. Venkatesh](/sites/default/files/faculty_image/Dr_G-Venkatesh.jpg)
 
 ### [G. venkatesh](https://www.daiict.ac.in/faculty/g-venkatesh)
 
@@ -269,7 +221,6 @@ PhD (Computer Science), TIFR, Mumbai
 
 079-68261565 # Administration Block, First Floor, Director - SoT office, DAU, Gandhinagar, Gujarat, India – 382007 venkatesh_g[at]dau[dot]ac[dot]in
 
-  * ![Gautam Dutta](/sites/default/files/faculty_image/Gautam-Dutta.jpg)
 
 ### [Gautam dutta](https://www.daiict.ac.in/faculty/gautam-dutta)
 
@@ -279,7 +230,6 @@ PhD (Physics), Physical Research Laboratory, Ahmedabad
 
 Theoretical physics
 
-  * ![Gopinath Panda ](/sites/default/files/faculty_image/gopinath-panda.png)
 
 ### [Gopinath panda ](https://www.daiict.ac.in/faculty/gopinath-panda)
 
@@ -289,7 +239,6 @@ PhD (Mathematics), IIT Bhubaneswar
 
 Probability and Statistics
 
-  * ![Hemant Patil](/sites/default/files/faculty_image/Hemant-Patil.jpg)
 
 ### [Hemant patil](https://www.daiict.ac.in/faculty/hemant-patil)
 
@@ -300,7 +249,6 @@ Lab: CEP 006, Speech Lb, DA-IICT, Gandhinagar, Gujarat, India – 382007 hemant_
 
 Speech Signal Processing, Speech and Speaker Recognition (Voice Biometrics), Development of Countermeasures for Spoofing Attacks on Automatic Speaker Verification, Voice Conversion
 
-  * ![Jenson Joseph](/sites/default/files/faculty_image/Jenson-Joseph.jpeg)
 
 ### [Jenson joseph](https://www.daiict.ac.in/faculty/jenson-joseph)
 
@@ -310,7 +258,6 @@ PhD (Communication), University of Hyderabad, Hyderabad
 
 History and theory of Media, Film Studies, Cultural Studies, Malayalam Cinema, Popular Culture
 
-  * ![Madhu Kant Sharma](/sites/default/files/faculty_image/Prof-Madhu-Kant-Sharma.jpg)
 
 ### [Madhu kant sharma](https://www.daiict.ac.in/faculty/madhu-kant-sharma)
 
@@ -320,7 +267,6 @@ PhD (Mathematics), IIT Madras
 
 Fractional Differential Equations (FDEs), Optimization, Numerical Methods for FDEs, Signal Processing
 
-  * ![Madhumita Mazumdar](/sites/default/files/faculty_image/Prof-Madhumita-Mazumdar.jpg)
 
 ### [Madhumita mazumdar](https://www.daiict.ac.in/faculty/madhumita-mazumdar)
 
@@ -330,7 +276,6 @@ PhD (Modern History), University of Calcutta, Calcutta
 
 Social and Cultural History Science, Technology and Design, History of Modernity and Developmental Practice in Colonial and Post-Colonial India, Economic and Social History of Gujarat
 
-  * ![Maniklal Das](/sites/default/files/faculty_image/Maniklal-Das.jpg)
 
 ### [Maniklal das](https://www.daiict.ac.in/faculty/maniklal-das)
 
@@ -340,7 +285,6 @@ PhD (Computer Science), IIT Bombay
 
 Cyber Security, Privacy, Cryptography, Algorithms
 
-  * ![Manish Chaturvedi](/sites/default/files/faculty_image/PROF-MANISH_CHATURVEDI.jpg)
 
 ### [Manish chaturvedi](https://www.daiict.ac.in/faculty/manish-chaturvedi)
 
@@ -350,7 +294,6 @@ PhD (ICT), DA-IICT, Gandhinagar
 
 Design of Intelligent Transportation Systems, Communication Protocol Design, Embedded Systems and Internet of Things
 
-  * ![Manish Kumar](/sites/default/files/faculty_image/manish-kumar_0.jpg)
 
 ### [Manish kumar](https://www.daiict.ac.in/faculty/manish-kumar)
 
@@ -360,7 +303,6 @@ PhD (Electrical Engineering), IIT Patna
 
 Algorithm Development and Performance Optimization in UAV Networks, Sensor Networks & Ad-Hoc Networks; Wireless Powered Internet of Things; Applications of AI/ML, Blockchain in Networks; Next Generation Wireless Networks: 5G/6G
 
-  * ![Manjunath V. Joshi](/sites/default/files/faculty_image/Manjunath-V-Joshi.jpg)
 
 ### [Manjunath v. joshi](https://www.daiict.ac.in/faculty/manjunath-v-joshi)
 
@@ -370,7 +312,6 @@ PhD (Electrical Engineering), IIT Bombay
 
 Signal and Image Processing, Digital Communication, Computer Vision, Machine Learning
 
-  * ![Manoj Raut](/sites/default/files/faculty_image/Manoj-Raut.jpg)
 
 ### [Manoj raut](https://www.daiict.ac.in/faculty/manoj-raut)
 
@@ -380,7 +321,6 @@ PhD (Mathematics), IIT Madras
 
 Mathematical Logic
 
-  * ![Minal Bhise](/sites/default/files/faculty_image/Prof-Minal_Bhise.jpg)
 
 ### [Minal bhise](https://www.daiict.ac.in/faculty/minal-bhise)
 
@@ -390,7 +330,6 @@ PhD (Computer Science), BITS Pilani
 
 Distributed Databases - Query Processing, Application Development for Biodiversity Domain, Software System Analysis and Design
 
-  * ![Mukesh Tiwari](/sites/default/files/faculty_image/Mukesh-Tiwari.jpg)
 
 ### [Mukesh tiwari](https://www.daiict.ac.in/faculty/mukesh-tiwari)
 
@@ -400,7 +339,6 @@ PhD (Optical Science & Engineering), University of New Mexico, USA
 
 Nonequilibrium statistical mechanics and Nonlinear dynamics
 
-  * ![Nabin Kumar Sahu](/sites/default/files/faculty_image/Nabin-Sahu.jpg)
 
 ### [Nabin kumar sahu](https://www.daiict.ac.in/faculty/nabin-kumar-sahu)
 
@@ -410,7 +348,6 @@ PhD (Mathematics), IIT Kharagpur
 
 Frame Theory, Optimization Theory and Applications, Variational Inequalities
 
-  * ![P M Jat](/sites/default/files/faculty_image/P-M-Jat.jpg)
 
 ### [P m jat](https://www.daiict.ac.in/faculty/p-m-jat)
 
@@ -420,7 +357,6 @@ PhD (Computer Science and Engineering), ML Sukhadia University, Udaipur
 
 Databases
 
-  * ![P S Kalyan Sasidhar](/sites/default/files/faculty_image/P-S-Kalyan-Sasidhar.jpg)
 
 ### [P s kalyan sasidhar](https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar)
 
@@ -432,7 +368,6 @@ PhD (Computer Science and Engineering), University of North Texas-Denton, USA
 
 Mobile and Pervasive Computing which include Wireless Sensor Networks, Mo…
 
-  * ![Pankaj Kumar](/sites/default/files/faculty_image/Prof-Pankaj-kumar.jpg)
 
 ### [Pankaj kumar](https://www.daiict.ac.in/faculty/pankaj-kumar)
 
@@ -442,7 +377,6 @@ PhD (RF & Microwave), NIT Patna
 
 Bio-Inspired Metasurface/Metamaterial Devices, Terahertz Devices, Semiconductor Device Modeling and Simulation, Emerging Devices, JLT, OFET, TFET, FIN-FET, VLSI Design.
 
-  * ![Parul Gupta](/sites/default/files/faculty_image/Prof_Parul-Gupta.jpg)
 
 ### [Parul gupta](https://www.daiict.ac.in/faculty/parul-gupta)
 
@@ -452,7 +386,6 @@ PhD (Economics), IIT Delhi
 
 Economic Development, Education Policy, Economics of Gender
 
-  * ![Prasenjit Majumder \(On Leave\)](/sites/default/files/faculty_image/Prasenjit-Majumder.jpg)
 
 ### [Prasenjit majumder (on leave)](https://www.daiict.ac.in/faculty/prasenjit-majumder)
 
@@ -462,7 +395,6 @@ PhD (Computer Science), Jadavpur University
 
 Natural Language Processing, Information Retrieval, Cognitive Science
 
-  * ![Pratim Roy](/sites/default/files/faculty_image/Pratim-Roy.jpeg)
 
 ### [Pratim roy](https://www.daiict.ac.in/faculty/pratim-roy)
 
@@ -472,7 +404,6 @@ PhD (Physics), IIT Kanpur
 
 Theoretical Physics, ADS/CFT Duality, Quantum Field Theory
 
-  * ![Pritam Anand ](/sites/default/files/faculty_image/Prof-Pritam-Anand.jpg)
 
 ### [Pritam anand ](https://www.daiict.ac.in/faculty/pritam-anand)
 
@@ -482,7 +413,6 @@ PhD (Computer Science), South Asian University, New Delhi
 
 Support Vector Machines, Loss Functions, Regression, Extreme Learning Machine, Quantile Regression
 
-  * ![Prosenjit Kundu](/sites/default/files/faculty_image/PROSENJIT-KUNDU.JPG)
 
 ### [Prosenjit kundu](https://www.daiict.ac.in/faculty/prosenjit-kundu)
 
@@ -492,7 +422,6 @@ PhD (Mathematics), National Institute of Technology, Durgapur
 
 Physics and Mathematical Sciences, Applied Mathematics, Complex Networks, Dynamical Systems
 
-  * ![Puneet Bhateja](/sites/default/files/faculty_image/Puneet-Bhateja.jpg)
 
 ### [Puneet bhateja](https://www.daiict.ac.in/faculty/puneet-bhateja)
 
@@ -502,7 +431,6 @@ PhD (Computer Science), Chennai Mathematical Institute
 
 Theoretical Computer Science
 
-  * ![Purbasha Das](/sites/default/files/faculty_image/PURBASHA_DAS.jpg)
 
 ### [Purbasha das](https://www.daiict.ac.in/faculty/purbasha-das)
 
@@ -512,7 +440,6 @@ PhD (History), Jawaharlal Nehru University, New Delhi
 
 History of Transport and Communication, Urban History, Legal and Social History
 
-  * ![Pushpendra Kumar](/sites/default/files/faculty_image/Dr-Pushpendra-Kumar.jpg)
 
 ### [Pushpendra kumar](https://www.daiict.ac.in/faculty/pushpendra-kumar)
 
@@ -522,7 +449,6 @@ PhD (Mathematics), National Institute of Technology Puducherry
 
 Fractional Calculus, Mathematical Modeling, Numerical Analysis, and Neural Networks
 
-  * ![Rachit Chhaya](/sites/default/files/faculty_image/Rachit_Chhaya.jpg)
 
 ### [Rachit chhaya](https://www.daiict.ac.in/faculty/rachit-chhaya)
 
@@ -532,7 +458,6 @@ PhD (Computer Science), IIT Gandhinagar
 
 Coresets for Machine Learning
 
-  * ![Rahul Muthu](/sites/default/files/faculty_image/Rahul-Muthu.jpg)
 
 ### [Rahul muthu](https://www.daiict.ac.in/faculty/rahul-muthu)
 
@@ -542,7 +467,6 @@ PhD (Mathematics), Homi Bhabha National Institute, Mumbai
 
 Graph Theory, Data Structures, Algorithms, Automata Theory
 
-  * ![Rajib Lochan Das](/sites/default/files/faculty_image/Rajib-Lochan-Das.jpg)
 
 ### [Rajib lochan das](https://www.daiict.ac.in/faculty/rajib-lochan-das)
 
@@ -552,7 +476,6 @@ PhD (Electronics & Electrical Communication Engineering), IIT Kharagpur
 
 Adaptive Signal Processing, Compressive Sensing, Machine Learning, Image Processing, Graph Signal Processing
 
-  * ![Ratna Bharati Bhamidipati](/sites/default/files/faculty_image/Ratna_Bharati.jpg)
 
 ### [Ratna bharati bhamidipati](https://www.daiict.ac.in/faculty/ratna-bharati-bhamidipati)
 
@@ -562,7 +485,6 @@ PhD (Sociology), Dr B R Ambedkar University, Delhi
 
 Diaspora , Transnationalism, Migrant Subjectivity
 
-  * ![Rutu Parekh](/sites/default/files/faculty_image/Rutu-Parekh-Final.jpg)
 
 ### [Rutu parekh](https://www.daiict.ac.in/faculty/rutu-parekh)
 
@@ -572,7 +494,6 @@ PhD (Electrical Engineering), Sherbrooke University, Canada
 
 High-Voltage ASIC Design for Space Applications, Nanoelectronics and Emerging Devices, Embedded Systems and IoT Applications, Long-Distance Wireless Communication Systems, Smart Agriculture and Environmental Monitoring, Memristor-based Neuromorphi…
 
-  * ![Sandeep Sharma](/sites/default/files/faculty_image/Prof-Sandeep-Sharma.jpg)
 
 ### [Sandeep sharma](https://www.daiict.ac.in/faculty/sandeep-sharma)
 
@@ -582,7 +503,6 @@ PhD (Mathematics), Indraprastha Institute of Information Technology, Delhi
 
 Algebraic Coding Theory, Quantum Error Correction Codes
 
-  * ![Sandip Modha](/sites/default/files/faculty_image/Prof-Sandip-Modha.jpg)
 
 ### [Sandip modha](https://www.daiict.ac.in/faculty/sandip-modha)
 
@@ -592,7 +512,6 @@ PhD, DA-IICT Gandhinagar
 
 Natural Language Processing (NLP), Information Retrieval (IR), Evaluation Methodologies, and Computational Approaches to Social Media Data.
 
-  * ![Sanjay Srivastava](/sites/default/files/faculty_image/Sanjay-Srivastava.jpg)
 
 ### [Sanjay srivastava](https://www.daiict.ac.in/faculty/sanjay-srivastava)
 
@@ -602,7 +521,6 @@ PhD (Physics), University of California, Los Angeles, USA
 
 Internet of Things, Protocol Modelling and Analysis, Simulation
 
-  * ![Saurabh Tiwari](/sites/default/files/faculty_image/Saurabh-Tiwari-1.jpg)
 
 ### [Saurabh tiwari](https://www.daiict.ac.in/faculty/saurabh-tiwari)
 
@@ -614,7 +532,6 @@ PhD (Computer Science & Engineering), IIITDM, Jabalpur
 
 Software Engineering (SE), Mining Software Repositories, Natural Langua…
 
-  * ![Sayantan Paul](/sites/default/files/faculty_image/Prof-Sayantan-Paul.jpg)
 
 ### [Sayantan paul](https://www.daiict.ac.in/faculty/sayantan-paul)
 
@@ -624,7 +541,6 @@ PhD (Statistics) - Thesis Submitted
 
 High-dimensional Inference, Multiple Testing, Posterior Concentration, Variable Selection, Sparse Signal Recovery
 
-  * ![Shefali Jha](/sites/default/files/faculty_image/Shefali-Jha.jpg)
 
 ### [Shefali jha](https://www.daiict.ac.in/faculty/shefali-jha)
 
@@ -634,7 +550,6 @@ PhD (Anthropology), University of Chicago, USA
 
 Political Anthropology, Cultural Studies, Feminist Theory, Film Studies, Literary and Visual Cultures in South Asia
 
-  * ![Shruti Bhilare](/sites/default/files/faculty_image/Shruti-Bhilare.jpg)
 
 ### [Shruti bhilare](https://www.daiict.ac.in/faculty/shruti-bhilare)
 
@@ -644,7 +559,6 @@ PhD (Computer Science and Engineering), IIT Indore
 
 Biometrics, Pattern Recognition, Image Processing
 
-  * ![Sourish Dasgupta](/sites/default/files/faculty_image/Sourish-Dasgupta_0.jpg)
 
 ### [Sourish dasgupta](https://www.daiict.ac.in/faculty/sourish-dasgupta)
 
@@ -654,7 +568,6 @@ PhD (Computer Science), University of Missouri - Kansas City, USA
 
 Natural Language Processing, Knowledge Graphs, Analysis of Large Language Models
 
-  * ![Sreeja Rajendran](/sites/default/files/faculty_image/DrSreejaR.jpg)
 
 ### [Sreeja rajendran](https://www.daiict.ac.in/faculty/sreeja-rajendran)
 
@@ -664,7 +577,6 @@ PhD (Electrical and Electronics Engineering), Birla Institute of Technology and 
 
 VLSI, Embedded Systems and MEMS, Hardware Security, VLSI Test
 
-  * ![Srimanta Mandal](/sites/default/files/faculty_image/Srimanta-Mandal.jpg)
 
 ### [Srimanta mandal](https://www.daiict.ac.in/faculty/srimanta-mandal)
 
@@ -674,7 +586,6 @@ PhD (Computing and Electrical Engineering), IIT Mandi
 
 Image Processing, Computer Vision, Machine Learning
 
-  * ![Subhasish Basak](/sites/default/files/faculty_image/Prof-Subhasish-Basak.jpg)
 
 ### [Subhasish basak](https://www.daiict.ac.in/faculty/subhasish-basak)
 
@@ -684,7 +595,6 @@ PhD (Statistics), Indian Statistical Institute, Kolkata
 
 Image Processing, Statistical Learning, Nonparametric Methods, Decision trees, Bayesian techniques, Quality monitoring
 
-  * ![Sudip Bera](/sites/default/files/faculty_image/SUDIP-BERA.jpg)
 
 ### [Sudip bera](https://www.daiict.ac.in/faculty/sudip-bera)
 
@@ -694,7 +604,6 @@ PhD (Mathematics), Visva-Bharati University, Shantiniketan, West Bengal
 
 Algebraic graph theory, Algebraic combinatorics
 
-  * ![Sujay Kadam](/sites/default/files/faculty_image/SUJAY_KADAM.jpg)
 
 ### [Sujay kadam](https://www.daiict.ac.in/faculty/sujay-kadam)
 
@@ -704,7 +613,6 @@ PhD (Electrical Engineering), IIT Gandhinagar
 
 Instrumentation, Systems and Control Theory, Human-Motor Learning, Robotics
 
-  * ![Sunitha V](/sites/default/files/faculty_image/V-Sunitha.jpg)
 
 ### [Sunitha v](https://www.daiict.ac.in/faculty/sunitha-v)
 
@@ -714,7 +622,6 @@ PhD (Mathematics), IIT Madras
 
 Theory, Algorithms (Parallel, Distributed, Dynamic), Applications of Graphs
 
-  * ![Supantha Pandit](/sites/default/files/faculty_image/Supantha-Pandit.jpg)
 
 ### [Supantha pandit](https://www.daiict.ac.in/faculty/supantha-pandit)
 
@@ -733,7 +640,6 @@ Mainly focused on:
     * Distributed Network and Agent Algorithms
     * Graph Algorithms
 
-  * ![Tapas Kumar Maiti](/sites/default/files/faculty_image/Tapas-Kumar-Maiti.jpg)
 
 ### [Tapas kumar maiti](https://www.daiict.ac.in/faculty/tapas-kumar-maiti)
 
@@ -748,7 +654,6 @@ PhD (Electronics & Telecommunication Engineering), Jadavpur University, Kolkata
     * AI-Chip
     * Cyber…
 
-  * ![Tathagata Bandyopadhyay](/sites/default/files/faculty_image/Tathagata%20Bandyopadhyay.jpg)
 
 ### [Tathagata bandyopadhyay](https://www.daiict.ac.in/faculty/tathagata-bandyopadhyay)
 
@@ -758,7 +663,6 @@ PhD (Statistics), University of Calcutta, Kolkata
 
 Statistical Inference, Survey Sampling, Discrete Data Modeling and Analysis, Applications of Statistical Methodologies in Various Fields
 
-  * ![Vinay Palaparthy](/sites/default/files/faculty_image/Vinay-Palaparthy.jpg)
 
 ### [Vinay palaparthy](https://www.daiict.ac.in/faculty/vinay-palaparthy)
 
@@ -768,7 +672,6 @@ PhD (Electrical Engineering), IIT Bombay
 
 Micro-Electro-Mechanical Systems (MEMS), Physics of Sensors, 2D materials, Memristor, Self-healing System Design, Embedded System Design, IoT, AI/ML
 
-  * ![Yash Agrawal](/sites/default/files/faculty_image/Yash-Agrawal.jpg)
 
 ### [Yash agrawal](https://www.daiict.ac.in/faculty/yash-agrawal)
 
@@ -778,7 +681,6 @@ PhD (Electronics & Communication), NIT Hamirpur
 
 VLSI, Nanotechnology, Numerical Method Techniques--FDTD, Design Techniques and Modelling Schemes of High-speed on-chip VLSI Interconnects, Modeling and Simulation Schemes, Advanced Devices and Their Modeling, Analysis
 
-  * ![Yash Vasavada](/sites/default/files/faculty_image/yash-vasavda.jpg)
 
 ### [Yash vasavada](https://www.daiict.ac.in/faculty/yash-vasavada)
 
@@ -790,7 +692,7 @@ Communication, Signal Processing, Machine Learning
 
 [**Meet Prof. Yash Vasavada:** A Passionate Researcher in Wireless Communications and Signal Processing](https://www.youtube.com/embed/mCqN-wK4loE)…
 
-## Contact Information
+# Contact Information
 
 - **Phone:** 079-68261629
 - **Phone:** 079-68261627
@@ -867,7 +769,7 @@ Communication, Signal Processing, Machine Learning
 - **Phone:** 079-68261562
 - **Phone:** 079-68261540
 
-## Related Links
+# Related Links
 
 - [Faculty](https://www.daiict.ac.in/faculty)
 - [Adjunct Faculty](https://www.daiict.ac.in/adjunct-faculty)

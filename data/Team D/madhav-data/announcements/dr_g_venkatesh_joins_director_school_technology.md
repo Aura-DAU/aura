@@ -7,14 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Announcement of Dr. G. Venkatesh joining as the Director of the School of Technology at Dhirubhai Ambani University (DAU). Dr. Venkatesh is an eminent academician and accomplished industry leader with deep expertise in microelectronics, telecommunications, and technology-led innovation.
 
-## Main Content
+# Main Content
 
 
-[Image Present: Dr. G. Venkatesh]
 
 ### Dr. G. Venkatesh Joins as the Director, School of Technology, DAU
 
@@ -48,7 +47,7 @@ With deep expertise in microelectronics, telecommunications, and technology-led 
 
 We extend our warmest welcome to Dr. G. Venkatesh and look forward to his visionary leadership in shaping the next phase of growth and impact at DAU.
 
-## Important Information
+# Important Information
 
 - **Name**: Dr. G. Venkatesh
 - **Position**: Director, School of Technology, Dhirubhai Ambani University
@@ -56,6 +55,6 @@ We extend our warmest welcome to Dr. G. Venkatesh and look forward to his vision
 - **Other Affiliations**: Professor of Practice at IIT Madras; Fellow and Director at Sasken Technologies Limited
 - **Expertise Areas**: Microelectronics, Telecommunications, Technology-led Innovation
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)

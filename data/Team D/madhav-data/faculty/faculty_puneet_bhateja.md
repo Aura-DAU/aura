@@ -7,24 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Puneet Bhateja at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Puneet Bhateja
 
-
 Puneet Bhateja
-Â 
+ 
 PhD (Computer Science), Chennai Mathematical Institute
 Contact Details
-Â 
+ 
 079-68261647
-Â 
+ 
 # 2101, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 puneet_bhateja@dau.ac.in
 Biography
 
@@ -42,11 +41,11 @@ Design and Analysis of Algorithms
 Models of Computation
 Specification and Verification of Systems
 
-## Contact Information
+# Contact Information
 
 - **Email:** puneet_bhateja@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/puneet-bhateja)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

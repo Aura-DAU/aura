@@ -7,29 +7,29 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 International Adjunct Faculty profile page for Anthony R. Noerpel at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Anthony R. Noerpel
 
 Anthony R. Noerpel
-Â 
+ 
 MSc (Electrical Engineering), New Jersey Institute of Technology, USA
 Contact Details
-Â 
+ 
 anthony_noerpel@dau.ac.in
 Specialization
 
 Cellular and Satellite Communication System Design, RF Propagation, Earth Systems Sciences.
 
-## Contact Information
+# Contact Information
 
 - **Email:** anthony_noerpel@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty-international/anthony-r-noerpel)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

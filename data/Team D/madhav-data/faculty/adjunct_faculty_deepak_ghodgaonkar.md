@@ -7,25 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Adjunct Faculty profile page for Deepak Ghodgaonkar at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Deepak Ghodgaonkar
 
 Deepak Ghodgaonkar
-Â 
+ 
 PhD (Electrical Engineering), University of Utah, USA
 Contact Details
-Â 
+ 
 079-68261623
-Â 
+ 
 # 1103, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 deepak_ghodgaonkar@dau.ac.in
-Â 
+ 
 https://scholar.google.co.in/citations?user=CSK9tLMAAAAJ&hl=en&cstart=20&pagesiâ€¦
 Biography
 
@@ -45,11 +45,11 @@ Antennas and Propagation
 Electromagnetic Fields and Waves
 Satellite Communications and Materials Science
 
-## Contact Information
+# Contact Information
 
 - **Email:** deepak_ghodgaonkar@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty/deepak-ghodgaonkar)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

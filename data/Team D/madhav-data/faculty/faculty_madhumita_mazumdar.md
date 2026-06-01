@@ -7,24 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Madhumita Mazumdar at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Madhumita Mazumdar
 
-
 Madhumita Mazumdar
-Â 
+ 
 PhD (Modern History), University of Calcutta, Calcutta
 Contact Details
-Â 
+ 
 079-68261562
-Â 
+ 
 # 2111, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 madhumita_mazumdar@dau.ac.in
 Biography
 
@@ -49,11 +48,11 @@ Teaching
 Btech (Open Electives) Culture, Politics, Identity and Approaches to Globalization
 MDes (CD) Introduction to the History of Design, Thematic Seminar and Research Proposal Writing
 
-## Contact Information
+# Contact Information
 
 - **Email:** madhumita_mazumdar@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/madhumita-mazumdar)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

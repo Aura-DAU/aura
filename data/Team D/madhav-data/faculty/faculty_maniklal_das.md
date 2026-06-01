@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Maniklal Das at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Maniklal Das
 
-
 Maniklal Das
-Â 
+ 
 PhD (Computer Science), IIT Bombay
 Contact Details
-Â 
+ 
 079-68261617, Fax: (+91) 079-68261710
-Â 
+ 
 # 2103, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 maniklal_das@dau.ac.in
-Â 
+ 
 http://intranet.daiict.ac.in/~maniklal_das/
 https://scholar.google.co.in/citations?user=wlTzQBMAAAAJ&hl=en
 Biography
@@ -47,11 +46,11 @@ Information Security
 Security Protocols
 Algorithms
 
-## Contact Information
+# Contact Information
 
 - **Email:** maniklal_das@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/maniklal-das)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

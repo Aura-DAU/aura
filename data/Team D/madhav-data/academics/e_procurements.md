@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Explore procurement opportunities with DA-IICT through our tendering platform, stay updated on various tenders including civil works, construction projects, IT services, supply contracts and more.
 
-## Main Content
+# Main Content
 
-## e-Procurement
+# e-Procurement
 
 Explore procurement opportunities with DA-IICT through our tendering platform, stay updated on various tenders including civil works, construction projects, IT services, supply contracts and more.
 
@@ -35,7 +35,7 @@ Explore procurement opportunities with DA-IICT through our tendering platform, s
 
 [Know More](http://intranet.daiict.ac.in/~daiict_nt01/Eprocurement/2021-22/)
 
-## Related Links
+# Related Links
 
 - [Know More](http://intranet.daiict.ac.in/~daiict_nt01/Eprocurement/2024-25/)
 - [Know More](http://intranet.daiict.ac.in/~daiict_nt01/Eprocurement/2023-24/)

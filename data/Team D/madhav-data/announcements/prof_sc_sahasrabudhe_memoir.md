@@ -7,14 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 A memoir page dedicated to Prof. S.C. Sahasrabudhe, former Director of DA-IICT (March 2005 â€“ January 2015), who made rich contributions in technology research and education in India. This page honors his legacy and contributions to DA-IICT and the broader academic community.
 
-## Main Content
+# Main Content
 
 
-[Image Present: Prof SC Sahasrabudhe - A Memoir]
 
 ### Prof. S.C. Sahasrabudhe - A Memoir
 
@@ -64,7 +63,7 @@ For colleagues and students of the Institutions he was associated with, he was a
 
 He will be missed by us -- but will always be remembered in our hearts.
 
-## Important Information
+# Important Information
 
 - **Name**: Prof. S.C. Sahasrabudhe
 - **Education**: Doctorate from Leningrad University, USSR (Communication/Signal Processing)
@@ -73,12 +72,12 @@ He will be missed by us -- but will always be remembered in our hearts.
 - **Research Areas**: Communications, Signal and Image Processing, Microprocessor Applications
 - **Fellowships**: IEEE Fellow, IETE Fellow
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 |----------|------|
 | A Tribute to Prof. S.C. Sahasrabudhe | Flip Book PDF |
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)

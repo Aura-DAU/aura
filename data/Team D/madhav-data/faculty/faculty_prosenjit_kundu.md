@@ -7,27 +7,26 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Prosenjit Kundu at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Prosenjit Kundu
 
-
 Prosenjit Kundu
-Â 
+ 
 PhD (Mathematics), National Institute of Technology, Durgapur
 Contact Details
-Â 
+ 
 079-68261559
-Â 
+ 
 # 2211, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 prosenjit_kundu@dau.ac.in
 jitprosen.math@gmail.com
-Â 
+ 
 https://sites.google.com/view/prosenjit-kundu/home
 https://scholar.google.co.in/citations?user=una7rcQAAAAJ&hl=en
 Biography
@@ -40,8 +39,8 @@ Physics and Mathematical Sciences, Applied Mathematics, Complex Networks, Dynami
 
 Publications
 Symmetry invariance in nonlinear dynamical complex networks,
-Authors:Â Abhijit Mondal, Subrata Ghosh, Prosenjit Kundu, Pitambar Khanra, Stefano Boccaletti, Pinaki Pal, Chittaranjan Hens.
-Journal Ref.:Â Chaos Solitons and Fractals,Â 185,Â  115002Â (2024).
+Authors: Abhijit Mondal, Subrata Ghosh, Prosenjit Kundu, Pitambar Khanra, Stefano Boccaletti, Pinaki Pal, Chittaranjan Hens.
+Journal Ref.: Chaos Solitons and Fractals, 185,  115002 (2024).
 Teaching
 Post PhD
 Engineering Mathematics I (ED 111) (UG course) at DAIICT, India. (Role: Instructor) (Autumn 2023)
@@ -65,11 +64,11 @@ Collaborators:
 
 1. Satyaki Roy
 
-## Contact Information
+# Contact Information
 
 - **Email:** prosenjit_kundu@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/prosenjit-kundu)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

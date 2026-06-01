@@ -7,14 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 The Dean of Faculty Affairs at DAU oversees academic excellence through research-led teaching, faculty development, and interdisciplinary education programs at undergraduate, postgraduate, and doctoral levels.
 
-## Main Content
+# Main Content
 
 
-[Image Present: Dean (Academic Programs)]
 
 ### Message from the Dean of Faculty Affairs
 
@@ -32,14 +31,14 @@ Please write to **dean_faculty[at]dau[dot]ac[dot]in** should you have any commen
 
 **Dr. Maniklal Das**
 
-## Important Information
+# Important Information
 
 - The Faculty Affairs Office focuses on attracting, developing, and retaining top academic talent
 - DAU emphasizes research-led teaching across all levels of education
 - Faculty members drive interdisciplinary education programs
 - Contact: dean_faculty[at]dau[dot]ac[dot]in
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Dean Faculty Page](https://www.daiict.ac.in/dean-faculty)

@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Details of the Internal Quality Assurance Cell (IQAC) at DA-IICT (now Dhirubhai Ambani University), including its objectives, functions, current membership, past compositions, meeting minutes, and annual quality assurance reports.
 
-## Main Content
+# Main Content
 
 ### About IQAC
 
@@ -47,7 +47,7 @@ The focus of the IQAC is to develop a system for conscious and consistent improv
 - Monitor the effective use of financial resources and financial management
 - Take inputs from external/industry experts and incorporate them in institutional development
 
-## Members of IQAC
+# Members of IQAC
 
 *Composition effective 1 August 2024:*
 
@@ -109,7 +109,7 @@ The focus of the IQAC is to develop a system for conscious and consistent improv
 |------|-------------|------------|
 | Prof. Mukesh Tiwari | Director, IQAC | Member by position |
 
-## Past IQACs
+# Past IQACs
 
 - IQAC August 2023
 - IQAC October 2022
@@ -121,7 +121,7 @@ The focus of the IQAC is to develop a system for conscious and consistent improv
 - IQAC 2017
 - IQAC 2015
 
-## Past Meetings
+# Past Meetings
 
 ### AY: 2023-24
 
@@ -176,7 +176,7 @@ The focus of the IQAC is to develop a system for conscious and consistent improv
 - IQAC Dean-AP Report â€” July 2015
 - Minutes of the First Meeting of Internal Quality Assurance Cell
 
-## Reports (AQAR)
+# Reports (AQAR)
 
 | Academic Year | Report |
 |---------------|--------|
@@ -188,7 +188,7 @@ The focus of the IQAC is to develop a system for conscious and consistent improv
 | Jul 2018 â€“ Jul 2019 | DA-IICT AQAR |
 | Jul 2017 â€“ Jun 2018 | DA-IICT AQAR |
 
-## Important Information
+# Important Information
 
 - IQAC was established as a post-accreditation quality sustenance measure per NAAC guidelines
 - Current composition is effective from 1 August 2024
@@ -196,7 +196,7 @@ The focus of the IQAC is to develop a system for conscious and consistent improv
 - Prof. Mukesh Tiwari serves as IQAC Director/Coordinator
 - Annual Quality Assurance Reports (AQAR) are published yearly
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [IQAC Page](https://daiict.ac.in/iqac)

@@ -7,15 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
-![Dhirubhai Ambani University - New Visual Identity](/sites/default/files/inline-images/Dhirubhai-Ambani-University-new-logo.jpg)
+# Main Content
 
-## Main Content
-
-## Message from the President of Dhirubhai Ambani University - New Visual Identity
-
-![Dhirubhai Ambani University - New Visual Identity](/sites/default/files/inline-images/Dhirubhai-Ambani-University-new-logo.jpg)
+# Message from the President of Dhirubhai Ambani University - New Visual Identity
 
 #### My dear DAU family,
 
@@ -35,7 +31,7 @@ I believe that with our collective efforts, commitment and zeal, DAU will take o
 
 #### **Tina Ambani**
 
-## Related Links
+# Related Links
 
 - [About us / Message from president](https://daiict.ac.in/dhirubhai-ambani-university-launches-its-visual-identity)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

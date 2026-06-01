@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Biswajit Mishra at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Biswajit Mishra
 
-
 Biswajit Mishra
-Â 
+ 
 PhD (Electrical & Electronics Engineering), University of Southampton, UK
 Contact Details
-Â 
+ 
 079-68261561
-Â 
+ 
 # 2104, FB-2, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 biswajit_mishra@dau.ac.in
-Â 
+ 
 http://intranet.daiict.ac.in/~biswajitmishra/
 Specialization
 
@@ -40,11 +39,11 @@ Basic Electronic Circuits (BTech)
 VLSI Subsystem Design (MTech)
 Low Power VLSI Design
 
-## Contact Information
+# Contact Information
 
 - **Email:** biswajit_mishra@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/biswajit-mishra)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

@@ -7,24 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Manish Chaturvedi at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Manish Chaturvedi
 
-
 Manish Chaturvedi
-Â 
+ 
 PhD (ICT), DA-IICT, Gandhinagar
 Contact Details
-Â 
+ 
 079-68261645
-Â 
+ 
 # 1111, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 https://sites.google.com/site/manishacademics
 Biography
 
@@ -34,7 +33,7 @@ I did M.Tech. (ICT) and Ph.D. (ICT) from Dhirubhai Ambani Institute of ICT (DA-I
 
 My Research interests include the design of Intelligent Transportation Systems, Embedded Systems and IoT, Scalable protocol design for large distributed systems, and the ICT system design in general. I am also interested in studying distributed data structures, peer to peer content sharing, and the use cases of Blockchain framework.
 
-Please referÂ https://sites.google.com/site/manishacademics/research for more information about my research.
+Please refer https://sites.google.com/site/manishacademics/research for more information about my research.
 
 Specialization
 
@@ -48,10 +47,9 @@ Teaching
 Computer Networks
 Data Structures
 
-## Contact Information
+# Contact Information
 
-
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/manish-chaturvedi)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

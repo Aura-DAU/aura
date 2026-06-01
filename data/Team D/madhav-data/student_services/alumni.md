@@ -7,11 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 **DAU Silver Jubilee Celebrations and Alumni Reunion** | **The Distinguished Alumni Awards 2025–26**
 
-## Main Content
+# Main Content
 
 **DAU Silver Jubilee Celebrations and Alumni Reunion** | **The Distinguished Alumni Awards 2025–26**
 
@@ -19,9 +19,9 @@ team: "Team D"
 
 [Alumni Document Service](https://www.daiict.ac.in/da-iict-alumni-document-service)
 
-  * #### **DAU Alumni Chapter Membership Drive** : [Click here](/dau-alumni-chapter-membership-drive)
+  * #### **DAU Alumni Chapter Membership Drive** : [Click here](https://www.daiict.ac.in/dau-alumni-chapter-membership-drive)
 
-  * #### **Alumni Document Service** : [Click here](/da-iict-alumni-document-service)
+  * #### **Alumni Document Service** : [Click here](https://www.daiict.ac.in/da-iict-alumni-document-service)
 
   * #### **Update your Alumni Profile with Alma Mater** : [Click here](https://forms.gle/j4cXEE8G4VYyypT37)
 
@@ -34,9 +34,7 @@ team: "Team D"
   
 **[_Data Privacy Policy_](https://www.daiict.ac.in/alumni/data-privacy-policy)**
 
-## **Message From Director General**
-
-![Dr. Tathagata Bandyopadhyay](/sites/default/files/other-images/Dr-Tathagata_Bandyopadhyay.jpg)
+# **Message From Director General**
 
 ### **Dr. Tathagata Bandyopadhyay**
 
@@ -48,13 +46,11 @@ The remarkable professional accomplishments of our alumni post DA-IICT, I am con
 
 I eagerly anticipate the opportunity to meet each of you personally, to hear about your life experiences, and to share the present activities and future plan of our institute. Your visit would be greatly valued, and you are most welcome to return to your alma mater at any time you feel like. I look forward to the opportunity to reconnect and extend my best wishes to you all!
 
-## Alumni
+# Alumni
 
 DA-IICT prides itself on the success of its alumni. Being an ICT Institute that started in 2001, first of its kind in the country, the Institute will soon be celebrating its Silver Jubilee with more than 7500 alumni spread across the globe.
 
 Our alumni have been instrumental in strengthening the brand of DA-IICT by distinguishing themselves as entrepreneurs, researchers, academicians, bureaucrats, Analysts, developers, designers, etc. We are proud of remarkable achievements of our Alums.
-
-![Alumni](/sites/default/files/other-images/Alumni-Portal.jpg)
 
 We look forward to welcoming you on campus/meeting in your cities and closely engaging for the shared vision for this unique institution. In the coming months/year, we are planning Alumni Reunions on campus; arranging chapter/city meetings for interaction with the Director/various faculty members; and forming active Special Interest Groups. This year will also see the launch of Alumni Achievers Awards at DA-IICT.
 
@@ -63,11 +59,9 @@ We are planning to launch DA-IICTian Alumni Magazine/Newsletter. We seek your su
 _**For any information contact**_ :  
 **Email:** **[alumni_office[at]dau[dot]ac[dot]in](mailto:alumni_office\[at\]dau\[dot\]ac\[dot\]in)**
 
-## **Message From Dean (Alumni & External Relations)**
+# **Message From Dean (Alumni & External Relations)**
 
 ### **Dr. Anil Roy**
-
-![Dr. Anil Roy](/sites/default/files/other-images/Dr-Anil-Roy.jpg)
 
 #### Dear Esteemed Alumni
 
@@ -136,7 +130,7 @@ Unicorn Startups
 
 Distinguished Alumnus Awardees
 
-## Reunions planned on campus
+# Reunions planned on campus
 
 Reunions on campus are among the best ways to go down the memory lane of the wonderful years spent on campus with your friends, batchmates, faculty, and others.
 
@@ -152,9 +146,7 @@ Looking forward to meeting you all soon.
 
 **Email:** [alumni_office[at]dau[dot]ac[dot]in](mailto:alumni_office\[at\]dau\[dot\]ac\[dot\]in)
 
-![Reunions planned on campus](/sites/default/files/other-images/Alumni-Reunion.jpg)
-
-## DAU Silver Jubilee Celebrations and Alumni Reunion
+# DAU Silver Jubilee Celebrations and Alumni Reunion
 
 **Reunion Alert!_Batches of 2001, 2002, 2003 & 2004_**, **don't miss out!**
 
@@ -164,17 +156,13 @@ The DAU Silver Jubilee Alumni Reunion on **Dec 27-28, 2025**! Reconnect with fri
 
 #### [Register Here!](https://bit.ly/4oceTh8)
 
-#### [Click here for more details about the event](/events/6909).
+#### [Click here for more details about the event](https://www.daiict.ac.in/events/6909).
 
-#### [Click here for FAQs regarding the event](/sites/default/files/other-files/FAQs-DAU_Silver-Jubliee-Alumni-Meet_Dec_27-28_2025.pdf).
+#### [Click here for FAQs regarding the event](https://www.daiict.ac.in/sites/default/files/other-files/FAQs-DAU_Silver-Jubliee-Alumni-Meet_Dec_27-28_2025.pdf).
 
 #### **For any queries regarding the event, the Alumni Office may be reached at** : **alumni_office[at]dau[dot]ac[dot]in**
 
-![DAU Silver Jubilee Celebrations and Alumni Reunion](/sites/default/files/other-images/Alumni-Reunion_DEC-25.JPG)
-
-![Distinguished Alumni Award \(DAA\) 2025–26](/sites/default/files/other-images/Distinguished-Alumni-Award_SM.png)
-
-## The Distinguished Alumni Awards 2025–26
+# The Distinguished Alumni Awards 2025–26
 
 As part of the Silver Jubilee celebrations, Dhirubhai Ambani University is pleased to invite nominations for the inaugural Distinguished Alumni Awards. These awards recognise those who have not only achieved professional eminence but have also made significant contributions to business, research, and the betterment of society.
 
@@ -197,19 +185,17 @@ We invite the University Alumni Committee and our community to nominate exceptio
   * **Deadline** : All submissions must be received by **December 31, 2025**.
   * **Presentation** : Winners will be honored during the 20th Convocation on **January 17, 2026**.
 
-[Know More](/sites/default/files/other-files/DAA_2025%E2%80%9326.pdf)
+[Know More](https://www.daiict.ac.in/sites/default/files/other-files/DAA_2025%E2%80%9326.pdf)
 
-![Events on campus](/sites/default/files/other-images/E-Collage-02.jpg)
-
-## Events on campus
+# Events on campus
 
 In this section on the Institute’s portal, we are planning to keep you updated with recent and forthcoming events on campus to help plan your visit, whenever feasible. We will also selectively share past events that may revive beautiful memories of your student days.
 
 Please do share interesting pictures on the Alumni office email below to help post some of these on this page/portal!
 
-[Events Photo Gallery](/events-campus)
+[Events Photo Gallery](https://www.daiict.ac.in/events-campus)
 
-## Campus Memories
+# Campus Memories
 
 We will always be delighted to welcome you back on campus. Between your last visit and the next, hope you will enjoy these campus pictures for memories.
 
@@ -219,27 +205,24 @@ Please do share interesting pictures and news on the Alumni office to help post 
 
 [Please share interesting pictures and news](https://forms.gle/jChACvrRgVi9vA8m9)
 
-![Campus Memories](/sites/default/files/other-images/CM-Collage-02.jpg)
+# Alumni Office Team
 
-## Alumni Office Team
-
-  * ![Ajit K Motwani](/sites/default/files/other-images/Ajit_K-Motwani.jpg)
 
 ### **Ajit K Motwani**  
 (_Principal Advisor_)
 
-## Alumni Newsletter
+# Alumni Newsletter
 
-[![Newsletter](/sites/default/files/other-images/Alumni-Connect_Vol-1_Oct-Dec_2025.jpg) Vol. 1, No. 1, Oct-Dec. 2025 ](/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf)
+[Vol. 1, No. 1, Oct-Dec. 2025](https://www.daiict.ac.in/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf)
 
-[![Newsletter](/sites/default/files/other-images/Alumni_Connect%20_Vol-1_No-2_Page_01.jpg) Vol. 1, No. 2, Jan-Mar. 2026 ](/sites/default/files/other-files/Alumni_Connect%20_Vol-1_No-2_Jan-Mar_2026.pdf)
+[Vol. 1, No. 2, Jan-Mar. 2026](https://www.daiict.ac.in/sites/default/files/other-files/Alumni_Connect%20_Vol-1_No-2_Jan-Mar_2026.pdf)
 
-## Other Links
+# Other Links
 
   * [Alumni Association](https://www.daiict.ac.in/alumni-association.html)
-  * [Events at DAU](/events)
+  * [Events at DAU](https://www.daiict.ac.in/events)
 
-## Related Links
+# Related Links
 
 - [Alumni Document Service](https://www.daiict.ac.in/da-iict-alumni-document-service)
 - [Click here](https://www.daiict.ac.in/dau-alumni-chapter-membership-drive)
@@ -257,7 +240,7 @@ Please do share interesting pictures and news on the Alumni office to help post 
 - [Events Photo Gallery](https://www.daiict.ac.in/events-campus)
 - [Read More](https://www.daiict.ac.in/campus-memories)
 
-## Downloadable Resources
+# Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

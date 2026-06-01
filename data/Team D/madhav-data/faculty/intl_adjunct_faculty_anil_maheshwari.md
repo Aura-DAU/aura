@@ -7,21 +7,21 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 International Adjunct Faculty profile page for Anil Maheshwari at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Anil Maheshwari
 
 Anil Maheshwari
-Â 
+ 
 PhD, TIFR Bombay
 Contact Details
-Â 
+ 
 anil_maheshwari@dau.ac.in
-Â 
+ 
 https://carleton.ca/scs/people/anil-maheshwari/
 Biography
 
@@ -40,11 +40,11 @@ Research
 
 Design, Analysis and Implementation of Algorithms for Problems arising in Computational Geometry, Graph Theory, Discrete Mathematics, and Data Science.
 
-## Contact Information
+# Contact Information
 
 - **Email:** anil_maheshwari@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/adjunct-faculty-international/anil-maheshwari)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

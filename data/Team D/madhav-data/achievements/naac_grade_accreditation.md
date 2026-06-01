@@ -7,14 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 DA-IICT (now Dhirubhai Ambani University) achieved the prestigious NAAC Grade A+ accreditation, recognizing its commitment to academic excellence, infrastructure, faculty quality, and overall educational standards.
 
-## Main Content
+# Main Content
 
 
-[Image Present: NAAC Grade Award 2023]
 
 ### DA-IICT Achieves NAAC Grade A+ Accreditation
 
@@ -44,15 +43,15 @@ DA-IICT's achievement of NAAC Grade A+ reflects its dedication to providing a wo
 
 With this accreditation, DA-IICT stands as a beacon of excellence in higher education, contributing to the advancement of knowledge and technology in India and abroad.
 
-[Image Present: NAAC Peer Team Visit]
 
-## Important Information
+
+# Important Information
 
 - DA-IICT received **NAAC Grade A+** accreditation
 - NAAC is an autonomous body funded by the **University Grants Commission (UGC)**
 - The accreditation evaluates seven key criteria including curricular aspects, teaching-learning, research, infrastructure, student support, governance, and institutional values
 - Grade A+ is recognized as a mark of academic excellence in the country
 
-## Related Links
+# Related Links
 
 - [DA-IICT Website](https://www.daiict.ac.in)

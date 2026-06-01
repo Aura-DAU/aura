@@ -7,19 +7,19 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Professor of Practice profile page for Vinay Kulkarni at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Vinay Kulkarni
 
 Vinay Kulkarni
-Â 
+ 
 MSEE, IIT Madras
 Contact Details
-Â 
+ 
 vinay_kulkarni@dau.ac.in
 Biography
 
@@ -32,11 +32,11 @@ Digital Twins, Software Engineering for AI-first world, Complex Adaptive Systems
 Publications
 200+ conference & journal, 4 co-authored books, and 40+ patents
 
-## Contact Information
+# Contact Information
 
 - **Email:** vinay_kulkarni@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/professor-practice/vinay-kulkarni)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

@@ -7,11 +7,11 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Press Release - Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 Press Release: Hindi | Gujarati
 
@@ -29,7 +29,7 @@ In his academic career, he has held senior roles, including Director at Manipal 
 
 In addition to being a legal scholar, Dr. Dadhich has also worked as an advocate in the Supreme Court of India and has consulted on legal matters at Deloitte and EY, Gide Loyrette Nouel, Paris, White & Case, Brussels, and the Competition Commission of India.
 
-Â 
+ 
 
 About Dhirubhai Ambani University
 
@@ -39,13 +39,13 @@ Over the years, DA-IICT has built a strong reputation as a leading higher educat
 
 DA-IICTâ€™s leadership in ICT higher education is evidenced by its recognition as a â€˜Centre of Excellenceâ€™ by the State Government of Gujarat and its role as a mentor to other ICT institutions in the State. Recent legislative amendments have enabled the transformation of DA-IICT into a multi-disciplinary education and research university, now known as Dhirubhai Ambani University (DAU).
 
-For further information, please write to us at:Â communication_office[at]daiict[dot]ac[dot]in
+For further information, please write to us at: communication_office[at]daiict[dot]ac[dot]in
 
-## Images
+# Images
 
-- [Image Present: Prof. (Dr.) Avinash Dadhich]
+- 
 
-## Related Links
+# Related Links
 
 - [Original Page](https://www.daiict.ac.in/prof-avinash-dadhich-appointed-founding-director-establish-proposed-school-law)
 - [DAU Website](https://www.daiict.ac.in)

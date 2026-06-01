@@ -7,28 +7,28 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Professor of Practice profile page for Harpreet Singh Jattana at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Harpreet Singh Jattana
 
 Harpreet Singh Jattana
-Â 
+ 
 PhD - Pursuing (Microelectronics â€“ SOI CMOS Process Integration & Modelling), IIT Roorkee
 Contact Details
-Â 
+ 
 079-68261718
-Â 
+ 
 # 3110, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 harpreetsingh_jattana@dau.ac.in
-Â 
+ 
 https://www.linkedin.com/in/hs-jattana-00738326?lipi=urn%3Ali%3Apage%3Ad_flagshâ€¦
 Biography
-Have hands-on experienceÂ (more than 37 years) in the following areas of microelectronics:
+Have hands-on experience (more than 37 years) in the following areas of microelectronics:
 
 CMOS Process development and Integration (SOI, HV, BiPolar, NVM, OTP)
 
@@ -41,7 +41,7 @@ Publications
 Sr No.	Title	Journal	Month and Year
 1	L style n- MOSFET Layout for Mitigating TID Effects	Springer
 http://doi.org/10.1007/s12633-021-01150-z	May 2021
-2	Effect of optical parameters on design of highly reflecting distributed Bragg reflectors based on compound semiconductors for spaceÂ  applications	Material science
+2	Effect of optical parameters on design of highly reflecting distributed Bragg reflectors based on compound semiconductors for space  applications	Material science
 http://doi.org/10,1007/s12034-021-02356-y	March 2021
 3	Transient response of 0.18mm SOI MOSFETS and SRAM bit-cells to heavy-Ion irradiation for variable SOI film thickness.	IEEE Transactions on Electron Devices	Vol 66 No.11, Nov 2018
 4	A physics based variability â€“aware methodology to estimate critical charge for near-threshold voltage latches.	IEEE Transactions on Electron Devices	Vol 27 No.9 Sept 2019
@@ -51,7 +51,7 @@ http://doi.org/10,1007/s12034-021-02356-y	March 2021
 8	SPICE Based compact modelling of a spiral Inductor and MIM capacitor for RF circuit simulations	ICEE 2020 at IIT Delhi	Dec 2020
 9	Modeling of 0.18mm RF Bulk and SOI Planar MOSFETs using Industry Standard BSIM Models	ICEE 2020 at IIT Delhi	Dec 2020
 10	Verilog â€“ A SPICE Model of PECVD SiO2 OTP Memory Device	IEEE International Conference on modelling of systems circuits and Devices	Jan 2019
-11	Hi Rel ASIC Design and Development â€“ A case study	IEEE InternationalÂ  Conference ICECA	Jan 2018
+11	Hi Rel ASIC Design and Development â€“ A case study	IEEE International  Conference ICECA	Jan 2018
 12	Technology development of High Gain BJT to enable 180nm BiCMOS technology	IWPSD	Oct 2017
 13	Simple PE CVD SiO2 OTP memory based PUF for 180nm node for IoT.	75th Annual Device research Conference DRC	Jan 2017
 14	Comparative Simulation Analysis of Process Parameter Variation in 20nm Triangular FinFET	Active and Passive Electronic Components Journal	Oct 2017
@@ -77,11 +77,11 @@ Research
 
 VLSI Analog Design, CMOS Pro-cess development (SOI, Bipolar, nvm) & Integration, RadHard Technology, Compound semi-conductor â€“ hetero-epi struc-ture growth and bandgap engg
 
-## Contact Information
+# Contact Information
 
 - **Email:** harpreetsingh_jattana@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/professor-practice/harpreet-singh-jattana)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

@@ -7,26 +7,25 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Gopinath Panda at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Gopinath Panda
 
-
 Gopinath Panda
-Â 
+ 
 PhD (Mathematics), IIT Bhubaneswar
 Contact Details
-Â 
+ 
 079-68261716
-Â 
+ 
 # 3203, FB-3, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 gopinath_panda@dau.ac.in
-Â 
+ 
 https://scholar.google.com/citations?user=cfJJeTcAAAAJ&hl=en
 https://www.researchgate.net/profile/Gopinath-Panda
 https://www.linkedin.com/in/pandag/
@@ -44,20 +43,20 @@ Publications
 Panda, G., & Goswami V. Analysis of a discrete-time queue with modified batch service policy and batch-size-dependent service, Methodology & Computing in Applied Probability, 2023, 25(5).
 Teaching
 Assistant Professor, DA-IICT, Gandhinagar
-Discrete Mathematics (MC 123)Â 
+Discrete Mathematics (MC 123) 
 Mathematical Statistics (MC 221)
 Exploratory Data Analysis (IT 495)
-Discrete Mathematics (SC 612)Â 
+Discrete Mathematics (SC 612) 
 Exploratory Data Analysis (IT 462)
 Adjunct Faculty, Florida Tech, USA.
-Aviation Statistics (AVS 5205)Â 
+Aviation Statistics (AVS 5205) 
 Applied Calculus and Statistics (MTH 1603)
 Teaching Assistant, NISER Bhubaneswar, India.
-Real AnalysisÂ 
+Real Analysis 
 Teaching Assistant, IIT Bhubaneswar, India.
 Mathematics I
 Mathematics II
-Probability and Random processesÂ 
+Probability and Random processes 
 Probability, Statistics, and Stochastic Processes
 Sponsored Projects
 
@@ -67,7 +66,7 @@ News
 I am interested in research collaborations in the areas of mutual interest.
 Openings
 
-I am looking to collaborateÂ with students in Applied Probability and Stochastic Modeling.Â 
+I am looking to collaborate with students in Applied Probability and Stochastic Modeling. 
 
 Research
 Decision-making under uncertainty, Game theory
@@ -78,11 +77,11 @@ Insurance risk processes
 Software-defined network communications
 Statistical Data Analysis
 
-## Contact Information
+# Contact Information
 
 - **Email:** gopinath_panda@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/gopinath-panda)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

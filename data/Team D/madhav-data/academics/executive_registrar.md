@@ -7,13 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Profile of Mr. Siddharth Swaminarayan, the Executive Registrar of Dhirubhai Ambani University (formerly DA-IICT), highlighting his extensive experience in government service and academic administration.
 
-## Main Content
+# Main Content
 
-[Image Present: Siddharth Swaminarayan]
+
 
 ### Mr. Siddharth Swaminarayan
 
@@ -48,14 +48,14 @@ As an institution builder, Mr. Swaminarayan was the key official in:
 - Authored a book on **State Public Administration**
 - Visiting faculty in State Public Administration at **Sardar Patel Institute of Public Administration** for the pre-service training of direct recruit Class 1 and Class 2 Officers
 
-## Important Information
+# Important Information
 
 - Over 40 years of experience in government and academic administration
 - Key role in establishing multiple national-level institutions (NIFT, NID campuses)
 - Instrumental in drafting legislation for institutions of national importance
 - Currently serves as Executive Registrar at Dhirubhai Ambani University
 
-## Related Links
+# Related Links
 
 - [DAU Website](https://www.daiict.ac.in)
 - [Executive Registrar](https://daiict.ac.in/executive-registrar)

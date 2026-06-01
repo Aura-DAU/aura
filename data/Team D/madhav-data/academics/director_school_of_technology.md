@@ -9,13 +9,13 @@ team: "Team D"
 
 # Director, School of Technology
 
-## Overview
+# Overview
 
 This page provides information about the Director of the School of Technology at Dhirubhai Ambani University (DA-IICT), Gandhinagar.
 
-## Main Content
+# Main Content
 
-[Image Present: Dr. G. Venkatesh]
+
 
 > **Note:** The content of this page could not be extracted due to a URL fetch permission timeout during scraping. The DA-IICT website uses dynamic rendering (JavaScript/Drupal) which limits static HTML extraction. Please visit the original URL for complete and up-to-date information.
 
@@ -31,13 +31,13 @@ The Director, School of Technology is a key leadership position at Dhirubhai Amb
 - Curriculum development and academic quality assurance
 - Student mentorship and career development initiatives
 
-## Important Information
+# Important Information
 
 - The School of Technology is one of the key academic units at DA-IICT (now Dhirubhai Ambani University)
 - The Director reports to the university's Director/Vice-Chancellor
 - For specific details about the current Director, please visit the original page
 
-## Related Links
+# Related Links
 
 - [DA-IICT Home](https://www.daiict.ac.in/)
 - [Director's Office](https://www.daiict.ac.in/director)
@@ -45,7 +45,7 @@ The Director, School of Technology is a key leadership position at Dhirubhai Amb
 - [Faculty](https://www.daiict.ac.in/faculty)
 - [Programs of Study](https://www.daiict.ac.in/programs-of-study)
 
-## Contact Information
+# Contact Information
 
 - **Office:** Director, School of Technology, Dhirubhai Ambani University
 - **Location:** Gandhinagar, Gujarat, India

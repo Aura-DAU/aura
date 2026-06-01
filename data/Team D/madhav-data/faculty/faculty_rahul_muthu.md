@@ -7,24 +7,23 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 Faculty profile page for Rahul Muthu at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-## Main Content
+# Main Content
 
 ### Rahul Muthu
 
-
 Rahul Muthu
-Â 
+ 
 PhD (Mathematics), Homi Bhabha National Institute, Mumbai
 Contact Details
-Â 
+ 
 079-68261564, 9586478239
-Â 
+ 
 # 1202, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
-Â 
+ 
 rahul_muthu@dau.ac.in
 Biography
 
@@ -64,11 +63,11 @@ Approximation Algorithms
 Design & Analysis of Algorithms
 Graph Theory & Algorithms
 
-## Contact Information
+# Contact Information
 
 - **Email:** rahul_muthu@dau.ac.in
 
-## Related Links
+# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/rahul-muthu)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)

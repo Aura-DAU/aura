@@ -7,12 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-## Overview
+# Overview
 
 This document contains the schema and details of the online request form for the official Dhirubhai Ambani University (DAU) Alumni E-card/ID Card.
 
-## Main Content
-
+# Main Content
 
 ### Alumni E-card Request Form
 
@@ -40,7 +39,7 @@ This application is hosted on Google Forms and is used by the university adminis
 | **Upload Your Photo (Passport-size or Clear Selfie)** | File Upload | Required (Max 10 MB). Guidelines:<br>• JPG format only, max 5 MB.<br>• Size should be 300 x 400 pixels (approx.).<br>• Plain white background required.<br>• Face centered, front-facing, clearly visible.<br>• **Filename must be your Student ID** |
 | **Declaration** | Checkbox | Required: *I confirm that the photo I have uploaded is mine, and I consent to its use for creating my Alumni ID Card.* |
 
-## Related Links
+# Related Links
 
 - [Google Form - Alumni E-card Request Form](https://forms.gle/ybqqfjP5rer3KcnN6)
 - [DAU Alumni Directory](https://www.daiict.ac.in/alumni)
