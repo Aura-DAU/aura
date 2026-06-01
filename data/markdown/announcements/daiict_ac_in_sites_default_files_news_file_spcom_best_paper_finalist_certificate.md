@@ -1,0 +1,42 @@
+---
+title: "sites/default/files/news_files/SPCOM_best_paper_finaist_certificate"
+url: "https://www.daiict.ac.in/sites/default/files/news_file/SPCOM_best_paper_finalist_certificate.pdf"
+category: "announcements"
+scraped_by: "Local Document Scraper (PyMuPDF/Pandas)"
+scraped_date: "2026-05-31"
+team: "Knowledge Base Pipeline"
+---
+
+ih 6 —~ [EEE Bangalore \
+og S P C O M = ComSoc Chapter
+
+sizer faster 21221161
+
+IEEE INTERNATIONAL CONFERENCE ON
+SIGNAL PROCESSING AND COMMUNICATIONS (SPCOM 2022)
+INDIAN INSTITUTE OF SCIENCE, BANGALORE
+11-15 JULY 2022
+
+BEST STUDENT PAPER CONTEST FINALIST
+
+presented to the paper
+Morse Wavelet Features for Pop Noise Detection
+Priyanka Gupta, Piyushkumar K. Chodingala, and Hemant Patil
+
+MMMM MUMMM@ee@MMM Met,
+
+SN
+| |r 5
+| in Ne N
+SUNDEEP CHEPURI/SOMA BISWAS/SAIF MOHAMMED NEELESH B. MEHTA/RAHUL VAZE N
+General Co-Chair N
+
+MMM MMMM
+
+Yf-
+
+Technical Program Co-Chair
+
+SA ye °° °° % v'Frt my IDDl0O ”’}W"tr'’’ Wr
+
+YY
