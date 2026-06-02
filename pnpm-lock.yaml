@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  frontend:
+  pwa/dau-pwa:
     dependencies:
       next:
         specifier: 16.2.6

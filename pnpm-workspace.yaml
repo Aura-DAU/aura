@@ -1,5 +1,5 @@
 packages:
-  - 'frontend'
+  - 'pwa/dau-pwa'
 
 allowBuilds:
   sharp: true
