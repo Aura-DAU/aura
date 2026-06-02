@@ -2,56 +2,59 @@
 
 import fs from "fs";
 import path from "path";
+import { z } from "zod";
+
+const fetchStudentServiceDocumentSchema = z.object({
+  fileName: z.string().endsWith(".md", "Only markdown files are permitted")
+});
+
+export interface FetchStudentServiceDocumentResult {
+  success: boolean;
+  content: string;
+}
 
 /**
  * Fetch a student service markdown document safely from the data folder
  */
-export async function fetchStudentServiceDocument(payload: { fileName: string }) {
-  if (
-    !payload ||
-    typeof payload.fileName !== "string" ||
-    payload.fileName.includes("..") ||
-    !payload.fileName.endsWith(".md")
-  ) {
-    throw new Error("Invalid file name pattern");
+export async function fetchStudentServiceDocument(
+  payload: { fileName: string }
+): Promise<FetchStudentServiceDocumentResult> {
+  const validated = fetchStudentServiceDocumentSchema.safeParse(payload);
+  if (!validated.success) {
+    throw new Error("Invalid input: " + validated.error.message);
   }
 
-  const { fileName } = payload;
+  const { fileName } = validated.data;
+
+  // Define allowed root directories for searching
+  const rootDirs = [
+    path.join(process.cwd(), "data", "Team D", "madhav-data", "student_services"),
+    path.join(process.cwd(), "data", "intranet", "academics"),
+    path.join(process.cwd(), "data", "Team C"),
+    path.join(process.cwd(), "data", "Team D", "madhav-data", "faculty")
+  ];
 
   try {
-    // 1. Try student_services directory
-    let filePath = path.join(
-      process.cwd(),
-      "data",
-      "Team D",
-      "madhav-data",
-      "student_services",
-      fileName
-    );
+    let filePath = "";
 
-    // 2. Try intranet/academics directory
-    if (!fs.existsSync(filePath)) {
-      filePath = path.join(process.cwd(), "data", "intranet", "academics", fileName);
+    // Resolve and verify that the file path stays inside the corresponding allowed root
+    for (const rootDir of rootDirs) {
+      const resolved = path.resolve(rootDir, fileName);
+      if (resolved.startsWith(rootDir + path.sep)) {
+        if (fs.existsSync(resolved)) {
+          filePath = resolved;
+          break;
+        }
+      }
     }
 
-    // 3. Try Team C directory
-    if (!fs.existsSync(filePath)) {
-      filePath = path.join(process.cwd(), "data", "Team C", fileName);
-    }
-
-    // 4. Try faculty directory
-    if (!fs.existsSync(filePath)) {
-      filePath = path.join(
-        process.cwd(),
-        "data",
-        "Team D",
-        "madhav-data",
-        "faculty",
-        fileName
-      );
-    }
-
-    if (!fs.existsSync(filePath)) {
+    if (!filePath) {
+      // In case path is requested but not found, check path safety against default root to prevent path traversal
+      const defaultDir = rootDirs[0];
+      const resolvedFallback = path.resolve(defaultDir, fileName);
+      if (!resolvedFallback.startsWith(defaultDir + path.sep)) {
+        throw new Error("Invalid file path");
+      }
       return {
         success: false,
         content: `Document ${fileName} not found on disk.`,

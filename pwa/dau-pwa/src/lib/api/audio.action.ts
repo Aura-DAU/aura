@@ -1,26 +1,39 @@
 "use server";
 
+import { z } from "zod";
+
+const transcribeAudioSchema = z.object({
+  audioBase64: z.string().min(1, "Audio data is required"),
+  filename: z.string().optional(),
+});
+
+export interface TranscribeAudioResult {
+  success: boolean;
+  text?: string;
+  error?: string;
+}
+
 /**
  * Server Action to transcribe base64 audio data using Groq's Whisper API
  */
-export async function transcribeAudio(payload: {
-  audioBase64: string;
-  filename?: string;
-}) {
-  const { audioBase64, filename } = payload;
+export async function transcribeAudio(
+  payload: { audioBase64: string; filename?: string }
+): Promise<TranscribeAudioResult> {
+  const validated = transcribeAudioSchema.safeParse(payload);
+  if (!validated.success) {
+    return {
+      success: false,
+      error: "Invalid input: " + validated.error.message,
+    };
+  }
+
+  const { audioBase64, filename } = validated.data;
   const apiKey = process.env.GROQ_API_KEY;
   
   if (!apiKey) {
     return {
       success: false,
       error: "Error: GROQ_API_KEY is not configured on the server. Please add it to your environment.",
-    };
-  }
-
-  if (!audioBase64) {
-    return {
-      success: false,
-      error: "Error: Audio data is missing.",
     };
   }
 

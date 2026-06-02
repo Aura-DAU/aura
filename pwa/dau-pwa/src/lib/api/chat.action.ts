@@ -2,6 +2,7 @@
 
 import fs from "fs";
 import path from "path";
+import { z } from "zod";
 import { callClaude } from "@/lib/ai/aiClient";
 import { AURA_SYSTEM_PROMPT } from "@/lib/ai/prompts/chatPrompt";
 
@@ -25,6 +26,36 @@ interface SearchDocument {
   score: number;
 }
 
+export interface Citation {
+  title: string;
+  file: string;
+}
+
+export interface AskAuraResult {
+  success: boolean;
+  content: string;
+  citations: Citation[];
+}
+
+const chatMessageSchema = z.object({
+  role: z.enum(["user", "assistant"]),
+  content: z.string()
+});
+
+const studentProfileSchema = z.object({
+  name: z.string(),
+  branch: z.string(),
+  year: z.string(),
+  semester: z.string(),
+  interests: z.string()
+});
+
+const askAuraSchema = z.object({
+  message: z.string().min(1, "Message is required"),
+  history: z.array(chatMessageSchema),
+  studentProfile: studentProfileSchema
+});
+
 /**
  * RAG Chat Server Action for AURA
  */
@@ -32,8 +63,17 @@ export async function askAura(payload: {
   message: string;
   history: ChatMessage[];
   studentProfile: StudentProfile;
-}) {
-  const { message, history, studentProfile } = payload;
+}): Promise<AskAuraResult> {
+  const validated = askAuraSchema.safeParse(payload);
+  if (!validated.success) {
+    return {
+      success: false,
+      content: "Invalid input: " + validated.error.message,
+      citations: [],
+    };
+  }
+
+  const { message, history, studentProfile } = validated.data;
 
   if (!message || typeof message !== "string") {
     throw new Error("Message is required.");

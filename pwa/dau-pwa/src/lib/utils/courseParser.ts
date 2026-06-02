@@ -217,13 +217,16 @@ export function getPoliciesList(): PolicyMetadata[] {
  */
 export function getDocumentContent(fileName: string): string {
   try {
-    const filePath = path.join(DATA_DIR, fileName);
-    if (!fs.existsSync(filePath)) {
+    const resolvedPath = path.resolve(DATA_DIR, fileName);
+    if (!resolvedPath.startsWith(DATA_DIR + path.sep)) {
+      throw new Error("Invalid file path: path traversal detected");
+    }
+    if (!fs.existsSync(resolvedPath)) {
       return "Document not found.";
     }
     
     // Read the file and strip YAML frontmatter if present
-    let content = fs.readFileSync(filePath, "utf-8");
+    let content = fs.readFileSync(resolvedPath, "utf-8");
     if (content.startsWith("---")) {
       const endOfFrontmatter = content.indexOf("---", 3);
       if (endOfFrontmatter !== -1) {

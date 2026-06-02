@@ -1,12 +1,19 @@
+import Anthropic from "@anthropic-ai/sdk";
+
+// Initialize Anthropic client
+const apiKey = process.env.ANTHROPIC_API_KEY;
+const anthropic = new Anthropic({
+  apiKey: apiKey || "",
+});
+
 /**
- * Fetch-based Anthropic Claude API Client
+ * Anthropic Claude API Client using SDK with Prompt Caching
  */
 export async function callClaude(payload: {
   systemPrompt: string;
   userMessage: string;
   history?: { role: "user" | "assistant"; content: string }[];
 }) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return {
       success: false,
@@ -16,45 +23,38 @@ export async function callClaude(payload: {
 
   const { systemPrompt, userMessage, history = [] } = payload;
 
-  const messages = [
-    ...history.map((h) => ({ role: h.role, content: h.content })),
-    { role: "user", content: userMessage },
-  ];
-
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
+    const messages = [
+      ...history.map((h) => ({ role: h.role as "user" | "assistant", content: h.content })),
+      { role: "user" as const, content: userMessage },
+    ];
+
+    // Call Anthropic API with prompt caching
+    const response = await anthropic.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 1024,
+      system: [
+        {
+          type: "text",
+          text: systemPrompt,
+          cache_control: { type: "ephemeral" },
+        },
+      ],
+      messages: messages,
+    }, {
       headers: {
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "claude-3-5-sonnet-20241022",
-        max_tokens: 1024,
-        system: systemPrompt,
-        messages: messages,
-      }),
+        "anthropic-beta": "prompt-caching-2024-07-31"
+      }
     });
 
-    if (!response.ok) {
-      const errText = await response.text();
-      console.error("Anthropic API Error response:", errText);
-      return {
-        success: false,
-        content: `Error: Claude API responded with status ${response.status}`,
-      };
-    }
-
-    const data = await response.json();
-    const reply = data.content?.[0]?.text || "No response text found.";
+    const reply = response.content[0].type === "text" ? response.content[0].text : "No response text found.";
 
     return {
       success: true,
       content: reply,
     };
   } catch (error) {
-    console.error("Error calling Anthropic API:", error);
+    console.error("Error calling Anthropic API via SDK:", error);
     return {
       success: false,
       content: "Error: Failed to connect to Claude AI services.",

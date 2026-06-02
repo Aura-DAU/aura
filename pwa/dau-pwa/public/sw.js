@@ -3,7 +3,9 @@ const ASSETS_TO_CACHE = [
   "/",
   "/student/academics",
   "/favicon.ico",
-  "/dau_logo.png",
+  "/icons/icon-192x192.png",
+  "/icons/icon-512x512.png",
+  "/icons/icon-512x512-maskable.png",
 ];
 
 // Install Event
@@ -40,32 +42,61 @@ self.addEventListener("fetch", (event) => {
 
   // Avoid intercepting third-party requests or hot-reloading web sockets
   if (url.origin !== self.location.origin) return;
-  if (url.pathname.startsWith("/_next/") || url.pathname.includes("webpack")) return;
-  if (url.pathname.startsWith("/api/") || url.pathname.includes(".action")) return;
+  if (url.pathname.includes("webpack")) return;
+  if (url.pathname.startsWith("/api/")) return;
 
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Cache successful responses for static assets and page content
-        if (response && response.status === 200 && response.type === "basic") {
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
+  // Explicit caching allowlist
+  const isNextStatic = url.pathname.startsWith("/_next/static/");
+  const isIcon = url.pathname.startsWith("/icons/") || url.pathname === "/favicon.ico";
+  const isLogo = url.pathname.match(/^\/dau_logo\.(png|jpg|jpeg|webp|svg)/i);
+  const isManifest = url.pathname.endsWith(".webmanifest") || url.pathname.endsWith(".json");
+  const isCacheableAsset = ASSETS_TO_CACHE.includes(url.pathname);
+
+  const shouldCache = isNextStatic || isIcon || isLogo || isManifest || isCacheableAsset;
+
+  if (shouldCache) {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) {
+          // Serve from cache, but fetch in background to refresh the cache
+          fetch(event.request)
+            .then((response) => {
+              if (response && response.status === 200 && response.type === "basic") {
+                caches.open(CACHE_NAME).then((cache) => {
+                  cache.put(event.request, response);
+                });
+              }
+            })
+            .catch(() => {});
+          return cachedResponse;
         }
-        return response;
+
+        return fetch(event.request)
+          .then((response) => {
+            if (response && response.status === 200 && response.type === "basic") {
+              const responseToCache = response.clone();
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+            }
+            return response;
+          })
+          .catch(() => caches.match(event.request));
       })
-      .catch(() => {
-        // Retrieve from cache when offline
+    );
+  } else {
+    // Network-only with cache/fallback fallback (e.g., for HTML pages when offline)
+    event.respondWith(
+      fetch(event.request).catch(() => {
         return caches.match(event.request).then((cachedResponse) => {
           if (cachedResponse) {
             return cachedResponse;
           }
-          // Default fallback for page requests
           if (event.request.headers.get("accept")?.includes("text/html")) {
             return caches.match("/student/academics");
           }
         });
       })
-  );
+    );
+  }
 });
