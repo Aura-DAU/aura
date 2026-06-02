@@ -1,0 +1,11 @@
+{
+  "name": "dau-pwa-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter frontend dev",
+    "build": "pnpm --filter frontend build",
+    "start": "pnpm --filter frontend start",
+    "lint": "pnpm --filter frontend lint",
+    "type-check": "pnpm --filter frontend type-check"
+  }
+}
