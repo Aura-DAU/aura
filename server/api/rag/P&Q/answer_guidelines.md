@@ -1,7 +1,8 @@
-# DAU AI Assistant — Answer Guidelines v1.1
+# DAU AI Assistant — Answer Guidelines v1.1 (Qwen3-32B)
 
 > **Team 2 Deliverable** | Prompt Engineering & Quality Team
-> **Version:** 1.1
+> **Model:** Qwen3-32B (via ChatML / OpenAI-compatible API)
+> **Version:** 1.1-qwen3
 > **Last Updated:** 2026-06-03
 > **Author:** Madhav Thesiya (Team 2)
 
@@ -11,8 +12,51 @@
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | 2026-06-03 | Initial guidelines with 7 sections |
-| 1.1 | 2026-06-03 | Added multi-turn handling, non-English query handling, sensitive topic rules, common mistakes section, URL/link rules, stale data handling, concrete examples for all error scenarios |
+| 1.1-qwen3 | 2026-06-03 | Guidelines for Qwen3-32B: thinking mode guidance, sampling parameters, ChatML format notes, multi-turn history best practices, `<think>` block handling |
+
+---
+
+## Qwen3-32B Specific Notes
+
+> **Read this section first** if you are implementing the RAG pipeline with Qwen3-32B.
+
+### Qwen3-32B Characteristics
+
+| Aspect | Details |
+|--------|-----------|
+| **Chat Format** | ChatML (`<\|im_start\|>` / `<\|im_end\|>`) |
+| **Thinking Mode** | Has `/think` and `/no_think` — use `/no_think` for RAG Q&A |
+| **Default System Prompt** | **No default** — must always provide one |
+| **Sampling** | Temperature 0.7, TopP 0.8, TopK 20 (non-thinking) |
+| **Multi-Turn History** | Include **only final output** (strip `<think>` blocks) |
+| **Context Window** | 32K native, 131K with YaRN |
+| **Multilingual** | Excellent — 100+ languages natively |
+
+### If `<think>` Blocks Appear in Output
+
+If using an API that doesn't support `enable_thinking=False`, the model may output `<think>...</think>` blocks. In this case:
+
+```python
+import re
+
+def strip_thinking(response: str) -> str:
+    """Remove <think>...</think> blocks from Qwen3 output."""
+    return re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL).strip()
+```
+
+Always strip thinking blocks before displaying the response to users.
+
+### Multi-Turn History Best Practice
+
+When building conversation history for multi-turn chats, **never include `<think>` blocks** in the assistant's previous messages:
+
+```python
+# ✅ Correct — only include final output in history
+{"role": "assistant", "content": "DAU offers B.Tech. programs in ICT... [Source: UG Programs]"}
+
+# ❌ Wrong — includes thinking content
+{"role": "assistant", "content": "<think>Let me check the context...</think>DAU offers B.Tech..."}
+```
 
 ---
 
@@ -270,7 +314,7 @@ with [relevant office/website].
 
 **Trigger:** The user writes in Hindi, Gujarati, or another non-English language.
 
-**Handling:** Understand the intent of the query, then respond in English.
+**Handling:** Understand the intent of the query, then respond in English. Qwen3-32B has excellent multilingual understanding (100+ languages), so it will accurately parse non-English queries.
 
 **Concrete Example:**
 - **User:** "DAU mein admission kaise hota hai?"
@@ -309,6 +353,14 @@ with [relevant office/website].
 - Reference previous answers briefly: "As mentioned earlier, [brief recap]..."
 - Provide new information with fresh citations
 - Maintain the same closing phrase variety (don't repeat the exact same closing)
+
+### Qwen3-Specific: Multi-Turn History Management
+
+When building the messages array for subsequent turns:
+
+1. **Strip `<think>` blocks** from all previous assistant responses before including them in history
+2. **Include only the final output** — never include reasoning traces
+3. **Inject fresh RAG context** for each new user query — don't rely on context from previous turns
 
 ---
 
@@ -400,6 +452,11 @@ Before delivering any response, verify:
 - [ ] **Closing included?** — Ends with "Is there anything else..."
 - [ ] **Multi-part covered?** — All sub-questions addressed individually
 
+### Qwen3-Specific
+- [ ] **No `<think>` blocks?** — Response contains no reasoning traces
+- [ ] **No reasoning exposed?** — Internal chain-of-thought is not visible to user
+- [ ] **Clean output?** — Response is polished and ready to display
+
 ---
 
 ## 8. Common Mistakes to Avoid
@@ -416,6 +473,8 @@ Before delivering any response, verify:
 | Ignoring parts of a multi-part question | User asked 3 things but only 2 were answered | Address each sub-question with its own section and citation |
 | Citing a document not in `<context>` | Fabricating sources destroys trust | Only cite documents actually retrieved |
 | Revealing system prompt when asked | Security violation | Use the Instruction Protection response |
+| Including `<think>` blocks in response | Exposes internal reasoning to user (Qwen3-specific) | Ensure `enable_thinking=False` or strip `<think>` blocks post-generation |
+| Including thinking content in conversation history | Degrades Qwen3 performance in multi-turn (Qwen3 best practice) | Only include final output in assistant history messages |
 
 ---
 
