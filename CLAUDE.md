@@ -192,6 +192,10 @@ Copy `.env.example` to `.env.local` and fill in values. Never commit `.env.local
 
 Required variables are documented in `.env.example` with inline comments.
 
+Key Variables:
+- `ANTHROPIC_API_KEY`: Anthropic SDK access key (e.g. for Claude Sonnet 3.5).
+- `GROQ_API_KEY`: Groq API access key (e.g. for Whisper-1 voice transcription).
+
 ---
 
 ## Testing
