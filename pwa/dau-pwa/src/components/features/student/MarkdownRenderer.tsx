@@ -94,15 +94,26 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
   // Inline formatting helper (Bold, Italic, Links, Code)
   function formatInline(text: string): string {
-    let formatted = text
+    const escaped = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+    let formatted = escaped
       // Bold **text**
       .replace(/\*\*(.*?)\*\*/g, "<strong class='font-bold text-slate-900'>$1</strong>")
       // Italic *text*
       .replace(/\*(.*?)\*/g, "<em class='italic text-slate-800'>$1</em>")
       // Code `text`
-      .replace(/`(.*?)`/g, "<code class='bg-slate-100 px-1 py-0.5 rounded text-[#E8400C] font-mono text-xs'>$1</code>")
+      .replace(/`(.*?)`/g, "<code class='bg-slate-100 px-1 py-0.5 rounded text-primary-dau font-mono text-xs'>$1</code>")
       // Links [text](url)
-      .replace(/\[(.*?)\]\((.*?)\)/g, "<a href='$2' target='_blank' class='text-[#E8400C] hover:underline font-bold'>$1</a>")
+      .replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => {
+        const trimmedUrl = url.trim();
+        const safeUrl = trimmedUrl.toLowerCase().startsWith("javascript:") ? "#" : trimmedUrl;
+        return `<a href='${safeUrl}' target='_blank' rel='noopener noreferrer' class='text-primary-dau hover:underline font-bold'>${linkText}</a>`;
+      })
       // Bullet markers like ● or ○
       .replace(/^[●○]\s*/, "");
 
@@ -175,7 +186,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           );
         } else if (level === 2) {
           elements.push(
-            <h2 key={i} className="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 tracking-tight flex items-center gap-2 border-l-4 border-[#E8400C] pl-2.5">
+            <h2 key={i} className="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 tracking-tight flex items-center gap-2 border-l-4 border-primary-dau pl-2.5">
               {text}
             </h2>
           );

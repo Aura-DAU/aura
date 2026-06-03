@@ -41,10 +41,6 @@ export async function callClaude(payload: {
         },
       ],
       messages: messages,
-    }, {
-      headers: {
-        "anthropic-beta": "prompt-caching-2024-07-31"
-      }
     });
 
     const reply = response.content[0].type === "text" ? response.content[0].text : "No response text found.";

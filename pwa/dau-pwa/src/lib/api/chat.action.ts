@@ -23,7 +23,60 @@ interface SearchDocument {
   title: string;
   content: string;
   filePath: string;
-  score: number;
+  category: string;
+}
+
+let cachedCorpus: SearchDocument[] | null = null;
+
+// Memoise the RAG corpus to prevent scanning the filesystem on every request.
+function loadCorpus(): SearchDocument[] {
+  if (cachedCorpus) return cachedCorpus;
+
+  const searchDocs: SearchDocument[] = [];
+  const dirs = [
+    { path: path.join(process.cwd(), "data", "student_services"), category: "Student Services" },
+    { path: path.join(process.cwd(), "data", "faculty"), category: "Faculty Directory" },
+    { path: path.join(process.cwd(), "data", "academics"), category: "Academics" },
+    { path: path.join(process.cwd(), "data", "events"), category: "Campus News" },
+  ];
+
+  for (const dir of dirs) {
+    if (fs.existsSync(dir.path)) {
+      try {
+        const files = fs.readdirSync(dir.path).filter((f) => f.endsWith(".md"));
+        for (const file of files) {
+          const filePath = path.join(dir.path, file);
+          const rawContent = fs.readFileSync(filePath, "utf-8");
+          
+          let content = rawContent;
+          if (content.startsWith("---")) {
+            const end = content.indexOf("---", 3);
+            if (end !== -1) content = content.substring(end + 3).trim();
+          }
+
+          let title = file
+            .replace(/\.md$/, "")
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+          
+          const titleMatch = rawContent.match(/title:\s*"(.*?)"/);
+          if (titleMatch) title = titleMatch[1];
+
+          searchDocs.push({
+            title: `${title} (${dir.category})`,
+            content: content.substring(0, 1500),
+            filePath: file,
+            category: dir.category,
+          });
+        }
+      } catch (err) {
+        console.error(`Error loading directory ${dir.path}:`, err);
+      }
+    }
+  }
+
+  cachedCorpus = searchDocs;
+  return cachedCorpus;
 }
 
 export interface Citation {
@@ -75,19 +128,9 @@ export async function askAura(payload: {
 
   const { message, history, studentProfile } = validated.data;
 
-  if (!message || typeof message !== "string") {
-    throw new Error("Message is required.");
-  }
-
   try {
-    // 1. Gather all documents from directories
-    const searchDocs: SearchDocument[] = [];
-    const dirs = [
-      { path: path.join(process.cwd(), "data", "Team D", "madhav-data", "student_services"), category: "Student Services" },
-      { path: path.join(process.cwd(), "data", "Team D", "madhav-data", "faculty"), category: "Faculty Directory" },
-      { path: path.join(process.cwd(), "data", "intranet", "academics"), category: "Academics" },
-      { path: path.join(process.cwd(), "data", "Team C"), category: "Campus News" },
-    ];
+    const corpus = loadCorpus();
+    const scoredDocs: (SearchDocument & { score: number })[] = [];
 
     const keywords = message
       .toLowerCase()
@@ -95,54 +138,27 @@ export async function askAura(payload: {
       .split(/\s+/)
       .filter((w) => w.length > 2);
 
-    for (const dir of dirs) {
-      if (fs.existsSync(dir.path)) {
-        const files = fs.readdirSync(dir.path).filter((f) => f.endsWith(".md"));
-        for (const file of files) {
-          const filePath = path.join(dir.path, file);
-          const rawContent = fs.readFileSync(filePath, "utf-8");
-          
-          let content = rawContent;
-          if (content.startsWith("---")) {
-            const end = content.indexOf("---", 3);
-            if (end !== -1) content = content.substring(end + 3).trim();
-          }
-
-          // Simple keyword scoring
-          let score = 0;
-          const lowerContent = content.toLowerCase();
-          for (const kw of keywords) {
-            if (lowerContent.includes(kw)) {
-              // Count occurrences
-              const count = (lowerContent.match(new RegExp(kw, "g")) || []).length;
-              score += count;
-            }
-          }
-
-          if (score > 0) {
-            // Extract document title from metadata or file name
-            let title = file
-              .replace(/\.md$/, "")
-              .replace(/_/g, " ")
-              .replace(/\b\w/g, (c) => c.toUpperCase());
-            
-            const titleMatch = rawContent.match(/title:\s*"(.*?)"/);
-            if (titleMatch) title = titleMatch[1];
-
-            searchDocs.push({
-              title: `${title} (${dir.category})`,
-              content: content.substring(0, 1500), // Limit snippet size
-              filePath: file,
-              score,
-            });
-          }
+    for (const doc of corpus) {
+      let score = 0;
+      const lowerContent = doc.content.toLowerCase();
+      for (const kw of keywords) {
+        if (lowerContent.includes(kw)) {
+          // Count literal occurrences safely without Regex engine parsing overhead or vulnerability.
+          const count = lowerContent.split(kw).length - 1;
+          score += count;
         }
+      }
+
+      if (score > 0) {
+        scoredDocs.push({
+          ...doc,
+          score,
+        });
       }
     }
 
-    // Sort documents by relevance score
-    searchDocs.sort((a, b) => b.score - a.score);
-    const topMatches = searchDocs.slice(0, 3);
+    scoredDocs.sort((a, b) => b.score - a.score);
+    const topMatches = scoredDocs.slice(0, 3);
 
     // Build context string
     let groundingContext = "";

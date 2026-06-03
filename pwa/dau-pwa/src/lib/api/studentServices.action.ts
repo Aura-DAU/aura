@@ -28,10 +28,10 @@ export async function fetchStudentServiceDocument(
 
   // Define allowed root directories for searching
   const rootDirs = [
-    path.join(process.cwd(), "data", "Team D", "madhav-data", "student_services"),
-    path.join(process.cwd(), "data", "intranet", "academics"),
-    path.join(process.cwd(), "data", "Team C"),
-    path.join(process.cwd(), "data", "Team D", "madhav-data", "faculty")
+    path.join(process.cwd(), "data", "student_services"),
+    path.join(process.cwd(), "data", "academics"),
+    path.join(process.cwd(), "data", "events"),
+    path.join(process.cwd(), "data", "faculty")
   ];
 
   try {
@@ -93,12 +93,18 @@ export interface FacultyMember {
   fileName: string;
 }
 
+let cachedFaculty: FacultyMember[] | null = null;
+let cachedEvents: EventItem[] | null = null;
+
 /**
  * Scans faculty directory and parses all records
  */
 export async function getFacultyList(): Promise<FacultyMember[]> {
+  if (cachedFaculty !== null) {
+    return cachedFaculty;
+  }
   try {
-    const facultyDir = path.join(process.cwd(), "data", "Team D", "madhav-data", "faculty");
+    const facultyDir = path.join(process.cwd(), "data", "faculty");
     if (!fs.existsSync(facultyDir)) {
       return [];
     }
@@ -203,7 +209,8 @@ export async function getFacultyList(): Promise<FacultyMember[]> {
       });
     }
 
-    return facultyList.sort((a, b) => a.name.localeCompare(b.name));
+    cachedFaculty = facultyList.sort((a, b) => a.name.localeCompare(b.name));
+    return cachedFaculty;
   } catch (err) {
     console.error("Error parsing faculty directory:", err);
     return [];
@@ -218,21 +225,23 @@ export interface EventItem {
 }
 
 /**
- * Scans events database under Team C and returns aggregated events list
+ * Scans events database and returns aggregated events list
  */
 export async function getEventsList(): Promise<EventItem[]> {
+  if (cachedEvents !== null) {
+    return cachedEvents;
+  }
   try {
     const eventsList: EventItem[] = [];
 
-    // 1. Scan Team C files
-    const teamCDir = path.join(process.cwd(), "data", "Team C");
-    if (fs.existsSync(teamCDir)) {
-      const files = fs.readdirSync(teamCDir).filter(
-        (f) => f.endsWith(".md") && f !== "team-c.md" && f !== "validation_report.md"
+    const eventsDir = path.join(process.cwd(), "data", "events");
+    if (fs.existsSync(eventsDir)) {
+      const files = fs.readdirSync(eventsDir).filter(
+        (f) => f.endsWith(".md") && f !== "events.md"
       );
       
       for (const file of files) {
-        const filePath = path.join(teamCDir, file);
+        const filePath = path.join(eventsDir, file);
         const content = fs.readFileSync(filePath, "utf-8");
 
         let title = file
@@ -304,7 +313,8 @@ export async function getEventsList(): Promise<EventItem[]> {
       }
     );
 
-    return eventsList.sort((a, b) => b.date.localeCompare(a.date));
+    cachedEvents = eventsList.sort((a, b) => b.date.localeCompare(a.date));
+    return cachedEvents;
   } catch (err) {
     console.error("Error parsing events directory:", err);
     return [];

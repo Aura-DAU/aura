@@ -19,7 +19,10 @@ export interface PolicyMetadata {
   filePath: string;
 }
 
-const DATA_DIR = path.join(process.cwd(), "data", "intranet", "academics");
+const DATA_DIR = path.join(process.cwd(), "data", "academics");
+
+let cachedCourses: CourseMetadata[] | null = null;
+let cachedPolicies: PolicyMetadata[] | null = null;
 
 /**
  * Format string to Title Case
@@ -34,6 +37,9 @@ function toTitleCase(str: string): string {
  * Scan academics directory and parse metadata of course policy files
  */
 export function getCoursesList(): CourseMetadata[] {
+  if (cachedCourses !== null) {
+    return cachedCourses;
+  }
   try {
     if (!fs.existsSync(DATA_DIR)) {
       return [];
@@ -148,11 +154,14 @@ export function getCoursesList(): CourseMetadata[] {
       }
     });
 
-    return Array.from(coursesMap.values()).sort((a, b) => {
+    const result = Array.from(coursesMap.values()).sort((a, b) => {
       // Sort by code first, then title
       if (a.code !== b.code) return a.code.localeCompare(b.code);
       return a.title.localeCompare(b.title);
     });
+
+    cachedCourses = result;
+    return cachedCourses;
   } catch (error) {
     console.error("Error reading courses:", error);
     return [];
@@ -163,6 +172,9 @@ export function getCoursesList(): CourseMetadata[] {
  * Scan academics directory and parse metadata of academic policy files
  */
 export function getPoliciesList(): PolicyMetadata[] {
+  if (cachedPolicies !== null) {
+    return cachedPolicies;
+  }
   try {
     if (!fs.existsSync(DATA_DIR)) {
       return [];
@@ -205,7 +217,9 @@ export function getPoliciesList(): PolicyMetadata[] {
       });
     });
 
-    return policies.sort((a, b) => a.title.localeCompare(b.title));
+    const result = policies.sort((a, b) => a.title.localeCompare(b.title));
+    cachedPolicies = result;
+    return cachedPolicies;
   } catch (error) {
     console.error("Error reading policies:", error);
     return [];

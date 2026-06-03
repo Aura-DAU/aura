@@ -1,7 +1,7 @@
 const CACHE_NAME = "dau-pwa-cache-v1";
 const ASSETS_TO_CACHE = [
   "/",
-  "/student/academics",
+  "/offline.html",
   "/favicon.ico",
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png",
@@ -93,7 +93,7 @@ self.addEventListener("fetch", (event) => {
             return cachedResponse;
           }
           if (event.request.headers.get("accept")?.includes("text/html")) {
-            return caches.match("/student/academics");
+            return caches.match("/offline.html");
           }
         });
       })

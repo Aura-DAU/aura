@@ -11,8 +11,6 @@ export default function CurriculumPage() {
     const filePath = path.join(
       process.cwd(),
       "data",
-      "Team D",
-      "madhav-data",
       "student_services",
       "programs_of_study.md"
     );
