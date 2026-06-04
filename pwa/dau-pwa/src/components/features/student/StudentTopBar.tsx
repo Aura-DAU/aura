@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { verticalsConfig } from "./sidebarConfig";
+import { useAuth } from "@/lib/auth/authContext";
 
 interface SearchResult {
   label: string;
@@ -29,6 +30,12 @@ export default function StudentTopBar() {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    router.replace("/");
+  };
 
   const filteredResults: SearchResult[] = searchQuery.trim()
     ? allRoutes.filter(
@@ -248,23 +255,33 @@ export default function StudentTopBar() {
         </button>
 
         {/* User Profile Info Card */}
-        <div className="flex items-center gap-3 group cursor-pointer">
+        <div className="flex items-center gap-3 group">
           <div className="relative shrink-0">
-            <div className="w-9 h-9 rounded-full border border-slate-200 overflow-hidden shadow-sm group-hover:scale-105 transition-transform duration-200">
+            <div className="w-9 h-9 rounded-full border border-slate-200 overflow-hidden shadow-sm">
               <div className="w-full h-full bg-orange-50 flex items-center justify-center font-black text-xs text-[#E8400C]">
-                RS
+                {user?.studentId?.slice(0, 2).toUpperCase() ?? "ST"}
               </div>
             </div>
           </div>
           <div className="text-left hidden sm:block leading-tight">
-            <p className="text-xs font-black text-slate-800 group-hover:text-[#E8400C] transition-colors duration-150">
-              Rahul Sharma
+            <p className="text-xs font-black text-slate-800">
+              {user?.studentId ?? "Student"}
             </p>
             <p className="text-[9px] text-emerald-600 font-bold mt-0.5 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
               Active
             </p>
           </div>
+          {/* Logout button */}
+          <button
+            onClick={handleLogout}
+            title="Sign out"
+            className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all duration-200 ml-1"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+            </svg>
+          </button>
         </div>
       </div>
     </header>

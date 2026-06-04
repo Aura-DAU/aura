@@ -1,9 +1,10 @@
 import React from "react";
+import AuthGuard from "@/components/common/AuthGuard";
 
 export default function StudentLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <AuthGuard>{children}</AuthGuard>;
 }
