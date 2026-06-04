@@ -1,0 +1,16 @@
+# Python virtual environment
+.venv/
+venv/
+ENV/
+
+# Python cache / compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local configuration / secrets
+.env
+.env.local
+.env.*.local
