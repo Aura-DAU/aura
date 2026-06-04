@@ -5,6 +5,7 @@ import path from "path";
 import { z } from "zod";
 import { callClaude } from "@/lib/ai/aiClient";
 import { AURA_SYSTEM_PROMPT } from "@/lib/ai/prompts/chatPrompt";
+import { callRagPipeline } from "@/lib/api/ragClient";
 
 export interface ChatMessage {
   role: "user" | "assistant";
