@@ -158,7 +158,7 @@ export default function Home() {
               </p>
             </div>
 
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4">
               {/* Student ID */}
               <div>
                 <label className="block text-xs font-black text-slate-700 mb-1.5 uppercase tracking-wide">
