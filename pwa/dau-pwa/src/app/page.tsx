@@ -295,21 +295,6 @@ export default function Home() {
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="flex items-center gap-3 my-5">
-              <div className="flex-1 h-px bg-[#E2E8F0]" />
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">or</span>
-              <div className="flex-1 h-px bg-[#E2E8F0]" />
-            </div>
-
-            {/* AURA guest shortcut */}
-            <Link
-              href="/student/chat"
-              className="flex items-center justify-center gap-2 w-full bg-orange-50 hover:bg-orange-100 border border-orange-200 text-[#E8400C] text-xs font-black py-3 px-6 rounded-[16px] transition-colors"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              Continue as Guest · Ask AURA
-            </Link>
 
             <p className="text-[10px] text-slate-400 font-medium text-center mt-4 leading-relaxed">
               Contact{" "}
