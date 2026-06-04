@@ -1,11 +1,96 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { verticalsConfig } from "./sidebarConfig";
+
+interface SearchResult {
+  label: string;
+  href: string;
+  section: string;
+}
+
+// Flatten all nav items into one searchable list
+const allRoutes: SearchResult[] = Object.values(verticalsConfig).flatMap(
+  (vertical) =>
+    vertical.items.map((item) => ({
+      label: item.label,
+      href: item.href,
+      section: vertical.label,
+    }))
+);
 
 export default function StudentTopBar() {
-  const [searchFocused, setSearchFocused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const filteredResults: SearchResult[] = searchQuery.trim()
+    ? allRoutes.filter(
+        (route) =>
+          route.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          route.section.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  const handleSelect = (href: string) => {
+    router.push(href);
+    setSearchQuery("");
+    setShowDropdown(false);
+    setActiveIndex(-1);
+    inputRef.current?.blur();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showDropdown) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((prev) =>
+        prev < filteredResults.length - 1 ? prev + 1 : prev
+      );
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev > 0 ? prev - 1 : 0));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const target =
+        activeIndex >= 0 ? filteredResults[activeIndex] : filteredResults[0];
+      if (target) handleSelect(target.href);
+    } else if (e.key === "Escape") {
+      setShowDropdown(false);
+      setSearchQuery("");
+      setActiveIndex(-1);
+      inputRef.current?.blur();
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setActiveIndex(-1);
+    setShowDropdown(true);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const hasQuery = searchQuery.trim().length > 0;
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white border-b border-[#E2E8F0] px-6 py-4 flex items-center justify-between gap-4 text-slate-800 shadow-sm">
@@ -22,27 +107,57 @@ export default function StudentTopBar() {
       </div>
 
       {/* Center: Search Bar */}
-      <div className="flex-1 max-w-md mx-6 relative hidden md:block">
+      <div
+        ref={containerRef}
+        className="flex-1 max-w-md mx-6 relative hidden md:block"
+      >
+        {/* Input */}
         <div
           className={`flex items-center justify-between gap-2 px-5 py-2.5 rounded-full bg-slate-50 border transition-all duration-300 ${
-            searchFocused
+            showDropdown && hasQuery
+              ? "border-[#E8400C] ring-1 ring-[#E8400C]/20 bg-white rounded-b-none border-b-transparent"
+              : showDropdown
               ? "border-[#E8400C] ring-1 ring-[#E8400C]/20 bg-white"
               : "border-slate-200 hover:border-slate-300"
           }`}
         >
           <input
+            ref={inputRef}
             type="text"
             placeholder="Search courses, guidelines, events..."
             className="bg-transparent text-xs text-slate-800 focus:outline-none w-full placeholder-slate-400 font-medium"
-            onFocus={() => setSearchFocused(true)}
-            onBlur={() => setSearchFocused(false)}
+            value={searchQuery}
+            onChange={handleChange}
+            onFocus={() => setShowDropdown(true)}
+            onKeyDown={handleKeyDown}
+            autoComplete="off"
           />
+          {/* Clear button */}
+          {hasQuery && (
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery("");
+                setShowDropdown(false);
+                setActiveIndex(-1);
+                inputRef.current?.focus();
+              }}
+              className="text-slate-400 hover:text-slate-600 transition-colors duration-150 shrink-0"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
           <svg
-            className="w-4 h-4 text-slate-400 cursor-pointer hover:text-slate-600 transition-colors duration-150"
+            className="w-4 h-4 text-slate-400 cursor-pointer hover:text-[#E8400C] transition-colors duration-150 shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2.5}
+            onClick={() => {
+              if (filteredResults.length > 0) handleSelect(filteredResults[0].href);
+            }}
           >
             <path
               strokeLinecap="round"
@@ -51,6 +166,54 @@ export default function StudentTopBar() {
             />
           </svg>
         </div>
+
+        {/* Dropdown */}
+        {showDropdown && hasQuery && (
+          <div className="absolute left-0 right-0 top-full bg-white border border-[#E8400C] border-t-0 rounded-b-2xl shadow-lg overflow-hidden z-50 max-h-72 overflow-y-auto">
+            {filteredResults.length > 0 ? (
+              <>
+                {filteredResults.map((result, i) => (
+                  <button
+                    key={result.href}
+                    type="button"
+                    onMouseDown={(e) => {
+                      e.preventDefault(); // prevent blur before click
+                      handleSelect(result.href);
+                    }}
+                    onMouseEnter={() => setActiveIndex(i)}
+                    className={`w-full text-left flex items-center justify-between gap-3 px-5 py-3 transition-colors duration-100 ${
+                      activeIndex === i
+                        ? "bg-orange-50"
+                        : "hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span className="text-xs font-semibold text-slate-800 truncate">
+                        {result.label}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-bold text-[#E8400C] bg-orange-50 border border-orange-100 px-2 py-0.5 rounded-full shrink-0">
+                      {result.section}
+                    </span>
+                  </button>
+                ))}
+              </>
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-2 px-5 py-6 text-slate-400">
+                <svg className="w-8 h-8 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <p className="text-xs font-semibold">No results found</p>
+                <p className="text-[10px]">
+                  Try &ldquo;courses&rdquo;, &ldquo;hostel&rdquo;, or &ldquo;placements&rdquo;
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Right: Notifications & User Avatar */}
