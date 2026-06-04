@@ -1,16 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import fs from "fs";
 import { callClaude } from "@/lib/ai/aiClient";
-import { callRagPipeline } from "@/lib/api/ragClient";
 
 // Mock the AI client
 vi.mock("@/lib/ai/aiClient", () => ({
   callClaude: vi.fn(),
-}));
-
-// Mock the RAG pipeline client
-vi.mock("@/lib/api/ragClient", () => ({
-  callRagPipeline: vi.fn(),
 }));
 
 describe("askAura server action", () => {
@@ -142,61 +136,5 @@ describe("askAura server action", () => {
 
     expect(result.success).toBe(false);
     expect(result.content).toBe("Failed to connect to Claude AI services.");
-  });
-
-  it("should call FastAPI RAG pipeline when FASTAPI_RAG_URL is configured", async () => {
-    process.env.FASTAPI_RAG_URL = "http://localhost:8000";
-
-    delete process.env.ANTHROPIC_API_KEY;
-
-    vi.mocked(callRagPipeline).mockResolvedValue({
-      success: true,
-      content: "The hostel curfew is 10 PM according to FastAPI RAG.",
-      citations: [{ title: "Hostel Rules (Student Services)", file: "hostel_rules.md" }],
-    });
-
-    const payload = {
-      message: "What is the hostel curfew?",
-      history: [],
-      studentProfile: {
-        name: "Test Student",
-        branch: "ICT",
-        year: "1st Year",
-        semester: "Sem I",
-        interests: "Coding",
-      },
-    };
-
-    const result = await askAura(payload);
-
-    expect(result.success).toBe(true);
-    expect(result.content).toContain("FastAPI RAG");
-    expect(result.citations).toHaveLength(1);
-    expect(vi.mocked(callRagPipeline)).toHaveBeenCalled();
-  });
-
-  it("should fall back to offline mode when FastAPI pipeline throws", async () => {
-    process.env.FASTAPI_RAG_URL = "http://localhost:8000";
-    delete process.env.ANTHROPIC_API_KEY;
-
-    vi.mocked(callRagPipeline).mockRejectedValue(new Error("FastAPI returned HTTP 500"));
-
-    const payload = {
-      message: "What is the hostel curfew timing?",
-      history: [],
-      studentProfile: {
-        name: "Test Student",
-        branch: "ICT",
-        year: "1st Year",
-        semester: "Sem I",
-        interests: "Coding",
-      },
-    };
-
-    const result = await askAura(payload);
-
-    // Should fall back to the offline keyword match, not crash
-    expect(result.success).toBe(true);
-    expect(result.content).toContain("AURA Offline Assistant");
   });
 });

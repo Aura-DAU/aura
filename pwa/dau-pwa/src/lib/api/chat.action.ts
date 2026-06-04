@@ -177,26 +177,7 @@ export async function askAura(payload: {
       .replace("{{STUDENT_PROFILE}}", studentProfileStr)
       .replace("{{GROUNDING_CONTEXT}}", groundingContext);
 
-    // 3a. FastAPI RAG Pipeline (priority-1)
-    if (process.env.FASTAPI_RAG_URL) {
-      try {
-        const ragResult = await callRagPipeline({
-          message,
-          history,
-          student_profile: studentProfile,
-        });
-        return {
-          success: ragResult.success,
-          content: ragResult.content,
-          citations: ragResult.citations ?? [],
-        };
-      } catch (ragError) {
-        console.error("FastAPI RAG pipeline failed, falling back:", ragError);
-        // Fall through to Anthropic / offline fallback below
-      }
-    }
-
-    // 3b. Check for Claude API Key (priority-2)
+    // 3. Check for Claude API Key
     if (process.env.ANTHROPIC_API_KEY) {
       const response = await callClaude({
         systemPrompt,
