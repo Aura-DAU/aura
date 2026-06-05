@@ -61,6 +61,7 @@ export async function askAura(payload: {
       body: JSON.stringify({
         question: payload.message,
         history: slicedHistory,
+        studentProfile: payload.studentProfile,
       }),
     });
 

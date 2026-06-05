@@ -12,16 +12,25 @@ class HistoryTurn(BaseModel):
     role: str
     content: str
 
+class StudentProfile(BaseModel):
+    name: Optional[str] = None
+    branch: Optional[str] = None
+    year: Optional[str] = None
+    semester: Optional[str] = None
+    interests: Optional[str] = None
+
 class ChatRequest(BaseModel):
     question: str
     history: Optional[List[HistoryTurn]] = None
+    studentProfile: Optional[StudentProfile] = None
 
 ALLOWED_EXTENSIONS = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 
 @app.post("/chat")
 def chat(request: ChatRequest):
     history_list = [turn.dict() for turn in request.history] if request.history else None
-    return answer_question(request.question, history=history_list)
+    profile_dict = request.studentProfile.dict() if request.studentProfile else None
+    return answer_question(request.question, history=history_list, student_profile=profile_dict)
 
 
 @app.post("/speech")

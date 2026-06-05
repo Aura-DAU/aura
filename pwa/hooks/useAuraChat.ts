@@ -46,6 +46,17 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const audioContextRef = useRef<AudioContext | null>(null);
+
+  const closeAudioContext = () => {
+    const ctx = audioContextRef.current;
+    if (ctx) {
+      audioContextRef.current = null;
+      if (ctx.state !== "closed") {
+        ctx.close().catch(console.error);
+      }
+    }
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -114,6 +125,8 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       };
 
       mediaRecorder.onstop = async () => {
+        closeAudioContext();
+
         const audioBlob = new Blob(audioChunksRef.current, {
           type: mediaRecorder.mimeType || "audio/webm",
         });
@@ -135,11 +148,8 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
               filename,
             });
 
-            if (result.success && result.text) {
-              setInputText((prev) => {
-                const space = prev.trim() ? " " : "";
-                return prev + space + result.text;
-              });
+            if (result.success && result.text && result.text.trim()) {
+              void handleSendMessage(result.text);
             } else if (result.error) {
               setErrorMessage(result.error);
             }
@@ -151,6 +161,72 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
           }
         };
       };
+
+      // Silence (Voice Activity) Detection
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const AudioCtxClass = window.AudioContext || (window as any).webkitAudioContext;
+        const audioCtx = new AudioCtxClass();
+        audioContextRef.current = audioCtx;
+
+        if (audioCtx.state === "suspended") {
+          await audioCtx.resume();
+        }
+
+        const source = audioCtx.createMediaStreamSource(stream);
+        const analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 512;
+        source.connect(analyser);
+
+        const bufferLength = analyser.fftSize;
+        const dataArray = new Uint8Array(bufferLength);
+
+        // eslint-disable-next-line react-hooks/purity
+        let silenceStart = Date.now();
+        const silenceThreshold = 0.01; // Slightly more sensitive volume threshold
+        const silenceDurationLimit = 1500; // 1.5 seconds of silence after speaking to auto-stop
+        const initialSilenceDurationLimit = 5000; // 5 seconds of initial silence before auto-stopping
+        let hasSpoken = false;
+        let isChecking = true;
+
+        const checkSilence = () => {
+          if (!isChecking || (mediaRecorder.state as string) === "inactive") return;
+
+          analyser.getByteTimeDomainData(dataArray);
+          let sum = 0;
+          for (let i = 0; i < bufferLength; i++) {
+            const val = (dataArray[i] - 128) / 128;
+            sum += val * val;
+          }
+          const rms = Math.sqrt(sum / bufferLength);
+
+          if (rms >= silenceThreshold) {
+            if (!hasSpoken) {
+              hasSpoken = true;
+            }
+            silenceStart = Date.now();
+          }
+
+          const silentTime = Date.now() - silenceStart;
+          const limit = hasSpoken ? silenceDurationLimit : initialSilenceDurationLimit;
+
+          if (silentTime > limit) {
+            isChecking = false;
+            if ((mediaRecorder.state as string) !== "inactive") {
+              mediaRecorder.stop();
+            }
+            setIsRecording(false);
+            closeAudioContext();
+            return;
+          }
+
+          requestAnimationFrame(checkSilence);
+        };
+
+        requestAnimationFrame(checkSilence);
+      } catch (audioErr) {
+        console.warn("Failed to initialize silence detection audio context:", audioErr);
+      }
 
       mediaRecorderRef.current = mediaRecorder;
       mediaRecorder.start();
@@ -166,6 +242,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
     }
+    closeAudioContext();
   };
 
   const handleMicClick = () => {
