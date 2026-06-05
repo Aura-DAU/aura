@@ -53,6 +53,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     const savedHistory = localStorage.getItem(storageKey);
     if (savedHistory) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMessages(JSON.parse(savedHistory));
       } catch {
         console.error("Error loading chat history");

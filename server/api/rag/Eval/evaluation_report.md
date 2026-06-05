@@ -24,7 +24,7 @@ Our evaluation suite consists of **3,609 unique custom-curated questions** (with
 
 ## ⚙️ Benchmarking Framework & Execution
 
-We have created an automated evaluation runner: [run_eval.py](file:///Users/meetvirugama/Desktop/DAU-pwa/server/api/rag/Eval/run_eval.py).
+We have created an automated evaluation runner: [run_eval.py](file:///Users/vedant_shah/DAU-pwa/server/api/rag/Eval/run_eval.py).
 
 ### How to Run the Benchmark
 Once the RAG API is running locally (e.g., on `http://localhost:3000/api/chat`), execute the following command:
@@ -34,7 +34,7 @@ python3 server/api/rag/Eval/run_eval.py --api-url http://localhost:3000/api/chat
 ```
 
 ### Script Output
-* The script outputs a summary to the console and generates [evaluation_results.json](file:///Users/meetvirugama/Desktop/DAU-pwa/server/api/rag/Eval/evaluation_results.json).
+* The script outputs a summary to the console and generates [evaluation_results.json](file:///Users/vedant_shah/DAU-pwa/server/api/rag/Eval/evaluation_results.json).
 * The JSON results track exactly which questions passed or failed, the returned citations, and the latency in seconds.
 
 ---

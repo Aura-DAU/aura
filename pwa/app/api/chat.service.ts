@@ -52,12 +52,15 @@ export async function askAura(payload: {
   studentProfile: StudentProfile;
 }): Promise<AskAuraResult> {
   try {
+    // Limit history payload size to prevent validation and token limit issues
+    const slicedHistory = payload.history.slice(-20);
+
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         question: payload.message,
-        history: payload.history,
+        history: slicedHistory,
       }),
     });
 

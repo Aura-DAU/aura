@@ -9,10 +9,10 @@ const HistoryTurnSchema = z.object({
 
 const BodySchema = z.object({
   question: z.string().min(1).max(2000),
-  history: z.array(HistoryTurnSchema).max(40).optional(),
+  history: z.array(HistoryTurnSchema).max(100).optional(),
 });
 
-const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
+const BACKEND_URL = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
 
 export async function POST(request: Request) {
   let body: unknown;

@@ -17,6 +17,7 @@ export default function ProfileModal({
   const [formData, setFormData] = React.useState<StudentProfile>(profile);
 
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormData(profile);
   }, [profile]);
 

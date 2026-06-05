@@ -31,7 +31,7 @@ def run_evaluation(api_url: str, csv_path: str, output_path: str) -> None:
         
         print(f"[{i}/{total}] Testing: {question_text[:50]}...")
         
-        payload = {"message": question_text}
+        payload = {"question": question_text}
         
         try:
             # Call the local RAG API
@@ -40,12 +40,27 @@ def run_evaluation(api_url: str, csv_path: str, output_path: str) -> None:
             
             if response.status_code == 200:
                 data = response.json()
-                # Expected structure: { "answer": "...", "sources": ["url1", "url2"] }
                 answer = data.get("answer", "")
-                sources = [s.strip() for s in data.get("sources", [])]
                 
-                # Check if expected source is cited
-                source_matched = any(expected_source.lower() in s.lower() for s in sources)
+                # Support both list of strings and list of dicts for sources
+                raw_sources = data.get("sources", [])
+                sources = []
+                source_matched = False
+                
+                for s in raw_sources:
+                    if isinstance(s, dict):
+                        url = s.get("url", "") or ""
+                        title = s.get("title", "") or ""
+                        section = s.get("section", "") or ""
+                        sources.append(url if url else f"{title} - {section}")
+                        
+                        exp_lower = expected_source.lower()
+                        if exp_lower in url.lower() or exp_lower in title.lower() or exp_lower in section.lower():
+                            source_matched = True
+                    elif isinstance(s, str):
+                        sources.append(s.strip())
+                        if expected_source.lower() in s.lower():
+                            source_matched = True
                 
                 # Basic check if answer contains text or is fallback
                 is_valid_answer = len(answer.strip()) > 0
