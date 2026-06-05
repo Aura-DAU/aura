@@ -4,17 +4,24 @@ from pydantic import BaseModel
 from rag import answer_question
 from Pipeline.speech import transcribe_audio
 import os
+from typing import List, Optional
 
 app = FastAPI(title="DAU RAG API")
 
+class HistoryTurn(BaseModel):
+    role: str
+    content: str
+
 class ChatRequest(BaseModel):
     question: str
+    history: Optional[List[HistoryTurn]] = None
 
 ALLOWED_EXTENSIONS = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    return answer_question(request.question)
+    history_list = [turn.dict() for turn in request.history] if request.history else None
+    return answer_question(request.question, history=history_list)
 
 
 @app.post("/speech")
@@ -44,7 +51,7 @@ async def speech(file: UploadFile = File(...)):
 
         question = transcribe_audio(temp_path)
 
-        return answer_question(question)
+        return {"text": question}
         
     except Exception as e:
         print("Speech endpoint error:")
