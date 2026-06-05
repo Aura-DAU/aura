@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     EMBED_MODEL: str = "all-MiniLM-L6-v2"
 
     # Number of top documents to retrieve per query
-    TOP_K: int = 5
+    TOP_K: int = 10
 
     # ------------------------------------------------------------------
     # Server

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, field_validator
-from typing import Literal
+from typing import Literal, Optional
 
 
 # ---------------------------------------------------------------------------
@@ -12,12 +12,28 @@ class ChatMessage(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Student profile — sent by the PWA frontend for response personalisation.
+# All fields are optional so the schema stays backward-compatible with callers
+# that do not include profile data.
+# ---------------------------------------------------------------------------
+
+class StudentProfile(BaseModel):
+    name: str = ""
+    branch: str = ""
+    year: str = ""
+    semester: str = ""
+    interests: str = ""
+
+
+# ---------------------------------------------------------------------------
 # /api/chat  —  Request
 # ---------------------------------------------------------------------------
 
 class ChatRequest(BaseModel):
     message: str
     history: list[ChatMessage] = []
+    # Optional: PWA sends studentProfile; ignored if not provided
+    student_profile: Optional[StudentProfile] = None
 
     @field_validator("message")
     @classmethod
@@ -28,29 +44,35 @@ class ChatRequest(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# /api/chat  —  Response
+# /api/chat  —  Response (superset)
 #
-# Matches the contract expected by the eval harness (run_eval.py):
-#   { "answer": "...", "sources": ["url1", "url2"] }
+# Satisfies two contracts simultaneously:
+#   1. Eval harness (run_eval.py):  reads `answer` and `sources`
+#   2. PWA frontend (useAuraChat):  reads `success`, `content`, `citations`
 #
-# The Next.js ragClient.ts also reads these fields.
-# ---------------------------------------------------------------------------
-
-class ChatResponse(BaseModel):
-    answer: str
-    sources: list[str] = []     # source URLs from document YAML front-matter
-
-
-# ---------------------------------------------------------------------------
-# Legacy / PWA bridge — the Next.js frontend currently expects the shape:
-#   { success, content, citations: [{title, file}] }
-# We expose this as an additional response model for the /api/chat/pwa route.
+# The Next.js proxy at pwa/src/app/api/chat/route.ts forwards this verbatim.
 # ---------------------------------------------------------------------------
 
 class PwaCitation(BaseModel):
     title: str
     file: str
 
+
+class ChatResponse(BaseModel):
+    # Eval-harness fields
+    answer: str
+    sources: list[str] = []     # source URLs from document YAML front-matter
+
+    # PWA frontend fields (mirrors PwaChatResponse shape)
+    success: bool = True
+    content: str = ""           # same text as `answer`; populated by endpoint
+    citations: list[PwaCitation] = []
+
+
+# ---------------------------------------------------------------------------
+# Legacy /api/chat/pwa bridge — kept for backward compatibility.
+# New callers should prefer /api/chat which now returns the superset above.
+# ---------------------------------------------------------------------------
 
 class PwaChatResponse(BaseModel):
     success: bool
