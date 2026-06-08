@@ -1,0 +1,324 @@
+Question ID,Question,Subcategory,Difficulty,Expected Source
+Q0001,Does the latest version of Machine Learning override the requirements listed in Minor Degree?,Policy Ambiguity,Hard,Academic Handbook
+Q0002,"If a student failed Major Degree in 2024 but passed the supplementary exam in 2025, what policy applies?",Multi-Hop Retrieval,Hard,Program Regulations
+Q0003,Find the minimum CGPA required for Scholarship Renewal and explain any exceptions.,Prerequisite Analysis,Medium,Course Catalog
+Q0004,"According to the academic handbook, can a student who completed Academic Probation but not Machine Learning enroll in Summer Term?",Policy Ambiguity,Medium,Academic Handbook
+Q0005,"Across all versions of the handbook, what changed regarding Thesis Submission between consecutive revisions and which version is authoritative?",Table Lookup,Easy,Academic Handbook
+Q0006,"According to the academic handbook, can a student who completed Summer Term but not Capstone Project enroll in Thesis Submission?",Prerequisite Analysis,Easy,Program Regulations
+Q0007,"Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Thesis Submission.",Citation Verification,Easy,Course Catalog
+Q0008,Find the minimum CGPA required for Academic Probation and explain any exceptions.,Cross-Document Reasoning,Hard,Curriculum Guide
+Q0009,Find the minimum CGPA required for Semester Withdrawal and explain any exceptions.,Policy Ambiguity,Medium,Student Policy Manual
+Q0010,"Across all versions of the handbook, what changed regarding Elective Selection between consecutive revisions and which version is authoritative?",Table Lookup,Easy,Curriculum Guide
+Q0011,"List every prerequisite chain leading to Data Structures, including indirect prerequisites and waived conditions.",Exam Regulations,Medium,Curriculum Guide
+Q0012,What is the difference between the attendance requirement stated in Internship Registration and the rule mentioned in Machine Learning?,Prerequisite Analysis,Hard,Academic Handbook
+Q0013,Compare the grading policy of Thesis Submission with the grading policy of Capstone Project.,Citation Verification,Hard,Course Catalog
+Q0014,"Using information from multiple PDFs, determine whether exceptions to Scholarship Renewal contradict the policy for Machine Learning.",Citation Verification,Hard,Academic Handbook
+Q0015,"Across all versions of the handbook, what changed regarding Academic Probation between consecutive revisions and which version is authoritative?",Multi-Hop Retrieval,Medium,Program Regulations
+Q0016,Does the latest version of Hostel Allocation override the requirements listed in Research Project?,Cross-Document Reasoning,Medium,Multiple Documents
+Q0017,Find the minimum CGPA required for Research Project and explain any exceptions.,Multi-Hop Retrieval,Hard,Student Policy Manual
+Q0018,Find the minimum CGPA required for Internship Registration and explain any exceptions.,Curriculum Rules,Hard,Academic Handbook
+Q0019,Which document has precedence when Semester Withdrawal conflicts with Data Structures?,Acronym Disambiguation,Medium,Academic Handbook
+Q0020,"Across all versions of the handbook, what changed regarding Data Structures between consecutive revisions and which version is authoritative?",Exam Regulations,Hard,Academic Handbook
+Q0021,"Using information from multiple PDFs, determine whether exceptions to Internship Registration contradict the policy for Elective Selection.",Exam Regulations,Medium,Course Catalog
+Q0022,"List every prerequisite chain leading to Course Registration, including indirect prerequisites and waived conditions.",Temporal Reasoning,Medium,Program Regulations
+Q0023,"According to the academic handbook, can a student who completed Semester Withdrawal but not Thesis Submission enroll in Major Degree?",Curriculum Rules,Medium,Program Regulations
+Q0024,"According to the academic handbook, can a student who completed Elective Selection but not Internship Registration enroll in Research Project?",Multi-Hop Retrieval,Hard,Curriculum Guide
+Q0025,"Across all versions of the handbook, what changed regarding Internship Registration between consecutive revisions and which version is authoritative?",Curriculum Rules,Hard,Student Policy Manual
+Q0026,Compare the grading policy of Data Structures with the grading policy of Machine Learning.,Curriculum Rules,Easy,Multiple Documents
+Q0027,Compare the grading policy of Minor Degree with the grading policy of Summer Term.,Policy Ambiguity,Hard,Academic Handbook
+Q0029,Which document has precedence when Internship Registration conflicts with Hostel Allocation?,Cross-Document Reasoning,Easy,Multiple Documents
+Q0030,"Across all versions of the handbook, what changed regarding Research Project between consecutive revisions and which version is authoritative?",Citation Verification,Medium,Curriculum Guide
+Q0032,Identify every document that mentions Capstone Project and explain the differences.,Prerequisite Analysis,Medium,Course Catalog
+Q0033,"List every prerequisite chain leading to Summer Term, including indirect prerequisites and waived conditions.",Curriculum Rules,Hard,Academic Handbook
+Q0034,What is the difference between the attendance requirement stated in Hostel Allocation and the rule mentioned in Machine Learning?,Prerequisite Analysis,Hard,Program Regulations
+Q0035,"Across all versions of the handbook, what changed regarding Capstone Project between consecutive revisions and which version is authoritative?",Temporal Reasoning,Medium,Student Policy Manual
+Q0036,Compare the grading policy of Data Structures with the grading policy of Capstone Project.,Policy Ambiguity,Easy,Student Policy Manual
+Q0037,"According to the academic handbook, can a student who completed Capstone Project but not Summer Term enroll in Academic Probation?",Exam Regulations,Hard,Multiple Documents
+Q0038,Compare the grading policy of Research Project with the grading policy of Elective Selection.,Citation Verification,Hard,Academic Handbook
+Q0039,"If a student failed Capstone Project in 2024 but passed the supplementary exam in 2025, what policy applies?",Curriculum Rules,Medium,Student Policy Manual
+Q0040,"Across all versions of the handbook, what changed regarding Summer Term between consecutive revisions and which version is authoritative?",Policy Ambiguity,Hard,Academic Handbook
+Q0041,Identify every document that mentions Course Registration and explain the differences.,Curriculum Rules,Easy,Multiple Documents
+Q0042,"Using information from multiple PDFs, determine whether exceptions to Minor Degree contradict the policy for Elective Selection.",Temporal Reasoning,Hard,Student Policy Manual
+Q0043,"According to the academic handbook, can a student who completed Course Registration but not Major Degree enroll in Data Structures?",Citation Verification,Hard,Course Catalog
+Q0047,Which document has precedence when Academic Probation conflicts with Elective Selection?,Temporal Reasoning,Easy,Academic Handbook
+Q0048,Find the minimum CGPA required for Major Degree and explain any exceptions.,Policy Ambiguity,Easy,Academic Handbook
+Q0049,"Using information from multiple PDFs, determine whether exceptions to Elective Selection contradict the policy for Scholarship Renewal.",Acronym Disambiguation,Medium,Academic Handbook
+Q0050,"Across all versions of the handbook, what changed regarding Hostel Allocation between consecutive revisions and which version is authoritative?",Exam Regulations,Medium,Multiple Documents
+Q0051,"According to the academic handbook, can a student who completed Scholarship Renewal but not Thesis Submission enroll in Research Project?",Citation Verification,Medium,Student Policy Manual
+Q0052,What is the difference between the attendance requirement stated in Hostel Allocation and the rule mentioned in Academic Probation?,Citation Verification,Medium,Student Policy Manual
+Q0053,Compare the grading policy of Research Project with the grading policy of Internship Registration.,Policy Ambiguity,Easy,Student Policy Manual
+Q0054,Summarize all eligibility conditions for Major Degree using information from multiple academic documents.,Acronym Disambiguation,Easy,Student Policy Manual
+Q0055,"Across all versions of the handbook, what changed regarding Major Degree between consecutive revisions and which version is authoritative?",Prerequisite Analysis,Hard,Multiple Documents
+Q0056,"Using information from multiple PDFs, determine whether exceptions to Scholarship Renewal contradict the policy for Summer Term.",Cross-Document Reasoning,Medium,Course Catalog
+Q0057,Does the latest version of Course Registration override the requirements listed in Elective Selection?,Curriculum Rules,Medium,Course Catalog
+Q0058,A student satisfies all conditions except Research Project. Can they still apply for Minor Degree?,Policy Ambiguity,Medium,Program Regulations
+Q0059,Does the latest version of Semester Withdrawal override the requirements listed in Hostel Allocation?,Prerequisite Analysis,Easy,Curriculum Guide
+Q0060,"Across all versions of the handbook, what changed regarding Minor Degree between consecutive revisions and which version is authoritative?",Table Lookup,Hard,Multiple Documents
+Q0061,Compare the grading policy of Summer Term with the grading policy of Research Project.,Temporal Reasoning,Hard,Program Regulations
+Q0062,A student satisfies all conditions except Summer Term. Can they still apply for Hostel Allocation?,Acronym Disambiguation,Medium,Curriculum Guide
+Q0063,"Using information from multiple PDFs, determine whether exceptions to Thesis Submission contradict the policy for Machine Learning.",Exam Regulations,Hard,Curriculum Guide
+Q0064,"According to the academic handbook, can a student who completed Scholarship Renewal but not Major Degree enroll in Elective Selection?",Policy Ambiguity,Easy,Course Catalog
+Q0066,"List every prerequisite chain leading to Major Degree, including indirect prerequisites and waived conditions.",Exam Regulations,Hard,Curriculum Guide
+Q0067,A student satisfies all conditions except Summer Term. Can they still apply for Major Degree?,Table Lookup,Hard,Academic Handbook
+Q0068,A student satisfies all conditions except Thesis Submission. Can they still apply for Internship Registration?,Exam Regulations,Easy,Student Policy Manual
+Q0069,Does the latest version of Thesis Submission override the requirements listed in Minor Degree?,Policy Ambiguity,Medium,Course Catalog
+Q0071,Summarize all eligibility conditions for Academic Probation using information from multiple academic documents.,Exam Regulations,Hard,Multiple Documents
+Q0072,Does the latest version of Thesis Submission override the requirements listed in Internship Registration?,Acronym Disambiguation,Easy,Multiple Documents
+Q0073,Compare the grading policy of Course Registration with the grading policy of Machine Learning.,Prerequisite Analysis,Easy,Program Regulations
+Q0074,"If a student failed Scholarship Renewal in 2024 but passed the supplementary exam in 2025, what policy applies?",Curriculum Rules,Hard,Program Regulations
+Q0075,"Across all versions of the handbook, what changed regarding Course Registration between consecutive revisions and which version is authoritative?",Cross-Document Reasoning,Easy,Course Catalog
+Q0076,Identify every document that mentions Academic Probation and explain the differences.,Cross-Document Reasoning,Hard,Curriculum Guide
+Q0077,"Using information from multiple PDFs, determine whether exceptions to Machine Learning contradict the policy for Thesis Submission.",Curriculum Rules,Medium,Course Catalog
+Q0078,Compare the grading policy of Summer Term with the grading policy of Academic Probation.,Temporal Reasoning,Hard,Curriculum Guide
+Q0079,Compare the grading policy of Capstone Project with the grading policy of Hostel Allocation.,Citation Verification,Easy,Academic Handbook
+Q0081,Identify every document that mentions Semester Withdrawal and explain the differences.,Prerequisite Analysis,Hard,Curriculum Guide
+Q0082,Which document has precedence when Course Registration conflicts with Internship Registration?,Prerequisite Analysis,Hard,Course Catalog
+Q0083,What is the difference between the attendance requirement stated in Summer Term and the rule mentioned in Data Structures?,Table Lookup,Medium,Curriculum Guide
+Q0084,"Using information from multiple PDFs, determine whether exceptions to Academic Probation contradict the policy for Capstone Project.",Acronym Disambiguation,Hard,Multiple Documents
+Q0086,Which document has precedence when Course Registration conflicts with Research Project?,Acronym Disambiguation,Easy,Course Catalog
+Q0087,Find the minimum CGPA required for Elective Selection and explain any exceptions.,Acronym Disambiguation,Hard,Student Policy Manual
+Q0088,"List every prerequisite chain leading to Capstone Project, including indirect prerequisites and waived conditions.",Multi-Hop Retrieval,Easy,Curriculum Guide
+Q0089,Does the latest version of Research Project override the requirements listed in Summer Term?,Citation Verification,Easy,Multiple Documents
+Q0091,"Using information from multiple PDFs, determine whether exceptions to Elective Selection contradict the policy for Hostel Allocation.",Exam Regulations,Hard,Curriculum Guide
+Q0092,"According to the academic handbook, can a student who completed Research Project but not Minor Degree enroll in Hostel Allocation?",Prerequisite Analysis,Medium,Curriculum Guide
+Q0093,Compare the grading policy of Hostel Allocation with the grading policy of Course Registration.,Exam Regulations,Easy,Curriculum Guide
+Q0097,"According to the academic handbook, can a student who completed Summer Term but not Hostel Allocation enroll in Scholarship Renewal?",Prerequisite Analysis,Hard,Student Policy Manual
+Q0098,"Using information from multiple PDFs, determine whether exceptions to Capstone Project contradict the policy for Thesis Submission.",Curriculum Rules,Medium,Program Regulations
+Q0102,Which document has precedence when Internship Registration conflicts with Minor Degree?,Exam Regulations,Medium,Student Policy Manual
+Q0103,Summarize all eligibility conditions for Hostel Allocation using information from multiple academic documents.,Prerequisite Analysis,Hard,Course Catalog
+Q0104,"According to the academic handbook, can a student who completed Minor Degree but not Data Structures enroll in Academic Probation?",Policy Ambiguity,Hard,Academic Handbook
+Q0106,Which document has precedence when Semester Withdrawal conflicts with Internship Registration?,Prerequisite Analysis,Hard,Program Regulations
+Q0107,Summarize all eligibility conditions for Scholarship Renewal using information from multiple academic documents.,Table Lookup,Easy,Academic Handbook
+Q0108,Which document has precedence when Thesis Submission conflicts with Scholarship Renewal?,Table Lookup,Easy,Multiple Documents
+Q0109,What is the difference between the attendance requirement stated in Machine Learning and the rule mentioned in Elective Selection?,Table Lookup,Easy,Curriculum Guide
+Q0111,Does the latest version of Research Project override the requirements listed in Thesis Submission?,Curriculum Rules,Hard,Academic Handbook
+Q0112,"Using information from multiple PDFs, determine whether exceptions to Academic Probation contradict the policy for Thesis Submission.",Curriculum Rules,Easy,Student Policy Manual
+Q0113,"According to the academic handbook, can a student who completed Data Structures but not Scholarship Renewal enroll in Research Project?",Citation Verification,Hard,Multiple Documents
+Q0114,A student satisfies all conditions except Minor Degree. Can they still apply for Machine Learning?,Curriculum Rules,Hard,Program Regulations
+Q0116,"According to the academic handbook, can a student who completed Capstone Project but not Semester Withdrawal enroll in Major Degree?",Exam Regulations,Medium,Course Catalog
+Q0117,Identify every document that mentions Elective Selection and explain the differences.,Temporal Reasoning,Medium,Course Catalog
+Q0118,Find the minimum CGPA required for Minor Degree and explain any exceptions.,Multi-Hop Retrieval,Hard,Multiple Documents
+Q0119,"Using information from multiple PDFs, determine whether exceptions to Semester Withdrawal contradict the policy for Elective Selection.",Citation Verification,Hard,Program Regulations
+Q0120,"Across all versions of the handbook, what changed regarding Scholarship Renewal between consecutive revisions and which version is authoritative?",Table Lookup,Hard,Curriculum Guide
+Q0122,Summarize all eligibility conditions for Machine Learning using information from multiple academic documents.,Exam Regulations,Hard,Academic Handbook
+Q0123,Find the minimum CGPA required for Thesis Submission and explain any exceptions.,Prerequisite Analysis,Medium,Program Regulations
+Q0124,Which document has precedence when Hostel Allocation conflicts with Thesis Submission?,Exam Regulations,Easy,Student Policy Manual
+Q0127,"According to the academic handbook, can a student who completed Academic Probation but not Summer Term enroll in Major Degree?",Table Lookup,Hard,Course Catalog
+Q0128,"According to the academic handbook, can a student who completed Major Degree but not Research Project enroll in Course Registration?",Multi-Hop Retrieval,Hard,Curriculum Guide
+Q0131,"According to the academic handbook, can a student who completed Elective Selection but not Hostel Allocation enroll in Academic Probation?",Multi-Hop Retrieval,Easy,Course Catalog
+Q0132,"List every prerequisite chain leading to Research Project, including indirect prerequisites and waived conditions.",Exam Regulations,Medium,Course Catalog
+Q0133,"Using information from multiple PDFs, determine whether exceptions to Thesis Submission contradict the policy for Academic Probation.",Table Lookup,Hard,Curriculum Guide
+Q0134,Which document has precedence when Summer Term conflicts with Semester Withdrawal?,Curriculum Rules,Medium,Program Regulations
+Q0136,"According to the academic handbook, can a student who completed Thesis Submission but not Semester Withdrawal enroll in Machine Learning?",Multi-Hop Retrieval,Medium,Multiple Documents
+Q0138,A student satisfies all conditions except Major Degree. Can they still apply for Scholarship Renewal?,Multi-Hop Retrieval,Medium,Course Catalog
+Q0139,A student satisfies all conditions except Research Project. Can they still apply for Machine Learning?,Prerequisite Analysis,Easy,Academic Handbook
+Q0141,What is the difference between the attendance requirement stated in Semester Withdrawal and the rule mentioned in Thesis Submission?,Table Lookup,Easy,Academic Handbook
+Q0142,Identify every document that mentions Research Project and explain the differences.,Multi-Hop Retrieval,Easy,Multiple Documents
+Q0143,"List every prerequisite chain leading to Hostel Allocation, including indirect prerequisites and waived conditions.",Acronym Disambiguation,Easy,Course Catalog
+Q0144,Identify every document that mentions Thesis Submission and explain the differences.,Acronym Disambiguation,Hard,Student Policy Manual
+Q0145,"Across all versions of the handbook, what changed regarding Semester Withdrawal between consecutive revisions and which version is authoritative?",Acronym Disambiguation,Hard,Curriculum Guide
+Q0146,Does the latest version of Major Degree override the requirements listed in Elective Selection?,Table Lookup,Medium,Course Catalog
+Q0147,"Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Summer Term.",Multi-Hop Retrieval,Medium,Academic Handbook
+Q0148,"According to the academic handbook, can a student who completed Scholarship Renewal but not Minor Degree enroll in Major Degree?",Cross-Document Reasoning,Easy,Multiple Documents
+Q0149,Identify every document that mentions Data Structures and explain the differences.,Acronym Disambiguation,Hard,Course Catalog
+Q0151,What is the difference between the attendance requirement stated in Capstone Project and the rule mentioned in Research Project?,Citation Verification,Medium,Student Policy Manual
+Q0153,Compare the grading policy of Machine Learning with the grading policy of Internship Registration.,Cross-Document Reasoning,Hard,Course Catalog
+Q0154,"Using information from multiple PDFs, determine whether exceptions to Internship Registration contradict the policy for Course Registration.",Multi-Hop Retrieval,Medium,Course Catalog
+Q0156,A student satisfies all conditions except Scholarship Renewal. Can they still apply for Machine Learning?,Exam Regulations,Medium,Curriculum Guide
+Q0157,Summarize all eligibility conditions for Semester Withdrawal using information from multiple academic documents.,Exam Regulations,Medium,Academic Handbook
+Q0158,A student satisfies all conditions except Data Structures. Can they still apply for Research Project?,Multi-Hop Retrieval,Hard,Program Regulations
+Q0159,Which document has precedence when Summer Term conflicts with Machine Learning?,Exam Regulations,Easy,Academic Handbook
+Q0161,"Using information from multiple PDFs, determine whether exceptions to Capstone Project contradict the policy for Academic Probation.",Multi-Hop Retrieval,Medium,Multiple Documents
+Q0162,Compare the grading policy of Course Registration with the grading policy of Minor Degree.,Table Lookup,Hard,Multiple Documents
+Q0166,Which document has precedence when Semester Withdrawal conflicts with Thesis Submission?,Acronym Disambiguation,Hard,Program Regulations
+Q0167,Does the latest version of Course Registration override the requirements listed in Data Structures?,Citation Verification,Hard,Program Regulations
+Q0168,"Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Hostel Allocation.",Exam Regulations,Medium,Academic Handbook
+Q0169,"According to the academic handbook, can a student who completed Thesis Submission but not Research Project enroll in Minor Degree?",Exam Regulations,Easy,Academic Handbook
+Q0171,Compare the grading policy of Research Project with the grading policy of Thesis Submission.,Citation Verification,Hard,Curriculum Guide
+Q0173,"According to the academic handbook, can a student who completed Thesis Submission but not Data Structures enroll in Capstone Project?",Acronym Disambiguation,Medium,Student Policy Manual
+Q0174,"According to the academic handbook, can a student who completed Data Structures but not Machine Learning enroll in Internship Registration?",Prerequisite Analysis,Easy,Student Policy Manual
+Q0177,What is the difference between the attendance requirement stated in Minor Degree and the rule mentioned in Scholarship Renewal?,Acronym Disambiguation,Medium,Multiple Documents
+Q0178,A student satisfies all conditions except Summer Term. Can they still apply for Elective Selection?,Cross-Document Reasoning,Medium,Academic Handbook
+Q0179,What is the difference between the attendance requirement stated in Machine Learning and the rule mentioned in Capstone Project?,Multi-Hop Retrieval,Hard,Course Catalog
+Q0182,"Using information from multiple PDFs, determine whether exceptions to Data Structures contradict the policy for Course Registration.",Table Lookup,Easy,Multiple Documents
+Q0183,Compare the grading policy of Summer Term with the grading policy of Internship Registration.,Table Lookup,Easy,Student Policy Manual
+Q0184,A student satisfies all conditions except Research Project. Can they still apply for Semester Withdrawal?,Table Lookup,Easy,Multiple Documents
+Q0186,"According to the academic handbook, can a student who completed Elective Selection but not Data Structures enroll in Capstone Project?",Temporal Reasoning,Easy,Curriculum Guide
+Q0187,"List every prerequisite chain leading to Semester Withdrawal, including indirect prerequisites and waived conditions.",Policy Ambiguity,Hard,Student Policy Manual
+Q0188,Compare the grading policy of Elective Selection with the grading policy of Research Project.,Multi-Hop Retrieval,Easy,Course Catalog
+Q0191,"According to the academic handbook, can a student who completed Hostel Allocation but not Thesis Submission enroll in Scholarship Renewal?",Acronym Disambiguation,Medium,Multiple Documents
+Q0192,A student satisfies all conditions except Research Project. Can they still apply for Summer Term?,Table Lookup,Hard,Program Regulations
+Q0193,"According to the academic handbook, can a student who completed Capstone Project but not Academic Probation enroll in Machine Learning?",Policy Ambiguity,Medium,Program Regulations
+Q0196,"Using information from multiple PDFs, determine whether exceptions to Major Degree contradict the policy for Summer Term.",Curriculum Rules,Medium,Course Catalog
+Q0197,Compare the grading policy of Semester Withdrawal with the grading policy of Elective Selection.,Curriculum Rules,Easy,Multiple Documents
+Q0201,Which document has precedence when Thesis Submission conflicts with Capstone Project?,Policy Ambiguity,Easy,Academic Handbook
+Q0202,"According to the academic handbook, can a student who completed Course Registration but not Internship Registration enroll in Hostel Allocation?",Cross-Document Reasoning,Easy,Academic Handbook
+Q0203,"Using information from multiple PDFs, determine whether exceptions to Course Registration contradict the policy for Summer Term.",Table Lookup,Medium,Student Policy Manual
+Q0207,Find the minimum CGPA required for Machine Learning and explain any exceptions.,Cross-Document Reasoning,Easy,Program Regulations
+Q0211,Which document has precedence when Data Structures conflicts with Hostel Allocation?,Policy Ambiguity,Easy,Curriculum Guide
+Q0212,What is the difference between the attendance requirement stated in Thesis Submission and the rule mentioned in Machine Learning?,Citation Verification,Hard,Program Regulations
+Q0213,Identify every document that mentions Scholarship Renewal and explain the differences.,Curriculum Rules,Hard,Student Policy Manual
+Q0217,"Using information from multiple PDFs, determine whether exceptions to Elective Selection contradict the policy for Machine Learning.",Curriculum Rules,Easy,Program Regulations
+Q0218,Identify every document that mentions Machine Learning and explain the differences.,Table Lookup,Easy,Academic Handbook
+Q0219,"According to the academic handbook, can a student who completed Research Project but not Data Structures enroll in Minor Degree?",Table Lookup,Hard,Curriculum Guide
+Q0220,"Across all versions of the handbook, what changed regarding Machine Learning between consecutive revisions and which version is authoritative?",Prerequisite Analysis,Easy,Academic Handbook
+Q0221,Which document has precedence when Course Registration conflicts with Minor Degree?,Cross-Document Reasoning,Easy,Course Catalog
+Q0223,What is the difference between the attendance requirement stated in Research Project and the rule mentioned in Course Registration?,Table Lookup,Easy,Curriculum Guide
+Q0224,"Using information from multiple PDFs, determine whether exceptions to Semester Withdrawal contradict the policy for Course Registration.",Acronym Disambiguation,Easy,Course Catalog
+Q0226,Compare the grading policy of Thesis Submission with the grading policy of Data Structures.,Policy Ambiguity,Easy,Academic Handbook
+Q0227,Does the latest version of Scholarship Renewal override the requirements listed in Thesis Submission?,Exam Regulations,Hard,Curriculum Guide
+Q0228,Which document has precedence when Course Registration conflicts with Thesis Submission?,Prerequisite Analysis,Easy,Course Catalog
+Q0229,A student satisfies all conditions except Minor Degree. Can they still apply for Internship Registration?,Prerequisite Analysis,Medium,Course Catalog
+Q0231,"Using information from multiple PDFs, determine whether exceptions to Machine Learning contradict the policy for Minor Degree.",Cross-Document Reasoning,Hard,Program Regulations
+Q0233,Does the latest version of Internship Registration override the requirements listed in Data Structures?,Policy Ambiguity,Medium,Program Regulations
+Q0234,What is the difference between the attendance requirement stated in Semester Withdrawal and the rule mentioned in Data Structures?,Acronym Disambiguation,Hard,Academic Handbook
+Q0236,Does the latest version of Scholarship Renewal override the requirements listed in Hostel Allocation?,Prerequisite Analysis,Easy,Curriculum Guide
+Q0238,"Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Elective Selection.",Cross-Document Reasoning,Hard,Curriculum Guide
+Q0239,Compare the grading policy of Elective Selection with the grading policy of Minor Degree.,Prerequisite Analysis,Medium,Multiple Documents
+Q0241,What is the difference between the attendance requirement stated in Thesis Submission and the rule mentioned in Summer Term?,Temporal Reasoning,Medium,Student Policy Manual
+Q0242,"List every prerequisite chain leading to Internship Registration, including indirect prerequisites and waived conditions.",Curriculum Rules,Medium,Student Policy Manual
+Q0243,"According to the academic handbook, can a student who completed Semester Withdrawal but not Data Structures enroll in Elective Selection?",Prerequisite Analysis,Medium,Curriculum Guide
+Q0244,Compare the grading policy of Summer Term with the grading policy of Data Structures.,Table Lookup,Easy,Student Policy Manual
+Q0246,A student satisfies all conditions except Semester Withdrawal. Can they still apply for Data Structures?,Temporal Reasoning,Medium,Academic Handbook
+Q0247,Which document has precedence when Hostel Allocation conflicts with Major Degree?,Multi-Hop Retrieval,Easy,Program Regulations
+Q0248,Does the latest version of Academic Probation override the requirements listed in Data Structures?,Citation Verification,Easy,Program Regulations
+Q0249,"If a student failed Minor Degree in 2024 but passed the supplementary exam in 2025, what policy applies?",Exam Regulations,Hard,Student Policy Manual
+Q0251,What is the difference between the attendance requirement stated in Internship Registration and the rule mentioned in Minor Degree?,Citation Verification,Easy,Program Regulations
+Q0252,"Using information from multiple PDFs, determine whether exceptions to Academic Probation contradict the policy for Minor Degree.",Temporal Reasoning,Hard,Curriculum Guide
+Q0254,Does the latest version of Data Structures override the requirements listed in Capstone Project?,Exam Regulations,Medium,Student Policy Manual
+Q0258,Find the minimum CGPA required for Hostel Allocation and explain any exceptions.,Policy Ambiguity,Medium,Multiple Documents
+Q0259,"Using information from multiple PDFs, determine whether exceptions to Thesis Submission contradict the policy for Course Registration.",Table Lookup,Hard,Program Regulations
+Q0261,Summarize all eligibility conditions for Internship Registration using information from multiple academic documents.,Temporal Reasoning,Easy,Student Policy Manual
+Q0263,"According to the academic handbook, can a student who completed Data Structures but not Academic Probation enroll in Elective Selection?",Cross-Document Reasoning,Hard,Multiple Documents
+Q0266,"Using information from multiple PDFs, determine whether exceptions to Machine Learning contradict the policy for Research Project.",Acronym Disambiguation,Easy,Multiple Documents
+Q0267,Compare the grading policy of Semester Withdrawal with the grading policy of Course Registration.,Acronym Disambiguation,Easy,Academic Handbook
+Q0268,What is the difference between the attendance requirement stated in Capstone Project and the rule mentioned in Elective Selection?,Multi-Hop Retrieval,Easy,Course Catalog
+Q0271,Find the minimum CGPA required for Capstone Project and explain any exceptions.,Curriculum Rules,Easy,Course Catalog
+Q0273,"Using information from multiple PDFs, determine whether exceptions to Data Structures contradict the policy for Thesis Submission.",Policy Ambiguity,Medium,Multiple Documents
+Q0274,"If a student failed Thesis Submission in 2024 but passed the supplementary exam in 2025, what policy applies?",Policy Ambiguity,Easy,Multiple Documents
+Q0276,A student satisfies all conditions except Hostel Allocation. Can they still apply for Summer Term?,Policy Ambiguity,Easy,Course Catalog
+Q0277,"According to the academic handbook, can a student who completed Scholarship Renewal but not Course Registration enroll in Summer Term?",Temporal Reasoning,Easy,Student Policy Manual
+Q0278,A student satisfies all conditions except Machine Learning. Can they still apply for Hostel Allocation?,Citation Verification,Easy,Student Policy Manual
+Q0279,"According to the academic handbook, can a student who completed Scholarship Renewal but not Semester Withdrawal enroll in Minor Degree?",Acronym Disambiguation,Medium,Curriculum Guide
+Q0281,Which document has precedence when Hostel Allocation conflicts with Research Project?,Table Lookup,Medium,Program Regulations
+Q0282,What is the difference between the attendance requirement stated in Capstone Project and the rule mentioned in Machine Learning?,Cross-Document Reasoning,Easy,Curriculum Guide
+Q0283,Compare the grading policy of Hostel Allocation with the grading policy of Major Degree.,Cross-Document Reasoning,Medium,Student Policy Manual
+Q0284,A student satisfies all conditions except Course Registration. Can they still apply for Internship Registration?,Table Lookup,Medium,Program Regulations
+Q0287,"Using information from multiple PDFs, determine whether exceptions to Course Registration contradict the policy for Research Project.",Acronym Disambiguation,Medium,Multiple Documents
+Q0289,"If a student failed Elective Selection in 2024 but passed the supplementary exam in 2025, what policy applies?",Cross-Document Reasoning,Easy,Multiple Documents
+Q0291,A student satisfies all conditions except Scholarship Renewal. Can they still apply for Course Registration?,Acronym Disambiguation,Easy,Curriculum Guide
+Q0292,What is the difference between the attendance requirement stated in Academic Probation and the rule mentioned in Data Structures?,Policy Ambiguity,Medium,Student Policy Manual
+Q0294,"Using information from multiple PDFs, determine whether exceptions to Scholarship Renewal contradict the policy for Capstone Project.",Acronym Disambiguation,Easy,Student Policy Manual
+Q0296,Which document has precedence when Machine Learning conflicts with Thesis Submission?,Acronym Disambiguation,Medium,Academic Handbook
+Q0297,"List every prerequisite chain leading to Elective Selection, including indirect prerequisites and waived conditions.",Temporal Reasoning,Hard,Academic Handbook
+Q0298,Identify every document that mentions Summer Term and explain the differences.,Table Lookup,Hard,Curriculum Guide
+Q0301,"Using information from multiple PDFs, determine whether exceptions to Course Registration contradict the policy for Academic Probation.",Acronym Disambiguation,Easy,Multiple Documents
+Q0302,Which document has precedence when Major Degree conflicts with Thesis Submission?,Citation Verification,Medium,Multiple Documents
+Q0303,"According to the academic handbook, can a student who completed Academic Probation but not Thesis Submission enroll in Course Registration?",Exam Regulations,Hard,Curriculum Guide
+Q0304,Does the latest version of Summer Term override the requirements listed in Major Degree?,Table Lookup,Hard,Course Catalog
+Q0306,Compare the grading policy of Summer Term with the grading policy of Elective Selection.,Multi-Hop Retrieval,Easy,Student Policy Manual
+Q0307,What is the difference between the attendance requirement stated in Hostel Allocation and the rule mentioned in Summer Term?,Table Lookup,Hard,Student Policy Manual
+Q0308,"Using information from multiple PDFs, determine whether exceptions to Semester Withdrawal contradict the policy for Thesis Submission.",Cross-Document Reasoning,Medium,Curriculum Guide
+Q0311,What is the difference between the attendance requirement stated in Data Structures and the rule mentioned in Major Degree?,Curriculum Rules,Hard,Program Regulations
+Q0312,Does the latest version of Thesis Submission override the requirements listed in Summer Term?,Multi-Hop Retrieval,Easy,Program Regulations
+Q0313,A student satisfies all conditions except Minor Degree. Can they still apply for Summer Term?,Policy Ambiguity,Hard,Course Catalog
+Q0314,Does the latest version of Summer Term override the requirements listed in Internship Registration?,Multi-Hop Retrieval,Medium,Course Catalog
+Q0316,Compare the grading policy of Machine Learning with the grading policy of Scholarship Renewal.,Prerequisite Analysis,Easy,Student Policy Manual
+Q0317,Compare the grading policy of Data Structures with the grading policy of Semester Withdrawal.,Prerequisite Analysis,Medium,Student Policy Manual
+Q0318,"According to the academic handbook, can a student who completed Elective Selection but not Machine Learning enroll in Semester Withdrawal?",Cross-Document Reasoning,Easy,Student Policy Manual
+Q0321,What is the difference between the attendance requirement stated in Hostel Allocation and the rule mentioned in Course Registration?,Exam Regulations,Medium,Multiple Documents
+Q0322,"Using information from multiple PDFs, determine whether exceptions to Internship Registration contradict the policy for Major Degree.",Temporal Reasoning,Medium,Program Regulations
+Q0323,"According to the academic handbook, can a student who completed Minor Degree but not Capstone Project enroll in Hostel Allocation?",Cross-Document Reasoning,Medium,Academic Handbook
+Q0324,A student satisfies all conditions except Academic Probation. Can they still apply for Course Registration?,Multi-Hop Retrieval,Easy,Program Regulations
+Q0326,"According to the academic handbook, can a student who completed Internship Registration but not Academic Probation enroll in Hostel Allocation?",Cross-Document Reasoning,Medium,Student Policy Manual
+Q0329,"Using information from multiple PDFs, determine whether exceptions to Internship Registration contradict the policy for Semester Withdrawal.",Multi-Hop Retrieval,Easy,Academic Handbook
+Q0332,"According to the academic handbook, can a student who completed Academic Probation but not Research Project enroll in Data Structures?",Curriculum Rules,Medium,Student Policy Manual
+Q0333,Does the latest version of Research Project override the requirements listed in Semester Withdrawal?,Cross-Document Reasoning,Hard,Curriculum Guide
+Q0334,Summarize all eligibility conditions for Research Project using information from multiple academic documents.,Multi-Hop Retrieval,Easy,Student Policy Manual
+Q0336,"Using information from multiple PDFs, determine whether exceptions to Course Registration contradict the policy for Major Degree.",Cross-Document Reasoning,Medium,Academic Handbook
+Q0338,"According to the academic handbook, can a student who completed Scholarship Renewal but not Summer Term enroll in Major Degree?",Curriculum Rules,Hard,Program Regulations
+Q0342,Identify every document that mentions Internship Registration and explain the differences.,Cross-Document Reasoning,Easy,Program Regulations
+Q0343,"Using information from multiple PDFs, determine whether exceptions to Hostel Allocation contradict the policy for Course Registration.",Cross-Document Reasoning,Easy,Course Catalog
+Q0344,"According to the academic handbook, can a student who completed Elective Selection but not Course Registration enroll in Research Project?",Citation Verification,Medium,Program Regulations
+Q0346,What is the difference between the attendance requirement stated in Research Project and the rule mentioned in Summer Term?,Exam Regulations,Hard,Course Catalog
+Q0347,"If a student failed Summer Term in 2024 but passed the supplementary exam in 2025, what policy applies?",Temporal Reasoning,Medium,Academic Handbook
+Q0349,"According to the academic handbook, can a student who completed Semester Withdrawal but not Scholarship Renewal enroll in Elective Selection?",Cross-Document Reasoning,Easy,Student Policy Manual
+Q0351,Does the latest version of Minor Degree override the requirements listed in Hostel Allocation?,Exam Regulations,Medium,Course Catalog
+Q0353,Does the latest version of Summer Term override the requirements listed in Hostel Allocation?,Exam Regulations,Hard,Curriculum Guide
+Q0357,"Using information from multiple PDFs, determine whether exceptions to Capstone Project contradict the policy for Major Degree.",Multi-Hop Retrieval,Easy,Program Regulations
+Q0359,Find the minimum CGPA required for Course Registration and explain any exceptions.,Exam Regulations,Medium,Course Catalog
+Q0361,Summarize all eligibility conditions for Elective Selection using information from multiple academic documents.,Table Lookup,Easy,Program Regulations
+Q0362,Compare the grading policy of Elective Selection with the grading policy of Data Structures.,Policy Ambiguity,Medium,Program Regulations
+Q0363,"List every prerequisite chain leading to Thesis Submission, including indirect prerequisites and waived conditions.",Cross-Document Reasoning,Hard,Multiple Documents
+Q0366,"If a student failed Course Registration in 2024 but passed the supplementary exam in 2025, what policy applies?",Exam Regulations,Medium,Program Regulations
+Q0367,Compare the grading policy of Minor Degree with the grading policy of Thesis Submission.,Acronym Disambiguation,Hard,Curriculum Guide
+Q0368,Which document has precedence when Capstone Project conflicts with Summer Term?,Acronym Disambiguation,Hard,Multiple Documents
+Q0369,Compare the grading policy of Elective Selection with the grading policy of Major Degree.,Policy Ambiguity,Hard,Academic Handbook
+Q0371,"Using information from multiple PDFs, determine whether exceptions to Hostel Allocation contradict the policy for Minor Degree.",Table Lookup,Medium,Academic Handbook
+Q0372,Compare the grading policy of Data Structures with the grading policy of Academic Probation.,Policy Ambiguity,Hard,Curriculum Guide
+Q0373,Compare the grading policy of Semester Withdrawal with the grading policy of Data Structures.,Table Lookup,Easy,Curriculum Guide
+Q0376,What is the difference between the attendance requirement stated in Internship Registration and the rule mentioned in Hostel Allocation?,Prerequisite Analysis,Hard,Academic Handbook
+Q0377,What is the difference between the attendance requirement stated in Major Degree and the rule mentioned in Minor Degree?,Citation Verification,Medium,Student Policy Manual
+Q0378,"Using information from multiple PDFs, determine whether exceptions to Semester Withdrawal contradict the policy for Hostel Allocation.",Cross-Document Reasoning,Hard,Academic Handbook
+Q0379,Compare the grading policy of Academic Probation with the grading policy of Machine Learning.,Exam Regulations,Medium,Academic Handbook
+Q0381,Does the latest version of Academic Probation override the requirements listed in Machine Learning?,Citation Verification,Hard,Student Policy Manual
+Q0382,Summarize all eligibility conditions for Summer Term using information from multiple academic documents.,Temporal Reasoning,Easy,Student Policy Manual
+Q0386,Does the latest version of Research Project override the requirements listed in Academic Probation?,Acronym Disambiguation,Easy,Course Catalog
+Q0389,Which document has precedence when Elective Selection conflicts with Semester Withdrawal?,Curriculum Rules,Medium,Academic Handbook
+Q0391,Compare the grading policy of Capstone Project with the grading policy of Course Registration.,Table Lookup,Hard,Course Catalog
+Q0392,"Using information from multiple PDFs, determine whether exceptions to Scholarship Renewal contradict the policy for Data Structures.",Policy Ambiguity,Hard,Student Policy Manual
+Q0393,What is the difference between the attendance requirement stated in Semester Withdrawal and the rule mentioned in Major Degree?,Citation Verification,Hard,Course Catalog
+Q0396,"List every prerequisite chain leading to Scholarship Renewal, including indirect prerequisites and waived conditions.",Citation Verification,Hard,Course Catalog
+Q0397,What is the difference between the attendance requirement stated in Major Degree and the rule mentioned in Thesis Submission?,Curriculum Rules,Medium,Program Regulations
+Q0399,"Using information from multiple PDFs, determine whether exceptions to Semester Withdrawal contradict the policy for Internship Registration.",Curriculum Rules,Medium,Program Regulations
+Q0401,Find the minimum CGPA required for Summer Term and explain any exceptions.,Acronym Disambiguation,Hard,Student Policy Manual
+Q0403,Does the latest version of Minor Degree override the requirements listed in Data Structures?,Policy Ambiguity,Medium,Student Policy Manual
+Q0404,What is the difference between the attendance requirement stated in Capstone Project and the rule mentioned in Semester Withdrawal?,Cross-Document Reasoning,Medium,Academic Handbook
+Q0406,"Using information from multiple PDFs, determine whether exceptions to Data Structures contradict the policy for Scholarship Renewal.",Prerequisite Analysis,Easy,Program Regulations
+Q0408,"If a student failed Hostel Allocation in 2024 but passed the supplementary exam in 2025, what policy applies?",Citation Verification,Easy,Multiple Documents
+Q0409,Does the latest version of Hostel Allocation override the requirements listed in Elective Selection?,Acronym Disambiguation,Medium,Course Catalog
+Q0411,"According to the academic handbook, can a student who completed Semester Withdrawal but not Scholarship Renewal enroll in Data Structures?",Policy Ambiguity,Hard,Course Catalog
+Q0412,Does the latest version of Scholarship Renewal override the requirements listed in Semester Withdrawal?,Acronym Disambiguation,Easy,Program Regulations
+Q0413,"Using information from multiple PDFs, determine whether exceptions to Scholarship Renewal contradict the policy for Research Project.",Exam Regulations,Easy,Multiple Documents
+Q0416,Does the latest version of Summer Term override the requirements listed in Course Registration?,Citation Verification,Easy,Multiple Documents
+Q0417,A student satisfies all conditions except Hostel Allocation. Can they still apply for Semester Withdrawal?,Citation Verification,Medium,Student Policy Manual
+Q0418,"List every prerequisite chain leading to Academic Probation, including indirect prerequisites and waived conditions.",Temporal Reasoning,Easy,Multiple Documents
+Q0419,What is the difference between the attendance requirement stated in Summer Term and the rule mentioned in Internship Registration?,Exam Regulations,Medium,Program Regulations
+Q0421,Summarize all eligibility conditions for Thesis Submission using information from multiple academic documents.,Exam Regulations,Hard,Multiple Documents
+Q0423,What is the difference between the attendance requirement stated in Thesis Submission and the rule mentioned in Data Structures?,Multi-Hop Retrieval,Easy,Student Policy Manual
+Q0424,What is the difference between the attendance requirement stated in Semester Withdrawal and the rule mentioned in Hostel Allocation?,Table Lookup,Hard,Student Policy Manual
+Q0427,"Using information from multiple PDFs, determine whether exceptions to Summer Term contradict the policy for Data Structures.",Prerequisite Analysis,Hard,Curriculum Guide
+Q0428,Which document has precedence when Data Structures conflicts with Internship Registration?,Cross-Document Reasoning,Easy,Program Regulations
+Q0432,Which document has precedence when Elective Selection conflicts with Minor Degree?,Prerequisite Analysis,Easy,Course Catalog
+Q0433,Compare the grading policy of Machine Learning with the grading policy of Hostel Allocation.,Temporal Reasoning,Easy,Course Catalog
+Q0434,"Using information from multiple PDFs, determine whether exceptions to Hostel Allocation contradict the policy for Scholarship Renewal.",Table Lookup,Hard,Multiple Documents
+Q0438,"According to the academic handbook, can a student who completed Minor Degree but not Semester Withdrawal enroll in Scholarship Renewal?",Multi-Hop Retrieval,Hard,Multiple Documents
+Q0439,Which document has precedence when Internship Registration conflicts with Research Project?,Exam Regulations,Easy,Multiple Documents
+Q0441,"Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Semester Withdrawal.",Acronym Disambiguation,Easy,Academic Handbook
+Q0443,A student satisfies all conditions except Elective Selection. Can they still apply for Hostel Allocation?,Policy Ambiguity,Medium,Course Catalog
+Q0444,Which document has precedence when Data Structures conflicts with Major Degree?,Table Lookup,Easy,Academic Handbook
+Q0447,Which document has precedence when Internship Registration conflicts with Capstone Project?,Table Lookup,Hard,Program Regulations
+Q0448,"Using information from multiple PDFs, determine whether exceptions to Summer Term contradict the policy for Machine Learning.",Prerequisite Analysis,Easy,Curriculum Guide
+Q0454,"If a student failed Internship Registration in 2024 but passed the supplementary exam in 2025, what policy applies?",Curriculum Rules,Medium,Curriculum Guide
+Q0457,Which document has precedence when Minor Degree conflicts with Elective Selection?,Cross-Document Reasoning,Hard,Curriculum Guide
+Q0462,"Using information from multiple PDFs, determine whether exceptions to Course Registration contradict the policy for Semester Withdrawal.",Cross-Document Reasoning,Medium,Multiple Documents
+Q0463,A student satisfies all conditions except Scholarship Renewal. Can they still apply for Elective Selection?,Exam Regulations,Medium,Course Catalog
+Q0464,Does the latest version of Semester Withdrawal override the requirements listed in Internship Registration?,Acronym Disambiguation,Medium,Course Catalog
+Q0466,What is the difference between the attendance requirement stated in Academic Probation and the rule mentioned in Minor Degree?,Acronym Disambiguation,Hard,Course Catalog
+Q0469,"Using information from multiple PDFs, determine whether exceptions to Minor Degree contradict the policy for Internship Registration.",Exam Regulations,Medium,Student Policy Manual
+Q0471,Which document has precedence when Course Registration conflicts with Hostel Allocation?,Acronym Disambiguation,Easy,Multiple Documents
+Q0474,Which document has precedence when Elective Selection conflicts with Summer Term?,Cross-Document Reasoning,Hard,Curriculum Guide
+Q0476,"Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Capstone Project.",Acronym Disambiguation,Easy,Course Catalog
+Q0477,Compare the grading policy of Major Degree with the grading policy of Capstone Project.,Citation Verification,Hard,Student Policy Manual
+Q0478,"If a student failed Data Structures in 2024 but passed the supplementary exam in 2025, what policy applies?",Citation Verification,Hard,Curriculum Guide
+Q0479,"According to the academic handbook, can a student who completed Thesis Submission but not Hostel Allocation enroll in Elective Selection?",Exam Regulations,Hard,Student Policy Manual
+Q0482,Does the latest version of Machine Learning override the requirements listed in Scholarship Renewal?,Temporal Reasoning,Easy,Course Catalog
+Q0483,"Using information from multiple PDFs, determine whether exceptions to Internship Registration contradict the policy for Research Project.",Cross-Document Reasoning,Hard,Program Regulations
+Q0486,"According to the academic handbook, can a student who completed Hostel Allocation but not Machine Learning enroll in Summer Term?",Multi-Hop Retrieval,Medium,Student Policy Manual
+Q0487,Compare the grading policy of Semester Withdrawal with the grading policy of Internship Registration.,Acronym Disambiguation,Hard,Curriculum Guide
+Q0489,A student satisfies all conditions except Summer Term. Can they still apply for Minor Degree?,Table Lookup,Easy,Student Policy Manual
+Q0491,Does the latest version of Course Registration override the requirements listed in Summer Term?,Table Lookup,Easy,Course Catalog
+Q0493,Compare the grading policy of Machine Learning with the grading policy of Research Project.,Multi-Hop Retrieval,Hard,Program Regulations
+Q0496,Compare the grading policy of Thesis Submission with the grading policy of Semester Withdrawal.,Policy Ambiguity,Easy,Program Regulations
+Q0497,"Using information from multiple PDFs, determine whether exceptions to Academic Probation contradict the policy for Course Registration.",Prerequisite Analysis,Medium,Multiple Documents
+Q0498,"According to the academic handbook, can a student who completed Hostel Allocation but not Data Structures enroll in Semester Withdrawal?",Multi-Hop Retrieval,Hard,Course Catalog
