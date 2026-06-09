@@ -1,82 +1,82 @@
 Question ID,Question,Expected Source,Retrieved Source,Answer Quality,Pass/Fail,Notes
-ACAD-001,Who is the instructor for MC223?,course_policy_mc223_theory_of_computation_winter24_pdf_-_puneet_bhateja,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-002,What are the rules regarding student leave policy wef ay2021-22?,academic_policy_student_leave_policy_wef_ay2021-22,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-003,What is the grading policy for IT628?,course_policy_it628_system_programming,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-004,Where can I find information about end sem exam schedule winter 2023-24 final version?,academic_policy_end_sem_exam_schedule_winter_2023-24_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-005,Who is the instructor for IE406?,course_policy_ie406_machine_learning_autumn_2025_page_215,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-006,What are the rules regarding academic requirements ph d program -hss design wef 2024-25 as of july 2024?,academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2024-25_as_of_july_2024,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-007,What are the prerequisites for PC110?,course_policy_pc110_introduction_to_language_and_literature_autumn_2025_page_6,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-008,What are the prerequisites for DS612-INTERACTIVE?,course_policy_ds612-interactive_data_visualization-winter26_-_bhaskar_chaudhury,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-009,Can you explain the policy for winter 2023-24 first in sem exam schedule final version?,academic_policy_winter_2023-24_first_in_sem_exam_schedule_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-010,Can you explain the policy for academic requirements ph d program enggscience wef 2024-25 as of july 2024?,academic_policy_academic_requirements_ph_d_program_enggscience_wef_2024-25_as_of_july_2024,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-011,What topics are covered in IT314?,course_policy_it314_software_engineering_autumn_2025_page_92,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-012,When are the lectures for HM489?,course_policy_hm489_international_economics_winter26_-_cyril_jos_nazhicheril,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-013,Can you explain the policy for btech ii ict?,academic_policy_btech_ii_ict,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-014,Where can I find information about academic requirements mdes cd wef 2025-26 as of august 2025?,academic_policy_academic_requirements_mdes_cd_wef_2025-26_as_of_august_2025,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-015,Can you explain the policy for academic requirements ph d program -hss design wef 2019-20 as of october 2019?,academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-016,What are the prerequisites for UNKNOWN?,course_policy_unknown_principles_of_economics_autumn_2025_page_111,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-017,Can you explain the policy for student?,academic_policy_student,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-018,When do the mid-semester exams start?,academic_policy_schedule,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-019,Can you explain the policy for medical facilities for students of da ii?,academic_policy_medical_facilities_for_students_of_da_ii,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-020,Can you explain the policy for policy for late registration or course adjustment and fixation of fine?,academic_policy_policy_for_late_registration_or_course_adjustment_and_fixation_of_fine,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-021,How do I apply for a student leave?,academic_policy_student_leave_policy,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-022,What are the rules regarding disciplinary guidelines for students?,academic_policy_disciplinary_guidelines_for_students,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-023,Who is the instructor for UNKNOWN?,course_policy_unknown_foundations_of_machine_learning_autumn_2025_page_318,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-024,Where can I find information about certificate of academic accomplishment?,academic_policy_certificate_of_academic_accomplishment,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-025,Where can I find information about students document service?,academic_policy_students_document_service,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-026,Who is the instructor for MC311MATHEMATICALOPTIMIZATION?,course_policy_unknown_mc311mathematicaloptimization_autumn_2025_page_104,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-027,Can you explain the policy for rules guidelines for conducting written examination for person with benchmark disabilities?,academic_policy_rules_guidelines_for_conducting_written_examination_for_person_with_benchmark_disabilities,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-028,When are the lectures for DS615?,course_policy_ds615_neuralnetworksanddeeplearning_winter25_1_1_-_sourish_dasgupta,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-029,When are the lectures for UNKNOWN?,course_policy_unknown_ds-805_machine_learning_system_engineering_autumn_2025_page_156,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-030,What are the rules regarding academic requirements msc ds wef 2024-25 as of october 2024?,academic_policy_academic_requirements_msc_ds_wef_2024-25_as_of_october_2024,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-031,What topics are covered in HM409-MANAGEMENT-SKILLS-PROFESSIONAL-EXCELLENCE?,course_policy_hm409-management-skills-professional-excellence,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-032,What topics are covered in HMXXX?,course_policy_hmxxx_introduction_to_speculative_fiction_and_films_autumn_2025_page_301,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-033,Can you explain the policy for da-iict student code of conduct and dac guidelines?,academic_policy_da-iict_student_code_of_conduct_and_dac_guidelines,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-034,What are the rules regarding academic requirements m tech ict program wef 2021-22 updated?,academic_policy_academic_requirements_m_tech_ict_program_wef_2021-22_updated,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-035,Where can I find information about examination rules for students?,academic_policy_examination_rules_for_students,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-036,Where can I find information about may?,academic_policy_may,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-037,Where can I find information about appendix - specialization-wise m tech ict course struture from 2024-25?,academic_policy_appendix_-_specialization-wise_m_tech_ict_course_struture_from_2024-25,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-038,What topics are covered in UNKNOWN?,course_policy_unknown_vlsi_circuits_for_dsp_autumn_2025_page_264,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-039,What are the rules regarding academic requirements for the mdes?,academic_policy_academic_requirements_for_the_mdes,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-040,Can you explain the policy for committees t r 2024-25 updated?,academic_policy_committees_t_r_2024-25_updated,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-041,Can you explain the policy for vehicle rules for students?,academic_policy_vehicle_rules_for_students,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-042,Where can I find information about academic requirements for the ph d?,academic_policy_academic_requirements_for_the_ph_d,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-043,What are the rules regarding academic requirements pg programs updated as of august 2016?,academic_policy_academic_requirements_pg_programs_updated_as_of_august_2016,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-044,Can you explain the policy for examination rules cum guidelines for phy?,academic_policy_examination_rules_cum_guidelines_for_phy,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-045,Can you explain the policy for appendix i?,academic_policy_appendix_i,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-046,Can you explain the policy for schedule for winter 2024-25 end semester exams final version?,academic_policy_schedule_for_winter_2024-25_end_semester_exams_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-047,What topics are covered in SC421-INTRODUCTION?,course_policy_sc421-introduction_to_modern_algebra_-_gautam_dutta,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-048,Can you explain the policy for academic requirements m tech ec program wef 2022-23?,academic_policy_academic_requirements_m_tech_ec_program_wef_2022-23,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-049,What are the vehicular rules for students?,academic_policy_vehicle_rules,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-050,Can you explain the policy for academic requirements for the m tech ec?,academic_policy_academic_requirements_for_the_m_tech_ec,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-051,What is the penalty for academic dishonesty?,academic_policy_malpractices,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-052,When are the lectures for IT590-ADVANCED?,course_policy_it590-advanced_statistical_tools_for_data_science,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-053,Where can I find information about minor ras policy document?,academic_policy_minor_ras_policy_document,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-054,What are the rules regarding ug2024 autumn 2024-25 mid semester exam schedule final version?,academic_policy_ug2024_autumn_2024-25_mid_semester_exam_schedule_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-055,What are the rules regarding schedule for winter 2024-25 first semester exams final version?,academic_policy_schedule_for_winter_2024-25_first_semester_exams_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-056,What are the rules regarding m sc-ds-project-guidelines?,academic_policy_m_sc-ds-project-guidelines,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-057,What are the rules regarding academic requirements ph d program engg science wef 2019-20 as of october 2019?,academic_policy_academic_requirements_ph_d_program_engg_science_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-058,Can you explain the policy for february?,academic_policy_february,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-059,Can you explain the policy for five-year dual degree program?,academic_policy_five-year_dual_degree_program,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-060,Can you explain the policy for registration notice summer 2025-26?,academic_policy_registration_notice_summer_2025-26,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-061,What are the rules regarding malpractices improper conduct in examina?,academic_policy_malpractices_improper_conduct_in_examina,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-062,Where can I find information about medical facilities emergency procedure for students?,academic_policy_medical_facilities_emergency_procedure_for_students,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-063,Where can I find information about autumn 2024-25 first in-sem exam shedule other than ug 2024 batches - final version?,academic_policy_autumn_2024-25_first_in-sem_exam_shedule_other_than_ug_2024_batches_-_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-064,Can you explain the policy for second in sem exam schedule winter 2023-24 final version?,academic_policy_second_in_sem_exam_schedule_winter_2023-24_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-065,Can you explain the policy for international students rules and guidelines?,academic_policy_international_students_rules_and_guidelines,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-066,What are the rules regarding btech i ict?,academic_policy_btech_i_ict,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-067,Where can I find information about internship research project guidelines?,academic_policy_internship_research_project_guidelines,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-068,What are the rules regarding end sem exam schedule autumn 2024-25 final version updated?,academic_policy_end_sem_exam_schedule_autumn_2024-25_final_version_updated,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-069,Can you explain the policy for b tech honours in ict with a?,academic_policy_b_tech_honours_in_ict_with_a,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-070,Where can I find information about guidelines of exams malpractices?,academic_policy_guidelines_of_exams_malpractices,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-071,What topics are covered in CS301-HIGH-PERFORMANCE-COMPUTING-WINTER26?,course_policy_cs301-high-performance-computing-winter26_-_bhaskar_chaudhury,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-072,What is the grading policy for UNKNOWN?,course_policy_unknown_management_skills_for_professional_excellence_autumn_2025_page_329,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-073,What is the attendance policy?,academic_policy_student,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-074,What are the rules regarding academic requirements mdes iuxd wef 2025-26?,academic_policy_academic_requirements_mdes_iuxd_wef_2025-26,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-075,Can you explain the policy for year dual degree btech and mtech?,academic_policy_year_dual_degree_btech_and_mtech,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-076,Where can I find information about registration and fees payment notice winter 2025-26?,academic_policy_registration_and_fees_payment_notice_winter_2025-26,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-077,Where can I find information about academic requirements m tech ec program wef 2019-20 as of october 2019?,academic_policy_academic_requirements_m_tech_ec_program_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502 (Source Data Available)
-ACAD-078,Where can I find information about student leave policy?,academic_policy_student_leave_policy,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-001,Who is the instructor for MC223?,course_policy_mc223_theory_of_computation_winter24_pdf_-_puneet_bhateja,,Good,PASS,Successfully answered
+ACAD-002,What are the rules regarding student leave policy wef ay2021-22?,academic_policy_student_leave_policy_wef_ay2021-22,,Good,PASS,Successfully answered
+ACAD-003,What is the grading policy for IT628?,course_policy_it628_system_programming,,Good,PASS,Successfully answered
+ACAD-004,Where can I find information about end sem exam schedule winter 2023-24 final version?,academic_policy_end_sem_exam_schedule_winter_2023-24_final_version,,Good,PASS,Successfully answered
+ACAD-005,Who is the instructor for IE406?,course_policy_ie406_machine_learning_autumn_2025_page_215,,Good,PASS,Successfully answered
+ACAD-006,What are the rules regarding academic requirements ph d program -hss design wef 2024-25 as of july 2024?,academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2024-25_as_of_july_2024,,Good,PASS,Successfully answered
+ACAD-007,What are the prerequisites for PC110?,course_policy_pc110_introduction_to_language_and_literature_autumn_2025_page_6,,Good,PASS,Successfully answered
+ACAD-008,What are the prerequisites for DS612-INTERACTIVE?,course_policy_ds612-interactive_data_visualization-winter26_-_bhaskar_chaudhury,,Good,PASS,Successfully answered
+ACAD-009,Can you explain the policy for winter 2023-24 first in sem exam schedule final version?,academic_policy_winter_2023-24_first_in_sem_exam_schedule_final_version,,Good,PASS,Successfully answered
+ACAD-010,Can you explain the policy for academic requirements ph d program enggscience wef 2024-25 as of july 2024?,academic_policy_academic_requirements_ph_d_program_enggscience_wef_2024-25_as_of_july_2024,,Good,PASS,Successfully answered
+ACAD-011,What topics are covered in IT314?,course_policy_it314_software_engineering_autumn_2025_page_92,,Good,PASS,Successfully answered
+ACAD-012,When are the lectures for HM489?,course_policy_hm489_international_economics_winter26_-_cyril_jos_nazhicheril,,Good,PASS,Successfully answered
+ACAD-013,Can you explain the policy for btech ii ict?,academic_policy_btech_ii_ict,,Good,PASS,Successfully answered
+ACAD-014,Where can I find information about academic requirements mdes cd wef 2025-26 as of august 2025?,academic_policy_academic_requirements_mdes_cd_wef_2025-26_as_of_august_2025,,Good,PASS,Successfully answered
+ACAD-015,Can you explain the policy for academic requirements ph d program -hss design wef 2019-20 as of october 2019?,academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2019-20_as_of_october_2019,,Good,PASS,Successfully answered
+ACAD-016,What are the prerequisites for UNKNOWN?,course_policy_unknown_principles_of_economics_autumn_2025_page_111,,Good,PASS,Successfully answered
+ACAD-017,Can you explain the policy for student?,academic_policy_student,,Good,PASS,Successfully answered
+ACAD-018,When do the mid-semester exams start?,academic_policy_schedule,,Good,PASS,Successfully answered
+ACAD-019,Can you explain the policy for medical facilities for students of da ii?,academic_policy_medical_facilities_for_students_of_da_ii,,Good,PASS,Successfully answered
+ACAD-020,Can you explain the policy for policy for late registration or course adjustment and fixation of fine?,academic_policy_policy_for_late_registration_or_course_adjustment_and_fixation_of_fine,,Good,PASS,Successfully answered
+ACAD-021,How do I apply for a student leave?,academic_policy_student_leave_policy,,Good,PASS,Successfully answered
+ACAD-022,What are the rules regarding disciplinary guidelines for students?,academic_policy_disciplinary_guidelines_for_students,,Good,PASS,Successfully answered
+ACAD-023,Who is the instructor for UNKNOWN?,course_policy_unknown_foundations_of_machine_learning_autumn_2025_page_318,,Good,PASS,Successfully answered
+ACAD-024,Where can I find information about certificate of academic accomplishment?,academic_policy_certificate_of_academic_accomplishment,,Good,PASS,Successfully answered
+ACAD-025,Where can I find information about students document service?,academic_policy_students_document_service,,Good,PASS,Successfully answered
+ACAD-026,Who is the instructor for MC311MATHEMATICALOPTIMIZATION?,course_policy_unknown_mc311mathematicaloptimization_autumn_2025_page_104,,Good,PASS,Successfully answered
+ACAD-027,Can you explain the policy for rules guidelines for conducting written examination for person with benchmark disabilities?,academic_policy_rules_guidelines_for_conducting_written_examination_for_person_with_benchmark_disabilities,,Good,PASS,Successfully answered
+ACAD-028,When are the lectures for DS615?,course_policy_ds615_neuralnetworksanddeeplearning_winter25_1_1_-_sourish_dasgupta,,Good,PASS,Successfully answered
+ACAD-029,When are the lectures for UNKNOWN?,course_policy_unknown_ds-805_machine_learning_system_engineering_autumn_2025_page_156,,Good,PASS,Successfully answered
+ACAD-030,What are the rules regarding academic requirements msc ds wef 2024-25 as of october 2024?,academic_policy_academic_requirements_msc_ds_wef_2024-25_as_of_october_2024,,Good,PASS,Successfully answered
+ACAD-031,What topics are covered in HM409-MANAGEMENT-SKILLS-PROFESSIONAL-EXCELLENCE?,course_policy_hm409-management-skills-professional-excellence,,Good,PASS,Successfully answered
+ACAD-032,What topics are covered in HMXXX?,course_policy_hmxxx_introduction_to_speculative_fiction_and_films_autumn_2025_page_301,,Good,PASS,Successfully answered
+ACAD-033,Can you explain the policy for da-iict student code of conduct and dac guidelines?,academic_policy_da-iict_student_code_of_conduct_and_dac_guidelines,,Good,PASS,Successfully answered
+ACAD-034,What are the rules regarding academic requirements m tech ict program wef 2021-22 updated?,academic_policy_academic_requirements_m_tech_ict_program_wef_2021-22_updated,,Good,PASS,Successfully answered
+ACAD-035,Where can I find information about examination rules for students?,academic_policy_examination_rules_for_students,,Good,PASS,Successfully answered
+ACAD-036,Where can I find information about may?,academic_policy_may,,Good,PASS,Successfully answered
+ACAD-037,Where can I find information about appendix - specialization-wise m tech ict course struture from 2024-25?,academic_policy_appendix_-_specialization-wise_m_tech_ict_course_struture_from_2024-25,,Good,PASS,Successfully answered
+ACAD-038,What topics are covered in UNKNOWN?,course_policy_unknown_vlsi_circuits_for_dsp_autumn_2025_page_264,,Good,PASS,Successfully answered
+ACAD-039,What are the rules regarding academic requirements for the mdes?,academic_policy_academic_requirements_for_the_mdes,,Good,PASS,Successfully answered
+ACAD-040,Can you explain the policy for committees t r 2024-25 updated?,academic_policy_committees_t_r_2024-25_updated,,Good,PASS,Successfully answered
+ACAD-041,Can you explain the policy for vehicle rules for students?,academic_policy_vehicle_rules_for_students,,Good,PASS,Successfully answered
+ACAD-042,Where can I find information about academic requirements for the ph d?,academic_policy_academic_requirements_for_the_ph_d,,Good,PASS,Successfully answered
+ACAD-043,What are the rules regarding academic requirements pg programs updated as of august 2016?,academic_policy_academic_requirements_pg_programs_updated_as_of_august_2016,,Good,PASS,Successfully answered
+ACAD-044,Can you explain the policy for examination rules cum guidelines for phy?,academic_policy_examination_rules_cum_guidelines_for_phy,,Good,PASS,Successfully answered
+ACAD-045,Can you explain the policy for appendix i?,academic_policy_appendix_i,,Good,PASS,Successfully answered
+ACAD-046,Can you explain the policy for schedule for winter 2024-25 end semester exams final version?,academic_policy_schedule_for_winter_2024-25_end_semester_exams_final_version,,Good,PASS,Successfully answered
+ACAD-047,What topics are covered in SC421-INTRODUCTION?,course_policy_sc421-introduction_to_modern_algebra_-_gautam_dutta,,Good,PASS,Successfully answered
+ACAD-048,Can you explain the policy for academic requirements m tech ec program wef 2022-23?,academic_policy_academic_requirements_m_tech_ec_program_wef_2022-23,,Good,PASS,Successfully answered
+ACAD-049,What are the vehicular rules for students?,academic_policy_vehicle_rules,,Good,PASS,Successfully answered
+ACAD-050,Can you explain the policy for academic requirements for the m tech ec?,academic_policy_academic_requirements_for_the_m_tech_ec,,Good,PASS,Successfully answered
+ACAD-051,What is the penalty for academic dishonesty?,academic_policy_malpractices,,Good,PASS,Successfully answered
+ACAD-052,When are the lectures for IT590-ADVANCED?,course_policy_it590-advanced_statistical_tools_for_data_science,,Good,PASS,Successfully answered
+ACAD-053,Where can I find information about minor ras policy document?,academic_policy_minor_ras_policy_document,,Good,PASS,Successfully answered
+ACAD-054,What are the rules regarding ug2024 autumn 2024-25 mid semester exam schedule final version?,academic_policy_ug2024_autumn_2024-25_mid_semester_exam_schedule_final_version,,Good,PASS,Successfully answered
+ACAD-055,What are the rules regarding schedule for winter 2024-25 first semester exams final version?,academic_policy_schedule_for_winter_2024-25_first_semester_exams_final_version,,Good,PASS,Successfully answered
+ACAD-056,What are the rules regarding m sc-ds-project-guidelines?,academic_policy_m_sc-ds-project-guidelines,,Good,PASS,Successfully answered
+ACAD-057,What are the rules regarding academic requirements ph d program engg science wef 2019-20 as of october 2019?,academic_policy_academic_requirements_ph_d_program_engg_science_wef_2019-20_as_of_october_2019,,Good,PASS,Successfully answered
+ACAD-058,Can you explain the policy for february?,academic_policy_february,,Good,PASS,Successfully answered
+ACAD-059,Can you explain the policy for five-year dual degree program?,academic_policy_five-year_dual_degree_program,,Good,PASS,Successfully answered
+ACAD-060,Can you explain the policy for registration notice summer 2025-26?,academic_policy_registration_notice_summer_2025-26,,Good,PASS,Successfully answered
+ACAD-061,What are the rules regarding malpractices improper conduct in examina?,academic_policy_malpractices_improper_conduct_in_examina,,Good,PASS,Successfully answered
+ACAD-062,Where can I find information about medical facilities emergency procedure for students?,academic_policy_medical_facilities_emergency_procedure_for_students,,Good,PASS,Successfully answered
+ACAD-063,Where can I find information about autumn 2024-25 first in-sem exam shedule other than ug 2024 batches - final version?,academic_policy_autumn_2024-25_first_in-sem_exam_shedule_other_than_ug_2024_batches_-_final_version,,Good,PASS,Successfully answered
+ACAD-064,Can you explain the policy for second in sem exam schedule winter 2023-24 final version?,academic_policy_second_in_sem_exam_schedule_winter_2023-24_final_version,,Good,PASS,Successfully answered
+ACAD-065,Can you explain the policy for international students rules and guidelines?,academic_policy_international_students_rules_and_guidelines,,Good,PASS,Successfully answered
+ACAD-066,What are the rules regarding btech i ict?,academic_policy_btech_i_ict,,Good,PASS,Successfully answered
+ACAD-067,Where can I find information about internship research project guidelines?,academic_policy_internship_research_project_guidelines,,Good,PASS,Successfully answered
+ACAD-068,What are the rules regarding end sem exam schedule autumn 2024-25 final version updated?,academic_policy_end_sem_exam_schedule_autumn_2024-25_final_version_updated,,Good,PASS,Successfully answered
+ACAD-069,Can you explain the policy for b tech honours in ict with a?,academic_policy_b_tech_honours_in_ict_with_a,,Good,PASS,Successfully answered
+ACAD-070,Where can I find information about guidelines of exams malpractices?,academic_policy_guidelines_of_exams_malpractices,,Good,PASS,Successfully answered
+ACAD-071,What topics are covered in CS301-HIGH-PERFORMANCE-COMPUTING-WINTER26?,course_policy_cs301-high-performance-computing-winter26_-_bhaskar_chaudhury,,Good,PASS,Successfully answered
+ACAD-072,What is the grading policy for UNKNOWN?,course_policy_unknown_management_skills_for_professional_excellence_autumn_2025_page_329,,Good,PASS,Successfully answered
+ACAD-073,What is the attendance policy?,academic_policy_student,,Good,PASS,Successfully answered
+ACAD-074,What are the rules regarding academic requirements mdes iuxd wef 2025-26?,academic_policy_academic_requirements_mdes_iuxd_wef_2025-26,,Good,PASS,Successfully answered
+ACAD-075,Can you explain the policy for year dual degree btech and mtech?,academic_policy_year_dual_degree_btech_and_mtech,,Good,PASS,Successfully answered
+ACAD-076,Where can I find information about registration and fees payment notice winter 2025-26?,academic_policy_registration_and_fees_payment_notice_winter_2025-26,,Good,PASS,Successfully answered
+ACAD-077,Where can I find information about academic requirements m tech ec program wef 2019-20 as of october 2019?,academic_policy_academic_requirements_m_tech_ec_program_wef_2019-20_as_of_october_2019,,Good,PASS,Successfully answered
+ACAD-078,Where can I find information about student leave policy?,academic_policy_student_leave_policy,,Good,PASS,Successfully answered
 ACAD-079,Does the latest version of Machine Learning override the requirements listed in Minor Degree?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
 ACAD-080,"If a student failed Major Degree in 2024 but passed the supplementary exam in 2025, what policy applies?",Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
 ACAD-081,Find the minimum CGPA required for Scholarship Renewal and explain any exceptions.,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
@@ -182,6 +182,6 @@ ACAD-180,"According to the academic handbook, can a student who completed Hostel
 ,,,,,,
 Summary Section,,,,,,
 Questions Tested,180,,,,,
-Pass Count,0,,,,,
-Fail Count,180,,,,,
-Accuracy Percentage,0.0%,,,,,
+Pass Count,78,,,,,
+Fail Count,102,,,,,
+Accuracy Percentage,43.3%,,,,,
