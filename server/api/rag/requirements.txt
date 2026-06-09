@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 pydantic
-openai
+groq
 pinecone
 sentence-transformers
 torch
@@ -9,4 +9,4 @@ openai-whisper
 python-dotenv
 python-multipart
 PyYAML
-tiktoken
+numpy
