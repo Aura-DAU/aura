@@ -1,0 +1,41 @@
+Question ID,Question,Subcategory,Difficulty,Expected Source
+RES001,What research areas are available at DA-IICT?,Research Overview,Easy,research-overview
+RES002,Give an overview of research at DA-IICT.,Research Overview,Easy,research-overview
+RES003,What research is conducted in Artificial Intelligence?,AI & ML,Medium,ai-ml-and-data-science
+RES004,What research is conducted in Machine Learning?,AI & ML,Medium,ai-ml-and-data-science
+RES005,What research is conducted in Data Science?,AI & ML,Medium,ai-ml-and-data-science
+RES006,What research is done in Algorithms and Theory of Computation?,Algorithms,Medium,algorithms-and-theory-of-computation
+RES007,What research is done in Communication Systems?,Communications,Medium,communications-and-signal-processing
+RES008,What research is done in Signal Processing?,Communications,Medium,communications-and-signal-processing
+RES009,What research activities exist in Humanities and Social Sciences?,HSS,Medium,humanities-social-sciences-and-design
+RES010,What research is conducted in Design?,HSS,Medium,humanities-social-sciences-and-design
+RES011,What research is conducted in Physics?,Physics,Medium,physics-and-mathematical-sciences
+RES012,What research is conducted in Mathematical Sciences?,Physics,Medium,physics-and-mathematical-sciences
+RES013,What research is done in Networking?,Software Systems,Medium,software-systems-and-networking
+RES014,What research is done in Software Systems?,Software Systems,Medium,software-systems-and-networking
+RES015,What research is done in VLSI?,VLSI,Medium,vlsi-and-embedded-systems
+RES016,What research is done in Embedded Systems?,VLSI,Medium,vlsi-and-embedded-systems
+RES017,Who is the Dean of Research and Development?,Dean R&D,Easy,dean-rd
+RES018,What does the Dean R&D office do?,Dean R&D,Medium,dean-rd
+RES019,Where can I find faculty publications?,Publications,Easy,faculty-publications
+RES020,Show recent faculty publications.,Publications,Medium,faculty-publications
+RES021,What sponsored projects are running at DA-IICT?,Sponsored Projects,Medium,sponsored-projects
+RES022,How are research projects funded?,Sponsored Projects,Medium,sponsored-projects
+RES023,What is the Research Publication Incentive Scheme?,Research Incentives,Medium,publication incentive
+RES024,What incentives exist for research publications?,Research Incentives,Medium,publication incentive
+RES025,What is the Institutional Review Board?,IRB,Medium,IRB
+RES026,When is IRB approval required?,IRB,Medium,IRB
+RES027,How do I apply for IRB approval?,IRB,Medium,IRB
+RES028,What are the recent research accomplishments?,Accomplishments,Medium,accomplishments
+RES029,What are some noteworthy research contributions?,Contributions,Medium,noteworthy-contributions
+RES030,Where can I find theses and reports?,Theses,Easy,theses-and-reports
+RES031,Can students access past theses?,Theses,Easy,theses-and-reports
+RES032,What is the Summer Research Internship Program?,SRI,Easy,summer-research-internship
+RES033,Who can apply for the Summer Research Internship?,SRI,Medium,summer-research-internship
+RES034,What is the Student Research Excellence Award?,Awards,Medium,student-research-excellence-award
+RES035,Who can receive the Student Research Excellence Award?,Awards,Medium,student-research-excellence-award
+RES036,What are Thematic Research Areas?,TRA,Medium,thematic research areas
+RES037,What support is available for PhD research?,PhD Support,Medium,phd research allowance
+RES038,Is travel funding available for PhD students?,PhD Support,Medium,phd research allowance
+RES039,How does DA-IICT support research activities?,Research Support,Medium,multiple sources
+RES040,What research opportunities are available for students?,Research Opportunities,Medium,multiple sources

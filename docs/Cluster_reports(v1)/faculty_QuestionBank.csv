@@ -1,0 +1,41 @@
+Question ID,Question,Subcategory,Difficulty,Expected Source
+FAC001,Who are the faculty members at DA-IICT?,Faculty Directory,Easy,faculty
+FAC002,Where can I find the faculty directory?,Faculty Directory,Easy,faculty
+FAC003,List all faculty members in the institute.,Faculty Directory,Easy,faculty
+FAC004,How can I contact a faculty member?,Contact Information,Easy,faculty
+FAC005,What is the email address of Professor X?,Contact Information,Easy,faculty profile
+FAC006,What is the office location of Professor X?,Contact Information,Easy,faculty profile
+FAC007,Who is the Dean of Faculty?,Dean Faculty,Easy,dean-faculty
+FAC008,What are the responsibilities of the Dean of Faculty?,Dean Faculty,Medium,dean-faculty
+FAC009,What is Professor X's designation?,Designation,Easy,faculty profile
+FAC010,Which department does Professor X belong to?,Department Affiliation,Easy,faculty profile
+FAC011,What are Professor X's qualifications?,Qualifications,Medium,faculty profile
+FAC012,What degrees does Professor X hold?,Qualifications,Medium,faculty profile
+FAC013,What are Professor X's research interests?,Research Interests,Medium,faculty profile
+FAC014,Which faculty members work in Artificial Intelligence?,Research Interests,Medium,faculty profile
+FAC015,Which faculty members work in Machine Learning?,Research Interests,Medium,faculty profile
+FAC016,Which faculty members work in Data Science?,Research Interests,Medium,faculty profile
+FAC017,What is Professor X's area of expertise?,Expertise,Medium,faculty profile
+FAC018,Who specializes in Cyber Security?,Expertise,Medium,faculty profile
+FAC019,Who specializes in VLSI Design?,Expertise,Medium,faculty profile
+FAC020,Who specializes in Human Computer Interaction?,Expertise,Medium,faculty profile
+FAC021,Where can I find faculty publications?,Publications,Easy,faculty-publications
+FAC022,What publications has Professor X authored?,Publications,Medium,faculty-publications
+FAC023,Show recent faculty publications.,Publications,Medium,faculty-publications
+FAC024,Does DA-IICT provide publication incentives to faculty?,Publication Incentive,Medium,faculty-research-publication-incentive
+FAC025,What is the Faculty Research Publication Incentive Scheme?,Publication Incentive,Medium,faculty-research-publication-incentive
+FAC026,What awards has Professor X received?,Awards,Medium,faculty profile
+FAC027,Which faculty members have received notable awards?,Awards,Medium,faculty profile
+FAC028,Who are the adjunct faculty members?,Adjunct Faculty,Easy,adjunct-faculty
+FAC029,What is an adjunct faculty member?,Adjunct Faculty,Easy,adjunct-faculty
+FAC030,Who are the international adjunct faculty members?,International Adjunct Faculty,Easy,adjunct-faculty-international
+FAC031,What is the Faculty Entrepreneurship Policy?,Policy,Medium,faculty entrepreneurship policy
+FAC032,Can faculty members start companies while at DA-IICT?,Policy,Medium,faculty entrepreneurship policy
+FAC033,What information is included in the Faculty Handbook?,Faculty Handbook,Medium,faculty handbook
+FAC034,Where can I access the Faculty Handbook?,Faculty Handbook,Easy,faculty handbook
+FAC035,How can faculty members raise grievances?,Grievance,Medium,grievance authority
+FAC036,What is the Faculty Grievance Redressal Authority?,Grievance,Medium,grievance authority
+FAC037,Are there faculty positions open in Computer Science?,Recruitment,Easy,faculty positions
+FAC038,Are there faculty positions open in Data Science?,Recruitment,Easy,faculty positions
+FAC039,What faculty recruitment opportunities are available?,Recruitment,Easy,faculty positions
+FAC040,What is the faculty tenure track process?,Recruitment,Medium,faculty-tenure
