@@ -11,49 +11,61 @@
 
 ---
 
-## 🔍 Semantic Category Gaps
+## 🔍 Semantic Category Gaps & Specific Failed Questions
 
-Based on the evaluation of the 150-question bank, the following core knowledge gaps were identified in the RAG system:
+The evaluation identified 26 queries that failed because of missing context or incorrect retrieval alignment. These are categorized below:
 
-### Gap 1: Faculty Directory Navigation & Capabilities
+### Gap 1: Faculty Directory Navigation & Website Features
+* **Failure Description:** The RAG system lacks meta-information regarding how the website's directory is operated, structured, filtered, or searched.
 * **Failed Questions:**
+  * `FAC002`: *Where can I find the official faculty list?*
+  * `FAC003`: *How do I access faculty profiles?*
+  * `FAC004`: *What information is available in faculty profiles?*
+  * `FAC005`: *Where is the DA-IICT faculty directory hosted?*
+  * `FAC006`: *How can I search for a specific faculty member?*
+  * `FAC008`: *Where can I find faculty email addresses?*
+  * `FAC009`: *Does DA-IICT provide department-wise faculty listing?*
+  * `FAC010`: *How is faculty information structured on the website?*
+  * `FAC011`: *Can I view faculty designations online?*
+  * `FAC012`: *Where can I find faculty office locations?*
+  * `FAC013`: *Is the faculty directory updated regularly?*
   * `FAC014`: *Can I filter faculty by department?*
   * `FAC016`: *How detailed are faculty profiles at DA-IICT?*
+  * `FAC018`: *Can students contact faculty directly?*
   * `FAC019`: *Is faculty profile information publicly accessible?*
   * `FAC020`: *Where is the main faculty database maintained?*
-* **Failure Reason:** The RAG system retrieves individual faculty profile files but has no meta-information about the web interface's directory capabilities (such as filtering by department, API access, or update schedules).
-* **Missing Knowledge:** Documentation explaining the features, search filters, structure, and backend database of the official DA-IICT Faculty Directory.
+* **Missing Knowledge:** Explicit guide describing the search filters, department lists, data schema, office list mappings, and accessibility rules of the online directory.
 * **Required Source:** DA-IICT Webmaster or IT administration guide.
 * **Priority:** Medium
 
 ### Gap 2: Dean of Faculty Affairs Appointment & Office Details
+* **Failure Description:** General biography pages are available, but details about the office room numbers or appointment procedures are missing from the scraped dataset.
 * **Failed Questions:**
   * `FAC027`: *How is the Dean Faculty appointed?*
   * `FAC029`: *Where is the Dean Faculty office located?*
-* **Failure Reason:** The RAG system retrieved the Dean's page, but the page only lists the Dean's name and general welcome message. Details on office room numbers and appointment processes are absent.
-* **Missing Knowledge:** Specific office location (room number/building) of the Dean of Faculty Affairs and the selection/appointment criteria.
-* **Required Source:** Faculty Handbook or Administration Office.
+* **Missing Knowledge:** Selection and appointment procedures for the Dean of Faculty Affairs, and their physical office location on campus.
+* **Required Source:** Faculty Handbook or Administration Office policies.
 * **Priority:** Medium
 
-### Gap 3: Adjunct & International Faculty Selection & Roles
+### Gap 3: Adjunct & International Faculty Appointment Guidelines & Roles
+* **Failure Description:** The RAG system retrieved historical annual reports or old NAAC files containing noise, but failed to locate any active guidelines defining the definition, status, and selection of adjunct professors.
 * **Failed Questions:**
   * `FAC031`: *What are adjunct faculty members?*
   * `FAC034`: *What is the role of adjunct faculty?*
   * `FAC035`: *Are adjunct faculty full-time employees?*
   * `FAC036`: *How are adjunct faculty selected?*
   * `FAC038`: *Where is international adjunct faculty information available?*
-* **Failure Reason:** The RAG system retrieved historical annual reports or NAAC cycle documents containing noise, but failed to retrieve current active policies or pages clarifying the selection criteria and roles of adjunct faculty.
 * **Missing Knowledge:** Clear, structured policy document on the appointment, criteria, expectations, and status of adjunct and international visiting faculty.
 * **Required Source:** Registrar Office or Academic Dean policies.
 * **Priority:** High
 
 ### Gap 4: Centralized Research Output and Searching
+* **Failure Description:** The system can search individual profile documents, but has no context on whether a centralized library database exists for searching across all publications.
 * **Failed Questions:**
   * `FAC044`: *Is there a database for faculty research output?*
   * `FAC045`: *Can I search faculty publications by name?*
   * `FAC048`: *Where is publication data stored?*
-* **Failure Reason:** The system has individual profiles containing list of publications, but lacks information on whether a centralized library database (e.g., IRINS, Scopus, or a local library repository) is available for searching.
-* **Missing Knowledge:** Guide on using the DA-IICT Library or institutional repository to search and browse publications.
+* **Missing Knowledge:** Reference documentation about the DA-IICT Library repository (e.g., IRINS or library search system) for tracking research papers.
 * **Required Source:** DA-IICT Library guide or IRINS portal documentation.
 * **Priority:** Medium
 
