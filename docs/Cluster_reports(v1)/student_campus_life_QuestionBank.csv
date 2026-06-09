@@ -1,0 +1,251 @@
+Question ID,Question,Subcategory,Difficulty,Expected Source
+Q001,Who is the Dean of Students at DAU?,Dean of Students,Easy,data/student_services/dean_students.md
+Q002,What is the email address of the Dean of Students office?,Dean of Students,Easy,data/student_services/dean_students.md
+Q003,What is the phone number of the Executive Assistant to the Dean of Students?,Dean of Students,Easy,data/student_services/dean_students.md
+Q004,Who is the Executive Assistant to the Dean of Students?,Dean of Students,Easy,data/student_services/dean_students.md
+Q005,What does the Dean of Students oversee at DAU?,Dean of Students,Medium,data/student_services/dean_students.md
+Q006,How many student committees are there under the SBG?,Student Body Government,Easy,data/student_services/dean_students.md
+Q007,How many student clubs are there under the SBG?,Student Body Government,Easy,data/student_services/dean_students.md
+Q008,What does SBG stand for?,Student Body Government,Easy,data/student_services/dean_students.md
+Q009,What is the email address of the SBG?,Student Body Government,Easy,data/student_services/dean_students.md
+Q010,Who is the Convenor of the SBG?,Student Body Government,Easy,data/student_services/dean_students.md
+Q011,Who is the Deputy Convenor of the SBG?,Student Body Government,Easy,data/student_services/dean_students.md
+Q012,Who is the Treasurer of the SBG?,Student Body Government,Easy,data/student_services/dean_students.md
+Q013,Who is the Secretary of the SBG?,Student Body Government,Easy,data/student_services/dean_students.md
+Q014,What are the goals of the Student Body Government?,Student Body Government,Medium,data/student_services/dean_students.md
+Q015,What is the RBG and who does it serve?,Research Body Government,Medium,data/student_services/dean_students.md
+Q016,Who is the Convenor of the RBG?,Research Body Government,Easy,data/student_services/dean_students.md
+Q017,What is the email address of the RBG?,Research Body Government,Easy,data/student_services/dean_students.md
+Q018,List all 8 student committees at DAU.,Student Committees,Medium,data/student_services/dean_students.md
+Q019,What does the Academic Committee do?,Student Committees,Medium,data/student_services/dean_students.md
+Q020,Who is the Convenor of the Academic Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q021,What is the email address of the Academic Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q022,What events does the Annual Festival Committee organize?,Student Committees,Medium,data/student_services/dean_students.md
+Q023,Who is the Convenor of the Annual Festival Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q024,What is the email address of the Annual Festival Committee / Synapse?,Student Committees,Easy,data/student_services/dean_students.md
+Q025,What is the Cafeteria Management Committee (CMC) responsible for?,Student Committees,Medium,data/student_services/dean_students.md
+Q026,Who is the Convenor of the CMC?,Student Committees,Easy,data/student_services/dean_students.md
+Q027,What is the email of the CMC?,Student Committees,Easy,data/student_services/dean_students.md
+Q028,What does the Cultural Committee do?,Student Committees,Medium,data/student_services/dean_students.md
+Q029,Who is the Convenor of the Cultural Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q030,What is the email of the Cultural Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q031,What is the Hostel Management Committee (HMC) responsible for?,Student Committees,Medium,data/student_services/dean_students.md
+Q032,Who is the Convenor of the HMC?,Student Committees,Easy,data/student_services/dean_students.md
+Q033,What is the email of the HMC?,Student Committees,Easy,data/student_services/dean_students.md
+Q034,What does the TechSupport Committee handle?,Student Committees,Medium,data/student_services/dean_students.md
+Q035,Who is the Convenor of the TechSupport Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q036,What is the email of the TechSupport Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q037,What flagship events does the Sports Committee organize?,Student Committees,Medium,data/student_services/dean_students.md
+Q038,Who is the Convenor of the Sports Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q039,What is the email of the Sports Committee?,Student Committees,Easy,data/student_services/dean_students.md
+Q040,What is the Student Placement Cell (SPC) responsible for?,Student Committees,Medium,data/student_services/dean_students.md
+Q041,Who is the Convenor of the SPC?,Student Committees,Easy,data/student_services/dean_students.md
+Q042,What is the email of the SPC?,Student Committees,Easy,data/student_services/dean_students.md
+Q043,What is the AI Club about and what activities does it organize?,Student Clubs,Medium,data/student_services/dean_students.md
+Q044,Who is the Convenor of the AI Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q045,What is the email of the AI Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q046,What publications does the Press Club produce?,Student Clubs,Medium,data/student_services/dean_students.md
+Q047,Who is the Convenor of the Press Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q048,What is the email of the Press Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q049,What is DebSoc and what events does it organize?,Student Clubs,Medium,data/student_services/dean_students.md
+Q050,Who is the Convenor of the Debating Society?,Student Clubs,Easy,data/student_services/dean_students.md
+Q051,What is the email of the Debating Society?,Student Clubs,Easy,data/student_services/dean_students.md
+Q052,What is DADC and what are its notable achievements?,Student Clubs,Medium,data/student_services/dean_students.md
+Q053,Who is the Convenor of the Dance Club (DADC)?,Student Clubs,Easy,data/student_services/dean_students.md
+Q054,What is the email of the Dance Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q055,What does the Programming Club do and what competitions does it promote?,Student Clubs,Medium,data/student_services/dean_students.md
+Q056,Who is the Convenor of the Programming Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q057,What is the email of the Programming Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q058,What does the Music Club offer to students?,Student Clubs,Medium,data/student_services/dean_students.md
+Q059,Who is the Convenor of the Music Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q060,What is the email of the Music Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q061,What type of performances does the DAU Theatres Group do?,Student Clubs,Medium,data/student_services/dean_students.md
+Q062,Who is the Convenor of the DAU Theatres Group?,Student Clubs,Easy,data/student_services/dean_students.md
+Q063,What is the email of the DAU Theatres Group?,Student Clubs,Easy,data/student_services/dean_students.md
+Q064,What is the Research Club about?,Student Clubs,Medium,data/student_services/dean_students.md
+Q065,Who is the Convenor of the Research Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q066,What is the email of the Research Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q067,What does the Chess Club do on campus?,Student Clubs,Easy,data/student_services/dean_students.md
+Q068,Who is the Convenor of the Chess Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q069,What is the email of the Chess Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q070,What does the Electronics Hobby Club (EHC) work with?,Student Clubs,Medium,data/student_services/dean_students.md
+Q071,Who is the Convenor of the EHC?,Student Clubs,Easy,data/student_services/dean_students.md
+Q072,What is the email of the EHC?,Student Clubs,Easy,data/student_services/dean_students.md
+Q073,What does PMMC stand for and what does the club focus on?,Student Clubs,Easy,data/student_services/dean_students.md
+Q074,Who is the Convenor of the Photography and Movie Making Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q075,What is the email of the PMMC?,Student Clubs,Easy,data/student_services/dean_students.md
+Q076,What events does the Film Club organize?,Student Clubs,Medium,data/student_services/dean_students.md
+Q077,Who is the Convenor of the Film Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q078,What is the email of the Film Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q079,What does the Google Developer Group (GDG) at DAU do?,Student Clubs,Medium,data/student_services/dean_students.md
+Q080,Who is the Convenor of GDG?,Student Clubs,Easy,data/student_services/dean_students.md
+Q081,What is the email of GDG?,Student Clubs,Easy,data/student_services/dean_students.md
+Q082,What is the IEEE Student Branch's objective at DAU?,Student Chapters & Societies,Medium,data/student_services/dean_students.md
+Q083,Who is the Convenor of the IEEE Student Branch?,Student Chapters & Societies,Easy,data/student_services/dean_students.md
+Q084,What is the email of the IEEE Student Branch?,Student Chapters & Societies,Easy,data/student_services/dean_students.md
+Q085,What events does the IEEE Student Branch organize?,Student Chapters & Societies,Medium,data/student_services/dean_students.md
+Q086,What does the Khelaiya Club do?,Student Clubs,Medium,data/student_services/dean_students.md
+Q087,Who is the Convenor of the Khelaiya Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q088,What is the email of the Khelaiya Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q089,What does the Cubing Club do on campus?,Student Clubs,Easy,data/student_services/dean_students.md
+Q090,Who is the Convenor of the Cubing Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q091,What is the email of the Cubing Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q092,What events does The Radio Club organize?,Student Clubs,Medium,data/student_services/dean_students.md
+Q093,Who is the Convenor of The Radio Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q094,What is the email of The Radio Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q095,What is Headrush and what does it do?,Student Clubs,Easy,data/student_services/dean_students.md
+Q096,Who is the Convenor of the Headrush Quizzing Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q097,What is the email of the Quizzing Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q098,What does the Business Club do?,Student Clubs,Medium,data/student_services/dean_students.md
+Q099,Who is the Convenor of the Business Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q100,What is the email of the Business Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q101,What does MSTC stand for and what events does it organize?,Student Clubs,Medium,data/student_services/dean_students.md
+Q102,Who is the Convenor of MSTC?,Student Clubs,Easy,data/student_services/dean_students.md
+Q103,What is the email of MSTC?,Student Clubs,Easy,data/student_services/dean_students.md
+Q104,What is Muse – The Designing Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q105,Who is the Convenor of Muse?,Student Clubs,Easy,data/student_services/dean_students.md
+Q106,What is the email of Muse?,Student Clubs,Easy,data/student_services/dean_students.md
+Q107,What does CINS stand for and what does the club focus on?,Student Clubs,Easy,data/student_services/dean_students.md
+Q108,Who is the Convenor of the CINS Club?,Student Clubs,Easy,data/student_services/dean_students.md
+Q109,What is the email of CINS?,Student Clubs,Easy,data/student_services/dean_students.md
+Q110,What is DCEI and when was it established?,Student Chapters & Societies,Medium,data/student_services/committees/entrepreneurship_cell.md
+Q111,What is the mission of DCEI?,Student Chapters & Societies,Medium,data/student_services/committees/entrepreneurship_cell.md
+Q112,How many incubates has DCEI produced?,Student Chapters & Societies,Easy,data/student_services/committees/entrepreneurship_cell.md
+Q113,Who supports DCEI financially / institutionally?,Student Chapters & Societies,Medium,data/student_services/committees/entrepreneurship_cell.md
+Q114,How many sports facilities does DAU have in total?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q115,How many basketball courts does DAU have?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q116,How many indoor badminton courts are there on campus?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q117,Does DAU have a cricket field?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q118,What is the length of the athletic track at DAU?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q119,How many volleyball courts does DAU have?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q120,How many table tennis tables are in the DAU Table Tennis Hall?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q121,Does DAU have a gymnasium?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q122,Is there a yoga and meditation zone on the DAU campus?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q123,What are the two coaching phases for sports at DAU?,Sports Facilities,Medium,data/infrastructure/sports_complex.md
+Q124,When does Phase I of sports coaching take place at DAU?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q125,When does Phase II of sports coaching take place at DAU?,Sports Facilities,Easy,data/infrastructure/sports_complex.md
+Q126,What inter-collegiate tournaments does DAU participate in at state/national level?,Sports Facilities,Medium,data/infrastructure/sports_complex.md
+Q127,How many Halls of Residence are there at DAU?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q128,What are the wings in the New Men's Hall of Residence?,Hostel Facilities,Medium,data/infrastructure/halls_of_residence.md
+Q129,What is the capacity of the New Men's Hall of Residence?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q130,How many wings does the old Men's Hall of Residence have?,Hostel Facilities,Medium,data/infrastructure/halls_of_residence.md
+Q131,What is the capacity of the old Men's Hall of Residence?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q132,What is the total capacity of the Women's Hall of Residence?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q133,What wings are in the Women's Hall of Residence?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q134,What furniture is provided in DAU hostel rooms?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q135,Is internet provided in DAU hostels?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q136,Is hot water available in the DAU hostels?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q137,Is there a laundry/dhobi facility at DAU hostels?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q138,Are there TV rooms in DAU hostels?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q139,Are mattresses provided in DAU hostel rooms?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q140,Is hostel accommodation mandatory for B.Tech students?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q141,Can PG students get hostel accommodation at DAU?,Hostel Facilities,Medium,data/infrastructure/halls_of_residence.md
+Q142,Is there a mess (dining hall) inside the DAU hostel?,Hostel Facilities,Easy,data/student_services/dean_students.md
+Q143,Is there a guest room available in the Women's hostel and for what purpose?,Hostel Facilities,Medium,data/infrastructure/halls_of_residence.md
+Q144,What security arrangements exist for the Women's Hall of Residence?,Hostel Facilities,Medium,data/infrastructure/halls_of_residence.md
+Q145,Are CCTV cameras installed in the Men's hostel?,Hostel Facilities,Easy,data/student_services/dean_students.md
+Q146,Who is the Warden for the Men's Hall of Residence?,Hostel Facilities,Easy,data/student_services/dean_students.md
+Q147,Who is the Warden for the Women's Hall of Residence?,Hostel Facilities,Easy,data/student_services/dean_students.md
+Q148,Who is the Resident Warden at DAU and what is their email?,Hostel Facilities,Easy,data/student_services/dean_students.md
+Q149,What is the contact number of the Resident Warden?,Hostel Facilities,Easy,data/student_services/dean_students.md
+Q150,Who are the Hostel Supervisors and what are their contacts?,Hostel Facilities,Medium,data/student_services/dean_students.md
+Q151,How is room allocation done for new students in the hostel?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q152,Can a student request a room change in the hostel?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q153,For how many years can a UG student avail hostel accommodation?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q154,What is the curfew (return to campus) time for hostel residents?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q155,Can residents leave the campus between midnight and 6 AM?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q156,What must a resident do if they plan to stay outside the hostel overnight?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q157,Is alcohol allowed in the DAU hostel?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q158,Is smoking allowed on the DAU campus?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q159,Can men enter the Women's Hall of Residence?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q160,What is the fine for having someone stay in your room without permission?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q161,Is ragging allowed at DAU and what are the consequences?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q162,Can students bring food inside the Halls of Residence?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q163,What is the fine for bringing food inside the hostel rooms?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q164,Which electrical appliances are prohibited in DAU hostel rooms?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q165,Is cooking allowed in the Halls of Residence?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q166,Can students park 4-wheelers (cars) on the DAU campus?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q167,Can students keep 2-wheelers on campus? What are the parking rules?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q168,What happens if a student violates vehicle or traffic rules on campus for the first time?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q169,Are visitors allowed inside the Halls of Residence?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q170,What is the guest room rent for parents visiting the hostel?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q171,What is the guest room rent for non-resident DAU students staying in the hostel?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q172,What is the fine for entertaining a visitor without prior intimation?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q173,Are pets allowed in the Halls of Residence?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q174,What is the fine for losing a hostel room key?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q175,What is the fine for leaving a hostel room unlocked and vacant?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q176,Can residents use their own locks in the hostel room?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q177,What is the minimum fine for breaking any hostel rule?,Hostel Rules & Policies,Easy,data/student_services/rules/hostel_rules_and_regulations.md
+Q178,Who are the members of the Hostel Management Committee?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q179,How many food courts are there on the DAU campus?,Campus Amenities,Easy,data/infrastructure/food_court.md
+Q180,What types of cuisine are available at DAU food courts?,Campus Amenities,Easy,data/infrastructure/food_court.md
+Q181,Is non-vegetarian and egg food available on the DAU campus?,Campus Amenities,Easy,data/infrastructure/food_court.md
+Q182,Are Amul products available at the DAU food courts?,Campus Amenities,Easy,data/infrastructure/food_court.md
+Q183,How are the food courts managed at DAU?,Campus Amenities,Medium,data/infrastructure/food_court.md
+Q184,Is there a food court at DAU specifically serving breakfast and snacks?,Campus Amenities,Easy,data/infrastructure/food_court.md
+Q185,Is there a food court at DAU serving fruit and fruit juices?,Campus Amenities,Easy,data/infrastructure/food_court.md
+Q186,How many doctors visit the DAU Medical Centre daily?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q187,What are the visiting hours of Dr. Arvindsinh Vaghela at the Medical Centre?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q188,What are the visiting hours of Dr. Charulata Harshe at the Medical Centre?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q189,What are the visiting hours of Dr. Anjana Ved at the Medical Centre?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q190,Are medical consultations at the DAU Medical Centre free for students?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q191,Are medicines dispensed at the Medical Centre free of charge?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q192,Which hospitals have signed an MoU with DAU for student medical treatment?,Medical Facilities,Medium,data/infrastructure/medical_facility.md
+Q193,How far is Aashka Hospital from the DAU campus?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q194,Is there a 24x7 vehicle available for medical emergencies at DAU?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q195,What is the Group Mediclaim Insurance coverage amount for DAU students?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q196,Which insurance company provides the DAU Group Mediclaim policy?,Medical Facilities,Easy,data/infrastructure/medical_facility.md
+Q197,What type of medical treatment does the DAU Mediclaim policy cover?,Medical Facilities,Medium,data/infrastructure/medical_facility.md
+Q198,What is the emergency intercom number for the DAU Medical Centre?,Medical Facilities,Easy,data/student_services/medical_assistance_sop.md
+Q199,What is the landline number of the DAU Medical Centre for emergencies?,Medical Facilities,Easy,data/student_services/medical_assistance_sop.md
+Q200,Who are the nurses at the Medical Centre and what are their hours?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q201,Is nursing staff available on weekends at the DAU Medical Centre?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q202,What is the contact email of the DAU Medical Centre?,Medical Facilities,Easy,data/student_services/medical_assistance_sop.md
+Q203,What hospitals are empanelled with DAU for student treatment (full list)?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q204,What is the emergency contact number for SGVNS Swaminarayan Hospital?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q205,What is the emergency contact number for Apollo Hospital Gandhinagar?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q206,Does DAU have a counselling or stress management centre for students?,Medical Facilities,Easy,data/student_services/medical_assistance_sop.md
+Q207,Who are the counsellors at the Stress Management Centre and when are they available?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q208,Where is Dr. Nandini Banerjee's counselling room on campus?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q209,What is the SBG structure in terms of committees and clubs?,Student Activity Board Structure,Medium,data/student_services/dean_students.md
+Q210,What is the overall role of the Student Body Government at DAU?,Student Activity Board Structure,Medium,data/student_services/dean_students.md
+Q211,What is the Disciplinary Action Committee (DAC) and who are its members?,Student Support Services,Medium,data/student_services/dean_students.md
+Q212,What is the direct contact number of the Dean of Students?,Student Support Services,Easy,data/student_services/dean_students.md
+Q213,What is the purpose of the Grievance Redressal Cell at DAU?,Student Support Services,Medium,data/student_services/grievance_redressal_cell.md
+Q214,What types of grievances can students raise through the GRHS?,Student Support Services,Medium,data/student_services/grievance_redressal_cell.md
+Q215,What matters are out of scope of the Grievance Redressal Handling System?,Student Support Services,Medium,data/student_services/grievance_redressal_cell.md
+Q216,Where can students find anti-ragging information at DAU?,Student Support Services,Easy,data/student_services/dean_students.md
+Q217,What cultural activities does the Cultural Committee organize?,Cultural Activities,Medium,data/student_services/dean_students.md
+Q218,What is Synapse at DAU?,Cultural Activities,Easy,data/student_services/dean_students.md
+Q219,What is HackOut at DAU?,Cultural Activities,Easy,data/student_services/dean_students.md
+Q220,What is YouthRun at DAU?,Cultural Activities,Easy,data/student_services/dean_students.md
+Q221,What campus security arrangement does DAU have (round the clock)?,Campus Infrastructure,Easy,data/infrastructure/campus_security.md
+Q222,Who administers and monitors campus security at DAU?,Campus Infrastructure,Medium,data/infrastructure/campus_security.md
+Q223,Can security staff ask students or visitors for identification?,Campus Infrastructure,Easy,data/infrastructure/campus_security.md
+Q224,Is rural internship mandatory for B.Tech students at DAU?,Student Support Services,Medium,data/student_services/dean_students.md
+Q225,What should first-year students expect when joining DAU campus life?,Student Support Services,Medium,data/student_services/first_year_in_campus.md
+Q226,What academic advice is given to first-year students at DAU?,Student Support Services,Medium,data/student_services/first_year_in_campus.md
+Q227,Where is the DAU campus located?,Campus Maps & Locations,Easy,data/student_services/contact/location_contact.md
+Q228,What is the full official name of the university (DAU)?,Campus Maps & Locations,Easy,data/student_services/contact/location_contact.md
+Q229,What are the room types available in the New Men's HoR?,Hostel Facilities,Medium,data/infrastructure/halls_of_residence.md
+Q230,What type of internet connection is available in the Women's HoR?,Hostel Facilities,Easy,data/infrastructure/halls_of_residence.md
+Q231,What is Concours in the context of DAU sports?,Student Committees,Medium,data/student_services/dean_students.md
+Q232,What is DCL (DAU Cricket League)?,Student Committees,Easy,data/student_services/dean_students.md
+Q233,What is the Inter-Wing Tournament at DAU?,Student Committees,Easy,data/student_services/dean_students.md
+Q234,What is Freshers' Weekend at DAU?,Student Committees,Easy,data/student_services/dean_students.md
+Q235,Which dance club won WALTZ in 2024?,Cultural Activities,Easy,data/student_services/dean_students.md
+Q236,What are the notable achievements of the DAU Theatres Group?,Cultural Activities,Medium,data/student_services/dean_students.md
+Q237,What is i.Fest and which club organizes it?,Student Chapters & Societies,Easy,data/student_services/dean_students.md
+Q238,What is the flagship magazine published by the Press Club at DAU?,Student Clubs,Easy,data/student_services/dean_students.md
+Q239,What is the campus newsletter published by the DAU Press Club called?,Student Clubs,Easy,data/student_services/dean_students.md
+Q240,What sports disciplines does DAU compete in at district/state/national tournaments?,Sports Facilities,Medium,data/infrastructure/sports_complex.md
+Q241,What is the vision of the DAU Sports Department?,Sports Facilities,Medium,data/infrastructure/sports_complex.md
+Q242,Can a sick student get food delivered to their hostel room?,Hostel Rules & Policies,Medium,data/student_services/rules/hostel_rules_and_regulations.md
+Q243,How should students or employees resolve disputes at DAU as a first step?,Student Support Services,Medium,data/student_services/grievance_redressal_cell.md
+Q244,How can DAU students generate their Group Mediclaim insurance card?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q245,What should students do in a medical emergency outside Medical Centre working hours?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q246,Is there a 24x7 ambulance facility on the DAU campus?,Medical Facilities,Easy,data/student_services/medical_assistance_sop.md
+Q247,What is the Kashka Hospital contact number for emergencies?,Medical Facilities,Medium,data/student_services/medical_assistance_sop.md
+Q248,Who are the members of the DAC (Disciplinary Action Committee)?,Student Support Services,Hard,data/student_services/dean_students.md
+Q249,What are the key disciplinary rules for students at DAU?,Student Support Services,Medium,data/student_services/dean_students.md
+Q250,How many clubs under SBG focus on technology (coding/engineering/cyber)?,Student Clubs,Hard,data/student_services/dean_students.md
