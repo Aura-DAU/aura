@@ -1,187 +1,187 @@
 Question ID,Question,Expected Source,Retrieved Source,Answer Quality,Pass/Fail,Notes
-ACAD-001,Who is the instructor for MC223?,course_policy_mc223_theory_of_computation_winter24_pdf_-_puneet_bhateja,,Poor,FAIL,HTTP status 502
-ACAD-002,What are the rules regarding student leave policy wef ay2021-22?,academic_policy_student_leave_policy_wef_ay2021-22,,Poor,FAIL,HTTP status 502
-ACAD-003,What is the grading policy for IT628?,course_policy_it628_system_programming,,Poor,FAIL,HTTP status 502
-ACAD-004,Where can I find information about end sem exam schedule winter 2023-24 final version?,academic_policy_end_sem_exam_schedule_winter_2023-24_final_version,,Poor,FAIL,HTTP status 502
-ACAD-005,Who is the instructor for IE406?,course_policy_ie406_machine_learning_autumn_2025_page_215,,Poor,FAIL,HTTP status 502
-ACAD-006,What are the rules regarding academic requirements ph d program -hss design wef 2024-25 as of july 2024?,academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2024-25_as_of_july_2024,,Poor,FAIL,HTTP status 502
-ACAD-007,What are the prerequisites for PC110?,course_policy_pc110_introduction_to_language_and_literature_autumn_2025_page_6,,Poor,FAIL,HTTP status 502
-ACAD-008,What are the prerequisites for DS612-INTERACTIVE?,course_policy_ds612-interactive_data_visualization-winter26_-_bhaskar_chaudhury,,Poor,FAIL,HTTP status 502
-ACAD-009,Can you explain the policy for winter 2023-24 first in sem exam schedule final version?,academic_policy_winter_2023-24_first_in_sem_exam_schedule_final_version,,Poor,FAIL,HTTP status 502
-ACAD-010,Can you explain the policy for academic requirements ph d program enggscience wef 2024-25 as of july 2024?,academic_policy_academic_requirements_ph_d_program_enggscience_wef_2024-25_as_of_july_2024,,Poor,FAIL,HTTP status 502
-ACAD-011,What topics are covered in IT314?,course_policy_it314_software_engineering_autumn_2025_page_92,,Poor,FAIL,HTTP status 502
-ACAD-012,When are the lectures for HM489?,course_policy_hm489_international_economics_winter26_-_cyril_jos_nazhicheril,,Poor,FAIL,HTTP status 502
-ACAD-013,Can you explain the policy for btech ii ict?,academic_policy_btech_ii_ict,,Poor,FAIL,HTTP status 502
-ACAD-014,Where can I find information about academic requirements mdes cd wef 2025-26 as of august 2025?,academic_policy_academic_requirements_mdes_cd_wef_2025-26_as_of_august_2025,,Poor,FAIL,HTTP status 502
-ACAD-015,Can you explain the policy for academic requirements ph d program -hss design wef 2019-20 as of october 2019?,academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502
-ACAD-016,What are the prerequisites for UNKNOWN?,course_policy_unknown_principles_of_economics_autumn_2025_page_111,,Poor,FAIL,HTTP status 502
-ACAD-017,Can you explain the policy for student?,academic_policy_student,,Poor,FAIL,HTTP status 502
-ACAD-018,When do the mid-semester exams start?,academic_policy_schedule,,Poor,FAIL,HTTP status 502
-ACAD-019,Can you explain the policy for medical facilities for students of da ii?,academic_policy_medical_facilities_for_students_of_da_ii,,Poor,FAIL,HTTP status 502
-ACAD-020,Can you explain the policy for policy for late registration or course adjustment and fixation of fine?,academic_policy_policy_for_late_registration_or_course_adjustment_and_fixation_of_fine,,Poor,FAIL,HTTP status 502
-ACAD-021,How do I apply for a student leave?,academic_policy_student_leave_policy,,Poor,FAIL,HTTP status 502
-ACAD-022,What are the rules regarding disciplinary guidelines for students?,academic_policy_disciplinary_guidelines_for_students,,Poor,FAIL,HTTP status 502
-ACAD-023,Who is the instructor for UNKNOWN?,course_policy_unknown_foundations_of_machine_learning_autumn_2025_page_318,,Poor,FAIL,HTTP status 502
-ACAD-024,Where can I find information about certificate of academic accomplishment?,academic_policy_certificate_of_academic_accomplishment,,Poor,FAIL,HTTP status 502
-ACAD-025,Where can I find information about students document service?,academic_policy_students_document_service,,Poor,FAIL,HTTP status 502
-ACAD-026,Who is the instructor for MC311MATHEMATICALOPTIMIZATION?,course_policy_unknown_mc311mathematicaloptimization_autumn_2025_page_104,,Poor,FAIL,HTTP status 502
-ACAD-027,Can you explain the policy for rules guidelines for conducting written examination for person with benchmark disabilities?,academic_policy_rules_guidelines_for_conducting_written_examination_for_person_with_benchmark_disabilities,,Poor,FAIL,HTTP status 502
-ACAD-028,When are the lectures for DS615?,course_policy_ds615_neuralnetworksanddeeplearning_winter25_1_1_-_sourish_dasgupta,,Poor,FAIL,HTTP status 502
-ACAD-029,When are the lectures for UNKNOWN?,course_policy_unknown_ds-805_machine_learning_system_engineering_autumn_2025_page_156,,Poor,FAIL,HTTP status 502
-ACAD-030,What are the rules regarding academic requirements msc ds wef 2024-25 as of october 2024?,academic_policy_academic_requirements_msc_ds_wef_2024-25_as_of_october_2024,,Poor,FAIL,HTTP status 502
-ACAD-031,What topics are covered in HM409-MANAGEMENT-SKILLS-PROFESSIONAL-EXCELLENCE?,course_policy_hm409-management-skills-professional-excellence,,Poor,FAIL,HTTP status 502
-ACAD-032,What topics are covered in HMXXX?,course_policy_hmxxx_introduction_to_speculative_fiction_and_films_autumn_2025_page_301,,Poor,FAIL,HTTP status 502
-ACAD-033,Can you explain the policy for da-iict student code of conduct and dac guidelines?,academic_policy_da-iict_student_code_of_conduct_and_dac_guidelines,,Poor,FAIL,HTTP status 502
-ACAD-034,What are the rules regarding academic requirements m tech ict program wef 2021-22 updated?,academic_policy_academic_requirements_m_tech_ict_program_wef_2021-22_updated,,Poor,FAIL,HTTP status 502
-ACAD-035,Where can I find information about examination rules for students?,academic_policy_examination_rules_for_students,,Poor,FAIL,HTTP status 502
-ACAD-036,Where can I find information about may?,academic_policy_may,,Poor,FAIL,HTTP status 502
-ACAD-037,Where can I find information about appendix - specialization-wise m tech ict course struture from 2024-25?,academic_policy_appendix_-_specialization-wise_m_tech_ict_course_struture_from_2024-25,,Poor,FAIL,HTTP status 502
-ACAD-038,What topics are covered in UNKNOWN?,course_policy_unknown_vlsi_circuits_for_dsp_autumn_2025_page_264,,Poor,FAIL,HTTP status 502
-ACAD-039,What are the rules regarding academic requirements for the mdes?,academic_policy_academic_requirements_for_the_mdes,,Poor,FAIL,HTTP status 502
-ACAD-040,Can you explain the policy for committees t r 2024-25 updated?,academic_policy_committees_t_r_2024-25_updated,,Poor,FAIL,HTTP status 502
-ACAD-041,Can you explain the policy for vehicle rules for students?,academic_policy_vehicle_rules_for_students,,Poor,FAIL,HTTP status 502
-ACAD-042,Where can I find information about academic requirements for the ph d?,academic_policy_academic_requirements_for_the_ph_d,,Poor,FAIL,HTTP status 502
-ACAD-043,What are the rules regarding academic requirements pg programs updated as of august 2016?,academic_policy_academic_requirements_pg_programs_updated_as_of_august_2016,,Poor,FAIL,HTTP status 502
-ACAD-044,Can you explain the policy for examination rules cum guidelines for phy?,academic_policy_examination_rules_cum_guidelines_for_phy,,Poor,FAIL,HTTP status 502
-ACAD-045,Can you explain the policy for appendix i?,academic_policy_appendix_i,,Poor,FAIL,HTTP status 502
-ACAD-046,Can you explain the policy for schedule for winter 2024-25 end semester exams final version?,academic_policy_schedule_for_winter_2024-25_end_semester_exams_final_version,,Poor,FAIL,HTTP status 502
-ACAD-047,What topics are covered in SC421-INTRODUCTION?,course_policy_sc421-introduction_to_modern_algebra_-_gautam_dutta,,Poor,FAIL,HTTP status 502
-ACAD-048,Can you explain the policy for academic requirements m tech ec program wef 2022-23?,academic_policy_academic_requirements_m_tech_ec_program_wef_2022-23,,Poor,FAIL,HTTP status 502
-ACAD-049,What are the vehicular rules for students?,academic_policy_vehicle_rules,,Poor,FAIL,HTTP status 502
-ACAD-050,Can you explain the policy for academic requirements for the m tech ec?,academic_policy_academic_requirements_for_the_m_tech_ec,,Poor,FAIL,HTTP status 502
-ACAD-051,What is the penalty for academic dishonesty?,academic_policy_malpractices,,Poor,FAIL,HTTP status 502
-ACAD-052,When are the lectures for IT590-ADVANCED?,course_policy_it590-advanced_statistical_tools_for_data_science,,Poor,FAIL,HTTP status 502
-ACAD-053,Where can I find information about minor ras policy document?,academic_policy_minor_ras_policy_document,,Poor,FAIL,HTTP status 502
-ACAD-054,What are the rules regarding ug2024 autumn 2024-25 mid semester exam schedule final version?,academic_policy_ug2024_autumn_2024-25_mid_semester_exam_schedule_final_version,,Poor,FAIL,HTTP status 502
-ACAD-055,What are the rules regarding schedule for winter 2024-25 first semester exams final version?,academic_policy_schedule_for_winter_2024-25_first_semester_exams_final_version,,Poor,FAIL,HTTP status 502
-ACAD-056,What are the rules regarding m sc-ds-project-guidelines?,academic_policy_m_sc-ds-project-guidelines,,Poor,FAIL,HTTP status 502
-ACAD-057,What are the rules regarding academic requirements ph d program engg science wef 2019-20 as of october 2019?,academic_policy_academic_requirements_ph_d_program_engg_science_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502
-ACAD-058,Can you explain the policy for february?,academic_policy_february,,Poor,FAIL,HTTP status 502
-ACAD-059,Can you explain the policy for five-year dual degree program?,academic_policy_five-year_dual_degree_program,,Poor,FAIL,HTTP status 502
-ACAD-060,Can you explain the policy for registration notice summer 2025-26?,academic_policy_registration_notice_summer_2025-26,,Poor,FAIL,HTTP status 502
-ACAD-061,What are the rules regarding malpractices improper conduct in examina?,academic_policy_malpractices_improper_conduct_in_examina,,Poor,FAIL,HTTP status 502
-ACAD-062,Where can I find information about medical facilities emergency procedure for students?,academic_policy_medical_facilities_emergency_procedure_for_students,,Poor,FAIL,HTTP status 502
-ACAD-063,Where can I find information about autumn 2024-25 first in-sem exam shedule other than ug 2024 batches - final version?,academic_policy_autumn_2024-25_first_in-sem_exam_shedule_other_than_ug_2024_batches_-_final_version,,Poor,FAIL,HTTP status 502
-ACAD-064,Can you explain the policy for second in sem exam schedule winter 2023-24 final version?,academic_policy_second_in_sem_exam_schedule_winter_2023-24_final_version,,Poor,FAIL,HTTP status 502
-ACAD-065,Can you explain the policy for international students rules and guidelines?,academic_policy_international_students_rules_and_guidelines,,Poor,FAIL,HTTP status 502
-ACAD-066,What are the rules regarding btech i ict?,academic_policy_btech_i_ict,,Poor,FAIL,HTTP status 502
-ACAD-067,Where can I find information about internship research project guidelines?,academic_policy_internship_research_project_guidelines,,Poor,FAIL,HTTP status 502
-ACAD-068,What are the rules regarding end sem exam schedule autumn 2024-25 final version updated?,academic_policy_end_sem_exam_schedule_autumn_2024-25_final_version_updated,,Poor,FAIL,HTTP status 502
-ACAD-069,Can you explain the policy for b tech honours in ict with a?,academic_policy_b_tech_honours_in_ict_with_a,,Poor,FAIL,HTTP status 502
-ACAD-070,Where can I find information about guidelines of exams malpractices?,academic_policy_guidelines_of_exams_malpractices,,Poor,FAIL,HTTP status 502
-ACAD-071,What topics are covered in CS301-HIGH-PERFORMANCE-COMPUTING-WINTER26?,course_policy_cs301-high-performance-computing-winter26_-_bhaskar_chaudhury,,Poor,FAIL,HTTP status 502
-ACAD-072,What is the grading policy for UNKNOWN?,course_policy_unknown_management_skills_for_professional_excellence_autumn_2025_page_329,,Poor,FAIL,HTTP status 502
-ACAD-073,What is the attendance policy?,academic_policy_student,,Poor,FAIL,HTTP status 502
-ACAD-074,What are the rules regarding academic requirements mdes iuxd wef 2025-26?,academic_policy_academic_requirements_mdes_iuxd_wef_2025-26,,Poor,FAIL,HTTP status 502
-ACAD-075,Can you explain the policy for year dual degree btech and mtech?,academic_policy_year_dual_degree_btech_and_mtech,,Poor,FAIL,HTTP status 502
-ACAD-076,Where can I find information about registration and fees payment notice winter 2025-26?,academic_policy_registration_and_fees_payment_notice_winter_2025-26,,Poor,FAIL,HTTP status 502
-ACAD-077,Where can I find information about academic requirements m tech ec program wef 2019-20 as of october 2019?,academic_policy_academic_requirements_m_tech_ec_program_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502
-ACAD-078,Where can I find information about student leave policy?,academic_policy_student_leave_policy,,Poor,FAIL,HTTP status 502
-ACAD-079,Does the latest version of Machine Learning override the requirements listed in Minor Degree?,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-080,"If a student failed Major Degree in 2024 but passed the supplementary exam in 2025, what policy applies?",Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-081,Find the minimum CGPA required for Scholarship Renewal and explain any exceptions.,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-082,"According to the academic handbook, can a student who completed Academic Probation but not Machine Learning enroll in Summer Term?",Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-083,"Across all versions of the handbook, what changed regarding Thesis Submission between consecutive revisions and which version is authoritative?",Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-084,"According to the academic handbook, can a student who completed Summer Term but not Capstone Project enroll in Thesis Submission?",Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-085,"Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Thesis Submission.",Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-086,Find the minimum CGPA required for Academic Probation and explain any exceptions.,Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-087,Find the minimum CGPA required for Semester Withdrawal and explain any exceptions.,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-088,"List every prerequisite chain leading to Data Structures, including indirect prerequisites and waived conditions.",Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-089,What is the difference between the attendance requirement stated in Internship Registration and the rule mentioned in Machine Learning?,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-090,Compare the grading policy of Thesis Submission with the grading policy of Capstone Project.,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-091,"Using information from multiple PDFs, determine whether exceptions to Scholarship Renewal contradict the policy for Machine Learning.",Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-092,Does the latest version of Hostel Allocation override the requirements listed in Research Project?,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-093,Which document has precedence when Semester Withdrawal conflicts with Data Structures?,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-094,"Using information from multiple PDFs, determine whether exceptions to Internship Registration contradict the policy for Elective Selection.",Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-095,"According to the academic handbook, can a student who completed Semester Withdrawal but not Thesis Submission enroll in Major Degree?",Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-096,"According to the academic handbook, can a student who completed Elective Selection but not Internship Registration enroll in Research Project?",Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-097,Compare the grading policy of Data Structures with the grading policy of Machine Learning.,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-098,Compare the grading policy of Minor Degree with the grading policy of Summer Term.,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-099,Which document has precedence when Internship Registration conflicts with Hostel Allocation?,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-100,Identify every document that mentions Capstone Project and explain the differences.,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-101,"According to the academic handbook, can a student who completed Capstone Project but not Summer Term enroll in Academic Probation?",Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-102,Compare the grading policy of Research Project with the grading policy of Elective Selection.,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-103,"According to the academic handbook, can a student who completed Course Registration but not Major Degree enroll in Data Structures?",Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-104,Which document has precedence when Academic Probation conflicts with Elective Selection?,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-105,"Using information from multiple PDFs, determine whether exceptions to Elective Selection contradict the policy for Scholarship Renewal.",Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-106,"According to the academic handbook, can a student who completed Scholarship Renewal but not Thesis Submission enroll in Research Project?",Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-107,What is the difference between the attendance requirement stated in Hostel Allocation and the rule mentioned in Academic Probation?,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-108,Summarize all eligibility conditions for Major Degree using information from multiple academic documents.,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-109,Does the latest version of Course Registration override the requirements listed in Elective Selection?,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-110,A student satisfies all conditions except Research Project. Can they still apply for Minor Degree?,Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-111,Does the latest version of Semester Withdrawal override the requirements listed in Hostel Allocation?,Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-112,Compare the grading policy of Summer Term with the grading policy of Research Project.,Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-113,A student satisfies all conditions except Summer Term. Can they still apply for Hostel Allocation?,Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-114,"According to the academic handbook, can a student who completed Scholarship Renewal but not Major Degree enroll in Elective Selection?",Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-115,A student satisfies all conditions except Thesis Submission. Can they still apply for Internship Registration?,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-116,Does the latest version of Thesis Submission override the requirements listed in Internship Registration?,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-117,Compare the grading policy of Capstone Project with the grading policy of Hostel Allocation.,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-118,Which document has precedence when Course Registration conflicts with Internship Registration?,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-119,What is the difference between the attendance requirement stated in Summer Term and the rule mentioned in Data Structures?,Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-120,"Using information from multiple PDFs, determine whether exceptions to Academic Probation contradict the policy for Capstone Project.",Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-121,Which document has precedence when Course Registration conflicts with Research Project?,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-122,Does the latest version of Research Project override the requirements listed in Summer Term?,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-123,"According to the academic handbook, can a student who completed Research Project but not Minor Degree enroll in Hostel Allocation?",Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-124,Compare the grading policy of Hostel Allocation with the grading policy of Course Registration.,Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-125,"According to the academic handbook, can a student who completed Summer Term but not Hostel Allocation enroll in Scholarship Renewal?",Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-126,"According to the academic handbook, can a student who completed Minor Degree but not Data Structures enroll in Academic Probation?",Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-127,Which document has precedence when Thesis Submission conflicts with Scholarship Renewal?,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-128,What is the difference between the attendance requirement stated in Machine Learning and the rule mentioned in Elective Selection?,Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-129,"According to the academic handbook, can a student who completed Data Structures but not Scholarship Renewal enroll in Research Project?",Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-130,A student satisfies all conditions except Minor Degree. Can they still apply for Machine Learning?,Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-131,"According to the academic handbook, can a student who completed Capstone Project but not Semester Withdrawal enroll in Major Degree?",Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-132,Identify every document that mentions Elective Selection and explain the differences.,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-133,Which document has precedence when Hostel Allocation conflicts with Thesis Submission?,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-134,"According to the academic handbook, can a student who completed Major Degree but not Research Project enroll in Course Registration?",Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-135,"According to the academic handbook, can a student who completed Elective Selection but not Hostel Allocation enroll in Academic Probation?",Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-136,"Using information from multiple PDFs, determine whether exceptions to Thesis Submission contradict the policy for Academic Probation.",Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-137,Which document has precedence when Summer Term conflicts with Semester Withdrawal?,Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-138,"According to the academic handbook, can a student who completed Thesis Submission but not Semester Withdrawal enroll in Machine Learning?",Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-139,What is the difference between the attendance requirement stated in Semester Withdrawal and the rule mentioned in Thesis Submission?,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-140,What is the difference between the attendance requirement stated in Capstone Project and the rule mentioned in Research Project?,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-141,Compare the grading policy of Machine Learning with the grading policy of Internship Registration.,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-142,A student satisfies all conditions except Data Structures. Can they still apply for Research Project?,Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-143,Which document has precedence when Summer Term conflicts with Machine Learning?,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-144,Compare the grading policy of Course Registration with the grading policy of Minor Degree.,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-145,"According to the academic handbook, can a student who completed Thesis Submission but not Research Project enroll in Minor Degree?",Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-146,"According to the academic handbook, can a student who completed Thesis Submission but not Data Structures enroll in Capstone Project?",Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-147,"According to the academic handbook, can a student who completed Data Structures but not Machine Learning enroll in Internship Registration?",Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-148,What is the difference between the attendance requirement stated in Minor Degree and the rule mentioned in Scholarship Renewal?,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-149,"Using information from multiple PDFs, determine whether exceptions to Data Structures contradict the policy for Course Registration.",Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-150,"According to the academic handbook, can a student who completed Hostel Allocation but not Thesis Submission enroll in Scholarship Renewal?",Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-151,"According to the academic handbook, can a student who completed Capstone Project but not Academic Probation enroll in Machine Learning?",Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-152,"Using information from multiple PDFs, determine whether exceptions to Major Degree contradict the policy for Summer Term.",Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-153,"According to the academic handbook, can a student who completed Course Registration but not Internship Registration enroll in Hostel Allocation?",Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-154,Identify every document that mentions Scholarship Renewal and explain the differences.,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-155,"According to the academic handbook, can a student who completed Research Project but not Data Structures enroll in Minor Degree?",Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-156,Does the latest version of Scholarship Renewal override the requirements listed in Thesis Submission?,Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-157,Does the latest version of Internship Registration override the requirements listed in Data Structures?,Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-158,What is the difference between the attendance requirement stated in Thesis Submission and the rule mentioned in Summer Term?,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-159,"According to the academic handbook, can a student who completed Semester Withdrawal but not Data Structures enroll in Elective Selection?",Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-160,A student satisfies all conditions except Semester Withdrawal. Can they still apply for Data Structures?,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-161,Does the latest version of Data Structures override the requirements listed in Capstone Project?,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-162,"According to the academic handbook, can a student who completed Data Structures but not Academic Probation enroll in Elective Selection?",Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-163,"Using information from multiple PDFs, determine whether exceptions to Machine Learning contradict the policy for Research Project.",Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-164,A student satisfies all conditions except Hostel Allocation. Can they still apply for Summer Term?,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-165,"According to the academic handbook, can a student who completed Scholarship Renewal but not Course Registration enroll in Summer Term?",Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-166,A student satisfies all conditions except Scholarship Renewal. Can they still apply for Course Registration?,Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-167,"According to the academic handbook, can a student who completed Academic Probation but not Thesis Submission enroll in Course Registration?",Curriculum Guide,,Poor,FAIL,HTTP status 502
-ACAD-168,A student satisfies all conditions except Academic Probation. Can they still apply for Course Registration?,Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-169,"According to the academic handbook, can a student who completed Academic Probation but not Research Project enroll in Data Structures?",Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-170,"According to the academic handbook, can a student who completed Scholarship Renewal but not Summer Term enroll in Major Degree?",Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-171,Compare the grading policy of Elective Selection with the grading policy of Data Structures.,Program Regulations,,Poor,FAIL,HTTP status 502
-ACAD-172,Which document has precedence when Capstone Project conflicts with Summer Term?,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-173,"Using information from multiple PDFs, determine whether exceptions to Semester Withdrawal contradict the policy for Hostel Allocation.",Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-174,Does the latest version of Academic Probation override the requirements listed in Machine Learning?,Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-175,"According to the academic handbook, can a student who completed Semester Withdrawal but not Scholarship Renewal enroll in Data Structures?",Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-176,Does the latest version of Summer Term override the requirements listed in Course Registration?,Multiple Documents,,Poor,FAIL,HTTP status 502
-ACAD-177,Which document has precedence when Elective Selection conflicts with Minor Degree?,Course Catalog,,Poor,FAIL,HTTP status 502
-ACAD-178,Which document has precedence when Data Structures conflicts with Major Degree?,Academic Handbook,,Poor,FAIL,HTTP status 502
-ACAD-179,"According to the academic handbook, can a student who completed Thesis Submission but not Hostel Allocation enroll in Elective Selection?",Student Policy Manual,,Poor,FAIL,HTTP status 502
-ACAD-180,"According to the academic handbook, can a student who completed Hostel Allocation but not Data Structures enroll in Semester Withdrawal?",Course Catalog,,Poor,FAIL,HTTP status 502
-
-Summary Section
-Questions Tested,180
-Pass Count,0
-Fail Count,180
-Accuracy Percentage,0.0%
+ACAD-001,Who is the instructor for MC223?,course_policy_mc223_theory_of_computation_winter24_pdf_-_puneet_bhateja,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-002,What are the rules regarding student leave policy wef ay2021-22?,academic_policy_student_leave_policy_wef_ay2021-22,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-003,What is the grading policy for IT628?,course_policy_it628_system_programming,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-004,Where can I find information about end sem exam schedule winter 2023-24 final version?,academic_policy_end_sem_exam_schedule_winter_2023-24_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-005,Who is the instructor for IE406?,course_policy_ie406_machine_learning_autumn_2025_page_215,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-006,What are the rules regarding academic requirements ph d program -hss design wef 2024-25 as of july 2024?,academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2024-25_as_of_july_2024,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-007,What are the prerequisites for PC110?,course_policy_pc110_introduction_to_language_and_literature_autumn_2025_page_6,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-008,What are the prerequisites for DS612-INTERACTIVE?,course_policy_ds612-interactive_data_visualization-winter26_-_bhaskar_chaudhury,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-009,Can you explain the policy for winter 2023-24 first in sem exam schedule final version?,academic_policy_winter_2023-24_first_in_sem_exam_schedule_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-010,Can you explain the policy for academic requirements ph d program enggscience wef 2024-25 as of july 2024?,academic_policy_academic_requirements_ph_d_program_enggscience_wef_2024-25_as_of_july_2024,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-011,What topics are covered in IT314?,course_policy_it314_software_engineering_autumn_2025_page_92,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-012,When are the lectures for HM489?,course_policy_hm489_international_economics_winter26_-_cyril_jos_nazhicheril,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-013,Can you explain the policy for btech ii ict?,academic_policy_btech_ii_ict,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-014,Where can I find information about academic requirements mdes cd wef 2025-26 as of august 2025?,academic_policy_academic_requirements_mdes_cd_wef_2025-26_as_of_august_2025,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-015,Can you explain the policy for academic requirements ph d program -hss design wef 2019-20 as of october 2019?,academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-016,What are the prerequisites for UNKNOWN?,course_policy_unknown_principles_of_economics_autumn_2025_page_111,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-017,Can you explain the policy for student?,academic_policy_student,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-018,When do the mid-semester exams start?,academic_policy_schedule,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-019,Can you explain the policy for medical facilities for students of da ii?,academic_policy_medical_facilities_for_students_of_da_ii,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-020,Can you explain the policy for policy for late registration or course adjustment and fixation of fine?,academic_policy_policy_for_late_registration_or_course_adjustment_and_fixation_of_fine,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-021,How do I apply for a student leave?,academic_policy_student_leave_policy,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-022,What are the rules regarding disciplinary guidelines for students?,academic_policy_disciplinary_guidelines_for_students,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-023,Who is the instructor for UNKNOWN?,course_policy_unknown_foundations_of_machine_learning_autumn_2025_page_318,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-024,Where can I find information about certificate of academic accomplishment?,academic_policy_certificate_of_academic_accomplishment,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-025,Where can I find information about students document service?,academic_policy_students_document_service,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-026,Who is the instructor for MC311MATHEMATICALOPTIMIZATION?,course_policy_unknown_mc311mathematicaloptimization_autumn_2025_page_104,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-027,Can you explain the policy for rules guidelines for conducting written examination for person with benchmark disabilities?,academic_policy_rules_guidelines_for_conducting_written_examination_for_person_with_benchmark_disabilities,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-028,When are the lectures for DS615?,course_policy_ds615_neuralnetworksanddeeplearning_winter25_1_1_-_sourish_dasgupta,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-029,When are the lectures for UNKNOWN?,course_policy_unknown_ds-805_machine_learning_system_engineering_autumn_2025_page_156,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-030,What are the rules regarding academic requirements msc ds wef 2024-25 as of october 2024?,academic_policy_academic_requirements_msc_ds_wef_2024-25_as_of_october_2024,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-031,What topics are covered in HM409-MANAGEMENT-SKILLS-PROFESSIONAL-EXCELLENCE?,course_policy_hm409-management-skills-professional-excellence,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-032,What topics are covered in HMXXX?,course_policy_hmxxx_introduction_to_speculative_fiction_and_films_autumn_2025_page_301,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-033,Can you explain the policy for da-iict student code of conduct and dac guidelines?,academic_policy_da-iict_student_code_of_conduct_and_dac_guidelines,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-034,What are the rules regarding academic requirements m tech ict program wef 2021-22 updated?,academic_policy_academic_requirements_m_tech_ict_program_wef_2021-22_updated,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-035,Where can I find information about examination rules for students?,academic_policy_examination_rules_for_students,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-036,Where can I find information about may?,academic_policy_may,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-037,Where can I find information about appendix - specialization-wise m tech ict course struture from 2024-25?,academic_policy_appendix_-_specialization-wise_m_tech_ict_course_struture_from_2024-25,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-038,What topics are covered in UNKNOWN?,course_policy_unknown_vlsi_circuits_for_dsp_autumn_2025_page_264,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-039,What are the rules regarding academic requirements for the mdes?,academic_policy_academic_requirements_for_the_mdes,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-040,Can you explain the policy for committees t r 2024-25 updated?,academic_policy_committees_t_r_2024-25_updated,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-041,Can you explain the policy for vehicle rules for students?,academic_policy_vehicle_rules_for_students,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-042,Where can I find information about academic requirements for the ph d?,academic_policy_academic_requirements_for_the_ph_d,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-043,What are the rules regarding academic requirements pg programs updated as of august 2016?,academic_policy_academic_requirements_pg_programs_updated_as_of_august_2016,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-044,Can you explain the policy for examination rules cum guidelines for phy?,academic_policy_examination_rules_cum_guidelines_for_phy,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-045,Can you explain the policy for appendix i?,academic_policy_appendix_i,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-046,Can you explain the policy for schedule for winter 2024-25 end semester exams final version?,academic_policy_schedule_for_winter_2024-25_end_semester_exams_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-047,What topics are covered in SC421-INTRODUCTION?,course_policy_sc421-introduction_to_modern_algebra_-_gautam_dutta,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-048,Can you explain the policy for academic requirements m tech ec program wef 2022-23?,academic_policy_academic_requirements_m_tech_ec_program_wef_2022-23,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-049,What are the vehicular rules for students?,academic_policy_vehicle_rules,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-050,Can you explain the policy for academic requirements for the m tech ec?,academic_policy_academic_requirements_for_the_m_tech_ec,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-051,What is the penalty for academic dishonesty?,academic_policy_malpractices,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-052,When are the lectures for IT590-ADVANCED?,course_policy_it590-advanced_statistical_tools_for_data_science,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-053,Where can I find information about minor ras policy document?,academic_policy_minor_ras_policy_document,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-054,What are the rules regarding ug2024 autumn 2024-25 mid semester exam schedule final version?,academic_policy_ug2024_autumn_2024-25_mid_semester_exam_schedule_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-055,What are the rules regarding schedule for winter 2024-25 first semester exams final version?,academic_policy_schedule_for_winter_2024-25_first_semester_exams_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-056,What are the rules regarding m sc-ds-project-guidelines?,academic_policy_m_sc-ds-project-guidelines,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-057,What are the rules regarding academic requirements ph d program engg science wef 2019-20 as of october 2019?,academic_policy_academic_requirements_ph_d_program_engg_science_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-058,Can you explain the policy for february?,academic_policy_february,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-059,Can you explain the policy for five-year dual degree program?,academic_policy_five-year_dual_degree_program,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-060,Can you explain the policy for registration notice summer 2025-26?,academic_policy_registration_notice_summer_2025-26,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-061,What are the rules regarding malpractices improper conduct in examina?,academic_policy_malpractices_improper_conduct_in_examina,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-062,Where can I find information about medical facilities emergency procedure for students?,academic_policy_medical_facilities_emergency_procedure_for_students,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-063,Where can I find information about autumn 2024-25 first in-sem exam shedule other than ug 2024 batches - final version?,academic_policy_autumn_2024-25_first_in-sem_exam_shedule_other_than_ug_2024_batches_-_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-064,Can you explain the policy for second in sem exam schedule winter 2023-24 final version?,academic_policy_second_in_sem_exam_schedule_winter_2023-24_final_version,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-065,Can you explain the policy for international students rules and guidelines?,academic_policy_international_students_rules_and_guidelines,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-066,What are the rules regarding btech i ict?,academic_policy_btech_i_ict,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-067,Where can I find information about internship research project guidelines?,academic_policy_internship_research_project_guidelines,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-068,What are the rules regarding end sem exam schedule autumn 2024-25 final version updated?,academic_policy_end_sem_exam_schedule_autumn_2024-25_final_version_updated,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-069,Can you explain the policy for b tech honours in ict with a?,academic_policy_b_tech_honours_in_ict_with_a,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-070,Where can I find information about guidelines of exams malpractices?,academic_policy_guidelines_of_exams_malpractices,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-071,What topics are covered in CS301-HIGH-PERFORMANCE-COMPUTING-WINTER26?,course_policy_cs301-high-performance-computing-winter26_-_bhaskar_chaudhury,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-072,What is the grading policy for UNKNOWN?,course_policy_unknown_management_skills_for_professional_excellence_autumn_2025_page_329,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-073,What is the attendance policy?,academic_policy_student,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-074,What are the rules regarding academic requirements mdes iuxd wef 2025-26?,academic_policy_academic_requirements_mdes_iuxd_wef_2025-26,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-075,Can you explain the policy for year dual degree btech and mtech?,academic_policy_year_dual_degree_btech_and_mtech,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-076,Where can I find information about registration and fees payment notice winter 2025-26?,academic_policy_registration_and_fees_payment_notice_winter_2025-26,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-077,Where can I find information about academic requirements m tech ec program wef 2019-20 as of october 2019?,academic_policy_academic_requirements_m_tech_ec_program_wef_2019-20_as_of_october_2019,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-078,Where can I find information about student leave policy?,academic_policy_student_leave_policy,,Poor,FAIL,HTTP status 502 (Source Data Available)
+ACAD-079,Does the latest version of Machine Learning override the requirements listed in Minor Degree?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-080,"If a student failed Major Degree in 2024 but passed the supplementary exam in 2025, what policy applies?",Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-081,Find the minimum CGPA required for Scholarship Renewal and explain any exceptions.,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-082,"According to the academic handbook, can a student who completed Academic Probation but not Machine Learning enroll in Summer Term?",Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-083,"Across all versions of the handbook, what changed regarding Thesis Submission between consecutive revisions and which version is authoritative?",Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-084,"According to the academic handbook, can a student who completed Summer Term but not Capstone Project enroll in Thesis Submission?",Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-085,"Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Thesis Submission.",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-086,Find the minimum CGPA required for Academic Probation and explain any exceptions.,Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-087,Find the minimum CGPA required for Semester Withdrawal and explain any exceptions.,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-088,"List every prerequisite chain leading to Data Structures, including indirect prerequisites and waived conditions.",Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-089,What is the difference between the attendance requirement stated in Internship Registration and the rule mentioned in Machine Learning?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-090,Compare the grading policy of Thesis Submission with the grading policy of Capstone Project.,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-091,"Using information from multiple PDFs, determine whether exceptions to Scholarship Renewal contradict the policy for Machine Learning.",Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-092,Does the latest version of Hostel Allocation override the requirements listed in Research Project?,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-093,Which document has precedence when Semester Withdrawal conflicts with Data Structures?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-094,"Using information from multiple PDFs, determine whether exceptions to Internship Registration contradict the policy for Elective Selection.",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-095,"According to the academic handbook, can a student who completed Semester Withdrawal but not Thesis Submission enroll in Major Degree?",Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-096,"According to the academic handbook, can a student who completed Elective Selection but not Internship Registration enroll in Research Project?",Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-097,Compare the grading policy of Data Structures with the grading policy of Machine Learning.,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-098,Compare the grading policy of Minor Degree with the grading policy of Summer Term.,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-099,Which document has precedence when Internship Registration conflicts with Hostel Allocation?,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-100,Identify every document that mentions Capstone Project and explain the differences.,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-101,"According to the academic handbook, can a student who completed Capstone Project but not Summer Term enroll in Academic Probation?",Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-102,Compare the grading policy of Research Project with the grading policy of Elective Selection.,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-103,"According to the academic handbook, can a student who completed Course Registration but not Major Degree enroll in Data Structures?",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-104,Which document has precedence when Academic Probation conflicts with Elective Selection?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-105,"Using information from multiple PDFs, determine whether exceptions to Elective Selection contradict the policy for Scholarship Renewal.",Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-106,"According to the academic handbook, can a student who completed Scholarship Renewal but not Thesis Submission enroll in Research Project?",Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-107,What is the difference between the attendance requirement stated in Hostel Allocation and the rule mentioned in Academic Probation?,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-108,Summarize all eligibility conditions for Major Degree using information from multiple academic documents.,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-109,Does the latest version of Course Registration override the requirements listed in Elective Selection?,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-110,A student satisfies all conditions except Research Project. Can they still apply for Minor Degree?,Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-111,Does the latest version of Semester Withdrawal override the requirements listed in Hostel Allocation?,Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-112,Compare the grading policy of Summer Term with the grading policy of Research Project.,Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-113,A student satisfies all conditions except Summer Term. Can they still apply for Hostel Allocation?,Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-114,"According to the academic handbook, can a student who completed Scholarship Renewal but not Major Degree enroll in Elective Selection?",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-115,A student satisfies all conditions except Thesis Submission. Can they still apply for Internship Registration?,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-116,Does the latest version of Thesis Submission override the requirements listed in Internship Registration?,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-117,Compare the grading policy of Capstone Project with the grading policy of Hostel Allocation.,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-118,Which document has precedence when Course Registration conflicts with Internship Registration?,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-119,What is the difference between the attendance requirement stated in Summer Term and the rule mentioned in Data Structures?,Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-120,"Using information from multiple PDFs, determine whether exceptions to Academic Probation contradict the policy for Capstone Project.",Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-121,Which document has precedence when Course Registration conflicts with Research Project?,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-122,Does the latest version of Research Project override the requirements listed in Summer Term?,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-123,"According to the academic handbook, can a student who completed Research Project but not Minor Degree enroll in Hostel Allocation?",Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-124,Compare the grading policy of Hostel Allocation with the grading policy of Course Registration.,Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-125,"According to the academic handbook, can a student who completed Summer Term but not Hostel Allocation enroll in Scholarship Renewal?",Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-126,"According to the academic handbook, can a student who completed Minor Degree but not Data Structures enroll in Academic Probation?",Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-127,Which document has precedence when Thesis Submission conflicts with Scholarship Renewal?,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-128,What is the difference between the attendance requirement stated in Machine Learning and the rule mentioned in Elective Selection?,Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-129,"According to the academic handbook, can a student who completed Data Structures but not Scholarship Renewal enroll in Research Project?",Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-130,A student satisfies all conditions except Minor Degree. Can they still apply for Machine Learning?,Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-131,"According to the academic handbook, can a student who completed Capstone Project but not Semester Withdrawal enroll in Major Degree?",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-132,Identify every document that mentions Elective Selection and explain the differences.,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-133,Which document has precedence when Hostel Allocation conflicts with Thesis Submission?,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-134,"According to the academic handbook, can a student who completed Major Degree but not Research Project enroll in Course Registration?",Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-135,"According to the academic handbook, can a student who completed Elective Selection but not Hostel Allocation enroll in Academic Probation?",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-136,"Using information from multiple PDFs, determine whether exceptions to Thesis Submission contradict the policy for Academic Probation.",Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-137,Which document has precedence when Summer Term conflicts with Semester Withdrawal?,Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-138,"According to the academic handbook, can a student who completed Thesis Submission but not Semester Withdrawal enroll in Machine Learning?",Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-139,What is the difference between the attendance requirement stated in Semester Withdrawal and the rule mentioned in Thesis Submission?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-140,What is the difference between the attendance requirement stated in Capstone Project and the rule mentioned in Research Project?,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-141,Compare the grading policy of Machine Learning with the grading policy of Internship Registration.,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-142,A student satisfies all conditions except Data Structures. Can they still apply for Research Project?,Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-143,Which document has precedence when Summer Term conflicts with Machine Learning?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-144,Compare the grading policy of Course Registration with the grading policy of Minor Degree.,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-145,"According to the academic handbook, can a student who completed Thesis Submission but not Research Project enroll in Minor Degree?",Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-146,"According to the academic handbook, can a student who completed Thesis Submission but not Data Structures enroll in Capstone Project?",Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-147,"According to the academic handbook, can a student who completed Data Structures but not Machine Learning enroll in Internship Registration?",Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-148,What is the difference between the attendance requirement stated in Minor Degree and the rule mentioned in Scholarship Renewal?,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-149,"Using information from multiple PDFs, determine whether exceptions to Data Structures contradict the policy for Course Registration.",Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-150,"According to the academic handbook, can a student who completed Hostel Allocation but not Thesis Submission enroll in Scholarship Renewal?",Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-151,"According to the academic handbook, can a student who completed Capstone Project but not Academic Probation enroll in Machine Learning?",Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-152,"Using information from multiple PDFs, determine whether exceptions to Major Degree contradict the policy for Summer Term.",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-153,"According to the academic handbook, can a student who completed Course Registration but not Internship Registration enroll in Hostel Allocation?",Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-154,Identify every document that mentions Scholarship Renewal and explain the differences.,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-155,"According to the academic handbook, can a student who completed Research Project but not Data Structures enroll in Minor Degree?",Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-156,Does the latest version of Scholarship Renewal override the requirements listed in Thesis Submission?,Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-157,Does the latest version of Internship Registration override the requirements listed in Data Structures?,Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-158,What is the difference between the attendance requirement stated in Thesis Submission and the rule mentioned in Summer Term?,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-159,"According to the academic handbook, can a student who completed Semester Withdrawal but not Data Structures enroll in Elective Selection?",Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-160,A student satisfies all conditions except Semester Withdrawal. Can they still apply for Data Structures?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-161,Does the latest version of Data Structures override the requirements listed in Capstone Project?,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-162,"According to the academic handbook, can a student who completed Data Structures but not Academic Probation enroll in Elective Selection?",Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-163,"Using information from multiple PDFs, determine whether exceptions to Machine Learning contradict the policy for Research Project.",Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-164,A student satisfies all conditions except Hostel Allocation. Can they still apply for Summer Term?,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-165,"According to the academic handbook, can a student who completed Scholarship Renewal but not Course Registration enroll in Summer Term?",Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-166,A student satisfies all conditions except Scholarship Renewal. Can they still apply for Course Registration?,Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-167,"According to the academic handbook, can a student who completed Academic Probation but not Thesis Submission enroll in Course Registration?",Curriculum Guide,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-168,A student satisfies all conditions except Academic Probation. Can they still apply for Course Registration?,Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-169,"According to the academic handbook, can a student who completed Academic Probation but not Research Project enroll in Data Structures?",Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-170,"According to the academic handbook, can a student who completed Scholarship Renewal but not Summer Term enroll in Major Degree?",Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-171,Compare the grading policy of Elective Selection with the grading policy of Data Structures.,Program Regulations,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-172,Which document has precedence when Capstone Project conflicts with Summer Term?,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-173,"Using information from multiple PDFs, determine whether exceptions to Semester Withdrawal contradict the policy for Hostel Allocation.",Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-174,Does the latest version of Academic Probation override the requirements listed in Machine Learning?,Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-175,"According to the academic handbook, can a student who completed Semester Withdrawal but not Scholarship Renewal enroll in Data Structures?",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-176,Does the latest version of Summer Term override the requirements listed in Course Registration?,Multiple Documents,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-177,Which document has precedence when Elective Selection conflicts with Minor Degree?,Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-178,Which document has precedence when Data Structures conflicts with Major Degree?,Academic Handbook,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-179,"According to the academic handbook, can a student who completed Thesis Submission but not Hostel Allocation enroll in Elective Selection?",Student Policy Manual,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+ACAD-180,"According to the academic handbook, can a student who completed Hostel Allocation but not Data Structures enroll in Semester Withdrawal?",Course Catalog,,Poor,FAIL,HTTP status 502 (Source Data Missing)
+,,,,,,
+Summary Section,,,,,,
+Questions Tested,180,,,,,
+Pass Count,0,,,,,
+Fail Count,180,,,,,
+Accuracy Percentage,0.0%,,,,,

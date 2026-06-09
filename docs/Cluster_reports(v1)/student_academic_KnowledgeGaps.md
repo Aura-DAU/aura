@@ -1,68 +1,77 @@
-# Academic Cluster - Knowledge Gaps
+# Academic Cluster - True Content Gap Analysis
 
 ## Overview
-The evaluation resulted in a 0.0% pass rate. All failures were due to backend 502 errors or missing data. The following gaps need to be addressed.
+The previous evaluation crashed due to a backend connection issue (HTTP status 502). This document provides an **actual content-gap analysis** by verifying which 'Expected Sources' are genuinely missing from the `data/` repository.
 
-## Failed Questions List (Sample)
-### Question: Who is the instructor for MC223?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `course_policy_mc223_theory_of_computation_winter24_pdf_-_puneet_bhateja`
-- **Required Source**: `data/academics/course_policy_mc223_theory_of_computation_winter24_pdf_-_puneet_bhateja.md`
-- **Priority**: High
+Out of **180** total questions, **78** have their sources available, while **102** questions are missing their required knowledge sources.
 
-### Question: What are the rules regarding student leave policy wef ay2021-22?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `academic_policy_student_leave_policy_wef_ay2021-22`
-- **Required Source**: `data/academics/academic_policy_student_leave_policy_wef_ay2021-22.md`
-- **Priority**: High
+## Summary of Missing Knowledge Sources
+- **Academic Handbook**: Missing for 19 questions
+- **Course Catalog**: Missing for 19 questions
+- **Multiple Documents**: Missing for 18 questions
+- **Student Policy Manual**: Missing for 17 questions
+- **Curriculum Guide**: Missing for 16 questions
+- **Program Regulations**: Missing for 13 questions
 
-### Question: What is the grading policy for IT628?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `course_policy_it628_system_programming`
-- **Required Source**: `data/academics/course_policy_it628_system_programming.md`
-- **Priority**: High
+## Detailed Breakdown of Missing Knowledge
 
-### Question: Where can I find information about end sem exam schedule winter 2023-24 final version?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `academic_policy_end_sem_exam_schedule_winter_2023-24_final_version`
-- **Required Source**: `data/academics/academic_policy_end_sem_exam_schedule_winter_2023-24_final_version.md`
-- **Priority**: High
+### Source: `Academic Handbook`
+**Impact**: Prevents answering 19 questions.
+**Sample Affected Questions**:
+- [ACAD-079] Does the latest version of Machine Learning override the requirements listed in Minor Degree?
+- [ACAD-082] According to the academic handbook, can a student who completed Academic Probation but not Machine Learning enroll in Summer Term?
+- [ACAD-083] Across all versions of the handbook, what changed regarding Thesis Submission between consecutive revisions and which version is authoritative?
+- [ACAD-089] What is the difference between the attendance requirement stated in Internship Registration and the rule mentioned in Machine Learning?
+- [ACAD-091] Using information from multiple PDFs, determine whether exceptions to Scholarship Renewal contradict the policy for Machine Learning.
+- *...and 14 more questions.*
 
-### Question: Who is the instructor for IE406?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `course_policy_ie406_machine_learning_autumn_2025_page_215`
-- **Required Source**: `data/academics/course_policy_ie406_machine_learning_autumn_2025_page_215.md`
-- **Priority**: High
+### Source: `Course Catalog`
+**Impact**: Prevents answering 19 questions.
+**Sample Affected Questions**:
+- [ACAD-081] Find the minimum CGPA required for Scholarship Renewal and explain any exceptions.
+- [ACAD-085] Using information from multiple PDFs, determine whether exceptions to Research Project contradict the policy for Thesis Submission.
+- [ACAD-090] Compare the grading policy of Thesis Submission with the grading policy of Capstone Project.
+- [ACAD-094] Using information from multiple PDFs, determine whether exceptions to Internship Registration contradict the policy for Elective Selection.
+- [ACAD-100] Identify every document that mentions Capstone Project and explain the differences.
+- *...and 14 more questions.*
 
-### Question: What are the rules regarding academic requirements ph d program -hss design wef 2024-25 as of july 2024?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2024-25_as_of_july_2024`
-- **Required Source**: `data/academics/academic_policy_academic_requirements_ph_d_program_-hss_design_wef_2024-25_as_of_july_2024.md`
-- **Priority**: High
+### Source: `Multiple Documents`
+**Impact**: Prevents answering 18 questions.
+**Sample Affected Questions**:
+- [ACAD-092] Does the latest version of Hostel Allocation override the requirements listed in Research Project?
+- [ACAD-097] Compare the grading policy of Data Structures with the grading policy of Machine Learning.
+- [ACAD-099] Which document has precedence when Internship Registration conflicts with Hostel Allocation?
+- [ACAD-101] According to the academic handbook, can a student who completed Capstone Project but not Summer Term enroll in Academic Probation?
+- [ACAD-116] Does the latest version of Thesis Submission override the requirements listed in Internship Registration?
+- *...and 13 more questions.*
 
-### Question: What are the prerequisites for PC110?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `course_policy_pc110_introduction_to_language_and_literature_autumn_2025_page_6`
-- **Required Source**: `data/academics/course_policy_pc110_introduction_to_language_and_literature_autumn_2025_page_6.md`
-- **Priority**: High
+### Source: `Student Policy Manual`
+**Impact**: Prevents answering 17 questions.
+**Sample Affected Questions**:
+- [ACAD-087] Find the minimum CGPA required for Semester Withdrawal and explain any exceptions.
+- [ACAD-106] According to the academic handbook, can a student who completed Scholarship Renewal but not Thesis Submission enroll in Research Project?
+- [ACAD-107] What is the difference between the attendance requirement stated in Hostel Allocation and the rule mentioned in Academic Probation?
+- [ACAD-108] Summarize all eligibility conditions for Major Degree using information from multiple academic documents.
+- [ACAD-115] A student satisfies all conditions except Thesis Submission. Can they still apply for Internship Registration?
+- *...and 12 more questions.*
 
-### Question: What are the prerequisites for DS612-INTERACTIVE?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `course_policy_ds612-interactive_data_visualization-winter26_-_bhaskar_chaudhury`
-- **Required Source**: `data/academics/course_policy_ds612-interactive_data_visualization-winter26_-_bhaskar_chaudhury.md`
-- **Priority**: High
+### Source: `Curriculum Guide`
+**Impact**: Prevents answering 16 questions.
+**Sample Affected Questions**:
+- [ACAD-086] Find the minimum CGPA required for Academic Probation and explain any exceptions.
+- [ACAD-088] List every prerequisite chain leading to Data Structures, including indirect prerequisites and waived conditions.
+- [ACAD-096] According to the academic handbook, can a student who completed Elective Selection but not Internship Registration enroll in Research Project?
+- [ACAD-111] Does the latest version of Semester Withdrawal override the requirements listed in Hostel Allocation?
+- [ACAD-113] A student satisfies all conditions except Summer Term. Can they still apply for Hostel Allocation?
+- *...and 11 more questions.*
 
-### Question: Can you explain the policy for winter 2023-24 first in sem exam schedule final version?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `academic_policy_winter_2023-24_first_in_sem_exam_schedule_final_version`
-- **Required Source**: `data/academics/academic_policy_winter_2023-24_first_in_sem_exam_schedule_final_version.md`
-- **Priority**: High
+### Source: `Program Regulations`
+**Impact**: Prevents answering 13 questions.
+**Sample Affected Questions**:
+- [ACAD-080] If a student failed Major Degree in 2024 but passed the supplementary exam in 2025, what policy applies?
+- [ACAD-084] According to the academic handbook, can a student who completed Summer Term but not Capstone Project enroll in Thesis Submission?
+- [ACAD-095] According to the academic handbook, can a student who completed Semester Withdrawal but not Thesis Submission enroll in Major Degree?
+- [ACAD-110] A student satisfies all conditions except Research Project. Can they still apply for Minor Degree?
+- [ACAD-112] Compare the grading policy of Summer Term with the grading policy of Research Project.
+- *...and 8 more questions.*
 
-### Question: Can you explain the policy for academic requirements ph d program enggscience wef 2024-25 as of july 2024?
-- **Failure Reason**: HTTP status 502
-- **Missing Knowledge**: Information from source `academic_policy_academic_requirements_ph_d_program_enggscience_wef_2024-25_as_of_july_2024`
-- **Required Source**: `data/academics/academic_policy_academic_requirements_ph_d_program_enggscience_wef_2024-25_as_of_july_2024.md`
-- **Priority**: High
-
-
-*...and 170 more questions failed due to the same server issues (502 Bad Gateway).*
