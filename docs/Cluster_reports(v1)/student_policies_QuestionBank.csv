@@ -1,0 +1,151 @@
+Question ID,Question,Subcategory,Difficulty,Expected Source
+SP001,"Is there a concept of official leave for students at DA-IICT?",Leave Policies,Easy,student_leave_policy
+SP002,"What must students adhere to instead of having a formal leave system?",Leave Policies,Easy,student_leave_policy
+SP003,"If I've been absent for 3 or more consecutive weeks, what option do I have?",Leave Policies,Medium,student_leave_policy
+SP004,"Who do I apply to if I want to opt for semester withdrawal after being absent 3+ weeks?",Leave Policies,Medium,student_leave_policy
+SP005,"If I've been absent for 3+ consecutive weeks and I don't opt for withdrawal, do I get any relaxation on continuous evaluation marks?",Leave Policies,Hard,student_leave_policy
+SP006,"I missed an exam because of a family death. Where do I apply?",Leave Policies,Medium,student_leave_policy
+SP007,"What are the valid reasons for applying for a missed exam? (illness, accident, death in family)",Leave Policies,Medium,student_leave_policy
+SP008,"Within how many days of missing an exam must I submit the leave application?",Leave Policies,Easy,student_leave_policy
+SP009,"What documents do I need to provide when applying for a missed exam due to illness?",Leave Policies,Medium,student_leave_policy
+SP010,"Can I sit for a re-exam before my leave application is approved?",Leave Policies,Medium,student_leave_policy
+SP011,"Who conducts the re-examination or alternate assessment after leave is approved?",Leave Policies,Easy,student_leave_policy
+SP012,"What happens if I miss the re-examination too?",Leave Policies,Hard,student_leave_policy
+SP013,"From which academic year did the student leave policy become effective?",Leave Policies,Easy,student_leave_policy
+SP014,"Where do I collect the leave application proforma from?",Leave Policies,Easy,student_leave_policy
+SP015,"Who communicates the schedule for re-examinations?",Leave Policies,Medium,student_leave_policy
+SP016,"Who allots rooms to new students in the hostel?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP017,"Who has the authority to allot, re-allot, or withdraw hostel accommodation?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP018,"Who is eligible for hostel room allotment?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP019,"If I stop being a student, how many days do I have to vacate the hostel?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP020,"For how many years are UG students guaranteed a hostel room?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP021,"What happens if a UG student needs hostel accommodation beyond 4 years?",Hostel Rules,Hard,hostel_rules_and_regulations
+SP022,"How many guardian/relative contacts must hostellers from outside Ahmedabad/Gandhinagar provide?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP023,"Is alcohol allowed in the hostel or campus?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP024,"What law makes alcohol/intoxicants prohibited at DA-IICT?",Hostel Rules,Hard,hostel_rules_and_regulations
+SP025,"What is the consequence for possession or consumption of alcohol on campus?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP026,"What time must hostellers return to campus by?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP027,"During what hours are students not allowed outside campus?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP028,"What is the exception for leaving campus between midnight and 6 AM?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP029,"What must I do before staying away from the hostel even for one night?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP030,"Am I allowed to enter the hostel of the opposite gender?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP031,"What is the punishment for changing rooms or exchanging property without Hostel Supervisor approval?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP032,"Is ragging considered a criminal offence at DA-IICT?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP033,"Who should I contact if I witness or experience ragging?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP034,"What is the maximum punishment for ragging?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP035,"Is there a dress code for hostellers outside their rooms?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP036,"What is the fine if an unauthorized person stays in my hostel room?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP037,"What should I do with electrical gadgets when leaving my room?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP038,"Can I bring food inside the HOR (Hall of Residence)?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP039,"What is the fine for bringing food inside the HOR, and within what time must it be paid?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP040,"Which electrical appliances are prohibited in hostel rooms?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP041,"Is cooking permitted in hostel rooms?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP042,"Are 4-wheelers allowed on campus for students?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP043,"How many 2-wheelers can a student have on campus?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP044,"What happens on the first vehicle rule offence in the hostel context?",Hostel Rules,Hard,hostel_rules_and_regulations
+SP045,"Can fines be imposed on an entire floor or wing for electricity/water wastage?",Hostel Rules,Hard,hostel_rules_and_regulations
+SP046,"Where should I file maintenance complaints in the hostel?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP047,"What is the escalation path for unresolved hostel complaints?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP048,"Can the institute do spot checks of hostel rooms without notice?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP049,"Is drilling or civil works allowed in hostel rooms?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP050,"Are visitors allowed inside the HOR?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP051,"Where should hostellers meet their visitors?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP052,"What is the guest room charge for non-resident students?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP053,"What is the guest room charge for outside visitors?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP054,"What is the fine for entertaining a visitor without permission?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP055,"Is the institute responsible for loss of personal property in the hostel?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP056,"What is the fine for losing your hostel room key?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP057,"Can I use my own lock on my hostel room?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP058,"What is the additional fine for using your own lock without informing the authorities?",Hostel Rules,Hard,hostel_rules_and_regulations
+SP059,"What must I do if my roommate goes missing?",Hostel Rules,Medium,hostel_rules_and_regulations
+SP060,"Are pets allowed in the hostel?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP061,"What is the minimum fine for any breach of hostel rules?",Hostel Rules,Easy,hostel_rules_and_regulations
+SP062,"What types of vehicles are allowed on campus for students?",Vehicle Rules,Easy,vehicle_rules_for_students
+SP063,"What must I do to bring my 2-wheeler to campus?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP064,"What happens if my 2-wheeler doesn't have an institute sticker?",Vehicle Rules,Easy,vehicle_rules_for_students
+SP065,"What documents must I always carry while riding my 2-wheeler on campus?",Vehicle Rules,Hard,vehicle_rules_for_students
+SP066,"Where are the designated parking areas for 2-wheelers on campus?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP067,"What is the fine for a first speeding offence on campus?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP068,"What is the fine for a second speeding offence on campus?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP069,"What happens on a third speeding offence?",Vehicle Rules,Easy,vehicle_rules_for_students
+SP070,"What is the first-offence penalty for riding without a helmet?",Vehicle Rules,Easy,vehicle_rules_for_students
+SP071,"What is the second-offence penalty for riding without a helmet?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP072,"What is the penalty for not having a driving license or documents on the first offence?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP073,"What is the penalty progression for unauthorized parking?",Vehicle Rules,Hard,vehicle_rules_for_students
+SP074,"What is the fine for triple riding on a first offence?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP075,"What are the penalties for reckless driving on campus?",Vehicle Rules,Hard,vehicle_rules_for_students
+SP076,"What is the punishment for driving under the influence (DUI) on campus?",Vehicle Rules,Easy,vehicle_rules_for_students
+SP077,"What is the penalty for disobeying security staff while on a vehicle?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP078,"What is the fine for entering campus without an institute sticker on the first offence?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP079,"What is the penalty for honking on campus?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP080,"Who is authorized to report vehicle violations on campus?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP081,"What email address should vehicle violations be reported to?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP082,"Who reviews and takes action on vehicle violation reports?",Vehicle Rules,Medium,vehicle_rules_for_students
+SP083,"Does the penalty for repeated vehicle offences always end in permanent suspension on the third offence?",Vehicle Rules,Hard,vehicle_rules_for_students
+SP084,"What documents can I get from the Registrar's office?",Registrar Services,Easy,daiict_students_document_service
+SP085,"What is the process to apply for documents from the Registrar?",Registrar Services,Medium,daiict_students_document_service
+SP086,"How long does it take for a document to be ready for in-person collection?",Registrar Services,Easy,daiict_students_document_service
+SP087,"What is the contact email for the Registrar's document service?",Registrar Services,Easy,daiict_students_document_service
+SP088,"What is the phone number for the Registrar's document service?",Registrar Services,Medium,daiict_students_document_service
+SP089,"How do I pay for documents from the Registrar?",Registrar Services,Easy,daiict_students_document_service
+SP090,"Can I get my documents delivered by courier or post?",Registrar Services,Medium,daiict_students_document_service
+SP091,"Is there an online portal for requesting documents from the Registrar?",Registrar Services,Easy,daiict_students_document_service
+SP092,"Which activities lead to immediate expulsion from DA-IICT?",Student Conduct,Medium,student_code_of_conduct
+SP093,"Is gambling or betting considered an immediately expellable offence?",Student Conduct,Medium,student_code_of_conduct
+SP094,"What are examples of 'other acts of indiscipline' in the Student Code of Conduct?",Student Conduct,Hard,student_code_of_conduct
+SP095,"Is bypassing the institute firewall considered an act of indiscipline?",Student Conduct,Medium,student_code_of_conduct
+SP096,"What happens to a student found guilty of indiscipline regarding probation?",Student Conduct,Medium,student_code_of_conduct
+SP097,"What restrictions apply to a student on disciplinary probation?",Student Conduct,Hard,student_code_of_conduct
+SP098,"What happens if a student commits an offence while already on disciplinary probation?",Student Conduct,Medium,student_code_of_conduct
+SP099,"What does 'Expulsion' as a punishment entail at DA-IICT?",Student Conduct,Medium,student_code_of_conduct
+SP100,"What does 'Academic Suspension' mean as a DAC punishment?",Student Conduct,Medium,student_code_of_conduct
+SP101,"If I'm expelled from HOR, can I still attend classes?",Student Conduct,Hard,student_code_of_conduct
+SP102,"What are the visiting hours for a student expelled from HOR?",Student Conduct,Hard,student_code_of_conduct
+SP103,"What does the 'Restitution' punishment involve?",Student Conduct,Medium,student_code_of_conduct
+SP104,"Who is the Convener of the DAC?",Student Conduct,Easy,student_code_of_conduct
+SP105,"What types of breaches are listed in the Disciplinary Guidelines?",Student Conduct,Hard,disciplinary_guidelines
+SP106,"How are disciplinary cases referred to the committee?",Student Conduct,Medium,disciplinary_guidelines
+SP107,"What factors are considered when deciding a disciplinary penalty?",Student Conduct,Hard,disciplinary_guidelines
+SP108,"Who is the final appellate authority for disciplinary decisions?",Student Conduct,Medium,disciplinary_guidelines
+SP109,"Within how many weeks must a student submit an appeal against a disciplinary order?",Student Conduct,Easy,disciplinary_guidelines
+SP110,"What powers does the Director have when hearing an appeal?",Student Conduct,Hard,disciplinary_guidelines
+SP111,"Is ragging punishable under a Central Government Act?",Student Conduct,Easy,curbing_ragging
+SP112,"What are the possible punishments for ragging at DA-IICT?",Student Conduct,Hard,curbing_ragging
+SP113,"What is the maximum fine for ragging?",Student Conduct,Medium,curbing_ragging
+SP114,"Are firearms and weapons possession grounds for immediate expulsion?",Student Conduct,Easy,student_code_of_conduct
+SP115,"Is failure to appear before the DAC considered an act of indiscipline?",Student Conduct,Medium,student_code_of_conduct
+SP116,"Can the Director modify or enhance a penalty on appeal?",Student Conduct,Hard,disciplinary_guidelines
+SP117,"How many visiting doctors does the Medical Centre have?",Medical Services,Easy,medical_assistance_sop
+SP118,"How many nurses are available at the Medical Centre?",Medical Services,Easy,medical_assistance_sop
+SP119,"Is there a charge for doctor consultations at the Medical Centre?",Medical Services,Easy,medical_assistance_sop
+SP120,"What is the email address for the Medical Centre?",Medical Services,Easy,medical_assistance_sop
+SP121,"What are the timings for Dr. Arvindsinh Vaghela?",Medical Services,Medium,medical_assistance_sop
+SP122,"What are the timings for Dr. Charulata Harshe?",Medical Services,Medium,medical_assistance_sop
+SP123,"What are the timings for Dr. Anjana Ved?",Medical Services,Medium,medical_assistance_sop
+SP124,"What are the duty hours for the female nurse Ms. Shivani Vala?",Medical Services,Medium,medical_assistance_sop
+SP125,"What are the duty hours for the male nurse Mr. Chirag Patni?",Medical Services,Medium,medical_assistance_sop
+SP126,"Is nursing staff available on weekends?",Medical Services,Medium,medical_assistance_sop
+SP127,"What are the weekend nurse timings?",Medical Services,Hard,medical_assistance_sop
+SP128,"Is there a 24x7 ambulance service on campus?",Medical Services,Easy,medical_assistance_sop
+SP129,"What is the intercom number for the ambulance?",Medical Services,Medium,medical_assistance_sop
+SP130,"What is the landline number for the ambulance service?",Medical Services,Medium,medical_assistance_sop
+SP131,"What is the Group Mediclaim amount per student?",Medical Services,Medium,medical_assistance_sop
+SP132,"Can students get cashless hospitalisation?",Medical Services,Medium,medical_assistance_sop
+SP133,"Where can students generate their Medi-claim cards?",Medical Services,Hard,medical_assistance_sop
+SP134,"Which hospitals are empanelled with DA-IICT for student healthcare?",Medical Services,Hard,medical_assistance_sop
+SP135,"Who are the counsellors available on campus?",Medical Services,Medium,medical_assistance_sop
+SP136,"What are the timings for Dr. Nandini Banerjee's counselling?",Medical Services,Medium,medical_assistance_sop
+SP137,"Where is Dr. Nandini Banerjee's office located?",Medical Services,Medium,medical_assistance_sop
+SP138,"What days is Ms. Nitu Singh Bhadouria available for counselling?",Medical Services,Medium,medical_assistance_sop
+SP139,"Where is Ms. Nitu Singh Bhadouria's counselling office?",Medical Services,Hard,medical_assistance_sop
+SP140,"Is there an online counselling service available 24x7?",Medical Services,Easy,medical_assistance_sop
+SP141,"What is the phone number for the Security Supervisor?",Medical Services,Medium,medical_assistance_sop
+SP142,"What is the contact number for Hostel Supervisors?",Medical Services,Medium,medical_assistance_sop
+SP143,"Who is the Dean of Students and what is their contact number?",Medical Services,Medium,medical_assistance_sop
+SP144,"Who is the Executive Registrar and what is their contact?",Medical Services,Hard,medical_assistance_sop
+SP145,"What are the steps in the Medical Assistance SOP?",Medical Services,Hard,medical_assistance_sop
+SP146,"Who accompanies a student during emergency hospital transfer?",Medical Services,Medium,medical_assistance_sop
+SP147,"What should I do if I have a medical emergency after hours?",Medical Services,Medium,medical_assistance_sop
+SP148,"Who must be notified after a medical emergency — Warden, Manager (Admin), or Dean (Students)?",Medical Services,Hard,medical_assistance_sop
+SP149,"What is the contact number for the Resident Warden Women Ms. Minalben Patel?",Medical Services,Hard,medical_assistance_sop
+SP150,"Who do I report to after hours for a medical emergency as a hostel resident?",Medical Services,Medium,medical_assistance_sop
