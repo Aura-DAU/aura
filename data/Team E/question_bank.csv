@@ -1,0 +1,106 @@
+Question ID,Question,Subcategory,Difficulty,Expected Source
+Q001,What are the disciplinary rules for students at DAU?,Disciplinary Rules,Easy,disciplinary_rules.md
+Q002,What constitutes an act of indiscipline at DAU?,Disciplinary Rules,Easy,punishment_for_act_of_indiscipline.md
+Q003,What is the punishment for ragging at DAU?,Anti-Ragging,Easy,anti_ragging_committee.md
+Q004,Who are the members of the Anti-Ragging Committee 2025-26?,Anti-Ragging,Easy,anti_ragging_committee.md
+Q005,How do I report a ragging incident at DAU?,Anti-Ragging,Easy,anti_ragging_committee.md
+Q006,What is the National Anti-Ragging Helpline number?,Anti-Ragging,Easy,anti_ragging_committee.md
+Q007,What are the disciplinary guidelines for students regarding academic misconduct?,Disciplinary Rules,Medium,disciplinary_guidelines_for_students.md
+Q008,Can a student be expelled for plagiarism at DAU?,Disciplinary Rules,Medium,plagiarism_prevention_framework.md
+Q009,What is the plagiarism prevention framework at DAU?,Academic Integrity,Medium,plagiarism_prevention_framework.md
+Q010,What software does DAU use to detect plagiarism?,Academic Integrity,Hard,plagiarism_prevention_framework.md
+Q011,How do I file a grievance as a student at DAU?,Grievance,Easy,grievance_redressal_cell.md
+Q012,What is the Grievance Redressal Cell at DAU?,Grievance,Easy,grievance_redressal_cell.md
+Q013,Who is the Grievance Redressal Authority for students?,Grievance,Easy,table_1_grievance_redressal_students.md
+Q014,Who is the Grievance Redressal Authority for faculty?,Grievance,Easy,table_2_grievance_redressal_faculty.md
+Q015,Who is the Grievance Redressal Authority for staff?,Grievance,Easy,table_3_grievance_redressal_staff.md
+Q016,What is the timeline for resolving a student grievance at DAU?,Grievance,Medium,grievance_redressal_cell.md
+Q017,Can a student appeal a grievance decision at DAU?,Grievance,Medium,grievance_redressal_cell.md
+Q018,What is DAU's policy against sexual harassment?,ICC Policy,Easy,dau_policy_against_sexual_harassment.md
+Q019,Who are the members of the Internal Complaints Committee (ICC) at DAU?,ICC Policy,Easy,dau_policy_against_sexual_harassment.md
+Q020,How do I report sexual harassment at DAU?,ICC Policy,Easy,dau_policy_against_sexual_harassment.md
+Q021,What is the POSH Act and how does it apply at DAU?,ICC Policy,Medium,dau_policy_against_sexual_harassment.md
+Q022,What is DAU's Whistle Blowers Policy?,Whistle Blower,Easy,whistle_blowers_policy.md
+Q023,How can I report financial misconduct at DAU anonymously?,Whistle Blower,Medium,whistle_blowers_policy.md
+Q024,What is DAU's data privacy policy for alumni?,Data Privacy,Easy,alumni_data_privacy_policy.md
+Q025,How does DAU protect my personal data?,Data Privacy,Easy,alumni_data_privacy_policy.md
+Q026,Can I opt out of DAU alumni communications?,Data Privacy,Easy,alumni_data_privacy_policy.md
+Q027,What is the E-Governance Policy at DAU?,Data Privacy,Medium,e_governance_policy.md
+Q028,What is the Patent Filing Policy at DAU?,Research Policy,Medium,patent_filing_policy.md
+Q029,How does a student file a patent at DAU?,Research Policy,Medium,patent_filing_policy.md
+Q030,What incentives does DAU offer for research publications?,Research Policy,Medium,policy_of_incentives_for_research.md
+Q031,What is the policy on sponsored research projects at DAU?,Research Policy,Medium,policy_on_the_sponsored_projects.md
+Q032,What are the Institute Thematic Research Areas (TRAs) at DAU?,Research Policy,Medium,policy_on_institute_thematic_research_areas.md
+Q033,What is the internship policy for students on sponsored projects?,Research Policy,Medium,internship_policy_sponsored_projects.md
+Q034,What travel allowances do PhD students get for research at DAU?,Research Policy,Medium,phd_student_travel_policy.md
+Q035,What is the DAU Student Research Excellence Award?,Research Policy,Easy,policy_student_research_excellence.md
+Q036,Who is eligible for the DAU Student Research Excellence Award?,Research Policy,Medium,policy_student_research_excellence.md
+Q037,What is the consultancy policy at DAU?,Research Policy,Medium,consultancy_policy.md
+Q038,What is the Teaching Assistantship Policy at DAU?,Faculty Policy,Medium,teaching_assistantship_policy.md
+Q039,How much stipend do Teaching Assistants get at DAU?,Faculty Policy,Medium,teaching_assistantship_policy.md
+Q040,What is the Teaching Fellow Policy at DAU?,Faculty Policy,Medium,teaching_fellow_policy.md
+Q041,What is the Faculty Research Publication Incentive Policy?,Faculty Policy,Medium,policy_on_faculty_research_publications.md
+Q042,What are the general service conditions for DAU employees?,Faculty Policy,Hard,general_service_conditions.md
+Q043,What is the travel reimbursement policy for faculty at DAU?,Faculty Policy,Medium,travel_policy.md
+Q044,What is DAU's environment and energy usage policy?,Environment,Easy,environment_and_energy_usage_policy.md
+Q045,Does DAU have solar energy? What is its capacity?,Environment,Easy,environment_and_energy_usage_policy.md
+Q046,What are the vehicle rules for students at DAU?,Student Facilities,Easy,vehicle_rules_for_students.md
+Q047,Can students park vehicles inside the DAU campus?,Student Facilities,Easy,vehicle_rules_for_students.md
+Q048,What is the holiday list for DAU in 2026?,Administration,Easy,dau_holiday_list_2026.md
+Q049,How many holidays does DAU give in a year?,Administration,Easy,dau_holiday_list_2026.md
+Q050,What medical facilities are available at DAU?,Healthcare,Easy,sop_healthcare_facilities.md
+Q051,How do I access healthcare services at DAU?,Healthcare,Easy,sop_healthcare_facilities.md
+Q052,Does DAU have a medical emergency protocol?,Healthcare,Medium,sop_healthcare_facilities.md
+Q053,Is there a campus doctor at DAU?,Healthcare,Easy,sop_healthcare_facilities.md
+Q054,Does DAU have a tie-up with any hospital?,Healthcare,Medium,sop_healthcare_facilities.md
+Q055,What is the SOP for organising events at DAU?,Events,Easy,sop_for_event_organisation.md
+Q056,How do I get approval for hosting an event at DAU?,Events,Medium,sop_for_event_organisation.md
+Q057,What permissions are needed to invite an external guest speaker at DAU?,Events,Medium,sop_for_event_organisation.md
+Q058,What is the Continuing Education Programme (CEP) at DAU?,CEP,Easy,cep_policy.md
+Q059,How can I enroll in a CEP course at DAU?,CEP,Easy,cep_policy.md
+Q060,What is the AIP (Academic Industry Partnership) at DAU?,CEP,Medium,cep_policy.md
+Q061,What is the DAIICT Act 2003?,Governance,Medium,daiict_act_2003.md
+Q062,What changes were made in the DAIICT Amendment Act 2024?,Governance,Medium,amended_daiict_act.md
+Q063,What are the objectives of DAU as per its founding act?,Governance,Medium,daiict_act_2003.md
+Q064,What is the governance structure of DAU?,Governance,Medium,vision_mission_strategic_plan.md
+Q065,What is the vision and mission of DAU?,Governance,Easy,vision_mission_strategic_plan.md
+Q066,What is DAU's strategic plan?,Governance,Medium,vision_mission_strategic_plan.md
+Q067,How has DAU implemented the National Education Policy (NEP) 2020?,NEP,Medium,nep_2020.md
+Q068,What NEP 2020 initiatives has DAU launched?,NEP,Medium,nep_2020.md
+Q069,What is DAU's NAAC grade and CGPA?,Rankings,Easy,naac_accreditation_2023.md
+Q070,When was DAU last accredited by NAAC?,Rankings,Easy,naac_accreditation_2023.md
+Q071,What is DAU's NAAC Cycle 2 Self Study Report?,Rankings,Hard,naac_cycle_2_ssr.md
+Q072,What is DAU's NIRF ranking?,Rankings,Easy,public_self_disclosure_2025.md
+Q073,What is the GSIRF Five Star Rating for DAU?,Rankings,Easy,gsirf_certificate.md
+Q074,What is the UGC 12B status of DAU?,Governance,Medium,ugc_12b_proforma.md
+Q075,Where can I find DAU's annual report?,Annual Reports,Easy,annual_reports.md
+Q076,What were DAU's highlights in the 2024-25 annual report?,Annual Reports,Hard,annual_report_2024_25.md
+Q077,How many students graduated from DAU in 2022-23?,Annual Reports,Hard,annual_report_2022_23.md
+Q078,What is UGC's Public Self-Disclosure requirement and how does DAU comply?,UGC / Statutory,Hard,public_self_disclosure_2025.md
+Q079,What was the UGC notification about DAU's name change?,UGC / Statutory,Medium,ugc_notification_change_of_name.md
+Q080,What is the UGC Proforma for Inspection at DAU?,UGC / Statutory,Hard,ugc_proforma_for_inspection.md
+Q081,What is the fee structure for BTech at DAU?,Fee Structure,Easy,N/A — Missing
+Q082,Can I get a refund if I withdraw from a course at DAU?,Refund Policy,Medium,N/A — Missing
+Q083,What scholarships are available for students at DAU?,Scholarships,Easy,N/A — Missing
+Q084,What is the attendance policy for BTech students at DAU?,Attendance Policy,Easy,N/A — Missing
+Q085,How many absences are allowed before I lose credits at DAU?,Attendance Policy,Easy,N/A — Missing
+Q086,What is the library usage policy at DAU?,Library,Easy,N/A — Missing
+Q087,Can students borrow books overnight from the DAU library?,Library,Easy,N/A — Missing
+Q088,What is the hostel allotment policy at DAU?,Hostel,Easy,N/A — Missing
+Q089,Is hostel accommodation mandatory for first year students at DAU?,Hostel,Easy,N/A — Missing
+Q090,What is the IT and cybersecurity policy for students at DAU?,IT Policy,Medium,N/A — Missing
+Q091,Are students allowed to use personal laptops on the DAU campus network?,IT Policy,Easy,N/A — Missing
+Q092,What is the faculty leave policy at DAU?,Faculty Policy,Medium,N/A — Missing
+Q093,How many casual leaves does a DAU employee get per year?,Faculty Policy,Easy,N/A — Missing
+Q094,What is the maternity leave policy at DAU?,Faculty Policy,Medium,N/A — Missing
+Q095,What is the dress code policy at DAU?,Student Conduct,Easy,N/A — Missing
+Q096,What is the alcohol and substance use policy on DAU campus?,Student Conduct,Easy,N/A — Missing
+Q097,Is there a policy for student clubs and organisations at DAU?,Student Activities,Easy,N/A — Missing
+Q098,What is the sports facility usage policy at DAU?,Student Facilities,Easy,N/A — Missing
+Q099,What is the data retention policy for student records at DAU?,Data Privacy,Hard,N/A — Missing
+Q100,What is the policy on recording lectures at DAU?,Academic Integrity,Medium,N/A — Missing
+Q101,What is the social media policy for DAU students?,Student Conduct,Medium,N/A — Missing
+Q102,Can students start a company while studying at DAU?,Entrepreneurship,Medium,N/A — Missing
+Q103,What is the IP ownership policy for student projects at DAU?,Research Policy,Hard,patent_filing_policy.md
+Q104,What is the conflict of interest policy at DAU?,Governance,Hard,N/A — Missing
+Q105,What is the policy for international students at DAU?,Administration,Medium,N/A — Missing
