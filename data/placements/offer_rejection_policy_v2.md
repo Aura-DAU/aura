@@ -1,0 +1,23 @@
+---
+title: "Offer Rejection Policy (2025-26)"
+category: "Placement Policy"
+url: "offer_rejection_policy.md"
+scraped_date: "2026-06-10"
+---
+
+# Offer Rejection Policy
+
+### Valid Rejection Criteria
+An offer is only considered officially rejected by a student if:
+1. The student informs the placement office in **writing only**.
+2. The student fails to accept the offer within the time period declared by the company or placement cell.
+
+### Out-of-Drive Penalties
+
+If a student explicitly rejects a Job (J) only or an Internship + Job (I+J) offer from either a Category I or Category II company, they will be considered "not interested" in securing employment through the university. Consequently, they will be **permanently removed** from the ongoing placement drive.
+
+### The Parallel Process Limit
+
+A student is permitted to reject **one offer maximum**. This typically occurs while exercising a valid switch option or managing parallel recruitment processes. If a student rejects a **second** offer, they will be immediately removed from the placement drive. 
+
+*Note: Abandoning a company's recruitment process midway without authorization is considered a rejection and may lead to disciplinary action by the PIAAC.*
