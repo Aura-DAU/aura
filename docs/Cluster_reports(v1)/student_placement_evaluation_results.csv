@@ -149,3 +149,9 @@ PLCMT-147,Does the chatbot have access to my previous semester grades?,Missing -
 PLCMT-148,Can the system automatically detect if I abandoned a company process midway?,Missing - Level 4,It628 System Programming |  | Placement / Placement Cell / PIAAC Document,Pending Review,Fail,Expected source missing from retrieved context.
 PLCMT-149,Will I get an automated email if a Dream Company opens its registration?,Missing - Level 4,AnnualReport 2024-25 pdf | Newsletter/July - Dec 2022 | UGC Proforma/Proforma for Inspection by UGC – 2025,Poor,Fail,Source Data Missing
 PLCMT-150,Is the student registration process for placement drives completely automated?,Missing - Level 4,Placement / Placement Cell / PLACEMENT BROCHURE 2025-26 | Placement / Placement Cell / PIAAC Document | NAAC / NAAC Cycle 1,Pending Review,Fail,Expected source missing from retrieved context.
+
+SUMMARY SECTION
+Questions Tested,150
+Pass Count,43
+Fail Count,107
+Accuracy Percentage,28.67%
