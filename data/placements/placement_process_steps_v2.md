@@ -2,7 +2,9 @@
 title: "Standard Placement Process Pipeline"
 category: "Placement Policy"
 url: "placement_process_steps.md"
+scrapped_by: "Pushkar"
 scraped_date: "2026-06-10"
+team: "Team D"
 ---
 
 # The Placement Process Pipeline

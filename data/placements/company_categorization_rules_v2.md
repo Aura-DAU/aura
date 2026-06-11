@@ -2,7 +2,9 @@
 title: "Company Categorization Rules (2025-26)"
 category: "Placement Policy"
 url: "company_categorization_rules.md"
+scrapped_by: "Pushkar"
 scraped_date: "2026-06-10"
+team: "Team D"
 ---
 
 # Company Categorization Rules
