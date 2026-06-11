@@ -216,17 +216,6 @@ class RetrievalPipeline:
 
         results = deduped
 
-        print("\nAFTER RETRIEVAL")
-        print("=" * 60)
-
-        for i, r in enumerate(results[:20]):
-
-            print(
-                f"[{i+1}]",
-                r["metadata"].get("faculty_name"),
-                r["metadata"].get("title")
-            )
-
         if decomposed_queries:
 
             reranked = results
@@ -240,53 +229,9 @@ class RetrievalPipeline:
                 )
             )
 
-
-        print("\nAFTER RERANK")
-        print("=" * 60)
-
-        for i, r in enumerate(reranked[:10]):
-
-            print(
-                f"[{i+1}]",
-                r["metadata"].get("faculty_name"),
-                r["metadata"].get("title")
-            )
-
         final_chunks = reranked[
             :final_top_k
         ]
-
-        print("\nFINAL CHUNKS")
-        print("=" * 60)
-
-        for i, chunk in enumerate(final_chunks):
-
-            print(f"\n[{i+1}]")
-
-            print(
-                chunk["metadata"].get(
-                    "faculty_name"
-                )
-            )
-
-            print(
-                chunk["metadata"].get(
-                    "h2"
-                )
-            )
-
-            print(
-                chunk["metadata"].get(
-                    "title"
-                )
-            )
-
-            print(
-                chunk["metadata"].get(
-                    "text",
-                    ""
-                )[:300]
-            )
 
         built = (
             self.builder.build(

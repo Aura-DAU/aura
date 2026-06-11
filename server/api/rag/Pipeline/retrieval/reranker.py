@@ -106,29 +106,6 @@ class Reranker:
             )
         )
 
-        # intent_section_boosts = {
-        #     "faculty_research":
-        #         "research",
-
-        #     "faculty_contact":
-        #         "contact",
-
-        #     "program_eligibility":
-        #         "eligibility",
-
-        #     "program_curriculum":
-        #         "curriculum",
-
-        #     "scholarship_information":
-        #         "scholarship",
-
-        #     "admissions_information":
-        #         "admissions"
-        # }
-
-
-        print(plan)
-
         if isinstance(
             retrieval_intent,
             list
@@ -318,13 +295,6 @@ class Reranker:
 
             reranked.append(
                 result
-            )
-
-            print(
-                section_type,
-                target_section,
-                required_sections,
-                result["reranked_score"]
             )
 
         reranked.sort(
