@@ -1,9 +1,10 @@
-# Source: Faculty on Contract Page
-
-**URL:** https://www.daiict.ac.in/faculty-contract  
-**Content Type:** Teaching Track Faculty (Contract) Recruitment  
-**Last Updated:** December 2024
-
+---
+title: "Faculty Contract"
+url: "https://www.daiict.ac.in/faculty-contract"
+category: "Faculty"
+scraped_by: "Bhagyashree Khemwani"
+scraped_date: "2026-06-10"
+team: "Team C"
 ---
 
 # Special Recruitment Drive – Teaching Track Faculty (on Contract)

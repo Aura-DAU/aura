@@ -1,9 +1,10 @@
-# Source: Faculty on Tenure Page
-
-**URL:** https://www.daiict.ac.in/faculty-tenure  
-**Content Type:** Full-Time Faculty Recruitment & Tenure Policy  
-**Last Updated:** 2024
-
+---
+title: "Faculty Tenure"
+url: "https://www.daiict.ac.in/faculty-tenure"
+category: "Faculty"
+scraped_by: "Bhagyashree Khemwani"
+scraped_date: "2026-06-10"
+team: "Team C"
 ---
 
 # Faculty Recruitment

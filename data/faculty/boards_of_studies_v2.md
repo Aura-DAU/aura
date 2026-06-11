@@ -1,9 +1,10 @@
-# Source: Board of Studies Page
-
-**URL:** https://www.daiict.ac.in/board-studies  
-**Content Type:** Academic Governance Committee  
-**Last Updated:** 2026-06-04
-
+---
+title: "BoardsofStudies"
+url: "https://daiict.ac.in/board-studies"
+category: "faculty"
+scraped_by: "Bhagyashree Khemwani"
+scraped_date: "2026-06-10"
+team: "Team C"
 ---
 
 # Board Of Studies
