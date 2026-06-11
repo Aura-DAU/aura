@@ -1,157 +1,112 @@
 Question ID,Question,Expected Source,Retrieved Source,Answer Quality,Pass/Fail,Notes
-SP001,Is there a concept of official leave for students at DA-IICT?,student_leave_policy,Policies/Faculty Handbook | Student Leave Policy,Good,Pass,Answer generated successfully.
-SP002,What must students adhere to instead of having a formal leave system?,student_leave_policy, |  | First year in campus,Good,Pass,Answer generated successfully.
-SP003,"If I've been absent for 3 or more consecutive weeks, what option do I have?",student_leave_policy, |  | Student Leave Policy,Good,Pass,Answer generated successfully.
-SP004,Who do I apply to if I want to opt for semester withdrawal after being absent 3+ weeks?,student_leave_policy, |  | student leave policy,Good,Pass,Answer generated successfully.
-SP005,"If I've been absent for 3+ consecutive weeks and I don't opt for withdrawal, do I get any relaxation on continuous evaluation marks?",student_leave_policy, |  | student leave policy,Good,Pass,Answer generated successfully.
-SP006,I missed an exam because of a family death. Where do I apply?,student_leave_policy, | student leave policy | Student Leave Policy,Good,Pass,Answer generated successfully.
-SP007,"What are the valid reasons for applying for a missed exam? (illness, accident, death in family)",student_leave_policy, | student leave policy | Student Leave Policy,Good,Pass,Answer generated successfully.
-SP008,Within how many days of missing an exam must I submit the leave application?,student_leave_policy,student leave policy |  | Student Leave Policy,Good,Pass,Answer generated successfully.
-SP009,What documents do I need to provide when applying for a missed exam due to illness?,student_leave_policy,medical assisstance |  | UGC Proforma/Proforma for Inspection by UGC – 2025,Good,Pass,Answer generated successfully.
-SP010,Can I sit for a re-exam before my leave application is approved?,student_leave_policy, | student leave policy | ,Good,Pass,Answer generated successfully.
-SP011,Who conducts the re-examination or alternate assessment after leave is approved?,student_leave_policy, | student leave policy | Malpractices/Improper Conduct in Examinations and Consequences,Good,Pass,Answer generated successfully.
-SP012,What happens if I miss the re-examination too?,student_leave_policy, | student leave policy | Malpractices/Improper Conduct in Examinations and Consequences,Good,Pass,Answer generated successfully.
-SP013,From which academic year did the student leave policy become effective?,student_leave_policy,Student Leave Policy | Student Leave Policy,Good,Pass,Answer generated successfully.
-SP014,Where do I collect the leave application proforma from?,student_leave_policy, |  | UGC Proforma/Proforma for Inspection by UGC – 2025,Good,Pass,Answer generated successfully.
-SP015,Who communicates the schedule for re-examinations?,student_leave_policy, | Examination Department | UGC Proforma/Proforma for Inspection by UGC – 2025,Good,Pass,Answer generated successfully.
-SP016,Who allots rooms to new students in the hostel?,hostel_rules_and_regulations, |  | ,Good,Pass,Answer generated successfully.
-SP017,"Who has the authority to allot, re-allot, or withdraw hostel accommodation?",hostel_rules_and_regulations, |  | hall of residence,Good,Pass,Answer generated successfully.
-SP018,Who is eligible for hostel room allotment?,hostel_rules_and_regulations, |  | ,Good,Pass,Answer generated successfully.
-SP019,"If I stop being a student, how many days do I have to vacate the hostel?",hostel_rules_and_regulations,hall of residence | ,Poor,Fail,RAG fallback triggered. Missing context.
-SP020,For how many years are UG students guaranteed a hostel room?,hostel_rules_and_regulations,hall of residence | Students,Poor,Fail,RAG fallback triggered. Missing context.
-SP021,What happens if a UG student needs hostel accommodation beyond 4 years?,hostel_rules_and_regulations,hall of residence,Good,Pass,Answer generated successfully.
-SP022,How many guardian/relative contacts must hostellers from outside Ahmedabad/Gandhinagar provide?,hostel_rules_and_regulations,Students | Students | ,Poor,Fail,RAG fallback triggered. Missing context.
-SP023,Is alcohol allowed in the hostel or campus?,hostel_rules_and_regulations,hall of residence,Good,Pass,Answer generated successfully.
-SP024,What law makes alcohol/intoxicants prohibited at DA-IICT?,hostel_rules_and_regulations,Student | hall of residence,Good,Pass,Answer generated successfully.
-SP025,What is the consequence for possession or consumption of alcohol on campus?,hostel_rules_and_regulations,hall of residence | Students / DAC/ Act of indiscipline and indicative list of punishment | ,Good,Pass,Answer generated successfully.
-SP026,What time must hostellers return to campus by?,hostel_rules_and_regulations,hall of residence | ,Poor,Fail,RAG fallback triggered. Missing context.
-SP027,During what hours are students not allowed outside campus?,hostel_rules_and_regulations, |  | ,Poor,Fail,RAG fallback triggered. Missing context.
-SP028,What is the exception for leaving campus between midnight and 6 AM?,hostel_rules_and_regulations,Examination Rules for students | hall of residence | student leave policy,Poor,Fail,RAG fallback triggered. Missing context.
-SP029,What must I do before staying away from the hostel even for one night?,hostel_rules_and_regulations,hall of residence | ,Good,Pass,Answer generated successfully.
-SP030,Am I allowed to enter the hostel of the opposite gender?,hostel_rules_and_regulations,National Education Policy 2020 | hall of residence,Poor,Fail,RAG fallback triggered. Missing context.
-SP031,What is the punishment for changing rooms or exchanging property without Hostel Supervisor approval?,hostel_rules_and_regulations,hall of residence |  | ,Good,Pass,Answer generated successfully.
-SP032,Is ragging considered a criminal offence at DA-IICT?,hostel_rules_and_regulations,Students / Curbing Ragging | Students / ANTI-RAGGING Committees & Squad Details | ,Good,Pass,Answer generated successfully.
-SP033,Who should I contact if I witness or experience ragging?,hostel_rules_and_regulations,Students / Anti-Ragging Info | Students / ANTI-RAGGING Committees & Squad Details,Good,Pass,Answer generated successfully.
-SP034,What is the maximum punishment for ragging?,hostel_rules_and_regulations,Students / Curbing Ragging | Students / Anti-Ragging Info | Students / ANTI-RAGGING Committees & Squad Details,Good,Pass,Answer generated successfully.
-SP035,Is there a dress code for hostellers outside their rooms?,hostel_rules_and_regulations,hall of residence | ,Good,Pass,Answer generated successfully.
-SP036,What is the fine if an unauthorized person stays in my hostel room?,hostel_rules_and_regulations,hall of residence | ,Good,Pass,Answer generated successfully.
-SP037,What should I do with electrical gadgets when leaving my room?,hostel_rules_and_regulations, | AnnualReport 2018-19 pdf | hall of residence,Poor,Fail,RAG fallback triggered. Missing context.
-SP038,Can I bring food inside the HOR (Hall of Residence)?,hostel_rules_and_regulations,hall of residence | Halls of Residence,Good,Pass,Answer generated successfully.
-SP039,"What is the fine for bringing food inside the HOR, and within what time must it be paid?",hostel_rules_and_regulations,hall of residence | ,Good,Pass,Answer generated successfully.
-SP040,Which electrical appliances are prohibited in hostel rooms?,hostel_rules_and_regulations, | hall of residence,Good,Pass,Answer generated successfully.
-SP041,Is cooking permitted in hostel rooms?,hostel_rules_and_regulations, | hall of residence,Good,Pass,Answer generated successfully.
-SP042,Are 4-wheelers allowed on campus for students?,hostel_rules_and_regulations, |  | ,Good,Pass,Answer generated successfully.
-SP043,How many 2-wheelers can a student have on campus?,hostel_rules_and_regulations, |  | ,Good,Pass,Answer generated successfully.
-SP044,What happens on the first vehicle rule offence in the hostel context?,hostel_rules_and_regulations,hall of residence |  | vehicle rules for students,Good,Pass,Answer generated successfully.
-SP045,Can fines be imposed on an entire floor or wing for electricity/water wastage?,hostel_rules_and_regulations, | hall of residence,Good,Pass,Answer generated successfully.
-SP046,Where should I file maintenance complaints in the hostel?,hostel_rules_and_regulations, | hall of residence,Good,Pass,Answer generated successfully.
-SP047,What is the escalation path for unresolved hostel complaints?,hostel_rules_and_regulations,hall of residence | Students,Good,Pass,Answer generated successfully.
-SP048,Can the institute do spot checks of hostel rooms without notice?,hostel_rules_and_regulations, |  | hall of residence,Good,Pass,Answer generated successfully.
-SP049,Is drilling or civil works allowed in hostel rooms?,hostel_rules_and_regulations,hall of residence | ,Good,Pass,Answer generated successfully.
-SP050,Are visitors allowed inside the HOR?,hostel_rules_and_regulations, | hall of residence,Good,Pass,Answer generated successfully.
-SP051,Where should hostellers meet their visitors?,hostel_rules_and_regulations, | hall of residence | Students,Good,Pass,Answer generated successfully.
-SP052,What is the guest room charge for non-resident students?,hostel_rules_and_regulations,BS–MS (Data Science & Artificial Intelligence) Admissions | BS–MS (Information Technology) Admissions | BS–MS in Information Technology (newly launched),Poor,Fail,RAG fallback triggered. Missing context.
-SP053,What is the guest room charge for outside visitors?,hostel_rules_and_regulations, | Policies/Travel Policy | BS–MS in Information Technology (newly launched),Good,Pass,Answer generated successfully.
-SP054,What is the fine for entertaining a visitor without permission?,hostel_rules_and_regulations, |  | ,Poor,Fail,RAG fallback triggered. Missing context.
-SP055,Is the institute responsible for loss of personal property in the hostel?,hostel_rules_and_regulations, |  | hall of residence,Good,Pass,Answer generated successfully.
-SP056,What is the fine for losing your hostel room key?,hostel_rules_and_regulations, | hall of residence,Good,Pass,Answer generated successfully.
-SP057,Can I use my own lock on my hostel room?,hostel_rules_and_regulations, | hall of residence,Good,Pass,Answer generated successfully.
-SP058,What is the additional fine for using your own lock without informing the authorities?,hostel_rules_and_regulations, |  | ,Good,Pass,Answer generated successfully.
-SP059,What must I do if my roommate goes missing?,hostel_rules_and_regulations, | hall of residence | A Word of Guidance,Good,Pass,Answer generated successfully.
-SP060,Are pets allowed in the hostel?,hostel_rules_and_regulations,hall of residence | ,Poor,Fail,RAG fallback triggered. Missing context.
-SP061,What is the minimum fine for any breach of hostel rules?,hostel_rules_and_regulations, | hall of residence,Good,Pass,Answer generated successfully.
-SP062,What types of vehicles are allowed on campus for students?,vehicle_rules_for_students, |  | Vehicle Rules for Students,Good,Pass,Answer generated successfully.
-SP063,What must I do to bring my 2-wheeler to campus?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP064,What happens if my 2-wheeler doesn't have an institute sticker?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP065,What documents must I always carry while riding my 2-wheeler on campus?,vehicle_rules_for_students, | vehicle rules for students | Vehicle Rules for Students,Good,Pass,Answer generated successfully.
-SP066,Where are the designated parking areas for 2-wheelers on campus?,vehicle_rules_for_students, | vehicle rules for students | ,Good,Pass,Answer generated successfully.
-SP067,What is the fine for a first speeding offence on campus?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP068,What is the fine for a second speeding offence on campus?,vehicle_rules_for_students, |  | vehicle rules for students,Good,Pass,Answer generated successfully.
-SP069,What happens on a third speeding offence?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP070,What is the first-offence penalty for riding without a helmet?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP071,What is the second-offence penalty for riding without a helmet?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP072,What is the penalty for not having a driving license or documents on the first offence?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP073,What is the penalty progression for unauthorized parking?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP074,What is the fine for triple riding on a first offence?,vehicle_rules_for_students, |  | vehicle rules for students,Good,Pass,Answer generated successfully.
-SP075,What are the penalties for reckless driving on campus?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP076,What is the punishment for driving under the influence (DUI) on campus?,vehicle_rules_for_students, | vehicle rules for students | ,Good,Pass,Answer generated successfully.
-SP077,What is the penalty for disobeying security staff while on a vehicle?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP078,What is the fine for entering campus without an institute sticker on the first offence?,vehicle_rules_for_students, | hall of residence | vehicle rules for students,Good,Pass,Answer generated successfully.
-SP079,What is the penalty for honking on campus?,vehicle_rules_for_students, |  | ,Good,Pass,Answer generated successfully.
-SP080,Who is authorized to report vehicle violations on campus?,vehicle_rules_for_students, | vehicle rules for students | ,Good,Pass,Answer generated successfully.
-SP081,What email address should vehicle violations be reported to?,vehicle_rules_for_students, | vehicle rules for students | ,Good,Pass,Answer generated successfully.
-SP082,Who reviews and takes action on vehicle violation reports?,vehicle_rules_for_students,vehicle rules for students | ,Good,Pass,Answer generated successfully.
-SP083,Does the penalty for repeated vehicle offences always end in permanent suspension on the third offence?,vehicle_rules_for_students,vehicle rules for students |  | ,Good,Pass,Answer generated successfully.
-SP084,What documents can I get from the Registrar's office?,daiict_students_document_service,People / Alumini / Alumini Document Service | DAIICT Students Document Service,Good,Pass,Answer generated successfully.
-SP085,What is the process to apply for documents from the Registrar?,daiict_students_document_service,People / Alumini / Alumini Document Service | DAIICT Students Document Service,Good,Pass,Answer generated successfully.
-SP086,How long does it take for a document to be ready for in-person collection?,daiict_students_document_service,DAIICT Students Document Service | People / Alumini / Alumini Document Service,Good,Pass,Answer generated successfully.
-SP087,What is the contact email for the Registrar's document service?,daiict_students_document_service,Dean's Office |  | People / Alumini / Alumini Document Service,Good,Pass,Answer generated successfully.
-SP088,What is the phone number for the Registrar's document service?,daiict_students_document_service,Dean's Office | DAIICT Students Document Service,Poor,Fail,RAG fallback triggered. Missing context.
-SP089,How do I pay for documents from the Registrar?,daiict_students_document_service,People / Alumini / Alumini Document Service | DAIICT Students Document Service,Good,Pass,Answer generated successfully.
-SP090,Can I get my documents delivered by courier or post?,daiict_students_document_service,DAIICT Students Document Service | People / Alumini / Alumini Document Service,Good,Pass,Answer generated successfully.
-SP091,Is there an online portal for requesting documents from the Registrar?,daiict_students_document_service,DAIICT Students Document Service | DAIICT Students Document Service,Good,Pass,Answer generated successfully.
-SP092,Which activities lead to immediate expulsion from DA-IICT?,student_code_of_conduct,DA-IICT | B. Tech DAFS Merit Scholarships at DA-IICT,Good,Pass,Answer generated successfully.
-SP093,Is gambling or betting considered an immediately expellable offence?,student_code_of_conduct,Students / Curbing Ragging | Policies/Conduct Rules | Students / DAC/ Act of indiscipline and indicative list of punishment,Good,Pass,Answer generated successfully.
-SP094,What are examples of 'other acts of indiscipline' in the Student Code of Conduct?,student_code_of_conduct, |  | Students / DAC/ Act of indiscipline and indicative list of punishment,Good,Pass,Answer generated successfully.
-SP095,Is bypassing the institute firewall considered an act of indiscipline?,student_code_of_conduct,DA-IICT | Students / DAC/ Act of indiscipline and indicative list of punishment,Good,Pass,Answer generated successfully.
-SP096,What happens to a student found guilty of indiscipline regarding probation?,student_code_of_conduct,Students / DAC/ Act of indiscipline and indicative list of punishment | Student,Good,Pass,Answer generated successfully.
-SP097,What restrictions apply to a student on disciplinary probation?,student_code_of_conduct,Student | Students / Disciplinary Guidelines for Students,Good,Pass,Answer generated successfully.
-SP098,What happens if a student commits an offence while already on disciplinary probation?,student_code_of_conduct,Student | Students / DAC/ Act of indiscipline and indicative list of punishment,Good,Pass,Answer generated successfully.
-SP099,What does 'Expulsion' as a punishment entail at DA-IICT?,student_code_of_conduct,DA-IICT | Students / DAC/ Act of indiscipline and indicative list of punishment,Good,Pass,Answer generated successfully.
-SP100,What does 'Academic Suspension' mean as a DAC punishment?,student_code_of_conduct,Students / DAC/ Act of indiscipline and indicative list of punishment | Student,Good,Pass,Answer generated successfully.
-SP101,"If I'm expelled from HOR, can I still attend classes?",student_code_of_conduct,Student | hall of residence,Good,Pass,Answer generated successfully.
-SP102,What are the visiting hours for a student expelled from HOR?,student_code_of_conduct,Student | hall of residence,Good,Pass,Answer generated successfully.
-SP103,What does the 'Restitution' punishment involve?,student_code_of_conduct,DA-IICT | Grievance Redressal Cell (Students and Employees) | Students / DAC/ Act of indiscipline and indicative list of punishment,Good,Pass,Answer generated successfully.
-SP104,Who is the Convener of the DAC?,student_code_of_conduct,NAAC / NAAC Cycle 1 |  | Students,Good,Pass,Answer generated successfully.
-SP105,What types of breaches are listed in the Disciplinary Guidelines?,disciplinary_guidelines,Students / Disciplinary Guidelines for Students | DA-IICT | Malpractices/Improper Conduct in Examinations and Consequences,Good,Pass,Answer generated successfully.
-SP106,How are disciplinary cases referred to the committee?,disciplinary_guidelines,Students |  | ,Good,Pass,Answer generated successfully.
-SP107,What factors are considered when deciding a disciplinary penalty?,disciplinary_guidelines,DA-IICT | Policies/Conduct Rules | Students / Disciplinary Guidelines for Students,Good,Pass,Answer generated successfully.
-SP108,Who is the final appellate authority for disciplinary decisions?,disciplinary_guidelines,Policies/Conduct Rules | Grievance Redressal Cell (Students and Employees) | DA-IICT,Good,Pass,Answer generated successfully.
-SP109,Within how many weeks must a student submit an appeal against a disciplinary order?,disciplinary_guidelines,Students / Disciplinary Guidelines for Students | ICC / DAU Policy against Sexual Harassment | DA-IICT,Good,Pass,Answer generated successfully.
-SP110,What powers does the Director have when hearing an appeal?,disciplinary_guidelines,Policies/Conduct Rules | DAIICT ACT,Good,Pass,Answer generated successfully.
-SP111,Is ragging punishable under a Central Government Act?,curbing_ragging,Students / Curbing Ragging | Students / Anti-Ragging Info | Students / ANTI-RAGGING Committees & Squad Details,Good,Pass,Answer generated successfully.
-SP112,What are the possible punishments for ragging at DA-IICT?,curbing_ragging,Students / Curbing Ragging | DA-IICT | ,Good,Pass,Answer generated successfully.
-SP113,What is the maximum fine for ragging?,curbing_ragging,Students / Curbing Ragging | Students / Anti-Ragging Info | Students / ANTI-RAGGING Committees & Squad Details,Good,Pass,Answer generated successfully.
-SP114,Are firearms and weapons possession grounds for immediate expulsion?,student_code_of_conduct,Students / Disciplinary Guidelines for Students | Students / DAC/ Act of indiscipline and indicative list of punishment | Policies/Conduct Rules,Good,Pass,Answer generated successfully.
-SP115,Is failure to appear before the DAC considered an act of indiscipline?,student_code_of_conduct,Students / DAC/ Act of indiscipline and indicative list of punishment |  | ,Good,Pass,Answer generated successfully.
-SP116,Can the Director modify or enhance a penalty on appeal?,disciplinary_guidelines,Policies/Conduct Rules | DA-IICT,Good,Pass,Answer generated successfully.
-SP117,How many visiting doctors does the Medical Centre have?,medical_assistance_sop,Medical Facility | Medical Facility | ,Good,Pass,Answer generated successfully.
-SP118,How many nurses are available at the Medical Centre?,medical_assistance_sop, | medical assisstance | ,Good,Pass,Answer generated successfully.
-SP119,Is there a charge for doctor consultations at the Medical Centre?,medical_assistance_sop,Medical Facility | Medical Facility | ,Good,Pass,Answer generated successfully.
-SP120,What is the email address for the Medical Centre?,medical_assistance_sop, |  | medical assisstance,Poor,Fail,RAG fallback triggered. Missing context.
-SP121,What are the timings for Dr. Arvindsinh Vaghela?,medical_assistance_sop, | Doctoral Scholars | Academic Calendar 2020-21,Good,Pass,Answer generated successfully.
-SP122,What are the timings for Dr. Charulata Harshe?,medical_assistance_sop,Academic Calendar 2020-21 | Academic Calendar 2025-26 | AnnualReport 2019-20 pdf,Poor,Fail,RAG fallback triggered. Missing context.
-SP123,What are the timings for Dr. Anjana Ved?,medical_assistance_sop,AnnualReport 2019-20 pdf | Visvesvaraya Ph.D. Scheme | Newsletter/Jan - Jun 2020,Poor,Fail,RAG fallback triggered. Missing context.
-SP124,What are the duty hours for the female nurse Ms. Shivani Vala?,medical_assistance_sop,People / Staff |  | Directory,Good,Pass,Answer generated successfully.
-SP125,What are the duty hours for the male nurse Mr. Chirag Patni?,medical_assistance_sop,People / Staff |  | medical assisstance,Good,Pass,Answer generated successfully.
-SP126,Is nursing staff available on weekends?,medical_assistance_sop,medical assisstance |  | ,Good,Pass,Answer generated successfully.
-SP127,What are the weekend nurse timings?,medical_assistance_sop, | medical assisstance,Good,Pass,Answer generated successfully.
-SP128,Is there a 24x7 ambulance service on campus?,medical_assistance_sop,medical assisstance | ,Good,Pass,Answer generated successfully.
-SP129,What is the intercom number for the ambulance?,medical_assistance_sop, | medical assisstance | ,Good,Pass,Answer generated successfully.
-SP130,What is the landline number for the ambulance service?,medical_assistance_sop,medical assisstance |  | Research / DAU Student Research Excellence Award,Good,Pass,Answer generated successfully.
-SP131,What is the Group Mediclaim amount per student?,medical_assistance_sop, | medical assisstance | Medical Facility,Good,Pass,Answer generated successfully.
-SP132,Can students get cashless hospitalisation?,medical_assistance_sop,medical assisstance | ,Good,Pass,Answer generated successfully.
-SP133,Where can students generate their Medi-claim cards?,medical_assistance_sop, | medical assisstance | MEDICAL FACILITIES FOR STUDENTS OF DA-IICT,Good,Pass,Answer generated successfully.
-SP134,Which hospitals are empanelled with DA-IICT for student healthcare?,medical_assistance_sop,MEDICAL FACILITIES FOR STUDENTS OF DA-IICT,Good,Pass,Answer generated successfully.
-SP135,Who are the counsellors available on campus?,medical_assistance_sop,Policies/Faculty Handbook |  | UGC Proforma/UGC 12B Proforma,Good,Pass,Answer generated successfully.
-SP136,What are the timings for Dr. Nandini Banerjee's counselling?,medical_assistance_sop, | People / Staff | Nandini Banerjee,Good,Pass,Answer generated successfully.
-SP137,Where is Dr. Nandini Banerjee's office located?,medical_assistance_sop,Nandini Banerjee | People / Staff | ,Good,Pass,Answer generated successfully.
-SP138,What days is Ms. Nitu Singh Bhadouria available for counselling?,medical_assistance_sop,People / Staff |  | UGC Proforma/UGC 12B Proforma,Good,Pass,Answer generated successfully.
-SP139,Where is Ms. Nitu Singh Bhadouria's counselling office?,medical_assistance_sop,People / Staff |  | medical assisstance,Good,Pass,Answer generated successfully.
-SP140,Is there an online counselling service available 24x7?,medical_assistance_sop,medical assisstance |  | UGC Proforma/UGC 12B Proforma,Good,Pass,Answer generated successfully.
-SP141,What is the phone number for the Security Supervisor?,medical_assistance_sop, |  | emergency contact detail,Good,Pass,Answer generated successfully.
-SP142,What is the contact number for Hostel Supervisors?,medical_assistance_sop, | Students | Students,Good,Pass,Answer generated successfully.
-SP143,Who is the Dean of Students and what is their contact number?,medical_assistance_sop, |  | Students,Good,Pass,Answer generated successfully.
-SP144,Who is the Executive Registrar and what is their contact?,medical_assistance_sop,AnnualReport 2015-16 pdf |  | ,Good,Pass,Answer generated successfully.
-SP145,What are the steps in the Medical Assistance SOP?,medical_assistance_sop, | medical assisstance | ,Good,Pass,Answer generated successfully.
-SP146,Who accompanies a student during emergency hospital transfer?,medical_assistance_sop, | medical assisstance | ,Good,Pass,Answer generated successfully.
-SP147,What should I do if I have a medical emergency after hours?,medical_assistance_sop,medical assisstance | ,Good,Pass,Answer generated successfully.
-SP148,"Who must be notified after a medical emergency — Warden, Manager (Admin), or Dean (Students)?",medical_assistance_sop,medical assisstance | ,Good,Pass,Answer generated successfully.
-SP149,What is the contact number for the Resident Warden Women Ms. Minalben Patel?,medical_assistance_sop,Students |  | Students,Poor,Fail,RAG fallback triggered. Missing context.
-SP150,Who do I report to after hours for a medical emergency as a hostel resident?,medical_assistance_sop, | medical assisstance,Good,Pass,Answer generated successfully.
-,,,,,,
-SUMMARY SECTION,,,,,,
-Questions Tested,150,,,,,
-Pass Count,134,,,,,
-Fail Count,16,,,,,
-Accuracy Percentage,89.33%,,,,,
+Q001,What are the disciplinary rules for students at DAU?,disciplinary_rules.md,disciplinary_rules.md,Good,Pass,
+Q002,What constitutes an act of indiscipline at DAU?,punishment_for_act_of_indiscipline.md,punishment_for_act_of_indiscipline.md,Good,Pass,
+Q003,What is the punishment for ragging at DAU?,anti_ragging_committee.md,anti_ragging_committee.md,Good,Pass,
+Q004,Who are the members of the Anti-Ragging Committee 2025-26?,anti_ragging_committee.md,anti_ragging_committee.md,Good,Pass,
+Q005,How do I report a ragging incident at DAU?,anti_ragging_committee.md,anti_ragging_committee.md,Good,Pass,
+Q006,What is the National Anti-Ragging Helpline number?,anti_ragging_committee.md,anti_ragging_committee.md,Good,Pass,
+Q007,What are the disciplinary guidelines for students regarding academic misconduct?,disciplinary_guidelines_for_students.md,disciplinary_guidelines_for_students.md,Good,Pass,
+Q008,Can a student be expelled for plagiarism at DAU?,plagiarism_prevention_framework.md,plagiarism_prevention_framework.md,Good,Pass,
+Q009,What is the plagiarism prevention framework at DAU?,plagiarism_prevention_framework.md,plagiarism_prevention_framework.md,Good,Pass,
+Q010,What software does DAU use to detect plagiarism?,plagiarism_prevention_framework.md,plagiarism_prevention_framework.md,Good,Pass,
+Q011,How do I file a grievance as a student at DAU?,grievance_redressal_cell.md,grievance_redressal_cell.md,Good,Pass,
+Q012,What is the Grievance Redressal Cell at DAU?,grievance_redressal_cell.md,grievance_redressal_cell.md,Good,Pass,
+Q013,Who is the Grievance Redressal Authority for students?,table_1_grievance_redressal_students.md,table_1_grievance_redressal_students.md,Good,Pass,
+Q014,Who is the Grievance Redressal Authority for faculty?,table_2_grievance_redressal_faculty.md,table_2_grievance_redressal_faculty.md,Good,Pass,
+Q015,Who is the Grievance Redressal Authority for staff?,table_3_grievance_redressal_staff.md,table_3_grievance_redressal_staff.md,Good,Pass,
+Q016,What is the timeline for resolving a student grievance at DAU?,grievance_redressal_cell.md,grievance_redressal_cell.md,Good,Pass,
+Q017,Can a student appeal a grievance decision at DAU?,grievance_redressal_cell.md,grievance_redressal_cell.md,Good,Pass,
+Q018,What is DAU's policy against sexual harassment?,dau_policy_against_sexual_harassment.md,dau_policy_against_sexual_harassment.md,Good,Pass,
+Q019,Who are the members of the Internal Complaints Committee (ICC) at DAU?,dau_policy_against_sexual_harassment.md,dau_policy_against_sexual_harassment.md,Good,Pass,
+Q020,How do I report sexual harassment at DAU?,dau_policy_against_sexual_harassment.md,dau_policy_against_sexual_harassment.md,Good,Pass,
+Q021,What is the POSH Act and how does it apply at DAU?,dau_policy_against_sexual_harassment.md,dau_policy_against_sexual_harassment.md,Good,Pass,
+Q022,What is DAU's Whistle Blowers Policy?,whistle_blowers_policy.md,whistle_blowers_policy.md,Good,Pass,
+Q023,How can I report financial misconduct at DAU anonymously?,whistle_blowers_policy.md,whistle_blowers_policy.md,Good,Pass,
+Q024,What is DAU's data privacy policy for alumni?,alumni_data_privacy_policy.md,alumni_data_privacy_policy.md,Good,Pass,
+Q025,How does DAU protect my personal data?,alumni_data_privacy_policy.md,alumni_data_privacy_policy.md,Good,Pass,
+Q026,Can I opt out of DAU alumni communications?,alumni_data_privacy_policy.md,alumni_data_privacy_policy.md,Good,Pass,
+Q027,What is the E-Governance Policy at DAU?,e_governance_policy.md,e_governance_policy.md,Good,Pass,
+Q028,What is the Patent Filing Policy at DAU?,patent_filing_policy.md,patent_filing_policy.md,Good,Pass,
+Q029,How does a student file a patent at DAU?,patent_filing_policy.md,patent_filing_policy.md,Good,Pass,
+Q030,What incentives does DAU offer for research publications?,policy_of_incentives_for_research.md,policy_of_incentives_for_research.md,Good,Pass,
+Q031,What is the policy on sponsored research projects at DAU?,policy_on_the_sponsored_projects.md,policy_on_the_sponsored_projects.md,Good,Pass,
+Q032,What are the Institute Thematic Research Areas (TRAs) at DAU?,policy_on_institute_thematic_research_areas.md,policy_on_institute_thematic_research_areas.md,Good,Pass,
+Q033,What is the internship policy for students on sponsored projects?,internship_policy_sponsored_projects.md,internship_policy_sponsored_projects.md,Good,Pass,
+Q034,What travel allowances do PhD students get for research at DAU?,phd_student_travel_policy.md,phd_student_travel_policy.md,Good,Pass,
+Q035,What is the DAU Student Research Excellence Award?,policy_student_research_excellence.md,policy_student_research_excellence.md,Good,Pass,
+Q036,Who is eligible for the DAU Student Research Excellence Award?,policy_student_research_excellence.md,policy_student_research_excellence.md,Good,Pass,
+Q037,What is the consultancy policy at DAU?,consultancy_policy.md,consultancy_policy.md,Good,Pass,
+Q038,What is the Teaching Assistantship Policy at DAU?,teaching_assistantship_policy.md,teaching_assistantship_policy.md,Good,Pass,
+Q039,How much stipend do Teaching Assistants get at DAU?,teaching_assistantship_policy.md,teaching_assistantship_policy.md,Good,Pass,
+Q040,What is the Teaching Fellow Policy at DAU?,teaching_fellow_policy.md,teaching_fellow_policy.md,Good,Pass,
+Q041,What is the Faculty Research Publication Incentive Policy?,policy_on_faculty_research_publications.md,policy_on_faculty_research_publications.md,Good,Pass,
+Q042,What are the general service conditions for DAU employees?,general_service_conditions.md,general_service_conditions.md,Good,Pass,
+Q043,What is the travel reimbursement policy for faculty at DAU?,travel_policy.md,travel_policy.md,Good,Pass,
+Q044,What is DAU's environment and energy usage policy?,environment_and_energy_usage_policy.md,environment_and_energy_usage_policy.md,Good,Pass,
+Q045,Does DAU have solar energy? What is its capacity?,environment_and_energy_usage_policy.md,environment_and_energy_usage_policy.md,Good,Pass,
+Q046,What are the vehicle rules for students at DAU?,vehicle_rules_for_students.md,vehicle_rules_for_students.md,Good,Pass,
+Q047,Can students park vehicles inside the DAU campus?,vehicle_rules_for_students.md,vehicle_rules_for_students.md,Good,Pass,
+Q048,What is the holiday list for DAU in 2026?,dau_holiday_list_2026.md,dau_holiday_list_2026.md,Good,Pass,
+Q049,How many holidays does DAU give in a year?,dau_holiday_list_2026.md,dau_holiday_list_2026.md,Good,Pass,
+Q050,What medical facilities are available at DAU?,sop_healthcare_facilities.md,sop_healthcare_facilities.md,Good,Pass,
+Q051,How do I access healthcare services at DAU?,sop_healthcare_facilities.md,sop_healthcare_facilities.md,Good,Pass,
+Q052,Does DAU have a medical emergency protocol?,sop_healthcare_facilities.md,sop_healthcare_facilities.md,Good,Pass,
+Q053,Is there a campus doctor at DAU?,sop_healthcare_facilities.md,sop_healthcare_facilities.md,Good,Pass,
+Q054,Does DAU have a tie-up with any hospital?,sop_healthcare_facilities.md,sop_healthcare_facilities.md,Good,Pass,
+Q055,What is the SOP for organising events at DAU?,sop_for_event_organisation.md,sop_for_event_organisation.md,Good,Pass,
+Q056,How do I get approval for hosting an event at DAU?,sop_for_event_organisation.md,sop_for_event_organisation.md,Good,Pass,
+Q057,What permissions are needed to invite an external guest speaker at DAU?,sop_for_event_organisation.md,sop_for_event_organisation.md,Good,Pass,
+Q058,What is the Continuing Education Programme (CEP) at DAU?,cep_policy.md,cep_policy.md,Good,Pass,
+Q059,How can I enroll in a CEP course at DAU?,cep_policy.md,cep_policy.md,Good,Pass,
+Q060,What is the AIP (Academic Industry Partnership) at DAU?,cep_policy.md,cep_policy.md,Good,Pass,
+Q061,What is the DAIICT Act 2003?,daiict_act_2003.md,daiict_act_2003.md,Good,Pass,
+Q062,What changes were made in the DAIICT Amendment Act 2024?,amended_daiict_act.md,amended_daiict_act.md,Good,Pass,
+Q063,What are the objectives of DAU as per its founding act?,daiict_act_2003.md,daiict_act_2003.md,Good,Pass,
+Q064,What is the governance structure of DAU?,vision_mission_strategic_plan.md,vision_mission_strategic_plan.md,Good,Pass,
+Q065,What is the vision and mission of DAU?,vision_mission_strategic_plan.md,vision_mission_strategic_plan.md,Good,Pass,
+Q066,What is DAU's strategic plan?,vision_mission_strategic_plan.md,vision_mission_strategic_plan.md,Good,Pass,
+Q067,How has DAU implemented the National Education Policy (NEP) 2020?,nep_2020.md,nep_2020.md,Good,Pass,
+Q068,What NEP 2020 initiatives has DAU launched?,nep_2020.md,nep_2020.md,Good,Pass,
+Q069,What is DAU's NAAC grade and CGPA?,naac_accreditation_2023.md,naac_accreditation_2023.md,Good,Pass,
+Q070,When was DAU last accredited by NAAC?,naac_accreditation_2023.md,naac_accreditation_2023.md,Good,Pass,
+Q071,What is DAU's NAAC Cycle 2 Self Study Report?,naac_cycle_2_ssr.md,naac_cycle_2_ssr.md,Good,Pass,
+Q072,What is DAU's NIRF ranking?,public_self_disclosure_2025.md,public_self_disclosure_2025.md,Good,Pass,
+Q073,What is the GSIRF Five Star Rating for DAU?,gsirf_certificate.md,gsirf_certificate.md,Good,Pass,
+Q074,What is the UGC 12B status of DAU?,ugc_12b_proforma.md,ugc_12b_proforma.md,Good,Pass,
+Q075,Where can I find DAU's annual report?,annual_reports.md,annual_reports.md,Good,Pass,
+Q076,What were DAU's highlights in the 2024-25 annual report?,annual_report_2024_25.md,annual_report_2024_25.md,Good,Pass,
+Q077,How many students graduated from DAU in 2022-23?,annual_report_2022_23.md,annual_report_2022_23.md,Good,Pass,
+Q078,What is UGC's Public Self-Disclosure requirement and how does DAU comply?,public_self_disclosure_2025.md,public_self_disclosure_2025.md,Good,Pass,
+Q079,What was the UGC notification about DAU's name change?,ugc_notification_change_of_name.md,ugc_notification_change_of_name.md,Good,Pass,
+Q080,What is the UGC Proforma for Inspection at DAU?,ugc_proforma_for_inspection.md,ugc_proforma_for_inspection.md,Good,Pass,
+Q081,What is the fee structure for BTech at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q082,Can I get a refund if I withdraw from a course at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q083,What scholarships are available for students at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q084,What is the attendance policy for BTech students at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q085,How many absences are allowed before I lose credits at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q086,What is the library usage policy at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q087,Can students borrow books overnight from the DAU library?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q088,What is the hostel allotment policy at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q089,Is hostel accommodation mandatory for first year students at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q090,What is the IT and cybersecurity policy for students at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q091,Are students allowed to use personal laptops on the DAU campus network?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q092,What is the faculty leave policy at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q093,How many casual leaves does a DAU employee get per year?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q094,What is the maternity leave policy at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q095,What is the dress code policy at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q096,What is the alcohol and substance use policy on DAU campus?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q097,Is there a policy for student clubs and organisations at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q098,What is the sports facility usage policy at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q099,What is the data retention policy for student records at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q100,What is the policy on recording lectures at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q101,What is the social media policy for DAU students?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q102,Can students start a company while studying at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q103,What is the IP ownership policy for student projects at DAU?,patent_filing_policy.md,patent_filing_policy.md,Good,Pass,
+Q104,What is the conflict of interest policy at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+Q105,What is the policy for international students at DAU?,N/A — Missing,N/A,No Answer,Fail,Source document not yet collected
+
+Summary,,,,,,
+Questions Tested,105,,,,,
+Pass Count,81,,,,,
+Fail Count,24,,,,,
+Accuracy Percentage,77.1%,,,,,
