@@ -1,8 +1,9 @@
-from Pipeline.retrieval.retrieval_pipeline import (
+#Chat pipeline for AURA RAG system
+from pipeline.retrieval.retrieval_pipeline import (
     RetrievalPipeline
 )
 
-from Pipeline.generation.answer_generator import (
+from pipeline.generation.answer_generator import (
     AnswerGenerator
 )
 
@@ -10,11 +11,9 @@ from Pipeline.generation.answer_generator import (
 class AuraChat:
 
     def __init__(self):
-
         self.pipeline = (
             RetrievalPipeline()
         )
-
         self.generator = (
             AnswerGenerator()
         )
@@ -22,9 +21,9 @@ class AuraChat:
     def chat(
         self,
         query,
-        history=None
+        history=None,
+        profile=None
     ):
-
         retrieval_result = (
             self.pipeline.get_context(
                 query,
@@ -32,17 +31,15 @@ class AuraChat:
             )
         )
 
-
         answer = (
             self.generator.generate(
-
                 query=query,
-
                 context=retrieval_result[
                     "context"
                 ],
 
-                history=history
+                history=history,
+                profile=profile
             )
         )
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { useAuraChat } from "@/hooks/useAuraChat";
+import { useAuraChat } from "@/hooks/use-aura-chat";
 import ChatSidebar from "@/app/components/features/chat/ChatSidebar";
 import MessageStream from "@/app/components/features/chat/MessageStream";
 import ProfileModal from "@/app/components/features/chat/ProfileModal";
@@ -167,6 +167,7 @@ export default function ChatPage() {
               <textarea
                 ref={textareaRef}
                 rows={1}
+                maxLength={2000}
                 placeholder="Ask AURA about exams, curfews, clubs, maps, leave policies..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}

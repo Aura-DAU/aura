@@ -71,13 +71,21 @@ class RetrievalPipeline:
         ]
 
         query_lower = query.lower()
-        
-        needs_rewrite = any(
-            re.search(
-                rf"\b{re.escape(ref)}\b",
-                query_lower
+
+        # Rewriting only makes sense mid-conversation. Beyond explicit
+        # pronouns, short or "what about..." follow-ups are usually
+        # context-dependent too; the rewriter returns self-contained
+        # queries unchanged, so over-triggering only costs one LLM call.
+        needs_rewrite = bool(history) and (
+            any(
+                re.search(
+                    rf"\b{re.escape(ref)}\b",
+                    query_lower
+                )
+                for ref in REFERENCE_WORDS
             )
-            for ref in REFERENCE_WORDS
+            or query_lower.startswith(("what about", "how about", "and ", "also "))
+            or len(query.split()) <= 4
         )
 
         if needs_rewrite:
@@ -98,8 +106,11 @@ class RetrievalPipeline:
 
         program_name = entities.get("program_name")
 
-        if event_name:
+        if isinstance(event_name, str):
             query += " " + event_name
+
+        elif isinstance(event_name, list):
+            query += " " + " ".join(str(e) for e in event_name)
 
         if isinstance(program_name, str):
             query += " " + program_name
