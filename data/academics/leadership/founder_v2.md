@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Founder"
 url: "https://daiict.ac.in/founder"
 category: "Academic"

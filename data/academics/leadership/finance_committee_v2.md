@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Finance Committee"
 url: "https://daiict.ac.in/finance-committee"
 category: "Academic"

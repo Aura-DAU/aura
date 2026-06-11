@@ -116,7 +116,6 @@ transcendence of chauvinism and intolerance, as well as in sensitivity to global
 concerns, the commonality of concerns, and transnational moral claims to basic amenities
 across cultures. The course will highlight the importance of this formative and
 pervasive principle of life.
-***
 3
 
 ## Important Information

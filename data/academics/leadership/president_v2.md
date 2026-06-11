@@ -1,4 +1,4 @@
-﻿---
+---
 title: "President"
 url: "https://daiict.ac.in/president"
 category: "Academic"

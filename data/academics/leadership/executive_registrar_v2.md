@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Executive Registrar"
 url: "https://daiict.ac.in/executive-registrar"
 category: "Academic"

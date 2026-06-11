@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Director General"
 url: "https://daiict.ac.in/director"
 category: "Academic"

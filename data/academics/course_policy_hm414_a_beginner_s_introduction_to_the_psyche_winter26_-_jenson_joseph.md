@@ -101,7 +101,7 @@ Project: 30%
 - **Document Title:** HM414 A Beginner s Introduction to the Psyche Winter26
 - **Document Source:** HM414_A Beginner_s Introduction to the Psyche _Winter26 - Jenson Joseph.pdf
 - **Category:** Academics - Course Policies
-- **Scraped At:** 2026-06-08 06:55:11 UTC
+- **Scraped At:** 2026-06-08 06:55in UTC
 
 ## Related Links
 

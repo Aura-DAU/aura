@@ -218,20 +218,20 @@ This elective basket framework supports individualized learning pathways while m
 | Sem 5 | Program Core (DS) | Big Data Processing & Management | 4 (3-0-2) |
 | Sem 5 | Program Core (DS) | Fundamentals of Machine Learning | 4 (3-0-2) |
 | Sem 5 | Program Elective 1 | **Modeling in AI/ML** | 4 (3-0-2) |
-| - Time Series Forecasting  - Artificial Intelligence Foundations |
-| **Systems & Engineering for AI** |
-| - Advanced Databases (NoSQL, VDBs)  - Distributed Databases |
+| | | - Time Series Forecasting  - Artificial Intelligence Foundations | |
+| | | **Systems & Engineering for AI** | |
+| | | - Advanced Databases (NoSQL, VDBs)  - Distributed Databases | |
 | Sem 5 | Program Core (HSS) | Ethics in Data and AI | 3 (3-0-0) |
 |  | | | **19 (15-0-8)** |
 | Sem 6 | Program Core (DS) | Deep Learning | 4 (3-0-2) |
 | Sem 6 | Program Core (DS) | Machine Learning Operations | 4 (3-0-2) |
 | Sem 6 | Program Elective 2 | **Modeling in AI/ML** | 4 (3-0-2) |
-| - Digital Image Processing  - Classical NLP  - Speech & Audio Processing  - Information Retrieval |
+| | | - Digital Image Processing  - Classical NLP  - Speech & Audio Processing  - Information Retrieval | |
 | Sem 6 | Program Elective 3 | **Systems & Engineering for AI** | 4 (3-0-2) |
-| - Parallel and Distributed Systems  - Cybersecurity and Ethical Hacking  - Knowledge Graphs  - High Performance Computing |
+| | | - Parallel and Distributed Systems  - Cybersecurity and Ethical Hacking  - Knowledge Graphs  - High Performance Computing | |
 | Sem 6 | Applied Project | B.Sc. Exit / Applied Project | 2 (0-0-4) |
 |  | | | **18 (12-0-12)** |
-| Summer Internship | | | 4 (0-0-8) |
+| | Summer Internship | | 4 (0-0-8) |
 
 ### Year IV: Frontier and Applied AI
 
@@ -240,22 +240,22 @@ This elective basket framework supports individualized learning pathways while m
 | **Semester** | **Course Category** | **Course Title** | **Credits (L-T-P)** |
 | Sem 7 | Program Core (DS) | Reinforcement Learning | 4 (3-0-2) |
 | Sem 7 | Program Elective 4 | **Modeling in AI/ML** | 4 (3-0-2) |
-| - Neural Natural Language Processing  - Computer Vision  - Neural Speech Processing  - Recommendation Systems  - Spatiotemporal Data Analysis |
+| | | - Neural Natural Language Processing  - Computer Vision  - Neural Speech Processing  - Recommendation Systems  - Spatiotemporal Data Analysis | |
 | Sem 7 | Program Elective 5 | **Domain & Applied Analytics** | 4 (3-0-2) |
-| - Manufacturing & Industrial Systems Analytics  - Finance & Econometrics  - Environment, Energy, and Sustainability Analytics  - Cybersecurity Analytics |
+| | | - Manufacturing & Industrial Systems Analytics  - Finance & Econometrics  - Environment, Energy, and Sustainability Analytics  - Cybersecurity Analytics | |
 | Sem 7 | Open Elective 1 | - Data and Culture  - Indian Knowledge System  - or any other 3 Credit Course | 3 (3-0-0) |
 | Sem 7 | Project 1 (Phase I) | Project 1 (Phase I) | 3 (0-0-6) |
 |  | | | **18 (12-0-12)** |
 | Sem 8 | Program Core (DS) | Deep Generative Models | 4 (3-0-2) |
 | Sem 8 | Program Elective 6 | **Modeling in AI/ML** | 4 (3-0-2) |
-| - Multimodal Learning and Reasoning  - Graph Representation Learning  - Causal Inference and Reasoning  - Advanced Topics in Machine Learning |
-| **Systems & Engineering for AI** |
-| - Federated Machine Learning  - Adversarial Machine Learning  - AI Systems: Thinking beyond Models |
+| | | - Multimodal Learning and Reasoning  - Graph Representation Learning  - Causal Inference and Reasoning  - Advanced Topics in Machine Learning | |
+| | | **Systems & Engineering for AI** | |
+| | | - Federated Machine Learning  - Adversarial Machine Learning  - AI Systems: Thinking beyond Models | |
 | Sem 8 | Program Elective 7 | **Domain & Applied Analytics** | 4 (3-0-2) |
-| - Business Process and Automation Analytics  - Marketing & Consumer Analytics  - Healthcare Analytics  - Agri Analytics |
+| | | - Business Process and Automation Analytics  - Marketing & Consumer Analytics  - Healthcare Analytics  - Agri Analytics | |
 | Sem 8 | Open Elective 2 | - Technology Entrepreneurship and Innovation  - Innovation Management and Design Thinking  - Organizational Economics  - or any other 3 credit course... | 3 (3-0-0) |
 | Sem 8 | Project 1 (Phase II) | Project 1 (Phase II) | 3 (0-0-6) |
-| Grand Innovation Showcase (GIS): Showcase of Project 1 through a demonstration or poster to communicate the innovation to the general public | | | **18 (12-0-12)** |
+| Sem 8 | Grand Innovation Showcase (GIS) | Showcase of Project 1 through a demonstration or poster to communicate the innovation to the general public | **18 (12-0-12)** |
 
 ### Year V: Research & Translation
 
@@ -264,7 +264,7 @@ This elective basket framework supports individualized learning pathways while m
 | **Semester** | **Course Category** | **Course Title** | **Credits (L-T-P)** |
 | Sem 9 | Program Core (DS) | AI Systems Engineering | 4 (3-0-2) |
 | Sem 9 | Program Elective 8 | **Ethics, Governance & Emerging AI** | 3 (3-0-0) |
-| - AI Governance, Policy, and Regulation  - Trustworthy and Reliable Machine Learning  - Fairness, Accountability, Transparency in AI Systems |
+| | | - AI Governance, Policy, and Regulation  - Trustworthy and Reliable Machine Learning  - Fairness, Accountability, Transparency in AI Systems | |
 | Sem 9 | Open Elective 3 | - Startup Strategy and Growth Management  - Managing Technology and Product Innovation  - Business Law and Entrepreneurship  - or any other 3 credit course... | 3 (3-0-0) |
 | Sem 9 | Capstone Seminar / Thesis | Industrial Research Case Studies in AI/ DS | 2 (2-0-0) |
 | Sem 9 | Project 2 / Thesis | Project 2/ Thesis | 4 (0-0-8) |

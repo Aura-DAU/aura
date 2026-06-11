@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Director, School of Technology"
 url: "https://www.daiict.ac.in/director-school-technology"
 category: "Academic"

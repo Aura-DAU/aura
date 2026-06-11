@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Board of Governors"
 url: "https://daiict.ac.in/board-governors"
 category: "Academic"

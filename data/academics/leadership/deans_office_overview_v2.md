@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Dean's Office"
 url: "https://daiict.ac.in/deans-office-0"
 category: "Academic"

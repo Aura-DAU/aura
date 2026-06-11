@@ -55,10 +55,8 @@ Total
 No. | Description | No. of
 Lectures |
 |---|---|---|
-| 1 | History of agriculture development in independent India and India's
-achievements in agriculture today, agricultural land holding and land reforms | 1 |
-| 2 | Production trends of main food and cash crops; balance between food and
-cash crops | 1 |
+| 1 | History of agriculture development in independent India and India's achievements in agriculture today, agricultural land holding and land reforms | 1 |
+| 2 | Production trends of main food and cash crops; balance between food and cash crops | 1 |
 | 3 | Factors affecting agriculture (Biotic and abiotic) | 2 |
 | 4 | Soil as a medium affecting plant growth | 1 |
 | 5 | Soil properties – physical, chemical and physicochemical | 2 |
@@ -71,13 +69,11 @@ cash crops | 1 |
 | 12 | Simulation model for crop management | 1 |
 | 13 | Agrometeorology and relevance to crop production | 1 |
 | 14 | Solar radiation and crop production | 1 |
-| 15 | Diurnal and seasonal variation in temperature, PET and importance to crop
-production | 1 |
+| 15 | Diurnal and seasonal variation in temperature, PET and importance to crop production | 1 |
 | 16 | Introduction to precision agriculture | 1 |
 | 17 | Weather forecasting | 2 |
 | 18 | Impact of climate change on agriculture | 1 |
-| 19 | Agriculture marketing and impact of climate change on agriculture value
-chain and supply chain | 1 |
+| 19 | Agriculture marketing and impact of climate change on agriculture value chain and supply chain | 1 |
 | 20 | Climate smart agriculture | 1 |
 |  | Total | 26 |
 

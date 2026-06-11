@@ -90,10 +90,10 @@ Details on the application process, admission criteria, fee structure and financ
 | Courses | Total Credits: |
 | --- | --- |
 | General Elective-I | 15 |
-| General Elective-II |
-| Program Core-I |
-| Program Core-II |
-| Specialization Core-I |
+| General Elective-II | |
+| Program Core-I | |
+| Program Core-II | |
+| Specialization Core-I | |
 
 * TWO **general elective** courses of 6 credits. One course is to be taken from a basket of designated mathematics courses. The other course is to be taken from a basket of designated technical elective courses. These baskets may include upper level undergraduate courses or refresher courses.
 * TWO **program core** courses of 5 credits. These courses are common to students of all specializations. The courses are:
@@ -106,9 +106,9 @@ Details on the application process, admission criteria, fee structure and financ
 | Courses | Total Credits: |
 | --- | --- |
 | Specialization Core-II | 14 |
-| Specialization Elective-I |
-| Specialization Elective-II |
-| Minor Project-I |
+| Specialization Elective-I | |
+| Specialization Elective-II | |
+| Minor Project-I | |
 
 * ONE **specialization core** course of 4 credits
 * TWO **specialization elective** courses of 7 credits
@@ -127,8 +127,8 @@ Details on the application process, admission criteria, fee structure and financ
 | Courses | Total Credits: |
 | --- | --- |
 | Specialization Elective-III | 13 |
-| Specialization Elective-IV |
-| Major Project-I |
+| Specialization Elective-IV | |
+| Major Project-I | |
 
 * TWO **specialization electives** of 7 credits
 * Continuation of **major project I**- Summer (0-0-12-6)

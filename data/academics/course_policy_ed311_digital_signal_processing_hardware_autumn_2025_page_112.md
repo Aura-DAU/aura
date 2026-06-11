@@ -23,33 +23,9 @@ This document presents the detailed policy and syllabus structure for the course
 | Category | Core | Semester V | Winter Semester (AY 25-26) |
 | Program | B.Tech (EVD) |  |  |
 | Prerequisites | Embedded Hardware Design |  |  |
-| Course
-Objectives/
-Brief Course
-Description | Digital Signal Processing Hardware
-Digital system design and of digital signal processing in the context of modern
-systems. The course is intended to synthesise both sides (theory and experiment) of
-the module content, so as to broaden and deepen understanding.
-Syllabus
- Introduction to DSP and DSP Hardware
- Introduction to Stochastic Signals, Sampling and Quantisation
- ADC, DAC Architectures
- Registers, ALU, SRAM, IO ports, Instruction Decoder, Synthesis of a
-simplified MIPS microprocessor on FPGA
- Testing combinational and sequential digital systems, Boundary Scan,
-Build-in self-test
- Laboratory space and FPGA development kits required, Software
-requirements: Modelsim, Altera Quartus, |  |  |
-| Evaluation/
-Grading Policy | 2 In sem exams, 1 Final Exam, 1 Practical Session graded throughout the semester
-+ Quizzes and Homeworks. |  |  |
-| Course
-Materials/
-References | Textbooks
-J F Wakerly (2006). Digital Design - Principles and Practices. Pearson Prentice
-Hall.
-M M Mano, M D Ciletti, Digital Design (2007). Digital Design. Pearson Prentice
-Hall. |  |  |
+| Course Objectives/ Brief Course Description | Digital Signal Processing Hardware Digital system design and of digital signal processing in the context of modern systems. The course is intended to synthesise both sides (theory and experiment) of the module content, so as to broaden and deepen understanding. Syllabus  Introduction to DSP and DSP Hardware  Introduction to Stochastic Signals, Sampling and Quantisation  ADC, DAC Architectures  Registers, ALU, SRAM, IO ports, Instruction Decoder, Synthesis of a simplified MIPS microprocessor on FPGA  Testing combinational and sequential digital systems, Boundary Scan, Build-in self-test  Laboratory space and FPGA development kits required, Software requirements: Modelsim, Altera Quartus, |  |  |
+| Evaluation/ Grading Policy | 2 In sem exams, 1 Final Exam, 1 Practical Session graded throughout the semester + Quizzes and Homeworks. |  |  |
+| Course Materials/ References | Textbooks J F Wakerly (2006). Digital Design - Principles and Practices. Pearson Prentice Hall. M M Mano, M D Ciletti, Digital Design (2007). Digital Design. Pearson Prentice Hall. |  |  |
 
 
 Course Outcome:

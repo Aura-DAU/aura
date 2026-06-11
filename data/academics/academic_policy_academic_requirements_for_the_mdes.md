@@ -296,36 +296,27 @@ March 2025
 MDes (IUxD) –Masters of Design (Intelligent User Experience Design) 
 Curriculum Structure
 
-| No. |  |  | Semester |  |  | Subject title |  |  | Credits |  |  | Code |  |  |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 |  |  | 1 |  |  | Orientation to Intelligent User-Experience Design |  |  | 2-0-2-3 |  |  | MI601 |  |  |
-| 2 |  |  |  | 1 |  | Fundamentals of Design for IUxD |  |  | 3-0-4-5 |  |  | MI602 |  |  |
-| 3 |  |  |  | 1 |  | Elements of Design for IUxD |  |  | 2-0-4-4 |  |  | MI603 |  |  |
-| 4 |  |  |  | 1 |  | Intelligent Technology: An-introduction |  |  | 2-0-4-4 |  |  | MI604 |  |  |
-| 5 |  |  |  | 1 |  | Basics of UI, UX & IxD |  |  | 3-0-4-4 |  |  | MI605 |  |  |
-|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-|  | No. |  |  | Semester |  |  | Subject title |  |  | Credits |  |  | Code |  |
-| 6 |  |  |  | 2 |  | Design Thinking: Concepts & concerns |  |  | 2-0-2-3 |  |  | MI611 |  |  |
-| 7 |  |  |  | 2 |  | Design Research Methods |  |  | 2-0-2-3 |  |  | MI612 |  |  |
-| 8 |  |  |  | 2 |  | AI & Interaction Intelligence |  |  | 2-0-4-4 |  |  | MI613 |  |  |
-| 9 |  |  |  | 2 |  | Intelligent Design Decisions |  |  | 2-0-4-4 |  |  | MI614 |  |  |
-| 10 |  |  | 2 | 2 |  | Human Factors (Physical and Cognitive Ergonomics) in
-Interaction Design |  |  | 2-0-2-3 |  |  | MI615 |  |  |
-| 11 |  |  |  | 2 |  | User Interface Design |  |  | 2-0-4-4 |  |  | MI616 |  |  |
-|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-|  | No. |  |  | Semester |  |  | Subject title |  |  | Credits |  |  | Code |  |
-| 12 |  |  |  | 3 |  | AR & XR for Designers |  |  | 1-0-4-3 |  |  | MI621 |  |  |
-| 13 |  |  |  | 3 |  | Interaction Design |  |  | 3-0-4-5 |  |  | MI622 |  |  |
-| 14 |  |  |  | 3 |  | Phygital Experience Design |  |  | 3-0-4-5 |  |  | MI623 |  |  |
-| 15 |  |  |  | 3 |  | Immersive Experience Design |  |  | 3-0-4-5 |  |  | MI624 |  |  |
-| 16 |  |  |  | 3 |  | Open Elective (DM/etc..) |  |  | 2-0-2-3 |  |  | MI625 |  |  |
-|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-|  | No. |  |  | Semester |  |  | Subject title |  |  | Credits |  |  | Code |  |
-| 17 |  |  | 4 | 4 |  | Final Thesis / Capstone project |  |  | 6-0-24-
-18 |  |  | MI631 |  |  |
+| No. | Semester | Subject title | Credits | Code |
+|---|---|---|---|---|
+| 1 | 1 | Orientation to Intelligent User-Experience Design | 2-0-2-3 | MI601 |
+| 2 | 1 | Fundamentals of Design for IUxD | 3-0-4-5 | MI602 |
+| 3 | 1 | Elements of Design for IUxD | 2-0-4-4 | MI603 |
+| 4 | 1 | Intelligent Technology: An-introduction | 2-0-4-4 | MI604 |
+| 5 | 1 | Basics of UI, UX & IxD | 3-0-4-4 | MI605 |
+| 6 | 2 | Design Thinking: Concepts & concerns | 2-0-2-3 | MI611 |
+| 7 | 2 | Design Research Methods | 2-0-2-3 | MI612 |
+| 8 | 2 | AI & Interaction Intelligence | 2-0-4-4 | MI613 |
+| 9 | 2 | Intelligent Design Decisions | 2-0-4-4 | MI614 |
+| 10 | 2 | Human Factors (Physical and Cognitive Ergonomics) in Interaction Design | 2-0-2-3 | MI615 |
+| 11 | 2 | User Interface Design | 2-0-4-4 | MI616 |
+| 12 | 3 | AR & XR for Designers | 1-0-4-3 | MI621 |
+| 13 | 3 | Interaction Design | 3-0-4-5 | MI622 |
+| 14 | 3 | Phygital Experience Design | 3-0-4-5 | MI623 |
+| 15 | 3 | Immersive Experience Design | 3-0-4-5 | MI624 |
+| 16 | 3 | Open Elective (DM/etc..) | 2-0-2-3 | MI625 |
+| 17 | 4 | Final Thesis / Capstone project | 6-0-24-18 | MI631 |
 
 
-____________________________****************************_________________________
 
 ## Important Information
 

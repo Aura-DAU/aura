@@ -97,7 +97,7 @@ Text book:
 - **Course Title:** Title: Discrete Mathematics
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf (pages 132–133)
 - **Semester:** Autumn 2025-26
-- **Scraped At:** 2026-06-08 07:08:11 UTC
+- **Scraped At:** 2026-06-08 07:08in UTC
 
 ## Related Links
 

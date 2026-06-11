@@ -1,4 +1,4 @@
-﻿---
+---
 title: "IQAC"
 url: "https://daiict.ac.in/iqac"
 category: "Academic"
