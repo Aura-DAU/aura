@@ -24,7 +24,7 @@
 
 ## Documents Indexed
 
-**885**
+**911**
 
 The knowledge base consists of markdown documents generated from the scraped DAU website pages and supporting documents.
 
@@ -32,15 +32,15 @@ The knowledge base consists of markdown documents generated from the scraped DAU
 
 ## Chunks Created
 
-**8070**
+**15238**
 
-Header-aware chunking was used to preserve document structure while maintaining semantic coherence.
+Heirarchical heading-based semantic chunking with metadata enrichment.
 
 ---
 
 ## Chunk Size
 
-**600 Tokens**
+**256 Tokens**
 
 Maximum chunk size used during document processing.
 
@@ -48,7 +48,7 @@ Maximum chunk size used during document processing.
 
 ## Chunk Overlap
 
-**75 Tokens**
+**40 Tokens**
 
 Token overlap was maintained between consecutive chunks to preserve contextual continuity across chunk boundaries.
 
@@ -56,15 +56,15 @@ Token overlap was maintained between consecutive chunks to preserve contextual c
 
 ## Top-K Retrieval
 
-**20**
+**Dynamic Top-K Retrieval with a maximum of 5 final context chunks.**
 
-For each user query, the top 20 most relevant chunks are retrieved from Pinecone and provided to the language model for answer generation.
+The retrieval depth is dynamically determined by the query planner based on the query intent and entity type. The final number of chunks included in the context ranges from 1 to 5, with a maximum of 5 chunks.
 
 ---
 
 ## Average Retrieval Latency
 
-**0.405 seconds**
+**0.341 seconds**
 
 Average time taken to:
 
@@ -82,9 +82,9 @@ Measured over multiple test queries.
 | ------------------------- | --------------------- |
 | Embedding Model           | BAAI/bge-base-en-v1.5 |
 | Vector Database           | Pinecone              |
-| Documents Indexed         | 885                   |
-| Chunks Created            | 8070                  |
-| Chunk Size                | 600 Tokens            |
-| Chunk Overlap             | 75 Tokens             |
-| Top-K Retrieval           | 20                    |
-| Average Retrieval Latency | 0.405 seconds         |
+| Documents Indexed         | 911                   |
+| Chunks Created            | 15238                 |
+| Chunk Size                | 256 Tokens            |
+| Chunk Overlap             | 40 Tokens             |
+| Top-K Retrieval           | 1-5                   |
+| Average Retrieval Latency | 0.341 seconds         |

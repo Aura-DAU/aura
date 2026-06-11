@@ -272,7 +272,7 @@ This structured specialization ensures graduates develop both broad IT competenc
 |  |  | Indian Knowledge System |  |
 |  |  | or any other 3 Credit Course |  |
 | Sem 7 | Domain Elective I | Business Automation/ Markering/ Healthcare | 1 (1-0-0) |
-| Project | 2 (0-0-4) |
+| Sem 7 | Project | | 2 (0-0-4) |
 |  | | | **17 (13-0-8)** |
 |  | | | |
 | Sem 8 | Program Core (IT) | Enterprise Application Development | 4 (3-0-2) |
@@ -286,8 +286,8 @@ This structured specialization ensures graduates develop both broad IT competenc
 |  |  | Innovation Management and Design Thinking |  |
 |  |  | Organizational Economics |  |
 | Sem 8 | Domain Elective 2 | Manufacturing/ Finance/ Environment | 1 (1-0-0) |
-| Project | 2 (0-0-4) |
-| Grand Innovation Showcase (GIS): Showcase of Project 1 through a demonstration or poster to communicate the innovation to the general public | | | **17 (13-0-8)** |
+| Sem 8 | Project | | 2 (0-0-4) |
+| Sem 8 | Grand Innovation Showcase (GIS) | Showcase of Project 1 through a demonstration or poster to communicate the innovation to the general public | **17 (13-0-8)** |
 
 ### Year V: Innovation & Immersion
 

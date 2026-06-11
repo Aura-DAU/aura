@@ -136,7 +136,7 @@ Tentative Weekly Schedule
 - **Course Title:** Data Structures
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf (pages 127–129)
 - **Semester:** Autumn 2025-26
-- **Scraped At:** 2026-06-08 07:08:11 UTC
+- **Scraped At:** 2026-06-08 07:08in UTC
 
 ## Related Links
 

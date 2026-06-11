@@ -23,28 +23,10 @@ This document presents the detailed policy and syllabus structure for the course
 | Category | Core | Semester | I - Autumn Semester (AY 25-26) |
 | Program | B.Tech(MnC) |  |  |
 | Prerequisites | None |  |  |
-| Course
-Objectives/
-Brief Course
-Description | This course provides an introduction and basic understanding of the design and
-implementation of digital circuits. Topics include number systems, Boolean algebra,
-combinational and sequential circuits. |  |  |
-| Evaluation/
-Grading Policy | • Mid-Semester Exam: 30%
-• End-Semester Exam: 30%
-• Laboratory Assignments: 10%
-• Quizzes / Class Participation: 10%
-• Project / Mini Design Task: 10% |  |  |
-| Course
-Materials/
-References | Basic understanding of digital and analog domain, noise margin, number system,
-binary code, logic gate and related devices, Boolean algebra and simplification
-Combinational Circuits: Digital arithmetic, encoders, decoders, multiplexer, de-
-multiplexers
-Sequential Circuits: Latch, flip-flop, register, counter, memory. |  |  |
-| Detailed Course
-Content | APPENDIX A: Lectures/Modules
-APPENDIX B: Lab Experiments |  |  |
+| Course Objectives/ Brief Course Description | This course provides an introduction and basic understanding of the design and implementation of digital circuits. Topics include number systems, Boolean algebra, combinational and sequential circuits. |  |  |
+| Evaluation/ Grading Policy | • Mid-Semester Exam: 30% • End-Semester Exam: 30% • Laboratory Assignments: 10% • Quizzes / Class Participation: 10% • Project / Mini Design Task: 10% |  |  |
+| Course Materials/ References | Basic understanding of digital and analog domain, noise margin, number system, binary code, logic gate and related devices, Boolean algebra and simplification Combinational Circuits: Digital arithmetic, encoders, decoders, multiplexer, de- multiplexers Sequential Circuits: Latch, flip-flop, register, counter, memory. |  |  |
+| Detailed Course Content | APPENDIX A: Lectures/Modules APPENDIX B: Lab Experiments |  |  |
 
 
 | Course Outcomes: |  |
@@ -82,25 +64,11 @@ POs-COs Matrix:
 | CO# | Course Outcome | Mapped
 POs | Justification |
 |---|---|---|---|
-| CO1 | Understand the representation of data
-using number systems and binary
-codes | P1 | Fundamental knowledge of
-engineering concepts and
-mathematics |
-| CO2 | Apply Boolean algebra and
-simplification techniques to design
-logic circuits | P1, P2 | Involves problem analysis and use
-of engineering fundamentals |
-| CO3 | Design and implement combinational
-logic circuits using basic gates and ICs | P1, P2, P3 | Involves design and development
-of solutions |
-| CO4 | Analyze and build sequential logic
-systems like flip-flops, counters, and
-registers | P1, P3 | Analyzing and designing real-
-world sequential systems |
-| CO5 | Use digital ICs and breadboard setups
-to verify logical functions through labs | P4, P5 | Emphasizes experimentation,
-practical tools, and techniques |
+| CO1 | Understand the representation of data using number systems and binary codes | P1 | Fundamental knowledge of engineering concepts and mathematics |
+| CO2 | Apply Boolean algebra and simplification techniques to design logic circuits | P1, P2 | Involves problem analysis and use of engineering fundamentals |
+| CO3 | Design and implement combinational logic circuits using basic gates and ICs | P1, P2, P3 | Involves design and development of solutions |
+| CO4 | Analyze and build sequential logic systems like flip-flops, counters, and registers | P1, P3 | Analyzing and designing real- world sequential systems |
+| CO5 | Use digital ICs and breadboard setups to verify logical functions through labs | P4, P5 | Emphasizes experimentation, practical tools, and techniques |
 |  |  |  |  |
 
 
@@ -112,39 +80,18 @@ APPENDIX A: Detailed Course Content (Session-wise/ Module-wise) – Tentative Pl
 
 | Week | Module / Topic | Description | Lectures |
 |---|---|---|---|
-| 1 | Introduction to Digital
-Systems | Analog vs Digital,
-signals and domains,
-noise margin | 1 |
-| 2 | Number Systems | Binary, octal,
-hexadecimal,
-conversions | 1 |
-| 3 | Binary Codes and
-Logic Gates | Binary codes, basic
-and universal logic
-gates | 1 |
-| 4 | Boolean Algebra | Postulates, theorems,
-simplification | 1 |
-| 5 | Logic Simplification | Karnaugh Maps,
-SOP/POS forms | 1 |
-| 6 | Combinational
-Circuits I | Half adder, full adder,
-subtractors | 1 |
-| 7 | Combinational
-Circuits II | Encoders, decoders | 1 |
-| 8 | Combinational
-Circuits III | Multiplexers,
-demultiplexers | 1 |
+| 1 | Introduction to Digital Systems | Analog vs Digital, signals and domains, noise margin | 1 |
+| 2 | Number Systems | Binary, octal, hexadecimal, conversions | 1 |
+| 3 | Binary Codes and Logic Gates | Binary codes, basic and universal logic gates | 1 |
+| 4 | Boolean Algebra | Postulates, theorems, simplification | 1 |
+| 5 | Logic Simplification | Karnaugh Maps, SOP/POS forms | 1 |
+| 6 | Combinational Circuits I | Half adder, full adder, subtractors | 1 |
+| 7 | Combinational Circuits II | Encoders, decoders | 1 |
+| 8 | Combinational Circuits III | Multiplexers, demultiplexers | 1 |
 | 9 | Sequential Circuits I | Latches and Flip-Flops | 1 |
-| 10 | Sequential Circuits II | Registers and
-Counters | 1 |
-| 11 | Memory Devices | RAM, ROM, basics of
-memory hierarchy | 1 |
-| 12 | Lab Demonstrations /
-Projects | Practical
-implementation of
-combinational and
-sequential logic | 1 |
+| 10 | Sequential Circuits II | Registers and Counters | 1 |
+| 11 | Memory Devices | RAM, ROM, basics of memory hierarchy | 1 |
+| 12 | Lab Demonstrations / Projects | Practical implementation of combinational and sequential logic | 1 |
 
 
 ---
@@ -199,28 +146,13 @@ Programme Outcomes (POs)
 | PO
 No. | Programme Outcomes |
 |---|---|
-| PO1 | Engineering knowledge: Apply the knowledge of mathematics, science,
-engineering fundamentals, and an engineering specialization to the solution of
-complex engineering problems. |
-| PO2 | Problem analysis: Identify, formulate, review research literature, and analyze
-complex engineering problems reaching substantiated conclusions using first
-principles of mathematics, natural sciences, and engineering sciences |
-| PO3 | Design/development of solutions: Design solutions for complex engineering
-problems and design system components or processes that meet the specified needs
-with appropriate consideration for the public health and safety, and the cultural,
-societal, and environmental considerations. |
-| PO4 | Conduct investigations of complex problems: Use research-based knowledge and
-research methods including design of experiments, analysis and interpretation of
-data, and synthesis of the information to provide valid conclusions. |
-| PO5 | Modern tool usage: Create, select, and apply appropriate techniques, resources,
-and modern engineering and IT tools including prediction and modeling to
-complex engineering activities with an understanding of the limitations. |
-| PO6 | The engineer and society: Apply reasoning informed by the contextual knowledge
-to assess societal, health, safety, legal and cultural issues and the consequent
-responsibilities relevant to the professional engineering practice. |
-| PO7 | Environment and sustainability: Understand the impact of the professional
-engineering solutions in societal and environmental contexts, and demonstrate the
-knowledge of, and need for sustainable development. |
+| PO1 | Engineering knowledge: Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems. |
+| PO2 | Problem analysis: Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences |
+| PO3 | Design/development of solutions: Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations. |
+| PO4 | Conduct investigations of complex problems: Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions. |
+| PO5 | Modern tool usage: Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations. |
+| PO6 | The engineer and society: Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice. |
+| PO7 | Environment and sustainability: Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development. |
 
 
 ---
@@ -230,19 +162,10 @@ knowledge of, and need for sustainable development. |
 | PO8 | Ethics: Apply ethical principles and commit to professional ethics and
 responsibilities and norms of the engineering practice. |
 |---|---|
-| PO9 | Individual and team work: Function effectively as an individual, and as a member
-or leader in diverse teams, and in multidisciplinary settings. |
-| PO10 | Communication: Communicate effectively on complex engineering activities with
-the engineering community and with society at large, such as, being able to
-comprehend and write effective reports and design documentation, make effective
-presentations, and give and receive clear instructions. |
-| PO11 | Project management and finance: Demonstrate knowledge and understanding of
-the engineering and management principles and apply these to one’s own work, as
-a member and leader in a team, to manage projects and in multidisciplinary
-environments. |
-| PO12 | Life-long learning: Recognize the need for, and have the preparation and ability to
-engage in independent and life-long learning in the broadest context of
-technological change. |
+| PO9 | Individual and team work: Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings. |
+| PO10 | Communication: Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions. |
+| PO11 | Project management and finance: Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments. |
+| PO12 | Life-long learning: Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change. |
 
 
 ## Important Information

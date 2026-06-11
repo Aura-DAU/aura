@@ -86,7 +86,7 @@ assignments and evaluations in order to pass the course.
 - **Course Title:** Database Management System DBMS (3‐0‐2‐4
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf (pages 130–131)
 - **Semester:** Autumn 2025-26
-- **Scraped At:** 2026-06-08 07:08:11 UTC
+- **Scraped At:** 2026-06-08 07:08in UTC
 
 ## Related Links
 

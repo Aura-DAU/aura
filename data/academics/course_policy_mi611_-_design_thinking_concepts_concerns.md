@@ -41,7 +41,6 @@ Credit structure: 2-0-2-3
 Course Structure: Module submission: 60%
 End Term Jury: 40%
 
-_____________________________________________________________________________
 
 MI612:
 
@@ -75,7 +74,6 @@ Credit structure: 2-0-2-3
 Course Structure: Module submission: 60%
 End Term Jury: 40%
 
-______________________________________________________________________________
 
 MI613
 
@@ -99,7 +97,6 @@ Credit structure: 2-0-4-4
 Course Structure: Module submission: 60%
 End Term Jury: 40%
 
-_____________________________________________________________________________
 
 ---
 *Page Split*
@@ -128,7 +125,6 @@ Credit structure: 2-0-4-4
 Course Structure: Module submission: 60%
 End Term Jury: 40%
 
-______________________________________________________________________________
 
 MI615:
 

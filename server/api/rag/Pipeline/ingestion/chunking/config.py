@@ -1,0 +1,4 @@
+MODEL_NAME = "BAAI/bge-base-en-v1.5"
+
+CHUNK_SIZE = 256
+CHUNK_OVERLAP = 40

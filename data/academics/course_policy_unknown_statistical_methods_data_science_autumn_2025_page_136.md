@@ -112,27 +112,15 @@ No. | Description | No. of
 Lectures |
 |---|---|---|
 | 1. | Data summarization | 5 |
-|  | Data types, Data visualization and summarization with the
-help of tables and the important descriptive measures. |  |
+|  | Data types, Data visualization and summarization with the help of tables and the important descriptive measures. |  |
 | 2. | Probability | 5 |
-|  | Concepts of probability (both objective and subjective).
-Statistical interpretation of probability, Bayes’ theorem and
-its applications in solving real-life decision problems. |  |
+|  | Concepts of probability (both objective and subjective). Statistical interpretation of probability, Bayes’ theorem and its applications in solving real-life decision problems. |  |
 | 3. | Standard probability distributions | 10 |
-|  | Standard probability models (Binomial, Poisson, Uniform,
-Exponential, Gaussian), Probability distributions of
-transforms of random variables, Data generation from
-probability distributions using Monte Carlo method. |  |
+|  | Standard probability models (Binomial, Poisson, Uniform, Exponential, Gaussian), Probability distributions of transforms of random variables, Data generation from probability distributions using Monte Carlo method. |  |
 | 4. | Sampling | 5 |
-|  | Concepts of population and sample (both random and non-
-random), Parameter & Statistic, Probability distribution of a
-statistic (small sample & large sample), Central limit
-theorems, Illustration of sampling distribution using Monte
-Carlo simulation. |  |
+|  | Concepts of population and sample (both random and non- random), Parameter & Statistic, Probability distribution of a statistic (small sample & large sample), Central limit theorems, Illustration of sampling distribution using Monte Carlo simulation. |  |
 | 5. | Statistical inference | 5 |
-|  | Statistical estimation: Point and interval estimation,
-Methods of estimation (method of moments & maximum
-likelihood method) | 3 |
+|  | Statistical estimation: Point and interval estimation, Methods of estimation (method of moments & maximum likelihood method) | 3 |
 
 
 ---
@@ -141,12 +129,9 @@ likelihood method) | 3 |
 
 |  |  |  |
 |---|---|---|
-|  | Statistical testing of point null hypotheses: Null and
-alternative hypotheses, Significance testing using p-value,
-Some standard parametric and non-parametric tests | 4 |
+|  | Statistical testing of point null hypotheses: Null and alternative hypotheses, Significance testing using p-value, Some standard parametric and non-parametric tests | 4 |
 | 6. | Analysis of Variance | 3 |
-| 7. | Regression Analysis
-Linear Regression & Logistic Regression | 10 |
+| 7. | Regression Analysis Linear Regression & Logistic Regression | 10 |
 | 7. | Time Series Analysis | 5 |
 | 9. | Bootstrap estimation of Bias and Standard Error | 3 |
 

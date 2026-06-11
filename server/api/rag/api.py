@@ -1,12 +1,13 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 import tempfile
 from pydantic import BaseModel
-from rag import answer_question
+from rag import AURA
 from Pipeline.speech import transcribe_audio
 import os
 from typing import List, Optional
 
 app = FastAPI(title="DAU RAG API")
+aura = AURA()
 
 class HistoryTurn(BaseModel):
     role: str
@@ -20,8 +21,13 @@ ALLOWED_EXTENSIONS = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    history_list = [turn.dict() for turn in request.history] if request.history else None
-    return answer_question(request.question, history=history_list)
+    history = (
+        [turn.model_dump()
+         for turn in request.history]
+        if request.history
+        else []
+    )
+    return aura.ask(question=request.question, history=history)
 
 
 @app.post("/speech")

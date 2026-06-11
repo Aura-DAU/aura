@@ -141,7 +141,6 @@ consciousness. One should enjoy one’s social and economic advantage, but shoul
 that a portion of it needs to be shared. This sharing is reflected in global ecological concerns,
 common ownership of resources, and their usage limits. The course will highlight the
 importance of this formative and pervasive principle of life.
-***
 4
 
 ## Important Information

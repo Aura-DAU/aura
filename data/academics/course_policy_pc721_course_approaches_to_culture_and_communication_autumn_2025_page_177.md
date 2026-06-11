@@ -103,7 +103,6 @@ impart to you.
 ● The lectures would then be followed by discussion around readings that
 would help you to understand the basic ideas in relation to concrete specific
 cultural case.
-● .
 ● The ‘research project’ has to be turned in by individual student as a
 researched paper (double spaced typed of 10 to 12 pages, 12pt.font, normal
 margins) focusing on a theme provided by the faculty. You are expected to

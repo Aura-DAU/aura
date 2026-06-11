@@ -580,7 +580,6 @@ Representative List of Specialization Elective III and IV
 • Device Modeling and Simulation
 • Nanoelectronics
 • Any other relevant course
-**********
 15
 
 ## Important Information

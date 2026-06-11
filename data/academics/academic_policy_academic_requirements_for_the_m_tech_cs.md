@@ -28,10 +28,7 @@ from time to time,   as per the needs and requirements. The rules deal only with
 admission academic activities of this program. Eligibility for admission, admission procedures etc. 
 for this program are outside the purview of document.
 
-| Master of Technology in Communication Systems and Machine Learning (CS&ML) is a full- |  |  |  |
-|---|---|---|---|
-| time two-year (four semesters) program. The program is jointly offered by DA-IICT and CR Rao |  |  |  |
-| AIMSCS. | , Hyderabad. | The program w | ill be governed by these rules, subject to amendments, |
+Master of Technology in Communication Systems and Machine Learning (CS&ML) is a full-time two-year (four semesters) program. The program is jointly offered by DA-IICT and CR Rao AIMSCS, Hyderabad. The program will be governed by these rules, subject to amendments,
 
 
 The Dean (Academic Programs)/Registrar may, from time to time, issue such instructions or 
@@ -275,18 +272,11 @@ agency (optional).
 | Requirement | Sponsored M Tech |
 |---|---|
 | Course Work | 40 credits. |
-| Research | 21 credits min. Part or all the research may be carried
-out at the sponsoring agency as indicated in the agreement of
-CR Rao AIMSCS. |
-| Guidance | Guide from DA-IICT (mandatory), Co-Guide from sponsoring
-agency (optional). |
-| Infrastructure (for Research
-& Course work) | DA-IICT and sponsoring agency respectively for the part in
-which student stays at DA-IICT and at the
-sponsoring agency. |
+| Research | 21 credits min. Part or all the research may be carried out at the sponsoring agency as indicated in the agreement of CR Rao AIMSCS. |
+| Guidance | Guide from DA-IICT (mandatory), Co-Guide from sponsoring agency (optional). |
+| Infrastructure (for Research & Course work) | DA-IICT and sponsoring agency respectively for the part in which student stays at DA-IICT and at the sponsoring agency. |
 | Financial Support (TA/RA) | Not Applicable unless indicated in the agreement |
-| Intellectual Property Rights | DA-IICT jointly with sponsoring agency as specified in the
-agreement. |
+| Intellectual Property Rights | DA-IICT jointly with sponsoring agency as specified in the agreement. |
 
 
 4
@@ -480,8 +470,7 @@ Semester-wise Course Sequence
 | M. Tech Degree Credits | 33 | 0 | 56 | 61 |
 | Credits for the Core Courses | 20 | 0 | 8 | 24 |
 | Credits for the Elective Courses | 12 | 0 | 8 | 16 |
-| Research Credits (including Research
-Seminar) | 1 | 0 | 40 | 21 |
+| Research Credits (including Research Seminar) | 1 | 0 | 40 | 21 |
 
 
 The credit structure of a course is given by a sequence of 4 numbers: (1) Number of lecture 
@@ -510,11 +499,7 @@ Elective IV
 2)   Advanced Wireless Communications  
 3)   Machine Learning for Communications Network Security
 
-| The credit structure of a course is given by a sequence of 4 numbers: (1) Number of lecture |  |
-|---|---|
-| hours per week (L), (2) Number of tutorial hours per week (T), (3) Number of lab hours per |  |
-| week (P), and (4) the Total credit of the course (C). 1 lecture hour/week contributes 1 credit; |  |
-| 1 tutorial hour/week contributes 1 credit; 2 laboratory hours/week contribute 1 credit |  |
+The credit structure of a course is given by a sequence of 4 numbers: (1) Number of lecture hours per week (L), (2) Number of tutorial hours per week (T), (3) Number of lab hours per week (P), and (4) the Total credit of the course (C). 1 lecture hour/week contributes 1 credit; 1 tutorial hour/week contributes 1 credit; 2 laboratory hours/week contribute 1 credit
 
 
 8

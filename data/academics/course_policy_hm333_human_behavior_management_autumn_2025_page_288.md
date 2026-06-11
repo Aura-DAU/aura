@@ -58,10 +58,8 @@ Course Contents:
 | 1. | Psychology of Human Development: Introduction to psychology, Life skill Development, Self-
 Awareness, SWOT analysis. |
 |---|---|
-| 2. | Behavioral aspects in human relations: Sigmund Freud's Psychoanalysis, Understanding,
-Personality, Behaviorism (Skinner, Pavlov), Humanistic Psychology (Maslow, Rogers). |
-| 3. | Communication: Transactional Analysis, Communicate and Articulate in personal and
-professional life, Presentation skills, Mock Interview. |
+| 2. | Behavioral aspects in human relations: Sigmund Freud's Psychoanalysis, Understanding, Personality, Behaviorism (Skinner, Pavlov), Humanistic Psychology (Maslow, Rogers). |
+| 3. | Communication: Transactional Analysis, Communicate and Articulate in personal and professional life, Presentation skills, Mock Interview. |
 | 4. | Social Behavior: Leadership, Goal setting, Fostering Team work, Group Dynamics. |
 | 5. | Ethics and Human Responsibility, Attitude, Aggression. |
 | 6. | HUMANE Traps, Psychological Disorders. |

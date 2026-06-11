@@ -253,7 +253,6 @@ Representative List of Specialization Elective III and IV
 • Cyber-Physical Systems and Internet of Things
 • Adaptive Signal Processing
 • Any other relevant course
-*********
 @2024, DA-IICT
 
 ## Important Information
