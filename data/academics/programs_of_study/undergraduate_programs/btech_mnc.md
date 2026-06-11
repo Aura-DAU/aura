@@ -117,84 +117,53 @@ Details on the application process, admission criteria, fee structure and financ
 | --- | --- | --- | --- | --- |
 | Semester I | L-T-P-C | Winter Break | Semester II | L-T-P-C |
 | Mathematical, Algorithmic, and Computational Thinking | 3-1-0-4 |  | Functions of Single Variable and ODEs | 3-1-0—4 |
-| Computer Organization and Programming  Computer Organization and Programming Lab | 3-0-0—3  0-0-4—2 | Object Oriented Programming | 2-0-2—3 |
-|
-| Discrete Mathematics | 3-1-0—4 | Data Structures and Algorithms | 3-0-2—4 |
-|
-| Digital Logic Design | 1-0-2—2 | Linear Algebra | 3-1-0—4 |
-| Language and Literature | 3-0-0—3 | Approaches to Indian Society | 3-0-0—3 |
-| **Semester credits** | **18** | **Semester credits** | **18** |
-|  |  |  |  |  |
-| Summer – I | | | | |
-|  |  |  |  |  |
+| Computer Organization and Programming<br>Computer Organization and Programming Lab | 3-0-0—3<br>0-0-4—2 |  | Object Oriented Programming | 2-0-2—3 |
+| Discrete Mathematics | 3-1-0—4 |  | Data Structures and Algorithms | 3-0-2—4 |
+| Digital Logic Design | 1-0-2—2 |  | Linear Algebra | 3-1-0—4 |
+| Language and Literature | 3-0-0—3 |  | Approaches to Indian Society | 3-0-0—3 |
+| **Semester credits** | **18** |  | **Semester credits** | **18** |
+| Summer – I |  |  |  |  |
 
 ### Year II
 
-|  |  |  |  |  |  |  |  |  |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  | |  | |  |  |  |  |
-|  | | YEAR – II | | | | | | |
-|  | | Semester III | L-T-P-C | Winter Break | | Semester IV | L-T-P-C | |
-|  | | Probability and Random Processes | 3-1-0—4 | R U R A L   Internship | | Mathematical Statistics | 3-1-0—4 | |
-|  | | Operating Systems | 3-0-2—4 | Theory of Computation | 3-1-0—4 | |
-|  | | Design and Analysis of Algorithms | 3-1-0—4 | Parallel and Distributed, Algorithms | 3-1-0—4 | |
-|  | | Functions of Several variables and PDEs | 3-1-0—4 | Real and Complex Analysis | 3-1-0—4 | |
-|  | | Database Management Systems | 3-0-2—4 | Numerical and Computational Methods | 3-0-2—4 | |
-|  | | Science, Technology, Society | 3-0-0—3 | Environmental Studies | 2-0-0—2 | |
-|  | | **Semester credits** | **23** | **0-0-8—4** | | **Semester credits** | **22** | |
-|  | |  | | | | | | |
-|  | | Summer – II | | | | | | |
-|  | |  |  |  | |  |  | |
+| YEAR – II | | | | |
+| --- | --- | --- | --- | --- |
+| Semester III | L-T-P-C | Winter Break | Semester IV | L-T-P-C |
+| Probability and Random Processes | 3-1-0—4 | RURAL Internship | Mathematical Statistics | 3-1-0—4 |
+| Operating Systems | 3-0-2—4 |  | Theory of Computation | 3-1-0—4 |
+| Design and Analysis of Algorithms | 3-1-0—4 |  | Parallel and Distributed Algorithms | 3-1-0—4 |
+| Functions of Several variables and PDEs | 3-1-0—4 |  | Real and Complex Analysis | 3-1-0—4 |
+| Database Management Systems | 3-0-2—4 |  | Numerical and Computational Methods | 3-0-2—4 |
+| Science, Technology, Society | 3-0-0—3 |  | Environmental Studies | 2-0-0—2 |
+| **Semester credits** | **23** | **0-0-8—4** | **Semester credits** | **22** |
+| Summer – II |  |  |  |  |
 
 ### Year III
 
-|  |  |  |  |  |
-| --- | --- | --- | --- | --- |
 | YEAR – III | | | | |
+| --- | --- | --- | --- | --- |
 | Semester V | L-T-P-C | Winter Break | Semester VI | L-T-P-C |
 | Mathematical Optimization | 3-1-0—4 |  | Machine Learning | 3-0-2—4 |
-| Modelling and Simulation | 3-0-2—4 | Open Elective – 1 | 3-0-0—3 |
-| Algebraic Structures | 3-1-0—4 | MnC Elective – 3 | 3-0-0—3 /  3-1-0—4 /  3-0-2—4 |
-| Principles of Economics | 3-0-0—3 | MnC Elective – 4 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3 |
-|
-|
-| MnC Elective – 1 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3 | MnC Elective – 5 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3 |
-|
-|
-| MnC Elective – 2 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3 | Independent Project – 1/  MnC Elective – 6 | 0-0-6—3  3-0-2—4 /  3-1-0—4 /  3-0-0—3 |
-|
-|
-| **Semester credits** | **21-23** | **Semester credits** | **19-23** |
-|  | | | | |
-| Summer - III : Summer Research/Industrial Internship (0-0-12—6) | | | | |
-|  | | | | |
+| Modelling and Simulation | 3-0-2—4 |  | Open Elective – 1 | 3-0-0—3 |
+| Algebraic Structures | 3-1-0—4 |  | MnC Elective – 3 | 3-0-0—3 / 3-1-0—4 / 3-0-2—4 |
+| Principles of Economics | 3-0-0—3 |  | MnC Elective – 4 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 |
+| MnC Elective – 1 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 |  | MnC Elective – 5 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 |
+| MnC Elective – 2 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 |  | Independent Project – 1/ MnC Elective – 6 | 0-0-6—3 / 3-0-2—4 / 3-1-0—4 / 3-0-0—3 |
+| **Semester credits** | **21-23** |  | **Semester credits** | **19-23** |
+| Summer - III : Summer Research/Industrial Internship | 0-0-12—6 |  |  |  |
 
 ### Year IV
 
-|  |  |  |  |  |
-| --- | --- | --- | --- | --- |
 | YEAR – IV | | | | |
+| --- | --- | --- | --- | --- |
 | Semester VII | L-T-P-C | Winter Break | Semester VIII | L-T-P-C |
-| MnC Elective – 6 / Independent Project – 1 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3  0-0-6—3 |  | MnC Elective – 10 / BTP-1 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3  0-0-8—4 |
-|
-|
-|
-| MnC Elective – 7 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3 / | BTP-2 | 0-0-18—9 |
-|
-|
-| MnC Elective -8 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3 |  | |
-|
-|
-| Open Elective – 2 | 3-0-0—3 |
-| MnC Elective – 9 | 3-0-2—4 /  3-1-0—4 /  3-0-0—3 |
-|
-|
-| Independent Project – 2 / MnC Elective – 10 /  BTP – 1 | 0-0-6—3  3-0-2—4 /  3-1-0—4 /  3-0-0—3  0-0-8—4 |
-|
-|
-|
-|
-| **Semester credits** | **18-23** | **Semester credits** | **12-13** |
+| MnC Elective – 6 / Independent Project – 1 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 / 0-0-6—3 |  | MnC Elective – 10 / BTP-1 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 / 0-0-8—4 |
+| MnC Elective – 7 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 |  | BTP-2 | 0-0-18—9 |
+| MnC Elective - 8 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 |  |  |  |
+| Open Elective – 2 | 3-0-0—3 |  |  |  |
+| MnC Elective – 9 | 3-0-2—4 / 3-1-0—4 / 3-0-0—3 |  |  |  |
+| Independent Project – 2 / MnC Elective – 10 / BTP – 1 | 0-0-6—3 / 3-0-2—4 / 3-1-0—4 / 3-0-0—3 / 0-0-8—4 |  |  |  |
+| **Semester credits** | **18-23** |  | **Semester credits** | **12-13** |
 
 
 ## Downloadable Resources

@@ -417,15 +417,11 @@ There may be a few minor changes and updates to this list.
 
 
 
-| Representative List of Electives (Any One) |
-|---|
-| 1) Speech Technology |
-|  |
-| 2) Advanced Image Processing |
-|  |
-| 3) Natural Language Processing |
-|  |
-| 4) Cyber Physical Systems and Internet of Things |
+### Representative List of Electives (Any One)
+1. Speech Technology
+2. Advanced Image Processing
+3. Natural Language Processing
+4. Cyber Physical Systems and Internet of Things
 
 
 9

@@ -28,10 +28,7 @@ from time to time,   as per the needs and requirements. The rules deal only with
 admission academic activities of this program. Eligibility for admission, admission procedures etc. 
 for this program are outside the purview of document.
 
-| Master of Technology in Communication Systems and Machine Learning (CS&ML) is a full- |  |  |  |
-|---|---|---|---|
-| time two-year (four semesters) program. The program is jointly offered by DA-IICT and CR Rao |  |  |  |
-| AIMSCS. | , Hyderabad. | The program w | ill be governed by these rules, subject to amendments, |
+Master of Technology in Communication Systems and Machine Learning (CS&ML) is a full-time two-year (four semesters) program. The program is jointly offered by DA-IICT and CR Rao AIMSCS, Hyderabad. The program will be governed by these rules, subject to amendments,
 
 
 The Dean (Academic Programs)/Registrar may, from time to time, issue such instructions or 
@@ -510,11 +507,7 @@ Elective IV
 2)   Advanced Wireless Communications  
 3)   Machine Learning for Communications Network Security
 
-| The credit structure of a course is given by a sequence of 4 numbers: (1) Number of lecture |  |
-|---|---|
-| hours per week (L), (2) Number of tutorial hours per week (T), (3) Number of lab hours per |  |
-| week (P), and (4) the Total credit of the course (C). 1 lecture hour/week contributes 1 credit; |  |
-| 1 tutorial hour/week contributes 1 credit; 2 laboratory hours/week contribute 1 credit |  |
+The credit structure of a course is given by a sequence of 4 numbers: (1) Number of lecture hours per week (L), (2) Number of tutorial hours per week (T), (3) Number of lab hours per week (P), and (4) the Total credit of the course (C). 1 lecture hour/week contributes 1 credit; 1 tutorial hour/week contributes 1 credit; 2 laboratory hours/week contribute 1 credit
 
 
 8

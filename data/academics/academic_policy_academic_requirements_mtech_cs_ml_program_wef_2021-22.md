@@ -17,10 +17,7 @@ Academic Requirements for the M. Tech (CS&ML) Program
 (Effective from 2021-22 batch)
 
 
-| Master of Technology in Communication Systems and Machine Learning (CS&ML) is a full- |
-|---|
-| time two-year (four semesters) program. The program is jointly offered by DA-IICT and CR Rao |
-| AIMSCS. |
+Master of Technology in Communication Systems and Machine Learning (CS&ML) is a full-time two-year (four semesters) program. The program is jointly offered by DA-IICT and CR Rao AIMSCS.
 
 
 from time to time, as per the needs and requirements. The rules deal only with the post-
@@ -376,11 +373,7 @@ Semester-wise Course Sequence
 
 
 
-| The credit structure of a course is given by a sequence of 4 numbers: (1) Number of lecture |
-|---|
-| hours per week (L), (2) Number of tutorial hours per week (T), (3) Number of lab hours per |
-| week (P), and (4) the Total credit of the course (C). 1 lecture hour/week contributes 1 credit; |
-| 1 tutorial hour/week contributes 1 credit; 2 laboratory hours/week contribute 1 credit |
+The credit structure of a course is given by a sequence of 4 numbers: (1) Number of lecture hours per week (L), (2) Number of tutorial hours per week (T), (3) Number of lab hours per week (P), and (4) the Total credit of the course (C). 1 lecture hour/week contributes 1 credit; 1 tutorial hour/week contributes 1 credit; 2 laboratory hours/week contribute 1 credit
 
 
 Representative List of Electives
