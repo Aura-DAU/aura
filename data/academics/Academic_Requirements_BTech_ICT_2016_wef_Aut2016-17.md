@@ -1,3 +1,12 @@
+---
+title: "Academic Requirements Btech Ict 2016 Wef Aut2016 17"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
            ACADEMIC REQUIREMENT FOR B TECH (ICT) PROGRAM
                                (Effective from Autumn 2016-17)
 
@@ -145,19 +154,19 @@ overall performance in all the assessments. These letter grades are assigned on 
 scale as described in the table below:
                                                  3
                         Letter      Corresponding
-                                                         Explanation
-                        Grade           Points
-                          AA               10
-                          AB                9
-                          BB                8
-                          BC                7
-                          CC                6
-                          CD                5
-                          DD                4
-                          DE                3           Pass
-                           F                0           Fail
-                           I                -           Incomplete
-                           P                -           Passed
+| Grade | Points | Explanation |
+|---|---|---|
+| AA | 10 | |
+| AB | 9 | |
+| BB | 8 | |
+| BC | 7 | |
+| CC | 6 | |
+| CD | 5 | |
+| DD | 4 | |
+| DE | 3 | Pass |
+| F | 0 | Fail |
+| I | - | Incomplete |
+| P | - | Passed |
 
 b. A student passes the course if he/she gets any grade in the range of AA to DE, but fails
 if he/she gets the grade F. Certain courses are indicated as Pass/Fail courses in the curriculum,

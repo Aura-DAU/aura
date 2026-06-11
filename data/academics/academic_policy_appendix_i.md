@@ -477,7 +477,6 @@ Adaptive Signal Processing
 • 
 Any other relevant course
 
-*********
 
 @2024, DA-IICT
 

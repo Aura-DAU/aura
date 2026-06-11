@@ -75,7 +75,6 @@ Systems, Open SUNY Textbooks, Milne Library, 2015.
 ---
 
 Assessment method: Two in-semester examinations (40%), final examination (30%) and lab viva 
-(30%).  
  
 Course Outcomes:  
 After completing the course, the students would be able to create a relevant model for many 

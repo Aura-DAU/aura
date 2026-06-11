@@ -1,4 +1,12 @@
-﻿---
+---
+title: "Organogram"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 title: "Organogram"
 url: "https://daiict.ac.in/organogram"
 category: "Academic"
@@ -17,7 +25,6 @@ The Organogram page presents the organizational hierarchy of Dhirubhai Ambani Un
 
 ### Organizational Hierarchy
 
-```
 President
     â”‚
 Board of Governors
@@ -40,7 +47,6 @@ Technology    of Law            Registrar
                                           Dean
                                   (Alumni & External
                                       Relations)
-```
 
 ### Level 1 â€” Top Governance
 

@@ -119,7 +119,7 @@ questions
 - **Document Title:** IT590 Advanced Statistical Tools for Data Science
 - **Document Source:** IT590-Advanced Statistical Tools for Data Science.pdf
 - **Category:** Academics - Course Policies
-- **Scraped At:** 2026-06-08 06:55:11 UTC
+- **Scraped At:** 2026-06-08 06:55in UTC
 
 ## Related Links
 

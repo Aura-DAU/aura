@@ -757,7 +757,6 @@ Representative List of Specialization Elective III and IV
 • Nanoelectronics 
 • Any other relevant course
 
-**********
 
 15
 

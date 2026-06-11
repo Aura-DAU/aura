@@ -1,3 +1,12 @@
+---
+title: "Program Regulations"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 # Program Regulations
 
 This document outlines the rules for specific degree programs, research projects, and graduation requirements at DA-IICT.

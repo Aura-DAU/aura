@@ -1,3 +1,12 @@
+---
+title: "Curriculum Guide"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 # Curriculum Guide
 
 This document defines the progression of courses and prerequisites required to complete various degrees.

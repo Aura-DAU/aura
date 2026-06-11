@@ -1,3 +1,12 @@
+---
+title: "Course Catalog"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 # Course Catalog
 
 This document provides a comprehensive list of courses offered, including credits, prerequisites, and brief descriptions.

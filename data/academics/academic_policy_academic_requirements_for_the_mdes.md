@@ -317,7 +317,6 @@ Curriculum Structure
 | 17 | 4 | Final Thesis / Capstone project | 6-0-24-18 | MI631 |
 
 
-____________________________****************************_________________________
 
 ## Important Information
 

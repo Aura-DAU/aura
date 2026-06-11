@@ -1,3 +1,12 @@
+---
+title: "Academic Handbook"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 # Academic Handbook
 
 This handbook covers general academic rules, examination procedures, and guidelines for students with benchmark disabilities.

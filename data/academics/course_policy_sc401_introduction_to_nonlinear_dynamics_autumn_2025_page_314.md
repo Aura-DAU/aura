@@ -49,7 +49,6 @@ Reference Books:
 Jordan & P. Smith, Oxford University Press
 
 Assessment Method: The total grade will be based on assignments (30%) and scheduled examinations 
-(70%).
 
 Course Outcomes: 
 The course is expected to inspire confidence among engineering undergraduates to enable them to 

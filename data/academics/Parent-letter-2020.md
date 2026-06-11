@@ -1,3 +1,12 @@
+---
+title: "Parent Letter 2020"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 Dear Parent(s):
 
 The Undergraduate Committee (UGC) of DA-IICT congratulates you on your ward’s admission to its

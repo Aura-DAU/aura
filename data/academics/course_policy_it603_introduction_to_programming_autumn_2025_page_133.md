@@ -63,7 +63,7 @@ able to navigate Linux environments fluently and take up new programming languag
 - **Course Title:** Introduction to programming
 - **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf (pages 134–134)
 - **Semester:** Autumn 2025-26
-- **Scraped At:** 2026-06-08 07:08:11 UTC
+- **Scraped At:** 2026-06-08 07:08in UTC
 
 ## Related Links
 

@@ -1,3 +1,12 @@
+---
+title: "Examination Rules For Students"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
                             Examination Rules for students
 
 The following rules apply to every student of DA-IICT, Gandhinagar while taking

@@ -1,4 +1,12 @@
-﻿---
+---
+title: "Founder"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 title: "Founder"
 url: "https://daiict.ac.in/founder"
 category: "Academic"

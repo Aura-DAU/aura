@@ -1,3 +1,12 @@
+---
+title: "Rules And Guidelines For Conducting Written Examination For Person With Benchmark Disabilities"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
                  EXAMINATION RULES CUM GUIDELINES FOR PHYSICALLY DISABLED STUDENTS
 
 Following are covered under the rules:

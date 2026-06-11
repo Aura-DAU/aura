@@ -1,3 +1,12 @@
+---
+title: "Academic Calendar 2026 27"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 # Academic Calendar 2026-27 (Admissions & Registration)
 
 The following schedule outlines the important dates for the admission process and the commencement of the academic year 2026-2027:

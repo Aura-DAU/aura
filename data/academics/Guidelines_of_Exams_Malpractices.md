@@ -1,3 +1,12 @@
+---
+title: "Guidelines Of Exams Malpractices"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 Malpractices/Improper Conduct in Examinations and Consequences
 The examinations authority (examinations invigilators, course instructors, controller of
 examinations, or examinations scrutiny committee) of the institute shall examine the matter of

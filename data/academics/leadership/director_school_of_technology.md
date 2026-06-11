@@ -1,4 +1,12 @@
-﻿---
+---
+title: "Director School Of Technology"
+url: "https://daiict.ac.in/"
+category: "Academics"
+scraped_by: "Meet Virugama"
+scraped_date: "2026-06-10"
+team: "Team D"
+---
+
 title: "Director, School of Technology"
 url: "https://www.daiict.ac.in/director-school-technology"
 category: "Academic"
