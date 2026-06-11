@@ -1,13 +1,5 @@
 ---
 title: "President"
-url: "https://daiict.ac.in/"
-category: "Academics"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-06-10"
-team: "Team D"
----
-
-title: "President"
 url: "https://daiict.ac.in/president"
 category: "Academic"
 scraped_by: "Madhav Thesiya"

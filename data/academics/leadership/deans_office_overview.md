@@ -1,12 +1,4 @@
 ---
-title: "Deans Office Overview"
-url: "https://daiict.ac.in/"
-category: "Academics"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-06-10"
-team: "Team D"
----
-
 title: "Dean's Office"
 url: "https://daiict.ac.in/deans-office-0"
 category: "Academic"
