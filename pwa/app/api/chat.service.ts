@@ -38,6 +38,10 @@ interface BackendResponse {
   detail?: string;
 }
 
+// Must match the Zod limits in app/api/chat/route.ts.
+export const MAX_QUESTION_CHARS = 2000;
+export const MAX_HISTORY_TURN_CHARS = 8000;
+
 function normaliseCitations(sources: BackendSource[] | undefined): Citation[] {
   if (!sources) return [];
   return sources.map((s, i) => ({
@@ -52,15 +56,21 @@ export async function askAura(payload: {
   studentProfile: StudentProfile;
 }): Promise<AskAuraResult> {
   try {
-    // Limit history payload size to prevent validation and token limit issues
-    const slicedHistory = payload.history.slice(-20);
+    // Keep payloads inside the proxy's Zod limits: long assistant answers
+    // would otherwise poison the stored history and 400 every later request.
+    const slicedHistory = payload.history.slice(-20).map((turn) =>
+      turn.content.length > MAX_HISTORY_TURN_CHARS
+        ? { ...turn, content: turn.content.slice(0, MAX_HISTORY_TURN_CHARS) }
+        : turn,
+    );
 
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        question: payload.message,
+        question: payload.message.slice(0, MAX_QUESTION_CHARS),
         history: slicedHistory,
+        studentProfile: payload.studentProfile,
       }),
     });
 

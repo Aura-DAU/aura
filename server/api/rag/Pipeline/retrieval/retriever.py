@@ -4,8 +4,9 @@ from dotenv import load_dotenv
 from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 
-
-MODEL_NAME = "BAAI/bge-base-en-v1.5"
+# Query-time embeddings MUST use the same model as ingestion-time
+# embeddings or retrieval silently degrades — single source of truth.
+from pipeline.ingestion.chunking.config import MODEL_NAME
 
 TOP_K = 3
 

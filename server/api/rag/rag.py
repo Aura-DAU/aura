@@ -1,4 +1,4 @@
-from Pipeline.aura_chat import AuraChat
+from pipeline.aura_chat import AuraChat
 
 
 class AURA:
@@ -10,10 +10,12 @@ class AURA:
     def ask(
         self,
         question,
-        history=None
+        history=None,
+        profile=None
     ):
 
         return self.chatbot.chat(
             query=question,
-            history=history
+            history=history,
+            profile=profile
         )

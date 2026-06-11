@@ -7,9 +7,18 @@ const HistoryTurnSchema = z.object({
   content: z.string().min(1).max(8000),
 });
 
+const StudentProfileSchema = z.object({
+  name: z.string().max(100),
+  branch: z.string().max(100),
+  year: z.string().max(50),
+  semester: z.string().max(50),
+  interests: z.string().max(300),
+});
+
 const BodySchema = z.object({
   question: z.string().min(1).max(2000),
   history: z.array(HistoryTurnSchema).max(100).optional(),
+  studentProfile: StudentProfileSchema.optional(),
 });
 
 const BACKEND_URL = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
