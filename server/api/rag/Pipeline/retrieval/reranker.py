@@ -1,63 +1,79 @@
+from transformers import (
+    AutoTokenizer,
+    AutoModelForSequenceClassification
+)
+
+import torch
+
+
 class Reranker:
 
-    H1_BOOST = 0.05
-    H2_BOOST = 0.15
-    H3_BOOST = 0.10
+    def __init__(self):
 
-    INTENT_SECTION_MAP = {
+        self.tokenizer = (
+            AutoTokenizer.from_pretrained(
+                "BAAI/bge-reranker-base"
+            )
+        )
 
-        "research": [
-            "research",
-            "specialization",
-            "publications"
-        ],
+        self.model = (
+            AutoModelForSequenceClassification
+            .from_pretrained(
+                "BAAI/bge-reranker-base"
+            )
+        )
 
-        "contact": [
-            "contact information",
-            "website links"
-        ],
+        self.model.eval()
 
-        "overview": [
-            "overview",
-            "biography",
-            "profile"
-        ],
-
-        "eligibility": [
-            "eligibility",
-            "admission process"
-        ],
-
-        "scholarship": [
-            "scholarship",
-            "financial assistance"
-        ],
-
-        "facilities": [
-            "facilities",
-            "infrastructure",
-            "food court",
-            "halls of residence"
-        ],
-
-        "event_details": [
-            "event details",
-            "venue",
-            "organizers",
-            "correspondence"
-        ]
-    }
+        self.H1_BOOST = 0.10
+        self.H2_BOOST = 0.20
+        self.H3_BOOST = 0.15
 
     def rerank(
         self,
+        query,
         results,
         plan
     ):
 
-        intent = plan.get(
-            "intent",
-            "general"
+        if not results:
+            return []
+
+        pairs = []
+
+        for result in results:
+
+            metadata = result["metadata"]
+
+            text = metadata.get(
+                "text",
+                ""
+            )
+
+            pairs.append(
+                [query, text]
+            )
+
+        inputs = self.tokenizer(
+            pairs,
+            padding=True,
+            truncation=True,
+            max_length=512,
+            return_tensors="pt"
         )
+
+        with torch.no_grad():
+
+            cross_scores = (
+                self.model(
+                    **inputs
+                )
+                .logits
+                .squeeze(-1)
+                .tolist()
+            )
+
+        reranked = []
 
         boost_sections = (
             plan
@@ -71,67 +87,249 @@ class Reranker:
             )
         )
 
-        intent_sections = (
-            self.INTENT_SECTION_MAP.get(
-                intent,
+        required_sections = (
+            plan
+            .get(
+                "retrieval_hints",
+                {}
+            )
+            .get(
+                "required_sections",
                 []
             )
         )
 
-        reranked = []
+        retrieval_intent = (
+            plan.get(
+                "retrieval_intent",
+                "general"
+            )
+        )
 
-        for result in results:
+        # intent_section_boosts = {
+        #     "faculty_research":
+        #         "research",
 
-            score = result["score"]
+        #     "faculty_contact":
+        #         "contact",
+
+        #     "program_eligibility":
+        #         "eligibility",
+
+        #     "program_curriculum":
+        #         "curriculum",
+
+        #     "scholarship_information":
+        #         "scholarship",
+
+        #     "admissions_information":
+        #         "admissions"
+        # }
+
+
+        print(plan)
+
+        if isinstance(
+            retrieval_intent,
+            list
+        ):
+            retrieval_intent = (
+                retrieval_intent[0]
+                if retrieval_intent
+                else "general"
+            )
+
+        intent_boosts = {
+            "faculty_profile": [
+                "biography",
+                "overview",
+                "research",
+                "teaching",
+                "specialization"
+            ],
+
+            "faculty_research": [
+                "research",
+                "research interests",
+                "publications"
+            ],
+
+            "faculty_contact": [
+                "contact",
+                "contact information"
+            ],
+
+            "program_overview": [
+                "overview",
+                "program overview",
+                "about the program"
+            ],
+
+            "program_eligibility": [
+                "eligibility",
+                "eligibility criteria",
+                "admission requirements"
+            ],
+
+            "program_curriculum": [
+                "curriculum",
+                "courses",
+                "course structure"
+            ],
+
+            "admissions_information": [
+                "admissions",
+                "application process",
+                "how to apply"
+            ],
+
+            "scholarship_information": [
+                "scholarships",
+                "financial aid",
+                "awards"
+            ],
+
+            "event_information": [
+                "event",
+                "schedule",
+                "details"
+            ]
+        }
+
+        boost_sections.extend(
+            intent_boosts.get(
+                retrieval_intent,
+                []
+            )
+        )
+
+        boost_sections = list(
+            set(boost_sections)
+        )
+
+        for result, cross_score in zip(
+            results,
+            cross_scores
+        ):
 
             metadata = result["metadata"]
 
+            section_type = metadata.get("section_type", "general")
+
             h1 = (
                 metadata
-                .get("h1") or ""
-            ).lower()
+                .get("h1", "")
+                .lower()
+            )
 
             h2 = (
                 metadata
-                .get("h2") or ""
-            ).lower()
+                .get("h2", "")
+                .lower()
+            )
 
             h3 = (
                 metadata
-                .get("h3") or ""
-            ).lower()
+                .get("h3", "")
+                .lower()
+            )
+
+            metadata_boost = 0.0
 
             for section in boost_sections:
 
                 section = section.lower()
 
                 if section in h1:
-                    score += self.H1_BOOST * 2
+                    metadata_boost += (
+                        self.H1_BOOST
+                    )
 
                 if section in h2:
-                    score += self.H2_BOOST
+                    metadata_boost += (
+                        self.H2_BOOST
+                    )
 
                 if section in h3:
-                    score += self.H3_BOOST
+                    metadata_boost += (
+                        self.H3_BOOST
+                    )
 
-            for section in intent_sections:
+            dense_score = (
+                result.get(
+                    "score",
+                    0
+                )
+            )
+
+            required_section_boost = 0.0
+
+            for section in required_sections:
+
+                section = section.lower()
 
                 if section in h1:
-                    score += self.H1_BOOST * 2
+                    required_section_boost += 0.40
 
                 if section in h2:
-                    score += self.H2_BOOST
+                    required_section_boost += 0.60
 
                 if section in h3:
-                    score += self.H3_BOOST
+                    required_section_boost += 0.50
 
-                    
-            result["reranked_score"] = score
 
-            reranked.append(result)
+            section_boost = 0.0
+
+            target_section = (
+                plan.get(
+                    "retrieval_hints",
+                    {}
+                )
+                .get(
+                    "preferred_section_type"
+                )
+            )
+
+            if target_section and section_type == target_section:
+                section_boost += 0.25
+
+
+            final_score = (
+                (0.72 * float(cross_score))
+                +
+                (0.10 * dense_score)
+                +
+                (0.05 * metadata_boost)
+                +
+                (0.05 * required_section_boost)
+                +
+                (0.08 * section_boost)
+            )
+
+            result[
+                "cross_score"
+            ] = float(
+                cross_score
+            )
+
+            result[
+                "reranked_score"
+            ] = final_score
+
+            reranked.append(
+                result
+            )
+
+            print(
+                section_type,
+                target_section,
+                required_sections,
+                result["reranked_score"]
+            )
 
         reranked.sort(
-            key=lambda x: x["reranked_score"],
+            key=lambda x:
+                x["reranked_score"],
             reverse=True
         )
 

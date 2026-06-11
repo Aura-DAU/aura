@@ -35,11 +35,29 @@ class RetrievalPipeline:
             "faculty_name"
         )
 
+        if isinstance(faculty_name, list):
+            faculty_name = (
+                faculty_name[0]
+                if faculty_name
+                else None
+            )
+
         if faculty_name:
 
             return {
                 "faculty_name": {
                     "$eq": faculty_name
+                }
+            }
+
+        program_name = entities.get(
+            "program_name"
+        )
+
+        if isinstance(program_name, str):
+            return {
+                "program_name": {
+                    "$eq": program_name
                 }
             }
     
@@ -124,24 +142,151 @@ class RetrievalPipeline:
             10
         )
         
-        results = (
-            self.retriever.retrieve(
-                query=query,
-                top_k=retrieval_top_k,
-                metadata_filter=metadata_filter
-            )
+        decomposed_queries = plan.get(
+            "query_decomposition"
         )
 
-        reranked = (
-            self.reranker.rerank(
-                results,
-                plan
+        if decomposed_queries:
+
+            all_results = []
+
+            for subquery in decomposed_queries:
+
+                sub_results = (
+                    self.retriever.retrieve(
+                        query=subquery,
+                        top_k=retrieval_top_k,
+                        metadata_filter=None
+                    )
+                )
+
+                sub_reranked = (
+                    self.reranker.rerank(
+                        query=subquery,
+                        results=sub_results,
+                        plan=plan
+                    )
+                )
+
+                all_results.extend(
+                    sub_reranked[:3]
+                )
+
+            results = all_results
+        
+        else:
+            results = (
+                self.retriever.retrieve(
+                    query=query,
+                    top_k=retrieval_top_k,
+                    metadata_filter=metadata_filter
+                )
             )
-        )
+
+            if not results and metadata_filter:
+                print(
+                    "Metadata filter returned 0 results. "
+                    "Falling back to semantic search."
+                )
+
+                results = (
+                    self.retriever.retrieve(
+                        query=query,
+                        top_k=retrieval_top_k,
+                        metadata_filter=None
+                    )
+                )
+
+        seen = set()
+        deduped = []
+
+        for result in results:
+
+            chunk_id = result["id"]
+
+            if chunk_id not in seen:
+
+                deduped.append(
+                    result
+                )
+
+                seen.add(
+                    chunk_id
+                )
+
+        results = deduped
+
+        print("\nAFTER RETRIEVAL")
+        print("=" * 60)
+
+        for i, r in enumerate(results[:20]):
+
+            print(
+                f"[{i+1}]",
+                r["metadata"].get("faculty_name"),
+                r["metadata"].get("title")
+            )
+
+        if decomposed_queries:
+
+            reranked = results
+
+        else:
+            reranked = (
+                self.reranker.rerank(
+                    query=query,
+                    results=results,
+                    plan=plan
+                )
+            )
+
+
+        print("\nAFTER RERANK")
+        print("=" * 60)
+
+        for i, r in enumerate(reranked[:10]):
+
+            print(
+                f"[{i+1}]",
+                r["metadata"].get("faculty_name"),
+                r["metadata"].get("title")
+            )
 
         final_chunks = reranked[
             :final_top_k
         ]
+
+        print("\nFINAL CHUNKS")
+        print("=" * 60)
+
+        for i, chunk in enumerate(final_chunks):
+
+            print(f"\n[{i+1}]")
+
+            print(
+                chunk["metadata"].get(
+                    "faculty_name"
+                )
+            )
+
+            print(
+                chunk["metadata"].get(
+                    "h2"
+                )
+            )
+
+            print(
+                chunk["metadata"].get(
+                    "title"
+                )
+            )
+
+            print(
+                chunk["metadata"].get(
+                    "text",
+                    ""
+                )[:300]
+            )
 
         built = (
             self.builder.build(

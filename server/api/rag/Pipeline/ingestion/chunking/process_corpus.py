@@ -4,7 +4,7 @@ from pathlib import Path
 from parser import extract_frontmatter
 from section_extracter import extract_sections
 from chunker import split_section
-from metadata_extractors import extract_event_metadata
+from metadata_extractors import extract_event_metadata, extract_program_name, extract_section_type
 
 
 def process_markdown_file(file_path):
@@ -33,6 +33,12 @@ def process_markdown_file(file_path):
         faculty_name = metadata.get("title") or file_path.stem.replace("_", " ").title()
 
     event_metadata = {}
+    
+    program_name = extract_program_name(
+        metadata,
+        cluster,
+        subclusters
+    )
 
     if category == "events":
         event_metadata = extract_event_metadata(sections)
@@ -41,6 +47,9 @@ def process_markdown_file(file_path):
     chunks = []
 
     for section in sections:
+
+        section_type = extract_section_type(section, subclusters)
+
         section_text = ""
 
         if faculty_name:
@@ -77,6 +86,7 @@ def process_markdown_file(file_path):
                 "h1": section["h1"],
                 "h2": section["h2"],
                 "h3": section["h3"],
+                "section_type": section_type,
 
                 "path": str(file_path),
                 "source_file": file_path.name,
@@ -94,6 +104,9 @@ def process_markdown_file(file_path):
 
             if event_metadata:
                 chunk_record.update(event_metadata)
+
+            if program_name:
+                chunk_record["program_name"] = program_name
 
             chunks.append(chunk_record)
 
