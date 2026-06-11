@@ -50,13 +50,11 @@ The GRHS covers:
 
 ### Procedure Steps
 
-| Step | Action |
-|------|--------|
-| 1 | Attempt informal resolution through discussion with the concerned person or department |
-| 2 | If unresolved, formally submit the grievance through the GRHS |
-| 3 | The grievance is taken up for fair investigation |
-| 4 | Resolution is communicated back to the aggrieved party |
-| 5 | Preventive measures are put in place to avoid recurrence |
+1. Attempt informal resolution through discussion with the concerned person or department.
+2. If unresolved, formally submit the grievance through the GRHS.
+3. The grievance is taken up for fair investigation.
+4. Resolution is communicated back to the aggrieved party.
+5. Preventive measures are put in place to avoid recurrence.
 
 ---
 
@@ -74,10 +72,8 @@ The GRHS maintains confidentiality throughout the process to ensure that grievan
 
 ## 6. Related Committees (Separate from GRHS)
 
-| Committee | Scope |
-|-----------|-------|
-| Disciplinary Action Committee (DAC) | Student misconduct and discipline (separate from GRHS) |
-| Internal Complaints Committee (ICC / Gender Cell) | Sexual harassment and gender-related issues (separate from GRHS) |
+- **Disciplinary Action Committee (DAC):** Handles student misconduct and discipline — separate from GRHS.
+- **Internal Complaints Committee (ICC / Gender Cell):** Handles sexual harassment and gender-related issues — separate from GRHS.
 
 ---
 

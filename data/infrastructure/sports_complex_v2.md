@@ -39,21 +39,19 @@ In DAU sports and games are an important and unique part of the daily programme.
 
 DAU has **9 distinct sports facilities** on campus:
 
-| # | Facility | Count / Detail |
-|---|----------|----------------|
-| 1 | Basketball Courts | **2** courts |
-| 2 | Athletic Track | **1** track — **400 metres** |
-| 3 | Indoor Badminton Courts | **3** courts |
-| 4 | Cricket Field | **1** field |
-| 5 | Gymnasium | **1** gymnasium with all modern facilities |
-| 6 | Football Ground | **1** ground |
-| 7 | Volleyball Courts | **2** courts |
-| 8 | Table Tennis Hall | **1** hall equipped with **6 tables** |
-| 9 | Yoga and Meditation Zone | **1** zone |
+- **Basketball Courts:** 2 courts
+- **Athletic Track:** 1 track — **400 metres** long
+- **Indoor Badminton Courts:** 3 courts
+- **Cricket Field:** 1 field
+- **Gymnasium:** 1 gymnasium with all modern facilities
+- **Football Ground:** 1 ground
+- **Volleyball Courts:** 2 courts
+- **Table Tennis Hall:** 1 hall equipped with **6 tables**
+- **Yoga and Meditation Zone:** 1 zone
 
 **Total distinct sports facility types: 9**
 
-> Note: Total count of individual units (courts, grounds, etc.) = 13 (2 basketball + 1 track + 3 badminton + 1 cricket + 1 gym + 1 football + 2 volleyball + 1 TT hall + 1 yoga zone).
+> Total count of individual units = 13 (2 basketball + 1 track + 3 badminton + 1 cricket + 1 gym + 1 football + 2 volleyball + 1 TT hall + 1 yoga zone).
 
 ---
 
@@ -61,10 +59,8 @@ DAU has **9 distinct sports facilities** on campus:
 
 All sports and games coaching sessions are divided into **two phases** per the annual sports policy:
 
-| Phase | Period |
-|-------|--------|
-| **Phase I** | January to March |
-| **Phase II** | August to October |
+- **Phase I:** January to March
+- **Phase II:** August to October
 
 ---
 
@@ -72,17 +68,15 @@ All sports and games coaching sessions are divided into **two phases** per the a
 
 DAU participates in District, State, and National level tournaments in the following sports:
 
-| Sport | Level |
-|-------|-------|
-| Athletics | District, State, National |
-| Table Tennis | District, State, National |
-| Badminton | District, State, National |
-| Basketball | District, State, National |
-| Tennis | District, State, National |
-| Cricket | District, State, National |
-| Volleyball | District, State, National |
-| Chess | District, State, National |
-| Football | District, State, National |
+- Athletics — District, State, National
+- Table Tennis — District, State, National
+- Badminton — District, State, National
+- Basketball — District, State, National
+- Tennis — District, State, National
+- Cricket — District, State, National
+- Volleyball — District, State, National
+- Chess — District, State, National
+- Football — District, State, National
 
 DAU has produced many outstanding sports persons who have brought laurels to the institution in various Intra and Extramural competitions.
 
@@ -90,25 +84,23 @@ DAU has produced many outstanding sports persons who have brought laurels to the
 
 ## 5. Sports Committee & Events
 
-The **Sports Committee** under the Student Body Government (SBG) promotes physical fitness, teamwork, and healthy competition. Flagship events include:
+The **Sports Committee** under the Student Body Government (SBG) promotes physical fitness, teamwork, and healthy competition.
 
-| Event | Description |
-|-------|-------------|
-| **Concours** | Inter-university sports tournament (DAU's flagship inter-collegiate sports fest) |
-| **DCL (DAU Cricket League)** | Intra-university cricket tournament |
-| **Inter-Wing Tournament** | Multi-sport event fostering unity among hostel wings |
-| **Freshers' Weekend** | Sports activities for first-year students |
+### Flagship Sports Events
+
+- **Concours:** Inter-university sports tournament (DAU's flagship inter-collegiate sports fest).
+- **DCL (DAU Cricket League):** Intra-university cricket tournament.
+- **Inter-Wing Tournament:** Multi-sport event fostering unity among hostel wings.
+- **Freshers' Weekend:** Sports activities for first-year students.
 
 ### Sports Committee Contacts
 
-| Role | Name | Email |
-|------|------|-------|
-| Convener | Ishan Thakkar | sports@dau.ac.in |
-| Deputy Convener | Ved Mungra | sports@dau.ac.in |
+- **Convener:** Ishan Thakkar — sports@dau.ac.in
+- **Deputy Convener:** Ved Mungra — sports@dau.ac.in
 
 ---
 
-## 6. Quick Reference – Sports FAQs
+## 6. Quick Reference – Sports FAQs (Facilities)
 
 **Q: How many basketball courts does DAU have?**
 DAU has **2 basketball courts**.
@@ -124,6 +116,8 @@ DAU has **2 volleyball courts**.
 
 **Q: Does DAU have a gymnasium?**
 Yes, DAU has **1 gymnasium** with all modern facilities.
+
+## 6b. Quick Reference – Sports FAQs (Events & Coaching)
 
 **Q: Is there a yoga and meditation zone on the DAU campus?**
 Yes, DAU has a **yoga and meditation zone** on campus.

@@ -19,14 +19,10 @@ gap_fixes:
 
 ## 1. Official University Name
 
-> **Gap 4 resolved:** The full official university name and its history.
-
-| Detail | Information |
-|--------|-------------|
-| **Full Official Name** | **Dhirubhai Ambani University (DAU)** |
-| **Former Name** | Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) |
-| **Short Name / Acronym** | DAU (current) / DA-IICT (legacy) |
-| **Named After** | Shri Dhirubhai Hirachand Ambani — founder of Reliance Industries |
+- **Full Official Name:** Dhirubhai Ambani University (DAU)
+- **Former Name:** Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
+- **Short Name / Acronym:** DAU (current) / DA-IICT (legacy)
+- **Named After:** Shri Dhirubhai Hirachand Ambani — founder of Reliance Industries
 
 ### Name Change History
 
@@ -39,19 +35,15 @@ gap_fixes:
 
 ## 2. Contact Information
 
-| Detail | Information |
-|--------|-------------|
-| **Address** | DA-IICT Road, Gandhinagar – 382 007, Gujarat, India |
-| **Phone** | (+91) 079-68261500, 079-68261700 |
-| **Fax** | (+91) 079-68261710 |
-| **Email (General)** | info@dau.ac.in |
-| **Website** | [www.daiict.ac.in](https://www.daiict.ac.in) / [www.dau.ac.in](https://www.dau.ac.in) |
+- **Address:** DA-IICT Road, Gandhinagar – 382 007, Gujarat, India
+- **Phone:** (+91) 079-68261500, 079-68261700
+- **Fax:** (+91) 079-68261710
+- **Email (General):** info@dau.ac.in
+- **Website:** [www.daiict.ac.in](https://www.daiict.ac.in) / [www.dau.ac.in](https://www.dau.ac.in)
 
 ---
 
 ## 3. Campus Location
-
-**Q: Where is the DAU campus located?**
 
 DAU (formerly DA-IICT) is located in **Gandhinagar, Gujarat, India**.
 
@@ -62,11 +54,9 @@ DAU (formerly DA-IICT) is located in **Gandhinagar, Gujarat, India**.
 
 ### How to Reach
 
-| Mode | Details |
-|------|---------|
-| **By Air** | Ahmedabad International Airport (~20 minutes drive from campus) — has direct international flights to Europe and the USA |
-| **By Train** | Kalupur Railway Station (main railway station, Ahmedabad) — ~50 minutes drive from campus |
-| **From Ahmedabad** | ~20–30 km via Sarkhej-Gandhinagar (SG) Highway |
+- **By Air:** Ahmedabad International Airport (~20 minutes drive from campus) — has direct international flights to Europe and the USA.
+- **By Train:** Kalupur Railway Station (main railway station, Ahmedabad) — ~50 minutes drive from campus.
+- **From Ahmedabad:** ~20–30 km via Sarkhej-Gandhinagar (SG) Highway.
 
 ---
 
@@ -93,35 +83,29 @@ Gandhinagar is the **capital city of Gujarat**, established as a modernized plan
 
 ### Climate
 
-| Season | Temperature |
-|--------|-------------|
-| Summer (Max) | 36°C – 42°C |
-| Summer (Min) | 19°C – 27°C |
-| Winter (Nov–Feb Avg Max) | ~29°C |
-| Winter (Nov–Feb Avg Min) | ~14°C |
-| Monsoon | Mid-June to mid-September |
+- **Summer (Max):** 36°C – 42°C
+- **Summer (Min):** 19°C – 27°C
+- **Winter (Nov–Feb Avg Max):** ~29°C
+- **Winter (Nov–Feb Avg Min):** ~14°C
+- **Monsoon:** Mid-June to mid-September
 
 ---
 
 ## 5. Social Media Handles
 
-| Platform | Handle/Link |
-|----------|-------------|
-| Facebook | [facebook.com/daboratory](https://www.facebook.com/daboratory) |
-| X (Twitter) | [twitter.com/daboratory](https://twitter.com/daboratory) |
-| Instagram | [instagram.com/daboratory](https://www.instagram.com/daboratory) |
-| YouTube | [youtube.com/daboratory](https://www.youtube.com/daboratory) |
-| LinkedIn | [linkedin.com/school/daboratory](https://www.linkedin.com/school/daboratory) |
+- **Facebook:** [facebook.com/daboratory](https://www.facebook.com/daboratory)
+- **X (Twitter):** [twitter.com/daboratory](https://twitter.com/daboratory)
+- **Instagram:** [instagram.com/daboratory](https://www.instagram.com/daboratory)
+- **YouTube:** [youtube.com/daboratory](https://www.youtube.com/daboratory)
+- **LinkedIn:** [linkedin.com/school/daboratory](https://www.linkedin.com/school/daboratory)
 
 ---
 
 ## 6. Key Administrative Contacts
 
-| Name | Designation | Phone |
-|------|-------------|-------|
-| Shri Siddharth Swaminarayan | Executive Registrar | (+91) 079-68261567 |
-| Dr. P. S. Kalyan Sasidhar | Dean (Students) | (+91) 079-68261560 |
-| Dr. Krutika Raval | Head – HR & Administration | (+91) 079-68261591 |
+- **Shri Siddharth Swaminarayan** — Executive Registrar — (+91) 079-68261567
+- **Dr. P. S. Kalyan Sasidhar** — Dean (Students) — (+91) 079-68261560
+- **Dr. Krutika Raval** — Head – HR & Administration — (+91) 079-68261591
 
 ---
 

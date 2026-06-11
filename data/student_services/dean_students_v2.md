@@ -38,39 +38,66 @@ The students of DAU have constituted a self-governing democratic organisation ca
 
 **Email:** sbg@dau.ac.in
 
+The Student Body Government consists of **8 committees** and **22 hobby-driven clubs**.
+
 ### SBG Core Team
 
-| Name | Role | Email |
-|------|------|-------|
-| Yash Judal | Convenor | convener_student_government@dau.ac.in |
-| Dev Sanghani | Deputy Convenor | dy_convener_student_government@dau.ac.in |
-| Madhav Bhatt | Treasurer | treasurer_student_government@dau.ac.in |
-| Siddh Shah | Secretary | secretary_student_government@dau.ac.in |
-
-> The Student Body Government consists of **8 committees** and **22 hobby-driven clubs**.
+- **Convenor:** Yash Judal — convener_student_government@dau.ac.in
+- **Deputy Convenor:** Dev Sanghani — dy_convener_student_government@dau.ac.in
+- **Treasurer:** Madhav Bhatt — treasurer_student_government@dau.ac.in
+- **Secretary:** Siddh Shah — secretary_student_government@dau.ac.in
 
 ---
 
 ## 2. The 8 Student Committees
 
-| # | Committee | Role | Convener | Email |
-|---|-----------|------|----------|-------|
-| 1 | **Academic Committee** | Interface between student community and institute administration for academic development | Zeel Ghori | sbg_academics@dau.ac.in |
-| 2 | **Annual Festival Committee** | Conducts Synapse (Annual Techno-Cultural Fest), HackOut (Hackathon), and YouthRun (Marathon) | Rishabh Jain | synapse@dau.ac.in |
-| 3 | **Cafeteria Management Committee (CMC)** | Addresses cafeteria issues, conducts inspections, ensures hygiene | Yug Tejani | cmc@dau.ac.in |
-| 4 | **Cultural Committee** | Organizes cultural expression events, festivals, and talent showcases | Ansh Garg | cultural@dau.ac.in |
-| 5 | **Hostel Management Committee (HMC)** | Ensures peaceful, clean, student-friendly hostel environment | Dweep Kotecha | hmc@dau.ac.in |
-| 6 | **TechSupport Committee** | Represents student ICT resource issues (Wi-Fi, Printers), technical assistance for campus events | Parshwa Modi | tech_support@dau.ac.in |
-| 7 | **Sports Committee** | Promotes fitness, teamwork; organizes Concours, DCL, Inter-Wing Tournament, Freshers' Weekend | Ishan Thakkar | sports@dau.ac.in |
-| 8 | **Student Placement Cell (SPC)** | Bridge between students and placement office; organizes mock interviews, company sessions | Rishit Unadkat | spc@dau.ac.in |
+DAU has 8 student committees operating under the Student Body Government (SBG).
+
+### Academic Committee
+- **Role:** Interface between student community and institute administration for academic development.
+- **Convener:** Zeel Ghori
+- **Email:** sbg_academics@dau.ac.in
+
+### Annual Festival Committee
+- **Role:** Conducts Synapse (Annual Techno-Cultural Fest), HackOut (Hackathon), and YouthRun (Marathon).
+- **Convener:** Rishabh Jain
+- **Email:** synapse@dau.ac.in
+
+### Cafeteria Management Committee (CMC)
+- **Role:** Addresses cafeteria issues, conducts inspections, and ensures hygiene.
+- **Convener:** Yug Tejani
+- **Email:** cmc@dau.ac.in
+
+### Cultural Committee
+- **Role:** Organizes cultural expression events, festivals, and talent showcases.
+- **Convener:** Ansh Garg
+- **Email:** cultural@dau.ac.in
+
+### Hostel Management Committee (HMC)
+- **Role:** Ensures peaceful, clean, student-friendly hostel environment.
+- **Convener:** Dweep Kotecha
+- **Email:** hmc@dau.ac.in
+
+### TechSupport Committee
+- **Role:** Represents student ICT resource issues (Wi-Fi, Printers); provides technical assistance for campus events.
+- **Convener:** Parshwa Modi
+- **Email:** tech_support@dau.ac.in
+
+### Sports Committee
+- **Role:** Promotes fitness and teamwork; organizes Concours, DCL, Inter-Wing Tournament, and Freshers' Weekend.
+- **Convener:** Ishan Thakkar
+- **Email:** sports@dau.ac.in
+
+### Student Placement Cell (SPC)
+- **Role:** Bridge between students and the placement office; organizes mock interviews and company sessions.
+- **Convener:** Rishit Unadkat
+- **Email:** spc@dau.ac.in
 
 ---
 
 ## 3. Flagship Events – Detailed Descriptions
 
 ### HackOut (Annual Hackathon)
-
-**What is HackOut at DAU?**
 
 - **Type:** Annual hackathon (coding competition)
 - **Organized by:** Annual Festival Committee (under SBG)
@@ -82,8 +109,6 @@ The students of DAU have constituted a self-governing democratic organisation ca
 ---
 
 ### YouthRun (Annual Marathon)
-
-**What is YouthRun at DAU?**
 
 - **Type:** Annual marathon / social initiative
 - **Organized by:** Annual Festival Committee (under SBG)
@@ -108,8 +133,6 @@ The students of DAU have constituted a self-governing democratic organisation ca
 
 ### Concours (Inter-University Sports Tournament)
 
-**What is Concours in the context of DAU sports?**
-
 - **Type:** Inter-university sports tournament
 - **Organized by:** Sports Committee (under SBG)
 - **Description:** Concours is DAU's flagship **inter-university sports tournament**. It is an annual event where students from multiple universities/colleges compete in various sports. It is organized as part of Synapse, DAU's annual festival.
@@ -118,8 +141,6 @@ The students of DAU have constituted a self-governing democratic organisation ca
 
 ### Freshers' Weekend
 
-**What is Freshers' Weekend at DAU?**
-
 - **Type:** Sports and social activities for newly admitted students
 - **Organized by:** Sports Committee (under SBG)
 - **Description:** Freshers' Weekend is a sports and recreational programme organized specifically for **first-year students** at DAU. It is designed to help new students get acquainted with the campus, their batchmates, and the sporting culture at DAU through friendly matches and activities across various sports.
@@ -127,8 +148,6 @@ The students of DAU have constituted a self-governing democratic organisation ca
 ---
 
 ### i.Fest (Annual Technical Festival)
-
-**What is i.Fest and which club organizes it?**
 
 - **Type:** Annual Technical Festival
 - **Organized by:** **IEEE Student Branch** (DA-IICT / DAU)
@@ -143,44 +162,123 @@ The students of DAU have constituted a self-governing democratic organisation ca
 
 ## 4. Student Clubs (All 22)
 
-| # | Club | Key Activity | Convener | Email |
-|---|------|-------------|----------|-------|
-| 1 | AI Club | Workshops, hackathons, speaker sessions in AI | Jash Shah | ai_club@dau.ac.in |
-| 2 | Press Club | *News & Nonsense* (newsletter), *Entelechy* (magazine) | Sharnam Shah | pressclub@dau.ac.in |
-| 3 | The Debating Society (DebSoc) | British/Asian Parliamentary debates, MUNs | Kkavy Dave | debate_club@dau.ac.in |
-| 4 | Dance Club (DADC) | Dance performances and competitions | Shambhavi Singh | danceclub@dau.ac.in |
-| 5 | Programming Club | Competitive programming, ACM ICPC, TCS Codevita | Vraj K. Dobariya | programming-club@dau.ac.in |
-| 6 | Music Club | Jam sessions, live performances, workshops | Harsh Popatiya | music_club@dau.ac.in |
-| 7 | DAU Theatres Group | Mono Act, Street Play, Stage Play, Mime | Rishank Dudhat | theatres@dau.ac.in |
-| 8 | Research Club | Research papers, tech talks, industry collaborations | Gulafsha Bhatti | research_club@dau.ac.in |
-| 9 | Chess Club | Chess learning, practice, and competition | Aarya Shah | chess_club@dau.ac.in |
-| 10 | Electronics Hobby Club (EHC) | Arduino, Raspberry Pi, NFC Door-Lock, RC Car, Drones | Kaushik Prajapati | ehc@dau.ac.in |
-| 11 | Photography & Movie Making Club (PMMC) | Workshops, photowalks, training | Ayush Gandhi | pmmc@dau.ac.in |
-| 12 | Film Club | Film screenings, live sports screenings, Picture Perfect quiz | Ayushi Jani | film_club@dau.ac.in |
-| 13 | Google Developer Group (GDG) | ML, Android, Web Dev, UI/UX, Linux workshops | Abhishek Abbi | dsc@dau.ac.in |
-| 14 | **IEEE Student Branch** | **i.Fest, Manual Robotics, MUN, Think Tank, speaker sessions** | Rishi Shah | ieee@dau.ac.in |
-| 15 | Khelaiya Club | Garba performance, competitions | Yash Tarpara | khelaiya_club@dau.ac.in |
-| 16 | Cubing Club | Rubik's cube mosaics, competitions, workshops | Het Dadhania | cubing_club@dau.ac.in |
-| 17 | The Radio Club | Podcasts, Vaani (Performance Night), Commentator Cup | Maulik Khoyani | radio@dau.ac.in |
-| 18 | Headrush: Quizzing Club | Regular quizzes, I.Quiz flagship event | Shashwat Menon | quizzing@dau.ac.in |
-| 19 | Business Club | Entrepreneurship discussions, workshops, networking | Gaurav Meena | business_club@dau.ac.in |
-| 20 | Microsoft Student Technical Club (MSTC) | Open Source, Hacktoberfest, Winter-of-Code (WoC) | Zeel Dadhaniya | microsoftclub@dau.ac.in |
-| 21 | Muse – The Designing Club | Design innovation, idea sharing | Preksha Shah | muse@dau.ac.in |
-| 22 | Cyber Information and Network Security Club (CINS) | CTF events, cybersecurity workshops | Hemal Ravrani | cins_club@dau.ac.in |
+DAU has 22 student clubs operating under the Student Body Government (SBG).
 
-### Electronics Hobby Club (EHC) – Key Detail
+### AI Club
+- **Key Activity:** Workshops, hackathons, speaker sessions in AI.
+- **Convener:** Jash Shah
+- **Email:** ai_club@dau.ac.in
 
-> **Q: Who is the Convenor of the EHC?**
-> The Convenor of the Electronics Hobby Club (EHC) is **Kaushik Prajapati**.
-> Deputy Convenor: Parjanya Rajput
-> Email: ehc@dau.ac.in
-> Projects: NFC Door-Lock System, RC Car, Line Follower, Maze Solving Bot, Drone
+### Press Club
+- **Key Activity:** Publishes *News & Nonsense* (newsletter) and *Entelechy* (magazine).
+- **Convener:** Sharnam Shah
+- **Email:** pressclub@dau.ac.in
+
+### The Debating Society (DebSoc)
+- **Key Activity:** British/Asian Parliamentary debates, Model United Nations (MUNs).
+- **Convener:** Kkavy Dave
+- **Email:** debate_club@dau.ac.in
+
+### Dance Club (DADC)
+- **Key Activity:** Dance performances and competitions.
+- **Convener:** Shambhavi Singh
+- **Email:** danceclub@dau.ac.in
+
+### Programming Club
+- **Key Activity:** Competitive programming, ACM ICPC, TCS Codevita.
+- **Convener:** Vraj K. Dobariya
+- **Email:** programming-club@dau.ac.in
+
+### Music Club
+- **Key Activity:** Jam sessions, live performances, workshops.
+- **Convener:** Harsh Popatiya
+- **Email:** music_club@dau.ac.in
+
+### DAU Theatres Group
+- **Key Activity:** Mono Act, Street Play, Stage Play, Mime.
+- **Convener:** Rishank Dudhat
+- **Email:** theatres@dau.ac.in
+
+### Research Club
+- **Key Activity:** Research papers, tech talks, industry collaborations.
+- **Convener:** Gulafsha Bhatti
+- **Email:** research_club@dau.ac.in
+
+### Chess Club
+- **Key Activity:** Chess learning, practice, and competition.
+- **Convener:** Aarya Shah
+- **Email:** chess_club@dau.ac.in
+
+### Electronics Hobby Club (EHC)
+- **Key Activity:** Arduino, Raspberry Pi, NFC Door-Lock, RC Car, Drones.
+- **Convener:** Kaushik Prajapati
+- **Deputy Convener:** Parjanya Rajput
+- **Email:** ehc@dau.ac.in
+- **Notable Projects:** NFC Door-Lock System, RC Car, Line Follower, Maze Solving Bot, Drone
+
+### Photography & Movie Making Club (PMMC)
+- **Key Activity:** Workshops, photowalks, training.
+- **Convener:** Ayush Gandhi
+- **Email:** pmmc@dau.ac.in
+
+### Film Club
+- **Key Activity:** Film screenings, live sports screenings, Picture Perfect quiz.
+- **Convener:** Ayushi Jani
+- **Email:** film_club@dau.ac.in
+
+### Google Developer Group (GDG)
+- **Key Activity:** ML, Android, Web Dev, UI/UX, Linux workshops.
+- **Convener:** Abhishek Abbi
+- **Email:** dsc@dau.ac.in
+
+### IEEE Student Branch
+- **Key Activity:** i.Fest, Manual Robotics, MUN, Think Tank, speaker sessions.
+- **Convener:** Rishi Shah
+- **Email:** ieee@dau.ac.in
+
+### Khelaiya Club
+- **Key Activity:** Garba performance and competitions.
+- **Convener:** Yash Tarpara
+- **Email:** khelaiya_club@dau.ac.in
+
+### Cubing Club
+- **Key Activity:** Rubik's cube mosaics, competitions, workshops.
+- **Convener:** Het Dadhania
+- **Email:** cubing_club@dau.ac.in
+
+### The Radio Club
+- **Key Activity:** Podcasts, Vaani (Performance Night), Commentator Cup.
+- **Convener:** Maulik Khoyani
+- **Email:** radio@dau.ac.in
+
+### Headrush: Quizzing Club
+- **Key Activity:** Regular quizzes, I.Quiz flagship event.
+- **Convener:** Shashwat Menon
+- **Email:** quizzing@dau.ac.in
+
+### Business Club
+- **Key Activity:** Entrepreneurship discussions, workshops, networking.
+- **Convener:** Gaurav Meena
+- **Email:** business_club@dau.ac.in
+
+### Microsoft Student Technical Club (MSTC)
+- **Key Activity:** Open Source, Hacktoberfest, Winter-of-Code (WoC).
+- **Convener:** Zeel Dadhaniya
+- **Email:** microsoftclub@dau.ac.in
+
+### Muse – The Designing Club
+- **Key Activity:** Design innovation, idea sharing.
+- **Convener:** Preksha Shah
+- **Email:** muse@dau.ac.in
+
+### Cyber Information and Network Security Club (CINS)
+- **Key Activity:** CTF events, cybersecurity workshops.
+- **Convener:** Hemal Ravrani
+- **Email:** cins_club@dau.ac.in
 
 ---
 
 ## 5. Anti-Ragging Information
-
-**Q: Is ragging allowed at DAU and what are the consequences?**
 
 Ragging is a **criminal offence** and is **strictly prohibited** at DAU.
 
@@ -188,8 +286,6 @@ Ragging is a **criminal offence** and is **strictly prohibited** at DAU.
 - **Where to find info:** The Anti-Ragging Committee & Squad details are published on the **DAU website at daiict.ac.in/dean-students**.
 - **Committee:** Anti-Ragging Vigilance Committee (details uploaded on institute's website)
 - **Immediate contact:** Resident Warden in case of any incident.
-
-**Q: Where can students find anti-ragging information at DAU?**
 
 Anti-ragging information is available on the **Dean (Students) page** of the DAU website: [www.daiict.ac.in/dean-students](https://www.daiict.ac.in/dean-students). This page contains links to the National Ragging Prevention Programme and the Anti-Ragging Committee & Squad details.
 
@@ -201,56 +297,48 @@ A student body exclusively for PhD students of DAU SoT and SoL. The RBG is a sem
 
 **Email:** rbg@dau.ac.in
 
-| Name | Role |
-|------|------|
-| Bhavin Makwana | Convenor |
-| Dhiraj Golhar | Deputy Convener |
-| Adiba Khan | Secretary |
-| Pronay Dey | Treasurer |
-| Himani | Diversity & Well-Being Officer |
+- **Convenor:** Bhavin Makwana
+- **Deputy Convener:** Dhiraj Golhar
+- **Secretary:** Adiba Khan
+- **Treasurer:** Pronay Dey
+- **Diversity & Well-Being Officer:** Himani
 
 ---
 
 ## 7. Important Facts Summary
 
-| Question | Answer |
-|----------|--------|
-| How many student committees does DAU have? | **8 committees** |
-| How many student clubs does DAU have? | **22 clubs** |
-| Who is the current Dean (Students)? | Dr. P. S. Kalyan Sasidhar |
-| What is Synapse? | Annual Techno-Cultural Fest — Largest in Gujarat |
-| What is HackOut? | Annual 72-hour hackathon (12th edition in 2025), part of Synapse |
-| What is YouthRun? | Annual marathon, social initiative under the Annual Festival Committee |
-| What is Concours? | Inter-university sports tournament organized by Sports Committee |
-| What is Freshers' Weekend? | Sports activities for first-year students, organized by Sports Committee |
-| What is i.Fest? | Annual Technical Festival organized by **IEEE Student Branch** |
-| Who is the EHC Convenor? | **Kaushik Prajapati** |
-| Is rural internship mandatory for B.Tech? | **Yes** – mandatory requirement of the B.Tech curriculum |
-| Is hostel mandatory for B.Tech? | **Yes** – mandatory for all undergraduate programs |
+- DAU has **8 student committees** under SBG.
+- DAU has **22 student clubs** under SBG.
+- **Current Dean (Students):** Dr. P. S. Kalyan Sasidhar
+- **Synapse** is the Annual Techno-Cultural Fest — the Largest in Gujarat.
+- **HackOut** is the annual 72-hour hackathon (12th edition in 2025), part of Synapse.
+- **YouthRun** is the annual marathon, a social initiative under the Annual Festival Committee.
+- **Concours** is the inter-university sports tournament organized by the Sports Committee.
+- **Freshers' Weekend** is a sports event for first-year students, organized by the Sports Committee.
+- **i.Fest** is the Annual Technical Festival organized by the **IEEE Student Branch**.
+- **EHC Convenor:** Kaushik Prajapati
+- **Rural internship** is mandatory for B.Tech students.
+- **Hostel** is mandatory for all undergraduate programs.
 
 ---
 
 ## 8. Hostel Wardens & Supervisors
 
-| Name | Designation | Email | Phone |
-|------|-------------|-------|-------|
-| Dr. Madhu Kant Sharma | Resident Warden | resi_warden@dau.ac.in | (+91) 079-68261554 |
-| Dr. Bakul Gohel | Warden, HoR (Men) | warden_men@dau.ac.in | (+91) 079-68261672 |
-| Dr. Sreeja Rajendran | Asst. Warden, HoR (Women) | warden_women@dau.ac.in | (+91) 079-68261707 |
-| Mr. Jitendra Parmar | Assistant Manager – Hostel | hostels@dau.ac.in | 09328994140 |
-| Mr. Shirish Varma | Sr. Executive – Hostels | hostels@dau.ac.in | 09328994142 |
-| Ms. Priya Kumari | Resident Warden (Female) | priya_kumari@dau.ac.in | (+91) 079-68261667 |
+- **Dr. Madhu Kant Sharma** — Resident Warden — resi_warden@dau.ac.in — (+91) 079-68261554
+- **Dr. Bakul Gohel** — Warden, HoR (Men) — warden_men@dau.ac.in — (+91) 079-68261672
+- **Dr. Sreeja Rajendran** — Asst. Warden, HoR (Women) — warden_women@dau.ac.in — (+91) 079-68261707
+- **Mr. Jitendra Parmar** — Assistant Manager – Hostel — hostels@dau.ac.in — 09328994140
+- **Mr. Shirish Varma** — Sr. Executive – Hostels — hostels@dau.ac.in — 09328994142
+- **Ms. Priya Kumari** — Resident Warden (Female) — priya_kumari@dau.ac.in — (+91) 079-68261667
 
 ---
 
 ## 9. Disciplinary Action Committee (DAC)
 
-| Name | Role | Phone |
-|------|------|-------|
-| Dr. P S Kalyan Sasidhar | Dean (Students), Convener (ex-officio) | (+91) 079-68261560 |
-| Dr. Madhu Kant Sharma | Resident Warden (ex-officio) | (+91) 079-68261554 |
-| Dr. Rutu Parekh | Member | (+91) 079-68261553 |
-| Jigar Yagnik | Controller of Examination, Member (ex-officio) | (+91) 079-68261604 |
+- **Dr. P S Kalyan Sasidhar** — Dean (Students), Convener (ex-officio) — (+91) 079-68261560
+- **Dr. Madhu Kant Sharma** — Resident Warden (ex-officio) — (+91) 079-68261554
+- **Dr. Rutu Parekh** — Member — (+91) 079-68261553
+- **Jigar Yagnik** — Controller of Examination, Member (ex-officio) — (+91) 079-68261604
 
 ---
 

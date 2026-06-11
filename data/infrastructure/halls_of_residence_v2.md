@@ -27,11 +27,20 @@ DAU (formerly DA-IICT) has **three Halls of Residence (HoRs)** on campus — two
 
 ## 1. Halls of Residence – Overview
 
-| HoR | Wings | Capacity | Occupancy Type |
-|-----|-------|----------|----------------|
-| New Men's HoR | 4 wings: L, M, P, R | 476 residents | Triple and double occupancy rooms |
-| Men's HoR | 8 wings: A to H (~60 rooms/wing) | ~1025 students | Twin sharing basis |
-| Women's HoR | 2 wings: J and K | 400 residents | Twin sharing rooms |
+### New Men's Hall of Residence
+- **Wings:** 4 wings — L, M, P, R
+- **Capacity:** 476 residents
+- **Occupancy Type:** Triple and double occupancy rooms
+
+### Men's Hall of Residence (Old)
+- **Wings:** 8 wings — A to H (~60 rooms per wing)
+- **Capacity:** ~1025 students
+- **Occupancy Type:** Twin sharing basis
+
+### Women's Hall of Residence
+- **Wings:** 2 wings — J and K
+- **Capacity:** 400 residents
+- **Occupancy Type:** Twin sharing rooms
 
 **Total Men's capacity:** ~1500 residents (combined both Men's HoRs)
 
@@ -43,19 +52,21 @@ DAU (formerly DA-IICT) has **three Halls of Residence (HoRs)** on campus — two
 
 Each hostel room is furnished with the following for **each occupant**:
 
-| Item | Provided? |
-|------|-----------|
-| Bed / Cot | ✅ Yes |
-| Study Table | ✅ Yes |
-| Chair | ✅ Yes |
-| Cupboard | ✅ Yes |
-| Fan | ✅ Yes |
-| Tubelight | ✅ Yes |
-| Mattress | ❌ No – Students must bring their own |
-| Pillow | ❌ No – Students must bring their own |
-| Linen / Bedsheet | ❌ No – Students must bring their own |
-| Personal Clothing | ❌ No – Students must bring their own |
-| Washroom (attached) | ❌ No – Common washrooms are on all floors |
+**Provided by the Institute:**
+- Bed / Cot — ✅ Yes
+- Study Table — ✅ Yes
+- Chair — ✅ Yes
+- Cupboard — ✅ Yes
+- Fan — ✅ Yes
+- Tubelight — ✅ Yes
+
+**Students must bring their own:**
+- Mattress — ❌ Not provided
+- Pillow — ❌ Not provided
+- Linen / Bedsheet — ❌ Not provided
+- Personal Clothing — ❌ Not provided
+
+**Note on washrooms:** Common washrooms are on all floors — no attached washrooms.
 
 > **Key clarification (Gap 1 resolved):** Mattresses are **NOT provided**. The Hostel Rules and Regulations explicitly state: *"The residents are expected to bring mattress, pillow, linen and personal clothing."*
 
@@ -63,10 +74,8 @@ Each hostel room is furnished with the following for **each occupant**:
 
 ## 3. Internet Connectivity
 
-| HoR | Type of Internet |
-|-----|-----------------|
-| Men's HoR (Old & New) | **Wi-Fi only** – Fully Wi-Fi enabled |
-| Women's HoR | **Both Wi-Fi and LAN** connection |
+- **Men's HoR (Old & New):** Wi-Fi only — Fully Wi-Fi enabled.
+- **Women's HoR:** Both Wi-Fi and LAN connection available.
 
 > Internet facility is provided **free of cost** to all hostel residents.
 
@@ -74,29 +83,23 @@ Each hostel room is furnished with the following for **each occupant**:
 
 ## 4. Residency Requirements (Mandatory vs Optional)
 
-> **Gap 2 resolved:** Hostel accommodation rules by program type:
+- **B.Tech (all undergraduate programs):** Hostel is **Mandatory** — All UG programs are residential.
+- **PG students (M.Tech, M.Sc, MBA etc.):** Hostel is **Optional** — Subject to availability.
+- **PhD students:** Hostel is **Optional** — Subject to availability.
 
-| Program | Hostel Status |
-|---------|---------------|
-| B.Tech (all undergraduate programs) | **Mandatory** – All UG programs are residential |
-| PG students (M.Tech, M.Sc, MBA etc.) | **Optional** – Subject to availability |
-| PhD students | **Optional** – Subject to availability |
-
-> A UG student is allotted a room for the **first four years** of stay on campus. Extension subject to availability only.
+> A UG student is allotted a room for the **first four years** of stay on campus. Extension is subject to availability only.
 
 ---
 
 ## 5. Additional Facilities at All HoRs
 
-| Facility | Availability |
-|----------|-------------|
-| Hot Water | ✅ Yes – Geysers provided |
-| Laundry (Dhobi) | ✅ Yes – Dhobis come to collect and deliver clothes |
-| TV Rooms | ✅ Yes – TV Rooms with D2H are available |
-| Internet | ✅ Yes – Free of cost |
-| Security (Women's HoR) | ✅ Yes – Lady security staff on 3 shifts, round-the-clock |
-| CCTV (Men's HoR) | ✅ Yes – Fully covered with CCTVs |
-| CCTV (Women's HoR) | ✅ Yes – At entry-exit points |
+- **Hot Water:** ✅ Yes — Geysers provided.
+- **Laundry (Dhobi):** ✅ Yes — Dhobis come to collect and deliver clothes.
+- **TV Rooms:** ✅ Yes — TV Rooms with D2H are available.
+- **Internet:** ✅ Yes — Free of cost.
+- **Security (Women's HoR):** ✅ Yes — Lady security staff on 3 shifts, round-the-clock.
+- **CCTV (Men's HoR):** ✅ Yes — Fully covered with CCTVs.
+- **CCTV (Women's HoR):** ✅ Yes — At entry-exit points.
 
 ---
 
@@ -110,10 +113,8 @@ Each hostel room is furnished with the following for **each occupant**:
 
 ### Guest Room Charges
 
-| Guest Type | Rate |
-|-----------|------|
-| Non-resident DA-IICT students (short stay) | ₹200 per person per day |
-| Outside visitors (including parents) | ₹250 per person per day (inclusive of GST) |
+- **Non-resident DA-IICT students (short stay):** ₹200 per person per day.
+- **Outside visitors (including parents):** ₹250 per person per day (inclusive of GST).
 
 > Any resident found entertaining a visitor **without prior intimation** will be fined a minimum of ₹1000/- in addition to guest charges for the duration of stay.
 
@@ -139,16 +140,17 @@ Each hostel room is furnished with the following for **each occupant**:
 
 The following electrical appliances are **strictly prohibited** in hostel rooms:
 
-| Item | Allowed? |
-|------|----------|
-| Computers / Laptops | ✅ Yes |
-| Table Lamps | ✅ Yes |
-| Irons | ❌ No |
-| Heaters | ❌ No |
-| Ovens | ❌ No |
-| Refrigerators | ❌ No |
-| TVs (personal) | ❌ No |
-| Kettles | ❌ No |
+**Permitted:**
+- Computers / Laptops — ✅ Yes
+- Table Lamps — ✅ Yes
+
+**Prohibited (not allowed in hostel rooms):**
+- Irons — ❌ No
+- Heaters — ❌ No
+- Ovens — ❌ No
+- Refrigerators — ❌ No
+- TVs (personal) — ❌ No
+- Kettles — ❌ No
 
 ---
 
@@ -163,21 +165,22 @@ The following electrical appliances are **strictly prohibited** in hostel rooms:
 
 ---
 
-## 11. Hostel Management & Contacts
+## 11. Hostel Management & Contacts – Wardens
 
-| Name | Designation | Email | Phone |
-|------|-------------|-------|-------|
-| Dr. Madhu Kant Sharma | Resident Warden | resi_warden@dau.ac.in | (+91) 079-68261554 |
-| Dr. Bakul Gohel | Warden, HoR (Men) | warden_men@dau.ac.in | (+91) 079-68261672 |
-| Dr. Sreeja Rajendran | Asst. Warden, HoR (Women) | warden_women@dau.ac.in | (+91) 079-68261707 |
-| Mr. Jitendra Parmar | Assistant Manager – Hostel | hostels@dau.ac.in | 09328994140 / (+91) 079-68261544 |
-| Mr. Shirish Varma | Sr. Executive – Hostels | hostels@dau.ac.in | 09328994142 / (+91) 079-68261545 |
-| Ms. Priya Kumari | Resident Warden (Female) | priya_kumari@dau.ac.in | (+91) 079-68261667 |
-| Hostel Management Committee (HMC) | Student Committee | hmc@dau.ac.in | — |
+- **Dr. Madhu Kant Sharma** — Resident Warden — resi_warden@dau.ac.in — (+91) 079-68261554
+- **Dr. Bakul Gohel** — Warden, HoR (Men) — warden_men@dau.ac.in — (+91) 079-68261672
+- **Dr. Sreeja Rajendran** — Asst. Warden, HoR (Women) — warden_women@dau.ac.in — (+91) 079-68261707
+
+## 11b. Hostel Management & Contacts – Administrative Staff
+
+- **Mr. Jitendra Parmar** — Assistant Manager – Hostel — hostels@dau.ac.in — 09328994140 / (+91) 079-68261544
+- **Mr. Shirish Varma** — Sr. Executive – Hostels — hostels@dau.ac.in — 09328994142 / (+91) 079-68261545
+- **Ms. Priya Kumari** — Resident Warden (Female) — priya_kumari@dau.ac.in — (+91) 079-68261667
+- **Hostel Management Committee (HMC)** — Student Committee — hmc@dau.ac.in
 
 ---
 
-## 12. Hostel FAQs (Official)
+## 12. Hostel FAQs – General
 
 **Q: How are the hostels of DAU?**
 DAU has Men's Halls of Residence with capacity of almost 1500 residents (double and triple rooms). Women's Halls of Residence has a capacity of 400 residents (twin sharing rooms). Hostel accommodation on campus is only for B.Tech programs. For other UG/PG programs, allocation is subject to availability.
@@ -190,6 +193,8 @@ All hostel rooms are furnished with cot, chair, study table, cupboard, fan, and 
 
 **Q: Is internet available in hostels?**
 Yes. Men's HoR is fully Wi-Fi enabled. Women's HoR has Wi-Fi as well as LAN connection.
+
+## 12b. Hostel FAQs – Security & Mess
 
 **Q: Are washrooms attached to the hostel rooms?**
 No. Common washrooms are available on all floors of the hostels.

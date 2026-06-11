@@ -1,4 +1,4 @@
-﻿---
+---
 title: "SOP - Healthcare Facilities and Medical Emergencies"
 url: "https://daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf"
 category: "Student Services"
@@ -25,24 +25,40 @@ The University operates a Medical Centre on campus with the services of three vi
 
 #### 1.2 Visiting Doctors
 
-| Name | Visiting Hours | Contact | Residence Address |
-|------|---------------|---------|-------------------|
-| Dr. Arvindsinh Vaghela | 09:00 AM - 10:00 AM (Mon-Sat) | 9426008600 | Plot No 628/1, Sector 6A, Gandhinagar |
-| Dr. Charulata Harshe | 12:45 PM - 01:45 PM (Mon-Sat) | 9427600923 | Plot 35/1, Sector 2A, Gandhinagar |
-| Dr. Anjana Ved | 05:45 PM - 06:45 PM (Mon-Sat) | 9429459829 | 719/2, Panchshil Park, Sector 21, Gandhinagar |
+Three visiting doctors attend the Medical Centre on campus from Monday to Saturday.
+
+##### Dr. Arvindsinh Vaghela
+- **Visiting Hours:** 09:00 AM – 10:00 AM (Monday to Saturday)
+- **Contact:** 9426008600
+- **Residence Address:** Plot No 628/1, Sector 6A, Gandhinagar
+
+##### Dr. Charulata Harshe
+- **Visiting Hours:** 12:45 PM – 01:45 PM (Monday to Saturday)
+- **Contact:** 9427600923
+- **Residence Address:** Plot 35/1, Sector 2A, Gandhinagar
+
+##### Dr. Anjana Ved
+- **Visiting Hours:** 05:45 PM – 06:45 PM (Monday to Saturday)
+- **Contact:** 9429459829
+- **Residence Address:** 719/2, Panchshil Park, Sector 21, Gandhinagar
 
 #### 1.3 Nursing Staff
 
-| Name | Visiting Hours | Contact |
-|------|---------------|---------|
-| Ms. Shivani Vala (Female Nurse) | 08:00 AM - 04:30 PM (Mon-Fri) | 6355 761 083 |
-| Mr. Chirag Patni (Male Nurse) | 03:30 PM - 12:00 AM (Mon-Fri) | 9601846889 |
+Two qualified nurses are on duty on weekdays.
+
+##### Ms. Shivani Vala (Female Nurse)
+- **Visiting Hours:** 08:00 AM – 04:30 PM (Monday to Friday)
+- **Contact:** 6355 761 083
+
+##### Mr. Chirag Patni (Male Nurse)
+- **Visiting Hours:** 03:30 PM – 12:00 AM (Monday to Friday)
+- **Contact:** 9601846889
 
 **Weekend Provision:** On Saturdays and Sundays, one nurse shall be available at the Medical Centre during official working hours, i.e., from 9:00 AM to 6:30 PM.
 
 #### 1.4 Emergency Medical Support
 
-- The University provides a **24x7 ambulance facility** on campus
+- The University provides a **24x7 ambulance facility** on campus.
 - **Intercom:** 566
 - **Landline:** 079-68261566
 
@@ -54,7 +70,7 @@ In medical emergencies outside the Medical Centre's official working hours, stud
 
 All students of DAU are covered under the Group Mediclaim Insurance Policy:
 
-- **Coverage Amount:** â‚¹40,000/- per student
+- **Coverage Amount:** ₹40,000/- per student
 - **Facility:** Cashless hospitalisation (subject to hospital tie-up)
 - **Medi-claim cards:** [Generate online](https://www.reliancegeneral.co.in/insurance/self-help/online-ecard.aspx)
 
@@ -62,42 +78,58 @@ In cases where cashless treatment is not available, reimbursement claims may be 
 
 ### 3. Empanelled Hospitals
 
-| Hospital | Address | Contact |
-|----------|---------|---------|
-| SGVNS Swaminarayan Hospital | Beside Swaminarayan Dham, Koba-Gandhinagar Highway, Gandhinagar-382007 | Emergency: +91 73737 33907, Operator: +91 73737 33904/05, Ambulance: +91 95374 74444 |
-| Apollo Hospital | Gandhinagar-Ahmedabad Road, GIDC Bhat, Gandhinagar, Ahmedabad-382428 | Emergency: +91 80690 49761, +91 84018 01066 |
-| Kashka Hospital | Sargasan & Reliance Cross Road, Gandhinagar | Appointments: +91 7575006000 / +91 7575009366, Reception: +91 9879752777, Emergency: +91 7575007707, Patient Coordinator: +91 7575007705 |
+DAU has tie-ups with the following hospitals for cashless treatment and priority admission.
+
+#### SGVNS Swaminarayan Hospital
+- **Address:** Beside Swaminarayan Dham, Koba-Gandhinagar Highway, Gandhinagar-382007
+- **Emergency:** +91 73737 33907
+- **Operator:** +91 73737 33904 / +91 73737 33905
+- **Ambulance:** +91 95374 74444
+
+#### Apollo Hospital
+- **Address:** Gandhinagar-Ahmedabad Road, GIDC Bhat, Gandhinagar, Ahmedabad-382428
+- **Emergency:** +91 80690 49761
+- **Emergency (alternate):** +91 84018 01066
+
+#### Kashka Hospital
+- **Address:** Sargasan & Reliance Cross Road, Gandhinagar
+- **Appointments:** +91 7575006000 / +91 7575009366
+- **Reception:** +91 9879752777
+- **Emergency:** +91 7575007707
+- **Patient Coordinator:** +91 7575007705
 
 ### 4. Stress Management & Counselling Services
 
 The University has a Stress Management Centre that offers free confidential counselling services to students.
 
-#### Counsellors
+#### Dr. Nandini Banerjee (Counsellor)
+- **Availability:** Monday to Friday, 9:30 AM to 6:00 PM
+- **Venue:** Room No. 2110, Faculty Block-2, DAU Campus
+- **Phone:** +91 079-6826 1620
+- **Email:** nandini_banerjee@dau.ac.in
 
-| Name | Availability | Venue |
-|------|-------------|-------|
-| Dr. Nandini Banerjee | Mon-Fri (9:30 AM to 6 PM) | Room No. 2110, Faculty Block-2, DAU Campus |
-| Ms. Nitu Singh Bhadouria | Thursday, Friday & Saturday (9:30 AM to 6 PM) | Room No. 4160, Faculty Block-4, DAU Campus |
-
-**Contact:**
-- Dr. Nandini Banerjee: +91 079-6826 1620, nandini_banerjee@dau.ac.in
-- Ms. Nitu Singh Bhadouria: 9723611689, nitusingh_b@dau.ac.in
+#### Ms. Nitu Singh Bhadouria (Counsellor)
+- **Availability:** Thursday, Friday & Saturday, 9:30 AM to 6:00 PM
+- **Venue:** Room No. 4160, Faculty Block-4, DAU Campus
+- **Phone:** 9723611689
+- **Email:** nitusingh_b@dau.ac.in
 
 **YourDOST Partnership:** The University has partnered with YourDOST, an online platform for emotional wellness and mental health support. Available 24x7 via chat, voice, or video at [yourdost.com](https://yourdost.com/).
 
-### 5. Key Emergency Contact Numbers
+### 5. Key Emergency Contact Numbers – Campus Security & Hostel
 
-| Name | Tel. No. |
-|------|----------|
-| Security Supervisor, Main Gate | (+91) 079-68261566 |
-| Security | (+91) 079-68261544 / 9328994140 |
-| Hostel Supervisors | (+91) 079-68261545 / 9328994142 |
-| Prof. Madhukant Sharma, Resident Warden (HOR Men) | (+91) 079-68261554 |
-| Ms. Minalben Patel, Resident Warden (HOR Women) | (+91) 079-68261667 / 9727540450 |
-| Prof. Rutu Parekh, Warden (HOR Women) | (+91) 079-68261553 |
-| Prof. Kalyan Sasidhar, Dean (Students) | (+91) 079-68261560 |
-| Dr. Krutika Raval, Head- HR & Administration | (+91) 079-68261591 |
-| Shri Siddharth Swaminarayan, Executive Registrar | (+91) 079-68261567 |
+- **Security Supervisor, Main Gate:** (+91) 079-68261566
+- **Security:** (+91) 079-68261544 / 9328994140
+- **Hostel Supervisors:** (+91) 079-68261545 / 9328994142
+- **Prof. Madhukant Sharma, Resident Warden (HOR Men):** (+91) 079-68261554
+- **Ms. Minalben Patel, Resident Warden (HOR Women):** (+91) 079-68261667 / 9727540450
+- **Prof. Rutu Parekh, Warden (HOR Women):** (+91) 079-68261553
+
+### 5b. Key Emergency Contact Numbers – Dean & Administration
+
+- **Prof. Kalyan Sasidhar, Dean (Students):** (+91) 079-68261560
+- **Dr. Krutika Raval, Head- HR & Administration:** (+91) 079-68261591
+- **Shri Siddharth Swaminarayan, Executive Registrar:** (+91) 079-68261567
 
 ### 6. SOP for Medical Emergencies
 
@@ -139,20 +171,23 @@ Basic first aid steps may be administered only by persons trained in first aid f
 - Kirit Pandya, Manager - Administration
 - Sh. Siddharth Swaminarayan, Executive Registrar
 
-### Annexure-1: First Aid Tips in Case of Emergency
+### Annexure-1: First Aid Tips (Tips 1–5)
 
 *(To be done only by a person who has undergone first-aid training course of an approved institution)*
 
-1. **Respiration** â€“ If failing, give artificial respiration (mouth-to-mouth or mouth-to-nose)
-2. **Bleeding** â€“ Arrest bleeding, apply pressure, dressing, pad and firm bandage. Elevate and keep at rest
-3. **Fractures** â€“ Immobilise with padded stiff support covering joints on either side
-4. **Burns and Scalds** â€“ Cool with cold water for 15 minutes. Do not break blisters or apply substances. Cover with clean cloth
-5. **Nose Bleeding** â€“ Sit upright, lean forward, pinch soft part of nose for 10 minutes, apply cold compress
-6. **Bee Sting** â€“ Remove sting using forceps. Apply cold or weak ammonia
-7. **Animal Bites** â€“ Wash with soap and water. Apply loose bandage. Seek medical aid
-8. **Snake Bites** â€“ Keep calm. Wash with soap and water. Apply constrictive bandage on heart side (not more than 20 minutes). Do not incise or suck wound
-9. **Fainting** â€“ Lay down, loosen clothing, raise legs slightly. Do not give food or drink
-10. **General** â€“ If in doubt, do nothing. Wrong action may cause harm
+1. **Respiration** – If failing, give artificial respiration (mouth-to-mouth or mouth-to-nose)
+2. **Bleeding** – Arrest bleeding, apply pressure, dressing, pad and firm bandage. Elevate and keep at rest
+3. **Fractures** – Immobilise with padded stiff support covering joints on either side
+4. **Burns and Scalds** – Cool with cold water for 15 minutes. Do not break blisters or apply substances. Cover with clean cloth
+5. **Nose Bleeding** – Sit upright, lean forward, pinch soft part of nose for 10 minutes, apply cold compress
+
+### Annexure-1: First Aid Tips (Tips 6–10)
+
+6. **Bee Sting** – Remove sting using forceps. Apply cold or weak ammonia
+7. **Animal Bites** – Wash with soap and water. Apply loose bandage. Seek medical aid
+8. **Snake Bites** – Keep calm. Wash with soap and water. Apply constrictive bandage on heart side (not more than 20 minutes). Do not incise or suck wound
+9. **Fainting** – Lay down, loosen clothing, raise legs slightly. Do not give food or drink
+10. **General** – If in doubt, do nothing. Wrong action may cause harm
 
 *(Courtesy: St. John Ambulance Association, India)*
 
