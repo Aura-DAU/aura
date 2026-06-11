@@ -1,94 +1,99 @@
-> **Team E – Policies & Administration**  
-> **Done By:** Madhav Thesiya  
-> **Date:** 2026-06-08  
+---
+title: "Coverage Map - Policies & Administration"
+cluster: "Policies & Administration"
+team: "Team E"
+scraped_by: "Om Patel"
+date: "2026-06-08"
+---
+
+# Coverage Map — Policies & Administration
+
+## Overview
+
+This document measures knowledge coverage for the **Policies & Administration** cluster of the DAU PWA Knowledge Base.
+It lists all major topics, marks availability, and identifies gaps.
 
 ---
 
-# Coverage Map: Policies & Administration Cluster
+## Coverage Summary
 
-**Purpose:** Measure what information is available and missing for the Policies & Administration cluster.
+| Metric | Value |
+|---|---|
+| Total Topics Identified | 51 |
+| Available (L1 Collected) | 41 |
+| Missing | 10 |
+| **Coverage Percentage** | **80%** |
 
-## Level 1 – Information Available (From Current Sources)
+---
 
-* **Disciplinary Rules** – Available
-  * Source: `data/student_services/rules/disciplinary_rules.md`
-  * Source: `data/academics/academic_policy_disciplinary_guidelines_for_students.md`
+## Available Topics
 
-* **Hostel Rules & Structure** – Available
-  * Source: `data/student_services/rules/hostel_rules_and_regulations.md`
-  * Source: `data/infrastructure/halls_of_residence.md`
+| # | Topic | Category | Source File |
+|---|---|---|---|
+| 1 | Data Privacy Policy (Alumni) | policies | alumni_data_privacy_policy.md |
+| 2 | Disciplinary Rules | policies | daiict_ac_in_disciplinary_rules.md |
+| 3 | Grievance Redressal Cell | policies | daiict_ac_in_grievance_redressal_cell.md |
+| 4 | Anti-Ragging Committee & Squad Details | policies | anti_ragging_committee_2025_26.md |
+| 5 | Disciplinary Guidelines for Students | policies | disciplinary_guidelines_for_students.md |
+| 6 | Policy of Incentives for Research | policies | policy_of_incentives_for_research.md |
+| 7 | Faculty Research Publication Incentive Policy | policies | policy_on_faculty_research_publications.md |
+| 8 | Policy on Institute Thematic Research Areas (TRAs) | policies | policy_on_institute_thematic_research_areas.md |
+| 9 | Internship Policy for Sponsored Projects | policies | policy_on_internship_for_sponsored_projects.md |
+| 10 | Patent Filing Policy | policies | policy_on_patent_filing_process.md |
+| 11 | PhD Student Travel and Research Allowance Policy | policies | policy_on_phd_students_travel_and_research.md |
+| 12 | SOP for Event Organisation at DAU | policies | policy_on_sop_for_event_organisation.md |
+| 13 | Policy on Sponsored Research Projects | policies | policy_on_the_sponsored_projects.md |
+| 14 | DAU Student Research Excellence Award Policy | policies | policy_student_research_excellence.md |
+| 15 | Healthcare / Medical Assistance SOP | policies | sop_healthcare_facilities.md |
+| 16 | Whistle Blowers Policy | administration | whistle_blowers_policy.md |
+| 17 | Plagiarism Prevention Framework | administration | plagiarism_prevention_framework.md |
+| 18 | Teaching Assistantship Policy | administration | teaching_assistantship_policy.md |
+| 19 | Teaching Fellow Policy | administration | teaching_fellow_policy.md |
+| 20 | Travel Policy | administration | travel_policy.md |
+| 21 | E-Governance Policy | administration | e_governance_policy.md |
+| 22 | Environment and Energy Usage Policy | administration | environment_and_energy_usage_policy.md |
+| 23 | Consultancy Policy | administration | consultancy_policy.md |
+| 24 | Sexual Harassment Policy (ICC) | administration | dau_policy_against_sexual_harassment.md |
+| 25 | Vehicle Rules for Students | administration | vehicle_rules_for_students.md |
+| 26 | Conduct Rules (General Service Conditions) | administration | general_service_condition_employees.md |
+| 27 | CEP Policy | administration | cep_policy.md |
+| 28 | DAIICT ACT 2003 | administration | daiict_act_2003.md |
+| 29 | DAIICT Amendment ACT 2024 | administration | amended_da_iict_act_gazette.md |
+| 30 | Vision, Mission and Strategic Plan | administration | vision_mission_strategic_plan.md |
+| 31 | NEP 2020 Implementation | administration | daiict_ac_in_nep_2020.md |
+| 32 | Grievance Redressal Authority - Students (Table) | administration | table_1_grievance_redressal_students.md |
+| 33 | Grievance Redressal Authority - Faculty (Table) | administration | table_2_grievance_redressal_faculty.md |
+| 34 | Grievance Redressal Authority - Staff (Table) | administration | table_3_grievance_redressal_staff.md |
+| 35 | UGC Proforma for Inspection 2025 | administration | ugc_proforma_for_inspection.md |
+| 36 | UGC 12B Proforma | administration | ugc_12b_proforma.md |
+| 37 | Public Self-Disclosure (UGC) | administration | public_self_disclosure_2025.md |
+| 38 | NAAC Cycle 1 Report | administration | naac_cycle_1.md |
+| 39 | NAAC Cycle 2 SSR (2023) | administration | naac_cycle_2_ssr.md |
+| 40 | Annual Reports (2014–2025) | administration | annual_reports_multiple.md |
+| 41 | Holiday List 2026 | administration | dau_holiday_list_2026.md |
 
-* **Anti-Ragging Policy** – Available
-  * Source: `data/student_services/rules/curbing_ragging.md`
-  * Source: `data/administration/daiict_ac_in_sites_default_files_other_files_national_ragging_prevention_program.md`
-  * Source: `data/policies/daiict_ac_in_sites_default_files_other_files_anti_ragging_committee_2025_26_1808.md`
+---
 
-* **Grievance Redressal** – Available
-  * Source: `data/administration/daiict_ac_in_table_1_grievance_redressal_authority_students.md`
-  * Source: `data/student_services/committees/grievance_redressal_cell.md`
-  * Source: `data/policies/daiict_ac_in_grievance_redressal_cell.md`
+## Missing Topics
 
-* **Sexual Harassment Policy (ICC)** – Available
-  * Source: `data/administration/daiict_ac_in_sites_default_files_other_files_dau_policy_against_sexual_harassmen.md`
-  * Source: `data/student_services/committees/internal_complaint_committee.md`
+| # | Topic | Category | Priority |
+|---|---|---|---|
+| 1 | Fee Structure & Payment Policies | administration | High |
+| 2 | Student Code of Conduct (Full Document) | policies | High |
+| 3 | Refund / Withdrawal Policy | policies | High |
+| 4 | Scholarship & Financial Aid Policy | policies | High |
+| 5 | Examination Malpractice Penalties | policies | Medium |
+| 6 | Library Usage Policy | administration | Low |
+| 7 | Hostel Allotment Policy | administration | Medium |
+| 8 | IT / Cybersecurity Policy | policies | High |
+| 9 | Attendance Policy (Official Document) | policies | High |
+| 10 | Faculty Leave Policy | administration | Low |
 
-* **Student Code of Conduct & DAC Guidelines** – Available
-  * Source: `data/academics/academic_policy_da_iict_student_code_of_conduct_and_dac_guidelines.md`
+---
 
-* **Holiday List 2026** – Available
-  * Source: `data/student_services/holiday_list_2026.md`
-  * Source: `data/administration/daiict_ac_in_sites_default_files_other_files_dau_holiday_list_2026_pdf.md`
+## Cluster Status
 
-* **Vision & Mission** – Available
-  * Source: `data/administration/daiict_ac_in_sites_default_files_other_files_6_1_1_vision_mission_strategic_plan.md`
-
-* **Plagiarism Prevention Framework** – Available
-  * Source: `data/administration/daiict_ac_in_sites_default_files_other_files_plagiarism_prevention_framework_rev.md`
-
-* **Whistle Blowers Policy** – Available
-  * Source: `data/administration/daiict_ac_in_sites_default_files_other_files_whistle_blowers_policy_pdf.md`
-
-* **Vehicle Rules for Students** – Available
-  * Source: `data/student_services/rules/vehicle_rules_for_students.md`
-  * Source: `data/academics/academic_policy_da_iict_vehicle_rules_for_students.md`
-
-* **Student Leave Policy** – Available
-  * Source: `data/student_services/rules/student_leave_policy.md`
-  * Source: `data/academics/academic_policy_student_leave_policy_wef_ay2021_22.md`
-
-* **Registrar / Document Services** – Available
-  * Source: `data/academics/academic_policy_daiict_students_document_service.md`
-  * Source: `data/academics/academic_policy_students_document_service.md`
-
-* **Medical Services & Healthcare SOP** – Available
-  * Source: `data/student_services/medical_assistance_sop.md`
-
-* **Patent Filing Policy** – Available
-  * Source: `data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_patent_filing_process_pdf.md`
-
-## Level 2 – Dynamic / Continuously Updating (Identified)
-
-* Attendance Policy updates
-* Library Management System
-* Ranking Updates
-* IT/Cyber Policy
-* UGC Disclosures
-* NAAC Updates
-* Scholarship Policy
-* Committee Updates
-* Fee Policy
-
-## Level 3 – Human-Provided Info Needed
-
-* Mess & Canteen Rules (Ask: Warden / Student Affairs)
-* Faculty Leave Policy details
-* Administrative Guidance from committees
-
-## Level 4 – Future Integrations (Planned)
-
-* ERP Integration (Student records & admin data)
-* Fee Payment Portal (Live fee status & receipts)
-* HR Portal
-* Online Grievance Portal (Ticket submission & status)
-
-## Coverage Summary: 80% (15/19 total topics — Level 1 fully mapped at 100%)
+- ✅ L1 (Static) — **80% complete**
+- ⚠️ L2 (Dynamic) — Holiday lists and notices need periodic refresh
+- ❌ L3 (Human-Provided) — Fee structure, attendance, hostel allotment policies pending
+- ❌ L4 (Future) — ERP integration for policy updates not yet planned
