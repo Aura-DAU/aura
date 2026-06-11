@@ -136,6 +136,26 @@ def main():
             ]
 
         if chunk.get(
+            "program_name"
+        ):
+            
+            vector["metadata"][
+                "program_name"
+            ] = chunk[
+                "program_name"
+            ]
+
+        if chunk.get(
+            "section_type"
+        ):
+            
+            vector["metadata"][
+                "section_type"
+            ] = chunk[
+                "section_type"
+            ]
+
+        if chunk.get(
             "event_name"
         ):
 
