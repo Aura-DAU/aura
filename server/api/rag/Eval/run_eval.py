@@ -55,11 +55,12 @@ def run_evaluation(api_url: str, csv_path: str, output_path: str) -> None:
                         sources.append(url if url else f"{title} - {section}")
                         
                         exp_lower = expected_source.lower()
-                        if exp_lower in url.lower() or exp_lower in title.lower() or exp_lower in section.lower():
+                        # Empty expected source must not trivially match ('' is a substring of everything)
+                        if exp_lower and (exp_lower in url.lower() or exp_lower in title.lower() or exp_lower in section.lower()):
                             source_matched = True
                     elif isinstance(s, str):
                         sources.append(s.strip())
-                        if expected_source.lower() in s.lower():
+                        if expected_source and expected_source.lower() in s.lower():
                             source_matched = True
                 
                 # Basic check if answer contains text or is fallback

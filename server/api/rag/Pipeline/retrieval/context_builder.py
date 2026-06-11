@@ -47,67 +47,6 @@ scraped_date="{metadata.get('scraped_date', '')}"
 
                 seen_urls.add(url)
 
-            source = []
-
-            source.append(
-                f"[Source {idx}]"
-            )
-
-            if metadata.get("title"):
-
-                source.append(
-                    f"Title: {metadata['title']}"
-                )
-
-            if metadata.get("url"):
-
-                source.append(
-                    f"URL: {metadata['url']}"
-                )
-
-            if metadata.get("cluster"):
-
-                source.append(
-                    f"Cluster: {metadata['cluster']}"
-                )
-
-            if metadata.get(
-                "faculty_name"
-            ):
-
-                source.append(
-                    f"Faculty: {metadata['faculty_name']}"
-                )
-
-            if metadata.get(
-                "event_name"
-            ):
-
-                source.append(
-                    f"Event: {metadata['event_name']}"
-                )
-
-            if metadata.get("h1"):
-
-                source.append(
-                    f"H1: {metadata['h1']}"
-                )
-
-            if metadata.get("h2"):
-
-                source.append(
-                    f"H2: {metadata['h2']}"
-                )
-
-            source.append("")
-
-            source.append(
-                metadata.get(
-                    "text",
-                    ""
-                )
-            )
-        
         context = (
             "<context>\n"
             + "\n".join(documents)

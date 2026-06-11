@@ -47,6 +47,12 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  // Always points at the latest handleSendMessage so async callbacks
+  // (MediaRecorder.onstop) never act on stale messages/loading state.
+  const sendMessageRef = useRef<(text: string) => Promise<void>>(
+    async () => {},
+  );
 
   const closeAudioContext = () => {
     const ctx = audioContextRef.current;
@@ -90,6 +96,21 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     }
   }, [storageKey, profileKey]);
 
+  useEffect(() => {
+    return () => {
+      const recorder = mediaRecorderRef.current;
+      if (recorder && recorder.state !== "inactive") {
+        recorder.onstop = null;
+        recorder.stop();
+      }
+      mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+      const ctx = audioContextRef.current;
+      if (ctx && ctx.state !== "closed") {
+        ctx.close().catch(console.error);
+      }
+    };
+  }, []);
+
   const saveHistory = (newMessages: ChatMessage[]) => {
     setMessages(newMessages);
     localStorage.setItem(storageKey, JSON.stringify(newMessages));
@@ -108,6 +129,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
         return;
       }
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaStreamRef.current = stream;
       audioChunksRef.current = [];
 
       const recorderOptions = { mimeType: "audio/webm" };
@@ -131,35 +153,31 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
           type: mediaRecorder.mimeType || "audio/webm",
         });
         stream.getTracks().forEach((track) => track.stop());
+        mediaStreamRef.current = null;
 
         setIsTranscribing(true);
 
-        const reader = new FileReader();
-        reader.readAsDataURL(audioBlob);
-        reader.onloadend = async () => {
-          try {
-            const base64data = (reader.result as string).split(",")[1];
-            const filename = mediaRecorder.mimeType?.includes("wav")
-              ? "audio.wav"
-              : "audio.webm";
+        try {
+          const filename = mediaRecorder.mimeType?.includes("wav")
+            ? "audio.wav"
+            : "audio.webm";
 
-            const result = await transcribeAudio({
-              audioBase64: base64data,
-              filename,
-            });
+          const result = await transcribeAudio({
+            audio: audioBlob,
+            filename,
+          });
 
-            if (result.success && result.text && result.text.trim()) {
-              void handleSendMessage(result.text);
-            } else if (result.error) {
-              setErrorMessage(result.error);
-            }
-          } catch (err) {
-            console.error("Transcription error:", err);
-            setErrorMessage("Failed to transcribe audio.");
-          } finally {
-            setIsTranscribing(false);
+          if (result.success && result.text && result.text.trim()) {
+            void sendMessageRef.current(result.text);
+          } else if (result.error) {
+            setErrorMessage(result.error);
           }
-        };
+        } catch (err) {
+          console.error("Transcription error:", err);
+          setErrorMessage("Failed to transcribe audio.");
+        } finally {
+          setIsTranscribing(false);
+        }
       };
 
       // Silence (Voice Activity) Detection
@@ -181,7 +199,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
         const bufferLength = analyser.fftSize;
         const dataArray = new Uint8Array(bufferLength);
 
-        // eslint-disable-next-line react-hooks/purity
+         
         let silenceStart = Date.now();
         const silenceThreshold = 0.01; // Slightly more sensitive volume threshold
         const silenceDurationLimit = 1500; // 1.5 seconds of silence after speaking to auto-stop
@@ -276,12 +294,22 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     setLoading(true);
     setActiveCitations([]);
 
+    // Animate the status steps alongside the request instead of
+    // delaying it — the fetch starts immediately.
     setThinkingStep("Accessing university registry database...");
-    await new Promise((r) => setTimeout(r, 400));
-    setThinkingStep("Scanning academics policies & student service handbooks...");
-    await new Promise((r) => setTimeout(r, 450));
-    setThinkingStep("Formulating RAG grounded response...");
-    await new Promise((r) => setTimeout(r, 300));
+    const stepTimers = [
+      setTimeout(
+        () =>
+          setThinkingStep(
+            "Scanning academics policies & student service handbooks...",
+          ),
+        400,
+      ),
+      setTimeout(
+        () => setThinkingStep("Formulating RAG grounded response..."),
+        850,
+      ),
+    ];
 
     try {
       const result = await askAura({
@@ -290,11 +318,11 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
         studentProfile,
       });
 
-      if (result.success && result.content) {
-        saveHistory([
-          ...updatedMessages,
-          { role: "assistant", content: result.content },
-        ]);
+      if (result.success) {
+        const content = result.content?.trim()
+          ? result.content
+          : "I could not find that information in the available university data.";
+        saveHistory([...updatedMessages, { role: "assistant", content }]);
         if (result.citations) {
           setActiveCitations(result.citations);
         }
@@ -322,10 +350,15 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       ]);
       setErrorMessage("Network error: Could not reach registry servers.");
     } finally {
+      stepTimers.forEach(clearTimeout);
       setLoading(false);
       setThinkingStep("");
     }
   };
+
+  useEffect(() => {
+    sendMessageRef.current = handleSendMessage;
+  });
 
   const handleClearChat = () => {
     saveHistory([]);
