@@ -2,7 +2,7 @@
 title: "Placement Cell Overview and Policies"
 category: "Placement Cell"
 url: "placement_cell.md"
-scrapped_by: "Pushkar"
+scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
 ---

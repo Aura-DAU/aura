@@ -2,7 +2,7 @@
 title: "Offer Rejection Policy (2025-26)"
 category: "Placement Policy"
 url: "offer_rejection_policy.md"
-scrapped_by: "Pushkar"
+scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
 ---

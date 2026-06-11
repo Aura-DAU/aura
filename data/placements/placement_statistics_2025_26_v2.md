@@ -2,7 +2,7 @@
 title: "Placement Brochure 2025-26"
 category: "Placement Cell"
 url: "Placement-Brochure_2025-26.pdf"
-scrapped_by: "Pushkar"
+scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
 ---

@@ -2,7 +2,7 @@
 title: "Placement Offer Switching Mechanics"
 category: "Placement Policy"
 url: "placement_switching_mechanics.md"
-scrapped_by: "Pushkar"
+scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
 

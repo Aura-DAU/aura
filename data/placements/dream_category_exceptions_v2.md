@@ -2,7 +2,7 @@
 title: "Dream Category Companies Policy"
 category: "Placement Policy"
 url: "dream_category_exceptions.md"
-scrapped_by: "Pushkar"
+scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
 ---
