@@ -35,30 +35,15 @@ integration for system implementation will be taught.
 | Sr. No. | Description |
 |---|---|
 | 1. | Introduction |
-|  | Trends in VLSI/Semiconductor industry, benefits and challenges, ITRS Roadmap, Beyond CMOS, Moore’s
-law, Device scaling effects,
-Basics of MOSFETs and VLSI, inverter designs, review of MOS analytical models, SPICE models
-CMOS fabrication process, VLSI circuit design and layout. |
+|  | Trends in VLSI/Semiconductor industry, benefits and challenges, ITRS Roadmap, Beyond CMOS, Moore’s law, Device scaling effects, Basics of MOSFETs and VLSI, inverter designs, review of MOS analytical models, SPICE models CMOS fabrication process, VLSI circuit design and layout. |
 | 2. | Combinational Logic Design |
-|  | Static MOS design, Complementary MOS, Ratioed logic, Pass transistor logic, complex logic circuits,
-transmission gate logic designs. |
+|  | Static MOS design, Complementary MOS, Ratioed logic, Pass transistor logic, complex logic circuits, transmission gate logic designs. |
 | 3. | Sequential Logic Design |
-|  | Dynamic logic families and their performance analysis. Static latches, Flip flops and Registers. CMOS
-Schmitt trigger, Monostable sequential circuits, Astable circuits, CMOS current mirror designs, CMOS
-amplifiers, Comparator designs, Adder and Multiplier circuits, Memory Designs, Timing analysis: Set-up
-time (Max-delay) constraint, Hold time (Min-delay) constraint, Clock-skew budgeting, Time borrowing,
-simple synchronizer, FSM, introduction to pipelined system/ALU, etc. |
+|  | Dynamic logic families and their performance analysis. Static latches, Flip flops and Registers. CMOS Schmitt trigger, Monostable sequential circuits, Astable circuits, CMOS current mirror designs, CMOS amplifiers, Comparator designs, Adder and Multiplier circuits, Memory Designs, Timing analysis: Set-up time (Max-delay) constraint, Hold time (Min-delay) constraint, Clock-skew budgeting, Time borrowing, simple synchronizer, FSM, introduction to pipelined system/ALU, etc. |
 | 4. | Datapath Subsystems and Implementation |
-|  | Adders, Multipliers, Division, Standard Math function implementation, Comparators, shifter-registers, Error
-Correcting Codes, FSM, Practical circuit and system designs. |
+|  | Adders, Multipliers, Division, Standard Math function implementation, Comparators, shifter-registers, Error Correcting Codes, FSM, Practical circuit and system designs. |
 | 5. | Interconnects |
-|  | Interconnect Parameters: Resistance, Inductance, and Capacitance, Interconnect RC delays: Elmore delay
-calculation. Interconnect models: The lumped RC model, the distributed RC model, the transmission line
-model. SPICE Wire Models: Distributed RC lines, Transmission line models.
-Scaling issues in interconnect: Gate and Interconnect delay. Clock distribution system. Crosstalk and noise
-in interconnects. Crosstalk mitigation techniques. Non-ideal effects in VLSI interconnects and remedial
-measures. Performance improvement techniques of on-chip interconnects. Advanced interconnect materials
-and techniques. |
+|  | Interconnect Parameters: Resistance, Inductance, and Capacitance, Interconnect RC delays: Elmore delay calculation. Interconnect models: The lumped RC model, the distributed RC model, the transmission line model. SPICE Wire Models: Distributed RC lines, Transmission line models. Scaling issues in interconnect: Gate and Interconnect delay. Clock distribution system. Crosstalk and noise in interconnects. Crosstalk mitigation techniques. Non-ideal effects in VLSI interconnects and remedial measures. Performance improvement techniques of on-chip interconnects. Advanced interconnect materials and techniques. |
 
 
 ---

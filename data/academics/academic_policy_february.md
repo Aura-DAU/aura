@@ -36,31 +36,11 @@ Asst. Registrar (Academic)
 
 | Particular | Amount of Fine |
 |---|---|
-| Up to Add/Drop Course Adjustment period - No
-Registration done in the E-campus within the
-stipulated time:
-• Fees paid
-• Fees not paid | Rs. 2500/-
-Rs. 2500/- + applicable fine for the
-late payment i.e. @ Rs. 300/- per
-day or Rs. 2500/- whichever is less |
-| After Add/Drop Course Adjustment period - No
-Registration done in the E-campus within the
-stipulated time:
-• Fees paid
-• Fees not paid | Rs. 5000/-
-Rs. 5000/- + applicable fine for the
-late payment i.e. @ Rs. 300/- per
-day or Rs. 2500/- whichever is less |
-| Missed to register some course(s) (after the last date
-of add and drop courses): subject to convener’s
-approval– only addition of some course(s) | Rs. 2500/- |
-| Amendment in registration (after the last date of add
-and drop courses): subject to convener’s approval. –
-replacement of course(s) | Rs. 5000/- |
-| Drop a course(after the last date of and drop
-courses): subject to convener’s approval | Rs. 1000/- per course or Rs. 2500/-
-whichever is less. |
+| Up to Add/Drop Course Adjustment period - No Registration done in the E-campus within the stipulated time: • Fees paid • Fees not paid | Rs. 2500/- Rs. 2500/- + applicable fine for the late payment i.e. @ Rs. 300/- per day or Rs. 2500/- whichever is less |
+| After Add/Drop Course Adjustment period - No Registration done in the E-campus within the stipulated time: • Fees paid • Fees not paid | Rs. 5000/- Rs. 5000/- + applicable fine for the late payment i.e. @ Rs. 300/- per day or Rs. 2500/- whichever is less |
+| Missed to register some course(s) (after the last date of add and drop courses): subject to convener’s approval– only addition of some course(s) | Rs. 2500/- |
+| Amendment in registration (after the last date of add and drop courses): subject to convener’s approval. – replacement of course(s) | Rs. 5000/- |
+| Drop a course(after the last date of and drop courses): subject to convener’s approval | Rs. 1000/- per course or Rs. 2500/- whichever is less. |
 
 
 ## Important Information

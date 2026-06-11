@@ -27,31 +27,14 @@ Course Content:
 
 | S. No. | Unit Title | Topics | Lectures |
 |---|---|---|---|
-| 1 | Probability | (a) Basic of Probability: Axioms of Probability, Independence,
-Conditional Probability, Bayes theorem. | 6 |
-|  |  | (b) Random variables: Random Variables, Discrete and
-Continuous Random variables, Expectation, Mean and Variance
-of Random variables, and functions of one random variable. | 4 |
-|  |  | (c) Probability Density/Distribution, Cumulative
-Density/Distribution functions: Definition and some examples:
-Uniform and Gaussian. | 5 |
-| 2 | Linear Algebra | (a) Vectors: Vector Spaces, Examples, Operations on Vectors:
-Addition, Scaling, Linear Combination, Span, Subspaces, Basis,
-Linear Dependence and Independence. Span,
-Data as Vectors, Euclidean Space Rn, Inner product Space,
-Orthogonality, Norms in Euclidean Space Rn , Distances. | 5 |
-|  |  | (b) Matrices:- Matrices as Data, Rank of Matrix, Matrix operations,
-Addition, Multiplication, Inversion. | 5 |
-|  |  | (c) Matrices: Linear transformations their representation as matrices,
-Change of Basis - Similarity transformations | 5 |
-|  |  | (d). Eigenvalues and Eigenvectors. A special case of Similarity
-transformation, Characteristic polynomial for computing
-eigenvalues and eigenvectors. Matrix Diagonalization, Singular
-value decomposition, Principal Component Analysis. | 5 |
-| 3. | Calculus | Functions, function of several variables, continuous functions,
-convex functions, differentiable functions, gradient of a function,
-directional derivatives. Minima of a convex function, gradient
-descent method. | 5 |
+| 1 | Probability | (a) Basic of Probability: Axioms of Probability, Independence, Conditional Probability, Bayes theorem. | 6 |
+|  |  | (b) Random variables: Random Variables, Discrete and Continuous Random variables, Expectation, Mean and Variance of Random variables, and functions of one random variable. | 4 |
+|  |  | (c) Probability Density/Distribution, Cumulative Density/Distribution functions: Definition and some examples: Uniform and Gaussian. | 5 |
+| 2 | Linear Algebra | (a) Vectors: Vector Spaces, Examples, Operations on Vectors: Addition, Scaling, Linear Combination, Span, Subspaces, Basis, Linear Dependence and Independence. Span, Data as Vectors, Euclidean Space Rn, Inner product Space, Orthogonality, Norms in Euclidean Space Rn , Distances. | 5 |
+|  |  | (b) Matrices:- Matrices as Data, Rank of Matrix, Matrix operations, Addition, Multiplication, Inversion. | 5 |
+|  |  | (c) Matrices: Linear transformations their representation as matrices, Change of Basis - Similarity transformations | 5 |
+|  |  | (d). Eigenvalues and Eigenvectors. A special case of Similarity transformation, Characteristic polynomial for computing eigenvalues and eigenvectors. Matrix Diagonalization, Singular value decomposition, Principal Component Analysis. | 5 |
+| 3. | Calculus | Functions, function of several variables, continuous functions, convex functions, differentiable functions, gradient of a function, directional derivatives. Minima of a convex function, gradient descent method. | 5 |
 
 
 Suggested books:

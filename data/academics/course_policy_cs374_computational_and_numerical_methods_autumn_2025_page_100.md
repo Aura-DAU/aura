@@ -19,49 +19,13 @@ This document presents the detailed policy and syllabus structure for the course
 
 | Course Title | Computational and Numerical Methods |  |  |
 |---|---|---|---|
-| Course Code | CS 374 | Credit
-Structure | 3-0-3 -4.5 (L-T-P-C) |
+| Course Code | CS 374 | Credit Structure | 3-0-3 -4.5 (L-T-P-C) |
 | Category | Core | Semester | Autumn Semester (AY 25-26) |
 | Program | B.Tech-ICT-CS |  |  |
 | Prerequisites | NA |  |  |
-| Course
-Objectives/
-Brief Course
-Description | There are several problems in applications that can’t be solved analytically.
-For that reason people search for approximate solutions. The aim of this
-course is to make the students learn some numerical techniques to find the
-approximate solutions of a variety of problems such as numerical solutions
-of algebraic and transcendental equations, numerical solutions to systems of
-algebraic equations, interpolation, numerical differentiation, numerical
-integration, numerical solutions of differential equations. For hands-on
-experience in problem solving, students will be writing in some of the
-programming language of their choice. |  |  |
-| Evaluation/
-Grading Policy | Labwork: 30%
-Insem – 1: 20%
-Insem – 2: 20%
-Final Exam: 30% |  |  |
-| Course
-Materials/
-References | Lecture notes.
-Lecture notes/ class notes will be posted and made available for students
-after the lecture.
-Labs
-In labs the students will do hands on to implement the numerical methods
-using a programming language. Instructor and TA will help the students in
-labs
-Books
-1. Elementary Numerical Analysis, K. Atkinson and W. Han, Wiley &
-Sons.
-2. Numerical Analysis, Mathematics of Scientific Computing, D.
-Kincaid, W.Cheney, American Mathematical Society.
-3. An Introdution to Numerical Methods and Analysis, James F.
-Epperson, Wiley and Sons.
-4. Numerical Method for Scientific and Engineering Computation, M.
-K. Jain, S. R. K. Iyengar, and R. K. Jain, New Age International
-Publishers.
-5. Computer Oriented Numerical Methods, V. Rajaraman, Prentice Hall
-of India |  |  |
+| Course Objectives/ Brief Course Description | There are several problems in applications that can’t be solved analytically. For that reason people search for approximate solutions. The aim of this course is to make the students learn some numerical techniques to find the approximate solutions of a variety of problems such as numerical solutions of algebraic and transcendental equations, numerical solutions to systems of algebraic equations, interpolation, numerical differentiation, numerical integration, numerical solutions of differential equations. For hands-on experience in problem solving, students will be writing in some of the programming language of their choice. |  |  |
+| Evaluation/ Grading Policy | Labwork: 30% Insem – 1: 20% Insem – 2: 20% Final Exam: 30% |  |  |
+| Course Materials/ References | Lecture notes. Lecture notes/ class notes will be posted and made available for students after the lecture. Labs In labs the students will do hands on to implement the numerical methods using a programming language. Instructor and TA will help the students in labs Books 1. Elementary Numerical Analysis, K. Atkinson and W. Han, Wiley & Sons. 2. Numerical Analysis, Mathematics of Scientific Computing, D. Kincaid, W.Cheney, American Mathematical Society. 3. An Introdution to Numerical Methods and Analysis, James F. Epperson, Wiley and Sons. 4. Numerical Method for Scientific and Engineering Computation, M. K. Jain, S. R. K. Iyengar, and R. K. Jain, New Age International Publishers. 5. Computer Oriented Numerical Methods, V. Rajaraman, Prentice Hall of India |  |  |
 
 
 ---
@@ -120,23 +84,11 @@ Tentative Lecture Schedule
 Lectures |
 |---|---|---|
 | 1 | Introduction to Numerical Analysis, Computer Arithmetic | 3 |
-| 2 | Root Finding:
-Bisection Method, Secant Method, Newton-Raphson Method, Fixed
-Point Iteration Method | 7 |
-| 3 | Interpolation:
-Lagrange Interpolation, Divided Difference Interpolation, Newton’s
-forward and backward Interpolation, Piecewise Interpolation, Spline
-Interpolation | 7 |
-| 4 | Numerical Integration and Differentiation:
-Trapezoid Rule, Simpson’s Rule, Gaussian Quadrature Rule,
-Differentiation Using Interpolation, Differentiation using Method of
-undetermined coefficients | 8 |
-| 5 | Solution of Systems of Linear Equations:
-Gauss Elimination Method, Gauss Jordan Method, Gauss-Seidel Method,
-Jacobi Iteration Method, Newtons Method for solving nonlinear systems | 6 |
-| 6 | Numerical solutions to Ordinary Differential Equations:
-Euler’s Method, Midpoint Rule, Second Order and fourth order Runge-
-kutta Method, Boundary Value Problems | 8 |
+| 2 | Root Finding: Bisection Method, Secant Method, Newton-Raphson Method, Fixed Point Iteration Method | 7 |
+| 3 | Interpolation: Lagrange Interpolation, Divided Difference Interpolation, Newton’s forward and backward Interpolation, Piecewise Interpolation, Spline Interpolation | 7 |
+| 4 | Numerical Integration and Differentiation: Trapezoid Rule, Simpson’s Rule, Gaussian Quadrature Rule, Differentiation Using Interpolation, Differentiation using Method of undetermined coefficients | 8 |
+| 5 | Solution of Systems of Linear Equations: Gauss Elimination Method, Gauss Jordan Method, Gauss-Seidel Method, Jacobi Iteration Method, Newtons Method for solving nonlinear systems | 6 |
+| 6 | Numerical solutions to Ordinary Differential Equations: Euler’s Method, Midpoint Rule, Second Order and fourth order Runge- kutta Method, Boundary Value Problems | 8 |
 
 
 | Week | Topics |
@@ -155,8 +107,7 @@ kutta Method, Boundary Value Problems | 8 |
 | 6 | Spline Interpolation, Trapezoid Rule, |
 |---|---|
 | 7 | Simpson’s Rule, Gaussian Quadrature Rule |
-| 8 | Differentiation Using Interpolation, Differentiation using Method of
-undetermined coefficients |
+| 8 | Differentiation Using Interpolation, Differentiation using Method of undetermined coefficients |
 | 9 | Gauss Elimination Method, Gauss Jordan Method |
 | 10 | Gauss-Seidel Method, Jacobi Iteration Method |
 | 11 | Newtons Method for solving nonlinear systems |

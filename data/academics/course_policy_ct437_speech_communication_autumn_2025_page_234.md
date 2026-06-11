@@ -82,26 +82,18 @@ Conversion, etc.
 | Key Laboratory Experiments (Tentative) |  |
 |---|---|
 | LAB1 | Introduction to MATLAB Programming |
-| LAB2 | Speech Analysis: Reading Speech Waveform, Speech Framing at suprasegmental (< 4 ms),
-segmental (10-30 ms), and suprasegmental level (~ 200 ms) |
+| LAB2 | Speech Analysis: Reading Speech Waveform, Speech Framing at suprasegmental (< 4 ms), segmental (10-30 ms), and suprasegmental level (~ 200 ms) |
 | LAB3 | Significance of Phase of Fourier Transform: A Case Study for Speech |
-| LAB4 | Spectrographic Analysis of Speech, Audio, Music, and Infant Cry Signals
-Narrowband vs. wideband spectrograms, Displaying Mel Spectrograms |
-| LAB4 | Estimation of Instantaneous Frequency (IF) using Hilbert Transform and Relevance to Speech
-Processing |
-| LAB5 | Design of 2nd order Digital Resonator and its relevance to Speech Formant Estimation and their
-– 3dB Bandwidths |
-| LAB6 | Linear Prediction Analysis of Speech Wave: Estimation of Speech Excitation Source using LP
-residual, LP Spectrum vs. STFT Spectrum |
+| LAB4 | Spectrographic Analysis of Speech, Audio, Music, and Infant Cry Signals Narrowband vs. wideband spectrograms, Displaying Mel Spectrograms |
+| LAB4 | Estimation of Instantaneous Frequency (IF) using Hilbert Transform and Relevance to Speech Processing |
+| LAB5 | Design of 2nd order Digital Resonator and its relevance to Speech Formant Estimation and their – 3dB Bandwidths |
+| LAB6 | Linear Prediction Analysis of Speech Wave: Estimation of Speech Excitation Source using LP residual, LP Spectrum vs. STFT Spectrum |
 | LAB7 | Formant and – 3dB bandwidth Estimation using LP Methods |
-| LAB 8 | Cepstrum Analysis of Speech Signals=> Estimation of Voiced vs. Unvoiced Regions,
-Fundamental Frequency (Fo) using Cepstrum, cepstrally-smoothed spectrum |
-| LAB 9 | Estimation Fundamental Frequency (Fo) using Autocorrelation, LP Residual, Hilbert Envelope,
-etc. |
+| LAB 8 | Cepstrum Analysis of Speech Signals=> Estimation of Voiced vs. Unvoiced Regions, Fundamental Frequency (Fo) using Cepstrum, cepstrally-smoothed spectrum |
+| LAB 9 | Estimation Fundamental Frequency (Fo) using Autocorrelation, LP Residual, Hilbert Envelope, etc. |
 | LAB 10 | Case Study1: Convolutional Neural Networks (CNN) for Speech Applications |
 | LAB 11 | Case Study 2: Web-Scale Supervised Pre-training for Speech Recognition (Whisper) |
-| LAB 12 | Case Study 3: Generative Adversarial Networks (GANs) for Speech Enhancement, Voice
-Conversion, etc. |
+| LAB 12 | Case Study 3: Generative Adversarial Networks (GANs) for Speech Enhancement, Voice Conversion, etc. |
 
 
 Recent Success Story: Students who took this elective in the last Autumn 2021-2024 

@@ -70,15 +70,8 @@ Phone No.
 Medical Centre | Residence Address &
 Phone No. |
 |---|---|---|
-| Dr. Suresh Shah | 16.15 to 17.45
-(Ext. # 593) | Plot No. 800, Sector 21
-Gandhinagar
-Phone: (079) 23221115 |
-| Dr. (Mrs). Anjana Ved | 12.30 to 13.30
-(Ext. # 593) | Abhinav Nursing Home
-Behind Dena Bank, Sector 16
-Gandhinagar
-Phone: (079) 23222865 |
+| Dr. Suresh Shah | 16.15 to 17.45 (Ext. # 593) | Plot No. 800, Sector 21 Gandhinagar Phone: (079) 23221115 |
+| Dr. (Mrs). Anjana Ved | 12.30 to 13.30 (Ext. # 593) | Abhinav Nursing Home Behind Dena Bank, Sector 16 Gandhinagar Phone: (079) 23222865 |
 
 
 | S.
@@ -86,14 +79,11 @@ No. | Name of the Doctor | Specialisation | Clinic
 Phone No. | Residence
 Phone No. |
 |---|---|---|---|---|
-| 1 | Dr. P. S. Patel | General
-Physician | 23226214 | 23226214 |
+| 1 | Dr. P. S. Patel | General Physician | 23226214 | 23226214 |
 | 2 | Dr. Rajendra Anand | Psychiatrist | 23238853 | 23224220 |
-| 3 | Dr. Asim Shah | Radiologist &
-Sonologist | 23229224 | 23229224 |
+| 3 | Dr. Asim Shah | Radiologist & Sonologist | 23229224 | 23229224 |
 | 4 | Dr. Mahendra L Gajjar | Pathology Lab | 23222474 | 23222952 |
-| 5 | Dr. Mukul Pandit | Orthopaedic
-Surgeon | 23224565 | 23221757 |
+| 5 | Dr. Mukul Pandit | Orthopaedic Surgeon | 23224565 | 23221757 |
 | 6 | Dr. Haresh Thekdi | Physician | 23220838 | 23223418 |
 | 7 | Dr. Y. Chhantbar | ENT Surgeon | 23222444 | 23221731 |
 | 8 | Dr. Darshan Pandya | Physician | 23224610 | 23232307 |
@@ -113,10 +103,8 @@ Dermatologist
 |---|---|---|---|---|
 | 10 | Dr. Mira N Butani | Gynaecologist | 23222197 | 23222196 |
 | 11 | Dr. Sanjiv B. Shah | Dentist | 23221647 | 23225377 |
-| 12 | Dr. Girdharilal Kaw | General
-Surgeon | 23238865 | 23229871 |
-| 13 | Dr. J. G. Tatu | General
-Surgeon | 23221239 | 23221634 |
+| 12 | Dr. Girdharilal Kaw | General Surgeon | 23238865 | 23229871 |
+| 13 | Dr. J. G. Tatu | General Surgeon | 23221239 | 23221634 |
 | 14 | Dr. Trupti Dhrangadhria | Dermatologist | 23226968 | 23224042 |
 
 
@@ -254,10 +242,7 @@ Mr. Soman Nair, Executive Registrar
 | Name | Phone No. | Mobile No. |
 |---|---|---|
 | Security Supervisor, Main Gate | (079) 30510566 | -- |
-| Hostel Supervisors:
-Mr. Jitendra Parmar
-Mr. Sawan Kumar Sachaniya | 30510544 | 9328994140
-9328994142 |
+| Hostel Supervisors: Mr. Jitendra Parmar Mr. Sawan Kumar Sachaniya | 30510544 | 9328994140 9328994142 |
 | Prof. Gagan Garg, Warden, HOR-Men | 30510559 | 9558323578 |
 | Prof. Shweta Garg, Warden, HOR-Women | 30510627 | 9328721604 |
 | Prof. Sanjeev Gupta, Dean (students) | 30510594 | 9327043612 |
