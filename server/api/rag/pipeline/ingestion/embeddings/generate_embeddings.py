@@ -36,10 +36,11 @@ def load_chunks(filepath):
 # ==================================================
 
 def main():
+    import torch
+    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    print(f"Using device: {device}")
 
-    print(f"Loading model: {MODEL_NAME}")
-
-    model = SentenceTransformer(MODEL_NAME)
+    model = SentenceTransformer(MODEL_NAME, device=device)
 
     print("Loading chunks...")
 
@@ -56,7 +57,7 @@ def main():
 
     embeddings = model.encode(
         texts,
-        batch_size=32,
+        batch_size=256,
         show_progress_bar=True,
         normalize_embeddings=True,
         convert_to_numpy=True

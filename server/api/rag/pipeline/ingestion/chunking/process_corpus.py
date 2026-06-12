@@ -1,10 +1,138 @@
 import uuid
+import re
 from pathlib import Path
 
 from parser import extract_frontmatter
 from section_extracter import extract_sections
 from chunker import split_section
 from metadata_extractors import extract_event_metadata, extract_program_name, extract_section_type
+
+
+def extract_curriculum_chunks(body, metadata, file_path):
+    lines = body.split("\n")
+    table_started = False
+    headers = []
+    rows = []
+    tables = []
+    
+    for line in lines:
+        line_strip = line.strip()
+        if line_strip.startswith("|"):
+            if not table_started:
+                table_started = True
+                headers = [h.strip() for h in line_strip.split("|")[1:-1]]
+            else:
+                if re.match(r"^\|[\s\-\|]+$", line_strip):
+                    continue
+                row_cells = [c.strip() for c in line_strip.split("|")[1:-1]]
+                rows.append(row_cells)
+        else:
+            if table_started:
+                tables.append((headers, rows))
+                table_started = False
+                headers = []
+                rows = []
+    if table_started:
+        tables.append((headers, rows))
+
+    custom_chunks = []
+    semester_courses = {}
+    
+    roman_map = {
+        "1": "I", "2": "II", "3": "III", "4": "IV", "5": "V", "6": "VI", "7": "VII", "8": "VIII",
+        "i": "I", "ii": "II", "iii": "III", "iv": "IV", "v": "V", "vi": "VI", "vii": "VII", "viii": "VIII"
+    }
+
+    for headers, rows in tables:
+        header_lower = [h.lower() for h in headers]
+        
+        has_code = any("code" in h for h in header_lower)
+        has_name = any("name" in h or "title" in h or "subject" in h for h in header_lower)
+        
+        if not (has_code and has_name):
+            continue
+            
+        col_sem = -1
+        col_code = -1
+        col_name = -1
+        col_type = -1
+        col_credits = -1
+        
+        for idx, h in enumerate(header_lower):
+            if "sem" in h:
+                col_sem = idx
+            elif "code" in h:
+                col_code = idx
+            elif "name" in h or "title" in h or "subject" in h:
+                col_name = idx
+            elif "type" in h:
+                col_type = idx
+            elif "l-t-p-c" in h or "credit" in h or "c" == h:
+                col_credits = idx
+                
+        for row in rows:
+            if len(row) <= max(col_code, col_name):
+                continue
+            course_code = row[col_code].strip()
+            course_name = row[col_name].strip()
+            
+            if not course_code or not course_name or course_code == "Course Code":
+                continue
+                
+            sem_raw = row[col_sem].strip() if col_sem != -1 and col_sem < len(row) else ""
+            sem_roman = roman_map.get(sem_raw.lower(), sem_raw)
+            if not sem_roman:
+                sem_roman = "I"
+                
+            credits_raw = row[col_credits].strip() if col_credits != -1 and col_credits < len(row) else ""
+            credits_val = credits_raw
+            if "-" in credits_raw:
+                credits_val = credits_raw.split("-")[-1]
+            elif not credits_raw:
+                credits_val = "N/A"
+                
+            course_type = row[col_type].strip() if col_type != -1 and col_type < len(row) else "Core"
+            
+            chunk_text = (
+                f"Course Name: {course_name}\n"
+                f"Course Code: {course_code}\n"
+                f"Semester: {sem_roman}\n"
+                f"Credits: {credits_val}"
+            )
+            
+            custom_chunks.append({
+                "text": chunk_text,
+                "h1": "Curriculum Course Details",
+                "h2": f"{course_name} ({course_code})",
+                "h3": f"Semester {sem_roman}",
+                "section_type": "curriculum",
+                "semester": sem_roman,
+                "credits": credits_val
+            })
+            
+            if sem_roman not in semester_courses:
+                semester_courses[sem_roman] = []
+            semester_courses[sem_roman].append(
+                f"- {course_code} | {course_name} ({course_type}, Credits: {credits_val})"
+            )
+            
+    for sem, courses_list in semester_courses.items():
+        courses_str = "\n".join(courses_list)
+        chunk_text = (
+            f"Semester {sem} Chunk\n"
+            f"Courses taught in Semester {sem}:\n"
+            f"{courses_str}"
+        )
+        custom_chunks.append({
+            "text": chunk_text,
+            "h1": "Semester Curriculum Overview",
+            "h2": f"Semester {sem} Courses",
+            "h3": None,
+            "section_type": "curriculum",
+            "semester": sem
+        })
+        
+    return custom_chunks
 
 
 def process_markdown_file(file_path):
@@ -109,5 +237,42 @@ def process_markdown_file(file_path):
                 chunk_record["program_name"] = program_name
 
             chunks.append(chunk_record)
+
+    # Add custom curriculum chunks
+    curriculum_chunks = extract_curriculum_chunks(body, metadata, file_path)
+    total_custom = len(curriculum_chunks)
+    for idx, custom in enumerate(curriculum_chunks):
+        chunk_record = {
+            "chunk_id": str(uuid.uuid4()),
+            "text": custom["text"],
+
+            "title": metadata.get("title"),
+            "url": metadata.get("url"),
+            "category": metadata.get("category"),
+
+            "document_type": category,
+            "cluster": cluster,
+            "subclusters": subclusters,
+            
+            "h1": custom["h1"],
+            "h2": custom["h2"],
+            "h3": custom["h3"],
+            "section_type": custom["section_type"],
+
+            "path": str(file_path),
+            "source_file": file_path.name,
+
+            "scraped_date": metadata.get("scraped_date"),
+
+            "chunk_index": idx,
+            "total_chunks": total_custom,
+            "char_length": len(custom["text"]),
+            "token_estimate": len(custom["text"].split())
+        }
+
+        if program_name:
+            chunk_record["program_name"] = program_name
+
+        chunks.append(chunk_record)
 
     return chunks
