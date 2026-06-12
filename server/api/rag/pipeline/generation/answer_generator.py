@@ -163,6 +163,13 @@ Context:
             code_request_patterns = ["write a", "code for", "program for", "how to write", "implement a", "palindrome", "function in", "script in"]
             is_code_request = any(kw in question_lower for kw in code_request_patterns)
 
+            # Exclude course/subject/program/dress/rules codes from code requests
+            if is_code_request:
+                for exclude in ["course code", "subject code", "program code", "dress code", "rules code"]:
+                    if exclude in question_lower:
+                        is_code_request = False
+                        break
+
             if is_code_request:
                 answer_lower = answer.lower()
                 is_grounded = (

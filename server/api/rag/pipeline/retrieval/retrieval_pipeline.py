@@ -265,5 +265,11 @@ class RetrievalPipeline:
                 built["context"],
 
             "sources":
-                built["sources"]
+                built["sources"],
+
+            "top_k_before_rerank":
+                len(results),
+
+            "top_k_after_rerank":
+                len(final_chunks)
         }
