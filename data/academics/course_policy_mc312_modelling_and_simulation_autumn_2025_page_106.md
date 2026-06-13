@@ -75,7 +75,6 @@ Systems, Open SUNY Textbooks, Milne Library, 2015.
 ---
 
 Assessment method: Two in-semester examinations (40%), final examination (30%) and lab viva 
-(30%).  
  
 Course Outcomes:  
 After completing the course, the students would be able to create a relevant model for many 
@@ -139,9 +138,7 @@ No. | Description |  | No. of Lectures |
 | 2 | System Dynamics Model (Compartment Models) |  | 15-18 |
 |  | 2.1 | Unconstrained growth models. |  |
 |  | 2.2 | Constrained Growth. |  |
-|  | 2.3 | Applications: Radioactive decay, Drug dosage, population
-dynamics, growth of technologies, SI models for epidemic
-spread etc. |  |
+|  | 2.3 | Applications: Radioactive decay, Drug dosage, population dynamics, growth of technologies, SI models for epidemic spread etc. |  |
 |  | 2.4 | System of Equations: |  |
 
 
@@ -153,30 +150,18 @@ spread etc. |  |
 SEIR, SEIZ etc.), predator-prey models, Modeling spread of
 infectious disease such as SARS, Malaria |  |
 |---|---|---|---|
-|  | 2.6 | Models from Social Science: Rumor spread,
-Models for Innovation Diffusion etc |  |
-|  | 2.7 | Selective methods for analyzing one and two
-dimensional nonlinear differential equations |  |
+|  | 2.6 | Models from Social Science: Rumor spread, Models for Innovation Diffusion etc |  |
+|  | 2.7 | Selective methods for analyzing one and two dimensional nonlinear differential equations |  |
 | 3 | Stochastic models (Monte Carlo simulations) |  | 12-16 |
 |  | 3.1 | Review of basic probability theory. |  |
-|  | 3.2 | Generating random numbers from different
-distributions on computer. |  |
-|  | 3.3 | Brownian motion and random walk in 1D,
-discrete and continuous time stochastic
-differential equation with applications. |  |
-|  | 3.4 | Symmetric, asymmetric, Markovian and non-
-markovian random walk |  |
-|  | 3.5 | Markov Chains, Continuous Time Markov
-Chains, Birth and death processes, limiting
-time behavior. |  |
+|  | 3.2 | Generating random numbers from different distributions on computer. |  |
+|  | 3.3 | Brownian motion and random walk in 1D, discrete and continuous time stochastic differential equation with applications. |  |
+|  | 3.4 | Symmetric, asymmetric, Markovian and non- markovian random walk |  |
+|  | 3.5 | Markov Chains, Continuous Time Markov Chains, Birth and death processes, limiting time behavior. |  |
 | 4 | Agent based Simulation (ABM) |  | 8-12 |
 |  | 4.1 | Cellular Automata simulation of random walk. |  |
-|  | 4.2 | Ising Model for ferromagnetic Systems with
-applications to social science, metropolis
-algorithm. |  |
-|  | 4.3 | Applications: Modeling opinion formation on
-2D lattice, segregation models, Rumor spread
-models etc. |  |
+|  | 4.2 | Ising Model for ferromagnetic Systems with applications to social science, metropolis algorithm. |  |
+|  | 4.3 | Applications: Modeling opinion formation on 2D lattice, segregation models, Rumor spread models etc. |  |
 
 
 * The number of topics covered will depend on the overall enthusiasm and 

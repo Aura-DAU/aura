@@ -42,7 +42,6 @@ Content:
 Course Structure: Module submission: 60%
 End Term Jury: 40%
 
-_____________________________________________________________________________
 
 MI602:
 
@@ -79,7 +78,6 @@ Content:
 Course Structure: Module submission: 60%
 End Term Jury: 40%
 
-______________________________________________________________________________
 
 MI603
 
@@ -117,7 +115,6 @@ Content:
 Course Structure: Module submission: 60%
 End Term Jury: 40%
 
-_____________________________________________________________________________
 
 MI604:
 
@@ -142,7 +139,6 @@ Content:
 Course Structure: Module submission: 60%
 End Term Jury: 40%
 
-______________________________________________________________________________
 
 MI605:
 

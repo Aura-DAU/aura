@@ -125,10 +125,7 @@ schedule is as under:
 
 | Particular | All Programs |
 |---|---|
-| Tuition Fee*
-[for course(s) other than internship / Value Added Courses] | Rs. 25,000/- per course with maximum tuition fees applicable will not be more
-than the half of the semester tuition fee applicable to respective batch for
-students admitted through other than DAFS (NRI-FN) category. |
+| Tuition Fee* [for course(s) other than internship / Value Added Courses] | Rs. 25,000/- per course with maximum tuition fees applicable will not be more than the half of the semester tuition fee applicable to respective batch for students admitted through other than DAFS (NRI-FN) category. |
 | Registration Fee | Rs. 1,000/- |
 
 

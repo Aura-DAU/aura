@@ -18,7 +18,6 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 ## Main Content
 
 Course Plan Proposal under CEP 
-_______________________________________________________________________________ 
 Please see CEP Policy Document 
 ☐ Conference 
 ☐ Short-term Course 

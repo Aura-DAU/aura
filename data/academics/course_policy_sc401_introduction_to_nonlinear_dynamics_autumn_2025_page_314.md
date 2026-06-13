@@ -49,7 +49,6 @@ Reference Books:
 Jordan & P. Smith, Oxford University Press
 
 Assessment Method: The total grade will be based on assignments (30%) and scheduled examinations 
-(70%).
 
 Course Outcomes: 
 The course is expected to inspire confidence among engineering undergraduates to enable them to 
@@ -94,8 +93,7 @@ Lectures |
 | 3 | Two-Dimensional Systems |  | 15 |
 |  | 3.1 | Coupled autonomous systems. Phase portraits. |  |
 |  | 3.2 | Linearization, fixed points and their classification. |  |
-|  | 3.3 | Systems in social and biological dynamics: love affairs, arms race,
-predator-prey interactions, competitive exclusion, etc. |  |
+|  | 3.3 | Systems in social and biological dynamics: love affairs, arms race, predator-prey interactions, competitive exclusion, etc. |  |
 |  | 3.4 | Conservative and reversible systems. |  |
 |  | 3.5 | Limit cycles. Bifurcation in two-dimensional systems. |  |
 |  | 3.6 | Introduction to chaotic systems. |  |

@@ -218,7 +218,6 @@ the right course of action is almost always tricky. The course will highlight th
 of this demanding and exciting exercise of distinguishing between the correct choice and
 the merely attractive one, as well as the importance of due diligence in acting on the
 proper course of action in various situations of material existence.
-***
 5
 
 ## Important Information

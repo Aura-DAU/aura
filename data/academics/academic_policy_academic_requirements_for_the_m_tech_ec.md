@@ -224,18 +224,11 @@ Requirements for M Tech (EC) Program.
 | Requirement | Sponsored M Tech |
 |---|---|
 | Course Work | 33 credits |
-| Research | 25 credits min. Part or all the research may be carried
-out at the Sponsoring agency as indicated in the
-agreement. |
-| Guidance | Guide from DA-IICT (mandatory), Co-Guide from
-sponsoring agency (optional). |
-| Infrastructure (Research &
-Course) | DA-IICT and sponsoring agency respectively for the
-part in which student stays at DA- IICT and at the
-Sponsoring agency. |
+| Research | 25 credits min. Part or all the research may be carried out at the Sponsoring agency as indicated in the agreement. |
+| Guidance | Guide from DA-IICT (mandatory), Co-Guide from sponsoring agency (optional). |
+| Infrastructure (Research & Course) | DA-IICT and sponsoring agency respectively for the part in which student stays at DA- IICT and at the Sponsoring agency. |
 | Financial Support (TA/RA) | Not Applicable unless indicated in the agreement |
-| Intellectual Property Rights | DA-IICT jointly with sponsoring agency as specified in
-the agreement. |
+| Intellectual Property Rights | DA-IICT jointly with sponsoring agency as specified in the agreement. |
 
 
 3. ACADEMIC PERFORMANCE REQUIREMENT

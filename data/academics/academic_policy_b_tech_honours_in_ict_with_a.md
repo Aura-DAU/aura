@@ -56,8 +56,7 @@ TOTAL
 |---|---|---|---|
 | Introduction to ICT | 1-0-2-2 | Approaches to Indian Society | 3-0-0-3 |
 | Language and Literature | 3-0-0-3 | Discrete Mathematics | 3-1-0-4 |
-| Calculus | 3-1-0-4 | Digital Logic and Computer
-Organization | 3-0-2-4 |
+| Calculus | 3-1-0-4 | Digital Logic and Computer Organization | 3-0-2-4 |
 | Introduction to Programming | 3-0-0-3 | Data Structures | 3-0-0-3 |
 | Programming Lab | 0-0-2-1 | Data Structures Lab using OOP | 1-0-2-2 |
 | Basic Electronic Circuits | 3-0-2-4 | Electromagnetic Theory | 3-1-0-4 |
@@ -73,8 +72,7 @@ C | Semester-4 | L-T-P-C |
 | Linear Algebra | 3-1-0-4 | Probability and Statistics | 3-1-0-4 |
 | Design and Analysis of Algorithms | 3-1-0-4 | Database Management System | 3-0-2-4 |
 | Computer Systems Programming | 3-0-2-4 | Embedded Hardware Design | 3-0-2-4 |
-| Signal and Systems | 3-0-2-4 | Introduction to Communication
-Systems | 3-0-2-4 |
+| Signal and Systems | 3-0-2-4 | Introduction to Communication Systems | 3-0-2-4 |
 | CoCurr-3 | 0-0-2-1 | CoCurr-4 | 0-0-2-1 |
 | Exploration Project | 0-0-2-1 | Introduction to Robotics | 3-0-2-4 |
 | TOTAL | 19 | TOTAL | 19+(3/4) |
@@ -87,8 +85,7 @@ Systems | 3-0-2-4 |
 | Computer Networks | 3-0-2-4 | ICTE-2 | 3-0-2-4 |
 | ICTE-1 | 3-0-2-4 | TE-2 | 3-0-0-3 |
 | TE-1 | 3-0-0-3 | TE-3 | 3-0-0-3 |
-| Introduction to Autonomous
-Systems | 3-0-2-4 | Robot Programming | 1-0-2-3 |
+| Introduction to Autonomous Systems | 3-0-2-4 | Robot Programming | 1-0-2-3 |
 | Minor Elective-1*1 | 3-x-x-3/4 | Minor Elective-1/2*1/2 | 3-x-x-3/4 |
 | TOTAL | 19+(3/4) | TOTAL | 16+(3/4) |
 
