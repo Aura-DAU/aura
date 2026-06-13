@@ -1,3 +1,5 @@
 allowBuilds:
-  sharp: set this to true or false
-  unrs-resolver: set this to true or false
+  esbuild: true
+  msw: true
+  sharp: true
+  unrs-resolver: true

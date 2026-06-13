@@ -6,6 +6,11 @@ import {
   Citation,
 } from "@/app/api/chat.service";
 import { transcribeAudio } from "@/app/api/audio.service";
+import {
+  getSession,
+  logout as logoutServerAction,
+  updateProfile as updateProfileServerAction,
+} from "@/lib/api/auth.action";
 
 export interface UseAuraChatOptions {
   storageKey?: string;
@@ -95,14 +100,19 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       }
     }
 
-    const savedSession = localStorage.getItem("aura_session");
-    if (savedSession) {
+    const initSession = async () => {
       try {
-        setUserSession(JSON.parse(savedSession));
-      } catch {
-        console.error("Error loading user session");
+        const session = await getSession();
+        if (session) {
+          setUserSession(session);
+        } else {
+          setUserSession(null);
+        }
+      } catch (err) {
+        console.error("Error fetching user session from server:", err);
       }
-    }
+    };
+    void initSession();
 
     const savedThreads = localStorage.getItem("aura_recent_threads");
     if (savedThreads) {
@@ -134,9 +144,21 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     localStorage.setItem(storageKey, JSON.stringify(newMessages));
   };
 
-  const saveProfile = (profile: StudentProfile) => {
+  const saveProfile = async (profile: StudentProfile) => {
     setStudentProfile(profile);
     localStorage.setItem(profileKey, JSON.stringify(profile));
+    if (userSession) {
+      try {
+        await updateProfileServerAction(userSession.email, userSession.role, {
+          name: profile.name,
+          branch: profile.branch,
+          semester: profile.semester,
+          interests: profile.interests,
+        });
+      } catch (err) {
+        console.error("Failed to sync profile changes to server:", err);
+      }
+    }
   };
 
   const startRecording = async () => {
@@ -393,9 +415,14 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     setErrorMessage(null);
   };
 
-  const logout = () => {
+  const logout = async () => {
     setUserSession(null);
     localStorage.removeItem("aura_session");
+    try {
+      await logoutServerAction();
+    } catch (err) {
+      console.error("Error logging out on server:", err);
+    }
     const defaultProfile: StudentProfile = {
       name: "",
       branch: "B.Tech (ICT)",

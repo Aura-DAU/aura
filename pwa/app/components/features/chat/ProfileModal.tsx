@@ -28,6 +28,7 @@ export default function ProfileModal({
   const isParent = userSession?.role === "parent";
 
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormData(profile);
   }, [profile]);
 

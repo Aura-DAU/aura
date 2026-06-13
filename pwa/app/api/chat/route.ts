@@ -5,6 +5,7 @@ export const runtime = "nodejs";
 const HistoryTurnSchema = z.object({
   role: z.enum(["user", "assistant"]),
   content: z.string().min(1).max(8000),
+  timestamp: z.number().optional(),
 });
 
 const StudentProfileSchema = z.object({

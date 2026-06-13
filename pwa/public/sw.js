@@ -49,7 +49,7 @@ self.addEventListener("fetch", (event) => {
   const isNextStatic = url.pathname.startsWith("/_next/static/");
   const isIcon = url.pathname.startsWith("/icons/") || url.pathname === "/favicon.ico";
   const isLogo = url.pathname.match(/^\/dau_logo\.(png|jpg|jpeg|webp|svg)/i);
-  const isManifest = url.pathname.endsWith(".webmanifest") || url.pathname.endsWith(".json");
+  const isManifest = url.pathname === "/manifest.webmanifest" || url.pathname === "/manifest.json";
   const isCacheableAsset = ASSETS_TO_CACHE.includes(url.pathname);
 
   const shouldCache = isNextStatic || isIcon || isLogo || isManifest || isCacheableAsset;
