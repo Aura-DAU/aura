@@ -1,44 +1,100 @@
 import React from "react";
 import { StudentProfile } from "@/app/api/chat.service";
+import { UserSession } from "@/hooks/use-aura-chat";
 
 interface ChatSidebarProps {
   open: boolean;
   onClose: () => void;
+  collapsed?: boolean;
   recentQueries: string[];
   onSelectQuery: (query: string) => void;
   studentProfile: StudentProfile;
   onOpenProfile: () => void;
   onClearChat: () => void;
+  userSession?: UserSession | null;
+}
+
+function DAUCrest({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 40 40"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="40" height="40" rx="6" fill="#1a3a5c" />
+      <path
+        d="M20 9 L30 13 V20 C30 26 25.5 30 20 31.5 C14.5 30 10 26 10 20 V13 Z"
+        stroke="#ffffff"
+        strokeWidth="1.6"
+        fill="none"
+      />
+      <path
+        d="M20 14 L20 26 M14.5 17.5 L25.5 17.5"
+        stroke="#ffffff"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
 }
 
 export default function ChatSidebar({
   open,
   onClose,
+  collapsed = false,
   recentQueries,
   onSelectQuery,
   studentProfile,
   onOpenProfile,
   onClearChat,
+  userSession
 }: ChatSidebarProps) {
+  const getInitials = () => {
+    const name = userSession ? userSession.name : studentProfile.name;
+    if (!name) return "?";
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+  };
+
+  const getDisplayName = () => {
+    if (userSession) return userSession.name;
+    return studentProfile.name || "Guest Account";
+  };
+
+  const getSubtext = () => {
+    if (userSession) {
+      if (userSession.role === "parent") {
+        return `Parent of ${studentProfile.name || "Student"}`;
+      }
+      return `${studentProfile.branch || "B.Tech"} - ${studentProfile.semester || "Sem V"}`;
+    }
+    return studentProfile.name ? `${studentProfile.branch} - ${studentProfile.semester}` : "Configure profile settings";
+  };
+
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col bg-slate-950 border-r border-slate-800/80 transition-transform duration-300 lg:static lg:translate-x-0 ${
+      className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col bg-slate-50 dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-transform duration-200 lg:static lg:translate-x-0 ${
         open ? "translate-x-0" : "-translate-x-full"
-      }`}
+      } ${collapsed ? "lg:hidden" : ""}`}
     >
-      <div className="flex h-16 items-center justify-between px-5 border-b border-slate-900">
+      <div className="flex h-16 items-center justify-between px-5 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-2.5">
-          <span className="w-8 h-8 rounded-lg bg-orange-500 text-white font-semibold text-sm flex items-center justify-center">
-            A
-          </span>
+          <DAUCrest className="w-8 h-8 shrink-0" />
           <div className="leading-tight">
-            <h1 className="text-sm font-semibold text-white">AURA</h1>
-            <span className="text-[11px] text-slate-500">DAU Registry</span>
+            <h1 className="text-sm font-semibold text-slate-900 dark:text-slate-100">AURA</h1>
+            <span className="text-[12px] text-slate-500 dark:text-slate-400">
+              DA-IICT Academic Assistant
+            </span>
           </div>
         </div>
         <button
           onClick={onClose}
-          className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-900 hover:text-white lg:hidden"
+          className="rounded-md p-1.5 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 lg:hidden hover:cursor-pointer"
           type="button"
         >
           <svg
@@ -46,7 +102,7 @@ export default function ChatSidebar({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2.5}
+            strokeWidth={2}
           >
             <path
               strokeLinecap="round"
@@ -61,14 +117,14 @@ export default function ChatSidebar({
         <button
           onClick={onClearChat}
           type="button"
-          className="flex w-full items-center gap-2.5 rounded-lg border border-slate-800 bg-slate-900 hover:bg-slate-800 px-3.5 py-2.5 text-sm font-medium text-slate-200 transition-all duration-150 hover:border-orange-500/40 hover:text-white"
+          className="flex w-full items-center justify-center gap-2.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 px-3.5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 transition-colors duration-150 hover:cursor-pointer"
         >
           <svg
-            className="w-4 h-4 text-orange-500"
+            className="w-4 h-4 text-slate-500"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2.5}
+            strokeWidth={2}
           >
             <path
               strokeLinecap="round"
@@ -76,12 +132,12 @@ export default function ChatSidebar({
               d="M12 4.5v15m7.5-7.5h-15"
             />
           </svg>
-          New Chat
+          New chat
         </button>
       </div>
 
       <div className="flex-1 overflow-y-auto px-3 py-2 space-y-0.5">
-        <span className="block px-3 text-xs font-medium text-slate-500 mb-1.5">
+        <span className="block px-3 text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">
           Recent
         </span>
         {recentQueries.map((thread, idx) => (
@@ -89,35 +145,32 @@ export default function ChatSidebar({
             key={idx}
             onClick={() => onSelectQuery(thread)}
             type="button"
-            className="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm text-slate-300 hover:bg-slate-900 hover:text-white transition-all duration-150"
+            className="flex w-full items-center rounded-md px-3 py-2 text-left text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-colors duration-150 hover:cursor-pointer"
           >
             <span className="truncate">{thread}</span>
           </button>
         ))}
       </div>
 
-      <div className="p-3 border-t border-slate-900">
+      <div className="p-3 border-t border-slate-200 dark:border-slate-800">
         <button
           onClick={onOpenProfile}
           type="button"
-          className="flex w-full items-center gap-3 rounded-lg hover:bg-slate-900 p-2.5 text-left transition-all duration-150 text-slate-100"
+          className="flex w-full items-center gap-3 rounded-md hover:bg-slate-200/70 dark:hover:bg-slate-800 p-2.5 text-left transition-colors duration-150 text-slate-900 dark:text-slate-100 hover:cursor-pointer"
         >
-          <div className="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-400 flex items-center justify-center font-semibold text-xs border border-orange-500/20 shrink-0">
-            {studentProfile.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")}
+          <div className="w-8 h-8 rounded-md bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 flex items-center justify-center font-semibold text-xs border border-brand-100 dark:border-brand-800 shrink-0">
+            {getInitials()}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-slate-200 truncate">
-              {studentProfile.name}
+            <p className="text-sm font-medium text-slate-800 dark:text-slate-200 truncate">
+              {getDisplayName()}
             </p>
             <p className="text-xs text-slate-500 truncate">
-              {studentProfile.branch}
+              {getSubtext()}
             </p>
           </div>
           <svg
-            className="w-4 h-4 text-slate-500"
+            className="w-4 h-4 text-slate-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

@@ -19,6 +19,13 @@ const DEFAULT_THREADS = [
   "Technical Clubs & E-Cell",
 ];
 
+export interface UserSession {
+  role: "student" | "parent";
+  email: string;
+  name: string;
+  linkedStudentEmail?: string;
+}
+
 export function useAuraChat(options: UseAuraChatOptions = {}) {
   const {
     storageKey = "aura_chat_history",
@@ -35,6 +42,8 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   const [activeCitations, setActiveCitations] = useState<Citation[]>([]);
   const [recentThreads, setRecentThreads] =
     useState<string[]>(DEFAULT_THREADS);
+
+  const [userSession, setUserSession] = useState<UserSession | null>(null);
 
   const [studentProfile, setStudentProfile] = useState<StudentProfile>({
     name: "",
@@ -83,6 +92,15 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
         setStudentProfile(JSON.parse(savedProfile));
       } catch {
         console.error("Error loading student profile");
+      }
+    }
+
+    const savedSession = localStorage.getItem("aura_session");
+    if (savedSession) {
+      try {
+        setUserSession(JSON.parse(savedSession));
+      } catch {
+        console.error("Error loading user session");
       }
     }
 
@@ -287,7 +305,11 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       );
     }
 
-    const userMsg: ChatMessage = { role: "user", content: textToSend };
+    const userMsg: ChatMessage = {
+      role: "user",
+      content: textToSend,
+      timestamp: Date.now(),
+    };
     const updatedMessages = [...messages, userMsg];
     saveHistory(updatedMessages);
     setInputText("");
@@ -322,7 +344,10 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
         const content = result.content?.trim()
           ? result.content
           : "I could not find that information in the available university data.";
-        saveHistory([...updatedMessages, { role: "assistant", content }]);
+        saveHistory([
+          ...updatedMessages,
+          { role: "assistant", content, timestamp: Date.now() },
+        ]);
         if (result.citations) {
           setActiveCitations(result.citations);
         }
@@ -333,6 +358,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
             role: "assistant",
             content:
               "Sorry, I had trouble processing your query. Please check your network or try again.",
+            timestamp: Date.now(),
           },
         ]);
         setErrorMessage(
@@ -346,6 +372,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
           role: "assistant",
           content:
             "Error: I encountered a problem communicating with the university registry servers.",
+          timestamp: Date.now(),
         },
       ]);
       setErrorMessage("Network error: Could not reach registry servers.");
@@ -366,6 +393,21 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     setErrorMessage(null);
   };
 
+  const logout = () => {
+    setUserSession(null);
+    localStorage.removeItem("aura_session");
+    const defaultProfile: StudentProfile = {
+      name: "",
+      branch: "B.Tech (ICT)",
+      year: "3rd Year",
+      semester: "Semester V",
+      interests: "Artificial Intelligence, competitive coding",
+    };
+    setStudentProfile(defaultProfile);
+    localStorage.setItem(profileKey, JSON.stringify(defaultProfile));
+    handleClearChat();
+  };
+
   return {
     messages,
     inputText,
@@ -383,5 +425,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     handleMicClick,
     handleSendMessage,
     handleClearChat,
+    userSession,
+    logout,
   };
 }

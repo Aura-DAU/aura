@@ -46,6 +46,16 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --color-brand-50: #eef2f6;
+  --color-brand-100: #dbe4ee;
+  --color-brand-200: #b8c8d9;
+  --color-brand-300: #8aa6bf;
+  --color-brand-400: #4d6f96;
+  --color-brand-500: #2c5079;
+  --color-brand-600: #1a3a5c;
+  --color-brand-700: #152f4b;
+  --color-brand-800: #11253c;
+  --color-brand-900: #0d1c2e;
 }
 
 :root {
@@ -127,4 +137,24 @@
   html {
     @apply font-sans;
   }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-slate-100) 25%,
+    var(--color-slate-200) 37%,
+    var(--color-slate-100) 63%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
 }
