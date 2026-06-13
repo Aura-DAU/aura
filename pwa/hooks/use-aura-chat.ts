@@ -6,6 +6,11 @@ import {
   Citation,
 } from "@/app/api/chat.service";
 import { transcribeAudio } from "@/app/api/audio.service";
+import {
+  getSession,
+  logout as logoutServerAction,
+  updateProfile as updateProfileServerAction,
+} from "@/lib/api/auth.action";
 
 export interface UseAuraChatOptions {
   storageKey?: string;
@@ -18,6 +23,13 @@ const DEFAULT_THREADS = [
   "Lost ID Replacement Steps",
   "Technical Clubs & E-Cell",
 ];
+
+export interface UserSession {
+  role: "student" | "parent";
+  email: string;
+  name: string;
+  linkedStudentEmail?: string;
+}
 
 export function useAuraChat(options: UseAuraChatOptions = {}) {
   const {
@@ -35,6 +47,8 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   const [activeCitations, setActiveCitations] = useState<Citation[]>([]);
   const [recentThreads, setRecentThreads] =
     useState<string[]>(DEFAULT_THREADS);
+
+  const [userSession, setUserSession] = useState<UserSession | null>(null);
 
   const [studentProfile, setStudentProfile] = useState<StudentProfile>({
     name: "",
@@ -86,6 +100,20 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       }
     }
 
+    const initSession = async () => {
+      try {
+        const session = await getSession();
+        if (session) {
+          setUserSession(session);
+        } else {
+          setUserSession(null);
+        }
+      } catch (err) {
+        console.error("Error fetching user session from server:", err);
+      }
+    };
+    void initSession();
+
     const savedThreads = localStorage.getItem("aura_recent_threads");
     if (savedThreads) {
       try {
@@ -116,9 +144,21 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     localStorage.setItem(storageKey, JSON.stringify(newMessages));
   };
 
-  const saveProfile = (profile: StudentProfile) => {
+  const saveProfile = async (profile: StudentProfile) => {
     setStudentProfile(profile);
     localStorage.setItem(profileKey, JSON.stringify(profile));
+    if (userSession) {
+      try {
+        await updateProfileServerAction(userSession.email, userSession.role, {
+          name: profile.name,
+          branch: profile.branch,
+          semester: profile.semester,
+          interests: profile.interests,
+        });
+      } catch (err) {
+        console.error("Failed to sync profile changes to server:", err);
+      }
+    }
   };
 
   const startRecording = async () => {
@@ -287,7 +327,11 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       );
     }
 
-    const userMsg: ChatMessage = { role: "user", content: textToSend };
+    const userMsg: ChatMessage = {
+      role: "user",
+      content: textToSend,
+      timestamp: Date.now(),
+    };
     const updatedMessages = [...messages, userMsg];
     saveHistory(updatedMessages);
     setInputText("");
@@ -322,7 +366,10 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
         const content = result.content?.trim()
           ? result.content
           : "I could not find that information in the available university data.";
-        saveHistory([...updatedMessages, { role: "assistant", content }]);
+        saveHistory([
+          ...updatedMessages,
+          { role: "assistant", content, timestamp: Date.now() },
+        ]);
         if (result.citations) {
           setActiveCitations(result.citations);
         }
@@ -333,6 +380,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
             role: "assistant",
             content:
               "Sorry, I had trouble processing your query. Please check your network or try again.",
+            timestamp: Date.now(),
           },
         ]);
         setErrorMessage(
@@ -346,6 +394,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
           role: "assistant",
           content:
             "Error: I encountered a problem communicating with the university registry servers.",
+          timestamp: Date.now(),
         },
       ]);
       setErrorMessage("Network error: Could not reach registry servers.");
@@ -366,6 +415,26 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     setErrorMessage(null);
   };
 
+  const logout = async () => {
+    setUserSession(null);
+    localStorage.removeItem("aura_session");
+    try {
+      await logoutServerAction();
+    } catch (err) {
+      console.error("Error logging out on server:", err);
+    }
+    const defaultProfile: StudentProfile = {
+      name: "",
+      branch: "B.Tech (ICT)",
+      year: "3rd Year",
+      semester: "Semester V",
+      interests: "Artificial Intelligence, competitive coding",
+    };
+    setStudentProfile(defaultProfile);
+    localStorage.setItem(profileKey, JSON.stringify(defaultProfile));
+    handleClearChat();
+  };
+
   return {
     messages,
     inputText,
@@ -383,5 +452,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     handleMicClick,
     handleSendMessage,
     handleClearChat,
+    userSession,
+    logout,
   };
 }

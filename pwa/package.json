@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync-db": "../.venv/bin/python ../server/api/rag/pipeline/ingestion/sync_db.py"
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -15,6 +16,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^1.17.0",
     "next": "16.2.7",
+    "next-themes": "^0.4.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "shadcn": "^4.10.0",
@@ -27,9 +29,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "jsdom": "^26.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.1.8"
   }
 }
