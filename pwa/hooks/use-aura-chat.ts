@@ -61,6 +61,8 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
 
   const [userSession, setUserSession] = useState<UserSession | null>(null);
 
+  const [userSession, setUserSession] = useState<UserSession | null>(null);
+
   const [studentProfile, setStudentProfile] = useState<StudentProfile>({
     name: "",
     branch: "B.Tech (ICT)",

@@ -11,3 +11,5 @@ python-multipart
 PyYAML
 numpy
 transformers
+thefuzz
+python-Levenshtein

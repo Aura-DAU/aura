@@ -10,6 +10,12 @@ from typing import List, Optional
 app = FastAPI(title="API for RAG System - AURA")
 aura = AURA()
 
+FFMPEG_DIR = r"C:\Users\pushk\Downloads\ffmpeg-2026-06-10-git-b29bdd3715-essentials_build\ffmpeg-2026-06-10-git-b29bdd3715-essentials_build\bin"
+if FFMPEG_DIR not in os.environ["PATH"]:
+    os.environ["PATH"] += os.pathsep + FFMPEG_DIR
+
+UNIVERSITY_PROMPT = "DAIICT, Prof. Hemant A. Patil, Placement Convener, B.Tech, M.Tech, ICT, Gandhinagar."
+
 class HistoryTurn(BaseModel):
     role: str
     content: str
@@ -76,8 +82,12 @@ async def speech(file: UploadFile = File(...)):
 
             temp_path = temp_file.name
 
-        # Whisper inference is CPU-bound; keep it off the event loop.
-        question = await run_in_threadpool(transcribe_audio, temp_path)
+        question = await run_in_threadpool(
+            transcribe_audio, 
+            temp_path, 
+            initial_prompt=UNIVERSITY_PROMPT
+        )
+
 
         return {"text": question}
 
