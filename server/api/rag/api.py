@@ -1,6 +1,7 @@
 import os
 import logging
 import tempfile
+import asyncio
 from typing import List, Optional
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,10 +21,17 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="API for RAG System - AURA")
 aura = AURA()
 
+speech_queue_lock = asyncio.Semaphore(1)
+
+ALLOWED_FRONTEND_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+]
+
 # Production CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=ALLOWED_FRONTEND_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -97,11 +105,13 @@ async def speech(file: UploadFile = File(...)):
                     )
                 temp_file.write(chunk)
 
-        question = await run_in_threadpool(
-            transcribe_audio, 
-            temp_path, 
-            initial_prompt=UNIVERSITY_PROMPT
-        )
+        # ADD THE ASYNC WITH CONTEXT AND INDENT THE EXECUTION
+        async with speech_queue_lock:
+            question = await run_in_threadpool(
+                transcribe_audio, 
+                temp_path, 
+                initial_prompt=UNIVERSITY_PROMPT
+            )
 
         return {"text": question}
 
