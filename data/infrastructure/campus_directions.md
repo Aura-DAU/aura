@@ -13,7 +13,7 @@ description: "A complete and exhaustive database of walking and driving directio
 
 ## Overview
 
-This document presents the course syllabus, policy guidelines, and lecture breakdown for Exhaustive DA-IICT Campus Navigation and Walking Directions.
+This document outlines walking and driving routes between all major facilities, buildings, and landmarks on the DA-IICT campus.
 
 ## Main Content
 
