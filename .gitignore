@@ -145,3 +145,8 @@ vite.config.ts.timestamp-*
 # pycache
 __pycache__/
 *.pyc
+
+# RAG generated artifacts
+server/api/rag/pipeline/vector_store/embeddings.npy
+server/api/rag/pipeline/vector_store/metadata.json
+server/api/rag/processed_chunks/chunks.json

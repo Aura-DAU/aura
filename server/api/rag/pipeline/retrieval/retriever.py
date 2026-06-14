@@ -1,5 +1,5 @@
 import os
-
+from pathlib import Path
 from dotenv import load_dotenv
 from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
@@ -24,8 +24,14 @@ class Retriever:
             MODEL_NAME
         )
 
+        metadata_path = (
+            Path(__file__).resolve().parent.parent
+            / "vector_store"
+            / "metadata.json"
+        )
+
         self.bm25 = BM25Retriever(
-            "pipeline/vector_store/metadata.json"
+            str(metadata_path)
         )
         
         pc = Pinecone(

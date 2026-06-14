@@ -21,6 +21,54 @@ class RetrievalPipeline:
         from pipeline.retrieval.query_rewriter import QueryRewriter
         self.rewriter = QueryRewriter()
 
+    PROGRAM_ALIASES = {
+
+        "ict": "B.Tech. (ICT)",
+        "btech ict": "B.Tech. (ICT)",
+        "b.tech ict": "B.Tech. (ICT)",
+        "b.tech. ict": "B.Tech. (ICT)",
+        "b.tech. (ict)": "B.Tech. (ICT)",
+
+        "csai": "B.Tech. (CS and AI)",
+        "cs ai": "B.Tech. (CS and AI)",
+        "btech csai": "B.Tech. (CS and AI)",
+        "b.tech csai": "B.Tech. (CS and AI)",
+        "b.tech. (cs and ai)": "B.Tech. (CS and AI)",
+        "btech cs and ai": "B.Tech. (CS and AI)",
+
+        "ece": "B.Tech. (ECE-AI)",
+        "ece ai": "B.Tech. (ECE-AI)",
+        "btech ece": "B.Tech. (ECE-AI)",
+        "b.tech. (ece-ai)": "B.Tech. (ECE-AI)",
+        "btech ece ai": "B.Tech. (ECE-AI)",
+
+        "evd": "B.Tech. (EVD)",
+        "btech evd": "B.Tech. (EVD)",
+
+        "mnc": "B.Tech. (MnC)",
+        "btech mnc": "B.Tech. (MnC)",
+
+        "msc it": "M.Sc. (IT)",
+        "m.sc. it": "M.Sc. (IT)",
+        "it": "M.Sc. (IT)",
+
+        "msc data science": "M.Sc. (Data Science)",
+        "m.sc data science": "M.Sc. (Data Science)",
+        "data science": "M.Sc. (Data Science)",
+        "ds": "M.Sc. (Data Science)",
+
+        "msc agriculture analytics": "M.Sc. (Agriculture Analytics)",
+        "m.sc agriculture analytics": "M.Sc. (Agriculture Analytics)",
+        "agriculture analytics": "M.Sc. (Agriculture Analytics)",
+        "aa": "M.Sc. (Agriculture Analytics)",
+
+        "mtech ict": "M.Tech. (ICT)",
+        "m.tech ict": "M.Tech. (ICT)",
+
+        "phd": "Ph.D.",
+        "ph.d": "Ph.D."
+    }
+
     def _build_metadata_filter(
         self,
         plan
@@ -80,9 +128,11 @@ class RetrievalPipeline:
                 }
             }
 
-        program_name = first_value(
-            entities.get(
-                "program_name"
+        program_name = self._canonical_program_name(
+            first_value(
+                entities.get(
+                    "program_name"
+                )
             )
         )
 
@@ -158,7 +208,25 @@ class RetrievalPipeline:
             "msc"
         )
 
+        name = re.sub(
+            r"\bph\s*d\b",
+            "phd",
+            name
+        )
+
         return name
+    
+    def _canonical_program_name(self, name):
+
+        if not name:
+            return None
+
+        key = self._normalize_program_name(name)
+
+        return self.PROGRAM_ALIASES.get(
+            key,
+            name
+        )
 
 
     def get_context(
