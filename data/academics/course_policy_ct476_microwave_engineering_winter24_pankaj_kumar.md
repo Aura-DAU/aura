@@ -4,8 +4,7 @@ url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_
 category: "Academics"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
----
-# CT476 Microwave Engineering Winter24 - Pankaj Kumar
+---# CT476 Microwave Engineering Winter24 - Pankaj Kumar
 
 **Last Modified:** 2023-12-19
 
@@ -15,15 +14,14 @@ This document presents the course syllabus, policy guidelines, and lecture break
 
 ## Main Content
 
-Grading Policy CT476 ( Microwave Engineering ) 
-1) Class Attenda nce= 15%  
-2) 1st In-sem= 15%  
-3) 2nd In sem= 15%  
-4) Lab= 15%  
-5) Endsem= 40%  
- 
-Details of cours e content can be found at 
-https://www.daiict.ac.in/btech -ict under sy llabus of the 
-program.  
- 
+
+
+### Grading
+
+Policy CT476 ( Microwave Engineering ) 1) Class Attenda nce= 15% 2) 1st In-sem= 15% 3) 2nd In sem=
+15% 4) Lab= 15% 5) Endsem= 40%
+
+Details of cours e content can be found at https://www.daiict.ac.in/btech -ict under sy llabus of
+the program.
+
 Course Instructor: https://www.daiict.ac.in/faculty -details/5238

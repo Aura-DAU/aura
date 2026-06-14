@@ -6,25 +6,30 @@ scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
 version: "v2"
 description: "A complete and exhaustive database of walking and driving directions covering every possible route between all buildings, facilities, and landmarks on the DA-IICT campus."
----
-# Exhaustive DA-IICT Campus Navigation and Walking Directions
+---# Exhaustive DA-IICT Campus Navigation and Walking Directions
 
 **Last Modified:** Unknown
 
 ## Overview
 
-This document presents the course syllabus, policy guidelines, and lecture breakdown for Exhaustive DA-IICT Campus Navigation and Walking Directions.
+This document provides comprehensive campus navigation and walking directions for DA-IICT, detailing routes between key academic buildings, hostels, and administrative facilities.
 
 ## Main Content
 
 * **To Library (F):** Enter Main Gate, walk straight to the circular Lotus Point (LP). Take the red-brick pedestrian path curving East (right). Walk past Faculty Blocks 1, 2, 3, and 4 on your right. The Library is on the left.
 * **To LAB Building (H):** Enter Main Gate to the Lotus Point (LP). Take the direct pedestrian path curving slightly left (North-West). The large central LAB building will be right in front of you.
-* **To CEP Building (G):** Walk straight North past the Lotus Point (LP), taking the path between the LAB (left) and Library (right). CEP is directly North of the Lotus Point (LP).
+* **To CEP Building (G):** Walk straight North past the Lotus Point (LP), taking the path between the LAB (left) and Library (right).
+
+CEP is directly North of the Lotus Point (LP).
 * **To Lecture Theatres 1, 2, 3 (I, J, K):** From Lotus Point (LP), take the far-left (West) pedestrian path. Follow it along the South side of the LAB building. The LTs are clustered at the end of this path on the West boundary.
 * **To Boys Hostel (L):** From Lotus Point (LP), you can either take the West Peripheral Road (for vehicles) all the way North, OR walk straight through the campus core passing the LAB and CEP, continuing North-West on the red pathways until reaching the Boys Hostel complex.
-* **To Girls Hostel (Q) & SAC-2 (P):** Immediately upon entering the Main Gate, turn right (East) onto the yellow peripheral vehicle road. Follow it past the Faculty Blocks and Library. The Girls Hostel and SAC-2 are on the far East side.
+* **To Girls Hostel (Q) & SAC-2 (P):** Immediately upon entering the Main Gate, turn right (East) onto the yellow peripheral vehicle road.
+
+Follow it past the Faculty Blocks and Library. The Girls Hostel and SAC-2 are on the far East side.
 * **To Admin Block (A):** Walk to the Library via the Lotus Point (LP). Once at the Library, take the path heading North. The Admin block is just North of Faculty Block-4 (B).
-* **To Canteen (M), Food Court (N), SAC-1 (O) & OAT:** Walk straight North through the campus core from the Lotus Point (LP), passing the LAB and CEP. Continue North on the pedestrian paths to reach the Canteen hub.
+* **To Canteen (M), Food Court (N), SAC-1 (O) & OAT:** Walk straight North through the campus core from the Lotus Point (LP), passing the LAB and CEP.
+
+Continue North on the pedestrian paths to reach the Canteen hub.
 * **To Playground & Sports Courts:** Take the East peripheral road all the way North, or walk through the campus core past the Canteen, heading East towards the large circular ground.
 * **To Bungalows (R):** Enter Main Gate, take an immediate right on the East peripheral road. The Bungalows are in the South-East corner before the Girls Hostel.
 
