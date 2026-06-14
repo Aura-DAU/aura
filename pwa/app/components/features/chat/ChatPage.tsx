@@ -20,7 +20,11 @@ export default function ChatPage() {
     errorMessage,
     setErrorMessage,
     activeCitations,
-    recentThreads,
+    threads,
+    activeThreadId,
+    setActiveThreadId,
+    startNewChat,
+    deleteThread,
     studentProfile,
     saveProfile,
     handleMicClick,
@@ -35,6 +39,8 @@ export default function ChatPage() {
   const [showProfileSettings, setShowProfileSettings] = useState(false);
   const [micSupported, setMicSupported] = useState(true);
   const [confirmClear, setConfirmClear] = useState(false);
+  const [isOffline, setIsOffline] = useState(false);
+  const [installPrompt, setInstallPrompt] = useState<any>(null);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -58,6 +64,44 @@ export default function ChatPage() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMicSupported(hasGetUserMedia && hasMediaRecorder);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    setIsOffline(!window.navigator.onLine);
+
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!installPrompt) return;
+    try {
+      await installPrompt.prompt();
+      const { outcome } = await installPrompt.userChoice;
+      console.log(`PWA installation outcome: ${outcome}`);
+    } catch (err) {
+      console.error("Failed to prompt PWA install:", err);
+    } finally {
+      setInstallPrompt(null);
+    }
+  };
 
   useEffect(() => {
     return () => {
@@ -99,14 +143,19 @@ export default function ChatPage() {
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         collapsed={desktopSidebarCollapsed}
-        recentQueries={recentThreads}
-        onSelectQuery={(q) => {
-          setInputText(q);
+        threads={threads}
+        activeThreadId={activeThreadId}
+        onSelectThread={(id) => {
+          setActiveThreadId(id);
+          setSidebarOpen(false);
+        }}
+        onDeleteThread={deleteThread}
+        onNewChat={() => {
+          startNewChat();
           setSidebarOpen(false);
         }}
         studentProfile={studentProfile}
         onOpenProfile={() => setShowProfileSettings(true)}
-        onClearChat={handleClearChat}
         userSession={userSession}
       />
 
@@ -173,6 +222,28 @@ export default function ChatPage() {
           </div>
 
           <div className="flex items-center gap-3">
+            {installPrompt && (
+              <button
+                onClick={handleInstallClick}
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-md bg-brand-50 dark:bg-brand-900/50 text-brand-600 dark:text-brand-300 border border-brand-200 dark:border-brand-800 hover:bg-brand-100 dark:hover:bg-brand-900 transition-all hover:scale-105 active:scale-95 duration-200 shadow-sm"
+                title="Install AURA App"
+              >
+                <svg
+                  className="w-4 h-4 text-brand-600 dark:text-brand-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                  />
+                </svg>
+                <span className="hidden sm:inline">Install App</span>
+              </button>
+            )}
             <ThemeToggle />
             {userSession ? (
               <div className="flex items-center gap-3">
@@ -227,6 +298,17 @@ export default function ChatPage() {
           </div>
         </header>
 
+        {isOffline && (
+          <div className="bg-rose-50 dark:bg-rose-950/30 border-b border-rose-200 dark:border-rose-900/50 px-6 py-2.5 flex items-center justify-between gap-3 text-rose-800 dark:text-rose-300 text-[13px] shrink-0">
+            <div className="flex items-center gap-2.5">
+              <span className="w-5 h-5 rounded-full bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-400 flex items-center justify-center shrink-0 text-xs font-bold animate-pulse">
+                ⚡
+              </span>
+              <span>Connection lost. You are currently offline. You can still view previous chats.</span>
+            </div>
+          </div>
+        )}
+
         {errorMessage && (
           <div className="bg-amber-50 border-b border-amber-200 px-6 py-2.5 flex items-center justify-between gap-3 text-amber-800 text-[13px] shrink-0">
             <div className="flex items-center gap-2.5">
@@ -266,11 +348,11 @@ export default function ChatPage() {
                 ref={textareaRef}
                 rows={1}
                 maxLength={2000}
-                placeholder="Ask AURA about exams, curfews, clubs, maps, leave policies..."
+                placeholder={isOffline ? "You are offline. Please reconnect to send messages." : "Ask AURA about exams, curfews, clubs, maps, leave policies..."}
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={handleKeyDown}
-                disabled={loading || isRecording}
+                disabled={loading || isRecording || isOffline}
                 className="w-full resize-none bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none disabled:opacity-50 leading-relaxed max-h-[200px]"
               />
               <div className="flex items-center justify-between">
@@ -278,13 +360,13 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={handleMicClick}
-                    disabled={loading || isTranscribing}
+                    disabled={loading || isTranscribing || isOffline}
                     className={`p-2 rounded-md transition-colors duration-150 shrink-0 ${
                       isRecording
                         ? "bg-red-500 text-white"
-                        : "text-slate-500 hover:bg-slate-100 hover:text-slate-700"
+                        : "text-slate-500 hover:bg-slate-100 hover:text-slate-700 disabled:opacity-30 disabled:cursor-not-allowed"
                     }`}
-                    title={isRecording ? "Stop recording" : "Record voice input"}
+                    title={isOffline ? "Voice input unavailable offline" : isRecording ? "Stop recording" : "Record voice input"}
                   >
                     {isTranscribing ? (
                       <svg
@@ -348,9 +430,9 @@ export default function ChatPage() {
                 )}
                 <button
                   type="submit"
-                  disabled={!inputText.trim() || loading || isRecording}
+                  disabled={!inputText.trim() || loading || isRecording || isOffline}
                   className="bg-brand-600 text-white p-2 rounded-md hover:bg-brand-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors shrink-0"
-                  title="Send message"
+                  title={isOffline ? "Offline" : "Send message"}
                 >
                   <svg
                     className="w-4 h-4"
