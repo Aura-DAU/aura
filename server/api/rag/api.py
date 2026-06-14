@@ -1,18 +1,33 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.concurrency import run_in_threadpool
+import os
+import logging
 import tempfile
+from typing import List, Optional
+from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from rag import AURA
 from pipeline.speech import transcribe_audio
-import os
-from typing import List, Optional
+
+# Ensure api runtime logging inherits standard visibility structures
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="API for RAG System - AURA")
 aura = AURA()
 
-FFMPEG_DIR = r"C:\Users\pushk\Downloads\ffmpeg-2026-06-10-git-b29bdd3715-essentials_build\ffmpeg-2026-06-10-git-b29bdd3715-essentials_build\bin"
-if FFMPEG_DIR not in os.environ["PATH"]:
-    os.environ["PATH"] += os.pathsep + FFMPEG_DIR
+# Production CORS configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 UNIVERSITY_PROMPT = "DAIICT, Prof. Hemant A. Patil, Placement Convener, B.Tech, M.Tech, ICT, Gandhinagar."
 
@@ -38,8 +53,7 @@ MAX_AUDIO_BYTES = 25 * 1024 * 1024
 @app.post("/chat")
 def chat(request: ChatRequest):
     history = (
-        [turn.model_dump()
-         for turn in request.history]
+        [turn.model_dump() for turn in request.history]
         if request.history
         else []
     )
@@ -70,6 +84,9 @@ async def speech(file: UploadFile = File(...)):
             )
         
         with tempfile.NamedTemporaryFile(delete=False, suffix=extension) as temp_file:
+            # FIX: Assign the trackable path path immediately on resource allocation
+            temp_path = temp_file.name
+            
             size = 0
             while chunk := await file.read(1024 * 1024):
                 size += len(chunk)
@@ -80,26 +97,24 @@ async def speech(file: UploadFile = File(...)):
                     )
                 temp_file.write(chunk)
 
-            temp_path = temp_file.name
-
         question = await run_in_threadpool(
             transcribe_audio, 
             temp_path, 
             initial_prompt=UNIVERSITY_PROMPT
         )
 
-
         return {"text": question}
 
     except HTTPException:
         raise
     except Exception as e:
-        print("Speech processing Error")
-        print(e)
-
+        logger.error("Request failed during processing", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
     
     finally:
-        
+        # The cleanup hook is now completely guaranteed to wipe the file if it exists
         if temp_path and os.path.exists(temp_path):
-            os.remove(temp_path)
+            try:
+                os.remove(temp_path)
+            except Exception as cleanup_error:
+                logger.error(f"Failed to remove temp file at {temp_path}: {cleanup_error}")
