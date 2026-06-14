@@ -26,21 +26,37 @@ class RetrievalPipeline:
         plan
     ):
 
+        def first_value(value):
+
+            if isinstance(value, list):
+                return value[0] if value else None
+
+            return value
+
         entities = plan.get(
             "entities",
             {}
         )
 
-        faculty_name = entities.get(
-            "faculty_name"
+        course_code = first_value(
+            entities.get(
+                "course_code"
+            )
         )
 
-        if isinstance(faculty_name, list):
-            faculty_name = (
-                faculty_name[0]
-                if faculty_name
-                else None
+        if course_code:
+
+            return {
+                "course_code": {
+                    "$eq": course_code
+                }
+            }
+
+        faculty_name = first_value(
+            entities.get(
+                "faculty_name"
             )
+        )
 
         if faculty_name:
 
@@ -50,18 +66,100 @@ class RetrievalPipeline:
                 }
             }
 
-        program_name = entities.get(
-            "program_name"
+        event_name = first_value(
+            entities.get(
+                "event_name"
+            )
         )
 
-        if isinstance(program_name, str):
+        if event_name:
+
+            return {
+                "event_name": {
+                    "$eq": event_name
+                }
+            }
+
+        program_name = first_value(
+            entities.get(
+                "program_name"
+            )
+        )
+
+        semester = first_value(
+            entities.get(
+                "semester"
+            )
+        )
+
+        if program_name and semester:
+
+            return {
+                "$and": [
+                    {
+                        "program_name": {
+                            "$eq": program_name
+                        }
+                    },
+                    {
+                        "semester": {
+                            "$eq": semester
+                        }
+                    }
+                ]
+            }
+
+        if program_name:
+
             return {
                 "program_name": {
                     "$eq": program_name
                 }
             }
-    
+
         return None
+    
+
+    def _normalize_program_name(self, name):
+        if not name:
+            return ""
+            
+        name = name.lower()
+
+        name = re.sub(
+            r"[^a-z0-9 ]",
+            " ",
+            name
+        )
+
+        name = re.sub(
+            r"\s+",
+            " ",
+            name
+        ).strip()
+
+        name = name.replace(
+            "b tech",
+            "btech"
+        )
+
+        name = name.replace(
+            "m tech",
+            "mtech"
+        )
+
+        name = name.replace(
+            "m des",
+            "mdes"
+        )
+
+        name = name.replace(
+            "m sc",
+            "msc"
+        )
+
+        return name
+
 
     def get_context(
         self,

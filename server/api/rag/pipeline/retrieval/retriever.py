@@ -8,6 +8,9 @@ from sentence_transformers import SentenceTransformer
 # embeddings or retrieval silently degrades — single source of truth.
 from pipeline.ingestion.chunking.config import MODEL_NAME
 
+from pipeline.retrieval.bm25_retriever import BM25Retriever
+from pipeline.retrieval.rrf import fuse
+
 TOP_K = 3
 
 
@@ -21,6 +24,10 @@ class Retriever:
             MODEL_NAME
         )
 
+        self.bm25 = BM25Retriever(
+            "pipeline/vector_store/metadata.json"
+        )
+        
         pc = Pinecone(
             api_key=os.getenv(
                 "PINECONE_API_KEY"
@@ -73,4 +80,17 @@ class Retriever:
                 }
             )
 
-        return chunks
+        dense_results = chunks
+
+        bm25_results = self.bm25.retrieve(
+            query=query,
+            top_k=top_k,
+            metadata_filter=metadata_filter
+        )
+
+        fused_results = fuse(
+            dense_results,
+            bm25_results
+        )
+
+        return fused_results

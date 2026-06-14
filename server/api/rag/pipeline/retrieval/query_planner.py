@@ -39,6 +39,9 @@ Available entity types:
 - program_name
 - department_name
 - scholarship_name
+- course_code
+- course_name
+- semester
 
 Extract entities when present.
 
@@ -66,6 +69,7 @@ Rules:
   programs, events, scholarships, or major topics are referenced.
 - When multiple entities of the same type are present,
   store them as arrays.
+- When a faculty member, program, event, scholarship, or department is mentioned by name, it MUST be extracted into the entities field.
 
 Return ONLY valid JSON.
 
@@ -95,7 +99,10 @@ Who is Abhishek Jindal?
     "intent": "overview",
     "retrieval_intent": "faculty_profile",
     "entity_confidence": 0.98,
-    "multi_entity_query": false
+    "multi_entity_query": false,
+    "entities": {
+        "faculty_name": "Abhishek Jindal"
+    }
 }
 
 Query:
@@ -106,7 +113,10 @@ What are Abhishek Jindal's research interests?
     "intent": "research",
     "retrieval_intent": "faculty_research",
     "entity_confidence": 0.98,
-    "multi_entity_query": false
+    "multi_entity_query": false,
+    "entities": {
+        "faculty_name": "Abhishek Jindal"
+    }
 }
 
 Query:
@@ -125,6 +135,49 @@ Compare BTech CSAI and BTech ICT
             "BTech ICT"
         ]
     }
+}
+
+Query:
+What semester is IT205 offered in?
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "program_curriculum",
+  "entity_confidence": 0.99,
+  "multi_entity_query": false,
+  "entities": {
+    "course_code": "IT205"
+  }
+}
+
+Query:
+How many credits does IT205 have?
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "program_curriculum",
+  "entity_confidence": 0.99,
+  "multi_entity_query": false,
+  "entities": {
+    "course_code": "IT205"
+  }
+}
+
+Query:
+List all courses in Semester I for BTech ICT
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "program_curriculum",
+  "entity_confidence": 0.98,
+  "multi_entity_query": false,
+  "entities": {
+    "program_name": "BTech ICT",
+    "semester": "I"
+  }
 }
 
 query_decomposition:

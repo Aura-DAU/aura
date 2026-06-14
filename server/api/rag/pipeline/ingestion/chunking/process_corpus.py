@@ -10,6 +10,7 @@ from metadata_extractors import extract_event_metadata, extract_program_name, ex
 
 def extract_curriculum_chunks(body, metadata, file_path):
     lines = body.split("\n")
+    current_semester = None
     table_started = False
     headers = []
     rows = []
@@ -17,6 +18,15 @@ def extract_curriculum_chunks(body, metadata, file_path):
     
     for line in lines:
         line_strip = line.strip()
+        semester_match = re.match(
+            r"^#{2,6}\s*Semester\s+([IVX]+|\d+)$",
+            line_strip,
+            re.IGNORECASE
+        )
+
+        if semester_match:
+            current_semester = semester_match.group(1).upper()
+
         if line_strip.startswith("|"):
             if not table_started:
                 table_started = True
@@ -28,12 +38,12 @@ def extract_curriculum_chunks(body, metadata, file_path):
                 rows.append(row_cells)
         else:
             if table_started:
-                tables.append((headers, rows))
+                tables.append((headers, rows, current_semester))
                 table_started = False
                 headers = []
                 rows = []
     if table_started:
-        tables.append((headers, rows))
+        tables.append((headers, rows, current_semester))
 
     custom_chunks = []
     semester_courses = {}
@@ -43,10 +53,13 @@ def extract_curriculum_chunks(body, metadata, file_path):
         "i": "I", "ii": "II", "iii": "III", "iv": "IV", "v": "V", "vi": "VI", "vii": "VII", "viii": "VIII"
     }
 
-    for headers, rows in tables:
+    for headers, rows, table_semester in tables:
         header_lower = [h.lower() for h in headers]
         
-        has_code = any("code" in h for h in header_lower)
+        has_code = any(
+            ("code" in h) or (h == "category") 
+            for h in header_lower
+        )
         has_name = any("name" in h or "title" in h or "subject" in h for h in header_lower)
         
         if not (has_code and has_name):
@@ -61,7 +74,7 @@ def extract_curriculum_chunks(body, metadata, file_path):
         for idx, h in enumerate(header_lower):
             if "sem" in h:
                 col_sem = idx
-            elif "code" in h:
+            elif "code" in h or h == "category":
                 col_code = idx
             elif "name" in h or "title" in h or "subject" in h:
                 col_name = idx
@@ -74,12 +87,24 @@ def extract_curriculum_chunks(body, metadata, file_path):
             if len(row) <= max(col_code, col_name):
                 continue
             course_code = row[col_code].strip()
+            # if col_code != -1 and h == "category":
+            #     if not re.match(
+            #         r"^#{2,6}\s*Semester\s+([IVX]+|\d+)$",
+            #         course_code,
+            #         re.IGNORECASE
+            #     ): 
+            #         continue
+
             course_name = row[col_name].strip()
             
             if not course_code or not course_name or course_code == "Course Code":
                 continue
                 
-            sem_raw = row[col_sem].strip() if col_sem != -1 and col_sem < len(row) else ""
+            if col_sem != -1 and col_sem < len(row):
+                sem_raw = row[col_sem].strip()
+            else:
+                sem_raw = table_semester or ""
+
             sem_roman = roman_map.get(sem_raw.lower(), sem_raw)
             if not sem_roman:
                 sem_roman = "I"
@@ -107,6 +132,9 @@ def extract_curriculum_chunks(body, metadata, file_path):
                 "h3": f"Semester {sem_roman}",
                 "section_type": "curriculum",
                 "semester": sem_roman,
+                "course_code": course_code,
+                "course_name": course_name,
+                "course_type": course_type,
                 "credits": credits_val
             })
             
@@ -129,7 +157,11 @@ def extract_curriculum_chunks(body, metadata, file_path):
             "h2": f"Semester {sem} Courses",
             "h3": None,
             "section_type": "curriculum",
-            "semester": sem
+            "semester": sem,
+            "course_code": None,
+            "course_name": None,
+            "course_type": None,
+            "credits": None
         })
         
     return custom_chunks
@@ -272,6 +304,26 @@ def process_markdown_file(file_path):
 
         if program_name:
             chunk_record["program_name"] = program_name
+
+        chunk_record["semester"] = custom.get(
+            "semester"
+        )
+
+        chunk_record["course_code"] = custom.get(
+            "course_code"
+        )
+
+        chunk_record["course_name"] = custom.get(
+            "course_name"
+        )
+
+        chunk_record["course_type"] = custom.get(
+            "course_type"
+        )
+
+        chunk_record["credits"] = custom.get(
+            "credits"
+        )
 
         chunks.append(chunk_record)
 

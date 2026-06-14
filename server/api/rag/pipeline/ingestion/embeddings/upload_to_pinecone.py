@@ -185,6 +185,60 @@ def main():
                 "venue"
             ]
         
+        if chunk.get(
+            "semester"
+        ):
+
+            vector["metadata"][
+                "semester"
+            ] = chunk[
+                "semester"
+            ]
+
+
+        if chunk.get(
+            "course_code"
+        ):
+
+            vector["metadata"][
+                "course_code"
+            ] = chunk[
+                "course_code"
+            ]
+
+
+        if chunk.get(
+            "course_name"
+        ):
+
+            vector["metadata"][
+                "course_name"
+            ] = chunk[
+                "course_name"
+            ]
+
+
+        if chunk.get(
+            "course_type"
+        ):
+
+            vector["metadata"][
+                "course_type"
+            ] = chunk[
+                "course_type"
+            ]
+
+
+        if chunk.get(
+            "credits"
+        ):
+
+            vector["metadata"][
+                "credits"
+            ] = chunk[
+                "credits"
+            ]
+        
         if chunk.get("h1"):
             vector["metadata"]["h1"] = chunk["h1"]
         
