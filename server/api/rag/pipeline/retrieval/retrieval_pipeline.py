@@ -21,6 +21,32 @@ class RetrievalPipeline:
         from pipeline.retrieval.query_rewriter import QueryRewriter
         self.rewriter = QueryRewriter()
 
+    def _expand_semesters(self, query):
+        arabic_to_roman = {
+            "1": "I", "2": "II", "3": "III", "4": "IV",
+            "5": "V", "6": "VI", "7": "VII", "8": "VIII"
+        }
+        roman_to_arabic = {v: k for k, v in arabic_to_roman.items()}
+        
+        replaced = False
+        # Expand Arabic to Roman, e.g. "semester 1" -> "semester 1 (semester I)"
+        for num, roman in arabic_to_roman.items():
+            pattern_sem = rf"\b(semester|sem)\s*[-_]?\s*{num}\b"
+            if re.search(pattern_sem, query, re.IGNORECASE):
+                query = re.sub(pattern_sem, f"\\1 {num} (\\1 {roman})", query, flags=re.IGNORECASE)
+                replaced = True
+                
+        # If we already expanded Arabic to Roman, skip Roman to Arabic to prevent recursive nesting
+        if not replaced:
+            # Expand Roman to Arabic, e.g. "semester I" -> "semester I (semester 1)"
+            for roman in sorted(roman_to_arabic.keys(), key=len, reverse=True):
+                num = roman_to_arabic[roman]
+                pattern_sem = rf"\b(semester|sem)\s*[-_]?\s*{roman}\b"
+                if re.search(pattern_sem, query, re.IGNORECASE):
+                    query = re.sub(pattern_sem, f"\\1 {roman} (\\1 {num})", query, flags=re.IGNORECASE)
+                
+        return query
+
     def _build_metadata_filter(
         self,
         plan
@@ -68,6 +94,7 @@ class RetrievalPipeline:
         query,
         history=None
     ):
+        original_query = query
         
         REFERENCE_WORDS = [
             "he",
@@ -118,6 +145,8 @@ class RetrievalPipeline:
             query
         )
 
+        query = self._expand_semesters(query)
+
         entities = plan.get("entities", {})
 
         event_name = entities.get("event_name")
@@ -162,10 +191,11 @@ class RetrievalPipeline:
             all_results = []
 
             for subquery in decomposed_queries:
+                subquery_expanded = self._expand_semesters(subquery)
 
                 sub_results = (
                     self.retriever.retrieve(
-                        query=subquery,
+                        query=subquery_expanded,
                         top_k=retrieval_top_k,
                         metadata_filter=None
                     )
@@ -173,7 +203,7 @@ class RetrievalPipeline:
 
                 sub_reranked = (
                     self.reranker.rerank(
-                        query=subquery,
+                        query=subquery_expanded,
                         results=sub_results,
                         plan=plan
                     )
@@ -253,7 +283,7 @@ class RetrievalPipeline:
         return {
 
             "query":
-                query,
+                original_query,
 
             "plan":
                 plan,
