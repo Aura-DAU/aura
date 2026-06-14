@@ -31,11 +31,11 @@ def run_step(script_name, cwd):
         print(f"\n[SUCCESS] Step {script_name} completed.")
 
 def main():
-    base_dir = Path(__file__).resolve().parents[3]
-    print(f"Base Directory: {base_dir}")
+    current_dir = Path(__file__).resolve().parent
+    print(f"Current Ingestion Directory: {current_dir}")
     
-    chunking_dir = base_dir / "server" / "api" / "rag" / "pipeline" / "ingestion" / "chunking"
-    embeddings_dir = base_dir / "server" / "api" / "rag" / "pipeline" / "ingestion" / "embeddings"
+    chunking_dir = current_dir / "chunking"
+    embeddings_dir = current_dir / "embeddings"
     
     # Step 1: Chunking
     run_step("process_all.py", chunking_dir)
