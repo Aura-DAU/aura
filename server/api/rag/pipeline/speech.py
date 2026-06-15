@@ -42,64 +42,67 @@ logger.info("Whisper base model loaded and ready.")
 
 
 def clean_transcription(raw_text: str) -> str:
-    # 1. STRIP WHISPER SILENCE HALLUCINATIONS
-    # Whisper commonly generates single words like "You", "Thank you.", "Yeah." during silent audio segments
     hallucination_words = {"you", "thank", "yeah", "uh", "um"}
     text_clean = raw_text.strip()
-    
-    # Remove isolated hallucination words at the very beginning if followed by a space
+
     for word in hallucination_words:
         text_clean = re.sub(r'^\b' + re.escape(word) + r'\b\s*', '', text_clean, flags=re.IGNORECASE)
 
     cleaned_text = text_clean
     words = text_clean.split()
     words_to_check = words[:30]
-    
-    # Track exact matches to exclude them from the fuzzy pipeline loop entirely
+
     already_matched_names = set()
     for name in FACULTY_LIST:
         if name in text_clean:
             already_matched_names.add(name)
-            
+
     first_letters = {name[0].lower() for name in FACULTY_LIST if name and name not in already_matched_names}
     text_letters = {word[0].lower() for word in words_to_check if word}
-    
+
     if not first_letters.intersection(text_letters) and not already_matched_names:
-        # Pass directly to deduplication if no fuzzy candidates match initial bounds
         return re.sub(r'\b(\w+)(?:\s+\1)+\b', r'\1', cleaned_text, flags=re.IGNORECASE)
-        
-    # Track strings we have already substituted during this execution pass 
-    # to prevent smaller window sizes from matching sub-fragments of an already-corrected name.
+
     substituted_phrases = set()
 
     for window_size in [3, 2]:
         if len(words_to_check) < window_size:
             continue
-            
+
         for i in range(len(words_to_check) - window_size + 1):
-            phrase = " ".join(words_to_check[i:i+window_size])
-            
-            # Skip checking if this phrase is a subset of a change we already committed
+            raw_phrase = " ".join(words_to_check[i:i+window_size])
+
+            # Strip leading/trailing punctuation for matching, keep track of it
+            phrase = raw_phrase.strip(".,!?;:\"'")
+            trailing_punct = raw_phrase[len(raw_phrase.rstrip(".,!?;:\"'")):]
+
+            if not phrase:
+                continue
+
             if any(phrase in sub for sub in substituted_phrases):
                 continue
-                
-            match = process.extractOne(phrase, FACULTY_LIST, scorer=fuzz.WRatio)
-            
-            # Enforce strict score requirements to prevent fragment matching
-            if match and match[1] >= 85:
+
+            # Stricter scorer + higher threshold to avoid loose partial matches
+            match = process.extractOne(phrase, FACULTY_LIST, scorer=fuzz.token_sort_ratio)
+
+            if match and match[1] >= 88:
                 correct_name = match[0]
-                
-                # Verify that we aren't turning a word like "Rana" into "Arpit Rana" 
-                # if "Arpit Rana" is already sitting directly next to it.
-                pattern = r'\b' + re.escape(phrase) + r'\b'
-                cleaned_text = re.sub(pattern, correct_name, cleaned_text)
+
+                # Sanity check: reject if word-count difference is too large
+                phrase_word_count = len(phrase.split())
+                name_word_count = len(correct_name.split())
+                if abs(phrase_word_count - name_word_count) > 1:
+                    continue
+
+                # Build pattern that matches the original phrase including
+                # optional trailing punctuation
+                pattern = r'\b' + re.escape(phrase) + r'\b' + re.escape(trailing_punct)
+                replacement = correct_name + trailing_punct
+                cleaned_text = re.sub(pattern, replacement, cleaned_text)
                 substituted_phrases.add(phrase)
-                
-    # 2. CONSECUTIVE DUPLICATION COLLAPSE
-    # This regex catches any word or phrase repeated sequentially (e.g., "Rana Rana" -> "Rana")
-    # It ensures that even if Whisper hallucinates a repetition, it gets flattened.
+
     cleaned_text = re.sub(r'\b(\w+)(?:\s+\1)+\b', r'\1', cleaned_text, flags=re.IGNORECASE)
-                
+
     return cleaned_text
 
 
