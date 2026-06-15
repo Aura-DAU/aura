@@ -28,22 +28,19 @@ class RetrievalPipeline:
         }
         roman_to_arabic = {v: k for k, v in arabic_to_roman.items()}
         
-        replaced = False
         # Expand Arabic to Roman, e.g. "semester 1" -> "semester 1 (semester I)"
         for num, roman in arabic_to_roman.items():
             pattern_sem = rf"\b(semester|sem)\s*[-_]?\s*{num}\b"
             if re.search(pattern_sem, query, re.IGNORECASE):
                 query = re.sub(pattern_sem, f"\\1 {num} (\\1 {roman})", query, flags=re.IGNORECASE)
-                replaced = True
                 
-        # If we already expanded Arabic to Roman, skip Roman to Arabic to prevent recursive nesting
-        if not replaced:
-            # Expand Roman to Arabic, e.g. "semester I" -> "semester I (semester 1)"
-            for roman in sorted(roman_to_arabic.keys(), key=len, reverse=True):
-                num = roman_to_arabic[roman]
-                pattern_sem = rf"\b(semester|sem)\s*[-_]?\s*{roman}\b"
-                if re.search(pattern_sem, query, re.IGNORECASE):
-                    query = re.sub(pattern_sem, f"\\1 {roman} (\\1 {num})", query, flags=re.IGNORECASE)
+        # Expand Roman to Arabic, e.g. "semester I" -> "semester I (semester 1)"
+        # Use negative lookahead (?!\)) to prevent matching roman numerals inside the newly created (semester I) parentheticals
+        for roman in sorted(roman_to_arabic.keys(), key=len, reverse=True):
+            num = roman_to_arabic[roman]
+            pattern_sem = rf"\b(semester|sem)\s*[-_]?\s*{roman}\b(?!\))"
+            if re.search(pattern_sem, query, re.IGNORECASE):
+                query = re.sub(pattern_sem, f"\\1 {roman} (\\1 {num})", query, flags=re.IGNORECASE)
                 
         return query
 

@@ -70,223 +70,121 @@ WDHINV
 
 Semester-wise Curriculum Structure
 
-Majority of foundation courses are offered in the first four semesters and part of the fifth semester, These courses are from the technical areas of Computer Science and Information   Technology, Electronics and Communication; as well as courses in Humanities; Mathematics and Basic Sciences. In the remaining 3 and a half semesters, students take elective courses and do internships and  project: The semester-wise course sequence is provided below:
+Majority of foundation courses are offered in the first four semesters and part of the fifth semester. These courses are from the technical areas of Computer Science and Information Technology, Electronics and Communication; as well as courses in Humanities; Mathematics and Basic Sciences. In the remaining 3 and a half semesters, students take elective courses and do internships and project. The semester-wise course sequence is provided below:
 
-LT-P-
+### Semester I
+| Course Code | Course Title | L-T-P-C | Credits |
+|---|---|---|---|
+| IC-101 | HSS I (Language & Literature) | 3-0-0-3 | 3 |
+| IC-102 | Introduction to Programming | 3-0-0-3 | 3 |
+| IC-103 | Programming Lab | 0-0-4-2 | 2 |
+| IC-104 | Basic Electronic Circuits | 3-0-2-4 | 4 |
+| IC-105 | Maths I (Calculus) | 3-1-0-4 | 4 |
+| IC-106 | Introduction to ICT | 1-0-2-2 | 2 |
+| IC-107 | Co-curricular - 1 | 0-0-2-1 | 1 |
+| | **Total Course Credits (Excl. Co-curricular)** | | **18** |
 
-LT-P-
-
-Semester-1
-
-Semester-2 1-0-2-2 Approaches to Indian Society
-
-C
-
-Introduction to ICT 3-0-0-3 Language and Literature 3-0-0-3 Discrete Mathematics 3-1-0-4 Digital Logic and Computer Calculus 3-1-0-4 Organization 3-0-2-4
-
-Introduction
-
-to
-
-Programming 3-0-0-3 Data Structures Programming Lab 0-0-2-1 Data Structures Lab using OOP Basic Electronic Circuits 3-0-2-4 Electromagnetic Theory Exploration Project CoCurr-1 0-0-2-1 CoCurr-2 TOTAL 17 TOTAL
-
-3-0-0-3
-
-1-0-2-2
-
-3-1-0-4
-
-0-1-0-1
-
-0-0-2-1
-
-20
-
-LT-P-
-
-Semester-3 Science
-
-Semester-4
-
-LTPC
-
-Technology, 3-0-0-3 Principles of Economics
-
-3-0-0-3
-
-NDHY
+### Semester II
+| Course Code | Course Title | L-T-P-C | Credits |
+|---|---|---|---|
+| IC-108 | HSS II (Approaches to Indian Society) | 1-0-2-2 | 2 |
+| IC-109 | Discrete Mathematics | 3-1-0-4 | 4 |
+| IC-110 | Digital Logic and Computer Organization | 3-0-2-4 | 4 |
+| IC-111 | Data Structures | 3-0-0-3 | 3 |
+| IC-112 | Data Structures Lab using OOP | 1-0-2-2 | 2 |
+| IC-113 | Electromagnetic Theory | 3-1-0-4 | 4 |
+| IC-114 | Co-curricular - 2 | 0-0-2-1 | 1 |
+| | **Total Course Credits (Excl. Co-curricular)** | | **19** |
 
 ## Page 7
 
-Society Linear Algebra 3-1-0-4 Probability and Statistics 3-1-0-4 Design and Analysis of Database Management Algorithms 3-1-0-4 System 3-0-2-4 Computer Systems Programming 3-0-2-4 Embedded Hardware Design 3-0-2-4 Introduction to Communication Signal and Systems 3-0-2-4 Systems 3-0-2-4
+### Semester III
+| Course Code | Course Title | L-T-P-C | Credits |
+|---|---|---|---|
+| IC-215 | HSS III (Science, Technology, Society) | 3-0-0-3 | 3 |
+| IC-216 | Linear Algebra | 3-1-0-4 | 4 |
+| IC-217 | Design and Analysis of Algorithms | 3-1-0-4 | 4 |
+| IC-218 | Computer Systems Programming | 3-0-2-4 | 4 |
+| IC-219 | Signal and Systems | 3-0-2-4 | 4 |
+| | Honours-1 | 3-X-X-3/4 | 3-4 |
+| IC-220 | Co-curricular - 3 | 0-0-2-1 | 1 |
+| | **Total Course Credits (Excl. Co-curricular/Honours)** | | **19** |
 
-3-X-X-
+### Semester IV
+| Course Code | Course Title | L-T-P-C | Credits |
+|---|---|---|---|
+| IC-221 | Principles of Economics | 3-0-0-3 | 3 |
+| IC-222 | Probability and Statistics | 3-1-0-4 | 4 |
+| IC-223 | Database Management System | 3-0-2-4 | 4 |
+| IC-224 | Embedded Hardware Design | 3-0-2-4 | 4 |
+| IC-225 | Introduction to Communication Systems | 3-0-2-4 | 4 |
+| IC-226 | Exploration Project | 0-0-2-1 | 1 |
+| IC-227 | Co-curricular - 4 | 0-0-2-1 | 1 |
+| | **Total Course Credits (Excl. Co-curricular)** | | **20** |
 
-Honours-1
+### Semester V
+| Course Code | Course Title | L-T-P-C | Credits |
+|---|---|---|---|
+| PC-309 | Software Engineering | 3-0-2-4 | 4 |
+| PC-310 | Digital Communications | 3-0-2-4 | 4 |
+| PC-311 | Computer Networks | 3-0-2-4 | 4 |
+| | ICT Elective - 1 (ICTE-1) | 3-0-2-4 | 4 |
+| | Technical Elective - 1 (TE-1) | 3-0-0-3 | 3 |
+| | Honours-2 | 3-X-X-3/4 | 3-4 |
+| | **Total Course Credits (Excl. Honours)** | | **19** |
 
-3/4
-
-Exploration Project CoCurr-3
-
-0-0-2-1
-
-0-0-2-1
-
-CoCurr-4
-
-0-0-2-1 79+(3/4)
-
-TOTAL
-
-19
-
-TOTAL
-
-Semester-5 LTPC Semester-6 Software Engineering 3-0-2-4 Environmental Science Digital Communications 3-0-2-4 SE-1 Computer Networks 3-0-2-4 ICTE-2 ICTE-1 3-0-2-4 TE-2 TE-1 3-0-0-3 TE-3 3-X-X- Honours-2 3/4 Honours-3 Overload Slot Overload Slot TOTAL 19+(314) TOTAL
-
-LTPC
-
-3-0-0-3
-
-3-0-0-3
-
-3-0-2-4
-
-3-0-0-3
-
-3-0-0-3
-
-3-X-X-
-
-3/4
-
-16+(3/4)
-
-Semester-7
-
-CTPC
-
-Semester-8
-
-LTPc
-
-BTP-1
-
-0-1-6-4
-
-BTP-2 / ITP*
-
-0-2-12-8
-
-ICTE-3
-
-3-0-2-4
-
-OE
-
-3-0-0-3
-
-JNDHINY
+### Semester VI
+| Course Code | Course Title | L-T-P-C | Credits |
+|---|---|---|---|
+| | Environmental Science | 3-0-0-3 | 3 |
+| | Science Elective - 1 (SE-1) | 3-0-0-3 | 3 |
+| | ICT Elective - 2 (ICTE-2) | 3-0-2-4 | 4 |
+| | Technical Elective - 2 (TE-2) | 3-0-0-3 | 3 |
+| | Technical Elective - 3 (TE-3) | 3-0-0-3 | 3 |
+| | Honours-3 | 3-X-X-3/4 | 3-4 |
+| | **Total Course Credits (Excl. Honours)** | | **16** |
 
 ## Page 8
 
-TE-4 HASSE-1
+### Semester VII
+| Course Code | Course Title | L-T-P-C | Credits |
+|---|---|---|---|
+| | BTech Project - 1 (BTP-1) | 0-1-6-4 | 4 |
+| | ICT Elective - 3 (ICTE-3) | 3-0-2-4 | 4 |
+| | Technical Elective - 4 (TE-4) | 3-0-0-3 | 3 |
+| | HASS Elective - 1 (HASSE-1) | 3-0-0-3 | 3 |
+| | Open Elective - 2 (OE-2) | 3-0-0-3 | 3 |
+| | Honours-4 | 3-X-X-3/4 | 3-4 |
+| | **Total Course Credits (Excl. Honours)** | | **17** |
 
-3-0-0-3
+### Semester VIII
+| Course Code | Course Title | L-T-P-C | Credits |
+|---|---|---|---|
+| | BTech Project - 2 (BTP-2) / ITP* | 0-2-12-8 | 8-12 |
+| | Open Elective - 3 (OE-3) | 3-0-0-3 | 3 |
+| | Honours-5 | 3-X-X-3/4 | 3-4 |
+| | **Total Course Credits (Excl. Honours)** | | **11-15** |
 
-OE-2
+\* *ITP (Industrial Training Project) is graded Pass/Fail, whereas BTP is letter-graded.*
 
-3-0-0-3
+### Summary of Internships
+* **Rural Internship (0-0-6-3)**: 4 weeks during the winter break after Semester III. Graded Pass/Fail.
+* **Research/Industrial Internship (0-1-6-4)**: 6-8 weeks during the summer break after Semester VI. Graded Pass/Fail.
 
-3-0-0-3
-
-Honours-5
-
-3-X-X-3/4
-
-SE-2
-
-3-0-0-3
-
-Honours-4
-
-3-X-X-3/4
-
-Overload Slot TOTAL
-
-13+4+(3/4) TOTAL
-
-6+8+(3/4)
-
-#Rural Internship (0-0-6-3) (4 weeks) #Research/Industry Internship (0-1-6-4 Sem-4
-
-Winter Break after Sem-3
-
-(6 weeks)
-
-Summer Break after
-
-Course category and Credits
-
-Type Core
-
-Credits
-
-Type Course Total
-
-Credits
-
-90
-
-129
-
-TE
-
-12
-
-Internships BTPIITP
-
-ICTE HASSE
-
-12
-
-12
-
-Honours
-
-15-18
-
-SE
-
-CoCurr
-
-OE
-
-TOTAL
-
-148+6+(15-18)
-
-Honours
-
-15-18
-
-Rural Intern
-
-3
-
-Res. Intern
-
-BTPIITP Exp Proj CoCurr
-
-12
-
-2
-
-Elective Courses and Requirements
-
-A-IC
-
-'NDHINES
+### Course Category and Credits
+| Course Category | Core Credits | Elective Credits | Total Required |
+|---|---|---|---|
+| Core/Foundation | 90 | - | 90 |
+| ICT Electives (ICTE) | - | 12 (3 courses) | 12 |
+| Technical Electives (TE) | - | 12 (4 courses) | 12 |
+| Science Electives (SE) | - | 6 (2 courses) | 6 |
+| HASS Elective (HASSE) | - | 3 (1 course) | 3 |
+| Open Electives (OE) | - | 6 (2 courses) | 6 |
+| Internships | 7 | - | 7 |
+| BTech Project (BTP/ITP) | 12 | - | 12 |
+| Co-curricular / Exploration | 6 | - | 6 |
+| **Total graduation credits** | **115** | **39** | **154** (without Honours) |
+| **Honours Degree** | +15 (5 courses) | - | **169-172** |
 
 ## Page 9
 
