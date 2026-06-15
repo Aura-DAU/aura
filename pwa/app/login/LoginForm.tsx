@@ -115,6 +115,7 @@ export function LoginForm({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
+            maxLength={72}
             className="w-full pl-10 pr-10 py-2.5 text-sm bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-slate-900 dark:text-slate-100 placeholder-slate-400 transition-all"
           />
           <button
