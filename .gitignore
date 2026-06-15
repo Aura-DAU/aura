@@ -141,3 +141,20 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# RAG local pipeline outputs
+**/__pycache__/
+**/*.py[cod]
+server/api/rag/processed_chunks/
+server/api/rag/pipeline/processed_chunks/
+server/api/rag/pipeline/vector_store/
+server/api/rag/.venv/
