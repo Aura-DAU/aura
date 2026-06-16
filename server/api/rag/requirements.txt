@@ -13,3 +13,4 @@ numpy
 transformers
 thefuzz
 python-Levenshtein
+rank-bm25

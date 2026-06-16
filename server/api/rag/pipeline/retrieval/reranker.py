@@ -45,9 +45,16 @@ class Reranker:
 
             metadata = result["metadata"]
 
-            text = metadata.get(
-                "text",
-                ""
+            text = "\n".join(
+                filter(
+                    None,
+                    [
+                        metadata.get("h1"),
+                        metadata.get("h2"),
+                        metadata.get("h3"),
+                        metadata.get("text")
+                    ]
+                )
             )
 
             pairs.append(
@@ -184,6 +191,21 @@ class Reranker:
             set(boost_sections)
         )
 
+        entities = plan.get(
+            "entities",
+            {}
+        )
+
+        target_section = (
+            plan.get(
+                "retrieval_hints",
+                {}
+            )
+            .get(
+                "preferred_section_type"
+            )
+        )
+
         for result, cross_score in zip(
             results,
             cross_scores
@@ -193,23 +215,69 @@ class Reranker:
 
             section_type = metadata.get("section_type", "general")
 
-            h1 = (
-                metadata
-                .get("h1", "")
-                .lower()
+            query_semester = entities.get(
+                "semester"
             )
 
-            h2 = (
-                metadata
-                .get("h2", "")
-                .lower()
+            if isinstance(query_semester, list):
+                query_semester = (
+                    query_semester[0]
+                    if query_semester
+                    else None
+                )
+
+            semester_penalty = 0.0
+
+            if (
+                section_type == "curriculum"
+                and query_semester
+            ):
+
+                chunk_semester = metadata.get(
+                    "semester"
+                )
+
+                if (
+                    chunk_semester
+                    and chunk_semester != query_semester
+                ):
+                    semester_penalty = -0.20
+
+            course_match_boost = 0.0
+
+            query_course = entities.get(
+                "course_code"
             )
 
-            h3 = (
-                metadata
-                .get("h3", "")
-                .lower()
-            )
+            if isinstance(query_course, list):
+                query_course = (
+                    query_course[0]
+                    if query_course
+                    else None
+                )
+
+            if query_course:
+
+                if metadata.get(
+                    "course_code"
+                ) == query_course:
+
+                    course_match_boost = 0.35
+
+            h1 = str(
+                metadata.get("h1") or ""
+            ).lower()
+            
+
+            h2 = str(
+                metadata.get("h2") or ""
+            ).lower()
+            
+
+            h3 = str(
+                metadata.get("h3") or ""
+            ).lower()
+            
 
             metadata_boost = 0.0
 
@@ -257,16 +325,6 @@ class Reranker:
 
             section_boost = 0.0
 
-            target_section = (
-                plan.get(
-                    "retrieval_hints",
-                    {}
-                )
-                .get(
-                    "preferred_section_type"
-                )
-            )
-
             if target_section and section_type == target_section:
                 section_boost += 0.25
 
@@ -281,6 +339,10 @@ class Reranker:
                 (0.05 * required_section_boost)
                 +
                 (0.08 * section_boost)
+                +
+                semester_penalty
+                +
+                course_match_boost
             )
 
             result[
