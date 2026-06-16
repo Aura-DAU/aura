@@ -1,4 +1,5 @@
 import os
+import logging
 from pathlib import Path
 from dotenv import load_dotenv
 from pinecone import Pinecone
@@ -11,6 +12,7 @@ from pipeline.ingestion.chunking.config import MODEL_NAME
 from pipeline.retrieval.bm25_retriever import BM25Retriever
 from pipeline.retrieval.rrf import fuse
 
+logger = logging.getLogger(__name__)
 TOP_K = 3
 
 
@@ -30,9 +32,20 @@ class Retriever:
             / "metadata.json"
         )
 
-        self.bm25 = BM25Retriever(
-            str(metadata_path)
-        )
+        self.bm25 = None
+        if metadata_path.exists():
+            try:
+                self.bm25 = BM25Retriever(
+                    str(metadata_path)
+                )
+                logger.info("BM25 Retriever initialized successfully from local metadata.")
+            except Exception as e:
+                logger.warning("Failed to initialize BM25 Retriever: %s. Sparse search will be disabled.", e)
+        else:
+            logger.warning(
+                "Local metadata.json not found at %s. BM25 sparse search is disabled. Run sync_db.py to generate it.",
+                metadata_path
+            )
         
         pc = Pinecone(
             api_key=os.getenv(
@@ -87,6 +100,9 @@ class Retriever:
             )
 
         dense_results = chunks
+
+        if not self.bm25:
+            return dense_results
 
         bm25_results = self.bm25.retrieve(
             query=query,
