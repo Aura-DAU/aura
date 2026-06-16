@@ -16,14 +16,6 @@ const StudentProfileSchema = z.object({
   interests: z.string().max(300),
 });
 
-const StudentProfileSchema = z.object({
-  name: z.string().max(100),
-  branch: z.string().max(100),
-  year: z.string().max(50),
-  semester: z.string().max(50),
-  interests: z.string().max(300),
-});
-
 const BodySchema = z.object({
   question: z.string().min(1).max(2000),
   history: z.array(HistoryTurnSchema).max(100).optional(),
