@@ -3,8 +3,6 @@ import { z } from "zod";
 // Zod validation schemas
 export const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
-  // FIX: Long Password DoS — cap password at 72 chars (bcrypt limit) to prevent
-  // server-side hashing of arbitrarily long strings that could stall the event loop.
   password: z.string().min(6, "Password must be at least 6 characters.").max(72, "Password must not exceed 72 characters."),
   role: z.enum(["student", "parent"]),
 });
@@ -12,9 +10,7 @@ export const LoginSchema = z.object({
 export const RegisterSchema = z.object({
   role: z.enum(["student", "parent"]),
   email: z.string().email("Please enter a valid email address."),
-  // FIX: Long Password DoS — same 72-char cap on registration
   password: z.string().min(6, "Password must be at least 6 characters.").max(72, "Password must not exceed 72 characters."),
-  // FIX: tighten name/interests to prevent oversized payloads
   name: z.string().min(1, "Full name is required.").max(100, "Name must not exceed 100 characters."),
   branch: z.string().max(100).optional(),
   year: z.string().max(50).optional(),
@@ -52,4 +48,4 @@ export const RegisterSchema = z.object({
 });
 
 export type LoginInput = z.infer<typeof LoginSchema>;
-export type RegisterInput = z.infer<typeof RegisterSchema>;
+export type RegisterInput = z.infer<typeof RegisterSchema>;

@@ -5,7 +5,6 @@ import crypto from "crypto";
 export interface UserAccount {
   role: "student" | "parent";
   email: string;
-  // FIX: stored as PBKDF2 hash — never plaintext
   passwordHash: string;
   name: string;
   branch?: string;
@@ -38,8 +37,6 @@ export function verifyPassword(password: string, stored: string): boolean {
   return crypto.timingSafeEqual(Buffer.from(candidate, "hex"), Buffer.from(hash, "hex"));
 }
 
-// ---------- Default seed users (hashed) ----------
-// FIX: Passwords are now hashed at startup — no more plaintext in source
 const _RAW_DEFAULTS = [
   {
     role: "student" as const,
@@ -118,4 +115,4 @@ export async function updateUserProfile(
 
   await fs.mkdir(DB_DIR, { recursive: true });
   await fs.writeFile(DB_PATH, JSON.stringify(users, null, 2), "utf-8");
-}
+}

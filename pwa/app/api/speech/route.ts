@@ -1,34 +1,9 @@
-import { z } from "zod";
 import { cookies } from "next/headers";
 
 export const runtime = "nodejs";
 
-// ─── Request schemas ──────────────────────────────────────────────────────────
-const HistoryTurnSchema = z.object({
-  role: z.enum(["user", "assistant"]),
-  content: z.string().min(1).max(8000),
-  timestamp: z.number().optional(),
-});
-
-const StudentProfileSchema = z.object({
-  name: z.string().max(100),
-  branch: z.string().max(100),
-  year: z.string().max(50),
-  semester: z.string().max(50),
-  interests: z.string().max(300),
-});
-
-const BodySchema = z.object({
-  question: z.string().min(1).max(2000),
-  history: z.array(HistoryTurnSchema).max(100).optional(),
-  studentProfile: StudentProfileSchema.optional(),
-});
-
-// ─── BACKEND_URL validation — prevents SSRF via env misconfiguration ──────────
-// FIX: AWS S3 key leakage / SSRF — whitelist the backend origin so a
-// misconfigured BACKEND_URL can never point to an internal metadata endpoint
-// (169.254.169.254, IMDSv2, etc.) or an attacker-controlled server.
 const RAW_BACKEND = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
+
 function validateBackendUrl(raw: string): URL {
   let parsed: URL;
   try {
@@ -38,9 +13,9 @@ function validateBackendUrl(raw: string): URL {
   }
 
   const BLOCKED_HOSTS = [
-    "169.254.169.254",   // AWS/GCP/Azure IMDS
+    "169.254.169.254",
     "metadata.google.internal",
-    "169.254.170.2",     // ECS task metadata
+    "169.254.170.2",
   ];
   if (BLOCKED_HOSTS.includes(parsed.hostname)) {
     throw new Error(`BACKEND_URL targets a blocked internal host: ${parsed.hostname}`);
@@ -55,32 +30,29 @@ let BACKEND_URL: string;
 try {
   BACKEND_URL = validateBackendUrl(RAW_BACKEND).origin;
 } catch (err) {
-  console.error("[chat/route] Invalid BACKEND_URL:", err);
-  BACKEND_URL = "http://127.0.0.1:8000"; // safe fallback
+  console.error("[speech/route] Invalid BACKEND_URL:", err);
+  BACKEND_URL = "http://127.0.0.1:8000";
 }
 
-// ─── In-process rate limiter — prevents chat API abuse ───────────────────────
-// FIX: Login Replay / chat-spam — 30 requests per user per minute
-interface ChatBucket { count: number; windowStart: number; }
-const chatLimiter = new Map<string, ChatBucket>();
-const CHAT_MAX = 30;
-const CHAT_WINDOW_MS = 60_000;
+// TODO: Move in-process rate limiting to a shared store (Redis/Upstash) before deploying.
+interface SpeechBucket { count: number; windowStart: number; }
+const speechLimiter = new Map<string, SpeechBucket>();
+const SPEECH_MAX = 30;
+const SPEECH_WINDOW_MS = 60_000;
 
-function chatRateLimit(key: string): boolean {
+function speechRateLimit(key: string): boolean {
   const now = Date.now();
-  const b = chatLimiter.get(key);
-  if (!b || now - b.windowStart > CHAT_WINDOW_MS) {
-    chatLimiter.set(key, { count: 1, windowStart: now });
-    return true; // allowed
+  const b = speechLimiter.get(key);
+  if (!b || now - b.windowStart > SPEECH_WINDOW_MS) {
+    speechLimiter.set(key, { count: 1, windowStart: now });
+    return true;
   }
-  if (b.count >= CHAT_MAX) return false; // blocked
+  if (b.count >= SPEECH_MAX) return false;
   b.count++;
   return true;
 }
 
-// ─── Route handler ────────────────────────────────────────────────────────────
 export async function POST(request: Request) {
-  // FIX: Auth gate — only authenticated sessions may call /api/chat
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("aura_session");
   if (!sessionCookie) {
@@ -91,36 +63,33 @@ export async function POST(request: Request) {
   try {
     const sess = JSON.parse(sessionCookie.value);
     sessionEmail = sess?.email ?? "anonymous";
-  } catch { /* malformed cookie — still allow but treat as anon */ }
+  } catch {
+    // Treat as anonymous but still proceed
+  }
 
-  // Rate limit by session email
-  if (!chatRateLimit(sessionEmail)) {
+  if (!speechRateLimit(sessionEmail)) {
     return Response.json(
       { error: "Too many requests. Please slow down." },
       { status: 429, headers: { "Retry-After": "60" } }
     );
   }
 
-  let body: unknown;
+  let formData: FormData;
   try {
-    body = await request.json();
+    formData = await request.formData();
   } catch {
-    return Response.json({ error: "Invalid JSON" }, { status: 400 });
+    return Response.json({ error: "Invalid form data" }, { status: 400 });
   }
 
-  const parsed = BodySchema.safeParse(body);
-  if (!parsed.success) {
-    return Response.json(
-      { error: "Invalid request", details: parsed.error.flatten() },
-      { status: 400 }
-    );
+  const file = formData.get("file");
+  if (!file || !(file instanceof File)) {
+    return Response.json({ error: "Missing file parameter" }, { status: 400 });
   }
 
   try {
-    const upstream = await fetch(`${BACKEND_URL}/chat`, {
+    const upstream = await fetch(`${BACKEND_URL}/speech`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(parsed.data),
+      body: formData,
     });
 
     if (!upstream.ok) {

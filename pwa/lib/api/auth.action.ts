@@ -1,7 +1,7 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { getUsers, saveUser, updateUserProfile, verifyPassword, UserAccount } from "@/lib/db/user-db";
+import { cookies, headers } from "next/headers";
+import { getUsers, saveUser, updateUserProfile, verifyPassword } from "@/lib/db/user-db";
 import { LoginSchema, RegisterSchema, LoginInput, RegisterInput } from "./auth.schema";
 
 export interface UserSession {
@@ -11,9 +11,7 @@ export interface UserSession {
   linkedStudentEmail?: string;
 }
 
-// ─── In-memory rate limiter (login brute-force / replay protection) ─────────
-// FIX: Login Replay Attack + brute-force — track failed attempts per IP+email
-// key: `${ip}:${email}` → { count, firstFail, lockedUntil }
+// TODO: Move in-process rate limiting to a shared store (Redis/Upstash) before deploying.
 interface RateBucket {
   count: number;
   firstFail: number;
@@ -23,15 +21,6 @@ const loginAttempts = new Map<string, RateBucket>();
 const MAX_ATTEMPTS = 5;
 const WINDOW_MS = 15 * 60 * 1000;   // 15 min rolling window
 const LOCKOUT_MS = 15 * 60 * 1000;  // 15 min lockout after MAX_ATTEMPTS
-
-function getClientIp(request?: Request): string {
-  // Next.js server actions don't expose Request directly; fall back to a
-  // process-level sentinel so the map still works in serverless.
-  if (!request) return "server-action";
-  return (
-    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown"
-  );
-}
 
 function checkRateLimit(key: string): { allowed: boolean; retryAfterSec?: number } {
   const now = Date.now();
@@ -83,8 +72,9 @@ export async function login(input: LoginInput) {
 
   const { email, password, role } = parsed.data;
 
-  // FIX: Rate-limit by email (IP unavailable in server actions without middleware)
-  const rlKey = `login:${email.toLowerCase()}`;
+  const headersList = await headers();
+  const ip = headersList.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+  const rlKey = `login:${ip}:${email.toLowerCase()}`;
   const rl = checkRateLimit(rlKey);
   if (!rl.allowed) {
     return {
@@ -100,7 +90,6 @@ export async function login(input: LoginInput) {
       u.role === role
   );
 
-  // FIX: Use constant-time PBKDF2 verify — never compare plain strings
   // Always call verifyPassword even if user not found (dummy hash) to
   // avoid timing-based user-enumeration.
   const DUMMY_HASH = "00000000000000000000000000000000:0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
@@ -172,7 +161,7 @@ export async function register(input: RegisterInput) {
   }
 
   try {
-    // FIX: saveUser now hashes the password internally before persisting
+    // saveUser now hashes the password internally before persisting
     await saveUser({
       role,
       email,
@@ -219,4 +208,4 @@ export async function updateProfile(
   } catch (err) {
     return { success: false, error: err instanceof Error ? err.message : "Failed to update profile" };
   }
-}
+}

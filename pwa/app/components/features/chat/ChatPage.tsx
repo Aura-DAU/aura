@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -7,6 +8,15 @@ import ChatSidebar from "@/app/components/features/chat/ChatSidebar";
 import MessageStream from "@/app/components/features/chat/MessageStream";
 import ProfileModal from "@/app/components/features/chat/ProfileModal";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
+
+interface BeforeInstallPromptEvent extends Event {
+  readonly platforms: string[];
+  readonly userChoice: Promise<{
+    outcome: "accepted" | "dismissed";
+    platform: string;
+  }>;
+  prompt(): Promise<void>;
+}
 
 export default function ChatPage() {
   const {
@@ -40,7 +50,7 @@ export default function ChatPage() {
   const [micSupported, setMicSupported] = useState(true);
   const [confirmClear, setConfirmClear] = useState(false);
   const [isOffline, setIsOffline] = useState(false);
-  const [installPrompt, setInstallPrompt] = useState<any>(null);
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -61,7 +71,6 @@ export default function ChatPage() {
     );
     const hasMediaRecorder =
       typeof window !== "undefined" && "MediaRecorder" in window;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMicSupported(hasGetUserMedia && hasMediaRecorder);
   }, []);
 
@@ -78,7 +87,7 @@ export default function ChatPage() {
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      setInstallPrompt(e);
+      setInstallPrompt(e as BeforeInstallPromptEvent);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);

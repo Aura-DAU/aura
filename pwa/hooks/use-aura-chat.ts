@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useRef } from "react";
 import {
   askAura,
@@ -24,12 +25,7 @@ export interface ChatThread {
   timestamp: number;
 }
 
-const DEFAULT_THREADS = [
-  "Hostel Curfew Rules",
-  "Bonafide Application Guide",
-  "Lost ID Replacement Steps",
-  "Technical Clubs & E-Cell",
-];
+
 
 export interface UserSession {
   role: "student" | "parent";
@@ -58,8 +54,6 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [activeCitations, setActiveCitations] = useState<Citation[]>([]);
-
-  const [userSession, setUserSession] = useState<UserSession | null>(null);
 
   const [userSession, setUserSession] = useState<UserSession | null>(null);
 
@@ -177,22 +171,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     };
   }, []);
 
-  const saveHistory = (newMessages: ChatMessage[], specificThreadId: string) => {
-    const updatedThreads = threads.map((t) => {
-      if (t.id === specificThreadId) {
-        return {
-          ...t,
-          messages: newMessages,
-          timestamp: Date.now(),
-        };
-      }
-      return t;
-    });
 
-    updatedThreads.sort((a, b) => b.timestamp - a.timestamp);
-    setThreads(updatedThreads);
-    localStorage.setItem("aura_chat_threads", JSON.stringify(updatedThreads));
-  };
 
   const saveProfile = async (profile: StudentProfile) => {
     setStudentProfile(profile);
@@ -373,7 +352,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     };
 
     let currentThreadId = activeThreadId;
-    let currentMessages = [...messages, userMsg];
+    const currentMessages = [...messages, userMsg];
 
     if (!currentThreadId) {
       currentThreadId = `thread_${Date.now()}`;

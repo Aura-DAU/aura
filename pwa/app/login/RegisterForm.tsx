@@ -250,4 +250,4 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
       </button>
     </form>
   );
-}
+}

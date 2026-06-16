@@ -1,6 +1,5 @@
 import { ChatThread, UserSession } from "@/hooks/use-aura-chat";
 import { StudentProfile } from "@/app/api/chat.service";
-import { UserSession } from "@/hooks/use-aura-chat";
 
 interface ChatSidebarProps {
   open: boolean;

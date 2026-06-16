@@ -6,7 +6,6 @@ interface MessageItemProps {
   userInitial: string;
 }
 
-// FIX: URL allowlist — only permit http/https hrefs (blocks javascript:, data:, vbscript:)
 function sanitizeUrl(url: string): string | null {
   try {
     const parsed = new URL(url);
@@ -17,10 +16,7 @@ function sanitizeUrl(url: string): string | null {
   }
 }
 
-// FIX: ReDoS — the original single regex with nested quantifiers on the email
-// pattern ([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}) could catastrophically
-// backtrack on crafted input. Split into separate, bounded, linear-time patterns.
-// Each regex is anchored or length-bounded; none use nested * or + groups.
+
 
 const BOLD_RE = /^\*\*(.+?)\*\*$/;           // **text**
 const SOURCE_RE = /^\[Source:\s*([^\]]{1,200})\]$/; // [Source: …] — capped at 200
@@ -83,7 +79,6 @@ function parseInline(text: string): React.ReactNode[] {
             </a>
           );
         } else {
-          // FIX: unsafe scheme (javascript:, data:…) — render as plain text
           nodes.push(<span key={key}>{part}</span>);
         }
         return;
@@ -193,13 +188,9 @@ function CopyButton({ content }: { content: string }) {
 
   const handleCopy = async () => {
     try {
-      // FIX: Clipboard hijacking — only write plain text stripped of any
-      // HTML / script payloads. navigator.clipboard.writeText already writes
-      // as text/plain, but we explicitly strip control characters that could
-      // trigger terminal/IDE auto-execution when pasted.
       const safeToCopy = content
-        .replace(/\x00-\x08\x0B\x0C\x0E-\x1F\x7F/g, "") // strip control chars
-        .replace(/\u202E|\u200F|\u200B/g, "");             // strip invisible unicode
+        .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "")
+        .replace(/\u202E|\u200F|\u200B/g, "");
       await navigator.clipboard.writeText(safeToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -273,4 +264,4 @@ const MessageItem = React.memo(function MessageItem({ msg, userInitial }: Messag
   );
 });
 
-export default MessageItem;
+export default MessageItem;
