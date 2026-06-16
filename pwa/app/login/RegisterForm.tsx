@@ -28,7 +28,7 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
 
   const [branch, setBranch] = useState("B.Tech (ICT)");
   const [year] = useState("3rd Year");
-  const [semester, setSemester] = useState("Semester V");
+  const [semester, setSemester] = useState("Semester I");
   const [interests, setInterests] = useState("");
 
   const [linkedStudentEmail, setLinkedStudentEmail] = useState("");
@@ -174,9 +174,13 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
                 className={selectBase}
               >
                 <option value="Semester I">Sem I</option>
+                <option value="Semester II">Sem II</option>
                 <option value="Semester III">Sem III</option>
+                <option value="Semester IV">Sem IV</option>
                 <option value="Semester V">Sem V</option>
+                <option value="Semester VI">Sem VI</option>
                 <option value="Semester VII">Sem VII</option>
+                <option value="Semester VIII">Sem VIII</option>
               </select>
             </div>
           </div>

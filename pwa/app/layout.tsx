@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "AURA | DAU Academic Assistant",
   description:
-    "Ask AURA for DA-IICT academic policies, exam schedules, hostel rules, and campus resources.",
+    "Ask AURA for DAU academic policies, exam schedules, hostel rules, and campus resources.",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

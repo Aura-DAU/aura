@@ -35,7 +35,7 @@ export default function LoginPage() {
     setAuthMode("signin");
     if (demoType === "student") {
       setRole("student");
-      setEmail("student@dau.edu");
+      setEmail("student@dau.ac.in");
       setPassword("password123");
     } else {
       setRole("parent");
