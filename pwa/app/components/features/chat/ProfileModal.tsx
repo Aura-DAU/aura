@@ -85,7 +85,7 @@ export default function ProfileModal({
         ref={dialogRef}
         className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full overflow-hidden shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200"
       >
-        <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center text-slate-900 dark:text-slate-100">
+        <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center text-black dark:text-white">
           <div>
             <h2 className="text-sm font-semibold leading-tight">
               {isParent ? "Linked Student Profile" : "Student Profile Settings"}
@@ -172,7 +172,7 @@ export default function ProfileModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-white hover:bg-slate-50 dark:bg-transparent dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium py-2.5 rounded-md border border-slate-300 dark:border-slate-800 transition-colors hover:cursor-pointer"
+              className="flex-1 bg-white hover:bg-slate-50 dark:bg-transparent dark:hover:bg-slate-800 text-black dark:text-white text-sm font-medium py-2.5 rounded-md border border-slate-300 dark:border-slate-800 transition-colors hover:cursor-pointer"
             >
               {isParent ? "Close" : "Cancel"}
             </button>

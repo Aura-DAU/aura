@@ -147,7 +147,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex h-[100dvh] w-screen overflow-hidden bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans">
+    <div className="flex h-[100dvh] w-screen overflow-hidden bg-white dark:bg-slate-950 text-black dark:text-white font-sans">
       <ChatSidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -225,7 +225,7 @@ export default function ChatPage() {
                 )}
               </svg>
             </button>
-            <span className="text-sm font-medium text-slate-700 ml-1 hidden sm:inline">
+            <span className="text-sm font-medium text-black dark:text-white ml-1 hidden sm:inline">
               AURA — Academic & University Resource Assistant
             </span>
           </div>

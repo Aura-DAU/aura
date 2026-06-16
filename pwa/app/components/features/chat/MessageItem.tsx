@@ -148,10 +148,10 @@ function parseMarkdown(text: string): React.ReactNode[] {
       const content = headingMatch[2];
       const parsedContent = parseInline(content);
       switch (level) {
-        case 1: elements.push(<h1 key={`h1-${i}`} className="text-lg font-bold mt-6 mb-3 text-slate-900">{parsedContent}</h1>); break;
-        case 2: elements.push(<h2 key={`h2-${i}`} className="text-base font-bold mt-5 mb-2.5 text-slate-900">{parsedContent}</h2>); break;
-        case 3: elements.push(<h3 key={`h3-${i}`} className="text-sm font-semibold mt-4 mb-2 text-slate-900">{parsedContent}</h3>); break;
-        default: elements.push(<h4 key={`h4-${i}`} className="text-sm font-semibold mt-3 mb-1.5 text-slate-900">{parsedContent}</h4>);
+        case 1: elements.push(<h1 key={`h1-${i}`} className="text-lg font-bold mt-6 mb-3 text-black dark:text-white">{parsedContent}</h1>); break;
+        case 2: elements.push(<h2 key={`h2-${i}`} className="text-base font-bold mt-5 mb-2.5 text-black dark:text-white">{parsedContent}</h2>); break;
+        case 3: elements.push(<h3 key={`h3-${i}`} className="text-sm font-semibold mt-4 mb-2 text-black dark:text-white">{parsedContent}</h3>); break;
+        default: elements.push(<h4 key={`h4-${i}`} className="text-sm font-semibold mt-3 mb-1.5 text-black dark:text-white">{parsedContent}</h4>);
       }
       continue;
     }
@@ -159,7 +159,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
     const listMatch = line.match(/^(\s*)[-*+]\s+(.*)$/);
     if (listMatch) {
       currentList.push(
-        <li key={`li-${i}`} className="text-slate-600 text-sm sm:text-base">
+        <li key={`li-${i}`} className="text-black dark:text-white text-sm sm:text-base">
           {parseInline(listMatch[2])}
         </li>
       );
@@ -168,7 +168,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
 
     flushList();
     elements.push(
-      <p key={`p-${i}`} className="mb-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+      <p key={`p-${i}`} className="mb-3 text-black dark:text-white text-sm sm:text-base leading-relaxed">
         {parseInline(line)}
       </p>
     );
@@ -203,7 +203,7 @@ function CopyButton({ content }: { content: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="inline-flex items-center gap-1 text-[12px] text-slate-400 hover:text-slate-600 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+      className="inline-flex items-center gap-1 text-[12px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
       title="Copy response"
     >
       {copied ? (
@@ -235,7 +235,7 @@ const MessageItem = React.memo(function MessageItem({ msg, userInitial }: Messag
       <div
         className={`w-8 h-8 rounded-md flex items-center justify-center font-semibold text-xs shrink-0 select-none ${isAssistant
             ? "bg-brand-600 text-white"
-            : "bg-slate-100 text-slate-600 border border-slate-200"
+            : "bg-slate-100 text-black dark:text-white border border-slate-200"
           }`}
       >
         {isAssistant ? "A" : userInitial}
@@ -248,8 +248,8 @@ const MessageItem = React.memo(function MessageItem({ msg, userInitial }: Messag
         </div>
         <div
           className={`max-w-none leading-relaxed ${isAssistant
-              ? "text-slate-700 space-y-3"
-              : "text-slate-700 font-medium text-sm sm:text-base whitespace-pre-wrap"
+              ? "text-black dark:text-white space-y-3"
+              : "text-black dark:text-white font-medium text-sm sm:text-base whitespace-pre-wrap"
             }`}
         >
           {isAssistant ? parseMarkdown(msg.content) : msg.content}

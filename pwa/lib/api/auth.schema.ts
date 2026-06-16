@@ -19,11 +19,11 @@ export const RegisterSchema = z.object({
   linkedStudentEmail: z.string().optional(),
 }).superRefine((data, ctx) => {
   if (data.role === "student") {
-    if (!data.email.toLowerCase().endsWith("@dau.edu")) {
+    if (!data.email.toLowerCase().endsWith("@dau.ac.in")) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["email"],
-        message: "Student registration requires a university domain email (@dau.edu).",
+        message: "Student registration requires a university domain email (@dau.ac.in).",
       });
     }
   }

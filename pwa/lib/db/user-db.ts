@@ -40,7 +40,7 @@ export function verifyPassword(password: string, stored: string): boolean {
 const _RAW_DEFAULTS = [
   {
     role: "student" as const,
-    email: "student@dau.edu",
+    email: "student@dau.ac.in",
     password: "password123",
     name: "Aarav Patel",
     branch: "B.Tech (ICT)",
@@ -53,7 +53,7 @@ const _RAW_DEFAULTS = [
     email: "parent@example.com",
     password: "password123",
     name: "Rajesh Patel",
-    linkedStudentEmail: "student@dau.edu",
+    linkedStudentEmail: "student@dau.ac.in",
   },
 ];
 

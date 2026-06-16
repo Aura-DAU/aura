@@ -20,7 +20,7 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
   // Student specific inputs
   const [branch, setBranch] = useState("B.Tech (ICT)");
   const [year] = useState("3rd Year");
-  const [semester, setSemester] = useState("Semester V");
+  const [semester, setSemester] = useState("Semester I");
   const [interests, setInterests] = useState("");
 
   // Parent specific inputs
@@ -123,7 +123,7 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder={role === "student" ? "student@dau.edu" : "parent@example.com"}
+            placeholder={role === "student" ? "student@dau.ac.in" : "parent@example.com"}
             className="w-full pl-10 pr-4 py-2.5 text-sm bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-slate-900 dark:text-slate-100 placeholder-slate-400 transition-all"
           />
         </div>
@@ -144,7 +144,7 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
               required
               value={linkedStudentEmail}
               onChange={(e) => setLinkedStudentEmail(e.target.value)}
-              placeholder="e.g. student@dau.edu"
+              placeholder="e.g. student@dau.ac.in"
               className="w-full pl-10 pr-4 py-2.5 text-sm bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-slate-900 dark:text-slate-100 placeholder-slate-400 transition-all"
             />
           </div>
@@ -177,9 +177,13 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
                 className="w-full px-3 py-2 text-xs bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-slate-900 dark:text-slate-100 transition-all"
               >
                 <option value="Semester I">Sem I</option>
+                <option value="Semester II">Sem II</option>
                 <option value="Semester III">Sem III</option>
+                <option value="Semester IV">Sem IV</option>
                 <option value="Semester V">Sem V</option>
+                <option value="Semester VI">Sem VI</option>
                 <option value="Semester VII">Sem VII</option>
+                <option value="Semester VIII">Sem VIII</option>
               </select>
             </div>
           </div>

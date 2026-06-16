@@ -89,9 +89,9 @@ export default function ChatSidebar({
         <div className="flex items-center gap-2.5">
           <DAUCrest className="w-8 h-8 shrink-0" />
           <div className="leading-tight">
-            <h1 className="text-sm font-semibold text-slate-900 dark:text-slate-100">AURA</h1>
+            <h1 className="text-sm font-semibold text-black dark:text-white">AURA</h1>
             <span className="text-[12px] text-slate-500 dark:text-slate-400">
-              DA-IICT Academic Assistant
+              DAU Academic Assistant
             </span>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function ChatSidebar({
               key={t.id}
               className={`group flex items-center justify-between rounded-lg transition-colors duration-150 ${
                 t.id === activeThreadId
-                  ? "bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-medium"
+                  ? "bg-slate-200 dark:bg-slate-800 text-black dark:text-white font-medium"
                   : "text-slate-600 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/40 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
@@ -196,7 +196,7 @@ export default function ChatSidebar({
         <button
           onClick={onOpenProfile}
           type="button"
-          className="flex w-full items-center gap-3 rounded-md hover:bg-slate-200/70 dark:hover:bg-slate-800 p-2.5 text-left transition-colors duration-150 text-slate-900 dark:text-slate-100 hover:cursor-pointer"
+          className="flex w-full items-center gap-3 rounded-md hover:bg-slate-200/70 dark:hover:bg-slate-800 p-2.5 text-left transition-colors duration-150 text-black dark:text-white hover:cursor-pointer"
         >
           <div className="w-8 h-8 rounded-md bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 flex items-center justify-center font-semibold text-xs border border-brand-100 dark:border-brand-800 shrink-0">
             {getInitials()}
