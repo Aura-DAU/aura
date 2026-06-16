@@ -4,7 +4,9 @@ from pipeline.retrieval.reranker import Reranker
 from pipeline.retrieval.context_builder import ContextBuilder
 
 import re
+import logging
 
+logger = logging.getLogger(__name__)
 
 class RetrievalPipeline:
 
@@ -21,6 +23,54 @@ class RetrievalPipeline:
         from pipeline.retrieval.query_rewriter import QueryRewriter
         self.rewriter = QueryRewriter()
 
+    PROGRAM_ALIASES = {
+
+        "ict": "B.Tech. (ICT)",
+        "btech ict": "B.Tech. (ICT)",
+        "b.tech ict": "B.Tech. (ICT)",
+        "b.tech. ict": "B.Tech. (ICT)",
+        "b.tech. (ict)": "B.Tech. (ICT)",
+
+        "csai": "B.Tech. (CS and AI)",
+        "cs ai": "B.Tech. (CS and AI)",
+        "btech csai": "B.Tech. (CS and AI)",
+        "b.tech csai": "B.Tech. (CS and AI)",
+        "b.tech. (cs and ai)": "B.Tech. (CS and AI)",
+        "btech cs and ai": "B.Tech. (CS and AI)",
+
+        "ece": "B.Tech. (ECE-AI)",
+        "ece ai": "B.Tech. (ECE-AI)",
+        "btech ece": "B.Tech. (ECE-AI)",
+        "b.tech. (ece-ai)": "B.Tech. (ECE-AI)",
+        "btech ece ai": "B.Tech. (ECE-AI)",
+
+        "evd": "B.Tech. (EVD)",
+        "btech evd": "B.Tech. (EVD)",
+
+        "mnc": "B.Tech. (MnC)",
+        "btech mnc": "B.Tech. (MnC)",
+
+        "msc it": "M.Sc. (IT)",
+        "m.sc. it": "M.Sc. (IT)",
+        "it": "M.Sc. (IT)",
+
+        "msc data science": "M.Sc. (Data Science)",
+        "m.sc data science": "M.Sc. (Data Science)",
+        "data science": "M.Sc. (Data Science)",
+        "ds": "M.Sc. (Data Science)",
+
+        "msc agriculture analytics": "M.Sc. (Agriculture Analytics)",
+        "m.sc agriculture analytics": "M.Sc. (Agriculture Analytics)",
+        "agriculture analytics": "M.Sc. (Agriculture Analytics)",
+        "aa": "M.Sc. (Agriculture Analytics)",
+
+        "mtech ict": "M.Tech. (ICT)",
+        "m.tech ict": "M.Tech. (ICT)",
+
+        "phd": "Ph.D.",
+        "ph.d": "Ph.D."
+    }
+    
     def _expand_semesters(self, query):
         arabic_to_roman = {
             "1": "I", "2": "II", "3": "III", "4": "IV",
@@ -49,21 +99,61 @@ class RetrievalPipeline:
         plan
     ):
 
+        def first_value(value):
+
+            if isinstance(value, list):
+                return value[0] if value else None
+
+            return value
+
         entities = plan.get(
             "entities",
             {}
         )
 
-        faculty_name = entities.get(
-            "faculty_name"
+        course_code = first_value(
+            entities.get(
+                "course_code"
+            )
         )
 
-        if isinstance(faculty_name, list):
-            faculty_name = (
-                faculty_name[0]
-                if faculty_name
-                else None
+        program_name = self._canonical_program_name(
+            first_value(
+                entities.get(
+                    "program_name"
+                )
             )
+        )
+
+        if course_code:
+
+            if program_name:
+                return {
+                    "$and": [
+                        {
+                            "course_code": {
+                                "$eq": course_code
+                            }
+                        },
+                        {
+                            "program_name": {
+                                "$eq": program_name
+                            }
+                        }
+                    ]
+                }
+
+            return {
+                "course_code": {
+                    "$eq": course_code
+                }
+            }
+
+        faculty_name = first_value(
+            entities.get(
+                "faculty_name"
+            )
+        )
 
         if faculty_name:
 
@@ -73,18 +163,119 @@ class RetrievalPipeline:
                 }
             }
 
-        program_name = entities.get(
-            "program_name"
+        event_name = first_value(
+            entities.get(
+                "event_name"
+            )
         )
 
-        if isinstance(program_name, str):
+        if event_name:
+
+            return {
+                "event_name": {
+                    "$eq": event_name
+                }
+            }
+
+        semester = first_value(
+            entities.get(
+                "semester"
+            )
+        )
+
+        if program_name and semester:
+
+            return {
+                "$and": [
+                    {
+                        "program_name": {
+                            "$eq": program_name
+                        }
+                    },
+                    {
+                        "semester": {
+                            "$eq": semester
+                        }
+                    }
+                ]
+            }
+
+        if program_name:
+
             return {
                 "program_name": {
                     "$eq": program_name
                 }
             }
-    
+
         return None
+    
+
+    def _normalize_program_name(self, name):
+        if not name:
+            return ""
+            
+        name = name.lower()
+
+        name = re.sub(
+            r"[^a-z0-9 ]",
+            " ",
+            name
+        )
+
+        name = re.sub(
+            r"\s+",
+            " ",
+            name
+        ).strip()
+
+        name = name.replace(
+            "b tech",
+            "btech"
+        )
+
+        name = name.replace(
+            "m tech",
+            "mtech"
+        )
+
+        name = name.replace(
+            "m des",
+            "mdes"
+        )
+
+        name = name.replace(
+            "m sc",
+            "msc"
+        )
+
+        name = re.sub(
+            r"\bph\s*d\b",
+            "phd",
+            name
+        )
+
+        return name
+    
+    def _canonical_program_name(self, name):
+
+        if not name:
+            return None
+
+        key = self._normalize_program_name(name)
+
+        canonical = self.PROGRAM_ALIASES.get(key)
+
+        if canonical is None:
+            logger.warning(
+                "Unknown program alias '%s' (normalized: '%s'); skipping program metadata filter.",
+                name,
+                key
+            )
+            return None
+
+        return canonical
+            
 
     def get_context(
         self,

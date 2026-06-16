@@ -7,7 +7,7 @@ vi.mock("../db/user-db", () => {
     {
       role: "student",
       email: "test@dau.edu",
-      password: "password123",
+      passwordHash: "password123",
       name: "Test Student",
       branch: "B.Tech (ICT)",
       year: "3rd Year",
@@ -20,19 +20,29 @@ vi.mock("../db/user-db", () => {
       if (user.email === "test@dau.edu") {
         throw new Error("User already exists");
       }
-      mockUsers.push(user);
+      mockUsers.push({
+        ...user,
+        passwordHash: user.password
+      });
     }),
     updateUserProfile: vi.fn(async () => {}),
+    verifyPassword: vi.fn((password, stored) => password === stored),
   };
 });
 
 vi.mock("next/headers", () => {
-  const store: Record<string, any> = {};
+  const store: Record<string, string> = {};
   return {
     cookies: vi.fn(async () => ({
       set: vi.fn((key, val) => { store[key] = val; }),
       get: vi.fn((key) => store[key] ? { name: key, value: store[key] } : undefined),
       delete: vi.fn((key) => { delete store[key]; }),
+    })),
+    headers: vi.fn(async () => ({
+      get: vi.fn((key) => {
+        if (key === "x-forwarded-for") return "127.0.0.1";
+        return null;
+      }),
     })),
   };
 });
