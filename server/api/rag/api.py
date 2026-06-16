@@ -23,9 +23,13 @@ ALLOWED_FRONTEND_ORIGINS = [
     "http://127.0.0.1:3000"
 ]
 
-# Dynamically append production origin if it exists in the host environment.
-if prod_origin := os.getenv("PROD_FRONTEND_ORIGIN"):
+prod_origin = os.getenv("PROD_FRONTEND_ORIGIN")
+
+if prod_origin:
     ALLOWED_FRONTEND_ORIGINS.append(prod_origin)
+    print(f"CORS: Enabled production origin: {prod_origin}")
+else:
+    print("CORS: Warning - PROD_FRONTEND_ORIGIN not set. Only localhost allowed.")
 
 app.add_middleware(
     CORSMiddleware,
@@ -46,9 +50,11 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 speech_queue_lock = asyncio.Semaphore(1)
 
-FFMPEG_DIR = r"C:\Users\pushk\Downloads\ffmpeg-2026-06-10-git-b29bdd3715-essentials_build\ffmpeg-2026-06-10-git-b29bdd3715-essentials_build\bin"
-if FFMPEG_DIR not in os.environ.get("PATH", ""):
-    os.environ["PATH"] += os.pathsep + FFMPEG_DIR
+ffmpeg_env_path = os.getenv("FFMPEG_BINARY_PATH")
+
+if ffmpeg_env_path and os.path.exists(ffmpeg_env_path):
+    if ffmpeg_env_path not in os.environ["PATH"]:
+        os.environ["PATH"] += os.pathsep + ffmpeg_env_path
 
 UNIVERSITY_PROMPT = "DAIICT, Prof. Hemant A. Patil, Placement Convener, B.Tech, M.Tech, ICT, Gandhinagar."
 
@@ -136,3 +142,11 @@ async def speech(file: UploadFile = File(...)):
     finally:
         if temp_path and os.path.exists(temp_path):
             os.remove(temp_path)
+
+@app.get("/health")
+async def health():
+    return {
+        "status": "online",
+        "cors_origins": ALLOWED_FRONTEND_ORIGINS,
+        "env_check": "PROD_FRONTEND_ORIGIN is " + ("SET" if os.getenv("PROD_FRONTEND_ORIGIN") else "MISSING")
+    }

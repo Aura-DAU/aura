@@ -1,67 +1,39 @@
 "use server";
 
-import { z } from "zod";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { getUsers, saveUser, updateUserProfile, UserAccount } from "@/lib/db/user-db";
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 
-// Zod validation schemas
-export const LoginSchema = z.object({
-  email: z.string().email("Please enter a valid email address."),
-  password: z.string().min(6, "Password must be at least 6 characters."),
-  role: z.enum(["student", "parent"]),
+// Import schemas and types from your new file
+import { 
+  LoginSchema, 
+  RegisterSchema, 
+  LoginInput, 
+  RegisterInput, 
+  UserSession 
+} from "./auth.schema";
+
+// Initialize Redis & Ratelimit
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
 });
 
-export const RegisterSchema = z.object({
-  role: z.enum(["student", "parent"]),
-  email: z.string().email("Please enter a valid email address."),
-  password: z.string().min(6, "Password must be at least 6 characters."),
-  name: z.string().min(1, "Full name is required."),
-  branch: z.string().optional(),
-  year: z.string().optional(),
-  semester: z.string().optional(),
-  interests: z.string().optional(),
-  linkedStudentEmail: z.string().optional(),
-}).superRefine((data, ctx) => {
-  if (data.role === "student") {
-    if (!data.email.toLowerCase().endsWith("@dau.edu")) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["email"],
-        message: "Student registration requires a university domain email (@dau.edu).",
-      });
-    }
-  }
-  if (data.role === "parent") {
-    if (!data.linkedStudentEmail || !data.linkedStudentEmail.trim()) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["linkedStudentEmail"],
-        message: "Linked Student Email is required.",
-      });
-    } else {
-      const emailResult = z.string().email().safeParse(data.linkedStudentEmail);
-      if (!emailResult.success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ["linkedStudentEmail"],
-          message: "Please enter a valid linked student email address.",
-        });
-      }
-    }
-  }
+const ratelimit = new Ratelimit({
+  redis: redis,
+  limiter: Ratelimit.slidingWindow(5, "60 s"), // 5 attempts per minute
 });
-
-export type LoginInput = z.infer<typeof LoginSchema>;
-export type RegisterInput = z.infer<typeof RegisterSchema>;
-
-export interface UserSession {
-  role: "student" | "parent";
-  email: string;
-  name: string;
-  linkedStudentEmail?: string;
-}
 
 export async function login(input: LoginInput) {
+  const headersList = await headers();
+  const ip = headersList.get("x-forwarded-for") || "127.0.0.1";
+  
+  const { success } = await ratelimit.limit(ip);
+  if (!success) {
+    return { success: false, error: "Too many login attempts. Please try again in a minute." };
+  }
+
   // Validate input schema
   const parsed = LoginSchema.safeParse(input);
   if (!parsed.success) {

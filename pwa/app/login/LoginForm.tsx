@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
-import { login, LoginSchema, UserSession } from "@/lib/api/auth.action";
+import { login } from "@/lib/api/auth.action";
+import { LoginSchema, UserSession } from "@/lib/api/auth.schema";
 import { StudentProfile } from "@/app/api/chat.service";
 
 interface LoginFormProps {
@@ -54,7 +55,7 @@ export function LoginForm({
 
       const res = await login({ email, password, role });
 
-      if (res.success) {
+      if (res.success && res.session && res.profile) {
         onSuccess(res.session, res.profile);
       } else {
         onError(res.error || "Authentication failed.");

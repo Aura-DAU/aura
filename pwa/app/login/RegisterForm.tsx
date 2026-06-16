@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { User, Mail, GraduationCap, BookOpen, Lock, Loader2, Eye, EyeOff } from "lucide-react";
-import { register, RegisterSchema } from "@/lib/api/auth.action";
+import { register } from "@/lib/api/auth.action";
+import { RegisterSchema } from "@/lib/api/auth.schema";
 
 interface RegisterFormProps {
   role: "student" | "parent";
