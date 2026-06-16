@@ -115,7 +115,6 @@ class BM25Retriever:
     STOPWORDS = {
         "what",
         "how",
-        "many",
         "does",
         "are",
         "the",

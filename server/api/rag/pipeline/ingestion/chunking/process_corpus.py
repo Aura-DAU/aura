@@ -87,14 +87,6 @@ def extract_curriculum_chunks(body, metadata, file_path):
             if len(row) <= max(col_code, col_name):
                 continue
             course_code = row[col_code].strip()
-            # if col_code != -1 and h == "category":
-            #     if not re.match(
-            #         r"^#{2,6}\s*Semester\s+([IVX]+|\d+)$",
-            #         course_code,
-            #         re.IGNORECASE
-            #     ): 
-            #         continue
-
             course_name = row[col_name].strip()
             
             if not course_code or not course_name or course_code == "Course Code":

@@ -4,7 +4,9 @@ from pipeline.retrieval.reranker import Reranker
 from pipeline.retrieval.context_builder import ContextBuilder
 
 import re
+import logging
 
+logger = logging.getLogger(__name__)
 
 class RetrievalPipeline:
 
@@ -92,7 +94,31 @@ class RetrievalPipeline:
             )
         )
 
+        program_name = self._canonical_program_name(
+            first_value(
+                entities.get(
+                    "program_name"
+                )
+            )
+        )
+
         if course_code:
+
+            if program_name:
+                return {
+                    "$and": [
+                        {
+                            "course_code": {
+                                "$eq": course_code
+                            }
+                        },
+                        {
+                            "program_name": {
+                                "$eq": program_name
+                            }
+                        }
+                    ]
+                }
 
             return {
                 "course_code": {
@@ -127,14 +153,6 @@ class RetrievalPipeline:
                     "$eq": event_name
                 }
             }
-
-        program_name = self._canonical_program_name(
-            first_value(
-                entities.get(
-                    "program_name"
-                )
-            )
-        )
 
         semester = first_value(
             entities.get(
@@ -223,11 +241,18 @@ class RetrievalPipeline:
 
         key = self._normalize_program_name(name)
 
-        return self.PROGRAM_ALIASES.get(
-            key,
-            name
-        )
+        canonical = self.PROGRAM_ALIASES.get(key)
 
+        if canonical is None:
+            logger.warning(
+                "Unknown program alias '%s' (normalized: '%s'); skipping program metadata filter.",
+                name,
+                key
+            )
+            return None
+
+        return canonical
+            
 
     def get_context(
         self,
