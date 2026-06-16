@@ -554,7 +554,8 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     };
     setStudentProfile(defaultProfile);
     localStorage.setItem(profileKey, JSON.stringify(defaultProfile));
-    clearAllThreads();
+    setActiveCitations([]);
+    setErrorMessage(null);
   };
 
   return {
