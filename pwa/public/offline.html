@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline | DAU Student Portal</title>
+  <style>
+    :root {
+      --background: #0F172A;
+      --foreground: #F8FAFC;
+      --primary: #E8400C;
+      --surface: #1E293B;
+      --border: #334155;
+      --text-muted: #94A3B8;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    .card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.25);
+    }
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1.25rem;
+      height: 3rem;
+      background-color: rgba(232, 64, 12, 0.1);
+      border: 1px solid rgba(232, 64, 12, 0.2);
+      border-radius: 18px;
+      color: var(--primary);
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 0 0 0.5rem 0;
+      letter-spacing: -0.025em;
+    }
+    p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0 0 2rem 0;
+      font-weight: 500;
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 6px -1px rgba(232, 64, 12, 0.15);
+    }
+    .btn-primary:hover {
+      background-color: #D7380A;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--foreground);
+    }
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo-badge">AURA</div>
+    <h1>You're Offline</h1>
+    <p>It looks like you're not connected to the internet. You can still view your previously loaded chat history and profile details.</p>
+    <div class="actions">
+      <a href="/" class="btn btn-primary">Go to Chat History</a>
+      <button onclick="window.location.reload()" class="btn btn-secondary">Retry Connection</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -10,3 +10,7 @@ python-dotenv
 python-multipart
 PyYAML
 numpy
+transformers
+thefuzz
+python-Levenshtein
+rank-bm25
