@@ -1,34 +1,32 @@
 import os
-import logging
 import tempfile
 import asyncio
 from typing import List, Optional
+
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
+
 from rag import AURA
 from pipeline.speech import transcribe_audio
-
-# Ensure api runtime logging inherits standard visibility structures
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-logger = logging.getLogger(__name__)
 
 app = FastAPI(title="API for RAG System - AURA")
 aura = AURA()
 
-speech_queue_lock = asyncio.Semaphore(1)
-
+# ---------------------------------------------------------------------------
+# CORS CONFIGURATION
+# ---------------------------------------------------------------------------
+# TODO: Extend ALLOWED_FRONTEND_ORIGINS with the prod frontend origin before deploy.
 ALLOWED_FRONTEND_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000"
 ]
 
-# Production CORS configuration
+# Dynamically append production origin if it exists in the host environment.
+if prod_origin := os.getenv("PROD_FRONTEND_ORIGIN"):
+    ALLOWED_FRONTEND_ORIGINS.append(prod_origin)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_FRONTEND_ORIGINS,
@@ -36,6 +34,21 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ---------------------------------------------------------------------------
+# ARCHITECTURAL SAFEGUARD: SINGLE-FLIGHT WHISPER EXECUTION
+# We intentionally use a Semaphore of 1 to serialize speech requests globally.
+# Whisper is a highly CPU-bound machine learning task. Allowing concurrent 
+# executions on standard hardware divides CPU attention, degrades throughput 
+# exponentially, and risks OOM (Out-Of-Memory) application crashes.
+# Students will queue asynchronously with near-zero overhead until the lock frees.
+# Do not bump this value unless migrating to a dedicated GPU cluster.
+# ---------------------------------------------------------------------------
+speech_queue_lock = asyncio.Semaphore(1)
+
+FFMPEG_DIR = r"C:\Users\pushk\Downloads\ffmpeg-2026-06-10-git-b29bdd3715-essentials_build\ffmpeg-2026-06-10-git-b29bdd3715-essentials_build\bin"
+if FFMPEG_DIR not in os.environ.get("PATH", ""):
+    os.environ["PATH"] += os.pathsep + FFMPEG_DIR
 
 UNIVERSITY_PROMPT = "DAIICT, Prof. Hemant A. Patil, Placement Convener, B.Tech, M.Tech, ICT, Gandhinagar."
 
@@ -92,9 +105,6 @@ async def speech(file: UploadFile = File(...)):
             )
         
         with tempfile.NamedTemporaryFile(delete=False, suffix=extension) as temp_file:
-            # FIX: Assign the trackable path path immediately on resource allocation
-            temp_path = temp_file.name
-            
             size = 0
             while chunk := await file.read(1024 * 1024):
                 size += len(chunk)
@@ -105,7 +115,8 @@ async def speech(file: UploadFile = File(...)):
                     )
                 temp_file.write(chunk)
 
-        # ADD THE ASYNC WITH CONTEXT AND INDENT THE EXECUTION
+            temp_path = temp_file.name
+
         async with speech_queue_lock:
             question = await run_in_threadpool(
                 transcribe_audio, 
@@ -118,13 +129,10 @@ async def speech(file: UploadFile = File(...)):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error("Request failed during processing", exc_info=True)
+        print("Speech processing Error")
+        print(e)
         raise HTTPException(status_code=500, detail=str(e))
     
     finally:
-        # The cleanup hook is now completely guaranteed to wipe the file if it exists
         if temp_path and os.path.exists(temp_path):
-            try:
-                os.remove(temp_path)
-            except Exception as cleanup_error:
-                logger.error(f"Failed to remove temp file at {temp_path}: {cleanup_error}")
+            os.remove(temp_path)
