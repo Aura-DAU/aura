@@ -41,6 +41,8 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   } = options;
 
   const [threads, setThreads] = useState<ChatThread[]>([]);
+  const getThreadsKey = (session: UserSession | null) =>
+    session ? `aura_chat_threads_${session.email.toLowerCase()}` : "aura_chat_threads_guest";
   const [activeThreadId, setActiveThreadId] = useState<string | null>(null);
 
   // Derived messages for the active thread
@@ -88,8 +90,36 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const savedProfile = localStorage.getItem(profileKey);
+    if (savedProfile) {
+      try {
+        setStudentProfile(JSON.parse(savedProfile));
+      } catch {
+        console.error("Error loading student profile");
+      }
+    }
+
+    const initSession = async () => {
+      try {
+        const session = await getSession();
+        if (session) {
+          setUserSession(session);
+        } else {
+          setUserSession(null);
+        }
+      } catch (err) {
+        console.error("Error fetching user session from server:", err);
+      }
+    };
+    void initSession();
+  }, [profileKey]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const emailKey = getThreadsKey(userSession);
     let initialThreads: ChatThread[] = [];
-    const savedThreads = localStorage.getItem("aura_chat_threads");
+    const savedThreads = localStorage.getItem(emailKey);
 
     if (savedThreads) {
       try {
@@ -118,7 +148,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
               timestamp: Date.now(),
             };
             initialThreads = [legacyThread];
-            localStorage.setItem("aura_chat_threads", JSON.stringify(initialThreads));
+            localStorage.setItem(emailKey, JSON.stringify(initialThreads));
             localStorage.removeItem(storageKey);
           }
         } catch {
@@ -127,34 +157,19 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       }
     }
 
+    // Limit to 10 threads
+    if (initialThreads.length > 10) {
+      initialThreads = initialThreads.slice(0, 10);
+      localStorage.setItem(emailKey, JSON.stringify(initialThreads));
+    }
+
     setThreads(initialThreads);
     if (initialThreads.length > 0) {
       setActiveThreadId(initialThreads[0].id);
+    } else {
+      setActiveThreadId(null);
     }
-
-    const savedProfile = localStorage.getItem(profileKey);
-    if (savedProfile) {
-      try {
-        setStudentProfile(JSON.parse(savedProfile));
-      } catch {
-        console.error("Error loading student profile");
-      }
-    }
-
-    const initSession = async () => {
-      try {
-        const session = await getSession();
-        if (session) {
-          setUserSession(session);
-        } else {
-          setUserSession(null);
-        }
-      } catch (err) {
-        console.error("Error fetching user session from server:", err);
-      }
-    };
-    void initSession();
-  }, [storageKey, profileKey]);
+  }, [userSession, storageKey]);
 
   useEffect(() => {
     return () => {
@@ -366,9 +381,10 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       };
 
       const updatedThreads = [newThread, ...threads];
-      setThreads(updatedThreads);
+      const limitedThreads = updatedThreads.slice(0, 10);
+      setThreads(limitedThreads);
       setActiveThreadId(currentThreadId);
-      localStorage.setItem("aura_chat_threads", JSON.stringify(updatedThreads));
+      localStorage.setItem(getThreadsKey(userSession), JSON.stringify(limitedThreads));
     } else {
       const updatedThreads = threads.map((t) => {
         if (t.id === currentThreadId) {
@@ -381,8 +397,9 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
         return t;
       });
       updatedThreads.sort((a, b) => b.timestamp - a.timestamp);
-      setThreads(updatedThreads);
-      localStorage.setItem("aura_chat_threads", JSON.stringify(updatedThreads));
+      const limitedThreads = updatedThreads.slice(0, 10);
+      setThreads(limitedThreads);
+      localStorage.setItem(getThreadsKey(userSession), JSON.stringify(limitedThreads));
     }
 
     setInputText("");
@@ -447,8 +464,9 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
           return t;
         });
         updated.sort((a, b) => b.timestamp - a.timestamp);
-        localStorage.setItem("aura_chat_threads", JSON.stringify(updated));
-        return updated;
+        const limitedThreads = updated.slice(0, 10);
+        localStorage.setItem(getThreadsKey(userSession), JSON.stringify(limitedThreads));
+        return limitedThreads;
       });
     } catch {
       const errorMsg: ChatMessage = {
@@ -470,8 +488,9 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
           return t;
         });
         updated.sort((a, b) => b.timestamp - a.timestamp);
-        localStorage.setItem("aura_chat_threads", JSON.stringify(updated));
-        return updated;
+        const limitedThreads = updated.slice(0, 10);
+        localStorage.setItem(getThreadsKey(userSession), JSON.stringify(limitedThreads));
+        return limitedThreads;
       });
       setErrorMessage("Network error: Could not reach registry servers.");
     } finally {
@@ -490,7 +509,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   const deleteThread = (id: string) => {
     const updatedThreads = threads.filter((t) => t.id !== id);
     setThreads(updatedThreads);
-    localStorage.setItem("aura_chat_threads", JSON.stringify(updatedThreads));
+    localStorage.setItem(getThreadsKey(userSession), JSON.stringify(updatedThreads));
     if (activeThreadId === id) {
       if (updatedThreads.length > 0) {
         setActiveThreadId(updatedThreads[0].id);
@@ -504,7 +523,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   const clearAllThreads = () => {
     setThreads([]);
     setActiveThreadId(null);
-    localStorage.removeItem("aura_chat_threads");
+    localStorage.removeItem(getThreadsKey(userSession));
     setActiveCitations([]);
     setErrorMessage(null);
   };
