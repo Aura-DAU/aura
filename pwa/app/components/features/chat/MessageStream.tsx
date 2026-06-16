@@ -98,7 +98,7 @@ export default function MessageStream({
         {messages.length === 0 ? (
           <div className="flex flex-col items-start justify-center min-h-[30vh] pt-8 space-y-5 select-none">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 leading-snug">
+              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-black dark:text-white leading-snug">
                 AURA — Academic & University Resource Assistant
               </h2>
               <h3 className="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
@@ -124,7 +124,7 @@ export default function MessageStream({
                     <span className="shrink-0 text-brand-600 dark:text-brand-400">
                       <Icon />
                     </span>
-                    <span className="text-sm text-slate-600 dark:text-slate-300 leading-snug">
+                    <span className="text-sm text-black dark:text-white leading-snug">
                       {prompt.text}
                     </span>
                   </button>
@@ -177,7 +177,7 @@ export default function MessageStream({
                   key={idx}
                   className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-l-2 border-l-brand-300 dark:border-l-brand-600 rounded-md p-3.5 hover:border-l-brand-500 dark:hover:border-l-brand-400 transition-colors duration-150"
                 >
-                  <h4 className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-1 leading-snug">
+                  <h4 className="text-sm font-medium text-black dark:text-white mb-1 leading-snug">
                     {cit.title}
                   </h4>
                   {cit.file && (
