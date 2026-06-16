@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
-import { login, LoginSchema, UserSession } from "@/lib/api/auth.action";
+import { login, UserSession } from "@/lib/api/auth.action";
+import { LoginSchema } from "@/lib/api/auth.schema";
 import { StudentProfile } from "@/app/api/chat.service";
 
 interface LoginFormProps {
@@ -54,7 +55,7 @@ export function LoginForm({
 
       const res = await login({ email, password, role });
 
-      if (res.success) {
+      if (res.success && res.session && res.profile) {
         onSuccess(res.session, res.profile);
       } else {
         onError(res.error || "Authentication failed.");
@@ -114,6 +115,7 @@ export function LoginForm({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
+            maxLength={72}
             className="w-full pl-10 pr-10 py-2.5 text-sm bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-slate-900 dark:text-slate-100 placeholder-slate-400 transition-all"
           />
           <button
@@ -143,4 +145,4 @@ export function LoginForm({
       </button>
     </form>
   );
-}
+}

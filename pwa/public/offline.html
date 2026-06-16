@@ -41,13 +41,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 4rem;
-      height: 4rem;
+      padding: 0.5rem 1.25rem;
+      height: 3rem;
       background-color: rgba(232, 64, 12, 0.1);
       border: 1px solid rgba(232, 64, 12, 0.2);
       border-radius: 18px;
       color: var(--primary);
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 900;
       margin-bottom: 1.5rem;
     }
@@ -103,11 +103,11 @@
 </head>
 <body>
   <div class="card">
-    <div class="logo-badge">AU</div>
+    <div class="logo-badge">AURA</div>
     <h1>You're Offline</h1>
-    <p>It looks like you're not connected to the internet. You can still browse downloaded academic calendars, timetables, and course policies.</p>
+    <p>It looks like you're not connected to the internet. You can still view your previously loaded chat history and profile details.</p>
     <div class="actions">
-      <a href="/student/academics" class="btn btn-primary">Go to Academics (Offline)</a>
+      <a href="/" class="btn btn-primary">Go to Chat History</a>
       <button onclick="window.location.reload()" class="btn btn-secondary">Retry Connection</button>
     </div>
   </div>

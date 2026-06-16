@@ -1,16 +1,17 @@
-import React from "react";
+import { ChatThread, UserSession } from "@/hooks/use-aura-chat";
 import { StudentProfile } from "@/app/api/chat.service";
-import { UserSession } from "@/hooks/use-aura-chat";
 
 interface ChatSidebarProps {
   open: boolean;
   onClose: () => void;
   collapsed?: boolean;
-  recentQueries: string[];
-  onSelectQuery: (query: string) => void;
+  threads: ChatThread[];
+  activeThreadId: string | null;
+  onSelectThread: (id: string) => void;
+  onDeleteThread: (id: string) => void;
+  onNewChat: () => void;
   studentProfile: StudentProfile;
   onOpenProfile: () => void;
-  onClearChat: () => void;
   userSession?: UserSession | null;
 }
 
@@ -43,11 +44,13 @@ export default function ChatSidebar({
   open,
   onClose,
   collapsed = false,
-  recentQueries,
-  onSelectQuery,
+  threads,
+  activeThreadId,
+  onSelectThread,
+  onDeleteThread,
+  onNewChat,
   studentProfile,
   onOpenProfile,
-  onClearChat,
   userSession
 }: ChatSidebarProps) {
   const getInitials = () => {
@@ -115,9 +118,9 @@ export default function ChatSidebar({
 
       <div className="px-3 py-3">
         <button
-          onClick={onClearChat}
+          onClick={onNewChat}
           type="button"
-          className="flex w-full items-center justify-center gap-2.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 px-3.5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 transition-colors duration-150 hover:cursor-pointer"
+          className="flex w-full items-center justify-center gap-2.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 px-3.5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 transition-colors duration-150 hover:cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.99]"
         >
           <svg
             className="w-4 h-4 text-slate-500"
@@ -136,20 +139,57 @@ export default function ChatSidebar({
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-3 py-2 space-y-0.5">
-        <span className="block px-3 text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">
-          Recent
+      <div className="flex-1 overflow-y-auto px-3 py-2 space-y-1">
+        <span className="block px-3 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
+          Conversations
         </span>
-        {recentQueries.map((thread, idx) => (
-          <button
-            key={idx}
-            onClick={() => onSelectQuery(thread)}
-            type="button"
-            className="flex w-full items-center rounded-md px-3 py-2 text-left text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-colors duration-150 hover:cursor-pointer"
-          >
-            <span className="truncate">{thread}</span>
-          </button>
-        ))}
+        {threads.length === 0 ? (
+          <div className="px-3 py-4 text-xs text-slate-400 dark:text-slate-500 text-center italic">
+            No chats started yet
+          </div>
+        ) : (
+          threads.map((t) => (
+            <div
+              key={t.id}
+              className={`group flex items-center justify-between rounded-lg transition-colors duration-150 ${
+                t.id === activeThreadId
+                  ? "bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-medium"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/40 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
+              <button
+                onClick={() => onSelectThread(t.id)}
+                type="button"
+                className="flex-1 truncate px-3 py-2 text-left text-sm hover:cursor-pointer block"
+              >
+                <span className="truncate block">{t.title}</span>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDeleteThread(t.id);
+                }}
+                type="button"
+                className="px-2.5 py-2 text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:cursor-pointer opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-150 shrink-0"
+                title="Delete chat"
+              >
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          ))
+        )}
       </div>
 
       <div className="p-3 border-t border-slate-200 dark:border-slate-800">

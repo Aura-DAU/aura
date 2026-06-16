@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useRef } from "react";
 import {
   askAura,
@@ -17,12 +18,14 @@ export interface UseAuraChatOptions {
   profileKey?: string;
 }
 
-const DEFAULT_THREADS = [
-  "Hostel Curfew Rules",
-  "Bonafide Application Guide",
-  "Lost ID Replacement Steps",
-  "Technical Clubs & E-Cell",
-];
+export interface ChatThread {
+  id: string;
+  title: string;
+  messages: ChatMessage[];
+  timestamp: number;
+}
+
+
 
 export interface UserSession {
   role: "student" | "parent";
@@ -37,7 +40,15 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     profileKey = "aura_student_profile",
   } = options;
 
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [threads, setThreads] = useState<ChatThread[]>([]);
+  const getThreadsKey = (session: UserSession | null) =>
+    session ? `aura_chat_threads_${session.email.toLowerCase()}` : "aura_chat_threads_guest";
+  const [activeThreadId, setActiveThreadId] = useState<string | null>(null);
+
+  // Derived messages for the active thread
+  const activeThread = threads.find((t) => t.id === activeThreadId);
+  const messages = activeThread ? activeThread.messages : [];
+
   const [inputText, setInputText] = useState("");
   const [loading, setLoading] = useState(false);
   const [thinkingStep, setThinkingStep] = useState("");
@@ -45,8 +56,6 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [activeCitations, setActiveCitations] = useState<Citation[]>([]);
-  const [recentThreads, setRecentThreads] =
-    useState<string[]>(DEFAULT_THREADS);
 
   const [userSession, setUserSession] = useState<UserSession | null>(null);
 
@@ -81,16 +90,6 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const savedHistory = localStorage.getItem(storageKey);
-    if (savedHistory) {
-      try {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setMessages(JSON.parse(savedHistory));
-      } catch {
-        console.error("Error loading chat history");
-      }
-    }
-
     const savedProfile = localStorage.getItem(profileKey);
     if (savedProfile) {
       try {
@@ -113,16 +112,64 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
       }
     };
     void initSession();
+  }, [profileKey]);
 
-    const savedThreads = localStorage.getItem("aura_recent_threads");
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const emailKey = getThreadsKey(userSession);
+    let initialThreads: ChatThread[] = [];
+    const savedThreads = localStorage.getItem(emailKey);
+
     if (savedThreads) {
       try {
-        setRecentThreads(JSON.parse(savedThreads));
+        initialThreads = JSON.parse(savedThreads);
       } catch {
-        setRecentThreads(DEFAULT_THREADS);
+        console.error("Error loading chat threads");
+      }
+    } else {
+      // Migrate legacy chat history if present
+      const legacyHistory = localStorage.getItem(storageKey);
+      if (legacyHistory) {
+        try {
+          const parsedHistory = JSON.parse(legacyHistory) as ChatMessage[];
+          if (parsedHistory.length > 0) {
+            const firstUserMsg = parsedHistory.find((m) => m.role === "user");
+            const title = firstUserMsg
+              ? firstUserMsg.content.length > 25
+                ? firstUserMsg.content.substring(0, 25) + "..."
+                : firstUserMsg.content
+              : "Migrated Conversation";
+
+            const legacyThread: ChatThread = {
+              id: "thread_legacy",
+              title,
+              messages: parsedHistory,
+              timestamp: Date.now(),
+            };
+            initialThreads = [legacyThread];
+            localStorage.setItem(emailKey, JSON.stringify(initialThreads));
+            localStorage.removeItem(storageKey);
+          }
+        } catch {
+          console.error("Error migrating legacy history");
+        }
       }
     }
-  }, [storageKey, profileKey]);
+
+    // Limit to 10 threads
+    if (initialThreads.length > 10) {
+      initialThreads = initialThreads.slice(0, 10);
+      localStorage.setItem(emailKey, JSON.stringify(initialThreads));
+    }
+
+    setThreads(initialThreads);
+    if (initialThreads.length > 0) {
+      setActiveThreadId(initialThreads[0].id);
+    } else {
+      setActiveThreadId(null);
+    }
+  }, [userSession, storageKey]);
 
   useEffect(() => {
     return () => {
@@ -139,10 +186,7 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     };
   }, []);
 
-  const saveHistory = (newMessages: ChatMessage[]) => {
-    setMessages(newMessages);
-    localStorage.setItem(storageKey, JSON.stringify(newMessages));
-  };
+
 
   const saveProfile = async (profile: StudentProfile) => {
     setStudentProfile(profile);
@@ -316,30 +360,52 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
 
     setErrorMessage(null);
 
-    const threadTitle =
-      textToSend.length > 25 ? textToSend.substring(0, 25) + "..." : textToSend;
-    if (!recentThreads.includes(threadTitle)) {
-      const updatedThreads = [threadTitle, ...recentThreads.slice(0, 9)];
-      setRecentThreads(updatedThreads);
-      localStorage.setItem(
-        "aura_recent_threads",
-        JSON.stringify(updatedThreads),
-      );
-    }
-
     const userMsg: ChatMessage = {
       role: "user",
       content: textToSend,
       timestamp: Date.now(),
     };
-    const updatedMessages = [...messages, userMsg];
-    saveHistory(updatedMessages);
+
+    let currentThreadId = activeThreadId;
+    const currentMessages = [...messages, userMsg];
+
+    if (!currentThreadId) {
+      currentThreadId = `thread_${Date.now()}`;
+      const title =
+        textToSend.length > 25 ? textToSend.substring(0, 25) + "..." : textToSend;
+      const newThread: ChatThread = {
+        id: currentThreadId,
+        title,
+        messages: [userMsg],
+        timestamp: Date.now(),
+      };
+
+      const updatedThreads = [newThread, ...threads];
+      const limitedThreads = updatedThreads.slice(0, 10);
+      setThreads(limitedThreads);
+      setActiveThreadId(currentThreadId);
+      localStorage.setItem(getThreadsKey(userSession), JSON.stringify(limitedThreads));
+    } else {
+      const updatedThreads = threads.map((t) => {
+        if (t.id === currentThreadId) {
+          return {
+            ...t,
+            messages: currentMessages,
+            timestamp: Date.now(),
+          };
+        }
+        return t;
+      });
+      updatedThreads.sort((a, b) => b.timestamp - a.timestamp);
+      const limitedThreads = updatedThreads.slice(0, 10);
+      setThreads(limitedThreads);
+      localStorage.setItem(getThreadsKey(userSession), JSON.stringify(limitedThreads));
+    }
+
     setInputText("");
     setLoading(true);
     setActiveCitations([]);
 
-    // Animate the status steps alongside the request instead of
-    // delaying it — the fetch starts immediately.
     setThinkingStep("Accessing university registry database...");
     const stepTimers = [
       setTimeout(
@@ -362,41 +428,70 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
         studentProfile,
       });
 
+      let assistantContent = "";
       if (result.success) {
-        const content = result.content?.trim()
+        assistantContent = result.content?.trim()
           ? result.content
           : "I could not find that information in the available university data.";
-        saveHistory([
-          ...updatedMessages,
-          { role: "assistant", content, timestamp: Date.now() },
-        ]);
         if (result.citations) {
           setActiveCitations(result.citations);
         }
       } else {
-        saveHistory([
-          ...updatedMessages,
-          {
-            role: "assistant",
-            content:
-              "Sorry, I had trouble processing your query. Please check your network or try again.",
-            timestamp: Date.now(),
-          },
-        ]);
+        assistantContent =
+          "Sorry, I had trouble processing your query. Please check your network or try again.";
         setErrorMessage(
           result.error ?? "Failed to receive response from AURA server.",
         );
       }
+
+      const assistantMsg: ChatMessage = {
+        role: "assistant",
+        content: assistantContent,
+        timestamp: Date.now(),
+      };
+
+      const finalMessages = [...currentMessages, assistantMsg];
+      
+      setThreads((prevThreads) => {
+        const updated = prevThreads.map((t) => {
+          if (t.id === currentThreadId) {
+            return {
+              ...t,
+              messages: finalMessages,
+              timestamp: Date.now(),
+            };
+          }
+          return t;
+        });
+        updated.sort((a, b) => b.timestamp - a.timestamp);
+        const limitedThreads = updated.slice(0, 10);
+        localStorage.setItem(getThreadsKey(userSession), JSON.stringify(limitedThreads));
+        return limitedThreads;
+      });
     } catch {
-      saveHistory([
-        ...updatedMessages,
-        {
-          role: "assistant",
-          content:
-            "Error: I encountered a problem communicating with the university registry servers.",
-          timestamp: Date.now(),
-        },
-      ]);
+      const errorMsg: ChatMessage = {
+        role: "assistant",
+        content:
+          "Error: I encountered a problem communicating with the university registry servers.",
+        timestamp: Date.now(),
+      };
+      const finalMessages = [...currentMessages, errorMsg];
+      setThreads((prevThreads) => {
+        const updated = prevThreads.map((t) => {
+          if (t.id === currentThreadId) {
+            return {
+              ...t,
+              messages: finalMessages,
+              timestamp: Date.now(),
+            };
+          }
+          return t;
+        });
+        updated.sort((a, b) => b.timestamp - a.timestamp);
+        const limitedThreads = updated.slice(0, 10);
+        localStorage.setItem(getThreadsKey(userSession), JSON.stringify(limitedThreads));
+        return limitedThreads;
+      });
       setErrorMessage("Network error: Could not reach registry servers.");
     } finally {
       stepTimers.forEach(clearTimeout);
@@ -405,14 +500,41 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     }
   };
 
-  useEffect(() => {
-    sendMessageRef.current = handleSendMessage;
-  });
-
-  const handleClearChat = () => {
-    saveHistory([]);
+  const startNewChat = () => {
+    setActiveThreadId(null);
     setActiveCitations([]);
     setErrorMessage(null);
+  };
+
+  const deleteThread = (id: string) => {
+    const updatedThreads = threads.filter((t) => t.id !== id);
+    setThreads(updatedThreads);
+    localStorage.setItem(getThreadsKey(userSession), JSON.stringify(updatedThreads));
+    if (activeThreadId === id) {
+      if (updatedThreads.length > 0) {
+        setActiveThreadId(updatedThreads[0].id);
+      } else {
+        setActiveThreadId(null);
+      }
+      setActiveCitations([]);
+    }
+  };
+
+  const clearAllThreads = () => {
+    setThreads([]);
+    setActiveThreadId(null);
+    localStorage.removeItem(getThreadsKey(userSession));
+    setActiveCitations([]);
+    setErrorMessage(null);
+  };
+
+  const handleClearChat = () => {
+    if (activeThreadId) {
+      deleteThread(activeThreadId);
+    } else {
+      setActiveCitations([]);
+      setErrorMessage(null);
+    }
   };
 
   const logout = async () => {
@@ -432,7 +554,8 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     };
     setStudentProfile(defaultProfile);
     localStorage.setItem(profileKey, JSON.stringify(defaultProfile));
-    handleClearChat();
+    setActiveCitations([]);
+    setErrorMessage(null);
   };
 
   return {
@@ -446,7 +569,12 @@ export function useAuraChat(options: UseAuraChatOptions = {}) {
     errorMessage,
     setErrorMessage,
     activeCitations,
-    recentThreads,
+    threads,
+    activeThreadId,
+    setActiveThreadId,
+    startNewChat,
+    deleteThread,
+    clearAllThreads,
     studentProfile,
     saveProfile,
     handleMicClick,
