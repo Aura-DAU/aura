@@ -1,21 +1,11 @@
 import os
-
 from dotenv import load_dotenv
-from groq import Groq
-
+from pipeline.key_manager import KeyManager
 
 class QueryRewriter:
 
     def __init__(self):
-
         load_dotenv()
-
-        self.client = Groq(
-            api_key=os.getenv(
-                "GROQ_API_KEY"
-            )
-        )
-
         self.model = os.getenv(
             "GROQ_MODEL",
             "qwen/qwen3-32b"
@@ -29,7 +19,6 @@ class QueryRewriter:
 
         if not history:
             return query
-        
 
         history_text = ""
 
@@ -63,14 +52,10 @@ Latest Question:
 {query}
 """
 
-        response = (
-            self.client.chat.completions.create(
+        def _execute_rewrite(client):
+            return client.chat.completions.create(
                 model=self.model,
-
                 temperature=0,
-
-                reasoning_effort="none",
-
                 messages=[
                     {
                         "role": "user",
@@ -78,7 +63,8 @@ Latest Question:
                     }
                 ]
             )
-        )
+
+        response = KeyManager.call_with_rotation(_execute_rewrite, max_retries=5)
 
         return (
             response
