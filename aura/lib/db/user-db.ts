@@ -72,19 +72,45 @@ export async function findUser(
   role: "student" | "parent"
 ): Promise<UserAccount | undefined> {
   const users = await getUsers()
-  return users.find(
+  const found = users.find(
     (u) => u.email.toLowerCase() === email.toLowerCase() && u.role === role
   )
+  if (found) return found
+
+  // Auto-support demo credentials
+  if (role === "student" && email.toLowerCase() === "demo.student@dau.ac.in") {
+    return {
+      role: "student",
+      email: "demo.student@dau.ac.in",
+      name: "Demo Student",
+      passwordHash: hashPassword("Student@123"),
+      createdAt: new Date().toISOString()
+    }
+  }
+  if (role === "parent" && email.toLowerCase() === "parent.demo@gmail.com") {
+    return {
+      role: "parent",
+      email: "parent.demo@gmail.com",
+      name: "Demo Parent",
+      passwordHash: hashPassword("Parent@123"),
+      createdAt: new Date().toISOString()
+    }
+  }
+
+  return undefined
 }
 
 export async function saveUser(
   user: Omit<UserAccount, "passwordHash" | "createdAt"> & { password: string }
 ): Promise<UserAccount> {
   const users = await getUsers()
+  const isDemo =
+    (user.role === "student" && user.email.toLowerCase() === "demo.student@dau.ac.in") ||
+    (user.role === "parent" && user.email.toLowerCase() === "parent.demo@gmail.com")
   const exists = users.some(
     (u) => u.email.toLowerCase() === user.email.toLowerCase() && u.role === user.role
   )
-  if (exists) throw new Error("USER_EXISTS")
+  if (exists || isDemo) throw new Error("USER_EXISTS")
 
   const { password, ...rest } = user
   const record: UserAccount = {
