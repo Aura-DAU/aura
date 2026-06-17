@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/app/components/ThemeProvider";
-import { ServiceWorkerRegister } from "@/app/components/ServiceWorkerRegister";
+import { PwaKillSwitch } from "@/app/components/PwaKillSwitch";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,13 +46,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        <PwaKillSwitch />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
         >
           {children}
-          <ServiceWorkerRegister />
         </ThemeProvider>
       </body>
     </html>

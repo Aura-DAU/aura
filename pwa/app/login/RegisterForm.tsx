@@ -110,7 +110,6 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
           />
         </div>
       </div>
-
       <div className="space-y-1.5">
         <label className={labelBase}>
           {role === "student" ? "university email" : "parent email"}

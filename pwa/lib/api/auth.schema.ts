@@ -1,21 +1,20 @@
 import { z } from "zod";
 
-// Zod validation schemas
 export const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
-  password: z.string().min(6, "Password must be at least 6 characters.").max(72, "Password must not exceed 72 characters."),
+  password: z.string().min(6, "Password must be at least 6 characters."),
   role: z.enum(["student", "parent"]),
 });
 
 export const RegisterSchema = z.object({
   role: z.enum(["student", "parent"]),
   email: z.string().email("Please enter a valid email address."),
-  password: z.string().min(6, "Password must be at least 6 characters.").max(72, "Password must not exceed 72 characters."),
-  name: z.string().min(1, "Full name is required.").max(100, "Name must not exceed 100 characters."),
-  branch: z.string().max(100).optional(),
-  year: z.string().max(50).optional(),
-  semester: z.string().max(50).optional(),
-  interests: z.string().max(300).optional(),
+  password: z.string().min(6, "Password must be at least 6 characters."),
+  name: z.string().min(1, "Full name is required."),
+  branch: z.string().optional(),
+  year: z.string().optional(),
+  semester: z.string().optional(),
+  interests: z.string().optional(),
   linkedStudentEmail: z.string().optional(),
 }).superRefine((data, ctx) => {
   if (data.role === "student") {
@@ -48,4 +47,11 @@ export const RegisterSchema = z.object({
 });
 
 export type LoginInput = z.infer<typeof LoginSchema>;
-export type RegisterInput = z.infer<typeof RegisterSchema>;
+export type RegisterInput = z.infer<typeof RegisterSchema>;
+
+export interface UserSession {
+  role: "student" | "parent";
+  email: string;
+  name: string;
+  linkedStudentEmail?: string;
+}

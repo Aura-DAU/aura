@@ -11,6 +11,4 @@ python-multipart
 PyYAML
 numpy
 transformers
-thefuzz
-python-Levenshtein
-rank-bm25
+rapidfuzz>=3.5.0

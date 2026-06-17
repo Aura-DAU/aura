@@ -1,8 +1,9 @@
+"use client";
 
 import React, { useState } from "react";
 import { Mail, Lock, Loader2, Eye, EyeOff, ArrowRight } from "lucide-react";
-import { login, UserSession } from "@/lib/api/auth.action";
-import { LoginSchema } from "@/lib/api/auth.schema";
+import { login } from "@/lib/api/auth.action";
+import { LoginSchema, UserSession } from "@/lib/api/auth.schema";
 import { StudentProfile } from "@/app/api/chat.service";
 
 interface LoginFormProps {
