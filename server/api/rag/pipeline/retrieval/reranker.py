@@ -10,6 +10,8 @@ class Reranker:
 
     def __init__(self):
 
+        self.device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+
         self.tokenizer = (
             AutoTokenizer.from_pretrained(
                 "BAAI/bge-reranker-base"
@@ -21,7 +23,7 @@ class Reranker:
             .from_pretrained(
                 "BAAI/bge-reranker-base"
             )
-        )
+        ).to(self.device)
 
         self.model.eval()
 
@@ -68,6 +70,8 @@ class Reranker:
             max_length=512,
             return_tensors="pt"
         )
+
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
 
         with torch.no_grad():
 

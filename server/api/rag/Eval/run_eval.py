@@ -6,6 +6,14 @@ import requests
 import time
 from typing import List, Dict, Any
 
+def clean_url(u: str) -> str:
+    u = u.lower().strip()
+    u = u.replace("https://", "").replace("http://", "")
+    u = u.replace("www.", "")
+    if u.endswith("/"):
+        u = u[:-1]
+    return u
+
 def run_evaluation(api_url: str, csv_path: str, output_path: str) -> None:
     print(f"Starting evaluation using dataset: {csv_path}")
     print(f"Target API Endpoint: {api_url}")
@@ -35,7 +43,7 @@ def run_evaluation(api_url: str, csv_path: str, output_path: str) -> None:
         
         try:
             # Call the local RAG API
-            response = requests.post(api_url, json=payload, timeout=15)
+            response = requests.post(api_url, json=payload, timeout=400)
             latency = response.elapsed.total_seconds()
             
             if response.status_code == 200:
@@ -54,13 +62,13 @@ def run_evaluation(api_url: str, csv_path: str, output_path: str) -> None:
                         section = s.get("section", "") or ""
                         sources.append(url if url else f"{title} - {section}")
                         
-                        exp_lower = expected_source.lower()
-                        # Empty expected source must not trivially match ('' is a substring of everything)
-                        if exp_lower and (exp_lower in url.lower() or exp_lower in title.lower() or exp_lower in section.lower()):
+                        exp_clean = clean_url(expected_source)
+                        if exp_clean and (exp_clean in clean_url(url) or exp_clean in clean_url(title) or exp_clean in clean_url(section)):
                             source_matched = True
                     elif isinstance(s, str):
                         sources.append(s.strip())
-                        if expected_source and expected_source.lower() in s.lower():
+                        exp_clean = clean_url(expected_source)
+                        if exp_clean and exp_clean in clean_url(s):
                             source_matched = True
                 
                 # Basic check if answer contains text or is fallback
@@ -112,6 +120,9 @@ def run_evaluation(api_url: str, csv_path: str, output_path: str) -> None:
                 "status": "FAIL",
                 "error": str(e)
             })
+        
+        # Space out requests to stay under Groq API TPM rate limits
+        time.sleep(1.0)
             
     total_time = time.time() - start_time
     accuracy = (passed / total) * 100 if total > 0 else 0.0
