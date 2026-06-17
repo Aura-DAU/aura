@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { login, register } from "./auth.action";
+import { login } from "./auth.action";
 import { LoginSchema, RegisterSchema, LoginInput, RegisterInput } from "./auth.schema";
 
 vi.mock("../db/user-db", () => {
