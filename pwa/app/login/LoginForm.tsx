@@ -1,8 +1,9 @@
+"use client";
 
 import React, { useState } from "react";
 import { Mail, Lock, Loader2, Eye, EyeOff, ArrowRight } from "lucide-react";
-import { login, UserSession } from "@/lib/api/auth.action";
-import { LoginSchema } from "@/lib/api/auth.schema";
+import { login } from "@/lib/api/auth.action";
+import { LoginSchema, UserSession } from "@/lib/api/auth.schema";
 import { StudentProfile } from "@/app/api/chat.service";
 
 interface LoginFormProps {
@@ -14,10 +15,8 @@ interface LoginFormProps {
   onSuccess: (session: UserSession, profile: StudentProfile) => void;
   onError: (msg: string | null) => void;
 }
-
 const inputBase =
   "w-full pl-10 pr-4 py-3 text-sm font-medium bg-white dark:bg-slate-950 border-2 border-[var(--color-aura-ink)] dark:border-slate-100 rounded-2xl text-[var(--color-aura-ink)] dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-none shadow-sticker-sm transition-all";
-
 export function LoginForm({
   role,
   email,

@@ -70,6 +70,7 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
 
       if (role === "parent" && linkedStudentEmail) {
         setLoadingStatus("linking student record…");
+      }
         await new Promise((r) => setTimeout(r, 500));
       }
 
@@ -91,12 +92,12 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="space-y-1.5">
-        <label className={labelBase}>
-          {role === "student" ? "full name" : "parent full name"}
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+    <div className="space-y-1.5">
+            <label className={labelBase}>
+              {role === "student" ? "full name" : "parent full name"}
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">   
             <User className="w-4 h-4" />
           </div>
           <input
@@ -110,7 +111,7 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
           />
         </div>
       </div>
-
+ 
       <div className="space-y-1.5">
         <label className={labelBase}>
           {role === "student" ? "university email" : "parent email"}
