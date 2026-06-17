@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Download, LogIn, LogOut, Menu, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { UserSession } from "@/lib/chat-types"
@@ -24,14 +24,25 @@ export function Header({
   onLogout,
 }: HeaderProps) {
   const [confirmClear, setConfirmClear] = useState(false)
+  const confirmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (confirmTimerRef.current) clearTimeout(confirmTimerRef.current)
+    }
+  }, [])
 
   const handleClear = () => {
+    if (confirmTimerRef.current) {
+      clearTimeout(confirmTimerRef.current)
+      confirmTimerRef.current = null
+    }
     if (confirmClear) {
       onClearChat()
       setConfirmClear(false)
     } else {
       setConfirmClear(true)
-      setTimeout(() => setConfirmClear(false), 3000)
+      confirmTimerRef.current = setTimeout(() => setConfirmClear(false), 3000)
     }
   }
 
