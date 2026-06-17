@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { login } from "./auth.action";
-import { LoginSchema, RegisterSchema, LoginInput, RegisterInput } from "./auth.schema";
+import { LoginSchema, RegisterSchema } from "./auth.schema";
 
 vi.mock("../db/user-db", () => {
   const mockUsers = [
