@@ -314,8 +314,9 @@ export function useAuraChat() {
         form.append("audio", blob, "recording.webm")
         const res = await fetch("/api/speech", { method: "POST", body: form })
         const data = (await res.json()) as { text?: string; error?: string }
-        if (data.text) {
-          setInputText((prev) => (prev ? `${prev} ${data.text}` : data.text!))
+        const transcript = data.text
+        if (transcript) {
+          setInputText((prev) => (prev ? `${prev} ${transcript}` : transcript))
         } else {
           setErrorMessage(data.error ?? "Could not transcribe audio.")
         }
