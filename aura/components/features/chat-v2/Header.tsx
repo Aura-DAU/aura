@@ -23,6 +23,7 @@ export function Header({
   userSession,
   onLogout,
 }: HeaderProps) {
+  const router = useRouter()
   const [confirmClear, setConfirmClear] = useState(false)
   const confirmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -97,6 +98,7 @@ export function Header({
           ) : (
             <button
               type="button"
+              onClick={() => router.push("/login")}
               className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm text-neutral-300 transition-colors hover:bg-theme-gray-light"
             >
               <LogIn className="size-4" />
