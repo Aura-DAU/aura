@@ -9,8 +9,9 @@ import type {
   UserSession,
 } from "@/lib/chat-types"
 
-const STORAGE_KEY = "aura-threads-v2"
-const PROFILE_KEY = "aura-profile-v2"
+const STORAGE_KEY  = "aura-threads-v2"
+const PROFILE_KEY  = "aura-profile-v2"
+const SESSION_KEY  = "aura-session-v1"
 
 interface StoredThread extends ChatThread {
   messages: ChatMessage[]
@@ -43,6 +44,19 @@ function toBackendProfile(p: StudentProfile) {
 
 function toBackendHistory(messages: ChatMessage[]) {
   return messages.map(({ role, content }) => ({ role, content }))
+}
+
+// Fire-and-forget — never blocks the UI
+function saveHistoryToServer(
+  email: string,
+  threads: (StoredThread & { messages: ChatMessage[] })[]
+): void {
+  const payload = threads.slice(0, 10)
+  fetch("/api/auth/history", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, threads: payload }),
+  }).catch(() => { /* ignore network errors */ })
 }
 
 async function* parseSSEStream(response: Response) {
@@ -103,7 +117,8 @@ export function useAuraChat() {
       }
       const rawProfile = localStorage.getItem(PROFILE_KEY)
       if (rawProfile) setStudentProfile(JSON.parse(rawProfile) as StudentProfile)
-      setUserSession({ name: "Aarav Patel", email: "aarav@dau.ac.in" })
+      const rawSession = localStorage.getItem(SESSION_KEY)
+      if (rawSession) setUserSession(JSON.parse(rawSession) as UserSession)
     } catch {
       /* ignore corrupt storage */
     }
@@ -256,6 +271,21 @@ export function useAuraChat() {
           { ...assistantMsg, content: assistantText },
         ]
         persistMessages(threadId, finalMessages)
+
+        // Sync to server (fire-and-forget) if a user is logged in
+        try {
+          const rawSession = localStorage.getItem(SESSION_KEY)
+          if (rawSession) {
+            const session = JSON.parse(rawSession) as { email: string }
+            if (session.email) {
+              // Build latest snapshot of threads to sync
+              setThreads((current) => {
+                saveHistoryToServer(session.email, current)
+                return current
+              })
+            }
+          }
+        } catch { /* ignore */ }
       } catch {
         setErrorMessage("Something went wrong. Please try again.")
         setMessages(baseMessages)
@@ -326,6 +356,7 @@ export function useAuraChat() {
 
   const logout = useCallback(async () => {
     setUserSession(null)
+    try { localStorage.removeItem(SESSION_KEY) } catch { /* ignore */ }
   }, [])
 
   return {
