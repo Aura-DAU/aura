@@ -46,25 +46,43 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --color-brand-50: #eef2f6;
-  --color-brand-100: #dbe4ee;
-  --color-brand-200: #b8c8d9;
-  --color-brand-300: #8aa6bf;
-  --color-brand-400: #4d6f96;
-  --color-brand-500: #2c5079;
-  --color-brand-600: #1a3a5c;
-  --color-brand-700: #152f4b;
-  --color-brand-800: #11253c;
-  --color-brand-900: #0d1c2e;
+  /* AURA brand — electric violet (Gen-Z bold) */
+  --color-brand-50:  #f5f1ff;
+  --color-brand-100: #ebe3ff;
+  --color-brand-200: #d4c2ff;
+  --color-brand-300: #b599ff;
+  --color-brand-400: #9168ff;
+  --color-brand-500: #7c3aed;
+  --color-brand-600: #6d28d9;
+  --color-brand-700: #5b21b6;
+  --color-brand-800: #4c1d95;
+  --color-brand-900: #2e1065;
+
+  /* Sticker-pack accent palette */
+  --color-aura-yellow:  #facc15;
+  --color-aura-mint:    #34d399;
+  --color-aura-coral:   #fb7185;
+  --color-aura-sky:     #38bdf8;
+  --color-aura-ink:     #0f172a;
+  --color-aura-cream:   #fdf9ef;
+  --color-aura-lavender:#f5f3ff;
+
+  /* SBG DAU chat surface tokens (dark only — scoped to chat-v2) */
+  --color-theme-black:        #000000;
+  --color-theme-gray:          #1A1A1A;
+  --color-theme-gray-light:    #2A2A2A;
+  --color-theme-gray-lighter:  #3A3A3A;
+  --color-theme-red:           #F4503B;
+  --color-theme-yellow:        #FFBE3F;
 }
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: oklch(0 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
@@ -95,11 +113,11 @@
 
 .dark {
   --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  --foreground: oklch(1 0 0);
   --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --card-foreground: oklch(1 0 0);
   --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --popover-foreground: oklch(1 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
@@ -158,3 +176,74 @@
   background-size: 800px 100%;
   animation: shimmer 1.6s ease-in-out infinite;
 }
+
+/* ------- Sticker / Neo-brutal utility layer ------- */
+@utility shadow-sticker {
+  box-shadow: 4px 4px 0 0 var(--color-aura-ink);
+}
+@utility shadow-sticker-sm {
+  box-shadow: 2px 2px 0 0 var(--color-aura-ink);
+}
+@utility shadow-sticker-lg {
+  box-shadow: 6px 6px 0 0 var(--color-aura-ink);
+}
+@utility shadow-sticker-violet {
+  box-shadow: 4px 4px 0 0 var(--color-brand-700);
+}
+
+.dark .shadow-sticker,
+.dark .shadow-sticker-sm,
+.dark .shadow-sticker-lg {
+  box-shadow: 4px 4px 0 0 var(--color-brand-500);
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+.animate-wiggle { animation: wiggle 0.6s ease-in-out infinite; }
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float { animation: float-y 6s ease-in-out infinite; }
+
+/* ------- chat-v2: SBG DAU brand scrollbar (scoped) ------- */
+.chat-v2-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.chat-v2-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+.chat-v2-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #F4503B 0%, #FFBE3F 100%);
+  border-radius: 9999px;
+}
+.chat-v2-scroll {
+  scrollbar-color: #F4503B rgba(255, 255, 255, 0.04);
+  scrollbar-width: thin;
+}
+
+/* prose overrides for assistant markdown — keeps brand color on links/code */
+.chat-v2-prose a { color: #F4503B; text-decoration: underline; text-underline-offset: 3px; }
+.chat-v2-prose a:hover { color: #FFBE3F; }
+.chat-v2-prose code {
+  background: #2A2A2A;
+  color: #FFBE3F;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.chat-v2-prose pre {
+  background: #1A1A1A;
+  border: 1px solid #2A2A2A;
+  border-radius: 12px;
+  padding: 12px 14px;
+  overflow-x: auto;
+}
+.chat-v2-prose pre code { background: transparent; color: inherit; padding: 0; }
+
+@keyframes chat-v2-dot {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+.chat-v2-dot { animation: chat-v2-dot 1.2s ease-in-out infinite; }

@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "AURA | DAU Academic Assistant",
     short_name: "AURA",
-    description: "Ask AURA for DA-IICT academic policies, exam schedules, hostel rules, and campus resources.",
+    description: "Ask AURA for DAU academic policies, exam schedules, hostel rules, and campus resources.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Loader2, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { login } from "@/lib/api/auth.action";
 import { LoginSchema, UserSession } from "@/lib/api/auth.schema";
 import { StudentProfile } from "@/app/api/chat.service";
@@ -15,7 +15,8 @@ interface LoginFormProps {
   onSuccess: (session: UserSession, profile: StudentProfile) => void;
   onError: (msg: string | null) => void;
 }
-
+const inputBase =
+  "w-full pl-10 pr-4 py-3 text-sm font-medium bg-white dark:bg-slate-950 border-2 border-[var(--color-aura-ink)] dark:border-slate-100 rounded-2xl text-[var(--color-aura-ink)] dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-none shadow-sticker-sm transition-all";
 export function LoginForm({
   role,
   email,
@@ -33,7 +34,6 @@ export function LoginForm({
     e.preventDefault();
     onError(null);
 
-    // Client-side Zod Validation
     const validation = LoginSchema.safeParse({ email, password, role });
     if (!validation.success) {
       onError(validation.error.issues[0]?.message || "Invalid inputs");
@@ -43,14 +43,11 @@ export function LoginForm({
     setLoading(true);
 
     try {
-      // Simulate authenticating milestones
-      setLoadingStatus("Verifying identity via LDAP server...");
+      setLoadingStatus("verifying identity…");
       await new Promise((r) => setTimeout(r, 600));
-
-      setLoadingStatus("Resolving academic credentials...");
+      setLoadingStatus("resolving credentials…");
       await new Promise((r) => setTimeout(r, 600));
-
-      setLoadingStatus("Injecting context and loading AURA desktop...");
+      setLoadingStatus("loading AURA…");
       await new Promise((r) => setTimeout(r, 500));
 
       const res = await login({ email, password, role });
@@ -71,13 +68,12 @@ export function LoginForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Email Address */}
-      <div className="space-y-1">
-        <label className="text-xs font-medium text-slate-700 dark:text-slate-300 ml-1">
-          {role === "student" ? "University Email ID" : "Parent Email Address"}
+      <div className="space-y-1.5">
+        <label className="text-[10px] font-black uppercase tracking-wider text-[var(--color-aura-ink)] dark:text-slate-200 ml-1">
+          {role === "student" ? "university email" : "parent email"}
         </label>
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
             <Mail className="w-4 h-4" />
           </div>
           <input
@@ -85,28 +81,27 @@ export function LoginForm({
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder={role === "student" ? "student@dau.edu" : "parent@example.com"}
-            className="w-full pl-10 pr-4 py-2.5 text-sm bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-slate-900 dark:text-slate-100 placeholder-slate-400 transition-all"
+            placeholder={role === "student" ? "you@dau.ac.in" : "parent@example.com"}
+            className={inputBase}
           />
         </div>
       </div>
 
-      {/* Password */}
-      <div className="space-y-1">
+      <div className="space-y-1.5">
         <div className="flex items-center justify-between ml-1">
-          <label className="text-xs font-medium text-slate-700 dark:text-slate-300">
-            Password
+          <label className="text-[10px] font-black uppercase tracking-wider text-[var(--color-aura-ink)] dark:text-slate-200">
+            password
           </label>
           <a
             href="#"
             onClick={(e) => e.preventDefault()}
-            className="text-[10px] font-medium text-brand-600 dark:text-brand-400 hover:underline"
+            className="text-[10px] font-bold text-brand-600 dark:text-brand-300 hover:underline"
           >
-            Forgot password?
+            forgot?
           </a>
         </div>
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
             <Lock className="w-4 h-4" />
           </div>
           <input
@@ -115,31 +110,34 @@ export function LoginForm({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="w-full pl-10 pr-10 py-2.5 text-sm bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-slate-900 dark:text-slate-100 placeholder-slate-400 transition-all"
+            maxLength={72}
+            className={`${inputBase} pr-10`}
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+            className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-[var(--color-aura-ink)] dark:hover:text-slate-200"
           >
             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>
         </div>
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/20 dark:shadow-brand-500/10 transition-all hover:shadow-brand-500/30 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2 mt-6 cursor-pointer"
+        className="group mt-5 w-full py-3.5 px-5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-black text-sm border-2 border-[var(--color-aura-ink)] shadow-sticker transition-all hover:-translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none disabled:opacity-70 disabled:cursor-not-allowed disabled:active:translate-x-0 disabled:active:translate-y-0 flex items-center justify-center gap-2 tracking-tight cursor-pointer"
       >
         {loading ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            <span>{loadingStatus || "Authenticating..."}</span>
+            <span>{loadingStatus || "authenticating…"}</span>
           </>
         ) : (
-          <span>Sign In</span>
+          <>
+            <span>sign me in</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </>
         )}
       </button>
     </form>

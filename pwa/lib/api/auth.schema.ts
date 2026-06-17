@@ -16,7 +16,35 @@ export const RegisterSchema = z.object({
   semester: z.string().optional(),
   interests: z.string().optional(),
   linkedStudentEmail: z.string().optional(),
-}); // Keep any existing .superRefine() logic if you had it attached here
+}).superRefine((data, ctx) => {
+  if (data.role === "student") {
+    if (!data.email.toLowerCase().endsWith("@dau.ac.in")) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["email"],
+        message: "Student registration requires a university domain email (@dau.ac.in).",
+      });
+    }
+  }
+  if (data.role === "parent") {
+    if (!data.linkedStudentEmail || !data.linkedStudentEmail.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["linkedStudentEmail"],
+        message: "Linked Student Email is required.",
+      });
+    } else {
+      const emailResult = z.string().email().safeParse(data.linkedStudentEmail);
+      if (!emailResult.success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["linkedStudentEmail"],
+          message: "Please enter a valid linked student email address.",
+        });
+      }
+    }
+  }
+});
 
 export type LoginInput = z.infer<typeof LoginSchema>;
 export type RegisterInput = z.infer<typeof RegisterSchema>;

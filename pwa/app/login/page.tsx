@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, GraduationCap, Users, AlertCircle, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, GraduationCap, Users, AlertCircle, CheckCircle2, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
@@ -14,20 +14,14 @@ import { StudentProfile } from "@/app/api/chat.service";
 export default function LoginPage() {
   const router = useRouter();
 
-  // Auth Modes: "signin" or "signup"
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
-  // Roles: "student" or "parent"
   const [role, setRole] = useState<"student" | "parent">("student");
 
-  // Input states sync'd for demo filling
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // Feedback states
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
-  // Clear inputs and messages when toggling modes or roles
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setEmail("");
@@ -41,7 +35,7 @@ export default function LoginPage() {
     setAuthMode("signin");
     if (demoType === "student") {
       setRole("student");
-      setEmail("student@dau.edu");
+      setEmail("student@dau.ac.in");
       setPassword("password123");
     } else {
       setRole("parent");
@@ -50,94 +44,127 @@ export default function LoginPage() {
     }
   };
 
-  const handleLoginSuccess = (session: UserSession, profile: StudentProfile) => {
-    // Save profile and redirect (the session cookie is already managed by Server Action)
+  const handleLoginSuccess = (_session: UserSession, profile: StudentProfile) => {
     localStorage.setItem("aura_student_profile", JSON.stringify(profile));
     router.push("/");
   };
 
   return (
-    <div className="min-h-screen w-full bg-slate-50 dark:bg-slate-950 flex flex-col relative overflow-hidden transition-colors duration-300 font-sans">
-      {/* Decorative background gradients */}
-      <div className="absolute top-[-15%] left-[-15%] w-[50%] h-[50%] rounded-full bg-brand-500/10 dark:bg-brand-500/20 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-15%] right-[-15%] w-[50%] h-[50%] rounded-full bg-blue-500/5 dark:bg-blue-500/10 blur-[120px] pointer-events-none" />
+    <div className="min-h-screen w-full bg-[var(--color-aura-lavender)] dark:bg-slate-950 flex flex-col relative overflow-hidden font-sans text-[var(--color-aura-ink)] dark:text-slate-100">
+      {/* Sticker-pack background blobs */}
+      <div className="pointer-events-none absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-brand-500/20 dark:bg-brand-500/15 blur-[80px]" />
+      <div className="pointer-events-none absolute -bottom-40 -right-32 w-[460px] h-[460px] rounded-full bg-[var(--color-aura-yellow)]/45 dark:bg-[var(--color-aura-yellow)]/15 blur-[80px]" />
+      <div className="pointer-events-none absolute top-12 right-24 w-44 h-44 rounded-full bg-[var(--color-aura-mint)]/60 dark:bg-[var(--color-aura-mint)]/20 blur-[40px]" />
 
-      <header className="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-10">
+      {/* Floating sticker shapes */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute hidden sm:block top-32 left-12 w-20 h-20 rotate-12 animate-float"
+      >
+        <div className="w-full h-full rounded-3xl bg-[var(--color-aura-coral)] border-2 border-[var(--color-aura-ink)] shadow-sticker" />
+      </div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute hidden sm:block bottom-24 left-1/4 w-14 h-14 -rotate-12 animate-float"
+        style={{ animationDelay: "1s" }}
+      >
+        <div className="w-full h-full rounded-2xl bg-[var(--color-aura-sky)] border-2 border-[var(--color-aura-ink)] shadow-sticker-sm" />
+      </div>
+
+      {/* Top bar */}
+      <header className="relative z-10 w-full px-5 sm:px-10 py-5 flex justify-between items-center">
         <Link
           href="/"
-          className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors"
+          className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-aura-ink)] bg-white px-4 py-2 text-xs font-bold text-[var(--color-aura-ink)] shadow-sticker-sm transition-transform hover:-translate-y-0.5 hover:translate-x-0 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-100"
         >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Chat
+          <ArrowLeft className="w-3.5 h-3.5" />
+          back to chat
         </Link>
-        <ThemeToggle />
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 rounded-full border-2 border-[var(--color-aura-ink)] bg-white px-3 py-2 shadow-sticker-sm dark:bg-slate-900 dark:border-slate-100">
+            <div className="grid place-items-center w-7 h-7 rounded-lg bg-[var(--color-aura-ink)] dark:bg-brand-500">
+              <span className="font-black text-sm text-[var(--color-aura-yellow)]">A</span>
+            </div>
+            <span className="font-black tracking-tight text-sm">AURA</span>
+          </div>
+          <ThemeToggle />
+        </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center p-6 z-10 my-16">
-        <div className="w-full max-w-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
-          
-          {/* Main Logo & Title */}
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-brand-400 dark:from-brand-500 dark:to-brand-300 text-white shadow-xl shadow-brand-500/10 dark:shadow-brand-500/20 mb-4">
-              <span className="text-2xl font-bold tracking-tight">A</span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-1">
-              {authMode === "signin" ? "Academic Portal Login" : "Create Academic Profile"}
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-5 sm:px-6 pb-12">
+        <div className="w-full max-w-lg">
+          {/* Hero */}
+          <div className="text-center mb-6 sm:mb-8">
+            <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[var(--color-aura-ink)] bg-[var(--color-aura-yellow)] px-3 py-1 text-[10px] font-black uppercase tracking-wider shadow-sticker-sm">
+              <Sparkles className="w-3 h-3" />
+              DAU academic portal
+            </span>
+            <h1 className="mt-5 text-[44px] sm:text-[56px] font-black leading-[0.95] tracking-[-0.03em] text-[var(--color-aura-ink)] dark:text-white">
+              {authMode === "signin" ? (
+                <>
+                  hey future
+                  <br />
+                  engineer <span className="inline-block animate-wiggle origin-bottom">👋</span>
+                </>
+              ) : (
+                <>
+                  let&apos;s get
+                  <br />
+                  you set up <span className="inline-block animate-wiggle origin-bottom">🚀</span>
+                </>
+              )}
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300 max-w-md mx-auto">
               {authMode === "signin"
-                ? "Sign in to access student handbooks and curfew logs"
-                : "Register to get personalized answers on exams and campus policies"}
+                ? "sign in to AURA for exams, curfews, hostel rules & campus chaos — instantly."
+                : "register to get personalised answers on exams, policies & everything DAU."}
             </p>
           </div>
 
-          {/* Form Container */}
-          <div className="backdrop-blur-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-3xl shadow-xl shadow-slate-200/40 dark:shadow-black/40 relative overflow-hidden">
-            
-            {/* Sliding Role Selectors (Tabs) */}
-            <div className="relative flex p-1 bg-slate-100 dark:bg-slate-950/70 rounded-xl mb-6 border border-slate-200/30 dark:border-slate-800/30">
+          {/* Sticker auth card */}
+          <div className="rounded-3xl border-2 border-[var(--color-aura-ink)] bg-white shadow-sticker-lg dark:bg-slate-900 dark:border-slate-100 p-6 sm:p-7">
+            {/* Role tabs */}
+            <div className="flex gap-2 p-1.5 rounded-2xl bg-[var(--color-aura-lavender)] border-2 border-[var(--color-aura-ink)] dark:bg-slate-950 dark:border-slate-700 mb-5">
               <button
                 type="button"
                 onClick={() => setRole("student")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all duration-200 z-10 ${
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-black rounded-xl transition-all ${
                   role === "student"
-                    ? "bg-white dark:bg-slate-900 text-brand-700 dark:text-brand-400 shadow-md"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                    ? "bg-[var(--color-aura-ink)] text-white shadow-sticker-sm dark:bg-brand-500"
+                    : "text-slate-500 hover:text-[var(--color-aura-ink)] dark:text-slate-400"
                 }`}
               >
-                <GraduationCap className="w-4 h-4" />
-                Student
+                <GraduationCap className="w-3.5 h-3.5" />
+                student
               </button>
               <button
                 type="button"
                 onClick={() => setRole("parent")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all duration-200 z-10 ${
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-black rounded-xl transition-all ${
                   role === "parent"
-                    ? "bg-white dark:bg-slate-900 text-brand-700 dark:text-brand-400 shadow-md"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                    ? "bg-[var(--color-aura-ink)] text-white shadow-sticker-sm dark:bg-brand-500"
+                    : "text-slate-500 hover:text-[var(--color-aura-ink)] dark:text-slate-400"
                 }`}
               >
-                <Users className="w-4 h-4" />
-                Parent
+                <Users className="w-3.5 h-3.5" />
+                parent
               </button>
             </div>
 
-            {/* Error & Success Messages */}
             {errorMsg && (
-              <div className="mb-5 flex items-start gap-2.5 bg-red-50 dark:bg-red-950/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900/50 p-3.5 rounded-xl text-xs leading-relaxed animate-in fade-in slide-in-from-top-2">
+              <div className="mb-4 flex items-start gap-2.5 rounded-2xl border-2 border-[var(--color-aura-ink)] bg-[var(--color-aura-coral)]/90 text-[var(--color-aura-ink)] p-3.5 text-xs font-semibold leading-relaxed shadow-sticker-sm">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
             {successMsg && (
-              <div className="mb-5 flex items-start gap-2.5 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900/50 p-3.5 rounded-xl text-xs leading-relaxed animate-in fade-in slide-in-from-top-2">
+              <div className="mb-4 flex items-start gap-2.5 rounded-2xl border-2 border-[var(--color-aura-ink)] bg-[var(--color-aura-mint)] text-[var(--color-aura-ink)] p-3.5 text-xs font-semibold leading-relaxed shadow-sticker-sm">
                 <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{successMsg}</span>
               </div>
             )}
 
-            {/* Render Login or Register Form */}
             {authMode === "signin" ? (
               <LoginForm
                 role={role}
@@ -159,29 +186,28 @@ export default function LoginPage() {
               />
             )}
 
-            {/* Toggle Sign In / Sign Up */}
-            <div className="mt-6 text-center pt-4 border-t border-slate-100 dark:border-slate-800/40">
+            <div className="mt-5 pt-4 border-t-2 border-dashed border-slate-200 dark:border-slate-700 text-center">
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 {authMode === "signin" ? (
                   <>
-                    Logging in for the first time?{" "}
+                    first time here?{" "}
                     <button
                       type="button"
                       onClick={() => setAuthMode("signup")}
-                      className="font-semibold text-brand-600 dark:text-brand-400 hover:underline cursor-pointer"
+                      className="font-black text-brand-600 dark:text-brand-300 underline decoration-2 decoration-[var(--color-aura-yellow)] underline-offset-2 hover:decoration-[var(--color-aura-coral)] cursor-pointer"
                     >
-                      Create an account
+                      create an account
                     </button>
                   </>
                 ) : (
                   <>
-                    Already have an account?{" "}
+                    already have an account?{" "}
                     <button
                       type="button"
                       onClick={() => setAuthMode("signin")}
-                      className="font-semibold text-brand-600 dark:text-brand-400 hover:underline cursor-pointer"
+                      className="font-black text-brand-600 dark:text-brand-300 underline decoration-2 decoration-[var(--color-aura-yellow)] underline-offset-2 hover:decoration-[var(--color-aura-coral)] cursor-pointer"
                     >
-                      Sign in here
+                      sign in here
                     </button>
                   </>
                 )}
@@ -189,15 +215,11 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* Quick-test Demo Credentials Card */}
           <DemoCredentials onFillDemo={handleFillDemo} />
 
-          {/* IT Support footer */}
-          <p className="text-center text-[11px] text-slate-400 dark:text-slate-500 mt-6 leading-normal">
-            Security managed by Dhirubhai Ambani University IT Support.<br />
-            For systemic login issues, contact the system administrator.
+          <p className="text-center text-[11px] font-medium text-slate-500 dark:text-slate-500 mt-6">
+            🔐 managed by DAU IT  ·  v1.0
           </p>
-
         </div>
       </main>
     </div>
