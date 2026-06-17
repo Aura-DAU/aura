@@ -1,16 +1,23 @@
+import os
+import torch
 from transformers import (
     AutoTokenizer,
     AutoModelForSequenceClassification
 )
 
-import torch
-
 
 class Reranker:
 
     def __init__(self):
-
-        self.device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+        env_device = os.getenv("RERANKER_DEVICE")
+        if env_device:
+            self.device = torch.device(env_device)
+        elif torch.cuda.is_available():
+            self.device = torch.device("cuda")
+        elif torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        else:
+            self.device = torch.device("cpu")
 
         self.tokenizer = (
             AutoTokenizer.from_pretrained(

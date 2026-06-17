@@ -156,9 +156,9 @@ def run_evaluation(api_url: str, csv_path: str, output_path: str) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="DAU RAG Evaluation Script")
-    parser.add_argument("--api-url", default="http://localhost:3000/api/chat", help="RAG Chat API endpoint URL")
-    parser.add_argument("--csv", default="server/api/rag/Eval/evaluation_dataset.csv", help="Path to evaluation dataset CSV")
-    parser.add_argument("--output", default="server/api/rag/Eval/evaluation_results.json", help="Path to save output JSON")
+    parser.add_argument("--api-url", default="http://localhost:8000/chat", help="RAG Chat API endpoint URL")
+    parser.add_argument("--csv", default="server/rag/eval/representative_dataset.csv", help="Path to evaluation dataset CSV")
+    parser.add_argument("--output", default="server/rag/eval/representative_results.json", help="Path to save output JSON")
     
     args = parser.parse_args()
     run_evaluation(args.api_url, args.csv, args.output)

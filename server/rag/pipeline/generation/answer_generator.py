@@ -2,7 +2,7 @@ import os
 import re
 import time
 from dotenv import load_dotenv
-from groq import Groq, RateLimitError, APIStatusError, APIConnectionError
+from pipeline.key_manager import KeyManager
 
 
 SYSTEM_PROMPT = """You are AURA, the official AI assistant for Dhirubhai Ambani University (DAU). You help students, faculty, staff, and prospective applicants with questions about the university.
@@ -51,12 +51,6 @@ class AnswerGenerator:
     def __init__(self):
 
         load_dotenv()
-        from pipeline.key_manager import KeyManager
-        self.KeyManager = KeyManager
-
-        self.client = Groq(
-            api_key=self.KeyManager.get_current_key()
-        )
 
         self.model = os.getenv(
             "GROQ_MODEL",
@@ -70,38 +64,34 @@ class AnswerGenerator:
         history=None,
         profile=None
     ):
+        try:
+            profile_text = ""
 
-        profile_text = ""
-
-        if profile:
-            fields = [
-                f"- {key}: {value}"
-                for key, value in profile.items()
-                if value
-            ]
-            if fields:
-                profile_text = (
-                    "Student Profile (use only to personalize tone and "
-                    "examples; never treat it as a source of facts):\n"
-                    + "\n".join(fields)
-                    + "\n"
-                )
-
-        history_text = ""
-
-        if history:
-            for turn in history[-8:]:
-                role = turn.get("role")
-                content = turn.get("content")
-                if role in ["user", "assistant"] and content:
-                    if role == "assistant":
-                        content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
-                    history_text += (
-                        f"{role}: "
-                        f"{content}\n"
+            if profile:
+                fields = [
+                    f"- {key}: {value}"
+                    for key, value in profile.items()
+                    if value
+                ]
+                if fields:
+                    profile_text = (
+                        "Student Profile Info:\n"
+                        + "\n".join(fields)
+                        + "\n\n"
                     )
 
-        prompt = f"""
+            history_text = ""
+            if history:
+                for turn in history[-5:]:
+                    role = turn.get("role", "")
+                    content = turn.get("content", "")
+                    if role and content:
+                        history_text += (
+                            f"{role}: "
+                            f"{content}\n"
+                        )
+
+            prompt = f"""
 Conversation History:
 {history_text}
 
@@ -123,81 +113,29 @@ cite it using [1], [2], etc.
 Context:
 {context}
 """
-        try:
-            max_retries = 15
-            retry_delay = 5
-            response = None
-            keys_tried = set()
+            def _execute_generate(client):
+                return client.chat.completions.create(
+                    model=self.model,
 
-            attempt = 0
-            while attempt < max_retries:
-                try:
-                    # Ensure client is using the current key
-                    self.client = Groq(api_key=self.KeyManager.get_current_key())
-                    response = (
-                        self.client.chat.completions.create(
-                            model=self.model,
+                    temperature=0.2,
+                    top_p=0.9,
 
-                            temperature=0.2,
-                            top_p=0.9,
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": SYSTEM_PROMPT
+                        },
+                        {
+                            "role": "user",
+                            "content": prompt
+                        }
+                    ]
+                )
 
-                            messages=[
-                                {
-                                    "role": "system",
-                                    "content": SYSTEM_PROMPT
-                                },
-                                {
-                                    "role": "user",
-                                    "content": prompt
-                                }
-                            ]
-                        )
-                    )
-                    break
-                except (RateLimitError, APIStatusError, APIConnectionError) as e:
-                    status_code = getattr(e, "status_code", None)
-                    error_msg = str(e).lower()
-                    is_daily_limit = "tpd" in error_msg or "tokens per day" in error_msg or "rpd" in error_msg or "requests per day" in error_msg
-                    
-                    if is_daily_limit and status_code == 429:
-                        current_key = self.KeyManager.get_current_key()
-                        keys_tried.add(current_key)
-                        if len(keys_tried) >= len(self.KeyManager._keys):
-                            print("All API keys exhausted for daily limits in AnswerGenerator. Failing request.")
-                            raise e
-                        
-                        print(f"Daily rate limit hit in AnswerGenerator: {e}. Rotating API key...")
-                        self.KeyManager.rotate_key()
-                        # Retry immediately with the new key without incrementing attempt or sleeping
-                        continue
-                    
-                    is_retryable = (status_code in [429, 500, 502, 503, 504]) or isinstance(e, APIConnectionError)
-                    if is_retryable:
-                        if attempt == max_retries - 1:
-                            print("Max retries reached in AnswerGenerator. Failing request.")
-                            return "Sorry, I encountered a rate limit error and could not generate a response."
-                        
-                        # Check if we can parse the retry-after duration from error message, e.g. "Please try again in 16.63s."
-                        retry_after = retry_delay
-                        match = re.search(r"try again in (\d+(?:\.\d+)?)s", str(e))
-                        if match:
-                            retry_after = float(match.group(1)) + 1.0  # Add 1s buffer
-                        
-                        # Cap sleep at 65s since Groq token rate limits reset per minute
-                        retry_after = min(retry_after, 65.0)
-                        
-                        print(f"API error/timeout {status_code} in AnswerGenerator: {e}. Retrying in {retry_after:.2f} seconds...")
-                        time.sleep(retry_after)
-                        retry_delay *= 2
-                        attempt += 1
-                    else:
-                        raise e
-                except Exception as e:
-                    # Raise other exceptions to let the outer try/except catch them
-                    raise e
+            response = KeyManager.call_with_rotation(_execute_generate, max_retries=5)
 
             if not response:
-                return "Sorry, I encountered an error while generating a response."
+                raise RAGPipelineError("Sorry, I encountered an error while generating a response.")
 
             answer = response.choices[0].message.content
 

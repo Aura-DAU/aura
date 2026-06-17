@@ -4,7 +4,7 @@ import re
 import time
 
 from dotenv import load_dotenv
-from groq import Groq, RateLimitError, APIStatusError, APIConnectionError
+from pipeline.key_manager import KeyManager
 
 
 SYSTEM_PROMPT = """
@@ -223,12 +223,6 @@ class QueryPlanner:
     def __init__(self):
 
         load_dotenv()
-        from pipeline.key_manager import KeyManager
-        self.KeyManager = KeyManager
-
-        self.client = Groq(
-            api_key=self.KeyManager.get_current_key()
-        )
 
         self.model = os.getenv(
             "GROQ_MODEL",
@@ -237,78 +231,29 @@ class QueryPlanner:
 
     def plan(self, query):
 
-        max_retries = 15
-        retry_delay = 5
-        response = None
-        keys_tried = set()
+        def _execute_plan(client):
+            return client.chat.completions.create(
+                model=self.model,
 
-        attempt = 0
-        while attempt < max_retries:
-            try:
-                # Ensure client is using the current key
-                self.client = Groq(api_key=self.KeyManager.get_current_key())
-                response = (
-                    self.client.chat.completions.create(
-                        model=self.model,
+                temperature=0,
 
-                        temperature=0,
+                response_format={
+                    "type": "json_object"
+                },
 
-                        response_format={
-                            "type": "json_object"
-                        },
+                messages=[
+                    {
+                        "role": "system",
+                        "content": SYSTEM_PROMPT
+                    },
+                    {
+                        "role": "user",
+                        "content": query
+                    }
+                ]
+            )
 
-                        messages=[
-                            {
-                                "role": "system",
-                                "content": SYSTEM_PROMPT
-                            },
-                            {
-                                "role": "user",
-                                "content": query
-                            }
-                        ]
-                    )
-                )
-                break
-            except (RateLimitError, APIStatusError, APIConnectionError) as e:
-                status_code = getattr(e, "status_code", None)
-                error_msg = str(e).lower()
-                is_daily_limit = "tpd" in error_msg or "tokens per day" in error_msg or "rpd" in error_msg or "requests per day" in error_msg
-                
-                if is_daily_limit and status_code == 429:
-                    current_key = self.KeyManager.get_current_key()
-                    keys_tried.add(current_key)
-                    if len(keys_tried) >= len(self.KeyManager._keys):
-                        print("All API keys exhausted for daily limits in QueryPlanner. Failing request.")
-                        raise e
-                    
-                    print(f"Daily rate limit hit in QueryPlanner: {e}. Rotating API key...")
-                    self.KeyManager.rotate_key()
-                    # Retry immediately with the new key without incrementing attempt or sleeping
-                    continue
-                
-                is_retryable = (status_code in [429, 500, 502, 503, 504]) or isinstance(e, APIConnectionError)
-                if is_retryable:
-                    if attempt == max_retries - 1:
-                        print("Max retries reached in QueryPlanner. Failing request.")
-                        raise e
-                    
-                    retry_after = retry_delay
-                    match = re.search(r"try again in (\d+(?:\.\d+)?)s", str(e))
-                    if match:
-                        retry_after = float(match.group(1)) + 1.0  # Add 1s buffer
-                    
-                    # Cap sleep at 65s since Groq token rate limits reset per minute
-                    retry_after = min(retry_after, 65.0)
-                    
-                    print(f"API error/timeout {status_code} in QueryPlanner: {e}. Retrying in {retry_after:.2f} seconds...")
-                    time.sleep(retry_after)
-                    retry_delay *= 2
-                    attempt += 1
-                else:
-                    raise e
-            except Exception as e:
-                raise e
+        response = KeyManager.call_with_rotation(_execute_plan, max_retries=5)
 
         if not response:
             raise RuntimeError("Failed to generate plan due to API errors.")
