@@ -1,5 +1,5 @@
-import ChatPage from "@/app/components/features/chat/ChatPage";
+import ChatShell from "@/app/components/features/chat-v2/ChatShell";
 
 export default function Home() {
-  return <ChatPage />;
+  return <ChatShell />;
 }
