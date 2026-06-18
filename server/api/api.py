@@ -1,7 +1,18 @@
 import os
+import sys
 import tempfile
 import asyncio
 from typing import List, Optional
+from pathlib import Path
+
+# Add the server and server/rag directories to sys.path to resolve imports cleanly
+server_dir = Path(__file__).resolve().parent.parent
+rag_dir = server_dir / "rag"
+
+if str(server_dir) not in sys.path:
+    sys.path.insert(0, str(server_dir))
+if str(rag_dir) not in sys.path:
+    sys.path.insert(0, str(rag_dir))
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
