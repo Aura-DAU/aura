@@ -1,7 +1,7 @@
 import os
 import re
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.key_manager import KeyManager
 
 
 SYSTEM_PROMPT = """You are AURA, the official AI assistant for Dhirubhai Ambani University (DAU). You help students, faculty, staff, and prospective applicants with questions about the university.
@@ -51,12 +51,6 @@ class AnswerGenerator:
 
         load_dotenv()
 
-        self.client = Groq(
-            api_key=os.getenv(
-                "GROQ_API_KEY"
-            )
-        )
-
         self.model = os.getenv(
             "GROQ_MODEL",
             "qwen/qwen3-32b"
@@ -69,38 +63,34 @@ class AnswerGenerator:
         history=None,
         profile=None
     ):
+        try:
+            profile_text = ""
 
-        profile_text = ""
-
-        if profile:
-            fields = [
-                f"- {key}: {value}"
-                for key, value in profile.items()
-                if value
-            ]
-            if fields:
-                profile_text = (
-                    "Student Profile (use only to personalize tone and "
-                    "examples; never treat it as a source of facts):\n"
-                    + "\n".join(fields)
-                    + "\n"
-                )
-
-        history_text = ""
-
-        if history:
-            for turn in history[-8:]:
-                role = turn.get("role")
-                content = turn.get("content")
-                if role in ["user", "assistant"] and content:
-                    if role == "assistant":
-                        content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
-                    history_text += (
-                        f"{role}: "
-                        f"{content}\n"
+            if profile:
+                fields = [
+                    f"- {key}: {value}"
+                    for key, value in profile.items()
+                    if value
+                ]
+                if fields:
+                    profile_text = (
+                        "Student Profile Info:\n"
+                        + "\n".join(fields)
+                        + "\n\n"
                     )
 
-        prompt = f"""
+            history_text = ""
+            if history:
+                for turn in history[-5:]:
+                    role = turn.get("role", "")
+                    content = turn.get("content", "")
+                    if role and content:
+                        history_text += (
+                            f"{role}: "
+                            f"{content}\n"
+                        )
+
+            prompt = f"""
 Conversation History:
 {history_text}
 
@@ -122,14 +112,12 @@ cite it using [1], [2], etc.
 Context:
 {context}
 """
-        try:
-            response = (
-                self.client.chat.completions.create(
+            def _execute_generate(client):
+                return client.chat.completions.create(
                     model=self.model,
 
                     temperature=0.2,
                     top_p=0.9,
-                    reasoning_effort="none",
 
                     messages=[
                         {
@@ -142,7 +130,11 @@ Context:
                         }
                     ]
                 )
-            )
+
+            response = KeyManager.call_with_rotation(_execute_generate, max_retries=5)
+
+            if not response:
+                raise RAGPipelineError("Sorry, I encountered an error while generating a response.")
 
             answer = response.choices[0].message.content
 

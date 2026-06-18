@@ -1,14 +1,23 @@
+import os
+import torch
 from transformers import (
     AutoTokenizer,
     AutoModelForSequenceClassification
 )
 
-import torch
-
 
 class Reranker:
 
     def __init__(self):
+        env_device = os.getenv("RERANKER_DEVICE")
+        if env_device:
+            self.device = torch.device(env_device)
+        elif torch.cuda.is_available():
+            self.device = torch.device("cuda")
+        elif torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        else:
+            self.device = torch.device("cpu")
 
         self.tokenizer = (
             AutoTokenizer.from_pretrained(
@@ -21,7 +30,7 @@ class Reranker:
             .from_pretrained(
                 "BAAI/bge-reranker-base"
             )
-        )
+        ).to(self.device)
 
         self.model.eval()
 
@@ -68,6 +77,8 @@ class Reranker:
             max_length=512,
             return_tensors="pt"
         )
+
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
 
         with torch.no_grad():
 

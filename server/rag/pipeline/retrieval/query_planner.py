@@ -1,8 +1,9 @@
 import json
 import os
+import time
 
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.key_manager import KeyManager
 
 
 SYSTEM_PROMPT = """
@@ -222,12 +223,6 @@ class QueryPlanner:
 
         load_dotenv()
 
-        self.client = Groq(
-            api_key=os.getenv(
-                "GROQ_API_KEY"
-            )
-        )
-
         self.model = os.getenv(
             "GROQ_MODEL",
             "qwen/qwen3-32b"
@@ -235,8 +230,8 @@ class QueryPlanner:
 
     def plan(self, query):
 
-        response = (
-            self.client.chat.completions.create(
+        def _execute_plan(client):
+            return client.chat.completions.create(
                 model=self.model,
 
                 temperature=0,
@@ -256,7 +251,11 @@ class QueryPlanner:
                     }
                 ]
             )
-        )
+
+        response = KeyManager.call_with_rotation(_execute_plan, max_retries=5)
+
+        if not response:
+            raise RuntimeError("Failed to generate plan due to API errors.")
 
         content = (
             response
