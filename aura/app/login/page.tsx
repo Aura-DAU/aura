@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation"
 import {
   Eye,
   EyeOff,
-  GraduationCap,
-  Heart,
   Info,
   Loader2,
   Sparkles,
@@ -19,48 +17,24 @@ const THREADS_KEY  = "aura-threads-v2"
 
 // ─── Demo credentials (shown in UI only) ─────────────────────────────────────
 const DEMO = {
-  student: { email: "demo.student@dau.ac.in", password: "Student@123" },
-  parent:  { email: "parent.demo@gmail.com",  password: "Parent@123"  },
+  email: "demo.student@dau.ac.in",
+  password: "Student@123",
 } as const
 
-// ─── Role config ─────────────────────────────────────────────────────────────
-type Role = "student" | "parent"
-type Tab  = "signin"  | "signup"
-
-const ROLES: {
-  id: Role
-  label: string
-  placeholder: string
-  hint: string
-}[] = [
-  {
-    id: "student",
-    label: "Student",
-    placeholder: "you@dau.ac.in",
-    hint: "Students must use their official @dau.ac.in email address.",
-  },
-  {
-    id: "parent",
-    label: "Parent",
-    placeholder: "yourname@gmail.com",
-    hint: "Parents can sign in with any personal email address.",
-  },
-]
+// ─── Types ───────────────────────────────────────────────────────────────────
+type Tab = "signin" | "signup"
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function LoginPage() {
   const router = useRouter()
 
-  const [tab,  setTab]  = useState<Tab>("signin")
-  const [role, setRole] = useState<Role>("student")
+  const [tab, setTab] = useState<Tab>("signin")
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const [error,   setError]   = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "" })
-
-  const activeRole = ROLES.find((r) => r.id === role)!
 
   const reset = () => {
     setForm({ name: "", email: "", password: "", confirm: "" })
@@ -69,7 +43,6 @@ export default function LoginPage() {
   }
 
   const handleTabChange = (t: Tab) => { setTab(t); reset() }
-  const handleRoleChange = (r: Role) => { setRole(r); reset() }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -77,7 +50,7 @@ export default function LoginPage() {
   }
 
   const fillDemo = () => {
-    setForm((prev) => ({ ...prev, email: DEMO[role].email, password: DEMO[role].password, confirm: DEMO[role].password }))
+    setForm((prev) => ({ ...prev, email: DEMO.email, password: DEMO.password, confirm: DEMO.password }))
     setError(null)
   }
 
@@ -85,10 +58,8 @@ export default function LoginPage() {
   const validate = (): string | null => {
     if (tab === "signup" && !form.name.trim()) return "Please enter your full name."
     if (!form.email || !form.password) return "Please fill in all fields."
-    if (role === "student" && !form.email.toLowerCase().endsWith("@dau.ac.in"))
+    if (!form.email.toLowerCase().endsWith("@dau.ac.in"))
       return "Student email must end with @dau.ac.in"
-    if (role === "parent" && form.email.toLowerCase().endsWith("@dau.ac.in"))
-      return "Parent email should not be a @dau.ac.in address."
     if (tab === "signup") {
       if (form.password.length < 8) return "Password must be at least 8 characters."
       if (form.password !== form.confirm) return "Passwords do not match."
@@ -109,7 +80,7 @@ export default function LoginPage() {
         const res  = await fetch("/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: form.email, password: form.password, role }),
+          body: JSON.stringify({ email: form.email, password: form.password, role: "student" }),
         })
         const data = await res.json() as { name?: string; email?: string; role?: string; threads?: unknown[]; error?: string }
         if (!res.ok) {
@@ -131,7 +102,7 @@ export default function LoginPage() {
         const res  = await fetch("/api/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: form.name.trim(), email: form.email, password: form.password, role }),
+          body: JSON.stringify({ name: form.name.trim(), email: form.email, password: form.password, role: "student" }),
         })
         const data = await res.json() as { name?: string; email?: string; role?: string; error?: string }
         if (!res.ok) {
@@ -202,33 +173,10 @@ export default function LoginPage() {
             ))}
           </div>
 
-          {/* Student / Parent role selector */}
-          <div className="flex gap-3 border-b border-theme-gray-light p-4">
-            {ROLES.map((r) => (
-              <button
-                key={r.id}
-                type="button"
-                id={`role-${r.id}`}
-                onClick={() => handleRoleChange(r.id)}
-                className={cn(
-                  "flex flex-1 items-center justify-center gap-2 rounded-xl border py-2.5 text-sm font-medium transition-all",
-                  role === r.id
-                    ? "border-theme-red/50 bg-gradient-to-r from-theme-red/20 to-theme-yellow/10 text-neutral-100 shadow-inner"
-                    : "border-theme-gray-lighter bg-theme-gray-light text-neutral-400 hover:text-neutral-200"
-                )}
-              >
-                {r.id === "student"
-                  ? <GraduationCap className="size-4" />
-                  : <Heart className="size-4" />}
-                {r.label}
-              </button>
-            ))}
-          </div>
-
           {/* Domain hint */}
           <div className="flex items-center gap-2 border-b border-theme-gray-light bg-theme-gray-light/30 px-5 py-2.5 text-xs text-neutral-400">
             <Info className="size-3.5 shrink-0 text-theme-yellow" />
-            {activeRole.hint}
+            Students must use their official @dau.ac.in email address.
           </div>
 
           {/* Form */}
@@ -252,17 +200,15 @@ export default function LoginPage() {
             <div className="flex flex-col gap-1.5">
               <label htmlFor="auth-email" className="text-xs font-medium text-neutral-300">
                 Email
-                {role === "student" && (
-                  <span className="ml-1.5 rounded bg-theme-red/20 px-1.5 py-0.5 text-[10px] font-normal text-theme-red">
-                    @dau.ac.in only
-                  </span>
-                )}
+                <span className="ml-1.5 rounded bg-theme-red/20 px-1.5 py-0.5 text-[10px] font-normal text-theme-red">
+                  @dau.ac.in only
+                </span>
               </label>
               <input
                 id="auth-email"
                 name="email"
                 type="email"
-                placeholder={activeRole.placeholder}
+                placeholder="you@dau.ac.in"
                 value={form.email}
                 onChange={handleChange}
                 autoComplete="email"
@@ -353,9 +299,9 @@ export default function LoginPage() {
               ) : success ? (
                 "Welcome! Redirecting…"
               ) : tab === "signin" ? (
-                `Sign In as ${activeRole.label}`
+                "Sign In"
               ) : (
-                `Create ${activeRole.label} Account`
+                "Create Account"
               )}
             </button>
           </form>
@@ -379,9 +325,9 @@ export default function LoginPage() {
               </div>
               <div className="grid grid-cols-2 gap-x-3 gap-y-1 px-3.5 py-2.5 text-[11px] text-neutral-400">
                 <span className="text-neutral-500">Email</span>
-                <span className="break-all font-mono text-neutral-300">{DEMO[role].email}</span>
+                <span className="break-all font-mono text-neutral-300">{DEMO.email}</span>
                 <span className="text-neutral-500">Password</span>
-                <span className="font-mono text-neutral-300">{DEMO[role].password}</span>
+                <span className="font-mono text-neutral-300">{DEMO.password}</span>
               </div>
             </div>
           )}

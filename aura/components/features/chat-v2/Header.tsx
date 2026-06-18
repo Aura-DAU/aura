@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import { Download, LogIn, LogOut, Menu, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { UserSession } from "@/lib/chat-types"
