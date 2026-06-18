@@ -77,7 +77,7 @@ class AuraChat:
 
         answer = (
             self.generator.generate(
-                query=query,
+                query=retrieval_result.get("corrected_query", query),
                 context=retrieval_result[
                     "context"
                 ],

@@ -23,6 +23,34 @@ class RetrievalPipeline:
         from pipeline.retrieval.query_rewriter import QueryRewriter
         self.rewriter = QueryRewriter()
 
+        # Load faculty names from metadata.json for fuzzy matching
+        import json
+        from pathlib import Path
+        metadata_path = (
+            Path(__file__).resolve().parent.parent
+            / "vector_store"
+            / "metadata.json"
+        )
+        self.faculty_names = []
+        self.faculty_names_lower = []
+        self.faculty_names_map = {}
+        if metadata_path.exists():
+            try:
+                with open(metadata_path, "r", encoding="utf-8") as f:
+                    chunks = json.load(f)
+                self.faculty_names = sorted(list({
+                    chunk["faculty_name"]
+                    for chunk in chunks
+                    if chunk.get("faculty_name")
+                }))
+                self.faculty_names_lower = [n.lower() for n in self.faculty_names]
+                self.faculty_names_map = {n.lower(): n for n in self.faculty_names}
+                logger.info("Loaded %d unique faculty names for fuzzy matching.", len(self.faculty_names))
+            except Exception as e:
+                logger.warning("Failed to load faculty names from metadata.json: %s", e)
+        else:
+            logger.warning("metadata.json not found at %s. Fuzzy faculty matching disabled.", metadata_path)
+
     PROGRAM_ALIASES = {
 
         "ict": "B.Tech. (ICT)",
@@ -267,6 +295,34 @@ class RetrievalPipeline:
         canonical = self.PROGRAM_ALIASES.get(key)
 
         if canonical is None:
+            from rapidfuzz import fuzz, process
+            aliases_keys = list(self.PROGRAM_ALIASES.keys())
+            matches = process.extract(key, aliases_keys, scorer=fuzz.ratio, limit=5)
+            if matches:
+                best_match = matches[0]
+                s1 = best_match[1]
+                if s1 >= 80.0:
+                    canonical1 = self.PROGRAM_ALIASES[best_match[0]]
+                    conflict = False
+                    for other_match in matches[1:]:
+                        s_other = other_match[1]
+                        canonical_other = self.PROGRAM_ALIASES[other_match[0]]
+                        if canonical_other != canonical1:
+                            if s1 == s_other or (s1 - s_other) < 8.0:
+                                conflict = True
+                                break
+                    if not conflict:
+                        canonical = canonical1
+                        logger.info(
+                            "Fuzzy matched program name '%s' (normalized '%s') to alias '%s' (canonical '%s') with score %.2f",
+                            name,
+                            key,
+                            best_match[0],
+                            canonical,
+                            s1
+                        )
+
+        if canonical is None:
             logger.warning(
                 "Unknown program alias '%s' (normalized: '%s'); skipping program metadata filter.",
                 name,
@@ -275,6 +331,37 @@ class RetrievalPipeline:
             return None
 
         return canonical
+
+    def _canonical_faculty_name(self, name):
+        if not name or not hasattr(self, "faculty_names") or not self.faculty_names:
+            return name
+        
+        # Strip common titles before fuzzy matching
+        cleaned = re.sub(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", "", name, flags=re.IGNORECASE).strip()
+        
+        # Avoid matching short, generic terms
+        if len(cleaned) < 3:
+            return name
+            
+        from rapidfuzz import fuzz, process
+        matches = process.extract(cleaned.lower(), self.faculty_names_lower, scorer=fuzz.WRatio, limit=2)
+        if not matches:
+            return name
+            
+        best_match = matches[0]
+        s1 = best_match[1]
+        if s1 >= 80.0:
+            if len(matches) == 1:
+                corrected = self.faculty_names_map[best_match[0]]
+                logger.info("Fuzzy matched faculty name '%s' (cleaned: '%s') to '%s' (Score: %.2f)", name, cleaned, corrected, s1)
+                return corrected
+            s2 = matches[1][1]
+            if s1 == 100.0 or (s1 - s2) >= 8.0:
+                corrected = self.faculty_names_map[best_match[0]]
+                logger.info("Fuzzy matched faculty name '%s' (cleaned: '%s') to '%s' (Score: %.2f)", name, cleaned, corrected, s1)
+                return corrected
+                
+        return name
             
 
     def get_context(
@@ -332,6 +419,62 @@ class RetrievalPipeline:
         plan = self.planner.plan(
             query
         )
+
+        # Correct entities inside the plan (e.g. fuzzy match faculty and program names)
+        entities = plan.get("entities", {})
+        
+        # 1. Correct faculty_name
+        faculty_val = entities.get("faculty_name")
+        if faculty_val:
+            if isinstance(faculty_val, list):
+                corrected_list = []
+                for name in faculty_val:
+                    corrected_name = self._canonical_faculty_name(name)
+                    corrected_list.append(corrected_name)
+                    # Replace the typo name in query and decomposed queries, retaining any title prefix
+                    if corrected_name != name:
+                        title_match = re.match(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", name, flags=re.IGNORECASE)
+                        title_part = title_match.group(0) if title_match else ""
+                        replacement = title_part + corrected_name
+                        query = re.sub(re.escape(name), replacement, query, flags=re.IGNORECASE)
+                        if plan.get("query_decomposition"):
+                            plan["query_decomposition"] = [
+                                re.sub(re.escape(name), replacement, dq, flags=re.IGNORECASE)
+                                for dq in plan["query_decomposition"]
+                            ]
+                entities["faculty_name"] = corrected_list
+            elif isinstance(faculty_val, str):
+                corrected_name = self._canonical_faculty_name(faculty_val)
+                if corrected_name != faculty_val:
+                    title_match = re.match(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", faculty_val, flags=re.IGNORECASE)
+                    title_part = title_match.group(0) if title_match else ""
+                    replacement = title_part + corrected_name
+                    query = re.sub(re.escape(faculty_val), replacement, query, flags=re.IGNORECASE)
+                    if plan.get("query_decomposition"):
+                        plan["query_decomposition"] = [
+                            re.sub(re.escape(faculty_val), replacement, dq, flags=re.IGNORECASE)
+                            for dq in plan["query_decomposition"]
+                        ]
+                entities["faculty_name"] = corrected_name
+
+        # 2. Correct program_name
+        program_val = entities.get("program_name")
+        if program_val:
+            if isinstance(program_val, list):
+                corrected_list = []
+                for prog in program_val:
+                    canonical_prog = self._canonical_program_name(prog)
+                    if canonical_prog:
+                        corrected_list.append(canonical_prog)
+                    else:
+                        corrected_list.append(prog)
+                entities["program_name"] = corrected_list
+            elif isinstance(program_val, str):
+                canonical_prog = self._canonical_program_name(program_val)
+                if canonical_prog:
+                    entities["program_name"] = canonical_prog
+
+        corrected_query = query
 
         query = self._expand_semesters(query)
 
@@ -472,6 +615,9 @@ class RetrievalPipeline:
 
             "query":
                 original_query,
+
+            "corrected_query":
+                corrected_query,
 
             "plan":
                 plan,
