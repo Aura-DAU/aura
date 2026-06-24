@@ -13,11 +13,11 @@ export async function POST(req: Request) {
   if (!email || !password || !role) {
     return NextResponse.json({ error: "All fields are required" }, { status: 400 })
   }
-  if (role !== "student" && role !== "parent") {
+  if (role !== "student" && role !== "parent" && role !== "faculty") {
     return NextResponse.json({ error: "Invalid role" }, { status: 400 })
   }
 
-  const user = await findUser(email, role as "student" | "parent")
+  const user = await findUser(email, role as "student" | "parent" | "faculty")
   if (!user || !verifyPassword(password, user.passwordHash)) {
     return NextResponse.json({ error: "Invalid email or password" }, { status: 401 })
   }
