@@ -6,7 +6,6 @@ import { Download, LogIn, LogOut, Menu, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { UserSession } from "@/lib/chat-types"
 import { BrandMark } from "@/components/common/BrandMark"
-import { useRouter } from "next/navigation"
 
 interface HeaderProps {
   onToggleSidebar: () => void

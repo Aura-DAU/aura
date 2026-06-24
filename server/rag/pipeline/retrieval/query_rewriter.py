@@ -8,7 +8,7 @@ class QueryRewriter:
         load_dotenv()
         self.model = os.getenv(
             "GROQ_MODEL",
-            "qwen/qwen3-32b"
+            "openai/gpt-oss-120b"
         )
 
     def rewrite(

@@ -56,7 +56,7 @@ def main():
             print(
                 f"[{file_count}] "
                 f"{md_file.name} "
-                f"→ {len(chunks)} chunks"
+                f"-> {len(chunks)} chunks"
             )
 
         except Exception as e:

@@ -105,7 +105,7 @@ def build_entity_index(metadata_path: Path, output_path: Path) -> dict:
     # ── Stats ─────────────────────────────────────────────────────────────
     for field, mapping in entity_index.items():
         logger.info(
-            "  %-20s → %d unique entity values, %d total mappings",
+            "  %-20s -> %d unique entity values, %d total mappings",
             field,
             len(mapping),
             sum(len(ids) for ids in mapping.values()),
