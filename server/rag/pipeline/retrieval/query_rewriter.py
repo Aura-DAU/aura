@@ -56,6 +56,7 @@ Latest Question:
             return client.chat.completions.create(
                 model=self.model,
                 temperature=0,
+                # reasoning_effort="none",
                 messages=[
                     {
                         "role": "user",

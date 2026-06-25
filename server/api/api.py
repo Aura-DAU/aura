@@ -73,17 +73,19 @@ class HistoryTurn(BaseModel):
     role: str
     content: str
 
-class StudentProfile(BaseModel):
+class UserProfile(BaseModel):
+    role: str = "student"
     name: Optional[str] = None
     branch: Optional[str] = None
     year: Optional[str] = None
     semester: Optional[str] = None
     interests: Optional[str] = None
+    subjects: Optional[List[str]] = None
 
 class ChatRequest(BaseModel):
     question: str
     history: Optional[List[HistoryTurn]] = None
-    studentProfile: Optional[StudentProfile] = None
+    userProfile: Optional[UserProfile] = None
 
 ALLOWED_EXTENSIONS = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 MAX_AUDIO_BYTES = 25 * 1024 * 1024
@@ -96,8 +98,8 @@ def chat(request: ChatRequest):
         else []
     )
     profile = (
-        request.studentProfile.model_dump(exclude_none=True)
-        if request.studentProfile
+        request.userProfile.model_dump(exclude_none=True)
+        if request.userProfile
         else None
     )
     return aura.ask(question=request.question, history=history, profile=profile)
