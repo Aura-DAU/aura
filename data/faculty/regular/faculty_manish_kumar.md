@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Manish Kumar
+
+# Main Content
+
 # Manish Kumar
 
 ## Education
 
 PhD (Electrical Engineering), IIT Patna
+
+## Contact Information
+
+- Phone: 079-68261678
+- Email: manish_kumar@dau.ac.in
+- Address: # 3102, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -63,13 +75,4 @@ https://www.daiict.ac.in/node/6755
 
 https://www.daiict.ac.in/node/6756
 
-## Contact Information
 
-- **Office:** ** # 3102, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261678
-- **Email:** ** manish_kumar@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/manish-kumar
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

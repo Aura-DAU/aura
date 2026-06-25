@@ -7,11 +7,28 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Anil Roy (On Leave)
+
+# Main Content
+
 # Anil Roy (On Leave)
 
 ## Education
 
 PhD (Physics), IIT Delhi
+
+## Contact Information
+
+- Phone: 079-68261613
+- Email: anil_roy@dau.ac.in
+- Address: # 1104, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.co.in/citations?hl=en&user=NLniVooAAAAJ&view_op=list_works
+- https://anilroy.incandescentsolution.com/
 
 ## Biography
 
@@ -49,13 +66,4 @@ Applications of Image Processing, Fiber Optics and Optical Communication, High s
 * Electromagnetic Theory (3rd sem BTech Core course)
 * Solid State Devices (6th sem BTech Elective course)
 
-## Contact Information
 
-- **Office:** ** # 1104, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261613
-- **Email:** ** anil_roy@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/anil-roy
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.co.in/citations?hl=en&user=NLniVooAAAAJ&view_op=list_works
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

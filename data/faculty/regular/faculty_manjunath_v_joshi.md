@@ -7,11 +7,28 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Manjunath V. Joshi
+
+# Main Content
+
 # Manjunath V. Joshi
 
 ## Education
 
 PhD (Electrical Engineering), IIT Bombay
+
+## Contact Information
+
+- Phone: 079-68261611
+- Email: mv_joshi@dau.ac.in
+- Address: # 1203, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://sites.google.com/site/manjunathvjoshi/home?overridemobile=true
+- http://scholar.google.co.in/citations?user=iDqnnKkAAAAJ&hl=en&oi=ao
 
 ## Biography
 
@@ -37,13 +54,4 @@ Signal and Image Processing, Digital Communication, Computer Vision, Machine Lea
 * Computer Vision
 * Topics in Deep Learning
 
-## Contact Information
 
-- **Office:** ** # 1203, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261611
-- **Email:** ** mv_joshi@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/manjunath-v-joshi
-- **Website:** *Not available*
-- **Google Scholar:** ** http://scholar.google.co.in/citations?user=iDqnnKkAAAAJ&hl=en&oi=ao
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

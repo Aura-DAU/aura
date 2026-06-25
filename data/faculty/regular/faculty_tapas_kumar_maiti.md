@@ -7,11 +7,28 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Tapas Kumar Maiti
+
+# Main Content
+
 # Tapas Kumar Maiti
 
 ## Education
 
 PhD (Electronics & Telecommunication Engineering), Jadavpur University, Kolkata
+
+## Contact Information
+
+- Phone: 079-68261637
+- Email: tapas_kumar@dau.ac.in
+- Address: # 2206, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://sites.google.com/view/cybernoid
+- https://scholar.google.co.in/citations?hl=en&user=BQvuFfkAAAAJ&view_op=list_works&sortby=pubdate
 
 ## Biography
 
@@ -146,13 +163,4 @@ Subhadeep Paul, Area: Intelligent Systems and Robotics
 
 Sourav Roy, Area: Robotic Computing Accelerator
 
-## Contact Information
 
-- **Office:** ** # 2206, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261637
-- **Email:** ** tapas_kumar@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/tapas-kumar-maiti
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.co.in/citations?hl=en&user=BQvuFfkAAAAJ&view_op=list_works&sortby=pubdate
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

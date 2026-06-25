@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Anjan Ghosh
+
+# Main Content
+
 # Anjan Ghosh
 
 ## Education
 
 PhD (Electrical Engineering), Carnegie Mellon University, Pittsburgh, Pennsylvania
+
+## Contact Information
+
+- Phone: 079-68261645
+- Email: anjan_ghosh@dau.ac.in
+- Address: # 1111, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -51,13 +63,4 @@ Optical Communication - Fiber Optic and Free Space, Photonic Devices and Subsyst
 * Linear Algebra
 * Random Variables and Processes
 
-## Contact Information
 
-- **Office:** ** # 1111, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261645
-- **Email:** ** anjan_ghosh@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/anjan-ghosh
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

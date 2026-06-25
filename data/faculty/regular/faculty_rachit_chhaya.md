@@ -7,11 +7,28 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Rachit Chhaya
+
+# Main Content
+
 # Rachit Chhaya
 
 ## Education
 
 PhD (Computer Science), IIT Gandhinagar
+
+## Contact Information
+
+- Phone: 079-68261708
+- Email: rachit_chhaya@dau.ac.in
+- Address: # 3109, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://sites.google.com/view/rachitchhaya/
+- https://www.linkedin.com/in/rachit-chhaya-1817a25b/
 
 ## Biography
 
@@ -37,13 +54,4 @@ Coresets for Machine Learning
 
 I have been TA for courses like Machine Learning, Scalable Data Science (NPTEL), Algorithms
 
-## Contact Information
 
-- **Office:** ** # 3109, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261708
-- **Email:** ** rachit_chhaya@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/rachit-chhaya
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** https://www.linkedin.com/in/rachit-chhaya-1817a25b/
-- **ORCID:** ** *Not available*

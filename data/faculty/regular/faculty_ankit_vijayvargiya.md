@@ -7,11 +7,28 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Ankit Vijayvargiya
+
+# Main Content
+
 # Ankit Vijayvargiya
 
 ## Education
 
 PhD (Biomedical Signals), Malaviya National Institute of Technology, Jaipur
+
+## Contact Information
+
+- Phone: 079-68261628
+- Email: ankit_vijayvargiya@dau.ac.in
+- Address: # 4205, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.com/citations?hl=en&user=vd5bQocAAAAJ&view_op=list_works&sortby=pubdate
+- https://www.linkedin.com/in/ankit-vijayvargiya/
 
 ## Biography
 
@@ -104,13 +121,4 @@ Introduction to Programming
 
 Object Oriented Programming
 
-## Contact Information
 
-- **Office:** ** # 4205, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261628
-- **Email:** ** ankit_vijayvargiya@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/ankit-vijayvargiya
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.com/citations?hl=en&user=vd5bQocAAAAJ&view_op=list_works&sortby=pubdate
-- **LinkedIn:** ** https://www.linkedin.com/in/ankit-vijayvargiya/
-- **ORCID:** ** *Not available*

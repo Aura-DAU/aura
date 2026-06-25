@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Jenson Joseph
+
+# Main Content
+
 # Jenson Joseph
 
 ## Education
 
 PhD (Communication), University of Hyderabad, Hyderabad
+
+## Contact Information
+
+- Phone: 079-68261536
+- Email: jenson_joseph@dau.ac.in
+- Address: # 3205, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -31,13 +43,4 @@ History and theory of Media, Film Studies, Cultural Studies, Malayalam Cinema, P
 * Indian Cinema: Lineages and the Present
 * Communication Skills
 
-## Contact Information
 
-- **Office:** ** # 3205, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261536
-- **Email:** ** jenson_joseph@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/jenson-joseph
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

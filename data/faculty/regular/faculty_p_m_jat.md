@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of P M Jat
+
+# Main Content
+
 # P M Jat
 
 ## Education
 
 PhD (Computer Science and Engineering), ML Sukhadia University, Udaipur
+
+## Contact Information
+
+- Phone: 079-68261641
+- Email: pm_jat@dau.ac.in
+- Address: # 2203, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Specialization
 
@@ -30,13 +42,4 @@ Databases
 * Object Oriented Programming
 * Enterprise Computing with J2EE
 
-## Contact Information
 
-- **Office:** ** # 2203, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261641
-- **Email:** ** pm_jat@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/p-m-jat
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

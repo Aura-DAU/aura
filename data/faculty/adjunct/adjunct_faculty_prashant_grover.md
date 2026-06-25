@@ -7,11 +7,21 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Prashant Grover
+
+# Main Content
+
 # Prashant Grover
 
 ## Education
 
 B.Sc (Hons) - Animation & Multi., Birla Institute of Technology
+
+## Contact Information
+
+- Email: prashant_grover@dau.ac.in
 
 ## Biography
 
@@ -21,13 +31,4 @@ I am a Artist professionally working in this industry for past 11 years. I am sp
 
 Animation
 
-## Contact Information
 
-- **Office:** ** *Not available*
-- **Phone:** ** *Not available*
-- **Email:** ** prashant_grover@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/prashant-grover
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

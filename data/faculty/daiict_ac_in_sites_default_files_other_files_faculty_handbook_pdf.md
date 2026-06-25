@@ -2042,14 +2042,3 @@ NAAC Accredited
 Recipient of Centre of Excellence Award by the Government of Gujarat
 Recipient of ‘5 Star’ in GSIRF Ranking by Government of Gujarat
 Tel.: +91 79 6826 1700  I  Fax: +91 79 6826 1710  I Web: www.daiict.ac.in
-
-## Contact Information
-
-- **Office:** ** *Not available*
-- **Phone:** ** *Not available*
-- **Email:** ** *Not available*
-- **Profile:** ** https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Brajesh Dhiman
+
+# Main Content
+
 # Brajesh Dhiman
 
 ## Education
 
 PhD, IIT Guwahati
+
+## Contact Information
+
+- Phone: 079-68261755
+- Email: brajesh_dhiman@dau.ac.in
+- Address: # 3101, FB-3, DAU, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -23,13 +35,4 @@ An avid adventurer, Dr Dhiman thrives on challenges and is known for his collabo
 
 Small Scale PV Applications, and AI Enabled Design for Global South
 
-## Contact Information
 
-- **Office:** ** # 3101, FB-3, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261755
-- **Email:** ** brajesh_dhiman@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/brajesh-dhiman
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

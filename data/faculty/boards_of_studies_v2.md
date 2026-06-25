@@ -7,7 +7,27 @@ scraped_date: "2026-06-10"
 team: "Team C"
 ---
 
-# BoardsofStudies
+# Board Of Studies
+
+### Chairman
+
+| Name |
+|------|
+| **Prof. Bhaskar Chaudhury** - *Chairman*<br>Dean (Academic Programs), DA-IICT (ex-Officio) |
+
+---
+
+### Members
+
+| # | Name | Role | Affiliation |
+|---|------|------|-------------|
+| 1 | **Prof. P.M. Jat** | Convenor (Convenor, UG Programs) | DA-IICT (ex-Officio) |
+| 2 | **Prof. Anish Mathuria** | Member | DA-IICT |
+| 3 | **Prof. Yash Vasavada** | Member | Dean (Research), DA-IICT |
+| 4 | **Prof. Madhumita Mazumdar** | Member | Professor, DA-IICT |
+| 5 | **Prof. Maniklal Das** | Member | Dean (Faculty), DA-IICT |
+
+---
 
 ## Key Information
 
@@ -35,20 +55,17 @@ team: "Team C"
 
 ---
 
+## Contact Information
+
+For more information about Board of Studies activities and functions, please contact:
+- **Email:** dean_ap[at]dau[dot]ac[dot]in (Dean Academic Programs)
+- **Office:** DA-IICT, Gandhinagar, Gujarat, India
+
+---
+
 ## Related Governance Pages
 
 - **Academic Council:** https://www.daiict.ac.in/academic-council
 - **Board of Governors:** https://www.daiict.ac.in/board-governors
 - **Director General:** https://www.daiict.ac.in/director
 - **Director - School of Technology:** https://www.daiict.ac.in/director-school-technology
-
-## Contact Information
-
-- **Office:** ** ** DA-IICT, Gandhinagar, Gujarat, India
-- **Phone:** ** *Not available*
-- **Email:** ** ** dean_ap[at]dau[dot]ac[dot]in (Dean Academic Programs)
-- **Profile:** ** https://daiict.ac.in/board-studies
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

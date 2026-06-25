@@ -7,11 +7,21 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Vinay Kulkarni
+
+# Main Content
+
 # Vinay Kulkarni
 
 ## Education
 
 MSEE, IIT Madras
+
+## Contact Information
+
+- Email: vinay_kulkarni@dau.ac.in
 
 ## Biography
 
@@ -25,13 +35,4 @@ Digital Twins, Software Engineering for AI-first world, Complex Adaptive Systems
 
 * **200+ conference & journal, 4 co-authored books, and 40+ patents**
 
-## Contact Information
 
-- **Office:** ** *Not available*
-- **Phone:** ** *Not available*
-- **Email:** ** vinay_kulkarni@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/professor-practice/vinay-kulkarni
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

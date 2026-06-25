@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Vishvajit Pandya
+
+# Main Content
+
 # Vishvajit Pandya
 
 ## Education
 
 PhD (Anthropology), University of Chicago, USA
+
+## Contact Information
+
+- Phone: 079-68261543
+- Email: vishvajit_pandya@dau.ac.in
+- Address: # 2105, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Specialization
 
@@ -33,13 +45,4 @@ Material Culture, Design and Communication Culture, Visual Anthropology, Anthrop
 * Ethnographic: Methods
 * Research Narratives
 
-## Contact Information
 
-- **Office:** ** # 2105, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261543
-- **Email:** ** vishvajit_pandya@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/distinguished-professor/vishvajit-pandya
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

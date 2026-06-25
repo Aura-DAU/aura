@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Jayanth Varma
+
+# Main Content
+
 # Jayanth Varma
 
 ## Education
 
 Doctorate in Management, IIM Ahmedabad
+
+## Contact Information
+
+- Phone: 079-68261679
+- Email: jayanth_varma@dau.ac.in
+- Address: # 2208, FB-2, DAU, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://www.jrvarma.in/
 
 ## Biography
 
@@ -29,13 +45,4 @@ He is the author of several books including Derivatives and Risk Management, Por
 
 Courses on capital markets, fixed income, alternative investments, risk management, and corporate finance during my tenure at IIMA. List of these courses is available at [HTTPS://WWW.JRVARMA.IN/COURSES.HTML](https://www.jrvarma.in/courses.html)
 
-## Contact Information
 
-- **Office:** ** # 2208, FB-2, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261679
-- **Email:** ** jayanth_varma@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/distinguished-professor/jayanth-varma
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

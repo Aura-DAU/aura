@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Sudip Bera
+
+# Main Content
+
 # Sudip Bera
 
 ## Education
 
 PhD (Mathematics), Visva-Bharati University, Shantiniketan, West Bengal
+
+## Contact Information
+
+- Phone: 079-68261632
+- Email: sudip_bera@dau.ac.in
+- Address: # 4201, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://sites.google.com/view/sudipbera
 
 ## Biography
 
@@ -44,13 +60,4 @@ Algebraic graph theory, Algebraic combinatorics
 * Calculus
 * Real and complex analysis
 
-## Contact Information
 
-- **Office:** ** # 4201, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261632
-- **Email:** ** sudip_bera@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/sudip-bera
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

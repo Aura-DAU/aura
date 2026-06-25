@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Sandeep Sharma
+
+# Main Content
+
 # Sandeep Sharma
 
 ## Education
 
 PhD (Mathematics), Indraprastha Institute of Information Technology, Delhi
+
+## Contact Information
+
+- Phone: 079-68261636
+- Email: sandeep_sharma@dau.ac.in
+- Address: # 4206, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.co.in/citations?user=2DdmJGgAAAAJ
 
 ## Biography
 
@@ -50,13 +66,4 @@ Algebraic Coding Theory, Quantum Error Correction Codes
 * Differential Equations
 * Discrete Mathematics
 
-## Contact Information
 
-- **Office:** ** # 4206, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261636
-- **Email:** ** sandeep_sharma@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/sandeep-sharma
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.co.in/citations?user=2DdmJGgAAAAJ
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

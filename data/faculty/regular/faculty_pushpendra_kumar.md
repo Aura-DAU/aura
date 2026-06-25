@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Pushpendra Kumar
+
+# Main Content
+
 # Pushpendra Kumar
 
 ## Education
 
 PhD (Mathematics), National Institute of Technology Puducherry
+
+## Contact Information
+
+- Phone: 079-68261649
+- Email: pushpendra_kumar@dau.ac.in
+- Address: # 4109, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.com/citations?user=qKRnDacAAAAJ&hl=en
 
 ## Biography
 
@@ -42,13 +58,4 @@ Selected Publications: 10 (Citations: 2790, h-index: 30) Total 101 papers can be
 * Transforms and Complex Analysis; B.Tech. (ECE) 2nd year, 2022, NIT Puducherry
 * Differential Equations and Laplace Transforms; B.Tech. (EEE) 1st year, 2022, NIT Puducherry
 
-## Contact Information
 
-- **Office:** ** # 4109, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261649
-- **Email:** ** pushpendra_kumar@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/pushpendra-kumar
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.com/citations?user=qKRnDacAAAAJ&hl=en
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

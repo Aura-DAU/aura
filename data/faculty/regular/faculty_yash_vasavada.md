@@ -7,11 +7,28 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Yash Vasavada
+
+# Main Content
+
 # Yash Vasavada
 
 ## Education
 
 PhD (Electrical Engineering), Virginia Polytechnic Institute and State University, USA
+
+## Contact Information
+
+- Phone: 079-68261634
+- Email: yash_vasavada@dau.ac.in
+- Address: # 1224, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- http://intranet.daiict.ac.in/~yash_vasavada/index.html
+- https://scholar.google.co.in/citations?user=9KkhfBgAAAAJ&hl=en
 
 ## Biography
 
@@ -56,13 +73,4 @@ Communication, Signal Processing, Machine Learning
 * Advanced Digital Communications
 * Next Generation Communication Systems
 
-## Contact Information
 
-- **Office:** ** # 1224, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261634
-- **Email:** ** yash_vasavada@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/yash-vasavada
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.co.in/citations?user=9KkhfBgAAAAJ&hl=en
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

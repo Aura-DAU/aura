@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Gautam Dutta
+
+# Main Content
+
 # Gautam Dutta
 
 ## Education
 
 PhD (Physics), Physical Research Laboratory, Ahmedabad
+
+## Contact Information
+
+- Phone: 079-68261631
+- Email: gautam_dutta@dau.ac.in
+- Address: # 1110, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -48,13 +60,4 @@ Theoretical physics
 * Discrete Mathematics
 * Probability and Information Theory
 
-## Contact Information
 
-- **Office:** ** # 1110, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261631
-- **Email:** ** gautam_dutta@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/gautam-dutta
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*
