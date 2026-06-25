@@ -573,7 +573,6 @@ class RetrievalPipeline:
             results = self._retrieve_dual_path(query, plan)
             # Expand adjacent chunks
             results = self._expand_adjacent_chunks(results)
-
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
         # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
         # the vector/BM25 results (query chunks) into a single chunk pool.
