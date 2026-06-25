@@ -45,6 +45,11 @@ def main():
     
     # Step 3: Upload to Pinecone
     run_step("upload_to_pinecone.py", embeddings_dir)
+
+    # Step 4: Build entity index for graph-enhanced retrieval
+    # Reads vector_store/metadata.json (written in Step 2) and writes
+    # vector_store/entity_index.json used by EntityRetriever at query time.
+    run_step("build_entity_index.py", current_dir)
     
     print("\n" + "="*50)
     print("ALL STEPS COMPLETED. PINECONE INDEX IS FULLY SYNCED!")
@@ -52,3 +57,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

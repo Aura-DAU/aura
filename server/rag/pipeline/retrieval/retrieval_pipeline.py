@@ -2,6 +2,7 @@ from pipeline.retrieval.query_planner import QueryPlanner
 from pipeline.retrieval.retriever import Retriever
 from pipeline.retrieval.reranker import Reranker
 from pipeline.retrieval.context_builder import ContextBuilder
+from pipeline.retrieval.entity_retriever import EntityRetriever
 
 import re
 import logging
@@ -23,7 +24,8 @@ class RetrievalPipeline:
         from pipeline.retrieval.query_rewriter import QueryRewriter
         self.rewriter = QueryRewriter()
 
-        # Load faculty names from metadata.json for fuzzy matching
+        # Shared: load metadata.json once for both faculty fuzzy-matching
+        # and entity-based retrieval (professor's algorithm).
         import json
         from pathlib import Path
         metadata_path = (
@@ -31,6 +33,8 @@ class RetrievalPipeline:
             / "vector_store"
             / "metadata.json"
         )
+
+        # ── Faculty fuzzy matching ────────────────────────────────────────
         self.faculty_names = []
         self.faculty_names_lower = []
         self.faculty_names_map = {}
@@ -51,6 +55,29 @@ class RetrievalPipeline:
         else:
             logger.warning("metadata.json not found at %s. Fuzzy faculty matching disabled.", metadata_path)
 
+        # ── Entity-based retrieval (professor's algorithm) ─────────────────
+        # Chunks → Triples → Entity → Chunk Pool
+        # Loads entity_index.json built by build_entity_index.py.
+        # Gracefully disabled if the index or metadata file is absent.
+        if metadata_path.exists():
+            try:
+                self.entity_retriever = EntityRetriever(
+                    str(metadata_path)
+                )
+                logger.info("EntityRetriever initialised successfully.")
+            except Exception as e:
+                logger.warning(
+                    "EntityRetriever failed to initialise: %s. "
+                    "Entity-based retrieval disabled.",
+                    e,
+                )
+                self.entity_retriever = None
+        else:
+            logger.warning(
+                "metadata.json not found — EntityRetriever disabled."
+            )
+            self.entity_retriever = None
+
         # Build local index mapping coordinate keys to raw chunks for adjacent chunk expansion
         self.chunk_by_coordinate = {}
         if self.retriever.bm25 and hasattr(self.retriever.bm25, "chunks"):
@@ -59,7 +86,6 @@ class RetrievalPipeline:
                 chunk_idx = chunk.get("chunk_index")
                 if doc_id and chunk_idx is not None:
                     self.chunk_by_coordinate[(doc_id, int(chunk_idx))] = chunk
-
 
     PROGRAM_ALIASES = {
 
@@ -547,6 +573,22 @@ class RetrievalPipeline:
             results = self._retrieve_dual_path(query, plan)
             # Expand adjacent chunks
             results = self._expand_adjacent_chunks(results)
+        # ── Entity-based retrieval (professor's algorithm) ─────────────────
+        # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
+        # the vector/BM25 results (query chunks) into a single chunk pool.
+        # The cross-encoder reranker then scores the full pool uniformly.
+        if self.entity_retriever and not decomposed_queries:
+            entity_chunks = (
+                self.entity_retriever.retrieve_by_entities(
+                    entities
+                )
+            )
+            if entity_chunks:
+                logger.debug(
+                    "Entity retriever added %d candidate chunks to pool.",
+                    len(entity_chunks),
+                )
+                results = results + entity_chunks
 
         seen = set()
         deduped = []

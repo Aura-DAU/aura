@@ -57,7 +57,7 @@ def main():
 
     embeddings = model.encode(
         texts,
-        batch_size=256,
+        batch_size=32,
         show_progress_bar=True,
         normalize_embeddings=True,
         convert_to_numpy=True
