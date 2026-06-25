@@ -7,11 +7,28 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Rajib Lochan Das
+
+# Main Content
+
 # Rajib Lochan Das
 
 ## Education
 
 PhD (Electronics & Electrical Communication Engineering), IIT Kharagpur
+
+## Contact Information
+
+- Phone: 079-68261597
+- Email: rajib_das@dau.ac.in
+- Address: # 4202, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://sites.google.com/site/rajiblochandasiit/
+- https://www.linkedin.com/in/dr-rajib-lochan-das-b69b3041/
 
 ## Biography
 
@@ -34,13 +51,4 @@ Adaptive Signal Processing, Compressive Sensing, Machine Learning, Image Process
 * Adaptive Signal Processing
 * Control Systems
 
-## Contact Information
 
-- **Office:** ** # 4202, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261597
-- **Email:** ** rajib_das@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/rajib-lochan-das
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** https://www.linkedin.com/in/dr-rajib-lochan-das-b69b3041/
-- **ORCID:** ** *Not available*

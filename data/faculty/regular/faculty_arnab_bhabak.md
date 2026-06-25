@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Arnab Bhabak
+
+# Main Content
+
 # Arnab Bhabak
 
 ## Education
 
 PhD (Mathematics), IIT Guwahati
+
+## Contact Information
+
+- Phone: 079-68261619
+- Email: arnab_bhabak@dau.ac.in
+- Address: # 4204, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -29,13 +41,4 @@ Stochastic Control, Stochastic Game Theory, Probability Theory
 * **Arnab Bhabak**, Chandan Pal and Subhamay Saha (2022) Zero-sum semi-Markov games with a probability criterion, Stochastics, 94:3, 415-431, *DOI: 10.1080/17442508.2021.1957891*.
 * **Arnab Bhabak**, Subhamay Saha (2021) Continuous-time zero-sum games with probability criterion, Stochastic Analysis and Applications, 39:6, 1130-1143, *DOI: 10.1080/07362994.2021.1871627*.
 
-## Contact Information
 
-- **Office:** ** # 4204, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261619
-- **Email:** ** arnab_bhabak@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/arnab-bhabak
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Hemant Patil
+
+# Main Content
+
 # Hemant Patil
 
 ## Education
 
 PhD (Computer Science), IIT Kharagpur
+
+## Contact Information
+
+- Phone: 079-68261650, Lab: 079-68261587
+- Email: hemant_patil@dau.ac.in hemant_patil1977@yahoo.com
+- Address: Office: # 4103, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007. Lab: CEP 006, Speech Lb, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://sites.google.com/site/hemantpatildaiict/
 
 ## Biography
 
@@ -36,13 +52,4 @@ Speech Signal Processing, Speech and Speaker Recognition (Voice Biometrics), Dev
 * Speech Communication
 * Advanced Digital Signal Processing
 
-## Contact Information
 
-- **Office:** ** Office: # 4103, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007. Lab: CEP 006, Speech Lb, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261650, Lab: 079-68261587
-- **Email:** ** hemant_patil@dau.ac.in hemant_patil1977@yahoo.com
-- **Profile:** ** https://www.daiict.ac.in/faculty/hemant-patil
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Manoj Raut
+
+# Main Content
+
 # Manoj Raut
 
 ## Education
 
 PhD (Mathematics), IIT Madras
+
+## Contact Information
+
+- Phone: 079-68261585
+- Email: manoj_raut@dau.ac.in
+- Address: # 4112, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Specialization
 
@@ -29,13 +41,4 @@ Mathematical Logic
 * Discrete Mathematics
 * Coding Theory
 
-## Contact Information
 
-- **Office:** ** # 4112, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261585
-- **Email:** ** manoj_raut@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/manoj-raut
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

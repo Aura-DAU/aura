@@ -7,26 +7,9 @@ scraped_date: "2026-06-10"
 team: "Team C"
 ---
 
-# Faculty Tenure
+# Faculty Recruitment
 
-## Teaching
-
-### Teaching Load
-- Faculty members are engaging in teaching of **3 courses in one academic year**
-- **Two courses** to teach in one semester and **one** in the other semester
-- Faculty member teaching core courses in UG and PG is **supported by Teaching Assistants (TAs)**
-- Number of TAs assigned depends on the registration of the course
-
-### New Joinee (First Year)
-- **Two courses** (one in each semester) teaching load for the first year
-- Then **three courses** in the subsequent year
-
-### Infrastructure
-- Institute has **three air-cooled lecture theatres** with seating capacity of more than 300 students
-- These theatres are equipped with modern audio and video presentation systems
-- Regular class rooms and tutorial rooms are also equipped with audio-visual aids
-- Teaching and research laboratories are housed in a laboratory building located in between the lecture theatres and the classrooms
-- The entire campus is **wi-fi enabled**
+Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) invites applications for full-time faculty positions from highly motivated individuals with a good record of conducting independent, high-quality research and a strong commitment to teaching and educating a diverse group of students at both undergraduate and postgraduate levels.
 
 ---
 
@@ -137,6 +120,27 @@ DA-IICT has emphasized and encouraged research since its founding in 2001, and t
 
 ---
 
+## Academics and Teaching Infrastructure
+
+### Teaching Load
+- Faculty members are engaging in teaching of **3 courses in one academic year**
+- **Two courses** to teach in one semester and **one** in the other semester
+- Faculty member teaching core courses in UG and PG is **supported by Teaching Assistants (TAs)**
+- Number of TAs assigned depends on the registration of the course
+
+### New Joinee (First Year)
+- **Two courses** (one in each semester) teaching load for the first year
+- Then **three courses** in the subsequent year
+
+### Infrastructure
+- Institute has **three air-cooled lecture theatres** with seating capacity of more than 300 students
+- These theatres are equipped with modern audio and video presentation systems
+- Regular class rooms and tutorial rooms are also equipped with audio-visual aids
+- Teaching and research laboratories are housed in a laboratory building located in between the lecture theatres and the classrooms
+- The entire campus is **wi-fi enabled**
+
+---
+
 ## Research Environment
 
 DA-IICT stands for a confluence of several interrelated disciplines, from technology and basic sciences to humanities and social sciences catering to both academia and industry.
@@ -236,14 +240,3 @@ The Institute has over **1700 undergraduate students** and **600 postgraduate st
 ## Questions Answered by This Source
 
 - FAC096, FAC097, FAC104, FAC117, FAC120, FAC121, FAC135, FAC137, FAC139, FAC044
-
-## Contact Information
-
-- **Office:** ** *Not available*
-- **Phone:** ** *Not available*
-- **Email:** ** *Not available*
-- **Profile:** ** https://www.daiict.ac.in/faculty-tenure
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

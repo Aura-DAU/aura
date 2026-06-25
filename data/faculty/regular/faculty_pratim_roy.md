@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Pratim Roy
+
+# Main Content
+
 # Pratim Roy
 
 ## Education
 
 PhD (Physics),  IIT Kanpur
+
+## Contact Information
+
+- Phone: 079-68261627
+- Email: pratim_roy@dau.ac.in
+- Address: # 4211, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -78,13 +90,4 @@ A list of publications may be found at: **<https://scholar.google.com/citations?
   ARXIV:1108.1907 [COND-MAT.MES-HALL],  
   J.PHYS.CONDENS.MATTER 24 (2012) 055301
 
-## Contact Information
 
-- **Office:** ** # 4211, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261627
-- **Email:** ** pratim_roy@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/pratim-roy
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

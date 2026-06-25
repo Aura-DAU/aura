@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Biswajit Mishra
+
+# Main Content
+
 # Biswajit Mishra
 
 ## Education
 
 PhD (Electrical & Electronics Engineering), University of Southampton, UK
+
+## Contact Information
+
+- Phone: 079-68261561
+- Email: biswajit_mishra@dau.ac.in
+- Address: # 2104, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- http://intranet.daiict.ac.in/~biswajitmishra/
 
 ## Specialization
 
@@ -36,13 +52,4 @@ Ultra Low Power and Sub-threshold Circuit Methodologies, Very Low Voltage Circui
 * VLSI Subsystem Design (MTech)
 * Low Power VLSI Design
 
-## Contact Information
 
-- **Office:** ** # 2104, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261561
-- **Email:** ** biswajit_mishra@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/biswajit-mishra
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

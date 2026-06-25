@@ -230,14 +230,3 @@ DA-IICT, Gandhinagar.
 Sa
 
 Classification: confidential Page 5 of 5
-
-## Contact Information
-
-- **Office:** ** *Not available*
-- **Phone:** ** *Not available*
-- **Email:** ** *Not available*
-- **Profile:** ** https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Entrepreneurship-Policy.pdf
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

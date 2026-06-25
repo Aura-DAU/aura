@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Arnab Kumar Ray
+
+# Main Content
+
 # Arnab Kumar Ray
 
 ## Education
 
 PhD (Physics), Jadavpur University, Kolkata
+
+## Contact Information
+
+- Phone: 079-68261612
+- Email: arnab_kumar@dau.ac.in
+- Address: # 2210, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.co.in/citations?user=eiBbBFMAAAAJ&hl=en
 
 ## Biography
 
@@ -38,13 +54,4 @@ Astrophysical Accretion, Fluid Dynamics, Nonlinear Systems
 * Econophysics
 * Multidisciplinary Problem-Solving Techniques
 
-## Contact Information
 
-- **Office:** ** # 2210, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261612
-- **Email:** ** arnab_kumar@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/arnab-kumar-ray
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.co.in/citations?user=eiBbBFMAAAAJ&hl=en
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

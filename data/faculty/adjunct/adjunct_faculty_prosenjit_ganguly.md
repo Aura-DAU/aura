@@ -7,23 +7,24 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Prosenjit Ganguly
+
+# Main Content
+
 # Prosenjit Ganguly
 
 ## Education
 
 4yr Diploma (now B.Des) in Animation Film Design, NID
 
+## Contact Information
+
+- Email: prosenjit_ganguly@dau.ac.in
+
 ## Specialization
 
 Animation Film Making, Screenwriting, Story-telling, Character Design, Photography, Illustration, Voice Acting
 
-## Contact Information
 
-- **Office:** ** *Not available*
-- **Phone:** ** *Not available*
-- **Email:** ** prosenjit_ganguly@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/prosenjit-ganguly
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

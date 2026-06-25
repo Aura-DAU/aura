@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Nandini Banerjee
+
+# Main Content
+
 # Nandini Banerjee
 
 ## Education
 
 MA, M.Phil, PhD (International Economics), MA psychology in Psychotherapy and Counselling
+
+## Contact Information
+
+- Phone: 079-68261620
+- Email: nandini_banerjee@dau.ac.in
+- Address: # 2110, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -47,13 +59,4 @@ Certifications in Basic counseling course – Counseling development program (CD
 * Soft Skills
 * Economics
 
-## Contact Information
 
-- **Office:** ** # 2110, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261620
-- **Email:** ** nandini_banerjee@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/nandini-banerjee
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

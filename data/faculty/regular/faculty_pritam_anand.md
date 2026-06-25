@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Pritam Anand
+
+# Main Content
+
 # Pritam Anand
 
 ## Education
 
 PhD (Computer Science), South Asian University, New Delhi
+
+## Contact Information
+
+- Phone: 079-68261657
+- Email: pritam_anand@dau.ac.in
+- Address: # 3103, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.com/citations?user=ATYzQhoAAAAJ&hl=en
 
 ## Biography
 
@@ -38,13 +54,4 @@ Support Vector Machines, Loss Functions, Regression, Extreme Learning Machine, Q
 
 Probability and Statistics
 
-## Contact Information
 
-- **Office:** ** # 3103, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261657
-- **Email:** ** pritam_anand@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/pritam-anand
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.com/citations?user=ATYzQhoAAAAJ&hl=en
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

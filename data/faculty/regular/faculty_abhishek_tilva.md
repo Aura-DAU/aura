@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Abhishek Tilva
+
+# Main Content
+
 # Abhishek Tilva
 
 ## Education
 
 PhD (Statistics), Columbia University, New York, USA
+
+## Contact Information
+
+- Phone: 079-68261549
+- Email: abhishek_tilva@dau.ac.in
+- Address: # 2209, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.com/citations?user=1YCDWY0AAAAJ&hl=en&oi=ao
 
 ## Biography
 
@@ -33,13 +49,4 @@ Arbitrage Theory, Stochastic Portfolio Theory, Stochastic Analysis
 
 [Please Click Here](https://scholar.google.com/citations?user=1YCDWY0AAAAJ&hl=en&oi=ao)
 
-## Contact Information
 
-- **Office:** ** # 2209, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261549
-- **Email:** ** abhishek_tilva@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/abhishek-tilva
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.com/citations?user=1YCDWY0AAAAJ&hl=en&oi=ao
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

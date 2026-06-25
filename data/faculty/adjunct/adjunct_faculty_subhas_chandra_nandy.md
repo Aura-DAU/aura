@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Subhas Chandra Nandy
+
+# Main Content
+
 # Subhas Chandra Nandy
 
 ## Education
 
 PhD (Computer Science), University of Calcutta
+
+## Contact Information
+
+- Phone: 079-68261717
+- Email: subhas_nandy@dau.ac.in
+- Address: # 4105, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -31,13 +43,4 @@ Algorithms, Data Structure, Graph Applications, Computational and Combinatorial 
 
 Algorithms, Data Structure, Computational Geometry, Graph Algorithms, Optimization, Approximation and Randomized Algorithms
 
-## Contact Information
 
-- **Office:** ** # 4105, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261717
-- **Email:** ** subhas_nandy@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/subhas-chandra-nandy
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

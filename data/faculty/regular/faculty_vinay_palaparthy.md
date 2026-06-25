@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Vinay Palaparthy
+
+# Main Content
+
 # Vinay Palaparthy
 
 ## Education
 
 PhD (Electrical Engineering), IIT Bombay
+
+## Contact Information
+
+- Phone: 079-68261677
+- Email: vinay_shrinivas@dau.ac.in
+- Address: # 1208, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -157,13 +169,4 @@ University Topper in M.Sc. Electronics (2011)
 
 * MeitY
 
-## Contact Information
 
-- **Office:** ** # 1208, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261677
-- **Email:** ** vinay_shrinivas@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/vinay-palaparthy
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

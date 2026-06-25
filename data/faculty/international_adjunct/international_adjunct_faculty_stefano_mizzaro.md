@@ -7,23 +7,24 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Stefano Mizzaro
+
+# Main Content
+
 # Stefano Mizzaro
 
 ## Education
 
 PhD (Information Engineering), University of Trieste, Italy
 
+## Contact Information
+
+- Email: mizzaro@uniud.it
+
 ## Specialization
 
 Information Retrieval, Artificial Intelligence
 
-## Contact Information
 
-- **Office:** ** *Not available*
-- **Phone:** ** *Not available*
-- **Email:** ** mizzaro@uniud.it
-- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty-international/stefano-mizzaro
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

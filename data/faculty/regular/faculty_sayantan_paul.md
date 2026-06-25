@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Sayantan Paul
+
+# Main Content
+
 # Sayantan Paul
 
 ## Education
 
 PhD (Statistics) - Thesis Submitted
+
+## Contact Information
+
+- Phone: 079-68261752
+- Email: sayantan_paul@dau.ac.in
+- Address: # 3202, FB-3, DAU, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.com/citations?user=3o6PTmsAAAAJ&hl=en
 
 ## Biography
 
@@ -38,13 +54,4 @@ High-dimensional Inference, Multiple Testing, Posterior Concentration, Variable 
 * Time Series
 * Bayesian Computation
 
-## Contact Information
 
-- **Office:** ** # 3202, FB-3, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261752
-- **Email:** ** sayantan_paul@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/sayantan-paul
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.com/citations?user=3o6PTmsAAAAJ&hl=en
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

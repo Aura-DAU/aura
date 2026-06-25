@@ -7,11 +7,30 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Arunava Chakravarty
+
+# Main Content
+
 # Arunava Chakravarty
 
 ## Education
 
 PhD (Computer Science and Engineering), IIIT Hyderabad
+
+## Contact Information
+
+- Phone: 079-68261542
+- Email: arunava_chakravarty@dau.ac.in
+- Address: # 1201, FB-1, DAU, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://scholar.google.co.in/citations?user=Tk2svbAAAAAJ&hl=en
+- https://orcid.org/0000-0003-3646-0650
+- https://www.scopus.com/authid/detail.uri?authorId=59102807500
+- https://github.com/arunava555/
 
 ## Biography
 
@@ -75,13 +94,4 @@ Medical Image Analysis, Machine Learning for Healthcare, Computer Vision
 
 * IE406 Machine Learning (ongoing)
 
-## Contact Information
 
-- **Office:** ** # 1201, FB-1, DAU, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261542
-- **Email:** ** arunava_chakravarty@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/arunava-chakravarty
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.co.in/citations?user=Tk2svbAAAAAJ&hl=en
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** https://orcid.org/0000-0003-3646-0650

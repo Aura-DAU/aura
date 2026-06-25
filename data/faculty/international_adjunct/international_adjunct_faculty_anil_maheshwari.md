@@ -7,11 +7,25 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Anil Maheshwari
+
+# Main Content
+
 # Anil Maheshwari
 
 ## Education
 
 PhD, TIFR Bombay
+
+## Contact Information
+
+- Email: anil_maheshwari@dau.ac.in
+
+## Website Links
+
+- https://carleton.ca/scs/people/anil-maheshwari/
 
 ## Biography
 
@@ -31,13 +45,4 @@ Dr. Maheshwari works in the field of design, analysis, and implementation of seq
 
 Design, Analysis and Implementation of Algorithms for Problems arising in Computational Geometry, Graph Theory, Discrete Mathematics, and Data Science.
 
-## Contact Information
 
-- **Office:** ** *Not available*
-- **Phone:** ** *Not available*
-- **Email:** ** anil_maheshwari@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty-international/anil-maheshwari
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

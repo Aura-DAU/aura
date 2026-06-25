@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Ajay Beniwal
+
+# Main Content
+
 # Ajay Beniwal
 
 ## Education
 
 PhD (Electronics and Communication Engineering), IIIT Allahabad
+
+## Contact Information
+
+- Phone: 079-68261745
+- Email: ajay_beniwal@dau.ac.in
+- Address: # 3211, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://sites.google.com/view/ajay-beniwal/home
 
 ## Biography
 
@@ -73,13 +89,4 @@ Flexible and Printable Electronics for Healthcare and Digital Agricultural Appli
 
 Flexible and Printed Electronics
 
-## Contact Information
 
-- **Office:** ** # 3211, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261745
-- **Email:** ** ajay_beniwal@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/ajay-beniwal
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

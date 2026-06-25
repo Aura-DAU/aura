@@ -7,23 +7,25 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Dipankar Nagchoudhuri
+
+# Main Content
+
 # Dipankar Nagchoudhuri
 
 ## Education
 
 PhD (Electrical Engineering), Michigan State University, USA
 
+## Contact Information
+
+- Phone: 079-68261654
+- Email: dnc@dau.ac.in
+
 ## Specialization
 
 VLSI Design, CMOS Circuits and Technology, Biomedical Signal Processing Chip Design
 
-## Contact Information
 
-- **Office:** ** *Not available*
-- **Phone:** ** 079-68261654
-- **Email:** ** dnc@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/dipankar-nagchoudhuri
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

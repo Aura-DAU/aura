@@ -7,11 +7,28 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Prosenjit Kundu
+
+# Main Content
+
 # Prosenjit Kundu
 
 ## Education
 
 PhD (Mathematics), National Institute of Technology, Durgapur
+
+## Contact Information
+
+- Phone: 079-68261559
+- Email: prosenjit_kundu@dau.ac.in jitprosen.math@gmail.com
+- Address: # 2211, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://sites.google.com/view/prosenjit-kundu/home
+- https://scholar.google.co.in/citations?user=una7rcQAAAAJ&hl=en
 
 ## Biography
 
@@ -111,13 +128,4 @@ Collaborators:
 
 1. Satyaki Roy
 
-## Contact Information
 
-- **Office:** ** # 2211, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261559
-- **Email:** ** prosenjit_kundu@dau.ac.in jitprosen.math@gmail.com
-- **Profile:** ** https://www.daiict.ac.in/faculty/prosenjit-kundu
-- **Website:** *Not available*
-- **Google Scholar:** ** https://scholar.google.co.in/citations?user=una7rcQAAAAJ&hl=en
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

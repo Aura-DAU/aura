@@ -7,11 +7,27 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Amit Mankodi
+
+# Main Content
+
 # Amit Mankodi
 
 ## Education
 
 PhD, DA-IICT Gandhinagar
+
+## Contact Information
+
+- Phone: 079-68261656
+- Email: amit_mankodi@dau.ac.in
+- Address: # 4205, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Website Links
+
+- https://www.linkedin.com/in/amitmankodi/
 
 ## Specialization
 
@@ -27,13 +43,4 @@ Embedded Systems, Computer Networks, High Performance Computing, Machine Learnin
 * Computer Organization
 * Python Programming
 
-## Contact Information
 
-- **Office:** ** # 4205, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261656
-- **Email:** ** amit_mankodi@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/amit-mankodi
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** https://www.linkedin.com/in/amitmankodi/
-- **ORCID:** ** *Not available*

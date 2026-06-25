@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Minal Bhise
+
+# Main Content
+
 # Minal Bhise
 
 ## Education
 
 PhD (Computer Science), BITS Pilani
+
+## Contact Information
+
+- Phone: 079-68261548
+- Email: minal_bhise@dau.ac.in
+- Address: # 1209, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Specialization
 
@@ -32,13 +44,4 @@ Distributed Databases - Query Processing, Application Development for Biodiversi
 * Web Data Management (PG UG Technical Elective)
 * Approaches to Semantic Web (PG Elective)
 
-## Contact Information
 
-- **Office:** ** # 1209, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261548
-- **Email:** ** minal_bhise@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/minal-bhise
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*

@@ -7,11 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
+# Overview
+
+Profile of Ratna Bharati Bhamidipati
+
+# Main Content
+
 # Ratna Bharati Bhamidipati
 
 ## Education
 
 PhD (Sociology), Dr B R Ambedkar University, Delhi
+
+## Contact Information
+
+- Phone: 079-68261589
+- Email: ratna_bharati@dau.ac.in
+- Address: # 2202, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -47,13 +59,4 @@ Diaspora , Transnationalism, Migrant Subjectivity
 * **B, Ratna Bharati**. 2019. “Transmission of cultural codes through language: A Study of Gujarati Diaspora in Lisbon, Portugal”. Paper presented at Global Indian Diaspora: Its Contribution in Retention of Indian Culture and India Connect organised by Banaras Hindu University (BHU), Varanasi (22-23 January).
 * **B, Ratna Bharati**. 2017. “Expressing Self through Movies: A Lacanian understanding of Rituparno Ghosh’s ‘Chitrangada”. Paper presented at Media and Subalterns in India organized by Central University of Rajasthan (16-17 March).
 
-## Contact Information
 
-- **Office:** ** # 2202, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-- **Phone:** ** 079-68261589
-- **Email:** ** ratna_bharati@dau.ac.in
-- **Profile:** ** https://www.daiict.ac.in/faculty/ratna-bharati-bhamidipati
-- **Website:** *Not available*
-- **Google Scholar:** ** *Not available*
-- **LinkedIn:** ** *Not available*
-- **ORCID:** ** *Not available*
