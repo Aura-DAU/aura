@@ -21,7 +21,7 @@ export function MessageList({
   onRegenerate,
 }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
-  const lastAssistantIndex = messages.map((m) => m.role).lastIndexOf("assistant")
+  const lastAssistantIndex = messages.findLastIndex((m) => m.role === "assistant")
   const showIndicator = loading && messages[messages.length - 1]?.role !== "assistant"
 
   useEffect(() => {

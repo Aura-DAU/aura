@@ -2,7 +2,7 @@ import React from "react";
 import { FlaskConical } from "lucide-react";
 
 interface DemoCredentialsProps {
-  onFillDemo: (role: "student" | "parent") => void;
+  onFillDemo: () => void;
 }
 
 export function DemoCredentials({ onFillDemo }: DemoCredentialsProps) {
@@ -12,22 +12,13 @@ export function DemoCredentials({ onFillDemo }: DemoCredentialsProps) {
         <FlaskConical className="w-3.5 h-3.5 text-brand-500 shrink-0" />
         <span>demo quick-fill</span>
       </div>
-      <div className="flex gap-3">
-        <button
-          type="button"
-          onClick={() => onFillDemo("student")}
-          className="flex-1 py-2.5 px-3 text-xs font-black rounded-2xl border-2 border-[var(--color-aura-ink)] bg-[var(--color-aura-mint)] text-[var(--color-aura-ink)] shadow-sticker-sm hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer dark:border-slate-100"
-        >
-          🎓 demo · student
-        </button>
-        <button
-          type="button"
-          onClick={() => onFillDemo("parent")}
-          className="flex-1 py-2.5 px-3 text-xs font-black rounded-2xl border-2 border-[var(--color-aura-ink)] bg-[var(--color-aura-coral)] text-[var(--color-aura-ink)] shadow-sticker-sm hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer dark:border-slate-100"
-        >
-          👪 demo · parent
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={onFillDemo}
+        className="w-full py-2.5 px-3 text-xs font-black rounded-2xl border-2 border-[var(--color-aura-ink)] bg-[var(--color-aura-mint)] text-[var(--color-aura-ink)] shadow-sticker-sm hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer dark:border-slate-100"
+      >
+        🎓 demo · student
+      </button>
     </div>
   );
 }

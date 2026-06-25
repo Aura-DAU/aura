@@ -49,7 +49,7 @@ export function ChatShell() {
   }, [installPrompt])
 
   const handleRegenerate = useCallback(() => {
-    const lastUser = [...chat.messages].reverse().find((m) => m.role === "user")
+    const lastUser = chat.messages.findLast((m) => m.role === "user")
     if (lastUser) void chat.handleSendMessage(lastUser.content)
   }, [chat])
 

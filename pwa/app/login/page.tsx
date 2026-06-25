@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, GraduationCap, Users, AlertCircle, CheckCircle2, Sparkles } from "lucide-react";
+import { ArrowLeft, AlertCircle, CheckCircle2, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
@@ -15,7 +15,6 @@ export default function LoginPage() {
   const router = useRouter();
 
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
-  const [role, setRole] = useState<"student" | "parent">("student");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,20 +27,13 @@ export default function LoginPage() {
     setPassword("");
     setErrorMsg(null);
     setSuccessMsg(null);
-  }, [authMode, role]);
+  }, [authMode]);
 
-  const handleFillDemo = (demoType: "student" | "parent") => {
+  const handleFillDemo = () => {
     setErrorMsg(null);
     setAuthMode("signin");
-    if (demoType === "student") {
-      setRole("student");
-      setEmail("student@dau.ac.in");
-      setPassword("password123");
-    } else {
-      setRole("parent");
-      setEmail("parent@example.com");
-      setPassword("password123");
-    }
+    setEmail("student@dau.ac.in");
+    setPassword("password123");
   };
 
   const handleLoginSuccess = (_session: UserSession, profile: StudentProfile) => {
@@ -123,33 +115,6 @@ export default function LoginPage() {
 
           {/* Sticker auth card */}
           <div className="rounded-3xl border-2 border-[var(--color-aura-ink)] bg-white shadow-sticker-lg dark:bg-slate-900 dark:border-slate-100 p-6 sm:p-7">
-            {/* Role tabs */}
-            <div className="flex gap-2 p-1.5 rounded-2xl bg-[var(--color-aura-lavender)] border-2 border-[var(--color-aura-ink)] dark:bg-slate-950 dark:border-slate-700 mb-5">
-              <button
-                type="button"
-                onClick={() => setRole("student")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-black rounded-xl transition-all ${
-                  role === "student"
-                    ? "bg-[var(--color-aura-ink)] text-white shadow-sticker-sm dark:bg-brand-500"
-                    : "text-slate-500 hover:text-[var(--color-aura-ink)] dark:text-slate-400"
-                }`}
-              >
-                <GraduationCap className="w-3.5 h-3.5" />
-                student
-              </button>
-              <button
-                type="button"
-                onClick={() => setRole("parent")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-black rounded-xl transition-all ${
-                  role === "parent"
-                    ? "bg-[var(--color-aura-ink)] text-white shadow-sticker-sm dark:bg-brand-500"
-                    : "text-slate-500 hover:text-[var(--color-aura-ink)] dark:text-slate-400"
-                }`}
-              >
-                <Users className="w-3.5 h-3.5" />
-                parent
-              </button>
-            </div>
 
             {errorMsg && (
               <div className="mb-4 flex items-start gap-2.5 rounded-2xl border-2 border-[var(--color-aura-ink)] bg-[var(--color-aura-coral)]/90 text-[var(--color-aura-ink)] p-3.5 text-xs font-semibold leading-relaxed shadow-sticker-sm">
@@ -167,7 +132,6 @@ export default function LoginPage() {
 
             {authMode === "signin" ? (
               <LoginForm
-                role={role}
                 email={email}
                 setEmail={setEmail}
                 password={password}
@@ -177,7 +141,6 @@ export default function LoginPage() {
               />
             ) : (
               <RegisterForm
-                role={role}
                 onSuccess={(msg) => {
                   setSuccessMsg(msg);
                   setAuthMode("signin");

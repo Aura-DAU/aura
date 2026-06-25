@@ -30,12 +30,17 @@ function sseLine(data: unknown): string {
   return `data: ${JSON.stringify(data)}\n\n`
 }
 
-function normaliseSource(s: string | { file?: string; title?: string }): {
+function normaliseSource(s: string | { file?: string; url?: string; title?: string }): {
   file: string
   title?: string
 } | null {
   if (typeof s === "string") return { file: s }
-  if (s && typeof s === "object" && s.file) return { file: s.file, title: s.title }
+  if (s && typeof s === "object") {
+    const file = s.file || s.url || ""
+    if (file) {
+      return { file, title: s.title }
+    }
+  }
   return null
 }
 

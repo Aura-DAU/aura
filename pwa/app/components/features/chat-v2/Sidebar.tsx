@@ -100,14 +100,15 @@ function SidebarBody({
           </div>
           <div className="min-w-0 flex-1">
             <div className="truncate text-sm font-medium text-foreground">
-              {userSession?.name || "Guest"}
+              {userSession?.name || "Guest Account"}
             </div>
             <div className="truncate text-xs text-muted-foreground">
-              {userSession?.email || "Sign in to sync"}
+              {userSession ? userSession.email : "Sign in to get started"}
             </div>
           </div>
         </button>
       </div>
+
     </div>
   );
 }

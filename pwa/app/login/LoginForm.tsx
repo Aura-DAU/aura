@@ -7,7 +7,6 @@ import { LoginSchema, UserSession } from "@/lib/api/auth.schema";
 import { StudentProfile } from "@/app/api/chat.service";
 
 interface LoginFormProps {
-  role: "student" | "parent";
   email: string;
   setEmail: (email: string) => void;
   password: string;
@@ -18,7 +17,6 @@ interface LoginFormProps {
 const inputBase =
   "w-full pl-10 pr-4 py-3 text-sm font-medium bg-white dark:bg-slate-950 border-2 border-[var(--color-aura-ink)] dark:border-slate-100 rounded-2xl text-[var(--color-aura-ink)] dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-none shadow-sticker-sm transition-all";
 export function LoginForm({
-  role,
   email,
   setEmail,
   password,
@@ -34,7 +32,7 @@ export function LoginForm({
     e.preventDefault();
     onError(null);
 
-    const validation = LoginSchema.safeParse({ email, password, role });
+    const validation = LoginSchema.safeParse({ email, password, role: "student" });
     if (!validation.success) {
       onError(validation.error.issues[0]?.message || "Invalid inputs");
       return;
@@ -50,7 +48,7 @@ export function LoginForm({
       setLoadingStatus("loading AURA…");
       await new Promise((r) => setTimeout(r, 500));
 
-      const res = await login({ email, password, role });
+      const res = await login({ email, password, role: "student" });
 
       if (res.success && res.session && res.profile) {
         onSuccess(res.session, res.profile);
@@ -70,7 +68,7 @@ export function LoginForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-1.5">
         <label className="text-[10px] font-black uppercase tracking-wider text-[var(--color-aura-ink)] dark:text-slate-200 ml-1">
-          {role === "student" ? "university email" : "parent email"}
+          university email
         </label>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
@@ -81,7 +79,7 @@ export function LoginForm({
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder={role === "student" ? "you@dau.ac.in" : "parent@example.com"}
+            placeholder="you@dau.ac.in"
             className={inputBase}
           />
         </div>
