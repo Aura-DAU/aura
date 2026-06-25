@@ -396,4 +396,4 @@ class Reranker:
             reverse=True
         )
 
-        return reranked
+        return reranked

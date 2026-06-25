@@ -159,6 +159,59 @@ def extract_curriculum_chunks(body, metadata, file_path):
     return custom_chunks
 
 
+def convert_tables_to_sentences(text):
+    """
+    Finds markdown tables in text and converts them into semantic sentences
+    to prevent tabular fragmentation during chunking.
+    """
+    lines = text.split("\n")
+    processed_lines = []
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        # A markdown table header starts and ends with pipes
+        if line.startswith("|") and line.endswith("|"):
+            if i + 1 < len(lines):
+                next_line = lines[i+1].strip()
+                # A separator line starts and ends with pipes, contains dashes and colons/spaces
+                if next_line.startswith("|") and next_line.endswith("|") and "-" in next_line and all(c in " |:-" for c in next_line):
+                    # Extracted headers
+                    headers = [h.strip() for h in line.split("|")[1:-1]]
+                    
+                    table_rows = []
+                    j = i + 2
+                    while j < len(lines):
+                        row_line = lines[j].strip()
+                        if row_line.startswith("|") and row_line.endswith("|"):
+                            row_cells = [c.strip() for c in row_line.split("|")[1:-1]]
+                            table_rows.append(row_cells)
+                            j += 1
+                        else:
+                            break
+                    
+                    # Convert each row to a list of "Header: Value" and join them into a sentence
+                    table_sentences = []
+                    for row in table_rows:
+                        row_parts = []
+                        for h, cell in zip(headers, row):
+                            if cell:
+                                cell_val = cell
+                                if cell_val == "✅ Yes":
+                                    cell_val = "Yes"
+                                elif cell_val == "❌ No":
+                                    cell_val = "No"
+                                row_parts.append(f"{h}: {cell_val}")
+                        if row_parts:
+                            table_sentences.append(". ".join(row_parts) + ".")
+                    
+                    processed_lines.extend(table_sentences)
+                    i = j
+                    continue
+        processed_lines.append(lines[i])
+        i += 1
+    return "\n".join(processed_lines)
+
+
 def process_markdown_file(file_path):
     file_path = Path(file_path)
     
@@ -217,12 +270,12 @@ def process_markdown_file(file_path):
             section_text += f"H3: {section['h3']}\n"
 
         section_text += "\n"
-        section_text += section["content"]
+        # Parse table markdown to text sentences
+        section_text += convert_tables_to_sentences(section["content"])
 
         split_chunks = split_section(section_text)
-        total = len(split_chunks)
 
-        for idx, chunk_text in enumerate(split_chunks):
+        for chunk_text in split_chunks:
             chunk_record = {
                 "chunk_id": str(uuid.uuid4()),
                 "text": chunk_text,
@@ -245,8 +298,6 @@ def process_markdown_file(file_path):
 
                 "scraped_date": metadata.get("scraped_date"),
 
-                "chunk_index": idx,
-                "total_chunks": total,
                 "char_length": len(chunk_text),
                 "token_estimate": len(chunk_text.split())
             }
@@ -264,8 +315,7 @@ def process_markdown_file(file_path):
 
     # Add custom curriculum chunks
     curriculum_chunks = extract_curriculum_chunks(body, metadata, file_path)
-    total_custom = len(curriculum_chunks)
-    for idx, custom in enumerate(curriculum_chunks):
+    for custom in curriculum_chunks:
         chunk_record = {
             "chunk_id": str(uuid.uuid4()),
             "text": custom["text"],
@@ -288,8 +338,6 @@ def process_markdown_file(file_path):
 
             "scraped_date": metadata.get("scraped_date"),
 
-            "chunk_index": idx,
-            "total_chunks": total_custom,
             "char_length": len(custom["text"]),
             "token_estimate": len(custom["text"].split())
         }
@@ -318,5 +366,13 @@ def process_markdown_file(file_path):
         )
 
         chunks.append(chunk_record)
+
+    # Assign contiguous document_id, chunk_index, and total_chunks
+    document_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, file_path.as_posix()))
+    total_chunks = len(chunks)
+    for idx, chunk in enumerate(chunks):
+        chunk["document_id"] = document_id
+        chunk["chunk_index"] = idx
+        chunk["total_chunks"] = total_chunks
 
     return chunks

@@ -1,5 +1,6 @@
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import numpy as np
 from dotenv import load_dotenv
@@ -113,6 +114,16 @@ def main():
                     )
             }
         }
+
+        # Coordinate metadata
+        if chunk.get("document_id"):
+            vector["metadata"]["document_id"] = chunk["document_id"]
+
+        if chunk.get("chunk_index") is not None:
+            vector["metadata"]["chunk_index"] = int(chunk["chunk_index"])
+
+        if chunk.get("total_chunks") is not None:
+            vector["metadata"]["total_chunks"] = int(chunk["total_chunks"])
 
         # Optional metadata
 
@@ -255,23 +266,20 @@ def main():
             vector
         )
 
+    batches = list(chunk_list(vectors, BATCH_SIZE))
     print(
-        f"Uploading "
-        f"{len(vectors)} vectors..."
+        f"Uploading {len(vectors)} vectors in {len(batches)} batches of {BATCH_SIZE}..."
     )
 
-    for batch in tqdm(
-        list(
-            chunk_list(
-                vectors,
-                BATCH_SIZE
-            )
-        )
-    ):
-
-        index.upsert(
-            vectors=batch
-        )
+    # Use ThreadPoolExecutor for parallel Pinecone upserts
+    with ThreadPoolExecutor(max_workers=32) as executor:
+        futures = {executor.submit(index.upsert, vectors=batch): i for i, batch in enumerate(batches)}
+        for future in tqdm(as_completed(futures), total=len(futures), desc="Uploading"):
+            try:
+                future.result()
+            except Exception as e:
+                batch_idx = futures[future]
+                print(f"\n[ERROR] Batch {batch_idx} failed to upload: {e}")
 
     print("\nUpload complete!")
 
@@ -280,7 +288,6 @@ def main():
     )
 
     print("\nIndex Stats:")
-
     print(stats)
 
 

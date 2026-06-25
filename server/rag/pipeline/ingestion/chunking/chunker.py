@@ -1,3 +1,4 @@
+import re
 from transformers import AutoTokenizer
 from config import (MODEL_NAME, CHUNK_SIZE, CHUNK_OVERLAP)
 
