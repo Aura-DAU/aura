@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Puneet Bhateja
-
-# Main Content
-
 # Puneet Bhateja
 
 ## Education
 
 PhD (Computer Science), Chennai Mathematical Institute
-
-## Contact Information
-
-- Phone: 079-68261647
-- Email: puneet_bhateja@dau.ac.in
-- Address: # 2101, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -62,4 +50,13 @@ Theoretical Computer Science
 * Models of Computation
 * Specification and Verification of Systems
 
+## Contact Information
 
+- **Office:** ** # 2101, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261647
+- **Email:** ** puneet_bhateja@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/puneet-bhateja
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Mukesh Tiwari
-
-# Main Content
-
 # Mukesh Tiwari
 
 ## Education
 
 PhD (Optical Science & Engineering), University of New Mexico, USA
-
-## Contact Information
-
-- Phone: 079-68261614
-- Email: mukesh_tiwari@dau.ac.in
-- Address: # 1112, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/view/mtiwari
 
 ## Biography
 
@@ -52,4 +36,13 @@ Nonequilibrium statistical mechanics and Nonlinear dynamics
 * Electromagnetic Theory
 * Time Series Analysis
 
+## Contact Information
 
+- **Office:** ** # 1112, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261614
+- **Email:** ** mukesh_tiwari@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/mukesh-tiwari
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

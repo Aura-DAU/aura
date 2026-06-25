@@ -7,11 +7,7 @@ scraped_date: "2026-06-10"
 team: "Team C"
 ---
 
-# Special Recruitment Drive – Teaching Track Faculty (on Contract)
-
-Applications are invited from suitable candidates for teaching track faculty positions (on contract) in the area of **Computer Science** and **Data Science**.
-
----
+# Faculty Contract
 
 ## Eligible Areas
 
@@ -105,3 +101,14 @@ Applicants should email the following to **dean_faculty[at]dau[dot]ac[dot]in** w
 ## Questions Answered by This Source
 
 - FAC096, FAC097, FAC104, FAC120
+
+## Contact Information
+
+- **Office:** ** *Not available*
+- **Phone:** ** *Not available*
+- **Email:** ** *Not available*
+- **Profile:** ** https://www.daiict.ac.in/faculty-contract
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

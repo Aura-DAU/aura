@@ -7,12 +7,6 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Rita Chakravarti
-
-# Main Content
-
 # Rita Chakravarti
 
 ## Education
@@ -21,6 +15,11 @@ PhD (Multivariate Analysis), University of Pittsburgh
 
 ## Contact Information
 
-- Email: rita_chakravarti@dau.ac.in
-
-
+- **Office:** ** *Not available*
+- **Phone:** ** *Not available*
+- **Email:** ** rita_chakravarti@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty-international/rita-chakravarti
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

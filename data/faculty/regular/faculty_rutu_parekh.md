@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Rutu Parekh
-
-# Main Content
-
 # Rutu Parekh
 
 ## Education
 
 PhD (Electrical Engineering), Sherbrooke University, Canada
-
-## Contact Information
-
-- Phone: 079-68261553
-- Email: rutu_parekh@dau.ac.in
-- Address: # 2112, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/view/rutumparekh/home?authuser=1
 
 ## Biography
 
@@ -82,4 +66,13 @@ High-Voltage ASIC Design for Space Applications, Nanoelectronics and Emerging De
 
 I am inviting highly motivated Ph.D. students to join my research group in high-voltage ASIC design, nanoelectronics, embedded systems, and IoT applications. Students will have the opportunity to work on innovative projects spanning chip design for space applications, smart agriculture, and long-distance wireless systems for defense and space, while contributing to high-impact publications and patents.
 
+## Contact Information
 
+- **Office:** ** # 2112, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261553
+- **Email:** ** rutu_parekh@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/rutu-parekh
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

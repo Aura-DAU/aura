@@ -7,26 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Manish Chaturvedi
-
-# Main Content
-
 # Manish Chaturvedi
 
 ## Education
 
 PhD (ICT), DA-IICT, Gandhinagar
-
-## Contact Information
-
-- Phone: 079-68261645
-- Address: # 1111, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/site/manishacademics
 
 ## Biography
 
@@ -51,4 +36,13 @@ Please refer **<https://sites.google.com/site/manishacademics/research>** for th
 * Computer Networks
 * Data Structures
 
+## Contact Information
 
+- **Office:** ** # 1111, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261645
+- **Email:** ** *Not available*
+- **Profile:** ** https://www.daiict.ac.in/faculty/manish-chaturvedi
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

@@ -7,22 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Nikita Desai
-
-# Main Content
-
 # Nikita Desai
 
 ## Education
 
 PhD (Design), DA-IICT Gandhinagar
-
-## Contact Information
-
-- Phone: +91 9825169337
-- Email: nikita_d@dau.ac.in nikitadesai82@gmail.com
 
 ## Biography
 
@@ -56,4 +45,13 @@ Interaction Design Immersive Experience Design
 
 Interactive Space Design Immersive Technologies and Strategy Communication, Space, and Design
 
+## Contact Information
 
+- **Office:** ** *Not available*
+- **Phone:** ** +91 9825169337
+- **Email:** ** nikita_d@dau.ac.in nikitadesai82@gmail.com
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/nikita-desai
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

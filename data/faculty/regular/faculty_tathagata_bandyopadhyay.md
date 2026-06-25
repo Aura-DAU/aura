@@ -7,22 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Tathagata Bandyopadhyay
-
-# Main Content
-
 # Tathagata Bandyopadhyay
 
 ## Education
 
 PhD (Statistics), University of Calcutta, Kolkata
-
-## Contact Information
-
-- Phone: 079-68261572
-- Email: tathagata_b@dau.ac.in
 
 ## Biography
 
@@ -94,4 +83,13 @@ Statistical Inference, Survey Sampling, Discrete Data Modeling and Analysis, App
 * Regression Analysis
 * Nonparametric Data Analysis
 
+## Contact Information
 
+- **Office:** ** *Not available*
+- **Phone:** ** 079-68261572
+- **Email:** ** tathagata_b@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/tathagata-bandyopadhyay
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

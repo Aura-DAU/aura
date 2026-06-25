@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Aditya Tatu
-
-# Main Content
-
 # Aditya Tatu
 
 ## Education
 
 PhD (Computer Science), University of Copenhagen, Denmark
-
-## Contact Information
-
-- Phone: 079-68261540
-- Email: aditya_tatu@dau.ac.in
-- Address: #1206, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -65,4 +53,13 @@ Computer Vision, Image Processing, Pattern Recognition, Signal Processing
 * Shape Modeling, Computer Graphics
 * Robotics
 
+## Contact Information
 
+- **Office:** ** #1206, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261540
+- **Email:** ** aditya_tatu@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/aditya-tatu
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

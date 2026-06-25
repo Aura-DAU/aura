@@ -33,7 +33,7 @@ Arpita Mal | **660** | Jitendra Parmar-Hostel  | **544** | Prasanjit Majumder  |
 Anuradha Srivastava  | **646** | Tathagata Bandyopadhyay-Director  | **570** | Pritam Anand  | **657**  
 Arnab Kumar  | **612** | Kirit Pandya  | **592** | Ratna Bharati Bhamidipati  | **589**  
 Arpit Rana  | **687** | Lab 001  | **501** | Prosenjit Kundu  | **559**  
-\-  | **640** | Lab 002  | **502** | Punneet Bhateja  | **647**  
+Ajit Nair | **640** | Lab 002  | **502** | Punneet Bhateja  | **647**  
 Amitava Ghosh | **682** | Lab 003  | **503** | Pritesh Panchal | **733**  
 Abhishek Karli | **753** | Lab 004  | **504** | Rachit Chhaya | **708**  
 Bhaskar Chaudhury  | **590** | Lab 005  | **505** | Rahul Mutthu  | **564**  

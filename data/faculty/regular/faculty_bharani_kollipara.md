@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Bharani Kollipara
-
-# Main Content
-
 # Bharani Kollipara
 
 ## Education
 
 PhD (English), The English and Foreign Languages University, Hyderabad
-
-## Contact Information
-
-- Phone: 079-68261558
-- Email: bharani_kollipara@dau.ac.in
-- Address: # 2102, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -48,4 +36,13 @@ Modern Philosophy, Phenomenology and Hermeneutics, Literary Modernism
 * Modern European Philosophy
 * Modernity and Political Theory
 
+## Contact Information
 
+- **Office:** ** # 2102, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261558
+- **Email:** ** bharani_kollipara@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/bharani-kollipara
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

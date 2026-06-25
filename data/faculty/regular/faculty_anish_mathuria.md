@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Anish Mathuria
-
-# Main Content
-
 # Anish Mathuria
 
 ## Education
 
 PhD (Computer Science), University of Wollongong, Australia
-
-## Contact Information
-
-- Phone: 079-68261541
-- Email: anish_mathuria@dau.ac.in
-- Address: # 1105, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- http://intranet.daiict.ac.in/~anish_mathuria/
 
 ## Biography
 
@@ -53,4 +37,13 @@ Network Security, Privacy-Preserving Computation, System and Software Security
 * Blockchains and Cryptocurrencies
 * Operating Systems
 
+## Contact Information
 
+- **Office:** ** # 1105, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261541
+- **Email:** ** anish_mathuria@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/anish-mathuria
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Sreeja Rajendran
-
-# Main Content
-
 # Sreeja Rajendran
 
 ## Education
 
 PhD (Electrical and Electronics Engineering), Birla Institute of Technology and Science, Pilani, Dubai Campus
-
-## Contact Information
-
-- Phone: 079-68261707
-- Email: sreeja_rajendran@dau.ac.in
-- Address: #3108, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -61,4 +49,13 @@ VLSI, Embedded Systems and MEMS, Hardware Security, VLSI Test
 * PUF Based Solutions for Security
 * Application of Machine Learning Algorithms for Trojan Detection and Prevention in Logic Circuit Designs
 
+## Contact Information
 
+- **Office:** ** #3108, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261707
+- **Email:** ** sreeja_rajendran@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/sreeja-rajendran
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

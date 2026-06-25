@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Anupam Rana
-
-# Main Content
-
 # Anupam Rana
 
 ## Education
 
 PhD (Design Management) - Retails Experience-CX, Indus University, Ahmedabad
-
-## Contact Information
-
-- Phone: 079-68261538
-- Email: anupam_rana@dau.ac.in
-- Address: #3210, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -54,4 +42,13 @@ Design Education, Experience Design, Multidisciplinary Research, UIUX, Design Th
 
 Product Design, Interaction Design, Packaging Design, Design Thinking, UX Research
 
+## Contact Information
 
+- **Office:** ** #3210, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261538
+- **Email:** ** anupam_rana@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/anupam-rana
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

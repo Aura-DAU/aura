@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Shefali Jha
-
-# Main Content
-
 # Shefali Jha
 
 ## Education
 
 PhD (Anthropology), University of Chicago, USA
-
-## Contact Information
-
-- Phone: 079-68261709
-- Email: shefali_jha@dau.ac.in
-- Address: # 3112, FB-3 , DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Specialization
 
@@ -42,4 +30,13 @@ My graduate training is in English Literary Studies, Cultural Studies and Anthro
 
 My doctoral research has to do with the politics of democracy and representation of minorities in the Deccani city of Hyderabad. My current research focuses on the participation of Muslim women in the political process. Popular culture, feminist theory and the history of feminist movements in South Asia are included in my broader research interests. I am also deeply interested in thinking about method, especially comparative approaches to ethnographic and literary narrative.
 
+## Contact Information
 
+- **Office:** ** # 3112, FB-3 , DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261709
+- **Email:** ** shefali_jha@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/shefali-jha
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

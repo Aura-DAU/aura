@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Yash Agrawal
-
-# Main Content
-
 # Yash Agrawal
 
 ## Education
 
 PhD (Electronics & Communication), NIT Hamirpur
-
-## Contact Information
-
-- Phone: 079-68261629, 9882114669
-- Email: yash_agrawal@dau.ac.in mr.yashagrawal@gmail.com
-- Address: # 1101, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- http://www.linkedin.com/in/yash-agrawal-525b021a/
 
 ## Biography
 
@@ -65,4 +49,13 @@ VLSI, Nanotechnology, Numerical Method Techniques--FDTD, Design Techniques and M
 * Introduction to VLSI Circuits
 * Engineering Design Workshop
 
+## Contact Information
 
+- **Office:** ** # 1101, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261629, 9882114669
+- **Email:** ** yash_agrawal@dau.ac.in mr.yashagrawal@gmail.com
+- **Profile:** ** https://www.daiict.ac.in/faculty/yash-agrawal
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** http://www.linkedin.com/in/yash-agrawal-525b021a/
+- **ORCID:** ** *Not available*

@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of P S Kalyan Sasidhar
-
-# Main Content
-
 # P S Kalyan Sasidhar
 
 ## Education
 
 PhD (Computer Science and Engineering), University of North Texas-Denton, USA
-
-## Contact Information
-
-- Phone: 079-68261560
-- Email: kalyan_sasidhar@dau.ac.in
-- Address: # 2109, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/daiict.ac.in/kalyan-sasidhar/bio
 
 ## Biography
 
@@ -53,4 +37,13 @@ Mobile and Pervasive Computing which include Wireless Sensor Networks, Mobile Ph
 * Distributed Systems
 * Pervasive Sensing Systems
 
+## Contact Information
 
+- **Office:** ** # 2109, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261560
+- **Email:** ** kalyan_sasidhar@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

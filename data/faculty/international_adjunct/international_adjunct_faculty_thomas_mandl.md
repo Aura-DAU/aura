@@ -7,24 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Thomas Mandl
-
-# Main Content
-
 # Thomas Mandl
 
 ## Education
 
 PhD (Information Science), University of Hildesheim, Germany
 
-## Contact Information
-
-- Email: thomas_mandl@dau.ac.in
-
 ## Specialization
 
 Information Science, Cognitive Similarity Learning in Information Retrieval and Information Management
 
+## Contact Information
 
+- **Office:** ** *Not available*
+- **Phone:** ** *Not available*
+- **Email:** ** thomas_mandl@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty-international/thomas-mandl
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Sunitha V
-
-# Main Content
-
 # Sunitha V
 
 ## Education
 
 PhD (Mathematics), IIT Madras
-
-## Contact Information
-
-- Phone: 079-68261563
-- Email: v_suni@dau.ac.in
-- Address: # 1212, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -50,4 +38,13 @@ Theory, Algorithms (Parallel, Distributed, Dynamic), Applications of Graphs
 * Algorithmic Graph Theory
 * Parallel, Distributed and Dynamic Algorithms
 
+## Contact Information
 
+- **Office:** ** # 1212, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261563
+- **Email:** ** v_suni@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/sunitha-v
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

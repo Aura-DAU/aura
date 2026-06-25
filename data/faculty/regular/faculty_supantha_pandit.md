@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Supantha Pandit
-
-# Main Content
-
 # Supantha Pandit
 
 ## Education
 
 PhD (Computer Science), IIT Ropar
-
-## Contact Information
-
-- Phone: 079-68261546
-- Email: supantha_pandit@dau.ac.in
-- Address: # 2205, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -43,8 +31,6 @@ Mainly focused on:
 * Graph Algorithms
 
 ## Publications
-
-## **Journal Publications**
 
 * Barun Gorain, Partha Sarathi Mandal, Kaushik Mondal, and Supantha Pandit, Collaborative Dispersion by Silent Robots, Journal of Parallel and Distributed Computing, 2024, https://www.sciencedirect.com/science/article/pii/S0304397524000173
 * Ankush Acharyya, Vahideh Keikha, Diptapriyo Majumdar, and Supantha Pandit, Constrained Hitting Set Problem with Intervals: Hardness, FPT and Approximation Algorithms, Theoretical Computer Science, 2024, https://www.sciencedirect.com/science/article/pii/S0304397524000173
@@ -68,8 +54,6 @@ Mainly focused on:
 
 ---
 
-## **Conference Publications**
-
 * Sukanya Maji, Supantha Pandit, Sanjib Sadhu: Red-Blue Rectangular Annulus Cover Problem. IJTCS-FAW 2023: 195-211
 
 ## Teaching
@@ -87,4 +71,13 @@ Mainly focused on:
 
 I am looking for Ph.D. and Masters Students. A Ph.D. thesis will have foundational theoretical work possibly supported by experimental studies. The research topics include computational geometry, approximation algorithms, graph algorithms, distributed computing, discrete mathematics, and problems that generally obey the design and analysis framework of discrete algorithms. For a better understanding, I'd like you to please take a look at my publications. If you have any questions, please don't hesitate to contact me.
 
+## Contact Information
 
+- **Office:** ** # 2205, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261546
+- **Email:** ** supantha_pandit@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/supantha-pandit
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

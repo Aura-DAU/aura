@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Saurabh Tiwari
-
-# Main Content
-
 # Saurabh Tiwari
 
 ## Education
 
 PhD (Computer Science & Engineering), IIITDM, Jabalpur
-
-## Contact Information
-
-- Phone: 079-68261618
-- Email: saurabh_t@dau.ac.in
-- Address: # 1102, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/view/saurabhtiwari
-- https://www.youtube.com/watch?v=Vwxeo8G5Tbc
 
 ## Biography
 
@@ -78,4 +61,13 @@ For more details on sponsored research projects and publications, visit my [per
 * I am looking for highly motivated and self-driven prospective PhD students who are interested in (1) Software Engineering Research, especially mining software repositories, empirical software engineering, automated software engineering, (2) Modeling and analysing the requirements specification by applying Natural language Processing,  especially pre-trained large language models. (3) GenAI (Generative AI) for Software Engineering.
 * You may explore exciting research papers from top SE conferences and journals  (ICSE, ASE, RE, MODELS, ESEC/FSE, MSR, ICPC, IEEE TSE, IST, JSS, ESE, SoSYM, ACMTOSEM). Going through the research papers will deepen your understanding and ignite your curiosity about the field. PhD students should have an excellent background in computer science and statistics. Coding skills, as well as related experiences, are desirable. Most important is a strong enthusiasm for cutting-edge research.
 
+## Contact Information
 
+- **Office:** ** # 1102, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261618
+- **Email:** ** saurabh_t@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/saurabh-tiwari
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

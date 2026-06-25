@@ -7,22 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Gangeya Mukherji
-
-# Main Content
-
 # Gangeya Mukherji
 
 ## Education
 
 PhD (The Vision of India in Tagore and Vivekananda), University of Allahabad
-
-## Contact Information
-
-- Phone: 079-68261683
-- Email: gangeya_mukherji@dau.ac.in
 
 ## Biography
 
@@ -102,4 +91,13 @@ Intellectual history, 19th century India, Post-colonialism, Vivekananda, Tagore,
 * ‘Statement of Outstanding Universal Value and Justification of Criteria’ as Consultant for the team preparing the Dossier for the Ministry of Culture, Government of India, for the nomination of Santiniketan as a UNESCO World Heritage Site in 2009.
 * ‘South Asian Philosophies of Peace: Tagore and Vivekananda’, as part of syllabi for the Nelson Mandela Center for Peace and Conflict Resolution, Jamia Millia Islamia, Delhi, 2009.
 
+## Contact Information
 
+- **Office:** ** *Not available*
+- **Phone:** ** 079-68261683
+- **Email:** ** gangeya_mukherji@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/gangeya-m
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

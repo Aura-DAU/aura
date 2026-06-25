@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Pankaj Kumar
-
-# Main Content
-
 # Pankaj Kumar
 
 ## Education
 
 PhD (RF & Microwave), NIT Patna
-
-## Contact Information
-
-- Phone: 079-68261705
-- Email: pankaj_kumar@dau.ac.in
-- Address: # 3201, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://scholar.google.co.in/citations?user=FwCfbOoAAAAJ&hl=en
-- https://www.researchgate.net/profile/Pankaj-Kumar-207
 
 ## Biography
 
@@ -77,4 +60,13 @@ Bio-Inspired Metasurface/Metamaterial Devices, Terahertz Devices, Semiconductor 
 * <https://scholar.google.co.in/citations?user=FwCfbOoAAAAJ&hl=en>
 * <https://www.researchgate.net/profile/Pankaj-Kumar-207>
 
+## Contact Information
 
+- **Office:** ** # 3201, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261705
+- **Email:** ** pankaj_kumar@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/pankaj-kumar
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.co.in/citations?user=FwCfbOoAAAAJ&hl=en
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

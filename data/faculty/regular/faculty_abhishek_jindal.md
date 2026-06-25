@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Abhishek Jindal
-
-# Main Content
-
 # Abhishek Jindal
 
 ## Education
 
 PhD (Electronics & Communication Engineering), IIT Delhi
-
-## Contact Information
-
-- Phone: 079-68261654
-- Email: abhishek_jindal@dau.ac.in
-- Address: # 4101, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://scholar.google.co.in/citations?user=J_mM6WwAAAAJ&hl=en
 
 ## Biography
 
@@ -97,4 +81,13 @@ I am actively working on the problems in the following areas.
 
 I am currently supervising three Ph.D. students and co-supervising one Ph.D. student on problems in some of the areas above. If you are visiting this page and are interested to work on a problem in any of the area above, get in touch with me through email.
 
+## Contact Information
 
+- **Office:** ** # 4101, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261654
+- **Email:** ** abhishek_jindal@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/abhishek-jindal
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.co.in/citations?user=J_mM6WwAAAAJ&hl=en
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

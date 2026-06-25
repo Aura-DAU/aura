@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Shruti Bhilare
-
-# Main Content
-
 # Shruti Bhilare
 
 ## Education
 
 PhD (Computer Science and Engineering), IIT Indore
-
-## Contact Information
-
-- Phone: 079-68261651
-- Email: shruti_bhilare@dau.ac.in
-- Address: # 4208, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://scholar.google.co.in/citations?hl=en&user=zlvqa7IAAAAJ
-- https://www.linkedin.com/in/dr-shruti-bhilare-6276222b
 
 ## Biography
 
@@ -118,4 +101,13 @@ Biometrics, Pattern Recognition, Image Processing
 * **Khushi Dhake**: Adversarial Defense (2025)
 * **Rohan Joshi**: Adversarial Machine Learning and Cancelable Biometrics (2024)
 
+## Contact Information
 
+- **Office:** ** # 4208, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261651
+- **Email:** ** shruti_bhilare@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/shruti-bhilare
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.co.in/citations?hl=en&user=zlvqa7IAAAAJ
+- **LinkedIn:** ** https://www.linkedin.com/in/dr-shruti-bhilare-6276222b
+- **ORCID:** ** *Not available*

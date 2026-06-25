@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Arpit Rana
-
-# Main Content
-
 # Arpit Rana
 
 ## Education
 
 PhD (Computer Science), University College Cork, Ireland
-
-## Contact Information
-
-- Phone: 079-68261687
-- Email: arpit_rana@dau.ac.in
-- Address: #3105, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://www.linkedin.com/in/arpitrana/
 
 ## Biography
 
@@ -58,4 +42,13 @@ Applied Machine Learning, Recommendation Systems, Multimodality, and their appli
 * **Data Structures** (B.Tech. I Year)
 * **Object-Oriented Programming** (M.Sc. (IT) I Year)
 
+## Contact Information
 
+- **Office:** ** #3105, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261687
+- **Email:** ** arpit_rana@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/arpit-rana
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** https://www.linkedin.com/in/arpitrana/
+- **ORCID:** ** *Not available*

@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Nabin Kumar Sahu
-
-# Main Content
-
 # Nabin Kumar Sahu
 
 ## Education
 
 PhD (Mathematics), IIT Kharagpur
-
-## Contact Information
-
-- Phone: 079-68261642
-- Email: nabinkumar_sahu@dau.ac.in
-- Address: # 4212, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -47,4 +35,13 @@ Frame Theory, Optimization Theory and Applications, Variational Inequalities
 * Optimization
 * Numerical Methods
 
+## Contact Information
 
+- **Office:** ** # 4212, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261642
+- **Email:** ** nabinkumar_sahu@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/nabin-kumar-sahu
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

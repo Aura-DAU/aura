@@ -7,12 +7,6 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Nilotpal Chakravarti
-
-# Main Content
-
 # Nilotpal Chakravarti
 
 ## Education
@@ -21,6 +15,11 @@ PhD (Combinatorics and Optimization), University of Waterloo, USA
 
 ## Contact Information
 
-- Email: nilotpal_chakravarti@dau.ac.in
-
-
+- **Office:** ** *Not available*
+- **Phone:** ** *Not available*
+- **Email:** ** nilotpal_chakravarti@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty-international/nilotpal-chakravarti
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

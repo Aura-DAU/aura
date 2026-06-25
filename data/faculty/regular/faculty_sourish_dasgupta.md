@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Sourish Dasgupta
-
-# Main Content
-
 # Sourish Dasgupta
 
 ## Education
 
 PhD (Computer Science), University of Missouri - Kansas City, USA
-
-## Contact Information
-
-- Phone: 079-68261624, 9624106109
-- Email: sourish_dasgupta@dau.ac.in
-- Address: # 4102, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://www.linkedin.com/in/sourish-dasgupta-2432248/
 
 ## Biography
 
@@ -74,4 +58,13 @@ I am currently looking for full-time PhD students who are excited to explore ope
 * Knowledge Graph Completion and Expansion
 * Generative Knowledge Graphs
 
+## Contact Information
 
+- **Office:** ** # 4102, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261624, 9624106109
+- **Email:** ** sourish_dasgupta@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/sourish-dasgupta
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** https://www.linkedin.com/in/sourish-dasgupta-2432248/
+- **ORCID:** ** *Not available*

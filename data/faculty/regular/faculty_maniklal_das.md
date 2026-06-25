@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Maniklal Das
-
-# Main Content
-
 # Maniklal Das
 
 ## Education
 
 PhD (Computer Science), IIT Bombay
-
-## Contact Information
-
-- Phone: 079-68261617, Fax: (+91) 079-68261710
-- Email: maniklal_das@dau.ac.in
-- Address: # 2103, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- http://intranet.daiict.ac.in/~maniklal_das/
-- https://scholar.google.co.in/citations?user=wlTzQBMAAAAJ&hl=en
 
 ## Biography
 
@@ -56,4 +39,13 @@ Cyber Security, Privacy, Cryptography, Algorithms
 * Security Protocols
 * Algorithms
 
+## Contact Information
 
+- **Office:** ** # 2103, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261617, Fax: (+91) 079-68261710
+- **Email:** ** maniklal_das@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/maniklal-das
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.co.in/citations?user=wlTzQBMAAAAJ&hl=en
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Anil Roy"
 url: "https://www.daiict.ac.in/faculty/anil-roy"
 category: "Faculty"
@@ -7,28 +7,9 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-# Overview
+# Anil Roy
 
-Faculty profile page for Anil Roy at Dhirubhai Ambani University (DAU), Gandhinagar.
-
-# Main Content
-
-### Anil Roy
-
-Anil Roy (On Leave)
- 
-PhD (Physics), IIT Delhi
-Contact Details
- 
-079-68261613
- 
-# 1104, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
- 
-anil_roy@dau.ac.in
- 
-Scholar
-https://anilroy.incandescentsolution.com/
-Biography
+## Biography
 
 I am a faculty of DA-IICT, Gandhinagar (India) and am an alumnus of IIT Delhi and IIT Roorkee. I obtained my PhD degree in Physics from IIT Delhi in 1993. Prior to joining DA-IICT in 2003, I worked at Centre for Theoretical Studies at Indian Institute of Science, Bangalore (India) during 1993-94 followed by the Optical Fiber Group at IIT Delhi (India) till 1996. My main academic interest areas are sensors, Internet of Things, image processing, fiber optics, semiconductor physics, applications of technologies for humanitarian challenges. 
 
@@ -38,26 +19,34 @@ Some of the notable awards which I won are: 2019 IEEE India Council Section Chai
 
 KNOW MORE
 
-Specialization
+## Specialization
 
 Applications of Image Processing, Fiber Optics and Optical Communication, High speed Semiconductor Devices, Nanoscience and Nanotechnology, Quantum Optics, Technologies for Humanitarian Challenges.
 
-Publications
+## Publications
 
 Priyanka Khaparde, Kamlesh S. Patle, Hitesh Borkar, Jitendra Gangwar, Anil K. Roy, and Vinay S. Palaparthy (2024), â€œInvestigating an Impact of Leaf Bending Radius and Angle for Flexible Leaf Wetness Sensor,â€ in IEEE Sensors Letters, vol. 8, no. 3, pp. 1-4, Mar. 2024. DOI: 10.1109/LSENS.2024.3355371.
 
-Teaching
+## Teaching
+
 Engineering Design Workshop (1st sem BTech Core course)
 Engineered Materials (4th sem BTech Core course)
 Electromagnetic Theory (3rd sem BTech Core course)
 Solid State Devices (6th sem BTech Elective course)
 
-# Contact Information
-
 - **Email:** anil_roy@dau.ac.in
-
-# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/anil-roy)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)
 - [DAU Website](https://www.daiict.ac.in)
+
+## Contact Information
+
+- **Office:** *Not available*
+- **Phone:** *Not available*
+- **Email:** *Not available*
+- **Profile:** https://www.daiict.ac.in/faculty/anil-roy
+- **Website:** https://anilroy.incandescentsolution.com/
+- **Google Scholar:** *Not available*
+- **LinkedIn:** *Not available*
+- **ORCID:** *Not available*

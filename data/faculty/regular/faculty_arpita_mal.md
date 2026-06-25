@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Arpita Mal
-
-# Main Content
-
 # Arpita Mal
 
 ## Education
 
 PhD (Mathematics), Jadavpur University, Kolkata
-
-## Contact Information
-
-- Phone: 079-68261660
-- Email: arpita_mal@dau.ac.in
-- Address: # 3104, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -72,4 +60,13 @@ Dr. Arpita Mal was a teaching assistant for Analysis and Linear Algebra course-U
 
 Mathematics, Functional Analysis, Geometry of Banach Space.
 
+## Contact Information
 
+- **Office:** ** # 3104, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261660
+- **Email:** ** arpita_mal@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/arpita-mal
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Abhishek Tripathy
-
-# Main Content
-
 # Abhishek Tripathy
 
 ## Education
 
 PhD (Thesis Submitted), Indian Institute of Management Ahmedabad
-
-## Contact Information
-
-- Phone: 079-68261643
-- Email: abhishek_tripathy@dau.ac.in
-- Address: # 1205, FB-1, DAU, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/view/abhishek-tripathy/home
 
 ## Biography
 
@@ -43,4 +27,13 @@ Find more about my work on my personal website: **<https://sites.google.com/view
 
 Decentralization and Public Policy, Financial Inclusion, Applied Social Networks Analysis
 
+## Contact Information
 
+- **Office:** ** # 1205, FB-1, DAU, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261643
+- **Email:** ** abhishek_tripathy@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/abhishek-tripathy
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

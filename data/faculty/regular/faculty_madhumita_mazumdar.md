@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Madhumita Mazumdar
-
-# Main Content
-
 # Madhumita Mazumdar
 
 ## Education
 
 PhD (Modern History), University of Calcutta, Calcutta
-
-## Contact Information
-
-- Phone: 079-68261562
-- Email: madhumita_mazumdar@dau.ac.in
-- Address: # 2111, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -57,4 +45,13 @@ Social and Cultural History Science, Technology and Design, History of Modernity
 * Btech (Open Electives) Culture, Politics, Identity and Approaches to Globalization
 * MDes (CD) Introduction to the History of Design, Thematic Seminar and Research Proposal Writing
 
+## Contact Information
 
+- **Office:** ** # 2111, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261562
+- **Email:** ** madhumita_mazumdar@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/madhumita-mazumdar
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

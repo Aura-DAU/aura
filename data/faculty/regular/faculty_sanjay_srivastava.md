@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Sanjay Srivastava
-
-# Main Content
-
 # Sanjay Srivastava
 
 ## Education
 
 PhD (Physics), University of California, Los Angeles, USA
-
-## Contact Information
-
-- Phone: 079-68261547
-- Email: sanjay_srivastava@dau.ac.in
-- Address: # 1204, FB-1, DAU, Gandhinagar, Gujarat, India – 382007
 
 ## Specialization
 
@@ -44,4 +32,13 @@ Internet of Things, Protocol Modelling and Analysis, Simulation
 * Computer Networks
 * Network Protocols
 
+## Contact Information
 
+- **Office:** ** # 1204, FB-1, DAU, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261547
+- **Email:** ** sanjay_srivastava@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/sanjay-srivastava
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

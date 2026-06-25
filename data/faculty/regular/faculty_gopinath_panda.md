@@ -7,29 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Gopinath Panda
-
-# Main Content
-
 # Gopinath Panda
 
 ## Education
 
 PhD (Mathematics), IIT Bhubaneswar
-
-## Contact Information
-
-- Phone: 079-68261716
-- Email: gopinath_panda@dau.ac.in
-- Address: # 3203, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://scholar.google.com/citations?user=cfJJeTcAAAAJ&hl=en
-- https://www.researchgate.net/profile/Gopinath-Panda
-- https://www.linkedin.com/in/pandag/
 
 ## Biography
 
@@ -101,4 +83,13 @@ I am looking to collaborate with students in Applied Probability and Stochastic
 * Software-defined network communications
 * Statistical Data Analysis
 
+## Contact Information
 
+- **Office:** ** # 3203, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261716
+- **Email:** ** gopinath_panda@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/gopinath-panda
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.com/citations?user=cfJJeTcAAAAJ&hl=en
+- **LinkedIn:** ** https://www.linkedin.com/in/pandag/
+- **ORCID:** ** *Not available*

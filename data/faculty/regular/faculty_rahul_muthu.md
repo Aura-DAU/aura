@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Rahul Muthu
-
-# Main Content
-
 # Rahul Muthu
 
 ## Education
 
 PhD (Mathematics), Homi Bhabha National Institute, Mumbai
-
-## Contact Information
-
-- Phone: 079-68261564, 9586478239
-- Email: rahul_muthu@dau.ac.in
-- Address: # 1202, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -119,4 +107,13 @@ Graph Theory, Data Structures, Algorithms, Automata Theory
 * Design & Analysis of Algorithms
 * Graph Theory & Algorithms
 
+## Contact Information
 
+- **Office:** ** # 1202, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261564, 9586478239
+- **Email:** ** rahul_muthu@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/rahul-muthu
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*
