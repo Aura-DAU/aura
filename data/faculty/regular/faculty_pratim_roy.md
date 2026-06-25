@@ -91,3 +91,41 @@ A list of publications may be found at: **<https://scholar.google.com/citations?
   J.PHYS.CONDENS.MATTER 24 (2012) 055301
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is in high-energy theoretical physics and quantum field theory. Strong foundation in theoretical physics + quantum field theory direction. Domain: Quantum field theory + AdS/CFT + theoretical physics. Style: pure mathematical physics.
+
+### Core Research Areas
+1. **Quantum Field Theory (QFT)**
+2. **String theory / AdS-CFT correspondence**
+3. **Mathematical physics**
+4. **Theoretical high-energy physics models**
+
+### Research Style
+He studies questions like: How fundamental particles interact at quantum scale, How space-time behaves in extreme theoretical models, Mathematical structures behind modern physics theories, Holography principle (AdS/CFT duality). Think: "Deep theory of how the universe works at its most fundamental level". Academic work is in pure theoretical physics journals and collaborations.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like theoretical physics. Interested in: quantum field theory, mathematical physics, MS/PhD in physics. Comfortable with abstraction and derivations.
+* **Not suitable for:** Software engineering / coding focus, Easy elective seekers, Practical engineering expectations.
+
+**Teaching Area:**
+Quantum Mechanics (advanced level), Theoretical Physics electives, Mathematical methods for physics, Advanced statistical / field theory topics.
+
+**Teaching Style:**
+Very math-heavy and derivation-based. Strong emphasis on conceptual physics understanding, step-by-step derivations. Exams typically require proofs / derivations, deep conceptual clarity. High difficulty if physics basics are weak. Very rewarding for students interested in theory. Not coding-related at all.
+
+**Difficulty Level:**
+* Concept depth: ⭐⭐⭐⭐⭐
+* Math intensity: ⭐⭐⭐⭐⭐
+* Coding requirement: ⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Concept clarity: ⭐⭐⭐⭐
+
+**Hidden Insight:** Strong theoretical physics faculty. Focus on quantum field theory and string theory ideas. Very math-intensive and abstract. Best for students interested in physics research paths.
+

@@ -66,3 +66,37 @@ Computer Vision, Image Processing, Pattern Recognition, Signal Processing
 * Robotics
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity (Core Idea)
+His research sits at the intersection of: Computer Vision, Mathematical Optimization, Differential Geometry, and Graph Signal Processing. This makes his work much more theoretical than typical ML faculty.
+
+### Research Areas (Deep Breakdown)
+1. **Computer Vision:** Object recognition, Shape modeling, Feature extraction, Pattern recognition. (Focuses on mathematical formulations rather than "deep learning only".)
+2. **Image Processing:** Image denoising, Texture segmentation, Image reconstruction, Signal-based image modeling. Treats images as mathematical structures instead of just pixel grids.
+3. **Signal Processing on Graphs:** Represents images/signals as graphs and processes them using graph theory and linear algebra. Applications in image denoising, data compression, feature smoothing.
+4. **Geometry & Shape Modeling:** Curve evolution, Shape deformation, 3D modeling, Manifold-based image representation.
+5. **Optimization Methods:** Convex optimization, Variational methods, Linear algebra, Differential equations.
+
+### Key Research Contributions
+* **Graph-Based Signal Processing:** Recovering structure from sparse signals, using graph topology for image processing.
+* **Active Contours (Segmentation):** Texture segmentation models, energy minimization methods in vision.
+* **Lie Group / Geometry-Based Vision:** Shape interpolation using Lie groups, 3D morphing of shapes.
+* **HOG Descriptor Analysis:** Understanding representation power of HOG features.
+
+### Prospective Students & Fit Matrix
+**Best suited for students interested in:** Mathematical AI, Computer Vision research, Image processing theory, Optimization & ML math, Graph-based ML.
+**Not ideal for:** NLP / LLMs, Web development, Pure software engineering, Product-based ML applications.
+
+**Research Style:** Problem -> Mathematical model -> Optimization -> Algorithm -> Vision result. (Not Data -> Deep learning model -> Output).
+
+**Difficulty Level:**
+* Math intensity: Very High
+* Coding demand: Medium
+* Research difficulty: High
+* Beginner friendliness: Low-Medium
+
+**Hidden Insight:** If you want to work with him successfully, you should be strong in Linear algebra, Calculus, Optimization, and Basic ML concepts. You must be interested in understanding *why* algorithms work, not just using them.
+

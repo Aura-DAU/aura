@@ -98,3 +98,43 @@ I am actively working on the problems in the following areas.
 I am currently supervising three Ph.D. students and co-supervising one Ph.D. student on problems in some of the areas above. If you are visiting this page and are interested to work on a problem in any of the area above, get in touch with me through email.
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+Abhishek Jindal sits in the "AI + Networks + Security" cluster of DAU faculty. His profile is closer to AI + Wireless Systems + Cyber Security + Decision Intelligence rather than pure LLM research.
+
+### Why His Profile Is Interesting
+Most communication researchers remain in networking, and most AI researchers remain in machine learning. Abhishek Jindal's research connects Wireless Communications -> Deep Learning -> Reinforcement Learning -> Cyber Security. This combination is increasingly important for 5G, 6G, Autonomous Networks, Smart Cities, and Intelligent Infrastructure.
+
+### Core Research Areas
+* **Reinforcement Learning (RL):** Sequential decision making, Intelligent optimization, Autonomous learning systems. (Applications: Network optimization, Security automation, Smart infrastructure)
+* **Deep Learning:** Neural networks, Intelligent prediction systems, Applied AI.
+* **Cyber Security:** Information Security, Secure Communication, Cyber-Physical Systems.
+* **Wireless Communications:** Wireless networks, Resource allocation, Communication protocols, Future communication systems.
+* **Cyber-Physical Systems:** Intersection of Computing + Networking + Physical Devices + Security (e.g. Smart grids, IoT systems, Intelligent transportation).
+
+### Prospective Students & Projects
+
+**Student Fit Matrix:**
+* Reinforcement Learning (10/10)
+* Cyber Security (10/10)
+* Wireless Networks (10/10)
+* Deep Learning (9/10)
+* IoT (9/10)
+* Systems Research (8/10)
+* Data Science (7/10)
+* Computer Vision (4/10)
+* NLP (3/10)
+
+### Likely Student Project Ideas
+* **B.Tech Level:** Intrusion Detection using ML, Network Traffic Classification, Reinforcement Learning Simulators, IoT Security Systems.
+* **M.Tech Level:** AI-driven Resource Allocation, Intelligent Network Control, Deep Learning for Cyber Security, Wireless Optimization.
+* **PhD Level:** Autonomous Communication Systems, RL for Wireless Networks, Secure AI Systems, Cyber-Physical Infrastructure.
+
+### Industry Relevance
+His expertise aligns strongly with industries such as Telecom, Cybersecurity, Smart Infrastructure, Defense Communications, Industrial IoT, and AI-driven Networks.
+
+**Hidden Insight:** If your long-term goal is AI + Security or AI + Networking, then Abhishek Jindal is one of the strongest faculty matches at DAU. If your goal is pure LLMs or NLP, other faculty would be a better fit.
+

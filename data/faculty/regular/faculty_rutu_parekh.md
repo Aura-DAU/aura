@@ -83,3 +83,44 @@ High-Voltage ASIC Design for Space Applications, Nanoelectronics and Emerging De
 I am inviting highly motivated Ph.D. students to join my research group in high-voltage ASIC design, nanoelectronics, embedded systems, and IoT applications. Students will have the opportunity to work on innovative projects spanning chip design for space applications, smart agriculture, and long-distance wireless systems for defense and space, while contributing to high-impact publications and patents.
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+Her research is in nanoelectronics + embedded IoT + semiconductor devices. Domain: Nanoelectronics + VLSI + IoT hardware systems. Style: device physics + circuit-level engineering. Strong hardware + semiconductor + embedded systems background.
+
+### Core Research Areas
+1. **Micro / Nanoelectronics**
+2. **High-voltage ASIC design (space applications)**
+3. **Hybrid CMOS nano-devices (logic + memory systems)**
+4. **Embedded systems & IoT applications**
+5. **Wireless sensor networks**
+6. **Smart agriculture & environmental monitoring systems**
+7. **Memristor-based neuromorphic systems**
+
+### Research Style
+She works on problems like: Designing chips for space and extreme environments, Building ultra-low-power embedded IoT devices, Creating next-gen memory + logic hybrid circuits, Using sensors for agriculture, Developing hardware for smart systems. Think: "Hardware + chips + IoT devices that run real-world sensing systems". Publications include: High-voltage ASIC design for space applications, Resonant tunneling diode simulation studies, Single-electron transistor (SET) and hybrid SET-MOS models, Nano-device modeling, IoT-based environmental monitoring systems.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like electronics / VLSI / hardware systems. Interested in: semiconductor industry, IoT device design, chip-level engineering. Want hands-on hardware + theory mix.
+* **Not suitable for:** Software-only / coding-heavy careers, ML / AI-focused electives, Easy CPI hunting mindset.
+
+**Teaching Area:**
+Analog Circuits, VLSI Design, Semiconductor Devices, Embedded Systems, Nanoelectronics, Hardware/IoT system design courses.
+
+**Teaching Style:**
+Concept-heavy electronics + device physics. Focus on derivations + circuit understanding. Labs/projects matter significantly. Exam difficulty depends heavily on preparation. Mixed feedback: considered knowledgeable, grading sometimes perceived as strict/variable. Requires consistent understanding of electronics fundamentals.
+
+**Difficulty Level:**
+* Concept depth: ⭐⭐⭐⭐⭐
+* Math/physics load: ⭐⭐⭐⭐
+* Coding requirement: ⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Practical hardware exposure: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** Strong VLSI + nanoelectronics + embedded systems faculty. Focus on chips, IoT devices, and semiconductor modeling. Best for electronics / hardware engineering students. Not software-oriented.
+

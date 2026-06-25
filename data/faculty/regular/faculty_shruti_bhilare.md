@@ -119,3 +119,43 @@ Biometrics, Pattern Recognition, Image Processing
 * **Rohan Joshi**: Adversarial Machine Learning and Cancelable Biometrics (2024)
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+Her work is in machine learning + data-driven systems. Domain: Applied Machine Learning + Data Science. Style: practical + coding-heavy AI teaching. Strong academic training in: statistical learning, optimization, applied machine learning systems.
+
+### Core Research Areas
+1. **Machine Learning (ML)**
+2. **Deep Learning applications**
+3. **Data Mining**
+4. **Pattern Recognition**
+5. **AI for real-world datasets**
+6. **Time-series / structured data modeling**
+
+### Research Style
+She works on problems like: Training AI models to detect patterns in data, Predicting outcomes from structured datasets, Building ML models for real-world applications, Improving accuracy of AI systems on noisy data. Think: "Using AI and statistics to make predictions from data". Research typically includes: Supervised and unsupervised learning methods, Classification and clustering models, Feature engineering techniques, Applied deep learning pipelines, Data-driven prediction systems.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who want ML / AI / Data Science career. Interested in: Python + ML projects, Kaggle-style learning. Prefer practical implementation over theory proofs.
+* **Not suitable for:** Pure theory CS / algorithms focus, Students avoiding coding assignments, Heavy math-proof oriented mindset.
+
+**Teaching Area:**
+Machine Learning, Data Mining, Artificial Intelligence, Python for Data Science, Statistical Learning (depending on semester).
+
+**Teaching Style:**
+Very coding + project oriented. Focus on implementing ML models, assignments in Python. Exams often mix theory + practical ML problems. Moderate difficulty. Fair grading if projects are done properly. Good learning value for ML beginners.
+
+**Difficulty Level:**
+* Coding workload: ⭐⭐⭐⭐⭐
+* Theory depth: ⭐⭐⭐⭐
+* Math intensity: ⭐⭐⭐⭐
+* Exam difficulty: ⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐⭐
+* Practical ML value: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** Strong ML / Data Science faculty. Focus on applied machine learning systems. Very useful for AI beginners and project building. Coding-heavy but manageable.
+

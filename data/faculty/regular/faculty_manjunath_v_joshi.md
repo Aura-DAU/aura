@@ -55,3 +55,42 @@ Signal and Image Processing, Digital Communication, Computer Vision, Machine Lea
 * Topics in Deep Learning
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is one of the most established ML + vision + signal processing profiles at DA-IICT. Domain: Computer vision + image processing + ML. Style: math-heavy AI + signal processing. Think: "How to make machines understand and improve images like satellites, medical scans, or cameras".
+
+### Core Research Areas
+1. **Image Processing:** Improving blurry or low-quality images (super-resolution), Combining multiple images into better ones (fusion).
+2. **Computer Vision**
+3. **Machine Learning**
+4. **Remote Sensing & Hyperspectral Imaging:** Satellite image analysis, Detecting patterns in hyperspectral data.
+5. **Signal Processing**
+
+### Research Style
+He has a very strong publication + book record. Key contributions: Image super-resolution using probabilistic models, Hyperspectral image reconstruction, Multi-resolution image fusion techniques, Deep learning for vision tasks, Signal processing for communication systems. Books (major contribution): Multi-resolution Image Fusion in Remote Sensing (Cambridge University Press).
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like AI + computer vision. Interested in: ML engineering, image processing, remote sensing / satellite AI. Want strong foundation for: MS/PhD abroad, AI research roles.
+* **Not suitable for:** Easy elective seekers, Minimal coding / theory avoidance, Pure software dev focus without ML interest.
+
+**Teaching Area:**
+Digital Signal Processing (DSP), Computer Vision, Digital Communication, Deep Learning (advanced topics).
+
+**Teaching Style:**
+Strong math + signal processing foundation. Concept-heavy lectures (Fourier, transforms, probabilistic modeling). Assignments often involve: coding image processing algorithms, ML-based vision tasks. Exams require: derivations + intuition + implementation understanding. Considered tough but very rewarding. High learning value if you attend regularly. Not "easy CPI", but strong skill building.
+
+**Difficulty Level:**
+* Math intensity: ⭐⭐⭐⭐⭐
+* Coding workload: ⭐⭐⭐⭐
+* Concept clarity: ⭐⭐⭐⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Practical industry value: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** One of the strongest ML/vision faculty at DA-IICT. Focus on image processing + remote sensing + deep learning. High difficulty but excellent learning payoff. Best for AI / CV / research-oriented students.
+

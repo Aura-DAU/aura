@@ -90,3 +90,40 @@ Flexible and Printable Electronics for Healthcare and Digital Agricultural Appli
 Flexible and Printed Electronics
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His research is very hardware + materials + sensor systems oriented. Think: "Physics + materials + electronics + IoT devices" (Not pure software engineering).
+
+### Core Research Areas
+1. **Flexible and Printable Electronics**
+2. **Smart Sensing Technologies**
+3. **Sensor Materials & Nanocomposites**
+4. **Sustainable / Green Electronics**
+5. **Wearable and Disposable Sensors**
+6. **Wireless Sensor Systems**
+
+### Research Output
+His publications include top IEEE / ACS journals. Common research directions: PEDOT:PSS-based flexible sensors, Graphene/carbon ink printed sensors, Wearable healthcare electronics, Eco-friendly disposable sensing platforms, Real-time wireless sensing systems. (Example contributions: Skin-wearable humidity sensors, Paper-based disposable medical sensors, Smart agriculture sensors).
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** IoT / hardware / embedded systems interests, Research projects in sensors, MS/PhD in electronics/materials, Hands-on lab experience.
+* **Not suitable for:** Pure software engineering path, Easy grading expectation, Minimal-effort electives.
+
+**Teaching Area:**
+Flexible and Printed Electronics. Course type: Hardware + lab + fabrication concepts, Sensor physics + electronics design, Some embedded/system integration ideas.
+
+**Difficulty Level:**
+* Theory difficulty: ⭐⭐⭐⭐
+* Math intensity: ⭐⭐⭐
+* Coding required: ⭐⭐⭐
+* Lab workload: ⭐⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐⭐
+* Project scope: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** Strong international research background. Focus on real-world sensor devices. Heavy lab + experimental work. Very different from ML/software-heavy professors.
+

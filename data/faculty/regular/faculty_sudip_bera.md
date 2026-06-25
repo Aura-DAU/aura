@@ -61,3 +61,42 @@ Algebraic graph theory, Algebraic combinatorics
 * Real and complex analysis
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His research is in algebraic graph theory + combinatorics. Domain: Algebraic graph theory + combinatorics. Style: pure mathematical rigor + proofs. Think: "Pure mathematics of networks — but extremely abstract and algebra-heavy".
+
+### Core Research Areas
+1. **Algebraic graph theory**
+2. **Graph spectra and matrix representations of graphs**
+3. **Combinatorics of algebraic structures (groups -> graphs)**
+4. **Power graphs of finite groups**
+5. **Graph connectivity and domination problems**
+
+### Research Style
+He studies things like: How algebraic structures (like groups) can be turned into graphs, How properties of graphs reflect deep algebraic behavior, Counting paths, connectivity, and structure inside complex networks, Mathematical identities related to graphs and matrices. Publications include: Power graphs of finite groups, Graph connectivity and domination numbers, Matrix methods for graph enumeration, Combinatorial identities using graph theory, Algebraic combinatorics on structured graphs.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like pure mathematics + graph theory. Interested in: theoretical CS / algorithms research, MS/PhD in math/CS theory. Comfortable with strict evaluation.
+* **Not suitable for:** Easy CPI seekers, Software engineering / coding-heavy students, Last-minute exam preparation style.
+
+**Teaching Area:**
+Discrete Mathematics, Graph Theory, Linear Algebra (theory-heavy version), Algorithms (theoretical aspects), Mathematical foundations for CS.
+
+**Teaching Style:**
+Very strict, exam-heavy evaluation style. Strong focus on proofs, exact answers (low partial marking in some cases). Assignments and exams are conceptually simple if prepared but punishing if careless. Known for very sharp marking schemes. Lecture notes are good but self-study is often required. Can feel "unforgiving" in exams if you make small mistakes.
+
+**Difficulty Level:**
+* Concept depth: ⭐⭐⭐⭐⭐
+* Math rigor: ⭐⭐⭐⭐⭐
+* Coding requirement: ⭐
+* Exam difficulty: ⭐⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐
+* Concept clarity: ⭐⭐⭐⭐
+
+**Hidden Insight:** Strong theoretical graph theory faculty. Focus on algebraic structures + graphs. Very rigorous exams and strict marking style. Best for math-heavy CS/theory students.
+

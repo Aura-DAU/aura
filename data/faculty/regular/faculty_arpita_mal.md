@@ -73,3 +73,41 @@ Dr. Arpita Mal was a teaching assistant for Analysis and Linear Algebra course-U
 Mathematics, Functional Analysis, Geometry of Banach Space.
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+Her work is in functional analysis and operator theory, which is a very abstract branch of mathematics. This is pure theoretical mathematics, very far from coding or applied CS. Strong pure-maths research training from a well-known Indian research university.
+
+### Core Research Areas
+1. **Functional Analysis**
+2. **Operator Theory**
+3. **Banach Space Geometry**
+4. **Numerical radius / operator theory**
+
+### Research Style
+She studies questions like: How do linear transformations behave in infinite-dimensional spaces? What are the "geometric properties" of abstract function spaces? How do operators behave under different mathematical constraints? When do different mathematical norms behave consistently? Her publications are in top-level pure mathematics journals (Linear Algebra and its Applications, Banach Journal of Mathematical Analysis, etc.). Key themes: Smoothness of operators in Banach spaces, Orthogonality in normed spaces, Numerical range and operator geometry.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like pure mathematics. Interested in: theoretical CS/ML foundations, probability theory later on, MS/PhD in mathematics or theoretical CS. Comfortable with abstraction and proofs.
+* **Not suitable for:** Software engineering / coding-focused goals, Easy electives / CPI boosting mindset, Applied project-heavy learning expectations.
+
+**Teaching Area:**
+Calculus (UG level), Abstract Algebra, Linear Algebra & Analysis. She handles both intro-level math and advanced theoretical math.
+
+**Teaching Style:**
+Strong emphasis on proofs and theory. Focus on mathematical rigor. Exams require: derivations, definitions + proofs. Less emphasis on computation or coding. Medium to high difficulty. Very concept-heavy. Requires consistent study (not last-minute friendly).
+
+**Difficulty Level:**
+* Concept depth: ⭐⭐⭐⭐⭐
+* Math rigor: ⭐⭐⭐⭐⭐
+* Coding requirement: ⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Practical application: ⭐
+
+**Hidden Insight:** One of the pure mathematics faculty. Focus on Banach spaces and operator theory. Very strong theoretical background. Best for students interested in math depth or theoretical CS foundations.
+

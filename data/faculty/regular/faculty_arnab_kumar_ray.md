@@ -55,3 +55,42 @@ Astrophysical Accretion, Fluid Dynamics, Nonlinear Systems
 * Multidisciplinary Problem-Solving Techniques
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His research is very theoretical physics + fluid dynamics + nonlinear systems. This is pure theory-heavy physics, not coding or engineering.
+
+### Core Research Areas
+1. **Astrophysical Accretion:** Black hole / space physics flows. How matter falls into black holes.
+2. **Fluid Dynamics:** Hydraulic jumps, turbulence. How fluids behave under extreme conditions.
+3. **Nonlinear Dynamical Systems:** Why certain flows become chaotic or stable.
+4. **Complex Systems:** Cross-disciplinary physics.
+5. **Geophysics + Condensed Matter Applications (theory side)**
+
+### Research Style
+His publication record spans top physics journals. Examples of work: Rotating waves in hydraulic jumps, Nonlinear spherical accretion models, Fractal structures in accretion disks. Deep theoretical modeling bridging physics and applied mathematics.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like theoretical physics / applied math, enjoy derivations and modeling, are interested in MS/PhD abroad (physics, applied math, ML theory side), and want strong analytical thinking.
+* **Not suitable for:** Pure software engineering path, easy grading / CPI boosting electives, low-effort coding courses.
+
+**Teaching Area:**
+Computational & Numerical Methods, Econophysics, Multidisciplinary Problem Solving Techniques.
+
+**Teaching Style:**
+Very mathematical and derivation-heavy. Focus on problem solving + theory building. Less emphasis on programming frameworks. Exams usually require derivations, conceptual reasoning, mathematical modeling. Respected for knowledge depth, considered challenging if math basics are weak. Not an "easy CPI" professor.
+
+**Difficulty Level:**
+* Concept difficulty: ⭐⭐⭐⭐⭐
+* Math intensity: ⭐⭐⭐⭐⭐
+* Coding requirement: ⭐⭐
+* Exam toughness: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Concept clarity (if attentive): ⭐⭐⭐⭐
+
+**Hidden Insight:** One of the most theory-heavy physics faculty. Strong in astrophysics + fluid dynamics modeling. Ideal for students who enjoy math + physics depth. Not focused on software or industry coding skills.
+

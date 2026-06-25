@@ -55,3 +55,42 @@ High-dimensional Inference, Multiple Testing, Posterior Concentration, Variable 
 * Bayesian Computation
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is in modern statistical theory for high-dimensional data. Domain: High-dimensional statistics + ML theory. Style: probability-heavy mathematical statistics. Strong training in: high-dimensional statistics, probability theory, Bayesian inference methods.
+
+### Core Research Areas
+1. **High-dimensional inference**
+2. **Sparse signal recovery**
+3. **Multiple hypothesis testing**
+4. **Bayesian posterior concentration**
+5. **Variable selection in big data**
+
+### Research Style
+He studies problems like: When data has thousands of variables, how do we pick the important ones? How do we avoid false positives in large-scale testing? How does probability behave in very high dimensions? How do we reliably extract patterns from noisy big data? Think: "Math behind modern machine learning statistics and big data inference". Research includes: Sparse regression theory, Bayesian high-dimensional modeling, False discovery rate control, Statistical consistency in large-scale models, Asymptotic behavior of estimators.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** ML / Data Science aspirants (theory side). Students interested in: statistical learning, Bayesian ML, research in AI/Stats. Strong math background students.
+* **Not suitable for:** Software engineering focus, Easy CPI electives, Students weak in probability/statistics.
+
+**Teaching Area:**
+Probability Theory, Mathematical Statistics, Data Science foundations, Statistical Inference, Machine Learning math prerequisites.
+
+**Teaching Style:**
+Very math + probability heavy. Focus on derivations, theoretical understanding. Exams usually include: proofs + numerical statistics problems.
+
+**Difficulty Level:**
+* Math depth: ⭐⭐⭐⭐⭐
+* Theory difficulty: ⭐⭐⭐⭐⭐
+* Coding: ⭐⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* ML usefulness: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** Strong ML theory / statistics faculty. Focus on high-dimensional data + inference. Very relevant for data science research track. Math-heavy but highly useful.
+

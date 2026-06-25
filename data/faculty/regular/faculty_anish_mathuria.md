@@ -54,3 +54,46 @@ Network Security, Privacy-Preserving Computation, System and Software Security
 * Operating Systems
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is centered around System Security + Network Security + Privacy-Preserving Computation + Software Security. He is part of DAU's core cybersecurity group.
+
+### Core Research Areas
+1. **Network Security:** Secure communication protocols, Attack prevention in networks, Intrusion detection concepts, Secure routing.
+2. **Privacy-Preserving Computation:** Data privacy techniques, Secure multi-party computation, Privacy in distributed systems, Cryptographic privacy models.
+3. **System Security:** Operating system security, System-level vulnerabilities, Secure system design.
+4. **Software Security:** Vulnerability detection, Secure coding practices, Exploit prevention, Program analysis.
+
+### Research Style
+His approach is more: Theory + Systems + Protocol Design + Security Guarantees. Not machine learning security or AI-driven cybersecurity. He is closer to formal security systems, protocol design, and cryptography-based thinking.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Cyber Security, Network Security, System Programming, Privacy & Cryptography, OS-level security.
+* **Moderate fit:** Distributed systems, Backend systems, Networking.
+* **Not suitable for:** AI / ML, Data Science, Computer Vision, NLP / LLMs.
+
+**Why His Profile Matters:**
+DAU has 3 major "security-related" directions:
+1. AI + Security (Abhishek Jindal)
+2. Pure Cryptography / Security Systems (Maniklal Das, Anish Mathuria)
+3. Applied Cyber-Physical Security (IoT + Systems faculty)
+Anish Mathuria belongs to the pure systems security core.
+
+### Likely Student Project Ideas
+* **B.Tech Level:** Secure file sharing system, Password authentication systems, Basic intrusion detection simulations, Network traffic monitoring tools.
+* **M.Tech Level:** Privacy-preserving data systems, Secure communication protocols, Vulnerability analysis tools, System-level security frameworks.
+* **Research Level:** Formal verification of security protocols, Privacy models in distributed systems, Secure computation frameworks.
+
+**Difficulty Level:**
+* Math requirement: Medium
+* Coding requirement: High
+* Theory depth: High
+* Practical hacking/security mindset: High
+
+**Hidden Insight:** If your interest is Ethical Hacking + System Security + Cryptography, then he is one of the most relevant faculty members at DAU.
+

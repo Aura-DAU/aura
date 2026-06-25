@@ -95,3 +95,42 @@ Statistical Inference, Survey Sampling, Discrete Data Modeling and Analysis, App
 * Nonparametric Data Analysis
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is in applied statistics + data modeling systems. Domain: Applied statistics + data modeling. Style: practical statistical reasoning. Strong classical training in: statistical inference, data modeling, survey sampling theory.
+
+### Core Research Areas
+1. **Statistical inference**
+2. **Survey sampling theory**
+3. **Discrete data modeling**
+4. **Applied statistical methods**
+5. **Data-driven decision systems**
+
+### Research Style
+He works on problems like: How to design good surveys so results are unbiased, How to model real-world data mathematically, How to make conclusions from incomplete/noisy data, How statistical methods apply to real systems (health, social data, etc.). Think: "Math for making sense of real-world data reliably". His academic work includes: survey sampling frameworks, discrete statistical models, inference methods for real-world datasets, applied probability + statistical methodology.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like statistics + data science basics. Prefer: applied math over proofs, structured numerical problems. Interested in: analytics, data interpretation, ML foundations (probability side).
+* **Not suitable for:** Pure theory/CS algorithm research track, Heavy coding electives, Abstract mathematical proof-heavy mindset.
+
+**Teaching Area:**
+Probability & Statistics, Data Analysis / Applied Statistics, Discrete Data Modeling, Introductory statistical methods for engineering students.
+
+**Teaching Style:**
+Conceptual but less abstract than pure math faculty. Focus on: formulas + interpretation, solving statistical problems. Exams are usually: calculation + reasoning based. Generally considered manageable. Not extremely theory-heavy. Better for students who prefer applied math over proofs.
+
+**Difficulty Level:**
+* Concept depth: ⭐⭐⭐⭐
+* Math rigor: ⭐⭐⭐
+* Coding requirement: ⭐⭐
+* Exam difficulty: ⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐⭐
+* Practical relevance: ⭐⭐⭐⭐
+
+**Hidden Insight:** Strong statistics and data modeling faculty. Focus on survey sampling + applied inference. More application-oriented than theory-heavy math. Good fit for data science foundation courses.
+

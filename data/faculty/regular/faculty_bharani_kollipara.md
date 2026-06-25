@@ -49,3 +49,41 @@ Modern Philosophy, Phenomenology and Hermeneutics, Literary Modernism
 * Modernity and Political Theory
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is in the humanities + philosophy + interpretive theory space. Strong background in Philosophy + literature + critical theory, not engineering / CS / math.
+
+### Core Research Areas
+1. **Modern Philosophy**
+2. **Phenomenology**
+3. **Hermeneutics (interpretation theory)**
+4. **Literary Modernism**
+
+### Research Style
+He works on questions like: How do traditions shape human thinking? How do we interpret ancient vs modern texts? What does "meaning" mean in philosophy? How Western philosophy interacts with Indian intellectual traditions? How literature shapes political and philosophical thought? This is deep reading + theory + interpretation, not coding or math. Highly theoretical, dense reading-based work.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like philosophy, humanities, political theory. Enjoy reading and writing long analytical answers. Interested in UPSC / humanities research, interdisciplinary studies, social theory / philosophy tracks.
+* **Not suitable for:** Coding-focused students, Engineering-heavy curriculum seekers, Easy "technical elective" expectation.
+
+**Teaching Area:**
+Modern European Philosophy, Modernity and Political Theory, Approaches to Indian Society.
+
+**Teaching Style:**
+Heavy reading (books, essays, philosophy texts). Essay-based evaluation. Conceptual discussions over coding/problem solving. Focus on writing clarity and interpretation. Moderate to high workload in reading courses. Not calculation-heavy. Depends heavily on writing performance.
+
+**Difficulty Level:**
+* Reading load: ⭐⭐⭐⭐⭐
+* Writing/essay work: ⭐⭐⭐⭐⭐
+* Math/coding: ⭐
+* Concept difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐⭐ (varies by effort)
+* Exam style: Theory + essays
+
+**Hidden Insight:** One of the humanities core faculty at DA-IICT. Focus on philosophy + interpretation + literature. Very different from CS/ML/engineering professors. Best for students who like reading + writing + theory.
+

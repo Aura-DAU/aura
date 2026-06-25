@@ -63,3 +63,43 @@ Theoretical Computer Science
 * Specification and Verification of Systems
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is in formal verification + theoretical computer science. Domain: Formal verification + theoretical CS. Style: mathematical correctness of software systems. Very strong theoretical CS lineage (formal methods school).
+
+### Core Research Areas
+1. **Formal Methods**
+2. **Model Checking**
+3. **Testing of Distributed Systems**
+4. **Real-time systems verification**
+5. **Conformance testing of communication systems**
+6. **Process algebra / system equivalence**
+
+### Research Style
+He studies questions like: How do we mathematically prove a system is correct? How do we test distributed systems without running every case? How can we ensure software behaves correctly in all scenarios? How do concurrent systems communicate without errors? Think: "Mathematical guarantees of correctness in software systems". Publications include top conferences in formal methods (Asynchronous testing of distributed systems, Equivalence checking in real-time systems, Conformance testing frameworks).
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like theoretical CS / algorithms / formal methods. Interested in: MS/PhD in CS theory, systems verification, algorithms research. Comfortable with proofs and abstraction.
+* **Not suitable for:** Easy electives / CPI boosting mindset, Pure software development focus, Avoiding theory-heavy subjects.
+
+**Teaching Area:**
+Design and Analysis of Algorithms (DAA), Models of Computation, Formal Specification & Verification, Theoretical Computer Science, Discrete Mathematics / Logic-based courses.
+
+**Teaching Style:**
+Very concept-heavy and theory-focused. Strong emphasis on proofs, formal reasoning, problem solving under constraints. Exams often tough but standard for theory CS. Known for being strict in evaluation in some courses. Highly respected for depth of knowledge. Considered challenging but very valuable. Not a "CPI boosting" easy professor.
+
+**Difficulty Level:**
+* Theory difficulty: ⭐⭐⭐⭐⭐
+* Math rigor: ⭐⭐⭐⭐⭐
+* Coding requirement: ⭐⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐
+* Concept clarity: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** One of the core theoretical CS faculty. Focus on formal verification + distributed systems testing. Best for theory-focused CS students.
+

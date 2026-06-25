@@ -78,3 +78,43 @@ Bio-Inspired Metasurface/Metamaterial Devices, Terahertz Devices, Semiconductor 
 * <https://www.researchgate.net/profile/Pankaj-Kumar-207>
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His research is deeply rooted in nano-electronics + RF + metamaterials. Strong hardware + device physics + semiconductor modeling background. Think: "Physics of future chips + nano-scale electronics + metamaterials".
+
+### Core Research Areas
+1. **Metamaterials / metasurfaces:** bio-inspired EM structures
+2. **Terahertz devices**
+3. **Semiconductor device modeling**
+4. **Advanced transistor architectures:** FinFET, TFET, JLT
+5. **VLSI design and emerging nano-devices**
+6. **OFET (organic field-effect transistors)**
+
+### Research Style
+He works on things like: Designing next-generation computer chips, Creating materials that control electromagnetic waves, Building ultra-small, high-speed transistors, Working in THz frequency devices (beyond 5G hardware), Modeling how future VLSI chips will behave at nano-scale.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like electronics + chip design. Interested in: VLSI / semiconductor industry, hardware design engineering, nanotechnology / RF systems. Planning for MS/PhD in electronics/materials.
+* **Not suitable for:** Software engineering / coding-focused careers, ML / AI-heavy electives, Easy CPI optimization mindset.
+
+**Teaching Area:**
+Semiconductor Devices, VLSI Design, Analog / Digital Electronics (core + advanced), Emerging Nano-devices, RF / Microwave fundamentals (advanced electives).
+
+**Teaching Style:**
+Strong physics + math + device theory focus. Heavy derivations in semiconductor physics. Design-oriented assignments (circuits + device behavior). Exams can be conceptual + analytical. Medium to high difficulty. Not coding-heavy. Requires understanding of electronics fundamentals.
+
+**Difficulty Level:**
+* Concept depth: ⭐⭐⭐⭐⭐
+* Math/physics load: ⭐⭐⭐⭐
+* Coding requirement: ⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Practical lab relevance: ⭐⭐⭐⭐
+
+**Hidden Insight:** Strong semiconductor + VLSI + RF faculty. Focus on nano-devices and metamaterials. Ideal for electronics / chip design aspirants. Not software or ML focused.
+

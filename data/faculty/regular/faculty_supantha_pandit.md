@@ -88,3 +88,42 @@ Mainly focused on:
 I am looking for Ph.D. and Masters Students. A Ph.D. thesis will have foundational theoretical work possibly supported by experimental studies. The research topics include computational geometry, approximation algorithms, graph algorithms, distributed computing, discrete mathematics, and problems that generally obey the design and analysis framework of discrete algorithms. For a better understanding, I'd like you to please take a look at my publications. If you have any questions, please don't hesitate to contact me.
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is in advanced theoretical computer science. Domain: Theoretical CS + approximation algorithms. Style: geometry + graph algorithms + optimization theory. Strong theoretical CS training across India + US research ecosystem.
+
+### Core Research Areas
+1. **Computational Geometry**
+2. **Approximation Algorithms**
+3. **Distributed / Agent-based Algorithms**
+4. **Graph Algorithms**
+5. **Combinatorial Optimization**
+
+### Research Style
+He studies problems like: How to approximate hard problems efficiently (since exact solutions are too slow), How robots/agents coordinate in geometric space, How graphs can represent real-world networks and optimization problems, How to design algorithms that work well at scale. Think: "Efficient algorithms for hard mathematical and geometric problems". Work includes: Geometric covering problems (hitting set, set cover variants), Distributed coordination of autonomous agents (robots-type models), Graph algorithm optimization problems, Approximation algorithms for NP-hard problems, Computational geometry structures.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like algorithms + theoretical CS. Interested in: competitive programming theory, MS/PhD in CS theory, optimization problems. Comfortable with proofs and abstraction.
+* **Not suitable for:** Easy CPI / lightweight electives, Pure software engineering focus, Students avoiding math-heavy thinking.
+
+**Teaching Area:**
+Design and Analysis of Algorithms (DAA), Discrete Mathematics, Optimization, Graph Theory / Algorithmic Problem Solving, Theoretical Computer Science electives.
+
+**Teaching Style:**
+Very logic + proof + problem-solving heavy. Focus on algorithm design, correctness proofs, complexity analysis. Exams often require deep reasoning (not memorization). High difficulty but fair if prepared. Not coding-heavy, more "algorithm thinking". Strong learning value for theory CS.
+
+**Difficulty Level:**
+* Theory depth: ⭐⭐⭐⭐⭐
+* Math rigor: ⭐⭐⭐⭐⭐
+* Coding requirement: ⭐⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Concept clarity: ⭐⭐⭐⭐
+
+**Hidden Insight:** Strong theoretical CS / algorithms faculty. Focus on approximation + geometry + graphs. Very good for core CS thinking and research prep. Demanding but intellectually strong.
+

@@ -102,3 +102,43 @@ I am looking to collaborate with students in Applied Probability and Stochastic
 * Statistical Data Analysis
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His research is focused on stochastic systems + queueing theory + decision models. Strong foundation in probability theory, stochastic processes, queueing systems, applied mathematics.
+
+### Core Research Areas
+1. **Queueing theory:** waiting line systems
+2. **Markov decision processes**
+3. **Game theory in queues:** queueing games
+4. **Decision-making under uncertainty**
+5. **Healthcare service modeling**
+6. **Cloud computing systems optimization**
+
+### Research Style
+He studies questions like: Why do servers / systems get overloaded and how to optimize them? How should customers join or leave queues strategically? How to design efficient hospital / healthcare waiting systems? How cloud systems allocate resources under uncertainty? How randomness affects service systems? Think: "Math of waiting lines + optimization of real systems under uncertainty".
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like statistics / data analysis. Want manageable math electives. Interested in: data science basics, operations research, service systems / optimization. Prefer balanced workload + good CPI potential.
+* **Not suitable for:** Deep theoretical math research track, Hardcore ML theory / proofs-heavy courses, Heavy programming electives.
+
+**Teaching Area:**
+Probability and Statistics, Data Analysis / Exploratory Data Analysis, Stochastic Processes (depending on semester offerings).
+
+**Teaching Style:**
+Considered very approachable and chill. Assignments are manageable if done regularly. Exams are calculation + concept based. Not overly strict compared to math-theory heavy faculty. Often described as "easy-going" or "comfortable grading". Good for learning data/statistics fundamentals.
+
+**Difficulty Level:**
+* Math intensity: ⭐⭐⭐⭐
+* Coding requirement: ⭐⭐
+* Concept clarity: ⭐⭐⭐⭐
+* Exam difficulty: ⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐⭐⭐
+* Practical relevance: ⭐⭐⭐⭐
+
+**Hidden Insight:** Strong applied probability + queueing systems researcher. Focus on real-world service optimization (cloud, healthcare). One of the more student-friendly math/stat faculty. Good for data science foundations + CPI balance.
+

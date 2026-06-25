@@ -79,3 +79,44 @@ For more details on sponsored research projects and publications, visit my [per
 * You may explore exciting research papers from top SE conferences and journals  (ICSE, ASE, RE, MODELS, ESEC/FSE, MSR, ICPC, IEEE TSE, IST, JSS, ESE, SoSYM, ACMTOSEM). Going through the research papers will deepen your understanding and ignite your curiosity about the field. PhD students should have an excellent background in computer science and statistics. Coding skills, as well as related experiences, are desirable. Most important is a strong enthusiasm for cutting-edge research.
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is in Software Engineering + AI for software systems. Think: "Using data + AI to improve how software is built, tested, and understood". One of the core Software Engineering faculty at DA-IICT.
+
+### Core Research Areas
+1. **Requirements Engineering (RE)**
+2. **Empirical Software Engineering**
+3. **Mining Software Repositories (GitHub/Git analysis)**
+4. **Software Testing & Verification**
+5. **GenAI / LLMs for Software Engineering**
+6. **Human-Computer Interaction (HCI)**
+7. **Software Engineering Education research**
+
+### Research Style
+He works on problems like: How to write better software requirements so developers don’t misunderstand them, How to automatically analyze GitHub repositories for bugs/patterns, How AI/LLMs can help write or test software, How to improve software engineering teaching methods, How real-world software teams can reduce errors using tools. Publications include: Automated requirement analysis tools (NLP-based), GitHub mining + developer behavior studies, AI-assisted software testing frameworks, Model-based testing (MBT), Empirical studies on student learning in SE courses, GenAI applications in software engineering workflows.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who want software engineering / backend / system design understanding. Interested in: GitHub + real-world dev processes, AI for coding/testing, software engineering research. Prefer structured, concept-heavy courses.
+* **Not suitable for:** Easy CPI mindset, Pure competitive programming focus, Students avoiding theory-heavy CS subjects.
+
+**Teaching Area:**
+Software Engineering, Software Testing & Verification, Design of Software Systems, Data Structures, Systems Software, Introduction to Programming, Advanced SE / GenAI for SE.
+
+**Teaching Style:**
+Very structured but strict. Focus on conceptual software engineering (UML, design, testing). Exams can be: theory-heavy, scenario-based. Attendance + lecture engagement matters. Mixed reviews: content is useful in industry, teaching style can feel strict / dense. Requires consistent study (not last-minute friendly).
+
+**Difficulty Level:**
+* Concept depth: ⭐⭐⭐⭐⭐
+* Coding workload: ⭐⭐⭐
+* Theory load: ⭐⭐⭐⭐⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Industry relevance: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** Strong focus on AI + SE + GitHub mining. Courses are useful but demanding. Best for serious CS/software engineering learners.
+

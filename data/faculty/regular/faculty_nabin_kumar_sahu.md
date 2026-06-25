@@ -48,3 +48,42 @@ Frame Theory, Optimization Theory and Applications, Variational Inequalities
 * Numerical Methods
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work sits between pure mathematics and applied ML foundations. Domain: Optimization + functional analysis + frame theory. Style: applied pure math for ML foundations. Strong base in: functional analysis, optimization theory, variational inequalities.
+
+### Core Research Areas
+1. **Frame theory (signal representation mathematics)**
+2. **Optimization theory**
+3. **Variational inequalities**
+4. **Functional analysis in Banach spaces**
+5. **Applications in signal processing & machine learning**
+
+### Research Style
+He studies things like: How signals can be represented efficiently in mathematical systems, How optimization problems can be solved in abstract spaces, How ML-style optimization connects to pure math theory, How data transformations behave in high-dimensional spaces. Think: "Mathematical backbone of signal processing and ML optimization". Work includes: Frame representations in Hilbert/Banach spaces, Variational inequality problems, Optimization convergence theory, Tensor-product operator frameworks, Applications in signal and image processing systems.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who want ML / AI foundation via math. Interested in: optimization (very important for ML), data science theory. Prefer structured math learning without extreme proof intensity.
+* **Not suitable for:** Pure theory CS / hardcore proof-based math lovers, Software engineering-only mindset, Students avoiding any math depth.
+
+**Teaching Area:**
+Calculus, Optimization, Numerical Methods, Linear Algebra (advanced math-focused versions), Mathematical foundations for engineering.
+
+**Teaching Style:**
+Strong concept + formula + derivation balance. Focus on: optimization intuition, step-by-step problem solving. Exams usually: numerical + conceptual mix. Generally chill to moderate difficulty. Known for being reasonable in grading. Helpful for building math foundation for ML/DS.
+
+**Difficulty Level:**
+* Math rigor: ⭐⭐⭐⭐
+* Concept depth: ⭐⭐⭐⭐
+* Coding requirement: ⭐⭐
+* Exam difficulty: ⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐⭐
+* Practical relevance: ⭐⭐⭐⭐
+
+**Hidden Insight:** Strong optimization + ML-math foundation faculty. Bridges pure math and applied data science. More student-friendly than many theory-heavy math professors. Good for ML/DS preparation via math.
+

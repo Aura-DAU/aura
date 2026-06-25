@@ -164,3 +164,44 @@ Subhadeep Paul, Area: Intelligent Systems and Robotics
 Sourav Roy, Area: Robotic Computing Accelerator
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+His work is in robotics + intelligent embedded systems + AI hardware systems. Domain: Robotics + embedded AI + cybernetics. Style: hands-on robotics engineering. Very strong international + India research ecosystem background.
+
+### Core Research Areas
+1. **Robotics (biped robots, humanoid systems)**
+2. **Cybernetics & intelligent systems**
+3. **Embedded AI / AI-on-chip systems**
+4. **VLSI + robotic computing accelerators**
+5. **Human-robot interaction systems**
+6. **Motion planning + control systems**
+7. **ROS-based robotic platforms**
+
+### Research Style
+He works on problems like: Making robots walk stably (biped stability), Designing AI systems that run directly on hardware chips, Building robotic arms and autonomous movement systems, Using sensors + AI for robot decision-making, Creating embedded systems that power robots in real-time. Think: "Brains + hardware + motion control for robots". He has 100+ publications, multiple funded projects, and robotics lab founding contributions. Publications include Biped robot stability using force sensors, Neural-network-based robot control systems, Q-learning accelerators, ROS on FPGA/ARM, Energy optimization in robotic locomotion.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like robotics / AI + hardware systems. Interested in: ROS / robotics programming, embedded AI systems, control systems + machine learning. Want hands-on engineering experience.
+* **Not suitable for:** Pure software development focus, Theory-only learners, Easy CPI optimization mindset.
+
+**Teaching Area:**
+Introduction to Robotics, Robot Programming (ROS-based), Embedded Artificial Intelligence, Embedded Hardware Design, Analog / Basic Electronics, VLSI & embedded systems courses.
+
+**Teaching Style:**
+Strong project + robotics lab focus. Practical implementation-heavy courses. Assignments often involve: robot simulations (ROS), embedded AI tasks, hardware + software integration. Concept clarity depends on attendance + lab engagement. Considered good but slightly inconsistent depending on course structure. Generally more practical than theory-heavy professors. Robotics courses are demanding but interesting.
+
+**Difficulty Level:**
+* Robotics depth: ⭐⭐⭐⭐⭐
+* Coding requirement: ⭐⭐⭐⭐
+* Hardware integration: ⭐⭐⭐⭐⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Practical learning value: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** One of the core robotics faculty at DA-IICT. Strong focus on ROS, embedded AI, and robot control. Heavy practical + project-based learning. Best for robotics / AI hardware students.
+

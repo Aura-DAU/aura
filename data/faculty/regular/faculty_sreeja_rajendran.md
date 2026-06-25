@@ -62,3 +62,43 @@ VLSI, Embedded Systems and MEMS, Hardware Security, VLSI Test
 * Application of Machine Learning Algorithms for Trojan Detection and Prevention in Logic Circuit Designs
 
 
+
+
+## In-Depth Profile / Student Guide
+
+### Research Identity
+Her work is focused on secure hardware design and VLSI reliability. Domain: Hardware security + VLSI testing. Style: chip-level design + fault analysis. Strong electronics + chip security + VLSI test background.
+
+### Core Research Areas
+1. **Hardware Security:** Trojan detection, reverse engineering attacks
+2. **VLSI Testing and Testability**
+3. **Fault-tolerant circuit design**
+4. **Quantum-dot Cellular Automata (QCA)**
+5. **Secure embedded systems for IoT**
+6. **FinFET / SRAM optimization techniques**
+
+### Research Style
+She works on problems like: Detecting hidden malicious circuits inside chips (hardware Trojans), Making chips resistant to attacks and faults, Ensuring circuits still work even if parts fail, Designing secure IoT hardware, Testing whether a chip design is reliable before manufacturing. Think: "Cybersecurity, but at the chip hardware level". Publications include IEEE / IET / Springer-level work.
+
+### Prospective Students & Projects
+
+**Student Fit Analysis:**
+* **Best suited for:** Students who like VLSI / chip design / hardware security. Interested in: semiconductor industry, embedded security systems, IC design & testing. Want strong electronics fundamentals.
+* **Not suitable for:** Software engineering / coding-heavy focus, ML / AI-centric electives, Easy CPI optimization mindset.
+
+**Teaching Area:**
+Digital Logic Design (DLD), Computer Organization, VLSI Design & Testing, Hardware Security / Embedded Systems labs.
+
+**Teaching Style:**
+Strong circuit + logic + design theory focus. Emphasis on truth tables, timing, CMOS logic, fault models and testing. Lab work is important (HDL / circuit simulation). Exams often include derivations + circuit design questions. Medium to high difficulty. Concept-heavy but structured. Requires consistent practice in VLSI fundamentals.
+
+**Difficulty Level:**
+* Concept depth: ⭐⭐⭐⭐⭐
+* Hardware theory: ⭐⭐⭐⭐⭐
+* Coding requirement: ⭐⭐
+* Exam difficulty: ⭐⭐⭐⭐
+* CPI friendliness: ⭐⭐⭐
+* Practical lab work: ⭐⭐⭐⭐⭐
+
+**Hidden Insight:** Strong hardware security + VLSI testing faculty. Focus on chip reliability and Trojan detection. Very relevant for semiconductor + embedded security careers. Best for electronics / VLSI students.
+
