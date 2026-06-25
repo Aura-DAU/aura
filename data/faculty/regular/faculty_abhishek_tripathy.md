@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Abhishek Tripathy
-
-# Main Content
-
 # Abhishek Tripathy
 
 ## Education
 
 PhD (Thesis Submitted), Indian Institute of Management Ahmedabad
-
-## Contact Information
-
-- Phone: 079-68261643
-- Email: abhishek_tripathy@dau.ac.in
-- Address: # 1205, FB-1, DAU, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/view/abhishek-tripathy/home
 
 ## Biography
 
@@ -43,39 +27,13 @@ Find more about my work on my personal website: **<https://sites.google.com/view
 
 Decentralization and Public Policy, Financial Inclusion, Applied Social Networks Analysis
 
+## Contact Information
 
-
-
-## In-Depth Profile / Student Guide
-
-### Research Identity
-His work is centered around applied economics + data-driven policy research. This is a rare combo: engineering + economics + top IIM research training. This is data + field studies + econometrics, not coding-heavy CS.
-
-### Core Research Areas
-1. **Decentralization & Local Governance:** Gram Panchayat systems. What happens when decentralization is "real vs only on paper"?
-2. **Public Policy Evaluation:** Do village-level governments actually improve healthcare delivery?
-3. **Financial Inclusion:** Banking access, rural finance. How does financial access change rural behavior?
-4. **Applied Social Network Analysis:** How do social networks affect policy outcomes?
-5. **Empirical Microeconomics**
-
-### Research Style
-Based on his academic output (e.g. from his IIM-A CV), he has strong training in advanced econometrics, causal inference, game theory, development economics, and policy modeling.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Students interested in the economics + data science intersection, policy / MBA / research careers.
-* **Not suitable for:** Pure software engineering focus, heavy programming electives.
-
-**Teaching Style:**
-Typical course direction is economics + statistics heavy, case-study + data interpretation based. Less programming, more: regression thinking, policy interpretation, reading datasets / surveys.
-
-**Difficulty Level:**
-* Math intensity: ⭐⭐⭐⭐
-* Coding required: ⭐⭐
-* Theory reading: ⭐⭐⭐⭐⭐
-* Project workload: ⭐⭐⭐⭐
-* CPI friendliness: ⭐⭐⭐ (moderate)
-
-**Hidden Insight:** He has a strong policy + economics + data science profile, focusing on real-world governance problems. Expect more analysis & interpretation and less coding.
-
+- **Office:** ** # 1205, FB-1, DAU, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261643
+- **Email:** ** abhishek_tripathy@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/abhishek-tripathy
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

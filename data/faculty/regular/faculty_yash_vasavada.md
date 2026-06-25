@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Yash Vasavada
-
-# Main Content
-
 # Yash Vasavada
 
 ## Education
 
 PhD (Electrical Engineering), Virginia Polytechnic Institute and State University, USA
-
-## Contact Information
-
-- Phone: 079-68261634
-- Email: yash_vasavada@dau.ac.in
-- Address: # 1224, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- http://intranet.daiict.ac.in/~yash_vasavada/index.html
-- https://scholar.google.co.in/citations?user=9KkhfBgAAAAJ&hl=en
 
 ## Biography
 
@@ -73,45 +56,13 @@ Communication, Signal Processing, Machine Learning
 * Advanced Digital Communications
 * Next Generation Communication Systems
 
+## Contact Information
 
-
-
-## In-Depth Profile / Student Guide
-
-### Research Identity
-His work is in wireless communication + signal processing + ML for comms. Domain: Wireless + satellite communication systems. Style: signal processing + ML for telecom. Strong industry + research hybrid profile (Hughes Network Systems, GEO/MEO/LEO satellite communication systems).
-
-### Core Research Areas
-1. **Satellite communication systems**
-2. **Wireless signal processing**
-3. **MIMO systems and beamforming**
-4. **5G / 6G communication techniques**
-5. **Machine learning applied to communication systems**
-6. **GNSS / interference detection systems**
-7. **Coding theory (LDPC, detection algorithms)**
-
-### Research Style
-He works on problems like: How satellite internet systems transmit data efficiently, How to improve signal quality in noisy environments, How antennas communicate in modern 5G systems, How ML can improve wireless communication decisions, How to detect and isolate interference in satellite signals. Think: "Engineering the invisible infrastructure behind satellite + mobile networks". Publications include: MIMO and spatial modulation systems, Beamforming algorithms for mmWave systems, Neural decoding for LDPC codes (5G-related), Satellite signal interference detection systems, Compressive sensing in wireless communication, Multiple IEEE Transactions papers in communications/signal processing.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Students who like communication systems / signal processing. Interested in: telecom / networking / satellite systems, 5G/6G technologies. Want strong fundamentals in: signals, transforms, probability in comms.
-* **Not suitable for:** Pure software development focus, Easy CPI optimization mindset, Students avoiding math-heavy subjects.
-
-**Teaching Area:**
-Communication Systems, Digital Communications, Advanced Wireless Communication, Signal Processing, Next Generation Communication Systems.
-
-**Teaching Style:**
-Very knowledge-heavy and concept-dense. Focus on: Fourier transforms, modulation theory, signal processing intuition. Assignments require serious effort and analytical thinking. Lectures can feel slow but deep. Mixed perception on engagement: "too detailed / slow pace" for some, "very strong conceptual base" for others. Assignments are not copy-paste friendly. Highly respected for knowledge.
-
-**Difficulty Level:**
-* Concept depth: ⭐⭐⭐⭐⭐
-* Math intensity: ⭐⭐⭐⭐⭐
-* Coding requirement: ⭐⭐⭐
-* Exam difficulty: ⭐⭐⭐⭐
-* CPI friendliness: ⭐⭐⭐
-* Industry relevance: ⭐⭐⭐⭐⭐
-
-**Hidden Insight:** One of the strongest communication systems faculty. Focus on satellite networks + 5G + signal processing. Very industry-relevant but mathematically heavy. Best for telecom / signal processing / systems students.
-
+- **Office:** ** # 1224, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261634
+- **Email:** ** yash_vasavada@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/yash-vasavada
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.co.in/citations?user=9KkhfBgAAAAJ&hl=en
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

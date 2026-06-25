@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of P S Kalyan Sasidhar
-
-# Main Content
-
 # P S Kalyan Sasidhar
 
 ## Education
 
 PhD (Computer Science and Engineering), University of North Texas-Denton, USA
-
-## Contact Information
-
-- Phone: 079-68261560
-- Email: kalyan_sasidhar@dau.ac.in
-- Address: # 2109, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/daiict.ac.in/kalyan-sasidhar/bio
 
 ## Biography
 
@@ -53,43 +37,13 @@ Mobile and Pervasive Computing which include Wireless Sensor Networks, Mobile Ph
 * Distributed Systems
 * Pervasive Sensing Systems
 
+## Contact Information
 
-
-
-## In-Depth Profile / Student Guide
-
-### Research Identity
-His academic work is in systems + sensing + mobile computing. Think: "How phones, sensors, and networks can be used to understand real-world behavior". He is also one of the key student administration + teaching faculty on campus (Dean of Students).
-
-### Core Research Areas
-1. **Mobile and pervasive computing**
-2. **Wireless sensor networks**
-3. **Mobile phone-based sensing systems**
-4. **Distributed systems**
-5. **Network sensing and embedded systems**
-
-### Research Style
-He works on problems like: Using smartphones as sensor networks, Turning everyday devices into data collection systems, Tracking human activity using embedded sensors, Building distributed sensing systems using mobile devices. From faculty profiles and lab work: Mobile sensing platforms using smartphones, Wireless sensor network design, Crowd-sensing systems, Distributed mobile computing testbeds, Systems using discarded smartphones as computing nodes.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Students who like systems + networking + embedded work. Prefer practical learning over pure theory. Want exposure to mobile sensing, IoT systems, distributed systems. Are okay with project-based evaluation.
-* **Not suitable for:** Pure theory/math-heavy learners, Students avoiding lab/project workload, Minimal-effort elective mindset.
-
-**Teaching Area:**
-Embedded Hardware Design, Operating Systems (supporting role in some years), Mobile and Pervasive Computing, Distributed Systems / Networking concepts, Hardware + systems labs.
-
-**Teaching Style:**
-Very structured and practical-oriented. Focus on hands-on implementation. Assignments and labs are important. Generally considered supportive and approachable. Seen as "no-nonsense but fair". Projects and labs are useful but sometimes uneven in workload depending on batch. Grading often perceived as moderate to fair.
-
-**Difficulty Level:**
-* Concept difficulty: ⭐⭐⭐⭐
-* Coding/lab work: ⭐⭐⭐⭐
-* Theory load: ⭐⭐⭐
-* Exam difficulty: ⭐⭐⭐
-* CPI friendliness: ⭐⭐⭐⭐
-* Practical exposure: ⭐⭐⭐⭐⭐
-
-**Hidden Insight:** One of the key systems + mobile computing faculty. Strong focus on sensor networks and smartphone-based systems. Also serves as Dean (Students). Balanced mix of theory + practical implementation.
-
+- **Office:** ** # 2109, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261560
+- **Email:** ** kalyan_sasidhar@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

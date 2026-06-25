@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Madhu Kant Sharma
-
-# Main Content
-
 # Madhu Kant Sharma
 
 ## Education
 
 PhD (Mathematics), IIT Madras
-
-## Contact Information
-
-- Phone: 079-68261554
-- Email: madhukant_sharma@dau.ac.in
-- Address: # 1109, FB-1 , DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://www.researchgate.net/profile/Madhukant-Sharma
-- https://scholar.google.com/citations?user=o_BY9JYAAAAJ&hl=en
 
 ## Biography
 
@@ -62,4 +45,13 @@ Fractional Differential Equations (FDEs), Optimization, Numerical Methods for FD
 * Functions of Several Variables & PDEs
 * Linear Algebra
 
+## Contact Information
 
+- **Office:** ** # 1109, FB-1 , DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261554
+- **Email:** ** madhukant_sharma@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/madhu-kant-sharma
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.com/citations?user=o_BY9JYAAAAJ&hl=en
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

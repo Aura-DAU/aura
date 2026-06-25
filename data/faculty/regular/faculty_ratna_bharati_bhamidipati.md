@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Ratna Bharati Bhamidipati
-
-# Main Content
-
 # Ratna Bharati Bhamidipati
 
 ## Education
 
 PhD (Sociology), Dr B R Ambedkar University, Delhi
-
-## Contact Information
-
-- Phone: 079-68261589
-- Email: ratna_bharati@dau.ac.in
-- Address: # 2202, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -59,43 +47,13 @@ Diaspora , Transnationalism, Migrant Subjectivity
 * **B, Ratna Bharati**. 2019. “Transmission of cultural codes through language: A Study of Gujarati Diaspora in Lisbon, Portugal”. Paper presented at Global Indian Diaspora: Its Contribution in Retention of Indian Culture and India Connect organised by Banaras Hindu University (BHU), Varanasi (22-23 January).
 * **B, Ratna Bharati**. 2017. “Expressing Self through Movies: A Lacanian understanding of Rituparno Ghosh’s ‘Chitrangada”. Paper presented at Media and Subalterns in India organized by Central University of Rajasthan (16-17 March).
 
+## Contact Information
 
-
-
-## In-Depth Profile / Student Guide
-
-### Research Identity
-Her academic work is in sociology of migration and diaspora studies. Domain: Migration studies + diaspora sociology. Style: qualitative research + writing-heavy humanities. Think: "How people, identity, money, and culture move across countries".
-
-### Core Research Areas
-1. **Indian diaspora (especially Gujarati diaspora)**
-2. **Transnational migration networks**
-3. **Migrant identity and subjectivity**
-4. **Remittances and economic migration behavior**
-5. **Social anthropology of mobility**
-
-### Research Style
-She studies questions like: How migrants maintain identity across countries, How families and communities stay connected across borders, How money (remittances) shapes social relationships, How diaspora communities build networks abroad, How "being from Gujarat/India" changes outside India. Her publications include peer-reviewed sociology work such as Gujarati diaspora networks from Dharmaj, Transnational engagement and property investment patterns, Migrant subjectivity and identity formation.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Students who like sociology, humanities, and social science thinking. Interested in: UPSC / humanities research, migration / global studies, writing-heavy electives. Comfortable with essay-based evaluation.
-* **Not suitable for:** Coding-focused students, Easy CPI hunting electives, Technical/engineering-heavy mindset.
-
-**Teaching Area:**
-Sociology of Migration, Indian Society & Culture, Diaspora Studies, Political & Social Theory (contextual humanities courses).
-
-**Teaching Style:**
-Heavy reading + writing-based evaluation. Essay / assignment driven grading. Focus on arguments, reflection, critical writing. Mixed feedback on grading strictness. Some find it hard to score high CPI in humanities electives, others find courses interesting but theory-heavy. Content is engaging, but marks may not be "easy" compared to lighter electives.
-
-**Difficulty Level:**
-* Reading load: ⭐⭐⭐⭐⭐
-* Writing load: ⭐⭐⭐⭐⭐
-* Coding requirement: ⭐
-* Exam difficulty: ⭐⭐⭐⭐
-* CPI friendliness: ⭐⭐⭐
-* Concept difficulty: ⭐⭐⭐⭐
-
-**Hidden Insight:** Strong sociology + diaspora studies faculty. Focus on migration, identity, and transnational networks. Courses are interesting but writing-intensive. Not technical or coding-related.
-
+- **Office:** ** # 2202, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261589
+- **Email:** ** ratna_bharati@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/ratna-bharati-bhamidipati
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

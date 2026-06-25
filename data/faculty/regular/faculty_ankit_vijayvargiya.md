@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Ankit Vijayvargiya
-
-# Main Content
-
 # Ankit Vijayvargiya
 
 ## Education
 
 PhD (Biomedical Signals), Malaviya National Institute of Technology, Jaipur
-
-## Contact Information
-
-- Phone: 079-68261628
-- Email: ankit_vijayvargiya@dau.ac.in
-- Address: # 4205, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://scholar.google.com/citations?hl=en&user=vd5bQocAAAAJ&view_op=list_works&sortby=pubdate
-- https://www.linkedin.com/in/ankit-vijayvargiya/
 
 ## Biography
 
@@ -121,43 +104,13 @@ Introduction to Programming
 
 Object Oriented Programming
 
+## Contact Information
 
-
-
-## In-Depth Profile / Student Guide
-
-### Research Identity
-His work is centered around AI applied to human body signals and rehabilitation systems. Strong AI + healthcare + robotics rehabilitation background. Think: "AI + sensors + human body + rehabilitation robotics".
-
-### Core Research Areas
-1. **Biomedical signal processing:** EMG, EEG, gait signals.
-2. **Human Activity Recognition:** Detecting human movement using sensors (EMG bands), AI systems that understand walking patterns.
-3. **Machine Learning for Healthcare Systems:** Smart healthcare monitoring devices, Deep learning for knee abnormality detection.
-4. **Wearable Sensing Systems:** Activity recognition from wearable devices, Wearable sensor signal processing frameworks.
-5. **Human-Robot Interaction & Neuro-rehabilitation:** Spinal injury recovery systems, Robots that help rehabilitation after injuries.
-
-### Research Style
-His publications span top venues like IEEE, Elsevier, Springer. Core contributions include EMG-based human activity recognition models, Deep learning for knee abnormality detection, Gait analysis using AI, Explainable AI for biomedical signals, Robotic rehabilitation outcome modeling.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Interested in AI / ML + healthcare. Want projects in: computer vision for medical data, wearable computing, robotics + AI. Prefer structured coding courses. Thinking about MS/PhD in AI/biomedical domain.
-* **Not suitable for:** Students avoiding coding, Pure theoretical math/physics interests, Light/easy elective seekers.
-
-**Teaching Area:**
-Introduction to Programming, Object-Oriented Programming (OOP). Despite his research being advanced, his teaching starts from core CS basics.
-
-**Teaching Style:**
-Structured and assignment-heavy. Focus on coding fundamentals (Python / Java depending on course). Mix of theory + practical implementation. Project-based evaluation in some courses. Moderate difficulty. Coding practice important. Reasonable grading if assignments are done.
-
-**Difficulty Level:**
-* Coding workload: ⭐⭐⭐⭐
-* Theory load: ⭐⭐⭐
-* Concept clarity: ⭐⭐⭐⭐
-* Project difficulty: ⭐⭐⭐⭐
-* CPI friendliness: ⭐⭐⭐⭐
-* Research depth: ⭐⭐⭐⭐⭐
-
-**Hidden Insight:** Strong AI in healthcare researcher. Focus on human motion + biomedical signals. Very relevant for ML + robotics + bio-AI careers. Teaching is coding-oriented but structured.
-
+- **Office:** ** # 4205, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261628
+- **Email:** ** ankit_vijayvargiya@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/ankit-vijayvargiya
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.com/citations?hl=en&user=vd5bQocAAAAJ&view_op=list_works&sortby=pubdate
+- **LinkedIn:** ** https://www.linkedin.com/in/ankit-vijayvargiya/
+- **ORCID:** ** *Not available*

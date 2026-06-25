@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Harpreet Singh Jattana
-
-# Main Content
-
 # Harpreet Singh Jattana
 
 ## Education
 
 PhD - Pursuing (Microelectronics – SOI CMOS Process Integration & Modelling), IIT Roorkee
-
-## Contact Information
-
-- Phone: 079-68261718
-- Email: harpreetsingh_jattana@dau.ac.in
-- Address: # 3110, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://www.linkedin.com/in/hs-jattana-00738326?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BnQhQkNQvSPyVpTTq1Zg9sA%3D%3D
 
 ## Biography
 
@@ -132,4 +116,13 @@ Have taught the following courses to MTech/PhD /Btech students at IIST Trivandru
 
 VLSI Analog Design, CMOS Pro-cess development (SOI, Bipolar, nvm) & Integration, RadHard Technology, Compound semi-conductor – hetero-epi struc-ture growth and bandgap engg
 
+## Contact Information
 
+- **Office:** ** # 3110, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261718
+- **Email:** ** harpreetsingh_jattana@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/professor-practice/harpreet-singh-jattana
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** https://www.linkedin.com/in/hs-jattana-00738326?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BnQhQkNQvSPyVpTTq1Zg9sA%3D%3D
+- **ORCID:** ** *Not available*

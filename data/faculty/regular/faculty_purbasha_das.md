@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Purbasha Das
-
-# Main Content
-
 # Purbasha Das
 
 ## Education
 
 PhD (History), Jawaharlal Nehru University, New Delhi
-
-## Contact Information
-
-- Phone: 079-68261653
-- Email: purbasha_das@daiict.ac.in
-- Address: # 4210, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -43,4 +31,13 @@ History of Transport and Communication, Urban History, Legal and Social History
 
 History of Science and Technology, History of Health and Environment
 
+## Contact Information
 
+- **Office:** ** # 4210, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261653
+- **Email:** ** purbasha_das@daiict.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/purbasha-das
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

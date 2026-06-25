@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of G. Venkatesh
-
-# Main Content
-
 # G. Venkatesh
 
 ## Education
 
 PhD (Computer Science), TIFR, Mumbai
-
-## Contact Information
-
-- Phone: 079-68261565
-- Email: venkatesh_g@dau.ac.in
-- Address: # Administration Block, First Floor, Director - SoT office, DAU, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -35,4 +23,13 @@ Dr. Venkatesh was elected as a fellow of the Indian National Academy of Engineer
 
 Dr. Venkatesh serves on a number of government, industry and investor committees and boards in the areas of microelectronics, telecommunications and education. He is a director on the board of five companies, including the Section 8 companies IITM Pravartak and IIITDM MadeIT, both of which commercialise technology ideas through startups. He is also a founder of the Communications Systems and Networks Association which runs two premier international conferences in India - Comsnets (focused on network technology) and AIML systems (focused on AI and ML systems). He is a member of the governing council of the Centre for Excellence in Wireless Technology (CeWiT) at IIT Madras, board of governors of NIT Nagaland and Dhirubhai Ambani University, faculty selection & promotion committee of IIIT Bangalore, and has served as the chairman of the government’s Uchhatar Avishkar Yojana (UAY) expert committee on electronics, computing and telecommunication.
 
+## Contact Information
 
+- **Office:** ** # Administration Block, First Floor, Director - SoT office, DAU, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261565
+- **Email:** ** venkatesh_g@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/g-venkatesh
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

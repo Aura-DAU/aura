@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Deepak Ghodgaonkar
-
-# Main Content
-
 # Deepak Ghodgaonkar
 
 ## Education
 
 PhD (Electrical Engineering), University of Utah, USA
-
-## Contact Information
-
-- Phone: 079-68261623
-- Email: deepak_ghodgaonkar@dau.ac.in
-- Address: # 1103, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://scholar.google.co.in/citations?user=CSK9tLMAAAAJ&hl=en&cstart=20&pagesize=20
 
 ## Biography
 
@@ -59,4 +43,13 @@ RF and Microwave Engineering, Microwave Nondestructive Testing of Composite Mate
 * Electromagnetic Fields and Waves
 * Satellite Communications and Materials Science
 
+## Contact Information
 
+- **Office:** ** # 1103, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261623
+- **Email:** ** deepak_ghodgaonkar@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/deepak-ghodgaonkar
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.co.in/citations?user=CSK9tLMAAAAJ&hl=en&cstart=20&pagesize=20
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

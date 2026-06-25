@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Prasenjit Majumder (On Leave)
-
-# Main Content
-
 # Prasenjit Majumder (On Leave)
 
 ## Education
 
 PhD (Computer Science), Jadavpur University
-
-## Contact Information
-
-- Phone: 079-68261605
-- Email: p_majumder@dau.ac.in prasenjit.majumder@gmail.com
-- Address: # 4209, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- http://intranet.daiict.ac.in/~p_majumder/
-- https://scholar.google.co.in/citations?user=Cf-XE08AAAAJ&hl=en&oi=ao
 
 ## Specialization
 
@@ -59,4 +42,13 @@ Natural Language Processing, Information Retrieval, Cognitive Science
 * Operating systems
 * Introduction to Programming
 
+## Contact Information
 
+- **Office:** ** # 4209, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261605
+- **Email:** ** p_majumder@dau.ac.in prasenjit.majumder@gmail.com
+- **Profile:** ** https://www.daiict.ac.in/faculty/prasenjit-majumder
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.co.in/citations?user=Cf-XE08AAAAJ&hl=en&oi=ao
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

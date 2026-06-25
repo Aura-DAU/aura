@@ -7,24 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Troy Vasanth
-
-# Main Content
-
 # Troy Vasanth
 
 ## Education
 
 PGDPD (Animation Film Design), NID, Ahmedabad
 
-## Contact Information
-
-- Email: troy_vasanth@dau.ac.in
-
 ## Specialization
 
 Sound Design, 3D, Animation and Motion Design
 
+## Contact Information
 
+- **Office:** ** *Not available*
+- **Phone:** ** *Not available*
+- **Email:** ** troy_vasanth@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/troy-vasanth
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

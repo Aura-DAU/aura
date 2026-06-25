@@ -7,24 +7,23 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Gabriella Pasi
-
-# Main Content
-
 # Gabriella Pasi
 
 ## Education
 
 PhD (Computer Science), University of Rennes, France
 
-## Contact Information
-
-- Email: gabriella_pasi@dau.ac.in
-
 ## Specialization
 
 Information Retrieval, Information Filtering, Data Science, Fuzzy Logic
 
+## Contact Information
 
+- **Office:** ** *Not available*
+- **Phone:** ** *Not available*
+- **Email:** ** gabriella_pasi@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty-international/gabriella-pasi
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

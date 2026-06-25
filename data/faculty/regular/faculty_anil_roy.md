@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Anil Roy"
 url: "https://www.daiict.ac.in/faculty/anil-roy"
 category: "Faculty"
@@ -7,28 +7,9 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-# Overview
+# Anil Roy
 
-Faculty profile page for Anil Roy at Dhirubhai Ambani University (DAU), Gandhinagar.
-
-# Main Content
-
-### Anil Roy
-
-Anil Roy (On Leave)
- 
-PhD (Physics), IIT Delhi
-Contact Details
- 
-079-68261613
- 
-# 1104, FB-1, DA-IICT, Gandhinagar, Gujarat, India â€“ 382007
- 
-anil_roy@dau.ac.in
- 
-Scholar
-https://anilroy.incandescentsolution.com/
-Biography
+## Biography
 
 I am a faculty of DA-IICT, Gandhinagar (India) and am an alumnus of IIT Delhi and IIT Roorkee. I obtained my PhD degree in Physics from IIT Delhi in 1993. Prior to joining DA-IICT in 2003, I worked at Centre for Theoretical Studies at Indian Institute of Science, Bangalore (India) during 1993-94 followed by the Optical Fiber Group at IIT Delhi (India) till 1996. My main academic interest areas are sensors, Internet of Things, image processing, fiber optics, semiconductor physics, applications of technologies for humanitarian challenges. 
 
@@ -38,64 +19,34 @@ Some of the notable awards which I won are: 2019 IEEE India Council Section Chai
 
 KNOW MORE
 
-Specialization
+## Specialization
 
 Applications of Image Processing, Fiber Optics and Optical Communication, High speed Semiconductor Devices, Nanoscience and Nanotechnology, Quantum Optics, Technologies for Humanitarian Challenges.
 
-Publications
+## Publications
 
 Priyanka Khaparde, Kamlesh S. Patle, Hitesh Borkar, Jitendra Gangwar, Anil K. Roy, and Vinay S. Palaparthy (2024), â€œInvestigating an Impact of Leaf Bending Radius and Angle for Flexible Leaf Wetness Sensor,â€ in IEEE Sensors Letters, vol. 8, no. 3, pp. 1-4, Mar. 2024. DOI: 10.1109/LSENS.2024.3355371.
 
-Teaching
+## Teaching
+
 Engineering Design Workshop (1st sem BTech Core course)
 Engineered Materials (4th sem BTech Core course)
 Electromagnetic Theory (3rd sem BTech Core course)
 Solid State Devices (6th sem BTech Elective course)
 
-# Contact Information
-
 - **Email:** anil_roy@dau.ac.in
-
-# Related Links
 
 - [Faculty Profile](https://www.daiict.ac.in/faculty/anil-roy)
 - [DAU Faculty Directory](https://daiict.ac.in/faculty)
 - [DAU Website](https://www.daiict.ac.in)
 
+## Contact Information
 
-## In-Depth Profile / Student Guide
-
-### Research Identity
-His work spans hardware, sensing, optics, and applied AI systems. This is a pure physics + optics + applied engineering research background, not CS. He is associated with multiple cross-domain groups: Sensors & IoT, Image Processing, Optical / Fiber Systems. One of the oldest-generation DA-IICT faculty.
-
-### Core Research Areas
-1. **Sensor Systems:** Flexible environmental sensors (leaf wetness, humidity, agriculture use cases), Nanomaterial-based sensing devices (e.g., MoS2 sensors).
-2. **Image Processing + AI:** Digital image tampering detection, PolSAR image classification (remote sensing + ML).
-3. **Applied IoT Systems:** Smart agriculture monitoring systems, Assistive devices (medical + mobility systems).
-4. **Humanitarian Engineering:** Low-cost water collection systems ("dew water harvesting" type systems).
-
-### Research Style
-His lab work and publications include ML for image classification (PolSAR, remote sensing), Sensor hardware design + calibration, Signal processing for physical systems, and AI applied to physical measurement devices. Style is hardware-first, physics-heavy engineering.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Students who like hardware + sensors + IoT, are okay with physics-heavy engineering, enjoy project + lab-based evaluation, and want exposure to ML applied to physical systems.
-* **Not suitable for:** Pure software engineering focus, easy-grades / CPI boosting electives, minimal effort coding courses.
-
-**Teaching Area:**
-Engineering Design Workshop (1st year core), Engineered Materials, Electromagnetic Theory, Solid State Devices. These are physics + electronics foundation courses, not software-heavy CS courses.
-
-**Teaching Style:**
-Highly discipline-heavy classroom environment. Focus on attendance + assignments + viva performance. Project-based evaluation in some courses. Strict grading in many core courses. Very polarizing: some find him structured and rigorous, others find grading unpredictable in project/viva components.
-
-**Difficulty Level:**
-* Concept difficulty: ⭐⭐⭐⭐
-* Math/physics load: ⭐⭐⭐⭐
-* Coding requirement: ⭐⭐
-* Lab/project load: ⭐⭐⭐⭐⭐
-* CPI friendliness: ⭐⭐
-* Practical exposure: ⭐⭐⭐⭐⭐
-
-**Hidden Insight:** Strong background in physics + optics + sensors. Research blends AI + hardware + IoT. Known for rigorous core courses and strict evaluation style.
-
+- **Office:** *Not available*
+- **Phone:** *Not available*
+- **Email:** *Not available*
+- **Profile:** https://www.daiict.ac.in/faculty/anil-roy
+- **Website:** https://anilroy.incandescentsolution.com/
+- **Google Scholar:** *Not available*
+- **LinkedIn:** *Not available*
+- **ORCID:** *Not available*

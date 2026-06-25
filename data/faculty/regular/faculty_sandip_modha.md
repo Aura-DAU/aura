@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Sandip Modha
-
-# Main Content
-
 # Sandip Modha
 
 ## Education
 
 PhD, DA-IICT Gandhinagar
-
-## Contact Information
-
-- Phone: 079-68261672
-- Email: sandip_modha@dau.ac.in
-- Address: # 2201, FB-2, DAU, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://scholar.google.com/citations?user=J0lkcsQAAAAJ
 
 ## Biography
 
@@ -85,4 +69,13 @@ Natural Language Processing (NLP), Information Retrieval (IR), Evaluation Method
 * Information Retrieval
 * Natural Language Processing
 
+## Contact Information
 
+- **Office:** ** # 2201, FB-2, DAU, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261672
+- **Email:** ** sandip_modha@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/sandip-modha
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.com/citations?user=J0lkcsQAAAAJ
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

@@ -7,28 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Bhaskar Chaudhury
-
-# Main Content
-
 # Bhaskar Chaudhury
 
 ## Education
 
 PhD (Computational Plasma Physics), IPR, Gandhinagar
-
-## Contact Information
-
-- Phone: 079-68261590
-- Email: bhaskar_chaudhury@dau.ac.in
-- Address: # 2204, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://scholar.google.co.in/citations?user=Bp4D0JoAAAAJ&hl=en
-- https://sites.google.com/site/bhaskarchaudhury/
 
 ## Biography
 
@@ -93,4 +76,13 @@ Computing, Parallel Programming, Data Visualization, Applications of AI/ML
 * Introduction to GPU Programming
 * Accelerated Computing
 
+## Contact Information
 
+- **Office:** ** # 2204, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261590
+- **Email:** ** bhaskar_chaudhury@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/bhaskar-chaudhury
+- **Website:** *Not available*
+- **Google Scholar:** ** https://scholar.google.co.in/citations?user=Bp4D0JoAAAAJ&hl=en
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

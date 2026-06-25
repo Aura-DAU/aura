@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Sunitha V
-
-# Main Content
-
 # Sunitha V
 
 ## Education
 
 PhD (Mathematics), IIT Madras
-
-## Contact Information
-
-- Phone: 079-68261563
-- Email: v_suni@dau.ac.in
-- Address: # 1212, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -50,43 +38,13 @@ Theory, Algorithms (Parallel, Distributed, Dynamic), Applications of Graphs
 * Algorithmic Graph Theory
 * Parallel, Distributed and Dynamic Algorithms
 
+## Contact Information
 
-
-
-## In-Depth Profile / Student Guide
-
-### Research Identity
-Her work is in graph theory + network algorithms + mathematical modeling. Domain: Graph theory + network algorithms. Style: mathematical + theoretical CS. Strong pure math + graph theory + algorithms background.
-
-### Core Research Areas
-1. **Graph theory**
-2. **Parallel and distributed algorithms**
-3. **Dynamic graph problems**
-4. **Network controllability**
-5. **Applications in communication networks & complex systems**
-
-### Research Style
-She studies questions like: How do large networks behave when nodes/links change? How can we control or influence complex networks? How do algorithms behave on graphs in real systems? How do network structures affect communication efficiency? Think: "Mathematics of networks, graphs, and large systems". Publications include work in: Network controllability in biological systems, Graph-based modeling of complex systems, Quantum memory channel modeling (mathematical physics intersection), Algorithmic graph theory applications.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Students who like theoretical CS / algorithms. Interested in: graph theory, algorithms research, MS/PhD in CS theory. Comfortable with proofs and abstract reasoning.
-* **Not suitable for:** Software engineering / coding-only mindset, Easy CPI electives, Avoiding math-heavy subjects.
-
-**Teaching Area:**
-Discrete Mathematics, Graph Theory, Design and Analysis of Algorithms (DAA), Parallel & Distributed Algorithms, Advanced graph-based modeling courses.
-
-**Teaching Style:**
-Very theory-heavy and proof-based. Strong focus on: graph proofs, algorithm correctness, mathematical reasoning. Exams typically: concept + proof + derivation based. Moderate to high difficulty. Very conceptual but logical if understood well. Not coding-heavy.
-
-**Difficulty Level:**
-* Concept depth: ⭐⭐⭐⭐⭐
-* Math rigor: ⭐⭐⭐⭐⭐
-* Coding requirement: ⭐⭐
-* Exam difficulty: ⭐⭐⭐⭐
-* CPI friendliness: ⭐⭐⭐
-* Concept clarity: ⭐⭐⭐⭐
-
-**Hidden Insight:** Strong graph theory + algorithms faculty. Focus on networks, graphs, and distributed systems. Very theoretical and proof-heavy. Best for CS theory / algorithm enthusiasts.
-
+- **Office:** ** # 1212, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261563
+- **Email:** ** v_suni@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/sunitha-v
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

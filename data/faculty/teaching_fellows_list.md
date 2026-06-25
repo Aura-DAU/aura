@@ -7,27 +7,15 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# People / Teaching Fellow
 
-* Teaching Fellows
-  * Past Teaching Fellows
+## Contact Information
 
-# Main Content
-
-* Teaching Fellows
-  * Past Teaching Fellows
-
-
-Anuj budhia
-
-Designation : Teaching Fellow
-
-Joining Date : 27/01/2026
-
-Office : TA/RA Room, FB-2, DAU, Gandhinagar, Gujarat, India – 382007
-
-# Related Links
-
-- [People / Teaching Fellow](https://www.daiict.ac.in/teaching-fellows)
-- [Dhirubhai Ambani University Website](https://www.daiict.ac.in)
-
+- **Office:** ** *Not available*
+- **Phone:** ** *Not available*
+- **Email:** ** *Not available*
+- **Profile:** ** https://www.daiict.ac.in/teaching-fellows
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

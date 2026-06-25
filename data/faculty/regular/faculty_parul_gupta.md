@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Parul Gupta
-
-# Main Content
-
 # Parul Gupta
 
 ## Education
 
 PhD (Economics), IIT Delhi
-
-## Contact Information
-
-- Phone: 079-68261744
-- Email: parul_gupta@dau.ac.in
-- Address: # 4102, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/view/gupta-parul/home
 
 ## Biography
 
@@ -70,4 +54,13 @@ Economic Development, Education Policy, Economics of Gender
 * Development Economics
 * Quantitative methods in economics
 
+## Contact Information
 
+- **Office:** ** # 4102, FB-4, DAU, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261744
+- **Email:** ** parul_gupta@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/parul-gupta
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

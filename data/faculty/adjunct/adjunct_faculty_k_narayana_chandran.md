@@ -7,21 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of K Narayana Chandran
-
-# Main Content
-
 # K Narayana Chandran
 
 ## Education
 
 PhD, Indian Institute of Technology Bombay
-
-## Contact Information
-
-- Email: knarayana_chandran@dau.ac.in
 
 ## Specialization
 
@@ -33,4 +23,13 @@ English Poetry and Theory; English Pedagogy and Politics of the discipline; Indi
 
 Translation; Allusion, intertextuality and intergenres; Short Narrative Forms including short fiction; Reading Relations ...
 
+## Contact Information
 
+- **Office:** ** *Not available*
+- **Phone:** ** *Not available*
+- **Email:** ** knarayana_chandran@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty/k-narayana-chandran
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

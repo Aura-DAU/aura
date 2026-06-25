@@ -7,12 +7,6 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Abhishek Gupta
-
-# Main Content
-
 # Abhishek Gupta
 
 ## Education
@@ -22,19 +16,21 @@ Profile of Abhishek Gupta
 * **MS in Intelligent Systems**, De Montfort University, UK
 * **BE in Electronics and Telecommunication Engineering**, Savitribai Phule Pune University, India
 
-## Contact Information
-
-- Phone: 079-68261598
-- Email: abhishek_gupta@dau.ac.in
-- Address: # 3208, FB-3, DAU, Gandhinagar, Gujarat, India – 382007
-
 ## Biography
 
 Dr. Abhishek Gupta received his PhD in Electrical and Computer Engineering from Toronto Metropolitan University, Canada. During his PhD, he worked on the application of Machine Learning techniques for performance optimization in Wireless Communications. He also holds an MS in Electrical and Computer Engineering from Toronto Metropolitan University, Canada, where he worked on Computer Vision in Autonomous Vehicles using machine learning techniques. Prior to this, he completed an MS in Intelligent Systems from De Montfort University, UK, and a BE in Electronics and Telecommunication Engineering from Savitribai Phule Pune University, Pune, India. His research interests lie at a rare intersection of machine learning, signal processing, wireless communications, and computer vision.
 
-## Specialization & Core Domains
+## Specialization
 
 Machine Learning, Wireless Communications, Signal Processing, Computer Vision, Autonomous Vehicles
+
+## Teaching
+
+* **Signals and Systems:** Fourier transforms, LTI systems, Frequency analysis
+* **Computer Networks:** TCP/IP, Routing, Congestion control, Protocol design
+* **Digital Communications:** Modulation, Coding, Channel models
+* **Network Security:** Authentication, Encryption, Secure communication
+* **Probability and Statistics:** Random variables, Estimation, Statistical inference
 
 ## Research Identity & Themes
 
@@ -54,15 +50,8 @@ Focuses on machine vision, scene perception, vehicle sensing, and ML-based recog
 * **Machine Learning:** Predictive modeling, learning-based optimization, network intelligence, data-driven communications.
 * **Statistical Signal Processing:** Noise filtering, signal estimation, detection theory, communication signal analysis.
 * **RF Communications:** Cellular systems, wireless performance analysis, coverage prediction, interference modeling.
+
 * **Computer Vision:** Autonomous vehicle perception, object recognition, scene understanding, ML-driven visual systems.
-
-## Teaching
-
-* **Signals and Systems:** Fourier transforms, LTI systems, Frequency analysis
-* **Computer Networks:** TCP/IP, Routing, Congestion control, Protocol design
-* **Digital Communications:** Modulation, Coding, Channel models
-* **Network Security:** Authentication, Encryption, Secure communication
-* **Probability and Statistics:** Random variables, Estimation, Statistical inference
 
 ## Prospective Students & Projects
 
@@ -76,3 +65,14 @@ Focuses on machine vision, scene perception, vehicle sensing, and ML-based recog
 * **PhD Level:** Learning-driven communication systems, Stochastic network optimization, Intelligent wireless infrastructure.
 
 **Hidden Insight:** Among DAU faculty, Abhishek Gupta is particularly valuable if you want to combine Mathematics + Machine Learning + Wireless Systems, pointing toward AI for communication networks and intelligent infrastructure (closely aligned with future 6G research).
+
+## Contact Information
+
+- **Office:** ** # 3208, FB-3, DAU, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261598
+- **Email:** ** abhishek_gupta@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/abhishek-gupta
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

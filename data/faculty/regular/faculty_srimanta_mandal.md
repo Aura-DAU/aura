@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Srimanta Mandal
-
-# Main Content
-
 # Srimanta Mandal
 
 ## Education
 
 PhD (Computing and Electrical Engineering), IIT Mandi
-
-## Contact Information
-
-- Phone: 079-68261621
-- Email: srimanta_mandal@dau.ac.in
-- Address: # 4203, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://srimanta-mandal.github.io/
 
 ## Biography
 
@@ -83,4 +67,13 @@ Image Processing, Computer Vision, Machine Learning
 
 * SAR Polarimetric image classification using Wishart Mixture Model and Convolution Neural Networks"-ISRO [2020-2023] (PI)
 
+## Contact Information
 
+- **Office:** ** # 4203, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261621
+- **Email:** ** srimanta_mandal@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/srimanta-mandal
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

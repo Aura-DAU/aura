@@ -7,21 +7,19 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Gaurav Sharma
-
-# Main Content
-
 # Gaurav Sharma
-
-## Contact Information
-
-- Email: gaurav.sharma@rochester.edu
-- Address: Professor of Electrical and Computer Engineering, University of Rochester, CSB 725, Box 270231, Rochester, NY 14627-0231 USA
 
 ## Specialization
 
 Data Analytics, Cyber Physical Systems, Signal and Image Processing, Computer Vision, Media Security, Communications
 
+## Contact Information
 
+- **Office:** ** Professor of Electrical and Computer Engineering, University of Rochester, CSB 725, Box 270231, Rochester, NY 14627-0231 USA
+- **Phone:** ** *Not available*
+- **Email:** ** gaurav.sharma@rochester.edu
+- **Profile:** ** https://www.daiict.ac.in/adjunct-faculty-international/gaurav-sharma
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

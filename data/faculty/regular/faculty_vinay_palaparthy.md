@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Vinay Palaparthy
-
-# Main Content
-
 # Vinay Palaparthy
 
 ## Education
 
 PhD (Electrical Engineering), IIT Bombay
-
-## Contact Information
-
-- Phone: 079-68261677
-- Email: vinay_shrinivas@dau.ac.in
-- Address: # 1208, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -169,44 +157,13 @@ University Topper in M.Sc. Electronics (2011)
 
 * MeitY
 
+## Contact Information
 
-
-
-## In-Depth Profile / Student Guide
-
-### Research Identity
-His research is strongly hardware + sensors + AI-enabled agriculture systems. Strong background in: MEMS (Micro-Electro-Mechanical Systems), Sensor physics, IoT hardware systems, Nano-material based devices.
-
-### Core Research Areas
-1. **MEMS / Micro & Nano sensors**
-2. **IoT-based sensing systems**
-3. **Embedded hardware design**
-4. **AI/ML for sensor data**
-5. **Smart agriculture systems**
-6. **Self-healing / self-calibrating sensor systems**
-
-### Research Style
-He builds systems like: Smart soil moisture sensors for farming, Leaf disease detection using sensors + ML, IoT devices that monitor crops in real time, Self-calibrating sensor networks, Embedded systems for agriculture + environment. Think: "Real-world smart farming + sensor networks + AI". His work includes: Graphene / MoS2 / MXene-based flexible sensors, IoT-enabled plant disease detection systems, MEMS-based environmental sensing platforms, AI-based agriculture prediction systems. He also has multiple patents, an industry-linked startup, and government-funded IoT projects.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Students who like IoT / embedded systems / sensors. Interested in: smart agriculture tech, hardware + AI integration, electronics + real-world systems. Prefer hands-on projects over theory exams.
-* **Not suitable for:** Pure software engineering focus, Theory-heavy ML/math interests, Low-effort CPI strategy.
-
-**Teaching Area:**
-Introduction to MEMS, Sensors and Instrumentation, Internet of Things (IoT), Embedded Hardware Design, Digital Logic Design.
-
-**Teaching Style:**
-Very project + lab heavy. Strong focus on: hardware understanding, sensor-based systems. Assignments often involve: IoT prototypes, embedded system coding + circuits. Practical-oriented evaluation. Moderate difficulty. Can be scoring if projects are good. Requires consistent lab work.
-
-**Difficulty Level:**
-* Hardware depth: ⭐⭐⭐⭐⭐
-* Coding requirement: ⭐⭐⭐
-* Project workload: ⭐⭐⭐⭐⭐
-* Theory load: ⭐⭐⭐
-* CPI friendliness: ⭐⭐⭐⭐
-* Practical value: ⭐⭐⭐⭐⭐
-
-**Hidden Insight:** Strong IoT + sensor + embedded systems faculty. Focus on real-world smart agriculture + MEMS devices. Very project-driven and practical. Ideal for hardware + IoT + embedded learners.
-
+- **Office:** ** # 1208, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261677
+- **Email:** ** vinay_shrinivas@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/vinay-palaparthy
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

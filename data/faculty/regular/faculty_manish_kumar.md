@@ -7,23 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Manish Kumar
-
-# Main Content
-
 # Manish Kumar
 
 ## Education
 
 PhD (Electrical Engineering), IIT Patna
-
-## Contact Information
-
-- Phone: 079-68261678
-- Email: manish_kumar@dau.ac.in
-- Address: # 3102, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Biography
 
@@ -75,44 +63,13 @@ https://www.daiict.ac.in/node/6755
 
 https://www.daiict.ac.in/node/6756
 
+## Contact Information
 
-
-
-## In-Depth Profile / Student Guide
-
-### Research Identity
-His research is heavily wireless systems + AI-driven networking. Think: "Next-generation internet + drones + smart sensors + AI optimization". Strong background in wireless communications, signal processing, optimization for networks.
-
-### Core Research Areas
-1. **5G / 6G wireless communication systems**
-2. **UAV (drone) networks**
-3. **Sensor networks & ad-hoc networks**
-4. **IoT (wireless-powered IoT systems)**
-5. **AI/ML for wireless optimization**
-6. **Blockchain applications in networks**
-
-### Research Style
-He works on problems like: How drones communicate efficiently in networks, How to optimize 5G/6G signal performance, How IoT devices can work with low energy, How to reduce interference in wireless systems, How AI can improve network routing. His publications include top IEEE conferences and journals. Key directions: UAV-assisted communication systems, RIS (Reconfigurable Intelligent Surfaces) in wireless networks, Energy-efficient IoT routing, Machine learning for network optimization.
-
-### Prospective Students & Projects
-
-**Student Fit Analysis:**
-* **Best suited for:** Students who like wireless systems / telecom / AI networks. Interested in: 5G/6G technology, drones / IoT / sensor systems, ML applied to networks. Comfortable with math + engineering thinking.
-* **Not suitable for:** Pure software development focus, Easy elective seekers, Minimal math interest.
-
-**Teaching Area:**
-Optimization, Probability & Statistics, Digital Communications, Advanced Wireless Communications.
-
-**Teaching Style:**
-Very math-heavy but structured. Focus on derivations + optimization intuition. Slides are important but lectures help significantly. Assignments often involve calculations, algorithmic reasoning, optimization problems. Considered a good teacher when attending lectures. Moderate difficulty exams. Requires consistent practice in math.
-
-**Difficulty Level:**
-* Math intensity: ⭐⭐⭐⭐⭐
-* Coding requirement: ⭐⭐
-* Concept clarity: ⭐⭐⭐⭐
-* Exam difficulty: ⭐⭐⭐⭐
-* CPI friendliness: ⭐⭐⭐⭐
-* Practical relevance: ⭐⭐⭐⭐⭐
-
-**Hidden Insight:** Strong wireless networking + AI systems researcher. Focus on 5G/6G, UAVs, IoT optimization. Good balance of theory + practical relevance. Best for telecom / ML systems / networking students.
-
+- **Office:** ** # 3102, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261678
+- **Email:** ** manish_kumar@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/manish-kumar
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*

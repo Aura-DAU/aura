@@ -7,27 +7,11 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
-
-Profile of Sujay Kadam
-
-# Main Content
-
 # Sujay Kadam
 
 ## Education
 
 PhD (Electrical Engineering), IIT Gandhinagar
-
-## Contact Information
-
-- Phone: 079-68261584
-- Email: sujay_kadam@dau.ac.in
-- Address: # 1210, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-## Website Links
-
-- https://sites.google.com/iitgn.ac.in/sujaykadam/home
 
 ## Biography
 
@@ -77,4 +61,13 @@ Instrumentation, Systems and Control Theory, Human-Motor Learning, Robotics
 
 Robotics, Control Theory, Autonomous Ground and Underwater Vehicles, Human Motor Learning, Learning Controllers, Subspace State-Space System Identification
 
+## Contact Information
 
+- **Office:** ** # 1210, FB-1, DA-IICT, Gandhinagar, Gujarat, India – 382007
+- **Phone:** ** 079-68261584
+- **Email:** ** sujay_kadam@dau.ac.in
+- **Profile:** ** https://www.daiict.ac.in/faculty/sujay-kadam
+- **Website:** *Not available*
+- **Google Scholar:** ** *Not available*
+- **LinkedIn:** ** *Not available*
+- **ORCID:** ** *Not available*
