@@ -112,20 +112,35 @@ class BM25Retriever:
             if x
         )
     
+    # Fix #12: expanded from 12 words to a comprehensive English stopword
+    # list. Common query tokens like "which", "when", "where", "tell",
+    # "about", "with" were previously polluting BM25 term frequencies.
     STOPWORDS = {
-        "what",
-        "how",
-        "does",
-        "are",
-        "the",
-        "a",
-        "an",
-        "in",
-        "of",
-        "for",
-        "to",
-        "is",
-        "on"
+        # question words
+        "what", "which", "who", "whom", "whose", "when", "where", "why", "how",
+        # articles / determiners
+        "a", "an", "the", "this", "that", "these", "those",
+        # prepositions
+        "in", "of", "for", "to", "at", "by", "from", "with", "about",
+        "into", "through", "during", "before", "after", "above", "below",
+        "between", "out", "off", "over", "under", "again", "on", "up",
+        # conjunctions
+        "and", "or", "but", "so", "yet", "nor", "both", "either",
+        # auxiliaries / copulas
+        "is", "are", "was", "were", "be", "been", "being",
+        "has", "have", "had", "do", "does", "did",
+        "will", "would", "shall", "should", "may", "might", "must",
+        "can", "could",
+        # pronouns
+        "i", "me", "my", "myself", "we", "our", "ours", "ourselves",
+        "you", "your", "yours", "he", "him", "his", "she", "her", "hers",
+        "it", "its", "they", "them", "their", "theirs",
+        # common filler verbs / adverbs
+        "tell", "give", "show", "get", "let", "make", "know", "see",
+        "also", "just", "very", "more", "all", "any", "some", "no",
+        "not", "only", "same", "than", "then", "too", "own", "such",
+        # misc
+        "please", "like", "list", "need", "want", "find", "look",
     }
 
 

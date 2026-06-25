@@ -1,4 +1,5 @@
 import os
+import math
 import torch
 from transformers import (
     AutoTokenizer,
@@ -252,7 +253,10 @@ class Reranker:
                     chunk_semester
                     and chunk_semester != query_semester
                 ):
-                    semester_penalty = -0.20
+                    # Fix #13: use a proportional penalty (10 % reduction of
+                    # the normalised cross-score) instead of a hard -0.20 that
+                    # is negligible at high logit values (e.g. +5.0 → +4.80).
+                    semester_penalty = -0.10  # applied to the normalised score
 
             course_match_boost = 0.0
 
@@ -273,7 +277,10 @@ class Reranker:
                     "course_code"
                 ) == query_course:
 
-                    course_match_boost = 0.35
+                    # Fix #4: course_match_boost is now used as a weighted
+                    # component (coefficient 0.20) rather than a raw add of
+                    # 0.35, which previously inflated poorly-relevant chunks.
+                    course_match_boost = 1.0  # normalised; weight applied below
 
             h1 = str(
                 metadata.get("h1") or ""
@@ -311,12 +318,20 @@ class Reranker:
                         self.H3_BOOST
                     )
 
-            dense_score = (
-                result.get(
-                    "score",
-                    0
-                )
-            )
+            # Fix #4: sigmoid-normalize the cross-encoder logit to [0, 1]
+            # so it is on the same scale as all other components.  Previously
+            # the raw logit (range -∞ to +∞) dominated the formula while the
+            # dense_score contribution (RRF value × 0.10 ≈ 0.002) was noise.
+            norm_cross = 1.0 / (1.0 + math.exp(-float(cross_score)))
+
+            # Fix #4: scale the RRF/cosine dense score.  RRF values top out at
+            # ~0.033 so the old 0.10 weight was effectively zero (≈ 0.003).
+            # Use the cosine_score if available (range 0–1), else rrf_score.
+            raw_dense = result.get("cosine_score") or result.get("rrf_score") or result.get("score") or 0.0
+            # Clamp cosine/rrf to [0, 1]
+            norm_dense = max(0.0, min(float(raw_dense), 1.0))
+
+            dense_score = norm_dense
 
             required_section_boost = 0.0
 
@@ -340,20 +355,25 @@ class Reranker:
                 section_boost += 0.25
 
 
+            # Fix #4: all components are now on comparable scales [0, 1].
+            # course_match_boost is weighted at 0.20 (was a raw +0.35 add).
+            # semester_penalty is applied to the normalised cross component.
             final_score = (
-                (0.72 * float(cross_score))
+                (0.65 * norm_cross)
                 +
-                (0.10 * dense_score)
+                (0.15 * dense_score)
                 +
                 (0.05 * metadata_boost)
                 +
                 (0.05 * required_section_boost)
                 +
-                (0.08 * section_boost)
+                (0.05 * section_boost)
                 +
-                semester_penalty
+                (0.05 * course_match_boost)
                 +
-                course_match_boost
+                # Fix #13: penalty is now a fraction of the normalised cross
+                # score so it remains meaningful even at high relevance.
+                (semester_penalty * norm_cross)
             )
 
             result[
@@ -376,4 +396,4 @@ class Reranker:
             reverse=True
         )
 
-        return reranked
+        return reranked

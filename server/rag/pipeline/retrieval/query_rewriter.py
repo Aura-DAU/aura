@@ -22,7 +22,9 @@ class QueryRewriter:
 
         history_text = ""
 
-        for turn in history[-8:]:
+        # Fix #10: aligned to 6 turns (was 8) so the rewriter uses the same
+        # history window as the answer generator, preventing context mismatch.
+        for turn in history[-6:]:
 
             history_text += (
                 f"{turn['role']}: "

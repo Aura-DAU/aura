@@ -153,48 +153,53 @@ class RetrievalPipeline:
         self,
         plan
     ):
+        """Build a Pinecone metadata filter from extracted entities.
+
+        Fix F: multi-value entity lists (e.g. two programs in a comparison
+        query) now use the $in operator instead of discarding all but the
+        first value via first_value().
+        """
 
         def first_value(value):
-
             if isinstance(value, list):
                 return value[0] if value else None
-
             return value
+
+        def as_filter(field, value):
+            """Return a Pinecone filter clause for one or many values."""
+            if isinstance(value, list) and len(value) > 1:
+                return {field: {"$in": value}}
+            scalar = value[0] if isinstance(value, list) else value
+            return {field: {"$eq": scalar}}
 
         entities = plan.get(
             "entities",
             {}
         )
 
-        course_code = first_value(
-            entities.get(
-                "course_code"
-            )
-        )
+        course_code_raw = entities.get("course_code")
+        course_code = first_value(course_code_raw)
 
-        program_name = self._canonical_program_name(
-            first_value(
-                entities.get(
-                    "program_name"
-                )
-            )
-        )
+        # Fix F: canonicalise all program values, not just the first one
+        program_name_raw = entities.get("program_name")
+        if isinstance(program_name_raw, list):
+            program_names = [
+                p for p in (
+                    self._canonical_program_name(p) for p in program_name_raw
+                ) if p
+            ]
+            program_name = program_names[0] if len(program_names) == 1 else (program_names or None)
+        else:
+            program_name = self._canonical_program_name(program_name_raw)
 
         if course_code:
 
             if program_name:
+                prog_clause = as_filter("program_name", program_name)
                 return {
                     "$and": [
-                        {
-                            "course_code": {
-                                "$eq": course_code
-                            }
-                        },
-                        {
-                            "program_name": {
-                                "$eq": program_name
-                            }
-                        }
+                        {"course_code": {"$eq": course_code}},
+                        prog_clause
                     ]
                 }
 
@@ -204,19 +209,14 @@ class RetrievalPipeline:
                 }
             }
 
-        faculty_name = first_value(
-            entities.get(
-                "faculty_name"
-            )
-        )
-
-        if faculty_name:
-
-            return {
-                "faculty_name": {
-                    "$eq": faculty_name
-                }
-            }
+        # Fix F: support multi-faculty queries with $in
+        faculty_name_raw = entities.get("faculty_name")
+        if faculty_name_raw:
+            if isinstance(faculty_name_raw, list) and len(faculty_name_raw) > 1:
+                return {"faculty_name": {"$in": faculty_name_raw}}
+            faculty_name = first_value(faculty_name_raw)
+            if faculty_name:
+                return {"faculty_name": {"$eq": faculty_name}}
 
         event_name = first_value(
             entities.get(
@@ -239,32 +239,18 @@ class RetrievalPipeline:
         )
 
         if program_name and semester:
-
+            prog_clause = as_filter("program_name", program_name)
             return {
                 "$and": [
-                    {
-                        "program_name": {
-                            "$eq": program_name
-                        }
-                    },
-                    {
-                        "semester": {
-                            "$eq": semester
-                        }
-                    }
+                    prog_clause,
+                    {"semester": {"$eq": semester}}
                 ]
             }
 
         if program_name:
-
-            return {
-                "program_name": {
-                    "$eq": program_name
-                }
-            }
+            return as_filter("program_name", program_name)
 
         return None
-    
 
     def _normalize_program_name(self, name):
         if not name:
@@ -397,43 +383,33 @@ class RetrievalPipeline:
         history=None
     ):
         original_query = query
-        
-        REFERENCE_WORDS = [
-            "he",
-            "his",
-            "him",
-            "she",
-            "her",
-            "they",
-            "their",
-            "them",
-            "it",
-            "its",
-            "that faculty",
-            "that professor",
-            "that event",
-            "that program",
-            "this program",
-            "this event"
-        ]
 
         query_lower = query.lower()
 
-        # Rewriting only makes sense mid-conversation. Beyond explicit
-        # pronouns, short or "what about..." follow-ups are usually
-        # context-dependent too; the rewriter returns self-contained
-        # queries unchanged, so over-triggering only costs one LLM call.
-        needs_rewrite = bool(history) and (
-            any(
-                re.search(
-                    rf"\b{re.escape(ref)}\b",
-                    query_lower
-                )
-                for ref in REFERENCE_WORDS
-            )
-            or query_lower.startswith(("what about", "how about", "and ", "also "))
-            or len(query.split()) <= 4
+        # Fix #6: narrow the rewrite trigger to avoid spurious LLM calls for
+        # short but self-contained questions (e.g. "What is the fee?").
+        # Rewrite only when:
+        #   (a) a pronoun / reference phrase is present in the query, OR
+        #   (b) the query is <=3 words AND the first word is a pronoun
+        #       (genuine fragment follow-up like "And him?" or "What about it?")
+        PRONOUN_REFS = [
+            "he", "his", "him", "she", "her", "they", "their", "them",
+            "it", "its", "that faculty", "that professor", "that event",
+            "that program", "this program", "this event"
+        ]
+        SHORT_PRONOUN_STARTERS = {
+            "he", "his", "him", "she", "her", "they", "their", "them",
+            "it", "its", "what about", "how about"
+        }
+        has_pronoun = any(
+            re.search(rf"\b{re.escape(ref)}\b", query_lower)
+            for ref in PRONOUN_REFS
         )
+        is_short_fragment = (
+            len(query.split()) <= 3
+            and any(query_lower.startswith(p) for p in SHORT_PRONOUN_STARTERS)
+        )
+        needs_rewrite = bool(history) and (has_pronoun or is_short_fragment)
 
         if needs_rewrite:
             query = (
@@ -511,18 +487,22 @@ class RetrievalPipeline:
 
         program_name = entities.get("program_name")
 
-        if isinstance(event_name, str):
-            query += " " + event_name
+        # Fix E: only augment the query string with entity names when the
+        # planner is confident about the extraction (entity_confidence >= 0.80).
+        # A low-confidence wrong extraction (e.g. program_name on a general
+        # internship question) biases the embedding toward wrong chunks.
+        entity_confidence = plan.get("entity_confidence", 0.5)
 
-        elif isinstance(event_name, list):
-            query += " " + " ".join(str(e) for e in event_name)
+        if entity_confidence >= 0.80:
+            if isinstance(event_name, str):
+                query += " " + event_name
+            elif isinstance(event_name, list):
+                query += " " + " ".join(str(e) for e in event_name)
 
-        if isinstance(program_name, str):
-            query += " " + program_name
-
-        elif isinstance(program_name, list):
-            query += " " + " ".join(program_name)
-
+            if isinstance(program_name, str):
+                query += " " + program_name
+            elif isinstance(program_name, list):
+                query += " " + " ".join(program_name)
 
         metadata_filter = (
             self._build_metadata_filter(
@@ -551,13 +531,30 @@ class RetrievalPipeline:
             for subquery in decomposed_queries:
                 subquery_expanded = self._expand_semesters(subquery)
 
+                # Fix #8: build a sub-query-specific metadata filter.
+                # Previously always None, causing sub-queries to scan the full
+                # corpus and pull in noise from unrelated programs/faculty.
+                sub_metadata_filter = (
+                    self._build_metadata_filter(plan)
+                )
+
                 sub_results = (
                     self.retriever.retrieve(
                         query=subquery_expanded,
                         top_k=retrieval_top_k,
-                        metadata_filter=None
+                        metadata_filter=sub_metadata_filter
                     )
                 )
+
+                # Fallback: if the filter yields nothing, retry without it
+                if not sub_results and sub_metadata_filter:
+                    sub_results = (
+                        self.retriever.retrieve(
+                            query=subquery_expanded,
+                            top_k=retrieval_top_k,
+                            metadata_filter=None
+                        )
+                    )
 
                 sub_reranked = (
                     self.reranker.rerank(
@@ -597,10 +594,10 @@ class RetrievalPipeline:
                 )
 
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
-        # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
-        # the vector/BM25 results (query chunks) into a single chunk pool.
-        # The cross-encoder reranker then scores the full pool uniformly.
-        if self.entity_retriever and not decomposed_queries:
+        # Fix #3: entity retrieval is now also run for decomposed queries.
+        # Previously skipped entirely for comparison/multi-entity queries,
+        # which are exactly the ones that benefit most from entity injection.
+        if self.entity_retriever:
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
                     entities
@@ -633,8 +630,18 @@ class RetrievalPipeline:
         results = deduped
 
         if decomposed_queries:
-
-            reranked = results
+            # Fix A: run a final joint cross-encoder rerank over the merged
+            # pool using the original user query (not a sub-query string).
+            # Previously, sub-results were merged raw with no joint scoring,
+            # so poorly-scored chunks from one sub-query could displace
+            # high-quality chunks from another.
+            reranked = (
+                self.reranker.rerank(
+                    query=original_query,
+                    results=results,
+                    plan=plan
+                )
+            )
 
         else:
             reranked = (

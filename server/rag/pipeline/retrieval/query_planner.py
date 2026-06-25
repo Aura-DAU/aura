@@ -214,6 +214,121 @@ query_decomposition:
   "Hostel policy",
   "Scholarships available"
 ]
+
+Fix B — additional few-shot examples for previously uncovered query patterns:
+
+Query:
+What courses are offered in Semester 3 and Semester 4 of BTech ICT?
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "program_curriculum",
+  "entity_confidence": 0.97,
+  "multi_entity_query": true,
+  "entities": {
+    "program_name": "BTech ICT",
+    "semester": ["III", "IV"]
+  },
+  "query_decomposition": [
+    "BTech ICT Semester III courses",
+    "BTech ICT Semester IV courses"
+  ]
+}
+
+Query:
+What does the ICT department offer?
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "program_overview",
+  "entity_confidence": 0.90,
+  "multi_entity_query": false,
+  "entities": {
+    "department_name": "ICT"
+  }
+}
+
+Query:
+Am I eligible for the merit scholarship with a 9 CGPA?
+
+{
+  "category": "admissions",
+  "intent": "eligibility",
+  "retrieval_intent": "scholarship_information",
+  "entity_confidence": 0.92,
+  "multi_entity_query": false,
+  "entities": {
+    "scholarship_name": "merit scholarship"
+  },
+  "retrieval_hints": {
+    "required_sections": ["Eligibility", "Scholarship", "CGPA"]
+  }
+}
+
+Query:
+What is the total fee for BTech ICT?
+
+{
+  "category": "admissions",
+  "intent": "overview",
+  "retrieval_intent": "admissions_information",
+  "entity_confidence": 0.93,
+  "multi_entity_query": false,
+  "entities": {
+    "program_name": "BTech ICT"
+  },
+  "retrieval_hints": {
+    "required_sections": ["Fee", "Tuition", "Fees Structure"]
+  }
+}
+
+Query:
+What are Dr. Sourish Dasgupta's research areas?
+
+{
+  "category": "faculty",
+  "intent": "research",
+  "retrieval_intent": "faculty_research",
+  "entity_confidence": 0.98,
+  "multi_entity_query": false,
+  "entities": {
+    "faculty_name": "Sourish Dasgupta"
+  }
+}
+
+Query:
+What placement support does DAU provide?
+
+{
+  "category": "campus_life",
+  "intent": "overview",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.80,
+  "multi_entity_query": false,
+  "entities": {},
+  "retrieval_hints": {
+    "required_sections": ["Placement", "Career", "Internship"]
+  }
+}
+
+Query:
+Which courses do not count as elective credits in BTech ICT?
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "program_curriculum",
+  "entity_confidence": 0.92,
+  "multi_entity_query": false,
+  "entities": {
+    "program_name": "BTech ICT"
+  },
+  "retrieval_hints": {
+    "required_sections": ["Elective", "Credits", "Curriculum"]
+  }
+}
 """
 
 
@@ -277,7 +392,11 @@ class QueryPlanner:
             )
             plan.setdefault(
                 "entity_confidence",
-                1.0
+                # Fix #14: was 1.0 (maximum), which caused overconfident
+                # metadata filters when the LLM omitted this field.
+                # 0.5 is a neutral fallback — the pipeline only applies
+                # strict filtering when entity_confidence >= 0.85.
+                0.5
             )
             plan.setdefault(
                 "multi_entity_query",
@@ -488,10 +607,13 @@ class QueryPlanner:
                 "category": "general",
                 "intent": "general",
                 "confidence": 0.0,
-
+                # Fix J: add all keys that downstream code reads so that the
+                # fallback plan is a fully-valid plan dict, not a partial one.
+                "retrieval_intent": "general",
+                "entity_confidence": 0.5,
+                "multi_entity_query": False,
+                "query_decomposition": None,
                 "entities": {},
-
                 "retrieval_hints": {},
-
                 "top_k": 5
             }

@@ -80,8 +80,11 @@ class AnswerGenerator:
                     )
 
             history_text = ""
+            # Fix #10: use 6 turns to match query_rewriter.py's window.
+            # Previously 5 (generator) vs 8 (rewriter) caused the generator
+            # to miss context that was used to resolve the rewritten query.
             if history:
-                for turn in history[-5:]:
+                for turn in history[-6:]:
                     role = turn.get("role", "")
                     content = turn.get("content", "")
                     if role and content:
@@ -145,22 +148,29 @@ Context:
                 flags=re.DOTALL
             ).strip()
 
-            # Programmatic guardrail for out-of-scope code-generation requests.
-            # Only triggers on request-shaped phrases ("write a", "implement a"),
-            # never on bare language names — questions about programming COURSES
-            # at DAU are in scope.
+            # Fix #11: tighten code-request detection to require a
+            # programming language or construct keyword so that academic
+            # phrases like "What is the program for MnC?" or
+            # "How to write a thesis?" do NOT trigger the guardrail.
             out_of_scope_response = "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?"
 
+            PROG_LANG_INDICATORS = [
+                "python", "java", "c++", "javascript", "js", "typescript",
+                "c#", "ruby", "go", "rust", "kotlin", "swift", "php",
+                "sql", "bash", "shell", "html", "css",
+                "algorithm", "fibonacci", "palindrome", "sorting", "linked list",
+                "binary tree", "recursion", "dynamic programming",
+            ]
+            CODE_ACTION_PATTERNS = [
+                "write a", "code for", "implement a", "function in",
+                "script in", "program in",
+            ]
             question_lower = query.lower()
-            code_request_patterns = ["write a", "code for", "program for", "how to write", "implement a", "palindrome", "function in", "script in"]
-            is_code_request = any(kw in question_lower for kw in code_request_patterns)
+            is_code_request = (
+                any(kw in question_lower for kw in CODE_ACTION_PATTERNS)
+                and any(lang in question_lower for lang in PROG_LANG_INDICATORS)
+            ) or "palindrome" in question_lower
 
-            # Exclude course/subject/program/dress/rules codes from code requests
-            if is_code_request:
-                for exclude in ["course code", "subject code", "program code", "dress code", "rules code"]:
-                    if exclude in question_lower:
-                        is_code_request = False
-                        break
 
             if is_code_request:
                 answer_lower = answer.lower()

@@ -16,7 +16,7 @@ def extract_program_name(
         "btech",
         "mtech",
         "msc",
-        "mdes"
+        "mdes",      # Fix I: was missing comma — previously concatenated with "bs-ms" into "mdesbs-ms"
         "bs-ms",
         "phd",
         "programs",
