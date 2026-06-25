@@ -51,6 +51,16 @@ class RetrievalPipeline:
         else:
             logger.warning("metadata.json not found at %s. Fuzzy faculty matching disabled.", metadata_path)
 
+        # Build local index mapping coordinate keys to raw chunks for adjacent chunk expansion
+        self.chunk_by_coordinate = {}
+        if self.retriever.bm25 and hasattr(self.retriever.bm25, "chunks"):
+            for chunk in self.retriever.bm25.chunks:
+                doc_id = chunk.get("document_id")
+                chunk_idx = chunk.get("chunk_index")
+                if doc_id and chunk_idx is not None:
+                    self.chunk_by_coordinate[(doc_id, int(chunk_idx))] = chunk
+
+
     PROGRAM_ALIASES = {
 
         "ict": "B.Tech. (ICT)",
@@ -503,41 +513,27 @@ class RetrievalPipeline:
             )
         )
 
-        final_top_k = plan.get(
-            "top_k",
-            5
-        )
-
-        retrieval_top_k = max(
-            final_top_k * 3,
-            10
-        )
-        
         decomposed_queries = plan.get(
             "query_decomposition"
         )
 
         if decomposed_queries:
-
             all_results = []
 
             for subquery in decomposed_queries:
                 subquery_expanded = self._expand_semesters(subquery)
 
-                sub_results = (
-                    self.retriever.retrieve(
-                        query=subquery_expanded,
-                        top_k=retrieval_top_k,
-                        metadata_filter=None
-                    )
-                )
+                # Retrieve dual-path fusion results for the subquery
+                sub_results = self._retrieve_dual_path(subquery_expanded, plan)
 
-                sub_reranked = (
-                    self.reranker.rerank(
-                        query=subquery_expanded,
-                        results=sub_results,
-                        plan=plan
-                    )
+                # Expand adjacent chunks before reranking
+                expanded_sub_results = self._expand_adjacent_chunks(sub_results)
+
+                # Rerank
+                sub_reranked = self.reranker.rerank(
+                    query=subquery_expanded,
+                    results=expanded_sub_results,
+                    plan=plan
                 )
 
                 all_results.extend(
@@ -547,63 +543,34 @@ class RetrievalPipeline:
             results = all_results
         
         else:
-            results = (
-                self.retriever.retrieve(
-                    query=query,
-                    top_k=retrieval_top_k,
-                    metadata_filter=metadata_filter
-                )
-            )
-
-            if not results and metadata_filter:
-                print(
-                    "Metadata filter returned 0 results. "
-                    "Falling back to semantic search."
-                )
-
-                results = (
-                    self.retriever.retrieve(
-                        query=query,
-                        top_k=retrieval_top_k,
-                        metadata_filter=None
-                    )
-                )
+            # Main query retrieval using dual path
+            results = self._retrieve_dual_path(query, plan)
+            # Expand adjacent chunks
+            results = self._expand_adjacent_chunks(results)
 
         seen = set()
         deduped = []
 
         for result in results:
-
             chunk_id = result["id"]
-
             if chunk_id not in seen:
-
-                deduped.append(
-                    result
-                )
-
-                seen.add(
-                    chunk_id
-                )
+                deduped.append(result)
+                seen.add(chunk_id)
 
         results = deduped
 
         if decomposed_queries:
-
             reranked = results
-
         else:
-            reranked = (
-                self.reranker.rerank(
-                    query=query,
-                    results=results,
-                    plan=plan
-                )
+            reranked = self.reranker.rerank(
+                query=query,
+                results=results,
+                plan=plan
             )
 
-        final_chunks = reranked[
-            :final_top_k
-        ]
+        # Restrict candidate list to the Top-5 chunks (limit to min of final_top_k and 5)
+        final_top_k = min(plan.get("top_k", 5), 5)
+        final_chunks = reranked[:final_top_k]
 
         built = (
             self.builder.build(
@@ -612,7 +579,6 @@ class RetrievalPipeline:
         )
 
         return {
-
             "query":
                 original_query,
 
@@ -637,3 +603,166 @@ class RetrievalPipeline:
             "top_k_after_rerank":
                 len(final_chunks)
         }
+
+    def _expand_adjacent_chunks(self, candidates):
+        """
+        Retrieves neighboring (i-1 and i+1) chunks for candidate chunks to preserve context.
+        """
+        expanded_candidates = []
+        for cand in candidates:
+            metadata = cand.get("metadata", {})
+            doc_id = metadata.get("document_id")
+            chunk_idx = metadata.get("chunk_index")
+            if not doc_id or chunk_idx is None:
+                expanded_candidates.append(cand)
+                continue
+            
+            chunk_idx = int(chunk_idx)
+            prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - 1))
+            next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + 1))
+            
+            parts = []
+            if prev_chunk:
+                parts.append(prev_chunk.get("text", ""))
+            parts.append(metadata.get("text", ""))
+            if next_chunk:
+                parts.append(next_chunk.get("text", ""))
+                
+            expanded_text = "\n\n".join(filter(None, parts))
+            
+            new_cand = dict(cand)
+            new_cand["metadata"] = dict(metadata)
+            new_cand["metadata"]["text"] = expanded_text
+            expanded_candidates.append(new_cand)
+            
+        return expanded_candidates
+
+    def _retrieve_dual_path(self, query, plan):
+        """
+        Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
+        Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
+        combines them with an equal 50/50 weighted sum.
+        """
+        # 1. Entity Path
+        entities = plan.get("entities", {})
+        entity_queries = []
+        for entity_type, entity_val in entities.items():
+            if not entity_val:
+                continue
+            vals = entity_val if isinstance(entity_val, list) else [entity_val]
+            for val in vals:
+                val_str = str(val).strip()
+                if not val_str:
+                    continue
+                
+                metadata_key = entity_type
+                if metadata_key == "program_name":
+                    canonical_val = self._canonical_program_name(val_str)
+                    if canonical_val:
+                        entity_queries.append((val_str, {metadata_key: {"$eq": canonical_val}}))
+                    else:
+                        entity_queries.append((val_str, None))
+                elif metadata_key in ["faculty_name", "event_name", "course_code", "course_name", "semester"]:
+                    entity_queries.append((val_str, {metadata_key: {"$eq": val_str}}))
+                else:
+                    entity_queries.append((val_str, None))
+
+        entity_pool = {}
+        for ent_text, ent_filter in entity_queries:
+            # Query retriever to get top 3 fused BM25 + dense chunks for this entity
+            res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=ent_filter)
+            if not res_list and ent_filter:
+                res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=None)
+            
+            for rank, res in enumerate(res_list, start=1):
+                chunk_id = res["id"]
+                if chunk_id not in entity_pool:
+                    entity_pool[chunk_id] = {
+                        "chunk": res,
+                        "rrf_score": 0.0
+                    }
+                entity_pool[chunk_id]["rrf_score"] += 1.0 / (60.0 + rank)
+
+        entity_list = []
+        for chunk_id, info in entity_pool.items():
+            chunk_item = dict(info["chunk"])
+            chunk_item["entity_score"] = info["rrf_score"]
+            entity_list.append(chunk_item)
+
+        # Min-Max normalize entity path scores
+        if entity_list:
+            scores = [c["entity_score"] for c in entity_list]
+            min_val = min(scores)
+            max_val = max(scores)
+            val_range = max_val - min_val
+            for c in entity_list:
+                c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
+
+        # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
+        query_embedding = self.retriever.model.encode(
+            ["Represent this sentence for searching relevant passages: " + query],
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
+        results = self.retriever.index.query(
+            vector=query_embedding[0].tolist(),
+            top_k=50,
+            include_metadata=True,
+            filter=None
+        )
+        semantic_list = []
+        for match in results["matches"]:
+            semantic_list.append({
+                "id": match["id"],
+                "score": match["score"],
+                "metadata": match["metadata"],
+                "semantic_score": match["score"]
+            })
+
+        # Min-Max normalize semantic path scores
+        if semantic_list:
+            scores = [c["semantic_score"] for c in semantic_list]
+            min_val = min(scores)
+            max_val = max(scores)
+            val_range = max_val - min_val
+            for c in semantic_list:
+                c["normalized_score"] = (c["semantic_score"] - min_val) / val_range if val_range > 0 else 1.0
+
+        # 3. Global 50/50 Fusion
+        fused_pool = {}
+        for c in entity_list:
+            chunk_id = c["id"]
+            fused_pool[chunk_id] = {
+                "id": chunk_id,
+                "metadata": c["metadata"],
+                "score": c.get("score", 0.0),
+                "entity_norm": c["normalized_score"],
+                "semantic_norm": 0.0
+            }
+        for c in semantic_list:
+            chunk_id = c["id"]
+            if chunk_id not in fused_pool:
+                fused_pool[chunk_id] = {
+                    "id": chunk_id,
+                    "metadata": c["metadata"],
+                    "score": c.get("score", 0.0),
+                    "entity_norm": 0.0,
+                    "semantic_norm": c["normalized_score"]
+                }
+            else:
+                fused_pool[chunk_id]["semantic_norm"] = c["normalized_score"]
+
+        final_candidates = []
+        for chunk_id, info in fused_pool.items():
+            final_score = 0.5 * info["entity_norm"] + 0.5 * info["semantic_norm"]
+            cand = {
+                "id": chunk_id,
+                "metadata": info["metadata"],
+                "score": info["score"],
+                "fusion_score": final_score
+            }
+            final_candidates.append(cand)
+
+        # Sort candidates by final fusion score descending
+        final_candidates.sort(key=lambda x: x["fusion_score"], reverse=True)
+        return final_candidates
