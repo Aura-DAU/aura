@@ -1,6 +1,8 @@
 import os
 import re
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
+# pyrefly: ignore [missing-import]
 from groq import Groq
 
 
@@ -73,18 +75,28 @@ class AnswerGenerator:
         profile_text = ""
 
         if profile:
+            role = profile.get("role", "student")
             fields = [
                 f"- {key}: {value}"
                 for key, value in profile.items()
-                if value
+                if value and key != "role"
             ]
+            
+            profile_text = f"User Role: {role.upper()}\n"
             if fields:
-                profile_text = (
-                    "Student Profile (use only to personalize tone and "
-                    "examples; never treat it as a source of facts):\n"
-                    + "\n".join(fields)
-                    + "\n"
-                )
+                profile_text += "User Profile Info:\n" + "\n".join(fields) + "\n\n"
+
+            # Inject RBAC Rules
+            profile_text += "--- ACCESS CONTROL RULES ---\n"
+            if role == "student":
+                profile_text += "CRITICAL: You are assisting a STUDENT. You MUST NOT provide any personal, academic (grades, CPI), or contact information regarding OTHER students under any circumstances. If the question asks for another student's details, politely decline.\n\n"
+            elif role == "professor":
+                subjects = profile.get("subjects", [])
+                if subjects:
+                    subjects_str = ", ".join(subjects)
+                    profile_text += f"CRITICAL: You are assisting a PROFESSOR. You may provide student information ONLY if it explicitly relates to the subjects they teach ({subjects_str}). If they ask for student information outside these subjects, politely decline.\n\n"
+                else:
+                    profile_text += "CRITICAL: You are assisting a PROFESSOR with no assigned subjects. You MUST NOT provide specific student records. Politely decline.\n\n"
 
         history_text = ""
 
@@ -129,7 +141,7 @@ Context:
 
                     temperature=0.2,
                     top_p=0.9,
-                    reasoning_effort="none",
+                    # reasoning_effort="none",
 
                     messages=[
                         {

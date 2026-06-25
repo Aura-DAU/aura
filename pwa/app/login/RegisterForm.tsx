@@ -70,7 +70,6 @@ export function RegisterForm({ role, onSuccess, onError }: RegisterFormProps) {
 
       if (role === "parent" && linkedStudentEmail) {
         setLoadingStatus("linking student record…");
-      }
         await new Promise((r) => setTimeout(r, 500));
       }
 

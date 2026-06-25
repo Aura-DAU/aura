@@ -69,7 +69,7 @@ Latest Question:
 
                 temperature=0,
 
-                reasoning_effort="none",
+                # reasoning_effort="none",
 
                 messages=[
                     {
