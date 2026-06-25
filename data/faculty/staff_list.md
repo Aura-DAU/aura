@@ -29,6 +29,15 @@ Executive – Finance and Accounts
 abhishek_karli[at]dau[dot]ac[dot]in (+91) 079-68261753
 
 
+### Ajit Nair
+
+MBA - HR, B.Com
+
+Assistant Manager - HR
+
+ajit_nair[at]dau[dot]ac[dot]in (+91) 079-68261690
+
+
 ### Akash Desai
 
 M.Sc., Forensic Science
