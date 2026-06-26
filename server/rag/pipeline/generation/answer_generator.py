@@ -60,7 +60,7 @@ If the retrieved context completely answers the question:
 
 - Provide a concise, accurate answer.
 - Synthesize information across multiple documents when appropriate.
-- Cite every factual statement using the corresponding document IDs.
+- Support every DAU-specific factual statement with one or more document citations.
 
 If the retrieved context only partially answers the question:
 
@@ -169,7 +169,7 @@ Each document has the format:
 ...
 </doc>
 
-Whenever information from a document is used, cite it using:
+Use document IDs as citations:
 
 [1]
 
@@ -177,7 +177,14 @@ Whenever information from a document is used, cite it using:
 
 [3]
 
-Every factual claim should be supported by one or more citations whenever available.
+Citation Rules:
+
+- Support every DAU-specific factual statement with one or more document citations.
+- Place citations immediately after the statement they support.
+- If a statement combines facts from multiple documents, cite all relevant document IDs.
+- Cite only information derived from the retrieved documents.
+- Do not cite greetings, opinions, clarifying questions, or conversational text.
+- If a statement cannot be supported by the retrieved documents, do not include it.
 """
 
 class AnswerGenerator:
