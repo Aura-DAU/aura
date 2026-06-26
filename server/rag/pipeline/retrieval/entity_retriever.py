@@ -155,10 +155,6 @@ class EntityRetriever:
             field_count = 0
 
             for v in values:
-                if field_count >= max_chunks_per_field:
-                    break
-
-            for v in values:
                 matched_ids = field_map.get(v, [])
 
                 # Also try case-insensitive fallback
