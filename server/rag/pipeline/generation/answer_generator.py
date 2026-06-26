@@ -67,45 +67,43 @@ class AnswerGenerator:
         try:
             profile_text = ""
 
-        profile_text = ""
+            if profile:
+                role = profile.get("role", "student")
+                fields = [
+                    f"- {key}: {value}"
+                    for key, value in profile.items()
+                    if value and key != "role"
+                ]
+                
+                profile_text = f"User Role: {role.upper()}\n"
+                if fields:
+                    profile_text += "User Profile Info:\n" + "\n".join(fields) + "\n\n"
 
-        if profile:
-            role = profile.get("role", "student")
-            fields = [
-                f"- {key}: {value}"
-                for key, value in profile.items()
-                if value and key != "role"
-            ]
-            
-            profile_text = f"User Role: {role.upper()}\n"
-            if fields:
-                profile_text += "User Profile Info:\n" + "\n".join(fields) + "\n\n"
+                # Inject RBAC Rules
+                profile_text += "--- ACCESS CONTROL RULES ---\n"
+                if role == "student":
+                    profile_text += "CRITICAL: You are assisting a STUDENT. You MUST NOT provide any personal, academic (grades, CPI), or contact information regarding OTHER students under any circumstances. If the question asks for another student's details, politely decline.\n\n"
+                elif role == "professor":
+                    subjects = profile.get("subjects", [])
+                    if subjects:
+                        subjects_str = ", ".join(subjects)
+                        profile_text += f"CRITICAL: You are assisting a PROFESSOR. You may provide student information ONLY if it explicitly relates to the subjects they teach ({subjects_str}). If they ask for student information outside these subjects, politely decline.\n\n"
+                    else:
+                        profile_text += "CRITICAL: You are assisting a PROFESSOR with no assigned subjects. You MUST NOT provide specific student records. Politely decline.\n\n"
 
-            # Inject RBAC Rules
-            profile_text += "--- ACCESS CONTROL RULES ---\n"
-            if role == "student":
-                profile_text += "CRITICAL: You are assisting a STUDENT. You MUST NOT provide any personal, academic (grades, CPI), or contact information regarding OTHER students under any circumstances. If the question asks for another student's details, politely decline.\n\n"
-            elif role == "professor":
-                subjects = profile.get("subjects", [])
-                if subjects:
-                    subjects_str = ", ".join(subjects)
-                    profile_text += f"CRITICAL: You are assisting a PROFESSOR. You may provide student information ONLY if it explicitly relates to the subjects they teach ({subjects_str}). If they ask for student information outside these subjects, politely decline.\n\n"
-                else:
-                    profile_text += "CRITICAL: You are assisting a PROFESSOR with no assigned subjects. You MUST NOT provide specific student records. Politely decline.\n\n"
+            history_text = ""
 
-        history_text = ""
-
-        if history:
-            for turn in history[-8:]:
-                role = turn.get("role", "")
-                content = turn.get("content", "")
-                if role in ["user", "assistant"] and content:
-                    if role == "assistant":
-                        content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
-                    history_text += (
-                        f"{role}: "
-                        f"{content}\n"
-                    )
+            if history:
+                for turn in history[-8:]:
+                    role = turn.get("role", "")
+                    content = turn.get("content", "")
+                    if role in ["user", "assistant"] and content:
+                        if role == "assistant":
+                            content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
+                        history_text += (
+                            f"{role}: "
+                            f"{content}\n"
+                        )
 
             prompt = f"""
 Conversation History:
