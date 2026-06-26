@@ -7,11 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-# Overview
+# DCEI - DA-IICT Centre for Entrepreneurship and Incubation
+
+## Overview
 
 The DA-IICT Centre for Entrepreneurship and Incubation (DCEI) at Dhirubhai Ambani University (DAU), Gandhinagar. Established in 2011 to promote innovation and entrepreneurship culture among the DA-IICT community. Supported by DeitY, Government of India and Government of Gujarat.
 
-# Main Content
+## Main Content
 
 ### About DCEI
 
@@ -31,7 +33,7 @@ The DA-IICT Centre for Entrepreneurship and Incubation (DCEI) aims to encourage 
 
 A dynamic DA-IICT community with an inherent quest for innovation and at the forefront of the entrepreneurial activity not just in India, but across the globe. This is to be expanded to include Indian youth in general. DCEI aims to be a leading incubation center, meeting expectations of budding entrepreneurs. With experience and leadership, DCEI strives to be distinctive and successful where incubates feel at home and do well.
 
-# Important Information
+## Important Information
 
 - **Established:** 2011
 - **Location:** DA-IICT, Gandhinagar
@@ -40,7 +42,7 @@ A dynamic DA-IICT community with an inherent quest for innovation and at the for
 - **Focus areas:** Finance, e-commerce, synthetic biology, AI, robotics, e-governance
 - **Website:** [ceid.daiict.ac.in](http://ceid.daiict.ac.in/)
 
-# Related Links
+## Related Links
 
 - [DCEI Website](http://ceid.daiict.ac.in/)
 - [Placements](https://daiict.ac.in/placements)

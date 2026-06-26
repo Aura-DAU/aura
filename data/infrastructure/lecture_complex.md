@@ -7,27 +7,12 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Lecture Complex
 
-Lecture Complex
+## Overview
 
-# Main Content
+The Lecture Complex provides the primary venue for large classes and academic events at DA-IICT.
 
-Lecture Complex
+## Main Content
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Details about the Lecture Complex facilities are currently being updated.

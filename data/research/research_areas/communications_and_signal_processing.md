@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Communications and Signal Processing
+
+## Overview
 
 Research is underway on the design and development of software that generates implementations and solves estimation problems using Kalman filters and its variants. From a high-level mathematical description of a state estimation problem, the software aims to generate code that computes statistically optimal estimate using the appropriate estimation filters. Also being developed are motion analysis algorithms to find relevant motion parameters based on available information, in the presence of relatively high error rates in low SNR conditions.
 
-# Main Content
+## Main Content
 
 ### Research Overview
 
@@ -145,7 +147,7 @@ Research is being carried out for the development of new circuit topologies for 
 
 * [One-Day Workshop on 5G and Beyond 5G Wireless Technologies](https://www.daiict.ac.in/events/5994)
 
-## Related Links
+### Related Links
 
 - [Prof. Abhishek Jindal:](https://www.daiict.ac.in/faculty/abhishek-jindal)
 - [Prof. Anjan Ghosh:](https://www.daiict.ac.in/adjunct-faculty/anjan-ghosh)
@@ -167,7 +169,7 @@ Research is being carried out for the development of new circuit topologies for 
 - [One-Day Workshop on 5G and Beyond 5G Wireless Technologies](https://www.daiict.ac.in/events/5994)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
 

@@ -7,13 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Resource Centre
 
-Resource Centre is the Library of Dhirubhai Ambani University, and mainly connects the community to relevant information resources, services, and facilities. It serves as an innovative partner in teaching, learning, and research activities. RC is spread across two Wi-Fi-enabled buildings covering an area of about 16000 square feet, accommodating 450 users at a time. The RC has a rich and diverse collection of nearly 36,000 books, 1,22,009 e-books, 10,320 e-journals, 39 magazines, 13 print newspapers, 10 online newspapers and magazines, 10 databases,1148 theses, and 4000 + audio-visual materials in the areas of ICT, social sciences, and humanities. This collection can be searched through the web-enabled online catalogue (OPAC). Students can also browse and access various electronic resources, namely e-journals, e-books, and databases. RC timings are as follows:
+## Overview
 
-# Main Content
+The Resource Centre (RC) serves as the primary library of Dhirubhai Ambani University, providing access to extensive information resources, services, and facilities for teaching, learning, and research.
 
-
+## Main Content
 
 [**Resource Centre (RC)**](https://rc.daiict.ac.in/), is the Library of Dhirubhai Ambani University, and mainly connects the community to relevant information resources, services, and facilities. It serves as an innovative partner in teaching, learning, and research activities. RC is spread across two Wi-Fi-enabled buildings covering an area of about 16000 square feet, accommodating 450 users at a time. The RC has a rich and diverse collection of nearly 36,000 books, 1,22,009 e-books, 10,320 e-journals, 39 magazines, 13 print newspapers, 10 online newspapers and magazines, 10 databases,1148 theses, and 4000 + audio-visual materials in the areas of ICT, social sciences, and humanities. This collection can be searched through the web-enabled online catalogue (OPAC). Students can also browse and access various electronic resources, namely e-journals, e-books, and databases. RC timings are as follows:
 

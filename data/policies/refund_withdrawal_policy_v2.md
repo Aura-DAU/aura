@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Refund and Withdrawal Policy
 
-## Overview
+### Overview
 
 This document outlines the fee refund rules for students who withdraw from courses or from the program at DAU, based on UGC guidelines and DAU's admissions policies.
 
-## Main Content
+### Main Content
 
 ### Caution Deposit
 
@@ -47,7 +47,7 @@ DAU follows UGC refund policy guidelines for students who withdraw after admissi
 - Caution deposit refund is processed after no-dues clearance from all departments.
 - Hostel fees, mess fees, and other charges are refunded on a pro-rata basis depending on timing.
 
-## Important Information
+### Important Information
 
 - Refund processing may take **4–6 weeks** after application.
 - No-dues clearance from Library, Hostel, and Finance is required for full refund.

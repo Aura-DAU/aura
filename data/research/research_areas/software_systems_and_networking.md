@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Software Systems and Networking
+
+## Overview
 
 Software Systems and Networking
 
-# Main Content
+## Main Content
 
 ### Faculty
 
@@ -110,7 +112,7 @@ For more details: [Click here](https://sites.google.com/view/saurabhtiwari/)
 
 Information will be available soon
 
-## Related Links
+### Related Links
 
 - [Prof. Amit Mankodi:](https://www.daiict.ac.in/faculty/amit-mankodi)
 - [Prof. Anish Mathuria:](https://www.daiict.ac.in/faculty/anish-mathuria)
@@ -135,7 +137,7 @@ Information will be available soon
 - [For more details](https://sites.google.com/view/saurabhtiwari/)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
 

@@ -11,11 +11,11 @@ pdf_name: "Policies/Seed Grant Policy"
 
 # Policies/Seed Grant Policy
 
-## Overview
+### Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
 
-## Main Content
+### Main Content
 
 pr
 

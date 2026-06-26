@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Institutional Review Board (IRB) - DA-IICT
+
+## Overview
 
 * The IRB must review and approve all proposed research involving human subjects before participant recruitment and data collection can start.
 
-# Main Content
+## Main Content
 
 ## Institutional Review Board (IRB) - DA-IICT
 
@@ -27,13 +29,13 @@ team: "Team A"
 
 **Contact Email:** **[irb[at]daiict[dot]ac[dot]in](mailto:irb[at]daiict[dot]ac[dot]in)**
 
-## Related Links
+### Related Links
 
 - [IRB Participation Consent details and Form](https://www.daiict.ac.in/themes/daiict/images/IRB-participation-consent-details-and-form-template.docx)
 - [IRB Application Form](https://www.daiict.ac.in/themes/daiict/images/IRB-application-form-template.docx)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [](https://www.daiict.ac.in/sites/default/files/other-files/DA-IICT_IRB_Policy_and-Other-Details.pdf) (PDF)
 

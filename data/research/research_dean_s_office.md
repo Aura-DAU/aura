@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Dean's Office
+
+## Overview
 
 Thanks for visiting the Dean (Research) website. DAIICT is committed towards developing and maintaining the highest standards in both teaching and research. Engineering with Humanities and Social Sciences at DAIICT provides a best environment that fosters inter-disciplinary research in cutting edge areas. The faculty at DAIICT contributes to sponsored research and industrial collaboration in different areas. It is my pleasure to inform that research contribution by the faculty has grown over the last decade. Funding support from sponsored research and consultancy has increased in the past few years and so has the number of publications and monographs.
 
-# Main Content
+## Main Content
 
 ## Message from the Desk of Dean (Research)
 

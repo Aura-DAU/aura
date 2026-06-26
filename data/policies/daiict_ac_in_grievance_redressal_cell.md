@@ -9,9 +9,9 @@ team: "Team E"
 
 # Grievance Redressal Cell (Students and Employees)
 
-## Overview
+### Overview
 
-## Main Content
+### Main Content
 
 # Grievance Redressal Cell (Students and Employees)
 
@@ -111,7 +111,7 @@ Prevention of grievances is also important. All primary complaints, if not atten
 
 In case of any false or frivolous complaint, the Designated Authority as mentioned in Table 1, 2, 3, may advise for an appropriate action against the complainant, which the GRHC may or may not follow. However, number of such cases are to be monitored to understand if the students tend to use this privilege to protect their failures for whatsoever reason.
 
-## Related Links
+### Related Links
 
 - [1\. Scope](https://www.daiict.ac.in/grievance-redressal-cell#tab-1)
 - [2\. Nature of Grievances](https://www.daiict.ac.in/grievance-redressal-cell#tab-2)

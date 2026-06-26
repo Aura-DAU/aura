@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Research Overview
+
+## Overview
 
 DA-IICT has emphasized and encouraged research right from its founding in the year 2001. Research-oriented M.Tech. and Ph.D. programs were started in 2002, and potential for quality research has always been an important criterion in faculty selection. A fundamental principle followed at DA-IICT from day one is that teaching and research must remain equally vital and important elements in the shaping of an academic institution.
 
-# Main Content
+## Main Content
 
 [Read More - R&D @ DA-IICT](https://www.daiict.ac.in/sites/default/files/other-files/Coffee-Table-Booklet.pdf)
 
@@ -37,13 +39,13 @@ For DA-IICT students who wish to venture out with their own technology-based sta
 
 For more information, please send e-mail to specific research groups, or to **dean\_research[at]dau[dot]ac[dot]in**
 
-## Related Links
+### Related Links
 
 - [here](https://www.daiict.ac.in/areas)
 - [more…](http://ceid.daiict.ac.in/)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Read More - R&D @ DA-IICT](https://www.daiict.ac.in/sites/default/files/other-files/Coffee-Table-Booklet.pdf) (PDF)
 

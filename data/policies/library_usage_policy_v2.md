@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Library (Resource Centre) Usage Policy
 
-## Overview
+### Overview
 
 The DA-IICT / DAU Resource Centre (RC) provides library and digital resource services to students, faculty, and staff. This document outlines borrowing privileges, rules, and late fee policies.
 
-## Main Content
+### Main Content
 
 ### Borrowing Privileges
 
@@ -51,7 +51,7 @@ The DA-IICT / DAU Resource Centre (RC) provides library and digital resource ser
 | Short Loan Books — first 7 days overdue | ₹5.00 per day |
 | Short Loan Books — from 8th day onwards | ₹10.00 per day |
 
-## Important Information
+### Important Information
 
 - Students **cannot borrow overnight** from the Short Loan collection — it is a 3-day loan.
 - Reference materials must be used **within the Resource Centre premises only**.

@@ -7,11 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-# Overview
+# Events
+
+## Overview
 
 Events page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-# Main Content
+## Main Content
 
 Artificial Intelligence in Internet of Things (AIoT): Concepts, Architectures, and Hands-oâ€¦
 15/06/2026 - 20/06/2026
@@ -49,7 +51,7 @@ Next â€º
 Last page
 Last Â»
 
-# Related Links
+## Related Links
 
 - [Original Page](https://daiict.ac.in/events)
 - [Parents](https://daiict.ac.in/parents)

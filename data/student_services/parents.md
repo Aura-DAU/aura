@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# People / Parents
 
-* A Word 4 U
+## Overview
 
-# Main Content
+Details are provided in the main content section.
+
+## Main Content
 
 * A Word 4 U
 
@@ -62,7 +64,7 @@ team: "Team D"
     * [Gallery](https://www.daiict.ac.in/photo-gallery)
     * [Location](https://www.daiict.ac.in/contact-0)
 
-# Related Links
+## Related Links
 
 - [A Word of Guidance](https://www.daiict.ac.in/word-guidance)
 - [First year in campus](https://www.daiict.ac.in/first-year-campus)
@@ -80,7 +82,7 @@ team: "Team D"
 - [Student Leave Policy](https://www.daiict.ac.in/sites/default/files/other-files/Student_Leave_Policy_wef_AY2021-22.pdf)
 - [Halls of Residence](https://www.daiict.ac.in/sites/default/files/other-files/Hostel-Rules-and-Regulations.pdf)
 
-# Downloadable Resources
+## Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Accomplishments
+
+## Overview
 
 Noteworthy Contributions - Accomplishments
 
-# Main Content
+## Main Content
 
 | Year of Award | Name of Awardee | **Details** |
 | --- | --- | --- |
@@ -29,7 +31,7 @@ Noteworthy Contributions - Accomplishments
 
 View [Prior Years](https://www.daiict.ac.in/prior-years-faculty-accomplishments)
 
-## Related Links
+### Related Links
 
 - [Spatial-Spectral Convolutional Learning for Robust Fingerprint Liveness Detection](https://iitrpr.ac.in/cvip2025/awards)
 - [Sparse Matrix Precoded MIMO: A Computationally-Efficient Approach for High Throughput Wireless Links](https://www.linkedin.com/posts/ieee-ants-04636522a_congratulations-to-the-best-paper-awardees-activity-7407697118221488129-k7ba?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAPw_K8BndS3r0j8xnIMSgkB5msG5tc5_80)

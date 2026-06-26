@@ -7,13 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# ICT Infrastructure
 
-DA-IICT has modern eco-friendly, fully networked campus with 1GBps Internet link from NKN and 1GBps Internet link from Tata Teleservices and 10GBps Server-farm connectivity Campus LAN infrastructure with 1GBps optical fiber cable connectivity between various buildings with four L3 Manageable switch and around 75 L2 manageable/unmanageable network switches. Wireless network setup consists of 143 access points spread over various campus locations being managed at a centralized location using Ruckus 1200/SZVC series zone controllers.
+## Overview
 
-# Main Content
+DA-IICT features a modern, eco-friendly, and fully networked campus with high-speed internet links, an extensive optical fiber LAN, and centralized wireless network management.
 
-## IT Infrastructure
+## Main Content
 
 DA-IICT has modern eco-friendly, fully networked campus with 1GBps Internet link from NKN and 1GBps Internet link from Tata Teleservices and 10GBps Server-farm connectivity Campus LAN infrastructure with 1GBps optical fiber cable connectivity between various buildings with four L3 Manageable switch and around 75 L2 manageable/unmanageable network switches. Wireless network setup consists of 143 access points spread over various campus locations being managed at a centralized location using Ruckus 1200/SZVC series zone controllers.
 

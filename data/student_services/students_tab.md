@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# Students
 
-None
+## Overview
 
-# Main Content
+Details are provided in the main content section.
+
+## Main Content
 
 None
 
@@ -320,7 +322,7 @@ Back to Top
 
 - **Phone:** 069747533
 
-# Related Links
+## Related Links
 
 - [20th Convocation Booklet](https://www.daiict.ac.in/sites/default/files/other-files/Convocation-Booklet_JAN-26.pdf)
 - [Link](https://zoom.us/j/95763574411?pwd=TZinuHRuZddF4JndkaqCb5kmsBNs0s.1)
@@ -338,7 +340,7 @@ Back to Top
 - [Link](https://www.daiict.ac.in/da-iict-achieves-naac-grade-accreditation)
 - [Link](https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence-admissions)
 
-# Downloadable Resources
+## Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

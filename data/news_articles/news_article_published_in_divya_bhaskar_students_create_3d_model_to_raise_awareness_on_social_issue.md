@@ -7,18 +7,14 @@ scraped_date: "2026-05-31"
 team: "Team C"
 ---
 
-# Overview
+# Students Create 3D Model to Raise Awareness on Social Issue
 
-Title: Students create 3D model to raise awareness on social issue
-Publication: Divybhaskar, City Bhaskar
-Date: 09-01-2025
+## Overview
 
-# Main Content
+A news article published in Divya Bhaskar (City Bhaskar) highlighting DA-IICT students who created a 3D model to raise awareness on a social issue.
 
-Title: Students create 3D model to raise awareness on social issue
-Publication: Divybhaskar, City Bhaskar
-Date: 09-01-2025
+## Important Information
 
-# Important Information
-
-- Date of Announcement: 09/01/2025
+- **Publication:** Divya Bhaskar, City Bhaskar
+- **Publication Date:** 09-01-2025
+- **Date of Announcement:** 09/01/2025

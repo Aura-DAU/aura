@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# First year in campus
+
+## Overview
 
 The first year of any professional academic campus or of a university is a big transition for most of the students and for their families as well. Until now, parents were involved in each and every activity of their kids, whether it was related to studies, sports, friends, entertainment, social or anything. Parents sought out opportunities for them, helped them make important decisions and encouraged them to develop the study habits they needed to make it this far. In many cases, you saved up money with a dream that someday your kid would go to some prestigious institution/university. But from the moment your kids, son or daughter, become our students, they are treated as adults by the institution. They have to make their own decisions. That is to say, in academic and other matters, the university deals directly with the students, not with their families. This is both a legal obligation and an important part of students’ development into responsible citizens. And it’s a big change for you, too. So, be strong enough to handle this turning point.
 
-# Main Content
+## Main Content
 
 ## The First Year In Campus
 

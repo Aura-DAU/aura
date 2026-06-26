@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Student Clubs and Organisations Policy
 
-## Overview
+### Overview
 
 Student clubs and activities at DAU are governed by the **Student Body Government (SBG)**, which is the official representative body for the student community.
 
-## Main Content
+### Main Content
 
 ### Student Body Government (SBG)
 
@@ -58,7 +58,7 @@ Student clubs and activities at DAU are governed by the **Student Body Governmen
 - Ensure all events have proper administrative approval.
 - Uphold the reputation of DAU in all activities — including outreach events.
 
-## Important Information
+### Important Information
 
 - SBG serves as the **primary interface between students and administration**.
 - Club budgets are managed and allocated by SBG.

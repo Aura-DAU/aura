@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Scholarships and Financial Aid
 
-## Overview
+### Overview
 
 DAU (formerly DA-IICT) offers a range of merit-based and merit-cum-means scholarships to support students across BTech, BS+MS, and PG programs.
 
-## Main Content
+### Main Content
 
 ### Institute Scholarships
 
@@ -46,14 +46,14 @@ DAU (formerly DA-IICT) offers a range of merit-based and merit-cum-means scholar
 - Students facing exceptional financial hardship may apply for additional support from the institute directly.
 - Applications are reviewed on a case-by-case basis by the Scholarship Committee.
 
-## Important Information
+### Important Information
 
 - Scholarships are **disbursed semester-wise**, not annually.
 - Scholarship amounts are credited directly to the student's account after fee payment.
 - Students must **re-apply or maintain eligibility** each semester — scholarships are not automatically renewed without meeting criteria.
 - Financial hardship cases: Contact the Academic Office directly.
 
-## Related Links
+### Related Links
 
 - [DAU Scholarships Page](https://www.daiict.ac.in/scholarships)
 - [Admissions Page](https://www.daiict.ac.in/admissions)

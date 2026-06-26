@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Summer Research Internship at DAU
+
+## Overview
 
 * Currently enrolled UG, PG and PhD students in good academic standing at accredited national institutions are eligible to apply (students currently enrolled at DAU are not eligible for this program).
 
-# Main Content
+## Main Content
 
 ## Summer Research Internship 2026
 
@@ -111,7 +113,7 @@ team: "Team A"
 
 [Summer Research Internship 2025](https://www.daiict.ac.in/summer-research-internship-2025)
 
-## Related Links
+### Related Links
 
 - [Download Flyer with QR Code for SRI 2026](https://www.daiict.ac.in/sites/default/files/inline-images/Flyer-SRI2026-DAU.png)
 - [https://ieeexplore.ieee.org/abstract/document/11193854](https://ieeexplore.ieee.org/abstract/document/11193854)

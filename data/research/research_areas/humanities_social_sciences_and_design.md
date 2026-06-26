@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Humanities, Social Sciences and Design
+
+## Overview
 
 Humanities, Social Sciences and Design
 
-# Main Content
+## Main Content
 
 ### Faculty
 
@@ -88,7 +90,7 @@ For more details: [Click here](https://daiict.academia.edu/JensonJoseph)
 
 Information will be available soon
 
-## Related Links
+### Related Links
 
 - [Prof. Bharani Kollipara :](https://www.daiict.ac.in/faculty/bharani-kollipara)
 - [Prof. Jenson Joseph :](https://www.daiict.ac.in/faculty/jenson-joseph)

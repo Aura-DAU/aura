@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Physics and Mathematical Sciences
+
+## Overview
 
 For several years, DA-IICT has served as a premier training and research ground for ICT. Basic sciences are very much a central part of ICT research and teaching. Research in basic sciences at DA-IICT is primarily conducted in the areas of Mathematics and Physics and is both theoretical and computational in nature. Pure, applied as well as interdisciplinary studies of complex systems is being pursued. Broadly, the areas under study are frame theory, fractional differential equations, mathematical logic, fluid dynamics, astrophysics, quantum computation and information, general relativity, plasma physics, electromagnetics, granular systems and nonlinear waves. Interdisciplinary research is carried out in the areas of mathematical finance, sociophysics, stock markets, systems Biology and Bioinformatics.
 
-# Main Content
+## Main Content
 
 ### Research Overview
 
@@ -150,7 +152,7 @@ For several years, DA-IICT has served as a premier training and research ground 
 
 Information will be available soon
 
-## Related Links
+### Related Links
 
 - [Prof. Anil Roy:](https://www.daiict.ac.in/faculty/anil-roy)
 - [Prof. Arnab Ray:](https://www.daiict.ac.in/faculty/arnab-kumar-ray)
@@ -174,7 +176,7 @@ Information will be available soon
 - [Please visit](https://scholar.google.com/citations?user=_6LOQFkAAAAJ&hl=en&oi=ao)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
 

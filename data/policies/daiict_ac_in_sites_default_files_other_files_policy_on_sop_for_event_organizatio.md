@@ -11,11 +11,11 @@ pdf_name: "Policies/Standard Operating Procedure (SOP) for Event Organisation at
 
 # Policies/Standard Operating Procedure (SOP) for Event Organisation at DAU
 
-## Overview
+### Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
 
-## Main Content
+### Main Content
 
 > pb pe
 

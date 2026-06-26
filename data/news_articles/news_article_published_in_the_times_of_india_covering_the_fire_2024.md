@@ -7,24 +7,18 @@ scraped_date: "2026-05-31"
 team: "Team C"
 ---
 
-# Overview
+# Machine vs machine: AI trained to detect hate speech, deepfakes online
 
-Title:  Machine vs machine: AI trained to detect hate speech, deepfakes online
-Publication: The Times of India
-Date: 16-12-2024
-URL: Click here
+## Overview
 
-# Main Content
+A news article published in The Times of India covering the FIRE 2024 event, focusing on AI training for detecting hate speech and deepfakes.
 
-Title:  Machine vs machine: AI trained to detect hate speech, deepfakes online
-Publication: The Times of India
-Date: 16-12-2024
-URL: Click here
+## Important Information
 
-# Important Information
+- **Publication:** The Times of India
+- **Publication Date:** 16-12-2024
+- **Date of Announcement:** 18/12/2024
 
-- Date of Announcement: 18/12/2024
+## Related Links
 
-# Related Links
-
-- [Click here](https://timesofindia.indiatimes.com/city/ahmedabad/machine-vs-machine-ai-trained-to-detect-hate-speech-deepfakes-online/articleshow/116345284.cms)
+- [Original Article (The Times of India)](https://timesofindia.indiatimes.com/city/ahmedabad/machine-vs-machine-ai-trained-to-detect-hate-speech-deepfakes-online/articleshow/116345284.cms)

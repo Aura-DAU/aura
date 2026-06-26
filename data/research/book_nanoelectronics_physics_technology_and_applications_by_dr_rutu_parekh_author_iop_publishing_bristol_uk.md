@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team C"
 ---
 
-# Overview
+# Book: Nanoelectronics, Physics, technology and applications by Dr. Rutu Parekh (Author), IOP Publishing, Bristol, UK
 
-Dr. Rutu Parekh has published a book on Nanoelectronics, Physics, technology and applications.
+## Overview
 
-# Main Content
+Details are provided in the main content section.
+
+## Main Content
 
 Dr. Rutu Parekh has published a book on Nanoelectronics, Physics, technology and applications.
 Nanoelectronics is the basis of future electronics. It demands interdisciplinary knowledge in terms of quantum mechanics, material science, electronics, circuit design, simulation, and fabrication. To design a future miniaturized circuit, one needs to understand the device, its physics and fabrication process, as well as its limitations.
@@ -20,11 +22,11 @@ This book provides comprehensive coverage for fundamental and advanced courses i
 https://store.ioppublishing.org/
 https://www.amazon.in/
 
-# Important Information
+## Important Information
 
 - Date of Announcement: 23/02/2024
 
-# Related Links
+## Related Links
 
 - [https://store.ioppublishing.org/](https://store.ioppublishing.org/page/detail/Nanoelectronics/?k=9780750348096)
 - [https://www.amazon.in/](https://www.amazon.in/Nanoelectronics-Physics-technology-applications-ebooks/dp/0750348097)

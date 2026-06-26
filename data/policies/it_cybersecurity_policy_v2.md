@@ -10,11 +10,11 @@ source_type: "Web"
 
 # ICT and Cybersecurity Policy for Students
 
-## Overview
+### Overview
 
 DAU's ICT Policy governs the acceptable use of computing, network, and internet resources on campus. It applies to all students, faculty, staff, and authorized guests.
 
-## Main Content
+### Main Content
 
 ### Acceptable Use
 
@@ -50,7 +50,7 @@ DAU's ICT Policy governs the acceptable use of computing, network, and internet 
 
 - The ICT Policy is reviewed **periodically (typically annually)** by the Director, incorporating feedback from stakeholders and updates based on new technologies.
 
-## Important Information
+### Important Information
 
 - **Password sharing is strictly prohibited.**
 - Attempting to access systems without authorization is a serious offense.

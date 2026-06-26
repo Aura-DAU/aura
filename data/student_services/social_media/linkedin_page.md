@@ -7,14 +7,16 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# LinkedIn
+
+## Overview
 
 External link for LinkedIn.
 
-# Main Content
+## Main Content
 
 This is an external form/social media page link. Please visit the original URL to access the content.
 
-# Related Links
+## Related Links
 
 - [LinkedIn](https://www.linkedin.com/school/dhirubhaiambaniuniversity/?viewAsMember=true)

@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# Instagram
+
+## Overview
 
 This document contains the profile details and statistics of the official Instagram account of Dhirubhai Ambani University (DAU).
 
-# Main Content
+## Main Content
 
 ### Dhirubhai Ambani University (DAU) Instagram Profile
 
@@ -27,7 +29,7 @@ This document contains the profile details and statistics of the official Instag
 * **Pin Code:** 382007
 * **Website Link listed on bio:** [www.daiict.ac.in](https://www.daiict.ac.in)
 
-# Related Links
+## Related Links
 
 - [Official Instagram Account - daiictofficial](https://www.instagram.com/daiictofficial/)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

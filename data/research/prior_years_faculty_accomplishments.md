@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Prior Years (Faculty Accomplishments)
+
+## Overview
 
 Prior Years Faculty Accomplishments
 
-# Main Content
+## Main Content
 
 Year 2019
 
@@ -119,7 +121,7 @@ Year 2003
 | --- | --- |
 | Prof Ganesh Devy | Prince Clause Award, Netherlands, 2003. |
 
-## Related Links
+### Related Links
 
 - [(APSEC 2018)](http://www.apsec2018.org/)
 

@@ -9,11 +9,13 @@ source_type: "PDF"
 pdf_name: "DA-IICT_Vehicle_Rules_for_Students"
 ---
 
-# Overview
+# Vehicle Rules for Students
+
+## Overview
 
 Student Vehicle Regulations at Dhirubhai Ambani University (DAU) / DA-IICT, Gandhinagar. Covers permitted vehicles, registration, parking, traffic rules, and penalties for violations.
 
-# Main Content
+## Main Content
 
 ### General Rules
 
@@ -128,7 +130,7 @@ Entering the campus without the proper Institute-issued vehicle sticker.
 
 6. **Notification to Student:** The student will be informed of the action and any consequences. For serious violations, parents may be notified by the Administrative Officer.
 
-# Important Information
+## Important Information
 
 - **Only two-wheelers allowed** â€” no 4-wheelers on campus
 - **One vehicle per student** maximum
@@ -136,7 +138,7 @@ Entering the campus without the proper Institute-issued vehicle sticker.
 - **DUI = immediate permanent ban** + disciplinary proceedings
 - All reports go to: admin_officer@daiict.ac.in
 
-# Related Links
+## Related Links
 
 - [Vehicle Rules (PDF)](https://daiict.ac.in/sites/default/files/other-files/DA-IICT_Vehicle_Rules_for_Students.pdf)
 - [Hostel Rules and Regulations](https://daiict.ac.in/sites/default/files/other-files/Hostel-Rules-and-Regulations.pdf)

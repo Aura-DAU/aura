@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Algorithms and Theory of Computation
+
+## Overview
 
 Theoretical Computer Science is a discipline at the interface between Mathematics and Computer Science. Work in theoretical computer science often fuels major advances in the world of computer technology, allied industrial endeavours and often contributes to the development of rich mathematical ideas. It focuses on developing mathematical tools applicable to computer science. The applicability is enabled by modelling various aspects of computer science in an abstract framework. A collection of some of the important subjects that fall in this discipline could be: Algorithms, Computational Complexity, Data Structures, Discrete Mathematics, Formal Specification & Verification, Graph Theory, Mathematical Logic, Models of Computation. The members of this group at DA-IICT, work on a wide subset of these areas both in the form of teaching courses as well as research.
 
-# Main Content
+## Main Content
 
 ### Research Overview
 
@@ -90,7 +92,7 @@ Information will be available soon
 
 Information will be available soon
 
-## Related Links
+### Related Links
 
 - [Prof. Manoj Raut:](https://www.daiict.ac.in/faculty/manoj-raut)
 - [Prof. Puneet Bhateja :](https://www.daiict.ac.in/faculty/puneet-bhateja)
@@ -102,7 +104,7 @@ Information will be available soon
 - [Please visit](https://scholar.google.ca/citations?hl=en&user=_6LOQFkAAAAJ)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
 

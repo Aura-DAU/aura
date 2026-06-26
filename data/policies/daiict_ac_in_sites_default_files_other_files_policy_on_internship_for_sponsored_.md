@@ -11,11 +11,11 @@ pdf_name: "Policies/Internship Policy for Sponsored Projects"
 
 # Policies/Internship Policy for Sponsored Projects
 
-## Overview
+### Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
 
-## Main Content
+### Main Content
 
 >» be
 

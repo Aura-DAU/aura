@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Attendance Policy — BTech and PG Students
 
-## Overview
+### Overview
 
 DA-IICT / DAU requires a minimum attendance level in each course for students to remain eligible for end-semester examinations. Non-compliance can result in academic penalties.
 
-## Main Content
+### Main Content
 
 ### Minimum Attendance Requirement
 
@@ -43,7 +43,7 @@ DA-IICT / DAU requires a minimum attendance level in each course for students to
 - Students with backlogs are guided by the UG Committee on course registration.
 - Eligibility for registration requires no outstanding unpaid fees.
 
-## Important Information
+### Important Information
 
 - Attendance records are maintained by each course instructor.
 - Students are advised to track their own attendance regularly.

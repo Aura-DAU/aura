@@ -7,9 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# Students
 
-# Main Content
+## Overview
+
+## Main Content
 
 # **Dean (Students) Message**
 
@@ -710,7 +712,7 @@ Member (ex-officio)
 - **Phone:** 079-68261554
 - **Phone:** 079-68261667
 
-# Related Links
+## Related Links
 
 - [Click here](https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar)
 - [dean-students_office[at]dau[dot]ac[dot]in](mailto:dean-students_office[at]dau[dot]ac[dot]in)
@@ -728,7 +730,7 @@ Member (ex-officio)
 - [synapse[at]dau[dot]ac[dot]in](mailto:synapse[at]dau[dot]ac[dot]in)
 - [Link](http://synapse.daiict.ac.in)
 
-# Downloadable Resources
+## Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

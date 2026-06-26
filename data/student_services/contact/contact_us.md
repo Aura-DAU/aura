@@ -7,13 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+## Overview
 
 _Text_ DA-IICT, DA-IICT Road,  
 Gandhinagar 382 007,  
 Gujarat (India)
 
-# Main Content
+## Main Content
 
 # Contact Information
 
@@ -54,7 +54,7 @@ Apart from the monsoon season, the climate of Gandhinagar is normally dry. Winte
 
 Places to visit in Gandhinagar and Ahmedabad are SiddiSayyedJali, Jumma Masjid, Gujarat Science City, Akshardham (Gandhinagar), Law Garden Market, Vaishnodevi Temple, Kankaria Lake, Sabarmati Riverfront Development Project, SarkhejRoja, Adalaj Wav, Rani Sipri Mosque, Iskon Temple, Sola Temple, CG Road, Gandhi Ashram (Sabarmati), Calico Museum of Textiles (Shahibaugh).
 
-# Related Links
+## Related Links
 
 - [facebook](https://www.facebook.com/officialdau)
 - [X](https://x.com/dauofficial_)

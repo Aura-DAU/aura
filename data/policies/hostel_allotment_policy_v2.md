@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Hostel Allotment Policy — Halls of Residence
 
-## Overview
+### Overview
 
 DA-IICT / DAU provides on-campus residential facilities (Halls of Residence) for students. This document outlines room allotment rules, conduct requirements, and fees.
 
-## Main Content
+### Main Content
 
 ### Room Allotment Rules
 
@@ -55,7 +55,7 @@ DA-IICT / DAU provides on-campus residential facilities (Halls of Residence) for
 - Expulsion from hostel for a semester
 - Termination from the institute (for severe violations)
 
-## Important Information
+### Important Information
 
 - Once allotted, room changes are generally **not permitted** during the first year.
 - If a student takes longer than 4 years to complete their degree, further allotment is **subject to availability**.

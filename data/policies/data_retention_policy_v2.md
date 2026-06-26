@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Data Retention Policy for Student Records
 
-## Overview
+### Overview
 
 DAU collects and retains student data for academic, administrative, and alumni relations purposes. This document outlines how long data is retained and how it is protected.
 
-## Main Content
+### Main Content
 
 ### Types of Student Data Collected
 
@@ -49,7 +49,7 @@ DAU collects and retains student data for academic, administrative, and alumni r
 - Alumni can **opt out of communications** by emailing alumni_office[at]daiict[dot]ac[dot]in or clicking "unsubscribe" in communications.
 - For data correction requests, contact the Academic or Administration Office.
 
-## Important Information
+### Important Information
 
 - Official academic transcripts are issued by the Registrar's Office.
 - Students can request copies of their academic records at any time (fee may apply).

@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Sponsored Research Projects
+
+## Overview
 
 Sponsored Research Projects
 
-# Main Content
+## Main Content
 
 Policy on the Sponsored Research Projects: [Click Here!](https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-the_Sponsored-Projects-23.5.24.pdf)
 
@@ -671,7 +673,7 @@ Year 2009
 * Commencement of the Project: 10/9/2009
 * Duration: 3 Years
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Click Here!](https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-the_Sponsored-Projects-23.5.24.pdf) (PDF)
 - [Compendium of Recent Sponsored Research Projects](https://www.daiict.ac.in/sites/default/files/other-files/Compendium-of-Recent-Sponsored-Research-Projects.pdf) (PDF)

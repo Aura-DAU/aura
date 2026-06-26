@@ -7,13 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Campus Security
 
-The campus has round-the-clock security coverage. The security of campus and residents is administered through a registered private security company which employs well trained security supervisors and guards. Their work is monitored by the Institute administration as well as the centralized security set up of Reliance ADA Group.
+## Overview
 
-# Main Content
+The DA-IICT campus has round-the-clock security coverage administered through a registered private security company.
 
-## Campus Security
+## Main Content
 
 The campus has round-the-clock security coverage. The security of campus and residents is administered through a registered private security company which employs well trained security supervisors and guards. Their work is monitored by the Institute administration as well as the centralized security set up of Reliance ADA Group.
 

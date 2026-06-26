@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# People / Alumini / Alumini Document Service
+
+## Overview
 
 A comprehensive record of student’s academic performance throughout [his/her] tenure at DA-IICT, including grades for individual courses, cumulative CPI, and any relevant academic distinctions. This document is issued to the convocated / Graduated student only.
 
-# Main Content
+## Main Content
 
 # DA-IICT Alumni Document Service
 
@@ -56,7 +58,7 @@ Please write to documents[at]dau[dot]ac[dot]in
 
 Contact us on **079-68261 574**
 
-# Related Links
+## Related Links
 
 - [Click here](https://documents.daiict.ac.in/alumni/login)
 

@@ -7,11 +7,13 @@ scraped_date: "2026-06-15"
 team: "Team D"
 ---
 
-# Overview
+# Academic Calendar
+
+## Overview
 
 Academic Calendar page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-# Main Content
+## Main Content
 
 ### Autumn 2026-27
 | Sr. | Event | Date(s) | Day(s) |
@@ -86,7 +88,7 @@ Academic Calendar page at Dhirubhai Ambani University (DAU), Gandhinagar.
 | 6 | Registration for Autumn 2027-28 | 05-07-2027 to 16-07-2027 | Monday to Friday |
 | 7 | Commencement of Session for Autumn 2027-28 | 19-07-2027 | Monday |
 
-# Related Links
+## Related Links
 
 - [Original Page](https://daiict.ac.in/academic-calendar)
 - [DAU Website](https://www.daiict.ac.in)

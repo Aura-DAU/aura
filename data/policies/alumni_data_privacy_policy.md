@@ -9,11 +9,11 @@ team: "Team E"
 
 # Data Privacy Policy
 
-## Overview
+### Overview
 
 This policy outlines the guidelines and procedures for the confidentiality and protection of Alumni data at DA-IICT, Gandhinagar. Alumni data includes any information related to former students of the institution, collected during their time as students and afterward. Protecting this data is essenti
 
-## Main Content
+### Main Content
 
 ## Data Privacy Policy
 

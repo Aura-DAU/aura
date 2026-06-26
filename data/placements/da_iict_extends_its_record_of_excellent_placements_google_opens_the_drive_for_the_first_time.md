@@ -7,13 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# DA-IICT extends its record of excellent placements, Google opens the drive for the first time
 
-In our current times, campus placements are an essential and integral part of a student's college life. It's a golden opportunity for the students to kickstart their professions and provides a great foundation to build upon their careers. We, placement cell at DA-IICT take pride in the fact that we've consistently had prominent companies such as Microsoft, Sprinklr, Morgan Stanley, Goldman Sachs (among many others) visit our campus every year; however, we still always aim at improving the quality and quantity of the placements and providing our students with the best of the best opportunities, and thus we were determined to bring one of the biggest tech firms in India, as well as in the world, to our campus. With our persistence and consistent efforts, we have made it possible, Google to visit our campus for the first time in the history of DA-IICT.
+## Overview
 
-# Main Content
+DA-IICT successfully secured placements from top tech firms including Google, Microsoft, Sprinklr, and DE Shaw, marking Google's first-ever placement drive at the campus.
 
-### DA-IICT extends its record of excellent placements, Google opens the drive for the first time
+## Main Content
 
 In our current times, campus placements are an essential and integral part of a student's college life. It's a golden opportunity for the students to kickstart their professions and provides a great foundation to build upon their careers. We, placement cell at DA-IICT take pride in the fact that we've consistently had prominent companies such as Microsoft, Sprinklr, Morgan Stanley, Goldman Sachs (among many others) visit our campus every year; however, we still always aim at improving the quality and quantity of the placements and providing our students with the best of the best opportunities, and thus we were determined to bring one of the biggest tech firms in India, as well as in the world, to our campus. With our persistence and consistent efforts, we have made it possible, Google to visit our campus for the first time in the history of DA-IICT.
 

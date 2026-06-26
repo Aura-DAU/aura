@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# DAU Student Research Excellence Award
+
+## Overview
 
 DAU Student Research Excellence Award - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/Policy_Student-Research-Excellence-VER_1.pdf)
 
-# Main Content
+## Main Content
 
 ## DAU Student Research Excellence Award
 
@@ -175,7 +177,7 @@ List of Awardees for the Year 2023/24
 | **Surupendu Gangopadhyay** | 201921002 | Prasenjit Majumder | 20-08-2022 | Gangopadhyay, Surupendu, and Prasenjit Majumder. "Text representation for direction prediction of share market." Expert Systems with Applications 211 (2023): 118472. | Expert Systems with Applications | Surupendu Gangopadhyay, Prasenjit Majumder | <https://doi.org/10.1016/j.eswa.2022.118472> |
 | **Twinkle Bhavsar** | 201921001 | Abhishek Jindal | 06-12-2022 | T. Bhavsar and A. Jindal, "On Reducing the Outage Probability in VFD-NOMA With Limited CSI at Source," in IEEE Communications Letters, vol. 27, no. 2, pp. 507-511, Feb. 2023, doi: 10.1109/LCOMM.2022.3227129. | IEEE Communications Letters | Twinkle Bhavsar, Dr. Abhishek Jindal | 10.1109/LCOMM.2022.3227129 |
 
-## Related Links
+### Related Links
 
 - [Scimago Journal ranking](https://www.scimagojr.com/)
 - [core.edu](https://portal.core.edu.au/conf-ranks/)
@@ -186,7 +188,7 @@ List of Awardees for the Year 2023/24
 - [https://doi.org/10.1016/j.eswa.2022.118472](https://doi.org/10.1016/j.eswa.2022.118472)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/Policy_Student-Research-Excellence-VER_1.pdf) (PDF)
 

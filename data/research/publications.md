@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Publications
+
+## Overview
 
 Publications
 
-# Main Content
+## Main Content
 
 ### Sorted year-wise
 
@@ -42,7 +44,7 @@ Publications
 * [2002](http://resourcecentre.daiict.ac.in/ir/faculty_pub/year_2002.html)
 * [2001](http://resourcecentre.daiict.ac.in/ir/faculty_pub/year_2001.html)
 
-## Related Links
+### Related Links
 
 - [2026](https://ir.daiict.ac.in/browse/dateissued?bbm.page=1&startsWith=2026)
 - [2025](http://resourcecentre.daiict.ac.in/ir/faculty_pub/year_2025.html)

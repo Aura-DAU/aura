@@ -7,11 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-# Overview
+# Admissions
+
+## Overview
 
 Admissions page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-# Main Content
+## Main Content
 
 Newly Launched Programs
 Admission Enquiry
@@ -221,7 +223,7 @@ Careers
  
 Navigation
 
-# Related Links
+## Related Links
 
 - [Original Page](https://daiict.ac.in/admissions)
 - [Parents](https://daiict.ac.in/parents)

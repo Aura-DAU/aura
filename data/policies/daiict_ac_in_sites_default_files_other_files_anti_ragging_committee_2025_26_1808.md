@@ -11,11 +11,11 @@ pdf_name: "Students / ANTI-RAGGING Committees & Squad Details"
 
 # Students / ANTI-RAGGING Committees & Squad Details
 
-## Overview
+### Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
 
-## Main Content
+### Main Content
 
 ► ~ ~~· 
 r 

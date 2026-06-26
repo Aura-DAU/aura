@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Fee Structure — BTech and PG Programs
 
-## Overview
+### Overview
 
 This document outlines the fee structure for undergraduate (BTech) and postgraduate programs at Dhirubhai Ambani University (DAU), formerly DA-IICT.
 
-## Main Content
+### Main Content
 
 ### BTech Fee Structure (2025-26)
 
@@ -45,14 +45,14 @@ This document outlines the fee structure for undergraduate (BTech) and postgradu
 - Semester 1 fees (including caution deposit) are due at the time of counselling/admission.
 - Subsequent semester fees are due before the start of each semester.
 
-## Important Information
+### Important Information
 
 - Contact for fee queries: **ug_admissions@dau.ac.in**
 - Helpline for NRI/Foreign category: **(+91) 8488876445**
 - Fee receipts are issued by the Finance Office.
 - Hostel fees and electricity charges are charged separately.
 
-## Related Links
+### Related Links
 
 - [DAU Admissions Page](https://www.daiict.ac.in/admissions)
 - [Scholarships Page](https://www.daiict.ac.in/scholarships)

@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# Students / IEEE Student Branch / Members
+
+## Overview
 
 ×
 
-# Main Content
+## Main Content
 
 # [  
 IEEE Members of DA-IICT](members.html)
@@ -462,7 +464,7 @@ MI-SIG plans to begin exciting group projects with a mentor assigned to each gro
 - **Email:** jaykakadiya19@gmail.com
 - **Email:** pratikpanchal.8491@gmail.com
 
-# Related Links
+## Related Links
 
 - [IEEE Members of DA-IICT](members.html)
 - [More about DAIICT](http://daiict.ac.in)

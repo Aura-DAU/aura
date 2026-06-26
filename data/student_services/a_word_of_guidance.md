@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# A Word of Guidance
+
+## Overview
 
 University or a professional academic campus is an entirely new academic environment and high school standards no longer apply. You can expect that grades will be somewhat, if not significantly, lower in university, particularly in first year, when there are so many adjustments for students to make. Be patient and encouraging and promote the concept of “doing your best” rather than “being the best.
 
-# Main Content
+## Main Content
 
 
 

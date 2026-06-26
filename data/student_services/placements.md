@@ -7,11 +7,13 @@ scraped_date: "2026-05-30"
 team: "Team D"
 ---
 
-# Overview
+# Placement Cell
+
+## Overview
 
 Placement Cell page at Dhirubhai Ambani University (DAU), Gandhinagar.
 
-# Main Content
+## Main Content
 
 Why Recruit at DAU? | Team | Placement Events | Placement and Internship Affairs Action Committee | Student Placement Cell | Placement Statistics | Audit Reports as per Indian Placement Reporting Standards | Placement Brochure | Recruiters | Contact us
 
@@ -253,7 +255,7 @@ Email: head_cpm[at]dau[dot]ac[dot]in
 
 Phone: (+91) 079-68261609, (+91) 9320301228
 
-# Related Links
+## Related Links
 
 - [Original Page](https://daiict.ac.in/placements)
 - [Parents](https://daiict.ac.in/parents)

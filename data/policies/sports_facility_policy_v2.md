@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Sports Facility Usage Policy
 
-## Overview
+### Overview
 
 DAU's Sports and Cultural Complex provides a wide range of indoor and outdoor sports facilities available to all registered students. This document outlines available facilities and usage rules.
 
-## Main Content
+### Main Content
 
 ### Available Facilities
 
@@ -51,7 +51,7 @@ DAU's Sports and Cultural Complex provides a wide range of indoor and outdoor sp
 - Check the institute notice board or SBG portal for booking schedules.
 - Facility bookings for tournaments or inter-college events require prior administrative approval.
 
-## Important Information
+### Important Information
 
 - Facilities are available to **registered DAU students** only.
 - Faculty and staff may use facilities during designated hours.

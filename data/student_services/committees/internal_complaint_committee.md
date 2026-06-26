@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# ICC
+
+## Overview
 
 DAU aims to provide safe working and learning campus life for faculty, staff and students free from gender discrimination and sexual harassment. It further cultivates the atmosphere where men and women work together towards the growth and prosperity of the institution in a safe and healthy academic environment.
 
-# Main Content
+## Main Content
 
 # Internal Complaints Committee
 
@@ -103,7 +105,7 @@ The Internal Complaints Committee will:
 - **Phone:** 079-68261548
 - **Phone:** 079-68261573
 
-# Related Links
+## Related Links
 
 - [icc[at]dau[dot]ac[dot]in](mailto:icc[at]dau[dot]ac[dot]in)
 - [policy](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf)
@@ -113,7 +115,7 @@ The Internal Complaints Committee will:
 - [nair_geeta[at]dau[dot]ac[dot]in](mailto:nair_geeta[at]dau[dot]ac[dot]in)
 - [jaydeep_panchal[at]dau[dot]ac[dot]in](mailto:jaydeep_panchal[at]dau[dot]ac[dot]in)
 
-# Downloadable Resources
+## Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

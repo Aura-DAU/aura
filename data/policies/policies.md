@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# Policies
 
-* [Standard Operating Procedure (SOP) for Event Organisation at DAU (1.06 MB)](https://www.daiict.ac.in/sites/default/files/other-files/Policy-on_SOP_for_Event_Organization-Apr_2026.pdf) "PDF file that opens in new window.")
+## Overview
 
-# Main Content
+Details are provided in the main content section.
+
+## Main Content
 
 * [Standard Operating Procedure (SOP) for Event Organisation at DAU (1.06 MB)](https://www.daiict.ac.in/sites/default/files/other-files/Policy-on_SOP_for_Event_Organization-Apr_2026.pdf) "PDF file that opens in new window.")
 
@@ -65,7 +67,7 @@ team: "Team D"
 
   * [Academic Integrity Policy (4.48 MB)](https://www.daiict.ac.in/sites/default/files/other-files/Plagiarism-Prevention-Framework_rev1-Director-2-EDITEDMM-1.pdf "PDF file that opens in new window.")
 
-# Related Links
+## Related Links
 
 - [Standard Operating Procedure (SOP) for Event Organisation at DAU(1.06 MB)](https://www.daiict.ac.in/sites/default/files/other-files/Policy-on_SOP_for_Event_Organization-Apr_2026.pdf)
 - [Policy on Institute Thematic Research Areas (TRAs)(692 KB)](https://www.daiict.ac.in/sites/default/files/other-files/Policy_on_Institute_Thematic_Research_Areas-Apr_2026.pdf)
@@ -83,7 +85,7 @@ team: "Team D"
 - [DAU Policy against Sexual Harassment(355 KB)](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf)
 - [Policy on the Sponsored Research Projects(1.44 MB)](https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-the_Sponsored-Projects-23.5.24.pdf)
 
-# Downloadable Resources
+## Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

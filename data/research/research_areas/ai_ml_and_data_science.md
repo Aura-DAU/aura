@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# AI, ML and Data Science
+
+## Overview
 
 Machine learning and Data science deals with data-aware mathematical models, algorithms and computational tools to manage, analyse and process possibly large scale data for various applications. There are several faculty members at DAIICT working in applications of Machine learning to wide-ranging domains like Image Processing and Computer Vision, Speech Processing, Information Retrieval, Natural Language Processing, Computional Neuroscience, Multimedia Forensics and Security, Biometrics, and Signal Processing and Communication. Faculty also work on core issues in Machine learning like Dimensionality reduction and Adversarial Machine learning. Aspects of Data Science pursued at DAIICT include Modeling Complex networks, Databases and Computational algorithms and tools for simulations on HPC and GPUs. Computing facility at the institute is available in the form of a HPC cluster, apart from GPU’s funded by projects. The Speech lab and Information Retrieval lab at DAIICT fall under the umbrella of Machine learning and Data Science.
 
-# Main Content
+## Main Content
 
 ### Research Overview
 
@@ -156,7 +158,7 @@ Machine learning and Data science deals with data-aware mathematical models, alg
 
 * [Two-Day School on AI and Law, DA-IICT, Gandhinagar](https://www.daiict.ac.in/events/6298)
 
-## Related Links
+### Related Links
 
 - [Prof. Aditya Tatu:](https://www.daiict.ac.in/faculty/aditya-tatu)
 - [Prof. Anil Roy:](https://www.daiict.ac.in/faculty/anil-roy)
@@ -176,7 +178,7 @@ Machine learning and Data science deals with data-aware mathematical models, alg
 - [Two-Day School on AI and Law, DA-IICT, Gandhinagar](https://www.daiict.ac.in/events/6298)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [RESEARCH PROJECTS](https://www.daiict.ac.in/sites/default/files/other-files/Geospatial-Lab_Project_Report.pdf) (PDF)
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)

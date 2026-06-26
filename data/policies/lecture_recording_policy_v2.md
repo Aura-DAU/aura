@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Policy on Recording of Lectures and Academic Sessions
 
-## Overview
+### Overview
 
 This document outlines DAU's guidelines on recording lectures, tutorials, and academic sessions by students and faculty.
 
-## Main Content
+### Main Content
 
 ### General Policy
 
@@ -48,7 +48,7 @@ This document outlines DAU's guidelines on recording lectures, tutorials, and ac
 - Instructors retain **intellectual property rights** over their lecture content.
 - Instructors may record their own sessions for distribution to enrolled students on the LMS.
 
-## Important Information
+### Important Information
 
 - When in doubt, **always ask the instructor** before recording.
 - Institute-provided lecture recordings (on Moodle/LMS) are for enrolled students only — redistribution is not permitted.

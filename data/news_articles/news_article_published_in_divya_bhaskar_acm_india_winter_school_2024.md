@@ -7,18 +7,14 @@ scraped_date: "2026-05-31"
 team: "Team C"
 ---
 
-# Overview
+# ACM India Winter School 2024 at DA-IICT
 
-Title: ACM India Winter School 2024 at DA-IICT
-Publication: Divya Bhaskar
-Date: 26-12-2024
+## Overview
 
-# Main Content
+A news article published in Divya Bhaskar covering the ACM India Winter School 2024 held at DA-IICT.
 
-Title: ACM India Winter School 2024 at DA-IICT
-Publication: Divya Bhaskar
-Date: 26-12-2024
+## Important Information
 
-# Important Information
-
-- Date of Announcement: 26/12/2024
+- **Publication:** Divya Bhaskar
+- **Publication Date:** 26-12-2024
+- **Date of Announcement:** 26/12/2024

@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# emergency contact detail
+
+## Overview
 
 Information page about emergency contact detail at Dhirubhai Ambani University (DAU).
 
-# Main Content
+## Main Content
 
 # Emergency Contact Details
 
@@ -53,7 +55,7 @@ Information page about emergency contact detail at Dhirubhai Ambani University (
 - **Phone:** 079-68261554
 - **Phone:** 079-68261573
 
-# Related Links
+## Related Links
 
 - [emergency contact detail](https://daiict.ac.in/emergency-contact-details)
 - [Dhirubhai Ambani University Website](https://www.daiict.ac.in)

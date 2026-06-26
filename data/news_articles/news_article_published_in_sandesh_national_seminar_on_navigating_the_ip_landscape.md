@@ -7,18 +7,14 @@ scraped_date: "2026-05-31"
 team: "Team C"
 ---
 
-# Overview
+# National Seminar on Navigating the IP Landscape
 
-Title: National Seminar on Navigating the IP Landscape
-Publication: Sandesh
-Date: 12-12-2024
+## Overview
 
-# Main Content
+A news article published in Sandesh covering the National Seminar on Navigating the IP Landscape.
 
-Title: National Seminar on Navigating the IP Landscape
-Publication: Sandesh
-Date: 12-12-2024
+## Important Information
 
-# Important Information
-
-- Date of Announcement: 18/12/2024
+- **Publication:** Sandesh
+- **Publication Date:** 12-12-2024
+- **Date of Announcement:** 18/12/2024

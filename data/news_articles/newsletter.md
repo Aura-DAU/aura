@@ -7,13 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team C"
 ---
 
-# Overview
+# DA-IICT Newsletters
 
-This page contains downloadable volumes of the DA-IICT newsletter.
+## Overview
 
-# Main Content
-
-This page contains downloadable volumes of the DA-IICT newsletter.
+This page provides access to downloadable volumes of the DA-IICT newsletter, covering various activities, achievements, and updates from the institute over the years.
 
 # Downloadable Resources
 

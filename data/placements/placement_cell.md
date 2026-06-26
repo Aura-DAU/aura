@@ -7,13 +7,17 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Placement Cell
+
+## Overview
+
+The Placement Cell at Dhirubhai Ambani University (DAU) facilitates career planning, internships, and final placements. It provides a structured, transparent ecosystem that prepares students for top industry opportunities while maintaining a strict code of conduct.
+
+## Quick Links
 
 **[Why Recruit at DAU?](https://www.daiict.ac.in/placements#why-recruit)** | **[Team](https://www.daiict.ac.in/placements#place-cell)** | **[Placement Events](https://www.daiict.ac.in/placements#events)** | **[Placement and Internship Affairs Action Committee](https://www.daiict.ac.in/placements#piaac)** | **[Student Placement Cell](https://www.daiict.ac.in/placements#spc-team)** | **[Placement Statistics](https://www.daiict.ac.in/placements#placement-stat)** | **[Audit Reports as per Indian Placement Reporting Standards](https://www.daiict.ac.in/placements#placement-audit)** | **[Placement Brochure](https://www.daiict.ac.in/placements#placement-bro)** | **[Recruiters](https://www.daiict.ac.in/placements#recruiter-s)** | **[Contact us](https://www.daiict.ac.in/placements#cont-us)**
 
-# Main Content
-
-**[Why Recruit at DAU?](https://www.daiict.ac.in/placements#why-recruit)** | **[Team](https://www.daiict.ac.in/placements#place-cell)** | **[Placement Events](https://www.daiict.ac.in/placements#events)** | **[Placement and Internship Affairs Action Committee](https://www.daiict.ac.in/placements#piaac)** | **[Student Placement Cell](https://www.daiict.ac.in/placements#spc-team)** | **[Placement Statistics](https://www.daiict.ac.in/placements#placement-stat)** | **[Audit Reports as per Indian Placement Reporting Standards](https://www.daiict.ac.in/placements#placement-audit)** | **[Placement Brochure](https://www.daiict.ac.in/placements#placement-bro)** | **[Recruiters](https://www.daiict.ac.in/placements#recruiter-s)** | **[Contact us](https://www.daiict.ac.in/placements#cont-us)**
+## Main Content
 
 ## Message from Placement Cell:
 
@@ -34,72 +38,6 @@ DAU is distinguished by its unique Placement and Internship Affairs Action Commi
 * Involvement in **high-quality events**, including workshops, and summer/winter schools
 
 ## Placement Events
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
 
 ## Placement and Internship Affairs Committee (PIAAC)
 

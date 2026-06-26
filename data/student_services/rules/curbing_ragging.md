@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# Students / Curbing Ragging
+
+## Overview
 
 Ragging of any nature is strictly prohibited. Ragging is a punishable offence under Central Government Act.
 
-# Main Content
+## Main Content
 
 # Curbing Ragging
 
@@ -29,11 +31,11 @@ Ragging of any nature is strictly prohibited. Ragging is a punishable offence un
 
 [For More Info ..](https://www.daiict.ac.in/sites/default/files/other-files/UGC-Regulations-for-Curbing-Ragging.pdf)
 
-# Related Links
+## Related Links
 
 - [For More Info ..](https://www.daiict.ac.in/sites/default/files/other-files/UGC-Regulations-for-Curbing-Ragging.pdf)
 
-# Downloadable Resources
+## Downloadable Resources
 
 | Resource | Type |
 | --- | --- |

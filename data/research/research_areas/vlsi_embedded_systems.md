@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# VLSI & Embedded Systems
+
+## Overview
 
 An important component of the Information and Communication Technology (ICT) is the Electronics and Communication, VLSI and Embedded systems (VES). The VES research group of ICT department in DA-IICT encompasses wide range of spectrum from microelectronics, digital and analog system architectures, VLSI electronic-design automation, nanotechnology, embedded systems and designs.
 
-# Main Content
+## Main Content
 
 ### Research Overview
 
@@ -160,7 +162,7 @@ For more details: **[Click here](https://scholar.google.fi/citations?user=EmlIL
   **Date:** 04th June – 08th June 2018  
   **Coordinators:** Prof. Yash Agrawal and Prof. Amit Bhatt
 
-## Related Links
+### Related Links
 
 - [Prof. Biswajit Mishra:](https://www.daiict.ac.in/faculty/biswajit-mishra)
 - [Prof. Rutu Parekh:](https://www.daiict.ac.in/faculty/rutu-parekh)
@@ -181,7 +183,7 @@ For more details: **[Click here](https://scholar.google.fi/citations?user=EmlIL
 - [https://karyashala-workshop.daiict.ac.in/index.html](https://karyashala-workshop.daiict.ac.in/index.html)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
 

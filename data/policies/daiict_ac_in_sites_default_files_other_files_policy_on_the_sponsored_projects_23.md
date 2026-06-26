@@ -11,11 +11,11 @@ pdf_name: "Policies/Policy on the Sponsored Research Projects"
 
 # Policies/Policy on the Sponsored Research Projects
 
-## Overview
+### Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
 
-## Main Content
+### Main Content
 
 DhiITubhaiAmbani
 Institute of Information and Communication Technology

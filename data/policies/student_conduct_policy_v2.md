@@ -10,11 +10,11 @@ source_type: "Web"
 
 # Student Code of Conduct — Campus Behaviour, Dress Code, and Social Media
 
-## Overview
+### Overview
 
 All students at DAU are expected to maintain a high standard of personal conduct, both on and off campus. This document covers dress code, alcohol/substance policy, social media conduct, and general campus behaviour expectations.
 
-## Main Content
+### Main Content
 
 ### Dress Code
 
@@ -54,7 +54,7 @@ All students at DAU are expected to maintain a high standard of personal conduct
 - The **Disciplinary Action Committee (DAC)** oversees all violations.
 - Penalties: warnings, fines, community service, hostel expulsion, academic suspension, or termination.
 
-## Important Information
+### Important Information
 
 - All students sign a declaration of adherence to the Code of Conduct at admission.
 - Ragging complaints can be filed at the National Anti-Ragging Helpline: **1800-180-5522**.

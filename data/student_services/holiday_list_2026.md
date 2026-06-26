@@ -9,11 +9,13 @@ source_type: "PDF"
 pdf_name: "DAU_Holiday-List-2026"
 ---
 
-# Overview
+# Holiday List 2026
+
+## Overview
 
 Official holiday list for Dhirubhai Ambani University (DAU), Gandhinagar for the calendar year 2026. Circular dated 11 December 2025.
 
-# Main Content
+## Main Content
 
 ### Holidays During Calendar Year 2026
 
@@ -48,14 +50,14 @@ Official holiday list for Dhirubhai Ambani University (DAU), Gandhinagar for the
 | 3 | Independence Day & Parsi New Year | 15 August 2026 | Saturday |
 | 4 | Diwali | 08 November 2026 | Sunday |
 
-# Important Information
+## Important Information
 
 - Total holidays observed: 19
 - Additional 4 public holidays fall on weekends
 - Circular issued by: Siddharth Swaminarayan, Executive Registrar
 - Circular date: 11 December 2025
 
-# Related Links
+## Related Links
 
 - [Holiday List 2026 (PDF)](https://daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf)
 - [Parents](https://daiict.ac.in/parents)

@@ -7,11 +7,13 @@ scraped_date: "2026-06-01"
 team: "Team A"
 ---
 
-# Overview
+# Faculty Research Publication Incentive
 
-An Incentive Policy for Faculty Research Publications: [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/An-Incentive-Policy-for-Faculty-Research-Publications_aug25.pdf)
+## Overview
 
-# Main Content
+Details are provided in the main content section.
+
+## Main Content
 
 An Incentive Policy for Faculty Research Publications: [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/An-Incentive-Policy-for-Faculty-Research-Publications_aug25.pdf)
 
@@ -216,7 +218,7 @@ List of Awardees for the Year 2024
 | Prof Sreeja Rajendran | Design and Analysis of Self Testable Fast Multiplier Architecture | Proceedings in 2024 IEEE Region 10 Symposium (TENSYMP) | https://doi.org/10.1109/tensymp61132.2024.10752144 |
 | Prof Abhishek Jindal and Prof Manish Kumar | An Energy Efficient UAV Path Planning for Data Collection in Multi-Node IoT System | International Conference on Advanced Networks and Telecommunications Systems (ANTS) - 2024 | https://doi.org/10.1109/ants63515.2024.10898404 |
 
-## Related Links
+### Related Links
 
 - [https://doi.org/10.22049/cco.2025.30706.2586](https://doi.org/10.22049/cco.2025.30706.2586)
 - [IEEE Transactions on Artificial Intelligence](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=9078688)
@@ -226,7 +228,7 @@ List of Awardees for the Year 2024
 - [Efficient Estimation of Saleh and Rapp Model Parameters for Nonlinear Amplifiers](https://ieeexplore.ieee.org/abstract/document/11429843/)
 
 
-## Downloadable Resources
+### Downloadable Resources
 
 - [Click here!](https://www.daiict.ac.in/sites/default/files/other-files/An-Incentive-Policy-for-Faculty-Research-Publications_aug25.pdf) (PDF)
 

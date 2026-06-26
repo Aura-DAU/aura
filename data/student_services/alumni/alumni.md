@@ -7,11 +7,13 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# People / Alumini
 
-**DAU Silver Jubilee Celebrations and Alumni Reunion** | **The Distinguished Alumni Awards 2025–26**
+## Overview
 
-# Main Content
+Details are provided in the main content section.
+
+## Main Content
 
 **DAU Silver Jubilee Celebrations and Alumni Reunion** | **The Distinguished Alumni Awards 2025–26**
 
@@ -222,7 +224,7 @@ Please do share interesting pictures and news on the Alumni office to help post 
   * [Alumni Association](https://www.daiict.ac.in/alumni-association.html)
   * [Events at DAU](https://www.daiict.ac.in/events)
 
-# Related Links
+## Related Links
 
 - [Alumni Document Service](https://www.daiict.ac.in/da-iict-alumni-document-service)
 - [Click here](https://www.daiict.ac.in/dau-alumni-chapter-membership-drive)
@@ -240,7 +242,7 @@ Please do share interesting pictures and news on the Alumni office to help post 
 - [Events Photo Gallery](https://www.daiict.ac.in/events-campus)
 - [Read More](https://www.daiict.ac.in/campus-memories)
 
-# Downloadable Resources
+## Downloadable Resources
 
 | Resource | Type |
 | --- | --- |
