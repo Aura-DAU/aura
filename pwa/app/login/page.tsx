@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/app/components/ThemeToggle";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 import { DemoCredentials } from "./DemoCredentials";
-import { UserSession } from "@/lib/api/auth.action";
+import { UserSession } from "@/lib/api/auth.schema";
 import { StudentProfile } from "@/app/api/chat.service";
 
 export default function LoginPage() {

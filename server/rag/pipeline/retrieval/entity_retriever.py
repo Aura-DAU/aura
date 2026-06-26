@@ -32,6 +32,8 @@ ENTITY_FIELDS = [
 # field (e.g. faculty_name with many chunks) cannot starve other fields.
 MAX_ENTITY_CHUNKS_PER_FIELD = 8   # max chunks pulled per individual field
 MAX_ENTITY_CHUNKS_TOTAL = 24      # hard cap on the combined pool
+# How many entity-matched chunks to pull per entity value at most
+MAX_ENTITY_CHUNKS = 10
 
 
 class EntityRetriever:
@@ -92,6 +94,7 @@ class EntityRetriever:
         entities: dict,
         max_chunks_per_field: int = MAX_ENTITY_CHUNKS_PER_FIELD,
         max_chunks_total: int = MAX_ENTITY_CHUNKS_TOTAL,
+        max_chunks: int = MAX_ENTITY_CHUNKS,
     ) -> list[dict]:
         """
         Return chunk records whose entity fields overlap with `entities`.
@@ -110,6 +113,8 @@ class EntityRetriever:
             Maximum number of entity-matched chunks per field.
         max_chunks_total : int
             Hard cap on the combined chunk pool returned.
+        max_chunks : int
+            Maximum number of entity-matched chunks to return.
 
         Returns
         -------
@@ -124,6 +129,7 @@ class EntityRetriever:
 
         # Collect candidate chunk IDs per field, then merge — so each field
         # is always consulted independently up to its own budget.
+        # Collect candidate chunk IDs (ordered, deduped via seen set)
         seen: set[str] = set()
         candidate_ids: list[str] = []
 
@@ -152,6 +158,7 @@ class EntityRetriever:
                 if field_count >= max_chunks_per_field:
                     break
 
+            for v in values:
                 matched_ids = field_map.get(v, [])
 
                 # Also try case-insensitive fallback
@@ -172,6 +179,18 @@ class EntityRetriever:
                         seen.add(chunk_id)
                         candidate_ids.append(chunk_id)
                         field_count += 1
+                    if chunk_id not in seen:
+                        seen.add(chunk_id)
+                        candidate_ids.append(chunk_id)
+
+                    if len(candidate_ids) >= max_chunks:
+                        break
+
+                if len(candidate_ids) >= max_chunks:
+                    break
+
+            if len(candidate_ids) >= max_chunks:
+                break
 
         # Hydrate to full chunk records
         results = []

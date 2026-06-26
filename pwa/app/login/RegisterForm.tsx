@@ -99,7 +99,7 @@ export function RegisterForm({ onSuccess, onError }: RegisterFormProps) {
           />
         </div>
       </div>
-
+ 
       <div className="space-y-1.5">
         <label className={labelBase}>university email</label>
         <div className="relative">
