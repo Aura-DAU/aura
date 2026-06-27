@@ -176,7 +176,13 @@ class Reranker:
             "admissions_information": [
                 "admissions",
                 "application process",
-                "how to apply"
+                "how to apply",
+                # Fix RR1: fee-related heading keywords were missing, so the
+                # reranker never boosted fee chunks for admissions queries.
+                "fees structure",
+                "fee structure",
+                "tuition fee",
+                "fee"
             ],
 
             "scholarship_information": [

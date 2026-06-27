@@ -132,7 +132,54 @@ class RetrievalPipeline:
         "m.tech ict": "M.Tech. (ICT)",
 
         "phd": "Ph.D.",
-        "ph.d": "Ph.D."
+        "ph.d": "Ph.D.",
+
+        # Fix RP3: BS-MS dual degree programs were entirely missing from
+        # PROGRAM_ALIASES, so "fee for BS-MS" / "BS-MS admissions" queries
+        # produced no program_name entity → no metadata filter → noisy retrieval.
+        "bs ms": "BS-MS (Data Science & Artificial Intelligence)",
+        "bs-ms": "BS-MS (Data Science & Artificial Intelligence)",
+        "bs ms ds ai": "BS-MS (Data Science & Artificial Intelligence)",
+        "bs ms data science": "BS-MS (Data Science & Artificial Intelligence)",
+        "bs ms dsai": "BS-MS (Data Science & Artificial Intelligence)",
+        "bs ms artificial intelligence": "BS-MS (Data Science & Artificial Intelligence)",
+        "bs ms it": "BS-MS (Information Technology)",
+        "bs ms information technology": "BS-MS (Information Technology)",
+
+        # MDes variants
+        "mdes": "M.Des.",
+        "m des": "M.Des.",
+        "m.des": "M.Des.",
+        "mdes cd": "M.Des. (CD)",
+        "mdes iuxd": "M.Des. (IUxD)",
+        "m.des. cd": "M.Des. (CD)",
+        "m.des. iuxd": "M.Des. (IUxD)",
+        "design": "M.Des.",
+
+        # MTech EC
+        "mtech ec": "M.Tech. (EC)",
+        "m.tech ec": "M.Tech. (EC)",
+        "mtech ece": "M.Tech. (EC)",
+
+        # MTech CS ML
+        "mtech cs ml": "M.Tech. (CS and ML)",
+        "mtech cs": "M.Tech. (CS and ML)",
+        "mtech ml": "M.Tech. (CS and ML)",
+
+        # MSc IT variants
+        "msc it": "M.Sc. (IT)",
+        "m.sc it": "M.Sc. (IT)",
+        "msc information technology": "M.Sc. (IT)",
+
+        # BTech with full spellings
+        "b tech ict": "B.Tech. (ICT)",
+        "b tech csai": "B.Tech. (CS and AI)",
+        "b tech ece": "B.Tech. (ECE-AI)",
+        "b tech evd": "B.Tech. (EVD)",
+        "b tech mnc": "B.Tech. (MnC)",
+        "computer science and artificial intelligence": "B.Tech. (CS and AI)",
+        "electronics and communication": "B.Tech. (ECE-AI)",
+        "mathematics and computing": "B.Tech. (MnC)"
     }
     
     def _expand_semesters(self, query):
@@ -582,25 +629,12 @@ class RetrievalPipeline:
             results = self._expand_adjacent_chunks(results)
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
         # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
-        # the vector/BM25 results (query chunks) into a single chunk pool.
-        # The cross-encoder reranker then scores the full pool uniformly.
-        if self.entity_retriever and not decomposed_queries:
-            entity_chunks = (
-                self.entity_retriever.retrieve_by_entities(
-                    entities
-                )
-            )
-            if entity_chunks:
-                logger.debug(
-                    "Entity retriever added %d candidate chunks to pool.",
-                    len(entity_chunks),
-                )
-                results = results + entity_chunks
-
-        # ── Entity-based retrieval (professor's algorithm) ─────────────────
-        # Fix #3: entity retrieval is now also run for decomposed queries.
-        # Previously skipped entirely for comparison/multi-entity queries,
-        # which are exactly the ones that benefit most from entity injection.
+        # the vector/BM25 results into a unified chunk pool for reranking.
+        # Fix RP1: previously two separate blocks existed — one guarded by
+        # `not decomposed_queries` and a second unconditional one. For
+        # non-decomposed queries both ran, injecting entity chunks twice
+        # (before dedup). Collapsed into a single unconditional block so
+        # entity retrieval runs exactly once for all query types.
         if self.entity_retriever:
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
@@ -793,6 +827,12 @@ class RetrievalPipeline:
             semantic_list.append({
                 "id": match["id"],
                 "score": match["score"],
+                # Fix RP2: cosine_score explicitly stored so the confidence
+                # router in aura_chat.py can read it via c.get("cosine_score").
+                # Previously dual-path candidates only had "score"/"fusion_score"
+                # so the router always saw top_cosine=0.0 and relied entirely
+                # on top_cross for routing decisions.
+                "cosine_score": match["score"],
                 "metadata": match["metadata"],
                 "semantic_score": match["score"]
             })
@@ -807,6 +847,8 @@ class RetrievalPipeline:
                 c["normalized_score"] = (c["semantic_score"] - min_val) / val_range if val_range > 0 else 1.0
 
         # 3. Global 50/50 Fusion
+        # Fix RP2 (cont.): cosine_score is tracked through the fused pool
+        # so it survives into the final_candidates list for the router.
         fused_pool = {}
         for c in entity_list:
             chunk_id = c["id"]
@@ -814,6 +856,7 @@ class RetrievalPipeline:
                 "id": chunk_id,
                 "metadata": c["metadata"],
                 "score": c.get("score", 0.0),
+                "cosine_score": c.get("cosine_score", 0.0),
                 "entity_norm": c["normalized_score"],
                 "semantic_norm": 0.0
             }
@@ -824,11 +867,14 @@ class RetrievalPipeline:
                     "id": chunk_id,
                     "metadata": c["metadata"],
                     "score": c.get("score", 0.0),
+                    "cosine_score": c.get("cosine_score", 0.0),
                     "entity_norm": 0.0,
                     "semantic_norm": c["normalized_score"]
                 }
             else:
                 fused_pool[chunk_id]["semantic_norm"] = c["normalized_score"]
+                # Prefer the semantic path's cosine_score (it's the raw Pinecone value)
+                fused_pool[chunk_id]["cosine_score"] = c.get("cosine_score", 0.0)
 
         final_candidates = []
         for chunk_id, info in fused_pool.items():
@@ -837,6 +883,7 @@ class RetrievalPipeline:
                 "id": chunk_id,
                 "metadata": info["metadata"],
                 "score": info["score"],
+                "cosine_score": info.get("cosine_score", 0.0),
                 "fusion_score": final_score
             }
             final_candidates.append(cand)

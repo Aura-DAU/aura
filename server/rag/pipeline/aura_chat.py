@@ -87,14 +87,21 @@ class AuraChat:
 
             # Fix #1B: use the raw Pinecone cosine score (stored as
             # 'cosine_score' by the retriever) for the 0.60 threshold check.
-            # The 'score' field after RRF fusion is in the range 0.01–0.033
-            # and can never reach 0.60, so that branch was dead code.
+            # Fix AC1: if retrieval returned zero chunks (e.g. Pinecone
+            # connection issue or a silent exception in the pipeline), the
+            # max() calls below return their defaults, which is correct.
+            # However, we also log this so it's visible in DEBUG mode.
+            chunks = retrieval_result.get("chunks", [])
+
+            if not chunks and os.getenv("DEBUG", "false").lower() == "true":
+                print("[Router] WARNING: retrieval returned 0 chunks for query:", query)
+
             top_cosine = max(
-                [(c.get("cosine_score") or 0.0) for c in retrieval_result["chunks"]],
+                [(c.get("cosine_score") or 0.0) for c in chunks],
                 default=0.0
             )
             top_cross = max(
-                [(c.get("cross_score") or -10.0) for c in retrieval_result["chunks"]],
+                [(c.get("cross_score") or -10.0) for c in chunks],
                 default=-10.0
             )
 

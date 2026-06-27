@@ -669,6 +669,14 @@ class QueryPlanner:
                     "event"
                 )
 
+            # Fix QP1: for "general" intent (placement, hostel, campus life,
+            # ragging, transport etc.) no required_sections were ever set, so
+            # the reranker couldn't boost relevant section headings. Populate
+            # them now from the retrieval_hints the LLM already provided (if any),
+            # so planner-supplied hints are always honoured.
+            if not required_sections and hints.get("required_sections"):
+                required_sections = hints["required_sections"]
+
             hints["preferred_section_type"] = preferred_section_type
             hints["required_sections"] = required_sections
 

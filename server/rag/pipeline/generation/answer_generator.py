@@ -372,10 +372,12 @@ Retrieved Documents
             if is_code_request:
                 answer_lower = answer.lower()
                 is_grounded = (
-                    re.search(r"\bdau\b", answer_lower)
+                    re.search(r"\\bdau\\b", answer_lower)
                     or "dhirubhai ambani" in answer_lower
                     or "[source:" in answer_lower
+                    or bool(re.search(r"\\[\\d+\\]", answer_lower))  # Fix AG1: [1][2] citations
                     or "could not find that information" in answer_lower
+                    or "not available" in answer_lower
                 )
                 if "```" in answer or not is_grounded:
                     return out_of_scope_response

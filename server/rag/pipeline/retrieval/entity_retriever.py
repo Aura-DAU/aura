@@ -171,13 +171,14 @@ class EntityRetriever:
                     if len(candidate_ids) >= max_chunks_total:
                         break
 
+                    # Fix ER1: the second `if chunk_id not in seen` block was
+                    # dead code — after the first block runs seen.add(chunk_id),
+                    # the second check always evaluates False, so it never
+                    # executed. Removed the duplicate to prevent future confusion.
                     if chunk_id not in seen:
                         seen.add(chunk_id)
                         candidate_ids.append(chunk_id)
                         field_count += 1
-                    if chunk_id not in seen:
-                        seen.add(chunk_id)
-                        candidate_ids.append(chunk_id)
 
                     if len(candidate_ids) >= max_chunks:
                         break
