@@ -375,7 +375,7 @@ Retrieved Documents
                     re.search(r"\\bdau\\b", answer_lower)
                     or "dhirubhai ambani" in answer_lower
                     or "[source:" in answer_lower
-                    or bool(re.search(r"\\[\\d+\\]", answer_lower))  # Fix AG1: [1][2] citations
+                    or bool(re.search(r"\[\d+\]", answer_lower))  # Fix AG1: [1][2] citations
                     or "could not find that information" in answer_lower
                     or "not available" in answer_lower
                 )
