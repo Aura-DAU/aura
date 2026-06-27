@@ -104,7 +104,7 @@ class AuraChat:
                 context=retrieval_result[
                     "context"
                 ],
-
+                plan=retrieval_result["plan"],                
                 history=history,
                 profile=profile
             )
