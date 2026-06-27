@@ -1,57 +1,47 @@
 ---
-title: "Autumn 2025"
-url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
-category: "Academics - Course Policies"
-scraped_by: "Squad D Scraper"
-scraped_date: "2026-06-08"
-team: "Squad D"
+title: "Communication Skills"
+url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Course_Files_Autumn_2025_26/Autumn_2025_26_Individual_Course_Files/PC613_CommunicationSkills_Autumn2025%20-%20Jenson%20Joseph.pdf"
+category: "Academics"
+scraped_by: "Madhav Thesiya"
+scraped_date: "2026-06-28"
 source_type: "PDF"
-pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
-course_code: "PC613"
-semester: "Autumn 2025-26"
-pdf_page_start: 126
-pdf_page_end: 126
+pdf_name: "PC613_CommunicationSkills_Autumn2025 - Jenson Joseph.pdf"
+instructor: "Jenson Joseph"
 ---
 
-# Autumn 2025 (PC613)
+# Communication Skills (PC613)
+
+## Overview
+
+This document presents the detailed policy and syllabus structure for the course Communication Skills (PC613). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
 
 ## Main Content
 
-Autumn 2025
-PC613: Communica/on Skills
-(Sem I, MSc IT)
-This 4-credit course is designed to equip the MSc IT students with the essen;al skills for
-effec;ve communica;on and comprehension of ideas that will help them in their career as
-IT professionals. The course will include sessions intended to improve the students’ wri;ng
-competence, ability to ar;culate ideas and think cri;cally, presenta;on skills, and command
-over English language. Exercises like group ac;vi;es, wri;ng tasks, class presenta;ons, and
-crea;ve assignments will be combined with lectures on basic English grammar, reading skills,
-and protocols of communica;on appropriate to a modern work culture.
-Students are expected to dedicate ;me for comple;ng take-home readings and wri;ng
-assignments. Apart from three hours of contact hours per week, the course will include two
-hours of prac;cal sessions per week dedicated to group ac;vi;es and language skills.
-Course Outcome:
-At the end of the course, the students will be equipped with essen;al skills for wri;ng and
-speaking in English in everyday situa;ons, and for communica;ng ideas as part of work, at
-presenta;ons and during interviews. During the course, the students will engage in
-individual and group ac;vi;es that will improve their wri;ng and speaking abili;es in
-English, as well as their ability to comprehend and appreciate ideas and cultural artefacts
-like literature, poetry and cinema.
-Grading policy
-Class Exercise (Construct a Scenario): 15 Marks
-Class Exercise (Pitch Your Idea): 15 Marks
-In class wri;ng exercises: 20 Marks
-Social Media Video exercise: 20 Marks
-Mid Sem Exam II: 30 Marks
-Total Marks: 100
+| Course Title | Communication Skills | | |
+|---|---|---|---|
+| Course Code | PC613 | Credit Structure |  |
+| Category |  | Semester | Autumn 2025 |
+| Program | MSc IT | | |
+| Prerequisites |  | | |
+| Course Objectives/ Brief Course Description |  | | |
+| Evaluation/ Grading Policy | Autumn 2025 PC613: Communica/on Skills (Sem I, MSc IT) This 4-credit course is designed to equip the MSc IT students with the essen;al skills for eﬀec;ve communica;on and comprehension of ideas that will help them in their career as IT professionals. The course will include sessions intended to improve the students’ wri;ng competence, ability to ar;culate ideas and think cri;cally, presenta;on skills, and command over English language. Exercises like group ac;vi;es, wri;ng tasks, class presenta;ons, and crea;ve assignments will be combined with lectures on basic English grammar, reading skills | | |
+| Course Materials/ References |  | | |
+
+---
+*Page Split*
+---
+
+## Detailed Course Content
+
+
+- Detailed content not available in this PDF.
 
 ## Important Information
 
 - **Course Code:** PC613
-- **Course Title:** Autumn 2025
-- **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf (pages 126–126)
-- **Semester:** Autumn 2025-26
-- **Scraped At:** 2026-06-08 07:08:10 UTC
+- **Course Title:** Communication Skills
+- **Document Source:** PC613_CommunicationSkills_Autumn2025 - Jenson Joseph.pdf
+- **Category:** Academics (Intranet)
 
 ## Related Links
 
@@ -62,4 +52,4 @@ Total Marks: 100
 
 | Resource | Type | Link |
 |---|---|---|
-| Course_Booklet_for_Autumn_2025-26.pdf | PDF | [Download Course_Booklet_for_Autumn_2025-26.pdf](https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf) |
+| PC613_CommunicationSkills_Autumn2025 - Jenson Joseph.pdf | PDF | [Download PC613_CommunicationSkills_Autumn2025 - Jenson Joseph.pdf](https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Course_Files_Autumn_2025_26/Autumn_2025_26_Individual_Course_Files/PC613_CommunicationSkills_Autumn2025%20-%20Jenson%20Joseph.pdf) |
