@@ -240,8 +240,10 @@ def get_canonical_faculty_names():
                     if m:
                         names.add(m.group(1).strip().strip("'").strip('"'))
                         continue
-            except Exception:
-                pass
+            except Exception as e:
+                # Non-fatal: if a faculty markdown file cannot be read/parsed,
+                # fall back to deriving the name from the filename below.
+                _ = e
             name = f.stem.replace("faculty_", "").replace("_", " ").title()
             names.add(name)
             
