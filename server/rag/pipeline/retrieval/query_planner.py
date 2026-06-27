@@ -413,6 +413,56 @@ Which courses do not count as elective credits in BTech ICT?
     "required_sections": ["Elective", "Credits", "Curriculum"]
   }
 }
+
+Query:
+What is the fee for BS-MS program?
+
+{
+  "category": "admissions",
+  "intent": "overview",
+  "retrieval_intent": "admissions_information",
+  "entity_confidence": 0.93,
+  "multi_entity_query": false,
+  "entities": {
+    "program_name": "BS-MS"
+  },
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Fee", "Fees Structure", "Tuition", "Admissions"]
+  }
+}
+
+Query:
+How much is the tuition fee at DAU?
+
+{
+  "category": "admissions",
+  "intent": "overview",
+  "retrieval_intent": "admissions_information",
+  "entity_confidence": 0.80,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Fee", "Fees Structure", "Tuition"]
+  }
+}
+
+Query:
+What are the hostel charges?
+
+{
+  "category": "campus_life",
+  "intent": "overview",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.80,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Hostel", "Fee", "Charges"]
+  }
+}
 """
 
 class QueryPlanner:
@@ -577,10 +627,17 @@ class QueryPlanner:
 
             elif retrieval_intent == "admissions_information":
 
+                # Fix Bug3: added "Fee", "Fees Structure", "Tuition" so that
+                # fee-related questions classified as admissions_information
+                # (e.g. "What is the fee for BS-MS program?") get a reranking
+                # boost toward chunks containing fee tables/sections.
                 required_sections.extend([
                     "Admissions",
                     "Application Process",
-                    "Requirements"
+                    "Requirements",
+                    "Fee",
+                    "Fees Structure",
+                    "Tuition"
                 ])
 
                 preferred_section_type = (

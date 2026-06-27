@@ -1,11 +1,14 @@
 class ContextBuilder:
 
-    # Fix G: maximum estimated tokens to include in context. At top_k=9 each
-    # chunk can contribute ~306 tokens (256 text + ~50 XML overhead), giving
-    # up to ~2,754 tokens which risks silent LLM input truncation when combined
-    # with the system prompt (~450 tokens) and history (~500 tokens).
-    # Cap context at 2,000 tokens — lower-ranked chunks are dropped first.
-    MAX_CONTEXT_TOKENS = 2000
+    # Fix G (original): cap context to avoid LLM truncation.
+    # Fix Bug4: raised from 2000 → 3000 tokens. The original 2000-token cap
+    # was too tight: a BS-MS admissions page has a long eligibility section
+    # before the Fees Structure, so the fee chunk (chunk #3-4) was being
+    # silently dropped when added after the eligibility chunks already consumed
+    # ~1800 tokens. 3000 gives headroom for fee + scholarship + other data
+    # while staying well under model context limits (system prompt ~450 +
+    # history ~500 + 3000 context = ~3950 tokens, safe for all hosted models).
+    MAX_CONTEXT_TOKENS = 3000
 
     def _estimate_tokens(self, text: str) -> int:
         """Rough token estimate: word count × 1.3 (accounts for sub-word splits)."""

@@ -526,6 +526,13 @@ class RetrievalPipeline:
         if decomposed_queries:
             all_results = []
 
+            # Fix Bug1: retrieval_top_k was referenced but never defined,
+            # causing a NameError that silently crashed the decomposed-query
+            # branch and returned zero results ("not in database" false positive).
+            # Use plan["top_k"] (already boosted for multi-entity queries) or
+            # fall back to 5 per sub-query.
+            retrieval_top_k = plan.get("top_k", 5)
+
             for subquery in decomposed_queries:
                 subquery_expanded = self._expand_semesters(subquery)
 

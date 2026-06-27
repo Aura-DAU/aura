@@ -69,6 +69,15 @@ class AuraChat:
                         subjects_str = ", ".join(subjects)
                         retrieval_query = f"{query} (Context: student data related to {subjects_str})"
 
+            # Fix Bug5: fee-related queries need "Fees Structure" injected
+            # into the retrieval query so BM25 keyword matching can find the
+            # right section even when the question is phrased generically
+            # (e.g. "what is the fee for BS-MS" → no heading keywords).
+            FEE_KEYWORDS = ["fee", "fees", "tuition", "charges", "cost", "payment", "caution deposit"]
+            query_lower_check = retrieval_query.lower()
+            if any(kw in query_lower_check for kw in FEE_KEYWORDS):
+                retrieval_query = retrieval_query + " Fees Structure Tuition"
+
             retrieval_result = (
                 self.pipeline.get_context(
                     retrieval_query,
@@ -91,7 +100,7 @@ class AuraChat:
 
             # Permit simple greetings to pass to RAG
             is_greeting = is_greeting_or_meta(query)
-            is_high_confidence = is_greeting or (top_cosine >= 0.60) or (top_cross >= 0.0)
+            is_high_confidence = is_greeting or (top_cosine >= 0.45) or (top_cross >= 0.0)  # Fix Bug2: lowered from 0.60
 
             router_decision = "RAG" if is_high_confidence else "FALLBACK"
             
