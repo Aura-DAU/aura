@@ -52,32 +52,28 @@ class AuraChat:
         profile=None
     ):
         try:
+            # 1. Semantic Guardrail Evaluation
+            if not self.guardrail.is_safe(query):
+                return {
+                    "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                    "sources": []
+                }
+
+            # Guardrail / Query Augmentation for RBAC
+            retrieval_query = query
+            if profile:
+                role = profile.get("role", "student")
+                if role == "professor":
+                    subjects = profile.get("subjects", [])
+                    if subjects:
+                        subjects_str = ", ".join(subjects)
+                        retrieval_query = f"{query} (Context: student data related to {subjects_str})"
+
             retrieval_result = (
                 self.pipeline.get_context(
-                    query,
+                    retrieval_query,
                     history=history
                 )
-        # 1. Semantic Guardrail Evaluation
-        if not self.guardrail.is_safe(query):
-            return {
-                "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
-                "sources": []
-            }
-
-        # Guardrail / Query Augmentation for RBAC
-        retrieval_query = query
-        if profile:
-            role = profile.get("role", "student")
-            if role == "professor":
-                subjects = profile.get("subjects", [])
-                if subjects:
-                    subjects_str = ", ".join(subjects)
-                    retrieval_query = f"{query} (Context: student data related to {subjects_str})"
-
-        retrieval_result = (
-            self.pipeline.get_context(
-                retrieval_query,
-                history=history
             )
 
             # Fix #1B: use the raw Pinecone cosine score (stored as
@@ -123,7 +119,7 @@ class AuraChat:
                     context=retrieval_result[
                         "context"
                     ],
-
+                    plan=retrieval_result["plan"],
                     history=history,
                     profile=profile
                 )

@@ -1,5 +1,5 @@
 ---
-title: "Jahnvi Trivedi of M.Des 2021 batch shines through the "Firki Ni Dori" Film at the Green Frames: VATAVARAN Short Film Competition & Festival."
+title: 'Jahnvi Trivedi of M.Des 2021 batch shines through the "Firki Ni Dori" Film at the Green Frames: VATAVARAN Short Film Competition & Festival.'
 url: "https://www.daiict.ac.in/achievements/6183"
 category: "Achievements"
 scraped_by: "Dhruvam"

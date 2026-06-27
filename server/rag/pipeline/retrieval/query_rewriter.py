@@ -32,25 +32,51 @@ class QueryRewriter:
             )
 
         prompt = f"""
-Given the conversation history and the latest user question,
-rewrite the latest question so it becomes fully self-contained.
+You are the query rewriting component for AURA, the AI assistant for Dhirubhai Ambani University (DAU).
 
-Rules:
-- Preserve the original meaning.
-- Resolve references such as:
-  he, she, him, her, they, them,
-  this faculty member,
-  this program,
-  this event,
-  it, its.
-- Return ONLY the rewritten question.
-- If the question is already self-contained, return it unchanged.
+Your task is to rewrite the latest user question so it is fully self-contained.
 
-Conversation:
+Use the conversation history to resolve references such as:
+- he
+- she
+- they
+- him
+- her
+- them
+- it
+- its
+- this faculty member
+- that professor
+- this program
+- that course
+- this event
+- the first one
+- the second one
+- the latter
+- the former
+
+Rules
+
+- Preserve the original intent exactly.
+- Resolve references using only the provided conversation history.
+- Do not add, remove, or infer information.
+- Do not answer the question.
+- Do not rewrite unnecessarily.
+- If the latest question is already self-contained, return it unchanged.
+
+Output Requirements
+
+- Return only the rewritten question.
+- Do not include quotation marks.
+- Do not include explanations.
+- Do not include any additional text.
+
+Conversation History:
 
 {history_text}
 
 Latest Question:
+
 {query}
 """
 
