@@ -33,7 +33,8 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-Detailed content not available in this PDF.
+
+- Detailed content not available in this PDF.
 
 ## Important Information
 

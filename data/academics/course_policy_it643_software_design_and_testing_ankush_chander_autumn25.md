@@ -33,7 +33,54 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-- Evolution of programming- Programming Paradigms - Software design vs Software Architecture - Role of design in software process - Object Oriented principles: Classes (Data + behaviour), Categories of objects, Encapsulation, Abstraction, Generalization, Decomposition - Modelling using CRC(Class Responsibilities Collaborators) cards and UML diagrams - Design principles - Coupling and Cohesion, Separation of Concerns, Information Hiding, Conceptual Integrity - Software Testing: Basic concepts and preliminaries, - Design and Code Inspections to Reduce Errors in Program Development, - Functional Testing (Black Box, White Box, Mutation Regression) - Debugging, - Verification of Software Systems, Testing of W eb GUI and Mobile Apps - Non-functional Testing. Suggested T extbook/references: 1. Head First Object-Oriented Analysis and Design 2. Software Design and Architecture Specialization Assessment Method: - Lab +Group Project assignments: 50% (group size will be a maximum of 4 students) - Mid-Sem Exam: 25% - End Sem Exam: 25% Grading Policy: Relative grading with the following slabs: - >90 = AA - 80-90 = AB - 65-79 = BB - 50-64 = BC - 40-50 = CC - <39 = CD Course outcome: Upon completion, students will be equipped with the advanced principles, modern techniques, and practical skills required to architect software that is inherently testable, maintainable, reflecting the core tenets of creating software that is "safe from bugs, easy to understand, and ready for change".
+
+- Evolution of programming- Programming Paradigms
+
+- Software design vs Software Architecture
+
+- Role of design in software process
+
+- Object Oriented principles: Classes (Data + behaviour), Categories of objects, Encapsulation, Abstraction, Generalization, Decomposition
+
+- Modelling using CRC(Class Responsibilities Collaborators) cards and UML diagrams
+
+- Design principles
+
+- Coupling and Cohesion, Separation of Concerns, Information Hiding, Conceptual Integrity
+
+- Software Testing: Basic concepts and preliminaries,
+
+- Design and Code Inspections to Reduce Errors in Program Development,
+
+- Functional Testing (Black Box, White Box, Mutation Regression)
+
+- Debugging,
+
+- Verification of Software Systems, Testing of W eb GUI and Mobile Apps
+
+- Non-functional Testing. Suggested T extbook/references:
+
+1. Head First Object-Oriented Analysis and Design
+
+2. Software Design and Architecture Specialization Assessment Method:
+
+- Lab +Group Project assignments: 50% (group size will be a maximum of 4 students)
+
+- Mid-Sem Exam: 25%
+
+- End Sem Exam: 25% Grading Policy: Relative grading with the following slabs:
+
+- >90 = AA
+
+- 80-90 = AB
+
+- 65-79 = BB
+
+- 50-64 = BC
+
+- 40-50 = CC
+
+- <39 = CD Course outcome: Upon completion, students will be equipped with the advanced principles, modern techniques, and practical skills required to architect software that is inherently testable, maintainable, reflecting the core tenets of creating software that is "safe from bugs, easy to understand, and ready for change".
 
 ## Important Information
 

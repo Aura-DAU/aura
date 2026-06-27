@@ -32,7 +32,8 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-Learning outcome: After successful completion of the course, a student  Will get exposure in agriculture economics and agriculture situation in India  Will get exposure in crop and soil science  Will get exposure in agrometeorology  Will know about impact of climate change on agriculture Learning and teaching activity:  2 x 1-hour lectures per week
+
+- Learning outcome: After successful completion of the course, a student  Will get exposure in agriculture economics and agriculture situation in India  Will get exposure in crop and soil science  Will get exposure in agrometeorology  Will know about impact of climate change on agriculture Learning and teaching activity:  2 x 1-hour lectures per week
 
 ## Important Information
 

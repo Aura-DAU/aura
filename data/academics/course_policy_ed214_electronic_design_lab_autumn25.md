@@ -33,7 +33,12 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-â€¢ Effective use of laboratory equipment and Synthesis vs analysis â€¢ Effective use of design resources, Cadence ICFB, Matlab, Spice, ModelSim, Xilinx ISE â€¢ Manufacturing techniques, fabless design, EMC â€¢ Learn HDL, System Verilog The course has two experiments 1. Build a part of an 8-bit Microprocessor using Discrete components and verify them 2. Verify Various Analog Circuits using LM741 Resources â€¢ Web Resources, Datasheets
+
+- â€¢ Effective use of laboratory equipment and Synthesis vs analysis â€¢ Effective use of design resources, Cadence ICFB, Matlab, Spice, ModelSim, Xilinx ISE â€¢ Manufacturing techniques, fabless design, EMC â€¢ Learn HDL, System Verilog The course has two experiments
+
+1. Build a part of an 8-bit Microprocessor using Discrete components and verify them
+
+2. Verify Various Analog Circuits using LM741 Resources â€¢ Web Resources, Datasheets
 
 ## Important Information
 

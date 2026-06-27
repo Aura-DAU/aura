@@ -33,7 +33,32 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-• Pressman, Roger S. Software engineering: a practitioner's approach. Palgrave Macmillan, 2005. Course Project Outline: Specific to the software process model chosen for development of the course project. For example, for Agile Process Model (SCRUM) 1. Requirements in the form of user sto ry (both functional and non -functional) 2. Acceptance Criteria 3. Burn -down chart 4. Daily SCRUM planning and development of sprints. 5. Use of GitHub and DevOps tools. 6. LLMs 7. Slack Marking Scheme for Projects: 1. The group mark is everybody's mark, i.e., individual assessment of 25% and group assessment of 15%. 2. Everybody reports what they personally did, and separate marks are given to those components by the instructor. This can be done by using either a dossier of rough work or a division of labour report produced by team members. 3. Other group members report (confidentially or openly) the relative contributions of other group members to allow for an adjustment of the final grade. 4. Pop quizzes in class to ensure that students know the intimate details of the project. 5. Cross -validating with the results of individual work (possibly reducing the weight of group work for students who perform poorly on exams or individual assignments).
+
+- Pressman, Roger S. Software engineering: a practitioner's approach. Palgrave Macmillan, 2005. Course Project Outline: Specific to the software process model chosen for development of the course project. For example, for Agile Process Model (SCRUM)
+
+1. Requirements in the form of user sto ry (both functional and non -functional)
+
+2. Acceptance Criteria
+
+3. Burn -down chart
+
+4. Daily SCRUM planning and development of sprints.
+
+5. Use of GitHub and DevOps tools.
+
+6. LLMs
+
+7. Slack Marking Scheme for Projects:
+
+1. The group mark is everybody's mark, i.e., individual assessment of 25% and group assessment of 15%.
+
+2. Everybody reports what they personally did, and separate marks are given to those components by the instructor. This can be done by using either a dossier of rough work or a division of labour report produced by team members.
+
+3. Other group members report (confidentially or openly) the relative contributions of other group members to allow for an adjustment of the final grade.
+
+4. Pop quizzes in class to ensure that students know the intimate details of the project.
+
+5. Cross -validating with the results of individual work (possibly reducing the weight of group work for students who perform poorly on exams or individual assignments).
 
 ## Important Information
 

@@ -32,7 +32,38 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-Unit 4 – Security, Best Practices & Industry Integration ● Security & compliance in MLOps (GDPR, ISO) ● Case studies from e-commerce, finance, healthcare ● Lab: End-to-end corporate-style ML project from data acquisition to Kubernetes deployment ● Capstone mini-project with CI/CD integration ● Industry mentor guest lecture ● Certification readiness (AWS Certified ML Specialty or equivalent) Suggested Text/s: 1. Designing Machine Learning Systems – Chip Huyen ● Why: This is one of the most practical books on building and deploying ML systems at scale. Covers ML lifecycle, MLOps, data pipelines, experimentation, deployment, and monitoring in industry settings. ● Industry Relevance: Written from a product and engineering perspective, with case studies from leading tech companies. 2. Kubernetes for Machine Learning – Emmanuel Raj ● Why: Hands-on approach to running, scaling, and managing ML workloads with Kubernetes. Includes examples with Docker, Kubeflow, and cloud platforms. ● Industry Relevance: Perfect for bridging the gap between data science and production infrastructure. Course structure: 1. 30% mid semester exam, 2. 30% viva(alternate Wednesday, starting from 20th), 3. 40% assignments/project
+
+- Unit 4 – Security, Best Practices & Industry Integration
+
+- Security & compliance in MLOps (GDPR, ISO)
+
+- Case studies from e-commerce, finance, healthcare
+
+- Lab: End-to-end corporate-style ML project from data acquisition to Kubernetes deployment
+
+- Capstone mini-project with CI/CD integration
+
+- Industry mentor guest lecture
+
+- Certification readiness (AWS Certified ML Specialty or equivalent) Suggested Text/s:
+
+1. Designing Machine Learning Systems – Chip Huyen
+
+- Why: This is one of the most practical books on building and deploying ML systems at scale. Covers ML lifecycle, MLOps, data pipelines, experimentation, deployment, and monitoring in industry settings.
+
+- Industry Relevance: Written from a product and engineering perspective, with case studies from leading tech companies.
+
+2. Kubernetes for Machine Learning – Emmanuel Raj
+
+- Why: Hands-on approach to running, scaling, and managing ML workloads with Kubernetes. Includes examples with Docker, Kubeflow, and cloud platforms.
+
+- Industry Relevance: Perfect for bridging the gap between data science and production infrastructure. Course structure:
+
+1. 30% mid semester exam,
+
+2. 30% viva(alternate Wednesday, starting from 20th),
+
+3. 40% assignments/project
 
 ## Important Information
 

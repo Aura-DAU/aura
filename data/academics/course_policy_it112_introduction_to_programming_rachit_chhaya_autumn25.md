@@ -33,7 +33,20 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-1. Core C (20 Hours) Variables, Types, Assignment, Operators, Expressions, Branching and Looping Solving problems by representing solutions as pseudocode. Mapping pseudocode to C programs. Arrays. Functions, passing by value. Scoping rules. Basic I/O and File I/O using standard C library . 2. Tools (4 Hours) Editor , Compiler , Debugger , Make, and Shell commands. (We will be using Linux/gedit/gcc/gdb/make/bash for this course.) Multi-file programs. 3. Pointers (10 Hours) Pointers. Pointer arithmetic. Function - pass by reference. Command line arguments. Dynamic memory allocation. Sruct and link list. 4. Recursion (4 Hours) Basic concepts. Solving simple problems using recursion. Performance comparison with iterative solutions. Lab Content and Exercises will be tightly tied with content covered in the class. Textbook Yashvant Kanetkar , Let Us C , 19 th Ed, BPB Publications Refer ences 1. Kernighan Brian, Ritchi Dennis, The C Programming Language (ANSI C Version), 2 nd Ed., Prentice Hall 2. Deitel Harvey , C: How to Program, PHI Learning Online compiler used in the lectur es : https://onecompiler .com/c Other tools will be communicated to the s tudents whenever they are used.
+
+1. Core C (20 Hours) Variables, Types, Assignment, Operators, Expressions, Branching and Looping Solving problems by representing solutions as pseudocode. Mapping pseudocode to C programs. Arrays. Functions, passing by value. Scoping rules. Basic I/O and File I/O using standard C library .
+
+2. Tools (4 Hours) Editor , Compiler , Debugger , Make, and Shell commands. (We will be using Linux/gedit/gcc/gdb/make/bash for this course.) Multi-file programs.
+
+3. Pointers (10 Hours) Pointers. Pointer arithmetic. Function
+
+- pass by reference. Command line arguments. Dynamic memory allocation. Sruct and link list.
+
+4. Recursion (4 Hours) Basic concepts. Solving simple problems using recursion. Performance comparison with iterative solutions. Lab Content and Exercises will be tightly tied with content covered in the class. Textbook Yashvant Kanetkar , Let Us C , 19 th Ed, BPB Publications Refer ences
+
+1. Kernighan Brian, Ritchi Dennis, The C Programming Language (ANSI C Version), 2 nd Ed., Prentice Hall
+
+2. Deitel Harvey , C: How to Program, PHI Learning Online compiler used in the lectur es : https://onecompiler .com/c Other tools will be communicated to the s tudents whenever they are used.
 
 ## Important Information
 

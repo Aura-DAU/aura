@@ -32,7 +32,8 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-Topic wise lecture plan is expected. Introduction to IoT system design , Compo nents of system design, Sensor s and actuators , Interface electronics , IoT Networ k topologies, IoT Hardware security design , need of hardware security design for the IoT applications , Hardware design concepts and protocols , Challenges in the hardware security design , Basic implementation of hardware security using the digital devices, Applications for in -situ measurements
+
+- Topic wise lecture plan is expected. Introduction to IoT system design , Compo nents of system design, Sensor s and actuators , Interface electronics , IoT Networ k topologies, IoT Hardware security design , need of hardware security design for the IoT applications , Hardware design concepts and protocols , Challenges in the hardware security design , Basic implementation of hardware security using the digital devices, Applications for in -situ measurements
 
 ## Important Information
 

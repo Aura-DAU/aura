@@ -33,7 +33,54 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-/Contents: 1. Introdu ction to optimization methods [4 HOURS] • Introduction • Formulation of an LPP • Graphical Method to solve an LPP • Nature of a solution 2. Linear programming problem [10 HOURS] • Algebraic method • Simplex method • Revised simplex method • Duality • Dual simplex method • Sensitivity analysis 3. Transportation Problem [ 6 HOURS] • North -west corner Rule • Row -minimum method • Vogel’s Approximation • u-v method 4. Game Theory [6 HOURS] • Introduction to Game Theory • Game with pure and mixed strategies • 2 × n and m × 2 Games • LPP For mulation of m x n Games 5. Numerical Solution of Convex Optimization [ 8 HOURS]  Gradient Descent, Steepest Descent  Newton’s Method  Conjugate Direction and Conjugate Gradient Methods
+
+- /Contents:
+
+1. Introdu ction to optimization methods [4 HOURS]
+
+- Introduction
+
+- Formulation of an LPP
+
+- Graphical Method to solve an LPP
+
+- Nature of a solution
+
+2. Linear programming problem [10 HOURS]
+
+- Algebraic method
+
+- Simplex method
+
+- Revised simplex method
+
+- Duality
+
+- Dual simplex method
+
+- Sensitivity analysis
+
+3. Transportation Problem [ 6 HOURS]
+
+- North -west corner Rule
+
+- Row -minimum method
+
+- Vogel’s Approximation
+
+- u-v method
+
+4. Game Theory [6 HOURS]
+
+- Introduction to Game Theory
+
+- Game with pure and mixed strategies
+
+- 2 × n and m × 2 Games
+
+- LPP For mulation of m x n Games
+
+5. Numerical Solution of Convex Optimization [ 8 HOURS]  Gradient Descent, Steepest Descent  Newton’s Method  Conjugate Direction and Conjugate Gradient Methods
 
 ## Important Information
 

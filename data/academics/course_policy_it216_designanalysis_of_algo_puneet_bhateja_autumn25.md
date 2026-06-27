@@ -33,7 +33,50 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-(tentative) : 1. Introduction (a) What is an algorithm? (b) Notation for programs (c) Proof techniques (d) Basics review: Sets - Functions - Limits - Simple series 2. Fundamentals (a) Instances and problems - Elementary operations. (b) Efficiency (c) Average and worst -case analysis (d) Examples 3. Asymptotic notation (a) Introduction (b) A notation for “the order of” (c) The omega n otation, the ‘oh’ (O) notation, the theta notation 4. Analysis of algorithms (a) Solving recurrences (b) Data structures (c) Arrays, stacks and queues (d) Records and pointers (e) Lists, graphs, trees and associative tables (f) Heaps (g) Disjoint set struc tures 5. Greedy algorithms (a) Making change (b) General characteristics of Greedy algorithms (c) Graphs MST - Kruskal’s and Prims’s algorithms (d) Graphs: shortest paths (e) Knapsack problem (f) Scheduling 6. Divide - and - Conquer (a) Multiplying large integers (b) Binary search (c) Sorting by: merging and quicksort (d) Finding the median (e) Matrix multiplication (f) Exponentiation 7. Dynamic programming (a) Basics of dynamic programming (b) Rod cutting problem (c) Chained matrix multiplication (d) The knapsack problem 8. Introduction to probabilistic algorithms - Parallel algorithms 9. Introduction to computational complexity 10. Approximation Algorithms Evaluation process: Each student has to undertake In -semester and final examinations. At the end of the course he will be a given a grade based on his performance in these examinations. Also there is lab assignment each week which tests their programming as well as algorithm design skills. Course Outcomes: Through this course , students can develop abilit y to • design and analysis of the major classes of algorithms. • to develop their own versions for a given computational task and to compare and contrast their performance. • understand mathematical structures such as graphs, trees and learn their uses. Text book: Introduction to Algorithms, 3rd Edition (Mit Press) 3rd Edition by Thomas H Cormen , Charles E Leiserson , Ronald L Rivest Grading policy (tentative): The grade earned by a student wil l depend on (1) the total marks earned by him in all the exa ms conducted over the entire semester, and (2) active participation in the class discussions and labs . The weightage of each part is as follows: Mid sem marks: 4 0 End sem marks: 40 Class participation and labs : 20 % Attendance: there is likely to be an institute -wide attendance policy, which will be applicable to this course and will be announced in due course.
+
+- (tentative) :
+
+1. Introduction (a) What is an algorithm? (b) Notation for programs (c) Proof techniques (d) Basics review: Sets
+
+- Functions
+
+- Limits
+
+- Simple series
+
+2. Fundamentals (a) Instances and problems
+
+- Elementary operations. (b) Efficiency (c) Average and worst -case analysis (d) Examples
+
+3. Asymptotic notation (a) Introduction (b) A notation for “the order of” (c) The omega n otation, the ‘oh’ (O) notation, the theta notation
+
+4. Analysis of algorithms (a) Solving recurrences (b) Data structures (c) Arrays, stacks and queues (d) Records and pointers (e) Lists, graphs, trees and associative tables (f) Heaps (g) Disjoint set struc tures
+
+5. Greedy algorithms (a) Making change (b) General characteristics of Greedy algorithms (c) Graphs MST
+
+- Kruskal’s and Prims’s algorithms (d) Graphs: shortest paths (e) Knapsack problem (f) Scheduling
+
+6. Divide
+
+- and
+
+- Conquer (a) Multiplying large integers (b) Binary search (c) Sorting by: merging and quicksort (d) Finding the median (e) Matrix multiplication (f) Exponentiation
+
+7. Dynamic programming (a) Basics of dynamic programming (b) Rod cutting problem (c) Chained matrix multiplication (d) The knapsack problem
+
+8. Introduction to probabilistic algorithms
+
+- Parallel algorithms
+
+9. Introduction to computational complexity
+
+10. Approximation Algorithms Evaluation process: Each student has to undertake In -semester and final examinations. At the end of the course he will be a given a grade based on his performance in these examinations. Also there is lab assignment each week which tests their programming as well as algorithm design skills. Course Outcomes: Through this course , students can develop abilit y to
+
+- design and analysis of the major classes of algorithms.
+
+- to develop their own versions for a given computational task and to compare and contrast their performance.
+
+- understand mathematical structures such as graphs, trees and learn their uses. Text book: Introduction to Algorithms, 3rd Edition (Mit Press) 3rd Edition by Thomas H Cormen , Charles E Leiserson , Ronald L Rivest Grading policy (tentative): The grade earned by a student wil l depend on (1) the total marks earned by him in all the exa ms conducted over the entire semester, and (2) active participation in the class discussions and labs . The weightage of each part is as follows: Mid sem marks: 4 0 End sem marks: 40 Class participation and labs : 20 % Attendance: there is likely to be an institute -wide attendance policy, which will be applicable to this course and will be announced in due course.
 
 ## Important Information
 

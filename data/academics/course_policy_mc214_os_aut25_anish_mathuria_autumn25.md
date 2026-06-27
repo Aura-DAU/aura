@@ -33,7 +33,12 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-- 2 - Textbook Operating Systems: Three Easy Pieces , Remzi H. Arpaci -Dusseau and Andrea C. Arpaci -Dusseau, November 2023 (Version 1.1 0). The course text covers most of the lecture material. It is freely available at http://pages.cs.wisc.edu/~remzi/OSTEP/ Reference s  Operating System Concepts, A. Silberschatz, P. Gavin and G. Gagne, 8th edition, 2009, Pearson Education.  Linux Kernel Development, Robert Love, 3rd edition, 2010, Pearson Education. Evaluation Two in -semester tests and a final exam will take place at the officially scheduled exam time for the course.  30% two mid-term exams  40% final exam  20% in-lab exercises  10% mini -projects Lab policy  Lab attendance is mandatory. You will have to demonstrate your code for the in - lab exercises to a TA as specified in the lab handout . If you fail to do so , you will lose points. There will be no makeup labs for any reason.  It is a cour se requirement that you do the programming assignments on Linux OS. If the code you submit does not compile on Linux or we are unable to run the executable , you will not receive credit.
+
+- 2
+
+- Textbook Operating Systems: Three Easy Pieces , Remzi H. Arpaci -Dusseau and Andrea C. Arpaci -Dusseau, November 2023 (Version 1.1 0). The course text covers most of the lecture material. It is freely available at http://pages.cs.wisc.edu/~remzi/OSTEP/ Reference s  Operating System Concepts, A. Silberschatz, P. Gavin and G. Gagne, 8th edition, 2009, Pearson Education.  Linux Kernel Development, Robert Love, 3rd edition, 2010, Pearson Education. Evaluation Two in -semester tests and a final exam will take place at the officially scheduled exam time for the course.  30% two mid-term exams  40% final exam  20% in-lab exercises  10% mini -projects Lab policy  Lab attendance is mandatory. You will have to demonstrate your code for the in
+
+- lab exercises to a TA as specified in the lab handout . If you fail to do so , you will lose points. There will be no makeup labs for any reason.  It is a cour se requirement that you do the programming assignments on Linux OS. If the code you submit does not compile on Linux or we are unable to run the executable , you will not receive credit.
 
 ## Important Information
 

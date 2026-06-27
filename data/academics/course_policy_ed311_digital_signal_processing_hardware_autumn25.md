@@ -32,7 +32,10 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
- Introduction to DSP and DSP Hardware  Introduction to Stochastic Signals, Sampling and Quantisation  ADC, DAC Architectures  Registers, ALU, SRAM, IO ports, Instruction Decoder, Synthesis of a simplified MIPS microprocessor on FPGA  Testing combinational and sequential digital systems, Boundary Scan, Build-in self-test  Laboratory space and FPGA development kits required, Software requirements: Modelsim, Altera Quartus, Evaluation/ Grading Policy 2 In sem exams, 1 Final Exam, 1 Practical Session graded throughout the semester + Quizzes and Homeworks. Course Materials/ References Textbooks J F Wakerly (2006). Digital Design - Principles and Practices. Pearson Prentice Hall. M M Mano, M D Ciletti, Digital Design (2007). Digital Design. Pearson Prentice Hall. Course Outcome : Having successfully completed this module the student will be able to:  Build and debug a digital circuit, FPGA and hardware implementations of combinational and sequential digital systems  Signals, quantisation and coding of communications signals
+
+-  Introduction to DSP and DSP Hardware  Introduction to Stochastic Signals, Sampling and Quantisation  ADC, DAC Architectures  Registers, ALU, SRAM, IO ports, Instruction Decoder, Synthesis of a simplified MIPS microprocessor on FPGA  Testing combinational and sequential digital systems, Boundary Scan, Build-in self-test  Laboratory space and FPGA development kits required, Software requirements: Modelsim, Altera Quartus, Evaluation/ Grading Policy 2 In sem exams, 1 Final Exam, 1 Practical Session graded throughout the semester + Quizzes and Homeworks. Course Materials/ References Textbooks J F Wakerly (2006). Digital Design
+
+- Principles and Practices. Pearson Prentice Hall. M M Mano, M D Ciletti, Digital Design (2007). Digital Design. Pearson Prentice Hall. Course Outcome : Having successfully completed this module the student will be able to:  Build and debug a digital circuit, FPGA and hardware implementations of combinational and sequential digital systems  Signals, quantisation and coding of communications signals
 
 ## Important Information
 

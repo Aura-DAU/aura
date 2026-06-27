@@ -33,7 +33,26 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
- 1. INTRODUCTION TO ORGANIZATIONAL BEHAVIOR.   2. CHALLENGES IN COMMUNICATION.   3. INDIVIDUAL BEHAVIOUR (PERCEPTION, MOTIVATION AND LEARNING).   4. GROUP BEHAVIOUR.   5. CONFLICTS AND NEGOTIATION IN THE WORK PLACE.  6. IMPACT OF CULTUR E AND STRUCTURE.   7. DECISION MAKING AND PROBLEM SOLVING.   8. EMERGING TRENDS IN PSYCHOLOGY: Stress Management and coping skills. Course Methodology Teaching Case - Studies. Role- plays. Article Analysis. Group Discussions Course Evaluation In-semester Examination's 25% Case Studies, Discussions, Article Analysis, and Project /Paper Presentations & Reports, Mock Interview 20% Assignments 20% End-semester Examination 30% Overall class participation in course 5% Book(s) Stephen Robbins, “Organisational Behaviour”, Pearson Education, 10th Edition, 2005. K. Ashwathappa, “Organisational Behaviour”, Himalaya Publishing House. 5th Edition, 2004. Paul Hersey et. al., “Management of Organisational Behaviour – Utilizing human resources”, Prentice -Hall of India Pvt. Ltd., 7th Edition, 1998 Fred Luthans, “Organisational Behaviour”, Irwin McGraw -Hill, 8th Edition, 1998. C. B. Mamoria, “Personnel Management”, Himalaya Publishing House, 1998. John W. Newstrom et. al., “Organisational Behaviour – Human Behaviour at Work”, Tata McGraw -Hill, 9th Edition, 1997. Stephen Robbins, “Managing Organisational Conflict: A Nontraditional Approach”, Prentice Hall, 1974 P1 P2 P3 P4 P5 P6: x P7 P8:x P9:x P10:x P11 P12:x
+
+- 
+
+1. INTRODUCTION TO ORGANIZATIONAL BEHAVIOR.  
+
+2. CHALLENGES IN COMMUNICATION.  
+
+3. INDIVIDUAL BEHAVIOUR (PERCEPTION, MOTIVATION AND LEARNING).  
+
+4. GROUP BEHAVIOUR.  
+
+5. CONFLICTS AND NEGOTIATION IN THE WORK PLACE. 
+
+6. IMPACT OF CULTUR E AND STRUCTURE.  
+
+7. DECISION MAKING AND PROBLEM SOLVING.  
+
+8. EMERGING TRENDS IN PSYCHOLOGY: Stress Management and coping skills. Course Methodology Teaching Case
+
+- Studies. Role- plays. Article Analysis. Group Discussions Course Evaluation In-semester Examination's 25% Case Studies, Discussions, Article Analysis, and Project /Paper Presentations & Reports, Mock Interview 20% Assignments 20% End-semester Examination 30% Overall class participation in course 5% Book(s) Stephen Robbins, “Organisational Behaviour”, Pearson Education, 10th Edition, 2005. K. Ashwathappa, “Organisational Behaviour”, Himalaya Publishing House. 5th Edition, 2004. Paul Hersey et. al., “Management of Organisational Behaviour – Utilizing human resources”, Prentice -Hall of India Pvt. Ltd., 7th Edition, 1998 Fred Luthans, “Organisational Behaviour”, Irwin McGraw -Hill, 8th Edition, 1998. C. B. Mamoria, “Personnel Management”, Himalaya Publishing House, 1998. John W. Newstrom et. al., “Organisational Behaviour – Human Behaviour at Work”, Tata McGraw -Hill, 9th Edition, 1997. Stephen Robbins, “Managing Organisational Conflict: A Nontraditional Approach”, Prentice Hall, 1974 P1 P2 P3 P4 P5 P6: x P7 P8:x P9:x P10:x P11 P12:x
 
 ## Important Information
 

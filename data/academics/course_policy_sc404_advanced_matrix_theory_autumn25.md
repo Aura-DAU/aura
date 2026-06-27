@@ -32,7 +32,24 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-(The selection of topics is variable depending on time constraints.) 1. Review: eigenvalues, eigenvectors, special types of matrices. 2. Schur triangular form, spectral theorem, singular value decomposition, polar decomposition, generalized inverse, least squares solutions. 3. Positive semidefinite and Positive definite matrices: Properties and characterizations 4. Matrix norms, spectral radius formula, relationship between matrix norms and singular values. 5. Perron–Frobenius theory: Matrices with positive and non-negative entries. Suggested Textbook/references: [1] F. Zhang. Matrix theory. Basic results and techniques. Springer, 1999. [2] R.A. Horn and C.R. Johnson. Matrix analysis. Cambridge University Press, 2012. Assessment method: In-Sem 1 - 30%, In-Sem 2 - 30%, End-Sem - 40% Course Outcomes: After completing the course, the students should be able to:   Understand basic concepts related to matrix theory [PO12]   Handle abstract ideas of mathematics and learn to write mathematical proofs [PO1, PO2]   Understand different types of representations of a matrix [PO4].    Develop skills towards solving problems using properties and characterization of special matrices [PO3].  PO1 PO2 PO3 PO4 PO5 PO6 PO7 PO8 PO9 PO10 PO11 PO12 X X X X X Tentative Lecture Schedule : Detailed Course Contents Topic Name Content No. of lectures Review Eigenvalues, eigenvectors, special types of matrices , inner product space 2 Matrix decomposition Schur triangular form, spectral theorem, singular value decomposition, polar decomposition, generalized inverse, least squares solutions. 10 Positive semidefinite matrices Positive semidefinite and Positive definite matrices: Definition, properties and characterizations 10 Matrix norms Definition and examples of m atrix norms, spectral radius formula, relationship between matrix norms and singular values. 10 Entrywise p ositive and non-negative matrices Definition, Properties, Perron’s theorem, irreducible matrices, Perron-Frobenius theorem 10
+
+- (The selection of topics is variable depending on time constraints.)
+
+1. Review: eigenvalues, eigenvectors, special types of matrices.
+
+2. Schur triangular form, spectral theorem, singular value decomposition, polar decomposition, generalized inverse, least squares solutions.
+
+3. Positive semidefinite and Positive definite matrices: Properties and characterizations
+
+4. Matrix norms, spectral radius formula, relationship between matrix norms and singular values.
+
+5. Perron–Frobenius theory: Matrices with positive and non-negative entries. Suggested Textbook/references: [1] F. Zhang. Matrix theory. Basic results and techniques. Springer, 1999. [2] R.A. Horn and C.R. Johnson. Matrix analysis. Cambridge University Press, 2012. Assessment method: In-Sem 1
+
+- 30%, In-Sem 2
+
+- 30%, End-Sem
+
+- 40% Course Outcomes: After completing the course, the students should be able to:   Understand basic concepts related to matrix theory [PO12]   Handle abstract ideas of mathematics and learn to write mathematical proofs [PO1, PO2]   Understand different types of representations of a matrix [PO4].    Develop skills towards solving problems using properties and characterization of special matrices [PO3].  PO1 PO2 PO3 PO4 PO5 PO6 PO7 PO8 PO9 PO10 PO11 PO12 X X X X X Tentative Lecture Schedule : Detailed Course Contents Topic Name Content No. of lectures Review Eigenvalues, eigenvectors, special types of matrices , inner product space 2 Matrix decomposition Schur triangular form, spectral theorem, singular value decomposition, polar decomposition, generalized inverse, least squares solutions. 10 Positive semidefinite matrices Positive semidefinite and Positive definite matrices: Definition, properties and characterizations 10 Matrix norms Definition and examples of m atrix norms, spectral radius formula, relationship between matrix norms and singular values. 10 Entrywise p ositive and non-negative matrices Definition, Properties, Perron’s theorem, irreducible matrices, Perron-Frobenius theorem 10
 
 ## Important Information
 

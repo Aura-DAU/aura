@@ -33,7 +33,32 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-(Strong Math content) : Supervised Vs Unsupervised learning, Linear and Polynomial regressions, [convex/non convex functions, convex sets, constra ined/unconstrained minimization] Least squares (LS) estimation, Maximum likelihood (ML) and Maximum a posteriori (MAP) estimations ,] logistic regression, soft max for multiclass classification, Support v ector machine (Soft margin and Hard margin classifiers) , Kernel Trick, bias and variance in machine learning , overfitting problem and regularization, Decision trees and Random forest, cross validation, Linear Discriminant Analysis (LDA), Quadratic Discriminant Analysis (QDA) , K means clustering , Principal component a nalysis (PCA) , Independent component a nalysis (ICA), Gaussian Mixture Model ( GMM ) 8-10 Labs will be conducted conducted . Evaluation: P erformance is evaluated based on continuous evaluation process that include s project, lab, class participation, one Mid-semester Examination and an End -Semester Examination . Expected Outcomes After studying this course, students will be a ble to understand a variety of machine learning architectures, use them to solve problems in object classification, segmentation (clustering) . The course will be helpful for the students to come up with new research ideas in various application areas of machine learning . This course has both Theory and Lab. Labs are based on the theory taught in the class. READINGS 1. Kevin Murphy, Machine Learning A Probabilistic Approach, MIT 2. Hastie, Tibshirani, Friedman, The Elements of Statistical Learning. 3. Research papers from ICML, ICLR, Neurl PS, ICCV, CVPR etc 4. Notes prepared by me. ● Evaluation Scheme (TAs will also be part of evaluation process ): ● Lab - 5% ● Class Participation 10% – Reward points for answering questions asked during class hours (max 10 points ). ● Midsem exam and Endsem exam -40% (Best of the two will be considered) ● Course project : - 45%. ● Two presentations in a semester. At the beginning and towards the end. In a project group a person randomly chosen will be presenting on prescribed date (decided by the Instructor) . The marks o btained by that student will be awarded to all students in that group . Codes to be verified by TAs . MAP TO PROGRAM OUTCOMES (POs) OF NBA P1PP1 P2P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 XX X X X X X X
+
+- (Strong Math content) : Supervised Vs Unsupervised learning, Linear and Polynomial regressions, [convex/non convex functions, convex sets, constra ined/unconstrained minimization] Least squares (LS) estimation, Maximum likelihood (ML) and Maximum a posteriori (MAP) estimations ,] logistic regression, soft max for multiclass classification, Support v ector machine (Soft margin and Hard margin classifiers) , Kernel Trick, bias and variance in machine learning , overfitting problem and regularization, Decision trees and Random forest, cross validation, Linear Discriminant Analysis (LDA), Quadratic Discriminant Analysis (QDA) , K means clustering , Principal component a nalysis (PCA) , Independent component a nalysis (ICA), Gaussian Mixture Model ( GMM ) 8-10 Labs will be conducted conducted . Evaluation: P erformance is evaluated based on continuous evaluation process that include s project, lab, class participation, one Mid-semester Examination and an End -Semester Examination . Expected Outcomes After studying this course, students will be a ble to understand a variety of machine learning architectures, use them to solve problems in object classification, segmentation (clustering) . The course will be helpful for the students to come up with new research ideas in various application areas of machine learning . This course has both Theory and Lab. Labs are based on the theory taught in the class. READINGS
+
+1. Kevin Murphy, Machine Learning A Probabilistic Approach, MIT
+
+2. Hastie, Tibshirani, Friedman, The Elements of Statistical Learning.
+
+3. Research papers from ICML, ICLR, Neurl PS, ICCV, CVPR etc
+
+4. Notes prepared by me.
+
+- Evaluation Scheme (TAs will also be part of evaluation process ):
+
+- Lab
+
+- 5%
+
+- Class Participation 10% – Reward points for answering questions asked during class hours (max 10 points ).
+
+- Midsem exam and Endsem exam -40% (Best of the two will be considered)
+
+- Course project :
+
+- 45%.
+
+- Two presentations in a semester. At the beginning and towards the end. In a project group a person randomly chosen will be presenting on prescribed date (decided by the Instructor) . The marks o btained by that student will be awarded to all students in that group . Codes to be verified by TAs . MAP TO PROGRAM OUTCOMES (POs) OF NBA P1PP1 P2P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 XX X X X X X X
 
 ## Important Information
 

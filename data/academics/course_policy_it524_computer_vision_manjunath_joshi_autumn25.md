@@ -33,7 +33,18 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-2. Develop technical presentation skills 3. Solving the problems that are of ill-posed nature. Text Books: 1. Multiple view geometry in computer vision: R. Hartley and A. Zisserman, Cambridge University Press 2. Robot Vision by BKP Horn, MIT Press 3. Introductory Techniques for 3-D Computer Vision by Trucco and Veri, Prentice Hall 4. Deep Learning: Ian Goodfellow, Yashua Bengio and Aaron Courvillee, MIT Press. Evaluation Strategy: In semester and Mid semester Exam s: 40% each Best of the above 2 exams will be consid ered. Project: 50% Attendance, Class participation, Assignments:10% MAP TO PROGRAM OUTCOMES (POs) OF NBA P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 X X X X X X X
+
+2. Develop technical presentation skills
+
+3. Solving the problems that are of ill-posed nature. Text Books:
+
+1. Multiple view geometry in computer vision: R. Hartley and A. Zisserman, Cambridge University Press
+
+2. Robot Vision by BKP Horn, MIT Press
+
+3. Introductory Techniques for 3-D Computer Vision by Trucco and Veri, Prentice Hall
+
+4. Deep Learning: Ian Goodfellow, Yashua Bengio and Aaron Courvillee, MIT Press. Evaluation Strategy: In semester and Mid semester Exam s: 40% each Best of the above 2 exams will be consid ered. Project: 50% Attendance, Class participation, Assignments:10% MAP TO PROGRAM OUTCOMES (POs) OF NBA P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 X X X X X X X
 
 ## Important Information
 

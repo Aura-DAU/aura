@@ -32,7 +32,62 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-Course Description There has been a dramatic growth in markets for financial products like s tocks, bonds , currencies , derivatives, insurance, private equity and Venture capital . The purpose of this course is to provide knowledge of various markets and their applications . Course Objectives On completion of the course, the students will have knowledge of: a) Stock markets – Microstructure and IPO management b) Money markets – Call money and Treasury bill markets c) Bond markets – Microstructure and valuation d) Derivatives markets – Forwards, Futures, Options and Swaps e) Forex markets – Exchange rates, Exposures and Euromarkets f) Insurance market g) PEVC – Fund raising, financing and PE industry in India Instructor B.B. Chakraba rti - email: bbc@iimcal.ac.in Course Material A) Cases 1) Narayana Health: The Initial Public Offering Decision - HBS Case No. W 17503 2) Fairfax and Thomas Cook India: Private Equ ity, Permannet Capital and Public Markets - HBS Case No. W15463 B) Class notes Course Evaluation 1) Attendance – 10% 2) Quizzes ( Two – One after Session 13 and the other after Session 25 ) – 20% 3) In-Semester examination (after Session 13) – 30% 4) End-Semester examination – 40% Session Plan (Total hours – 42) Main Topic Sub-Topic Hours Financial Markets S 1 - Introduction 1.5 Stock Markets S 2 - Market Microstructure S 3 - IPO management – Case of Narayana Health 3 1.5 Money Markets S 4 - Call Money Market S 5 - Treasury Bill Market 1.5 1.5 Bond M arket s S 6 - Market Microstructure S 7 - Yield, Spot and Forward Rates S 8 - Valuation of Bonds 2 1.5 1.5 Derivatives Market s S 9 - Introduction S 10 - Futures Marke t S 11 - Options Market S 12 - Trading Strategies S 13 - Swap Market 1.5 1.5 1.5 2 3 Forex Market s S 14 - Market Microstructure S 15 - Exchange Rates and Parity Condition s S 16 - Translation and Transaction Exposures S 17 - Economic Exposure S 18 - Euromarkets 1.5 1.5 2 1.5 1.5 Insurance Market S 19 - Concepts 1.5 Private Equity and Venture Capital Market S 20 - Introduction S 21 - Organization of PE Funds S 22 - VC Financing S 23 - LBO Financing S 24 – The Process of PE Investment S 25 - PE Industry in India – Case of TCIL 1.5 1.5 1.5 1.5 1.5 1.5
+
+- Course Description There has been a dramatic growth in markets for financial products like s tocks, bonds , currencies , derivatives, insurance, private equity and Venture capital . The purpose of this course is to provide knowledge of various markets and their applications . Course Objectives On completion of the course, the students will have knowledge of: a) Stock markets – Microstructure and IPO management b) Money markets – Call money and Treasury bill markets c) Bond markets – Microstructure and valuation d) Derivatives markets – Forwards, Futures, Options and Swaps e) Forex markets – Exchange rates, Exposures and Euromarkets f) Insurance market g) PEVC – Fund raising, financing and PE industry in India Instructor B.B. Chakraba rti
+
+- email: bbc@iimcal.ac.in Course Material A) Cases 1) Narayana Health: The Initial Public Offering Decision
+
+- HBS Case No. W 17503 2) Fairfax and Thomas Cook India: Private Equ ity, Permannet Capital and Public Markets
+
+- HBS Case No. W15463 B) Class notes Course Evaluation 1) Attendance – 10% 2) Quizzes ( Two – One after Session 13 and the other after Session 25 ) – 20% 3) In-Semester examination (after Session 13) – 30% 4) End-Semester examination – 40% Session Plan (Total hours – 42) Main Topic Sub-Topic Hours Financial Markets S 1
+
+- Introduction 1.5 Stock Markets S 2
+
+- Market Microstructure S 3
+
+- IPO management – Case of Narayana Health 3 1.5 Money Markets S 4
+
+- Call Money Market S 5
+
+- Treasury Bill Market 1.5 1.5 Bond M arket s S 6
+
+- Market Microstructure S 7
+
+- Yield, Spot and Forward Rates S 8
+
+- Valuation of Bonds 2 1.5 1.5 Derivatives Market s S 9
+
+- Introduction S 10
+
+- Futures Marke t S 11
+
+- Options Market S 12
+
+- Trading Strategies S 13
+
+- Swap Market 1.5 1.5 1.5 2 3 Forex Market s S 14
+
+- Market Microstructure S 15
+
+- Exchange Rates and Parity Condition s S 16
+
+- Translation and Transaction Exposures S 17
+
+- Economic Exposure S 18
+
+- Euromarkets 1.5 1.5 2 1.5 1.5 Insurance Market S 19
+
+- Concepts 1.5 Private Equity and Venture Capital Market S 20
+
+- Introduction S 21
+
+- Organization of PE Funds S 22
+
+- VC Financing S 23
+
+- LBO Financing S 24 – The Process of PE Investment S 25
+
+- PE Industry in India – Case of TCIL 1.5 1.5 1.5 1.5 1.5 1.5
 
 ## Important Information
 

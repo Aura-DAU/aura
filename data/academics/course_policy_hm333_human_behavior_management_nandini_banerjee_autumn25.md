@@ -33,7 +33,42 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-1. Psychology of Human Development: Introduction to psychology, Life skill Development, Self - Awareness, SWOT analysis. 2. Behavioral aspects in human relations: Sigmund Freud's Psychoanalysis, Understanding, Personality, Behaviorism (Skinner, Pavlov), Humanistic Psychology (Maslow, Rogers). 3. Communication: Transactional Analysis, Communicate and Articulate in personal and professi onal life, Presentation skills, Mock Interview. 4. Social Behavior: Leadership, Goal setting, Fostering Team work, Group Dynamics. 5. Ethics and Human Responsibility, Attitude, Aggression. 6. HUMANE Traps, Psychological Disorders. Books: 1. Gary Dessler, Human Resource Management, 13th Edition, Pearson Education, 2015. Courtland L Bovee, John V. Thill , and Barbara E. Schatzma, Business Communication 2. Today, 7th Edition, Pearson, 2003. 3. Stacey Magner, Modern Business Etiquette for Young and Fabulous Professionals, Spencer Crane, 2018. 4. Eric Berne, Games People Play, New York, Penguin Group, 2010 5. Thomas A. Harris, I’m OK – You’re OK, New York, Harper, 1967 Grading Policy : The course will have activities, case studies, and regular examinations. Hence it would have the following evaluation components with their corresponding weightages. S. No. Evaluation Component Weightage 1. In-semester Examinations 1 and 2 (15% each) 20 % 2. Classroom Activities and Case Studies 10 % 3. End-semester Examination 40 % 4. Overall Impression (Participation in Course) 5 % 5. Attendance 5% 6. Project 20% Proposed by: Dr. Nandini Banerjee
+
+1. Psychology of Human Development: Introduction to psychology, Life skill Development, Self
+
+- Awareness, SWOT analysis.
+
+2. Behavioral aspects in human relations: Sigmund Freud's Psychoanalysis, Understanding, Personality, Behaviorism (Skinner, Pavlov), Humanistic Psychology (Maslow, Rogers).
+
+3. Communication: Transactional Analysis, Communicate and Articulate in personal and professi onal life, Presentation skills, Mock Interview.
+
+4. Social Behavior: Leadership, Goal setting, Fostering Team work, Group Dynamics.
+
+5. Ethics and Human Responsibility, Attitude, Aggression.
+
+6. HUMANE Traps, Psychological Disorders. Books:
+
+1. Gary Dessler, Human Resource Management, 13th Edition, Pearson Education, 2015. Courtland L Bovee, John V. Thill , and Barbara E. Schatzma, Business Communication
+
+2. Today, 7th Edition, Pearson, 2003.
+
+3. Stacey Magner, Modern Business Etiquette for Young and Fabulous Professionals, Spencer Crane, 2018.
+
+4. Eric Berne, Games People Play, New York, Penguin Group, 2010
+
+5. Thomas A. Harris, I’m OK – You’re OK, New York, Harper, 1967 Grading Policy : The course will have activities, case studies, and regular examinations. Hence it would have the following evaluation components with their corresponding weightages. S. No. Evaluation Component Weightage
+
+1. In-semester Examinations 1 and 2 (15% each) 20 %
+
+2. Classroom Activities and Case Studies 10 %
+
+3. End-semester Examination 40 %
+
+4. Overall Impression (Participation in Course) 5 %
+
+5. Attendance 5%
+
+6. Project 20% Proposed by: Dr. Nandini Banerjee
 
 ## Important Information
 

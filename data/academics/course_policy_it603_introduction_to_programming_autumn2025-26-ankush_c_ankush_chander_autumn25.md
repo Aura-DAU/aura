@@ -33,7 +33,16 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-Introduction to Linux environment - Computer system, Shell , Command line Interface, Standard I/O, System Path Introduction to Programming – Introduction to Modern C++, concept of program flow , why modern C++ without OOP is C, Hello world, Program structure, Compilation process Data types and Concept of V ariables – Data types, V ariable, Static variables, global variables Program Control – Logical operators, bitwise operators, functions, Conditional constructs Array , Pointers, Structures – Arrays, pointers, array of characters, multi-dimensional arrays, pointers to functions, structures and classes Dynamic Memory Allocation – creating variables on the free-store, memory management Modern C++: Templates – Generic programming, Template structure and definition Modern C++: STL – std::string, STL algorithms Suggested T extbook/references: Assessment Method: Grading Policy: Relative grading with the following slabs: Course outcome: After taking this course, students will be able to write portable, ef ficient application programs in C++. They will also be able to navigate Linux environments fluently and take up new programming languages with relative ease.1. Think C++ by Allen B Downey 2. the C++ Programming Language by Bjourne Stroustrup 3. UNIX : Concepts and Applications, Sumitabha Das 4. Computer Systems: A Programmer's Perspective, Randal E. Bryant and David R. O'Hallaron Labs and Assignments: 30 In-Sem Exam: 30 End Sem Exam: 40 >90 = AA 80-90 = AB 65-79 = BB 50-64 = BC 40-50 = CC <39 = CD
+
+- Introduction to Linux environment
+
+- Computer system, Shell , Command line Interface, Standard I/O, System Path Introduction to Programming – Introduction to Modern C++, concept of program flow , why modern C++ without OOP is C, Hello world, Program structure, Compilation process Data types and Concept of V ariables – Data types, V ariable, Static variables, global variables Program Control – Logical operators, bitwise operators, functions, Conditional constructs Array , Pointers, Structures – Arrays, pointers, array of characters, multi-dimensional arrays, pointers to functions, structures and classes Dynamic Memory Allocation – creating variables on the free-store, memory management Modern C++: Templates – Generic programming, Template structure and definition Modern C++: STL – std::string, STL algorithms Suggested T extbook/references: Assessment Method: Grading Policy: Relative grading with the following slabs: Course outcome: After taking this course, students will be able to write portable, ef ficient application programs in C++. They will also be able to navigate Linux environments fluently and take up new programming languages with relative ease.1. Think C++ by Allen B Downey
+
+2. the C++ Programming Language by Bjourne Stroustrup
+
+3. UNIX : Concepts and Applications, Sumitabha Das
+
+4. Computer Systems: A Programmer's Perspective, Randal E. Bryant and David R. O'Hallaron Labs and Assignments: 30 In-Sem Exam: 30 End Sem Exam: 40 >90 = AA 80-90 = AB 65-79 = BB 50-64 = BC 40-50 = CC <39 = CD
 
 ## Important Information
 

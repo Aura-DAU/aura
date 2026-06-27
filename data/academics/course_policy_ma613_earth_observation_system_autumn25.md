@@ -32,7 +32,32 @@ This document presents the detailed policy and syllabus structure for the course
 
 ## Detailed Course Content
 
-Evaluation criteria: Evaluation is based on • First / Mid and final semester exams. ( 60%) • Quizzes in the class (1 0%) • Mini project ( 30 %) Learning outcome s: After successful completion of the course, a student • Explain the physical principles and concept s underlying EO • Describe the spectral signature of natural objects on earth surface. • Describe the sources, nature and common form of EO data • Will be able to understand the technical information about orbit, sensors • Be aware of new developments and trends i n EO Learning and teaching activity: • 3 x 1 -hour lectures per week • 1 x 2 -hour lab session per week Suggested text book 1. Remote Sensing Digital Image Analysis: John A. Richards, Xiuping Jia, 2. Introductory Digital Image Processing: John R Jensen
+
+- Evaluation criteria: Evaluation is based on
+
+- First / Mid and final semester exams. ( 60%)
+
+- Quizzes in the class (1 0%)
+
+- Mini project ( 30 %) Learning outcome s: After successful completion of the course, a student
+
+- Explain the physical principles and concept s underlying EO
+
+- Describe the spectral signature of natural objects on earth surface.
+
+- Describe the sources, nature and common form of EO data
+
+- Will be able to understand the technical information about orbit, sensors
+
+- Be aware of new developments and trends i n EO Learning and teaching activity:
+
+- 3 x 1 -hour lectures per week
+
+- 1 x 2 -hour lab session per week Suggested text book
+
+1. Remote Sensing Digital Image Analysis: John A. Richards, Xiuping Jia,
+
+2. Introductory Digital Image Processing: John R Jensen
 
 ## Important Information
 
