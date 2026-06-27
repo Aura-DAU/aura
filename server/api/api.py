@@ -1,7 +1,18 @@
 import os
+import sys
 import tempfile
 import asyncio
 from typing import List, Optional
+from pathlib import Path
+
+# Add the server and server/rag directories to sys.path to resolve imports cleanly
+server_dir = Path(__file__).resolve().parent.parent
+rag_dir = server_dir / "rag"
+
+if str(server_dir) not in sys.path:
+    sys.path.insert(0, str(server_dir))
+if str(rag_dir) not in sys.path:
+    sys.path.insert(0, str(rag_dir))
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -62,17 +73,19 @@ class HistoryTurn(BaseModel):
     role: str
     content: str
 
-class StudentProfile(BaseModel):
+class UserProfile(BaseModel):
+    role: str = "student"
     name: Optional[str] = None
     branch: Optional[str] = None
     year: Optional[str] = None
     semester: Optional[str] = None
     interests: Optional[str] = None
+    subjects: Optional[List[str]] = None
 
 class ChatRequest(BaseModel):
     question: str
     history: Optional[List[HistoryTurn]] = None
-    studentProfile: Optional[StudentProfile] = None
+    userProfile: Optional[UserProfile] = None
 
 ALLOWED_EXTENSIONS = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 MAX_AUDIO_BYTES = 25 * 1024 * 1024
@@ -85,8 +98,8 @@ def chat(request: ChatRequest):
         else []
     )
     profile = (
-        request.studentProfile.model_dump(exclude_none=True)
-        if request.studentProfile
+        request.userProfile.model_dump(exclude_none=True)
+        if request.userProfile
         else None
     )
     return aura.ask(question=request.question, history=history, profile=profile)

@@ -51,16 +51,26 @@ export function Message({ message, citations, onRegenerate }: MessageProps) {
 
         {citations && citations.length > 0 ? (
           <div className="mt-3 flex flex-wrap gap-2">
-            {citations.map((c, i) => (
-              <span
-                key={`${c.file}-${i}`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300"
-              >
-                <span className="size-1.5 rounded-full bg-theme-yellow" />
-                <FileText className="size-3 text-neutral-500" />
-                {c.title ?? c.file}
-              </span>
-            ))}
+            {citations.map((c, i) => {
+              const isUrl = c.file.startsWith("http://") || c.file.startsWith("https://")
+              const Component = isUrl ? "a" : "span"
+              return (
+                <Component
+                  key={`${c.file}-${i}`}
+                  href={isUrl ? c.file : undefined}
+                  target={isUrl ? "_blank" : undefined}
+                  rel={isUrl ? "noopener noreferrer" : undefined}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300",
+                    isUrl && "hover:bg-theme-gray-light transition-colors cursor-pointer hover:text-neutral-100"
+                  )}
+                >
+                  <span className="size-1.5 rounded-full bg-theme-yellow" />
+                  <FileText className="size-3 text-neutral-500" />
+                  {c.title ?? c.file}
+                </Component>
+              )
+            })}
           </div>
         ) : null}
 

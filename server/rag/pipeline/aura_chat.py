@@ -8,6 +8,9 @@ from pipeline.generation.answer_generator import (
     AnswerGenerator
 )
 
+from pipeline.guardrails.query_guardrail import (
+    QueryGuardrail
+)
 
 def is_greeting_or_meta(query):
     q = query.strip().lower().rstrip("?").rstrip("!").rstrip(".")
@@ -34,6 +37,9 @@ class AuraChat:
         self.generator = (
             AnswerGenerator()
         )
+        self.guardrail = (
+            QueryGuardrail()
+        )
 
     def chat(
         self,
@@ -41,9 +47,26 @@ class AuraChat:
         history=None,
         profile=None
     ):
+        # 1. Semantic Guardrail Evaluation
+        if not self.guardrail.is_safe(query):
+            return {
+                "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                "sources": []
+            }
+
+        # Guardrail / Query Augmentation for RBAC
+        retrieval_query = query
+        if profile:
+            role = profile.get("role", "student")
+            if role == "professor":
+                subjects = profile.get("subjects", [])
+                if subjects:
+                    subjects_str = ", ".join(subjects)
+                    retrieval_query = f"{query} (Context: student data related to {subjects_str})"
+
         retrieval_result = (
             self.pipeline.get_context(
-                query,
+                retrieval_query,
                 history=history
             )
         )
@@ -77,11 +100,11 @@ class AuraChat:
 
         answer = (
             self.generator.generate(
-                query=query,
+                query=retrieval_result.get("corrected_query", query),
                 context=retrieval_result[
                     "context"
                 ],
-
+                plan=retrieval_result["plan"],                
                 history=history,
                 profile=profile
             )

@@ -8,7 +8,7 @@ from process_corpus import process_markdown_file
 # CONFIG
 # ==========================================
 
-DATA_DIR = "../../../../../../data"
+DATA_DIR = "../../../../../data"
 OUTPUT_DIR = "../../../processed_chunks"
 OUTPUT_FILE = "chunks.json"
 
@@ -56,7 +56,7 @@ def main():
             print(
                 f"[{file_count}] "
                 f"{md_file.name} "
-                f"→ {len(chunks)} chunks"
+                f"-> {len(chunks)} chunks"
             )
 
         except Exception as e:

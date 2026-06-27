@@ -64,8 +64,8 @@ function SidebarContent({
   userSession,
   onCloseMobile,
 }: SidebarProps) {
-  const displayName = studentProfile.name || userSession?.name || "Guest"
-  const displayEmail = userSession?.email ?? "Not signed in"
+  const displayName = userSession ? (studentProfile.name || userSession.name) : "Guest Account"
+  const displayEmail = userSession ? (userSession.email ?? "") : "Sign in to get started"
 
   return (
     <div className="flex h-full flex-col">
@@ -146,10 +146,10 @@ function SidebarContent({
             <User className="size-4" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block truncate text-sm font-medium text-neutral-100">
+            <span suppressHydrationWarning className="block truncate text-sm font-medium text-neutral-100">
               {displayName}
             </span>
-            <span className="block truncate text-xs text-neutral-500">
+            <span suppressHydrationWarning className="block truncate text-xs text-neutral-500">
               {displayEmail}
             </span>
           </span>

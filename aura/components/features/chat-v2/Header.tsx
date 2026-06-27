@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import { Download, LogIn, LogOut, Menu, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { UserSession } from "@/lib/chat-types"
@@ -23,6 +24,7 @@ export function Header({
   userSession,
   onLogout,
 }: HeaderProps) {
+  const router = useRouter()
   const [confirmClear, setConfirmClear] = useState(false)
   const confirmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -97,6 +99,7 @@ export function Header({
           ) : (
             <button
               type="button"
+              onClick={() => router.push("/login")}
               className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm text-neutral-300 transition-colors hover:bg-theme-gray-light"
             >
               <LogIn className="size-4" />

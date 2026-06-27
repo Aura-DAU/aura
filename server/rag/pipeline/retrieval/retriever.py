@@ -116,3 +116,32 @@ class Retriever:
         )
 
         return fused_results
+
+    def retrieve_by_ids(
+        self,
+        chunk_ids: list[str],
+    ) -> list[dict]:
+        """
+        Hydrate a list of chunk IDs into full result dicts using the local
+        BM25 metadata store.  Used by the retrieval pipeline to pull
+        entity-matched chunks without an extra Pinecone query.
+
+        Returns only chunks whose IDs are present in the local store.
+        score is set to 0.0 (entity-match is boolean; reranker scores it).
+        """
+        if not self.bm25 or not chunk_ids:
+            return []
+
+        id_set = set(chunk_ids)
+        results = []
+
+        for chunk in self.bm25.chunks:
+            cid = chunk.get("chunk_id")
+            if cid in id_set:
+                results.append({
+                    "id": cid,
+                    "score": 0.0,
+                    "metadata": chunk,
+                })
+
+        return results
