@@ -22,14 +22,14 @@ class Reranker:
 
         self.tokenizer = (
             AutoTokenizer.from_pretrained(
-                "BAAI/bge-reranker-base"
+                "BAAI/bge-reranker-v2-m3"
             )
         )
 
         self.model = (
             AutoModelForSequenceClassification
             .from_pretrained(
-                "BAAI/bge-reranker-base"
+                "BAAI/bge-reranker-v2-m3"
             )
         ).to(self.device)
 
