@@ -600,6 +600,7 @@ class RetrievalPipeline:
             if retrieval_intent == "policy_version" and metadata_filter
             else metadata_filter
         )
+        metadata_filter = effective_metadata_filter
 
         decomposed_queries = plan.get(
             "query_decomposition"
