@@ -12,3 +12,4 @@ PyYAML
 numpy
 transformers
 rapidfuzz>=3.5.0
+rank-bm25

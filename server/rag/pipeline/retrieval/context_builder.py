@@ -32,7 +32,6 @@ class ContextBuilder:
             4000 if retrieval_intent == "policy_version"
             else self.MAX_CONTEXT_TOKENS
         )
-
         for idx, chunk in enumerate(
             chunks,
             start=1
