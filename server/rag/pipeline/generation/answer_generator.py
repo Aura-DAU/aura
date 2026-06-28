@@ -165,9 +165,14 @@ The retrieved context consists of XML documents.
 
 Each document has the format:
 
-<doc id="1">
+<doc id="1" program_name="B.Tech. (ICT)" title="..." h1="..." h2="...">
 ...
 </doc>
+
+When a question involves a specific program, use the program_name attribute to
+identify which program each document belongs to. For comparison questions
+(e.g. "compare BTech ICT vs BS-MS fees") check the program_name on each
+document to ensure you attribute information to the correct program.
 
 Use document IDs as citations:
 
@@ -232,20 +237,6 @@ class AnswerGenerator:
                         profile_text += f"CRITICAL: You are assisting a PROFESSOR. You may provide student information ONLY if it explicitly relates to the subjects they teach ({subjects_str}). If they ask for student information outside these subjects, politely decline.\n\n"
                     else:
                         profile_text += "CRITICAL: You are assisting a PROFESSOR with no assigned subjects. You MUST NOT provide specific student records. Politely decline.\n\n"
-
-            history_text = ""
-
-            if history:
-                for turn in history[-8:]:
-                    role = turn.get("role", "")
-                    content = turn.get("content", "")
-                    if role in ["user", "assistant"] and content:
-                        if role == "assistant":
-                            content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
-                        history_text += (
-                            f"{role}: "
-                            f"{content}\n"
-                        )
 
             planner_hint = {
                 "intent": plan["retrieval_intent"],
@@ -371,8 +362,10 @@ Retrieved Documents
 
             if is_code_request:
                 answer_lower = answer.lower()
+                # Fix AG2: regex was double-escaped (\\b → \b literal, never matches).
+                # Correct to single-escape so word-boundary and digit patterns work.
                 is_grounded = (
-                    re.search(r"\\bdau\\b", answer_lower)
+                    bool(re.search(r"\bdau\b", answer_lower))
                     or "dhirubhai ambani" in answer_lower
                     or "[source:" in answer_lower
                     or bool(re.search(r"\[\d+\]", answer_lower))  # Fix AG1: [1][2] citations

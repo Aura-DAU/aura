@@ -205,6 +205,17 @@ class BM25Retriever:
                     if chunk.get(key) != condition["$eq"]:
                         return False
 
+                # Fix BM1: $in operator was not handled. When the retrieval
+                # pipeline builds a multi-value filter (e.g. two programs in a
+                # comparison query), it uses {"program_name": {"$in": [v1, v2]}}.
+                # BM25 previously fell through to the outer else branch and
+                # compared the chunk's string value to the dict object → always
+                # False → zero BM25 results for all multi-program queries.
+                elif "$in" in condition:
+
+                    if chunk.get(key) not in condition["$in"]:
+                        return False
+
             else:
 
                 if chunk.get(key) != condition:

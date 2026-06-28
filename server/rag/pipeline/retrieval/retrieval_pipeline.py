@@ -680,8 +680,13 @@ class RetrievalPipeline:
                 plan=plan
             )
 
-        # Restrict candidate list to the Top-5 chunks (limit to min of final_top_k and 5)
-        final_top_k = min(plan.get("top_k", 5), 5)
+        # Fix TK1: previously capped at min(plan["top_k"], 5) which destroyed
+        # the multi-entity boost (num_entities*3 was always clamped back to 5).
+        # For multi-entity queries 2 entities need at least 3 chunks each = 6.
+        # Cap raised to 8 to give comparison queries enough chunks while staying
+        # within the context token budget (3000 tokens ≈ 8-9 chunks).
+        max_final = 8 if plan.get("multi_entity_query") else 5
+        final_top_k = min(plan.get("top_k", 5), max_final)
         final_chunks = reranked[:final_top_k]
 
         built = (

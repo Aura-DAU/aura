@@ -30,14 +30,15 @@ class ContextBuilder:
 
             metadata = chunk["metadata"]
 
-            # Build the XML attributes string for the token estimate
-            xml_attrs = (
-                f'title="{metadata.get("title", "")}" '
-                f'h1="{metadata.get("h1", "")}" '
-                f'h2="{metadata.get("h2", "")}"'
-            )
             chunk_text = metadata.get("text", "")
-            estimated_tokens = self._estimate_tokens(xml_attrs + " " + chunk_text)
+
+            # Fix CB1: token estimate previously only included title/h1/h2 in
+            # xml_attrs, underestimating the real XML overhead (12 attributes +
+            # tag structure ≈ 250 chars). Estimate now covers the full document
+            # string so the token budget is accurate and chunks aren't silently
+            # over-admitted.
+            xml_overhead_words = 50  # ~250 chars / avg 5 chars-per-word
+            estimated_tokens = self._estimate_tokens(chunk_text) + xml_overhead_words
 
             # Fix G: enforce token budget — skip lower-ranked chunks that
             # would push us over the limit.
@@ -46,12 +47,16 @@ class ContextBuilder:
 
             context_tokens_used += estimated_tokens
 
-            # Fix #9: internal reranked_score is omitted from the XML to avoid
-            # the LLM being influenced by or reasoning about internal scores.
+            # Fix CB2: added program_name attribute so the LLM knows which
+            # program each chunk belongs to. Critical for comparison queries
+            # ("compare BTech ICT vs BS-MS fees") where two chunks about
+            # different programs would otherwise look identical to the model.
+            # Fix #9: internal reranked_score is still omitted from the XML.
             document = f"""
 <doc
 id="{idx}"
 title="{metadata.get('title', '')}"
+program_name="{metadata.get('program_name', '')}"
 cluster="{metadata.get('cluster', '')}"
 category="{metadata.get('category', '')}"
 faculty_name="{metadata.get('faculty_name', '')}"
