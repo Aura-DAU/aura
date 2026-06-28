@@ -1,57 +1,108 @@
 ---
-title: "Linear Algebra"
+title: "SC223 Linear Algebra Autumn Semester (AY 25-26)""
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Course_Files_Autumn_2025_26/Autumn_2025_26_Individual_Course_Files/SC223_Linear_Algebra_Autumn25%20-%20Prosenjit%20Kundu.pdf"
-category: "Academics"
-scraped_by: "Madhav Thesiya"
+category: "Academics - Course Policies"
+scraped_by: "Squad D Scraper"
 scraped_date: "2026-06-28"
+team: "Squad D"
 source_type: "PDF"
 pdf_name: "SC223_Linear_Algebra_Autumn25 - Prosenjit Kundu.pdf"
-instructor: "Prosenjit Kundu"
+course_code: "SC223"
+semester: "Autumn Semester (AY 25-26)"
 ---
 
-# Linear Algebra (SC223)
+# SC223: Linear Algebra
 
-## Overview
+## Course Overview
 
-This document presents the detailed policy and syllabus structure for the course Linear Algebra (SC223). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
-
-## Main Content
-
-| Course Title | Linear Algebra | | |
-|---|---|---|---|
-| Course Code | SC223 | Credit Structure | 3-1-0-4 |
-| Category | Core | Semester | Autumn Semester (AY 25-26) |
-| Program | B.Tech | | |
-| Prerequisites | NA | | |
-| Course Objectives/ Brief Course Description | This course provides a foundational introduction to linear algebra, a branch of mathematics central to many areas of science and engineering. Topics include systems of linear equations, matrices, determinants, vector spaces, linear transformations, eigenvalues and eigenvectors, and applications of linear algebra in various fields. The course emphasizes both theoretical understanding and problem-solving skills. | | |
-| Evaluation/ Grading Policy | Insem – 1: 25% Insem – 2: 25% Final Exam: 35% Assignment/Quiz: 15% | | |
-| Course Materials/ References | Lecture notes. Lecture notes/ class notes will be posted and made available for students after the lecture. Books • P. Selinger, Matrix Theory and Linear Algebra (www.mathstat.dal.ca/~selinger/linear-algebra/) • David C. Lay, Steven R. Lay and Judi J. McDonald. Linear Algebra and Its Applications • Kenneth Hoffman, Ray Kunze, Linear Algebra • Sheldon Axler, Linear Algebra done right | | |
+| Field | Details |
+|---|---|
+| **Course Code** | SC223 |
+| **Course Name** | Linear Algebra |
+| **Instructor(s)** | Not stated in source document |
+| **Credits** | 3-1-0-4 |
+| **Semester Offered** | Autumn Semester (AY 25-26) |
+| **Type** | Core |
+| **Program(s)** | B.Tech |
+| **Year / Semester in Program** | Not stated in source document |
+| **Associated Lab** | Not stated in source document |
+| **Prerequisites** | NA |
+| **Foundation For** | Not stated in source document |
 
 ---
-*Page Split*
+
+## Course Description
+
+This course provides a foundational introduction to linear algebra, a branch of mathematics central to many areas of science and engineering. Topics include systems of linear equations, matrices, determinants, vector spaces, linear transformations, eigenvalues and eigenvectors, and applications of linear algebra in various fields. The course emphasizes both theoretical understanding and problem-solving skills.
+
 ---
 
-## Detailed Course Content
+## Course Outcomes (COs)
 
+After successful completion of this course, students will be able to:
 
-- Systems of linear equations. Matrices and elementary row operations. Gauss-Jordan elimination. Pivot positions and pivot columns. Applications of systems of linear equations (e.g. balancing chemical equations, traffic flow in a network of streets, Google PageRank, polynomial interpolation etc.). Vectors and vector equations. Linear combinations. Span of a set of vectors. Linear independence. Matrix equations. The column space and the null space of a matrix. Linear transformations. Matrix-vector multiplication. The standard matrix of a linear transformation. Matrix algebra: addition, transpose, matrix multiplication. Properties of matrix algebra. Invertible matrices. Applications of matrix algebra (e.g. the Hill cipher, error correcting codes etc.). Determinants. Determinants and elementary row operations, cofactor expansion, Cramer’s rule. Determinants and area and volume. General vector spaces. Subspaces. Linear transformations of general vector spaces. Basis of a vector space and coordinates relative to a basis. Change of basis. Dimension of a vector space. The rank theorem. The dot product. Length of a vector, distance between vectors, orthogonality of vectors. Pythagorean Theorem. Orthogonal and orthonormal bases. The Gram-Schmidt process. Orthogonal projections. Least square solutions of systems of linear equations. Application: fitting least square lines and curves. General inner product spaces. Eigenvalues and eigenvectors. The characteristic polynomial of a matrix. Matrix diagonalization. Orthogonal diagonalization and spectral decomposition of symmetric matrices. Singular Value Decomposition. Applications of SVD (e.g. image compression, data analysis etc.). Course Outcome: At the end of the course the students will be able to: CO1: Represent systems of linear equations in vector and matrix form and solve it. CO2: Perform matrix-vector multiplication and understand how this operation defines a linear transformation between Rn and Rm CO3: Add, multiply, and transpose matrices determine whether a given matrix is invertible and compute its inverse if it exists CO4: Compute determinants of matrices both by cofactor expansion and by row reduction and use Cramer’s rule to solve systems of equations and to compute inverses of matrices compute areas of parallelograms and volumes of parallelepipeds using determinants. CO5: Vector space, subspace, dimension, rank theorem etc. CO6: Recognize if a given function between vector spaces is a linear transformation understand the notions of the kernel and the image of a linear transformation and their relationship to the null space and the column space of a matrix CO7: Compute the inner product of vectors in Rn determine if a set of vectors in Rn is orthogonal compute the projection of a vector onto a subspace orthogonalize a set of vectors using the Gram-Schmidt process
+| CO | Description |
+|---|---|
+| CO1 | Represent systems of linear equations in vector and matrix form and solve it. |
+| CO2 | Vector space, subspace, dimension, rank theorem etc. |
 
-- solve least squares problems CO8: Compute the characteristic polynomial of a matrix, find eigenvalues and eigenvectors of the matrix, diagonalization of a matrix, compute orthogonal diagonalization of symmetric matrix, compute the Singular Value Decomposition of a matrix. POs-COs Matrix: P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 x x x x APPENDIX: Detailed Course Content (Session-wise/ Module-wise) Tentative Lecture Schedule Sl. No. Topics Lectures 1 Systems of linear equations. Matrices and elementary row operations. Gauss-Jordan elimination. Pivot positions and pivot columns. Applications of systems of linear equations (e.g. balancing chemical equations, traffic flow in a network of streets, Google PageRank, polynomial interpolation etc.). 6 2 Vectors and vector equations. Linear combinations. Span of a set of vectors. Linear independence. Matrix equations. The column space and the null space of a matrix. Linear transformations. Matrix-vector multiplication. The standard matrix of a linear transformation. 8 3 Matrix algebra: addition, transpose, matrix multiplication. Properties of matrix algebra. Invertible matrices. Applications 4 of matrix algebra (e.g. the Hill cipher, error correcting codes etc.). 4 Determinants. Determinants and elementary row operations, cofactor expansion, Cramer’s rule. Determinants and area and volume. 2 5 General vector spaces. Subspaces. Linear transformations of general vector spaces. Basis of a vector space and coordinates relative to a basis. Change of basis. Dimension of a vector space. The rank theorem. 4 6 The dot product. Length of a vector, distance between vectors, orthogonality of vectors. Pythagorean Theorem. Orthogonal and orthonormal bases. The Gram-Schmidt process. 4 7 Least square solutions of systems of linear equations. Application: fitting least square lines and curves. General inner product spaces. 5 8 Eigenvalues and eigenvectors. The characteristic polynomial of a matrix. Matrix diagonalization. Orthogonal diagonalization and spectral decomposition of symmetric matrices. 7 9 Singular Value Decomposition. Applications of SVD (e.g. image compression, data analysis etc.). 3
+---
 
-## Important Information
+## Program Outcome Mapping (PO Mapping)
 
-- **Course Code:** SC223
-- **Course Title:** Linear Algebra
-- **Document Source:** SC223_Linear_Algebra_Autumn25 - Prosenjit Kundu.pdf
-- **Category:** Academics (Intranet)
+| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| x | x |  | x |  |  |  |  |  |  |  | x |
 
-## Related Links
+---
 
-- [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp)
-- [Academic Guidelines](https://daiict.ac.in/academics)
+## Course Structure
 
-## Downloadable Resources
+| Sl. No. | Topics | Lectures |
+|---|---|---|
+| 1 | Systems of linear equations. Matrices and elementary row operations. Gauss-Jordan elimination. Pivot positions and pivot columns. Applications of systems of linear equations (e.g. balancing chemical equations, traffic flow in a network of streets, Google PageRank, polynomial interpolation etc.). | 6 |
+| 2 | Vectors and vector equations. Linear combinations. Span of a set of vectors. Linear independence. Matrix equations. The column space and the null space of a matrix. Linear transformations. Matrix-vector multiplication. The standard matrix of a linear transformation. | 8 |
+| 3 | Matrix algebra: addition, transpose, matrix multiplication. Properties of matrix algebra. Invertible matrices. Applications | 4 |
+
+---
+
+## Evaluation / Grading Scheme
+
+Insem – 1: 25% Insem – 2: 25% Final Exam: 35% Assignment/Quiz: 15%
+
+---
+
+## Textbooks and References
+
+Lecture notes. Lecture notes/ class notes will be posted and made available for students after the lecture. Books • P. Selinger, Matrix Theory and Linear Algebra (www.mathstat.dal.ca/~selinger/linear-algebra/) • David C. Lay, Steven R. Lay and Judi J. McDonald. Linear Algebra and Its Applications • Kenneth Hoffman, Ray Kunze, Linear Algebra • Sheldon Axler, Linear Algebra done right
+
+---
+
+## Program Structure Context
+
+This course is offered as part of the B.Tech in Autumn Semester (AY 25-26).
+
+---
+
+## Additional Notes
+
+None stated in source document.
+
+---
+
+## Downloads and Resources
 
 | Resource | Type | Link |
 |---|---|---|
 | SC223_Linear_Algebra_Autumn25 - Prosenjit Kundu.pdf | PDF | [Download SC223_Linear_Algebra_Autumn25 - Prosenjit Kundu.pdf](https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Course_Files_Autumn_2025_26/Autumn_2025_26_Individual_Course_Files/SC223_Linear_Algebra_Autumn25%20-%20Prosenjit%20Kundu.pdf) |
+
+---
+
+## Document Metadata
+
+| Field | Value |
+|---|---|
+| **Source PDF** | SC223_Linear_Algebra_Autumn25 - Prosenjit Kundu.pdf |
+| **Scraped Date** | 2026-06-28 |
+| **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

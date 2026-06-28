@@ -1,63 +1,73 @@
 ---
-title: "The Idea Of India Swami Vivekananda Rabindranath Tagore MKGandhi"
+title: "HM405 The Idea Of India Swami Vivekananda Rabindranath Tagore MKGandhi 7th Semester, Autumn 2025-26""
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Course_Files_Autumn_2025_26/Autumn_2025_26_Individual_Course_Files/HM%20405_The%20Idea%20Of%20IndiaSwamiVivekanandaRabindranathTagoreMKGandhi_Autumn.pdf%20-%20Gangeya%20Mukherji.pdf"
-category: "Academics"
-scraped_by: "Madhav Thesiya"
+category: "Academics - Course Policies"
+scraped_by: "Squad D Scraper"
 scraped_date: "2026-06-28"
+team: "Squad D"
 source_type: "PDF"
 pdf_name: "HM 405_The Idea Of IndiaSwamiVivekanandaRabindranathTagoreMKGandhi_Autumn.pdf - Gangeya Mukherji.pdf"
-instructor: "Gangeya Mukherji"
+course_code: "HM405"
+semester: "7th Semester, Autumn 2025-26"
 ---
 
-# The Idea Of India Swami Vivekananda Rabindranath Tagore MKGandhi (HM405)
+# HM405: The Idea Of India Swami Vivekananda Rabindranath Tagore MKGandhi
 
-## Overview
+## Course Overview
 
-This document presents the detailed policy and syllabus structure for the course The Idea Of India Swami Vivekananda Rabindranath Tagore MKGandhi (HM405). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
-
-## Main Content
-
-| Course Title | The Idea Of India Swami Vivekananda Rabindranath Tagore MKGandhi | | |
-|---|---|---|---|
-| Course Code | HM405 | Credit Structure | 3 Credits |
-| Category | Elective | Semester | 7th Semester, Autumn 2025-26 |
-| Program | BTech ICT | | |
-| Prerequisites |  | | |
-| Course Objectives/ Brief Course Description |  | | |
-| Evaluation/ Grading Policy | EVALUATION : The first evaluation, in the form of a quiz comprising multiple -choice questions covering the first three modules, will account for 40% of the total marks and will be conducted as part of the mid -semester examinations. The second evaluation , accounting for 60% of the total marks , will comprise multiple -choice, short -answer, and one detailed question and will be conducted during the end-of-semester examinations. PLAGIARISM AND ACADEMIC INTEGRITY : Using words and phrases of au thors without proper citation is considered a violation of norms of academic integrity and is strict | | |
-| Course Materials/ References | to Vivekananda, Tagore , and Gandhi. It brings on board certain concepts such as truth , conscience, violence/non -violence , responsibility , deprivation and suppression, and issues of culture , to better understand the idea of India formulated by these three dominant figures of history. The cou rse will involve detailed readings and discussion of some of the fundamental writings of these three thinkers, regarding specific themes and events of their respective lives . Primary Readings: M.K. Gandhi, Hind Swaraj and other Writings , ed. Anthony J. Parel, Delhi: Cambridge University Press, 1997. | | |
+| Field | Details |
+|---|---|
+| **Course Code** | HM405 |
+| **Course Name** | The Idea Of India Swami Vivekananda Rabindranath Tagore MKGandhi |
+| **Instructor(s)** | Not stated in source document |
+| **Credits** | 3 Credits |
+| **Semester Offered** | 7th Semester, Autumn 2025-26 |
+| **Type** | Elective |
+| **Program(s)** | BTech ICT |
+| **Year / Semester in Program** | Not stated in source document |
+| **Associated Lab** | Not stated in source document |
+| **Prerequisites** | None |
+| **Foundation For** | Not stated in source document |
 
 ---
-*Page Split*
+
+## Course Description
+
+Not stated in source document
+
 ---
 
-## Detailed Course Content
+## Textbooks and References
 
+Books, 2009, & ‘The Centre of Indian Culture’ in The English Writings of Rabindranath Tagore, vol. II, Delhi: Sahitya Akademi, 1996. [Readings will be provided electronically before the commencement of the course.] Recommended Readings: Bhattacharya, Sabyasachi. ed. The Mahatma and The Poet: Letters and Debates Between Gandhi and Tagore 1915-1941, Delhi: National Book Trust, 2005. Bhattacharya, Sabyasachi. ed. Rabindranath Tagore: An Interpretation, New Delhi: Penguin, 2011. 2 Rajmohan Gandhi, A True Story of a Man, his People and an Empire, New Delhi: Penguin, 2006. M.K. Gandhi, Autobiography, Intro & ed., Tridip Suhrud, New Delhi: Penguin India, 2018. D.C. Khan, ‘Development of Science and Technology’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture, 2011. Gangeya Mukherji, An Alternative Idea of India: Tagore and Vivekananda, Delhi: Routledge, 2011. Gangeya Mukherji, Gandhi and Tagore: Politics, Truth and Conscience, Delhi: Routledge, 2016. B.R. Nanda, Gandhi and his Critics, Delhi: Oxford University Press, 1997. Bisheshwar Prasad, ‘The Progress of India During 1765-1947’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture, 2011. Tapan Raychaudhury, ‘In Quest of Indian Modernity’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture, 2011. Sen, Amiya P. Swami Vivekananda, Delhi: Oxford University Press, 2013. [Many of the readings will be provided electronically before the commencement of the course.] LEARNING OUTCOMES: The course aims to acquaint students with some of the formative themes and thinkers who have contributed to the modern idea of India and familiarise them with different approaches to reading texts, identifying their central arguments, and raising their individual questions regarding these arguments. COURSE REQUIREMENTS Attendance and Participation: The success of the course depends significantly on students' engagement with the readings and with one another in class. Mode of Teaching: The course will be organised around the ideas of the four thinkers chosen for study. The course will be divided into four broad modules. The first module will consist of drawing the background of the course, identifying the main strands of thought emerging in modern India under British rule, influenced by the meeting of two cultures: that of contemporary Europe and Indian traditions. The remaining three modules will be centred around the three thinkers. The lectures will involve engagement with the themes and with specific readings. 3 EVALUATION
 
-- This course ha s been visualised for undergraduate students without an intermediate academic background in the liberal arts stream. They are aimed to encourage ad contextualise some of the natural questions that might arise in a young mind regarding individual identity framed in some ethical concepts such as truth, community living, individual duty of contributing towards the preservation and growth of material and intellectual ecology , broadly defined as public service. This course falls under the rubric of intellectual history , also known as the history of ideas. Referring to the analogy of the organic sciences , the growth and development of an organism are governed by a combination of conditions, which can either promote its healthy growth or, conversely, might serve to retard or distort it. Under specific organic laws, organic mutation is inevitable, whether benign or malignant. Similarly , an idea can be said to evolve in its logical trajectory . Still, its evolution is determined by a combination of factors, comprising the genius of its proponent, its interaction with historical forces (composed of events and peo ple) , as well as its affinity with specific human psychological traits , under which the idea can mutate based on its mental momentum to become a constructive or a destructive force for humanity. To describe intellectual history in a less organic and more physical or mechanical vocabulary, the evolution of an idea is overarchingly determined by the limits imposed by a complex of human psychology and existent level of human knowledge, and any idea thrives or retards given its position within the limits of this complex , irrespective of the other factors enumerated above. The limits can be said to follow from the elem ental qualities of the idea , similar to the malleability or tensile strength of a metal, and the mental tendencies, resembling the laws of gravity. Under this broad framework of the genesis and evolution of ideas, this course on the concept of 2 India is an attempt to understand the reality, relevance and potential of this ideal for a country work ing out issues of representation and participation across diverse classes/communities. Efforts are still underway among communities to determine the ir destiny in th is national scheme of specific identit ies and their sense of belonging. Suspicions and violent expressions of historical dislikes or insecurities can obstruct such efforts . For imagining future communities, the foundational thinking of the 19th and 20th centuries regarding the modern Indian community might acquire relevance as difficult situations unfold across the world today. The course searches for the genesis of this idea of India in 19th -century India, amid a vortex of national and international currents, with particular reference to Vivekananda, Tagore , and Gandhi. It brings on board certain concepts such as truth , conscience, violence/non -violence , responsibility , deprivation and suppression, and issues of culture , to better understand the idea of India formulated by these three dominant figures of history. The cou rse will involve detailed readings and discussion of some of the fundamental writings of these three thinkers, regarding specific themes and events of their respective lives . Primary Readings: M.K. Gandhi, Hind Swaraj and other Writings , ed. Anthony J. Parel, Delhi: Cambridge University Press, 1997. Swami Vivekananda, ‘The Ideal of a Universal Religion’ (vol. II) ; ‘The Future of India’, ‘At the Parliament of Religions’, ‘The Women of India ’ (vol. III); ‘The Problem of Modern India and Its Solutions’, ‘Modern India’ , (vol. IV) in The Complete Works of Swami Vivekananda , 9 vols. Mayavati/Kolkata: Advaita Ashrama, Mayawati Memorial Edition, 2011. Rabindranath Tagore, Nationalism , intro. Ramachandra Guha, Nationalism , Delhi: Penguin Books, 2009, & ‘The Centre of Indian Culture ’ in The English Writings of Rabindranath Tagore , vol. II , Delhi: Sahitya Akademi, 1996. [Readings will be provided electronically before the commencement of the course. ] Recommended Readings: Bhattacharya, Sabyasachi. ed. The Mahatma and The Poet: Letters and Debates Between Gandhi and Tagore 1915-1941 , Delhi: National Book Trust, 2005. Bhattacharya, Sabyasachi. ed. Rabindranath Tagore : An Interpretation , New Delhi: Penguin, 2011. 3 Rajmohan Gandhi, A True Story of a Man, his People and an Empire , New Delhi: Penguin, 2006. M.K. Gandhi, Autobiography , Intro & ed., Tridip Suhrud, New Delhi: Penguin India, 2018. D.C. Khan, ‘Development of Science and Technology’ in The Cultural Heritage of India , vol. VIII, eds., Sukumar Bhattachary ya & Uma DasGupta , Kolkata: Ramakrishna Institute of Cul ture, 2011. Gangeya Mukherji, An Alternative Idea of India: Tagore and Vivekananda , Delhi: Routledge, 2011. Gangeya Mukherji, Gandhi and Tagore: Pol itics, Truth and Conscience , Delhi: Routledge, 201
+---
 
-6. B.R. Nanda, Gandhi and his Critics , Delhi: Oxford University Press, 1997. Bisheshwar Prasad, ‘The Progress of India During 1765-1947’ in The Cultural Heritage of India , vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture, 2011. Tapan Raychaudhury, ‘In Quest of Indian Modernity’ in The Cultural Heritage of India , vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture, 2011. Sen, Amiya P. Swami Vivekananda , Delhi: Oxford University Press, 2013. [Many of the readings will be provided electronically before the commencement of the course.] LEARNING OUTCOMES : The course aims to acquaint students with some of the formative themes and thinkers who have contributed to the modern idea of India and familiarise them with different approaches to reading texts, identifying their central arguments, and raising their individual questions regarding these arguments. COURSE REQUIREMENTS Attendance and Participation : The success of the course depends significantly on students' engagement with the readings and with one another in class. Mode of Teaching : The course will be organised around the ideas of the four thinkers chosen for study. The course will be divided into four broad modules . The first module will consist of drawing the background of the course, identifying the main strands of thought emerging in modern India under British rule , influenced by the meeting of two cultures : that of contemporary Europe and Indian traditions. The remaining three modules will be centred ar ound the three thinkers. The lectures will involve engagement with the themes and with specific readings. 4 EVALUATION : The first evaluation, in the form of a quiz comprising multiple -choice questions covering the first three modules, will account for 40% of the total marks and will be conducted as part of the mid -semester examinations. The second evaluation , accounting for 60% of the total marks , will comprise multiple -choice, short -answer, and one detailed question and will be conducted during the end-of-semester examinations. PLAGIARISM AND ACADEMIC INTEGRITY : Using words and phrases of au thors without proper citation is considered a violation of norms of academic integrity and is strictly discouraged. Genuine effort and commitment will be duly appreciated. COURSE OUTCOMES The course additionally aims to achieve the following outcome apart from the ones stated above:
+## Program Structure Context
 
-- Understanding the broader ethical, human responsibility of overriding importance while approaching scientific and technical challenges relating to building amenities and individual and corporate wealth .
+This course is offered as part of the BTech ICT in 7th Semester, Autumn 2025-26.
 
-- The thinkers to be stud ied shared a common understanding of life as a continuous form of sacrifice that extended beyond observing ritualistic practices. They conceived of a universe closely connected in its creation and destruction . Hence, all human activity in some way or other was part of this sacrifice. Each individual grew with the assistance of the other, whether recognisable or not.
+---
 
-- Knowing and understanding this fact was one of the highest functions of human consciousness. One should enjoy one ’s social and economic advantage, but should be mindful that a portion of it needs to be shared . This sharing is reflected in global ecological concerns, common ownership of resources, and their usage limits . The course will highlight the importance of this formative and pervasive principle of life. ***
+## Additional Notes
 
-## Important Information
+None stated in source document.
 
-- **Course Code:** HM405
-- **Course Title:** The Idea Of India Swami Vivekananda Rabindranath Tagore MKGandhi
-- **Document Source:** HM 405_The Idea Of IndiaSwamiVivekanandaRabindranathTagoreMKGandhi_Autumn.pdf - Gangeya Mukherji.pdf
-- **Category:** Academics (Intranet)
+---
 
-## Related Links
-
-- [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp)
-- [Academic Guidelines](https://daiict.ac.in/academics)
-
-## Downloadable Resources
+## Downloads and Resources
 
 | Resource | Type | Link |
 |---|---|---|
 | HM 405_The Idea Of IndiaSwamiVivekanandaRabindranathTagoreMKGandhi_Autumn.pdf - Gangeya Mukherji.pdf | PDF | [Download HM 405_The Idea Of IndiaSwamiVivekanandaRabindranathTagoreMKGandhi_Autumn.pdf - Gangeya Mukherji.pdf](https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Course_Files_Autumn_2025_26/Autumn_2025_26_Individual_Course_Files/HM%20405_The%20Idea%20Of%20IndiaSwamiVivekanandaRabindranathTagoreMKGandhi_Autumn.pdf%20-%20Gangeya%20Mukherji.pdf) |
+
+---
+
+## Document Metadata
+
+| Field | Value |
+|---|---|
+| **Source PDF** | HM 405_The Idea Of IndiaSwamiVivekanandaRabindranathTagoreMKGandhi_Autumn.pdf - Gangeya Mukherji.pdf |
+| **Scraped Date** | 2026-06-28 |
+| **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

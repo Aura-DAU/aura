@@ -1,59 +1,81 @@
 ---
-title: "VLSI Design Credit Structure 3-0-0-3"
+title: "ED312 VLSI Design Credit Structure 3-0-0-3 1st Semester, Autumn 2025-26""
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Course_Files_Autumn_2025_26/Autumn_2025_26_Individual_Course_Files/ED312_VLSIDesign_Autumn25%20-%20Sreeja%20Rajendran.pdf"
-category: "Academics"
-scraped_by: "Madhav Thesiya"
+category: "Academics - Course Policies"
+scraped_by: "Squad D Scraper"
 scraped_date: "2026-06-28"
+team: "Squad D"
 source_type: "PDF"
 pdf_name: "ED312_VLSIDesign_Autumn25 - Sreeja Rajendran.pdf"
-instructor: "Sreeja Rajendran"
+course_code: "ED312"
+semester: "1st Semester, Autumn 2025-26"
 ---
 
-# VLSI Design Credit Structure 3-0-0-3 (ED312)
+# ED312: VLSI Design Credit Structure 3-0-0-3
 
-## Overview
+## Course Overview
 
-This document presents the detailed policy and syllabus structure for the course VLSI Design Credit Structure 3-0-0-3 (ED312). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
-
-## Main Content
-
-| Course Title | VLSI Design Credit Structure 3-0-0-3 | | |
-|---|---|---|---|
-| Course Code | ED312 | Credit Structure | 3-0-0-3 |
-| Category | Core Course Objective: This course introduces design fundamentals necessary to i | Semester | 1st Semester, Autumn 2025-26 |
-| Program | B.Tech (EVD ) | | |
-| Prerequisites |  | | |
-| Course Objectives/ Brief Course Description | This course introduces design fundamentals necessary to implement VLSI circuits. | | |
-| Evaluation/ Grading Policy | In semester evaluation s – 60% End semester evaluation – 40% Program Outcomes  Analyze the operation and timing of CMOS circuits , including metastability, synchronization, pipelining, and resource sharing in synchronous digital systems.  Design and evaluate static and dynamic logic circuits such as CMOS, ratioed logic, domino logic, and pass -transistor logic, including flip -flops and latches.  Develop memory architectures with a focus on their layout, read/write mechanisms, and integration.  Apply algorithms for placement and routing in physical design. | | |
-| Course Materials/ References | s 1. Wakerly J. F ~ Digital Design: Principles and Practices (4th Edition, Pearson, 2008) 2. Neil H.E. Westte & David Money Harris ~ CMOS VLSI Design: A Circuits and Systems Perspective (Addison Wesley, 4th Edition, 2011) | | |
+| Field | Details |
+|---|---|
+| **Course Code** | ED312 |
+| **Course Name** | VLSI Design Credit Structure 3-0-0-3 |
+| **Instructor(s)** | Not stated in source document |
+| **Credits** | 3-0-0-3 |
+| **Semester Offered** | 1st Semester, Autumn 2025-26 |
+| **Type** | Core Course Objective: This course introduces design fundamentals necessary to i |
+| **Program(s)** | B.Tech (EVD ) |
+| **Year / Semester in Program** | Not stated in source document |
+| **Associated Lab** | Not stated in source document |
+| **Prerequisites** | None |
+| **Foundation For** | Not stated in source document |
 
 ---
-*Page Split*
+
+## Course Description
+
+This course introduces design fundamentals necessary to implement VLSI circuits.
+
 ---
 
-## Detailed Course Content
+## Program Outcome Mapping (PO Mapping)
 
+| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| X |  | X |  | X | X |  |  |  |  |  | X |
 
-- CMOS Circuits: Timing issues, pipelining, resource sharing, metastability, synchronization, Semi & full custom designs: Placement & routing, Algorithms for Physical Design, IO pads & ESD Static & Dynamic CMOS Transistor, Ratioed circuits, domino logic, pas s transistor, latches Memory Designs: SRAM, DRAM, ROM, PROM, EPROM, EEPROM, Flash, CAM, VLSI Layout of small digital systems using predefined cells using a layout editor, System Verilog, CAD Tools, HDL Textbook s
+---
 
-1. Wakerly J. F ~ Digital Design: Principles and Practices (4th Edition, Pearson, 2008)
+## Textbooks and References
 
-2. Neil H.E. Westte & David Money Harris ~ CMOS VLSI Design: A Circuits and Systems Perspective (Addison Wesley, 4th Edition, 2011) Evaluation Components In semester evaluation s – 60% End semester evaluation – 40% Program Outcomes  Analyze the operation and timing of CMOS circuits , including metastability, synchronization, pipelining, and resource sharing in synchronous digital systems.  Design and evaluate static and dynamic logic circuits such as CMOS, ratioed logic, domino logic, and pass -transistor logic, including flip -flops and latches.  Develop memory architectures with a focus on their layout, read/write mechanisms, and integration.  Apply algorithms for placement and routing in physical design. P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 X X X X X
+Textbooks 1. Wakerly J. F ~ Digital Design: Principles and Practices (4th Edition, Pearson, 2008) 2. Neil H.E. Westte & David Money Harris ~ CMOS VLSI Design: A Circuits and Systems Perspective (Addison Wesley, 4th Edition, 2011) Evaluation
 
-## Important Information
+---
 
-- **Course Code:** ED312
-- **Course Title:** VLSI Design Credit Structure 3-0-0-3
-- **Document Source:** ED312_VLSIDesign_Autumn25 - Sreeja Rajendran.pdf
-- **Category:** Academics (Intranet)
+## Program Structure Context
 
-## Related Links
+This course is offered as part of the B.Tech (EVD ) in 1st Semester, Autumn 2025-26.
 
-- [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp)
-- [Academic Guidelines](https://daiict.ac.in/academics)
+---
 
-## Downloadable Resources
+## Additional Notes
+
+None stated in source document.
+
+---
+
+## Downloads and Resources
 
 | Resource | Type | Link |
 |---|---|---|
 | ED312_VLSIDesign_Autumn25 - Sreeja Rajendran.pdf | PDF | [Download ED312_VLSIDesign_Autumn25 - Sreeja Rajendran.pdf](https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Course_Files_Autumn_2025_26/Autumn_2025_26_Individual_Course_Files/ED312_VLSIDesign_Autumn25%20-%20Sreeja%20Rajendran.pdf) |
+
+---
+
+## Document Metadata
+
+| Field | Value |
+|---|---|
+| **Source PDF** | ED312_VLSIDesign_Autumn25 - Sreeja Rajendran.pdf |
+| **Scraped Date** | 2026-06-28 |
+| **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |
