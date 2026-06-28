@@ -166,6 +166,13 @@ class RetrievalPipeline:
         "mtech cs": "M.Tech. (CS and ML)",
         "mtech ml": "M.Tech. (CS and ML)",
 
+        # Fix AL1: bare "mtech"/"m.tech" without specialization suffix is a valid
+        # query term (e.g. "what is the M.Tech fee?"). Previously normalized to
+        # "mtech" → alias miss → filter skipped → top_k stays at 5 → answer buried.
+        # Map to a sentinel "M.Tech." so the alias hit triggers the top_k boost.
+        "mtech": "M.Tech.",
+        "m tech": "M.Tech.",
+
         # MSc IT variants
         "msc it": "M.Sc. (IT)",
         "m.sc it": "M.Sc. (IT)",
@@ -179,7 +186,19 @@ class RetrievalPipeline:
         "b tech mnc": "B.Tech. (MnC)",
         "computer science and artificial intelligence": "B.Tech. (CS and AI)",
         "electronics and communication": "B.Tech. (ECE-AI)",
-        "mathematics and computing": "B.Tech. (MnC)"
+        "mathematics and computing": "B.Tech. (MnC)",
+
+        # Fix AL1 (cont.): bare program abbreviations used when no specialization given
+        "btech": "B.Tech.",
+        "b tech": "B.Tech.",
+        "msc": "M.Sc.",
+        "m sc": "M.Sc.",
+        "mtech ict": "M.Tech. (ICT)",
+        "msc data science": "M.Sc. (Data Science)",
+        "msc agriculture analytics": "M.Sc. (Agriculture Analytics)",
+        "phd regular": "Ph.D.",
+        "phd part time": "Ph.D.",
+        "doctoral": "Ph.D."
     }
     
     def _expand_semesters(self, query):
@@ -591,7 +610,18 @@ class RetrievalPipeline:
             # branch and returned zero results ("not in database" false positive).
             # Use plan["top_k"] (already boosted for multi-entity queries) or
             # fall back to 5 per sub-query.
-            retrieval_top_k = plan.get("top_k", 5)
+            # Fix AL2: when the metadata filter will be None (because program_name
+            # canonicalized to None — bare alias like "M.Tech" with no specialization),
+            # raise top_k to 15 so the answer isn't buried under noise.
+            # The filter being None means the entire index is searched; top_k=5
+            # is far too narrow for broad-corpus sub-queries.
+            base_top_k = plan.get("top_k", 5)
+            alias_resolved = bool(
+                self._canonical_program_name(
+                    plan.get("entities", {}).get("program_name", "")
+                )
+            ) if plan.get("entities", {}).get("program_name") else True
+            retrieval_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
 
             for subquery in decomposed_queries:
                 subquery_expanded = self._expand_semesters(subquery)

@@ -100,6 +100,21 @@ class AuraChat:
             if is_myth_bust:
                 retrieval_query = retrieval_query + " policy rule regulation fact-check verify"
 
+            # Fix AQ1: laundry/dhobi queries lack the keyword "dhobi" that source
+            # docs use — augment so BM25 finds the furnishings/services chunk.
+            # Fixes Q121 (dhobi not mentioned when asked who collects laundry).
+            LAUNDRY_KEYWORDS = ["laundry", "wash clothes", "dhobi", "linen service"]
+            if any(kw in query_lower_t9 for kw in LAUNDRY_KEYWORDS):
+                retrieval_query = retrieval_query + " dhobi laundry hostel residence collect deliver"
+
+            # Fix AQ2: move-in / room setup queries need "mattress" in the
+            # retrieval query so the furnishings chunk ranks highly.
+            # Fixes Q130 (move-in steps didn't mention bring mattress).
+            MOVEIN_KEYWORDS = ["move in", "moving in", "moving into", "settle in",
+                               "first day hostel", "check in hostel", "what to bring hostel"]
+            if any(kw in query_lower_t9 for kw in MOVEIN_KEYWORDS):
+                retrieval_query = retrieval_query + " mattress pillow linen not provided bring own room"
+
             retrieval_result = (
                 self.pipeline.get_context(
                     retrieval_query,
@@ -200,9 +215,22 @@ class AuraChat:
             }
         except Exception as e:
             import traceback
+            err_str = str(e).lower()
             print("Error in AuraChat.chat:", e)
             traceback.print_exc()
+            # Fix TO1: differentiate timeout/rate-limit errors from generic errors
+            # so users get a more helpful message (Q60, Q61 — 323s/105s timeouts).
+            if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
+                msg = (
+                    "I'm experiencing a temporary connection issue. "
+                    "Please try your question again in a few seconds."
+                )
+            else:
+                msg = (
+                    "Sorry, I encountered an error while generating a response. "
+                    "Please try again."
+                )
             return {
-                "answer": "Sorry, I encountered an error while generating a response. Please try again.",
+                "answer": msg,
                 "sources": []
             }
