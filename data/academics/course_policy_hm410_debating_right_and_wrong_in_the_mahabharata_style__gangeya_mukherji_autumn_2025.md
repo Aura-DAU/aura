@@ -37,6 +37,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+EVALUATION: The ï¿½irst e valuation , comprising multiple -choice questions from the ï¿½irst module , will account for 30% of the total marks and will be conducted as part of the mid -semester examinations. Student p resentations scheduled for the last week of October, and centred around the second module, will account for another 10% of the marks . The students are encouraged to make presentations based on their personal interpretation on the topics, as well as the adaptations of the epi or its episodes in tele serials and contemporary rete llings. The end - semester examination, comprising multi
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

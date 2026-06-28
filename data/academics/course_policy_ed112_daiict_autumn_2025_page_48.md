@@ -37,6 +37,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+â€¢Attendance and participation in Lectures: 5%. (Irrespective of every- thing else, the final grade would be an F if absent in more than 4 lectures in the whole semester.) â€¢Lab Experiments and reports: 20%. (Irrespective of everything else, the final grade would be an F if absent in more than 1 lab. in the whole semester.) â€¢In-sem. Exam. 1: 15% â€¢In-sem. Exam. 2: 20% â€¢End-sem. Exam: 30% â€¢Surprise Quizzes: 10% â€¢Irrespective of everything else, the final grade would be an F if any instance of copying, or cheating, or dishonesty is detected. Reading Materials â€¢H.D. Young, R. A. Freedman, and A. L.
+
+---
+
 ## Textbooks and References
 
 books and documents distributed in the Google Classroom portal of the course. NBA Program and Program-Specific Outcomes P1 Eng. knowledge yes P2 Problem analysis yes P3 Design of solutions yes P4 Investigation of problems yes P5 Modern tool usage yes P8 Ethics yes P9 Ind. and team work yes P12 Life-long learning yes PSO 1 yes PSO 2 yes PSO 3 yes 7

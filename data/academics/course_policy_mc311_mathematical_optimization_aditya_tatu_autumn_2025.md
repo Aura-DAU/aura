@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+8.Evaluation: (a) Quizzes, Assignments/Lab exam - 30 âˆ’40%. (b) In Sem 1 & 2 and/or Project - 30 âˆ’40%. (c) End Sem - 30 âˆ’40%. 9.Program Outcomes : P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 X X X 2
+
+---
+
 ## Textbooks and References
 
 References: (a) AnIntroductiontoOptimization,ChongandZak,Fourthed.,Wiley. (b) LinearandNonlinearProgramming,LuenbergerandYe,Fifthed.,Springer. 1 (c) ConvexOptimization,BoydandVandenberghe,CambridgeUniversityPress. 7. CourseOutcomes: Thestudentwillbeableto (a) use the first and second order conditions to compute optima for small uncon- strainedoptimizationproblems, (b) implementlinesearch,gradientdescent,andNewton’smethodforunconstrained optimization, (c) usetheKKTconditionstoderiveconditionsthatanoptimaoraconstrainednon- linearoptimizationproblemhastosatisfy, (d) appreciateimportanceofoptimizationinDataScienceapplications. 8. Evaluation

@@ -60,6 +60,12 @@ Course Description This course aims to introduce the concept of data structures,
 
 ---
 
+## Evaluation / Grading Scheme
+
+1 â€¢In-Semester Exams (I & II): 40% (20% + 20%) â€¢Course Project/ Lab Assignments: 20% â€¢End-Semester Exam: 40% Tentative Course Plan2 Unit Topics Number of Lectures Preliminaries Representation of data on a computer, data types; ar- ray and linked list representations; ways of representing programs and associated data on computers.3 Analysis Tools The notion of the running time of an algorithm, Recur- rences, Parameters of performance.3 Dictionary OperationsFind, Max, Min, Successor, Predecessor (query opera- tions); Insert, Delete (modify operations).6 List Data Stacks, queues, variant implemen
+
+---
+
 ## Textbooks and References
 
 Books • Textbook: – Data Structures and Algorithms by Aho, Hopcroft, and Ullman, Addison- Wesley, 1999. • Reference Books: – Data Structures and Algorithms in C++/Java by Goodrich, Tamassia, and Goldberg, Wiley, 2011 – Introduction to Algorithms byCormen, Leiserson, Rivest, andStein, PHI,2010 Course Outcomes

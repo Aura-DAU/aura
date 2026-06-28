@@ -45,6 +45,12 @@ This course introduces design fundamentals necessary to implement VLSI circuits.
 
 ---
 
+## Evaluation / Grading Scheme
+
+In semester evaluation s â€“ 60% End semester evaluation â€“ 40% Program Outcomes ï‚· Analyze the operation and timing of CMOS circuits , including metastability, synchronization, pipelining, and resource sharing in synchronous digital systems. ï‚· Design and evaluate static and dynamic logic circuits such as CMOS, ratioed logic, domino logic, and pass -transistor logic, including flip -flops and latches. ï‚· Develop memory architectures with a focus on their layout, read/write mechanisms, and integration. ï‚· Apply algorithms for placement and routing in physical design.
+
+---
+
 ## Textbooks and References
 
 Textbooks 1. Wakerly J. F ~ Digital Design: Principles and Practices (4th Edition, Pearson, 2008) 2. Neil H.E. Westte & David Money Harris ~ CMOS VLSI Design: A Circuits and Systems Perspective (Addison Wesley, 4th Edition, 2011) Evaluation

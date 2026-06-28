@@ -37,6 +37,12 @@ Studying the earth surfaces can be possible using conventional means like traver
 
 ---
 
+## Evaluation / Grading Scheme
+
+Evaluation is based on â€¢ First / Mid and final semester exams. ( 60%) â€¢ Quizzes in the class (1 0%) â€¢ Mini project ( 30 %)
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

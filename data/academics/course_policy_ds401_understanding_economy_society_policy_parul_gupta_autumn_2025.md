@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Method of Assessment : Data exercises (30 %) Mid-term exam (30 %) Group project and presentation (40 %) Plagiarism on any assessment component will result in a failing grade for the course. Course Outcomes : On successfully completing the course, students will have a basic familiarity with
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

@@ -86,6 +86,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+1. Two Mid Semester Exams: 30%, 2. Project: 20%, 3. Lab Evaluation: 20%, 4. End Semester evaluation: 30%
+
+---
+
 ## Textbooks and References
 
 Books: 1. Fundamentals of Database Systems, Ramez Elmasri and Shamkant B. Navathe, Pearson Education 2. Database System Concepts by Avi Silberschatz, Henry F. Korth, S. Sudarshan, TMH Evaluation

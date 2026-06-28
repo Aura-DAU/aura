@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+ï‚· In Semester Exam ( 30%) ï‚· End Semester Exam (5 0%) ï‚· Project (20%) The marks of all the components would be duly considered for Grading . This is tentatively the final schedule of evaluation. Any minor change will be announced well in advance.
+
+---
+
 ## Textbooks and References
 
 Textbook/references: Operations Research by HA Taha 8th/9th Edition An introduction to optimization by E. K. P. Chong and S. H. Zak (Wiley) Evaluation

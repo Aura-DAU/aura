@@ -54,6 +54,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Evaluation and Assessment : There will be assignments, critical review of a research paper and a final exam . The final grade will be based on the assignments ( 40%), critical review of a research paper (10%) and the final end-semester exam (50%). The critical review of a research paper aims to gain an understanding of how ne tworking may evolve in the future to provide ubiquitous support for quality -of-service (QoS) in heterogeneous environments. The students will identify and critically review one paper selected from either of the following journals /conferences (not limited t o):  IEEE/AC
+
+---
+
 ## Textbooks and References
 
 books and a set of research papers will be used to cover the fundamentals, seminal findings and new directions in networking research. This course will introduce students to the essential tools and concepts such as:  Understanding a computer networks’ basic structure requires concepts.  Visualize the connected structure where networks are not only limited to computers but span to billions of devices.  The course aims to develop a working foundation that would allow for systematic analysis of modern networks.  In addition, it also aims at exposing students to some modern challenges and selected methods that are used extensively in the research literature.  Understanding the technology of the Internet and learning how to improve its properties is a fundamental objective of this course that will have an enormously beneficial impact on all facets of the economy and society at large. Course Goals: The goals for this course are (1) To study main concepts of computer network architecture, protocols and systems; (2) To become acquainted with computer networking research topics; (3) To gain practice in reading research papers and discussing the research of others, and (4) To be introduced and gain experience with network programming, analysis of traffic measurements, traffic control algorithms, and peer-to-peer software. Course Outcomes

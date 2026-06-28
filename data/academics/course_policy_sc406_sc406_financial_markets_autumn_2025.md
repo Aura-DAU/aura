@@ -37,6 +37,12 @@ Course Description There has been a dramatic growth in markets for financial pro
 
 ---
 
+## Evaluation / Grading Scheme
+
+Course Evaluation 1) Attendance â€“ 10% 2) Quizzes ( Two â€“ One after Session 13 and the other after Session 25 ) â€“ 20% 3) In-Semester examination (after Session 13) â€“ 30% 4) End-Semester examination â€“ 40% Session Plan (Total hours â€“ 42) Main Topic Sub-Topic Hours Financial Markets S 1 - Introduction 1.5 Stock Markets S 2 - Market Microstructure S 3 - IPO management â€“ Case of Narayana Health 3 1.5 Money Markets S 4 - Call Money Market
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

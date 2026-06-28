@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Mid Semester Exam: 30 % Final Semester Exam: 40 % Report writing & Presentation based on emerging technology: 30 % Lecture Schedule
+
+---
+
 ## Textbooks and References
 
 Books and literature: 1. Book title: Nanoelectronics: Physics, Technology and Applications, by Rutu Parekh and Rasika Dhavse, IOP publisher, UK. 2. Research papers. Course Outcomes

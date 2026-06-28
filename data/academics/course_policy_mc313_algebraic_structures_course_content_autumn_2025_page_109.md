@@ -37,6 +37,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Grading Two midsem test 20%+ 20% and an endsem 40%. If possible Quiz will be conducted. Quiz and attendance will comprise 20% of evaluation process. Outcome : Students learn the important algebraic structures of Groups and Fields which one encounters in various areas of Science and Engineering. They learn homomorphism and the important theorems of homomorphism which help in understanding and interpreting various aspects of a given algebraic structure. Introduction to a variety of Rings and Fields help them to generalize the structure of integers, real and complex numbers. Some of these fields
+
+---
+
 ## Textbooks and References
 
 Books 1. Topics in Algebra I.N. Herstein 2. Abstract Algebra, An Introduction Thomas W. Hungerford 3. Algebra Michael Artin 1 Grading Two midsem test 20%+ 20% and an endsem 40%. If possible Quiz will be conducted. Quiz and attendance will comprise 20% of evaluation

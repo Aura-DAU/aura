@@ -53,6 +53,12 @@ The course takes an introductory look at the core abstractions in operating syst
 
 ---
 
+## Evaluation / Grading Scheme
+
+â€¢ Lab Programming Assignments: 20% â€¢ 1st In-Semester Exam: 15 % â€¢ 2nd In-Semester Exam : 20% â€¢ End-Semester Exam: 25% â€¢ Project: 20%
+
+---
+
 ## Textbooks and References
 
 Books:  Bryant and O'Hallaron, Computer Systems: A Programmer's Perspective, 3rd edition, Pearson India, 2016.  Operating Systems: Three Easy Pieces, Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, 2018, Version 1.00. (Freely available online.) Assessment method: • Lab Programming Assignments: 20% • 1st In-Semester Exam: 15% • 2nd In-Semester Exam: 20% • End-Semester Exam: 25% • Project: 20% Course Outcomes

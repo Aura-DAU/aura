@@ -59,6 +59,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+- Surprise Quizzes, Assignments, Viva, Semester exams, La b test. Tentative marks distributions: - ï‚· Surprise Quizzes: - 30 . ï‚· End Semester Exam: - 30. ï‚· Lab Assignments +Viva + Lab test: - 40. Evaluation are subject to change as per the response of the class.
+
+---
+
 ## Textbooks and References
 
 References: Suggested books: For development of ML general concepts: -  Bishop, Christopher M. Pattern recognition and Machine learning 128.9 (2008). - A very popular and standard book for developing the ML general concepts systematically.  Murphy, K. P. (2013). Machine learning: a probabilistic perspective. Cambridge, Mass: MIT Press. ISBN: 9780262018029 026201802. - A detailed and widely adapted book for providing the statistical perspective of ML general concepts.  Friedman, Jerome, Trevor Hastie, and Robert Tibshirani. The elements of statistical learning. Vol. 1. No. 10. New York: Springer series in statistics, 2001. - It has nice stories which avoid the mathematical complexity and comprehend the ML concepts easily.  Duda, Richard O., and Peter E. Hart. Pattern classification. John Wiley & Sons, 2006. - A popular book of ML particularly for the Bayesian learning.  Zaki, Mohammed J., and Wagner Meira Jr. Data Mining and Machine Learning: Fundamental Concepts and Algorithms. Cambridge University Press, 2020. - A good reference book for overall ML techniques and algorithms.  Deisenroth, Marc Peter, A. Aldo Faisal, and Cheng Soon Ong. Mathematics for machine learning. Cambridge University Press, 2020. - Use it to understand the mathematics required for building the ML concepts.  Chandra, Suresh, Jayadeva, and Aparna Mehra. Numerical optimization with applications. Alpha Science International, 2009. - Use it to understand the optimization methods used for building the ML concepts.  Deng, Naiyang, Yingjie Tian, and Chunhua Zhang. Support vector machines: optimization based theory, algorithms, and extensions. CRC press, 2012. - It provides the SVM comprehension from the lens of optimization.  Zaki, Mohammed J., and Wagner Meira Jr. Data Mining and Machine Learning: Fundamental Concepts and Algorithms. Cambridge University Press, 2020. Evaluation

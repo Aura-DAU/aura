@@ -45,6 +45,12 @@ Course Objectives:  ICT in itself may not generate a vivid picture of itself,
 
 ---
 
+## Evaluation / Grading Scheme
+
+ï‚§ Quizzes: 10 % ï‚§ Assignments: 10% ï‚§ Mid Sem Exam: 20 % ï‚§ Project: 30% ï‚§ End Sem Exam: 30%
+
+---
+
 ## Textbooks and References
 
 Textbook/references:  Lecture notes  Handouts of lab classes Assessment Method/Evaluation

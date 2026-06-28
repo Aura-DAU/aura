@@ -45,6 +45,12 @@ This course will dive into the fundamentals of how man machine interaction happe
 
 ---
 
+## Evaluation / Grading Scheme
+
+In-Sem 20% Project 40% Lab 20% Quiz 10% Assignments 10%
+
+---
+
 ## Textbooks and References
 
 Textbook: A. Dix, J. Finlay, G. D. Abowd, R. Beale, “Human Computer Interaction”, Pearson Education, 2005. Reference Textbooks: • Mirel, Barbara, “Interaction design for complex problem solving: Developing useful and usable software”, Morgan Kaufmann, 2003. • Cooper, Alan, “Essentials of User Interface Design”, Wiley-dreamtech India, 2002 • Yvonne Rogers, Helen Sharp and Jenny Preece, “Interaction Design - Beyond Human-Computer Interaction”, 3rd Edition. Course Conduct and Grading Policy 1. Students are supposed to be present for all lectures and lab sessions. 2. If the attendance falls below 70%, a student will receive an F grade. (An institute-wide detailed policy will be communicated separately and will supersede this, once that takes effect) 3. All lab assignments must be completed, failing which zero marks will be awarded for the lab component. One makeup lab session will be scheduled at the end of the semester for students who miss a session due to any reason. For special medical cases, if the Dean, AP has approved their application, additional makeup sessions may be provided to the concerned students. 4. If a case of plagiarism/copying is detected in the exams or lab submissions, then that student will receive zero marks in the complete lab segment (30%) or the respective exam component. The student will also be reported to the Dean AP for possible further actions. Lecture Outline: Labs: Laboratory exercises will typically involve group based discussions, applying principles taught in lecture to real world objects/things/interfaces. The exercises will evolve as per the lecture material.

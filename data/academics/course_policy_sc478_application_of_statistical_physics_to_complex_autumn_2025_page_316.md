@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Grades will be based on performance in one mid-semester/in-semester examination and one end- semester exam. The weightage will be 35%and 65%respectively. 6
+
+---
+
 ## Textbooks and References
 
 Textbooks and References 1. Concepts in Thermal Physics,, S. Blundell and K. Blundell, Oxford University Press, 2006, 2. An Introduction to Thermal Physics, D. V. Schroeder, Oxford University Press, 2021, 3. Fundamentals of Statistical and Thermal Physics, F. Reif, , McGraw-Hill Book Company, New York. Other reference books/material will be suggested in class from time to time, as appropriate. 5 Grading Policy Grades will be based on performance in one mid-semester/in-semester examination and one end- semester exam. The weightage will be 35% and 65% respectively. 6 Course Outcomes

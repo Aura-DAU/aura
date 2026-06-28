@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+The total grade will be based on assignments (30%) and scheduled examinations (70%).
+
+---
+
 ## Textbooks and References
 
 Books: 1.) Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry and Engineering, Steven H. Strogatz, Levant Books 2.) Differential Equations and Their Applications: An Introduction to Applied Mathematics, Martin Braun, Springer-Verlag Reference Books: 1.) Nonlinear Ordinary Differential Equations: An Introduction to Dynamical Systems, D. W. Jordan & P. Smith, Oxford University Press Assessment Method: The total grade will be based on assignments (30%) and scheduled examinations (70%). Course Outcomes

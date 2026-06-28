@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Two Exams (55 marks): One Mid sem exam and Final end-sem examination. (20+35 marks) Lab Assignments: There will be around 6-7 Lab assignments in the whole course comprising a total 30 marks. Lab attendance is compulsory. Lab attendance will carry 20% marks in each assignment. 1 course Project: 15 marks (Project may be evaluated in multiple ways). Grading scheme is relative and depends on both: class performance and minimum expectation from a student.
+
+---
+
 ## Textbooks and References
 
 Course Materials/ • Information Visualization: Perception for Design by Colin Ware. References Morgan Kaufmann Suggested Text book(s) • Better Data Visualizations - A Guide for Scholars, Researchers, and Wonks, by Jonathan Schwabish. Columbia University Press • Visualization Analysis and Design by Tamara Munzner. CRC Press. • The Visual Display of Quantitative Information by Edward R. Tufte . 10. Evaluation

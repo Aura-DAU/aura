@@ -37,6 +37,12 @@ Course Objectives: 1. To understand the evolution of India as a nation with refe
 
 ---
 
+## Evaluation / Grading Scheme
+
+Evaluation : Evaluation will be continuous , based on presentations, panel discussions, class tests and assignment. It is proposed to have module -wise evalua tion of 4 modules (30%). Term paper writing based on in -depth study/discussions and data collection/survey will be 30%. End term will be of 40% weightage which will have written component. Learning Outcomes : After completion of the course the student will be able to 1 Get a broad -based understanding of Indian society and enable students to relate their theoretical knowledge with social realities on the ground. 2. Understand the evolut
+
+---
+
 ## Textbooks and References
 
 Books, 2013 4. KM Sen – Hinduism, Penguin Books, 2004 5. Ashish Nandy and others – Creating a Nationality, Oxford India Paperbacks,1997 6. Following websites from two known think tanks will be useful. i https://www.satp.org ii https://www.orfonline.org

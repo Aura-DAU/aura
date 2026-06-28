@@ -84,6 +84,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Homework/Assignments, Online quizzes/tests in Moodle, Online discussion in Moodle, term examination and a Final Project. Grading Policy:5% Attendance 25% Quizzes/Assignments 30% Project/Tests/Viva 40% Semester examFinal letter grades will be assessed on the following scale: A [90% â€“ 100%] B [80% â€“ 90%) C [70% â€“ 80%) D [60% â€“ 70%) F [0% â€“ 60%) This grading policy is subject to change and the final grading policy will be updated once the class starts.
+
+---
+
 ## Textbooks and References
 
 Textbook: Exploratory Data Analysis by J W Tukey Reference books: 1. Visualizing Data by Cleveland 2. Think Stats: Exploratory Data Analysis by Allen B. Downey, 2014 3. Exploratory Data Analysis Using R by Ronald K. Pearson, CRC Press 4. Graphical Data Analysis with R by Unwin Antony 5. Graphical Exploratory Data Analysis by S. H. C. DuToit, A. G. W. Steyn, R. H. Stumpf Assessmentmethod: Homework/Assignments,Onlinequizzes/testsinMoodle,OnlinediscussioninMoodle, term examination and a Final Project. Finallettergradeswillbeassessedonthefollowingscale: 5% Attendance A [90% – 100%] 25% Quizzes/Assignments B [80% – 90%) Grading Policy: 30% Project/Tests/Viva C [70% – 80%) 40% Semester exam D [60% – 70%) F [0% – 60%) This grading policy is subject to change and the final grading policy will be updated once the class starts. Course Outcomes

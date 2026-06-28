@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Quizzes, 1 Project, In -Semester Examinations and a Final Examination will be conducted during the course. Grading Policy : In-Sem 1: 2 0% In-Sem 2: 20 % End-Sem: 30 % Lab: 10% Project, Quiz: 2 0%
+
+---
+
 ## Textbooks and References
 
 Books: 1. Samir Palnitkar, Verilog HDL: A Guide to Digital Design and Synthesis, Prentice Hall. 2. Stephen Brown and Zvonko Vrsaniec, Fundamentals of Digital Logic with Verilog Design, McGraw Hill. 3. Zainalabedin Navabi, Verilog Digital System Design, McGraw Hill. 4. Vivek Sagdeo, The Complete Verilog Book, Kluwer Academic Pub. 5. Peter R. Wilson, Design Recipes for FPGAs, Elsevier. Assessment Method: Quizzes, 1 Project, In-Semester Examinations and a Final Examination will be conducted during the course. Grading Policy: In-Sem 1: 20% In-Sem 2: 20% End-Sem: 30% Lab: 10% Project, Quiz: 20% Course Outcomes

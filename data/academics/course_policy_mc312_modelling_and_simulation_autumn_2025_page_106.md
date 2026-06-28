@@ -62,6 +62,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Two in-semester examinations (40%) , final examination (30%) and lab viva (30%) .
+
+---
+
 ## Textbooks and References
 
 Textbooks, Milne Library, 2015. 3) Taylor & Karlin, An Introduction to Stochastic Modeling, Academic Press, 1998. 4) S. Strogatz, Nonlinear Dynamic and Chaos, Oxford University Press, 2001. Assessment method: Two in-semester examinations (40%), final examination (30%) and lab viva (30%). Course Outcomes

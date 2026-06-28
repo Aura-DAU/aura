@@ -54,6 +54,12 @@ Course Description This course provides a rigorous introduction to probability a
 
 ---
 
+## Evaluation / Grading Scheme
+
+•Midterm: 40% •Final: 60%
+
+---
+
 ## Textbooks and References
 
 Course Materials/References Suggested Textbooks • Grimmett, G. R., and D. R. Sterzaker. ””Probability and Random Processes” 4th edition.” • DeGroot, Morris H., and Mark J. Schervish. ””Probability and statistics” 4th edition.” • Ramsey,FredandSchafer,Daniel. “TheStatisticalSleuth: AcourseinmethodsofDataAnalysis” 3rd edition. • F. E. Harrell, Jr. ””Regression Modelling Strategies with Applications to Linear Models, Logistic Regression and Survival analysis.”” Evaluation

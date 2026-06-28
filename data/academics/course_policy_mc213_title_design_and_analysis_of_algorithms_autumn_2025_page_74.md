@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Every student must participate in two in-semester examinations and one nal examination. Their grade at the conclusion of the course will be determined by their performance in these assessments. Additionally, there will be 4-5 assignments (either programming or theoretical) designed to evaluate their programming and algorithm design abilities. The tentative weight distribution, subject to slight variation, is as follows: In-sem I (30%), In-sem II (30%), and End-sem (40%). Attendance follows institute policy.
+
+---
+
 ## Textbooks and References
 
 textbook/references: 1. Introduction to Algorithms - Cormen, Leiserson, Rivest and Stein. 2. Algorithm Design - Kleinberg and Tardos 3. Algorithms - Robert Sedgewick and Kevin Wayne 4. The Design and Analysis of Computer Algorithms - Aho, Hopcroft and Ullman Gradingpolicy: Everystudentmustparticipateintwoin-semesterexaminationsandonefinalexamination. Their grade at the conclusion of the course will be determined by their performance in these assessments. Additionally, there will be 4-5 assignments (either programming or theoretical) designed to evaluate their programming and algorithm design abilities. The tentative weight distribution, subject to slight variation, is as follows: In-sem I (30%), In-sem II (30%), and End-sem (40%). Attendance follows institute policy. Course outcome: • Algorithmic Knowledge: Understand fundamental algorithms, including sorting, searching, and graph algorithms. • AlgorithmDesignSkills: Applytechniqueslikedivideandconquer,dynamicprogramming,andgreedy algorithms to solve computational problems. • Complexity Analysis: Analyze algorithms using Big-O notation to determine time and space complex- ity. • Problem-SolvingProficiency: Developskillsinsolvingalgorithmicproblemsthroughlogicalandstruc- tured thinking. • Implementation Ability: Implement algorithms in programming assignments to translate theoretical concepts into practical solutions. • Critical Thinking: Evaluate and compare different algorithms based on their theoretical analysis and practical performance. P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 (cid:54) (cid:54) (cid:54) (cid:54)

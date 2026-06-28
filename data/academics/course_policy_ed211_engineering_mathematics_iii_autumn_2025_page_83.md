@@ -45,6 +45,12 @@ Course Description: (cid:136) Introduction to Signals and Systems. Fourier Trans
 
 ---
 
+## Evaluation / Grading Scheme
+
+The assessment method will be as follows:1 Two midterm exams: 27.5% each Final exam: 30% Tutorials, In-class Quizzes and Evaluations: 15% Attendance: will follow Institute’s attendance policy 1This is tentative and subject to change. 1
+
+---
+
 ## Textbooks and References
 
 References: Textbook Oppenheim, A. V., and Schafer, R. W. (2010). “Discrete-time signal processing,” 3rd ed., Prentice Hall. Reference Books The following books are used as the reference: 1. Kreyszig, E. (2011). “Advanced engineering mathematics,” 10th ed., Wiley. 2. Proakis, J. G., and Manolakis, D. G. (2007). “Digital signal processing: Principles, algorithms, and applications,” 4th ed., Pearson Prentice Hall. Grading Policy The assessment method will be as follows:1 (cid:136) Two midterm exams: 27.5% each (cid:136) Final exam: 30% (cid:136) Tutorials, In-class Quizzes and Evaluation

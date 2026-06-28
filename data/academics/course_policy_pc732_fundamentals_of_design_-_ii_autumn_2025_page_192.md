@@ -45,6 +45,12 @@ and Content: This module deals with the advanced aspects of colour, composition,
 
 ---
 
+## Evaluation / Grading Scheme
+
+Course Abstract: PC 732 FOD 2 for MDes CD 6 11. Type as display, type as body text, digital type 12. Type and scale 13. Integration â€“ judgement, interaction and decisions Skill: 1. Colour application and mixing 2. Hue, Saturation, tint, shade 3. Greyscale and RGB Wheel 4. RGB vs CMYK 5. Physical colour vs screen colour 6. Using colour for representation 7. Elements of type â€“ size, leading, kerning, spacing etc 8. Type narrative Assessment Method: Continuous assessment of application of concepts through the duration of the course, along with assessment of group and individual assignments given.
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

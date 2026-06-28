@@ -37,6 +37,12 @@ This course will introduce students to the emergent field of Design History or D
 
 ---
 
+## Evaluation / Grading Scheme
+
+There will be continuous evaluation of students through class participation, individual presentations and a final research paper, seminar or in-class examination. Selected Readings from: 3 Nikolaus Pevsner, Pioneers of Modern Design (1936; revised ed. 1960) John Heskett, Industrial Design (1980) and Design: A Very Short Introduction (2002) Jonathan Woodham, Twentieth Century Design (1997) Victor Margolin, World History of Design (2015, 2 vols.) H.K. Kumar Vyas : Alternative Histories of Design (essays) S. Balaram : Thinking Design
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

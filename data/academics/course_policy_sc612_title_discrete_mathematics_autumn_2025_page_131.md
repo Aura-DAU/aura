@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+(tentative): The grade earned by a student wil l depend on (1) the total marks earned by him in all the exams conducted over the entire semester, and (2) active participation in the class discussions and labs . The weightage of each part is as follows: Insem 1: 20% Insem 2: 20% Endsem: 40% Tutorials /Lecture Participatio n/ Assignments : 20 %
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

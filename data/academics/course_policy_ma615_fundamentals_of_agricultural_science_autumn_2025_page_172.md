@@ -65,6 +65,12 @@ The course presumes that the participants have no exposure of subjects related t
 
 ---
 
+## Evaluation / Grading Scheme
+
+Evaluation is based on ï‚· First in-semester exam and End semester exam (80%) ï‚· Quizzes in the class (20%)
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

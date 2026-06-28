@@ -37,6 +37,12 @@ Course aims to impart students know-how of creating modular , flexible, and reus
 
 ---
 
+## Evaluation / Grading Scheme
+
+- Lab +Group Project assignments: 50% (group size will be a maximum of 4 students) - Mid-Sem Exam: 25% - End Sem Exam: 25% Grading Policy: Relative grading with the following slabs: - >90 = AA - 80-90 = AB - 65-79 = BB - 50-64 = BC - 40-50 = CC - <39 = CD
+
+---
+
 ## Textbooks and References
 
 Textbook/references: 1. Head First Object-Oriented Analysis and Design 2. Software Design and Architecture Specialization Assessment Method: - Lab +Group Project assignments: 50% (group size will be a maximum of 4 students) - Mid-Sem Exam: 25% - End Sem Exam: 25% Grading Policy: Relative grading with the following slabs: - >90 = AA - 80-90 = AB - 65-79 = BB - 50-64 = BC - 40-50 = CC - <39 = CD Course outcome: Upon completion, students will be equipped with the advanced principles, modern techniques, and practical skills required to architect software that is inherently testable, maintainable, reflecting the core tenets of creating software that is "safe from bugs, easy to understand, and ready for change".

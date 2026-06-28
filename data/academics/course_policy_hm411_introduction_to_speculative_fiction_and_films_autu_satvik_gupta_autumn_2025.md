@@ -45,6 +45,12 @@ Course Objectives: ● To recognize and appreciate works of horror, science fict
 
 ---
 
+## Evaluation / Grading Scheme
+
+Evaluation plan: 1. Attendance and Classroom Participation: 10%
+
+---
+
 ## Textbooks and References
 
 Books, 2003 (Select excerpts). Jackson, Shirley. “The Lottery.” The Lottery and Other Stories, Penguin Books, 2009, pp. 291-302. Bradbury, Ray. “There Will Come Soft Rains.” The Martian Chronicles, Simon & Schuster Paperbacks, 2017. McCarthy, Cormac. The Road. Picador collection, 2022. Films: Miyazaki, Hayao, director. Spirited Away. Studio Ghibli, 2001. Villeneuve, Denis, director. Arrival. Paramount Pictures, 2016. Peele, Jordan, director. Get Out. Universal Pictures, 2017. Joon Ho, Bong, director. Snowpiercer. CJ Entertainment, 2013. Additional Readings: Asimov, Isaac. “Nightfall.” Nightfall and Other Stories, Fawcett Publications, 1969, pp. 11–44. Atwood, Margaret. The Handmaid’s Tale. Vintage, 1996. Carroll, Noël. “Why Horror?” The Philosophy of Horror, or, Paradoxes of the Heart, Routledge, 1990, pp. 158–215. Jackson, Shirley. The Haunting of Hill House. Penguin Books, 2009. Shelley, Mary. Frankenstein: Or the Modern Prometheus, Oxford University Press, 2008. Additional Films: Weir, Peter, director. The Truman Show. Paramount Pictures, 1998. “When You’re Lost in the Darkness.” The Last of Us, written by Craig Mazin and Neil Druckmann, directed by Craig Mazin, PlayStation Productions, 2023. Note: Narratives/films beyond the prescribed course material may also be discussed in the class. Evaluation

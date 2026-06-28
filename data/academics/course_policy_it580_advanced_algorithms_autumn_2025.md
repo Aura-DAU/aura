@@ -37,6 +37,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Grading Policy: Class participation/Scribe /Presentation â€“ 20% Lab practice and performance â€“ 20% Mid-semester exam â€“ 20% End Semester Exam â€“ 40%.
+
+---
+
 ## Textbooks and References
 
 Books: Introduction to Algorithms -- Cormen, Leiserson, Rivest, Stein (MIT Press) Algorithms -- Dasgupta, Papadimitriou, and Vazirani (McGraw-Hill Education). Grading Policy: Class participation/Scribe/Presentation – 20% Lab practice and performance – 20% Mid-semester exam – 20% End Semester Exam – 40%.

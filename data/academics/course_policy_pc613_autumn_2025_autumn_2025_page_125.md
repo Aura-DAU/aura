@@ -37,6 +37,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Autumn 2025 PC613: Communica/on Skills (Sem I, MSc IT) This 4-credit course is designed to equip the MSc IT students with the essen;al skills for eï¬€ec;ve communica;on and comprehension of ideas that will help them in their career as IT professionals. The course will include sessions intended to improve the studentsâ€™ wri;ng competence, ability to ar;culate ideas and think cri;cally, presenta;on skills, and command over English language. Exercises like group ac;vi;es, wri;ng tasks, class presenta;ons, and crea;ve assignments will be combined with lectures on basic English grammar, reading skills
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Evaluation Two in -semester tests and a final exam will take place at the officially scheduled exam time for the course. ï‚· 30% two mid-term exams ï‚· 40% final exam ï‚· 20% in-lab exercises ï‚· 10% mini -projects Lab policy ï‚· Lab attendance is mandatory. You will have to demonstrate your code for the in - lab exercises to a TA as specified in the lab handout . If you fail to do so , you will lose points. There will be no makeup labs for any reason.
+
+---
+
 ## Textbooks and References
 
 Textbook Operating Systems: Three Easy Pieces, Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, November 2023 (Version 1.10). The course text covers most of the lecture material. It is freely available at http://pages.cs.wisc.edu/~remzi/OSTEP/ References  Operating System Concepts, A. Silberschatz, P. Gavin and G. Gagne, 8th edition, 2009, Pearson Education.  Linux Kernel Development, Robert Love, 3rd edition, 2010, Pearson Education. Evaluation

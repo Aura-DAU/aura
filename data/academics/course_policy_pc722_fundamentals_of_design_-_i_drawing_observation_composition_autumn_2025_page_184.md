@@ -45,6 +45,12 @@ and Content: Design is an interdisciplinary activity – characterized by the co
 
 ---
 
+## Evaluation / Grading Scheme
+
+Course Abstract: PC 722 FOD 1 for MDes CD 5 Skill: 1. Drawing & Sketching skills 2. Understanding tools â€“ pencil, pen, paper, ink, brush 3. Quality, precision and professionalism 4. Visualisation and eye-trace training 5. Judgement 6. Communication 7. Reflexive thinking Assessment Method: Continuous assessment of application of concepts through the duration of the course, along with assessment of group and individual assignments given. Assessment will not only cover the assignments, but professionalism, precision, pride, care and discipline displayed by the students. P1 P2 P3 P4 P5 P6 P7 P8 P9
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

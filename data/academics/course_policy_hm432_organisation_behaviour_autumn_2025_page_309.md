@@ -37,6 +37,12 @@ Course Objectives: Learning Organizational Behavior is important, not only becau
 
 ---
 
+## Evaluation / Grading Scheme
+
+Course Evaluation In-semester Examination's 25% Case Studies, Discussions, Article Analysis, and Project /Paper Presentations & Reports, Mock Interview 20% Assignments 20% End-semester Examination 30% Overall class participation in course 5% Book(s) Stephen Robbins, “Organisational Behaviour”, Pearson Education, 10th Edition, 2005. K. Ashwathappa, “Organisational Behaviour”, Himalaya Publishing House. 5th Edition, 2004. Paul Hersey et. al., “Management of Organisational Behaviour – Utilizing human resources”, Prentice -Hall of India Pvt. Ltd., 7th Edition, 1998 Fred Luthans, “Organisational Be
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

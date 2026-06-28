@@ -37,6 +37,12 @@ The activities will be centered around reading, speaking, listening, writing and
 
 ---
 
+## Evaluation / Grading Scheme
+
+Mid Sem Exam : 35% End Sem Exam: 30% Group Project: 35%
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

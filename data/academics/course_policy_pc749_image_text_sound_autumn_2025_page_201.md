@@ -45,6 +45,12 @@ and Content: This course aims to introduce to elements of multi-media in Communi
 
 ---
 
+## Evaluation / Grading Scheme
+
+Course Abstract: PC 749 Image, Text and Sound for MDes CD 4 7. Deploying as multimedia assets 8. Seamless user experience design 9. Recap of typographic concepts from FOD 2 10. Recap of visual design concepts from FOD 1 and FOD 2 11. Recap of History of Design Skill: 1. Appreciating sound scape 2. Recording and creating soundscape 3. Integrating image and sound 4. Sound and image editing software 5. Multimedia integration software 6. Organising sound recording setup Softwareâ€™s: 1. Adobe Premiere Pro 2. Adobe Animate 3. Adobe Audition 4. Audacity Hardware: 1. Sound recording equipmentâ€™s (zoom m
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

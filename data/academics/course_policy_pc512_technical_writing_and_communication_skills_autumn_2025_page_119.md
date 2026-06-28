@@ -37,6 +37,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+• In-Sem. Exam 1 : 30% • In-Sem. Exam 2: 30% • End -Sem. Project : 40% • If any instance of plagiarism, copying and cheating is detected an “F” would be given as the final grade.
+
+---
+
 ## Textbooks and References
 
 references and developing a bibliography 15. Applying for a Patent 16. Ethics for Technical Communication 17. Using platform-independent public-domain software such as LibreOffice Suite, Markdown, LATEX and Beamer. Reading Materials • Handouts in the Google Classroom portal of PC512. • Several E-books (fiction and non-fiction) in the Google Classroom portal. • Several papers and technical documents in Google Classroom portal. Suggested Books: 1. Meenakshi Raman and Sangeeta Sharma, Technical Communication: Principles and Practice, Third Edition (Oxford University Press, 2015) 2. M. Ashraf Rizvi, Effective Technical Communication, Second Edition (McGraw Hill Education Private Ltd., 2018) 3. Elizabeth Tebeaux and Sam Dragga ed., The Essentials of Technical Communication (Oxford University Press, 2021). 4. Seth Lindstromberg ed., The Standby book: Activities for the language classroom (Cambridge University Press, 1997) 5. Mario Linvolucri and Paul Davis, More Grammar Games: Cognitive, Affective and Movement activities for EFL students (Cambridge University Press, 1995) 6. John Seely, The Oxford Guide to Effective Writing and Speaking, Third Edition (Oxford University Press, 2013). Grading Policy • In-Sem. Exam 1: 30% • In-Sem. Exam 2: 30% • End-Sem. Project: 40% • If any instance of plagiarism, copying and cheating is detected an “F” would be given as the final grade. NBA Program and Program-Specific Outcomes P5 Modern tool usage yes P6 Eng. and society yes P8 Ethics yes P9 Ind. and team work yes P10 Communication yes P12 Life-long learning yes PSO 3 yes

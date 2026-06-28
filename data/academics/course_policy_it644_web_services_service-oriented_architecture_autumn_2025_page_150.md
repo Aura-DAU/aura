@@ -57,6 +57,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Assessment Method: 6-8 lab assignments, a group project, class tests, and end-semester examination. Course Outcomes:
+
+---
+
 ## Textbooks and References
 
 Books and Literature: • Service-Oriented Architecture: Concepts, Technology, and Design by Thomas E. • SOA Principles of Service Design by T Erl. • Service Design Patterns: Fundamental Design Solutions for SOAP/WSDL and RESTful Web Services by Robert Daigneau • Patterns of Enterprise Application Architecture by Martin Fowler • Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions by Gregor Hohpe & Bobby Woolf • Building Microservices by Sam Newman Assessment Method: 6-8 lab assignments, a group project, class tests, and end-semester examination. Course Outcomes

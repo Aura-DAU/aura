@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Quizzes, assignments, In-semester examinations and a final end -semester examination will be conducted during the course. Grading Policy : In-Sem 1: 20% In-Sem 2: 20% End-Sem: 30% Lab: 1 0% Project, Quiz: 20%
+
+---
+
 ## Textbooks and References
 
 Books: 1. CMOS Digital Integrated Circuits-Analysis & Design by S.M. Kang & Y. Leblibici, TMH. 2. Principles of CMOS VLSI Design: A System Perspective by NHE Weste & K. Eshraghian, McGraw Hill Pub. 3. Low Power Design Methodologies by Rabaey and Pedram, Kluwer Academic Press. Reference Books: 1. Microelectronic Circuits by A.S.Sedra and K.C.Smith, Oxford University Press. 2. Integrated Electronics by Millman and Halkias, McGraw Hill Publications. 3. CMOS: Circuit Design, Layout and Simulation by R. Jacob Baker, Harry W. Li, and David E. Boyce, PHI. 4. Introduction to PSPICE by H.M. Rashid, PHI. 5. F.Moll and M.Roca, Interconnection Noise in VLSI Circuits, Kluwer Academic Pub. 6. H.K. Bakoglu, Circuits, Interconnections and Packaging for VLSI, Addison Wesley Pub.

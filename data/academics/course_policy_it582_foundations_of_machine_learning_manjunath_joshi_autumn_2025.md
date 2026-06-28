@@ -45,6 +45,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+(TAs will also be part of evaluation process ): ● Lab - 5% ● Class Participation 10% – Reward points for answering questions asked during class hours (max 10 points ). ● Midsem exam and Endsem exam -40% (Best of the two will be considered) ● Course project : - 45%. ● Two presentations in a semester. At the beginning and towards the end. In a project group a person randomly chosen will be presenting on prescribed date (decided by the
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

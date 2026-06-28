@@ -49,6 +49,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Mid-semester Exam: 20%, End-semester Exam: 30%, Group Project-Assignments: 50%
+
+---
+
 ## Textbooks and References
 
 Books(optional): ● YoavGoldberg:APrimeronNeuralNetworkModelsforNaturalLanguageProcessing CourseOutcomes: Aftersuccessfulcompletionofthecourse,thestudentwillhavetheabilityto- ● Completeanend-to-endreal-lifeindustry-levelNLPproject ● ThoroughunderstandingofthefundamentalsoftheparadigmofNeuralNLP-theirprosandcons ● Designandimplementindustry-standardNLPsystems. ● Thoroughunderstandingofindustry-standardNLPlibrariessuchasSpaCyandHuggingFaceNLP. Evaluation

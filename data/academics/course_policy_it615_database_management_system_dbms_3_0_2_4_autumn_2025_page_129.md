@@ -59,6 +59,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+Labs and Assignments 30% InSem Exam(s) 30% End Semest er Exam 40%
+
+---
+
 ## Textbooks and References
 
 Books Silberschatz, Korth & Sudarshan, Database System Concepts, Seventh Edition, 2019, McGraw‐Hill Course Outcomes

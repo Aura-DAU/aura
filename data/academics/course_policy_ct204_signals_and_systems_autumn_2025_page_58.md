@@ -75,6 +75,12 @@ The course serves as a foundation/introduction to the area of signal and image p
 
 ---
 
+## Evaluation / Grading Scheme
+
+(Tentative) :  1st In-semester examination – 15%  2nd In-semester examination -- 25%  End-semester examination – 40%  Lab Experiments , Reports, and Lab Exam – 20%
+
+---
+
 ## Textbooks and References
 
 Not stated in source document

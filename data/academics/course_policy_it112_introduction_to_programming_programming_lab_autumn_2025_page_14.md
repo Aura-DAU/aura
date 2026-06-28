@@ -45,6 +45,12 @@ This course aims to introduce problem solving techniques using programming to he
 
 ---
 
+## Evaluation / Grading Scheme
+
+Mid Semester Test 40% Final Examination 60% Course Conduct and Grading Policy (For IT112 and IT113) 1. Students are supposed to be present for all lectures and lab sessions. 2. If the attendance falls below 70%, a student will receive an F grade. (An institute-wide detailed policy will be communicated separately) 3. All lab assignments (IT113) must be completed , failing which zero marks will be awarded for the lab course. One makeup lab session will be scheduled at the end of the semester for students who miss a session due to any reason. For special medical cases, if the Dean, AP has approve
+
+---
+
 ## Textbooks and References
 
 Textbook Yashvant Kanetkar, Let Us C, 19th Ed, BPB Publications References 1. Kernighan Brian, Ritchi Dennis, The C Programming Language (ANSI C Version), 2nd Ed., Prentice Hall 2. Deitel Harvey, C: How to Program, PHI Learning Online compiler used in the lectures: https://onecompiler.com/c Other tools will be communicated to the students whenever they are used.

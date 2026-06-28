@@ -64,6 +64,12 @@ Not stated in source document
 
 ---
 
+## Evaluation / Grading Scheme
+
+â€¢ Pop-up Quizzes: 10% â€¢ Lab Assignments: 15% â€¢ Proje ct: 20 % â€¢ First In -Semester Exam : 10% â€¢ Second In -Semester Exam: 20% â€¢ End-Semester Exam : 25%
+
+---
+
 ## Textbooks and References
 
 Books:  Data Structures and Algorithms in Python by Michael Goodrich, Roberto Tamassia, Michael Goldwasser, Wiley Publication  Python crash course: a hands-on project based introduction to programming, 2nd Edition, by Eric Matthews, San Francisco No Starch Press 2019.  Learn Python the hard way: a very simple introduction to the terrifyingly beautiful world of computers and code, 3rd Edition, by Zed Shaw, Upper Saddle River: Addison-Wesley, 2014 Other Resources:  www.python.org Assessment method: • Pop-up Quizzes: 10% • Lab Assignments: 15% • Project: 20% • First In-Semester Exam: 10% • Second In-Semester Exam: 20% • End-Semester Exam: 25% Course Outcomes
