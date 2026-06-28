@@ -91,7 +91,13 @@ class Retriever:
                     "id": 
                         match["id"],
                         
+                    # Fix #1A: store the raw Pinecone cosine score separately
+                    # so the confidence router can use it even after RRF fusion
+                    # overwrites 'score' with the hybrid rrf_score.
                     "score":
+                        match["score"],
+
+                    "cosine_score":
                         match["score"],
 
                     "metadata":

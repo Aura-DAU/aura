@@ -67,7 +67,9 @@ if ffmpeg_env_path and os.path.exists(ffmpeg_env_path):
     if ffmpeg_env_path not in os.environ["PATH"]:
         os.environ["PATH"] += os.pathsep + ffmpeg_env_path
 
-UNIVERSITY_PROMPT = "DAIICT, Prof. Hemant A. Patil, Placement Convener, B.Tech, M.Tech, ICT, Gandhinagar."
+# Fix API1: updated Whisper initial_prompt to reflect DAU rebrand and
+# include key terms the model commonly mishears in student voice queries.
+UNIVERSITY_PROMPT = ("Dhirubhai Ambani University, DAU, DA-IICT, Gandhinagar. B.Tech ICT, B.Tech CS AI, B.Tech ECE, BS-MS, M.Tech, M.Sc, M.Des, Ph.D. AURA, CGPA, semester, admissions, fees, hostel, scholarship, placement, Hemant Patil.")
 
 class HistoryTurn(BaseModel):
     role: str

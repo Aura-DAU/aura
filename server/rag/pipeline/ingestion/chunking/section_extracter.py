@@ -37,8 +37,6 @@ def extract_sections(markdown_text):
 
         if heading_match:
 
-            save_section()
-
             level = len(
                 heading_match.group(1)
             )
@@ -48,19 +46,31 @@ def extract_sections(markdown_text):
                 .strip()
             )
 
-            current_content = []
-
             if level == 1:
+                save_section()
                 current_h1 = title
                 current_h2 = None
                 current_h3 = None
+                current_content = []
 
             elif level == 2:
+                save_section()
                 current_h2 = title
                 current_h3 = None
+                current_content = []
 
             elif level == 3:
+                save_section()
                 current_h3 = title
+                current_content = []
+
+            else:
+                # Fix D: H4–H6 headings were previously treated as plain body
+                # text (falling to the else branch below), losing structural
+                # context like "Research Area: VLSI" on faculty pages.
+                # Now fold them into the current section content as bold lines
+                # so embeddings and BM25 capture the semantic signal.
+                current_content.append(f"**{title}**")
 
         else:
             current_content.append(line)

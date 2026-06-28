@@ -210,6 +210,104 @@ def convert_tables_to_sentences(text):
         processed_lines.append(lines[i])
         i += 1
     return "\n".join(processed_lines)
+_CANONICAL_FACULTY_NAMES = None
+
+def get_canonical_faculty_names():
+    global _CANONICAL_FACULTY_NAMES
+    if _CANONICAL_FACULTY_NAMES is not None:
+        return _CANONICAL_FACULTY_NAMES
+        
+    current_dir = Path(__file__).resolve().parent
+    # Under server/rag/pipeline/ingestion/chunking/
+    data_dir = current_dir.parent.parent.parent.parent.parent / "data"
+    f_dir = data_dir / "faculty"
+    
+    names = set()
+    if f_dir.exists():
+        for f in f_dir.rglob("*.md"):
+            if f.name in ["faculty_list.md", "staff_list.md", "teaching_fellows_list.md", "boards_of_studies_v2.md"]:
+                continue
+            if "policy" in f.name or "handbook" in f.name or "contract" in f.name or "tenure" in f.name:
+                continue
+            try:
+                with open(f, "r", encoding="utf-8") as file:
+                    content = file.read()
+                    m = re.search(r'^title:\s*"([^"]+)"', content, re.MULTILINE)
+                    if m:
+                        names.add(m.group(1).strip())
+                        continue
+                    m = re.search(r'^title:\s*([^\r\n]+)', content, re.MULTILINE)
+                    if m:
+                        names.add(m.group(1).strip().strip("'").strip('"'))
+                        continue
+            except Exception as e:
+                # Non-fatal: if a faculty markdown file cannot be read/parsed,
+                # fall back to deriving the name from the filename below.
+                _ = e
+            name = f.stem.replace("faculty_", "").replace("_", " ").title()
+            names.add(name)
+            
+    _CANONICAL_FACULTY_NAMES = sorted(list(names))
+    return _CANONICAL_FACULTY_NAMES
+
+
+def map_to_canonical_faculty(name):
+    canonical_list = get_canonical_faculty_names()
+    if not canonical_list or not name:
+        return name
+        
+    from rapidfuzz import fuzz, process
+    matches = process.extract(name, canonical_list, scorer=fuzz.WRatio, limit=1)
+    if matches:
+        best_match = matches[0]
+        score = best_match[1]
+        if score >= 80.0:
+            return best_match[0]
+    return name
+
+
+def extract_faculty_from_text(text):
+    """
+    Search text for Advisor: ... or similar lines and extract faculty names.
+    Also scan text for any matches of canonical faculty names.
+    """
+    faculty_names = set()
+    
+    # 1. Scoped advisor lines
+    pattern = r"\bAdvisors?\s*:\s*(.*)"
+    for line in text.split("\n"):
+        m = re.search(pattern, line, re.IGNORECASE)
+        if m:
+            advisor_str = m.group(1)
+            parts = re.split(r",|and", advisor_str, flags=re.IGNORECASE)
+            for part in parts:
+                part_cleaned = re.sub(
+                    r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*",
+                    "",
+                    part.strip(),
+                    flags=re.IGNORECASE
+                ).strip()
+                if part_cleaned:
+                    part_cleaned = re.sub(r"\s+", " ", part_cleaned)
+                    mapped = map_to_canonical_faculty(part_cleaned)
+                    faculty_names.add(mapped)
+                    
+    # 2. General substring mention matching
+    canonical_list = get_canonical_faculty_names()
+    for name in canonical_list:
+        name_pattern = rf"\b{re.escape(name)}\b"
+        if re.search(name_pattern, text, re.IGNORECASE):
+            faculty_names.add(name)
+            
+    return list(faculty_names)
+
+
+def extract_course_codes_from_text(text):
+    """
+    Find course codes (2-3 letters followed by 3 digits) in the text.
+    """
+    codes = set(re.findall(r"\b[A-Z]{2,3}\d{3}\b", text))
+    return list(codes)
 
 
 def process_markdown_file(file_path):
@@ -249,6 +347,13 @@ def process_markdown_file(file_path):
         event_metadata = extract_event_metadata(sections)
         event_metadata["event_name"] = metadata.get("title")
 
+    # Frontmatter fields copy
+    fm_course_code = metadata.get("course_code")
+    fm_semester = metadata.get("semester")
+    fm_faculty_name = metadata.get("faculty_name")
+    fm_program_name = metadata.get("program_name")
+    fm_event_name = metadata.get("event_name")
+
     chunks = []
 
     for section in sections:
@@ -257,8 +362,34 @@ def process_markdown_file(file_path):
 
         section_text = ""
 
-        if faculty_name:
-            section_text += f"Faculty Name: {faculty_name}\n\n"
+        # Extract advisors and mentioned faculty from the section content
+        section_faculty = []
+        if category == "faculty" and faculty_name:
+            section_faculty.append(faculty_name)
+        else:
+            # Extract mentioned faculty members
+            section_faculty.extend(extract_faculty_from_text(section["content"]))
+            # Also add frontmatter faculty if defined
+            if fm_faculty_name:
+                if isinstance(fm_faculty_name, list):
+                    section_faculty.extend(fm_faculty_name)
+                else:
+                    section_faculty.append(fm_faculty_name)
+            # Deduplicate
+            section_faculty = list(set(section_faculty))
+
+        # Extract course codes from section content and combine with frontmatter course_code
+        section_course_codes = extract_course_codes_from_text(section["content"])
+        if fm_course_code:
+            section_course_codes.append(fm_course_code)
+        section_course_codes = list(set(section_course_codes))
+
+        # Prepends contextual lines
+        if section_faculty:
+            section_text += f"Faculty Name: {', '.join(section_faculty)}\n\n"
+
+        if category == "doctoral scholars" and metadata.get("title"):
+            section_text += f"Document Title: {metadata.get('title')}\n"
 
         if section["h1"]:
             section_text += f"H1: {section['h1']}\n"
@@ -302,14 +433,26 @@ def process_markdown_file(file_path):
                 "token_estimate": len(chunk_text.split())
             }
 
-            if faculty_name:
-                chunk_record["faculty_name"] = faculty_name
+            if section_faculty:
+                chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
+
+            if section_course_codes:
+                chunk_record["course_code"] = section_course_codes if len(section_course_codes) > 1 else section_course_codes[0]
+
+            target_semester = fm_semester or metadata.get("semester")
+            if target_semester:
+                chunk_record["semester"] = target_semester
+
+            target_program = program_name or fm_program_name
+            if target_program:
+                chunk_record["program_name"] = target_program
+
+            target_event = event_metadata.get("event_name") or fm_event_name
+            if target_event:
+                chunk_record["event_name"] = target_event
 
             if event_metadata:
-                chunk_record.update(event_metadata)
-
-            if program_name:
-                chunk_record["program_name"] = program_name
+                chunk_record.update({k: v for k, v in event_metadata.items() if k != "event_name"})
 
             chunks.append(chunk_record)
 
@@ -342,28 +485,14 @@ def process_markdown_file(file_path):
             "token_estimate": len(custom["text"].split())
         }
 
-        if program_name:
-            chunk_record["program_name"] = program_name
-
-        chunk_record["semester"] = custom.get(
-            "semester"
-        )
-
-        chunk_record["course_code"] = custom.get(
-            "course_code"
-        )
-
-        chunk_record["course_name"] = custom.get(
-            "course_name"
-        )
-
-        chunk_record["course_type"] = custom.get(
-            "course_type"
-        )
-
-        chunk_record["credits"] = custom.get(
-            "credits"
-        )
+        if program_name or fm_program_name:
+            chunk_record["program_name"] = program_name or fm_program_name
+            
+        chunk_record["semester"] = custom.get("semester") or fm_semester
+        chunk_record["course_code"] = custom.get("course_code") or fm_course_code
+        chunk_record["course_name"] = custom.get("course_name")
+        chunk_record["course_type"] = custom.get("course_type")
+        chunk_record["credits"] = custom.get("credits")
 
         chunks.append(chunk_record)
 

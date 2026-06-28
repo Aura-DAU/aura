@@ -165,9 +165,14 @@ The retrieved context consists of XML documents.
 
 Each document has the format:
 
-<doc id="1">
+<doc id="1" program_name="B.Tech. (ICT)" title="..." h1="..." h2="...">
 ...
 </doc>
+
+When a question involves a specific program, use the program_name attribute to
+identify which program each document belongs to. For comparison questions
+(e.g. "compare BTech ICT vs BS-MS fees") check the program_name on each
+document to ensure you attribute information to the correct program.
 
 Use document IDs as citations:
 
@@ -233,24 +238,24 @@ class AnswerGenerator:
                     else:
                         profile_text += "CRITICAL: You are assisting a PROFESSOR with no assigned subjects. You MUST NOT provide specific student records. Politely decline.\n\n"
 
-            history_text = ""
-
-            if history:
-                for turn in history[-8:]:
-                    role = turn.get("role", "")
-                    content = turn.get("content", "")
-                    if role in ["user", "assistant"] and content:
-                        if role == "assistant":
-                            content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
-                        history_text += (
-                            f"{role}: "
-                            f"{content}\n"
-                        )
-
             planner_hint = {
                 "intent": plan["retrieval_intent"],
                 "entities": plan["entities"],
             }
+
+            history_text = ""
+            # Fix #10: use 6 turns to match query_rewriter.py's window.
+            # Previously 5 (generator) vs 8 (rewriter) caused the generator
+            # to miss context that was used to resolve the rewritten query.
+            if history:
+                for turn in history[-6:]:
+                    role = turn.get("role", "")
+                    content = turn.get("content", "")
+                    if role and content:
+                        history_text += (
+                            f"{role}: "
+                            f"{content}\n"
+                        )
 
             prompt = f"""
 Conversation History
@@ -297,6 +302,22 @@ Retrieved Documents
 
 {context}
 """
+            # Fix AG3: if the context XML is empty (no chunks reached the
+            # generator — e.g. all chunks were filtered by token budget, or
+            # retrieval silently failed after the router passed the query),
+            # skip the LLM call entirely and return a helpful fallback message.
+            # The LLM with empty context often hallucinates or gives a generic
+            # "I could not find" response — we can do that cheaper and clearer.
+            import re as _re
+            context_text_only = _re.sub(r"<[^>]+>", "", context).strip()
+            if not context_text_only:
+                return (
+                    "I couldn\'t find specific information about that in the "
+                    "university\'s knowledge base. For accurate details, please "
+                    "contact DAU directly at admissions@dau.edu.in or visit "
+                    "https://www.daiict.ac.in."
+                )
+
             def _execute_generate(client):
                 return client.chat.completions.create(
                     model=self.model,
@@ -331,30 +352,41 @@ Retrieved Documents
                 flags=re.DOTALL
             ).strip()
 
-            # Programmatic guardrail for out-of-scope code-generation requests.
-            # Only triggers on request-shaped phrases ("write a", "implement a"),
-            # never on bare language names — questions about programming COURSES
-            # at DAU are in scope.
+            # Fix #11: tighten code-request detection to require a
+            # programming language or construct keyword so that academic
+            # phrases like "What is the program for MnC?" or
+            # "How to write a thesis?" do NOT trigger the guardrail.
             out_of_scope_response = "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?"
 
+            PROG_LANG_INDICATORS = [
+                "python", "java", "c++", "javascript", "js", "typescript",
+                "c#", "ruby", "go", "rust", "kotlin", "swift", "php",
+                "sql", "bash", "shell", "html", "css",
+                "algorithm", "fibonacci", "palindrome", "sorting", "linked list",
+                "binary tree", "recursion", "dynamic programming",
+            ]
+            CODE_ACTION_PATTERNS = [
+                "write a", "code for", "implement a", "function in",
+                "script in", "program in",
+            ]
             question_lower = query.lower()
-            code_request_patterns = ["write a", "code for", "program for", "how to write", "implement a", "palindrome", "function in", "script in"]
-            is_code_request = any(kw in question_lower for kw in code_request_patterns)
+            is_code_request = (
+                any(kw in question_lower for kw in CODE_ACTION_PATTERNS)
+                and any(lang in question_lower for lang in PROG_LANG_INDICATORS)
+            ) or "palindrome" in question_lower
 
-            # Exclude course/subject/program/dress/rules codes from code requests
-            if is_code_request:
-                for exclude in ["course code", "subject code", "program code", "dress code", "rules code"]:
-                    if exclude in question_lower:
-                        is_code_request = False
-                        break
 
             if is_code_request:
                 answer_lower = answer.lower()
+                # Fix AG2: regex was double-escaped (\\b → \b literal, never matches).
+                # Correct to single-escape so word-boundary and digit patterns work.
                 is_grounded = (
-                    re.search(r"\bdau\b", answer_lower)
+                    bool(re.search(r"\bdau\b", answer_lower))
                     or "dhirubhai ambani" in answer_lower
                     or "[source:" in answer_lower
+                    or bool(re.search(r"\[\d+\]", answer_lower))
                     or "could not find that information" in answer_lower
+                    or "not available" in answer_lower
                 )
                 if "```" in answer or not is_grounded:
                     return out_of_scope_response

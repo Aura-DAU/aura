@@ -22,7 +22,9 @@ class QueryRewriter:
 
         history_text = ""
 
-        for turn in history[-8:]:
+        # Fix #10: aligned to 6 turns (was 8) so the rewriter uses the same
+        # history window as the answer generator, preventing context mismatch.
+        for turn in history[-6:]:
 
             history_text += (
                 f"{turn['role']}: "
@@ -93,10 +95,14 @@ Latest Question:
 
         response = KeyManager.call_with_rotation(_execute_rewrite, max_retries=5)
 
-        return (
+        # Fix QR1: if the LLM returns an empty string (hallucination or API
+        # edge case), fall back to the original query rather than passing ""
+        # to the retrieval pipeline (which would destroy BM25 term matching).
+        rewritten = (
             response
             .choices[0]
             .message
             .content
             .strip()
         )
+        return rewritten if rewritten else query

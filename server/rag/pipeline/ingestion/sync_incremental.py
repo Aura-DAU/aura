@@ -75,7 +75,7 @@ def main():
     logger.info("Generating embeddings for %d new chunks...", len(texts))
     new_embeddings = model.encode(
         texts,
-        batch_size=32,
+        batch_size=128,
         show_progress_bar=True,
         normalize_embeddings=True,
         convert_to_numpy=True
@@ -132,9 +132,12 @@ def main():
 
         vectors.append(vector)
 
-    # Upload in one batch if small, otherwise partition (usually 2 files fit in 1 batch)
-    logger.info("Uploading %d new vectors to Pinecone index %s...", len(vectors), index_name)
-    index.upsert(vectors=vectors)
+    # Upload in partitioned batches (recommended batch size is <= 200)
+    batch_size = 200
+    logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
+    for i in range(0, len(vectors), batch_size):
+        batch = vectors[i:i+batch_size]
+        index.upsert(vectors=batch)
     logger.info("Pinecone upload complete.")
 
     # 5. Refresh entity index

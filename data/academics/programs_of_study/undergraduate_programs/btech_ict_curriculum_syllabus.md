@@ -1,5 +1,6 @@
 ---
 title: "B.Tech. (ICT) Curriculum and Syllabus"
+url: "https://www.daiict.ac.in/btech-ict"
 category: "Academics"
 scraped_by: "Antigravity OCR"
 scraped_date: "2026-06-15"
