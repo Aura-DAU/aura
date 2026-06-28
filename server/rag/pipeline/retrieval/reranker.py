@@ -195,6 +195,17 @@ class Reranker:
                 "event",
                 "schedule",
                 "details"
+            ],
+
+            # Fix RR2: version-history section headings boosted for policy_version
+            # intent so that the reranker surfaces version history chunks first.
+            "policy_version": [
+                "version history",
+                "supersedes",
+                "effective date",
+                "revision",
+                "amendment",
+                "replaces"
             ]
         }
 

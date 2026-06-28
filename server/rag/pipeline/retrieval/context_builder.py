@@ -14,7 +14,7 @@ class ContextBuilder:
         """Rough token estimate: word count × 1.3 (accounts for sub-word splits)."""
         return int(len(text.split()) * 1.3)
 
-    def build(self, chunks):
+    def build(self, chunks, retrieval_intent="general"):
 
         documents = []
 
@@ -22,6 +22,16 @@ class ContextBuilder:
         seen_urls = set()
 
         context_tokens_used = 0
+
+        # Fix CB3: for policy_version queries, raise the token budget so that
+        # version history sections — which often appear at the end of a long
+        # policy document — are not dropped by the budget cap before they are
+        # included in the context. 4000 tokens is still safe for all models
+        # (system ~450 + history ~500 + 4000 = ~4950 tokens).
+        effective_max_tokens = (
+            4000 if retrieval_intent == "policy_version"
+            else self.MAX_CONTEXT_TOKENS
+        )
 
         for idx, chunk in enumerate(
             chunks,
@@ -42,7 +52,7 @@ class ContextBuilder:
 
             # Fix G: enforce token budget — skip lower-ranked chunks that
             # would push us over the limit.
-            if context_tokens_used + estimated_tokens > self.MAX_CONTEXT_TOKENS and idx > 1:
+            if context_tokens_used + estimated_tokens > effective_max_tokens and idx > 1:
                 break
 
             context_tokens_used += estimated_tokens

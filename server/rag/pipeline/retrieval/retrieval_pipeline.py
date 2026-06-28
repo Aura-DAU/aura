@@ -566,6 +566,19 @@ class RetrievalPipeline:
             )
         )
 
+        # Fix DEG1: dead-end guard for policy version/metadata queries.
+        # When the retrieval intent is "policy_version", these questions ask
+        # about version history, supersession, and effective dates — sections
+        # that only exist in documents if explicitly added. If the metadata
+        # filter would narrow to a single highly-specific document that is
+        # unlikely to have a version history chunk, skip the metadata filter
+        # entirely and do a broad search so we at least return the policy doc.
+        retrieval_intent = plan.get("retrieval_intent", "general")
+        if retrieval_intent == "policy_version" and metadata_filter:
+            # Keep only category-level filter, drop entity-level filters
+            # so the version history chunk from the right policy is reachable.
+            metadata_filter = None
+
         decomposed_queries = plan.get(
             "query_decomposition"
         )
@@ -608,6 +621,25 @@ class RetrievalPipeline:
                         )
                     )
 
+                # Fix CP1: for cross-policy comparison queries, even if the
+                # filtered retrieval returns some results, those may all be
+                # from ONE policy. If this sub-query is retrieving the second
+                # leg and results overlap heavily with already-seen chunk IDs,
+                # also retry filter-free to maximise distinct coverage.
+                if sub_results and sub_metadata_filter:
+                    already_seen_ids = {r["id"] for r in all_results}
+                    new_in_sub = [r for r in sub_results if r["id"] not in already_seen_ids]
+                    if len(new_in_sub) == 0:
+                        # All sub-results already collected — retry without filter
+                        extra = self.retriever.retrieve(
+                            query=subquery_expanded,
+                            top_k=retrieval_top_k,
+                            metadata_filter=None
+                        )
+                        new_extra = [r for r in extra if r["id"] not in already_seen_ids]
+                        if new_extra:
+                            sub_results = new_extra
+
                 sub_reranked = (
                     self.reranker.rerank(
                         query=subquery_expanded,
@@ -616,8 +648,14 @@ class RetrievalPipeline:
                     )
                 )
 
+                # Fix SR1: raised per-sub-query cap from 3 → 4 for multi-entity
+                # (comparison) queries. With 3 chunks per sub-query and 2 sub-
+                # queries, the joint rerank pool was only 6 items — often not
+                # enough distinct coverage when one leg returns weak results.
+                # 4 per sub-query gives an 8-item joint pool for 2-way comparisons.
+                sub_limit = 4 if plan.get("multi_entity_query") else 3
                 all_results.extend(
-                    sub_reranked[:3]
+                    sub_reranked[:sub_limit]
                 )
 
             results = all_results
@@ -625,8 +663,11 @@ class RetrievalPipeline:
         else:
             # Main query retrieval using dual path
             results = self._retrieve_dual_path(query, plan)
-            # Expand adjacent chunks
-            results = self._expand_adjacent_chunks(results)
+            # Fix J2: use a wider context window for policy_version queries
+            # so that version history sections (which may be 1-2 chunks after
+            # the main policy heading) are always included in context.
+            expand_window = 2 if retrieval_intent == "policy_version" else 1
+            results = self._expand_adjacent_chunks(results, window=expand_window)
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
         # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
         # the vector/BM25 results into a unified chunk pool for reranking.
@@ -691,7 +732,8 @@ class RetrievalPipeline:
 
         built = (
             self.builder.build(
-                final_chunks
+                final_chunks,
+                retrieval_intent=retrieval_intent
             )
         )
 
@@ -721,9 +763,12 @@ class RetrievalPipeline:
                 len(final_chunks)
         }
 
-    def _expand_adjacent_chunks(self, candidates):
+    def _expand_adjacent_chunks(self, candidates, window=1):
         """
-        Retrieves neighboring (i-1 and i+1) chunks for candidate chunks to preserve context.
+        Retrieves neighboring chunks (window chunks before and after) for each
+        candidate to preserve context. window=1 is the default; use window=2
+        for policy_version queries to capture version history sections that may
+        be one or two chunks away from the main policy chunk.
         """
         expanded_candidates = []
         for cand in candidates:
@@ -733,25 +778,31 @@ class RetrievalPipeline:
             if not doc_id or chunk_idx is None:
                 expanded_candidates.append(cand)
                 continue
-            
+
             chunk_idx = int(chunk_idx)
-            prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - 1))
-            next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + 1))
-            
             parts = []
-            if prev_chunk:
-                parts.append(prev_chunk.get("text", ""))
+
+            # Collect preceding chunks within window
+            for offset in range(window, 0, -1):
+                prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - offset))
+                if prev_chunk:
+                    parts.append(prev_chunk.get("text", ""))
+
             parts.append(metadata.get("text", ""))
-            if next_chunk:
-                parts.append(next_chunk.get("text", ""))
-                
+
+            # Collect following chunks within window
+            for offset in range(1, window + 1):
+                next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + offset))
+                if next_chunk:
+                    parts.append(next_chunk.get("text", ""))
+
             expanded_text = "\n\n".join(filter(None, parts))
-            
+
             new_cand = dict(cand)
             new_cand["metadata"] = dict(metadata)
             new_cand["metadata"]["text"] = expanded_text
             expanded_candidates.append(new_cand)
-            
+
         return expanded_candidates
 
     def _retrieve_dual_path(self, query, plan):

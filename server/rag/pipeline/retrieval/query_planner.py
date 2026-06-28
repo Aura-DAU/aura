@@ -69,7 +69,14 @@ Retrieval Intents
 - admissions_information
 - scholarship_information
 - event_information
+- policy_version
 - general
+
+Use policy_version when the question asks about:
+- when a policy was issued or became effective
+- whether a policy supersedes or replaces an older one
+- whether a newer version of a policy exists
+- what changed between versions of a document
 
 Entity Types
 
@@ -463,6 +470,275 @@ What are the hostel charges?
     "required_sections": ["Hostel", "Fee", "Charges"]
   }
 }
+
+------------------------------------------------------------
+COMPARISON QUERIES — always decompose into two focused sub-queries
+------------------------------------------------------------
+
+Query:
+How does the library borrowing limit for a postgraduate student differ from an undergraduate student?
+
+{
+  "category": "campus_life",
+  "intent": "general",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.85,
+  "multi_entity_query": true,
+  "entities": {},
+  "query_decomposition": [
+    "library borrowing limit postgraduate PG student books items loan period",
+    "library borrowing limit undergraduate UG BTech student books loan period"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Borrowing", "Loan Period", "Library", "Resource Centre"]
+  }
+}
+
+Query:
+Between a BTech student and a PhD student, who has a longer borrowing period for library books?
+
+{
+  "category": "campus_life",
+  "intent": "general",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.85,
+  "multi_entity_query": true,
+  "entities": {},
+  "query_decomposition": [
+    "library loan period borrowing duration BTech undergraduate student",
+    "library loan period borrowing duration PhD doctoral student"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Borrowing", "Loan Period", "Library"]
+  }
+}
+
+Query:
+How does the refund percentage differ between withdrawing on day 10 versus day 20 after commencement of classes?
+
+{
+  "category": "admissions",
+  "intent": "overview",
+  "retrieval_intent": "admissions_information",
+  "entity_confidence": 0.88,
+  "multi_entity_query": true,
+  "entities": {},
+  "query_decomposition": [
+    "tuition fee refund percentage withdrawal within 15 days commencement",
+    "tuition fee refund percentage withdrawal 16 to 30 days commencement"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Refund", "Withdrawal", "Fee Refund", "Tuition"]
+  }
+}
+
+Query:
+How does the procedure for student grievances differ from the procedure for faculty grievances under the GRHS?
+
+{
+  "category": "administration",
+  "intent": "overview",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.87,
+  "multi_entity_query": true,
+  "entities": {},
+  "query_decomposition": [
+    "student grievance redressal procedure GRHS level authority",
+    "faculty grievance redressal procedure GRHS level authority"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Grievance", "Grievance Redressal", "Procedure", "GRHS"]
+  }
+}
+
+Query:
+Under the patent policy, how does the revenue share differ if the filing cost was covered by a sponsored research funder versus by DAU directly?
+
+{
+  "category": "research",
+  "intent": "overview",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.88,
+  "multi_entity_query": true,
+  "entities": {},
+  "query_decomposition": [
+    "patent revenue share distribution DAU funds filing cost",
+    "patent revenue share distribution sponsored research project funds filing"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Patent", "Revenue", "Filing", "Revenue Share"]
+  }
+}
+
+Query:
+Under the hostel allotment policy, are day scholars given hostel rooms on the same basis as outstation students?
+
+{
+  "category": "campus_life",
+  "intent": "overview",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.85,
+  "multi_entity_query": true,
+  "entities": {},
+  "query_decomposition": [
+    "hostel allotment eligibility day scholar local student",
+    "hostel allotment eligibility outstation student priority criteria"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Hostel", "Allotment", "Eligibility", "Day Scholar"]
+  }
+}
+
+------------------------------------------------------------
+CROSS-POLICY SCENARIO QUERIES — multi-policy decomposition
+------------------------------------------------------------
+
+Query:
+Does a DX grade make a student ineligible for a merit scholarship?
+
+{
+  "category": "academics",
+  "intent": "eligibility",
+  "retrieval_intent": "scholarship_information",
+  "entity_confidence": 0.87,
+  "multi_entity_query": true,
+  "entities": {
+    "scholarship_name": "merit scholarship"
+  },
+  "query_decomposition": [
+    "DX grade attendance penalty academic backlog definition",
+    "merit scholarship eligibility criteria backlog academic standing"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["DX", "Scholarship", "Eligibility", "Backlog", "Attendance"]
+  }
+}
+
+Query:
+Can a student who received a disciplinary warning still be allotted a hostel room for the next year?
+
+{
+  "category": "campus_life",
+  "intent": "eligibility",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.86,
+  "multi_entity_query": true,
+  "entities": {},
+  "query_decomposition": [
+    "hostel allotment eligibility disciplinary action warning suspension",
+    "disciplinary warning penalty consequences student hostel"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Hostel", "Allotment", "Disciplinary", "Warning"]
+  }
+}
+
+Query:
+If a student is on disciplinary probation, are they eligible for the Student Research Excellence Award?
+
+{
+  "category": "academics",
+  "intent": "eligibility",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.87,
+  "multi_entity_query": true,
+  "entities": {},
+  "query_decomposition": [
+    "Student Research Excellence Award eligibility criteria disciplinary probation",
+    "disciplinary probation student standing academic record"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Research Excellence Award", "Eligibility", "Disciplinary", "Probation"]
+  }
+}
+
+------------------------------------------------------------
+POLICY VERSION / METADATA QUERIES — use effective_date and version_history sections
+------------------------------------------------------------
+
+Query:
+The PhD Student Travel and Research Allowance Policy has an effective date of 1 January 2026. Does it explicitly mention what earlier policy it supersedes?
+
+{
+  "category": "administration",
+  "intent": "overview",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.82,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Version History", "Supersedes", "Effective Date", "PhD Travel", "Research Allowance"]
+  }
+}
+
+Query:
+The Patent Filing Policy has an effective date of 1 December 2025. Is there any mention of a prior patent policy at DAU?
+
+{
+  "category": "research",
+  "intent": "overview",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.82,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Version History", "Supersedes", "Effective Date", "Patent"]
+  }
+}
+
+Query:
+The Anti-Ragging Committee document for 2025-26 is dated 18 August 2025. Does the same document still apply, or has a newer version been issued?
+
+{
+  "category": "administration",
+  "intent": "overview",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.82,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Version History", "Effective Date", "Anti-Ragging", "Ragging Committee"]
+  }
+}
+
+------------------------------------------------------------
+MYTH-BUSTING / CLAIM VERIFICATION (Type9) — always use "rules" intent
+------------------------------------------------------------
+
+Query:
+A friend told me attendance is tracked overall not per course — is that true?
+
+{
+  "category": "academics",
+  "intent": "rules",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.85,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Attendance", "DX", "Academic Policy"]
+  }
+}
+
+Query:
+Someone said alumni data at DAU is shared with placement companies by default — does the alumni data privacy policy permit this?
+
+{
+  "category": "administration",
+  "intent": "rules",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.85,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Alumni", "Data Privacy", "Sharing", "Third Party"]
+  }
+}
 """
 
 class QueryPlanner:
@@ -668,6 +944,22 @@ class QueryPlanner:
                 preferred_section_type = (
                     "event"
                 )
+
+            elif retrieval_intent == "policy_version":
+
+                # Fix PV1: policy version/metadata questions (Type4) need
+                # "Version History", "Supersedes", and "Effective Date" boosted
+                # so the reranker prioritises chunks from the version history
+                # section of each policy document.
+                required_sections.extend([
+                    "Version History",
+                    "Supersedes",
+                    "Effective Date",
+                    "Revision",
+                    "Amendment"
+                ])
+
+                preferred_section_type = "administration"
 
             # Fix QP1: for "general" intent (placement, hostel, campus life,
             # ragging, transport etc.) no required_sections were ever set, so
