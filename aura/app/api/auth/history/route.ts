@@ -1,5 +1,11 @@
-import { saveThreadsForUser, type StoredThread } from "@/lib/db/chat-db"
+import { saveThreadsForUser } from "@/lib/db/chat-db"
 import { NextResponse } from "next/server"
+import { z } from "zod"
+
+const historySchema = z.object({
+  email: z.string().email("Invalid email address"),
+  threads: z.array(z.any())
+})
 
 export async function POST(req: Request) {
   let body: unknown
@@ -7,11 +13,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
 
-  const { email, threads } = body as { email?: string; threads?: StoredThread[] }
-
-  if (!email || !Array.isArray(threads)) {
-    return NextResponse.json({ error: "email and threads are required" }, { status: 400 })
+  const parsed = historySchema.safeParse(body)
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0]?.message || "Invalid input" }, { status: 400 })
   }
+
+  const { email, threads } = parsed.data
 
   try {
     await saveThreadsForUser(email, threads)
