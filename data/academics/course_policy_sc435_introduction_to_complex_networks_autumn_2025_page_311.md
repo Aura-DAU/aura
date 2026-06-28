@@ -70,7 +70,43 @@ Many systems spanning multiple disciplines are composed of many interacting comp
 
 ## Textbooks and References
 
-references used to develop the understanding (iii) viva/presentation.  Attendance Policy: Any student with less than 75% of attendance in lectures will not be allowed to appear for the final exam.  Plagiarism and cheating policy: Plagiarism and/or cheating will result in disqualification from the course. Suggested textbook/references: 1. M. E. J.Newman, Networks – An introduction. Oxford Univ. Press, 2010. 2. A. L. Barabasi, Network Science, Cambridge, 2015. 3. F. Menczer, S. Fortunato, and C. A. Davis, A First course in Network Science, Cambridge University Press, 2020. Reference Books 1. Alain Barrat, Marc Barthelemy, Alessandro Vespignany, Dynamical processes on complex networks, Cambridge University Press, 2012. 2. Eli Ben-Naim , Complex Networks (Lecture notes in Physics), Springer, 2004. 3. S. N. Dorogovtsev and J. F. F. Mendes, Evolution of networks, Oxford University Press, 2003. 4. Guido Calderelli, Complex webs in nature and technology, Oxford university Press, 2007. 5. Marc Newmann, Barabsi, Duncan Watts, The structure and Dynamics of networks, New Age International Pvt Ltd, 2010. Course Outcomes
+references used to develop the understanding (iii) viva/presentation.  Attendance Policy: Any student with less than 75% of attendance in lectures will not be allowed to appear for the final exam.  Plagiarism and cheating policy: Plagiarism and/or cheating will result in disqualification from the course. Suggested textbook/references:
+
+- 1.
+
+- M. E. J.Newman, Networks – An introduction. Oxford Univ. Press,
+
+- 2010. 2.
+
+- A. L. Barabasi, Network Science, Cambridge,
+
+- 2015. 3.
+
+- F. Menczer,
+
+- S. Fortunato, and
+
+- C. A. Davis, A First course in Network Science, Cambridge University Press,
+
+- 2020. Reference Books
+
+- 1. Alain Barrat, Marc Barthelemy, Alessandro Vespignany, Dynamical processes on complex networks, Cambridge University Press,
+
+- 2012. 2. Eli Ben-Naim , Complex Networks (Lecture notes in Physics), Springer,
+
+- 2004. 3.
+
+- S. N. Dorogovtsev and
+
+- J. F.
+
+- F. Mendes, Evolution of networks, Oxford University Press,
+
+- 2003. 4. Guido Calderelli, Complex webs in nature and technology, Oxford university Press,
+
+- 2007. 5. Marc Newmann, Barabsi, Duncan Watts, The structure and Dynamics of networks, New Age International Pvt Ltd,
+
+- 2010. Course Outcomes
 
 ---
 

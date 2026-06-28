@@ -49,7 +49,23 @@ Not stated in source document
 
 ## Textbooks and References
 
-References 2. M. Caironi, Y-Y. Noh, (Editors), Large Area and Flexible Electronics, 2nd Edition, Suggested Text book(s) WILEY-VCH, 2015. 3. A. M. Hussain, Introduction to flexible electronics. CRC Press, 2022. 4. W. S. Wong, and A, Salleo, (Editors) Flexible electronics: Materials and Applications, 1st Edition, Springer, 2009. Recent Research Papers on ‘Flexible and Printed Electronics’ area from scientific publisher like IEEE, IOP, ACS, AIP, Elsevier, RSC and others. 10. Evaluation
+References
+
+- 2.
+
+- M. Caironi, Y-Y. Noh, (Editors), Large Area and Flexible Electronics, 2nd Edition, Suggested Text book(s) WILEY-VCH,
+
+- 2015. 3.
+
+- A. M. Hussain, Introduction to flexible electronics. CRC Press,
+
+- 2022. 4.
+
+- W. S. Wong, and A, Salleo, (Editors) Flexible electronics: Materials and Applications, 1st Edition, Springer,
+
+- 2009. Recent Research Papers on ‘Flexible and Printed Electronics’ area from scientific publisher like IEEE, IOP, ACS, AIP, Elsevier, RSC and others.
+
+- 10. Evaluation
 
 ---
 

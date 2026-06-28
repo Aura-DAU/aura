@@ -39,7 +39,9 @@ Digital Signal Processing Hardware Digital system design and of digital signal p
 
 ## Textbooks and References
 
-Textbooks Materials/ J F Wakerly (2006). Digital Design - Principles and Practices. Pearson Prentice References Hall. M M Mano, M D Ciletti, Digital Design (2007). Digital Design. Pearson Prentice Hall. Course Outcome: Having successfully completed this module the student will be able to:  Build and debug a digital circuit, FPGA and hardware implementations of combinational and sequential digital systems  Signals, quantisation and coding of communications signals
+Textbooks Materials/ J F Wakerly (2006). Digital Design
+
+- Principles and Practices. Pearson Prentice References Hall. M M Mano, M D Ciletti, Digital Design (2007). Digital Design. Pearson Prentice Hall. Course Outcome: Having successfully completed this module the student will be able to:  Build and debug a digital circuit, FPGA and hardware implementations of combinational and sequential digital systems  Signals, quantisation and coding of communications signals
 
 ---
 

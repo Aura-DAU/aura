@@ -45,7 +45,33 @@ EVALUATION : The first evaluation, in the form of a quiz comprising multiple -ch
 
 ## Textbooks and References
 
-Books, 2009, & ‘The Centre of Indian Culture’ in The English Writings of Rabindranath Tagore, vol. II, Delhi: Sahitya Akademi, 1996. [Readings will be provided electronically before the commencement of the course.] Recommended Readings: Bhattacharya, Sabyasachi. ed. The Mahatma and The Poet: Letters and Debates Between Gandhi and Tagore 1915-1941, Delhi: National Book Trust, 2005. Bhattacharya, Sabyasachi. ed. Rabindranath Tagore: An Interpretation, New Delhi: Penguin, 2011. 2 Rajmohan Gandhi, A True Story of a Man, his People and an Empire, New Delhi: Penguin, 2006. M.K. Gandhi, Autobiography, Intro & ed., Tridip Suhrud, New Delhi: Penguin India, 2018. D.C. Khan, ‘Development of Science and Technology’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture, 2011. Gangeya Mukherji, An Alternative Idea of India: Tagore and Vivekananda, Delhi: Routledge, 2011. Gangeya Mukherji, Gandhi and Tagore: Politics, Truth and Conscience, Delhi: Routledge, 2016. B.R. Nanda, Gandhi and his Critics, Delhi: Oxford University Press, 1997. Bisheshwar Prasad, ‘The Progress of India During 1765-1947’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture, 2011. Tapan Raychaudhury, ‘In Quest of Indian Modernity’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture, 2011. Sen, Amiya P. Swami Vivekananda, Delhi: Oxford University Press, 2013. [Many of the readings will be provided electronically before the commencement of the course.] LEARNING OUTCOMES: The course aims to acquaint students with some of the formative themes and thinkers who have contributed to the modern idea of India and familiarise them with different approaches to reading texts, identifying their central arguments, and raising their individual questions regarding these arguments. COURSE REQUIREMENTS Attendance and Participation: The success of the course depends significantly on students' engagement with the readings and with one another in class. Mode of Teaching: The course will be organised around the ideas of the four thinkers chosen for study. The course will be divided into four broad modules. The first module will consist of drawing the background of the course, identifying the main strands of thought emerging in modern India under British rule, influenced by the meeting of two cultures: that of contemporary Europe and Indian traditions. The remaining three modules will be centred around the three thinkers. The lectures will involve engagement with the themes and with specific readings. 3 EVALUATION
+Books, 2009, & ‘The Centre of Indian Culture’ in The English Writings of Rabindranath Tagore, vol. II, Delhi: Sahitya Akademi,
+
+- 1996. [Readings will be provided electronically before the commencement of the course.] Recommended Readings: Bhattacharya, Sabyasachi. ed. The Mahatma and The Poet: Letters and Debates Between Gandhi and Tagore 1915-1941, Delhi: National Book Trust,
+
+- 2005. Bhattacharya, Sabyasachi. ed. Rabindranath Tagore: An Interpretation, New Delhi: Penguin,
+
+- 2011. 2 Rajmohan Gandhi, A True Story of a Man, his People and an Empire, New Delhi: Penguin,
+
+- 2006. M.K. Gandhi, Autobiography, Intro & ed., Tridip Suhrud, New Delhi: Penguin India,
+
+- 2018. D.C. Khan, ‘Development of Science and Technology’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture,
+
+- 2011. Gangeya Mukherji, An Alternative Idea of India: Tagore and Vivekananda, Delhi: Routledge,
+
+- 2011. Gangeya Mukherji, Gandhi and Tagore: Politics, Truth and Conscience, Delhi: Routledge,
+
+- 2016. B.R. Nanda, Gandhi and his Critics, Delhi: Oxford University Press,
+
+- 1997. Bisheshwar Prasad, ‘The Progress of India During 1765-1947’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture,
+
+- 2011. Tapan Raychaudhury, ‘In Quest of Indian Modernity’ in The Cultural Heritage of India, vol. VIII, eds., Sukumar Bhattacharyya & Uma DasGupta, Kolkata: Ramakrishna Institute of Culture,
+
+- 2011. Sen, Amiya
+
+- P. Swami Vivekananda, Delhi: Oxford University Press,
+
+- 2013. [Many of the readings will be provided electronically before the commencement of the course.] LEARNING OUTCOMES: The course aims to acquaint students with some of the formative themes and thinkers who have contributed to the modern idea of India and familiarise them with different approaches to reading texts, identifying their central arguments, and raising their individual questions regarding these arguments. COURSE REQUIREMENTS Attendance and Participation: The success of the course depends significantly on students' engagement with the readings and with one another in class. Mode of Teaching: The course will be organised around the ideas of the four thinkers chosen for study. The course will be divided into four broad modules. The first module will consist of drawing the background of the course, identifying the main strands of thought emerging in modern India under British rule, influenced by the meeting of two cultures: that of contemporary Europe and Indian traditions. The remaining three modules will be centred around the three thinkers. The lectures will involve engagement with the themes and with specific readings. 3 EVALUATION
 
 ---
 

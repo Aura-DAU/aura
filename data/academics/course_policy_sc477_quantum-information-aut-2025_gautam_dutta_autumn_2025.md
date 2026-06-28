@@ -45,7 +45,15 @@ Evaluation: Two insem 20% each and endsem 50 % Attendance : 10 % 2
 
 ## Textbooks and References
 
-Books: 1. QuantumComputationandQuantumInformation MichaelA.NielsenandIsaacL.Chuang 2. QuantumInformationTheory MarkM.Wilde. 3. AnIntroductiontoQuantumComputing PhillipKaye,RaymondLaflammeandMicheleMosca 4. ModernQuantumMechanics J.J.Sakurai Course material is based on Reference no. 1 . Referrence 2 has much more than the course needs. ForintroductiontobasicideasofQuantumMechanics,J.J.Sakuraiisgood. Evaluation
+Books:
+
+- 1. QuantumComputationandQuantumInformation MichaelA.NielsenandIsaacL.Chuang
+
+- 2. QuantumInformationTheory MarkM.Wilde.
+
+- 3. AnIntroductiontoQuantumComputing PhillipKaye,RaymondLaflammeandMicheleMosca
+
+- 4. ModernQuantumMechanics J.J.Sakurai Course material is based on Reference no. 1 . Referrence 2 has much more than the course needs. ForintroductiontobasicideasofQuantumMechanics,J.J.Sakuraiisgood. Evaluation
 
 ---
 

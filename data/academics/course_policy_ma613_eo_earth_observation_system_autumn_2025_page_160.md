@@ -33,7 +33,9 @@ semester: "1st Semester, Autumn 2025-26"
 
 ## Course Description
 
-Studying the earth surfaces can be possible using conventional means like traversing or ground survey. Although it is a sound technique for studying the details with the help of various ground - based instrumentat ion but studying the regional relationship of the earth features and the various processes, past or present, is not possible without the use of appropriate technology. It is in this context the technologies like satellite based remote sensing; Geographic I nformation System (GIS) are relevant. Detailed content : Theory SI. No. Description No. of Lecture s 1 Introduction to remote sen
+Studying the earth surfaces can be possible using conventional means like traversing or ground survey. Although it is a sound technique for studying the details with the help of various ground
+
+- based instrumentat ion but studying the regional relationship of the earth features and the various processes, past or present, is not possible without the use of appropriate technology. It is in this context the technologies like satellite based remote sensing; Geographic I nformation System (GIS) are relevant. Detailed content : Theory SI. No. Description No. of Lecture s 1 Introduction to remote sen
 
 ---
 

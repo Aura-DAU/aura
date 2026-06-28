@@ -53,7 +53,13 @@ Not stated in source document
 
 ## Textbooks and References
 
-Textbook/references: Operations Research by HA Taha 8th/9th Edition An introduction to optimization by E. K. P. Chong and S. H. Zak (Wiley) Evaluation
+Textbook/references: Operations Research by HA Taha 8th/9th Edition An introduction to optimization by
+
+- E. K.
+
+- P. Chong and
+
+- S. H. Zak (Wiley) Evaluation
 
 ---
 

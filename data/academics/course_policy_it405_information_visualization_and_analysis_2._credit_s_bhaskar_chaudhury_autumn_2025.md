@@ -53,7 +53,21 @@ Two Exams (55 marks): One Mid sem exam and Final end-sem examination. (20+35 mar
 
 ## Textbooks and References
 
-Course Materials/ • Information Visualization: Perception for Design by Colin Ware. References Morgan Kaufmann Suggested Text book(s) • Better Data Visualizations - A Guide for Scholars, Researchers, and Wonks, by Jonathan Schwabish. Columbia University Press • Visualization Analysis and Design by Tamara Munzner. CRC Press. • The Visual Display of Quantitative Information by Edward R. Tufte . 10. Evaluation
+Course Materials/
+
+- Information Visualization: Perception for Design by Colin Ware. References Morgan Kaufmann Suggested Text book(s)
+
+- Better Data Visualizations
+
+- A Guide for Scholars, Researchers, and Wonks, by Jonathan Schwabish. Columbia University Press
+
+- Visualization Analysis and Design by Tamara Munzner. CRC Press.
+
+- The Visual Display of Quantitative Information by Edward
+
+- R. Tufte .
+
+- 10. Evaluation
 
 ---
 

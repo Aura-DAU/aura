@@ -56,7 +56,25 @@ Not stated in source document
 
 ## Textbooks and References
 
-books may be used as ready references. References: 1. Statistics for Business & Economics – Anderson et al., Cengage Learning (2018) 2. Introduction to Data Science -- Rafael A. Irizarry (CRC Press but freely available in https://leanpub.com/datasciencebook) 3. An introduction to probability theory and its application (Volume -1) —William Feller (Wiley series in probability and statistics) 4. Statistical Inference – George Casella and Roger L. Berger (Cengage Learning India) 5. An introduction to the Bootstrap—Bradley Efron and Robert J. Tibshirani (Chapman Hall/CRC Press) 6. Introductory Statistics with R – Peter Daalgard, Springer (2008) Assessment method: Quizzes, project presentation, and an end-term examination Course Outcomes
+books may be used as ready references. References:
+
+- 1. Statistics for Business & Economics – Anderson et al., Cengage Learning (2018)
+
+- 2. Introduction to Data Science -- Rafael
+
+- A. Irizarry (CRC Press but freely available in https://leanpub.com/datasciencebook)
+
+- 3. An introduction to probability theory and its application (Volume -1) —William Feller (Wiley series in probability and statistics)
+
+- 4. Statistical Inference – George Casella and Roger
+
+- L. Berger (Cengage Learning India)
+
+- 5. An introduction to the Bootstrap—Bradley Efron and Robert
+
+- J. Tibshirani (Chapman Hall/CRC Press)
+
+- 6. Introductory Statistics with R – Peter Daalgard, Springer (2008) Assessment method: Quizzes, project presentation, and an end-term examination Course Outcomes
 
 ---
 

@@ -33,7 +33,29 @@ semester: "1st Semester, Autumn 2025-26"
 
 ## Course Description
 
-Course Description This course provides a rigorous introduction to probability and its applications in stochastic modelling, statistics and data science. Many applied topics such as martingales, stochastic processes, regression, etc will be discussed. Course Objectives and Outcomes This course is designed to equip students with a rigorous understanding of probability theory and its applications in modeling uncertainty across real-world phenomena. The course aims to build students’ ability to formulate, analyze, and implement probabilistic and statistical models relevant to domains such as data science, finance, and engineering. Upon completion of this course, students will be able to: • Developunderstandingofconceptsinprobabilityandstatisticsandrelatednotionssuchasstochas- tic processes. • Utilizeprobabilisticreasoningandmodelingtoolsinresearchandindustryapplicationsacrossfields such as finance, data science, operations research, and engineering. • Apply statistical techniques such as regression and statistical design to model and interpret real- world data. 1 Course Materials/References Suggested Textbooks • Grimmett, G. R., and D. R. Sterzaker. ””Probability and Random Processes” 4th edition.” • DeGroot, Morris H., and Mark J. Schervish. ””Probability and statistics” 4th edition.” • Ramsey,FredandSchafer,Daniel. “TheStatisticalSleuth: AcourseinmethodsofDataAnalysis” 3rd edition. • F. E. Harrell, Jr. ””Regression Modelling Strategies with Applications to Linear Models, Logistic Regression and Survival analysis.”” Evaluation
+Course Description This course provides a rigorous introduction to probability and its applications in stochastic modelling, statistics and data science. Many applied topics such as martingales, stochastic processes, regression, etc will be discussed. Course Objectives and Outcomes This course is designed to equip students with a rigorous understanding of probability theory and its applications in modeling uncertainty across real-world phenomena. The course aims to build students’ ability to formulate, analyze, and implement probabilistic and statistical models relevant to domains such as data science, finance, and engineering. Upon completion of this course, students will be able to:
+
+- Developunderstandingofconceptsinprobabilityandstatisticsandrelatednotionssuchasstochas- tic processes.
+
+- Utilizeprobabilisticreasoningandmodelingtoolsinresearchandindustryapplicationsacrossfields such as finance, data science, operations research, and engineering.
+
+- Apply statistical techniques such as regression and statistical design to model and interpret real- world data. 1 Course Materials/References Suggested Textbooks
+
+- Grimmett,
+
+- G. R., and
+
+- D. R. Sterzaker. ””Probability and Random Processes” 4th edition.”
+
+- DeGroot, Morris H., and Mark
+
+- J. Schervish. ””Probability and statistics” 4th edition.”
+
+- Ramsey,FredandSchafer,Daniel. “TheStatisticalSleuth: AcourseinmethodsofDataAnalysis” 3rd edition.
+
+-
+
+- F. E. Harrell, Jr. ””Regression Modelling Strategies with Applications to Linear Models, Logistic Regression and Survival analysis.”” Evaluation
 
 ---
 
@@ -62,7 +84,23 @@ Course Description This course provides a rigorous introduction to probability a
 
 ## Textbooks and References
 
-Course Materials/References Suggested Textbooks • Grimmett, G. R., and D. R. Sterzaker. ””Probability and Random Processes” 4th edition.” • DeGroot, Morris H., and Mark J. Schervish. ””Probability and statistics” 4th edition.” • Ramsey,FredandSchafer,Daniel. “TheStatisticalSleuth: AcourseinmethodsofDataAnalysis” 3rd edition. • F. E. Harrell, Jr. ””Regression Modelling Strategies with Applications to Linear Models, Logistic Regression and Survival analysis.”” Evaluation
+Course Materials/References Suggested Textbooks
+
+- Grimmett,
+
+- G. R., and
+
+- D. R. Sterzaker. ””Probability and Random Processes” 4th edition.”
+
+- DeGroot, Morris H., and Mark
+
+- J. Schervish. ””Probability and statistics” 4th edition.”
+
+- Ramsey,FredandSchafer,Daniel. “TheStatisticalSleuth: AcourseinmethodsofDataAnalysis” 3rd edition.
+
+-
+
+- F. E. Harrell, Jr. ””Regression Modelling Strategies with Applications to Linear Models, Logistic Regression and Survival analysis.”” Evaluation
 
 ---
 

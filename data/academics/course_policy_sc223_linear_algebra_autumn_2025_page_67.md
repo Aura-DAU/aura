@@ -74,7 +74,23 @@ Insem – 1: 25% Insem – 2: 25% Final Exam: 35% Assignment/Quiz: 15%
 
 ## Textbooks and References
 
-Lecture notes. Lecture notes/ class notes will be posted and made available for students after the lecture. Books • P. Selinger, Matrix Theory and Linear Algebra (www.mathstat.dal.ca/~selinger/linear-algebra/) • David C. Lay, Steven R. Lay and Judi J. McDonald. Linear Algebra and Its Applications • Kenneth Hoffman, Ray Kunze, Linear Algebra • Sheldon Axler, Linear Algebra done right
+Lecture notes. Lecture notes/ class notes will be posted and made available for students after the lecture. Books
+
+-
+
+- P. Selinger, Matrix Theory and Linear Algebra (www.mathstat.dal.ca/~selinger/linear-algebra/)
+
+- David
+
+- C. Lay, Steven
+
+- R. Lay and Judi
+
+- J. McDonald. Linear Algebra and Its Applications
+
+- Kenneth Hoffman, Ray Kunze, Linear Algebra
+
+- Sheldon Axler, Linear Algebra done right
 
 ---
 

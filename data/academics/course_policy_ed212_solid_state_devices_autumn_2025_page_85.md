@@ -53,7 +53,17 @@ Two in -semester examination s, a final examination , lab assignments and projec
 
 ## Textbooks and References
 
-Books: 1. S. M. Sze - Semiconductor Devices: Physics & Technology (2nd Edition, Wiley, 2002). 2. Greg Parker (2004) - Introductory Semiconductor Device Physics. IOP. Assessment method: Two in-semester examinations, a final examination, lab assignments and project. Evaluation
+Books:
+
+- 1.
+
+- S. M. Sze
+
+- Semiconductor Devices: Physics & Technology (2nd Edition, Wiley, 2002).
+
+- 2. Greg Parker (2004)
+
+- Introductory Semiconductor Device Physics. IOP. Assessment method: Two in-semester examinations, a final examination, lab assignments and project. Evaluation
 
 ---
 

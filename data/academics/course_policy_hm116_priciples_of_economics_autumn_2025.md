@@ -39,7 +39,21 @@ Not stated in source document
 
 ## Textbooks and References
 
-references and the theory of the firm. Students would also get an introduction to macroeconomic concepts such as national income accounting, unemployment and inflation. Reference to monetary, fiscal and foreign exchange rate policies will help students to get a greater understanding of the role of central banks and the government role in the economy. Learning Objectives/Outcome: Students will be able to reflect on their personal consumption decisions and understand better how different market structures work particularly with respect to their implications for consumer welfare. They should be able to interpret graphs and charts to explain consumer choices, production decisions by firms and macroeconomic indicators like economic growth and inflation. It is also expected that they would be able to appreciate global macroeconomic developments and their influence on the domestic economy. Text Book 1) Principles of Microeconomics : Gregory Mankiw (GM) 2) Macroeconomics: Blanchard and Johnson (BJ) Optional 1) Intermediate Microeconomics : Hal Varian (HV) Readings 2) Macroeconomics: Dornbusch, Fischer, Startz (DFS ), 3) Macroeconomics: Gregory Mankiw (GM2). 4) Principle of Economics: Samuelson (SAM) Grading Policy: The evaluation
+- references and the theory of the firm. Students would also get an introduction to macroeconomic concepts such as national income accounting, unemployment and inflation. Reference to monetary, fiscal and foreign exchange rate policies will help students to get a greater understanding of the role of central banks and the government role in the economy.
+
+- Learning Objectives/Outcome: Students will be able to reflect on their personal consumption decisions and understand better how different market structures work particularly with respect to their implications for consumer welfare. They should be able to interpret graphs and charts to explain consumer choices, production decisions by firms and macroeconomic indicators like economic growth and inflation. It is also expected that they would be able to appreciate global macroeconomic developments and their influence on the domestic economy. Text Book.
+
+- 1) Principles of Microeconomics : Gregory Mankiw (GM)
+
+- 2) Macroeconomics: Blanchard and Johnson (BJ) Optional
+
+- 1) Intermediate Microeconomics : Hal Varian (HV) Readings
+
+- 2) Macroeconomics: Dornbusch, Fischer, Startz (DFS ),
+
+- 3) Macroeconomics: Gregory Mankiw (GM2).
+
+- 4) Principle of Economics: Samuelson (SAM) Grading Policy: The evaluation
 
 ---
 

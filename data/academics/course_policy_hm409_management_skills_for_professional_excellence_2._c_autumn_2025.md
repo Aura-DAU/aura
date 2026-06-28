@@ -39,7 +39,19 @@ Not stated in source document
 
 ## Textbooks and References
 
-References 1. Goleman, Daniel. Emotional Intelligence: Why It Can Matter More Than IQ. 2. Calvin C. Newport. Deep Work: Rules for Focused Success in a Distracted World 3. Lencioni, Patrick. The Five Dysfunctions of a Team: A Leadership Fable. 4. Rumelt, Richard P. Good Strategy Bad Strategy: The Difference and Why It Matters. Page 1 of 2 Topic Content (per 3-5 lectures) 1 Self-Awareness and Self-Discovery. Understanding Values, Strengths, and Purpose 2 Strategies and Mindsets for Lifelong Learning. Cultivating Focus in a Distracted World 3 Building Resilience, Overcoming Adversity, Thriving Under Pressure 4 Principles of Effective Collaboration, Team Building Dynamics and Practices 5 Self-Discipline and Reflection. Ath-Yoganushashanam, Discipline and Inner Mastery 6 Communication Skills, Mastering Clarity and Impact, Art of Listening 7 Critical Thinking, Decision Making, Problem-Solving Techniques. Strategic Thinking, planning for Long-Term Success, Unlocking Creativity and Driving Innovation. Embracing Adaptability. 8 Effective Delegation, Building Trust and Responsibility, Fostering Growth in Teams, Time management for productivity and balance 9 Insights from Japanese and Korean Wisdom 10 Minimalism, Simplifying for Effectiveness, Happiness and Well-being, Defining and Pursuing Happiness. 11 Emotional Intelligence, Understanding and Managing Emotions Page 2 of 2
+References
+
+- 1. Goleman, Daniel. Emotional Intelligence: Why It Can Matter More Than IQ.
+
+- 2. Calvin
+
+- C. Newport. Deep Work: Rules for Focused Success in a Distracted World
+
+- 3. Lencioni, Patrick. The Five Dysfunctions of a Team: A Leadership Fable.
+
+- 4. Rumelt, Richard
+
+- P. Good Strategy Bad Strategy: The Difference and Why It Matters. Page 1 of 2 Topic Content (per 3-5 lectures) 1 Self-Awareness and Self-Discovery. Understanding Values, Strengths, and Purpose 2 Strategies and Mindsets for Lifelong Learning. Cultivating Focus in a Distracted World 3 Building Resilience, Overcoming Adversity, Thriving Under Pressure 4 Principles of Effective Collaboration, Team Building Dynamics and Practices 5 Self-Discipline and Reflection. Ath-Yoganushashanam, Discipline and Inner Mastery 6 Communication Skills, Mastering Clarity and Impact, Art of Listening 7 Critical Thinking, Decision Making, Problem-Solving Techniques. Strategic Thinking, planning for Long-Term Success, Unlocking Creativity and Driving Innovation. Embracing Adaptability. 8 Effective Delegation, Building Trust and Responsibility, Fostering Growth in Teams, Time management for productivity and balance 9 Insights from Japanese and Korean Wisdom 10 Minimalism, Simplifying for Effectiveness, Happiness and Well-being, Defining and Pursuing Happiness. 11 Emotional Intelligence, Understanding and Managing Emotions Page 2 of 2
 
 ---
 

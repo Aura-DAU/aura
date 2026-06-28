@@ -83,7 +83,25 @@ Not stated in source document
 
 ## Textbooks and References
 
-Textbooks: 1. Statistics for Business & Economics - Anderson et al., Cengage Learning (2018) 2. Think Stats - Allen B Downey (2011) 3. Statistics Using Python - Oswald Campesato (2023) 4. A Text Book of Agricultural Statistics - R. Rangaswamy (2022) Course Outcomes
+### Textbooks:
+
+- 1. Statistics for Business & Economics
+
+- Anderson et al., Cengage Learning (2018)
+
+- 2. Think Stats
+
+- Allen B Downey (2011)
+
+- 3. Statistics Using Python
+
+- Oswald Campesato (2023)
+
+- 4. A Text Book of Agricultural Statistics
+
+-
+
+- R. Rangaswamy (2022) Course Outcomes
 
 ---
 

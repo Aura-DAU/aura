@@ -94,7 +94,17 @@ Not stated in source document
 
 ## Textbooks and References
 
-Books: 1. Fundamentals of Database Systems, Ramez Elmasri and Shamkant B. Navathe, Pearson Education 2. Database System Concepts by Avi Silberschatz, Henry F. Korth, S. Sudarshan, TMH Evaluation
+Books:
+
+- 1. Fundamentals of Database Systems, Ramez Elmasri and Shamkant
+
+- B. Navathe, Pearson Education
+
+- 2. Database System Concepts by Avi Silberschatz, Henry
+
+- F. Korth,
+
+- S. Sudarshan, TMH Evaluation
 
 ---
 

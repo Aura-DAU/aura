@@ -33,7 +33,17 @@ semester: "1st Semester, Autumn 2025-26"
 
 ## Course Description
 
-Course Description This course aims to introduce the concept of data structures, their indispensability in implementing algorithms, and how they aid in improving performance. Extensive cover- age of the well-known and essential data structures such as arrays, linked lists, queues, stacks, hash tables, binary search trees, AVL trees, red-black trees, 2-3-4 trees, heaps, along with associated routines/algorithms such as dictionary operations, order statistics, sorting will constitute the contents of the course. Suggested Books • Textbook: – Data Structures and Algorithms by Aho, Hopcroft, and Ullman, Addison- Wesley, 1999. • Reference Books: – Data Structures and Algorithms in C++/Java by Goodrich, Tamassia, and Goldberg, Wiley, 2011 – Introduction to Algorithms byCormen, Leiserson, Rivest, andStein, PHI,2010 Course Outcomes
+Course Description This course aims to introduce the concept of data structures, their indispensability in implementing algorithms, and how they aid in improving performance. Extensive cover- age of the well-known and essential data structures such as arrays, linked lists, queues, stacks, hash tables, binary search trees, AVL trees, red-black trees, 2-3-4 trees, heaps, along with associated routines/algorithms such as dictionary operations, order statistics, sorting will constitute the contents of the course. Suggested Books
+
+- Textbook: – Data Structures and Algorithms by Aho, Hopcroft, and Ullman, Addison- Wesley,
+
+- 1999.
+
+-
+
+### Reference Books:
+
+– Data Structures and Algorithms in C++/Java by Goodrich, Tamassia, and Goldberg, Wiley, 2011 – Introduction to Algorithms byCormen, Leiserson, Rivest, andStein, PHI,2010 Course Outcomes
 
 ---
 
@@ -68,7 +78,17 @@ Course Description This course aims to introduce the concept of data structures,
 
 ## Textbooks and References
 
-Books • Textbook: – Data Structures and Algorithms by Aho, Hopcroft, and Ullman, Addison- Wesley, 1999. • Reference Books: – Data Structures and Algorithms in C++/Java by Goodrich, Tamassia, and Goldberg, Wiley, 2011 – Introduction to Algorithms byCormen, Leiserson, Rivest, andStein, PHI,2010 Course Outcomes
+Books
+
+- Textbook: – Data Structures and Algorithms by Aho, Hopcroft, and Ullman, Addison- Wesley,
+
+- 1999.
+
+-
+
+### Reference Books:
+
+– Data Structures and Algorithms in C++/Java by Goodrich, Tamassia, and Goldberg, Wiley, 2011 – Introduction to Algorithms byCormen, Leiserson, Rivest, andStein, PHI,2010 Course Outcomes
 
 ---
 

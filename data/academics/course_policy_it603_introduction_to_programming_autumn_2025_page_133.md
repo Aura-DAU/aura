@@ -39,7 +39,19 @@ Course is designed as a first timer introduction to programming. It assumes no p
 
 ## Textbooks and References
 
-Textbook/references: 1. Think C++ by Allen B Downey 2. the C++ Programming Language by Bjourne Stroustrup 3. UNIX : Concepts and Applications, Sumitabha Das 4. Computer Systems: A Programmer's Perspective, Randal E. Bryant and David R. O'Hallaron Assessment Method: Labs and Assignments: 30 In-Sem Exam: 30 End Sem Exam: 40 Grading Policy: Relative grading with the following slabs: >90 = AA 80-90 = AB 65-79 = BB 50-64 = BC 40-50 = CC <39 = CD Course outcome: After taking this course, students will be able to write portable, efficient application programs in C++. They will also be able to navigate Linux environments fluently and take up new programming languages with relative ease.
+Textbook/references:
+
+- 1. Think C++ by Allen B Downey
+
+- 2. the C++ Programming Language by Bjourne Stroustrup
+
+- 3. UNIX : Concepts and Applications, Sumitabha Das
+
+- 4. Computer Systems: A Programmer's Perspective, Randal
+
+- E. Bryant and David
+
+- R. O'Hallaron Assessment Method: Labs and Assignments: 30 In-Sem Exam: 30 End Sem Exam: 40 Grading Policy: Relative grading with the following slabs: >90 = AA 80-90 = AB 65-79 = BB 50-64 = BC 40-50 = CC <39 = CD Course outcome: After taking this course, students will be able to write portable, efficient application programs in C++. They will also be able to navigate Linux environments fluently and take up new programming languages with relative ease.
 
 ---
 

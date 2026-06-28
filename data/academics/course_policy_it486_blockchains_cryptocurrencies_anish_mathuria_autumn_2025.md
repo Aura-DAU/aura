@@ -53,7 +53,11 @@ Evaluation (tentative) ï‚· 20% pop quizzes (in-lecture ) ï‚· 40% two in 
 
 ## Textbooks and References
 
-Course materials We will use selected papers and references available online. The lecture slides will be made available in the Lecture folder as the course progresses. The following references are useful.  Bitcoin and Cryptocurrency Technologies: A Comprehensive Introduction, Narayanan, et. al. Princeton, 2016. ISBN: 978-0691171692.  Programming Bitcoin, Jimmy Song, O’Reilly, 2019. ISBN: 978-93-5213-808-1. Evaluation
+Course materials We will use selected papers and references available online. The lecture slides will be made available in the Lecture folder as the course progresses. The following references are useful.  Bitcoin and Cryptocurrency Technologies: A Comprehensive Introduction, Narayanan, et. al. Princeton,
+
+- 2016. ISBN: 978-0691171692.  Programming Bitcoin, Jimmy Song, O’Reilly,
+
+- 2019. ISBN: 978-93-5213-808-1. Evaluation
 
 ---
 

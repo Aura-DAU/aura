@@ -53,7 +53,11 @@ Not stated in source document
 
 ## Textbooks and References
 
-References: (a) AnIntroductiontoOptimization,ChongandZak,Fourthed.,Wiley. (b) LinearandNonlinearProgramming,LuenbergerandYe,Fifthed.,Springer. 1 (c) ConvexOptimization,BoydandVandenberghe,CambridgeUniversityPress. 7. CourseOutcomes: Thestudentwillbeableto (a) use the first and second order conditions to compute optima for small uncon- strainedoptimizationproblems, (b) implementlinesearch,gradientdescent,andNewton’smethodforunconstrained optimization, (c) usetheKKTconditionstoderiveconditionsthatanoptimaoraconstrainednon- linearoptimizationproblemhastosatisfy, (d) appreciateimportanceofoptimizationinDataScienceapplications. 8. Evaluation
+References: (a) AnIntroductiontoOptimization,ChongandZak,Fourthed.,Wiley. (b) LinearandNonlinearProgramming,LuenbergerandYe,Fifthed.,Springer. 1 (c) ConvexOptimization,BoydandVandenberghe,CambridgeUniversityPress.
+
+- 7. CourseOutcomes: Thestudentwillbeableto (a) use the first and second order conditions to compute optima for small uncon- strainedoptimizationproblems, (b) implementlinesearch,gradientdescent,andNewton’smethodforunconstrained optimization, (c) usetheKKTconditionstoderiveconditionsthatanoptimaoraconstrainednon- linearoptimizationproblemhastosatisfy, (d) appreciateimportanceofoptimizationinDataScienceapplications.
+
+- 8. Evaluation
 
 ---
 

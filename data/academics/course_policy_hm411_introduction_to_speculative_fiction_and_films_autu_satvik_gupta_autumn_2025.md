@@ -33,7 +33,47 @@ semester: "Autumn 2025"
 
 ## Course Description
 
-Course Objectives: ● To recognize and appreciate works of horror, science fiction, fantasy, dystopian fiction and post-apocalyptic fiction. ● To position and understand works of speculative fiction within a larger cultural, historical, and socio-political context. ● To encourage learners to engage in discourse related to speculative fiction. Course Material (Selected): Primary Readings: Tolkien, J. R. R. “On Fairy-Stories.” Tolkien on Fairy-Stories. Harper Collins, 2014, pp. 27-84 (Select excerpts). Borges, Jorge Luis. “The Library of Babel.” Ficciones, A.A. Knopf, 2000, pp. 58–66. Clarke, Arthur C. “The Nine Billion Names of God.” The Collected Stories of Arthur C. Clarke, Orion, 2011. Asimov, Isaac. “Robot Dreams.” The Complete Stories Vol. 2, Harper Collins, 1997. Lovecraft, H. P. “The Call of Cthulhu.” The Call of Cthulhu and Other Weird Tales, Vintage Classic, 2011, pp. 61–98. Poe, Edgar Allan. “The Fall of the House of Usher.” The Fall of the House of Usher and Other Writings, edited by David D. Galloway, Penguin, 2003, pp. 90–109. Orwell, George. Nineteen Eighty-Four. Penguin Books, 2003 (Select excerpts). Jackson, Shirley. “The Lottery.” The Lottery and Other Stories, Penguin Books, 2009, pp. 291-302. Bradbury, Ray. “There Will Come Soft Rains.” The Martian Chronicles, Simon & Schuster Paperbacks, 2017. McCarthy, Cormac. The Road. Picador collection, 2022. Films: Miyazaki, Hayao, director. Spirited Away. Studio Ghibli, 2001. Villeneuve, Denis, director. Arrival. Paramount Pictures, 2016. Peele, Jordan, director. Get Out. Universal Pictures, 2017. Joon Ho, Bong, director. Snowpiercer. CJ Entertainment, 2013. Additional Readings: Asimov, Isaac. “Nightfall.” Nightfall and Other Stories, Fawcett Publications, 1969, pp. 11–44. Atwood, Margaret. The Handmaid’s Tale. Vintage, 1996. Carroll, Noël. “Why Horror?” The Philosophy of Horror, or, Paradoxes of the Heart, Routledge, 1990, pp. 158–215. Jackson, Shirley. The Haunting of Hill House. Penguin Books, 2009. Shelley, Mary. Frankenstein: Or the Modern Prometheus, Oxford University Press, 2008. Additional Films: Weir, Peter, director. The Truman Show. Paramount Pictures, 1998. “When You’re Lost in the Darkness.” The Last of Us, written by Craig Mazin and Neil Druckmann, directed by Craig Mazin, PlayStation Productions, 2023. Note: Narratives/films beyond the prescribed course material may also be discussed in the class. Evaluation
+### Course Objectives:
+
+● To recognize and appreciate works of horror, science fiction, fantasy, dystopian fiction and post-apocalyptic fiction. ● To position and understand works of speculative fiction within a larger cultural, historical, and socio-political context. ● To encourage learners to engage in discourse related to speculative fiction. Course Material (Selected): Primary Readings: Tolkien,
+
+- J. R.
+
+- R. “On Fairy-Stories.” Tolkien on Fairy-Stories. Harper Collins, 2014, pp. 27-84 (Select excerpts). Borges, Jorge Luis. “The Library of Babel.” Ficciones, A.A. Knopf, 2000, pp. 58–66. Clarke, Arthur
+
+- C. “The Nine Billion Names of God.” The Collected Stories of Arthur
+
+- C. Clarke, Orion,
+
+- 2011. Asimov, Isaac. “Robot Dreams.” The Complete Stories Vol. 2, Harper Collins,
+
+- 1997. Lovecraft,
+
+- H. P. “The Call of Cthulhu.” The Call of Cthulhu and Other Weird Tales, Vintage Classic, 2011, pp. 61–98. Poe, Edgar Allan. “The Fall of the House of Usher.” The Fall of the House of Usher and Other Writings, edited by David
+
+- D. Galloway, Penguin, 2003, pp. 90–109. Orwell, George. Nineteen Eighty-Four. Penguin Books, 2003 (Select excerpts). Jackson, Shirley. “The Lottery.” The Lottery and Other Stories, Penguin Books, 2009, pp. 291-302. Bradbury, Ray. “There Will Come Soft Rains.” The Martian Chronicles, Simon & Schuster Paperbacks,
+
+- 2017. McCarthy, Cormac. The Road. Picador collection,
+
+- 2022. Films: Miyazaki, Hayao, director. Spirited Away. Studio Ghibli,
+
+- 2001. Villeneuve, Denis, director. Arrival. Paramount Pictures,
+
+- 2016. Peele, Jordan, director. Get Out. Universal Pictures,
+
+- 2017. Joon Ho, Bong, director. Snowpiercer. CJ Entertainment,
+
+- 2013. Additional Readings: Asimov, Isaac. “Nightfall.” Nightfall and Other Stories, Fawcett Publications, 1969, pp. 11–44. Atwood, Margaret. The Handmaid’s Tale. Vintage,
+
+- 1996. Carroll, Noël. “Why Horror?” The Philosophy of Horror, or, Paradoxes of the Heart, Routledge, 1990, pp. 158–215. Jackson, Shirley. The Haunting of Hill House. Penguin Books,
+
+- 2009. Shelley, Mary. Frankenstein: Or the Modern Prometheus, Oxford University Press,
+
+- 2008. Additional Films: Weir, Peter, director. The Truman Show. Paramount Pictures,
+
+- 1998. “When You’re Lost in the Darkness.” The Last of Us, written by Craig Mazin and Neil Druckmann, directed by Craig Mazin, PlayStation Productions,
+
+- 2023. Note: Narratives/films beyond the prescribed course material may also be discussed in the class. Evaluation
 
 ---
 
@@ -53,7 +93,29 @@ Evaluation plan: 1. Attendance and Classroom Participation: 10%
 
 ## Textbooks and References
 
-Books, 2003 (Select excerpts). Jackson, Shirley. “The Lottery.” The Lottery and Other Stories, Penguin Books, 2009, pp. 291-302. Bradbury, Ray. “There Will Come Soft Rains.” The Martian Chronicles, Simon & Schuster Paperbacks, 2017. McCarthy, Cormac. The Road. Picador collection, 2022. Films: Miyazaki, Hayao, director. Spirited Away. Studio Ghibli, 2001. Villeneuve, Denis, director. Arrival. Paramount Pictures, 2016. Peele, Jordan, director. Get Out. Universal Pictures, 2017. Joon Ho, Bong, director. Snowpiercer. CJ Entertainment, 2013. Additional Readings: Asimov, Isaac. “Nightfall.” Nightfall and Other Stories, Fawcett Publications, 1969, pp. 11–44. Atwood, Margaret. The Handmaid’s Tale. Vintage, 1996. Carroll, Noël. “Why Horror?” The Philosophy of Horror, or, Paradoxes of the Heart, Routledge, 1990, pp. 158–215. Jackson, Shirley. The Haunting of Hill House. Penguin Books, 2009. Shelley, Mary. Frankenstein: Or the Modern Prometheus, Oxford University Press, 2008. Additional Films: Weir, Peter, director. The Truman Show. Paramount Pictures, 1998. “When You’re Lost in the Darkness.” The Last of Us, written by Craig Mazin and Neil Druckmann, directed by Craig Mazin, PlayStation Productions, 2023. Note: Narratives/films beyond the prescribed course material may also be discussed in the class. Evaluation
+Books, 2003 (Select excerpts). Jackson, Shirley. “The Lottery.” The Lottery and Other Stories, Penguin Books, 2009, pp. 291-302. Bradbury, Ray. “There Will Come Soft Rains.” The Martian Chronicles, Simon & Schuster Paperbacks,
+
+- 2017. McCarthy, Cormac. The Road. Picador collection,
+
+- 2022. Films: Miyazaki, Hayao, director. Spirited Away. Studio Ghibli,
+
+- 2001. Villeneuve, Denis, director. Arrival. Paramount Pictures,
+
+- 2016. Peele, Jordan, director. Get Out. Universal Pictures,
+
+- 2017. Joon Ho, Bong, director. Snowpiercer. CJ Entertainment,
+
+- 2013. Additional Readings: Asimov, Isaac. “Nightfall.” Nightfall and Other Stories, Fawcett Publications, 1969, pp. 11–44. Atwood, Margaret. The Handmaid’s Tale. Vintage,
+
+- 1996. Carroll, Noël. “Why Horror?” The Philosophy of Horror, or, Paradoxes of the Heart, Routledge, 1990, pp. 158–215. Jackson, Shirley. The Haunting of Hill House. Penguin Books,
+
+- 2009. Shelley, Mary. Frankenstein: Or the Modern Prometheus, Oxford University Press,
+
+- 2008. Additional Films: Weir, Peter, director. The Truman Show. Paramount Pictures,
+
+- 1998. “When You’re Lost in the Darkness.” The Last of Us, written by Craig Mazin and Neil Druckmann, directed by Craig Mazin, PlayStation Productions,
+
+- 2023. Note: Narratives/films beyond the prescribed course material may also be discussed in the class. Evaluation
 
 ---
 

@@ -33,7 +33,29 @@ semester: "7th Semester, Autumn 2025-26"
 
 ## Course Description
 
-Course Objectives: Learning Organizational Behavior is important, not only because it is fundamental for individual who are trying to enter the fields of Human Resource Management or Business Administration, but also because it is important for any individual who plans to work in an organization. Organizational behavior increases individual understanding of how people work in organizations, how they interact with the organization and with each other, and as an employee how can you improve individual satisfaction and organizational productivity. In short, Organizational Behavior studies individuals, groups, and organizational structures and how they interact with each other. Course outcome.  Increase effectiveness of the students as future managers, by introducing them to a framework for understanding self, organizations and the behavior of people and groups within them.  Make the students aware of the skills required to deal with the increasing challenges facing organizations.  The goal of this course is to help the students acquire the knowledge and skills that will result in high performance for them and the organizations they would eventually Manage.  To re-engineer attitude and understand its influence on human behavior.  Understand as an engineer the society, cultural issues, apply ethical principles, learn to work in teams, (P6. P8, P9)  Develop communication skills and lifelong learnings with change in technology. (P10, P12) Course Content  1. INTRODUCTION TO ORGANIZATIONAL BEHAVIOR.  2. CHALLENGES IN COMMUNICATION.  3. INDIVIDUAL BEHAVIOUR (PERCEPTION, MOTIVATION AND LEARNING).  4. GROUP BEHAVIOUR.  5. CONFLICTS AND NEGOTIATION IN THE WORK PLACE.  6. IMPACT OF CULTURE AND STRUCTURE.  7. DECISION MAKING AND PROBLEM SOLVING.  8. EMERGING TRENDS IN PSYCHOLOGY: Stress Management and coping skills. Course Methodology Teaching Case- Studies. Role- plays. Article Analysis. Group Discussions Course Evaluation
+### Course Objectives:
+
+- Learning Organizational Behavior is important, not only because it is fundamental for individual who are trying to enter the fields of Human Resource Management or Business Administration, but also because it is important for any individual who plans to work in an organization. Organizational behavior increases individual understanding of how people work in organizations, how they interact with the organization and with each other, and as an employee how can you improve individual satisfaction and organizational productivity.
+
+- In short, Organizational Behavior studies individuals, groups, and organizational structures and how they interact with each other. Course outcome.  Increase effectiveness of the students as future managers, by introducing them to a framework for understanding self, organizations and the behavior of people and groups within them.  Make the students aware of the skills required to deal with the increasing challenges facing organizations.
+
+-  The goal of this course is to help the students acquire the knowledge and skills that will result in high performance for them and the organizations they would eventually Manage.  To re-engineer attitude and understand its influence on human behavior.  Understand as an engineer the society, cultural issues, apply ethical principles, learn to work in teams, (P6. P8, P9)  Develop communication skills and lifelong learnings with change in technology. (P10, P12) Course Content .
+
+- 1. INTRODUCTION TO ORGANIZATIONAL BEHAVIOR. 
+
+- 2. CHALLENGES IN COMMUNICATION. 
+
+- 3. INDIVIDUAL BEHAVIOUR (PERCEPTION, MOTIVATION AND LEARNING). 
+
+- 4. GROUP BEHAVIOUR. 
+
+- 5. CONFLICTS AND NEGOTIATION IN THE WORK PLACE. 
+
+- 6. IMPACT OF CULTURE AND STRUCTURE. 
+
+- 7. DECISION MAKING AND PROBLEM SOLVING. 
+
+- 8. EMERGING TRENDS IN PSYCHOLOGY: Stress Management and coping skills. Course Methodology Teaching Case- Studies. Role- plays. Article Analysis. Group Discussions Course Evaluation
 
 ---
 

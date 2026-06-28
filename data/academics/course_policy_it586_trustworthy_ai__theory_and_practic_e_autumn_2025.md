@@ -45,7 +45,15 @@ Artificial -intelligence systems now power everything from boiler -plate documen
 
 ## Textbooks and References
 
-Course materials and other references will be provided throughout the Materials/ course duration. References Detailed Course Appendix Content Course Outcome: Upon completion of this course, students will be able to: • Formulate risk models for end-to-end ML pipelines, mapping failure modes to security, privacy, fairness, and alignment taxonomies. • Stress-test models with distribution shifts, adversarial/poisoning attacks, and jailbreak prompts, then implement certified defenses. • Quantify and mitigate bias & privacy leakage using causal metrics and differential-privacy guarantees. • Detect drift in production with conformal and OOD detectors tied to real-time incident workflows. APPENDIX Detailed Course Contents Foundations of AI Risk, NIST Risk Framework, EU AI Act snapshot Adversarial Attacks and Defenses Threat model taxonomy, Adversarial Examples, Fast Gradient Sign Method, Basic Iterative Method, Projected Gradient Descent, Carlini& Wagner, One-pixel attack; Defenses: Adversarial Training, Feature Squeezing, Adversarial Detection Data Poisoning Attacks Threat model taxonomy, label-flip based attacks, gradient-based attacks, backdoor attacks, data sanitization filters, robust training Distribution Shift and OOD detection Problem Framing, Evaluation
+Course materials and other references will be provided throughout the Materials/ course duration. References Detailed Course Appendix Content Course Outcome: Upon completion of this course, students will be able to:
+
+- Formulate risk models for end-to-end ML pipelines, mapping failure modes to security, privacy, fairness, and alignment taxonomies.
+
+- Stress-test models with distribution shifts, adversarial/poisoning attacks, and jailbreak prompts, then implement certified defenses.
+
+- Quantify and mitigate bias & privacy leakage using causal metrics and differential-privacy guarantees.
+
+- Detect drift in production with conformal and OOD detectors tied to real-time incident workflows. APPENDIX Detailed Course Contents Foundations of AI Risk, NIST Risk Framework, EU AI Act snapshot Adversarial Attacks and Defenses Threat model taxonomy, Adversarial Examples, Fast Gradient Sign Method, Basic Iterative Method, Projected Gradient Descent, Carlini& Wagner, One-pixel attack; Defenses: Adversarial Training, Feature Squeezing, Adversarial Detection Data Poisoning Attacks Threat model taxonomy, label-flip based attacks, gradient-based attacks, backdoor attacks, data sanitization filters, robust training Distribution Shift and OOD detection Problem Framing, Evaluation
 
 ---
 

@@ -33,7 +33,19 @@ semester: "7th Semester, Autumn 2025-26"
 
 ## Course Description
 
-Course Description There has been a dramatic growth in markets for financial products like stocks, bonds, currencies, derivatives, insurance, private equity and Venture capital. The purpose of this course is to provide knowledge of various markets and their applications. Course Objectives On completion of the course, the students will have knowledge of: a) Stock markets – Microstructure and IPO management b) Money markets – Call money and Treasury bill markets c) Bond markets – Microstructure and valuation d) Derivatives markets – Forwards, Futures, Options and Swaps e) Forex markets – Exchange rates, Exposures and Euromarkets f) Insurance market g) PEVC – Fund raising, financing and PE industry in India Instructor B.B. Chakrabarti - email: bbc@iimcal.ac.in Course Material A) Cases 1) Narayana Health: The Initial Public Offering Decision - HBS Case No. W 17503 2) Fairfax and Thomas Cook India: Private Equity, Permannet Capital and Public Markets - HBS Case No. W15463 B) Class notes Course Evaluation
+- Course Description There has been a dramatic growth in markets for financial products like stocks, bonds, currencies, derivatives, insurance, private equity and Venture capital. The purpose of this course is to provide knowledge of various markets and their applications.
+
+- Course Objectives On completion of the course, the students will have knowledge of: a) Stock markets – Microstructure and IPO management b) Money markets – Call money and Treasury bill markets c) Bond markets – Microstructure and valuation d) Derivatives markets – Forwards, Futures, Options and Swaps e) Forex markets – Exchange rates, Exposures and Euromarkets f) Insurance market g) PEVC – Fund raising, financing and PE industry in India Instructor B.B. Chakrabarti.
+
+- email: bbc@iimcal.ac.in Course Material A) Cases
+
+- 1) Narayana Health: The Initial Public Offering Decision
+
+- HBS Case No. W 17503
+
+- 2) Fairfax and Thomas Cook India: Private Equity, Permannet Capital and Public Markets
+
+- HBS Case No. W15463 B) Class notes Course Evaluation
 
 ---
 

@@ -39,7 +39,27 @@ Digital signal processing hardware is an important element in real time applicat
 
 ## Textbooks and References
 
-Textbooks: • V. Oppenheium ~ R.W. Schafer, Discrete~Time Sig Processing ( 2nd Ed, Prentice Hall, 1999) • M. Mano ~ Computer System Architecture ( 3rd Edition, Pearson Publication, 2007 ) • John L. Hannessey & David A. Patterson ~ Computer Architecture: A Quantitative Approach ( 4th Edition, Elsevier, Morgan Kaufmann Publishers, 2007 ) • DSP, A Practical Approach by Ifeachor and Jervis • Y.T. Chan ~ Wavelet Basics (Kluwer Publishers, Boston, 1993)
+### Textbooks:
+
+-
+
+- V. Oppenheium ~ R.W. Schafer, Discrete~Time Sig Processing ( 2nd Ed, Prentice Hall,
+
+- 1999)
+
+-
+
+- M. Mano ~ Computer System Architecture ( 3rd Edition, Pearson Publication, 2007 )
+
+- John
+
+- L. Hannessey & David
+
+- A. Patterson ~ Computer Architecture: A Quantitative Approach ( 4th Edition, Elsevier, Morgan Kaufmann Publishers, 2007 )
+
+- DSP, A Practical Approach by Ifeachor and Jervis
+
+- Y.T. Chan ~ Wavelet Basics (Kluwer Publishers, Boston, 1993)
 
 ---
 

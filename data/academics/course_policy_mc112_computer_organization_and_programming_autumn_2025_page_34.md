@@ -53,7 +53,29 @@ Class Test â€“ 15% Mid semester evaluation â€“ 35% End semester evalua
 
 ## Textbooks and References
 
-Books:  William C. Gear, Computer Organization and Programming, McGraw Hill, 2016.  William Stallings, Computer Organization and Architecture, 10th edition, Pearson, 2016.  Carl Hamacher, Zvonko Vranesic and Safwat Zaky, Computer Organization, 5th Edition, McGraw Hill, 2011.  James L. Peterson, Computer Organization and Assembly Language Programming, Academic Press, 1978.  Paul Deitel and Harvey Deitel, C How to Program, Pearson; 8th edition, 2015.  Brian W. Kernighan and Dennis Ritchie, The C Programming Language, Pearson Education, 2nd edition, 2015.  E. Balagurusamy, Programming in ANSI C, McGraw Hill, 7th edition, 2017. Evaluation
+Books:  William
+
+- C. Gear, Computer Organization and Programming, McGraw Hill,
+
+- 2016.  William Stallings, Computer Organization and Architecture, 10th edition, Pearson,
+
+- 2016.  Carl Hamacher, Zvonko Vranesic and Safwat Zaky, Computer Organization, 5th Edition, McGraw Hill,
+
+- 2011.  James
+
+- L. Peterson, Computer Organization and Assembly Language Programming, Academic Press,
+
+- 1978.  Paul Deitel and Harvey Deitel, C How to Program, Pearson; 8th edition,
+
+- 2015.  Brian
+
+- W. Kernighan and Dennis Ritchie, The C Programming Language, Pearson Education, 2nd edition,
+
+- 2015. 
+
+- E. Balagurusamy, Programming in ANSI C, McGraw Hill, 7th edition,
+
+- 2017. Evaluation
 
 ---
 

@@ -53,7 +53,19 @@ Evaluation Strategy: In semester and Mid semester Exam s: 40% each Best of the a
 
 ## Textbooks and References
 
-Books: 1. Multiple view geometry in computer vision: R. Hartley and A. Zisserman, Cambridge University Press 2. Robot Vision by BKP Horn, MIT Press 3. Introductory Techniques for 3-D Computer Vision by Trucco and Veri, Prentice Hall 4. Deep Learning: Ian Goodfellow, Yashua Bengio and Aaron Courvillee, MIT Press. Evaluation
+Books:
+
+- 1. Multiple view geometry in computer vision:
+
+- R. Hartley and
+
+- A. Zisserman, Cambridge University Press
+
+- 2. Robot Vision by BKP Horn, MIT Press
+
+- 3. Introductory Techniques for 3-D Computer Vision by Trucco and Veri, Prentice Hall
+
+- 4. Deep Learning: Ian Goodfellow, Yashua Bengio and Aaron Courvillee, MIT Press. Evaluation
 
 ---
 

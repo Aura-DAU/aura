@@ -33,7 +33,21 @@ semester: "3rd Semester, Autumn 2025-26"
 
 ## Course Description
 
-Course Description: (cid:136) Introduction to Signals and Systems. Fourier Transformation, Fourier Series, (cid:136) Discrete Time Signals. Sampling and its effects (cid:136) Analysis and Processing of Discrete Time Signals. DiscreteTimeFourierTransform (DTFT),LinearShiftInvariant(LSI)systems,impulseresponse,frequencyresponse (cid:136) Z transformation. Z transformation and its relation to Laplace transform and DTFT, Poles and Zeros, Region of Convergence. (cid:136) Digital Systems. Design and analysis of digital filters. References: Textbook Oppenheim, A. V., and Schafer, R. W. (2010). “Discrete-time signal processing,” 3rd ed., Prentice Hall. Reference Books The following books are used as the reference: 1. Kreyszig, E. (2011). “Advanced engineering mathematics,” 10th ed., Wiley. 2. Proakis, J. G., and Manolakis, D. G. (2007). “Digital signal processing: Principles, algorithms, and applications,” 4th ed., Pearson Prentice Hall. Grading Policy The assessment method will be as follows:1 (cid:136) Two midterm exams: 27.5% each (cid:136) Final exam: 30% (cid:136) Tutorials, In-class Quizzes and Evaluation
+Course Description: (cid:136) Introduction to Signals and Systems. Fourier Transformation, Fourier Series, (cid:136) Discrete Time Signals. Sampling and its effects (cid:136) Analysis and Processing of Discrete Time Signals. DiscreteTimeFourierTransform (DTFT),LinearShiftInvariant(LSI)systems,impulseresponse,frequencyresponse (cid:136) Z transformation. Z transformation and its relation to Laplace transform and DTFT, Poles and Zeros, Region of Convergence. (cid:136) Digital Systems. Design and analysis of digital filters. References: Textbook Oppenheim,
+
+- A. V., and Schafer,
+
+- R. W. (2010). “Discrete-time signal processing,” 3rd ed., Prentice Hall. Reference Books The following books are used as the reference:
+
+- 1. Kreyszig,
+
+- E. (2011). “Advanced engineering mathematics,” 10th ed., Wiley.
+
+- 2. Proakis,
+
+- J. G., and Manolakis,
+
+- D. G. (2007). “Digital signal processing: Principles, algorithms, and applications,” 4th ed., Pearson Prentice Hall. Grading Policy The assessment method will be as follows:1 (cid:136) Two midterm exams: 27.5% each (cid:136) Final exam: 30% (cid:136) Tutorials, In-class Quizzes and Evaluation
 
 ---
 
@@ -53,7 +67,21 @@ The assessment method will be as follows:1 Two midterm exams: 27.5% each Fin
 
 ## Textbooks and References
 
-References: Textbook Oppenheim, A. V., and Schafer, R. W. (2010). “Discrete-time signal processing,” 3rd ed., Prentice Hall. Reference Books The following books are used as the reference: 1. Kreyszig, E. (2011). “Advanced engineering mathematics,” 10th ed., Wiley. 2. Proakis, J. G., and Manolakis, D. G. (2007). “Digital signal processing: Principles, algorithms, and applications,” 4th ed., Pearson Prentice Hall. Grading Policy The assessment method will be as follows:1 (cid:136) Two midterm exams: 27.5% each (cid:136) Final exam: 30% (cid:136) Tutorials, In-class Quizzes and Evaluation
+References: Textbook Oppenheim,
+
+- A. V., and Schafer,
+
+- R. W. (2010). “Discrete-time signal processing,” 3rd ed., Prentice Hall. Reference Books The following books are used as the reference:
+
+- 1. Kreyszig,
+
+- E. (2011). “Advanced engineering mathematics,” 10th ed., Wiley.
+
+- 2. Proakis,
+
+- J. G., and Manolakis,
+
+- D. G. (2007). “Digital signal processing: Principles, algorithms, and applications,” 4th ed., Pearson Prentice Hall. Grading Policy The assessment method will be as follows:1 (cid:136) Two midterm exams: 27.5% each (cid:136) Final exam: 30% (cid:136) Tutorials, In-class Quizzes and Evaluation
 
 ---
 

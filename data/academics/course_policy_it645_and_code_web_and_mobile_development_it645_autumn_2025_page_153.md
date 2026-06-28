@@ -72,7 +72,23 @@ The objective of this course is to provide an overview of the building blocks of
 
 ## Textbooks and References
 
-textbooks and references 1 Richard Clark, “Beginning HTML5 and CSS3”, Apress Publishers. 2. Marijn Haverbeke, “Eloquent JavaScript: A Modern Introduction to Programming”, MIT press. 3. Jason Krol, Bruno Joseph D’mello, Mithun Satheesh, “Web Development with MongoDB and NodeJS- second edition”, O’Reilly. 4. Bonnie Eisenman, “Learning React Native: Building Mobile Applications with Javascript”, O’Reilly 4. https://www.mongodb.com/ 5. https://nodejs.org/en/ 6. https://reactjs.org/ 7. https://expressjs.com/ 8. https://reactnative.dev/docs/getting-started Mapping to program outcomes of NBA P1PP1 P2P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 X X X X X Grading Policy  Insem 1: 15%  Insem 2: 20%  Endsem exam: 25%  Lab Assignments: 20%  Project work: 20% Course Outcomes
+textbooks and references 1 Richard Clark, “Beginning HTML5 and CSS3”, Apress Publishers.
+
+- 2. Marijn Haverbeke, “Eloquent JavaScript: A Modern Introduction to Programming”, MIT press.
+
+- 3. Jason Krol, Bruno Joseph D’mello, Mithun Satheesh, “Web Development with MongoDB and NodeJS- second edition”, O’Reilly.
+
+- 4. Bonnie Eisenman, “Learning React Native: Building Mobile Applications with Javascript”, O’Reilly
+
+- 4. https://www.mongodb.com/
+
+- 5. https://nodejs.org/en/
+
+- 6. https://reactjs.org/
+
+- 7. https://expressjs.com/
+
+- 8. https://reactnative.dev/docs/getting-started Mapping to program outcomes of NBA P1PP1 P2P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 X X X X X Grading Policy  Insem 1: 15%  Insem 2: 20%  Endsem exam: 25%  Lab Assignments: 20%  Project work: 20% Course Outcomes
 
 ---
 

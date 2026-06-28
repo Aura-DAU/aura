@@ -45,7 +45,15 @@ Grading Two midsem test 20%+ 20% and an endsem 40%. If possible Quiz will be con
 
 ## Textbooks and References
 
-Books 1. Topics in Algebra I.N. Herstein 2. Abstract Algebra, An Introduction Thomas W. Hungerford 3. Algebra Michael Artin 1 Grading Two midsem test 20%+ 20% and an endsem 40%. If possible Quiz will be conducted. Quiz and attendance will comprise 20% of evaluation
+Books
+
+- 1. Topics in Algebra I.N. Herstein
+
+- 2. Abstract Algebra, An Introduction Thomas
+
+- W. Hungerford
+
+- 3. Algebra Michael Artin 1 Grading Two midsem test 20%+ 20% and an endsem 40%. If possible Quiz will be conducted. Quiz and attendance will comprise 20% of evaluation
 
 ---
 

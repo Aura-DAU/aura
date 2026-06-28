@@ -33,7 +33,85 @@ semester: "1st Semester, Autumn 2025-26"
 
 ## Course Description
 
-Course Objectives:  ICT in itself may not generate a vivid picture of itself, but it encompasses almost all walks of our lives. The prime objective of this course is to make students aware of the ubiquity of ICT. Therefore this is a foundation course.  This course is designed to provide students a contextual understanding of different facets of ICT and how the information and communication technologies (ICT) manifested in various existing and emerging verticals of science, technology and engineering as well.  Lectures are planned in a way to expose the students to many of the STEAM verticals.  Lectures comprise of various problem statements considering the real-world issues and need to provide the ICT based solution to abate those issues.  If the lectures are to help them to “think and ideate,” lab work involves “visualization” of spaces and objects and ultimately the solutions – 1D, 2D, 3D, projections, isometric views of lines, embedding of solids will be introduced in the Lab classes.  As a future ICT engineer these students have to observe challenging issues around them and solve them to improve the quality of life of the society at large. These solutions, within the scope of ICT, may be from pure design part, from mechanical design aspect and/or from electrical/electronics point of view. In the Lab classes we try to give them a glimpse of these three modules, as far as possible. Lecture Plan: Applications of ICT towards the following topics (in alphabetical order) 1. AI/ML/Deep Learning 2. Communication Technology 3. Computational/Data Science 4. Design 5. Fashion & Music 6. Healthcare 7. IoT/Automation/Robotics 8. Landscaping 9. Mathematical Science 10. Photography & Art 11. Quantum Computing and Measurement 12. Science Education 13. Semiconductor industry 14. Social Media 15. Some successful projects demonstration (to understand project life-cycle) 16. Technology readiness levels (TRL-1 to TRL-9) Lab Plan: Product Design part: 1. Introduction to AutoCAD 2. AutoCAD + Video 3. Multiview drawing, Dimensions, Object Design 4. Demo-Rhino 5. 3D Printer Mechanical design part: 1. Drilling & Milling Machine 2. Dremel (for finishing milling, grinding, cutting etc.) 3. Bench Lathe Machine 4. Octagon Tabletop CNC Lathe Machine 5. Welding machine (students are not allowed to use it) 6. Grinder Machine Electronic design part: 1. Recognizing electronic component 2. Understanding of footprint of components and PCB and its relation with final circuit design 3. Understanding of power consumption aspect of the design 4. Reading spec sheet of components 5. PCB Design on DipTrace/Eagle 6. Working with circuit boards and chips – soldering, PCB design 7. PCB fabrication and populating components 8. Final designed PCB performance testing Suggested Textbook/references:  Lecture notes  Handouts of lab classes Assessment Method/Evaluation
+### Course Objectives:
+
+-  ICT in itself may not generate a vivid picture of itself, but it encompasses almost all walks of our lives. The prime objective of this course is to make students aware of the ubiquity of ICT. Therefore this is a foundation course.
+
+-  This course is designed to provide students a contextual understanding of different facets of ICT and how the information and communication technologies (ICT) manifested in various existing and emerging verticals of science, technology and engineering as well.  Lectures are planned in a way to expose the students to many of the STEAM verticals.  Lectures comprise of various problem statements considering the real-world issues and need to provide the ICT based solution to abate those issues.
+
+-  If the lectures are to help them to “think and ideate,” lab work involves “visualization” of spaces and objects and ultimately the solutions – 1D, 2D, 3D, projections, isometric views of lines, embedding of solids will be introduced in the Lab classes.  As a future ICT engineer these students have to observe challenging issues around them and solve them to improve the quality of life of the society at large.
+
+- These solutions, within the scope of ICT, may be from pure design part, from mechanical design aspect and/or from electrical/electronics point of view. In the Lab classes we try to give them a glimpse of these three modules, as far as possible. Lecture Plan: Applications of ICT towards the following topics (in alphabetical order).
+
+- 1. AI/ML/Deep Learning
+
+- 2. Communication Technology
+
+- 3. Computational/Data Science
+
+- 4. Design
+
+- 5. Fashion & Music
+
+- 6. Healthcare
+
+- 7. IoT/Automation/Robotics
+
+- 8. Landscaping
+
+- 9. Mathematical Science
+
+- 10. Photography & Art
+
+- 11. Quantum Computing and Measurement
+
+- 12. Science Education
+
+- 13. Semiconductor industry
+
+- 14. Social Media
+
+- 15. Some successful projects demonstration (to understand project life-cycle)
+
+- 16. Technology readiness levels (TRL-1 to TRL-9) Lab Plan: Product Design part:
+
+- 1. Introduction to AutoCAD
+
+- 2. AutoCAD + Video
+
+- 3. Multiview drawing, Dimensions, Object Design
+
+- 4. Demo-Rhino
+
+- 5. 3D Printer Mechanical design part:
+
+- 1. Drilling & Milling Machine
+
+- 2. Dremel (for finishing milling, grinding, cutting etc.)
+
+- 3. Bench Lathe Machine
+
+- 4. Octagon Tabletop CNC Lathe Machine
+
+- 5. Welding machine (students are not allowed to use it)
+
+- 6. Grinder Machine Electronic design part:
+
+- 1. Recognizing electronic component
+
+- 2. Understanding of footprint of components and PCB and its relation with final circuit design
+
+- 3. Understanding of power consumption aspect of the design
+
+- 4. Reading spec sheet of components
+
+- 5. PCB Design on DipTrace/Eagle
+
+- 6. Working with circuit boards and chips – soldering, PCB design
+
+- 7. PCB fabrication and populating components
+
+- 8. Final designed PCB performance testing Suggested Textbook/references:  Lecture notes  Handouts of lab classes Assessment Method/Evaluation
 
 ---
 

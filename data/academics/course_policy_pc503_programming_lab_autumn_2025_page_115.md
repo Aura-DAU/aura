@@ -77,7 +77,53 @@ Project and Assignments, a mid-semester and a final examinatio n. Evaluation Sch
 
 ## Textbooks and References
 
-textbook is insufficient for this course. Some of the relevant resources that will be referred to are: Reference Book: 1. Introducing Python: Modern Computing in Simple Packages by Bill Lubanovic, O'Reilly, 2nd Edition, 2019. 2. Coding Python and SQL: How to Install and Python Code: How to Improve SQL and Python by Patricia Jasmine, 1st Edition, 2022. 3. Learning the Pandas Library: Python Tools for Data Munging, Analysis, and Visualization by Matt Harrison and Michael Prentiss, 2nd Edition2016. 4. Python for Data Analysis: Data Wrangling with Pandas, NumPy, and Ipython by Wes McKinney, Second Edition, 2017. 5. Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems by Aurelian Gerona, 2nd Edition, 2019. 6. Flask Web Development: Developing Web Applications with Python by Miguel Grinberg, 2nd Edition, 2018. 7. Django3 Web Development Cookbook: Actionable solutions to common problems in Python web development by Aidas Bendoraitis and Jake Kronika, 4th Edition, 2020. 8. Web Scraping with Python: Collecting More Data from the Modern Web by Ryan Mitchell, 1st Edition, 2018. 9. Python GUI Programming - A Complete Reference Guide: Develop responsive and powerful GUI applications with PyQt and Tkinter by Alan D. Moore and B.M. Harwani, 1st Edition, 2019. 10. Python for MATLAB Development by Albert Danial, 1st Edition, Apress Berkeley, CA, 2022. 11. Arduino Cookbook: Recipes to Begin, Expand, and Enhance Your Projects by Michael Margolis, 2nd Edition, 2021. 12. Exploring Arduino: Tools and Techniques for Engineering Wizardry by Jeremy Blum, 2nd Edition, 2019. 13. The Elements of MATLAB Style by Richard K. Johnson, 1st Edition, Cambridge University Press, 2010. Related Resources: 1. Visual Studio Code: https://code.visualstudio.com/download 2. Anaconda: https://www.anaconda.com/download 3. Python 3.9: https://www.python.org/downloads/ 4. Tinkercad, Autodesk: https://www.tinkercad.com/dashboard 5. LTspice:https://www.analog.com/en/design-center/design-tools-and- calculators/ltspice-simulator.html 6. MATLAB (licensed version available at DA-IICT): https://in.mathworks.com/campaigns/products/trials.html The Project Topics (Not Limited):  Hand Gesture Recognition  Emotion Recognition  Signal Denoising  Embedded AI and ML  Voice Recognition  Image Processing  Gait Analysis  Kidney Disease Diagnosis  Face Recognition  Biomedical Signal Processing  Robotics  Real time weather forecasting Assessment Method: Project and Assignments, a mid-semester and a final examination. Evaluation
+textbook is insufficient for this course. Some of the relevant resources that will be referred to are: Reference Book:
+
+- 1. Introducing Python: Modern Computing in Simple Packages by Bill Lubanovic, O'Reilly, 2nd Edition,
+
+- 2019. 2. Coding Python and SQL: How to Install and Python Code: How to Improve SQL and Python by Patricia Jasmine, 1st Edition,
+
+- 2022. 3. Learning the Pandas Library: Python Tools for Data Munging, Analysis, and Visualization by Matt Harrison and Michael Prentiss, 2nd Edition2016.
+
+- 4. Python for Data Analysis: Data Wrangling with Pandas, NumPy, and Ipython by Wes McKinney, Second Edition,
+
+- 2017. 5. Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems by Aurelian Gerona, 2nd Edition,
+
+- 2019. 6. Flask Web Development: Developing Web Applications with Python by Miguel Grinberg, 2nd Edition,
+
+- 2018. 7. Django3 Web Development Cookbook: Actionable solutions to common problems in Python web development by Aidas Bendoraitis and Jake Kronika, 4th Edition,
+
+- 2020. 8. Web Scraping with Python: Collecting More Data from the Modern Web by Ryan Mitchell, 1st Edition,
+
+- 2018. 9. Python GUI Programming
+
+- A Complete Reference Guide: Develop responsive and powerful GUI applications with PyQt and Tkinter by Alan
+
+- D. Moore and B.M. Harwani, 1st Edition,
+
+- 2019. 10. Python for MATLAB Development by Albert Danial, 1st Edition, Apress Berkeley, CA,
+
+- 2022. 11. Arduino Cookbook: Recipes to Begin, Expand, and Enhance Your Projects by Michael Margolis, 2nd Edition,
+
+- 2021. 12. Exploring Arduino: Tools and Techniques for Engineering Wizardry by Jeremy Blum, 2nd Edition,
+
+- 2019. 13. The Elements of MATLAB Style by Richard
+
+- K. Johnson, 1st Edition, Cambridge University Press,
+
+- 2010. Related Resources:
+
+- 1. Visual Studio Code: https://code.visualstudio.com/download
+
+- 2. Anaconda: https://www.anaconda.com/download
+
+- 3. Python 3.9: https://www.python.org/downloads/
+
+- 4. Tinkercad, Autodesk: https://www.tinkercad.com/dashboard
+
+- 5. LTspice:https://www.analog.com/en/design-center/design-tools-and- calculators/ltspice-simulator.html
+
+- 6. MATLAB (licensed version available at DA-IICT): https://in.mathworks.com/campaigns/products/trials.html The Project Topics (Not Limited):  Hand Gesture Recognition  Emotion Recognition  Signal Denoising  Embedded AI and ML  Voice Recognition  Image Processing  Gait Analysis  Kidney Disease Diagnosis  Face Recognition  Biomedical Signal Processing  Robotics  Real time weather forecasting Assessment Method: Project and Assignments, a mid-semester and a final examination. Evaluation
 
 ---
 

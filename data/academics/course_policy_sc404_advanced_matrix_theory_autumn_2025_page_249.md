@@ -53,7 +53,19 @@ In-Sem 1 - 30%, In-Sem 2 - 30%, End-Sem - 40%
 
 ## Textbooks and References
 
-Textbook/references: [1] F. Zhang. Matrix theory. Basic results and techniques. Springer, 1999. [2] R.A. Horn and C.R. Johnson. Matrix analysis. Cambridge University Press, 2012. Assessment method: In-Sem 1 - 30%, In-Sem 2 - 30%, End-Sem - 40% Course Outcomes
+Textbook/references: [1]
+
+- F. Zhang. Matrix theory. Basic results and techniques. Springer,
+
+- 1999. [2] R.A. Horn and C.R. Johnson. Matrix analysis. Cambridge University Press,
+
+- 2012. Assessment method: In-Sem 1
+
+- 30%, In-Sem 2
+
+- 30%, End-Sem
+
+- 40% Course Outcomes
 
 ---
 

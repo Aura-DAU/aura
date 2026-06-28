@@ -53,7 +53,11 @@ Mid Semester Test 40% Final Examination 60% Course Conduct and Grading Policy (F
 
 ## Textbooks and References
 
-Textbook Yashvant Kanetkar, Let Us C, 19th Ed, BPB Publications References 1. Kernighan Brian, Ritchi Dennis, The C Programming Language (ANSI C Version), 2nd Ed., Prentice Hall 2. Deitel Harvey, C: How to Program, PHI Learning Online compiler used in the lectures: https://onecompiler.com/c Other tools will be communicated to the students whenever they are used.
+Textbook Yashvant Kanetkar, Let Us C, 19th Ed, BPB Publications References
+
+- 1. Kernighan Brian, Ritchi Dennis, The C Programming Language (ANSI C Version), 2nd Ed., Prentice Hall
+
+- 2. Deitel Harvey, C: How to Program, PHI Learning Online compiler used in the lectures: https://onecompiler.com/c Other tools will be communicated to the students whenever they are used.
 
 ---
 

@@ -53,7 +53,23 @@ Evaluation Evaluation will be based on in -class presentations and tasks like sh
 
 ## Textbooks and References
 
-books, articles, talks etc. These will be kept in a common repository that can be accessed by all. Class Organization The entire class will be randomly broken up into groups of 10-12 students on an average, and a student assigned to a group will remain in it throughout the semester. It will be the responsibility of the group representative or GR (either elected or a volunteer) to interface with the faculty on behalf of the group, and to make sure that the assigned tasks are undertaken efficiently and on time. TAs for the course will coordinate all Group related issues. Course Material All the relevant reading material will be made available in a Google Drive Folder for the class. Extracts from following books will be the main texts for the course: 1) Arnold, David. Science, Technology and Medicine in Colonial India. The New Cambridge History of India, vol 3, no. 5. Cambridge University Press, 2000. 2) Levesque, Hector. Common Sense, the Turing Test, and the Quest for Real AI. MIT Press, 2018. 3) O’Neil, Cathy. Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy. Penguin, 2016. 4) Sismondo, Sergio. An Introduction to Science and Technology Studies. 2nd ed. Wiley-Blackwell, 2010. Evaluation
+- books, articles, talks etc. These will be kept in a common repository that can be accessed by all. Class Organization The entire class will be randomly broken up into groups of 10-12 students on an average, and a student assigned to a group will remain in it throughout the semester.
+
+- It will be the responsibility of the group representative or GR (either elected or a volunteer) to interface with the faculty on behalf of the group, and to make sure that the assigned tasks are undertaken efficiently and on time. TAs for the course will coordinate all Group related issues. Course Material All the relevant reading material will be made available in a Google Drive Folder for the class.
+
+- Extracts from following books will be the main texts for the course:.
+
+- 1) Arnold, David. Science, Technology and Medicine in Colonial India. The New Cambridge History of India, vol 3, no.
+
+- 5. Cambridge University Press,
+
+- 2000. 2) Levesque, Hector. Common Sense, the Turing Test, and the Quest for Real AI. MIT Press,
+
+- 2018. 3) O’Neil, Cathy. Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy. Penguin,
+
+- 2016. 4) Sismondo, Sergio. An Introduction to Science and Technology Studies. 2nd ed. Wiley-Blackwell,
+
+- 2010. Evaluation
 
 ---
 

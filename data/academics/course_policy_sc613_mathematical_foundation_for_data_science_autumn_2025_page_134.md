@@ -77,7 +77,21 @@ Not stated in source document
 
 ## Textbooks and References
 
-books:  Deisenroth, Marc Peter, A. Aldo Faisal, and Cheng Soon Ong. Mathematics for machine learning. Cambridge University Press, 2020  A First Course in Probability, Sheldon Ross, Pearson, 10th ed., 2023  Modern Statistics: Intuition, Math, Python, R, Mike X Cohen, Sincxpress, 2023.  David C. Lay, Steven R. Lay and Judi McDonald, Linear Algebra and its Applications, Pearson, 5th ed., 2015.  Linear Algebra for Data Science, Moshe Haviv, World Scientific, 2023.  Linear Algebra for Everyone, Gilbert Strang, Wellesley-Cambridge Press, 2020. Grading method: Evaluation
+books:  Deisenroth, Marc Peter,
+
+- A. Aldo Faisal, and Cheng Soon Ong. Mathematics for machine learning. Cambridge University Press, 2020  A First Course in Probability, Sheldon Ross, Pearson, 10th ed., 2023  Modern Statistics: Intuition, Math, Python, R, Mike X Cohen, Sincxpress,
+
+- 2023.  David
+
+- C. Lay, Steven
+
+- R. Lay and Judi McDonald, Linear Algebra and its Applications, Pearson, 5th ed.,
+
+- 2015.  Linear Algebra for Data Science, Moshe Haviv, World Scientific,
+
+- 2023.  Linear Algebra for Everyone, Gilbert Strang, Wellesley-Cambridge Press,
+
+- 2020. Grading method: Evaluation
 
 ---
 

@@ -83,7 +83,41 @@ Not stated in source document
 
 ## Textbooks and References
 
-References [1] Q. Li and C. Yao, Real-Time Concepts for Embedded Systems, 1st ed. San Francisco, CA, USA: CMP Books, 2003. [2] J. W. Valvano, Embedded Systems: Introduction to ARM Cortex-M Microcontrollers, Volume 1, 5th ed. Lexington, KY, USA: CreateSpace Independent Publishing, 2018. [3] J. Yiu, The Definitive Guide to ARM Cortex-M0 and Cortex-M0+ Processors, 2nd ed. Oxford, UK: Newnes, 2015. [4] E. White, Making Embedded Systems: Design Patterns for Great Software, 1st ed. Sebastopol, CA, USA: O’Reilly Media, 2011. [5] A. Bahga and V. Madisetti, Internet of Things: A Hands-On-Approach, 1st ed. Universities Press, 2015. [6] AWS, Microsoft Azure, and Google Cloud documentation [7] Confluent, The Ultimate Data Streaming Guide, 2025. [Online]. Available: https://www.confluent.io/resources/ebook/streaming-use-case-guide/ Assessment Method Sl. No. Component Weightage 1. Second In-Sem Exam 30% 2. End-Sem Exam 30% 2. Assignments & Labs 20% 4. Project 20% 1 Course Outcomes
+References [1]
+
+- Q. Li and
+
+- C. Yao, Real-Time Concepts for Embedded Systems, 1st ed. San Francisco, CA, USA: CMP Books,
+
+- 2003. [2]
+
+- J. W. Valvano, Embedded Systems: Introduction to ARM Cortex-M Microcontrollers, Volume 1, 5th ed. Lexington, KY, USA: CreateSpace Independent Publishing,
+
+- 2018. [3]
+
+- J. Yiu, The Definitive Guide to ARM Cortex-M0 and Cortex-M0+ Processors, 2nd ed. Oxford, UK: Newnes,
+
+- 2015. [4]
+
+- E. White, Making Embedded Systems: Design Patterns for Great Software, 1st ed. Sebastopol, CA, USA: O’Reilly Media,
+
+- 2011. [5]
+
+- A. Bahga and
+
+- V. Madisetti, Internet of Things: A Hands-On-Approach, 1st ed. Universities Press,
+
+- 2015. [6] AWS, Microsoft Azure, and Google Cloud documentation [7] Confluent, The Ultimate Data Streaming Guide,
+
+- 2025. [Online]. Available: https://www.confluent.io/resources/ebook/streaming-use-case-guide/ Assessment Method Sl. No. Component Weightage
+
+- 1. Second In-Sem Exam 30%
+
+- 2. End-Sem Exam 30%
+
+- 2. Assignments & Labs 20%
+
+- 4. Project 20% 1 Course Outcomes
 
 ---
 

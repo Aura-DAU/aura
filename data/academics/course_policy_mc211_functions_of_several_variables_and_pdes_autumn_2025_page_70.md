@@ -77,7 +77,27 @@ Not stated in source document
 
 ## Textbooks and References
 
-Books: 1. George F. Simmons. Differential Equations With Applications and Historical Notes. 2nd ed. International Series in Pure & Applied Mathematics. McGraw-Hill Higher Education, 1991. ISBN: 978-0070575400. 2. George B. Thomas, Ross L. Finney, Calculus and analytical geometry, 9th edition, Pearson Publications, India, 2006. 3. Bartle and Sherbert, Introduction to real Analysis, Fourth Edition, John Wiley & Sons, 2011. 4. E. Kreyszig, Advanced Engineering Mathematics, 10th Ed., Wiley, 2015. Assessment Method: MID-SEM + END-SEM + Project + Tutorial Assignment + Quizzes. Course Outcomes
+Books:
+
+- 1. George
+
+- F. Simmons. Differential Equations With Applications and Historical Notes. 2nd ed. International Series in Pure & Applied Mathematics. McGraw-Hill Higher Education,
+
+- 1991. ISBN: 978-0070575400.
+
+- 2. George
+
+- B. Thomas, Ross
+
+- L. Finney, Calculus and analytical geometry, 9th edition, Pearson Publications, India,
+
+- 2006. 3. Bartle and Sherbert, Introduction to real Analysis, Fourth Edition, John Wiley & Sons,
+
+- 2011. 4.
+
+- E. Kreyszig, Advanced Engineering Mathematics, 10th Ed., Wiley,
+
+- 2015. Assessment Method: MID-SEM + END-SEM + Project + Tutorial Assignment + Quizzes. Course Outcomes
 
 ---
 

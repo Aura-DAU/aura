@@ -33,13 +33,33 @@ semester: "1st Semester, Autumn 2025-26"
 
 ## Course Description
 
-Course Description This course provides foundational mathematical concepts required for M.Sc. Agriculture Analytics students who have studied mathematics up to secondary (10th) level. The emphasis is on geometric intuition, concrete examples from agriculture and simple com- putational skills to prepare students for further coursework in analytics and statistics. Course Objectives 1. Reinforceessentialmathematicalideasrequiredforquantitativecoursesinanalytics. 2. Provide geometric and intuitive understanding of vectors, functions, calculus and probability. 3. Equip students with basic skills to interpret and manipulate simple mathematical models relevant to agricultural data. 2 M.Sc. Agriculture Analytics MA614 – Preparatory Mathematics Course Outcomes
+Course Description This course provides foundational mathematical concepts required for M.Sc. Agriculture Analytics students who have studied mathematics up to secondary (10th) level. The emphasis is on geometric intuition, concrete examples from agriculture and simple com- putational skills to prepare students for further coursework in analytics and statistics. Course Objectives
+
+- 1. Reinforceessentialmathematicalideasrequiredforquantitativecoursesinanalytics.
+
+- 2. Provide geometric and intuitive understanding of vectors, functions, calculus and probability.
+
+- 3. Equip students with basic skills to interpret and manipulate simple mathematical models relevant to agricultural data. 2 M.Sc. Agriculture Analytics MA614 – Preparatory Mathematics Course Outcomes
 
 ---
 
 ## Textbooks and References
 
-References and Learning Resources 9 1 Course Information Course Title: MA614 – Preparatory Mathematics Programme: M.Sc. Agriculture Analytics (Sem 1) Credits: 2 Total Contact Hours: 24-28 Instructor: Dr. Bibin Baby John Institute: Dhirubhai Ambani University Academic Year: 2025-2026 Course Description This course provides foundational mathematical concepts required for M.Sc. Agriculture Analytics students who have studied mathematics up to secondary (10th) level. The emphasis is on geometric intuition, concrete examples from agriculture and simple com- putational skills to prepare students for further coursework in analytics and statistics. Course Objectives 1. Reinforceessentialmathematicalideasrequiredforquantitativecoursesinanalytics. 2. Provide geometric and intuitive understanding of vectors, functions, calculus and probability. 3. Equip students with basic skills to interpret and manipulate simple mathematical models relevant to agricultural data. 2 M.Sc. Agriculture Analytics MA614 – Preparatory Mathematics Course Outcomes
+References and Learning Resources 9 1 Course Information Course Title: MA614 – Preparatory Mathematics Programme: M.Sc. Agriculture Analytics (Sem
+
+- 1) Credits: 2 Total Contact Hours: 24-28 Instructor: Dr. Bibin Baby John Institute: Dhirubhai Ambani University Academic Year: 2025-2026 Course Description This course provides foundational mathematical concepts required for M.Sc. Agriculture Analytics students who have studied mathematics up to secondary (10th) level. The emphasis is on geometric intuition, concrete examples from agriculture and simple com- putational skills to prepare students for further coursework in analytics and statistics. Course Objectives
+
+-
+
+- 1. Reinforceessentialmathematicalideasrequiredforquantitativecoursesinanalytics.
+
+-
+
+- 2. Provide geometric and intuitive understanding of vectors, functions, calculus and probability.
+
+-
+
+- 3. Equip students with basic skills to interpret and manipulate simple mathematical models relevant to agricultural data. 2 M.Sc. Agriculture Analytics MA614 – Preparatory Mathematics Course Outcomes
 
 ---
 

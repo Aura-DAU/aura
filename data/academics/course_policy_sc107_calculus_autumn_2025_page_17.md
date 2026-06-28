@@ -53,7 +53,29 @@ T wo in-sem examinations (30% each) and a final examination (40%).
 
 ## Textbooks and References
 
-Textbook/references: 1. Thomas's Calculus (Textbook) 2. Introduction to Real Analysis, Robert G. Bartle Donald R. Sherbert 3. A basic course in real analysis, Ajit Kumar and S. Kumaresan 4. Differential equations, S. L. Ross 5. A first course in Complex Analysis with applications, D. G. Zill and P. D. Shanahan Assessment method: Two in-sem examinations (30% each) and a final examination (40%). Course Outcomes
+Textbook/references:
+
+- 1. Thomas's Calculus (Textbook)
+
+- 2. Introduction to Real Analysis, Robert
+
+- G. Bartle Donald
+
+- R. Sherbert
+
+- 3. A basic course in real analysis, Ajit Kumar and
+
+- S. Kumaresan
+
+- 4. Differential equations,
+
+- S. L. Ross
+
+- 5. A first course in Complex Analysis with applications,
+
+- D. G. Zill and
+
+- P. D. Shanahan Assessment method: Two in-sem examinations (30% each) and a final examination (40%). Course Outcomes
 
 ---
 

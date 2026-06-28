@@ -45,7 +45,19 @@ Not stated in source document
 
 ## Textbooks and References
 
-BOOKs : Notes will be provided Explanatory Notes 1. Enter a discipline (see master list for guidance) and a first digit followed by xx: 1-4 BTech by year, 5 Mtech, 6 MSc, 7 Mdes 2. Please indicate the program and desired semester in which it is to be offered. In 12, comment on what additional courses in that semester it should not conflict with. 3. Appropriate categories: Core (all programs), technical elective, science elective, open elective (BTech), elective (other programs) 4. Indicate the subsequent courses for which the course would be needed. 5. The Instructor is permitted a certain degree of flexibility in each course. The following ratios of primary to optional content in terms of lecture hours are given as guidelines: Foundation Courses – 75:25, Track Core (Group Elective)/M.Tech. Specialization Core – 66:33, Electives – 50:50. For example, a 3-0-0-3 course is expected to have 40-42 lectures in the semester, and the primary content should specify 30 lecture hours worth of material in a Foundation Level course and only 20 hours of material in an Elective Course. The primary content is what the instructor must cover in the course; the remaining is at the discretion of the Instructor. 6. The outcomes and objectives should give on the one hand the skills and competencies acquired by the student as well as the value of the course towards industry/research/academic objectives. 4
+BOOKs : Notes will be provided Explanatory Notes
+
+- 1. Enter a discipline (see master list for guidance) and a first digit followed by xx: 1-4 BTech by year, 5 Mtech, 6 MSc, 7 Mdes
+
+- 2. Please indicate the program and desired semester in which it is to be offered. In 12, comment on what additional courses in that semester it should not conflict with.
+
+- 3. Appropriate categories: Core (all programs), technical elective, science elective, open elective (BTech), elective (other programs)
+
+- 4. Indicate the subsequent courses for which the course would be needed.
+
+- 5. The Instructor is permitted a certain degree of flexibility in each course. The following ratios of primary to optional content in terms of lecture hours are given as guidelines: Foundation Courses – 75:25, Track Core (Group Elective)/M.Tech. Specialization Core – 66:33, Electives – 50:50. For example, a 3-0-0-3 course is expected to have 40-42 lectures in the semester, and the primary content should specify 30 lecture hours worth of material in a Foundation Level course and only 20 hours of material in an Elective Course. The primary content is what the instructor must cover in the course; the remaining is at the discretion of the Instructor.
+
+- 6. The outcomes and objectives should give on the one hand the skills and competencies acquired by the student as well as the value of the course towards industry/research/academic objectives. 4
 
 ---
 

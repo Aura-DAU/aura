@@ -53,7 +53,37 @@ Two in-semester examinations(30% each), final examination(40%).
 
 ## Textbooks and References
 
-Textbook/references • Discrete Mathematics, Norman. L. Biggs, Oxford science publication. 1 2 COURSE CODE-MC123 • ElementsofDiscreteMathematics,C.L.Liu.,TataMcGraw-HillPublishingCompany Ltds. 2nd edition. • Discrete Mathematics and its Applications (7th Edition), Kenneth.H. Rosen, Mc- Graw Hill International edition. • MottJ.L., KandelA.andBakerT.P., DiscreteMathematicsforComputerScientists and Mathematicians, Second Edition, Prentice Hall India, 1986. • Thomas H. C., Leiserson C. E.; Rivest R. L.; Stein C., Introduction to Algorithms (2nd ed.). MIT Press and McGraw-Hill. 2001. Assessment method: Two in-semester examinations(30% each), final examination(40%). Course outcome: After successful completion of the course, students will be able to: • Understand and create mathematical arguments for solving problems. • Understand mathematical structures such as sets, graphs, trees and learn their uses in computer science. • Develop skills towards mathematical modeling and analysis of engineering problems. • Be able to understand discrete probability distributions based on simple combinato- rial processes, and to calculate the probabilities and expectations of simple events under such discrete distributions. P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 x x x x
+Textbook/references
+
+- Discrete Mathematics, Norman.
+
+- L. Biggs, Oxford science publication. 1 2 COURSE CODE-MC123
+
+- ElementsofDiscreteMathematics,C.L.Liu.,TataMcGraw-HillPublishingCompany Ltds. 2nd edition.
+
+- Discrete Mathematics and its Applications (7th Edition), Kenneth.H. Rosen, Mc- Graw Hill International edition.
+
+- MottJ.L., KandelA.andBakerT.P., DiscreteMathematicsforComputerScientists and Mathematicians, Second Edition, Prentice Hall India,
+
+- 1986.
+
+- Thomas
+
+- H. C., Leiserson
+
+- C. E.; Rivest
+
+- R. L.; Stein C., Introduction to Algorithms (2nd ed.). MIT Press and McGraw-Hill.
+
+- 2001. Assessment method: Two in-semester examinations(30% each), final examination(40%). Course outcome: After successful completion of the course, students will be able to:
+
+- Understand and create mathematical arguments for solving problems.
+
+- Understand mathematical structures such as sets, graphs, trees and learn their uses in computer science.
+
+- Develop skills towards mathematical modeling and analysis of engineering problems.
+
+- Be able to understand discrete probability distributions based on simple combinato- rial processes, and to calculate the probabilities and expectations of simple events under such discrete distributions. P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 P12 x x x x
 
 ---
 

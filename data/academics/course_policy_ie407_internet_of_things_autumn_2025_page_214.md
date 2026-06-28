@@ -33,7 +33,31 @@ semester: "2nd Semester, Autumn 2025-26"
 
 ## Course Description
 
-Course Objectives: Hands-on Experience in the IoT Hardware design Suggested Textbook/references: 1) S. Misra, A. Mukherjee, and A. Roy, 2020. Introduction to IoT. Cambridge University Press. 2) S. Misra, C. Roy, and A. Mukherjee, 2020. Introduction to Industrial Internet of Things and Industry 4.0. CRC Press. 3) Research Papers Evaluation
+### Course Objectives:
+
+Hands-on Experience in the IoT Hardware design Suggested Textbook/references:
+
+- 1)
+
+- S. Misra,
+
+- A. Mukherjee, and
+
+- A. Roy,
+
+- 2020. Introduction to IoT. Cambridge University Press.
+
+- 2)
+
+- S. Misra,
+
+- C. Roy, and
+
+- A. Mukherjee,
+
+- 2020. Introduction to Industrial Internet of Things and Industry 4.0. CRC Press.
+
+- 3) Research Papers Evaluation
 
 ---
 
@@ -45,7 +69,29 @@ o Labs and Assignment s : 40% o In Sem-1 Exam : 20 % o In Sem-II Exam : 20 % o E
 
 ## Textbooks and References
 
-Textbook/references: 1) S. Misra, A. Mukherjee, and A. Roy, 2020. Introduction to IoT. Cambridge University Press. 2) S. Misra, C. Roy, and A. Mukherjee, 2020. Introduction to Industrial Internet of Things and Industry 4.0. CRC Press. 3) Research Papers Evaluation
+Textbook/references:
+
+- 1)
+
+- S. Misra,
+
+- A. Mukherjee, and
+
+- A. Roy,
+
+- 2020. Introduction to IoT. Cambridge University Press.
+
+- 2)
+
+- S. Misra,
+
+- C. Roy, and
+
+- A. Mukherjee,
+
+- 2020. Introduction to Industrial Internet of Things and Industry 4.0. CRC Press.
+
+- 3) Research Papers Evaluation
 
 ---
 

@@ -33,7 +33,9 @@ semester: "1st Semester (M.Des), Autumn 2025-26"
 
 ## Course Description
 
-This course will introduce students to the emergent field of Design History or Design Studies as a part of a broader attempt to instill in students a critical engagement with their discipline. It will map the evolution of interest in ‘historical’ questions related to Design both as practice and as discipline. But before that we will try to understand the many meanings of Design in use and ask which one of these helps us understand the true nature of our practice. Course Structure: The course will introduce students to the range of approaches to the study of the History of Design- particularly
+- This course will introduce students to the emergent field of Design History or Design Studies as a part of a broader attempt to instill in students a critical engagement with their discipline. It will map the evolution of interest in ‘historical’ questions related to Design both as practice and as discipline.
+
+- But before that we will try to understand the many meanings of Design in use and ask which one of these helps us understand the true nature of our practice. Course Structure: The course will introduce students to the range of approaches to the study of the History of Design- particularly.
 
 ---
 

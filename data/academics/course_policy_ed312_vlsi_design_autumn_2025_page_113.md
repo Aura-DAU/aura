@@ -53,7 +53,15 @@ In semester evaluation s â€“ 60% End semester evaluation â€“ 40% Progr
 
 ## Textbooks and References
 
-Textbooks 1. Wakerly J. F ~ Digital Design: Principles and Practices (4th Edition, Pearson, 2008) 2. Neil H.E. Westte & David Money Harris ~ CMOS VLSI Design: A Circuits and Systems Perspective (Addison Wesley, 4th Edition, 2011) Evaluation
+Textbooks
+
+- 1. Wakerly
+
+- J. F ~ Digital Design: Principles and Practices (4th Edition, Pearson,
+
+- 2008) 2. Neil H.E. Westte & David Money Harris ~ CMOS VLSI Design: A Circuits and Systems Perspective (Addison Wesley, 4th Edition,
+
+- 2011) Evaluation
 
 ---
 
