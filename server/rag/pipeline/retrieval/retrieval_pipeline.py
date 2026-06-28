@@ -595,12 +595,11 @@ class RetrievalPipeline:
         retrieval_intent = plan.get("retrieval_intent", "general")
         # Keep only category-level filter, drop entity-level filters
         # so the version history chunk from the right policy is reachable.
-        effective_metadata_filter = (
+        metadata_filter = (
             None
             if retrieval_intent == "policy_version" and metadata_filter
             else metadata_filter
         )
-        metadata_filter = effective_metadata_filter
 
         decomposed_queries = plan.get(
             "query_decomposition"
