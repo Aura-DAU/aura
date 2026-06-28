@@ -302,6 +302,22 @@ Retrieved Documents
 
 {context}
 """
+            # Fix AG3: if the context XML is empty (no chunks reached the
+            # generator — e.g. all chunks were filtered by token budget, or
+            # retrieval silently failed after the router passed the query),
+            # skip the LLM call entirely and return a helpful fallback message.
+            # The LLM with empty context often hallucinates or gives a generic
+            # "I could not find" response — we can do that cheaper and clearer.
+            import re as _re
+            context_text_only = _re.sub(r"<[^>]+>", "", context).strip()
+            if not context_text_only:
+                return (
+                    "I couldn\'t find specific information about that in the "
+                    "university\'s knowledge base. For accurate details, please "
+                    "contact DAU directly at admissions@dau.edu.in or visit "
+                    "https://www.daiict.ac.in."
+                )
+
             def _execute_generate(client):
                 return client.chat.completions.create(
                     model=self.model,
@@ -368,7 +384,7 @@ Retrieved Documents
                     bool(re.search(r"\bdau\b", answer_lower))
                     or "dhirubhai ambani" in answer_lower
                     or "[source:" in answer_lower
-                    or bool(re.search(r"\[\d+\]", answer_lower))  # Fix AG1: [1][2] citations
+                    or bool(re.search(r"\[\d+\]", answer_lower))
                     or "could not find that information" in answer_lower
                     or "not available" in answer_lower
                 )

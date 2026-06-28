@@ -69,11 +69,14 @@ class AuraChat:
                         subjects_str = ", ".join(subjects)
                         retrieval_query = f"{query} (Context: student data related to {subjects_str})"
 
-            # Fix Bug5: fee-related queries need "Fees Structure" injected
-            # into the retrieval query so BM25 keyword matching can find the
-            # right section even when the question is phrased generically
-            # (e.g. "what is the fee for BS-MS" → no heading keywords).
-            FEE_KEYWORDS = ["fee", "fees", "tuition", "charges", "cost", "payment", "caution deposit"]
+            # Fix Bug5 (revised): inject "Fees Structure Tuition" into the
+            # retrieval query for fee-intent questions so BM25 can keyword-match
+            # the section heading even when the question is generic.
+            # Fix AC2: narrowed keyword list — "cost", "charges", "payment" were
+            # too broad and caused false augmentation for unrelated queries like
+            # "cost of living near campus" or "hostel charges for AC room".
+            # Only trigger on words that unambiguously signal fee intent.
+            FEE_KEYWORDS = ["fee", "fees", "tuition", "caution deposit", "semester fee"]
             query_lower_check = retrieval_query.lower()
             if any(kw in query_lower_check for kw in FEE_KEYWORDS):
                 retrieval_query = retrieval_query + " Fees Structure Tuition"
@@ -107,7 +110,17 @@ class AuraChat:
 
             # Permit simple greetings to pass to RAG
             is_greeting = is_greeting_or_meta(query)
-            is_high_confidence = is_greeting or (top_cosine >= 0.45) or (top_cross >= 0.0)  # Fix Bug2: lowered from 0.60
+
+            # Fix AC4: three-tier routing logic to minimise false "not DAU" rejections:
+            # Tier 1 — greeting/meta: always pass (no retrieval confidence needed)
+            # Tier 2 — high confidence: cosine >= 0.45 (strong semantic match)
+            #          OR cross >= 0.0 (cross-encoder ≥50% relevance confidence)
+            # Tier 3 — weak but plausible: cosine >= 0.35 AND cross > -2.0
+            #          (sigmoid(-2.0)=0.119 → model gives ≥12% relevance).
+            #          Catches valid DAU queries where the top-retrieved chunk
+            #          is a partial match but the question is genuinely about DAU.
+            is_weak_match = (top_cosine >= 0.35 and top_cross > -2.0)
+            is_high_confidence = is_greeting or (top_cosine >= 0.45) or (top_cross >= 0.0) or is_weak_match
 
             router_decision = "RAG" if is_high_confidence else "FALLBACK"
             
@@ -122,6 +135,22 @@ class AuraChat:
                 print(f"retrieved_sources: {[c['id'] for c in retrieval_result.get('chunks', [])]}")
                 print(f"final_context: {retrieval_result.get('context', '')[:300]}...")
                 print("-------------------------------\n")
+
+            # Fix AC3: distinguish between two failure modes that previously
+            # both returned the "not DAU" message:
+            # (a) Retrieval returned 0 chunks → likely a backend/DB issue, not
+            #     an off-topic query. Return a service message so the user isn't
+            #     misled into thinking their valid DAU question was rejected.
+            # (b) Chunks retrieved but confidence too low → genuinely off-topic.
+            if not chunks:
+                return {
+                    "answer": (
+                        "I'm having trouble retrieving information right now. "
+                        "Please try again in a moment. If the issue persists, "
+                        "contact DAU directly."
+                    ),
+                    "sources": []
+                }
 
             if not is_high_confidence:
                 return {
