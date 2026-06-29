@@ -586,20 +586,25 @@ class RetrievalPipeline:
         )
 
         # Fix DEG1: dead-end guard for policy version/metadata queries.
-        # When the retrieval intent is "policy_version", these questions ask
-        # about version history, supersession, and effective dates — sections
-        # that only exist in documents if explicitly added. If the metadata
-        # filter would narrow to a single highly-specific document that is
-        # unlikely to have a version history chunk, skip the metadata filter
-        # entirely and do a broad search so we at least return the policy doc.
         retrieval_intent = plan.get("retrieval_intent", "general")
-        # Keep only category-level filter, drop entity-level filters
-        # so the version history chunk from the right policy is reachable.
-        metadata_filter = (
-            None
-            if retrieval_intent == "policy_version" and metadata_filter
-            else metadata_filter
-        )
+        if retrieval_intent == "policy_version" and metadata_filter:
+            metadata_filter = None
+
+        # Fix TY1: temporal year anchor — if the planner extracted a rule_year
+        # (e.g. "2024-25") from the query, inject it into the retrieval query
+        # so BM25 keyword matching prioritises documents whose title or heading
+        # contains that year string. This fixes Om report failures where
+        # "under the 2024-25 PhD rules" retrieves the 2019-20 document instead.
+        rule_year = plan.get("entities", {}).get("rule_year")
+        if rule_year:
+            # Augment the query string so BM25 scores year-matching chunks higher
+            query = query + " " + rule_year
+            # Also boost it as a required section heading in the plan hints
+            plan.setdefault("retrieval_hints", {})
+            existing_sections = plan["retrieval_hints"].get("required_sections", [])
+            if rule_year not in existing_sections:
+                existing_sections.append(rule_year)
+            plan["retrieval_hints"]["required_sections"] = existing_sections
 
         decomposed_queries = plan.get(
             "query_decomposition"

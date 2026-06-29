@@ -78,6 +78,17 @@ Use policy_version when the question asks about:
 - whether a newer version of a policy exists
 - what changed between versions of a document
 
+Use rules when the question asks about:
+- examination regulations, malpractice, or academic dishonesty
+- student code of conduct, disciplinary actions, or penalties
+- academic progression rules (credit limits, CPI thresholds, DX grades)
+- what is or is not allowed under a specific policy
+
+Use event_version when the question asks about:
+- comparing annual editions of the same event (e.g. 18th vs 19th Convocation)
+- which year's convocation/event data is current
+- changes in event format or statistics between editions
+
 Entity Types
 
 - faculty_name
@@ -739,6 +750,73 @@ Someone said alumni data at DAU is shared with placement companies by default �
     "required_sections": ["Alumni", "Data Privacy", "Sharing", "Third Party"]
   }
 }
+
+------------------------------------------------------------
+TEMPORAL YEAR ANCHOR — CRITICAL (Fix QP5)
+------------------------------------------------------------
+
+If the question explicitly names a specific academic year or rule version
+(e.g. "under the 2024-25 rules", "per the 2019-20 regulations", "in the
+2022-23 M.Tech ICT curriculum"), include a "rule_year" field in entities:
+
+Query:
+Under the 2024-25 PhD rules, what is the maximum credit limit per semester?
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "rules",
+  "entity_confidence": 0.92,
+  "multi_entity_query": false,
+  "entities": {
+    "program_name": "Ph.D.",
+    "rule_year": "2024-25"
+  },
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Credits", "Maximum", "Academic Requirements"]
+  }
+}
+
+Query:
+What was the minimum credit load for PhD students prior to the 2024-25 rules?
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "rules",
+  "entity_confidence": 0.90,
+  "multi_entity_query": false,
+  "entities": {
+    "program_name": "Ph.D.",
+    "rule_year": "2019-20"
+  },
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Credits", "Minimum", "Academic Requirements"]
+  }
+}
+
+Query:
+How many core courses are in the first semester of M.Tech EC (2022-23)?
+
+{
+  "category": "academics",
+  "intent": "overview",
+  "retrieval_intent": "program_curriculum",
+  "entity_confidence": 0.93,
+  "multi_entity_query": false,
+  "entities": {
+    "program_name": "M.Tech. (EC)",
+    "rule_year": "2022-23"
+  },
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Core Courses", "Semester I", "Curriculum"]
+  }
+}
+
+If no specific year is mentioned in the question, omit "rule_year" entirely.
 """
 
 class QueryPlanner:
@@ -960,6 +1038,44 @@ class QueryPlanner:
                 ])
 
                 preferred_section_type = "administration"
+
+            elif retrieval_intent == "rules":
+
+                # Fix QP2: queries about examination rules, malpractice,
+                # academic regulations, and code of conduct map to intent
+                # "rules" but previously triggered NO required_sections boost.
+                # This caused general course policy chunks to outrank actual
+                # regulation chunks. Boosting these headers fixes Vedant
+                # report failures (95.33% → target 99%+).
+                required_sections.extend([
+                    "Regulations",
+                    "Rules",
+                    "Malpractices",
+                    "Code of Conduct",
+                    "Guidelines",
+                    "Academic Policy",
+                    "Disciplinary",
+                    "Examination Policy"
+                ])
+
+                preferred_section_type = "rules"
+
+            elif retrieval_intent == "event_version":
+
+                # Fix QP3: annual event comparison queries (18th vs 19th vs
+                # 20th Convocation) need version/chronology section boost so
+                # old event schedules don't override current statistics.
+                # Addresses Events domain report failures.
+                required_sections.extend([
+                    "Version History",
+                    "Effective Date",
+                    "Convocation",
+                    "Annual",
+                    "Edition",
+                    "Schedule"
+                ])
+
+                preferred_section_type = "event"
 
             # Fix QP1: for "general" intent (placement, hostel, campus life,
             # ragging, transport etc.) no required_sections were ever set, so

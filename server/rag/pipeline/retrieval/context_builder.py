@@ -32,6 +32,7 @@ class ContextBuilder:
             4000 if retrieval_intent == "policy_version"
             else self.MAX_CONTEXT_TOKENS
         )
+
         for idx, chunk in enumerate(
             chunks,
             start=1
@@ -61,10 +62,20 @@ class ContextBuilder:
             # ("compare BTech ICT vs BS-MS fees") where two chunks about
             # different programs would otherwise look identical to the model.
             # Fix #9: internal reranked_score is still omitted from the XML.
+            # Fix CB4: rule_year extracted from title heuristically
+            # (e.g. "Academic Requirements PhD wef 2024-25" → "2024-25")
+            # and added as an XML attribute. This lets the LLM explicitly see
+            # which year's document it is reading and cite the year correctly.
+            import re as _re_cb
+            title_str = metadata.get("title", "")
+            year_match = _re_cb.search(r"(20\d{2}[-–]\d{2,4})", title_str)
+            doc_rule_year = year_match.group(1) if year_match else ""
+
             document = f"""
 <doc
 id="{idx}"
-title="{metadata.get('title', '')}"
+title="{title_str}"
+rule_year="{doc_rule_year}"
 program_name="{metadata.get('program_name', '')}"
 cluster="{metadata.get('cluster', '')}"
 category="{metadata.get('category', '')}"

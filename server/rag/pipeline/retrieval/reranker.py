@@ -197,8 +197,7 @@ class Reranker:
                 "details"
             ],
 
-            # Fix RR2: version-history section headings boosted for policy_version
-            # intent so that the reranker surfaces version history chunks first.
+            # Fix RR2: version-history section headings boosted for policy_version intent.
             "policy_version": [
                 "version history",
                 "supersedes",
@@ -206,6 +205,31 @@ class Reranker:
                 "revision",
                 "amendment",
                 "replaces"
+            ],
+
+            # Fix RR3: rules intent boosts regulation/conduct/malpractice headings.
+            # Addresses Vedant report where course policy chunks outranked actual
+            # academic regulation chunks for rules-intent queries.
+            "rules": [
+                "regulations",
+                "rules",
+                "malpractices",
+                "code of conduct",
+                "guidelines",
+                "academic policy",
+                "disciplinary",
+                "examination policy"
+            ],
+
+            # Fix RR4: event_version intent boosts edition/schedule headings.
+            # Addresses Events report where old convocation data overrode current.
+            "event_version": [
+                "convocation",
+                "annual",
+                "edition",
+                "schedule",
+                "graduates",
+                "ceremony"
             ]
         }
 
