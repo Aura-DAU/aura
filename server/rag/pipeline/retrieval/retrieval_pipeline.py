@@ -586,7 +586,7 @@ class RetrievalPipeline:
                 plan
             )
         )
-        metadata_filter = (
+        computed_metadata_filter = (
             None
             if retrieval_intent == "policy_version" and computed_metadata_filter
             else computed_metadata_filter
