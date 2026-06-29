@@ -593,10 +593,13 @@ class RetrievalPipeline:
         # unlikely to have a version history chunk, skip the metadata filter
         # entirely and do a broad search so we at least return the policy doc.
         retrieval_intent = plan.get("retrieval_intent", "general")
-        if retrieval_intent == "policy_version" and metadata_filter:
-            # Keep only category-level filter, drop entity-level filters
-            # so the version history chunk from the right policy is reachable.
-            metadata_filter = None
+        # Keep only category-level filter, drop entity-level filters
+        # so the version history chunk from the right policy is reachable.
+        metadata_filter = (
+            None
+            if retrieval_intent == "policy_version" and metadata_filter
+            else metadata_filter
+        )
 
         decomposed_queries = plan.get(
             "query_decomposition"
