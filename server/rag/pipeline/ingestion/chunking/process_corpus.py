@@ -503,5 +503,7 @@ def process_markdown_file(file_path):
         chunk["document_id"] = document_id
         chunk["chunk_index"] = idx
         chunk["total_chunks"] = total_chunks
+        # Generate deterministic chunk_id so that future upserts overwrite existing vectors
+        chunk["chunk_id"] = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"{document_id}_{idx}"))
 
     return chunks

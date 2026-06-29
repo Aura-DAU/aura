@@ -46,8 +46,8 @@ export function verifyPassword(password: string, stored: string): boolean {
 // ─── File paths ────────────────────────────────────────────────────────
 const __filename = fileURLToPath(import.meta.url)
 const __dirname  = path.dirname(__filename)
-// This file lives at aura/lib/db/user-db.ts → DB sits in the same folder
-const DB_DIR  = __dirname
+// For local hosting, store the DB outside the compiled .next build directory
+const DB_DIR  = path.join(process.cwd(), "db")
 const DB_PATH = path.join(DB_DIR, "users.json")
 
 // ─── Read / write ─────────────────────────────────────────────────────────────

@@ -271,8 +271,8 @@ def main():
         f"Uploading {len(vectors)} vectors in {len(batches)} batches of {BATCH_SIZE}..."
     )
 
-    # Use ThreadPoolExecutor for parallel Pinecone upserts
-    with ThreadPoolExecutor(max_workers=32) as executor:
+    # Use ThreadPoolExecutor for parallel Pinecone upserts (concurrency reduced to prevent timeouts)
+    with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(index.upsert, vectors=batch): i for i, batch in enumerate(batches)}
         for future in tqdm(as_completed(futures), total=len(futures), desc="Uploading"):
             try:
@@ -280,6 +280,8 @@ def main():
             except Exception as e:
                 batch_idx = futures[future]
                 print(f"\n[ERROR] Batch {batch_idx} failed to upload: {e}")
+                # Raise exception to fail the script if any batch fails
+                raise e
 
     print("\nUpload complete!")
 

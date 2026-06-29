@@ -1,5 +1,13 @@
 import { saveUser } from "@/lib/db/user-db"
 import { NextResponse } from "next/server"
+import { z } from "zod"
+
+const registerSchema = z.object({
+  name: z.string().trim().min(1, "Full name is required"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  role: z.enum(["student", "parent"])
+})
 
 export async function POST(req: Request) {
   let body: unknown
@@ -7,29 +15,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
 
-  const { name, email, password, role } = body as Record<string, string>
+  const parsed = registerSchema.safeParse(body)
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0]?.message || "Invalid input" }, { status: 400 })
+  }
 
-  if (!name || !email || !password || !role) {
-    return NextResponse.json({ error: "All fields are required" }, { status: 400 })
-  }
-  if (role !== "student" && role !== "parent") {
-    return NextResponse.json({ error: "Invalid role" }, { status: 400 })
-  }
+  const { name, email, password, role } = parsed.data
+
   if (role === "student" && !email.toLowerCase().endsWith("@dau.ac.in")) {
     return NextResponse.json(
       { error: "Student email must end with @dau.ac.in" },
       { status: 400 }
     )
   }
-  if (password.length < 8) {
-    return NextResponse.json(
-      { error: "Password must be at least 8 characters" },
-      { status: 400 }
-    )
-  }
 
   try {
-    await saveUser({ name, email, password, role: role as "student" | "parent" })
+    await saveUser({ name, email, password, role })
     return NextResponse.json({ name, email, role }, { status: 201 })
   } catch (err) {
     if (err instanceof Error && err.message === "USER_EXISTS") {
