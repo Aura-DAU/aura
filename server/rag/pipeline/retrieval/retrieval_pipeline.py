@@ -579,19 +579,6 @@ class RetrievalPipeline:
             elif isinstance(program_name, list):
                 query += " " + " ".join(program_name)
 
-        # Fix DEG1: dead-end guard for policy version/metadata queries.
-        retrieval_intent = plan.get("retrieval_intent", "general")
-        computed_metadata_filter = (
-            self._build_metadata_filter(
-                plan
-            )
-        )
-        computed_metadata_filter = (
-            None
-            if retrieval_intent == "policy_version" and computed_metadata_filter
-            else computed_metadata_filter
-        )
-
         # Fix TY1: temporal year anchor — if the planner extracted a rule_year
         # (e.g. "2024-25") from the query, inject it into the retrieval query
         # so BM25 keyword matching prioritises documents whose title or heading
