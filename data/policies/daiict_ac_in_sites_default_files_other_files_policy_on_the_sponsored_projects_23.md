@@ -11,6 +11,10 @@ pdf_name: "Policies/Policy on the Sponsored Research Projects"
 
 # Policies/Policy on the Sponsored Research Projects
 
+## Version History
+- **Ver 1.0** (Effective: 23 May 2024) — Currently in force. First version of the policy.
+
+
 ## Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.

@@ -9,6 +9,10 @@ team: "Team E"
 
 # Grievance Redressal Cell (Students and Employees)
 
+## Version History
+- **Ver 1.0** (Effective: 15 May 2024) — Annual GRC composition date; first version.
+
+
 ## Overview
 
 ## Main Content
