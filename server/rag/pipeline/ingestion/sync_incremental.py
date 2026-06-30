@@ -37,12 +37,25 @@ def main():
     with open(METADATA_FILE, "r", encoding="utf-8") as f:
         metadata = json.load(f)
 
-    existing_files = {chunk.get("source_file") for chunk in metadata if chunk.get("source_file")}
+    # Helper to convert paths to a canonical format relative to DATA_DIR
+    def get_canonical_path(path_str):
+        try:
+            return Path(path_str).resolve().relative_to(DATA_DIR.resolve()).as_posix().lower()
+        except ValueError:
+            return Path(path_str).as_posix().lower()
+
+    existing_files = {
+        get_canonical_path(chunk.get("path"))
+        for chunk in metadata if chunk.get("path")
+    }
     logger.info("Found %d chunks representing %d unique files in current index.", len(metadata), len(existing_files))
 
     logger.info("Scanning directory: %s", DATA_DIR)
     md_files = list(DATA_DIR.rglob("*.md"))
-    new_files = [f for f in md_files if f.name not in existing_files]
+    new_files = [
+        f for f in md_files 
+        if get_canonical_path(f) not in existing_files
+    ]
 
     if not new_files:
         logger.info("No new markdown files found. Database is up to date!")
