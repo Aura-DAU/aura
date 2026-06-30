@@ -6,14 +6,17 @@ import numpy as np
 from dotenv import load_dotenv
 from pinecone import Pinecone
 from tqdm import tqdm
+from pathlib import Path
 
 
 # ==================================================
 # CONFIG
 # ==================================================
 
-EMBEDDINGS_FILE = "../../vector_store/embeddings.npy"
-METADATA_FILE = "../../vector_store/metadata.json"
+EMBEDDINGS_DIR = Path(__file__).resolve().parent
+VECTOR_STORE_DIR = (EMBEDDINGS_DIR / "../../vector_store").resolve()
+EMBEDDINGS_FILE = VECTOR_STORE_DIR / "embeddings.npy"
+METADATA_FILE = VECTOR_STORE_DIR / "metadata.json"
 
 BATCH_SIZE = 100
 
