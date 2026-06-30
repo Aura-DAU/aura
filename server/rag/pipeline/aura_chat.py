@@ -69,51 +69,23 @@ class AuraChat:
                         subjects_str = ", ".join(subjects)
                         retrieval_query = f"{query} (Context: student data related to {subjects_str})"
 
-            # Fix Bug5 (revised): inject "Fees Structure Tuition" into the
-            # retrieval query for fee-intent questions so BM25 can keyword-match
-            # the section heading even when the question is generic.
-            # Fix AC2: narrowed keyword list — "cost", "charges", "payment" were
-            # too broad and caused false augmentation for unrelated queries like
-            # "cost of living near campus" or "hostel charges for AC room".
-            # Only trigger on words that unambiguously signal fee intent.
-            FEE_KEYWORDS = ["fee", "fees", "tuition", "caution deposit", "semester fee"]
-            query_lower_check = retrieval_query.lower()
-            if any(kw in query_lower_check for kw in FEE_KEYWORDS):
-                retrieval_query = retrieval_query + " Fees Structure Tuition"
-
-            # Fix T9L: Type9 (myth-busting) latency reduction.
-            # When the query contains claim-verification phrasing, prepend
-            # a planner directive so the generator gives verdict-first answers
-            # without running exhaustive chain-of-thought exploration first.
-            # This shaves 10-20s off the average Type9 response time.
-            MYTH_BUST_PATTERNS = [
-                "is this true", "is that true", "is this correct", "is that correct",
-                "is this accurate", "is that accurate", "is this what", "is that what",
-                "does the policy actually", "does the policy permit",
-                "does the policy say", "does the policy allow",
-                "a friend told me", "my friend said", "someone told me",
-                "my senior told me", "i heard that", "i was told",
-                "a classmate claimed", "someone said"
-            ]
-            query_lower_t9 = query.lower()
-            is_myth_bust = any(p in query_lower_t9 for p in MYTH_BUST_PATTERNS)
-            if is_myth_bust:
-                retrieval_query = retrieval_query + " policy rule regulation fact-check verify"
-
-            # Fix AQ1: laundry/dhobi queries lack the keyword "dhobi" that source
-            # docs use — augment so BM25 finds the furnishings/services chunk.
-            # Fixes Q121 (dhobi not mentioned when asked who collects laundry).
-            LAUNDRY_KEYWORDS = ["laundry", "wash clothes", "dhobi", "linen service"]
-            if any(kw in query_lower_t9 for kw in LAUNDRY_KEYWORDS):
-                retrieval_query = retrieval_query + " dhobi laundry hostel residence collect deliver"
-
-            # Fix AQ2: move-in / room setup queries need "mattress" in the
-            # retrieval query so the furnishings chunk ranks highly.
-            # Fixes Q130 (move-in steps didn't mention bring mattress).
-            MOVEIN_KEYWORDS = ["move in", "moving in", "moving into", "settle in",
-                               "first day hostel", "check in hostel", "what to bring hostel"]
-            if any(kw in query_lower_t9 for kw in MOVEIN_KEYWORDS):
-                retrieval_query = retrieval_query + " mattress pillow linen not provided bring own room"
+            # Fix HARDCODE-REMOVAL: previously this function used four separate
+            # static Python keyword lists (FEE_KEYWORDS, MYTH_BUST_PATTERNS,
+            # LAUNDRY_KEYWORDS, MOVEIN_KEYWORDS) here in aura_chat.py to
+            # pattern-match query intent and bolt extra words onto the
+            # retrieval query. This doesn't generalize: every new entity,
+            # policy, or vocabulary gap found in testing required editing
+            # this file and redeploying a new static list.
+            #
+            # All of that logic has been moved into retrieval_pipeline.py
+            # get_context() (Fix QP6/RP-MYTH), which runs AFTER the LLM-driven
+            # query_planner classifies retrieval_intent and is_claim_verification
+            # generically for every query — no static keyword lists, no
+            # per-topic hardcoding, and it automatically covers any future
+            # entity, policy, or vocabulary the planner LLM can recognize.
+            # The query_rewriter (Fix QR2) separately handles colloquial/vague
+            # vocabulary expansion (e.g. "dhobi", "mattress") using the same
+            # LLM-driven approach instead of static synonym lists.
 
             retrieval_result = (
                 self.pipeline.get_context(

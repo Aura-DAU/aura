@@ -28,6 +28,38 @@ Determine:
 6. whether multiple entities or topics are requested
 7. retrieval hints (when applicable)
 8. query decomposition (when applicable)
+9. is_claim_verification — true if the user is asking you to confirm or deny
+   a claim, rumor, or piece of information they heard from someone else, in
+   any phrasing or language register (e.g. "I was told X, is that true?",
+   "my friend said X", "is it true that X", "someone mentioned X to me").
+   This is a semantic judgment, not a fixed list of trigger phrases — apply
+   it whenever the query's structure is "verify this claim" regardless of
+   the exact wording used.
+10. requires_complete_list — true if answering correctly REQUIRES seeing the
+    full enumerated set of items (e.g. negation questions like "what is NOT
+    a member", "which of these is NOT included"; or "how many total X are
+    there"; or comparison-of-a-set questions). When true, the retrieval
+    pipeline will fetch more candidates than usual before reranking, since
+    a partial list is insufficient to answer a negation or completeness
+    question correctly — the model must see every item to correctly
+    identify what is missing or excluded.
+11. expanded_terms — a short list (max 5) of formal/document terminology
+    that DAU's official documents would likely use for the informal or
+    colloquial concepts in the query, if they differ from the query's own
+    wording. This is a general-purpose translation step, not a fixed
+    synonym dictionary: apply your own knowledge of how Indian university
+    administrative documents are phrased.
+    Examples of the KIND of gap to bridge (do not memorize these as a list —
+    reason about the actual query each time):
+    - colloquial "who washes clothes in hostel" → formal terms like
+      "laundry service", "dhobi", "linen"
+    - colloquial "what do I need to bring on day one" → formal terms like
+      "room furnishings", "mattress", "bedding", "items not provided"
+    - an ambiguous role name like "the head professor in charge of courses"
+      → formal designation terms like "Dean of Academic Programs",
+      "Board of Studies Chairman"
+    If the query already uses formal/document-like terminology, return an
+    empty array — do not pad with redundant terms.
 
 ------------------------------------------------------------
 VALID VALUES
@@ -114,7 +146,10 @@ Return exactly one JSON object using this structure.
   "multi_entity_query": false,
   "entities": {},
   "query_decomposition": null,
-  "retrieval_hints": {}
+  "retrieval_hints": {},
+  "is_claim_verification": false,
+  "requires_complete_list": false,
+  "expanded_terms": []
 }
 
 Every field in the output schema is mandatory.
@@ -123,7 +158,8 @@ If a field has no applicable value:
 
 - use an empty object {} for entities and retrieval_hints
 - use null for query_decomposition
-- use false for booleans
+- use false for booleans (including is_claim_verification)
+- use an empty array [] for expanded_terms when the query already uses formal terms
 - use "general" for category, intent, and retrieval_intent when appropriate
 - use 0.0 for entity_confidence when no entities are extracted
 
@@ -732,7 +768,8 @@ A friend told me attendance is tracked overall not per course — is that true?
   "query_decomposition": null,
   "retrieval_hints": {
     "required_sections": ["Attendance", "DX", "Academic Policy"]
-  }
+  },
+  "is_claim_verification": true
 }
 
 Query:
@@ -748,7 +785,92 @@ Someone said alumni data at DAU is shared with placement companies by default �
   "query_decomposition": null,
   "retrieval_hints": {
     "required_sections": ["Alumni", "Data Privacy", "Sharing", "Third Party"]
-  }
+  },
+  "is_claim_verification": true
+}
+
+Query:
+I heard that the Dean of Faculty and the Dean of Academic Programs are the same person at DAU — is that right?
+
+{
+  "category": "faculty",
+  "intent": "rules",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.85,
+  "multi_entity_query": true,
+  "entities": {
+    "department_name": ["Dean of Faculty Affairs", "Dean of Academic Programs"]
+  },
+  "query_decomposition": [
+    "Dean of Faculty Affairs name role DAU",
+    "Dean of Academic Programs name role DAU Board of Studies Chairman"
+  ],
+  "retrieval_hints": {
+    "required_sections": ["Dean of Faculty", "Dean of Academic Programs", "Board of Studies"]
+  },
+  "is_claim_verification": true
+}
+
+Query:
+I was told there are no non-teaching staff at DA-IICT with engineering degrees — is that correct?
+
+{
+  "category": "faculty",
+  "intent": "rules",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.80,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Non-Teaching Staff", "Engineering", "Qualifications"]
+  },
+  "is_claim_verification": true,
+  "requires_complete_list": true
+}
+
+------------------------------------------------------------
+NEGATION / ENUMERATION QUERIES — requires_complete_list example
+------------------------------------------------------------
+
+Query:
+Which of the following is NOT a member of the Board of Studies at DAU: Dean of Research, Dean of Faculty, Director General, Dean of Academic Programs?
+
+{
+  "category": "faculty",
+  "intent": "rules",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.88,
+  "multi_entity_query": false,
+  "entities": {
+    "department_name": "Board of Studies"
+  },
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Board of Studies", "Members", "Composition", "Chairman"]
+  },
+  "is_claim_verification": false,
+  "requires_complete_list": true
+}
+
+Query:
+The Board of Studies at DAU does NOT serve which function: curriculum oversight, faculty appointment decisions, academic program governance, or program committee membership?
+
+{
+  "category": "faculty",
+  "intent": "rules",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.85,
+  "multi_entity_query": false,
+  "entities": {
+    "department_name": "Board of Studies"
+  },
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Board of Studies", "Functions", "Responsibilities"]
+  },
+  "is_claim_verification": false,
+  "requires_complete_list": true
 }
 
 ------------------------------------------------------------
@@ -892,6 +1014,27 @@ class QueryPlanner:
             plan.setdefault(
                 "query_decomposition",
                 None
+            )
+            # Fix QP6: defensive setdefault in case the LLM omits this field
+            # despite the schema instruction — keeps retrieval_pipeline.py's
+            # plan.get("is_claim_verification") safe without needing a
+            # try/except or hardcoded check at the call site.
+            plan.setdefault(
+                "is_claim_verification",
+                False
+            )
+            # Fix QP7: defensive setdefault for the generic vocabulary
+            # expansion field that replaces all topic-specific hardcoded
+            # keyword lists previously in aura_chat.py.
+            plan.setdefault(
+                "expanded_terms",
+                []
+            )
+            # Fix QP8: defensive setdefault for the negation/completeness
+            # signal used to widen retrieval top_k generically.
+            plan.setdefault(
+                "requires_complete_list",
+                False
             )
 
             if plan.get("multi_entity_query"):
@@ -1171,5 +1314,15 @@ class QueryPlanner:
                 "query_decomposition": None,
                 "entities": {},
                 "retrieval_hints": {},
-                "top_k": 5
+                "top_k": 5,
+                # Fix QP6: include is_claim_verification in the fallback dict
+                # so retrieval_pipeline.py's plan.get("is_claim_verification")
+                # never raises on a planner exception — defaults to False,
+                # meaning myth-bust augmentation is simply skipped rather than
+                # crashing the request.
+                "is_claim_verification": False,
+                # Fix QP7: same defensive default for expanded_terms.
+                "expanded_terms": [],
+                # Fix QP8: same defensive default for requires_complete_list.
+                "requires_complete_list": False
             }

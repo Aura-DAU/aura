@@ -498,6 +498,58 @@ class RetrievalPipeline:
             query
         )
 
+        # Fix RP-MYTH: replaces the old static MYTH_BUST_PATTERNS keyword list
+        # that lived in aura_chat.py. The query_planner LLM already classifies
+        # every query's intent and entities — it is the single correct place
+        # to also flag claim-verification framing ("is this true", "I was told
+        # that...", etc.), since that classification generalizes to any phrasing
+        # in any language/dialect mix the planner sees, unlike a static list of
+        # English phrases. If the plan signals claim verification, append a
+        # retrieval-side directive so the matched chunk's policy/rule language
+        # ranks higher — this also lets the answer generator give a direct
+        # verdict instead of exploring multiple interpretations (Type9 latency).
+        if plan.get("is_claim_verification"):
+            query = query + " policy rule regulation verify"
+
+        # Fix RP-FEE: replaces the old static FEE_KEYWORDS list. The retrieval
+        # intent "admissions_information" combined with required_sections
+        # already containing "Fee"/"Fees Structure"/"Tuition" (set generically
+        # by the planner's few-shot examples, not by string-matching here) is
+        # sufficient signal — no separate keyword list needed. We simply
+        # surface the planner's own required_sections into the BM25 query
+        # so its classification has retrieval-side effect.
+        plan_required_sections = plan.get("retrieval_hints", {}).get("required_sections", [])
+        if plan_required_sections:
+            # Append a small number of the most specific (longest) section
+            # names so BM25 keyword matching benefits from exactly what the
+            # planner identified as relevant — generalizes to ANY section
+            # heading the planner names (Fee, Dean of Academic Programs,
+            # Board of Studies, etc.) without a static list of any kind.
+            top_sections = sorted(plan_required_sections, key=len, reverse=True)[:3]
+            query = query + " " + " ".join(top_sections)
+
+        # Fix RP-VOCAB: replaces the old static LAUNDRY_KEYWORDS / MOVEIN_KEYWORDS
+        # lists. The planner's expanded_terms field (Fix QP7) does the same
+        # informal-to-formal vocabulary translation generically, per-query,
+        # using the LLM's own knowledge of DAU document phrasing — instead of
+        # a fixed Python list that only covers terms already seen in testing.
+        # This is the single mechanism that handles ANY future vocabulary gap
+        # (dhobi, mattress, role-name confusion, or anything not yet tested)
+        # without requiring a code change.
+        expanded_terms = plan.get("expanded_terms", [])
+        if expanded_terms:
+            query = query + " " + " ".join(expanded_terms[:5])
+
+        # Fix RP-COMPLETE: negation ("What is NOT X") and enumeration
+        # ("how many total X") questions need the FULL set of relevant
+        # chunks, not just the top-5 semantically closest ones — otherwise
+        # the LLM only sees a partial list and cannot correctly identify
+        # what is missing or excluded. Widen top_k generically using the
+        # planner's requires_complete_list signal rather than hardcoding
+        # per-entity-type retrieval counts.
+        if plan.get("requires_complete_list"):
+            plan["top_k"] = max(plan.get("top_k", 5), 12)
+
         # Correct entities inside the plan (e.g. fuzzy match faculty and program names)
         entities = plan.get("entities", {})
         
@@ -578,6 +630,17 @@ class RetrievalPipeline:
                 query += " " + program_name
             elif isinstance(program_name, list):
                 query += " " + " ".join(program_name)
+
+        metadata_filter = (
+            self._build_metadata_filter(
+                plan
+            )
+        )
+
+        # Fix DEG1: dead-end guard for policy version/metadata queries.
+        retrieval_intent = plan.get("retrieval_intent", "general")
+        if retrieval_intent == "policy_version" and metadata_filter:
+            metadata_filter = None
 
         # Fix TY1: temporal year anchor — if the planner extracted a rule_year
         # (e.g. "2024-25") from the query, inject it into the retrieval query

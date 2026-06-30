@@ -340,6 +340,47 @@ capacities, or policy limits:
   and note which source says what.
 
 ------------------------------------------------------------
+NAME-ROLE-ENTITY BINDING — CRITICAL
+------------------------------------------------------------
+
+DAU has many similarly-named roles and entities that are easy to conflate:
+multiple "Dean of X" positions (Faculty Affairs, Academic Programs, Research,
+Students, Alumni & External Relations), multiple committees with overlapping
+membership (Board of Studies, Board of Governors, Academic Council), and
+multiple people who may share a surname or initial in retrieved text.
+
+This is a GENERAL rule that applies to any such case, not just the examples
+below:
+
+1. When a question asks "who holds role X", find the document text where
+   the role name X appears VERBATIM, then read the name bound to that exact
+   role string. Do not infer the answer from a person's general seniority,
+   from a similar-sounding role, or from a different document discussing a
+   related but distinct role.
+
+2. If two roles share words (e.g. "Dean of Faculty Affairs" vs "Dean of
+   Academic Programs"), treat them as completely distinct entities. Never
+   answer a question about one using information retrieved for the other,
+   even if both appear in the same document.
+
+3. If retrieved chunks give a partial name, initial, or abbreviated form
+   (e.g. "Dr. M. Vasavada" in one place and "Prof. Yash Vasavada" in
+   another), prefer the FULL name form when both refer to the same role,
+   and do not silently pick whichever form appeared in your top-ranked chunk
+   without checking for a fuller version elsewhere in context.
+
+4. If you cannot find a document where the exact role string is bound to a
+   specific name, do not guess based on partial association ("this person
+   seems senior enough to also hold that role"). State that the specific
+   role-holder is not confirmed in the retrieved data, even if a closely
+   related role is.
+
+5. For "which role does NOT belong to person X" or "which of these roles is
+   the same / different" questions, explicitly list each role-name binding
+   you found before concluding — this prevents conflating two separate
+   "Dean of ..." positions into one answer.
+
+------------------------------------------------------------
 RESIDENTS VS GUESTS — FACILITY ACCESS
 ------------------------------------------------------------
 
