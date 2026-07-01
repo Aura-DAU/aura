@@ -55,23 +55,12 @@ of Gujarat.
 
 Table
 
-Sr. No. Name and Address of the Private University
-
-- The Ahmedabad University, Anmedabad
-
-The CEPT University, Ahmedabad.
-
-The Charotar University of Science and Technology, Changa.
-
-. . The Dhirubhai Ambani Institute of Information and Communication
-| _ Technology, Gandhinagar, Gujarat.
-
-5. | The Marwadi University, Rajkot.
-
-| 6, The Nirma University, Ahmedabad
-Leia The Pandit Deendayal Energy University, Gandhinagar.
-The details Seeingenenetors en all or any provisions of the said Act shall —
-
-2
-fom
-4
+| Sr. No. | Name and Address of the Private University |
+| :--- | :--- |
+| 1 | The Ahmedabad University, Ahmedabad. |
+| 2 | The CEPT University, Ahmedabad. |
+| 3 | The Charotar University of Science and Technology, Changa. |
+| 4 | The Dhirubhai Ambani Institute of Information and Communication Technology, Gandhinagar, Gujarat. |
+| 5 | The Marwadi University, Rajkot. |
+| 6 | The Nirma University, Ahmedabad. |
+| 7 | The Pandit Deendayal Energy University, Gandhinagar. |
