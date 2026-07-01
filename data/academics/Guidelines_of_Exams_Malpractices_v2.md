@@ -1,6 +1,6 @@
 ---
 title: "Guidelines Of Exams Malpractices"
-url: "https://daiict.ac.in/"
+url: "https://intranet.daiict.ac.in/academics/Guidelines of Exams Malpractices.pdf"
 category: "Academics"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-06-10"
