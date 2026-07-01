@@ -95,13 +95,17 @@ export function useAuraChat() {
   const [thinkingStep, setThinkingStep] = useState<string | undefined>(undefined)
   const [isRecording, setIsRecording] = useState(false)
   const [isTranscribing, setIsTranscribing] = useState(false)
+  const [recordingVolume, setRecordingVolume] = useState(0)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [activeCitations, setActiveCitations] = useState<Citation[]>([])
   const [studentProfile, setStudentProfile] = useState<StudentProfile>(DEFAULT_PROFILE)
   const [userSession, setUserSession] = useState<UserSession | null>(null)
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
+  const streamRef = useRef<MediaStream | null>(null)
   const audioChunksRef = useRef<Blob[]>([])
+  const audioContextRef = useRef<AudioContext | null>(null)
+  const animationFrameRef = useRef<number | null>(null)
   const hydrated = useRef(false)
 
   useEffect(() => {
@@ -133,6 +137,26 @@ export function useAuraChat() {
       /* quota or unavailable */
     }
   }, [threads])
+
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((t) => t.stop())
+        streamRef.current = null
+      }
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current)
+        animationFrameRef.current = null
+      }
+      if (audioContextRef.current) {
+        void audioContextRef.current.close().catch(() => {})
+        audioContextRef.current = null
+      }
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+        mediaRecorderRef.current.stop()
+      }
+    }
+  }, [])
 
   const persistMessages = useCallback(
     (threadId: string, next: ChatMessage[], title?: string) => {
@@ -310,8 +334,23 @@ export function useAuraChat() {
     async (blob: Blob) => {
       setIsTranscribing(true)
       try {
+        const mimeType = blob.type
+        let extension = "webm"
+        if (mimeType) {
+          const match = mimeType.match(/audio\/([^;]+)/)
+          if (match && match[1]) {
+            extension = match[1].toLowerCase()
+          }
+        }
+        if (extension === "mpeg") extension = "mp3"
+        if (extension.includes("aac")) extension = "aac"
+        if (extension.includes("wav")) extension = "wav"
+        if (extension.includes("mp4")) extension = "mp4"
+        if (extension.includes("webm")) extension = "webm"
+        if (extension.includes("ogg")) extension = "ogg"
+
         const form = new FormData()
-        form.append("audio", blob, "recording.webm")
+        form.append("audio", blob, `recording.${extension}`)
         const res = await fetch("/api/speech", { method: "POST", body: form })
         const data = (await res.json()) as { text?: string; error?: string }
         const transcript = data.text
@@ -336,15 +375,106 @@ export function useAuraChat() {
       return
     }
     try {
+      const mimeTypes = [
+        "audio/webm",
+        "audio/mp4",
+        "audio/aac",
+        "audio/ogg",
+        "audio/wav",
+      ]
+      let detectedMimeType = ""
+      if (typeof MediaRecorder !== "undefined") {
+        for (const type of mimeTypes) {
+          if (MediaRecorder.isTypeSupported(type)) {
+            detectedMimeType = type
+            break
+          }
+        }
+      }
+
+      if (!detectedMimeType) {
+        setErrorMessage("Audio recording is not supported in this browser.")
+        return
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const recorder = new MediaRecorder(stream)
+      streamRef.current = stream
+      const recorder = new MediaRecorder(stream, { mimeType: detectedMimeType })
       audioChunksRef.current = []
       recorder.ondataavailable = (e) => {
         if (e.data.size > 0) audioChunksRef.current.push(e.data)
       }
+
+      // Initialize AudioContext for Silence Detection & Volume Visualizer
+      const AudioCtxClass = typeof window !== "undefined" ? (window.AudioContext || (window as any).webkitAudioContext) : null
+      if (AudioCtxClass) {
+        try {
+          const audioCtx = new AudioCtxClass()
+          const source = audioCtx.createMediaStreamSource(stream)
+          const analyser = audioCtx.createAnalyser()
+          analyser.fftSize = 256
+          source.connect(analyser)
+          audioContextRef.current = audioCtx
+
+          const bufferLength = analyser.frequencyBinCount
+          const dataArray = new Uint8Array(bufferLength)
+
+          let silentSince: number | null = null
+          const SILENCE_THRESHOLD_DB = 10 // DB threshold for detecting silence
+          const SILENCE_DURATION_MS = 1800 // Auto-stop after 1.8 seconds of silence
+
+          const checkSilence = () => {
+            if (!analyser) return
+            analyser.getByteFrequencyData(dataArray)
+
+            let sum = 0
+            for (let i = 0; i < bufferLength; i++) {
+              sum += dataArray[i]
+            }
+            const avgVol = sum / bufferLength
+
+            // Map average volume to a 0-1 scale for UI Visualizer
+            const normalizedVol = Math.min(avgVol / 120, 1)
+            setRecordingVolume(normalizedVol)
+
+            if (avgVol < SILENCE_THRESHOLD_DB) {
+              if (silentSince === null) {
+                silentSince = Date.now()
+              } else if (Date.now() - silentSince > SILENCE_DURATION_MS) {
+                // Silence threshold exceeded, auto-stop recording
+                if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+                  mediaRecorderRef.current.stop()
+                  setIsRecording(false)
+                  return
+                }
+              }
+            } else {
+              silentSince = null
+            }
+
+            animationFrameRef.current = requestAnimationFrame(checkSilence)
+          }
+
+          animationFrameRef.current = requestAnimationFrame(checkSilence)
+        } catch {
+          /* Fallback gracefully if AudioContext initialization fails */
+        }
+      }
+
       recorder.onstop = () => {
         stream.getTracks().forEach((t) => t.stop())
-        const blob = new Blob(audioChunksRef.current, { type: "audio/webm" })
+        streamRef.current = null
+        if (animationFrameRef.current !== null) {
+          cancelAnimationFrame(animationFrameRef.current)
+          animationFrameRef.current = null
+        }
+        if (audioContextRef.current) {
+          void audioContextRef.current.close().catch(() => {})
+          audioContextRef.current = null
+        }
+        setRecordingVolume(0)
+
+        const blob = new Blob(audioChunksRef.current, { type: detectedMimeType })
         void transcribeAudio(blob)
       }
       mediaRecorderRef.current = recorder
@@ -368,6 +498,7 @@ export function useAuraChat() {
     thinkingStep,
     isRecording,
     isTranscribing,
+    recordingVolume,
     errorMessage,
     setErrorMessage,
     activeCitations,
