@@ -38,10 +38,8 @@ def main():
     with open(METADATA_FILE, "r", encoding="utf-8") as f:
         metadata = json.load(f)
 
-    CHUNKING_DIR = INGESTION_DIR / "chunking"
 
     # Helper to convert paths to a canonical format relative to DATA_DIR
-        # Helper to convert paths to a canonical format relative to DATA_DIR
     def get_canonical_path(path_str):
         path_str = Path(path_str).as_posix().lower()
         if "data/" in path_str:
