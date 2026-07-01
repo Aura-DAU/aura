@@ -11,7 +11,7 @@ team: "Team E"
 
 ## Overview
 
-| Nature of Grievances | Level-I<br> Grievance Handling Authority | Level-II<br> Grievance Handling Authority | Level-III<br> Grievance Handling Authority | | :-: | --- | --- | --- | | Matters related to Academics, Teaching-Learning and Evaluation | Program Convenor | Dean-Academic Programs | GRHC |
+This document lists the Grievance Redressal Authority levels for students at Dhirubhai Ambani University (DAU), categorized by the nature of the grievances.
 
 ## Main Content
 

@@ -7,14 +7,12 @@ scraped_date: "2026-05-31"
 team: "Team D"
 ---
 
-# Overview
+# LinkedIn
 
-External link for LinkedIn.
+## Overview
 
-# Main Content
+This page links to the official DA-IICT LinkedIn account.
 
-This is an external form/social media page link. Please visit the original URL to access the content.
-
-# Related Links
+## Official Link
 
 - [LinkedIn](https://www.linkedin.com/school/dhirubhaiambaniuniversity/?viewAsMember=true)

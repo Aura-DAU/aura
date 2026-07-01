@@ -31,27 +31,27 @@ of some possible indiscipline activities and possible action towards offenders.
  
 1.  Students found involved in any of following activities will be immediately expelled from the 
 institute: 
- Ragging. 
- Possession or consumption of any form of intoxicant (like narcotic drugs, alcohol, etc.). 
- Sexual harassment. 
- Criminal activity. 
- Use or possession of firearms and weapons. 
- Gambling or betting for money or other items of value. 
+- Ragging. 
+- Possession or consumption of any form of intoxicant (like narcotic drugs, alcohol, etc.). 
+- Sexual harassment. 
+- Criminal activity. 
+- Use or possession of firearms and weapons. 
+- Gambling or betting for money or other items of value. 
  
 2.   Following is the indicative list of other acts of indiscipline: 
- Smoking. 
- Improper behavior with any student, faculty member or staff. 
- Violation of Institute / Halls of Residence (HoR) rules. 
- Damage, defacement, or destruction of any private or Institute property. 
- Theft.  
- Violation of any traffic rule within the campus. 
- Causing disturbance or discomfort to co-residents. 
- Visiting HoR of opposite gender. 
- Violation of the computing practices of DA-IICT, including but not limited to, the misuse of DA-
+- Smoking. 
+- Improper behavior with any student, faculty member or staff. 
+- Violation of Institute / Halls of Residence (HoR) rules. 
+- Damage, defacement, or destruction of any private or Institute property. 
+- Theft.  
+- Violation of any traffic rule within the campus. 
+- Causing disturbance or discomfort to co-residents. 
+- Visiting HoR of opposite gender. 
+- Violation of the computing practices of DA-IICT, including but not limited to, the misuse of DA-
 IICT computers or computer network (like bypassing firewall / security system of the internet in an 
 unauthorized manner, sending offensive email, etc.). 
- Disruption or obstruction of teaching, research, administration, or other DA-IICT activities. 
- Failure to appear and/or report to DAC in conjunction with any disciplinary matter, at the time 
+- Disruption or obstruction of teaching, research, administration, or other DA-IICT activities. 
+- Failure to appear and/or report to DAC in conjunction with any disciplinary matter, at the time 
 specified. 
 In these acts of indiscipline, based on the severity of offence, the offender will be liable to the 
 disciplinary action, which will include one or more punishments from the ones stated later in this 

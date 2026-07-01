@@ -17,16 +17,9 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 
 ## Main Content
 
-asa et NAAC Evaluative Report 2015
+NAAC Evaluative Report 2015
 
--, DAIICT
-
-AOojouude, UONESIUNWWO) PUe UONEWJOJU] JO dIN}}SU| uequuy lEYQnNIIUd DIIVd
-
-», “
-
-ie ae lan thé
-wt Vins oY a Ae eh “ty!
+Dhirubhai Ambani Institute of Information and Communication Technology, Gandhinagar
 
 OMY ca ierg
 Yep Wy
@@ -43,13 +36,13 @@ Near Indroda Circle, Gandhinagar 382 007, Gujarat (India) Near Indroda Circle, G
 Telelephone: (+91) 079-3052-0000 Fax: (+91) 079-3052-0010 A Telelephone: (+91) 079-3052-0000 Fax: (+91) 079-3052-0010
 www.daiict.ac.in www.daiict.ac.in
 NAAC Evaluative Report - 2015 
- 
- 
-                                      1 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      1 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Evaluative Report 
 1. Name of the Programmes 
 The institute offers the following programmes: 
@@ -76,13 +69,13 @@ State Act of Gujarat in 2003. It was granted recognition under section 2(f) of U
 and also the membership of Association of Indian Universities (AIU).
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      2 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      2 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 29 October, 2001:  DA-IICT registered as a Society and Trust under the Societies  
 Registration Act, 1860 and the Bombay Public Trust Act, 1950, respectively  
 (Society Registration No. GUJ/861/GANDHINAGAR) 06 March 2003:  Government 
@@ -113,13 +106,13 @@ and Rural Development –M.Sc (ICT in ARD)
  Doctor of Philosophy – PhD
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      3 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      3 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 5. Interdisciplinary programmes and departments involved  
 All our programmes are interdisciplinary nature, as ICT itself captures 
 interdisciplinary curricula of Information Technology, Communications Technology 
@@ -150,13 +143,13 @@ graduation credit requirements. In every course of the programmes, the instructo
 announces to students about the grading policy and the distribution of weightage in
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      4 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      4 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 different components in the courses that the instructor is going to follow to assess the 
 students’ performance in the course. The performance of the students is assessed on a 
 continuous evaluation mechanism by assessing their performance in in-semester 
@@ -188,13 +181,13 @@ students and faculty participation to one discipline, that is, Information and
 Communication Technology.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      5 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      5 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 10. Number of teaching posts sanctioned, filled and actual (Professors/ Associate 
 Professors/Asst. Professors/others) 
 All teaching staff are counted as faculty. There is no department division among the 
@@ -234,11 +227,11 @@ TOTAL
 180
 
 NAAC Evaluative Report - 2015 
-                                      6 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+                                      6 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 11. Faculty profile with name, qualification, designation, area of specialization, 
 experience and research under guidance  
 Sr.No. 
@@ -386,11 +379,11 @@ system.
 -
 
 NAAC Evaluative Report - 2015 
-                                      7 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+                                      7 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Name 
 Qualification 
@@ -543,11 +536,11 @@ architecture and
 16
 
 NAAC Evaluative Report - 2015 
-                                      8 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+                                      8 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Name 
 Qualification 
@@ -701,11 +694,11 @@ Associate
 Communication, 
 11 
 NAAC Evaluative Report - 2015 
-                                      9 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+                                      9 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Name 
 Qualification 
@@ -847,11 +840,11 @@ Literature and
 Philosophy, 
 10 
 NAAC Evaluative Report - 2015 
-                                      10 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+                                      10 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Name 
 Qualification 
@@ -1013,11 +1006,11 @@ Distributed
 10
 
 NAAC Evaluative Report - 2015 
-                                      11 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+                                      11 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Name 
 Qualification 
@@ -1174,11 +1167,11 @@ Food & Cultural
 Studies, 
 5 
 NAAC Evaluative Report - 2015 
-                                      12 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+                                      12 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Name 
 Qualification 
@@ -1311,11 +1304,11 @@ Video and Photography
 5
 
 NAAC Evaluative Report - 2015 
-                                      13 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+                                      13 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Diploma in 
 Professional 
 Photography 
@@ -1404,14 +1397,14 @@ Experience Design
 Inforgraphics,  
 6
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      14 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      14 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 PhD Teaching Assistants 
 Sr No 
 Name 
@@ -1559,14 +1552,14 @@ Calculus and Complex
 Variables 
 July-13
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      15 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      15 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 M.Tech Teaching Assistants 
 Sr.No. 
 Name 
@@ -1701,14 +1694,14 @@ Computer Networks
 Jitendra Gupta 
 Machine Intelligence
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      16 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      16 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Name 
 Specialization 
@@ -1848,14 +1841,14 @@ Computer Networks
 Saurabh  Tyagi 
 Computer Networks
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      17 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      17 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Name 
 Specialization 
@@ -1943,14 +1936,14 @@ Technical
 TOTAL 
 124
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      18 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      18 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 http://irlab.daiict.ac.in/ 
  
 https://sites.google.com/site/speechlabdaiict/ 
@@ -2006,14 +1999,14 @@ Body Area Sensor Networks and
 SERC-DST 
 12.60
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      19 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      19 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Heterogeneous Access Networks 
 2014 
 Securing Biometric data using 
@@ -2127,14 +2120,14 @@ SAC-RESPOND
 Deepak 
 11,65,000/-
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      20 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      20 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Resonators Antenna 
 Ghodgaonkar/ 
 Sanjeev Gupta 
@@ -2232,14 +2225,14 @@ IIIT-Hyderabad
 DeitY 
 50.6
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      21 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      21 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 2011 
 Development of Cross-Lingual 
 Information Access (CLIA) 
@@ -2313,14 +2306,14 @@ The following research laboratories have been recognized by national funding
 agencies such as DeitY. 
  Information Retrieval Lab (http://irlab.daiict.ac.in/)
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      22 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      22 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
  Speech Processing Lab (https://sites.google.com/site/speechlabdaiict/). 
 21. Special research laboratories sponsored by / created by industry or corporate 
 bodies  
@@ -2399,14 +2392,14 @@ Database (Scopus)
 h-index 
 14
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      23 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      23 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 23. Details of patents and income generated 
 Patents Awarded 
  
@@ -2497,14 +2490,14 @@ Alka Parikh
 - 
 41,580/-
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      24 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      24 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
  
 25. Faculty selected nationally internationally to visit other laboratories/institutions 
 /industries in India and abroad  
@@ -2616,14 +2609,14 @@ at Kansas City
 USA 
 May – Jun, 2012
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      25 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      25 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 26. Faculty serving in  
 a) National committees  b) International committees  
   
@@ -2694,14 +2687,14 @@ Institute, Kolkata
 2. Member, Governing Council, Satyajit Ray Film &  
      Television Institute (SRFTI) Kolkata; ongoing.
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      26 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      26 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Faculty Name 
 Position 
@@ -2743,7 +2736,7 @@ University, Mehsana, Gujarat.
 2. Member, Board of Studies, Nirma University, Ahmedabad 
 3. Member, Board of Studies, UV Patel College of Engineering, 
 Ganpat University, Mehsana, Gujarat. 
-4.  Senior Member, Institute of Electrical and Electronics 
+4.  Senior Member, Institute of Electrical and Electronics 
 Engineers (IEEE)  
 8 
 B. N. Hiremath 
@@ -2779,14 +2772,14 @@ Research and Publication Centre
 Culture, Government of India. 
 4. Member, Committee on Indigenous Languages and Special
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      27 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      27 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Faculty Name 
 Position 
@@ -2862,14 +2855,14 @@ August 2013 to 31 July 2014
 4. Chair, IEEE Gujarat Section Chapter and Joint Chapter of 
 Industrial Applications Society, Industrial Electronics and
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      28 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      28 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Faculty Name 
 Position 
@@ -2882,16 +2875,16 @@ Automation Project
 Rutu Parekh 
 1. Session Chair, Signal Processing and VLSI, INDICON 2013, 
 Impact of Engineering on Global Sustainability, 13-15 
-December, IIT Bombay, Mumbai. 
+December, IIT Bombay, Mumbai. 
 2.  As a member of editorial board for Journal of Electrical and 
 Electronic Engineering, Science Publishing Group journal, 
 from Sept. 2013. 
 http://www.sciencepublishinggroup.com/journal/editorialboard
-.aspx?journalid=239 
+.aspx?journalid=239 
  3.   Member of   International Scientific Committee for 2014 
 Internation conference on Artificial Intelligence and 
 Communication Engineering (AICE2014) held on  May 20-
-21, 2014 in Macao 
+21, 2014 in Macao 
 4.     Member of International Scientific Committee, International 
 Conference on Communication Technology and Application 
 (CTA2014) held on August 19-20, 2014, in Beijing, China
@@ -2933,14 +2926,14 @@ Technology, Govt. of India, New Dlehi
 Chapter of GEDC of Indian Society for Technical Education, 
 (ISTE), Bengaluru and Sivakasi, Tamil Nadu.
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      29 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      29 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Faculty Name 
 Position 
@@ -3014,14 +3007,14 @@ Vijaykumar Chakka
 1.     Member, Academic Council and Board of Studies, Ganpat 
 University, Mehsana
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      30 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      30 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Faculty Name 
 Position 
@@ -3057,14 +3050,14 @@ semester project. The M.Tech programme requires student to do a year-long thesis
 work. The M.Sc (IT), M.Sc (ICT in ARD) and M.Des (CD) programmes require 
 student to undertake the final semester project work.
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      31 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      31 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 • 
 percentage of students who have done in-house projects including inter-
 departmental projects 
@@ -3099,14 +3092,14 @@ M.Sc (ICT in ARD)
 M.Des (CD) 
 100
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      32 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      32 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Faculty 
@@ -3240,14 +3233,14 @@ Computer Science Week (TECS
 TRDDC 
 2012
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      33 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      33 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 PhD students 
@@ -3349,14 +3342,14 @@ Best paper award during
 ICBAPS 2015 
 2015
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      34 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      34 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 PhD students 
@@ -3454,14 +3447,14 @@ India,
 Bengaluru 
 2011
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      35 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      35 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -3545,14 +3538,14 @@ Application
 Society 
 2012
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      36 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      36 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -3650,14 +3643,14 @@ International
 Conference on 
 2012
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      37 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      37 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -3775,14 +3768,14 @@ Institute for
 Women and 
 2013
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      38 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      38 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -3884,14 +3877,14 @@ First prize in "Women in Industry
 Industry 
 2013
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      39 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      39 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -3985,14 +3978,14 @@ Industrial Application Society
 IEEE 
 2014
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      40 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      40 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -4071,14 +4064,14 @@ world summit of KDE, one of the
 Google 
 2014
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      41 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      41 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -4167,14 +4160,14 @@ of Code 2014 (May 19 – August
 Google 
 2014
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      42 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      42 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -4280,14 +4273,14 @@ IEEE R10 HTC 2014 conference.
 IEEE 
 2014
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      43 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      43 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Students 
@@ -4365,14 +4358,14 @@ Geometric Algorithms
 NBHM 
 10-12 March, 2012
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      44 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      44 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Outstanding participants during various events organised 
 Events 
 Year 
@@ -4532,14 +4525,14 @@ IIT Bombay
 Sachin Patkar 
 IIT Bombay
 
-NAAC Evaluative Report - 2015 
- 
- 
-                                      45 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+NAAC Evaluative Report - 2015 
+ 
+ 
+                                      45 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Events 
 Year 
 Name of the 
@@ -4580,13 +4573,13 @@ Amitabha Mukerjee
 IIT Kanpur
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      46 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      46 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Below is a listing of the workshops and training programs that have been held at the 
 Institute in the last four years. 
 Sr.No 
@@ -4663,13 +4656,13 @@ June 2012
 DAIICT
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      47 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      47 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 31. Code of ethics for research followed by the departments  
  
 Being a research led teaching Institute, DAIICT takes the pride of those faculty 
@@ -4703,13 +4696,13 @@ misinterpreted and misused against the development of society at large.
  All parties involved should be informed in time for conflict of interest, if any.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      48 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      48 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Avoidance of Infringement 
  Take care that there is no infringement of any published work while reporting 
 research results. 
@@ -4741,13 +4734,13 @@ potential benefit before taking up any research issue.
 32. Student profile programme-wise:
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      49 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      49 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Applications and Selection 
 Programme 
 Applications Received 
@@ -4917,23 +4910,23 @@ $Graduating students of UG 2009 (and backlog 2008, 2007). PG 2011 and 2010
 ^Graduating students of UG 2010 (and backlog 2009, 2008). PG 2012 and 2011
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      50 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      50 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 33. Diversity of students
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      51 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      51 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 34. How many students have cleared Civil Services and Defense Services 
 examinations, NET, SET, GATE and other competitive examinations? Give 
 details category-wise?  
@@ -4992,13 +4985,13 @@ Total
 100
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      52 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      52 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 37. Number of faculty who were awarded M.Phil., Ph.D., D.Sc. and D.Litt. during 
 the assessment period  
  None 
@@ -5070,13 +5063,13 @@ E-book Reader “infibeam Pi”
 01
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      53 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      53 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. 
 No. 
 Particulars 
@@ -5148,13 +5141,13 @@ The campus is also WiFi enabled and students’ hostel rooms are connected with 
 speed Internet.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      54 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      54 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 c) Total number of class rooms 
 Details of ICT enabled classrooms & seminar rooms 
 Room description 
@@ -5202,13 +5195,13 @@ with ICT enabled laboratory rooms, also used to conduct workshops, to conduct
 seminars and placement activity.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      55 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      55 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Details of Laboratory Space 
 Lab 
 Room 
@@ -5335,13 +5328,13 @@ Teaching lab
 /Phd student
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      56 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      56 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Lab 
 Room 
 no. 
@@ -5464,13 +5457,13 @@ Tech student
 workspace
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      57 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      57 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Description 
 No. 
@@ -5533,13 +5526,13 @@ classifications and specialization on the basis of the research to be carried ou
 as to carry out special events and workshops organized by students and placement
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      58 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      58 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 activity.  The laboratory building is enabled with WI-FI and every laboratory room 
 has intercom facility. 
 The institute has a standing Information and Communication Technology (ICT) 
@@ -5577,13 +5570,13 @@ Postgresql,, DIA, Silos, Crimson Editor, Logisim, Applian FLV Player, Clamwin
 Free Antivirus , AVR studio, Edit plus, GPL ghost script, KEIL Vision 4,
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      59 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      59 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 OMNET++, StarUML, Winpcap, 8085 simulator, Magic VLSI layout, kchmviewer, 
 php Designer, NS-2, SUMO. 
 Network Lab 
@@ -5632,13 +5625,13 @@ RF circuit design, Rapid prototyping of Digital Systems, Industrial Automation,
 reconfigurable processors, Digital Arithmetic, Advanced Processor Architectures, VLSI
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      60 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      60 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Implementation of Speech and Image processing algorithms, Biomedical signal processor 
 design, testing and formal verification, memory design, Embedded VLSI, asynchronous 
 circuits, CAD tools, Graph theory and Optimisation problems in VLSI. 
@@ -5687,13 +5680,13 @@ electives courses in the domain. The following are the equipment available in th
 labs.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      61 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      61 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No. 
 Category 
 Equipment 
@@ -5757,13 +5750,13 @@ boards 3505 / 3504 /1500-A / 1005 / 5102; ADSP-2189M EZ-KIT Lite; ADSP-218X EZ-
 ICE.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      62 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      62 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. No. 
 Laboratory 
 Name 
@@ -5899,13 +5892,13 @@ SAS HDDD
 1
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      63 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      63 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. No. 
 Laboratory 
 Name 
@@ -6013,13 +6006,13 @@ Intel Pentium IV 2.6Ghz
 1
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      64 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      64 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. No. 
 Laboratory 
 Name 
@@ -6133,13 +6126,13 @@ RAM / 250GB HDD
 1
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      65 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      65 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. No. 
 Laboratory 
 Name 
@@ -6250,13 +6243,13 @@ P-IV / 1GB RAM / 40GB HDD
 1
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                      66 
- 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                      66 
+ 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr. No. 
 Laboratory 
 Name 
@@ -6351,12 +6344,12 @@ Physics Lab Equipment
 30 capacity
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             67 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             67 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Language Lab 
 English Lab is designed to enhance overall communication skills amongst students 
 including pronunciation, accent, etc. to make them successful in careers. The Lab is a 
@@ -6387,12 +6380,12 @@ NetFPGA platform also contains one small Xilinx Spartan II FPGA holding the logi
 that implements the control logic for the PCI interface to the host processor.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             68 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             68 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 ZeBu Workstation 
 ZeBu-UF Fast ASIC Emulator hosted on HP workstation, which having Intel Xeon 
 E5205 1.86 6MB/1066 DC CPU-1, 8GB(4x2GB) DDR2-667 ECC FBD RAM, 
@@ -6420,12 +6413,12 @@ NVIDIA GPU cards (Tesla k40, GTX 680, GTX 690), Intel Xeon E5-2640 v2
 CUDA compiler, nVIDIA CUDA toolkit, OpenMP, MPI and MPICH.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             69 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             69 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 a. Research laboratories  
 Location 
 Signage / Usage 
@@ -6508,12 +6501,12 @@ Hydroponics
 LAB
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             70 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             70 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 39. List of doctoral, post-doctoral students and Research Associates  
 a) from the host institution/university  
 b) from other institutions/universities   
@@ -6598,12 +6591,12 @@ Jadeja Mahipal Prithvisinh
 2012
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             71 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             71 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 26 
 Nileshkumar 
 2012 
@@ -6692,12 +6685,12 @@ Total
 53
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             72 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             72 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Detailed list of Doctoral Students: 
 Sr.No. 
 Name of Employees 
@@ -6821,12 +6814,12 @@ S. Nivedita
 2013
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             73 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             73 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 40 
 Purvi Koringa 
 2013 
@@ -6899,12 +6892,12 @@ In this stage, peer programmes across the globe are studied for establishing
 benchmarks for program input, objectives, and outcomes.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             74 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             74 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 3. Model Curricula Design 
 A detailed analysis of peer curricula is done along with study of reference 
 curricula if any. Institute’s vision and requirement study results are used as guides 
@@ -6945,12 +6938,12 @@ Yes, the institute has a well-defined mechanism in place to obtain feedback from
 students, faculty, alumni and employers. A feedback form is circulated to each of
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             75 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             75 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 the student for all the courses he/she has registered for the semester before the 
 semester ends. The duration of course evaluation by student is also included in the 
 Academic calendar. The exit feedback is collected from all students when they 
@@ -6985,12 +6978,12 @@ first week of the semester. Typically, in-semester exams, end semester exam,
 quizzes, assignments, in-class participation are some of the measures that
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             76 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             76 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 help in assessing students’ performance. The entire course registration, 
 course grading and semester-wise transcript is managed online by the 
 institute through its E-campus system. Both students and faculty can access 
@@ -7025,12 +7018,12 @@ infrastructure and juniors. The board consists of faculty representatives who
 brought the feedback of alumni to Dean(AP)’s and Director’s notice. The
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             77 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             77 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 institute also collects feedback from employers through its placement 
 process. Employers suggest the need of curriculum updation and introduction 
 of new courses to keep pace of industry requirement. Employers feedback is 
@@ -7069,11 +7062,11 @@ Current Position      : Co-founder and CEO,
                                    Almaconnect, New Delhi
 
 NAAC E
- 
- 
+ 
+ 
 Evaluative R
-Dhirubhai Amb
-Institute of Info
+Dhirubhai Amb
+Institute of Info
 Nam
 Yea
 Cur
@@ -7102,8 +7095,8 @@ Nam
 Yea
 Cur
 Report - 2015
-bani  
-ormation and C
+bani  
+ormation and C
 me :  Ms. A
 ar of Gradu
 rrent Positio
@@ -7170,7 +7163,7 @@ on      : Vice
 mi Ahalpar
 uation :  M-D
 on      :  Dev
-n Technology 
+n Technology 
 anchal 
 ech-ICT 20
 founder and
@@ -7239,15 +7232,15 @@ le, USA
 t Banking,, 
  
 orway 
-                 78
+                 78
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             79 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             79 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Name : Mr. Prateek Kabaria 
 Year of Graduation :  M.Sc.-ICT-ARD 2009 
 Current Position      : Marketing & Sales Leader-South Asia Region, 
@@ -7270,12 +7263,12 @@ society within the country and abroad. A detailed account of student enrichment
 programmes is as under:
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             80 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             80 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No 
 Title 
 Dates 
@@ -7392,12 +7385,12 @@ University of
 Dayton, USA
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             81 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             81 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No 
 Speaker and Title 
 Dates 
@@ -7520,12 +7513,12 @@ Centre – IIT
 Bombay
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             82 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             82 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Sr.No 
 Speaker and Title 
 Dates 
@@ -7574,12 +7567,12 @@ response system” (PRS) is very helpful in real-time interactivity and thus the
 possibility of change in teaching emphasis on the fly. We also find that breaking the
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             83 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             83 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 lecture in 3 fifteen minutes capsules with interactive games and quizzes of five 
 minutes each greatly enhances the alertness level and the comprehension of the 
 students. 
@@ -7612,12 +7605,12 @@ recently constituted an Internal Quality Assurance Cell (IQAC), which along with
 various internal committees, guided by the Board of Studies and the Academic
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             84 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             84 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Council can assure standards and quality in all the matters related to academic 
 processes. 
 The academic calendar of the institute is prepared by the Registrar in consultation 
@@ -7651,12 +7644,12 @@ professionals in industry and R&D organisations. As a result, the institute ensu
 programme objectives are constantly met and learning outcomes are supervised
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             85 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             85 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 throughout the academic calendar. 
 47. Highlight the participation of students and faculty in extension activities 
 During the rural internship, students often carry out surveys to help NGOs in setting 
@@ -7690,12 +7683,12 @@ connections and consequent changes in policy. Design thus becomes a
 methodological tool not just for policy but peoples’ engagement with it. If Design is
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             86 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             86 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 connectivity, one had to see all the relations that exist about health - connectivities 
 between health and water, health and land, natural resources, agriculture, food 
 consumption including policies were established in the project that became the key 
@@ -7727,12 +7720,12 @@ Film& Television Institute (SRFTI) (An Academic Institution of Ministry of I&B
 Govt.of India)
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             87 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             87 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 Youth Run 
 Youth run was an initiative by a group of students who wanted to promote good 
 health, camaraderie and social awareness. The Youth run vision was to run for a 
@@ -7768,12 +7761,12 @@ Students also actively participate in IEEE student branch and ACM
 (Association for Computing Machinery) student branch at the institute.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             88 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             88 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 With active participation in national and international forums, our students have 
 received many prestigious awards such as Texas Instruments DSP Design, Microsoft 
 Imagine Cup, Red Hat Challenge, HP Innovate, Google Summer of Code, TCS-100 
@@ -7803,12 +7796,12 @@ government of India, and they are being jointly executed with other premier
 institutions in the country.
 
 NAAC Evaluative Report - 2015 
- 
- 
-                                                                                                                             89 
- 
-Dhirubhai Ambani  
-Institute of Information and Communication Technology 
+ 
+ 
+                                                                                                                             89 
+ 
+Dhirubhai Ambani  
+Institute of Information and Communication Technology 
 51. Detail five major Strengths, Weaknesses, Opportunities and Challenges (SWOC) 
 of the department.  
 STRENGTHS 

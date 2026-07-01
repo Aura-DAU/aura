@@ -35,19 +35,19 @@ student at the university, clicked the photographs shown on the cover page.
 
 TABLE OF CONTENTS
 
-1, Board Of GOveROlS smcncsnmmmnmnmnnmnmmmamanmmanmnun O05
-2. Director's M@SSAaE .......cccsccesssessescescsscsscssesssscsscsscsseesssssesseeeees 06
-& JAismicine ISS ssscisccsscnsscamcamsnmmmememaaummmanmnnanas 08 - 13
-4, ACACGHNCS sccnurecssmamrenmnomnnmencmannnsnamens 14 - 29
-5. Research and Development ..........cccccccsccssccssesscssssrecseseeseees 30 - 41
-& Faculby Publleation$ nue 42 - 63
-7. Awards and Professional Engagements ..............:cccseeseeseeee 64-77
-8. Placements and Internships ou... scssessetsessessessseeeeesees 78 - 86
-9. Students Activities and Achievements ...........:scceseeeeeeees 87 - 104
-10. 1T8th CONVOCATION 00... eeseesseeeseseseseseacscececsceeeeeeeeeeneneaees 105 - 110
-LT, AIA ACEIVIEIGS ccscssessssnsusscenrenunanerucnsercaanernnvananscneneumannnuans 111 - 114
-12. Human Resource and Development ou... ee eeeeeeeeeeees 115-121
-13, Infrasteectore oon 122 - 128
+1. Board of Governors ....................................................................... 05
+2. Director's Message ....................................................................... 06
+3. Admissions ............................................................................... 08 - 13
+4. Academics ................................................................................ 14 - 29
+5. Research and Development ................................................................ 30 - 41
+6. Faculty Publications ...................................................................... 42 - 63
+7. Awards and Professional Engagements ...................................................... 64 - 77
+8. Placements and Internships ............................................................... 78 - 86
+9. Student Activities and Achievements ...................................................... 87 - 104
+10. 18th Convocation ....................................................................... 105 - 110
+11. Alumni Activities and Achievements ..................................................... 111 - 114
+12. Human Resource and Development ......................................................... 115 - 121
+13. Infrastructure ......................................................................... 122 - 128
 | 129 - 165
 
 » Annexure 1 - Statutory Authorities
@@ -81,7 +81,7 @@ civically engaged individuals who recognize
 their responsibility and role in their
 communities and the world.
 
-e To pursue global standards of excellence in
+- To pursue global standards of excellence in
 Qu El Ity all our endeavors, namely, teaching,
 research, consultancy and continuing
 @ education focusing on Information and
@@ -507,14 +507,14 @@ B.Tech. (EVD)
 Further, undergraduate admissions at the Institute were categorized into three groups: All India,
 NRI, and Gujarat.
 
-e All India Category: Admissions were based on the All India Rank of JEE Main 2023, adhering
+- All India Category: Admissions were based on the All India Rank of JEE Main 2023, adhering
 to the reservation guidelines for eligible categories.
 
-e NRI Category: This included Non-Resident Indians, Foreign Nationals, and Persons of Indian
+- NRI Category: This included Non-Resident Indians, Foreign Nationals, and Persons of Indian
 Origin. Selection was based on the candidates’ performance in their 10th and 12th grades,
 SAT Il, or JEE Main 2023.
 
-e Gujarat Category: Applicants with Gujarat domicile were eligible under this category.
+- Gujarat Category: Applicants with Gujarat domicile were eligible under this category.
 Admissions were managed by ACPC, based on GUJCET or JEE Main 2023 scores.
 
 Of the total seats, 67% were managed by the Institute, including 52% under the All-India
@@ -549,16 +549,16 @@ M.Tech. in Information and Communication Technology (ICT)
 
 The M.Tech. (ICT) program was structured around three cutting-edge specializations:
 
-e Machine Learning (ML): 32 seats
-e Software Systems (SS): 26 seats
-e VLSI and Embedded Systems (VLSI&ES): 16 seats
+- Machine Learning (ML): 32 seats
+- Software Systems (SS): 26 seats
+- VLSI and Embedded Systems (VLSI&ES): 16 seats
 
 Admissions were conducted through two channels: GATE and Non-GATE.
 
-e Inthe GATE channel, candidates were shortlisted based on their GATE scores. In some cases,
+- Inthe GATE channel, candidates were shortlisted based on their GATE scores. In some cases,
 interviews were conducted to finalize admissions.
 
-e The Non-GATE channel focused on academic performance in the qualifying degree,
+- The Non-GATE channel focused on academic performance in the qualifying degree,
 supplemented by interviews to assess the candidates’ aptitude.
 
 This dual-channel approach ensured opportunities for students with diverse strengths while
@@ -572,9 +572,9 @@ Wireless Communications and Signal Processing
 in modern communication technologies.
 
 Admissions followed a similar two-channel process:
-e GATE Channel: Based on candidates’ GATE scores.
+- GATE Channel: Based on candidates’ GATE scores.
 
-e Non-GATE Channel : Evaluations were based on | &
+- Non-GATE Channel : Evaluations were based on | &
 academic credentials and interview performance.
 
 By offering these specialized programs and leveraging a robust admission process, the institute
@@ -619,8 +619,8 @@ eee
 Doctor of Philosophy (Ph.D.)
 
 Admission to the Ph.D program was through the following tracks:
-e Ph.D. (Regular)
-e Ph.D. (Rolling)
+- Ph.D. (Regular)
+- Ph.D. (Rolling)
 
 DA-IICT offers Ph.D. programs in a wide range of research domains, including Communication and
 Signal Processing, Algorithms and Theory of Computation, VLSI and Embedded Systems, Physics
@@ -842,39 +842,39 @@ practices and and opportunities to collaborate in diverse areas. The Memorandums
 Understanding (MOUs) inked / signed during the reporting period, have significantly contributed to
 the enhancement of academic exchange, progress in research and faculty development.
 
-e Anand Agricultural University:
+- Anand Agricultural University:
 Develop and deliver programs to elevate the quality of education in the PG program. Focus on
 enhancing student skills through internships and vocational training.
 
-e Bureau of Indian Standards:
+- Bureau of Indian Standards:
 
 Collaborate on standardization and conformity assessment initiatives based on equality and
 reciprocity. Contribute to standardization activities, conduct R&D projects, and build
 infrastructure to support relevant research.
 
-e Civil Hospital Ahmedabad (IKDRC):
+- Civil Hospital Ahmedabad (IKDRC):
 
 Foster academic and research collaboration through joint certificate courses and degree
 programs (undergraduate/postgraduate). Share teaching resources, organize seminars,
 workshops, and internships, and exchange faculty/staff for joint research guidance at the
 doctoral and postgraduate levels.
 
-e Enago - Crimson Interactive Pvt Ltd
+- Enago - Crimson Interactive Pvt Ltd
 Partnership to establish the Enago Scholars Doctoral Fellowships, focusing on research across
 diverse fields.
 
-e Erisha Space Private Limited, New Delhi
+- Erisha Space Private Limited, New Delhi
 A Memorandum of Understanding (MoU) between DA-IICT and Erisha Space Private Limited to
 foster innovation and collaboration.
 
-e Gujarat Council on Science & Technology (GUJCOST)
+- Gujarat Council on Science & Technology (GUJCOST)
 
 The GUJCOST Supercomputer Facility is designed to enhance research capabilities by
 integrating advanced technologies in scientific, engineering, and academic programs. It aims to
 foster research through high-end computation, modelling, simulation, and data analysis at the
 grassroots level.
 
-e Indian Institute of Management, Ahmedabad (IIM-A)
+- Indian Institute of Management, Ahmedabad (IIM-A)
 
 Collaboration with the Billion Readers (BIRD) Initiative to conduct a survey of 100 rural
 low-income households, studying TV viewing patterns among women and children with
@@ -887,17 +887,17 @@ Partnering to offer a postgraduate program, enhancing education through curricul
 development and hands-on learning. The initiative aims to boost student skills via internships
 and vocational training.
 
-e Indian Institute of Remote Sensing
+- Indian Institute of Remote Sensing
 Expanding academic and research cooperation, focusing on teaching, training, and advancing
 learning in the field of remote sensing.
 
-e Institute of Seismological Research (ISR):
+- Institute of Seismological Research (ISR):
 
 Focused on fostering academic research and technical exchanges, this partnership supports joint
 conferences, workshops, seminars, and training programs aimed at advancing scientific
 knowledge.
 
-e Jadavpur University:
+- Jadavpur University:
 
 This collaboration enhances academic exchanges and student programs, while offering faculty
 opportunities for teaching and conducting seminars. It also includes facilitating national and
@@ -907,22 +907,22 @@ iF e Rishabh Integrated Skill Enhancement (RISE):
 Promotes the exchange of teaching materials, faculty, staff, and students. It also organizes joint
 seminars, conferences, workshops, and training programs to strengthen educational initiatives.
 
-e Sardar Vallabhbhai National Institute of Technology (SVNIT):
+- Sardar Vallabhbhai National Institute of Technology (SVNIT):
 A partnership for academic and research collaboration, including student exchange programs,
 aimed at enhancing research and technical cooperation.
 
-e Smt. GR Doshi & Smt. KM Mehta Institute of Kidney Diseases and Research Centre,
+- Smt. GR Doshi & Smt. KM Mehta Institute of Kidney Diseases and Research Centre,
 Ahmedabad:
 
 Focuses on advancing medical research and educational exchange to contribute to the
 
 healthcare sector.
 
-e Tata Consultancy Services (TCS):
+- Tata Consultancy Services (TCS):
 Provides opportunities for DA-IICT’s PhD candidates to join the TCS Research Scholar Program,
 fostering academic and research development.
 
-e TCG CREST:
+- TCG CREST:
 
 Aimed at joint academic and research initiatives, this partnership includes offering PhD and PG
 programs, organizing research workshops, and facilitating the exchange of scholarly
@@ -1427,14 +1427,14 @@ Countries."
 
 Speakers included:
 
-e Prof. Digvijay Sampatrao Pawar (IIT Hyderabad)
+- Prof. Digvijay Sampatrao Pawar (IIT Hyderabad)
 
-e Mr. Ravi Darji (TCS Gandhinagar)
+- Mr. Ravi Darji (TCS Gandhinagar)
 
-e Mr. Akhilesh Srivastava (International Road
+- Mr. Akhilesh Srivastava (International Road
 Federation / WEF)
 
-e Dr. Swarn Rathour (Hitachi R&D, Japan)
+- Dr. Swarn Rathour (Hitachi R&D, Japan)
 
 38
 
@@ -2684,26 +2684,26 @@ AWARDS AND PROFESSIONAL ACTIVITIES
 HONORARY WORK/POSITIONS HELD ON PROFESSIONAL BODIES
 
 Biswajit Mishra
-e Board of Studies Member - PDEU, Gandhinagar
+- Board of Studies Member - PDEU, Gandhinagar
 
 Deepak Ghodgaonkar
-e Life Fellow, The Institution of Engineers, Malaysia (FIEM),
+- Life Fellow, The Institution of Engineers, Malaysia (FIEM),
 4 Malaysia
-e Life Fellow, Institution of Electronics and
+- Life Fellow, Institution of Electronics and
 Telecommunication Engineers, (FIETE), India.
-e Senior Member, Institute of Electrical and Electronics
+- Senior Member, Institute of Electrical and Electronics
 Engineers, (SMIEEE), USA
 
 Hemant A. Patil
 
-e Life Member, Indian Unit for Pattern Recognition and Artificial Intelligence (IUPRAI).
-e Member of International Speech Communication Association (ISCA).
+- Life Member, Indian Unit for Pattern Recognition and Artificial Intelligence (IUPRAI).
+- Member of International Speech Communication Association (ISCA).
 
-e Member, Asia-Pacific Signal and Information Processing Association (APSIPA)
+- Member, Asia-Pacific Signal and Information Processing Association (APSIPA)
 
-e Member of IEEE, USA
+- Member of IEEE, USA
 
-e Member of IEEE Signal Processing Society (SPS), USA.
+- Member of IEEE Signal Processing Society (SPS), USA.
 
 Affiliate member of IEEE, the Speech and Language Technical Committee (SLTC)
 Member of IEEE Circuits and Systems Society, USA.
@@ -2715,95 +2715,95 @@ Member of International Association for Engineers (IAENG).
 Life member of System Society of India (SSI).
 
 Madhukant Sharma
-e Lifetime Member of the Indian Mathematical Society.
-e Lifetime Member of the Ramanujan Mathematical Society.
-e Affiliate Member of the American Mathematical Society.
+- Lifetime Member of the Indian Mathematical Society.
+- Lifetime Member of the Ramanujan Mathematical Society.
+- Affiliate Member of the American Mathematical Society.
 
 Manik Lal Das
 
 Senior Member, Institute of Electrical and Electronics Engineers (IEEE)
 Life Member, Cryptology Research Society of India
-e Advisory member, IEEE Gujarat Sectio
+- Advisory member, IEEE Gujarat Sectio
 
 vanish K Gupta
 
 Member Steering Committee, BBOMOD 2024, Japan
 
-e Chair (India), Organizing Committee, International Coding Theory Seminar (ICTS),
+- Chair (India), Organizing Committee, International Coding Theory Seminar (ICTS),
 2023-Present
 
-e Advisor, International Conference on “Path of sustainability for greener and healthier
+- Advisor, International Conference on “Path of sustainability for greener and healthier
 planet” KSU and University of Tasmania, 21st March 2024.
 
-e Member, Vibrant Gujarat Organizing Committee, Startups: Unlocking Infinite
+- Member, Vibrant Gujarat Organizing Committee, Startups: Unlocking Infinite
 Potentials, Jan 11, 2024.
 
-e Co-Convenor, BIS, LITD23/Panel 1 Expert Group on Audio, Picture and Video White
+- Co-Convenor, BIS, LITD23/Panel 1 Expert Group on Audio, Picture and Video White
 Paper, 2024
 
-e Program Chair, Outreach Program on Indian Standards and Workshop on Drone and
+- Program Chair, Outreach Program on Indian Standards and Workshop on Drone and
 Robotics Standards, October 8, 2023, DA-IICT Gandhinagar
 
-e General Chair, Workshop on Intellectual Property Rights (IPR 2023), 15 April 2023,
+- General Chair, Workshop on Intellectual Property Rights (IPR 2023), 15 April 2023,
 DA-IICT Gandhinagar
 
-e Conference Chair, International Conference on Quantum Computing and
+- Conference Chair, International Conference on Quantum Computing and
 Communications (QCC 2023), 09-11 February 2023, Punjab
 
 e |EEE Computer Society Distinguished Visitor (2022-2024)
 
-e Member, DNA Data Storage Alliance, California, USA, October 2021-Present
+- Member, DNA Data Storage Alliance, California, USA, October 2021-Present
 
-e Member, DNA Data Storage Alliance Road mapping Working Group, SNIA, California,
+- Member, DNA Data Storage Alliance Road mapping Working Group, SNIA, California,
 USA, April 2022-Present
 
-e Member, DNA Archive Rosetta Stone (DARS) Group, SNIA, California, USA, April
+- Member, DNA Archive Rosetta Stone (DARS) Group, SNIA, California, USA, April
 2022-Present
 
-e Member, ISO/IEC JTC 1/SC 29/WG 1 Committee, Geneva, Switzerland, January
+- Member, ISO/IEC JTC 1/SC 29/WG 1 Committee, Geneva, Switzerland, January
 2023-Present
 
-e Member (Chair from April 2024), DNA Data Storage CODEC Working Group, SNIA,
+- Member (Chair from April 2024), DNA Data Storage CODEC Working Group, SNIA,
 California, USA, 2023-Present
 
-e Member, National Mirror Committee LITD 23, Bureau of Indian Standards, New
+- Member, National Mirror Committee LITD 23, Bureau of Indian Standards, New
 Delhi, India, January 2023-Present
 
-e Academic Advisor, School of Computing, Kaushalya the Skill University, Gujarat
+- Academic Advisor, School of Computing, Kaushalya the Skill University, Gujarat
 Government (2022 - 2024)
 
-e Hon. Head, School of Computing, Kaushalya the Skill University, Gujarat
+- Hon. Head, School of Computing, Kaushalya the Skill University, Gujarat
 Government (2022 - 2024)
 
-e Chairman, Board of Studies, School of Computing, (2022 - 2024)
+- Chairman, Board of Studies, School of Computing, (2022 - 2024)
 
-e Kaushalya the Skill University, Gujarat Government (2022 - 2024)
+- Kaushalya the Skill University, Gujarat Government (2022 - 2024)
 
-e Member, Board of Studies, School of ICT, Adani University, Gujarat (2024 - Present)
+- Member, Board of Studies, School of ICT, Adani University, Gujarat (2024 - Present)
 
-e Member, Advisory Board, Greater Karnavati Quantum Computing Technology Park
+- Member, Advisory Board, Greater Karnavati Quantum Computing Technology Park
 (2022 - Present)
 
-e Member, iCreate Microsoft Program for Emerging Leaders in Artificial Intelligence
+- Member, iCreate Microsoft Program for Emerging Leaders in Artificial Intelligence
 Working Group, 2024-Present
 
-e University Education Outreach Coordinator, Bureau of Indian Standards,
+- University Education Outreach Coordinator, Bureau of Indian Standards,
 Government of India, 2023-2024
 
-e Member, SNIA DNA data storage alliance, 2021-Present
+- Member, SNIA DNA data storage alliance, 2021-Present
 
-e Member, European Science Foundation (ESF) College of Expert Reviewers,
+- Member, European Science Foundation (ESF) College of Expert Reviewers,
 2021-2024
 
-e Member, Fundraising Committee, Indian Mathematical Society, 2021-2024
+- Member, Fundraising Committee, Indian Mathematical Society, 2021-2024
 
-e Member, Technical Committee, Indian Mathematical Society, 2021-Present
+- Member, Technical Committee, Indian Mathematical Society, 2021-Present
 
 y.
 
 Manish Kumar
 
-e Session Chair, 17th IEEE
+- Session Chair, 17th IEEE
 ANTS, 2023 at MNIT Jaipur
 
 Rahul Mishra
@@ -2819,32 +2819,32 @@ Appointed as Vice Chair Technical Activity for
 IEEE Sensor Council GC, August 2023
 
 Saurabh Tiwari
-e Member, Association for Computing Machinery
+- Member, Association for Computing Machinery
 (ACM)
 
 Rutu Parekh
-e CHAIR, IEEE NTC CHAPTER, GUJARAT
+- CHAIR, IEEE NTC CHAPTER, GUJARAT
 SECTION, INDIA
 
 Srimanta Mandal
-e Member, IEEE
-e Membe, The IEEE Signal Processing Society
-e Executive member, The IEEE Signal Processing Society Gujarat Chapter
+- Member, IEEE
+- Membe, The IEEE Signal Processing Society
+- Executive member, The IEEE Signal Processing Society Gujarat Chapter
 
 Sujay Kadam
-e Life Member, Instrument Society of India
+- Life Member, Instrument Society of India
 e |IEEE Member
 e lEEE Control Systems Society Member
 e |EEE Computational Intelligence Society Member
 
 Tapas Kumar Maiti
 
-e Member, IEEE - Institute of Electrical and Electronics Engineers
+- Member, IEEE - Institute of Electrical and Electronics Engineers
 
-e Member, IEEE Technical Committee on Multi-Robot Systems (TC MRS)
-e Member, [AAM - International Association of Advanced Materials
+- Member, IEEE Technical Committee on Multi-Robot Systems (TC MRS)
+- Member, [AAM - International Association of Advanced Materials
 
-e Life Member, IEI - The Institute of Engineers (India)
+- Life Member, IEI - The Institute of Engineers (India)
 
 Yash Agrawal
 
@@ -2854,50 +2854,50 @@ e |EEE Chapter Chair, Electron Devices, IEEE Gujarat Section
 FELLOWSHIPS/VISITING SCHOLARSHIPS
 
 es Rutu Parikh
-e Visiting Associate at IUCAA, Pune, IndiancilGC, August 2023
+- Visiting Associate at IUCAA, Pune, IndiancilGC, August 2023
 
 Biswajit Mishra
-e Associate Editor: Frontiers Journal in Cardiovascular Medicine
+- Associate Editor: Frontiers Journal in Cardiovascular Medicine
 
 Hemant A. Patil
 
-e Associate Editor, IEEE Signal Processing Magazine 2021-2023
-e Associate Editor, SN Computer Science, Springer (May 2024- till date)
+- Associate Editor, IEEE Signal Processing Magazine 2021-2023
+- Associate Editor, SN Computer Science, Springer (May 2024- till date)
 
 Mukesh Tiwari
 
-e Editor and Editorial
+- Editor and Editorial
 Board Member,
 International Journal of
 
 Manish K Gupta
 
-e Associate Editor, Journal of
+- Associate Editor, Journal of
 Applied Mathematics and
 Computation, Springer,
 
 2017—present. viene phe B |
-e Associate Editor, AIMS ° itor and Editoria
+- Associate Editor, AIMS ° itor and Editoria
 i : Board Member,
 Electronics and Electrical
 
 Engineering, AIMS Press, 2017 Modern Physics Letters
 
 Rahul Mishra
-e Guest Editor MDPI Algorithms
+- Guest Editor MDPI Algorithms
 
 B
 
 Tapas Kumar Maiti
 
-e T.K. Maiti, Editorial Board
+- T.K. Maiti, Editorial Board
 Member, Bulletin of
 Electrical Engineering and
 
 Rutu Parekh Informatics (BEEl), Jan
 2020 to till date
 
-e Editorial Board Member,
+- Editorial Board Member,
 SCIREA Journal of Electrical
 Engineering, SCIREA
 
@@ -2909,7 +2909,7 @@ Electronics and Communication
 
 Rahul Muthu
 
-e Guest Executive Editor in
+- Guest Executive Editor in
 Discrete Applied
 Mathematics, for the
 
@@ -2925,11 +2925,11 @@ REVIEWING OF BOOK/JOURNAL/ CONFERENCE PAPERS
 
 Arnab Kumar Ray
 
-e International Journal of Modern Physics C, World Scientific.
+- International Journal of Modern Physics C, World Scientific.
 
 Arpita Mall
 
-e Journal of Mathematical Analysis and Applications, Elsevier
+- Journal of Mathematical Analysis and Applications, Elsevier
 
 Linear and Multilinear Algebra, Taylor and Francis Ltd.
 
@@ -2944,12 +2944,12 @@ Mathematical Reviews, American Mathematical Society
 
 Deepak Ghodgaonkar
 
-e EEE Transactions. Instrumentation and Measurement (IM)
-e JEEE Transactions on Microwave Theory and Techniques (MTT)
-e EEE Transactions on Antennas and Propagation (AP)
+- EEE Transactions. Instrumentation and Measurement (IM)
+- JEEE Transactions on Microwave Theory and Techniques (MTT)
+- EEE Transactions on Antennas and Propagation (AP)
 
 Hemant A. Patil
-e APSIPAASC 2024
+- APSIPAASC 2024
 ee INTERSPEECH 2024
 . . \ @ EUSIPCO 2024
 
@@ -2962,15 +2962,15 @@ ICASSP 2023
 
 Manish K Gupta
 
-e ACM Computing Reviews Journal (ACM)
-e AMS Mathematical Reviews Journal (AMS)
+- ACM Computing Reviews Journal (ACM)
+- AMS Mathematical Reviews Journal (AMS)
 
 a, Minal Bhise
 
-e Knowledge and Information Systems KAIS,
+- Knowledge and Information Systems KAIS,
 Springer
 
-e EEE International Conference on Fog and Mobile
+- EEE International Conference on Fog and Mobile
 Edge Computing FMEC, Tartu, Estonia 2023
 
 Mukesh Tiwari
@@ -2986,10 +2986,10 @@ Chaos
 
 Sudip Bera
 
-e Linear and Multilinear Algebra,
+- Linear and Multilinear Algebra,
 Taylor and Francis
 
-e Communications in Algebra,
+- Communications in Algebra,
 Taylor and Francis
 
 Yash Agrawal
@@ -3001,18 +3001,18 @@ Nanotechnology, IEEE
 
 Prosenjit Kundu
 
-e Physical Review E
+- Physical Review E
 
-e Chaos
+- Chaos
 
-e Plos One
+- Plos One
 
-e Frontiers in Physics
+- Frontiers in Physics
 
-e International Journal of
+- International Journal of
 Modern Physics B
 
-e Communications in Nonlinear
+- Communications in Nonlinear
 
 Science and Numerical Francis
 Simulation + COMPEL:The International Journal
@@ -3033,7 +3033,7 @@ Packaging and Systems (EDAPS)
 
 Hemant A Patil Conference (APSCON)
 
-e Invited talk on Overview of Speech Research Activities@ DA-IICT, at C-DAC
+- Invited talk on Overview of Speech Research Activities@ DA-IICT, at C-DAC
 Kolkata, Dec. 15, 2023.
 
 Manish K Gupta
@@ -3097,37 +3097,37 @@ Campus, Lucknow, May 25, 2023.
 e “How to plan your Bachelor’s?” Amity University, Lucknow, May 11, 2023.
 
 Manish Kumar
-e Invited Speaker, SERB Karyashala workshop at IIIT Pune
+- Invited Speaker, SERB Karyashala workshop at IIIT Pune
 
 Mukesh Tiwari
 
-e Social Network Analysis in Mathematics for Computing: Bridging Theory
+- Social Network Analysis in Mathematics for Computing: Bridging Theory
 and Application at KSU, April 1-2, 2024
 
 Rutu Parikh Rahul Muthu
 
-e Invited Talk on Nano-CMOS e Delivered invited talks at LDRP
+- Invited Talk on Nano-CMOS e Delivered invited talks at LDRP
 Technology at elnfochips, on 7th College of Engineering, PDEU
 August, 2024. and Charusat University.
 
 Tapas Kumar Maiti
 
-e TRAINER in the Training of Trainers (ToT) program on Robotics (Advance), Indian
+- TRAINER in the Training of Trainers (ToT) program on Robotics (Advance), Indian
 Institute of Technology (IIT), Patna, July 04-08, 2024
 
-e Research Progress Committee (RPC) Member, School of Doctoral Studies and
+- Research Progress Committee (RPC) Member, School of Doctoral Studies and
 Research, National Forensic Sciences University (NFSU), Gandhinagar, January 2021
 to March 2024
 
 Yash Agrawal
 
-e Expert Lecture in Electrical Design of Advanced VLSI and
+- Expert Lecture in Electrical Design of Advanced VLSI and
 Communication Systems Workshop at NIT Hamirpur, HP,
 India.
 
-e M.Tech. Thesis External Examiner at NIT Hamirpur.
+- M.Tech. Thesis External Examiner at NIT Hamirpur.
 
-e External expert, Nirma University, Anemdabad for EDA
+- External expert, Nirma University, Anemdabad for EDA
 tools procurement.
 
 45 Yash Vasavada
@@ -3149,42 +3149,42 @@ CONFERENCE/WORKSHOP SESSION CHAIR
 
 Hemant A Patil
 
-e Meta Reviewer, APSIPA ASC, Macau, China, 3rd - 6th Dec 2024
+- Meta Reviewer, APSIPA ASC, Macau, China, 3rd - 6th Dec 2024
 
-e Session Chair, 25th International Conference on Speech and Computer (SPECOM),
+- Session Chair, 25th International Conference on Speech and Computer (SPECOM),
 Dharwad, India, 29th Nov. - 1st Dec 2023.
 
-e Session Chair, 10th International Conference on Pattern Recognition and Machine
+- Session Chair, 10th International Conference on Pattern Recognition and Machine
 Intelligence (PReMI) 2023, ISI Kolkata, 12th - 15th Dec 2023
 
-e Session Chair, 15th International Conference on Signal Processing and
+- Session Chair, 15th International Conference on Signal Processing and
 Communications (SPCOM), IISc Bangalore, 1st - 4th July 2024.
 
-e Organizing Chair, Summer School on Speech Signal Processing (S4P) (Theme:
+- Organizing Chair, Summer School on Speech Signal Processing (S4P) (Theme:
 Automatic Speech Recognition), 6th - 10th July 2024.
 
-e Advisory Board Member, 25th International Conference on Speech and Computer
+- Advisory Board Member, 25th International Conference on Speech and Computer
 (SPECOM), Dharwad, India, 29th Nov - 1st Dec 2023.
 
-e Presented a research paper (s) during 15th International Conference on Signal
+- Presented a research paper (s) during 15th International Conference on Signal
 Processing and Communications (SPCOM), IISc Bangalore, 1st - 4th July 2024.
 
-e Presented a research paper (s) during 10th International Conference on Pattern
+- Presented a research paper (s) during 10th International Conference on Pattern
 Recognition and Machine Intelligence (PReMI) 2023, ISI Kolkata, 12th - 15th Dec
 2023
 
-e Presented a poster presentation during the Winter School on Speech and Audio
+- Presented a poster presentation during the Winter School on Speech and Audio
 Processing (WiSSAP), IIT Kanpur during 18th - 21st Dec 2023.
 
-e Presented a research paper (s) during 25th International Conference on Speech and
+- Presented a research paper (s) during 25th International Conference on Speech and
 Computer (SPECOM), Dharward, India, 29th Nov - 1st Dec 2023.
 
-e Satellite Workshop of SPECOM on, “Speaker and Language Identification,
+- Satellite Workshop of SPECOM on, “Speaker and Language Identification,
 Verification, and Diarization,’ NIT Goa, 2nd Dec 2023
 
 Manish K Gupta
 
-e Invited Speaker, “The role of ICT in education”, NEP Orientation and
+- Invited Speaker, “The role of ICT in education”, NEP Orientation and
 Sensitization Virtual Program, UGC-Malaviya Mission Teacher Training
 Center, Jawahar Lal University (JNU), New Delhi, 11th June 2024.
 
@@ -3193,31 +3193,31 @@ V e Invited Speaker, “Mathematical Opportunities in DNA Digital Data Storage�
 International Conference on Mathematics and its Applications, Mata Sundri
 College for Women, University of Delhi, New Delhi, January 2024
 
-e Invited Plenary Speaker, “Opportunities and Challenges in DNA Data Storage”,
+- Invited Plenary Speaker, “Opportunities and Challenges in DNA Data Storage”,
 International Conference on Coding Theory and its Applications, South Korea, 18th
 August 2023
 
-e Invited Keynote Speaker, “A Story of Quantum Error Correction”, The 1st 24+ hours
+- Invited Keynote Speaker, “A Story of Quantum Error Correction”, The 1st 24+ hours
 Online IEEE Computer Society Distinguished Visitor Event 3rd June 2023
 
 Sujay Kadam
 
-e Outreach Program on Indian Standards and Workshop on Drone and Robotics
+- Outreach Program on Indian Standards and Workshop on Drone and Robotics
 Standards 8th October 2023, DA-IICT, Gandhinagar
 
-e Faculty Development Program focused on Generative Al & Industrial loT, Intel SRR
+- Faculty Development Program focused on Generative Al & Industrial loT, Intel SRR
 Campus, Bengaluru, 3rd and 4th November, 2023.
 
 Yash Agrawal
 
-e Participated in Two week Semiconductor High-Impact Learning Program (SHILP) at
+- Participated in Two week Semiconductor High-Impact Learning Program (SHILP) at
 CEERI Pilani, Rajasthan from 13th - 24th May 2024.
 
-e Participated One week workshop under Instruction Enhancement Programme (IEP)
+- Participated One week workshop under Instruction Enhancement Programme (IEP)
 on Memory and In-memory Computing using SCL 180nm PDK at IIT Indore from
 18-22 March 2024.
 
-e Participated One week workshop under Instruction Enhancement Programme (IEP)
+- Participated One week workshop under Instruction Enhancement Programme (IEP)
 on ASIC Digital Design Using SCL 180 nm PDK by ChipIN Centre at CDAC
 Bangalore from 12-16 February 2024.
 
@@ -3225,20 +3225,20 @@ CONFERENCE PROGRAM COMMITTEE
 
 Hemant A Patil
 
-e Technical Program Committee (TPC), Member, Int. Conf. on Speech and Computer
+- Technical Program Committee (TPC), Member, Int. Conf. on Speech and Computer
 (SPECOM), Istanbul, Turkey, August 20-25, 2019.
 
-e Organiser, ISCA Supported Summer School on Automatic Speech Recognition (ASR)
+- Organiser, ISCA Supported Summer School on Automatic Speech Recognition (ASR)
 July 06-10, 2024, DA-IICT Gandhinagar
 
 Manish Kumar
 
-e Organized One-day workshop in Collaboration with Gigayasa Wireless, IIT Madras
+- Organized One-day workshop in Collaboration with Gigayasa Wireless, IIT Madras
 Research Park at DA-IICT Gandhinagar.
 
 Prosenjit Kundu
 
-e Member, Technical Program Committee, Complex Networks 2023
+- Member, Technical Program Committee, Complex Networks 2023
 
 7
 
@@ -3246,24 +3246,24 @@ SPONSORED RESEARCH PROJECTS
 
 Arpita Mall
 
-e Inspire Faculty Fellowship, Department of Science and Technology, Govt. of
+- Inspire Faculty Fellowship, Department of Science and Technology, Govt. of
 India
 
 Deepak Ghodgaonkar
 
-e Principal Investigator, Development of Microwave Absorber (Carbonyl Iron Filled
+- Principal Investigator, Development of Microwave Absorber (Carbonyl Iron Filled
 Silicon Rubber Sheets) in 1 to 8 GHz range, Name of Funding Agency - Space
 Application Centre, ISRO, Ahmedabad (RESPOND Program)
 
 Hemant A Patil
 
-e Principal Investigator, Speech technologies in Indian languages' under the Project titled
+- Principal Investigator, Speech technologies in Indian languages' under the Project titled
 ‘National Language Translation
-e Mission (NLTM) : BHASHINI’
+- Mission (NLTM) : BHASHINI’
 
 Manik Lal Das Rutu Parikh
 
-e Co-Principal Investigator, Indian e Principal Investigator, Design,
+- Co-Principal Investigator, Indian e Principal Investigator, Design,
 Language to Indian Language fabrication, validation and
 Machine Translation under the characterization of a low noise,
 project titled "National Language high speed, high voltage
@@ -3275,20 +3275,20 @@ Technology. RESPOND SAC, ISRO under
 MNIT, Jaipur.
 Saurabh Tiwari
 
-e Principal Investigator, an empirical analysis on Deriving Test Cases from Natural
+- Principal Investigator, an empirical analysis on Deriving Test Cases from Natural
 Language text using MBT approach, Sponcer: SAC-ISRO.
 
-e Principal Investigator, Vulnerability Research on QUIC Implementations" Spocer:
+- Principal Investigator, Vulnerability Research on QUIC Implementations" Spocer:
 CAIR, DRDO.
 
 Sujay Kadam
 
-e Principal Investigator, A Robotic Arm Platform for Performing Human Motor
+- Principal Investigator, A Robotic Arm Platform for Performing Human Motor
 Learning-like Studies (RAPPer-HML), Sponsor: DA-IICT through Seed Grant
 
 Yash Agrawal
 
-e Co-Pl, Secure and Energy efficient Mixed domain Compute in
+- Co-Pl, Secure and Energy efficient Mixed domain Compute in
 memory-based Al accelerator Chip for Edge applications, Ministry
 of Electronics and Information Technology.
 
@@ -3297,75 +3297,75 @@ of Electronics and Information Technology.
 VISIT TO INSTITUTES/ INDUSTRIES
 
 Rutu Parikh
-e Visit to elnfochips, Ahmedabad, India
+- Visit to elnfochips, Ahmedabad, India
 
 Sujay Kadam
 
-e Visit to Reliance Sasan
+- Visit to Reliance Sasan
 Power Limited, Sasan,
 Madhya Pradesh, India
 
 Hemant A Patil
 
-e Member, NAAC Peer Team, Baba Farid College of Engineering, Bhatinda, Punjab, Oct.
+- Member, NAAC Peer Team, Baba Farid College of Engineering, Bhatinda, Punjab, Oct.
 12-13, 2023
 
-e Member, NAAC Peer Team, Bajaj Institute of Technology, Wardha, Maharashtra, June
+- Member, NAAC Peer Team, Bajaj Institute of Technology, Wardha, Maharashtra, June
 13-14, 2024.
 
-e NAAC Peer Team, College of Military Engineering (CME), Pune, Maharashtra, July
+- NAAC Peer Team, College of Military Engineering (CME), Pune, Maharashtra, July
 15-16, 2024.
 
-e Attended the Workshop on Bhashini-NLTM-Core "Speech Technologies in Indian
+- Attended the Workshop on Bhashini-NLTM-Core "Speech Technologies in Indian
 Languages" to be held at K L University, Vijayawada (A.P.) during March 15-17, 2024.
 
 Manish K Gupta
 
-e Moderated the panel discussion on “Waste to Wealth - Circular economy" at
+- Moderated the panel discussion on “Waste to Wealth - Circular economy" at
 International Conference on “Path of Sustainability for Greener and Healthier Planet
 - 2024, Kaushalya the Skill University, Ahmedabad, India, March 21, 2024.
 
-e Served on numerous selection committees for faculty and staff at Kaushalya the Skill University,
+- Served on numerous selection committees for faculty and staff at Kaushalya the Skill University,
 Gujarat Government, staff selection at Gati Shakti Vishwavidyalaya, Government of India 2022-2023
 and Faculty Selection Committee at Jio Institute January and June 2024.
 
 e | have been instrumental in signing the MOU between the Bureau of Indian Standards and the
 DA-IICT, Gandhinagar, 4 August 2023.
 
-e Moderated the panel discussion on “Responsible Al in Artificial Intelligence and Machine Learning”,
+- Moderated the panel discussion on “Responsible Al in Artificial Intelligence and Machine Learning”,
 RPC 2023 conference, Kaushalya Skill University, Anmedabad, India, July 29, 2023.
 
-e Moderated the panel discussion on “Quantum Entrepreneurship Ecosystem in India”, QCC 2023
+- Moderated the panel discussion on “Quantum Entrepreneurship Ecosystem in India”, QCC 2023
 conference, Panjab, India, February 11, 2023.
 
-e External Projects Examiner/Reviewer, Dutch Research Council, March 2023
+- External Projects Examiner/Reviewer, Dutch Research Council, March 2023
 
-e External Projects Examiner/Reviewer, European Science Foundation, July 2023, Dec 2023, Jan 2024,
+- External Projects Examiner/Reviewer, European Science Foundation, July 2023, Dec 2023, Jan 2024,
 February 2024 (twice), June 2024.
 
-e External PhD Thesis Examiner/Reviewer, PhD Thesis, Build-up constructions over certain non-unital
+- External PhD Thesis Examiner/Reviewer, PhD Thesis, Build-up constructions over certain non-unital
 rings of order 9, King Abdula Aziz University, Saudi Arabia, June/July 2024
 
-e External PhD Thesis Examiner/Reviewer, PhD Thesis, Duality, and constructions of codes over
+- External PhD Thesis Examiner/Reviewer, PhD Thesis, Duality, and constructions of codes over
 non-unital rings of order 4, King Abdula Aziz University, Saudi Arabia, January
 2024
 
-e Invited member, Research Progress Committee (RPC), Nirma Universit (2016-till
+- Invited member, Research Progress Committee (RPC), Nirma Universit (2016-till
 date)
 
-e Invited external expert, IQAC, Nirma University (2018-till date)
+- Invited external expert, IQAC, Nirma University (2018-till date)
 
 Rutu Parikh
 
-e Selection of team from Level II (Proof of Concept) to Level III (Prototype) for
+- Selection of team from Level II (Proof of Concept) to Level III (Prototype) for
 designing “Two Wheeled Self Balancing Robot” Robotics competition:
 “ROBOFEST-GUJARAT 3.0”, August 2023, GUJCOST, DST, Gandhinagar, India.
 
 Yash Agrawal
 
-e Organiser, AIP Workshop on Artificial Intelligence and its Application using VLSI
+- Organiser, AIP Workshop on Artificial Intelligence and its Application using VLSI
 Design and Technology
-e Organiser, IEEE Expert Talks on Emerging Trends in Semiconductor Devices
+- Organiser, IEEE Expert Talks on Emerging Trends in Semiconductor Devices
 
 fn Es
 
@@ -4370,7 +4370,7 @@ HUMAN RESOURCE AND TRAINING
 
 The following faculty have joined the Institute during 2023-24:
 
-e Ratna Bharati Bhamidipati joined as Assistant Professor on 21 August 2023
+- Ratna Bharati Bhamidipati joined as Assistant Professor on 21 August 2023
 
 Harpreet Singh Jattana joined as Professor on 1 August 2023
 
@@ -4379,19 +4379,19 @@ Purbasha Das joined as Assistant Professor on 4 September 2023
 Tathagata Bandyopadhyay joined as Director on 16 November 2023
 
 Arpita Mal joined as Assistant Professor on 27 December 2023
-e Gayatri Pany joined as Adjunct Faculty on 1 January 2024
+- Gayatri Pany joined as Adjunct Faculty on 1 January 2024
 
 Ashish Phopalia joined as Adjunct Faculty on 1 January 2024
 
 Deepak Ghodgaonkar joined as Adjunct Faculty on 1 January 2024
-e Gaurav Kumar Singh joined as Adjunct Faculty on 1 January 2024
-e Anjan Ghosh joined as Adjunct Faculty on 1 January 2024
+- Gaurav Kumar Singh joined as Adjunct Faculty on 1 January 2024
+- Anjan Ghosh joined as Adjunct Faculty on 1 January 2024
 
 STAFF APPOINTMENTS:
 
-e Govindbhai Masharabhai Prajapati joined as Laboratory Assistant on 23 August 2023
-e Yamini Krishna Bhoware joined as Library Trainee on 1 August 2023
-e Prashant Kumar joined as Library Trainee on 1 August 2023
+- Govindbhai Masharabhai Prajapati joined as Laboratory Assistant on 23 August 2023
+- Yamini Krishna Bhoware joined as Library Trainee on 1 August 2023
+- Prashant Kumar joined as Library Trainee on 1 August 2023
 
 Soni Singh joined as Library Trainee on 14 August 2023
 
@@ -4400,11 +4400,11 @@ Neetu Kumari joined as Library Trainee on 14 August 2023
 Nisha Varma joined as Library Trainee on 13 September 2023
 
 Siddharth Dashrath Swaminarayan joined as Executive Registrar on 16 October 2023
-e Varshaa Ratnaparke joined as Communication Consultant on 1 December 2023
+- Varshaa Ratnaparke joined as Communication Consultant on 1 December 2023
 
 Ajit Kumar Motwani joined as Principal Advisor to the Director, on 14 December 2023
 
-e Krutika Himanshu Raval joined as Head-Hr & Administration on 15 March 2024
+- Krutika Himanshu Raval joined as Head-Hr & Administration on 15 March 2024
 
 Amitava Ghosh joined as Chief Operating Officer - Executive education and strategic
 initiatives on 18 March 2024
@@ -4425,39 +4425,39 @@ Akshay S Hansrajani joined as Assistant Manager-Hr on 5 July 2024 A
 
 y PROJECT STAFF APPOINTMENTS: %
 
-e Janvi Bhatt joined as Junior Research Fellow on 4 September 2023
+- Janvi Bhatt joined as Junior Research Fellow on 4 September 2023
 
-e Dhruvi Sukhadiya joined as Junior Research Fellow on 4 September 2023
+- Dhruvi Sukhadiya joined as Junior Research Fellow on 4 September 2023
 
 e lItaliya Nirajkumar V joined as Junior Research Fellow on 15 December 2023
-e Surupendu Gangopadhyay joined as Research Scholar on 1 January 2024
+- Surupendu Gangopadhyay joined as Research Scholar on 1 January 2024
 
-e Raj Jitendra Shah joined as Intern on 1 February 2024
+- Raj Jitendra Shah joined as Intern on 1 February 2024
 
-e Sri Sai Aditya Pusuluri joined as Project Personnel on 15 March 2024
+- Sri Sai Aditya Pusuluri joined as Project Personnel on 15 March 2024
 
-e Arth Juhul Shah joined as Research Assistant on 1 March 2024
+- Arth Juhul Shah joined as Research Assistant on 1 March 2024
 
-e Mahyavanshi Ritik Pankaj joined as Research Assistant on 1 March 2024
+- Mahyavanshi Ritik Pankaj joined as Research Assistant on 1 March 2024
 
-e Hiya Chaudhari joined as Research Assistant on 1 March 2024
+- Hiya Chaudhari joined as Research Assistant on 1 March 2024
 
-e Kumar Kavya joined as Research Assistant on 1 March 2024
+- Kumar Kavya joined as Research Assistant on 1 March 2024
 
-e Nandini Vishal Mandaviya joined as Research Assistant on 1 March 2024
+- Nandini Vishal Mandaviya joined as Research Assistant on 1 March 2024
 
-e Dharmi Patel joined as Research Assistant on 1 March 2024
+- Dharmi Patel joined as Research Assistant on 1 March 2024
 
-e Pooja Yogi joined as Junior Research Fellow on 1 April 2024
+- Pooja Yogi joined as Junior Research Fellow on 1 April 2024
 
-e Vishwajeet Singh Bhadouria joined as Junior Research Fellow on 15 April 2024
-e Avinash Dharmraj Pawar joined as Junior Research Fellow on 1 May 2024
+- Vishwajeet Singh Bhadouria joined as Junior Research Fellow on 15 April 2024
+- Avinash Dharmraj Pawar joined as Junior Research Fellow on 1 May 2024
 
-e Vyas Harsh Tusharkumar joined as Software Developer on 1 July 2024
+- Vyas Harsh Tusharkumar joined as Software Developer on 1 July 2024
 
-e Oza Birva Kirankumar joined as Software Developer on 1 July 2024
+- Oza Birva Kirankumar joined as Software Developer on 1 July 2024
 
-e Priyank M Oza joined as Junior Research Fellow on 30 July 2024
+- Priyank M Oza joined as Junior Research Fellow on 30 July 2024
 
 The HR team organized workshops tailored for the professional advancement of our staff
 members in various areas, based on a thorough needs assessment. These ranged from upgrading
@@ -4497,39 +4497,39 @@ sr
 
 Faculty Resignations
 
-e Priyanka Singh, Assistant Professor, on 31 August 2023
+- Priyanka Singh, Assistant Professor, on 31 August 2023
 
-e Gaurav Vinod Vaidya, Assistant Professor, on 4 August 2023
+- Gaurav Vinod Vaidya, Assistant Professor, on 4 August 2023
 
-e KS Dasgupta, Director, on 16 November 2023
+- KS Dasgupta, Director, on 16 November 2023
 
-e Tathagata Bandyopadhyay, Distinguished Professor, on 15 November 2023
-e Anuj Tawari, Assistant Professor, on 5 December 2023
+- Tathagata Bandyopadhyay, Distinguished Professor, on 15 November 2023
+- Anuj Tawari, Assistant Professor, on 5 December 2023
 
-e Ranendu Ghosh, Professor, on 31 December 2023
+- Ranendu Ghosh, Professor, on 31 December 2023
 
-e Gaurav Kumar Singh, Adjunct Faculty, on 31 December 2023
+- Gaurav Kumar Singh, Adjunct Faculty, on 31 December 2023
 
-e Anjan Ghosh, Professor, on 31 January 2024
+- Anjan Ghosh, Professor, on 31 January 2024
 
-e Deepak Ghodgaonkar, Visiting Faculty, on 29 February 2024
+- Deepak Ghodgaonkar, Visiting Faculty, on 29 February 2024
 
-e Rahul Mishra, Assistant Professor, on 20 February 2024
+- Rahul Mishra, Assistant Professor, on 20 February 2024
 
 Staff Resignations
 
-e Goutham N, Information Officer, on 25 August 2023
+- Goutham N, Information Officer, on 25 August 2023
 
-e Sachinkumar Anilbhai Parmar, Library Trainee, on 31 August 2023
-e Ganeshe Nilesh Madhukarbhai, Library Trainee, on 31 August 2023
-e Neetu Kumari, Library Trainee, on 9 September 2023
+- Sachinkumar Anilbhai Parmar, Library Trainee, on 31 August 2023
+- Ganeshe Nilesh Madhukarbhai, Library Trainee, on 31 August 2023
+- Neetu Kumari, Library Trainee, on 9 September 2023
 
-e Hasendrasinh Jhala, Head-Hr & Administration, on 31 March 2024
-e Suresh Shah, Visiting Doctor, on 30 June 2024
+- Hasendrasinh Jhala, Head-Hr & Administration, on 31 March 2024
+- Suresh Shah, Visiting Doctor, on 30 June 2024
 
-e Anjana Ved, Visiting Doctor, on 30 June 2024
+- Anjana Ved, Visiting Doctor, on 30 June 2024
 
-e Prashant Kumar, Library Trainee, on 31 July 2024
+- Prashant Kumar, Library Trainee, on 31 July 2024
 
 Project Staff Resignation
 
@@ -4770,44 +4770,44 @@ DA -lICT has undertaken new infrastructure projects and
 completed the renovation of existing facilities on campus. The
 key projects are as follows:
 
-e Rain Water Harvesting: Four additional percolation wells
+- Rain Water Harvesting: Four additional percolation wells
 were constructed to discharge surface rainwater into the
 ground at a depth of 15-20 feet, aiding the recharge of
 surface water bodies.
 
-e Food Court Upgrades: A new FRP weather shed was
+- Food Court Upgrades: A new FRP weather shed was
 installed above the counter area of all five food courts to
 improve functionality and shelter.
 
-e New Research Lab in CEP 210: A 22-seat research lab was
+- New Research Lab in CEP 210: A 22-seat research lab was
 set up with new furniture, workstation tables, drawer units,
 cupboards, revolving chairs, and air-conditioning units.
 
-e New Research Lab in FB 3 FF TA Room: A 15-seat lab was
+- New Research Lab in FB 3 FF TA Room: A 15-seat lab was
 established, equipped with workstation tables, revolving
 chairs, and new air-conditioning units.
 
-e Renovation of Meeting Rooms: Faculty Block 1, 2, and 4 |
+- Renovation of Meeting Rooms: Faculty Block 1, 2, and 4 |
 meeting rooms were refurbished with new furniture, @& RU ie ye
 including meeting tables, revolving chairs, computer tables, §4 © 1p
 and curtains.
 
-e Cafeteria Upgrades: A new juice counter was introduced to
+- Cafeteria Upgrades: A new juice counter was introduced to
 the cafeteria for enhanced dining options.
 
-e Staff Dining Hall Renovation: The staff dining hall was
+- Staff Dining Hall Renovation: The staff dining hall was
 renovated, now featuring air-conditioning and new dining
 furniture.
 
-e Student Dining Facility: The student mess facility was
+- Student Dining Facility: The student mess facility was
 upgraded with new utensils, a fridge, a weather shed, and a
 new exhaust system.
 
-e Hostel Upgrades: lol-based washing machine facilities
+- Hostel Upgrades: lol-based washing machine facilities
 were introduced in all three hostels, alongside new
 hot/normal drinking water facilities.
 
-e Energy-efficient AC Units: Old non-functional window AC
+- Energy-efficient AC Units: Old non-functional window AC
 units in faculty and staff offices were replaced with new,
 energy-efficient split AC units’ featuring inverter
 technology.
