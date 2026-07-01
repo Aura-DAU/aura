@@ -1,6 +1,6 @@
 ---
 title: "Rules And Guidelines For Conducting Written Examination For Person With Benchmark Disabilities"
-url: "https://daiict.ac.in/"
+url: "https://intranet.daiict.ac.in/academics/Rules & Guidelines for Conducting written examination for Person with Benchmark Disabilities.pdf"
 category: "Academics"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-06-10"

@@ -1,6 +1,6 @@
 ---
 title: "Examination Rules For Students"
-url: "https://daiict.ac.in/"
+url: "https://intranet.daiict.ac.in/academics/Examination Rules for Students.pdf"
 category: "Academics"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-06-10"
