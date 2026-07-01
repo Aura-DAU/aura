@@ -41,17 +41,12 @@ def main():
     CHUNKING_DIR = INGESTION_DIR / "chunking"
 
     # Helper to convert paths to a canonical format relative to DATA_DIR
+        # Helper to convert paths to a canonical format relative to DATA_DIR
     def get_canonical_path(path_str):
-        try:
-            p = Path(path_str)
-            if not p.is_absolute():
-                # Relative paths in metadata are relative to the chunking directory
-                p = (CHUNKING_DIR / p).resolve()
-            else:
-                p = p.resolve()
-            return p.relative_to(DATA_DIR.resolve()).as_posix().lower()
-        except ValueError:
-            return Path(path_str).as_posix().lower()
+        path_str = Path(path_str).as_posix().lower()
+        if "data/" in path_str:
+            return path_str.split("data/", 1)[1]
+        return path_str
 
     logger.info("Scanning directory: %s", DATA_DIR)
     md_files = list(DATA_DIR.rglob("*.md"))
