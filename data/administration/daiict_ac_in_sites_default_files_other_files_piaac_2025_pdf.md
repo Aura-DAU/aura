@@ -134,289 +134,33 @@ The punishment for breaching placement policy and/or process can vary depending 
 severity of the breach. Some indicative (but not limited to) punishments are defined in this
 document.
 
-Offense/Breach/Violation
-
-Absence from
-employability skill sessions (Pre-
-Placement Tests, Mock GD’s
-(Group Discussion), Technical
-Boot camps, Interview Preparation
-Workshops, Training Sessions,
-Guest Lectures, etc.) for more
-than 1 day
-
-Canvassing in any form including
-misleading information in resume
-(e.g., CPI, electives, projects,
-internships, etc.)
-
-3
-
-4
-
-Dress code violation during
-campus recruitment processes
-
-placement process including Pre-
-Placement Talk, Written Test
-Interviews, etc.
-
-Engaging in impersonation or
-proxy attendance during any
-
-stage of the company’s campus
-recruitment process (PPTs,
-written tests, etc.).
-Dissemination of false or
-misleading information
-concerning placement activities at
-DAU during the placement
-process.
-
-mandatory
-
-Punishment(s)
-
-Ineligible for Day-0
-companies
-
-for their respective
-programs
-
-Debarred for next 1
-company
-
-Exception
-
-Medical reason with
-proof
-
-NA
-
-Debarred for next 1
-
-such as Pre-Placement Talks, company
-written tests, or interviews.
-Mobile phone use during
-
-Debarred for next 1
-company
-
-| Debarred for next 1
-company
-
-Debarred for next 1
-company
-
-ny [eosin
-
-NA
-
-NA
-
-NA
-
-NA
-
->» be
-
-Dhirubhai Ambani
-University
-
-: Documented medical
-Failure to attend the placement :
-
-Debarred for next 2 reason with
-7 | process of a company after |
-
-maar compani i
-registering for it. ea vetiably promt
-
-Engaging in any direct or indirect |
-
-communication with company |
-representatives through email, Debarred for next 2
-calls, or social media platforms companies
-before, during, or after the
-lacement process.
-Any act of misconduct toward
-wee anil artoials sigs | Debarred for next 2
-placement activities (PPTs, :
-
-' ; ; companies
-written tests, interviews, etc.),
-irrespective of provocation. |
-Any form of verbal or written
-misconduct toward Placement | Debarred for next 2
-10 : , NA
-Cell representatives or Student companies
-
-Placement Cell members (SPC).
-Engaging in unlawful or
-
-prohibited activities connected to
-placement processes, either on or
-off campus |
-
-NA
-
-NA
-
-Debarred for next 2
-companies; possible NA
-referral to DAC
-
-Exceptions may be
-granted for
-documented medical
-| reasons, overlapping
-Use of unfair practices during on-campus
-
-company assessments, including | internship schedules,
-possession of unauthorized or ongoing
-
-devices or attempting tests from international
-
-| Debarred for next 3
-
-e locations not approved by the | See internships that
-Placement Office. | prevent attendance
-| on the specified test
-date.
-
-Any interference in official
-placement procedures, including |
-
-manipulation of slot schedules,
-lobbying with the placement cell, | Debarred for next 3
-or dissemination of false | companies
-
-information about student |
-
-selection process. | ia
-
-NA
-
-»
-
-» be
-
-Dhirubhai Ambani
-University
-
-|_| Unauthorized disclosure
-
-such as CTC, recruitment
-schedule, or process details to
-representatives of other
-organizations.
-
-14
-
-misuse of another person’s
-identity during company
-rocesses, tests, or interviews.
-
-15
-
-Participation in, or association
-with, any financial misconduct
-
-16 | or fraudulent activity at the
-company.
-
-Gender-related
-received from compan
-Posting defamatory or
-inappropriate content about the
-company or DAU on social media
-during SI/WI/J.
-
-Declining a job offer obtained via
-the campus placement process.
-Defaming the University or
-Placement Cell during the
-20 placement process or while
-pursuing an internship.
-
-complaint
-
-Leaving the internship
-ABH BISR int ) before
-
-out prior written
-pe Or approval from the
-Pfacement Office.
-
-of
-company-specific information
-
-Debarred for next 4
-companies
-
-Forgery, impersonation, or
-
-Debarred for next 4
-companies
-
-Ineligible for
-placement;
-
-Referred to DAC, and
-the concerned faculty
-body for further action
-including possible
-denial of future
-reference letters or
-recommendations for
-employment or
-internships.
-
-Same as 16
-
-Same as 16
-
-Ineligible for further
-placement
-
-Same as 16
-
-including possible
-denial of future
-
-reference letters or
-recommendations for
-employment or
-
-NA
-
-NA
-
-NA
-
-NA
-
->a
-
-Dhirubhai Ambani
-University
-
-Unethical practices reported by
-the company—such as leaving
-immediately after training,
-misconduct, or lack of Same as 21 NA
-commitment—during internship
-or job tenure before award of the
-degree.
-
-Any act of indiscipline or
-misconduct during the internship | Maybe referred to DAC
-period, if reported by the at the discretion of
-company before the degree is PIAAC
-
-awarded. |
-
-23
+### Indicative Placement Policy Violations and Punishments
+
+| S.No. | Offense / Breach / Violation | Punishment(s) | Exception |
+| :---: | :--- | :--- | :--- |
+| **1** | Absence from employability skill sessions (Pre-Placement Tests, Mock GD’s, Technical Boot camps, Interview Preparation Workshops, Training Sessions, Guest Lectures, etc.) for more than 1 day. | Ineligible for Day-0 companies. | Medical reason with proof. |
+| **2** | Canvassing in any form including misleading information in resume (e.g., CPI, electives, projects, internships, etc.). | Ineligible for placement for their respective programs. | NA |
+| **3** | Dress code violation during campus recruitment processes. | Debarred for next 1 company. | NA |
+| **4** | Mobile phone use during placement process including Pre-Placement Talk, Written Test, Interviews, etc. | Debarred for next 1 company. | NA |
+| **5** | Engaging in impersonation or proxy attendance during any stage of the company’s campus recruitment process (PPTs, written tests, etc.). | Debarred for next 1 company. | NA |
+| **6** | Dissemination of false or misleading information concerning placement activities at DAU during the placement process. | Debarred for next 1 company. | NA |
+| **7** | Failure to attend the placement process of a company after registering for it. | Debarred for next 2 companies. | Documented medical reason with verifiably prompt notice. |
+| **8** | Engaging in any direct or indirect communication with company representatives through email, calls, or social media platforms before, during, or after the placement process. | Debarred for next 2 companies. | NA |
+| **9** | Any act of misconduct toward placement activities (PPTs, written tests, interviews, etc.), irrespective of provocation. | Debarred for next 2 companies. | NA |
+| **10** | Any form of verbal or written misconduct toward Placement Cell representatives or Student Placement Cell members (SPC). | Debarred for next 2 companies. | NA |
+| **11** | Engaging in unlawful or prohibited activities connected to placement processes, either on or off campus. | Debarred for next 2 companies; possible referral to DAC. | NA |
+| **12** | Use of unfair practices during on-campus company assessments, including possession of unauthorized devices or attempting tests from locations not approved by the Placement Office. | Debarred for next 3 companies. | Exceptions may be granted for documented medical reasons, overlapping internship schedules, or ongoing international internships that prevent attendance on the specified test date. |
+| **13** | Any interference in official placement procedures, including manipulation of slot schedules, lobbying with the placement cell, or dissemination of false information about student selection process. | Debarred for next 3 companies. | NA |
+| **14** | Unauthorized disclosure of company-specific information such as CTC, recruitment schedule, or process details to representatives of other organizations. | Debarred for next 4 companies. | NA |
+| **15** | Forgery, impersonation, or misuse of another person’s identity during company processes, tests, or interviews. | Debarred for next 4 companies. | NA |
+| **16** | Participation in, or association with, any financial misconduct or fraudulent activity at the company. | Ineligible for placement; Referred to DAC, and the concerned faculty body for further action including possible denial of future reference letters or recommendations for employment or internships. | NA |
+| **17** | Gender-related complaint received from company. | Same as 16 (Ineligible for placement; Referred to DAC, etc.). | NA |
+| **18** | Defaming the University or Placement Cell during the placement process or while pursuing an internship. | Same as 16 (Ineligible for placement; Referred to DAC, etc.). | NA |
+| **19** | Declining a job offer obtained via the campus placement process. | Ineligible for further placement. | NA |
+| **20** | Posting defamatory or inappropriate content about the company or DAU on social media during SI/WI/J. | Same as 16 (Ineligible for placement; Referred to DAC, etc.). | NA |
+| **21** | Leaving the internship before completing the tenure without prior written permission or approval from the Placement Office. | Same as 16 (Ineligible for placement; Referred to DAC, etc.). | NA |
+| **22** | Unethical practices reported by the company—such as leaving immediately after training, misconduct, or lack of commitment—during internship or job tenure before award of the degree. | Same as 16 (Ineligible for placement; Referred to DAC, etc.). | NA |
+| **23** | Any act of indiscipline or misconduct during the internship period, if reported by the company before the degree is awarded. | Maybe referred to DAC at the discretion of PIAAC. | NA |
 
 1. PIAAC may impose a monetary fine based on the severity of the offence. Such fines
 may be deducted from the student’s caution deposit.
