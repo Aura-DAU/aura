@@ -17,108 +17,25 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 
 ## Main Content
 
-Me ||RF-2023 | TOP 100
+# IIRF Ranking 2023 — Top State Private Universities (Overall)
 
-All India Rank*
-(Based on Survey & Secondary Research)
-
-State Private Universities
-
- DA-IICT University
-
-Nirma University
-
-Gandhinagar
-
-Ahmedabad
-
-Shiv Nadar University
-
-Dadri
-
-Shri Dharmasthala
-Manjunatheshwara University
-
-# Azim Premji University
-
-Dharwad
-
-Bengaluru
-
-7 AMITY University
-
-REVA University
-Chitkara University
-Dayananda Sagar University
-
-Sri Sri University-
-
-4) O.P. Jindal Global University
-
-Bengaluru
-
-State
-
-Uttar Pradesh
-
-Karnataka
-
-Karnataka
-
-Uttar Pradesh
-
-Karnataka
-
-Patiala
-Bengaluru
-
-Bhubaneswar
-
-Punjab
-
-Karnataka
-
-Odisha
-
-Sonipat
-
-Shoolini University
-
-/. ] JSS Science and Technology
-he University
-
-*Page 6
-
-Centre for Environmental Planning
-and Technology University
-
-# Ahmedabad University
-
-ikkim Manipal University
-
-Solan
-
-Mysuru
-
-Ahmedabad
-
-Ahmedabad
-
-Apeejay Stya University
-
-EDUCATION
-
-Haryana
-
-Himachal
-Pradesh
-
-Karnataka
-
-Gujarat
-
-Gujarat
-
-March - April 2023 | 162
-
-*Page 6
+| Rank | University | City | State |
+| :---: | :--- | :--- | :--- |
+| **1** | Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) | Gandhinagar | Gujarat |
+| **2** | Ashoka University | Sonipat | Haryana |
+| **3** | Nirma University | Ahmedabad | Gujarat |
+| **4** | Shiv Nadar University | Dadri | Uttar Pradesh |
+| **5** | Shri Dharmasthala Manjunatheshwara University | Dharwad | Karnataka |
+| **6** | Azim Premji University | Bengaluru | Karnataka |
+| **7** | AMITY University | Noida | Uttar Pradesh |
+| **8** | REVA University | Bengaluru | Karnataka |
+| **9** | Chitkara University | Patiala | Punjab |
+| **10** | Dayananda Sagar University | Bengaluru | Karnataka |
+| **11** | Sri Sri University | Bhubaneswar | Odisha |
+| **12** | O.P. Jindal Global University | Sonipat | Haryana |
+| **13** | Shoolini University | Solan | Himachal Pradesh |
+| **14** | JSS Science and Technology University | Mysuru | Karnataka |
+| **15** | Centre for Environmental Planning and Technology (CEPT) University | Ahmedabad | Gujarat |
+| **16** | Ahmedabad University | Ahmedabad | Gujarat |
+| **17** | Sikkim Manipal University | Gangtok | Sikkim |
+| **18** | Apeejay Stya University | Gurugram | Haryana |

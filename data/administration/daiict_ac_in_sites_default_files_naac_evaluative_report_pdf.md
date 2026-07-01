@@ -17,16 +17,9 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 
 ## Main Content
 
-asa et NAAC Evaluative Report 2015
+NAAC Evaluative Report 2015
 
--, DAIICT
-
-AOojouude, UONESIUNWWO) PUe UONEWJOJU] JO dIN}}SU| uequuy lEYQnNIIUd DIIVd
-
-», “
-
-ie ae lan thé
-wt Vins oY a Ae eh “ty!
+Dhirubhai Ambani Institute of Information and Communication Technology, Gandhinagar
 
 OMY ca ierg
 Yep Wy

@@ -26,35 +26,54 @@ make students aware of the capabilities as well as limitations of computers. It 
 idea about the kind of problems that are realistically tractable. Text book: Automata and
 Computability by Dexter C.
 
-Kozen. Springer, 1997/2012/2013. Reference books: Introduction to Theory of Computation, 2nd Ed,
-Michael Sipser, Wadsworth Publishing Co Inc, 2012. Languages and Machines, 3rd Ed, Thomas A.
-Sudkamap, Addison Wesley, 2006. An introduction to Formal Languages and Automaton, Narosa Pub-
+Kozen. Springer, 1997/2012/2013. Reference books:  - Introduction to Theory of Computation, 2nd Ed,
+Michael Sipser, Wadsworth Publishing Co Inc, 2012.  - Languages and Machines, 3rd Ed, Thomas A.
+Sudkamap, Addison Wesley, 2006.  - An introduction to Formal Languages and Automaton, Narosa Pub-
 lishing House, 2007.
 
 ### Evaluation
 
-method: The evaluation will have the following break-up: One insemester exam (20%) One end
-semester exam (50%) Quizzes/assignments (20%) 1 Course outcomes: After successfully completing this
-course, students will: be euqipped to model problems, both abstract and real, in the areas of
-computability, algorithmic complexity and formal language frame- work. be able to deploy this
+method: The evaluation will have the following break-up: 
+- One insemester exam (20%) 
+- One end
+semester exam (50%) 
+- Quizzes/assignments (20%) 1 Course outcomes: After successfully completing this
+course, students will: 
+- be equipped to model problems, both abstract and real, in the areas of
+computability, algorithmic complexity and formal language frame- work. 
+- be able to deploy this
 knowledge in the software disciplines of compiler design as well as formal speci cation and veri
 cation.
 
-P1P2P3P4P5P6P7P8P9P10P11P12  Sl. No. Topic No. of Lectures 1 Mathematical Preliminaries 4 2 Finite
+P1P2P3P4P5P6P7P8P9P10P11P12    Sl. No. Topic No. of Lectures 1 Mathematical Preliminaries 4 2 Finite
 State Automata & Regular Languages 12 3 Pushdown Automata & Context-Free Languages 8 4 Turing
 Machines & Undecidability 6 Detailed contents:
 1. Mathematical preliminaries:
-Sets, Strings and operations on them. Formal languages and their applicability in modelling
+
+- Sets, Strings and operations on them. 
+- Formal languages and their applicability in modelling
 computa- tional problems.
 2. Finite state automate & regular languages:
-Finite state machines (deterministic, non-deterministic and -moves), subset construction Closure
-properties and fancy regular languages Regular languages, regular expressions and equivalence
-Regular grammars Finite equivalences Pumping lemma.
+
+- Finite state machines (deterministic, non-deterministic and -moves), subset construction 
+- Closure
+properties and fancy regular languages  - Regular languages, regular expressions and equivalence
+
+- Regular grammars 
+- Finite equivalences 
+- Pumping lemma.
 3.
 
 Pushdown automata & context-free languages
-2 Context-free grammars Deterministic and non-deterministic CFLs Acceptance by empty stack or
-nal state Pumping lemma
+2 
+- Context-free grammars 
+- Deterministic and non-deterministic CFLs 
+- Acceptance by empty stack or
+nal state 
+- Pumping lemma
 4. Turing machines & undecidability
-Determinstic and non-deterministic Turing machines Decision and computational variants
-Undecidability 3
+
+- Deterministic and non-deterministic Turing machines 
+- Decision and computational variants
+
+- Undecidability 3

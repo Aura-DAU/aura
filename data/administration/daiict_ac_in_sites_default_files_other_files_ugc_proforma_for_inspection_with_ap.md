@@ -27,8 +27,8 @@ d»
 Dhirubhai Ambani
 University
 
-GA-ICT Road, Gandhinagar 282 a Gujarat, (India)
-Ti oS F682 61700 | infoSeda ni | wana! claude in
+DA-IICT Road, Gandhinagar - 382007, Gujarat, (India)
+Tel: +91 79 6826 1700 | info@daiict.ac.in | www.daiict.ac.in
 
 UGC Proforma for Inspection
 

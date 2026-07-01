@@ -19,21 +19,15 @@ This document is a Excel resource from DA-IICT / DAU. Content below has been ext
 
 ### Sheet: Sheet1
 
-| Institute Name | Unnamed: 1 | Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) | Unnamed: 3 | Unnamed: 4 | Unnamed: 5 | Unnamed: 6 | Unnamed: 7 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| India Ranking 2017 ID | - | IR17-ENGG-1-18173 | - | - | - | - | - |
-| Discipline | - | ENGINEERING | - | - | - | - | - |
-| Parameter | Consultancy Projects | - | - | - | - | - | - |
-| 2D.FPPP | S.No. | Financial Year | Name of faculty (Chief Consultant) | Client Organization | Title of Consultancy of project | Amount received (in Rupees) | Amount received (in words) |
-| - | 1 | 2015-16 | Prof. Anil Roy | (n) Code Solutions | Testing of Wireless <br>Device and CCTV <br>Surveillance System | 493061 | Four Lack Ninty Three Thousand Sixty One |
-| - | - | - | DIRECTOR | IIIT VADODARA | Mentorship of <br>IIIT-Vadodara | 1800000 | Ten Lack Elevan Thousand Five Hundred Sixty |
-| - | - | - | Prof. Anil Roy | (n) Code Solutions | Internet Wi-Fi Network Security Testing | 459999 | Four Lack Fifty Nine Thousand Nine Hundred Ninty Nine |
-| - | 2 | 2014-15 | Prof. Girja Sharan | Adani Institute of Infrastructure Management | Renewable energy applications | 90000 | Ninety Thousand |
-| - | - | - | DIRECTOR | IIIT VADODARA | Mentorship of <br>IIIT-Vadodara | 1011560 | Ten Lack Elevan Thousand Five Hundred Sixty |
-| - | 3 | 2013-14 | Prof. Sourish Dasgupta | Samyak Infotech Pvt Ltd | Debugging and Performance Tuning | 3600 | Three Thousand Six Hundred |
-| - | - | - | Prof. S.C. Sahasrabuddhe | SSN Trust | - | 45000 | Fourty Five Thousand |
-| - | - | - | Prof. Asim Banerjee | USID Foundation | Design Challenge-2012 | 50000 | Fifty Thousand |
-| - | - | - | DIRECTOR | IIIT VADODARA | Mentorship of <br>IIIT-Vadodara | 1011560 | Ten Lack Elevan Thousand Five Hundred Sixty |
-| - | - | - | Prof. Girja Sharan | Adani Institute of Infrastructure Management | Renewable Energy Applications | 90000 | Ninety Thousand |
-
-
+| S.No. | Financial Year | Name of faculty (Chief Consultant) | Client Organization | Title of Consultancy of project | Amount received (in Rupees) | Amount received (in words) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 2015-16 | Prof. Anil Roy | (n) Code Solutions | Testing of Wireless <br>Device and CCTV <br>Surveillance System | 493061 | Four Lack Ninty Three Thousand Sixty One |
+|  |  | DIRECTOR | IIIT VADODARA | Mentorship of <br>IIIT-Vadodara | 1800000 | Ten Lack Elevan Thousand Five Hundred Sixty |
+|  |  | Prof. Anil Roy | (n) Code Solutions | Internet Wi-Fi Network Security Testing | 459999 | Four Lack Fifty Nine Thousand Nine Hundred Ninty Nine |
+| 2 | 2014-15 | Prof. Girja Sharan | Adani Institute of Infrastructure Management | Renewable energy applications | 90000 | Ninety Thousand |
+|  |  | DIRECTOR | IIIT VADODARA | Mentorship of <br>IIIT-Vadodara | 1011560 | Ten Lack Elevan Thousand Five Hundred Sixty |
+| 3 | 2013-14 | Prof. Sourish Dasgupta | Samyak Infotech Pvt Ltd | Debugging and Performance Tuning | 3600 | Three Thousand Six Hundred |
+|  |  | Prof. S.C. Sahasrabuddhe | SSN Trust |  | 45000 | Fourty Five Thousand |
+|  |  | Prof. Asim Banerjee | USID Foundation | Design Challenge-2012 | 50000 | Fifty Thousand |
+|  |  | DIRECTOR | IIIT VADODARA | Mentorship of <br>IIIT-Vadodara | 1011560 | Ten Lack Elevan Thousand Five Hundred Sixty |
+|  |  | Prof. Girja Sharan | Adani Institute of Infrastructure Management | Renewable Energy Applications | 90000 | Ninety Thousand |

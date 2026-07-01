@@ -18,21 +18,8 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 ## Main Content
 
 August 2022 – July 2023
-22
-23
-ENGINEERS WITH 
-SOCIAL RESPONSIBILITY
-NAAC Accreditation Grade ‘A+’
-Recipient of Centre of Excellence Award by the Government of Gujarat
-DA-IICT Road, Gandhinagar, Gujarat, India 382007.
-Tel.: +91 79 6826 1700 | Fax: +91 79 6826 1710 | Web: www.daiict.ac.in
 
-1
-August 2022 – July 2023
-22
-23
-ENGINEERS WITH 
-SOCIAL RESPONSIBILITY
+ENGINEERS WITH SOCIAL RESPONSIBILITY
 NAAC Accreditation Grade ‘A+’
 Recipient of Centre of Excellence Award by the Government of Gujarat
 DA-IICT Road, Gandhinagar, Gujarat, India 382007.
