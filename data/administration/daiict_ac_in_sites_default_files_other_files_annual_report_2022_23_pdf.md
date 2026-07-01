@@ -2484,7 +2484,7 @@ of Price for Taxi Rides," in Proceedings of
 Third International Conference on 
 Computing, Communications, and Cyber-
 Security. Lecture Notes in Networks and 
-Systems, vol 421., Singh, P.K., Wierzcho , 
+Systems, vol 421., Singh, P.K., Wierzcho, 
 S.T., Tanwar, S., Rodrigues, J.J.P.C., 
 Ganzha, M. (eds), Springer, Singapore, 
 Jan. 2023, pp. 341–348, doi: 10.1007/978-
@@ -2529,7 +2529,7 @@ Manish Khare, "Emotion Detection Using
 Facial Expressions," in Futuristic Trends in 
 Networks and Computing Technologies. 
 Lecture Notes in Electrical Engineering, vol 
-936., Singh, P.K., Wierzcho , S.T., Chhabra,
+936., Singh, P.K., Wierzcho, S.T., Chhabra,
 
 37
 J.K., Tanwar, S. (eds), Springer, Singapore, 
@@ -2542,7 +2542,7 @@ Using Image Processing and Machine
 Learning," in Futuristic Trends in Networks 
 and Computing Technologies. Lecture 
 Notes in Electrical Engineering, vol 936., 
-Singh, P.K., Wierzcho , S.T., Chhabra, J.K., 
+Singh, P.K., Wierzcho, S.T., Chhabra, J.K., 
 Tanwar, S. (eds), Springer, Singapore, 16 
 N o v.  2 0 2 2 ,  p p .  5 4 9 – 5 6 1 ,  I S B N: 
 9789811950377. doi: 10.1007/978-981-19-
@@ -2575,7 +2575,7 @@ Processing: Relational Versus Graph
 Approach," in Futuristic Trends in Networks 
 and Computing Technologies. Lecture 
 Notes in Electrical Engineering, vol 936., 
-Singh, P.K., Wierzcho , S.T., Chhabra, J.K., 
+Singh, P.K., Wierzcho, S.T., Chhabra, J.K., 
 Tanwar, S. (eds), Springer, Singapore, 16 
 N o v.  2 0 2 2 ,  p p .  5 7 5 – 5 8 7 ,  I S B N: 
 9789811950377. doi: 10.1007/978-981-19-
@@ -2586,7 +2586,7 @@ loading of Raw data for Limited Storage
 Resources," in Futuristic Trends in 
 Networks and Computing Technologies. 
 Lecture Notes in Electrical Engineering, vol 
-936., Singh, P.K., Wierzcho , S.T., Chhabra, 
+936., Singh, P.K., Wierzcho, S.T., Chhabra, 
 J.K., Tanwar, S. (eds), Springer, Singapore, 
 16 Nov. 2022, pp. 1035–1048, ISBN: 
 9789811950377. doi: 10.1007/978-981-19-
@@ -2597,7 +2597,7 @@ Classication Using Pixel-Level Lesion
 Segmentation," in Futuristic Trends in 
 Networks and Computing Technologies. 
 Lecture Notes in Electrical Engineering, vol 
-936., Singh, P.K., Wierzcho , S.T., Chhabra, 
+936., Singh, P.K., Wierzcho, S.T., Chhabra, 
 J.K., Tanwar, S. (eds), Springer, Singapore, 
 16 Nov. 2022, pp. 405–417, ISBN: 
 9789811950377. doi: 10.1007/978-981-19-
@@ -2608,7 +2608,7 @@ Network for Colorization of Mammograms,"
 in Futuristic Trends in Networks and 
 Computing Technologies. Lecture Notes in 
 Electrical Engineering, vol 936., Singh, P.K., 
-Wierzcho , S.T., Chhabra, J.K., Tanwar, S. 
+Wierzcho, S.T., Chhabra, J.K., Tanwar, S. 
 (eds), Springer, Singapore, 16 Nov. 2022, 
 pp. 13–24, ISBN: 9789811950377. doi: 
 10.1007/978-981-19-5037-7_2.
@@ -2618,7 +2618,7 @@ Computer Vision Applications," in Futuristic
 Trends in Networks and Computing 
 Technologies. Lecture Notes in Electrical 
 Engineering, vol 936., Singh, P.K., 
-Wierzcho , S.T., Chhabra, J.K., Tanwar, S. 
+Wierzcho, S.T., Chhabra, J.K., Tanwar, S. 
 (eds), Springer, Singapore, 16 Nov. 2022, 
 pp. 391–403, ISBN: 9789811950377. doi: 
 10.1007/978-981-19-5037-7_28.
@@ -2836,7 +2836,7 @@ Enabled Resource Allocation in Fog–IoT
 Architecture," in Futuristic Trends in 
 Networks and Computing Technologies. 
 Lecture Notes in Electrical Engineering, vol 
-936., Singh, P.K., Wierzcho , S.T., Chhabra, 
+936., Singh, P.K., Wierzcho, S.T., Chhabra, 
 J.K., Tanwar, S. (eds), Springer, Singapore, 
 16 Nov. 2022, pp. 303–314, ISBN: 
 9789811950377. doi: 10.1007/978-981-19-

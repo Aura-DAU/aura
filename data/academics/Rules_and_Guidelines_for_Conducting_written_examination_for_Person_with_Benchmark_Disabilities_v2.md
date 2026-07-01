@@ -47,4 +47,3 @@ On request, following arrangements can be done by CoE:
 The examination hall for such student(s) can be arranged on ground floor to make it easy accessible for the
 persons with specific disabilities. CoE will also notify the corresponding course instructor about such
 arrangement.
-
