@@ -11,7 +11,7 @@ team: "Team E"
 
 ## Overview
 
-| Nature of Grievances | Level-I<br> Grievance Handling Authority | Level-II<br> Grievance Handling Authority | Level-III<br> Grievance Handling Authority | | :-: | --- | --- | --- | | Matters related to Human Resource and Administration | Head-HR | Executive Registrar | GRHC | | Matters related to 
+This document lists the Grievance Redressal Authority levels for faculty at Dhirubhai Ambani University (DAU), categorized by the nature of the grievances.
 
 ## Main Content
 
