@@ -200,7 +200,17 @@ class RetrievalPipeline:
         "phd part time": "Ph.D.",
         "doctoral": "Ph.D."
     }
-    
+
+    # Fix AL1-SENTINEL: broad program sentinels are valid alias targets
+    # (e.g. "mtech" → "M.Tech.") but they do NOT exist as values in the
+    # Pinecone index — the index only stores specific specialisations like
+    # "M.Tech. (ICT)". Building a filter {"program_name": {"$eq": "M.Tech."}}
+    # therefore always returns zero results, and the fallback filter-free
+    # search then runs with top_k=5 instead of the intended 15.
+    # Listing them here lets both _build_metadata_filter and the
+    # alias_resolved check treat them as "unresolved / broad".
+    BROAD_PROGRAM_SENTINELS = {"B.Tech.", "M.Tech.", "M.Sc.", "M.Des."}
+
     def _expand_semesters(self, query):
         arabic_to_roman = {
             "1": "I", "2": "II", "3": "III", "4": "IV",
@@ -255,7 +265,10 @@ class RetrievalPipeline:
         course_code_raw = entities.get("course_code")
         course_code = first_value(course_code_raw)
 
-        # Fix F: canonicalise all program values, not just the first one
+        # Fix F: canonicalise all program values, not just the first one.
+        # Fix AL1-SENTINEL: after canonicalisation, strip broad sentinel values
+        # ("B.Tech.", "M.Tech.", "M.Sc.", "M.Des.") so they never produce a
+        # Pinecone filter clause — those strings do not exist in the index.
         program_name_raw = entities.get("program_name")
         if isinstance(program_name_raw, list):
             program_names = [
@@ -263,9 +276,14 @@ class RetrievalPipeline:
                     self._canonical_program_name(p) for p in program_name_raw
                 ) if p
             ]
+            # Remove broad sentinels from the list
+            program_names = [p for p in program_names if p not in self.BROAD_PROGRAM_SENTINELS]
             program_name = program_names[0] if len(program_names) == 1 else (program_names or None)
         else:
             program_name = self._canonical_program_name(program_name_raw)
+            # A broad sentinel must not become a filter clause
+            if program_name in self.BROAD_PROGRAM_SENTINELS:
+                program_name = None
 
         if course_code:
 
@@ -676,11 +694,17 @@ class RetrievalPipeline:
             # The filter being None means the entire index is searched; top_k=5
             # is far too narrow for broad-corpus sub-queries.
             base_top_k = plan.get("top_k", 5)
-            alias_resolved = bool(
-                self._canonical_program_name(
-                    plan.get("entities", {}).get("program_name", "")
-                )
-            ) if plan.get("entities", {}).get("program_name") else True
+            # Fix AL1-SENTINEL: alias_resolved must be False for broad sentinels
+            # ("M.Tech.", "B.Tech.", etc.) so the top_k=15 boost fires.
+            # The old code treated any non-None canonical as resolved, but
+            # sentinels are non-None yet still unresolved — they only mean
+            # "user said mtech without specifying a specialisation".
+            raw_program = plan.get("entities", {}).get("program_name", "")
+            canonical_program = self._canonical_program_name(raw_program) if raw_program else None
+            alias_resolved = (
+                canonical_program is not None
+                and canonical_program not in self.BROAD_PROGRAM_SENTINELS
+            )
             retrieval_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
 
             for subquery in decomposed_queries:

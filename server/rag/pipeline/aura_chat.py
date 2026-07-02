@@ -92,6 +92,40 @@ class AuraChat:
                 }
 
             history = history or []
+            # Guardrail / Query Augmentation for RBAC
+            retrieval_query = query
+            if profile:
+                role = profile.get("role", "student")
+                if role == "professor":
+                    subjects = profile.get("subjects", [])
+                    if subjects:
+                        subjects_str = ", ".join(subjects)
+                        retrieval_query = f"{query} (Context: student data related to {subjects_str})"
+
+            # Fix HARDCODE-REMOVAL: previously this function used four separate
+            # static Python keyword lists (FEE_KEYWORDS, MYTH_BUST_PATTERNS,
+            # LAUNDRY_KEYWORDS, MOVEIN_KEYWORDS) here in aura_chat.py to
+            # pattern-match query intent and bolt extra words onto the
+            # retrieval query. This doesn't generalize: every new entity,
+            # policy, or vocabulary gap found in testing required editing
+            # this file and redeploying a new static list.
+            #
+            # All of that logic has been moved into retrieval_pipeline.py
+            # get_context() (Fix QP6/RP-MYTH), which runs AFTER the LLM-driven
+            # query_planner classifies retrieval_intent and is_claim_verification
+            # generically for every query — no static keyword lists, no
+            # per-topic hardcoding, and it automatically covers any future
+            # entity, policy, or vocabulary the planner LLM can recognize.
+            # The query_rewriter (Fix QR2) separately handles colloquial/vague
+            # vocabulary expansion (e.g. "dhobi", "mattress") using the same
+            # LLM-driven approach instead of static synonym lists.
+
+            retrieval_result = (
+                self.pipeline.get_context(
+                    retrieval_query,
+                    history=history
+                )
+            )
 
             # ── Greetings bypass classifier ────────────────────────────
             if is_greeting_or_meta(query):
