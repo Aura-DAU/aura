@@ -166,6 +166,13 @@ class RetrievalPipeline:
         "mtech cs": "M.Tech. (CS and ML)",
         "mtech ml": "M.Tech. (CS and ML)",
 
+        # Fix AL1: bare "mtech"/"m.tech" without specialization suffix is a valid
+        # query term (e.g. "what is the M.Tech fee?"). Previously normalized to
+        # "mtech" → alias miss → filter skipped → top_k stays at 5 → answer buried.
+        # Map to a sentinel "M.Tech." so the alias hit triggers the top_k boost.
+        "mtech": "M.Tech.",
+        "m tech": "M.Tech.",
+
         # MSc IT variants
         "msc it": "M.Sc. (IT)",
         "m.sc it": "M.Sc. (IT)",
@@ -179,7 +186,19 @@ class RetrievalPipeline:
         "b tech mnc": "B.Tech. (MnC)",
         "computer science and artificial intelligence": "B.Tech. (CS and AI)",
         "electronics and communication": "B.Tech. (ECE-AI)",
-        "mathematics and computing": "B.Tech. (MnC)"
+        "mathematics and computing": "B.Tech. (MnC)",
+
+        # Fix AL1 (cont.): bare program abbreviations used when no specialization given
+        "btech": "B.Tech.",
+        "b tech": "B.Tech.",
+        "msc": "M.Sc.",
+        "m sc": "M.Sc.",
+        "mtech ict": "M.Tech. (ICT)",
+        "msc data science": "M.Sc. (Data Science)",
+        "msc agriculture analytics": "M.Sc. (Agriculture Analytics)",
+        "phd regular": "Ph.D.",
+        "phd part time": "Ph.D.",
+        "doctoral": "Ph.D."
     }
     
     def _expand_semesters(self, query):
@@ -479,6 +498,58 @@ class RetrievalPipeline:
             query
         )
 
+        # Fix RP-MYTH: replaces the old static MYTH_BUST_PATTERNS keyword list
+        # that lived in aura_chat.py. The query_planner LLM already classifies
+        # every query's intent and entities — it is the single correct place
+        # to also flag claim-verification framing ("is this true", "I was told
+        # that...", etc.), since that classification generalizes to any phrasing
+        # in any language/dialect mix the planner sees, unlike a static list of
+        # English phrases. If the plan signals claim verification, append a
+        # retrieval-side directive so the matched chunk's policy/rule language
+        # ranks higher — this also lets the answer generator give a direct
+        # verdict instead of exploring multiple interpretations (Type9 latency).
+        if plan.get("is_claim_verification"):
+            query = query + " policy rule regulation verify"
+
+        # Fix RP-FEE: replaces the old static FEE_KEYWORDS list. The retrieval
+        # intent "admissions_information" combined with required_sections
+        # already containing "Fee"/"Fees Structure"/"Tuition" (set generically
+        # by the planner's few-shot examples, not by string-matching here) is
+        # sufficient signal — no separate keyword list needed. We simply
+        # surface the planner's own required_sections into the BM25 query
+        # so its classification has retrieval-side effect.
+        plan_required_sections = plan.get("retrieval_hints", {}).get("required_sections", [])
+        if plan_required_sections:
+            # Append a small number of the most specific (longest) section
+            # names so BM25 keyword matching benefits from exactly what the
+            # planner identified as relevant — generalizes to ANY section
+            # heading the planner names (Fee, Dean of Academic Programs,
+            # Board of Studies, etc.) without a static list of any kind.
+            top_sections = sorted(plan_required_sections, key=len, reverse=True)[:3]
+            query = query + " " + " ".join(top_sections)
+
+        # Fix RP-VOCAB: replaces the old static LAUNDRY_KEYWORDS / MOVEIN_KEYWORDS
+        # lists. The planner's expanded_terms field (Fix QP7) does the same
+        # informal-to-formal vocabulary translation generically, per-query,
+        # using the LLM's own knowledge of DAU document phrasing — instead of
+        # a fixed Python list that only covers terms already seen in testing.
+        # This is the single mechanism that handles ANY future vocabulary gap
+        # (dhobi, mattress, role-name confusion, or anything not yet tested)
+        # without requiring a code change.
+        expanded_terms = plan.get("expanded_terms", [])
+        if expanded_terms:
+            query = query + " " + " ".join(expanded_terms[:5])
+
+        # Fix RP-COMPLETE: negation ("What is NOT X") and enumeration
+        # ("how many total X") questions need the FULL set of relevant
+        # chunks, not just the top-5 semantically closest ones — otherwise
+        # the LLM only sees a partial list and cannot correctly identify
+        # what is missing or excluded. Widen top_k generically using the
+        # planner's requires_complete_list signal rather than hardcoding
+        # per-entity-type retrieval counts.
+        if plan.get("requires_complete_list"):
+            plan["top_k"] = max(plan.get("top_k", 5), 12)
+
         # Correct entities inside the plan (e.g. fuzzy match faculty and program names)
         entities = plan.get("entities", {})
         
@@ -566,6 +637,27 @@ class RetrievalPipeline:
             )
         )
 
+        # Fix DEG1: dead-end guard for policy version/metadata queries.
+        retrieval_intent = plan.get("retrieval_intent", "general")
+        if retrieval_intent == "policy_version" and metadata_filter:
+            metadata_filter = None
+
+        # Fix TY1: temporal year anchor — if the planner extracted a rule_year
+        # (e.g. "2024-25") from the query, inject it into the retrieval query
+        # so BM25 keyword matching prioritises documents whose title or heading
+        # contains that year string. This fixes Om report failures where
+        # "under the 2024-25 PhD rules" retrieves the 2019-20 document instead.
+        rule_year = plan.get("entities", {}).get("rule_year")
+        if rule_year:
+            # Augment the query string so BM25 scores year-matching chunks higher
+            query = query + " " + rule_year
+            # Also boost it as a required section heading in the plan hints
+            plan.setdefault("retrieval_hints", {})
+            existing_sections = plan["retrieval_hints"].get("required_sections", [])
+            if rule_year not in existing_sections:
+                existing_sections.append(rule_year)
+            plan["retrieval_hints"]["required_sections"] = existing_sections
+
         decomposed_queries = plan.get(
             "query_decomposition"
         )
@@ -578,7 +670,18 @@ class RetrievalPipeline:
             # branch and returned zero results ("not in database" false positive).
             # Use plan["top_k"] (already boosted for multi-entity queries) or
             # fall back to 5 per sub-query.
-            retrieval_top_k = plan.get("top_k", 5)
+            # Fix AL2: when the metadata filter will be None (because program_name
+            # canonicalized to None — bare alias like "M.Tech" with no specialization),
+            # raise top_k to 15 so the answer isn't buried under noise.
+            # The filter being None means the entire index is searched; top_k=5
+            # is far too narrow for broad-corpus sub-queries.
+            base_top_k = plan.get("top_k", 5)
+            alias_resolved = bool(
+                self._canonical_program_name(
+                    plan.get("entities", {}).get("program_name", "")
+                )
+            ) if plan.get("entities", {}).get("program_name") else True
+            retrieval_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
 
             for subquery in decomposed_queries:
                 subquery_expanded = self._expand_semesters(subquery)
@@ -608,6 +711,25 @@ class RetrievalPipeline:
                         )
                     )
 
+                # Fix CP1: for cross-policy comparison queries, even if the
+                # filtered retrieval returns some results, those may all be
+                # from ONE policy. If this sub-query is retrieving the second
+                # leg and results overlap heavily with already-seen chunk IDs,
+                # also retry filter-free to maximise distinct coverage.
+                if sub_results and sub_metadata_filter:
+                    already_seen_ids = {r["id"] for r in all_results}
+                    new_in_sub = [r for r in sub_results if r["id"] not in already_seen_ids]
+                    if len(new_in_sub) == 0:
+                        # All sub-results already collected — retry without filter
+                        extra = self.retriever.retrieve(
+                            query=subquery_expanded,
+                            top_k=retrieval_top_k,
+                            metadata_filter=None
+                        )
+                        new_extra = [r for r in extra if r["id"] not in already_seen_ids]
+                        if new_extra:
+                            sub_results = new_extra
+
                 sub_reranked = (
                     self.reranker.rerank(
                         query=subquery_expanded,
@@ -616,8 +738,14 @@ class RetrievalPipeline:
                     )
                 )
 
+                # Fix SR1: raised per-sub-query cap from 3 → 4 for multi-entity
+                # (comparison) queries. With 3 chunks per sub-query and 2 sub-
+                # queries, the joint rerank pool was only 6 items — often not
+                # enough distinct coverage when one leg returns weak results.
+                # 4 per sub-query gives an 8-item joint pool for 2-way comparisons.
+                sub_limit = 4 if plan.get("multi_entity_query") else 3
                 all_results.extend(
-                    sub_reranked[:3]
+                    sub_reranked[:sub_limit]
                 )
 
             results = all_results
@@ -625,8 +753,11 @@ class RetrievalPipeline:
         else:
             # Main query retrieval using dual path
             results = self._retrieve_dual_path(query, plan)
-            # Expand adjacent chunks
-            results = self._expand_adjacent_chunks(results)
+            # Fix J2: use a wider context window for policy_version queries
+            # so that version history sections (which may be 1-2 chunks after
+            # the main policy heading) are always included in context.
+            expand_window = 2 if retrieval_intent == "policy_version" else 1
+            results = self._expand_adjacent_chunks(results, window=expand_window)
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
         # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
         # the vector/BM25 results into a unified chunk pool for reranking.
@@ -691,7 +822,8 @@ class RetrievalPipeline:
 
         built = (
             self.builder.build(
-                final_chunks
+                final_chunks,
+                retrieval_intent=retrieval_intent
             )
         )
 
@@ -721,9 +853,12 @@ class RetrievalPipeline:
                 len(final_chunks)
         }
 
-    def _expand_adjacent_chunks(self, candidates):
+    def _expand_adjacent_chunks(self, candidates, window=1):
         """
-        Retrieves neighboring (i-1 and i+1) chunks for candidate chunks to preserve context.
+        Retrieves neighboring chunks (window chunks before and after) for each
+        candidate to preserve context. window=1 is the default; use window=2
+        for policy_version queries to capture version history sections that may
+        be one or two chunks away from the main policy chunk.
         """
         expanded_candidates = []
         for cand in candidates:
@@ -733,25 +868,31 @@ class RetrievalPipeline:
             if not doc_id or chunk_idx is None:
                 expanded_candidates.append(cand)
                 continue
-            
+
             chunk_idx = int(chunk_idx)
-            prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - 1))
-            next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + 1))
-            
             parts = []
-            if prev_chunk:
-                parts.append(prev_chunk.get("text", ""))
+
+            # Collect preceding chunks within window
+            for offset in range(window, 0, -1):
+                prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - offset))
+                if prev_chunk:
+                    parts.append(prev_chunk.get("text", ""))
+
             parts.append(metadata.get("text", ""))
-            if next_chunk:
-                parts.append(next_chunk.get("text", ""))
-                
+
+            # Collect following chunks within window
+            for offset in range(1, window + 1):
+                next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + offset))
+                if next_chunk:
+                    parts.append(next_chunk.get("text", ""))
+
             expanded_text = "\n\n".join(filter(None, parts))
-            
+
             new_cand = dict(cand)
             new_cand["metadata"] = dict(metadata)
             new_cand["metadata"]["text"] = expanded_text
             expanded_candidates.append(new_cand)
-            
+
         return expanded_candidates
 
     def _retrieve_dual_path(self, query, plan):

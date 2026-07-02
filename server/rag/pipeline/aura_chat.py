@@ -1,21 +1,58 @@
-#Chat pipeline for AURA RAG system
+"""
+AuraChat — main chat pipeline.
+
+The 7-step flow (from 06_query_routing.md) is now the primary path.
+The existing RAG pipeline (Pinecone + BM25 + rerank) is called for
+PUBLIC and the PUBLIC half of MIXED queries — it is completely unchanged.
+
+Step 1: Classify (B9)
+Step 2: Resolve target ERP ID
+Step 3: Access control gate (B7)
+Step 4: Audit log (B8)
+Step 5: If DENIED → return denial message
+Step 6: If PERSONAL/MIXED → fetch from ERP (B5), build context (B6)
+Step 7: If PUBLIC/MIXED → run existing RAG pipeline
+        Merge contexts → generate answer
+"""
+
 import os
 import re
-from pipeline.retrieval.retrieval_pipeline import (
-    RetrievalPipeline
+from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
+from pipeline.generation.answer_generator import AnswerGenerator
+from pipeline.guardrails.query_guardrail import QueryGuardrail
+
+from erp_connector import ERPConnector
+from erp_context_builder import ERPContextBuilder
+from access_control import AccessControlGate, AccessDecision
+from audit_log import AuditLog
+from personal_query_classifier import PersonalQueryClassifier
+
+GENERIC_DENIAL = (
+    "I'm not able to retrieve that information. "
+    "If you believe you should have access to this data, "
+    "please contact the Academic Office."
 )
 
-from pipeline.generation.answer_generator import (
-    AnswerGenerator
-)
+PERSONAL_DATA_SYSTEM_ADDENDUM = """
+------------------------------------------------------------
+PERSONAL DATA IN CONTEXT
+------------------------------------------------------------
+When the context contains a <personal_data> block, this is live,
+real-time data from DAU's ERP system for the logged-in user.
 
-from pipeline.guardrails.query_guardrail import (
-    QueryGuardrail
-)
+- Always present personal data as current fact, not a retrieved excerpt.
+  Say "Your current CGPA is 8.34" not "According to the retrieved document..."
+- Never quote sources for personal data — there is no URL to link to.
+- Never speculate about what the personal data means beyond what is stated.
+  "Your attendance in IT205 is 68.2%" is correct.
+  "You may fail IT205 due to attendance" is speculation — do not add this.
+- If the <personal_data> block is present but a field the user asked about
+  is missing from it, say clearly that this specific data is not available
+  in your current access rather than guessing.
+"""
+
 
 def is_greeting_or_meta(query):
-    # Fix #7: strip ALL trailing punctuation in one pass instead of chained
-    # rstrip calls that only remove one character each.
     q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
     greetings = {
         "hi", "hello", "hey", "hola", "greetings", "good morning",
@@ -26,7 +63,6 @@ def is_greeting_or_meta(query):
     if q in greetings:
         return True
     words = q.split()
-    # Allow greeting combos up to 3 words (e.g. "hello aura" or "hey there")
     if len(words) <= 3 and any(w in greetings for w in words):
         return True
     return False
@@ -35,155 +71,147 @@ def is_greeting_or_meta(query):
 class AuraChat:
 
     def __init__(self):
-        self.pipeline = (
-            RetrievalPipeline()
-        )
-        self.generator = (
-            AnswerGenerator()
-        )
-        self.guardrail = (
-            QueryGuardrail()
-        )
+        self.pipeline   = RetrievalPipeline()
+        self.generator  = AnswerGenerator()
+        self.guardrail  = QueryGuardrail()
 
-    def chat(
-        self,
-        query,
-        history=None,
-        profile=None
-    ):
+        erp = ERPConnector()
+        self.classifier     = PersonalQueryClassifier()
+        self.erp_connector  = erp
+        self.context_builder = ERPContextBuilder()
+        self.access_gate    = AccessControlGate(erp)
+        self.audit_log      = AuditLog()
+
+    def chat(self, query, history=None, identity=None, display_profile=None):
         try:
-            # 1. Semantic Guardrail Evaluation
+            # ── Safety guardrail (applies to every query) ──────────────
             if not self.guardrail.is_safe(query):
                 return {
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
-                    "sources": []
+                    "sources": [],
                 }
 
-            # Guardrail / Query Augmentation for RBAC
-            retrieval_query = query
-            if profile:
-                role = profile.get("role", "student")
-                if role == "professor":
-                    subjects = profile.get("subjects", [])
-                    if subjects:
-                        subjects_str = ", ".join(subjects)
-                        retrieval_query = f"{query} (Context: student data related to {subjects_str})"
+            history = history or []
 
-            # Fix Bug5 (revised): inject "Fees Structure Tuition" into the
-            # retrieval query for fee-intent questions so BM25 can keyword-match
-            # the section heading even when the question is generic.
-            # Fix AC2: narrowed keyword list — "cost", "charges", "payment" were
-            # too broad and caused false augmentation for unrelated queries like
-            # "cost of living near campus" or "hostel charges for AC room".
-            # Only trigger on words that unambiguously signal fee intent.
-            FEE_KEYWORDS = ["fee", "fees", "tuition", "caution deposit", "semester fee"]
-            query_lower_check = retrieval_query.lower()
-            if any(kw in query_lower_check for kw in FEE_KEYWORDS):
-                retrieval_query = retrieval_query + " Fees Structure Tuition"
+            # ── Greetings bypass classifier ────────────────────────────
+            if is_greeting_or_meta(query):
+                return self._rag_only(query, history, display_profile)
 
-            retrieval_result = (
-                self.pipeline.get_context(
-                    retrieval_query,
-                    history=history
+            # ── Step 1: Classify ────────────────────────────────────────
+            classification = self.classifier.classify(query)
+            query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
+
+            erp_context   = ""
+            is_personal   = False
+
+            # ── Steps 2–6: Personal and Aggregate data paths ──────────
+            if query_type in ("PERSONAL", "MIXED", "AGGREGATE") and identity:
+                target_erp_id = self._resolve_target(classification["target"], identity)
+
+                # Step 3: Access control gate
+                access_result = self.access_gate.evaluate(
+                    identity=identity,
+                    query_intent=classification,
+                    target_identifier=target_erp_id,
                 )
-            )
 
-            # Fix #1B: use the raw Pinecone cosine score (stored as
-            # 'cosine_score' by the retriever) for the 0.60 threshold check.
-            # Fix AC1: if retrieval returned zero chunks (e.g. Pinecone
-            # connection issue or a silent exception in the pipeline), the
-            # max() calls below return their defaults, which is correct.
-            # However, we also log this so it's visible in DEBUG mode.
-            chunks = retrieval_result.get("chunks", [])
-
-            if not chunks and os.getenv("DEBUG", "false").lower() == "true":
-                print("[Router] WARNING: retrieval returned 0 chunks for query:", query)
-
-            top_cosine = max(
-                [(c.get("cosine_score") or 0.0) for c in chunks],
-                default=0.0
-            )
-            top_cross = max(
-                [(c.get("cross_score") or -10.0) for c in chunks],
-                default=-10.0
-            )
-
-            # Permit simple greetings to pass to RAG
-            is_greeting = is_greeting_or_meta(query)
-
-            # Fix AC4: three-tier routing logic to minimise false "not DAU" rejections:
-            # Tier 1 — greeting/meta: always pass (no retrieval confidence needed)
-            # Tier 2 — high confidence: cosine >= 0.45 (strong semantic match)
-            #          OR cross >= 0.0 (cross-encoder ≥50% relevance confidence)
-            # Tier 3 — weak but plausible: cosine >= 0.35 AND cross > -2.0
-            #          (sigmoid(-2.0)=0.119 → model gives ≥12% relevance).
-            #          Catches valid DAU queries where the top-retrieved chunk
-            #          is a partial match but the question is genuinely about DAU.
-            is_weak_match = (top_cosine >= 0.35 and top_cross > -2.0)
-            is_high_confidence = is_greeting or (top_cosine >= 0.45) or (top_cross >= 0.0) or is_weak_match
-
-            router_decision = "RAG" if is_high_confidence else "FALLBACK"
-            
-            # Log query routing details in debug mode
-            if os.getenv("DEBUG", "false").lower() == "true":
-                print("\n--- DEBUG QUERY ROUTER LOG ---")
-                print(f"query: {query}")
-                print(f"router_decision: {router_decision}")
-                print(f"router_confidence: top_cosine={top_cosine:.4f}, top_cross={top_cross:.4f}")
-                print(f"top_k_before_rerank: {retrieval_result.get('top_k_before_rerank', 0)}")
-                print(f"top_k_after_rerank: {retrieval_result.get('top_k_after_rerank', 0)}")
-                print(f"retrieved_sources: {[c['id'] for c in retrieval_result.get('chunks', [])]}")
-                print(f"final_context: {retrieval_result.get('context', '')[:300]}...")
-                print("-------------------------------\n")
-
-            # Fix AC3: distinguish between two failure modes that previously
-            # both returned the "not DAU" message:
-            # (a) Retrieval returned 0 chunks → likely a backend/DB issue, not
-            #     an off-topic query. Return a service message so the user isn't
-            #     misled into thinking their valid DAU question was rejected.
-            # (b) Chunks retrieved but confidence too low → genuinely off-topic.
-            if not chunks:
-                return {
-                    "answer": (
-                        "I'm having trouble retrieving information right now. "
-                        "Please try again in a moment. If the issue persists, "
-                        "contact DAU directly."
-                    ),
-                    "sources": []
-                }
-
-            if not is_high_confidence:
-                return {
-                    "answer": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
-                    "sources": []
-                }
-
-            answer = (
-                self.generator.generate(
-                    query=retrieval_result.get("corrected_query", query),
-                    context=retrieval_result[
-                        "context"
-                    ],
-                    plan=retrieval_result["plan"],
-                    history=history,
-                    profile=profile
+                # Step 4: Audit log (always — both ALLOWED and DENIED)
+                self.audit_log.record(
+                    erp_id=identity.erp_id,
+                    role=identity.role,
+                    query_text=query,
+                    query_type=query_type.lower(),
+                    target_erp_id=target_erp_id,
+                    access_granted=(access_result.decision == AccessDecision.ALLOWED),
+                    denial_reason=access_result.reason if access_result.decision == AccessDecision.DENIED else None,
+                    erp_tables=classification.get("erp_fields", []),
                 )
+
+                # Step 5: If DENIED → return generic message
+                if access_result.decision == AccessDecision.DENIED:
+                    return {"answer": GENERIC_DENIAL, "sources": [], "is_personal_data": False}
+
+                # Step 6: Fetch from ERP and build context
+                if query_type == "AGGREGATE":
+                    course_code = (access_result.course_codes[0] if access_result.course_codes else None)
+                    erp_data = {"aggregate": self.erp_connector.get_class_aggregate(course_code) if course_code else {}}
+                else:
+                    erp_data = self._fetch_erp_data(classification["erp_fields"], target_erp_id, access_result)
+                erp_context = self.context_builder.build(erp_data, identity, access_result)
+                is_personal = True
+
+            # ── Step 7: Public RAG (for PUBLIC and MIXED) ──────────────
+            rag_context = ""
+            sources     = []
+            if query_type in ("PUBLIC", "MIXED", "AGGREGATE"):
+                retrieval_result = self.pipeline.get_context(query, history)
+                chunks    = retrieval_result.get("chunks", [])
+                rag_context = retrieval_result.get("context", "")
+                sources   = retrieval_result.get("sources", [])
+
+                if not chunks and query_type == "PUBLIC":
+                    return {"answer": "I'm having trouble retrieving information right now. Please try again.", "sources": [], "is_personal_data": False}
+
+            # ── Step 8: Merge and generate ─────────────────────────────
+            combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
+
+            answer = self.generator.generate(
+                query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
+                context=combined_context,
+                plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
+                history=history,
+                profile=display_profile,
+                system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
             )
 
             return {
-
                 "answer": answer,
-
-                "sources":
-                    retrieval_result[
-                        "sources"
-                    ]
+                "sources": sources,          # public sources only — never ERP data
+                "is_personal_data": is_personal,
             }
+
         except Exception as e:
             import traceback
-            print("Error in AuraChat.chat:", e)
             traceback.print_exc()
-            return {
-                "answer": "Sorry, I encountered an error while generating a response. Please try again.",
-                "sources": []
-            }
+            err_str = str(e).lower()
+            if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
+                msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
+            else:
+                msg = "Sorry, I encountered an error while generating a response. Please try again."
+            return {"answer": msg, "sources": [], "is_personal_data": False}
+
+    def _resolve_target(self, target_label: str | None, identity) -> str | None:
+        if not target_label or target_label == "self":
+            return identity.erp_id
+        if target_label and target_label[:3].isdigit():
+            return target_label
+        result = self.erp_connector.find_student_by_name(target_label)
+        return result["roll_number"] if result else None
+
+    def _fetch_erp_data(self, fields: list, roll_number: str | None, access_result) -> dict:
+        if not roll_number:
+            return {}
+        data = {}
+        course_scope = (access_result.course_codes[0] if access_result.course_codes else None)
+        if "profile"    in fields: data["profile"]    = self.erp_connector.get_student_profile(roll_number)
+        if "cgpa"       in fields: data["cgpa"]        = self.erp_connector.get_cgpa(roll_number)
+        if "grades"     in fields: data["grades"]      = self.erp_connector.get_grades(roll_number, course_code=course_scope)
+        if "attendance" in fields: data["attendance"]  = self.erp_connector.get_attendance(roll_number, course_code=course_scope)
+        if "advisees"   in fields and getattr(access_result, "scope_type", None) in ("advisee", "all", "batch"):
+            data["advisees"] = self.erp_connector.get_advisees(roll_number)
+        if "courses"    in fields: data["courses"]     = self.erp_connector.get_faculty_courses(roll_number)
+        return data
+
+    def _rag_only(self, query, history, profile) -> dict:
+        retrieval_result = self.pipeline.get_context(query, history)
+        chunks    = retrieval_result.get("chunks", [])
+        if not chunks:
+            return {"answer": "I'm having trouble retrieving information. Please try again.", "sources": [], "is_personal_data": False}
+        answer = self.generator.generate(
+            query=retrieval_result.get("corrected_query", query),
+            context=retrieval_result["context"],
+            plan=retrieval_result["plan"],
+            history=history,
+            profile=profile,
+        )
+        return {"answer": answer, "sources": retrieval_result["sources"], "is_personal_data": False}
