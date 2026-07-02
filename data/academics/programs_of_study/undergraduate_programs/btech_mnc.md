@@ -69,7 +69,7 @@ The course structure of the curriculum is broadly classified into 3 categories.
 
 ### Semester-wise course sequence
 
-Each course is associated with a fixed number of credits. Credits are awarded on an L-T-P-C system (C=L+T+P/2) per semester, that is, the number of contact hours for Lectures (L), Tutorials (T) and Practical (P) in a week. Nominally, since a semester has around 13–14 weeks of classes, therefore, a 3credit lecture course would amount to approximately 40 lecture hours in a semester.
+Each course is associated with a fixed number of credits. Credits are awarded on an L-T-P-C system (C=L+T+P/2) per semester, that is, the number of contact hours for Lectures (L), Tutorials (T) and Practical (P) in a week. Nominally, since a semester has around 13–14 weeks of classes, therefore, a 3credit lecture course would amount to approximately 40 lecture hours in a semester.
 
 ### Representative list of electives
 

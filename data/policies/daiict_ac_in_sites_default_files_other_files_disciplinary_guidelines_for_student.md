@@ -11,6 +11,10 @@ pdf_name: "Students / Disciplinary Guidelines for Students"
 
 # Students / Disciplinary Guidelines for Students
 
+## Version History
+- **Ver 1.0** (Effective: 01 March 2024) — Signed by Director. First version of this policy at DAU.
+
+
 ## Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.

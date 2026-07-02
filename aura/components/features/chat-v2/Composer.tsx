@@ -13,6 +13,7 @@ interface ComposerProps {
   loading: boolean
   isRecording: boolean
   isTranscribing: boolean
+  recordingVolume?: number
   onSend: (text: string) => void
   onMicClick: () => void
 }
@@ -29,6 +30,7 @@ export function Composer({
   loading,
   isRecording,
   isTranscribing,
+  recordingVolume = 0,
   onSend,
   onMicClick,
 }: ComposerProps) {
@@ -78,26 +80,50 @@ export function Composer({
           />
 
           {showMic ? (
-            <button
-              type="button"
-              onClick={onMicClick}
-              disabled={isTranscribing || loading}
-              aria-label={isRecording ? "Stop recording" : "Start voice input"}
-              className={cn(
-                "inline-flex size-9 shrink-0 items-center justify-center rounded-full transition-colors disabled:opacity-50",
-                isRecording
-                  ? "animate-pulse bg-theme-red text-black"
-                  : "text-neutral-400 hover:bg-theme-gray-light hover:text-neutral-100",
+            <div className="relative flex items-center justify-center">
+              {isRecording && (
+                <>
+                  <div
+                    className="absolute -inset-1 animate-ping rounded-full bg-theme-red/30"
+                    style={{
+                      transform: `scale(${1 + recordingVolume * 1.5})`,
+                      opacity: 0.4 + recordingVolume * 0.6,
+                    }}
+                  />
+                  <div
+                    className="absolute -inset-2 rounded-full bg-theme-red/10 transition-transform duration-75"
+                    style={{
+                      transform: `scale(${1 + recordingVolume * 0.8})`,
+                    }}
+                  />
+                </>
               )}
-            >
-              {isTranscribing ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : isRecording ? (
-                <Square className="size-4" />
-              ) : (
-                <Mic className="size-4" />
-              )}
-            </button>
+              <button
+                type="button"
+                onClick={onMicClick}
+                disabled={isTranscribing || loading}
+                aria-label={isRecording ? "Stop recording" : "Start voice input"}
+                style={{
+                  transform: isRecording
+                    ? `scale(${1 + recordingVolume * 0.25})`
+                    : undefined,
+                }}
+                className={cn(
+                  "relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-full transition-all duration-75 disabled:opacity-50",
+                  isRecording
+                    ? "bg-theme-red text-black"
+                    : "text-neutral-400 hover:bg-theme-gray-light hover:text-neutral-100",
+                )}
+              >
+                {isTranscribing ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : isRecording ? (
+                  <Square className="size-4 animate-pulse" />
+                ) : (
+                  <Mic className="size-4" />
+                )}
+              </button>
+            </div>
           ) : null}
 
           <button

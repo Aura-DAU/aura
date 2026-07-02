@@ -52,22 +52,6 @@ team: "Team D"
   * [Submitted Overall Report-MHRD-NIRF – 3 December 2019](https://www.daiict.ac.in/sites/default/files/Submitted-Overall-Dhirubhai-Ambani-Institute-of-Information-and-Communication-NIRF-2020.pdf) "PDF file that opens in new window.")(34.6 KB)
   * [Submitted Engineering Discipline-All Report-MHRD-NIRF – 29 November 2019](https://www.daiict.ac.in/sites/default/files/Submitted-Engineering-MHRD-National-Institutional-Ranking-Framework-NIRF-2020.pdf) "PDF file that opens in new window.")(33.6 KB)
 
-# NIRF INDIA RANKING 2019 DCS SUBMITTED
-
-  * [Submitted Overall Report-MHRD-NIRF-13Dec2018](https://www.daiict.ac.in/sites/default/files/Dhirubhai-Ambani-Institute-of-Information-and-Communication-Technology20190212-Overall.pdf) "PDF file that opens in new window.")(34.1 KB)
-  * [Submitted Engineering Discipline-All Report-MHRD-NIRF-13Dec2018](https://www.daiict.ac.in/sites/default/files/Dhirubhai-Ambani-Institute-of-Information-and-Communication-Technology20190212-Engineering.pdf) "PDF file that opens in new window.")(33.5 KB)
-
-# NIRF INDIA RANKING 2018 DCS SUBMITTED
-
-  * [Submitted-Overall-Report-MHRD-NIRF-07Dec2017](https://www.daiict.ac.in/sites/default/files/Submitted-Overall-Report-MHRD-NIRF-07Dec2017.pdf) "PDF file that opens in new window.")(1.9 MB)
-  * [Submitted-Engineering-Discipline-All-Report-MHRD-NIRF-07Dec2017](https://www.daiict.ac.in/sites/default/files/Submitted-Engineering-Discipline-All-Report-MHRD-NIRF-07Dec2017-1.pdf) "PDF file that opens in new window.")(1.8 MB)
-
-
-
-# NIRF INDIA RANKING 2017 DCS SUBMITTED
-
-  * [Filled prescribed format](https://www.daiict.ac.in/sites/default/files/NIRF_DATA.pdf) "PDF file that opens in new window.")(179 KB)
-
 ### Student details
 
   * [UG Campus Placement](https://www.daiict.ac.in/sites/default/files/UGPlacement-1.xls) "PDF file that opens in new window.")(14.9 KB)
@@ -104,7 +88,6 @@ team: "Team D"
 - [Submitted Engineering Discipline-All Report-MHRD-NIRF – 18 February 2022](https://www.daiict.ac.in/sites/default/files/other-files/DA-IICT_20220218-Engineering.pdf)
 - [Submitted Overall Report-MHRD-NIRF – 19 February 2021](https://www.daiict.ac.in/sites/default/files/daiict-20210219-Overall.pdf)
 - [Submitted Engineering Discipline-All Report-MHRD-NIRF – 19 February 2021](https://www.daiict.ac.in/sites/default/files/daiict-20210219-Engineering.pdf)
-- [Submitted Overall Report-MHRD-NIRF – 3 December 2019](https://www.daiict.ac.in/sites/default/files/Submitted-Overall-Dhirubhai-Ambani-Institute-of-Information-and-Communication-NIRF-2020.pdf)
 
 # Downloadable Resources
 
@@ -125,10 +108,5 @@ team: "Team D"
 | [Submitted Overall Report-MHRD-NIRF – 19 February 2021](https://www.daiict.ac.in/sites/default/files/daiict-20210219-Overall.pdf) | PDF |
 | [Submitted Engineering Discipline-All Report-MHRD-NIRF – 19 February 2021](https://www.daiict.ac.in/sites/default/files/daiict-20210219-Engineering.pdf) | PDF |
 | [Submitted Overall Report-MHRD-NIRF – 3 December 2019](https://www.daiict.ac.in/sites/default/files/Submitted-Overall-Dhirubhai-Ambani-Institute-of-Information-and-Communication-NIRF-2020.pdf) | PDF |
-| [Submitted Engineering Discipline-All Report-MHRD-NIRF – 29 November 2019](https://www.daiict.ac.in/sites/default/files/Submitted-Engineering-MHRD-National-Institutional-Ranking-Framework-NIRF-2020.pdf) | PDF |
-| [Submitted Overall Report-MHRD-NIRF-13Dec2018](https://www.daiict.ac.in/sites/default/files/Dhirubhai-Ambani-Institute-of-Information-and-Communication-Technology20190212-Overall.pdf) | PDF |
-| [Submitted Engineering Discipline-All Report-MHRD-NIRF-13Dec2018](https://www.daiict.ac.in/sites/default/files/Dhirubhai-Ambani-Institute-of-Information-and-Communication-Technology20190212-Engineering.pdf) | PDF |
-| [Submitted-Overall-Report-MHRD-NIRF-07Dec2017](https://www.daiict.ac.in/sites/default/files/Submitted-Overall-Report-MHRD-NIRF-07Dec2017.pdf) | PDF |
-| [Submitted-Engineering-Discipline-All-Report-MHRD-NIRF-07Dec2017](https://www.daiict.ac.in/sites/default/files/Submitted-Engineering-Discipline-All-Report-MHRD-NIRF-07Dec2017-1.pdf) | PDF |
-| [Filled prescribed format](https://www.daiict.ac.in/sites/default/files/NIRF_DATA.pdf) | PDF |
+
 

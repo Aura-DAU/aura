@@ -11,6 +11,10 @@ pdf_name: "Policies/Standard Operating Procedure (SOP) for Event Organisation at
 
 # Policies/Standard Operating Procedure (SOP) for Event Organisation at DAU
 
+## Version History
+- **Ver 1.0** (Effective: 01 April 2026) — First event SOP at DAU.
+
+
 ## Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.

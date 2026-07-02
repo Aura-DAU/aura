@@ -10,6 +10,10 @@ source_type: "Web"
 
 # Library (Resource Centre) Usage Policy
 
+## Version History
+- **Ver 1.0** (Effective: 01 August 2024) — First version of the policy.
+
+
 ## Overview
 
 The DA-IICT / DAU Resource Centre (RC) provides library and digital resource services to students, faculty, and staff. This document outlines borrowing privileges, rules, and late fee policies.
