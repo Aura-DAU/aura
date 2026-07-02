@@ -6,12 +6,11 @@ import type {
   ChatThread,
   Citation,
   StudentProfile,
-  UserSession,
 } from "@/lib/chat-types"
+import { useSession } from "next-auth/react"
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
-const SESSION_KEY  = "aura-session-v1"
 
 interface StoredThread extends ChatThread {
   messages: ChatMessage[]
@@ -99,7 +98,7 @@ export function useAuraChat() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [activeCitations, setActiveCitations] = useState<Citation[]>([])
   const [studentProfile, setStudentProfile] = useState<StudentProfile>(DEFAULT_PROFILE)
-  const [userSession, setUserSession] = useState<UserSession | null>(null)
+  const { data: session } = useSession()
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
@@ -121,8 +120,6 @@ export function useAuraChat() {
       }
       const rawProfile = localStorage.getItem(PROFILE_KEY)
       if (rawProfile) setStudentProfile(JSON.parse(rawProfile) as StudentProfile)
-      const rawSession = localStorage.getItem(SESSION_KEY)
-      if (rawSession) setUserSession(JSON.parse(rawSession) as UserSession)
     } catch {
       /* ignore corrupt storage */
     }
@@ -298,16 +295,11 @@ export function useAuraChat() {
 
         // Sync to server (fire-and-forget) if a user is logged in
         try {
-          const rawSession = localStorage.getItem(SESSION_KEY)
-          if (rawSession) {
-            const session = JSON.parse(rawSession) as { email: string }
-            if (session.email) {
-              // Build latest snapshot of threads to sync
-              setThreads((current) => {
-                saveHistoryToServer(session.email, current)
-                return current
-              })
-            }
+          if (session?.user?.email) {
+            setThreads((current) => {
+              saveHistoryToServer(session.user.email!, current)
+              return current
+            })
           }
         } catch { /* ignore */ }
       } catch {
@@ -318,7 +310,7 @@ export function useAuraChat() {
         setThinkingStep(undefined)
       }
     },
-    [activeThreadId, loading, messages, persistMessages, studentProfile],
+    [activeThreadId, loading, messages, persistMessages, studentProfile, session],
   )
 
   const handleClearChat = useCallback(() => {
@@ -485,11 +477,6 @@ export function useAuraChat() {
     }
   }, [isRecording, transcribeAudio])
 
-  const logout = useCallback(async () => {
-    setUserSession(null)
-    try { localStorage.removeItem(SESSION_KEY) } catch { /* ignore */ }
-  }, [])
-
   return {
     messages,
     inputText,
@@ -512,7 +499,5 @@ export function useAuraChat() {
     handleMicClick,
     handleSendMessage,
     handleClearChat,
-    userSession,
-    logout,
   }
 }

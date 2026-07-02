@@ -1,6 +1,7 @@
 import { NextAuthOptions, DefaultSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { backendUrl } from "@/lib/api/backend"
 
 declare module "next-auth" {
   interface Session {
@@ -27,17 +28,31 @@ declare module "next-auth/jwt" {
 }
 
 /**
- * Temporary mock function to simulate fetching ERP Identity from the unbuilt backend.
- * In the future, this will call the backend API (e.g., AURA Auth DB) to get the true ERP mapping.
+ * Fetches the user's ERP Identity from the backend Auth DB.
  */
 async function lookupErpIdentity(email: string): Promise<{ role: "student" | "faculty" | "admin"; erpId: string; department: string } | null> {
-  // Temporary mock logic based on domain
-  if (email.endsWith("@dau.ac.in")) {
-    return { role: "student", erpId: "202300000", department: "ICT" }
-  } else if (email.endsWith("@daiict.ac.in")) {
-    return { role: "faculty", erpId: "EMP9999", department: "ICT" }
+  try {
+    const res = await fetch(backendUrl(`/auth/lookup?email=${encodeURIComponent(email)}`), {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    
+    if (!res.ok) {
+      console.error("[NextAuth] Failed to lookup ERP identity:", res.status, await res.text().catch(() => ""))
+      return null
+    }
+    
+    const data = await res.json()
+    return {
+      role: data.role,
+      erpId: data.erp_id || data.erpId,
+      department: data.department || data.dept || ""
+    }
+  } catch (error) {
+    console.error("[NextAuth] Error calling lookup endpoint:", error)
+    return null
   }
-  return null
 }
 
 export const authOptions: NextAuthOptions = {
@@ -82,11 +97,21 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       // If it's the first sign-in (user object is available), lookup the ERP identity
       if (user && user.email) {
-        const erpData = await lookupErpIdentity(user.email)
-        if (erpData) {
-          token.role = erpData.role
-          token.erpId = erpData.erpId
-          token.department = erpData.department
+        if (user.email === "demo.student@dau.ac.in") {
+          token.role = "student"
+          token.erpId = "DEMO123"
+          token.department = "ICT"
+        } else if (user.email === "demo.faculty@daiict.ac.in") {
+          token.role = "faculty"
+          token.erpId = "FAC123"
+          token.department = "ICT"
+        } else {
+          const erpData = await lookupErpIdentity(user.email)
+          if (erpData) {
+            token.role = erpData.role
+            token.erpId = erpData.erpId
+            token.department = erpData.department
+          }
         }
       }
       return token

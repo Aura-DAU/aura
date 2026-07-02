@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { signIn } from "next-auth/react"
-import { Sparkles, Loader2, GraduationCap, BookOpen, Globe } from "lucide-react"
+import { Sparkles, Loader2, Globe, GraduationCap, BookOpen } from "lucide-react"
 import { BrandMark } from "@/components/common/BrandMark"
 
 export default function LoginPage() {
@@ -74,16 +74,13 @@ export default function LoginPage() {
             {loading === "google" ? <Loader2 className="size-4 animate-spin" /> : <Globe className="size-4" />}
             Continue with Google Workspace
           </button>
-          
+
           <p className="mt-4 text-center text-xs text-neutral-400">
             Must be an official @dau.ac.in or @daiict.ac.in email address.
           </p>
 
           {/* Development Demo Mode - always shown in dev build */}
           <div className="mt-8 border-t border-theme-gray-light pt-6">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="text-xs font-semibold text-theme-yellow uppercase tracking-wider">Dev Mode</span>
-            </div>
             <div className="flex gap-2">
               <button
                 onClick={() => handleDemoSignIn("student")}

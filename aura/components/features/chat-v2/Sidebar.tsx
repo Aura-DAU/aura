@@ -3,7 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { MessageSquare, Plus, Trash2, User } from "lucide-react"
 import { cn } from "@/lib/utils"
-import type { ChatThread, StudentProfile, UserSession } from "@/lib/chat-types"
+import type { ChatThread, StudentProfile } from "@/lib/chat-types"
+import { useSession } from "next-auth/react"
 import { BrandMark } from "@/components/common/BrandMark"
 
 interface SidebarProps {
@@ -14,7 +15,6 @@ interface SidebarProps {
   onDeleteThread: (id: string) => void
   onOpenProfile: () => void
   studentProfile: StudentProfile
-  userSession: UserSession | null
   mobileOpen: boolean
   onCloseMobile: () => void
 }
@@ -61,11 +61,11 @@ function SidebarContent({
   onDeleteThread,
   onOpenProfile,
   studentProfile,
-  userSession,
   onCloseMobile,
 }: SidebarProps) {
-  const displayName = userSession ? (studentProfile.name || userSession.name) : "Guest Account"
-  const displayEmail = userSession ? (userSession.email ?? "") : "Sign in to get started"
+  const { data: session } = useSession()
+  const displayName = session?.user ? (studentProfile.name || session.user.name || "User") : "Guest Account"
+  const displayEmail = session?.user ? (session.user.email ?? "") : "Sign in to get started"
 
   return (
     <div className="flex h-full flex-col">
@@ -143,7 +143,11 @@ function SidebarContent({
           className="flex w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left transition-colors hover:bg-theme-gray-light"
         >
           <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-theme-gray-lighter text-neutral-200">
-            <User className="size-4" />
+            {session?.user?.image ? (
+              <img src={session.user.image} alt={displayName} className="size-full rounded-full object-cover" />
+            ) : (
+              <User className="size-4" />
+            )}
           </span>
           <span className="min-w-0 flex-1">
             <span suppressHydrationWarning className="block truncate text-sm font-medium text-neutral-100">
