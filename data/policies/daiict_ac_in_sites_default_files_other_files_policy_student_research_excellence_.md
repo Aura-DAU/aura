@@ -11,6 +11,10 @@ pdf_name: "Policies/DAU Student Research Excellence Award"
 
 # Policies/DAU Student Research Excellence Award
 
+## Version History
+- **Ver 1.0** (Effective: 28 May 2025) — First iteration of the award policy.
+
+
 ## Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
