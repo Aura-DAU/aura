@@ -1,3 +1,12 @@
+---
+title: "UG Admissions 2026-27: Comprehensive Guide"
+url: "https://www.daiict.ac.in/undergraduate-admissions"
+category: "Admissions"
+scraped_by: "Pushkar"
+scraped_date: "2026-07-01"
+team: "Team A"
+---
+
 # UG Admissions 2026-27: Comprehensive Data & Guidelines
 
 ## 1. New Programs for 2026-27
