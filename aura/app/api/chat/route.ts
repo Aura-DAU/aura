@@ -4,6 +4,9 @@ import {
   type BackendChatRequest,
   type BackendChatResponse,
 } from "@/lib/api/backend"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth/options"
+import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
 export const maxDuration = 60
 
@@ -57,13 +60,33 @@ export async function POST(req: Request) {
     return new Response("Invalid request", { status: 400 })
   }
 
+  const session = await getServerSession(authOptions)
+  if (!session?.user) {
+    return new Response("Unauthorized", { status: 401 })
+  }
+
+  // Strip client-sent role if any (enforce truth from session)
+  if (parsed.data.studentProfile) {
+    delete (parsed.data.studentProfile as any).role
+  }
+
   const payload: BackendChatRequest = parsed.data
+
+  // Mint internal JWT for the backend
+  const internalToken = await signInternalJwt({
+    role: session.user.role,
+    erpId: session.user.erpId,
+    department: session.user.department,
+  })
 
   let backendRes: Response
   try {
     backendRes = await fetch(backendUrl("/chat"), {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${internalToken}`
+      },
       body: JSON.stringify(payload),
     })
   } catch (err) {
