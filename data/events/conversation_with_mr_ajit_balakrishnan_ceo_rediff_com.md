@@ -1,18 +1,10 @@
-title: "Conversation with Mr Ajit Balakrishnan, CEO, Rediff.Com" url: "https://www.daiict.ac.in/news/400" category: "Announcements" scraped_by: "Vedant Shah"
-scraped_date: "2026-05-31" team: "Team 3"
+---
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
+---
 
-# Overview
+## Overview  
+This page announces an event or interview featuring Mr. Ajit Balakrishnan, CEO of Rediff.Com, likely discussing topics related to technology, media, or digital innovation. The content appears linked to a YouTube video (https://www.youtube.com/watch?v=8CoHiJr7cZE) for further details.  
 
-https://www.youtube.com/watch?v=8CoHiJr7cZE
-
-# Main Content
-
-https://www.youtube.com/watch?v=8CoHiJr7cZE
-
-# Important Information
-
-- Date of Announcement: 03/12/2020
-
-# Related Links
-
-- [https://www.youtube.com/watch?v=8CoHiJr7cZE](https://www.youtube.com/watch?v=8CoHiJr7cZE)
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.

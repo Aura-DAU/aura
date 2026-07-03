@@ -5,16 +5,14 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: Excel
+source_type: "Excel"
 pdf_name: "N.I.R.F. / IPR / Sponsored Research details"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# N.I.R.F. / IPR / Sponsored Research details
+## Overview  
+This Excel document from DA-IICT/DAU provides structured data on N.I.R.F. rankings, intellectual property rights (IPR), and sponsored research projects. It likely includes administrative records related to research funding, institutional performance metrics, and innovation outputs managed by the administration.  
 
-## Overview
-
-This document is a Excel resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
-
-## Main Content
-
-## Sheet: Sheet1
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.

@@ -5,16 +5,14 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: Excel
+source_type: "Excel"
 pdf_name: "N.I.R.F. / UG campus Placement"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# N.I.R.F. / UG campus Placement
+## Overview  
+This Excel document provides data related to undergraduate (UG) campus placements at DA-IICT/DAU, likely including statistics on student placements, employer participation, and performance metrics aligned with N.I.R.F. (National Institutional Ranking Framework) criteria. It serves as an administrative resource for tracking and reporting placement outcomes.  
 
-## Overview
-
-This document is a Excel resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
-
-## Main Content
-
-## Sheet: Sheet1
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.

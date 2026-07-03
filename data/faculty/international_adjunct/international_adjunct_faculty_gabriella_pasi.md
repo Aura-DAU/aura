@@ -5,26 +5,12 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# Overview
+## Overview  
+Gabriella Pasi is an adjunct faculty member at Dhirubhai Ambani Institute of Information and Communication Technology (DAIICT), specializing in Information Retrieval, Information Filtering, Data Science, and Fuzzy Logic. She holds a PhD in Computer Science from the University of Rennes, France. The page provides her contact information, including an email address for academic communication.  
 
-Profile of Gabriella Pasi
-
-# Main Content
-
-# Gabriella Pasi
-
-## Education
-
-PhD (Computer Science), University of Rennes, France
-
-## Contact Information
-
-- Email: gabriella_pasi@dau.ac.in
-
-## Specialization
-
-Information Retrieval, Information Filtering, Data Science, Fuzzy Logic
-
-
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.

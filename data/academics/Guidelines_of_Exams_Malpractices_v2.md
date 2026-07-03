@@ -49,7 +49,7 @@ component of the course.
 
 Clause 3. Copies from any papers, gadgets, or any other form of material relevant to the subject
 of the examinations in which the candidate is appearing for his/her performance evaluation.
-Punishment: Expulsion from the examinations hall and cancellation of the performance in that
+ Punishment: Expulsion from the examinations hall and cancellation of the performance in that
 exam of the course and all other courses the candidate has already appeared in the examinations
 based on the severity of the acts of malpractice, and shall not be permitted to appear for the
 remaining examinations of the courses during the examinations schedule.
@@ -91,7 +91,7 @@ Any matter which does not fit the above mentioned clauses, shall be referred to 
 clauses shall be referred to Dean (Academic Programs). The Dean (Academic Programs) or an
 appointed Examinations Scrutiny Committee may re-examine such unresolved matters and
 may recommend for more penalty or relax an imposed penalty.
-The examinations authority, as authorized by the Director or Dean (Academic Programs), shall
+ The examinations authority, as authorized by the Director or Dean (Academic Programs), shall
 examine all matters of the acts of malpractice in the examinations and recommend its decision
 to the office of the Controller of Examinations. The examinations authority must involve Dean
 (Academic Programs) in all decision making processes before drawing any final decision. Dean
@@ -103,4 +103,4 @@ matters.
                                                                           26 February, 2021
 
                                                                                    DA-IICT
-
+ 

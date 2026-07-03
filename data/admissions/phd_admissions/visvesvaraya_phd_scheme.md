@@ -5,94 +5,100 @@ category: "Admissions"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-02"
+fixes_applied: ['OCR_NOISE']
 ---
 
-# Overview
+<think>
+Okay, let's tackle this. The user wants me to clean up the raw text from the PDF into structured Markdown following their specific rules. First, I need to make sure I understand all the rules they've given. Let me go through them again.
 
-Visvesvaraya Ph.D. scheme has been initiated by the Government with an objective of enhancing the number of Ph.Ds. in the country to compete globally in the knowledge intensive sectors of Electronics System Design and Manufacturing (ESDM) and IT/IT Enabled Services (IT/ITES). Under the scheme, financial support is provided to Full-time & Part-time PhD candidates and Young Faculty who are undertaking research and technology development.
+Rule 1: Output only the markdown body. No frontmatter or explanations. Got it. So I can't add any extra text beyond the structured content.
 
-# Main Content
+Rule 2: Use H1 for the title. The title here is "Visvesvaraya Ph.D. Scheme". I'll start with that.
+
+Rule 3: H2 for major sections. The main sections here are Overview, About the Scheme, Eligibility Criteria, Fellowship and Other Benefits, Duration of Fellowship, Selection Process, Important Dates, List of Beneficiaries, Related Links, and Downloadable Resources. Wait, the original text has sections like "Main Content" with subsections. I need to reorganize those into proper H2s.
+
+Looking at the raw text, the first section is "Overview" which is an H1. Then under "Main Content", there's "About the Scheme", which is a repetition of the overview. Maybe that's a duplicate. I should check if that's necessary. The user says to preserve all content, so I'll keep it but structure it properly.
+
+Next, "Eligibility Criteria" is a major section (H2), then "Fellowship and Other Benefits" as another H2. Then "Duration of Fellowship" as H2. "Selection Process" as H2, with subsections like "Entrance Test waiver" and "Interview" as H3s. "Important Dates" as H2 with a table. "List of Beneficiaries" as H2, "Related Links" as H2, and "Downloadable Resources" as H2.
+
+I need to make sure each H2 is properly placed. Also, check for any garbled text. For example, in the "Thrust Research Areas", there's a list that's a bit long. I need to split it into Priority Areas and Emerging Areas as H3s under the Thrust Research Areas H2. The user mentioned splitting large sections into H3s if they exceed ~256 tokens. The Emerging Areas list is quite long, so maybe split it into multiple H3s? Wait, the user says each H2/H3 should fit within ~256 tokens. Let me count the words in the Emerging Areas. It's a long list, but since it's a list, maybe it's okay as a single H3. Alternatively, split into multiple H3s if needed. But the user says to split large sections with additional H3s. Hmm. The Emerging Areas list is one paragraph, but it's a list of items separated by commas. Maybe it's better to keep it as a single H3 with the list. I'll check the token count later.
+
+Also, there are some OCR errors. For example, "Visvesvary" in the NOC link. The correct spelling is "Visvesvaraya". I should correct that. The user allows fixing OCR typos if I'm 100% certain. Since "Visvesvary" is likely a typo for "Visvesvaraya", I'll correct it.
+
+In the "Duration of Fellowship" section, the text says "Support will be provided upto 5 years or the Ph.D. duration whichever is lesser." The word "upto" should be "up to" with a space. That's a minor correction.
+
+The "Important Dates" table has a column with "TBD". I need to make sure the table is properly formatted in Markdown. The original has two columns, but the second row has "TBD" which is okay.
+
+Also, check for any repeated headers. The "Overview" and "About the Scheme" both have similar content. The user says to remove repeated headers. So maybe the "About the Scheme" section under "Main Content" is redundant. The user says to preserve all content, but remove repeated headers. So I'll keep the content but structure it under the appropriate H2.
+
+In the "Eligibility Criteria" section, there are subsections for Full-time and Part-time. Those should be H3s under the main H2 "Eligibility Criteria".
+
+For the "Fellowship and Other Benefits", the user has (a) and (b) for Full-time and Part-time. These should be H3s under the main H2.
+
+The "Selection Process" has subsections like "Entrance Test waiver" and "Interview", which should be H3s.
+
+The "List of Beneficiaries" section is a placeholder, so I'll keep it as is.
+
+Now, let's start structuring the Markdown.
+
+Start with the H1 title. Then the Overview as H2. Wait, the original has an H1 for Overview. But the user's example shows the title as H1, then sections as H2. Wait, the user's instruction says to use H1 for the document title once at the top. The original text has an H1 for "Overview", but that's not correct. The title should be the document title, which is "Visvesvaraya Ph.D. Scheme". So the first line should be # Visvesvaraya Ph.D. Scheme. Then the Overview section as H2.
+
+Wait, looking back at the user's example, the title is H1, then sections like Overview, Eligibility, etc., as H2. So in the raw text, the first line is # Overview, but according to the rules, the title should be H1. So I need to correct that. The user's example shows the title as H1, then sections as H2. So the first line should be the title as H1, then the Overview section as H2.
+
+So the structure would be:
+
+# Visvesvaraya Ph.D. Scheme
+
+## Overview
+
+[content]
 
 ## About the Scheme
 
-Visvesvaraya Ph.D. scheme has been initiated by the Government with an objective of enhancing the number of Ph.Ds. in the country to compete globally in the knowledge intensive sectors of Electronics System Design and Manufacturing (ESDM) and IT/IT Enabled Services (IT/ITES). Under the scheme, financial support is provided to Full-time & Part-time PhD candidates and Young Faculty who are undertaking research and technology development.
+[content]
 
-### **Thrust Research Areas**:
+Wait, but the original has "Overview" as an H1. But according to the rules, the title is H1. So the user's raw text might have an error here. The correct approach is to make the title H1, then the Overview as H2. So I'll adjust that.
 
-**Priority Areas**: ESDM, IT/ITES, VLSI, ASIC Design for In-memory Computing and Hardware Accelerators for Edge Computing.
+Next, the "Main Content" section in the raw text includes "About the Scheme", which is a repetition of the overview. Since the user says to remove repeated headers, I'll merge that into the Overview section. Wait, the original has "Overview" as an H1 and then under "Main Content", "About the Scheme" as another H2. Since they're similar, I should combine them into one section under H2 Overview.
 
-**Emerging Areas**: Wireless communication, Computer Security, Recommender systems, Data Analysis, Circuits Design and Fabrication, Speech Communication, Cyber Security, Machine Learning, Distributed database, Distributed Systems, Semiconductor Physics, Information retrieval, AI & ML, Semiconductor Process, Internet of Things, Software Engg., Biometric Security, Robotics, Next generation communication, Next generation interconnects, NLP, Intelligent cell free communication network for 6G systems, study of efficient data transmission protocol for 5G and future networks for higher throughput, user fairness and low latency, study of efficient data, A speech to speech translation system enhanced with prosodic information for converting speech in english and speech in assamese and vice versa, Nanoelectronics, Artificial Intelligence, Robotics and Mechatronics, Integration of renewable energy into power system ele., Unmanned Aerial system in swam communication, Efficient Memory Architecture of AI chips, Design and Development of a system on chip for certain applications, Low Power VLSI Design, 5g and beyond communication system, 2D material for flexible electronics, Automatic voice pathology detection system from speech signals, IOT gateway SoC for Industry 4.0
+Wait, the user's instruction says to remove repeated headers. So if "Overview" and "About the Scheme" are the same, I should keep one. But the user says to preserve all content. Hmm. The original text has "Overview" as an H1 and then "About the Scheme" as an H2 with the same content. Since the user says to remove repeated headers, I'll keep the content under the H2 "Overview" and remove the duplicate.
 
-**You may refer to the** **link**
+So the structure would be:
 
-Apply for PhD Program at DAU **Click here**
+# Visvesvaraya Ph.D. Scheme
 
-## Eligibility Criteria
+## Overview
 
-#### **(a) For Full-time**:
+[content from both Overview and About the Scheme sections]
 
-M.Tech./M.E./B.Tech/B.E./M.Sc. or equivalent degree in EC / EE / Electronics / ICT /or other appropriate disciplines with 60% marks or its equivalent in the qualifying degree as per the norms set by degree awarding Institute / University.
+Then proceed with the other sections.
 
-#### **(b) For Part-time**:
+Next, the "Eligibility Criteria" as H2, with subsections for Full-time and Part-time as H3s.
 
-M.Tech./M.E./B.Tech/B.E./M.Sc. or equivalent degree in EC / EE / Electronics / ICT /or other appropriate disciplines with 60% marks or its equivalent in the qualifying degree as per the norms set by degree awarding Institute / University.
+"Fellowship and Other Benefits" as H2, with subsections for Full-time and Part-time as H3s.
 
-**AND**
+"Duration of Fellowship" as H2.
 
-The candidate must be currently employed at an R&D Organization or University / Institution and must have at least three years of relevant experience. The candidate should submit a 'no objection certificate' (NOC) issued by the head of the organization / institution. A template for the NoC is attached as Annexure-I
+"Selection Process" as H2, with subsections for Entrance Test waiver and Interview as H3s.
 
-### **Fellowship and Other Benefits**:
+"Important Dates" as H2 with the table.
 
-Some of the highlights of this scheme are the following:
+"List of Beneficiaries" as H2.
 
-#### **(a) For Full-time**:
+"Related Links" as H2.
 
-1. Fellowship:
-   * ₹ 38,750/- per month (I & II year);
-   * ₹ 43,750/- (III, IV and V year).
-2. Research Contingency Grant support of Rs. 1,20,000 / year for support duration of PhD candidate.
-3. One Time International Conf. Support @ Rs. 1.5 Lakhs/Full Time PhD
-4. One Time Support for Visit to Labs abroad.  
-   **For more details**: **Click here**
-5. Reimbursement of Rent (as per GoI norms)
+"Downloadable Resources" as H2.
 
-#### **(b) For Part-time:**:
+Now, checking for any garbled text. For example, in the Emerging Areas list, there's "A speech to speech translation system enhanced with prosodic information for converting speech in english and speech in assamese and vice versa,". The user says to preserve all numbers, names, etc., exactly. So I'll keep it as is.
 
-* A one-time incentive of Rs. 3.00 Lakhs, through DBT in his/her bank account, on successful completion of PhD.
-* The above detailed Terms and Conditions are as per Visvesvaraya Ph.D. Scheme Phase –II, Round - II funded by Ministry of Electronics and IT (MeitY).
+In the NOC link, "Visvesvary" should be corrected to "Visvesvaraya".
 
-### **Duration of Fellowship**
+Also, in the "Duration of Fellowship" section, "upto" should be "up to".
 
-Support will be provided upto 5 years or the Ph.D. duration whichever is lesser.
+In the "Selection Process" section, the note about the interview being held physically at DA-IICT, Gandhinagar. The user says to remove footers, page numbers, etc. But this is part of the content, so it should be kept.
 
-## Selection Process
-
-#### (Only for C2S Program - **1 seat** for full-time PhD)
-
-#### **Entrance Test waiver**: Candidates meeting any of the following conditions can avail a waiver for the entrance test:
-
-* Valid GATE score
-* Valid NET qualification (Including NET-PhD, LS and JRF)
-* Awarded with an MS by Research degree of an IIT or IISc or IIIT
-* Awarded with an MTech degree of DA-IICT along with a CPI > 8.0
-* Selected for DST Inspire / NBHM / JEST / UGC / CSIR PhD fellowship
-* Applying under the Sponsored Part-time Category
-* Applying under the External Part-time Category
-
-### **Interview**:
-
-Candidates short-listed on the basis of the Entrance Test or who have availed a waiver for the entrance test should appear for an interview to be held at DA-IICT on the date mentioned in the ‘Important Dates’ webpage of the Admissions web portal. During the interview, the candidates will be evaluated on foundational as well as specialized topics of their educational background and research interests. For this purpose, the candidates have to submit a one-page statement of purpose (SoP) as a part of their application. A set of guidelines for preparing a SoP is available **[here](https://www.daiict.ac.in/sites/default/files/other-files/Guidelines-for-writing-the-statement-of-purpose.pdf)**
-
-**The Ph.D. interview will be held physically at DA-IICT, Gandhinagar. The shortlisted Ph.D. (Regular) candidates for entrance test / interview will be provided to and from sleeper class train fare from the nearest railway station as per the communication address mentioned in their application. The lodging will be provided at DA-IICT**.
-
-Candidate also has to apply through institute PhD portal
-
-Also the interested candidates need to send their resume and SoP to  
-**Prof. Vinay S. Palaparthy** at **vinay\_shrinivas[at]daiict[dot]ac[dot]in** (*Nodal Officer*)
-
-Please write “**Application for Visvesvaraya Ph.D. scheme**” in the subject line of the email. For any queries, you can also contact at +91-9890613053.
-
-### **Important Dates**:
+Now, formatting the tables. The "Important Dates" table has two columns. The original has:
 
 |  |  |
 | --- | --- |
@@ -101,20 +107,12 @@ Please write “**Application for Visvesvaraya Ph.D. scheme**” in the subject 
 | Written Examinations/Interviews | **15 June 2025** |
 | Announcement of Results | **TBD** |
 
-[NO OBJECTION CERTIFICATE](https://www.daiict.ac.in/sites/default/files/other-files/NO_OBJECTION_CERTIFICATE_Visvesvary-%20PhD-Fellowship.pdf) For Applying to the PhD Program (Part-time) Category at DA-IICT Gandhinagar under Visvesvaraya Ph.D. Scheme
+I need to make sure the table is properly formatted with pipes and headers. The user's example shows the table with | col | col | format. So that's correct.
 
-## List of Beneficiaries
+Also, check for any control characters or OCR noise. For example, in the raw text, there's "reg1strat1un" which should be "registration". The user allows fixing OCR typos if certain. But in the provided text, I don't see such typos. The only possible one is "Visvesvary" which I corrected.
 
-#### We’re working on updating this section—stay tuned!
+Now, putting it all together. Let's start writing the Markdown.
 
+First, the title as H1.
 
-## Related Links
-
-- [link](https://phd.dic.gov.in/)
-- [apply](https://www.daiict.ac.in/admission-phd)
-
-## Downloadable Resources
-
-- [here](https://www.daiict.ac.in/sites/default/files/other-files/Guidelines-for-writing-the-statement-of-purpose.pdf)
-- [NO OBJECTION CERTIFICATE](https://www.daiict.ac.in/sites/default/files/other-files/NO_OBJECTION_CERTIFICATE_Visvesvary-%20PhD-Fellowship.pdf)
-
+Then the Overview section combining the content from the original Overview

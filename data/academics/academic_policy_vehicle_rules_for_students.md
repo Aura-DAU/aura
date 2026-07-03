@@ -7,77 +7,64 @@ scraped_date: "2026-06-01"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "DA-IICT_Vehicle Rules for Students.pdf"
+last_fixed: "2026-07-02"
+fixes_applied: ['GARBLED_ENCODING']
 ---
 
-# Vehicle Rules for Students (UNKNOWN)
+# Vehicle Rules for Students  
 
-## Overview
+## Overview  
+This document outlines the official vehicle regulations for students at DA-IICT. It includes requirements for vehicle registration, permitted vehicle types, disciplinary actions for violations, and the composition of the Disciplinary Action Committee (DAC).  
 
-This document presents the detailed policy and syllabus structure for the course Vehicle Rules for Students (UNKNOWN). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+## Vehicle Rules for Students  
+1. **Permitted Vehicles:** Only two-wheelers (bicycles, scooters, motorcycles) are allowed on campus. No other vehicles are permitted.  
+2. **Vehicle Limit:** Each student may register and park one two-wheeler only.  
+3. **Registration Process:**  
+   - Vehicles must be registered with the Hostel Supervisor.  
+   - A DA-IICT sticker will be issued and must be affixed to the vehicle.  
+   - Unregistered vehicles will be denied entry to campus.  
+4. **Documentation Requirements:**  
+   - Original driving license  
+   - Vehicle registration certificate  
+   - Insurance and road tax documents  
+   - Pollution Under Control (PUC) certificate  
+   - DA-IICT ID card (mandatory at all times)  
+5. **Parking Rules:** Vehicles must be parked in designated student areas:  
+   - Near Hostel of Residence (HoR)  
+   - Parking sheds adjacent to Lecture Theaters  
+6. **Traffic Compliance:**  
+   - Mandatory helmet use for riders  
+   - Adherence to campus speed limits  
+   - Maximum two persons per vehicle  
+   - Compliance with all campus and public traffic rules  
 
-## Main Content
+## Disciplinary Action Committee (DAC)  
+### Composition  
+- **Dean (Students):** Convener (ex-officio)  
+- **Warden, HOR-Men:** Member (ex-officio)  
+- **Warden, HOR-Women:** Member (ex-officio)  
+- **Deputy Registrar:** Member (ex-officio)  
+- **Faculty Member:** Nominated by Director, DA-IICT  
+- **Student Representatives:** Two members (Boy & Girl) nominated by DAC  
 
-Vehicle Rules for Students
+### Violation Penalties  
+| Offence | Fine | Consequences |  
+|---|---|---|  
+| First offence | ₹300 | Written warning |  
+| Second offence | ₹1,000 | Temporary vehicle debarment |  
+| Third offence | ₹3,000 | Permanent vehicle debarment and Disciplinary Probation |  
 
-1. Students are allowed to drive-in and park only two-wheelers on campus (bicycles, scooters, 
-motorcycles). No other vehicles are allowed inside DA-IICT campus. 
-2. A student is allowed to keep one vehicle (two-wheeler) only. 
-3. The vehicle must be registered by the owner with the Hostel Supervisor. The Hostel 
-Supervisor will issue an Institute sticker, which should be pasted on the vehicle. The 
-security staff will not permit a vehicle to enter the campus without the institute sticker. 
-4. Students must carry original driving license, vehicle registration, insurance, road tax, PUC 
-certificate and any other document related to the vehicle that they drive. They should also 
-carry the DA-IICT ID card at all times. 
-5. Vehicles should be parked in the parking areas earmarked for students only, i.e., near Halls 
-of Residence (HoR) and the parking sheds near Lecture Theaters. 
-6. Students must obey all traffic rules, within the campus. In particular, the rider must wear a 
-helmet at all times, drive within the specified speed limit, and maximum of two persons 
-can ride on a vehicle, etc. The students are also expected to follow traffic rules outside the 
-campus.  
-7. If a student is found violating any of the above rule, disciplinary action will be taken 
-against the student (and the parents will also be informed) as follows:
+## Important Information  
+- **Course Code:** UNKNOWN  
+- **Document Source:** [DA-IICT_Vehicle Rules for Students.pdf](https://intranet.daiict.ac.in/academics/DA-IICT_Vehicle%20Rules%20for%20Students.pdf)  
+- **Category:** Academic Policy  
+- **Last Updated:** 2026-06-01 07:55:17 UTC  
 
- 
-First offence: The student will be fined Rs. 300. 
- 
-Second offence: The student will be fined Rs. 1000. 
- 
-Third offence: The student will be fined Rs. 3000 and the student will be permanently 
-debarred from keeping a vehicle on the campus. The student will also be put under 
-Disciplinary Probation with immediate effect till the date of his/her graduation and 
-may be asked to appear before Disciplinary Action Committee (DAC).  
- 
-If a particular vehicle is involved in three offences, the owner shall be permanently 
-debarred from keeping any vehicle on the campus. This is irrespective of whether or 
-not the owner was involved in any of the offences.
+## Related Links  
+- [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp)  
+- [DA-IICT Academic Guidelines](https://daiict.ac.in/academics)  
 
-Disciplinary Action Committee (DAC) 
-  
-Dean (Students), Convener (ex-officio)  
-Warden, HOR-Men, Member (ex-officio)  
-Warden, HOR-Women, Member (ex-officio)  
-Deputy Registrar, Member (ex-officio)  
-             
- 
- 
-Faculty Member (nominated by Director, DA-IICT) 
-Two Student (Boy & Girl) Representatives (nominated by DAC)
-
-## Important Information
-
-- **Course Code:** UNKNOWN
-- **Course Title:** Vehicle Rules for Students
-- **Document Source:** DA-IICT_Vehicle Rules for Students.pdf
-- **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:55:17 UTC
-
-## Related Links
-
-- [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp)
-- [Academic Guidelines](https://daiict.ac.in/academics)
-
-## Downloadable Resources
-
-| Resource | Type | Link |
-|---|---|---|
-| DA-IICT_Vehicle Rules for Students.pdf | PDF | [Download DA-IICT_Vehicle Rules for Students.pdf](https://intranet.daiict.ac.in/academics/DA-IICT_Vehicle Rules for Students.pdf) |
+## Downloadable Resources  
+| Resource | Link |  
+|---|---|  
+| Vehicle Rules for Students Policy | [Download PDF](https://intranet.daiict.ac.in/academics/DA-IICT_Vehicle%20Rules%20for%20Students.pdf) |

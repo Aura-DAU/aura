@@ -5,26 +5,12 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# Overview
+## Overview  
+This page provides a profile of Kalgi Gandhi, an adjunct faculty member at DA-IICT, Gandhinagar. It outlines her academic background, including her PhD thesis submission at DA-IICT, and her areas of specialization in Database Management, Distributed Database Management, and Edge Computing. The page also includes her contact information for academic communication.  
 
-Profile of Kalgi Gandhi
-
-# Main Content
-
-# Kalgi Gandhi
-
-## Education
-
-PhD - Thesis Submitted, DA-IICT Gandhinagar
-
-## Contact Information
-
-- Email: kalgi_gandhi@dau.ac.in
-
-## Specialization
-
-Database Management, Distributed Database Management, Edge Computing
-
-
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.

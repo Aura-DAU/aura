@@ -5,193 +5,130 @@ category: "academics"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: PDF
+source_type: "PDF"
 pdf_name: "Courses Through CEP & AIP/Course Plan under CEP form pdf"
+last_fixed: "2026-07-02"
+fixes_applied: ['OCR_NOISE']
 ---
 
-# Courses Through CEP & AIP/Course Plan under CEP form pdf
+# Course Plan Proposal under CEP  
 
-## Overview
+## A. Basic Information  
+### Course Title & Objective  
+- **Course Title**: [illegible]  
+- **Course Objective**: [illegible]  
 
-This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+### Course Modality  
+- ☐ Online ☐ Offline ☐ Hybrid  
 
-## Main Content
+### Anchor Details  
+1. **Anchor 1**  
+   - Name: [illegible]  
+   - Email: [illegible]  
+   - Phone No.: [illegible]  
+2. **Anchor 2 (if any)**  
+   - Name: [illegible]  
+   - Email: [illegible]  
+   - Phone No.: [illegible]  
+   - Affiliation: [illegible]  
 
-Course Plan Proposal under CEP 
-Please see CEP Policy Document 
-☐ Conference 
-☐ Short-term Course 
-☐ Workshop 
-☐ Symposium 
-☐ Seminar 
-☐ Other_______________________________________________________________________ 
- 
-A. Basic Information: 
-Date: ______________ 
- 
-Sr. No. 
-Item 
-Details 
-1. 
-Course Title 
- 
- 
-2. 
-Course Objective 
- 
-3(i). 
-Course Modality 
-☐ Online 
-☐ Offline 
-☐ Hybrid 
- 
-(ii). 
-Anchor 1 
-Name:    
-Email:  
-Phone No: 
-(iii) 
-Anchor 2 (if any) 
-Name:    
-Email:  
-Phone No: 
-Affiliation: 
-4.  
-No. of additional instructors (please 
-provide brief bio, and other relevant 
-info) 
- 
-5.  
-Total lecture hours:  
-Lab/Tutorial 
-Hours:  
-Lecture Hours:  
-6. 
-Course duration (in days) 
-7. 
-Tentative Dates, Day and Time 
-8. 
-Expected number of participants 
-9.  
-Targeted Audience 
-10. 
-Registration Fee (per participant incl. 
-GST)
+### Additional Instructors  
+- No. of additional instructors: [illegible]  
+  - *Provide brief bio and other relevant info.*  
 
-B. Program Schedule: 
- 
-Date 
-Instructors Name 
-Topic  
-Lecture Timing 
-C. Lab and Infrastructure Requirements: List the specific requirements, including software, 
-hardware, and other infrastructure necessary for the course. 
- 
-D. Final Examination Schedule (optional): Provide details of the final examination schedule if 
-applicable. 
- 
-E. Teaching-Assistant Office Hour Schedule (optional): If applicable, provide the schedule for 
-Teaching Assistant office hours along with TA information. 
- 
- 
-Date 
-Instructor/TA/Staff 
-Name 
-Tutorial/Lab Topics  
-Tutorial/Lab 
-Timing 
-F. Certificate Type: Choose one: (a) Participation, (b) Pass/Fail, or (c) Grade. 
- 
-G. Course Notes: 
- 
-● The final course plan must be submitted to the Continuing Education Program (CEP) 
-office at least 45 days before the tentative course start date. 
-● For offline CEP programs, scheduling should preferably align with vacation periods or 
-extended breaks within the semester due to current infrastructure limitations. If the 
-program is offered during working days, ensure it does not interfere with regular 
-classes/labs. 
-● Please note that any course must have at least two instructors.
+### Course Structure  
+- Total lecture hours: [illegible]  
+- Lab/Tutorial hours: [illegible]  
+- Course duration (in days): [illegible]  
+- Tentative dates, day, and time: [illegible]  
+- Expected number of participants: [illegible]  
+- Targeted audience: [illegible]  
+- Registration fee (per participant, incl. GST): [illegible]  
 
-H. Commercial aspects and Revenue: 
-Table-1: Revenue 
-Expected Revenue 
-Amount (INR) 
-Total Revenue from Registration (incl. GST)   
-Total Revenue from Sponsorship (incl. GST)   
-A: Total  
- 
-B: Reduce GST (18%) 
- 
-C: Net Amount (A - B) 
- 
-D: Funding from Govt. or Other GST exempt 
-Agency 
- 
-E: Net Available Revenue (C + D) 
- 
- 
-Table-2: Expenses  
-Expected Expenses 
-Budget (incl. of GST) (INR) 
-A. Institute Overhead (fixed) 
-10% of Net Available Revenue 
-(Table1.E) 
-B. Faculty Anchor/Proposer(s): 
-10% of Net Available Revenue 
-(Table1.E) 
-C. Remuneration of Experts and TA 
-D. Food  
- 
-E. Travel  
- 
-F. Accommodation 
- 
-G. Stationeries and Registration Kit 
- 
-H. Marketing: External Marketing 
-Agency as per requirement 
-(optional)  
- 
-NT 1: Support given by CEP Office 
-and Communication Office 
- 
-I. Contingencies 
- 
-J. Total Expected Expenditure 
-Sum(A:I) 
-K. Surplus  
-Net available Revenue - Total Expected 
-Expenditure 
- 
-     *NT: Adjustable to meet financial feasibility under the discretion of the Director of the Institute.
+---
 
-The surplus amount will be shared between the program coordinator(s) and the Institute as follows: 
- 
-Settlement of the surplus amount Institute share Faculty Program Coordinator(s) share 
-Surplus < 3 lakhs 
-20% 
-80% 
-Surplus between 3 - 5 lakhs 
-30% 
-70% 
-Surplus > 5 lakhs 
-50% 
-50% 
- 
-It is the faculty anchor(s) responsibility to ensure that K is always positive. 
- 
-By submitting this course plan, I acknowledge that I have reviewed and agree to adhere to the 
-guidelines provided above. 
- 
- 
-Anchor's Signature: ______________________________ 
- 
- 
-Date: ______________________________ 
- 
- 
-For the use of CEP office 
-Remarks:  
-Approved by CEP Convenor/Co-Convenor 
- 
-Approved by Director
+## B. Program Schedule  
+| Date       | Instructors Name | Topic       | Lecture Timing |  
+|------------|------------------|-------------|----------------|  
+| [illegible] | [illegible]      | [illegible] | [illegible]    |  
+
+---
+
+## C. Lab and Infrastructure Requirements  
+- [illegible]  
+- List specific software, hardware, and infrastructure needs.  
+
+---
+
+## D. Final Examination Schedule (Optional)  
+- [illegible]  
+
+---
+
+## E. Teaching-Assistant Office Hour Schedule (Optional)  
+| Instructor/TA/Staff | Tutorial/Lab Topics | Date       | Timing       |  
+|---------------------|---------------------|------------|--------------|  
+| [illegible]         | [illegible]         | [illegible] | [illegible]  |  
+
+---
+
+## F. Certificate Type  
+- Choose one:  
+  - (a) Participation  
+  - (b) Pass/Fail  
+  - (c) Grade  
+
+---
+
+## G. Course Notes  
+1. Final course plan must be submitted to CEP office **45 days before** the tentative start date.  
+2. Offline programs should align with vacation periods or extended breaks.  
+3. Minimum **two instructors** required for any course.  
+
+---
+
+## H. Commercial Aspects and Revenue  
+
+### Table 1: Revenue  
+| Item                                | Amount (INR) |  
+|-------------------------------------|--------------|  
+| Total Revenue from Registration     | [illegible]  |  
+| Total Revenue from Sponsorship      | [illegible]  |  
+| **A. Total**                        | [illegible]  |  
+| **B. Reduce GST (18%)**            | [illegible]  |  
+| **C. Net Amount (A - B)**           | [illegible]  |  
+| **D. Funding from Govt./GST-exempt**| [illegible]  |  
+| **E. Net Available Revenue (C + D)**| [illegible]  |  
+
+### Table 2: Expenses  
+| Item                                | Budget (INR) |  
+|-------------------------------------|--------------|  
+| 10% of Net Available Revenue        | [illegible]  |  
+| Institute Overhead (fixed)          | [illegible]  |  
+| Faculty Anchor/Proposer(s)          | [illegible]  |  
+| Remuneration of Experts and TA      | [illegible]  |  
+| Food                                | [illegible]  |  
+| Travel                              | [illegible]  |  
+| Accommodation                       | [illegible]  |  
+| Stationeries and Registration Kit   | [illegible]  |  
+| Marketing (External Agency)         | [illegible]  |  
+| Contingencies                       | [illegible]  |  
+| **J. Total Expected Expenditure**   | [illegible]  |  
+
+### Surplus Sharing  
+| Surplus Range       | Institute Share | Faculty Program Coordinator(s) Share |  
+|---------------------|-----------------|--------------------------------------|  
+| Surplus < 3 lakhs   | 20%             | 80%                                  |  
+| Surplus 3–5 lakhs   | 30%             | 70%                                  |  
+| Surplus > 5 lakhs   | 50%             | 50%                                  |  
+
+---
+
+## I. Submission and Approval  
+- **Anchor's Signature**: [illegible]  
+- **Date**: [illegible]  
+
+### For CEP Office Use  
+- **Remarks**: [illegible]  
+- **Approved by CEP Convenor/Co-Convenor**: [illegible]  
+- **Approved by Director**: [illegible]

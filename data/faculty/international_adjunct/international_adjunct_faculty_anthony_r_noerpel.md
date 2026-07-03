@@ -5,26 +5,13 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# Overview
+## Overview  
+This page provides the profile of Anthony R. Noerpel, an adjunct faculty member at Dhirubhai Ambani University. It highlights his expertise in cellular and satellite communication system design, RF propagation, and Earth systems sciences. The page also includes his educational background in electrical engineering and contact information for professional correspondence.  
 
-Profile of Anthony R. Noerpel
-
-# Main Content
-
-# Anthony R. Noerpel
-
-## Education
-
-MSc (Electrical Engineering), New Jersey Institute of Technology, USA
-
-## Contact Information
-
-- Email: anthony_noerpel@dau.ac.in
-
-## Specialization
-
-Cellular and Satellite Communication System Design, RF Propagation, Earth Systems Sciences.
-
-
+## Note  
+This page's content could not be fully extracted during scraping.  
+Please refer to the source URL for complete information.

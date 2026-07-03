@@ -1,30 +1,16 @@
-﻿---
+---
 title: "Talk Session by Prof. Kiran Trivedi"
 url: "https://www.daiict.ac.in/events/6543"
 category: "Events"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+last_fixed: "2026-07-02"
+fixes_applied: ['CRLF_ENCODING', 'STUB_EMPTY']
 ---
 
-# Talk Session by Prof. Kiran Trivedi
+## Overview  
+This page details a talk session by Prof. Kiran Trivedi from the University of Wollongong, Australia, at DA-IICT. The session, titled "From Data to Intelligence: Exploring Data Nuances, Basics of Machine Learning, TinyML, and Edge Tools," will cover machine learning fundamentals, TinyML applications, and edge computing. Scheduled for November 13, 2024, at 7:00 PM in LT-1, the event targets faculty and students, offering insights into data science and computational tools.  
 
-# Overview
-
-_No overview available._
-
-# Main Content
-
-# Talk Session by Prof. Kiran Trivedi
-
-# We are happy to welcome Prof. Kiran Trivedi from the University of Wollongong, Australia, as the distinguished speaker for our upcoming session at DA-IICT. Prof. Trivedi’s talk, "From Data to Intelligence: Exploring Data Nuances, Basics of Machine Learning, TinyML, and Edge Tools," will delve into the fundamentals of machine learning, the role of TinyML in modern applications, and the transformative potential of edge computing.
-
-# The session offers an exciting opportunity for faculty and students to gain valuable insights from Prof. Trivedi, a leading researcher whose expertise spans data science, machine learning, and advanced computational tools.
-
-# Date and Time: November 13, 2024 (Wednesday), at 7:00 PM
-
-# Venue: LT-1, DA-IICT
-
-# Important Information
-
-_No important information found._
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.

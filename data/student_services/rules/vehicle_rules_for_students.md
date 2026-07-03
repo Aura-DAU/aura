@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Vehicle Rules for Students"
 url: "https://daiict.ac.in/sites/default/files/other-files/DA-IICT_Vehicle_Rules_for_Students.pdf"
 category: "Student Services"
@@ -7,139 +7,112 @@ scraped_date: "2026-05-30"
 team: "Team D"
 source_type: "PDF"
 pdf_name: "DA-IICT_Vehicle_Rules_for_Students"
+last_fixed: "2026-07-03"
+fixes_applied: ['OCR_NOISE']
 ---
 
-# Overview
+# Vehicle Rules for Students  
 
-Student Vehicle Regulations at Dhirubhai Ambani University (DAU) / DA-IICT, Gandhinagar. Covers permitted vehicles, registration, parking, traffic rules, and penalties for violations.
+## Overview of Vehicle Regulations  
+Students are permitted to bring and park only two-wheelers on campus (such as bicycles, scooters, and motorcycles). No other vehicles are allowed within the DA-IICT campus. Each student is allowed to keep only one two-wheeler.  
 
-# Main Content
+The vehicle must be registered with the Hostel Supervisor, who will provide an Institute sticker that must be affixed to the vehicle. Without this sticker, security staff will not permit entry to the campus.  
 
-### General Rules
+Students must carry their original driving license, vehicle registration, insurance, road tax, PUC certificate, and any other relevant documents related to the vehicle they are driving. They are also required to carry their DA-IICT ID card at all times.  
 
-- Students are permitted to bring and park only **two-wheelers** on campus (bicycles, scooters, motorcycles). No other vehicles are allowed.
-- Each student is allowed to keep **only one two-wheeler**.
-- The vehicle must be **registered with the Hostel Supervisor**, who will provide an Institute sticker that must be affixed to the vehicle. Without this sticker, security staff will not permit entry.
-- Students must carry their **original driving license, vehicle registration, insurance, road tax, PUC certificate**, and any other relevant documents. DA-IICT ID card must be carried at all times.
-- Vehicles must be parked only in **designated student parking areas** (near Halls of Residence and parking sheds near Lecture Theaters).
-- Students must follow all driving rules on campus: **wear helmets**, adhere to **speed limits**, no more than **two persons** per vehicle. Traffic rules outside campus must also be observed.
+Vehicles must be parked only in designated student parking areas, such as those near the Halls of Residence (HoR) and the parking sheds near Lecture Theaters.  
 
-### Violations and Penalties
+Students must follow all driving rules on campus. Riders are required to wear helmets at all times, adhere to the speed limits, and ensure that no more than two persons ride a vehicle. Traffic rules outside the campus must also be observed.  
 
-#### 1. Speeding
-Exceeding the specified speed limit on campus roads.
+## Disciplinary Actions for Violations  
+### 1. Speeding  
+**Description:** Exceeding the specified speed limit on campus roads.  
+**Punishment:**  
+- First offense: Rs. 1500.  
+- Second offense: Fine of Rs. 2000.  
+- Third offense: Permanent suspension of vehicle entry.  
 
-| Offence | Penalty |
-|---------|---------|
-| First | â‚¹1,500 fine |
-| Second | â‚¹2,000 fine |
-| Third | Permanent suspension of vehicle entry |
+### 2. Not Wearing a Helmet  
+**Description:** Riding a two-wheeler without wearing a helmet.  
+**Punishment:**  
+- First offense: Fine of Rs. 500.  
+- Second offense: Fine of Rs. 1000.  
+- Third offense: Permanent suspension of vehicle entry.  
 
-#### 2. Not Wearing a Helmet
-Riding a two-wheeler without wearing a helmet.
+### 3. Driving Without a License or Proper Documents  
+**Description:** Failing to carry a valid driving license or required vehicle documents (registration, insurance, etc.).  
+**Punishment:**  
+- First offense: Fine of Rs. 2000.  
+- Second offense: Permanent suspension of vehicle entry.  
 
-| Offence | Penalty |
-|---------|---------|
-| First | â‚¹500 fine |
-| Second | â‚¹1,000 fine |
-| Third | Permanent suspension of vehicle entry |
+### 4. Unauthorized Parking  
+**Description:** Parking in non-designated areas, blocking access points, or parking in reserved spots.  
+**Punishment:**  
+- First offense: Written warning.  
+- Second offense: Fine of Rs. 500.  
+- Third offense: Permanent suspension of vehicle entry.  
 
-#### 3. Driving Without License or Proper Documents
-Failing to carry a valid driving license or required vehicle documents (registration, insurance, etc.).
+### 5. Riding with More Than Two People  
+**Description:** Carrying more than two persons on a two-wheeler.  
+**Punishment:**  
+- First offense: Fine of Rs. 500.  
+- Second offense: Fine of Rs. 1000.  
+- Third offense: Permanent suspension of vehicle entry.  
 
-| Offence | Penalty |
-|---------|---------|
-| First | â‚¹2,000 fine |
-| Second | Permanent suspension of vehicle entry |
+### 6. Reckless Driving  
+**Description:** Dangerous driving in an unsafe manner and riding on pathways meant for walking.  
+**Punishment:**  
+- First offense: Fine of Rs. 1000.  
+- Second offense: Fine of Rs. 3000.  
+- Third offense: Permanent suspension of vehicle entry.  
 
-#### 4. Unauthorized Parking
-Parking in non-designated areas, blocking access points, or parking in reserved spots.
+### 7. Driving Under the Influence (DUI)  
+**Description:** Operating a vehicle under the influence of alcohol or drugs.  
+**Punishment:**  
+- First offense: Permanent suspension of vehicle entry and DAC proceedings.  
 
-| Offence | Penalty |
-|---------|---------|
-| First | Written warning |
-| Second | â‚¹500 fine |
-| Third | Permanent suspension of vehicle entry |
+### 8. Failure to Obey Security Personnel  
+**Description:** Ignoring instructions from security staff, such as refusing to stop for checks or following parking guidelines.  
+**Punishment:**  
+- First offense: Fine of Rs. 500.  
+- Second offense: Fine of Rs. 1000.  
+- Third offense: Permanent suspension of vehicle entry.  
 
-#### 5. Riding with More Than Two People
+### 9. Unauthorized Entry of Vehicle Without Sticker  
+**Description:** Entering the campus without the proper Institute-issued vehicle sticker.  
+**Punishment:**  
+- First offense: Fine of Rs. 1000.  
+- Second offense: Permanent suspension of vehicle entry.  
 
-| Offence | Penalty |
-|---------|---------|
-| First | â‚¹500 fine |
-| Second | â‚¹1,000 fine |
-| Third | Permanent suspension of vehicle entry |
+### 10. Use of Horn in the Campus  
+**Description:** Using a vehicle horn in the campus.  
+**Punishment:**  
+- First offense: Rs. 500.  
+- Second offense: Fine of Rs. 1000.  
+- Third offense: Permanent suspension of vehicle entry.  
 
-#### 6. Reckless Driving
-Dangerous driving in an unsafe manner and riding on pathways meant for walking.
+## Procedure for Reporting Traffic Violations on Campus  
+### 1. Authority to Report  
+- The security staff and DA-IICT employees are authorized to identify and report any traffic violations committed by students on campus.  
+- All incidents must be reported on `admin_officer@daiict.ac.in`.  
 
-| Offence | Penalty |
-|---------|---------|
-| First | â‚¹1,000 fine |
-| Second | â‚¹3,000 fine |
-| Third | Permanent suspension of vehicle entry |
+### 2. Collection of Details  
+- Upon identifying a violation, the security staff or employee will collect the following details:  
+  - Student's name and ID.  
+  - Photograph of the student or vehicle involved (if possible).  
+  - Date and time of the incident.  
+  - Description of the violation (details of the incident).  
 
-#### 7. Driving Under the Influence (DUI)
-Operating a vehicle under the influence of alcohol or drugs.
+### 3. Submission of Report  
+- The collected information will be submitted to the Administrative Officer for further action.  
 
-| Offence | Penalty |
-|---------|---------|
-| First | **Permanent suspension of vehicle entry + DAC proceedings** |
+### 4. Administrative Action  
+- The Administrative Officer will review the report and take appropriate action as per the guidelines outlined in the rule book. This may include issuing fines, warnings, or other disciplinary actions depending on the severity and frequency of the violation.  
 
-#### 8. Failure to Obey Security Personnel
-Ignoring instructions from security staff, such as refusing to stop for checks or following parking guidelines.
+### 5. Consultation with the Dean (Students)  
+- If necessary, the Administrative Officer may consult with the Dean (Students) for advice or further guidance on handling serious or repeat offenses.  
 
-| Offence | Penalty |
-|---------|---------|
-| First | â‚¹500 fine |
-| Second | â‚¹1,000 fine |
-| Third | Permanent suspension of vehicle entry |
+### 6. Notification to the Student  
+- Once the decision is made, the student will be informed of the action and any consequences or penalties resulting from the violation. If the student's parents need to be notified (for serious violations), the Administrative Officer will ensure communication is made.  
 
-#### 9. Unauthorized Entry Without Sticker
-Entering the campus without the proper Institute-issued vehicle sticker.
-
-| Offence | Penalty |
-|---------|---------|
-| First | â‚¹1,000 fine |
-| Second | Permanent suspension of vehicle entry |
-
-#### 10. Use of Horn on Campus
-
-| Offence | Penalty |
-|---------|---------|
-| First | â‚¹500 fine |
-| Second | â‚¹1,000 fine |
-| Third | Permanent suspension of vehicle entry |
-
-### Procedure for Reporting Traffic Violations on Campus
-
-1. **Authority to Report:** Security staff and DA-IICT employees are authorized to identify and report any traffic violations. All incidents must be reported to admin_officer@daiict.ac.in
-
-2. **Collection of Details:** Upon identifying a violation, the following is collected:
-   - Student's name and ID
-   - Photograph of the student or vehicle involved (if possible)
-   - Date and time of the incident
-   - Description of the violation
-
-3. **Submission of Report:** Collected information submitted to the Administrative Officer for further action.
-
-4. **Administrative Action:** The Administrative Officer will review the report and take appropriate action as per guidelines â€” fines, warnings, or other disciplinary actions depending on severity and frequency.
-
-5. **Consultation with Dean (Students):** If necessary, the Administrative Officer may consult with the Dean (Students) for serious or repeat offenses.
-
-6. **Notification to Student:** The student will be informed of the action and any consequences. For serious violations, parents may be notified by the Administrative Officer.
-
-# Important Information
-
-- **Only two-wheelers allowed** â€” no 4-wheelers on campus
-- **One vehicle per student** maximum
-- **Registration mandatory** with Institute sticker
-- **DUI = immediate permanent ban** + disciplinary proceedings
-- All reports go to: admin_officer@daiict.ac.in
-
-# Related Links
-
-- [Vehicle Rules (PDF)](https://daiict.ac.in/sites/default/files/other-files/DA-IICT_Vehicle_Rules_for_Students.pdf)
-- [Hostel Rules and Regulations](https://daiict.ac.in/sites/default/files/other-files/Hostel-Rules-and-Regulations.pdf)
-- [Disciplinary Rules](https://daiict.ac.in/disciplinary-rules)
-- [Parents](https://daiict.ac.in/parents)
-- [DAU Website](https://www.daiict.ac.in)
+This procedure ensures that campus traffic rules are enforced consistently and transparently, with proper reporting and accountability measures in place.

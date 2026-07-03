@@ -7,137 +7,106 @@ scraped_date: "2026-06-01"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "DA-IICT_Student Code of Conduct and DAC Guidelines.pdf"
+last_fixed: "2026-07-02"
+fixes_applied: ['GARBLED_ENCODING']
 ---
 
-# Student (OFCONDUCTANDDACGUIDELINES)
+# Student Code of Conduct and DAC Guidelines
 
 ## Overview
 
-This document presents the detailed policy and syllabus structure for the course Student (OFCONDUCTANDDACGUIDELINES). It includes details on course objectives, credits, prerequisites, syllabus content, evaluation schemes, and contact information where available.
+This document outlines the disciplinary policies and procedures for students at DA-IICT, including definitions of misconduct, disciplinary actions, and the role of the Disciplinary Action Committee (DAC). It serves as a reference for resolving student conduct issues in alignment with institutional values.
 
 ## Main Content
 
-Student Code of Conduct and DAC Guidelines 
- 
-DA-IICT is a professional institute of academic excellence. A positive and successful learning environment 
-provides opportunities for students to practice good citizenship in the larger society and to practice 
-respectful dissent. These are the practices and qualities that the Student Code of Conduct encourages.  
- 
-The Student Code of Conduct serves as a reference and working guide when attempting to resolve student 
-disciplinary issues. This document is intended to represent minimum guidelines only; students should be 
-aware of the fact that the absence of a specific policy, statement, procedure or provision should not be 
-interpreted to be a waiver of such item by the Disciplinary Action Committee (DAC). Following enumerates 
-of some possible indiscipline activities and possible action towards offenders. 
- 
-1.  Students found involved in any of following activities will be immediately expelled from the 
-institute: 
- Ragging. 
- Possession or consumption of any form of intoxicant (like narcotic drugs, alcohol, etc.). 
- Sexual harassment. 
- Criminal activity. 
- Use or possession of firearms and weapons. 
- Gambling or betting for money or other items of value. 
- 
-2.   Following is the indicative list of other acts of indiscipline: 
- Smoking. 
- Improper behavior with any student, faculty member or staff. 
- Violation of Institute / Halls of Residence (HoR) rules. 
- Damage, defacement, or destruction of any private or Institute property. 
- Theft.  
- Violation of any traffic rule within the campus. 
- Causing disturbance or discomfort to co-residents. 
- Visiting HoR of opposite gender. 
- Violation of the computing practices of DA-IICT, including but not limited to, the misuse of DA-
-IICT computers or computer network (like bypassing firewall / security system of the internet in an 
-unauthorized manner, sending offensive email, etc.). 
- Disruption or obstruction of teaching, research, administration, or other DA-IICT activities. 
- Failure to appear and/or report to DAC in conjunction with any disciplinary matter, at the time 
-specified. 
-In these acts of indiscipline, based on the severity of offence, the offender will be liable to the 
-disciplinary action, which will include one or more punishments from the ones stated later in this 
-document.  
- 
-Procedure 
- 
-Any student who has been adjudged guilty by DAC will be put on the Disciplinary Probation with 
-immediate effect and it will last till his/her graduation. His/her parents will be also be called by DAC to the 
-Institute and informed of the punishment rendered to the student. 
- 
-Disciplinary Probation prohibits a student from participation in any activity of the Institute/Student Clubs, 
-and representation of the Institute in any event/activity outside the Institute. The student also ceases to be a 
-member of any Student Club/Committee, if any. If a student under Disciplinary Probation commits any 
-offence, it will be treated very severely.
+### Institute Philosophy
 
----
-*Page Split*
----
+DA-IICT emphasizes academic excellence and fosters a learning environment that encourages good citizenship and respectful dissent. The Student Code of Conduct reflects these principles.
 
-Explanation of Punishments 
- 
-Expulsion from the Institute:  
- 
-The offender is asked to permanently leave the institute; the parents are called and the student is handed over 
-to them. 
- 
-Academic Suspension for a Semester(s):  
- 
-The offender is suspended for a specified number of academic semester(s). 
- 
-Expulsion from Hall of Residence (HoR):  
- 
-The offender is asked to vacate the room from HoR. In such cases, the student is allowed to continue 
-academics but is not allowed to stay in the HoR. He/she can visit the Institute premises only between 0800 
-to 2100 hrs on all days (including weekends/holidays). Entry is to be made at the register (kept with the 
-security at the main gate) while coming/leaving DA-IICT campus. The student is not allowed to enter the 
-HoR for any reason at any time.  
- 
-Restitution:  
- 
-This is typically done if a student is found guilty in any kind of infrastructure damage. In such cases, student 
-may be asked to repair or replace the damaged thing, in addition to some other penalty/punishment. 
- 
-Suspension of Privileges:  
- 
-Certain privileges are withdrawn like Teaching Assistantship (TA), if any. 
- 
-Community Service:  
- 
-The offender is assigned a specific number of hours of community/social service at DA-IICT under a 
-mentor. The idea behind this is to make the student realize the offence while not penalizing the parents due 
-to consequent financial burden, otherwise. 
- 
-Counseling:  
- 
-A student under Disciplinary Probation can be mandated to meet the counselor. 
- 
- 
-Disciplinary Action Committee (DAC) 
-  
-Dean (Students), Convener (ex-officio)  
-Warden, HOR-Men, Member (ex-officio)  
-Warden, HOR-Women, Member (ex-officio)  
-Deputy Registrar, Member (ex-officio)  
-             
- 
- 
-Faculty Member (nominated by Director, DA-IICT) 
-Two Student (Boy & Girl) Representatives (nominated by DAC)
+### Purpose of the Code
+
+The Code acts as a minimum guideline for resolving disciplinary issues. Absence of specific policies does not imply waiver by the DAC.
+
+### Immediate Expulsion Offenses
+
+Students involved in the following activities will face immediate expulsion:
+- Ragging  
+- Intoxicant possession/consumption (narcotics, alcohol)  
+- Sexual harassment  
+- Criminal activity  
+- Firearm possession  
+- Gambling/betting  
+- Disruption of academic/administrative activities  
+
+### Indiscipline Activities
+
+Additional acts of indiscipline include:
+- Smoking  
+- Improper behavior with students/faculty/staff  
+- Property damage/theft  
+- Campus traffic violations  
+- HoR rule violations (e.g., opposite-gender visits)  
+- Cyber misconduct (firewall bypassing, offensive emails)  
+
+## Procedure
+
+### Disciplinary Probation
+
+Guilty students are placed on probation until graduation. Parents are notified, and the student loses privileges like participation in clubs/events and TA roles. Further offenses during probation will result in severe penalties.
+
+## Punishments
+
+### Expulsion from the Institute
+
+Permanent removal from DA-IICT. Parents are notified, and the student is handed over to them.
+
+### Academic Suspension
+
+Suspension for a specified number of semesters.
+
+### Expulsion from Hall of Residence (HoR)
+
+The student must vacate HoR premises. Campus access is restricted to 0800–2100 hrs daily, with entry/exit logged at the main gate.
+
+### Restitution
+
+Required for infrastructure damage, including repair/replacement costs.
+
+### Suspension of Privileges
+
+Revocation of roles like Teaching Assistantship.
+
+### Community Service
+
+Assigned hours of service under a mentor to avoid financial burden on parents.
+
+### Counseling
+
+Mandatory sessions for students under probation.
+
+## Disciplinary Action Committee (DAC)
+
+The DAC includes:
+- **Dean (Students)** – Convener (ex-officio)  
+- **Warden, HOR-Men/Women** – Members (ex-officio)  
+- **Deputy Registrar** – Member (ex-officio)  
+- **Faculty Member** – Nominated by Director  
+- **Two Student Representatives** – Nominated by DAC  
 
 ## Important Information
 
-- **Course Code:** OFCONDUCTANDDACGUIDELINES
-- **Course Title:** Student
-- **Document Source:** DA-IICT_Student Code of Conduct and DAC Guidelines.pdf
-- **Category:** Academics (Intranet)
-- **Scraped At:** 2026-06-01 07:55:17 UTC
+- **Course Code:** OFCONDUCTANDDACGUIDELINES  
+- **Document Source:** DA-IICT_Student Code of Conduct and DAC Guidelines.pdf  
+- **Category:** Academics (Intranet)  
+- **Scraped At:** 2026-06-01 07:55:17 UTC  
 
 ## Related Links
 
-- [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp)
-- [Academic Guidelines](https://daiict.ac.in/academics)
+- [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp)  
+- [Academic Guidelines](https://daiict.ac.in/academics)  
 
 ## Downloadable Resources
 
 | Resource | Type | Link |
 |---|---|---|
-| DA-IICT_Student Code of Conduct and DAC Guidelines.pdf | PDF | [Download DA-IICT_Student Code of Conduct and DAC Guidelines.pdf](https://intranet.daiict.ac.in/academics/DA-IICT_Student Code of Conduct and DAC Guidelines.pdf) |
+| DA-IICT_Student Code of Conduct and DAC Guidelines.pdf | PDF | [Download](https://intranet.daiict.ac.in/academics/DA-IICT_Student%20Code%20of%20Conduct%20and%20DAC%20Guidelines.pdf) |

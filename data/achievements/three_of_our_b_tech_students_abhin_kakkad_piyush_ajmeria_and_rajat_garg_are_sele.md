@@ -5,18 +5,13 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+last_fixed: "2026-07-02"
+fixes_applied: ['CRLF_ENCODING', 'STUB_EMPTY']
 ---
 
-# Three of our B.Tech. students, Abhin Kakkad, Piyush Ajmeria and Rajat Garg are selected for the Postgraduate Management Program at IIM- Ahmedabad.
+## Overview  
+This page highlights the achievement of three B.Tech students—Abhin Kakkad, Piyush Ajmeria, and Rajat Garg—from Dhirubhai Ambani Institute of Information and Communication Technology (DAIICT) who have been selected for the Postgraduate Management Program at Indian Institute of Management Ahmedabad (IIM-A). The announcement underscores their academic excellence and recognition in securing admission to a prestigious management program.  
 
-# Overview
-
-_No overview available._
-
-# Main Content
-
-_No main content extracted._
-
-# Important Information
-
-_No important information found._
+## Note  
+This page's content could not be fully extracted during scraping.  
+Please refer to the source URL for complete information.

@@ -1,0 +1,36 @@
+{
+  "generated": "2026-07-03T11:23:57.348786",
+  "summary": {
+    "clean": 0,
+    "partial": 1,
+    "new_issues": 0,
+    "errors": 0,
+    "issues_resolved": 1,
+    "issues_remaining": 1,
+    "issues_introduced": 0
+  },
+  "validations": [
+    {
+      "file": "student_services/dean_students_tab.md",
+      "fix_status": "fixed",
+      "fixes_applied": [
+        "OCR_NOISE"
+      ],
+      "before_issues": [
+        "OCR_NOISE",
+        "CHUNK_OVERFLOW"
+      ],
+      "after_issues": [
+        "CHUNK_OVERFLOW"
+      ],
+      "resolved": [
+        "OCR_NOISE"
+      ],
+      "remaining": [
+        "CHUNK_OVERFLOW"
+      ],
+      "new_issues": [],
+      "validation": "🟡 PARTIAL"
+    }
+  ]
+}

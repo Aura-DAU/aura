@@ -1,0 +1,14 @@
+AURA Fix Validation Report
+Generated: 2026-07-03T11:23:57.349006
+============================================================
+Fully clean     : 0
+Partial fix     : 1
+New issues      : 0
+Errors          : 0
+Issues resolved : 1
+Issues remaining: 1
+
+FILES NEEDING FURTHER ATTENTION:
+------------------------------------------------------------
+  student_services/dean_students_tab.md
+    Still broken : CHUNK_OVERFLOW

@@ -5,26 +5,12 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# Overview
+## Overview  
+Prosenjit Ganguly is an adjunct faculty member at Dhirubhai Ambani University, specializing in animation film making, screenwriting, storytelling, character design, photography, illustration, and voice acting. His profile highlights expertise in creative and design disciplines, with a focus on animation and visual arts. The page outlines his academic background, including a 4-year diploma (now recognized as a B.Des) in Animation Film Design from the National Institute of Design (NID).  
 
-Profile of Prosenjit Ganguly
-
-# Main Content
-
-# Prosenjit Ganguly
-
-## Education
-
-4yr Diploma (now B.Des) in Animation Film Design, NID
-
-## Contact Information
-
-- Email: prosenjit_ganguly@dau.ac.in
-
-## Specialization
-
-Animation Film Making, Screenwriting, Story-telling, Character Design, Photography, Illustration, Voice Acting
-
-
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.

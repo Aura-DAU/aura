@@ -5,185 +5,151 @@ category: "CEP"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-02"
+fixes_applied: ['OCR_NOISE']
 ---
+
+<think>
+Okay, let's start by looking at the user's request. They want me to structure the provided raw text into clean Markdown following specific rules. The main goal is to create a structured document for the AURA RAG system at Dhirubhai Ambani University. 
+
+First, I need to identify the title. The user provided "Courses Through CEP & AIP" as the title, so I'll start with that as an H1.
+
+Next, the raw text has sections like Overview, CEP, AIP, Core Responsibilities, Contact Us, etc. I need to convert these into H2 and H3 sections as per the rules. For example, "Overview" is already an H2 in the raw text, so I'll keep that. 
+
+Looking at the CEP and AIP sections, they each have their own content. The user mentioned that H3 should be subsections within each major section. However, in the raw text, CEP and AIP are under Main Content as H2s. Wait, the user's example shows that the main sections are H2s. So I need to check if "CEP" and "AIP" should be H2s under the Main Content H2. But in the provided example, the user has "Main Content" as an H2, and then CEP and AIP as H3s. Wait, no, looking back, the user's example shows:
 
 # Overview
 
-DAIICT has been very active in the area of the CEP. There are 50-plus faculty members with Ph.D. from reputed universities. Many of the faculty members collaborate actively with industries, and some faculty members also have industrial experience. DAIICT is focused on the areas of Information and Communication Technology. Since its inception, several CEPs have been conducted for the Indian Air Force, Indian Navy, SAC-ISRO, INS Valsura. Over the last five years, sponsored programs have been conducted for ICAR and ISRO on topics such as Machine Learning and Deep Learning, Analytics in Agriculture, and so on.
-
-# Main Content
-
 ## CEP
-
-DAIICT has been very active in the area of the CEP. There are 50-plus faculty members with Ph.D. from reputed universities. Many of the faculty members collaborate actively with industries, and some faculty members also have industrial experience. DAIICT is focused on the areas of Information and Communication Technology. Since its inception, several CEPs have been conducted for the Indian Air Force, Indian Navy, SAC-ISRO, INS Valsura. Over the last five years, sponsored programs have been conducted for ICAR and ISRO on topics such as Machine Learning and Deep Learning, Analytics in Agriculture, and so on.
-
-The Continuing Education Program Centre (CEPC) at the Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) is dedicated to enriching the skills and knowledge of a diverse audience. Our mission is to empower fresh graduates, undergraduates, faculty members from various institutions, industry professionals, government employees, and individuals seeking to upskill with the expertise of DA-IICT's faculty members. In collaboration with industry and other academic institutions, CEP offers a wide array of educational opportunities tailored to meet the specific needs of our participants.
 
 ## AIP
 
-DAIICT is also selected as an Anchor Institute by the Center for Entrepreneurship Development (CED), Department of Industries, Government of Gujarat, in the specialization area of Information and Communication Technology. This is a 5-year program. Under this program, nodal institutes are selected within Gujarat, and DAIICT faculty members train faculty members from these nodal institutes. The objective of this Anchor Institute Program is to achieve the ultimate goal of making students of Gujarat “industry ready” through well-trained faculty members of Gujarat-based engineering colleges. Over the last five years, AIP programs have been run on topics such as Operating Systems, Digital and Analog Communication Systems, Image Processing using VLSI Architectures, Multicore Processor Architecture and parallel Programming, Data Structures, Software Engineering, Programming, .Net and C#, Real-time and Embedded Systems, and others.
+So maybe the Main Content is not an H2. Wait, the user's raw text starts with # Overview, then ## CEP, then ## AIP. So I should follow that structure. The user's instruction says to use H2 for major sections like Overview, Eligibility, etc. So the initial Overview is H1, then the sections like CEP, AIP, Core Responsibilities, Contact Us, etc., should be H2s.
 
-## The core responsibilities and functions of the CEP & AIP include:
+Wait, the user's raw text has:
 
-* Program marketing/publicity, brochure creation (with content submission by Anchor faculty), feedback collection from participants, certificate preparation.
-* Coordinating and overseeing all academic outreach initiatives such as Conferences, Workshops, Symposia, Short-term courses, Training programs, and similar activities within the Institute.
-* Providing essential logistics and administrative support to ensure the smooth execution of these programs.
-* Follow-up on payment matters with the account department
+# Overview
 
-## Contact Us
+DAIICT has been very active in the area of the CEP. ... 
 
-#### ***Feel free to contact for any query:***
+## CEP
 
-**Office:**  
-Dhirubhai Ambani Institute of information and Communication Technology,  
-CEP Building, DCEI Office - 01, A2 Staff Office,  
-Near Reliance Cross Road, Beside NIFT and TCS,  
-Gandhinagar Gujarat, India  
-**Phone:** (+91) 079 - 68261565  
-**Email:**[cep[at]daiict[dot]ac[dot]in](mailto:cep[at]daiict[dot]ac[dot]in)
+DAIICT has been very active in the area of the CEP. ... 
 
-### Quick Links:
+So the first section is an H1, then the next sections are H2s. So the structure is:
 
-* [Head CEP](https://www.daiict.ac.in/faculty/manish-kumar)
+H1: Courses Through CEP & AIP
 
-## Documents/Forms
+H2: Overview
 
-### CEP Forms
+H2: CEP
 
-* [Continuing Education Program (CEP) Policy](https://www.daiict.ac.in/sites/default/files/other-files/CEP_Policy_May-2024.pdf)
-* [CEP Office, Intent-for-Proposal (IFP)](https://www.daiict.ac.in/sites/default/files/other-files/Intent-for-Proposal_IFP.pdf)
-* [Form - Course Plan Proposal under CEP](https://www.daiict.ac.in/sites/default/files/other-files/Course-Plan-Proposal-under-CEP.pdf)
+H2: AIP
 
-### AIP Forms
+H2: The core responsibilities and functions of the CEP & AIP include:
 
-* [Form - Course Plan Proposal under AIP](https://www.daiict.ac.in/sites/default/files/other-files/AIP-Course-Plan-Proposal.pdf)
+H2: Contact Us
 
-## AIP 2025-26
+H2: Documents/Forms
 
-| Sr. No. | Course Title | Course Duration | Start Date (Tentative) | End Date (Tentative) | Modality | Format (>=40 lectures is long-term) | Comprehensive Course Details | Registration Link | Registration Deadline |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| More information to follow | | | | | | | | | |
+H2: AIP 2025-26
 
-## CEP 2025-26
+H2: CEP 2025-26
 
-| Sr No | Course Title | Course Duration | Start Date (Tentative) | End Date (Tentative) | Modality | Format (>=40 lectures is long-term) | Comprehensive Course Details | Registration Link | Registration Deadline |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| More information to follow | | | | | | | | | |
+H2: AIP 2025-26
 
-## AIP 2025-26
+H2: 2025-26
 
-| Sr. No. | Course Title | Course Duration | Start Date (Tentative) | End Date (Tentative) | Modality | Format (>=40 lectures is long-term) | Comprehensive Course Details |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| More information to follow | | | | | | | |
+H2: 2024-25
 
-### 2025-26
+H2: 2023-24
 
-* [Workshop on “Arduino and FPGA Based Embedded System Design”](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Arduino-and-FPGA_Course-Outline_2025.pdf)
-* [Workshop on “Speech and Audio Signal Processing using FPGA”](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Speech-and-Audio-Signal-Processing-using-FPGA_Course-Outline_2025.pdf)
-* [Workshop on “Device Modeling and Circuit Simulation for Integrated Circuit Designs"](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Device-Modeling-and-Circuit_Course-Outline_2025.pdf)
+H2: 2022-23
 
-### 2024-25
+H2: CEP Committee
 
-* [Arduino Based Embedded System Design](https://www.daiict.ac.in/sites/default/files/other-files/Arduino-Based-Embedded-System-Design.pdf)
-* [Human Experiences through Interaction Design](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline_Human-Experiences-through-Interaction%20-Design.pdf)
-* [Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python.pdf)
-* [Online certificate course on Advance Data Science and Analytics: A Comprehensive Hands-on](https://www.daiict.ac.in/sites/default/files/other-files/Advance-Data-Science-and-Analytics.pdf)
-* [Workshop on Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python_June24.pdf)
-* [Workshop on Artificial Intelligence and its Application in VLSI Design and Technology](https://www.daiict.ac.in/sites/default/files/other-images/AI-Application-in-VLSI-Design-24.jpg)
-* [Online certificate course on Designing Human Experiences: HCI & UX Fundamentals](https://www.daiict.ac.in/sites/default/files/other-images/Designing-Human-Experiences_HCI-UX_Fundamentals.jpg)
+H2: Related Links
 
-### 2023-24
+H2: Downloadable Resources
 
-* [Online Certificate Course on “Introduction to ML with Python”](https://www.daiict.ac.in/sites/default/files/other-files/Introduction-to-ML-with-Python.pdf)
-* [Digital Psychology: Harnessing Smartphone Mediated Tools to Assess Mental Health](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-Digital-Psychology-2024.jpg)
+But the user's rules say to use H2 for major sections and H3 for subsections. However, in the raw text, some sections like "2025-26" under the AIP 2025-26 table might be H3s. Wait, the user's example shows that under AIP 2025-26, there's a list of workshops with years. Maybe those should be H3s under the AIP 2025-26 H2.
 
-### 2022-23
+Also, the user mentioned that each H2/H3 should be within ~256 tokens. I need to check if any sections are too long and split them if necessary. For example, the "CEP" section has a lot of text. Let me see: the CEP section starts with a paragraph about DAIICT's activity, then another paragraph about the CEP Centre's mission. Maybe splitting into H3s for each paragraph.
 
-* [Introduction to Java Backend](https://www.daiict.ac.in/sites/default/files/other-files/Introduction-to-Java-Backend.pdf)
+Wait, the user's instruction says to split large sections with additional H3s. So if a section is too long, split into H3s. For example, the CEP section has two paragraphs. The first is about DAIICT's activity, the second is about the CEP Centre's mission. So maybe split into two H3s.
 
-## CEP Committee
+Similarly, the AIP section has two paragraphs. The first about being an Anchor Institute, the second about the program's objectives. So split into H3s.
 
-### Head, Continuing Education Program
+The core responsibilities section is a bullet list. Maybe keep it as is under an H2.
 
-#### [Prof. Manish Kumar](https://www.daiict.ac.in/faculty/manish-kumar)
+The contact us section has a phone and email. Keep as H2.
 
+Documents/Forms has CEP Forms and AIP Forms as H3s.
 
+The AIP 2025-26 and CEP 2025-26 sections have tables. The user's example shows that the AIP 2025-26 table is under an H2, and the 2025-26 workshops are under another H2. Wait, in the raw text, after the AIP 2025-26 table, there's a section labeled "### 2025-26" with bullet points. That should be an H3 under the AIP 2025-26 H2.
 
-**Office:** #3102, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+Similarly, the 2024-25, 2023-24, etc., sections are under the same H2 as the 2025-26 workshops. Wait, in the raw text, after the AIP 2025-26 table, there's a section labeled "### 2025-26" with bullet points. Then "### 2024-25", etc. So those should be H3s under the AIP 2025-26 H2. But the user's example shows that the AIP 2025-26 is an H2, and the subsequent years are H3s. So I need to adjust that.
 
-**Phone:** 079-68261678
+Wait, looking at the user's provided example, the structure is:
 
-**Email:** cep\_chair[at]daiict[dot]ac[dot]in
+# Courses Through CEP & AIP
 
-### Members
+## Overview
 
-#### [Dr. Sourish Dasgupta](https://www.daiict.ac.in/faculty/sourish-dasgupta)
+## CEP
 
+### [Subsection]
 
+## AIP
 
-**Office:** #4102, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+### [Subsection]
 
-**Phone:** 079-68261624
+## Core Responsibilities...
 
-**Email:** sourish\_dasgupta[at]daiict[dot]ac[dot]in
+But in the raw text, after the AIP 2025-26 table, there's a section labeled "### 2025-26" with bullet points. That should be an H3 under the AIP 2025-26 H2. Similarly for the other years.
 
-#### [Prof. Gopinath Panda](https://www.daiict.ac.in/faculty/gopinath-panda)
+Also, the CEP Committee section has Head and Members as H3s.
 
+Now, checking for garbled text. The user mentioned removing control characters and OCR noise. Looking through the text, I don't see any obvious OCR errors like "reg1strat1un" that need fixing. The email addresses are written with [at] and [dot], which should be converted to @ and . as per standard. For example, [cep[at]daiict[dot]ac[dot]in] becomes cep@daiict.ac.in.
 
+Also, the user wants to preserve all numbers, names, dates, etc., exactly. So I need to make sure that course titles and years are kept as they are.
 
-**Office:** #3203, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+For the tables, the user wants them converted into proper Markdown tables. The AIP 2025-26 table has a row with "More information to follow" and empty cells. I'll keep that as is. The same for the CEP 2025-26 table.
 
-**Phone:** 079-68261716
+The user also wants to remove repeated headers, page numbers, footers, etc. In the raw text, there's a line "## The core responsibilities and functions of the CEP & AIP include:" which is a heading but the content is a bullet list. So that should be an H2.
 
-**Email:** gopinath\_panda[at]daiict[dot]ac[dot]in
+The contact us section has a phone number with (+91) 079 - 68261565. Need to make sure the formatting is correct.
 
-#### [Prof. Jenson Joseph](https://www.daiict.ac.in/faculty/jenson-joseph)
+For the downloadable resources, the user has a list of links. The example shows that these are under H2: Downloadable Resources, with bullet points.
 
+Now, putting it all together:
 
-
-**Office:** #3205, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-**Phone:** 079-68261536
-
-**Email:** jenson\_joseph[at]daiict[dot]ac[dot]in
-
-#### [Prof. Bhaskar Chaudhury](https://www.daiict.ac.in/faculty/bhaskar-chaudhury) [Dean (Academic Programs), (ex-officio)](https://www.daiict.ac.in/dean-academic-programs)
-
-
-
-**Office:** #2204, FB-2, DA-IICT, Gandhinagar, Gujarat, India – 382007
-
-**Phone:** 079-68261590
-
-**Email:** bhaskar\_chaudhury[at]daiict[dot]ac[dot]in
-
-## Related Links
-
-- [Head CEP](https://www.daiict.ac.in/faculty/manish-kumar)
-- [Workshop on Artificial Intelligence and its Application in VLSI Design and Technology](https://www.daiict.ac.in/sites/default/files/other-images/AI-Application-in-VLSI-Design-24.jpg)
-- [Online certificate course on Designing Human Experiences: HCI & UX Fundamentals](https://www.daiict.ac.in/sites/default/files/other-images/Designing-Human-Experiences_HCI-UX_Fundamentals.jpg)
-- [Digital Psychology: Harnessing Smartphone Mediated Tools to Assess Mental Health](https://www.daiict.ac.in/sites/default/files/other-images/Workshop-Digital-Psychology-2024.jpg)
-- [Dr. Sourish Dasgupta](https://www.daiict.ac.in/faculty/sourish-dasgupta)
-- [Prof. Gopinath Panda](https://www.daiict.ac.in/faculty/gopinath-panda)
-- [Prof. Jenson Joseph](https://www.daiict.ac.in/faculty/jenson-joseph)
-- [Prof. Bhaskar Chaudhury](https://www.daiict.ac.in/faculty/bhaskar-chaudhury)
-- [Dean (Academic Programs), (ex-officio)](https://www.daiict.ac.in/dean-academic-programs)
-
-
-## Downloadable Resources
-
-- [Continuing Education Program (CEP) Policy](https://www.daiict.ac.in/sites/default/files/other-files/CEP_Policy_May-2024.pdf) (PDF)
-- [CEP Office, Intent-for-Proposal (IFP)](https://www.daiict.ac.in/sites/default/files/other-files/Intent-for-Proposal_IFP.pdf) (PDF)
-- [Form - Course Plan Proposal under CEP](https://www.daiict.ac.in/sites/default/files/other-files/Course-Plan-Proposal-under-CEP.pdf) (PDF)
-- [Form - Course Plan Proposal under AIP](https://www.daiict.ac.in/sites/default/files/other-files/AIP-Course-Plan-Proposal.pdf) (PDF)
-- [Workshop on “Arduino and FPGA Based Embedded System Design”](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Arduino-and-FPGA_Course-Outline_2025.pdf) (PDF)
-- [Workshop on “Speech and Audio Signal Processing using FPGA”](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Speech-and-Audio-Signal-Processing-using-FPGA_Course-Outline_2025.pdf) (PDF)
-- [Workshop on “Device Modeling and Circuit Simulation for Integrated Circuit Designs"](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Device-Modeling-and-Circuit_Course-Outline_2025.pdf) (PDF)
-- [Arduino Based Embedded System Design](https://www.daiict.ac.in/sites/default/files/other-files/Arduino-Based-Embedded-System-Design.pdf) (PDF)
-- [Human Experiences through Interaction Design](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline_Human-Experiences-through-Interaction%2520-Design.pdf) (PDF)
-- [Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python.pdf) (PDF)
-- [Online certificate course on Advance Data Science and Analytics: A Comprehensive Hands-on](https://www.daiict.ac.in/sites/default/files/other-files/Advance-Data-Science-and-Analytics.pdf) (PDF)
-- [Workshop on Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python_June24.pdf) (PDF)
-- [Online Certificate Course on “Introduction to ML with Python”](https://www.daiict.ac.in/sites/default/files/other-files/Introduction-to-ML-with-Python.pdf) (PDF)
-- [Introduction to Java Backend](https://www.daiict.ac.in/sites/default/files/other-files/Introduction-to-Java-Backend.pdf) (PDF)
-
+- Start with H1: Courses Through CEP & AIP
+- H2: Overview
+- H2: CEP
+  - H3: [Subsection 1]
+  - H3: [Subsection 2]
+- H2: AIP
+  - H3: [Subsection 1]
+  - H3: [Subsection 2]
+- H2: Core Responsibilities and Functions of CEP & AIP
+- H2: Contact Us
+- H2: Documents/Forms
+  - H3: CEP Forms
+  - H3: AIP Forms
+- H2: AIP 2025-26
+  - Table
+  - H3: 2025-26 (workshops)
+  - H3: 2024-25
+  - H3: 2023-24
+  - H3: 2022-23
+- H2: CEP 2025-26
+  - Table
+- H2: CEP Committee
+  - H3: Head
+  - H3: Members
+- H2: Related Links
+- H2: Downloadable Resources
+  - Bullet points
+
+I need to ensure that each H2 is a major section, and H3s are subsections. Also, check that all tables are properly formatted with pipes and headers. For example, the

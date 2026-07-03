@@ -5,16 +5,22 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: PDF
+source_type: "PDF"
 pdf_name: "Tenders/EE2526006 drawing pdf"
+last_fixed: "2026-07-02"
+fixes_applied: ['SCANNED_PDF']
 ---
 
-# Tenders/EE2526006 drawing pdf
+# Tenders/EE2526006 Drawing PDF  
 
-## Overview
+## Document Overview  
+### OCR Processing Status  
+[illegible] --- SCANNED ARCHITECTURAL DRAWING / ATTACHMENT --- [illegible]  
+**Note:** Tesseract OCR is not installed on the host machine to process image contents.  
 
-This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+The document appears to be an architectural drawing or technical schematic related to a tender (EE2526006) for facilities such as dining areas, washrooms, and creche rooms. Due to OCR limitations, no textual content from the scanned images can be extracted or structured.  
 
-## Main Content
+For administrative reference, this file is categorized under **administration** and hosted at:  
+https://www.daiict.ac.in/sites/default/files/other-files/Tender-No-EE2526006-Annex-5-Dining-Washroom-Creche-Room-Drawing_26-09-25.pdf  
 
-Annexure 5 : Drawing
+No further details are available from the OCR output.

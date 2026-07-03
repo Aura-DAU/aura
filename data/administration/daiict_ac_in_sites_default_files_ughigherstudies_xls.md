@@ -5,16 +5,15 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: Excel
+source_type: "Excel"
 pdf_name: "N.I.R.F. / UG Higher Studies"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# N.I.R.F. / UG Higher Studies
+## Overview  
+This Excel document from DA-IICT/DAU relates to undergraduate higher education programs and their alignment with N.I.R.F. (National Institutional Ranking Framework) rankings. It likely includes administrative data, program details, or institutional performance metrics for UG-level studies.  
 
-## Overview
-
-This document is a Excel resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
-
-## Main Content
-
-## Sheet: Sheet1
+## Note  
+This page's content could not be fully extracted during scraping.  
+Please refer to the source URL for complete information.

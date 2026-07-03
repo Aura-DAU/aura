@@ -1,28 +1,30 @@
-﻿---
-title: "Prof. ?????? ? ????? will be delivering a lecture on the topic “??? ????? ?? ???” at the C…"
+---
+title: "Prof. ?????? ? ????? will be delivering a lecture on the topic \u201c??? ????? ?? ???\u201d at the C\u2026"
 url: "https://www.daiict.ac.in/events/5622"
 category: "Events"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+last_fixed: "2026-07-03"
+fixes_applied: ['OCR_NOISE']
 ---
 
-# Prof. ?????? ? ????? will be delivering a lecture on the topic “??? ????? ?? ???” at the C…
+# Prof. [illegible] will be delivering a lecture on the topic "[illegible]" at the Centre of Biomedical Research  
 
-# Overview
+## Overview  
 
-DAIICT professor ?????? ? ????? will be delivering a lecture on the topic “??? ????? ?? ???” on May 25, 2023 at the Centre of Biomedical Research (CBMR), Lucknow. It is a part of CBMR lecture series “Vigyan Sangam” which was started on the occasion of 75th Anniversary of Indian Independence Day (Azadi Ka Amrit Mahotsav). This will be the second year into the lecture series where Professor ?????? ? ????? will deliver the first lecture. CBMR is a premier #research institute dedicated to disease- oriented-research that aims to translate innovations and discoveries of basic sciences into new diagnosis and therapies for better patient care.
+DAIICT professor [illegible] will deliver a lecture on the topic "[illegible]" on May 25, 2023, at the Centre of Biomedical Research (CBMR), Lucknow. This event is part of CBMR’s lecture series "Vigyan Sangam," initiated during the 75th Anniversary of Indian Independence Day (Azadi Ka Amrit Mahotsav). CBMR is a premier research institute focused on disease-oriented research, translating basic science innovations into diagnostic tools and therapies for improved patient care.  
 
-# Main Content
+## Main Content  
 
-# Prof. ?????? ? ????? will be delivering a lecture on the topic “??? ????? ?? ???” at the CBMR, Lucknow
+### Lecture Details  
 
-DAIICT professor ?????? ? ????? will be delivering a lecture on the topic “??? ????? ?? ???” on May 25, 2023 at the Centre of Biomedical Research (CBMR), Lucknow. It is a part of CBMR lecture series “Vigyan Sangam” which was started on the occasion of 75th Anniversary of Indian Independence Day (Azadi Ka Amrit Mahotsav). This will be the second year into the lecture series where Professor ?????? ? ????? will deliver the first lecture. CBMR is a premier #research institute dedicated to disease- oriented-research that aims to translate innovations and discoveries of basic sciences into new diagnosis and therapies for better patient care.
+DAIICT professor [illegible] will deliver the first lecture in the second year of CBMR’s "Vigyan Sangam" series on May 25, 2023. The lecture will be held at the Centre of Biomedical Research (CBMR), Lucknow, and will focus on the convergence of life and computation.  
 
-In the lecture, Professor ?????? ? ????? will talk about convergence of life and computation. He will focus on research problems related to DNA Computing, Chemical Computing, Synthetic Biology, DNA Origami etc. He will show how the magic of DNA can create wonderful things in the area of DNA nanotechnology with potential applications in drug delivery systems and vaccines.
+### Research Focus  
 
-Since 2006, he has been with the Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar, India and currently works as a professor. His areas of interest are the elegant applications of mathematics in emerging technologies. His group is well known for developing open-source software products (for example, DNA Pen, 3DNA, DNA Cloud) in DNA nanotechnology.
+The lecture will explore research problems in DNA Computing, Chemical Computing, Synthetic Biology, and DNA Origami. Professor [illegible] will demonstrate how DNA nanotechnology can enable breakthroughs in drug delivery systems and vaccine development.  
 
-# Important Information
+### Professor’s Background  
 
-_No important information found._
+Since 2006, the professor has been affiliated with the Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar, India. His research emphasizes the application of mathematics in emerging technologies. His group is renowned for developing open-source software tools like DNA Pen, 3DNA, and DNA Cloud in DNA nanotechnology.

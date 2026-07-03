@@ -5,26 +5,13 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# Overview
+## Overview  
+This page provides an academic profile of Dhaval Joshi, an adjunct faculty member at Dhirubhai Ambani University (DAU). It highlights his expertise in design research, artificial intelligence, gaming, and customer engagement, along with his educational background in design from the National Institute of Design, Gandhinagar.  
 
-Profile of Dhaval Joshi
-
-# Main Content
-
-# Dhaval Joshi
-
-## Education
-
-Masters in Design (PGDPD): National Institute of Design, Gandhinagar
-
-## Contact Information
-
-- Email: dhaval_joshi@dau.ac.in
-
-## Specialization
-
-Design Research, Artificial Intelligence, Gaming, Customer engagement
-
-
+## Note  
+This page's content could not be fully extracted during scraping.  
+Please refer to the source URL for complete information.

@@ -1,0 +1,20 @@
+{
+  "generated": "2026-07-03T11:23:22.489519",
+  "total": 1,
+  "counts": {
+    "fixed": 1,
+    "error": 0,
+    "skipped": 0,
+    "dry-run": 0
+  },
+  "logs": [
+    {
+      "file": "student_services/dean_students_tab.md",
+      "status": "fixed",
+      "fixes_applied": [
+        "OCR_NOISE"
+      ],
+      "error": null
+    }
+  ]
+}

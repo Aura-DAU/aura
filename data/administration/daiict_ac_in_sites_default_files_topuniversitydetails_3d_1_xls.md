@@ -5,16 +5,14 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: Excel
+source_type: "Excel"
 pdf_name: "N.I.R.F. / Top Universities/Institute Admission Data/Details of No. of Graduating students admitted into Top University/Institute. (11.5 KB)"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# N.I.R.F. / Top Universities/Institute Admission Data/Details of No. of Graduating students admitted into Top University/Institute. (11.5 KB)
+## Overview  
+This Excel document provides data on the number of graduating students admitted into top universities and institutes, as per N.I.R.F. (National Institutional Ranking Framework) rankings. It likely includes institutional performance metrics related to student admissions and outcomes, categorized under administrative records. The file is hosted by DA-IICT/DAU and structured for internal or institutional analysis.  
 
-## Overview
-
-This document is a Excel resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
-
-## Main Content
-
-## Sheet: Sheet1
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.

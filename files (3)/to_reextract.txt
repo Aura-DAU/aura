@@ -1,0 +1,13 @@
+CRITICAL  STUB_EMPTY | SCANNED_PDF                            administration/daiict_ac_in_sites_default_files_other_files_daiict_ar_2019_20_pdf.md
+CRITICAL  STUB_EMPTY | SCANNED_PDF                            administration/daiict_ac_in_sites_default_files_other_files_general_service_condition_employee_.md
+CRITICAL  SCANNED_PDF                                         administration/daiict_ac_in_sites_default_files_other_files_plagiarism_prevention_framework_rev.md
+CRITICAL  STUB_EMPTY | SCANNED_PDF                            administration/daiict_ac_in_sites_default_files_other_files_ugc_12b_proforma_for_seeking_inform.md
+CRITICAL  SCANNED_PDF                                         administration/daiict_ac_in_sites_default_files_other_files_ugc_proforma_for_inspection_with_ap.md
+CRITICAL  STUB_EMPTY | SCANNED_PDF                            policies/daiict_ac_in_sites_default_files_other_files_policy_on_patent_filing_process_pdf.md
+HIGH      OCR_NOISE | CHUNK_OVERFLOW                          academics/careers/careers_creche_supervisor_application_v2.md
+HIGH      OCR_NOISE | CHUNK_OVERFLOW                          academics/course_policy_el203_embeddedhardwaredesign_winter26_-_tapas_kumar_maiti.md
+HIGH      OCR_NOISE                                           achievements/research_dau_student_research_excellence_award.md
+HIGH      OCR_NOISE                                           administration/daiict_ac_in_nep_2020.md
+HIGH      OCR_NOISE                                           administration/daiict_ac_in_sites_default_files_other_files_no_objection_certificate_visvesvary.md
+HIGH      OCR_NOISE                                           admissions/dual_degree_admissions/bs_ms_data_science_artificial_intelligence_admissions.md
+HIGH      OCR_NOISE | CHUNK_OVERFLOW                          student_services/dean_students_tab.md

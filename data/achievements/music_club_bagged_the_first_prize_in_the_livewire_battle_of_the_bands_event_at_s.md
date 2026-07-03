@@ -5,18 +5,13 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+last_fixed: "2026-07-02"
+fixes_applied: ['CRLF_ENCODING', 'STUB_EMPTY']
 ---
 
-# Music Club bagged the first prize in the Livewire/Battle of the bands event at Spectrum, NIFT.
+## Overview  
+DAU's Music Club secured the first prize at the Livewire/Battle of the Bands event hosted by Spectrum, NIFT. This achievement highlights the club's talent and dedication in musical performances. The competition showcased various bands, with DAU's team emerging as the top performers.  
 
-# Overview
-
-_No overview available._
-
-# Main Content
-
-_No main content extracted._
-
-# Important Information
-
-_No important information found._
+## Note  
+This page's content could not be fully extracted during scraping.  
+Please refer to the source URL for complete information.

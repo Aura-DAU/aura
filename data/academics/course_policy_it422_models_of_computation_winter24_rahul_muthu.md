@@ -1,60 +1,87 @@
 ---
-title: "IT422 Models of Computation Winter24 - Rahul Muthu"
-url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/IT422_Models_of_Computation_Winter24%20-%20Rahul%20Muthu.pdf"
-category: "Academics"
-scraped_by: "Madhav Thesiya"
-scraped_date: "2026-06-14"
----# IT422 Models of Computation Winter24 - Rahul Muthu
+last_fixed: "2026-07-02"
+fixes_applied: ['CRLF_ENCODING', 'GARBLED_ENCODING']
+---
 
-**Last Modified:** 2023-12-15
+# IT422 Models of Computation Winter24 - Rahul Muthu  
 
-## Overview
+## Overview  
+This document presents the course syllabus, policy guidelines, and lecture breakdown for IT422 Models of Computation Winter24 - Rahul Muthu.  
 
-This document presents the course syllabus, policy guidelines, and lecture breakdown for IT422 Models of Computation Winter24 - Rahul Muthu.
+## Course Details  
+**Last Modified:** 2023-12-15  
 
-## Main Content
+**Course Format:**  
+- Elective course offered in the third and fourth years of B.Tech. programs  
+- 3 lectures per week (1 hour each)  
 
-Models of Computation (IT422) Winter 2023-24 Course placement: This is an elective course o ered in
-the third and fourth years of the B.tech. programmes. Course format: There will be 3 lectures per
-week of one hour each. Prerequisites: The courses on Discrete Mathematics and Data Struc- tures/
-Algorithms feed into the contents of this course to varying degrees. Course objective: This subject
-forms the theoretical foundation of computer science.
+**Prerequisites:**  
+- Discrete Mathematics  
+- Data Structures/Algorithms  
 
-While the contemporary languages and architectures would inevitably become obsolete someday, the
-foundational matter in com- puter science would always remain relevant. Studying this subject will
-make students aware of the capabilities as well as limitations of computers. It also gives a clear
-idea about the kind of problems that are realistically tractable. Text book: Automata and
-Computability by Dexter C.
+**Course Objective:**  
+Establish the theoretical foundation of computer science, emphasizing enduring principles over transient technologies. Students will understand computational capabilities, limitations, and problem tractability.  
 
-Kozen. Springer, 1997/2012/2013. Reference books: Introduction to Theory of Computation, 2nd Ed,
-Michael Sipser, Wadsworth Publishing Co Inc, 2012. Languages and Machines, 3rd Ed, Thomas A.
-Sudkamap, Addison Wesley, 2006. An introduction to Formal Languages and Automaton, Narosa Pub-
-lishing House, 2007.
+**Textbook:**  
+- *Automata and Computability* by Dexter C. Kozen (Springer, 1997/2012/2013)  
 
-### Evaluation
+**Reference Books:**  
+- *Introduction to Theory of Computation* (2nd Ed), Michael Sipser (Wadsworth, 2012)  
+- *Languages and Machines* (3rd Ed), Thomas A. Sudkamap (Addison Wesley, 2006)  
+- *An Introduction to Formal Languages and Automaton* (Narosa Publishing House, 2007)  
 
-method: The evaluation will have the following break-up: One insemester exam (20%) One end
-semester exam (50%) Quizzes/assignments (20%) 1 Course outcomes: After successfully completing this
-course, students will: be euqipped to model problems, both abstract and real, in the areas of
-computability, algorithmic complexity and formal language frame- work. be able to deploy this
-knowledge in the software disciplines of compiler design as well as formal speci cation and veri
-cation.
+## Evaluation  
+| Method               | Weightage |  
+|----------------------|-----------|  
+| In-semester exam     | 20%       |  
+| End-semester exam    | 50%       |  
+| Quizzes/assignments  | 20%       |  
 
-P1P2P3P4P5P6P7P8P9P10P11P12  Sl. No. Topic No. of Lectures 1 Mathematical Preliminaries 4 2 Finite
-State Automata & Regular Languages 12 3 Pushdown Automata & Context-Free Languages 8 4 Turing
-Machines & Undecidability 6 Detailed contents:
-1. Mathematical preliminaries:
-Sets, Strings and operations on them. Formal languages and their applicability in modelling
-computa- tional problems.
-2. Finite state automate & regular languages:
-Finite state machines (deterministic, non-deterministic and -moves), subset construction Closure
-properties and fancy regular languages Regular languages, regular expressions and equivalence
-Regular grammars Finite equivalences Pumping lemma.
-3.
+**Course Outcomes:**  
+- Model problems in computability, algorithmic complexity, and formal language frameworks  
+- Apply knowledge to compiler design, formal specification, and verification  
 
-Pushdown automata & context-free languages
-2 Context-free grammars Deterministic and non-deterministic CFLs Acceptance by empty stack or
-nal state Pumping lemma
-4. Turing machines & undecidability
-Determinstic and non-deterministic Turing machines Decision and computational variants
-Undecidability 3
+## Course Outline  
+
+### Mathematical Preliminaries  
+| Topic                | Lectures |  
+|----------------------|----------|  
+| Sets, Strings, Formal Languages | 4      |  
+
+**Details:**  
+- Sets, strings, and operations  
+- Formal languages and computational problem modeling  
+
+---
+
+### Finite State Automata & Regular Languages  
+| Topic                | Lectures |  
+|----------------------|----------|  
+| Finite state machines (deterministic, non-deterministic, ε-moves) | 12 |  
+
+**Details:**  
+- Subset construction  
+- Closure properties, regular expressions, and grammars  
+- Pumping lemma  
+
+---
+
+### Pushdown Automata & Context-Free Languages  
+| Topic                | Lectures |  
+|----------------------|----------|  
+| Context-free grammars, acceptance by empty stack/final state | 8  |  
+
+**Details:**  
+- Deterministic/non-deterministic CFLs  
+- Pumping lemma  
+
+---
+
+### Turing Machines & Undecidability  
+| Topic                | Lectures |  
+|----------------------|----------|  
+| Deterministic/non-deterministic Turing machines | 6  |  
+
+**Details:**  
+- Decision and computational variants  
+- Undecidability concepts

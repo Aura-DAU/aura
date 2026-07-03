@@ -5,16 +5,15 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: Excel
+source_type: "Excel"
 pdf_name: "N.I.R.F. / Top Universities/Institute Admission Data/Details of No. of PG and PhD students admitted from Top University/Institute. (13.3 KB)"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# N.I.R.F. / Top Universities/Institute Admission Data/Details of No. of PG and PhD students admitted from Top University/Institute. (13.3 KB)
+## Overview  
+This Excel document provides data on the number of postgraduate (PG) and PhD students admitted by top universities and institutes, likely in the context of N.I.R.F. (National Institutional Ranking Framework) rankings. It serves as an administrative resource for tracking admission trends and institutional performance in higher education.  
 
-## Overview
-
-This document is a Excel resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
-
-## Main Content
-
-## Sheet: Sheet1
+## Note  
+This page's content could not be fully extracted during scraping.  
+Please refer to the source URL for complete information.

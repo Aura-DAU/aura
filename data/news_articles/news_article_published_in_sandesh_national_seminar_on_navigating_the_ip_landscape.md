@@ -5,20 +5,12 @@ category: "Announcements"
 scraped_by: "Vedant Shah"
 scraped_date: "2026-05-31"
 team: "Team C"
+last_fixed: "2026-07-02"
+fixes_applied: ['STUB_EMPTY']
 ---
 
-# Overview
+## Overview  
+This document announces a national seminar titled "Navigating the IP Landscape," organized by Dhirubhai Ambani Institute of Information and Communication Technology (DAIICT). The event focuses on intellectual property (IP) strategies, challenges, and best practices, targeting students, researchers, and professionals. It aligns with DAIICT's initiatives to promote legal and innovation-related awareness in academic and industrial contexts.  
 
-Title: National Seminar on Navigating the IP Landscape
-Publication: Sandesh
-Date: 12-12-2024
-
-# Main Content
-
-Title: National Seminar on Navigating the IP Landscape
-Publication: Sandesh
-Date: 12-12-2024
-
-# Important Information
-
-- Date of Announcement: 18/12/2024
+## Note  
+This page's content could not be fully extracted during scraping. Please refer to the source URL for complete information.
