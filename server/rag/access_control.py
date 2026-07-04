@@ -6,9 +6,12 @@ queries role_bindings.erp_id directly (no UUID user_id join needed since
 the users table no longer exists).
 """
 
+import logging
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 
 class AccessDecision(Enum):
@@ -137,4 +140,12 @@ class AccessControlGate:
             )
             return {r["binding"] for r in rows}
         except Exception:
+            # Fix #8: log the failure before returning empty so a DB outage
+            # doesn't silently cause false access denials for admin users.
+            logger.error(
+                "_get_bindings: DB query failed for erp_id=%s — "
+                "returning empty binding set, which may cause false DENIED decisions.",
+                erp_id,
+                exc_info=True,
+            )
             return set()

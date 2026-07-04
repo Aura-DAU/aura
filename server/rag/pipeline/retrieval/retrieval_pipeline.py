@@ -662,26 +662,27 @@ class RetrievalPipeline:
             "query_decomposition"
         )
 
+        # Fix #10: compute alias_resolved / top_k boost BEFORE the decomposed
+        # branch so the same widened top_k applies to non-decomposed queries
+        # entering _retrieve_dual_path. Previously this lived only inside the
+        # decomposed block, so bare sentinel aliases ("mtech") got top_k=5
+        # on non-decomposed paths — too narrow for an unfiltered index search.
+        base_top_k = plan.get("top_k", 5)
+        raw_program = plan.get("entities", {}).get("program_name", "")
+        canonical_program = self._canonical_program_name(raw_program) if raw_program else None
+        alias_resolved = (
+            canonical_program is not None
+            and canonical_program not in self.BROAD_PROGRAM_SENTINELS
+        )
+        effective_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
+        # Write it back so _retrieve_dual_path and sub-query loops both see it.
+        plan["top_k"] = effective_top_k
+
         if decomposed_queries:
             all_results = []
 
-            # Fix Bug1: retrieval_top_k was referenced but never defined,
-            # causing a NameError that silently crashed the decomposed-query
-            # branch and returned zero results ("not in database" false positive).
-            # Use plan["top_k"] (already boosted for multi-entity queries) or
-            # fall back to 5 per sub-query.
-            # Fix AL2: when the metadata filter will be None (because program_name
-            # canonicalized to None — bare alias like "M.Tech" with no specialization),
-            # raise top_k to 15 so the answer isn't buried under noise.
-            # The filter being None means the entire index is searched; top_k=5
-            # is far too narrow for broad-corpus sub-queries.
-            base_top_k = plan.get("top_k", 5)
-            alias_resolved = bool(
-                self._canonical_program_name(
-                    plan.get("entities", {}).get("program_name", "")
-                )
-            ) if plan.get("entities", {}).get("program_name") else True
-            retrieval_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
+            # Fix #10: top_k already computed above (applies to both paths)
+            retrieval_top_k = effective_top_k
 
             for subquery in decomposed_queries:
                 subquery_expanded = self._expand_semesters(subquery)

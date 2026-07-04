@@ -13,6 +13,9 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 
+_audit_fail_count = 0
+
+
 class AuditLog:
 
     def __init__(self, db_module=None):
@@ -53,7 +56,10 @@ class AuditLog:
                 ),
             )
         except Exception:
+            global _audit_fail_count
+            _audit_fail_count += 1
             logger.error(
-                "audit_log INSERT failed — continuing without audit row.\n%s",
+                "audit_log INSERT failed (total failures: %d) — continuing without audit row.\n%s",
+                _audit_fail_count,
                 traceback.format_exc(),
             )

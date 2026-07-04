@@ -256,11 +256,29 @@ class ERPConnector:
     def find_student_by_name(self, name: str) -> Optional[dict]:
         """Fuzzy name lookup — only available in SQL mode."""
         if self._mode == "sql":
+            cleaned_name = name.strip()
+            if len(cleaned_name) < 4:
+                import logging
+                logging.getLogger(__name__).warning(
+                    "find_student_by_name: Search query '%s' too short (min 4 chars required). Skipping lookup.",
+                    name
+                )
+                return None
             rows = self._q(
-                "SELECT roll_number, full_name FROM students WHERE full_name ILIKE %s AND enrollment_status='active' LIMIT 1",
-                (f"%{name}%",),
+                "SELECT roll_number, full_name FROM students WHERE full_name ILIKE %s AND enrollment_status='active' ORDER BY full_name LIMIT 5",
+                (f"%{cleaned_name}%",),
             )
-            return rows[0] if rows else None
+            if not rows:
+                return None
+            if len(rows) > 1:
+                import logging
+                logging.getLogger(__name__).warning(
+                    "find_student_by_name: Ambiguous lookup for '%s'. Found %d matches: %s. Returning the first match.",
+                    cleaned_name,
+                    len(rows),
+                    [r["full_name"] for r in rows],
+                )
+            return rows[0]
         return None
 
     # ── Aggregate queries (anonymized — no individual records returned) ───

@@ -23,7 +23,7 @@ JWT that FastAPI's require_identity() verifies on every chat request.
 """
 
 import os
-from fastapi import APIRouter, HTTPException, Header, Query
+from fastapi import APIRouter, Depends, HTTPException, Header, Query
 import db.connection as db_conn
 
 router = APIRouter(prefix="/internal", tags=["internal"])
@@ -32,7 +32,9 @@ INTERNAL_RESOLVE_SECRET = os.environ.get("INTERNAL_RESOLVE_SECRET", "")
 ALLOWED_DOMAINS = {"dau.ac.in", "daiict.ac.in"}
 
 
-def _validate_secret(x_internal_secret: str = Header(...)) -> None:
+def _validate_secret(x_internal_secret: str = Header(..., alias="X-Internal-Secret")) -> None:
+    """FastAPI dependency — validates the X-Internal-Secret header.
+    Wired via Depends() so secret checking is not duplicated inline."""
     if not INTERNAL_RESOLVE_SECRET:
         raise HTTPException(
             status_code=500,
@@ -54,19 +56,13 @@ def _validate_email_domain(email: str) -> None:
 @router.get("/resolve-identity")
 def resolve_identity(
     email: str = Query(..., description="Institutional Google email to resolve"),
-    x_internal_secret: str = Header(..., alias="X-Internal-Secret"),
+    _: None = Depends(_validate_secret),   # Fix #9: auth enforced via Depends
 ):
     """
     Resolve a Google institutional email to an ERP identity.
     Called by Next.js inside the NextAuth jwt() callback — not by browsers.
     """
-    # 1. Authenticate the caller
-    if not INTERNAL_RESOLVE_SECRET:
-        raise HTTPException(status_code=500, detail="INTERNAL_RESOLVE_SECRET not configured.")
-    if x_internal_secret != INTERNAL_RESOLVE_SECRET:
-        raise HTTPException(status_code=403, detail="Forbidden")
-
-    # 2. Validate domain
+    # 1. Domain validation (secret already verified by Depends(_validate_secret))
     _validate_email_domain(email)
 
     # 3. Look up in user_identity_map

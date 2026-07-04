@@ -75,7 +75,7 @@ def add_binding(
 
 
 @router.delete("/bindings/{binding_id}")
-def revoke_binding(binding_id: str, admin: Identity = Depends(_require_admin)):
+def revoke_binding(binding_id: int, admin: Identity = Depends(_require_admin)):
     rows = db_conn.query(
         "SELECT id FROM role_bindings WHERE id = %s AND revoked = FALSE",
         (binding_id,),

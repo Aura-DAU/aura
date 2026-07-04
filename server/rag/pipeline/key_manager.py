@@ -95,9 +95,12 @@ class KeyManager:
                 if status_code == 429:
                     match = re.search(r"try again in (\d+(?:\.\d+)?)s", error_msg)
                     has_seconds_retry = bool(match)
-                    is_daily_limit = ("tpd" in error_msg or "tokens per day" in error_msg or 
-                                      "rpd" in error_msg or "requests per day" in error_msg or 
-                                      not has_seconds_retry)
+                # A burst-limit 429 that Groq returns without a "try again in Xs"
+                # hint is NOT a daily limit — rotating the key wastes the backup
+                # key's burst budget unnecessarily. Only explicit TPD/RPD keywords
+                # should trigger key rotation; burst limits use the backoff path.
+                is_daily_limit = ("tpd" in error_msg or "tokens per day" in error_msg or
+                                  "rpd" in error_msg or "requests per day" in error_msg)
                 
                 if is_daily_limit:
                     with cls._lock:

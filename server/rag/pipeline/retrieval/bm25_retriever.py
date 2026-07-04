@@ -261,7 +261,11 @@ class BM25Retriever:
 
         results = []
 
+        max_score = max(scores[i] for i in ranked_indices) if ranked_indices else 0.0
+
         for idx in ranked_indices:
+            raw_score = float(scores[idx])
+            norm_score = raw_score / max_score if max_score > 0.0 else 0.0
 
             results.append({
 
@@ -271,7 +275,7 @@ class BM25Retriever:
                     ],
 
                 "score":
-                    float(scores[idx]),
+                    norm_score,
 
                 "metadata":
                     self.chunks[idx]
