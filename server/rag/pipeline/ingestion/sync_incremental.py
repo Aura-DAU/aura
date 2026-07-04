@@ -104,11 +104,23 @@ def main():
             # Existing file that was modified
             updated_files.append((f, canonical_path))
 
+    # 5. Check for deleted files (exist in index but no longer on disk)
+    current_canonical_paths = {get_canonical_path(f) for f in md_files}
+    deleted_path_to_doc_id = {}
+    for chunk in metadata:
+        path = chunk.get("path")
+        if path:
+            canonical_path = get_canonical_path(path)
+            if canonical_path not in current_canonical_paths:
+                deleted_path_to_doc_id[canonical_path] = chunk.get("document_id")
+
+    deleted_files = list(deleted_path_to_doc_id.keys())
+
     # Combine both lists as files that need processing
     files_to_process = new_files + [f for f, _ in updated_files]
 
-    if not files_to_process:
-        logger.info("No new or modified markdown files found. Database is up to date!")
+    if not files_to_process and not deleted_files:
+        logger.info("No new, modified, or deleted markdown files found. Database is up to date!")
         sys.exit(0)
 
     if new_files:
@@ -121,6 +133,11 @@ def main():
         for f, _ in updated_files:
             logger.info("  - [MODIFIED] %s", f.relative_to(DATA_DIR))
 
+    if deleted_files:
+        logger.info("Found %d deleted files to remove:", len(deleted_files))
+        for f in deleted_files:
+            logger.info("  - [DELETED] %s", f)
+
     # 1. Chunk only modified/new files
     new_chunks = []
     for md_file in files_to_process:
@@ -131,30 +148,31 @@ def main():
         except Exception as e:
             logger.error("Failed to chunk %s: %s", md_file, e)
 
-    
-    if not new_chunks:
-        logger.warning("No new chunks generated. Exiting.")
+    if not new_chunks and not deleted_files:
+        logger.warning("No new chunks generated and no files to delete. Exiting.")
         sys.exit(0)
 
     # 2. Embed only new chunks
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
-    logger.info("Loading embedding model %s on device: %s...", MODEL_NAME, device)
-    model = SentenceTransformer(MODEL_NAME, device=device)
+    new_embeddings = None
+    if new_chunks:
+        device = "mps" if torch.backends.mps.is_available() else "cpu"
+        logger.info("Loading embedding model %s on device: %s...", MODEL_NAME, device)
+        model = SentenceTransformer(MODEL_NAME, device=device)
 
-    texts = [c["text"] for c in new_chunks]
-    logger.info("Generating embeddings for %d new chunks...", len(texts))
-    new_embeddings = model.encode(
-        texts,
-        batch_size=128,
-        show_progress_bar=True,
-        normalize_embeddings=True,
-        convert_to_numpy=True
-    ).astype("float32")
+        texts = [c["text"] for c in new_chunks]
+        logger.info("Generating embeddings for %d new chunks...", len(texts))
+        new_embeddings = model.encode(
+            texts,
+            batch_size=128,
+            show_progress_bar=True,
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        ).astype("float32")
 
-    # 3. Clean local metadata & embeddings for updated files first
-    if updated_files:
-        logger.info("Removing old chunks for %d updated files from local index...", len(updated_files))
-        files_to_remove = {canonical_path for _, canonical_path in updated_files}
+    # 3. Clean local metadata & embeddings for updated/deleted files first
+    if updated_files or deleted_files:
+        logger.info("Removing old chunks for %d updated/deleted files from local index...", len(updated_files) + len(deleted_files))
+        files_to_remove = {canonical_path for _, canonical_path in updated_files} | set(deleted_files)
         
         keep_indices = []
         for idx, chunk in enumerate(metadata):
@@ -171,12 +189,12 @@ def main():
 
     # Save updated local embeddings and metadata
     logger.info("Saving updated local embeddings and metadata...")
-    old_embeddings = np.load(EMBEDDINGS_FILE)
-    updated_embeddings = np.concatenate((old_embeddings, new_embeddings), axis=0)
+    if new_embeddings is not None:
+        old_embeddings = np.load(EMBEDDINGS_FILE)
+        updated_embeddings = np.concatenate((old_embeddings, new_embeddings), axis=0)
+        np.save(EMBEDDINGS_FILE, updated_embeddings)
+        metadata.extend(new_chunks)
     
-    np.save(EMBEDDINGS_FILE, updated_embeddings)
-
-    metadata.extend(new_chunks)
     with open(METADATA_FILE, "w", encoding="utf-8") as f:
         json.dump(metadata, f, ensure_ascii=False)
 
@@ -195,7 +213,6 @@ def main():
     if updated_files:
         logger.info("Deleting old vectors from Pinecone for %d modified files...", len(updated_files))
         for f, canonical_path in updated_files:
-            # Generate the document_id using the exact same formula
             import uuid
             doc_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, f.as_posix()))
             try:
@@ -204,42 +221,55 @@ def main():
             except Exception as e:
                 logger.error("Failed to delete vectors for %s from Pinecone: %s", canonical_path, e)
 
-    logger.info("Preparing vectors for Pinecone upload...")
-    vectors = []
-    for embedding, chunk in zip(new_embeddings, new_chunks):
-        vector = {
-            "id": chunk["chunk_id"],
-            "values": embedding.tolist(),
-            "metadata": {
-                "text": chunk["text"],
-                "cluster": chunk.get("cluster"),
-                "subclusters": chunk.get("subclusters"),
-                "document_type": chunk.get("document_type")
+    # Delete vectors for deleted files from Pinecone
+    if deleted_files:
+        logger.info("Deleting vectors from Pinecone for %d deleted files...", len(deleted_files))
+        for canonical_path in deleted_files:
+            doc_id = deleted_path_to_doc_id.get(canonical_path)
+            if doc_id:
+                try:
+                    index.delete(filter={"document_id": doc_id})
+                    logger.info("  Deleted vectors for: %s (doc_id: %s)", canonical_path, doc_id)
+                except Exception as e:
+                    logger.error("Failed to delete vectors for %s from Pinecone: %s", canonical_path, e)
+
+    if new_chunks:
+        logger.info("Preparing vectors for Pinecone upload...")
+        vectors = []
+        for embedding, chunk in zip(new_embeddings, new_chunks):
+            vector = {
+                "id": chunk["chunk_id"],
+                "values": embedding.tolist(),
+                "metadata": {
+                    "text": chunk["text"],
+                    "cluster": chunk.get("cluster"),
+                    "subclusters": chunk.get("subclusters"),
+                    "document_type": chunk.get("document_type")
+                }
             }
-        }
-        
-        # Coordinate metadata
-        if chunk.get("document_id"):
-            vector["metadata"]["document_id"] = chunk["document_id"]
-        if chunk.get("chunk_index") is not None:
-            vector["metadata"]["chunk_index"] = int(chunk["chunk_index"])
-        if chunk.get("total_chunks") is not None:
-            vector["metadata"]["total_chunks"] = int(chunk["total_chunks"])
+            
+            # Coordinate metadata
+            if chunk.get("document_id"):
+                vector["metadata"]["document_id"] = chunk["document_id"]
+            if chunk.get("chunk_index") is not None:
+                vector["metadata"]["chunk_index"] = int(chunk["chunk_index"])
+            if chunk.get("total_chunks") is not None:
+                vector["metadata"]["total_chunks"] = int(chunk["total_chunks"])
 
-        # Optional metadata fields
-        for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date"]:
-            if chunk.get(field) is not None:
-                vector["metadata"][field] = chunk[field]
+            # Optional metadata fields
+            for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date"]:
+                if chunk.get(field) is not None:
+                    vector["metadata"][field] = chunk[field]
 
-        vectors.append(vector)
+            vectors.append(vector)
 
-    # Upload in partitioned batches (recommended batch size is <= 200)
-    batch_size = 200
-    logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
-    for i in range(0, len(vectors), batch_size):
-        batch = vectors[i:i+batch_size]
-        index.upsert(vectors=batch)
-    logger.info("Pinecone upload complete.")
+        # Upload in partitioned batches (recommended batch size is <= 200)
+        batch_size = 200
+        logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
+        for i in range(0, len(vectors), batch_size):
+            batch = vectors[i:i+batch_size]
+            index.upsert(vectors=batch)
+        logger.info("Pinecone upload complete.")
 
     # 5. Refresh entity index
     logger.info("Rebuilding entity index...")

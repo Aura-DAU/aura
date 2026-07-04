@@ -53,6 +53,9 @@ def split_section(text):
         chunk_text = tokenizer.decode(chunk_tokens, skip_special_tokens=True)
         chunks.append(chunk_text)
 
+        if end == len(tokens):
+            break
+
         # Advance by (snapped_chunk_size - overlap); never go backwards
         advance = max(1, (end - start) - CHUNK_OVERLAP)
         start += advance
