@@ -63,7 +63,8 @@ class Retriever:
         self,
         query,
         top_k=TOP_K,
-        metadata_filter=None
+        metadata_filter=None,
+        allowed_roles=None
     ):
 
         query_embedding = self.model.encode(
@@ -113,7 +114,8 @@ class Retriever:
         bm25_results = self.bm25.retrieve(
             query=query,
             top_k=top_k,
-            metadata_filter=metadata_filter
+            metadata_filter=metadata_filter,
+            allowed_roles=allowed_roles
         )
 
         fused_results = fuse(

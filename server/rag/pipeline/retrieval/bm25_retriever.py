@@ -212,9 +212,14 @@ class BM25Retriever:
                 # compared the chunk's string value to the dict object → always
                 # False → zero BM25 results for all multi-program queries.
                 elif "$in" in condition:
-
-                    if chunk.get(key) not in condition["$in"]:
-                        return False
+                    val = chunk.get(key)
+                    if isinstance(val, list):
+                        # Array intersection: True if any element in val is in condition["$in"]
+                        if not any(v in condition["$in"] for v in val):
+                            return False
+                    else:
+                        if val not in condition["$in"]:
+                            return False
 
             else:
 
@@ -228,7 +233,8 @@ class BM25Retriever:
         self,
         query,
         top_k=10,
-        metadata_filter=None
+        metadata_filter=None,
+        allowed_roles=None
     ):
 
         query_tokens = (

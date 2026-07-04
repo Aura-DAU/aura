@@ -8,6 +8,7 @@ import type {
   StudentProfile,
 } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
+import { apiFetch, setToken } from "@/lib/auth-client"
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
@@ -51,7 +52,7 @@ function saveHistoryToServer(
   threads: (StoredThread & { messages: ChatMessage[] })[]
 ): void {
   const payload = threads.slice(0, 10)
-  fetch("/api/auth/history", {
+  apiFetch("/api/auth/history", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, threads: payload }),
@@ -99,6 +100,14 @@ export function useAuraChat() {
   const [activeCitations, setActiveCitations] = useState<Citation[]>([])
   const [studentProfile, setStudentProfile] = useState<StudentProfile>(DEFAULT_PROFILE)
   const { data: session } = useSession()
+
+  useEffect(() => {
+    if (session?.accessToken) {
+      setToken(session.accessToken)
+    } else {
+      setToken(null)
+    }
+  }, [session])
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
@@ -249,7 +258,7 @@ export function useAuraChat() {
       setThinkingStep("Thinking…")
 
       try {
-        const response = await fetch("/api/chat", {
+        const response = await apiFetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -343,7 +352,7 @@ export function useAuraChat() {
 
         const form = new FormData()
         form.append("audio", blob, `recording.${extension}`)
-        const res = await fetch("/api/speech", { method: "POST", body: form })
+        const res = await apiFetch("/api/speech", { method: "POST", body: form })
         const data = (await res.json()) as { text?: string; error?: string }
         const transcript = data.text
         if (transcript) {

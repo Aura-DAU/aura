@@ -1,7 +1,6 @@
-import { SignJWT, jwtVerify } from "jose"
+import jwt from "jsonwebtoken"
 
 const JWT_SECRET = process.env.INTERNAL_JWT_SECRET || "fallback-secret-for-development-only"
-const secretKey = new TextEncoder().encode(JWT_SECRET)
 
 export interface InternalJwtPayload {
   role: "student" | "faculty" | "admin"
@@ -12,19 +11,26 @@ export interface InternalJwtPayload {
 
 /**
  * Signs a short-lived internal JWT for communicating with the Python backend.
+ * Expiry is set to 15m to ensure security.
  */
-export async function signInternalJwt(payload: InternalJwtPayload): Promise<string> {
-  return new SignJWT({ ...payload })
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("1h") // Short-lived
-    .sign(secretKey)
+export function signInternalJwt(payload: InternalJwtPayload): string {
+  return jwt.sign(
+    {
+      role: payload.role,
+      erpId: payload.erpId,
+      department: payload.department,
+    },
+    JWT_SECRET,
+    {
+      algorithm: "HS256",
+      expiresIn: "15m",
+    }
+  )
 }
 
 /**
  * Verifies an internal JWT.
  */
-export async function verifyInternalJwt(token: string): Promise<InternalJwtPayload> {
-  const { payload } = await jwtVerify(token, secretKey)
-  return payload as unknown as InternalJwtPayload
+export function verifyInternalJwt(token: string): InternalJwtPayload {
+  return jwt.verify(token, JWT_SECRET) as InternalJwtPayload
 }

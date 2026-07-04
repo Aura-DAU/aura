@@ -325,6 +325,10 @@ def process_markdown_file(file_path):
         content = f.read()
 
     metadata, body = extract_frontmatter(content)
+    
+    authorization = metadata.get("authorization", ["public"])
+    if isinstance(authorization, str):
+        authorization = [authorization]
 
     sections = extract_sections(body)
 
@@ -428,6 +432,7 @@ def process_markdown_file(file_path):
                 "source_file": file_path.name,
 
                 "scraped_date": metadata.get("scraped_date"),
+                "authorization": authorization,
 
                 "char_length": len(chunk_text),
                 "token_estimate": len(chunk_text.split())
@@ -480,6 +485,7 @@ def process_markdown_file(file_path):
             "source_file": file_path.name,
 
             "scraped_date": metadata.get("scraped_date"),
+            "authorization": authorization,
 
             "char_length": len(custom["text"]),
             "token_estimate": len(custom["text"].split())
