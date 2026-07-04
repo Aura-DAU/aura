@@ -18,10 +18,10 @@ Application of Statistics to Complex Systems (SCxxx) Decem b er 21, 2023 1 Cours
 ation of Statistics to Complex Systems can b e a science electiv e course for studen ts taking a B.T
 ec h (Honours) degree in ICT and an electiv e for MnC studen ts. 2 Course F ormat The course will
 consist of 3 hours of lectures eac h w eek. 3 Course Con ten t Concepts of statistics ha v e pro v
-ed to b e highly useful in probing the b eha viour of dieren t ph ysical systems, t ypically
+ed to b e highly useful in probing the b eha viour of dieren t ph ysical systems, t ypically
 consisting of a large n um b er of particles.
 
-These w ere traditionally rst dev elop ed in the con text of thermal ph ysics, but ha v e subsequen
+These w ere traditionally rst dev elop ed in the con text of thermal ph ysics, but ha v e subsequen
 tly b een b een used in other div erse areas. This course is in tended to in tro duce probabilistic
 approac hes to studying systems with large n um b er of degrees of freedom. These systems can range
 from ideal gases, whic h consist of large n um b ers of particles to mo deling the dynamics of the
@@ -50,7 +50,7 @@ the studen ts should b e able to,  T o understand and analyse the ph ysical w 
 set of principles.  T o design, mo del and in v estigate complex engineering problems. P1 P2 P3 P4
 P5 P6 P7 P8 P9 P10 P11 P12 x x 1 7 Course material and T en tativ e Lecture Sc hedule
 7.1 Concepts of Probabilit y
-Time Allotted (10 Lectures) Theory (5 lectures): General denitions and statistical terminology ,
+Time Allotted (10 Lectures) Theory (5 lectures): General denitions and statistical terminology ,
 Random v ariables, Probabilit y Distributions, Probabilit y distributions for large n, Information
 and En trop y , Random W alk.
 
@@ -64,14 +64,14 @@ Densit y of states.
 7.3 Concepts of Thermo dynamics
 Time Allotted (7 Lectures) Zeroth La w, First La w and Second La w of Thermo dynamics, En trop y ,
 Concept of equilibrium and thermo dynamic p oten tials, Uses of the ab o v e concepts in areas suc h
-as nance and the sto c k mark et.
+as nance and the sto c k mark et.
 7.4 Classical Statistical Mec hanics
 Time Allotted (13 Lectures) Theory (10 Lectures): Micro canonical, Canonical and Grand Canonical
 Ensem bles, P artition F unc- tion, Ising mo del and its uses in ph ysics and in other areas suc h
 as the sto c k mark et, Exact solution of the Ising mo del.
 
 Applications (in brief ) (3 Lectures): Metrop olis-Hastings algorithm for Mon te Carlo sim ulation
-of the Ising mo del and calculating dieren t ph ysical quan tities in this con text.
+of the Ising mo del and calculating dieren t ph ysical quan tities in this con text.
 7.5 Kinetic Theory
 Time Allotted (4 Lectures) Liouville's Theorem, Boltzmann equation, Conserv ation La ws Note : The n
 um b er of lectures assigned for eac h topic is ten tativ e and w ould ultimately dep end on the

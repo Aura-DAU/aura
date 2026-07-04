@@ -11,6 +11,10 @@ pdf_name: "Students / ANTI-RAGGING Committees & Squad Details"
 
 # Students / ANTI-RAGGING Committees & Squad Details
 
+## Version History
+- **Ver 1.0** (Effective: 18 August 2025) — Annual composition of the committee for the 2025-26 academic year.
+
+
 ## Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.

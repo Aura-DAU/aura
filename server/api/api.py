@@ -51,15 +51,11 @@ app.add_middleware(
 )
 
 # ---------------------------------------------------------------------------
-# ARCHITECTURAL SAFEGUARD: SINGLE-FLIGHT WHISPER EXECUTION
-# We intentionally use a Semaphore of 1 to serialize speech requests globally.
-# Whisper is a highly CPU-bound machine learning task. Allowing concurrent 
-# executions on standard hardware divides CPU attention, degrades throughput 
-# exponentially, and risks OOM (Out-Of-Memory) application crashes.
-# Students will queue asynchronously with near-zero overhead until the lock frees.
-# Do not bump this value unless migrating to a dedicated GPU cluster.
+# ARCHITECTURAL SAFEGUARD: LOCAL SINGLE-FLIGHT WHISPER EXECUTION
+# The local CPU Whisper model is now synchronized via an asyncio.Semaphore(1)
+# inside speech.py to protect hardware resources. Concurrency for cloud-based
+# Groq Whisper calls is fully allowed, removing global serialization overhead.
 # ---------------------------------------------------------------------------
-speech_queue_lock = asyncio.Semaphore(1)
 
 ffmpeg_env_path = os.getenv("FFMPEG_BINARY_PATH")
 
@@ -138,12 +134,10 @@ async def speech(file: UploadFile = File(...)):
 
             temp_path = temp_file.name
 
-        async with speech_queue_lock:
-            question = await run_in_threadpool(
-                transcribe_audio, 
-                temp_path, 
-                initial_prompt=UNIVERSITY_PROMPT
-            )
+        question = await transcribe_audio(
+            temp_path, 
+            initial_prompt=UNIVERSITY_PROMPT
+        )
 
         return {"text": question}
 

@@ -190,37 +190,39 @@ SORAB S. ENGINEER & CO. (Regd.)
 Placement details as per IPRS
 The entire batch of students was eligible for sitting in the Final Placements.
 
-1. Classification of the entire Placement Pool.
-Categories No. of Students
-1. Number of students eligible for placements 264
-2. Number of students who did not seek placement through
-the institute ; - : cS
-2a. Company-sponsored or already employed — : = =
-2b. Continuing education, =
-2c. Postponing job search : | -
-2d. Entrepreneurship (Starting a new business) ——
-2e. Returning to / joining family business -
-2f. Sought placement outside the campus placement process _ =
-2g. Did not seek placements for other reasons eS
-3. Total who sought Placements through the institute ; i. (264
-4. Total offers accepted 2 | 264
+1. Classification of the entire Placement Pool
 
-5. Number unplaced, if any -
-Table 1: Classification of entire placement pool
+| Categories | No. of Students |
+| :--- | :---: |
+| 1. Number of students eligible for placements | 264 |
+| 2. Number of students who did not seek placement through the institute | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;2a. Company-sponsored or already employed | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;2b. Continuing education | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;2c. Postponing job search | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;2d. Entrepreneurship (Starting a new business) | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;2e. Returning to / joining family business | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;2f. Sought placement outside the campus placement process | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;2g. Did not seek placements for other reasons | 0 |
+| 3. Total who sought Placements through the institute | 264 |
+| 4. Total offers accepted | 264 |
+| 5. Number unplaced, if any | 0 |
 
-2. Classification based on Sectors.
+**Table 1: Classification of entire placement pool**
 
-Banking : yee 28
-Conglomerate ; oe | *
-Consulting | RES
-Consumer Internet- App Based Tech
-Platform 7 - - 3
-Ecommerce | a Be oe :
-Electronics R&D ; 3
-Fintech 26
-IT/ITES a {| 126
-Pharma & Healthcare _ *3 :
-Total 264
+2. Classification based on Sectors
+
+| Sector | No. of Offers Accepted |
+| :--- | :---: |
+| Banking | 28 |
+| Conglomerate | 1 |
+| Consulting | 73 |
+| Consumer Internet - App Based Tech Platform | 3 |
+| E-commerce | 1 |
+| Electronics R&D | 3 |
+| Fintech | 26 |
+| IT/ITES | 126 |
+| Pharma & Healthcare | 3 |
+| **Total** | **264** |
 For Sorab S. Engineer & Co. Dhirubhai Ambani University
 
 Page 4 of 9
@@ -230,40 +232,39 @@ i eee
 SORAB S. ENGINEER & CO. (Regd.)
 
 3. Classification based on Location
-Indian Locations No. of offers accepted
 
-~Ahmedabad 5 : Sa 51
-Bengaluru | - 18
-Chennai 1
-Delhi 3
-Gurgaon : | : 25
-Gandhinagar 36
-Hyderabad : 32
-Sanand | / : ; ol
-New Delhi 1
-Noida | ; ; 2)
-Mumbai 8
-Pune ee 7 40
-Others =: 39
-Total 264
+| Indian Locations | No. of Offers Accepted |
+| :--- | :---: |
+| Ahmedabad | 51 |
+| Bengaluru | 18 |
+| Chennai | 1 |
+| Delhi | 3 |
+| Gurgaon | 25 |
+| Gandhinagar | 36 |
+| Hyderabad | 32 |
+| Sanand | 1 |
+| New Delhi | 1 |
+| Noida | 21 |
+| Mumbai | 8 |
+| Pune | 40 |
+| Others | 27 |
+| **Total** | **264** |
 
-Table 3.1: Classification based on Locations within India
+**Table 3.1: Classification based on Locations within India**
 
 4. Salary Data
 
 Note: The entries in the ‘Data’ column specify the data points for which the minimum, maximum,
 mean and median are specified.
 
-4.1 Sal Head -— Domestic Offers (INR
+4.1 Salary Head — Domestic Offers (INR)
 
-Salary Min Max Median Mean Data
-
-A. Fixed Yearly Cash Component —2,79,460 29,78,400 14,50,000 12,09,879 263
-B. One Time - Cash Payment 40,000 ~—7,74,000 _—3,00,000_ =—-1,07,291 87
-C. Total Guaranteed Cash
-
-Component 2,79,460 Saati 14,56,560 | 13,17,170 203
-D. Maximum Earning Potential 3,36,882 55,54,026 16,00,860 18,20,268 264
+| Salary Head | Min (INR) | Max (INR) | Median (INR) | Mean (INR) | Data |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **A. Fixed Yearly Cash Component** | 2,79,460 | 29,78,400 | 14,50,000 | 12,09,879 | 263 |
+| **B. One Time - Cash Payment** | 40,000 | 7,74,000 | 3,00,000 | 1,07,291 | 87 |
+| **C. Total Guaranteed Cash Component** | 2,79,460 | 34,34,960 | 14,56,560 | 13,17,170 | 263 |
+| **D. Maximum Earning Potential** | 3,36,882 | 55,54,026 | 16,00,860 | 18,20,268 | 264 |
 
 a
 For Sorab S. Engineer & Co. Dhirubhai Ambani University
