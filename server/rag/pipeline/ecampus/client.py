@@ -12,7 +12,7 @@ Usage pattern (see tool_registry.py for the full picture):
 """
 
 from . import pages, parsers, cache, credentials_vault, timetable, timetable_pool, faculty_schedule
-from .session import ECampusSession, ECampusLoginError
+from .session import ECampusSession
 
 
 class ECampusClient:

@@ -13,7 +13,6 @@ Personal data is NEVER included in the public RAG `sources` list — the
 there is no URL to cite for live ERP data.
 """
 
-from typing import Optional
 
 
 class ERPContextBuilder:

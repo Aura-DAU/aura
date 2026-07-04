@@ -241,7 +241,7 @@ CHECK_EXAM_ELIGIBILITY = Tool(
     description="Check whether the requester's attendance meets the exam eligibility threshold in every registered course, flagging at-risk courses.",
     parameters={"type": "object", "properties": {}},
     category="derived", allowed_roles=["student"],
-    handler=lambda identity, **kw: composite_tools.check_exam_eligibility(identity, **kw),
+    handler=composite_tools.check_exam_eligibility,
 )
 
 GET_ACADEMIC_SNAPSHOT = Tool(

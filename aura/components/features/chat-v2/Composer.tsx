@@ -4,6 +4,7 @@ import { type FormEvent, type KeyboardEvent, useEffect, useState } from "react"
 import TextareaAutosize from "react-textarea-autosize"
 import { Mic, Send, Square, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useSession } from "next-auth/react"
 
 const MAX_CHARS = 2000
 
@@ -36,6 +37,17 @@ export function Composer({
 }: ComposerProps) {
   const [showMic, setShowMic] = useState(false)
   const canSend = inputText.trim().length > 0 && !loading && !isRecording
+  const { data: session } = useSession()
+  const role = (session?.user?.role as string) || ""
+  let dynamicPlaceholder = "Message AURA…"
+
+  if (role === "student") {
+    dynamicPlaceholder = "Ask about your timetable, attendance, or requirements..."
+  } else if (role.startsWith("faculty") || role.startsWith("dean") || role === "registrar") {
+    dynamicPlaceholder = "Ask about class schedule, grade submission, or mentoring..."
+  } else if (role === "admin" || role === "superadmin" || role === "admin_staff") {
+    dynamicPlaceholder = "Ask about administration, role bindings, or settings..."
+  }
 
   useEffect(() => {
     setShowMic(micSupported())
@@ -74,7 +86,7 @@ export function Composer({
             minRows={1}
             maxRows={8}
             maxLength={MAX_CHARS}
-            placeholder="Message AURA…"
+            placeholder={dynamicPlaceholder}
             aria-label="Message AURA"
             className="flex-1 resize-none bg-transparent py-1.5 text-sm leading-relaxed text-neutral-100 outline-none placeholder:text-neutral-500"
           />

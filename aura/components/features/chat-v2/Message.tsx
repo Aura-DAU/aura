@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Check, Copy, RotateCcw, ThumbsDown, ThumbsUp, FileText } from "lucide-react"
+import { Check, Copy, RotateCcw, ThumbsDown, ThumbsUp, FileText, Lock } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 import type { ChatMessage, Citation } from "@/lib/chat-types"
@@ -18,6 +18,51 @@ export function Message({ message, citations, onRegenerate }: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
 
+    const getAuthBadge = (auth?: string[], visibility?: string) => {
+    if (visibility) {
+      const isFaculty = visibility.toLowerCase().includes("faculty")
+      return (
+        <span className={cn(
+          "rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider border",
+          isFaculty 
+            ? "bg-purple-500/10 text-purple-400 border-purple-500/20"
+            : "bg-blue-500/10 text-blue-400 border-blue-500/20"
+        )}>
+          {visibility}
+        </span>
+      )
+    }
+    
+    if (auth && auth.length > 0) {
+      if (auth.includes("faculty")) {
+        return (
+          <span className="rounded-full bg-purple-500/10 px-2 py-0.5 text-[9px] font-semibold text-purple-400 border border-purple-500/20 uppercase tracking-wider">
+            Faculty-only
+          </span>
+        )
+      }
+      if (auth.includes("student_ug") || auth.includes("ug")) {
+        return (
+          <span className="rounded-full bg-blue-500/10 px-2 py-0.5 text-[9px] font-semibold text-blue-400 border border-blue-500/20 uppercase tracking-wider">
+            UG student
+          </span>
+        )
+      }
+      if (auth.includes("student_pg") || auth.includes("pg")) {
+        return (
+          <span className="rounded-full bg-teal-500/10 px-2 py-0.5 text-[9px] font-semibold text-teal-400 border border-teal-500/20 uppercase tracking-wider">
+            PG student
+          </span>
+        )
+      }
+      return (
+        <span className="rounded-full bg-neutral-500/10 px-2 py-0.5 text-[9px] font-semibold text-neutral-400 border border-neutral-500/20 uppercase tracking-wider">
+          {auth[0]}
+        </span>
+      )
+    }
+    return null
+  }
   if (message.role === "user") {
     return (
       <div className="flex justify-end">
@@ -47,28 +92,37 @@ export function Message({ message, citations, onRegenerate }: MessageProps) {
     <div className="group flex items-start gap-3">
       <BrandMark className="mt-0.5 size-8 text-sm" />
       <div className="min-w-0 flex-1">
+        {message.is_personal_data && (
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-lg border border-theme-yellow/20 bg-theme-yellow/10 px-2.5 py-1 text-xs text-theme-yellow font-medium select-none">
+            <Lock className="size-3 text-theme-yellow" />
+            <span>Your personal data</span>
+          </div>
+        )}
         <MarkdownContent content={message.content} />
 
         {citations && citations.length > 0 ? (
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-3">
             {citations.map((c, i) => {
               const isUrl = c.file.startsWith("http://") || c.file.startsWith("https://")
               const Component = isUrl ? "a" : "span"
+              const badge = getAuthBadge(c.authorization, c.visibility)
               return (
-                <Component
-                  key={`${c.file}-${i}`}
-                  href={isUrl ? c.file : undefined}
-                  target={isUrl ? "_blank" : undefined}
-                  rel={isUrl ? "noopener noreferrer" : undefined}
-                  className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300",
-                    isUrl && "hover:bg-theme-gray-light transition-colors cursor-pointer hover:text-neutral-100"
-                  )}
-                >
-                  <span className="size-1.5 rounded-full bg-theme-yellow" />
-                  <FileText className="size-3 text-neutral-500" />
-                  {c.title ?? c.file}
-                </Component>
+                <div key={`${c.file}-${i}`} className="inline-flex items-center gap-1.5">
+                  <Component
+                    href={isUrl ? c.file : undefined}
+                    target={isUrl ? "_blank" : undefined}
+                    rel={isUrl ? "noopener noreferrer" : undefined}
+                    className={cn(
+                      "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300",
+                      isUrl && "hover:bg-theme-gray-light transition-colors cursor-pointer hover:text-neutral-100"
+                    )}
+                  >
+                    <span className="size-1.5 rounded-full bg-theme-yellow" />
+                    <FileText className="size-3 text-neutral-500" />
+                    {c.title ?? c.file}
+                  </Component>
+                  {badge}
+                </div>
               )
             })}
           </div>

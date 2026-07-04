@@ -39,6 +39,7 @@ def _attendance_threshold() -> float:
         if match:
             return float(match.group(1))
     except Exception:
+        # Fallback to default threshold if handbook retrieval fails
         pass
     return DEFAULT_ATTENDANCE_THRESHOLD
 
