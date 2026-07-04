@@ -11,7 +11,7 @@ interface Binding {
   revoked: boolean
 }
 
-export default function AdminBindingsPage() {
+export default function AdminBindingsClient() {
   const [erpId, setErpId] = useState("")
   const [searchQuery, setSearchQuery] = useState("")
   const [loading, setLoading] = useState(false)
@@ -112,8 +112,8 @@ export default function AdminBindingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-theme-black text-neutral-100 px-4 py-12 md:px-8">
-      <div className="mx-auto max-w-4xl animate-in fade-in duration-200">
+    <div className="min-h-screen bg-theme-black text-neutral-100 px-4 py-12 md:px-8 font-sans">
+      <div className="mx-auto max-w-4xl animate-in fade-in duration-200 text-left">
         {/* Header */}
         <div className="mb-8 flex items-center gap-3">
           <div className="flex size-10 items-center justify-center rounded-xl bg-theme-red/10 border border-theme-red/20 text-theme-red">
@@ -123,7 +123,7 @@ export default function AdminBindingsPage() {
             <h1 className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-xl font-bold text-transparent md:text-2xl">
               Role Bindings Panel
             </h1>
-            <p className="text-xs text-neutral-400 mt-0.5">
+            <p className="text-xs text-neutral-400 mt-0.5 font-sans">
               Manage scope bindings for coordinators, deans, and administration staff.
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function AdminBindingsPage() {
         <div className="rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 mb-6">
           <form onSubmit={handleSearch} className="flex gap-2.5">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-neutral-500" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
               <input
                 type="text"
                 value={searchQuery}
@@ -171,13 +171,13 @@ export default function AdminBindingsPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {/* Left side: Add Binding Form */}
             <div className="md:col-span-1 rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 h-fit">
-              <h2 className="text-sm font-semibold text-neutral-200 mb-4 flex items-center gap-1.5">
+              <h2 className="text-sm font-semibold text-neutral-200 mb-4 flex items-center gap-1.5 font-sans">
                 <Plus className="size-4 text-theme-yellow" />
                 Grant Scope
               </h2>
               <form onSubmit={handleAddBinding} className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500">
+                  <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500 font-sans">
                     Binding String
                   </label>
                   <input
@@ -188,13 +188,13 @@ export default function AdminBindingsPage() {
                     required
                     className="w-full rounded-lg border border-theme-gray-lighter bg-theme-gray-light px-3 py-2 text-xs text-neutral-100 placeholder:text-neutral-500 outline-none focus:border-theme-red/60"
                   />
-                  <span className="text-[9px] text-neutral-500 mt-1 leading-normal">
+                  <span className="text-[9px] text-neutral-500 mt-1 leading-normal font-sans">
                     Valid prefixes: class_advisor:, course_instructor:, dean_of_students, exam_committee, admin_full
                   </span>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500">
+                  <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500 font-sans">
                     Expiration Date
                   </label>
                   <input
@@ -203,7 +203,7 @@ export default function AdminBindingsPage() {
                     onChange={(e) => setExpiresAt(e.target.value)}
                     className="w-full rounded-lg border border-theme-gray-lighter bg-theme-gray-light px-3 py-2 text-xs text-neutral-100 outline-none focus:border-theme-red/60"
                   />
-                  <span className="text-[9px] text-neutral-500 leading-normal">
+                  <span className="text-[9px] text-neutral-500 leading-normal font-sans">
                     Leave empty for permanent bindings.
                   </span>
                 </div>
@@ -211,7 +211,7 @@ export default function AdminBindingsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-theme-gray-light border border-theme-gray-lighter py-2 text-xs font-medium hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-theme-gray-light border border-theme-gray-lighter py-2 text-xs font-medium hover:bg-neutral-800 disabled:opacity-50 transition-colors font-sans"
                 >
                   {submitting ? <Loader2 className="size-3.5 animate-spin" /> : "Grant Binding"}
                 </button>
@@ -220,14 +220,14 @@ export default function AdminBindingsPage() {
 
             {/* Right side: Active Bindings list */}
             <div className="md:col-span-2 rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5">
-              <h2 className="text-sm font-semibold text-neutral-200 mb-4 flex items-center gap-1.5">
+              <h2 className="text-sm font-semibold text-neutral-200 mb-4 flex items-center gap-1.5 font-sans">
                 <Shield className="size-4 text-theme-yellow" />
                 Active Bindings (ERP: {erpId})
               </h2>
 
               {bindings.length === 0 ? (
                 <div className="text-center py-10 rounded-xl bg-theme-gray-light/20 border border-theme-gray-light">
-                  <p className="text-xs text-neutral-500">No active bindings found for this user.</p>
+                  <p className="text-xs text-neutral-500 font-sans">No active bindings found for this user.</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -242,7 +242,7 @@ export default function AdminBindingsPage() {
                         <span className="font-mono text-xs font-semibold text-neutral-200 truncate">
                           {b.binding}
                         </span>
-                        <div className="flex flex-wrap items-center gap-3 text-[10px] text-neutral-500">
+                        <div className="flex flex-wrap items-center gap-3 text-[10px] text-neutral-500 font-sans">
                           <span>Granted: {new Date(b.granted_at).toLocaleDateString()}</span>
                           {b.expires_at && (
                             <span className="flex items-center gap-1 text-theme-yellow">
