@@ -679,7 +679,7 @@ class RetrievalPipeline:
         retrieval_intent = plan.get("retrieval_intent", "general")
         if retrieval_intent == "policy_version" and metadata_filter:
             # We still need the DLS filter even if intent is policy_version
-            metadata_filter = self._apply_dls_filter(None, allowed_roles)
+            pass
 
         # Fix TY1: temporal year anchor — if the planner extracted a rule_year
         # (e.g. "2024-25") from the query, inject it into the retrieval query

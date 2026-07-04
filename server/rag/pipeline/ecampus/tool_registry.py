@@ -249,7 +249,7 @@ GET_ACADEMIC_SNAPSHOT = Tool(
     description="Get a single combined view of the requester's CGPA, attendance, fees, hostel, and registration status — use this instead of calling several individual tools when the user wants a general status check.",
     parameters={"type": "object", "properties": {}},
     category="derived", allowed_roles=["student"],
-    handler=lambda identity, **kw: composite_tools.get_academic_snapshot(identity, **kw),
+    handler=composite_tools.get_academic_snapshot,
 )
 
 COMPARE_SEMESTER_TREND = Tool(
@@ -257,7 +257,7 @@ COMPARE_SEMESTER_TREND = Tool(
     description="Get a breakdown of the requester's courses and grades grouped by semester, to support questions about performance trends over time.",
     parameters={"type": "object", "properties": {}},
     category="derived", allowed_roles=["student"],
-    handler=lambda identity, **kw: composite_tools.compare_semester_trend(identity, **kw),
+    handler=composite_tools.compare_semester_trend,
 )
 
 REFRESH_MY_DATA = Tool(
@@ -265,7 +265,7 @@ REFRESH_MY_DATA = Tool(
     description="Force AURA to re-fetch fresh data from eCampus instead of using cached results — use this if the user says their data seems outdated or they just made a change on eCampus (e.g. just registered for a course).",
     parameters={"type": "object", "properties": {}},
     category="write", allowed_roles=["student", "faculty"],
-    handler=lambda identity, **kw: composite_tools.refresh_my_data(identity, **kw),
+    handler=composite_tools.refresh_my_data,
 )
 
 SHARE_DATA_WITH_ADVISOR = Tool(
@@ -277,7 +277,7 @@ SHARE_DATA_WITH_ADVISOR = Tool(
         "required": ["faculty_erp_id"],
     },
     category="write", allowed_roles=["student"],
-    handler=lambda identity, **kw: composite_tools.share_data_with_advisor(identity, **kw),
+    handler=composite_tools.share_data_with_advisor,
 )
 
 REVOKE_ADVISOR_ACCESS = Tool(
@@ -289,7 +289,7 @@ REVOKE_ADVISOR_ACCESS = Tool(
         "required": ["faculty_erp_id"],
     },
     category="write", allowed_roles=["student"],
-    handler=lambda identity, **kw: composite_tools.revoke_advisor_access(identity, **kw),
+    handler=composite_tools.revoke_advisor_access,
 )
 
 LIST_MY_DATA_SHARING = Tool(
@@ -297,7 +297,7 @@ LIST_MY_DATA_SHARING = Tool(
     description="List which faculty members currently have access to the requester's academic data.",
     parameters={"type": "object", "properties": {}},
     category="read", allowed_roles=["student"],
-    handler=lambda identity, **kw: composite_tools.list_my_data_sharing(identity, **kw),
+    handler=composite_tools.list_my_data_sharing,
 )
 
 GET_ADVISEE_SNAPSHOT = Tool(
@@ -309,7 +309,7 @@ GET_ADVISEE_SNAPSHOT = Tool(
         "required": ["student_erp_id"],
     },
     category="read", allowed_roles=["faculty"],
-    handler=lambda identity, **kw: composite_tools.get_advisee_snapshot(identity, **kw),
+    handler=composite_tools.get_advisee_snapshot,
 )
 
 
