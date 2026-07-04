@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 import torch
-import hashlib
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s — %(message)s")
 logger = logging.getLogger(__name__)
@@ -38,92 +37,24 @@ def main():
     with open(METADATA_FILE, "r", encoding="utf-8") as f:
         metadata = json.load(f)
 
-
-    # Helper to convert paths to a canonical format relative to DATA_DIR
-    def get_canonical_path(path_str):
-        path_str = Path(path_str).as_posix().lower()
-        if "data/" in path_str:
-            return path_str.split("data/", 1)[1]
-        return path_str
+    existing_files = {chunk.get("source_file") for chunk in metadata if chunk.get("source_file")}
+    logger.info("Found %d chunks representing %d unique files in current index.", len(metadata), len(existing_files))
 
     logger.info("Scanning directory: %s", DATA_DIR)
     md_files = list(DATA_DIR.rglob("*.md"))
+    new_files = [f for f in md_files if f.name not in existing_files]
 
-    # 1. First, pre-calculate hashes of all files on disk
-    current_file_hashes = {}
-    for f in md_files:
-        canonical_path = get_canonical_path(f)
-        try:
-            with open(f, "r", encoding="utf-8") as file_obj:
-                content = file_obj.read()
-            current_file_hashes[canonical_path] = hashlib.md5(content.encode("utf-8")).hexdigest()
-        except Exception as e:
-            logger.error("Failed to read/hash file %s: %s", f, e)
-
-    # 2. Upgrade existing metadata on-the-fly (Backfill missing file_hash keys)
-    metadata_updated = False
-    for chunk in metadata:
-        path = chunk.get("path")
-        if path and not chunk.get("file_hash"):
-            canonical_path = get_canonical_path(path)
-            disk_hash = current_file_hashes.get(canonical_path)
-            if disk_hash:
-                chunk["file_hash"] = disk_hash
-                metadata_updated = True
-
-    if metadata_updated:
-        logger.info("Backfilling missing file_hash keys in existing metadata.json...")
-        with open(METADATA_FILE, "w", encoding="utf-8") as f_out:
-            json.dump(metadata, f_out, ensure_ascii=False)
-        logger.info("Local metadata.json migration complete.")
-
-    # 3. Map existing files to their last known hashes
-    existing_file_hashes = {}
-    for chunk in metadata:
-        path = chunk.get("path")
-        if path and chunk.get("file_hash"):
-            canonical_path = get_canonical_path(path)
-            existing_file_hashes[canonical_path] = chunk["file_hash"]
-
-    logger.info("Found %d chunks representing %d unique files in current index.", len(metadata), len(existing_file_hashes))
-
-    new_files = []
-    updated_files = []
-
-    # 4. Check each file for changes
-    for f in md_files:
-        canonical_path = get_canonical_path(f)
-        current_hash = current_file_hashes.get(canonical_path)
-        if not current_hash:
-            continue
-
-        if canonical_path not in existing_file_hashes:
-            # Completely new file
-            new_files.append(f)
-        elif existing_file_hashes[canonical_path] != current_hash:
-            # Existing file that was modified
-            updated_files.append((f, canonical_path))
-
-    # Combine both lists as files that need processing
-    files_to_process = new_files + [f for f, _ in updated_files]
-
-    if not files_to_process:
-        logger.info("No new or modified markdown files found. Database is up to date!")
+    if not new_files:
+        logger.info("No new markdown files found. Database is up to date!")
         sys.exit(0)
 
-    if new_files:
-        logger.info("Found %d new files to process:", len(new_files))
-        for f in new_files:
-            logger.info("  - [NEW] %s", f.relative_to(DATA_DIR))
-            
-    if updated_files:
-        logger.info("Found %d modified files to update:", len(updated_files))
-        for f, _ in updated_files:
-            logger.info("  - [MODIFIED] %s", f.relative_to(DATA_DIR))
+    logger.info("Found %d new files to process:", len(new_files))
+    for f in new_files:
+        logger.info("  - %s", f.relative_to(DATA_DIR))
 
-    # 1. Chunk only modified/new files
+    # 1. Chunk only new files
     new_chunks = []
-    for md_file in files_to_process:
+    for md_file in new_files:
         try:
             chunks = process_markdown_file(md_file)
             new_chunks.extend(chunks)
@@ -131,7 +62,6 @@ def main():
         except Exception as e:
             logger.error("Failed to chunk %s: %s", md_file, e)
 
-    
     if not new_chunks:
         logger.warning("No new chunks generated. Exiting.")
         sys.exit(0)
@@ -151,25 +81,7 @@ def main():
         convert_to_numpy=True
     ).astype("float32")
 
-    # 3. Clean local metadata & embeddings for updated files first
-    if updated_files:
-        logger.info("Removing old chunks for %d updated files from local index...", len(updated_files))
-        files_to_remove = {canonical_path for _, canonical_path in updated_files}
-        
-        keep_indices = []
-        for idx, chunk in enumerate(metadata):
-            path = chunk.get("path")
-            if path and get_canonical_path(path) in files_to_remove:
-                continue
-            keep_indices.append(idx)
-            
-        metadata = [metadata[idx] for idx in keep_indices]
-        
-        old_embeddings = np.load(EMBEDDINGS_FILE)
-        old_embeddings = old_embeddings[keep_indices]
-        np.save(EMBEDDINGS_FILE, old_embeddings)
-
-    # Save updated local embeddings and metadata
+    # 3. Concatenate and save local vector store files
     logger.info("Saving updated local embeddings and metadata...")
     old_embeddings = np.load(EMBEDDINGS_FILE)
     updated_embeddings = np.concatenate((old_embeddings, new_embeddings), axis=0)
@@ -190,19 +102,6 @@ def main():
     logger.info("Connecting to Pinecone...")
     pc = Pinecone(api_key=api_key)
     index = pc.Index(index_name)
-
-    # Delete old vectors for modified files from Pinecone
-    if updated_files:
-        logger.info("Deleting old vectors from Pinecone for %d modified files...", len(updated_files))
-        for f, canonical_path in updated_files:
-            # Generate the document_id using the exact same formula
-            import uuid
-            doc_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, f.as_posix()))
-            try:
-                index.delete(filter={"document_id": doc_id})
-                logger.info("  Deleted old vectors for: %s", canonical_path)
-            except Exception as e:
-                logger.error("Failed to delete vectors for %s from Pinecone: %s", canonical_path, e)
 
     logger.info("Preparing vectors for Pinecone upload...")
     vectors = []

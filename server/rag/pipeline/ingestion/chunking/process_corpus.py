@@ -1,7 +1,6 @@
 import uuid
 import re
 from pathlib import Path
-import hashlib
 
 from parser import extract_frontmatter
 from section_extracter import extract_sections
@@ -325,9 +324,6 @@ def process_markdown_file(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Calculate MD5 hash of the file content
-    file_hash = hashlib.md5(content.encode("utf-8")).hexdigest()
-
     metadata, body = extract_frontmatter(content)
 
     sections = extract_sections(body)
@@ -430,7 +426,6 @@ def process_markdown_file(file_path):
 
                 "path": str(file_path),
                 "source_file": file_path.name,
-                "file_hash": file_hash,
 
                 "scraped_date": metadata.get("scraped_date"),
 
@@ -483,7 +478,6 @@ def process_markdown_file(file_path):
 
             "path": str(file_path),
             "source_file": file_path.name,
-            "file_hash": file_hash, 
 
             "scraped_date": metadata.get("scraped_date"),
 
@@ -509,7 +503,5 @@ def process_markdown_file(file_path):
         chunk["document_id"] = document_id
         chunk["chunk_index"] = idx
         chunk["total_chunks"] = total_chunks
-        # Generate deterministic chunk_id so that future upserts overwrite existing vectors
-        chunk["chunk_id"] = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"{document_id}_{idx}"))
 
     return chunks
