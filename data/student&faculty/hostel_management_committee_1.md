@@ -4,7 +4,7 @@ category: "Committees"
 scraped_by: "MeetVirugama"
 scraped_date: "2026-07-04"
 team: "Scraping Team"
-authorization: ["student", "faculty"]
+authorisation: ["student", "faculty"]
 ---
 
 # Hostel Management Committee
