@@ -8,7 +8,6 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-import pytest
 from unittest.mock import MagicMock
 from access_control import AccessControlGate, AccessDecision, GENERIC_DENIAL
 

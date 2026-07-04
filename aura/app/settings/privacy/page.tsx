@@ -6,7 +6,7 @@ import { Loader2, ShieldAlert, UserCheck, UserX } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export default function PrivacySettingsPage() {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const router = useRouter()
   
   const [advisors, setAdvisors] = useState<string[]>([])
