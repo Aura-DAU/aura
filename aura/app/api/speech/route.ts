@@ -21,10 +21,18 @@ export async function POST(req: Request) {
   const forwarded = new FormData()
   forwarded.append("file", file, filename)
 
+  const authHeader = req.headers.get("Authorization")
+  if (!authHeader) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
   let backendRes: Response
   try {
     backendRes = await fetch(backendUrl("/speech"), {
       method: "POST",
+      headers: {
+        "Authorization": authHeader
+      },
       body: forwarded,
     })
   } catch (err) {

@@ -2,9 +2,11 @@ import { NextAuthOptions, DefaultSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { backendUrl } from "@/lib/api/backend"
+import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
 declare module "next-auth" {
   interface Session {
+    accessToken?: string
     user: {
       role: "student" | "faculty" | "admin"
       erpId: string
@@ -24,6 +26,7 @@ declare module "next-auth/jwt" {
     role?: "student" | "faculty" | "admin"
     erpId?: string
     department?: string
+    accessToken?: string
   }
 }
 
@@ -32,9 +35,10 @@ declare module "next-auth/jwt" {
  */
 async function lookupErpIdentity(email: string): Promise<{ role: "student" | "faculty" | "admin"; erpId: string; department: string } | null> {
   try {
-    const res = await fetch(backendUrl(`/auth/lookup?email=${encodeURIComponent(email)}`), {
+    const res = await fetch(backendUrl(`/internal/resolve-identity?email=${encodeURIComponent(email)}`), {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Internal-Secret": process.env.INTERNAL_RESOLVE_SECRET || ""
       }
     })
     
@@ -84,13 +88,32 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       if (account?.provider === "google") {
         const email = user.email || ""
-        if (email.endsWith("@dau.ac.in") || email.endsWith("@daiict.ac.in")) {
-          return true
+        if (!email.endsWith("@dau.ac.in") && !email.endsWith("@daiict.ac.in")) {
+          return "/login?error=DomainNotAllowed"
         }
-        return false // Reject other domains
+        
+        try {
+          const res = await fetch(backendUrl(`/internal/resolve-identity?email=${encodeURIComponent(email)}`), {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Internal-Secret": process.env.INTERNAL_RESOLVE_SECRET || ""
+            }
+          })
+          
+          if (res.status === 404) {
+            return "/login?error=NotRegistered"
+          }
+          if (!res.ok) {
+            return "/login?error=ServerError"
+          }
+          return true
+        } catch (err) {
+          console.error("[NextAuth] SignIn callback lookup failed:", err)
+          return "/login?error=ServerError"
+        }
       }
       return true
     },
@@ -114,6 +137,16 @@ export const authOptions: NextAuthOptions = {
           }
         }
       }
+
+      // Mint a fresh short-lived internal JWT on every token update
+      if (token.role && token.erpId) {
+        token.accessToken = signInternalJwt({
+          role: token.role as "student" | "faculty" | "admin",
+          erpId: token.erpId,
+          department: token.department || undefined,
+        })
+      }
+      
       return token
     },
     async session({ session, token }) {
@@ -122,6 +155,7 @@ export const authOptions: NextAuthOptions = {
         session.user.erpId = token.erpId as string
         session.user.department = token.department as string | undefined
       }
+      session.accessToken = token.accessToken
       return session
     },
   },
