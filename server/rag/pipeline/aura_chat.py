@@ -94,10 +94,11 @@ class AuraChat:
             history = history or []
             # Guardrail / Query Augmentation for RBAC
             retrieval_query = query
-            if profile:
-                role = profile.get("role", "student")
+            user_role = getattr(identity, "role", "public") if identity else "public"
+            if display_profile:
+                role = display_profile.get("role", "student")
                 if role == "professor":
-                    subjects = profile.get("subjects", [])
+                    subjects = display_profile.get("subjects", [])
                     if subjects:
                         subjects_str = ", ".join(subjects)
                         retrieval_query = f"{query} (Context: student data related to {subjects_str})"
@@ -123,7 +124,8 @@ class AuraChat:
             retrieval_result = (
                 self.pipeline.get_context(
                     retrieval_query,
-                    history=history
+                    history=history,
+                    user_role=user_role
                 )
             )
 

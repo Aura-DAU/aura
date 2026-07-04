@@ -234,6 +234,19 @@ class RetrievalPipeline:
                 
         return query
 
+    def _apply_dls_filter(self, filter_dict, allowed_roles):
+        if not allowed_roles:
+            return filter_dict
+        role_clause = {"authorization": {"$in": allowed_roles}}
+        if filter_dict:
+            if "$and" in filter_dict:
+                # Ensure we don't mutate the original list if it's reused
+                new_and = list(filter_dict["$and"])
+                new_and.append(role_clause)
+                return {"$and": new_and}
+            return {"$and": [filter_dict, role_clause]}
+        return role_clause
+
     def _build_metadata_filter(
         self,
         plan
@@ -473,8 +486,12 @@ class RetrievalPipeline:
     def get_context(
         self,
         query,
-        history=None
+        history=None,
+        user_role="public"
     ):
+        from pipeline.retrieval.rbac import get_allowed_roles
+        allowed_roles = get_allowed_roles(user_role)
+
         original_query = query
 
         query_lower = query.lower()
@@ -654,11 +671,15 @@ class RetrievalPipeline:
                 plan
             )
         )
+        
+        # Apply DLS Layer A
+        metadata_filter = self._apply_dls_filter(metadata_filter, allowed_roles)
 
         # Fix DEG1: dead-end guard for policy version/metadata queries.
         retrieval_intent = plan.get("retrieval_intent", "general")
         if retrieval_intent == "policy_version" and metadata_filter:
-            metadata_filter = None
+            # We still need the DLS filter even if intent is policy_version
+            metadata_filter = self._apply_dls_filter(None, allowed_roles)
 
         # Fix TY1: temporal year anchor — if the planner extracted a rule_year
         # (e.g. "2024-25") from the query, inject it into the retrieval query
@@ -716,6 +737,7 @@ class RetrievalPipeline:
                 sub_metadata_filter = (
                     self._build_metadata_filter(plan)
                 )
+                sub_metadata_filter = self._apply_dls_filter(sub_metadata_filter, allowed_roles)
 
                 sub_results = (
                     self.retriever.retrieve(
@@ -727,11 +749,14 @@ class RetrievalPipeline:
 
                 # Fallback: if the filter yields nothing, retry without it
                 if not sub_results and sub_metadata_filter:
+                    # Still apply DLS filter even in fallback!
+                    fallback_filter = self._apply_dls_filter(None, allowed_roles)
                     sub_results = (
                         self.retriever.retrieve(
                             query=subquery_expanded,
                             top_k=retrieval_top_k,
-                            metadata_filter=None
+                            metadata_filter=fallback_filter,
+                            allowed_roles=allowed_roles
                         )
                     )
 
@@ -745,10 +770,12 @@ class RetrievalPipeline:
                     new_in_sub = [r for r in sub_results if r["id"] not in already_seen_ids]
                     if len(new_in_sub) == 0:
                         # All sub-results already collected — retry without filter
+                        fallback_filter = self._apply_dls_filter(None, allowed_roles)
                         extra = self.retriever.retrieve(
                             query=subquery_expanded,
                             top_k=retrieval_top_k,
-                            metadata_filter=None
+                            metadata_filter=fallback_filter,
+                            allowed_roles=allowed_roles
                         )
                         new_extra = [r for r in extra if r["id"] not in already_seen_ids]
                         if new_extra:
@@ -776,7 +803,7 @@ class RetrievalPipeline:
         
         else:
             # Main query retrieval using dual path
-            results = self._retrieve_dual_path(query, plan)
+            results = self._retrieve_dual_path(query, plan, allowed_roles)
             # Fix J2: use a wider context window for policy_version queries
             # so that version history sections (which may be 1-2 chunks after
             # the main policy heading) are always included in context.
@@ -919,7 +946,7 @@ class RetrievalPipeline:
 
         return expanded_candidates
 
-    def _retrieve_dual_path(self, query, plan):
+    def _retrieve_dual_path(self, query, plan, allowed_roles):
         """
         Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
         Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
@@ -951,10 +978,13 @@ class RetrievalPipeline:
 
         entity_pool = {}
         for ent_text, ent_filter in entity_queries:
+            # Apply DLS filter to entity filter
+            ent_filter = self._apply_dls_filter(ent_filter, allowed_roles)
             # Query retriever to get top 3 fused BM25 + dense chunks for this entity
-            res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=ent_filter)
+            res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=ent_filter, allowed_roles=allowed_roles)
             if not res_list and ent_filter:
-                res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=None)
+                fallback_filter = self._apply_dls_filter(None, allowed_roles)
+                res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=fallback_filter, allowed_roles=allowed_roles)
             
             for rank, res in enumerate(res_list, start=1):
                 chunk_id = res["id"]
@@ -981,6 +1011,7 @@ class RetrievalPipeline:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
         # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
+        semantic_filter = self._apply_dls_filter(self._build_metadata_filter(plan), allowed_roles)
         query_embedding = self.retriever.model.encode(
             ["Represent this sentence for searching relevant passages: " + query],
             normalize_embeddings=True,
@@ -990,8 +1021,18 @@ class RetrievalPipeline:
             vector=query_embedding[0].tolist(),
             top_k=50,
             include_metadata=True,
-            filter=None
+            filter=semantic_filter
         )
+        
+        if not results["matches"] and semantic_filter:
+            # Fallback if no results with semantic_filter (but still keep DLS filter)
+            fallback_filter = self._apply_dls_filter(None, allowed_roles)
+            results = self.retriever.index.query(
+                vector=query_embedding[0].tolist(),
+                top_k=50,
+                include_metadata=True,
+                filter=fallback_filter
+            )
         semantic_list = []
         for match in results["matches"]:
             semantic_list.append({

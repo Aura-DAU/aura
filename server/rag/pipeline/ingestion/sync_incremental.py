@@ -126,7 +126,7 @@ def main():
             vector["metadata"]["total_chunks"] = int(chunk["total_chunks"])
 
         # Optional metadata fields
-        for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date"]:
+        for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date", "authorization"]:
             if chunk.get(field) is not None:
                 vector["metadata"][field] = chunk[field]
 
