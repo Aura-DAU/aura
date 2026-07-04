@@ -73,12 +73,12 @@ Below is the official list of winners and positions for all cultural, technical,
 | **Symphony** | 1st (Joint Winner) | Sherwin Abraham (Band Name: Leherz) |
 | **Crime & Clues** | 1st | Naitik Sutariya, Priya Patel, Jaydip Chaudhari |
 | **Crime & Clues** | 2nd | Zeel, Ronak, Nildeep |
-| **Battledrome (BGMI)** | 1st | Mihir Chauhan (Contact: 9106980128) |
-| **Battledrome (BGMI)** | 2nd | Het Gohil (Contact: 9824518607) |
-| **Battledrome (BGMI)** | 3rd | Nishith Joshi (Contact: 7984761058) |
-| **Battledrome (Brawl Stars)** | 1st | Dhruvam Panchal (Contact: 7863896195) |
-| **Battledrome (Valorant)** | 1st | Ved Ghule (Contact: 7984539372) |
-| **Battledrome (Clash Royale)** | 1st | Contact: 9687700960 |
-| **Battledrome (Clash Royale)** | 2nd | Contact: 7990904761 |
-| **Battledrome (Rocket League)** | 1st | Contact: 8818818080 |
-| **Battledrome (Rocket League)** | 2nd | Contact: 9998750027 |
+| **Battledrome (BGMI)** | 1st | Mihir Chauhan |
+| **Battledrome (BGMI)** | 2nd | Het Gohil |
+| **Battledrome (BGMI)** | 3rd | Nishith Joshi |
+| **Battledrome (Brawl Stars)** | 1st | Dhruvam Panchal |
+| **Battledrome (Valorant)** | 1st | Ved Ghule |
+| **Battledrome (Clash Royale)** | 1st | Student Winner |
+| **Battledrome (Clash Royale)** | 2nd | Student Winner |
+| **Battledrome (Rocket League)** | 1st | Student Winner |
+| **Battledrome (Rocket League)** | 2nd | Student Winner |
