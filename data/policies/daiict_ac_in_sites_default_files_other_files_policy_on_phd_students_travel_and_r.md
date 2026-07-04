@@ -11,6 +11,10 @@ pdf_name: "Policies/PhD Student Travel and Research Allowance Policy"
 
 # Policies/PhD Student Travel and Research Allowance Policy
 
+## Version History
+- **Ver 1.0** (Effective: 01 January 2026) — First version of this policy; no prior policy existed.
+
+
 ## Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.

@@ -151,30 +151,7 @@ The focus of the IQAC is to develop a system for conscious and consistent improv
 - Minutes of IQAC Meeting â€” 25 Sep 2019
 - ATR of IQAC Meeting â€” 25 Sep 2019
 
-### AY: 2018-19
 
-- Minutes of IQAC Meeting â€” 21 Feb 2019
-- ATR of IQAC Meeting â€” 21 Feb 2019
-- Minutes of IQAC Meeting â€” 20 Nov 2018
-
-### AY: 2017-18
-
-- Minutes of the meeting held on 20th March 2018
-
-### AY: 2016-17
-
-- Minutes of the third meeting held on 6th March 2017
-- Agenda for IQAC â€” Sep 2016
-- Annexure-I
-- Annexure-II
-- Annexure-V
-- IQAC MoM (revised)
-
-### AY: 2015-16
-
-- Agenda for IQAC â€” July 2015
-- IQAC Dean-AP Report â€” July 2015
-- Minutes of the First Meeting of Internal Quality Assurance Cell
 
 # Reports (AQAR)
 
@@ -185,8 +162,7 @@ The focus of the IQAC is to develop a system for conscious and consistent improv
 | Aug 2021 â€“ Jul 2022 | DA-IICT AQAR |
 | Aug 2020 â€“ Jul 2021 | DA-IICT AQAR |
 | Aug 2019 â€“ Jul 2020 | DA-IICT AQAR |
-| Jul 2018 â€“ Jul 2019 | DA-IICT AQAR |
-| Jul 2017 â€“ Jun 2018 | DA-IICT AQAR |
+
 
 # Important Information
 

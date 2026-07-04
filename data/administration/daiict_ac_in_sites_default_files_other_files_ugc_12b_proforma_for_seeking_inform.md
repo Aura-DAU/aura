@@ -32,16 +32,8 @@ al
 
 a
 
-Dhirubhai Ambani
-University
-
-GA-NET Ro rath shores
-
-a —
-
-Ke
-
-Se”
+Dhirubhai Ambani University
+DA-IICT Road, Gandhinagar - 382007, Gujarat, (India)
 
 INFORMATION FROM STATE (P PRIVATE) UNIVERSITIES
 

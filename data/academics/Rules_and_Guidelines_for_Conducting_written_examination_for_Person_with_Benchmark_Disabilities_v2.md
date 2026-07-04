@@ -1,6 +1,6 @@
 ---
 title: "Rules And Guidelines For Conducting Written Examination For Person With Benchmark Disabilities"
-url: "https://daiict.ac.in/"
+url: "https://intranet.daiict.ac.in/academics/Rules & Guidelines for Conducting written examination for Person with Benchmark Disabilities.pdf"
 category: "Academics"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-06-10"
@@ -47,4 +47,3 @@ On request, following arrangements can be done by CoE:
 The examination hall for such student(s) can be arranged on ground floor to make it easy accessible for the
 persons with specific disabilities. CoE will also notify the corresponding course instructor about such
 arrangement.
-

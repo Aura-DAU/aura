@@ -1,6 +1,13 @@
 import { findUser, verifyPassword } from "@/lib/db/user-db"
 import { getThreadsForUser } from "@/lib/db/chat-db"
 import { NextResponse } from "next/server"
+import { z } from "zod"
+
+const loginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+  role: z.enum(["student", "parent", "faculty"])
+})
 
 export async function POST(req: Request) {
   let body: unknown
@@ -8,16 +15,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
 
-  const { email, password, role } = body as Record<string, string>
-
-  if (!email || !password || !role) {
-    return NextResponse.json({ error: "All fields are required" }, { status: 400 })
-  }
-  if (role !== "student" && role !== "parent" && role !== "faculty") {
-    return NextResponse.json({ error: "Invalid role" }, { status: 400 })
+  const parsed = loginSchema.safeParse(body)
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0]?.message || "Invalid input" }, { status: 400 })
   }
 
-  const user = await findUser(email, role as "student" | "parent" | "faculty")
+  const { email, password, role } = parsed.data
+
+  const user = await findUser(email, role)
   if (!user || !verifyPassword(password, user.passwordHash)) {
     return NextResponse.json({ error: "Invalid email or password" }, { status: 401 })
   }

@@ -37,16 +37,16 @@ campus.
 7. If a student is found violating any of the above rule, disciplinary action will be taken 
 against the student (and the parents will also be informed) as follows:
 
- 
+ 
 First offence: The student will be fined Rs. 300. 
- 
+ 
 Second offence: The student will be fined Rs. 1000. 
- 
+ 
 Third offence: The student will be fined Rs. 3000 and the student will be permanently 
 debarred from keeping a vehicle on the campus. The student will also be put under 
 Disciplinary Probation with immediate effect till the date of his/her graduation and 
 may be asked to appear before Disciplinary Action Committee (DAC).  
- 
+ 
 If a particular vehicle is involved in three offences, the owner shall be permanently 
 debarred from keeping any vehicle on the campus. This is irrespective of whether or 
 not the owner was involved in any of the offences.

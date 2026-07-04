@@ -17,45 +17,18 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 
 ## Main Content
 
-Certificate No:- — ERI/ERC/20250331/9796
+# FSSAI Eat Right Campus Certificate
 
-Ss nee eae Ud ;
-MINISTRY OF
+**Certificate Number**: ERI/ERC/20250331/9796
+**Certified Institution**: Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar, Gujarat
+**Certification Category**: Eat Right Campus
+**Rating / Grade**: Exemplary (5-Star Rating)
+**Validity Period**: 15 May, 2025 to 14 May, 2027
 
-AB. HEALTH AND
-“== FAMILY WELFARE
+### Stakeholders & Partners
+- **Authority**: Food Safety and Standards Authority of India (FSSAI), Ministry of Health and Family Welfare, Government of India
+- **Implementation Partner**: FSSAI & FDCA Gujarat
+- **Auditing Partner**: QACS International Pvt. Ltd.
+- **Training Partner**: Gyancity Educational Trust
+- **Signatory**: Shri U. S. Dhyani, Executive Director, FSSAI
 
-Food Safety and Standards Authority of India
-
-DA-ITCT UNIVERSITY
-GANDHINAGAR , GUJARAT
-
-is certified as
-
-eS Eat Right
-
-CLAIM] P JUS”
-
-as per guideline established by
-
-Food Safety and Standards Authority of India
-for the period of 15 May, 2025 - 14 May, 2027
-
-KKK KK
-EXEMPLARY
-
-epee
-
-Shri U. S. Dhyani
-
-Executive Director, FSSAI
-(f ; \
-
-Implementation Partner
-WR FSSAI & FDCA GUJARAT
-
-Auditing Partner
-QACS International Pvt. Ltd.
-
-Training Partner
-GYANCITY EDUCATIONAL TRUST

@@ -69,17 +69,23 @@ class AuraChat:
                         subjects_str = ", ".join(subjects)
                         retrieval_query = f"{query} (Context: student data related to {subjects_str})"
 
-            # Fix Bug5 (revised): inject "Fees Structure Tuition" into the
-            # retrieval query for fee-intent questions so BM25 can keyword-match
-            # the section heading even when the question is generic.
-            # Fix AC2: narrowed keyword list — "cost", "charges", "payment" were
-            # too broad and caused false augmentation for unrelated queries like
-            # "cost of living near campus" or "hostel charges for AC room".
-            # Only trigger on words that unambiguously signal fee intent.
-            FEE_KEYWORDS = ["fee", "fees", "tuition", "caution deposit", "semester fee"]
-            query_lower_check = retrieval_query.lower()
-            if any(kw in query_lower_check for kw in FEE_KEYWORDS):
-                retrieval_query = retrieval_query + " Fees Structure Tuition"
+            # Fix HARDCODE-REMOVAL: previously this function used four separate
+            # static Python keyword lists (FEE_KEYWORDS, MYTH_BUST_PATTERNS,
+            # LAUNDRY_KEYWORDS, MOVEIN_KEYWORDS) here in aura_chat.py to
+            # pattern-match query intent and bolt extra words onto the
+            # retrieval query. This doesn't generalize: every new entity,
+            # policy, or vocabulary gap found in testing required editing
+            # this file and redeploying a new static list.
+            #
+            # All of that logic has been moved into retrieval_pipeline.py
+            # get_context() (Fix QP6/RP-MYTH), which runs AFTER the LLM-driven
+            # query_planner classifies retrieval_intent and is_claim_verification
+            # generically for every query — no static keyword lists, no
+            # per-topic hardcoding, and it automatically covers any future
+            # entity, policy, or vocabulary the planner LLM can recognize.
+            # The query_rewriter (Fix QR2) separately handles colloquial/vague
+            # vocabulary expansion (e.g. "dhobi", "mattress") using the same
+            # LLM-driven approach instead of static synonym lists.
 
             retrieval_result = (
                 self.pipeline.get_context(
@@ -181,9 +187,22 @@ class AuraChat:
             }
         except Exception as e:
             import traceback
+            err_str = str(e).lower()
             print("Error in AuraChat.chat:", e)
             traceback.print_exc()
+            # Fix TO1: differentiate timeout/rate-limit errors from generic errors
+            # so users get a more helpful message (Q60, Q61 — 323s/105s timeouts).
+            if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
+                msg = (
+                    "I'm experiencing a temporary connection issue. "
+                    "Please try your question again in a few seconds."
+                )
+            else:
+                msg = (
+                    "Sorry, I encountered an error while generating a response. "
+                    "Please try again."
+                )
             return {
-                "answer": "Sorry, I encountered an error while generating a response. Please try again.",
+                "answer": msg,
                 "sources": []
             }
