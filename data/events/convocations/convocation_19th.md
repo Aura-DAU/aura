@@ -37,6 +37,8 @@ Gold Medallists | Media Coverages | 19th Convocation Booklet
 
 The President of DA-llCT, Smt Tina Anil Ambani , cordially invites you to the Nineteenth Convocation of Dhirubhai Ambani Institute of Information and Communication Technology to be held on Saturday, 18 th January 2025 .
 
+At the Nineteenth Convocation, Dhirubhai Ambani University (DAU) conferred degrees upon a total of 653 graduating students across undergraduate, postgraduate, and doctoral programmes. This included the first graduating cohort of B.Tech in Mathematics & Computing (43 graduates) and M.Sc in Agriculture Analytics (29 graduates).
+
 Dr. S. Somanath, Distinguished Scientist and Secretary, Department of Space and Chairman, Space Commission and Chairman, Indian Space Research Organisation has kindly consented to be the Chief Guest of the function.
 
 The Convocation proceedings will start at 17:00 hours at the Students Activity Centre, DA-llCT Campus, Gandhinagar .
@@ -61,7 +63,9 @@ He has published papers in journals and conferences in the area of structural dy
 
 # Important Information
 
-_No important information found._
+- **Total Graduates:** 653 students graduated across undergraduate, postgraduate, and doctoral programmes.
+- **B.Tech in Mathematics & Computing:** 43 graduates (First Batch).
+- **M.Sc in Agriculture Analytics:** 29 graduates (First Batch).
 
 # Related Links
 
