@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # SBG Team and Other Important Committees
 
-## Document Overview
-This document was converted from an official SBG XLSX file (`SBG Team & Other Important Committees.xlsx`) into RAG-optimized structured Markdown.
-
 ## SBG Core Team
 
 - **Club/Committee:** SBG Core Team | **Name:** Yash Judal | **Role:** Convener

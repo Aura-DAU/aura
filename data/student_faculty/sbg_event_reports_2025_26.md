@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Event Reports 2025-26
 
-## Document Overview
-This document was converted from an official SBG XLSX file (`Event Reports 2025-26_.xlsx`) into RAG-optimized structured Markdown using logical Entity Card formatting.
-
 ## Event Reports: 
 
 ### Event: Entrepreneurship: In the Age of AI
@@ -1754,4 +1751,3 @@ For online events, you may upload the official poster or Instagram post instead.
 - **Event Start Date:** 2026-06-13 00:00:00
 - **Event End date:** 2026-06-20 00:00:00
 - **Awards and Achievements (If applicable) (with access to "anyone with the link")  (Docs/word format):** https://docs.google.com/spreadsheets/d/1Ea8a_As0ZW93OtBA9IHdsaPM3TfL5XkaNMEButn8-Cg/edit?usp=sharing
-

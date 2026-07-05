@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Club Committee C_DCs Information 2026-27
 
-## Document Overview
-This document was converted from an official SBG XLSX file (`Club_Committee C_DCs Information 2026-27_.xlsx`) into RAG-optimized structured Markdown using logical Entity Card formatting.
-
 - **Email Address:** cultural@dau.ac.in | **Club/Committee Name:** Cultural Committee | **Convener Name:** Meet Jain | **Convener Student ID:** 202301073 | **Dy.  Convener Name:** Het Ladani | **Dy.  Convener Student ID:** 202301102 | **Faculty Mentor Name:** Sreeja Rajendran
 
 - **Email Address:** cmc@dau.ac.in | **Club/Committee Name:** CMC- Cafeteria Management Committee | **Convener Name:** Prince Sojitra | **Convener Student ID:** 202301126 | **Dy.  Convener Name:** Varshil Shah | **Dy.  Convener Student ID:** 202401194 | **Faculty Mentor Name:** Pankaj Kumar

@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # List of Club Committee Core Members Winter 2026
 
-## Document Overview
-This document was converted from an official SBG XLSX file (`List of Club_Committee Core Members Winter 2026.xlsx`) into RAG-optimized structured Markdown using logical Entity Card formatting.
-
 ## Committee / Club: Acad
 
 - **Club/Committee:** Acad | **Name:** Jas Mehta | **Student ID:** 202301432 | **Position:** Convenor

@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Club Committee Data 24-25
 
-## Document Overview
-This document was converted from an official SBG XLSX file (`Club_Committee Data 24-25.xlsx`) into RAG-optimized structured Markdown using logical Entity Card formatting.
-
 ## Committee / Club: Academic Committee
 
 - **Club/Committee:** Academic Committee | **Name:** Yash Tarpara | **Student ID:** 202201422 | **Position:** Convener | **Number:** 9925454911

@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Event Reports Winter Sem 25
 
-## Document Overview
-This document was converted from an official SBG XLSX file (`Event Reports Winter Sem 25.xlsx`) into RAG-optimized structured Markdown using logical Entity Card formatting.
-
 ## Event Reports: 
 
 ### Event: Introduction to British Parliamentary Debate and IIMA auditions
@@ -900,4 +897,3 @@ https://docs.google.com/spreadsheets/d/1UxaLRqJ-Lo1LWb9zWjpCVxl0ZrGU46OcOF261yqB
 - **Winner's Details (Also mention the prize details along with amount):** Unprized Event
 - **Drive Link (you can share a drive link of event photos/videos (minimum 3 photos required) with access to 'anyone with the link') (If online event then share the poster/instagram post):** https://drive.google.com/drive/folders/1Ji0EHRBxufO5pUKx8AHOZdK9twocxwWU
 - **Other Details:** None
-

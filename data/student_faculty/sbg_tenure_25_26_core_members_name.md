@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Tenure 25-26 Core Members Name
 
-## Document Overview
-This document was converted from an official SBG XLSX file (`Tenure 25-26 Core Members Name.xlsx`) into RAG-optimized structured Markdown using logical Entity Card formatting.
-
 ## Committee / Club: IEEE
 
 - **Club/Committee:** IEEE | **Name:** Natansh Shah | **Role:** Chair

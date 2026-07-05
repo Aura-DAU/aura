@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Anti-Ragging Week Event Report Format by QAC
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Anti-Ragging Week Event Report - format by QAC.docx`) into RAG-optimized structured Markdown.
-
 Photos (Geo-tagged):
 
 https://drive.google.com/drive/folders/1j08GGz--eUOFsC9EfPDOmnpjXPSEZ7WN?usp=drive_link
@@ -66,4 +63,3 @@ Deputy Registrar
 - **Organized/Funded by:** Under the supervision of the Dean (Students) and with active participation from the Student Body Government (SBG)
 
 - **Report Prepared by:** Dean (Students) Office
-

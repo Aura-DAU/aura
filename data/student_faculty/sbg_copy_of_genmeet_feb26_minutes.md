@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Copy of GenMeet Feb26 Minutes
 
-## Document Overview
-This document was converted from an official SBG PDF file (`Copy of GenMeet_Feb26_Minutes.pdf`) into RAG-optimized structured Markdown.
-
 Minutes of Meeting - SBG General Meet 18–19 February 2026
 
 Student Body Government

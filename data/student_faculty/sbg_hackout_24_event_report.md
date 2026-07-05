@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Hackout 24 Event Report
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Hackout _24 Event Report.docx`) into RAG-optimized structured Markdown.
-
 Photos (Geo-tagged):
 
 https://drive.google.com/drive/folders/1Rtp7920eDAXLjQaE06EDcZ1GknTv39mA
@@ -48,4 +45,3 @@ IQAC Director (Mandatory)
 - **Total number of participants:** Around 1800
 
 - **Organized/Funded by:** Annual Festival Committee / Sponsored event
-

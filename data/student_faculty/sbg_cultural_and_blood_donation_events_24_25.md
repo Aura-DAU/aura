@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Cultural and blood donation events 24 25
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Cultural and blood donation events 24-25.docx`) into RAG-optimized structured Markdown.
-
 Dhirubhai Ambani University
 
 Student Body Government (SBG)

@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Indent 2026 27
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Indent_2026-27 .docx`) into RAG-optimized structured Markdown.
-
 Dhirubhai Ambani University
 
 Student Body Government (SBG)
@@ -48,4 +45,3 @@ Madhav Bhatt                                                                    
 (Treasurer, SBG)                                                                                      (Dean Students)
 
 ### Table 1: Document Data
-

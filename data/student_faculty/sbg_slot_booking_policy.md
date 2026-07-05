@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Slot Booking Policy
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Slot Booking Policy.docx`) into RAG-optimized structured Markdown.
-
 ## Slot Booking Policy
 
 Club/Committee Division: All clubs/ committees are divided into 3 groups. (See Appendix)

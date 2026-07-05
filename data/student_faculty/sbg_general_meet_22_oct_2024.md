@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # General Meet  22 Oct 2024
 
-## Document Overview
-This document was converted from an official SBG PPTX file (`General Meet_ 22 Oct 2024.pptx`) into RAG-optimized structured Markdown.
-
 ### SBG General Meet
 
 ### DATE :- 22/10/2024

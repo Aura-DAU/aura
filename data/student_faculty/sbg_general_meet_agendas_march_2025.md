@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # General Meet Agendas (March 2025)
 
-## Document Overview
-This document was converted from an official SBG PPTX file (`General Meet Agendas (March 2025).pptx`) into RAG-optimized structured Markdown.
-
 ### General Meet Agendas
 
 - Student Body Government

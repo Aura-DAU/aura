@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # SBG General Meet March 25 MoM
 
-## Document Overview
-This document was converted from an official SBG PDF file (`SBG General Meet March_25 MoM.pdf`) into RAG-optimized structured Markdown.
-
 SBG General Meet [Winter 2025] Minutes of the Meeting Date: 17/03/2025 Time: 7:00 PM onwards Location: LT-3 Attendees: e SBG Core e All committee members, IEEE SB, Sambhav, DCEI and all club cores (except Heritage Club) e General students as audience Agendas: Club voting rights Dormant Clubs Process Increase in internship period of MTech VLSI and WCSP students Increase in wifi quota Impeachment process of SBG core Felicitation of sports team members and captains Addition of one more selection seat for 1st year students in SPC Proposal to increase a second year election seat in TSC . Formation of core + plans for future of Sambhav 10. Increase in 3 selection seats (2 general and 1 for third year) for
 
 AFC (Synapse) 11. Farewell/Freshers Committee consisting of 2nd and 3rd year students 12. Yearbook Introduction by Press Club NNW EARC©
@@ -71,4 +68,3 @@ A proposal was made highlighting the increased workload in the committee compare
 
 ### 12, Introduction of yearbook by Press Club:
  The Press Club has proposed taking responsibility for creating the yearbook for future batches. They plan to collect data from students and professors while incorporating photos from various events and fests. Additionally, they aim to minimize costs for students while ensuring the successful execution of the yearbook.
-

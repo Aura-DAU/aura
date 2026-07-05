@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Youth Run 24 Event Report
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Youth Run _24 Event Report.docx`) into RAG-optimized structured Markdown.
-
 Photos (Geo-tagged):
 
 https://drive.google.com/drive/u/0/folders/1RHHk5uIJyKArb4aeN-Nj90YxnGzil3TW
@@ -40,4 +37,3 @@ IQAC Director (Mandatory)
 - **Participant’s Profile  (Students, Senior Students, Faculty  Members, Researchers, Industry experts – internal and  external  etc.):** Students
 - **Total number of participants:** 1700
 - **Organized/Funded by:** Annual Festival Committee / Sponsored event
-

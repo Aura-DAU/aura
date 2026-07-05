@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Tarang 2024 Event Report
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Tarang 2024 - Event Report.docx`) into RAG-optimized structured Markdown.
-
 Photos (Geo-tagged):
 
 https://drive.google.com/drive/folders/1mw3kTNwuRHdp-xKY549pAnpIXPtxDY-1
@@ -42,4 +39,3 @@ IQAC Director (Mandatory)
 - **Participant’s Profile  (Students, Senior Students, Faculty  Members, Researchers, Industry experts – internal and  external  etc.):** Students, Senior students, Alumnus, Faculty members, Government officials
 - **Total number of participants:** 6000
 - **Organized/Funded by:** Team Tarang/Sponsored Event
-

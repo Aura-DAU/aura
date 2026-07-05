@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Waltz 2025 Event Report
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Waltz 2025 - Event Report.docx`) into RAG-optimized structured Markdown.
-
 Photos (Geo-tagged):
 
 https://drive.google.com/drive/u/0/folders/1i4rbSo5DqKn4takZ6oCP05uNLoCNFQiU
@@ -40,4 +37,3 @@ IQAC Director (Mandatory)
 - **Participant’s Profile  (Students, Senior Students, Faculty  Members, Researchers, Industry experts – internal and  external  etc.):** Students
 - **Total number of participants:** 120-150 including audience
 - **Organized/Funded by:** Cultural Committee
-

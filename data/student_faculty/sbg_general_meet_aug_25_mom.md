@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # SBG General Meet Aug 25 MoM
 
-## Document Overview
-This document was converted from an official SBG PDF file (`SBG General Meet Aug_25 MoM.pdf`) into RAG-optimized structured Markdown.
-
 SBG General Meeting [August 2025]
 
 Minutes of the Meeting

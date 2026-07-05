@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # August 2025 SBG event report
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`August 2025 SBG event report.docx`) into RAG-optimized structured Markdown.
-
 Dhirubhai Ambani University
 
 Student Body Government (SBG)

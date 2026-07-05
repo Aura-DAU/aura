@@ -12,9 +12,7 @@ authorization: ["student", "faculty"]
 
 # Event Brief 25-26
 
-## Document Overview
-
-- **Club/Committee:** Event | **Details:** This document was converted from an official SBG PDF file (`Event Brief 25-26.pdf`) into RAG-optimized structured Markdown. IEEE Student Branch INDGenius Al Summit (14th September 2025) |EEE Student Branch DAU organized the INDGenius Al Summit 2025, a one-day event focused on exploring the impact of Artificial Intelligence across domains such as Generative Al and Cybersecurity. The summit featured expert talks, panel discussions, and interactive sessions aimed at encouraging meaningful discussions on emerging Al technologies, innovation, and India’s evolving role in the global Al landscape.
+- **Club/Committee:** Event | **Details:**  IEEE Student Branch INDGenius Al Summit (14th September 2025) |EEE Student Branch DAU organized the INDGenius Al Summit 2025, a one-day event focused on exploring the impact of Artificial Intelligence across domains such as Generative Al and Cybersecurity. The summit featured expert talks, panel discussions, and interactive sessions aimed at encouraging meaningful discussions on emerging Al technologies, innovation, and India’s evolving role in the global Al landscape.
 
 - **Club/Committee:** Event | **Details:** Bootcamps : ML edition (6th - 7th September & 13th - 14th September 2025) |EEE Student Branch DAU organized The Bootcamps: Machine Learning Edition to provide students with a practical and hands-on introduction to Artificial Intelligence and Machine Learning. The sessions covered MATLAB fundamentals, Al concepts, and deep learning, while industry speakers shared insights into real-world tools, workflows, and applications. The bootcamp encouraged experiential learning and helped students gain exposure to industry-oriented technologies and practices. i.Fest '25: Pixel Paradox (14th - 17th November 2024) |IEEE Student Branch DAU organized i.Fest '25 — Pixel Paradox, Gujarat's leading techno-cultural festival, bringing together innovation, creativity, and technical excellence through a diverse lineup of over 20 technical events.
 

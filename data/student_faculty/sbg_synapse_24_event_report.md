@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Synapse 24 Event Report
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Synapse _24 Event Report.docx`) into RAG-optimized structured Markdown.
-
 Photos (Geo-tagged):
 
 https://drive.google.com/drive/folders/1iqTRNsxiA4iCvekq9GKadiddtp7jlf_w?usp=sharing
@@ -48,4 +45,3 @@ IQAC Director (Mandatory)
 - **Total number of participants:** (not provided)
 
 - **Organized/Funded by:** Annual Festival Committee / Sponsored event
-

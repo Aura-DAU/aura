@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # SBG Constitution 25 26
 
-## Document Overview
-This document was converted from an official SBG PDF file (`SBG_Constitution 25-26.pdf`) into RAG-optimized structured Markdown.
-
 ### THE CONSTITUTION OF
 
 ### STUDENT BODY GOVERNMENT

@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # MoM Template Draft
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`MoM_Template_Draft.docx`) into RAG-optimized structured Markdown.
-
 ATTENDEES
 
 ## 1. [Agenda 1 Title]

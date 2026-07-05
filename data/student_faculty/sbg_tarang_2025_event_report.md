@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Tarang 2025 Event Report
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Tarang 2025 Event Report.docx`) into RAG-optimized structured Markdown.
-
 Photos (Geo-tagged):
 
 https://drive.google.com/drive/folders/1pB3bRs6HATi5J2I0CGONqkX94CehqoyZ
@@ -40,4 +37,3 @@ IQAC Director (Mandatory)
 - **Participant’s Profile  (Students, Senior Students, Faculty  Members, Researchers, Industry experts – internal and  external  etc.):** Students, Senior Students, Alumnus, Faculty
 - **Total number of participants:** 7000
 - **Organized/Funded by:** Team Tarang ‘25 / Sponsored Event
-

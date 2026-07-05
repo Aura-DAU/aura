@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # EC Constitution2026
 
-## Document Overview
-This document was converted from an official SBG PDF file (`EC_Constitution2026.pdf`) into RAG-optimized structured Markdown.
-
 Contents
 
 1. The Election Commission .................................................................... 1

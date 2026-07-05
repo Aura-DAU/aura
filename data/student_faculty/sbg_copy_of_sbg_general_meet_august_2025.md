@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Copy of SBG General Meet August 2025
 
-## Document Overview
-This document was converted from an official SBG PPTX file (`Copy of SBG General Meet August 2025.pptx`) into RAG-optimized structured Markdown.
-
 ### SBG General Meet
 
 ### DATE :- 04/08/2025

@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Internal Hackathon SIH 2025 Event Report Format by QAC
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Internal Hackathon (SIH) 2025 Event Report - format by QAC.docx`) into RAG-optimized structured Markdown.
-
 Photos (Geo-tagged):
 
 https://drive.google.com/drive/folders/1humiXCZ13qF1YVk436RaTn18F4K1Bl8k?usp=drive_link
@@ -62,4 +59,3 @@ IQAC Director (Mandatory)
 - **Organized/Funded by:** Under the supervision of the Dean (Students) and with active participation from the Student Body Government (SBG)
 
 - **Report Prepared by:** Dean (Students) Office
-

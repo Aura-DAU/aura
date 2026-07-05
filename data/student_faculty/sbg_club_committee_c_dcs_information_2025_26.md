@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Club Committee C_DCs Information 2025-26
 
-## Document Overview
-This document was converted from an official SBG XLSX file (`Club_Committee C_DCs Information 2025-26_.xlsx`) into RAG-optimized structured Markdown using logical Entity Card formatting.
-
 - **Email Address:** sbg_academics@dau.ac.in | **Club/Committee Name:** Academic Committee | **Convener Name:** Hari Sharma | **Convener Student ID:** 202401195 | **Dy. Convener Name:** Pranamya Sanghvi | **Dy. Convener Student ID:** 202401165 | **Faculty Mentor Name:** Prof. Bhaskar Chaudhury
 
 - **Email Address:** ai_club@dau.ac.in | **Club/Committee Name:** AI Club | **Convener Name:** Siddharth Rambhia | **Convener Student ID:** 202301072 | **Dy. Convener Name:** Jainil Jagtap | **Dy. Convener Student ID:** 202301032 | **Faculty Mentor Name:** Shruti Bhilare

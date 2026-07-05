@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Format for Awards & Achievements Record
 
-## Document Overview
-This document was converted from an official SBG DOCX file (`Format for Awards & Achievements Record.docx`) into RAG-optimized structured Markdown.
-
 Awards and Achievements (Students) for Cultural & Other Events
 
 Details of Awards Won by DAU students in various competitions, such as Cultural and Other events.

@@ -12,9 +12,6 @@ authorization: ["student", "faculty"]
 
 # Guidelines for Indents
 
-## Document Overview
-This document was converted from an official SBG PDF file (`Guidelines for Indents.pdf`) into RAG-optimized structured Markdown.
-
 Guidelines for Indents
 
 Procedure for Clearance Indents as per the SBG Constitution:
