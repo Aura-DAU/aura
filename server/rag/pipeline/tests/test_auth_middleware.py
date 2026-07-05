@@ -10,7 +10,6 @@ import sys, os, datetime
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-import pytest
 import jwt
 from fastapi import FastAPI, Depends
 from fastapi.testclient import TestClient

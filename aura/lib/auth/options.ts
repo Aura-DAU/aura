@@ -79,6 +79,9 @@ export const authOptions: NextAuthOptions = {
           if (credentials?.email === "demo.faculty@daiict.ac.in" && credentials?.password === "Faculty@123") {
             return { id: "demo-fac", email: credentials.email, name: "Demo Faculty" }
           }
+          if (credentials?.email === "demo.admin@dau.ac.in" && credentials?.password === "Admin@123") {
+            return { id: "demo-admin", email: credentials.email, name: "Demo Admin" }
+          }
           return null
         }
       })
@@ -128,6 +131,10 @@ export const authOptions: NextAuthOptions = {
           token.role = "faculty"
           token.erpId = "FAC123"
           token.department = "ICT"
+        } else if (user.email === "demo.admin@dau.ac.in") {
+          token.role = "admin"
+          token.erpId = "ADM123"
+          token.department = "IT"
         } else {
           const erpData = await lookupErpIdentity(user.email)
           if (erpData) {

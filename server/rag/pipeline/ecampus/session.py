@@ -120,5 +120,6 @@ class ECampusSession:
         try:
             self.http.get(ECAMPUS_BASE_URL + "/Logout.aspx", timeout=10)
         except requests.RequestException:
+            # Swallow connection exceptions on best-effort logout
             pass
         self._logged_in = False

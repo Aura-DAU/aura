@@ -10,7 +10,8 @@ def clean_vault():
     for erp_id in ("S1", "S2"):
         try:
             vault.unlink_credentials(erp_id)
-        except Exception:
+        except vault.CredentialsNotLinked:
+            # Swallow if credentials were not linked yet
             pass
         for faculty_id in ("F1", "F2"):
             vault.revoke_advisor_consent(erp_id, faculty_id)
