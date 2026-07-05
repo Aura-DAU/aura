@@ -158,6 +158,10 @@ In case of tie, the marks in C programming section and QA & logical reasoning se
 
 ## FAQs
 
+### Does the M.Sc. (IT) program offer any specialization tracks?
+
+No. The M.Sc. (IT) is a single-stream, general Information Technology program. It does not offer separate specialization tracks.
+
 ### What is program structure of M.Sc. (IT)?
 
 The M.Sc. (IT) program follows a full time four-semester pattern and the curriculum consists of three semesters of course work followed by a one-semester project work on a specified topic. There is also a summer internship of duration of four weeks that students need to take up after the second semester and before the start of third semester.
