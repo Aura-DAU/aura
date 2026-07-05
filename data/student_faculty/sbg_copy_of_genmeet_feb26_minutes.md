@@ -45,11 +45,11 @@ as a single delegate.
 
 Minutes of Meeting - SBG General Meet 18–19 February 2026
 
-1. Increment in Seats - Student Placement Cell
+### 1. Increment in Seats - Student Placement Cell
 
 Nature
 
-Voting Agenda
+### Voting Agenda
 
 Proposed By
 
@@ -65,9 +65,10 @@ SPC proposed an increment of two seats through open selection:
 
 followed by MSc DS.
 
-Discussion
+### Discussion
 
-Point raised: Whether the seat increment was actually necessary, given the existing
+Point raised:
+ Whether the seat increment was actually necessary, given the existing
 
 committee size.
 
@@ -77,7 +78,8 @@ at saturation. Two additional members would provide meaningful operational relie
 
 allow the committee to function more efficiently during peak placement season.
 
-Point raised (on the First Year seat): Why should a first-year student be given a
+### Point raised (on the First Year seat):
+ Why should a first-year student be given a
 
 seat when they will not be participating in the placement drive itself?
 
@@ -91,19 +93,20 @@ exposure would mean they are significantly better prepared to take on responsibi
 
 No further points were raised.
 
-Voting Result
+### Voting Result
 
-Requirement: 66% (supermajority, as this is a seat-increment agenda)
+Requirement:
+ 66% (supermajority, as this is a seat-increment agenda)
 
 Result: PASSED - 86.1% votes in favour
 
 Minutes of Meeting - SBG General Meet 18–19 February 2026
 
-2. Co-Curricular Activities (CCA) Course
+### 2. Co-Curricular Activities (CCA) Course
 
 Nature
 
-Non-Voting Discussion Agenda
+### Non-Voting Discussion Agenda
 
 Proposed By
 
@@ -135,7 +138,8 @@ for mere participation could be gamed as nearly every student could claim it wit
 
 meaningful effort.
 
-Outcome after deliberation: Acad consulted with the house and reached a consensus
+### Outcome after deliberation:
+ Acad consulted with the house and reached a consensus
 
 to introduce a tiered attendance structure specifically for hackathons, recognising different
 
@@ -149,21 +153,26 @@ certified.
 
 • 5 attendance units - for winning the hackathon.
 
-Discussion - Weekend vs. Weekday Scheduling of CCA Events
+Discussion - Weekend vs.
 
-In favour of weekends: Students pointed out that weekdays are hectic due to labs
+### Weekday Scheduling of CCA Events
+
+In favour of weekends:
+ Students pointed out that weekdays are hectic due to labs
 
 and scheduled coursework, making it difficult to meaningfully participate in co-curricular
 
 events. Weekends would allow for better engagement and less fatigue.
 
-Against weekends: Others felt strongly that weekends are personal time - to unwind,
+### Against weekends:
+ Others felt strongly that weekends are personal time - to unwind,
 
 socialise outside of campus, and pursue their own interests - and that mandating CCA
 
 events on weekends would encroach on that.
 
-Outcome: No consensus was reached. The decision on event scheduling is left to the
+### Outcome:
+ No consensus was reached. The decision on event scheduling is left to the
 
 discretion of individual clubs and committees, who may choose the timing that best suits
 
@@ -171,11 +180,11 @@ their members and audience.
 
 Minutes of Meeting - SBG General Meet 18–19 February 2026
 
-3. Formation of New Club - eSports Social
+### 3. Formation of New Club - eSports Social
 
 Nature
 
-Voting Agenda
+### Voting Agenda
 
 Proposed By
 
@@ -191,9 +200,10 @@ to create a space for students to connect with their peers through gaming, rathe
 
 build a competitive team.
 
-Discussion
+### Discussion
 
-Point raised: There is no need to formalise such a community. A simple group chat
+Point raised:
+ There is no need to formalise such a community. A simple group chat
 
 would serve the same social bonding purpose, without the overhead of a formal club
 
@@ -205,7 +215,8 @@ and book campus spaces, enabling organised events - something an informal chat g
 
 cannot facilitate.
 
-Counter-argument: The moment the group gains formal structure, a budget, and
+### Counter-argument:
+ The moment the group gains formal structure, a budget, and
 
 organisedevents, itwouldinevitablyshiftitscharacterfromasocialspacetoacompetitive
 
@@ -215,19 +226,20 @@ The proposers were unable to resolve this concern to the satisfaction of a major
 
 house.
 
-Voting Result
+### Voting Result
 
-Requirement: 50% (simple majority)
+Requirement:
+ 50% (simple majority)
 
 Result: FAILED - 39.8% votes in favour
 
 Minutes of Meeting - SBG General Meet 18–19 February 2026
 
-4. Formation of New Club - Fashion Club
+### 4. Formation of New Club - Fashion Club
 
 Nature
 
-Voting Agenda
+### Voting Agenda
 
 Proposed By
 
@@ -251,9 +263,10 @@ The proposers also noted significant interest from students in the first year, a
 
 Masters programmes.
 
-Discussion
+### Discussion
 
-Feasibility concern: Whether there is a sufficient number of genuinely interested
+Feasibility concern:
+ Whether there is a sufficient number of genuinely interested
 
 students to sustain a club of this nature.
 
@@ -261,7 +274,8 @@ Proposers’ response: There is strong interest from a considerable number of st
 
 and the proposers expressed confidence in the club’s ability to attract members.
 
-Suggestion: The club should be required to conduct one or two events before being
+### Suggestion:
+ The club should be required to conduct one or two events before being
 
 formally admitted into the SBG, to demonstrate viability.
 
@@ -277,19 +291,20 @@ organically.
 
 The house accepted this reasoning. No prior-event requirement was imposed.
 
-Voting Result
+### Voting Result
 
-Requirement: 50% (simple majority)
+Requirement:
+ 50% (simple majority)
 
 Result: PASSED - 64.8% votes in favour
 
 Minutes of Meeting - SBG General Meet 18–19 February 2026
 
-5. Amendments to the SBG Constitution
+### 5. Amendments to the SBG Constitution
 
 Nature
 
-Voting Agenda
+### Voting Agenda
 
 Proposed By
 
@@ -327,27 +342,37 @@ A formal impeachment procedure is introduced as follows:
 
 1. Any committee member may initiate an impeachment motion by writing to the Com-mittee Convener, with SBG copied.
 
-2. The Committee Convener will schedule a meeting at a time convenient to the entire
+### 2. The Committee Convener will schedule a meeting at a time convenient to the entire
 
 committee, and invite at least one SBG Core member to serve as mediator.
 
-3. Initiation threshold: If at least 33% of members present at the meeting agree to
+### 3. Initiation threshold:
+
+ If at least 33% of members present at the meeting agree to
 
 proceed, the formal impeachment process commences.
 
-4. Proceedings: Members who raised the motion present their grievances first. The
+### 4. Proceedings:
+
+ Members who raised the motion present their grievances first. The
 
 member against whom the motion is raised then has a full right to defence.
 
-5. Voting threshold: A vote is held. 66% of members present must vote in favour for
+### 5. Voting threshold:
+
+ A vote is held. 66% of members present must vote in favour for
 
 impeachment to be carried.
 
-6. Quorum: At least 50% of the entire committee must be present for the meeting to
+### 6. Quorum:
+
+ At least 50% of the entire committee must be present for the meeting to
 
 be valid.
 
-7. Safeguard: If a meeting is deliberately scheduled at a time when certain members are
+### 7. Safeguard:
+
+ If a meeting is deliberately scheduled at a time when certain members are
 
 unavailable, those members may formally request SBG to reschedule the meeting.
 
@@ -359,7 +384,9 @@ Given that clubs often cater to niche interests, it is possible that the General
 
 Body may reject a club proposal not due to any legitimate objection, but simply out of
 
-unfamiliarity with the niche. To address this:
+unfamiliarity with the niche.
+
+### To address this:
 
 • The Dean of Students and the SBG, after independently hearing out the club’s proposal,
 
@@ -407,9 +434,10 @@ capacity after their term ends. In this role, they may:
 
 This is entirely voluntary and carries no formal authority or responsibility.
 
-Voting Result
+### Voting Result
 
-Requirement: 50% (simple majority)
+Requirement:
+ 50% (simple majority)
 
 Result: PASSED - 92.6% votes in favour
 

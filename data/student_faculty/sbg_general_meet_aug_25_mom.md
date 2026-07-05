@@ -35,13 +35,17 @@ Attendees:
 
 Agendas:
 
-1. MSTC : To increase 1 core seat of the club.
+### 1. MSTC :
+ To increase 1 core seat of the club.
 
-2. Formation of new club : Reader’s society.
+### 2. Formation of new club :
 
-3. To increase 3 open selection seats in Annual Festival Committee
+ Reader’s society.
 
-1. MSTC : To increase 1 core seat of the club.
+### 3. To increase 3 open selection seats in Annual Festival Committee
+
+### 1. MSTC :
+ To increase 1 core seat of the club.
 
 A proposal was put forth to increase the number of core committee seats for MSTC from 6 to 7,
 
@@ -55,11 +59,14 @@ members are capable of handling the tasks, core members are selected for their h
 
 responsibility and commitment, which is crucial for the successful execution of major events.
 
-Conclusion: The agenda was not approved as it failed to reach a passing majority (two thirds
+### Conclusion:
+ The agenda was not approved as it failed to reach a passing majority (two thirds
 
 for seat-increasing agendas).
 
-2. Formation of new club : Reader’s society.
+### 2. Formation of new club :
+
+ Reader’s society.
 
 The Reader's Society expressed interest in coming under the Student Body Governance (SBG)
 
@@ -73,9 +80,10 @@ and other protocols.The club also mentioned that, if formed, they would not requ
 
 allocation or voting rights during the first year of its formation.
 
-Conclusion: The agenda was approved, as it reached a passing majority (50%).
+### Conclusion:
+ The agenda was approved, as it reached a passing majority (50%).
 
-3. To increase 3 open selection seats in the Annual Festival Committee.
+### 3. To increase 3 open selection seats in the Annual Festival Committee.
 
 A proposal was presented highlighting the growing workload within the committee, which is
 
@@ -91,15 +99,20 @@ proposed that the number of core seats be increased to better reflect the curren
 
 contributions.
 
-Conclusion: The agenda was approved, as it reached a passing majority (two thirds for
+### Conclusion:
+ The agenda was approved, as it reached a passing majority (two thirds for
 
 seat-increasing agendas).
 
-4. General Student Concerns (Non Voting Agenda)
+### 4. General Student Concerns (Non Voting Agenda)
 
-Students raised various student concerns. The major ones were as follows:
+Students raised various student concerns.
 
-1. ACs in Classrooms: It was discussed that classrooms of big size, especially CEP 110,
+### The major ones were as follows:
+
+### 1. ACs in Classrooms:
+
+ It was discussed that classrooms of big size, especially CEP 110,
 
 CEP 102, LT 2 and LT 3 require Air Conditioning, as the atmosphere, especially during
 
@@ -107,7 +120,9 @@ humid days year round, gets very uncomfortable, and negatively impacts the
 
 teaching-learning environment.
 
-2. Lab Infrastructure: It was discussed that the lab infrastructure has become really
+### 2. Lab Infrastructure:
+
+ It was discussed that the lab infrastructure has become really
 
 outdated, with a lot of equipment not working properly. Moreover, the state of the
 
@@ -117,23 +132,31 @@ access to sufficient soldering equipment which needs to be looked upon immediate
 
 Moreover, more licenses of Cadence software also need to be made available.
 
-3. Speakers in Classrooms: It was briefly discussed that a lot of classrooms do not have
+### 3. Speakers in Classrooms:
+
+ It was briefly discussed that a lot of classrooms do not have
 
 good quality speakers and this hampers with the teaching learning process, as well.
 
-4. Club Rooms: It was discussed that clubs are facing significant challenges without club
+### 4. Club Rooms:
+
+ It was discussed that clubs are facing significant challenges without club
 
 rooms. This includes but isn’t limited to: no space to practice, no space or limited shared
 
 space to store inventory, problems sharing rooms (eg. Radio and EHC), etc.
 
-5. Gym Infrastructure: It was raised that the Gym Infrastructure is really outdated, with a
+### 5. Gym Infrastructure:
+
+ It was raised that the Gym Infrastructure is really outdated, with a
 
 majority of the machines not working, and the Gym requires a complete rehaul to be
 
 usable.
 
-6. Hostel Renovations: The top floors of Boys Hostel, as well as the entirety of Girls Hostel
+### 6. Hostel Renovations:
+
+ The top floors of Boys Hostel, as well as the entirety of Girls Hostel
 
 are in the need of a major refurbishment. There are leakage problems with top floors, as
 

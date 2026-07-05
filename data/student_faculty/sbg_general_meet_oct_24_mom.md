@@ -17,5 +17,14 @@ This document was converted from an official SBG PDF file (`SBG General Meet Oct
 
 Student Body Government 24-25 SBG General Meet Verdict 22nd October, 2024 1) CMC: Extension of 2 selection seats. 2) Annual Festival Committee: Extension of 3 selection seats
 
-Student Body Government 24-25 3) a. Student Placement Cell: Revised Seat Matrix 3) b. Student Placement Cell: Separate C/DC for UG & PG 3) c. Student Placement Cell: Minimum CPI Criteria of 7 to contest in elections
+Student Body Government 24-25 3) a.
+
+### Student Placement Cell:
+ Revised Seat Matrix 3) b.
+
+### Student Placement Cell:
+ Separate C/DC for UG & PG 3) c.
+
+### Student Placement Cell:
+ Minimum CPI Criteria of 7 to contest in elections
 
