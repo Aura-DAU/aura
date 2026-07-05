@@ -21,6 +21,7 @@ GET  /calendar/status
 import os
 import datetime
 import urllib.parse
+import jwt
 
 from fastapi import APIRouter, HTTPException, Depends, Query
 from fastapi.responses import RedirectResponse
@@ -30,6 +31,9 @@ from pipeline.google_calendar.slot_service import get_available_slots
 from pipeline.google_calendar.token_vault import (
     store_tokens, unlink_calendar, is_linked, CalendarNotLinked
 )
+
+INTERNAL_JWT_SECRET = os.environ.get("INTERNAL_JWT_SECRET", "")
+ALGORITHM           = "HS256"
 
 router = APIRouter(prefix="/calendar", tags=["calendar"])
 
@@ -85,6 +89,15 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
         raise HTTPException(status_code=403, detail="Only faculty can connect a Google Calendar.")
     if not CLIENT_ID:
         raise HTTPException(status_code=500, detail="GOOGLE_CALENDAR_CLIENT_ID not configured.")
+    if not INTERNAL_JWT_SECRET:
+        raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured.")
+
+    # Mint a short-lived signed state token containing the faculty erp_id to prevent CSRF / State Injection
+    state_payload = {
+        "erp_id": identity.erp_id,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
+    }
+    state_token = jwt.encode(state_payload, INTERNAL_JWT_SECRET, algorithm=ALGORITHM)
 
     params = {
         "client_id":     CLIENT_ID,
@@ -93,7 +106,7 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
         "scope":         CALENDAR_SCOPE,
         "access_type":   "offline",   # needed to get refresh_token
         "prompt":        "consent",
-        "state":         identity.erp_id,  # used in callback to identify faculty
+        "state":         state_token, # signed token prevents tampering
     }
     auth_url = GOOGLE_AUTH_URL + "?" + urllib.parse.urlencode(params)
     return RedirectResponse(url=auth_url)
@@ -102,16 +115,30 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
 @router.get("/callback")
 def calendar_oauth_callback(
     code: str = Query(...),
-    state: str = Query(...),  # faculty erp_id
+    state: str = Query(...),  # signed JWT state token
 ):
     """
     OAuth callback. Exchanges auth code for tokens and stores them.
     This endpoint is called by Google's OAuth server — it is NOT
     called by the frontend directly.
-    NOTE: 'state' should be signed/verified in production to prevent CSRF.
     """
     import requests
     import datetime
+
+    if not INTERNAL_JWT_SECRET:
+        raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured on the server.")
+
+    # Cryptographically verify the state parameter to prevent CSRF / Account Link Hijacking
+    try:
+        claims = jwt.decode(state, INTERNAL_JWT_SECRET, algorithms=[ALGORITHM])
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=400, detail="State token expired. Please reconnect calendar.")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=400, detail="Invalid state token. Possible CSRF attempt.")
+
+    erp_id = claims.get("erp_id")
+    if not erp_id:
+        raise HTTPException(status_code=400, detail="State token payload is missing erp_id.")
 
     resp = requests.post(GOOGLE_TOKEN_URL, data={
         "code":          code,
@@ -135,7 +162,7 @@ def calendar_oauth_callback(
             detail="No refresh token returned. Ensure prompt=consent and access_type=offline in the auth URL.",
         )
 
-    store_tokens(erp_id=state, access_token=access_token,
+    store_tokens(erp_id=erp_id, access_token=access_token,
                  refresh_token=refresh_token, token_expiry=expiry)
 
     # Redirect back to the faculty dashboard

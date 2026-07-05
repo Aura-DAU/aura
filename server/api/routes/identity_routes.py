@@ -23,6 +23,7 @@ JWT that FastAPI's require_identity() verifies on every chat request.
 """
 
 import os
+import secrets
 from fastapi import APIRouter, Depends, HTTPException, Header, Query
 import db.connection as db_conn
 
@@ -40,7 +41,7 @@ def _validate_secret(x_internal_secret: str = Header(..., alias="X-Internal-Secr
             status_code=500,
             detail="INTERNAL_RESOLVE_SECRET is not configured on the server.",
         )
-    if x_internal_secret != INTERNAL_RESOLVE_SECRET:
+    if not secrets.compare_digest(x_internal_secret, INTERNAL_RESOLVE_SECRET):
         raise HTTPException(status_code=403, detail="Forbidden")
 
 

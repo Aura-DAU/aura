@@ -83,6 +83,19 @@ class AuraChat:
         self.audit_log      = AuditLog()
 
     def chat(self, query, history=None, identity=None, display_profile=None):
+        # Convert dict identity to a simple object with dot-attribute access to avoid AttributeError
+        if isinstance(identity, dict):
+            class SimpleIdentity:
+                def __init__(self, erp_id, role, dept=None):
+                    self.erp_id = erp_id
+                    self.role = role
+                    self.dept = dept
+            identity = SimpleIdentity(
+                erp_id=identity.get("erp_id"),
+                role=identity.get("role"),
+                dept=identity.get("dept")
+            )
+
         try:
             # ── Safety guardrail (applies to every query) ──────────────
             if not self.guardrail.is_safe(query):
@@ -95,7 +108,9 @@ class AuraChat:
 
             # ── Greetings bypass classifier ────────────────────────────
             if is_greeting_or_meta(query):
-                return self._rag_only(query, history, display_profile)
+                from access_control import resolve_effective_role
+                user_role = resolve_effective_role(identity) if identity else "public"
+                return self._rag_only(query, history, display_profile, user_role=user_role)
 
             # ── Step 1: Classify ────────────────────────────────────────
             classification = self.classifier.classify(query)
@@ -145,7 +160,9 @@ class AuraChat:
             rag_context = ""
             sources     = []
             if query_type in ("PUBLIC", "MIXED", "AGGREGATE"):
-                retrieval_result = self.pipeline.get_context(query, history)
+                from access_control import resolve_effective_role
+                user_role = resolve_effective_role(identity) if identity else "public"
+                retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
                 chunks    = retrieval_result.get("chunks", [])
                 rag_context = retrieval_result.get("context", "")
                 sources   = retrieval_result.get("sources", [])
@@ -203,8 +220,8 @@ class AuraChat:
         if "courses"    in fields: data["courses"]     = self.erp_connector.get_faculty_courses(roll_number)
         return data
 
-    def _rag_only(self, query, history, profile) -> dict:
-        retrieval_result = self.pipeline.get_context(query, history)
+    def _rag_only(self, query, history, profile, user_role: str = "public") -> dict:
+        retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
         chunks    = retrieval_result.get("chunks", [])
         if not chunks:
             return {"answer": "I'm having trouble retrieving information. Please try again.", "sources": [], "is_personal_data": False}

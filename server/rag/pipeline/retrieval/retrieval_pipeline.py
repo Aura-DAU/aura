@@ -3,6 +3,7 @@ from pipeline.retrieval.retriever import Retriever
 from pipeline.retrieval.reranker import Reranker
 from pipeline.retrieval.context_builder import ContextBuilder
 from pipeline.retrieval.entity_retriever import EntityRetriever
+from pipeline.retrieval.rbac import get_allowed_roles
 
 import re
 import logging
@@ -455,8 +456,10 @@ class RetrievalPipeline:
     def get_context(
         self,
         query,
-        history=None
+        history=None,
+        user_role: str = "public"
     ):
+        allowed_roles = get_allowed_roles(user_role)
         original_query = query
 
         query_lower = query.lower()
@@ -687,28 +690,34 @@ class RetrievalPipeline:
             for subquery in decomposed_queries:
                 subquery_expanded = self._expand_semesters(subquery)
 
-                # Fix #8: build a sub-query-specific metadata filter.
-                # Previously always None, causing sub-queries to scan the full
-                # corpus and pull in noise from unrelated programs/faculty.
                 sub_metadata_filter = (
                     self._build_metadata_filter(plan)
                 )
+                if allowed_roles:
+                    auth_filter = {"authorization": {"$in": allowed_roles}}
+                    if sub_metadata_filter:
+                        sub_metadata_filter = {"$and": [sub_metadata_filter, auth_filter]}
+                    else:
+                        sub_metadata_filter = auth_filter
 
                 sub_results = (
                     self.retriever.retrieve(
                         query=subquery_expanded,
                         top_k=retrieval_top_k,
-                        metadata_filter=sub_metadata_filter
+                        metadata_filter=sub_metadata_filter,
+                        allowed_roles=allowed_roles
                     )
                 )
 
-                # Fallback: if the filter yields nothing, retry without it
+                # Fallback: if the filter yields nothing, retry without it (preserving DLS)
                 if not sub_results and sub_metadata_filter:
+                    fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
                     sub_results = (
                         self.retriever.retrieve(
                             query=subquery_expanded,
                             top_k=retrieval_top_k,
-                            metadata_filter=None
+                            metadata_filter=fallback_filter,
+                            allowed_roles=allowed_roles
                         )
                     )
 
@@ -716,16 +725,18 @@ class RetrievalPipeline:
                 # filtered retrieval returns some results, those may all be
                 # from ONE policy. If this sub-query is retrieving the second
                 # leg and results overlap heavily with already-seen chunk IDs,
-                # also retry filter-free to maximise distinct coverage.
+                # also retry filter-free (preserving DLS) to maximise distinct coverage.
                 if sub_results and sub_metadata_filter:
                     already_seen_ids = {r["id"] for r in all_results}
                     new_in_sub = [r for r in sub_results if r["id"] not in already_seen_ids]
                     if len(new_in_sub) == 0:
-                        # All sub-results already collected — retry without filter
+                        # All sub-results already collected — retry without filter (preserving DLS)
+                        fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
                         extra = self.retriever.retrieve(
                             query=subquery_expanded,
                             top_k=retrieval_top_k,
-                            metadata_filter=None
+                            metadata_filter=fallback_filter,
+                            allowed_roles=allowed_roles
                         )
                         new_extra = [r for r in extra if r["id"] not in already_seen_ids]
                         if new_extra:
@@ -753,7 +764,7 @@ class RetrievalPipeline:
         
         else:
             # Main query retrieval using dual path
-            results = self._retrieve_dual_path(query, plan)
+            results = self._retrieve_dual_path(query, plan, allowed_roles=allowed_roles)
             # Fix J2: use a wider context window for policy_version queries
             # so that version history sections (which may be 1-2 chunks after
             # the main policy heading) are always included in context.
@@ -770,7 +781,8 @@ class RetrievalPipeline:
         if self.entity_retriever:
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
-                    entities
+                    entities,
+                    allowed_roles=allowed_roles
                 )
             )
             if entity_chunks:
@@ -896,7 +908,7 @@ class RetrievalPipeline:
 
         return expanded_candidates
 
-    def _retrieve_dual_path(self, query, plan):
+    def _retrieve_dual_path(self, query, plan, allowed_roles=None):
         """
         Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
         Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
@@ -928,10 +940,29 @@ class RetrievalPipeline:
 
         entity_pool = {}
         for ent_text, ent_filter in entity_queries:
+            combined_filter = ent_filter
+            if allowed_roles:
+                auth_filter = {"authorization": {"$in": allowed_roles}}
+                if combined_filter:
+                    combined_filter = {"$and": [combined_filter, auth_filter]}
+                else:
+                    combined_filter = auth_filter
+
             # Query retriever to get top 3 fused BM25 + dense chunks for this entity
-            res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=ent_filter)
+            res_list = self.retriever.retrieve(
+                query=ent_text,
+                top_k=3,
+                metadata_filter=combined_filter,
+                allowed_roles=allowed_roles
+            )
             if not res_list and ent_filter:
-                res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=None)
+                fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
+                res_list = self.retriever.retrieve(
+                    query=ent_text,
+                    top_k=3,
+                    metadata_filter=fallback_filter,
+                    allowed_roles=allowed_roles
+                )
             
             for rank, res in enumerate(res_list, start=1):
                 chunk_id = res["id"]
@@ -967,7 +998,7 @@ class RetrievalPipeline:
             vector=query_embedding[0].tolist(),
             top_k=50,
             include_metadata=True,
-            filter=None
+            filter={"authorization": {"$in": allowed_roles}} if allowed_roles else None
         )
         semantic_list = []
         for match in results["matches"]:
