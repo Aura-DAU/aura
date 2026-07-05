@@ -5,20 +5,21 @@ category: "announcements"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: PDF
+source_type: "PDF"
 pdf_name: "sites/default/files/news_files/SPCOM_best_paper_finaist_certificate"
+last_fixed: "2026-07-04"
+fixes_applied: ['SCANNED_PDF']
 ---
 
-# sites/default/files/news_files/SPCOM_best_paper_finaist_certificate
+# SPCOM 2022 Best Student Paper Finalist
 
-## Overview
+## Certificate Details
 
-This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
-
-## Main Content
-
-SPCOM 2022 Best Student Paper Finalist
-Paper titled 'Morse Wavelet Features for Pop Noise Detection' by 
-Priyanka Gupta, Piyushkumar K. Chodingala, and Hemant Patil was a finalist 
-in the Best Student Paper Contest at IEEE SPCOM 2022, held at IISc Bangalore 
-(July 11-15, 2022).
+### Paper Information
+- **Paper Title:** Morse Wavelet Features for Pop Noise Detection
+- **Authors:** Priyanka Gupta, Piyushkumar K. Chodingala, Hemant Patil
+- **Contest:** Best Student Paper Contest, IEEE SPCOM 2022
+- **Event:** IEEE Signal Processing and Communications (SPCOM) 2022
+- **Location:** Indian Institute of Science (IISc), Bangalore
+- **Date:** July 11–15, 2022
+- **Status:** Finalist

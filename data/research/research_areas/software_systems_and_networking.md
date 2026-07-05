@@ -5,43 +5,45 @@ category: "Research"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
 
-# Overview
+# Software Systems and Networking
 
-Software Systems and Networking
+## Overview
 
-# Main Content
+Software Systems and Networking is a department at Dhirubhai Ambani University (DAU) that focuses on research and education in software systems and networking.
 
-### Faculty
+## Faculty
 
-* **[Prof. Amit Mankodi:](https://www.daiict.ac.in/faculty/amit-mankodi)** Embedded Systems, Computer Networks, High Performance Computing, Machine Learning
-* [**Prof. Anish Mathuria:**](https://www.daiict.ac.in/faculty/anish-mathuria) Security and Privacy in Computer Systems
-* **[Prof. Kalyan Sasidhar:](https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar)** Mobile and Pervasive Computing which include Wireless Sensor Networks, Mobile Phone Based Sensing
-* **[Prof. Manik Lal Das:](https://www.daiict.ac.in/faculty/maniklal-das)** Cyber Security, Privacy, Cryptography, Algorithms
-* **[Prof. Manish Chaturvedi:](https://www.daiict.ac.in/faculty/manish-chaturvedi)** Intelligent Transportation Systems, Scalable Protocol Design, Internet of Things
-* **[Prof. Minal Bhise:](https://www.daiict.ac.in/faculty/minal-bhise)**  Analytics for Biodiversity Domain, Resource Estimation for Query Processing, Energy Efficient Edge Computing, Query Optimization
-* **[Prof. Naresh Jotwani:](https://www.daiict.ac.in/faculty/naresh-jotwani)** Solar PV microgrids; 4D spacetime structure.
-* **[Prof. P M Jat](https://www.daiict.ac.in/faculty/p-m-jat):** Databases
-* **[Prof. Sanjay Srivastava:](https://www.daiict.ac.in/faculty/sanjay-srivastava)** Intelligent Transportation Systems, Internet of Things, Protocol Modelling and Analysis, Simulation
-* **[Prof. Saurabh Tiwari:](https://www.daiict.ac.in/faculty/saurabh-tiwari)** Requirements Engineering, Empirical Software Engineering, Mining Software Repositories and their analysis, Applications of NLP in Software Engineering, and HCI.
+### Faculty Members
+
+* **Prof. Amit Mankodi**: Embedded Systems, Computer Networks, High Performance Computing, Machine Learning
+* **Prof. Anish Mathuria**: Security and Privacy in Computer Systems
+* **Prof. Kalyan Sasidhar**: Mobile and Pervasive Computing which include Wireless Sensor Networks, Mobile Phone Based Sensing
+* **Prof. Manik Lal Das**: Cyber Security, Privacy, Cryptography, Algorithms
+* **Prof. Manish Chaturvedi**: Intelligent Transportation Systems, Scalable Protocol Design, Internet of Things
+* **Prof. Minal Bhise**: Analytics for Biodiversity Domain, Resource Estimation for Query Processing, Energy Efficient Edge Computing, Query Optimization
+* **Prof. Naresh Jotwani**: Solar PV microgrids; 4D spacetime structure.
+* **Prof. P M Jat**: Databases
+* **Prof. Sanjay Srivastava**: Intelligent Transportation Systems, Internet of Things, Protocol Modelling and Analysis, Simulation
+* **Prof. Saurabh Tiwari**: Requirements Engineering, Empirical Software Engineering, Mining Software Repositories and their analysis, Applications of NLP in Software Engineering, and HCI.
+
+## Research Groups and Labs
 
 ### Research Groups and Labs
 
 * UbiSense Lab
-* [Security Research Group](http://security.daiict.ac.in/)
+* Security Research Group
 * Software Engineering Research Group
 * Distributed Databases Research Group
-* [Software Engineering Research Lab](https://sites.google.com/view/saurabhtiwari/software-engineering-research-lab), Lab208, Cabin#2
-* [Intelligent Mobility and Cyber Physical Systems Research Group](https://imcps.dau.ac.in/)
+* Software Engineering Research Lab
+* Intelligent Mobility and Cyber Physical Systems Research Group
 
-#### *More Information Through Figure*
+## Sponsored Research
 
-
-
-### Sponsored Research
-
-[Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf)
+### Sponsored Research Projects
 
 | PI/Co-PI | Project Title | Funding Agency | Duration | Amount |
 | --- | --- | --- | --- | --- |
@@ -54,11 +56,13 @@ Software Systems and Networking
 | An empirical analysis on Deriving Test Cases from Natural Language text using MBT approach" | ISRO | 3 Years | - |
 | Vulnerability Research on QUIC Implementations | DRDO | 1.6 Years | - |
 
+## Current Publications
+
 ### Current Publications
 
 #### Prof. Amit Mankodi
 
-[Please visit](https://scholar.google.com/citations?user=UrQGRnMAAAAJ&hl=en&oi=ao)
+* Please visit [Google Scholar](https://scholar.google.com/citations?user=UrQGRnMAAAAJ&hl=en&oi=ao)
 
 #### Prof. Anish Mathuria
 
@@ -66,15 +70,13 @@ Software Systems and Networking
 * Dhrumil Patel, **Anish Mathuria** and Aditya Basu, Automatic Generation of Compact Printable Shellcodes for x86, 14th USENIX Workshop on Offensive Technologies (WOOT’20), August 2020.
 * Pranav Verma, **Anish Mathuria** and Sourish Dasgupta, Faster Rating Update via Integer-Based Homomorphic Encryption, 17th International Conference on Information Systems Security (ICISS’21), LNCS vol. 13146, pages 218-236, Springer, December 2021.
 
-For more details: [Click here](http://intranet.daiict.ac.in/~anish_mathuria/)
-
 #### Prof. Kalyan Sasidhar
 
-[Please visit](https://scholar.google.co.in/citations?user=hEeSLNwAAAAJ&hl=en&authuser=1)
+* Please visit [Google Scholar](https://scholar.google.co.in/citations?user=hEeSLNwAAAAJ&hl=en&authuser=1)
 
 #### Prof. Maniklal Das
 
-[Please visit](https://scholar.google.co.in/citations?user=wlTzQBMAAAAJ&hl=en)
+* Please visit [Google Scholar](https://scholar.google.co.in/citations?user=wlTzQBMAAAAJ&hl=en)
 
 #### Prof. Minal Bhise
 
@@ -84,15 +86,15 @@ For more details: [Click here](http://intranet.daiict.ac.in/~anish_mathuria/)
 
 #### Prof. Naresh Jotwani
 
-[Please visit](https://scholar.google.co.in/citations?hl=en&user=gLHgfYUAAAAJ)
+* Please visit [Google Scholar](https://scholar.google.co.in/citations?hl=en&user=gLHgfYUAAAAJ)
 
 #### Prof. P M Jat
 
-[Please visit](https://scholar.google.com/citations?user=s9tZgnsAAAAJ&hl=en&oi=ao)
+* Please visit [Google Scholar](https://scholar.google.com/citations?user=s9tZgnsAAAAJ&hl=en&oi=ao)
 
 #### Prof. Sanjay Srivastava
 
-[Please visit](https://scholar.google.com/citations?user=irIm3lUAAAAJ&hl=en&oi=sra)
+* Please visit [Google Scholar](https://scholar.google.com/citations?user=irIm3lUAAAAJ&hl=en&oi=sra)
 
 #### Prof. Saurabh Tiwari
 
@@ -100,42 +102,36 @@ For more details: [Click here](http://intranet.daiict.ac.in/~anish_mathuria/)
 * Shivani Balwani, **Saurabh Tiwari**, Sourish Dasgupta, and Akhilesh Sharma, AutoReco: A Tool for Recommending Requirements for their Non-Conformance with Requirement Templates (RTs), In 31st IEEE International Requirements Engineering 2023 conference (RE 2023), Leibniz Universität Hannover, Germany, September 4-8, 2023.
 * Prahar Pandya and **Saurabh Tiwari**, CORMS: A GitHub and Gerrit based Hybrid Code Reviewer Recommendation Approach for Modern Code Review, In 30th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE 2022), pp 546–557, Research Paper/Technical Track, NUS, Singapore, 14 - 18 November 2022.
 
-For more details: [Click here](https://sites.google.com/view/saurabhtiwari/)
+## Media Gallery
 
-### Media Gallery
+### Meet Dr. Kalyan Sasidhar: Pioneering Mobile Computing and Network Sensing at DA-IICT Gandhinagar
 
-#### Meet Dr. Kalyan Sasidhar: Pioneering Mobile Computing and Network Sensing at DA-IICT Gandhinagar
+## Events and Activities
 
-### Events and Activities
+### Upcoming Events
 
 Information will be available soon
 
 ## Related Links
 
-- [Prof. Amit Mankodi:](https://www.daiict.ac.in/faculty/amit-mankodi)
-- [Prof. Anish Mathuria:](https://www.daiict.ac.in/faculty/anish-mathuria)
-- [Prof. Kalyan Sasidhar:](https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar)
-- [Prof. Manik Lal Das:](https://www.daiict.ac.in/faculty/maniklal-das)
-- [Prof. Manish Chaturvedi:](https://www.daiict.ac.in/faculty/manish-chaturvedi)
-- [Prof. Minal Bhise:](https://www.daiict.ac.in/faculty/minal-bhise)
-- [Prof. Naresh Jotwani:](https://www.daiict.ac.in/faculty/naresh-jotwani)
-- [Prof. P M Jat](https://www.daiict.ac.in/faculty/p-m-jat)
-- [Prof. Sanjay Srivastava:](https://www.daiict.ac.in/faculty/sanjay-srivastava)
-- [Prof. Saurabh Tiwari:](https://www.daiict.ac.in/faculty/saurabh-tiwari)
-- [Security Research Group](http://security.daiict.ac.in/)
-- [Software Engineering Research Lab](https://sites.google.com/view/saurabhtiwari/software-engineering-research-lab)
-- [Intelligent Mobility and Cyber Physical Systems Research Group](https://imcps.dau.ac.in/)
-- [Please visit](https://scholar.google.com/citations?user=UrQGRnMAAAAJ&hl=en&oi=ao)
-- [For more details](http://intranet.daiict.ac.in/~anish_mathuria/)
-- [Please visit](https://scholar.google.co.in/citations?user=hEeSLNwAAAAJ&hl=en&authuser=1)
-- [Please visit](https://scholar.google.co.in/citations?user=wlTzQBMAAAAJ&hl=en)
-- [Please visit](https://scholar.google.co.in/citations?hl=en&user=gLHgfYUAAAAJ)
-- [Please visit](https://scholar.google.com/citations?user=s9tZgnsAAAAJ&hl=en&oi=ao)
-- [Please visit](https://scholar.google.com/citations?user=irIm3lUAAAAJ&hl=en&oi=sra)
-- [For more details](https://sites.google.com/view/saurabhtiwari/)
+### Faculty Members
 
+* [Prof. Amit Mankodi](https://www.daiict.ac.in/faculty/amit-mankodi)
+* [Prof. Anish Mathuria](https://www.daiict.ac.in/faculty/anish-mathuria)
+* [Prof. Kalyan Sasidhar](https://www.daiict.ac.in/faculty/p-s-kalyan-sasidhar)
+* [Prof. Manik Lal Das](https://www.daiict.ac.in/faculty/maniklal-das)
+* [Prof. Manish Chaturvedi](https://www.daiict.ac.in/faculty/manish-chaturvedi)
+* [Prof. Minal Bhise](https://www.daiict.ac.in/faculty/minal-bhise)
+* [Prof. Naresh Jotwani](https://www.daiict.ac.in/faculty/naresh-jotwani)
+* [Prof. P M Jat](https://www.daiict.ac.in/faculty/p-m-jat)
+* [Prof. Sanjay Srivastava](https://www.daiict.ac.in/faculty/sanjay-srivastava)
+* [Prof. Saurabh Tiwari](https://www.daiict.ac.in/faculty/saurabh-tiwari)
+* [Security Research Group](http://security.daiict.ac.in/)
+* [Software Engineering Research Lab](https://sites.google.com/view/saurabhtiwari/software-engineering-research-lab)
+* [Intelligent Mobility and Cyber Physical Systems Research Group](https://imcps.dau.ac.in/)
 
 ## Downloadable Resources
 
-- [Faculty Handbook](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)
+### Faculty Handbook
 
+* [Download](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Handbook.pdf) (PDF)

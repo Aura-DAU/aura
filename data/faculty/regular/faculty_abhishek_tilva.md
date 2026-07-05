@@ -5,13 +5,9 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
-
-# Overview
-
-Profile of Abhishek Tilva
-
-# Main Content
 
 # Abhishek Tilva
 
@@ -35,18 +31,25 @@ Abhishek Tilva currently serves as an Assistant Professor at DAU. He holds M.A.,
 
 ## Specialization
 
-Arbitrage Theory, Stochastic Portfolio Theory, Stochastic Analysis
+### Arbitrage Theory
+Arbitrage Theory
+
+### Stochastic Portfolio Theory
+Stochastic Portfolio Theory
+
+### Stochastic Analysis
+Stochastic Analysis
 
 ## Publications
 
-* Bayraktar, Erhan, Donghan Kim, and **Abhishek Tilva**. "Quantifying dimensional change in stochastic portfolio theory." Mathematical Finance 34.3 (2024): 977-1021.
-* Bayraktar, Erhan, Donghan Kim, and **Abhishek Tilva**. "Arbitrage theory in a market of stochastic dimension." Mathematical Finance 34.3 (2024): 847-895.
-* Nualart, David, and **Abhishek Tilva**. "Continuous Breuer-Major theorem for vector valued fields." Stochastic Analysis and Applications 38.4 (2020): 668-685.
+### 2024
+* Bayraktar, Erhan, Donghan Kim, and Abhishek Tilva. "Quantifying dimensional change in stochastic portfolio theory." Mathematical Finance 34.3 (2024): 977-1021.
+* Bayraktar, Erhan, Donghan Kim, and Abhishek Tilva. "Arbitrage theory in a market of stochastic dimension." Mathematical Finance 34.3 (2024): 847-895.
+
+### 2020
+* Nualart, David, and Abhishek Tilva. "Continuous Breuer-Major theorem for vector valued fields." Stochastic Analysis and Applications 38.4 (2020): 668-685.
 
 ## Teaching
 
-#### WEBPAGE LINK:
-
+### Webpage Link
 [Please Click Here](https://scholar.google.com/citations?user=1YCDWY0AAAAJ&hl=en&oi=ao)
-
-

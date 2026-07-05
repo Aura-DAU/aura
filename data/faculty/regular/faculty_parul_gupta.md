@@ -5,13 +5,9 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
-
-# Overview
-
-Profile of Parul Gupta
-
-# Main Content
 
 # Parul Gupta
 
@@ -37,15 +33,17 @@ Outside of academics, her interests lie in music, dance and fine arts. She is tr
 
 ## Specialization
 
-Economic Development, Education Policy, Economics of Gender
+### Economic Development
+### Education Policy
+### Economics of Gender
 
 ## Publications
 
-#### **Journal**
+### Journal
 
 * Ankush Agrawal, Parul Gupta & Debasis Mondal (2024). Determinants of Private Tutoring Demand in Rural India, The Journal of Development Studies (ABDC:A), DOI: 10.1080/00220388.2023.2273798
 
-#### **Book Chapters**
+### Book Chapters
 
 * “Coasian Bargaining” (2021). In: Environmental Economics. Ed. by B.S. Prakash and B.S Bagla. New Delhi: Indira Gandhi National Open University. Chap. 4. isbn: 978-93-5566-199-7.
 * “Economy and Environment” (2021). In: Environmental Economics. Ed. by B.S. Prakash and B.S Bagla. New Delhi: Indira Gandhi National Open University. Chap. 1. isbn: 978-93-5566-199-7.
@@ -53,7 +51,7 @@ Economic Development, Education Policy, Economics of Gender
 * “Welfare Economics and Environment” (2021). In: Environmental Economics. Ed. by B.S. Prakash and B.S Bagla. New Delhi: Indira Gandhi National Open University. Chap. 2. isbn: 978-93-5566-199-7.
 * “Population and Economic Progress” (2016) In: Development Theory and Experience - I. Institute of Lifelong Learning, University of Delhi. isbn: 2349-154X
 
-#### **Conferences**
+### Conferences
 
 * 6th Annual Economics Conference, Ahmedabad University, 2025
 * Annual Conference on Economics and Public Policy, O.P. Jindal Global University (hybrid), 2024
@@ -69,5 +67,3 @@ Economic Development, Education Policy, Economics of Gender
 * Mathematical economics
 * Development Economics
 * Quantitative methods in economics
-
-

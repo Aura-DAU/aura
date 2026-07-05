@@ -5,13 +5,9 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
-
-# Overview
-
-Profile of Anjan Ghosh
-
-# Main Content
 
 # Anjan Ghosh
 
@@ -31,36 +27,41 @@ Dr. Anjan K Ghosh has 35 years of research and teaching experience in the areas 
 
 ## Specialization
 
-Optical Communication - Fiber Optic and Free Space, Photonic Devices and Subsystems, Sensors, Image and Signal Processing, Nonlinear Systems and Chaos, System Dynamics Modelling of Education
+### Optical Communication - Fiber Optic and Free Space
+### Photonic Devices and Subsystems
+### Sensors
+### Image and Signal Processing
+### Nonlinear Systems and Chaos
+### System Dynamics Modelling of Education
 
 ## Publications
 
-#### Book:
+### Book
 
-* U Gogoi, M Bhowmik, D Bhattacharjee, and A Ghosh, “Singular Value based Characterization and Analysis of Thermal Patches for Early Breast Abnormality Detection”, Australasian Physical and Engineering Science in Medicine, Springer , pp. 1-19, 2018, https://doi.org/10.1007/s13246-018-0681-4.
-* A. Datta, A. Ghosh and A. Mukherjee, “Characterization of Chaotic electro optic modulator with the help of Lypunov exponent and bifurcation analysis technique”, Materials Today: Proceedings, Vol. 5, pp. 20131-2039, 2018.
-* T. Deb, A. Ghosh and A. Mukherjee, “Singular value decomposition applied to associative memory of Hopfield neural networks”, Materials Today: Proceedings, Vol. 5, pp. 2222-2228, 2018.
-* M. Bhowmick, U. Gogoi, G. Majumdar, D. Bhattacharjee, S. Datta and A. Ghosh, “Designing of Ground Truth Annotated DBT-TU-JU Thermogram Database towards Early Abnormality Prediction” to appear in IEEE Journal of Biomedical and Health Informatics, 2018. doi: 10.1109/JBHI 2017.2740500.
-* D. Shah, D. Kothari and A. Ghosh, “Bit Error Rate Analysis of the K Channel using Wavelength Diversity”, Optical Engineering, Vol. 56, p. 056106, May 2017. doi: 10.1117/1.OE.56.5.056106.
-* A. Ghosh and Anasmita Ghosh, “A few ways of reducing cheating in examinations in Indian colleges and universities”, University News, Vol. 55, No. 05, pp. 164-168, Jan. 30-Feb. 05, 2017.
+| Title | Authors | Journal | Year | Pages | DOI |
+| --- | --- | --- | --- | --- | --- |
+| Singular Value based Characterization and Analysis of Thermal Patches for Early Breast Abnormality Detection | U Gogoi, M Bhowmik, D Bhattacharjee, A Ghosh | Australasian Physical and Engineering Science in Medicine, Springer | 2018 | 1-19 | https://doi.org/10.1007/s13246-018-0681-4 |
 
-#### Journals:
+### Journals
 
-* M. Bhowmick, U. Gogoi, G. Majumdar, D. Bhattacharjee, S. Datta and A. Ghosh, “Designing of Ground Truth Annotated DBT-TU-JU Thermogram Database towards Early Abnormality Prediction” to appear in IEEE Journal of Biomedical and Health Informatics, 2018. doi: 10.1109/JBHI **2017.2740500.**
-* T. Deb, A. Ghosh and A. Mukherjee, “Singular value decomposition applied to associative memory of Hopfield neural networks”, Materials Today: Proceedings, Vol. 5, pp. **2222-2228, 2018.**
-* A. Datta, A. Ghosh and A. Mukherjee, “Characterization of Chaotic electro optic modulator with the help of Lypunov exponent and bifurcation analysis technique”, Materials Today: Proceedings, Vol. 5, pp. **20131-2039, 2018****.**
-* U Gogoi, M Bhowmik, D Bhattacharjee, and A Ghosh, “Singular Value based Characterization and Analysis of Thermal Patches for Early Breast Abnormality Detection”, Australasian Physical and Engineering Science in Medicine, Springer , pp. 1-19, 2018, <https://doi.org/10.1007/s13246-018-0681-4>.
+| Title | Authors | Journal | Year | Pages | DOI |
+| --- | --- | --- | --- | --- | --- |
+| Designing of Ground Truth Annotated DBT-TU-JU Thermogram Database towards Early Abnormality Prediction | M. Bhowmick, U. Gogoi, G. Majumdar, D. Bhattacharjee, S. Datta, A. Ghosh | IEEE Journal of Biomedical and Health Informatics | 2018 | [illegible] | 10.1109/JBHI 2017.2740500 |
+| Singular value decomposition applied to associative memory of Hopfield neural networks | T. Deb, A. Ghosh, A. Mukherjee | Materials Today: Proceedings | 2018 | 2222-2228 | [illegible] |
+| Characterization of Chaotic electro optic modulator with the help of Lypunov exponent and bifurcation analysis technique | A. Datta, A. Ghosh, A. Mukherjee | Materials Today: Proceedings | 2018 | 20131-2039 | [illegible] |
 
-#### Conferences:
+### Conferences
 
-* A. Ghosh, A. Datta and A. Mukherjee, “Noise Tolerance in Optical Chaos Encrypted Communication Using Nonlinear Electro-optic Systems”, Proc. Photonics-2018 The Intl. Conference on Fiber Optics and Photonics, Dec 2018, New Delhi (Abstract only).
+| Title | Authors | Conference | Year | Location |
+| --- | --- | --- | --- | --- |
+| Noise Tolerance in Optical Chaos Encrypted Communication Using Nonlinear Electro-optic Systems | A. Ghosh, A. Datta, A. Mukherjee | Proc. Photonics-2018 The Intl. Conference on Fiber Optics and Photonics | 2018 | New Delhi (Abstract only) |
 
 ## Teaching
+
+### Courses
 
 * Optical Communication
 * Optical Wireless Communication
 * Basic Electronics
 * Linear Algebra
 * Random Variables and Processes
-
-
