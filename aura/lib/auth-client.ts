@@ -15,15 +15,14 @@ export function getToken(): string | null {
  */
 export async function initAuth(): Promise<string | null> {
   try {
-    const res = await fetch("/api/auth/session")
+    const res = await fetch("/api/auth/token")
     if (res.ok) {
-      const session = await res.json()
-      const token = session?.accessToken || null
-      setToken(token)
-      return token
+      const { token } = await res.json()
+      setToken(token || null)
+      return token || null
     }
   } catch (err) {
-    console.error("[auth-client] Failed to fetch session:", err)
+    console.error("[auth-client] Failed to fetch token:", err)
   }
   setToken(null)
   return null

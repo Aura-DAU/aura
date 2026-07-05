@@ -201,6 +201,10 @@ class RetrievalPipeline:
         "phd part time": "Ph.D.",
         "doctoral": "Ph.D."
     }
+
+    BROAD_PROGRAM_SENTINELS = {
+        "M.Tech.", "B.Tech.", "M.Sc.", "M.Des.", "Ph.D."
+    }
     
     def _expand_semesters(self, query):
         arabic_to_roman = {

@@ -32,7 +32,8 @@ from pipeline.google_calendar.token_vault import (
     store_tokens, unlink_calendar, is_linked, CalendarNotLinked
 )
 
-INTERNAL_JWT_SECRET = os.environ.get("INTERNAL_JWT_SECRET", "")
+def get_internal_jwt_secret() -> str:
+    return os.environ.get("INTERNAL_JWT_SECRET", "")
 ALGORITHM           = "HS256"
 
 router = APIRouter(prefix="/calendar", tags=["calendar"])
@@ -89,7 +90,8 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
         raise HTTPException(status_code=403, detail="Only faculty can connect a Google Calendar.")
     if not CLIENT_ID:
         raise HTTPException(status_code=500, detail="GOOGLE_CALENDAR_CLIENT_ID not configured.")
-    if not INTERNAL_JWT_SECRET:
+    secret = get_internal_jwt_secret()
+    if not secret:
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured.")
 
     # Mint a short-lived signed state token containing the faculty erp_id to prevent CSRF / State Injection
@@ -97,7 +99,7 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
         "erp_id": identity.erp_id,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
     }
-    state_token = jwt.encode(state_payload, INTERNAL_JWT_SECRET, algorithm=ALGORITHM)
+    state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)
 
     params = {
         "client_id":     CLIENT_ID,
@@ -125,12 +127,13 @@ def calendar_oauth_callback(
     import requests
     import datetime
 
-    if not INTERNAL_JWT_SECRET:
+    secret = get_internal_jwt_secret()
+    if not secret:
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured on the server.")
 
     # Cryptographically verify the state parameter to prevent CSRF / Account Link Hijacking
     try:
-        claims = jwt.decode(state, INTERNAL_JWT_SECRET, algorithms=[ALGORITHM])
+        claims = jwt.decode(state, secret, algorithms=[ALGORITHM])
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=400, detail="State token expired. Please reconnect calendar.")
     except jwt.InvalidTokenError:

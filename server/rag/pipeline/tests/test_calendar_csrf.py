@@ -12,11 +12,11 @@ from fastapi.testclient import TestClient
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent / "server"))
 
-os.environ["INTERNAL_JWT_SECRET"] = "test-secret-key"
+os.environ.setdefault("INTERNAL_JWT_SECRET", "test-secret-key")
 os.environ["GOOGLE_CALENDAR_CLIENT_ID"] = "test-client-id"
 os.environ["GOOGLE_CALENDAR_CLIENT_SECRET"] = "test-client-secret"
 
-from api.routes.calender_routes import router
+from api.routes.calendar_routes import router
 
 app = FastAPI()
 app.include_router(router)
@@ -28,7 +28,8 @@ def test_callback_with_valid_state():
         "erp_id": "FAC001",
         "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
     }
-    state = jwt.encode(payload, "test-secret-key", algorithm="HS256")
+    secret = os.environ.get("INTERNAL_JWT_SECRET", "test-secret-key")
+    state = jwt.encode(payload, secret, algorithm="HS256")
     
     # Mock requests.post to return 200 with tokens
     mock_resp = MagicMock()
@@ -40,7 +41,7 @@ def test_callback_with_valid_state():
     }
     
     with patch("requests.post", return_value=mock_resp), \
-         patch("api.routes.calender_routes.store_tokens") as mock_store:
+         patch("api.routes.calendar_routes.store_tokens") as mock_store:
         res = client.get(f"/calendar/callback?code=mock_code&state={state}", follow_redirects=False)
         
     assert res.status_code == 307  # Redirect to /calendar/connected
@@ -62,7 +63,8 @@ def test_callback_with_expired_state():
         "erp_id": "FAC001",
         "exp": datetime.datetime.utcnow() - datetime.timedelta(seconds=1)
     }
-    state = jwt.encode(payload, "test-secret-key", algorithm="HS256")
+    secret = os.environ.get("INTERNAL_JWT_SECRET", "test-secret-key")
+    state = jwt.encode(payload, secret, algorithm="HS256")
     
     res = client.get(f"/calendar/callback?code=mock_code&state={state}", follow_redirects=False)
     assert res.status_code == 400

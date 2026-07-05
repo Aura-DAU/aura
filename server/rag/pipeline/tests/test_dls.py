@@ -24,7 +24,7 @@ def test_rbac_additive_hierarchy():
     assert "faculty" in ug_convenor_roles
     assert "faculty_coord" in ug_convenor_roles
     assert "faculty_convenor_ug" in ug_convenor_roles
-    assert "faculty_convenor_pg" in ug_convenor_roles
+    assert "faculty_convenor_pg" not in ug_convenor_roles
     
     # Test superadmin
     superadmin_roles = get_allowed_roles("superadmin")

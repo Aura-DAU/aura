@@ -2,18 +2,19 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth/options"
 import { backendUrl } from "@/lib/api/backend"
 import { NextResponse } from "next/server"
+import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions)
-  if (!session?.user) {
+  if (!session?.user?.erpId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  // Get the accessToken from session (internal token)
-  const token = session.accessToken
-  if (!token) {
-    return NextResponse.json({ error: "Session missing access token" }, { status: 401 })
-  }
+  const token = signInternalJwt({
+    role: session.user.role,
+    erpId: session.user.erpId,
+    department: session.user.department,
+  })
 
   try {
     const res = await fetch(backendUrl("/ecampus/link"), {
@@ -38,14 +39,15 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
-  if (!session?.user) {
+  if (!session?.user?.erpId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const token = session.accessToken
-  if (!token) {
-    return NextResponse.json({ error: "Session missing access token" }, { status: 401 })
-  }
+  const token = signInternalJwt({
+    role: session.user.role,
+    erpId: session.user.erpId,
+    department: session.user.department,
+  })
 
   let body
   try {
@@ -91,14 +93,15 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
   const session = await getServerSession(authOptions)
-  if (!session?.user) {
+  if (!session?.user?.erpId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const token = session.accessToken
-  if (!token) {
-    return NextResponse.json({ error: "Session missing access token" }, { status: 401 })
-  }
+  const token = signInternalJwt({
+    role: session.user.role,
+    erpId: session.user.erpId,
+    department: session.user.department,
+  })
 
   try {
     const res = await fetch(backendUrl("/ecampus/link"), {

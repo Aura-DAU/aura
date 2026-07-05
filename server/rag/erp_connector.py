@@ -52,16 +52,13 @@ def _get_sql_pool() -> psycopg2.pool.ThreadedConnectionPool:
     return _sql_pool
 
 
-_USE_SQL = bool(os.environ.get("ERP_DB_HOST"))
-
-
 class ERPConnector:
     """
     Public interface — all callers use this class regardless of transport mode.
     """
 
     def __init__(self):
-        self._mode = "sql" if _USE_SQL else "scrape"
+        self._mode = "sql" if os.environ.get("ERP_DB_HOST") else "scrape"
 
     # ── Internal SQL helper ───────────────────────────────────────────────
 
@@ -503,24 +500,16 @@ class ERPConnector:
         Never surfaces individual case details unless explicitly requested
         by an authorized dean — the gate checks this before calling."""
         if self._mode == "sql":
-            params: list = []
-            conditions = []
-            if status:
-                conditions.append("dc.status = %s")
-                params.append(status)
-            if student_erp_id:
-                conditions.append("dc.student_roll = %s")
-                params.append(student_erp_id)
-            where = ("WHERE " + " AND ".join(conditions)) if conditions else ""
             return self._q(
-                f"""SELECT dc.case_id, dc.student_roll, s.full_name,
+                """SELECT dc.case_id, dc.student_roll, s.full_name,
                            dc.incident_date, dc.category, dc.status,
                            dc.committee_decision
                     FROM disciplinary_cases dc
                     JOIN students s ON s.roll_number = dc.student_roll
-                    {where}
+                    WHERE (%s IS NULL OR dc.status = %s)
+                      AND (%s IS NULL OR dc.student_roll = %s)
                     ORDER BY dc.incident_date DESC""",
-                tuple(params),
+                (status, status, student_erp_id, student_erp_id),
             )
         return []
 

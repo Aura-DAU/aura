@@ -8,7 +8,7 @@ import type {
   StudentProfile,
 } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
-import { apiFetch, setToken } from "@/lib/auth-client"
+import { apiFetch, setToken, initAuth } from "@/lib/auth-client"
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
@@ -102,8 +102,8 @@ export function useAuraChat() {
   const { data: session } = useSession()
 
   useEffect(() => {
-    if (session?.accessToken) {
-      setToken(session.accessToken)
+    if (session) {
+      initAuth()
     } else {
       setToken(null)
     }

@@ -18,7 +18,8 @@ import jwt
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-INTERNAL_JWT_SECRET = os.environ.get("INTERNAL_JWT_SECRET", "")
+def get_internal_jwt_secret() -> str:
+    return os.environ.get("INTERNAL_JWT_SECRET", "")
 ALGORITHM           = "HS256"
 
 # Broad roles stored in user_identity_map.role — what the JWT carries.
@@ -69,12 +70,13 @@ def require_identity(
     role (coordinator, convenor, dean) call resolve_effective_role() from
     access_control.py, which queries role_bindings.
     """
-    if not INTERNAL_JWT_SECRET:
+    secret = get_internal_jwt_secret()
+    if not secret:
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured.")
 
     token = credentials.credentials
     try:
-        claims = jwt.decode(token, INTERNAL_JWT_SECRET, algorithms=[ALGORITHM])
+        claims = jwt.decode(token, secret, algorithms=[ALGORITHM])
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Session expired — please refresh the page")
     except jwt.InvalidTokenError:

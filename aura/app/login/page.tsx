@@ -83,34 +83,36 @@ function LoginCard() {
       {/* Dev-only: after switching demo accounts, always wait for Sign Out to fully
           redirect to /login before clicking another demo button — rapid switching has a
           known session-cache race condition, tracked as a follow-up. */}
-      <div className="mt-8 border-t border-theme-gray-light pt-6">
-        <div className="grid grid-cols-3 gap-2">
-          <button
-            onClick={() => handleDemoSignIn("student")}
-            disabled={loading !== null}
-            className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
-          >
-            {loading === "demo-student" ? <Loader2 className="size-3 animate-spin" /> : <GraduationCap className="size-3.5 text-theme-yellow" />}
-            Student
-          </button>
-          <button
-            onClick={() => handleDemoSignIn("faculty")}
-            disabled={loading !== null}
-            className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
-          >
-            {loading === "demo-faculty" ? <Loader2 className="size-3 animate-spin" /> : <BookOpen className="size-3.5 text-theme-yellow" />}
-            Faculty
-          </button>
-          <button
-            onClick={() => handleDemoSignIn("admin")}
-            disabled={loading !== null}
-            className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
-          >
-            {loading === "demo-admin" ? <Loader2 className="size-3 animate-spin" /> : <Shield className="size-3.5 text-theme-yellow" />}
-            Admin
-          </button>
+      {process.env.NODE_ENV === "development" && (
+        <div className="mt-8 border-t border-theme-gray-light pt-6">
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              onClick={() => handleDemoSignIn("student")}
+              disabled={loading !== null}
+              className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
+            >
+              {loading === "demo-student" ? <Loader2 className="size-3 animate-spin" /> : <GraduationCap className="size-3.5 text-theme-yellow" />}
+              Student
+            </button>
+            <button
+              onClick={() => handleDemoSignIn("faculty")}
+              disabled={loading !== null}
+              className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
+            >
+              {loading === "demo-faculty" ? <Loader2 className="size-3 animate-spin" /> : <BookOpen className="size-3.5 text-theme-yellow" />}
+              Faculty
+            </button>
+            <button
+              onClick={() => handleDemoSignIn("admin")}
+              disabled={loading !== null}
+              className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
+            >
+              {loading === "demo-admin" ? <Loader2 className="size-3 animate-spin" /> : <Shield className="size-3.5 text-theme-yellow" />}
+              Admin
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

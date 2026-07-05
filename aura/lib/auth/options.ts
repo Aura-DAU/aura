@@ -62,8 +62,22 @@ async function lookupErpIdentity(email: string): Promise<{ role: "student" | "fa
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "mock-client-id",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "mock-client-secret",
+      clientId: (() => {
+        const id = process.env.GOOGLE_CLIENT_ID
+        if (!id && process.env.NODE_ENV === "production") throw new Error("FATAL: GOOGLE_CLIENT_ID is not set.")
+        return id || "mock-client-id"
+      })(),
+      clientSecret: (() => {
+        const secret = process.env.GOOGLE_CLIENT_SECRET
+        if (!secret && process.env.NODE_ENV === "production") throw new Error("FATAL: GOOGLE_CLIENT_SECRET is not set.")
+        return secret || "mock-client-secret"
+      })(),
+      authorization: {
+        params: {
+          hd: "dau.ac.in",
+          prompt: "select_account",
+        },
+      },
     }),
     ...(process.env.NODE_ENV === "development" ? [
       CredentialsProvider({
@@ -112,6 +126,11 @@ export const authOptions: NextAuthOptions = {
           if (!res.ok) {
             return "/login?error=ServerError"
           }
+          
+          const data = await res.json()
+          user.role = data.role
+          user.erpId = data.erp_id || data.erpId
+          user.department = data.department || data.dept || ""
           return true
         } catch (err) {
           console.error("[NextAuth] SignIn callback lookup failed:", err)
@@ -123,18 +142,22 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       // If it's the first sign-in (user object is available), lookup the ERP identity
       if (user && user.email) {
-        if (user.email === "demo.student@dau.ac.in") {
+        if (process.env.NODE_ENV === "development" && user.email === "demo.student@dau.ac.in") {
           token.role = "student"
           token.erpId = "DEMO123"
           token.department = "ICT"
-        } else if (user.email === "demo.faculty@daiict.ac.in") {
+        } else if (process.env.NODE_ENV === "development" && user.email === "demo.faculty@daiict.ac.in") {
           token.role = "faculty"
           token.erpId = "FAC123"
           token.department = "ICT"
-        } else if (user.email === "demo.admin@dau.ac.in") {
+        } else if (process.env.NODE_ENV === "development" && user.email === "demo.admin@dau.ac.in") {
           token.role = "admin"
           token.erpId = "ADM123"
           token.department = "IT"
+        } else if (user.erpId) {
+          token.role = user.role
+          token.erpId = user.erpId
+          token.department = user.department
         } else {
           const erpData = await lookupErpIdentity(user.email)
           if (erpData) {
@@ -162,11 +185,14 @@ export const authOptions: NextAuthOptions = {
         session.user.erpId = token.erpId as string
         session.user.department = token.department as string | undefined
       }
-      session.accessToken = token.accessToken
       return session
     },
   },
-  secret: process.env.NEXTAUTH_SECRET || "fallback-secret-for-development-only",
+  secret: (() => {
+    const s = process.env.NEXTAUTH_SECRET
+    if (!s) throw new Error("FATAL: NEXTAUTH_SECRET is not set.")
+    return s
+  })(),
   pages: {
     signIn: "/login",
     error: "/login",
