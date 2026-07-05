@@ -46,7 +46,8 @@ def get_allowed_roles(user_role: str) -> list[str]:
         "admin_staff": ["public", "admin_staff", "student"], # Assuming admin staff can see student docs
         
         "superadmin": ALL_ROLES,
-        "admin_full": ALL_ROLES
+        "admin_full": ALL_ROLES,
+        "admin": ALL_ROLES
     }
     
     # Check if a specific binding exists, else fall back to public
