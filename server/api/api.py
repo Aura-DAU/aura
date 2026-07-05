@@ -21,6 +21,7 @@ from pipeline.speech import transcribe_audio
 from api.auth import require_identity, Identity
 from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
+from api.routes.calendar_routes import router as calendar_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
@@ -51,6 +52,7 @@ app.add_middleware(
 # No auth_router — login/refresh/logout are handled entirely by NextAuth.js
 app.include_router(identity_router)
 app.include_router(admin_router)
+app.include_router(calendar_router)
 
 # ── Whisper concurrency lock ──────────────────────────────────────────────
 speech_queue_lock = asyncio.Semaphore(1)

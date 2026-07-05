@@ -1,27 +1,14 @@
 """
-auth.py — FastAPI identity middleware (SSO architecture).
+auth.py — FastAPI identity middleware (SSO / Next.js JWT architecture).
 
-Authentication is owned entirely by NextAuth.js on the frontend.
-FastAPI's only job here is to cryptographically verify the short-lived
-internal JWT that Next.js mints (via jsonwebtoken) and attaches to every
-request in the Authorization header.
+FastAPI never issues tokens. It only verifies the short-lived internal JWT
+that Next.js mints after Google SSO, then attaches to every request.
 
-Flow:
-  1. User logs in via Google SSO → NextAuth.js handles everything.
-  2. NextAuth jwt() callback calls GET /internal/resolve-identity?email=...
-     to get the user's erp_id, role, and department from AURA's backend.
-  3. Next.js mints a short-lived internal JWT:
-       jwt.sign({ role, erpId, department }, INTERNAL_JWT_SECRET, { expiresIn: "60s" })
-  4. Next.js attaches it as: Authorization: Bearer <token> on every request.
-  5. require_identity() (this file) verifies the signature and extracts Identity.
-
-FastAPI never issues tokens. FastAPI never stores passwords or sessions.
-FastAPI never sets cookies.
-
-Required env var:
-  INTERNAL_JWT_SECRET — shared secret between Next.js and FastAPI.
-  Must be ≥256 bits of random data, stored only in env/secrets-manager.
-  Generate: python3 -c "import secrets; print(secrets.token_hex(32))"
+JWT claim shape (minted by Next.js):
+  { erpId, role, department, exp }
+  role is the BROAD role from user_identity_map: student | faculty | admin
+  Fine-grained roles (faculty_coord, dean_students, etc.) are resolved
+  server-side via role_bindings — see access_control.resolve_effective_role()
 """
 
 import os
@@ -33,20 +20,39 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 INTERNAL_JWT_SECRET = os.environ.get("INTERNAL_JWT_SECRET", "")
 ALGORITHM           = "HS256"
-VALID_ROLES         = {"student", "faculty", "admin"}
+
+# Broad roles stored in user_identity_map.role — what the JWT carries.
+# Fine-grained roles are in role_bindings and resolved by resolve_effective_role().
+BROAD_ROLES = {"student", "faculty", "admin"}
+
+# All possible effective roles (for DLS filter, Pinecone, admin panel)
+ALL_ROLES = {
+    "public",
+    "student",
+    "faculty_general",
+    "faculty_coord",
+    "faculty_convenor_ug",
+    "faculty_convenor_pg",
+    "dean_students",
+    "dean_faculty",
+    "dean_academic",
+    "registrar",
+    "admin_staff",
+    "superadmin",
+}
 
 security = HTTPBearer()
 
 
 @dataclass
 class Identity:
-    erp_id: str           # roll number (student) or employee ID (faculty)
-    role:   str           # 'student' | 'faculty' | 'admin'
+    erp_id: str
+    role:   str           # broad role from JWT: student | faculty | admin
     dept:   str | None = None
 
     @property
     def user_id(self) -> str:
-        """Backward-compat alias — erp_id is the stable identifier now."""
+        """Backward-compat alias."""
         return self.erp_id
 
     def as_dict(self) -> dict:
@@ -57,17 +63,14 @@ def require_identity(
     credentials: HTTPAuthorizationCredentials = Depends(security),
 ) -> Identity:
     """
-    FastAPI dependency. Verifies the internal JWT minted by Next.js.
-    Raises 401 on missing/invalid/expired token.
-    Raises 403 on unrecognized role.
-    On success, returns Identity — the single source of truth for
-    who is making this request throughout the entire request lifecycle.
+    Verifies the HS256 internal JWT minted by Next.js.
+    Raises 401 on missing/invalid/expired token, 403 on unrecognised role.
+    Returns Identity with the BROAD role — callers that need the fine-grained
+    role (coordinator, convenor, dean) call resolve_effective_role() from
+    access_control.py, which queries role_bindings.
     """
     if not INTERNAL_JWT_SECRET:
-        raise HTTPException(
-            status_code=500,
-            detail="INTERNAL_JWT_SECRET is not configured on the server.",
-        )
+        raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured.")
 
     token = credentials.credentials
     try:
@@ -78,19 +81,14 @@ def require_identity(
         raise HTTPException(status_code=401, detail="Invalid session token")
 
     role   = claims.get("role", "")
-    erp_id = claims.get("erpId", "")   # Next.js mints camelCase "erpId"
+    erp_id = claims.get("erpId", "")  # Next.js mints camelCase
 
     if not erp_id:
         raise HTTPException(status_code=401, detail="Token missing erpId claim")
-    if role not in VALID_ROLES:
-        raise HTTPException(status_code=403, detail=f"Unrecognized role: {role!r}")
+    if role not in BROAD_ROLES:
+        raise HTTPException(status_code=403, detail=f"Unrecognised role in token: {role!r}")
 
-    return Identity(
-        erp_id=erp_id,
-        role=role,
-        dept=claims.get("department"),
-    )
+    return Identity(erp_id=erp_id, role=role, dept=claims.get("department"))
 
 
-# Alias used in some route files
 get_current_identity = require_identity

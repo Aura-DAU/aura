@@ -1,9 +1,9 @@
 """
-Audit Log — PostgreSQL, append-only, never crashes the request.
+Audit Log — PostgreSQL append-only, never crashes the request (B2-AUTH-9).
 
-Updated for SSO architecture: removed the separate `user_id` UUID parameter
-since the users table no longer exists. `erp_id` is the sole requester
-identifier, matching the audit_log table schema in 001_auth_schema.sql.
+scope_context field (added in 002_extend_roles.sql) records coordinator
+program scope, dean batch scope, etc. for richer audit trail — e.g.
+"coordinator:BTech-ICT" or "UG convenor → BTech-ICT".
 """
 
 import logging
@@ -11,9 +11,6 @@ import traceback
 from typing import Optional
 
 logger = logging.getLogger(__name__)
-
-
-_audit_fail_count = 0
 
 
 class AuditLog:
@@ -33,17 +30,20 @@ class AuditLog:
         target_erp_id:  Optional[str]       = None,
         denial_reason:  Optional[str]       = None,
         erp_tables:     Optional[list[str]] = None,
+        scope_context:  Optional[str]       = None,   # B2-AUTH-9: coordinator/dean scope
     ) -> None:
         """
-        Insert one audit row. Never raises — if the DB write fails, logs
-        the error to stderr but does NOT propagate (the chat response returns).
+        Insert one audit row. Never raises — wraps in try/except.
+        scope_context captures fine-grained scope info such as
+        'coordinator:BTech-ICT' or 'dean_students' for administrative roles.
         """
         try:
             self._db.execute(
                 """INSERT INTO audit_log
                    (erp_id, role, query_text, query_type,
-                    target_erp_id, access_granted, denial_reason, erp_tables)
-                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""",
+                    target_erp_id, access_granted, denial_reason,
+                    erp_tables, scope_context)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
                 (
                     erp_id,
                     role,
@@ -53,13 +53,11 @@ class AuditLog:
                     access_granted,
                     denial_reason,
                     erp_tables or [],
+                    scope_context,
                 ),
             )
         except Exception:
-            global _audit_fail_count
-            _audit_fail_count += 1
             logger.error(
-                "audit_log INSERT failed (total failures: %d) — continuing without audit row.\n%s",
-                _audit_fail_count,
+                "audit_log INSERT failed — continuing.\n%s",
                 traceback.format_exc(),
             )
