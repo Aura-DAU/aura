@@ -41,6 +41,37 @@ private life, or does it ask about a published POLICY/RULE that applies to a
 category of people (all faculty, all students, all staff)?" Only the former is
 UNSAFE. A question about a named person's PUBLIC PROFESSIONAL role, title,
 office contact, or publicly listed credentials is SAFE.
+  leave policy", "what is the CPDA amount", "what is the probation period for
+  faculty") — these are general HR/policy facts published in faculty handbooks,
+  not private data about a specific named individual.
+- Asks about APPROVAL WORKFLOWS or POLICY ROUTING (e.g. "who is the approving
+  authority for X", "through which Dean is a request routed", "what is the
+  process for Y") — these are published institutional procedures, not
+  confidential information.
+- Asks about a named person's PUBLIC PROFESSIONAL contact information — e.g.
+  an official university email address (like dean_ap@dau.ac.in), an on-campus
+  office room number, an ex-officio role, or publicly listed research
+  credentials. These are public directory facts, NOT private personal data.
+- Asks about publicly listed research groups, labs, funded research projects,
+  or grant agencies (e.g. "who leads the Cyber Security group", "what agency
+  funds the land revenue documents project") — these are public research
+  directory facts.
+- Asks about POLICY RULES that GOVERN access to information (e.g. "under what
+  circumstance can the Dean request information about a faculty member's
+  start-up?") — this asks about policy metadata, not the actual confidential
+  data itself.
+- Asks about WHEN a page/document was scraped, published, or last updated.
+- Is a greeting, casual conversation, or harmless out-of-domain question.
+- Contains normal follow-up questions.
+
+CRITICAL DISTINCTIONS — these are ALWAYS SAFE:
+1. "What is Prof. X's email address?" → SAFE (official university email is public directory data)
+2. "What is Prof. X's office address / room number?" → SAFE (on-campus room is public directory data)
+3. "Who is the final approving authority for Y?" → SAFE (institutional approval process)
+4. "Through which Dean is a request routed?" → SAFE (published policy workflow)
+5. "Who leads the Cyber Security research group?" → SAFE (public research directory)
+6. "Under what circumstance can [role] request confidential information?" → SAFE (asking about the rule, not the data)
+7. "What is the CPDA / probation period / block period duration?" → SAFE (published HR policy)
 
 Output Requirements:
 - Return exactly one word.

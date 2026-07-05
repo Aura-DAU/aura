@@ -24,7 +24,7 @@ export async function POST(req: Request) {
   }
 
   // Mint internal JWT
-  const internalToken = await signInternalJwt({
+  const internalToken = signInternalJwt({
     role: session.user.role,
     erpId: session.user.erpId,
     department: session.user.department,

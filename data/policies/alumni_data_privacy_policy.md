@@ -9,6 +9,15 @@ team: "Team E"
 
 # Data Privacy Policy
 
+## Document Authority
+- **Signed by:** Registrar, DAU
+- **Effective Date:** 26 June 2024
+- **Next Review Due:** June 2025
+
+## Version History
+- **Ver 1.0** (Effective: 26 June 2024) — Annual review completed; first version of the policy.
+
+
 ## Overview
 
 This policy outlines the guidelines and procedures for the confidentiality and protection of Alumni data at DA-IICT, Gandhinagar. Alumni data includes any information related to former students of the institution, collected during their time as students and afterward. Protecting this data is essenti

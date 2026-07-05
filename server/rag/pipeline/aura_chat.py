@@ -17,9 +17,6 @@ Step 7: If PUBLIC/MIXED → run existing RAG pipeline
 
 import os
 import re
-import logging
-
-logger = logging.getLogger(__name__)
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import AnswerGenerator
 from pipeline.guardrails.query_guardrail import QueryGuardrail
@@ -87,20 +84,18 @@ class AuraChat:
 
     def chat(self, query, history=None, identity=None, display_profile=None):
         try:
-            history = history or []
-
-            # ── Greetings bypass guardrail + classifier (Fix #16) ──────
-            # Greetings are definitionally safe — checking guardrail first
-            # wastes a Groq API call for every "Hello" or "What can you do".
-            if is_greeting_or_meta(query):
-                return self._rag_only(query, history, display_profile)
-
-            # ── Safety guardrail (applies to all non-greeting queries) ─
+            # ── Safety guardrail (applies to every query) ──────────────
             if not self.guardrail.is_safe(query):
                 return {
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                     "sources": [],
                 }
+
+            history = history or []
+
+            # ── Greetings bypass classifier ────────────────────────────
+            if is_greeting_or_meta(query):
+                return self._rag_only(query, history, display_profile)
 
             # ── Step 1: Classify ────────────────────────────────────────
             classification = self.classifier.classify(query)
@@ -130,6 +125,7 @@ class AuraChat:
                     access_granted=(access_result.decision == AccessDecision.ALLOWED),
                     denial_reason=access_result.reason if access_result.decision == AccessDecision.DENIED else None,
                     erp_tables=classification.get("erp_fields", []),
+                    scope_context=getattr(access_result, "scope_context", None),
                 )
 
                 # Step 5: If DENIED → return generic message
@@ -146,14 +142,13 @@ class AuraChat:
                 is_personal = True
 
             # ── Step 7: Public RAG (for PUBLIC and MIXED) ──────────────
-            rag_context      = ""
-            sources          = []
-            retrieval_result = None
+            rag_context = ""
+            sources     = []
             if query_type in ("PUBLIC", "MIXED", "AGGREGATE"):
                 retrieval_result = self.pipeline.get_context(query, history)
-                chunks      = retrieval_result.get("chunks", [])
+                chunks    = retrieval_result.get("chunks", [])
                 rag_context = retrieval_result.get("context", "")
-                sources     = retrieval_result.get("sources", [])
+                sources   = retrieval_result.get("sources", [])
 
                 if not chunks and query_type == "PUBLIC":
                     return {"answer": "I'm having trouble retrieving information right now. Please try again.", "sources": [], "is_personal_data": False}
@@ -161,23 +156,10 @@ class AuraChat:
             # ── Step 8: Merge and generate ─────────────────────────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
 
-            # Fix #1: retrieval_result is None for pure PERSONAL queries —
-            # guard every access to avoid NameError / TypeError.
-            rag_corrected_query = (
-                retrieval_result.get("corrected_query", query)
-                if retrieval_result and rag_context
-                else query
-            )
-            rag_plan = (
-                retrieval_result.get("plan")
-                if retrieval_result and rag_context
-                else None
-            )
-
             answer = self.generator.generate(
-                query=rag_corrected_query,
+                query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
                 context=combined_context,
-                plan=rag_plan,
+                plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
                 history=history,
                 profile=display_profile,
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
@@ -202,11 +184,8 @@ class AuraChat:
     def _resolve_target(self, target_label: str | None, identity) -> str | None:
         if not target_label or target_label == "self":
             return identity.erp_id
-        # Fix #4: use a strict 9-digit pattern to identify roll numbers.
-        # The old [:3].isdigit() check was too loose — it matched strings like
-        # "2nd year Parth" and would have returned them as an ERP ID.
-        if target_label and re.fullmatch(r"\d{9}", target_label.strip()):
-            return target_label.strip()
+        if target_label and target_label[:3].isdigit():
+            return target_label
         result = self.erp_connector.find_student_by_name(target_label)
         return result["roll_number"] if result else None
 

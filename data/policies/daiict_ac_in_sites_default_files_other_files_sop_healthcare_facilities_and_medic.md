@@ -11,6 +11,10 @@ pdf_name: "medical assisstance"
 
 # medical assisstance
 
+## Version History
+- **Ver 1.0** (Effective: 16 January 2026) — Replaces and supersedes the prior Medical SOP.
+
+
 ## Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.

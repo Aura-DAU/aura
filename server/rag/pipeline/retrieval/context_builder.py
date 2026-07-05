@@ -1,3 +1,5 @@
+import re
+
 class ContextBuilder:
 
     # Fix G (original): cap context to avoid LLM truncation.
@@ -66,9 +68,10 @@ class ContextBuilder:
             # (e.g. "Academic Requirements PhD wef 2024-25" → "2024-25")
             # and added as an XML attribute. This lets the LLM explicitly see
             # which year's document it is reading and cite the year correctly.
-            import re as _re_cb
+            # Fix CB5: moved `import re` to the top of the file (was imported
+            # inside this loop on every chunk iteration, which is unnecessary).
             title_str = metadata.get("title", "")
-            year_match = _re_cb.search(r"(20\d{2}[-–]\d{2,4})", title_str)
+            year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
             doc_rule_year = year_match.group(1) if year_match else ""
 
             document = f"""
