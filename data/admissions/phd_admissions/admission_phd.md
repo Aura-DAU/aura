@@ -26,6 +26,7 @@ School of Technology, Dhirubhai Ambani University (Formerly DA-IICT) invites app
 | Fees payment window | TBD |
 | Registration and document verification at DAIICT campus for confirmed candidates (**Tentative**) | 14 July 2026 |
 | Commencement of classes **(Tentative)** | 20 July 2026 |
+| Last date to submit No Objection Certificate (NOC) for External Part-time candidates | **30 October 2026** |
 
 ## Program Overview
 
@@ -225,9 +226,13 @@ The selection to the Ph D program will be based on Entrance Test and/or Intervie
 
 ### Fellowship provided by DAU (Formerly DA-IICT)?
 
-**The Current fellowship is as follows:**
+The fellowship is provided to eligible full-time PhD students in the non-sponsored category, with the same monthly amount for both Teaching Assistantships (TAs) and Research Assistantships (RAs):
 
-For the first two years the fellowship would be Rs. 35,000 per month. From the third year the fellowship will be revised to Rs. 40,000/- per month upto the fifth year.
+*   **Fellowship Amount (Years 1 & 2):** Rs. 35,000 per month.
+*   **Fellowship Amount (Years 3, 4 & 5):** Rs. 40,000 per month.
+*   **Designation Distinction:** The monthly stipend amount is identical for both TAs and RAs.
+*   **Maximum Duration:** Up to 5 years total, subject to meeting academic and assistantship performance requirements.
+*   **Duties:** TAs and RAs are expected to assist in conducting laboratory courses, tutorials, teaching, research projects, and academic administration.
 
 ### What is the refund policy for Ph.D. candidates?
 
@@ -293,6 +298,11 @@ No, there is no any age limit to apply for Ph.D
 ### What is the difference between Ph.D. (Regular) and Ph.D.(Part-time)?
 
 Ph.D. (Regular) is Full-time doctoral program. Ph.D. (Part-time) can be pursued by candidates with relevant work-experience as per the eligibility criteria mentioned at the website. The PhD (Regular) full-time candidates get financial assistance from the Institute or some other agency, whereas the part-time candidates will not get any financial assistance from the Institute.
+
+### What is the deadline to submit the No Objection Certificate (NOC) for External Part-time Ph.D. candidates?
+
+For candidates applying in the External Part-time category, the deadline to submit the No Objection Certificate (NOC) is **30 October 2026**. 
+*Note: Submission of NOC is not mandatory at the time of application, but it must be submitted by this deadline to prevent cancellation of admission.*
 
 ## For Inquiries
 

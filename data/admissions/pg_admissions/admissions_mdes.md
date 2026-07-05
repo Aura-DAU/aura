@@ -153,15 +153,21 @@ Final merit list of confirmed and wait-list candidates based on entrance test an
 
 The offer letter for admission will be sent by the Admission committee through post or email to candidates.
 
-In case of a tie, years of experience, marks in 10+2 and 10th examination or age will be considered in order to break the tie.
+In case of a tie in the final merit list, the tie will be broken by applying the following criteria in this exact order:
+1. Years of experience (work experience)
+2. Marks obtained in the 10+2 / Higher Secondary examination
+3. Marks obtained in the 10th standard / Secondary examination
+4. Age of the candidate (older candidate preferred)
 
 ## FAQs
 
 ### How many specialisations are offered under M.Des.?
 
-There is only one specialization offered as follows for AY 2026-27:
+There is only one specialization offered for AY 2026-27:
 
 * Intelligent User Experience Design (IUxD)
+
+**Note:** M.Des. in Communication Design (CD) is **not** offered for the academic year 2026-27. Only M.Des. (IUxD) is available for admissions.
 
 ### Please give me the program overview for specialization - Master of Design (Intelligent User Experience Design) – M.Des. (IUxD)
 
@@ -217,7 +223,11 @@ The Design Aptitude Test for MDes Intelligent User Experience Design (MDes IUxD)
 
 ### What is the selection procedure in case of tie, after the final merit list for M.Des.?
 
-In case of a tie, years of experience, marks in 10+2 and 10th examination or age will be considered in order to break the tie.
+In case of a tie, the tie will be broken by applying the following criteria in this exact order:
+1. Years of experience (work experience)
+2. Marks obtained in the 10+2 / Higher Secondary examination
+3. Marks obtained in the 10th standard / Secondary examination
+4. Age of the candidate (older candidate preferred)
 
 ### Is there any management quota in M.Des. Program?
 
