@@ -21,6 +21,7 @@ from pipeline.speech import transcribe_audio
 from api.auth import require_identity, Identity
 from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
+from api.routes.calendar_routes import router as calendar_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
@@ -51,6 +52,7 @@ app.add_middleware(
 # No auth_router — login/refresh/logout are handled entirely by NextAuth.js
 app.include_router(identity_router)
 app.include_router(admin_router)
+app.include_router(calendar_router)
 
 # ── Whisper concurrency lock ──────────────────────────────────────────────
 speech_queue_lock = asyncio.Semaphore(1)
@@ -178,14 +180,16 @@ async def speech(
 
 @app.get("/health")
 async def health():
+    # Public: only confirms the server is alive. No secrets, no env detail.
+    return {"status": "online", "service": "AURA API"}
+
+@app.get("/health/detail")
+async def health_detail(identity: Identity = Depends(require_identity)):
+    # Authenticated admins only
+    if identity.role != "admin":
+        raise HTTPException(status_code=403, detail="Forbidden")
     return {
-        "status": "online",
-        "auth_mode": "NextAuth.js SSO (Google) — FastAPI verifies internal JWT only",
-        "env_check": {
-            "INTERNAL_JWT_SECRET":    "SET" if os.getenv("INTERNAL_JWT_SECRET") else "MISSING",
-            "INTERNAL_RESOLVE_SECRET":"SET" if os.getenv("INTERNAL_RESOLVE_SECRET") else "MISSING",
-            "AUTH_DB_URL":            "SET" if os.getenv("AUTH_DB_URL") else "MISSING",
-            "ERP_DB_HOST":            "SET" if os.getenv("ERP_DB_HOST") else "MISSING (scrape mode)",
-            "PROD_FRONTEND_ORIGIN":   os.getenv("PROD_FRONTEND_ORIGIN", "not set"),
-        },
+        "INTERNAL_JWT_SECRET":    bool(os.getenv("INTERNAL_JWT_SECRET")),
+        "AUTH_DB_URL":            bool(os.getenv("AUTH_DB_URL")),
+        "ERP_DB_HOST":            bool(os.getenv("ERP_DB_HOST")),
     }

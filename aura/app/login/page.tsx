@@ -3,11 +3,11 @@
 import { useState, Suspense } from "react"
 import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
-import { Sparkles, Loader2, Globe, GraduationCap, BookOpen, AlertCircle } from "lucide-react"
+import { Sparkles, Loader2, Globe, GraduationCap, BookOpen, AlertCircle, Shield } from "lucide-react"
 import { BrandMark } from "@/components/common/BrandMark"
 
 function LoginCard() {
-  const [loading, setLoading] = useState<"google" | "demo-student" | "demo-faculty" | null>(null)
+  const [loading, setLoading] = useState<"google" | "demo-student" | "demo-faculty" | "demo-admin" | null>(null)
   const searchParams = useSearchParams()
   const errorParam = searchParams.get("error")
 
@@ -25,10 +25,18 @@ function LoginCard() {
     signIn("google", { callbackUrl: "/" })
   }
 
-  const handleDemoSignIn = async (role: "student" | "faculty") => {
+  const handleDemoSignIn = async (role: "student" | "faculty" | "admin") => {
     setLoading(`demo-${role}`)
-    const email = role === "student" ? "demo.student@dau.ac.in" : "demo.faculty@daiict.ac.in"
-    const password = role === "student" ? "Student@123" : "Faculty@123"
+    const email = role === "student"
+      ? "demo.student@dau.ac.in"
+      : role === "faculty"
+        ? "demo.faculty@daiict.ac.in"
+        : "demo.admin@dau.ac.in"
+    const password = role === "student"
+      ? "Student@123"
+      : role === "faculty"
+        ? "Faculty@123"
+        : "Admin@123"
 
     try {
       const res = await signIn("credentials", {
@@ -72,26 +80,39 @@ function LoginCard() {
       </p>
 
       {/* Development Demo Mode - always shown in dev build */}
-      <div className="mt-8 border-t border-theme-gray-light pt-6">
-        <div className="flex gap-2">
-          <button
-            onClick={() => handleDemoSignIn("student")}
-            disabled={loading !== null}
-            className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-theme-gray-lighter bg-theme-gray px-3 py-2 text-xs font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
-          >
-            {loading === "demo-student" ? <Loader2 className="size-3 animate-spin" /> : <GraduationCap className="size-3" />}
-            Demo Student
-          </button>
-          <button
-            onClick={() => handleDemoSignIn("faculty")}
-            disabled={loading !== null}
-            className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-theme-gray-lighter bg-theme-gray px-3 py-2 text-xs font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
-          >
-            {loading === "demo-faculty" ? <Loader2 className="size-3 animate-spin" /> : <BookOpen className="size-3" />}
-            Demo Faculty
-          </button>
+      {/* Dev-only: after switching demo accounts, always wait for Sign Out to fully
+          redirect to /login before clicking another demo button — rapid switching has a
+          known session-cache race condition, tracked as a follow-up. */}
+      {process.env.NODE_ENV === "development" && (
+        <div className="mt-8 border-t border-theme-gray-light pt-6">
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              onClick={() => handleDemoSignIn("student")}
+              disabled={loading !== null}
+              className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
+            >
+              {loading === "demo-student" ? <Loader2 className="size-3 animate-spin" /> : <GraduationCap className="size-3.5 text-theme-yellow" />}
+              Student
+            </button>
+            <button
+              onClick={() => handleDemoSignIn("faculty")}
+              disabled={loading !== null}
+              className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
+            >
+              {loading === "demo-faculty" ? <Loader2 className="size-3 animate-spin" /> : <BookOpen className="size-3.5 text-theme-yellow" />}
+              Faculty
+            </button>
+            <button
+              onClick={() => handleDemoSignIn("admin")}
+              disabled={loading !== null}
+              className="flex items-center justify-center gap-1.5 rounded-lg border border-theme-gray-lighter bg-theme-gray px-2 py-2 text-[11px] font-medium text-neutral-300 hover:text-white disabled:opacity-60 cursor-pointer"
+            >
+              {loading === "demo-admin" ? <Loader2 className="size-3 animate-spin" /> : <Shield className="size-3.5 text-theme-yellow" />}
+              Admin
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

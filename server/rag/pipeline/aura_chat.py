@@ -83,6 +83,19 @@ class AuraChat:
         self.audit_log      = AuditLog()
 
     def chat(self, query, history=None, identity=None, display_profile=None):
+        # Convert dict identity to a simple object with dot-attribute access to avoid AttributeError
+        if isinstance(identity, dict):
+            class SimpleIdentity:
+                def __init__(self, erp_id, role, dept=None):
+                    self.erp_id = erp_id
+                    self.role = role
+                    self.dept = dept
+            identity = SimpleIdentity(
+                erp_id=identity.get("erp_id"),
+                role=identity.get("role"),
+                dept=identity.get("dept")
+            )
+
         try:
             # ── Safety guardrail (applies to every query) ──────────────
             if not self.guardrail.is_safe(query):
@@ -92,50 +105,29 @@ class AuraChat:
                 }
 
             history = history or []
-            # Guardrail / Query Augmentation for RBAC
-            retrieval_query = query
-            user_role = getattr(identity, "role", "public") if identity else "public"
-            if display_profile:
-                role = display_profile.get("role", "student")
-                if role == "professor":
-                    subjects = display_profile.get("subjects", [])
-                    if subjects:
-                        subjects_str = ", ".join(subjects)
-                        retrieval_query = f"{query} (Context: student data related to {subjects_str})"
-
-            # Fix HARDCODE-REMOVAL: previously this function used four separate
-            # static Python keyword lists (FEE_KEYWORDS, MYTH_BUST_PATTERNS,
-            # LAUNDRY_KEYWORDS, MOVEIN_KEYWORDS) here in aura_chat.py to
-            # pattern-match query intent and bolt extra words onto the
-            # retrieval query. This doesn't generalize: every new entity,
-            # policy, or vocabulary gap found in testing required editing
-            # this file and redeploying a new static list.
-            #
-            # All of that logic has been moved into retrieval_pipeline.py
-            # get_context() (Fix QP6/RP-MYTH), which runs AFTER the LLM-driven
-            # query_planner classifies retrieval_intent and is_claim_verification
-            # generically for every query — no static keyword lists, no
-            # per-topic hardcoding, and it automatically covers any future
-            # entity, policy, or vocabulary the planner LLM can recognize.
-            # The query_rewriter (Fix QR2) separately handles colloquial/vague
-            # vocabulary expansion (e.g. "dhobi", "mattress") using the same
-            # LLM-driven approach instead of static synonym lists.
-
-            retrieval_result = (
-                self.pipeline.get_context(
-                    retrieval_query,
-                    history=history,
-                    user_role=user_role
-                )
-            )
 
             # ── Greetings bypass classifier ────────────────────────────
             if is_greeting_or_meta(query):
-                return self._rag_only(query, history, display_profile)
+                from access_control import resolve_effective_role
+                user_role = resolve_effective_role(identity) if identity else "public"
+                return self._rag_only(query, history, display_profile, user_role=user_role)
 
             # ── Step 1: Classify ────────────────────────────────────────
             classification = self.classifier.classify(query)
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
+
+            # ── Step 1b: Strict guardrail for personal-data paths ───────
+            # is_safe() above fails OPEN (acceptable for public RAG). For
+            # personal/ERP paths we re-check with is_safe_strict() which
+            # fails CLOSED — if the guardrail LLM is down, deny rather than
+            # risk a prompt injection reaching the ERP pipeline.
+            if query_type in ("PERSONAL", "MIXED", "AGGREGATE") and identity:
+                if not self.guardrail.is_safe_strict(query):
+                    return {
+                        "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                        "sources": [],
+                        "is_personal_data": False,
+                    }
 
             erp_context   = ""
             is_personal   = False
@@ -161,6 +153,7 @@ class AuraChat:
                     access_granted=(access_result.decision == AccessDecision.ALLOWED),
                     denial_reason=access_result.reason if access_result.decision == AccessDecision.DENIED else None,
                     erp_tables=classification.get("erp_fields", []),
+                    scope_context=getattr(access_result, "scope_context", None),
                 )
 
                 # Step 5: If DENIED → return generic message
@@ -180,7 +173,9 @@ class AuraChat:
             rag_context = ""
             sources     = []
             if query_type in ("PUBLIC", "MIXED", "AGGREGATE"):
-                retrieval_result = self.pipeline.get_context(query, history)
+                from access_control import resolve_effective_role
+                user_role = resolve_effective_role(identity) if identity else "public"
+                retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
                 chunks    = retrieval_result.get("chunks", [])
                 rag_context = retrieval_result.get("context", "")
                 sources   = retrieval_result.get("sources", [])
@@ -238,8 +233,8 @@ class AuraChat:
         if "courses"    in fields: data["courses"]     = self.erp_connector.get_faculty_courses(roll_number)
         return data
 
-    def _rag_only(self, query, history, profile) -> dict:
-        retrieval_result = self.pipeline.get_context(query, history)
+    def _rag_only(self, query, history, profile, user_role: str = "public") -> dict:
+        retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
         chunks    = retrieval_result.get("chunks", [])
         if not chunks:
             return {"answer": "I'm having trouble retrieving information. Please try again.", "sources": [], "is_personal_data": False}

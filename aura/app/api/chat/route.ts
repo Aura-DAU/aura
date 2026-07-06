@@ -99,6 +99,7 @@ export async function POST(req: Request) {
   }
 
   const answer = data?.answer ?? ""
+  const isPersonalData = data?.is_personal_data === true
   const citations = (data?.sources ?? [])
     .map(normaliseSource)
     .filter((c): c is { file: string; title?: string } => c !== null)
@@ -109,6 +110,9 @@ export async function POST(req: Request) {
       controller.enqueue(encoder.encode(sseLine({ type: "text-delta", delta: answer })))
       if (citations.length > 0) {
         controller.enqueue(encoder.encode(sseLine({ type: "citations", citations })))
+      }
+      if (isPersonalData) {
+        controller.enqueue(encoder.encode(sseLine({ type: "personal-data-flag" })))
       }
       controller.enqueue(encoder.encode("data: [DONE]\n\n"))
       controller.close()

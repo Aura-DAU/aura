@@ -29,8 +29,25 @@ import sqlite3
 from pathlib import Path
 from cryptography.fernet import Fernet
 
-VAULT_KEY = os.environ["ECAMPUS_VAULT_KEY"]  # generate once via Fernet.generate_key(), store in secrets manager
-_fernet = Fernet(VAULT_KEY.encode() if isinstance(VAULT_KEY, str) else VAULT_KEY)
+# Fix #2: VAULT_KEY was read at module level, so a missing env var crashed the
+# entire server at startup even when the scrape path was never exercised.
+# Replaced with a lazy getter so the error surfaces only when credentials
+# are actually needed.
+_fernet = None
+
+
+def _get_fernet():
+    global _fernet
+    if _fernet is None:
+        key = os.environ.get("ECAMPUS_VAULT_KEY")
+        if not key:
+            raise RuntimeError(
+                "ECAMPUS_VAULT_KEY is not set. Generate one with "
+                "Fernet.generate_key() and add it to your .env / secrets manager."
+            )
+        from cryptography.fernet import Fernet as _Fernet
+        _fernet = _Fernet(key.encode() if isinstance(key, str) else key)
+    return _fernet
 
 DB_PATH = Path(os.environ.get("ECAMPUS_VAULT_DB", "/var/lib/aura/ecampus_credentials.db"))
 
@@ -67,7 +84,7 @@ def store_credentials(erp_id: str, ecampus_username: str, ecampus_password: str)
     """Called once, during the explicit 'Connect your eCampus account' flow —
     never inferred or auto-populated from any other source."""
     blob = json.dumps({"username": ecampus_username, "password": ecampus_password}).encode()
-    encrypted = _fernet.encrypt(blob)
+    encrypted = _get_fernet().encrypt(blob)
     with _connect() as conn:
         conn.execute(
             """INSERT INTO ecampus_credentials (erp_id, encrypted_blob, linked_at)
@@ -92,7 +109,7 @@ def get_credentials(erp_id: str) -> tuple[str, str]:
             f"No eCampus credentials linked for {erp_id}. "
             "Prompt the user to connect their eCampus account first."
         )
-    decrypted = _fernet.decrypt(row[0])
+    decrypted = _get_fernet().decrypt(row[0])
     data = json.loads(decrypted)
     return data["username"], data["password"]
 

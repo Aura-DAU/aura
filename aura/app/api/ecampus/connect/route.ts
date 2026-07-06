@@ -2,12 +2,11 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 import { NextResponse } from "next/server"
-// import { backendUrl } from "@/lib/api/backend" // uncomment when backend is ready
+import { backendUrl } from "@/lib/api/backend"
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
-  
-  if (!session?.user) {
+  if (!session?.user?.erpId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
@@ -18,25 +17,44 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
 
-  const { password } = body
-  if (!password) {
-    return NextResponse.json({ error: "Password is required" }, { status: 400 })
+  const { ecampus_username, password } = body
+  if (!ecampus_username || !password) {
+    return NextResponse.json({ error: "Username and password required" }, { status: 400 })
   }
 
   // Mint internal JWT
-  const internalToken = signInternalJwt({
+  const token = signInternalJwt({
     role: session.user.role,
     erpId: session.user.erpId,
     department: session.user.department,
   })
 
-  // DUMMY IMPLEMENTATION for unbuilt backend
-  // In the future, this will be:
-  // const backendRes = await fetch(backendUrl("/ecampus/credentials"), { ... })
-  console.log(`[DUMMY] Forwarding eCampus credentials for ${session.user.erpId} to backend with token: ${internalToken.substring(0, 10)}...`)
-  
-  // Fake delay
-  await new Promise(resolve => setTimeout(resolve, 800))
+  try {
+    const res = await fetch(backendUrl("/ecampus/link"), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ecampus_username, ecampus_password: password }),
+    })
 
-  return NextResponse.json({ success: true })
+    if (!res.ok) {
+      let errDetail = "Failed to link eCampus account"
+      try {
+        const errJson = await res.json()
+        if (errJson?.detail) errDetail = errJson.detail
+      } catch {
+        const errText = await res.text().catch(() => "")
+        if (errText) errDetail = errText
+      }
+      return NextResponse.json({ error: errDetail }, { status: res.status })
+    }
+
+    const data = await res.json()
+    return NextResponse.json(data)
+  } catch (err) {
+    console.error("[ecampus-connect] POST failed:", err)
+    return NextResponse.json({ error: "Backend unavailable" }, { status: 502 })
+  }
 }

@@ -61,8 +61,6 @@ office contact, or publicly listed credentials is SAFE.
   start-up?") — this asks about policy metadata, not the actual confidential
   data itself.
 - Asks about WHEN a page/document was scraped, published, or last updated.
-- Is a greeting, casual conversation, or harmless out-of-domain question.
-- Contains normal follow-up questions.
 
 CRITICAL DISTINCTIONS — these are ALWAYS SAFE:
 1. "What is Prof. X's email address?" → SAFE (official university email is public directory data)
@@ -103,3 +101,16 @@ UNSAFE
             print(f"[Guardrail] Error evaluating query: {e}")
             # Fail open to prevent blocking all queries if the LLM API is down
             return True
+
+    def is_safe_strict(self, query: str) -> bool:
+        """Like is_safe() but fails CLOSED on any exception.
+
+        Use this before routing to personal-data paths: if the guardrail LLM
+        is unavailable we must deny rather than risk passing a prompt injection
+        through to the ERP/ecampus pipeline.
+        """
+        try:
+            return self.is_safe(query)
+        except Exception as e:
+            print(f"[Guardrail] Strict check failed, denying query: {e}")
+            return False  # Fail CLOSED — deny on uncertainty for personal data

@@ -24,7 +24,7 @@ def test_rbac_additive_hierarchy():
     assert "faculty" in ug_convenor_roles
     assert "faculty_coord" in ug_convenor_roles
     assert "faculty_convenor_ug" in ug_convenor_roles
-    assert "faculty_convenor_pg" in ug_convenor_roles
+    assert "faculty_convenor_pg" not in ug_convenor_roles
     
     # Test superadmin
     superadmin_roles = get_allowed_roles("superadmin")
@@ -32,6 +32,13 @@ def test_rbac_additive_hierarchy():
     assert "faculty" in superadmin_roles
     assert "student" in superadmin_roles
     assert "dean_academic" in superadmin_roles
+    
+    # Test admin
+    admin_roles = get_allowed_roles("admin")
+    assert "public" in admin_roles
+    assert "faculty" in admin_roles
+    assert "student" in admin_roles
+    assert "dean_academic" in admin_roles
     
     # Test unknown role fallback
     assert get_allowed_roles("unknown_role") == ["public"]

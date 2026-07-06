@@ -1,6 +1,9 @@
 import jwt from "jsonwebtoken"
 
-const JWT_SECRET = process.env.INTERNAL_JWT_SECRET || "fallback-secret-for-development-only"
+const JWT_SECRET = process.env.INTERNAL_JWT_SECRET
+if (!JWT_SECRET) {
+  throw new Error("FATAL: INTERNAL_JWT_SECRET is not set. Set it before starting the server.")
+}
 
 export interface InternalJwtPayload {
   role: "student" | "faculty" | "admin"

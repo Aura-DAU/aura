@@ -35,6 +35,7 @@ import os
 import sys
 import argparse
 import psycopg2
+from psycopg2 import sql
 from pathlib import Path
 
 MIGRATIONS_DIR = Path(__file__).resolve().parent / "migrations"
@@ -46,16 +47,16 @@ def _conn(db_url: str):
 
 
 def _ensure_tracking_table(cur) -> None:
-    cur.execute(f"""
-        CREATE TABLE IF NOT EXISTS {TRACKING_TABLE} (
+    cur.execute(sql.SQL("""
+        CREATE TABLE IF NOT EXISTS {} (
             filename    TEXT PRIMARY KEY,
             applied_at  TIMESTAMPTZ DEFAULT now()
         )
-    """)
+    """).format(sql.Identifier(TRACKING_TABLE)))
 
 
 def _applied_migrations(cur) -> set[str]:
-    cur.execute(f"SELECT filename FROM {TRACKING_TABLE}")
+    cur.execute(sql.SQL("SELECT filename FROM {}").format(sql.Identifier(TRACKING_TABLE)))
     return {r[0] for r in cur.fetchall()}
 
 
@@ -89,7 +90,9 @@ def run(db_url: str, dry_run: bool = False) -> None:
                 with conn.cursor() as cur:
                     cur.execute(sql)
                     cur.execute(
-                        f"INSERT INTO {TRACKING_TABLE} (filename) VALUES (%s)",
+                        sql.SQL("INSERT INTO {} (filename) VALUES (%s)").format(
+                            sql.Identifier(TRACKING_TABLE)
+                        ),
                         (migration_file.name,),
                     )
                 conn.commit()

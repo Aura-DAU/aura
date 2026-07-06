@@ -2,9 +2,6 @@
 
 import { Sparkles } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useSession } from "next-auth/react"
-import { StudentDashboard } from "./StudentDashboard"
-import { FacultyDashboard } from "./FacultyDashboard"
 
 interface EmptyStateProps {
   onSelectPrompt: (text: string) => void
@@ -18,30 +15,8 @@ const STARTER_PROMPTS = [
 ]
 
 export function EmptyState({ onSelectPrompt }: EmptyStateProps) {
-  const { data: session } = useSession()
-  const role = (session?.user?.role as string) || ""
-  const userName = session?.user?.name || "User"
-  const departmentName = session?.user?.department
-  if (role === "student") {
-    return (
-      <StudentDashboard
-        userName={userName}
-        departmentName={departmentName}
-        onSelectPrompt={onSelectPrompt}
-      />
-    )
-  }
-  if (role.startsWith("faculty") || role.startsWith("dean") || role === "registrar") {
-    return (
-      <FacultyDashboard
-        userName={userName}
-        departmentName={departmentName}
-        onSelectPrompt={onSelectPrompt}
-      />
-    )
-  }
   return (
-    <div className="mx-auto flex min-h-full max-w-3xl flex-col items-center justify-center px-4 py-16 text-center">
+    <div className="mx-auto flex min-h-full max-w-3xl flex-col items-center justify-center px-4 py-16 text-center animate-in fade-in duration-200">
       <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-theme-gray-light bg-theme-gray px-3 py-1 text-xs text-neutral-400">
         <Sparkles className="size-3.5 text-theme-yellow" />
         AURA · DAU Assistant

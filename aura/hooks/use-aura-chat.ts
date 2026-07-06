@@ -8,7 +8,7 @@ import type {
   StudentProfile,
 } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
-import { apiFetch, setToken } from "@/lib/auth-client"
+import { apiFetch, setToken, initAuth } from "@/lib/auth-client"
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
@@ -59,6 +59,22 @@ function saveHistoryToServer(
   }).catch(() => { /* ignore network errors */ })
 }
 
+/**
+ * Returns a copy of threads with personal-data assistant message content
+ * replaced by a redaction placeholder. The live UI state is unaffected —
+ * only the copy written to localStorage / the server is redacted.
+ */
+function redactPersonalDataMessages(threads: StoredThread[]): StoredThread[] {
+  return threads.map((t) => ({
+    ...t,
+    messages: t.messages.map((m) =>
+      m.is_personal_data
+        ? { ...m, content: "[Personal data — not stored]" }
+        : m
+    ),
+  }))
+}
+
 async function* parseSSEStream(response: Response) {
   if (!response.body) throw new Error("No response body")
   const reader = response.body.getReader()
@@ -102,8 +118,8 @@ export function useAuraChat() {
   const { data: session } = useSession()
 
   useEffect(() => {
-    if (session?.accessToken) {
-      setToken(session.accessToken)
+    if (session) {
+      initAuth()
     } else {
       setToken(null)
     }
@@ -138,7 +154,8 @@ export function useAuraChat() {
   useEffect(() => {
     if (!hydrated.current) return
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(threads))
+      // Redact personal-data content before writing to localStorage
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(redactPersonalDataMessages(threads)))
     } catch {
       /* quota or unavailable */
     }
@@ -274,6 +291,7 @@ export function useAuraChat() {
 
         let assistantText = ""
         let citations: Citation[] = []
+        let isPersonalData = false
         const assistantMsg: ChatMessage = {
           role: "assistant",
           content: "",
@@ -293,12 +311,14 @@ export function useAuraChat() {
           } else if (chunk.type === "citations" && Array.isArray(chunk.citations)) {
             citations = chunk.citations as Citation[]
             setActiveCitations(citations)
+          } else if (chunk.type === "personal-data-flag") {
+            isPersonalData = true
           }
         }
 
         const finalMessages: ChatMessage[] = [
           ...baseMessages,
-          { ...assistantMsg, content: assistantText },
+          { ...assistantMsg, content: assistantText, is_personal_data: isPersonalData || undefined },
         ]
         persistMessages(threadId, finalMessages)
 
@@ -306,7 +326,8 @@ export function useAuraChat() {
         try {
           if (session?.user?.email) {
             setThreads((current) => {
-              saveHistoryToServer(session.user.email!, current)
+              // Redact personal-data content before sending to server
+              saveHistoryToServer(session.user.email!, redactPersonalDataMessages(current))
               return current
             })
           }

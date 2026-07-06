@@ -99,6 +99,18 @@ class ECampusClient:
             self._session.logout()
             self._session = None
 
+    # Fix #11: context-manager support so callers can write:
+    #   with ECampusClient(erp_id=erp_id) as client:
+    #       ...
+    # This guarantees close() (and therefore logout()) is always called,
+    # even if an exception occurs during the session, preventing dangling
+    # authenticated sessions on the eCampus server.
+    def __enter__(self) -> "ECampusClient":
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        self.close()
+
 
 def get_faculty_schedule(faculty_name: str) -> dict:
     """Module-level, not tied to a student's session — pulls from the pool

@@ -53,7 +53,13 @@ def get_conn():
 
 
 def query(sql: str, params: tuple = ()) -> list[dict]:
-    """One-shot query helper — use for reads."""
+    """One-shot query helper — use for reads.
+    Enforces SELECT-only statement execution at the code level."""
+    if not sql.strip().upper().startswith("SELECT"):
+        raise ValueError(
+            "db_conn.query only accepts SELECT statements. "
+            f"Received: {sql[:40]!r}"
+        )
     with get_conn() as conn:
         with conn.cursor() as cur:
             cur.execute(sql, params)

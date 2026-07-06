@@ -3,6 +3,7 @@ from pipeline.retrieval.retriever import Retriever
 from pipeline.retrieval.reranker import Reranker
 from pipeline.retrieval.context_builder import ContextBuilder
 from pipeline.retrieval.entity_retriever import EntityRetriever
+from pipeline.retrieval.rbac import get_allowed_roles
 
 import re
 import logging
@@ -201,16 +202,10 @@ class RetrievalPipeline:
         "doctoral": "Ph.D."
     }
 
-    # Fix AL1-SENTINEL: broad program sentinels are valid alias targets
-    # (e.g. "mtech" → "M.Tech.") but they do NOT exist as values in the
-    # Pinecone index — the index only stores specific specialisations like
-    # "M.Tech. (ICT)". Building a filter {"program_name": {"$eq": "M.Tech."}}
-    # therefore always returns zero results, and the fallback filter-free
-    # search then runs with top_k=5 instead of the intended 15.
-    # Listing them here lets both _build_metadata_filter and the
-    # alias_resolved check treat them as "unresolved / broad".
-    BROAD_PROGRAM_SENTINELS = {"B.Tech.", "M.Tech.", "M.Sc.", "M.Des."}
-
+    BROAD_PROGRAM_SENTINELS = {
+        "M.Tech.", "B.Tech.", "M.Sc.", "M.Des.", "Ph.D."
+    }
+    
     def _expand_semesters(self, query):
         arabic_to_roman = {
             "1": "I", "2": "II", "3": "III", "4": "IV",
@@ -233,19 +228,6 @@ class RetrievalPipeline:
                 query = re.sub(pattern_sem, f"\\1 {roman} (\\1 {num})", query, flags=re.IGNORECASE)
                 
         return query
-
-    def _apply_dls_filter(self, filter_dict, allowed_roles):
-        if not allowed_roles:
-            return filter_dict
-        role_clause = {"authorization": {"$in": allowed_roles}}
-        if filter_dict:
-            if "$and" in filter_dict:
-                # Ensure we don't mutate the original list if it's reused
-                new_and = list(filter_dict["$and"])
-                new_and.append(role_clause)
-                return {"$and": new_and}
-            return {"$and": [filter_dict, role_clause]}
-        return role_clause
 
     def _build_metadata_filter(
         self,
@@ -278,10 +260,7 @@ class RetrievalPipeline:
         course_code_raw = entities.get("course_code")
         course_code = first_value(course_code_raw)
 
-        # Fix F: canonicalise all program values, not just the first one.
-        # Fix AL1-SENTINEL: after canonicalisation, strip broad sentinel values
-        # ("B.Tech.", "M.Tech.", "M.Sc.", "M.Des.") so they never produce a
-        # Pinecone filter clause — those strings do not exist in the index.
+        # Fix F: canonicalise all program values, not just the first one
         program_name_raw = entities.get("program_name")
         if isinstance(program_name_raw, list):
             program_names = [
@@ -289,14 +268,9 @@ class RetrievalPipeline:
                     self._canonical_program_name(p) for p in program_name_raw
                 ) if p
             ]
-            # Remove broad sentinels from the list
-            program_names = [p for p in program_names if p not in self.BROAD_PROGRAM_SENTINELS]
             program_name = program_names[0] if len(program_names) == 1 else (program_names or None)
         else:
             program_name = self._canonical_program_name(program_name_raw)
-            # A broad sentinel must not become a filter clause
-            if program_name in self.BROAD_PROGRAM_SENTINELS:
-                program_name = None
 
         if course_code:
 
@@ -487,11 +461,9 @@ class RetrievalPipeline:
         self,
         query,
         history=None,
-        user_role="public"
+        user_role: str = "public"
     ):
-        from pipeline.retrieval.rbac import get_allowed_roles
         allowed_roles = get_allowed_roles(user_role)
-
         original_query = query
 
         query_lower = query.lower()
@@ -671,15 +643,11 @@ class RetrievalPipeline:
                 plan
             )
         )
-        
-        # Apply DLS Layer A
-        metadata_filter = self._apply_dls_filter(metadata_filter, allowed_roles)
 
         # Fix DEG1: dead-end guard for policy version/metadata queries.
         retrieval_intent = plan.get("retrieval_intent", "general")
         if retrieval_intent == "policy_version" and metadata_filter:
-            # We still need the DLS filter even if intent is policy_version
-            pass
+            metadata_filter = None
 
         # Fix TY1: temporal year anchor — if the planner extracted a rule_year
         # (e.g. "2024-25") from the query, inject it into the retrieval query
@@ -701,56 +669,53 @@ class RetrievalPipeline:
             "query_decomposition"
         )
 
+        # Fix #10: compute alias_resolved / top_k boost BEFORE the decomposed
+        # branch so the same widened top_k applies to non-decomposed queries
+        # entering _retrieve_dual_path. Previously this lived only inside the
+        # decomposed block, so bare sentinel aliases ("mtech") got top_k=5
+        # on non-decomposed paths — too narrow for an unfiltered index search.
+        base_top_k = plan.get("top_k", 5)
+        raw_program = plan.get("entities", {}).get("program_name", "")
+        canonical_program = self._canonical_program_name(raw_program) if raw_program else None
+        alias_resolved = (
+            canonical_program is not None
+            and canonical_program not in self.BROAD_PROGRAM_SENTINELS
+        )
+        effective_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
+        # Write it back so _retrieve_dual_path and sub-query loops both see it.
+        plan["top_k"] = effective_top_k
+
         if decomposed_queries:
             all_results = []
 
-            # Fix Bug1: retrieval_top_k was referenced but never defined,
-            # causing a NameError that silently crashed the decomposed-query
-            # branch and returned zero results ("not in database" false positive).
-            # Use plan["top_k"] (already boosted for multi-entity queries) or
-            # fall back to 5 per sub-query.
-            # Fix AL2: when the metadata filter will be None (because program_name
-            # canonicalized to None — bare alias like "M.Tech" with no specialization),
-            # raise top_k to 15 so the answer isn't buried under noise.
-            # The filter being None means the entire index is searched; top_k=5
-            # is far too narrow for broad-corpus sub-queries.
-            base_top_k = plan.get("top_k", 5)
-            # Fix AL1-SENTINEL: alias_resolved must be False for broad sentinels
-            # ("M.Tech.", "B.Tech.", etc.) so the top_k=15 boost fires.
-            # The old code treated any non-None canonical as resolved, but
-            # sentinels are non-None yet still unresolved — they only mean
-            # "user said mtech without specifying a specialisation".
-            raw_program = plan.get("entities", {}).get("program_name", "")
-            canonical_program = self._canonical_program_name(raw_program) if raw_program else None
-            alias_resolved = (
-                canonical_program is not None
-                and canonical_program not in self.BROAD_PROGRAM_SENTINELS
-            )
-            retrieval_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
+            # Fix #10: top_k already computed above (applies to both paths)
+            retrieval_top_k = effective_top_k
 
             for subquery in decomposed_queries:
                 subquery_expanded = self._expand_semesters(subquery)
 
-                # Fix #8: build a sub-query-specific metadata filter.
-                # Previously always None, causing sub-queries to scan the full
-                # corpus and pull in noise from unrelated programs/faculty.
                 sub_metadata_filter = (
                     self._build_metadata_filter(plan)
                 )
-                sub_metadata_filter = self._apply_dls_filter(sub_metadata_filter, allowed_roles)
+                if allowed_roles:
+                    auth_filter = {"authorization": {"$in": allowed_roles}}
+                    if sub_metadata_filter:
+                        sub_metadata_filter = {"$and": [sub_metadata_filter, auth_filter]}
+                    else:
+                        sub_metadata_filter = auth_filter
 
                 sub_results = (
                     self.retriever.retrieve(
                         query=subquery_expanded,
                         top_k=retrieval_top_k,
-                        metadata_filter=sub_metadata_filter
+                        metadata_filter=sub_metadata_filter,
+                        allowed_roles=allowed_roles
                     )
                 )
 
-                # Fallback: if the filter yields nothing, retry without it
+                # Fallback: if the filter yields nothing, retry without it (preserving DLS)
                 if not sub_results and sub_metadata_filter:
-                    # Still apply DLS filter even in fallback!
-                    fallback_filter = self._apply_dls_filter(None, allowed_roles)
+                    fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
                     sub_results = (
                         self.retriever.retrieve(
                             query=subquery_expanded,
@@ -764,13 +729,13 @@ class RetrievalPipeline:
                 # filtered retrieval returns some results, those may all be
                 # from ONE policy. If this sub-query is retrieving the second
                 # leg and results overlap heavily with already-seen chunk IDs,
-                # also retry filter-free to maximise distinct coverage.
+                # also retry filter-free (preserving DLS) to maximise distinct coverage.
                 if sub_results and sub_metadata_filter:
                     already_seen_ids = {r["id"] for r in all_results}
                     new_in_sub = [r for r in sub_results if r["id"] not in already_seen_ids]
                     if len(new_in_sub) == 0:
-                        # All sub-results already collected — retry without filter
-                        fallback_filter = self._apply_dls_filter(None, allowed_roles)
+                        # All sub-results already collected — retry without filter (preserving DLS)
+                        fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
                         extra = self.retriever.retrieve(
                             query=subquery_expanded,
                             top_k=retrieval_top_k,
@@ -803,7 +768,7 @@ class RetrievalPipeline:
         
         else:
             # Main query retrieval using dual path
-            results = self._retrieve_dual_path(query, plan, allowed_roles)
+            results = self._retrieve_dual_path(query, plan, allowed_roles=allowed_roles)
             # Fix J2: use a wider context window for policy_version queries
             # so that version history sections (which may be 1-2 chunks after
             # the main policy heading) are always included in context.
@@ -820,7 +785,8 @@ class RetrievalPipeline:
         if self.entity_retriever:
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
-                    entities
+                    entities,
+                    allowed_roles=allowed_roles
                 )
             )
             if entity_chunks:
@@ -946,7 +912,7 @@ class RetrievalPipeline:
 
         return expanded_candidates
 
-    def _retrieve_dual_path(self, query, plan, allowed_roles):
+    def _retrieve_dual_path(self, query, plan, allowed_roles=None):
         """
         Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
         Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
@@ -978,13 +944,29 @@ class RetrievalPipeline:
 
         entity_pool = {}
         for ent_text, ent_filter in entity_queries:
-            # Apply DLS filter to entity filter
-            ent_filter = self._apply_dls_filter(ent_filter, allowed_roles)
+            combined_filter = ent_filter
+            if allowed_roles:
+                auth_filter = {"authorization": {"$in": allowed_roles}}
+                if combined_filter:
+                    combined_filter = {"$and": [combined_filter, auth_filter]}
+                else:
+                    combined_filter = auth_filter
+
             # Query retriever to get top 3 fused BM25 + dense chunks for this entity
-            res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=ent_filter, allowed_roles=allowed_roles)
+            res_list = self.retriever.retrieve(
+                query=ent_text,
+                top_k=3,
+                metadata_filter=combined_filter,
+                allowed_roles=allowed_roles
+            )
             if not res_list and ent_filter:
-                fallback_filter = self._apply_dls_filter(None, allowed_roles)
-                res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=fallback_filter, allowed_roles=allowed_roles)
+                fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
+                res_list = self.retriever.retrieve(
+                    query=ent_text,
+                    top_k=3,
+                    metadata_filter=fallback_filter,
+                    allowed_roles=allowed_roles
+                )
             
             for rank, res in enumerate(res_list, start=1):
                 chunk_id = res["id"]
@@ -1011,7 +993,6 @@ class RetrievalPipeline:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
         # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
-        semantic_filter = self._apply_dls_filter(self._build_metadata_filter(plan), allowed_roles)
         query_embedding = self.retriever.model.encode(
             ["Represent this sentence for searching relevant passages: " + query],
             normalize_embeddings=True,
@@ -1021,18 +1002,8 @@ class RetrievalPipeline:
             vector=query_embedding[0].tolist(),
             top_k=50,
             include_metadata=True,
-            filter=semantic_filter
+            filter={"authorization": {"$in": allowed_roles}} if allowed_roles else None
         )
-        
-        if not results["matches"] and semantic_filter:
-            # Fallback if no results with semantic_filter (but still keep DLS filter)
-            fallback_filter = self._apply_dls_filter(None, allowed_roles)
-            results = self.retriever.index.query(
-                vector=query_embedding[0].tolist(),
-                top_k=50,
-                include_metadata=True,
-                filter=fallback_filter
-            )
         semantic_list = []
         for match in results["matches"]:
             semantic_list.append({
