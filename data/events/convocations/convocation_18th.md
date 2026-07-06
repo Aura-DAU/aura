@@ -19,6 +19,8 @@ The President of DA-llCT, Smt Tina Anil Ambani , cordially invites you to the Ei
 
 The President of DA-llCT, Smt Tina Anil Ambani , cordially invites you to the Eighteenth Convocation of Dhirubhai Ambani Institute of Information and Communication Technology to be held on Saturday, 27 January 2024 .
 
+During the Eighteenth Convocation, a total of 610 students from nine different academic programmes were conferred their degrees for academic excellence.
+
 Professor Brij Kothari , a social entrepreneur who is globally known for his frugal innovation, the 'Same language subtitling (SLS)' to enhance mass literacy and founder of Book Box Inc. and Planet Read, has kindly consented to be the Chief Guest and deliver the Convocation address.
 
 # The Convocation proceedings will start at 17:00 hours at the Students Activity Centre, DA-llCT Campus, Gandhinagar .
@@ -61,7 +63,7 @@ English | Gujarati | Booklet | Media Coverages
 
 # Important Information
 
-_No important information found._
+- **Total Degrees Conferred:** A total of 610 students from nine academic programmes were awarded degrees.
 
 # Related Links
 
