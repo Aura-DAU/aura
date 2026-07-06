@@ -21,10 +21,12 @@ Dhirubhai Ambani University is pleased to announce the Alumni Meet 2026 for the 
 
 The event will feature alumni networking, panel discussions, career and start-up talks and engaging activities. It also offers a platform for collaboration, knowledge sharing and contributing to institutional growth.
 
-We warmly invite all alumni to be part of this memorable gathering and help make it a grand success. Further details on venue, schedule and registration will be shared soon. Stay connected with the Alumni Office for updates.
+We warmly invite all alumni to be part of this memorable gathering and help make it a grand success. The event will be held at the Dhirubhai Ambani University (DAU) Campus in Gandhinagar, starting from 10:00 AM on 18 April 2026. Further details on registration will be shared soon. Stay connected with the Alumni Office for updates.
 
 Register here
 
 # Important Information
 
-_No important information found._
+- **Date:** 18 April 2026
+- **Venue:** Dhirubhai Ambani University (DAU) Campus, Gandhinagar
+- **Schedule:** 10:00 AM onwards (registration starts at 9:00 AM)

@@ -55,7 +55,21 @@ Mr. Jayesh Patel CEP Office DA-IICT, Gandhinagar Tel.: (+91) 079-68261676 Email:
 
 # Tables
 
-| Tentative Start Date | 17.06.2024 to 21.06.2024 | | Venue | DA-IICT, Gandhinagar | | Program Schedule | Click here | | Course Duration | The duration of the course will be 40 hours, consisting of 20 hours of theory sessions and 20 hours of laboratory sessions. | | Target Audience | Professionals Design, VLSI, AI/ML, Faculties, Ph.D. Scholar, PG and Final year UG Students | | Course Fee (Pay Online) | Participants from Gujarat state are charged a fully refundable upfront course fee of 5,000 INR. Please note that this fee is non-refundable for candidates from other states. | | Accommodation | Complimentary accommodation, breakfast, lunch, and snacks will be provided throughout the workshop.Now the accommodation is available for male/female candidates as well. | | Refund Policy | Maintain a 75% minimum attendance to be eligible for the refund. | | Certificate | A participation certificate will be conferred to individuals who maintain an attendance record of at least 75%. | | Name of Account Holder | M/S.DHIRUBHAI AMBANI INST OF INFOR & COMM TECHNOLOGY ANCHOR IN | | Bank Name | ICICI Bank Ltd. | | Account Number | 016501021384 | | IFSC Code | ICIC0000165 |
+| Parameter | Details |
+| --- | --- |
+| **Tentative Start Date** | 17.06.2024 to 21.06.2024 |
+| **Venue** | DA-IICT, Gandhinagar |
+| **Program Schedule** | Click here |
+| **Course Duration** | The duration of the course will be 40 hours, consisting of 20 hours of theory sessions and 20 hours of laboratory sessions. |
+| **Target Audience** | Professionals Design, VLSI, AI/ML, Faculties, Ph.D. Scholar, PG and Final year UG Students |
+| **Course Fee (Pay Online)** | Participants from Gujarat state are charged a fully refundable upfront course fee of 5,000 INR. Please note that this fee is non-refundable for candidates from other states. |
+| **Accommodation** | Complimentary accommodation, breakfast, lunch, and snacks will be provided throughout the workshop. Now the accommodation is available for male/female candidates as well. |
+| **Refund Policy** | Maintain a 75% minimum attendance to be eligible for the refund. |
+| **Certificate** | A participation certificate will be conferred to individuals who maintain an attendance record of at least 75%. |
+| **Name of Account Holder** | M/S.DHIRUBHAI AMBANI INST OF INFOR & COMM TECHNOLOGY ANCHOR IN |
+| **Bank Name** | ICICI Bank Ltd. |
+| **Account Number** | 016501021384 |
+| **IFSC Code** | ICIC0000165 |
 
 # Important Information
 
