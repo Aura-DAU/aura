@@ -99,8 +99,8 @@ def get_academic_snapshot(identity, **kwargs) -> dict:
 
 # ── compare_semester_trend ──────────────────────────────────────────────
 def compare_semester_trend(identity, **kwargs) -> dict:
-    client = _own_client(identity)
     try:
+        client = _own_client(identity)
         result = client.get_result()
     except CredentialsNotLinked as e:
         return {"error": str(e), "action_needed": "link_ecampus_account"}

@@ -10,8 +10,8 @@ unmodified RAG pipeline in aura_chat.py.
 import os
 import json
 from dotenv import load_dotenv
-from groq import Groq
 
+from ..key_manager import KeyManager
 from .tool_registry import tools_for_role, TOOL_REGISTRY
 
 SYSTEM_PROMPT = """You are AURA, DAU's academic assistant, handling a request that
@@ -38,8 +38,20 @@ Rules:
 class EcampusOrchestrator:
     def __init__(self):
         load_dotenv()
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
         self.model = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+        # No self.client — every LLM call goes through KeyManager.call_with_rotation
+        # so this orchestrator participates in key rotation just like every
+        # other pipeline component.
+
+    def _call_llm(self, messages: list, tools: list | None = None, tool_choice: str | None = None) -> object:
+        """Single LLM call through KeyManager so daily-limit rotation applies here too."""
+        model = self.model
+        def _fn(client):
+            kwargs: dict = {"model": model, "messages": messages}
+            if tools:       kwargs["tools"] = tools
+            if tool_choice: kwargs["tool_choice"] = tool_choice
+            return client.chat.completions.create(**kwargs)
+        return KeyManager.call_with_rotation(_fn, max_retries=3)
 
     def _tool_schemas(self, role: str) -> list[dict]:
         return [
@@ -69,8 +81,7 @@ class EcampusOrchestrator:
                 "sources": [],
             }
 
-        response = self.client.chat.completions.create(
-            model=self.model,
+        response = self._call_llm(
             messages=messages,
             tools=tool_schemas,
             tool_choice="auto",
@@ -103,8 +114,7 @@ class EcampusOrchestrator:
                 "content": json.dumps(result, default=str),
             })
 
-        follow_up = self.client.chat.completions.create(
-            model=self.model,
+        follow_up = self._call_llm(
             messages=messages + [
                 {"role": "assistant", "content": msg.content, "tool_calls": [
                     {"id": c.id, "type": "function",

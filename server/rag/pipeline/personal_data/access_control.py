@@ -13,6 +13,24 @@ Read access denied is an inconvenience; read access wrongly granted is a
 privacy incident.
 """
 
+# Roles that are treated as elevated (non-student) and are allowed to
+# query a target student's data (subject to the consent gate in
+# composite_tools.py). This list mirrors the full 12-role hierarchy in
+# server/rag/access_control.py — update both if new roles are added.
+_ELEVATED_ROLES = {
+    "faculty",
+    "faculty_coord",
+    "faculty_convenor_ug",
+    "faculty_convenor_pg",
+    "dean_students",
+    "dean_faculty",
+    "dean_academic",
+    "registrar",
+    "admin_staff",
+    "admin",
+    "superadmin",
+}
+
 
 class AccessDenied(Exception):
     pass
@@ -20,7 +38,7 @@ class AccessDenied(Exception):
 
 def authorize_personal_query(identity: dict, target_student_id: str | None) -> str:
     """
-    identity: {"role": "student"|"faculty", "erp_id": str, "department": str|None}
+    identity: {"role": str, "erp_id": str, "department": str|None}
     target_student_id: the student the query is ABOUT. None means
         "the requester themselves."
 
@@ -37,32 +55,30 @@ def authorize_personal_query(identity: dict, target_student_id: str | None) -> s
             raise AccessDenied("Students may only access their own academic data.")
         return requester_id
 
-    if role == "faculty":
+    if role in _ELEVATED_ROLES:
         if target_student_id is None:
-            raise AccessDenied("Faculty must specify which student's data they need.")
+            raise AccessDenied(
+                f"Role '{role}' must specify which student's data they need."
+            )
         if target_student_id == requester_id:
-            raise AccessDenied("Faculty erp_id cannot itself be a student record.")
-
+            raise AccessDenied(
+                f"Requester erp_id cannot itself be used as a student record."
+            )
         # NOTE (eCampus scraping model specifically): under the per-student
         # credential vault, AURA only ever holds ONE person's eCampus login
-        # at a time. There is no legitimate way for a faculty member's
+        # at a time. There is no legitimate way for an elevated-role member's
         # request to use a STUDENT's stored credentials to scrape that
-        # student's own portal — faculty never possess that student's
-        # password, nor should AURA pretend otherwise.
+        # student's own portal — they never possess that student's password,
+        # nor should AURA pretend otherwise.
         #
-        # So faculty access to a student's data, under this credential
+        # Faculty/elevated access to a student's data, under this credential
         # model, can only be authorized when the STUDENT has explicitly
         # opted in (see ecampus/credentials_vault.py:
-        # grant_advisor_consent / has_advisor_consent). Faculty cannot be
-        # authorized here on enrollment/advising status alone — consent is
+        # grant_advisor_consent / has_advisor_consent). Elevated roles cannot
+        # be authorized here on enrollment/advising status alone — consent is
         # an additional, separate gate checked by the calling tool handler
         # (see ecampus/composite_tools.py:get_advisee_snapshot).
-        #
-        # If/when DAU IT provides real backend access (Section 1 of the IT
-        # ask-list) instead of per-student scraping, this function is where
-        # you'd add a get_students_for_faculty() enrollment check instead of
-        # relying on consent — a service-account-backed integration doesn't
-        # have this limitation.
         return target_student_id
 
     raise AccessDenied(f"Unrecognized role: {role!r}")
+

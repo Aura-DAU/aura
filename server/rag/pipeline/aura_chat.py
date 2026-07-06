@@ -116,6 +116,19 @@ class AuraChat:
             classification = self.classifier.classify(query)
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
 
+            # ── Step 1b: Strict guardrail for personal-data paths ───────
+            # is_safe() above fails OPEN (acceptable for public RAG). For
+            # personal/ERP paths we re-check with is_safe_strict() which
+            # fails CLOSED — if the guardrail LLM is down, deny rather than
+            # risk a prompt injection reaching the ERP pipeline.
+            if query_type in ("PERSONAL", "MIXED", "AGGREGATE") and identity:
+                if not self.guardrail.is_safe_strict(query):
+                    return {
+                        "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                        "sources": [],
+                        "is_personal_data": False,
+                    }
+
             erp_context   = ""
             is_personal   = False
 
