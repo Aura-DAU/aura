@@ -1,3 +1,4 @@
+
 from pathlib import Path
 
 def extract_frontmatter(content: str) -> tuple[dict, str]:

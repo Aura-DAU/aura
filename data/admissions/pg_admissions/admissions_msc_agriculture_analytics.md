@@ -238,6 +238,12 @@ No. Admission to M.Sc. (AA) program is completely based on merit list.
 
 All girls admitted to the M.Sc. program will be eligible for on-campus hostel accommodation., For boys, it is subject to availability. Hostels / PG accommodation will be arranged in second and third semesters at IIRS and AAU respectively.
 
+### What are the exact hostel fees for M.Sc. (Agriculture Analytics) students at IIRS and AAU campuses?
+
+The exact hostel fees for the second semester (at IIRS, Dehradun) and the third semester (at AAU, Anand) are not set by DAU. The accommodation rent and fees are determined directly by the respective partner institutions (IIRS and AAU) during those semesters. 
+
+Hostel or PG accommodation will be arranged for students at the IIRS and AAU campuses during their respective semesters, and the fees must be paid directly to the host institution. Only the DAU campus hostel rent is fixed at Rs. 37,800 per semester (applicable for Semesters 1 and 4).
+
 ### What are the job prospects after completion of M.Sc. (AA) from DAU (Formerly DA-IICT)?
 
 After completing post graduation in Agriculture Analytics, the students are likely to be engaged as Data Analyst in various agritech startup in India (250 nos. approx.) and abroad.
