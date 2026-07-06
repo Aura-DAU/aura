@@ -247,29 +247,30 @@ def main():
                     "document_type": chunk.get("document_type")
                 }
             }
-            
-            # Coordinate metadata
-            if chunk.get("document_id"):
-                vector["metadata"]["document_id"] = chunk["document_id"]
-            if chunk.get("chunk_index") is not None:
-                vector["metadata"]["chunk_index"] = int(chunk["chunk_index"])
-            if chunk.get("total_chunks") is not None:
-                vector["metadata"]["total_chunks"] = int(chunk["total_chunks"])
+        }
+        
+        # Coordinate metadata
+        if chunk.get("document_id"):
+            vector["metadata"]["document_id"] = chunk["document_id"]
+        if chunk.get("chunk_index") is not None:
+            vector["metadata"]["chunk_index"] = int(chunk["chunk_index"])
+        if chunk.get("total_chunks") is not None:
+            vector["metadata"]["total_chunks"] = int(chunk["total_chunks"])
 
-            # Optional metadata fields
-            for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date"]:
-                if chunk.get(field) is not None:
-                    vector["metadata"][field] = chunk[field]
+        # Optional metadata fields
+        for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date", "authorization"]:
+            if chunk.get(field) is not None:
+                vector["metadata"][field] = chunk[field]
 
-            vectors.append(vector)
+        vectors.append(vector)
 
-        # Upload in partitioned batches (recommended batch size is <= 200)
-        batch_size = 200
-        logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
-        for i in range(0, len(vectors), batch_size):
-            batch = vectors[i:i+batch_size]
-            index.upsert(vectors=batch)
-        logger.info("Pinecone upload complete.")
+    # Upload in partitioned batches (recommended batch size is <= 200)
+    batch_size = 200
+    logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
+    for i in range(0, len(vectors), batch_size):
+        batch = vectors[i:i+batch_size]
+        index.upsert(vectors=batch)
+    logger.info("Pinecone upload complete.")
 
     # 5. Refresh entity index
     logger.info("Rebuilding entity index...")

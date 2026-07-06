@@ -2,11 +2,14 @@ export interface ChatMessage {
   role: "user" | "assistant"
   content: string
   timestamp?: number
+  is_personal_data?: boolean
 }
 
 export interface Citation {
   file: string
   title?: string
+  visibility?: string
+  authorization?: string[]
 }
 
 export interface ChatThread {
@@ -24,4 +27,6 @@ export interface StudentProfile {
 export interface UserSession {
   name: string
   email: string
+  role?: "student" | "faculty" | "admin" | "faculty_coord" | "faculty_convenor_ug" | "faculty_convenor_pg" | "dean_students" | "dean_faculty" | "dean_academic" | "registrar" | "admin_staff" | "superadmin"
+  department?: string
 }
