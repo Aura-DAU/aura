@@ -229,6 +229,23 @@ DAU (Formerly DA-IICT) encourages bright young students to join its undergradua
 
 ## FAQs
 
+### Which GATE papers and qualifying degrees are accepted for each M.Tech. (ICT) specialization?
+
+Below is the consolidated eligibility mapping (both accepted GATE papers and qualifying degrees) for all four specializations:
+
+*   **Machine Learning (ML):**
+    *   *Accepted GATE Disciplines:* Computer Science (CS), Electronics & Communication (EC), Electrical Engineering (EE), or Data Science & Artificial Intelligence (DA).
+    *   *Eligible Qualifying Degrees:* B.E./B.Tech. or equivalent in CS, IT, EL, ECE, ICT, Electrical, or Instrumentation; B.S./B.Sc. (4-year) in CS, IT, EL, ECE, Electrical, Instrumentation, Mathematics, Statistics, or Physics; M.Sc./M.S. in CS, Electronics, Mathematics, Statistics, or Physics; M.C.A. (3-year).
+*   **Software Systems (SS):**
+    *   *Accepted GATE Disciplines:* Computer Science (CS) only.
+    *   *Eligible Qualifying Degrees:* B.E./B.Tech. or equivalent in CS, IT, EL, ECE, ICT, Electrical, or Instrumentation; B.S./B.Sc. (4-year) in CS, IT, EL, ECE, Electrical, Instrumentation, Mathematics, Statistics, or Physics; M.Sc./M.S. in CS, Electronics, Mathematics, Statistics, or Physics; M.C.A. (3-year).
+*   **VLSI and Embedded Systems (VLSI & ES):**
+    *   *Accepted GATE Disciplines:* Electronics & Communication (EC), Electrical Engineering (EE), or Instrumentation Engineering (IN).
+    *   *Eligible Qualifying Degrees:* B.E./B.Tech. or equivalent in CS, IT, EL, ECE, ICT, Instrumentation & Control, Electrical, or Instrumentation; B.S./B.Sc. (4-year) in EL, ECE, Electrical, Instrumentation, or Physics; M.Sc./M.S. in Electronics or Physics.
+*   **Wireless Communication and Signal Processing (WCSP):**
+    *   *Accepted GATE Disciplines:* Electronics & Communication (EC) only.
+    *   *Eligible Qualifying Degrees:* B.E./B.Tech. or equivalent in CS/IT, ECE, ICT, Instrumentation & Control, Electrical, or Instrumentation; B.S./B.Sc. (4-year) in EE, ECE, Instrumentation, or Physics; M.Sc./M.S. in Electronics or Physics.
+
 ### What is the intake for M.Tech. (ICT) through GATE - All India Category?
 
 Total intake is **47**with 18 seats in Machine Learning, 15 in Software Systems, 9 in VLSI and Embedded Systems and 5 in Wireless Communication and Signal Processing through GATE.
