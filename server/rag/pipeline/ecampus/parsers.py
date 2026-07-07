@@ -108,7 +108,47 @@ def parse_fees(html: str) -> dict:
     if table:
         headers = ["semester", "head", "amount", "due_date", "status"]  # TODO confirm
         payments = _rows_as_dicts(table, headers)
-    return {"payments": payments}
+
+    # Aggregation pass: split rows into outstanding vs. paid, and total each
+    # side up, so the fee/dues tool can answer "do I owe anything" and "how
+    # much" directly instead of the LLM having to eyeball a raw row list.
+    # The column NAMES above are still a guess (see module TODO) — but this
+    # aggregation logic itself should hold regardless of exact column layout,
+    # since it only depends on "amount" and "status" existing per row.
+    total_due = 0.0
+    total_paid = 0.0
+    outstanding_heads: list[dict] = []
+    for row in payments:
+        raw_amount = str(row.get("amount", "0")).replace(",", "").replace("₹", "").strip()
+        try:
+            amount = float(raw_amount)
+        except ValueError:
+            continue  # TODO: log/flag rows that fail to parse once real data is available
+
+        status = str(row.get("status", "")).strip().lower()
+        if status in {"paid", "cleared", "settled", "completed"}:
+            total_paid += amount
+        else:
+            total_due += amount
+            outstanding_heads.append({
+                "semester": row.get("semester"),
+                "head": row.get("head"),
+                "amount": amount,
+                "due_date": row.get("due_date"),
+                "status": row.get("status"),
+            })
+
+    return {
+        "payments": payments,
+        "total_due": round(total_due, 2),
+        "total_paid": round(total_paid, 2),
+        "outstanding_count": len(outstanding_heads),
+        "outstanding_heads": outstanding_heads,
+        "overall_status": "dues_pending" if total_due > 0 else "no_dues_found",
+        # TODO confirm: once real eCampus HTML is available, re-check that
+        # "amount"/"status" column names and value formats (currency
+        # symbols, date formats, status vocabulary) match what's assumed here.
+    }
 
 
 def parse_attendance(html: str) -> list[dict]:

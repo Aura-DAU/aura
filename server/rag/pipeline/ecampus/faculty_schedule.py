@@ -17,6 +17,11 @@ correctly whether you're feeding it one student's data (partial result) or
 many (more complete).
 """
 
+# TODO(unirp): Replace with UniRP endpoint — routes TBD. Do NOT implement any
+# UniRP logic. Faculty personal/schedule data is migrating from this
+# student-timetable-aggregation approach to a direct UniRP API source once
+# routes are confirmed; this whole module is an interim measure until then.
+
 from collections import defaultdict
 from .timetable import TimetableEntry
 
