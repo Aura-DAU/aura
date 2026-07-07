@@ -121,6 +121,7 @@ export function ChatShell() {
             loading={chat.loading}
             isRecording={chat.isRecording}
             isTranscribing={chat.isTranscribing}
+            recordingVolume={chat.recordingVolume}
             onSend={chat.handleSendMessage}
             onMicClick={chat.handleMicClick}
           />

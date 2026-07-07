@@ -1,5 +1,6 @@
 #Chat pipeline for AURA RAG system
 import os
+import re
 from pipeline.retrieval.retrieval_pipeline import (
     RetrievalPipeline
 )
@@ -13,17 +14,20 @@ from pipeline.guardrails.query_guardrail import (
 )
 
 def is_greeting_or_meta(query):
-    q = query.strip().lower().rstrip("?").rstrip("!").rstrip(".")
+    # Fix #7: strip ALL trailing punctuation in one pass instead of chained
+    # rstrip calls that only remove one character each.
+    q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
     greetings = {
-        "hi", "hello", "hey", "hola", "greetings", "good morning", 
-        "good afternoon", "good evening", "how are you", "who are you", 
+        "hi", "hello", "hey", "hola", "greetings", "good morning",
+        "good afternoon", "good evening", "how are you", "who are you",
         "who is aura", "what is aura", "what can you do", "help", "menu",
         "intro", "introduce yourself"
     }
     if q in greetings:
         return True
     words = q.split()
-    if len(words) <= 2 and any(w in greetings for w in words):
+    # Allow greeting combos up to 3 words (e.g. "hello aura" or "hey there")
+    if len(words) <= 3 and any(w in greetings for w in words):
         return True
     return False
 
@@ -47,75 +51,158 @@ class AuraChat:
         history=None,
         profile=None
     ):
-        # 1. Semantic Guardrail Evaluation
-        if not self.guardrail.is_safe(query):
+        try:
+            # 1. Semantic Guardrail Evaluation
+            if not self.guardrail.is_safe(query):
+                return {
+                    "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                    "sources": []
+                }
+
+            # Guardrail / Query Augmentation for RBAC
+            retrieval_query = query
+            if profile:
+                role = profile.get("role", "student")
+                if role == "professor":
+                    subjects = profile.get("subjects", [])
+                    if subjects:
+                        subjects_str = ", ".join(subjects)
+                        retrieval_query = f"{query} (Context: student data related to {subjects_str})"
+
+            # Fix HARDCODE-REMOVAL: previously this function used four separate
+            # static Python keyword lists (FEE_KEYWORDS, MYTH_BUST_PATTERNS,
+            # LAUNDRY_KEYWORDS, MOVEIN_KEYWORDS) here in aura_chat.py to
+            # pattern-match query intent and bolt extra words onto the
+            # retrieval query. This doesn't generalize: every new entity,
+            # policy, or vocabulary gap found in testing required editing
+            # this file and redeploying a new static list.
+            #
+            # All of that logic has been moved into retrieval_pipeline.py
+            # get_context() (Fix QP6/RP-MYTH), which runs AFTER the LLM-driven
+            # query_planner classifies retrieval_intent and is_claim_verification
+            # generically for every query — no static keyword lists, no
+            # per-topic hardcoding, and it automatically covers any future
+            # entity, policy, or vocabulary the planner LLM can recognize.
+            # The query_rewriter (Fix QR2) separately handles colloquial/vague
+            # vocabulary expansion (e.g. "dhobi", "mattress") using the same
+            # LLM-driven approach instead of static synonym lists.
+
+            retrieval_result = (
+                self.pipeline.get_context(
+                    retrieval_query,
+                    history=history
+                )
+            )
+
+            # Fix #1B: use the raw Pinecone cosine score (stored as
+            # 'cosine_score' by the retriever) for the 0.60 threshold check.
+            # Fix AC1: if retrieval returned zero chunks (e.g. Pinecone
+            # connection issue or a silent exception in the pipeline), the
+            # max() calls below return their defaults, which is correct.
+            # However, we also log this so it's visible in DEBUG mode.
+            chunks = retrieval_result.get("chunks", [])
+
+            if not chunks and os.getenv("DEBUG", "false").lower() == "true":
+                print("[Router] WARNING: retrieval returned 0 chunks for query:", query)
+
+            top_cosine = max(
+                [(c.get("cosine_score") or 0.0) for c in chunks],
+                default=0.0
+            )
+            top_cross = max(
+                [(c.get("cross_score") or -10.0) for c in chunks],
+                default=-10.0
+            )
+
+            # Permit simple greetings to pass to RAG
+            is_greeting = is_greeting_or_meta(query)
+
+            # Fix AC4: three-tier routing logic to minimise false "not DAU" rejections:
+            # Tier 1 — greeting/meta: always pass (no retrieval confidence needed)
+            # Tier 2 — high confidence: cosine >= 0.45 (strong semantic match)
+            #          OR cross >= 0.0 (cross-encoder ≥50% relevance confidence)
+            # Tier 3 — weak but plausible: cosine >= 0.35 AND cross > -2.0
+            #          (sigmoid(-2.0)=0.119 → model gives ≥12% relevance).
+            #          Catches valid DAU queries where the top-retrieved chunk
+            #          is a partial match but the question is genuinely about DAU.
+            is_weak_match = (top_cosine >= 0.35 and top_cross > -2.0)
+            is_high_confidence = is_greeting or (top_cosine >= 0.45) or (top_cross >= 0.0) or is_weak_match
+
+            router_decision = "RAG" if is_high_confidence else "FALLBACK"
+            
+            # Log query routing details in debug mode
+            if os.getenv("DEBUG", "false").lower() == "true":
+                print("\n--- DEBUG QUERY ROUTER LOG ---")
+                print(f"query: {query}")
+                print(f"router_decision: {router_decision}")
+                print(f"router_confidence: top_cosine={top_cosine:.4f}, top_cross={top_cross:.4f}")
+                print(f"top_k_before_rerank: {retrieval_result.get('top_k_before_rerank', 0)}")
+                print(f"top_k_after_rerank: {retrieval_result.get('top_k_after_rerank', 0)}")
+                print(f"retrieved_sources: {[c['id'] for c in retrieval_result.get('chunks', [])]}")
+                print(f"final_context: {retrieval_result.get('context', '')[:300]}...")
+                print("-------------------------------\n")
+
+            # Fix AC3: distinguish between two failure modes that previously
+            # both returned the "not DAU" message:
+            # (a) Retrieval returned 0 chunks → likely a backend/DB issue, not
+            #     an off-topic query. Return a service message so the user isn't
+            #     misled into thinking their valid DAU question was rejected.
+            # (b) Chunks retrieved but confidence too low → genuinely off-topic.
+            if not chunks:
+                return {
+                    "answer": (
+                        "I'm having trouble retrieving information right now. "
+                        "Please try again in a moment. If the issue persists, "
+                        "contact DAU directly."
+                    ),
+                    "sources": []
+                }
+
+            if not is_high_confidence:
+                return {
+                    "answer": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+                    "sources": []
+                }
+
+            answer = (
+                self.generator.generate(
+                    query=retrieval_result.get("corrected_query", query),
+                    context=retrieval_result[
+                        "context"
+                    ],
+                    plan=retrieval_result["plan"],
+                    history=history,
+                    profile=profile
+                )
+            )
+
             return {
-                "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+
+                "answer": answer,
+
+                "sources":
+                    retrieval_result[
+                        "sources"
+                    ]
+            }
+        except Exception as e:
+            import traceback
+            err_str = str(e).lower()
+            print("Error in AuraChat.chat:", e)
+            traceback.print_exc()
+            # Fix TO1: differentiate timeout/rate-limit errors from generic errors
+            # so users get a more helpful message (Q60, Q61 — 323s/105s timeouts).
+            if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
+                msg = (
+                    "I'm experiencing a temporary connection issue. "
+                    "Please try your question again in a few seconds."
+                )
+            else:
+                msg = (
+                    "Sorry, I encountered an error while generating a response. "
+                    "Please try again."
+                )
+            return {
+                "answer": msg,
                 "sources": []
             }
-
-        # Guardrail / Query Augmentation for RBAC
-        retrieval_query = query
-        if profile:
-            role = profile.get("role", "student")
-            if role == "professor":
-                subjects = profile.get("subjects", [])
-                if subjects:
-                    subjects_str = ", ".join(subjects)
-                    retrieval_query = f"{query} (Context: student data related to {subjects_str})"
-
-        retrieval_result = (
-            self.pipeline.get_context(
-                retrieval_query,
-                history=history
-            )
-        )
-
-        # Retrieval confidence decides
-        top_score = retrieval_result["chunks"][0].get("score", 0.0) if retrieval_result["chunks"] else 0.0
-        
-        # Permit simple greetings to pass to RAG
-        is_greeting = is_greeting_or_meta(query)
-        is_high_confidence = is_greeting or (top_score >= 0.60)
-        
-        router_decision = "RAG" if is_high_confidence else "FALLBACK"
-        
-        # Log query routing details in debug mode
-        if os.getenv("DEBUG", "false").lower() == "true":
-            print("\n--- DEBUG QUERY ROUTER LOG ---")
-            print(f"query: {query}")
-            print(f"router_decision: {router_decision}")
-            print(f"router_confidence: {top_score:.4f}")
-            print(f"top_k_before_rerank: {retrieval_result.get('top_k_before_rerank', 0)}")
-            print(f"top_k_after_rerank: {retrieval_result.get('top_k_after_rerank', 0)}")
-            print(f"retrieved_sources: {[c['id'] for c in retrieval_result.get('chunks', [])]}")
-            print(f"final_context: {retrieval_result.get('context', '')[:300]}...")
-            print("-------------------------------\n")
-
-        if not is_high_confidence:
-            return {
-                "answer": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
-                "sources": []
-            }
-
-        answer = (
-            self.generator.generate(
-                query=retrieval_result.get("corrected_query", query),
-                context=retrieval_result[
-                    "context"
-                ],
-                plan=retrieval_result["plan"],                
-                history=history,
-                profile=profile
-            )
-        )
-
-        return {
-
-            "answer": answer,
-
-            "sources":
-                retrieval_result[
-                    "sources"
-                ]
-        }

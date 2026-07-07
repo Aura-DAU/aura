@@ -15,7 +15,7 @@ pdf_name: "CT423_Wavelet Signal Processing_Winter2026 - hemant patil.pdf"
 
 | 1. Course Title | Wavelet Signal Processing |
 |---|---|
-| 2. Course Instructor | ------------------------------------------ |
+| 2. Course Instructor | Prof. Hemant Patil |
 | 3. Credit Structure | Lecture hours per week: 3 hours Tutorial hours per week: Nil Practical hours per week: Nil Total Credits: 3 |
 | 4. Course Code | CT423 (3-0-0-3) |
 | 5. Program/Semester | B.Tech. (ICT/CS/MNC/EVD) Sem (VI) Technical Elective MTech (ICT with specialization in Machine Learning) Open to Ph.D. |

@@ -17,31 +17,22 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 
 ## Main Content
 
-Annexure-I 
- 
- 
-NO OBJECTION CERTIFICATE 
-FROM THE HEAD THE ORGANISATION 
-For Applying to the PhD Program (Part-time) Category  
-at DA-IICT Gandhinagar under Visvesvaraya Ph.D. Scheme 
- 
- 
-The 
-application 
-of 
-_____________________________________ 
-working 
-as 
-______________________________________________ 
-in 
-________________ 
-___________________________________________ since ________ is herewith recommended 
-and forwarded to pursue PhD program under External Part-time enrolment category of Autumn (July) 
-/ Winter (January) semester at DA-IICT.  
-1. The applicant has ______ years of experience in this organization. 
-2. The applicant will be given permission to attend the required class for completing course work. 
-3. No part of the research work carried out in fulfilment of the candidate’s PhD requirement will be 
-utilized commercially or for applying for a Patent without the approval of DA-IICT. 
-Date:                                                                                                            Signature of the head 
-Place: 
-                                                                                    Name, address, and seal of the organization
+# Visvesvaraya Ph.D. Scheme - No Objection Certificate
+
+**Annexure-I**
+
+## NO OBJECTION CERTIFICATE FROM THE HEAD OF THE ORGANISATION
+*(For Applying to the PhD Program (Part-time) Category at DA-IICT Gandhinagar under Visvesvaraya Ph.D. Scheme)*
+
+The application of **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_** working as **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_** in **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_** since **\_\_\_\_\_\_\_\_** is herewith recommended and forwarded to pursue PhD program under External Part-time enrolment category of Autumn (July) / Winter (January) semester at DA-IICT.
+
+1. The applicant has **\_\_\_\_\_\_** years of experience in this organization.
+2. The applicant will be given permission to attend the required class for completing course work.
+3. No part of the research work carried out in fulfilment of the candidate’s PhD requirement will be utilized commercially or for applying for a Patent without the approval of DA-IICT.
+
+**Date**: \_\_\_\_\_\_\_\_\_\_\_  
+**Place**: \_\_\_\_\_\_\_\_\_\_\_  
+
+*Signature of the Head of Organization*  
+*Name, address, and seal of the organization*
+

@@ -1,6 +1,6 @@
 ---
 title: "Examination Rules For Students"
-url: "https://daiict.ac.in/"
+url: "https://intranet.daiict.ac.in/academics/Examination Rules for Students.pdf"
 category: "Academics"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-06-10"
@@ -49,7 +49,7 @@ II. At the start of the examination
       commencement of the examination for in-semester examinations and 30
       minutes after the commencement of the examination for end-semester
       examinations.
-III. During the examination.
+III. During the examination.
 
    1. Exchange (borrowing or lending) of any material during the examination is
       not allowed.
@@ -87,4 +87,3 @@ IV. On completion of the examination.
    3. While leaving the examination hall the students should not hang around to
       discuss the paper. As there may be other examinations still in progress,
       quietly leave the building to ensure that you do not disturb them.
-

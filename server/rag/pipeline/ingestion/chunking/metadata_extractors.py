@@ -16,14 +16,23 @@ def extract_program_name(
         "btech",
         "mtech",
         "msc",
-        "mdes"
+        "mdes",      # Fix I: was missing comma — previously concatenated with "bs-ms" into "mdesbs-ms"
         "bs-ms",
         "phd",
         "programs",
         "undergraduate",
         "postgraduate",
         "doctoral",
-        "dual-degree"
+        "dual-degree",
+        # Fix ME2: folder name uses underscore ("dual_degree_admissions") but keyword
+        # was "dual-degree" (hyphen). This caused BS-MS pages to never receive a
+        # program_name metadata field, breaking entity-based retrieval for all BS-MS queries.
+        "dual_degree",
+        # Fix ME3: add "pg_admissions" and "scholarship" subcluster keywords so
+        # PG program pages (M.Des, M.Sc IT etc.) and scholarship pages correctly
+        # trigger program_name extraction from their page title metadata.
+        "pg_admissions",
+        "scholarship"
     ]
 
     is_program_page = any(
@@ -117,6 +126,23 @@ def extract_section_type(
             "rules",
             "regulations",
             "policy"
+        ],
+
+        # Fix ME1: fee/fees sections were falling through to "general"
+        # section_type because no mapping existed. This prevented the
+        # reranker's required_section_boost from firing on fee chunks
+        # even when "Fee" appeared in required_sections. Now tagged
+        # "admissions" (consistent with their folder-level classification)
+        # so the section_type boost also applies.
+        "admissions": [
+            "fees structure",
+            "fee structure",
+            "tuition fee",
+            "scholarship",
+            "financial assistance",
+            "admission process",
+            "how to apply",
+            "application process"
         ]
     }
 

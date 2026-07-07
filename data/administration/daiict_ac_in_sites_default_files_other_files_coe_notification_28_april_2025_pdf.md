@@ -68,35 +68,19 @@ the Universities within the State of Gujarat.
 
 Table
 
-Sr. No. [ Name of the University
+| Sr. No. | Name of the University |
+| :--- | :--- |
+| 1 | Ahmedabad University, Ahmedabad |
+| 2 | Anant National University, Ahmedabad |
+| 3 | CEPT University, Ahmedabad |
+| 4 | Charotar University of Science and Technology, Changa |
+| 5 | Dhirubhai Ambani University, Gandhinagar |
+| 6 | Ganpat University, Ganpat Vidyanagar |
+| 7 | Marwadi University, Rajkot |
+| 8 | Nirma University, Ahmedabad |
+| 9 | Parul University, Vadodara |
+| 10 | Pandit Deendayal Energy University, Gandhinagar |
 
-(1) | (2)
-is l. Ahmedabad University, Ahmedabad |
-
-i)
-
-Anant National University. Ahmedabad /
-
-| 3. | CEPT University. Ahmedabad
-
-4. Charotar University of Science and Technology,
-Changa
-5. Dhirubhai Ambani University, Gandhinagar
-
-| 6. Ganpat University, Ganpat Vidyanagar
-
-7. Marwadi University, Rajkot
-
-8. | Nirma University, Ahmedabad
-9, | Parul University, Vadodara [ |
-{
-
-10, Pandit Deendayal Energy University, Gandhinagar
-. . )
-
-(1)
-
-(2)
 
 AND WHEREAS the Government of Gujarat considers it necessary
 to exempt the Universities mentioned in the Table from certain

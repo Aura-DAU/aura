@@ -5,12 +5,13 @@ import crypto from "crypto"
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 export interface UserAccount {
-  role: "student" | "parent"
+  role: "student" | "parent" | "faculty"
   email: string
   name: string
   passwordHash: string
   createdAt: string
   linkedStudentEmail?: string // parent only
+  department?: string // faculty only
 }
 
 // ─── PBKDF2 password hashing (no external deps) ──────────────────────────────
@@ -45,8 +46,8 @@ export function verifyPassword(password: string, stored: string): boolean {
 // ─── File paths ────────────────────────────────────────────────────────
 const __filename = fileURLToPath(import.meta.url)
 const __dirname  = path.dirname(__filename)
-// This file lives at aura/lib/db/user-db.ts → DB sits in the same folder
-const DB_DIR  = __dirname
+// For local hosting, store the DB outside the compiled .next build directory
+const DB_DIR  = path.join(process.cwd(), "db")
 const DB_PATH = path.join(DB_DIR, "users.json")
 
 // ─── Read / write ─────────────────────────────────────────────────────────────
@@ -69,7 +70,7 @@ async function writeUsers(users: UserAccount[]): Promise<void> {
 // ─── Public API ───────────────────────────────────────────────────────────────
 export async function findUser(
   email: string,
-  role: "student" | "parent"
+  role: "student" | "parent" | "faculty"
 ): Promise<UserAccount | undefined> {
   const users = await getUsers()
   const found = users.find(
@@ -96,6 +97,16 @@ export async function findUser(
       createdAt: new Date().toISOString()
     }
   }
+  if (role === "faculty" && email.toLowerCase() === "demo.faculty@daiict.ac.in") {
+    return {
+      role: "faculty",
+      email: "demo.faculty@daiict.ac.in",
+      name: "Demo Faculty",
+      department: "Information & Communication Technology",
+      passwordHash: hashPassword("Faculty@123"),
+      createdAt: new Date().toISOString()
+    }
+  }
 
   return undefined
 }
@@ -106,7 +117,8 @@ export async function saveUser(
   const users = await getUsers()
   const isDemo =
     (user.role === "student" && user.email.toLowerCase() === "demo.student@dau.ac.in") ||
-    (user.role === "parent" && user.email.toLowerCase() === "parent.demo@gmail.com")
+    (user.role === "parent" && user.email.toLowerCase() === "parent.demo@gmail.com") ||
+    (user.role === "faculty" && user.email.toLowerCase() === "demo.faculty@daiict.ac.in")
   const exists = users.some(
     (u) => u.email.toLowerCase() === user.email.toLowerCase() && u.role === user.role
   )

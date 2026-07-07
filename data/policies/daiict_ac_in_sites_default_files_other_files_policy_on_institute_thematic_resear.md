@@ -11,6 +11,10 @@ pdf_name: "Policies/Policy on Institute Thematic Research Areas (TRAs)"
 
 # Policies/Policy on Institute Thematic Research Areas (TRAs)
 
+## Version History
+- **Ver 1.0** (Effective: 01 April 2026) — First TRA policy at DAU.
+
+
 ## Overview
 
 This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.

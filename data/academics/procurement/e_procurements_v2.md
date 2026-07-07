@@ -27,13 +27,6 @@ Explore procurement opportunities with DA-IICT through our tendering platform, s
 
 [Know More](http://intranet.daiict.ac.in/~daiict_nt01/Eprocurement/2023-24/)
 
-### 2022 - 23
-
-[Know More](http://intranet.daiict.ac.in/~daiict_nt01/Eprocurement/2022-23/)
-
-### 2021 - 22
-
-[Know More](http://intranet.daiict.ac.in/~daiict_nt01/Eprocurement/2021-22/)
 
 # Related Links
 

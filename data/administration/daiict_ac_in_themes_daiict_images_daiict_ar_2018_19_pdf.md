@@ -2195,7 +2195,7 @@ Codes for Archival DNA Data Storage,” IEEE
 Communications Letters, Vol. 22, no. 10, 
 pp. 1972 - 1975, Oct. 2018. doi:10.1109/
 LCOMM.2018.2861867
-29.	 Manish Narwaria, Luká  Krasula and Patrick 
+29.	 Manish Narwaria, Luká Krasula and Patrick 
 Le Callet, “Data Analysis in Multimedia Quality 
 Assessment: Revisiting the Statistical Tests,” 
 IEEE Transactions on Multimedia, vol. 20, no. 

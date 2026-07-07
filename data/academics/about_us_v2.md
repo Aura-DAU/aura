@@ -225,27 +225,6 @@ M Sc (IT) and MSc (ICT-Agriculture & Rural Development) and PhD launched.
 
 [Annual Report 2019-20  39.4 MB ](https://www.daiict.ac.in/sites/default/files/other-files/DAIICT_AR_2019_20.pdf)
 
-[Annual Report 2018-19  1.8 MB ](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2018-19.pdf)
-
-[Annual Report 2017-18  2.6 MB ](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2017-18.pdf)
-
-[Annual Report 2016-17  1.9 MB ](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2016-17.pdf)
-
-[Annual Report 2015-16  4.7 MB ](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2015-16.pdf)
-
-[Annual Report 2014-15  3.6 MB ](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2014-15.pdf)
-
-
-
-Annual Report
-
-  * [Annual Report 2018-19](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2018-19.pdf) "Annual Report 2018-19") 1.8 MB
-  * [Annual Report 2017-18](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2017-18.pdf) "Annual Report 2017-18") 2.6 MB
-  * [Annual Report 2016-17](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2016-17.pdf) "Annual Report 2016-17") 1.9 MB
-  * [Annual Report 2015-16](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2015-16.pdf) "Annual Report 2015-16") 4.7 MB
-  * [Annual Report 2014-15](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2014-15.pdf) "Annual Report 2014-15") 3.6 MB
-
-
 
 Collaboration & MoUs
 
@@ -393,9 +372,5 @@ To collaborate in mutually selected projects with a view to share expertise for 
 | [Annual Report 2023-24 33.5 MB](https://www.daiict.ac.in/sites/default/files/other-files/DA-IICT_Annual-Report_2023-24_Final_2025.pdf) | PDF |
 | [Annual Report 2022-23 3.80 MB](https://www.daiict.ac.in/sites/default/files/other-files/Annual-Report_2022-23.pdf) | PDF |
 | [Annual Report 2019-20  39.4 MB](https://www.daiict.ac.in/sites/default/files/other-files/DAIICT_AR_2019_20.pdf) | PDF |
-| [Annual Report 2018-19  1.8 MB](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2018-19.pdf) | PDF |
-| [Annual Report 2017-18  2.6 MB](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2017-18.pdf) | PDF |
-| [Annual Report 2016-17  1.9 MB](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2016-17.pdf) | PDF |
-| [Annual Report 2015-16  4.7 MB](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2015-16.pdf) | PDF |
-| [Annual Report 2014-15  3.6 MB](https://www.daiict.ac.in/themes/daiict/images/DAIICT-AR-2014-15.pdf) | PDF |
+
 

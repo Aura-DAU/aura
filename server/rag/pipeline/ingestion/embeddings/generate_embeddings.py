@@ -15,11 +15,12 @@ from sentence_transformers import SentenceTransformer
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "chunking"))
 from config import MODEL_NAME
 
-CHUNKS_FILE = "../../../processed_chunks/chunks.json"
+EMBEDDINGS_DIR = Path(__file__).resolve().parent
+CHUNKS_FILE = (EMBEDDINGS_DIR / "../../../processed_chunks/chunks.json").resolve()
 
-
-EMBEDDINGS_FILE = "../../vector_store/embeddings.npy"
-METADATA_FILE = "../../vector_store/metadata.json"
+VECTOR_STORE_DIR = (EMBEDDINGS_DIR / "../../vector_store").resolve()
+EMBEDDINGS_FILE = VECTOR_STORE_DIR / "embeddings.npy"
+METADATA_FILE = VECTOR_STORE_DIR / "metadata.json"
 
 
 # ==================================================
@@ -37,7 +38,14 @@ def load_chunks(filepath):
 
 def main():
     import torch
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    # Fix K: check CUDA first — previously only MPS was checked, so NVIDIA
+    # GPU machines always fell back to CPU for embedding generation.
+    if torch.cuda.is_available():
+        device = "cuda"
+    elif torch.backends.mps.is_available():
+        device = "mps"
+    else:
+        device = "cpu"
     print(f"Using device: {device}")
 
     model = SentenceTransformer(MODEL_NAME, device=device)
@@ -74,7 +82,7 @@ def main():
     # SAVE OUTPUTS
     # ==========================================
 
-    Path("../../vector_store").mkdir(
+    VECTOR_STORE_DIR.mkdir(
         parents=True,
         exist_ok=True
     )

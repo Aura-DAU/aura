@@ -17,35 +17,19 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 
 ## Main Content
 
-BY ORDER
-The Executive Committee of the Knowledge Consortium of Gujarat, 
-Department of Education, Government of Gujarat on the recommendation of 
-the duly appointed assessment & rating agency, the Indian Centre for Academic 
-Rankings and Excellence (ICARE) has rated
-as a    Star Institution in the category of 
-Gujarat State Institutional Ratings Framework (GSIRF)
-on the 2nd December 2024.
-VALID UPTO 31st May 
-Sunaina 
-2025
-Tomar IAS
-Gaurav Dinesh Ramesh IAS
-Director (Higher Education)
-Government of Gujarat
-Additional Chief Secretary 
-(Higher and Technical Education)
-Government of Gujarat
-Dr Karthick Sridhar
-Vice Chairman
-Indian Centre for Academic
-Rankings and Excellence
-Prof AU Patel
-Advisor
-Knowledge Consortium of Gujarat
-Government of Gujarat
-on the basis of comprehensive performance metrics as set out in the 
-University
-5
-5
-Dhirubhai Ambani Institute Of Information 
-And Communication Technology
+# Gujarat State Institutional Ratings Framework (GSIRF) 2024-2025 Rating Certificate
+
+**Institution Rated**: Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)
+**Category**: University
+**Rating**: 5-Star Institution
+**Date of Rating**: 2nd December 2024
+**Valid Upto**: 31st May 2025
+
+### Signatories
+- **Sunaina Tomar, IAS**: Additional Chief Secretary (Higher and Technical Education), Government of Gujarat
+- **Gaurav Dinesh Ramesh, IAS**: Director (Higher Education), Government of Gujarat
+- **Dr. Karthick Sridhar**: Vice Chairman, Indian Centre for Academic Rankings and Excellence (ICARE)
+- **Prof. A. U. Patel**: Advisor, Knowledge Consortium of Gujarat (KCG)
+
+---
+*Rated by the Knowledge Consortium of Gujarat (KCG), Department of Education, Government of Gujarat, on the recommendation of the Indian Centre for Academic Rankings and Excellence (ICARE).*
