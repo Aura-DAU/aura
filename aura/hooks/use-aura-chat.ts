@@ -122,7 +122,7 @@ export function useAuraChat() {
     if (session?.user) {
       const email = session.user.email || 'guest'
       const role = session.user.role || 'guest'
-      const maxQuota = 999 // role === 'guest' ? 3 : 5
+      const maxQuota = role === 'guest' ? 3 : 5
       const date = new Date().toISOString().split('T')[0]
       const key = `aura-quota-${email}`
       
