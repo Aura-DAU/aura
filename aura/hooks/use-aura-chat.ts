@@ -6,6 +6,7 @@ import type {
   ChatThread,
   Citation,
   StudentProfile,
+  CalendarActionData,
 } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
 import { apiFetch, setToken, initAuth } from "@/lib/auth-client"
@@ -292,6 +293,7 @@ export function useAuraChat() {
         let assistantText = ""
         let citations: Citation[] = []
         let isPersonalData = false
+        let calendarAction: CalendarActionData | undefined
         const assistantMsg: ChatMessage = {
           role: "assistant",
           content: "",
@@ -313,12 +315,25 @@ export function useAuraChat() {
             setActiveCitations(citations)
           } else if (chunk.type === "personal-data-flag") {
             isPersonalData = true
+          } else if (
+            chunk.type === "calendar-action" &&
+            chunk.action !== null &&
+            typeof chunk.action === "object"
+          ) {
+            // Backend M3 (Dhruvam) owns the calendar tool logic.
+            // This handler activates when the backend emits a calendar-action event.
+            calendarAction = chunk.action as CalendarActionData
           }
         }
 
         const finalMessages: ChatMessage[] = [
           ...baseMessages,
-          { ...assistantMsg, content: assistantText, is_personal_data: isPersonalData || undefined },
+          {
+            ...assistantMsg,
+            content: assistantText,
+            is_personal_data: isPersonalData || undefined,
+            calendar_action: calendarAction,
+          },
         ]
         persistMessages(threadId, finalMessages)
 
