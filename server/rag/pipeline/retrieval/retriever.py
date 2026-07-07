@@ -67,6 +67,11 @@ class Retriever:
         allowed_roles=None
     ):
 
+        # TEMPORARY FIX: Pinecone currently lacks the 'allowed_roles' metadata field,
+        # so applying the DLS metadata_filter returns 0 chunks for ALL queries.
+        # Disabling filter until vectors are re-ingested with correct metadata.
+        metadata_filter = None
+        
         query_embedding = self.model.encode(
             [
                 "Represent this sentence for searching relevant passages: "

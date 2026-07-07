@@ -13,6 +13,7 @@ JWT claim shape (minted by Next.js):
 
 import os
 from dataclasses import dataclass
+from typing import Optional
 
 import jwt
 from fastapi import Depends, HTTPException
@@ -24,7 +25,7 @@ ALGORITHM           = "HS256"
 
 # Broad roles stored in user_identity_map.role — what the JWT carries.
 # Fine-grained roles are in role_bindings and resolved by resolve_effective_role().
-BROAD_ROLES = {"student", "faculty", "admin"}
+BROAD_ROLES = {"student", "faculty", "admin", "guest"}
 
 # All possible effective roles (for DLS filter, Pinecone, admin panel)
 ALL_ROLES = {
@@ -40,16 +41,18 @@ ALL_ROLES = {
     "registrar",
     "admin_staff",
     "superadmin",
+    "guest",
 }
 
-security = HTTPBearer()
+# auto_error=False so we can return 401 (not 403) for missing credentials.
+security = HTTPBearer(auto_error=False)
 
 
 @dataclass
 class Identity:
     erp_id: str
     role:   str           # broad role from JWT: student | faculty | admin
-    dept:   str | None = None
+    dept:   Optional[str] = None
 
     @property
     def user_id(self) -> str:
@@ -73,6 +76,9 @@ def require_identity(
     secret = get_internal_jwt_secret()
     if not secret:
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured.")
+
+    if credentials is None:
+        raise HTTPException(status_code=401, detail="Authorization header missing")
 
     token = credentials.credentials
     try:

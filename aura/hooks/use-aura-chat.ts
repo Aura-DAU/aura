@@ -115,7 +115,56 @@ export function useAuraChat() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [activeCitations, setActiveCitations] = useState<Citation[]>([])
   const [studentProfile, setStudentProfile] = useState<StudentProfile>(DEFAULT_PROFILE)
+  const [remainingQuota, setRemainingQuotaState] = useState<number | null>(null)
   const { data: session } = useSession()
+
+  useEffect(() => {
+    if (session?.user) {
+      const email = session.user.email || 'guest'
+      const role = session.user.role || 'guest'
+      const maxQuota = 999 // role === 'guest' ? 3 : 5
+      const date = new Date().toISOString().split('T')[0]
+      const key = `aura-quota-${email}`
+      
+      try {
+        const stored = localStorage.getItem(key)
+        if (stored) {
+          const parsed = JSON.parse(stored)
+          if (parsed.date === date) {
+            setRemainingQuotaState(Math.max(0, maxQuota - parsed.count))
+          } else {
+            setRemainingQuotaState(maxQuota)
+            localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+          }
+        } else {
+          setRemainingQuotaState(maxQuota)
+          localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+        }
+      } catch {
+        setRemainingQuotaState(maxQuota)
+      }
+    } else {
+      setRemainingQuotaState(null)
+    }
+  }, [session])
+
+  const decrementQuota = useCallback(() => {
+    setRemainingQuotaState(prev => {
+      if (prev === null) return null;
+      const newVal = Math.max(0, prev - 1)
+      if (session?.user) {
+        const email = session.user.email || 'guest'
+        const role = session.user.role || 'guest'
+        const maxQuota = role === 'guest' ? 3 : 5
+        const date = new Date().toISOString().split('T')[0]
+        const key = `aura-quota-${email}`
+        try {
+          localStorage.setItem(key, JSON.stringify({ date, count: maxQuota - newVal }))
+        } catch {}
+      }
+      return newVal
+    })
+  }, [session])
 
   useEffect(() => {
     if (session) {
@@ -244,7 +293,7 @@ export function useAuraChat() {
   const handleSendMessage = useCallback(
     async (text: string) => {
       const trimmed = text.trim()
-      if (!trimmed || loading) return
+      if (!trimmed || loading || remainingQuota === 0) return
 
       setErrorMessage(null)
       setInputText("")
@@ -285,9 +334,15 @@ export function useAuraChat() {
           }),
         })
 
+        if (response.status === 429) {
+          setRemainingQuotaState(0)
+          throw new Error("Question limit reached. Please wait or sign in with a DAU account.")
+        }
         if (!response.ok || !response.body) {
           throw new Error("Request failed")
         }
+
+        decrementQuota()
 
         let assistantText = ""
         let citations: Citation[] = []
@@ -332,15 +387,15 @@ export function useAuraChat() {
             })
           }
         } catch { /* ignore */ }
-      } catch {
-        setErrorMessage("Something went wrong. Please try again.")
+      } catch (err: any) {
+        setErrorMessage(err.message || "Something went wrong. Please try again.")
         setMessages(baseMessages)
       } finally {
         setLoading(false)
         setThinkingStep(undefined)
       }
     },
-    [activeThreadId, loading, messages, persistMessages, studentProfile, session],
+    [activeThreadId, loading, messages, persistMessages, studentProfile, session, remainingQuota, decrementQuota],
   )
 
   const handleClearChat = useCallback(() => {
@@ -519,6 +574,7 @@ export function useAuraChat() {
     errorMessage,
     setErrorMessage,
     activeCitations,
+    remainingQuota,
     threads: threads.map(({ id, title }) => ({ id, title })),
     activeThreadId,
     setActiveThreadId,

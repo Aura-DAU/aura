@@ -121,6 +121,7 @@ export function ChatShell() {
             recordingVolume={chat.recordingVolume}
             onSend={chat.handleSendMessage}
             onMicClick={chat.handleMicClick}
+            remainingQuota={chat.remainingQuota}
           />
         </div>
       </main>
