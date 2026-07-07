@@ -1,7 +1,9 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { MessageSquare, Plus, Trash2, User } from "lucide-react"
+import { LayoutDashboard, MessageSquare, Plus, Trash2, User } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import type { ChatThread, StudentProfile, UserSession } from "@/lib/chat-types"
 import { BrandMark } from "@/components/common/BrandMark"
@@ -64,6 +66,7 @@ function SidebarContent({
   userSession,
   onCloseMobile,
 }: SidebarProps) {
+  const pathname = usePathname()
   const displayName = userSession ? (studentProfile.name || userSession.name) : "Guest Account"
   const displayEmail = userSession ? (userSession.email ?? "") : "Sign in to get started"
 
@@ -88,6 +91,23 @@ function SidebarContent({
           <Plus className="size-4" />
           New chat
         </button>
+      </div>
+
+      {/* Dashboard shortcut */}
+      <div className="mt-3 px-3">
+        <Link
+          href="/dashboard"
+          onClick={onCloseMobile}
+          className={cn(
+            "flex items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-colors",
+            pathname === "/dashboard"
+              ? "bg-theme-gray-light text-neutral-100"
+              : "text-neutral-400 hover:bg-theme-gray-light/60 hover:text-neutral-200",
+          )}
+        >
+          <LayoutDashboard className="size-4 shrink-0" />
+          Dashboard
+        </Link>
       </div>
 
       <nav className="mt-4 flex-1 space-y-1 overflow-y-auto px-3 pb-4">
