@@ -1,32 +1,44 @@
 """
 Tab → page-path mapping for ecampus.daiict.ac.in.
 
-These are PLACEHOLDER paths based on the tab labels visible in the student
-portal screenshot (Home, Student Detail, Registration, Course Adjustments,
-Result, Hostel, Fees, Attendance, Utilities, LOGOUT). Classic ASP.NET sites
-of this vintage commonly use a flat *.aspx naming scheme like this, but the
-exact filenames need to be confirmed from the live URL bar or page source —
-update the values below once you have them, nothing else in the codebase
-needs to change since every other module references these constants, never
-a literal path.
+ALL paths confirmed from real portal HTML (July 2026).
+Extracted from the JavaScript menu arrays in every page's source.
+Base URL: https://ecampus.daiict.ac.in
 """
 
 
 class Pages:
-    HOME = "/Home.aspx"
-    STUDENT_DETAIL = "/StudentDetail.aspx"
-    REGISTRATION = "/Registration.aspx"
-    COURSE_ADJUSTMENTS = "/CourseAdjustments.aspx"
-    RESULT = "/Result.aspx"
-    HOSTEL = "/Hostel.aspx"
-    FEES = "/Fees.aspx"
-    ATTENDANCE = "/Attendance.aspx"
-    UTILITIES = "/Utilities.aspx"
-    LOGOUT = "/Logout.aspx"
+    # ── Core student pages (confirmed) ────────────────────────────────────
+    HOME                  = "/webapp/intranet/edu/student/DefaultStudentHomePage.jsp"
+    STUDENT_DETAIL        = "/webapp/intranet/StudentDetailEditServlet"
+    REGISTRATION_LIST     = "/webapp/intranet/StudentRegistrationListServlet"
+    REGISTRATION_EDIT     = "/webapp/intranet/StudentRegistrationEditServlet"   # POST with stdid + SemesterID
+    COURSE_DROP           = "/webapp/intranet/CourseDropListServlet"
+    GRADE_SEMESTER_LIST   = "/webapp/intranet/GradeSemesterListServlet"
+    GRADE_COURSE_LIST     = "/webapp/intranet/GradeCourseListServlet"           # POST with stdid + SemesterID
 
-    # TODO: confirm where timetable data actually lives — it may be a
-    # sub-page under Registration, a distinct tab not visible until you're
-    # logged in further, or embedded inside Course Adjustments. Send a
-    # screenshot of whichever tab shows weekly slot/timing data once you're
-    # past login and this gets corrected to the real path.
-    TIMETABLE = "/Timetable.aspx"  # best-guess placeholder
+    # ── Hostel submenu (confirmed from menu JS) ────────────────────────────
+    BULLETIN_BOARD        = "/webapp/intranet/BulletinListDisplayServlet"
+    HOSTEL_COMPLAINTS     = "/webapp/intranet/StudentComplainListServlet"
+    HOSTEL_LEAVES         = "/webapp/intranet/HostelStudentLeavesListServlet"
+    HOSTEL_VISITOR_ROOM   = "/webapp/intranet/HostelVisitRoomBookingsListServlet"
+    HOSTEL_RULES          = "/webapp/intranet/HostelPolicyListDisplayServlet"
+
+    # ── Fees (confirmed from menu JS) ─────────────────────────────────────
+    FEE_RECEIPTS_CANDIDATE = "/webapp/intranet/CandidateReceiptsViewServlet"
+    FEE_RECEIPTS_STUDENT   = "/webapp/intranet/SemSelector?target=StudentReceiptsViewServlet&actiontext=List Semesters"
+
+    # ── Attendance (confirmed — NOTE: real portal has typo "Attandance") ──
+    ATTENDANCE_LIST       = "/webapp/intranet/AttandanceSemesterListServlet"    # typo is intentional
+
+    # ── Utilities ─────────────────────────────────────────────────────────
+    CHANGE_PASSWORD       = "/webapp/intranet/edu/ChangePassword.jsp"
+
+    # ── Logout (confirmed from menu JS) ───────────────────────────────────
+    LOGOUT                = "/webapp/intranet/LoginServlet?logout=true"
+
+    # ── Grade card navigation ──────────────────────────────────────────────
+    # To get grade card for a specific semester, POST to GRADE_COURSE_LIST
+    # with form fields: stdid=<STDID> and SemesterID=<SEMESTERID>
+    # Both values come from parse_grade_semester_list() results.
+    # Example: stdid=12436, SemesterID=1455 → Semester IV grade card

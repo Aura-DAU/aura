@@ -1,14 +1,15 @@
 """
-High-level client used by tool handlers — replaces the OAuth-based
-ECampusClient from AURA_Agentic_ECampus_Tools.md. Same external shape
-(one method per data type) so tool_registry.py's handlers barely change,
-but internally this logs into the portal and scrapes instead of calling a
-REST API.
+High-level client used by tool handlers.
 
-Usage pattern (see tool_registry.py for the full picture):
+Key insight from real HTML (July 2026):
+  - Registration and grades both require a TWO-STEP fetch:
+      1. GET the list page → get semester list + (stdid, semesterID) per semester
+      2. POST to the edit/detail servlet with stdid + SemesterID → get actual data
+  - Grade card POST: stdid=12436, SemesterID=1455 → Semester IV
+  - Registration POST: same pattern via StudentRegistrationEditServlet
 
-    client = ECampusClient(erp_id="202301015")
-    result = client.get_result()
+  The client handles both steps transparently — callers just call
+  get_registration() or get_grades() and get structured data back.
 """
 
 from . import pages, parsers, cache, credentials_vault, timetable, timetable_pool, faculty_schedule
@@ -19,6 +20,7 @@ class ECampusClient:
     def __init__(self, erp_id: str):
         self.erp_id = erp_id
         self._session: ECampusSession | None = None
+        self._std_id: str | None = None   # internal DB id (e.g. "12436"), different from ERP ID
 
     def _ensure_session(self) -> ECampusSession:
         if self._session is not None:
@@ -29,82 +31,179 @@ class ECampusClient:
         self._session = session
         return session
 
-    def _get_cached_or_fetch(self, page_path: str, parse_fn):
-        key = cache.cache_key(self.erp_id, page_path)
+    def _get(self, path: str) -> str:
+        return self._ensure_session().get_page(path)
+
+    def _post_form(self, path: str, data: dict) -> str:
+        """POST a form to a servlet path with given data fields."""
+        session = self._ensure_session()
+        import requests as _req
+        from .session import ECAMPUS_BASE_URL
+        resp = session.http.post(ECAMPUS_BASE_URL + path, data=data, timeout=15)
+        resp.raise_for_status()
+        return resp.text
+
+    def _cached(self, key_suffix: str, fetch_fn):
+        key = cache.cache_key(self.erp_id, key_suffix)
         cached = cache.get(key)
         if cached is not None:
             return cached
-        session = self._ensure_session()
-        html = session.get_page(page_path)
-        parsed = parse_fn(html)
-        cache.set(key, parsed)
-        return parsed
+        result = fetch_fn()
+        cache.set(key, result)
+        return result
 
-    # ── One method per tab ───────────────────────────────────────────────
+    # ── Student Detail ─────────────────────────────────────────────────────
     def get_student_detail(self) -> dict:
-        return self._get_cached_or_fetch(pages.Pages.STUDENT_DETAIL, parsers.parse_student_detail)
+        def fetch():
+            html = self._get(pages.Pages.STUDENT_DETAIL)
+            return parsers.parse_student_detail(html)
+        return self._cached("student_detail", fetch)
 
-    def get_registration(self) -> list[dict]:
-        return self._get_cached_or_fetch(pages.Pages.REGISTRATION, parsers.parse_registration)
+    # ── Registration ───────────────────────────────────────────────────────
+    def get_registration_list(self) -> list[dict]:
+        """Returns list of semesters with registration dates."""
+        def fetch():
+            html = self._get(pages.Pages.REGISTRATION_LIST)
+            return parsers.parse_registration_list(html)
+        return self._cached("registration_list", fetch)
 
-    def get_course_adjustments(self) -> list[dict]:
-        return self._get_cached_or_fetch(pages.Pages.COURSE_ADJUSTMENTS, parsers.parse_course_adjustments)
+    def get_registration(self, semester: str | None = None) -> dict:
+        """
+        Returns enrolled courses for a semester (default: latest registered).
+        Requires a two-step fetch: list → POST to edit servlet.
+        """
+        def fetch():
+            sem_list = self.get_registration_list()
+            # Pick the most recently registered semester (has a reg_date)
+            registered = [s for s in sem_list if s.get("registered") and s.get("semester_id")]
+            if not registered:
+                return {"courses": [], "semester": None}
+
+            if semester:
+                target = next((s for s in registered if semester.lower() in s["semester"].lower()), registered[-1])
+            else:
+                target = registered[-1]  # latest
+
+            html = self._post_form(pages.Pages.REGISTRATION_EDIT, {
+                "stdid":      target["std_id"],
+                "SemesterID": target["semester_id"],
+            })
+            return parsers.parse_registration_courses(html)
+
+        return self._cached(f"registration_{semester or 'latest'}", fetch)
+
+    # ── Grades ─────────────────────────────────────────────────────────────
+    def get_grade_semester_list(self) -> list[dict]:
+        """Returns list of semesters that have grade cards available."""
+        def fetch():
+            html = self._get(pages.Pages.GRADE_SEMESTER_LIST)
+            return parsers.parse_grade_semester_list(html)
+        return self._cached("grade_semester_list", fetch)
+
+    def get_grade_card(self, semester: str | None = None) -> dict:
+        """
+        Returns grade card for a semester (default: latest with grades).
+        Two-step fetch: semester list → POST to GradeCourseListServlet.
+        """
+        def fetch():
+            sem_list = self.get_grade_semester_list()
+            graded = [s for s in sem_list if s.get("has_grades") and s.get("semester_id")]
+            if not graded:
+                return {"courses": [], "spi": None, "cpi": None}
+
+            if semester:
+                target = next((s for s in graded if semester.lower() in s["semester"].lower()), graded[-1])
+            else:
+                target = graded[-1]
+
+            html = self._post_form(pages.Pages.GRADE_COURSE_LIST, {
+                "stdid":      target["std_id"],
+                "SemesterID": target["semester_id"],
+            })
+            return parsers.parse_grade_card(html)
+
+        return self._cached(f"grade_card_{semester or 'latest'}", fetch)
 
     def get_result(self) -> dict:
-        return self._get_cached_or_fetch(pages.Pages.RESULT, parsers.parse_result)
+        """Returns latest semester grade card. Alias used by tool_registry."""
+        return self.get_grade_card()
 
     def get_cgpa(self) -> dict:
-        """Derived from the Result page rather than scraped separately —
-        there's no indication eCampus exposes CGPA on its own page."""
-        result = self.get_result()
+        """Returns CPI (cumulative) and SPI (latest semester) from grade card."""
+        card = self.get_grade_card()
         return {
-            "cgpa_raw_label": result.get("cgpa_raw_label"),
-            "sgpa_raw_label": result.get("sgpa_raw_label"),
-            # TODO: once parse_result's TODOs are filled in with real
-            # selectors, this should return clean numeric values instead of
-            # raw label text.
+            "cgpa":           card.get("cpi"),
+            "spi":            card.get("spi"),
+            "as_of_semester": card.get("semester"),
+            "credits_earned": card.get("credits_earned_cum"),
         }
 
-    def get_hostel(self) -> dict:
-        return self._get_cached_or_fetch(pages.Pages.HOSTEL, parsers.parse_hostel)
+    def get_all_grades(self) -> list[dict]:
+        """Fetches grade cards for ALL semesters with results. May be slow first time."""
+        def fetch():
+            sem_list = self.get_grade_semester_list()
+            graded = [s for s in sem_list if s.get("has_grades") and s.get("semester_id")]
+            all_cards = []
+            for sem in graded:
+                html = self._post_form(pages.Pages.GRADE_COURSE_LIST, {
+                    "stdid":      sem["std_id"],
+                    "SemesterID": sem["semester_id"],
+                })
+                card = parsers.parse_grade_card(html)
+                card["_semester_label"] = sem["semester"]
+                all_cards.append(card)
+            return all_cards
+        return self._cached("all_grades", fetch)
 
-    def get_fees(self) -> dict:
-        return self._get_cached_or_fetch(pages.Pages.FEES, parsers.parse_fees)
-
-    def get_attendance(self) -> list[dict]:
-        return self._get_cached_or_fetch(pages.Pages.ATTENDANCE, parsers.parse_attendance)
-
-    def get_utilities(self) -> dict:
-        return self._get_cached_or_fetch(pages.Pages.UTILITIES, parsers.parse_utilities)
-
+    # ── Timetable ──────────────────────────────────────────────────────────
     def get_timetable(self) -> list[dict]:
-        key = cache.cache_key(self.erp_id, pages.Pages.TIMETABLE)
-        cached = cache.get(key)
-        if cached is not None:
-            entries = cached
-        else:
-            session = self._ensure_session()
-            html = session.get_page(pages.Pages.TIMETABLE)
-            entries = timetable.parse_timetable(html)
-            cache.set(key, entries)
-            # Feed the shared pool so faculty schedules can be derived later —
-            # this is the "if I give you a timetable you generate faculty
-            # schedule from that only" mechanism from the brief.
-            timetable_pool.append_entries(entries)
+        """
+        Timetable URL not yet confirmed — not visible in menu JS.
+        May be embedded in registration or a separate tab.
+        Returns empty list until URL is confirmed.
+        TODO: find timetable URL and implement parser.
+        """
+        return []
 
-        return [e.__dict__ for e in entries]
+    # ── Attendance ─────────────────────────────────────────────────────────
+    def get_attendance(self) -> list[dict]:
+        """
+        Attendance URL confirmed: AttandanceSemesterListServlet (typo is real).
+        However, confirmed from status report that eCampus attendance data
+        is unavailable — returns empty list.
+        TODO: try fetching and check if data is actually there.
+        """
+        return []
+
+    # ── Hostel ─────────────────────────────────────────────────────────────
+    def get_hostel(self) -> dict:
+        """Hostel rules/policy page — not personal data, just static rules."""
+        def fetch():
+            html = self._get(pages.Pages.HOSTEL_RULES)
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(html, "html.parser")
+            return {"raw_text": soup.get_text("\n", strip=True)}
+        return self._cached("hostel", fetch)
+
+    # ── Fees ───────────────────────────────────────────────────────────────
+    def get_fees(self) -> dict:
+        """
+        Fee receipts page. Returns structured fee history.
+        TODO: implement parse_fee_receipts() in parsers.py once
+        HTML source of CandidateReceiptsViewServlet is available.
+        """
+        def fetch():
+            html = self._get(pages.Pages.FEE_RECEIPTS_CANDIDATE)
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(html, "html.parser")
+            return {"raw_text": soup.get_text("\n", strip=True)}
+        return self._cached("fees", fetch)
 
     def close(self) -> None:
         if self._session:
             self._session.logout()
             self._session = None
 
-    # Fix #11: context-manager support so callers can write:
-    #   with ECampusClient(erp_id=erp_id) as client:
-    #       ...
-    # This guarantees close() (and therefore logout()) is always called,
-    # even if an exception occurs during the session, preventing dangling
-    # authenticated sessions on the eCampus server.
     def __enter__(self) -> "ECampusClient":
         return self
 
@@ -113,8 +212,6 @@ class ECampusClient:
 
 
 def get_faculty_schedule(faculty_name: str) -> dict:
-    """Module-level, not tied to a student's session — pulls from the pool
-    accumulated across every student's get_timetable() call so far. No
-    eCampus login as faculty required for this in phase 1."""
+    """Module-level — pulls from pooled timetable data accumulated from students."""
     entries = timetable_pool.load_all_entries()
     return faculty_schedule.build_faculty_schedule(entries, faculty_name)
