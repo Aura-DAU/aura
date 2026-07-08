@@ -8,14 +8,14 @@ declare module "next-auth" {
   interface Session {
     accessToken?: string
     user: {
-      role: "student" | "faculty" | "admin"
+      role: "student" | "faculty" | "admin" | "guest"
       erpId: string
       department?: string
     } & DefaultSession["user"]
   }
 
   interface User {
-    role?: "student" | "faculty" | "admin"
+    role?: "student" | "faculty" | "admin" | "guest"
     erpId?: string
     department?: string
   }
@@ -23,7 +23,7 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
   interface JWT {
-    role?: "student" | "faculty" | "admin"
+    role?: "student" | "faculty" | "admin" | "guest"
     erpId?: string
     department?: string
     accessToken?: string
@@ -33,7 +33,7 @@ declare module "next-auth/jwt" {
 /**
  * Fetches the user's ERP Identity from the backend Auth DB.
  */
-async function lookupErpIdentity(email: string): Promise<{ role: "student" | "faculty" | "admin"; erpId: string; department: string } | null> {
+async function lookupErpIdentity(email: string): Promise<{ role: "student" | "faculty" | "admin" | "guest"; erpId: string; department: string } | null> {
   try {
     const res = await fetch(backendUrl(`/internal/resolve-identity?email=${encodeURIComponent(email)}`), {
       headers: {
@@ -74,7 +74,6 @@ export const authOptions: NextAuthOptions = {
       })(),
       authorization: {
         params: {
-          hd: "dau.ac.in",
           prompt: "select_account",
         },
       },
@@ -109,7 +108,10 @@ export const authOptions: NextAuthOptions = {
       if (account?.provider === "google") {
         const email = user.email || ""
         if (!email.endsWith("@dau.ac.in") && !email.endsWith("@daiict.ac.in")) {
-          return "/login?error=DomainNotAllowed"
+          user.role = "guest"
+          user.erpId = "GUEST"
+          user.department = "GUEST"
+          return true
         }
         
         try {
@@ -171,7 +173,7 @@ export const authOptions: NextAuthOptions = {
       // Mint a fresh short-lived internal JWT on every token update
       if (token.role && token.erpId) {
         token.accessToken = signInternalJwt({
-          role: token.role as "student" | "faculty" | "admin",
+          role: token.role as "student" | "faculty" | "admin" | "guest",
           erpId: token.erpId,
           department: token.department || undefined,
         })
@@ -181,7 +183,7 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.role = token.role as "student" | "faculty" | "admin"
+        session.user.role = token.role as "student" | "faculty" | "admin" | "guest"
         session.user.erpId = token.erpId as string
         session.user.department = token.department as string | undefined
       }

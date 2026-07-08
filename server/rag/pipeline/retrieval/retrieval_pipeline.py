@@ -175,7 +175,6 @@ class RetrievalPipeline:
         "m tech": "M.Tech.",
 
         # MSc IT variants
-        "msc it": "M.Sc. (IT)",
         "m.sc it": "M.Sc. (IT)",
         "msc information technology": "M.Sc. (IT)",
 
@@ -194,9 +193,6 @@ class RetrievalPipeline:
         "b tech": "B.Tech.",
         "msc": "M.Sc.",
         "m sc": "M.Sc.",
-        "mtech ict": "M.Tech. (ICT)",
-        "msc data science": "M.Sc. (Data Science)",
-        "msc agriculture analytics": "M.Sc. (Agriculture Analytics)",
         "phd regular": "Ph.D.",
         "phd part time": "Ph.D.",
         "doctoral": "Ph.D."
@@ -676,7 +672,13 @@ class RetrievalPipeline:
         # on non-decomposed paths — too narrow for an unfiltered index search.
         base_top_k = plan.get("top_k", 5)
         raw_program = plan.get("entities", {}).get("program_name", "")
-        canonical_program = self._canonical_program_name(raw_program) if raw_program else None
+        # Guard: program_name may be a list for multi-program queries; take the
+        # first element for the alias-resolved / top_k heuristic only.
+        if isinstance(raw_program, list):
+            raw_program_scalar = raw_program[0] if raw_program else ""
+        else:
+            raw_program_scalar = raw_program
+        canonical_program = self._canonical_program_name(raw_program_scalar) if raw_program_scalar else None
         alias_resolved = (
             canonical_program is not None
             and canonical_program not in self.BROAD_PROGRAM_SENTINELS
@@ -998,11 +1000,15 @@ class RetrievalPipeline:
             normalize_embeddings=True,
             convert_to_numpy=True
         )
+        semantic_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
+        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
+            semantic_filter = None
+
         results = self.retriever.index.query(
             vector=query_embedding[0].tolist(),
             top_k=50,
             include_metadata=True,
-            filter={"authorization": {"$in": allowed_roles}} if allowed_roles else None
+            filter=semantic_filter
         )
         semantic_list = []
         for match in results["matches"]:

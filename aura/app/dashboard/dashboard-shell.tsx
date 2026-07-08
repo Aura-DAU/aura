@@ -8,7 +8,7 @@ import AdminBindingsClient from "./admin-client"
 
 interface DashboardShellProps {
   user: {
-    role: "student" | "faculty" | "admin"
+    role: "student" | "faculty" | "admin" | "guest"
     name?: string | null
     email?: string | null
     department?: string

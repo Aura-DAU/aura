@@ -40,8 +40,9 @@ export default function AdminBindingsClient() {
         throw new Error(data.error || "Failed to fetch bindings")
       }
       setBindings(data.bindings || [])
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Something went wrong."
+      setError(msg)
       setBindings([])
     } finally {
       setLoading(false)
@@ -79,8 +80,9 @@ export default function AdminBindingsClient() {
       const refreshRes = await fetch(`/api/admin/users/${erpId}/bindings`)
       const refreshData = await refreshRes.json()
       setBindings(refreshData.bindings || [])
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Something went wrong."
+      setError(msg)
     } finally {
       setSubmitting(false)
     }
@@ -106,8 +108,9 @@ export default function AdminBindingsClient() {
       const refreshRes = await fetch(`/api/admin/users/${erpId}/bindings`)
       const refreshData = await refreshRes.json()
       setBindings(refreshData.bindings || [])
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Something went wrong."
+      setError(msg)
     }
   }
 
