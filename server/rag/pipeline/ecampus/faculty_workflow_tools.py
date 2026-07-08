@@ -74,12 +74,10 @@ def handle_faculty_leave_application(identity: dict, **kwargs) -> dict:
         "duration_days": duration_days,
         "approval_chain": approval_chain,
         "checklist": [
-            "Confirm the leave type against the entitlement table (Casual / Earned / Medical / "
-            "Maternity / Paternity / Academic-Study / CPDA).",
+            "Confirm the leave type against the entitlement table (Casual / Earned / Medical / Maternity / Paternity / Academic-Study / CPDA).",
             "Medical Leave requires a medical certificate.",
             "Academic/Study Leave requires advance planning and Director approval.",
-            "Casual Leave cannot be combined with any other leave category; combined with weekends/"
-            "holidays it must not exceed 7 days at a stretch.",
+            "Casual Leave cannot be combined with any other leave category; combined with weekends/holidays it must not exceed 7 days at a stretch.",
             "Return any borrowed library material before proceeding on long leave or deputation.",
         ],
         "policy_context": context,
@@ -124,8 +122,7 @@ def handle_cpda_travel_approval(identity: dict, **kwargs) -> dict:
         "eligibility_checklist": [
             "Faculty member must be past confirmation of service to hold a CPDA balance.",
             "CPDA funds cannot be used while on lien or extraordinary leave.",
-            "Available balance is the sum of up to 3 years of grants (current year + prior 2), each "
-            "Rs. 1 lakh/year — confirm your current balance before applying.",
+            "Available balance is the sum of up to 3 years of grants (current year + prior 2), each Rs. 1 lakh/year — confirm your current balance before applying.",
         ],
         "required_documents": [
             "Conference dates and location",
@@ -177,8 +174,7 @@ def handle_seed_grant_guidance(identity: dict, **kwargs) -> dict:
         "suggested_category": category,
         "over_ceiling": over_ceiling,
         "eligibility_checklist": [
-            "Open only to newly recruited faculty early in their career — Ph.D. awarded within the "
-            "last three years.",
+            "Open only to newly recruited faculty early in their career — Ph.D. awarded within the last three years.",
             "Only one seed grant application is allowed, within a year of joining the university.",
             "Project duration is capped at two years.",
         ],
