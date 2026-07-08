@@ -1,10 +1,13 @@
 import { LayoutDashboard } from "lucide-react"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 import {
   getTimetableToday,
   getCgpa,
   getRegistration,
   getFeeDues,
 } from "@/lib/api/ecampus.action"
+import { authOptions } from "@/lib/auth/options"
 import { TimetableCard } from "@/components/features/dashboard/TimetableCard"
 import { CgpaCard } from "@/components/features/dashboard/CgpaCard"
 import { CoursesCard } from "@/components/features/dashboard/CoursesCard"
@@ -20,6 +23,12 @@ export const metadata = {
 
 /** Student Dashboard — all eCampus data fetched in parallel on the server. */
 export default async function DashboardPage() {
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    redirect("/login")
+  }
+
   // Fetch all four data sources in parallel; each call is independent and fails gracefully.
   const [timetableResult, cgpaResult, registrationResult, feeDuesResult] =
     await Promise.all([

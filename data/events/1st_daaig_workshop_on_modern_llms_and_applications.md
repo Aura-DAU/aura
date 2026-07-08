@@ -27,8 +27,15 @@ DAU announces the 1st DAAlG Workshop on Modern LLMs and Applications, hosted by 
 
 Participants will dive into key topics such as fine-tuning LLMs for specific tasks, deploying models efficiently, optimizing performance, reducing costs, and mastering prompt engineering and model customization. The workshop emphasizes less theory and more practice, featuring expert-led sessions, collaborative exercises, and hands-on coding to help you build your own AI-powered solutions.
 
+The last date for registration is 15 March 2025. You can register via the registration link here: https://forms.gle/daaig-llm-workshop.
+
 The event will also feature renowned speakers like Prof. Preslav Nakov (MBZUAI), Prof. Tanmoy Chakraborty (IIT Delhi), and experts from MS Research, IBM Research, Microsoft, and more.
 
 # Important Information
 
-_No important information found._
+- **Registration Link:** [Register here](https://forms.gle/daaig-llm-workshop)
+- **Fee Structure:**
+  - Students / Research Scholars: Rs. 1,000
+  - Faculty Members / Academicians: Rs. 2,000
+  - Industry Professionals: Rs. 5,000
+- **Registration Deadline:** 15 March 2025

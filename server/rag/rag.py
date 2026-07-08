@@ -11,11 +11,13 @@ class AURA:
         self,
         question,
         history=None,
-        profile=None
+        identity=None,
+        display_profile=None,
     ):
 
         return self.chatbot.chat(
             query=question,
             history=history,
-            profile=profile
+            identity=identity,
+            display_profile=display_profile,
         )

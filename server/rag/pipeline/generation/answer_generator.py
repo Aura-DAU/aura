@@ -463,7 +463,8 @@ class AnswerGenerator:
         context,
         plan,
         history=None,
-        profile=None
+        profile=None,
+        system_addendum=None,
     ):
         try:
             profile_text = ""
@@ -492,10 +493,15 @@ class AnswerGenerator:
                     else:
                         profile_text += "CRITICAL: You are assisting a PROFESSOR with no assigned subjects. You MUST NOT provide specific student records. Politely decline.\n\n"
 
-            planner_hint = {
-                "intent": plan["retrieval_intent"],
-                "entities": plan["entities"],
-            }
+            # Fix #1/#14: plan is None for pure PERSONAL queries (no RAG path).
+            # Guard access so we never raise TypeError on plan["retrieval_intent"].
+            if plan:
+                planner_hint = {
+                    "intent": plan["retrieval_intent"],
+                    "entities": plan["entities"],
+                }
+            else:
+                planner_hint = {"intent": "personal_data", "entities":{}}
 
             history_text = ""
             # Fix #10: use 6 turns to match query_rewriter.py's window.
@@ -562,15 +568,22 @@ Retrieved Documents
             # skip the LLM call entirely and return a helpful fallback message.
             # The LLM with empty context often hallucinates or gives a generic
             # "I could not find" response — we can do that cheaper and clearer.
-            import re as _re
-            context_text_only = _re.sub(r"<[^>]+>", "", context).strip()
+            context_text_only = re.sub(r"<[^>]+>", "", context).strip()
             if not context_text_only:
-                return (
-                    "I couldn\'t find specific information about that in the "
-                    "university\'s knowledge base. For accurate details, please "
-                    "contact DAU directly at admissions@dau.edu.in or visit "
-                    "https://www.daiict.ac.in."
-                )
+                # If there's a system_addendum (personal data path), we
+                # still have ERP data in context even without RAG chunks.
+                if not system_addendum:
+                    return (
+                        "I couldn't find specific information about that in the "
+                        "university's knowledge base. For accurate details, please "
+                        "contact DAU directly at admissions@dau.edu.in or visit "
+                        "https://www.daiict.ac.in."
+                    )
+
+            # Fix #14: inject the personal-data system addendum when present.
+            effective_system_prompt = SYSTEM_PROMPT
+            if system_addendum:
+                effective_system_prompt = SYSTEM_PROMPT + system_addendum
 
             def _execute_generate(client):
                 return client.chat.completions.create(
@@ -578,12 +591,11 @@ Retrieved Documents
 
                     temperature=0.2,
                     top_p=0.9,
-                    # reasoning_effort="none",
 
                     messages=[
                         {
                             "role": "system",
-                            "content": SYSTEM_PROMPT
+                            "content": effective_system_prompt
                         },
                         {
                             "role": "user",

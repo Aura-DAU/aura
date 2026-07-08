@@ -2,10 +2,9 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { LayoutDashboard, LogOut, MessageSquare, Plus, Trash2, User } from "lucide-react"
-import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import type { ChatThread, StudentProfile, UserSession } from "@/lib/chat-types"
-import { signOut } from "next-auth/react"
+import type { ChatThread, StudentProfile } from "@/lib/chat-types"
+import { useSession, signOut } from "next-auth/react"
 import { BrandMark } from "@/components/common/BrandMark"
 
 interface SidebarProps {
@@ -64,9 +63,9 @@ function SidebarContent({
   studentProfile,
   onCloseMobile,
 }: SidebarProps) {
-  const pathname = usePathname()
-  const displayName = userSession ? (studentProfile.name || userSession.name) : "Guest Account"
-  const displayEmail = userSession ? (userSession.email ?? "") : "Sign in to get started"
+  const { data: session } = useSession()
+  const displayName = session?.user ? (studentProfile.name || session.user.name || "User") : "Guest Account"
+  const displayEmail = session?.user ? (session.user.email ?? "") : "Sign in to get started"
 
   return (
     <div className="flex h-full flex-col">

@@ -16,7 +16,7 @@ const STARTER_PROMPTS = [
 
 export function EmptyState({ onSelectPrompt }: EmptyStateProps) {
   return (
-    <div className="mx-auto flex min-h-full max-w-3xl flex-col items-center justify-center px-4 py-16 text-center">
+    <div className="mx-auto flex min-h-full max-w-3xl flex-col items-center justify-center px-4 py-16 text-center animate-in fade-in duration-200">
       <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-theme-gray-light bg-theme-gray px-3 py-1 text-xs text-neutral-400">
         <Sparkles className="size-3.5 text-theme-yellow" />
         AURA · DAU Assistant
