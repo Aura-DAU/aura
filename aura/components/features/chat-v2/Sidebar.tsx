@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { LayoutDashboard, LogOut, MessageSquare, Plus, Trash2, User } from "lucide-react"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import type { ChatThread, StudentProfile, UserSession } from "@/lib/chat-types"
