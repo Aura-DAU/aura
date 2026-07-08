@@ -5,7 +5,7 @@ import { LayoutDashboard, LogOut, MessageSquare, Plus, Trash2, User } from "luci
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import type { ChatThread, StudentProfile, UserSession } from "@/lib/chat-types"
-import { useSession, signOut } from "next-auth/react"
+import { signOut } from "next-auth/react"
 import { BrandMark } from "@/components/common/BrandMark"
 
 interface SidebarProps {
