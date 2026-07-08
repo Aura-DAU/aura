@@ -6,7 +6,7 @@ if (!JWT_SECRET) {
 }
 
 export interface InternalJwtPayload {
-  role: "student" | "faculty" | "admin"
+  role: "student" | "faculty" | "admin" | "guest"
   erpId: string
   department?: string
   [key: string]: unknown
@@ -23,7 +23,7 @@ export function signInternalJwt(payload: InternalJwtPayload): string {
       erpId: payload.erpId,
       department: payload.department,
     },
-    JWT_SECRET,
+    JWT_SECRET as string,
     {
       algorithm: "HS256",
       expiresIn: "15m",
@@ -35,5 +35,5 @@ export function signInternalJwt(payload: InternalJwtPayload): string {
  * Verifies an internal JWT.
  */
 export function verifyInternalJwt(token: string): InternalJwtPayload {
-  return jwt.verify(token, JWT_SECRET) as InternalJwtPayload
+  return jwt.verify(token, JWT_SECRET as string) as InternalJwtPayload
 }
