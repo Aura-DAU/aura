@@ -36,7 +36,7 @@ _DISTRESS_PATTERNS: list[str] = [
     r"\b(need\s+(emergency\s+)?help\s+(now|immediately|urgently)|in\s+(a\s+)?(crisis|danger))\b",
 ]
 
-_COMPILED: list[re.Pattern] = [
+_COMPILED: list[re.Pattern[str]] = [
     re.compile(p, re.IGNORECASE | re.UNICODE) for p in _DISTRESS_PATTERNS
 ]
 

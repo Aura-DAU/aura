@@ -160,6 +160,7 @@ def _handle_get_club_event_info(identity, **kwargs):
     will incorporate it as context if this tool is invoked via the
     retrieval pipeline's tool-routing path.
     """
+    # pyrefly: ignore [missing-import]
     from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 
     club_or_event = kwargs.get("club_or_event_name", "").strip()
