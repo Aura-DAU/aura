@@ -20,6 +20,7 @@ import re
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import AnswerGenerator
 from pipeline.guardrails.query_guardrail import QueryGuardrail
+from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
 
 from erp_connector import ERPConnector
 from erp_context_builder import ERPContextBuilder
@@ -71,9 +72,10 @@ def is_greeting_or_meta(query):
 class AuraChat:
 
     def __init__(self):
-        self.pipeline   = RetrievalPipeline()
-        self.generator  = AnswerGenerator()
-        self.guardrail  = QueryGuardrail()
+        self.pipeline           = RetrievalPipeline()
+        self.generator          = AnswerGenerator()
+        self.guardrail          = QueryGuardrail()
+        self.wellness_guardrail = WellnessGuardrail()
 
         erp = ERPConnector()
         self.classifier     = PersonalQueryClassifier()
@@ -97,6 +99,13 @@ class AuraChat:
             )
 
         try:
+            # ── Wellness guardrail — runs first, before RAG or ERP ─────
+            # Detects distress signals and returns a contact block without
+            # ever reaching answer_generator.py. Regex-only so it never
+            # fails or adds latency.
+            if self.wellness_guardrail.is_distress(query):
+                return self.wellness_guardrail.wellness_response()
+
             # ── Safety guardrail (applies to every query) ──────────────
             if not self.guardrail.is_safe(query):
                 return {

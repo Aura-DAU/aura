@@ -149,6 +149,66 @@ def _handle_get_faculty_schedule(identity, **kwargs):
     return result
 
 
+def _handle_get_club_event_info(identity, **kwargs):
+    """
+    Knowledge tool — no eCampus credentials needed.
+    Searches the student_faculty/ KB for a given club or event name and
+    returns membership process, convenor contact, and next steps as a
+    formatted checklist.
+
+    The handler returns a structured text block; answer_generator.py
+    will incorporate it as context if this tool is invoked via the
+    retrieval pipeline's tool-routing path.
+    """
+    from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
+
+    club_or_event = kwargs.get("club_or_event_name", "").strip()
+    if not club_or_event:
+        return {
+            "error": "club_or_event_name is required.",
+            "checklist": None,
+        }
+
+    # Build a targeted natural-language query for the retrieval pipeline.
+    query = (
+        f"How do I join or register for {club_or_event}? "
+        "Who is the convener, what is the membership process, "
+        "and what are the next steps?"
+    )
+
+    role = identity.get("role", "student") if isinstance(identity, dict) else getattr(identity, "role", "student")
+
+    try:
+        pipeline = RetrievalPipeline()
+        result = pipeline.get_context(query, history=[], user_role=role)
+        context = result.get("context", "")
+        sources = result.get("sources", [])
+    except Exception as e:
+        return {
+            "error": f"KB retrieval failed: {e}",
+            "checklist": None,
+        }
+
+    if not context:
+        return {
+            "club_or_event": club_or_event,
+            "checklist": (
+                f"No information found for '{club_or_event}' in the "
+                "knowledge base. Try the full official name, or contact "
+                "sbg@dau.ac.in for a list of active clubs and committees."
+            ),
+            "sources": [],
+        }
+
+    audit_log(identity, query=f"get_club_event_info:{club_or_event}", allowed=True, target=club_or_event)
+
+    return {
+        "club_or_event": club_or_event,
+        "checklist": context,
+        "sources": sources,
+    }
+
+
 GET_STUDENT_DETAIL = Tool(
     name="get_student_detail",
     description="Get the requester's own name, roll number, program, and batch from eCampus.",
@@ -313,6 +373,29 @@ GET_ADVISEE_SNAPSHOT = Tool(
 )
 
 
+GET_CLUB_EVENT_INFO = Tool(
+    name="get_club_event_info",
+    description=(
+        "Given a club or event name, return the membership / registration process, "
+        "the convenor contact, and next steps as a formatted checklist. "
+        "Uses the student_faculty knowledge base — no eCampus login required."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "club_or_event_name": {
+                "type": "string",
+                "description": "The exact or approximate name of the club, committee, or event (e.g. 'Programming Club', 'Synapse', 'Hostel Management Committee').",
+            }
+        },
+        "required": ["club_or_event_name"],
+    },
+    category="knowledge",
+    allowed_roles=["student", "faculty"],
+    handler=_handle_get_club_event_info,
+)
+
+
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
         GET_STUDENT_DETAIL, GET_REGISTRATION_STATUS, GET_COURSE_ADJUSTMENTS,
@@ -321,6 +404,7 @@ TOOL_REGISTRY: dict[str, Tool] = {
         CHECK_EXAM_ELIGIBILITY, GET_ACADEMIC_SNAPSHOT, COMPARE_SEMESTER_TREND,
         REFRESH_MY_DATA, SHARE_DATA_WITH_ADVISOR, REVOKE_ADVISOR_ACCESS,
         LIST_MY_DATA_SHARING, GET_ADVISEE_SNAPSHOT,
+        GET_CLUB_EVENT_INFO,
     ]
 }
 
