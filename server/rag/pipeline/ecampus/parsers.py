@@ -381,21 +381,21 @@ def parse_grade_card(html: str) -> dict:
                 texts = [c.get_text(strip=True).replace("\xa0", "").strip() for c in cells]
                 if len(texts) >= 8:
                     try: credits_registered_sem = float(texts[0])
-                    except: pass
+                    except (ValueError, TypeError): pass
                     try: credits_earned_sem = float(texts[1])
-                    except: pass
+                    except (ValueError, TypeError): pass
                     try: grade_points_sem = float(texts[2])
-                    except: pass
+                    except (ValueError, TypeError): pass
                     try: spi = float(texts[3])
-                    except: pass
+                    except (ValueError, TypeError): pass
                     try: credits_registered_cum = float(texts[4])
-                    except: pass
+                    except (ValueError, TypeError): pass
                     try: credits_earned_cum = float(texts[5])
-                    except: pass
+                    except (ValueError, TypeError): pass
                     try: grade_points_cum = float(texts[6])
-                    except: pass
+                    except (ValueError, TypeError): pass
                     try: cpi = float(texts[7])
-                    except: pass
+                    except (ValueError, TypeError): pass
 
     return {
         "student_name":            name,
