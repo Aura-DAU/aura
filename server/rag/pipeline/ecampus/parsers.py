@@ -362,7 +362,8 @@ def parse_grade_card(html: str) -> dict:
                 try:
                     gp_val = float(grade_points.replace("--", "").strip())
                 except ValueError:
-                    pass
+                    # Non-numeric grade points like "--" are expected for P/F (pass/fail) courses
+                    gp_val = None
 
                 if course_code:
                     courses.append({
@@ -380,22 +381,38 @@ def parse_grade_card(html: str) -> dict:
                 cells = data_rows[0].find_all("td")
                 texts = [c.get_text(strip=True).replace("\xa0", "").strip() for c in cells]
                 if len(texts) >= 8:
-                    try: credits_registered_sem = float(texts[0])
-                    except: pass
-                    try: credits_earned_sem = float(texts[1])
-                    except: pass
-                    try: grade_points_sem = float(texts[2])
-                    except: pass
-                    try: spi = float(texts[3])
-                    except: pass
-                    try: credits_registered_cum = float(texts[4])
-                    except: pass
-                    try: credits_earned_cum = float(texts[5])
-                    except: pass
-                    try: grade_points_cum = float(texts[6])
-                    except: pass
-                    try: cpi = float(texts[7])
-                    except: pass
+                    try:
+                        credits_registered_sem = float(texts[0])
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        credits_earned_sem = float(texts[1])
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        grade_points_sem = float(texts[2])
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        spi = float(texts[3])
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        credits_registered_cum = float(texts[4])
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        credits_earned_cum = float(texts[5])
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        grade_points_cum = float(texts[6])
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        cpi = float(texts[7])
+                    except (ValueError, TypeError):
+                        pass
 
     return {
         "student_name":            name,
