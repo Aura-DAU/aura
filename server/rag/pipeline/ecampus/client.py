@@ -21,8 +21,11 @@ class ECampusClient:
         self.erp_id = erp_id
         self._session: ECampusSession | None = None
         self._std_id: str | None = None   # internal DB id (e.g. "12436"), different from ERP ID
+        self._is_mock = erp_id.startswith("DEMO")
 
     def _ensure_session(self) -> ECampusSession:
+        if self._is_mock:
+            return None
         if self._session is not None:
             return self._session
         username, password = credentials_vault.get_credentials(self.erp_id)
@@ -30,6 +33,7 @@ class ECampusClient:
         session.login(username, password)
         self._session = session
         return session
+
 
     def _get(self, path: str) -> str:
         return self._ensure_session().get_page(path)
@@ -54,6 +58,14 @@ class ECampusClient:
 
     # ── Student Detail ─────────────────────────────────────────────────────
     def get_student_detail(self) -> dict:
+        if self._is_mock:
+            return {
+                "full_name": "Demo Student",
+                "student_id": "202301015",
+                "program": "B.Tech ICT",
+                "current_semester": "Semester IV (2025-26 Winter)",
+                "advisor": "Dr. Amit Bhatt",
+            }
         def fetch():
             html = self._get(pages.Pages.STUDENT_DETAIL)
             return parsers.parse_student_detail(html)
@@ -62,6 +74,13 @@ class ECampusClient:
     # ── Registration ───────────────────────────────────────────────────────
     def get_registration_list(self) -> list[dict]:
         """Returns list of semesters with registration dates."""
+        if self._is_mock:
+            return [
+                {"semester": "Semester I (2024-25 Autumn)", "semester_id": "1", "std_id": "DEMO123", "registered": True},
+                {"semester": "Semester II (2024-25 Winter)", "semester_id": "2", "std_id": "DEMO123", "registered": True},
+                {"semester": "Semester III (2025-26 Autumn)", "semester_id": "3", "std_id": "DEMO123", "registered": True},
+                {"semester": "Semester IV (2025-26 Winter)", "semester_id": "4", "std_id": "DEMO123", "registered": True},
+            ]
         def fetch():
             html = self._get(pages.Pages.REGISTRATION_LIST)
             return parsers.parse_registration_list(html)
@@ -72,6 +91,15 @@ class ECampusClient:
         Returns enrolled courses for a semester (default: latest registered).
         Requires a two-step fetch: list → POST to edit servlet.
         """
+        if self._is_mock:
+            return {
+                "semester": "Semester IV (2025-26 Winter)",
+                "courses": [
+                    {"course_code": "IT-302", "course_name": "Computer Networks", "credits": "4", "type": "Core"},
+                    {"course_code": "IT-304", "course_name": "Software Engineering", "credits": "4", "type": "Core"},
+                    {"course_code": "HS-201", "course_name": "Technical Writing", "credits": "3", "type": "Core"},
+                ]
+            }
         def fetch():
             sem_list = self.get_registration_list()
             # Pick the most recently registered semester (has a reg_date)
@@ -95,6 +123,13 @@ class ECampusClient:
     # ── Grades ─────────────────────────────────────────────────────────────
     def get_grade_semester_list(self) -> list[dict]:
         """Returns list of semesters that have grade cards available."""
+        if self._is_mock:
+            return [
+                {"semester": "Semester I (2024-25 Autumn)", "semester_id": "1", "std_id": "DEMO123", "has_grades": True},
+                {"semester": "Semester II (2024-25 Winter)", "semester_id": "2", "std_id": "DEMO123", "has_grades": True},
+                {"semester": "Semester III (2025-26 Autumn)", "semester_id": "3", "std_id": "DEMO123", "has_grades": True},
+                {"semester": "Semester IV (2025-26 Winter)", "semester_id": "4", "std_id": "DEMO123", "has_grades": True},
+            ]
         def fetch():
             html = self._get(pages.Pages.GRADE_SEMESTER_LIST)
             return parsers.parse_grade_semester_list(html)
@@ -105,6 +140,18 @@ class ECampusClient:
         Returns grade card for a semester (default: latest with grades).
         Two-step fetch: semester list → POST to GradeCourseListServlet.
         """
+        if self._is_mock:
+            return {
+                "semester": semester or "Semester IV (2025-26 Winter)",
+                "spi": "8.50",
+                "cpi": "8.75",
+                "credits_earned_cum": "80",
+                "courses": [
+                    {"course_code": "IT-302", "course_name": "Computer Networks", "credits": "4", "grade": "AA"},
+                    {"course_code": "IT-304", "course_name": "Software Engineering", "credits": "4", "grade": "AB"},
+                    {"course_code": "HS-201", "course_name": "Technical Writing", "credits": "3", "grade": "AA"},
+                ]
+            }
         def fetch():
             sem_list = self.get_grade_semester_list()
             graded = [s for s in sem_list if s.get("has_grades") and s.get("semester_id")]
@@ -140,6 +187,13 @@ class ECampusClient:
 
     def get_all_grades(self) -> list[dict]:
         """Fetches grade cards for ALL semesters with results. May be slow first time."""
+        if self._is_mock:
+            return [
+                self.get_grade_card("Semester I (2024-25 Autumn)"),
+                self.get_grade_card("Semester II (2024-25 Winter)"),
+                self.get_grade_card("Semester III (2025-26 Autumn)"),
+                self.get_grade_card("Semester IV (2025-26 Winter)"),
+            ]
         def fetch():
             sem_list = self.get_grade_semester_list()
             graded = [s for s in sem_list if s.get("has_grades") and s.get("semester_id")]
@@ -157,27 +211,29 @@ class ECampusClient:
 
     # ── Timetable ──────────────────────────────────────────────────────────
     def get_timetable(self) -> list[dict]:
-        """
-        Timetable URL not yet confirmed — not visible in menu JS.
-        May be embedded in registration or a separate tab.
-        Returns empty list until URL is confirmed.
-        TODO: find timetable URL and implement parser.
-        """
+        if self._is_mock:
+            return [
+                {"day": "Monday", "time": "09:00 AM - 10:30 AM", "course": "Computer Networks", "room": "Lab 3, Phase 1"},
+                {"day": "Monday", "time": "11:00 AM - 12:30 PM", "course": "Software Engineering", "room": "Room 102"},
+                {"day": "Wednesday", "time": "02:00 PM - 03:30 PM", "course": "Technical Writing", "room": "Room 110"},
+            ]
         return []
 
     # ── Attendance ─────────────────────────────────────────────────────────
     def get_attendance(self) -> list[dict]:
-        """
-        Attendance URL confirmed: AttandanceSemesterListServlet (typo is real).
-        However, confirmed from status report that eCampus attendance data
-        is unavailable — returns empty list.
-        TODO: try fetching and check if data is actually there.
-        """
+        if self._is_mock:
+            return [
+                {"course": "Computer Networks", "attendance_percentage": "82.5"},
+                {"course": "Software Engineering", "attendance_percentage": "71.0"},
+                {"course": "Technical Writing", "attendance_percentage": "95.0"},
+            ]
         return []
 
     # ── Hostel ─────────────────────────────────────────────────────────────
     def get_hostel(self) -> dict:
         """Hostel rules/policy page — not personal data, just static rules."""
+        if self._is_mock:
+            return {"raw_text": "Mock hostel rules: 1. In-time: 10:00 PM. 2. Quiet hours: 11:00 PM - 06:00 AM."}
         def fetch():
             html = self._get(pages.Pages.HOSTEL_RULES)
             from bs4 import BeautifulSoup
@@ -189,9 +245,9 @@ class ECampusClient:
     def get_fees(self) -> dict:
         """
         Fee receipts page. Returns structured fee history.
-        TODO: implement parse_fee_receipts() in parsers.py once
-        HTML source of CandidateReceiptsViewServlet is available.
         """
+        if self._is_mock:
+            return {"raw_text": "Mock receipt: Tuition Fee Semester IV: Paid INR 1,20,000"}
         def fetch():
             html = self._get(pages.Pages.FEE_RECEIPTS_CANDIDATE)
             from bs4 import BeautifulSoup
@@ -209,6 +265,7 @@ class ECampusClient:
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         self.close()
+
 
 
 def get_faculty_schedule(faculty_name: str) -> dict:
