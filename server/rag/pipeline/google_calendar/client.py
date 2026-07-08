@@ -11,11 +11,10 @@ Required env vars:
 """
 
 import os
-import time
 import datetime
 import requests
 
-from .token_vault import get_tokens, store_tokens, CalendarNotLinked, CalendarWriteScopeMissing
+from .token_vault import get_tokens, store_tokens, CalendarWriteScopeMissing
 
 GOOGLE_TOKEN_URL  = "https://oauth2.googleapis.com/token"
 GOOGLE_EVENTS_URL = "https://www.googleapis.com/calendar/v3/calendars/{cal_id}/events"

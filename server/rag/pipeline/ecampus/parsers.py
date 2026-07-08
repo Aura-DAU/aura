@@ -41,10 +41,6 @@ def parse_student_detail(html: str) -> dict:
     """
     soup = BeautifulSoup(html, "html.parser")
 
-    def val(name):
-        el = soup.find("input", {"name": name})
-        return el["value"].strip() if el and el.get("value") else None
-
     def txt(name):
         el = soup.find("input", {"name": name})
         return el.get("value", "").strip() if el else None
@@ -384,35 +380,43 @@ def parse_grade_card(html: str) -> dict:
                     try:
                         credits_registered_sem = float(texts[0])
                     except (ValueError, TypeError):
-                        pass
+                        # Tolerated: set to None if malformed or missing in portal data
+                        credits_registered_sem = None
                     try:
                         credits_earned_sem = float(texts[1])
                     except (ValueError, TypeError):
-                        pass
+                        # Tolerated: set to None if malformed or missing in portal data
+                        credits_earned_sem = None
                     try:
                         grade_points_sem = float(texts[2])
                     except (ValueError, TypeError):
-                        pass
+                        # Tolerated: set to None if malformed or missing in portal data
+                        grade_points_sem = None
                     try:
                         spi = float(texts[3])
                     except (ValueError, TypeError):
-                        pass
+                        # Tolerated: set to None if malformed or missing in portal data
+                        spi = None
                     try:
                         credits_registered_cum = float(texts[4])
                     except (ValueError, TypeError):
-                        pass
+                        # Tolerated: set to None if malformed or missing in portal data
+                        credits_registered_cum = None
                     try:
                         credits_earned_cum = float(texts[5])
                     except (ValueError, TypeError):
-                        pass
+                        # Tolerated: set to None if malformed or missing in portal data
+                        credits_earned_cum = None
                     try:
                         grade_points_cum = float(texts[6])
                     except (ValueError, TypeError):
-                        pass
+                        # Tolerated: set to None if malformed or missing in portal data
+                        grade_points_cum = None
                     try:
                         cpi = float(texts[7])
                     except (ValueError, TypeError):
-                        pass
+                        # Tolerated: set to None if malformed or missing in portal data
+                        cpi = None
 
     return {
         "student_name":            name,
