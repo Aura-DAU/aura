@@ -1000,11 +1000,15 @@ class RetrievalPipeline:
             normalize_embeddings=True,
             convert_to_numpy=True
         )
+        semantic_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
+        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
+            semantic_filter = None
+
         results = self.retriever.index.query(
             vector=query_embedding[0].tolist(),
             top_k=50,
             include_metadata=True,
-            filter=None
+            filter=semantic_filter
         )
         semantic_list = []
         for match in results["matches"]:

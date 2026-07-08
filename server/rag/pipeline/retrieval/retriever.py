@@ -70,7 +70,9 @@ class Retriever:
         # TEMPORARY FIX: Pinecone currently lacks the 'allowed_roles' metadata field,
         # so applying the DLS metadata_filter returns 0 chunks for ALL queries.
         # Disabling filter until vectors are re-ingested with correct metadata.
-        metadata_filter = None
+        pinecone_filter = metadata_filter
+        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
+            pinecone_filter = None
         
         query_embedding = self.model.encode(
             [
@@ -85,7 +87,7 @@ class Retriever:
             vector=query_embedding[0].tolist(),
             top_k=top_k,
             include_metadata=True,
-            filter=metadata_filter
+            filter=pinecone_filter
         )
 
         chunks = []

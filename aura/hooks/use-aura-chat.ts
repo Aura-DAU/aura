@@ -387,8 +387,9 @@ export function useAuraChat() {
             })
           }
         } catch { /* ignore */ }
-      } catch (err: any) {
-        setErrorMessage(err.message || "Something went wrong. Please try again.")
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : "Something went wrong. Please try again."
+        setErrorMessage(msg)
         setMessages(baseMessages)
       } finally {
         setLoading(false)

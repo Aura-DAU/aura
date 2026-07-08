@@ -1,20 +1,2 @@
 {
-  "demo.student@dau.ac.in": [
-    {
-      "id": "67h5bgcc",
-      "title": "How do I apply for the next intake?",
-      "messages": [
-        {
-          "role": "user",
-          "content": "How do I apply for the next intake?",
-          "timestamp": 1783442146153
-        },
-        {
-          "role": "assistant",
-          "content": "**How to apply for the next intake (BS‑MS programmes)**  \n\n1. **Choose the appropriate admission sub‑channel**  \n   * If you are applying under the **Direct Admission** category, select the relevant sub‑channel (e.g., General, SC/ST, etc.) and submit your details and supporting documents through the online application portal.  \n   * If you are applying under the **International / NRI** category, submit the required details and documents that prove you meet the conditions for that category.  \n\n2. **Pay the application fee**  \n   * For International / NRI candidates the fee is a **non‑refundable US $150**.  \n\n3. **Await the merit list and counseling**  \n   * Shortlisted candidates will be offered admission (confirmed or wait‑listed) based on merit.  \n   * Counseling is conducted **online**; applicants should regularly check the university website from the date the first merit list is announced for further instructions.  \n\n4. **Accept the admission offer**  \n   * Candidates who accept the offer must complete:  \n     - **Registration**  \n     - **Document verification**  \n     - **Fee payment**  \n\n5. **Orientation**  \n   * After the above steps, orientation sessions are organized for confirmed students.  \n\n**Fees structure (available information)**  \n* International / NRI application fee: **US $150 (non‑refundable)**. No other fee details are provided in the retrieved documents.  \n\n**Requirements**  \n* Applicants must satisfy the specific conditions listed for the sub‑channel they choose (e.g., academic qualifications, eligibility criteria).  \n\n**Admission cycle / intake schedule**  \n* The documents describe the merit‑list announcement, online counseling, and subsequent registration steps, but they do **not** provide exact dates or a detailed intake schedule.  \n\n**What is missing**  \n* Exact dates for the admission cycle and intake schedule are not available in the retrieved data. You may need to check the university’s admissions webpage or contact the Admissions Office for the latest calendar.  \n\n**Citations**  \n* Application steps, fee for International/NRI, merit‑list and counseling process – [5]  \n* General registration, document verification, fee payment, and orientation – [1][2][3][4]",
-          "timestamp": 1783442197857
-        }
-      ]
-    }
-  ]
 }
