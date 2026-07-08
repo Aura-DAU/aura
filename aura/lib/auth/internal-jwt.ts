@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-const JWT_SECRET = process.env.INTERNAL_JWT_SECRET
+const JWT_SECRET = process.env.INTERNAL_JWT_SECRET || ""
 if (!JWT_SECRET) {
   throw new Error("FATAL: INTERNAL_JWT_SECRET is not set. Set it before starting the server.")
 }
@@ -35,5 +35,5 @@ export function signInternalJwt(payload: InternalJwtPayload): string {
  * Verifies an internal JWT.
  */
 export function verifyInternalJwt(token: string): InternalJwtPayload {
-  return jwt.verify(token, JWT_SECRET) as InternalJwtPayload
+  return jwt.verify(token, JWT_SECRET) as unknown as InternalJwtPayload
 }

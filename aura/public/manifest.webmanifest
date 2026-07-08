@@ -4,8 +4,8 @@
   "description": "The official AI assistant for Dhirubhai Ambani University (DAU).",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#00275E",
+  "background_color": "#000000",
+  "theme_color": "#1a1a1a",
   "orientation": "portrait",
   "scope": "/",
   "icons": [
