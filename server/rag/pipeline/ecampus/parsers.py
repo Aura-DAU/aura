@@ -1,129 +1,425 @@
 """
-HTML parsers for ecampus.daiict.ac.in's tab pages.
+HTML parsers for ecampus.daiict.ac.in tab pages.
 
-Every function here takes raw HTML (from session.get_page()) and returns
-structured Python data. ASP.NET WebForms GridViews render as plain <table>
-elements with auto-generated IDs (e.g. id="ctl00_ContentPlaceHolder1_GridView1"),
-so the general pattern is: find the right table, iterate <tr>, map <td>
-columns by position or header text.
+All parsers validated against real HTML (July 2026) from:
+  - StudentDetailEditServlet
+  - StudentRegistrationListServlet
+  - StudentRegistrationEditServlet  (registration form with courses)
+  - GradeSemesterListServlet        (semester list)
+  - GradeCourseListServlet          (grade card per semester)
 
-EVERY function below is a TODO stub with a reasonable, generic table-parsing
-strategy — none of them have been validated against real eCampus HTML yet,
-because I don't have it. Send me a saved HTML snippet (View Source, or a
-screenshot is enough for the layout) of any of these pages once you're past
-login and I'll replace the guessed column ordering with the real one. The
-parsing approach (find table, iterate rows) is very likely right for a site
-like this either way — it's the column names/order that need confirming.
+Key structural facts confirmed from real HTML:
+  - Java servlet portal, NOT ASP.NET
+  - Tables use class="listtbl" for list views, class="formtbl" for forms
+  - Student detail is a label/value form (NOT a grid table)
+  - Registration list shows semesters, clicking "Edit" POSTs to
+    StudentRegistrationEditServlet with stdid + SemesterID hidden fields
+  - Grade card shows per-course grades AND a summary row with SPI/CPI
+  - Attendance tab URL confirmed: AttandanceSemesterListServlet
+    (note: typo in real portal — "Attandance" not "Attendance")
+  - Logout confirmed: /webapp/intranet/LoginServlet?logout=true
 """
 
+import re
 from bs4 import BeautifulSoup
 
 
-def _first_table_after(soup: BeautifulSoup, hint_text: str | None = None):
-    """Generic helper: ASP.NET GridViews are usually the largest <table> on
-    the content area. If hint_text is given, prefer a table whose nearest
-    preceding heading/text contains it."""
-    tables = soup.find_all("table")
-    if not tables:
-        return None
-    if hint_text:
-        for t in tables:
-            if hint_text.lower() in t.get_text(" ", strip=True).lower():
-                return t
-    # fallback: the table with the most rows is almost always the data grid,
-    # not a layout table
-    return max(tables, key=lambda t: len(t.find_all("tr")))
-
-
-def _rows_as_dicts(table, headers: list[str]) -> list[dict]:
-    rows = table.find_all("tr")
-    out = []
-    for tr in rows[1:]:  # skip header row
-        cells = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
-        if not cells or len(cells) < len(headers):
-            continue
-        out.append(dict(zip(headers, cells)))
-    return out
-
-
+# ── Student Detail ─────────────────────────────────────────────────────────
 def parse_student_detail(html: str) -> dict:
+    """
+    StudentDetailEditServlet — label/value form layout.
+    Confirmed fields from real HTML:
+      - Student Name  → hidden input STDFIRSTNAME
+      - Student Id    → hidden input STDINSTID
+      - Date of Birth → input STDDOB
+      - Gender        → input STDGENDER
+      - Programme     → visible in Registration form as "B Tech (ICT)"
+      - Batch         → hidden input STDBCHID (batch ID, not year)
+      - Mobile        → inside textarea (PermAddrs)
+      - Email         → inside textarea (PermAddrs)
+      - Address       → textarea PermAddrs
+    """
     soup = BeautifulSoup(html, "html.parser")
-    # TODO: Student Detail looks like a label/value form, not a grid — once
-    # you have the real markup, this likely becomes a series of
-    # soup.find(id="ctl00_..._lblName") style lookups rather than a table
-    # parse. Stub returns raw text for now so nothing silently breaks.
-    content = soup.get_text("\n", strip=True)
-    return {"raw_text": content}  # TODO: replace with structured fields
 
+    def val(name):
+        el = soup.find("input", {"name": name})
+        return el["value"].strip() if el and el.get("value") else None
 
-def parse_registration(html: str) -> list[dict]:
-    soup = BeautifulSoup(html, "html.parser")
-    table = _first_table_after(soup, hint_text="course")
-    if not table:
-        return []
-    # TODO confirm real column order
-    headers = ["course_code", "course_name", "credits", "instructor", "status"]
-    return _rows_as_dicts(table, headers)
+    def txt(name):
+        el = soup.find("input", {"name": name})
+        return el.get("value", "").strip() if el else None
 
+    # Name from hidden field (clean, no trailing spaces)
+    full_name = txt("STDFIRSTNAME") or ""
 
-def parse_course_adjustments(html: str) -> list[dict]:
-    soup = BeautifulSoup(html, "html.parser")
-    table = _first_table_after(soup, hint_text="adjustment")
-    if not table:
-        return []
-    headers = ["course_code", "action", "date", "approved_by", "status"]  # TODO confirm
-    return _rows_as_dicts(table, headers)
+    # Student ID
+    student_id = txt("STDINSTID")
 
+    # DOB and gender from readonly inputs
+    dob_el = soup.find("input", {"name": "STDDOB"})
+    dob = dob_el["value"].strip() if dob_el else None
 
-def parse_result(html: str) -> dict:
-    soup = BeautifulSoup(html, "html.parser")
-    table = _first_table_after(soup, hint_text="grade")
-    grades = []
-    if table:
-        headers = ["semester", "course_code", "course_name", "credits", "grade"]  # TODO confirm
-        grades = _rows_as_dicts(table, headers)
+    gender_el = soup.find("input", {"name": "STDGENDER"})
+    gender = gender_el["value"].strip() if gender_el else None
 
-    # TODO: confirm whether SGPA/CGPA appear as a separate summary table/row
-    # or as standalone labeled fields elsewhere on the page.
-    cgpa_text = soup.find(string=lambda s: s and "CGPA" in s)
-    sgpa_text = soup.find(string=lambda s: s and "SGPA" in s)
+    # Address textarea — extract mobile and email
+    address_text = ""
+    mobile = None
+    email = None
+    textarea = soup.find("textarea", {"name": "PermAddrs"})
+    if textarea:
+        address_text = textarea.get_text(strip=False)
+        mob_match = re.search(r"Student Mobile No\s*:\s*(\d+)", address_text)
+        email_match = re.search(r"Email Id\s*:\s*([\w.@]+)", address_text)
+        if mob_match:
+            mobile = mob_match.group(1).strip()
+        if email_match:
+            email = email_match.group(1).strip()
 
     return {
-        "grades": grades,
-        "cgpa_raw_label": cgpa_text.strip() if cgpa_text else None,  # TODO parse numeric value out of this
-        "sgpa_raw_label": sgpa_text.strip() if sgpa_text else None,
+        "full_name":   full_name.strip(),
+        "student_id":  student_id,
+        "dob":         dob,
+        "gender":      "Male" if gender == "M" else "Female" if gender == "F" else gender,
+        "mobile":      mobile,
+        "email":       email,
+        "address_raw": address_text.strip(),
     }
 
 
-def parse_hostel(html: str) -> dict:
+# ── Registration List ──────────────────────────────────────────────────────
+def parse_registration_list(html: str) -> list[dict]:
+    """
+    StudentRegistrationListServlet — table with columns:
+      Sr. No. | Semester | Registration Date | Action
+
+    Returns list of semesters with their stdid and SemesterID
+    (needed to POST to StudentRegistrationEditServlet for course details).
+
+    Semester IDs extracted from onclick="fncEditRegister(stdid, semesterID)"
+    """
     soup = BeautifulSoup(html, "html.parser")
-    content = soup.get_text("\n", strip=True)
-    return {"raw_text": content}  # TODO: structure into {block, room_no, mess_group, ...}
-
-
-def parse_fees(html: str) -> dict:
-    soup = BeautifulSoup(html, "html.parser")
-    table = _first_table_after(soup, hint_text="fee")
-    payments = []
-    if table:
-        headers = ["semester", "head", "amount", "due_date", "status"]  # TODO confirm
-        payments = _rows_as_dicts(table, headers)
-    return {"payments": payments}
-
-
-def parse_attendance(html: str) -> list[dict]:
-    soup = BeautifulSoup(html, "html.parser")
-    table = _first_table_after(soup, hint_text="attendance")
+    table = soup.find("table", class_="listtbl")
     if not table:
         return []
-    headers = ["course_code", "course_name", "classes_held", "classes_attended", "percentage"]  # TODO confirm
-    return _rows_as_dicts(table, headers)
+
+    semesters = []
+    for tr in table.find_all("tr")[1:]:  # skip header
+        cells = tr.find_all("td")
+        if len(cells) < 4:
+            continue
+
+        sr_no    = cells[0].get_text(strip=True)
+        sem_name = cells[1].get_text(strip=True)
+        reg_date = cells[2].get_text(strip=True).replace("\xa0", "").strip()
+
+        # Extract stdid and SemesterID from onclick
+        btn = cells[3].find("input", {"type": "button"})
+        std_id = None
+        sem_id = None
+        if btn and btn.get("onclick"):
+            match = re.search(r"fncEditRegister\((\d+),(\d+)\)", btn["onclick"])
+            if match:
+                std_id = match.group(1)
+                sem_id = match.group(2)
+
+        if sem_name:
+            semesters.append({
+                "sr_no":        sr_no,
+                "semester":     sem_name,
+                "reg_date":     reg_date if reg_date else None,
+                "std_id":       std_id,
+                "semester_id":  sem_id,
+                "registered":   bool(reg_date),
+            })
+
+    return semesters
 
 
-def parse_utilities(html: str) -> dict:
-    # TODO: "Utilities" is a catch-all label and I genuinely can't guess its
-    # contents (could be ID-card requests, document downloads, password
-    # change, etc.). Send a screenshot once you're on this tab and I'll
-    # write the real parser + corresponding tool(s).
+# ── Registration Edit (Course List for a Semester) ─────────────────────────
+def parse_registration_courses(html: str) -> dict:
+    """
+    StudentRegistrationEditServlet — registration form for a specific semester.
+    Confirmed fields from real HTML (Semester IV example):
+
+    Header info:
+      - Name, Program, Semester, Student ID, Batch, Date
+
+    Course sections:
+      - Regular courses (class="formtbl", rows with SRCSTATUS = ACTIVE)
+      - Other Courses (REGULARADD)
+      - Grade Improvement (REGULARGRADEIMPROVE)
+      - Backlog (BACKLOG)
+      - Audit (AUDIT)
+
+    For each course: Semester, Title, Code, Credits, Status
+    Credits format: "4.00\n(3.00+\n0.00+\n2.00)" → parse total only
+    """
     soup = BeautifulSoup(html, "html.parser")
-    return {"raw_text": soup.get_text("\n", strip=True)}
+
+    # ── Header info ──
+    name = program = semester = student_id = batch = reg_date = None
+    header_table = soup.find("table", class_="formtbl")
+    if header_table:
+        rows = header_table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            labels = [c.get_text(strip=True) for c in cells]
+            for i, lbl in enumerate(labels):
+                val = labels[i + 1] if i + 1 < len(labels) else ""
+                if lbl == "Name":       name = val
+                elif lbl == "Program":  program = val
+                elif lbl == "Semester": semester = val.replace("\n", " ").strip()
+                elif lbl == "Student ID": student_id = val
+                elif lbl == "Batch":    batch = val
+                elif lbl == "Date":     reg_date = val
+
+    # ── Course rows ──
+    courses = []
+    # All formtbl tables after the header contain courses
+    all_tables = soup.find_all("table", class_="formtbl")
+    for tbl in all_tables[1:]:  # skip the header table
+        rows = tbl.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td", class_="formfld")
+            if len(cells) < 3:
+                continue
+
+            # Regular course rows have: Semester | Title | Code | Credits | Status
+            texts = [c.get_text(" ", strip=True) for c in cells]
+
+            # Detect if this looks like a course row (has a course code pattern)
+            course_code = None
+            course_name = None
+            credits_raw = None
+            status = None
+            course_type = None
+
+            if len(texts) >= 4:
+                # Check for hidden SRCTYPE to determine course type
+                src_type = cells[-1].find("input", {"name": re.compile(r"SRCTYPE\d+")})
+                if src_type:
+                    course_type = src_type.get("value", "REGULAR")
+
+                # Status cell — last td with formfld
+                status_text = texts[-1].strip()
+                if status_text in {"ACTIVE", "INACTIVE", "DROPPED"}:
+                    status = status_text
+
+                # Course structure: sem | title | code | credits | status
+                if len(texts) >= 5:
+                    course_name = texts[1].strip()
+                    course_code = texts[2].strip()
+                    credits_raw = texts[3].strip()
+                elif len(texts) == 4:
+                    # Other/backlog section: sr | description(title+code+credits) | register
+                    combined = texts[1]
+                    # Try to extract code (pattern like IT214, EL203, IE410)
+                    code_match = re.search(r'\b([A-Z]{2,3}\d{3,4}[A-Z]?)\b', combined)
+                    if code_match:
+                        course_code = code_match.group(1).strip()
+                        course_name = combined[:combined.find(course_code)].strip()
+                    credits_raw = combined
+
+            if course_code:
+                # Parse total credits from "4.00\n(3.00+\n0.00+\n2.00)"
+                total_credits = None
+                credit_match = re.search(r'^([\d.]+)', credits_raw.replace("\n", " "))
+                if credit_match:
+                    total_credits = float(credit_match.group(1))
+
+                courses.append({
+                    "course_code":   course_code,
+                    "course_name":   course_name,
+                    "credits":       total_credits,
+                    "status":        status or "ACTIVE",
+                    "course_type":   course_type or "REGULAR",
+                })
+
+    return {
+        "student_name": name,
+        "program":      program,
+        "semester":     semester,
+        "student_id":   student_id,
+        "batch":        batch,
+        "reg_date":     reg_date,
+        "courses":      courses,
+    }
+
+
+# ── Grade Semester List ────────────────────────────────────────────────────
+def parse_grade_semester_list(html: str) -> list[dict]:
+    """
+    GradeSemesterListServlet — same table structure as registration list.
+    Columns: Sr. No. | Semester | Registration Date | Action (Grade Card button)
+
+    onclick="fncEditRegister(stdid, semesterID)" → POST to GradeCourseListServlet
+    Only rows with a "Grade Card" button have results available.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    table = soup.find("table", class_="listtbl")
+    if not table:
+        return []
+
+    semesters = []
+    for tr in table.find_all("tr")[1:]:
+        cells = tr.find_all("td")
+        if len(cells) < 4:
+            continue
+
+        sem_name = cells[1].get_text(strip=True)
+        reg_date = cells[2].get_text(strip=True).replace("\xa0", "").strip()
+
+        btn = cells[3].find("input", {"type": "button", "value": "Grade Card"})
+        std_id = sem_id = None
+        if btn and btn.get("onclick"):
+            match = re.search(r"fncEditRegister\((\d+),(\d+)\)", btn["onclick"])
+            if match:
+                std_id = match.group(1)
+                sem_id = match.group(2)
+
+        if sem_name:
+            semesters.append({
+                "semester":        sem_name,
+                "reg_date":        reg_date if reg_date else None,
+                "has_grades":      btn is not None,
+                "std_id":          std_id,
+                "semester_id":     sem_id,
+            })
+
+    return semesters
+
+
+# ── Grade Card (per semester) ──────────────────────────────────────────────
+def parse_grade_card(html: str) -> dict:
+    """
+    GradeCourseListServlet — grade card for one semester.
+    Confirmed structure from real HTML:
+
+    Header table (class=formtbl, first):
+      Name | Program | Semester
+      Student ID | Batch | Date
+
+    Course grades table (class=formtbl, second):
+      COURSE TITLE | COURSE CODE | CREDIT HOURS | GRADE | GRADE POINTS | REMARKS
+
+    Performance summary table (class=formtbl, last):
+      Current semester: CREDITS REGISTERED | CREDITS EARNED | GRADE POINTS EARNED | SPI
+      Cumulative:       CREDITS REGISTERED | CREDITS EARNED | GRADE POINTS EARNED | CPI
+
+    Real example (Semester IV):
+      IT214 Database Management System — BB — 32.0 points
+      EL203 Embedded Hardware Design   — AA — 40.0 points
+      SPI = 9.35, CPI = 8.54
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    all_tables = soup.find_all("table", class_="formtbl")
+
+    name = program = semester = student_id = batch = None
+    courses = []
+    spi = cpi = None
+    credits_registered_sem = credits_earned_sem = grade_points_sem = None
+    credits_registered_cum = credits_earned_cum = grade_points_cum = None
+
+    for idx, tbl in enumerate(all_tables):
+        rows = tbl.find_all("tr")
+        headers = [th.get_text(strip=True) for th in rows[0].find_all("td")] if rows else []
+
+        # ── Header table (Name, Program, Semester, Student ID, Batch) ──
+        if "Name" in headers or (headers and "COURSE TITLE" not in headers and "CREDITS REGISTERED" not in headers and idx == 0):
+            for row in rows:
+                cells = row.find_all("td")
+                texts = [c.get_text(" ", strip=True) for c in cells]
+                for i, t in enumerate(texts):
+                    nxt = texts[i+1].strip() if i+1 < len(texts) else ""
+                    if t == "Name":       name = nxt
+                    elif t == "Program":  program = nxt
+                    elif t == "Semester": semester = nxt.replace("\n", " ").strip()
+                    elif t == "Student ID": student_id = nxt
+                    elif t == "Batch":    batch = nxt
+
+        # ── Course grades table ──
+        elif "COURSE TITLE" in headers:
+            for row in rows[1:]:
+                cells = row.find_all("td")
+                if len(cells) < 5:
+                    continue
+                texts = [c.get_text(" ", strip=True) for c in cells]
+                course_name  = texts[0].strip()
+                course_code  = texts[1].strip()
+                credits_raw  = texts[2].strip()
+                grade        = texts[3].strip()
+                grade_points = texts[4].strip()
+
+                # Parse total credits
+                total_credits = None
+                cm = re.search(r'^([\d.]+)', credits_raw)
+                if cm:
+                    total_credits = float(cm.group(1))
+
+                # Parse grade points (may be "--" for P/F courses)
+                gp_val = None
+                try:
+                    gp_val = float(grade_points.replace("--", "").strip())
+                except ValueError:
+                    pass
+
+                if course_code:
+                    courses.append({
+                        "course_name":   course_name,
+                        "course_code":   course_code.strip(),
+                        "credits":       total_credits,
+                        "grade":         grade,
+                        "grade_points":  gp_val,
+                    })
+
+        # ── Performance summary table ──
+        elif "SPI" in headers or "CPI" in headers:
+            data_rows = [r for r in rows if r.find("td", class_="formfld")]
+            if data_rows:
+                cells = data_rows[0].find_all("td")
+                texts = [c.get_text(strip=True).replace("\xa0", "").strip() for c in cells]
+                if len(texts) >= 8:
+                    try: credits_registered_sem = float(texts[0])
+                    except: pass
+                    try: credits_earned_sem = float(texts[1])
+                    except: pass
+                    try: grade_points_sem = float(texts[2])
+                    except: pass
+                    try: spi = float(texts[3])
+                    except: pass
+                    try: credits_registered_cum = float(texts[4])
+                    except: pass
+                    try: credits_earned_cum = float(texts[5])
+                    except: pass
+                    try: grade_points_cum = float(texts[6])
+                    except: pass
+                    try: cpi = float(texts[7])
+                    except: pass
+
+    return {
+        "student_name":            name,
+        "program":                 program,
+        "semester":                semester,
+        "student_id":              student_id,
+        "batch":                   batch,
+        "courses":                 courses,
+        "spi":                     spi,
+        "cpi":                     cpi,
+        "credits_registered_sem":  credits_registered_sem,
+        "credits_earned_sem":      credits_earned_sem,
+        "grade_points_sem":        grade_points_sem,
+        "credits_registered_cum":  credits_registered_cum,
+        "credits_earned_cum":      credits_earned_cum,
+        "grade_points_cum":        grade_points_cum,
+    }
+
+
+# ── Also confirmed from menu JS in real HTML ───────────────────────────────
+# Attendance URL: /webapp/intranet/AttandanceSemesterListServlet  (typo is real)
+# Logout URL:     /webapp/intranet/LoginServlet?logout=true
+# Hostel submenu: BulletinListDisplayServlet, StudentComplainListServlet,
+#                 HostelStudentLeavesListServlet, HostelVisitRoomBookingsListServlet,
+#                 HostelPolicyListDisplayServlet
+# Fee receipts:   CandidateReceiptsViewServlet
+#                 SemSelector?target=StudentReceiptsViewServlet&actiontext=List Semesters

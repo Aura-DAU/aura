@@ -10,8 +10,11 @@ from typing import Callable
 from .client import ECampusClient, get_faculty_schedule as _get_faculty_schedule
 from .credentials_vault import CredentialsNotLinked
 from . import composite_tools
+from . import faculty_workflow_tools
 from ..personal_data.access_control import authorize_personal_query, AccessDenied
 from ..personal_data.audit import audit_log
+from ..google_calendar import client as gcal_client
+from ..google_calendar import token_vault as gcal_token_vault
 
 
 @dataclass
@@ -134,6 +137,10 @@ def _handle_get_timetable(identity, **kwargs):
     return {"timetable": data}
 
 
+# TODO(unirp): Replace with UniRP endpoint — routes TBD. Do NOT implement any
+# UniRP logic. This handler (and every other faculty-only handler in this
+# file) currently sources faculty data from eCampus/student-timetable
+# aggregation only, per the deferred UniRP migration.
 def _handle_get_faculty_schedule(identity, **kwargs):
     if identity["role"] != "faculty":
         raise AccessDenied("Only faculty may request a faculty teaching schedule.")
@@ -147,6 +154,38 @@ def _handle_get_faculty_schedule(identity, **kwargs):
     result = _get_faculty_schedule(faculty_name)
     audit_log(identity, query="get_faculty_schedule", allowed=True, target=faculty_name)
     return result
+
+
+def _handle_create_calendar_reminder(identity, **kwargs):
+    if identity["role"] != "faculty":
+        raise AccessDenied("Only faculty may create calendar reminders through AURA.")
+
+    summary = kwargs.get("summary")
+    start_iso = kwargs.get("start_iso")
+    end_iso = kwargs.get("end_iso")
+    description = kwargs.get("description")
+
+    if not summary or not start_iso or not end_iso:
+        return {"error": "summary, start_iso, and end_iso are all required."}
+
+    erp_id = identity["erp_id"]
+    if not gcal_token_vault.is_linked(erp_id):
+        return {
+            "error": "No Google Calendar linked for this account.",
+            "action_needed": "link_google_calendar",
+        }
+
+    try:
+        event = gcal_client.create_event(erp_id, summary, start_iso, end_iso, description)
+    except gcal_token_vault.CalendarNotLinked as e:
+        return {"error": str(e), "action_needed": "link_google_calendar"}
+    except gcal_client.CalendarWriteScopeMissing as e:
+        return {"error": str(e), "action_needed": "reconnect_google_calendar_write_scope"}
+    except Exception as e:
+        return {"error": str(e)}
+
+    audit_log(identity, query="create_calendar_reminder", allowed=True, target=erp_id)
+    return {"status": "created", "event": event}
 
 
 GET_STUDENT_DETAIL = Tool(
@@ -312,6 +351,100 @@ GET_ADVISEE_SNAPSHOT = Tool(
     handler=composite_tools.get_advisee_snapshot,
 )
 
+FACULTY_LEAVE_APPLICATION = Tool(
+    name="faculty_leave_application",
+    description=(
+        "Guide a faculty member through initiating a leave application — identifies the leave type, "
+        "states the approval chain (HOD vs Dean Faculty vs none for Casual Leave), and returns a "
+        "checklist sourced from the Faculty and Staff Leave Policy. Guidance only — does not submit "
+        "anything or notify HR/HOD/Dean."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "leave_type": {
+                "type": "string",
+                "description": "e.g. Casual, Earned, Medical, Maternity, Paternity, Academic/Study, CPDA.",
+            },
+            "duration_days": {
+                "type": "number",
+                "description": "Requested number of leave days, if known.",
+            },
+        },
+    },
+    category="read", allowed_roles=["faculty"],
+    handler=faculty_workflow_tools.handle_faculty_leave_application,
+)
+
+CPDA_TRAVEL_APPROVAL = Tool(
+    name="cpda_travel_approval",
+    description=(
+        "Check CPDA (Cumulative Professional Development Allowance) eligibility for conference or "
+        "travel support, and return required documents and the approval chain (Dean R&D, plus "
+        "Director approval above Rs. 1 lakh). Chat-based guidance only — no application is submitted."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "conference_type": {
+                "type": "string",
+                "description": "e.g. international, national/domestic.",
+            },
+            "requested_amount_inr": {
+                "type": "number",
+                "description": "Requested CPDA amount in INR, if known.",
+            },
+        },
+    },
+    category="read", allowed_roles=["faculty"],
+    handler=faculty_workflow_tools.handle_cpda_travel_approval,
+)
+
+SEED_GRANT_GUIDANCE = Tool(
+    name="seed_grant_guidance",
+    description=(
+        "Check seed grant eligibility for newly recruited faculty, suggest the applicable grant "
+        "category (A/B/C) from a proposed budget, and return the proposal structure, review process, "
+        "and reporting obligations. Guidance only — no proposal is submitted to Dean (R&D)."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "proposed_budget_inr": {
+                "type": "number",
+                "description": "Proposed research budget in INR, if known.",
+            },
+        },
+    },
+    category="read", allowed_roles=["faculty"],
+    handler=faculty_workflow_tools.handle_seed_grant_guidance,
+)
+
+CREATE_CALENDAR_REMINDER = Tool(
+    name="create_calendar_reminder",
+    description=(
+        "Create a reminder/event on the faculty member's linked Google Calendar — e.g. a CPDA "
+        "application deadline, seed grant progress review, or leave return date. Requires explicit "
+        "user confirmation before executing, and requires the faculty member's calendar to be linked "
+        "with write (calendar.events) access."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "summary": {"type": "string", "description": "Short title for the reminder/event."},
+            "start_iso": {
+                "type": "string",
+                "description": "Event start time, ISO 8601 (e.g. 2026-07-10T09:00:00+05:30).",
+            },
+            "end_iso": {"type": "string", "description": "Event end time, ISO 8601."},
+            "description": {"type": "string", "description": "Optional longer description/notes."},
+        },
+        "required": ["summary", "start_iso", "end_iso"],
+    },
+    category="write", allowed_roles=["faculty"],
+    handler=_handle_create_calendar_reminder,
+)
+
 
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
@@ -321,6 +454,8 @@ TOOL_REGISTRY: dict[str, Tool] = {
         CHECK_EXAM_ELIGIBILITY, GET_ACADEMIC_SNAPSHOT, COMPARE_SEMESTER_TREND,
         REFRESH_MY_DATA, SHARE_DATA_WITH_ADVISOR, REVOKE_ADVISOR_ACCESS,
         LIST_MY_DATA_SHARING, GET_ADVISEE_SNAPSHOT,
+        FACULTY_LEAVE_APPLICATION, CPDA_TRAVEL_APPROVAL, SEED_GRANT_GUIDANCE,
+        CREATE_CALENDAR_REMINDER,
     ]
 }
 
