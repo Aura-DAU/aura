@@ -313,6 +313,78 @@ GET_ADVISEE_SNAPSHOT = Tool(
 )
 
 
+GET_DOCUMENT_REQUEST_GUIDANCE = Tool(
+    name="get_document_request_guidance",
+    description="Get the procedure, checklist, handling office, and processing time for requesting official documents (bonafide, transcript, ID card replacement, fee structure, etc.)",
+    parameters={
+        "type": "object",
+        "properties": {
+            "document_type": {
+                "type": "string",
+                "enum": ["bonafide", "transcript", "id_card", "fee_structure", "grade_report", "other"],
+                "description": "The type of document requested."
+            }
+        },
+        "required": ["document_type"],
+    },
+    category="derived", allowed_roles=["student"],
+    handler=composite_tools.get_document_request_guidance,
+)
+
+
+GET_HOSTEL_COMPLAINT_GUIDANCE = Tool(
+    name="get_hostel_complaint_guidance",
+    description="Get warden/committee contacts and filing instructions for hostel complaints (mess, maintenance, ragging, disciplinary, general).",
+    parameters={
+        "type": "object",
+        "properties": {
+            "complaint_type": {
+                "type": "string",
+                "enum": ["maintenance", "mess", "ragging", "disciplinary", "general"],
+                "description": "The category of hostel complaint."
+            }
+        },
+        "required": ["complaint_type"],
+    },
+    category="derived", allowed_roles=["student"],
+    handler=composite_tools.get_hostel_complaint_guidance,
+)
+
+
+SCREEN_SCHOLARSHIP_ELIGIBILITY = Tool(
+    name="screen_scholarship_eligibility",
+    description="Cross-references student academic profiles (branch, year, category, cgpa, annual_income) against university scholarship rules in the KB to check eligibility and return application requirements.",
+    parameters={
+        "type": "object",
+        "properties": {
+            "branch": {
+                "type": "string",
+                "description": "The student's branch/program of study (e.g. BTech ICT, MSc, BS+MS)."
+            },
+            "year": {
+                "type": "integer",
+                "description": "The student's current year of study (1, 2, 3, 4)."
+            },
+            "category": {
+                "type": "string",
+                "description": "The category of admissions (General, SC/ST, DAFS, NRI, etc.)."
+            },
+            "cgpa": {
+                "type": "number",
+                "description": "The student's current CGPA or CPI."
+            },
+            "annual_income": {
+                "type": "number",
+                "description": "Annual family income in INR (optional)."
+            }
+        },
+        "required": ["branch", "year", "category", "cgpa"],
+    },
+    category="derived", allowed_roles=["student"],
+    handler=composite_tools.screen_scholarship_eligibility,
+)
+
+
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
         GET_STUDENT_DETAIL, GET_REGISTRATION_STATUS, GET_COURSE_ADJUSTMENTS,
@@ -320,7 +392,8 @@ TOOL_REGISTRY: dict[str, Tool] = {
         GET_UTILITIES, GET_TIMETABLE, GET_FACULTY_SCHEDULE,
         CHECK_EXAM_ELIGIBILITY, GET_ACADEMIC_SNAPSHOT, COMPARE_SEMESTER_TREND,
         REFRESH_MY_DATA, SHARE_DATA_WITH_ADVISOR, REVOKE_ADVISOR_ACCESS,
-        LIST_MY_DATA_SHARING, GET_ADVISEE_SNAPSHOT,
+        LIST_MY_DATA_SHARING, GET_ADVISEE_SNAPSHOT, GET_DOCUMENT_REQUEST_GUIDANCE,
+        GET_HOSTEL_COMPLAINT_GUIDANCE, SCREEN_SCHOLARSHIP_ELIGIBILITY,
     ]
 }
 

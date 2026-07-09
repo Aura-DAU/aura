@@ -169,3 +169,159 @@ def test_advisee_snapshot_consent_is_per_faculty_member():
 def test_student_cannot_call_advisee_snapshot():
     with pytest.raises(AccessDenied):
         composite_tools.get_advisee_snapshot(student_identity("S1"), student_erp_id="S2")
+
+
+def test_get_document_request_guidance(monkeypatch):
+    class FakeRetrievalPipeline:
+        def __init__(self):
+            pass
+        def get_context(self, query):
+            return {
+                "context": "Follow these steps to apply for a bonafide certificate: 1. Fill online form. 2. Contact CoE office. 3. Processing takes 2 working days."
+            }
+            
+    import pipeline.retrieval.retrieval_pipeline
+    monkeypatch.setattr(pipeline.retrieval.retrieval_pipeline, "RetrievalPipeline", FakeRetrievalPipeline)
+    
+    class FakeMessage:
+        def __init__(self, content):
+            self.content = content
+            
+    class FakeChoice:
+        def __init__(self, content):
+            self.message = FakeMessage(content)
+            
+    class FakeResponse:
+        def __init__(self, content):
+            self.choices = [FakeChoice(content)]
+            
+    class FakeCompletions:
+        def create(self, **kwargs):
+            return FakeResponse(
+                '{"checklist": ["Fill online form"], "handling_office": "CoE Office", "processing_time": "2 working days", "required_documents_and_fees": "None"}'
+            )
+            
+    class FakeChat:
+        def __init__(self):
+            self.completions = FakeCompletions()
+            
+    class FakeGroq:
+        def __init__(self, api_key):
+            self.chat = FakeChat()
+            
+    monkeypatch.setattr(composite_tools, "_get_groq_client", lambda: FakeGroq("fake-api-key"))
+    
+    result = composite_tools.get_document_request_guidance(
+        student_identity(),
+        document_type="bonafide"
+    )
+    
+    assert result["checklist"] == ["Fill online form"]
+    assert result["handling_office"] == "CoE Office"
+    assert result["processing_time"] == "2 working days"
+
+
+def test_get_hostel_complaint_guidance(monkeypatch):
+    class FakeRetrievalPipeline:
+        def __init__(self):
+            pass
+        def get_context(self, query):
+            return {
+                "context": "For maintenance complaints, write in the register. Escalations go to Dr. Madhu Kant Sharma, Resident Warden at resi_warden@dau.ac.in."
+            }
+            
+    import pipeline.retrieval.retrieval_pipeline
+    monkeypatch.setattr(pipeline.retrieval.retrieval_pipeline, "RetrievalPipeline", FakeRetrievalPipeline)
+    
+    class FakeMessage:
+        def __init__(self, content):
+            self.content = content
+            
+    class FakeChoice:
+        def __init__(self, content):
+            self.message = FakeMessage(content)
+            
+    class FakeResponse:
+        def __init__(self, content):
+            self.choices = [FakeChoice(content)]
+            
+    class FakeCompletions:
+        def create(self, **kwargs):
+            return FakeResponse(
+                '{"handling_contacts": [{"name": "Dr. Madhu Kant Sharma", "role": "Resident Warden", "email": "resi_warden@dau.ac.in", "phone": "079-68261554"}], "procedure": ["Write in register", "Email warden"], "remedy_timeframe": "24 hours", "severity_level": "normal"}'
+            )
+            
+    class FakeChat:
+        def __init__(self):
+            self.completions = FakeCompletions()
+            
+    class FakeGroq:
+        def __init__(self, api_key):
+            self.chat = FakeChat()
+            
+    monkeypatch.setattr(composite_tools, "_get_groq_client", lambda: FakeGroq("fake-api-key"))
+    
+    result = composite_tools.get_hostel_complaint_guidance(
+        student_identity(),
+        complaint_type="maintenance"
+    )
+    
+    assert len(result["handling_contacts"]) == 1
+    assert result["handling_contacts"][0]["name"] == "Dr. Madhu Kant Sharma"
+    assert result["procedure"] == ["Write in register", "Email warden"]
+    assert result["severity_level"] == "normal"
+
+
+def test_screen_scholarship_eligibility(monkeypatch):
+    class FakeRetrievalPipeline:
+        def __init__(self):
+            pass
+        def get_context(self, query):
+            return {
+                "context": "Institute offers Merit Scholarship to top SPI performers. Merit-cum-Means offers waiver to students with CGPA > 7.5 and family income < 6 Lakh."
+            }
+            
+    import pipeline.retrieval.retrieval_pipeline
+    monkeypatch.setattr(pipeline.retrieval.retrieval_pipeline, "RetrievalPipeline", FakeRetrievalPipeline)
+    
+    class FakeMessage:
+        def __init__(self, content):
+            self.content = content
+            
+    class FakeChoice:
+        def __init__(self, content):
+            self.message = FakeMessage(content)
+            
+    class FakeResponse:
+        def __init__(self, content):
+            self.choices = [FakeChoice(content)]
+            
+    class FakeCompletions:
+        def create(self, **kwargs):
+            return FakeResponse(
+                '{"eligible_schemes": [{"name": "Merit-cum-Means", "type": "Merit-cum-Means", "benefit": "Partial waiver", "status": "eligible", "reason_or_conditions": "Income is low and CGPA is 8.5", "mandatory_documents": ["Income Certificate"], "deadline": "Refer to Academic Office"}], "general_guidelines": ["No backlogs"]}'
+            )
+            
+    class FakeChat:
+        def __init__(self):
+            self.completions = FakeCompletions()
+            
+    class FakeGroq:
+        def __init__(self, api_key):
+            self.chat = FakeChat()
+            
+    monkeypatch.setattr(composite_tools, "_get_groq_client", lambda: FakeGroq("fake-api-key"))
+    
+    result = composite_tools.screen_scholarship_eligibility(
+        student_identity(),
+        branch="BTech ICT",
+        year=2,
+        category="General",
+        cgpa=8.5,
+        annual_income=500000.0
+    )
+    
+    assert len(result["eligible_schemes"]) == 1
+    assert result["eligible_schemes"][0]["name"] == "Merit-cum-Means"
+    assert result["eligible_schemes"][0]["status"] == "eligible"
+    assert result["general_guidelines"] == ["No backlogs"]

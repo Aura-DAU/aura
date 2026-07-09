@@ -70,6 +70,9 @@ describe('useAuraChat 429 handling', () => {
       if (url === '/api/chat') {
         return { ok: false, status: 429 }
       }
+      if (url === '/api/chat/quota') {
+        return { ok: true, json: async () => ({ remaining: 5 }) }
+      }
       return { ok: true, json: async () => ({ token: 'mock-token' }) }
     })
 

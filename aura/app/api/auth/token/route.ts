@@ -12,6 +12,7 @@ export async function GET() {
     role: session.user.role,
     erpId: session.user.erpId,
     department: session.user.department,
+    sub: session.user.id || undefined,
   })
   return NextResponse.json({ token })
 }

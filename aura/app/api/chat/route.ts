@@ -4,6 +4,8 @@ import {
   type BackendChatRequest,
   type BackendChatResponse,
 } from "@/lib/api/backend"
+import { verifyInternalJwt, type InternalJwtPayload } from "@/lib/auth/internal-jwt"
+import { getRemainingQuota, incrementQuotaUsage, pruneOldEntries } from "@/lib/db/rate-limit-db"
 
 export const maxDuration = 60
 
@@ -62,6 +64,36 @@ export async function POST(req: Request) {
   if (!authHeader) {
     return new Response("Unauthorized", { status: 401 })
   }
+
+  // Parse and verify internal JWT token
+  const token = authHeader.startsWith("Bearer ") ? authHeader.substring(7) : authHeader
+  let jwtPayload: InternalJwtPayload
+  try {
+    jwtPayload = verifyInternalJwt(token)
+  } catch (err) {
+    console.error("[chat] JWT verification failed:", err)
+    return new Response("Unauthorized", { status: 401 })
+  }
+
+  const sub = jwtPayload.sub
+  const role = jwtPayload.role || "guest"
+  if (!sub) {
+    return new Response("Unauthorized", { status: 401 })
+  }
+
+  const remaining = await getRemainingQuota(sub, role)
+  if (remaining <= 0) {
+    return new Response(JSON.stringify({ remaining: 0 }), {
+      status: 429,
+      headers: { "Content-Type": "application/json" }
+    })
+  }
+
+  // Increment usage count before forwarding to Python backend
+  await incrementQuotaUsage(sub, role)
+
+  // Prune old entries in the background asynchronously
+  pruneOldEntries().catch(err => console.error("[chat] error pruning rate limits:", err))
 
   // Strip client-sent role if any
   if (parsed.data.studentProfile) {

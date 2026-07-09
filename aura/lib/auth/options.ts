@@ -11,6 +11,7 @@ declare module "next-auth" {
       role: "student" | "faculty" | "admin" | "guest"
       erpId: string
       department?: string
+      id?: string
     } & DefaultSession["user"]
   }
 
@@ -144,6 +145,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       // If it's the first sign-in (user object is available), lookup the ERP identity
       if (user && user.email) {
+        token.sub = user.id
         if (process.env.NODE_ENV === "development" && user.email === "demo.student@dau.ac.in") {
           token.role = "student"
           token.erpId = "DEMO123"
@@ -176,6 +178,7 @@ export const authOptions: NextAuthOptions = {
           role: token.role as "student" | "faculty" | "admin" | "guest",
           erpId: token.erpId,
           department: token.department || undefined,
+          sub: token.sub || undefined,
         })
       }
       
@@ -186,6 +189,7 @@ export const authOptions: NextAuthOptions = {
         session.user.role = token.role as "student" | "faculty" | "admin" | "guest"
         session.user.erpId = token.erpId as string
         session.user.department = token.department as string | undefined
+        session.user.id = token.sub as string | undefined
       }
       return session
     },

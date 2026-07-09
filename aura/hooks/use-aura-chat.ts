@@ -120,52 +120,35 @@ export function useAuraChat() {
   const { data: session } = useSession()
 
   useEffect(() => {
+    let active = true
     if (session?.user) {
-      const email = session.user.email || 'guest'
+      // Set initial/fallback state synchronously based on role first
       const role = session.user.role || 'guest'
-      const maxQuota = role === 'guest' ? 3 : 5
-      const date = new Date().toISOString().split('T')[0]
-      const key = `aura-quota-${email}`
-      
-      try {
-        const stored = localStorage.getItem(key)
-        if (stored) {
-          const parsed = JSON.parse(stored)
-          if (parsed.date === date) {
-            setRemainingQuotaState(Math.max(0, maxQuota - parsed.count))
-          } else {
-            setRemainingQuotaState(maxQuota)
-            localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+      setRemainingQuotaState(role === 'guest' ? 3 : 5)
+
+      const fetchQuota = async () => {
+        try {
+          const res = await apiFetch("/api/chat/quota")
+          if (res.ok && active) {
+            const data = await res.json()
+            setRemainingQuotaState(prev => (prev === 0 ? 0 : data.remaining))
           }
-        } else {
-          setRemainingQuotaState(maxQuota)
-          localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+        } catch {
+          // API failed; keep the role-based fallback set above
         }
-      } catch {
-        setRemainingQuotaState(maxQuota)
       }
+      fetchQuota()
     } else {
       setRemainingQuotaState(null)
+    }
+    return () => {
+      active = false
     }
   }, [session])
 
   const decrementQuota = useCallback(() => {
-    setRemainingQuotaState(prev => {
-      if (prev === null) return null;
-      const newVal = Math.max(0, prev - 1)
-      if (session?.user) {
-        const email = session.user.email || 'guest'
-        const role = session.user.role || 'guest'
-        const maxQuota = role === 'guest' ? 3 : 5
-        const date = new Date().toISOString().split('T')[0]
-        const key = `aura-quota-${email}`
-        try {
-          localStorage.setItem(key, JSON.stringify({ date, count: maxQuota - newVal }))
-        } catch {}
-      }
-      return newVal
-    })
-  }, [session])
+    setRemainingQuotaState(prev => (prev === null ? null : Math.max(0, prev - 1)))
+  }, [])
 
   useEffect(() => {
     if (session) {

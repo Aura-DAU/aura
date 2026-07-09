@@ -9,6 +9,7 @@ export interface InternalJwtPayload {
   role: "student" | "faculty" | "admin" | "guest"
   erpId: string
   department?: string
+  sub?: string
   [key: string]: unknown
 }
 
