@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { getToken } from "next-auth/jwt"
 
-const PUBLIC_PATHS = ["/login", "/api/auth", "/_next", "/favicon.ico"]
+const PUBLIC_PATHS = ["/login", "/api/auth", "/_next", "/favicon.ico", "/manifest.webmanifest", "/offline", "/sw.js", "/icon", "/apple-icon"]
 const EXACT_PUBLIC_PATHS = ["/"]
 
 export async function middleware(req: NextRequest) {
@@ -13,7 +13,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next()
   }
 
-  const secret = process.env.NEXTAUTH_SECRET || "mock-nextauth-secret"
+  const secret = process.env.NEXTAUTH_SECRET
+  if (!secret) throw new Error("FATAL: NEXTAUTH_SECRET is not set.")
 
   // Check for a valid NextAuth session token
   const token = await getToken({
