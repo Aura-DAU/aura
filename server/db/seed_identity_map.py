@@ -35,8 +35,10 @@ import db.connection as db_conn
 VALID_ROLES    = {"student", "faculty", "admin"}
 ALLOWED_DOMAINS = {"dau.ac.in", "daiict.ac.in"}
 
+from typing import Optional
 
-def _validate_row(row: dict, line: int) -> dict | None:
+
+def _validate_row(row: dict, line: int) -> Optional[dict]:
     erp_id = row.get("erp_id", "").strip()
     email  = row.get("email",  "").strip().lower()
     role   = row.get("role",   "").strip().lower()

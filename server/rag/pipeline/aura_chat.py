@@ -17,6 +17,7 @@ Step 7: If PUBLIC/MIXED → run existing RAG pipeline
 
 import os
 import re
+from typing import Optional
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import AnswerGenerator
 from pipeline.guardrails.query_guardrail import QueryGuardrail
@@ -220,7 +221,7 @@ class AuraChat:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
             return {"answer": msg, "sources": [], "is_personal_data": False}
 
-    def _resolve_target(self, target_label: str | None, identity) -> str | None:
+    def _resolve_target(self, target_label: Optional[str], identity) -> Optional[str]:
         if not target_label or target_label == "self":
             return identity.erp_id
         if target_label and target_label[:3].isdigit():
@@ -228,7 +229,7 @@ class AuraChat:
         result = self.erp_connector.find_student_by_name(target_label)
         return result["roll_number"] if result else None
 
-    def _fetch_erp_data(self, fields: list, roll_number: str | None, access_result) -> dict:
+    def _fetch_erp_data(self, fields: list, roll_number: Optional[str], access_result) -> dict:
         if not roll_number:
             return {}
         data = {}

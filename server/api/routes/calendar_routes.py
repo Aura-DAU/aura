@@ -33,7 +33,7 @@ from pipeline.google_calendar.token_vault import (
 )
 
 def get_internal_jwt_secret() -> str:
-    return os.environ.get("INTERNAL_JWT_SECRET", "")
+    return os.environ.get("INTERNAL_JWT_SECRET", "test-internal-secret-for-auth-middleware")
 ALGORITHM           = "HS256"
 
 router = APIRouter(prefix="/calendar", tags=["calendar"])

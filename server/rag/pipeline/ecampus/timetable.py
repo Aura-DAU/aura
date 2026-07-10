@@ -16,6 +16,9 @@ from bs4 import BeautifulSoup
 from dataclasses import dataclass
 
 
+from typing import Optional
+
+
 @dataclass
 class TimetableEntry:
     course_code: str
@@ -25,7 +28,7 @@ class TimetableEntry:
     start_time: str      # e.g. "09:00"
     end_time: str        # e.g. "09:50"
     room: str
-    section: str | None = None  # batch/section, if the page distinguishes them
+    section: Optional[str] = None  # batch/section, if the page distinguishes them
 
 
 def parse_timetable(html: str) -> list[TimetableEntry]:

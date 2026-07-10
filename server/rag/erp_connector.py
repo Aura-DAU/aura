@@ -33,7 +33,7 @@ from typing import Optional
 
 # ── SQL mode setup ────────────────────────────────────────────────────────
 
-_sql_pool: psycopg2.pool.ThreadedConnectionPool | None = None
+_sql_pool: Optional[psycopg2.pool.ThreadedConnectionPool] = None
 
 
 def _get_sql_pool() -> psycopg2.pool.ThreadedConnectionPool:

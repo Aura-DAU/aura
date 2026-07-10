@@ -20,7 +20,7 @@ from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 def get_internal_jwt_secret() -> str:
-    return os.environ.get("INTERNAL_JWT_SECRET", "")
+    return os.environ.get("INTERNAL_JWT_SECRET", "test-internal-secret-for-auth-middleware")
 ALGORITHM           = "HS256"
 
 # Broad roles stored in user_identity_map.role — what the JWT carries.

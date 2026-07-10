@@ -1,51 +1,34 @@
 """
-Wellness guardrail — lightweight distress classifier.
+Wellness guardrail — detects signs of distress in a query BEFORE it reaches
+answer_generator / the RAG pipeline, and routes to a fixed, human-reviewed
+wellness-contact block instead of a generated answer.
 
-Runs as a pre-generation step in aura_chat.py BEFORE answer_generator.py
-is ever called. When a distress signal is detected:
-  - RAG retrieval is skipped entirely.
-  - A fixed wellness contact block is returned instead.
+This is deliberately NOT an LLM-generated response for the distress case
+itself — the contact block is fixed and human-reviewed so AURA never
+improvises in a safety-critical moment. The LLM call here is used only to
+CLASSIFY (distress / not distress), matching query_guardrail.py's pattern.
 
-Design decisions:
-  - Regex-only (no LLM call) so it is instant and never fails open.
-  - Errs on the side of sensitivity: a false-positive wellness response
-    is far less harmful than a false-negative on a genuine cry for help.
-  - Contact details mirror DAU's published counseling info as held in
-    the data/student_faculty/ KB.
+Fails OPEN for the classification step (same as QueryGuardrail.is_safe):
+if the guardrail LLM is unavailable, we do not silently swallow a
+potentially distressed message — we fall back to a lightweight keyword
+check so we never regress to "no safety net at all".
 """
 
+import os
 import re
+from dotenv import load_dotenv
+from groq import Groq
+
+load_dotenv()
 
 # ---------------------------------------------------------------------------
-# Distress phrase patterns
-# Ordered roughly from most-explicit to context-sensitive.
-# All matching is case-insensitive.
+# Fixed, human-reviewed contact block.
+# Do NOT have the LLM generate this text.
+# Update contact details here only after confirming with the counseling
+# center / student welfare office. Sources: DAU published counseling info
+# and POSH / anti-ragging contacts from data/student_faculty/ KB.
 # ---------------------------------------------------------------------------
-_DISTRESS_PATTERNS: list[str] = [
-    # Explicit self-harm / suicidal ideation
-    r"\b(suicid(e|al)|kill\s+my\s*self|end\s+(my\s+)?(life|it\s+all)|want\s+to\s+die|don['\u2019]?t\s+want\s+to\s+(live|be\s+alive))\b",
-    # Hopelessness / helplessness
-    r"\b(hopeless|worthless|feel\s+(so\s+)?(empty|numb|broken|trapped|alone|helpless)|no\s+(reason|point)\s+to\s+(go\s+on|live|continue))\b",
-    # Acute emotional crisis
-    r"\b(can['\u2019]?t\s+take\s+it\s+anymore|can['\u2019]?t\s+go\s+on|falling\s+apart|breaking\s+down|mental\s+breakdown)\b",
-    # Self-harm (non-suicidal)
-    r"\b(self[\s\-]?harm(ing)?|cut\s+my\s*self|hurt\s+my\s*self|hurting\s+my\s*self)\b",
-    # Abuse / ragging
-    r"\b(being\s+(abused|ragged|harassed|bullied)|ragging|sexual\s+harassment|assault)\b",
-    # Explicit requests for crisis help
-    r"\b(need\s+(emergency\s+)?help\s+(now|immediately|urgently)|in\s+(a\s+)?(crisis|danger))\b",
-]
-
-_COMPILED: list[re.Pattern[str]] = [
-    re.compile(p, re.IGNORECASE | re.UNICODE) for p in _DISTRESS_PATTERNS
-]
-
-# ---------------------------------------------------------------------------
-# Wellness contact block returned when distress is detected.
-# Sources: DAU published counseling info and POSH / anti-ragging contacts
-# from data/student_faculty/ KB.
-# ---------------------------------------------------------------------------
-WELLNESS_RESPONSE = """\
+WELLNESS_CONTACT_BLOCK = """\
 I'm really glad you reached out. What you're sharing sounds serious, \
 and you deserve real support — not just information.
 
@@ -58,21 +41,65 @@ and you deserve real support — not just information.
 | **Anti-Ragging Helpline** | anti_ragging@dau.ac.in |
 | **POSH Committee** | posh@dau.ac.in |
 | **Security / Emergency** | +91-79-6847-9000 (campus) |
-| **iCall (national helpline)** | 9152987821 |
-| **Vandrevala Foundation** | 1860-2662-345 (24×7) |
+| **iCall / TISS helpline** | 9152987821 (Mon–Sat, 8 am–10 pm) — free, confidential |
+| **AASRA (24×7 crisis)** | 91-9820466726 |
 
 You are not alone, and it is okay to ask for help. \
-If you are in immediate danger, please call campus security or go to the nearest \
-hospital emergency room right away.
+If you are in immediate danger, please call campus security or go to the \
+nearest hospital emergency room right away.
 
 AURA is not equipped to provide crisis counseling. \
-Please reach out to one of the contacts above.\
+Please reach out to one of the contacts above.
 """
+
+# ---------------------------------------------------------------------------
+# Lightweight keyword fallback — intentionally coarse.
+# Fires ONLY when the LLM classifier is unreachable.
+# The LLM path is the primary detector and handles nuance and phrasing
+# that a keyword list cannot. Do not expand this list as a substitute
+# for the LLM — fix the LLM integration instead.
+# ---------------------------------------------------------------------------
+_FALLBACK_DISTRESS_PATTERNS: list[str] = [
+    r"\bsuicid",
+    r"\bkill\s+my\s*self\b",
+    r"\bend\s+(my\s+)?(life|it\s+all)\b",
+    r"\bself[\s\-]?harm",
+    r"\bhurt\s+my\s*self\b",
+    r"\bwant\s+to\s+die\b",
+    r"\bno\s+reason\s+to\s+live\b",
+    r"\bcan['\u2019]?t\s+(take|go\s+on|cope)\s+anymore\b",
+    r"\bdon['\u2019]?t\s+want\s+to\s+(live|be\s+alive)\b",
+]
+
+_FALLBACK_COMPILED: list[re.Pattern[str]] = [
+    re.compile(p, re.IGNORECASE | re.UNICODE) for p in _FALLBACK_DISTRESS_PATTERNS
+]
+
+# ---------------------------------------------------------------------------
+# LLM system prompt for the classifier call.
+# Output contract: exactly one token — DISTRESS or NOT_DISTRESS.
+# ---------------------------------------------------------------------------
+_SYSTEM_PROMPT = """
+You are a safety classifier for a university assistant. Classify the user's
+message as DISTRESS or NOT_DISTRESS.
+
+DISTRESS means the message expresses suicidal ideation, self-harm intent,
+severe hopelessness, or a mental health crisis needing human support right
+now — not academic stress phrased casually ("this exam is killing me").
+
+Output exactly one word: DISTRESS or NOT_DISTRESS. No punctuation, no
+explanation.
+""".strip()
 
 
 class WellnessGuardrail:
     """
-    Lightweight regex-based classifier that detects distress signals.
+    LLM-based distress classifier with a keyword-regex fallback.
+
+    Primary path  — Groq LLM call: handles nuanced, paraphrased, and
+                    non-obvious distress signals that a keyword list misses.
+    Fallback path — regex keyword check: fires only when the Groq API is
+                    unavailable so there is always some safety net.
 
     Usage in aura_chat.py::
 
@@ -81,35 +108,61 @@ class WellnessGuardrail:
         self.wellness_guardrail = WellnessGuardrail()
 
         # Inside chat() — before answer_generator runs:
-        if self.wellness_guardrail.is_distress(query):
-            return self.wellness_guardrail.wellness_response()
+        if self.wellness_guardrail.check(query):
+            return {
+                "answer": self.wellness_guardrail.get_response(),
+                "sources": [],
+                "is_personal_data": False,
+                "wellness_escalation": True,
+            }
     """
 
-    def is_distress(self, query: str) -> bool:
-        """
-        Return True if the query contains a distress signal.
+    def __init__(self) -> None:
+        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        # llama-3.3-70b-versatile: fast, instruction-following, available on Groq.
+        # Override via GROQ_WELLNESS_MODEL env var if needed.
+        self.model = os.getenv("GROQ_WELLNESS_MODEL", "llama-3.3-70b-versatile")
 
-        Fails CLOSED: any exception during pattern matching returns True
-        so the wellness block is shown rather than a potentially harmful
-        RAG answer.
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
+
+    def check(self, query: str) -> bool:
+        """
+        Return True if the query should be routed to the wellness block.
+
+        Tries the LLM classifier first; falls back to keyword regex if
+        the API call fails for any reason.
         """
         try:
-            for pattern in _COMPILED:
-                if pattern.search(query):
-                    return True
-            return False
-        except Exception:
-            # Regex failure → default to safe / wellness path
-            return True
+            return self._llm_check(query)
+        except Exception as exc:
+            print(
+                f"[WellnessGuardrail] LLM classification failed, using keyword fallback: {exc}"
+            )
+            return self._fallback_check(query)
 
-    def wellness_response(self) -> dict:
-        """
-        Return the standard wellness contact block in the same shape
-        as a normal AuraChat.chat() response so callers need no special-casing.
-        """
-        return {
-            "answer": WELLNESS_RESPONSE,
-            "sources": [],
-            "is_personal_data": False,
-            "wellness_escalation": True,   # flag for frontend / analytics
-        }
+    def get_response(self) -> str:
+        """Return the fixed, human-reviewed wellness contact block."""
+        return WELLNESS_CONTACT_BLOCK
+
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
+
+    def _llm_check(self, query: str) -> bool:
+        response = self.client.chat.completions.create(
+            model=self.model,
+            temperature=0.0,
+            max_tokens=5,
+            messages=[
+                {"role": "system", "content": _SYSTEM_PROMPT},
+                {"role": "user", "content": query},
+            ],
+        )
+        result = response.choices[0].message.content.strip().upper()
+        # Guard against the model echoing "NOT_DISTRESS" which contains "DISTRESS"
+        return result == "DISTRESS"
+
+    def _fallback_check(self, query: str) -> bool:
+        return any(p.search(query) for p in _FALLBACK_COMPILED)

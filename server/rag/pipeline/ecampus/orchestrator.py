@@ -9,6 +9,7 @@ unmodified RAG pipeline in aura_chat.py.
 
 import os
 import json
+from typing import Optional, List
 from dotenv import load_dotenv
 
 from ..key_manager import KeyManager
@@ -43,7 +44,7 @@ class EcampusOrchestrator:
         # so this orchestrator participates in key rotation just like every
         # other pipeline component.
 
-    def _call_llm(self, messages: list, tools: list | None = None, tool_choice: str | None = None) -> object:
+    def _call_llm(self, messages: list, tools: Optional[list] = None, tool_choice: Optional[str] = None) -> object:
         """Single LLM call through KeyManager so daily-limit rotation applies here too."""
         model = self.model
         def _fn(client):
@@ -66,7 +67,7 @@ class EcampusOrchestrator:
             for t in tools_for_role(role)
         ]
 
-    def run(self, query: str, identity: dict, history: list | None = None) -> dict:
+    def run(self, query: str, identity: dict, history: Optional[list] = None) -> dict:
         history = history or []
         messages = (
             [{"role": "system", "content": SYSTEM_PROMPT}]
