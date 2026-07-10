@@ -47,17 +47,17 @@ class Retriever:
                 metadata_path
             )
         
-        pc = Pinecone(
-            api_key=os.getenv(
-                "PINECONE_API_KEY"
-            )
-        )
-
-        self.index = pc.Index(
-            os.getenv(
-                "PINECONE_INDEX"
-            )
-        )
+        self.index = None
+        api_key = os.getenv("PINECONE_API_KEY")
+        index_name = os.getenv("PINECONE_INDEX")
+        if api_key and index_name and not api_key.startswith("mock-"):
+            try:
+                pc = Pinecone(api_key=api_key)
+                self.index = pc.Index(index_name)
+            except Exception as e:
+                logger.warning("Failed to initialize Pinecone: %s. Dense search will be disabled.", e)
+        else:
+            logger.warning("Pinecone API key or Index name is mock/empty. Dense search is disabled.")
 
     def retrieve(
         self,
@@ -66,6 +66,20 @@ class Retriever:
         metadata_filter=None,
         allowed_roles=None
     ):
+
+        if not self.index:
+            logger.warning("Dense search requested but Pinecone index is not initialized.")
+            if self.bm25:
+                bm25_results = self.bm25.retrieve(
+                    query=query,
+                    top_k=top_k,
+                    metadata_filter=metadata_filter,
+                    allowed_roles=allowed_roles
+                )
+                for r in bm25_results:
+                    r["cosine_score"] = r.get("cosine_score", 0.0)
+                return bm25_results
+            return []
 
         # TEMPORARY FIX: Pinecone currently lacks the 'allowed_roles' metadata field,
         # so applying the DLS metadata_filter returns 0 chunks for ALL queries.
