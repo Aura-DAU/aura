@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { MessageSquare, Plus, Trash2, User, LogOut, LayoutDashboard } from "lucide-react"
 import { cn } from "@/lib/utils"
-import type { ChatThread, StudentProfile, UserSession } from "@/lib/chat-types"
+import type { ChatThread, StudentProfile } from "@/lib/chat-types"
 import { useSession, signOut } from "next-auth/react"
 import { BrandMark } from "@/components/common/BrandMark"
 

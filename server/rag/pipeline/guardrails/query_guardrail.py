@@ -41,9 +41,6 @@ private life, or does it ask about a published POLICY/RULE that applies to a
 category of people (all faculty, all students, all staff)?" Only the former is
 UNSAFE. A question about a named person's PUBLIC PROFESSIONAL role, title,
 office contact, or publicly listed credentials is SAFE.
-  leave policy", "what is the CPDA amount", "what is the probation period for
-  faculty") — these are general HR/policy facts published in faculty handbooks,
-  not private data about a specific named individual.
 - Asks about APPROVAL WORKFLOWS or POLICY ROUTING (e.g. "who is the approving
   authority for X", "through which Dean is a request routed", "what is the
   process for Y") — these are published institutional procedures, not
@@ -80,23 +77,26 @@ UNSAFE
 - Do not include punctuation, JSON, or any additional text.
 """
 
+    def _classify(self, query: str) -> bool:
+        response = self.client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": self.system_prompt.strip()},
+                {"role": "user", "content": f"Query to evaluate:\n{query}"},
+            ],
+            model=self.model,
+            max_tokens=10,
+            temperature=0.0,
+        )
+        result = response.choices[0].message.content.strip().upper()
+
+        if os.getenv("DEBUG", "false").lower() == "true":
+            print(f"[Guardrail] Query: '{query}' -> Result: {result}")
+
+        return "UNSAFE" not in result
+
     def is_safe(self, query: str) -> bool:
         try:
-            response = self.client.chat.completions.create(
-                messages=[
-                    {"role": "system", "content": self.system_prompt.strip()},
-                    {"role": "user", "content": f"Query to evaluate:\n{query}"}
-                ],
-                model=self.model,
-                max_tokens=10,
-                temperature=0.0
-            )
-            result = response.choices[0].message.content.strip().upper()
-            
-            if os.getenv("DEBUG", "false").lower() == "true":
-                print(f"[Guardrail] Query: '{query}' -> Result: {result}")
-                
-            return "UNSAFE" not in result
+            return self._classify(query)
         except Exception as e:
             print(f"[Guardrail] Error evaluating query: {e}")
             # Fail open to prevent blocking all queries if the LLM API is down
@@ -110,7 +110,7 @@ UNSAFE
         through to the ERP/ecampus pipeline.
         """
         try:
-            return self.is_safe(query)
+            return self._classify(query)
         except Exception as e:
             print(f"[Guardrail] Strict check failed, denying query: {e}")
             return False  # Fail CLOSED — deny on uncertainty for personal data

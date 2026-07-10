@@ -51,7 +51,7 @@ function LoginCard() {
         setLoading(null)
         alert(`Demo login failed: ${res?.error || "Unknown error"}`)
       }
-    } catch (e) {
+    } catch {
       setLoading(null)
       alert("Network error during demo login")
     }

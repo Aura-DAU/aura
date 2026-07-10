@@ -63,11 +63,7 @@ export async function POST(req: Request) {
     return new Response("Unauthorized", { status: 401 })
   }
 
-  // Strip client-sent role if any
-  if (parsed.data.studentProfile) {
-    delete (parsed.data.studentProfile as any).role
-  }
-
+  // studentProfileSchema has no role field — identity comes from the JWT only.
   const payload: BackendChatRequest = parsed.data
 
   let backendRes: Response

@@ -99,7 +99,7 @@ export default function ConnectEcampusPage() {
         setSuccessMsg("Your eCampus account has been connected successfully!")
         setPassword("")
       }
-    } catch (err) {
+    } catch {
       setError("Network error. Please try again.")
     } finally {
       setLoading(false)
@@ -129,7 +129,7 @@ export default function ConnectEcampusPage() {
         setLinked(false)
         setSuccessMsg("Your eCampus account has been disconnected.")
       }
-    } catch (err) {
+    } catch {
       setError("Network error. Please try again.")
     } finally {
       setLoading(false)
