@@ -657,8 +657,35 @@ Retrieved Documents
                 if "```" in answer or not is_grounded:
                     return out_of_scope_response
 
-            return answer
+            return self._clean_citations(answer)
     
         except Exception as e:
             print(e)
             return "Sorry, I encountered an error while generating a response."
+
+    def _clean_citations(self, text: str) -> str:
+        """
+        Strips all inline bracketed citations from sentences and appends
+        a single consolidated sources list at the end (e.g. [Sources: 1, 2, 3]).
+        """
+        pattern_bracket = r'\[\d+(?:,\s*\d+)*\]'
+        all_numbers = set()
+        
+        # Collect all citation numbers
+        for m in re.finditer(r'\[\d+\]|' + pattern_bracket, text):
+            nums = re.findall(r'\d+', m.group(0))
+            all_numbers.update(int(n) for n in nums)
+            
+        # Remove all inline citations (handles spaces before brackets and consecutive brackets)
+        text_no_citations = re.sub(r'\s*(?:\[\d+(?:,\s*\d+)*\]|\[\d+\])+', '', text)
+        
+        # Clean formatting (e.g., spaces before punctuation)
+        text_clean = re.sub(r'\s+([.,!?;:])', r'\1', text_no_citations)
+        text_clean = re.sub(r' {2,}', ' ', text_clean).strip()
+        
+        if all_numbers:
+            sorted_nums = sorted(list(all_numbers))
+            citation_str = ", ".join(map(str, sorted_nums))
+            text_clean += f"\n\n[Sources: {citation_str}]"
+            
+        return text_clean

@@ -262,6 +262,9 @@ def main():
         if chunk.get("scraped_date"):
             vector["metadata"]["scraped_date"] = chunk["scraped_date"]
 
+        if chunk.get("authorization"):
+            vector["metadata"]["authorization"] = chunk["authorization"]
+
         vectors.append(
             vector
         )
