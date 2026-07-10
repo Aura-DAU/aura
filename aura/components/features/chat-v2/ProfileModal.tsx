@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { X } from "lucide-react"
 import { toast } from "sonner"
 import type { StudentProfile } from "@/lib/chat-types"
+import { useSession } from "next-auth/react"
 
 interface ProfileModalProps {
   open: boolean
@@ -16,6 +17,7 @@ interface ProfileModalProps {
 export function ProfileModal({ open, onClose, profile, onSave }: ProfileModalProps) {
   const [draft, setDraft] = useState<StudentProfile>(profile)
   const [saving, setSaving] = useState(false)
+  const { data: session } = useSession()
 
   useEffect(() => {
     if (open) setDraft(profile)
@@ -70,6 +72,27 @@ export function ProfileModal({ open, onClose, profile, onSave }: ProfileModalPro
                 <X className="size-5" />
               </button>
             </div>
+            
+            {session?.user && (
+              <div className="mb-6 rounded-xl border border-theme-gray-lighter bg-theme-black p-4">
+                <div className="text-xs font-semibold text-theme-yellow uppercase tracking-wider mb-3">Verified Identity</div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-xs text-neutral-500 mb-1">Role</div>
+                    <div className="text-sm text-neutral-200 capitalize">{session.user.role}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-neutral-500 mb-1">Department</div>
+                    <div className="text-sm text-neutral-200">{session.user.department || "N/A"}</div>
+                  </div>
+                  <div className="col-span-2">
+                    <div className="text-xs text-neutral-500 mb-1">ERP ID</div>
+                    <div className="text-sm text-neutral-200">{session.user.erpId}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <Field
                 id="name"

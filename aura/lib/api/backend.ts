@@ -25,4 +25,5 @@ export interface BackendChatRequest {
 export interface BackendChatResponse {
   answer: string
   sources: Array<string | { file?: string; title?: string }>
+  is_personal_data?: boolean
 }

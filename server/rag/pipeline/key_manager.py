@@ -93,11 +93,18 @@ class KeyManager:
                 # Check for daily-limit detection
                 is_daily_limit = False
                 if status_code == 429:
-                    match = re.search(r"try again in (\d+(?:\.\d+)?)s", error_msg)
-                    has_seconds_retry = bool(match)
-                    is_daily_limit = ("tpd" in error_msg or "tokens per day" in error_msg or 
-                                      "rpd" in error_msg or "requests per day" in error_msg or 
-                                      not has_seconds_retry)
+                    # A 429 with "try again in Xs" is a burst/minute limit —
+                    # back off and retry WITHOUT rotating the key, to avoid
+                    # wasting the backup key's burst budget unnecessarily.
+                    # Only explicit TPD/RPD keywords should trigger key rotation.
+                    is_minute_burst = bool(
+                        re.search(r"try again in (\d+(?:\.\d+)?)s", error_msg)
+                    )
+                    is_daily_limit = (
+                        not is_minute_burst and
+                        ("tpd" in error_msg or "tokens per day" in error_msg or
+                         "rpd" in error_msg or "requests per day" in error_msg)
+                    )
                 
                 if is_daily_limit:
                     with cls._lock:

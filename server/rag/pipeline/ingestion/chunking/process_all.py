@@ -8,9 +8,8 @@ from process_corpus import process_markdown_file
 # CONFIG
 # ==========================================
 
-CHUNKING_DIR = Path(__file__).resolve().parent
-DATA_DIR = (CHUNKING_DIR / "../../../../../data").resolve()
-OUTPUT_DIR = (CHUNKING_DIR / "../../../processed_chunks").resolve()
+DATA_DIR = "../../../../../data"
+OUTPUT_DIR = "../../../processed_chunks"
 OUTPUT_FILE = "chunks.json"
 
 

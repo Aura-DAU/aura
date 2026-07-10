@@ -6,12 +6,13 @@ import type {
   ChatThread,
   Citation,
   StudentProfile,
-  UserSession,
+  CalendarActionData,
 } from "@/lib/chat-types"
+import { useSession } from "next-auth/react"
+import { apiFetch, setToken, initAuth } from "@/lib/auth-client"
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
-const SESSION_KEY  = "aura-session-v1"
 
 interface StoredThread extends ChatThread {
   messages: ChatMessage[]
@@ -52,11 +53,27 @@ function saveHistoryToServer(
   threads: (StoredThread & { messages: ChatMessage[] })[]
 ): void {
   const payload = threads.slice(0, 10)
-  fetch("/api/auth/history", {
+  apiFetch("/api/auth/history", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, threads: payload }),
   }).catch(() => { /* ignore network errors */ })
+}
+
+/**
+ * Returns a copy of threads with personal-data assistant message content
+ * replaced by a redaction placeholder. The live UI state is unaffected —
+ * only the copy written to localStorage / the server is redacted.
+ */
+function redactPersonalDataMessages(threads: StoredThread[]): StoredThread[] {
+  return threads.map((t) => ({
+    ...t,
+    messages: t.messages.map((m) =>
+      m.is_personal_data
+        ? { ...m, content: "[Personal data — not stored]" }
+        : m
+    ),
+  }))
 }
 
 async function* parseSSEStream(response: Response) {
@@ -99,7 +116,64 @@ export function useAuraChat() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [activeCitations, setActiveCitations] = useState<Citation[]>([])
   const [studentProfile, setStudentProfile] = useState<StudentProfile>(DEFAULT_PROFILE)
-  const [userSession, setUserSession] = useState<UserSession | null>(null)
+  const [remainingQuota, setRemainingQuotaState] = useState<number | null>(null)
+  const { data: session } = useSession()
+
+  useEffect(() => {
+    if (session?.user) {
+      const email = session.user.email || 'guest'
+      const role = session.user.role || 'guest'
+      const maxQuota = role === 'guest' ? 3 : 5
+      const date = new Date().toISOString().split('T')[0]
+      const key = `aura-quota-${email}`
+      
+      try {
+        const stored = localStorage.getItem(key)
+        if (stored) {
+          const parsed = JSON.parse(stored)
+          if (parsed.date === date) {
+            setRemainingQuotaState(Math.max(0, maxQuota - parsed.count))
+          } else {
+            setRemainingQuotaState(maxQuota)
+            localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+          }
+        } else {
+          setRemainingQuotaState(maxQuota)
+          localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+        }
+      } catch {
+        setRemainingQuotaState(maxQuota)
+      }
+    } else {
+      setRemainingQuotaState(null)
+    }
+  }, [session])
+
+  const decrementQuota = useCallback(() => {
+    setRemainingQuotaState(prev => {
+      if (prev === null) return null;
+      const newVal = Math.max(0, prev - 1)
+      if (session?.user) {
+        const email = session.user.email || 'guest'
+        const role = session.user.role || 'guest'
+        const maxQuota = role === 'guest' ? 3 : 5
+        const date = new Date().toISOString().split('T')[0]
+        const key = `aura-quota-${email}`
+        try {
+          localStorage.setItem(key, JSON.stringify({ date, count: maxQuota - newVal }))
+        } catch {}
+      }
+      return newVal
+    })
+  }, [session])
+
+  useEffect(() => {
+    if (session) {
+      initAuth()
+    } else {
+      setToken(null)
+    }
+  }, [session])
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
@@ -121,8 +195,6 @@ export function useAuraChat() {
       }
       const rawProfile = localStorage.getItem(PROFILE_KEY)
       if (rawProfile) setStudentProfile(JSON.parse(rawProfile) as StudentProfile)
-      const rawSession = localStorage.getItem(SESSION_KEY)
-      if (rawSession) setUserSession(JSON.parse(rawSession) as UserSession)
     } catch {
       /* ignore corrupt storage */
     }
@@ -132,7 +204,8 @@ export function useAuraChat() {
   useEffect(() => {
     if (!hydrated.current) return
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(threads))
+      // Redact personal-data content before writing to localStorage
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(redactPersonalDataMessages(threads)))
     } catch {
       /* quota or unavailable */
     }
@@ -221,7 +294,7 @@ export function useAuraChat() {
   const handleSendMessage = useCallback(
     async (text: string) => {
       const trimmed = text.trim()
-      if (!trimmed || loading) return
+      if (!trimmed || loading || remainingQuota === 0) return
 
       setErrorMessage(null)
       setInputText("")
@@ -252,7 +325,7 @@ export function useAuraChat() {
       setThinkingStep("Thinking…")
 
       try {
-        const response = await fetch("/api/chat", {
+        const response = await apiFetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -262,12 +335,20 @@ export function useAuraChat() {
           }),
         })
 
+        if (response.status === 429) {
+          setRemainingQuotaState(0)
+          throw new Error("Question limit reached. Please wait or sign in with a DAU account.")
+        }
         if (!response.ok || !response.body) {
           throw new Error("Request failed")
         }
 
+        decrementQuota()
+
         let assistantText = ""
         let citations: Citation[] = []
+        let isPersonalData = false
+        let calendarAction: CalendarActionData | undefined
         const assistantMsg: ChatMessage = {
           role: "assistant",
           content: "",
@@ -287,38 +368,50 @@ export function useAuraChat() {
           } else if (chunk.type === "citations" && Array.isArray(chunk.citations)) {
             citations = chunk.citations as Citation[]
             setActiveCitations(citations)
+          } else if (chunk.type === "personal-data-flag") {
+            isPersonalData = true
+          } else if (
+            chunk.type === "calendar-action" &&
+            chunk.action !== null &&
+            typeof chunk.action === "object"
+          ) {
+            // Backend M3 (Dhruvam) owns the calendar tool logic.
+            // This handler activates when the backend emits a calendar-action event.
+            calendarAction = chunk.action as CalendarActionData
           }
         }
 
         const finalMessages: ChatMessage[] = [
           ...baseMessages,
-          { ...assistantMsg, content: assistantText },
+          {
+            ...assistantMsg,
+            content: assistantText,
+            is_personal_data: isPersonalData || undefined,
+            calendar_action: calendarAction,
+          },
         ]
         persistMessages(threadId, finalMessages)
 
         // Sync to server (fire-and-forget) if a user is logged in
         try {
-          const rawSession = localStorage.getItem(SESSION_KEY)
-          if (rawSession) {
-            const session = JSON.parse(rawSession) as { email: string }
-            if (session.email) {
-              // Build latest snapshot of threads to sync
-              setThreads((current) => {
-                saveHistoryToServer(session.email, current)
-                return current
-              })
-            }
+          if (session?.user?.email) {
+            setThreads((current) => {
+              // Redact personal-data content before sending to server
+              saveHistoryToServer(session.user.email!, redactPersonalDataMessages(current))
+              return current
+            })
           }
         } catch { /* ignore */ }
-      } catch {
-        setErrorMessage("Something went wrong. Please try again.")
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : "Something went wrong. Please try again."
+        setErrorMessage(msg)
         setMessages(baseMessages)
       } finally {
         setLoading(false)
         setThinkingStep(undefined)
       }
     },
-    [activeThreadId, loading, messages, persistMessages, studentProfile],
+    [activeThreadId, loading, messages, persistMessages, studentProfile, session, remainingQuota, decrementQuota],
   )
 
   const handleClearChat = useCallback(() => {
@@ -351,7 +444,7 @@ export function useAuraChat() {
 
         const form = new FormData()
         form.append("audio", blob, `recording.${extension}`)
-        const res = await fetch("/api/speech", { method: "POST", body: form })
+        const res = await apiFetch("/api/speech", { method: "POST", body: form })
         const data = (await res.json()) as { text?: string; error?: string }
         const transcript = data.text
         if (transcript) {
@@ -485,11 +578,6 @@ export function useAuraChat() {
     }
   }, [isRecording, transcribeAudio])
 
-  const logout = useCallback(async () => {
-    setUserSession(null)
-    try { localStorage.removeItem(SESSION_KEY) } catch { /* ignore */ }
-  }, [])
-
   return {
     messages,
     inputText,
@@ -502,6 +590,7 @@ export function useAuraChat() {
     errorMessage,
     setErrorMessage,
     activeCitations,
+    remainingQuota,
     threads: threads.map(({ id, title }) => ({ id, title })),
     activeThreadId,
     setActiveThreadId,
@@ -512,7 +601,5 @@ export function useAuraChat() {
     handleMicClick,
     handleSendMessage,
     handleClearChat,
-    userSession,
-    logout,
   }
 }

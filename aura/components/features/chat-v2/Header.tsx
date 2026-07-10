@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Download, LogIn, LogOut, Menu, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import type { UserSession } from "@/lib/chat-types"
+import { useSession, signOut } from "next-auth/react"
 import { BrandMark } from "@/components/common/BrandMark"
 
 interface HeaderProps {
@@ -12,8 +12,6 @@ interface HeaderProps {
   onClearChat: () => void
   canInstall: boolean
   onInstall: () => void
-  userSession: UserSession | null
-  onLogout: () => void
 }
 
 export function Header({
@@ -21,10 +19,9 @@ export function Header({
   onClearChat,
   canInstall,
   onInstall,
-  userSession,
-  onLogout,
 }: HeaderProps) {
   const router = useRouter()
+  const { data: session } = useSession()
   const [confirmClear, setConfirmClear] = useState(false)
   const confirmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -87,10 +84,10 @@ export function Header({
               {confirmClear ? "Confirm clear" : "Clear"}
             </span>
           </button>
-          {userSession ? (
+          {session?.user ? (
             <button
               type="button"
-              onClick={onLogout}
+              onClick={() => signOut({ callbackUrl: "/login" })}
               className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm text-neutral-300 transition-colors hover:bg-theme-gray-light"
             >
               <LogOut className="size-4" />
