@@ -2,6 +2,7 @@ import os
 import sys
 import tempfile
 import asyncio
+import threading
 from typing import List, Optional
 from pathlib import Path
 
@@ -16,7 +17,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 
-from rag import AURA
 from pipeline.speech import transcribe_audio
 from api.auth import require_identity, Identity
 from api.routes.identity_routes import router as identity_router
@@ -27,7 +27,21 @@ from pipeline.ecampus.credentials_vault import (
 )
 
 app = FastAPI(title="AURA API")
-aura = AURA()
+
+# Lazy-init: AURA pulls in Pinecone, embeddings, etc. Defer until first /chat
+# so /health and auth routes stay available during cold start.
+_aura = None
+_aura_lock = threading.Lock()
+
+
+def get_aura():
+    global _aura
+    if _aura is None:
+        with _aura_lock:
+            if _aura is None:
+                from rag import AURA  # noqa: PLC0415 — deferred heavy import
+                _aura = AURA()
+    return _aura
 
 # ── CORS ──────────────────────────────────────────────────────────────────
 # allow_credentials=True is REQUIRED for httpOnly cookies to be forwarded
@@ -106,7 +120,7 @@ def chat(
         request.userProfile.model_dump(exclude_none=True)
         if request.userProfile else None
     )
-    return aura.ask(
+    return get_aura().ask(
         question=request.question,
         history=history,
         identity=identity.as_dict(),
