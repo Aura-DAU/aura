@@ -7,6 +7,12 @@ knowledge. General knowledge questions continue through the existing,
 unmodified RAG pipeline in aura_chat.py.
 """
 
+# TODO(unirp): Replace with UniRP endpoint — routes TBD. Do NOT implement any
+# UniRP logic. Faculty personal-data tools routed through this orchestrator
+# (get_faculty_schedule, and any future faculty ERP lookups) currently derive
+# everything from eCampus/student-timetable aggregation and will need to call
+# a UniRP-backed tool instead once routes are confirmed by IT.
+
 import os
 import json
 from typing import Optional, List

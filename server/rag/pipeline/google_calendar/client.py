@@ -11,11 +11,10 @@ Required env vars:
 """
 
 import os
-import time
 import datetime
 import requests
 
-from .token_vault import get_tokens, store_tokens, CalendarNotLinked
+from .token_vault import get_tokens, store_tokens, CalendarWriteScopeMissing
 
 GOOGLE_TOKEN_URL  = "https://oauth2.googleapis.com/token"
 GOOGLE_EVENTS_URL = "https://www.googleapis.com/calendar/v3/calendars/{cal_id}/events"
@@ -84,3 +83,55 @@ def get_events_on_date(erp_id: str, date: datetime.date) -> list[dict]:
         }
         for item in items
     ]
+
+
+def create_event(
+    erp_id: str,
+    summary: str,
+    start_iso: str,
+    end_iso: str,
+    description: str | None = None,
+) -> dict:
+    """
+    Creates an event (reminder) on the faculty member's primary Google
+    Calendar. Used by ecampus/tool_registry.py:create_calendar_reminder for
+    things like a CPDA deadline, seed-grant review date, or leave return date.
+
+    Requires the calendar.events (write) OAuth scope — a STRICTER scope than
+    the calendar.readonly this module was originally built with (see
+    token_vault.py). If the stored token predates the broader consent
+    screen, Google returns 403 here; that's surfaced as
+    CalendarWriteScopeMissing so the caller can tell the faculty member to
+    reconnect their calendar, instead of leaking a raw HTTP error.
+    """
+    access_token = _get_valid_access_token(erp_id)
+    body = {
+        "summary": summary,
+        "description": description or "",
+        "start": {"dateTime": start_iso},
+        "end": {"dateTime": end_iso},
+    }
+    resp = requests.post(
+        GOOGLE_EVENTS_URL.format(cal_id="primary"),
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=body,
+        timeout=10,
+    )
+    if resp.status_code == 403:
+        raise CalendarWriteScopeMissing(
+            "Calendar write access isn't authorized yet for this account. Ask the faculty "
+            "member to reconnect their Google Calendar after the calendar.events scope has "
+            "been enabled by IT."
+        )
+    resp.raise_for_status()
+    item = resp.json()
+    return {
+        "event_id":  item.get("id"),
+        "summary":   item.get("summary"),
+        "start":     item.get("start", {}).get("dateTime"),
+        "end":       item.get("end", {}).get("dateTime"),
+        "html_link": item.get("htmlLink"),
+    }

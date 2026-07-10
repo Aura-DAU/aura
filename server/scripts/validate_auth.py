@@ -1,4 +1,4 @@
-import os
+
 from pathlib import Path
 
 def extract_frontmatter(content: str) -> tuple[dict, str]:
@@ -12,6 +12,7 @@ def extract_frontmatter(content: str) -> tuple[dict, str]:
                 metadata = yaml.safe_load(parts[1]) or {}
                 return metadata, parts[2]
             except yaml.YAMLError:
+                # Ignore frontmatter YAML syntax errors and return default empty metadata
                 pass
     return {}, content
 

@@ -6,8 +6,13 @@ After completing the OAuth 2.0 authorization code flow, the access_token
 and refresh_token are stored here — encrypted with Fernet (AES-128-CBC),
 same pattern as pipeline/ecampus/credentials_vault.py.
 
-AURA only ever READS calendar data on the faculty's behalf — no writes,
-no event creation, no deletion. Scope requested: calendar.readonly.
+Originally AURA only ever READ calendar data on the faculty's behalf —
+scope requested: calendar.readonly. The reminder-creation tool (see
+ecampus/tool_registry.py: create_calendar_reminder) needs to WRITE events,
+which requires the stricter `calendar.events` scope below. Any token
+obtained under the old readonly-only consent screen will be rejected by
+Google with a 403 on event creation — faculty must re-link their calendar
+after the IT team enables the broader scope (see client.CalendarWriteScopeMissing).
 
 Setup checklist (IT team):
   1. Create a Google Cloud project.
@@ -15,12 +20,19 @@ Setup checklist (IT team):
   3. Create OAuth 2.0 credentials (Web application type).
   4. Add the redirect URI:
        https://aura.dau.ac.in/api/calendar/callback
-  5. Set env vars:
+  5. Request BOTH scopes on the consent screen so slot-fetching and
+     reminder-creation both work for the same linked account:
+       https://www.googleapis.com/auth/calendar.readonly
+       https://www.googleapis.com/auth/calendar.events
+  6. Set env vars:
        GOOGLE_CALENDAR_CLIENT_ID
        GOOGLE_CALENDAR_CLIENT_SECRET
        GOOGLE_CALENDAR_VAULT_KEY    (Fernet key — separate from ECAMPUS_VAULT_KEY)
        GOOGLE_CALENDAR_VAULT_DB     (SQLite path, default below)
 """
+
+READONLY_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
+EVENTS_SCOPE = "https://www.googleapis.com/auth/calendar.events"
 
 import os
 import json
@@ -34,6 +46,12 @@ DB_PATH   = Path(os.environ.get("GOOGLE_CALENDAR_VAULT_DB",
 
 
 class CalendarNotLinked(Exception):
+    pass
+
+
+class CalendarWriteScopeMissing(Exception):
+    """Raised when Google rejects a write (event-creation) call because the
+    stored token was only ever granted the calendar.readonly scope."""
     pass
 
 
