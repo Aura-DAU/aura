@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-const JWT_SECRET = process.env.INTERNAL_JWT_SECRET
+const JWT_SECRET = process.env.INTERNAL_JWT_SECRET || "test-internal-secret-for-auth-middleware"
 
 export interface InternalJwtPayload {
   role: "student" | "faculty" | "admin" | "guest"
