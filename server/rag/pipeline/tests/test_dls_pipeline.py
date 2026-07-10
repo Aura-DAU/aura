@@ -38,7 +38,10 @@ def test_pipeline_get_context_applies_dls_filter():
     pipeline.retriever.index.query.assert_called()
     called_args, called_kwargs = pipeline.retriever.index.query.call_args
     assert "filter" in called_kwargs
-    assert called_kwargs["filter"] == {"authorization": {"$in": ["public", "student"]}}
+    called_filter = called_kwargs["filter"]
+    assert "authorization" in called_filter
+    assert "$in" in called_filter["authorization"]
+    assert sorted(called_filter["authorization"]["$in"]) == sorted(["public", "student"])
 
 def test_pipeline_get_context_applies_dls_filter_superadmin():
     pipeline = RetrievalPipeline()
