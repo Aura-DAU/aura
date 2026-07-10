@@ -16,10 +16,11 @@ parsing approach (find table, iterate rows) is very likely right for a site
 like this either way — it's the column names/order that need confirming.
 """
 
+from typing import Optional
 from bs4 import BeautifulSoup
 
 
-def _first_table_after(soup: BeautifulSoup, hint_text: str | None = None):
+def _first_table_after(soup: BeautifulSoup, hint_text: Optional[str] = None):
     """Generic helper: ASP.NET GridViews are usually the largest <table> on
     the content area. If hint_text is given, prefer a table whose nearest
     preceding heading/text contains it."""

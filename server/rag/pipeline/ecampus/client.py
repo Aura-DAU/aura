@@ -11,6 +11,7 @@ Usage pattern (see tool_registry.py for the full picture):
     result = client.get_result()
 """
 
+from typing import Optional
 from . import pages, parsers, cache, credentials_vault, timetable, timetable_pool, faculty_schedule
 from .session import ECampusSession
 
@@ -18,7 +19,7 @@ from .session import ECampusSession
 class ECampusClient:
     def __init__(self, erp_id: str):
         self.erp_id = erp_id
-        self._session: ECampusSession | None = None
+        self._session: Optional[ECampusSession] = None
 
     def _ensure_session(self) -> ECampusSession:
         if self._session is not None:

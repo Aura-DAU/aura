@@ -5,6 +5,7 @@ from pipeline.retrieval.context_builder import ContextBuilder
 from pipeline.retrieval.entity_retriever import EntityRetriever
 from pipeline.retrieval.rbac import get_allowed_roles
 
+import os
 import re
 import logging
 

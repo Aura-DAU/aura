@@ -34,7 +34,7 @@ def test_faculty_cannot_target_their_own_erp_id_as_a_student_record():
 
 def test_unrecognized_role_is_denied():
     with pytest.raises(AccessDenied):
-        authorize_personal_query({"role": "admin", "erp_id": "X1"}, "S1")
+        authorize_personal_query({"role": "guest", "erp_id": "X1"}, "S1")
 
 
 def test_missing_identity_fields_denied_not_default_allowed():

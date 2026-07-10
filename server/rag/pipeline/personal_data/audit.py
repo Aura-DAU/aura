@@ -8,10 +8,12 @@ import json
 import time
 import os
 
+from typing import Optional
+
 AUDIT_LOG_PATH = os.environ.get("AURA_AUDIT_LOG", "/var/log/aura/personal_data_audit.log")
 
 
-def audit_log(identity: dict, query: str, allowed: bool, target: str | None = None, reason: str | None = None) -> None:
+def audit_log(identity: dict, query: str, allowed: bool, target: Optional[str] = None, reason: Optional[str] = None) -> None:
     entry = {
         "ts": time.time(),
         "requester_role": (identity or {}).get("role"),
