@@ -68,6 +68,10 @@ def test_ecampus_package_has_no_http_write_calls():
                     # builds a URL string, never calls requests.post/etc.
                     if py_file.name == "reminder_tool.py":
                         continue
+                    # allowlist: session.py is the scraping session client which
+                    # performs logins and form-submissions (ASP.NET postbacks).
+                    if py_file.name == "session.py":
+                        continue
                     # allowlist: client.py's requests.post() is the OAuth
                     # token-refresh handshake against Google's own token
                     # endpoint (GOOGLE_TOKEN_URL) — an auth call, not a write
