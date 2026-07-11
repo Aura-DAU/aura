@@ -48,16 +48,20 @@ class Retriever:
             )
         
         self.index = None
-        api_key = os.getenv("PINECONE_API_KEY")
-        index_name = os.getenv("PINECONE_INDEX")
-        if api_key and index_name and not api_key.startswith("mock-"):
-            try:
-                pc = Pinecone(api_key=api_key)
-                self.index = pc.Index(index_name)
-            except Exception as e:
-                logger.warning("Failed to initialize Pinecone: %s. Dense search will be disabled.", e)
-        else:
-            logger.warning("Pinecone API key or Index name is mock/empty. Dense search is disabled.")
+        try:
+            pc = Pinecone(
+                api_key=os.getenv(
+                    "PINECONE_API_KEY"
+                )
+            )
+            self.index = pc.Index(
+                os.getenv(
+                    "PINECONE_INDEX"
+                )
+            )
+            logger.info("Pinecone Index initialized successfully.")
+        except Exception as e:
+            logger.warning("Failed to initialize Pinecone Index: %s. Dense search will be disabled.", e)
 
     def retrieve(
         self,
@@ -66,20 +70,6 @@ class Retriever:
         metadata_filter=None,
         allowed_roles=None
     ):
-
-        if not self.index:
-            logger.warning("Dense search requested but Pinecone index is not initialized.")
-            if self.bm25:
-                bm25_results = self.bm25.retrieve(
-                    query=query,
-                    top_k=top_k,
-                    metadata_filter=metadata_filter,
-                    allowed_roles=allowed_roles
-                )
-                for r in bm25_results:
-                    r["cosine_score"] = r.get("cosine_score", 0.0)
-                return bm25_results
-            return []
 
         # TEMPORARY FIX: Pinecone currently lacks the 'allowed_roles' metadata field,
         # so applying the DLS metadata_filter returns 0 chunks for ALL queries.
@@ -97,37 +87,36 @@ class Retriever:
             convert_to_numpy=True
         )
 
-        results = self.index.query(
-            vector=query_embedding[0].tolist(),
-            top_k=top_k,
-            include_metadata=True,
-            filter=pinecone_filter
-        )
+        dense_results = []
+        if self.index:
+            try:
+                results = self.index.query(
+                    vector=query_embedding[0].tolist(),
+                    top_k=top_k,
+                    include_metadata=True,
+                    filter=pinecone_filter
+                )
+                for match in results["matches"]:
+                    dense_results.append(
+                        {
+                            "id":
+                                match["id"],
 
-        chunks = []
+                            # Fix #1A: store the raw Pinecone cosine score separately
+                            # so the confidence router can use it even after RRF fusion
+                            # overwrites 'score' with the hybrid rrf_score.
+                            "score":
+                                match["score"],
 
-        for match in results["matches"]:
+                            "cosine_score":
+                                match["score"],
 
-            chunks.append(
-                {
-                    "id": 
-                        match["id"],
-                        
-                    # Fix #1A: store the raw Pinecone cosine score separately
-                    # so the confidence router can use it even after RRF fusion
-                    # overwrites 'score' with the hybrid rrf_score.
-                    "score":
-                        match["score"],
-
-                    "cosine_score":
-                        match["score"],
-
-                    "metadata":
-                        match["metadata"]
-                }
-            )
-
-        dense_results = chunks
+                            "metadata":
+                                match["metadata"]
+                        }
+                    )
+            except Exception as e:
+                logger.warning("Pinecone query failed: %s", e)
 
         if not self.bm25:
             return dense_results
