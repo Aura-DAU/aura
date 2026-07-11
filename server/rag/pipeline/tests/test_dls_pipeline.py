@@ -44,9 +44,10 @@ def test_pipeline_get_context_applies_dls_filter(
     mock_retriever.index.query.assert_called()
     _called_args, called_kwargs = mock_retriever.index.query.call_args
     assert "filter" in called_kwargs
-    assert "authorization" in called_kwargs["filter"]
-    assert "$in" in called_kwargs["filter"]["authorization"]
-    assert set(called_kwargs["filter"]["authorization"]["$in"]) == {"public", "student"}
+    called_filter = called_kwargs["filter"]
+    assert "authorization" in called_filter
+    assert "$in" in called_filter["authorization"]
+    assert sorted(called_filter["authorization"]["$in"]) == sorted(["public", "student"])
 
 
 @patch("pipeline.retrieval.query_rewriter.QueryRewriter", MagicMock)
