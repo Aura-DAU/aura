@@ -20,8 +20,15 @@ from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 def get_internal_jwt_secret() -> str:
-    return os.environ.get("INTERNAL_JWT_SECRET", "test-internal-secret-for-auth-middleware")
-ALGORITHM           = "HS256"
+    """Return INTERNAL_JWT_SECRET, or empty string if unset.
+
+    Callers must treat an empty return as misconfiguration (HTTP 500).
+    Tests set INTERNAL_JWT_SECRET explicitly via conftest / env.
+    """
+    return os.environ.get("INTERNAL_JWT_SECRET", "")
+
+
+ALGORITHM = "HS256"
 
 # Broad roles stored in user_identity_map.role — what the JWT carries.
 # Fine-grained roles are in role_bindings and resolved by resolve_effective_role().

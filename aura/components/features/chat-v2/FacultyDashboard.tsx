@@ -102,7 +102,6 @@ export function FacultyDashboard({
         })
         .catch(() => setAdviseeState("error")),
     ])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Attendance card is intentionally absent:

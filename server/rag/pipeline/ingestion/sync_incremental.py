@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 # Setup directories
 INGESTION_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(INGESTION_DIR))
 sys.path.insert(0, str(INGESTION_DIR / "chunking"))
 
 from config import MODEL_NAME

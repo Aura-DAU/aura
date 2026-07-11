@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.208",
@@ -45,6 +47,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.10",
     "jsdom": "^29.1.1",
     "jsonwebtoken": "^9.0.3",
     "postcss": "^8.5",

@@ -8,9 +8,8 @@ from unittest.mock import patch, MagicMock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-# Add paths to sys.path
+# Add paths to sys.path — parent.parent.parent is server/
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent / "server"))
 
 os.environ.setdefault("INTERNAL_JWT_SECRET", "test-secret-key")
 os.environ["GOOGLE_CALENDAR_CLIENT_ID"] = "test-client-id"
@@ -44,8 +43,8 @@ def test_callback_with_valid_state():
          patch("api.routes.calendar_routes.store_tokens") as mock_store:
         res = client.get(f"/calendar/callback?code=mock_code&state={state}", follow_redirects=False)
         
-    assert res.status_code == 307  # Redirect to /calendar/connected
-    assert res.headers["location"] == "/calendar/connected"
+    assert res.status_code == 307
+    assert res.headers["location"] == "http://localhost:3000/dashboard?calendar=connected"
     mock_store.assert_called_once()
 
 def test_callback_with_invalid_state_signature():
