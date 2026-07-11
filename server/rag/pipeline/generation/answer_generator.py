@@ -5,6 +5,35 @@ from dotenv import load_dotenv
 from pipeline.key_manager import KeyManager
 from pipeline.exceptions import RAGPipelineError
 
+# ── Prompt caching (CLAUDE.md mandate) ──────────────────────────────────────
+# CLAUDE.md's cache_control(> 1024 tokens) instruction is written for
+# Anthropic's Messages API. This pipeline calls Groq's OpenAI-compatible
+# chat.completions endpoint (see key_manager.py) — Groq has no client-settable
+# `cache_control` field, so setting one here would either be silently ignored
+# or rejected. Two things this file does instead, to honor the mandate's
+# actual intent (control cost/latency on long, repeated prefixes):
+#
+#   1. `_approx_token_count` flags prompts over the 1024-token threshold so
+#      it's visible in logs which requests are candidates for caching —
+#      useful if/when a caching-capable provider is added.
+#   2. The prompt is built with the large, mostly-static SYSTEM_PROMPT +
+#      effective_system_prompt as the `system` message and the per-request
+#      content in `user` — Groq (like most inference stacks) applies
+#      automatic prefix caching to the identical leading portion of a
+#      request, so keeping that portion byte-identical across calls is
+#      what actually earns any caching benefit today, with zero
+#      application-level cache_control support required.
+#
+# If Groq later exposes explicit cache_control (or a future provider swap
+# brings one in via KeyManager), _execute_generate below is the only call
+# site that needs a `cache_control` block added to the system message.
+
+_TOKEN_CHARS_PER_TOKEN = 4  # rough approximation, no tokenizer dependency
+
+
+def _approx_token_count(text: str) -> int:
+    return len(text) // _TOKEN_CHARS_PER_TOKEN
+
 
 SYSTEM_PROMPT = """
 You are AURA, the official AI assistant for Dhirubhai Ambani University (DAU).
@@ -585,6 +614,14 @@ Retrieved Documents
             if system_addendum:
                 effective_system_prompt = SYSTEM_PROMPT + system_addendum
 
+            if _approx_token_count(effective_system_prompt) > 1024:
+                # See "Prompt caching" note at top of file: Groq has no
+                # cache_control field, so this is a visibility log only.
+                print(
+                    f"[AnswerGenerator] system prompt ~{_approx_token_count(effective_system_prompt)} "
+                    "tokens (>1024) — caching-candidate prefix."
+                )
+
             def _execute_generate(client):
                 return client.chat.completions.create(
                     model=self.model,
@@ -657,8 +694,39 @@ Retrieved Documents
                 if "```" in answer or not is_grounded:
                     return out_of_scope_response
 
-            return answer
-    
+            return self._clean_citations(answer)
+
         except Exception as e:
             print(e)
             return "Sorry, I encountered an error while generating a response."
+
+    def _clean_citations(self, text: str) -> str:
+        """
+        Strips all inline bracketed citations (e.g. [1], [2, 3]) from the
+        answer body and appends a single consolidated sources list at the
+        end (e.g. "[Sources: 1, 2, 3]"), instead of leaving raw [N] markers
+        scattered mid-sentence with no way for the frontend to link them
+        (Message.tsx renders the `sources` list separately as file/URL
+        pills, it doesn't parse inline [N] markers at all).
+        """
+        pattern_bracket = r'\[\d+(?:,\s*\d+)*\]'
+        all_numbers = set()
+
+        # Collect all citation numbers
+        for m in re.finditer(r'\[\d+\]|' + pattern_bracket, text):
+            nums = re.findall(r'\d+', m.group(0))
+            all_numbers.update(int(n) for n in nums)
+
+        # Remove all inline citations (handles spaces before brackets and consecutive brackets)
+        text_no_citations = re.sub(r'\s*(?:\[\d+(?:,\s*\d+)*\]|\[\d+\])+', '', text)
+
+        # Clean formatting (e.g., spaces before punctuation)
+        text_clean = re.sub(r'\s+([.,!?;:])', r'\1', text_no_citations)
+        text_clean = re.sub(r' {2,}', ' ', text_clean).strip()
+
+        if all_numbers:
+            sorted_nums = sorted(all_numbers)
+            citation_str = ", ".join(map(str, sorted_nums))
+            text_clean += f"\n\n[Sources: {citation_str}]"
+
+        return text_clean
