@@ -21,6 +21,7 @@ from typing import Optional
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import AnswerGenerator
 from pipeline.guardrails.query_guardrail import QueryGuardrail
+from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
 
 from erp_connector import ERPConnector
 from erp_context_builder import ERPContextBuilder
@@ -75,6 +76,7 @@ class AuraChat:
         self.pipeline   = RetrievalPipeline()
         self.generator  = AnswerGenerator()
         self.guardrail  = QueryGuardrail()
+        self.wellness   = WellnessGuardrail()
 
         erp = ERPConnector()
         self.classifier     = PersonalQueryClassifier()
@@ -105,17 +107,66 @@ class AuraChat:
                     "sources": [],
                 }
 
+            # ── Wellness/distress check ───────────────────────────────
+            if self.wellness.check(query):
+                return {
+                    "answer": self.wellness.get_response(),
+                    "sources": [],
+                    "is_personal_data": False,
+                }
+
             history = history or []
 
             # ── Greetings bypass classifier ────────────────────────────
             if is_greeting_or_meta(query):
-                from access_control import resolve_effective_role
-                user_role = resolve_effective_role(identity) if identity else "public"
-                return self._rag_only(query, history, display_profile, user_role=user_role)
+                q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
+                words = q.split()
+                
+                # Check for help/capabilities queries
+                help_words = {"what can you do", "help", "menu", "intro", "introduce yourself"}
+                who_words = {"who are you", "who is aura", "what is aura"}
+                
+                if q in help_words or any(w in help_words for w in words):
+                    ans = (
+                        "I can help you with a wide range of questions about Dhirubhai Ambani University, including:\n"
+                        "- **Admissions & Academics**: Program details, fee structures, eligibility criteria, and academic policies.\n"
+                        "- **Campus & Facilities**: Hostel rules, dining details, medical SOPs, and general guidelines.\n"
+                        "- **Personal ERP Records**: You can check your CPI/CGPA, attendance, and course grades securely.\n"
+                        "- **Calendar Actions**: I can help you schedule appointments or check event dates.\n\n"
+                        "How can I assist you today?"
+                    )
+                elif q in who_words or any(w in who_words for w in words):
+                    ans = (
+                        "I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
+                        "I am here to help you navigate university life, policies, academics, admissions, "
+                        "and connect you with your personal academic data from the ERP system. How can I help you today?"
+                    )
+                else:
+                    ans = (
+                        "Hello! I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
+                        "I can help you with questions about admissions, academics, faculty, courses, campus life, "
+                        "and your personal student records (like CGPA, grades, and attendance). How can I assist you today?"
+                    )
+                return {
+                    "answer": ans,
+                    "sources": [],
+                    "is_personal_data": False
+                }
 
             # ── Step 1: Classify ────────────────────────────────────────
             classification = self.classifier.classify(query)
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
+
+            # ── Guest / No-identity check for personal paths ───────────
+            if query_type in ("PERSONAL", "MIXED", "AGGREGATE"):
+                from access_control import resolve_effective_role
+                user_role = resolve_effective_role(identity) if identity else "guest"
+                if user_role == "guest":
+                    return {
+                        "answer": GENERIC_DENIAL,
+                        "sources": [],
+                        "is_personal_data": False,
+                    }
 
             # ── Step 1b: Strict guardrail for personal-data paths ───────
             # is_safe() above fails OPEN (acceptable for public RAG). For
