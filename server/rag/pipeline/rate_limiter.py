@@ -19,10 +19,10 @@ from dataclasses import dataclass, field
 QUOTA_WINDOW_SECONDS = 24 * 60 * 60  # 24h rolling window
 
 QUOTA_LIMITS = {
-    "guest": 3,
-    "student": 5,
-    "faculty": 5,
-    "admin": 5,
+    "guest": 9999,
+    "student": 9999,
+    "faculty": 9999,
+    "admin": 9999,
 }
 
 

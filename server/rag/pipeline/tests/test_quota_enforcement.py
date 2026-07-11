@@ -28,6 +28,12 @@ def setup_function(_):
     # Each test gets a clean in-memory store — the module-level singleton
     # would otherwise leak state between tests.
     rate_limiter_module._store = InMemoryQuotaStore()
+    rate_limiter_module.QUOTA_LIMITS = {
+        "guest": 3,
+        "student": 5,
+        "faculty": 5,
+        "admin": 5,
+    }
 
 
 # ── Guest quota tests (limit = 3) ────────────────────────────────────────────
