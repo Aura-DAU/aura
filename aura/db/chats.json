@@ -1,2 +1,397 @@
 {
+  "demo.student@dau.ac.in": [
+    {
+      "id": "hyxqh4am",
+      "title": "who is convenor of sbg?",
+      "messages": [
+        {
+          "role": "user",
+          "content": "who is convenor of sbg?",
+          "timestamp": 1782285724326
+        },
+        {
+          "role": "user",
+          "content": "who is convenor of sbg",
+          "timestamp": 1782286736942
+        },
+        {
+          "role": "assistant",
+          "content": "The most recent information lists **Yash Judal** as the Convenor of the Student Body Government (SBG) – email convener_student_government@dau.ac.in【1】.  \n\n*Earlier documents mention other names (e.g., Parshv Joshi and Yash Shah) as convenors, but the latest source (dated 2026‑06‑10) identifies Yash Judal.*",
+          "timestamp": 1782286762916
+        },
+        {
+          "role": "user",
+          "content": "ACM india summer school 2026 info",
+          "timestamp": 1782286852600
+        },
+        {
+          "role": "assistant",
+          "content": "I could locate a reference to an **ACM India Summer School** in the available data, but it pertains to the **2017** event:\n\n- **Topic:** Graph Theory and Graph Algorithms  \n- **Location:** IIT Gandhinagar, Gandhinagar  \n- **Period:** June – July 2017  \n\nNo information about an ACM India Summer School scheduled for **2026** appears in the provided university documents. You may want to contact the Office of Student Activities or check the official DAU website for the most recent details.",
+          "timestamp": 1782286874616
+        },
+        {
+          "role": "user",
+          "content": "who is arpit rana?",
+          "timestamp": 1782456265632
+        },
+        {
+          "role": "user",
+          "content": "who is arpit rana?",
+          "timestamp": 1782456348701
+        },
+        {
+          "role": "assistant",
+          "content": "**Arpit Rana** is a faculty member at DA‑IICT.\n\n- He earned his Ph.D. in Computer Science from **University College Cork, Ireland (2020)**【3】.  \n- After his doctorate, he worked as a **Postdoctoral Researcher** in the Department of Industrial Engineering at the **University of Toronto, Canada** before joining DA‑IICT【1】.  \n- His research and teaching specializations include **Applied Machine Learning, Recommendation Systems, Multimodality, and their applications in Digital Innovation and Transformation**【2】.",
+          "timestamp": 1782456377063
+        },
+        {
+          "role": "user",
+          "content": "who is director of School of Technology DAU?",
+          "timestamp": 1782456402397
+        },
+        {
+          "role": "assistant",
+          "content": "The Director of the School of Technology at Dhirubhai Ambani University (DAU) is **Dr. G. Venkatesh**【1】【2】【3】.",
+          "timestamp": 1782456427832
+        },
+        {
+          "role": "user",
+          "content": "who is shane christian?",
+          "timestamp": 1782457577968
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782457600626
+        },
+        {
+          "role": "user",
+          "content": "who is shane christian at DAU",
+          "timestamp": 1782457622219
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782457644395
+        },
+        {
+          "role": "user",
+          "content": "who is sanjay srivastava?",
+          "timestamp": 1782457651736
+        },
+        {
+          "role": "assistant",
+          "content": "Sanjay Srivastava is a faculty member of Dhirubhai Ambani University. He teaches courses such as Wireless Sensor Networks, Internet of Things, Computer Networks, and Network Protocols, and his areas of specialization include the Internet of Things, protocol modelling and analysis, and simulation【2】【3】.",
+          "timestamp": 1782457674321
+        },
+        {
+          "role": "user",
+          "content": "what are registration deadlines for new courses at DAU?",
+          "timestamp": 1782473866089
+        },
+        {
+          "role": "assistant",
+          "content": "I could not find information about registration deadlines for new courses in the provided university data. You may want to contact the Admissions Office or check the official DAU website for the most up‑to‑date course‑registration schedule.",
+          "timestamp": 1782473912702
+        },
+        {
+          "role": "user",
+          "content": "what was the fees of DAU in 2017?",
+          "timestamp": 1782579711025
+        },
+        {
+          "role": "assistant",
+          "content": "I could not find that information in the available university data.",
+          "timestamp": 1782579737195
+        },
+        {
+          "role": "user",
+          "content": "where is office of prof arpit rana located?",
+          "timestamp": 1782579996770
+        },
+        {
+          "role": "assistant",
+          "content": "Prof. Arpit Rana’s office is located at #3105, FB‑3, DA‑IICT, Gandhinagar, Gujarat, India – 382007【1】",
+          "timestamp": 1782580035788
+        },
+        {
+          "role": "user",
+          "content": "which doctoral scholars are under mentoship of prof abhishek jindal?",
+          "timestamp": 1782580602993
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782580627233
+        },
+        {
+          "role": "user",
+          "content": "list doctoral scholars under the mentorship of prof abhishek jindal at DAU",
+          "timestamp": 1782580678227
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782580702454
+        },
+        {
+          "role": "user",
+          "content": "Who teaches SC475?",
+          "timestamp": 1782581466261
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782581500944
+        },
+        {
+          "role": "user",
+          "content": "list doctoral scholars under the mentorship of prof abhishek jindal at DAU",
+          "timestamp": 1782582710124
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782582740834
+        },
+        {
+          "role": "user",
+          "content": "what is the course content and policy for MC112?",
+          "timestamp": 1782582764281
+        },
+        {
+          "role": "assistant",
+          "content": "**Course MC112 – Computer Organization and Programming**\n\n**Course content (as listed in the Autumn 2025‑26 course booklet)**  \n- **Credits:** 3‑0‑0‑3 (total 3 credits)  \n- **Program:** B.Tech. (MNC) – Core course, no prerequisite.  \n- **Scope:** Introduction to computer organization, assembly‑language programming, and high‑level programming in C.  \n- **Key topics**  \n  - **Computer organization:** components of a computer, memory unit, computation unit, control unit, I/O unit, bits, data types, operations, logic structures, von Neumann model.  \n  - **Assembly‑language programming:** basic syntax, memory segments, registers, system calls, addressing modes, variables, constants, arithmetic & logical instructions, conditions & loops, numbers, strings, arrays.  \n  - **C programming:** overview, program structure, data types, variables, constants, conditions & loops, arrays, functions, pointers, structures, unions.  \n- **Textbook:** *Introduction to Computing Systems: From Bits & Gates to C* by Yale Patt and Sanjay Patel.  \n\n(Information drawn from the course booklet’s “Main Content” section)【3】【4】\n\n**Course policy**  \nThe retrieved documents only provide the basic “Important Information” (course code, title, semester) and do not contain detailed policy statements such as grading scheme, attendance requirements, or assessment methods. Therefore, the specific policy for MC112 is not available in the current data.  \n\nIf you need the full policy details, you may contact the **Academic Office** or refer to the university’s official Academic Guidelines page linked in the booklet.",
+          "timestamp": 1782582819042
+        },
+        {
+          "role": "user",
+          "content": "what is fees of bs ms program?",
+          "timestamp": 1782587838648
+        },
+        {
+          "role": "assistant",
+          "content": "I could not find that information in the available university data.  \n\nFor details on the tuition fees for the BS‑MS programs, you may contact the Admissions Office or refer to the official DAU admissions webpage.",
+          "timestamp": 1782587960226
+        },
+        {
+          "role": "user",
+          "content": "what is fees of bs ms program?",
+          "timestamp": 1782588923460
+        },
+        {
+          "role": "user",
+          "content": "what is fees of bs ms program?",
+          "timestamp": 1782589087999
+        },
+        {
+          "role": "user",
+          "content": "what is fees of bs ms program?",
+          "timestamp": 1782622804251
+        },
+        {
+          "role": "assistant",
+          "content": "I could not find that information in the available university data.  \n\nFor the tuition‑fee details of the BS‑MS (Data Science & Artificial Intelligence) program, you may contact the Admissions Office or refer to the official DAU admissions webpage.",
+          "timestamp": 1782622968148
+        },
+        {
+          "role": "user",
+          "content": "who teaches SC475?",
+          "timestamp": 1782623008552
+        },
+        {
+          "role": "user",
+          "content": "who teaches SC475?",
+          "timestamp": 1782623201093
+        },
+        {
+          "role": "assistant",
+          "content": "The SC475 (Time Series Analysis) course is taught by **Mukesh Tiwari**【1】【2】【3】.",
+          "timestamp": 1782623401626
+        },
+        {
+          "role": "user",
+          "content": "Give me list of convenors of all committees",
+          "timestamp": 1783621431006
+        },
+        {
+          "role": "user",
+          "content": "Give me list of convenors of all committtees",
+          "timestamp": 1783683388187
+        },
+        {
+          "role": "user",
+          "content": "Give me list of convenors of all committes",
+          "timestamp": 1783683773716
+        },
+        {
+          "role": "assistant",
+          "content": "I'm having trouble retrieving information right now. Please try again.",
+          "timestamp": 1783683785891
+        }
+      ]
+    },
+    {
+      "id": "9lvtxnrp",
+      "title": "who is convenor of sbg?",
+      "messages": [
+        {
+          "role": "user",
+          "content": "who is convenor of sbg?",
+          "timestamp": 1782279013628
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782279030724
+        },
+        {
+          "role": "user",
+          "content": "who is convenor of sbg",
+          "timestamp": 1782284427335
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782284452520
+        },
+        {
+          "role": "user",
+          "content": "who is convenor of sbg",
+          "timestamp": 1782285026696
+        },
+        {
+          "role": "user",
+          "content": "who is convenor of sbg",
+          "timestamp": 1782285057965
+        },
+        {
+          "role": "user",
+          "content": "who is convenor of sbg?",
+          "timestamp": 1782285402348
+        },
+        {
+          "role": "user",
+          "content": "who is convenor of sbg?",
+          "timestamp": 1782285585636
+        }
+      ]
+    },
+    {
+      "id": "v2qldx3u",
+      "title": "What programs does DAU offer?",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What programs does DAU offer?",
+          "timestamp": 1781710856643
+        },
+        {
+          "role": "assistant",
+          "content": "Dhirubhai Ambani University (DAU) offers the following types of programs:\n\n1. **Undergraduate (UG) Programs**  \n2. **Dual Degree Programs**  \n3. **Postgraduate (PG) Programs**  \n4. **Doctoral (PhD) Programs**  \n\nThe university provides these programs across disciplines such as Information and Communication Technology (ICT), Computer Science, Electronics, Mathematics, Data Science, Design, and related fields [5].  \n\nFor doctoral programs specifically, DAU offers specializations in the following areas:  \n- Communications and Signal Processing  \n- Communications and Signal Processing Algorithms and Theory of Computation  \n- VLSI & Embedded Systems  \n- Physics and Mathematical Sciences  \n- AI, ML and Data Science  \n- Software Systems and Networking  \n- Humanities, Social Sciences and Design [1].",
+          "timestamp": 1781710869863
+        },
+        {
+          "role": "user",
+          "content": "who is working in the field of Digital Innovation and Transformation?",
+          "timestamp": 1782277862871
+        },
+        {
+          "role": "assistant",
+          "content": "Arpit Rana – his research specialization is listed as **“Applied Machine Learning, Recommendation Systems, Multimodality, and their applications in Digital Innovation and Transformation.”**【2†L1-L4】【3†L9-L13】【4†L9-L13】",
+          "timestamp": 1782277890020
+        },
+        {
+          "role": "user",
+          "content": "who is working in field of recommendation systems?",
+          "timestamp": 1782277977513
+        },
+        {
+          "role": "assistant",
+          "content": "Arpit Rana is listed as working in the field of **Recommendation Systems** (his specialization includes “Applied Machine Learning, Recommendation Systems, Multimodality, and their applications in Digital Innovation and Transformation”)【2†L1-L4】.",
+          "timestamp": 1782278005748
+        },
+        {
+          "role": "user",
+          "content": "any other prof working in this field?",
+          "timestamp": 1782278020655
+        },
+        {
+          "role": "assistant",
+          "content": "I could not find any other professor listed in the provided university data who works in the field of recommendation systems. You may want to contact the Department of Computer Science or check the official DA‑IICT faculty directory for additional information.",
+          "timestamp": 1782278039952
+        },
+        {
+          "role": "user",
+          "content": "who is working in field of computer vision",
+          "timestamp": 1782278057549
+        },
+        {
+          "role": "assistant",
+          "content": "**Faculty working in the field of computer vision (per the available DAU data)**  \n\n- **Dr. Srimanta Mandal** – leads the Image Processing & Computer Vision Research Group and works on topics such as intelligent video surveillance, image dehazing, image retrieval, super‑resolution, biometric face recognition, face anti‑spoofing, underwater video surveillance, object tracking, and anomaly detection【1†L1-L4】.  \n- **Jignesh Patel** – listed under “computer vision” in the NAAC Cycle 1 faculty register【5†L1-L4】.  \n- **Manju Nath V. Joshi** – also listed under “computer vision” in the same NAAC register【5†L1-L4】.  \n\nThese are the faculty members explicitly identified in the provided university documents as working in computer‑vision‑related research.",
+          "timestamp": 1782278074181
+        },
+        {
+          "role": "user",
+          "content": "and in image processing?",
+          "timestamp": 1782278101937
+        },
+        {
+          "role": "assistant",
+          "content": "**Faculty members identified in the university data as working in the field of image processing**\n\n- Dr. Aditya Tatu 【1†L1-L4】  \n- Dr. Anil Roy 【1†L1-L4】  \n- Dr. Bakul Gohel 【1†L1-L4】 (also listed in the Annual Report as having “image processing” among his interests)【5†L1-L4】  \n- Dr. Manish Khare 【1†L1-L4】  \n- Dr. Manjunath Joshi 【1†L1-L4】  \n- Dr. Shruti Bhilare 【1†L1-L4】  \n- Dr. Srimanta Mandal 【1†L1-L4】  \n- Dr. Subhasish Basak — research focuses on denoising, segmentation and other image‑processing topics【3†L1-L4】  \n- Dr. Manish K. Gupta — listed with “image processing” among his areas of interest in the Annual Report【5†L1-L4】\n\nThese names are the only faculty explicitly mentioned in the provided documents as being involved in image‑processing research or applications.",
+          "timestamp": 1782278122989
+        },
+        {
+          "role": "user",
+          "content": "give me course policy of CT216",
+          "timestamp": 1782278177166
+        },
+        {
+          "role": "assistant",
+          "content": "**CT216 – Introduction to Communication Systems (Winter 2026) – Course Policy**\n\n*Source: CT216 course‑policy PDF (document [1]).*\n\n| Component | Weight / Note |\n|-----------|---------------|\n| **Mid‑term Exam 1** | 22.5 % |\n| **Mid‑term Exam 2** | 22.5 % |\n| **Final Exam** | 26 % |\n| **Laboratory work** | 15 % |\n| **Project** | 10 % |\n| **Quizzes** | 4 % |\n| **Attendance** | Follows the institute’s attendance policy (no separate percentage) |\n\n**Course Outcomes (as stated in the policy)**  \n- **P1 – Engineering Knowledge:** Understand the mathematics and engineering fundamentals of communication systems.  \n- **P2 – Analysis:** Analyse basic modules of a communication system.  \n- **P3 – Design:** Design basic modules of a communication system.  \n- **Lab / Project Work:** Conduct investigations as part of labs and the semester project.\n\n> *Note:* The policy is marked as “tentative and subject to change” in the document.  \n\nIf you need the full PDF, it can be downloaded from the university intranet link provided in the resources section.",
+          "timestamp": 1782278194942
+        },
+        {
+          "role": "user",
+          "content": "what is curriculum for btech ICT batch 2024 in 5th sem ?",
+          "timestamp": 1782278239529
+        },
+        {
+          "role": "assistant",
+          "content": "**B.Tech (Honours in ICT – Batch 2024) – 5th Semester (Semester V)**  \n\nThe university documents describe the curriculum for **Semesters V to VIII** together. For Semester V the following subjects are listed as the core components [2†L1-L4]:\n\n- **Embedded Hardware Design** (core)  \n- **Digital Communications** (core)  \n- **Computer Networks** (core)  \n- **Database Management Systems** (core)  \n- **Principles of Economics** (core)  \n- **Numerical and Computational Methods** (core)  \n- **High‑Performance Computing** (core)  \n- **Modelling and Simulation** (core)  \n- **Software Engineering** (core)  \n\nIn addition to these core courses, students take:\n\n- **ICT electives**, **Science electives**, and **Technical electives** (chosen from the institute’s elective catalogue)  \n- The **B.Tech. Project** (which begins in later semesters)  \n\n**What is not specified in the available data**\n\n- A detailed, semester‑by‑semester list of individual course codes or titles for Semester V alone.  \n- Exact credit distribution for each of the above subjects in Semester V.  \n\nIf you need the precise course codes, credit values, or the elective options for Semester V, you may want to consult the official **Curriculum Guide** on the DAU website or contact the **Academic Office** (details are on the university portal).",
+          "timestamp": 1782278270824
+        },
+        {
+          "role": "user",
+          "content": "I think you are giving me new curriculum i want old one",
+          "timestamp": 1782278412684
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782278436999
+        },
+        {
+          "role": "user",
+          "content": "give me courses in Vth sem of Btech ICT for 2024 batch?",
+          "timestamp": 1782278461724
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782278476263
+        },
+        {
+          "role": "user",
+          "content": "who is convenor of sbg?",
+          "timestamp": 1782278745663
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?",
+          "timestamp": 1782278767294
+        }
+      ]
+    }
+  ]
 }
