@@ -1,9 +1,8 @@
----
+﻿---
 title: "M.Tech ICT (2022-23) Curriculum Change Log vs Previous Version"
 category: "Academics"
-synthesized_by: "Knowledge Gap Fix – OM10"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM10"
 source_documents:
   - "data/academics/academic_policy_academic_requirements_m_tech_ict_program_wef_2022-23.md"
   - "data/academics/academic_policy_academic_requirements_mtech_cs_ml_program_wef_2021-22.md"

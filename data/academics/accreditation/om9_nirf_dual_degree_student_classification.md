@@ -1,9 +1,8 @@
----
+﻿---
 title: "NIRF Classification of Five-Year Dual Degree Students"
 category: "Accreditation"
-synthesized_by: "Knowledge Gap Fix – OM9"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM9"
 source_documents:
   - "data/academics/accreditation/nirf_v2.md"
   - "data/academics/academic_policy_five-year_dual_degree_program.md"

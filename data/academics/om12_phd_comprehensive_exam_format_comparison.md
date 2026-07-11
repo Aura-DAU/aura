@@ -1,9 +1,8 @@
----
+﻿---
 title: "PhD Comprehensive Examination Formats – Engineering vs HSS Comparison"
 category: "Academics"
-synthesized_by: "Knowledge Gap Fix – OM12"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM12"
 source_documents:
   - "data/academics/14.Academic-Requirements_PhD_wef_2017-18_v2.md"
   - "data/academics/academic_policy_academic_requirements_ph_d_program_enggscience_wef_2024-25_as_of_july_2024.md"

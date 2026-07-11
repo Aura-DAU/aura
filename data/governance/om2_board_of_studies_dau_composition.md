@@ -1,9 +1,8 @@
----
+﻿---
 title: "DAU Board of Studies – Composition and Member Count"
 category: "Governance"
-synthesized_by: "Knowledge Gap Fix – OM2"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM2"
 source_documents:
   - "data/academics/board_of_studies.md"
   - "data/faculty/boards_of_studies_v2.md"

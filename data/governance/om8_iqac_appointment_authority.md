@@ -1,9 +1,8 @@
----
+﻿---
 title: "IQAC Member Appointment Authority – DAU Specific"
 category: "Governance"
-synthesized_by: "Knowledge Gap Fix – OM8"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM8"
 source_documents:
   - "data/academics/accreditation/iqac_v2.md"
 ---

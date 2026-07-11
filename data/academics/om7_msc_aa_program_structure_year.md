@@ -1,9 +1,8 @@
----
+﻿---
 title: "M.Sc. Agriculture Analytics – Year of Current Program Structure Adoption"
 category: "Academics"
-synthesized_by: "Knowledge Gap Fix – OM7"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM7"
 source_documents:
   - "data/academics/academic_policy_requirements_m_sc_aa_wef_2022_23.md"
   - "data/events/launching_of_m_sc_agriculture_analytics.md"

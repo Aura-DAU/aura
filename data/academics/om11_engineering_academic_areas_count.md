@@ -1,9 +1,8 @@
----
+﻿---
 title: "Engineering Academic Areas – Total Count at DAU"
 category: "Academics"
-synthesized_by: "Knowledge Gap Fix – OM11"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM11"
 source_documents:
   - "data/academics/academic_areas.md"
 ---

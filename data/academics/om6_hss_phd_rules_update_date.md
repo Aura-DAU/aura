@@ -1,9 +1,8 @@
----
+﻿---
 title: "HSS PhD Rules – Most Recent Update / Revision Date"
 category: "Academics"
-synthesized_by: "Knowledge Gap Fix – OM6"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM6"
 source_documents:
   - "data/academics/academic_policy_requirements_ph_d_program_hss_and_design_wef_2024_25_as_of_july_2024.md"
 ---

@@ -1,9 +1,8 @@
----
+﻿---
 title: "Five-Year Dual Degree (B.Tech + M.Tech) – Total Credits by End of Semester 10"
 category: "Academics"
-synthesized_by: "Knowledge Gap Fix – OM4"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM4"
 source_documents:
   - "data/academics/academic_policy_five-year_dual_degree_program.md"
   - "data/academics/academic_policy_year_dual_degree_btech_and_mtech.md"

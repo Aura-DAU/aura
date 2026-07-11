@@ -1,9 +1,8 @@
----
+﻿---
 title: "M.Tech Electronics & Communication (EC) 2022-23 Curriculum"
 category: "Academics"
-synthesized_by: "Knowledge Gap Fix – OM3"
+synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"
-gap_id: "OM3"
 program: "M.Tech (EC)"
 specialization: "Wireless Communication and Embedded Systems"
 effective_batch: "2022-23"
