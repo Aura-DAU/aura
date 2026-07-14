@@ -11,6 +11,7 @@ interface MessageListProps {
   thinkingStep?: string
   activeCitations: Citation[]
   onRegenerate: () => void
+  onCitationHover?: (citation: Citation | null) => void
 }
 
 export function MessageList({
@@ -19,6 +20,7 @@ export function MessageList({
   thinkingStep,
   activeCitations,
   onRegenerate,
+  onCitationHover,
 }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
   const lastAssistantIndex = messages.findLastIndex((m) => m.role === "assistant")
@@ -42,6 +44,7 @@ export function MessageList({
               ? onRegenerate
               : undefined
           }
+          onCitationHover={onCitationHover}
         />
       ))}
       {showIndicator ? <StreamingIndicator thinkingStep={thinkingStep} /> : null}
