@@ -52,6 +52,40 @@ prod = os.getenv("PROD_FRONTEND_ORIGIN")
 if prod:
     ALLOWED_ORIGINS.append(prod)
 
+
+# ── Latency Logging Middleware ───────────────────────────────────────────
+from pipeline.latency_tracker import init_tracker, reset_tracker
+from db.connection import execute
+import time
+
+@app.middleware("http")
+async def log_latency_middleware(request, call_next):
+    if request.url.path != "/chat":
+        return await call_next(request)
+        
+    data, token = init_tracker()
+    t0 = time.time()
+    try:
+        response = await call_next(request)
+        return response
+    finally:
+        total_time = time.time() - t0
+        try:
+            execute(
+                "INSERT INTO latency_logs (guardrail_time, retrieval_time, generation_time, total_time) "
+                "VALUES (%s, %s, %s, %s)",
+                (
+                    data.get("guardrail_time", 0.0),
+                    data.get("retrieval_time", 0.0),
+                    data.get("generation_time", 0.0),
+                    total_time
+                )
+            )
+        except Exception as e:
+            # Non-blocking log print
+            print(f"[latency_middleware] Failed to log latency: {e}")
+        reset_tracker(token)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
