@@ -4,8 +4,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import numpy as np
 from dotenv import load_dotenv
-from pinecone import Pinecone
+from qdrant_client import models
 from tqdm import tqdm
+
+from pipeline.retrieval.qdrant_adapter import QdrantAdapter
 
 
 # ==================================================
@@ -37,27 +39,8 @@ def main():
 
     load_dotenv()
 
-    api_key = os.getenv(
-        "PINECONE_API_KEY"
-    )
-
-    index_name = os.getenv("PINECONE_INDEX")
-
-    if not api_key:
-
-        raise ValueError(
-            "PINECONE_API_KEY not found"
-        )
-
-    print("Connecting to Pinecone...")
-
-    pc = Pinecone(
-        api_key=api_key
-    )
-
-    index = pc.Index(
-        index_name
-    )
+    print("Connecting to Qdrant...")
+    vector_store = QdrantAdapter()
 
     print("Loading embeddings...")
 
@@ -277,7 +260,11 @@ def main():
             vector["metadata"]["authorization"] = chunk["authorization"]
 
         vectors.append(
-            vector
+            models.PointStruct(
+                id=vector["id"],
+                vector=vector["values"],
+                payload=vector["metadata"],
+            )
         )
 
     batches = list(chunk_list(vectors, BATCH_SIZE))
@@ -285,9 +272,9 @@ def main():
         f"Uploading {len(vectors)} vectors in {len(batches)} batches of {BATCH_SIZE}..."
     )
 
-    # Use ThreadPoolExecutor for parallel Pinecone upserts
+    # Use ThreadPoolExecutor for parallel Qdrant upserts.
     with ThreadPoolExecutor(max_workers=32) as executor:
-        futures = {executor.submit(index.upsert, vectors=batch): i for i, batch in enumerate(batches)}
+        futures = {executor.submit(vector_store.upsert, batch): i for i, batch in enumerate(batches)}
         for future in tqdm(as_completed(futures), total=len(futures), desc="Uploading"):
             try:
                 future.result()
@@ -297,9 +284,7 @@ def main():
 
     print("\nUpload complete!")
 
-    stats = (
-        index.describe_index_stats()
-    )
+    stats = vector_store.collection_info()
 
     print("\nIndex Stats:")
     print(stats)
