@@ -14,8 +14,9 @@ On any failure → defaults to PUBLIC (safest fallback).
 import os
 import json
 import logging
+from pathlib import Path
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.key_manager import KeyManager
 
 logger = logging.getLogger(__name__)
 
@@ -83,23 +84,28 @@ VALID_TYPES  = {"PUBLIC", "PERSONAL", "MIXED", "AGGREGATE"}
 class PersonalQueryClassifier:
 
     def __init__(self):
-        load_dotenv()
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        env_path = Path(__file__).resolve().parent / ".env"
+        load_dotenv(env_path)
         self.model  = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+        self.client = None
 
     def classify(self, query: str) -> dict:
         # Injection defence: delimit user input clearly
         safe_query = f"<query>\n{query}\n</query>"
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                temperature=0,
-                max_tokens=200,
-                messages=[
-                    {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
-                    {"role": "user",   "content": safe_query},
-                ],
-            )
+            def _execute(client):
+                model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+                active_client = self.client if self.client is not None else client
+                return active_client.chat.completions.create(
+                    model=model,
+                    temperature=0,
+                    max_tokens=200,
+                    messages=[
+                        {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
+                        {"role": "user",   "content": safe_query},
+                    ],
+                )
+            response = KeyManager.call_with_rotation(_execute, max_retries=3)
             raw = response.choices[0].message.content.strip()
             raw = raw.replace("```json", "").replace("```", "").strip()
             result = json.loads(raw)

@@ -5,13 +5,9 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
-
-# Overview
-
-Profile of Harpreet Singh Jattana
-
-# Main Content
 
 # Harpreet Singh Jattana
 
@@ -21,67 +17,58 @@ PhD - Pursuing (Microelectronics – SOI CMOS Process Integration & Modelling), 
 
 ## Contact Information
 
-- Phone: 079-68261718
-- Email: harpreetsingh_jattana@dau.ac.in
-- Address: # 3110, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+### Phone
+079-68261718
+
+### Email
+harpreetsingh_jattana@dau.ac.in
+
+### Address
+# 3110, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
 
 ## Website Links
 
-- https://www.linkedin.com/in/hs-jattana-00738326?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BnQhQkNQvSPyVpTTq1Zg9sA%3D%3D
+https://www.linkedin.com/in/hs-jattana-00738326?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BnQhQkNQvSPyVpTTq1Zg9sA%3D%3D
 
 ## Biography
 
-#### **Have hands-on experience** (more than 37 years) in the following areas of microelectronics:
+### Experience
 
-CMOS Process development and Integration (SOI, HV, BiPolar, NVM, OTP)
+#### More than 37 years of experience in the following areas of microelectronics:
 
-VLSI Design for Space/Military applications
+- CMOS Process development and Integration (SOI, HV, BiPolar, NVM, OTP)
+- VLSI Design for Space/Military applications
+- Radiation hardened Technology for VLSI products
+- CMOS fabrication and Mass production
+- Device reliability and failure modes
+- IC testing, characterization, Packaging and Qualification
+- Failure Analysis of CMOS
+- Project planning, execution and Management
+- Materials management, procurement
+- Equipment specifications formulation, technical comparison
+- ToT related issues – Device types, process details, unit recipes, Tech vehicle, IPs, design flows etc.
+- MEMS Cantilever and Z-measurement MEMS device for Biomedical applications
 
-Radiation hardened Technology for VLSI products.
+### Subject Knowledge & Understanding
 
-CMOS fabrication and Mass production
-
-Device reliability and failure modes
-
-IC testing, characterization, Packaging and Qualification
-
-Failure Analysis of CMOS
-
-Project planning, execution and Management
-
-Materials management, procurement.
-
-Equipment specifications formulation, technical comparison
-
-ToT related issues – Device types, process details, unit recipes, Tech vehicle, IPs, design flows etc.
-
-MEMS Cantilever and Z-measurement MEMS device for Biomedical applications
-
-#### **Subject Knowledge & Understanding**
-
-Non conventional MOS devices
-
-Lower Node Technology (incl products and markets)
-
-VLSI Packaging ( Ceramic, Plastic, Small-outline, 2D, MCM,2.5D)
-
-MEMS Design
-
-MEMS Fabrication (Surface & Bulk Micromachining, LEGA)
-
-Compound Semiconductors (GaN, GaAs based devices)
-
-Medical Devices
-
-Clinical Validation
-
-Teaching Semiconductor courses (MTech, BTech )
-
-[Show More](#)
+- Non conventional MOS devices
+- Lower Node Technology (incl products and markets)
+- VLSI Packaging (Ceramic, Plastic, Small-outline, 2D, MCM,2.5D)
+- MEMS Design
+- MEMS Fabrication (Surface & Bulk Micromachining, LEGA)
+- Compound Semiconductors (GaN, GaAs based devices)
+- Medical Devices
+- Clinical Validation
+- Teaching Semiconductor courses (MTech, BTech )
 
 ## Specialization
 
-CMOS Process Development, Device Reliability, CMOS Design, Compound Semiconductors, VLSI Testing & Packaging, Wafer Fabrication
+- CMOS Process Development
+- Device Reliability
+- CMOS Design
+- Compound Semiconductors
+- VLSI Testing & Packaging
+- Wafer Fabrication
 
 ## Publications
 
@@ -106,30 +93,32 @@ CMOS Process Development, Device Reliability, CMOS Design, Compound Semiconducto
 | 17 | SCL 180nm CMOS Foundry – High Reliability ASIC design for aerospace applications | 19th VDAT | May 2015 |
 | 18 | Design, Implementation and Performance Evaluation of LVDS Transmitter | Journal of Spacecraft Technology | July 2014 |
 
-* 21 Technical papers in “Compendium of Research work “(ISRO)
-* Accurate analysis of settling error in CDS integrator based Sigma delta modulator INDI-CON 2015
-* Simple PE CVD SIo2 OTP Memory based PUF for 180nm node for IOT: 75th Annual de-vice research conference DRC
-* Technology development of high gain BJT 180nm BiCMOSTechnology : IWPSD 2017
-* IEEE Transactions on Electron Devices page 4826, Vol 66 Nov 2018.Number 11: Transi-ent response of 0.18 um SOI MOSFETS and SRAM bit-cells to heavy-ion Irritation for variable SOI film thickness.
+### Additional Publications
 
-#### Conference Proceedings:
+- 21 Technical papers in “Compendium of Research work “(ISRO)
+- Accurate analysis of settling error in CDS integrator based Sigma delta modulator INDI-CON 2015
+- Simple PE CVD SIo2 OTP Memory based PUF for 180nm node for IOT: 75th Annual de-vice research conference DRC
+- Technology development of high gain BJT 180nm BiCMOSTechnology : IWPSD 2017
+- IEEE Transactions on Electron Devices page 4826, Vol 66 Nov 2018.Number 11: Transi-ent response of 0.18 um SOI MOSFETS and SRAM bit-cells to heavy-ion Irritation for variable SOI film thickness.
 
-* 21 TECHNICAL PAPERS IN “COMPENDIUM OF RESEARCH WORK “(ISRO)
+## Conference Proceedings
+
+- 21 TECHNICAL PAPERS IN “COMPENDIUM OF RESEARCH WORK “(ISRO)
 
 ## Teaching
 
-Have taught the following courses to MTech/PhD /Btech students at IIST Trivandrum, Manipal University Jaipur, EICT IIT Guwahati, WPU Pune, NIRMA University and MNIT Jaipur
-
-* Device Physics
-* CMOS Analog Design
-* VLSI Microfabrication
-* VLSI Digital design, including Low Power design
-* Design of Data Converters (ADCs, DAC, PGA)
-* Physical design Implementation
-* Device Modelling, characterization and Failure modes of MOS Tx
+- Have taught the following courses to MTech/PhD /Btech students at IIST Trivandrum, Manipal University Jaipur, EICT IIT Guwahati, WPU Pune, NIRMA University and MNIT Jaipur
+- Device Physics
+- CMOS Analog Design
+- VLSI Microfabrication
+- VLSI Digital design, including Low Power design
+- Design of Data Converters (ADCs, DAC, PGA)
+- Physical design Implementation
+- Device Modelling, characterization and Failure modes of MOS Tx
 
 ## Research
 
-VLSI Analog Design, CMOS Pro-cess development (SOI, Bipolar, nvm) & Integration, RadHard Technology, Compound semi-conductor – hetero-epi struc-ture growth and bandgap engg
-
-
+- VLSI Analog Design
+- CMOS Pro-cess development (SOI, Bipolar, nvm) & Integration
+- RadHard Technology
+- Compound semi-conductor – hetero-epi struc-ture growth and bandgap engg

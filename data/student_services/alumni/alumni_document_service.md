@@ -5,58 +5,74 @@ category: "Student_services"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-05-31"
 team: "Team D"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
-
-# Overview
-
-A comprehensive record of student’s academic performance throughout [his/her] tenure at DA-IICT, including grades for individual courses, cumulative CPI, and any relevant academic distinctions. This document is issued to the convocated / Graduated student only.
-
-# Main Content
 
 # DA-IICT Alumni Document Service
 
-### **The institute issues a range of academic documents to its Alumni. A few of these are outlined as follows** :
-
-#### **1\. Transcript** :
+## Overview
 
 A comprehensive record of student’s academic performance throughout [his/her] tenure at DA-IICT, including grades for individual courses, cumulative CPI, and any relevant academic distinctions. This document is issued to the convocated / Graduated student only.
 
-#### **2\. CPI to Percentage conversion certificate** :
+## DA-IICT Alumni Document Service
 
-A document which indicates formula of conversion of CPI to percentage.
+### Available Documents
 
-#### **3\. No Objection Certificate** :
+#### 1. Transcript
 
-An NOC document to join program/course in other institute details.
+A comprehensive record of student’s academic performance throughout [his/her] tenure at DA-IICT, including grades for individual courses, cumulative CPI, and any relevant academic distinctions. This document is issued to the convocated / Graduated student only.
 
-#### **4\. Other** :
+#### 2. CPI to Percentage Conversion Certificate
+
+A document which indicates the formula of conversion of CPI to percentage.
+
+#### 3. No Objection Certificate
+
+An NOC document to join a program/course in another institute.
+
+#### 4. Other
 
 Any additional documents as requested by the student for official or academic purposes.
 
-#### **Process** :
+### Process
 
-To obtain documents issued by the institute, Alumni typically need to follow a prescribed process outlined here. This process usually involves submitting a formal request through online portal. The request may require specific details such as the type of document needed, student identification information, and any additional documentation or fees if applicable. Once the request is received, the institute verifies the student's eligibility and processes the request accordingly. Upon approval, the requested document is prepared and issued to the student within a specified timeframe, adhering to the institute's policies and procedures.
+To obtain documents issued by the institute, Alumni typically need to follow a prescribed process outlined here. This process usually involves submitting a formal request through the online portal. The request may require specific details such as the type of document needed, student identification information, and any additional documentation or fees if applicable. Once the request is received, the institute verifies the student's eligibility and processes the request accordingly. Upon approval, the requested document is prepared and issued to the student within a specified timeframe, adhering to the institute's policies and procedures.
 
-#### **Understand the Application Process** :
+### Application Process
 
-  * **Fill up online Application Form** : Fill out the required application form for the specific document(s) you need.
-  * **Provide Necessary Information** : Supply any required information on the application form, such as your full name, student ID, program of study, registration number, and the specific documents you are requesting.
-  * **Pay Applicable charges** : After completing the form, you will be directed to the payment gateway where you can pay applicable fees.
-  * **Submit the Application** : Once you have completed the application form and paid any necessary fees, your application will be auto submitted to the Registrar’s Office for processing document requests. In case of any query, you will be contacted on your registered email ID and/or mobile number.
-  * **Processing** : Usually, the document will be ready in two working days for collecting in person. If you are seeking the document through courier/post, the expected time to receive the document depends on the time taken by the courier/postal department.
-  * **Receive the Documents** : Once your application has been processed, you will be notified when your documents are ready for pickup or delivery.
+#### Step 1: Fill up Online Application Form
 
-### **Alumni Document Service Webpage** \- [Click here](https://documents.daiict.ac.in/alumni/login)
+Fill out the required application form for the specific document(s) you need.
 
-#### _**In case of any difficulty / guidance**_ ,
+#### Step 2: Provide Necessary Information
 
-Please write to documents[at]dau[dot]ac[dot]in
+Supply any required information on the application form, such as your full name, student ID, program of study, registration number, and the specific documents you are requesting.
 
-**OR**
+#### Step 3: Pay Applicable Charges
+
+After completing the form, you will be directed to the payment gateway where you can pay applicable fees.
+
+#### Step 4: Submit the Application
+
+Once you have completed the application form and paid any necessary fees, your application will be auto-submitted to the Registrar’s Office for processing document requests. In case of any query, you will be contacted on your registered email ID and/or mobile number.
+
+#### Step 5: Processing
+
+Usually, the document will be ready in two working days for collecting in person. If you are seeking the document through courier/post, the expected time to receive the document depends on the time taken by the courier/postal department.
+
+#### Step 6: Receive the Documents
+
+Once your application has been processed, you will be notified when your documents are ready for pickup or delivery.
+
+### Contact Us
+
+For any difficulty or guidance, please write to documents[at]dau[dot]ac[dot]in
+
+OR
 
 Contact us on **079-68261 574**
 
-# Related Links
+### Related Links
 
 - [Click here](https://documents.daiict.ac.in/alumni/login)
-

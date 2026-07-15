@@ -21,10 +21,12 @@ this class; that hunk was intentionally NOT applied — see review notes.)
 
 import os
 import re
+from pathlib import Path
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.key_manager import KeyManager
 
-load_dotenv()
+env_path = Path(__file__).resolve().parent.parent.parent / ".env"
+load_dotenv(env_path)
 
 # ---------------------------------------------------------------------------
 # Fixed, human-reviewed contact block.
@@ -69,10 +71,10 @@ _FALLBACK_DISTRESS_PATTERNS: list[str] = [
     r"\bkill\s+my\s*self\b",
     r"\bend\s+(my\s+)?(life|it\s+all)\b",
     r"\bself[\s\-]?harm",
-    r"\bhurt\s+my\s*self\b",
+    r"\b(cut|cutting|hurt|hurting|harm|harming)\s+my\s*self\b",
     r"\bwant\s+to\s+die\b",
     r"\bno\s+reason\s+to\s+live\b",
-    r"\bcan['\u2019]?t\s+(take|go\s+on|cope)\s+anymore\b",
+    r"\bcan['\u2019]?t\s+(take(\s+it)?|go\s+on|cope)(\s+anymore)?\b",
     r"\bdon['\u2019]?t\s+want\s+to\s+(live|be\s+alive)\b",
 ]
 
@@ -123,7 +125,6 @@ class WellnessGuardrail:
     """
 
     def __init__(self) -> None:
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
         # llama-3.3-70b-versatile: fast, instruction-following, available on Groq.
         # Override via GROQ_WELLNESS_MODEL env var if needed.
         self.model = os.getenv("GROQ_WELLNESS_MODEL", "llama-3.3-70b-versatile")
@@ -156,15 +157,18 @@ class WellnessGuardrail:
     # ------------------------------------------------------------------
 
     def _llm_check(self, query: str) -> bool:
-        response = self.client.chat.completions.create(
-            model=self.model,
-            temperature=0.0,
-            max_tokens=5,
-            messages=[
-                {"role": "system", "content": _SYSTEM_PROMPT},
-                {"role": "user", "content": query},
-            ],
-        )
+        model = os.getenv("GROQ_WELLNESS_MODEL", "llama-3.3-70b-versatile")
+        def _execute(client):
+            return client.chat.completions.create(
+                model=model,
+                temperature=0.0,
+                max_tokens=5,
+                messages=[
+                    {"role": "system", "content": _SYSTEM_PROMPT},
+                    {"role": "user", "content": query},
+                ],
+            )
+        response = KeyManager.call_with_rotation(_execute, max_retries=3)
         result = response.choices[0].message.content.strip().upper()
         # Guard against the model echoing "NOT_DISTRESS" which contains "DISTRESS"
         return result == "DISTRESS"

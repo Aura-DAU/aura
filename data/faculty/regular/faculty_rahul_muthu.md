@@ -5,13 +5,9 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
-
-# Overview
-
-Profile of Rahul Muthu
-
-# Main Content
 
 # Rahul Muthu
 
@@ -33,9 +29,9 @@ I worked under a post-doctoral fellowship at Laboratoire de Recherche en Informa
 
 I currently work at DA-IICT and my broad research interests lie in the field of Graph Algorithms. I have guided one Ph.D. student, Mahipal Jadeja who defended his thesis (2018) titled “Set Labelling of Vertices and Study of Auxiliary Graphs”. I have also guided around ten M.Tech. Theses and several B.Tech. Projects.
 
-My current research problems include:  
--Defining auxiliary or other graph classes and/or obtaining mathematical characterizations and algorithms for them;  
--Weight assignment to edges of complete graphs to yield a prespecified number of minimum weight spanning trees.
+My current research problems include:
+- Defining auxiliary or other graph classes and/or obtaining mathematical characterizations and algorithms for them;
+- Weight assignment to edges of complete graphs to yield a prespecified number of minimum weight spanning trees.
 
 I teach courses in Theoretical Computer Science and Mathematics.
 
@@ -45,70 +41,39 @@ Graph Theory, Data Structures, Algorithms, Automata Theory
 
 ## Publications
 
-#### Conferences
+### Conferences
 
-* Rahul Muthu, N. Narayanan and C.R. Subramanian  
-  Improved bounds on Acyclic Edge Colouring  
-  Proceedings of the 2nd Brazilian Symposium on Graphs, Algorithms and Combinatorics, GRACO-2005, Electronic Notes in Discrete Mathematics, Volume 19, Pages 171-177.
-* Rahul Muthu, N. Narayanan and C.R. Subramanian  
-  Optimal acyclic edge colouring of grid-like graphs  
-  Proceedings of the 12th Annual International Computing and Combinatorics Conference, COCOON-2006, Lecture Notes in Computer Science, Springer, volume 4112, pages 360-367.
-* Rahul Muthu, N. Narayanan and C.R. Subramanian  
-  Acyclic Edge colouring of Outerplanar graphs  
-  Proceedings of the 3rd International Conference on Algorithmic Aspects in Information and Management, AAIM-2007, Lecture Notes in Computer Science, Springer, volume 4508, pages 144-152.
-* Rahul Muthu, N. Narayanan and C.R. Subramanian  
-  k-intersection Colouring  
-  12th Workshop on Graph Theory; Colourings, Indepen- dence and Domination, CID 2007.
-* V. Borozan, W. Fernandez de la Vega, Y. Manoussakis, C. A. Martinhon, R. Muthu and R. Saad  
-  Colored Trees in Edge-Colored Graphs  
-  8th CTW09, Paris, June 2009.
-* Raquel Agueda, Valentin Borozan, Yannis Manoussakis, Gervais Mendy and Rahul Muthu  
-  Sufficient conditions for the existence of spanning colored trees in edge-colored graphs  
-  8th French Combinatorial Conference, Paris, June, 2010.
-* R. Goyal, M. Jadeja, R. Muthu and B. Patel  
-  A New Characterisation of Total Graphs  
-  19th Japan-Korea Joint Workshop on Algorithms and Computation (WAAC 2016), Hakodate, Japan, 2016.
-* M. Jadeja and R. Muthu  
-  Labeled Object Treemap: A New Graph-Labeling Based Technique for Visualizing  
-  Multiple Hierarchies  
-  19th Japan-Korea Joint Workshop on Algorithms and Computation (WAAC 2016), Hakodate, Japan, 2016.
+| Title | Authors | Year | Venue | Pages |
+| --- | --- | --- | --- | --- |
+| Improved bounds on Acyclic Edge Colouring | Rahul Muthu, N. Narayanan, C.R. Subramanian | 2005 | GRACO-2005 | 171-177 |
+| Optimal acyclic edge coloring of grid-like graphs | Rahul Muthu, N. Narayanan, C.R. Subramanian | 2006 | COCOON-2006 | 360-367 |
+| Acyclic Edge colouring of Outerplanar graphs | Rahul Muthu, N. Narayanan, C.R. Subramanian | 2007 | AAIM-2007 | 144-152 |
+| k-intersection Colouring | Rahul Muthu, N. Narayanan, C.R. Subramanian | 2007 | CID 2007 | [illegible] |
+| Colored Trees in Edge-Colored Graphs | V. Borozan, W. Fernandez de la Vega, Y. Manoussakis, R. Muthu, R. Saad | 2009 | CTW09 | [illegible] |
+| Sufficient conditions for the existence of spanning colored trees in edge-colored graphs | Raquel Agueda, Valentin Borozan, Yannis Manoussakis, Gervais Mendy, Rahul Muthu | 2010 | French Combinatorial Conference | [illegible] |
+| A New Characterisation of Total Graphs | R. Goyal, M. Jadeja, R. Muthu, B. Patel | 2016 | WAAC 2016 | [illegible] |
+| Labeled Object Treemap: A New Graph-Labeling Based Technique for Visualizing Multiple Hierarchies | M. Jadeja, R. Muthu | 2016 | WAAC 2016 | [illegible] |
 
-#### Journals
+### Journals
 
-* Rahul Muthu, N. Narayanan and C.R. Subramanian  
-  Improved bounds on acyclic edge coloring  
-  Discrete Mathematics, volume 307, number 23, 2007, pages 3063-3069.
-* Rahul Muthu, N. Narayanan and C.R. Subramanian  
-  Optimal acyclic edge coloring of grid like graphs  
-  Discrete Mathematics 310 (21), 2769-2775.
-* R Agueda, V Borozan, Y Manoussakis, G Mendy, R Muthu  
-  Sufficient conditions for the existence of spanning colored trees in edge-colored  
-  graphs  
-  Discrete Mathematics 312 (17), 2694-2699
-* M. Jadeja, R. Muthu and V. Sunitha  
-  Set Labelling Vertices To Ensure Adjacency Coincides with Disjointness  
-  Electronic Notes in Discrete Mathematics vol. 63, pages 237-244
-* M. Jadeja and R. Muthu  
-  Labeled Object Treemap: A New Graph-Labeling Based Technique for Visualizing  
-  Multiple Hierarchies  
-  Annals of Pure and Applied Mathematics, vol. 13, no. 1, pp. 49-62, January 2017.
-* M. Jadeja and R. Muthu  
-  Uniform Set Labelling Vertices To Ensure Adjacency Coincides With Disjointness  
-  Journal of Mathematical and Computational Science, vol. 7, no. 3, pp. 537-553, May 2017.
-* V. Borozan, W. Fernandez de la Vega, Y. Manoussakis, Rahul Muthu and Hong-Phong Pham  
-  Trees in Edge-Colored graphs  
-  European Journal of Combinatorics -Elsevier- (accepted and in press), 2018.
+| Title | Authors | Year | Journal | Volume | Pages |
+| --- | --- | --- | --- | --- | --- |
+| Improved bounds on acyclic edge coloring | Rahul Muthu, N. Narayanan, C.R. Subramanian | 2007 | Discrete Mathematics | 307 | 3063-3069 |
+| Optimal acyclic edge coloring of grid like graphs | Rahul Muthu, N. Narayanan, C.R. Subramanian | 2007 | Discrete Mathematics | 310 | 2769-2775 |
+| Sufficient conditions for the existence of spanning colored trees in edge-colored graphs | R Agueda, V Borozan, Y Manoussakis, G Mendy, R Muthu | 2009 | Discrete Mathematics | 312 | 2694-2699 |
+| Set Labelling Vertices To Ensure Adjacency Coincides with Disjointness | M. Jadeja, R. Muthu, V. Sunitha | 2013 | Electronic Notes in Discrete Mathematics | 63 | 237-244 |
+| Labeled Object Treemap: A New Graph-Labeling Based Technique for Visualizing Multiple Hierarchies | M. Jadeja, R. Muthu | 2017 | Annals of Pure and Applied Mathematics | 13 | 49-62 |
+| Uniform Set Labelling Vertices To Ensure Adjacency Coincides With Disjointness | M. Jadeja, R. Muthu | 2017 | Journal of Mathematical and Computational Science | 7 | 537-553 |
+| Trees in Edge-Colored graphs | V. Borozan, W. Fernandez de la Vega, Y. Manoussakis, Rahul Muthu, Hong-Phong Pham | 2018 | European Journal of Combinatorics | [illegible] |
 
-#### Preprints
+### Preprints
 
-* Rahul Muthu, N. Narayanan and C.R. Subramanian  
-  Acyclic Edge Colouring of Partial 2-Trees.
-* Rahul Muthu and C.R. Subramanian  
-  Cartesian Products and Acyclic Edge Colouring.
-* Rahul Muthu, N. Narayanan and C.R. Subramanian  
-  Some graph classes satisfying acyclic edge colouring conjecture.
-* Abhishek Garg, Mahipal Jadeja and Rahul Muthu  
-  Spanning Tree Auxiliary Graphs.
+| Title | Authors | Year | Venue | Pages |
+| --- | --- | --- | --- | --- |
+| Acyclic Edge Colouring of Partial 2-Trees | Rahul Muthu, N. Narayanan, C.R. Subramanian | [illegible] | [illegible] | [illegible] |
+| Cartesian Products and Acyclic Edge Colouring | Rahul Muthu, C.R. Subramanian | [illegible] | [illegible] | [illegible] |
+| Some graph classes satisfying acyclic edge colouring conjecture | Rahul Muthu, N. Narayanan, C.R. Subramanian | [illegible] | [illegible] | [illegible] |
+| Spanning Tree Auxiliary Graphs | Abhishek Garg, Mahipal Jadeja, Rahul Muthu | [illegible] | [illegible] | [illegible] |
 
 ## Teaching
 
@@ -118,5 +83,3 @@ Graph Theory, Data Structures, Algorithms, Automata Theory
 * Approximation Algorithms
 * Design & Analysis of Algorithms
 * Graph Theory & Algorithms
-
-

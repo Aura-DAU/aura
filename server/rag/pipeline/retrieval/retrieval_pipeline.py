@@ -1001,9 +1001,28 @@ class RetrievalPipeline:
             normalize_embeddings=True,
             convert_to_numpy=True
         )
+        # NOTE: Gated by DEBUG=true and cross-referenced with retriever.py:78.
         semantic_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
-        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
-            semantic_filter = None
+        is_debug = os.getenv("DEBUG", "false").lower() == "true"
+        disable_dls = os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true"
+        if disable_dls:
+            if is_debug:
+                logger.critical(
+                    "\n" + "="*80 + "\n"
+                    "CRITICAL WARNING: DISABLE_PINECONE_DLS_FILTER IS SET TO TRUE!\n"
+                    "DOCUMENT-LEVEL SECURITY (DLS) IS DISABLED FOR ALL SEMANTIC SEARCH REQUESTS!\n"
+                    "This is only allowed because DEBUG=true is also set.\n"
+                    "Do NOT deploy this configuration in a production environment.\n"
+                    + "="*80 + "\n"
+                )
+                semantic_filter = None
+            else:
+                logger.error(
+                    "\n" + "="*80 + "\n"
+                    "SECURITY GATE ACTIVE: DISABLE_PINECONE_DLS_FILTER is set to true but DEBUG is false.\n"
+                    "DLS filter remains ENABLED. To disable DLS, you must also set DEBUG=true.\n"
+                    + "="*80 + "\n"
+                )
 
         results = self.retriever.index.query(
             vector=query_embedding[0].tolist(),

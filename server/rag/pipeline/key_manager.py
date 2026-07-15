@@ -12,12 +12,26 @@ class KeyManager:
     _initialized = False
     _lock = threading.Lock()
     
+    _last_mtime = 0.0
+
     @classmethod
     def _initialize_keys(cls):
         with cls._lock:
-            if cls._initialized:
+            from pathlib import Path
+            env_path = Path(__file__).resolve().parent.parent / ".env"
+            
+            mtime = 0.0
+            if env_path.exists():
+                mtime = env_path.stat().st_mtime
+                
+            if cls._initialized and mtime == cls._last_mtime:
                 return
-            load_dotenv()
+                
+            # Override existing environment variables with the newly loaded ones
+            load_dotenv(env_path, override=True)
+            
+            # Reset keys list
+            cls._keys = []
             
             # Load primary key
             primary = os.getenv("GROQ_API_KEY")
@@ -34,7 +48,9 @@ class KeyManager:
                 idx += 1
                 
             cls._initialized = True
-            print(f"[KeyManager] Initialized with {len(cls._keys)} keys.")
+            cls._last_mtime = mtime
+            cls._current_idx = 0
+            print(f"[KeyManager] Initialized/Reloaded with {len(cls._keys)} keys. (mtime: {mtime})")
 
     @classmethod
     def get_current_key(cls):

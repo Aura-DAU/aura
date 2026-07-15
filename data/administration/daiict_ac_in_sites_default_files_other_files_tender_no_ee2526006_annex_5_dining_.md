@@ -5,8 +5,10 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: PDF
+source_type: "PDF"
 pdf_name: "Tenders/EE2526006 drawing pdf"
+last_fixed: "2026-07-04"
+fixes_applied: ['SCANNED_PDF']
 ---
 
 # Tenders/EE2526006 drawing pdf
@@ -17,4 +19,6 @@ This document is a PDF resource from DA-IICT / DAU. Content below has been extra
 
 ## Main Content
 
-Annexure 5 : Drawing
+### Annexure 5: Drawing
+
+No additional content was extracted from the provided PDF.

@@ -5,25 +5,23 @@ category: "Faculty"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
-
-# Overview
-
-Profile of Pratim Roy
-
-# Main Content
 
 # Pratim Roy
 
 ## Education
 
-PhD (Physics),  IIT Kanpur
+PhD (Physics), IIT Kanpur
 
 ## Contact Information
 
-- Phone: 079-68261627
-- Email: pratim_roy@dau.ac.in
-- Address: # 4211, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007
+| Col | Col |
+| --- | --- |
+| Phone | 079-68261627 |
+| Email | pratim_roy@dau.ac.in |
+| Address | # 4211, FB-4, DA-IICT, Gandhinagar, Gujarat, India – 382007 |
 
 ## Biography
 
@@ -31,63 +29,29 @@ Pratim Roy is an Assistant Professor at DA-IICT, Gandhinagar. He received a PhD 
 
 ## Specialization
 
-Theoretical Physics, ADS/CFT Duality, Quantum Field Theory
+### Theoretical Physics
+### ADS/CFT Duality
+### Quantum Field Theory
 
 ## Publications
 
-#### Publications:
+### Publications
 
-A list of publications may be found at: **<https://scholar.google.com/citations?user=5wFSBgYAAAAJ&hl=en&oi=sra>**
+A list of publications may be found at: <https://scholar.google.com/citations?user=5wFSBgYAAAAJ&hl=en&oi=sra>
 
-#### Journal Articles:
+### Journal Articles
 
-* KUNAL PAL, KUNTAL PAL, PRATIM ROY, TAPOBRATA SARKAR  
-  REGULARISING THE JNW AND JMN NAKED SINGULARITIES,  
-  ARXIV:2206.11764 [GR-QC],  
-  (EUR.PHYS.J.C 83 (2023) 5, 397)
-* PRATIM ROY  
-  ASPECTS OF ENTANGLEMENT IN NON-LOCAL FIELD THEORIES WITH FRACTIONAL LAPLACIAN,  
-  ARXIV: 2112.13641 [QUANT-PH]  
-  (JHEP 06 (2022)101)
-* ROBERTO AUZZI, STEFANO BAIGUERA, ANDREA LEGRAMANDI, GIUSEPPE NARDELLI, PRATIM ROY, NICOLÒ ZENONI  
-  ON SUBREGION ACTION COMPLEXITY IN ADS3 AND IN THE BTZ BLACK HOLE,  
-  ARXIV:1910.00526 [HEP-TH],  
-  JHEP 01 (2020) 066
-* SUBHASH MAHAPATRA AND PRATIM ROY,  
-  ON THE TIME DEPENDENCE OF HOLOGRAPHIC COMPLEXITY IN A DYNAMICAL EINSTEIN-DILATON MODEL,  
-  ARXIV:1808.09917 [HEP-TH],  
-  (JHEP 11 (2018) 138)
-* PRATIM ROY AND TAPOBRATA SARKAR,  
-  SUBREGION HOLOGRAPHIC COMPLEXITY AND RENORMALIZATION GROUP FLOWS,  
-  ARXIV:1701.05489 [HEP-TH],  
-  (PHYS.REV. D97 (2018) NO.8, 086018)
-* PRATIM ROY AND TAPOBRATA SARKAR,  
-  A NOTE ON SUBREGION HOLOGRAPHIC COMPLEXITY ,  
-  ARXIV:1701.05489 [HEP-TH],  
-  (PHYS.REV. D96 (2017) NO.2, 026022)
-* ANSHUMAN DEY, PRATIM ROY AND TAPOBRATA SARKAR,  
-  ON HOLOGRAPHIC RÉNYI ENTROPY IN SOME MODIFIED THEORIES OF GRAVITY ,  
-  ARXIV:1609.02290 [HEP-TH],  
-  (JHEP 1804 (2018) 098)
-* REEVU MAITY, PRATIM ROY AND TAPOBRATA SARKAR,  
-  BLACK HOLE PHASE TRANSITIONS AND THE CHEMICAL POTENTIAL,  
-  ARXIV:1512.05541 [HEP-TH],  
-  PHYS.LETT. B765 (2017) 386-394
-* AKASH GOEL, REEVU MAITY, PRATIM ROY AND TAPOBRATA SARKAR,  
-  TIDAL FORCES IN NAKED SINGULARITY BACKGROUNDS,  
-  ARXIV:1504.01302 [GR-QC],  
-  PHYS.REV. D91 (2015) 104029
-* ANSHUMAN DEY, SUBHASH MAHAPATRA, PRATIM ROY AND TAPOBRATA SARKAR,  
-  INFORMATION GEOMETRY AND QUANTUM PHASE TRANSITIONS IN THE DICKE MODEL,  
-  ARXIV:1208.4710 [COND-MAT.STAT-MECH],  
-  PHYS.REV. E86 (2012) 031137
-* ANSHUMAN DEY, PRATIM ROY AND TAPOBRATA SARKAR,  
-  INFORMATION GEOMETRY, PHASE TRANSITIONS, AND WIDOM LINES : MAGNETIC AND LIQUID SYSTEMS,  
-  ARXIV:1111.6721 [COND-MAT.STAT-MECH],  
-  PHYSICA A392 (2013) 6341-6352
-* PRATIM ROY, TARUN KANTI GHOSH AND KAUSHIK BHATTACHARYA,  
-  LOCALIZATION OF DIRAC-LIKE EXCITATIONS IN GRAPHENE IN THE PRESENCE OF SMOOTH INHOMOGENEOUS MAGNETIC FIELDS ,  
-  ARXIV:1108.1907 [COND-MAT.MES-HALL],  
-  J.PHYS.CONDENS.MATTER 24 (2012) 055301
-
-
+| Title | Authors | Year | Journal | DOI |
+| --- | --- | --- | --- | --- |
+| Regularising the JNW and JMN naked singularities | Kunal Pal, Kuntal Pal, Pratim Roy, Tapobrata Sarkar | 2023 | Eur. Phys. J. C | 83 (2023) 5, 397 |
+| Aspects of entanglement in non-local field theories with fractional Laplacian | Pratim Roy | 2022 | JHEP | 06 (2022) 101 |
+| On subregion action complexity in AdS3 and in the BTZ black hole | Roberto Auzzi, Stefano Baiguera, Andrea Legramandi, Giuseppe Nardelli, Pratim Roy, Nicolò Zenoni | 2020 | JHEP | 01 (2020) 066 |
+| On the time dependence of holographic complexity in a dynamical Einstein-dilaton model | Subhash Mahapatra and Pratim Roy | 2018 | JHEP | 11 (2018) 138 |
+| Subregion holographic complexity and renormalization group flows | Pratim Roy and Tapobrata Sarkar | 2018 | Phys. Rev. D | 97 (2018) 086018 |
+| A note on subregion holographic complexity | Pratim Roy and Tapobrata Sarkar | 2017 | Phys. Rev. D | 96 (2017) 026022 |
+| On holographic Rényi entropy in some modified theories of gravity | Anshuman Dey, Pratim Roy, and Tapobrata Sarkar | 2018 | JHEP | 1804 (2018) 098 |
+| Black hole phase transitions and the chemical potential | Reevu Maity, Pratim Roy, and Tapobrata Sarkar | 2017 | Phys. Lett. B | 765 (2017) 386-394 |
+| Tidal forces in naked singularity backgrounds | Akash Goel, Reevu Maity, Pratim Roy, and Tapobrata Sarkar | 2015 | Phys. Rev. D | 91 (2015) 104029 |
+| Information geometry and quantum phase transitions in the Dicke model | Anshuman Dey, Subhash Mahapatra, Pratim Roy, and Tapobrata Sarkar | 2012 | Phys. Rev. E | 86 (2012) 031137 |
+| Information geometry, phase transitions, and Widom lines: magnetic and liquid systems | Anshuman Dey, Pratim Roy, and Tapobrata Sarkar | 2013 | Physica A | 392 (2013) 6341-6352 |
+| Localization of Dirac-like excitations in graphene in the presence of smooth inhomogeneous magnetic fields | Pratim Roy, Tarun Kanti Ghosh, and Kaushik Bhattacharya | 2012 | J. Phys.: Condens. Matter | 24 (2012) 055301 |

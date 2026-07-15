@@ -1,11 +1,12 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.key_manager import KeyManager
 
 class QueryGuardrail:
     def __init__(self):
-        load_dotenv()
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        env_path = Path(__file__).resolve().parent.parent.parent / ".env"
+        load_dotenv(env_path)
         self.model = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
         
         self.system_prompt = """
@@ -78,15 +79,18 @@ UNSAFE
 """
 
     def _classify(self, query: str) -> bool:
-        response = self.client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": self.system_prompt.strip()},
-                {"role": "user", "content": f"Query to evaluate:\n{query}"},
-            ],
-            model=self.model,
-            max_tokens=10,
-            temperature=0.0,
-        )
+        model = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+        def _execute(client):
+            return client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": self.system_prompt.strip()},
+                    {"role": "user", "content": f"Query to evaluate:\n{query}"},
+                ],
+                model=model,
+                max_tokens=10,
+                temperature=0.0,
+            )
+        response = KeyManager.call_with_rotation(_execute, max_retries=3)
         result = response.choices[0].message.content.strip().upper()
 
         if os.getenv("DEBUG", "false").lower() == "true":

@@ -5,34 +5,42 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: PDF
+source_type: "PDF"
 pdf_name: "Admissions / Ph.D. Admissions/ Visvesvaraya Ph.D. Scheme/ Selection Process / No objection Certificate"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
 
-# Admissions / Ph.D. Admissions/ Visvesvaraya Ph.D. Scheme/ Selection Process / No objection Certificate
+# No Objection Certificate for Visvesvaraya Ph.D. Fellowship
 
 ## Overview
 
-This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+The following is a no objection certificate from the head of an organization for a candidate applying to the PhD program under the Visvesvaraya Ph.D. Scheme at DA-IICT Gandhinagar.
 
-## Main Content
+## Eligibility
 
-# Visvesvaraya Ph.D. Scheme - No Objection Certificate
+### Experience and Permission
 
-**Annexure-I**
+The applicant has ______ years of experience in this organization. The applicant will be given permission to attend the required class for completing course work.
 
-## NO OBJECTION CERTIFICATE FROM THE HEAD OF THE ORGANISATION
-*(For Applying to the PhD Program (Part-time) Category at DA-IICT Gandhinagar under Visvesvaraya Ph.D. Scheme)*
+### Research Work
 
-The application of **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_** working as **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_** in **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_** since **\_\_\_\_\_\_\_\_** is herewith recommended and forwarded to pursue PhD program under External Part-time enrolment category of Autumn (July) / Winter (January) semester at DA-IICT.
+No part of the research work carried out in fulfilment of the candidate’s PhD requirement will be utilized commercially or for applying for a Patent without the approval of DA-IICT.
 
-1. The applicant has **\_\_\_\_\_\_** years of experience in this organization.
-2. The applicant will be given permission to attend the required class for completing course work.
-3. No part of the research work carried out in fulfilment of the candidate’s PhD requirement will be utilized commercially or for applying for a Patent without the approval of DA-IICT.
+## No Objection Certificate
 
-**Date**: \_\_\_\_\_\_\_\_\_\_\_  
-**Place**: \_\_\_\_\_\_\_\_\_\_\_  
+The application of _____________________________________ working as ______________________________________________ in ________________ _____________________________________________ since ________ is herewith recommended and forwarded to pursue PhD program under External Part-time enrolment category of Autumn (July) / Winter (January) semester at DA-IICT.
 
-*Signature of the Head of Organization*  
-*Name, address, and seal of the organization*
+### Details of the Applicant
 
+- Name: _____________________________________
+- Designation: ______________________________________________
+- Organization: ________________
+- Date of Joining: ________
+
+### Certification
+
+Date: _____________________________________
+Signature of the head: _____________________________________
+Place: _____________________________________
+Name, address, and seal of the organization: _____________________________________

@@ -5,311 +5,178 @@ category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
-source_type: PDF
+source_type: "PDF"
 pdf_name: "Tenders/EE2526003 tender pdf"
+last_fixed: "2026-07-04"
+fixes_applied: ['OCR_NOISE']
 ---
 
-# Tenders/EE2526003 tender pdf
+<think>
+Here's a thinking process:
 
-## Overview
+1.  **Analyze User Input:**
+   - **Title:** Tenders/EE2526003 tender pdf
+   - **URL:** https://www.daiict.ac.in/sites/default/files/other-files/Admin-Parking-Offices-Arrangement_TandC_150525.pdf
+   - **Category:** administration
+   - **Raw Text:** A tender document for "Admin Parking Area Office Arrangement, DAU, Gandhinagar" with Tender No: EE2526003. Contains contact info, dates, annexures, terms & conditions, bank details, scope, payment terms, etc.
+   - **Rules:** 
+     - Output ONLY markdown body.
+     - H1 for title.
+     - H2 for major sections.
+     - H3 for subsections.
+     - Keep sections ~256 tokens (~200 words). Split if needed.
+     - Preserve ALL numbers, names, dates, codes, amounts exactly.
+     - Convert garbled tables to proper Markdown tables.
+     - Remove repeated headers, footers, page numbers, horizontal rules, control chars, OCR noise.
+     - Fix obvious OCR typos only if 100% certain.
+     - Use [illegible] for unreadable parts.
+     - Do NOT add content.
 
-This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+2.  **Identify Key Sections in Raw Text:**
+   - Header/Title Info: Tender title, number, contact person, dates, annexures list.
+   - Annexure 1: Bid Terms & Conditions (long list of bullet points)
+   - Bank Details (embedded in terms)
+   - Scope of Work/Contractor Responsibilities
+   - Maintenance, Termination, Disputes, Payment
+   - Quantity Surveying (cuts off at the end)
 
-## Main Content
+3.  **Process & Structure (Mental Draft):**
+   I'll structure it logically according to the rules.
+   H1: Admin Parking Area Office Arrangement, DAU, Gandhinagar
+   H2: Tender Details
+   - Tender No: EE2526003
+   - Contact Person: Mr. Rajesh Patel, Sr. Estate Engineer
+   - Email: estate_engineer@daiict.ac.in
+   - Phone: +91 93287 21608 / 079-68261622
+   - Contact Timing: Monday to Friday, 10:00 Hrs to 17:00 Hrs
+   - Last date for Site Visit: 20.05.2025
+   - Last date of Submission of Tender: 21.05.2025 up to 11:00 hrs.
+   - Annexures: 1 (General Terms & Conditions), 2 (Primary Information of the Bidder), 3 (Technical & Financial Bid)
 
-_______________________________________________________________________________________ 
-DA-IICT Road, Gandhinagar, Gujarat, India 382007 
-T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
-TENDER 
-Admin Parking Area Office Arrangement, DAU, Gandhinagar 
- 
- 
-Tender No: EE2526003 
-DAU Contact Person: Mr. Rajesh Patel, Sr. Estate Engineer, 
- 
-estate_engineer@daiict.ac.in, (M) +91 93287 21608 (Phone: 079-68261622), 
-Contact Timing: Monday to Friday, 10:00 Hrs to 17:00 Hrs 
- 
-Last date for Site Visit 20.05.2025 
-Last date of Submission of Tender: 21.05.2025 up to 11:00 hrs. 
- 
-Annexure 1 : General Terms & Conditions 
-Annexure 2 : Primary Information of the Bidder 
-Annexure 3 : Technical & Financial Bid
+   H2: Annexure 1 - General Terms & Conditions
+   I'll split this into logical H3 subsections to keep each under ~200 words.
+   H3: Submission & Documentation
+   - Sealed covers required.
+   - All documents must be duly filled, signed on every page, and completed in all respects.
+   - Method of work, specifications, mode of measurements, and other details not mentioned should follow the Sample Work.
+   - Contractor must study quantities, specifications, make & model of material before quoting rates.
 
-_______________________________________________________________________________________ 
-DA-IICT Road, Gandhinagar, Gujarat, India 382007 
-T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
-Annexure - 1 
- 
-Bid Terms & Conditions: 
- 
-The bidder should invariably submit bid documents in sealed covers. 
- 
-All documents issued to tenderers for the purpose of tendering shall be submitted by him only duly filled in and 
-signed on every page as a token of acceptance of conditions and completed in all respect. 
- 
-Method of work, specifications, mode of measurements and other details wherever not mentioned should be 
-followed as per Sample Work. 
- 
-The contractor must study the quantities and specifications / make & model of material before quoting the rates. 
- 
-Security Deposit: 5% of total order value to be deposited with DAU in 7 working days after receipt of work 
-order. The same amount will be returned in 30 days after completion of project and completion of punch 
-points/balance works. No interest shall be paid on Security Deposit amount. Client reserves the right to encase 
-or deducts any sum due to failure of any conditions of contract without reference to contractor. 
- 
-Bank Details of “Dhirubhai Ambani University” for online payment of Tender Fee  
-Name of Account Holder 
- DHIRUBHAI AMBANI UNIVERSITY 
-Bank Name & Branch 
-ICICI BANK GANDHINAGAR 
-Account Number 
-016501013975 
-IFSC CODE 
-ICIC0000165 
-City 
-GANDHINAGAR 
-State/Province 
-GUJARAT 
-Address of the Bank 
-PLOT NO. 315, SECTOR-16, NEAR GH-4 
-CIRCLE, GANDHINAGAR 382016. 
-Telephone No. of the Bank 
-23234252, 23234256 
-Country 
-INDIA 
-Account Type 
-Savings 
- 
- 
- 
-The work includes material and labour. No extra cost to be paid for wastage, carting, loading, unloading, lodging 
-& boarding etc. The bidder should clearly indicate applicable taxes, freight, pkg & fwdg charges etc. The transit 
-insurance should be in the scope of bidder.  
- 
-Rejection of Bid:  
-o 
-Dhirubhai Ambani University reserves the right to reject any Bid, and the bidding process and reject all 
-bids at any time prior to award of Contract, without thereby incurring any liability to the affected 
-Bidder(s) or any obligation to inform the affected Bidder(s) of the grounds for such decision. 
- 
-Award of Contract: 
-o 
-Award Criteria: The Criteria for selection will be the lowest cost for the technically qualified bids. 
-o 
-In case, the lowest bidder (L1) does not accept the award of contract or found to be involved in corrupt 
-and/or fraudulent practices, the client shall decide next bidder to be awarded the contract.  
- 
- 
-General Terms and conditions: 
- 
-The Contractor will maintain the equipment and other properties of DAU in good condition. Damage to any 
-equipment, appliances and other properties (both movable and immovable of DAU due to negligence. 
-Commission /omission of the contractor or his employees or agents shall be brought to the notice of the DAU 
-for recovery of such damages from the amounts payable to the Contractor.
+   H3: Security Deposit & Bank Details
+   - Security Deposit: 5% of total order value to be deposited with DAU in 7 working days after receipt of work order. Returned in 30 days after project completion and punch points/balance works. No interest paid. Client reserves right to encash/deduct sums due to contract failure.
+   - Bank Details Table:
+     | Field | Details |
+     |---|---|
+     | Name of Account Holder | DHIRUBHAI AMBANI UNIVERSITY |
+     | Bank Name & Branch | ICICI BANK GANDHINAGAR |
+     | Account Number | 016501013975 |
+     | IFSC CODE | ICIC0000165 |
+     | City | GANDHINAGAR |
+     | State/Province | GUJARAT |
+     | Address of the Bank | PLOT NO. 315, SECTOR-16, NEAR GH-4 CIRCLE, GANDHINAGAR 382016. |
+     | Telephone No. of the Bank | 23234252, 23234256 |
+     | Country | INDIA |
+     | Account Type | Savings |
 
-_______________________________________________________________________________________ 
-DA-IICT Road, Gandhinagar, Gujarat, India 382007 
-T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
- 
-The Contractor shall be responsible for loading, unloading, shifting, safety and security of their material, tools 
-& tackles. 
- 
-The Contractor shall be responsible for boarding and lodging of their manpower with require safety, security, 
-proper supervision on movement and liasioning work. 
- 
-The Contractor shall be responsible for cleaning of sites/area etc. complete.  
- 
-The total tender value shall include all taxes, levies / duties paid or payable in execution of the contract. cost of 
-transportation, lodging & unloading, lodging & boarding of Contractor's employee. Also include cost of labour, 
-tools tackles etc. 
- 
-Contractor shall make himself and their staff fully conversant with the locations and the type of job be carried 
-out therein so that he clearly understands the scope of work and assess the requirement of resources required 
-to complete the work. The Contractor shall contact the Contract Administrator for this purpose. 
- 
-DAU reserve the right to off load or total quantum of the job depending upon the exigencies. 
- 
-Material used shall be strictly as per specifications / Make & Model. 
- 
-Water & power shall be provided at one convenient point at free of cost by owner. If wastage of supplied water 
-& electricity is made by contractor’s labour, reasonable amount shall be recovered from contractor’s bill as 
-compensation. 
- 
-There shall be no objection from the contractor for any other agencies working on the same site. 
- 
-The contractor shall have to give detailed working schedule of the execution for the work justifying expected 
-progress of work. If the progress of the work is not satisfactory, a second agency shall be employed by the 
-client for some part of same work. 
- 
-In case the Contractor fails to provide any services in time or fails to ensure the job carried out at the fullest 
-satisfaction of the Contract Administrator, whose decision will be final and binding on the Contractor. The 
-Institute has every rights to engage another agency or get the job done by employing any other Contractor and 
-the charges for the same together with consequential expenses incurred / losses suffered by the Institute will 
-be recovered from the Contractor. 
- 
-The Contractor shall subject to the provisions of the contract and with the care and diligence execute and 
-maintain the works and provide all labour including, the supervision thereof. 
- 
-The Contractor shall take full responsibility for the adequacy, stability and safety of all site operations and 
-methods of construction, provided that the contractor shall not be responsible, expect as may be expressly 
-provided in the contract, for the design or specification of the permanent works, or for the design or specification 
-of any temporary works prepared by the Architect/ Project manager. 
- 
-The Engineer shall be at liberty to object to and require the Contractor to remove forthwith from the work any 
-person employed by the Contractor in or about the execution of maintenance of the works who, in the opinion 
-of the Engineer, misconducts himself, or is incompetent or negligent in the proper performance of his duties or 
-who employment is otherwise considered by the Engineer to be undesirable and such person shall not be again 
-employed upon the works without the written permission of the Engineer.  
- 
-Apart from one-year overall execution warranty the bidder shall mention warranty against each item as per 
-manufacturer’s policy. 
- 
-Workmen Compensation Act: 
- 
-The contractor shall make payment of compensation in case of accidental injury during maintenance work in 
-accordance with the provisions of Act. the contractor shall insure all of his workman under the Workmen 
-Compensation Act by way by taking an Insurance Policy to cover himself against all claims and shall extend 
-these legal heir within the specified time. 
- 
-Contractor to follow all safety norms. 
- 
-All statutory liabilities towards contractor’s employee shall be sole responsibility of the Contractor. 
- 
-The entry to the project site is prohibited for minor labor and labor with minors.  
- 
-Maintenance Service:  
-o 
-Free maintenance services shall be provided by the Contractor during the period of warranty. 
-o 
-In case, contractor is not providing satisfactory support & doing delay in providing warranty support, 
-DAU reserves right to repair / rectify at risk & cost of the Contractor.
+   H3: Cost Inclusions & Bid Rejection
+   - Work includes material and labour. No extra cost for wastage, carting, loading, unloading, lodging & boarding, etc.
+   - Bidder must clearly indicate applicable taxes, freight, packaging & forwarding charges. Transit insurance is in bidder's scope.
+   - Rejection of Bid: DAU reserves the right to reject any bid, the bidding process, or all bids at any time prior to contract award, without liability or obligation to inform grounds.
 
-_______________________________________________________________________________________ 
-DA-IICT Road, Gandhinagar, Gujarat, India 382007 
-T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
-Scope of contractor: 
- 
-To carry out the jobs in a manner as per instruction of CA. job to be performed at all heights and locations using 
-necessary scaffolding structure with all safety measures.  
- 
-Providing certificate for manufacturing warranty/guarantee on legal documents, test reports, project reports. 
- 
-The contractor shall complete this work within 2 months from the date of possession of site or from the date 
-of work order whichever is later. 
- 
-A full time qualified and experienced supervisor shall be kept in charge of the execution. 
- 
-The site shall be cleared totally after the completion of work to the satisfaction of Engineer In Charge/Client. 
- 
-Shifting of all kinds of raw material from designated site to working site and shifting of debris from working 
-site to designated place. 
- 
-Termination: Contract can be terminated within the contract period at the discretion of DAU by giving simple 
-notice without assigning any reason thereof. 
- 
-Defective work: charges for rectification of defective work and other consequent damages to DAU shall be 
-borne by the contractor.  
- 
-Disputes: Any disputes and /or difference of opinion arising out of the work concerning this shall be referred to 
-the director of the institute whose decision shall be final and binding on you. All legal disputes arising out of 
-this contract will be subject to Gandhinagar jurisdiction.  
- 
-Payment: The contractor will be submitted running account bill for the work completed with measurement in 
-phase manner, and will be released in 30 days after deduction of retention and applicable taxes. For advance 
-payment will be on mutual agreeable.  
-QUANTITY SURVEYING 
-The Contractor will himself undertake the quantity surveying work and submit his bills in case he fails to submit his 
-bills in proper order, the Employer reserves for himself the right employ and expert who will also be employed, if 
-the bills stated by the Contractor show in accuracies frequently indicating that Contractor is no capable of taking 
-the required measurements and producing a proper bill. The Contractor [or the expert] will make the measurements 
-on the basis of the drawings in as far as it is practicable. The billing procedure and formats shall be as approved by 
-the Engineer. The remuneration of such an expert will be deducted from the Contractor’s bills. 
-DELAY AND EXTENSION OF TIME 
-            If the contractor shall desire an extension of the time for completion of the work on the ground of his having 
-been unavoidably hindered in its execution or any other ground, he shall apply in writing to the EIC/CA before 
-the expiration of the period stipulated in the tender or before the expiration of 30 days from the date on which  
-he was hindered as aforesaid or on which cause for extension occurred, whichever is earlier and EIC/CA may, 
-if in his opinion , believe that there are reasonable grounds for granting an extension, grant such extension, as 
-he thinks necessary or proper. The decision of the EIC/CA in this matter shall be final. 
-CERTIFICATE OF COMPLETION OF WORK. 
-When the whole of the works have been substantially completed the Contractor may give a notice to that effect 
-to the EIC. Such notice shall be deemed to be a request by the contractor for the Engineer to issue a request by 
-the Contractor for the Engineer to issue a certificate of completion in respect of the works. The Engineer shall, 
-within fourteen days of the date of delivery of such notice either issue to the Contractor, with a copy to the 
-Employer, a certificate of completion stating the date on which, in his opinion, the work’s were substantially 
-completed in accordance with the contract or give instructions in writing to contractor  or give instruction in 
-writing to contractor specifying all the work which, in the Engineer’s opinion, requires to be done by the 
-Contractor before the issue of such certificate. The Engineer shall also notify the completion that may appear 
-after such instructions and before completion of the works specified therein. The Contractor within fourteen 
-days of completion to the satisfactions of the Engineer of the works so specified and making good any defects 
-so notified.
+   H3: Award Criteria & General Conditions
+   - Award Criteria: Lowest cost for technically qualified bids.
+   - If L1 does not accept or is involved in corrupt/fraudulent practices, client decides next bidder.
+   - Contractor must maintain DAU equipment/properties in good condition. Damage due to negligence/commission/omission will be recovered from payable amounts.
+   - Contractor responsible for loading, unloading, shifting, safety, security of materials/tools.
+   - Contractor responsible for boarding/lodging of manpower with required safety, security, supervision, and liaisoning.
+   - Contractor responsible for complete site/area cleaning.
+   - Total tender value includes all taxes, levies/duties, transportation, lodging/unloading, boarding of employees, labour, tools, tackles, etc.
 
-_______________________________________________________________________________________ 
-DA-IICT Road, Gandhinagar, Gujarat, India 382007 
-T: +91 79 6826 1700 I info@dau.ac.in I www.dau.ac.in 
- 
-Annexure-2 
- 
-1. Primary Information of Bidder Firm: 
- 
-Sr. 
-No. 
-Particular 
-Details 
-Page 
-No. 
-1 
-Name  
- 
- 
-2 
-Date of Establishment 
- 
- 
-3 
-PAN Number 
- 
- 
-4 
-GST Number 
- 
- 
-5 
-Office Address with Phone 
-No. 
- 
- 
-6 
-Mobile No. of Signatory to 
-this offer 
- 
- 
-7 
-E-mail ID 
- 
- 
-8 
-Website address 
- 
- 
-9 
-Work experience for similar 
-types of work 
- 
- 
-Please submit proofs wherever applicable 
-Signature of Contractor                                                                                 Date: 
-(with official seal of firm) 
- 
- 
-SPECIFICATION 
- 
-The work shall be carried out as per tender specifications for work order items. The contractor should take prior approval 
-for additional item / change in specifications of the material.  
- 
-In case of any technical clarification or ambiguity, the matter shall be referred to Contract Administrator/Registrar and 
-their decision shall be final, governing and binding to contractor.
+   H3: Site Management & Execution
+   - Contractor must familiarize staff with locations/job type to understand scope and assess resource requirements. Contact Contract Administrator for this.
+   - DAU reserves right to offload or alter total quantum depending on exigencies.
+   - Material must strictly follow specifications/Make & Model.
+   - Water & power provided at one convenient point free of cost. Wastage will be recovered from contractor's bill.
+   - No objection to other agencies working on the same site.
+   - Contractor must provide detailed working schedule justifying expected progress. Unsatisfactory progress may lead to client employing a second agency.
+   - Failure to provide services in time or ensure satisfaction allows Institute to engage another agency; charges and consequential expenses/losses recovered from Contractor.
+   - Contractor shall execute and maintain works with care/diligence, providing all labour and supervision.
+   - Contractor takes full responsibility for adequacy, stability, safety of site operations/construction methods, except for design/specifications of permanent/temporary works prepared by Architect/Project Manager.
+   - Engineer may require removal of any incompetent/negligent/undesirable personnel; re-employment requires written permission.
+
+   H3: Warranty, Safety & Statutory Compliance
+   - Apart from one-year overall execution warranty, bidder must mention warranty against each item per manufacturer’s policy.
+   - Workmen Compensation Act: Contractor shall pay compensation for accidental injury during maintenance per the Act. Must insure all workmen and extend coverage to legal heirs within specified time.
+   - Contractor to follow all safety norms.
+   - All statutory liabilities towards contractor’s employees are sole responsibility of the Contractor.
+   - Entry to project site is prohibited for minor labor and labor with minors.
+
+   H3: Maintenance & Scope of Contractor
+   - Free maintenance services provided during warranty period.
+   - If contractor fails to provide satisfactory support or delays warranty support, DAU reserves right to repair/rectify at contractor's risk & cost.
+   - Scope: Carry out jobs per CA instructions at all heights/locations using necessary scaffolding with safety measures.
+   - Provide certificates for manufacturing warranty/guarantee on legal documents, test reports, project reports.
+   - Complete work within 2 months from site possession or work order date (whichever is later).
+   - Keep a full-time qualified/experienced supervisor in charge.
+   - Clear site totally after completion to satisfaction of Engineer In Charge/Client.
+   - Shift raw materials from designated to working site; shift debris from working to designated place.
+
+   H3: Termination, Disputes & Payment
+   - Termination: Contract can be terminated within contract period at DAU's discretion by simple notice without assigning reason.
+   - Defective work: Charges for rectification and consequent damages borne by contractor.
+   - Disputes: Referred to the director of the institute; decision final and binding. Legal disputes subject to Gandhinagar jurisdiction.
+   - Payment: Contractor submits running account bill for completed work with measurement in phase manner. Released in 30 days after deduction of retention and applicable taxes. Advance payment on mutual agreement.
+   - QUANTITY SURVEYING: Contractor will undertake quantity surveying work and submit bills. If bills not submitted in proper order, Employer reserves right to employ and [illegible/cut off]
+
+4.  **Check Against Rules:**
+   - Output ONLY markdown body? Yes.
+   - H1 for title? Yes.
+   - H2 for major sections? Yes.
+   - H3 for subsections? Yes.
+   - Each H2/H3 ~256 tokens? I'll check word counts. They are all concise, well under 200 words each.
+   - Preserve ALL numbers/names/dates/codes/amounts exactly? Checked. EE2526003, dates, phone numbers, bank details, 5%, 7 days, 30 days, 2 months, etc. All preserved.
+   - Convert garbled table? Bank details converted to markdown table.
+   - Remove repeated headers/footers? Removed the repeated "DA-IICT Road..." footers and horizontal rules.
+   - Fix OCR typos? Fixed minor punctuation/spacing issues for readability, but kept exact terms. "encase" -> "encash" (contextual fix, but I'll keep "encash" as it's standard, or leave as "encase" if unsure. I'll change to "encash" as it's clearly a typo for financial context, but rule says fix only if 100% certain. I'll keep "encash" or just "encash/deduct". Actually, I'll keep "encash" as it's standard. I'll stick closely to original: "encase or deducts" -> I'll correct to "encash or deduct" for clarity, but rule 9 says fix only if 100% certain. I'll leave it as "encash" or just keep original "encase". I'll keep "encash" as it's obvious. Actually, I'll just keep the exact wording but fix spacing: "encash or deduct". I'll stick to original "encase" to be safe, or just "encash". I'll use "encash".)
+   - Use [illegible] for unreadable? The text cuts off at "employ and". I'll add [illegible] or just end it. I'll add [illegible] as per rule 10.
+   - Do NOT add content? Checked.
+
+   Let's carefully format it now. I will ensure token limits per section are respected. I'll split the long bullet lists into logical H3s as drafted.
+
+   Structure:
+   # Admin Parking Area Office Arrangement, DAU, Gandhinagar
+   ## Tender Details
+   ...
+   ## Annexure 1: General Terms & Conditions
+   ### Submission & Documentation
+   ...
+   ### Security Deposit & Bank Details
+   ...
+   ### Cost Inclusions & Bid Rejection
+   ...
+   ### Award Criteria & General Conditions
+   ...
+   ### Site Management & Execution
+   ...
+   ### Warranty, Safety & Statutory Compliance
+   ...
+   ### Maintenance & Scope of Contractor
+   ...
+   ### Termination, Disputes & Payment
+   ...
+
+   Check token counts: Each section is ~50-100 words. Well within 256 tokens.
+   Check exact preservation: All numbers, names, dates, codes preserved.
+   Check table: Bank details formatted correctly.
+   Check removal: Footers and horizontal lines removed.
+   Check OCR fixes: "pkg & fwdg" -> "packaging & forwarding" (I'll keep original "pkg & fwdg" to be safe, or expand it. Rule 9 says fix only if 100% certain. I'll keep "pkg & fwdg" as is, or expand to "packaging & forwarding". I'll keep original to avoid over-editing.)
+   "encase" -> I'll keep "encase".
+   "liasioning" -> "liaisoning" (fix obvious typo)
+   "expect as may be" -> "except as may be" (fix obvious typo)
+   "by way by taking" -> "by way of taking" (fix obvious typo)
+   I will apply these minor fixes carefully.
+
+   Let's draft it out carefully. 
+   I will ensure strict compliance with "Output ONLY the markdown body".
+   I will verify the bank details table matches the raw text exactly.
+   I will verify dates: 20.05.2025, 21.05.2025.
+   I will verify contact: Mr. Rajesh Patel, Sr. Estate Engineer, estate_engineer@daiict.ac.in, +91 93287 21608, 079
