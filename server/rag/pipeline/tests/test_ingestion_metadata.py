@@ -5,7 +5,6 @@ from pathlib import Path
 chunking_dir = Path(__file__).resolve().parent.parent / "ingestion" / "chunking"
 sys.path.insert(0, str(chunking_dir))
 
-import pytest
 from section_extracter import extract_sections
 from process_corpus import find_line_range_in_file, process_markdown_file
 
