@@ -15,6 +15,9 @@ logger = logging.getLogger(__name__)
 
 # Setup directories
 INGESTION_DIR = Path(__file__).resolve().parent
+RAG_DIR = INGESTION_DIR.parent.parent
+if str(RAG_DIR) not in sys.path:
+    sys.path.insert(0, str(RAG_DIR))
 sys.path.insert(0, str(INGESTION_DIR))
 sys.path.insert(0, str(INGESTION_DIR / "chunking"))
 

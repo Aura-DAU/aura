@@ -1,11 +1,17 @@
 import json
 import os
+import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
 
 import numpy as np
 from dotenv import load_dotenv
 from qdrant_client import models
 from tqdm import tqdm
+
+RAG_DIR = Path(__file__).resolve().parents[3]
+if str(RAG_DIR) not in sys.path:
+    sys.path.insert(0, str(RAG_DIR))
 
 from pipeline.retrieval.qdrant_adapter import QdrantAdapter
 
