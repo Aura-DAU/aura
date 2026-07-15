@@ -17,7 +17,7 @@ This guide helps you set up the AURA RAG backend and API Gateway locally.
 2. Open `.env` and fill in the required credentials:
    - Provide your PostgreSQL connection string in `AUTH_DB_URL`.
    - Provide your Groq API key in `GROQ_API_KEY`.
-   - Provide your Pinecone API key and Index name in `PINECONE_API_KEY` and `PINECONE_INDEX`.
+   - Provide your Qdrant Cloud URL, API key, and collection name in `QDRANT_URL`, `QDRANT_API_KEY`, and `QDRANT_COLLECTION`.
 
 ### 2. Set Up Python Virtual Environment
 Create a virtual environment and install the required dependencies:

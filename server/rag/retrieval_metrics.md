@@ -14,7 +14,7 @@
 
 ## Vector Database Used
 
-**Pinecone**
+**Qdrant Cloud**
 
 * Vector type: Dense
 * Similarity metric: Cosine Similarity
@@ -69,7 +69,7 @@ The retrieval depth is dynamically determined by the query planner based on the 
 Average time taken to:
 
 1. Generate query embedding
-2. Perform Pinecone vector search
+2. Perform Qdrant vector search
 3. Retrieve Top-K matching chunks
 
 Measured over multiple test queries.
@@ -81,7 +81,7 @@ Measured over multiple test queries.
 | Metric                    | Value                 |
 | ------------------------- | --------------------- |
 | Embedding Model           | BAAI/bge-base-en-v1.5 |
-| Vector Database           | Pinecone              |
+| Vector Database           | Qdrant Cloud          |
 | Documents Indexed         | 911                   |
 | Chunks Created            | 15238                 |
 | Chunk Size                | 256 Tokens            |

@@ -34,7 +34,7 @@ ALGORITHM = "HS256"
 # Fine-grained roles are in role_bindings and resolved by resolve_effective_role().
 BROAD_ROLES = {"student", "faculty", "admin", "guest"}
 
-# All possible effective roles (for DLS filter, Pinecone, admin panel)
+# All possible effective roles (for DLS filter, Qdrant, admin panel)
 ALL_ROLES = {
     "public",
     "student",

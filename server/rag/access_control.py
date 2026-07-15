@@ -5,7 +5,7 @@ Two public surfaces:
   1. resolve_effective_role(identity, db) → str
      Maps the JWT's broad role (student/faculty/admin) to the most elevated
      fine-grained role based on role_bindings. Used by:
-       - Pushkar's DLS Pinecone filter (builds the allowed-set from this)
+       - Pushkar's DLS Qdrant filter (builds the allowed-set from this)
        - AccessControlGate (determines which evaluation path to take)
 
   2. AccessControlGate.evaluate(identity, query_intent, target_identifier)
@@ -24,7 +24,7 @@ from enum import Enum
 from typing import Optional
 
 
-# ── Role allowed-sets for Pinecone DLS filter ─────────────────────────────
+# ── Role allowed-sets for Qdrant DLS filter ───────────────────────────────
 # Exported so Pushkar's retrieval_pipeline.py can import and use directly.
 ROLE_ALLOWED_SETS: dict[str, set[str]] = {
     "public":              {"public"},
@@ -74,7 +74,7 @@ def resolve_effective_role(identity, db_module=None) -> str:
     Resolves the JWT's broad role → most elevated fine-grained effective role.
 
     Called by:
-      • retrieval_pipeline.py (Pushkar) to build the Pinecone filter set
+      • retrieval_pipeline.py (Pushkar) to build the Qdrant filter set
       • AccessControlGate to pick the right evaluation path
 
     Returns one of the keys in ROLE_ALLOWED_SETS.
