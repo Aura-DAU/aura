@@ -273,6 +273,8 @@ def main():
                 vector["metadata"]["document_year"] = int(chunk["document_year"])
             except (ValueError, TypeError):
                 vector["metadata"]["document_year"] = str(chunk["document_year"])
+        if chunk.get("authorization"):
+            vector["metadata"]["authorization"] = chunk["authorization"]
 
         vectors.append(
             vector

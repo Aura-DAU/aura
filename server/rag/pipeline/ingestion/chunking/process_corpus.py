@@ -416,7 +416,9 @@ def process_markdown_file(file_path):
         else:
             document_year = datetime.date.today().year
 
-    authorization = metadata.get("authorization", ["public"])
+    metadata, body = extract_frontmatter(content)
+    
+    authorization = metadata.get("authorization") or metadata.get("authorisation") or ["public"]
     if isinstance(authorization, str):
         authorization = [authorization]
 
