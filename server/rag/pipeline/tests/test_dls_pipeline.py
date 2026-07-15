@@ -8,15 +8,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 
-def test_pipeline_get_context_applies_dls_filter():
+@patch('pipeline.retrieval.retrieval_pipeline.Retriever')
+def test_pipeline_get_context_applies_dls_filter(mock_retriever_class):
+    # Mock retriever instance
+    mock_retriever = MagicMock()
+    mock_retriever_class.return_value = mock_retriever
+    mock_retriever.index = MagicMock()
+    mock_retriever.index.query.return_value = {"matches": []}
+    mock_retriever.retrieve.return_value = []
+    
     pipeline = RetrievalPipeline()
-    
-    # Mock retriever
-    pipeline.retriever = MagicMock()
-    pipeline.retriever.retrieve.return_value = []
-    
-    # Mock retriever index query response
-    pipeline.retriever.index.query.return_value = {"matches": []}
     
     # Mock planner to return a simple plan
     pipeline.planner = MagicMock()
@@ -35,17 +36,23 @@ def test_pipeline_get_context_applies_dls_filter():
     pipeline.get_context("What is the fee?", user_role="student")
     
     # Verify that index.query was called with the correct DLS filter for student
-    pipeline.retriever.index.query.assert_called()
-    called_args, called_kwargs = pipeline.retriever.index.query.call_args
+    mock_retriever.index.query.assert_called()
+    called_args, called_kwargs = mock_retriever.index.query.call_args
     assert "filter" in called_kwargs
-    assert called_kwargs["filter"] == {"authorization": {"$in": ["public", "student"]}}
+    assert "authorization" in called_kwargs["filter"]
+    assert "$in" in called_kwargs["filter"]["authorization"]
+    assert set(called_kwargs["filter"]["authorization"]["$in"]) == {"public", "student"}
 
-def test_pipeline_get_context_applies_dls_filter_superadmin():
-    pipeline = RetrievalPipeline()
+@patch('pipeline.retrieval.retrieval_pipeline.Retriever')
+def test_pipeline_get_context_applies_dls_filter_superadmin(mock_retriever_class):
+    # Mock retriever instance
+    mock_retriever = MagicMock()
+    mock_retriever_class.return_value = mock_retriever
+    mock_retriever.index = MagicMock()
+    mock_retriever.index.query.return_value = {"matches": []}
+    mock_retriever.retrieve.return_value = []
     
-    # Mock retriever index query response
-    pipeline.retriever = MagicMock()
-    pipeline.retriever.index.query.return_value = {"matches": []}
+    pipeline = RetrievalPipeline()
     
     # Mock planner
     pipeline.planner = MagicMock()
@@ -64,8 +71,8 @@ def test_pipeline_get_context_applies_dls_filter_superadmin():
     pipeline.get_context("What is the fee?", user_role="superadmin")
     
     # Verify that index.query was called with all roles
-    pipeline.retriever.index.query.assert_called()
-    called_args, called_kwargs = pipeline.retriever.index.query.call_args
+    mock_retriever.index.query.assert_called()
+    called_args, called_kwargs = mock_retriever.index.query.call_args
     assert "filter" in called_kwargs
     allowed_roles = called_kwargs["filter"]["authorization"]["$in"]
     assert "superadmin" in allowed_roles

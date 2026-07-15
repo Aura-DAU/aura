@@ -71,14 +71,21 @@ class ContextBuilder:
             # Fix CB5: moved `import re` to the top of the file (was imported
             # inside this loop on every chunk iteration, which is unnecessary).
             title_str = metadata.get("title", "")
-            year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
-            doc_rule_year = year_match.group(1) if year_match else ""
+            doc_rule_year = metadata.get("document_year", "")
+            if not doc_rule_year:
+                year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
+                doc_rule_year = year_match.group(1) if year_match else ""
+
+            start_line_val = metadata.get("start_line", "")
+            end_line_val = metadata.get("end_line", "")
 
             document = f"""
 <doc
 id="{idx}"
 title="{title_str}"
 rule_year="{doc_rule_year}"
+start_line="{start_line_val}"
+end_line="{end_line_val}"
 program_name="{metadata.get('program_name', '')}"
 cluster="{metadata.get('cluster', '')}"
 category="{metadata.get('category', '')}"
