@@ -70,9 +70,28 @@ class Retriever:
         # TEMPORARY FIX: Pinecone currently lacks the 'allowed_roles' metadata field,
         # so applying the DLS metadata_filter returns 0 chunks for ALL queries.
         # Disabling filter until vectors are re-ingested with correct metadata.
+        # NOTE: Gated by DEBUG=true and cross-referenced with retrieval_pipeline.py:1005.
         pinecone_filter = metadata_filter
-        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
-            pinecone_filter = None
+        is_debug = os.getenv("DEBUG", "false").lower() == "true"
+        disable_dls = os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true"
+        if disable_dls:
+            if is_debug:
+                logger.critical(
+                    "\n" + "="*80 + "\n"
+                    "CRITICAL WARNING: DISABLE_PINECONE_DLS_FILTER IS SET TO TRUE!\n"
+                    "DOCUMENT-LEVEL SECURITY (DLS) IS DISABLED FOR ALL SEMANTIC SEARCH REQUESTS!\n"
+                    "This is only allowed because DEBUG=true is also set.\n"
+                    "Do NOT deploy this configuration in a production environment.\n"
+                    + "="*80 + "\n"
+                )
+                pinecone_filter = None
+            else:
+                logger.error(
+                    "\n" + "="*80 + "\n"
+                    "SECURITY GATE ACTIVE: DISABLE_PINECONE_DLS_FILTER is set to true but DEBUG is false.\n"
+                    "DLS filter remains ENABLED. To disable DLS, you must also set DEBUG=true.\n"
+                    + "="*80 + "\n"
+                )
         
         query_embedding = self.model.encode(
             [

@@ -1,6 +1,18 @@
 import uuid
 import re
+import logging
 from pathlib import Path
+
+# Setup logging
+logger = logging.getLogger(__name__)
+
+# Delete old untagged_sensitive_docs.csv on startup to ensure we start clean
+csv_path = Path(__file__).resolve().parent.parent.parent.parent / "untagged_sensitive_docs.csv"
+if csv_path.exists():
+    try:
+        csv_path.unlink()
+    except Exception:
+        pass
 
 from parser import extract_frontmatter
 from section_extracter import extract_sections
@@ -374,6 +386,47 @@ def process_markdown_file(file_path):
 
     metadata, body = extract_frontmatter(raw_content)
 
+    # Ingestion-time check for missing explicit authorization in sensitive documents
+    has_explicit_auth = ("authorization" in metadata) or ("authorisation" in metadata)
+    if not has_explicit_auth:
+        path_parts = [p.lower() for p in file_path.parts]
+        sensitive_dirs = {"faculty", "student_faculty", "student&faculty", "administration"}
+        is_sensitive_path = any(d in path_parts for d in sensitive_dirs)
+        
+        sensitive_keywords = {"salary", "ctc", "remuneration", "personal", "cgpa", "phone number", "address"}
+        is_sensitive_filename = any(k in file_path.name.lower() for k in sensitive_keywords)
+        
+        body_lower = body.lower()
+        is_sensitive_content = any(k in body_lower for k in sensitive_keywords)
+        
+        if is_sensitive_path or is_sensitive_filename or is_sensitive_content:
+            reasons = []
+            if is_sensitive_path:
+                reasons.append("sensitive directory path")
+            if is_sensitive_filename:
+                reasons.append("sensitive keyword in filename")
+            if is_sensitive_content:
+                reasons.append("sensitive keyword in content")
+            reason_str = ", ".join(reasons)
+            
+            logger.warning(
+                "SENSITIVE DOCUMENT LACKS EXPLICIT AUTHORIZATION: %s (Reason: %s). Defaulting to ['public'].",
+                file_path, reason_str
+            )
+            
+            # Write to CSV report
+            csv_path = Path(__file__).resolve().parent.parent.parent.parent / "untagged_sensitive_docs.csv"
+            write_header = not csv_path.exists()
+            try:
+                with open(csv_path, "a", newline="", encoding="utf-8") as csvfile:
+                    import csv
+                    writer = csv.writer(csvfile)
+                    if write_header:
+                        writer.writerow(["FilePath", "Reason"])
+                    writer.writerow([str(file_path), reason_str])
+            except Exception as e:
+                logger.error("Failed to write to untagged_sensitive_docs.csv: %s", e)
+
     # 1. Calculate frontmatter offset (1-indexed start of body)
     content_clean = raw_content.lstrip("\ufeff").replace("\r\n", "\n")
     match = re.match(r"^---\n(.*?)\n---\n", content_clean, re.DOTALL)
@@ -415,8 +468,7 @@ def process_markdown_file(file_path):
             document_year = int(year_match.group(1))
         else:
             document_year = datetime.date.today().year
-
-    authorization = metadata.get("authorization", ["public"])
+    authorization = metadata.get("authorization") or metadata.get("authorisation") or ["public"]
     if isinstance(authorization, str):
         authorization = [authorization]
 

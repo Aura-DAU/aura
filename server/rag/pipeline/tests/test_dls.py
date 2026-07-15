@@ -83,6 +83,11 @@ def test_bm25_array_intersection_filter():
         results_student = bm25.retrieve("document minutes", top_k=10, metadata_filter=filter_student, allowed_roles=student_roles)
         assert len(results_student) == 1
         assert results_student[0]["id"] == "c1"
+
+        # Test allowed_roles alone (without metadata_filter) for student
+        results_student_roles_only = bm25.retrieve("document minutes", top_k=10, metadata_filter=None, allowed_roles=student_roles)
+        assert len(results_student_roles_only) == 1
+        assert results_student_roles_only[0]["id"] == "c1"
         
         # Test faculty role (allowed: ["public", "faculty"])
         # Should match chunk c1, c2
@@ -94,6 +99,13 @@ def test_bm25_array_intersection_filter():
         assert "c1" in ids_faculty
         assert "c2" in ids_faculty
         assert "c3" not in ids_faculty
+
+        # Test allowed_roles alone (without metadata_filter) for faculty
+        results_faculty_roles_only = bm25.retrieve("document committee minutes", top_k=10, metadata_filter=None, allowed_roles=faculty_roles)
+        ids_faculty_roles_only = {r["id"] for r in results_faculty_roles_only}
+        assert "c1" in ids_faculty_roles_only
+        assert "c2" in ids_faculty_roles_only
+        assert "c3" not in ids_faculty_roles_only
         
         # Test superadmin (allowed: all roles)
         # Should match all 3

@@ -245,6 +245,14 @@ class BM25Retriever:
 
         for idx, chunk in enumerate(self.chunks):
 
+            # If allowed_roles is provided, enforce DLS on authorization field
+            if allowed_roles is not None:
+                chunk_auth = chunk.get("authorization") or ["public"]
+                if isinstance(chunk_auth, str):
+                    chunk_auth = [chunk_auth]
+                if not any(role in allowed_roles for role in chunk_auth):
+                    continue
+
             if not self._matches_filter(
                 chunk,
                 metadata_filter
