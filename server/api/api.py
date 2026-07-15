@@ -67,23 +67,32 @@ async def log_latency_middleware(request, call_next):
     t0 = time.time()
     try:
         response = await call_next(request)
+        total_time = time.time() - t0
+        
+        # Log asynchronously in the background so we do not block the client's HTTP response
+        from fastapi.background import BackgroundTasks
+        bg_tasks = BackgroundTasks()
+        
+        def _write_log():
+            try:
+                execute(
+                    "INSERT INTO latency_logs (guardrail_time, retrieval_time, generation_time, total_time) "
+                    "VALUES (%s, %s, %s, %s)",
+                    (
+                        data.get("guardrail_time", 0.0),
+                        data.get("retrieval_time", 0.0),
+                        data.get("generation_time", 0.0),
+                        total_time
+                    )
+                )
+            except Exception as e:
+                print(f"[latency_middleware] Failed to log latency: {e}")
+                
+        bg_tasks.add_task(_write_log)
+        response.background = bg_tasks
+        
         return response
     finally:
-        total_time = time.time() - t0
-        try:
-            execute(
-                "INSERT INTO latency_logs (guardrail_time, retrieval_time, generation_time, total_time) "
-                "VALUES (%s, %s, %s, %s)",
-                (
-                    data.get("guardrail_time", 0.0),
-                    data.get("retrieval_time", 0.0),
-                    data.get("generation_time", 0.0),
-                    total_time
-                )
-            )
-        except Exception as e:
-            # Non-blocking log print
-            print(f"[latency_middleware] Failed to log latency: {e}")
         reset_tracker(token)
 
 app.add_middleware(
