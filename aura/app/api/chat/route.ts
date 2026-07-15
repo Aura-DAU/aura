@@ -7,6 +7,7 @@ import {
 
 export const maxDuration = 60
 
+
 const historyTurnSchema = z.object({
   role: z.enum(["user", "assistant"]),
   content: z.string(),
@@ -57,13 +58,22 @@ export async function POST(req: Request) {
     return new Response("Invalid request", { status: 400 })
   }
 
+  const authHeader = req.headers.get("Authorization")
+  if (!authHeader) {
+    return new Response("Unauthorized", { status: 401 })
+  }
+
+  // studentProfileSchema has no role field — identity comes from the JWT only.
   const payload: BackendChatRequest = parsed.data
 
   let backendRes: Response
   try {
     backendRes = await fetch(backendUrl("/chat"), {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": authHeader
+      },
       body: JSON.stringify(payload),
     })
   } catch (err) {
@@ -85,6 +95,7 @@ export async function POST(req: Request) {
   }
 
   const answer = data?.answer ?? ""
+  const isPersonalData = data?.is_personal_data === true
   const citations = (data?.sources ?? [])
     .map(normaliseSource)
     .filter((c): c is { file: string; title?: string } => c !== null)
@@ -95,6 +106,9 @@ export async function POST(req: Request) {
       controller.enqueue(encoder.encode(sseLine({ type: "text-delta", delta: answer })))
       if (citations.length > 0) {
         controller.enqueue(encoder.encode(sseLine({ type: "citations", citations })))
+      }
+      if (isPersonalData) {
+        controller.enqueue(encoder.encode(sseLine({ type: "personal-data-flag" })))
       }
       controller.enqueue(encoder.encode("data: [DONE]\n\n"))
       controller.close()

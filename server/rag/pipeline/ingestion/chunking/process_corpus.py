@@ -1,7 +1,6 @@
 import uuid
 import re
 from pathlib import Path
-import hashlib
 
 from parser import extract_frontmatter
 from section_extracter import extract_sections
@@ -311,6 +310,50 @@ def extract_course_codes_from_text(text):
     return list(codes)
 
 
+def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end=None):
+    """
+    Given the chunk text and the original lines of the file, find the 1-indexed
+    start_line and end_line in the file where this chunk's content resides.
+    """
+    lines_to_search = []
+    for line in chunk_text.split("\n"):
+        line_clean = line.strip()
+        if not line_clean:
+            continue
+        if line_clean.startswith(("H1:", "H2:", "H3:", "Faculty Name:", "Document Title:", "Course Name:", "Course Code:", "Semester:", "Credits:")):
+            continue
+        # Strip markdown syntax
+        line_clean = line_clean.replace("**", "").replace("__", "").replace("*", "").strip()
+        if len(line_clean) > 5:
+            lines_to_search.append(line_clean)
+
+    if not lines_to_search:
+        return section_start, section_end or len(file_lines)
+
+    first_match = None
+    last_match = None
+
+    search_range_start = max(0, section_start - 1)
+    search_range_end = len(file_lines) if section_end is None else min(len(file_lines), section_end)
+
+    for phrase in lines_to_search:
+        for idx in range(search_range_start, search_range_end):
+            file_line = file_lines[idx].strip()
+            if phrase in file_line or file_line in phrase:
+                if first_match is None or idx < first_match:
+                    first_match = idx
+                if last_match is None or idx > last_match:
+                    last_match = idx
+                break
+
+    if first_match is not None and last_match is not None:
+        return first_match + 1, last_match + 1
+    elif first_match is not None:
+        return first_match + 1, first_match + 1
+    
+    return section_start, section_end or len(file_lines)
+
+
 def process_markdown_file(file_path):
     file_path = Path(file_path)
     
@@ -322,15 +365,62 @@ def process_markdown_file(file_path):
         parts[data_index + 2:-1]
     )
 
+    import datetime
+
     with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read()
+        raw_content = f.read()
 
-    # Calculate MD5 hash of the file content
-    file_hash = hashlib.md5(content.encode("utf-8")).hexdigest()
+    file_lines = raw_content.replace("\r\n", "\n").split("\n")
 
-    metadata, body = extract_frontmatter(content)
+    metadata, body = extract_frontmatter(raw_content)
 
-    sections = extract_sections(body)
+    # 1. Calculate frontmatter offset (1-indexed start of body)
+    content_clean = raw_content.lstrip("\ufeff").replace("\r\n", "\n")
+    match = re.match(r"^---\n(.*?)\n---\n", content_clean, re.DOTALL)
+    frontmatter_offset = match.group(0).count('\n') if match else 0
+
+    # 2. Extract document_year
+    document_year = None
+    if metadata.get("document_year") is not None:
+        try:
+            document_year = int(metadata.get("document_year"))
+        except (ValueError, TypeError):
+            document_year = str(metadata.get("document_year"))
+    elif metadata.get("year") is not None:
+        try:
+            document_year = int(metadata.get("year"))
+        except (ValueError, TypeError):
+            document_year = str(metadata.get("year"))
+    elif metadata.get("scraped_date") is not None:
+        scraped_date_str = str(metadata.get("scraped_date"))
+        year_match = re.search(r"\b(20\d{2})\b", scraped_date_str)
+        if year_match:
+            document_year = int(year_match.group(1))
+
+    if document_year is None:
+        year_match = re.search(r"\b(20\d{2})\b", file_path.name)
+        if year_match:
+            document_year = int(year_match.group(1))
+
+    if document_year is None:
+        for part in file_path.parts:
+            year_match = re.search(r"\b(20\d{2})\b", part)
+            if year_match:
+                document_year = int(year_match.group(1))
+                break
+
+    if document_year is None:
+        year_match = re.search(r"\b(20\d{2})\b", body[:1000])
+        if year_match:
+            document_year = int(year_match.group(1))
+        else:
+            document_year = datetime.date.today().year
+
+    authorization = metadata.get("authorization", ["public"])
+    if isinstance(authorization, str):
+        authorization = [authorization]
+
+    sections = extract_sections(body, start_line_offset=frontmatter_offset + 1)
 
     category = metadata.get("category", "").strip().lower()
 
@@ -411,6 +501,13 @@ def process_markdown_file(file_path):
         split_chunks = split_section(section_text)
 
         for chunk_text in split_chunks:
+            # Find start_line and end_line for this chunk
+            start_line, end_line = find_line_range_in_file(
+                chunk_text,
+                file_lines,
+                section_start=section["start_line"],
+                section_end=section["end_line"]
+            )
             chunk_record = {
                 "chunk_id": str(uuid.uuid4()),
                 "text": chunk_text,
@@ -430,12 +527,16 @@ def process_markdown_file(file_path):
 
                 "path": str(file_path),
                 "source_file": file_path.name,
-                "file_hash": file_hash,
 
                 "scraped_date": metadata.get("scraped_date"),
+                "authorization": authorization,
 
                 "char_length": len(chunk_text),
-                "token_estimate": len(chunk_text.split())
+                "token_estimate": len(chunk_text.split()),
+                
+                "start_line": start_line,
+                "end_line": end_line,
+                "document_year": document_year
             }
 
             if section_faculty:
@@ -464,6 +565,12 @@ def process_markdown_file(file_path):
     # Add custom curriculum chunks
     curriculum_chunks = extract_curriculum_chunks(body, metadata, file_path)
     for custom in curriculum_chunks:
+        start_line, end_line = find_line_range_in_file(
+            custom["text"],
+            file_lines,
+            section_start=frontmatter_offset + 1,
+            section_end=len(file_lines)
+        )
         chunk_record = {
             "chunk_id": str(uuid.uuid4()),
             "text": custom["text"],
@@ -483,12 +590,16 @@ def process_markdown_file(file_path):
 
             "path": str(file_path),
             "source_file": file_path.name,
-            "file_hash": file_hash, 
 
             "scraped_date": metadata.get("scraped_date"),
+            "authorization": authorization,
 
             "char_length": len(custom["text"]),
-            "token_estimate": len(custom["text"].split())
+            "token_estimate": len(custom["text"].split()),
+            
+            "start_line": start_line,
+            "end_line": end_line,
+            "document_year": document_year
         }
 
         if program_name or fm_program_name:
@@ -509,7 +620,5 @@ def process_markdown_file(file_path):
         chunk["document_id"] = document_id
         chunk["chunk_index"] = idx
         chunk["total_chunks"] = total_chunks
-        # Generate deterministic chunk_id so that future upserts overwrite existing vectors
-        chunk["chunk_id"] = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"{document_id}_{idx}"))
 
     return chunks

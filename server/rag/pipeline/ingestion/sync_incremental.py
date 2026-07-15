@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 # Setup directories
 INGESTION_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(INGESTION_DIR))
 sys.path.insert(0, str(INGESTION_DIR / "chunking"))
 
 from config import MODEL_NAME
@@ -257,19 +258,27 @@ def main():
                 vector["metadata"]["total_chunks"] = int(chunk["total_chunks"])
 
             # Optional metadata fields
-            for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date"]:
+            for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date", "authorization", "start_line", "end_line", "document_year"]:
                 if chunk.get(field) is not None:
-                    vector["metadata"][field] = chunk[field]
+                    if field in ("start_line", "end_line"):
+                        vector["metadata"][field] = int(chunk[field])
+                    elif field == "document_year":
+                        try:
+                            vector["metadata"][field] = int(chunk[field])
+                        except (ValueError, TypeError):
+                            vector["metadata"][field] = str(chunk[field])
+                    else:
+                        vector["metadata"][field] = chunk[field]
 
             vectors.append(vector)
 
-        # Upload in partitioned batches (recommended batch size is <= 200)
-        batch_size = 200
-        logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
-        for i in range(0, len(vectors), batch_size):
-            batch = vectors[i:i+batch_size]
-            index.upsert(vectors=batch)
-        logger.info("Pinecone upload complete.")
+    # Upload in partitioned batches (recommended batch size is <= 200)
+    batch_size = 200
+    logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
+    for i in range(0, len(vectors), batch_size):
+        batch = vectors[i:i+batch_size]
+        index.upsert(vectors=batch)
+    logger.info("Pinecone upload complete.")
 
     # 5. Refresh entity index
     logger.info("Rebuilding entity index...")

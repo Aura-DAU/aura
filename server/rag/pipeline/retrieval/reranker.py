@@ -326,17 +326,17 @@ class Reranker:
             h1 = str(
                 metadata.get("h1") or ""
             ).lower()
-            
+
 
             h2 = str(
                 metadata.get("h2") or ""
             ).lower()
-            
+
 
             h3 = str(
                 metadata.get("h3") or ""
             ).lower()
-            
+
 
             metadata_boost = 0.0
 
@@ -395,6 +395,16 @@ class Reranker:
             if target_section and section_type == target_section:
                 section_boost += 0.25
 
+
+            # Fix #12: cap variable boost components to [0.0, 1.0] so the
+            # weighted sum stays on a consistent scale. Without this, multiple
+            # matching sections can accumulate metadata_boost > 1.0, inflating
+            # final scores beyond the intended [0, 1] range and making them
+            # incomparable across queries.
+            metadata_boost = min(metadata_boost, 1.0)
+            required_section_boost = min(required_section_boost, 1.0)
+            section_boost = min(section_boost, 1.0)
+            course_match_boost = min(course_match_boost, 1.0)
 
             # Fix #4: all components are now on comparable scales [0, 1].
             # course_match_boost is weighted at 0.20 (was a raw +0.35 add).

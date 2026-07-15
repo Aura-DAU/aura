@@ -1,9 +1,10 @@
 "use client"
 
-import { type FormEvent, type KeyboardEvent, useEffect, useState } from "react"
+import { type FormEvent, type KeyboardEvent } from "react"
 import TextareaAutosize from "react-textarea-autosize"
 import { Mic, Send, Square, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useSession } from "next-auth/react"
 
 const MAX_CHARS = 2000
 
@@ -16,6 +17,7 @@ interface ComposerProps {
   recordingVolume?: number
   onSend: (text: string) => void
   onMicClick: () => void
+  remainingQuota?: number | null
 }
 
 const micSupported = () =>
@@ -33,13 +35,22 @@ export function Composer({
   recordingVolume = 0,
   onSend,
   onMicClick,
+  remainingQuota = null,
 }: ComposerProps) {
-  const [showMic, setShowMic] = useState(false)
-  const canSend = inputText.trim().length > 0 && !loading && !isRecording
+  const showMic = micSupported()
+  const { data: session, status } = useSession()
+  const isUnauthenticated = status === "unauthenticated"
+  const canSend = inputText.trim().length > 0 && !loading && !isRecording && !isUnauthenticated
+  const role = (session?.user?.role as string) || ""
+  let dynamicPlaceholder = "Message AURA…"
 
-  useEffect(() => {
-    setShowMic(micSupported())
-  }, [])
+  if (role === "student") {
+    dynamicPlaceholder = "Ask about your timetable, attendance, or requirements..."
+  } else if (role.startsWith("faculty") || role.startsWith("dean") || role === "registrar") {
+    dynamicPlaceholder = "Ask about class schedule, grade submission, or mentoring..."
+  } else if (role === "admin" || role === "superadmin" || role === "admin_staff") {
+    dynamicPlaceholder = "Ask about administration, role bindings, or settings..."
+  }
 
   const submit = () => {
     if (!canSend) return
@@ -61,23 +72,34 @@ export function Composer({
   return (
     <div className="border-t border-theme-gray-light bg-theme-black/70 backdrop-blur">
       <form onSubmit={handleSubmit} className="mx-auto w-full max-w-3xl px-4 py-4">
-        <div
-          className={cn(
-            "flex items-end gap-2 rounded-2xl border border-theme-gray-light bg-theme-gray px-3 py-2 transition-colors",
-            "focus-within:border-theme-gray-lighter",
-          )}
-        >
-          <TextareaAutosize
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value.slice(0, MAX_CHARS))}
-            onKeyDown={handleKeyDown}
-            minRows={1}
-            maxRows={8}
-            maxLength={MAX_CHARS}
-            placeholder="Message AURA…"
-            aria-label="Message AURA"
-            className="flex-1 resize-none bg-transparent py-1.5 text-sm leading-relaxed text-neutral-100 outline-none placeholder:text-neutral-500"
-          />
+        {isUnauthenticated ? (
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-theme-gray-light bg-theme-gray px-3 py-6 transition-colors">
+            <p className="mb-3 text-sm text-neutral-400">Sign in to ask questions</p>
+            <a
+              href="/login"
+              className="inline-flex h-9 items-center justify-center rounded-full bg-gradient-to-r from-theme-red to-theme-yellow px-4 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            >
+              Sign In
+            </a>
+          </div>
+        ) : (
+          <div
+            className={cn(
+              "flex items-end gap-2 rounded-2xl border border-theme-gray-light bg-theme-gray px-3 py-2 transition-colors",
+              "focus-within:border-theme-gray-lighter",
+            )}
+          >
+            <TextareaAutosize
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value.slice(0, MAX_CHARS))}
+              onKeyDown={handleKeyDown}
+              minRows={1}
+              maxRows={8}
+              maxLength={MAX_CHARS}
+              placeholder={dynamicPlaceholder}
+              aria-label="Message AURA"
+              className="flex-1 resize-none bg-transparent py-1.5 text-sm leading-relaxed text-neutral-100 outline-none placeholder:text-neutral-500"
+            />
 
           {showMic ? (
             <div className="relative flex items-center justify-center">
@@ -138,9 +160,17 @@ export function Composer({
             <Send className="size-4" />
           </button>
         </div>
-        <p className="mt-2 text-center text-xs text-neutral-500">
-          AI can make mistakes. Verify important info.
-        </p>
+        )}
+        <div className="mt-2 flex items-center justify-between px-1">
+          <p className="text-xs text-neutral-500">
+            AI can make mistakes. Verify important info.
+          </p>
+          {remainingQuota !== null && !isUnauthenticated && (
+            <p className={cn("text-xs", remainingQuota === 0 ? "text-theme-red" : "text-neutral-500")}>
+              {remainingQuota} question{remainingQuota !== 1 ? 's' : ''} remaining
+            </p>
+          )}
+        </div>
       </form>
     </div>
   )

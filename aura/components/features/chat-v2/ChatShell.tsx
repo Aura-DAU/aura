@@ -18,11 +18,12 @@ export function ChatShell() {
   const chat = useAuraChat()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
-  const [isOffline, setIsOffline] = useState(false)
+  const [isOffline, setIsOffline] = useState(
+    () => typeof navigator !== "undefined" && !navigator.onLine
+  )
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
 
   useEffect(() => {
-    setIsOffline(!navigator.onLine)
     const goOnline = () => setIsOffline(false)
     const goOffline = () => setIsOffline(true)
     window.addEventListener("online", goOnline)
@@ -65,7 +66,6 @@ export function ChatShell() {
         onDeleteThread={chat.deleteThread}
         onOpenProfile={() => setProfileOpen(true)}
         studentProfile={chat.studentProfile}
-        userSession={chat.userSession}
         mobileOpen={sidebarOpen}
         onCloseMobile={() => setSidebarOpen(false)}
       />
@@ -83,8 +83,6 @@ export function ChatShell() {
             onClearChat={chat.handleClearChat}
             canInstall={Boolean(installPrompt)}
             onInstall={handleInstall}
-            userSession={chat.userSession}
-            onLogout={chat.logout}
           />
 
           {isOffline ? (
@@ -124,6 +122,7 @@ export function ChatShell() {
             recordingVolume={chat.recordingVolume}
             onSend={chat.handleSendMessage}
             onMicClick={chat.handleMicClick}
+            remainingQuota={chat.remainingQuota}
           />
         </div>
       </main>

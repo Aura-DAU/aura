@@ -6,17 +6,14 @@ import numpy as np
 from dotenv import load_dotenv
 from pinecone import Pinecone
 from tqdm import tqdm
-from pathlib import Path
 
 
 # ==================================================
 # CONFIG
 # ==================================================
 
-EMBEDDINGS_DIR = Path(__file__).resolve().parent
-VECTOR_STORE_DIR = (EMBEDDINGS_DIR / "../../vector_store").resolve()
-EMBEDDINGS_FILE = VECTOR_STORE_DIR / "embeddings.npy"
-METADATA_FILE = VECTOR_STORE_DIR / "metadata.json"
+EMBEDDINGS_FILE = "../../vector_store/embeddings.npy"
+METADATA_FILE = "../../vector_store/metadata.json"
 
 BATCH_SIZE = 100
 
@@ -265,6 +262,18 @@ def main():
         if chunk.get("scraped_date"):
             vector["metadata"]["scraped_date"] = chunk["scraped_date"]
 
+        if chunk.get("start_line") is not None:
+            vector["metadata"]["start_line"] = int(chunk["start_line"])
+
+        if chunk.get("end_line") is not None:
+            vector["metadata"]["end_line"] = int(chunk["end_line"])
+
+        if chunk.get("document_year") is not None:
+            try:
+                vector["metadata"]["document_year"] = int(chunk["document_year"])
+            except (ValueError, TypeError):
+                vector["metadata"]["document_year"] = str(chunk["document_year"])
+
         vectors.append(
             vector
         )
@@ -274,8 +283,8 @@ def main():
         f"Uploading {len(vectors)} vectors in {len(batches)} batches of {BATCH_SIZE}..."
     )
 
-    # Use ThreadPoolExecutor for parallel Pinecone upserts (concurrency reduced to prevent timeouts)
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    # Use ThreadPoolExecutor for parallel Pinecone upserts
+    with ThreadPoolExecutor(max_workers=32) as executor:
         futures = {executor.submit(index.upsert, vectors=batch): i for i, batch in enumerate(batches)}
         for future in tqdm(as_completed(futures), total=len(futures), desc="Uploading"):
             try:
@@ -283,8 +292,6 @@ def main():
             except Exception as e:
                 batch_idx = futures[future]
                 print(f"\n[ERROR] Batch {batch_idx} failed to upload: {e}")
-                # Raise exception to fail the script if any batch fails
-                raise e
 
     print("\nUpload complete!")
 
