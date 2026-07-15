@@ -13,8 +13,8 @@ def test_pipeline_get_context_applies_dls_filter(mock_retriever_class):
     # Mock retriever instance
     mock_retriever = MagicMock()
     mock_retriever_class.return_value = mock_retriever
-    mock_retriever.index = MagicMock()
-    mock_retriever.index.query.return_value = {"matches": []}
+    mock_retriever.vector_store = MagicMock()
+    mock_retriever.vector_store.search.return_value = []
     mock_retriever.retrieve.return_value = []
     
     pipeline = RetrievalPipeline()
@@ -35,11 +35,10 @@ def test_pipeline_get_context_applies_dls_filter(mock_retriever_class):
     # Call get_context with student role
     pipeline.get_context("What is the fee?", user_role="student")
     
-    # Verify that index.query was called with the correct DLS filter for student
-    mock_retriever.index.query.assert_called()
-    called_args, called_kwargs = mock_retriever.index.query.call_args
-    assert "filter" in called_kwargs
-    called_filter = called_kwargs["filter"]
+    # Verify that dense search was called with the correct DLS filter for student
+    mock_retriever.vector_store.search.assert_called()
+    called_args, called_kwargs = mock_retriever.vector_store.search.call_args
+    called_filter = called_kwargs["metadata_filter"]
     assert "authorization" in called_filter
     assert "$in" in called_filter["authorization"]
     assert sorted(called_filter["authorization"]["$in"]) == sorted(["public", "student"])
@@ -49,8 +48,8 @@ def test_pipeline_get_context_applies_dls_filter_superadmin(mock_retriever_class
     # Mock retriever instance
     mock_retriever = MagicMock()
     mock_retriever_class.return_value = mock_retriever
-    mock_retriever.index = MagicMock()
-    mock_retriever.index.query.return_value = {"matches": []}
+    mock_retriever.vector_store = MagicMock()
+    mock_retriever.vector_store.search.return_value = []
     mock_retriever.retrieve.return_value = []
     
     pipeline = RetrievalPipeline()
@@ -71,10 +70,9 @@ def test_pipeline_get_context_applies_dls_filter_superadmin(mock_retriever_class
     # Call get_context with superadmin role
     pipeline.get_context("What is the fee?", user_role="superadmin")
     
-    # Verify that index.query was called with all roles
-    mock_retriever.index.query.assert_called()
-    called_args, called_kwargs = mock_retriever.index.query.call_args
-    assert "filter" in called_kwargs
-    allowed_roles = called_kwargs["filter"]["authorization"]["$in"]
+    # Verify that dense search was called with all roles
+    mock_retriever.vector_store.search.assert_called()
+    called_args, called_kwargs = mock_retriever.vector_store.search.call_args
+    allowed_roles = called_kwargs["metadata_filter"]["authorization"]["$in"]
     assert "superadmin" in allowed_roles
     assert "dean_academic" in allowed_roles

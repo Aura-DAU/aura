@@ -230,7 +230,7 @@ class RetrievalPipeline:
         self,
         plan
     ):
-        """Build a Pinecone metadata filter from extracted entities.
+        """Build a database-neutral metadata filter from extracted entities.
 
         Fix F: multi-value entity lists (e.g. two programs in a comparison
         query) now use the $in operator instead of discarding all but the
@@ -243,7 +243,7 @@ class RetrievalPipeline:
             return value
 
         def as_filter(field, value):
-            """Return a Pinecone filter clause for one or many values."""
+            """Return a filter clause for one or many values."""
             if isinstance(value, list) and len(value) > 1:
                 return {field: {"$in": value}}
             scalar = value[0] if isinstance(value, list) else value
@@ -995,36 +995,23 @@ class RetrievalPipeline:
             for c in entity_list:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
-        # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
+        # 2. Semantic Path: Top-50 vector search
         query_embedding = self.retriever.model.encode(
             ["Represent this sentence for searching relevant passages: " + query],
             normalize_embeddings=True,
             convert_to_numpy=True
         )
         semantic_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
-        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
+        if os.getenv("DISABLE_QDRANT_DLS_FILTER", "false").lower() == "true":
             semantic_filter = None
 
-        results = self.retriever.index.query(
+        semantic_list = self.retriever.vector_store.search(
             vector=query_embedding[0].tolist(),
-            top_k=50,
-            include_metadata=True,
-            filter=semantic_filter
+            limit=50,
+            metadata_filter=semantic_filter,
         )
-        semantic_list = []
-        for match in results["matches"]:
-            semantic_list.append({
-                "id": match["id"],
-                "score": match["score"],
-                # Fix RP2: cosine_score explicitly stored so the confidence
-                # router in aura_chat.py can read it via c.get("cosine_score").
-                # Previously dual-path candidates only had "score"/"fusion_score"
-                # so the router always saw top_cosine=0.0 and relied entirely
-                # on top_cross for routing decisions.
-                "cosine_score": match["score"],
-                "metadata": match["metadata"],
-                "semantic_score": match["score"]
-            })
+        for match in semantic_list:
+            match["semantic_score"] = match["score"]
 
         # Min-Max normalize semantic path scores
         if semantic_list:
@@ -1062,7 +1049,7 @@ class RetrievalPipeline:
                 }
             else:
                 fused_pool[chunk_id]["semantic_norm"] = c["normalized_score"]
-                # Prefer the semantic path's cosine_score (it's the raw Pinecone value)
+                # Prefer the semantic path's raw cosine score.
                 fused_pool[chunk_id]["cosine_score"] = c.get("cosine_score", 0.0)
 
         final_candidates = []

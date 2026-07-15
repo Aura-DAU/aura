@@ -62,7 +62,7 @@ def fuse(
 
     # Fix #5: attach rrf_score to each result dict so it propagates
     # to the confidence router and reranker (previously it was discarded).
-    # Fix RRF1: BM25-only chunks (not in Pinecone top_k) have no cosine_score
+    # Fix RRF1: BM25-only chunks (not in dense-search top_k) have no cosine_score
     # field. The router reads c.get("cosine_score") → None → 0.0, so a
     # BM25-only chunk at the top of the fused list always contributes 0.0 to
     # top_cosine even if it is highly relevant. Guarantee the field exists on
