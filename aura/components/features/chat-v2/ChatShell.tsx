@@ -1,6 +1,7 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { WifiOff } from "lucide-react"
 import { toast } from "sonner"
 import { useAuraChat } from "@/hooks/use-aura-chat"
@@ -20,17 +21,22 @@ interface BeforeInstallPromptEvent extends Event {
 
 export function ChatShell() {
   const chat = useAuraChat()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const promptHandled = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
-  const [isOffline, setIsOffline] = useState(
-    () => typeof navigator !== "undefined" && !navigator.onLine
-  )
+  // Always false for SSR + first client paint; only show after mount to avoid hydration mismatch.
+  const [isOffline, setIsOffline] = useState(false)
+  const [offlineReady, setOfflineReady] = useState(false)
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [hoveredCitation, setHoveredCitation] = useState<Citation | null>(null)
 
   useEffect(() => {
     const goOnline = () => setIsOffline(false)
     const goOffline = () => setIsOffline(true)
+    setOfflineReady(true)
+    setIsOffline(!navigator.onLine)
     window.addEventListener("online", goOnline)
     window.addEventListener("offline", goOffline)
     return () => {
@@ -47,6 +53,20 @@ export function ChatShell() {
     window.addEventListener("beforeinstallprompt", handler)
     return () => window.removeEventListener("beforeinstallprompt", handler)
   }, [])
+
+  // Consume ?prompt= from dashboard quick actions once, then clear the URL.
+  useEffect(() => {
+    if (promptHandled.current) return
+    const prompt = searchParams.get("prompt")?.trim()
+    if (!prompt) return
+    promptHandled.current = true
+    // Defer navigation until the router is ready (avoids "Router action before initialization").
+    queueMicrotask(() => {
+      router.replace("/", { scroll: false })
+    })
+    void chat.handleSendMessage(prompt)
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot handoff
+  }, [searchParams, router])
 
   const handleInstall = useCallback(async () => {
     if (!installPrompt) return
@@ -66,7 +86,8 @@ export function ChatShell() {
   const handleRegenerate = useCallback(() => {
     const lastUser = chat.messages.findLast((m) => m.role === "user")
     if (lastUser) void chat.handleSendMessage(lastUser.content)
-  }, [chat])
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- avoid depending on whole chat object
+  }, [chat.messages, chat.handleSendMessage])
 
   const hasMessages = chat.messages.length > 0
 
@@ -99,7 +120,7 @@ export function ChatShell() {
             onInstall={handleInstall}
           />
 
-          {isOffline ? (
+          {offlineReady && isOffline ? (
             <div className="flex items-center justify-center gap-2 border-b border-theme-yellow/20 bg-theme-yellow/10 px-4 py-2 text-xs text-theme-yellow">
               <span className="size-2 animate-pulse rounded-full bg-theme-yellow" />
               <WifiOff className="size-3.5" />

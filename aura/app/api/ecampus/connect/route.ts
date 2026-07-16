@@ -27,6 +27,7 @@ export async function POST(req: Request) {
     role: session.user.role,
     erpId: session.user.erpId,
     department: session.user.department,
+    email: session.user.email ?? undefined,
   })
 
   try {

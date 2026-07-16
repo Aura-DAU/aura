@@ -320,8 +320,9 @@ Rules:
   (i.e., the highest year value) as the authoritative source.
 - When comparing two versions, cite the rule_year attribute explicitly:
   "Under the 2019-20 rules [doc rule_year=2019-20]..." vs "Under the 2024-25 rules..."
+- You MUST always prefix or integrate the source document's year (e.g., "According to the year 2025,..." or "Based on the 2026 guidelines...") in your response when citing rules, so that answers explicitly call out the year of the rule they are citing.
 
-NEVER mix information from different rule_year documents without explicitly labelling which year each fact comes from.
+NEVER mix information from different rule_year/document_year sources without explicitly labelling which year each fact comes from.
 
 ------------------------------------------------------------
 ANNUAL REPORT vs CURRENT ADMISSIONS DATA

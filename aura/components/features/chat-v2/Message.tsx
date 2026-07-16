@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Check, Copy, RotateCcw, ThumbsDown, ThumbsUp, FileText, Lock, CalendarCheck } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
@@ -13,11 +13,20 @@ interface MessageProps {
   citations?: Citation[]
   onRegenerate?: () => void
   onCitationHover?: (citation: Citation | null) => void
+  /** While streaming, render plain text to avoid re-parsing Markdown every token. */
+  isStreaming?: boolean
 }
 
-export function Message({ message, citations, onRegenerate, onCitationHover }: MessageProps) {
+export function Message({ message, citations, onRegenerate, onCitationHover, isStreaming = false }: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
+    }
+  }, [])
 
     const getAuthBadge = (auth?: string[], visibility?: string) => {
     if (visibility) {
@@ -78,7 +87,8 @@ export function Message({ message, citations, onRegenerate, onCitationHover }: M
     try {
       await navigator.clipboard.writeText(message.content)
       setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
+      copyTimerRef.current = setTimeout(() => setCopied(false), 1500)
     } catch {
       toast.error("Could not copy message")
     }
@@ -99,7 +109,13 @@ export function Message({ message, citations, onRegenerate, onCitationHover }: M
             <span>Your personal data</span>
           </div>
         )}
-        <MarkdownContent content={message.content} />
+        {isStreaming ? (
+          <div className="whitespace-pre-wrap text-sm leading-relaxed text-neutral-100">
+            {message.content}
+          </div>
+        ) : (
+          <MarkdownContent content={message.content} />
+        )}
 
         {/* Calendar booking confirmation — renders when backend emits a calendar-action event */}
         {message.calendar_action && (
