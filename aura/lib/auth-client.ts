@@ -42,7 +42,12 @@ export async function logout(): Promise<void> {
  */
 export async function apiFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
   let token = getToken()
-  
+
+  // Ensure a token exists before authenticated calls (avoids dashboard race on mount).
+  if (!token) {
+    token = await initAuth()
+  }
+
   const headers = new Headers(init?.headers)
   if (token) {
     headers.set("Authorization", `Bearer ${token}`)
@@ -52,10 +57,8 @@ export async function apiFetch(input: RequestInfo | URL, init?: RequestInit): Pr
 
   if (response.status === 401) {
     console.warn("[auth-client] 401 Unauthorized, attempting silent session refresh...")
-    // Perform silent refresh
     token = await initAuth()
     if (token) {
-      // Retry original request with the fresh token
       headers.set("Authorization", `Bearer ${token}`)
       response = await fetch(input, { ...init, headers })
     } else {

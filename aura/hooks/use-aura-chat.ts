@@ -44,7 +44,7 @@ function toBackendProfile(p: StudentProfile) {
 }
 
 function toBackendHistory(messages: ChatMessage[]) {
-  return messages.map(({ role, content }) => ({ role, content }))
+  return messages.slice(-6).map(({ role, content }) => ({ role, content }))
 }
 
 // Fire-and-forget — never blocks the UI
@@ -76,30 +76,38 @@ function redactPersonalDataMessages(threads: StoredThread[]): StoredThread[] {
   }))
 }
 
-async function* parseSSEStream(response: Response) {
+async function* parseSSEStream(response: Response, signal?: AbortSignal) {
   if (!response.body) throw new Error("No response body")
   const reader = response.body.getReader()
   const decoder = new TextDecoder()
   let buffer = ""
 
-  while (true) {
-    const { done, value } = await reader.read()
-    if (done) break
-    buffer += decoder.decode(value, { stream: true })
-    const lines = buffer.split("\n")
-    buffer = lines.pop() || ""
-    for (const line of lines) {
-      const trimmed = line.trim()
-      if (trimmed.startsWith("data:")) {
-        const data = trimmed.slice(5).trim()
-        if (data === "[DONE]") return
-        try {
-          yield JSON.parse(data)
-        } catch {
-          /* skip malformed chunk */
+  try {
+    while (true) {
+      if (signal?.aborted) {
+        await reader.cancel().catch(() => {})
+        return
+      }
+      const { done, value } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+      const lines = buffer.split("\n")
+      buffer = lines.pop() || ""
+      for (const line of lines) {
+        const trimmed = line.trim()
+        if (trimmed.startsWith("data:")) {
+          const data = trimmed.slice(5).trim()
+          if (data === "[DONE]") return
+          try {
+            yield JSON.parse(data)
+          } catch {
+            /* skip malformed chunk */
+          }
         }
       }
     }
+  } finally {
+    reader.releaseLock()
   }
 }
 
@@ -117,6 +125,7 @@ export function useAuraChat() {
   const [activeCitations, setActiveCitations] = useState<Citation[]>([])
   const [studentProfile, setStudentProfile] = useState<StudentProfile>(DEFAULT_PROFILE)
   const [remainingQuota, setRemainingQuotaState] = useState<number | null>(null)
+  const [hasHydrated, setHasHydrated] = useState(false)
   const { data: session } = useSession()
 
   useEffect(() => {
@@ -180,7 +189,17 @@ export function useAuraChat() {
   const audioChunksRef = useRef<Blob[]>([])
   const audioContextRef = useRef<AudioContext | null>(null)
   const animationFrameRef = useRef<number | null>(null)
-  const hydrated = useRef(false)
+  const abortRef = useRef<AbortController | null>(null)
+  const lastVolumeUpdateRef = useRef(0)
+  const mountedRef = useRef(true)
+
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+      abortRef.current?.abort()
+    }
+  }, [])
 
   useEffect(() => {
     try {
@@ -198,18 +217,17 @@ export function useAuraChat() {
     } catch {
       /* ignore corrupt storage */
     }
-    hydrated.current = true
+    setHasHydrated(true)
   }, [])
 
   useEffect(() => {
-    if (!hydrated.current) return
+    if (!hasHydrated) return
     try {
-      // Redact personal-data content before writing to localStorage
       localStorage.setItem(STORAGE_KEY, JSON.stringify(redactPersonalDataMessages(threads)))
     } catch {
       /* quota or unavailable */
     }
-  }, [threads])
+  }, [threads, hasHydrated])
 
   useEffect(() => {
     return () => {
@@ -246,6 +264,10 @@ export function useAuraChat() {
 
   const setActiveThreadId = useCallback(
     (id: string) => {
+      abortRef.current?.abort()
+      abortRef.current = null
+      setLoading(false)
+      setThinkingStep(undefined)
       setActiveThreadIdState(id)
       const thread = threads.find((t) => t.id === id)
       setMessages(thread ? thread.messages : [])
@@ -256,6 +278,10 @@ export function useAuraChat() {
   )
 
   const startNewChat = useCallback(() => {
+    abortRef.current?.abort()
+    abortRef.current = null
+    setLoading(false)
+    setThinkingStep(undefined)
     setActiveThreadIdState(null)
     setMessages([])
     setActiveCitations([])
@@ -296,6 +322,10 @@ export function useAuraChat() {
       const trimmed = text.trim()
       if (!trimmed || loading || remainingQuota === 0) return
 
+      abortRef.current?.abort()
+      const controller = new AbortController()
+      abortRef.current = controller
+
       setErrorMessage(null)
       setInputText("")
 
@@ -333,14 +363,23 @@ export function useAuraChat() {
             history: toBackendHistory(messages),
             studentProfile: toBackendProfile(studentProfile),
           }),
+          signal: controller.signal,
         })
+
+        if (controller.signal.aborted || !mountedRef.current) return
 
         if (response.status === 429) {
           setRemainingQuotaState(0)
           throw new Error("Question limit reached. Please wait or sign in with a DAU account.")
         }
+        if (response.status === 401) {
+          throw new Error("Session expired. Please sign in again.")
+        }
+        if (response.status === 502 || response.status === 503) {
+          throw new Error("AURA backend is unreachable. Make sure the API server is running, then try again.")
+        }
         if (!response.ok || !response.body) {
-          throw new Error("Request failed")
+          throw new Error("Request failed. Please try again.")
         }
 
         decrementQuota()
@@ -356,7 +395,8 @@ export function useAuraChat() {
         }
         setMessages([...baseMessages, assistantMsg])
 
-        for await (const chunk of parseSSEStream(response)) {
+        for await (const chunk of parseSSEStream(response, controller.signal)) {
+          if (controller.signal.aborted || !mountedRef.current) return
           if (chunk.type === "text-delta" && typeof chunk.delta === "string") {
             setThinkingStep(undefined)
             assistantText += chunk.delta
@@ -381,6 +421,8 @@ export function useAuraChat() {
           }
         }
 
+        if (controller.signal.aborted || !mountedRef.current) return
+
         const finalMessages: ChatMessage[] = [
           ...baseMessages,
           {
@@ -390,25 +432,27 @@ export function useAuraChat() {
             calendar_action: calendarAction,
           },
         ]
+        setMessages(finalMessages)
         persistMessages(threadId, finalMessages)
 
-        // Sync to server (fire-and-forget) if a user is logged in
-        try {
-          if (session?.user?.email) {
-            setThreads((current) => {
-              // Redact personal-data content before sending to server
-              saveHistoryToServer(session.user.email!, redactPersonalDataMessages(current))
-              return current
-            })
-          }
-        } catch { /* ignore */ }
+        if (session?.user?.email) {
+          setThreads((current) => {
+            saveHistoryToServer(session.user.email!, redactPersonalDataMessages(current))
+            return current
+          })
+        }
       } catch (err) {
+        if (controller.signal.aborted || !mountedRef.current) return
+        if (err instanceof DOMException && err.name === "AbortError") return
         const msg = err instanceof Error ? err.message : "Something went wrong. Please try again."
         setErrorMessage(msg)
         setMessages(baseMessages)
       } finally {
-        setLoading(false)
-        setThinkingStep(undefined)
+        if (abortRef.current === controller) abortRef.current = null
+        if (mountedRef.current && !controller.signal.aborted) {
+          setLoading(false)
+          setThinkingStep(undefined)
+        }
       }
     },
     [activeThreadId, loading, messages, persistMessages, studentProfile, session, remainingQuota, decrementQuota],
@@ -532,9 +576,12 @@ export function useAuraChat() {
             }
             const avgVol = sum / bufferLength
 
-            // Map average volume to a 0-1 scale for UI Visualizer
             const normalizedVol = Math.min(avgVol / 120, 1)
-            setRecordingVolume(normalizedVol)
+            const now = performance.now()
+            if (now - lastVolumeUpdateRef.current >= 80) {
+              lastVolumeUpdateRef.current = now
+              setRecordingVolume(normalizedVol)
+            }
 
             if (avgVol < SILENCE_THRESHOLD_DB) {
               if (silentSince === null) {

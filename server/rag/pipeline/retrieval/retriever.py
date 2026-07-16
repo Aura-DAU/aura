@@ -47,17 +47,21 @@ class Retriever:
                 metadata_path
             )
         
-        pc = Pinecone(
-            api_key=os.getenv(
-                "PINECONE_API_KEY"
+        self.index = None
+        try:
+            pc = Pinecone(
+                api_key=os.getenv(
+                    "PINECONE_API_KEY"
+                )
             )
-        )
-
-        self.index = pc.Index(
-            os.getenv(
-                "PINECONE_INDEX"
+            self.index = pc.Index(
+                os.getenv(
+                    "PINECONE_INDEX"
+                )
             )
-        )
+            logger.info("Pinecone Index initialized successfully.")
+        except Exception as e:
+            logger.warning("Failed to initialize Pinecone Index: %s. Dense search will be disabled.", e)
 
     def retrieve(
         self,
@@ -83,37 +87,36 @@ class Retriever:
             convert_to_numpy=True
         )
 
-        results = self.index.query(
-            vector=query_embedding[0].tolist(),
-            top_k=top_k,
-            include_metadata=True,
-            filter=pinecone_filter
-        )
+        dense_results = []
+        if self.index:
+            try:
+                results = self.index.query(
+                    vector=query_embedding[0].tolist(),
+                    top_k=top_k,
+                    include_metadata=True,
+                    filter=pinecone_filter
+                )
+                for match in results["matches"]:
+                    dense_results.append(
+                        {
+                            "id":
+                                match["id"],
 
-        chunks = []
+                            # Fix #1A: store the raw Pinecone cosine score separately
+                            # so the confidence router can use it even after RRF fusion
+                            # overwrites 'score' with the hybrid rrf_score.
+                            "score":
+                                match["score"],
 
-        for match in results["matches"]:
+                            "cosine_score":
+                                match["score"],
 
-            chunks.append(
-                {
-                    "id": 
-                        match["id"],
-                        
-                    # Fix #1A: store the raw Pinecone cosine score separately
-                    # so the confidence router can use it even after RRF fusion
-                    # overwrites 'score' with the hybrid rrf_score.
-                    "score":
-                        match["score"],
-
-                    "cosine_score":
-                        match["score"],
-
-                    "metadata":
-                        match["metadata"]
-                }
-            )
-
-        dense_results = chunks
+                            "metadata":
+                                match["metadata"]
+                        }
+                    )
+            except Exception as e:
+                logger.warning("Pinecone query failed: %s", e)
 
         if not self.bm25:
             return dense_results
