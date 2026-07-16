@@ -265,6 +265,9 @@ def main():
         if chunk.get("authorization"):
             vector["metadata"]["authorization"] = chunk["authorization"]
 
+        if chunk.get("authorization"):
+            vector["metadata"]["authorization"] = chunk["authorization"]
+
         vectors.append(
             models.PointStruct(
                 id=vector["id"],

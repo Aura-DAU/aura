@@ -1,11 +1,21 @@
 import jwt from "jsonwebtoken"
 
-const JWT_SECRET = process.env.INTERNAL_JWT_SECRET || "test-internal-secret-for-auth-middleware"
+function getJwtSecret(): string {
+  const secret = process.env.INTERNAL_JWT_SECRET
+  if (!secret) {
+    if (process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
+      throw new Error("FATAL: INTERNAL_JWT_SECRET is not set. Set it before starting the server.")
+    }
+    return "test-internal-secret-for-auth-middleware"
+  }
+  return secret
+}
 
 export interface InternalJwtPayload {
   role: "student" | "faculty" | "admin" | "guest"
   erpId: string
   department?: string
+  email?: string
   [key: string]: unknown
 }
 
@@ -14,16 +24,14 @@ export interface InternalJwtPayload {
  * Expiry is set to 15m to ensure security.
  */
 export function signInternalJwt(payload: InternalJwtPayload): string {
-  if (!JWT_SECRET) {
-    throw new Error("FATAL: INTERNAL_JWT_SECRET is not set. Set it before starting the server.")
-  }
   return jwt.sign(
     {
       role: payload.role,
       erpId: payload.erpId,
       department: payload.department,
+      email: payload.email,
     },
-    JWT_SECRET,
+    getJwtSecret(),
     {
       algorithm: "HS256",
       expiresIn: "15m",
@@ -35,8 +43,5 @@ export function signInternalJwt(payload: InternalJwtPayload): string {
  * Verifies an internal JWT.
  */
 export function verifyInternalJwt(token: string): InternalJwtPayload {
-  if (!JWT_SECRET) {
-    throw new Error("FATAL: INTERNAL_JWT_SECRET is not set. Set it before starting the server.")
-  }
-  return jwt.verify(token, JWT_SECRET) as InternalJwtPayload
+  return jwt.verify(token, getJwtSecret()) as InternalJwtPayload
 }

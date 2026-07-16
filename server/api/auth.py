@@ -60,6 +60,7 @@ class Identity:
     erp_id: str
     role:   str           # broad role from JWT: student | faculty | admin
     dept:   Optional[str] = None
+    email:  Optional[str] = None
 
     @property
     def user_id(self) -> str:
@@ -67,7 +68,12 @@ class Identity:
         return self.erp_id
 
     def as_dict(self) -> dict:
-        return {"role": self.role, "erp_id": self.erp_id, "dept": self.dept}
+        return {
+            "role": self.role,
+            "erp_id": self.erp_id,
+            "dept": self.dept,
+            "email": self.email,
+        }
 
 
 def require_identity(
@@ -97,13 +103,14 @@ def require_identity(
 
     role   = claims.get("role", "")
     erp_id = claims.get("erpId", "")  # Next.js mints camelCase
+    email  = claims.get("email") or None
 
     if not erp_id:
         raise HTTPException(status_code=401, detail="Token missing erpId claim")
     if role not in BROAD_ROLES:
         raise HTTPException(status_code=403, detail=f"Unrecognised role in token: {role!r}")
 
-    return Identity(erp_id=erp_id, role=role, dept=claims.get("department"))
+    return Identity(erp_id=erp_id, role=role, dept=claims.get("department"), email=email)
 
 
 get_current_identity = require_identity

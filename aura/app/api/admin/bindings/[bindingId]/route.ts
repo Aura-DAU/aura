@@ -19,6 +19,7 @@ export async function DELETE(
     role: "admin",
     erpId: session.user.erpId,
     department: session.user.department,
+    email: session.user.email ?? undefined,
   })
 
   try {
