@@ -68,7 +68,7 @@ class EcampusOrchestrator:
         ]
 
     def run(self, query: str, identity: dict, history: Optional[list] = None) -> dict:
-        history = history or []
+        history = (history or [])[-6:]
         messages = (
             [{"role": "system", "content": SYSTEM_PROMPT}]
             + [{"role": h.get("role", "user"), "content": h.get("content", "")} for h in history]
