@@ -4,7 +4,7 @@ import { backendUrl } from "@/lib/api/backend"
 import { NextResponse } from "next/server"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
-export async function GET(req: Request) {
+export async function GET() {
   const session = await getServerSession(authOptions)
   if (!session?.user?.erpId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -91,7 +91,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE() {
   const session = await getServerSession(authOptions)
   if (!session?.user?.erpId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
