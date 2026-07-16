@@ -541,9 +541,6 @@ class RetrievalPipeline:
             logger.info("Speculative retrieval query matched; reusing speculative results.")
             results = future_speculative.result()
             corrected_query = query
-            # Apply J2 context expansion window logic
-            expand_window = 2 if retrieval_intent == "policy_version" else 1
-            results = self._expand_adjacent_chunks(results, window=expand_window)
         else:
             # Fix RP-MYTH: replaces the old static MYTH_BUST_PATTERNS keyword list
             # that lived in aura_chat.py. The query_planner LLM already classifies
@@ -806,11 +803,9 @@ class RetrievalPipeline:
                 results = all_results
             
             else:
-                # Main query retrieval using dual path
+                # Main query retrieval using dual path (returns 50-60 chunks)
                 results = self._retrieve_dual_path(query, plan, allowed_roles=allowed_roles)
-                # Apply J2 context expansion window logic
-                expand_window = 2 if retrieval_intent == "policy_version" else 1
-                results = self._expand_adjacent_chunks(results, window=expand_window)
+
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
         # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
         # the vector/BM25 results into a unified chunk pool for reranking.
@@ -859,9 +854,25 @@ class RetrievalPipeline:
             )
 
         else:
-            reranked = self.reranker.rerank(
+            # ── TWO-STAGE RERANKING ──
+            # Stage 1: Fast rerank on unexpanded chunks
+            stage1_reranked = self.reranker.rerank(
                 query=query,
                 results=results,
+                plan=plan
+            )
+            
+            # Select top 12 candidates
+            top_candidates = stage1_reranked[:12]
+            
+            # Expand only the top 12 candidates
+            expand_window = 2 if retrieval_intent == "policy_version" else 1
+            expanded_candidates = self._expand_adjacent_chunks(top_candidates, window=expand_window)
+            
+            # Stage 2: Final precise rerank on expanded top 12 chunks
+            reranked = self.reranker.rerank(
+                query=query,
+                results=expanded_candidates,
                 plan=plan
             )
 
