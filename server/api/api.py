@@ -1,0 +1,209 @@
+import os
+import sys
+import tempfile
+import asyncio
+import threading
+from typing import List, Optional
+from pathlib import Path
+
+server_dir = Path(__file__).resolve().parent.parent
+rag_dir    = server_dir / "rag"
+for p in (str(server_dir), str(rag_dir)):
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.concurrency import run_in_threadpool
+from pydantic import BaseModel
+
+from pipeline.speech import transcribe_audio
+from api.auth import require_identity, Identity
+from api.routes.identity_routes import router as identity_router
+from api.routes.admin_routes import router as admin_router
+from api.routes.calendar_routes import router as calendar_router
+from pipeline.ecampus.credentials_vault import (
+    store_credentials, unlink_credentials, is_linked
+)
+
+app = FastAPI(title="AURA API")
+
+# Lazy-init: AURA pulls in Pinecone, embeddings, etc. Defer until first /chat
+# so /health and auth routes stay available during cold start.
+_aura = None
+_aura_lock = threading.Lock()
+
+
+def get_aura():
+    global _aura
+    if _aura is None:
+        with _aura_lock:
+            if _aura is None:
+                from rag import AURA  # noqa: PLC0415 — deferred heavy import
+                _aura = AURA()
+    return _aura
+
+# ── CORS ──────────────────────────────────────────────────────────────────
+# allow_credentials=True is REQUIRED for httpOnly cookies to be forwarded
+# cross-origin (Next.js :3000 → FastAPI :8000 in dev). Must pair with
+# explicit allow_origins — "*" is rejected by browsers when credentials=True.
+ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
+prod = os.getenv("PROD_FRONTEND_ORIGIN")
+if prod:
+    ALLOWED_ORIGINS.append(prod)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ── Routers ──────────────────────────────────────────────────────────────
+# identity_router: /internal/resolve-identity (called by Next.js at login)
+# admin_router:    /admin/* (role_bindings management)
+# No auth_router — login/refresh/logout are handled entirely by NextAuth.js
+app.include_router(identity_router)
+app.include_router(admin_router)
+app.include_router(calendar_router)
+
+# ── Whisper concurrency lock ──────────────────────────────────────────────
+speech_queue_lock = asyncio.Semaphore(1)
+
+ffmpeg_path = os.getenv("FFMPEG_BINARY_PATH")
+if ffmpeg_path and os.path.exists(ffmpeg_path):
+    if ffmpeg_path not in os.environ.get("PATH", ""):
+        os.environ["PATH"] += os.pathsep + ffmpeg_path
+
+UNIVERSITY_PROMPT = (
+    "Dhirubhai Ambani University, DAU, DA-IICT, Gandhinagar. "
+    "B.Tech ICT, B.Tech CS AI, B.Tech ECE, BS-MS, M.Tech, M.Sc, M.Des, Ph.D. "
+    "AURA, CGPA, semester, admissions, fees, hostel, scholarship, placement."
+)
+
+# ── Request models ────────────────────────────────────────────────────────
+class HistoryTurn(BaseModel):
+    role:    str
+    content: str
+
+class UserProfile(BaseModel):
+    # Display/personalisation only — role and identity come from the
+    # Next.js-minted internal JWT verified by require_identity(), never here.
+    name:      Optional[str]       = None
+    branch:    Optional[str]       = None
+    year:      Optional[str]       = None
+    semester:  Optional[str]       = None
+    interests: Optional[str]       = None
+    subjects:  Optional[List[str]] = None
+
+class ChatRequest(BaseModel):
+    question:    str
+    history:     Optional[List[HistoryTurn]] = None
+    userProfile: Optional[UserProfile]       = None
+
+class LinkEcampusRequest(BaseModel):
+    ecampus_username: str
+    ecampus_password: str
+
+ALLOWED_AUDIO   = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
+MAX_AUDIO_BYTES = 25 * 1024 * 1024
+
+# ── /chat ─────────────────────────────────────────────────────────────────
+@app.post("/chat")
+def chat(
+    request:  ChatRequest,
+    identity: Identity = Depends(require_identity),   # verifies Next.js JWT
+):
+    history = [t.model_dump() for t in request.history] if request.history else []
+    display_profile = (
+        request.userProfile.model_dump(exclude_none=True)
+        if request.userProfile else None
+    )
+    return get_aura().ask(
+        question=request.question,
+        history=history,
+        identity=identity.as_dict(),
+        display_profile=display_profile,
+    )
+
+# ── eCampus account linking ───────────────────────────────────────────────
+# These three endpoints handle optional eCampus credential storage for the
+# scraper path. They are NOT auth endpoints — they manage the vault that
+# lets AURA log into ecampus.daiict.ac.in on a student's behalf to scrape
+# personal data (when direct ERP DB access is unavailable).
+@app.post("/ecampus/link")
+def link_ecampus(
+    request:  LinkEcampusRequest,
+    identity: Identity = Depends(require_identity),
+):
+    if identity.role != "student":
+        raise HTTPException(status_code=403, detail="Only students can link an eCampus account.")
+    store_credentials(identity.erp_id, request.ecampus_username, request.ecampus_password)
+    return {"status": "linked"}
+
+@app.delete("/ecampus/link")
+def unlink_ecampus(identity: Identity = Depends(require_identity)):
+    if identity.role != "student":
+        raise HTTPException(status_code=403, detail="Only students can unlink.")
+    unlink_credentials(identity.erp_id)
+    return {"status": "unlinked"}
+
+@app.get("/ecampus/link")
+def ecampus_link_status(identity: Identity = Depends(require_identity)):
+    if identity.role != "student":
+        raise HTTPException(status_code=403, detail="Only students have a link status.")
+    return {"linked": is_linked(identity.erp_id)}
+
+# ── /speech ───────────────────────────────────────────────────────────────
+@app.post("/speech")
+async def speech(
+    file:     UploadFile = File(...),
+    identity: Identity   = Depends(require_identity),
+):
+    temp_path = None
+    try:
+        if not file.filename:
+            raise HTTPException(status_code=400, detail="No filename provided")
+        ext = os.path.splitext(file.filename)[1].lower()
+        if ext not in ALLOWED_AUDIO:
+            raise HTTPException(status_code=400, detail=f"Unsupported file type: {ext}")
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+            size = 0
+            while chunk := await file.read(1024 * 1024):
+                size += len(chunk)
+                if size > MAX_AUDIO_BYTES:
+                    raise HTTPException(status_code=413, detail="Audio file too large")
+                tmp.write(chunk)
+            temp_path = tmp.name
+
+        async with speech_queue_lock:
+            question = await run_in_threadpool(
+                transcribe_audio, temp_path, initial_prompt=UNIVERSITY_PROMPT
+            )
+        return {"text": question}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        if temp_path and os.path.exists(temp_path):
+            os.remove(temp_path)
+
+@app.get("/health")
+async def health():
+    # Public: only confirms the server is alive. No secrets, no env detail.
+    return {"status": "online", "service": "AURA API"}
+
+@app.get("/health/detail")
+async def health_detail(identity: Identity = Depends(require_identity)):
+    # Authenticated admins only
+    if identity.role != "admin":
+        raise HTTPException(status_code=403, detail="Forbidden")
+    return {
+        "INTERNAL_JWT_SECRET":    bool(os.getenv("INTERNAL_JWT_SECRET")),
+        "AUTH_DB_URL":            bool(os.getenv("AUTH_DB_URL")),
+        "ERP_DB_HOST":            bool(os.getenv("ERP_DB_HOST")),
+    }

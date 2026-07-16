@@ -1,0 +1,60 @@
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth/options"
+import { signInternalJwt } from "@/lib/auth/internal-jwt"
+import { NextResponse } from "next/server"
+import { backendUrl } from "@/lib/api/backend"
+
+export async function POST(req: Request) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.erpId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  let body
+  try {
+    body = await req.json()
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
+  }
+
+  const { ecampus_username, password } = body
+  if (!ecampus_username || !password) {
+    return NextResponse.json({ error: "Username and password required" }, { status: 400 })
+  }
+
+  // Mint internal JWT
+  const token = signInternalJwt({
+    role: session.user.role,
+    erpId: session.user.erpId,
+    department: session.user.department,
+  })
+
+  try {
+    const res = await fetch(backendUrl("/ecampus/link"), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ecampus_username, ecampus_password: password }),
+    })
+
+    if (!res.ok) {
+      let errDetail = "Failed to link eCampus account"
+      try {
+        const errJson = await res.json()
+        if (errJson?.detail) errDetail = errJson.detail
+      } catch {
+        const errText = await res.text().catch(() => "")
+        if (errText) errDetail = errText
+      }
+      return NextResponse.json({ error: errDetail }, { status: res.status })
+    }
+
+    const data = await res.json()
+    return NextResponse.json(data)
+  } catch (err) {
+    console.error("[ecampus-connect] POST failed:", err)
+    return NextResponse.json({ error: "Backend unavailable" }, { status: 502 })
+  }
+}
