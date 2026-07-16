@@ -15,7 +15,6 @@ Step 7: If PUBLIC/MIXED → run existing RAG pipeline
         Merge contexts → generate answer
 """
 
-import os
 import re
 from typing import Optional
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
@@ -101,7 +100,10 @@ class AuraChat:
 
         try:
             # ── Safety guardrail (applies to every query) ──────────────
-            if not self.guardrail.is_safe(query):
+            from pipeline.latency_tracker import track_segment
+            with track_segment("guardrail_time"):
+                is_safe = self.guardrail.is_safe(query)
+            if not is_safe:
                 return {
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                     "sources": [],
@@ -174,7 +176,9 @@ class AuraChat:
             # fails CLOSED — if the guardrail LLM is down, deny rather than
             # risk a prompt injection reaching the ERP pipeline.
             if query_type in ("PERSONAL", "MIXED", "AGGREGATE") and identity:
-                if not self.guardrail.is_safe_strict(query):
+                with track_segment("guardrail_time"):
+                    is_safe_strict = self.guardrail.is_safe_strict(query)
+                if not is_safe_strict:
                     return {
                         "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                         "sources": [],
@@ -227,7 +231,8 @@ class AuraChat:
             if query_type in ("PUBLIC", "MIXED", "AGGREGATE"):
                 from access_control import resolve_effective_role
                 user_role = resolve_effective_role(identity) if identity else "public"
-                retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
+                with track_segment("retrieval_time"):
+                    retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
                 chunks    = retrieval_result.get("chunks", [])
                 rag_context = retrieval_result.get("context", "")
                 sources   = retrieval_result.get("sources", [])
@@ -238,14 +243,15 @@ class AuraChat:
             # ── Step 8: Merge and generate ─────────────────────────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
 
-            answer = self.generator.generate(
-                query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
-                context=combined_context,
-                plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
-                history=history,
-                profile=display_profile,
-                system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
-            )
+            with track_segment("generation_time"):
+                answer = self.generator.generate(
+                    query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
+                    context=combined_context,
+                    plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
+                    history=history,
+                    profile=display_profile,
+                    system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                )
 
             return {
                 "answer": answer,
@@ -286,15 +292,18 @@ class AuraChat:
         return data
 
     def _rag_only(self, query, history, profile, user_role: str = "public") -> dict:
-        retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
+        from pipeline.latency_tracker import track_segment
+        with track_segment("retrieval_time"):
+            retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
         chunks    = retrieval_result.get("chunks", [])
         if not chunks:
             return {"answer": "I'm having trouble retrieving information. Please try again.", "sources": [], "is_personal_data": False}
-        answer = self.generator.generate(
-            query=retrieval_result.get("corrected_query", query),
-            context=retrieval_result["context"],
-            plan=retrieval_result["plan"],
-            history=history,
-            profile=profile,
-        )
+        with track_segment("generation_time"):
+            answer = self.generator.generate(
+                query=retrieval_result.get("corrected_query", query),
+                context=retrieval_result["context"],
+                plan=retrieval_result["plan"],
+                history=history,
+                profile=profile,
+            )
         return {"answer": answer, "sources": retrieval_result["sources"], "is_personal_data": False}
