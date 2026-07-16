@@ -1,7 +1,7 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { MessageSquare, Plus, Trash2, User, LogOut, LayoutDashboard } from "lucide-react"
+import { LayoutDashboard, LogOut, MessageSquare, Plus, Trash2, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { ChatThread, StudentProfile } from "@/lib/chat-types"
 import { useSession, signOut } from "next-auth/react"
@@ -99,6 +99,7 @@ function SidebarContent({
           </a>
         )}
       </div>
+
 
       <nav className="mt-4 flex-1 space-y-1 overflow-y-auto px-3 pb-4">
         {threads.length === 0 ? (

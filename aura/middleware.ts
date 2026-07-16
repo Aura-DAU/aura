@@ -13,7 +13,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next()
   }
 
-  const secret = process.env.NEXTAUTH_SECRET || "mock-nextauth-secret"
+  const secret = process.env.NEXTAUTH_SECRET
+  if (!secret) throw new Error("FATAL: NEXTAUTH_SECRET is not set.")
 
   // Check for a valid NextAuth session token
   const token = await getToken({

@@ -51,9 +51,9 @@ export async function POST(
   }
 
   const { erpId } = await params
-  let body: Record<string, unknown>
+  let body: any
   try {
-    body = (await req.json()) as Record<string, unknown>
+    body = await req.json()
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }

@@ -1,6 +1,6 @@
 "use client"
 
-import { type FormEvent, type KeyboardEvent } from "react"
+import { type FormEvent, type KeyboardEvent, useEffect, useState } from "react"
 import TextareaAutosize from "react-textarea-autosize"
 import { Mic, Send, Square, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -37,7 +37,7 @@ export function Composer({
   onMicClick,
   remainingQuota = null,
 }: ComposerProps) {
-  const showMic = micSupported()
+  const [showMic, setShowMic] = useState(false)
   const { data: session, status } = useSession()
   const isUnauthenticated = status === "unauthenticated"
   const canSend = inputText.trim().length > 0 && !loading && !isRecording && !isUnauthenticated
@@ -51,6 +51,10 @@ export function Composer({
   } else if (role === "admin" || role === "superadmin" || role === "admin_staff") {
     dynamicPlaceholder = "Ask about administration, role bindings, or settings..."
   }
+
+  useEffect(() => {
+    setShowMic(micSupported())
+  }, [])
 
   const submit = () => {
     if (!canSend) return

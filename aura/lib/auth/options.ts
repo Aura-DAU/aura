@@ -64,16 +64,12 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: (() => {
         const id = process.env.GOOGLE_CLIENT_ID
-        if (!id && process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
-          console.warn("WARNING: GOOGLE_CLIENT_ID is not set.")
-        }
+        if (!id && process.env.NODE_ENV === "production") throw new Error("FATAL: GOOGLE_CLIENT_ID is not set.")
         return id || "mock-client-id"
       })(),
       clientSecret: (() => {
         const secret = process.env.GOOGLE_CLIENT_SECRET
-        if (!secret && process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
-          console.warn("WARNING: GOOGLE_CLIENT_SECRET is not set.")
-        }
+        if (!secret && process.env.NODE_ENV === "production") throw new Error("FATAL: GOOGLE_CLIENT_SECRET is not set.")
         return secret || "mock-client-secret"
       })(),
       authorization: {
@@ -196,12 +192,7 @@ export const authOptions: NextAuthOptions = {
   },
   secret: (() => {
     const s = process.env.NEXTAUTH_SECRET
-    if (!s) {
-      if (process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
-        console.warn("WARNING: NEXTAUTH_SECRET is not set.")
-      }
-      return "mock-nextauth-secret"
-    }
+    if (!s) throw new Error("FATAL: NEXTAUTH_SECRET is not set.")
     return s
   })(),
   pages: {

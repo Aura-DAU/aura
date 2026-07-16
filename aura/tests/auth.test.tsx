@@ -1,6 +1,5 @@
 import { render, screen, renderHook, act } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import type { Account, User } from 'next-auth'
 import { Composer } from '../components/features/chat-v2/Composer'
 import { useAuraChat } from '../hooks/use-aura-chat'
 import { authOptions } from '../lib/auth/options'
@@ -12,19 +11,11 @@ vi.mock('next-auth/react', () => ({
 
 describe('Domain detection (guest vs DAU)', () => {
   it('assigns guest role to non-DAU emails', async () => {
-    const user = { email: 'test@gmail.com' } as User & { role?: string }
-    const account = { provider: 'google' } as Account
-    const signIn = authOptions.callbacks?.signIn
-    expect(signIn).toBeDefined()
-
-    const result = await signIn!({
-      user,
-      account,
-      profile: undefined,
-      email: undefined,
-      credentials: undefined,
-    })
-
+    const user: any = { email: 'test@gmail.com' }
+    const account: any = { provider: 'google' }
+    const signIn = authOptions.callbacks?.signIn as any
+    const result = await signIn({ user, account })
+    
     expect(result).toBe(true)
     expect(user.role).toBe('guest')
   })
@@ -59,7 +50,9 @@ describe('useAuraChat 429 handling', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     localStorage.clear()
-    global.fetch = vi.fn()
+    
+    // Mock the global fetch
+    global.fetch = vi.fn() as any
   })
 
   it('handles 429 error and updates remainingQuota', async () => {
@@ -72,13 +65,12 @@ describe('useAuraChat 429 handling', () => {
       update: vi.fn(),
     })
 
-    const mockFetch = vi.mocked(global.fetch)
-    mockFetch.mockImplementation(async (input: RequestInfo | URL) => {
-      const url = String(input)
+    const mockFetch = global.fetch as any
+    mockFetch.mockImplementation(async (url: string) => {
       if (url === '/api/chat') {
-        return new Response(null, { status: 429 })
+        return { ok: false, status: 429 }
       }
-      return Response.json({ token: 'mock-token' })
+      return { ok: true, json: async () => ({ token: 'mock-token' }) }
     })
 
     const { result } = renderHook(() => useAuraChat())

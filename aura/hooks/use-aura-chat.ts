@@ -499,13 +499,7 @@ export function useAuraChat() {
       }
 
       // Initialize AudioContext for Silence Detection & Volume Visualizer
-      type WindowWithWebkitAudio = Window & {
-        webkitAudioContext?: typeof AudioContext
-      }
-      const AudioCtxClass =
-        typeof window !== "undefined"
-          ? window.AudioContext || (window as WindowWithWebkitAudio).webkitAudioContext
-          : null
+      const AudioCtxClass = typeof window !== "undefined" ? (window.AudioContext || (window as any).webkitAudioContext) : null
       if (AudioCtxClass) {
         try {
           const audioCtx = new AudioCtxClass()
