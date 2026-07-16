@@ -2,20 +2,16 @@
 
 import { useCallback, useEffect, useState } from "react"
 import { WifiOff } from "lucide-react"
-import { toast } from "sonner"
 import { useAuraChat } from "@/hooks/use-aura-chat"
-import type { Citation } from "@/lib/chat-types"
 import { Sidebar } from "./Sidebar"
 import { Header } from "./Header"
 import { MessageList } from "./MessageList"
 import { Composer } from "./Composer"
 import { EmptyState } from "./EmptyState"
 import { ProfileModal } from "./ProfileModal"
-import { SourcePanel } from "./SourcePanel"
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>
-  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>
 }
 
 export function ChatShell() {
@@ -26,7 +22,6 @@ export function ChatShell() {
     () => typeof navigator !== "undefined" && !navigator.onLine
   )
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
-  const [hoveredCitation, setHoveredCitation] = useState<Citation | null>(null)
 
   useEffect(() => {
     const goOnline = () => setIsOffline(false)
@@ -51,16 +46,7 @@ export function ChatShell() {
   const handleInstall = useCallback(async () => {
     if (!installPrompt) return
     await installPrompt.prompt()
-    try {
-      const { outcome } = await installPrompt.userChoice
-      if (outcome === "accepted") {
-        toast.success("AURA is installing…")
-      }
-      // "dismissed" — say nothing; the button simply reappears since the
-      // browser may fire beforeinstallprompt again on a future visit.
-    } finally {
-      setInstallPrompt(null)
-    }
+    setInstallPrompt(null)
   }, [installPrompt])
 
   const handleRegenerate = useCallback(() => {
@@ -121,7 +107,6 @@ export function ChatShell() {
                 thinkingStep={chat.thinkingStep}
                 activeCitations={chat.activeCitations}
                 onRegenerate={handleRegenerate}
-                onCitationHover={setHoveredCitation}
               />
             ) : (
               <EmptyState onSelectPrompt={chat.handleSendMessage} />
@@ -148,8 +133,6 @@ export function ChatShell() {
         profile={chat.studentProfile}
         onSave={chat.saveProfile}
       />
-
-      <SourcePanel citation={hoveredCitation} onClose={() => setHoveredCitation(null)} />
     </div>
   )
 }

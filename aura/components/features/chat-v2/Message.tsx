@@ -12,10 +12,9 @@ interface MessageProps {
   message: ChatMessage
   citations?: Citation[]
   onRegenerate?: () => void
-  onCitationHover?: (citation: Citation | null) => void
 }
 
-export function Message({ message, citations, onRegenerate, onCitationHover }: MessageProps) {
+export function Message({ message, citations, onRegenerate }: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
 
@@ -118,14 +117,9 @@ export function Message({ message, citations, onRegenerate, onCitationHover }: M
                     href={isUrl ? c.file : undefined}
                     target={isUrl ? "_blank" : undefined}
                     rel={isUrl ? "noopener noreferrer" : undefined}
-                    onMouseEnter={() => onCitationHover?.(c)}
-                    onMouseLeave={() => onCitationHover?.(null)}
-                    onFocus={() => onCitationHover?.(c)}
-                    onBlur={() => onCitationHover?.(null)}
-                    tabIndex={isUrl ? undefined : 0}
                     className={cn(
-                      "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300 outline-none",
-                      "hover:bg-theme-gray-light hover:text-neutral-100 focus-visible:bg-theme-gray-light focus-visible:text-neutral-100 transition-colors cursor-pointer"
+                      "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300",
+                      isUrl && "hover:bg-theme-gray-light transition-colors cursor-pointer hover:text-neutral-100"
                     )}
                   >
                     <span className="size-1.5 rounded-full bg-theme-yellow" />

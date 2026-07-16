@@ -27,17 +27,6 @@ export interface Citation {
   title?: string
   visibility?: string
   authorization?: string[]
-  /**
-   * Line-range + snippet metadata used by the source provenance side panel
-   * (FE-3). These fields are populated by the backend once BE-1 (Source
-   * Line Payload Integration) ships start_line/end_line/document_year in
-   * the retriever payload. Until then the panel degrades gracefully and
-   * just shows the document title/link.
-   */
-  start_line?: number
-  end_line?: number
-  document_year?: number | string
-  snippet?: string
 }
 
 export interface ChatThread {
