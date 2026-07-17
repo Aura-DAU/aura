@@ -20,11 +20,14 @@ interface ComposerProps {
   remainingQuota?: number | null
 }
 
-const micSupported = () =>
-  typeof navigator !== "undefined" &&
-  typeof navigator.mediaDevices?.getUserMedia === "function" &&
-  typeof window !== "undefined" &&
-  "MediaRecorder" in window
+function detectMicSupport(): boolean {
+  return (
+    typeof navigator !== "undefined" &&
+    typeof navigator.mediaDevices?.getUserMedia === "function" &&
+    typeof window !== "undefined" &&
+    "MediaRecorder" in window
+  )
+}
 
 export function Composer({
   inputText,
@@ -37,8 +40,15 @@ export function Composer({
   onMicClick,
   remainingQuota = null,
 }: ComposerProps) {
+  // Start false on server + first client paint to avoid hydration mismatch.
   const [showMic, setShowMic] = useState(false)
   const { data: session, status } = useSession()
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only MediaRecorder probe
+    setShowMic(detectMicSupport())
+  }, [])
+
   const isUnauthenticated = status === "unauthenticated"
   const canSend = inputText.trim().length > 0 && !loading && !isRecording && !isUnauthenticated
   const role = (session?.user?.role as string) || ""

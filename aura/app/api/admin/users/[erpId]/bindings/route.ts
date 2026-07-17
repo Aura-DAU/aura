@@ -19,6 +19,7 @@ export async function GET(
     role: "admin",
     erpId: session.user.erpId,
     department: session.user.department,
+    email: session.user.email ?? undefined,
   })
 
   try {
@@ -62,6 +63,7 @@ export async function POST(
     role: "admin",
     erpId: session.user.erpId,
     department: session.user.department,
+    email: session.user.email ?? undefined,
   })
 
   try {

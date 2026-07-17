@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { Calendar, Users, ArrowRight, Loader2, AlertCircle, Clock } from "lucide-react"
-import { apiFetch } from "@/lib/auth-client"
+import { apiFetch, initAuth } from "@/lib/auth-client"
 
 interface FacultyDashboardProps {
   userName: string
@@ -20,11 +20,15 @@ type CardState = "loading" | "done" | "error"
  * helper to call UniRP endpoints directly. Do NOT implement UniRP logic
  * until routes are confirmed. Current path: AURA RAG + ERP connector.
  */
-async function fetchDashboardAnswer(question: string): Promise<string> {
+async function fetchDashboardAnswer(
+  question: string,
+  signal: AbortSignal
+): Promise<string> {
   const res = await apiFetch("/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ question, history: [] }),
+    signal,
   })
 
   if (!res.ok || !res.body) return ""
@@ -34,27 +38,35 @@ async function fetchDashboardAnswer(question: string): Promise<string> {
   let buffer = ""
   let answer = ""
 
-  while (true) {
-    const { done, value } = await reader.read()
-    if (done) break
-    buffer += decoder.decode(value, { stream: true })
-    const lines = buffer.split("\n")
-    buffer = lines.pop() ?? ""
-    for (const line of lines) {
-      const trimmed = line.trim()
-      if (trimmed.startsWith("data:")) {
-        const data = trimmed.slice(5).trim()
-        if (data === "[DONE]") break
-        try {
-          const chunk = JSON.parse(data) as { type?: string; delta?: string }
-          if (chunk.type === "text-delta" && typeof chunk.delta === "string") {
-            answer += chunk.delta
+  try {
+    while (true) {
+      if (signal.aborted) {
+        await reader.cancel().catch(() => {})
+        break
+      }
+      const { done, value } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+      const lines = buffer.split("\n")
+      buffer = lines.pop() ?? ""
+      for (const line of lines) {
+        const trimmed = line.trim()
+        if (trimmed.startsWith("data:")) {
+          const data = trimmed.slice(5).trim()
+          if (data === "[DONE]") break
+          try {
+            const chunk = JSON.parse(data) as { type?: string; delta?: string }
+            if (chunk.type === "text-delta" && typeof chunk.delta === "string") {
+              answer += chunk.delta
+            }
+          } catch {
+            /* skip malformed chunk */
           }
-        } catch {
-          /* skip malformed chunk */
         }
       }
     }
+  } finally {
+    reader.releaseLock()
   }
 
   return answer
@@ -85,24 +97,46 @@ export function FacultyDashboard({
   const [adviseeState, setAdviseeState] = useState<CardState>("loading")
 
   useEffect(() => {
-    // Fetch faculty today's schedule and advisee count in parallel on mount.
+    const controller = new AbortController()
+    const { signal } = controller
+
     // TODO(unirp): Replace with UniRP endpoint when faculty data routes are confirmed.
     // Do NOT implement any UniRP logic until routes are provided.
-    void Promise.all([
-      fetchDashboardAnswer("What is my teaching schedule for today?")
-        .then((text) => {
-          setScheduleText(text)
-          setScheduleState(text.trim() ? "done" : "error")
-        })
-        .catch(() => setScheduleState("error")),
-      fetchDashboardAnswer("How many advisees do I currently have?")
-        .then((text) => {
-          setAdviseeText(text)
-          setAdviseeState(text.trim() ? "done" : "error")
-        })
-        .catch(() => setAdviseeState("error")),
-    ])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    void (async () => {
+      // Wait for JWT before hitting /api/chat (avoids mount-time 401 race).
+      const token = await initAuth()
+      if (signal.aborted) return
+      if (!token) {
+        setScheduleState("error")
+        setAdviseeState("error")
+        return
+      }
+
+      await Promise.all([
+        fetchDashboardAnswer("What is my teaching schedule for today?", signal)
+          .then((text) => {
+            if (signal.aborted) return
+            setScheduleText(text)
+            setScheduleState(text.trim() ? "done" : "error")
+          })
+          .catch(() => {
+            if (!signal.aborted) setScheduleState("error")
+          }),
+        fetchDashboardAnswer("How many advisees do I currently have?", signal)
+          .then((text) => {
+            if (signal.aborted) return
+            setAdviseeText(text)
+            setAdviseeState(text.trim() ? "done" : "error")
+          })
+          .catch(() => {
+            if (!signal.aborted) setAdviseeState("error")
+          }),
+      ])
+    })()
+
+    return () => {
+      controller.abort()
+    }
   }, [])
 
   // Attendance card is intentionally absent:

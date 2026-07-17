@@ -10,20 +10,20 @@ export const maxDuration = 60
 
 const historyTurnSchema = z.object({
   role: z.enum(["user", "assistant"]),
-  content: z.string(),
+  content: z.string().max(20_000),
 })
 
 const studentProfileSchema = z.object({
-  name: z.string().optional(),
-  branch: z.string().optional(),
-  year: z.string().optional(),
-  semester: z.string().optional(),
-  interests: z.string().optional(),
+  name: z.string().max(200).optional(),
+  branch: z.string().max(200).optional(),
+  year: z.string().max(50).optional(),
+  semester: z.string().max(50).optional(),
+  interests: z.string().max(1000).optional(),
 })
 
 const requestSchema = z.object({
-  question: z.string().min(1, "question is required"),
-  history: z.array(historyTurnSchema).optional(),
+  question: z.string().min(1, "question is required").max(2000),
+  history: z.array(historyTurnSchema).max(20).optional(),
   studentProfile: studentProfileSchema.optional(),
 })
 
@@ -68,21 +68,35 @@ export async function POST(req: Request) {
     delete (parsed.data.studentProfile as any).role
   }
 
-  const payload: BackendChatRequest = parsed.data
+  // Map studentProfile → userProfile for FastAPI; cap history for cost/latency.
+  const payload: BackendChatRequest = {
+    question: parsed.data.question,
+    history: parsed.data.history?.slice(-6),
+    studentProfile: parsed.data.studentProfile,
+  }
 
   let backendRes: Response
   try {
     backendRes = await fetch(backendUrl("/chat"), {
       method: "POST",
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
-        "Authorization": authHeader
+        Authorization: authHeader,
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        question: payload.question,
+        history: payload.history,
+        userProfile: payload.studentProfile,
+      }),
+      signal: req.signal,
     })
   } catch (err) {
     console.error("[chat] backend unreachable:", err)
     return new Response("Backend unavailable", { status: 502 })
+  }
+
+  if (backendRes.status === 429) {
+    return new Response("Question limit reached", { status: 429 })
   }
 
   if (!backendRes.ok) {

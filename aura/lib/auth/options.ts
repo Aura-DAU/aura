@@ -176,6 +176,7 @@ export const authOptions: NextAuthOptions = {
           role: token.role as "student" | "faculty" | "admin" | "guest",
           erpId: token.erpId,
           department: token.department || undefined,
+          email: typeof token.email === "string" ? token.email : undefined,
         })
       }
       

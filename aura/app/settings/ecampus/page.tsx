@@ -18,41 +18,51 @@ export default function ConnectEcampusPage() {
   const [error, setError] = useState<string | null>(null)
   const [successMsg, setSuccessMsg] = useState<string | null>(null)
 
-  // Fetch current linking status
-  const checkLinkStatus = async () => {
-    try {
-      const res = await fetch("/api/ecampus/link")
-      if (res.ok) {
-        const data = await res.json()
-        setLinked(data.linked)
-      }
-    } catch (err) {
-      console.error("Failed to fetch link status:", err)
-    } finally {
-      setStatusLoading(false)
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login")
     }
-  }
+  }, [status, router])
 
   useEffect(() => {
-    if (status === "authenticated") {
-      void checkLinkStatus()
-      if (session?.user?.erpId) {
-        setUsername(session.user.erpId)
+    if (status !== "authenticated") return
+
+    let cancelled = false
+    const checkLinkStatus = async () => {
+      try {
+        const res = await fetch("/api/ecampus/link")
+        if (cancelled) return
+        if (res.ok) {
+          const data = await res.json()
+          setLinked(data.linked)
+        }
+      } catch (err) {
+        if (!cancelled) console.error("Failed to fetch link status:", err)
+      } finally {
+        if (!cancelled) setStatusLoading(false)
       }
+    }
+
+    void checkLinkStatus()
+    if (session?.user?.erpId) {
+      setUsername(session.user.erpId)
+    }
+
+    return () => {
+      cancelled = true
     }
   }, [status, session])
 
-  if (status === "loading" || (status === "authenticated" && statusLoading)) {
+  if (
+    status === "loading" ||
+    status === "unauthenticated" ||
+    (status === "authenticated" && statusLoading)
+  ) {
     return (
       <div className="flex h-screen items-center justify-center bg-theme-black">
         <Loader2 className="animate-spin text-theme-yellow size-8" />
       </div>
     )
-  }
-
-  if (status === "unauthenticated") {
-    router.push("/login")
-    return null
   }
 
   // Only students should be able to link accounts
