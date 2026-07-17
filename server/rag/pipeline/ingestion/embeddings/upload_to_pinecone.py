@@ -262,6 +262,17 @@ def main():
         if chunk.get("scraped_date"):
             vector["metadata"]["scraped_date"] = chunk["scraped_date"]
 
+        if chunk.get("start_line") is not None:
+            vector["metadata"]["start_line"] = int(chunk["start_line"])
+
+        if chunk.get("end_line") is not None:
+            vector["metadata"]["end_line"] = int(chunk["end_line"])
+
+        if chunk.get("document_year") is not None:
+            try:
+                vector["metadata"]["document_year"] = int(chunk["document_year"])
+            except (ValueError, TypeError):
+                vector["metadata"]["document_year"] = str(chunk["document_year"])
         if chunk.get("authorization"):
             vector["metadata"]["authorization"] = chunk["authorization"]
 
