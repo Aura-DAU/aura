@@ -25,6 +25,7 @@ from api.routes.calendar_routes import router as calendar_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
+from pipeline.rate_limiter import enforce_quota, QuotaExceeded
 
 app = FastAPI(title="AURA API")
 
@@ -141,9 +142,13 @@ class UserProfile(BaseModel):
     subjects:  Optional[List[str]] = None
 
 class ChatRequest(BaseModel):
-    question:    str
-    history:     Optional[List[HistoryTurn]] = None
-    userProfile: Optional[UserProfile]       = None
+    question:       str
+    history:        Optional[List[HistoryTurn]] = None
+    userProfile:    Optional[UserProfile]       = None
+    studentProfile: Optional[UserProfile]       = None
+
+    def resolved_profile(self) -> Optional[UserProfile]:
+        return self.studentProfile or self.userProfile
 
 class LinkEcampusRequest(BaseModel):
     ecampus_username: str
@@ -154,16 +159,25 @@ MAX_AUDIO_BYTES = 25 * 1024 * 1024
 
 # ── /chat ─────────────────────────────────────────────────────────────────
 @app.post("/chat")
-def chat(
+async def chat(
     request:  ChatRequest,
     identity: Identity = Depends(require_identity),   # verifies Next.js JWT
 ):
-    history = [t.model_dump() for t in request.history] if request.history else []
-    display_profile = (
-        request.userProfile.model_dump(exclude_none=True)
-        if request.userProfile else None
-    )
-    return get_aura().ask(
+    history = [t.model_dump() for t in (request.history or [])][-6:]
+    profile = request.resolved_profile()
+    display_profile = profile.model_dump(exclude_none=True) if profile else None
+
+    quota_key = identity.email or identity.erp_id
+    try:
+        enforce_quota(quota_key, identity.role)
+    except QuotaExceeded as exc:
+        raise HTTPException(
+            status_code=429,
+            detail=f"Question limit reached ({exc.limit}/day).",
+        ) from exc
+
+    return await run_in_threadpool(
+        get_aura().ask,
         question=request.question,
         history=history,
         identity=identity.as_dict(),

@@ -1,3 +1,4 @@
+import React from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeSanitize from "rehype-sanitize"
@@ -7,7 +8,7 @@ interface MarkdownContentProps {
   content: string
 }
 
-export function MarkdownContent({ content }: MarkdownContentProps) {
+function MarkdownContentInner({ content }: MarkdownContentProps) {
   return (
     <div className="chat-v2-prose prose prose-invert max-w-none">
       <ReactMarkdown
@@ -36,3 +37,5 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
     </div>
   )
 }
+
+export const MarkdownContent = React.memo(MarkdownContentInner)

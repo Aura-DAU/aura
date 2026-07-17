@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { getToken } from "next-auth/jwt"
 
-const PUBLIC_PATHS = ["/login", "/api/auth", "/_next", "/favicon.ico", "/manifest.webmanifest", "/offline", "/sw.js", "/icon", "/apple-icon"]
+const PUBLIC_PATHS = ["/login", "/api/auth", "/api/health", "/_next", "/favicon.ico", "/manifest.webmanifest", "/offline", "/sw.js", "/icon", "/apple-icon"]
 const EXACT_PUBLIC_PATHS = ["/"]
 
 export async function middleware(req: NextRequest) {

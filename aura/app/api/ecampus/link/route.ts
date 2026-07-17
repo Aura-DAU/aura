@@ -14,6 +14,7 @@ export async function GET() {
     role: session.user.role,
     erpId: session.user.erpId,
     department: session.user.department,
+    email: session.user.email ?? undefined,
   })
 
   try {
@@ -47,6 +48,7 @@ export async function POST(req: Request) {
     role: session.user.role,
     erpId: session.user.erpId,
     department: session.user.department,
+    email: session.user.email ?? undefined,
   })
 
   let body
@@ -101,6 +103,7 @@ export async function DELETE() {
     role: session.user.role,
     erpId: session.user.erpId,
     department: session.user.department,
+    email: session.user.email ?? undefined,
   })
 
   try {
