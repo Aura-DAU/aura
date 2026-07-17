@@ -11,6 +11,7 @@ interface MessageListProps {
   thinkingStep?: string
   activeCitations: Citation[]
   onRegenerate: () => void
+  onCitationHover?: (citation: Citation | null) => void
 }
 
 export function MessageList({
@@ -19,6 +20,7 @@ export function MessageList({
   thinkingStep,
   activeCitations,
   onRegenerate,
+  onCitationHover,
 }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -65,6 +67,7 @@ export function MessageList({
                 ? onRegenerate
                 : undefined
             }
+            onCitationHover={onCitationHover}
           />
         )
       })}
