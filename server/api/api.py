@@ -2,6 +2,7 @@ import os
 import sys
 import tempfile
 import asyncio
+import threading
 from typing import List, Optional
 from pathlib import Path
 
@@ -16,7 +17,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 
-from rag import AURA
 from pipeline.speech import transcribe_audio
 from api.auth import require_identity, Identity
 from api.routes.identity_routes import router as identity_router
@@ -25,9 +25,24 @@ from api.routes.calendar_routes import router as calendar_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
+from pipeline.rate_limiter import enforce_quota, QuotaExceeded
 
 app = FastAPI(title="AURA API")
-aura = AURA()
+
+# Lazy-init: AURA pulls in Pinecone, embeddings, etc. Defer until first /chat
+# so /health and auth routes stay available during cold start.
+_aura = None
+_aura_lock = threading.Lock()
+
+
+def get_aura():
+    global _aura
+    if _aura is None:
+        with _aura_lock:
+            if _aura is None:
+                from rag import AURA  # noqa: PLC0415 — deferred heavy import
+                _aura = AURA()
+    return _aura
 
 # ── CORS ──────────────────────────────────────────────────────────────────
 # allow_credentials=True is REQUIRED for httpOnly cookies to be forwarded
@@ -37,6 +52,49 @@ ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
 prod = os.getenv("PROD_FRONTEND_ORIGIN")
 if prod:
     ALLOWED_ORIGINS.append(prod)
+
+
+# ── Latency Logging Middleware ───────────────────────────────────────────
+from pipeline.latency_tracker import init_tracker, reset_tracker
+from db.connection import execute
+import time
+
+@app.middleware("http")
+async def log_latency_middleware(request, call_next):
+    if request.url.path != "/chat":
+        return await call_next(request)
+        
+    data, token = init_tracker()
+    t0 = time.time()
+    try:
+        response = await call_next(request)
+        total_time = time.time() - t0
+        
+        # Log asynchronously in the background so we do not block the client's HTTP response
+        from fastapi.background import BackgroundTasks
+        bg_tasks = BackgroundTasks()
+        
+        def _write_log():
+            try:
+                execute(
+                    "INSERT INTO latency_logs (guardrail_time, retrieval_time, generation_time, total_time) "
+                    "VALUES (%s, %s, %s, %s)",
+                    (
+                        data.get("guardrail_time", 0.0),
+                        data.get("retrieval_time", 0.0),
+                        data.get("generation_time", 0.0),
+                        total_time
+                    )
+                )
+            except Exception as e:
+                print(f"[latency_middleware] Failed to log latency: {e}")
+                
+        bg_tasks.add_task(_write_log)
+        response.background = bg_tasks
+        
+        return response
+    finally:
+        reset_tracker(token)
 
 app.add_middleware(
     CORSMiddleware,
@@ -84,9 +142,13 @@ class UserProfile(BaseModel):
     subjects:  Optional[List[str]] = None
 
 class ChatRequest(BaseModel):
-    question:    str
-    history:     Optional[List[HistoryTurn]] = None
-    userProfile: Optional[UserProfile]       = None
+    question:       str
+    history:        Optional[List[HistoryTurn]] = None
+    userProfile:    Optional[UserProfile]       = None
+    studentProfile: Optional[UserProfile]       = None
+
+    def resolved_profile(self) -> Optional[UserProfile]:
+        return self.studentProfile or self.userProfile
 
 class LinkEcampusRequest(BaseModel):
     ecampus_username: str
@@ -97,16 +159,25 @@ MAX_AUDIO_BYTES = 25 * 1024 * 1024
 
 # ── /chat ─────────────────────────────────────────────────────────────────
 @app.post("/chat")
-def chat(
+async def chat(
     request:  ChatRequest,
     identity: Identity = Depends(require_identity),   # verifies Next.js JWT
 ):
-    history = [t.model_dump() for t in request.history] if request.history else []
-    display_profile = (
-        request.userProfile.model_dump(exclude_none=True)
-        if request.userProfile else None
-    )
-    return aura.ask(
+    history = [t.model_dump() for t in (request.history or [])][-6:]
+    profile = request.resolved_profile()
+    display_profile = profile.model_dump(exclude_none=True) if profile else None
+
+    quota_key = identity.email or identity.erp_id
+    try:
+        enforce_quota(quota_key, identity.role)
+    except QuotaExceeded as exc:
+        raise HTTPException(
+            status_code=429,
+            detail=f"Question limit reached ({exc.limit}/day).",
+        ) from exc
+
+    return await run_in_threadpool(
+        get_aura().ask,
         question=request.question,
         history=history,
         identity=identity.as_dict(),

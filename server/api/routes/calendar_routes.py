@@ -26,15 +26,11 @@ import jwt
 from fastapi import APIRouter, HTTPException, Depends, Query
 from fastapi.responses import RedirectResponse
 
-from api.auth import require_identity, Identity
+from api.auth import require_identity, Identity, get_internal_jwt_secret, ALGORITHM
 from pipeline.google_calendar.slot_service import get_available_slots
 from pipeline.google_calendar.token_vault import (
     store_tokens, unlink_calendar, is_linked, CalendarNotLinked
 )
-
-def get_internal_jwt_secret() -> str:
-    return os.environ.get("INTERNAL_JWT_SECRET", "")
-ALGORITHM           = "HS256"
 
 router = APIRouter(prefix="/calendar", tags=["calendar"])
 
@@ -47,6 +43,9 @@ REDIRECT_URI       = os.environ.get(
     "https://aura.dau.ac.in/api/calendar/callback",
 )
 CALENDAR_SCOPE     = "https://www.googleapis.com/auth/calendar.readonly"
+
+def _frontend_origin() -> str:
+    return os.environ.get("PROD_FRONTEND_ORIGIN", "http://localhost:3000").rstrip("/")
 
 
 @router.get("/slots/{faculty_erp_id}")
@@ -168,8 +167,7 @@ def calendar_oauth_callback(
     store_tokens(erp_id=erp_id, access_token=access_token,
                  refresh_token=refresh_token, token_expiry=expiry)
 
-    # Redirect back to the faculty dashboard
-    return RedirectResponse(url="/calendar/connected")
+    return RedirectResponse(url=f"{_frontend_origin()}/dashboard?calendar=connected")
 
 
 @router.delete("/disconnect")

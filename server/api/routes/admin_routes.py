@@ -105,7 +105,6 @@ def _check_erp_exists(erp_id: str) -> None:
 class AddBindingRequest(BaseModel):
     binding:    str
     expires_at: Optional[str] = None   # ISO-8601 datetime string, or null = permanent
-    note:       Optional[str] = None   # optional human-readable reason / context
 
 
 @router.get("/users/{erp_id}/bindings")

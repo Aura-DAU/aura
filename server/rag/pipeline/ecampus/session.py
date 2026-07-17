@@ -21,6 +21,7 @@ TODO once you have access to the live login page source:
 import os
 import re
 import requests
+from typing import Optional
 
 ECAMPUS_BASE_URL = os.environ.get("ECAMPUS_BASE_URL", "https://ecampus.daiict.ac.in")
 
@@ -97,7 +98,7 @@ class ECampusSession:
         return resp.text
 
     def post_back(self, path: str, event_target: str, event_argument: str = "",
-                   extra_fields: dict | None = None) -> str:
+                   extra_fields: Optional[dict] = None) -> str:
         """For tabs implemented as __doPostBack(...) rather than plain links."""
         if not self._logged_in:
             raise ECampusLoginError("Must call login() before post_back().")

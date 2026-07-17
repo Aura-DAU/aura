@@ -20,8 +20,15 @@ from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 def get_internal_jwt_secret() -> str:
+    """Return INTERNAL_JWT_SECRET, or empty string if unset.
+
+    Callers must treat an empty return as misconfiguration (HTTP 500).
+    Tests set INTERNAL_JWT_SECRET explicitly via conftest / env.
+    """
     return os.environ.get("INTERNAL_JWT_SECRET", "")
-ALGORITHM           = "HS256"
+
+
+ALGORITHM = "HS256"
 
 # Broad roles stored in user_identity_map.role — what the JWT carries.
 # Fine-grained roles are in role_bindings and resolved by resolve_effective_role().
@@ -53,6 +60,7 @@ class Identity:
     erp_id: str
     role:   str           # broad role from JWT: student | faculty | admin
     dept:   Optional[str] = None
+    email:  Optional[str] = None
 
     @property
     def user_id(self) -> str:
@@ -60,7 +68,12 @@ class Identity:
         return self.erp_id
 
     def as_dict(self) -> dict:
-        return {"role": self.role, "erp_id": self.erp_id, "dept": self.dept}
+        return {
+            "role": self.role,
+            "erp_id": self.erp_id,
+            "dept": self.dept,
+            "email": self.email,
+        }
 
 
 def require_identity(
@@ -90,13 +103,14 @@ def require_identity(
 
     role   = claims.get("role", "")
     erp_id = claims.get("erpId", "")  # Next.js mints camelCase
+    email  = claims.get("email") or None
 
     if not erp_id:
         raise HTTPException(status_code=401, detail="Token missing erpId claim")
     if role not in BROAD_ROLES:
         raise HTTPException(status_code=403, detail=f"Unrecognised role in token: {role!r}")
 
-    return Identity(erp_id=erp_id, role=role, dept=claims.get("department"))
+    return Identity(erp_id=erp_id, role=role, dept=claims.get("department"), email=email)
 
 
 get_current_identity = require_identity

@@ -11,8 +11,9 @@ import psycopg2
 import psycopg2.pool
 import psycopg2.extras
 from contextlib import contextmanager
+from typing import Optional
 
-_pool: psycopg2.pool.ThreadedConnectionPool | None = None
+_pool: Optional[psycopg2.pool.ThreadedConnectionPool] = None
 
 
 def _init_pool() -> psycopg2.pool.ThreadedConnectionPool:

@@ -32,11 +32,14 @@ _ELEVATED_ROLES = {
 }
 
 
+from typing import Optional
+
+
 class AccessDenied(Exception):
     pass
 
 
-def authorize_personal_query(identity: dict, target_student_id: str | None) -> str:
+def authorize_personal_query(identity: dict, target_student_id: Optional[str]) -> str:
     """
     identity: {"role": str, "erp_id": str, "department": str|None}
     target_student_id: the student the query is ABOUT. None means

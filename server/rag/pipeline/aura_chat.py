@@ -15,11 +15,12 @@ Step 7: If PUBLIC/MIXED → run existing RAG pipeline
         Merge contexts → generate answer
 """
 
-import os
 import re
+from typing import Optional
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import AnswerGenerator
 from pipeline.guardrails.query_guardrail import QueryGuardrail
+from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
 
 from erp_connector import ERPConnector
 from erp_context_builder import ERPContextBuilder
@@ -74,6 +75,7 @@ class AuraChat:
         self.pipeline   = RetrievalPipeline()
         self.generator  = AnswerGenerator()
         self.guardrail  = QueryGuardrail()
+        self.wellness   = WellnessGuardrail()
 
         erp = ERPConnector()
         self.classifier     = PersonalQueryClassifier()
@@ -98,23 +100,75 @@ class AuraChat:
 
         try:
             # ── Safety guardrail (applies to every query) ──────────────
-            if not self.guardrail.is_safe(query):
+            from pipeline.latency_tracker import track_segment
+            with track_segment("guardrail_time"):
+                is_safe = self.guardrail.is_safe(query)
+            if not is_safe:
                 return {
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                     "sources": [],
+                }
+
+            # ── Wellness/distress check ───────────────────────────────
+            if self.wellness.check(query):
+                return {
+                    "answer": self.wellness.get_response(),
+                    "sources": [],
+                    "is_personal_data": False,
                 }
 
             history = history or []
 
             # ── Greetings bypass classifier ────────────────────────────
             if is_greeting_or_meta(query):
-                from access_control import resolve_effective_role
-                user_role = resolve_effective_role(identity) if identity else "public"
-                return self._rag_only(query, history, display_profile, user_role=user_role)
+                q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
+                words = q.split()
+                
+                # Check for help/capabilities queries
+                help_words = {"what can you do", "help", "menu", "intro", "introduce yourself"}
+                who_words = {"who are you", "who is aura", "what is aura"}
+                
+                if q in help_words or any(w in help_words for w in words):
+                    ans = (
+                        "I can help you with a wide range of questions about Dhirubhai Ambani University, including:\n"
+                        "- **Admissions & Academics**: Program details, fee structures, eligibility criteria, and academic policies.\n"
+                        "- **Campus & Facilities**: Hostel rules, dining details, medical SOPs, and general guidelines.\n"
+                        "- **Personal ERP Records**: You can check your CPI/CGPA, attendance, and course grades securely.\n"
+                        "- **Calendar Actions**: I can help you schedule appointments or check event dates.\n\n"
+                        "How can I assist you today?"
+                    )
+                elif q in who_words or any(w in who_words for w in words):
+                    ans = (
+                        "I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
+                        "I am here to help you navigate university life, policies, academics, admissions, "
+                        "and connect you with your personal academic data from the ERP system. How can I help you today?"
+                    )
+                else:
+                    ans = (
+                        "Hello! I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
+                        "I can help you with questions about admissions, academics, faculty, courses, campus life, "
+                        "and your personal student records (like CGPA, grades, and attendance). How can I assist you today?"
+                    )
+                return {
+                    "answer": ans,
+                    "sources": [],
+                    "is_personal_data": False
+                }
 
             # ── Step 1: Classify ────────────────────────────────────────
             classification = self.classifier.classify(query)
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
+
+            # ── Guest / No-identity check for personal paths ───────────
+            if query_type in ("PERSONAL", "MIXED", "AGGREGATE"):
+                from access_control import resolve_effective_role
+                user_role = resolve_effective_role(identity) if identity else "guest"
+                if user_role == "guest":
+                    return {
+                        "answer": GENERIC_DENIAL,
+                        "sources": [],
+                        "is_personal_data": False,
+                    }
 
             # ── Step 1b: Strict guardrail for personal-data paths ───────
             # is_safe() above fails OPEN (acceptable for public RAG). For
@@ -122,7 +176,9 @@ class AuraChat:
             # fails CLOSED — if the guardrail LLM is down, deny rather than
             # risk a prompt injection reaching the ERP pipeline.
             if query_type in ("PERSONAL", "MIXED", "AGGREGATE") and identity:
-                if not self.guardrail.is_safe_strict(query):
+                with track_segment("guardrail_time"):
+                    is_safe_strict = self.guardrail.is_safe_strict(query)
+                if not is_safe_strict:
                     return {
                         "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                         "sources": [],
@@ -175,7 +231,8 @@ class AuraChat:
             if query_type in ("PUBLIC", "MIXED", "AGGREGATE"):
                 from access_control import resolve_effective_role
                 user_role = resolve_effective_role(identity) if identity else "public"
-                retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
+                with track_segment("retrieval_time"):
+                    retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
                 chunks    = retrieval_result.get("chunks", [])
                 rag_context = retrieval_result.get("context", "")
                 sources   = retrieval_result.get("sources", [])
@@ -186,14 +243,15 @@ class AuraChat:
             # ── Step 8: Merge and generate ─────────────────────────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
 
-            answer = self.generator.generate(
-                query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
-                context=combined_context,
-                plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
-                history=history,
-                profile=display_profile,
-                system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
-            )
+            with track_segment("generation_time"):
+                answer = self.generator.generate(
+                    query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
+                    context=combined_context,
+                    plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
+                    history=history,
+                    profile=display_profile,
+                    system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                )
 
             return {
                 "answer": answer,
@@ -211,7 +269,7 @@ class AuraChat:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
             return {"answer": msg, "sources": [], "is_personal_data": False}
 
-    def _resolve_target(self, target_label: str | None, identity) -> str | None:
+    def _resolve_target(self, target_label: Optional[str], identity) -> Optional[str]:
         if not target_label or target_label == "self":
             return identity.erp_id
         if target_label and target_label[:3].isdigit():
@@ -219,7 +277,7 @@ class AuraChat:
         result = self.erp_connector.find_student_by_name(target_label)
         return result["roll_number"] if result else None
 
-    def _fetch_erp_data(self, fields: list, roll_number: str | None, access_result) -> dict:
+    def _fetch_erp_data(self, fields: list, roll_number: Optional[str], access_result) -> dict:
         if not roll_number:
             return {}
         data = {}
@@ -234,15 +292,18 @@ class AuraChat:
         return data
 
     def _rag_only(self, query, history, profile, user_role: str = "public") -> dict:
-        retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
+        from pipeline.latency_tracker import track_segment
+        with track_segment("retrieval_time"):
+            retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
         chunks    = retrieval_result.get("chunks", [])
         if not chunks:
             return {"answer": "I'm having trouble retrieving information. Please try again.", "sources": [], "is_personal_data": False}
-        answer = self.generator.generate(
-            query=retrieval_result.get("corrected_query", query),
-            context=retrieval_result["context"],
-            plan=retrieval_result["plan"],
-            history=history,
-            profile=profile,
-        )
+        with track_segment("generation_time"):
+            answer = self.generator.generate(
+                query=retrieval_result.get("corrected_query", query),
+                context=retrieval_result["context"],
+                plan=retrieval_result["plan"],
+                history=history,
+                profile=profile,
+            )
         return {"answer": answer, "sources": retrieval_result["sources"], "is_personal_data": False}
