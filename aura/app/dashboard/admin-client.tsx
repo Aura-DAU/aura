@@ -28,7 +28,16 @@ interface LatencyStats {
   total_requests: number
 }
 
-const BoxShape = (props: any) => {
+interface BoxShapeProps {
+  x: number
+  y: number
+  width: number
+  height: number
+  fill?: string
+  payload: LatencySegment
+}
+
+const BoxShape = (props: BoxShapeProps) => {
   const { x, y, width, height, payload, fill } = props
   const { min, q1, median, q3, max } = payload
 
@@ -449,7 +458,7 @@ export default function AdminBindingsClient() {
                     <Bar
                       dataKey="box"
                       fill="#e53e3e"
-                      shape={<BoxShape />}
+                      shape={(props: any) => <BoxShape {...props} />}
                       barSize={40}
                     />
                   </ComposedChart>
