@@ -1,27 +1,6 @@
-"""
-build_entity_index.py
-=====================
-Offline one-time script implementing Step 2 of the professor's algorithm:
-
-    Chunks → Triples → Entity
-
-For each chunk in metadata.json we read the structured entity fields that
-were already attached at ingestion time (faculty_name, course_code,
-program_name, event_name, semester) and invert them into an
-entity_index.json:
-
-    {
-      "faculty_name": { "Abhishek Jindal": ["chunk-id-1", ...], ... },
-      "course_code":  { "IT205": ["chunk-id-2", ...], ... },
-      ...
-    }
-
-At retrieval time, EntityRetriever uses this index to find entity-matched
-chunks and merge them with the standard vector/BM25 results (chunk pool).
-
-Run from the project root:
-    python pipeline/ingestion/build_entity_index.py
-"""
+# build_entity_index.py
+# Offline one-time script implementing Step 2 of the professor's algorithm:
+# python pipeline/ingestion/build_entity_index.py
 
 import json
 import logging
@@ -53,11 +32,8 @@ ENTITY_FIELDS = [
 # ── Builder ───────────────────────────────────────────────────────────────────
 
 def build_entity_index(metadata_path: Path, output_path: Path) -> dict:
-    """
-    Read all chunks from metadata_path and build an inverted entity index.
-
-    Returns the index dict so callers can inspect it without touching disk.
-    """
+    # Read all chunks from metadata_path and build an inverted entity index.
+    # Returns the index dict so callers can inspect it without touching disk.
     if not metadata_path.exists():
         raise FileNotFoundError(
             f"metadata.json not found at {metadata_path}. "

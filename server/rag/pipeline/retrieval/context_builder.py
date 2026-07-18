@@ -13,7 +13,7 @@ class ContextBuilder:
     MAX_CONTEXT_TOKENS = 3000
 
     def _estimate_tokens(self, text: str) -> int:
-        """Rough token estimate: word count × 1.3 (accounts for sub-word splits)."""
+        # Rough token estimate: word count × 1.3 (accounts for sub-word splits).
         return int(len(text.split()) * 1.3)
 
     def build(self, chunks, retrieval_intent="general"):

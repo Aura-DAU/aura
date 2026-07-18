@@ -1,10 +1,6 @@
-"""
-B9 tests — updated to include AGGREGATE as a 4th valid type
-and injection-defense tests.
-
-Integration tests (require real GROQ_API_KEY) are marked @pytest.mark.integration.
-Failure-mode and injection tests run without a real key.
-"""
+# B9 tests — updated to include AGGREGATE as a 4th valid type
+# and injection-defense tests.
+# Failure-mode and injection tests run without a real key.
 
 import sys, os
 from pathlib import Path
@@ -139,11 +135,9 @@ def test_aggregate_is_a_valid_type():
 
 
 def test_prompt_injection_query_is_sent_wrapped_in_delimiters():
-    """
-    The classifier must wrap user input in <query>...</query> so the model
-    sees a clear boundary between its instructions and user text.
-    Verify the payload sent to the LLM contains the delimiter tags.
-    """
+    # The classifier must wrap user input in <query>...</query> so the model
+    # sees a clear boundary between its instructions and user text.
+    # Verify the payload sent to the LLM contains the delimiter tags.
     from personal_query_classifier import PersonalQueryClassifier
     clf = PersonalQueryClassifier.__new__(PersonalQueryClassifier)
     clf.client = MagicMock()

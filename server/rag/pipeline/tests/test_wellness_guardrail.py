@@ -1,23 +1,6 @@
-"""
-Tests for the WellnessGuardrail classifier.
-
-Covers:
-- Distress phrases that must trigger the guardrail (keyword-fallback path).
-- Normal university queries that must NOT trigger it.
-- Edge cases: empty string, whitespace-only.
-- Response content: get_response() returns the fixed contact block.
-
-NOTE: PR #144's original version of this file called `guardrail.is_distress()`
-and `guardrail.wellness_response()`. Neither method exists on WellnessGuardrail
-(the class only defines `check()` / `get_response()` / `_llm_check()` /
-`_fallback_check()`), and aura_chat.py's actual call site uses `check()` /
-`get_response()`. Running the original file would raise AttributeError on
-every test. This version is rewritten against the real API so it can pass.
-
-All tests here exercise `_fallback_check()` directly (not `check()`), the
-same way test_quota_enforcement.py's wellness tests do — this avoids making
-a live Groq API call in CI, matching the project's existing test pattern.
-"""
+# Tests for the WellnessGuardrail classifier.
+# Covers:
+# a live Groq API call in CI, matching the project's existing test pattern.
 
 import sys
 from pathlib import Path
@@ -106,13 +89,13 @@ def test_whitespace_only_does_not_trigger(guardrail):
 
 
 def test_fallback_check_case_insensitive(guardrail):
-    """Pattern matching must be case-insensitive."""
+    # Pattern matching must be case-insensitive.
     assert guardrail._fallback_check("I WANT TO KILL MYSELF") is True
     assert guardrail._fallback_check("I Want To Kill Myself") is True
 
 
 def test_fallback_check_embedded_in_sentence(guardrail):
-    """Trigger phrase embedded mid-sentence must still fire."""
+    # Trigger phrase embedded mid-sentence must still fire.
     assert guardrail._fallback_check(
         "Lately I have been thinking I want to end my life because of pressure"
     ) is True
@@ -128,7 +111,7 @@ def test_get_response_is_nonempty_string(guardrail):
 
 
 def test_get_response_contains_contact_info(guardrail):
-    """Wellness response must contain at least one real contact."""
+    # Wellness response must contain at least one real contact.
     response = guardrail.get_response()
     assert any(
         contact in response
