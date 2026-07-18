@@ -1,0 +1,141 @@
+# AURA production stack — Phase E (DO-5)
+#
+# Reflects the system-architecture doc's request/dependency graph
+# (NGINX → Next.js/FastAPI → orchestration → storage) as it maps onto this
+# repo's actual services today:
+#   - `aura`     — Next.js frontend (BFF route handlers + PWA)
+#   - `backend`  — FastAPI + RAG pipeline (chat, speech, documents, admin)
+#   - `postgres` — AUTH_DB_URL: auth schema, latency logs, admin bindings
+#   - `redis`    — timetable push-notification queue / rate limiting
+#   - `nginx`    — edge reverse proxy + SSL termination
+#
+# NOTE on parity with the architecture doc: the doc's target design calls
+# for a self-hosted Qdrant vector DB and on-prem vLLM inference nodes. This
+# codebase currently uses managed Pinecone (PINECONE_API_KEY/INDEX) and
+# Groq's hosted API (GROQ_API_KEY) instead — there is no local vector DB or
+# GPU inference server process to containerize yet. A `qdrant` service is
+# stubbed out below (commented) for when that migration happens; until
+# then, PINECONE_* and GROQ_* are supplied via env vars to `backend`.
+#
+# Usage:
+#   cp deploy/.env.prod.example deploy/.env.prod   # fill in secrets
+#   docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.prod up -d --build
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - aura
+      - backend
+    networks:
+      - aura-edge
+
+  aura:
+    build:
+      context: ../aura
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      BACKEND_URL: http://backend:8000
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
+      INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+    depends_on:
+      - backend
+    networks:
+      - aura-edge
+      - aura-internal
+
+  backend:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "8000"
+    environment:
+      PORT: "8000"
+      WEB_CONCURRENCY: ${BACKEND_WORKERS:-2}
+      AUTH_DB_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://redis:6379/0
+      PROD_FRONTEND_ORIGIN: ${PROD_FRONTEND_ORIGIN}
+      INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
+      INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      GROQ_MODEL: ${GROQ_MODEL:-llama-3.3-70b-versatile}
+      PINECONE_API_KEY: ${PINECONE_API_KEY}
+      PINECONE_INDEX: ${PINECONE_INDEX}
+      GOOGLE_CALENDAR_CLIENT_ID: ${GOOGLE_CALENDAR_CLIENT_ID}
+      GOOGLE_CALENDAR_CLIENT_SECRET: ${GOOGLE_CALENDAR_CLIENT_SECRET}
+      GOOGLE_CALENDAR_VAULT_KEY: ${GOOGLE_CALENDAR_VAULT_KEY}
+      GOOGLE_CALENDAR_VAULT_DB: /var/lib/aura/google_calendar_vault.db
+      ECAMPUS_VAULT_KEY: ${ECAMPUS_VAULT_KEY}
+      ECAMPUS_VAULT_DB: /var/lib/aura/ecampus_credentials.db
+      ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db
+      AURA_AUDIT_LOG: /var/log/aura/personal_data_audit.log
+    volumes:
+      # Raw markdown knowledge base — mounted read-only so the /documents
+      # endpoint (Phase C citation side-drawer) can serve source files, and
+      # so ingestion scripts can be run inside the container ad hoc.
+      - ../data:/app/data:ro
+      - aura-vault:/var/lib/aura
+      - aura-logs:/var/log/aura
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - aura-internal
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - aura-internal
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    networks:
+      - aura-internal
+
+  # qdrant:
+  #   image: qdrant/qdrant:latest
+  #   restart: unless-stopped
+  #   volumes:
+  #     - qdrant-storage:/qdrant/storage
+  #   networks:
+  #     - aura-internal
+
+networks:
+  aura-edge:
+  aura-internal:
+
+volumes:
+  postgres-data:
+  redis-data:
+  aura-vault:
+  aura-logs:
+  # qdrant-storage:

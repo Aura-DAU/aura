@@ -1,0 +1,151 @@
+Question ID,Question,Subcategory,Difficulty,Expected Source
+FAC001,Who are the faculty members at DA-IICT?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC002,Where can I find the official faculty list?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC003,How do I access faculty profiles?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC004,What information is available in faculty profiles?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC005,Where is the DA-IICT faculty directory hosted?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC006,How can I search for a specific faculty member?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC007,Are faculty contact details publicly available?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC008,Where can I find faculty email addresses?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC009,Does DA-IICT provide department-wise faculty listing?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC010,How is faculty information structured on the website?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC011,Can I view faculty designations online?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC012,Where can I find faculty office locations?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC013,Is the faculty directory updated regularly?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC014,Can I filter faculty by department?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC015,Does the faculty page include research interests?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC016,How detailed are faculty profiles at DA-IICT?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC017,Are retired faculty members listed?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC018,Can students contact faculty directly?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC019,Is faculty profile information publicly accessible?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC020,Where is the main faculty database maintained?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC021,Who is the Dean of Faculty?,Dean Faculty,Easy,data/faculty/dean_faculty.md
+FAC022,What is the role of Dean Faculty?,Dean Faculty,Easy,data/faculty/dean_faculty.md
+FAC023,Where can I find Dean Faculty information?,Dean Faculty,Easy,data/faculty/dean_faculty.md
+FAC024,Who reports to the Dean Faculty?,Dean Faculty,Medium,data/faculty/dean_faculty.md
+FAC025,What responsibilities does the Dean Faculty handle?,Dean Faculty,Medium,data/faculty/dean_faculty.md
+FAC026,Is Dean Faculty information publicly available?,Dean Faculty,Easy,data/faculty/dean_faculty.md
+FAC027,How is the Dean Faculty appointed?,Dean Faculty,Medium,data/faculty/dean_faculty.md
+FAC028,What decisions does the Dean Faculty oversee?,Dean Faculty,Medium,data/faculty/dean_faculty.md
+FAC029,Where is the Dean Faculty office located?,Dean Faculty,Easy,data/faculty/dean_faculty.md
+FAC030,How to contact the Dean Faculty?,Dean Faculty,Easy,data/faculty/dean_faculty.md
+FAC031,What are adjunct faculty members?,Adjunct Faculty,Easy,data/faculty/adjunct/adjunct_faculty.md
+FAC032,Where can I find adjunct faculty list?,Adjunct Faculty,Easy,data/faculty/adjunct/adjunct_faculty.md
+FAC033,Does DA-IICT have international adjunct faculty?,International Adjunct Faculty,Easy,data/faculty/adjunct/adjunct_faculty.md
+FAC034,What is the role of adjunct faculty?,Adjunct Faculty,Medium,data/faculty/adjunct/adjunct_faculty.md
+FAC035,Are adjunct faculty full-time employees?,Adjunct Faculty,Medium,data/faculty/adjunct/adjunct_faculty.md
+FAC036,How are adjunct faculty selected?,Adjunct Faculty,Medium,data/faculty/adjunct/adjunct_faculty.md
+FAC037,What departments have adjunct faculty?,Adjunct Faculty,Medium,data/faculty/adjunct/adjunct_faculty.md
+FAC038,Where is international adjunct faculty information available?,International Adjunct Faculty,Easy,data/faculty/adjunct/adjunct_faculty.md
+FAC039,Can adjunct faculty supervise research?,Adjunct Faculty,Medium,data/faculty/adjunct/adjunct_faculty.md
+FAC040,Are adjunct faculty listed on the official website?,Adjunct Faculty,Easy,data/faculty/adjunct/adjunct_faculty.md
+FAC041,Where can I find faculty research publications?,Faculty Publications,Easy,data/faculty/regular/faculty_list.md
+FAC042,What type of research publications are listed?,Faculty Publications,Easy,data/faculty/regular/faculty_list.md
+FAC043,How are faculty publications categorized?,Faculty Publications,Medium,data/faculty/regular/faculty_list.md
+FAC044,Is there a database for faculty research output?,Faculty Publications,Easy,data/faculty/regular/faculty_list.md
+FAC045,Can I search faculty publications by name?,Faculty Publications,Medium,data/faculty/regular/faculty_list.md
+FAC046,Are journal papers included in faculty publications?,Faculty Publications,Easy,data/faculty/regular/faculty_list.md
+FAC047,Does DA-IICT track faculty research output?,Faculty Publications,Medium,data/faculty/regular/faculty_list.md
+FAC048,Where is publication data stored?,Faculty Publications,Medium,data/faculty/regular/faculty_list.md
+FAC049,Are conference papers included in faculty publications?,Faculty Publications,Easy,data/faculty/regular/faculty_list.md
+FAC050,How frequently are faculty publications updated?,Faculty Publications,Medium,data/faculty/regular/faculty_list.md
+FAC051,What is the faculty publication incentive scheme?,Faculty Research Publication Incentive,Easy,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC052,Where can I find the incentive scheme document?,Faculty Research Publication Incentive,Easy,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC053,Who is eligible for publication incentives?,Faculty Research Publication Incentive,Medium,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC054,How are publication incentives calculated?,Faculty Research Publication Incentive,Medium,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC055,What documents are needed for incentive claims?,Faculty Research Publication Incentive,Medium,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC056,Is there a limit on incentive payouts?,Faculty Research Publication Incentive,Medium,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC057,Which publications qualify for incentives?,Faculty Research Publication Incentive,Medium,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC058,How does DA-IICT reward research output?,Faculty Research Publication Incentive,Easy,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC059,Who approves incentive claims?,Faculty Research Publication Incentive,Medium,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC060,Is the incentive scheme updated periodically?,Faculty Research Publication Incentive,Medium,data/policies/daiict_ac_in_sites_default_files_other_files_policy_on_faculty_research_publicat.md
+FAC061,What is the faculty entrepreneurship policy?,Faculty Entrepreneurship Policy,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC062,Where can I access the entrepreneurship policy document?,Faculty Entrepreneurship Policy,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC063,Does DA-IICT support faculty startups?,Faculty Entrepreneurship Policy,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC064,Are faculty allowed to start companies?,Faculty Entrepreneurship Policy,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC065,What are the guidelines for faculty entrepreneurship?,Faculty Entrepreneurship Policy,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC066,Does the institute provide funding for faculty startups?,Faculty Entrepreneurship Policy,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC067,Can faculty take leave for entrepreneurship?,Faculty Entrepreneurship Policy,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC068,What restrictions exist under entrepreneurship policy?,Faculty Entrepreneurship Policy,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC069,Is external collaboration allowed under entrepreneurship policy?,Faculty Entrepreneurship Policy,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC070,Who regulates faculty entrepreneurship activities?,Faculty Entrepreneurship Policy,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_entrepreneurship_policy_pdf.md
+FAC071,What is included in the faculty handbook?,Faculty Handbook,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC072,Where can I download the faculty handbook?,Faculty Handbook,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC073,Does the handbook include academic rules?,Faculty Handbook,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC074,Are teaching guidelines included in the faculty handbook?,Faculty Handbook,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC075,Does the handbook include evaluation policies?,Faculty Handbook,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC076,Is attendance policy included in faculty handbook?,Faculty Handbook,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC077,Are leave rules mentioned in faculty handbook?,Faculty Handbook,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC078,Who maintains the faculty handbook?,Faculty Handbook,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC079,How often is the faculty handbook updated?,Faculty Handbook,Medium,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC080,Does the handbook include code of conduct?,Faculty Handbook,Easy,data/faculty/daiict_ac_in_sites_default_files_other_files_faculty_handbook_pdf.md
+FAC081,What is the faculty grievance redressal authority?,Faculty Grievance Redressal,Easy,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC082,Where can grievances be submitted?,Faculty Grievance Redressal,Easy,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC083,Who handles faculty complaints?,Faculty Grievance Redressal,Easy,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC084,What types of grievances are accepted?,Faculty Grievance Redressal,Medium,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC085,Is grievance submission confidential?,Faculty Grievance Redressal,Medium,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC086,How long does grievance resolution take?,Faculty Grievance Redressal,Medium,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC087,Can faculty appeal grievance decisions?,Faculty Grievance Redressal,Medium,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC088,Who is part of grievance committee?,Faculty Grievance Redressal,Medium,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC089,Is there an online grievance system?,Faculty Grievance Redressal,Easy,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC090,What happens after grievance submission?,Faculty Grievance Redressal,Medium,data/administration/daiict_ac_in_table_2_grievance_redressal_authority_faculty.md
+FAC091,What faculty positions are available at DA-IICT?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC092,Where are faculty job openings listed?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC093,Which departments hire faculty at DA-IICT?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC094,How do I apply for faculty positions?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC095,What is the eligibility for faculty recruitment?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC096,Are PhD holders required for faculty jobs?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC097,What is the selection process for faculty hiring?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC098,Are interviews part of faculty recruitment?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC099,Which departments currently have openings?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC100,Is experience required for faculty positions?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC101,What is the tenure policy for faculty?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC102,How long is faculty probation period?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC103,Are faculty promotions based on research output?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC104,What is the salary structure for faculty?,Faculty Recruitment,Hard,data/academics/careers/careers_faculty_tenure.md
+FAC105,Do faculty get research grants?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC106,Is teaching experience mandatory?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC107,Can faculty move between departments?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC108,What is the retirement policy for faculty?,Faculty Recruitment,Hard,data/academics/careers/careers_faculty_tenure.md
+FAC109,Are visiting faculty positions available?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC110,Does DA-IICT hire international faculty?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC111,How are faculty evaluated annually?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC112,What KPIs are used for faculty assessment?,Faculty Recruitment,Hard,data/academics/careers/careers_faculty_tenure.md
+FAC113,Is student feedback used in evaluation?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC114,Are research publications considered in evaluation?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC115,Do faculty undergo performance reviews?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC116,How often are faculty promotions reviewed?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC117,What is the academic workload of faculty?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC118,Are faculty required to publish papers?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC119,Do faculty supervise student projects?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC120,Is industry experience valued in hiring?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC121,What teaching responsibilities do faculty have?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC122,Do faculty handle labs and lectures?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC123,Are faculty involved in curriculum design?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC124,Can faculty propose new courses?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC125,Do faculty participate in committees?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC126,Are faculty involved in admissions?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC127,Do faculty guide PhD students?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC128,Are faculty involved in placements?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC129,What administrative roles do faculty hold?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC130,Can faculty take sabbaticals?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC131,How are faculty promotions decided?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC132,What is the appraisal cycle for faculty?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC133,Are external reviewers involved in evaluation?,Faculty Recruitment,Hard,data/academics/careers/careers_faculty_tenure.md
+FAC134,Do faculty have research quotas?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC135,What is expected from junior faculty?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC136,What is expected from senior faculty?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC137,Are teaching assistants involved?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC138,Do faculty mentor students?,Faculty Recruitment,Easy,data/academics/careers/careers_faculty_tenure.md
+FAC139,Is interdisciplinary teaching encouraged?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC140,Are faculty required to attend training programs?,Faculty Recruitment,Medium,data/academics/careers/careers_faculty_tenure.md
+FAC141,What is the overall faculty structure at DA-IICT?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC142,How many departments have faculty listings?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC143,Are emeritus faculty listed separately?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC144,Can faculty profiles include achievements?,Faculty Directory,Easy,data/faculty/regular/faculty_list.md
+FAC145,Is research interest searchable in faculty directory?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC146,Are faculty publications linked in profiles?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC147,Can students rate faculty?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC148,Is faculty data accessible via API?,Faculty Directory,Hard,data/faculty/regular/faculty_list.md
+FAC149,Is the faculty database centralized?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md
+FAC150,How is faculty information verified?,Faculty Directory,Medium,data/faculty/regular/faculty_list.md

@@ -1,0 +1,79 @@
+import pytest
+from unittest.mock import MagicMock, patch
+import sys
+from pathlib import Path
+
+# Add rag directory to path so we can import from pipeline
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+
+from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
+
+@patch('pipeline.retrieval.retrieval_pipeline.Retriever')
+def test_pipeline_get_context_applies_dls_filter(mock_retriever_class):
+    # Mock retriever instance
+    mock_retriever = MagicMock()
+    mock_retriever_class.return_value = mock_retriever
+    mock_retriever.index = MagicMock()
+    mock_retriever.index.query.return_value = {"matches": []}
+    mock_retriever.retrieve.return_value = []
+    
+    pipeline = RetrievalPipeline()
+    
+    # Mock planner to return a simple plan
+    pipeline.planner = MagicMock()
+    pipeline.planner.plan.return_value = {
+        "top_k": 5,
+        "entities": {},
+        "retrieval_intent": "general",
+        "query_decomposition": []
+    }
+    
+    # Mock reranker
+    pipeline.reranker = MagicMock()
+    pipeline.reranker.rerank.return_value = []
+    
+    # Call get_context with student role
+    pipeline.get_context("What is the fee?", user_role="student")
+    
+    # Verify that index.query was called with the correct DLS filter for student
+    mock_retriever.index.query.assert_called()
+    called_args, called_kwargs = mock_retriever.index.query.call_args
+    assert "filter" in called_kwargs
+    assert "authorization" in called_kwargs["filter"]
+    assert "$in" in called_kwargs["filter"]["authorization"]
+    assert set(called_kwargs["filter"]["authorization"]["$in"]) == {"public", "student"}
+
+@patch('pipeline.retrieval.retrieval_pipeline.Retriever')
+def test_pipeline_get_context_applies_dls_filter_superadmin(mock_retriever_class):
+    # Mock retriever instance
+    mock_retriever = MagicMock()
+    mock_retriever_class.return_value = mock_retriever
+    mock_retriever.index = MagicMock()
+    mock_retriever.index.query.return_value = {"matches": []}
+    mock_retriever.retrieve.return_value = []
+    
+    pipeline = RetrievalPipeline()
+    
+    # Mock planner
+    pipeline.planner = MagicMock()
+    pipeline.planner.plan.return_value = {
+        "top_k": 5,
+        "entities": {},
+        "retrieval_intent": "general",
+        "query_decomposition": []
+    }
+    
+    # Mock reranker
+    pipeline.reranker = MagicMock()
+    pipeline.reranker.rerank.return_value = []
+    
+    # Call get_context with superadmin role
+    pipeline.get_context("What is the fee?", user_role="superadmin")
+    
+    # Verify that index.query was called with all roles
+    mock_retriever.index.query.assert_called()
+    called_args, called_kwargs = mock_retriever.index.query.call_args
+    assert "filter" in called_kwargs
+    allowed_roles = called_kwargs["filter"]["authorization"]["$in"]
+    assert "superadmin" in allowed_roles
+    assert "dean_academic" in allowed_roles

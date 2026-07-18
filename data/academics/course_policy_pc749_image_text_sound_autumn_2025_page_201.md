@@ -1,0 +1,259 @@
+---
+title: "Image, Text & Sound"
+url: "https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf"
+category: "Academics - Course Policies"
+scraped_by: "Squad D Scraper"
+scraped_date: "2026-06-08"
+team: "Squad D"
+source_type: "PDF"
+pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
+course_code: "PC749"
+semester: "Autumn 2025-26"
+pdf_page_start: 202
+pdf_page_end: 208
+---
+
+# Image, Text & Sound (PC749)
+
+## Main Content
+
+COURSE FILE
+PC749: Image, Text & Sound
+Credit Structure: 3-0-4-5
+Program: MDes (Communication Design)
+Year: 1
+Semester: 1
+Duration: 18 Days (Full Day – Lecture + Studio)
+Timing: 9 AM – 6 PM
+Course Instructor: Anirban Dutta Gupta
+Couse Placement: Core course for MDes (CD) Semester 1. This is a foundational course in
+design and is aimed to integrate the inputs in the previous courses into a ‘multimedia’
+matrix and orient the students to the application oriented Semester 2 that follows.
+Course Format: Module based. The course is taught as a combination of Lectures and Studio
+sessions. Lectures introduce concepts, which are then analysed and explored via studio
+sessions and assignments. Lecture and studio is integrated and in certain cases can overlap.
+Teaching is through hand-on learning and through learning-by-doing and via real-time
+demonstrations and guidance by faculty members. Students will be expected to fieldwork.
+Course Objective and Content:
+This course aims to introduce to elements of multi-media in Communication Design. It will
+encourage students to explore how words, images and sounds are put together for a range
+of communication events and forms. Students would be expected to observe, research,
+document and compose presentations deploying multi-media. They will be encouraged to
+read and explore ideas from design aesthetics and semiotics to understand compositional
+Course Abstract: PC 749 Image, Text and Sound for MDes CD
+1
+
+---
+*Page Split*
+---
+
+styles and aesthetic choices in traditional as well as contemporary forms of communication
+media in which visual, verbal and aural elements are combined to make effective
+communication events. Students would be able to appreciate diverse technologies of
+communication in rural or urban, India or in local or global media platforms and explore how
+image, text and sounds are combined to generate a context-specific meaning in specific
+contexts. This could be exemplified in case of advertisements, mounting of event such as
+theatrical, exhibition, and installation or ritual performances. By the end of the semester
+students are expected to acquire the skills and the theoretical insights that are needed to
+understand the relationships between composition and context in multimedia formats.
+In communication design, the integration of image, text, and sound is essential to creating
+effective, engaging, and immersive user experiences. This course investigates the individual
+and collective roles of these three elements in crafting messages that resonate emotionally,
+intellectually, and sensorially with the audience. The synergy between these elements
+results in a more comprehensive and powerful communication design, one that goes
+beyond traditional, single-sensory approaches to deliver a richer, multisensory experience
+to effectively convey messages, elicit responses, and shape user experiences. The fusion of
+image, text, and sound plays a pivotal role in determining the effectiveness of a design.
+While each element serves distinct functions, their interaction creates a more nuanced and
+dynamic experience that is capable of engaging multiple senses simultaneously.
+Images are integral to communication design because they convey meaning and emotion
+with immediacy. The power of visual imagery lies in its ability to transcend linguistic barriers
+and communicate universal concepts. Photographs, illustrations, icons, and graphics all
+contribute to the design by evoking emotional responses, by simplifying complex
+information and by providing context and meaning. Images establish the setting, provide
+visual cues, and help to reinforce or even redefine the message conveyed by accompanying
+text.
+Text remains the primary medium for delivering detailed information, articulating complex
+ideas, and guiding audience understanding. While images and sound evoke emotions and
+Course Abstract: PC 749 Image, Text and Sound for MDes CD
+2
+
+---
+*Page Split*
+---
+
+set tone, text provides the clarity and specificity necessary for the effective transmission of
+key messages. The strategic use of typography (comprehensively studied and deployed in
+Fundamentals of Design 2) and written language offers several advantages in
+communication design through clearly conveying information, by setting tone and voice, by
+enhancing accessibility through more legible text design, and finally, by providing structure
+and navigation through an organizational framework within a design.
+Sound is an often-overlooked yet powerful element of communication design, particularly in
+digital and multimedia contexts. It adds an additional layer of sensory engagement that
+heightens emotional connection and enhances the user experience. The use of sound
+effects, music, and spoken word in design helps to enhance emotional engagement,
+establish atmosphere and immersion, especially seen in films and in multimedia
+applications, games, and websites and in the digital realm support user interaction through
+haptic feedbacks.
+When combined, image, text, and sound can create a powerful, unified communication
+design platform. The interaction of these elements enables designers to convey messages
+that are not only clear and informative but also emotionally compelling and immersive. The
+integration of these media offers several advantages through multisensory engagement,
+memory retention and recall, enhanced emotional impact and an improved user experience.
+Knowledge and Skill targets:
+Knowledge:
+1. Understanding sound
+2. Diegetic, Non-Diegetic, Trans-diegetic and Intra-Diegetic sound
+3. Sound and emotion
+4. Visualising and planning sound
+5. Sound, Image, Text and culture
+6. Impact of sound, image and text in communication design
+Course Abstract: PC 749 Image, Text and Sound for MDes CD
+3
+
+---
+*Page Split*
+---
+
+7. Deploying as multimedia assets
+8. Seamless user experience design
+9. Recap of typographic concepts from FOD 2
+10. Recap of visual design concepts from FOD 1 and FOD 2
+11. Recap of History of Design
+Skill:
+1. Appreciating sound scape
+2. Recording and creating soundscape
+3. Integrating image and sound
+4. Sound and image editing software
+5. Multimedia integration software
+6. Organising sound recording setup
+Software’s:
+1. Adobe Premiere Pro
+2. Adobe Animate
+3. Adobe Audition
+4. Audacity
+Hardware:
+1. Sound recording equipment’s (zoom mic, microphones, boom rods etc.)
+2. Sound studio
+Assessment Method: Continuous assessment of application of concepts through the
+duration of the course, along with assessment of group and individual assignments given.
+Assessment will not only cover the assignments, but professionalism, precision, pride, care
+and discipline displayed by the students.
+Course Abstract: PC 749 Image, Text and Sound for MDes CD
+4
+
+---
+*Page Split*
+---
+
+
+| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+|  | X | X | X | X |  | X | X | X | X | X | X |
+
+
+Course Outcome: The strategic use of image, text, and sound in communication design is
+
+fundamental to creating designs that are effective, engaging, and memorable. These
+
+elements, when used independently or in combination, enhance emotional engagement,
+
+clarify complex ideas, establish brand identities, and create immersive experiences. The
+
+synergy between image, text, and sound forms the backbone of modern communication
+
+design, offering a more dynamic and multisensory approach to conveying messages. By
+
+understanding the distinct and collective roles of these elements, designers can craft
+
+powerful, user-centered designs that resonate deeply with diverse audiences. This course is
+
+the pre-cursor course to more complex and challenging courses like Fundamentals of
+
+Filmmaking (Semester 2), Interaction Design (Semester 2) and Animation and Motion
+
+Graphics (Semester 3)
+
+Growth Matrix:
+
+
+| Flow | Objectives |
+|---|---|
+| 1 | Growth Matrix 1: Understanding multimedia – exploring different modalities and synchronicity. Objective: To understand and appreciate the integrated nature of multimedia communication – as exists in our surrounding and as a way to replicate an experience |
+| 2 | Growth Matrix 2: Understanding Sound as part of multimedia experience. |
+
+
+Course Abstract: PC 749 Image, Text and Sound for MDes CD
+
+5
+
+---
+*Page Split*
+---
+
+
+|  | Objective: To understand and appreciate the how sound is structured and layered as part of audio modality. |
+|---|---|
+| 3 | Growth Matrix 3: Recording sound Objective: To understand how to deconstruct and reconstruct sound |
+| 4 | Growth Matrix 4: Integrating sound with image(s) Objective: Adding an additional layer of sensorial information to emphasise the communication |
+| 5 | Growth Matrix 5: Integrating text with sound and image to create a multimedia experience Objective: Multi-modal nature of communication design integrating text, image and audio |
+| 6 | Growth Matrix 6: Integrating sound, text with group of images to create a title sequence or an immersive multimodal experience Objective: Integrating image, text and sound for a specific culture-specific edutainment communication package |
+
+
+Some things to keep in mind:
+
+• Attendance is mandatory. You will have to be present during class hours.
+
+• All assignments have to be completed.
+
+• Use of any form of AI tools to generate concepts is strictly forbidden unless discussed in
+
+class and allowed for the specific assignment.
+
+Reference:
+
+• Audio-Vision: Sound on Screen by Michel Chion
+
+Course Abstract: PC 749 Image, Text and Sound for MDes CD
+
+6
+
+---
+*Page Split*
+---
+
+• The Visual Story: Creating the Visual Structure of Film, TV and Digital Media by Bruce
+A. Block
+• Sound and Image: Aesthetics and Practices edited by Andrew Knight-Hill
+• Writing for Visual Media by Anthony Friedmann
+• The Sound Effects Bible: How to Create and Record Hollywood Style Sound Effects by
+Ric Viers
+• Visual Culture: The Study of the Visual after the Cultural Turn by Irit Rogoff
+• The Oxford Handbook of Sound and Image in Digital Media edited by Carol Vernallis,
+Amy Herzog, and John Richardson
+• The Soundscape: Our Sonic Environment and the Tuning of the World by R. Murray
+Schafer
+• Sounding Out! The Practice and Politics of Listening edited by Michele Hilmes and
+Jason Loviglio
+• The Audible Past: Cultural Origins of Sound Reproduction by Jonathan Sterne
+Course Abstract: PC 749 Image, Text and Sound for MDes CD
+7
+
+## Important Information
+
+- **Course Code:** PC749
+- **Course Title:** Image, Text & Sound
+- **Document Source:** Course_Booklet_for_Autumn_2025-26.pdf (pages 202–208)
+- **Semester:** Autumn 2025-26
+- **Scraped At:** 2026-06-08 07:08:19 UTC
+
+## Related Links
+
+- [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp)
+- [Academic Guidelines](https://daiict.ac.in/academics)
+
+## Downloadable Resources
+
+| Resource | Type | Link |
+|---|---|---|
+| Course_Booklet_for_Autumn_2025-26.pdf | PDF | [Download Course_Booklet_for_Autumn_2025-26.pdf](https://intranet.daiict.ac.in/academics/Course_Booklet_for_Autumn_2025-26.pdf) |

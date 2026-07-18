@@ -1,0 +1,151 @@
+Question ID,Question,Subcategory,Difficulty,Expected Source
+PLCMT-001,"What was the highest CTC offered during the 2024-25 placement drive?",Statistics,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-002,"How many total offers were made in the recent placement season?",Statistics,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-003,"What is the median CTC for the university?",Statistics,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-004,"What is the average CTC for the top 50 students?",Statistics,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-005,"What was the highest monthly stipend offered for an internship?",Statistics,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-006,"How many companies visited the campus for the 2024-25 drive?",Statistics,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-007,"Is the average stipend more than 30,000 INR?",Statistics,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-008,"What is the difference between the average top 50 and average top 100 CTC?",Statistics,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-009,"Where can I find the IPRS audit reports for UG placements?",Statistics,Medium,placement_cell.md
+PLCMT-010,"Did Google open a placement drive at the campus recently?",Recruiters,Easy,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-011,"Which four major tech companies shared the first day slot?",Recruiters,Medium,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-012,"Does Microsoft recruit from our campus?",Recruiters,Easy,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-013,"Can you list some startups founded by DAU alumni?",Recruiters,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-014,"What is the threshold for a Category I company?",Policy,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-015,"Is an 8 LPA offer considered Category I or Category II?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-016,"If I get an Internship + Job (I+J) offer from a Category I company, can I sit for other companies?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-017,"I have an internship offer of 6 LPA from a Category II company. What CTC must the next company offer for me to switch?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-018,"Can I reject a Job only (J) offer from a Category I company and continue in the placement drive?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-019,"How many chances do I get to switch if I have an Internship (I) only offer from a Category II company?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-020,"What happens if I leave the placement process of a company midway?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-021,"Who handles disciplinary issues during the placement process?",Policy,Easy,placement_cell.md
+PLCMT-022,"What is the full form of PIAAC?",Policy,Easy,placement_cell.md
+PLCMT-023,"Can I accept two Job (J) offers if one of them allows internships elsewhere?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-024,"If I get an offer from a Dream Category company, what happens to my previous offers?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-025,"Can a student who has already used their switch option apply to a Dream company?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-026,"What is the maximum number of offers I can reject while exercising the switch option?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-027,"Are first-year students eligible for final placements?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-028,"Can M.Sc. Data Science students sit for the same companies as B.Tech ICT students?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-029,"What are the four B.Tech programs eligible for placements?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-030,"Are M.Des students eligible for placements?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-031,"What is the rural internship requirement for B.Tech students?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-032,"How long is the summer internship for pre-final year students?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-033,"What is the first step in the 8-step placement process?",Process,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-034,"Who is the Head of Career Planning, Placement & Marketing?",Team,Easy,placement_cell.md
+PLCMT-035,"How can I contact Mr. Souvik Sarkar?",Team,Easy,placement_cell.md
+PLCMT-036,"Who are the Placement Cell Conveners?",Team,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-037,"Can I verbally inform the placement cell that I am rejecting an offer?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-038,"Are M.Sc Agriculture Analytics students placed through the same cell?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-039,"What types of offers are categorized by the company's declared CTC?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-040,"How is the CTC calculated for an Internship (I) only offer if converted to a job?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-041,"Who decides which companies are classified as Dream Category?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-042,"Does the university follow a zero-tolerance policy for student discipline?",Policy,Easy,placement_cell.md
+PLCMT-043,"What happens after a company submits the Job Announcement Form (JAF)?",Process,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-044,"Who verifies the JAF before publishing?",Process,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-045,"Do offer letters come directly from the company to the student?",Process,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-046,"How many students were managed simultaneously during the shared slot for Google and Microsoft?",Statistics,Medium,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-047,"What is the email ID for the Placement Office?",Team,Easy,placement_cell.md
+PLCMT-048,"What kind of training is provided for pre-placement tests?",Preparation,Easy,placement_cell.md
+PLCMT-049,"Do B.Tech MnC students learn computational science for placements?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-050,"What is the duration of the final year industrial internship?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-051,"Who won the ICPC Regionals 2024 from the campus?",Statistics,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-052,"Can I do a research internship instead of an industrial internship?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-053,"Who distributes the final offer letters?",Process,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-054,"Is Ms. Deepali Sharma part of the placement team?",Team,Easy,placement_cell.md
+PLCMT-055,"How many Deputy Conveners are in the Student Placement Cell?",Team,Hard,placement_cell.md
+PLCMT-056,"Does the placement cell organize group discussion training?",Preparation,Easy,placement_cell.md
+PLCMT-057,"What rank did the university secure in the IIRF Ranking 2025 for B.Tech?",Statistics,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-058,"Is DE Shaw considered a Category I company?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-059,"Can a company complain about a student to PIAAC?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-060,"What is the penalty for rejecting a second offer during the switch option?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-061,"Does the initial Category II offer stand if I upgrade to a higher category?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-062,"Who approves the list of applicants before it is shared with the company?",Process,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-063,"Can I contact recruiters directly without going through the placement office?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-064,"What is the role of Jevik Rakholiya in the placement cell?",Team,Medium,placement_cell.md
+PLCMT-065,"Are foundational mathematics and algorithms emphasized in student preparation?",Preparation,Easy,placement_cell.md
+PLCMT-066,"How many students received fancy offers on the first shared slot day?",Statistics,Medium,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-067,"Who was the Placement Manager during the first Google drive?",Team,Hard,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-068,"Are students required to accept an offer within a declared time period?",Policy,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-069,"What happens if I miss the deadline to accept an offer?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-070,"Is there a printed placement brochure I can download?",Process,Easy,placement_cell.md
+PLCMT-071,"Which companies are visiting the campus next week?",Live Operations,Medium,Missing - Level 2
+PLCMT-072,"What is the JAF submission deadline for the upcoming Amazon drive?",Live Operations,Medium,Missing - Level 2
+PLCMT-073,"Has the shortlist for the Sprinklr HR round been announced yet?",Live Operations,Hard,Missing - Level 2
+PLCMT-074,"Where is the venue for today's Morgan Stanley pre-placement talk?",Live Operations,Easy,Missing - Level 2
+PLCMT-075,"How many students have registered for the Atlassian coding test so far?",Live Operations,Hard,Missing - Level 2
+PLCMT-076,"What time does the Goldman Sachs online assessment start tomorrow?",Live Operations,Medium,Missing - Level 2
+PLCMT-077,"Is the registration link for the Salesforce drive still open?",Live Operations,Easy,Missing - Level 2
+PLCMT-078,"When will the final results for the DE Shaw interviews be published?",Live Operations,Medium,Missing - Level 2
+PLCMT-079,"Are there any active Category II internship opportunities open right now?",Live Operations,Medium,Missing - Level 2
+PLCMT-080,"Has the interview schedule for M.Tech students changed for tomorrow?",Live Operations,Hard,Missing - Level 2
+PLCMT-081,"Which companies have extended their JAF deadline this week?",Live Operations,Hard,Missing - Level 2
+PLCMT-082,"How many offers have been rolled out today?",Live Operations,Medium,Missing - Level 2
+PLCMT-083,"Is there a waitlist for the Google technical interview slots?",Live Operations,Hard,Missing - Level 2
+PLCMT-084,"What is the cutoff score for yesterday's Microsoft coding round?",Live Operations,Medium,Missing - Level 2
+PLCMT-085,"Will there be a second round of aptitude tests for Oracle this evening?",Live Operations,Easy,Missing - Level 2
+PLCMT-086,"Which skills should I mainly target to apply for a machine learning internship?",Preparation,Medium,Missing - Level 3
+PLCMT-087,"How do I best describe my frontend development contributions on the Synapse project for my CV?",Preparation,Hard,Missing - Level 3
+PLCMT-088,"Are React, Next.js, and Tailwind CSS considered strong tech stacks for Category I roles?",Preparation,Medium,Missing - Level 3
+PLCMT-089,"What is the basic linked list STL syntax in C++ that I should know for technical rounds?",Preparation,Hard,Missing - Level 3
+PLCMT-090,"Are there specific companies targeting digital logic design like S-R latches and flip-flops?",Preparation,Medium,Missing - Level 3
+PLCMT-091,"How should I structure a resume for an M.Des Intelligent User Experience Design role?",Preparation,Medium,Missing - Level 3
+PLCMT-092,"What are the most common HR questions asked by Sprinklr?",Preparation,Medium,Missing - Level 3
+PLCMT-093,"Can I review past interview experiences of alumni who cleared Google?",Preparation,Easy,Missing - Level 3
+PLCMT-094,"How long does a typical technical interview with DE Shaw last?",Preparation,Medium,Missing - Level 3
+PLCMT-095,"Who can review my resume before I submit it for the Microsoft drive?",Preparation,Easy,Missing - Level 3
+PLCMT-096,"Does the placement portal automatically fetch my CGPA from the university ERP?",System,Hard,Missing - Level 4
+PLCMT-097,"Will I receive an automated WhatsApp alert if my interview slot is rescheduled?",System,Medium,Missing - Level 4
+PLCMT-098,"How does the LMS synchronize my Mettl assessment scores with the placement cell?",System,Hard,Missing - Level 4
+PLCMT-099,"Can I upload my verified resume directly to the digital document repository?",System,Medium,Missing - Level 4
+PLCMT-100,"Does the system automatically block me from applying if I don't meet a company's CGPA cutoff?",System,Hard,Missing - Level 4
+PLCMT-101,"Is there a regular Disciplinary Action Committee (DAC) apart from PIAAC?",Policy,Easy,placement_cell.md
+PLCMT-102,"Can a student reject a Category II internship offer and stay in the placement drive?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-103,"If I upgrade to a higher category company, what happens to my previous offer?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-104,"How many rejection chances do I get due to parallel processes?",Policy,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-105,"Does leaving a placement process midway lead to a DAC or PIAAC review?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-106,"Must offer rejection communication be in writing?",Policy,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-107,"What happens if I reject an offer verbally without writing to the placement office?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-108,"Does the university allow final year students to do a 6-month industrial internship?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-109,"What is the duration of the rural internship?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-110,"Are students placed in villages across India for the rural internship?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-111,"When does the summer internship take place?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-112,"How long does the summer industrial internship last?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-113,"Who was the PC Convenor mentioned during the first Google drive?",Team,Hard,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-114,"Who is the current Dean of Academic Programs?",Team,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-115,"How many student clubs are active on campus?",Statistics,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-116,"Is DAU accredited with NAAC A+?",Statistics,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-117,"What does the acronym EVD stand for in B.Tech?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-118,"Does the university offer a Ph.D. program?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-119,"Are B.Tech MnC students eligible for Category I offers?",Eligibility,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-120,"Which two programs launched their inaugural cohorts graduating this year?",Eligibility,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-121,"What specialization was introduced within the M.Des program?",Eligibility,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-122,"Can M.Sc. IT students participate in the placements?",Eligibility,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-123,"Who won the 1st rank from Gujarat in the Amritapuri ICPC Regionals?",Statistics,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-124,"Who reached the finals of the Google Girls Hackathon?",Statistics,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-125,"Who is the Founder of UnifyApps among the alumni?",Recruiters,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-126,"Is Bhavesh Manglani from Delhivery an alumnus?",Recruiters,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-127,"Who is the Director General of the university?",Team,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-128,"What happens if a company complains about my conduct during an interview?",Policy,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-129,"Do students undergo exploration projects from the first year onward?",Preparation,Easy,placement_cell.md
+PLCMT-130,"Does the B.Tech ICT program demand a higher credit load for the minor in CS?",Eligibility,Hard,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-131,"Who is the Assistant Manager for Placements?",Team,Easy,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-132,"What is the highest stipend listed in the 2024-25 highlights?",Statistics,Medium,daiict_ac_in_sites_default_files_other_files_placement_brochure_2025_26_pdf.md
+PLCMT-133,"Are pre-final year students evaluated for summer internships on the shared day slot?",Process,Hard,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-134,"Was the shared slot process completely offline or entirely online?",Process,Medium,da_iict_extends_its_record_of_excellent_placements_google_opens_the_drive_for_the_first_time.md
+PLCMT-135,"What is the current attendance status of the ongoing Morgan Stanley GD round?",Live Operations,Medium,Missing - Level 2
+PLCMT-136,"Have the aptitude test results for Sprinklr been declared today?",Live Operations,Easy,Missing - Level 2
+PLCMT-137,"Which room is allocated for the Google technical interview?",Live Operations,Easy,Missing - Level 2
+PLCMT-138,"How many companies have canceled their drives this month?",Live Operations,Hard,Missing - Level 2
+PLCMT-139,"What are the common puzzle questions asked by DE Shaw?",Preparation,Medium,Missing - Level 3
+PLCMT-140,"How did previous students prepare for the Microsoft coding assessment?",Preparation,Hard,Missing - Level 3
+PLCMT-141,"Does the placement committee recommend applying for Agtech Innovation Labs?",Preparation,Medium,Missing - Level 3
+PLCMT-142,"What is the general feedback from interns who worked at QuantumBlack?",Preparation,Hard,Missing - Level 3
+PLCMT-143,"Which faculty member should I contact to review my ML project portfolio?",Preparation,Medium,Missing - Level 3
+PLCMT-144,"Can the ERP system automatically pull my hackathon certificates into my JAF profile?",System,Hard,Missing - Level 4
+PLCMT-145,"Will the placement portal integrate with LinkedIn to verify student profiles?",System,Medium,Missing - Level 4
+PLCMT-146,"How does the system calculate the 1.5x CTC jump automatically during offer selection?",System,Hard,Missing - Level 4
+PLCMT-147,"Does the chatbot have access to my previous semester grades?",System,Medium,Missing - Level 4
+PLCMT-148,"Can the system automatically detect if I abandoned a company process midway?",System,Hard,Missing - Level 4
+PLCMT-149,"Will I get an automated email if a Dream Company opens its registration?",System,Medium,Missing - Level 4
+PLCMT-150,"Is the student registration process for placement drives completely automated?",System,Hard,Missing - Level 4

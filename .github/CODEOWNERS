@@ -1,0 +1,5 @@
+# CODEOWNERS — defines who must review PRs before merge.
+# Both owners must approve any change to main.
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+* @Vedant-1016 @vaishcodescape
