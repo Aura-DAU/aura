@@ -1,0 +1,23 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies required for psycopg2 and other native modules
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Use the existing comprehensive requirements file
+COPY rag/requirements.txt requirements.txt
+
+# Install python dependencies
+RUN pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
+
+# Copy all backend code
+COPY . .
+
+EXPOSE 8000
+
+# Run FastAPI via Uvicorn
+CMD ["uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8000"]
