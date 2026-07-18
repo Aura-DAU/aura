@@ -1,18 +1,6 @@
-"""
-Scholarship eligibility screening — advisory-only, KB-retrieval-driven.
-
-screen_scholarship_eligibility: cross-references a student's own profile
-attributes (branch, year, category, cgpa, annual_income) against the
-scholarship/financial-aid rules retrieved from the KB, and returns a
-structured list of schemes with eligibility status. AURA never submits an
-application or verifies documents itself — this is guidance only, same
-posture as every other *_guidance tool in this package.
-
-Follows the same pattern as student_workflow_tools.py / community_tools.py:
-retrieval via RetrievalPipeline, LLM call routed through KeyManager so it
-participates in Groq key rotation like every other pipeline component
-(no direct `Groq(api_key=...)` client — that bypasses rotation/backoff).
-"""
+# Scholarship eligibility screening — advisory-only, KB-retrieval-driven.
+# screen_scholarship_eligibility: cross-references a student's own profile
+# (no direct `Groq(api_key=...)` client — that bypasses rotation/backoff).
 
 import os
 import json
@@ -71,11 +59,9 @@ def screen_scholarship_eligibility(
     identity, branch: str, year: int, category: str, cgpa: float,
     annual_income: float | None = None, **kwargs
 ) -> dict:
-    """
-    Advisory-only: retrieves scholarship/financial-aid policy from the KB
-    and cross-references it against the requester's own stated profile.
-    No ERP write, no application submission.
-    """
+    # Advisory-only: retrieves scholarship/financial-aid policy from the KB
+    # and cross-references it against the requester's own stated profile.
+    # No ERP write, no application submission.
     if not identity or identity.get("role") not in ("student", "guest"):
         raise PermissionError("This tool is for students screening their own eligibility.")
 

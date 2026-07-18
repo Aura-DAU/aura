@@ -1,28 +1,6 @@
-"""
-seed_identity_map.py — Populate user_identity_map from an ERP CSV export.
-
-Replaces the old seed_users.py. Key differences:
-  - No password columns (auth is handled by Google SSO via NextAuth.js)
-  - No sessions table or hashing
-  - Idempotent: re-running updates changed rows, never duplicates
-
-CSV format (header row required):
-  erp_id, email, role, dept
-
-Example:
-  202301234, parth.a@daiict.ac.in, student, ICT
-  FAC001, prof.sharma@daiict.ac.in, faculty, ICT
-
-Run at the start of each semester to pick up new students/faculty and
-deactivate departed ones. The --deactivate-missing flag marks users
-absent from the CSV as is_active=FALSE, which blocks /internal/resolve-identity
-for them immediately.
-
-Usage:
-  python seed_identity_map.py users.csv
-  python seed_identity_map.py users.csv --dry-run
-  python seed_identity_map.py users.csv --deactivate-missing
-"""
+# seed_identity_map.py — Populate user_identity_map from an ERP CSV export.
+# Replaces the old seed_users.py. Key differences:
+# python seed_identity_map.py users.csv --deactivate-missing
 
 import csv
 import sys

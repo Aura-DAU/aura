@@ -1,16 +1,6 @@
-"""
-Timetable parsing — deliberately kept separate from parsers.py because this
-is the one piece of data that does double duty: it answers "what are my
-classes" for a student AND is the sole input for deriving a faculty
-member's teaching schedule (see faculty_schedule.py). Per your instruction,
-AURA does not scrape eCampus *as* faculty to get this — it only needs to
-get *better at deriving* it from whatever timetable data is already being
-pulled on the student side, since every timetable entry carries an
-instructor name.
-
-TODO: confirm exactly which page renders this (see pages.py — Pages.TIMETABLE
-is a best guess) and the real column layout, the same way as parsers.py.
-"""
+# Timetable parsing — deliberately kept separate from parsers.py because this
+# is the one piece of data that does double duty: it answers "what are my
+# is a best guess) and the real column layout, the same way as parsers.py.
 
 from bs4 import BeautifulSoup
 from dataclasses import dataclass

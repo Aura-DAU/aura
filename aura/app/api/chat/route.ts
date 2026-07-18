@@ -1,9 +1,5 @@
 import { z } from "zod"
-import {
-  backendUrl,
-  type BackendChatRequest,
-  type BackendChatResponse,
-} from "@/lib/api/backend"
+import { backendUrl, type BackendChatRequest } from "@/lib/api/backend"
 
 export const maxDuration = 60
 
@@ -26,24 +22,6 @@ const requestSchema = z.object({
   history: z.array(historyTurnSchema).max(20).optional(),
   studentProfile: studentProfileSchema.optional(),
 })
-
-function sseLine(data: unknown): string {
-  return `data: ${JSON.stringify(data)}\n\n`
-}
-
-function normaliseSource(s: string | { file?: string; url?: string; title?: string }): {
-  file: string
-  title?: string
-} | null {
-  if (typeof s === "string") return { file: s }
-  if (s && typeof s === "object") {
-    const file = s.file || s.url || ""
-    if (file) {
-      return { file, title: s.title }
-    }
-  }
-  return null
-}
 
 export async function POST(req: Request) {
   let body: unknown
@@ -72,7 +50,7 @@ export async function POST(req: Request) {
 
   let backendRes: Response
   try {
-    backendRes = await fetch(backendUrl("/chat"), {
+    backendRes = await fetch(backendUrl("/chat/stream"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,41 +72,16 @@ export async function POST(req: Request) {
     return new Response("Question limit reached", { status: 429 })
   }
 
-  if (!backendRes.ok) {
+  if (!backendRes.ok || !backendRes.body) {
     const text = await backendRes.text().catch(() => "")
     console.error("[chat] backend error:", backendRes.status, text)
     return new Response("Backend error", { status: 502 })
   }
 
-  let data: BackendChatResponse
-  try {
-    data = (await backendRes.json()) as BackendChatResponse
-  } catch {
-    return new Response("Invalid backend response", { status: 502 })
-  }
-
-  const answer = data?.answer ?? ""
-  const isPersonalData = data?.is_personal_data === true
-  const citations = (data?.sources ?? [])
-    .map(normaliseSource)
-    .filter((c): c is { file: string; title?: string } => c !== null)
-
-  const stream = new ReadableStream<Uint8Array>({
-    start(controller) {
-      const encoder = new TextEncoder()
-      controller.enqueue(encoder.encode(sseLine({ type: "text-delta", delta: answer })))
-      if (citations.length > 0) {
-        controller.enqueue(encoder.encode(sseLine({ type: "citations", citations })))
-      }
-      if (isPersonalData) {
-        controller.enqueue(encoder.encode(sseLine({ type: "personal-data-flag" })))
-      }
-      controller.enqueue(encoder.encode("data: [DONE]\n\n"))
-      controller.close()
-    },
-  })
-
-  return new Response(stream, {
+  // The backend emits the exact SSE events the client parses
+  // (text-delta / citations / personal-data-flag / [DONE]) — pipe it through
+  // so tokens reach the browser as they are generated.
+  return new Response(backendRes.body, {
     headers: {
       "Content-Type": "text/event-stream; charset=utf-8",
       "Cache-Control": "no-cache, no-transform",

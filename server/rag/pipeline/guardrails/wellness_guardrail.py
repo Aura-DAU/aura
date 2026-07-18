@@ -1,23 +1,6 @@
-"""
-Wellness guardrail — detects signs of distress in a query BEFORE it reaches
-answer_generator / the RAG pipeline, and routes to a fixed, human-reviewed
-wellness-contact block instead of a generated answer.
-
-This is deliberately NOT an LLM-generated response for the distress case
-itself — the contact block is fixed and human-reviewed so AURA never
-improvises in a safety-critical moment. The LLM call here is used only to
-CLASSIFY (distress / not distress), matching query_guardrail.py's pattern.
-
-Fails OPEN for the classification step (same as QueryGuardrail.is_safe):
-if the guardrail LLM is unavailable, we do not silently swallow a
-potentially distressed message — we fall back to a lightweight keyword
-check so we never regress to "no safety net at all".
-
-NOTE ON API: aura_chat.py calls `check(query)` / `get_response()` — keep
-these two names stable. (PR #144 introduced a second, incompatible call
-site using `is_distress()` / `wellness_response()` that does not exist on
-this class; that hunk was intentionally NOT applied — see review notes.)
-"""
+# Wellness guardrail — detects signs of distress in a query BEFORE it reaches
+# answer_generator / the RAG pipeline, and routes to a fixed, human-reviewed
+# this class; that hunk was intentionally NOT applied — see review notes.)
 
 import os
 import re
@@ -98,29 +81,9 @@ explanation.
 
 
 class WellnessGuardrail:
-    """
-    LLM-based distress classifier with a keyword-regex fallback.
-
-    Primary path — Groq LLM call: handles nuanced, paraphrased, and
-    non-obvious distress signals that a keyword list misses.
-    Fallback path — regex keyword check: fires only when the Groq API is
-    unavailable so there is always some safety net.
-
-    Usage in aura_chat.py::
-
-        from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
-
-        self.wellness_guardrail = WellnessGuardrail()
-
-        # Inside chat() — before answer_generator runs:
-        if self.wellness_guardrail.check(query):
-            return {
-                "answer": self.wellness_guardrail.get_response(),
-                "sources": [],
-                "is_personal_data": False,
-                "is_wellness_response": True,
-            }
-    """
+    # LLM-based distress classifier with a keyword-regex fallback.
+    # Primary path — Groq LLM call: handles nuanced, paraphrased, and
+    # }
 
     def __init__(self) -> None:
         self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
@@ -133,12 +96,9 @@ class WellnessGuardrail:
     # ------------------------------------------------------------------
 
     def check(self, query: str) -> bool:
-        """
-        Return True if the query should be routed to the wellness block.
-
-        Tries the LLM classifier first; falls back to keyword regex if
-        the API call fails for any reason.
-        """
+        # Return True if the query should be routed to the wellness block.
+        # Tries the LLM classifier first; falls back to keyword regex if
+        # the API call fails for any reason.
         try:
             return self._llm_check(query)
         except Exception as exc:
@@ -148,7 +108,7 @@ class WellnessGuardrail:
             return self._fallback_check(query)
 
     def get_response(self) -> str:
-        """Return the fixed, human-reviewed wellness contact block."""
+        # Return the fixed, human-reviewed wellness contact block.
         return WELLNESS_CONTACT_BLOCK
 
     # ------------------------------------------------------------------

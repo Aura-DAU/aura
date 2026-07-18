@@ -8,8 +8,38 @@ from pipeline.retrieval.rbac import get_allowed_roles
 import os
 import re
 import logging
+from concurrent.futures import ThreadPoolExecutor
 
 logger = logging.getLogger(__name__)
+
+# Precompiled semester alias patterns — compiling 16 regexes on every
+# _expand_semesters call (main query + each decomposed sub-query) was
+# measurable overhead in the retrieval hot path.
+_ARABIC_TO_ROMAN = {
+    "1": "I", "2": "II", "3": "III", "4": "IV",
+    "5": "V", "6": "VI", "7": "VII", "8": "VIII"
+}
+_SEM_ARABIC_PATTERNS = [
+    (
+        re.compile(rf"\b(semester|sem)\s*[-_]?\s*{num}\b", re.IGNORECASE),
+        rf"\1 {num} (\1 {roman})",
+    )
+    for num, roman in _ARABIC_TO_ROMAN.items()
+]
+# Roman patterns sorted longest-first so VIII matches before VI/V etc.
+# Negative lookahead (?!\)) prevents matching roman numerals inside the
+# newly created "(semester I)" parentheticals.
+_SEM_ROMAN_PATTERNS = [
+    (
+        re.compile(rf"\b(semester|sem)\s*[-_]?\s*{roman}\b(?!\))", re.IGNORECASE),
+        rf"\1 {roman} (\1 {num})",
+    )
+    for roman, num in sorted(
+        ((r, n) for n, r in _ARABIC_TO_ROMAN.items()),
+        key=lambda pair: len(pair[0]),
+        reverse=True,
+    )
+]
 
 class RetrievalPipeline:
 
@@ -204,38 +234,23 @@ class RetrievalPipeline:
     }
     
     def _expand_semesters(self, query):
-        arabic_to_roman = {
-            "1": "I", "2": "II", "3": "III", "4": "IV",
-            "5": "V", "6": "VI", "7": "VII", "8": "VIII"
-        }
-        roman_to_arabic = {v: k for k, v in arabic_to_roman.items()}
-        
         # Expand Arabic to Roman, e.g. "semester 1" -> "semester 1 (semester I)"
-        for num, roman in arabic_to_roman.items():
-            pattern_sem = rf"\b(semester|sem)\s*[-_]?\s*{num}\b"
-            if re.search(pattern_sem, query, re.IGNORECASE):
-                query = re.sub(pattern_sem, f"\\1 {num} (\\1 {roman})", query, flags=re.IGNORECASE)
-                
+        for pattern, replacement in _SEM_ARABIC_PATTERNS:
+            query = pattern.sub(replacement, query)
+
         # Expand Roman to Arabic, e.g. "semester I" -> "semester I (semester 1)"
-        # Use negative lookahead (?!\)) to prevent matching roman numerals inside the newly created (semester I) parentheticals
-        for roman in sorted(roman_to_arabic.keys(), key=len, reverse=True):
-            num = roman_to_arabic[roman]
-            pattern_sem = rf"\b(semester|sem)\s*[-_]?\s*{roman}\b(?!\))"
-            if re.search(pattern_sem, query, re.IGNORECASE):
-                query = re.sub(pattern_sem, f"\\1 {roman} (\\1 {num})", query, flags=re.IGNORECASE)
-                
+        for pattern, replacement in _SEM_ROMAN_PATTERNS:
+            query = pattern.sub(replacement, query)
+
         return query
 
     def _build_metadata_filter(
         self,
         plan
     ):
-        """Build a Pinecone metadata filter from extracted entities.
-
-        Fix F: multi-value entity lists (e.g. two programs in a comparison
-        query) now use the $in operator instead of discarding all but the
-        first value via first_value().
-        """
+        # Build a Pinecone metadata filter from extracted entities.
+        # Fix F: multi-value entity lists (e.g. two programs in a comparison
+        # first value via first_value().
 
         def first_value(value):
             if isinstance(value, list):
@@ -243,7 +258,7 @@ class RetrievalPipeline:
             return value
 
         def as_filter(field, value):
-            """Return a Pinecone filter clause for one or many values."""
+            # Return a Pinecone filter clause for one or many values.
             if isinstance(value, list) and len(value) > 1:
                 return {field: {"$in": value}}
             scalar = value[0] if isinstance(value, list) else value
@@ -874,12 +889,9 @@ class RetrievalPipeline:
         }
 
     def _expand_adjacent_chunks(self, candidates, window=1):
-        """
-        Retrieves neighboring chunks (window chunks before and after) for each
-        candidate to preserve context. window=1 is the default; use window=2
-        for policy_version queries to capture version history sections that may
-        be one or two chunks away from the main policy chunk.
-        """
+        # Retrieves neighboring chunks (window chunks before and after) for each
+        # candidate to preserve context. window=1 is the default; use window=2
+        # be one or two chunks away from the main policy chunk.
         expanded_candidates = []
         for cand in candidates:
             metadata = cand.get("metadata", {})
@@ -916,11 +928,9 @@ class RetrievalPipeline:
         return expanded_candidates
 
     def _retrieve_dual_path(self, query, plan, allowed_roles=None):
-        """
-        Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
-        Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
-        combines them with an equal 50/50 weighted sum.
-        """
+        # Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
+        # Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
+        # combines them with an equal 50/50 weighted sum.
         # 1. Entity Path
         entities = plan.get("entities", {})
         entity_queries = []
@@ -945,32 +955,81 @@ class RetrievalPipeline:
                 else:
                     entity_queries.append((val_str, None))
 
-        entity_pool = {}
-        for ent_text, ent_filter in entity_queries:
+        auth_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
+
+        # One batched forward pass covers every embedding this method needs:
+        # each entity text plus the main query (last row). Batching replaces
+        # N+1 sequential encode() calls with a single model invocation.
+        texts = [ent_text for ent_text, _ in entity_queries] + [query]
+        embeddings = self.retriever.encode_queries(texts)
+
+        def _entity_leg(i):
+            # Top 3 fused BM25 + dense chunks for one entity, with the same
+            # filtered-then-unfiltered fallback as before.
+            ent_text, ent_filter = entity_queries[i]
             combined_filter = ent_filter
-            if allowed_roles:
-                auth_filter = {"authorization": {"$in": allowed_roles}}
+            if auth_filter:
                 if combined_filter:
                     combined_filter = {"$and": [combined_filter, auth_filter]}
                 else:
                     combined_filter = auth_filter
 
-            # Query retriever to get top 3 fused BM25 + dense chunks for this entity
             res_list = self.retriever.retrieve(
                 query=ent_text,
                 top_k=3,
                 metadata_filter=combined_filter,
-                allowed_roles=allowed_roles
+                allowed_roles=allowed_roles,
+                precomputed_embedding=embeddings[i]
             )
             if not res_list and ent_filter:
-                fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
                 res_list = self.retriever.retrieve(
                     query=ent_text,
                     top_k=3,
-                    metadata_filter=fallback_filter,
-                    allowed_roles=allowed_roles
+                    metadata_filter=auth_filter,
+                    allowed_roles=allowed_roles,
+                    precomputed_embedding=embeddings[i]
                 )
-            
+            return res_list
+
+        def _semantic_leg():
+            semantic_filter = auth_filter
+            if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
+                semantic_filter = None
+
+            results = self.retriever.index.query(
+                vector=embeddings[-1].tolist(),
+                top_k=50,
+                include_metadata=True,
+                filter=semantic_filter
+            )
+            semantic_list = []
+            for match in results["matches"]:
+                semantic_list.append({
+                    "id": match["id"],
+                    "score": match["score"],
+                    # Fix RP2: cosine_score explicitly stored so the confidence
+                    # router in aura_chat.py can read it via c.get("cosine_score").
+                    # Previously dual-path candidates only had "score"/"fusion_score"
+                    # so the router always saw top_cosine=0.0 and relied entirely
+                    # on top_cross for routing decisions.
+                    "cosine_score": match["score"],
+                    "metadata": match["metadata"],
+                    "semantic_score": match["score"]
+                })
+            return semantic_list
+
+        # The entity legs and the top-50 semantic query are independent
+        # network round-trips (Pinecone + local BM25) — run them concurrently.
+        # Futures are consumed in submission order, so pool accumulation and
+        # all downstream scoring stay deterministic.
+        with ThreadPoolExecutor(max_workers=min(8, len(entity_queries) + 1)) as pool:
+            entity_futures = [pool.submit(_entity_leg, i) for i in range(len(entity_queries))]
+            semantic_future = pool.submit(_semantic_leg)
+            per_entity_results = [f.result() for f in entity_futures]
+            semantic_list = semantic_future.result()
+
+        entity_pool = {}
+        for res_list in per_entity_results:
             for rank, res in enumerate(res_list, start=1):
                 chunk_id = res["id"]
                 if chunk_id not in entity_pool:
@@ -995,36 +1054,8 @@ class RetrievalPipeline:
             for c in entity_list:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
-        # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
-        query_embedding = self.retriever.model.encode(
-            ["Represent this sentence for searching relevant passages: " + query],
-            normalize_embeddings=True,
-            convert_to_numpy=True
-        )
-        semantic_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
-        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
-            semantic_filter = None
-
-        results = self.retriever.index.query(
-            vector=query_embedding[0].tolist(),
-            top_k=50,
-            include_metadata=True,
-            filter=semantic_filter
-        )
-        semantic_list = []
-        for match in results["matches"]:
-            semantic_list.append({
-                "id": match["id"],
-                "score": match["score"],
-                # Fix RP2: cosine_score explicitly stored so the confidence
-                # router in aura_chat.py can read it via c.get("cosine_score").
-                # Previously dual-path candidates only had "score"/"fusion_score"
-                # so the router always saw top_cosine=0.0 and relied entirely
-                # on top_cross for routing decisions.
-                "cosine_score": match["score"],
-                "metadata": match["metadata"],
-                "semantic_score": match["score"]
-            })
+        # 2. Semantic Path results were fetched concurrently in _semantic_leg
+        # above (top-50 Pinecone query using the batched main-query embedding).
 
         # Min-Max normalize semantic path scores
         if semantic_list:

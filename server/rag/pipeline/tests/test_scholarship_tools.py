@@ -1,11 +1,6 @@
-"""
-test_scholarship_tools.py — Tests for scholarship eligibility screening.
-
-Mocks RetrievalPipeline.get_context and KeyManager.call_with_rotation,
-following the same pattern as test_student_workflow_tools.py-style tools
-elsewhere in this package (KeyManager routes the LLM call, not a direct
-Groq client).
-"""
+# test_scholarship_tools.py — Tests for scholarship eligibility screening.
+# Mocks RetrievalPipeline.get_context and KeyManager.call_with_rotation,
+# Groq client).
 
 import pytest
 from pipeline.ecampus import scholarship_tools

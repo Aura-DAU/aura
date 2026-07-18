@@ -1,34 +1,6 @@
-"""
-Audit log archiver — run as a cron job (e.g. weekly via crontab or a
-systemd timer) to prevent unbounded audit_log table growth.
-
-What it does:
-  1. Exports all audit_log rows older than ARCHIVE_AGE_DAYS (default 90)
-     to a compressed JSON-lines file in ARCHIVE_DIR.
-  2. Deletes those rows from the primary PostgreSQL audit_log table.
-
-This keeps the hot table small (only recent records) while preserving the
-complete audit history in cold storage (S3, NFS mount, local disk — set
-ARCHIVE_DIR to point at whichever).
-
-Usage (manual):
-    python audit_log_archiver.py
-    python audit_log_archiver.py --dry-run           # shows what would be archived
-    python audit_log_archiver.py --days 30           # archive rows older than 30 days
-
-Crontab example (run every Sunday at 02:00):
-    0 2 * * 0 /usr/bin/python3 /opt/aura/server/rag/audit_log_archiver.py >> /var/log/aura/archiver.log 2>&1
-
-S3 upload example (add after _write_archive_file):
-    import boto3
-    s3 = boto3.client("s3")
-    s3.upload_file(archive_path, os.environ["AUDIT_ARCHIVE_BUCKET"], archive_path.name)
-
-Note: The aura_app DB role has INSERT only on audit_log (no DELETE — append-only
-enforcement per 001_auth_schema.sql). The archiver therefore needs to connect
-with a separate, higher-privilege role (aura_admin) that has DELETE on audit_log.
-Set AURA_ADMIN_DB_URL accordingly.
-"""
+# Audit log archiver — run as a cron job (e.g. weekly via crontab or a
+# systemd timer) to prevent unbounded audit_log table growth.
+# Set AURA_ADMIN_DB_URL accordingly.
 
 import os
 import sys

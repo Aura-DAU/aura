@@ -1,17 +1,4 @@
-"""
-Tool registry — all handlers call ERPConnector directly (SQL-only).
-
-No eCampus client, no credentials vault, no write tools.
-Every personal-data tool still goes through AccessControlGate before
-touching the ERP connector, and every access is audit-logged.
-
-Removed tools (DB/scraper no longer available):
-  - get_attendance           (no DB table access granted)
-  - check_exam_eligibility   (depended on attendance)
-  - refresh_my_data          (write tool — AURA is read-only)
-  - share_data_with_advisor  (write tool)
-  - revoke_advisor_access    (write tool)
-"""
+# Tool registry — ERPConnector read handlers only (no vault / write tools).
 
 from dataclasses import dataclass
 from typing import Callable

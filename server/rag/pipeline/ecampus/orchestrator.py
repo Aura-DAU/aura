@@ -1,11 +1,6 @@
-"""
-Agent orchestrator for personal/eCampus-backed queries. This is a SEPARATE
-path from the existing RAG flow in aura_chat.py — it only runs when
-intent_router.py classifies a query as needing live, person-specific data
-(CGPA, attendance, fees, faculty schedule, etc.) rather than general
-knowledge. General knowledge questions continue through the existing,
-unmodified RAG pipeline in aura_chat.py.
-"""
+# Agent orchestrator for personal/eCampus-backed queries. This is a SEPARATE
+# path from the existing RAG flow in aura_chat.py — it only runs when
+# unmodified RAG pipeline in aura_chat.py.
 
 import os
 import json
@@ -45,7 +40,7 @@ class EcampusOrchestrator:
         # other pipeline component.
 
     def _call_llm(self, messages: list, tools: Optional[list] = None, tool_choice: Optional[str] = None) -> object:
-        """Single LLM call through KeyManager so daily-limit rotation applies here too."""
+        # Single LLM call through KeyManager so daily-limit rotation applies here too.
         model = self.model
         def _fn(client):
             kwargs: dict = {"model": model, "messages": messages}

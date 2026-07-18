@@ -13,6 +13,7 @@ class AURA:
         history=None,
         identity=None,
         display_profile=None,
+        on_delta=None,
     ):
 
         return self.chatbot.chat(
@@ -20,4 +21,5 @@ class AURA:
             history=history,
             identity=identity,
             display_profile=display_profile,
+            on_delta=on_delta,
         )
