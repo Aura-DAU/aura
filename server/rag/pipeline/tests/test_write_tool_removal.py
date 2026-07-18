@@ -1,6 +1,12 @@
-# v7 regression: write-tool + attendance-tool removal.
-# Confirms TOOL_REGISTRY never re-exports refresh_my_data,
-# this test guards against one being reintroduced).
+"""
+v7 regression: write-tool + attendance-tool removal.
+
+Confirms TOOL_REGISTRY never re-exports refresh_my_data,
+share_data_with_advisor, revoke_advisor_access, get_attendance, or
+check_exam_eligibility — and that no tool handler module imports an
+eCampus write/POST/PUT/DELETE client (there is none in this codebase;
+this test guards against one being reintroduced).
+"""
 
 import ast
 import sys
@@ -38,9 +44,13 @@ def test_no_write_category_tools_remain():
 
 
 def test_ecampus_package_has_no_http_write_calls():
-    # Static-analysis guard: walk every .py file under pipeline/ecampus/ and
-    # pipeline/google_calendar/ and fail if any call site looks like an HTTP
-    # substitute for code review.
+    """
+    Static-analysis guard: walk every .py file under pipeline/ecampus/ and
+    pipeline/google_calendar/ and fail if any call site looks like an HTTP
+    write (requests.post/put/patch/delete, or a SQL INSERT/UPDATE string).
+    This is intentionally coarse — it's a tripwire for regressions, not a
+    substitute for code review.
+    """
     ecampus_dir = Path(__file__).resolve().parent.parent / "ecampus"
     calendar_dir = Path(__file__).resolve().parent.parent / "google_calendar"
 

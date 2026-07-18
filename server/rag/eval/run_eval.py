@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
-# DAU RAG Evaluation Script.
-# Evaluates the retrieval pipeline against a ground-truth Q&A dataset and
-# and the regression gate are additive extensions per the AURA spec.
+"""
+DAU RAG Evaluation Script.
+
+Evaluates the retrieval pipeline against a ground-truth Q&A dataset and
+reports accuracy, precision@k, per-category breakdown, latency stats, and
+an optional regression gate that fails CI if quality drops below thresholds.
+
+Existing behaviour (accuracy via source-match) is preserved; precision@k
+and the regression gate are additive extensions per the AURA spec.
+"""
 import csv
 import json
 import argparse
@@ -25,16 +32,24 @@ def clean_url(u: str) -> str:
 # ---------------------------------------------------------------------------
 
 def _source_to_str(s) -> str:
-    # Normalise a source entry (string or dict) to a comparable string.
+    """Normalise a source entry (string or dict) to a comparable string."""
     if isinstance(s, dict):
         return clean_url(s.get("url", "") or s.get("title", "") or "")
     return clean_url(str(s))
 
 
 def precision_at_k(retrieved_sources: List[Any], expected_source: str, k: int) -> float:
-    # Precision@k for a single query.
-    # Returns 1.0 if the expected source appears in the top-k retrieved
-    # a binary hit/miss at rank k.
+    """
+    Precision@k for a single query.
+
+    Returns 1.0 if the expected source appears in the top-k retrieved
+    sources, 0.0 otherwise. When expected_source is empty (no ground
+    truth available) the question is skipped and None is returned.
+
+    The metric is binary-relevance precision: we have exactly one relevant
+    document per query (the expected source), so precision@k collapses to
+    a binary hit/miss at rank k.
+    """
     if not expected_source.strip():
         return None  # type: ignore[return-value]
 
@@ -48,8 +63,10 @@ def precision_at_k(retrieved_sources: List[Any], expected_source: str, k: int) -
 
 
 def compute_precision_at_k(results: List[Dict[str, Any]], k: int) -> float:
-    # Mean precision@k over all questions that have a ground-truth source.
-    # Questions without a ground-truth source are excluded from the average.
+    """
+    Mean precision@k over all questions that have a ground-truth source.
+    Questions without a ground-truth source are excluded from the average.
+    """
     scores = []
     for r in results:
         raw_sources = r.get("raw_sources", [])
@@ -63,7 +80,7 @@ def compute_precision_at_k(results: List[Dict[str, Any]], k: int) -> float:
 
 
 def per_category_breakdown(results: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
-    # Return accuracy and question count broken down by category.
+    """Return accuracy and question count broken down by category."""
     cats: Dict[str, Dict[str, Any]] = {}
     for r in results:
         cat = r.get("category", "uncategorised") or "uncategorised"
@@ -91,9 +108,19 @@ def run_evaluation(
     min_accuracy: float = 0.0,
     min_precision_at_k: float = 0.0,
 ) -> bool:
-    # Run the full evaluation and write results to output_path.
-    # Parameters
-    # Returns True if all regression gates pass, False otherwise.
+    """
+    Run the full evaluation and write results to output_path.
+
+    Parameters
+    ----------
+    k : Rank cutoff for precision@k (default 3).
+    min_accuracy : Regression gate — minimum required accuracy (0–100).
+        Pass 0.0 to disable.
+    min_precision_at_k : Regression gate — minimum required precision@k (0–1).
+        Pass 0.0 to disable.
+
+    Returns True if all regression gates pass, False otherwise.
+    """
     print(f"Starting evaluation using dataset: {csv_path}")
     print(f"Target API Endpoint: {api_url}")
     print(f"Precision@k with k={k}")

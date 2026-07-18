@@ -1,6 +1,14 @@
-# v7 regression: question quota enforcement (3/day guest, 5/day DAU).
-# Tests pipeline.rate_limiter directly (the FastAPI /chat endpoint just calls
-# test_wellness_guardrail.py.
+"""
+v7 regression: question quota enforcement (3/day guest, 5/day DAU).
+
+Tests pipeline.rate_limiter directly (the FastAPI /chat endpoint just calls
+enforce_quota() and translates QuotaExceeded -> HTTP 429 — see server/api/api.py).
+
+Wellness guardrail integration tests are at the bottom of this file.
+They confirm the guardrail is importable from within the test environment
+and returns the correct shape. Full guardrail tests live in
+test_wellness_guardrail.py.
+"""
 
 import sys
 from pathlib import Path
@@ -44,7 +52,7 @@ def test_guest_gets_3_questions_then_429():
 
 
 def test_guest_gets_429_on_4th_question():
-    # Alias test — explicit name mirrors the student equivalent below.
+    """Alias test — explicit name mirrors the student equivalent below."""
     key = "guest-alias@gmail.com"
     for _ in range(3):
         enforce_quota(key, "guest")
@@ -70,7 +78,7 @@ def test_dau_student_gets_5_questions_then_429():
 
 
 def test_student_429_exception_has_detail():
-    # QuotaExceeded carries both remaining and limit for the 429 response body.
+    """QuotaExceeded carries both remaining and limit for the 429 response body."""
     key = "detail-check@dau.ac.in"
     for _ in range(5):
         enforce_quota(key, "student")
@@ -83,9 +91,14 @@ def test_student_429_exception_has_detail():
 
 
 def test_student_limit_greater_than_guest_limit():
-    # Sanity: DAU students (5) always get more questions than guests (3).
-    # NOTE: PR #144's original version of this test imported module-level
-    # ImportError.
+    """Sanity: DAU students (5) always get more questions than guests (3).
+
+    NOTE: PR #144's original version of this test imported module-level
+    constants `STUDENT_DAILY_LIMIT` / `GUEST_DAILY_LIMIT` that do not exist
+    in rate_limiter.py — the actual implementation keys limits off the
+    `QUOTA_LIMITS` dict. Rewritten against the real module to avoid an
+    ImportError.
+    """
     from pipeline.rate_limiter import QUOTA_LIMITS
     assert QUOTA_LIMITS["student"] > QUOTA_LIMITS["guest"]
 
@@ -93,8 +106,8 @@ def test_student_limit_greater_than_guest_limit():
 # ── Per-account isolation ─────────────────────────────────────────────────────
 
 def test_quota_is_keyed_per_account_not_shared():
-    # Two different guest emails must not share one bucket — this guards
-    # against accidentally keying by erp_id='GUEST', which every guest shares.
+    """Two different guest emails must not share one bucket — this guards
+    against accidentally keying by erp_id='GUEST', which every guest shares."""
     enforce_quota("guest-a@gmail.com", "guest")
     enforce_quota("guest-a@gmail.com", "guest")
     # guest-b should still have their full quota
@@ -102,7 +115,7 @@ def test_quota_is_keyed_per_account_not_shared():
 
 
 def test_two_students_have_independent_quotas():
-    # Exhausting one student's quota must not affect another student.
+    """Exhausting one student's quota must not affect another student."""
     key_a = "student-a@dau.ac.in"
     key_b = "student-b@dau.ac.in"
 
@@ -136,7 +149,7 @@ def test_peek_remaining_does_not_consume_quota():
 # Full classifier tests (LLM path + fallback) live in test_wellness_guardrail.py.
 
 def test_wellness_guardrail_triggers_on_distress_phrase():
-    # Keyword fallback must catch an explicit distress phrase.
+    """Keyword fallback must catch an explicit distress phrase."""
     from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
     g = WellnessGuardrail()
     # _fallback_check is tested directly to avoid a live Groq API call in CI.
@@ -144,14 +157,14 @@ def test_wellness_guardrail_triggers_on_distress_phrase():
 
 
 def test_wellness_guardrail_passes_on_normal_query():
-    # Keyword fallback must not false-positive on a plain academic query.
+    """Keyword fallback must not false-positive on a plain academic query."""
     from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
     g = WellnessGuardrail()
     assert g._fallback_check("What is the CGPA cutoff for honours?") is False
 
 
 def test_wellness_guardrail_response_shape():
-    # get_response() must return a non-empty string with key contact info.
+    """get_response() must return a non-empty string with key contact info."""
     from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
     g = WellnessGuardrail()
     response = g.get_response()
