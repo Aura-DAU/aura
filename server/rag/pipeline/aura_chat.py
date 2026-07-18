@@ -2,7 +2,7 @@
 AuraChat — main chat pipeline.
 
 The 7-step flow (from 06_query_routing.md) is now the primary path.
-The existing RAG pipeline (Pinecone + BM25 + rerank) is called for
+The existing RAG pipeline (Qdrant + BM25 + rerank) is called for
 PUBLIC and the PUBLIC half of MIXED queries — it is completely unchanged.
 
 Step 1: Classify (B9)

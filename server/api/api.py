@@ -29,7 +29,7 @@ from pipeline.rate_limiter import enforce_quota, QuotaExceeded
 
 app = FastAPI(title="AURA API")
 
-# Lazy-init: AURA pulls in Pinecone, embeddings, etc. Defer until first /chat
+# Lazy-init: AURA pulls in Qdrant, embeddings, etc. Defer until first /chat
 # so /health and auth routes stay available during cold start.
 _aura = None
 _aura_lock = threading.Lock()

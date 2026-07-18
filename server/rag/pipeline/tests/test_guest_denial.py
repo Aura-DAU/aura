@@ -2,7 +2,7 @@
 v7 regression: guest / no-identity PERSONAL query must return GENERIC_DENIAL
 immediately — never crash, never fall through to AccessControlGate/ERP.
 
-Heavy real dependencies (Pinecone-backed RetrievalPipeline, Groq-backed
+Heavy real dependencies (Qdrant-backed RetrievalPipeline, Groq-backed
 QueryGuardrail/WellnessGuardrail/AnswerGenerator, ERPConnector) are stubbed
 out so this test exercises only aura_chat.py's routing logic, matching the
 Fakes-based approach in test_access_gate.py.
@@ -23,7 +23,7 @@ class _FakeClassification:
 
 def _build_aura_chat_with_fakes():
     """Constructs a real AuraChat but with every heavy dependency mocked out,
-    so .chat() can be exercised without a DB, Pinecone, or Groq connection."""
+    so .chat() can be exercised without a DB, Qdrant, or Groq connection."""
     with patch("pipeline.aura_chat.RetrievalPipeline") as MockRP, \
          patch("pipeline.aura_chat.AnswerGenerator") as MockAG, \
          patch("pipeline.aura_chat.QueryGuardrail") as MockGuardrail, \

@@ -2,7 +2,6 @@ import os
 import logging
 from pathlib import Path
 from dotenv import load_dotenv
-from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 
 # Query-time embeddings MUST use the same model as ingestion-time
@@ -10,6 +9,7 @@ from sentence_transformers import SentenceTransformer
 from pipeline.ingestion.chunking.config import MODEL_NAME
 
 from pipeline.retrieval.bm25_retriever import BM25Retriever
+from pipeline.retrieval.qdrant_adapter import QdrantAdapter
 from pipeline.retrieval.rrf import fuse
 
 logger = logging.getLogger(__name__)
@@ -47,21 +47,12 @@ class Retriever:
                 metadata_path
             )
         
-        self.index = None
+        self.vector_store = None
         try:
-            pc = Pinecone(
-                api_key=os.getenv(
-                    "PINECONE_API_KEY"
-                )
-            )
-            self.index = pc.Index(
-                os.getenv(
-                    "PINECONE_INDEX"
-                )
-            )
-            logger.info("Pinecone Index initialized successfully.")
+            self.vector_store = QdrantAdapter()
+            logger.info("Qdrant collection initialized successfully.")
         except Exception as e:
-            logger.warning("Failed to initialize Pinecone Index: %s. Dense search will be disabled.", e)
+            logger.warning("Failed to initialize Qdrant collection: %s. Dense search will be disabled.", e)
 
     def retrieve(
         self,
@@ -71,12 +62,12 @@ class Retriever:
         allowed_roles=None
     ):
 
-        # TEMPORARY FIX: Pinecone currently lacks the 'allowed_roles' metadata field,
+        # TEMPORARY FIX: the migrated collection may lack the 'authorization' payload field,
         # so applying the DLS metadata_filter returns 0 chunks for ALL queries.
         # Disabling filter until vectors are re-ingested with correct metadata.
-        pinecone_filter = metadata_filter
-        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
-            pinecone_filter = None
+        qdrant_filter = metadata_filter
+        if os.getenv("DISABLE_QDRANT_DLS_FILTER", "false").lower() == "true":
+            qdrant_filter = None
         
         query_embedding = self.model.encode(
             [
@@ -88,35 +79,15 @@ class Retriever:
         )
 
         dense_results = []
-        if self.index:
+        if self.vector_store:
             try:
-                results = self.index.query(
+                dense_results = self.vector_store.search(
                     vector=query_embedding[0].tolist(),
-                    top_k=top_k,
-                    include_metadata=True,
-                    filter=pinecone_filter
+                    limit=top_k,
+                    metadata_filter=qdrant_filter,
                 )
-                for match in results["matches"]:
-                    dense_results.append(
-                        {
-                            "id":
-                                match["id"],
-
-                            # Fix #1A: store the raw Pinecone cosine score separately
-                            # so the confidence router can use it even after RRF fusion
-                            # overwrites 'score' with the hybrid rrf_score.
-                            "score":
-                                match["score"],
-
-                            "cosine_score":
-                                match["score"],
-
-                            "metadata":
-                                match["metadata"]
-                        }
-                    )
             except Exception as e:
-                logger.warning("Pinecone query failed: %s", e)
+                logger.warning("Qdrant query failed: %s", e)
 
         if not self.bm25:
             return dense_results
@@ -142,7 +113,7 @@ class Retriever:
         """
         Hydrate a list of chunk IDs into full result dicts using the local
         BM25 metadata store.  Used by the retrieval pipeline to pull
-        entity-matched chunks without an extra Pinecone query.
+        entity-matched chunks without an extra vector-store query.
 
         Returns only chunks whose IDs are present in the local store.
         score is set to 0.0 (entity-match is boolean; reranker scores it).

@@ -54,7 +54,7 @@
 
 ## Retrieval-Related Gaps (RAG Routing Limitations)
 
-A total of 41 questions failed due to retrieval routing errors (e.g., BGE/Pinecone matching alternative documents containing similar terminology instead of the expected file).
+A total of 41 questions failed due to retrieval routing errors in the pre-migration system (e.g., BGE/Pinecone matching alternative documents containing similar terminology instead of the expected file).
 
 ### Gap (Routing) - Q018
 * **Question:** List all 8 student committees at DAU.

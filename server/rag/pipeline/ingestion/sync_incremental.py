@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 import numpy as np
 from dotenv import load_dotenv
-from pinecone import Pinecone
+from qdrant_client import models
 from sentence_transformers import SentenceTransformer
 import torch
 import hashlib
@@ -15,12 +15,16 @@ logger = logging.getLogger(__name__)
 
 # Setup directories
 INGESTION_DIR = Path(__file__).resolve().parent
+RAG_DIR = INGESTION_DIR.parent.parent
+if str(RAG_DIR) not in sys.path:
+    sys.path.insert(0, str(RAG_DIR))
 sys.path.insert(0, str(INGESTION_DIR))
 sys.path.insert(0, str(INGESTION_DIR / "chunking"))
 
 from config import MODEL_NAME
 from process_corpus import process_markdown_file
 from build_entity_index import build_entity_index
+from pipeline.retrieval.qdrant_adapter import QdrantAdapter
 
 DATA_DIR = INGESTION_DIR.parent.parent.parent.parent / "data"
 VECTOR_STORE_DIR = INGESTION_DIR.parent / "vector_store"
@@ -155,6 +159,7 @@ def main():
 
     # 2. Embed only new chunks
     new_embeddings = None
+    vectors = []
     if new_chunks:
         device = "mps" if torch.backends.mps.is_available() else "cpu"
         logger.info("Loading embedding model %s on device: %s...", MODEL_NAME, device)
@@ -199,44 +204,39 @@ def main():
     with open(METADATA_FILE, "w", encoding="utf-8") as f:
         json.dump(metadata, f, ensure_ascii=False)
 
-    # 4. Upload new chunks to Pinecone
-    api_key = os.getenv("PINECONE_API_KEY")
-    index_name = os.getenv("PINECONE_INDEX")
-    if not api_key or not index_name:
-        logger.error("PINECONE_API_KEY or PINECONE_INDEX not set in environment.")
+    # 4. Upload new chunks to Qdrant
+    try:
+        vector_store = QdrantAdapter()
+    except ValueError as e:
+        logger.error("Qdrant configuration error: %s", e)
         sys.exit(1)
 
-    logger.info("Connecting to Pinecone...")
-    pc = Pinecone(api_key=api_key)
-    index = pc.Index(index_name)
-
-    # Delete old vectors for modified files from Pinecone
+    # Delete old vectors for modified files from Qdrant
     if updated_files:
-        logger.info("Deleting old vectors from Pinecone for %d modified files...", len(updated_files))
+        logger.info("Deleting old vectors from Qdrant for %d modified files...", len(updated_files))
         for f, canonical_path in updated_files:
             import uuid
             doc_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, f.as_posix()))
             try:
-                index.delete(filter={"document_id": doc_id})
+                vector_store.delete_by_filter({"document_id": {"$eq": doc_id}})
                 logger.info("  Deleted old vectors for: %s", canonical_path)
             except Exception as e:
-                logger.error("Failed to delete vectors for %s from Pinecone: %s", canonical_path, e)
+                logger.error("Failed to delete vectors for %s from Qdrant: %s", canonical_path, e)
 
-    # Delete vectors for deleted files from Pinecone
+    # Delete vectors for deleted files from Qdrant
     if deleted_files:
-        logger.info("Deleting vectors from Pinecone for %d deleted files...", len(deleted_files))
+        logger.info("Deleting vectors from Qdrant for %d deleted files...", len(deleted_files))
         for canonical_path in deleted_files:
             doc_id = deleted_path_to_doc_id.get(canonical_path)
             if doc_id:
                 try:
-                    index.delete(filter={"document_id": doc_id})
+                    vector_store.delete_by_filter({"document_id": {"$eq": doc_id}})
                     logger.info("  Deleted vectors for: %s (doc_id: %s)", canonical_path, doc_id)
                 except Exception as e:
-                    logger.error("Failed to delete vectors for %s from Pinecone: %s", canonical_path, e)
+                    logger.error("Failed to delete vectors for %s from Qdrant: %s", canonical_path, e)
 
     if new_chunks:
-        logger.info("Preparing vectors for Pinecone upload...")
-        vectors = []
+        logger.info("Preparing vectors for Qdrant upload...")
         for embedding, chunk in zip(new_embeddings, new_chunks):
             vector = {
                 "id": chunk["chunk_id"],
@@ -270,15 +270,21 @@ def main():
                     else:
                         vector["metadata"][field] = chunk[field]
 
-            vectors.append(vector)
+            vectors.append(
+                models.PointStruct(
+                    id=vector["id"],
+                    vector=vector["values"],
+                    payload=vector["metadata"],
+                )
+            )
 
     # Upload in partitioned batches (recommended batch size is <= 200)
     batch_size = 200
-    logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
+    logger.info("Uploading %d new vectors to Qdrant collection %s in batches of %d...", len(vectors), vector_store.collection_name, batch_size)
     for i in range(0, len(vectors), batch_size):
         batch = vectors[i:i+batch_size]
-        index.upsert(vectors=batch)
-    logger.info("Pinecone upload complete.")
+        vector_store.upsert(batch)
+    logger.info("Qdrant upload complete.")
 
     # 5. Refresh entity index
     logger.info("Rebuilding entity index...")

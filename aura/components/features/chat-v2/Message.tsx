@@ -12,7 +12,6 @@ interface MessageProps {
   message: ChatMessage
   citations?: Citation[]
   onRegenerate?: () => void
-  onCitationHover?: (citation: Citation | null) => void
   /** While streaming, render plain text to avoid re-parsing Markdown every token. */
   isStreaming?: boolean
 }
