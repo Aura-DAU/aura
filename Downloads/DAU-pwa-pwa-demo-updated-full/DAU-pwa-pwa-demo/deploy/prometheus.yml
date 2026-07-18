@@ -1,0 +1,40 @@
+# AURA Prometheus scrape configuration
+#
+# Scrape targets:
+#   backend  — FastAPI /metrics (via prometheus-fastapi-instrumentator, if added)
+#              Falls back to /health for basic up/down status until the
+#              instrumentator middleware is wired in.
+#   nginx    — nginx-prometheus-exporter sidecar (optional, future)
+#
+# To expose FastAPI metrics, add to server/Dockerfile / requirements.txt:
+#   prometheus-fastapi-instrumentator>=6.0.0
+# And in server/api/api.py after app is created:
+#   from prometheus_fastapi_instrumentator import Instrumentator
+#   Instrumentator().instrument(app).expose(app)
+
+global:
+  scrape_interval:     15s   # how often to scrape targets
+  evaluation_interval: 15s   # how often to evaluate rules
+  scrape_timeout:      10s
+
+# ── Scrape configs ──────────────────────────────────────────────────────────
+scrape_configs:
+
+  # FastAPI backend
+  - job_name: "aura-backend"
+    static_configs:
+      - targets: ["backend:8000"]
+    metrics_path: /metrics
+    # Fall back gracefully — if /metrics 404s (instrumentator not wired yet),
+    # Prometheus will mark the target down but not crash.
+
+  # Prometheus self-monitoring
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Grafana self-monitoring
+  - job_name: "grafana"
+    static_configs:
+      - targets: ["grafana:3000"]
+    metrics_path: /metrics

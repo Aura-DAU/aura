@@ -129,6 +129,44 @@ services:
   #   networks:
   #     - aura-internal
 
+  # ── Monitoring stack (PDF architecture: aura-prometheus + aura-grafana) ──
+  prometheus:
+    image: prom/prometheus:v2.51.2
+    container_name: aura-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=15d"
+      - "--web.enable-lifecycle"
+    expose:
+      - "9090"
+    networks:
+      - aura-internal
+    depends_on:
+      - backend
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    container_name: aura-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER:     ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-changeme}
+      GF_SERVER_ROOT_URL:         ${GRAFANA_ROOT_URL:-http://localhost:3001}
+    volumes:
+      - grafana-data:/var/lib/grafana
+    expose:
+      - "3000"
+    ports:
+      - "3001:3000"   # accessible at host:3001 to avoid conflict with Next.js :3000
+    networks:
+      - aura-internal
+    depends_on:
+      - prometheus
+
 networks:
   aura-edge:
   aura-internal:
@@ -138,4 +176,6 @@ volumes:
   redis-data:
   aura-vault:
   aura-logs:
+  prometheus-data:
+  grafana-data:
   # qdrant-storage:
