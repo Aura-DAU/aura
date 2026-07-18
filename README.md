@@ -1,6 +1,15 @@
-# DAU PWA
+# AURA (AI-powered University Resource Assistant)
 
-A Progressive Web App for Dhirubhai Ambani University, enriched with AI.
+AURA is an Agentic Retrieval-Augmented Generation (Agentic RAG) system designed to answer students' and faculty members' questions using the university's curated knowledge base.
+
+Unlike a conventional chatbot, AURA follows a multi-stage reasoning pipeline featuring:
+- **FastAPI API Gateway:** Manages authentication (SSO) and request routing.
+- **Agent Orchestrator (LangGraph):** The intelligence layer that plans execution and gathers information before querying the LLM.
+- **Vector Retrieval & Reranking:** Uses **Qdrant** for semantic search and a **Cross-Encoder** for reranking to improve accuracy.
+- **Inference Layer:** Uses **vLLM** on a dedicated NVIDIA GPU cluster for scalable, continuous-batching language generation.
+- **Memory & Storage:** Contextual conversation memory via **Redis** and persistent analytics/logs via **PostgreSQL**.
+
+All components are containerized and orchestrated using **Docker Compose** for high portability and scalability.
 
 > **Project Status (Notion):** https://www.notion.so/Dhirubhai-Ambani-University-PWA-Checklist-36d37054896680329226c5b61049b176
 
