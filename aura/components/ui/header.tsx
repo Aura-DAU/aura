@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Download, LogIn, LogOut, Menu, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSession, signOut } from "next-auth/react"
-import { BrandMark } from "@/components/common/BrandMark"
+import { BrandMark } from "@/components/ui/brand-mark"
 
 interface HeaderProps {
   onToggleSidebar: () => void

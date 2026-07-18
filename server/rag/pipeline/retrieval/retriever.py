@@ -15,6 +15,10 @@ from pipeline.retrieval.rrf import fuse
 logger = logging.getLogger(__name__)
 TOP_K = 3
 
+# BGE-style instruction prefix — must be identical for every query embedding
+# (single source of truth for retrieve() and encode_queries()).
+QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
+
 
 class Retriever:
 
@@ -63,12 +67,23 @@ class Retriever:
         except Exception as e:
             logger.warning("Failed to initialize Pinecone Index: %s. Dense search will be disabled.", e)
 
+    def encode_queries(self, queries):
+        # Embed many query strings in ONE forward pass. Batching N texts is
+        # far cheaper than N sequential encode() calls, and callers can pass
+        # each row back into retrieve() via precomputed_embedding.
+        return self.model.encode(
+            [QUERY_PREFIX + q for q in queries],
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
+
     def retrieve(
         self,
         query,
         top_k=TOP_K,
         metadata_filter=None,
-        allowed_roles=None
+        allowed_roles=None,
+        precomputed_embedding=None
     ):
 
         # TEMPORARY FIX: Pinecone currently lacks the 'allowed_roles' metadata field,
@@ -77,21 +92,17 @@ class Retriever:
         pinecone_filter = metadata_filter
         if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
             pinecone_filter = None
-        
-        query_embedding = self.model.encode(
-            [
-                "Represent this sentence for searching relevant passages: "
-                + query
-            ],
-            normalize_embeddings=True,
-            convert_to_numpy=True
-        )
+
+        if precomputed_embedding is not None:
+            query_embedding = precomputed_embedding
+        else:
+            query_embedding = self.encode_queries([query])[0]
 
         dense_results = []
         if self.index:
             try:
                 results = self.index.query(
-                    vector=query_embedding[0].tolist(),
+                    vector=query_embedding.tolist(),
                     top_k=top_k,
                     include_metadata=True,
                     filter=pinecone_filter
@@ -139,14 +150,9 @@ class Retriever:
         self,
         chunk_ids: list[str],
     ) -> list[dict]:
-        """
-        Hydrate a list of chunk IDs into full result dicts using the local
-        BM25 metadata store.  Used by the retrieval pipeline to pull
-        entity-matched chunks without an extra Pinecone query.
-
-        Returns only chunks whose IDs are present in the local store.
-        score is set to 0.0 (entity-match is boolean; reranker scores it).
-        """
+        # Hydrate a list of chunk IDs into full result dicts using the local
+        # BM25 metadata store.  Used by the retrieval pipeline to pull
+        # score is set to 0.0 (entity-match is boolean; reranker scores it).
         if not self.bm25 or not chunk_ids:
             return []
 

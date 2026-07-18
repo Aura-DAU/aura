@@ -1,4 +1,4 @@
-import { BrandMark } from "@/components/common/BrandMark"
+import { BrandMark } from "@/components/ui/brand-mark"
 
 interface StreamingIndicatorProps {
   thinkingStep?: string

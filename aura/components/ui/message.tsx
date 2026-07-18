@@ -1,12 +1,12 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import { Check, Copy, RotateCcw, ThumbsDown, ThumbsUp, FileText, Lock, CalendarCheck } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 import type { ChatMessage, Citation, CalendarActionData } from "@/lib/chat-types"
-import { BrandMark } from "@/components/common/BrandMark"
-import { MarkdownContent } from "@/components/common/MarkdownContent"
+import { BrandMark } from "@/components/ui/brand-mark"
+import { MarkdownContent } from "@/components/ui/markdown-content"
 
 interface MessageProps {
   message: ChatMessage
@@ -16,7 +16,7 @@ interface MessageProps {
   isStreaming?: boolean
 }
 
-export function Message({ message, citations, onRegenerate, isStreaming = false }: MessageProps) {
+function MessageInner({ message, citations, onRegenerate, isStreaming = false }: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -181,6 +181,10 @@ export function Message({ message, citations, onRegenerate, isStreaming = false 
     </div>
   )
 }
+
+// Older messages keep stable prop identities while streaming/typing, so memo
+// limits per-delta and per-keystroke re-renders to the message being updated.
+export const Message = memo(MessageInner)
 
 interface ActionButtonProps {
   label: string

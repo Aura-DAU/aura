@@ -4,19 +4,17 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { WifiOff } from "lucide-react"
 import { useAuraChat } from "@/hooks/use-aura-chat"
-import { Sidebar } from "./Sidebar"
-import { Header } from "./Header"
-import { MessageList } from "./MessageList"
-import { Composer } from "./Composer"
-import { EmptyState } from "./EmptyState"
-import { ProfileModal } from "./ProfileModal"
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>
-}
+import { usePWAInstall } from "@/hooks/use-pwa-install"
+import { Sidebar } from "./sidebar"
+import { Header } from "./header"
+import { MessageList } from "./message-list"
+import { Composer } from "./composer"
+import { EmptyState } from "./empty-state"
+import { ProfileModal } from "./profile-modal"
 
 export function ChatShell() {
   const chat = useAuraChat()
+  const { canInstall, promptInstall } = usePWAInstall()
   const router = useRouter()
   const searchParams = useSearchParams()
   const promptHandled = useRef(false)
@@ -25,7 +23,6 @@ export function ChatShell() {
   // Always false for SSR + first client paint; only show after mount to avoid hydration mismatch.
   const [isOffline, setIsOffline] = useState(false)
   const [offlineReady, setOfflineReady] = useState(false)
-  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
 
   useEffect(() => {
     const goOnline = () => setIsOffline(false)
@@ -38,15 +35,6 @@ export function ChatShell() {
       window.removeEventListener("online", goOnline)
       window.removeEventListener("offline", goOffline)
     }
-  }, [])
-
-  useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault()
-      setInstallPrompt(e as BeforeInstallPromptEvent)
-    }
-    window.addEventListener("beforeinstallprompt", handler)
-    return () => window.removeEventListener("beforeinstallprompt", handler)
   }, [])
 
   // Consume ?prompt= from dashboard quick actions once, then clear the URL.
@@ -62,12 +50,6 @@ export function ChatShell() {
     void chat.handleSendMessage(prompt)
     // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot handoff
   }, [searchParams, router])
-
-  const handleInstall = useCallback(async () => {
-    if (!installPrompt) return
-    await installPrompt.prompt()
-    setInstallPrompt(null)
-  }, [installPrompt])
 
   const handleRegenerate = useCallback(() => {
     const lastUser = chat.messages.findLast((m) => m.role === "user")
@@ -102,8 +84,10 @@ export function ChatShell() {
           <Header
             onToggleSidebar={() => setSidebarOpen(true)}
             onClearChat={chat.handleClearChat}
-            canInstall={Boolean(installPrompt)}
-            onInstall={handleInstall}
+            canInstall={canInstall}
+            onInstall={() => {
+              void promptInstall()
+            }}
           />
 
           {offlineReady && isOffline ? (
