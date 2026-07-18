@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { memo, useEffect, useRef } from "react"
 import type { ChatMessage, Citation } from "@/lib/chat-types"
-import { Message } from "./Message"
-import { StreamingIndicator } from "./StreamingIndicator"
+import { Message } from "./message"
+import { StreamingIndicator } from "./streaming-indicator"
 
 interface MessageListProps {
   messages: ChatMessage[]
@@ -13,7 +13,7 @@ interface MessageListProps {
   onRegenerate: () => void
 }
 
-export function MessageList({
+function MessageListInner({
   messages,
   loading,
   thinkingStep,
@@ -73,3 +73,7 @@ export function MessageList({
     </div>
   )
 }
+
+// All props are referentially stable while the user types or records audio,
+// so memo skips the whole message subtree on those high-frequency re-renders.
+export const MessageList = memo(MessageListInner)

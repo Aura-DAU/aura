@@ -1,7 +1,7 @@
 from access_control import ROLE_ALLOWED_SETS
 
 def get_allowed_roles(user_role: str) -> list[str]:
-    """Single source of truth — delegates to access_control.ROLE_ALLOWED_SETS."""
+    # Single source of truth — delegates to access_control.ROLE_ALLOWED_SETS.
     user_role = user_role.lower()
     # Resolve aliases/legacy mapping for backward compatibility and tests
     alias_map = {

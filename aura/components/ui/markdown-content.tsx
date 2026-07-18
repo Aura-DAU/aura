@@ -2,7 +2,7 @@ import React from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeSanitize from "rehype-sanitize"
-import { CodeBlock } from "@/components/common/CodeBlock"
+import { CodeBlock } from "@/components/ui/code-block"
 
 interface MarkdownContentProps {
   content: string

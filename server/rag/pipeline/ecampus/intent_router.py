@@ -1,12 +1,6 @@
-"""
-Classifies whether a query needs the eCampus tool/orchestrator path (live,
-person-specific data) or should continue through the existing general-
-knowledge RAG pipeline in aura_chat.py. This is the one new decision point
-inserted into aura_chat.py — everything else in that file is untouched.
-
-Kept deliberately narrow: a cheap, fast, single-word classification call,
-same pattern as QueryGuardrail.
-"""
+# Classifies whether a query needs the eCampus tool/orchestrator path (live,
+# person-specific data) or should continue through the existing general-
+# same pattern as QueryGuardrail.
 
 import os
 from dotenv import load_dotenv

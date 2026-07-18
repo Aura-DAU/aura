@@ -160,10 +160,8 @@ def extract_curriculum_chunks(body, metadata, file_path):
 
 
 def convert_tables_to_sentences(text):
-    """
-    Finds markdown tables in text and converts them into semantic sentences
-    to prevent tabular fragmentation during chunking.
-    """
+    # Finds markdown tables in text and converts them into semantic sentences
+    # to prevent tabular fragmentation during chunking.
     lines = text.split("\n")
     processed_lines = []
     i = 0
@@ -267,10 +265,8 @@ def map_to_canonical_faculty(name):
 
 
 def extract_faculty_from_text(text):
-    """
-    Search text for Advisor: ... or similar lines and extract faculty names.
-    Also scan text for any matches of canonical faculty names.
-    """
+    # Search text for Advisor: ... or similar lines and extract faculty names.
+    # Also scan text for any matches of canonical faculty names.
     faculty_names = set()
     
     # 1. Scoped advisor lines
@@ -303,18 +299,14 @@ def extract_faculty_from_text(text):
 
 
 def extract_course_codes_from_text(text):
-    """
-    Find course codes (2-3 letters followed by 3 digits) in the text.
-    """
+    # Find course codes (2-3 letters followed by 3 digits) in the text.
     codes = set(re.findall(r"\b[A-Z]{2,3}\d{3}\b", text))
     return list(codes)
 
 
 def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end=None):
-    """
-    Given the chunk text and the original lines of the file, find the 1-indexed
-    start_line and end_line in the file where this chunk's content resides.
-    """
+    # Given the chunk text and the original lines of the file, find the 1-indexed
+    # start_line and end_line in the file where this chunk's content resides.
     lines_to_search = []
     for line in chunk_text.split("\n"):
         line_clean = line.strip()

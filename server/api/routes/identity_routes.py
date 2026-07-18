@@ -1,33 +1,12 @@
-"""
-identity_routes.py — Internal identity resolution endpoint.
-
-Exposes exactly one endpoint:
-  GET /internal/resolve-identity?email=<institutional_email>
-
-Called exclusively by Next.js (inside the NextAuth jwt() callback) once
-per user login to resolve a Google email into the ERP identity AURA needs.
-Never called by a browser directly.
-
-Security:
-  - Requires X-Internal-Secret header matching INTERNAL_RESOLVE_SECRET env var.
-  - Should be network-restricted to the Next.js server IP in production
-    (nginx/firewall rule), but the secret header is a defense-in-depth layer.
-  - Validates that the email domain is @dau.ac.in or @daiict.ac.in before
-    doing any DB lookup.
-
-Returns:
-  { "erp_id": "202301234", "role": "student", "department": "ICT" }
-
-Next.js uses this to populate the jwt() callback, then mints the internal
-JWT that FastAPI's require_identity() verifies on every chat request.
-"""
-
+# GET /internal/resolve-identity — Next.js-only email → ERP identity lookup.
+# Requires X-Internal-Secret; validates @dau.ac.in / @daiict.ac.in before DB hit.
 import os
 import secrets
 import re
 import json
 from pathlib import Path
-from fastapi import APIRouter, Depends, HTTPException, Header, Query
+
+from fastapi import APIRouter, Depends, Header, HTTPException, Query
 import db.connection as db_conn
 
 router = APIRouter(prefix="/internal", tags=["internal"])
@@ -47,8 +26,7 @@ if FACULTY_EMAILS_PATH.exists():
 
 
 def _validate_secret(x_internal_secret: str = Header(..., alias="X-Internal-Secret")) -> None:
-    """FastAPI dependency — validates the X-Internal-Secret header.
-    Wired via Depends() so secret checking is not duplicated inline."""
+    # Depends()-wired secret check (compare_digest).
     if not INTERNAL_RESOLVE_SECRET:
         raise HTTPException(
             status_code=500,
@@ -70,16 +48,11 @@ def _validate_email_domain(email: str) -> None:
 @router.get("/resolve-identity")
 def resolve_identity(
     email: str = Query(..., description="Institutional Google email to resolve"),
-    _: None = Depends(_validate_secret),   # Fix #9: auth enforced via Depends
+    _: None = Depends(_validate_secret),
 ):
-    """
-    Resolve a Google institutional email to an ERP identity.
-    Called by Next.js inside the NextAuth jwt() callback — not by browsers.
-    """
-    # 1. Domain validation (secret already verified by Depends(_validate_secret))
+    # Called from NextAuth jwt() callback — not from browsers.
     _validate_email_domain(email)
 
-    # 3. Look up in user_identity_map
     rows = db_conn.query(
         """SELECT erp_id, role, dept
            FROM user_identity_map
@@ -95,7 +68,7 @@ def resolve_identity(
             "department": row["dept"],
         }
 
-    # 4. Fallback to dynamic classification
+    # Fallback to dynamic classification
     prefix = email.split("@")[0].lower().strip()
     role = "guest"
     erp_id = f"GUEST_{prefix.upper()}"
@@ -114,7 +87,7 @@ def resolve_identity(
         erp_id = f"FAC_{prefix.upper()}"
         dept = "ICT"  # Default faculty department
 
-    # 5. Insert valid student/faculty into user_identity_map as write-through cache
+    # Insert valid student/faculty into user_identity_map as write-through cache
     if role in ("student", "faculty"):
         try:
             db_conn.execute(
@@ -132,4 +105,5 @@ def resolve_identity(
         "role":       role,
         "department": dept,
     }
+
 

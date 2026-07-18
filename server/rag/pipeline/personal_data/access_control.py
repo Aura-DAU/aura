@@ -1,17 +1,6 @@
-"""
-Central authorization policy. Every personal-data tool handler — in
-ecampus/tool_registry.py and anywhere else — must call
-authorize_personal_query() before touching any per-person data. This is
-intentionally the ONLY place this decision gets made, so a future change to
-the rule ("faculty can now see X") happens in one function, not scattered
-across N handlers.
-
-Fails CLOSED: any ambiguity, missing data, or unexpected role raises
-AccessDenied rather than defaulting to allow. This is the opposite default
-from query_guardrail.py's "fail open" safety filter — that's deliberate.
-Read access denied is an inconvenience; read access wrongly granted is a
-privacy incident.
-"""
+# Central authorization policy. Every personal-data tool handler — in
+# ecampus/tool_registry.py and anywhere else — must call
+# privacy incident.
 
 # Roles that are treated as elevated (non-student) and are allowed to
 # query a target student's data (subject to the consent gate in
@@ -40,13 +29,9 @@ class AccessDenied(Exception):
 
 
 def authorize_personal_query(identity: dict, target_student_id: Optional[str]) -> str:
-    """
-    identity: {"role": str, "erp_id": str, "department": str|None}
-    target_student_id: the student the query is ABOUT. None means
-        "the requester themselves."
-
-    Returns the ERP student_id that's safe to query, or raises AccessDenied.
-    """
+    # identity: {"role": str, "erp_id": str, "department": str|None}
+    # target_student_id: the student the query is ABOUT. None means
+    # Returns the ERP student_id that's safe to query, or raises AccessDenied.
     if not identity or "role" not in identity or "erp_id" not in identity:
         raise AccessDenied("Missing or incomplete identity — cannot authorize.")
 

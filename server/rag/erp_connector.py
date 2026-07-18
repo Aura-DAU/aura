@@ -1,28 +1,4 @@
-"""
-B5 — ERP Connector Service.
-
-Provides named, parameterized read-only methods for every piece of personal
-data AURA needs. The LLM and user query text NEVER touch this layer —
-only the AccessControlGate (B7) calls it, with typed, pre-validated
-arguments.
-
-Two transport modes, auto-selected:
-  SQL mode   — if ERP_DB_HOST is set: direct psycopg2 connection to
-               the ERP's PostgreSQL database via the aura_readonly service
-               account. sslmode=require, default_transaction_read_only=on.
-               Use this mode when ERP team grants DB read access.
-  Scrape mode — if ERP_DB_HOST is NOT set: falls back to the eCampus
-               session-scraper (pipeline/ecampus/client.py). Results are
-               mapped to the same return shapes as SQL mode so the rest of
-               the system is unaware of the difference.
-
-Security contract (applies to BOTH modes):
-  - No method ever accepts a raw SQL string or interpolates user input.
-  - Every SQL query uses %s parameterized placeholders.
-  - The aura_readonly DB user has SELECT-only grants on specific columns
-    (see 03_database_schema.md for the GRANT statements).
-  - Connection-level read_only=on means even a bug can't write.
-"""
+# ERP connector — read-only SQL or eCampus scrape for personal student/faculty data.
 
 import os
 import psycopg2
@@ -53,9 +29,7 @@ def _get_sql_pool() -> psycopg2.pool.ThreadedConnectionPool:
 
 
 class ERPConnector:
-    """
-    Public interface — all callers use this class regardless of transport mode.
-    """
+    # Public interface — all callers use this class regardless of transport mode.
 
     def __init__(self):
         self._mode = "sql" if os.environ.get("ERP_DB_HOST") else "scrape"
@@ -63,13 +37,9 @@ class ERPConnector:
     # ── Internal SQL helper ───────────────────────────────────────────────
 
     def _q(self, sql: str, params: tuple) -> list[dict]:
-        """
-        Executes a parameterized SELECT. Raises an error if sql is not a
-        SELECT statement — belt-and-suspenders guard against accidental writes.
-        The connection is already read-only at the DB level, but we add a
-        code-level check here too.
-        (B5 acceptance test: _q("DROP TABLE students", ()) must raise.)
-        """
+        # Executes a parameterized SELECT. Raises an error if sql is not a
+        # SELECT statement — belt-and-suspenders guard against accidental writes.
+        # (B5 acceptance test: _q("DROP TABLE students", ()) must raise.)
         if not sql.strip().upper().startswith("SELECT"):
             raise ValueError(
                 "ERPConnector._q only accepts SELECT statements. "
@@ -251,7 +221,7 @@ class ERPConnector:
         return []
 
     def find_student_by_name(self, name: str) -> Optional[dict]:
-        """Fuzzy name lookup — only available in SQL mode."""
+        # Fuzzy name lookup — only available in SQL mode.
         if self._mode == "sql":
             rows = self._q(
                 "SELECT roll_number, full_name FROM students WHERE full_name ILIKE %s AND enrollment_status='active' LIMIT 1",
@@ -263,12 +233,9 @@ class ERPConnector:
     # ── Aggregate queries (anonymized — no individual records returned) ───
 
     def get_class_aggregate(self, course_code: str, semester: Optional[int] = None) -> dict:
-        """
-        Returns anonymized class-level statistics for a course.
-        NEVER returns individual student records — only averages/counts.
-        Called only after the AccessControlGate confirms the requesting
-        faculty member teaches this course.
-        """
+        # Returns anonymized class-level statistics for a course.
+        # NEVER returns individual student records — only averages/counts.
+        # faculty member teaches this course.
         if self._mode == "sql":
             cgpa_rows = self._q(
                 """SELECT AVG(cg.grade_points) AS avg_grade_points,
@@ -303,8 +270,8 @@ class ERPConnector:
     # ── B2-AUTH-5: Program Coordinator level methods ──────────────────────
 
     def student_in_program(self, student_erp_id: str, program_id: str) -> bool:
-        """Check if a student belongs to a specific program (e.g. 'BTech-ICT').
-        Used by AccessControlGate for faculty_coord binding checks."""
+        # Check if a student belongs to a specific program (e.g. 'BTech-ICT').
+        # Used by AccessControlGate for faculty_coord binding checks.
         if self._mode == "sql":
             rows = self._q(
                 """SELECT 1 FROM students
@@ -324,7 +291,7 @@ class ERPConnector:
         batch_year: Optional[int] = None,
         enrollment_status: str = "active",
     ) -> list[dict]:
-        """All students enrolled in a given program. Coordinator-scoped."""
+        # All students enrolled in a given program. Coordinator-scoped.
         if self._mode == "sql":
             if batch_year:
                 return self._q(
@@ -351,7 +318,7 @@ class ERPConnector:
     def get_program_courses(
         self, program_id: str, semester: Optional[int] = None
     ) -> list[dict]:
-        """All courses in a program for a given semester (or current)."""
+        # All courses in a program for a given semester (or current).
         if self._mode == "sql":
             if semester:
                 return self._q(
@@ -379,8 +346,8 @@ class ERPConnector:
     def get_program_grade_distribution(
         self, program_id: str, course_code: str, semester: Optional[int] = None
     ) -> dict:
-        """Aggregate grade histogram for a course within a program.
-        Returns anonymized counts — no individual student data."""
+        # Aggregate grade histogram for a course within a program.
+        # Returns anonymized counts — no individual student data.
         if self._mode == "sql":
             rows = self._q(
                 """SELECT cg.grade, COUNT(*) AS count
@@ -402,7 +369,7 @@ class ERPConnector:
         return {"note": "SQL mode required for grade distribution."}
 
     def get_program_academic_standing(self, program_id: str) -> list[dict]:
-        """Students in a program with probation/backlog flags. Coordinator use."""
+        # Students in a program with probation/backlog flags. Coordinator use.
         if self._mode == "sql":
             return self._q(
                 """SELECT s.roll_number, s.full_name, s.current_semester,
@@ -425,7 +392,7 @@ class ERPConnector:
     def get_program_elective_demand(
         self, program_id: str, semester: int
     ) -> list[dict]:
-        """Elective demand vs capacity for a program's upcoming semester."""
+        # Elective demand vs capacity for a program's upcoming semester.
         if self._mode == "sql":
             return self._q(
                 """SELECT pc.course_code, pc.course_name,
@@ -454,8 +421,8 @@ class ERPConnector:
         enrollment_status: str = "active",
         dept: Optional[str] = None,
     ) -> list[dict]:
-        """Full student list across all programs. Dean/admin scope only.
-        Never call this from a student or general-faculty code path."""
+        # Full student list across all programs. Dean/admin scope only.
+        # Never call this from a student or general-faculty code path.
         if self._mode == "sql":
             if dept:
                 return self._q(
@@ -477,7 +444,7 @@ class ERPConnector:
         return []
 
     def get_hostel_master(self) -> list[dict]:
-        """Full hostel occupancy map. Dean of Students scope only."""
+        # Full hostel occupancy map. Dean of Students scope only.
         if self._mode == "sql":
             return self._q(
                 """SELECT ha.room_number, ha.block, ha.floor,
@@ -496,9 +463,9 @@ class ERPConnector:
         status: Optional[str] = None,
         student_erp_id: Optional[str] = None,
     ) -> list[dict]:
-        """Disciplinary committee cases. Dean of Students + admin scope only.
-        Never surfaces individual case details unless explicitly requested
-        by an authorized dean — the gate checks this before calling."""
+        # Disciplinary committee cases. Dean of Students + admin scope only.
+        # Never surfaces individual case details unless explicitly requested
+        # by an authorized dean — the gate checks this before calling.
         if self._mode == "sql":
             return self._q(
                 """SELECT dc.case_id, dc.student_roll, s.full_name,
@@ -518,7 +485,7 @@ class ERPConnector:
         grievance_type: Optional[str] = None,
         status: Optional[str] = None,
     ) -> list[dict]:
-        """All student grievances. Dean of Students scope only."""
+        # All student grievances. Dean of Students scope only.
         if self._mode == "sql":
             return self._q(
                 """SELECT g.grievance_id, g.student_roll, g.grievance_type,
@@ -535,7 +502,7 @@ class ERPConnector:
     def get_scholarship_records(
         self, student_erp_id: Optional[str] = None
     ) -> list[dict]:
-        """Scholarship and aid records. Dean of Students / registrar scope."""
+        # Scholarship and aid records. Dean of Students / registrar scope.
         if self._mode == "sql":
             if student_erp_id:
                 return self._q(
@@ -557,8 +524,8 @@ class ERPConnector:
         return []
 
     def get_btp_eligible_students(self, dept: Optional[str] = None) -> list[dict]:
-        """Students who have completed the minimum credits for BTP.
-        Faculty (general) read-only — filtered by dept if given."""
+        # Students who have completed the minimum credits for BTP.
+        # Faculty (general) read-only — filtered by dept if given.
         if self._mode == "sql":
             return self._q(
                 """SELECT s.roll_number, s.full_name, s.dept, s.current_semester,
@@ -581,7 +548,7 @@ class ERPConnector:
         return []
 
     def get_exploration_mentees(self, faculty_erp_id: str) -> list[dict]:
-        """Students in Exploration Project under this faculty's mentorship."""
+        # Students in Exploration Project under this faculty's mentorship.
         if self._mode == "sql":
             return self._q(
                 """SELECT ep.student_roll, s.full_name, s.dept,
@@ -597,7 +564,7 @@ class ERPConnector:
         return []
 
     def get_btp_students(self, faculty_erp_id: str) -> list[dict]:
-        """Students currently doing BTP under this faculty."""
+        # Students currently doing BTP under this faculty.
         if self._mode == "sql":
             return self._q(
                 """SELECT b.student_roll, s.full_name, s.dept,
@@ -613,7 +580,7 @@ class ERPConnector:
         return []
 
     def get_faculty_teaching_schedule(self, faculty_erp_id: str) -> list[dict]:
-        """Full teaching schedule for a faculty member (own profile use)."""
+        # Full teaching schedule for a faculty member (own profile use).
         if self._mode == "sql":
             return self._q(
                 """SELECT ca.course_code, pc.course_name, ca.semester,
