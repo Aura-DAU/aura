@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HBM_ 333 Course Proposal _ New_2025 - Nandini Banerjee.pdf"
 course_code: "HM333"
 semester: "New Course Proposal, 2025"
+authorization: ["student", "faculty"]
 ---
 
 # HM333: Human Behavior Management (Course Proposal)

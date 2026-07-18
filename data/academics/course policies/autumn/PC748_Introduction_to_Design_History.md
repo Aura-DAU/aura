@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC748 - INTRODUCTION TO DESIGN HISTORY.pdf"
 course_code: "PC748"
 semester: "Not specified in source document"
+authorization: ["student", "faculty"]
 ---
 
 # PC748: Introduction to Design History

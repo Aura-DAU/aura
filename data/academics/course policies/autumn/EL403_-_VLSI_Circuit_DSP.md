@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "EL403 - VLSI Circuit DSP.pdf"
 course_code: "EL403"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # EL403: VLSI Circuits for DSP

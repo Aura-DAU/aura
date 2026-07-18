@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT594_Deep Neural NLP & Applications (1).pdf"
 course_code: "IT594 / IT555"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IT594 / IT555: Deep Neural NLP & Applications

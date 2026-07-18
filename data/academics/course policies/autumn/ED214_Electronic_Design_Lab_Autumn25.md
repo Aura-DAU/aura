@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "ED214 - Electronic Design Lab.pdf"
 course_code: "ED214"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # ED214: Electronic Design Lab

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS603_Data_Structures_and_Algorithms_in_Python_Autumn25 - Amit Mankodi.pdf"
 course_code: "DS603"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # DS603: Data Structures and Algorithms in Python

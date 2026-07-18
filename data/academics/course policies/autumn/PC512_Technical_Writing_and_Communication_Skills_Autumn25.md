@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC512_TechnicalWritingandCommunicationSkills_Autumn25 - Purbasha Das.pdf"
 course_code: "PC512"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # PC512: Technical Writing and Communication Skills

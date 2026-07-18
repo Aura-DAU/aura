@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM216_ScienceTechnologySociety_Autumn25 - Shefali Jha.pdf"
 course_code: "HM216"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # HM216: Science, Technology, Society

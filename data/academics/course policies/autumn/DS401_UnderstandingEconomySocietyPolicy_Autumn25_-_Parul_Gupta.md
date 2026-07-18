@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS401_UnderstandingEconomySocietyPolicy_Autumn25 - Parul Gupta.pdf"
 course_code: "DS401"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # DS401: Understanding Economy, Society and Policy: A Data-Driven Approach

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT644_WSSOA-2025 (1).pdf"
 course_code: "IT644"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IT644: Web Services & Service-Oriented Architecture (WSSOA)

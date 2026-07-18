@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT615_DBMS_Autumn 2025 - Minal Bhise.pdf"
 course_code: "IT615"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IT615: Database Management System (DBMS)

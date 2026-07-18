@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "ED311 - Digital Signal Processing Hardware.pdf"
 course_code: "ED311"
 semester: "Winter 2025-26 (AY 25-26)"
+authorization: ["student", "faculty"]
 ---
 
 # ED311: Digital Signal Processing Hardware

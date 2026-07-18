@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MA615 - Fundamentals of Agricultural Science.pdf"
 course_code: "MA615"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # MA615: Fundamentals of Agricultural Science

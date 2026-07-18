@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "ED212_Solid_State_Devices - Pankaj Kumar - Pankaj Kumar.pdf"
 course_code: "ED212"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # ED212: Solid State Devices

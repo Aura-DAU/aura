@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM116 - Priciples of Economics.pdf"
 course_code: "HM116"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # HM116: Principles of Economics

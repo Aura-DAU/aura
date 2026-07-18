@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC749 - Image Text Sound.pdf"
 course_code: "PC749"
 semester: "Semester 1"
+authorization: ["student", "faculty"]
 ---
 
 # PC749: Image, Text & Sound

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC213_DesignandAnalysisof Algorithms_Autumn25.pdf"
 course_code: "MC213"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # MC213: Design and Analysis of Algorithms

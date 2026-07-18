@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT462_ExploratoryDataAnalysis_Autumn25 - Gopinath Panda.pdf"
 course_code: "IT462"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # IT462: Exploratory Data Analysis

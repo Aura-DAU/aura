@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM 410_Debating Right And Wrong In The MahabharataStyleAndContext_Autumn - Gangeya Mukherji.pdf"
 course_code: "HM410"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # HM410: Debating Right and Wrong in the Mahabharata: Style and Context

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "ED312_VLSIDesign_Autumn25 - Sreeja Rajendran.pdf"
 course_code: "ED312"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # ED312: VLSI Design

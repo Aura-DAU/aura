@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT586_TrustworthyAITheoryandPractice_Autumn25.pdf"
 course_code: "IT586"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IT586: Trustworthy AI – Theory and Practice

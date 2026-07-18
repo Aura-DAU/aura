@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT112_IntroductionToProgramming_Autumn2025 - Rachit Chhaya.pdf"
 course_code: "IT112 / IT113"
 semester: "Semester I, 2025-2026"
+authorization: ["student", "faculty"]
 ---
 
 # IT112 / IT113: Introduction to Programming / Programming Lab

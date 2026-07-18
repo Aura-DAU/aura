@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT580-Advanced Algorithms - Maniklal Das.pdf"
 course_code: "IT580"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IT580: Advanced Algorithms

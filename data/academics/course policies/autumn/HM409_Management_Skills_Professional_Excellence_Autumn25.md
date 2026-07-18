@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM409-Management-skills-professional-excellence.pdf"
 course_code: "HM409"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # HM409: Management Skills for Professional Excellence

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM 484 -  Modern European Philosophy.pdf"
 course_code: "HM484"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # HM484: Modern European Philosophy: From Descartes to Nietzsche

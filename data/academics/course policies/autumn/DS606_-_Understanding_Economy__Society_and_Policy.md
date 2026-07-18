@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS606 - Understanding Economy, Society and Policy.pdf"
 course_code: "DS606"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # DS606: Understanding Economy, Society and Policy: A Data-Driven Approach

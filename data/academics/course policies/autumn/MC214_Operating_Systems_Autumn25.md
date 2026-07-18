@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC214_OS_Aut25 - Anish Mathuria.pdf"
 course_code: "MC214"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # MC214: Operating Systems

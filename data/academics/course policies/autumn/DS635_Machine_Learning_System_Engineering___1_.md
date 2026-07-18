@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS635(Machine Learning System Engineering) (1).pdf"
 course_code: "DS635"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # DS635: Machine Learning System Engineering

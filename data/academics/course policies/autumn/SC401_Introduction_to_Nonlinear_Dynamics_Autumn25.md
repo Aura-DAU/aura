@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC401_Introduction to nonlinear dynamics_Autumn25_Pushpendra Kumar - Pushpendra Kumar.pdf"
 course_code: "SC401"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # SC401: Introduction to Nonlinear Dynamics

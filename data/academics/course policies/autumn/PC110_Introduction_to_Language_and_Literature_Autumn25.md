@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC110 - Introduction to Language and Literature.pdf"
 course_code: "PC110"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # PC110: Introduction to Language and Literature

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC612_DiscreteMathematics_Autumn2025-26 - Rahul Muthu.pdf"
 course_code: "SC612"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # SC612: Discrete Mathematics

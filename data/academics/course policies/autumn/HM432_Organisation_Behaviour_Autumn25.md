@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM_  432 _OB_ 2025 PDF _ NEW - Nandini Banerjee.pdf"
 course_code: "HM432"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # HM432: Organisation Behaviour

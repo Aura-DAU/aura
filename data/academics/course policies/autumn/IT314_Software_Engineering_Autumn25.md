@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT314 -  Software Engineering-Autumn 2025-26.pdf"
 course_code: "IT314"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IT314: Software Engineering

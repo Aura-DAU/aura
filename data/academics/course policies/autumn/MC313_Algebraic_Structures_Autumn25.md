@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC313_Algebraic_Structures - Gautam Dutta.pdf"
 course_code: "MC313"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # MC313: Algebraic Structures

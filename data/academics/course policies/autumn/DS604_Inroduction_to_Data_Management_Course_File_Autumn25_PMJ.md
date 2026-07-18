@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS604_Inroduction_to_Data_Management_Course_File_Autumn25_PMJ.pdf"
 course_code: "DS604"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # DS604: Introduction to Data Management

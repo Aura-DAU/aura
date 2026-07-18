@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CS374_Computational_and _Numerical_Methods_Autumn25 - Prosenjit Kundu.pdf"
 course_code: "CS374"
 semester: "Autumn Semester (AY 25-26)"
+authorization: ["student", "faculty"]
 ---
 
 # CS374: Computational and Numerical Methods

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC223_Linear_Algebra_Autumn25 - Prosenjit Kundu.pdf"
 course_code: "SC223"
 semester: "Autumn Semester (AY 25-26)"
+authorization: ["student", "faculty"]
 ---
 
 # SC223: Linear Algebra

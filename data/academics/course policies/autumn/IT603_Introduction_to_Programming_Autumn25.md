@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT603_IntroductionToProgramming_Autumn2025-26-AnkushChander - Ankush Chander.pdf"
 course_code: "IT603"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IT603: Introduction to Programming

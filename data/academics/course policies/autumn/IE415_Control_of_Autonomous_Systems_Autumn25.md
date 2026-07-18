@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE415_ControlOfAutonomousSystems_Autumn25 - Sujay Kadam.pdf"
 course_code: "IE415"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IE415: Control of Autonomous Systems

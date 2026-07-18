@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MDes (CD) - (PC732) Fundamentals of Design II.pdf"
 course_code: "PC732"
 semester: "Semester 1"
+authorization: ["student", "faculty"]
 ---
 
 # PC732: Fundamentals of Design - II

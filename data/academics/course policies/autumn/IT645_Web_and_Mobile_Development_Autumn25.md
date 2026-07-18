@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT645_WebAndMobileApplicationDevelpment_Autumn25 - Shruti Bhilare.pdf"
 course_code: "IT645"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IT645: Web and Mobile Development

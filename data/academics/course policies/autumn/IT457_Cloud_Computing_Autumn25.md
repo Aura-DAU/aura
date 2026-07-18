@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT457_Cloud Computing_Autumn2025 - kalyan sasidhar P S.pdf"
 course_code: "IT457"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # IT457: Cloud Computing

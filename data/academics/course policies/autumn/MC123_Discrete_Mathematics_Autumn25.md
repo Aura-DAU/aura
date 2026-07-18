@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC123_Discrete Mathematics_Autumn25 - Sudip Bera.pdf"
 course_code: "MC123"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # MC123: Discrete Mathematics

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "EL470 - Flexible and Printed Electronics.pdf"
 course_code: "EL470"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # EL470: Flexible and Printed Electronics

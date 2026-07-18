@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC613_CommunicationSkills_Autumn2025 - Jenson Joseph.pdf"
 course_code: "PC613"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # PC613: Communication Skills

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MA612_FundamentalsOfAnalytics_Autumn25 - Gopinath Panda.pdf"
 course_code: "MA612"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # MA612: Fundamentals of Analytics / Statistical Methods

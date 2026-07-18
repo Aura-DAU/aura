@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CT437_Speech_Communication_Autumn2025.pdf"
 course_code: "CT437"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # CT437: Speech Communication

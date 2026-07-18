@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE494_Big_Data_Processing_Course_File_Autumn25_PMJ.pdf"
 course_code: "IE494"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # IE494: Big Data Processing

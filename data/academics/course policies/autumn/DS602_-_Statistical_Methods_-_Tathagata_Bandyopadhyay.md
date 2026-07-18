@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS602 - Statistical Methods - Tathagata Bandyopadhyay.pdf"
 course_code: "DS602"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # DS602: Statistical Methods — Data Science

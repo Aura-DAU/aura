@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MA613 - Earth Observation System.pdf"
 course_code: "MA613"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # MA613: Earth Observation (EO) System

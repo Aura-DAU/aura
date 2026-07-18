@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE402_Optimization_Autumn 2025 - Nabin Sahu.pdf"
 course_code: "IE402"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # IE402: Optimization

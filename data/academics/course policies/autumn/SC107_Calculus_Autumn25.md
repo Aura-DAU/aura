@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC107 -  Calculus.pdf"
 course_code: "SC107"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # SC107: Calculus

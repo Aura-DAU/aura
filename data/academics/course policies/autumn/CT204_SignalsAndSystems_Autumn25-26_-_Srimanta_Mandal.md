@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CT204_SignalsAndSystems_Autumn25-26 - Srimanta Mandal.pdf"
 course_code: "CT204"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # CT204: Signals and Systems

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT216_Design&AnalysisOfAlgo_Autumn24 - Puneet Bhateja.pdf"
 course_code: "IT216"
 semester: "Autumn 2024"
+authorization: ["student", "faculty"]
 ---
 
 # IT216: Design and Analysis of Algorithms

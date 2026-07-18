@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE406_Machine_Learning_Autumn - Pritam Anand.pdf"
 course_code: "IE406"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # IE406: Machine Learning

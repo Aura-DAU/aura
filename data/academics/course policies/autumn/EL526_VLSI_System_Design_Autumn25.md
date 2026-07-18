@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "EL526_VLSI_System_Design_Autumn25 - YASH AGRAWAL.pdf"
 course_code: "EL526"
 semester: "Autumn 2025-26"
+authorization: ["student", "faculty"]
 ---
 
 # EL526: VLSI System Design

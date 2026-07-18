@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT531_Advanced Computer Networks_Autumn25 - Abhishek Gupta.pdf"
 course_code: "IT531"
 semester: "Autumn 2025"
+authorization: ["student", "faculty"]
 ---
 
 # IT531: Advanced Computer Networks
