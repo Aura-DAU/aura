@@ -35,6 +35,7 @@ Setup checklist (IT team):
                                       timetable events; see timetable_sync.py)
 """
 
+
 import os
 import json
 import sqlite3
@@ -102,6 +103,7 @@ def _connect():
 def store_tokens(erp_id: str, access_token: str, refresh_token: str,
                   token_expiry: str, scope: str = SCOPE_READONLY) -> None:
     """Called by the OAuth callback handler after the user grants consent."""
+
     blob = json.dumps({
         "access_token":  access_token,
         "refresh_token": refresh_token,
