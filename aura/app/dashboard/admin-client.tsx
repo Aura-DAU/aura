@@ -34,11 +34,12 @@ interface BoxShapeProps {
   width: number
   height: number
   fill?: string
-  payload: LatencySegment
+  payload?: LatencySegment
 }
 
 const BoxShape = (props: BoxShapeProps) => {
   const { x, y, width, height, payload, fill } = props
+  if (!payload) return null
   const { min, q1, median, q3, max } = payload
 
   const valueRange = q3 - q1
@@ -433,7 +434,7 @@ export default function AdminBindingsClient() {
                     />
                     <Tooltip
                       cursor={{ fill: 'rgba(255,255,255,0.05)' }}
-                      content={({ active, payload }: { active?: boolean; payload?: { payload: LatencySegment }[] }) => {
+                      content={({ active, payload }: { active?: boolean; payload?: readonly { payload: LatencySegment }[] }) => {
                         if (active && payload && payload.length) {
                           const data = payload[0].payload as LatencySegment
                           return (
