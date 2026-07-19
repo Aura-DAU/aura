@@ -1,0 +1,18 @@
+# Lightweight deps for CI unit tests (no torch / whisper / pinecone / transformers).
+fastapi
+uvicorn
+pydantic
+httpx
+pytest
+python-dotenv
+python-multipart
+PyYAML
+numpy
+rapidfuzz>=3.5.0
+rank-bm25
+requests
+beautifulsoup4
+cryptography
+PyJWT
+psycopg2-binary
+bcrypt
