@@ -1,11 +1,6 @@
-"""
-Slot service — derives available booking windows from a faculty's calendar.
-
-Takes the raw Google Calendar events for a day and returns time windows
-where the faculty member has no conflicting events — their "available slots".
-Faculty publish these slots; students see only the slots for their own
-enrolled courses or BTP guide.
-"""
+# Slot service — derives available booking windows from a faculty's calendar.
+# Takes the raw Google Calendar events for a day and returns time windows
+# enrolled courses or BTP guide.
 
 import datetime
 from typing import Optional
@@ -42,19 +37,9 @@ def get_available_slots(
     faculty_erp_id: str,
     date: datetime.date,
 ) -> dict:
-    """
-    Returns available 30-minute slot windows for a faculty member on a date.
-    Used by students to see when they can book a meeting.
-
-    Returns:
-      {
-        "faculty_erp_id": ...,
-        "date": "2026-07-04",
-        "calendar_linked": bool,
-        "available_slots": [{"start": "10:00", "end": "10:30"}, ...],
-        "note": "..."
-      }
-    """
+    # Returns available 30-minute slot windows for a faculty member on a date.
+    # Used by students to see when they can book a meeting.
+    # }
     if not is_linked(faculty_erp_id):
         return {
             "faculty_erp_id":  faculty_erp_id,

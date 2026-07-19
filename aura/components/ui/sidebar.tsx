@@ -1,11 +1,12 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { MessageSquare, Plus, Trash2, User, LogOut, LayoutDashboard } from "lucide-react"
+import { Download, MessageSquare, Plus, Trash2, User, LogOut, LayoutDashboard } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { ChatThread, StudentProfile } from "@/lib/chat-types"
 import { useSession, signOut } from "next-auth/react"
-import { BrandMark } from "@/components/common/BrandMark"
+import { BrandMark } from "@/components/ui/brand-mark"
+import { usePWAInstall } from "@/hooks/use-pwa-install"
 
 interface SidebarProps {
   threads: ChatThread[]
@@ -64,6 +65,7 @@ function SidebarContent({
   onCloseMobile,
 }: SidebarProps) {
   const { data: session } = useSession()
+  const { canInstall, promptInstall } = usePWAInstall()
   const displayName = session?.user ? (studentProfile.name || session.user.name || "User") : "Guest Account"
   const displayEmail = session?.user ? (session.user.email ?? "") : "Sign in to get started"
 
@@ -98,6 +100,19 @@ function SidebarContent({
             Go to Dashboard
           </a>
         )}
+        {canInstall ? (
+          <button
+            type="button"
+            onClick={() => {
+              void promptInstall()
+              onCloseMobile()
+            }}
+            className="install-aura-glow flex w-full items-center justify-center gap-2 rounded-full border border-theme-yellow/40 bg-theme-yellow/10 px-4 py-2.5 text-sm font-semibold text-theme-yellow transition-all hover:bg-theme-yellow/20 hover:text-theme-yellow"
+          >
+            <Download className="size-4" />
+            Install AURA
+          </button>
+        ) : null}
       </div>
 
       <nav className="mt-4 flex-1 space-y-1 overflow-y-auto px-3 pb-4">

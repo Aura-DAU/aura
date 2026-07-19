@@ -1,10 +1,6 @@
-"""
-B2-AUTH-10: Access gate tests — all original 8 scenarios + new
-coordinator / convenor / dean / registrar / superadmin scenarios.
-
-Uses FakeIdentity (no DB UUID) and FakeERP (controls all relationship
-answers) so tests run without any real DB or ERP.
-"""
+# B2-AUTH-10: Access gate tests — all original 8 scenarios + new
+# coordinator / convenor / dean / registrar / superadmin scenarios.
+# answers) so tests run without any real DB or ERP.
 
 import sys
 from pathlib import Path
@@ -262,7 +258,7 @@ def test_faculty_general_aggregate_denied_without_courses():
     assert r.decision == AccessDecision.DENIED
 
 def test_own_data_always_allowed_regardless_of_role():
-    """Every role can always access their own data."""
+    # Every role can always access their own data.
     for role in ("student", "faculty", "admin"):
         r = make_gate(FakeERP()).evaluate(
             FakeIdentity("X1", role), INTENT, None)

@@ -16,6 +16,7 @@ Step 7: If PUBLIC/MIXED → run existing RAG pipeline
 """
 
 import re
+from concurrent.futures import ThreadPoolExecutor
 from typing import Optional
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import AnswerGenerator
@@ -84,7 +85,11 @@ class AuraChat:
         self.access_gate    = AccessControlGate(erp)
         self.audit_log      = AuditLog()
 
-    def chat(self, query, history=None, identity=None, display_profile=None):
+    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None):
+        # on_delta: optional callable(str) receiving sanitised answer deltas as
+        # they stream from the LLM. Canned paths (guardrail denials, greetings,
+        # wellness, access denials) never invoke it — callers detect "nothing
+        # streamed" and fall back to emitting the returned answer whole.
         # Convert dict identity to a simple object with dot-attribute access to avoid AttributeError
         if isinstance(identity, dict):
             class SimpleIdentity:
@@ -99,28 +104,48 @@ class AuraChat:
             )
 
         try:
-            # ── Safety guardrail (applies to every query) ──────────────
             from pipeline.latency_tracker import track_segment
-            with track_segment("guardrail_time"):
-                is_safe = self.guardrail.is_safe(query)
-            if not is_safe:
-                return {
-                    "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
-                    "sources": [],
-                }
-
-            # ── Wellness/distress check ───────────────────────────────
-            if self.wellness.check(query):
-                return {
-                    "answer": self.wellness.get_response(),
-                    "sources": [],
-                    "is_personal_data": False,
-                }
 
             history = history or []
+            is_greeting = is_greeting_or_meta(query)
+
+            # ── Pre-flight checks (parallelised) ───────────────────────
+            # The safety guardrail, wellness/distress check and personal-query
+            # classifier are independent LLM round-trips over the raw query;
+            # running them sequentially added two full RTTs to every request.
+            # Wellness + classifier run on worker threads while the guardrail
+            # runs here; results are consumed in the original precedence order
+            # (guardrail → wellness → greeting → classification) so routing
+            # behaviour is unchanged.
+            with ThreadPoolExecutor(max_workers=2) as preflight:
+                wellness_future = preflight.submit(self.wellness.check, query)
+                # Greetings never reach the classifier — don't spend the call.
+                classify_future = (
+                    None if is_greeting
+                    else preflight.submit(self.classifier.classify, query)
+                )
+
+                # ── Safety guardrail (applies to every query) ──────────
+                # Fails OPEN (None verdict → allow), exactly like the old
+                # is_safe() call; personal paths re-check below.
+                with track_segment("guardrail_time"):
+                    guardrail_verdict = self.guardrail.evaluate(query)
+                if guardrail_verdict is False:
+                    return {
+                        "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                        "sources": [],
+                    }
+
+                # ── Wellness/distress check ───────────────────────────
+                if wellness_future.result():
+                    return {
+                        "answer": self.wellness.get_response(),
+                        "sources": [],
+                        "is_personal_data": False,
+                    }
 
             # ── Greetings bypass classifier ────────────────────────────
-            if is_greeting_or_meta(query):
+            if is_greeting:
                 q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
                 words = q.split()
                 
@@ -155,8 +180,10 @@ class AuraChat:
                     "is_personal_data": False
                 }
 
-            # ── Step 1: Classify ────────────────────────────────────────
-            classification = self.classifier.classify(query)
+            # ── Step 1: Classify (already running since pre-flight) ─────
+            # classify_future is always set here — greeting queries returned above.
+            assert classify_future is not None
+            classification = classify_future.result()
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
 
             # ── Guest / No-identity check for personal paths ───────────
@@ -171,11 +198,20 @@ class AuraChat:
                     }
 
             # ── Step 1b: Strict guardrail for personal-data paths ───────
-            # is_safe() above fails OPEN (acceptable for public RAG). For
-            # personal/ERP paths we re-check with is_safe_strict() which
-            # fails CLOSED — if the guardrail LLM is down, deny rather than
-            # risk a prompt injection reaching the ERP pipeline.
-            if query_type in ("PERSONAL", "MIXED", "AGGREGATE") and identity:
+            # The pre-flight guardrail fails OPEN (acceptable for public RAG);
+            # personal/ERP paths must fail CLOSED. When the pre-flight call
+            # produced a real verdict it is reused — it's the same
+            # deterministic temperature-0 classification, so re-asking only
+            # adds a full LLM round-trip, not safety. Only when the pre-flight
+            # call errored (verdict None, allowed through by fail-open) do we
+            # re-attempt via is_safe_strict(), which denies if the guardrail
+            # LLM is still down — no prompt injection reaches the ERP pipeline
+            # unchecked.
+            if (
+                query_type in ("PERSONAL", "MIXED", "AGGREGATE")
+                and identity
+                and guardrail_verdict is None
+            ):
                 with track_segment("guardrail_time"):
                     is_safe_strict = self.guardrail.is_safe_strict(query)
                 if not is_safe_strict:
@@ -251,6 +287,7 @@ class AuraChat:
                     history=history,
                     profile=display_profile,
                     system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                    on_delta=on_delta,
                 )
 
             return {
