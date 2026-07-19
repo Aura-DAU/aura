@@ -27,6 +27,7 @@
     "react-dom": "^19",
     "react-markdown": "^10.1.0",
     "react-textarea-autosize": "^8.5.9",
+    "recharts": "^3.9.2",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
     "shadcn": "^4.8.0",
@@ -54,5 +55,12 @@
     "tailwindcss": "^4.2.0",
     "typescript": "5.7.3",
     "vitest": "^4.1.10"
+  },
+  "pnpm": {
+    "approvedBuilds": {
+      "msw": "2.14.6",
+      "sharp": "0.34.5",
+      "unrs-resolver": "1.12.2"
+    }
   }
 }
