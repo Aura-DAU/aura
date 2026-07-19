@@ -6,7 +6,7 @@ import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
 interface SessionWithUser {
   user: {
-    role: string
+    role: "student" | "faculty" | "admin" | "guest"
     erpId: string
     department: string
     email?: string | null
@@ -23,10 +23,10 @@ function buildToken(session: SessionWithUser) {
     erpId: session.user.erpId,
     department: session.user.department,
     email: session.user.email ?? undefined,
-    fullName: session.user.fullName,
-    currentYear: session.user.currentYear,
-    currentSem: session.user.currentSem,
-    currentSec: session.user.currentSec,
+    fullName: session.user.fullName ?? undefined,
+    currentYear: session.user.currentYear ?? undefined,
+    currentSem: session.user.currentSem ?? undefined,
+    currentSec: session.user.currentSec ?? undefined,
   })
 }
 
