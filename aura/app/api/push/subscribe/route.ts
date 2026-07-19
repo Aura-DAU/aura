@@ -4,7 +4,20 @@ import { backendUrl } from "@/lib/api/backend"
 import { NextResponse } from "next/server"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
-function buildToken(session: NonNullable<Awaited<ReturnType<typeof getServerSession>>>) {
+interface SessionWithUser {
+  user: {
+    role: string
+    erpId: string
+    department: string
+    email?: string | null
+    fullName?: string | null
+    currentYear?: number | null
+    currentSem?: number | null
+    currentSec?: string | null
+  }
+}
+
+function buildToken(session: SessionWithUser) {
   return signInternalJwt({
     role: session.user.role,
     erpId: session.user.erpId,
@@ -35,7 +48,7 @@ export async function POST(req: Request) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${buildToken(session)}`,
+        "Authorization": `Bearer ${buildToken(session as unknown as SessionWithUser)}`,
       },
       body: JSON.stringify(body),
     })
@@ -68,7 +81,7 @@ export async function DELETE(req: Request) {
   try {
     const res = await fetch(backendUrl(`/push/subscribe?endpoint=${encodeURIComponent(endpoint)}`), {
       method: "DELETE",
-      headers: { "Authorization": `Bearer ${buildToken(session)}` },
+      headers: { "Authorization": `Bearer ${buildToken(session as unknown as SessionWithUser)}` },
     })
 
     if (!res.ok) {

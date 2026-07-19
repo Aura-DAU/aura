@@ -13,6 +13,7 @@
   "dependencies": {
     "@ai-sdk/react": "^3.0.208",
     "@base-ui/react": "^1.5.0",
+    "@serwist/next": "^9.5.11",
     "@vercel/analytics": "1.6.1",
     "ai": "^6.0.206",
     "class-variance-authority": "^0.7.1",
@@ -49,6 +50,7 @@
     "jsdom": "^29.1.1",
     "jsonwebtoken": "^9.0.3",
     "postcss": "^8.5",
+    "serwist": "^9.5.11",
     "tailwindcss": "^4.2.0",
     "typescript": "5.7.3",
     "vitest": "^4.1.10"
