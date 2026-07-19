@@ -433,7 +433,7 @@ export default function AdminBindingsClient() {
                     />
                     <Tooltip
                       cursor={{ fill: 'rgba(255,255,255,0.05)' }}
-                      content={({ active, payload }) => {
+                      content={({ active, payload }: { active?: boolean; payload?: { payload: LatencySegment }[] }) => {
                         if (active && payload && payload.length) {
                           const data = payload[0].payload as LatencySegment
                           return (
@@ -458,7 +458,7 @@ export default function AdminBindingsClient() {
                     <Bar
                       dataKey="box"
                       fill="#e53e3e"
-                      shape={(props: any) => <BoxShape {...props} />}
+                      shape={(props: BoxShapeProps) => <BoxShape {...props} />}
                       barSize={40}
                     />
                   </ComposedChart>

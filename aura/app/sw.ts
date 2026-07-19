@@ -20,7 +20,7 @@ const serwist = new Serwist({
     entries: [
       {
         url: "/offline",
-        matcher({ request }) {
+        matcher({ request }: { request: Request }) {
           return request.destination === "document"
         },
       },
