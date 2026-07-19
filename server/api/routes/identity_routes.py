@@ -2,15 +2,27 @@
 # Requires X-Internal-Secret; validates @dau.ac.in / @daiict.ac.in before DB hit.
 import os
 import secrets
+import re
+import json
+from pathlib import Path
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Query
-
 import db.connection as db_conn
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
 INTERNAL_RESOLVE_SECRET = os.environ.get("INTERNAL_RESOLVE_SECRET", "")
 ALLOWED_DOMAINS = {"dau.ac.in", "daiict.ac.in"}
+
+# Load pre-compiled faculty email prefixes on startup
+FACULTY_EMAILS_PATH = Path(__file__).resolve().parent.parent / "faculty_emails.json"
+FACULTY_EMAILS = set()
+if FACULTY_EMAILS_PATH.exists():
+    try:
+        with open(FACULTY_EMAILS_PATH, "r", encoding="utf-8") as f:
+            FACULTY_EMAILS = set(json.load(f))
+    except Exception as e:
+        print(f"Warning: Failed to load faculty_emails.json: {e}")
 
 
 def _validate_secret(x_internal_secret: str = Header(..., alias="X-Internal-Secret")) -> None:
@@ -48,20 +60,50 @@ def resolve_identity(
         (email.lower().strip(),),
     )
 
-    if not rows:
-        # Valid domain but no identity map row yet.
-        raise HTTPException(
-            status_code=404,
-            detail=(
-                f"No active AURA account found for {email}. "
-                "If you are a DAU student or faculty member, please contact "
-                "the AURA administrator to have your account activated."
-            ),
-        )
+    if rows:
+        row = rows[0]
+        return {
+            "erp_id":     row["erp_id"],
+            "role":       row["role"],
+            "department": row["dept"],
+        }
 
-    row = rows[0]
+    # Fallback to dynamic classification
+    prefix = email.split("@")[0].lower().strip()
+    role = "guest"
+    erp_id = f"GUEST_{prefix.upper()}"
+    dept = None
+
+    # Check Student: 9-digit roll number
+    if re.match(r"^\d{9}$", prefix):
+        year = int(prefix[:4])
+        if 2023 <= year <= 2026:
+            role = "student"
+            erp_id = prefix
+            dept = "ICT"  # Default student department
+    # Check Faculty: matched prefix from pre-compiled list
+    elif prefix in FACULTY_EMAILS:
+        role = "faculty"
+        erp_id = f"FAC_{prefix.upper()}"
+        dept = "ICT"  # Default faculty department
+
+    # Insert valid student/faculty into user_identity_map as write-through cache
+    if role in ("student", "faculty"):
+        try:
+            db_conn.execute(
+                """INSERT INTO user_identity_map (email, erp_id, role, dept, is_active)
+                   VALUES (%s, %s, %s, %s, TRUE)
+                   ON CONFLICT (email) DO UPDATE 
+                   SET erp_id = EXCLUDED.erp_id, role = EXCLUDED.role, dept = EXCLUDED.dept, is_active = TRUE""",
+                (email.lower().strip(), erp_id, role, dept),
+            )
+        except Exception as db_err:
+            print(f"Warning: Failed to cache dynamic user {email} in DB: {db_err}")
+
     return {
-        "erp_id": row["erp_id"],
-        "role": row["role"],
-        "department": row["dept"],
+        "erp_id":     erp_id,
+        "role":       role,
+        "department": dept,
     }
+
+
