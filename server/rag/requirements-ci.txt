@@ -16,3 +16,5 @@ cryptography
 PyJWT
 psycopg2-binary
 bcrypt
+# Imported at module load by guardrails / classifiers (tests mock the client).
+groq
