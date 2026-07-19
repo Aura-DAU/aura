@@ -434,9 +434,9 @@ export default function AdminBindingsClient() {
                     />
                     <Tooltip
                       cursor={{ fill: 'rgba(255,255,255,0.05)' }}
-                      content={({ active, payload }: { active?: boolean; payload?: readonly { payload: LatencySegment }[] }) => {
-                        if (active && payload && payload.length) {
-                          const data = payload[0].payload as LatencySegment
+                      content={({ active, payload }: { active?: boolean; payload?: readonly { payload?: LatencySegment }[] }) => {
+                        if (active && payload && payload.length && payload[0].payload) {
+                          const data = payload[0].payload
                           return (
                             <div className="bg-theme-black border border-theme-gray-light p-3 rounded-lg shadow-xl text-xs space-y-1">
                               <div className="font-semibold text-neutral-200 capitalize mb-2 border-b border-theme-gray-light pb-1">
