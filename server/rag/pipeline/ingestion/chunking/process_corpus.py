@@ -160,8 +160,10 @@ def extract_curriculum_chunks(body, metadata, file_path):
 
 
 def convert_tables_to_sentences(text):
-    # Finds markdown tables in text and converts them into semantic sentences
-    # to prevent tabular fragmentation during chunking.
+    """
+    Finds markdown tables in text and converts them into semantic sentences
+    to prevent tabular fragmentation during chunking.
+    """
     lines = text.split("\n")
     processed_lines = []
     i = 0
@@ -265,8 +267,10 @@ def map_to_canonical_faculty(name):
 
 
 def extract_faculty_from_text(text):
-    # Search text for Advisor: ... or similar lines and extract faculty names.
-    # Also scan text for any matches of canonical faculty names.
+    """
+    Search text for Advisor: ... or similar lines and extract faculty names.
+    Also scan text for any matches of canonical faculty names.
+    """
     faculty_names = set()
     
     # 1. Scoped advisor lines
@@ -299,14 +303,18 @@ def extract_faculty_from_text(text):
 
 
 def extract_course_codes_from_text(text):
-    # Find course codes (2-3 letters followed by 3 digits) in the text.
+    """
+    Find course codes (2-3 letters followed by 3 digits) in the text.
+    """
     codes = set(re.findall(r"\b[A-Z]{2,3}\d{3}\b", text))
     return list(codes)
 
 
 def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end=None):
-    # Given the chunk text and the original lines of the file, find the 1-indexed
-    # start_line and end_line in the file where this chunk's content resides.
+    """
+    Given the chunk text and the original lines of the file, find the 1-indexed
+    start_line and end_line in the file where this chunk's content resides.
+    """
     lines_to_search = []
     for line in chunk_text.split("\n"):
         line_clean = line.strip()
@@ -352,6 +360,12 @@ def process_markdown_file(file_path):
     parts = file_path.parts
     data_index = parts.index("data")
     cluster = parts[data_index + 1]
+
+    # Stable, portable path (e.g. "data/infrastructure/ict_infrastructure.md")
+    # used by the /documents API to serve the raw markdown source for the
+    # Phase C citation side-drawer. Unlike str(file_path), this is the same
+    # value regardless of which machine ran ingestion.
+    relative_path = "/".join(parts[data_index:])
 
     subclusters = list(
         parts[data_index + 2:-1]
@@ -519,6 +533,7 @@ def process_markdown_file(file_path):
 
                 "path": str(file_path),
                 "source_file": file_path.name,
+                "relative_path": relative_path,
 
                 "scraped_date": metadata.get("scraped_date"),
                 "authorization": authorization,
@@ -582,6 +597,7 @@ def process_markdown_file(file_path):
 
             "path": str(file_path),
             "source_file": file_path.name,
+            "relative_path": relative_path,
 
             "scraped_date": metadata.get("scraped_date"),
             "authorization": authorization,

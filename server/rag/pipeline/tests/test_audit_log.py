@@ -1,6 +1,8 @@
-# B8 acceptance tests — updated for SSO architecture.
-# AuditLog.record() no longer takes user_id (UUID). erp_id is the sole
-# requester identifier, matching the updated audit_log table schema.
+"""
+B8 acceptance tests — updated for SSO architecture.
+AuditLog.record() no longer takes user_id (UUID). erp_id is the sole
+requester identifier, matching the updated audit_log table schema.
+"""
 
 import sys
 from pathlib import Path
@@ -83,7 +85,7 @@ def test_target_erp_id_included_in_row():
 
 
 def test_no_user_id_parameter_accepted():
-    # Regression: record() must NOT accept a user_id kwarg (old interface).
+    """Regression: record() must NOT accept a user_id kwarg (old interface)."""
     audit, _ = make_audit()
     with pytest.raises(TypeError):
         audit.record(

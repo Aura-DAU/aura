@@ -8,9 +8,6 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    // Playwright specs run via Playwright, not vitest — importing
-    // @playwright/test under vitest fails the whole run.
-    exclude: ['**/node_modules/**', 'tests/e2e/**'],
     alias: {
       '@': path.resolve(__dirname, './'),
     },

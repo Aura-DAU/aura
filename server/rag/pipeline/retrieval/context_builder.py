@@ -13,7 +13,7 @@ class ContextBuilder:
     MAX_CONTEXT_TOKENS = 3000
 
     def _estimate_tokens(self, text: str) -> int:
-        # Rough token estimate: word count × 1.3 (accounts for sub-word splits).
+        """Rough token estimate: word count × 1.3 (accounts for sub-word splits)."""
         return int(len(text.split()) * 1.3)
 
     def build(self, chunks, retrieval_intent="general"):
@@ -104,16 +104,29 @@ scraped_date="{metadata.get('scraped_date', '')}"
             documents.append(document)
 
             url = metadata.get("url")
+            relative_path = metadata.get("relative_path")
 
-            if url and url not in seen_urls:
+            # Fix CB6 (Phase C): previously a chunk was only ever cited if it
+            # had a public "url" — internal-only markdown (no website URL)
+            # silently produced no citation card at all. Dedup key now falls
+            # back to relative_path, then title, so every retrieved chunk is
+            # citeable. relative_path/start_line/end_line let the frontend
+            # side-drawer open the exact source file and highlight the lines
+            # this chunk was drawn from.
+            dedup_key = url or relative_path or title_str
+
+            if dedup_key and dedup_key not in seen_urls:
 
                 sources.append({
                     "title": metadata.get("title"),
-                    "url": url,
+                    "url": url or None,
+                    "path": relative_path or None,
+                    "start_line": start_line_val or None,
+                    "end_line": end_line_val or None,
                     "cluster": metadata.get("cluster")
                 })
 
-                seen_urls.add(url)
+                seen_urls.add(dedup_key)
 
         context = (
             "<context>\n"

@@ -1,11 +1,17 @@
-from pipeline.aura_chat import AuraChat
+from pipeline.aura_chat_graph import AuraChatGraph
 
 
 class AURA:
 
     def __init__(self):
 
-        self.chatbot = AuraChat()
+        # Phase B: Agent Orchestrator, per the architecture doc, is now a
+        # LangGraph StateGraph (pipeline/aura_chat_graph.py) rather than the
+        # hand-written if/return sequence in pipeline/aura_chat.py. The
+        # latter is kept in the codebase as the reference implementation —
+        # every node in the graph delegates to the same collaborators it
+        # used to call directly.
+        self.chatbot = AuraChatGraph()
 
     def ask(
         self,
@@ -13,7 +19,6 @@ class AURA:
         history=None,
         identity=None,
         display_profile=None,
-        on_delta=None,
     ):
 
         return self.chatbot.chat(
@@ -21,5 +26,4 @@ class AURA:
             history=history,
             identity=identity,
             display_profile=display_profile,
-            on_delta=on_delta,
         )

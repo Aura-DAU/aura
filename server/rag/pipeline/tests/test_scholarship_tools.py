@@ -1,10 +1,10 @@
 """
 test_scholarship_tools.py — Tests for scholarship eligibility screening.
 
-Mocks RetrievalPipeline.get_context and KeyManager.call_with_rotation,
+Mocks RetrievalPipeline.get_context and InferenceRouter.call_with_rotation,
 following the same pattern as test_student_workflow_tools.py-style tools
-elsewhere in this package (KeyManager routes the LLM call, not a direct
-Groq client).
+elsewhere in this package (InferenceRouter routes the LLM call to the vLLM
+pool, not a direct client).
 """
 
 import pytest
@@ -58,7 +58,7 @@ def test_screen_scholarship_eligibility(monkeypatch):
     def fake_call_with_rotation(fn, max_retries=3):
         return _FakeResponse(fake_json)
 
-    monkeypatch.setattr(scholarship_tools.KeyManager, "call_with_rotation", staticmethod(fake_call_with_rotation))
+    monkeypatch.setattr(scholarship_tools.InferenceRouter, "call_with_rotation", staticmethod(fake_call_with_rotation))
 
     result = scholarship_tools.screen_scholarship_eligibility(
         student_identity(),

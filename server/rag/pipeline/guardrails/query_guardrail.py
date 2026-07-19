@@ -1,12 +1,12 @@
 import os
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.inference_router import InferenceRouter
 
 class QueryGuardrail:
     def __init__(self):
         load_dotenv()
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-        self.model = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+        self.client = InferenceRouter.get_client()
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
         
         self.system_prompt = """
 You are AURA's security guardrail.
@@ -94,27 +94,23 @@ UNSAFE
 
         return "UNSAFE" not in result
 
-    def evaluate(self, query: str):
-        # Single classification attempt. Returns True/False, or None when the
-        # guardrail LLM is unreachable — callers apply their own fail-open /
-        # fail-closed policy without paying a second identical LLM round-trip.
+    def is_safe(self, query: str) -> bool:
         try:
             return self._classify(query)
         except Exception as e:
             print(f"[Guardrail] Error evaluating query: {e}")
-            return None
-
-    def is_safe(self, query: str) -> bool:
-        verdict = self.evaluate(query)
-        # Fail open to prevent blocking all queries if the LLM API is down
-        return True if verdict is None else verdict
+            # Fail open to prevent blocking all queries if the LLM API is down
+            return True
 
     def is_safe_strict(self, query: str) -> bool:
-        # Like is_safe() but fails CLOSED on any exception.
-        # Use this before routing to personal-data paths: if the guardrail LLM
-        # through to the ERP/ecampus pipeline.
-        verdict = self.evaluate(query)
-        if verdict is None:
-            print("[Guardrail] Strict check unavailable, denying query.")
+        """Like is_safe() but fails CLOSED on any exception.
+
+        Use this before routing to personal-data paths: if the guardrail LLM
+        is unavailable we must deny rather than risk passing a prompt injection
+        through to the ERP/ecampus pipeline.
+        """
+        try:
+            return self._classify(query)
+        except Exception as e:
+            print(f"[Guardrail] Strict check failed, denying query: {e}")
             return False  # Fail CLOSED — deny on uncertainty for personal data
-        return verdict

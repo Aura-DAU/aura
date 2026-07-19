@@ -1,15 +1,30 @@
-# B6 — ERP Context Builder.
-# Converts raw ERP data (dicts from ERPConnector) into a readable
-# there is no URL to cite for live ERP data.
+"""
+B6 — ERP Context Builder.
+
+Converts raw ERP data (dicts from ERPConnector) into a readable
+<personal_data> XML block that the LLM can parse unambiguously.
+The wrapper tag tells the LLM this is live, authoritative personal data
+— not a scraped public document — and the answer_generator system prompt
+(see file 07 of the RBAC guide) tells it to say "Your CGPA is 8.34"
+instead of "According to the retrieved document...".
+
+Personal data is NEVER included in the public RAG `sources` list — the
+`build()` method returns a string, not a sources dict, exactly because
+there is no URL to cite for live ERP data.
+"""
 
 
 
 class ERPContextBuilder:
 
     def build(self, erp_results: dict, identity, access_result) -> str:
-        # erp_results: dict of field → value, as returned by ERPConnector methods.
-        # identity:    Identity object (for display name / role context).
-        # Returns: a plain-text string ready to be injected into the LLM context.
+        """
+        erp_results: dict of field → value, as returned by ERPConnector methods.
+        identity:    Identity object (for display name / role context).
+        access_result: AccessResult — scope_type is included so the LLM
+                       knows whether it's seeing all grades or just one course.
+        Returns: a plain-text string ready to be injected into the LLM context.
+        """
         if not erp_results:
             return ""
 
