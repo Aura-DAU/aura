@@ -1,6 +1,14 @@
-# Google Calendar API client — read-only slot fetcher.
-# Wraps the Google Calendar API v3. Requests only the
-# GOOGLE_CALENDAR_CLIENT_SECRET
+"""
+Google Calendar API client — read-only slot fetcher.
+
+Wraps the Google Calendar API v3. Requests only the
+`https://www.googleapis.com/auth/calendar.readonly` scope.
+Auto-refreshes the access token using the stored refresh token.
+
+Required env vars:
+  GOOGLE_CALENDAR_CLIENT_ID
+  GOOGLE_CALENDAR_CLIENT_SECRET
+"""
 
 import os
 import time
@@ -17,7 +25,7 @@ CLIENT_SECRET = os.environ.get("GOOGLE_CALENDAR_CLIENT_SECRET", "")
 
 
 def _refresh_access_token(erp_id: str, refresh_token: str) -> str:
-    # Exchange the stored refresh token for a new access token.
+    """Exchange the stored refresh token for a new access token."""
     resp = requests.post(GOOGLE_TOKEN_URL, data={
         "client_id":     CLIENT_ID,
         "client_secret": CLIENT_SECRET,
@@ -46,8 +54,10 @@ def _get_valid_access_token(erp_id: str) -> str:
 
 
 def get_events_on_date(erp_id: str, date: datetime.date) -> list[dict]:
-    # Fetches all calendar events for a faculty member on a given date.
-    # Returns a list of {summary, start, end, is_busy} dicts.
+    """
+    Fetches all calendar events for a faculty member on a given date.
+    Returns a list of {summary, start, end, is_busy} dicts.
+    """
     access_token = _get_valid_access_token(erp_id)
     day_start    = datetime.datetime.combine(date, datetime.time.min).isoformat() + "Z"
     day_end      = datetime.datetime.combine(date, datetime.time.max).isoformat() + "Z"

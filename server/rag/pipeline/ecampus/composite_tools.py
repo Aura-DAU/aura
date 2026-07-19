@@ -1,6 +1,9 @@
-# Composite tools — handlers that combine more than one raw eCampus call (or
-# an eCampus call + the RAG knowledge base) into one higher-value answer, so
-# questions. Registered in tool_registry.py alongside the single-source tools.
+"""
+Composite tools — handlers that combine more than one raw eCampus call (or
+an eCampus call + the RAG knowledge base) into one higher-value answer, so
+the LLM doesn't have to chain several tool calls itself for common
+questions. Registered in tool_registry.py alongside the single-source tools.
+"""
 
 from . import cache
 from .client import ECampusClient
@@ -18,16 +21,16 @@ DEFAULT_ATTENDANCE_THRESHOLD = 75.0  # fallback only — prefer the RAG-sourced 
 
 
 def _own_client(identity) -> ECampusClient:
-    # Raises AccessDenied (identity) or CredentialsNotLinked (vault) —
-    # callers must handle both.
+    """Raises AccessDenied (identity) or CredentialsNotLinked (vault) —
+    callers must handle both."""
     student_id = authorize_personal_query(identity, target_student_id=None)
     return ECampusClient(erp_id=student_id)
 
 
 def _attendance_threshold() -> float:
-    # Pulls the real attendance-eligibility threshold from the indexed
-    # Academic Handbook rather than hardcoding it, since policy doc text is
-    # the authoritative source and can change between catalog years.
+    """Pulls the real attendance-eligibility threshold from the indexed
+    Academic Handbook rather than hardcoding it, since policy doc text is
+    the authoritative source and can change between catalog years."""
     try:
         from ..retrieval.retrieval_pipeline import RetrievalPipeline
         import re

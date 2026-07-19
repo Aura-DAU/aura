@@ -22,7 +22,7 @@ this class; that hunk was intentionally NOT applied — see review notes.)
 import os
 import re
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.inference_router import InferenceRouter
 
 load_dotenv()
 
@@ -69,14 +69,11 @@ _FALLBACK_DISTRESS_PATTERNS: list[str] = [
     r"\bkill\s+my\s*self\b",
     r"\bend\s+(my\s+)?(life|it\s+all)\b",
     r"\bself[\s\-]?harm",
-    r"\bhurt(ing)?\s+(my\s*)?self\b",
-    r"\bcut\s+(my\s*)?self\b",
+    r"\bhurt(ing)?\s+my\s*self\b",
+    r"\bcut\s+my\s*self\b",
     r"\bwant\s+to\s+die\b",
     r"\bno\s+reason\s+to\s+live\b",
-    # "can't take it anymore" / "can't go on" / "can't cope anymore"
-    r"\bcan['\u2019]?t\s+take(\s+it)?\s+anymore\b",
-    r"\bcan['\u2019]?t\s+go\s+on(\s+anymore)?\b",
-    r"\bcan['\u2019]?t\s+cope(\s+anymore)?\b",
+    r"\bcan['\u2019]?t\s+(take(\s+it)?|go\s+on|cope)(\s+anymore)?\b",
     r"\bdon['\u2019]?t\s+want\s+to\s+(live|be\s+alive)\b",
 ]
 
@@ -127,10 +124,10 @@ class WellnessGuardrail:
     """
 
     def __init__(self) -> None:
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        self.client = InferenceRouter.get_client()
         # llama-3.3-70b-versatile: fast, instruction-following, available on Groq.
-        # Override via GROQ_WELLNESS_MODEL env var if needed.
-        self.model = os.getenv("GROQ_WELLNESS_MODEL", "llama-3.3-70b-versatile")
+        # Override via VLLM_WELLNESS_MODEL env var if needed.
+        self.model = os.getenv("VLLM_WELLNESS_MODEL", os.getenv("GROQ_WELLNESS_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
     # ------------------------------------------------------------------
     # Public API

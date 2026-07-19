@@ -4,33 +4,28 @@ import { useState, Suspense } from "react"
 import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
 import { Sparkles, Loader2, Globe, GraduationCap, BookOpen, AlertCircle, Shield } from "lucide-react"
-import { BrandMark } from "@/components/ui/brand-mark"
+import { BrandMark } from "@/components/common/BrandMark"
 
 function LoginCard() {
   const [loading, setLoading] = useState<"google" | "demo-student" | "demo-faculty" | "demo-admin" | null>(null)
-  const [demoError, setDemoError] = useState<string | null>(null)
   const searchParams = useSearchParams()
   const errorParam = searchParams.get("error")
 
-  let errorMsg: string | null = demoError
-  if (!errorMsg) {
-    if (errorParam === "NotRegistered") {
-      errorMsg = "Your DAU account is not yet registered in AURA. Contact the administrator."
-    } else if (errorParam === "DomainNotAllowed") {
-      errorMsg = "Access restricted. You must log in with a @dau.ac.in or @daiict.ac.in email address."
-    } else if (errorParam) {
-      errorMsg = "Authentication failed. Please try again."
-    }
+  let errorMsg: string | null = null
+  if (errorParam === "NotRegistered") {
+    errorMsg = "Your DAU account is not yet registered in AURA. Contact the administrator."
+  } else if (errorParam === "DomainNotAllowed") {
+    errorMsg = "Access restricted. You must log in with a @dau.ac.in or @daiict.ac.in email address."
+  } else if (errorParam) {
+    errorMsg = "Authentication failed. Please try again."
   }
 
   const handleGoogleSignIn = () => {
-    setDemoError(null)
     setLoading("google")
     signIn("google", { callbackUrl: "/" })
   }
 
   const handleDemoSignIn = async (role: "student" | "faculty" | "admin") => {
-    setDemoError(null)
     setLoading(`demo-${role}`)
     const email = role === "student"
       ? "demo.student@dau.ac.in"
@@ -54,21 +49,18 @@ function LoginCard() {
         window.location.href = "/"
       } else {
         setLoading(null)
-        setDemoError(res?.error ? `Demo login failed: ${res.error}` : "Demo login failed. Please try again.")
+        alert(`Demo login failed: ${res?.error || "Unknown error"}`)
       }
     } catch {
       setLoading(null)
-      setDemoError("Network error during demo login. Check your connection and try again.")
+      alert("Network error during demo login")
     }
   }
 
   return (
     <div className="overflow-hidden rounded-2xl border border-theme-gray-light bg-theme-gray/80 shadow-2xl backdrop-blur-xl p-6">
       {errorMsg && (
-        <div
-          role="alert"
-          className="mb-4 flex items-start gap-2.5 rounded-xl border border-theme-red/30 bg-theme-red/10 p-3.5 text-xs text-theme-red leading-relaxed"
-        >
+        <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-theme-red/30 bg-theme-red/10 p-3.5 text-xs text-theme-red leading-relaxed">
           <AlertCircle className="size-4 shrink-0 mt-0.5" />
           <span>{errorMsg}</span>
         </div>

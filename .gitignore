@@ -84,10 +84,6 @@ web_modules/
 .next
 out
 
-# Serwist
-aura/public/sw*
-aura/public/swe-worker*
-
 # Nuxt.js build / generate output
 .nuxt
 dist

@@ -4,8 +4,8 @@ from pipeline.ecampus import credentials_vault as vault
 
 @pytest.fixture(autouse=True)
 def clean_vault():
-    # Each test gets a clean slate within the same temp DB file (set in
-    # conftest.py) — delete any rows the previous test left behind.
+    """Each test gets a clean slate within the same temp DB file (set in
+    conftest.py) — delete any rows the previous test left behind."""
     yield
     for erp_id in ("S1", "S2"):
         try:
@@ -45,8 +45,8 @@ def test_storing_credentials_twice_overwrites_not_duplicates():
 
 
 def test_credentials_are_actually_encrypted_at_rest():
-    # Make sure we're not accidentally storing plaintext — read the raw
-    # DB row and confirm the password string doesn't appear in it.
+    """Make sure we're not accidentally storing plaintext — read the raw
+    DB row and confirm the password string doesn't appear in it."""
     import sqlite3
     vault.store_credentials("S1", "secretuser", "supersecretpassword123")
     conn = sqlite3.connect(vault.DB_PATH)
@@ -71,7 +71,7 @@ def test_advisor_consent_revoke():
 
 
 def test_advisor_consent_is_scoped_per_faculty_member():
-    # Granting access to F1 must not implicitly grant it to F2.
+    """Granting access to F1 must not implicitly grant it to F2."""
     vault.grant_advisor_consent("S1", "F1")
     assert vault.has_advisor_consent("S1", "F1") is True
     assert vault.has_advisor_consent("S1", "F2") is False

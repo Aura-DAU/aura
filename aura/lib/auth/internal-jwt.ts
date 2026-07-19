@@ -16,6 +16,13 @@ export interface InternalJwtPayload {
   erpId: string
   department?: string
   email?: string
+  // Timetable-cohort fields — display/lookup only, read by the FastAPI
+  // backend's Identity dataclass (see server/api/auth.py) purely to resolve
+  // which timetable cohort belongs to this student. Never used for authz.
+  fullName?: string
+  currentYear?: number
+  currentSem?: number
+  currentSec?: string
   [key: string]: unknown
 }
 
@@ -30,6 +37,10 @@ export function signInternalJwt(payload: InternalJwtPayload): string {
       erpId: payload.erpId,
       department: payload.department,
       email: payload.email,
+      fullName: payload.fullName,
+      currentYear: payload.currentYear,
+      currentSem: payload.currentSem,
+      currentSec: payload.currentSec,
     },
     getJwtSecret(),
     {

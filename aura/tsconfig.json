@@ -3,8 +3,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext",
-      "webworker"
+      "esnext"
     ],
     "allowJs": true,
     "target": "ES6",
@@ -38,7 +37,6 @@
   ],
   "exclude": [
     "node_modules",
-    "tests/e2e",
-    "public/sw.js"
+    "tests/e2e"
   ]
 }

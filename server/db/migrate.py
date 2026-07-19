@@ -1,6 +1,35 @@
-# Database migration runner — lightweight alternative to Alembic for AURA's
-# small Auth DB. Designed to run at server startup (or in a deployment script)
-# AUTH_DB_URL: ${{ secrets.AUTH_DB_URL }}
+"""
+Database migration runner — lightweight alternative to Alembic for AURA's
+small Auth DB. Designed to run at server startup (or in a deployment script)
+before FastAPI starts accepting requests.
+
+How it works:
+  1. Creates a `_migrations` tracking table if it doesn't exist.
+  2. Reads every *.sql file in server/db/migrations/ in lexicographic order.
+  3. Skips files that are already recorded in `_migrations`.
+  4. Runs each new file in a transaction; records success in `_migrations`.
+  5. Any migration failure rolls back ONLY that migration and aborts — the
+     server should not start if a migration fails.
+
+Usage:
+    # In deployment script, before starting uvicorn:
+    python server/db/migrate.py
+
+    # Or from the server/ directory:
+    python db/migrate.py
+
+    # Show status without running:
+    python db/migrate.py --status
+
+    # Target a specific DB URL (overrides AUTH_DB_URL env var):
+    python db/migrate.py --db-url postgresql://...
+
+Integrating into CI/CD (example GitHub Actions step):
+    - name: Run DB migrations
+      run: python server/db/migrate.py
+      env:
+        AUTH_DB_URL: ${{ secrets.AUTH_DB_URL }}
+"""
 
 import os
 import sys

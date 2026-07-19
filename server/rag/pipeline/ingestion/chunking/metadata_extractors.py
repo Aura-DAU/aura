@@ -16,7 +16,7 @@ def extract_program_name(
         "btech",
         "mtech",
         "msc",
-        "mdes",      
+        "mdes",      # Fix I: was missing comma — previously concatenated with "bs-ms" into "mdesbs-ms"
         "bs-ms",
         "phd",
         "programs",
@@ -24,7 +24,13 @@ def extract_program_name(
         "postgraduate",
         "doctoral",
         "dual-degree",
+        # Fix ME2: folder name uses underscore ("dual_degree_admissions") but keyword
+        # was "dual-degree" (hyphen). This caused BS-MS pages to never receive a
+        # program_name metadata field, breaking entity-based retrieval for all BS-MS queries.
         "dual_degree",
+        # Fix ME3: add "pg_admissions" and "scholarship" subcluster keywords so
+        # PG program pages (M.Des, M.Sc IT etc.) and scholarship pages correctly
+        # trigger program_name extraction from their page title metadata.
         "pg_admissions",
         "scholarship"
     ]

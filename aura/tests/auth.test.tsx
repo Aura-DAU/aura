@@ -1,7 +1,7 @@
 import { render, screen, renderHook, act } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import type { Account, User } from 'next-auth'
-import { Composer } from '../components/ui/composer'
+import { Composer } from '../components/features/chat-v2/Composer'
 import { useAuraChat } from '../hooks/use-aura-chat'
 import { authOptions } from '../lib/auth/options'
 import { useSession } from 'next-auth/react'

@@ -47,8 +47,8 @@ def test_missing_identity_fields_denied_not_default_allowed():
 
 
 def test_role_cannot_be_spoofed_via_arbitrary_string():
-    # Regression guard for the original vulnerability this whole layer
-    # exists to fix: a client claiming role='professor' (the old, unverified
-    # field name) must not slip through as faculty.
+    """Regression guard for the original vulnerability this whole layer
+    exists to fix: a client claiming role='professor' (the old, unverified
+    field name) must not slip through as faculty."""
     with pytest.raises(AccessDenied):
         authorize_personal_query({"role": "professor", "erp_id": "F1"}, "S1")

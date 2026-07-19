@@ -4,36 +4,66 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { backendUrl } from "@/lib/api/backend"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
+type Role = "student" | "faculty" | "admin" | "guest"
+
 declare module "next-auth" {
   interface Session {
     accessToken?: string
     user: {
-      role: "student" | "faculty" | "admin" | "guest"
+      role: Role
       erpId: string
       department?: string
+      // Timetable-cohort fields, populated from user_identity_map at login.
+      // Display/lookup only — never used for authorization decisions.
+      fullName?: string
+      currentYear?: number
+      currentSem?: number
+      currentSec?: string
     } & DefaultSession["user"]
   }
 
   interface User {
-    role?: "student" | "faculty" | "admin" | "guest"
+    role?: Role
     erpId?: string
     department?: string
+    fullName?: string
+    currentYear?: number
+    currentSem?: number
+    currentSec?: string
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    role?: "student" | "faculty" | "admin" | "guest"
+    role?: Role
     erpId?: string
     department?: string
     accessToken?: string
+    fullName?: string
+    currentYear?: number
+    currentSem?: number
+    currentSec?: string
   }
 }
 
+interface ErpIdentity {
+  role: Role
+  erpId: string
+  department: string
+  fullName?: string
+  currentYear?: number
+  currentSem?: number
+  currentSec?: string
+}
+
 /**
- * Fetches the user's ERP Identity from the backend Auth DB.
+ * Fetches the user's ERP Identity from the backend Auth DB. This is the
+ * ONLY place student_profile fields (name/role/current_year/current_sem/
+ * current_sec) enter AURA — pulled once from user_identity_map at login
+ * time via /internal/resolve-identity, then carried in the session + signed
+ * internal JWT for the rest of the session.
  */
-async function lookupErpIdentity(email: string): Promise<{ role: "student" | "faculty" | "admin" | "guest"; erpId: string; department: string } | null> {
+async function lookupErpIdentity(email: string): Promise<ErpIdentity | null> {
   try {
     const res = await fetch(backendUrl(`/internal/resolve-identity?email=${encodeURIComponent(email)}`), {
       headers: {
@@ -41,17 +71,21 @@ async function lookupErpIdentity(email: string): Promise<{ role: "student" | "fa
         "X-Internal-Secret": process.env.INTERNAL_RESOLVE_SECRET || ""
       }
     })
-    
+
     if (!res.ok) {
       console.error("[NextAuth] Failed to lookup ERP identity:", res.status, await res.text().catch(() => ""))
       return null
     }
-    
+
     const data = await res.json()
     return {
       role: data.role,
       erpId: data.erp_id || data.erpId,
-      department: data.department || data.dept || ""
+      department: data.department || data.dept || "",
+      fullName: data.full_name || data.fullName || undefined,
+      currentYear: data.current_year ?? data.currentYear ?? undefined,
+      currentSem: data.current_sem ?? data.currentSem ?? undefined,
+      currentSec: data.current_sec ?? data.currentSec ?? undefined,
     }
   } catch (error) {
     console.error("[NextAuth] Error calling lookup endpoint:", error)
@@ -117,7 +151,7 @@ export const authOptions: NextAuthOptions = {
           user.department = "GUEST"
           return true
         }
-        
+
         try {
           const res = await fetch(backendUrl(`/internal/resolve-identity?email=${encodeURIComponent(email)}`), {
             headers: {
@@ -125,18 +159,22 @@ export const authOptions: NextAuthOptions = {
               "X-Internal-Secret": process.env.INTERNAL_RESOLVE_SECRET || ""
             }
           })
-          
+
           if (res.status === 404) {
             return "/login?error=NotRegistered"
           }
           if (!res.ok) {
             return "/login?error=ServerError"
           }
-          
+
           const data = await res.json()
           user.role = data.role
           user.erpId = data.erp_id || data.erpId
           user.department = data.department || data.dept || ""
+          user.fullName = data.full_name || data.fullName || undefined
+          user.currentYear = data.current_year ?? data.currentYear ?? undefined
+          user.currentSem = data.current_sem ?? data.currentSem ?? undefined
+          user.currentSec = data.current_sec ?? data.currentSec ?? undefined
           return true
         } catch (err) {
           console.error("[NextAuth] SignIn callback lookup failed:", err)
@@ -152,24 +190,38 @@ export const authOptions: NextAuthOptions = {
           token.role = "student"
           token.erpId = "DEMO123"
           token.department = "ICT"
+          token.fullName = "Demo Student"
+          token.currentYear = 3
+          token.currentSem = 5
+          token.currentSec = "A"
         } else if (process.env.NODE_ENV === "development" && user.email === "demo.faculty@daiict.ac.in") {
           token.role = "faculty"
           token.erpId = "FAC123"
           token.department = "ICT"
+          token.fullName = "Demo Faculty"
         } else if (process.env.NODE_ENV === "development" && user.email === "demo.admin@dau.ac.in") {
           token.role = "admin"
           token.erpId = "ADM123"
           token.department = "IT"
+          token.fullName = "Demo Admin"
         } else if (user.erpId) {
           token.role = user.role
           token.erpId = user.erpId
           token.department = user.department
+          token.fullName = user.fullName
+          token.currentYear = user.currentYear
+          token.currentSem = user.currentSem
+          token.currentSec = user.currentSec
         } else {
           const erpData = await lookupErpIdentity(user.email)
           if (erpData) {
             token.role = erpData.role
             token.erpId = erpData.erpId
             token.department = erpData.department
+            token.fullName = erpData.fullName
+            token.currentYear = erpData.currentYear
+            token.currentSem = erpData.currentSem
+            token.currentSec = erpData.currentSec
           }
         }
       }
@@ -177,20 +229,28 @@ export const authOptions: NextAuthOptions = {
       // Mint a fresh short-lived internal JWT on every token update
       if (token.role && token.erpId) {
         token.accessToken = signInternalJwt({
-          role: token.role as "student" | "faculty" | "admin" | "guest",
+          role: token.role as Role,
           erpId: token.erpId,
           department: token.department || undefined,
           email: typeof token.email === "string" ? token.email : undefined,
+          fullName: token.fullName || undefined,
+          currentYear: token.currentYear,
+          currentSem: token.currentSem,
+          currentSec: token.currentSec,
         })
       }
-      
+
       return token
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.role = token.role as "student" | "faculty" | "admin" | "guest"
+        session.user.role = token.role as Role
         session.user.erpId = token.erpId as string
         session.user.department = token.department as string | undefined
+        session.user.fullName = token.fullName as string | undefined
+        session.user.currentYear = token.currentYear as number | undefined
+        session.user.currentSem = token.currentSem as number | undefined
+        session.user.currentSec = token.currentSec as string | undefined
       }
       return session
     },

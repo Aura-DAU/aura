@@ -2,14 +2,17 @@ import sys
 from pathlib import Path
 
 
-ingestion_dir = Path("/Users/yukta/Desktop/DAU-PWA/DAU-pwa/server/rag/pipeline/ingestion/chunking")
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent
+
+ingestion_dir = PROJECT_ROOT / "server/rag/pipeline/ingestion/chunking"
 sys.path.insert(0, str(ingestion_dir))
 
 from process_corpus import process_markdown_file
 
 def test_ingestion():
-    file1 = Path("/Users/yukta/Desktop/DAU-PWA/DAU-pwa/data/internal_policies/faculty_evaluation_rubric.md")
-    file2 = Path("/Users/yukta/Desktop/DAU-PWA/DAU-pwa/data/internal_policies/senate_meeting_minutes_2023.md")
+    file1 = PROJECT_ROOT / "data/internal_policies/faculty_evaluation_rubric.md"
+    file2 = PROJECT_ROOT / "data/internal_policies/senate_meeting_minutes_2023.md"
 
     print("Processing:", file1.name)
     chunks1 = process_markdown_file(file1)

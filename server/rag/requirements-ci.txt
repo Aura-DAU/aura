@@ -18,3 +18,11 @@ psycopg2-binary
 bcrypt
 # Imported at module load by guardrails / classifiers (tests mock the client).
 groq
+
+# Imported at module load by components/timetable/notifications/observability
+openai
+qdrant-client
+langgraph
+redis
+pywebpush
+prometheus-client

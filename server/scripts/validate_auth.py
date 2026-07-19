@@ -2,7 +2,7 @@
 from pathlib import Path
 
 def extract_frontmatter(content: str) -> tuple[dict, str]:
-    # Extremely basic frontmatter parser for validation purposes.
+    """Extremely basic frontmatter parser for validation purposes."""
     import yaml
 
     if content.startswith("---"):

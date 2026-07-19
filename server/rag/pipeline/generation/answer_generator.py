@@ -2,129 +2,37 @@ import os
 import re
 # pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
-from pipeline.key_manager import KeyManager
+from pipeline.inference_router import InferenceRouter
 from pipeline.exceptions import RAGPipelineError
 
 # ── Prompt caching (CLAUDE.md mandate) ──────────────────────────────────────
 # CLAUDE.md's cache_control(> 1024 tokens) instruction is written for
-# Anthropic's Messages API. This pipeline calls Groq's OpenAI-compatible
-# chat.completions endpoint (see key_manager.py) — Groq has no client-settable
-# `cache_control` field, so setting one here would either be silently ignored
-# or rejected. Two things this file does instead, to honor the mandate's
-# actual intent (control cost/latency on long, repeated prefixes):
+# Anthropic's Messages API. This pipeline calls a self-hosted vLLM node's
+# OpenAI-compatible chat.completions endpoint (see inference_router.py) —
+# vLLM has no client-settable `cache_control` field, so setting one here
+# would either be silently ignored or rejected. Two things this file does
+# instead, to honor the mandate's actual intent (control cost/latency on
+# long, repeated prefixes):
 #
 #   1. `_approx_token_count` flags prompts over the 1024-token threshold so
 #      it's visible in logs which requests are candidates for caching —
-#      useful if/when a caching-capable provider is added.
+#      useful for tuning vLLM's automatic prefix-cache (`--enable-prefix-caching`).
 #   2. The prompt is built with the large, mostly-static SYSTEM_PROMPT +
 #      effective_system_prompt as the `system` message and the per-request
-#      content in `user` — Groq (like most inference stacks) applies
-#      automatic prefix caching to the identical leading portion of a
-#      request, so keeping that portion byte-identical across calls is
-#      what actually earns any caching benefit today, with zero
-#      application-level cache_control support required.
+#      content in `user` — vLLM's prefix cache matches on the identical
+#      leading portion of a request, so keeping that portion byte-identical
+#      across calls is what actually earns any caching benefit today, with
+#      zero application-level cache_control support required.
 #
-# If Groq later exposes explicit cache_control (or a future provider swap
-# brings one in via KeyManager), _execute_generate below is the only call
-# site that needs a `cache_control` block added to the system message.
+# If a future provider exposes explicit cache_control (via InferenceRouter),
+# _execute_generate below is the only call site that needs a `cache_control`
+# block added to the system message.
 
 _TOKEN_CHARS_PER_TOKEN = 4  # rough approximation, no tokenizer dependency
 
 
 def _approx_token_count(text: str) -> int:
     return len(text) // _TOKEN_CHARS_PER_TOKEN
-
-
-# ── Streaming sanitizer ─────────────────────────────────────────────────────
-# The non-streaming path post-processes the FULL answer (strip <think> blocks,
-# strip inline [N] citations, append a consolidated [Sources: …] line). When
-# streaming, the same cleanup must happen on the fly: tokens are emitted as
-# they arrive, holding back only ambiguous tails (a partial "<think", or
-# whitespace/"[3," that may still become a citation once the next chunk lands).
-
-_THINK_OPEN = "<think>"
-_THINK_CLOSE = "</think>"
-_CITATION_RE = re.compile(r"[ \t]*\[\d+(?:\s*,\s*\d+)*\]")
-# Trailing text that could still turn into a citation (or is bare whitespace,
-# held back so the final answer is emitted right-stripped).
-_PARTIAL_TAIL_RE = re.compile(r"(?:\s*\[[\d\s,]*|\s+)$")
-
-
-class _StreamSanitizer:
-
-    def __init__(self):
-        self._buf = ""
-        self._in_think = False
-        self._started = False
-        self.cited: set[int] = set()
-
-    def feed(self, text: str) -> str:
-        self._buf += text
-        return self._drain(final=False)
-
-    def flush(self) -> str:
-        # rstrip for parity with the buffered path's .strip(): trailing
-        # whitespace is always held back mid-stream, so stripping the final
-        # drain strips the whole stream's tail.
-        return self._drain(final=True).rstrip()
-
-    def sources_tail(self) -> str:
-        if not self.cited:
-            return ""
-        return "\n\n[Sources: " + ", ".join(map(str, sorted(self.cited))) + "]"
-
-    def _drain(self, final: bool) -> str:
-        out = []
-        while True:
-            if self._in_think:
-                idx = self._buf.find(_THINK_CLOSE)
-                if idx == -1:
-                    # Keep enough to recognise a closing tag split across chunks.
-                    self._buf = "" if final else self._buf[-(len(_THINK_CLOSE) - 1):]
-                    break
-                self._buf = self._buf[idx + len(_THINK_CLOSE):]
-                self._in_think = False
-                continue
-
-            idx = self._buf.find(_THINK_OPEN)
-            if idx != -1:
-                segment, self._buf = self._buf[:idx], self._buf[idx + len(_THINK_OPEN):]
-                out.append(self._scrub(segment, final=True))
-                self._in_think = True
-                continue
-
-            hold = 0
-            if not final:
-                for k in range(min(len(_THINK_OPEN) - 1, len(self._buf)), 0, -1):
-                    if _THINK_OPEN.startswith(self._buf[-k:]):
-                        hold = k
-                        break
-            segment = self._buf[:-hold] if hold else self._buf
-            self._buf = self._buf[-hold:] if hold else ""
-            out.append(self._scrub(segment, final=final))
-            break
-
-        text_out = "".join(out)
-        if not self._started:
-            text_out = text_out.lstrip()
-            if text_out:
-                self._started = True
-        return text_out
-
-    def _scrub(self, segment: str, final: bool) -> str:
-        def _record(match):
-            for n in re.findall(r"\d+", match.group(0)):
-                self.cited.add(int(n))
-            return ""
-
-        segment = _CITATION_RE.sub(_record, segment)
-        if not final:
-            m = _PARTIAL_TAIL_RE.search(segment)
-            if m and m.group(0):
-                # Stream order: this tail precedes whatever _drain kept in _buf.
-                self._buf = segment[m.start():] + self._buf
-                segment = segment[:m.start()]
-        return segment
 
 
 SYSTEM_PROMPT = """
@@ -575,8 +483,8 @@ class AnswerGenerator:
         load_dotenv()
 
         self.model = os.getenv(
-            "GROQ_MODEL",
-            "openai/gpt-oss-120b"
+            "VLLM_MODEL",
+            os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
     def generate(
@@ -587,7 +495,6 @@ class AnswerGenerator:
         history=None,
         profile=None,
         system_addendum=None,
-        on_delta=None,
     ):
         try:
             profile_text = ""
@@ -709,43 +616,11 @@ Retrieved Documents
                 effective_system_prompt = SYSTEM_PROMPT + system_addendum
 
             if _approx_token_count(effective_system_prompt) > 1024:
-                # See "Prompt caching" note at top of file: Groq has no
+                # See "Prompt caching" note at top of file: vLLM has no
                 # cache_control field, so this is a visibility log only.
                 print(
                     f"[AnswerGenerator] system prompt ~{_approx_token_count(effective_system_prompt)} "
                     "tokens (>1024) — caching-candidate prefix."
-                )
-
-            # Fix #11: tighten code-request detection to require a
-            # programming language or construct keyword so that academic
-            # phrases like "What is the program for MnC?" or
-            # "How to write a thesis?" do NOT trigger the guardrail.
-            # (Query-only predicate — computed BEFORE the LLM call so the
-            # streaming path can fall back to buffered mode for code requests,
-            # whose answers may need to be replaced wholesale after grounding
-            # checks and therefore must never be streamed token-by-token.)
-            out_of_scope_response = "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?"
-
-            PROG_LANG_INDICATORS = [
-                "python", "java", "c++", "javascript", "js", "typescript",
-                "c#", "ruby", "go", "rust", "kotlin", "swift", "php",
-                "sql", "bash", "shell", "html", "css",
-                "algorithm", "fibonacci", "palindrome", "sorting", "linked list",
-                "binary tree", "recursion", "dynamic programming",
-            ]
-            CODE_ACTION_PATTERNS = [
-                "write a", "code for", "implement a", "function in",
-                "script in", "program in",
-            ]
-            question_lower = query.lower()
-            is_code_request = (
-                any(kw in question_lower for kw in CODE_ACTION_PATTERNS)
-                and any(lang in question_lower for lang in PROG_LANG_INDICATORS)
-            ) or "palindrome" in question_lower
-
-            if on_delta is not None and not is_code_request:
-                return self._generate_streaming(
-                    effective_system_prompt, prompt, on_delta
                 )
 
             def _execute_generate(client):
@@ -767,7 +642,7 @@ Retrieved Documents
                     ]
                 )
 
-            response = KeyManager.call_with_rotation(_execute_generate, max_retries=5)
+            response = InferenceRouter.call_with_rotation(_execute_generate, max_retries=5)
 
             if not response:
                 raise RAGPipelineError("Sorry, I encountered an error while generating a response.")
@@ -780,6 +655,30 @@ Retrieved Documents
                 answer,
                 flags=re.DOTALL
             ).strip()
+
+            # Fix #11: tighten code-request detection to require a
+            # programming language or construct keyword so that academic
+            # phrases like "What is the program for MnC?" or
+            # "How to write a thesis?" do NOT trigger the guardrail.
+            out_of_scope_response = "I'm sorry, I can only help with questions about Dhirubhai Ambani University. Is there something else about DAU I can assist you with?"
+
+            PROG_LANG_INDICATORS = [
+                "python", "java", "c++", "javascript", "js", "typescript",
+                "c#", "ruby", "go", "rust", "kotlin", "swift", "php",
+                "sql", "bash", "shell", "html", "css",
+                "algorithm", "fibonacci", "palindrome", "sorting", "linked list",
+                "binary tree", "recursion", "dynamic programming",
+            ]
+            CODE_ACTION_PATTERNS = [
+                "write a", "code for", "implement a", "function in",
+                "script in", "program in",
+            ]
+            question_lower = query.lower()
+            is_code_request = (
+                any(kw in question_lower for kw in CODE_ACTION_PATTERNS)
+                and any(lang in question_lower for lang in PROG_LANG_INDICATORS)
+            ) or "palindrome" in question_lower
+
 
             if is_code_request:
                 answer_lower = answer.lower()
@@ -802,63 +701,15 @@ Retrieved Documents
             print(e)
             return "Sorry, I encountered an error while generating a response."
 
-    def _generate_streaming(self, system_prompt, user_prompt, on_delta):
-        # Token-by-token path: sanitises deltas on the fly (think blocks and
-        # inline citations never reach the client) and returns EXACTLY the
-        # concatenation of emitted deltas, so callers can rely on
-        # streamed-content == returned answer. Stream-creation failures go
-        # through KeyManager rotation like the buffered path; a mid-stream
-        # provider failure after first emission surfaces as a truncated
-        # answer (the client keeps what it already received).
-        def _execute_generate_stream(client):
-            return client.chat.completions.create(
-                model=self.model,
-
-                temperature=0.2,
-                top_p=0.9,
-
-                messages=[
-                    {
-                        "role": "system",
-                        "content": system_prompt
-                    },
-                    {
-                        "role": "user",
-                        "content": user_prompt
-                    }
-                ],
-                stream=True
-            )
-
-        stream = KeyManager.call_with_rotation(_execute_generate_stream, max_retries=5)
-
-        if not stream:
-            raise RAGPipelineError("Sorry, I encountered an error while generating a response.")
-
-        sanitizer = _StreamSanitizer()
-        emitted = []
-
-        def _emit(piece: str) -> None:
-            if piece:
-                emitted.append(piece)
-                on_delta(piece)
-
-        for chunk in stream:
-            choices = getattr(chunk, "choices", None)
-            if not choices:
-                continue
-            delta = getattr(choices[0].delta, "content", None)
-            if delta:
-                _emit(sanitizer.feed(delta))
-        _emit(sanitizer.flush())
-        _emit(sanitizer.sources_tail())
-
-        return "".join(emitted)
-
     def _clean_citations(self, text: str) -> str:
-        # Strips all inline bracketed citations (e.g. [1], [2, 3]) from the
-        # answer body and appends a single consolidated sources list at the
-        # pills, it doesn't parse inline [N] markers at all).
+        """
+        Strips all inline bracketed citations (e.g. [1], [2, 3]) from the
+        answer body and appends a single consolidated sources list at the
+        end (e.g. "[Sources: 1, 2, 3]"), instead of leaving raw [N] markers
+        scattered mid-sentence with no way for the frontend to link them
+        (Message.tsx renders the `sources` list separately as file/URL
+        pills, it doesn't parse inline [N] markers at all).
+        """
         pattern_bracket = r'\[\d+(?:,\s*\d+)*\]'
         all_numbers = set()
 
