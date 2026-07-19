@@ -1,19 +1,19 @@
-"""
-AuraChat — main chat pipeline.
+# 
+# AuraChat — main chat pipeline.
 
-The 7-step flow (from 06_query_routing.md) is now the primary path.
-The existing RAG pipeline (Pinecone + BM25 + rerank) is called for
-PUBLIC and the PUBLIC half of MIXED queries — it is completely unchanged.
+# The 7-step flow (from 06_query_routing.md) is now the primary path.
+# The existing RAG pipeline (Pinecone + BM25 + rerank) is called for
+# PUBLIC and the PUBLIC half of MIXED queries — it is completely unchanged.
 
-Step 1: Classify (B9)
-Step 2: Resolve target ERP ID
-Step 3: Access control gate (B7)
-Step 4: Audit log (B8)
-Step 5: If DENIED → return denial message
-Step 6: If PERSONAL/MIXED → fetch from ERP (B5), build context (B6)
-Step 7: If PUBLIC/MIXED → run existing RAG pipeline
-        Merge contexts → generate answer
-"""
+# Step 1: Classify (B9)
+# Step 2: Resolve target ERP ID
+# Step 3: Access control gate (B7)
+# Step 4: Audit log (B8)
+# Step 5: If DENIED → return denial message
+# Step 6: If PERSONAL/MIXED → fetch from ERP (B5), build context (B6)
+# Step 7: If PUBLIC/MIXED → run existing RAG pipeline
+#         Merge contexts → generate answer
+# 
 
 import re
 from concurrent.futures import ThreadPoolExecutor
