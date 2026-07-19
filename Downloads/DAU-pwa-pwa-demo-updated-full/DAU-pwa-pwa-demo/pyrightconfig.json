@@ -1,6 +1,0 @@
-{
-  "extraPaths": [
-    "server/rag/pipeline/ingestion",
-    "server/rag/pipeline/ingestion/chunking"
-  ]
-}
