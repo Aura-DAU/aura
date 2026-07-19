@@ -164,3 +164,6 @@ server/rag/processed_chunks/
 server/rag/pipeline/processed_chunks/
 server/rag/pipeline/vector_store/
 server/rag/.venv/
+
+# Local UI mocks / chat state
+aura/db/

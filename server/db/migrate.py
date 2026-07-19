@@ -82,13 +82,13 @@ def run(db_url: str, dry_run: bool = False) -> None:
             return
 
         for migration_file in pending:
-            sql = migration_file.read_text(encoding="utf-8")
+            migration_sql = migration_file.read_text(encoding="utf-8")
             print(f"[migrate] {'(dry-run) would apply' if dry_run else 'Applying'}: {migration_file.name}")
             if dry_run:
                 continue
             try:
                 with conn.cursor() as cur:
-                    cur.execute(sql)
+                    cur.execute(migration_sql)
                     cur.execute(
                         sql.SQL("INSERT INTO {} (filename) VALUES (%s)").format(
                             sql.Identifier(TRACKING_TABLE)
@@ -96,10 +96,10 @@ def run(db_url: str, dry_run: bool = False) -> None:
                         (migration_file.name,),
                     )
                 conn.commit()
-                print(f"[migrate] ✓ Applied: {migration_file.name}")
+                print(f"[migrate] [OK] Applied: {migration_file.name}")
             except Exception as e:
                 conn.rollback()
-                print(f"[migrate] ✗ FAILED: {migration_file.name} — {e}")
+                print(f"[migrate] [FAILED] {migration_file.name} - {e}")
                 print("[migrate] Server startup aborted — fix the migration and redeploy.")
                 sys.exit(1)
 
@@ -121,7 +121,7 @@ def status(db_url: str) -> None:
     print(f"{'FILE':<45}  STATUS")
     print("-" * 60)
     for f in files:
-        tag = "✓ applied" if f.name in applied else "✗ PENDING"
+        tag = "[OK] applied" if f.name in applied else "[PENDING]"
         print(f"{f.name:<45}  {tag}")
 
 

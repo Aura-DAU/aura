@@ -214,3 +214,68 @@ def list_deans(admin: Identity = Depends(_require_admin)):
         tuple(dean_bindings),
     )
     return {"dean_bindings": [dict(r) for r in rows]}
+
+
+@router.get("/latency")
+def get_latency_stats(hours: int = 24, admin: Identity = Depends(_require_admin)):
+    if hours <= 0 or hours > 720:
+        raise HTTPException(
+            status_code=400,
+            detail="Hours parameter must be between 1 and 720 (30 days)."
+        )
+    
+    rows = db_conn.query(
+        """SELECT
+            count(*) as count,
+            min(guardrail_time) as guardrail_min,
+            percentile_cont(0.25) within group (order by guardrail_time) as guardrail_q1,
+            percentile_cont(0.50) within group (order by guardrail_time) as guardrail_median,
+            percentile_cont(0.75) within group (order by guardrail_time) as guardrail_q3,
+            max(guardrail_time) as guardrail_max,
+            avg(guardrail_time) as guardrail_mean,
+            
+            min(retrieval_time) as retrieval_min,
+            percentile_cont(0.25) within group (order by retrieval_time) as retrieval_q1,
+            percentile_cont(0.50) within group (order by retrieval_time) as retrieval_median,
+            percentile_cont(0.75) within group (order by retrieval_time) as retrieval_q3,
+            max(retrieval_time) as retrieval_max,
+            avg(retrieval_time) as retrieval_mean,
+            
+            min(generation_time) as generation_min,
+            percentile_cont(0.25) within group (order by generation_time) as generation_q1,
+            percentile_cont(0.50) within group (order by generation_time) as generation_median,
+            percentile_cont(0.75) within group (order by generation_time) as generation_q3,
+            max(generation_time) as generation_max,
+            avg(generation_time) as generation_mean,
+            
+            min(total_time) as total_min,
+            percentile_cont(0.25) within group (order by total_time) as total_q1,
+            percentile_cont(0.50) within group (order by total_time) as total_median,
+            percentile_cont(0.75) within group (order by total_time) as total_q3,
+            max(total_time) as total_max,
+            avg(total_time) as total_mean
+        FROM latency_logs
+        WHERE created_at >= NOW() - %s * INTERVAL '1 hour'""",
+        (hours,)
+    )
+
+    if not rows or rows[0]["count"] == 0:
+        return {"segments": [], "total_requests": 0}
+
+    r = rows[0]
+    count = r["count"]
+
+    segments = []
+    for prefix in ["guardrail", "retrieval", "generation", "total"]:
+        segments.append({
+            "name": prefix,
+            "min": r[f"{prefix}_min"],
+            "q1": r[f"{prefix}_q1"],
+            "median": r[f"{prefix}_median"],
+            "q3": r[f"{prefix}_q3"],
+            "max": r[f"{prefix}_max"],
+            "mean": r[f"{prefix}_mean"],
+            "count": count
+        })
+
+    return {"segments": segments, "total_requests": count}
