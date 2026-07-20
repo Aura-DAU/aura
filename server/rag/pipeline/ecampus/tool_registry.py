@@ -11,6 +11,12 @@ Removed tools (DB/scraper no longer available):
   - refresh_my_data          (write tool — AURA is read-only)
   - share_data_with_advisor  (write tool)
   - revoke_advisor_access    (write tool)
+
+Moved (not removed):
+  - get_timetable            -> pipeline.timetable.tool_registry.get_my_timetable
+                                 (timetable is AURA-owned data, not ERP-sourced,
+                                 and now supports per-student edits — see that
+                                 module's docstring)
 """
 
 from dataclasses import dataclass
@@ -88,13 +94,6 @@ def _handle_get_fees_status(identity, **kwargs):
     return data or {"error": "Fee record not found."}
 
 
-def _handle_get_timetable(identity, **kwargs):
-    roll = authorize_personal_query(identity, kwargs.get("student_id"))
-    data = _erp.get_timetable(roll)
-    audit_log(identity, query="get_timetable", allowed=True, target=roll)
-    return {"timetable": data}
-
-
 def _handle_get_faculty_schedule(identity, **kwargs):
     if identity["role"] not in ("faculty", "faculty_general", "faculty_coord",
                                 "faculty_convenor_ug", "faculty_convenor_pg",
@@ -157,13 +156,6 @@ GET_FEES_STATUS = Tool(
     description="Get the requester's fee payment status and dues from the ERP database.",
     parameters={"type": "object", "properties": {}},
     category="read", allowed_roles=["student"], handler=_handle_get_fees_status,
-)
-
-GET_TIMETABLE = Tool(
-    name="get_timetable",
-    description="Get the requester's weekly class timetable from the ERP database.",
-    parameters={"type": "object", "properties": {}},
-    category="read", allowed_roles=["student"], handler=_handle_get_timetable,
 )
 
 GET_FACULTY_SCHEDULE = Tool(
@@ -306,7 +298,7 @@ TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
         GET_STUDENT_DETAIL, GET_REGISTRATION_STATUS, GET_COURSE_ADJUSTMENTS,
         GET_RESULT, GET_CGPA, GET_HOSTEL_INFO, GET_FEES_STATUS,
-        GET_TIMETABLE, GET_FACULTY_SCHEDULE,
+        GET_FACULTY_SCHEDULE,
         GET_ACADEMIC_SNAPSHOT, COMPARE_SEMESTER_TREND,
         LIST_MY_DATA_SHARING, GET_ADVISEE_SNAPSHOT,
         LEAVE_APPLICATION_GUIDANCE, CPDA_TRAVEL_APPROVAL_GUIDANCE, SEED_GRANT_GUIDANCE,

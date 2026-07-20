@@ -1,6 +1,35 @@
-# Database migration runner — lightweight alternative to Alembic for AURA's
-# small Auth DB. Designed to run at server startup (or in a deployment script)
-# AUTH_DB_URL: ${{ secrets.AUTH_DB_URL }}
+"""
+Database migration runner — lightweight alternative to Alembic for AURA's
+small Auth DB. Designed to run at server startup (or in a deployment script)
+before FastAPI starts accepting requests.
+
+How it works:
+  1. Creates a `_migrations` tracking table if it doesn't exist.
+  2. Reads every *.sql file in server/db/migrations/ in lexicographic order.
+  3. Skips files that are already recorded in `_migrations`.
+  4. Runs each new file in a transaction; records success in `_migrations`.
+  5. Any migration failure rolls back ONLY that migration and aborts — the
+     server should not start if a migration fails.
+
+Usage:
+    # In deployment script, before starting uvicorn:
+    python server/db/migrate.py
+
+    # Or from the server/ directory:
+    python db/migrate.py
+
+    # Show status without running:
+    python db/migrate.py --status
+
+    # Target a specific DB URL (overrides AUTH_DB_URL env var):
+    python db/migrate.py --db-url postgresql://...
+
+Integrating into CI/CD (example GitHub Actions step):
+    - name: Run DB migrations
+      run: python server/db/migrate.py
+      env:
+        AUTH_DB_URL: ${{ secrets.AUTH_DB_URL }}
+"""
 
 import os
 import sys
@@ -53,13 +82,13 @@ def run(db_url: str, dry_run: bool = False) -> None:
             return
 
         for migration_file in pending:
-            sql = migration_file.read_text(encoding="utf-8")
+            migration_sql = migration_file.read_text(encoding="utf-8")
             print(f"[migrate] {'(dry-run) would apply' if dry_run else 'Applying'}: {migration_file.name}")
             if dry_run:
                 continue
             try:
                 with conn.cursor() as cur:
-                    cur.execute(sql)
+                    cur.execute(migration_sql)
                     cur.execute(
                         sql.SQL("INSERT INTO {} (filename) VALUES (%s)").format(
                             sql.Identifier(TRACKING_TABLE)
@@ -67,10 +96,10 @@ def run(db_url: str, dry_run: bool = False) -> None:
                         (migration_file.name,),
                     )
                 conn.commit()
-                print(f"[migrate] ✓ Applied: {migration_file.name}")
+                print(f"[migrate] [OK] Applied: {migration_file.name}")
             except Exception as e:
                 conn.rollback()
-                print(f"[migrate] ✗ FAILED: {migration_file.name} — {e}")
+                print(f"[migrate] [FAILED] {migration_file.name} - {e}")
                 print("[migrate] Server startup aborted — fix the migration and redeploy.")
                 sys.exit(1)
 
@@ -92,7 +121,7 @@ def status(db_url: str) -> None:
     print(f"{'FILE':<45}  STATUS")
     print("-" * 60)
     for f in files:
-        tag = "✓ applied" if f.name in applied else "✗ PENDING"
+        tag = "[OK] applied" if f.name in applied else "[PENDING]"
         print(f"{f.name:<45}  {tag}")
 
 

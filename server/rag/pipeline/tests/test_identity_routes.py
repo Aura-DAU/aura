@@ -1,6 +1,9 @@
-# Tests for GET /internal/resolve-identity.
-# Verifies: secret header enforcement, domain validation, found/not-found
-# behaviour. Does not need a real DB — uses a mock db_conn module.
+"""
+Tests for GET /internal/resolve-identity.
+
+Verifies: secret header enforcement, domain validation, found/not-found
+behaviour. Does not need a real DB — uses a mock db_conn module.
+"""
 
 import sys, os
 from pathlib import Path
@@ -49,13 +52,60 @@ def test_disallowed_domain_returns_400():
     assert "domain" in res.json()["detail"].lower()
 
 
-def test_unknown_email_returns_404():
+def test_unknown_email_returns_guest():
     with patch("api.routes.identity_routes.db_conn", _mock_db([])):
         res = client.get("/internal/resolve-identity?email=unknown@dau.ac.in",
                          headers=GOOD_HEADERS)
-    assert res.status_code == 404
-    # Must not echo the submitted email (enumeration / info disclosure).
-    assert "unknown@dau.ac.in" not in res.json()["detail"]
+    assert res.status_code == 200
+    data = res.json()
+    assert data["role"] == "guest"
+    assert data["erp_id"] == "GUEST_UNKNOWN"
+
+
+def test_valid_range_student_email_resolves():
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db:
+        res = client.get("/internal/resolve-identity?email=202401475@dau.ac.in",
+                         headers=GOOD_HEADERS)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["role"] == "student"
+    assert data["erp_id"] == "202401475"
+    # Ensure write-through cache called db_conn.execute
+    assert mock_db.execute.called
+
+
+def test_out_of_range_student_email_resolves_as_guest():
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db:
+        res = client.get("/internal/resolve-identity?email=202101002@dau.ac.in",
+                         headers=GOOD_HEADERS)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["role"] == "guest"
+    assert data["erp_id"] == "GUEST_202101002"
+    # Guests should not be cached in DB
+    assert not mock_db.execute.called
+
+
+def test_matching_faculty_email_resolves():
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db:
+        res = client.get("/internal/resolve-identity?email=abhishek.gupta@dau.ac.in",
+                         headers=GOOD_HEADERS)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["role"] == "faculty"
+    assert data["erp_id"] == "FAC_ABHISHEK.GUPTA"
+    assert mock_db.execute.called
+
+
+def test_non_matching_faculty_email_resolves_as_guest():
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db:
+        res = client.get("/internal/resolve-identity?email=notafaculty@dau.ac.in",
+                         headers=GOOD_HEADERS)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["role"] == "guest"
+    assert data["erp_id"] == "GUEST_NOTAFACULTY"
+    assert not mock_db.execute.called
 
 
 def test_known_student_email_returns_identity():

@@ -9,15 +9,15 @@ application or verifies documents itself — this is guidance only, same
 posture as every other *_guidance tool in this package.
 
 Follows the same pattern as student_workflow_tools.py / community_tools.py:
-retrieval via RetrievalPipeline, LLM call routed through KeyManager so it
-participates in Groq key rotation like every other pipeline component
-(no direct `Groq(api_key=...)` client — that bypasses rotation/backoff).
+retrieval via RetrievalPipeline, LLM call routed through InferenceRouter so
+it participates in vLLM node failover like every other pipeline component
+(no direct client construction — that bypasses routing/backoff).
 """
 
 import os
 import json
 from dotenv import load_dotenv
-from pipeline.key_manager import KeyManager
+from pipeline.inference_router import InferenceRouter
 from ..personal_data.audit import audit_log
 
 load_dotenv()
@@ -110,7 +110,7 @@ def screen_scholarship_eligibility(
 
     def _execute(client):
         return client.chat.completions.create(
-            model=os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"),
+            model=os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")),
             temperature=0,
             messages=[
                 {"role": "system", "content": _SCHOLARSHIP_SYSTEM_PROMPT.strip()},
@@ -124,7 +124,7 @@ def screen_scholarship_eligibility(
             ],
         )
 
-    response = KeyManager.call_with_rotation(_execute, max_retries=3)
+    response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
     raw = response.choices[0].message.content.strip() if response else ""
     raw = raw.replace("```json", "").replace("```", "").strip()
 

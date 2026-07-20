@@ -1,3 +1,9 @@
+"""
+DEPRECATED — superseded by upload_to_qdrant.py as part of the Pinecone →
+Qdrant migration (see pipeline/retrieval/qdrant_client.py). Kept only for
+reference; sync_db.py no longer calls this script. Requires the `pinecone`
+package, which is no longer in requirements.txt.
+"""
 import json
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -261,6 +267,12 @@ def main():
 
         if chunk.get("scraped_date"):
             vector["metadata"]["scraped_date"] = chunk["scraped_date"]
+
+        # Portable path back to the source markdown file (e.g.
+        # "data/infrastructure/ict_infrastructure.md"), used by the
+        # /documents API to power the citation side-drawer viewer.
+        if chunk.get("relative_path"):
+            vector["metadata"]["relative_path"] = chunk["relative_path"]
 
         if chunk.get("start_line") is not None:
             vector["metadata"]["start_line"] = int(chunk["start_line"])

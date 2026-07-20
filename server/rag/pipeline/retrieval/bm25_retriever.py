@@ -1,4 +1,3 @@
-import heapq
 import json
 import re
 
@@ -242,15 +241,17 @@ class BM25Retriever:
             self._tokenize(query)
         )
 
-        if metadata_filter:
-            candidate_indices = [
-                idx
-                for idx, chunk in enumerate(self.chunks)
-                if self._matches_filter(chunk, metadata_filter)
-            ]
-        else:
-            # No filter → every chunk is a candidate; skip the per-chunk scan.
-            candidate_indices = range(len(self.chunks))
+        candidate_indices = []
+
+        for idx, chunk in enumerate(self.chunks):
+
+            if not self._matches_filter(
+                chunk,
+                metadata_filter
+            ):
+                continue
+
+            candidate_indices.append(idx)
 
         scores = (
             self.bm25.get_scores(
@@ -258,13 +259,11 @@ class BM25Retriever:
             )
         )
 
-        # nlargest is O(n log k) vs O(n log n) for a full sort, and matches
-        # sorted(..., reverse=True)[:k] exactly (including tie order).
-        ranked_indices = heapq.nlargest(
-            top_k,
+        ranked_indices = sorted(
             candidate_indices,
-            key=scores.__getitem__
-        )
+            key=lambda i: scores[i],
+            reverse=True
+        )[:top_k]
 
         results = []
 

@@ -254,21 +254,3 @@
   border-top: 1px solid var(--color-theme-gray-light);
   margin: 1rem 0;
 }
-
-@keyframes install-aura-pulse {
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 0 rgb(255 190 63 / 0.35),
-      0 0 18px 0 rgb(244 80 59 / 0.25);
-  }
-  50% {
-    box-shadow:
-      0 0 0 6px rgb(255 190 63 / 0),
-      0 0 28px 2px rgb(244 80 59 / 0.4);
-  }
-}
-
-.install-aura-glow {
-  animation: install-aura-pulse 2.4s ease-in-out infinite;
-}

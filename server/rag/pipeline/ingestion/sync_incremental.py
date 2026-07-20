@@ -5,7 +5,8 @@ import logging
 from pathlib import Path
 import numpy as np
 from dotenv import load_dotenv
-from pinecone import Pinecone
+from qdrant_client import QdrantClient
+from qdrant_client.http import models as qmodels
 from sentence_transformers import SentenceTransformer
 import torch
 import hashlib
@@ -199,86 +200,88 @@ def main():
     with open(METADATA_FILE, "w", encoding="utf-8") as f:
         json.dump(metadata, f, ensure_ascii=False)
 
-    # 4. Upload new chunks to Pinecone
-    api_key = os.getenv("PINECONE_API_KEY")
-    index_name = os.getenv("PINECONE_INDEX")
-    if not api_key or not index_name:
-        logger.error("PINECONE_API_KEY or PINECONE_INDEX not set in environment.")
-        sys.exit(1)
+    # 4. Upload new chunks to Qdrant
+    qdrant_url = os.getenv("QDRANT_URL", "http://localhost:6333")
+    collection_name = os.getenv("QDRANT_COLLECTION", "aura-knowledge-base")
 
-    logger.info("Connecting to Pinecone...")
-    pc = Pinecone(api_key=api_key)
-    index = pc.Index(index_name)
+    logger.info("Connecting to Qdrant at %s...", qdrant_url)
+    client = QdrantClient(url=qdrant_url, api_key=os.getenv("QDRANT_API_KEY") or None)
 
-    # Delete old vectors for modified files from Pinecone
+    # Delete old vectors for modified files from Qdrant
     if updated_files:
-        logger.info("Deleting old vectors from Pinecone for %d modified files...", len(updated_files))
+        logger.info("Deleting old vectors from Qdrant for %d modified files...", len(updated_files))
         for f, canonical_path in updated_files:
             import uuid
             doc_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, f.as_posix()))
             try:
-                index.delete(filter={"document_id": doc_id})
+                client.delete(
+                    collection_name=collection_name,
+                    points_selector=qmodels.FilterSelector(
+                        filter=qmodels.Filter(must=[qmodels.FieldCondition(key="document_id", match=qmodels.MatchValue(value=doc_id))])
+                    ),
+                )
                 logger.info("  Deleted old vectors for: %s", canonical_path)
             except Exception as e:
-                logger.error("Failed to delete vectors for %s from Pinecone: %s", canonical_path, e)
+                logger.error("Failed to delete vectors for %s from Qdrant: %s", canonical_path, e)
 
-    # Delete vectors for deleted files from Pinecone
+    # Delete vectors for deleted files from Qdrant
     if deleted_files:
-        logger.info("Deleting vectors from Pinecone for %d deleted files...", len(deleted_files))
+        logger.info("Deleting vectors from Qdrant for %d deleted files...", len(deleted_files))
         for canonical_path in deleted_files:
             doc_id = deleted_path_to_doc_id.get(canonical_path)
             if doc_id:
                 try:
-                    index.delete(filter={"document_id": doc_id})
+                    client.delete(
+                        collection_name=collection_name,
+                        points_selector=qmodels.FilterSelector(
+                            filter=qmodels.Filter(must=[qmodels.FieldCondition(key="document_id", match=qmodels.MatchValue(value=doc_id))])
+                        ),
+                    )
                     logger.info("  Deleted vectors for: %s (doc_id: %s)", canonical_path, doc_id)
                 except Exception as e:
-                    logger.error("Failed to delete vectors for %s from Pinecone: %s", canonical_path, e)
+                    logger.error("Failed to delete vectors for %s from Qdrant: %s", canonical_path, e)
 
+    vectors = []
     if new_chunks:
-        logger.info("Preparing vectors for Pinecone upload...")
-        vectors = []
+        logger.info("Preparing points for Qdrant upload...")
         for embedding, chunk in zip(new_embeddings, new_chunks):
-            vector = {
-                "id": chunk["chunk_id"],
-                "values": embedding.tolist(),
-                "metadata": {
-                    "text": chunk["text"],
-                    "cluster": chunk.get("cluster"),
-                    "subclusters": chunk.get("subclusters"),
-                    "document_type": chunk.get("document_type")
-                }
+            payload = {
+                "text": chunk["text"],
+                "cluster": chunk.get("cluster"),
+                "subclusters": chunk.get("subclusters"),
+                "document_type": chunk.get("document_type")
             }
-            
+
             # Coordinate metadata
             if chunk.get("document_id"):
-                vector["metadata"]["document_id"] = chunk["document_id"]
+                payload["document_id"] = chunk["document_id"]
             if chunk.get("chunk_index") is not None:
-                vector["metadata"]["chunk_index"] = int(chunk["chunk_index"])
+                payload["chunk_index"] = int(chunk["chunk_index"])
             if chunk.get("total_chunks") is not None:
-                vector["metadata"]["total_chunks"] = int(chunk["total_chunks"])
+                payload["total_chunks"] = int(chunk["total_chunks"])
 
             # Optional metadata fields
-            for field in ["category", "title", "url", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date", "authorization", "start_line", "end_line", "document_year"]:
+            for field in ["category", "title", "url", "relative_path", "faculty_name", "program_name", "section_type", "event_name", "event_date", "venue", "semester", "course_code", "course_name", "course_type", "credits", "h1", "h2", "h3", "scraped_date", "authorization", "start_line", "end_line", "document_year"]:
                 if chunk.get(field) is not None:
                     if field in ("start_line", "end_line"):
-                        vector["metadata"][field] = int(chunk[field])
+                        payload[field] = int(chunk[field])
                     elif field == "document_year":
                         try:
-                            vector["metadata"][field] = int(chunk[field])
+                            payload[field] = int(chunk[field])
                         except (ValueError, TypeError):
-                            vector["metadata"][field] = str(chunk[field])
+                            payload[field] = str(chunk[field])
                     else:
-                        vector["metadata"][field] = chunk[field]
+                        payload[field] = chunk[field]
 
-            vectors.append(vector)
+            vectors.append(qmodels.PointStruct(id=chunk["chunk_id"], vector=embedding.tolist(), payload=payload))
 
-    # Upload in partitioned batches (recommended batch size is <= 200)
+    # Upload in partitioned batches
     batch_size = 200
-    logger.info("Uploading %d new vectors to Pinecone index %s in batches of %d...", len(vectors), index_name, batch_size)
+    logger.info("Uploading %d new points to Qdrant collection %s in batches of %d...", len(vectors), collection_name, batch_size)
     for i in range(0, len(vectors), batch_size):
         batch = vectors[i:i+batch_size]
-        index.upsert(vectors=batch)
-    logger.info("Pinecone upload complete.")
+        client.upsert(collection_name=collection_name, points=batch)
+    logger.info("Qdrant upload complete.")
 
     # 5. Refresh entity index
     logger.info("Rebuilding entity index...")

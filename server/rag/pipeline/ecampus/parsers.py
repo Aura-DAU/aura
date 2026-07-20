@@ -1,15 +1,29 @@
-# HTML parsers for ecampus.daiict.ac.in's tab pages.
-# Every function here takes raw HTML (from session.get_page()) and returns
-# like this either way — it's the column names/order that need confirming.
+"""
+HTML parsers for ecampus.daiict.ac.in's tab pages.
+
+Every function here takes raw HTML (from session.get_page()) and returns
+structured Python data. ASP.NET WebForms GridViews render as plain <table>
+elements with auto-generated IDs (e.g. id="ctl00_ContentPlaceHolder1_GridView1"),
+so the general pattern is: find the right table, iterate <tr>, map <td>
+columns by position or header text.
+
+EVERY function below is a TODO stub with a reasonable, generic table-parsing
+strategy — none of them have been validated against real eCampus HTML yet,
+because I don't have it. Send me a saved HTML snippet (View Source, or a
+screenshot is enough for the layout) of any of these pages once you're past
+login and I'll replace the guessed column ordering with the real one. The
+parsing approach (find table, iterate rows) is very likely right for a site
+like this either way — it's the column names/order that need confirming.
+"""
 
 from typing import Optional
 from bs4 import BeautifulSoup
 
 
 def _first_table_after(soup: BeautifulSoup, hint_text: Optional[str] = None):
-    # Generic helper: ASP.NET GridViews are usually the largest <table> on
-    # the content area. If hint_text is given, prefer a table whose nearest
-    # preceding heading/text contains it.
+    """Generic helper: ASP.NET GridViews are usually the largest <table> on
+    the content area. If hint_text is given, prefer a table whose nearest
+    preceding heading/text contains it."""
     tables = soup.find_all("table")
     if not tables:
         return None

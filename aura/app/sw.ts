@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-declare const self: ServiceWorkerGlobalScope
+declare const self: WorkerGlobalScope
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
@@ -20,7 +20,7 @@ const serwist = new Serwist({
     entries: [
       {
         url: "/offline",
-        matcher({ request }) {
+        matcher({ request }: { request: Request }) {
           return request.destination === "document"
         },
       },

@@ -1,12 +1,21 @@
-# B9 / B2-AUTH-7 — Personal Query Classifier (extended for all roles).
-# Classifies every query as PUBLIC / PERSONAL / MIXED / AGGREGATE.
-# On any failure → defaults to PUBLIC (safest fallback).
+"""
+B9 / B2-AUTH-7 — Personal Query Classifier (extended for all roles).
+
+Classifies every query as PUBLIC / PERSONAL / MIXED / AGGREGATE.
+Extended to handle faculty-specific queries (teaching schedule, BTP pool,
+mentees) and dean-level queries (grievances, hostel master, disciplinary).
+
+Injection defence: user query is wrapped in <query>...</query> tags so the
+model sees a clear boundary between its instructions and untrusted user text.
+
+On any failure → defaults to PUBLIC (safest fallback).
+"""
 
 import os
 import json
 import logging
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.inference_router import InferenceRouter
 
 logger = logging.getLogger(__name__)
 
@@ -75,8 +84,8 @@ class PersonalQueryClassifier:
 
     def __init__(self):
         load_dotenv()
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-        self.model  = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+        self.client = InferenceRouter.get_client()
+        self.model  = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
     def classify(self, query: str) -> dict:
         # Injection defence: delimit user input clearly

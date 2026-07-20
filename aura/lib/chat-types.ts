@@ -27,6 +27,10 @@ export interface Citation {
   title?: string
   visibility?: string
   authorization?: string[]
+  /** Relative path to the raw markdown source (e.g. "infrastructure/foo.md"), used to open the citation side-drawer. Absent for citations that are external URLs only. */
+  path?: string
+  startLine?: number
+  endLine?: number
 }
 
 export interface ChatThread {

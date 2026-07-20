@@ -84,10 +84,6 @@ web_modules/
 .next
 out
 
-# Serwist
-aura/public/sw*
-aura/public/swe-worker*
-
 # Nuxt.js build / generate output
 .nuxt
 dist
@@ -168,3 +164,9 @@ server/rag/processed_chunks/
 server/rag/pipeline/processed_chunks/
 server/rag/pipeline/vector_store/
 server/rag/.venv/
+
+# Local UI mocks / chat state
+aura/db/
+
+# Local documentation / cluster reports
+docs/

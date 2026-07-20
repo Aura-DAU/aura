@@ -19,3 +19,10 @@ bcrypt
 # Imported at module load by guardrails / classifiers (tests mock the client).
 groq
 redis>=5.0.0
+
+# Imported at module load by components/timetable/notifications/observability
+openai
+qdrant-client
+langgraph
+pywebpush
+prometheus-client

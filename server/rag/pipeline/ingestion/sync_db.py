@@ -44,7 +44,7 @@ def main():
     run_step("generate_embeddings.py", embeddings_dir)
     
     # Step 3: Upload to Pinecone
-    run_step("upload_to_pinecone.py", embeddings_dir)
+    run_step("upload_to_qdrant.py", embeddings_dir)
 
     # Step 4: Build entity index for graph-enhanced retrieval
     # Reads vector_store/metadata.json (written in Step 2) and writes
