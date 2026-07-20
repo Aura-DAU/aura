@@ -20,6 +20,7 @@ from pipeline.rate_limiter import (
     enforce_quota,
     peek_remaining,
     QuotaExceeded,
+    reset_store_for_tests,
 )
 import pipeline.rate_limiter as rate_limiter_module
 
@@ -27,7 +28,7 @@ import pipeline.rate_limiter as rate_limiter_module
 def setup_function(_):
     # Each test gets a clean in-memory store — the module-level singleton
     # would otherwise leak state between tests.
-    rate_limiter_module._store = InMemoryQuotaStore()
+    reset_store_for_tests(InMemoryQuotaStore())
     rate_limiter_module.QUOTA_LIMITS = {
         "guest": 3,
         "student": 5,

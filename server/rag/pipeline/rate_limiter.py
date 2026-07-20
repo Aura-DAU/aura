@@ -4,17 +4,15 @@ Question quota enforcement — v7 policy: 3 questions/day for guest accounts,
 signed-in Google account (email claim in the internal JWT, since guest
 users all share erp_id="GUEST" and can't be distinguished by erp_id alone).
 
-This is an in-memory sliding-24h-window counter behind a small interface
-(`QuotaStore`) so it can be swapped for a real `rate_limits` Postgres table
-or Redis without touching the FastAPI call site. In-memory is acceptable
-for a single-process dev/demo deployment; it resets on restart and does not
-share state across multiple workers — that's the concrete gap to close
-before this handles production traffic on more than one process.
+Uses Redis when REDIS_URL is set (shared across workers); otherwise an
+in-memory store for single-process dev/tests.
 """
 
+import os
 import time
 import threading
 from dataclasses import dataclass, field
+from typing import Optional, Protocol
 
 QUOTA_WINDOW_SECONDS = 24 * 60 * 60  # 24h rolling window
 
@@ -31,6 +29,11 @@ class QuotaExceeded(Exception):
         self.limit = limit
         self.remaining = remaining
         super().__init__(f"Question limit reached ({limit}/day).")
+
+
+class QuotaStore(Protocol):
+    def check_and_increment(self, key: str, limit: int) -> int: ...
+    def remaining(self, key: str, limit: int) -> int: ...
 
 
 @dataclass
@@ -68,7 +71,61 @@ class InMemoryQuotaStore:
             return max(0, limit - len(bucket.timestamps))
 
 
-_store = InMemoryQuotaStore()
+class RedisQuotaStore:
+    """Sliding 24h window via Redis sorted sets — shared across workers."""
+
+    def __init__(self, redis_url: str):
+        import redis  # lazy — only required when REDIS_URL is configured
+
+        self._r = redis.Redis.from_url(redis_url, decode_responses=True)
+        self._prefix = os.environ.get("REDIS_QUOTA_PREFIX", "aura:quota:")
+
+    def _key(self, key: str) -> str:
+        return f"{self._prefix}{key}"
+
+    def check_and_increment(self, key: str, limit: int) -> int:
+        now = time.time()
+        cutoff = now - QUOTA_WINDOW_SECONDS
+        rkey = self._key(key)
+        pipe = self._r.pipeline()
+        pipe.zremrangebyscore(rkey, 0, cutoff)
+        pipe.zcard(rkey)
+        _, count = pipe.execute()
+        if count >= limit:
+            raise QuotaExceeded(limit=limit, remaining=0)
+        member = f"{now}:{os.getpid()}:{id(object())}"
+        pipe = self._r.pipeline()
+        pipe.zadd(rkey, {member: now})
+        pipe.expire(rkey, QUOTA_WINDOW_SECONDS + 60)
+        pipe.zcard(rkey)
+        _, _, new_count = pipe.execute()
+        return max(0, limit - int(new_count))
+
+    def remaining(self, key: str, limit: int) -> int:
+        now = time.time()
+        cutoff = now - QUOTA_WINDOW_SECONDS
+        rkey = self._key(key)
+        pipe = self._r.pipeline()
+        pipe.zremrangebyscore(rkey, 0, cutoff)
+        pipe.zcard(rkey)
+        _, count = pipe.execute()
+        return max(0, limit - int(count))
+
+
+def _build_store() -> QuotaStore:
+    redis_url = os.environ.get("REDIS_URL", "").strip()
+    if redis_url:
+        return RedisQuotaStore(redis_url)
+    return InMemoryQuotaStore()
+
+
+_store: QuotaStore = _build_store()
+
+
+def reset_store_for_tests(store: Optional[QuotaStore] = None) -> None:
+    """Test helper — swap the module singleton."""
+    global _store
+    _store = store if store is not None else InMemoryQuotaStore()
 
 
 def enforce_quota(quota_key: str, role: str) -> int:

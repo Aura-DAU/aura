@@ -3,6 +3,11 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { backendUrl } from "@/lib/api/backend"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
+import {
+  getNextAuthSecret,
+  requireGoogleOAuthCredentials,
+  requireInternalResolveSecret,
+} from "@/lib/auth/secrets"
 
 declare module "next-auth" {
   interface Session {
@@ -38,7 +43,7 @@ async function lookupErpIdentity(email: string): Promise<{ role: "student" | "fa
     const res = await fetch(backendUrl(`/internal/resolve-identity?email=${encodeURIComponent(email)}`), {
       headers: {
         "Content-Type": "application/json",
-        "X-Internal-Secret": process.env.INTERNAL_RESOLVE_SECRET || ""
+        "X-Internal-Secret": requireInternalResolveSecret(),
       }
     })
     
@@ -59,23 +64,13 @@ async function lookupErpIdentity(email: string): Promise<{ role: "student" | "fa
   }
 }
 
+const googleCreds = requireGoogleOAuthCredentials()
+
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      clientId: (() => {
-        const id = process.env.GOOGLE_CLIENT_ID
-        if (!id && process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
-          console.warn("WARNING: GOOGLE_CLIENT_ID is not set.")
-        }
-        return id || "mock-client-id"
-      })(),
-      clientSecret: (() => {
-        const secret = process.env.GOOGLE_CLIENT_SECRET
-        if (!secret && process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
-          console.warn("WARNING: GOOGLE_CLIENT_SECRET is not set.")
-        }
-        return secret || "mock-client-secret"
-      })(),
+      clientId: googleCreds.clientId,
+      clientSecret: googleCreds.clientSecret,
       authorization: {
         params: {
           prompt: "select_account",
@@ -122,7 +117,7 @@ export const authOptions: NextAuthOptions = {
           const res = await fetch(backendUrl(`/internal/resolve-identity?email=${encodeURIComponent(email)}`), {
             headers: {
               "Content-Type": "application/json",
-              "X-Internal-Secret": process.env.INTERNAL_RESOLVE_SECRET || ""
+              "X-Internal-Secret": requireInternalResolveSecret(),
             }
           })
           
@@ -195,16 +190,7 @@ export const authOptions: NextAuthOptions = {
       return session
     },
   },
-  secret: (() => {
-    const s = process.env.NEXTAUTH_SECRET
-    if (!s) {
-      if (process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
-        console.warn("WARNING: NEXTAUTH_SECRET is not set.")
-      }
-      return "mock-nextauth-secret"
-    }
-    return s
-  })(),
+  secret: getNextAuthSecret(),
   pages: {
     signIn: "/login",
     error: "/login",

@@ -13,6 +13,7 @@ numpy
 transformers
 rapidfuzz>=3.5.0
 rank-bm25
+redis>=5.0.0
 
 # Auth, ERP integration, security
 requests

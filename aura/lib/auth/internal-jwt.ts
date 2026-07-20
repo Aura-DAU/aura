@@ -1,14 +1,18 @@
 import jwt from "jsonwebtoken"
 
+function isProductionRuntime(): boolean {
+  return process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE
+}
+
 function getJwtSecret(): string {
   const secret = process.env.INTERNAL_JWT_SECRET
-  if (!secret) {
-    if (process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
-      throw new Error("FATAL: INTERNAL_JWT_SECRET is not set. Set it before starting the server.")
-    }
-    return "test-internal-secret-for-auth-middleware"
+  if (secret) return secret
+  if (isProductionRuntime()) {
+    throw new Error(
+      "FATAL: INTERNAL_JWT_SECRET is not set. Set it before starting the server.",
+    )
   }
-  return secret
+  return "test-internal-secret-for-auth-middleware"
 }
 
 export interface InternalJwtPayload {
@@ -35,7 +39,7 @@ export function signInternalJwt(payload: InternalJwtPayload): string {
     {
       algorithm: "HS256",
       expiresIn: "15m",
-    }
+    },
   )
 }
 

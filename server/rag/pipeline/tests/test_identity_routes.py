@@ -54,6 +54,8 @@ def test_unknown_email_returns_404():
         res = client.get("/internal/resolve-identity?email=unknown@dau.ac.in",
                          headers=GOOD_HEADERS)
     assert res.status_code == 404
+    # Must not echo the submitted email (enumeration / info disclosure).
+    assert "unknown@dau.ac.in" not in res.json()["detail"]
 
 
 def test_known_student_email_returns_identity():

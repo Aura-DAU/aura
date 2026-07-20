@@ -1,8 +1,11 @@
+import { getServerSession } from "next-auth"
 import { z } from "zod"
+
 import { backendUrl, type BackendChatRequest } from "@/lib/api/backend"
+import { authOptions } from "@/lib/auth/options"
+import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
 export const maxDuration = 60
-
 
 const historyTurnSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -24,6 +27,11 @@ const requestSchema = z.object({
 })
 
 export async function POST(req: Request) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.erpId || !session.user.role) {
+    return new Response("Unauthorized", { status: 401 })
+  }
+
   let body: unknown
   try {
     body = await req.json()
@@ -36,10 +44,12 @@ export async function POST(req: Request) {
     return new Response("Invalid request", { status: 400 })
   }
 
-  const authHeader = req.headers.get("Authorization")
-  if (!authHeader) {
-    return new Response("Unauthorized", { status: 401 })
-  }
+  const internalToken = signInternalJwt({
+    role: session.user.role,
+    erpId: session.user.erpId,
+    department: session.user.department,
+    email: session.user.email ?? undefined,
+  })
 
   // Map studentProfile → userProfile for FastAPI; cap history for cost/latency.
   const payload: BackendChatRequest = {
@@ -54,7 +64,7 @@ export async function POST(req: Request) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: authHeader,
+        Authorization: `Bearer ${internalToken}`,
       },
       body: JSON.stringify({
         question: payload.question,
