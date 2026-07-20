@@ -27,8 +27,47 @@ from api.routes.identity_routes import router as identity_router
 from api.routes.speech_routes import router as speech_router
 
 
+def _is_production() -> bool:
+    return os.getenv("ENV", "").lower() in {"production", "prod"} or (
+        os.getenv("AURA_ENV", "").lower() == "production"
+    )
+
+
+def _validate_production_config() -> None:
+    """Fail fast on missing production-critical configuration."""
+    if not _is_production():
+        return
+    missing: list[str] = []
+    if not os.getenv("PROD_FRONTEND_ORIGIN"):
+        missing.append("PROD_FRONTEND_ORIGIN")
+    if not os.getenv("INTERNAL_JWT_SECRET"):
+        missing.append("INTERNAL_JWT_SECRET")
+    if not os.getenv("INTERNAL_RESOLVE_SECRET"):
+        missing.append("INTERNAL_RESOLVE_SECRET")
+    # eCampus scrape mode stores credentials — require vault key in prod.
+    if not os.getenv("ERP_DB_HOST") and not os.getenv("ECAMPUS_VAULT_KEY"):
+        missing.append("ECAMPUS_VAULT_KEY (required when ERP_DB_HOST is unset)")
+    if missing:
+        raise RuntimeError(
+            "Production config incomplete — set: " + ", ".join(missing)
+        )
+
+
+def _cors_origins() -> list[str]:
+    allowed = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    prod = os.getenv("PROD_FRONTEND_ORIGIN")
+    if prod:
+        allowed.append(prod.rstrip("/"))
+    elif _is_production():
+        raise RuntimeError(
+            "PROD_FRONTEND_ORIGIN must be set when ENV/AURA_ENV=production."
+        )
+    return allowed
+
+
 @asynccontextmanager
 async def _lifespan(application: FastAPI):
+    _validate_production_config()
     # Pre-load the RAG stack in the background so the first real /chat does
     # not pay the multi-second model init. AURA_WARMUP=0 opts out (e.g. when
     # running the API only for non-chat routes).
@@ -41,10 +80,7 @@ def create_app() -> FastAPI:
     application = FastAPI(title="AURA API", lifespan=_lifespan)
 
     # Credentials require explicit origins (browsers reject "*" with credentials).
-    allowed_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
-    prod = os.getenv("PROD_FRONTEND_ORIGIN")
-    if prod:
-        allowed_origins.append(prod)
+    allowed_origins = _cors_origins()
 
     register_latency_middleware(application)
 

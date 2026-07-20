@@ -46,7 +46,8 @@ async def speech(
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"[speech] transcription failed: {e}")
+        raise HTTPException(status_code=500, detail="Transcription failed. Please try again.")
     finally:
         if temp_path and os.path.exists(temp_path):
             os.remove(temp_path)

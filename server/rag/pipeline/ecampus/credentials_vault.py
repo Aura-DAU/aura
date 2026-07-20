@@ -77,6 +77,11 @@ def _connect():
             PRIMARY KEY (student_erp_id, faculty_erp_id)
         )
     """)
+    # Restrict vault DB permissions when possible (Unix).
+    try:
+        os.chmod(DB_PATH, 0o600)
+    except OSError:
+        pass
     return conn
 
 

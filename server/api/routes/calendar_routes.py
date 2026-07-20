@@ -150,7 +150,8 @@ def calendar_oauth_callback(
         "grant_type":    "authorization_code",
     }, timeout=10)
     if not resp.ok:
-        raise HTTPException(status_code=400, detail=f"Token exchange failed: {resp.text}")
+        print(f"[calendar] token exchange failed: {resp.status_code} {resp.text[:500]}")
+        raise HTTPException(status_code=400, detail="Calendar authorization failed. Please try again.")
 
     data          = resp.json()
     access_token  = data.get("access_token")

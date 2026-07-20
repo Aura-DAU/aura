@@ -136,4 +136,3 @@ def test_both_dau_and_daiict_domains_accepted():
             res = client.get(f"/internal/resolve-identity?email=user@{domain}",
                              headers=GOOD_HEADERS)
         assert res.status_code == 200, f"domain {domain} should be accepted"
-

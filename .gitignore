@@ -167,3 +167,6 @@ server/rag/.venv/
 
 # Local UI mocks / chat state
 aura/db/
+
+# Local documentation / cluster reports
+docs/
