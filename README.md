@@ -3,9 +3,9 @@
 A Progressive Web App for **Dhirubhai Ambani University**, enriched with AI.
 
 > [!IMPORTANT]
-> This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **Prof. Arpit Rana**.
+> This project is built in collaboration with **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **Prof. Arpit Rana**.
 
-> [!WARNING]
+> [!NOTE]
 > **A note for future GDG On Campus & AI Club members:** please take care of this project and keep it alive. Do not delete this file or the project — maintain it, hand it over cleanly to the next batch, and keep the ownership, setup, and contribution notes above up to date.
 
 > **Project Status (Notion):** https://www.notion.so/Dhirubhai-Ambani-University-PWA-Checklist-36d37054896680329226c5b61049b176
@@ -150,7 +150,7 @@ PRs are **squash-merged** into `main`. Direct pushes to `main` are blocked.
 
 ## Credits
 
-Built with ❤️ by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **Prof. Arpit Rana**.
+Built with ❤️ by the two best technical clubs **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University.
 
 ## License
 
