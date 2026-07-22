@@ -28,12 +28,7 @@ git remote add upstream https://github.com/vaishcodescape/DAU-pwa.git
 
 All work happens on personal feature branches — never commit directly to `main` or `dev`.
 
-| Pattern | Use for |
-|---------|---------|
-| `<name>/<feature>` | New features (e.g. `aditya/auth-flow`) |
-| `hotfix/<issue>` | Critical fixes that need to go straight to `main` |
-
-Create your branch from the latest `dev`:
+Create your branch from the latest `main`:
 
 ```bash
 git fetch upstream
@@ -50,7 +45,7 @@ Keep changes scoped to your feature. Each domain is owned by a sub-team — don'
 |--------|------|
 | Frontend | `src/app/`, `src/components/`, `src/hooks/`, `src/styles/` |
 | Backend / Infra | `src/lib/api/`, `src/lib/db/`, server actions, CI/CD |
-| AI | `src/lib/ai/`, prompt engineering, model evaluation |
+| Agents | `src/lib/ai/`, prompt engineering, model evaluation |
 
 ---
 
