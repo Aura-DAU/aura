@@ -1,7 +1,6 @@
 <!--
-  Base branch: pwa-demo  (NOT main)
-  All feature PRs merge into `pwa-demo` for demo purposes.
-  `main` is production and is promoted from `pwa-demo` by the team leads.
+  Base branch: main
+  All feature PRs merge into `main`.
 -->
 
 ## Summary
@@ -18,6 +17,6 @@
 
 ## Checklist
 
-- [ ] Base branch is **`pwa-demo`**
+- [ ] Base branch is **`main`**
 - [ ] `pnpm lint` and `pnpm type-check` pass
 - [ ] Linked the related issue (`Closes #<n>`)
