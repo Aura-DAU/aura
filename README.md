@@ -3,7 +3,7 @@
 A Progressive Web App for **Dhirubhai Ambani University**, enriched with AI.
 
 > [!IMPORTANT]
-> This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **Prof. Arpit Rana**.
+> This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
 
 > [!WARNING]
 > **A note for future GDG On Campus & AI Club members:** please take care of this project and keep it alive. Do not delete this file or the project — maintain it, hand it over cleanly to the next batch, and keep the ownership, setup, and contribution notes above up to date.
@@ -150,7 +150,7 @@ PRs are **squash-merged** into `main`. Direct pushes to `main` are blocked.
 
 ## Credits
 
-Built with ❤️ by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **Prof. Arpit Rana**.
+Built with ❤️ by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
 
 ## License
 
