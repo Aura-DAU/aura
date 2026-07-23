@@ -1,0 +1,65 @@
+# Auto-deploy Node 1 apps via self-hosted runner (aura-node1)
+#
+# Rebuilds ONLY aura (Next.js) + backend (FastAPI) + refreshes nginx.
+# Never restarts Postgres, Redis, or remote vLLM / Qdrant / TEI.
+#
+# Prerequisites on Node 1:
+#   1. Repo cloned at /opt/aura/app
+#   2. deploy/node1/.env configured
+#   3. Self-hosted runner installed under /opt/aura/actions-runner
+#      with label `aura-node1` (see deploy/README.md → Auto-deploy)
+#
+# This workflow is dormant until that runner is online.
+
+name: CD — Node 1 app deploy
+
+on:
+  # Manual deploy (safe default while the runner is being set up)
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to deploy (branch or tag)"
+        required: true
+        default: "main"
+        type: string
+  # Auto-deploy later: pushes to main that touch app code
+  push:
+    branches: [main]
+    paths:
+      - "aura/**"
+      - "server/**"
+      - "deploy/node1/**"
+      - "deploy/scripts/deploy-apps.sh"
+      - "deploy/nginx/**"
+      - ".github/workflows/cd-auto-deploy.yml"
+
+concurrency:
+  group: cd-node1-apps
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-apps:
+    name: Deploy aura + backend (aura-node1)
+    # Custom label registered on the Node 1 self-hosted runner.
+    # Do NOT use ubuntu-latest — deploy must run on the gateway host.
+    runs-on: [self-hosted, Linux, aura-node1]
+    timeout-minutes: 45
+
+    steps:
+      - name: Deploy application containers only
+        env:
+          AURA_APP_ROOT: /opt/aura/app
+          AURA_ENV_FILE: /opt/aura/app/deploy/node1/.env
+        run: |
+          set -euo pipefail
+          REF="${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.ref_name }}"
+          chmod +x "${AURA_APP_ROOT}/deploy/scripts/deploy-apps.sh"
+          # Pull first so the script on disk matches the commit that triggered CD
+          cd "${AURA_APP_ROOT}"
+          git fetch --prune origin
+          git checkout "${REF}"
+          git pull --ff-only origin "${REF}"
+          "${AURA_APP_ROOT}/deploy/scripts/deploy-apps.sh" "${REF}"
