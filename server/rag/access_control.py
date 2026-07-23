@@ -253,6 +253,25 @@ class AccessControlGate:
                         scope_context=f"coordinator:{program_id}",
                     )
 
+        # ── Course instructor binding: course_instructor:{code} ────────────
+        instructor_courses = [
+            b.split(":", 1)[1]
+            for b in bindings
+            if b.startswith("course_instructor:")
+        ]
+        if instructor_courses:
+            shared_via_binding = self.erp.get_shared_courses(identity.erp_id, target_identifier)
+            allowed_codes = [c for c in instructor_courses if c in shared_via_binding]
+            if allowed_codes:
+                return AccessResult(
+                    AccessDecision.ALLOWED,
+                    f"course instructor binding for {allowed_codes}",
+                    allowed_roll_numbers=[target_identifier],
+                    scope_type="course",
+                    course_codes=allowed_codes,
+                    scope_context=f"course_instructor:{','.join(allowed_codes)}",
+                )
+
         # ── Standard faculty: advisee, shared course, class advisor ─────────
         if self.erp.is_advisee(identity.erp_id, target_identifier):
             return AccessResult(

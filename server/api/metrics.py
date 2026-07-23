@@ -1,29 +1,27 @@
-"""
-metrics.py — Prometheus instrumentation for the FastAPI backend.
+# metrics.py — Prometheus instrumentation for the FastAPI backend.
 
-The architecture doc's containerization table (§Containerization and Deployment
-Strategy) names `aura-prometheus` and `aura-grafana` as two of AURA's Docker
-services, and the Node 1 hardware diagram lists Prometheus + Grafana as
-running components. Neither existed anywhere in the codebase — no
-`/metrics` endpoint, no `prometheus_client` usage. This module closes that
-gap without changing any existing request-handling code paths:
+# The architecture doc's containerization table (§Containerization and Deployment
+# Strategy) names `aura-prometheus` and `aura-grafana` as two of AURA's Docker
+# services, and the Node 1 hardware diagram lists Prometheus + Grafana as
+# running components. Neither existed anywhere in the codebase — no
+# `/metrics` endpoint, no `prometheus_client` usage. This module closes that
+# gap without changing any existing request-handling code paths:
 
-  - `REQUEST_COUNT` / `REQUEST_LATENCY`: every HTTP request, labeled by
-    route + method + status, mirroring what NGINX/FastAPI would report.
-  - `STAGE_LATENCY`: reuses the exact segments `pipeline/latency_tracker.py`
-    already collects per /chat request (guardrail_time, retrieval_time,
-    generation_time, total_time) — the same "critical path" breakdown
-    the doc's §Understanding the Critical Path and §Estimating the Cost
-    of a Single Request sections describe — so Grafana can plot the doc's
-    2–4 second end-to-end budget against real traffic.
-  - `INFERENCE_NODE_REQUESTS`: increments per vLLM node chosen by
-    InferenceRouter, so the "least-loaded node" behaviour described in
-    §13 (Inference Router) is visible/auditable rather than opaque.
+#   - `REQUEST_COUNT` / `REQUEST_LATENCY`: every HTTP request, labeled by
+#     route + method + status, mirroring what NGINX/FastAPI would report.
+#   - `STAGE_LATENCY`: reuses the exact segments `pipeline/latency_tracker.py`
+#     already collects per /chat request (guardrail_time, retrieval_time,
+#     generation_time, total_time) — the same "critical path" breakdown
+#     the doc's §Understanding the Critical Path and §Estimating the Cost
+#     of a Single Request sections describe — so Grafana can plot the doc's
+#     2–4 second end-to-end budget against real traffic.
+#   - `INFERENCE_NODE_REQUESTS`: increments per vLLM node chosen by
+#     InferenceRouter, so the "least-loaded node" behaviour described in
+#     §13 (Inference Router) is visible/auditable rather than opaque.
 
-`/metrics` is intentionally unauthenticated (Prometheus scrapes it directly,
-container-to-container, and it is never routed through the public NGINX
-edge — see deploy/nginx.conf, which only proxies /api/*, /backend/, and /).
-"""
+# `/metrics` is intentionally unauthenticated (Prometheus scrapes it directly,
+# container-to-container, and it is never routed through the public NGINX
+# edge — see deploy/nginx.conf, which only proxies /api/*, /backend/, and /).
 
 from prometheus_client import (
     Counter,

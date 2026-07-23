@@ -268,3 +268,29 @@ def test_own_data_always_allowed_regardless_of_role():
             FakeIdentity("X1", role), INTENT, None)
         assert r.decision == AccessDecision.ALLOWED, f"Failed for role: {role}"
         assert r.scope_type == "self"
+
+
+def test_course_instructor_binding_allows_shared_course_student():
+    r = make_gate(
+        FakeERP(shared_courses=["IT205"]),
+        ["course_instructor:IT205"],
+    ).evaluate(FakeIdentity("F1", "faculty"), INTENT, "S3")
+    assert r.decision == AccessDecision.ALLOWED
+    assert r.scope_type == "course"
+    assert "IT205" in r.course_codes
+
+
+def test_course_instructor_binding_denied_without_shared_course():
+    r = make_gate(
+        FakeERP(shared_courses=[]),
+        ["course_instructor:IT205"],
+    ).evaluate(FakeIdentity("F1", "faculty"), INTENT, "S99")
+    assert r.decision == AccessDecision.DENIED
+
+
+def test_admin_alias_maps_to_admin_staff_not_superadmin():
+    from pipeline.retrieval.rbac import get_allowed_roles
+    roles = set(get_allowed_roles("admin"))
+    assert "admin_staff" in roles
+    assert "superadmin" not in roles
+    assert "faculty_convenor_ug" not in roles

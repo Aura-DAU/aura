@@ -43,7 +43,8 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
   CMD curl -fsS "http://localhost:${PORT}/health" || exit 1
 
-# Single worker by default — the RAG pipeline (embeddings/Pinecone client)
-# is lazily initialised per-process on first /chat call, so extra workers
-# multiply cold-start memory. Override WEB_CONCURRENCY to scale out.
+# Default workers via WEB_CONCURRENCY — the RAG pipeline (Qdrant client,
+# in-process embedder/reranker, LangGraph orchestrator) is lazily
+# initialised per-process on first /chat call, so extra workers multiply
+# cold-start memory. Override WEB_CONCURRENCY to scale out.
 CMD ["sh", "-c", "gunicorn api.api:app -k uvicorn.workers.UvicornWorker --workers ${WEB_CONCURRENCY:-2} --bind 0.0.0.0:${PORT} --timeout 120"]

@@ -1,15 +1,13 @@
-"""
-auth.py — FastAPI identity middleware (SSO / Next.js JWT architecture).
+# auth.py — FastAPI identity middleware (SSO / Next.js JWT architecture).
 
-FastAPI never issues tokens. It only verifies the short-lived internal JWT
-that Next.js mints after Google SSO, then attaches to every request.
+# FastAPI never issues tokens. It only verifies the short-lived internal JWT
+# that Next.js mints after Google SSO, then attaches to every request.
 
-JWT claim shape (minted by Next.js):
-  { erpId, role, department, exp }
-  role is the BROAD role from user_identity_map: student | faculty | admin
-  Fine-grained roles (faculty_coord, dean_students, etc.) are resolved
-  server-side via role_bindings — see access_control.resolve_effective_role()
-"""
+# JWT claim shape (minted by Next.js):
+#   { erpId, role, department, exp }
+#   role is the BROAD role from user_identity_map: student | faculty | admin
+#   Fine-grained roles (faculty_coord, dean_students, etc.) are resolved
+#   server-side via role_bindings — see access_control.resolve_effective_role()
 
 import os
 from dataclasses import dataclass
