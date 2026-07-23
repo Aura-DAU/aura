@@ -71,7 +71,7 @@ deploy/
 ├── scripts/                   # CD helpers (app-only deploy + Actions runner install)
 │   ├── deploy-apps.sh
 │   └── install-actions-runner.sh
-└── monitoring/                # Prometheus & Grafana Monitoring Configuration
+└── monitoring/                # Prometheus & Grafana Monitoring
     ├── prometheus.yml
     └── grafana-datasource.yml
 ```
@@ -151,6 +151,42 @@ sets this). The CD workflow targets:
 runs-on: [self-hosted, Linux, aura-node1]
 ```
 
+### Git auth on Node 1 (required)
+
+CD runs headless. An HTTPS clone with no credentials fails with:
+
+```text
+fatal: could not read Username for 'https://github.com': No such device or address
+```
+
+**CD path (recommended):** the workflow passes a token into `deploy-apps.sh`
+via an ephemeral `url.*.insteadOf` rewrite (never written into
+`/opt/aura/app/.git/config`).
+
+1. Prefer a **repository secret** named `AURA_DEPLOY_GIT_TOKEN` (PAT with
+   Contents: Read on this repo).  
+   GitHub → Settings → Secrets and variables → Actions → New repository secret.
+2. If that secret is unset, CD falls back to the job’s built-in `github.token`.
+
+Never put PATs in workflow YAML, git remotes, or `deploy/node1/.env`. If a
+token was pasted into chat or a ticket, **revoke it immediately** and create a
+new one.
+
+**Manual deploys:** either export a fine-scoped PAT as `GITHUB_TOKEN` for that
+shell, or switch the checkout to SSH with a **read-only deploy key**:
+
+```bash
+# On Node 1 (once)
+ssh-keygen -t ed25519 -f /opt/aura/.ssh/github_deploy -N ""
+# Add /opt/aura/.ssh/github_deploy.pub as a Deploy key (read-only) on the repo
+cd /opt/aura/app
+git remote set-url origin git@github.com:ossdaiict/DAU-pwa.git
+GIT_SSH_COMMAND="ssh -i /opt/aura/.ssh/github_deploy -o IdentitiesOnly=yes" \
+  git fetch --prune origin
+```
+
+Do **not** put `GITHUB_TOKEN` / PATs / `RUNNER_TOKEN` in `deploy/node1/.env`.
+
 ### 2. What CD runs
 
 Workflow: [`.github/workflows/cd-auto-deploy.yml`](../.github/workflows/cd-auto-deploy.yml)
@@ -163,7 +199,7 @@ Workflow: [`.github/workflows/cd-auto-deploy.yml`](../.github/workflows/cd-auto-
 Script: [`deploy/scripts/deploy-apps.sh`](scripts/deploy-apps.sh)
 
 ```bash
-# Equivalent manual deploy on Node 1
+# Equivalent manual deploy on Node 1 (needs SSH deploy key or GITHUB_TOKEN)
 /opt/aura/app/deploy/scripts/deploy-apps.sh main
 ```
 

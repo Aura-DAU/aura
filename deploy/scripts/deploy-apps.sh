@@ -38,11 +38,24 @@ if [[ ! -f "${COMPOSE_DIR}/docker-compose.yml" ]]; then
   exit 1
 fi
 
+# Self-hosted runners have no interactive HTTPS credentials. Prefer either:
+#   - GITHUB_TOKEN / GH_TOKEN in the environment (CD workflow), or
+#   - SSH remote + read-only deploy key on the host (manual deploys).
+git_with_auth() {
+  if [[ -n "${GITHUB_TOKEN:-${GH_TOKEN:-}}" ]]; then
+    local token="${GITHUB_TOKEN:-${GH_TOKEN}}"
+    # Ephemeral — never writes the token into .git/config remotes.
+    git -c "url.https://x-access-token:${token}@github.com/.insteadOf=https://github.com/" "$@"
+  else
+    git "$@"
+  fi
+}
+
 echo "==> Updating ${APP_ROOT} to ${REF}"
 cd "${APP_ROOT}"
-git fetch --prune origin
+git_with_auth fetch --prune origin
 git checkout "${REF}"
-git pull --ff-only origin "${REF}"
+git_with_auth pull --ff-only origin "${REF}"
 
 echo "==> Rebuilding application services only (aura, backend)"
 cd "${COMPOSE_DIR}"
