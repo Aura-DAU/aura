@@ -47,8 +47,7 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Enforce pnpm — other package managers' lockfiles must not be committed
-package-lock.json
+# npm is the lockfile source of truth for aura/ (package-lock.json tracked)
 yarn.lock
 
 # Snowpack dependency directory (https://snowpack.dev/)

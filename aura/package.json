@@ -2,9 +2,7 @@
   "name": "AURA",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@10.12.1",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -22,7 +20,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.16.0",
-    "next": "16.2.6",
+    "next": "16.2.11",
     "next-auth": "^4.24.14",
     "react": "^19",
     "react-dom": "^19",
@@ -48,20 +46,24 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.3",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.10",
+    "eslint-config-next": "^16.2.11",
     "jsdom": "^29.1.1",
     "jsonwebtoken": "^9.0.3",
-    "postcss": "^8.5",
+    "postcss": "8.5.16",
     "serwist": "^9.5.11",
     "tailwindcss": "^4.2.0",
     "typescript": "5.7.3",
     "vitest": "^4.1.10"
   },
-  "pnpm": {
-    "approvedBuilds": {
-      "msw": "2.14.6",
-      "sharp": "0.34.5",
-      "unrs-resolver": "1.12.2"
-    }
+  "overrides": {
+    "@hono/node-server": "2.0.11",
+    "body-parser": "2.3.0",
+    "brace-expansion@5": "5.0.7",
+    "fast-uri": "3.1.4",
+    "hono": "4.12.31",
+    "js-yaml": "4.3.0",
+    "postcss": "8.5.16",
+    "sharp": "0.35.3",
+    "uuid": "11.1.1"
   }
 }

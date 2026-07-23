@@ -25,33 +25,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          # Match local / lockfile generation (pnpm 10 workspace settings).
-          version: 10
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: pnpm
-          cache-dependency-path: aura/pnpm-lock.yaml
+          cache: npm
+          cache-dependency-path: aura/package-lock.json
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Lint
-        run: pnpm lint
+        run: npm run lint
 
       - name: Type-check
-        run: pnpm type-check
+        run: npm run type-check
 
       - name: Unit tests
-        run: pnpm test
+        run: npm test
 
       - name: Production build
-        run: pnpm build
+        run: npm run build
         env:
           NEXTAUTH_SECRET: ci-nextauth-secret
           INTERNAL_JWT_SECRET: ci-internal-jwt-secret
