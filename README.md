@@ -1,12 +1,36 @@
-# DAU PWA
+# DAU PWA — AURA
 
-A Progressive Web App for Dhirubhai Ambani University, enriched with AI.
+A Progressive Web App for **Dhirubhai Ambani University**, enriched with AI.
+
+> [!IMPORTANT]
+> This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
+
+> [!WARNING]
+> **A note for future GDG On Campus & AI Club members:** please take care of this project and keep it alive. Do not delete this file or the project — maintain it, hand it over cleanly to the next batch, and keep the ownership, setup, and contribution notes above up to date.
 
 > **Project Status (Notion):** https://www.notion.so/Dhirubhai-Ambani-University-PWA-Checklist-36d37054896680329226c5b61049b176
 
 ---
 
+## Overview
+
+DAU PWA (codename **AURA**) is a monorepo with two parts:
+
+| Directory | What it is | Stack |
+|-----------|------------|-------|
+| [`aura/`](./aura) | The installable PWA frontend | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, shadcn/ui, Serwist (service worker), NextAuth |
+| [`server/`](./server) | API gateway + AI/RAG backend | FastAPI, PostgreSQL, RAG pipeline (Pinecone + Groq) |
+
+See [`server/README.md`](./server/README.md) for backend-specific setup.
+
+---
+
 ## Getting Started
+
+### Prerequisites
+
+- **Node.js** 20+ and **pnpm** 10+ (frontend)
+- **Python** 3.11+ (backend)
 
 ### 1. Fork & clone
 
@@ -20,24 +44,47 @@ cd DAU-pwa
 Add the upstream remote so you can pull future changes:
 
 ```bash
-git remote add upstream https://github.com/vaishcodescape/DAU-pwa.git
+git remote add upstream https://github.com/ossdaiict/DAU-pwa.git
 ```
 
-# 
+### 2. Run the frontend
+
+```bash
+cd aura
+pnpm install
+cp .env.example .env.local   # fill in the documented values
+pnpm dev                     # http://localhost:3000
+```
+
+### 3. Run the backend
+
+```bash
+cd server/rag
+cp .env.example .env         # fill AUTH_DB_URL, GROQ, Pinecone, JWT secrets
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd ..
+python db/migrate.py
+uvicorn api.api:app --host 127.0.0.1 --port 8000 --reload
+```
+
+---
+
 ## Branch Naming
 
-All work happens on personal feature branches — never commit directly to `main` or `dev`.
+All work happens on personal feature branches — **never commit directly to `main`**.
 
 | Pattern | Use for |
 |---------|---------|
 | `<name>/<feature>` | New features (e.g. `aditya/auth-flow`) |
 | `hotfix/<issue>` | Critical fixes that need to go straight to `main` |
 
-Create your branch from the latest `dev`:
+Create your branch from the latest `main`:
 
 ```bash
 git fetch upstream
-git checkout -b <name>/<feature> upstream/dev
+git checkout -b <name>/<feature> upstream/main
 ```
 
 ---
@@ -48,9 +95,9 @@ Keep changes scoped to your feature. Each domain is owned by a sub-team — don'
 
 | Domain | Owns |
 |--------|------|
-| Frontend | `src/app/`, `src/components/`, `src/hooks/`, `src/styles/` |
-| Backend / Infra | `src/lib/api/`, `src/lib/db/`, server actions, CI/CD |
-| AI | `src/lib/ai/`, prompt engineering, model evaluation |
+| Frontend | `aura/app/`, `aura/components/`, `aura/hooks/` |
+| Backend / Infra | `server/api/`, `server/db/`, CI/CD |
+| AI | `server/rag/`, prompt engineering, model evaluation |
 
 ---
 
@@ -58,7 +105,13 @@ Keep changes scoped to your feature. Each domain is owned by a sub-team — don'
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-# Examples
+```
+<type>(<scope>): <short description>
+```
+
+Examples:
+
+```
 feat(auth): add OTP login via university email
 fix(dashboard): correct timetable timezone offset
 perf(ai): enable prompt caching on search handler
@@ -76,26 +129,28 @@ Subject line must be 72 characters or fewer. For `fix` commits, add a body expla
    git push origin <name>/<feature>
    ```
 
-2. Open a PR on GitHub targeting the **`dev`** branch (not `main`).
+2. Open a PR on GitHub targeting the **`main`** branch.
 
 3. Fill in the PR template: summary, test plan, and screenshots for any UI changes.
 
 4. Link the related issue: `Closes #<issue-number>`.
 
-5. Request a review. Merging requires:
-   - **1 approval** for `dev`
-   - **2 approvals** for `main` (leads only)
+5. Request a review. Merging into `main` requires **at least 1 approval**.
 
-PRs are **squash-merged** into `dev`. Direct pushes to `main` are blocked.
+PRs are **squash-merged** into `main`. Direct pushes to `main` are blocked.
 
 ---
-    
+
 ## Further Reading
 
 - [`CLAUDE.md`](./CLAUDE.md) — full coding rules and conventions
 - [`AGENTS.md`](./AGENTS.md) — guidelines for AI coding agents on this project
 
 ---
+
+## Credits
+
+Built with ❤️ by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
 
 ## License
 

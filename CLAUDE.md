@@ -121,8 +121,8 @@ See `AGENTS.md` for the full agent behaviour ruleset.
 
 | Pattern | Purpose |
 |---------|---------|
-| `main` | Production-ready, protected. Promoted from `pwa-demo`; no direct pushes. |
-| `pwa-demo` | Default & integration branch for the demo. **All PRs target `pwa-demo`.** Protected. |
+| `main` | Default & integration branch. **All PRs target `main`.** Protected. |
+| `pwa-demo` | Legacy demo integration branch (kept in sync historically; no longer the default). |
 | `<name>/<feature>` | Personal feature branches (e.g. `aditya/auth-flow`) |
 | `hotfix/<issue>` | Critical fixes that go directly to `main` via fast PR |
 
@@ -144,14 +144,14 @@ Examples:
 
 - Subject line ≤ 72 characters.
 - Body optional, but required for `fix` commits — explain the root cause.
-- No "WIP" commits on `pwa-demo` or `main`.
+- No "WIP" commits on `main`.
 
 ### Pull Requests
 
 - PR title mirrors the commit format.
 - Fill the PR template: summary, test plan, screenshots for UI changes.
-- Minimum 1 review approval before merge to `pwa-demo`; 2 for `main`.
-- Squash-merge feature branches into `pwa-demo`. Merge commits for `pwa-demo` → `main`.
+- Minimum 1 review approval before merge to `main`.
+- Squash-merge feature branches into `main`.
 - Link the related GitHub issue (`Closes #<n>`).
 
 ---
