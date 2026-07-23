@@ -29,17 +29,22 @@ This directory contains the production deployment manifests for the **AURA Distr
         │ HTTP (Inference Router)                              │ HTTP (Vector & Rerank Client)                        │
         │                                                      │                                                      │
 ┌───────▼───────────────────────────┐      ┌───────────────────▼───────────────────────────┐      ┌────────────────────▼──────────────────────────┐
-│ NODE 2: vLLM NODE 1 (GPU)         │      │ NODE 3: vLLM NODE 2 (GPU)         │      │ NODE 4: SEARCH & VECTOR ENGINE (GPU/CPU)      │
+│ NODE 2: vLLM NODE 1 (GPU)         │      │ NODE 3: vLLM NODE 2 (GPU)         │      │ NODE 4: RETRIEVAL & INFRASTRUCTURE NODE       │
 │                                   │      │                                   │      │                                               │
 │  ┌─────────────────────────────┐  │      │  ┌─────────────────────────────┐  │      │  ┌──────────────┐       ┌──────────────────┐  │
 │  │ vLLM Engine (Qwen3-32B)     │  │      │  │ vLLM Engine (Qwen3-32B)     │  │      │  │ Qdrant Vector│       │ Embedding Service│  │
 │  │ OpenAI API (:8000)          │  │      │  │ OpenAI API (:8000)          │  │      │  │ DB (:6333)   │       │ TEI / FastEmbed  │  │
 │  └─────────────────────────────┘  │      │  └─────────────────────────────┘  │      │  └──────────────┘       └────────┬─────────┘  │
 └───────────────────────────────────┘      └───────────────────────────────────┘      │                                  │            │
-                                                                                      │                         ┌────────▼─────────┐  │
-                                                                                      │                         │ Reranker Service │  │
-                                                                                      │                         │ TEI / BGE-v2     │  │
-                                                                                      │                         └──────────────────┘  │
+                                                                                      │  ┌──────────────┐       ┌────────▼─────────┐  │
+                                                                                      │  │  Prometheus  │       │ Reranker Service │  │
+                                                                                      │  │   (:9090)    │       │ TEI / BGE-v2     │  │
+                                                                                      │  └──────┬───────┘       └──────────────────┘  │
+                                                                                      │         │                                     │
+                                                                                      │  ┌──────▼───────┐                             │
+                                                                                      │  │   Grafana    │                             │
+                                                                                      │  │   (:3000)    │                             │
+                                                                                      │  └──────────────┘                             │
                                                                                       └───────────────────────────────────────────────┘
 ```
 
@@ -58,7 +63,7 @@ deploy/
 ├── node3/                     # Node 3: vLLM GPU Node 2
 │   ├── docker-compose.yml
 │   └── .env.node3.example
-├── node4/                     # Node 4: Qdrant & Embedding/Reranker Microservice
+├── node4/                     # Node 4: Search Engine (Qdrant, Embedding/Reranker) + Monitoring (Prometheus, Grafana)
 │   ├── docker-compose.yml
 │   └── .env.node4.example
 ├── nginx/                     # Reverse Proxy & SSL Configuration
@@ -75,14 +80,15 @@ deploy/
 
 ## Quick Start Deployment Guide
 
-### Node 4: Search & Vector Engine (Start First)
+### Node 4: Search Engine & Monitoring Stack (Start First)
 On **Node 4**:
 ```bash
 cd deploy/node4
 cp .env.node4.example .env
+# Edit .env and update Prometheus scrape targets in ../monitoring/prometheus.yml with actual LAN IPs!
 docker compose up -d --build
 ```
-*Exposes:* Qdrant on `:6333` and Embedding/Reranker service on `:8001`.
+*Exposes:* Qdrant on `:6333`, Embedding/Reranker service on `:8001`, Prometheus on `:9090`, and Grafana on `:3000`.
 
 ### Node 2 & Node 3: vLLM GPU Nodes
 On **Node 2** (GPU Box 1):
@@ -208,4 +214,13 @@ curl -fsS https://localhost/backend/health
 
 # Check logs to confirm multi-node connections
 docker compose -f deploy/node1/docker-compose.yml logs backend | grep "InferenceRouter"
+```
+
+On **Node 4**:
+```bash
+# Verify Prometheus Scrape Targets
+curl -fsS http://localhost:9090/-/healthy
+
+# Verify Grafana
+curl -fsS http://localhost:3000/api/health
 ```
