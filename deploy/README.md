@@ -63,6 +63,9 @@ deploy/
 │   └── .env.node4.example
 ├── nginx/                     # Reverse Proxy & SSL Configuration
 │   └── nginx.conf
+├── scripts/                   # CD helpers (app-only deploy + Actions runner install)
+│   ├── deploy-apps.sh
+│   └── install-actions-runner.sh
 └── monitoring/                # Prometheus & Grafana Monitoring
     ├── prometheus.yml
     └── grafana-datasource.yml
@@ -108,6 +111,57 @@ docker compose up -d --build
 
 ---
 
+## Auto-deploy (optional — Node 1 self-hosted runner)
+
+For later CD: rebuild **only** `aura` + `backend` (+ refresh `nginx`) on every
+qualified push. **Never** restarts Postgres, Redis, or remote vLLM / Qdrant.
+
+### 1. Install the runner on Node 1
+
+```bash
+# On Node 1 — create dirs if needed
+sudo mkdir -p /opt/aura/actions-runner /opt/aura/app
+sudo chown -R "$USER:$USER" /opt/aura
+
+# Clone once (if not already present)
+git clone https://github.com/ossdaiict/DAU-pwa.git /opt/aura/app
+
+# Registration token: GitHub → Settings → Actions → Runners → New self-hosted runner
+export RUNNER_TOKEN=...          # short-lived
+export GITHUB_REPO_URL=https://github.com/ossdaiict/DAU-pwa
+/opt/aura/app/deploy/scripts/install-actions-runner.sh
+
+# Prefer a systemd service so the runner survives reboot
+cd /opt/aura/actions-runner
+sudo ./svc.sh install
+sudo ./svc.sh start
+```
+
+The runner must be registered with label **`aura-node1`** (the install script
+sets this). The CD workflow targets:
+
+```yaml
+runs-on: [self-hosted, Linux, aura-node1]
+```
+
+### 2. What CD runs
+
+Workflow: [`.github/workflows/cd-auto-deploy.yml`](../.github/workflows/cd-auto-deploy.yml)
+
+| Triggers | Action |
+|----------|--------|
+| `workflow_dispatch` (manual) | Deploy chosen ref |
+| `push` to `main` touching `aura/**`, `server/**`, `deploy/node1/**`, … | Auto-deploy |
+
+Script: [`deploy/scripts/deploy-apps.sh`](scripts/deploy-apps.sh)
+
+```bash
+# Equivalent manual deploy on Node 1
+/opt/aura/app/deploy/scripts/deploy-apps.sh main
+```
+
+Uses `docker compose up -d --build --no-deps aura backend` so database
+containers are not touched.
 ## Health Checks & Verification
 
 On **Node 1**:
