@@ -147,7 +147,3 @@ PRs are **squash-merged** into `main`. Direct pushes to `main` are blocked.
 ## Credits
 
 Built with ❤️ by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
-
-## License
-
-[Apache 2.0](./LICENSE)
