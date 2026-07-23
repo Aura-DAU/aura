@@ -136,6 +136,7 @@ cd /opt/aura/actions-runner
 sudo ./svc.sh install
 sudo ./svc.sh start
 ```
+*Exposes:* OpenAI-compatible vLLM endpoints on port `:8000`.
 
 The runner must be registered with label **`aura-node1`** (the install script
 sets this). The CD workflow targets:
