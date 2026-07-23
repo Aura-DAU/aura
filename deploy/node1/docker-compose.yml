@@ -127,35 +127,6 @@ services:
     networks:
       - aura-internal
 
-  prometheus:
-    image: prom/prometheus:latest
-    restart: unless-stopped
-    volumes:
-      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - prometheus-data:/prometheus
-    expose:
-      - "9090"
-    depends_on:
-      backend:
-        condition: service_healthy
-    networks:
-      - aura-internal
-
-  grafana:
-    image: grafana/grafana:latest
-    restart: unless-stopped
-    environment:
-      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
-    volumes:
-      - grafana-data:/var/lib/grafana
-      - ../monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
-    expose:
-      - "3000"
-    depends_on:
-      - prometheus
-    networks:
-      - aura-internal
-
 networks:
   aura-edge:
   aura-internal:
@@ -165,5 +136,3 @@ volumes:
   redis-data:
   aura-vault:
   aura-logs:
-  prometheus-data:
-  grafana-data:
