@@ -264,7 +264,12 @@ class AuraChatGraph:
             course_code = (access_result.course_codes[0] if access_result.course_codes else None)
             erp_data = {"aggregate": self.erp_connector.get_class_aggregate(course_code) if course_code else {}}
         else:
-            erp_data = self._fetch_erp_data(classification["erp_fields"], target_erp_id, access_result)
+            erp_data = self._fetch_erp_data(
+                classification["erp_fields"],
+                target_erp_id,
+                access_result,
+                requester_erp_id=identity.erp_id,
+            )
 
         state["erp_context"] = self.context_builder.build(erp_data, identity, access_result)
         state["is_personal"] = True
@@ -333,18 +338,40 @@ class AuraChatGraph:
         result = self.erp_connector.find_student_by_name(target_label)
         return result["roll_number"] if result else None
 
-    def _fetch_erp_data(self, fields: list, roll_number: Optional[str], access_result) -> dict:
+    def _fetch_erp_data(
+        self,
+        fields: list,
+        roll_number: Optional[str],
+        access_result,
+        requester_erp_id: Optional[str] = None,
+    ) -> dict:
         if not roll_number:
             return {}
         data = {}
+        scope = getattr(access_result, "scope_type", None)
         course_scope = (access_result.course_codes[0] if access_result.course_codes else None)
-        if "profile" in fields: data["profile"] = self.erp_connector.get_student_profile(roll_number)
-        if "cgpa" in fields: data["cgpa"] = self.erp_connector.get_cgpa(roll_number)
-        if "grades" in fields: data["grades"] = self.erp_connector.get_grades(roll_number, course_code=course_scope)
-        if "attendance" in fields: data["attendance"] = self.erp_connector.get_attendance(roll_number, course_code=course_scope)
-        if "advisees" in fields and getattr(access_result, "scope_type", None) in ("advisee", "all", "batch"):
-            data["advisees"] = self.erp_connector.get_advisees(roll_number)
-        if "courses" in fields: data["courses"] = self.erp_connector.get_faculty_courses(roll_number)
+
+        # Course-scoped access: only that course's grades/attendance — never
+        # overall CGPA or full profile (would overshare vs the teaching link).
+        if scope == "course":
+            if "grades" in fields:
+                data["grades"] = self.erp_connector.get_grades(roll_number, course_code=course_scope)
+            if "attendance" in fields:
+                data["attendance"] = self.erp_connector.get_attendance(roll_number, course_code=course_scope)
+            return data
+
+        if "profile" in fields:
+            data["profile"] = self.erp_connector.get_student_profile(roll_number)
+        if "cgpa" in fields:
+            data["cgpa"] = self.erp_connector.get_cgpa(roll_number)
+        if "grades" in fields:
+            data["grades"] = self.erp_connector.get_grades(roll_number, course_code=course_scope)
+        if "attendance" in fields:
+            data["attendance"] = self.erp_connector.get_attendance(roll_number, course_code=course_scope)
+        if "advisees" in fields and scope in ("advisee", "all", "batch") and requester_erp_id:
+            data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
+        if "courses" in fields and requester_erp_id:
+            data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
         return data
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────

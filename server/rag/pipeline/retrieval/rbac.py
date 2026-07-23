@@ -8,7 +8,9 @@ def get_allowed_roles(user_role: str) -> list[str]:
         "faculty": "faculty_general",
         "guest": "public",
         "admin_full": "superadmin",
-        "admin": "superadmin",
+        # Broad JWT "admin" resolves to admin_staff via resolve_effective_role;
+        # do not elevate bare "admin" to superadmin for document DLS.
+        "admin": "admin_staff",
     }
     canonical_role = alias_map.get(user_role, user_role)
     return list(ROLE_ALLOWED_SETS.get(canonical_role, {"public"}))

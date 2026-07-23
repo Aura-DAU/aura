@@ -1,25 +1,4 @@
-"""
-InferenceRouter — Phase B migration: replaces key_manager.KeyManager's
-Groq-API-key rotation with the "Inference Router" the architecture doc
-describes (§13): it selects the least-loaded of N self-hosted vLLM nodes,
-retries failed requests on a different node, and hides the physical
-topology from every caller — callers just get an OpenAI-compatible client
-and never know which node answered.
-
-vLLM's OpenAI-compatible server (`vllm serve ... `) speaks the exact same
-`chat.completions.create(model=, messages=, temperature=, top_p=...)`
-interface the `groq` SDK does (Groq's SDK is itself an OpenAI-API-shaped
-fork), so every existing call site (`client.chat.completions.create(...)`)
-keeps working unmodified — only the client construction changes.
-
-Two usage patterns, matching the two ways KeyManager used to be used:
-  - `InferenceRouter.call_with_rotation(fn)` — per-request routing +
-    automatic retry/failover across nodes (generation, query rewriting,
-    planning).
-  - `InferenceRouter.get_client()` — a single client bound to whichever
-    node is currently least loaded, for callers that hold a client for
-    their singleton's whole lifetime (guardrails, intent router).
-"""
+# InferenceRouter
 
 import os
 import re
