@@ -71,26 +71,47 @@ class Reranker:
                 [query, text]
             )
 
-        inputs = self.tokenizer(
-            pairs,
-            padding=True,
-            truncation=True,
-            max_length=512,
-            return_tensors="pt"
-        )
+        reranker_service_url = os.getenv("RERANKER_SERVICE_URL")
+        cross_scores = None
 
-        inputs = {k: v.to(self.device) for k, v in inputs.items()}
-
-        with torch.no_grad():
-
-            cross_scores = (
-                self.model(
-                    **inputs
+        if reranker_service_url:
+            try:
+                import requests
+                resp = requests.post(
+                    f"{reranker_service_url.rstrip('/')}/rerank",
+                    json={"pairs": pairs},
+                    timeout=10
                 )
-                .logits
-                .squeeze(-1)
-                .tolist()
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if "scores" in data:
+                        cross_scores = data["scores"]
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning("Remote reranker service failed: %s. Falling back to local model.", e)
+
+        if cross_scores is None:
+            inputs = self.tokenizer(
+                pairs,
+                padding=True,
+                truncation=True,
+                max_length=512,
+                return_tensors="pt"
             )
+
+            inputs = {k: v.to(self.device) for k, v in inputs.items()}
+
+            with torch.no_grad():
+                cross_scores = (
+                    self.model(
+                        **inputs
+                    )
+                    .logits
+                    .squeeze(-1)
+                    .tolist()
+                )
+                if isinstance(cross_scores, float):
+                    cross_scores = [cross_scores]
 
         reranked = []
 

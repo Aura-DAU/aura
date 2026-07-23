@@ -69,20 +69,41 @@ class Retriever:
         if os.getenv("DISABLE_DLS_FILTER", os.getenv("DISABLE_PINECONE_DLS_FILTER", "false")).lower() == "true":
             pinecone_filter = None
         
-        query_embedding = self.model.encode(
-            [
-                "Represent this sentence for searching relevant passages: "
-                + query
-            ],
-            normalize_embeddings=True,
-            convert_to_numpy=True
+        query_text = (
+            "Represent this sentence for searching relevant passages: "
+            + query
         )
+        embedding_service_url = os.getenv("EMBEDDING_SERVICE_URL")
+        query_embedding_list = None
+
+        if embedding_service_url:
+            try:
+                import requests
+                resp = requests.post(
+                    f"{embedding_service_url.rstrip('/')}/embed",
+                    json={"texts": [query_text], "normalize": True},
+                    timeout=5
+                )
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if "embeddings" in data and len(data["embeddings"]) > 0:
+                        query_embedding_list = data["embeddings"][0]
+            except Exception as e:
+                logger.warning("Remote embedding service failed: %s. Falling back to local model.", e)
+
+        if query_embedding_list is None:
+            query_embedding = self.model.encode(
+                [query_text],
+                normalize_embeddings=True,
+                convert_to_numpy=True
+            )
+            query_embedding_list = query_embedding[0].tolist()
 
         dense_results = []
         if self.index:
             try:
                 results = self.index.query(
-                    vector=query_embedding[0].tolist(),
+                    vector=query_embedding_list,
                     top_k=top_k,
                     include_metadata=True,
                     filter=pinecone_filter

@@ -1,0 +1,46 @@
+# AURA Distributed Cluster — Node 4 (Search & Vector Engine)
+# Services: Qdrant Vector DB & Standalone Embedding/Reranker Microservice
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    networks:
+      - aura-search-net
+
+  embedding-reranker:
+    build:
+      context: ../../services/embedding-reranker
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - EMBEDDING_MODEL_NAME=${EMBEDDING_MODEL_NAME:-BAAI/bge-m3}
+      - RERANKER_MODEL_NAME=${RERANKER_MODEL_NAME:-BAAI/bge-reranker-v2-m3}
+      - RERANKER_DEVICE=${RERANKER_DEVICE:-cpu}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8001/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - aura-search-net
+
+networks:
+  aura-search-net:
+
+volumes:
+  qdrant-storage:
