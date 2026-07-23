@@ -51,9 +51,9 @@ git remote add upstream https://github.com/ossdaiict/DAU-pwa.git
 
 ```bash
 cd aura
-pnpm install
+npm install
 cp .env.example .env.local   # fill in the documented values
-pnpm dev                     # http://localhost:3000
+npm dev                     # http://localhost:3000
 ```
 
 ### 3. Run the backend
@@ -75,10 +75,6 @@ uvicorn api.api:app --host 127.0.0.1 --port 8000 --reload
 
 All work happens on personal feature branches — **never commit directly to `main`**.
 
-| Pattern | Use for |
-|---------|---------|
-| `<name>/<feature>` | New features (e.g. `aditya/auth-flow`) |
-| `hotfix/<issue>` | Critical fixes that need to go straight to `main` |
 
 Create your branch from the latest `main`:
 
@@ -97,7 +93,7 @@ Keep changes scoped to your feature. Each domain is owned by a sub-team — don'
 |--------|------|
 | Frontend | `aura/app/`, `aura/components/`, `aura/hooks/` |
 | Backend / Infra | `server/api/`, `server/db/`, CI/CD |
-| AI | `server/rag/`, prompt engineering, model evaluation |
+| Agents | `server/rag/`, prompt engineering, model evaluation |
 
 ---
 
