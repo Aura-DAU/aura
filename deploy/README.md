@@ -126,6 +126,12 @@ sudo chown -R "$USER:$USER" /opt/aura
 # Clone once (if not already present)
 git clone https://github.com/ossdaiict/DAU-pwa.git /opt/aura/app
 
+# Node 1 compose env (required for CD) — pick one:
+cp /opt/aura/app/deploy/node1/.env.node1.example /opt/aura/app/deploy/node1/.env
+# edit /opt/aura/app/deploy/node1/.env
+# OR if you already keep secrets at /opt/aura/.env:
+# ln -sfn /opt/aura/.env /opt/aura/app/deploy/node1/.env
+
 # Registration token: GitHub → Settings → Actions → Runners → New self-hosted runner
 export RUNNER_TOKEN=...          # short-lived
 export GITHUB_REPO_URL=https://github.com/ossdaiict/DAU-pwa

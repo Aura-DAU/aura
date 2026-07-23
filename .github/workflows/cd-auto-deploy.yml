@@ -52,7 +52,8 @@ jobs:
       - name: Deploy application containers only
         env:
           AURA_APP_ROOT: /opt/aura/app
-          AURA_ENV_FILE: /opt/aura/app/deploy/node1/.env
+          # Optional override. deploy-apps.sh also tries deploy/node1/.env then /opt/aura/.env
+          # AURA_ENV_FILE: /opt/aura/app/deploy/node1/.env
           # Prefer repo secret AURA_DEPLOY_GIT_TOKEN (classic/fine-grained PAT with
           # Contents: Read). Falls back to the job's built-in github.token.
           # Never commit a PAT into this file or deploy/node1/.env.

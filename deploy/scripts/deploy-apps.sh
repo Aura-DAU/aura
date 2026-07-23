@@ -10,9 +10,9 @@
 # does not cascade into the databases.
 #
 # Expected layout on aura-node1:
-#   /opt/aura/app          — git clone of DAU-pwa
-#   /opt/aura/app/deploy/node1/.env
-#   /opt/aura/actions-runner — self-hosted GitHub Actions runner
+#   /opt/aura/app                  — git clone of DAU-pwa
+#   /opt/aura/app/deploy/node1/.env  (preferred) OR /opt/aura/.env (legacy fallback)
+#   /opt/aura/actions-runner       — self-hosted GitHub Actions runner
 #
 # Usage:
 #   AURA_APP_ROOT=/opt/aura/app ./deploy/scripts/deploy-apps.sh
@@ -21,18 +21,46 @@
 set -euo pipefail
 
 APP_ROOT="${AURA_APP_ROOT:-/opt/aura/app}"
-ENV_FILE="${AURA_ENV_FILE:-${APP_ROOT}/deploy/node1/.env}"
 COMPOSE_DIR="${APP_ROOT}/deploy/node1"
 REF="${1:-main}"
+
+# Resolve env file: explicit override, then node1 path, then legacy host path.
+resolve_env_file() {
+  local candidates=()
+  if [[ -n "${AURA_ENV_FILE:-}" ]]; then
+    candidates+=("${AURA_ENV_FILE}")
+  fi
+  candidates+=(
+    "${APP_ROOT}/deploy/node1/.env"
+    "/opt/aura/.env"
+    "${APP_ROOT}/deploy/.env.prod"
+  )
+  local candidate
+  for candidate in "${candidates[@]}"; do
+    if [[ -f "${candidate}" ]]; then
+      printf '%s\n' "${candidate}"
+      return 0
+    fi
+  done
+  return 1
+}
 
 if [[ ! -d "${APP_ROOT}/.git" ]]; then
   echo "error: ${APP_ROOT} is not a git checkout" >&2
   exit 1
 fi
-if [[ ! -f "${ENV_FILE}" ]]; then
-  echo "error: env file not found: ${ENV_FILE}" >&2
+if ! ENV_FILE="$(resolve_env_file)"; then
+  echo "error: env file not found. Tried:" >&2
+  echo "  \${AURA_ENV_FILE} (if set)" >&2
+  echo "  ${APP_ROOT}/deploy/node1/.env" >&2
+  echo "  /opt/aura/.env" >&2
+  echo "  ${APP_ROOT}/deploy/.env.prod" >&2
+  echo "On Node 1, create it once:" >&2
+  echo "  cp ${APP_ROOT}/deploy/node1/.env.node1.example ${APP_ROOT}/deploy/node1/.env" >&2
+  echo "  # or: ln -sfn /opt/aura/.env ${APP_ROOT}/deploy/node1/.env" >&2
   exit 1
 fi
+echo "==> Using env file: ${ENV_FILE}"
 if [[ ! -f "${COMPOSE_DIR}/docker-compose.yml" ]]; then
   echo "error: compose file missing under ${COMPOSE_DIR}" >&2
   exit 1
