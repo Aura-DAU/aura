@@ -33,12 +33,14 @@ def test_rbac_additive_hierarchy():
     assert "student" in superadmin_roles
     assert "dean_academic" in superadmin_roles
     
-    # Test admin
+    # Test admin (broad JWT role) → admin_staff DLS set, not superadmin
     admin_roles = get_allowed_roles("admin")
     assert "public" in admin_roles
     assert "faculty" in admin_roles
     assert "student" in admin_roles
-    assert "dean_academic" in admin_roles
+    assert "admin_staff" in admin_roles
+    assert "dean_academic" not in admin_roles
+    assert "superadmin" not in admin_roles
     
     # Test unknown role fallback
     assert get_allowed_roles("unknown_role") == ["public"]
