@@ -79,6 +79,9 @@ class ContextBuilder:
 id="{idx}"
 title="{title_str}"
 rule_year="{doc_rule_year}"
+document_year="{metadata.get('document_year', '')}"
+start_line="{metadata.get('start_line', '')}"
+end_line="{metadata.get('end_line', '')}"
 program_name="{metadata.get('program_name', '')}"
 cluster="{metadata.get('cluster', '')}"
 category="{metadata.get('category', '')}"
@@ -103,7 +106,12 @@ scraped_date="{metadata.get('scraped_date', '')}"
                 sources.append({
                     "title": metadata.get("title"),
                     "url": url,
-                    "cluster": metadata.get("cluster")
+                    "cluster": metadata.get("cluster"),
+                    # BE-1: line range and year forwarded to the frontend
+                    # so the citation hover tooltip can display them.
+                    "start_line": metadata.get("start_line"),
+                    "end_line": metadata.get("end_line"),
+                    "document_year": metadata.get("document_year"),
                 })
 
                 seen_urls.add(url)

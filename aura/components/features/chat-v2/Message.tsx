@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Check, Copy, RotateCcw, ThumbsDown, ThumbsUp, FileText, Lock, CalendarCheck } from "lucide-react"
+import { Check, Copy, RotateCcw, ThumbsDown, ThumbsUp, FileText, Lock, CalendarCheck, CalendarDays, Hash } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 import type { ChatMessage, Citation, CalendarActionData } from "@/lib/chat-types"
@@ -111,21 +111,62 @@ export function Message({ message, citations, onRegenerate }: MessageProps) {
               const isUrl = c.file.startsWith("http://") || c.file.startsWith("https://")
               const Component = isUrl ? "a" : "span"
               const badge = getAuthBadge(c.authorization, c.visibility)
+              const hasTooltip = c.document_year || (c.start_line != null && c.end_line != null)
               return (
                 <div key={`${c.file}-${i}`} className="inline-flex items-center gap-1.5">
-                  <Component
-                    href={isUrl ? c.file : undefined}
-                    target={isUrl ? "_blank" : undefined}
-                    rel={isUrl ? "noopener noreferrer" : undefined}
-                    className={cn(
-                      "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300",
-                      isUrl && "hover:bg-theme-gray-light transition-colors cursor-pointer hover:text-neutral-100"
+                  {/* Tooltip wrapper — shown only when line or year metadata exists */}
+                  <div className="group/cite relative inline-flex">
+                    <Component
+                      href={isUrl ? c.file : undefined}
+                      target={isUrl ? "_blank" : undefined}
+                      rel={isUrl ? "noopener noreferrer" : undefined}
+                      className={cn(
+                        "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300",
+                        isUrl && "hover:bg-theme-gray-light transition-colors cursor-pointer hover:text-neutral-100"
+                      )}
+                    >
+                      <span className="size-1.5 rounded-full bg-theme-yellow" />
+                      <FileText className="size-3 text-neutral-500" />
+                      {c.title ?? c.file}
+                    </Component>
+
+                    {/* Hover tooltip — only rendered when metadata is present */}
+                    {hasTooltip && (
+                      <div
+                        role="tooltip"
+                        className={cn(
+                          // Positioning: above the badge, centred
+                          "pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 -translate-x-1/2",
+                          // Visibility: hidden by default, fade in on group hover
+                          "opacity-0 transition-opacity duration-150 group-hover/cite:opacity-100",
+                          // Visual style — matches the dark glassmorphism aesthetic
+                          "w-max max-w-[220px] rounded-lg border border-white/10 bg-neutral-900/95 px-3 py-2 shadow-xl backdrop-blur-sm",
+                        )}
+                      >
+                        {/* Arrow */}
+                        <span className="absolute -bottom-1.5 left-1/2 size-3 -translate-x-1/2 rotate-45 rounded-sm border-b border-r border-white/10 bg-neutral-900/95" />
+
+                        <div className="flex flex-col gap-1">
+                          {c.document_year && (
+                            <div className="flex items-center gap-1.5">
+                              <CalendarDays className="size-3 shrink-0 text-theme-yellow" />
+                              <span className="text-[11px] font-medium text-neutral-300">
+                                {c.document_year}
+                              </span>
+                            </div>
+                          )}
+                          {c.start_line != null && c.end_line != null && (
+                            <div className="flex items-center gap-1.5">
+                              <Hash className="size-3 shrink-0 text-neutral-500" />
+                              <span className="text-[11px] text-neutral-400">
+                                Lines {c.start_line}–{c.end_line}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     )}
-                  >
-                    <span className="size-1.5 rounded-full bg-theme-yellow" />
-                    <FileText className="size-3 text-neutral-500" />
-                    {c.title ?? c.file}
-                  </Component>
+                  </div>
                   {badge}
                 </div>
               )

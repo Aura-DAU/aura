@@ -13,7 +13,11 @@ from typing import Optional, List
 from dotenv import load_dotenv
 
 from ..key_manager import KeyManager
-from .tool_registry import tools_for_role, TOOL_REGISTRY
+from .tool_registry import tools_for_role as _ecampus_tools_for_role, TOOL_REGISTRY as _ECAMPUS_TOOL_REGISTRY
+from ..timetable.tool_registry import tools_for_role as _timetable_tools_for_role, TOOL_REGISTRY as _TIMETABLE_TOOL_REGISTRY
+
+# Merge both registries so the LLM can invoke eCampus + timetable tools
+MERGED_TOOL_REGISTRY = {**_ECAMPUS_TOOL_REGISTRY, **_TIMETABLE_TOOL_REGISTRY}
 
 SYSTEM_PROMPT = """You are AURA, DAU's academic assistant, handling a request that
 needs the requester's own live academic data (or, for faculty, data a student has
@@ -22,6 +26,7 @@ explicitly shared with them).
 Rules:
 - Use the available tools to answer. Never invent CGPA, attendance, grades, or any
   other personal data — if no tool can answer the question, say so plainly.
+- When presenting a class timetable or schedule, ALWAYS format it in a clean, professional Markdown table with headers (e.g. | Day/Time | Course | Session | Room | Faculty |).
 - A tool returning {"action_needed": "link_ecampus_account"} means the user hasn't
   connected their eCampus account yet — tell them that directly and clearly,
   don't make up an answer instead.
@@ -55,6 +60,7 @@ class EcampusOrchestrator:
         return KeyManager.call_with_rotation(_fn, max_retries=3)
 
     def _tool_schemas(self, role: str) -> list[dict]:
+        all_tools = _ecampus_tools_for_role(role) + _timetable_tools_for_role(role)
         return [
             {
                 "type": "function",
@@ -64,7 +70,7 @@ class EcampusOrchestrator:
                     "parameters": t.parameters,
                 },
             }
-            for t in tools_for_role(role)
+            for t in all_tools
         ]
 
     def run(self, query: str, identity: dict, history: Optional[list] = None) -> dict:
@@ -94,7 +100,7 @@ class EcampusOrchestrator:
 
         tool_messages = []
         for call in msg.tool_calls:
-            tool = TOOL_REGISTRY.get(call.function.name)
+            tool = MERGED_TOOL_REGISTRY.get(call.function.name)
             if tool is None or identity["role"] not in tool.allowed_roles:
                 # Defense in depth: even if the model somehow names a tool it
                 # wasn't given a schema for, refuse rather than execute it.

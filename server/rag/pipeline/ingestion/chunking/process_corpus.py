@@ -310,9 +310,35 @@ def extract_course_codes_from_text(text):
     return list(codes)
 
 
+def _extract_document_year(metadata: dict) -> str:
+    """
+    Derive a human-readable document year string from the frontmatter.
+
+    Priority order:
+      1. scraped_date  → take the 4-digit year component (e.g. "2025-07-14" → "2025")
+      2. title         → extract an academic-year pattern such as "2024-25" or "2024-2025"
+      3. fallback      → empty string (LLM will skip temporal citation for this chunk)
+    """
+    scraped = metadata.get("scraped_date", "")
+    if scraped:
+        m = re.search(r"(\d{4})", str(scraped))
+        if m:
+            return m.group(1)
+
+    title = metadata.get("title", "") or ""
+    m = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title)
+    if m:
+        return m.group(1)
+    m = re.search(r"(20\d{2})", title)
+    if m:
+        return m.group(1)
+
+    return ""
+
+
 def process_markdown_file(file_path):
     file_path = Path(file_path)
-    
+
     parts = file_path.parts
     data_index = parts.index("data")
     cluster = parts[data_index + 1]
@@ -322,10 +348,28 @@ def process_markdown_file(file_path):
     )
 
     with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read()
+        raw_content = f.read()
+
+    # Normalise line endings so splitlines() counts are consistent
+    content = raw_content.lstrip("\ufeff").replace("\r\n", "\n")
 
     metadata, body = extract_frontmatter(content)
-    
+
+    # ── Body offset ────────────────────────────────────────────────────────
+    # The frontmatter block occupies N lines at the top of the file.  Every
+    # section line number returned by extract_sections() is body-relative
+    # (starts at 1 = first line after the closing "---").  We compute the
+    # offset once here so all chunks get correct file-absolute coordinates.
+    body_offset: int = len(content) - len(body) - len(body.lstrip("\n"))
+    # A cleaner approach: count lines before the body starts.
+    body_start_line: int = content[: len(content) - len(content.lstrip())].count("\n")
+    # Count how many lines the frontmatter+delimiters occupy
+    fm_lines = content.count("\n") - body.count("\n")
+    # The first line of the body in the file is fm_lines + 1
+    body_line_offset: int = fm_lines  # body line 1 → file line (fm_lines + 1)
+
+    document_year: str = _extract_document_year(metadata)
+
     authorization = metadata.get("authorization", ["public"])
     if isinstance(authorization, str):
         authorization = [authorization]
@@ -409,8 +453,20 @@ def process_markdown_file(file_path):
         section_text += convert_tables_to_sentences(section["content"])
 
         split_chunks = split_section(section_text)
+        num_sub = len(split_chunks)
 
-        for chunk_text in split_chunks:
+        # Derive file-absolute line range for this section
+        sec_start_abs: int = section["start_line"] + body_line_offset
+        sec_end_abs: int   = section["end_line"]   + body_line_offset
+        sec_span: int = max(1, sec_end_abs - sec_start_abs)
+
+        for sub_idx, chunk_text in enumerate(split_chunks):
+            # Distribute the section's line range proportionally across sub-chunks.
+            # For a section spanning lines 10–50 split into 3 sub-chunks:
+            #   sub 0 → 10–23,  sub 1 → 23–36,  sub 2 → 36–50
+            chunk_start_abs = sec_start_abs + round(sub_idx * sec_span / num_sub)
+            chunk_end_abs   = sec_start_abs + round((sub_idx + 1) * sec_span / num_sub)
+
             chunk_record = {
                 "chunk_id": str(uuid.uuid4()),
                 "text": chunk_text,
@@ -422,7 +478,7 @@ def process_markdown_file(file_path):
                 "document_type": category,
                 "cluster": cluster,
                 "subclusters": subclusters,
-                
+
                 "h1": section["h1"],
                 "h2": section["h2"],
                 "h3": section["h3"],
@@ -433,6 +489,11 @@ def process_markdown_file(file_path):
 
                 "scraped_date": metadata.get("scraped_date"),
                 "authorization": authorization,
+
+                # BE-1: Source line payload
+                "start_line": chunk_start_abs,
+                "end_line": chunk_end_abs,
+                "document_year": document_year,
 
                 "char_length": len(chunk_text),
                 "token_estimate": len(chunk_text.split())
@@ -475,7 +536,7 @@ def process_markdown_file(file_path):
             "document_type": category,
             "cluster": cluster,
             "subclusters": subclusters,
-            
+
             "h1": custom["h1"],
             "h2": custom["h2"],
             "h3": custom["h3"],
@@ -486,6 +547,13 @@ def process_markdown_file(file_path):
 
             "scraped_date": metadata.get("scraped_date"),
             "authorization": authorization,
+
+            # BE-1: curriculum chunks don't map to a single section span;
+            # tag them at the top of the body so the UI can still link to
+            # the correct file without a precise line reference.
+            "start_line": body_line_offset + 1,
+            "end_line": body_line_offset + 1,
+            "document_year": document_year,
 
             "char_length": len(custom["text"]),
             "token_estimate": len(custom["text"].split())

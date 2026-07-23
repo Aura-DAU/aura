@@ -1,2 +1,32 @@
 {
+  "202401226@dau.ac.in": [
+    {
+      "id": "2ez4qayc",
+      "title": "Can you give me My timetable ?",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Can you give me My timetable ?",
+          "timestamp": 1784797410120
+        },
+        {
+          "role": "assistant",
+          "content": "Here’s your current weekly class timetable (Year 3, Semester 5, Section B):\n\n| Day       | Time            | Course Code | Course Name | Session Type | Room | Faculty |\n|-----------|----------------|------------|------------|--------------|------|---------|\n| Monday    | 10:00 – 10:50  | IT314      | IT314      | lecture      | LT‑2 | ST      |\n| Tuesday   | 08:00 – 08:50  | CT303      | CT303      | lecture      | LT‑3 | MK2     |\n| Tuesday   | 09:00 – 09:50  | IT304      | IT304      | lecture      | LT‑3 | SS      |\n| Wednesday | 08:00 – 08:50  | IT314      | IT314      | lecture      | LT‑2 | ST      |\n| Wednesday | 10:00 – 10:50  | CT303      | CT303      | lecture      | LT‑3 | MK2     |\n| Thursday  | 08:00 – 08:50  | IT304      | IT304      | lecture      | LT‑3 | SS      |\n| Thursday  | 09:00 – 09:50  | IT314      | IT314      | lecture      | LT‑2 | ST      |\n| Friday    | 09:00 – 09:50  | CT303      | CT303      | lecture      | LT‑3 | MK2     |\n| Friday    | 10:00 – 10:50  | IT304      | IT304      | lecture      | LT‑3 | SS      |\n\nFeel free to let me know if you need any additional details!",
+          "timestamp": 1784797460030
+        },
+        {
+          "role": "user",
+          "content": "i have elective IE402 so add that's time table too in my timetable",
+          "timestamp": 1784797528285
+        },
+        {
+          "role": "assistant",
+          "content": "[Personal data — not stored]",
+          "timestamp": 1784797660975,
+          "is_personal_data": true
+        }
+      ]
+    }
+  ],
+  "demo.student@dau.ac.in": []
 }

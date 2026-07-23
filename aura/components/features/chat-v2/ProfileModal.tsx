@@ -1,11 +1,12 @@
 "use client"
 
-import { type FormEvent, useState } from "react"
+import { type FormEvent, useState, useMemo } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { X } from "lucide-react"
 import { toast } from "sonner"
 import type { StudentProfile } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
+import { useCohortProfile, type CohortProgramOption } from "@/hooks/use-cohort-profile"
 
 interface ProfileModalProps {
   open: boolean
@@ -40,13 +41,53 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
   const [saving, setSaving] = useState(false)
   const { data: session } = useSession()
 
+  const { options, profile: cohortProfile, saveCohort } = useCohortProfile()
+
+  // Infer admission year from ERP ID (e.g. 202401226 -> 2024 -> Year 3, Sem 5)
+  const inferredCohort = useMemo(() => {
+    const erpId = session?.user?.erpId || profile.name
+    const match = erpId?.match(/^(\d{4})\d+/)
+    if (match) {
+      const admissionYear = Number.parseInt(match[1], 10)
+      const currentYear = Math.min(4, Math.max(1, 2026 - admissionYear + 1))
+      const currentSem = (currentYear - 1) * 2 + 1
+      return { year: currentYear, sem: currentSem }
+    }
+    return { year: 2, sem: 3 }
+  }, [session?.user?.erpId, profile.name])
+
+  const initialYear = cohortProfile?.current_year ?? session?.user?.currentYear ?? inferredCohort.year
+  const initialSem = cohortProfile?.current_sem ?? session?.user?.currentSem ?? inferredCohort.sem
+  const initialSec = cohortProfile?.current_sec ?? session?.user?.currentSec ?? "A"
+
+  const [selectedProgram, setSelectedProgram] = useState<string>("B.Tech ICT")
+  const [selectedYear, setSelectedYear] = useState<number>(initialYear)
+  const [selectedSem, setSelectedSem] = useState<number>(initialSem)
+  const [selectedSec, setSelectedSec] = useState<string>(initialSec)
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setSaving(true)
     try {
-      await onSave(draft)
-      toast.success("Profile saved")
+      // 1. Save Cohort (Year, Semester, Section, Program) to PostgreSQL database
+      await saveCohort({
+        program: selectedProgram,
+        year: selectedYear,
+        semester: selectedSem,
+        section: selectedSec,
+      })
+
+      // 2. Save local draft profile
+      await onSave({
+        ...draft,
+        program: selectedProgram,
+        year: `${selectedYear}${selectedYear === 1 ? "st" : selectedYear === 2 ? "nd" : selectedYear === 3 ? "rd" : "th"} year (Sem ${selectedSem}, Sec ${selectedSec})`,
+      })
+
+      toast.success("Profile & Cohort saved permanently!")
       onClose()
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to save profile")
     } finally {
       setSaving(false)
     }
@@ -68,7 +109,7 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
         role="dialog"
         aria-modal="true"
         aria-label="Edit profile"
-        className="relative w-full max-w-md rounded-2xl border border-theme-gray-light bg-theme-gray p-6"
+        className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl border border-theme-gray-light bg-theme-gray p-6 shadow-2xl"
         initial={{ scale: 0.95, opacity: 0, y: 12 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.95, opacity: 0, y: 12 }}
@@ -89,20 +130,20 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
         </div>
 
         {session?.user && (
-          <div className="mb-6 rounded-xl border border-theme-gray-lighter bg-theme-black p-4">
-            <div className="text-xs font-semibold text-theme-yellow uppercase tracking-wider mb-3">Verified Identity</div>
-            <div className="grid grid-cols-2 gap-4">
+          <div className="mb-5 rounded-xl border border-theme-gray-lighter bg-theme-black p-4">
+            <div className="text-xs font-semibold text-theme-yellow uppercase tracking-wider mb-2">Verified Identity</div>
+            <div className="grid grid-cols-2 gap-3">
               <div>
-                <div className="text-xs text-neutral-500 mb-1">Role</div>
-                <div className="text-sm text-neutral-200 capitalize">{session.user.role}</div>
+                <div className="text-[11px] text-neutral-500 mb-0.5">Role</div>
+                <div className="text-xs font-medium text-neutral-200 capitalize">{session.user.role}</div>
               </div>
               <div>
-                <div className="text-xs text-neutral-500 mb-1">Department</div>
-                <div className="text-sm text-neutral-200">{session.user.department || "N/A"}</div>
+                <div className="text-[11px] text-neutral-500 mb-0.5">Department</div>
+                <div className="text-xs font-medium text-neutral-200">{session.user.department || "ICT"}</div>
               </div>
               <div className="col-span-2">
-                <div className="text-xs text-neutral-500 mb-1">ERP ID</div>
-                <div className="text-sm text-neutral-200">{session.user.erpId}</div>
+                <div className="text-[11px] text-neutral-500 mb-0.5">Student ID / ERP ID</div>
+                <div className="text-xs font-mono font-medium text-theme-yellow">{session.user.erpId}</div>
               </div>
             </div>
           </div>
@@ -115,20 +156,101 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
             value={draft.name}
             onChange={(v) => setDraft((d) => ({ ...d, name: v }))}
           />
-          <Field
-            id="program"
-            label="Program"
-            placeholder="B.Tech CSE"
-            value={draft.program}
-            onChange={(v) => setDraft((d) => ({ ...d, program: v }))}
-          />
-          <Field
-            id="year"
-            label="Year"
-            placeholder="2nd year"
-            value={draft.year}
-            onChange={(v) => setDraft((d) => ({ ...d, year: v }))}
-          />
+
+          {/* Program Selection */}
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="program-select" className="text-xs font-medium text-neutral-400">
+              Program / Branch
+            </label>
+            <select
+              id="program-select"
+              value={selectedProgram}
+              onChange={(e) => setSelectedProgram(e.target.value)}
+              className="rounded-xl border border-theme-gray-light bg-theme-black px-3 py-2 text-sm text-neutral-100 outline-none focus:border-theme-yellow"
+            >
+              {options.length > 0 ? (
+                options.map((o: CohortProgramOption) => (
+                  <option key={o.program} value={o.program}>
+                    {o.program}
+                  </option>
+                ))
+              ) : (
+                <>
+                  <option value="B.Tech ICT">B.Tech ICT</option>
+                  <option value="B.Tech CSE">B.Tech CSE</option>
+                  <option value="B.Tech MnC">B.Tech MnC</option>
+                  <option value="B.Tech EVD">B.Tech EVD</option>
+                </>
+              )}
+            </select>
+          </div>
+
+          {/* Year Selection (Auto-detected from ID) */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-neutral-400 flex items-center justify-between">
+              <span>Academic Year</span>
+              <span className="text-[10px] text-theme-yellow">Auto-detected from Student ID</span>
+            </label>
+            <div className="grid grid-cols-4 gap-2">
+              {[1, 2, 3, 4].map((yr) => (
+                <button
+                  key={yr}
+                  type="button"
+                  onClick={() => {
+                    setSelectedYear(yr)
+                    setSelectedSem((yr - 1) * 2 + 1)
+                  }}
+                  className={`rounded-xl border py-2 text-xs font-medium transition-all ${
+                    selectedYear === yr
+                      ? "border-theme-yellow bg-theme-yellow/10 text-theme-yellow"
+                      : "border-theme-gray-light bg-theme-black text-neutral-400 hover:border-theme-gray-lighter"
+                  }`}
+                >
+                  {yr === 1 ? "1st" : yr === 2 ? "2nd" : yr === 3 ? "3rd" : "4th"} Year
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Semester & Section Selection */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="sem-select" className="text-xs font-medium text-neutral-400">
+                Semester
+              </label>
+              <select
+                id="sem-select"
+                value={selectedSem}
+                onChange={(e) => setSelectedSem(Number(e.target.value))}
+                className="rounded-xl border border-theme-gray-light bg-theme-black px-3 py-2 text-sm text-neutral-100 outline-none focus:border-theme-yellow"
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((s) => (
+                  <option key={s} value={s}>
+                    Semester {s}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="sec-select" className="text-xs font-medium text-neutral-400">
+                Section / Group
+              </label>
+              <select
+                id="sec-select"
+                value={selectedSec}
+                onChange={(e) => setSelectedSec(e.target.value)}
+                className="rounded-xl border border-theme-gray-light bg-theme-black px-3 py-2 text-sm text-neutral-100 outline-none focus:border-theme-yellow"
+              >
+                {["A", "B", "C", "D"].map((sec) => (
+                  <option key={sec} value={sec}>
+                    Section {sec}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           <Field
             id="interests"
             label="Interests"
@@ -136,12 +258,13 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
             value={draft.interests}
             onChange={(v) => setDraft((d) => ({ ...d, interests: v }))}
           />
+
           <button
             type="submit"
             disabled={saving}
-            className="mt-2 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-theme-red to-theme-yellow px-4 py-2.5 text-sm font-semibold text-black transition-opacity disabled:opacity-50"
+            className="mt-2 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-theme-red to-theme-yellow px-4 py-2.5 text-sm font-semibold text-black transition-opacity disabled:opacity-50 hover:opacity-90"
           >
-            {saving ? "Saving…" : "Save profile"}
+            {saving ? "Saving to PostgreSQL…" : "Save profile permanently"}
           </button>
         </form>
       </motion.div>

@@ -295,6 +295,36 @@ Rules:
 NEVER mix information from different rule_year documents without explicitly labelling which year each fact comes from.
 
 ------------------------------------------------------------
+TEMPORAL CITATION IN ANSWERS — CRITICAL
+------------------------------------------------------------
+
+Every answer that cites a DAU document MUST explicitly state the year or
+academic session the information is drawn from.  Use the document_year or
+rule_year attribute on each <doc> to determine the year.
+
+Priority for choosing the year label:
+  1. rule_year attribute (academic-year formatted, e.g. "2024-25") — prefer this
+     for policy and academic-rules documents where version matters most.
+  2. document_year attribute (4-digit calendar year, e.g. "2025") — use when
+     rule_year is absent.
+  3. scraped_date attribute — fall back to its 4-digit year component.
+  4. If none of the above is present, omit the year but do NOT fabricate one.
+
+Integration rules:
+  - Weave the year naturally into the sentence; do NOT append it as a footnote.
+    CORRECT: "According to the 2025-26 hostel regulations, residents must..."
+    CORRECT: "Based on the 2025 admissions data, the fee structure is..."
+    WRONG:   "The hostel fee is Rs 50,000. (Source year: 2025)"
+  - When information from two different years is combined, label each fact
+    individually:
+    "Under the 2019-20 rules, X was required [1]. The 2024-25 rules revised
+    this to Y [2]."
+  - For the most recent document, still state the year explicitly:
+    "As per the current 2025-26 policy..." — not just "The current policy..."
+  - For time-insensitive facts (e.g. a professor's research area), temporal
+    citation is still recommended but is lower priority than factual accuracy.
+
+------------------------------------------------------------
 ANNUAL REPORT vs CURRENT ADMISSIONS DATA
 ------------------------------------------------------------
 

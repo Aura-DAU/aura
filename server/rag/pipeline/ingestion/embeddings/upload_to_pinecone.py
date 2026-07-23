@@ -262,6 +262,17 @@ def main():
         if chunk.get("scraped_date"):
             vector["metadata"]["scraped_date"] = chunk["scraped_date"]
 
+        # BE-1: Source line payload — persisted so the retriever can surface
+        # exact line ranges back to the frontend for hover tooltips.
+        if chunk.get("start_line") is not None:
+            vector["metadata"]["start_line"] = int(chunk["start_line"])
+
+        if chunk.get("end_line") is not None:
+            vector["metadata"]["end_line"] = int(chunk["end_line"])
+
+        if chunk.get("document_year"):
+            vector["metadata"]["document_year"] = str(chunk["document_year"])
+
         vectors.append(
             vector
         )

@@ -6,6 +6,11 @@ export interface InternalJwtPayload {
   role: "student" | "faculty" | "admin" | "guest"
   erpId: string
   department?: string
+  currentYear?: number
+  currentSem?: number
+  currentSec?: string
+  facultyInitials?: string
+  fullName?: string
   [key: string]: unknown
 }
 
@@ -22,6 +27,11 @@ export function signInternalJwt(payload: InternalJwtPayload): string {
       role: payload.role,
       erpId: payload.erpId,
       department: payload.department,
+      currentYear: payload.currentYear,
+      currentSem: payload.currentSem,
+      currentSec: payload.currentSec,
+      facultyInitials: payload.facultyInitials,
+      fullName: payload.fullName,
     },
     JWT_SECRET,
     {

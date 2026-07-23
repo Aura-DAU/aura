@@ -340,7 +340,8 @@ export function useAuraChat() {
           throw new Error("Question limit reached. Please wait or sign in with a DAU account.")
         }
         if (!response.ok || !response.body) {
-          throw new Error("Request failed")
+          const errText = await response.text().catch(() => "")
+          throw new Error(errText || `Request failed (${response.status})`)
         }
 
         decrementQuota()

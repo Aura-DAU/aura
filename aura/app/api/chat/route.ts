@@ -31,15 +31,24 @@ function sseLine(data: unknown): string {
   return `data: ${JSON.stringify(data)}\n\n`
 }
 
-function normaliseSource(s: string | { file?: string; url?: string; title?: string }): {
+function normaliseSource(s: string | { file?: string; url?: string; title?: string; start_line?: number; end_line?: number; document_year?: string }): {
   file: string
   title?: string
+  start_line?: number
+  end_line?: number
+  document_year?: string
 } | null {
   if (typeof s === "string") return { file: s }
   if (s && typeof s === "object") {
     const file = s.file || s.url || ""
     if (file) {
-      return { file, title: s.title }
+      return {
+        file,
+        title: s.title,
+        start_line: s.start_line,
+        end_line: s.end_line,
+        document_year: s.document_year,
+      }
     }
   }
   return null

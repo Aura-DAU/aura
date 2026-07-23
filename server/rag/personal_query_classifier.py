@@ -59,7 +59,7 @@ If PERSONAL or MIXED, extract:
     - "<name or ID>" → a specific named other person
     - null          → unclear
   "erp_fields": list of data categories needed. Choose from:
-    ["cgpa", "grades", "attendance", "profile", "advisees", "courses",
+    ["cgpa", "grades", "attendance", "profile", "timetable", "advisees", "courses",
      "fees", "hostel", "btp_students", "mentees", "teaching_schedule",
      "grievances", "disciplinary", "scholarship", "hostel_master",
      "program_students", "program_courses"]

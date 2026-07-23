@@ -24,6 +24,19 @@ export interface BackendChatRequest {
 
 export interface BackendChatResponse {
   answer: string
-  sources: Array<string | { file?: string; title?: string }>
+  sources: Array<
+    | string
+    | {
+        file?: string
+        url?: string
+        title?: string
+        cluster?: string
+        /** BE-1 */
+        start_line?: number
+        end_line?: number
+        /** BE-2 */
+        document_year?: string
+      }
+  >
   is_personal_data?: boolean
 }

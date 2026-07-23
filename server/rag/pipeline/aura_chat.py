@@ -166,7 +166,7 @@ class AuraChat:
                     course_code = (access_result.course_codes[0] if access_result.course_codes else None)
                     erp_data = {"aggregate": self.erp_connector.get_class_aggregate(course_code) if course_code else {}}
                 else:
-                    erp_data = self._fetch_erp_data(classification["erp_fields"], target_erp_id, access_result)
+                    erp_data = self._fetch_erp_data(classification["erp_fields"], target_erp_id, access_result, identity=identity)
                 erp_context = self.context_builder.build(erp_data, identity, access_result)
                 is_personal = True
 
@@ -220,18 +220,25 @@ class AuraChat:
         result = self.erp_connector.find_student_by_name(target_label)
         return result["roll_number"] if result else None
 
-    def _fetch_erp_data(self, fields: list, roll_number: Optional[str], access_result) -> dict:
-        if not roll_number:
+    def _fetch_erp_data(self, fields: list, roll_number: Optional[str], access_result, identity=None) -> dict:
+        if not roll_number and not identity:
             return {}
         data = {}
         course_scope = (access_result.course_codes[0] if access_result.course_codes else None)
-        if "profile"    in fields: data["profile"]    = self.erp_connector.get_student_profile(roll_number)
-        if "cgpa"       in fields: data["cgpa"]        = self.erp_connector.get_cgpa(roll_number)
-        if "grades"     in fields: data["grades"]      = self.erp_connector.get_grades(roll_number, course_code=course_scope)
-        if "attendance" in fields: data["attendance"]  = self.erp_connector.get_attendance(roll_number, course_code=course_scope)
-        if "advisees"   in fields and getattr(access_result, "scope_type", None) in ("advisee", "all", "batch"):
+        if "profile"    in fields and roll_number: data["profile"]    = self.erp_connector.get_student_profile(roll_number)
+        if "cgpa"       in fields and roll_number: data["cgpa"]        = self.erp_connector.get_cgpa(roll_number)
+        if "grades"     in fields and roll_number: data["grades"]      = self.erp_connector.get_grades(roll_number, course_code=course_scope)
+        if "attendance" in fields and roll_number: data["attendance"]  = self.erp_connector.get_attendance(roll_number, course_code=course_scope)
+        if "advisees"   in fields and roll_number and getattr(access_result, "scope_type", None) in ("advisee", "all", "batch"):
             data["advisees"] = self.erp_connector.get_advisees(roll_number)
-        if "courses"    in fields: data["courses"]     = self.erp_connector.get_faculty_courses(roll_number)
+        if "courses"    in fields and roll_number: data["courses"]     = self.erp_connector.get_faculty_courses(roll_number)
+        if "timetable"  in fields and identity:
+            from pipeline.timetable import service as timetable_service
+            try:
+                data["timetable"] = timetable_service.get_effective_timetable(identity)
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning("Failed to fetch timetable in ERP pipeline: %s", e)
         return data
 
     def _rag_only(self, query, history, profile, user_role: str = "public") -> dict:

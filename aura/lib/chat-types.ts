@@ -27,6 +27,12 @@ export interface Citation {
   title?: string
   visibility?: string
   authorization?: string[]
+  /** BE-1: file-absolute line where this chunk starts (1-indexed) */
+  start_line?: number
+  /** BE-1: file-absolute line where this chunk ends (1-indexed, inclusive) */
+  end_line?: number
+  /** BE-2: calendar year or academic session the source was written/scraped (e.g. "2025" or "2024-25") */
+  document_year?: string
 }
 
 export interface ChatThread {

@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: aura_postgres
+    environment:
+      POSTGRES_USER: aura_app
+      POSTGRES_DB: aura_auth
+      # trust = no password needed for local dev
+      # This avoids scram-sha-256 / libpq compatibility issues on Windows
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

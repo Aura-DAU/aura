@@ -18,12 +18,11 @@ export function ChatShell() {
   const chat = useAuraChat()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
-  const [isOffline, setIsOffline] = useState(
-    () => typeof navigator !== "undefined" && !navigator.onLine
-  )
+  const [isOffline, setIsOffline] = useState(false)
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
 
   useEffect(() => {
+    setIsOffline(!navigator.onLine)
     const goOnline = () => setIsOffline(false)
     const goOffline = () => setIsOffline(true)
     window.addEventListener("online", goOnline)

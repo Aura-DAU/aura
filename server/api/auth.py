@@ -60,6 +60,12 @@ class Identity:
     erp_id: str
     role:   str           # broad role from JWT: student | faculty | admin
     dept:   Optional[str] = None
+    # Timetable cohort fields (populated from JWT, sourced from user_identity_map)
+    current_year: Optional[int] = None
+    current_sem:  Optional[int] = None
+    current_sec:  Optional[str] = None
+    faculty_initials: Optional[str] = None
+    full_name:    Optional[str] = None
 
     @property
     def user_id(self) -> str:
@@ -67,7 +73,12 @@ class Identity:
         return self.erp_id
 
     def as_dict(self) -> dict:
-        return {"role": self.role, "erp_id": self.erp_id, "dept": self.dept}
+        return {
+            "role": self.role, "erp_id": self.erp_id, "dept": self.dept,
+            "current_year": self.current_year, "current_sem": self.current_sem,
+            "current_sec": self.current_sec, "faculty_initials": self.faculty_initials,
+            "full_name": self.full_name,
+        }
 
 
 def require_identity(
@@ -103,7 +114,16 @@ def require_identity(
     if role not in BROAD_ROLES:
         raise HTTPException(status_code=403, detail=f"Unrecognised role in token: {role!r}")
 
-    return Identity(erp_id=erp_id, role=role, dept=claims.get("department"))
+    return Identity(
+        erp_id=erp_id,
+        role=role,
+        dept=claims.get("department"),
+        current_year=claims.get("currentYear"),
+        current_sem=claims.get("currentSem"),
+        current_sec=claims.get("currentSec"),
+        faculty_initials=claims.get("facultyInitials"),
+        full_name=claims.get("fullName"),
+    )
 
 
 get_current_identity = require_identity

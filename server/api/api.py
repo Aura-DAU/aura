@@ -12,6 +12,10 @@ for p in (str(server_dir), str(rag_dir)):
     if p not in sys.path:
         sys.path.insert(0, p)
 
+from dotenv import load_dotenv
+load_dotenv(server_dir / ".env")
+load_dotenv(rag_dir / ".env")
+
 from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
@@ -25,6 +29,8 @@ from api.routes.calendar_routes import router as calendar_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
+from pipeline.timetable import service as timetable_service
+from pipeline.timetable.notifier import start_scheduler, stop_scheduler
 
 app = FastAPI(title="AURA API")
 
@@ -67,6 +73,22 @@ app.add_middleware(
 app.include_router(identity_router)
 app.include_router(admin_router)
 app.include_router(calendar_router)
+
+
+@app.on_event("startup")
+async def _startup():
+    """Start the timetable push-notification scheduler."""
+    try:
+        await start_scheduler()
+    except Exception:
+        import logging
+        logging.getLogger("aura.api").warning("Notification scheduler failed to start (non-fatal).")
+
+
+@app.on_event("shutdown")
+async def _shutdown():
+    """Stop the timetable push-notification scheduler."""
+    await stop_scheduler()
 
 # ── Whisper concurrency lock ──────────────────────────────────────────────
 speech_queue_lock = asyncio.Semaphore(1)
@@ -206,4 +228,239 @@ async def health_detail(identity: Identity = Depends(require_identity)):
         "INTERNAL_JWT_SECRET":    bool(os.getenv("INTERNAL_JWT_SECRET")),
         "AUTH_DB_URL":            bool(os.getenv("AUTH_DB_URL")),
         "ERP_DB_HOST":            bool(os.getenv("ERP_DB_HOST")),
+    }
+
+
+# -- Timetable API routes -------------------------------------------------------
+
+
+class PushSubscription(BaseModel):
+    endpoint: str
+    keys: dict
+
+
+@app.get("/timetable/me")
+def timetable_me(identity: Identity = Depends(require_identity)):
+    """Student's effective timetable (master + personal overrides)."""
+    try:
+        return timetable_service.get_effective_timetable(identity)
+    except timetable_service.TimetableError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/timetable/faculty")
+def timetable_faculty(identity: Identity = Depends(require_identity)):
+    """Faculty member's full teaching schedule across all batches."""
+    try:
+        return timetable_service.get_faculty_timetable(identity)
+    except timetable_service.TimetableError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/timetable/changes")
+def timetable_changes(identity: Identity = Depends(require_identity)):
+    """List student's personal timetable overrides."""
+    try:
+        return {"changes": timetable_service.list_my_changes(identity)}
+    except timetable_service.TimetableError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/push/subscribe")
+def push_subscribe(
+    subscription: PushSubscription,
+    identity: Identity = Depends(require_identity),
+):
+    """Register a Web Push subscription for class reminders."""
+    import db.connection as db_conn
+    db_conn.execute(
+        """INSERT INTO push_subscriptions (erp_id, endpoint, p256dh, auth_key)
+           VALUES (%s, %s, %s, %s)
+           ON CONFLICT (endpoint) DO UPDATE SET
+             p256dh = EXCLUDED.p256dh, auth_key = EXCLUDED.auth_key, last_seen_at = now()""",
+        (
+            identity.erp_id,
+            subscription.endpoint,
+            subscription.keys.get("p256dh", ""),
+            subscription.keys.get("auth", ""),
+        ),
+    )
+    return {"status": "subscribed"}
+
+
+@app.get("/push/vapid-public-key")
+def vapid_public_key():
+    """Return the VAPID public key for Web Push subscription."""
+    key = os.environ.get("VAPID_PUBLIC_KEY", "")
+    if not key:
+        raise HTTPException(status_code=503, detail="VAPID_PUBLIC_KEY is not configured.")
+    return {"publicKey": key}
+
+
+@app.delete("/push/subscribe")
+def push_unsubscribe(
+    endpoint: str,
+    identity: Identity = Depends(require_identity),
+):
+    """Remove a Web Push subscription by endpoint URL."""
+    import db.connection as db_conn
+    db_conn.execute(
+        """DELETE FROM push_subscriptions
+           WHERE erp_id = %s AND endpoint = %s""",
+        (identity.erp_id, endpoint),
+    )
+    return {"status": "unsubscribed"}
+
+
+# -- Elective selection routes -------------------------------------------------
+
+
+class ElectiveSelectionsRequest(BaseModel):
+    course_codes: list[str]
+
+
+@app.get("/timetable/electives")
+def timetable_electives(identity: Identity = Depends(require_identity)):
+    """Available elective courses for the student's cohort, with selection status."""
+    try:
+        return timetable_service.get_available_electives(identity)
+    except timetable_service.TimetableError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/timetable/electives")
+def save_elective_selections(
+    request: ElectiveSelectionsRequest,
+    identity: Identity = Depends(require_identity),
+):
+    """Save the student's elective course selections."""
+    try:
+        return timetable_service.save_elective_selections(identity, request.course_codes)
+    except timetable_service.TimetableError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+# -- Student profile / cohort onboarding routes -------------------------------
+
+
+class CohortUpdateRequest(BaseModel):
+    program: str        # "BTech", "BS-MS", "MSc", "MTech"
+    year: int           # 1, 2, 3, 4
+    semester: int       # 1-10
+    section: str        # "A", "B", "C", "D"
+    branch: Optional[str] = None  # "IT", "DS + AI", "AA", etc.
+
+
+@app.get("/profile/cohort")
+def get_cohort(identity: Identity = Depends(require_identity)):
+    """Returns the student's current cohort fields (or null if not set)."""
+    return {
+        "erp_id": identity.erp_id,
+        "current_year": identity.current_year,
+        "current_sem": identity.current_sem,
+        "current_sec": identity.current_sec,
+        "is_configured": (
+            identity.current_year is not None
+            and identity.current_sem is not None
+            and identity.current_sec is not None
+        ),
+    }
+
+
+@app.get("/profile/cohort-options")
+def get_cohort_options(identity: Identity = Depends(require_identity)):
+    """Returns available programs, years, and sections from timetable_master.
+    Used by the onboarding UI to populate dropdowns dynamically."""
+    import db.connection as db_conn
+
+    rows = db_conn.query(
+        """SELECT DISTINCT program, year, sem, sec, branch
+           FROM timetable_master
+           WHERE program IS NOT NULL
+             AND program != 'Elective'
+             AND year > 0
+           ORDER BY program, year, sem, sec""",
+        (),
+    )
+
+    # Build structured options
+    programs: dict[str, dict] = {}
+    for row in rows:
+        prog = row["program"]
+        if prog not in programs:
+            programs[prog] = {"years": {}, "branches": set()}
+        yr = row["year"]
+        sem = row["sem"]
+        sec = row.get("sec")
+        branch = row.get("branch", "")
+        if branch:
+            programs[prog]["branches"].add(branch)
+        if yr not in programs[prog]["years"]:
+            programs[prog]["years"][yr] = {"semesters": set(), "sections": set()}
+        programs[prog]["years"][yr]["semesters"].add(sem)
+        if sec:
+            programs[prog]["years"][yr]["sections"].add(sec)
+
+    # Convert sets to sorted lists for JSON serialization
+    result = []
+    for prog, data in sorted(programs.items()):
+        years = []
+        for yr, yr_data in sorted(data["years"].items()):
+            years.append({
+                "year": yr,
+                "semesters": sorted(yr_data["semesters"]),
+                "sections": sorted(yr_data["sections"]),
+            })
+        result.append({
+            "program": prog,
+            "branches": sorted(data["branches"]),
+            "years": years,
+        })
+
+    return {"options": result}
+
+
+@app.post("/profile/cohort")
+def save_cohort(
+    request: CohortUpdateRequest,
+    identity: Identity = Depends(require_identity),
+):
+    """Save the student's program/year/semester/section to user_identity_map.
+    Only students can set their own cohort. Validates that the combination
+    exists in timetable_master before saving."""
+    if identity.role != "student":
+        raise HTTPException(status_code=403, detail="Only students can set a cohort profile.")
+
+    import db.connection as db_conn
+
+    # Validate the cohort exists in timetable_master
+    check = db_conn.query(
+        """SELECT 1 FROM timetable_master
+           WHERE year = %s AND sem = %s AND sec = %s
+           LIMIT 1""",
+        (request.year, request.semester, request.section),
+    )
+    if not check:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"No timetable data found for Year {request.year}, "
+                f"Semester {request.semester}, Section {request.section}. "
+                "Please check your selection."
+            ),
+        )
+
+    # Update user_identity_map
+    db_conn.execute(
+        """UPDATE user_identity_map
+           SET current_year = %s, current_sem = %s, current_sec = %s
+           WHERE erp_id = %s""",
+        (request.year, request.semester, request.section, identity.erp_id),
+    )
+
+    return {
+        "status": "saved",
+        "current_year": request.year,
+        "current_sem": request.semester,
+        "current_sec": request.section,
     }

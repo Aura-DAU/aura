@@ -87,14 +87,21 @@ class ERPContextBuilder:
                 )
             lines.append("")
 
-        if "courses" in erp_results and erp_results["courses"]:
-            lines.append("Your courses this semester:")
-            for c in erp_results["courses"]:
-                lines.append(
-                    f"  {c.get('course_code','')} — Batch {c.get('batch','')} "
-                    f"(Sem {c.get('semester','')})"
-                )
-            lines.append("")
+        if "timetable" in erp_results and erp_results["timetable"]:
+            tt = erp_results["timetable"]
+            cohort = tt.get("cohort", {})
+            slots = tt.get("timetable", [])
+            if slots:
+                lines.append(f"Student Weekly Class Timetable (Year {cohort.get('year')}, Sem {cohort.get('sem')}, Sec {cohort.get('sec')}):")
+                lines.append("| Day | Time | Course Code | Course Name | Session Type | Room | Faculty |")
+                lines.append("|---|---|---|---|---|---|---|")
+                for s in slots:
+                    lines.append(
+                        f"| {s.get('day','')} | {s.get('start_time','')} - {s.get('end_time','')} | "
+                        f"{s.get('course_code','')} | {s.get('course_name','')} | {s.get('session_type','')} | "
+                        f"{s.get('room','N/A')} | {s.get('faculty_name','N/A')} |"
+                    )
+                lines.append("")
 
         lines.append("</personal_data>")
         return "\n".join(lines)
