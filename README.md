@@ -5,7 +5,7 @@ A Progressive Web App for **Dhirubhai Ambani University**, enriched with AI.
 > [!IMPORTANT]
 > This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
 
-> [!WARNING]
+> [!NOTICE]
 > **A note for future GDG On Campus & AI Club members:** please take care of this project and keep it alive. Do not delete this file or the project — maintain it, hand it over cleanly to the next batch, and keep the ownership, setup, and contribution notes above up to date.
 
 > **Project Status (Notion):** https://www.notion.so/Dhirubhai-Ambani-University-PWA-Checklist-36d37054896680329226c5b61049b176
@@ -51,9 +51,9 @@ git remote add upstream https://github.com/ossdaiict/DAU-pwa.git
 
 ```bash
 cd aura
-pnpm install
+npm install
 cp .env.example .env.local   # fill in the documented values
-pnpm dev                     # http://localhost:3000
+npm dev                     # http://localhost:3000
 ```
 
 ### 3. Run the backend
@@ -75,10 +75,6 @@ uvicorn api.api:app --host 127.0.0.1 --port 8000 --reload
 
 All work happens on personal feature branches — **never commit directly to `main`**.
 
-| Pattern | Use for |
-|---------|---------|
-| `<name>/<feature>` | New features (e.g. `aditya/auth-flow`) |
-| `hotfix/<issue>` | Critical fixes that need to go straight to `main` |
 
 Create your branch from the latest `main`:
 
@@ -97,7 +93,7 @@ Keep changes scoped to your feature. Each domain is owned by a sub-team — don'
 |--------|------|
 | Frontend | `aura/app/`, `aura/components/`, `aura/hooks/` |
 | Backend / Infra | `server/api/`, `server/db/`, CI/CD |
-| AI | `server/rag/`, prompt engineering, model evaluation |
+| Agents | `server/rag/`, prompt engineering, model evaluation |
 
 ---
 
@@ -151,7 +147,3 @@ PRs are **squash-merged** into `main`. Direct pushes to `main` are blocked.
 ## Credits
 
 Built with ❤️ by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
-
-## License
-
-[Apache 2.0](./LICENSE)
