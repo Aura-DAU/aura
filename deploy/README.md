@@ -1,114 +1,120 @@
-# AURA production deployment (Phase E)
+# AURA Production Multi-Node Deployment Topology
 
-Containerizes the monorepo apps (`aura/` Next.js, `server/` FastAPI + RAG)
-behind an NGINX edge proxy, with Postgres, Redis, Qdrant, optional vLLM GPU
-nodes, Prometheus, and Grafana.
+This directory contains the production deployment manifests for the **AURA Distributed Cluster** across 4 Ubuntu Nodes using Docker Compose.
 
-## Layout
+---
 
-- `../aura/Dockerfile` — multi-stage Next.js standalone build
-- `../server/Dockerfile` — FastAPI + Gunicorn/Uvicorn workers, FFmpeg
-- `docker-compose.prod.yml` — full stack wiring
-- `nginx.conf` — edge reverse proxy / SSL termination
-- `.env.prod.example` — required secrets (copy to `.env.prod`, never commit)
+## 4-Node Deployment Architecture
 
-## Architecture parity (vs system-architecture PDF)
-
-| PDF service | Compose service | Notes |
-|-------------|-----------------|--------|
-| NGINX | `nginx` | TLS + rate limit + SSE-friendly chat proxy |
-| FastAPI gateway | `backend` | Auth, routes, metrics |
-| LangGraph orchestrator | *inside* `backend` | `AuraChatGraph` — not a separate container yet (Phase F) |
-| Embedding / Cross-Encoder | *inside* `backend` | In-process torch models; set `RERANKER_DEVICE=cpu` unless backend has a GPU |
-| Redis | `redis` | Quota / short-term memory |
-| PostgreSQL | `postgres` | Auth + analytics |
-| Qdrant | `qdrant` | Vector store |
-| vLLM ×3 | `vllm-node1/2/3` | Compose profile `gpu` |
-| Prometheus / Grafana | `prometheus` / `grafana` | Internal network only |
-| (monorepo) Next.js PWA | `aura` | BFF + UI |
-
-GPU addresses are **not** hardcoded in app code. Put them in `.env.prod` as
-`VLLM_ENDPOINTS` (Compose DNS names or multi-host LAN IPs).
-
-## Running it
-
-```bash
-cd deploy
-cp .env.prod.example .env.prod   # fill in secrets
-mkdir -p certs                   # drop fullchain.pem / privkey.pem here
-
-# Validate the rendered compose file (no containers started)
-docker compose -f docker-compose.prod.yml --env-file .env.prod config >/dev/null
-
-# Core stack — no host GPUs required
-docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
-
-# With local vLLM nodes (needs NVIDIA Container Toolkit + GPUs)
-docker compose -f docker-compose.prod.yml --env-file .env.prod --profile gpu up -d --build
+```
+                               ┌───────────────────────────┐
+                               │       USER CLIENTS        │
+                               └─────────────┬─────────────┘
+                                             │ HTTPS (:443)
+┌────────────────────────────────────────────▼────────────────────────────────────────────┐
+│ NODE 1: GATEWAY & ORCHESTRATION NODE (Ubuntu - CPU/RAM)                                 │
+│                                                                                         │
+│   ┌──────────────┐         ┌──────────────┐         ┌─────────────────┐                 │
+│   │ NGINX Proxy  ├────────►│  AURA (PWA)  ├────────►│ FastAPI Gateway │                 │
+│   │   (:80/443)  │         │   (:3000)    │         │     (:8000)     │                 │
+│   └──────────────┘         └──────────────┘         └────────┬────────┘                 │
+│                                                              │                          │
+│   ┌──────────────┐         ┌──────────────┐                  │                          │
+│   │  PostgreSQL  │         │    Redis     │         ┌────────▼────────┐                 │
+│   │   (:5432)    │         │   (:6379)    │         │ LangGraph Engine│                 │
+│   └──────────────┘         └──────────────┘         └────────┬────────┘                 │
+└──────────────────────────────────────────────────────────────┼──────────────────────────┘
+                                                               │
+        ┌──────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┐
+        │ HTTP (Inference Router)                              │ HTTP (Vector & Rerank Client)                        │
+        │                                                      │                                                      │
+┌───────▼───────────────────────────┐      ┌───────────────────▼───────────────────────────┐      ┌────────────────────▼──────────────────────────┐
+│ NODE 2: vLLM NODE 1 (GPU)         │      │ NODE 3: vLLM NODE 2 (GPU)         │      │ NODE 4: SEARCH & VECTOR ENGINE (GPU/CPU)      │
+│                                   │      │                                   │      │                                               │
+│  ┌─────────────────────────────┐  │      │  ┌─────────────────────────────┐  │      │  ┌──────────────┐       ┌──────────────────┐  │
+│  │ vLLM Engine (Qwen3-32B)     │  │      │  │ vLLM Engine (Qwen3-32B)     │  │      │  │ Qdrant Vector│       │ Embedding Service│  │
+│  │ OpenAI API (:8000)          │  │      │  │ OpenAI API (:8000)          │  │      │  │ DB (:6333)   │       │ TEI / FastEmbed  │  │
+│  └─────────────────────────────┘  │      │  └─────────────────────────────┘  │      │  └──────────────┘       └────────┬─────────┘  │
+└───────────────────────────────────┘      └───────────────────────────────────┘      │                                  │            │
+                                                                                      │                         ┌────────▼─────────┐  │
+                                                                                      │                         │ Reranker Service │  │
+                                                                                      │                         │ TEI / BGE-v2     │  │
+                                                                                      │                         └──────────────────┘  │
+                                                                                      └───────────────────────────────────────────────┘
 ```
 
-### Inference endpoints (`VLLM_ENDPOINTS`)
+---
 
-Same-host Compose (default with `--profile gpu`):
+## Directory Layout
 
-```bash
-VLLM_ENDPOINTS=http://vllm-node1:8000/v1,http://vllm-node2:8000/v1,http://vllm-node3:8000/v1
+```
+deploy/
+├── node1/                     # Node 1: NGINX, Next.js (PWA), FastAPI + LangGraph, Postgres, Redis
+│   ├── docker-compose.yml
+│   └── .env.node1.example
+├── node2/                     # Node 2: vLLM GPU Node 1
+│   ├── docker-compose.yml
+│   └── .env.node2.example
+├── node3/                     # Node 3: vLLM GPU Node 2
+│   ├── docker-compose.yml
+│   └── .env.node3.example
+├── node4/                     # Node 4: Qdrant & Embedding/Reranker Microservice
+│   ├── docker-compose.yml
+│   └── .env.node4.example
+├── nginx/                     # Reverse Proxy & SSL Configuration
+│   └── nginx.conf
+└── monitoring/                # Prometheus & Grafana Monitoring
+    ├── prometheus.yml
+    └── grafana-datasource.yml
 ```
 
-Multi-host GPU cluster (set reachable IPs/hostnames in `.env.prod`; you can
-omit the compose `vllm-node*` services and only run vLLM on each GPU box):
+---
 
+## Quick Start Deployment Guide
+
+### Node 4: Search & Vector Engine (Start First)
+On **Node 4**:
 ```bash
-VLLM_ENDPOINTS=http://10.0.0.11:8000/v1,http://10.0.0.12:8000/v1,http://10.0.0.13:8000/v1
+cd deploy/node4
+cp .env.node4.example .env
+docker compose up -d --build
+```
+*Exposes:* Qdrant on `:6333` and Embedding/Reranker service on `:8001`.
+
+### Node 2 & Node 3: vLLM GPU Nodes
+On **Node 2** (GPU Box 1):
+```bash
+cd deploy/node2
+cp .env.node2.example .env
+docker compose up -d
+```
+On **Node 3** (GPU Box 2):
+```bash
+cd deploy/node3
+cp .env.node3.example .env
+docker compose up -d
+```
+*Exposes:* OpenAI-compatible vLLM endpoints on port `:8000`.
+
+### Node 1: Gateway & Orchestration Node
+On **Node 1**:
+```bash
+cd deploy/node1
+cp .env.node1.example .env
+# Edit .env and replace <NODE_2_IP>, <NODE_3_IP>, <NODE_4_IP> with actual LAN IPs!
+mkdir -p ../certs # add fullchain.pem / privkey.pem
+docker compose up -d --build
 ```
 
-Point Qdrant at another host the same way (`QDRANT_URL=http://10.0.0.14:6333`).
-Compose may still start a local `qdrant` sidecar because of `depends_on`; traffic follows `QDRANT_URL`.
+---
 
-Single GPU:
+## Health Checks & Verification
 
+On **Node 1**:
 ```bash
-VLLM_ENDPOINTS=http://vllm-node1:8000/v1
-# start only node1, or point at any one OpenAI-compatible server
-```
-
-`InferenceRouter` (`server/rag/pipeline/inference_router.py`) picks the
-least-loaded endpoint and fails over on retryable errors. LangGraph never
-sees which GPU answered.
-
-### Backend notes
-
-The backend image is heavy: retrieval embeds + BGE reranker load in-process
-alongside the LangGraph chat graph. Prefer `BACKEND_WORKERS=1` or `2` and
-`RERANKER_DEVICE=cpu` unless the backend host itself has a GPU.
-
-The backend container mounts the repo's `data/` directory read-only at
-`/app/data` — this backs the `/documents` endpoint (citation side-drawer)
-and ad-hoc ingestion via `docker compose exec backend`.
-
-Before first run, populate Qdrant from the markdown corpus:
-
-```bash
-docker compose -f docker-compose.prod.yml --env-file .env.prod exec backend \
-  bash -c "cd rag/pipeline/ingestion && python sync_db.py"
-```
-
-## Verification
-
-```bash
-# Config must render without errors
-docker compose -f docker-compose.prod.yml --env-file .env.prod config >/dev/null
-
-# Backend health (via nginx path or compose network)
+# Verify Gateway Health
 curl -fsS https://localhost/backend/health
 
-# After --profile gpu (or external endpoints), backend logs should show:
-#   [InferenceRouter] Initialized with N vLLM node(s): [...]
+# Check logs to confirm multi-node connections
+docker compose -f deploy/node1/docker-compose.yml logs backend | grep "InferenceRouter"
 ```
-
-## Reference code left unused
-
-`pipeline/aura_chat.py` (hand-written control flow) and
-`pipeline/key_manager.py` / `upload_to_pinecone.py` (legacy Groq/Pinecone)
-remain in the repo as reference — nothing currently imports them outside of
-each other.

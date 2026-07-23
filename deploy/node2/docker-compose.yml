@@ -1,0 +1,47 @@
+# AURA Distributed Cluster — Node 2 (vLLM GPU Node 1)
+# Services: vLLM OpenAI-Compatible API Engine
+
+services:
+  vllm-node1:
+    image: vllm/vllm-openai:latest
+    restart: unless-stopped
+    command: [
+      "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}",
+      "--port", "8000",
+      "--host", "0.0.0.0",
+      "--enable-prefix-caching",
+      "--max-model-len", "${MAX_MODEL_LEN:-8192}"
+    ]
+    ports:
+      - "8000:8000"
+    volumes:
+      - vllm-cache:/root/.cache/huggingface
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN:-}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 300s
+    networks:
+      - aura-vllm-net
+
+networks:
+  aura-vllm-net:
+
+volumes:
+  vllm-cache:
