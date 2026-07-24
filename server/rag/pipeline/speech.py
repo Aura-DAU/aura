@@ -2,8 +2,9 @@ import os
 import json
 import re
 import logging
-import whisper
 import warnings
+from typing import Any
+
 from rapidfuzz import process, fuzz
 
 # Configure logging for production
@@ -17,6 +18,10 @@ logger = logging.getLogger(__name__)
 warnings.filterwarnings("ignore", message="FP16 is not supported on CPU")
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
+
+# System user `aura` has HOME=/nonexistent; Whisper must not write there.
+# Prefer WHISPER_CACHE_DIR; default to /tmp so a root-owned vault volume cannot block boot.
+_WHISPER_CACHE = os.environ.get("WHISPER_CACHE_DIR", "/tmp/whisper-cache")
 
 if not os.path.exists(CONFIG_PATH):
     raise FileNotFoundError(
@@ -36,9 +41,21 @@ except (json.JSONDecodeError, KeyError) as e:
         "Server startup aborted."
     )
 
-logger.info("Booting up Whisper AI engine...")
-model = whisper.load_model("base")
-logger.info("Whisper base model loaded and ready.")
+_model: Any | None = None
+
+
+def _get_model() -> Any:
+    """Load Whisper on first /speech call (not at API import / gunicorn boot)."""
+    global _model
+    if _model is not None:
+        return _model
+    import whisper
+
+    os.makedirs(_WHISPER_CACHE, exist_ok=True)
+    logger.info("Booting up Whisper AI engine (cache=%s)...", _WHISPER_CACHE)
+    _model = whisper.load_model("base", download_root=_WHISPER_CACHE)
+    logger.info("Whisper base model loaded and ready.")
+    return _model
 
 
 def clean_transcription(raw_text: str) -> str:
@@ -109,12 +126,12 @@ def clean_transcription(raw_text: str) -> str:
 def transcribe_audio(audio_path: str, initial_prompt: str = None) -> str:
     try:
         active_prompt = initial_prompt if initial_prompt else TARGET_VOCAB
-        
-        result = model.transcribe(
-            audio_path, 
+
+        result = _get_model().transcribe(
+            audio_path,
             initial_prompt=active_prompt,
             fp16=False,
-            language="en"
+            language="en",
         )
         
         raw_text = result.get("text", "").strip()
