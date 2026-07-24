@@ -89,7 +89,7 @@ export class AppError extends Error {
   readonly code: ErrorCode
   readonly status: number
   readonly detail?: string
-  readonly expose: true = true
+  readonly expose = true as const
 
   constructor(options: AppErrorOptions) {
     const safe =

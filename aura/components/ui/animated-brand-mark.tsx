@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useCallback } from "react"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { cn } from "@/lib/utils"
@@ -45,7 +45,7 @@ export function AnimatedBrandMark({ className }: AnimatedBrandMarkProps) {
     { scope: rootRef },
   )
 
-  const burst = contextSafe(() => {
+  const burst = useCallback(contextSafe(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
 
@@ -89,9 +89,9 @@ export function AnimatedBrandMark({ className }: AnimatedBrandMarkProps) {
         },
       )
     })
-  })
+  }), [contextSafe])
 
-  const settle = contextSafe(() => {
+  const settle = useCallback(contextSafe(() => {
     gsap.to(coreRef.current, { scale: 1, duration: 0.4, ease: "power3.out" })
     gsap.to(discRef.current, {
       boxShadow: "0 0 0px 0px rgba(244,80,59,0)",
@@ -103,7 +103,7 @@ export function AnimatedBrandMark({ className }: AnimatedBrandMarkProps) {
       gsap.killTweensOf(el)
       gsap.to(el, { x: 0, y: 0, scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" })
     })
-  })
+  }), [contextSafe])
 
   return (
     <span

@@ -2,7 +2,7 @@
 // "class starts in 10 minutes" push notification sent by the backend
 // scheduler (server/rag/pipeline/timetable/notifier.py).
 
-self.addEventListener("install", (event) => {
+self.addEventListener("install", (_event) => {
   self.skipWaiting()
 })
 
@@ -16,7 +16,7 @@ self.addEventListener("push", (event) => {
     if (event.data) {
       data = { ...data, ...event.data.json() }
     }
-  } catch (err) {
+  } catch (_err) {
     // Non-JSON push payload — fall back to defaults above.
   }
 
