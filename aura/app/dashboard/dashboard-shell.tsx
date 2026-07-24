@@ -2,8 +2,8 @@
 
 import React from "react"
 import { useRouter } from "next/navigation"
-import { StudentDashboard } from "@/components/features/chat-v2/StudentDashboard"
-import { FacultyDashboard } from "@/components/features/chat-v2/FacultyDashboard"
+import { StudentDashboard } from "@/components/features/chat-ui/StudentDashboard"
+import { FacultyDashboard } from "@/components/features/chat-ui/FacultyDashboard"
 import AdminBindingsClient from "./admin-client"
 
 interface DashboardShellProps {

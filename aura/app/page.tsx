@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { ChatShell } from "@/components/features/chat-v2/ChatShell"
+import { ChatShell } from "@/components/features/chat-ui/ChatShell"
 
 function ChatFallback() {
   return (
