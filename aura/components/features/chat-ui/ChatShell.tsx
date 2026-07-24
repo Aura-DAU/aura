@@ -79,6 +79,22 @@ export function ChatShell() {
 
   const hasMessages = chat.messages.length > 0
 
+  const composer = (
+    <Composer
+      inputText={chat.inputText}
+      setInputText={chat.setInputText}
+      loading={chat.loading}
+      isRecording={chat.isRecording}
+      isTranscribing={chat.isTranscribing}
+      recordingVolume={chat.recordingVolume}
+      onSend={chat.handleSendMessage}
+      onMicClick={chat.handleMicClick}
+      onStop={chat.stopGeneration}
+      remainingQuota={chat.remainingQuota}
+      variant={hasMessages ? "docked" : "centered"}
+    />
+  )
+
   return (
     <DocumentViewerProvider>
       <div className="flex h-[100dvh] overflow-hidden bg-theme-black text-neutral-100">
@@ -96,9 +112,7 @@ export function ChatShell() {
 
         <main className="relative flex min-w-0 flex-1 flex-col">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:24px_24px]" />
-            <div className="absolute -left-24 -top-24 size-72 rounded-full bg-theme-red/20 blur-3xl" />
-            <div className="absolute -bottom-24 -right-24 size-72 rounded-full bg-theme-yellow/20 blur-3xl" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(244,80,59,0.06),transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(255,190,63,0.05),transparent_50%)]" />
           </div>
 
           <div className="relative z-10 flex h-full flex-col">
@@ -123,31 +137,31 @@ export function ChatShell() {
               </div>
             ) : null}
 
-            <div className="flex-1 overflow-y-auto">
-              {hasMessages ? (
-                <MessageList
-                  messages={chat.messages}
-                  loading={chat.loading}
-                  thinkingStep={chat.thinkingStep}
-                  activeCitations={chat.activeCitations}
-                  onRegenerate={handleRegenerate}
-                />
-              ) : (
-                <EmptyState onSelectPrompt={chat.handleSendMessage} />
-              )}
-            </div>
-
-            <Composer
-              inputText={chat.inputText}
-              setInputText={chat.setInputText}
-              loading={chat.loading}
-              isRecording={chat.isRecording}
-              isTranscribing={chat.isTranscribing}
-              recordingVolume={chat.recordingVolume}
-              onSend={chat.handleSendMessage}
-              onMicClick={chat.handleMicClick}
-              remainingQuota={chat.remainingQuota}
-            />
+            {hasMessages ? (
+              <>
+                <div className="flex-1 overflow-y-auto chat-v2-scroll">
+                  <MessageList
+                    messages={chat.messages}
+                    loading={chat.loading}
+                    thinkingStep={chat.thinkingStep}
+                    activeCitations={chat.activeCitations}
+                    onRegenerate={handleRegenerate}
+                  />
+                </div>
+                {composer}
+              </>
+            ) : (
+              <div className="flex-1 overflow-y-auto chat-v2-scroll">
+                <div className="flex min-h-full items-center justify-center">
+                  <EmptyState
+                    onSelectPrompt={chat.handleSendMessage}
+                    userName={chat.studentProfile.name}
+                  >
+                    {composer}
+                  </EmptyState>
+                </div>
+              </div>
+            )}
           </div>
         </main>
 

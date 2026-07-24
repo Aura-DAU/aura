@@ -5,7 +5,7 @@ import { MessageSquare, Plus, Trash2, User, LogOut, LayoutDashboard } from "luci
 import { cn } from "@/lib/utils"
 import type { ChatThread, StudentProfile } from "@/lib/chat-types"
 import { useSession, signOut } from "next-auth/react"
-import { BrandMark } from "@/components/common/BrandMark"
+import { BrandMark } from "@/components/ui/brand-mark"
 
 interface SidebarProps {
   threads: ChatThread[]
@@ -69,21 +69,24 @@ function SidebarContent({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-2 px-4 py-4">
-        <BrandMark className="size-8 text-sm" />
-        <span className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text font-semibold text-transparent">
-          AURA
-        </span>
+      <div className="flex items-center gap-2.5 px-4 py-4">
+        <BrandMark className="size-8 shadow-[0_0_20px_-6px_rgba(244,80,59,0.55)]" />
+        <div className="flex flex-col leading-tight">
+          <span className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text font-semibold tracking-tight text-transparent">
+            AURA
+          </span>
+          <span className="text-[10px] text-neutral-500">Your campus AI</span>
+        </div>
       </div>
 
-      <div className="px-3 flex flex-col gap-2">
+      <div className="flex flex-col gap-2 px-3">
         <button
           type="button"
           onClick={() => {
             onNewChat()
             onCloseMobile()
           }}
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-theme-red to-theme-yellow px-4 py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90"
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-theme-red to-theme-yellow px-4 py-2.5 text-sm font-semibold text-black shadow-[0_2px_14px_-6px_rgba(244,80,59,0.5)] transition-all hover:brightness-110 active:scale-[0.98]"
         >
           <Plus className="size-4" />
           New chat
@@ -92,7 +95,7 @@ function SidebarContent({
           <a
             href="/dashboard"
             onClick={onCloseMobile}
-            className="flex w-full items-center justify-center gap-2 rounded-full border border-theme-gray-light bg-theme-gray-light/30 px-4 py-2 text-sm font-medium text-neutral-300 transition-colors hover:bg-theme-gray-light hover:text-neutral-100"
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-theme-gray-light bg-theme-black/30 px-4 py-2 text-sm font-medium text-neutral-300 transition-colors hover:border-theme-gray-lighter hover:bg-theme-gray-light hover:text-neutral-100"
           >
             <LayoutDashboard className="size-4 text-theme-yellow" />
             Go to Dashboard
@@ -100,7 +103,10 @@ function SidebarContent({
         )}
       </div>
 
-      <nav className="mt-4 flex-1 space-y-1 overflow-y-auto px-3 pb-4">
+      <nav className="chat-v2-scroll mt-4 flex-1 space-y-1 overflow-y-auto px-3 pb-4">
+        <p className="mb-2 px-2 text-[10px] font-medium uppercase tracking-wider text-neutral-600">
+          Conversations
+        </p>
         {threads.length === 0 ? (
           <p className="px-2 py-4 text-xs text-neutral-500">
             No conversations yet.
@@ -112,12 +118,15 @@ function SidebarContent({
               <div
                 key={thread.id}
                 className={cn(
-                  "group flex items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-colors",
+                  "group relative flex items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-all duration-150",
                   active
                     ? "bg-theme-gray-light text-neutral-100"
-                    : "text-neutral-400 hover:bg-theme-gray-light/60 hover:text-neutral-200",
+                    : "text-neutral-400 hover:bg-theme-gray-light/55 hover:text-neutral-200",
                 )}
               >
+                {active ? (
+                  <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-gradient-to-b from-theme-red to-theme-yellow" />
+                ) : null}
                 <button
                   type="button"
                   onClick={() => {
@@ -126,17 +135,14 @@ function SidebarContent({
                   }}
                   className="flex min-w-0 flex-1 items-center gap-2 text-left"
                 >
-                  <MessageSquare className="size-4 shrink-0" />
+                  <MessageSquare className={cn("size-4 shrink-0", active && "text-theme-yellow")} />
                   <span className="truncate">{thread.title}</span>
-                  {active ? (
-                    <span className="ml-auto size-1.5 shrink-0 rounded-full bg-theme-yellow" />
-                  ) : null}
                 </button>
                 <button
                   type="button"
                   onClick={() => onDeleteThread(thread.id)}
                   aria-label={`Delete ${thread.title}`}
-                  className="shrink-0 rounded-md p-1 text-neutral-500 opacity-0 transition-opacity hover:text-theme-red group-hover:opacity-100"
+                  className="shrink-0 rounded-md p-1 text-neutral-500 opacity-0 transition-opacity hover:text-theme-red group-hover:opacity-100 focus-visible:opacity-100 max-md:opacity-100"
                 >
                   <Trash2 className="size-3.5" />
                 </button>
@@ -149,16 +155,16 @@ function SidebarContent({
         <button
           type="button"
           onClick={onOpenProfile}
-          className="flex flex-1 items-center gap-3 rounded-xl px-2.5 py-2 text-left transition-colors hover:bg-theme-gray-light min-w-0"
+          className="flex min-w-0 flex-1 items-center gap-3 rounded-xl px-2.5 py-2 text-left transition-colors hover:bg-theme-gray-light"
         >
-          <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-theme-gray-lighter text-neutral-200">
+          <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-theme-gray-lighter to-theme-gray text-neutral-200 ring-1 ring-white/10">
             <User className="size-4" />
           </span>
           <span className="min-w-0 flex-1">
             <span suppressHydrationWarning className="flex items-center gap-1.5 truncate text-sm font-medium text-neutral-100">
               <span className="truncate">{displayName}</span>
               {session?.user?.role && (
-                <span className="inline-flex items-center rounded-full bg-neutral-500/10 px-1.5 py-0.5 text-[10px] font-medium text-neutral-400 border border-neutral-500/20 capitalize">
+                <span className="inline-flex items-center rounded-full border border-theme-yellow/20 bg-theme-yellow/10 px-1.5 py-0.5 text-[10px] font-medium capitalize text-theme-yellow">
                   {session.user.role.replace("faculty_", "").replace("dean_", "dean ")}
                 </span>
               )}
@@ -178,12 +184,12 @@ function SidebarContent({
             type="button"
             onClick={() => signOut({ callbackUrl: "/login" })}
             aria-label="Sign out"
-            className="rounded-lg p-2 text-neutral-400 hover:bg-theme-gray-light hover:text-theme-red transition-colors shrink-0"
+            className="shrink-0 rounded-lg p-2 text-neutral-400 transition-colors hover:bg-theme-gray-light hover:text-theme-red"
           >
             <LogOut className="size-4" />
           </button>
         )}
       </div>
-    </div> 
+    </div>
   )
 }

@@ -48,28 +48,25 @@ export function MessageList({
   }, [messages, loading, thinkingStep])
 
   return (
-    <div ref={containerRef} className="mx-auto w-full max-w-3xl space-y-6 px-4 py-6">
+    <div ref={containerRef} className="mx-auto w-full max-w-3xl space-y-8 px-4 py-6 md:py-8">
       {messages.map((message, index) => {
         const isStreaming =
           loading && index === lastAssistantIndex && message.role === "assistant"
+        const isLatestAssistant =
+          message.role === "assistant" && index === lastAssistantIndex && !loading
         return (
           <Message
             key={`${message.timestamp ?? index}-${message.role}-${index}`}
             message={message}
             isStreaming={isStreaming}
-            citations={
-              index === lastAssistantIndex ? activeCitations : undefined
-            }
-            onRegenerate={
-              message.role === "assistant" && index === lastAssistantIndex && !loading
-                ? onRegenerate
-                : undefined
-            }
+            showActions={isLatestAssistant}
+            citations={index === lastAssistantIndex ? activeCitations : undefined}
+            onRegenerate={isLatestAssistant ? onRegenerate : undefined}
           />
         )
       })}
       {showIndicator ? <StreamingIndicator thinkingStep={thinkingStep} /> : null}
-      <div ref={bottomRef} />
+      <div ref={bottomRef} className="h-2" />
     </div>
   )
 }
