@@ -78,7 +78,7 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
         "role": identity.role,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
     }
-    state_token = jwt.encode(state_payload, secret, algorithm=HASHING_ALGORITHM)
+    state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)
 
     # Students need write scope for timetable sync; faculty need readonly
     scope = CALENDAR_SCOPE_EVENTS if identity.role == "student" else CALENDAR_SCOPE_READONLY
@@ -109,7 +109,7 @@ def calendar_oauth_callback(
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured on the server.")
 
     try:
-        claims = jwt.decode(state, secret, algorithms=[HASHING_ALGORITHM])
+        claims = jwt.decode(state, secret, algorithms=[ALGORITHM])
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=400, detail="State token expired. Please reconnect calendar.")
     except jwt.InvalidTokenError:
