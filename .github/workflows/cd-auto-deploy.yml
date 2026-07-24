@@ -11,7 +11,7 @@
 #
 # This workflow is dormant until that runner is online.
 
-name: CD — Node 1 app deploy
+name: CD — Aura app deploy
 
 on:
   # Manual deploy (safe default while the runner is being set up)
@@ -53,9 +53,6 @@ jobs:
         env:
           AURA_APP_ROOT: /opt/aura/app
           AURA_ENV_FILE: /opt/aura/app/deploy/node1/.env
-          # Prefer repo secret AURA_DEPLOY_GIT_TOKEN (classic/fine-grained PAT with
-          # Contents: Read). Falls back to the job's built-in github.token.
-          # Never commit a PAT into this file or deploy/node1/.env.
           GITHUB_TOKEN: ${{ secrets.AURA_DEPLOY_GIT_TOKEN || github.token }}
         run: |
           set -euo pipefail
