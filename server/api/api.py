@@ -17,7 +17,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 
-from pipeline.speech import transcribe_audio
 from api.auth import require_identity, Identity
 from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
@@ -289,6 +288,9 @@ async def speech(
             temp_path = tmp.name
 
         async with speech_queue_lock:
+            # Defer Whisper import/load until first /speech call so /health can boot.
+            from pipeline.speech import transcribe_audio
+
             question = await run_in_threadpool(
                 transcribe_audio, temp_path, initial_prompt=UNIVERSITY_PROMPT
             )

@@ -30,13 +30,18 @@ RUN pip install --no-cache-dir -r rag/requirements.txt \
 # just needs the whole server/ tree with this as the working directory.
 COPY . .
 
+# System users default HOME=/nonexistent; Whisper/HF caches need a real path.
 RUN addgroup --system aura && adduser --system --ingroup aura aura \
- && chown -R aura:aura /app/server
+ && mkdir -p /var/lib/aura/whisper /var/log/aura \
+ && chown -R aura:aura /app/server /var/lib/aura /var/log/aura
 USER aura
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PORT=8000
+    PORT=8000 \
+    HOME=/tmp \
+    XDG_CACHE_HOME=/tmp/.cache \
+    WHISPER_CACHE_DIR=/tmp/whisper-cache
 
 EXPOSE 8000
 
