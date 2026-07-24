@@ -49,6 +49,9 @@ from cryptography.fernet import Fernet
 SCOPE_READONLY = "https://www.googleapis.com/auth/calendar.readonly"
 SCOPE_EVENTS   = "https://www.googleapis.com/auth/calendar.events"
 
+SCOPE_READONLY = "https://www.googleapis.com/auth/calendar.readonly"
+SCOPE_EVENTS   = "https://www.googleapis.com/auth/calendar.events"
+
 
 class CalendarNotLinked(Exception):
     pass

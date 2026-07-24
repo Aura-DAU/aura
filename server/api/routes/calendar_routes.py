@@ -101,6 +101,9 @@ def start_calendar_oauth(
     }
     state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)
 
+    # Students need write scope for timetable sync; faculty need readonly
+    scope = CALENDAR_SCOPE_EVENTS if identity.role == "student" else CALENDAR_SCOPE_READONLY
+
     params = {
         "client_id":     CLIENT_ID,
         "redirect_uri":  REDIRECT_URI,
