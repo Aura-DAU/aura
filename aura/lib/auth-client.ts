@@ -1,4 +1,5 @@
 import { signOut } from "next-auth/react"
+import { toastError } from "@/lib/toast"
 
 let inMemoryToken: string | null = null
 
@@ -63,6 +64,7 @@ export async function apiFetch(input: RequestInfo | URL, init?: RequestInit): Pr
       response = await fetch(input, { ...init, headers })
     } else {
       console.error("[auth-client] Silent refresh failed, logging out...")
+      toastError("Your session expired. Please sign in again.")
       await logout()
     }
   }

@@ -6,6 +6,7 @@ import { X } from "lucide-react"
 import { toast } from "sonner"
 import type { StudentProfile } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
+import { toastError } from "@/lib/toast"
 
 interface ProfileModalProps {
   open: boolean
@@ -47,6 +48,8 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
       await onSave(draft)
       toast.success("Profile saved")
       onClose()
+    } catch {
+      toastError("Could not save profile")
     } finally {
       setSaving(false)
     }

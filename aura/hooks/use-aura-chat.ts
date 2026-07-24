@@ -10,6 +10,7 @@ import type {
 } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
 import { apiFetch, setToken, initAuth } from "@/lib/auth-client"
+import { getErrorMessage, toastError } from "@/lib/toast"
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
@@ -444,8 +445,9 @@ export function useAuraChat() {
       } catch (err) {
         if (controller.signal.aborted || !mountedRef.current) return
         if (err instanceof DOMException && err.name === "AbortError") return
-        const msg = err instanceof Error ? err.message : "Something went wrong. Please try again."
+        const msg = getErrorMessage(err, "Something went wrong. Please try again.")
         setErrorMessage(msg)
+        toastError(msg)
         setMessages(baseMessages)
       } finally {
         if (abortRef.current === controller) abortRef.current = null
@@ -494,10 +496,14 @@ export function useAuraChat() {
         if (transcript) {
           setInputText((prev) => (prev ? `${prev} ${transcript}` : transcript))
         } else {
-          setErrorMessage(data.error ?? "Could not transcribe audio.")
+          const msg = data.error ?? "Could not transcribe audio."
+          setErrorMessage(msg)
+          toastError(msg)
         }
       } catch {
-        setErrorMessage("Could not transcribe audio.")
+        const msg = "Could not transcribe audio."
+        setErrorMessage(msg)
+        toastError(msg)
       } finally {
         setIsTranscribing(false)
       }
@@ -530,7 +536,9 @@ export function useAuraChat() {
       }
 
       if (!detectedMimeType) {
-        setErrorMessage("Audio recording is not supported in this browser.")
+        const msg = "Audio recording is not supported in this browser."
+        setErrorMessage(msg)
+        toastError(msg)
         return
       }
 
@@ -627,7 +635,9 @@ export function useAuraChat() {
       recorder.start()
       setIsRecording(true)
     } catch {
-      setErrorMessage("Microphone access was denied.")
+      const msg = "Microphone access was denied."
+      setErrorMessage(msg)
+      toastError(msg)
     }
   }, [isRecording, transcribeAudio])
 

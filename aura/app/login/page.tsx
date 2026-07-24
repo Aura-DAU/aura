@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, Suspense } from "react"
+import { useState, Suspense, useEffect } from "react"
 import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
 import { Sparkles, Loader2, Globe, GraduationCap, BookOpen, AlertCircle, Shield } from "lucide-react"
 import { BrandMark } from "@/components/common/BrandMark"
+import { toastError } from "@/lib/toast"
 
 function LoginCard() {
   const [loading, setLoading] = useState<"google" | "demo-student" | "demo-faculty" | "demo-admin" | null>(null)
@@ -20,9 +21,18 @@ function LoginCard() {
     errorMsg = "Authentication failed. Please try again."
   }
 
-  const handleGoogleSignIn = () => {
+  useEffect(() => {
+    if (errorMsg) toastError(errorMsg)
+  }, [errorMsg])
+
+  const handleGoogleSignIn = async () => {
     setLoading("google")
-    signIn("google", { callbackUrl: "/" })
+    try {
+      await signIn("google", { callbackUrl: "/" })
+    } catch {
+      toastError("Could not start Google sign-in. Please try again.")
+      setLoading(null)
+    }
   }
 
   const handleDemoSignIn = async (role: "student" | "faculty" | "admin") => {
@@ -49,11 +59,11 @@ function LoginCard() {
         window.location.href = "/"
       } else {
         setLoading(null)
-        alert(`Demo login failed: ${res?.error || "Unknown error"}`)
+        toastError(`Demo login failed: ${res?.error || "Unknown error"}`)
       }
     } catch {
       setLoading(null)
-      alert("Network error during demo login")
+      toastError("Network error during demo login")
     }
   }
 
