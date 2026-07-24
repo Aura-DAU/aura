@@ -28,7 +28,7 @@ Example admin workflow:
 
 import re
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 import db.connection as db_conn
@@ -103,8 +103,8 @@ def _check_erp_exists(erp_id: str) -> None:
 
 
 class AddBindingRequest(BaseModel):
-    binding:    str
-    expires_at: Optional[str] = None   # ISO-8601 datetime string, or null = permanent
+    binding:    str = Field(..., min_length=1, max_length=128)
+    expires_at: Optional[str] = Field(None, max_length=64)   # ISO-8601 datetime string, or null = permanent
 
 
 @router.get("/users/{erp_id}/bindings")

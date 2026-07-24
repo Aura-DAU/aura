@@ -25,7 +25,9 @@ def _fernet() -> Fernet:
 
 
 def _connect():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    # mode=0o700 restricts a vault dir AURA creates itself; it does not loosen
+    # (or tighten) an already-existing shared parent such as /tmp.
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     conn = sqlite3.connect(DB_PATH)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS gcal_tokens (
@@ -34,6 +36,12 @@ def _connect():
             linked_at       TEXT NOT NULL
         )
     """)
+    # Restrict token DB permissions before any token blob is written, matching
+    # ecampus/credentials_vault.py — OAuth tokens are just as sensitive.
+    try:
+        os.chmod(DB_PATH, 0o600)
+    except OSError:
+        pass
     return conn
 
 

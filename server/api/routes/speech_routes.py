@@ -29,13 +29,16 @@ async def speech(
             raise HTTPException(status_code=400, detail=f"Unsupported file type: {ext}")
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+            # Capture the path immediately so the finally block always cleans up,
+            # including when the size cap trips mid-write (delete=False otherwise
+            # leaks the partial file to disk — a disk-fill DoS vector).
+            temp_path = tmp.name
             size = 0
             while chunk := await file.read(1024 * 1024):
                 size += len(chunk)
                 if size > MAX_AUDIO_BYTES:
                     raise HTTPException(status_code=413, detail="Audio file too large")
                 tmp.write(chunk)
-            temp_path = tmp.name
 
         async with speech_queue_lock:
             question = await run_in_threadpool(

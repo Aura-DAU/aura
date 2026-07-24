@@ -5,9 +5,14 @@ services:
   qdrant:
     image: qdrant/qdrant:latest
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Publish on the private LAN bind only in production (set NODE4_PUBLISH_BIND
+    # to the node LAN IP). Default 0.0.0.0 requires a host firewall that denies
+    # public internet access to 6333/6334/8001.
     ports:
-      - "6333:6333"
-      - "6334:6334"
+      - "${NODE4_PUBLISH_BIND:-0.0.0.0}:6333:6333"
+      - "${NODE4_PUBLISH_BIND:-0.0.0.0}:6334:6334"
     volumes:
       - qdrant-storage:/qdrant/storage
     healthcheck:
@@ -24,12 +29,16 @@ services:
       context: ../../services/embedding-reranker
       dockerfile: Dockerfile
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
-      - "8001:8001"
+      - "${NODE4_PUBLISH_BIND:-0.0.0.0}:8001:8001"
     environment:
       - EMBEDDING_MODEL_NAME=${EMBEDDING_MODEL_NAME:-BAAI/bge-m3}
       - RERANKER_MODEL_NAME=${RERANKER_MODEL_NAME:-BAAI/bge-reranker-v2-m3}
       - RERANKER_DEVICE=${RERANKER_DEVICE:-cpu}
+      - MAX_CONCURRENT_INFERENCE=${MAX_CONCURRENT_INFERENCE:-2}
+      - MAX_REQUEST_BYTES=${MAX_REQUEST_BYTES:-1048576}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://127.0.0.1:8001/health"]
       interval: 15s
@@ -42,8 +51,11 @@ services:
   prometheus:
     image: prom/prometheus:latest
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Bind to localhost on Node 4 — scrape from the LAN, not the public internet.
     ports:
-      - "9090:9090"
+      - "127.0.0.1:9090:9090"
     volumes:
       - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus-data:/prometheus
@@ -53,8 +65,11 @@ services:
   grafana:
     image: grafana/grafana:latest
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Ops UI — localhost only; tunnel/SSH for remote access.
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
     volumes:

@@ -2,7 +2,6 @@ import { NextAuthOptions, DefaultSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { backendUrl } from "@/lib/api/backend"
-import { signInternalJwt } from "@/lib/auth/internal-jwt"
 import {
   getNextAuthSecret,
   requireGoogleOAuthCredentials,
@@ -13,7 +12,6 @@ type Role = "student" | "faculty" | "admin" | "guest"
 
 declare module "next-auth" {
   interface Session {
-    accessToken?: string
     user: {
       role: Role
       erpId: string
@@ -43,7 +41,6 @@ declare module "next-auth/jwt" {
     role?: Role
     erpId?: string
     department?: string
-    accessToken?: string
     fullName?: string
     currentYear?: number
     currentSem?: number
@@ -135,6 +132,26 @@ export const authOptions: NextAuthOptions = {
   ],
   session: {
     strategy: "jwt",
+    // Bound session lifetime so stolen cookies expire without waiting for
+    // Google account recovery. Sliding refresh still renews while active.
+    maxAge: 8 * 60 * 60, // 8 hours
+    updateAge: 60 * 60, // refresh JWT at most once per hour
+  },
+  // Force Secure cookies in production (NextAuth also sets httpOnly + SameSite=lax).
+  useSecureCookies: process.env.NODE_ENV === "production",
+  cookies: {
+    sessionToken: {
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.session-token"
+          : "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
   },
   callbacks: {
     async signIn({ user, account }) {
@@ -219,20 +236,6 @@ export const authOptions: NextAuthOptions = {
             token.currentSec = erpData.currentSec
           }
         }
-      }
-
-      // Mint a fresh short-lived internal JWT on every token update
-      if (token.role && token.erpId) {
-        token.accessToken = signInternalJwt({
-          role: token.role as Role,
-          erpId: token.erpId,
-          department: token.department || undefined,
-          email: typeof token.email === "string" ? token.email : undefined,
-          fullName: token.fullName || undefined,
-          currentYear: token.currentYear,
-          currentSem: token.currentSem,
-          currentSec: token.currentSec,
-        })
       }
 
       return token

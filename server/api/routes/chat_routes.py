@@ -8,7 +8,7 @@ from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import StreamingResponse
 
 from api.auth import Identity, require_identity
-from api.deps import get_aura
+from api.deps import chat_queue_lock, get_aura
 from api.schemas import ChatRequest
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota
 
@@ -38,13 +38,14 @@ async def chat(
 ):
     history, display_profile = _resolve_request(request, identity)
 
-    return await run_in_threadpool(
-        get_aura().ask,
-        question=request.question,
-        history=history,
-        identity=identity.as_dict(),
-        display_profile=display_profile,
-    )
+    async with chat_queue_lock:
+        return await run_in_threadpool(
+            get_aura().ask,
+            question=request.question,
+            history=history,
+            identity=identity.as_dict(),
+            display_profile=display_profile,
+        )
 
 
 def _sse(payload: dict) -> str:
@@ -83,48 +84,52 @@ async def chat_stream(
         else:
             loop.call_soon_threadsafe(events.put_nowait, ("done", result))
 
-    # to_thread copies contextvars, so latency_tracker segments recorded inside
-    # the pipeline still land in this request's middleware-scoped dict.
-    worker = asyncio.create_task(asyncio.to_thread(_run))
-
     async def event_source():
-        streamed_any = False
-        while True:
-            kind, payload = await events.get()
-            if kind == "delta":
-                streamed_any = True
-                yield _sse({"type": "text-delta", "delta": payload})
-                continue
-            if kind == "error":
-                print(f"[chat_stream] pipeline error: {payload}")
-                if not streamed_any:
-                    yield _sse({
-                        "type": "text-delta",
-                        "delta": "Sorry, I encountered an error while generating a response. Please try again.",
-                    })
-                yield "data: [DONE]\n\n"
-                break
-            # done — canned/denial paths stream nothing, so emit the whole
-            # answer as a single delta to match the non-streaming UX.
-            result = payload or {}
-            answer = result.get("answer", "")
-            if not streamed_any and answer:
-                yield _sse({"type": "text-delta", "delta": answer})
-            citations = []
-            for source in result.get("sources") or []:
-                if isinstance(source, dict):
-                    file = source.get("file") or source.get("url") or ""
-                    if file:
-                        citations.append({"file": file, "title": source.get("title")})
-                elif source:
-                    citations.append({"file": str(source), "title": None})
-            if citations:
-                yield _sse({"type": "citations", "citations": citations})
-            if result.get("is_personal_data"):
-                yield _sse({"type": "personal-data-flag"})
-            yield "data: [DONE]\n\n"
-            break
-        await worker
+        # Hold a concurrency slot for the whole stream so authenticated
+        # floods cannot open unbounded parallel RAG/LLM jobs.
+        async with chat_queue_lock:
+            # to_thread copies contextvars, so latency_tracker segments recorded
+            # inside the pipeline still land in this request's middleware dict.
+            worker = asyncio.create_task(asyncio.to_thread(_run))
+            streamed_any = False
+            try:
+                while True:
+                    kind, payload = await events.get()
+                    if kind == "delta":
+                        streamed_any = True
+                        yield _sse({"type": "text-delta", "delta": payload})
+                        continue
+                    if kind == "error":
+                        print(f"[chat_stream] pipeline error: {payload}")
+                        if not streamed_any:
+                            yield _sse({
+                                "type": "text-delta",
+                                "delta": "Sorry, I encountered an error while generating a response. Please try again.",
+                            })
+                        yield "data: [DONE]\n\n"
+                        break
+                    # done — canned/denial paths stream nothing, so emit the whole
+                    # answer as a single delta to match the non-streaming UX.
+                    result = payload or {}
+                    answer = result.get("answer", "")
+                    if not streamed_any and answer:
+                        yield _sse({"type": "text-delta", "delta": answer})
+                    citations = []
+                    for source in result.get("sources") or []:
+                        if isinstance(source, dict):
+                            file = source.get("file") or source.get("url") or ""
+                            if file:
+                                citations.append({"file": file, "title": source.get("title")})
+                        elif source:
+                            citations.append({"file": str(source), "title": None})
+                    if citations:
+                        yield _sse({"type": "citations", "citations": citations})
+                    if result.get("is_personal_data"):
+                        yield _sse({"type": "personal-data-flag"})
+                    yield "data: [DONE]\n\n"
+                    break
+            finally:
+                await worker
 
     return StreamingResponse(
         event_source(),

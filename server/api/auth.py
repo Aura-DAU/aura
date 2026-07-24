@@ -28,6 +28,14 @@ def get_internal_jwt_secret() -> str:
 
 ALGORITHM = "HS256"
 
+# Must match aura/lib/auth/internal-jwt.ts — binds tokens to the Next→API hop
+# so Google Calendar OAuth state JWTs (different aud) cannot be reused as Bearer.
+INTERNAL_JWT_ISSUER = "aura-next"
+INTERNAL_JWT_AUDIENCE = "aura-api"
+GCAL_OAUTH_STATE_ISSUER = "aura-api"
+GCAL_OAUTH_STATE_AUDIENCE = "aura-gcal-oauth"
+GCAL_OAUTH_STATE_TYP = "gcal_oauth_state"
+
 # Broad roles stored in user_identity_map.role — what the JWT carries.
 # Fine-grained roles are in role_bindings and resolved by resolve_effective_role().
 BROAD_ROLES = {"student", "faculty", "admin", "guest"}
@@ -102,7 +110,13 @@ def require_identity(
 
     token = credentials.credentials
     try:
-        claims = jwt.decode(token, secret, algorithms=[ALGORITHM])
+        claims = jwt.decode(
+            token,
+            secret,
+            algorithms=[ALGORITHM],
+            audience=INTERNAL_JWT_AUDIENCE,
+            issuer=INTERNAL_JWT_ISSUER,
+        )
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Session expired — please refresh the page")
     except jwt.InvalidTokenError:
@@ -112,20 +126,30 @@ def require_identity(
     erp_id = claims.get("erpId", "")  # Next.js mints camelCase
     email  = claims.get("email") or None
 
-    if not erp_id:
+    if not erp_id or not isinstance(erp_id, str):
         raise HTTPException(status_code=401, detail="Token missing erpId claim")
+    # Bound claim sizes so a forged/minted JWT cannot inflate logs, Redis
+    # quota keys, or DB params with megabyte-scale strings.
+    if len(erp_id) > 64:
+        raise HTTPException(status_code=401, detail="Invalid erpId claim")
     if role not in BROAD_ROLES:
-        raise HTTPException(status_code=403, detail=f"Unrecognised role in token: {role!r}")
+        raise HTTPException(status_code=403, detail="Unrecognised role in token")
+    if email is not None and (not isinstance(email, str) or len(email) > 320):
+        raise HTTPException(status_code=401, detail="Invalid email claim")
+
+    dept = claims.get("department")
+    if dept is not None and (not isinstance(dept, str) or len(dept) > 128):
+        raise HTTPException(status_code=401, detail="Invalid department claim")
 
     return Identity(
         erp_id=erp_id,
         role=role,
-        dept=claims.get("department"),
+        dept=dept,
         email=email,
-        full_name=claims.get("fullName"),
-        current_year=claims.get("currentYear"),
-        current_sem=claims.get("currentSem"),
-        current_sec=claims.get("currentSec"),
+        full_name=claims.get("fullName") if isinstance(claims.get("fullName"), str) else None,
+        current_year=claims.get("currentYear") if isinstance(claims.get("currentYear"), int) else None,
+        current_sem=claims.get("currentSem") if isinstance(claims.get("currentSem"), int) else None,
+        current_sec=claims.get("currentSec") if isinstance(claims.get("currentSec"), str) else None,
     )
 
 

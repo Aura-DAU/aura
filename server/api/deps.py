@@ -1,5 +1,6 @@
-# Shared FastAPI dependencies (lazy AURA init, speech concurrency).
+# Shared FastAPI dependencies (lazy AURA init, speech/chat concurrency).
 import asyncio
+import os
 import threading
 
 _aura = None
@@ -7,6 +8,11 @@ _aura_lock = threading.Lock()
 
 # Serialize Whisper jobs — concurrent ffmpeg/transcription is expensive.
 speech_queue_lock = asyncio.Semaphore(1)
+
+# Cap concurrent RAG/LLM asks so a burst of authenticated users cannot pin
+# every worker on long-running inference. Override via CHAT_CONCURRENCY.
+_chat_limit = max(1, int(os.getenv("CHAT_CONCURRENCY", "4")))
+chat_queue_lock = asyncio.Semaphore(_chat_limit)
 
 
 def get_aura():

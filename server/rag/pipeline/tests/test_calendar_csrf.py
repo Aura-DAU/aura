@@ -22,9 +22,17 @@ app.include_router(router)
 client = TestClient(app, raise_server_exceptions=False)
 
 def test_callback_with_valid_state():
-    # Mint a valid token
+    # Mint a valid OAuth state token (separate aud/iss from session JWTs)
+    from api.auth import (
+        GCAL_OAUTH_STATE_AUDIENCE,
+        GCAL_OAUTH_STATE_ISSUER,
+        GCAL_OAUTH_STATE_TYP,
+    )
     payload = {
         "erp_id": "FAC001",
+        "typ": GCAL_OAUTH_STATE_TYP,
+        "iss": GCAL_OAUTH_STATE_ISSUER,
+        "aud": GCAL_OAUTH_STATE_AUDIENCE,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
     }
     secret = os.environ.get("INTERNAL_JWT_SECRET", "test-secret-key")
@@ -47,19 +55,39 @@ def test_callback_with_valid_state():
     assert res.headers["location"] == "http://localhost:3000/dashboard?calendar=connected"
     mock_store.assert_called_once()
 
+
 def test_callback_with_invalid_state_signature():
     # Mint token with a wrong secret
-    payload = {"erp_id": "FAC001"}
+    from api.auth import (
+        GCAL_OAUTH_STATE_AUDIENCE,
+        GCAL_OAUTH_STATE_ISSUER,
+        GCAL_OAUTH_STATE_TYP,
+    )
+    payload = {
+        "erp_id": "FAC001",
+        "typ": GCAL_OAUTH_STATE_TYP,
+        "iss": GCAL_OAUTH_STATE_ISSUER,
+        "aud": GCAL_OAUTH_STATE_AUDIENCE,
+    }
     state = jwt.encode(payload, "wrong-secret", algorithm="HS256")
     
     res = client.get(f"/calendar/callback?code=mock_code&state={state}", follow_redirects=False)
     assert res.status_code == 400
     assert "invalid state token" in res.json()["detail"].lower()
 
+
 def test_callback_with_expired_state():
     # Mint expired token
+    from api.auth import (
+        GCAL_OAUTH_STATE_AUDIENCE,
+        GCAL_OAUTH_STATE_ISSUER,
+        GCAL_OAUTH_STATE_TYP,
+    )
     payload = {
         "erp_id": "FAC001",
+        "typ": GCAL_OAUTH_STATE_TYP,
+        "iss": GCAL_OAUTH_STATE_ISSUER,
+        "aud": GCAL_OAUTH_STATE_AUDIENCE,
         "exp": datetime.datetime.utcnow() - datetime.timedelta(seconds=1)
     }
     secret = os.environ.get("INTERNAL_JWT_SECRET", "test-secret-key")

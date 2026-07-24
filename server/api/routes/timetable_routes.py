@@ -16,8 +16,8 @@ in 10 minutes" reminder feature.
 import os
 import uuid
 
-from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import BaseModel, Field
 
 import db.connection as db_conn
 from api.auth import require_identity, Identity
@@ -52,14 +52,14 @@ def get_my_timetable_changes(identity: Identity = Depends(require_identity)):
 
 
 class PushSubscriptionKeys(BaseModel):
-    p256dh: str
-    auth: str
+    p256dh: str = Field(..., min_length=1, max_length=256)
+    auth: str = Field(..., min_length=1, max_length=256)
 
 
 class PushSubscriptionIn(BaseModel):
-    endpoint: str
+    endpoint: str = Field(..., min_length=1, max_length=2048)
     keys: PushSubscriptionKeys
-    user_agent: str | None = None
+    user_agent: str | None = Field(None, max_length=512)
 
 
 @push_router.get("/vapid-public-key")
@@ -97,7 +97,10 @@ def subscribe_to_push(body: PushSubscriptionIn, identity: Identity = Depends(req
 
 
 @push_router.delete("/subscribe")
-def unsubscribe_from_push(endpoint: str, identity: Identity = Depends(require_identity)):
+def unsubscribe_from_push(
+    endpoint: str = Query(..., min_length=1, max_length=2048),
+    identity: Identity = Depends(require_identity),
+):
     db_conn.execute(
         "UPDATE push_subscriptions SET is_active = FALSE WHERE endpoint = %s AND erp_id = %s",
         (endpoint, identity.erp_id),
