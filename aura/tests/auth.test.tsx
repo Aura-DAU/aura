@@ -31,7 +31,7 @@ describe('Domain detection (guest vs DAU)', () => {
 })
 
 describe('Unauthenticated Composer rendering', () => {
-  it('renders sign-in prompt when unauthenticated', () => {
+  it('renders "Sign in to start chatting with AURA" when unauthenticated', () => {
     vi.mocked(useSession).mockReturnValue({
       data: null,
       status: 'unauthenticated',
