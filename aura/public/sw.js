@@ -2,7 +2,8 @@
 // "class starts in 10 minutes" push notification sent by the backend
 // scheduler (server/rag/pipeline/timetable/notifier.py).
 
-self.addEventListener("install", (_event) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+self.addEventListener("install", (event) => {
   self.skipWaiting()
 })
 
@@ -16,7 +17,8 @@ self.addEventListener("push", (event) => {
     if (event.data) {
       data = { ...data, ...event.data.json() }
     }
-  } catch (_err) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (err) {
     // Non-JSON push payload — fall back to defaults above.
   }
 
