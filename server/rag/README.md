@@ -39,7 +39,9 @@ python db/migrate.py
 ```
 
 ### 4. Start the Development Server
-Run the FastAPI development server:
+
+See [../README.md](../README.md) for the canonical runbook. From `server/`:
+
 ```bash
 uvicorn api.api:app --host 127.0.0.1 --port 8000 --reload
 ```

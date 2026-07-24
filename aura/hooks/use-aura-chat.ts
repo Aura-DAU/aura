@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import type {
   ChatMessage,
   ChatThread,
@@ -10,7 +10,8 @@ import type {
 } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
 import { apiFetch, setToken, initAuth } from "@/lib/auth-client"
-import { getErrorMessage, toastError } from "@/lib/toast"
+import { getUserMessage, toastAppError, toastError, appErrorFromResponse } from "@/lib/toast"
+import { AppError, isAbortError } from "@/lib/errors"
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
@@ -371,16 +372,10 @@ export function useAuraChat() {
 
         if (response.status === 429) {
           setRemainingQuotaState(0)
-          throw new Error("Question limit reached. Please wait or sign in with a DAU account.")
-        }
-        if (response.status === 401) {
-          throw new Error("Session expired. Please sign in again.")
-        }
-        if (response.status === 502 || response.status === 503) {
-          throw new Error("AURA backend is unreachable. Make sure the API server is running, then try again.")
+          throw AppError.rateLimited()
         }
         if (!response.ok || !response.body) {
-          throw new Error("Request failed. Please try again.")
+          throw await appErrorFromResponse(response)
         }
 
         decrementQuota()
@@ -444,10 +439,10 @@ export function useAuraChat() {
         }
       } catch (err) {
         if (controller.signal.aborted || !mountedRef.current) return
-        if (err instanceof DOMException && err.name === "AbortError") return
-        const msg = getErrorMessage(err, "Something went wrong. Please try again.")
+        if (isAbortError(err)) return
+        const msg = getUserMessage(err)
         setErrorMessage(msg)
-        toastError(msg)
+        toastAppError(err)
         setMessages(baseMessages)
       } finally {
         if (abortRef.current === controller) abortRef.current = null
@@ -468,6 +463,22 @@ export function useAuraChat() {
     setActiveCitations([])
     setErrorMessage(null)
   }, [activeThreadId, persistMessages])
+
+  const stopGeneration = useCallback(() => {
+    abortRef.current?.abort()
+    abortRef.current = null
+    setLoading(false)
+    setThinkingStep(undefined)
+  }, [])
+
+  const lastUserMessage = messages.findLast((m) => m.role === "user")?.content ?? null
+
+  // Stable identity unless threads actually change — consumers (Sidebar) can
+  // skip re-renders instead of receiving a fresh array every hook render.
+  const threadSummaries = useMemo(
+    () => threads.map(({ id, title }) => ({ id, title })),
+    [threads],
+  )
 
   const transcribeAudio = useCallback(
     async (blob: Blob) => {
@@ -491,19 +502,26 @@ export function useAuraChat() {
         const form = new FormData()
         form.append("audio", blob, `recording.${extension}`)
         const res = await apiFetch("/api/speech", { method: "POST", body: form })
-        const data = (await res.json()) as { text?: string; error?: string }
+        if (!res.ok) {
+          const err = await appErrorFromResponse(res)
+          setErrorMessage(err.message)
+          toastAppError(err)
+          return
+        }
+        const data = (await res.json()) as { text?: string }
         const transcript = data.text
         if (transcript) {
           setInputText((prev) => (prev ? `${prev} ${transcript}` : transcript))
         } else {
-          const msg = data.error ?? "Could not transcribe audio."
+          const msg = "Could not transcribe audio. Please try again."
           setErrorMessage(msg)
           toastError(msg)
         }
-      } catch {
-        const msg = "Could not transcribe audio."
+      } catch (err) {
+        if (isAbortError(err)) return
+        const msg = getUserMessage(err, "Could not transcribe audio. Please try again.")
         setErrorMessage(msg)
-        toastError(msg)
+        toastAppError(err, msg)
       } finally {
         setIsTranscribing(false)
       }
@@ -654,7 +672,7 @@ export function useAuraChat() {
     setErrorMessage,
     activeCitations,
     remainingQuota,
-    threads: threads.map(({ id, title }) => ({ id, title })),
+    threads: threadSummaries,
     activeThreadId,
     setActiveThreadId,
     startNewChat,
@@ -664,5 +682,7 @@ export function useAuraChat() {
     handleMicClick,
     handleSendMessage,
     handleClearChat,
+    stopGeneration,
+    lastUserMessage,
   }
 }

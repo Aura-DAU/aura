@@ -3,9 +3,20 @@
 import { useState, Suspense, useEffect } from "react"
 import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
-import { Sparkles, Loader2, Globe, GraduationCap, BookOpen, AlertCircle, Shield } from "lucide-react"
-import { BrandMark } from "@/components/common/BrandMark"
+import { Sparkles, Loader2, GraduationCap, BookOpen, AlertCircle, Shield } from "lucide-react"
+import { AnimatedBrandMark } from "@/components/ui/animated-brand-mark"
 import { toastError } from "@/lib/toast"
+
+function GoogleIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+    </svg>
+  )
+}
 
 function LoginCard() {
   const [loading, setLoading] = useState<"google" | "demo-student" | "demo-faculty" | "demo-admin" | null>(null)
@@ -68,7 +79,7 @@ function LoginCard() {
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-theme-gray-light bg-theme-gray/80 shadow-2xl backdrop-blur-xl p-6">
+    <div className="overflow-hidden rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl ring-1 ring-white/5">
       {errorMsg && (
         <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-theme-red/30 bg-theme-red/10 p-3.5 text-xs text-theme-red leading-relaxed">
           <AlertCircle className="size-4 shrink-0 mt-0.5" />
@@ -79,9 +90,9 @@ function LoginCard() {
       <button
         onClick={handleGoogleSignIn}
         disabled={loading !== null}
-        className="w-full flex items-center justify-center gap-2 rounded-xl bg-white text-black py-3 text-sm font-semibold transition-opacity hover:opacity-90 disabled:opacity-60 cursor-pointer"
+        className="w-full flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white py-3 text-sm font-semibold text-black transition-all hover:opacity-90 hover:shadow-[0_0_24px_-8px_rgba(255,255,255,0.35)] disabled:opacity-60"
       >
-        {loading === "google" ? <Loader2 className="size-4 animate-spin" /> : <Globe className="size-4" />}
+        {loading === "google" ? <Loader2 className="size-4 animate-spin" /> : <GoogleIcon className="size-4" />}
         Continue with Google Workspace
       </button>
 
@@ -139,18 +150,18 @@ export default function LoginPage() {
 
       <div className="relative z-10 w-full max-w-md">
         {/* Brand */}
-        <div className="mb-8 flex flex-col items-center gap-3 text-center">
-          <div className="flex items-center gap-2">
-            <BrandMark className="size-10 text-base" />
-            <span className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-2xl font-semibold text-transparent">
+        <div className="mb-8 flex flex-col items-center gap-3 text-center animate-in fade-in zoom-in-95 duration-500">
+          <div className="flex items-center gap-2.5">
+            <AnimatedBrandMark className="size-12 shadow-[0_0_36px_-6px_rgba(244,80,59,0.55)]" />
+            <span className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-3xl font-semibold tracking-tight text-transparent">
               AURA
             </span>
           </div>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-3 py-1 text-xs text-neutral-400">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray/80 px-3 py-1 text-xs text-neutral-400 backdrop-blur">
             <Sparkles className="size-3 text-theme-yellow" />
             DAU AI Assistant
           </span>
-          <p className="mt-1 max-w-xs text-sm text-neutral-400">
+          <p className="mt-1 max-w-xs text-sm leading-relaxed text-neutral-400">
             Sign in with your university account to personalise your experience.
           </p>
         </div>

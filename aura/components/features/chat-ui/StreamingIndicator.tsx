@@ -1,4 +1,4 @@
-import { BrandMark } from "@/components/common/BrandMark"
+import { BrandMark } from "@/components/ui/brand-mark"
 
 interface StreamingIndicatorProps {
   thinkingStep?: string
@@ -6,17 +6,17 @@ interface StreamingIndicatorProps {
 
 export function StreamingIndicator({ thinkingStep }: StreamingIndicatorProps) {
   return (
-    <div className="flex items-start gap-3">
-      <BrandMark className="mt-0.5 size-8 text-sm" />
-      <div className="flex items-center gap-3 pt-1.5">
+    <div className="msg-enter flex items-start gap-3">
+      <BrandMark className="mt-0.5 size-8" />
+      <div className="flex min-h-9 items-center gap-2.5 pt-1">
         <div className="flex items-center gap-1" aria-hidden="true">
-          <span className="size-2 animate-bounce rounded-full bg-theme-red [animation-delay:-0.3s]" />
-          <span className="size-2 animate-bounce rounded-full bg-theme-yellow [animation-delay:-0.15s]" />
-          <span className="size-2 animate-bounce rounded-full bg-theme-red" />
+          <span className="chat-v2-dot size-1.5 rounded-full bg-theme-red" style={{ animationDelay: "0ms" }} />
+          <span className="chat-v2-dot size-1.5 rounded-full bg-theme-yellow" style={{ animationDelay: "150ms" }} />
+          <span className="chat-v2-dot size-1.5 rounded-full bg-theme-red" style={{ animationDelay: "300ms" }} />
         </div>
-        {thinkingStep ? (
-          <span className="text-sm text-neutral-400">{thinkingStep}</span>
-        ) : null}
+        <span className="text-sm text-neutral-500 transition-opacity duration-300">
+          {thinkingStep || "Thinking…"}
+        </span>
         <span className="sr-only">AURA is responding</span>
       </div>
     </div>

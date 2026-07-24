@@ -1,17 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-cluster_eval.py — Cluster-Based RAG Evaluation for Faculty Intelligence Platform
-Evaluates the Aura RAG bot against questions derived from the Faculty Cluster
-diagram.
-Handles Groq model rate limits and token exhaustion by switching models
-automatically.
-
-Usage:
-    python -m eval.cluster_eval --api-url http://127.0.0.1:8007/chat \
-        --csv eval/cluster_questions.csv \
-        --output eval/cluster_results.json
-"""
+# cluster_eval.py — Cluster-Based RAG Evaluation for Faculty Intelligence Platform
+# Evaluates the Aura RAG bot against questions derived from the Faculty Cluster
+# diagram.
 import sys, io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
@@ -55,7 +46,7 @@ def clean_url(u: str) -> str:
 
 
 def check_answer_quality(answer: str, expected_answer: str) -> str:
-    """PASS / PARTIAL / FAIL verdict based on content coverage."""
+    # PASS / PARTIAL / FAIL verdict based on content coverage.
     if not answer or len(answer.strip()) < 10:
         return "FAIL"
     answer_lower = answer.lower()

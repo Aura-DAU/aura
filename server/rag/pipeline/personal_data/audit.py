@@ -1,8 +1,6 @@
-"""
-Logs every personal-data access attempt — allowed or denied. Swap the flat
-file for a real log sink (CloudWatch, ELK, whatever DAU already runs) before
-production; this still beats having no record at all.
-"""
+# Logs every personal-data access attempt — allowed or denied. Swap the flat
+# file for a real log sink (CloudWatch, ELK, whatever DAU already runs) before
+# production; this still beats having no record at all.
 
 import json
 import time

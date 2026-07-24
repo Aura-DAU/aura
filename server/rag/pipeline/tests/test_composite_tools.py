@@ -7,9 +7,9 @@ from pipeline.personal_data.access_control import AccessDenied
 
 
 class FakeECampusClient:
-    """Stand-in for the real scraping client — returns canned data instead
-    of touching ecampus.daiict.ac.in. instances_by_erp_id lets a test control
-    exactly what a given erp_id 'has' before constructing the client."""
+    # Stand-in for the real scraping client — returns canned data instead
+    # of touching ecampus.daiict.ac.in. instances_by_erp_id lets a test control
+    # exactly what a given erp_id 'has' before constructing the client.
 
     instances_by_erp_id = {}
 
@@ -159,7 +159,7 @@ def test_advisee_snapshot_allowed_with_consent():
 
 
 def test_advisee_snapshot_consent_is_per_faculty_member():
-    """F1 having consent must not let F2 see the same student's data."""
+    # F1 having consent must not let F2 see the same student's data.
     FakeECampusClient.instances_by_erp_id["S1"] = {"cgpa": {}, "attendance": []}
     vault.grant_advisor_consent("S1", "F1")
     result = composite_tools.get_advisee_snapshot(faculty_identity("F2"), student_erp_id="S1")

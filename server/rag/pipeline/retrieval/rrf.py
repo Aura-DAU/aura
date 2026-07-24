@@ -3,12 +3,9 @@ def fuse(
     bm25_results,
     k=60
 ):
-    """Reciprocal Rank Fusion of dense and BM25 result lists.
-
-    Fix #5: rrf_score is now stored on every returned result dict so that
-    downstream consumers (confidence router, reranker) see the true
-    hybrid signal rather than the original pre-fusion score.
-    """
+    # Reciprocal Rank Fusion of dense and BM25 result lists.
+    # Fix #5: rrf_score is now stored on every returned result dict so that
+    # hybrid signal rather than the original pre-fusion score.
 
     fused = {}
 
