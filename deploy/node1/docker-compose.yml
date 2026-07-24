@@ -92,6 +92,8 @@ services:
       redis:
         condition: service_healthy
     networks:
+      # edge: nginx upstream "backend:8000"; internal: postgres/redis
+      - aura-edge
       - aura-internal
 
   postgres:
