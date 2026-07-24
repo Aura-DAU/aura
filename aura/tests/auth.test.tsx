@@ -31,7 +31,7 @@ describe('Domain detection (guest vs DAU)', () => {
 })
 
 describe('Unauthenticated Composer rendering', () => {
-  it('renders "Sign in to ask questions" when unauthenticated', () => {
+  it('renders "Sign in to start chatting with AURA" when unauthenticated', () => {
     vi.mocked(useSession).mockReturnValue({
       data: null,
       status: 'unauthenticated',
@@ -50,8 +50,8 @@ describe('Unauthenticated Composer rendering', () => {
       />
     )
 
-    expect(screen.getByText('Sign in to ask questions')).toBeInTheDocument()
-    expect(screen.getByText('Sign In')).toBeInTheDocument()
+    expect(screen.getByText('Sign in to start chatting with AURA')).toBeInTheDocument()
+    expect(screen.getByText('Sign in')).toBeInTheDocument()
   })
 })
 
