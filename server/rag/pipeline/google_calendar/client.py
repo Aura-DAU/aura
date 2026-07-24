@@ -28,8 +28,10 @@ CLIENT_ID     = os.environ.get("GOOGLE_CALENDAR_CLIENT_ID", "")
 CLIENT_SECRET = os.environ.get("GOOGLE_CALENDAR_CLIENT_SECRET", "")
 
 
-def _refresh_access_token(erp_id: str, refresh_token: str) -> str:
+def _refresh_access_token(erp_id: str, refresh_token: str, current_scope: str) -> str:
     # Exchange the stored refresh token for a new access token.
+    # current_scope is passed in from _get_valid_access_token to avoid
+    # a redundant vault read inside here (Bug 5 fix).
     resp = requests.post(GOOGLE_TOKEN_URL, data={
         "client_id":     CLIENT_ID,
         "client_secret": CLIENT_SECRET,
@@ -42,20 +44,24 @@ def _refresh_access_token(erp_id: str, refresh_token: str) -> str:
     expiry     = datetime.datetime.utcnow() + datetime.timedelta(
         seconds=data.get("expires_in", 3600)
     )
-    # Persist the refreshed token — preserve the original scope so a
+    # Persist the refreshed token — preserve the caller-supplied scope so a
     # student's SCOPE_EVENTS grant isn't silently downgraded to SCOPE_READONLY.
-    tokens = get_tokens(erp_id)
-    store_tokens(erp_id, new_access, tokens["refresh_token"],
-                 expiry.isoformat(), scope=tokens.get("scope", SCOPE_READONLY))
+    store_tokens(erp_id, new_access, refresh_token,
+                 expiry.isoformat(), scope=current_scope)
     return new_access
 
 
 def _get_valid_access_token(erp_id: str) -> str:
     tokens = get_tokens(erp_id)
     expiry = datetime.datetime.fromisoformat(tokens["token_expiry"])
-    # Refresh if expires within 5 minutes
+    # Refresh if expires within 5 minutes; pass scope so _refresh_access_token
+    # doesn't need to do a second vault read to retrieve it.
     if datetime.datetime.utcnow() >= expiry - datetime.timedelta(minutes=5):
-        return _refresh_access_token(erp_id, tokens["refresh_token"])
+        return _refresh_access_token(
+            erp_id,
+            tokens["refresh_token"],
+            tokens.get("scope", SCOPE_READONLY),
+        )
     return tokens["access_token"]
 
 

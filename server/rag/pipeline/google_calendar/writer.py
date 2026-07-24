@@ -104,7 +104,10 @@ def _next_occurrence(day_of_week: int, start_time: str, end_time: str) -> tuple[
 
 def _event_body(slot: dict, tz: str) -> dict:
     start, end = _next_occurrence(slot["day_of_week"], slot["start_time"], slot["end_time"])
-    until = _semester_end_date().strftime("%Y%m%dT235959Z")
+    # Bug 3 fix: use a DATE-only UNTIL (no time/Z suffix) to avoid ambiguity
+    # when mixing a UTC-suffixed UNTIL with timezone-aware event datetimes.
+    # RFC 5545 §3.8.5.3 allows DATE form for weekly recurring events.
+    until = _semester_end_date().strftime("%Y%m%d")
     rrule = f"RRULE:FREQ=WEEKLY;BYDAY={_RRULE_DAY[slot['day_of_week']]};UNTIL={until}"
 
     location_parts = [p for p in (slot.get("room"),) if p]
@@ -128,9 +131,12 @@ def _event_body(slot: dict, tz: str) -> dict:
     }
 
 
-def _headers(erp_id: str) -> dict:
+def _make_headers(access_token: str) -> dict:
+    """Build auth headers from an already-fetched access token.
+    Takes the token as a parameter (Bug 6 fix) so callers fetch it once
+    per operation rather than once per API call inside a loop."""
     return {
-        "Authorization": f"Bearer {get_valid_access_token(erp_id)}",
+        "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/json",
     }
 
@@ -138,6 +144,11 @@ def _headers(erp_id: str) -> dict:
 def sync_timetable(erp_id: str, timetable_slots: list[dict], tz: str = "Asia/Kolkata") -> dict:
     """Upserts one recurring event per slot. Returns a summary the caller
     can relay back to the student: {created, updated, removed, errors}."""
+    # Bug 6 fix: fetch the access token once for the whole sync, not once
+    # per API call inside the loop (which could cause repeated refresh checks).
+    access_token = get_valid_access_token(erp_id)
+    hdrs = _make_headers(access_token)
+
     existing = get_synced_event_map(erp_id)
     seen_keys: set[str] = set()
     created = updated = removed = 0
@@ -151,13 +162,13 @@ def sync_timetable(erp_id: str, timetable_slots: list[dict], tz: str = "Asia/Kol
             if key in existing:
                 resp = requests.patch(
                     GOOGLE_EVENTS_URL.format(cal_id=CAL_ID) + f"/{existing[key]}",
-                    headers=_headers(erp_id), json=body, timeout=10,
+                    headers=hdrs, json=body, timeout=10,
                 )
                 if resp.status_code == 404:
                     # Event was deleted on the Google side out-of-band — recreate it.
                     resp = requests.post(
                         GOOGLE_EVENTS_URL.format(cal_id=CAL_ID),
-                        headers=_headers(erp_id), json=body, timeout=10,
+                        headers=hdrs, json=body, timeout=10,
                     )
                     resp.raise_for_status()
                     record_synced_event(erp_id, key, resp.json()["id"])
@@ -168,7 +179,7 @@ def sync_timetable(erp_id: str, timetable_slots: list[dict], tz: str = "Asia/Kol
             else:
                 resp = requests.post(
                     GOOGLE_EVENTS_URL.format(cal_id=CAL_ID),
-                    headers=_headers(erp_id), json=body, timeout=10,
+                    headers=hdrs, json=body, timeout=10,
                 )
                 resp.raise_for_status()
                 record_synced_event(erp_id, key, resp.json()["id"])
@@ -185,7 +196,7 @@ def sync_timetable(erp_id: str, timetable_slots: list[dict], tz: str = "Asia/Kol
         try:
             resp = requests.delete(
                 GOOGLE_EVENTS_URL.format(cal_id=CAL_ID) + f"/{event_id}",
-                headers=_headers(erp_id), timeout=10,
+                headers=hdrs, timeout=10,
             )
             if resp.status_code not in (200, 204, 404, 410):
                 resp.raise_for_status()
@@ -203,12 +214,15 @@ def unsync_all(erp_id: str) -> int:
     /calendar/timetable/sync DELETE and by full disconnect). Returns the
     count removed."""
     existing = get_synced_event_map(erp_id)
+    # Bug 6 fix: fetch token once for the entire unsync operation.
+    access_token = get_valid_access_token(erp_id)
+    hdrs = _make_headers(access_token)
     removed = 0
     for key, event_id in existing.items():
         try:
             resp = requests.delete(
                 GOOGLE_EVENTS_URL.format(cal_id=CAL_ID) + f"/{event_id}",
-                headers=_headers(erp_id), timeout=10,
+                headers=hdrs, timeout=10,
             )
             if resp.status_code not in (200, 204, 404, 410):
                 resp.raise_for_status()

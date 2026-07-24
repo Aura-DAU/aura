@@ -61,9 +61,16 @@ def get_faculty_slots(
 
 
 @router.get("/connect")
-def start_calendar_oauth(identity: Identity = Depends(require_identity)):
+def start_calendar_oauth(
+    identity: Identity = Depends(require_identity),
+    return_to: str = Query(default="/dashboard", description="Path to redirect back to after OAuth completes"),
+):
     """Start Google Calendar OAuth flow. Faculty get readonly scope,
-    students get events (read/write) scope for timetable sync."""
+    students get events (read/write) scope for timetable sync.
+
+    Returns JSON {"url": "..."} so the frontend can navigate itself —
+    fetch() does not follow cross-origin 307 redirects to Google.
+    """
     if identity.role not in ("student", "faculty"):
         raise HTTPException(status_code=403, detail="Only students and faculty can connect a Google Calendar.")
     if not CLIENT_ID:
@@ -72,11 +79,14 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
     if not secret:
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured.")
 
-    # Mint a short-lived signed state token containing the erp_id and role
+    # Mint a short-lived signed state token containing the erp_id, role,
+    # and the page to return to after consent so the callback can redirect
+    # back to wherever the user started rather than always /dashboard.
     state_payload = {
-        "erp_id": identity.erp_id,
-        "role": identity.role,
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
+        "erp_id":    identity.erp_id,
+        "role":      identity.role,
+        "return_to": return_to,
+        "exp":       datetime.datetime.utcnow() + datetime.timedelta(minutes=10),
     }
     state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)
 
@@ -84,8 +94,8 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
     scope = CALENDAR_SCOPE_EVENTS if identity.role == "student" else CALENDAR_SCOPE_READONLY
 
     params = {
-        "client_id": CLIENT_ID,
-        "redirect_uri": REDIRECT_URI,
+        "client_id":     CLIENT_ID,
+        "redirect_uri":  REDIRECT_URI,
         "response_type": "code",
         "scope":         scope,
         "access_type":   "offline",
@@ -93,7 +103,10 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
         "state":         state_token,
     }
     auth_url = GOOGLE_AUTH_URL + "?" + urllib.parse.urlencode(params)
-    return RedirectResponse(url=auth_url)
+    # Return the URL as JSON — the frontend navigates via window.location.href.
+    # A 307 RedirectResponse cannot be followed by fetch() to an external
+    # cross-origin URL (Google), so we give the URL to the client instead.
+    return {"url": auth_url}
 
 
 @router.get("/callback")
@@ -101,12 +114,20 @@ def calendar_oauth_callback(
     code: str = Query(...),
     state: str = Query(...),
 ):
-    # Google OAuth callback — exchange code, store tokens, redirect to dashboard.
+    # Google OAuth callback — exchange code, store tokens, redirect back to
+    # the page the user started the flow from (encoded in the state JWT).
     import requests
 
     secret = get_internal_jwt_secret()
     if not secret:
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured on the server.")
+
+    # Bug 9 fix: guard against missing credentials before hitting Google.
+    if not CLIENT_ID or not CLIENT_SECRET:
+        raise HTTPException(
+            status_code=500,
+            detail="Google Calendar OAuth credentials (CLIENT_ID / CLIENT_SECRET) are not configured on the server.",
+        )
 
     try:
         claims = jwt.decode(state, secret, algorithms=[ALGORITHM])
@@ -120,20 +141,20 @@ def calendar_oauth_callback(
         raise HTTPException(status_code=400, detail="State token payload is missing erp_id.")
 
     resp = requests.post(GOOGLE_TOKEN_URL, data={
-        "code": code,
-        "client_id": CLIENT_ID,
+        "code":          code,
+        "client_id":     CLIENT_ID,
         "client_secret": CLIENT_SECRET,
-        "redirect_uri": REDIRECT_URI,
-        "grant_type": "authorization_code",
+        "redirect_uri":  REDIRECT_URI,
+        "grant_type":    "authorization_code",
     }, timeout=10)
     if not resp.ok:
         raise HTTPException(status_code=400, detail=f"Token exchange failed: {resp.text}")
 
     data = resp.json()
-    access_token = data.get("access_token")
+    access_token  = data.get("access_token")
     refresh_token = data.get("refresh_token")
-    expires_in = data.get("expires_in", 3600)
-    expiry = (datetime.datetime.utcnow() + datetime.timedelta(seconds=expires_in)).isoformat()
+    expires_in    = data.get("expires_in", 3600)
+    expiry        = (datetime.datetime.utcnow() + datetime.timedelta(seconds=expires_in)).isoformat()
 
     if not refresh_token:
         raise HTTPException(
@@ -142,14 +163,16 @@ def calendar_oauth_callback(
         )
 
     # Determine scope from the role stored in state
-    role = claims.get("role", "faculty")
+    role  = claims.get("role", "faculty")
     scope = SCOPE_EVENTS if role == "student" else SCOPE_READONLY
 
     store_tokens(erp_id=erp_id, access_token=access_token,
                  refresh_token=refresh_token, token_expiry=expiry,
                  scope=scope)
 
-    return RedirectResponse(url=f"{_frontend_origin()}/dashboard?calendar=connected")
+    # Bug 4 fix: redirect to the page the user started from, not always /dashboard.
+    return_to = claims.get("return_to", "/dashboard").lstrip("/")
+    return RedirectResponse(url=f"{_frontend_origin()}/{return_to}?calendar=connected")
 
 
 @router.delete("/disconnect")

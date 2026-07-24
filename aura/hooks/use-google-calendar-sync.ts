@@ -35,7 +35,11 @@ export function useGoogleCalendarSync() {
         return
       }
       const data = await res.json()
-      setStatus(data.can_sync_timetable ? "connected" : "not_connected")
+      // Bug 10 fix: for faculty, the response has no can_sync_timetable field
+      // (it's student-only). Fall back to the generic `linked` flag so faculty
+      // correctly shows "connected" after linking their calendar.
+      const canUse = "can_sync_timetable" in data ? data.can_sync_timetable : data.linked
+      setStatus(canUse ? "connected" : "not_connected")
     } catch {
       setStatus("not_connected")
     }
@@ -64,7 +68,7 @@ export function useGoogleCalendarSync() {
       const res = await fetch("/api/calendar/connect", { cache: "no-store" })
       const data = await res.json()
       if (!res.ok || !data.url) {
-        setError(data.error || "Could not start Google Calendar connection.")
+        setError(data.detail || data.error || "Could not start Google Calendar connection.")
         return
       }
       // Full-page navigation to Google's consent screen — the OAuth
@@ -82,7 +86,10 @@ export function useGoogleCalendarSync() {
       const res = await fetch("/api/calendar/timetable/sync", { method: "POST" })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error || "Failed to sync your timetable.")
+        // Bug 2 fix: FastAPI HTTPException serialises to {detail: "..."},
+        // not {error: "..."}. Read detail first, fall back to error for
+        // non-FastAPI error shapes.
+        setError(data.detail || data.error || "Failed to sync your timetable.")
         setStatus("connected")
         return
       }

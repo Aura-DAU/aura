@@ -41,10 +41,11 @@ import sqlite3
 from pathlib import Path
 from cryptography.fernet import Fernet
 
-VAULT_KEY = os.environ.get("GOOGLE_CALENDAR_VAULT_KEY", "")
-DB_PATH   = Path(os.environ.get("GOOGLE_CALENDAR_VAULT_DB",
-                                 "/var/lib/aura/gcal_tokens.db"))
-
+# Scope constants — exported and used by client.py, calendar_routes.py.
+# VAULT_KEY and DB_PATH are intentionally NOT read at module import time —
+# they are read lazily inside _fernet() and _connect() so that env vars
+# set after import (e.g. in tests or deferred secrets managers) are
+# always picked up correctly (Bug 8 fix).
 SCOPE_READONLY = "https://www.googleapis.com/auth/calendar.readonly"
 SCOPE_EVENTS   = "https://www.googleapis.com/auth/calendar.events"
 
@@ -54,15 +55,18 @@ class CalendarNotLinked(Exception):
 
 
 def _fernet() -> Fernet:
-    if not VAULT_KEY:
+    vault_key = os.environ.get("GOOGLE_CALENDAR_VAULT_KEY", "")
+    if not vault_key:
         raise RuntimeError("GOOGLE_CALENDAR_VAULT_KEY is not set.")
-    key = VAULT_KEY.encode() if isinstance(VAULT_KEY, str) else VAULT_KEY
+    key = vault_key.encode() if isinstance(vault_key, str) else vault_key
     return Fernet(key)
 
 
 def _connect():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(DB_PATH)
+    db_path = Path(os.environ.get("GOOGLE_CALENDAR_VAULT_DB",
+                                   "/var/lib/aura/gcal_tokens.db"))
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(db_path)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS gcal_tokens (
             erp_id          TEXT PRIMARY KEY,
