@@ -45,7 +45,7 @@ export function handleRouteTextError(scope: string, err: unknown): Response {
 export async function readJsonBody(req: Request): Promise<unknown> {
   try {
     return await req.json()
-  } catch (cause) {
+  } catch {
     throw AppError.validation("Invalid JSON", "Request body is not valid JSON")
   }
 }

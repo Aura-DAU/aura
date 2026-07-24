@@ -5,6 +5,8 @@ services:
   nginx:
     image: nginx:1.27-alpine
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "80:80"
       - "443:443"
@@ -24,6 +26,8 @@ services:
       context: ../../aura
       dockerfile: Dockerfile
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     expose:
       - "3000"
     environment:
@@ -48,14 +52,18 @@ services:
       context: ../../server
       dockerfile: Dockerfile
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Do NOT publish 8000 to the host — that bypasses nginx denies on
+    # /backend/internal and /backend/metrics. Reach the API only via
+    # nginx (/backend/) or the Docker network (aura → backend:8000).
     expose:
       - "8000"
-    ports:
-      - "8000:8000"
     environment:
       ENV: production
       PORT: "8000"
       WEB_CONCURRENCY: ${BACKEND_WORKERS:-2}
+      CHAT_CONCURRENCY: ${CHAT_CONCURRENCY:-4}
       AUTH_DB_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       REDIS_URL: redis://redis:6379/0
       PROD_FRONTEND_ORIGIN: ${PROD_FRONTEND_ORIGIN:-https://aura.daiict.ac.in}

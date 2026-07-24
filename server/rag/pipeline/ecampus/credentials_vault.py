@@ -39,7 +39,9 @@ class CredentialsNotLinked(Exception):
 
 
 def _connect():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    # mode=0o700 restricts a vault dir AURA creates itself; it does not loosen
+    # (or tighten) an already-existing shared parent such as /tmp.
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     conn = sqlite3.connect(DB_PATH)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS ecampus_credentials (

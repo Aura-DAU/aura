@@ -3,7 +3,7 @@ import sys
 import tempfile
 import asyncio
 import threading
-from typing import List, Optional
+from typing import Annotated, List, Optional
 from pathlib import Path
 
 server_dir = Path(__file__).resolve().parent.parent
@@ -15,9 +15,10 @@ for p in (str(server_dir), str(rag_dir)):
 from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from api.auth import require_identity, Identity
+from api.middleware.security_headers import SecurityHeadersMiddleware
 from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
 from api.routes.calendar_routes import router as calendar_router
@@ -48,10 +49,20 @@ def get_aura():
 # allow_credentials=True is REQUIRED for httpOnly cookies to be forwarded
 # cross-origin (Next.js :3000 → FastAPI :8000 in dev). Must pair with
 # explicit allow_origins — "*" is rejected by browsers when credentials=True.
+def _is_production() -> bool:
+    return os.getenv("ENV", "").lower() in {"production", "prod"} or (
+        os.getenv("AURA_ENV", "").lower() == "production"
+    )
+
+
 ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
 prod = os.getenv("PROD_FRONTEND_ORIGIN")
 if prod:
-    ALLOWED_ORIGINS.append(prod)
+    ALLOWED_ORIGINS.append(prod.rstrip("/"))
+elif _is_production():
+    raise RuntimeError(
+        "PROD_FRONTEND_ORIGIN must be set when ENV/AURA_ENV=production."
+    )
 
 
 # ── Latency Logging Middleware ───────────────────────────────────────────
@@ -140,6 +151,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Defense-in-depth security headers on every backend response (the backend is
+# also reachable directly at /backend/ through nginx). Pure-ASGI so it never
+# buffers streaming responses.
+app.add_middleware(SecurityHeadersMiddleware)
+
 # ── Routers ──────────────────────────────────────────────────────────────
 # identity_router: /internal/resolve-identity (called by Next.js at login)
 # admin_router:    /admin/* (role_bindings management)
@@ -155,6 +171,26 @@ app.include_router(push_router)
 async def _start_timetable_scheduler():
     """Kicks off the '10 minutes before class' push-notification background
     job. See pipeline/timetable/notifier.py for the tick logic."""
+    # Fail closed on production-critical config when serving via api.api:app
+    # (gunicorn entrypoint). Mirror api.app._validate_production_config.
+    env = (os.getenv("ENV", "") or os.getenv("AURA_ENV", "")).lower()
+    if env in {"production", "prod"}:
+        missing: list[str] = []
+        if not os.getenv("PROD_FRONTEND_ORIGIN"):
+            missing.append("PROD_FRONTEND_ORIGIN")
+        if not os.getenv("INTERNAL_JWT_SECRET"):
+            missing.append("INTERNAL_JWT_SECRET")
+        if not os.getenv("INTERNAL_RESOLVE_SECRET"):
+            missing.append("INTERNAL_RESOLVE_SECRET")
+        if not os.getenv("REDIS_URL", "").strip():
+            missing.append("REDIS_URL")
+        if not os.getenv("ERP_DB_HOST") and not os.getenv("ECAMPUS_VAULT_KEY"):
+            missing.append("ECAMPUS_VAULT_KEY (required when ERP_DB_HOST is unset)")
+        if missing:
+            raise RuntimeError(
+                "Production config incomplete — set: " + ", ".join(missing)
+            )
+
     from pipeline.timetable.notifier import start_scheduler
     start_scheduler()
 
@@ -166,6 +202,9 @@ async def _stop_timetable_scheduler():
 
 # ── Whisper concurrency lock ──────────────────────────────────────────────
 speech_queue_lock = asyncio.Semaphore(1)
+# Cap concurrent RAG/LLM asks (same policy as api.deps.chat_queue_lock).
+_chat_limit = max(1, int(os.getenv("CHAT_CONCURRENCY", "4")))
+chat_queue_lock = asyncio.Semaphore(_chat_limit)
 
 ffmpeg_path = os.getenv("FFMPEG_BINARY_PATH")
 if ffmpeg_path and os.path.exists(ffmpeg_path):
@@ -180,22 +219,22 @@ UNIVERSITY_PROMPT = (
 
 # ── Request models ────────────────────────────────────────────────────────
 class HistoryTurn(BaseModel):
-    role:    str
-    content: str
+    role:    str = Field(..., max_length=32)
+    content: str = Field(..., max_length=20_000)
 
 class UserProfile(BaseModel):
     # Display/personalisation only — role and identity come from the
     # Next.js-minted internal JWT verified by require_identity(), never here.
-    name:      Optional[str]       = None
-    branch:    Optional[str]       = None
-    year:      Optional[str]       = None
-    semester:  Optional[str]       = None
-    interests: Optional[str]       = None
-    subjects:  Optional[List[str]] = None
+    name:      Optional[str]       = Field(None, max_length=200)
+    branch:    Optional[str]       = Field(None, max_length=200)
+    year:      Optional[str]       = Field(None, max_length=50)
+    semester:  Optional[str]       = Field(None, max_length=50)
+    interests: Optional[str]       = Field(None, max_length=1000)
+    subjects:  Optional[List[Annotated[str, Field(max_length=100)]]] = Field(None, max_length=50)
 
 class ChatRequest(BaseModel):
-    question:       str
-    history:        Optional[List[HistoryTurn]] = None
+    question:       str                         = Field(..., min_length=1, max_length=2000)
+    history:        Optional[List[HistoryTurn]] = Field(None, max_length=20)
     userProfile:    Optional[UserProfile]       = None
     studentProfile: Optional[UserProfile]       = None
 
@@ -203,8 +242,8 @@ class ChatRequest(BaseModel):
         return self.studentProfile or self.userProfile
 
 class LinkEcampusRequest(BaseModel):
-    ecampus_username: str
-    ecampus_password: str
+    ecampus_username: str = Field(..., min_length=1, max_length=200)
+    ecampus_password: str = Field(..., min_length=1, max_length=500)
 
 ALLOWED_AUDIO   = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 MAX_AUDIO_BYTES = 25 * 1024 * 1024
@@ -228,13 +267,14 @@ async def chat(
             detail=f"Question limit reached ({exc.limit}/day).",
         ) from exc
 
-    return await run_in_threadpool(
-        get_aura().ask,
-        question=request.question,
-        history=history,
-        identity=identity.as_dict(),
-        display_profile=display_profile,
-    )
+    async with chat_queue_lock:
+        return await run_in_threadpool(
+            get_aura().ask,
+            question=request.question,
+            history=history,
+            identity=identity.as_dict(),
+            display_profile=display_profile,
+        )
 
 # ── eCampus account linking ───────────────────────────────────────────────
 # These three endpoints handle optional eCampus credential storage for the
@@ -279,13 +319,16 @@ async def speech(
             raise HTTPException(status_code=400, detail=f"Unsupported file type: {ext}")
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+            # Capture the path immediately so the finally block always cleans up,
+            # including when the size cap trips mid-write (delete=False otherwise
+            # leaks the partial file to disk — a disk-fill DoS vector).
+            temp_path = tmp.name
             size = 0
             while chunk := await file.read(1024 * 1024):
                 size += len(chunk)
                 if size > MAX_AUDIO_BYTES:
                     raise HTTPException(status_code=413, detail="Audio file too large")
                 tmp.write(chunk)
-            temp_path = tmp.name
 
         async with speech_queue_lock:
             # Defer Whisper import/load until first /speech call so /health can boot.
@@ -299,7 +342,8 @@ async def speech(
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"[speech] transcription failed: {e}")
+        raise HTTPException(status_code=500, detail="Transcription failed. Please try again.")
     finally:
         if temp_path and os.path.exists(temp_path):
             os.remove(temp_path)

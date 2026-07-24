@@ -1,8 +1,20 @@
 import { getServerSession } from "next-auth"
+import { z } from "zod"
 import { authOptions } from "@/lib/auth/options"
 import { backendUrl } from "@/lib/api/backend"
 import { NextResponse } from "next/server"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
+
+// Shape of a standard browser PushSubscription (subscription.toJSON()) plus the
+// UA string the client attaches. Validated so we never forward unbounded input.
+const subscribeSchema = z.object({
+  endpoint: z.string().min(1).max(2048).url(),
+  keys: z.object({
+    p256dh: z.string().min(1).max(256),
+    auth: z.string().min(1).max(256),
+  }),
+  user_agent: z.string().max(1024).optional(),
+})
 
 interface SessionWithUser {
   user: {
@@ -36,12 +48,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  let body
+  let rawBody: unknown
   try {
-    body = await req.json()
+    rawBody = await req.json()
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
+
+  const parsed = subscribeSchema.safeParse(rawBody)
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid subscription payload" }, { status: 400 })
+  }
+  const body = parsed.data
 
   try {
     const res = await fetch(backendUrl("/push/subscribe"), {
@@ -54,6 +72,10 @@ export async function POST(req: Request) {
     })
 
     if (!res.ok) {
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to subscribe" }, { status: res.status })
+      }
       const errText = await res.text().catch(() => "")
       return NextResponse.json({ error: errText || "Failed to subscribe" }, { status: res.status })
     }
@@ -77,6 +99,9 @@ export async function DELETE(req: Request) {
   if (!endpoint) {
     return NextResponse.json({ error: "endpoint query param is required" }, { status: 400 })
   }
+  if (endpoint.length > 2048) {
+    return NextResponse.json({ error: "Invalid endpoint" }, { status: 400 })
+  }
 
   try {
     const res = await fetch(backendUrl(`/push/subscribe?endpoint=${encodeURIComponent(endpoint)}`), {
@@ -85,6 +110,10 @@ export async function DELETE(req: Request) {
     })
 
     if (!res.ok) {
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to unsubscribe" }, { status: res.status })
+      }
       const errText = await res.text().catch(() => "")
       return NextResponse.json({ error: errText || "Failed to unsubscribe" }, { status: res.status })
     }
