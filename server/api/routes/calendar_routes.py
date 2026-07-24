@@ -7,7 +7,7 @@ import jwt
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import RedirectResponse
 
-from api.auth import HASHING_ALGORITHM, Identity, get_internal_jwt_secret, require_identity
+from api.auth import ALGORITHM, Identity, get_internal_jwt_secret, require_identity
 from pipeline.google_calendar.slot_service import get_available_slots
 from pipeline.google_calendar.token_vault import is_linked, store_tokens, unlink_calendar
 
@@ -70,7 +70,7 @@ def start_calendar_oauth(identity: Identity = Depends(require_identity)):
         "erp_id": identity.erp_id,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10),
     }
-    state_token = jwt.encode(state_payload, secret, algorithm=HASHING_ALGORITHM)
+    state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)
 
     params = {
         "client_id": CLIENT_ID,
@@ -98,7 +98,7 @@ def calendar_oauth_callback(
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured on the server.")
 
     try:
-        claims = jwt.decode(state, secret, algorithms=[HASHING_ALGORITHM])
+        claims = jwt.decode(state, secret, algorithms=[ALGORITHM])
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=400, detail="State token expired. Please reconnect calendar.")
     except jwt.InvalidTokenError:
