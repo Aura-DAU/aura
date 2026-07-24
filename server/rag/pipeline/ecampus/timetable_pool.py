@@ -1,10 +1,6 @@
-"""
-Accumulates TimetableEntry rows seen across every student's get_timetable()
-call, so build_faculty_schedule() has more than just one student's partial
-view to work with over time. Non-sensitive data (class slot/room/instructor,
-not tied to who's asking), so this can live in a plain sqlite file rather
-than the encrypted vault.
-"""
+# Accumulates TimetableEntry rows seen across every student's get_timetable()
+# call, so build_faculty_schedule() has more than just one student's partial
+# than the encrypted vault.
 
 import os
 import sqlite3

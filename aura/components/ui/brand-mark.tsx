@@ -8,12 +8,20 @@ export function BrandMark({ className }: BrandMarkProps) {
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-theme-red to-theme-yellow font-semibold text-black",
+        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-black ring-1 ring-white/10",
         className,
       )}
       aria-hidden="true"
     >
-      A
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/aura-logo.svg"
+        alt=""
+        width={48}
+        height={48}
+        className="pointer-events-none size-[80%] select-none object-contain object-center"
+        draggable={false}
+      />
     </span>
   )
 }

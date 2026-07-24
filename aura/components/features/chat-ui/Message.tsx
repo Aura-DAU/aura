@@ -1,12 +1,21 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Check, Copy, RotateCcw, ThumbsDown, ThumbsUp, FileText, Lock, CalendarCheck } from "lucide-react"
+import {
+  Check,
+  Copy,
+  RotateCcw,
+  ThumbsDown,
+  ThumbsUp,
+  FileText,
+  Lock,
+  CalendarCheck,
+} from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 import type { ChatMessage, Citation, CalendarActionData } from "@/lib/chat-types"
-import { BrandMark } from "@/components/common/BrandMark"
-import { MarkdownContent } from "@/components/common/MarkdownContent"
+import { BrandMark } from "@/components/ui/brand-mark"
+import { MarkdownContent } from "@/components/ui/markdown-content"
 import { useDocumentViewer } from "@/hooks/use-document-viewer"
 
 interface MessageProps {
@@ -15,9 +24,17 @@ interface MessageProps {
   onRegenerate?: () => void
   /** While streaming, render plain text to avoid re-parsing Markdown every token. */
   isStreaming?: boolean
+  /** Keep action toolbar visible (ChatGPT pattern for the latest reply). */
+  showActions?: boolean
 }
 
-export function Message({ message, citations, onRegenerate, isStreaming = false }: MessageProps) {
+export function Message({
+  message,
+  citations,
+  onRegenerate,
+  isStreaming = false,
+  showActions = false,
+}: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -29,55 +46,58 @@ export function Message({ message, citations, onRegenerate, isStreaming = false 
     }
   }, [])
 
-    const getAuthBadge = (auth?: string[], visibility?: string) => {
+  const getAuthBadge = (auth?: string[], visibility?: string) => {
     if (visibility) {
       const isFaculty = visibility.toLowerCase().includes("faculty")
       return (
-        <span className={cn(
-          "rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider border",
-          isFaculty 
-            ? "bg-purple-500/10 text-purple-400 border-purple-500/20"
-            : "bg-blue-500/10 text-blue-400 border-blue-500/20"
-        )}>
+        <span
+          className={cn(
+            "rounded-full border px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider",
+            isFaculty
+              ? "border-purple-500/20 bg-purple-500/10 text-purple-400"
+              : "border-blue-500/20 bg-blue-500/10 text-blue-400",
+          )}
+        >
           {visibility}
         </span>
       )
     }
-    
+
     if (auth && auth.length > 0) {
       if (auth.includes("faculty")) {
         return (
-          <span className="rounded-full bg-purple-500/10 px-2 py-0.5 text-[9px] font-semibold text-purple-400 border border-purple-500/20 uppercase tracking-wider">
+          <span className="rounded-full border border-purple-500/20 bg-purple-500/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-purple-400">
             Faculty-only
           </span>
         )
       }
       if (auth.includes("student_ug") || auth.includes("ug")) {
         return (
-          <span className="rounded-full bg-blue-500/10 px-2 py-0.5 text-[9px] font-semibold text-blue-400 border border-blue-500/20 uppercase tracking-wider">
+          <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-blue-400">
             UG student
           </span>
         )
       }
       if (auth.includes("student_pg") || auth.includes("pg")) {
         return (
-          <span className="rounded-full bg-teal-500/10 px-2 py-0.5 text-[9px] font-semibold text-teal-400 border border-teal-500/20 uppercase tracking-wider">
+          <span className="rounded-full border border-teal-500/20 bg-teal-500/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-teal-400">
             PG student
           </span>
         )
       }
       return (
-        <span className="rounded-full bg-neutral-500/10 px-2 py-0.5 text-[9px] font-semibold text-neutral-400 border border-neutral-500/20 uppercase tracking-wider">
+        <span className="rounded-full border border-neutral-500/20 bg-neutral-500/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-neutral-400">
           {auth[0]}
         </span>
       )
     }
     return null
   }
+
   if (message.role === "user") {
     return (
-      <div className="flex justify-end">
-        <div className="max-w-[75%] rounded-2xl bg-theme-gray-light px-4 py-2.5 text-sm leading-relaxed text-neutral-100">
+      <div className="msg-enter flex justify-end">
+        <div className="max-w-[min(75%,42rem)] rounded-[22px] rounded-br-lg bg-theme-gray-light px-4 py-2.5 text-[15px] leading-relaxed text-neutral-100 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]">
           {message.content}
         </div>
       </div>
@@ -89,7 +109,7 @@ export function Message({ message, citations, onRegenerate, isStreaming = false 
       await navigator.clipboard.writeText(message.content)
       setCopied(true)
       if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
-      copyTimerRef.current = setTimeout(() => setCopied(false), 1500)
+      copyTimerRef.current = setTimeout(() => setCopied(false), 1600)
     } catch {
       toast.error("Could not copy message")
     }
@@ -101,38 +121,41 @@ export function Message({ message, citations, onRegenerate, isStreaming = false 
   }
 
   return (
-    <div className="group flex items-start gap-3">
-      <BrandMark className="mt-0.5 size-8 text-sm" />
+    <div className="msg-enter group flex items-start gap-3">
+      <BrandMark className="mt-0.5 size-8 transition-transform duration-300 group-hover:scale-[1.03]" />
       <div className="min-w-0 flex-1">
         {message.is_personal_data && (
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-lg border border-theme-yellow/20 bg-theme-yellow/10 px-2.5 py-1 text-xs text-theme-yellow font-medium select-none">
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-lg border border-theme-yellow/20 bg-theme-yellow/10 px-2.5 py-1 text-xs font-medium text-theme-yellow select-none">
             <Lock className="size-3 text-theme-yellow" />
             <span>Your personal data</span>
           </div>
         )}
+
         {isStreaming ? (
-          <div className="whitespace-pre-wrap text-sm leading-relaxed text-neutral-100">
+          <div className="whitespace-pre-wrap text-[15px] leading-[1.7] text-neutral-100">
             {message.content}
+            <span className="msg-caret ml-0.5 inline-block align-text-bottom" />
           </div>
         ) : (
-          <MarkdownContent content={message.content} />
+          <div className="text-[15px] leading-[1.7]">
+            <MarkdownContent content={message.content} />
+          </div>
         )}
 
-        {/* Calendar booking confirmation — renders when backend emits a calendar-action event */}
         {message.calendar_action && (
           <BookingConfirmationCard action={message.calendar_action} />
         )}
 
         {citations && citations.length > 0 ? (
-          <div className="mt-3 flex flex-wrap gap-3">
+          <div className="mt-3 flex flex-wrap gap-2">
             {citations.map((c, i) => {
               const isUrl = c.file.startsWith("http://") || c.file.startsWith("https://")
               const hasSource = Boolean(c.path)
               const badge = getAuthBadge(c.authorization, c.visibility)
               const pillClasses = cn(
-                "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray px-2.5 py-1 text-xs text-neutral-300",
+                "inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray/80 px-2.5 py-1 text-xs text-neutral-300 transition-all duration-150",
                 (isUrl || hasSource) &&
-                  "hover:bg-theme-gray-light transition-colors cursor-pointer hover:text-neutral-100",
+                  "cursor-pointer hover:-translate-y-px hover:border-theme-gray-lighter hover:bg-theme-gray-light hover:text-neutral-100",
               )
               const label = (
                 <>
@@ -142,7 +165,12 @@ export function Message({ message, citations, onRegenerate, isStreaming = false 
                 </>
               )
               const viewerTarget = hasSource
-                ? { path: c.path!, title: c.title ?? c.file, startLine: c.startLine, endLine: c.endLine }
+                ? {
+                    path: c.path!,
+                    title: c.title ?? c.file,
+                    startLine: c.startLine,
+                    endLine: c.endLine,
+                  }
                 : null
 
               return (
@@ -170,34 +198,51 @@ export function Message({ message, citations, onRegenerate, isStreaming = false 
           </div>
         ) : null}
 
-        <div className="mt-2 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
-          <ActionButton label={copied ? "Copied" : "Copy"} onClick={handleCopy}>
-            {copied ? (
-              <Check className="size-4 text-theme-yellow" />
-            ) : (
-              <Copy className="size-4" />
+        {/* ChatGPT / Claude style action toolbar */}
+        {!isStreaming ? (
+          <div
+            className={cn(
+              "msg-actions mt-1.5 flex items-center gap-0.5",
+              showActions
+                ? "opacity-100"
+                : "opacity-100 md:opacity-0 md:translate-y-0.5 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:focus-within:translate-y-0 md:focus-within:opacity-100",
             )}
-          </ActionButton>
-          {onRegenerate ? (
-            <ActionButton label="Regenerate" onClick={onRegenerate}>
-              <RotateCcw className="size-4" />
-            </ActionButton>
-          ) : null}
-          <ActionButton
-            label="Good response"
-            onClick={() => handleFeedback("up")}
-            active={feedback === "up"}
           >
-            <ThumbsUp className="size-4" />
-          </ActionButton>
-          <ActionButton
-            label="Bad response"
-            onClick={() => handleFeedback("down")}
-            active={feedback === "down"}
-          >
-            <ThumbsDown className="size-4" />
-          </ActionButton>
-        </div>
+            <div className="flex items-center gap-0.5">
+              <ActionButton label={copied ? "Copied" : "Copy"} onClick={handleCopy} pressed={copied}>
+                {copied ? (
+                  <Check className="size-3.5 text-theme-yellow" />
+                ) : (
+                  <Copy className="size-3.5" />
+                )}
+              </ActionButton>
+              {onRegenerate ? (
+                <ActionButton label="Regenerate" onClick={onRegenerate}>
+                  <RotateCcw className="size-3.5" />
+                </ActionButton>
+              ) : null}
+            </div>
+
+            <span className="mx-1.5 h-3 w-px bg-theme-gray-light" aria-hidden="true" />
+
+            <div className="flex items-center gap-0.5">
+              <ActionButton
+                label="Good response"
+                onClick={() => handleFeedback("up")}
+                pressed={feedback === "up"}
+              >
+                <ThumbsUp className="size-3.5" />
+              </ActionButton>
+              <ActionButton
+                label="Bad response"
+                onClick={() => handleFeedback("down")}
+                pressed={feedback === "down"}
+              >
+                <ThumbsDown className="size-3.5" />
+              </ActionButton>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   )
@@ -206,31 +251,32 @@ export function Message({ message, citations, onRegenerate, isStreaming = false 
 interface ActionButtonProps {
   label: string
   onClick: () => void
-  active?: boolean
+  pressed?: boolean
   children: React.ReactNode
 }
 
-function ActionButton({ label, onClick, active, children }: ActionButtonProps) {
+function ActionButton({ label, onClick, pressed, children }: ActionButtonProps) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={label}
+      title={label}
       className={cn(
-        "rounded-lg p-1.5 text-neutral-500 transition-colors hover:bg-theme-gray-light hover:text-neutral-200",
-        active && "text-theme-yellow",
+        "inline-flex size-8 items-center justify-center rounded-lg text-neutral-500 transition-all duration-150",
+        "hover:bg-theme-gray-light hover:text-neutral-200",
+        "active:scale-90",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-yellow/35",
+        pressed && "bg-theme-gray-light text-theme-yellow",
       )}
     >
-      {children}
+      <span className={cn("inline-flex transition-transform duration-200", pressed && "scale-110")}>
+        {children}
+      </span>
     </button>
   )
 }
 
-/**
- * Booking confirmation card — shown inline within an assistant message when
- * the backend calendar tool creates or confirms a Google Calendar event.
- * Backend M3 (Dhruvam) owns the tool logic; this is the frontend display half.
- */
 function BookingConfirmationCard({ action }: { action: CalendarActionData }) {
   const isConfirmed = action.status === "confirmed"
   const isFailed = action.status === "failed"
@@ -238,7 +284,7 @@ function BookingConfirmationCard({ action }: { action: CalendarActionData }) {
   return (
     <div
       className={cn(
-        "mt-3 rounded-xl border p-4",
+        "mt-3 rounded-xl border p-4 animate-in fade-in slide-in-from-bottom-1 duration-300",
         isFailed
           ? "border-theme-red/20 bg-theme-red/5"
           : "border-theme-yellow/20 bg-theme-yellow/5",
@@ -261,8 +307,8 @@ function BookingConfirmationCard({ action }: { action: CalendarActionData }) {
             {isFailed
               ? "Calendar event could not be created"
               : isConfirmed
-              ? "Calendar event confirmed"
-              : "Calendar event pending"}
+                ? "Calendar event confirmed"
+                : "Calendar event pending"}
           </p>
           {action.event_title && (
             <p className="text-sm font-medium text-neutral-200">{action.event_title}</p>

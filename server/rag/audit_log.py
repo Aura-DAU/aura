@@ -1,10 +1,6 @@
-"""
-Audit Log — PostgreSQL append-only, never crashes the request (B2-AUTH-9).
-
-scope_context field (added in 002_extend_roles.sql) records coordinator
-program scope, dean batch scope, etc. for richer audit trail — e.g.
-"coordinator:BTech-ICT" or "UG convenor → BTech-ICT".
-"""
+# Audit Log — PostgreSQL append-only, never crashes the request (B2-AUTH-9).
+# scope_context field (added in 002_extend_roles.sql) records coordinator
+# "coordinator:BTech-ICT" or "UG convenor → BTech-ICT".
 
 import logging
 import traceback
@@ -32,11 +28,9 @@ class AuditLog:
         erp_tables:     Optional[list[str]] = None,
         scope_context:  Optional[str]       = None,   # B2-AUTH-9: coordinator/dean scope
     ) -> None:
-        """
-        Insert one audit row. Never raises — wraps in try/except.
-        scope_context captures fine-grained scope info such as
-        'coordinator:BTech-ICT' or 'dean_students' for administrative roles.
-        """
+        # Insert one audit row. Never raises — wraps in try/except.
+        # scope_context captures fine-grained scope info such as
+        # 'coordinator:BTech-ICT' or 'dean_students' for administrative roles.
         try:
             self._db.execute(
                 """INSERT INTO audit_log

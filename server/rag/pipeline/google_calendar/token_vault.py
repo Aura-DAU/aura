@@ -1,26 +1,6 @@
-"""
-Encrypted per-faculty Google Calendar OAuth token storage.
-
-Each faculty member can optionally connect their Google Calendar.
-After completing the OAuth 2.0 authorization code flow, the access_token
-and refresh_token are stored here — encrypted with Fernet (AES-128-CBC),
-same pattern as pipeline/ecampus/credentials_vault.py.
-
-AURA only ever READS calendar data on the faculty's behalf — no writes,
-no event creation, no deletion. Scope requested: calendar.readonly.
-
-Setup checklist (IT team):
-  1. Create a Google Cloud project.
-  2. Enable the Google Calendar API.
-  3. Create OAuth 2.0 credentials (Web application type).
-  4. Add the redirect URI:
-       https://aura.dau.ac.in/api/calendar/callback
-  5. Set env vars:
-       GOOGLE_CALENDAR_CLIENT_ID
-       GOOGLE_CALENDAR_CLIENT_SECRET
-       GOOGLE_CALENDAR_VAULT_KEY    (Fernet key — separate from ECAMPUS_VAULT_KEY)
-       GOOGLE_CALENDAR_VAULT_DB     (SQLite path, default below)
-"""
+# Encrypted per-faculty Google Calendar OAuth token storage.
+# Each faculty member can optionally connect their Google Calendar.
+# GOOGLE_CALENDAR_VAULT_DB     (SQLite path, default below)
 
 import os
 import json
@@ -59,7 +39,7 @@ def _connect():
 
 def store_tokens(erp_id: str, access_token: str, refresh_token: str,
                  token_expiry: str) -> None:
-    """Called by the OAuth callback handler after the user grants consent."""
+    # Called by the OAuth callback handler after the user grants consent.
     blob = json.dumps({
         "access_token":  access_token,
         "refresh_token": refresh_token,

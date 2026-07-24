@@ -1,9 +1,6 @@
-"""
-Tests for GET /internal/resolve-identity.
-
-Verifies: secret header enforcement, domain validation, found/not-found
-behaviour. Does not need a real DB — uses a mock db_conn module.
-"""
+# Tests for GET /internal/resolve-identity.
+# Verifies: secret header enforcement, domain validation, found/not-found
+# behaviour. Does not need a real DB — uses a mock db_conn module.
 
 import sys, os
 from pathlib import Path

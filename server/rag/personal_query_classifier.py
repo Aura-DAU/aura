@@ -1,15 +1,6 @@
-"""
-B9 / B2-AUTH-7 — Personal Query Classifier (extended for all roles).
-
-Classifies every query as PUBLIC / PERSONAL / MIXED / AGGREGATE.
-Extended to handle faculty-specific queries (teaching schedule, BTP pool,
-mentees) and dean-level queries (grievances, hostel master, disciplinary).
-
-Injection defence: user query is wrapped in <query>...</query> tags so the
-model sees a clear boundary between its instructions and untrusted user text.
-
-On any failure → defaults to PUBLIC (safest fallback).
-"""
+# B9 / B2-AUTH-7 — Personal Query Classifier (extended for all roles).
+# Classifies every query as PUBLIC / PERSONAL / MIXED / AGGREGATE.
+# On any failure → defaults to PUBLIC (safest fallback).
 
 import os
 import json

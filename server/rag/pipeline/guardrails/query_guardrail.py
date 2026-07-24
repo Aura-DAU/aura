@@ -94,23 +94,27 @@ UNSAFE
 
         return "UNSAFE" not in result
 
-    def is_safe(self, query: str) -> bool:
+    def evaluate(self, query: str):
+        # Single classification attempt. Returns True/False, or None when the
+        # guardrail LLM is unreachable — callers apply their own fail-open /
+        # fail-closed policy without paying a second identical LLM round-trip.
         try:
             return self._classify(query)
         except Exception as e:
             print(f"[Guardrail] Error evaluating query: {e}")
-            # Fail open to prevent blocking all queries if the LLM API is down
-            return True
+            return None
+
+    def is_safe(self, query: str) -> bool:
+        verdict = self.evaluate(query)
+        # Fail open to prevent blocking all queries if the LLM API is down
+        return True if verdict is None else verdict
 
     def is_safe_strict(self, query: str) -> bool:
-        """Like is_safe() but fails CLOSED on any exception.
-
-        Use this before routing to personal-data paths: if the guardrail LLM
-        is unavailable we must deny rather than risk passing a prompt injection
-        through to the ERP/ecampus pipeline.
-        """
-        try:
-            return self._classify(query)
-        except Exception as e:
-            print(f"[Guardrail] Strict check failed, denying query: {e}")
+        # Like is_safe() but fails CLOSED on any exception.
+        # Use this before routing to personal-data paths: if the guardrail LLM
+        # through to the ERP/ecampus pipeline.
+        verdict = self.evaluate(query)
+        if verdict is None:
+            print("[Guardrail] Strict check unavailable, denying query.")
             return False  # Fail CLOSED — deny on uncertainty for personal data
+        return verdict

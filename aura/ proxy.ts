@@ -4,14 +4,17 @@ import { getToken } from "next-auth/jwt"
 
 import { getNextAuthSecret } from "@/lib/auth/secrets"
 
-const PUBLIC_PATHS = ["/login", "/api/auth", "/_next", "/favicon.ico"]
+const PUBLIC_PATHS = ["/login", "/api/auth", "/_next", "/favicon.ico", "/offline"]
 const EXACT_PUBLIC_PATHS = ["/"]
+const PUBLIC_FILE =
+  /\.(?:svg|png|jpg|jpeg|gif|webp|ico|json|webmanifest|js|css|map|txt|woff2?)$/i
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  // Allow public paths through
+  // Allow public paths and static assets from /public through
   if (
+    PUBLIC_FILE.test(pathname) ||
     PUBLIC_PATHS.some((p) => pathname.startsWith(p)) ||
     EXACT_PUBLIC_PATHS.includes(pathname)
   ) {

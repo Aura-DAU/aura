@@ -1,10 +1,13 @@
-"""AURA RAG package.
+# AURA RAG package. Prefer ``from rag import AURA`` with ``PYTHONPATH=server``.
+# Lazy export so importing ``rag`` (or pipeline tests) does not load Pinecone.
 
-Prefer ``from rag import AURA`` with ``PYTHONPATH=server``.
-When ``server/rag`` is also on ``sys.path`` (legacy flat imports),
-``rag.py`` may load as a top-level module instead of this package.
-"""
-
-from .rag import AURA
+from typing import Any
 
 __all__ = ["AURA"]
+
+
+def __getattr__(name: str) -> Any:
+    if name == "AURA":
+        from .rag import AURA as _AURA
+        return _AURA
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
