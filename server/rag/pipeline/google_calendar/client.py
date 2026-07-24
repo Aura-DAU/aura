@@ -1,9 +1,13 @@
 """
-Google Calendar API client — read-only slot fetcher.
+Google Calendar API client.
 
-Wraps the Google Calendar API v3. Requests only the
-`https://www.googleapis.com/auth/calendar.readonly` scope.
-Auto-refreshes the access token using the stored refresh token.
+Wraps the Google Calendar API v3 token handling. Historically this module
+only ever fetched events (faculty `calendar.readonly` grant, for
+slot_service.py). As of v8 it also backs the student write flow in
+writer.py / timetable_sync.py, which holds a `calendar.events` grant
+instead — but token refresh is scope-agnostic, so `get_valid_access_token`
+below is shared by both. This file itself still never calls a Calendar
+API write endpoint; see writer.py for that.
 
 Required env vars:
   GOOGLE_CALENDAR_CLIENT_ID
@@ -15,7 +19,7 @@ import time
 import datetime
 import requests
 
-from .token_vault import get_tokens, store_tokens, CalendarNotLinked
+from .token_vault import get_tokens, store_tokens, CalendarNotLinked, SCOPE_READONLY
 
 GOOGLE_TOKEN_URL  = "https://oauth2.googleapis.com/token"
 GOOGLE_EVENTS_URL = "https://www.googleapis.com/calendar/v3/calendars/{cal_id}/events"
@@ -38,9 +42,11 @@ def _refresh_access_token(erp_id: str, refresh_token: str) -> str:
     expiry     = datetime.datetime.utcnow() + datetime.timedelta(
         seconds=data.get("expires_in", 3600)
     )
-    # Persist the refreshed token
+    # Persist the refreshed token — preserve the original scope so a
+    # student's SCOPE_EVENTS grant isn't silently downgraded to SCOPE_READONLY.
     tokens = get_tokens(erp_id)
-    store_tokens(erp_id, new_access, tokens["refresh_token"], expiry.isoformat())
+    store_tokens(erp_id, new_access, tokens["refresh_token"],
+                 expiry.isoformat(), scope=tokens.get("scope", SCOPE_READONLY))
     return new_access
 
 
@@ -51,6 +57,11 @@ def _get_valid_access_token(erp_id: str) -> str:
     if datetime.datetime.utcnow() >= expiry - datetime.timedelta(minutes=5):
         return _refresh_access_token(erp_id, tokens["refresh_token"])
     return tokens["access_token"]
+
+
+# Public alias — writer.py (student write flow) uses this name; kept the
+# "_"-prefixed one too since slot_service.py already imports it that way.
+get_valid_access_token = _get_valid_access_token
 
 
 def get_events_on_date(erp_id: str, date: datetime.date) -> list[dict]:

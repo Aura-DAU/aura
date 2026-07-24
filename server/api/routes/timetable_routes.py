@@ -51,6 +51,36 @@ def get_my_timetable_changes(identity: Identity = Depends(require_identity)):
         raise HTTPException(status_code=409, detail=str(e))
 
 
+class ElectiveSelectionsIn(BaseModel):
+    course_codes: list[str]
+
+
+@router.get("/electives")
+def get_electives(identity: Identity = Depends(require_identity)):
+    """Available elective courses for the student's own cohort (year + sem),
+    with a `selected` flag for each. See service.get_available_electives —
+    scoped so a student never sees electives offered to a different
+    year/semester."""
+    if identity.role != "student":
+        raise HTTPException(status_code=403, detail="Only students have elective selections.")
+    try:
+        return service.get_available_electives(identity)
+    except TimetableError as e:
+        raise HTTPException(status_code=409, detail=str(e))
+
+
+@router.post("/electives")
+def post_electives(body: ElectiveSelectionsIn, identity: Identity = Depends(require_identity)):
+    """Save the student's elective course selections — resolved against
+    their own cohort only (see service.save_elective_selections)."""
+    if identity.role != "student":
+        raise HTTPException(status_code=403, detail="Only students have elective selections.")
+    try:
+        return service.save_elective_selections(identity, body.course_codes)
+    except TimetableError as e:
+        raise HTTPException(status_code=409, detail=str(e))
+
+
 class PushSubscriptionKeys(BaseModel):
     p256dh: str
     auth: str
