@@ -1,15 +1,4 @@
-# Auto-deploy Node 1 apps via self-hosted runner (aura-node1)
-#
-# Rebuilds ONLY aura (Next.js) + backend (FastAPI) + refreshes nginx.
-# Never restarts Postgres, Redis, or remote vLLM / Qdrant / TEI.
-#
-# Prerequisites on Node 1:
-#   1. Repo cloned at /opt/aura/app
-#   2. deploy/node1/.env configured
-#   3. Self-hosted runner installed under /opt/aura/actions-runner
-#      with label `aura-node1` (see deploy/README.md → Auto-deploy)
-#
-# This workflow is dormant until that runner is online.
+# CD workflow for Aura app deploy
 
 name: CD — Aura app deploy
 

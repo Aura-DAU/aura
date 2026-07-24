@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react"
 import { Search, Plus, Trash2, Shield, Calendar, Loader2, CheckCircle2, AlertCircle, Activity, Clock } from "lucide-react"
 import { ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+import { getErrorMessage, toastError, toastSuccess } from "@/lib/toast"
 
 interface Binding {
   id: string
@@ -83,6 +84,7 @@ export default function AdminBindingsClient() {
   const [newBinding, setNewBinding] = useState("")
   const [expiresAt, setExpiresAt] = useState("")
   const [submitting, setSubmitting] = useState(false)
+  const [revokingId, setRevokingId] = useState<string | null>(null)
 
   // Latency Dashboard state
   const [latencyStats, setLatencyStats] = useState<LatencyStats | null>(null)
@@ -103,7 +105,9 @@ export default function AdminBindingsClient() {
         const data = await res.json()
         setLatencyStats(data)
       } catch (err) {
-        setLatencyError(err instanceof Error ? err.message : "Failed to load latency data.")
+        const msg = getErrorMessage(err, "Failed to load latency data.")
+        setLatencyError(msg)
+        toastError(msg)
       } finally {
         setLatencyLoading(false)
       }
@@ -128,8 +132,9 @@ export default function AdminBindingsClient() {
       }
       setBindings(data.bindings || [])
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Something went wrong."
+      const msg = getErrorMessage(err, "Something went wrong.")
       setError(msg)
+      toastError(msg)
       setBindings([])
     } finally {
       setLoading(false)
@@ -159,7 +164,9 @@ export default function AdminBindingsClient() {
         throw new Error(data.error || "Failed to add binding")
       }
 
-      setSuccess(`Binding '${newBinding}' successfully added!`)
+      const successText = `Binding '${newBinding}' successfully added!`
+      setSuccess(successText)
+      toastSuccess(successText)
       setNewBinding("")
       setExpiresAt("")
       
@@ -168,8 +175,9 @@ export default function AdminBindingsClient() {
       const refreshData = await refreshRes.json()
       setBindings(refreshData.bindings || [])
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Something went wrong."
+      const msg = getErrorMessage(err, "Something went wrong.")
       setError(msg)
+      toastError(msg)
     } finally {
       setSubmitting(false)
     }
@@ -178,6 +186,7 @@ export default function AdminBindingsClient() {
   const handleRevokeBinding = async (bindingId: string, bindingName: string) => {
     setError(null)
     setSuccess(null)
+    setRevokingId(bindingId)
 
     try {
       const res = await fetch(`/api/admin/bindings/${bindingId}`, {
@@ -189,15 +198,20 @@ export default function AdminBindingsClient() {
         throw new Error(data.error || "Failed to revoke binding")
       }
 
-      setSuccess(`Binding '${bindingName}' successfully revoked!`)
+      const successText = `Binding '${bindingName}' successfully revoked!`
+      setSuccess(successText)
+      toastSuccess(successText)
       
       // Refresh list
       const refreshRes = await fetch(`/api/admin/users/${erpId}/bindings`)
       const refreshData = await refreshRes.json()
       setBindings(refreshData.bindings || [])
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Something went wrong."
+      const msg = getErrorMessage(err, "Something went wrong.")
       setError(msg)
+      toastError(msg)
+    } finally {
+      setRevokingId(null)
     }
   }
 
@@ -349,10 +363,15 @@ export default function AdminBindingsClient() {
                         <button
                           type="button"
                           onClick={() => handleRevokeBinding(b.id, b.binding)}
+                          disabled={revokingId === b.id}
                           aria-label={`Revoke ${b.binding}`}
-                          className="ml-4 shrink-0 rounded-lg p-2 text-neutral-500 hover:bg-theme-red/10 hover:text-theme-red transition-all"
+                          className="ml-4 shrink-0 rounded-lg p-2 text-neutral-500 hover:bg-theme-red/10 hover:text-theme-red transition-all disabled:opacity-50"
                         >
-                          <Trash2 className="size-4" />
+                          {revokingId === b.id ? (
+                            <Loader2 className="size-4 animate-spin" />
+                          ) : (
+                            <Trash2 className="size-4" />
+                          )}
                         </button>
                       )}
                     </div>

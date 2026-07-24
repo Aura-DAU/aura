@@ -31,9 +31,25 @@ function groupByDay(slots: TimetableSlot[]) {
 }
 
 function NotificationToggle() {
-  const { status, subscribe, unsubscribe } = usePushNotifications()
+  const { status, pending, subscribe, unsubscribe } = usePushNotifications()
 
   if (status === "unsupported") return null
+
+  if (pending === "subscribe") {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray/60 px-3 py-1.5 text-[11px] text-neutral-400">
+        <Loader2 className="size-3 animate-spin" /> Enabling…
+      </span>
+    )
+  }
+
+  if (pending === "unsubscribe") {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray/60 px-3 py-1.5 text-[11px] text-neutral-400">
+        <Loader2 className="size-3 animate-spin" /> Turning off…
+      </span>
+    )
+  }
 
   if (status === "loading") {
     return (
@@ -56,7 +72,8 @@ function NotificationToggle() {
       <button
         type="button"
         onClick={unsubscribe}
-        className="inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1.5 text-[11px] font-medium text-green-400 hover:bg-green-500/20 transition-colors"
+        disabled={pending !== null}
+        className="inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1.5 text-[11px] font-medium text-green-400 hover:bg-green-500/20 transition-colors disabled:opacity-50"
       >
         <BellRing className="size-3" /> Class reminders on
       </button>
@@ -67,7 +84,8 @@ function NotificationToggle() {
     <button
       type="button"
       onClick={subscribe}
-      className="inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray/60 px-3 py-1.5 text-[11px] font-medium text-neutral-300 hover:border-theme-yellow/40 hover:text-theme-yellow transition-colors"
+      disabled={pending !== null}
+      className="inline-flex items-center gap-1.5 rounded-full border border-theme-gray-light bg-theme-gray/60 px-3 py-1.5 text-[11px] font-medium text-neutral-300 hover:border-theme-yellow/40 hover:text-theme-yellow transition-colors disabled:opacity-50"
     >
       <Bell className="size-3" /> Remind me 10 min before class
     </button>
