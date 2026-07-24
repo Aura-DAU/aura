@@ -108,6 +108,7 @@ export function AnimatedBrandMark({ className }: AnimatedBrandMarkProps) {
     { scope: rootRef },
   )
 
+
   return (
     <span
       ref={rootRef}
