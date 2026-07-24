@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { Calendar, Users, ArrowRight, Loader2, AlertCircle, Clock } from "lucide-react"
-import { apiFetch, initAuth } from "@/lib/auth-client"
+import { apiFetch, ensureSession } from "@/lib/auth-client"
 
 interface FacultyDashboardProps {
   userName: string
@@ -102,10 +102,10 @@ export function FacultyDashboard({
 
     // TODO(unirp): Replace with UniRP endpoint when faculty data routes are confirmed.
     void (async () => {
-      // Wait for JWT before hitting /api/chat (avoids mount-time 401 race).
-      const token = await initAuth()
+      // Wait for session cookie before hitting /api/chat (avoids mount-time 401 race).
+      const ok = await ensureSession()
       if (signal.aborted) return
-      if (!token) {
+      if (!ok) {
         setScheduleState("error")
         setAdviseeState("error")
         return

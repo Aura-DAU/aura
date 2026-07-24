@@ -4,6 +4,19 @@ import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 import { backendUrl } from "@/lib/api/backend"
 
+// Only allow safe relative markdown-ish paths. Per-segment encodeURIComponent
+// does NOT neutralise ".." segments (they encode to "..") so we must reject
+// traversal, absolute paths, backslashes, null bytes and scheme-like inputs
+// here before forwarding to the backend.
+function isSafeDocumentPath(path: string): boolean {
+  if (path.includes("\0")) return false // null bytes
+  if (path.includes("\\")) return false // backslashes (Windows-style traversal)
+  if (path.startsWith("/")) return false // absolute / protocol-relative
+  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(path)) return false // scheme: prefix
+  if (path.split("/").some((segment) => segment === "..")) return false // parent traversal
+  return /^[A-Za-z0-9._/-]+$/.test(path) // final allowlist of safe characters
+}
+
 // Phase C (FE-3/BE-2): backs the citation side-drawer. Given a citation's
 // `path` (the relative markdown path returned alongside a citation, e.g.
 // "infrastructure/ict_infrastructure.md"), fetches the raw source from
@@ -19,6 +32,9 @@ export async function GET(req: Request) {
   const path = searchParams.get("path")?.trim()
   if (!path) {
     return NextResponse.json({ error: "Missing path" }, { status: 400 })
+  }
+  if (!isSafeDocumentPath(path)) {
+    return NextResponse.json({ error: "Invalid path" }, { status: 400 })
   }
 
   const token = signInternalJwt({
@@ -40,6 +56,10 @@ export async function GET(req: Request) {
     })
 
     if (!res.ok) {
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to fetch document" }, { status: res.status })
+      }
       let errDetail = "Failed to fetch document"
       try {
         const errJson = await res.json()

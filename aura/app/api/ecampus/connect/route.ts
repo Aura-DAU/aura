@@ -1,8 +1,14 @@
 import { getServerSession } from "next-auth"
+import { z } from "zod"
 import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 import { NextResponse } from "next/server"
 import { backendUrl } from "@/lib/api/backend"
+
+const connectSchema = z.object({
+  ecampus_username: z.string().min(1).max(256),
+  password: z.string().min(1).max(1024),
+})
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
@@ -10,17 +16,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  let body
+  let body: unknown
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
 
-  const { ecampus_username, password } = body
-  if (!ecampus_username || !password) {
+  const parsed = connectSchema.safeParse(body)
+  if (!parsed.success) {
     return NextResponse.json({ error: "Username and password required" }, { status: 400 })
   }
+  const { ecampus_username, password } = parsed.data
 
   // Mint internal JWT
   const token = signInternalJwt({
@@ -41,6 +48,10 @@ export async function POST(req: Request) {
     })
 
     if (!res.ok) {
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to link eCampus account" }, { status: res.status })
+      }
       let errDetail = "Failed to link eCampus account"
       try {
         const errJson = await res.json()

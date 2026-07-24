@@ -65,9 +65,10 @@ def _allowlist() -> list[str]:
 
 
 def _client_ip(request: Request) -> str:
-    forwarded = request.headers.get("x-forwarded-for")
-    if forwarded:
-        return forwarded.split(",")[0].strip()
+    # Prefer the direct peer (request.client.host). Do NOT trust X-Forwarded-For
+    # here — when the backend is reached without a trusted reverse-proxy hop
+    # (or if host port 8000 were ever published), forged XFF would bypass the
+    # allowlist. Nginx still sets XFF for logging; allowlist uses the TCP peer.
     if request.client:
         return request.client.host
     return ""
@@ -121,7 +122,7 @@ def _validate_email_domain(email: str) -> None:
 
 @router.get("/resolve-identity")
 def resolve_identity(
-    email: str = Query(..., description="Institutional Google email to resolve"),
+    email: str = Query(..., min_length=3, max_length=320, description="Institutional Google email to resolve"),
     _: None = Depends(_validate_secret),
 ):
     """

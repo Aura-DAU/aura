@@ -1,73 +1,48 @@
 import { signOut } from "next-auth/react"
 import { toastError } from "@/lib/toast"
 
-let inMemoryToken: string | null = null
-
-export function setToken(token: string | null) {
-  inMemoryToken = token
-}
-
-export function getToken(): string | null {
-  return inMemoryToken
-}
-
 /**
- * Hydrates the in-memory access token by fetching the active session.
- */
-export async function initAuth(): Promise<string | null> {
-  try {
-    const res = await fetch("/api/auth/token")
-    if (res.ok) {
-      const { token } = await res.json()
-      setToken(token || null)
-      return token || null
-    }
-  } catch (err) {
-    console.error("[auth-client] Failed to fetch token:", err)
-  }
-  setToken(null)
-  return null
-}
-
-/**
- * Sign out and clear in-memory tokens.
+ * Sign out and clear client session state.
  */
 export async function logout(): Promise<void> {
-  setToken(null)
   await signOut({ callbackUrl: "/login" })
 }
 
 /**
- * Fetch wrapper that appends the client's internal JWT access token,
- * handles silent 401 refreshes, and triggers logout if unauthorized.
+ * Same-origin fetch wrapper for Next.js BFF routes.
+ *
+ * Auth is the NextAuth session cookie (httpOnly) — never an INTERNAL JWT in
+ * browser JS. BFF handlers mint short-lived server-side JWTs for FastAPI.
+ * credentials: "same-origin" ensures the session cookie is always sent.
  */
 export async function apiFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
-  let token = getToken()
-
-  // Ensure a token exists before authenticated calls (avoids dashboard race on mount).
-  if (!token) {
-    token = await initAuth()
-  }
-
-  const headers = new Headers(init?.headers)
-  if (token) {
-    headers.set("Authorization", `Bearer ${token}`)
-  }
-
-  let response = await fetch(input, { ...init, headers })
+  const response = await fetch(input, {
+    ...init,
+    credentials: "same-origin",
+  })
 
   if (response.status === 401) {
-    console.warn("[auth-client] 401 Unauthorized, attempting silent session refresh...")
-    token = await initAuth()
-    if (token) {
-      headers.set("Authorization", `Bearer ${token}`)
-      response = await fetch(input, { ...init, headers })
-    } else {
-      console.error("[auth-client] Silent refresh failed, logging out...")
-      toastError("Your session expired. Please sign in again.")
-      await logout()
-    }
+    console.error("[auth-client] 401 Unauthorized — session missing or expired")
+    toastError("Your session expired. Please sign in again.")
+    await logout()
   }
 
   return response
+}
+
+/**
+ * True when a NextAuth session cookie is present (via /api/auth/session).
+ * Used by dashboards that need to wait for auth before firing BFF calls —
+ * does not expose any backend JWT to the browser.
+ */
+export async function ensureSession(): Promise<boolean> {
+  try {
+    const res = await fetch("/api/auth/session", { credentials: "same-origin" })
+    if (!res.ok) return false
+    const data = (await res.json()) as { user?: { erpId?: string } } | null
+    return Boolean(data?.user?.erpId)
+  } catch (err) {
+    console.error("[auth-client] Failed to check session:", err)
+    return false
+  }
 }

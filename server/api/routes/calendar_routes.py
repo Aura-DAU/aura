@@ -4,10 +4,18 @@ import os
 import urllib.parse
 
 import jwt
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from fastapi.responses import RedirectResponse
 
-from api.auth import ALGORITHM, Identity, get_internal_jwt_secret, require_identity
+from api.auth import (
+    ALGORITHM,
+    GCAL_OAUTH_STATE_AUDIENCE,
+    GCAL_OAUTH_STATE_ISSUER,
+    GCAL_OAUTH_STATE_TYP,
+    Identity,
+    get_internal_jwt_secret,
+    require_identity,
+)
 from pipeline.google_calendar.slot_service import get_available_slots
 from pipeline.google_calendar.token_vault import (
     store_tokens, unlink_calendar, is_linked, has_write_scope, CalendarNotLinked,
@@ -24,7 +32,9 @@ CLIENT_ID = os.environ.get("GOOGLE_CALENDAR_CLIENT_ID", "")
 CLIENT_SECRET = os.environ.get("GOOGLE_CALENDAR_CLIENT_SECRET", "")
 REDIRECT_URI = os.environ.get(
     "GOOGLE_CALENDAR_REDIRECT_URI",
-    "https://aura.dau.ac.in/api/calendar/callback",
+    # Callback lives on FastAPI (proxied at /backend/calendar/callback). There is
+    # no Next.js /api/calendar BFF route.
+    "https://aura.daiict.ac.in/backend/calendar/callback",
 )
 CALENDAR_SCOPE_READONLY = "https://www.googleapis.com/auth/calendar.readonly"
 CALENDAR_SCOPE_EVENTS   = "https://www.googleapis.com/auth/calendar.events"
@@ -35,8 +45,8 @@ def _frontend_origin() -> str:
 
 @router.get("/slots/{faculty_erp_id}")
 def get_faculty_slots(
-    faculty_erp_id: str,
-    date: str = Query(..., description="Date in YYYY-MM-DD format"),
+    faculty_erp_id: str = Path(..., min_length=1, max_length=64),
+    date: str = Query(..., min_length=10, max_length=10, description="Date in YYYY-MM-DD format"),
     identity: Identity = Depends(require_identity),
 ):
     # Students: enrolled course or BTP mentee only; faculty can view colleagues.
@@ -83,15 +93,13 @@ def start_calendar_oauth(
     # and the page to return to after consent so the callback can redirect
     # back to wherever the user started rather than always /dashboard.
     state_payload = {
-        "erp_id":    identity.erp_id,
-        "role":      identity.role,
-        "return_to": return_to,
-        "exp":       datetime.datetime.utcnow() + datetime.timedelta(minutes=10),
+        "erp_id": identity.erp_id,
+        "typ": GCAL_OAUTH_STATE_TYP,
+        "iss": GCAL_OAUTH_STATE_ISSUER,
+        "aud": GCAL_OAUTH_STATE_AUDIENCE,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10),
     }
     state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)
-
-    # Students need write scope for timetable sync; faculty need readonly
-    scope = CALENDAR_SCOPE_EVENTS if identity.role == "student" else CALENDAR_SCOPE_READONLY
 
     params = {
         "client_id":     CLIENT_ID,
@@ -111,8 +119,8 @@ def start_calendar_oauth(
 
 @router.get("/callback")
 def calendar_oauth_callback(
-    code: str = Query(...),
-    state: str = Query(...),
+    code: str = Query(..., min_length=1, max_length=2048),
+    state: str = Query(..., min_length=1, max_length=4096),
 ):
     # Google OAuth callback — exchange code, store tokens, redirect back to
     # the page the user started the flow from (encoded in the state JWT).
@@ -130,10 +138,19 @@ def calendar_oauth_callback(
         )
 
     try:
-        claims = jwt.decode(state, secret, algorithms=[ALGORITHM])
+        claims = jwt.decode(
+            state,
+            secret,
+            algorithms=[ALGORITHM],
+            audience=GCAL_OAUTH_STATE_AUDIENCE,
+            issuer=GCAL_OAUTH_STATE_ISSUER,
+        )
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=400, detail="State token expired. Please reconnect calendar.")
     except jwt.InvalidTokenError:
+        raise HTTPException(status_code=400, detail="Invalid state token. Possible CSRF attempt.")
+
+    if claims.get("typ") != GCAL_OAUTH_STATE_TYP:
         raise HTTPException(status_code=400, detail="Invalid state token. Possible CSRF attempt.")
 
     erp_id = claims.get("erp_id")

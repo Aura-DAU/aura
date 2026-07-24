@@ -52,4 +52,6 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
 # in-process embedder/reranker, LangGraph orchestrator) is lazily
 # initialised per-process on first /chat call, so extra workers multiply
 # cold-start memory. Override WEB_CONCURRENCY to scale out.
-CMD ["sh", "-c", "gunicorn api.api:app -k uvicorn.workers.UvicornWorker --workers ${WEB_CONCURRENCY:-2} --bind 0.0.0.0:${PORT} --timeout 120"]
+# Request-line/header caps blunt header-flood DoS; max-requests recycles
+# workers to bound memory growth from long-lived RAG caches.
+CMD ["sh", "-c", "gunicorn api.api:app -k uvicorn.workers.UvicornWorker --workers ${WEB_CONCURRENCY:-2} --bind 0.0.0.0:${PORT} --timeout 120 --limit-request-line 8190 --limit-request-fields 100 --limit-request-field_size 8190 --max-requests ${GUNICORN_MAX_REQUESTS:-1000} --max-requests-jitter 100"]

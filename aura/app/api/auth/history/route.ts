@@ -5,10 +5,37 @@ import { z } from "zod"
 import { authOptions } from "@/lib/auth/options"
 import { saveThreadsForUser } from "@/lib/db/chat-db"
 
+const MAX_THREADS = 10
+const MAX_MESSAGES_PER_THREAD = 100
+
+const historyMessageSchema = z.object({
+  role: z.enum(["user", "assistant"]),
+  content: z.string().max(20_000),
+  timestamp: z.number().optional(),
+  is_personal_data: z.boolean().optional(),
+  calendar_action: z
+    .object({
+      event_title: z.string().max(500).optional(),
+      date: z.string().max(64).optional(),
+      time: z.string().max(64).optional(),
+      attendees: z.array(z.string().max(256)).max(50).optional(),
+      status: z.enum(["confirmed", "pending", "failed"]).optional(),
+      calendar_link: z.string().max(2048).optional(),
+      description: z.string().max(2000).optional(),
+    })
+    .optional(),
+})
+
+const historyThreadSchema = z.object({
+  id: z.string().min(1).max(128),
+  title: z.string().max(500),
+  messages: z.array(historyMessageSchema).max(MAX_MESSAGES_PER_THREAD),
+})
+
 const historySchema = z.object({
   // email in the body is ignored — persistence is bound to the session.
-  email: z.string().email().optional(),
-  threads: z.array(z.any()),
+  email: z.string().email().max(320).optional(),
+  threads: z.array(historyThreadSchema).max(MAX_THREADS),
 })
 
 export async function POST(req: Request) {

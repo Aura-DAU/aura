@@ -29,6 +29,10 @@ export async function GET() {
     })
 
     if (!res.ok) {
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to fetch timetable" }, { status: res.status })
+      }
       let errDetail = "Failed to fetch timetable"
       try {
         const errJson = await res.json()

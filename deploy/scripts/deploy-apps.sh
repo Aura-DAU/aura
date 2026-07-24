@@ -96,10 +96,12 @@ echo "==> Refreshing nginx (no image build; no DB deps)"
 docker compose --env-file "${ENV_FILE}" up -d --no-deps --no-build nginx
 
 echo "==> Health check"
-# Prefer internal backend health; fall back to compose ps if curl missing
+# Backend is not published on the host (security: no host :8000 bypass of nginx).
+# Probe inside the container first, then via the public nginx edge if needed.
 if command -v curl >/dev/null 2>&1; then
-  curl -fsS --max-time 30 "http://127.0.0.1:8000/health" >/dev/null \
-    || curl -fsS --max-time 30 "https://127.0.0.1/backend/health" >/dev/null \
+  docker compose --env-file "${ENV_FILE}" exec -T backend \
+    curl -fsS --max-time 30 "http://127.0.0.1:8000/health" >/dev/null \
+    || curl -fsS --max-time 30 -k "https://127.0.0.1/backend/health" >/dev/null \
     || {
       echo "warning: health endpoint not reachable yet; check: docker compose ps" >&2
       docker compose --env-file "${ENV_FILE}" ps aura backend nginx

@@ -1,5 +1,5 @@
 # Shared request/response models for AURA API routes.
-from typing import List, Optional
+from typing import Annotated, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -25,7 +25,7 @@ class UserProfile(BaseModel):
     year: Optional[str] = Field(None, max_length=50)
     semester: Optional[str] = Field(None, max_length=50)
     interests: Optional[str] = Field(None, max_length=1000)
-    subjects: Optional[List[str]] = None
+    subjects: Optional[List[Annotated[str, Field(max_length=100)]]] = Field(None, max_length=50)
 
 
 class ChatRequest(BaseModel):

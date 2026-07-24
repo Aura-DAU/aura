@@ -1,11 +1,14 @@
 import os
 import logging
-from typing import List
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+import threading
+from typing import Annotated, List
+
+from fastapi import FastAPI, HTTPException, Request
+from pydantic import BaseModel, Field
 import torch
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from starlette.responses import JSONResponse
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("embedding-reranker-service")
@@ -19,6 +22,16 @@ app = FastAPI(
 # Configuration from Environment
 EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "BAAI/bge-base-en-v1.5")
 RERANKER_MODEL_NAME = os.getenv("RERANKER_MODEL_NAME", "BAAI/bge-reranker-v2-m3")
+
+MAX_EMBED_TEXTS = int(os.getenv("MAX_EMBED_TEXTS", "64"))
+MAX_RERANK_PAIRS = int(os.getenv("MAX_RERANK_PAIRS", "64"))
+MAX_TEXT_CHARS = int(os.getenv("MAX_TEXT_CHARS", "8000"))
+# Cap parallel GPU/CPU inference so a flood cannot OOM the node.
+MAX_CONCURRENT_INFERENCE = max(1, int(os.getenv("MAX_CONCURRENT_INFERENCE", "2")))
+# Reject bodies larger than this before parsing (default 1 MiB).
+MAX_REQUEST_BYTES = max(64_000, int(os.getenv("MAX_REQUEST_BYTES", str(1 * 1024 * 1024))))
+
+_inference_sem = threading.Semaphore(MAX_CONCURRENT_INFERENCE)
 
 if os.getenv("RERANKER_DEVICE"):
     DEVICE_NAME = os.getenv("RERANKER_DEVICE")
@@ -52,7 +65,9 @@ except Exception as e:
 
 
 class EmbedRequest(BaseModel):
-    texts: List[str]
+    texts: List[Annotated[str, Field(max_length=MAX_TEXT_CHARS)]] = Field(
+        ..., max_length=MAX_EMBED_TEXTS
+    )
     normalize: bool = True
 
 
@@ -63,12 +78,32 @@ class EmbedResponse(BaseModel):
 
 
 class RerankPairRequest(BaseModel):
-    pairs: List[List[str]]  # Each item is [query, passage_text]
+    # Each item is [query, passage_text]
+    pairs: List[
+        Annotated[
+            List[Annotated[str, Field(max_length=MAX_TEXT_CHARS)]],
+            Field(min_length=2, max_length=2),
+        ]
+    ] = Field(..., max_length=MAX_RERANK_PAIRS)
 
 
 class RerankResponse(BaseModel):
     scores: List[float]
     model: str
+
+
+@app.middleware("http")
+async def reject_oversized_bodies(request: Request, call_next):
+    # Cheap Content-Length gate — do not buffer the body here.
+    if request.method in ("POST", "PUT", "PATCH"):
+        cl = request.headers.get("content-length")
+        if cl is not None:
+            try:
+                if int(cl) > MAX_REQUEST_BYTES:
+                    return JSONResponse({"detail": "Request body too large"}, status_code=413)
+            except ValueError:
+                return JSONResponse({"detail": "Invalid Content-Length"}, status_code=400)
+    return await call_next(request)
 
 
 @app.get("/health")
@@ -89,7 +124,10 @@ def embed_texts(req: EmbedRequest):
         raise HTTPException(status_code=503, detail="Embedding model not loaded")
     if not req.texts:
         return EmbedResponse(embeddings=[], model=EMBEDDING_MODEL_NAME, dimension=0)
-    
+
+    acquired = _inference_sem.acquire(blocking=False)
+    if not acquired:
+        raise HTTPException(status_code=503, detail="Embedding service busy — retry shortly")
     try:
         embeddings = embedding_model.encode(
             req.texts,
@@ -104,7 +142,9 @@ def embed_texts(req: EmbedRequest):
         )
     except Exception as e:
         logger.error(f"Embedding error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="Embedding failed")
+    finally:
+        _inference_sem.release()
 
 
 @app.post("/rerank", response_model=RerankResponse)
@@ -113,7 +153,10 @@ def rerank_pairs(req: RerankPairRequest):
         raise HTTPException(status_code=503, detail="Reranker model not loaded")
     if not req.pairs:
         return RerankResponse(scores=[], model=RERANKER_MODEL_NAME)
-    
+
+    acquired = _inference_sem.acquire(blocking=False)
+    if not acquired:
+        raise HTTPException(status_code=503, detail="Reranker service busy — retry shortly")
     try:
         inputs = reranker_tokenizer(
             req.pairs,
@@ -132,4 +175,6 @@ def rerank_pairs(req: RerankPairRequest):
         return RerankResponse(scores=scores, model=RERANKER_MODEL_NAME)
     except Exception as e:
         logger.error(f"Reranking error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="Reranking failed")
+    finally:
+        _inference_sem.release()

@@ -25,7 +25,13 @@ client = TestClient(app, raise_server_exceptions=False)
 
 
 def make_token(payload: dict, secret: str = SECRET, exp_delta_seconds: int = 60) -> str:
-    payload = {**payload, "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=exp_delta_seconds)}
+    from api.auth import INTERNAL_JWT_AUDIENCE, INTERNAL_JWT_ISSUER
+    payload = {
+        **payload,
+        "iss": INTERNAL_JWT_ISSUER,
+        "aud": INTERNAL_JWT_AUDIENCE,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=exp_delta_seconds),
+    }
     return jwt.encode(payload, secret, algorithm="HS256")
 
 
@@ -72,6 +78,12 @@ def test_unrecognized_role_returns_403():
     token = make_token({"erpId": "X1", "role": "superuser"})
     res = client.get("/protected", headers=auth(token))
     assert res.status_code == 403
+
+
+def test_oversized_erp_id_returns_401():
+    token = make_token({"erpId": "X" * 65, "role": "student"})
+    res = client.get("/protected", headers=auth(token))
+    assert res.status_code == 401
 
 
 def test_missing_erp_id_claim_returns_401():

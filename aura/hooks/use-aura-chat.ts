@@ -9,7 +9,7 @@ import type {
   CalendarActionData,
 } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
-import { apiFetch, setToken, initAuth } from "@/lib/auth-client"
+import { apiFetch } from "@/lib/auth-client"
 import { getUserMessage, toastAppError, toastError, appErrorFromResponse } from "@/lib/toast"
 import { AppError, isAbortError } from "@/lib/errors"
 
@@ -176,14 +176,6 @@ export function useAuraChat() {
       }
       return newVal
     })
-  }, [session])
-
-  useEffect(() => {
-    if (session) {
-      initAuth()
-    } else {
-      setToken(null)
-    }
   }, [session])
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)

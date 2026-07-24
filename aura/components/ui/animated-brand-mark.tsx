@@ -31,8 +31,12 @@ export function AnimatedBrandMark({ className }: AnimatedBrandMarkProps) {
   const discRef = useRef<HTMLSpanElement>(null)
   const coreRef = useRef<HTMLImageElement>(null)
   const particlesRef = useRef<(SVGCircleElement | null)[]>([])
+  // Handlers live in refs so we never call contextSafe (which closes over
+  // element refs) during render — that trips react-hooks/refs.
+  const burstRef = useRef<() => void>(() => {})
+  const settleRef = useRef<() => void>(() => {})
 
-  const { contextSafe } = useGSAP(
+  useGSAP(
     () => {
       gsap.set(particlesRef.current, {
         transformOrigin: "center center",
@@ -41,92 +45,74 @@ export function AnimatedBrandMark({ className }: AnimatedBrandMarkProps) {
         x: 0,
         y: 0,
       })
+
+      burstRef.current = () => {
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        if (reduced) return
+
+        gsap.to(coreRef.current, {
+          scale: 1.08,
+          duration: 0.5,
+          ease: "back.out(2.4)",
+        })
+        gsap.to(discRef.current, {
+          boxShadow: "0 0 26px -4px rgba(244,80,59,0.55)",
+          duration: 0.45,
+          ease: "power2.out",
+        })
+
+        PARTICLES.forEach((p, i) => {
+          const el = particlesRef.current[i]
+          if (!el) return
+          gsap.killTweensOf(el)
+          gsap.fromTo(
+            el,
+            { x: 0, y: 0, scale: 0, opacity: 0 },
+            {
+              x: p.x,
+              y: p.y,
+              scale: 1,
+              opacity: 1,
+              duration: 0.55,
+              ease: "back.out(2.6)",
+              delay: i * 0.018,
+              onComplete: () => {
+                gsap.to(el, {
+                  scale: 0.8,
+                  opacity: 0.7,
+                  duration: 0.8 + (i % 4) * 0.12,
+                  ease: "sine.inOut",
+                  yoyo: true,
+                  repeat: -1,
+                })
+              },
+            },
+          )
+        })
+      }
+
+      settleRef.current = () => {
+        gsap.to(coreRef.current, { scale: 1, duration: 0.4, ease: "power3.out" })
+        gsap.to(discRef.current, {
+          boxShadow: "0 0 0px 0px rgba(244,80,59,0)",
+          duration: 0.4,
+          ease: "power2.out",
+        })
+        particlesRef.current.forEach((el) => {
+          if (!el) return
+          gsap.killTweensOf(el)
+          gsap.to(el, { x: 0, y: 0, scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" })
+        })
+      }
     },
     { scope: rootRef },
   )
 
-  // contextSafe() is a GSAP hook utility — it is called inside the event handler
-  // body (not during render) so the refs are only read when the callback fires.
-  // The eslint-disable comments suppress the false-positive from react-hooks/refs.
-  const burst = useCallback(() => {
-    // eslint-disable-next-line react-hooks/refs
-    const safeBurst = contextSafe(() => {
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      if (reduced) return
-
-      // eslint-disable-next-line react-hooks/refs
-      gsap.to(coreRef.current, {
-        scale: 1.08,
-        duration: 0.5,
-        ease: "back.out(2.4)",
-      })
-      // eslint-disable-next-line react-hooks/refs
-      gsap.to(discRef.current, {
-        boxShadow: "0 0 26px -4px rgba(244,80,59,0.55)",
-        duration: 0.45,
-        ease: "power2.out",
-      })
-
-      PARTICLES.forEach((p, i) => {
-        // eslint-disable-next-line react-hooks/refs
-        const el = particlesRef.current[i]
-        if (!el) return
-        gsap.killTweensOf(el)
-        gsap.fromTo(
-          el,
-          { x: 0, y: 0, scale: 0, opacity: 0 },
-          {
-            x: p.x,
-            y: p.y,
-            scale: 1,
-            opacity: 1,
-            duration: 0.55,
-            ease: "back.out(2.6)",
-            delay: i * 0.018,
-            onComplete: () => {
-              // Gentle twinkle for as long as the mark stays hovered.
-              gsap.to(el, {
-                scale: 0.8,
-                opacity: 0.7,
-                duration: 0.8 + (i % 4) * 0.12,
-                ease: "sine.inOut",
-                yoyo: true,
-                repeat: -1,
-              })
-            },
-          },
-        )
-      })
-    })
-    safeBurst()
-  }, [contextSafe])
-
-  const settle = useCallback(() => {
-    // eslint-disable-next-line react-hooks/refs
-    const safeSettle = contextSafe(() => {
-      // eslint-disable-next-line react-hooks/refs
-      gsap.to(coreRef.current, { scale: 1, duration: 0.4, ease: "power3.out" })
-      // eslint-disable-next-line react-hooks/refs
-      gsap.to(discRef.current, {
-        boxShadow: "0 0 0px 0px rgba(244,80,59,0)",
-        duration: 0.4,
-        ease: "power2.out",
-      })
-      // eslint-disable-next-line react-hooks/refs
-      particlesRef.current.forEach((el) => {
-        if (!el) return
-        gsap.killTweensOf(el)
-        gsap.to(el, { x: 0, y: 0, scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" })
-      })
-    })
-    safeSettle()
-  }, [contextSafe])
-
   return (
     <span
       ref={rootRef}
-      onMouseEnter={() => burst()}
-      onMouseLeave={() => settle()}
+      onMouseEnter={() => burstRef.current()}
+      onMouseLeave={() => settleRef.current()}
       className={cn(
         "relative inline-flex shrink-0 items-center justify-center rounded-full",
         className,
