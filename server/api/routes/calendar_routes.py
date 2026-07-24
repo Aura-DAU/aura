@@ -7,7 +7,7 @@ import jwt
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import RedirectResponse
 
-from api.auth import HASHING_ALGORITHM, Identity, get_internal_jwt_secret, require_identity
+from api.auth import ALGORITHM, Identity, get_internal_jwt_secret, require_identity
 from pipeline.google_calendar.slot_service import get_available_slots
 from pipeline.google_calendar.token_vault import is_linked, store_tokens, unlink_calendar
 
