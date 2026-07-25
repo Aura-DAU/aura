@@ -1,57 +1,64 @@
----
-title: "IE403 Human Computer Interaction Autumn 2025"
+﻿---
+title: "IE403 Human Computer Interaction Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "IE403_Human Computer Interaction_Autumn2025 - kalyan sasidhar P S.pdf"
+pdf_name: "IE403__2026-27__IE403_Human-Computer Interaction - kalyan sasidhar P S.pdf"
 course_code: "IE403"
-semester: "Autumn 2025"
+semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
-# IE403: Human Computer Interaction
+# IE-403: Human Computer Interaction
 
 ## Course Overview
 
 | Field | Details |
 |---|---|
-| **Course Code** | IE403 |
+| **Course Code** | IE-403 |
 | **Course Name** | Human Computer Interaction |
-| **Instructor(s)** | Prof. P.S. Kalyan Sasidhar (Office: 2109, Faculty Block 2, Extn. 560; Email: kalyan_sasidhar@daiict.ac.in) |
-| **Credits** | 3-0-2-4 |
-| **Semester Offered** | Autumn 2025 |
-| **Type** | ICT & Technical Elective (RAS minor) |
-| **Program(s)** | ICT |
-| **Year / Semester in Program** | Undergraduate |
-| **Associated Lab** | Integrated (2 practical hours per week as part of the 3-0-2-4 structure) |
-| **Prerequisites** | None stated |
+| **Instructor(s)** | Kalyan Sasidhar P S |
+| **Credits** | Not specified in numeric L-T-P-C form; Course Format is 3 hours lecture and 2 hours lab/programming every week |
+| **Semester Offered** | Autumn Semester (AY 2026-27) |
+| **Type** | Technical Elective |
+| **Program(s)** | BTech (CS and ICT) |
+| **Year / Semester in Program** | Not specified beyond program level |
+| **Associated Lab** | Embedded lab component, 2 hours lab/programming every week |
+| **Prerequisites** | Programming (C, C++ or Java) |
 | **Foundation For** | None stated |
+
+Course Placement: BTech (CS and ICT), ICT & Technical Elective.
 
 ---
 
 ## Course Description
 
-**Aims and Objectives:** This course will dive into the fundamentals of how man-machine interaction happens and the principles governing the interactions. It will also look at how HCI relates to other fields like user experience design, user interface design, human factors engineering, and psychology. Students will learn the three different roles of a user in interface design, namely the 'processor' view, the 'predictor' view, and the 'participant' view. The course will cover human capabilities, design principles and models, prototyping, and evaluation techniques. Emphasis will be given on learning and developing prototypes of various software modules, products, etc.
+This course dives into the fundamentals of Man-Machine Interaction (MMI) and the core engineering and psychological principles that govern how humans interact with digital systems. Rather than viewing interaction in a vacuum, the course explores how Human-Computer Interaction (HCI) intersects with and drives related disciplines, including User Experience (UX) Design, User Interface (UI) Design, Human Factors Engineering, and Cognitive Psychology. The course focuses on three foundational roles of a user in interface design: the 'Processor' view, which treats the human as an information processing unit, optimizing for cognitive load, memory limits, and reaction times; the 'Predictor' view, which focuses on how users form active mental models to anticipate system behaviors, requiring precise feedback loops and intuitive mapping; and the 'Participant' view, which recognizes the user as a social being operating within situated, real-world cultural and collaborative contexts.
+
+Beyond these classic paradigms, the course will provide students exposure to AI-Driven Interface Design, Spatial Computing, Ethical HCI, and Dark Design patterns. The practical methodology of the course centers on human cognitive and physical capabilities, foundational design principles, and predictive user models. Great emphasis is placed on the iterative design lifecycle. Through hands-on studio sessions, students will apply rapid prototyping and rigorous evaluation techniques to collaborate, develop, test, and refine interactive prototypes of various software modules, intelligent products, and spatial interfaces using industry-standard tools.
 
 ---
 
 ## Course Outcomes (COs)
 
-At the end of the course, students will understand:
+The student will be able to comprehend:
 
 | CO | Description |
 |---|---|
-| CO1 | The relationship between HCI, user experience design, human factors engineering, and psychology. |
-| CO2 | The feedback cycle in user interaction, including gulfs of execution and evaluation. |
-| CO3 | Various interaction design principles and heuristics in user interface design. |
-| CO4 | The emerging ideas in HCI research, such as context-sensitive computing, gesture-based interaction, and social computing. |
+| CO1 | The overall goals of human-computer interaction |
+| CO2 | The relationship between HCI, user experience design, human factors engineering, and psychology |
+| CO3 | The feedback cycle in user interaction, including gulfs of execution and evaluation |
+| CO4 | Various Interaction design principles and heuristics in user interface design |
+| CO5 | The emerging ideas in HCI research, such as context-sensitive computing, gesture-based interaction, and social computing |
 
 ---
 
 ## Program Outcome Mapping (PO Mapping)
+
+*Note: The source document uses "ü" rather than "X"/"×" to mark applicable outcomes.*
 
 | PO1 | PO2 | PO3 | PO4 | PO5 | PO6 | PO7 | PO8 | PO9 | PO10 | PO11 | PO12 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -61,15 +68,18 @@ At the end of the course, students will understand:
 
 ## Course Structure
 
-*Note: The source document includes a "Lecture Outline" heading, but the detailed unit-wise topic/lecture content table is not populated with visible text content in the extracted source (the page containing it appears to only have the heading, with lab information following). No unit/topic breakdown with lecture counts is available.*
+*Note: The source document states "Lecture Schedule (TBA)" with no module/lecture-hour breakdown provided.*
 
-**Labs:** Laboratory exercises will typically involve group-based discussions, applying principles taught in lecture to real-world objects/things/interfaces. The exercises will evolve as per the lecture material.
+| Unit | Topic | No. of Lectures |
+|---|---|---|
+| Not specified | Man-Machine Interaction fundamentals; Processor, Predictor, and Participant views of the user; AI-Driven Interface Design, Spatial Computing, Ethical HCI, and Dark Design patterns; iterative design lifecycle; rapid prototyping and evaluation techniques | TBA |
+| **Total** | | TBA |
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule with dates is available in the source document.*
+*Note: The source document states "Lecture Schedule (TBA)"; no weekly schedule is available.*
 
 ---
 
@@ -77,12 +87,14 @@ At the end of the course, students will understand:
 
 | Component | Weightage |
 |---|---|
-| In-Sem | 20% |
-| Project | 40% |
+| In-Sem I | 15% |
+| In-Sem II | 15% |
+| Quiz | 15% |
 | Lab | 20% |
-| Quiz | 10% |
-| Assignments | 10% |
+| Project | 35% |
 | **Total** | **100%** |
+
+The course will consist of 7-8 pop-up quizzes, exercises, programming assignments, and a group project.
 
 ---
 
@@ -90,35 +102,30 @@ At the end of the course, students will understand:
 
 ### Textbook(s)
 
-1. A. Dix, J. Finlay, G.D. Abowd, R. Beale, *Human Computer Interaction*, Pearson Education, 2005.
+1. A. Dix, J. Finlay, G. D. Abowd, R. Beale, *Human Computer Interaction*, Pearson Education, 2005.
+2. Kasper Hornbæk, Per Ola Kristensson, and Antti Oulasvirta, *Introduction to Human-Computer Interaction*, Oxford University Press.
 
 ### Reference Books
 
-1. Mirel, Barbara, *Interaction Design for Complex Problem Solving: Developing Useful and Usable Software*, Morgan Kaufmann, 2003.
-2. Cooper, Alan, *Essentials of User Interface Design*, Wiley-Dreamtech India, 2002.
-3. Yvonne Rogers, Helen Sharp, and Jenny Preece, *Interaction Design - Beyond Human-Computer Interaction*, 3rd Edition.
+1. Yvonne Rogers, Helen Sharp, and Jenny Preece, *Interaction Design - Beyond Human-Computer Interaction*, 3rd Edition.
+2. Claudia Mont'Alvão, Shristi Sharma, et al., *AI and Innovation in Human-Computer Interaction: Design Implementation and Trust-Building*, CRC Press/Routledge.
+3. Arun Kumar, Aziz Nanthaamornphong, et al., *AI-Driven Spatial Computing: Concepts, Challenges, and Use Cases*, Wiley-Scrivener.
 
 ### Online Resources
 
-*None stated in source document.*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-IE403 Human Computer Interaction is an ICT and Technical Elective (RAS minor) course at the undergraduate level, with a 3-0-2-4 credit structure.
+IE-403 is a Technical Elective for BTech (CS and ICT) students, offered in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-**Course Conduct and Grading Policy:**
-- Students are supposed to be present for all lectures and lab sessions.
-- If attendance falls below 70%, a student will receive an F grade. (An institute-wide detailed policy will be communicated separately and will supersede this, once that takes effect.)
-- All lab assignments must be completed, failing which zero marks will be awarded for the lab component. One makeup lab session will be scheduled at the end of the semester for students who miss a session due to any reason. For special medical cases, if the Dean, AP has approved their application, additional makeup sessions may be provided to the concerned students.
-- If a case of plagiarism/copying is detected in the exams or lab submissions, that student will receive zero marks in the complete lab segment (30%) or the respective exam component. The student will also be reported to the Dean AP for possible further actions.
-
-*Note: The plagiarism policy references a "lab segment (30%)" whereas the Evaluation Scheme table lists Lab as 20% — this discrepancy exists in the source document and is reproduced here as-is.*
+None stated in source document beyond what is captured above.
 
 ---
 
@@ -126,7 +133,7 @@ IE403 Human Computer Interaction is an ICT and Technical Elective (RAS minor) co
 
 | Resource | Type | Link |
 |---|---|---|
-| IE403_Human Computer Interaction_Autumn2025 - kalyan sasidhar P S.pdf | PDF | [Download IE403_Human Computer Interaction_Autumn2025 - kalyan sasidhar P S.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| IE403__2026-27__IE403_Human-Computer Interaction - kalyan sasidhar P S.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -134,7 +141,7 @@ IE403 Human Computer Interaction is an ICT and Technical Elective (RAS minor) co
 
 | Field | Value |
 |---|---|
-| **Source PDF** | IE403_Human Computer Interaction_Autumn2025 - kalyan sasidhar P S.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | IE403__2026-27__IE403_Human-Computer Interaction - kalyan sasidhar P S.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

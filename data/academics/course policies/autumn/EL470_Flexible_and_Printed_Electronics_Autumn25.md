@@ -1,18 +1,18 @@
----
-title: "EL470 Flexible and Printed Electronics Autumn 2025-26"
+﻿---
+title: "EL470 Printed and Flexible Electronics Autumn 2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "EL470 - Flexible and Printed Electronics.pdf"
+pdf_name: "EL470__2026-27__EL470_Printed and Flexible Electronics_Autumn2026 - Ajay Beniwal.pdf"
 course_code: "EL470"
-semester: "Autumn 2025-26"
+semester: "Autumn 2026"
 authorization: ["student", "faculty"]
 ---
 
-# EL470: Flexible and Printed Electronics
+# EL470: Printed and Flexible Electronics
 
 ## Course Overview
 
@@ -20,49 +20,41 @@ authorization: ["student", "faculty"]
 |---|---|
 | **Course Code** | EL470 |
 | **Course Name** | Printed and Flexible Electronics |
-| **Instructor(s)** | Not stated in source document |
-| **Credits** | 3-0-2-4 (Lecture hours/week: 3, Tutorial hours/week: 0, Practical hours/week: 2, Total Credits: 4) |
-| **Semester Offered** | Autumn 2025-26 |
-| **Type** | Elective |
-| **Program(s)** | UG (B.Tech 5th Sem, B.Tech 7th Sem) and PG (3rd Sem) |
-| **Year / Semester in Program** | B.Tech 5th Semester, B.Tech 7th Semester; PG 3rd Semester |
-| **Associated Lab** | Flexible and Printed Electronics Lab (integrated, 2 practical hours/week) |
+| **Instructor(s)** | Ajay Beniwal (ajay_beniwal@dau.ac.in) |
+| **Credits** | 3-0-2-4 (L-T-P-Cr) |
+| **Semester Offered** | Autumn 2026 |
+| **Type** | Technical Elective |
+| **Program(s)** | Not specified beyond "Technical Elective" |
+| **Year / Semester in Program** | Not specified |
+| **Associated Lab** | Embedded lab component: Printed and Flexible Electronics Lab (8 experiments — see Additional Notes) |
 | **Prerequisites** | Basic Electronic Circuits, Solid State Devices / Semiconductor Physics, Circuit Design Basics |
-| **Foundation For** | This course lays the foundation for progressive work in flexible electronic devices and printed semiconductor technologies. It prepares students for careers in next-gen/emerging electronics, smart healthcare, and semiconductor industries. |
+| **Foundation For** | None stated |
 
 ---
 
 ## Course Description
 
-This course introduces 'Flexible and Printed Electronics' as a transformative extension of the semiconductor industry, enabling bendable, lightweight, and low-cost electronic systems. As the semiconductor industry evolves, flexible electronics plays a pivotal role in advancing wearables, IoT, and sustainable electronics. Students will explore key concepts in semiconductor devices, novel materials, and additive manufacturing techniques, gaining insights into the integration of flexible electronics for next-generation applications.
-
-**Objective:** This course aims to provide a solid foundation in flexible electronics, focusing on semiconductor devices, circuits, and materials. This course bridges traditional semiconductor fundamentals with next-generation electronics for wearables, IoT, and beyond. The course covers the fundamentals of flexible electronics, printing techniques for developing flexible electronic devices and circuits along with system integration for real-world applications.
-
-**Outcome:** This course aligns with the modern semiconductor industry and research trends. Through bridging the gap between traditional semiconductor fundamentals and modern/next-generation real-world applications, the course will help in preparing students to lead in both industry innovation and academic research in flexible and printed electronics.
+This course aims to provide a solid foundation in flexible electronics, focusing on semiconductor devices, circuits, and materials. It bridges traditional semiconductor fundamentals with next-generation electronics for wearables, IoT, and beyond. The course covers the fundamentals of flexible electronics, printing techniques for developing flexible electronic devices and circuits, along with system integration for real-world applications.
 
 ---
 
 ## Course Outcomes (COs)
 
-After successful completion of this course, students will be able to:
+*Note: The source document states outcomes as a narrative paragraph rather than a numbered CO list; it is reproduced below as CO1.*
 
 | CO | Description |
 |---|---|
-| CO1 | Understand the principles of flexible electronics, including materials, processes and fabrication techniques for flexible electronic devices and circuits, with a focus on integration with traditional semiconductor systems. |
-| CO2 | Develop flexible electronic devices such as thin-film transistors, printed circuits, sensors and other flexible devices, applying knowledge of process integration and reliability evaluation. |
-| CO3 | Apply flexible electronics technologies to real-world applications in wearables, IoT, and beyond, while addressing challenges in performance, scalability, and system integration. |
+| CO1 | This course aligns with the modern semiconductor industry and research trends. Through bridging the gap between traditional semiconductor fundamentals and modern/next-generation real-world applications, the course will help prepare students to lead in both industry innovation and academic research in flexible and printed electronics |
 
 ---
 
 ## Program Outcome Mapping (PO Mapping)
 
+*Note: No PO mapping table is present in the source document.*
+
 | PO1 | PO2 | PO3 | PO4 | PO5 | PO6 | PO7 | PO8 | PO9 | PO10 | PO11 | PO12 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| CO1: X | | | | X | X | | | X | | X | X |
-| CO2: X | | | | X | | | | X | X | X | |
-| CO3: | | | | | X | | | X | X | X | X |
-
-*Note: The source presents a POs-COs matrix where checkmarks are given per CO row rather than a single combined mapping row. The table above reproduces the per-CO mapping as given (CO1, CO2, CO3 rows), since the source structures it this way rather than as a single aggregate PO row.*
+| | | | | | | | | | | | |
 
 ---
 
@@ -70,64 +62,65 @@ After successful completion of this course, students will be able to:
 
 | Unit | Topic | No. of Lectures |
 |---|---|---|
-| Introduction to Flexible and Printed Electronics | Need for flexible and printed electronics, Evolution of flexible electronics, Comparison with rigid electronics, Review of cutting-edge research on flexible/conformable/printed electronics, Current trends and industrial/commercial applications (IoT, wearables, healthcare, agricultural etc.) | 4 |
-| Materials for Flexible Electronics, Printing Techniques and Process Integration | Various semiconductors, dielectric and conducting materials; examples of printable functional materials; basics of charge injection and transport mechanism in flexible electronics; thin-film deposition and processing methods for flexible devices; solution-based processing and printing technologies (screen-printing, ink-jet printing, gravure, 3D printing and other processes) | 12 |
-| Flexible Devices and Circuit (Thin-Film Transistors, Printed Circuit Boards and Sensors) | Thin-Film Transistors (TFTs) — device structure and performance, electrical characteristics and parameters, characterization methods for rigid and flexible devices, electrical stability, printed transistors; Transistors to Circuits — flexible printed circuit boards (PCB), flexible hybrid electronic systems, fully flexible systems; Flexible Sensors — temperature, gas/analyte, humidity, pressure and strain; Contacts and interfaces to flexible electronic devices | 14 |
-| Other Flexible Devices, System Integration and Reliability Testing | Organic Light Emitting Diodes, flexible OLED displays and lighting; Organic solar cells; Flexible Energy Storage Devices (batteries and supercapacitors); RFID tags; Integration with wearables and IoT devices; Integration issues, designs for the future; Reliability Testing (mechanical, electrical and environmental reliability tests) | 10 |
+| Introduction to Flexible and Printed Electronics | Need for flexible and printed electronics, evolution of flexible electronics, comparison with rigid electronics, review of cutting-edge research on flexible/conformable/printed electronics, current trends and industrial/commercial applications (IoT, wearables, healthcare, agricultural etc.) | 4 |
+| Materials for Flexible Electronics, Printing Techniques and Process Integration | Various semiconductors, dielectric and conducting materials, examples of printable functional materials, basics of charge injection and transport mechanism in flexible electronics, thin-film deposition and processing methods for flexible devices, solution-based processing and printing technologies (screen-printing, ink-jet printing, gravure, 3D printing, and other processes) | 12 |
+| Flexible Devices and Circuit (Thin-Film Transistors, Printed Circuit Boards and Sensors) | Thin-film transistors (TFTs): device structure and performance, electrical characteristics and parameters, characterization methods for rigid and flexible devices, electrical stability, printed transistors, transistors to circuits; flexible printed circuit boards (PCB), flexible hybrid electronic systems, fully flexible systems; flexible sensors (temperature, gas/analyte, humidity, pressure, strain); contacts and interfaces to flexible electronic devices | 14 |
+| Other Devices, Integration, Reliability Testing | Flexible organic light emitting diodes, flexible OLED displays and lighting; organic solar cells, flexible energy storage devices (batteries and supercapacitors), and RFID tags; integration with wearables and IoT devices; integration issues, designs for the future and reliability testing (mechanical, electrical, and environmental reliability tests) | 10 |
 | **Total** | | **40** |
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule with dates is available in the source document. Only a topic-wise lecture plan (Detailed Course Contents) is provided above.*
+*Note: No weekly (dated) lecture schedule is available in the source document; only the unit-wise lecture distribution shown above is provided.*
 
 ---
 
 ## Evaluation / Grading Scheme
 
-*Note: The "Evaluation/Grading Policy" section (Item 10) in the source document is present as a heading but contains no specified content, weightages, or grading breakdown. No grading scheme is stated in the source document.*
+| Component | Weightage |
+|---|---|
+| Mid-Sem Exam | 25% |
+| Quiz/Assignment | 15% |
+| End-Sem Exam | 30% |
+| Laboratory | 30% |
+| **Total** | **100%** |
 
 ---
 
 ## Textbooks and References
 
-### Textbook(s)
-
-1. M.M. Hussain and N. El-Atab, *Handbook of Flexible and Stretchable Electronics*, CRC Press, 2020.
-2. M. Caironi, Y-Y. Noh (Editors), *Large Area and Flexible Electronics*, 2nd Edition, WILEY-VCH, 2015.
-3. A.M. Hussain, *Introduction to Flexible Electronics*, CRC Press, 2022.
-4. W.S. Wong and A. Salleo (Editors), *Flexible Electronics: Materials and Applications*, 1st Edition, Springer, 2009.
-
 ### Reference Books
 
-- Recent research papers on 'Flexible and Printed Electronics' area from scientific publishers like IEEE, IOP, ACS, AIP, Elsevier, RSC, and others.
+1. M. M. Hussain and N. El-Atab, *Handbook of Flexible and Stretchable Electronics*, CRC Press, 2020.
+2. M. Caironi and Y-Y. Noh (Editors), *Large Area and Flexible Electronics*, 2nd Edition, WILEY-VCH, 2015.
+3. A. M. Hussain, *Introduction to Flexible Electronics*, CRC Press, 2022.
+4. W. S. Wong and A. Salleo (Editors), *Flexible Electronics: Materials and Applications*, 1st Edition, Springer, 2009.
+5. Relevant research papers on 'Printed and Flexible Electronics' from scientific publishers such as IEEE, IOP, ACS, AIP, Elsevier, RSC, and others.
 
 ### Online Resources
 
-*None stated in source document.*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-EL470 Printed and Flexible Electronics is an elective course offered to B.Tech students in their 5th or 7th semester and PG students in their 3rd semester. It requires prerequisites in Basic Electronic Circuits, Solid State Devices/Semiconductor Physics, and Circuit Design Basics. The course lays the foundation for progressive work in flexible electronic devices and printed semiconductor technologies, preparing students for careers in next-generation electronics, smart healthcare, and semiconductor industries.
+EL470 is a Technical Elective course requiring Basic Electronic Circuits, Solid State Devices/Semiconductor Physics, and Circuit Design Basics as prerequisites, offered in Autumn 2026.
 
 ---
 
 ## Additional Notes
 
-- The course includes a dedicated **Flexible and Printed Electronics Lab** with 8 lab experiments:
-  1. Analysis of surface properties in flexible substrates for printed electronics (contact angle measurement for surface wettability).
-  2. Development of conductive ink for flexible electronics and printing techniques (carbon or silver-based ink preparation).
-  3. Printing resistive and/or capacitive tracks using conductive ink on flexible substrate to evaluate electrical behavior.
-  4. Characterization of printed resistor using temperature-dependent resistance measurement (TCR via 2-wire method).
-  5. Electro-physical analysis of moisture-induced conductance in printed tracks.
-  6. Development of flexible electronics circuitry using conductive ink.
-  7. Bending and reliability testing of printed conductive tracks.
-  8. Fabrication and characterization of a flexible strain sensor using conductive ink.
-- The source document includes "Explanatory Notes" intended as guidance for instructors preparing course offering templates (e.g., discipline code conventions, elective category definitions, primary-to-optional lecture content ratio guidelines: Foundation Courses 75:25, Track Core/M.Tech Specialization Core 66:33, Electives 50:50). These are template instructions rather than course-specific content, included here for completeness.
-- The source document is titled "Template for Course Offering," indicating it may be a course proposal rather than a finalized syllabus.
+**Laboratory Experiments (Printed and Flexible Electronics Lab):**
+1. Analysis of surface properties in flexible substrates for printed electronics — evaluating surface wettability for printed ink adhesion using contact angle measurement; outcome: understand surface energy relevance in ink spreading and adhesion.
+2. Development of conductive ink for flexible electronics and printing techniques — preparing a basic carbon or silver-based ink and testing its properties; outcome: learn principles of ink optimization for printing.
+3. Printing resistive and/or capacitive tracks using conductive ink on flexible substrate — designing and printing resistive/capacitive structures and evaluating electrical behavior; outcome: understand material resistive/capacitive behavior along with tracking geometry effects.
+4. Characterization of printed resistor using temperature-dependent resistance measurement — measuring resistance of printed track as a function of temperature; outcome: demonstrates TCR (temperature coefficient of resistance) using the 2-wire method.
+5. Electro-physical analysis of moisture-induced conductance in printed tracks — investigating how moisture exposure affects resistance of printed conductive tracks; outcome: hands-on experience with resistive sensor characterization and understanding of environmental effects.
+6. Development of flexible electronics circuitry using conductive ink — fabricating a simple flexible electronics circuit and assembling/testing a basic electronic circuit; outcome: understanding of how flexible electronics can be used in real-world applications.
+7. Bending and reliability testing of printed conductive tracks — studying how repeated mechanical bending affects electrical resistance; outcome: understanding mechanical reliability of flexible and printed electronics.
+8. Fabrication and characterization of a flexible strain sensor using conductive ink — fabricating a flexible strain sensor (e.g., carbon, graphene, etc.) and studying its response under applied strain; outcome: measuring and analyzing the change in electrical properties with strain, demonstrating sensor sensitivity and flexibility.
 
 ---
 
@@ -135,7 +128,7 @@ EL470 Printed and Flexible Electronics is an elective course offered to B.Tech s
 
 | Resource | Type | Link |
 |---|---|---|
-| EL470 - Flexible and Printed Electronics.pdf | PDF | [Download EL470 - Flexible and Printed Electronics.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| EL470__2026-27__EL470_Printed and Flexible Electronics_Autumn2026 - Ajay Beniwal.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -143,7 +136,7 @@ EL470 Printed and Flexible Electronics is an elective course offered to B.Tech s
 
 | Field | Value |
 |---|---|
-| **Source PDF** | EL470 - Flexible and Printed Electronics.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | EL470__2026-27__EL470_Printed and Flexible Electronics_Autumn2026 - Ajay Beniwal.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

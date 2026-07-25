@@ -1,14 +1,14 @@
----
-title: "HM432 Organisation Behaviour Autumn 2025-26"
+﻿---
+title: "HM432 Organisation Behaviour Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "HM_  432 _OB_ 2025 PDF _ NEW - Nandini Banerjee.pdf"
+pdf_name: "HM432 _Organizational Behaviour 2026 - Nandini Banerjee.pdf"
 course_code: "HM432"
-semester: "Autumn 2025-26"
+semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
@@ -18,38 +18,41 @@ authorization: ["student", "faculty"]
 
 | Field | Details |
 |---|---|
-| **Course Code** | HM 432 |
+| **Course Code** | HM432 |
 | **Course Name** | Organisation Behaviour |
 | **Instructor(s)** | Dr. Nandini Banerjee |
-| **Credits** | 3 Hours Lecture per week (total credit structure not explicitly stated) |
-| **Semester Offered** | Autumn 2025-26 |
+| **Credits** | Not specified in numeric L-T-P-C form; Course Format is 3 Hours Lecture per week |
+| **Semester Offered** | Autumn Semester (AY 2026-27) |
 | **Type** | Elective |
-| **Program(s)** | B.Tech ICT Program |
-| **Year / Semester in Program** | Third Year (7th Semester) |
+| **Program(s)** | B.Tech |
+| **Year / Semester in Program** | 7th Semester |
 | **Associated Lab** | None |
 | **Prerequisites** | None stated |
 | **Foundation For** | None stated |
+
+Target Audience: Students of the B.Tech. program for Autumn semester.
 
 ---
 
 ## Course Description
 
-Learning Organizational Behavior is important, not only because it is fundamental for individuals who are trying to enter the fields of Human Resource Management or Business Administration, but also because it is important for any individual who plans to work in an organization.
+Learning Organizational Behavior is important, not only because it is fundamental for individuals trying to enter the fields of Human Resource Management or Business Administration, but also because it is important for any individual who plans to work in an organization or set up an organization. Organizational behavior increases individual understanding of how people work in organizations, how they interact with the organization and with each other, and as an employee how one can improve individual satisfaction and organizational productivity.
 
-Organizational behavior increases individual understanding of how people work in organizations, how they interact with the organization and with each other, and as an employee, how one can improve individual satisfaction and organizational productivity. In short, Organizational Behavior studies individuals, groups, and organizational structures and how they interact with each other.
+The course aims to help students: understand human behavior in work settings; improve communication, teamwork, and self-awareness; develop practical people skills for real-life situations; and learn to collaborate effectively in diverse teams.
 
 ---
 
 ## Course Outcomes (COs)
 
+*Note: The source document states course outcomes as a narrative rather than a numbered CO list; they are reproduced below.*
+
 | CO | Description |
 |---|---|
-| CO1 | Increase effectiveness of the students as future managers, by introducing them to a framework for understanding self, organizations, and the behavior of people and groups within them. |
-| CO2 | Make students aware of the skills required to deal with the increasing challenges facing organizations. |
-| CO3 | Acquire the knowledge and skills that will result in high performance for the students and the organizations they would eventually manage. |
-| CO4 | Re-engineer attitude and understand its influence on human behavior. |
-| CO5 | Understand as an engineer the society, cultural issues, apply ethical principles, and learn to work in teams. [P6, P8, P9] |
-| CO6 | Develop communication skills and lifelong learning with change in technology. [P10, P12] |
+| CO1 | Increase effectiveness of the students as future managers, by introducing them to a framework for understanding self, organizations, and the behavior of people and groups within them |
+| CO2 | Make students aware of the skills required to deal with the increasing challenges facing organizations, acquiring knowledge and skills that result in high performance for themselves and the organizations they would eventually manage |
+| CO3 | Speak more confidently; work better in teams; understand people and behavior; be more prepared for internships/jobs |
+| CO4 | Understand as an engineer the society, cultural issues, and apply ethical principles, and learn to work in teams (mapped to PO6, PO8, PO9) |
+| CO5 | Develop communication skills and lifelong learning with change in technology (mapped to PO10, PO12) |
 
 ---
 
@@ -65,68 +68,65 @@ Organizational behavior increases individual understanding of how people work in
 
 | Unit | Topic | No. of Lectures |
 |---|---|---|
-| 1 | Introduction to Organizational Behavior | Not specified |
-| 2 | Challenges in Communication | Not specified |
-| 3 | Individual Behaviour (Perception, Motivation and Learning) | Not specified |
-| 4 | Group Behaviour | Not specified |
-| 5 | Conflicts and Negotiation in the Work Place | Not specified |
-| 6 | Impact of Culture and Structure | Not specified |
-| 7 | Decision Making and Problem Solving | Not specified |
-| 8 | Emerging Trends in Psychology: Stress Management and Coping Skills | Not specified |
-| **Total** | | Not specified in source |
+| Unit 1 | Work Place Psychology | Not specified |
+| Unit 2 | Challenges in Communication | Not specified |
+| Unit 3 | The Inner Mechanism: Perception, Motivation and Learning | Not specified |
+| Unit 4 | Conflicts and Negotiation in the Work Place | Not specified |
+| Unit 5 | Structure and Culture in Organisation | Not specified |
+| Unit 6 | Decision Making and Problem Solving | Not specified |
+| Unit 7 | Team Work and Collaboration | Not specified |
+| **Total** | | Not specified |
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule is available in the source document.*
+*Note: No weekly (dated) lecture schedule is available in the source document.*
 
 ---
 
 ## Evaluation / Grading Scheme
 
+*Note: The source document's grading table lists two percentage columns side by side for some components (apparently reflecting a revision); both values are preserved below.*
+
 | Component | Weightage |
 |---|---|
-| In-Semester Examinations | 25% |
-| Case Studies, Discussions, Article Analysis, Project/Paper Presentations & Reports, Mock Interview | 20% |
-| Assignments | 20% |
-| End-Semester Examination | 30% |
-| Overall Class Participation in Course | 5% |
+| In-semester Examination | 25% / 25% |
+| Project & Report | 15% / 10% |
+| Assignments | 10% / 10% |
+| End-semester Examination | 40% / 30% |
+| Continuous Evaluation (case study, class activities, attendance) | 10% |
 | **Total** | **100%** |
 
 ---
 
 ## Textbooks and References
 
-### Textbook(s)
+### Reference Books
 
 1. Stephen Robbins, *Organisational Behaviour*, Pearson Education, 10th Edition, 2005.
 2. K. Ashwathappa, *Organisational Behaviour*, Himalaya Publishing House, 5th Edition, 2004.
-3. Paul Hersey et al., *Management of Organisational Behaviour – Utilizing Human Resources*, Prentice-Hall of India Pvt. Ltd., 7th Edition, 1998.
+3. Paul Hersey et al., *Management of Organisational Behaviour - Utilizing Human Resources*, Prentice-Hall of India Pvt. Ltd., 7th Edition, 1998.
 4. Fred Luthans, *Organisational Behaviour*, Irwin McGraw-Hill, 8th Edition, 1998.
-
-### Reference Books
-
-1. C.B. Mamoria, *Personnel Management*, Himalaya Publishing House, 1998.
-2. John W. Newstrom et al., *Organisational Behaviour – Human Behaviour at Work*, Tata McGraw-Hill, 9th Edition, 1997.
-3. Stephen Robbins, *Managing Organisational Conflict: A Nontraditional Approach*, Prentice Hall, 1974.
+5. C. B. Mamoria, *Personnel Management*, Himalaya Publishing House, 1998.
+6. John W. Newstrom et al., *Organisational Behaviour - Human Behaviour at Work*, Tata McGraw-Hill, 9th Edition, 1997.
+7. Stephen Robbins, *Managing Organisational Conflict: A Nontraditional Approach*, Prentice Hall, 1974.
 
 ### Online Resources
 
-*None stated in source document.*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-HM432 Organisation Behaviour is an elective course for third-year (7th semester) students of the B.Tech ICT Program, with 3 hours of lecture per week.
+HM432 is an Elective course for 7th Semester B.Tech students, offered in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-- **Course Methodology / Teaching:** Case studies, role-plays, article analysis, and group discussions are used as teaching methods.
-- The course places emphasis on practical engagement methods such as mock interviews and project/paper presentations as part of evaluation.
+**Course Methodology** (as stated in source): Experiential Learning (Role plays); Discussion-Based Teaching; Case-Based Learning; Visual & Activity-Based Methods; Group Discussions; Mock Interview.
 
 ---
 
@@ -134,7 +134,7 @@ HM432 Organisation Behaviour is an elective course for third-year (7th semester)
 
 | Resource | Type | Link |
 |---|---|---|
-| HM_  432 _OB_ 2025 PDF _ NEW - Nandini Banerjee.pdf | PDF | [Download HM_  432 _OB_ 2025 PDF _ NEW - Nandini Banerjee.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| HM432 _Organizational Behaviour 2026 - Nandini Banerjee.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -142,7 +142,7 @@ HM432 Organisation Behaviour is an elective course for third-year (7th semester)
 
 | Field | Value |
 |---|---|
-| **Source PDF** | HM_  432 _OB_ 2025 PDF _ NEW - Nandini Banerjee.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | HM432 _Organizational Behaviour 2026 - Nandini Banerjee.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

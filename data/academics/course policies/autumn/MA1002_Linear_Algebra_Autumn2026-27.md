@@ -1,31 +1,31 @@
 ﻿---
-title: "SC223 Linear Algebra Autumn Semester 2026-27"
+title: "MA1002 Linear Algebra Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
 scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "SC223__2026-27__SC223_Linear Algebra _Autumn26 - Abhishek Tilva(1).pdf"
-course_code: "SC223"
+pdf_name: "MA1002_LinearAlgebra_Autumn26 - Abhishek Tilva.pdf"
+course_code: "MA1002"
 semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
-# SC223: Linear Algebra
+# MA1002: Linear Algebra
 
 ## Course Overview
 
 | Field | Details |
 |---|---|
-| **Course Code** | SC223 |
+| **Course Code** | MA1002 |
 | **Course Name** | Linear Algebra |
 | **Instructor(s)** | Prof. Abhishek Tilva |
 | **Credits** | 4 total (Lecture: 3 hrs/week, Tutorial: 1 hr/week, Practical: 0 hrs/week) |
 | **Semester Offered** | Autumn Semester (AY 2026-27) |
 | **Type** | Core |
-| **Program(s)** | B.Tech ICT |
-| **Year / Semester in Program** | 3rd Semester |
+| **Program(s)** | BS-MS DS & AI |
+| **Year / Semester in Program** | 1st Semester |
 | **Associated Lab** | None |
 | **Prerequisites** | None |
 | **Foundation For** | Advanced courses in machine learning, signal processing, optimization, etc. |
@@ -64,7 +64,7 @@ At the end of this course, the students will be able to:
 
 ## Course Structure
 
-*Note: "The contents are subject to change based on time and other factors."*
+*Note: The source document's "The contents are subject to change based on time and other factors."*
 
 | Unit | Topic | No. of Lectures |
 |---|---|---|
@@ -90,10 +90,9 @@ At the end of this course, the students will be able to:
 
 | Component | Weightage |
 |---|---|
-| Attendance (% attendance ÷ 20) | 5% |
-| In-semester Exam I | 30% |
-| In-semester Exam II | 30% |
-| Final Exam | 35% |
+| Attendance | 5% |
+| Mid-semester Exam | 45% |
+| Final Exam | 50% |
 | **Total** | **100%** |
 
 ---
@@ -115,13 +114,13 @@ None stated in source document.
 
 ## Program Structure Context
 
-SC223 is a Core course for B.Tech ICT students in their 3rd Semester, offered in the Autumn Semester (AY 2026-27).
+MA1002 is a Core course for BS-MS DS & AI students in their 1st Semester, offered in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-This course's description, outcomes, structure, and reference list closely parallel MA1002 (Linear Algebra), also taught by Prof. Abhishek Tilva in this batch; the two appear to be the same course content cross-listed/offered under different codes for different programs, with a different evaluation weighting scheme (SC223 uses 5%/30%/30%/35% versus MA1002's 5%/45%/50%).
+None stated in source document beyond what is captured above.
 
 ---
 
@@ -129,7 +128,7 @@ This course's description, outcomes, structure, and reference list closely paral
 
 | Resource | Type | Link |
 |---|---|---|
-| SC223__2026-27__SC223_Linear Algebra _Autumn26 - Abhishek Tilva(1).pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
+| MA1002_LinearAlgebra_Autumn26 - Abhishek Tilva.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -137,7 +136,7 @@ This course's description, outcomes, structure, and reference list closely paral
 
 | Field | Value |
 |---|---|
-| **Source PDF** | SC223__2026-27__SC223_Linear Algebra _Autumn26 - Abhishek Tilva(1).pdf |
+| **Source PDF** | MA1002_LinearAlgebra_Autumn26 - Abhishek Tilva.pdf |
 | **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

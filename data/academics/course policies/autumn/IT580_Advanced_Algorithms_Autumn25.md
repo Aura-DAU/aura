@@ -1,14 +1,14 @@
----
-title: "IT580 Advanced Algorithms Autumn 2025-26"
+﻿---
+title: "IT580 Advanced Algorithms Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "IT580-Advanced Algorithms - Maniklal Das.pdf"
+pdf_name: "IT580__2026-27__IT580_Advanced Algorithms_Autumn26 - Maniklal Das.pdf"
 course_code: "IT580"
-semester: "Autumn 2025-26"
+semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
@@ -20,47 +20,62 @@ authorization: ["student", "faculty"]
 |---|---|
 | **Course Code** | IT580 |
 | **Course Name** | Advanced Algorithms |
-| **Instructor(s)** | Dr. Manik Lal Das (Office: 2103, Faculty Block 2; Email: maniklal_das@daiict.ac.in) |
+| **Instructor(s)** | Maniklal Das |
 | **Credits** | 3-0-2-4 |
-| **Semester Offered** | Autumn 2025-26 |
-| **Type** | Not explicitly stated in source document |
-| **Program(s)** | Not explicitly stated in source document |
-| **Year / Semester in Program** | Not explicitly stated in source document |
-| **Associated Lab** | Integrated (2 practical hours per week as part of the 3-0-2-4 structure) |
-| **Prerequisites** | None explicitly stated |
+| **Semester Offered** | Autumn Semester (AY 2026-27) |
+| **Type** | Core |
+| **Program(s)** | PG |
+| **Year / Semester in Program** | Not specified beyond program level |
+| **Associated Lab** | Embedded lab component (Theory + Practice format) |
+| **Prerequisites** | Basic skills on problem solving and programming |
 | **Foundation For** | None stated |
+
+Course Format: Theory + Practice.
 
 ---
 
 ## Course Description
 
-**Objectives:** The course aims to enhance students' skills in problem-solving techniques, understanding, and analyzing of algorithms. Emphasis will be given to problem-solving approaches using divide-and-conquer, greedy, dynamic programming, randomization, and approximation algorithms.
-
-**Outcomes:** After completion of the course, the students will be able to understand different problem-solving approaches surrounded in various contexts and real-world applications.
+The course aims to enhance students' skills in problem solving techniques, understanding and analyzing of algorithms. Emphasis will be given on problem solving approaches using divide-and-conquer, greedy, dynamic programming, randomization, and approximation algorithms.
 
 ---
 
 ## Course Outcomes (COs)
 
-*Note: No explicit numbered Course Outcomes (COs) list is present in the source document beyond the single outcome statement provided in the Course Description above.*
+| CO | Description |
+|---|---|
+| CO1 | The students will be able to understand different problem solving approaches surrounded in various contexts and real-world applications |
+| CO2 | The students will be able to analyze solution approaches for different problems |
+| CO3 | The students will be able to implement and visualize solutions of different problem solving approaches |
 
 ---
 
 ## Program Outcome Mapping (PO Mapping)
 
-*Note: No PO mapping table is present in the source document.*
+*Note: No marks are present in the source document's PO mapping table.*
+
+| PO1 | PO2 | PO3 | PO4 | PO5 | PO6 | PO7 | PO8 | PO9 | PO10 | PO11 | PO12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| | | | | | | | | | | | |
 
 ---
 
 ## Course Structure
 
-*Note: The source document does not provide a unit-wise or topic-wise table with lecture counts. Course content is described at a high level as covering divide-and-conquer, greedy, dynamic programming, randomization, and approximation algorithms.*
+| Unit | Topic | No. of Lectures |
+|---|---|---|
+| Module 1 | Problem solving approaches, algorithm analysis, running time | 6 |
+| Module 2 | Divide and Conquer approach: searching, sorting | 8 |
+| Module 3 | Binary Tree; Binary Search Tree; tree traversals; balanced tree; multi-way search tree; B-Tree; heap | 10 |
+| Module 4 | Greedy approach: graph traversals; depth first search, breadth first search, spanning trees; greedy approach; shortest path algorithm | 8 |
+| Module 5 | Dynamic Programming, matrix multiplications; backtracking; knapsack | 10 |
+| **Total** | | **42** |
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule is available in the source document.*
+*Note: No weekly (dated) lecture schedule is available in the source document; only the module-wise lecture distribution shown above is provided.*
 
 ---
 
@@ -68,10 +83,10 @@ authorization: ["student", "faculty"]
 
 | Component | Weightage |
 |---|---|
-| Class Participation/Scribe/Presentation | 20% |
-| Lab Practice and Performance | 20% |
-| Mid-Semester Exam | 20% |
+| Mid-semester exam | 20% |
 | End Semester Exam | 40% |
+| Project, presentation | 20% |
+| Lab practice and performance | 20% |
 | **Total** | **100%** |
 
 ---
@@ -83,26 +98,21 @@ authorization: ["student", "faculty"]
 1. Cormen, Leiserson, Rivest, Stein, *Introduction to Algorithms*, MIT Press.
 2. Dasgupta, Papadimitriou, and Vazirani, *Algorithms*, McGraw-Hill Education.
 
-### Reference Books
-
-*None stated separately in source document.*
-
 ### Online Resources
 
-*None stated in source document.*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-IT580 Advanced Algorithms has a 3-0-2-4 credit structure. The source document does not explicitly state the program or year/semester placement for this course.
+IT580 is a Core PG course, offered in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-- The source document is a brief, single-page course outline.
-- The course emphasizes problem-solving approaches: divide-and-conquer, greedy algorithms, dynamic programming, randomization, and approximation algorithms.
+None stated in source document beyond what is captured above.
 
 ---
 
@@ -110,7 +120,7 @@ IT580 Advanced Algorithms has a 3-0-2-4 credit structure. The source document do
 
 | Resource | Type | Link |
 |---|---|---|
-| IT580-Advanced Algorithms - Maniklal Das.pdf | PDF | [Download IT580-Advanced Algorithms - Maniklal Das.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| IT580__2026-27__IT580_Advanced Algorithms_Autumn26 - Maniklal Das.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -118,7 +128,7 @@ IT580 Advanced Algorithms has a 3-0-2-4 credit structure. The source document do
 
 | Field | Value |
 |---|---|
-| **Source PDF** | IT580-Advanced Algorithms - Maniklal Das.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | IT580__2026-27__IT580_Advanced Algorithms_Autumn26 - Maniklal Das.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

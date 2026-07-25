@@ -1,14 +1,14 @@
----
-title: "IT643 Software Design and Testing Autumn 2025-26"
+﻿---
+title: "IT643 Software Design and Testing Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "IT643_SoftwareDesignAndTesting_Autumn2025-26 - Ankush Chander.pdf"
+pdf_name: "IT643__2026-27__IT643_SoftwareDesignAndTesting_Autumn26 - Ankush Chander.pdf"
 course_code: "IT643"
-semester: "Autumn 2025-26"
+semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
@@ -20,60 +20,67 @@ authorization: ["student", "faculty"]
 |---|---|
 | **Course Code** | IT643 |
 | **Course Name** | Software Design and Testing |
-| **Instructor(s)** | Ankush Chander (ankush_chander@dau.ac.in) |
-| **Credits** | 3-0-2-4 (L-T-P-Cr) |
-| **Semester Offered** | Autumn 2025 |
+| **Instructor(s)** | Ankush Chander |
+| **Credits** | 3-0-2-4 |
+| **Semester Offered** | Autumn Semester (AY 2026-27) |
 | **Type** | Core |
-| **Program(s)** | M.Sc IT |
-| **Year / Semester in Program** | Not further specified beyond "Core MSc IT" |
-| **Associated Lab** | Integrated (3 lectures and one lab every week) |
-| **Prerequisites** | Awareness of Object oriented programming |
+| **Program(s)** | PG |
+| **Year / Semester in Program** | Not specified beyond program level |
+| **Associated Lab** | Embedded via Hands-on Design Studio (blended format) |
+| **Prerequisites** | Introduction to Programming |
 | **Foundation For** | None stated |
+
+Course Format: Lecture + Hands-on Design Studio (blended); studio sessions run as paired/small-group exercises building a semester-long project artifact.
 
 ---
 
 ## Course Description
 
-The course aims to impart students know-how of creating modular, flexible, and reusable software, by applying object-oriented design principles and guidelines. Students will be able to communicate these designs in a visual notation known as Unified Modelling Language (UML).
+Course aims to impart students know-how of creating modular, flexible, and reusable software, by applying object-oriented design principles and guidelines.
+
+By the end of the course, students will be able to:
+1. Elicit, disambiguate, and specify software requirements precisely enough to survive contact with implementation — including AI-assisted implementation.
+2. Apply design principles (coupling, cohesion, SOLID, information hiding, deep modules) to build systems that tolerate change, and critically evaluate AI-generated designs against the same principles.
+3. Design and justify test suites (unit, integration, specification-based, mutation) that provide credible, evidence-based confidence in software correctness.
+4. Review, verify, and responsibly integrate AI-generated code and designs, exercising engineering judgment rather than uncritical acceptance.
 
 ---
 
 ## Course Outcomes (COs)
 
-Upon completion, students will be equipped with the advanced principles, modern techniques, and practical skills required to architect software that is inherently testable and maintainable, reflecting the core tenets of creating software that is "safe from bugs, easy to understand, and ready for change."
+| CO | Description |
+|---|---|
+| CO1 | Elicit, analyze, and specify software requirements (functional and non-functional) using structured techniques, and evaluate AI-assisted requirements elicitation for ambiguity and failure modes |
+| CO2 | Apply design principles and heuristics (coupling, cohesion, SOLID, information hiding, deep modules) to design software that accommodates change, including critical evaluation of AI-generated designs |
+| CO3 | Construct and justify test suites (unit, integration, specification-based, mutation) as evidence of software correctness, and apply structured review practices to AI-generated code |
 
 ---
 
 ## Program Outcome Mapping (PO Mapping)
 
-*Note: No PO mapping table is present in the source document.*
+| PO1 | PO2 | PO3 | PO4 | PO5 | PO6 | PO7 | PO8 | PO9 | PO10 | PO11 | PO12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| X | X | X | X | X | | | | X | X | X | X |
 
 ---
 
 ## Course Structure
 
-| Unit | Topic |
-|---|---|
-| 1 | Evolution of programming — Programming Paradigms |
-| 2 | Software design vs Software Architecture |
-| 3 | Role of design in software process |
-| 4 | Object Oriented principles: Classes (Data + behaviour), Categories of objects, Encapsulation, Abstraction, Generalization, Decomposition |
-| 5 | Modelling using CRC (Class Responsibilities Collaborators) cards and UML diagrams |
-| 6 | Design principles — Coupling and Cohesion, Separation of Concerns, Information Hiding, Conceptual Integrity |
-| 7 | Software Testing: Basic concepts and preliminaries |
-| 8 | Design and Code Inspections to Reduce Errors in Program Development |
-| 9 | Functional Testing (Black Box, White Box, Mutation, Regression) |
-| 10 | Debugging |
-| 11 | Verification of Software Systems, Testing of Web GUI and Mobile Apps |
-| 12 | Non-functional Testing |
+*APPENDIX-I: Detailed Course Content (Tentative)*
 
-*No lecture-count breakdown per topic is available in the source document.*
+| Unit | Topic | No. of Lectures |
+|---|---|---|
+| Requirements Engineering | Requirements discovery; functional vs non-functional requirements; ambiguity in requirements; stakeholder interviews; user stories; acceptance criteria; specification by example; prompting as a requirements-elicitation activity and its failure modes | 6 |
+| Software Design for Change | Design in the software process (conceptual vs technical design); CRC cards; design principles (abstraction, encapsulation, decomposition, generalization); composition over inheritance; encapsulate what varies; program against abstractions; the Hollywood Principle; SOLID principles as heuristics; component cohesion (REP, CCP, CRP); component coupling; complexity — deep vs shallow modules; refactoring and code smells; UML class & sequence diagrams; architecture and evolution; critiquing AI-generated designs using coupling/cohesion principles | 14 |
+| Verification, Validation & Testing | NASA V-model and the verification-for-every-activity principle; verification vs validation; unit testing fundamentals with gtest; the AAA framework; testing with external dependencies (test doubles, mocks vs stubs); integration testing; specification-based and property-based testing; mutation testing; executable specifications; testability as a design property | 14 |
+| Human-AI Collaborative Software Engineering | Reading code; reviewing AI-generated code; prompting for design; prompting for tests; AI hallucinations; static analysis; architecture review; calibrating trust in AI output (accept, verify, or rewrite); technical debt; legacy systems | 6 |
+| **Total** | | **40** |
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule with dates is available in the source document. The course format is 3 lectures and one lab every week.*
+*Note: No weekly (dated) lecture schedule is available in the source document; only the module-wise lecture distribution shown above is provided.*
 
 ---
 
@@ -81,52 +88,37 @@ Upon completion, students will be equipped with the advanced principles, modern 
 
 | Component | Weightage |
 |---|---|
-| Lab + Group Project Assignments (group size max 4 students) | 50% |
-| Mid-Sem Exam | 25% |
-| End Sem Exam | 25% |
+| Lab + Group Project assignments (group size max. 4 students) | 40% |
+| Mid-Sem Exam | 30% |
+| End Sem Exam | 30% |
 | **Total** | **100%** |
-
-**Grading Policy:** Relative grading with the following slabs:
-
-| Grade | Range |
-|---|---|
-| AA | > 90 |
-| AB | 80–90 |
-| BB | 65–79 |
-| BC | 50–64 |
-| CC | 40–50 |
-| CD | < 39 |
 
 ---
 
 ## Textbooks and References
 
-### Textbook(s) / Suggested Textbook/References
-
-1. *Head First Object-Oriented Analysis and Design*.
-2. *Software Design and Architecture Specialization*.
-
 ### Reference Books
 
-*None stated separately in source document.*
+1. Ian Sommerville, *Software Engineering*, 10th ed.
+2. John Ousterhout, *A Philosophy of Software Design* — deep vs shallow modules, complexity.
+3. Martin Fowler, *Refactoring: Improving the Design of Existing Code*, 2nd ed. — code smells and techniques.
+4. Kent Beck, *Test-Driven Development: By Example*.
 
 ### Online Resources
 
-*None stated in source document.*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-IT643 Software Design and Testing is a Core course for M.Sc IT students, with a 3-0-2-4 credit structure (3 lectures and one lab every week). It requires awareness of Object-Oriented Programming as a prerequisite.
+IT643 is a Core PG course requiring Introduction to Programming as a prerequisite, offered in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-- The source document is a brief, single-page course outline.
-- Group project size is capped at a maximum of 4 students.
-- There is a slight gap in the grading scale (39 to 40) between the CD and CC thresholds, as stated in the source document.
+None stated in source document beyond what is captured above.
 
 ---
 
@@ -134,7 +126,7 @@ IT643 Software Design and Testing is a Core course for M.Sc IT students, with a 
 
 | Resource | Type | Link |
 |---|---|---|
-| IT643_SoftwareDesignAndTesting_Autumn2025-26 - Ankush Chander.pdf | PDF | [Download IT643_SoftwareDesignAndTesting_Autumn2025-26 - Ankush Chander.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| IT643__2026-27__IT643_SoftwareDesignAndTesting_Autumn26 - Ankush Chander.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -142,7 +134,7 @@ IT643 Software Design and Testing is a Core course for M.Sc IT students, with a 
 
 | Field | Value |
 |---|---|
-| **Source PDF** | IT643_SoftwareDesignAndTesting_Autumn2025-26 - Ankush Chander.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | IT643__2026-27__IT643_SoftwareDesignAndTesting_Autumn26 - Ankush Chander.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |
