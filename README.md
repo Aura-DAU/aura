@@ -1,6 +1,16 @@
-# DAU PWA — AURA
-
-A Progressive Web App for **Dhirubhai Ambani University**, enriched with AI.
+<div align="center">
+    <img width="250" alt="AURA_Logo" src="https://github.com/user-attachments/assets/591dad76-42ae-473b-ab30-be8c951bbc07" />
+   <h1>DAU PWA — AURA</h1>
+   
+   <h3> A Progressive Web App for <strong>Dhirubhai Ambani University</strong>, enriched with AI. </h3>
+   
+   <p>
+       <a href="#architecture-overview"><img src="https://img.shields.io/badge/Agentic_RAG-LangGraph-0A66C2?style=for-the-badge&logo=openai&logoColor=white" alt="Agentic RAG" /></a>
+       <a href="#architecture-overview"><img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" /></a>
+       <a href="#getting-started"><img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
+       <img src="https://img.shields.io/badge/vLLM-NVIDIA-76B900?style=for-the-badge&logo=nvidia&logoColor=white" alt="NVIDIA GPU" />
+     </p>
+</div>
 
 > [!IMPORTANT]
 > This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
