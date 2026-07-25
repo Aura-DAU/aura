@@ -69,14 +69,11 @@ _FALLBACK_DISTRESS_PATTERNS: list[str] = [
     r"\bkill\s+my\s*self\b",
     r"\bend\s+(my\s+)?(life|it\s+all)\b",
     r"\bself[\s\-]?harm",
-    r"\bhurt(ing)?\s+(my\s*)?self\b",
-    r"\bcut\s+(my\s*)?self\b",
+    r"\bhurt(ing)?\s+my\s*self\b",
+    r"\bcut\s+my\s*self\b",
     r"\bwant\s+to\s+die\b",
     r"\bno\s+reason\s+to\s+live\b",
-    # "can't take it anymore" / "can't go on" / "can't cope anymore"
-    r"\bcan['\u2019]?t\s+take(\s+it)?\s+anymore\b",
-    r"\bcan['\u2019]?t\s+go\s+on(\s+anymore)?\b",
-    r"\bcan['\u2019]?t\s+cope(\s+anymore)?\b",
+    r"\bcan['\u2019]?t\s+(take(\s+it)?|go\s+on|cope)(\s+anymore)?\b",
     r"\bdon['\u2019]?t\s+want\s+to\s+(live|be\s+alive)\b",
 ]
 

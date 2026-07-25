@@ -1,11 +1,16 @@
-from pipeline.aura_chat import AuraChat
-
-
 class AURA:
 
     def __init__(self):
+        # Phase B: Lazy load the chatbot state graph to prevent heavy imports
+        # during light testing / CI collection steps.
+        self._chatbot = None
 
-        self.chatbot = AuraChat()
+    @property
+    def chatbot(self):
+        if self._chatbot is None:
+            from pipeline.aura_chat_graph import AuraChatGraph
+            self._chatbot = AuraChatGraph()
+        return self._chatbot
 
     def ask(
         self,

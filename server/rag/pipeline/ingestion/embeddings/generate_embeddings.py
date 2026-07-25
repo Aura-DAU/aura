@@ -1,117 +1,77 @@
 import json
+import os
 import sys
 from pathlib import Path
-
 import numpy as np
-from sentence_transformers import SentenceTransformer
+import requests
+from dotenv import load_dotenv
 
+load_dotenv()
 
-# ==================================================
-# CONFIG
-# ==================================================
+# Setup paths relative to script location
+SCRIPT_DIR = Path(__file__).resolve().parent
+CHUNKS_FILE = SCRIPT_DIR / "../../../processed_chunks/chunks.json"
+VECTOR_STORE_DIR = SCRIPT_DIR / "../../vector_store"
+EMBEDDINGS_FILE = VECTOR_STORE_DIR / "embeddings.npy"
+METADATA_FILE = VECTOR_STORE_DIR / "metadata.json"
 
-# Same sibling-import pattern as chunker.py: the embedding model must
-# stay in sync with chunking/config.py, which retrieval also reads.
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "chunking"))
-from config import MODEL_NAME
+EMBEDDING_URL = os.getenv("EMBEDDING_URL", "http://10.100.97.74:8081")
+BATCH_SIZE = 32
 
-CHUNKS_FILE = "../../../processed_chunks/chunks.json"
-
-
-EMBEDDINGS_FILE = "../../vector_store/embeddings.npy"
-METADATA_FILE = "../../vector_store/metadata.json"
-
-
-# ==================================================
-# HELPERS
-# ==================================================
 
 def load_chunks(filepath):
     with open(filepath, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-# ==================================================
-# MAIN
-# ==================================================
+def generate_tei_embeddings(texts, embedding_url, batch_size=32):
+    endpoint = f"{embedding_url.rstrip('/')}/embed"
+    all_embeddings = []
+    total = len(texts)
+    print(f"Requesting embeddings from TEI endpoint ({endpoint}) for {total} texts in batches of {batch_size}...")
+
+    for i in range(0, total, batch_size):
+        batch_texts = texts[i:i + batch_size]
+        payload = {"inputs": batch_texts, "truncate": True}
+        response = requests.post(endpoint, json=payload, headers={"Content-Type": "application/json"})
+        response.raise_for_status()
+        batch_vecs = response.json()
+        all_embeddings.extend(batch_vecs)
+        if (i + batch_size) % 320 == 0 or (i + batch_size) >= total:
+            print(f"  Processed {min(i + batch_size, total)}/{total} chunks")
+
+    embeddings = np.array(all_embeddings, dtype="float32")
+
+    # L2 Normalization check/enforcement
+    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    embeddings = (embeddings / np.maximum(norms, 1e-12)).astype("float32")
+
+    return embeddings
+
 
 def main():
-    import torch
-    # Fix K: check CUDA first — previously only MPS was checked, so NVIDIA
-    # GPU machines always fell back to CPU for embedding generation.
-    if torch.cuda.is_available():
-        device = "cuda"
-    elif torch.backends.mps.is_available():
-        device = "mps"
-    else:
-        device = "cpu"
-    print(f"Using device: {device}")
-
-    model = SentenceTransformer(MODEL_NAME, device=device)
-
     print("Loading chunks...")
-
     chunks = load_chunks(CHUNKS_FILE)
-
     print(f"Loaded {len(chunks)} chunks")
 
-    texts = [
-        chunk["text"]
-        for chunk in chunks
-    ]
+    texts = [chunk["text"] for chunk in chunks]
 
-    print("Generating embeddings...")
+    print("Generating embeddings via TEI endpoint...")
+    embeddings = generate_tei_embeddings(texts, EMBEDDING_URL, BATCH_SIZE)
 
-    embeddings = model.encode(
-        texts,
-        batch_size=32,
-        show_progress_bar=True,
-        normalize_embeddings=True,
-        convert_to_numpy=True
-    )
+    print(f"\nEmbedding shape: {embeddings.shape}")
 
-    embeddings = embeddings.astype("float32")
-
-    print(
-        f"\nEmbedding shape: "
-        f"{embeddings.shape}"
-    )
-
-    # ==========================================
     # SAVE OUTPUTS
-    # ==========================================
+    VECTOR_STORE_DIR.mkdir(parents=True, exist_ok=True)
 
-    Path("../../vector_store").mkdir(
-        parents=True,
-        exist_ok=True
-    )
+    np.save(EMBEDDINGS_FILE, embeddings)
 
-    np.save(
-        EMBEDDINGS_FILE,
-        embeddings
-    )
-
-    with open(
-        METADATA_FILE,
-        "w",
-        encoding="utf-8"
-    ) as f:
-
-        json.dump(
-            chunks,
-            f,
-            ensure_ascii=False
-        )
+    with open(METADATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(chunks, f, ensure_ascii=False)
 
     print("\nSaved embeddings")
-
-    print(
-        f"Embeddings -> {EMBEDDINGS_FILE}"
-    )
-
-    print(
-        f"Metadata -> {METADATA_FILE}"
-    )
+    print(f"Embeddings -> {EMBEDDINGS_FILE}")
+    print(f"Metadata -> {METADATA_FILE}")
 
 
 if __name__ == "__main__":

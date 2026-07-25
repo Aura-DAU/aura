@@ -3,6 +3,7 @@ uvicorn
 pydantic
 groq
 pinecone
+qdrant-client
 sentence-transformers
 torch
 openai-whisper
