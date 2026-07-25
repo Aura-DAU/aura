@@ -31,6 +31,12 @@ class FakeDB:
             erp_id = params[0]
             row = self.identity_map.get(erp_id)
             return [row] if row else []
+        if "FROM student_elective_selections" in sql_norm:
+            # No test in this file exercises the elective-selection feature
+            # itself (see test_elective_and_cohort_scoping.py for that) —
+            # zero selections is service.py's documented default, meaning
+            # every elective is shown unfiltered.
+            return []
         raise AssertionError(f"Unexpected query: {sql_norm}")
 
     def execute(self, sql, params=()):

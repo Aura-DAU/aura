@@ -1,18 +1,20 @@
----
-title: "HM216 Science, Technology, Society Autumn 2025-26"
+﻿---
+title: "HM216 Science, Technology, Society (Purbasha Das) Autumn 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "HM216_ScienceTechnologySociety_Autumn25 - Shefali Jha.pdf"
+pdf_name: "HM216__2026-27__HM216_Science Technology and Society_Autumn26 - Purbasha Das.pdf"
 course_code: "HM216"
-semester: "Autumn 2025-26"
+semester: "Autumn 2026-27"
 authorization: ["student", "faculty"]
 ---
 
-# HM216: Science, Technology, Society
+# HM216: Science, Technology, Society (Instructor: Purbasha Das)
+
+*Note: This is one of two distinct 2026-27 course files for HM216 in this batch, taught by a different instructor (Purbasha Das) than the other version (Jenson Joseph). Both are preserved as separate files per instructor. This version's content is nearly identical to the Jenson Joseph version, with one notable difference: the Unit I description here credits the philosophy of technics to both Gilbert Simondon and Bernard Stiegler, whereas the Jenson Joseph version credits Bernard Stiegler only.*
 
 ## Course Overview
 
@@ -20,37 +22,37 @@ authorization: ["student", "faculty"]
 |---|---|
 | **Course Code** | HM 216 |
 | **Course Name** | Science, Technology, Society |
-| **Instructor(s)** | Shefali Jha |
-| **Credits** | 3-0-0-3 (HSS Core) |
-| **Semester Offered** | Autumn 2025-26 |
-| **Type** | Core (HSS Core) |
-| **Program(s)** | B.Tech program |
+| **Instructor(s)** | Purbasha Das |
+| **Credits** | HSS Core (3-0-0-3) |
+| **Semester Offered** | Autumn 2026-27 |
+| **Type** | HSS Core |
+| **Program(s)** | BTech |
 | **Year / Semester in Program** | Semester 3 |
 | **Associated Lab** | None |
 | **Prerequisites** | PC110: Language and Literature; HM 106: Approaches to Indian Society |
 | **Foundation For** | None stated |
 
+Course Format: 3 hours of lectures each week.
+
 ---
 
 ## Course Description
 
-This course is designed to encourage students to understand, explore, and analyse ways in which science and technology relate to society. Science and Technology Studies (STS) is a growing field of study around the world that seeks to understand how science and technology shape human lives and livelihoods, and how society and culture, in turn, shape the development of science and technology.
+This course is designed to encourage students to understand, explore and analyse ways in which science and technology relate to society. The course introduces students to key debates in Science and Technology Studies (STS), a growing field that explores the mutual shaping of science, technology, and society. The course also engages critically with contemporary discourse on technology and progress, foregrounding the social, political, and historical questions often lost in polarized debates between utopian and catastrophic visions of technology's role in society, or between techno-optimism and technophobia. Broadly, the course takes a Cultural Studies approach, complicating the conventional view of science and technology as progressing linearly from primitive stages to hypermodern advancement. Instead, it asks: what counts as technology, in which contexts, by whom, and with what broader social, political, and cultural effects?
 
-STS seeks to provide insights into the deep relationship between science and technology and such basic categories of social thought as race, gender, class, the environment, democracy and development, and human rights, by focusing attention on science and technology as social institutions. This course intends to introduce students to some of the key philosophical, sociological, and historical approaches towards understanding the workings of science and technology in our times.
+**Objectives and Outcomes**: STS seeks to provide insights into the deep relationship between science and technology and such basic categories of social thought as race, gender, class, the environment, democracy and development, and human rights, by focusing attention on science and technology as social institutions. This course, in other words, intends to introduce students to some of the key philosophical, sociological and historical approaches towards understanding the workings of science and technology in our times.
 
-By the end of the course, it is expected that students will have the conceptual tools and vocabulary to think about the meanings of science and technology in varied social, political, and cultural contexts. They will be able to generate critical discussion around the impact of STS on their received ideas about science, and reflect upon their own professional goals and practice going forward.
+By the end of the course, it is expected that students will have the conceptual tools and vocabulary to think about the meanings of science and technology in varied social, political and cultural contexts. They will be able to generate critical discussion around the impact of STS on their received ideas about science, and reflect upon their own professional goals and practice going forward.
 
 ---
 
 ## Course Outcomes (COs)
 
+*Note: The source document states outcomes as a narrative paragraph (reproduced in Course Description above) rather than a numbered CO list.*
+
 | CO | Description |
 |---|---|
-| CO1 | Acquire conceptual tools and vocabulary to think about the meanings of science and technology in varied social, political, and cultural contexts. |
-| CO2 | Generate critical discussion around the impact of STS on received ideas about science. |
-| CO3 | Reflect upon their own professional goals and practice going forward in light of STS perspectives. |
-
-*Note: Course outcomes are stated in paragraph form under "Objectives and Outcomes" in the source document; the above are derived directly from that text.*
+| CO1 | Develop the conceptual tools and vocabulary to think about the meanings of science and technology in varied social, political and cultural contexts; generate critical discussion around the impact of STS on received ideas about science; and reflect on professional goals and practice going forward |
 
 ---
 
@@ -64,18 +66,26 @@ By the end of the course, it is expected that students will have the conceptual 
 
 ## Course Structure
 
+*Course Structure (as stated in source): "The course will be organized into four units, consisting of lectures, discussions, and presentations."*
+
 | Unit | Topic | No. of Lectures |
 |---|---|---|
-| Unit I | Introduction: STS as a Field of Study — Conventional Views of Science and the relationship between Science & Technology; Sociology and Philosophy of Science; Kuhn's Challenge; Practicing Science & Technology: Social contexts and hierarchies; Histories of Doing as Histories of Technology: Scientists and Engineers; Contemporary theoretical frames: Actor-Network Theory (ANT) and Feminist STS; Public participation in Science and Ideas of Expertise: Examples | 15 |
-| Unit II & III | History of Science in South Asia: Colonial roots, Global Connections — Knowledge, expertise and colonial power: the Asiatic Society of Bengal, the demands of bureaucracy (Indian Medical Service); Indian scientists in a colonial world: global networks and local connections, Indian work in Geology, Botany and Chemistry; Colonial Medicine: controlling populations and disease, South Asian systems of medicine encounter Western medicine; The Lab and the World: women scientists, the social dimensions of technology, gatekeeping | 15 |
-| Unit IV | Artificial Intelligence: Challenges and Potentialities — Group Projects | 12 |
+| Unit I: Introduction: STS as a Field of Study | A brief intro to Science as social institution and cultural practice; Interrelations between Science, Technology, and Society; Thomas Kuhn and the concept of paradigms and scientific revolutions; Actor-Network Theory (ANT) and sociology of scientific knowledge (Bruno Latour); Feminist themes in STS: gender, power, and 'situated knowledge' (Haraway). Introduction to conceptual approaches to the relations between technology, society, and human consciousness, via the philosophy of technics in Gilbert Simondon and Bernard Stiegler. Contemporary 'communicative capitalism,' its technological infrastructures, and its social and political implications. Public participation in Science and Ideas of Expertise: Examples | 15 |
+| Units II & III: History of Science in South Asia: Colonial roots, Global Connections | Knowledge, expertise and colonial power: the Asiatic Society of Bengal, the demands of bureaucracy (Indian Medical Service). Indian scientists in a colonial world: global networks and local connections; Indian work in Geology, Botany and Chemistry. Colonial Medicine: controlling populations and disease; South Asian systems of medicine encounter Western medicine. The Lab and the World: women scientists, the social dimensions of technology, gatekeeping | 15 |
+| Unit IV: Group Project | Theme (tentative): Care, Ethics, and Contemporary Technologies | 12 |
 | **Total** | | **42** |
+
+In Units Two and Three, students will be introduced to debates on science and technology in the Indian context. Class lectures and readings will focus on the structural impacts of colonialism, developmental planning and liberalization on the growth and development of Indian scientific and technological endeavours in different domains. Together, these units will allow the class to analyse the contemporary moment, and explore frameworks that seek to make sense of it.
+
+In Unit Four, students will build on the theoretical questions from Units One to Three and undertake a short group research project. The focus will be on 'communicative capitalism,' examining how Information and Communication Technologies, including Artificial Intelligence, reshape social, political, and cultural forms, as well as the challenges and possibilities they create.
+
+Details of specific topics and process of study will be provided in time, along with appropriate material in the form of e-resources, books, articles, talks, etc. These will be kept in a common repository that can be accessed by all.
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule with dates is available in the source document. Only a unit-wise lecture plan (as shown above) is provided. Details of specific topics and process of study will be provided in time, along with appropriate material in the form of e-resources, books, articles, talks, etc., kept in a common repository accessible by all.*
+*Note: No weekly (dated) lecture schedule is available in the source document; only the unit-wise lecture distribution shown above is provided.*
 
 ---
 
@@ -83,47 +93,46 @@ By the end of the course, it is expected that students will have the conceptual 
 
 | Component | Weightage |
 |---|---|
-| Class Presentations and Tasks (short writing assignments, reviews) | 30% |
-| Group Project | 30% |
-| End-Semester Examination | 40% |
-| **Total** | **100%** |
-
-**Additional grading notes:**
-- **Participation points:** Students with more than 85% attendance will receive an extra 5 marks, added to their total at the end of the course.
-- Participation in class discussion (asking relevant questions and/or making helpful observations) will also be considered for additional marks, awarded in consultation with the TAs at the end of the course, purely at the discretion of the instructor.
+| In-class presentation | 15 marks |
+| Mid-sem exam | 40 marks |
+| Group project | 40 marks |
+| **Total** | **95 marks (plus participation points, see Additional Notes)** |
 
 ---
 
 ## Textbooks and References
 
-### Textbook(s)
-
-1. Arnold, David. *Science, Technology and Medicine in Colonial India*. The New Cambridge History of India, vol. 3, no. 5. Cambridge University Press, 2000.
-2. Levesque, Hector. *Common Sense, the Turing Test, and the Quest for Real AI*. MIT Press, 2018.
-3. O'Neil, Cathy. *Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy*. Penguin, 2016.
-4. Sismondo, Sergio. *An Introduction to Science and Technology Studies*. 2nd ed. Wiley-Blackwell, 2010.
-
 ### Reference Books
 
-*None stated separately in source document (all listed as main course texts above).*
+1. Sergio Sismondo, *An Introduction to Science and Technology Studies*, 2nd ed., Wiley-Blackwell, 2010.
+2. Donna Haraway, "Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective," *Feminist Studies* 14, 3 (1988): 575-599.
+3. Guillaume Carnino, Liliane Hilaire-Pérez, and Jérôme Lamy, eds., *Global History of Techniques (Nineteenth to Twenty-first Centuries)*, Turnhout, Belgium: Brepols, 2024.
+4. Sheila Jasanoff, ed., *States of Knowledge: The Co-Production of Science and Social Order*, London: Routledge, 2004.
+5. David Arnold, "Science, Technology and Medicine in Colonial India," *The New Cambridge History of India*, vol. 3, no. 5, Cambridge University Press, 2000.
+6. James Gleick, *The Information: A History, a Theory, a Flood*, HarperCollins UK, 2011.
+7. Tiziana Terranova, *Network Culture: Politics for the Information Age*, Pluto Press, 2004.
+8. Jodi Dean, "Why the Net is Not a Public Sphere," *Constellations* 10, no. 1 (2003): 95-112.
+9. Sherry Turkle, "Cyberspace and Identity," *Contemporary Sociology* 28, No. 6 (November 1999): 643-648.
 
 ### Online Resources
 
-- All relevant reading material will be made available in a Google Drive Folder for the class.
+All relevant reading material will be made available in a Google Drive Folder for the class.
 
 ---
 
 ## Program Structure Context
 
-HM216 Science, Technology, Society is an HSS Core course for Semester 3 of the B.Tech program, with a 3-0-0-3 credit structure and 3 hours of lectures each week. It requires PC110 (Language and Literature) and HM 106 (Approaches to Indian Society) as prerequisites.
+HM216 (Purbasha Das section) is an HSS Core course for Semester 3 BTech students, offered in Autumn 2026-27, requiring PC110 (Language and Literature) and HM106 (Approaches to Indian Society) as prerequisites.
 
 ---
 
 ## Additional Notes
 
-- **Class Organization:** The entire class will be randomly broken up into groups of 10-12 students on average, with each student remaining in the same group throughout the semester. A Group Representative (GR), either elected or a volunteer, will interface with faculty on behalf of the group. TAs for the course will coordinate all group-related issues.
-- **Unit IV Focus:** This year's Group Project focus will be on Artificial Intelligence, its role in our lives, and emergent problems and potentialities.
-- **Honour Code:** Academic dishonesty, cheating, plagiarism, or any kind of deceit will not be tolerated and will result in a zero for the assignment. All ideas and words not generated by the student must be cited. In extreme cases, a failing grade for the course or a specific assignment will be awarded if a student is caught cheating or inappropriately copying-and-pasting content from external sources without acknowledgment. **Unacknowledged use of AI tools will also result in a reduction of marks.**
+**Additional Resources (as stated in source)**: In addition to the mandatory three hours of lectures per week, students can expect two to three film and documentary screenings each month.
+
+**Participation points (as stated in source)**: Students with more than 85% attendance will receive an extra 5 marks, to be added to their total at the end of the course. Participation in class discussion — by asking relevant questions and/or making helpful observations — will also be considered for additional marks to be awarded in consultation with the TAs at the end of the course. This will be purely at the discretion of the instructor.
+
+**Honour Code (as stated in source)**: Academic dishonesty, cheating, plagiarism — any kind of deceit — will not be tolerated, and will result in a zero for the assignment. All ideas and words that a student did not generate themselves must be cited. In extreme cases, a failing grade for the course or a specific assignment will be awarded if a student is caught cheating, or inappropriately copying-and-pasting content from external sources without acknowledgment. Unacknowledged use of AI tools will also result in a reduction of marks.
 
 ---
 
@@ -131,7 +140,7 @@ HM216 Science, Technology, Society is an HSS Core course for Semester 3 of the B
 
 | Resource | Type | Link |
 |---|---|---|
-| HM216_ScienceTechnologySociety_Autumn25 - Shefali Jha.pdf | PDF | [Download HM216_ScienceTechnologySociety_Autumn25 - Shefali Jha.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| HM216__2026-27__HM216_Science Technology and Society_Autumn26 - Purbasha Das.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -139,7 +148,7 @@ HM216 Science, Technology, Society is an HSS Core course for Semester 3 of the B
 
 | Field | Value |
 |---|---|
-| **Source PDF** | HM216_ScienceTechnologySociety_Autumn25 - Shefali Jha.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | HM216__2026-27__HM216_Science Technology and Society_Autumn26 - Purbasha Das.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

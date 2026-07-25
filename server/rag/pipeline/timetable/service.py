@@ -79,19 +79,51 @@ def _require_cohort(identity) -> tuple[int, int, str]:
     role = _field(identity, "role")
     if role != "student":
         raise TimetableError("Only students have a personal timetable in AURA.")
-    year, sem, sec = _field(identity, "current_year"), _field(identity, "current_sem"), _field(identity, "current_sec")
+
+    erp_id = _field(identity, "erp_id")
+    year = sem = sec = None
+
+    if erp_id:
+        try:
+            rows = db_conn.query(
+                "SELECT current_year, current_sem, current_sec, email FROM user_identity_map WHERE erp_id = %s AND is_active = TRUE",
+                (erp_id,),
+            )
+            if rows:
+                r = rows[0]
+                year = r.get("current_year")
+                sem = r.get("current_sem")
+                sec = r.get("current_sec")
+
+                # If still missing in DB, infer from email
+                if (year is None or sem is None or not sec) and r.get("email"):
+                    from api.routes.identity_routes import _infer_role_and_cohort
+                    inferred = _infer_role_and_cohort(r["email"])
+                    if inferred["role"] == "student":
+                        year = year if year is not None else inferred["current_year"]
+                        sem = sem if sem is not None else inferred["current_sem"]
+                        sec = sec if sec else inferred["current_sec"]
+        except Exception:
+            pass
+
+    # Fallback to identity object if DB fields were empty
+    if year is None: year = _field(identity, "current_year")
+    if sem is None: sem = _field(identity, "current_sem")
+    if not sec: sec = _field(identity, "current_sec")
+
     if year is None or sem is None or not sec:
         raise TimetableError(
-            "Your year/semester/section isn't set up yet in AURA — please contact the AURA "
-            "administrator so your profile can be linked to a timetable cohort."
+            "Your year/semester/section isn't set up yet in AURA — please update "
+            "your profile or contact the AURA administrator."
         )
-    return year, sem, sec
+    return int(year), int(sem), str(sec)
 
 
 def get_master_rows(year: int, sem: int, sec: str) -> list[dict]:
     return db_conn.query(
         """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
-                  course_code, course_name, session_type, room, faculty_name
+                  course_code, course_name, session_type, room, faculty_name,
+                  course_type
            FROM timetable_master
            WHERE year = %s AND sem = %s AND sec = %s
            ORDER BY day_of_week, start_time""",
@@ -122,16 +154,75 @@ def _row_to_slot(row: dict, is_custom: bool = False, override_id=None) -> dict:
         "session_type": row["session_type"],
         "room": row.get("room"),
         "faculty_name": row.get("faculty_name"),
+        "course_type": row.get("course_type", ""),
         "is_custom": is_custom,
     }
 
 
+def _is_elective(course_type: str) -> bool:
+    """Returns True if the course_type indicates an elective."""
+    return bool(course_type) and "elective" in course_type.lower()
+
+
+def _get_selected_elective_ids(erp_id: str) -> set[str]:
+    """Returns the set of master_ids the student has selected as their electives.
+    Empty set means no preferences saved yet."""
+    rows = db_conn.query(
+        "SELECT master_id FROM student_elective_selections WHERE erp_id = %s",
+        (erp_id,),
+    )
+    return {str(r["master_id"]) for r in rows}
+
+
+def has_elective_selections(erp_id: str) -> bool:
+    """Returns True if the student has saved at least one elective selection."""
+    rows = db_conn.query(
+        "SELECT 1 FROM student_elective_selections WHERE erp_id = %s LIMIT 1",
+        (erp_id,),
+    )
+    return len(rows) > 0
+
+
+def get_all_elective_rows(year: int, sem: int) -> list[dict]:
+    """Returns elective-type master rows offered to a specific (year, sem) —
+    NOT every elective in the whole database. Electives are commonly pooled
+    across all sections of the same year+sem (matching the source
+    timetable), so this intentionally does not filter by `sec`.
+
+    This scoping matters: without it, a student's course_code could
+    resolve to a master row belonging to a completely different cohort
+    (different year/semester), and get_effective_timetable would then
+    merge that unrelated class straight into their own timetable."""
+    return db_conn.query(
+        """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                  course_code, course_name, session_type, room, faculty_name,
+                  course_type
+           FROM timetable_master
+           WHERE (course_type ILIKE '%%Elective%%' OR program ILIKE '%%Elective%%')
+             AND year = %s AND sem = %s
+           ORDER BY course_code, day_of_week, start_time""",
+        (year, sem),
+    )
+
+
 def get_effective_timetable(identity) -> dict:
-    """Returns {"cohort": {...}, "timetable": [slot, ...]} sorted by day/time,
-    for the identity's own (year, sem, sec), merged with their overrides."""
+    """Returns {"cohort": {...}, "timetable": [slot, ...], "electives_configured": bool}
+    sorted by day/time, for the identity's own (year, sem, sec), merged with
+    their overrides and selected electives.
+    """
     year, sem, sec = _require_cohort(identity)
+    erp_id = _field(identity, "erp_id")
     master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec)}
-    overrides = get_overrides(_field(identity, "erp_id"))
+    overrides = get_overrides(erp_id)
+
+    # Elective filtering & inclusion
+    selected_ids = _get_selected_elective_ids(erp_id)
+    electives_configured = len(selected_ids) > 0
+    if electives_configured:
+        all_electives = get_all_elective_rows(year, sem)
+        for erow in all_electives:
+            if str(erow["id"]) in selected_ids:
+                master_rows[erow["id"]] = erow
 
     removed_master_ids = {o["master_id"] for o in overrides if o["kind"] == "remove" and o["master_id"]}
     replace_by_master = {o["master_id"]: o for o in overrides if o["kind"] == "replace" and o["master_id"]}
@@ -141,13 +232,20 @@ def get_effective_timetable(identity) -> dict:
     for master_id, row in master_rows.items():
         if master_id in removed_master_ids:
             continue
+
+        # Filter electives: skip if student has configured preferences
+        # and this elective is NOT one they selected
+        if electives_configured and _is_elective(row.get("course_type", "")):
+            if str(master_id) not in selected_ids:
+                continue
+
         if master_id in replace_by_master:
             override = replace_by_master[master_id]
             merged = dict(row)
-            for field in ("day_of_week", "start_time", "end_time", "course_code",
+            for fld in ("day_of_week", "start_time", "end_time", "course_code",
                           "course_name", "session_type", "room", "faculty_name"):
-                if override.get(field) is not None:
-                    merged[field] = override[field]
+                if override.get(fld) is not None:
+                    merged[fld] = override[fld]
             slots.append(_row_to_slot(merged, is_custom=True, override_id=override["id"]))
         else:
             slots.append(_row_to_slot(row))
@@ -158,6 +256,7 @@ def get_effective_timetable(identity) -> dict:
     slots.sort(key=lambda s: (s["day_of_week"], s["start_time"]))
     return {
         "cohort": {"year": year, "sem": sem, "sec": sec},
+        "electives_configured": electives_configured,
         "timetable": slots,
     }
 
@@ -291,3 +390,211 @@ def find_slots_starting_in(erp_id: str, minutes_from_now: int, now: Optional[dat
         slot for slot in effective["timetable"]
         if slot["day_of_week"] == target_dow and slot["start_time"] == target_hm
     ]
+
+
+# -- Faculty timetable (read-only, across all batches) -------------------------
+
+
+def get_faculty_rows(faculty_name: str) -> list[dict]:
+    """Get all master rows where faculty_name matches (case-insensitive).
+    Also matches combined faculty like 'SS/VS' when queried with 'SS' or 'VS'."""
+    return db_conn.query(
+        """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                  course_code, course_name, session_type, room, faculty_name,
+                  batch_raw, branch, program, credits, course_type
+           FROM timetable_master
+           WHERE UPPER(faculty_name) = UPPER(%s)
+              OR UPPER(faculty_name) LIKE '%%' || UPPER(%s) || '/%%'
+              OR UPPER(faculty_name) LIKE '%%/' || UPPER(%s) || '%%'
+           ORDER BY day_of_week, start_time""",
+        (faculty_name, faculty_name, faculty_name),
+    )
+
+
+def get_faculty_timetable(identity) -> dict:
+    """Returns the full weekly teaching schedule for a faculty member.
+    Queries all classes across every batch/year/section where this
+    faculty member is listed as the instructor."""
+    role = _field(identity, "role")
+    if role != "faculty":
+        raise TimetableError("This tool is only available to faculty members.")
+
+    faculty_name = _field(identity, "faculty_initials") or _field(identity, "erp_id")
+    if not faculty_name:
+        raise TimetableError(
+            "Your faculty identifier is not set up in AURA. "
+            "Please contact the administrator."
+        )
+
+    rows = get_faculty_rows(faculty_name)
+    slots = []
+    for row in rows:
+        slot = _row_to_slot(row)
+        slot["batch"] = row.get("batch_raw", "")
+        slot["branch"] = row.get("branch", "")
+        slot["program"] = row.get("program", "")
+        slot["credits"] = row.get("credits", "")
+        slot["course_type"] = row.get("course_type", "")
+        slots.append(slot)
+
+    return {
+        "faculty": faculty_name,
+        "total_classes_per_week": len(slots),
+        "timetable": slots,
+    }
+
+
+# -- Elective selection -------------------------------------------------------
+
+
+def get_available_electives(identity) -> dict:
+    """Returns all elective-type courses for the student's cohort, with a
+    `selected` flag indicating whether the student has chosen each one.
+
+    Courses are grouped by course_code so the student sees each elective
+    once (not once per time slot). The individual time slots are nested
+    under each course for reference.
+    """
+    year, sem, sec = _require_cohort(identity)
+    erp_id = _field(identity, "erp_id")
+    selected_ids = _get_selected_elective_ids(erp_id)
+    electives_configured = len(selected_ids) > 0
+
+    elective_rows = get_all_elective_rows(year, sem)
+    # Group by course_code
+    courses: dict[str, dict] = {}
+    for row in elective_rows:
+        code = row["course_code"]
+        mid = str(row["id"])
+        if code not in courses:
+            courses[code] = {
+                "course_code": code,
+                "course_name": row["course_name"],
+                "course_type": row.get("course_type", ""),
+                "selected": mid in selected_ids if electives_configured else False,
+                "master_ids": [],
+                "slots": [],
+            }
+        courses[code]["master_ids"].append(mid)
+        # If any slot for this course is selected, mark the course as selected
+        if electives_configured and mid in selected_ids:
+            courses[code]["selected"] = True
+        courses[code]["slots"].append({
+            "master_id": mid,
+            "day": day_name(row["day_of_week"]),
+            "day_of_week": row["day_of_week"],
+            "start_time": _fmt_time(row["start_time"]),
+            "end_time": _fmt_time(row["end_time"]),
+            "faculty_name": row.get("faculty_name", ""),
+            "room": row.get("room", ""),
+        })
+
+    return {
+        "cohort": {"year": year, "sem": sem, "sec": sec},
+        "electives_configured": electives_configured,
+        "electives": list(courses.values()),
+    }
+
+
+def save_elective_selections(identity, course_codes: list[str]) -> dict:
+    """Saves the student's elective choices. Accepts a list of course_codes
+    (not master_ids) -- all master slots for each selected course_code are
+    automatically included.
+
+    Replaces any previous selections entirely (idempotent).
+    """
+    year, sem, sec = _require_cohort(identity)
+    erp_id = _field(identity, "erp_id")
+
+    if not course_codes:
+        raise TimetableError("Please select at least one elective course.")
+
+    # Resolve course_codes to master_ids — scoped to the student's own
+    # (year, sem) so they can only select electives actually offered to
+    # their cohort, never a course_code that happens to also exist in a
+    # different year/semester's offering.
+    elective_rows = get_all_elective_rows(year, sem)
+
+    code_set = {c.strip().upper() for c in course_codes}
+    matched_ids = []
+    matched_codes = set()
+    for row in elective_rows:
+        if row["course_code"].upper() in code_set:
+            matched_ids.append(str(row["id"]))
+            matched_codes.add(row["course_code"].upper())
+
+    unmatched = code_set - matched_codes
+    if unmatched:
+        raise TimetableError(
+            f"These course codes are not available as electives: "
+            f"{', '.join(sorted(unmatched))}. Use get_available_electives to see valid options."
+        )
+
+    # Atomic replace: delete old, insert new
+    db_conn.execute(
+        "DELETE FROM student_elective_selections WHERE erp_id = %s",
+        (erp_id,),
+    )
+    for mid in matched_ids:
+        db_conn.execute(
+            "INSERT INTO student_elective_selections (erp_id, master_id) VALUES (%s, %s)",
+            (erp_id, mid),
+        )
+
+    return {
+        "status": "saved",
+        "selected_courses": sorted(matched_codes),
+        "total_slots": len(matched_ids),
+    }
+
+
+def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[int] = None, sec: Optional[str] = None) -> dict:
+    """Updates the student's cohort (year, semester, section) in user_identity_map."""
+    role = _field(identity, "role")
+    if role != "student":
+        raise TimetableError("Only students can set their cohort.")
+    erp_id = _field(identity, "erp_id")
+
+    cur_year = _field(identity, "current_year")
+    cur_sem = _field(identity, "current_sem")
+    cur_sec = _field(identity, "current_sec") or "A"
+
+    new_year = int(year) if year is not None else cur_year
+    new_sem = int(sem) if sem is not None else cur_sem
+    new_sec = str(sec).strip().upper() if sec else cur_sec
+
+    if new_year is None or new_sem is None:
+        raise TimetableError(
+            "I don't know your current year and semester yet, so I can't fill in what you didn't "
+            "specify — please tell me your year, semester, and section together this first time."
+        )
+
+    # Validate against timetable_master
+    check = db_conn.query(
+        "SELECT 1 FROM timetable_master WHERE year = %s AND sem = %s AND sec = %s LIMIT 1",
+        (new_year, new_sem, new_sec),
+    )
+    if not check:
+        raise TimetableError(f"No timetable found for Year {new_year}, Semester {new_sem}, Section '{new_sec}'.")
+
+    db_conn.execute(
+        "UPDATE user_identity_map SET current_year = %s, current_sem = %s, current_sec = %s WHERE erp_id = %s",
+        (new_year, new_sem, new_sec, erp_id),
+    )
+
+    if isinstance(identity, dict):
+        identity["current_year"] = new_year
+        identity["current_sem"] = new_sem
+        identity["current_sec"] = new_sec
+    else:
+        setattr(identity, "current_year", new_year)
+        setattr(identity, "current_sem", new_sem)
+        setattr(identity, "current_sec", new_sec)
+
+    return {
+        "status": "updated",
+        "cohort": {"year": new_year, "sem": new_sem, "sec": new_sec},
+        "message": f"Successfully updated your cohort to Year {new_year}, Semester {new_sem}, Section {new_sec}.",
+        "timetable": get_effective_timetable(identity),
+    }
+
