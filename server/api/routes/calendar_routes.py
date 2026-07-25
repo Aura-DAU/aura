@@ -93,13 +93,18 @@ def start_calendar_oauth(
     # and the page to return to after consent so the callback can redirect
     # back to wherever the user started rather than always /dashboard.
     state_payload = {
-        "erp_id": identity.erp_id,
+        "erp_id":    identity.erp_id,
+        "role":      identity.role,
+        "return_to": return_to,
         "typ": GCAL_OAUTH_STATE_TYP,
         "iss": GCAL_OAUTH_STATE_ISSUER,
         "aud": GCAL_OAUTH_STATE_AUDIENCE,
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10),
+        "exp":       datetime.datetime.utcnow() + datetime.timedelta(minutes=10),
     }
     state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)
+
+    # Students need write scope for timetable sync; faculty need readonly
+    scope = CALENDAR_SCOPE_EVENTS if identity.role == "student" else CALENDAR_SCOPE_READONLY
 
     params = {
         "client_id":     CLIENT_ID,
