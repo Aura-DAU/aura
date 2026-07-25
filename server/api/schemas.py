@@ -1,7 +1,7 @@
 # Shared request/response models for AURA API routes.
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 UNIVERSITY_PROMPT = (
     "Dhirubhai Ambani University, DAU, DA-IICT, Gandhinagar. "
@@ -14,23 +14,23 @@ MAX_AUDIO_BYTES = 25 * 1024 * 1024
 
 
 class HistoryTurn(BaseModel):
-    role: str
-    content: str
+    role: str = Field(..., max_length=32)
+    content: str = Field(..., max_length=20_000)
 
 
 class UserProfile(BaseModel):
     # Display only — role/identity come from JWT via require_identity().
-    name: Optional[str] = None
-    branch: Optional[str] = None
-    year: Optional[str] = None
-    semester: Optional[str] = None
-    interests: Optional[str] = None
+    name: Optional[str] = Field(None, max_length=200)
+    branch: Optional[str] = Field(None, max_length=200)
+    year: Optional[str] = Field(None, max_length=50)
+    semester: Optional[str] = Field(None, max_length=50)
+    interests: Optional[str] = Field(None, max_length=1000)
     subjects: Optional[List[str]] = None
 
 
 class ChatRequest(BaseModel):
-    question: str
-    history: Optional[List[HistoryTurn]] = None
+    question: str = Field(..., min_length=1, max_length=2000)
+    history: Optional[List[HistoryTurn]] = Field(None, max_length=20)
     userProfile: Optional[UserProfile] = None
     studentProfile: Optional[UserProfile] = None
 
@@ -39,5 +39,5 @@ class ChatRequest(BaseModel):
 
 
 class LinkEcampusRequest(BaseModel):
-    ecampus_username: str
-    ecampus_password: str
+    ecampus_username: str = Field(..., min_length=1, max_length=200)
+    ecampus_password: str = Field(..., min_length=1, max_length=500)

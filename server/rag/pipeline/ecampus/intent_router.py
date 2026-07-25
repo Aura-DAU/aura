@@ -1,17 +1,23 @@
-# Classifies whether a query needs the eCampus tool/orchestrator path (live,
-# person-specific data) or should continue through the existing general-
-# same pattern as QueryGuardrail.
+"""
+Classifies whether a query needs the eCampus tool/orchestrator path (live,
+person-specific data) or should continue through the existing general-
+knowledge RAG pipeline in aura_chat.py. This is the one new decision point
+inserted into aura_chat.py — everything else in that file is untouched.
+
+Kept deliberately narrow: a cheap, fast, single-word classification call,
+same pattern as QueryGuardrail.
+"""
 
 import os
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.inference_router import InferenceRouter
 
 
 class PersonalDataIntentRouter:
     def __init__(self):
         load_dotenv()
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-        self.model = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+        self.client = InferenceRouter.get_client()
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
         self.system_prompt = """
 Classify the user's query as PERSONAL_DATA or GENERAL.
 
@@ -21,7 +27,9 @@ allocation, registration status, course adjustments, personal timetable, or
 a faculty member's teaching schedule. Also PERSONAL_DATA: requests to link,
 unlink, or check the status of an eCampus account; requests to share or
 revoke sharing of academic data with a faculty member; requests to refresh
-cached personal data.
+cached personal data; and requests to change, add, remove, or undo a change
+to their OWN timetable (e.g. "move my 5pm class to Room 204", "add a lab on
+Friday", "undo that timetable change I made yesterday").
 
 GENERAL: anything about public university information — policies (including
 the attendance policy's percentage threshold as a general rule, not the

@@ -8,6 +8,11 @@ import requests
 from dotenv import load_dotenv
 from qdrant_client import QdrantClient
 from qdrant_client.http import models as qmodels
+<<<<<<< HEAD
+=======
+from sentence_transformers import SentenceTransformer
+import torch
+>>>>>>> origin/pwa-demo
 import hashlib
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s — %(message)s")
@@ -205,9 +210,10 @@ def main():
     # 4. Upload new chunks to Qdrant
     qdrant_url = os.getenv("QDRANT_URL", "http://10.100.97.74:6333")
     collection_name = os.getenv("QDRANT_COLLECTION", "aura_documents")
+    api_key = os.getenv("QDRANT_API_KEY") or None
 
     logger.info("Connecting to Qdrant at %s...", qdrant_url)
-    qclient = QdrantClient(url=qdrant_url)
+    qclient = QdrantClient(url=qdrant_url, api_key=api_key)
 
     if not qclient.collection_exists(collection_name):
         logger.info("Creating Qdrant collection %s (768-dim, COSINE)...", collection_name)
@@ -229,7 +235,7 @@ def main():
                         filter=qmodels.Filter(
                             must=[qmodels.FieldCondition(key="document_id", match=qmodels.MatchValue(value=doc_id))]
                         )
-                    )
+                    ),
                 )
                 logger.info("  Deleted old vectors for: %s", canonical_path)
             except Exception as e:
@@ -248,7 +254,7 @@ def main():
                             filter=qmodels.Filter(
                                 must=[qmodels.FieldCondition(key="document_id", match=qmodels.MatchValue(value=doc_id))]
                             )
-                        )
+                        ),
                     )
                     logger.info("  Deleted vectors for: %s (doc_id: %s)", canonical_path, doc_id)
                 except Exception as e:

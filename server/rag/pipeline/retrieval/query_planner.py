@@ -3,7 +3,7 @@ import os
 import time
 
 from dotenv import load_dotenv
-from pipeline.key_manager import KeyManager
+from pipeline.inference_router import InferenceRouter
 
 
 SYSTEM_PROMPT = """
@@ -948,8 +948,8 @@ class QueryPlanner:
         load_dotenv()
 
         self.model = os.getenv(
-            "GROQ_MODEL",
-            "openai/gpt-oss-120b"
+            "VLLM_MODEL",
+            os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
     def plan(self, query):
@@ -976,7 +976,7 @@ class QueryPlanner:
                 ]
             )
 
-        response = KeyManager.call_with_rotation(_execute_plan, max_retries=5)
+        response = InferenceRouter.call_with_rotation(_execute_plan, max_retries=5)
 
         if not response:
             raise RuntimeError("Failed to generate plan due to API errors.")

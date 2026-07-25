@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import type {
   ChatMessage,
   ChatThread,
@@ -467,22 +467,6 @@ export function useAuraChat() {
     setErrorMessage(null)
   }, [activeThreadId, persistMessages])
 
-  const stopGeneration = useCallback(() => {
-    abortRef.current?.abort()
-    abortRef.current = null
-    setLoading(false)
-    setThinkingStep(undefined)
-  }, [])
-
-  const lastUserMessage = messages.findLast((m) => m.role === "user")?.content ?? null
-
-  // Stable identity unless threads actually change — consumers (Sidebar) can
-  // skip re-renders instead of receiving a fresh array every hook render.
-  const threadSummaries = useMemo(
-    () => threads.map(({ id, title }) => ({ id, title })),
-    [threads],
-  )
-
   const transcribeAudio = useCallback(
     async (blob: Blob) => {
       setIsTranscribing(true)
@@ -660,7 +644,7 @@ export function useAuraChat() {
     setErrorMessage,
     activeCitations,
     remainingQuota,
-    threads: threadSummaries,
+    threads: threads.map(({ id, title }) => ({ id, title })),
     activeThreadId,
     setActiveThreadId,
     startNewChat,
@@ -670,7 +654,5 @@ export function useAuraChat() {
     handleMicClick,
     handleSendMessage,
     handleClearChat,
-    stopGeneration,
-    lastUserMessage,
   }
 }

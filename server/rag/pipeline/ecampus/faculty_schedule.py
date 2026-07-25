@@ -1,6 +1,21 @@
-# Derives a faculty member's weekly teaching schedule from timetable data that
-# was already scraped — never logs into eCampus as faculty, never needs a
-# many (more complete).
+"""
+Derives a faculty member's weekly teaching schedule from timetable data that
+was already scraped — never logs into eCampus as faculty, never needs a
+faculty eCampus account. This directly implements what you asked for:
+"if I give you a timetable you generate faculty schedule from that only."
+
+Important caveat worth being upfront about: a single student's eCampus
+timetable only lists the courses THAT student is enrolled in — not every
+course a given faculty member teaches. So a faculty member's *complete*
+schedule can only be assembled by aggregating timetable entries pulled from
+multiple students across different courses/sections (which naturally
+accumulates over time as more students use AURA and their timetables get
+cached), or — better — from a single course-level timetable source if one
+becomes available later. build_faculty_schedule() is written to accept
+entries from any number of sources and merge/dedupe them, so it works
+correctly whether you're feeding it one student's data (partial result) or
+many (more complete).
+"""
 
 from collections import defaultdict
 from .timetable import TimetableEntry
@@ -9,15 +24,28 @@ DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
 
 
 def _entry_key(e: TimetableEntry) -> tuple:
-    # Dedup key — the same class slot may appear in many different
-    # students' timetables (everyone in the section sees the same row).
+    """Dedup key — the same class slot may appear in many different
+    students' timetables (everyone in the section sees the same row)."""
     return (e.course_code, e.day, e.start_time, e.end_time, e.instructor)
 
 
 def build_faculty_schedule(timetable_entries: list[TimetableEntry], faculty_name: str) -> dict:
-    # timetable_entries: pooled TimetableEntry objects from however many
-    # student timetables have been scraped/cached so far (see cache.py — a
-    # room, section}, ... ], ... } sorted by day-of-week then start time.
+    """
+    timetable_entries: pooled TimetableEntry objects from however many
+    student timetables have been scraped/cached so far (see cache.py — a
+    background job or simply "every distinct timetable seen this term" can
+    feed this pool; the function itself doesn't care where they came from).
+
+    faculty_name: matched case-insensitively, substring-tolerant, against
+    each entry's instructor field, since eCampus naming conventions
+    (e.g. "Dr. Hemant Patil" vs "Hemant A. Patil" vs "H. A. Patil") may not
+    match the faculty's display name exactly. If this proves too loose in
+    practice, tighten it against pipeline/config.json's faculty_list, which
+    already has canonical full names.
+
+    Returns: { "Monday": [ {course_code, course_name, start_time, end_time,
+    room, section}, ... ], ... } sorted by day-of-week then start time.
+    """
     needle = faculty_name.strip().lower()
     seen = set()
     matched = []

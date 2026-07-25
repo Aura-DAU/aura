@@ -1,6 +1,32 @@
-# seed_identity_map.py — Populate user_identity_map from an ERP CSV export.
-# Replaces the old seed_users.py. Key differences:
-# python seed_identity_map.py users.csv --deactivate-missing
+"""
+seed_identity_map.py — Populate user_identity_map from an ERP CSV export.
+
+Replaces the old seed_users.py. Key differences:
+  - No password columns (auth is handled by Google SSO via NextAuth.js)
+  - No sessions table or hashing
+  - Idempotent: re-running updates changed rows, never duplicates
+
+CSV format (header row required):
+  erp_id, email, role, dept, full_name, current_year, current_sem, current_sec
+
+  full_name/current_year/current_sem/current_sec are optional and only
+  meaningful for role=student — they're what lets AURA show the right
+  timetable cohort. Leave them blank for faculty/admin rows.
+
+Example:
+  202301234, parth.a@daiict.ac.in, student, ICT, Parth Agrawal, 3, 5, A
+  FAC001, prof.sharma@daiict.ac.in, faculty, ICT, Dr. Sharma, , ,
+
+Run at the start of each semester to pick up new students/faculty and
+deactivate departed ones. The --deactivate-missing flag marks users
+absent from the CSV as is_active=FALSE, which blocks /internal/resolve-identity
+for them immediately.
+
+Usage:
+  python seed_identity_map.py users.csv
+  python seed_identity_map.py users.csv --dry-run
+  python seed_identity_map.py users.csv --deactivate-missing
+"""
 
 import csv
 import sys
@@ -21,6 +47,21 @@ def _validate_row(row: dict, line: int) -> Optional[dict]:
     email  = row.get("email",  "").strip().lower()
     role   = row.get("role",   "").strip().lower()
     dept   = row.get("dept",   "").strip() or None
+    full_name = (row.get("full_name") or "").strip() or None
+
+    def _int_or_none(key: str) -> Optional[int]:
+        val = (row.get(key) or "").strip()
+        if not val:
+            return None
+        try:
+            return int(val)
+        except ValueError:
+            print(f"  [SKIP] line {line}: {key} must be an integer, got {val!r}")
+            return None
+
+    current_year = _int_or_none("current_year")
+    current_sem = _int_or_none("current_sem")
+    current_sec = (row.get("current_sec") or "").strip() or None
 
     if not erp_id or not email:
         print(f"  [SKIP] line {line}: missing erp_id or email")
@@ -32,7 +73,11 @@ def _validate_row(row: dict, line: int) -> Optional[dict]:
     if role not in VALID_ROLES:
         print(f"  [SKIP] line {line}: invalid role '{role}' for {erp_id}")
         return None
-    return {"erp_id": erp_id, "email": email, "role": role, "dept": dept}
+    return {
+        "erp_id": erp_id, "email": email, "role": role, "dept": dept,
+        "full_name": full_name, "current_year": current_year,
+        "current_sem": current_sem, "current_sec": current_sec,
+    }
 
 
 def load_csv(path: str) -> list[dict]:
@@ -47,26 +92,38 @@ def load_csv(path: str) -> list[dict]:
 
 def upsert(user: dict, dry_run: bool) -> str:
     existing = db_conn.query(
-        "SELECT erp_id, email, role, dept, is_active FROM user_identity_map WHERE erp_id = %s",
+        """SELECT erp_id, email, role, dept, is_active,
+                  full_name, current_year, current_sem, current_sec
+           FROM user_identity_map WHERE erp_id = %s""",
         (user["erp_id"],),
     )
     if not existing:
         if not dry_run:
             db_conn.execute(
-                "INSERT INTO user_identity_map (erp_id, email, role, dept) VALUES (%s,%s,%s,%s)",
-                (user["erp_id"], user["email"], user["role"], user["dept"]),
+                """INSERT INTO user_identity_map
+                     (erp_id, email, role, dept, full_name, current_year, current_sem, current_sec)
+                   VALUES (%s,%s,%s,%s,%s,%s,%s,%s)""",
+                (user["erp_id"], user["email"], user["role"], user["dept"],
+                 user["full_name"], user["current_year"], user["current_sem"], user["current_sec"]),
             )
         return "INSERT"
     ex = existing[0]
     changed = (
         ex["email"] != user["email"] or ex["role"] != user["role"] or
-        ex["dept"] != user["dept"] or not ex["is_active"]
+        ex["dept"] != user["dept"] or not ex["is_active"] or
+        ex["full_name"] != user["full_name"] or ex["current_year"] != user["current_year"] or
+        ex["current_sem"] != user["current_sem"] or ex["current_sec"] != user["current_sec"]
     )
     if changed:
         if not dry_run:
             db_conn.execute(
-                "UPDATE user_identity_map SET email=%s, role=%s, dept=%s, is_active=TRUE WHERE erp_id=%s",
-                (user["email"], user["role"], user["dept"], user["erp_id"]),
+                """UPDATE user_identity_map
+                   SET email=%s, role=%s, dept=%s, is_active=TRUE,
+                       full_name=%s, current_year=%s, current_sem=%s, current_sec=%s
+                   WHERE erp_id=%s""",
+                (user["email"], user["role"], user["dept"],
+                 user["full_name"], user["current_year"], user["current_sem"], user["current_sec"],
+                 user["erp_id"]),
             )
         return "UPDATE"
     return "NOOP"

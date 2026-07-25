@@ -1,14 +1,14 @@
 import os
 from dotenv import load_dotenv
-from pipeline.key_manager import KeyManager
+from pipeline.inference_router import InferenceRouter
 
 class QueryRewriter:
 
     def __init__(self):
         load_dotenv()
         self.model = os.getenv(
-            "GROQ_MODEL",
-            "openai/gpt-oss-120b"
+            "VLLM_MODEL",
+            os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
     def rewrite(
@@ -92,7 +92,7 @@ Latest Question:
                 ]
             )
 
-        response = KeyManager.call_with_rotation(_execute_rewrite, max_retries=5)
+        response = InferenceRouter.call_with_rotation(_execute_rewrite, max_retries=5)
 
         # Fix QR1: if the LLM returns an empty string (hallucination or API
         # edge case), fall back to the original query rather than passing ""

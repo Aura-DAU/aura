@@ -1,6 +1,13 @@
-# Short-TTL cache for scraped eCampus pages.
-# Scraping is slow (a real login + page fetch per call) and eCampus may not
-# won't be shared across replicas).
+"""
+Short-TTL cache for scraped eCampus pages.
+
+Scraping is slow (a real login + page fetch per call) and eCampus may not
+appreciate AURA logging in on every single chat message a student sends.
+This cache means "what's my attendance" twice in five minutes only scrapes
+once. Swap the dict-based store for Redis in production if you're running
+more than one AURA backend instance (a single process's in-memory cache
+won't be shared across replicas).
+"""
 
 import time
 import threading
@@ -33,9 +40,9 @@ def set(key: str, value, ttl_seconds: int = DEFAULT_TTL_SECONDS):
 
 
 def invalidate(erp_id: str):
-    # Call this after any action that changes eCampus state on the
-    # student's behalf (none exist yet in the student-read-only phase, but
-    # Course Adjustments/Registration writes later would need this).
+    """Call this after any action that changes eCampus state on the
+    student's behalf (none exist yet in the student-read-only phase, but
+    Course Adjustments/Registration writes later would need this)."""
     with _lock:
         for k in [k for k in _store if k.startswith(f"{erp_id}:")]:
             del _store[k]

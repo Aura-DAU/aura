@@ -1,3 +1,11 @@
+"""
+upload_to_qdrant.py — Ingestion pipeline vector uploader to Qdrant.
+
+Reads embeddings.npy and metadata.json, formats metadata payloads,
+ensures the target collection exists (768-dim, COSINE distance), and
+upserts vector points into Qdrant using parallel threads.
+"""
+
 import json
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -17,6 +25,7 @@ EMBEDDINGS_FILE = SCRIPT_DIR / "../../vector_store/embeddings.npy"
 METADATA_FILE = SCRIPT_DIR / "../../vector_store/metadata.json"
 
 QDRANT_URL = os.getenv("QDRANT_URL", "http://10.100.97.74:6333")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
 COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "aura_documents")
 BATCH_SIZE = 100
 
@@ -28,17 +37,7 @@ def chunk_list(items, batch_size):
 
 def main():
     print(f"Connecting to Qdrant at {QDRANT_URL}...")
-    client = QdrantClient(url=QDRANT_URL)
-
-    # Check if collection exists; create only if it does NOT exist
-    if not client.collection_exists(COLLECTION_NAME):
-        print(f"Creating collection '{COLLECTION_NAME}' (size=768, distance=COSINE)...")
-        client.create_collection(
-            collection_name=COLLECTION_NAME,
-            vectors_config=qmodels.VectorParams(size=768, distance=qmodels.Distance.COSINE),
-        )
-    else:
-        print(f"Collection '{COLLECTION_NAME}' already exists. Preserving existing collection.")
+    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 
     print("Loading embeddings...")
     embeddings = np.load(EMBEDDINGS_FILE)
@@ -48,6 +47,18 @@ def main():
         metadata = json.load(f)
 
     assert len(embeddings) == len(metadata), f"Mismatch: {len(embeddings)} embeddings vs {len(metadata)} metadata items"
+
+    vector_size = int(embeddings.shape[1]) if len(embeddings.shape) > 1 else 768
+
+    # Check if collection exists; create only if it does NOT exist
+    if not client.collection_exists(COLLECTION_NAME):
+        print(f"Creating collection '{COLLECTION_NAME}' (size={vector_size}, distance=COSINE)...")
+        client.create_collection(
+            collection_name=COLLECTION_NAME,
+            vectors_config=qmodels.VectorParams(size=vector_size, distance=qmodels.Distance.COSINE),
+        )
+    else:
+        print(f"Collection '{COLLECTION_NAME}' already exists. Preserving existing collection.")
 
     print(f"Preparing {len(metadata)} points for Qdrant...")
     points = []

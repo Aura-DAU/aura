@@ -1,8 +1,15 @@
+import { getServerSession } from "next-auth"
 import { z } from "zod"
-import { backendUrl, type BackendChatRequest } from "@/lib/api/backend"
+
+import {
+  backendUrl,
+  type BackendChatRequest,
+  type BackendChatResponse,
+} from "@/lib/api/backend"
+import { authOptions } from "@/lib/auth/options"
+import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
 export const maxDuration = 60
-
 
 const historyTurnSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -23,7 +30,64 @@ const requestSchema = z.object({
   studentProfile: studentProfileSchema.optional(),
 })
 
+function sseLine(data: unknown): string {
+  return `data: ${JSON.stringify(data)}\n\n`
+}
+
+function toLineNumber(v: unknown): number | undefined {
+  if (typeof v === "number" && Number.isFinite(v)) return v
+  if (typeof v === "string" && v.trim() !== "" && !Number.isNaN(Number(v))) {
+    return Number(v)
+  }
+  return undefined
+}
+
+function normaliseSource(
+  s:
+    | string
+    | {
+        file?: string
+        url?: string
+        title?: string
+        path?: string
+        start_line?: number | string | null
+        end_line?: number | string | null
+        visibility?: string
+        authorization?: string[]
+      },
+): {
+  file: string
+  title?: string
+  path?: string
+  startLine?: number
+  endLine?: number
+  visibility?: string
+  authorization?: string[]
+} | null {
+  if (typeof s === "string") return { file: s }
+  if (s && typeof s === "object") {
+    const file = s.file || s.url || s.path || ""
+    if (file) {
+      return {
+        file,
+        title: s.title,
+        path: s.path || undefined,
+        startLine: toLineNumber(s.start_line),
+        endLine: toLineNumber(s.end_line),
+        visibility: s.visibility,
+        authorization: s.authorization,
+      }
+    }
+  }
+  return null
+}
+
 export async function POST(req: Request) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.erpId || !session.user.role) {
+    return new Response("Unauthorized", { status: 401 })
+  }
+
   let body: unknown
   try {
     body = await req.json()
@@ -36,10 +100,12 @@ export async function POST(req: Request) {
     return new Response("Invalid request", { status: 400 })
   }
 
-  const authHeader = req.headers.get("Authorization")
-  if (!authHeader) {
-    return new Response("Unauthorized", { status: 401 })
-  }
+  const internalToken = signInternalJwt({
+    role: session.user.role,
+    erpId: session.user.erpId,
+    department: session.user.department,
+    email: session.user.email ?? undefined,
+  })
 
   // Map studentProfile → userProfile for FastAPI; cap history for cost/latency.
   const payload: BackendChatRequest = {
@@ -50,11 +116,11 @@ export async function POST(req: Request) {
 
   let backendRes: Response
   try {
-    backendRes = await fetch(backendUrl("/chat/stream"), {
+    backendRes = await fetch(backendUrl("/chat"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: authHeader,
+        Authorization: `Bearer ${internalToken}`,
       },
       body: JSON.stringify({
         question: payload.question,
@@ -72,16 +138,41 @@ export async function POST(req: Request) {
     return new Response("Question limit reached", { status: 429 })
   }
 
-  if (!backendRes.ok || !backendRes.body) {
+  if (!backendRes.ok) {
     const text = await backendRes.text().catch(() => "")
     console.error("[chat] backend error:", backendRes.status, text)
     return new Response("Backend error", { status: 502 })
   }
 
-  // The backend emits the exact SSE events the client parses
-  // (text-delta / citations / personal-data-flag / [DONE]) — pipe it through
-  // so tokens reach the browser as they are generated.
-  return new Response(backendRes.body, {
+  let data: BackendChatResponse
+  try {
+    data = (await backendRes.json()) as BackendChatResponse
+  } catch {
+    return new Response("Invalid backend response", { status: 502 })
+  }
+
+  const answer = data?.answer ?? ""
+  const isPersonalData = data?.is_personal_data === true
+  const citations = (data?.sources ?? [])
+    .map(normaliseSource)
+    .filter((c): c is NonNullable<ReturnType<typeof normaliseSource>> => c !== null)
+
+  const stream = new ReadableStream<Uint8Array>({
+    start(controller) {
+      const encoder = new TextEncoder()
+      controller.enqueue(encoder.encode(sseLine({ type: "text-delta", delta: answer })))
+      if (citations.length > 0) {
+        controller.enqueue(encoder.encode(sseLine({ type: "citations", citations })))
+      }
+      if (isPersonalData) {
+        controller.enqueue(encoder.encode(sseLine({ type: "personal-data-flag" })))
+      }
+      controller.enqueue(encoder.encode("data: [DONE]\n\n"))
+      controller.close()
+    },
+  })
+
+  return new Response(stream, {
     headers: {
       "Content-Type": "text/event-stream; charset=utf-8",
       "Cache-Control": "no-cache, no-transform",

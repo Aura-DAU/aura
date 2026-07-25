@@ -1,6 +1,15 @@
-# High-level client used by tool handlers — replaces the OAuth-based
-# ECampusClient from AURA_Agentic_ECampus_Tools.md. Same external shape
-# result = client.get_result()
+"""
+High-level client used by tool handlers — replaces the OAuth-based
+ECampusClient from AURA_Agentic_ECampus_Tools.md. Same external shape
+(one method per data type) so tool_registry.py's handlers barely change,
+but internally this logs into the portal and scrapes instead of calling a
+REST API.
+
+Usage pattern (see tool_registry.py for the full picture):
+
+    client = ECampusClient(erp_id="202301015")
+    result = client.get_result()
+"""
 
 from typing import Optional
 from . import pages, parsers, cache, credentials_vault, timetable, timetable_pool, faculty_schedule
@@ -46,8 +55,8 @@ class ECampusClient:
         return self._get_cached_or_fetch(pages.Pages.RESULT, parsers.parse_result)
 
     def get_cgpa(self) -> dict:
-        # Derived from the Result page rather than scraped separately —
-        # there's no indication eCampus exposes CGPA on its own page.
+        """Derived from the Result page rather than scraped separately —
+        there's no indication eCampus exposes CGPA on its own page."""
         result = self.get_result()
         return {
             "cgpa_raw_label": result.get("cgpa_raw_label"),
@@ -105,8 +114,8 @@ class ECampusClient:
 
 
 def get_faculty_schedule(faculty_name: str) -> dict:
-    # Module-level, not tied to a student's session — pulls from the pool
-    # accumulated across every student's get_timetable() call so far. No
-    # eCampus login as faculty required for this in phase 1.
+    """Module-level, not tied to a student's session — pulls from the pool
+    accumulated across every student's get_timetable() call so far. No
+    eCampus login as faculty required for this in phase 1."""
     entries = timetable_pool.load_all_entries()
     return faculty_schedule.build_faculty_schedule(entries, faculty_name)

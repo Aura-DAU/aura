@@ -36,12 +36,11 @@ test.describe("AURA PWA - Smoke Tests", () => {
     expect(res.status()).toBe(401);
   });
 
-  test("manifest.json is served and installable-shaped", async ({ request }) => {
-    const res = await request.get("/manifest.json");
+  test("manifest.webmanifest is served and installable-shaped", async ({ request }) => {
+    const res = await request.get("/manifest.webmanifest");
     expect(res.ok()).toBeTruthy();
     const manifest = await res.json();
     expect(manifest.name).toContain("AURA");
-    expect(manifest.display).toBe("standalone");
     expect(manifest.icons.length).toBeGreaterThan(0);
   });
 

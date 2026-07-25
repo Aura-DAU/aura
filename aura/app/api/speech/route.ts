@@ -1,8 +1,17 @@
+import { getServerSession } from "next-auth"
+
 import { backendUrl } from "@/lib/api/backend"
+import { authOptions } from "@/lib/auth/options"
+import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
 export const maxDuration = 60
 
 export async function POST(req: Request) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.erpId || !session.user.role) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
   const formData = await req.formData().catch(() => null)
   const file = formData?.get("audio")
 
@@ -21,17 +30,19 @@ export async function POST(req: Request) {
   const forwarded = new FormData()
   forwarded.append("file", file, filename)
 
-  const authHeader = req.headers.get("Authorization")
-  if (!authHeader) {
-    return Response.json({ error: "Unauthorized" }, { status: 401 })
-  }
+  const internalToken = signInternalJwt({
+    role: session.user.role,
+    erpId: session.user.erpId,
+    department: session.user.department,
+    email: session.user.email ?? undefined,
+  })
 
   let backendRes: Response
   try {
     backendRes = await fetch(backendUrl("/speech"), {
       method: "POST",
       headers: {
-        "Authorization": authHeader
+        Authorization: `Bearer ${internalToken}`,
       },
       body: forwarded,
     })
@@ -41,16 +52,10 @@ export async function POST(req: Request) {
   }
 
   if (!backendRes.ok) {
-    let detail: string | undefined
-    try {
-      const json = (await backendRes.json()) as { detail?: string }
-      detail = json.detail
-    } catch {
-      /* non-JSON body */
-    }
+    console.error("[speech] backend error:", backendRes.status)
     return Response.json(
-      { error: detail ?? "Transcription failed" },
-      { status: backendRes.status },
+      { error: "Transcription failed" },
+      { status: backendRes.status >= 500 ? 502 : backendRes.status },
     )
   }
 

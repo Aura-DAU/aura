@@ -1,9 +1,19 @@
 fastapi
 uvicorn
 pydantic
+# Phase B (vLLM migration): vLLM's OpenAI-compatible server is called via
+# the standard `openai` client (see pipeline/inference_router.py). `groq`
+# is no longer imported anywhere in pipeline/ except the deprecated,
+# unused pipeline/key_manager.py (kept for reference).
+openai
 groq
-pinecone
+# Phase A (Qdrant migration): replaces `pinecone` as the vector store client
+# (see pipeline/retrieval/qdrant_client.py). `pinecone` is no longer
+# imported anywhere in pipeline/ except the deprecated, unused
+# upload_to_pinecone.py (kept for reference).
 qdrant-client
+pinecone
+langgraph
 sentence-transformers
 torch
 openai-whisper
@@ -14,6 +24,7 @@ numpy
 transformers
 rapidfuzz>=3.5.0
 rank-bm25
+redis>=5.0.0
 
 # Auth, ERP integration, security
 requests
@@ -22,3 +33,10 @@ cryptography
 PyJWT
 psycopg2-binary
 bcrypt
+
+# Timetable notifications
+redis
+pywebpush
+
+# Observability (architecture doc §Containerization — aura-prometheus / aura-grafana)
+prometheus-client

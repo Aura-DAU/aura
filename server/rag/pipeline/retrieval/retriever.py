@@ -2,7 +2,6 @@ import os
 import logging
 from pathlib import Path
 from dotenv import load_dotenv
-from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 
 # Query-time embeddings MUST use the same model as ingestion-time
@@ -11,13 +10,10 @@ from pipeline.ingestion.chunking.config import MODEL_NAME
 
 from pipeline.retrieval.bm25_retriever import BM25Retriever
 from pipeline.retrieval.rrf import fuse
+from pipeline.retrieval.qdrant_client import build_index_adapter
 
 logger = logging.getLogger(__name__)
 TOP_K = 3
-
-# BGE-style instruction prefix — must be identical for every query embedding
-# (single source of truth for retrieve() and encode_queries()).
-QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
 
 
 class Retriever:
@@ -51,58 +47,42 @@ class Retriever:
                 metadata_path
             )
         
-        self.index = None
-        try:
-            pc = Pinecone(
-                api_key=os.getenv(
-                    "PINECONE_API_KEY"
-                )
-            )
-            self.index = pc.Index(
-                os.getenv(
-                    "PINECONE_INDEX"
-                )
-            )
-            logger.info("Pinecone Index initialized successfully.")
-        except Exception as e:
-            logger.warning("Failed to initialize Pinecone Index: %s. Dense search will be disabled.", e)
-
-    def encode_queries(self, queries):
-        # Embed many query strings in ONE forward pass. Batching N texts is
-        # far cheaper than N sequential encode() calls, and callers can pass
-        # each row back into retrieve() via precomputed_embedding.
-        return self.model.encode(
-            [QUERY_PREFIX + q for q in queries],
-            normalize_embeddings=True,
-            convert_to_numpy=True
-        )
+        # Phase A: dense vector search now goes through Qdrant instead of
+        # Pinecone (see qdrant_client.py). build_index_adapter() returns an
+        # object with the same .query(vector=, top_k=, include_metadata=,
+        # filter=) shape pinecone.Index had, so nothing below this line
+        # needed to change.
+        self.index = build_index_adapter()
 
     def retrieve(
         self,
         query,
         top_k=TOP_K,
         metadata_filter=None,
-        allowed_roles=None,
-        precomputed_embedding=None
+        allowed_roles=None
     ):
 
-        # TEMPORARY FIX: Pinecone currently lacks the 'allowed_roles' metadata field,
-        # so applying the DLS metadata_filter returns 0 chunks for ALL queries.
+        # TEMPORARY FIX: metadata used to lack the 'allowed_roles' field,
+        # so applying the DLS metadata_filter returned 0 chunks for ALL queries.
         # Disabling filter until vectors are re-ingested with correct metadata.
         pinecone_filter = metadata_filter
-        if os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
+        if os.getenv("DISABLE_DLS_FILTER", os.getenv("DISABLE_PINECONE_DLS_FILTER", "false")).lower() == "true":
             pinecone_filter = None
-
-        if precomputed_embedding is not None:
-            query_embedding = precomputed_embedding
-        else:
-            query_embedding = self.encode_queries([query])[0]
+        
+        query_embedding = self.model.encode(
+            [
+                "Represent this sentence for searching relevant passages: "
+                + query
+            ],
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
 
         dense_results = []
         if self.index:
             try:
                 results = self.index.query(
-                    vector=query_embedding.tolist(),
+                    vector=query_embedding[0].tolist(),
                     top_k=top_k,
                     include_metadata=True,
                     filter=pinecone_filter
@@ -150,9 +130,14 @@ class Retriever:
         self,
         chunk_ids: list[str],
     ) -> list[dict]:
-        # Hydrate a list of chunk IDs into full result dicts using the local
-        # BM25 metadata store.  Used by the retrieval pipeline to pull
-        # score is set to 0.0 (entity-match is boolean; reranker scores it).
+        """
+        Hydrate a list of chunk IDs into full result dicts using the local
+        BM25 metadata store.  Used by the retrieval pipeline to pull
+        entity-matched chunks without an extra Pinecone query.
+
+        Returns only chunks whose IDs are present in the local store.
+        score is set to 0.0 (entity-match is boolean; reranker scores it).
+        """
         if not self.bm25 or not chunk_ids:
             return []
 

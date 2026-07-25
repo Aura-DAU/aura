@@ -22,7 +22,7 @@ this class; that hunk was intentionally NOT applied — see review notes.)
 import os
 import re
 from dotenv import load_dotenv
-from groq import Groq
+from pipeline.inference_router import InferenceRouter
 
 load_dotenv()
 
@@ -124,10 +124,10 @@ class WellnessGuardrail:
     """
 
     def __init__(self) -> None:
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        self.client = InferenceRouter.get_client()
         # llama-3.3-70b-versatile: fast, instruction-following, available on Groq.
-        # Override via GROQ_WELLNESS_MODEL env var if needed.
-        self.model = os.getenv("GROQ_WELLNESS_MODEL", "llama-3.3-70b-versatile")
+        # Override via VLLM_WELLNESS_MODEL env var if needed.
+        self.model = os.getenv("VLLM_WELLNESS_MODEL", os.getenv("GROQ_WELLNESS_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
     # ------------------------------------------------------------------
     # Public API

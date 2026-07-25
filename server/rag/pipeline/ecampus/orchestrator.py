@@ -1,14 +1,31 @@
-# Agent orchestrator for personal/eCampus-backed queries. This is a SEPARATE
-# path from the existing RAG flow in aura_chat.py — it only runs when
-# unmodified RAG pipeline in aura_chat.py.
+"""
+Agent orchestrator for personal/eCampus-backed queries. This is a SEPARATE
+path from the existing RAG flow in aura_chat.py — it only runs when
+intent_router.py classifies a query as needing live, person-specific data
+(CGPA, attendance, fees, faculty schedule, etc.) rather than general
+knowledge. General knowledge questions continue through the existing,
+unmodified RAG pipeline in aura_chat.py.
+"""
 
 import os
 import json
 from typing import Optional, List
 from dotenv import load_dotenv
 
-from ..key_manager import KeyManager
-from .tool_registry import tools_for_role, TOOL_REGISTRY
+from ..inference_router import InferenceRouter
+from .tool_registry import tools_for_role as _ecampus_tools_for_role, TOOL_REGISTRY as _ECAMPUS_TOOL_REGISTRY
+from ..timetable.tool_registry import tools_for_role as _timetable_tools_for_role, TOOL_REGISTRY as _TIMETABLE_TOOL_REGISTRY
+
+# Merged view used by this orchestrator. Kept as two separate source-of-truth
+# registries (pipeline.ecampus.tool_registry stays strictly read-only against
+# the ERP; pipeline.timetable.tool_registry is the one place AURA writes its
+# own, student-scoped data) so the read-only regression test for the ecampus
+# package (test_write_tool_removal.py) keeps guarding just that package.
+MERGED_TOOL_REGISTRY = {**_ECAMPUS_TOOL_REGISTRY, **_TIMETABLE_TOOL_REGISTRY}
+
+
+def _tools_for_role(role: str):
+    return _ecampus_tools_for_role(role) + _timetable_tools_for_role(role)
 
 SYSTEM_PROMPT = """You are AURA, DAU's academic assistant, handling a request that
 needs the requester's own live academic data (or, for faculty, data a student has
@@ -34,20 +51,20 @@ Rules:
 class EcampusOrchestrator:
     def __init__(self):
         load_dotenv()
-        self.model = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
-        # No self.client — every LLM call goes through KeyManager.call_with_rotation
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        # No self.client — every LLM call goes through InferenceRouter.call_with_rotation
         # so this orchestrator participates in key rotation just like every
         # other pipeline component.
 
     def _call_llm(self, messages: list, tools: Optional[list] = None, tool_choice: Optional[str] = None) -> object:
-        # Single LLM call through KeyManager so daily-limit rotation applies here too.
+        """Single LLM call through InferenceRouter so node failover applies here too."""
         model = self.model
         def _fn(client):
             kwargs: dict = {"model": model, "messages": messages}
             if tools:       kwargs["tools"] = tools
             if tool_choice: kwargs["tool_choice"] = tool_choice
             return client.chat.completions.create(**kwargs)
-        return KeyManager.call_with_rotation(_fn, max_retries=3)
+        return InferenceRouter.call_with_rotation(_fn, max_retries=3)
 
     def _tool_schemas(self, role: str) -> list[dict]:
         return [
@@ -59,7 +76,7 @@ class EcampusOrchestrator:
                     "parameters": t.parameters,
                 },
             }
-            for t in tools_for_role(role)
+            for t in _tools_for_role(role)
         ]
 
     def run(self, query: str, identity: dict, history: Optional[list] = None) -> dict:
@@ -89,7 +106,7 @@ class EcampusOrchestrator:
 
         tool_messages = []
         for call in msg.tool_calls:
-            tool = TOOL_REGISTRY.get(call.function.name)
+            tool = MERGED_TOOL_REGISTRY.get(call.function.name)
             if tool is None or identity["role"] not in tool.allowed_roles:
                 # Defense in depth: even if the model somehow names a tool it
                 # wasn't given a schema for, refuse rather than execute it.
