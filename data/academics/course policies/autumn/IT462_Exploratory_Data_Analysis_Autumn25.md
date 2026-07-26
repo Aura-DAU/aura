@@ -1,14 +1,14 @@
----
-title: "IT462 Exploratory Data Analysis Autumn 2025"
+﻿---
+title: "IT462 Exploratory Data Analysis Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "IT462_ExploratoryDataAnalysis_Autumn25 - Gopinath Panda.pdf"
+pdf_name: "IT462__2026-27__IT462_Exploratory Data Analysis _Autumn26 - Gopinath Panda.pdf"
 course_code: "IT462"
-semester: "Autumn 2025"
+semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
@@ -22,37 +22,35 @@ authorization: ["student", "faculty"]
 | **Course Name** | Exploratory Data Analysis |
 | **Instructor(s)** | Gopinath Panda |
 | **Credits** | 3-0-2-4 |
-| **Semester Offered** | Autumn 2025 |
-| **Type** | Technical Elective |
-| **Program(s)** | B.Tech; M.Sc-DS |
-| **Year / Semester in Program** | B.Tech — Semester VI, VIII; M.Sc-DS — Semester II |
-| **Associated Lab** | Integrated (2 lab hours per week; 3 hours lecture and 2 hours laboratory every week) |
-| **Prerequisites** | None explicitly stated |
+| **Semester Offered** | Autumn Semester (AY 2026-27) |
+| **Type** | Program Elective |
+| **Program(s)** | Both UG & PG |
+| **Year / Semester in Program** | Not specified beyond program level |
+| **Associated Lab** | Embedded lab component, 2 hours laboratory every week |
+| **Prerequisites** | A strong foundation in basic probability & statistics, elementary calculus, Python packages |
 | **Foundation For** | None stated |
+
+Course Format: 3 hours lecture and 2 hours laboratory every week.
 
 ---
 
 ## Course Description
 
-This course provides students a foundation for exploring data using the Python programming language. In particular, it covers numerical and graphical techniques for summarizing and displaying data. The course covers the following content: statistics and data, reading, cleaning, summarizing, and visualizing data using Python.
+Exploratory Data Analysis (EDA) focuses on understanding data before formal modeling. The course teaches methods to inspect, summarize, clean, visualize, and transform datasets to discover patterns, anomalies, missingness, structure, and relationships. Students learn both classical statistical EDA and modern Python-based workflows for real-world data analysis.
 
-**Course Aim:** The course's primary aim is to introduce students to the graphical and modeling techniques for exploring data, emphasizing visualization, interpretation, and clear communication of findings. The course will use modern software tools for data manipulation and visualization. It will build a foundation for exploring data using Python. The intention is that the student develops an intuition for statistical data analysis.
+The course's primary aim is to introduce students to the graphical and modeling techniques for exploring data, emphasizing visualization, interpretation, and clear communication of findings. The course will use modern software tools for data manipulation and visualization, building a foundation for exploring data using Python. The intention is that the student develops an intuition for statistical data analysis. The course emphasizes hands-on experiments with inbuilt as well as real datasets using the concepts/tools discussed in the theory classes.
+
+After completion of this course, students will be able to: understand data types, structures, and measurement scales; perform data cleaning and preprocessing; summarize and visualize univariate and multivariate data; detect missingness, outliers, anomalies, and bias; perform feature engineering and transformation; and communicate insights using statistical reasoning and dashboards.
 
 ---
 
 ## Course Outcomes (COs)
 
-After completing the course, the student will have the ability to:
-
 | CO | Description |
 |---|---|
-| CO1 | Import, manipulate, clean, visualize, and export data in Python. |
-| CO2 | Wrangle data from its original format into a fit-for-purpose format. |
-| CO3 | Conduct a systematic exploratory data analysis of different types of data. |
-| CO4 | Identify, formulate, and analyze complex engineering problems, reaching substantiated conclusions using the first principles of mathematics. [P2] |
-| CO5 | Use research methods, including design of experiments, analysis and interpretation of data, and synthesis of information to provide valid conclusions. [P4] |
-| CO6 | Create, select, and apply appropriate techniques, resources, and IT tools, including prediction and modeling, to complex engineering activities with an understanding of the limitations. [P5] |
-| CO7 | Recognize the need for, and have the preparation and ability to engage in, independent and life-long learning in the broadest context of technological change. [P12] |
+| CO1 | Import, manipulate, clean, visualize, and export data in Python |
+| CO2 | Conduct a systematic exploratory data analysis of different types of data |
+| CO3 | Use research methods, including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions |
 
 ---
 
@@ -66,21 +64,27 @@ After completing the course, the student will have the ability to:
 
 ## Course Structure
 
-| Unit | Topic | No. of Lectures | Lab Work |
-|---|---|---|---|
-| 1 | Introduction to Data: Statistics and Data; Collection and Classification of Data; Variables and Measurement Scales; Resources for working with data | 5 | Python Basics, Python Installation, Jupyter Notebook/Google Colab, Packages, Libraries, Data types |
-| 2 | Reading Data: Methods of Data Collection; Import Data; Reading Data; Understanding data; Representing Data | 5 | Import data from different sources, Reading Data from different formats, Data Inspection, Getting insights about the dataset, Get values from specific locations |
-| 3 | Cleaning Data: Examining Data; Finding Outliers; Finding Missing values; Correcting Data; Transform Data | 10 | Operations on data, Handling & removing outliers, Checking missing values, looking for incompatibility, Reorder/Reformat/Reshape |
-| 4 | Summarizing and Visualizing Data: Describe Data; Summarize Data; Visualize Data; Distribution of Data | 15 | Identify variables/types/patterns, Mean/median/variance/SD/percentile, Histogram/Box/QQ/Scatter plots, Measuring chance under distributions |
-| 5 | Fitting Data: Introduction; Regression models; Goodness of fit; Limitations | 6 | Inspect data & specify a fit, Linear & multiple regression, Curve fitting |
-| 6 | Final Project: Preparation; Presentation; Discussion; Communication, Submission | Not specified | Collect own data from data.gov.in, Perform EDA on the collected dataset, Discuss difficulties with peer/Instructor, Report submission & Presentation |
-| **Total** | | **41 (lecture units 1–5)** | |
+| Unit | Topic | No. of Lectures |
+|---|---|---|
+| Data and Statistics | What is Data? Data Science Pipeline, Role of EDA in ML, Structured vs Unstructured Data, Population vs Sample | 3 |
+| Measurement Scales | Nominal Scale, Ordinal Scale, Interval Scale, Ratio Scale, Discrete vs Continuous Variables | 4 |
+| Data Collection & Sampling | Census vs Sample, Sampling Bias, Random Sampling, Stratified Sampling, Cluster Sampling, Design of experiments | 3 |
+| Data Import & Cleaning | Import data from different sources, Data Inspection, Getting insights about the dataset, Duplicate Detection, Inconsistent Formats, Invalid Entries, Data Type Conversion, Encoding Issues, Transformation | 5 |
+| Missing Data Analysis | Missingness Mechanisms: MCAR, MAR, MNAR; Missingness Visualization, Missing Data Treatment | 5 |
+| Descriptive Summary | Measures of Central Tendency, Shape, Variation, Relationship: Mean, Median, Mode, Variance, Standard Deviation, IQR, MAD, Coefficient of Variation, Five number summary | 3 |
+| Univariate & Bivariate Analysis | Numeric visualization methods: Histogram, Density Plot, Boxplot, Violin Plot, Bar Chart, Scatter Plot, Covariance, Correlation, Crosstab, Heatmap | 5 |
+| Correlation Analysis & Data Fitting | Pearson Correlation, Spearman Correlation, Correlation Matrix, Multicollinearity, Regression models: Linear & multiple regression, Goodness of fit | 5 |
+| Advanced EDA, Building Dashboards | PCA, Time Series EDA, Trend Detection, Seasonality, ydata-profiling, Sweetviz, D-Tale, Plotly Dashboards, Data Storytelling, Tableau, PowerBI. Collect your own data from data.gov.in | 5 |
+| Final Project | Perform EDA on the collected dataset. Discuss difficulties with peer/instructor, report submission, presentation | 2 |
+| **Total** | | **40** |
+
+*Note: The source document states "An updated syllabus will be shared before the start of the class with the registered students."*
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule with dates is available in the source document. Only a topic-wise lecture plan (Lecture Schedule) is provided above.*
+*Note: No weekly (dated) lecture schedule is available in the source document; only the module-wise lecture distribution shown above is provided.*
 
 ---
 
@@ -88,25 +92,12 @@ After completing the course, the student will have the ability to:
 
 | Component | Weightage |
 |---|---|
-| Attendance | 5% |
-| Quizzes/Assignments | 25% |
-| Project/Tests/Viva | 30% |
-| Semester Exam | 40% |
+| Lab Assignments / Quizzes (A) | 25% |
+| Two In-Semester Examinations (M) | 25% |
+| Final Project (P) | 50% |
 | **Total** | **100%** |
 
-**Assessment methods:** Homework/Assignments, Online quizzes/tests in Moodle, Online discussion in Moodle, term examination, and a Final Project.
-
-**Final letter grade scale:**
-
-| Grade | Range |
-|---|---|
-| A | 90% – 100% |
-| B | 80% – 90% (exclusive of 90%) |
-| C | 70% – 80% (exclusive of 80%) |
-| D | 60% – 70% (exclusive of 70%) |
-| F | 0% – 60% (exclusive of 60%) |
-
-*Note: This grading policy is subject to change; the final grading policy will be updated once the class starts.*
+Final score formula: S = 0.25A + 0.25M + 0.5P. Final letter grades (AA-F) are assigned using relative grading based on class performance, final score distribution, minimum passing requirements, and instructor discretion.
 
 ---
 
@@ -114,7 +105,7 @@ After completing the course, the student will have the ability to:
 
 ### Textbook(s)
 
-1. J.W. Tukey, *Exploratory Data Analysis*.
+1. J. W. Tukey, *Exploratory Data Analysis*.
 
 ### Reference Books
 
@@ -122,25 +113,26 @@ After completing the course, the student will have the ability to:
 2. Allen B. Downey, *Think Stats: Exploratory Data Analysis*, 2014.
 3. Ronald K. Pearson, *Exploratory Data Analysis Using R*, CRC Press.
 4. Unwin Antony, *Graphical Data Analysis with R*.
-5. S.H.C. DuToit, A.G.W. Steyn, R.H. Stumpf, *Graphical Exploratory Data Analysis*.
+5. S. H. C. DuToit, A. G. W. Steyn, R. H., *Graphical Exploratory Data Analysis*.
 
 ### Online Resources
 
-- Moodle (used for online quizzes/tests and discussions).
-- data.gov.in (used for final project data collection).
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-IT462 Exploratory Data Analysis is a Technical Elective for B.Tech students (Semester VI, VIII) and M.Sc-DS students (Semester II), with a 3-0-2-4 credit structure (3 hours lecture and 2 hours laboratory every week).
+IT462 is a Program Elective open to both UG and PG students, offered in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-- The final project requires students to collect their own data from data.gov.in and perform exploratory data analysis on the collected dataset, followed by presentation and report submission.
-- The course emphasizes practical, hands-on data analysis skills using Python (Jupyter Notebook/Google Colab).
+- **Academic Integrity (as stated in source)**: Students must adhere to principles of academic integrity, ensuring that all work submitted is their own, properly attributed, and free from plagiarism or unauthorized collaboration. Cheating and plagiarism will not be tolerated in tests, assignments, projects, etc.; it will result in a Fail grade for the work or examination and may lead to disciplinary actions.
+- **Use of AI (as stated in source)**: Use of AI is encouraged as a student's assistant; however, generating class assignments, project reports, and any graded components will be considered plagiarism if not given credit for the way the AI was used.
+- **Make-up exams (as stated in source)**: All make-up exams are scheduled and given at the instructor's discretion, and are only given to students who coordinate the missing of an exam before the originally scheduled exam date and time, or for an emergency.
+- Course materials will be browsed through the Moodle portal.
 
 ---
 
@@ -148,7 +140,7 @@ IT462 Exploratory Data Analysis is a Technical Elective for B.Tech students (Sem
 
 | Resource | Type | Link |
 |---|---|---|
-| IT462_ExploratoryDataAnalysis_Autumn25 - Gopinath Panda.pdf | PDF | [Download IT462_ExploratoryDataAnalysis_Autumn25 - Gopinath Panda.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| IT462__2026-27__IT462_Exploratory Data Analysis _Autumn26 - Gopinath Panda.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -156,7 +148,7 @@ IT462 Exploratory Data Analysis is a Technical Elective for B.Tech students (Sem
 
 | Field | Value |
 |---|---|
-| **Source PDF** | IT462_ExploratoryDataAnalysis_Autumn25 - Gopinath Panda.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | IT462__2026-27__IT462_Exploratory Data Analysis _Autumn26 - Gopinath Panda.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

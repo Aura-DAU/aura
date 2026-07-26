@@ -20,14 +20,19 @@ def _time_range_overlaps(
     return s1 < e2 and s2 < e1
 
 
+# Bug 7 fix: define IST as a proper timezone object instead of hard-coding
+# a +5:30 offset arithmetic, so astimezone() works correctly regardless of
+# the source offset in the event's dateTime string.
+_IST = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
+
+
 def _parse_time(dt_str: Optional[str]) -> Optional[datetime.time]:
     if not dt_str:
         return None
     try:
-        # ISO format: 2026-07-04T10:30:00Z
+        # ISO format: 2026-07-04T10:30:00Z or with +HH:MM offset
         dt = datetime.datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
-        # Convert to IST (UTC+5:30)
-        dt_ist = dt + datetime.timedelta(hours=5, minutes=30)
+        dt_ist = dt.astimezone(_IST)
         return dt_ist.time().replace(tzinfo=None)
     except (ValueError, AttributeError):
         return None

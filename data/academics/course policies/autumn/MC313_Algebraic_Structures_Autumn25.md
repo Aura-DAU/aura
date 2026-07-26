@@ -1,73 +1,87 @@
----
-title: "MC313 Algebraic Structures Autumn 2025-26"
+﻿---
+title: "MC313 Algebraic Structure Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "MC313_Algebraic_Structures - Gautam Dutta.pdf"
+pdf_name: "MC313__2026-27__MC313_Algebraic Structure_Autumn_26 - Sudip Bera.pdf"
 course_code: "MC313"
-semester: "Autumn 2025-26"
+semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
-# MC313: Algebraic Structures
+# MC313: Algebraic Structure
 
 ## Course Overview
 
 | Field | Details |
 |---|---|
 | **Course Code** | MC313 |
-| **Course Name** | Algebraic Structures |
-| **Instructor(s)** | Gautam Dutta |
-| **Credits** | Not explicitly stated in source document |
-| **Semester Offered** | Autumn 2025-26 |
-| **Type** | Not explicitly stated in source document |
-| **Program(s)** | B.Tech-MnC |
-| **Year / Semester in Program** | Not further specified |
+| **Course Name** | Algebraic Structure |
+| **Instructor(s)** | Sudip Bera |
+| **Credits** | 3-1-0-4 (L-T-P-C) |
+| **Semester Offered** | Autumn Semester (AY 2026-27) |
+| **Type** | Core |
+| **Program(s)** | B.Tech. (Mathematics and Computing) |
+| **Year / Semester in Program** | Third year |
 | **Associated Lab** | None |
-| **Prerequisites** | None explicitly stated |
-| **Foundation For** | None stated |
+| **Prerequisites** | None stated |
+| **Foundation For** | Coding theory and cryptography (via finite algebraic structures) |
+
+Course Format: 3 hours lecture every week and 1 tutorial per week.
 
 ---
 
 ## Course Description
 
-**Objective:** A good way to study a system, natural or engineered, is to find its invariances, because these quantities define or label the system completely. An invariant quantity is related to a symmetry operation on the system. Since the set of symmetry operations forms a Group, it becomes imperative for scientists and engineers to understand the basic ideas of Group and its representations in vector spaces. This brings in the need to emphasize the structural aspects of algebra rather than only computational aspects. The codes in Information and Communication Technology are based on certain discrete groups and Fields. Hence, the objective of the course is to give a comprehensive understanding of these algebraic structures. Emphasis is on the similarity of various structures, i.e., homomorphism, so that students learn to map seemingly different problems using the underlying abstract algebraic structure.
+A good way to study a system, natural or engineered, is to find its invariances because these quantities define or label the system completely. An invariant quantity is related to a symmetry operation on the system. Since the set of symmetry operations form a Group, it becomes imperative for scientists and engineers to understand the basic ideas of Group and its representations in vector spaces. This brings in the need to emphasize the structural aspects of algebra rather than only computational. The codes in Information and Communication Technology are based on certain discrete groups and Fields. Hence the objective of the course is to give a comprehensive understanding of these algebraic structures. Emphasis is on the similarity of the various structures, i.e., homomorphism, so that students learn to map seemingly different problems using the underlying abstract algebraic structure.
 
 ---
 
 ## Course Outcomes (COs)
 
-Students learn the important algebraic structures of Groups and Fields which one encounters in various areas of Science and Engineering. They learn homomorphism and the important theorems of homomorphism which help in understanding and interpreting various aspects of a given algebraic structure. Introduction to a variety of Rings and Fields helps them generalize the structure of integers, real, and complex numbers. Some of these fields, like ⟨Zₙ, ⊕⟩ and ⟨Zₙ*, ⊗⟩, are useful in coding and cryptography.
+Upon successful completion of this course, students will:
+
+| CO | Description |
+|---|---|
+| CO1 | Acquire a sound understanding of the fundamental algebraic structures of groups and fields encountered in various areas of science and engineering |
+| CO2 | Understand homomorphisms and the fundamental homomorphism theorems, enabling them to analyze and interpret algebraic structures |
+| CO3 | Generalize the properties of integers, real numbers, and complex numbers through the study of rings and fields |
+| CO4 | Appreciate the role of finite algebraic structures in coding theory and cryptography |
+
+Through this course students can develop the ability to:
+- Apply the knowledge of mathematics, science, engineering fundamentals, and engineering specialization to the solution of complex engineering problems (PO1)
+- Understand and create mathematical arguments for solving problems (PO2)
+- Understand mathematical structures such as groups, rings, and fields, and learn their uses (PO12)
+- Develop skills towards mathematical modeling and analysis of engineering problems (PO3, PO4)
 
 ---
 
 ## Program Outcome Mapping (PO Mapping)
 
-*Note: No PO mapping table is present in the source document.*
+| PO1 | PO2 | PO3 | PO4 | PO5 | PO6 | PO7 | PO8 | PO9 | PO10 | PO11 | PO12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| X | X | X | X | | | | | | | | X |
 
 ---
 
 ## Course Structure
 
-| Unit | Topic |
-|---|---|
-| 1 | Groups: Basic Definitions, Subgroups, Cosets, Normal Subgroups, Lagrange's Theorem, Isomorphism, Homomorphism, Quotient groups, Cayley's Theorem |
-| 2 | Rings: Definition, types of rings, zero divisors, integral domains, Fields, Characteristic of a field |
-| 3 | The Number System: Examples of Rings and Fields in the number systems |
-| 4 | Polynomials: Definition, The division Algorithm, Factorization |
-| 5 | Quotient Rings: Homomorphisms, Ideals, Quotient rings, Quotient rings of Polynomial Rings, Factorization and Ideals |
-| 6 | Field Extensions: Simple Extensions, Degree of Extension, Splitting Fields, Finite Fields |
-
-*No lecture-count breakdown per unit is available in the source document.*
+| Unit | Topic | No. of Lectures |
+|---|---|---|
+| Groups | Basic Definitions, Subgroups, Cosets, Normal Subgroups, Lagrange's Theorem, Isomorphism, Homomorphism, Quotient groups, Cayley's Theorem | 15 |
+| Rings and Fields | Definition, types of rings, zero divisors, integral domains, properties | 10 |
+| Polynomials | Definition, the Division Algorithm, Factorization and various properties | 8 |
+| Fields | Definition of field, subfield, examples, field extensions, base fields and extensions, the degree of a field extension, Algebraic vs. Transcendental, etc. | 7 |
+| **Total** | | **40** |
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule with dates is available in the source document.*
+*Note: No weekly (dated) lecture schedule is available in the source document; only the topic-wise lecture distribution shown above is provided.*
 
 ---
 
@@ -75,44 +89,37 @@ Students learn the important algebraic structures of Groups and Fields which one
 
 | Component | Weightage |
 |---|---|
-| Midsem Test 1 | 20% |
-| Midsem Test 2 | 20% |
-| Endsem | 40% |
-| Quiz and Attendance | 20% |
+| First In-Semester Examination | 30% |
+| Second In-Semester Examination | 30% |
+| Final Examination | 40% |
 | **Total** | **100%** |
-
-*Note: "If possible, Quiz will be conducted" — quiz conduct is stated as conditional in the source document, though it is still allotted a portion of the overall grading weightage combined with attendance.*
 
 ---
 
 ## Textbooks and References
 
-### Textbook(s) / Books
-
-1. I.N. Herstein, *Topics in Algebra*.
-2. Thomas W. Hungerford, *Abstract Algebra, An Introduction*.
-3. Michael Artin, *Algebra*.
-
 ### Reference Books
 
-*None stated separately in source document (all listed as Books above).*
+1. I. N. Herstein, *Topics in Algebra*.
+2. Thomas W. Hungerford, *Abstract Algebra, An Introduction*.
+3. Michael Artin, *Algebra*.
+4. Sen, Ghosh and Mukhopadhyay, *Topics in Abstract Algebra*.
 
 ### Online Resources
 
-*None stated in source document.*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-MC313 Algebraic Structures is offered at DA-IICT for B.Tech-MnC (Mathematics and Computing) students. No specific credit structure, program year, or prerequisites are stated in the source document.
+MC313 is a Core course offered in the third year of the B.Tech. (Mathematics and Computing) program, in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-- The course connects abstract algebraic structures (Groups, Rings, Fields) directly to applications in coding theory and cryptography, particularly via the fields ⟨Zₙ, ⊕⟩ and ⟨Zₙ*, ⊗⟩.
-- The source document is a brief, two-page course outline without a formal PO mapping table.
+None stated in source document beyond what is captured above.
 
 ---
 
@@ -120,7 +127,7 @@ MC313 Algebraic Structures is offered at DA-IICT for B.Tech-MnC (Mathematics and
 
 | Resource | Type | Link |
 |---|---|---|
-| MC313_Algebraic_Structures - Gautam Dutta.pdf | PDF | [Download MC313_Algebraic_Structures - Gautam Dutta.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| MC313__2026-27__MC313_Algebraic Structure_Autumn_26 - Sudip Bera.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -128,7 +135,7 @@ MC313 Algebraic Structures is offered at DA-IICT for B.Tech-MnC (Mathematics and
 
 | Field | Value |
 |---|---|
-| **Source PDF** | MC313_Algebraic_Structures - Gautam Dutta.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | MC313__2026-27__MC313_Algebraic Structure_Autumn_26 - Sudip Bera.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

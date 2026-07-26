@@ -1,14 +1,14 @@
----
-title: "IT531 Advanced Computer Networks Autumn 2025"
+﻿---
+title: "IT531 Advanced Computer Networks Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "IT531_Advanced Computer Networks_Autumn25 - Abhishek Gupta.pdf"
+pdf_name: "IT531__2026-27__IT531_Advanced Computer Networks_Autumn 2026 - Abhishek Gupta.pdf"
 course_code: "IT531"
-semester: "Autumn 2025"
+semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
@@ -20,76 +20,65 @@ authorization: ["student", "faculty"]
 |---|---|
 | **Course Code** | IT531 |
 | **Course Name** | Advanced Computer Networks |
-| **Instructor(s)** | Dr. Abhishek Gupta (Office: 3208, Faculty Block 3; Email: abhishek_gupta@dau.ac.in) |
-| **Credits** | 3 hours lecture every week |
-| **Semester Offered** | Autumn 2025 |
+| **Instructor(s)** | Abhishek Gupta |
+| **Credits** | 3-0-2-4 |
+| **Semester Offered** | Autumn Semester (AY 2026-27) |
 | **Type** | Elective |
-| **Program(s)** | B.Tech; M.Tech |
-| **Year / Semester in Program** | Fourth year (B.Tech); M.Tech students |
-| **Associated Lab** | None (self-guided Cisco Packet Tracer activity for simulation) |
-| **Prerequisites** | First-level B.Tech course in Computer Networks; Python and MATLAB programming skills (optional) may be useful for the course project |
+| **Program(s)** | UG/PG |
+| **Year / Semester in Program** | Not specified beyond program level |
+| **Associated Lab** | Embedded lab component, weekly |
+| **Prerequisites** | This course assumes knowledge of the first level B.Tech course in Computer Networks. Python and Matlab programming skills (optional) may be useful for additional research |
 | **Foundation For** | None stated |
+
+Course Format: 3 hours' lecture every week and Lab every week.
 
 ---
 
 ## Course Description
 
-Major topics in this course include: Internet protocols for congestion control, approaches to achieve reliability and scalability, network measurement, P2P networks, wireless networks, content delivery networks, Software Defined Networking (SDN) architecture, and Network Functions Virtualization (NFV).
+Major topics in this course include: Internet protocols for congestion control, approaches to achieve reliability, scalability. Network measurement, P2P networks, Wireless networks, Content delivery networks. Software Defined Networking (SDN) architecture, Network Functions Virtualization (NFV).
 
-This course will emphasize the concepts and issues underlying the design and implementation of the Internet and other kinds of modern wireless networks. Time will also be spent learning to quantitatively analyse the performance of network protocols. A combination of reference books and a set of research papers will be used to cover the fundamentals, seminal findings, and new directions in networking research. This course will introduce students to essential tools and concepts, including:
-- Understanding a computer network's basic structure requires concepts.
-- Visualizing the connected structure where networks are not only limited to computers but span to billions of devices.
-- Developing a working foundation that would allow for systematic analysis of modern networks.
-- Exposing students to some modern challenges and selected methods used extensively in research literature.
-- Understanding the technology of the Internet and learning how to improve its properties, a fundamental objective with an enormously beneficial impact on the economy and society at large.
-
-**Course Goals:**
-1. To study the main concepts of computer network architecture, protocols, and systems.
-2. To become acquainted with computer networking research topics.
-3. To gain practice in reading research papers and discussing the research of others.
-4. To be introduced to and gain experience with network programming, analysis of traffic measurements, traffic control algorithms, and peer-to-peer software.
+This course will emphasize the concepts and issues underlying the design and implementation of the Internet and other kinds of modern wireless networks. Students will also spend time learning to quantitatively analyse the performance of network protocols. A combination of reference books and a set of research papers will be used to cover the fundamentals, seminal findings and new directions in networking research. This course will introduce students to essential tools and concepts such as: understanding a computer network's basic structure; visualizing the connected structure where networks span from computers to billions of devices; developing a working foundation for systematic analysis of modern networks; exposure to modern challenges and selected methods used extensively in the research literature; and understanding the technology of the Internet and how to improve its properties, which is a fundamental objective with an enormously beneficial impact on the economy and society at large.
 
 ---
 
 ## Course Outcomes (COs)
 
-At the end of the course, the students should be able to:
-
 | CO | Description |
 |---|---|
-| CO1 | Analyse a communication system by separating out the different functions provided by the network; understand that there are fundamental limits to any network. |
-| CO2 | Understand the general principles behind multiplexing, addressing, routing, reliable transmission and other protocols, as well as specific examples of each. |
-| CO3 | Compare various network architectures and how they solve similar problems with different efficiency. |
-| CO4 | Have an informed view of both the internal workings of the Internet and a number of common Internet applications and protocols. |
-| CO5 | Apply the knowledge of computer networks to model complex problems in network engineering. [P1, P2, P3, P12] |
-| CO6 | Carry out model-based investigations to derive insight into the problem at hand. [P4] |
-| CO7 | Communicate effectively through vivas, course presentation, and report writing. [P10] |
+| CO1 | At the end of the course, the students should be able to analyse a communication system by separating out the different functions provided by the network; understand that there are fundamental limits to any network; understand the general principles behind multiplexing, addressing, routing, reliable transmission and other protocols as well as specific examples of each |
+| CO2 | Be able to compare various network architectures and how they solve similar problems with different efficiency; have an informed view of both the internal workings of the Internet and of a number of common Internet applications and protocols |
+| CO3 | After completing the course, the students would be able to apply the knowledge of computer networks to model complex problems in network engineering (P1, P2, P3, P12), carry out model-based investigations to derive insight into the problem at hand (P4), communicate effectively through viva, course presentation and report writing (P10) |
 
 ---
 
 ## Program Outcome Mapping (PO Mapping)
 
-*Note: No formal PO mapping table is present in the source document; PO references are embedded inline within the Course Outcomes text (P1, P2, P3, P4, P10, P12 as noted above).*
+| PO1 | PO2 | PO3 | PO4 | PO5 | PO6 | PO7 | PO8 | PO9 | PO10 | PO11 | PO12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| X | X | X | X | | | | | X | X | | X |
 
 ---
 
 ## Course Structure
 
+*APPENDIX-I: Detailed Course Content (Session-wise/Module-wise)*
+
 | Unit | Topic | No. of Lectures |
 |---|---|---|
-| 1 | Overview of basic concepts in Computer Networks: Computer communications — salient features; Datagram, circuit, and connection-oriented networks; Multiple access — contention and ordered techniques; TCP/IP v6 group of protocols — routing and end-to-end reliability; Routing protocols, IPv4 and IPv6, Subnetting, CIDR, VLAN | 4–6 |
-| 2 | Internet Protocols: Point-to-point routing (OSPF, BGP); Performance Analysis of multicast and anycast protocols; Reliability Issues in Broadcast and Multicast; TCP and its variants; Performance Issues in TCP — Modelling and Analysis; Active Queue Management in TCP Networks | 6–8 |
-| 3 | Wireless Networks: Wireless Communication Basics, Wave propagation models, wireless physical layer, Antenna; Link Layer — Wireless Medium Access Control, MAC protocol survey; IEEE 802.11 and variants; Low Power MACs, IEEE 802.15.4, ZigBee; TCP for Wireless Internet | 5–7 |
-| 4 | Traffic Management: QoS definition, Mapping models, Integrated and Differentiated Services Architecture; Label Switching, MPLS | 5–7 |
-| 5 | Software Defined Networking: Switching architectures, Data/control/management planes, Dynamic tables, autonomous switching, SDN architecture, Network function virtualization, Open flow, SDN implementations | 5–7 |
-| 6 | Some Advanced and Additional Topics: Introduction to Data Center Networking, Characteristics and challenges in Data Center Networking, Topologies and Architecture in Data Center Networking, Information Centric Networking, Named Data Networking | 4–6 |
-| **Total** | | **~29–41** |
+| Module 01: Overview of basic concepts in Computer Networks | Computer communications: salient features, Datagram, circuit, and connection-oriented networks. Multiple access: contention and ordered techniques. TCP/IP v6 group of protocols: routing and end-to-end reliability. Routing protocols, IPv4 and IPv6, Subnetting, CIDR, VLAN | 6 |
+| Module 02: Internet Protocols Point-to-point routing | OSPF, BGP, Performance Analysis of multicast and anycast protocols, Reliability Issues in Broadcast and Multicast. TCP and its variants. Performance Issues in TCP: Modelling and Analysis. Active Queue Management in TCP Networks | 8 |
+| Module 03: Wireless Networks Wireless Communication Basics | Wave propagation models, wireless physical layer, Antenna. Link Layer - Wireless Medium Access Control, MAC protocol survey. IEEE 802.11 and variants, Low Power MACs, IEEE 802.15.4, ZigBee. TCP for Wireless Internet | 6 |
+| Module 04: Traffic Management | QoS definition, Mapping models, Integrated and Differentiated Services Architecture. Label Switching, MPLS | 6 |
+| Module 05: Software Defined Networking | Switching architectures, Data, control, and management planes, Dynamic tables, autonomous switching, SDN architecture, Network function virtualization, Open flow, SDN implementations | 6 |
+| Module 06: Advanced Topics | Introduction to Data Center Networking, Characteristics and challenges in Data Center Networking, Topologies and Architecture in Data Center Networking, Information Centric Networking, Named Data Networking | 6 |
+| **Total** | | **38** |
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule with dates is available in the source document. Only a topic-wise lecture plan (with a range of lecture counts per unit) is provided above.*
+*Note: No weekly (dated) lecture schedule is available in the source document; only the module-wise lecture distribution shown above is provided.*
 
 ---
 
@@ -97,23 +86,11 @@ At the end of the course, the students should be able to:
 
 | Component | Weightage |
 |---|---|
-| Assignments | 40% |
-| Critical Review of a Research Paper | 10% |
-| Final End-Semester Exam | 50% |
+| First In-semester Exam | 20% |
+| Second In-semester Exam | 20% |
+| End-semester Exam | 40% |
+| Lab assignments | 20% |
 | **Total** | **100%** |
-
-**Critical Review of a Research Paper:** Aims to gain an understanding of how networking may evolve in the future to provide ubiquitous support for quality-of-service (QoS) in heterogeneous environments. Students will identify and critically review one paper selected from journals/conferences including (not limited to):
-- IEEE/ACM Transactions on Networking
-- IEEE Transactions on Network Science and Engineering
-- IEEE Transactions on Network and Service Management
-- IEEE Transactions on Green Communications and Networking
-- IEEE Transactions on Wireless Communications
-- IEEE Wireless Communications and Networking Conference (WCNC)
-- IEEE Conference on Network Softwarization (NetSoft)
-- IEEE Conference on Local Computer Networks (LCN)
-- IEEE Conference on Computer Communications (InfoCom)
-
-**Final End-Semester Exam:** Closed book exam comprising multiple choice questions, mathematical questions, and descriptive questions.
 
 ---
 
@@ -121,40 +98,38 @@ At the end of the course, the students should be able to:
 
 ### Textbook(s)
 
-1. Tanenbaum, A.S. & Wetherall, D.J., *Computer Networks*, 6th ed., Pearson, 2022.
-2. Kurose, James F., and Keith W. Ross, *Computer Networking: A Top-Down Approach*, 8th ed., Pearson, 2021.
+1. A. S. Tanenbaum and D. J. Wetherall, *Computer Networks*, 6th ed., Pearson, 2022.
+2. James F. Kurose and Keith W. Ross, *Computer Networking: A Top-Down Approach*, 8th ed., Pearson, 2021.
 
 ### Reference Books
 
-1. Peterson, L.L. & Davie, B.S., *Computer Networks: A Systems Approach*, 6th ed., Cambridge, MA: Morgan Kaufmann, 2022.
-2. Stallings, W., *Data and Computer Communications*, 10th ed., Pearson Education India, 2017.
-3. D.P. Nagpal, *Data Communication and Networking*, S.Chand Publishing, 2011.
-4. Hassan, Mahboob and Jain, Raj, *High Performance TCP/IP Networking*, Prentice Hall India.
-5. Murthy, Manoj, *Ad Hoc Wireless Networks*, Pearson Education.
+1. L. L. Peterson and B. S. Davie, *Computer Networks: A Systems Approach*, 6th ed., Cambridge, MA: Morgan Kaufmann, 2022.
+2. W. Stallings, *Data and Computer Communications*, 10th ed., Pearson Education India, 2017.
+3. D. P. Nagpal, *Data Communication and Networking*, S. Chand Publishing, 2011.
+4. Mahboob Hassan and Raj Jain, *High Performance TCP/IP Networking*, Prentice Hall India.
+5. Manoj Murthy, *Ad Hoc Wireless Networks*, Pearson Education.
 
 ### Additional Books for Extra Reading
 
-1. Todd Lammle, Jon Buhagiar, *CompTIA® Network+® Study Guide*, 6th Edition.
-2. Quentin Docter, Jon Buhagiar, *CompTIA A+ Complete Study Guide: Core 1 Exam 220-1101 and Core 2 Exam 220-1102*, 5th Ed.
+1. Todd Lammle and Jon Buhagiar, *CompTIA Network+ Study Guide*, 6th Edition.
+2. Quentin Docter and Jon Buhagiar, *CompTIA A+ Complete Study Guide: Core 1 Exam 220-1101 and Core 2 Exam 220-1102*, 5th Ed.
 3. Wendell Odom, *CCNA 200-301 Official Cert Guide*, Cisco Press.
 
 ### Online Resources
 
-*None stated in source document (beyond referenced journals/conferences for the critical review assignment).*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-IT531 Advanced Computer Networks is an elective course offered to fourth-year B.Tech students and M.Tech students, with 3 hours of lecture every week. It requires a first-level B.Tech course in Computer Networks as a prerequisite.
+IT531 is an Elective course open to both UG and PG students, offered in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-- Students will be required to use Cisco Packet Tracer to simulate basic network environments and perform basic networking operations. Learning Cisco Packet Tracer will be a self-guided activity.
-- The course places significant emphasis on reading and critically reviewing research papers from top-tier networking journals/conferences.
-- A single textbook is explicitly stated as insufficient for this course; multiple textbooks, reference books, and additional reading materials are used.
+**Lab note (as stated in source)**: For the labs, students will be required to use Cisco Packet Tracer to simulate basic network environments and perform basic networking operations. Learning Cisco Packet Tracer will be a self-guided activity.
 
 ---
 
@@ -162,7 +137,7 @@ IT531 Advanced Computer Networks is an elective course offered to fourth-year B.
 
 | Resource | Type | Link |
 |---|---|---|
-| IT531_Advanced Computer Networks_Autumn25 - Abhishek Gupta.pdf | PDF | [Download IT531_Advanced Computer Networks_Autumn25 - Abhishek Gupta.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| IT531__2026-27__IT531_Advanced Computer Networks_Autumn 2026 - Abhishek Gupta.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -170,7 +145,7 @@ IT531 Advanced Computer Networks is an elective course offered to fourth-year B.
 
 | Field | Value |
 |---|---|
-| **Source PDF** | IT531_Advanced Computer Networks_Autumn25 - Abhishek Gupta.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | IT531__2026-27__IT531_Advanced Computer Networks_Autumn 2026 - Abhishek Gupta.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

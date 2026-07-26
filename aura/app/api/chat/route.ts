@@ -1,4 +1,6 @@
 import { getServerSession } from "next-auth"
+import { cookies } from "next/headers"
+import { randomUUID } from "crypto"
 import { z } from "zod"
 
 import {
@@ -10,6 +12,13 @@ import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
 export const maxDuration = 60
+
+// Cookie identifying an anonymous guest browser (no Google sign-in). It
+// carries no PII — just a random id — and lets the backend's 10/day quota
+// (see server/rag/pipeline/rate_limiter.py) key on a stable per-browser
+// identity instead of resetting on every request.
+const GUEST_COOKIE = "aura-guest-id"
+const GUEST_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
 const historyTurnSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -84,8 +93,39 @@ function normaliseSource(
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
-  if (!session?.user?.erpId || !session.user.role) {
-    return new Response("Unauthorized", { status: 401 })
+
+  // Signed-in @dau.ac.in accounts use their real erpId/role (unlimited
+  // quota, enforced server-side). Everyone else is treated as an
+  // anonymous guest identified by a long-lived cookie, capped at 10
+  // questions/day.
+  let identity: {
+    role: "student" | "faculty" | "admin" | "guest"
+    erpId: string
+    department?: string
+    email?: string
+  }
+
+  if (session?.user?.erpId && session.user.role) {
+    identity = {
+      role: session.user.role,
+      erpId: session.user.erpId,
+      department: session.user.department,
+      email: session.user.email ?? undefined,
+    }
+  } else {
+    const cookieStore = await cookies()
+    let guestId = cookieStore.get(GUEST_COOKIE)?.value
+    if (!guestId || guestId.length > 64) {
+      guestId = `GUEST-${randomUUID()}`
+      cookieStore.set(GUEST_COOKIE, guestId, {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        maxAge: GUEST_COOKIE_MAX_AGE,
+      })
+    }
+    identity = { role: "guest", erpId: guestId }
   }
 
   let body: unknown
@@ -101,10 +141,10 @@ export async function POST(req: Request) {
   }
 
   const internalToken = signInternalJwt({
-    role: session.user.role,
-    erpId: session.user.erpId,
-    department: session.user.department,
-    email: session.user.email ?? undefined,
+    role: identity.role,
+    erpId: identity.erpId,
+    department: identity.department,
+    email: identity.email,
   })
 
   // Map studentProfile → userProfile for FastAPI; cap history for cost/latency.

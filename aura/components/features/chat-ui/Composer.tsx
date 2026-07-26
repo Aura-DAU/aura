@@ -54,7 +54,11 @@ export function Composer({
   }, [])
 
   const isUnauthenticated = status === "unauthenticated"
-  const canSend = inputText.trim().length > 0 && !loading && !isRecording && !isUnauthenticated
+  // Guests (unauthenticated) can send until their daily quota hits 0.
+  // Signed-in @dau.ac.in accounts have unlimited quota, so remainingQuota
+  // is always null for them and this never blocks sending.
+  const quotaExhausted = remainingQuota === 0
+  const canSend = inputText.trim().length > 0 && !loading && !isRecording && !quotaExhausted
   const nearLimit = inputText.length >= MAX_CHARS * 0.9
   const atLimit = inputText.length >= MAX_CHARS
   const role = (session?.user?.role as string) || ""
@@ -100,15 +104,23 @@ export function Composer({
           variant === "docked" && "mx-auto max-w-3xl px-4 pb-3 md:pb-4",
         )}
       >
-        {isUnauthenticated ? (
+        {quotaExhausted ? (
           <div className="flex flex-col items-center justify-center rounded-[26px] border border-theme-gray-light bg-theme-gray/80 px-4 py-7 text-center shadow-[0_18px_50px_-24px_rgba(0,0,0,0.9)] backdrop-blur-xl">
-            <p className="mb-3.5 text-sm text-neutral-400">Sign in to start chatting with AURA</p>
-            <a
-              href="/login"
-              className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-theme-red to-theme-yellow px-5 text-sm font-semibold text-black transition-all hover:brightness-110 active:scale-[0.98]"
-            >
-              Sign in
-            </a>
+            <p className="mb-3.5 text-sm text-neutral-400">
+              {isUnauthenticated
+                ? "You've used all your free questions for today."
+                : "Question limit reached."}
+            </p>
+            {isUnauthenticated ? (
+              <a
+                href="/login"
+                className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-theme-red to-theme-yellow px-5 text-sm font-semibold text-black transition-all hover:brightness-110 active:scale-[0.98]"
+              >
+                Sign in with @dau.ac.in for unlimited access
+              </a>
+            ) : (
+              <p className="text-xs text-neutral-500">Please try again tomorrow.</p>
+            )}
           </div>
         ) : (
           <div
@@ -233,7 +245,7 @@ export function Composer({
           </div>
         )}
 
-        {!isUnauthenticated ? (
+        {!quotaExhausted ? (
           <p className="mt-2.5 text-center text-[11px] text-neutral-600">
             AURA can make mistakes. Verify important info.
           </p>

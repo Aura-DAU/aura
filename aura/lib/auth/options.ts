@@ -157,11 +157,12 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       if (account?.provider === "google") {
         const email = user.email || ""
-        if (!email.endsWith("@dau.ac.in") && !email.endsWith("@daiict.ac.in")) {
-          user.role = "guest"
-          user.erpId = "GUEST"
-          user.department = "GUEST"
-          return true
+        // Only official @dau.ac.in accounts may sign in. Anyone else
+        // (including personal Gmail addresses) should use the anonymous
+        // guest chat instead — see the "Continue as Guest" option on
+        // /login and the anonymous cookie flow in app/api/chat/route.ts.
+        if (!email.endsWith("@dau.ac.in")) {
+          return "/login?error=DomainNotAllowed"
         }
 
         try {

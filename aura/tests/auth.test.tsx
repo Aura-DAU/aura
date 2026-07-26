@@ -10,8 +10,8 @@ vi.mock('next-auth/react', () => ({
   useSession: vi.fn(),
 }))
 
-describe('Domain detection (guest vs DAU)', () => {
-  it('assigns guest role to non-DAU emails', async () => {
+describe('Domain restriction (only @dau.ac.in may sign in)', () => {
+  it('rejects non-DAU emails instead of signing them in as guest', async () => {
     const user = { email: 'test@gmail.com' } as User & { role?: string }
     const account = { provider: 'google' } as Account
     const signIn = authOptions.callbacks?.signIn
@@ -25,8 +25,11 @@ describe('Domain detection (guest vs DAU)', () => {
       credentials: undefined,
     })
 
-    expect(result).toBe(true)
-    expect(user.role).toBe('guest')
+    // Non-@dau.ac.in Google accounts (including @daiict.ac.in and personal
+    // Gmail) are redirected to the login page instead of being let in as
+    // guest — guest access is now anonymous/no-login only.
+    expect(result).toBe('/login?error=DomainNotAllowed')
+    expect(user.role).toBeUndefined()
   })
 })
 
@@ -47,6 +50,7 @@ describe('Unauthenticated Composer rendering', () => {
         isTranscribing={false}
         onSend={vi.fn()}
         onMicClick={vi.fn()}
+        remainingQuota={10}
       />
     )
 
@@ -62,13 +66,12 @@ describe('useAuraChat 429 handling', () => {
     global.fetch = vi.fn()
   })
 
-  it('handles 429 error and updates remainingQuota', async () => {
+  it('handles 429 error and updates remainingQuota for a guest', async () => {
+    // No session at all — anonymous guest, tracked via the local
+    // "aura-quota-guest" mirror of the server-enforced 10/day cookie quota.
     vi.mocked(useSession).mockReturnValue({
-      data: {
-        user: { email: 'student@dau.ac.in', role: 'student', erpId: '123' },
-        expires: '9999-12-31T23:59:59.999Z',
-      },
-      status: 'authenticated',
+      data: null,
+      status: 'unauthenticated',
       update: vi.fn(),
     })
 
@@ -83,8 +86,8 @@ describe('useAuraChat 429 handling', () => {
 
     const { result } = renderHook(() => useAuraChat())
 
-    // Initial quota for student should be 5
-    expect(result.current.remainingQuota).toBe(5)
+    // Initial quota for an anonymous guest should be 10
+    expect(result.current.remainingQuota).toBe(10)
 
     // Send a message to trigger fetch
     await act(async () => {
@@ -94,5 +97,21 @@ describe('useAuraChat 429 handling', () => {
     // After 429, quota should be 0 and errorMessage should be set
     expect(result.current.remainingQuota).toBe(0)
     expect(result.current.errorMessage).toContain("Question limit reached")
+  })
+
+  it('shows no quota limit for a signed-in @dau.ac.in account', async () => {
+    vi.mocked(useSession).mockReturnValue({
+      data: {
+        user: { email: 'student@dau.ac.in', role: 'student', erpId: '123' },
+        expires: '9999-12-31T23:59:59.999Z',
+      },
+      status: 'authenticated',
+      update: vi.fn(),
+    })
+
+    const { result } = renderHook(() => useAuraChat())
+
+    // Verified DAU accounts are unlimited — no counter shown.
+    expect(result.current.remainingQuota).toBeNull()
   })
 })
