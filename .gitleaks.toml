@@ -1,0 +1,7 @@
+[allowlist]
+description = "Ignore gitleaks own binary/docs and generated report files"
+paths = [
+    '''gitleaks_bin''',
+    '''gitleaks_report.*\.json''',
+    '''gitleaks_clean\.json''',
+]

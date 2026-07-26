@@ -13,6 +13,7 @@ groq
 # upload_to_pinecone.py (kept for reference).
 qdrant-client
 pinecone
+# Phase B (LangGraph orchestration): pipeline/aura_chat_graph.py
 langgraph
 sentence-transformers
 torch

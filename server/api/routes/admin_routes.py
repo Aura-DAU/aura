@@ -201,18 +201,18 @@ def list_deans(admin: Identity = Depends(_require_admin)):
         "dean_students", "dean_faculty", "dean_academic",
         "registrar", "superadmin",
     ]
+    # placeholders is built from a hardcoded list — no user input is interpolated.
     placeholders = ",".join(["%s"] * len(dean_bindings))
-    rows = db_conn.query(
-        f"""SELECT rb.erp_id, rb.binding, rb.granted_at,
-                   uim.dept
-            FROM role_bindings rb
-            JOIN user_identity_map uim ON uim.erp_id = rb.erp_id
-            WHERE rb.binding IN ({placeholders})
-              AND rb.revoked = FALSE
-              AND (rb.expires_at IS NULL OR rb.expires_at > NOW())
-            ORDER BY rb.binding, rb.erp_id""",
-        tuple(dean_bindings),
+    query = (
+        "SELECT rb.erp_id, rb.binding, rb.granted_at, uim.dept"
+        " FROM role_bindings rb"
+        " JOIN user_identity_map uim ON uim.erp_id = rb.erp_id"
+        " WHERE rb.binding IN (" + placeholders + ")"
+        " AND rb.revoked = FALSE"
+        " AND (rb.expires_at IS NULL OR rb.expires_at > NOW())"
+        " ORDER BY rb.binding, rb.erp_id"
     )
+    rows = db_conn.query(query, tuple(dean_bindings))
     return {"dean_bindings": [dict(r) for r in rows]}
 
 

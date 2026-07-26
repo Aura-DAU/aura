@@ -23,11 +23,11 @@ os.environ.setdefault("INTERNAL_RESOLVE_SECRET", "test-resolve-secret")
 
 # ── eCampus credential vault ──────────────────────────────────────────────
 os.environ.setdefault("ECAMPUS_VAULT_KEY",        Fernet.generate_key().decode())
-os.environ.setdefault("ECAMPUS_VAULT_DB",          f"/tmp/aura_test_vault_{_run}.db")
-os.environ.setdefault("ECAMPUS_TIMETABLE_POOL_DB", f"/tmp/aura_timetable_{_run}.db")
+os.environ.setdefault("ECAMPUS_VAULT_DB",          f"/tmp/aura_test_vault_{_run}.db")          # nosec B108 — test fixture, unique run-ID suffix
+os.environ.setdefault("ECAMPUS_TIMETABLE_POOL_DB", f"/tmp/aura_timetable_{_run}.db")           # nosec B108 — test fixture, unique run-ID suffix
 
 # ── Misc ──────────────────────────────────────────────────────────────────
-os.environ.setdefault("AURA_AUDIT_LOG",  f"/tmp/aura_test_audit_{_run}.log")
+os.environ.setdefault("AURA_AUDIT_LOG",  f"/tmp/aura_test_audit_{_run}.log")  # nosec B108 — test fixture, unique run-ID suffix
 os.environ.setdefault("ECAMPUS_BASE_URL","https://ecampus.test.invalid")
 os.environ.setdefault("GROQ_API_KEY",    "test-groq-key-unused-in-unit-tests")
 os.environ.setdefault("PINECONE_API_KEY","test-pinecone-key-unused-in-unit-tests")

@@ -21,7 +21,7 @@ CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
 
 # System user `aura` has HOME=/nonexistent; Whisper must not write there.
 # Prefer WHISPER_CACHE_DIR; default to /tmp so a root-owned vault volume cannot block boot.
-_WHISPER_CACHE = os.environ.get("WHISPER_CACHE_DIR", "/tmp/whisper-cache")
+_WHISPER_CACHE = os.environ.get("WHISPER_CACHE_DIR", "/tmp/whisper-cache")  # nosec B108 — intentional fallback; override via WHISPER_CACHE_DIR env var
 
 if not os.path.exists(CONFIG_PATH):
     raise FileNotFoundError(

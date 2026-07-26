@@ -43,7 +43,7 @@ def main():
     # Step 2: Generate Embeddings
     run_step("generate_embeddings.py", embeddings_dir)
     
-    # Step 3: Upload to Qdrant
+    # Step 3: Upload to Pinecone
     run_step("upload_to_qdrant.py", embeddings_dir)
 
     # Step 4: Build entity index for graph-enhanced retrieval
@@ -52,8 +52,9 @@ def main():
     run_step("build_entity_index.py", current_dir)
     
     print("\n" + "="*50)
-    print("ALL STEPS COMPLETED. QDRANT COLLECTION IS FULLY SYNCED!")
+    print("ALL STEPS COMPLETED. PINECONE INDEX IS FULLY SYNCED!")
     print("="*50)
 
 if __name__ == "__main__":
     main()
+

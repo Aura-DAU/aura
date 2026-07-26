@@ -40,7 +40,7 @@ See [`server/README.md`](./server/README.md) for backend-specific setup.
 ### Prerequisites
 
 - **Node.js** 20+ and **npm** (frontend)
-- **Python** 3.14+ (backend)
+- **Python** 3.11+ (backend)
 
 ### 1. Fork & clone
 

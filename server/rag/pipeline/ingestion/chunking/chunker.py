@@ -2,7 +2,7 @@ import re
 from transformers import AutoTokenizer
 from config import (MODEL_NAME, CHUNK_SIZE, CHUNK_OVERLAP)
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, revision="main")  # pin revision to avoid supply-chain risk (B615)
 
 # Fix H: how far back (in tokens) from a raw boundary we'll search for a
 # sentence-ending punctuation to snap the cut to a clean sentence edge.
