@@ -33,8 +33,8 @@ describe('Domain restriction (only @dau.ac.in may sign in)', () => {
   })
 })
 
-describe('Unauthenticated (guest) Composer rendering', () => {
-  it('lets a guest with quota remaining type and send normally', () => {
+describe('Unauthenticated Composer rendering', () => {
+  it('renders sign-in prompt when unauthenticated', () => {
     vi.mocked(useSession).mockReturnValue({
       data: null,
       status: 'unauthenticated',
@@ -54,35 +54,8 @@ describe('Unauthenticated (guest) Composer rendering', () => {
       />
     )
 
-    // Guests get a normal composer, not a sign-in wall — quota is enforced
-    // separately (see server/rag/pipeline/rate_limiter.py), not by blocking
-    // input outright.
-    expect(screen.getByLabelText('Message AURA')).toBeInTheDocument()
-    expect(screen.getByText('10 messages left')).toBeInTheDocument()
-  })
-
-  it('prompts a guest to sign in once their daily quota is exhausted', () => {
-    vi.mocked(useSession).mockReturnValue({
-      data: null,
-      status: 'unauthenticated',
-      update: vi.fn(),
-    })
-
-    render(
-      <Composer
-        inputText=""
-        setInputText={vi.fn()}
-        loading={false}
-        isRecording={false}
-        isTranscribing={false}
-        onSend={vi.fn()}
-        onMicClick={vi.fn()}
-        remainingQuota={0}
-      />
-    )
-
-    expect(screen.getByText("You've used all your free questions for today.")).toBeInTheDocument()
-    expect(screen.getByText('Sign in with @dau.ac.in for unlimited access')).toBeInTheDocument()
+    expect(screen.getByText('Sign in to start chatting with AURA')).toBeInTheDocument()
+    expect(screen.getByText('Sign in')).toBeInTheDocument()
   })
 })
 
