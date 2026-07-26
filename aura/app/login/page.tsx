@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, Suspense, useEffect } from "react"
+import Link from "next/link"
 import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
 import { Sparkles, Loader2, GraduationCap, BookOpen, AlertCircle, Shield } from "lucide-react"
@@ -106,12 +107,12 @@ function LoginCard() {
         <div className="h-px flex-1 bg-theme-gray-light" />
       </div>
 
-      <a
+      <Link
         href="/"
         className="mt-5 flex w-full cursor-pointer items-center justify-center rounded-xl border border-theme-gray-lighter bg-transparent py-3 text-sm font-medium text-neutral-300 transition-all hover:border-neutral-500 hover:text-white"
       >
         Continue as Guest
-      </a>
+      </Link>
       <p className="mt-2 text-center text-xs text-neutral-500">
         Guests get 10 questions/day. Sign in for unlimited access.
       </p>
