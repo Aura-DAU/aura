@@ -63,10 +63,12 @@ def _fernet() -> Fernet:
 
 
 def _connect():
+    db_path = Path(os.environ.get("GOOGLE_CALENDAR_VAULT_DB",
+                                   "/var/lib/aura/gcal_tokens.db"))
     # mode=0o700 restricts a vault dir AURA creates itself; it does not loosen
     # (or tighten) an already-existing shared parent such as /tmp.
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
-    conn = sqlite3.connect(DB_PATH)
+    db_path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    conn = sqlite3.connect(db_path)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS gcal_tokens (
             erp_id          TEXT PRIMARY KEY,
@@ -75,10 +77,23 @@ def _connect():
             linked_at       TEXT NOT NULL
         )
     """)
+    # Tracks every event AURA has created on a student's calendar, keyed by
+    # the stable "slot key" (master row id, or override id for custom
+    # entries) so a re-sync updates the same event in place instead of
+    # duplicating it, and disconnect/unsync can clean everything up.
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS gcal_synced_events (
+            erp_id          TEXT NOT NULL,
+            slot_key        TEXT NOT NULL,
+            google_event_id TEXT NOT NULL,
+            updated_at      TEXT NOT NULL,
+            PRIMARY KEY (erp_id, slot_key)
+        )
+    """)
     # Restrict token DB permissions before any token blob is written, matching
     # ecampus/credentials_vault.py — OAuth tokens are just as sensitive.
     try:
-        os.chmod(DB_PATH, 0o600)
+        os.chmod(db_path, 0o600)
     except OSError:
         pass
     return conn
