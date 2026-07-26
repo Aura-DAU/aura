@@ -128,48 +128,53 @@ export function useAuraChat() {
   const [studentProfile, setStudentProfile] = useState<StudentProfile>(DEFAULT_PROFILE)
   const [remainingQuota, setRemainingQuotaState] = useState<number | null>(null)
   const [hasHydrated, setHasHydrated] = useState(false)
-  const { data: session } = useSession()
+  const { data: session, status: sessionStatus } = useSession()
+
+  // Guest quota policy: signed-in @dau.ac.in accounts (student/faculty/admin)
+  // are unlimited — the backend never returns a limit for them, so we show
+  // no counter. Anonymous guests (no session at all) get 10 questions/day;
+  // the real enforcement lives server-side against a cookie-scoped
+  // anonymous id, this is just a local mirror for the UI counter.
+  const GUEST_DAILY_QUOTA = 10
+  const GUEST_QUOTA_KEY = "aura-quota-guest"
 
   useEffect(() => {
+    if (sessionStatus === "loading") return
     if (session?.user) {
-      const email = session.user.email || 'guest'
-      const role = session.user.role || 'guest'
-      const maxQuota = role === 'guest' ? 3 : 5
-      const date = new Date().toISOString().split('T')[0]
-      const key = `aura-quota-${email}`
-      
-      try {
-        const stored = localStorage.getItem(key)
-        if (stored) {
-          const parsed = JSON.parse(stored)
-          if (parsed.date === date) {
-            setRemainingQuotaState(Math.max(0, maxQuota - parsed.count))
-          } else {
-            setRemainingQuotaState(maxQuota)
-            localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
-          }
+      setRemainingQuotaState(null)
+      return
+    }
+    const maxQuota = GUEST_DAILY_QUOTA
+    const date = new Date().toISOString().split('T')[0]
+    const key = GUEST_QUOTA_KEY
+
+    try {
+      const stored = localStorage.getItem(key)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (parsed.date === date) {
+          setRemainingQuotaState(Math.max(0, maxQuota - parsed.count))
         } else {
           setRemainingQuotaState(maxQuota)
           localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
         }
-      } catch {
+      } else {
         setRemainingQuotaState(maxQuota)
+        localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
       }
-    } else {
-      setRemainingQuotaState(null)
+    } catch {
+      setRemainingQuotaState(maxQuota)
     }
-  }, [session])
+  }, [session, sessionStatus])
 
   const decrementQuota = useCallback(() => {
     setRemainingQuotaState(prev => {
       if (prev === null) return null;
       const newVal = Math.max(0, prev - 1)
-      if (session?.user) {
-        const email = session.user.email || 'guest'
-        const role = session.user.role || 'guest'
-        const maxQuota = role === 'guest' ? 3 : 5
+      if (!session?.user) {
+        const maxQuota = GUEST_DAILY_QUOTA
         const date = new Date().toISOString().split('T')[0]
-        const key = `aura-quota-${email}`
+        const key = GUEST_QUOTA_KEY
         try {
           localStorage.setItem(key, JSON.stringify({ date, count: maxQuota - newVal }))
         } catch {}

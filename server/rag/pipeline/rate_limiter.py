@@ -1,8 +1,12 @@
 """
-Question quota enforcement — v7 policy: 3 questions/day for guest accounts,
-5 questions/day for DAU accounts (student/faculty/admin), keyed by the
-signed-in Google account (email claim in the internal JWT, since guest
-users all share erp_id="GUEST" and can't be distinguished by erp_id alone).
+Question quota enforcement — v8 policy: guests (no sign-in — each browser
+gets an anonymous erp_id minted by Next.js and stored in a cookie) get
+10 questions/day. Verified @dau.ac.in accounts (student/faculty/admin) have
+unlimited quota, since sign-in itself already confirms institutional
+identity via Google Workspace + /internal/resolve-identity.
+
+Guests are keyed by the anonymous erp_id claim in the internal JWT (there is
+no email for a guest). Signed-in users are keyed by email when present.
 
 Uses Redis when REDIS_URL is set (shared across workers); otherwise an
 in-memory store for single-process dev/tests.
@@ -16,11 +20,12 @@ from typing import Optional, Protocol
 
 QUOTA_WINDOW_SECONDS = 24 * 60 * 60  # 24h rolling window
 
-QUOTA_LIMITS = {
-    "guest": 3,
-    "student": 5,
-    "faculty": 5,
-    "admin": 5,
+# None == unlimited (no quota check performed at all).
+QUOTA_LIMITS: dict[str, Optional[int]] = {
+    "guest": 10,
+    "student": None,
+    "faculty": None,
+    "admin": None,
 }
 
 
@@ -128,17 +133,22 @@ def reset_store_for_tests(store: Optional[QuotaStore] = None) -> None:
     _store = store if store is not None else InMemoryQuotaStore()
 
 
-def enforce_quota(quota_key: str, role: str) -> int:
+def enforce_quota(quota_key: str, role: str) -> Optional[int]:
     """
     Raises QuotaExceeded if the caller has hit their daily limit; otherwise
-    records this question and returns the remaining count. `quota_key`
-    should be the signed-in Google account email — never erp_id, since all
-    guests share erp_id="GUEST".
+    records this question and returns the remaining count. Returns None
+    (and records nothing) for roles with an unlimited quota. `quota_key` is
+    the guest's anonymous erp_id, or the signed-in @dau.ac.in email for
+    verified accounts.
     """
     limit = QUOTA_LIMITS.get(role, QUOTA_LIMITS["guest"])
+    if limit is None:
+        return None
     return _store.check_and_increment(quota_key, limit)
 
 
-def peek_remaining(quota_key: str, role: str) -> int:
+def peek_remaining(quota_key: str, role: str) -> Optional[int]:
     limit = QUOTA_LIMITS.get(role, QUOTA_LIMITS["guest"])
+    if limit is None:
+        return None
     return _store.remaining(quota_key, limit)

@@ -27,7 +27,7 @@ function LoginCard() {
   if (errorParam === "NotRegistered") {
     errorMsg = "Your DAU account is not yet registered in AURA. Contact the administrator."
   } else if (errorParam === "DomainNotAllowed") {
-    errorMsg = "Access restricted. You must log in with a @dau.ac.in or @daiict.ac.in email address."
+    errorMsg = "Access restricted. Sign in requires an official @dau.ac.in email address. Use \"Continue as Guest\" instead."
   } else if (errorParam) {
     errorMsg = "Authentication failed. Please try again."
   }
@@ -97,7 +97,23 @@ function LoginCard() {
       </button>
 
       <p className="mt-4 text-center text-xs text-neutral-400">
-        Must be an official @dau.ac.in or @daiict.ac.in email address.
+        Must be an official @dau.ac.in email address.
+      </p>
+
+      <div className="mt-5 flex items-center gap-3 text-[11px] text-neutral-600">
+        <div className="h-px flex-1 bg-theme-gray-light" />
+        or
+        <div className="h-px flex-1 bg-theme-gray-light" />
+      </div>
+
+      <a
+        href="/"
+        className="mt-5 flex w-full cursor-pointer items-center justify-center rounded-xl border border-theme-gray-lighter bg-transparent py-3 text-sm font-medium text-neutral-300 transition-all hover:border-neutral-500 hover:text-white"
+      >
+        Continue as Guest
+      </a>
+      <p className="mt-2 text-center text-xs text-neutral-500">
+        Guests get 10 questions/day. Sign in for unlimited access.
       </p>
 
       {/* Development Demo Mode - always shown in dev build */}
