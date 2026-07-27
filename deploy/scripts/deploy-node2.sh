@@ -45,6 +45,7 @@ done
 
 export AURA_DRY_RUN
 aura_load_node1_env
+aura_use_node_ssh_user 2
 aura_require_host "${AURA_NODE2_HOST:-}" "AURA_NODE2_HOST"
 
 echo "==> Node 2 deploy → ${AURA_SSH_USER}@${AURA_NODE2_HOST}:${AURA_REMOTE_APP_ROOT}"

@@ -148,7 +148,8 @@ On **each of Nodes 2, 3, 4** (as the deploy user, default `aura`):
 sudo mkdir -p /opt/aura/app
 sudo chown -R "$USER:$USER" /opt/aura
 # Install Node 1's public key for passwordless SSH:
-#   (from Node 1) ssh-copy-id -i /opt/aura/.ssh/cluster_deploy.pub aura@<NODE_IP>
+#   (from Node 1) ssh-copy-id -i /opt/aura/.ssh/cluster_deploy.pub aura4@<NODE_4_IP>
+#   (repeat for Nodes 2/3 with their login users)
 ```
 
 Copy per-node env once (not managed by rsync):
@@ -170,6 +171,10 @@ AURA_NODE4_HOST=<NODE_4_IP>
 # AURA_SSH_USER=aura
 # AURA_SSH_KEY=/opt/aura/.ssh/cluster_deploy
 # AURA_REMOTE_APP_ROOT=/opt/aura/app
+# Per-node SSH users (when not the same as AURA_SSH_USER):
+# AURA_NODE2_SSH_USER=aura2
+# AURA_NODE3_SSH_USER=aura3
+AURA_NODE4_SSH_USER=aura4
 ```
 
 ### After editing `deploy/monitoring/prometheus.yml`
