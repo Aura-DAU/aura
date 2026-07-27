@@ -36,6 +36,8 @@ export interface Citation {
 export interface ChatThread {
   id: string
   title: string
+  /** Epoch ms of the most recent message; used to group threads by recency in the sidebar. */
+  updatedAt?: number
 }
 
 export interface StudentProfile {
