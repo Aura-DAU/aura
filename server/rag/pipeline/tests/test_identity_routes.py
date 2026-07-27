@@ -67,8 +67,70 @@ def test_valid_range_student_email_resolves():
     data = res.json()
     assert data["role"] == "student"
     assert data["erp_id"] == "202401475"
+    assert data["department"] == "ICTCS"  # prog code "014" → ICTCS
     # Ensure write-through cache called db_conn.execute
     assert mock_db.execute.called
+
+
+# ---------------------------------------------------------------------------
+# Branch-code parsing tests (dynamic fallback path, no DB row)
+# ERP ID format: YYYY PP XXXXX  (PP = 2-digit program code at index 4:6)
+# ---------------------------------------------------------------------------
+
+def _student_dept(erp_id: str) -> str:
+    """Helper: fetch dept for a fresh student login (no DB row)."""
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])):
+        res = client.get(f"/internal/resolve-identity?email={erp_id}@dau.ac.in",
+                         headers=GOOD_HEADERS)
+    assert res.status_code == 200
+    return res.json()["department"]
+
+
+def test_branch_code_ict():
+    # prog code "01" (e.g. 202401001) → ICT
+    assert _student_dept("202401001") == "ICT"
+
+
+def test_branch_code_ict_cs():
+    # prog code "014" (e.g. 202401401) → ICTCS
+    assert _student_dept("202401401") == "ICTCS"
+
+
+def test_branch_code_mnc():
+    # prog code "03" (e.g. 202403001) → MnC
+    assert _student_dept("202403001") == "MnC"
+
+
+def test_branch_code_evd():
+    # prog code "04" (e.g. 202404001) → EVD
+    assert _student_dept("202404001") == "EVD"
+
+
+def test_branch_code_mtech():
+    # prog code "11" (e.g. 202411001) → MTech
+    assert _student_dept("202411001") == "MTech"
+
+
+def test_branch_code_mscit():
+    # prog code "12" (e.g. 202412001) → MScIT
+    assert _student_dept("202412001") == "MScIT"
+
+
+def test_branch_code_mscds():
+    # prog code "18" (e.g. 202418001) → MScDS
+    assert _student_dept("202418001") == "MScDS"
+
+
+def test_branch_code_phd():
+    # prog code "21" (e.g. 202421001) → PhD
+    assert _student_dept("202421001") == "PhD"
+
+
+def test_branch_code_unknown_defaults_to_ict():
+    # prog code "99" (unknown) → safe default ICT
+    assert _student_dept("202499001") == "ICT"
+
+
 
 
 def test_out_of_range_student_email_resolves_as_guest():
