@@ -22,9 +22,22 @@ export async function apiFetch(input: RequestInfo | URL, init?: RequestInit): Pr
   })
 
   if (response.status === 401) {
-    console.error("[auth-client] 401 Unauthorized — session missing or expired")
-    toastError("Your session expired. Please sign in again.")
-    await logout()
+    // Guests have no NextAuth session — a 401 on a protected route should not
+    // force signOut (which can cascade into noisy auth errors). Only bounce
+    // signed-in users whose cookie/session actually expired.
+    const hasSession = await fetch("/api/auth/session", { credentials: "same-origin" })
+      .then(async (res) => {
+        if (!res.ok) return false
+        const data = (await res.json().catch(() => null)) as { user?: unknown } | null
+        return Boolean(data?.user)
+      })
+      .catch(() => false)
+
+    if (hasSession) {
+      console.error("[auth-client] 401 Unauthorized — session missing or expired")
+      toastError("Your session expired. Please sign in again.")
+      await logout()
+    }
   }
 
   return response

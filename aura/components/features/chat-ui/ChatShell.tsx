@@ -12,6 +12,7 @@ import { Composer } from "./Composer"
 import { EmptyState } from "./EmptyState"
 import { ProfileModal } from "./ProfileModal"
 import { DocumentViewerSheet } from "./DocumentViewerSheet"
+import { AuroraBackground } from "@/components/ui/aurora-background"
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>
@@ -23,6 +24,9 @@ export function ChatShell() {
   const searchParams = useSearchParams()
   const promptHandled = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  // Desktop sidebar visibility. Default open for SSR/first paint; hydrate the
+  // persisted preference after mount to avoid a hydration mismatch.
+  const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true)
   const [profileOpen, setProfileOpen] = useState(false)
   // Always false for SSR + first client paint; only show after mount to avoid hydration mismatch.
   const [isOffline, setIsOffline] = useState(false)
@@ -64,6 +68,23 @@ export function ChatShell() {
     void chat.handleSendMessage(prompt)
     // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot handoff
   }, [searchParams, router])
+
+  useEffect(() => {
+    const stored = localStorage.getItem("aura-sidebar-open")
+    if (stored !== null) setDesktopSidebarOpen(stored === "1")
+  }, [])
+
+  const toggleDesktopSidebar = useCallback(() => {
+    setDesktopSidebarOpen((prev) => {
+      const next = !prev
+      try {
+        localStorage.setItem("aura-sidebar-open", next ? "1" : "0")
+      } catch {
+        /* storage unavailable */
+      }
+      return next
+    })
+  }, [])
 
   const handleInstall = useCallback(async () => {
     if (!installPrompt) return
@@ -108,6 +129,8 @@ export function ChatShell() {
           studentProfile={chat.studentProfile}
           mobileOpen={sidebarOpen}
           onCloseMobile={() => setSidebarOpen(false)}
+          collapsed={!desktopSidebarOpen}
+          onCollapse={toggleDesktopSidebar}
         />
 
         <main className="relative flex min-w-0 flex-1 flex-col">
@@ -118,6 +141,8 @@ export function ChatShell() {
           <div className="relative z-10 flex h-full flex-col">
             <Header
               onToggleSidebar={() => setSidebarOpen(true)}
+              onToggleDesktopSidebar={toggleDesktopSidebar}
+              desktopSidebarOpen={desktopSidebarOpen}
               onClearChat={chat.handleClearChat}
               canInstall={Boolean(installPrompt)}
               onInstall={handleInstall}
@@ -152,14 +177,14 @@ export function ChatShell() {
               </>
             ) : (
               <div className="flex-1 overflow-y-auto chat-v2-scroll">
-                <div className="flex min-h-full items-center justify-center">
+                <AuroraBackground className="flex min-h-full items-center justify-center">
                   <EmptyState
                     onSelectPrompt={chat.handleSendMessage}
                     userName={chat.studentProfile.name}
                   >
                     {composer}
                   </EmptyState>
-                </div>
+                </AuroraBackground>
               </div>
             )}
           </div>

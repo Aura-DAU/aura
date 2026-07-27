@@ -361,6 +361,73 @@
 }
 .chat-v2-dot { animation: chat-v2-dot 1.2s ease-in-out infinite; }
 
+/* ------- Gemini-style multi-hue gradient text (greeting / brand) ------- */
+@keyframes gradient-pan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.text-gradient-aura {
+  background-image: linear-gradient(
+    100deg,
+    #f4503b 0%,
+    #ffbe3f 22%,
+    #9168ff 50%,
+    #ffbe3f 78%,
+    #f4503b 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 7s linear infinite;
+}
+
+/* ------- Claude/Gemini-style shimmering "thinking" label ------- */
+@keyframes text-shimmer {
+  0% { background-position: 150% center; }
+  100% { background-position: -50% center; }
+}
+.text-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    rgba(163, 163, 163, 0.55) 0%,
+    rgba(245, 245, 245, 0.95) 50%,
+    rgba(163, 163, 163, 0.55) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-shimmer 2.4s linear infinite;
+}
+
+/* ------- Minimal ambient aurora — soft warm brand haze ------- */
+@keyframes aurora-drift {
+  from { transform: translate3d(-1.5%, -1%, 0) scale(1.06); }
+  to { transform: translate3d(1.5%, 1.5%, 0) scale(1.12); }
+}
+.aurora-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 45% at 50% 0%, rgba(244, 80, 59, 0.1), transparent 70%),
+    radial-gradient(45% 40% at 82% 6%, rgba(255, 190, 63, 0.07), transparent 72%),
+    radial-gradient(42% 45% at 15% 12%, rgba(145, 104, 255, 0.05), transparent 72%);
+  filter: blur(24px);
+  animation: aurora-drift 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.aurora-layer--mask {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 32%, transparent 82%);
+  mask-image: linear-gradient(to bottom, black 0%, black 32%, transparent 82%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .aurora-layer {
+    animation: none;
+  }
+}
+
 /* ------- ChatGPT / Claude-like chat motion ------- */
 @keyframes msg-enter {
   from {
@@ -397,7 +464,9 @@
 @media (prefers-reduced-motion: reduce) {
   .msg-enter,
   .msg-caret,
-  .chat-v2-dot {
+  .chat-v2-dot,
+  .text-gradient-aura,
+  .text-shimmer {
     animation: none !important;
   }
   .msg-actions {

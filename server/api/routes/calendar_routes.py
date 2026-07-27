@@ -107,8 +107,8 @@ def start_calendar_oauth(
     scope = CALENDAR_SCOPE_EVENTS if identity.role == "student" else CALENDAR_SCOPE_READONLY
 
     params = {
-        "client_id":     CLIENT_ID,
-        "redirect_uri":  REDIRECT_URI,
+        "client_id": CLIENT_ID,
+        "redirect_uri": REDIRECT_URI,
         "response_type": "code",
         "scope":         scope,
         "access_type":   "offline",
@@ -163,11 +163,11 @@ def calendar_oauth_callback(
         raise HTTPException(status_code=400, detail="State token payload is missing erp_id.")
 
     resp = requests.post(GOOGLE_TOKEN_URL, data={
-        "code":          code,
-        "client_id":     CLIENT_ID,
+        "code": code,
+        "client_id": CLIENT_ID,
         "client_secret": CLIENT_SECRET,
-        "redirect_uri":  REDIRECT_URI,
-        "grant_type":    "authorization_code",
+        "redirect_uri": REDIRECT_URI,
+        "grant_type": "authorization_code",
     }, timeout=10)
     if not resp.ok:
         raise HTTPException(status_code=400, detail=f"Token exchange failed: {resp.text}")
@@ -175,8 +175,8 @@ def calendar_oauth_callback(
     data = resp.json()
     access_token  = data.get("access_token")
     refresh_token = data.get("refresh_token")
-    expires_in    = data.get("expires_in", 3600)
-    expiry        = (datetime.datetime.utcnow() + datetime.timedelta(seconds=expires_in)).isoformat()
+    expires_in = data.get("expires_in", 3600)
+    expiry = (datetime.datetime.utcnow() + datetime.timedelta(seconds=expires_in)).isoformat()
 
     if not refresh_token:
         raise HTTPException(

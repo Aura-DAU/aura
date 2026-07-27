@@ -57,6 +57,10 @@ def resolve_effective_role(identity, db_module=None) -> str:
     # Returns one of the keys in ROLE_ALLOWED_SETS.
     if identity.role == "student":
         return "student"
+    # Guests have no role_bindings rows — skip the DB round-trip used for
+    # faculty/admin elevation. Maps to public DLS via get_allowed_roles().
+    if identity.role == "guest":
+        return "guest"
 
     if db_module is None:
         import db.connection as db_module  # noqa: PLC0415
