@@ -35,6 +35,48 @@ See [`server/README.md`](./server/README.md) for backend-specific setup.
 
 ---
 
+## Architecture Overview
+
+AURA is an agentic RAG system: the PWA talks to a FastAPI gateway, LangGraph orchestrates retrieval and inference, and GPU nodes serve the LLM.
+
+```mermaid
+graph TB
+  U[Browser / PWA]
+
+  subgraph gateway [Node 1 - Gateway]
+    N[NGINX]
+    A[AURA Next.js]
+    B[FastAPI]
+    L[LangGraph]
+    PG[(PostgreSQL)]
+    R[(Redis)]
+  end
+
+  subgraph gpu [Nodes 2 and 3 - vLLM]
+    V2[vLLM Qwen3-32B]
+    V3[vLLM Qwen3-32B]
+  end
+
+  subgraph retrieval [Node 4 - Retrieval]
+    Q[(Qdrant)]
+    E[Embedding]
+    RR[Reranker]
+  end
+
+  U -->|HTTPS| N
+  N --> A --> B --> L
+  B --> PG
+  B --> R
+  L -->|InferenceRouter| V2
+  L -->|InferenceRouter| V3
+  L --> Q
+  L --> E --> RR
+```
+
+Production multi-node layout, compose files, and CD: [`deploy/README.md`](./deploy/README.md).
+
+---
+
 ## Getting Started
 
 ### Prerequisites

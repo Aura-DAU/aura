@@ -7,46 +7,44 @@ This directory contains the production deployment manifests for the **AURA Distr
 ## Architecture
 
 ```mermaid
-flowchart LR
-  subgraph clients["User clients"]
-    U[Browser / PWA]
+graph TB
+  U[Browser / PWA]
+
+  subgraph n1 [Node 1 - Gateway]
+    N[NGINX]
+    A[AURA Next.js]
+    B[FastAPI]
+    L[LangGraph]
+    PG[(PostgreSQL)]
+    R[(Redis)]
   end
 
-  subgraph node1["Node 1 — Gateway & orchestration"]
-    N[NGINX :80/:443]
-    A[AURA Next.js :3000]
-    B[FastAPI gateway :8000]
-    L[LangGraph engine]
-    PG[(PostgreSQL :5432)]
-    R[(Redis :6379)]
+  subgraph n2 [Node 2 - vLLM GPU]
+    V2[vLLM Qwen3-32B]
   end
 
-  subgraph node2["Node 2 — vLLM GPU"]
-    V2[vLLM Qwen3-32B :8000]
+  subgraph n3 [Node 3 - vLLM GPU]
+    V3[vLLM Qwen3-32B]
   end
 
-  subgraph node3["Node 3 — vLLM GPU"]
-    V3[vLLM Qwen3-32B :8000]
+  subgraph n4 [Node 4 - Retrieval]
+    Q[(Qdrant)]
+    E[Embedding]
+    RR[Reranker]
+    P[Prometheus]
+    G[Grafana]
   end
 
-  subgraph node4["Node 4 — Retrieval & monitoring"]
-    Q[(Qdrant :6333)]
-    E[Embedding service :8001]
-    RR[Reranker service]
-    P[Prometheus :9090]
-    G[Grafana :3000]
-  end
-
-  U -->|HTTPS| N --> A --> B --> L
-  B --- PG
-  B --- R
+  U -->|HTTPS| N
+  N --> A --> B --> L
+  B --> PG
+  B --> R
   L -->|InferenceRouter| V2
   L -->|InferenceRouter| V3
-  L -->|retrieve / embed / rerank| Q
+  L --> Q
   L --> E --> RR
   P --> G
 ```
-
 ---
 
 ## Directory Layout
