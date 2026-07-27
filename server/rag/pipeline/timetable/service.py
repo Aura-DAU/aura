@@ -111,11 +111,25 @@ def _require_cohort(identity) -> tuple[int, int, str]:
     if sem is None: sem = _field(identity, "current_sem")
     if not sec: sec = _field(identity, "current_sec")
 
+    # If still missing, infer directly from erp_id
+    if (year is None or sem is None or not sec) and erp_id:
+        try:
+            from api.routes.identity_routes import _infer_role_and_cohort
+            inferred = _infer_role_and_cohort(f"{erp_id}@dau.ac.in")
+            if inferred["role"] == "student":
+                year = year if year is not None else inferred["current_year"]
+                sem = sem if sem is not None else inferred["current_sem"]
+                sec = sec if sec else inferred["current_sec"]
+        except Exception:
+            pass
+
+    # All resolution paths exhausted — missing cohort is a hard error.
     if year is None or sem is None or not sec:
         raise TimetableError(
-            "Your year/semester/section isn't set up yet in AURA — please update "
-            "your profile or contact the AURA administrator."
+            "Your year, semester, and section are not set up in AURA yet. "
+            "Please contact your administrator or set your cohort before using timetable features."
         )
+
     return int(year), int(sem), str(sec)
 
 

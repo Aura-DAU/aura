@@ -120,6 +120,63 @@ def _validate_email_domain(email: str) -> None:
         )
 
 
+def _infer_role_and_cohort(email: str) -> dict:
+    """Infer student/faculty/guest role, branch (dept), and default cohort from email."""
+    prefix = email.split("@")[0].lower().strip()
+    role = "guest"
+    erp_id = f"GUEST_{prefix.upper()}"
+    dept = None
+    year = None
+    sem = None
+    sec = None
+
+    if re.match(r"^\d{9}$", prefix):
+        entry_year = int(prefix[:4])
+        if 2023 <= entry_year <= 2026:
+            import datetime
+            now_year = datetime.datetime.now().year
+            year = max(1, min(4, (now_year - entry_year) + 1))
+            sem = year * 2 - 1
+            sec = "A"
+            role = "student"
+            erp_id = prefix
+
+        prog3 = prefix[4:7]
+        prog2 = prefix[4:6]
+        if prog3 == "014":
+            dept = "ICTCS"
+        elif prog2 == "01":
+            dept = "ICT"
+        elif prog2 == "03":
+            dept = "MnC"
+        elif prog2 == "04":
+            dept = "EVD"
+        elif prog2 == "11":
+            dept = "MTech"
+        elif prog2 == "12":
+            dept = "MScIT"
+        elif prog2 == "18":
+            dept = "MScDS"
+        elif prog2 == "21":
+            dept = "PhD"
+        else:
+            dept = "ICT"
+
+    elif prefix in FACULTY_EMAILS:
+        role = "faculty"
+        erp_id = f"FAC_{prefix.upper()}"
+        dept = "ICT"
+
+    return {
+        "role": role,
+        "erp_id": erp_id,
+        "dept": dept,
+        "current_year": year,
+        "current_sem": sem,
+        "current_sec": sec,
+    }
+
+
 @router.get("/resolve-identity")
 def resolve_identity(
     email: str = Query(..., min_length=3, max_length=320, description="Institutional Google email to resolve"),
@@ -140,45 +197,49 @@ def resolve_identity(
 
     if rows:
         row = rows[0]
+        yr = row.get("current_year")
+        sem = row.get("current_sem")
+        sec = row.get("current_sec")
+        dept = row.get("dept")
+        if (yr is None or sem is None or not sec or not dept) and row.get("erp_id") and re.match(r"^\d{9}$", row["erp_id"]):
+            inferred = _infer_role_and_cohort(email)
+            yr = yr if yr is not None else inferred["current_year"]
+            sem = sem if sem is not None else inferred["current_sem"]
+            sec = sec if sec else inferred["current_sec"]
+            dept = dept if dept else inferred["dept"]
+
         return {
             "erp_id": row["erp_id"],
             "role": row["role"],
-            "department": row["dept"],
+            "department": dept,
             "full_name": row.get("full_name"),
-            "current_year": row.get("current_year"),
-            "current_sem": row.get("current_sem"),
-            "current_sec": row.get("current_sec"),
+            "current_year": yr,
+            "current_sem": sem,
+            "current_sec": sec,
         }
 
-    # Fallback to dynamic classification (no email echoed in error paths).
-    prefix = email.split("@")[0].lower().strip()
-    role = "guest"
-    erp_id = f"GUEST_{prefix.upper()}"
-    dept = None
+    # Fallback to dynamic classification
+    inferred = _infer_role_and_cohort(email)
+    role = inferred["role"]
+    erp_id = inferred["erp_id"]
+    dept = inferred["dept"]
+    current_year = inferred["current_year"]
+    current_sem = inferred["current_sem"]
+    current_sec = inferred["current_sec"]
 
-    # Check Student: 9-digit roll number
-    if re.match(r"^\d{9}$", prefix):
-        year = int(prefix[:4])
-        if 2023 <= year <= 2026:
-            role = "student"
-            erp_id = prefix
-            dept = "ICT"
-    # Check Faculty: matched prefix from pre-compiled list
-    elif prefix in FACULTY_EMAILS:
-        role = "faculty"
-        erp_id = f"FAC_{prefix.upper()}"
-        dept = "ICT"
-
-    # Insert valid student/faculty into user_identity_map as write-through cache
     if role in ("student", "faculty"):
         try:
             db_conn.execute(
-                """INSERT INTO user_identity_map (email, erp_id, role, dept, is_active)
-                   VALUES (%s, %s, %s, %s, TRUE)
+                """INSERT INTO user_identity_map (email, erp_id, role, dept, current_year, current_sem, current_sec, is_active)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, TRUE)
                    ON CONFLICT (email) DO UPDATE
                    SET erp_id = EXCLUDED.erp_id, role = EXCLUDED.role,
-                       dept = EXCLUDED.dept, is_active = TRUE""",
-                (email.lower().strip(), erp_id, role, dept),
+                       dept = EXCLUDED.dept,
+                       current_year = COALESCE(user_identity_map.current_year, EXCLUDED.current_year),
+                       current_sem = COALESCE(user_identity_map.current_sem, EXCLUDED.current_sem),
+                       current_sec = COALESCE(user_identity_map.current_sec, EXCLUDED.current_sec),
+                       is_active = TRUE""",
+                (email.lower().strip(), erp_id, role, dept, current_year, current_sem, current_sec),
             )
         except Exception as db_err:
             print(f"Warning: Failed to cache dynamic user in DB: {db_err}")
@@ -188,7 +249,8 @@ def resolve_identity(
         "role": role,
         "department": dept,
         "full_name": None,
-        "current_year": None,
-        "current_sem": None,
-        "current_sec": None,
+        "current_year": current_year,
+        "current_sem": current_sem,
+        "current_sec": current_sec,
     }
+
