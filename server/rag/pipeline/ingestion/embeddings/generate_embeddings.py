@@ -1,6 +1,5 @@
 import json
 import os
-import sys
 from pathlib import Path
 import numpy as np
 import requests
@@ -15,7 +14,10 @@ VECTOR_STORE_DIR = SCRIPT_DIR / "../../vector_store"
 EMBEDDINGS_FILE = VECTOR_STORE_DIR / "embeddings.npy"
 METADATA_FILE = VECTOR_STORE_DIR / "metadata.json"
 
-EMBEDDING_URL = os.getenv("EMBEDDING_URL", "http://10.100.97.74:8081")
+# Node 4 embedding-reranker service (not legacy TEI on :8081)
+EMBEDDING_URL = os.getenv("EMBEDDING_URL") or os.getenv(
+    "EMBEDDING_SERVICE_URL", "http://10.100.97.74:8001"
+)
 BATCH_SIZE = 32
 
 
@@ -24,18 +26,25 @@ def load_chunks(filepath):
         return json.load(f)
 
 
-def generate_tei_embeddings(texts, embedding_url, batch_size=32):
+def generate_embeddings(texts, embedding_url, batch_size=32):
     endpoint = f"{embedding_url.rstrip('/')}/embed"
     all_embeddings = []
     total = len(texts)
-    print(f"Requesting embeddings from TEI endpoint ({endpoint}) for {total} texts in batches of {batch_size}...")
+    print(f"Requesting embeddings from {endpoint} for {total} texts in batches of {batch_size}...")
 
     for i in range(0, total, batch_size):
         batch_texts = texts[i:i + batch_size]
-        payload = {"inputs": batch_texts, "truncate": True}
-        response = requests.post(endpoint, json=payload, headers={"Content-Type": "application/json"})
+        # Matches services/embedding-reranker EmbedRequest
+        payload = {"texts": batch_texts, "normalize": True}
+        response = requests.post(
+            endpoint,
+            json=payload,
+            headers={"Content-Type": "application/json"},
+            timeout=120,
+        )
         response.raise_for_status()
-        batch_vecs = response.json()
+        data = response.json()
+        batch_vecs = data["embeddings"] if isinstance(data, dict) else data
         all_embeddings.extend(batch_vecs)
         if (i + batch_size) % 320 == 0 or (i + batch_size) >= total:
             print(f"  Processed {min(i + batch_size, total)}/{total} chunks")
@@ -56,8 +65,8 @@ def main():
 
     texts = [chunk["text"] for chunk in chunks]
 
-    print("Generating embeddings via TEI endpoint...")
-    embeddings = generate_tei_embeddings(texts, EMBEDDING_URL, BATCH_SIZE)
+    print("Generating embeddings via embedding-reranker service...")
+    embeddings = generate_embeddings(texts, EMBEDDING_URL, BATCH_SIZE)
 
     print(f"\nEmbedding shape: {embeddings.shape}")
 
