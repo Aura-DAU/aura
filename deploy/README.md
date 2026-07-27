@@ -332,6 +332,7 @@ Optional per-node SSH users: `AURA_NODE{2,3,4}_SSH_USER`.
 database containers are not touched. `deploy-node4.sh` uses
 `--no-deps --force-recreate` for prometheus/grafana so Qdrant stays up.
 Node 2/3 CD never passes `--restart-vllm`.
+
 ## Health Checks & Verification
 
 On **Node 1**:
