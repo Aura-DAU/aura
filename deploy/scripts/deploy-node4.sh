@@ -13,11 +13,11 @@
 #   AURA_NODE4_HOST   LAN IP or hostname of Node 4
 #
 # Optional env:
-#   AURA_NODE4_SSH_USER   SSH login on Node 4 (e.g. aura4); else AURA_SSH_USER / aura
+#   AURA_NODE4_SSH_USER   only if login ≠ AURA_SSH_USER (default aura)
 #   AURA_APP_ROOT / AURA_REMOTE_APP_ROOT / AURA_SSH_USER / AURA_SSH_KEY
 #
 # Usage (on Node 1):
-#   AURA_NODE4_HOST=10.x.x.4 AURA_NODE4_SSH_USER=aura4 ./deploy/scripts/deploy-node4.sh
+#   AURA_NODE4_HOST=10.x.x.4 ./deploy/scripts/deploy-node4.sh
 #   ./deploy/scripts/deploy-node4.sh --dry-run
 #   ./deploy/scripts/deploy-node4.sh --with-search
 

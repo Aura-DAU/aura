@@ -11,7 +11,7 @@ scrape_configs:
     static_configs:
       - targets: ["<NODE_1_IP>:8000"]
 
-  # Node 2 & Node 3: vLLM OpenAI GPU Inference Engines
+  # Node 2 & Node 3: vLLM Open Source Qwen GPU Inference Engines
   - job_name: "vllm-inference-nodes"
     static_configs:
       - targets:
