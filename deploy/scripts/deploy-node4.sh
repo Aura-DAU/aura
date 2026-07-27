@@ -17,7 +17,7 @@
 #   AURA_APP_ROOT / AURA_REMOTE_APP_ROOT / AURA_SSH_USER / AURA_SSH_KEY
 #
 # Usage (on Node 1):
-#   AURA_NODE4_HOST=10.x.x.4 AURA_NODE4_SSH_USER=aura4 ./deploy/scripts/deploy-node4.sh
+#   AURA_NODE4_HOST=10.x.x.4 ./deploy/scripts/deploy-node4.sh
 #   ./deploy/scripts/deploy-node4.sh --dry-run
 #   ./deploy/scripts/deploy-node4.sh --with-search
 
