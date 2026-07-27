@@ -3,8 +3,8 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { backendUrl } from "@/lib/api/backend"
 import {
+  getGoogleOAuthCredentials,
   getNextAuthSecret,
-  requireGoogleOAuthCredentials,
   requireInternalResolveSecret,
 } from "@/lib/auth/secrets"
 
@@ -95,40 +95,60 @@ async function lookupErpIdentity(email: string): Promise<ErpIdentity | null> {
   }
 }
 
-const googleCreds = requireGoogleOAuthCredentials()
+const googleCreds = getGoogleOAuthCredentials()
+if (!googleCreds && process.env.NODE_ENV === "production") {
+  console.warn(
+    "[auth] GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET unset — Google Workspace sign-in disabled; guest chat still works.",
+  )
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    GoogleProvider({
-      clientId: googleCreds.clientId,
-      clientSecret: googleCreds.clientSecret,
-      authorization: {
-        params: {
-          prompt: "select_account",
-        },
-      },
-    }),
-    ...(process.env.NODE_ENV === "development" ? [
-      CredentialsProvider({
-        name: "Demo Account",
-        credentials: {
-          email: { label: "Email", type: "text" },
-          password: { label: "Password", type: "password" }
-        },
-        async authorize(credentials) {
-          if (credentials?.email === "demo.student@dau.ac.in" && credentials?.password === "Student@123") {
-            return { id: "demo-stud", email: credentials.email, name: "Demo Student" }
-          }
-          if (credentials?.email === "demo.faculty@daiict.ac.in" && credentials?.password === "Faculty@123") {
-            return { id: "demo-fac", email: credentials.email, name: "Demo Faculty" }
-          }
-          if (credentials?.email === "demo.admin@dau.ac.in" && credentials?.password === "Admin@123") {
-            return { id: "demo-admin", email: credentials.email, name: "Demo Admin" }
-          }
-          return null
-        }
-      })
-    ] : [])
+    ...(googleCreds
+      ? [
+          GoogleProvider({
+            clientId: googleCreds.clientId,
+            clientSecret: googleCreds.clientSecret,
+            authorization: {
+              params: {
+                prompt: "select_account",
+              },
+            },
+          }),
+        ]
+      : []),
+    ...(process.env.NODE_ENV === "development"
+      ? [
+          CredentialsProvider({
+            name: "Demo Account",
+            credentials: {
+              email: { label: "Email", type: "text" },
+              password: { label: "Password", type: "password" },
+            },
+            async authorize(credentials) {
+              if (
+                credentials?.email === "demo.student@dau.ac.in" &&
+                credentials?.password === "Student@123"
+              ) {
+                return { id: "demo-stud", email: credentials.email, name: "Demo Student" }
+              }
+              if (
+                credentials?.email === "demo.faculty@daiict.ac.in" &&
+                credentials?.password === "Faculty@123"
+              ) {
+                return { id: "demo-fac", email: credentials.email, name: "Demo Faculty" }
+              }
+              if (
+                credentials?.email === "demo.admin@dau.ac.in" &&
+                credentials?.password === "Admin@123"
+              ) {
+                return { id: "demo-admin", email: credentials.email, name: "Demo Admin" }
+              }
+              return null
+            },
+          }),
+        ]
+      : []),
   ],
   session: {
     strategy: "jwt",
