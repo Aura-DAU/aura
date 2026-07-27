@@ -2,9 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Download, LogIn, LogOut, Menu, PanelLeftOpen, Trash2 } from "lucide-react"
+import { Download, LogIn, Menu, PanelLeftOpen, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useSession, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { BrandMark } from "@/components/ui/brand-mark"
 
 interface HeaderProps {
@@ -106,16 +106,7 @@ export function Header({
               {confirmClear ? "Confirm clear" : "Clear"}
             </span>
           </button>
-          {session?.user ? (
-            <button
-              type="button"
-              onClick={() => signOut({ callbackUrl: "/login" })}
-              className="inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-sm text-neutral-300 transition-colors hover:bg-theme-gray-light"
-            >
-              <LogOut className="size-4" />
-              <span className="hidden sm:inline">Sign out</span>
-            </button>
-          ) : (
+          {!session?.user ? (
             <button
               type="button"
               onClick={() => router.push("/login")}
@@ -124,7 +115,7 @@ export function Header({
               <LogIn className="size-4" />
               <span className="hidden sm:inline">Sign in</span>
             </button>
-          )}
+          ) : null}
         </div>
       </div>
       <div className="h-px bg-gradient-to-r from-transparent via-theme-gray-light to-transparent" />
