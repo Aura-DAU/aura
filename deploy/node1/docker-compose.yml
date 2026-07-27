@@ -40,6 +40,18 @@ services:
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
       INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
       INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+    # Probes /api/auth/session because it imports lib/auth/options.ts, whose
+    # module-scope secret readers throw in production when NEXTAUTH_SECRET or
+    # GOOGLE_CLIENT_* are unset. A page route would still 200 in that state and
+    # report a container as Up while every authenticated request 500s.
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:3000/api/auth/session >/dev/null 2>&1 || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
     depends_on:
       backend:
         condition: service_healthy

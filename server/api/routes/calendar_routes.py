@@ -96,9 +96,9 @@ def start_calendar_oauth(
         "erp_id":    identity.erp_id,
         "role":      identity.role,
         "return_to": return_to,
-        "typ": GCAL_OAUTH_STATE_TYP,
-        "iss": GCAL_OAUTH_STATE_ISSUER,
-        "aud": GCAL_OAUTH_STATE_AUDIENCE,
+        "typ":       GCAL_OAUTH_STATE_TYP,
+        "iss":       GCAL_OAUTH_STATE_ISSUER,
+        "aud":       GCAL_OAUTH_STATE_AUDIENCE,
         "exp":       datetime.datetime.utcnow() + datetime.timedelta(minutes=10),
     }
     state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)

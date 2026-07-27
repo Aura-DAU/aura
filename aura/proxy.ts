@@ -9,7 +9,7 @@ const EXACT_PUBLIC_PATHS = ["/"]
 const PUBLIC_FILE =
   /\.(?:svg|png|jpg|jpeg|gif|webp|ico|json|webmanifest|js|css|map|txt|woff2?)$/i
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   // Allow public paths and static assets from /public through

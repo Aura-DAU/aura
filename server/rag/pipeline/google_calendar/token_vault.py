@@ -65,7 +65,9 @@ def _fernet() -> Fernet:
 def _connect():
     db_path = Path(os.environ.get("GOOGLE_CALENDAR_VAULT_DB",
                                    "/var/lib/aura/gcal_tokens.db"))
-    db_path.parent.mkdir(parents=True, exist_ok=True)
+    # mode=0o700 restricts a vault dir AURA creates itself; it does not loosen
+    # (or tighten) an already-existing shared parent such as /tmp.
+    db_path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     conn = sqlite3.connect(db_path)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS gcal_tokens (
@@ -88,6 +90,12 @@ def _connect():
             PRIMARY KEY (erp_id, slot_key)
         )
     """)
+    # Restrict token DB permissions before any token blob is written, matching
+    # ecampus/credentials_vault.py — OAuth tokens are just as sensitive.
+    try:
+        os.chmod(db_path, 0o600)
+    except OSError:
+        pass
     return conn
 
 
