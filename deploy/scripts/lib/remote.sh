@@ -2,17 +2,29 @@
 # Sourced by deploy-node{2,3,4}.sh and deploy-cluster.sh — not executed directly.
 #
 # Expected env (set by caller or deploy/node1/.env):
-#   AURA_SSH_USER          default: aura
-#   AURA_SSH_KEY           default: /opt/aura/.ssh/cluster_deploy
-#   AURA_REMOTE_APP_ROOT   default: /opt/aura/app
-#   AURA_APP_ROOT          local checkout (default: /opt/aura/app)
-#   AURA_DRY_RUN           if "1", print actions only
+#   AURA_SSH_USER            default SSH user for remotes (default: aura)
+#   AURA_NODE{2,3,4}_SSH_USER  per-node override (e.g. aura4)
+#   AURA_SSH_KEY             default: /opt/aura/.ssh/cluster_deploy
+#   AURA_REMOTE_APP_ROOT     default: /opt/aura/app
+#   AURA_APP_ROOT            local checkout (default: /opt/aura/app)
+#   AURA_DRY_RUN             if "1", print actions only
 
 : "${AURA_SSH_USER:=aura}"
 : "${AURA_SSH_KEY:=/opt/aura/.ssh/cluster_deploy}"
 : "${AURA_REMOTE_APP_ROOT:=/opt/aura/app}"
 : "${AURA_APP_ROOT:=/opt/aura/app}"
 : "${AURA_DRY_RUN:=0}"
+
+# Apply per-node SSH user override if set (AURA_NODE4_SSH_USER, etc.).
+aura_use_node_ssh_user() {
+  local node="$1"
+  local override_var="AURA_NODE${node}_SSH_USER"
+  local override="${!override_var:-}"
+  if [[ -n "${override}" ]]; then
+    AURA_SSH_USER="${override}"
+    export AURA_SSH_USER
+  fi
+}
 
 aura_require_cmd() {
   local cmd
@@ -39,7 +51,13 @@ aura_require_host() {
   local label="${2:-remote host}"
   if [[ -z "${host}" ]]; then
     echo "error: ${label} is not set" >&2
-    echo "  Export AURA_NODE{2,3,4}_HOST or add it to deploy/node1/.env" >&2
+    echo "  Add it to ${AURA_APP_ROOT}/deploy/node1/.env (or /opt/aura/.env), e.g.:" >&2
+    echo "    AURA_NODE4_HOST=10.x.x.x" >&2
+    echo "  (no spaces around '=', do not leave the line commented with #)" >&2
+    echo "  Or export it for this shell: export ${label}=10.x.x.x" >&2
+    echo "  Checked: AURA_ENV_FILE=${AURA_ENV_FILE:-unset}," >&2
+    echo "           ${AURA_APP_ROOT}/deploy/node1/.env," >&2
+    echo "           /opt/aura/.env" >&2
     return 1
   fi
 }
@@ -129,22 +147,34 @@ aura_rsync() {
   fi
 }
 
-# Load cluster host vars from Node 1 env file if not already exported.
+# Load cluster host vars from Node 1 env file(s) if not already exported.
+# Merges across candidates: earlier files win for a given key; later files
+# fill keys that are still empty (so legacy /opt/aura/.env still works when
+# deploy/node1/.env exists but lacks AURA_NODE*_HOST).
 aura_load_node1_env() {
   local candidates=(
     "${AURA_ENV_FILE:-}"
     "${AURA_APP_ROOT}/deploy/node1/.env"
     "/opt/aura/.env"
   )
-  local f key val
+  local f key val line
+  local found_any=0
   for f in "${candidates[@]}"; do
     [[ -z "${f}" || ! -f "${f}" ]] && continue
+    found_any=1
     while IFS= read -r line || [[ -n "${line}" ]]; do
-      [[ -z "${line}" || "${line}" =~ ^[[:space:]]*# ]] && continue
-      if [[ "${line}" =~ ^(AURA_NODE[234]_HOST|AURA_SSH_USER|AURA_SSH_KEY|AURA_REMOTE_APP_ROOT)=(.*)$ ]]; then
-        key="${BASH_REMATCH[1]}"
-        val="${BASH_REMATCH[2]}"
-        # Strip optional surrounding quotes.
+      # Trim leading whitespace; skip blanks and comments.
+      line="${line#"${line%%[![:space:]]*}"}"
+      [[ -z "${line}" || "${line}" == \#* ]] && continue
+      # Optional "export " prefix; optional spaces around "=".
+      if [[ "${line}" =~ ^(export[[:space:]]+)?(AURA_NODE[234]_HOST|AURA_NODE[234]_SSH_USER|AURA_SSH_USER|AURA_SSH_KEY|AURA_REMOTE_APP_ROOT)[[:space:]]*=[[:space:]]*(.*)$ ]]; then
+        key="${BASH_REMATCH[2]}"
+        val="${BASH_REMATCH[3]}"
+        # Strip trailing inline comment (unquoted # ...) and surrounding quotes.
+        if [[ "${val}" != \"*\" && "${val}" != \'*\' ]]; then
+          val="${val%%\#*}"
+          val="${val%"${val##*[![:space:]]}"}"
+        fi
         val="${val%\"}"
         val="${val#\"}"
         val="${val%\'}"
@@ -155,8 +185,10 @@ aura_load_node1_env() {
         fi
       fi
     done < "${f}"
-    return 0
   done
+  if [[ "${found_any}" -eq 0 ]]; then
+    echo "warning: no Node 1 env file found (tried AURA_ENV_FILE, ${AURA_APP_ROOT}/deploy/node1/.env, /opt/aura/.env)" >&2
+  fi
   return 0
 }
 
