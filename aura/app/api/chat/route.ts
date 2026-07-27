@@ -92,6 +92,20 @@ function normaliseSource(
 }
 
 export async function POST(req: Request) {
+  try {
+    return await handleChatPost(req)
+  } catch (err) {
+    // Avoid Next's bare "Internal Server Error" text/plain body — clients that
+    // expect JSON/SSE otherwise surface SyntaxError: Unexpected token 'I'...
+    console.error("[chat] unhandled error:", err)
+    return Response.json(
+      { error: "Something went wrong while processing your request.", code: "INTERNAL" },
+      { status: 500 },
+    )
+  }
+}
+
+async function handleChatPost(req: Request): Promise<Response> {
   const session = await getServerSession(authOptions)
 
   // Signed-in @dau.ac.in accounts use their real erpId/role (unlimited
@@ -140,12 +154,21 @@ export async function POST(req: Request) {
     return new Response("Invalid request", { status: 400 })
   }
 
-  const internalToken = signInternalJwt({
-    role: identity.role,
-    erpId: identity.erpId,
-    department: identity.department,
-    email: identity.email,
-  })
+  let internalToken: string
+  try {
+    internalToken = signInternalJwt({
+      role: identity.role,
+      erpId: identity.erpId,
+      department: identity.department,
+      email: identity.email,
+    })
+  } catch (err) {
+    console.error("[chat] failed to mint internal JWT:", err)
+    return Response.json(
+      { error: "Authentication is temporarily unavailable", code: "INTERNAL" },
+      { status: 500 },
+    )
+  }
 
   // Map studentProfile → userProfile for FastAPI; cap history for cost/latency.
   const payload: BackendChatRequest = {
@@ -184,10 +207,16 @@ export async function POST(req: Request) {
     return new Response("Backend error", { status: 502 })
   }
 
+  const rawBody = await backendRes.text()
   let data: BackendChatResponse
   try {
-    data = (await backendRes.json()) as BackendChatResponse
+    data = JSON.parse(rawBody) as BackendChatResponse
   } catch {
+    console.error(
+      "[chat] backend returned non-JSON:",
+      backendRes.status,
+      rawBody.slice(0, 200),
+    )
     return new Response("Invalid backend response", { status: 502 })
   }
 

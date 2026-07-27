@@ -31,6 +31,7 @@ fi
 mkdir -p "${RUNNER_DIR}"
 cd "${RUNNER_DIR}"
 
+
 if [[ ! -f ./config.sh ]]; then
   echo "==> Downloading GitHub Actions runner ${RUNNER_VERSION}"
   curl -fsSL -o actions-runner-linux-x64.tar.gz \
