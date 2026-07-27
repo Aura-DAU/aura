@@ -4,48 +4,47 @@ This directory contains the production deployment manifests for the **AURA Distr
 
 ---
 
-## 4-Node Deployment Architecture
+## Architecture
 
-```
-                               ┌───────────────────────────┐
-                               │       USER CLIENTS        │
-                               └─────────────┬─────────────┘
-                                             │ HTTPS (:443)
-┌────────────────────────────────────────────▼────────────────────────────────────────────┐
-│ NODE 1: GATEWAY & ORCHESTRATION NODE (Ubuntu - CPU/RAM)                                 │
-│                                                                                         │
-│   ┌──────────────┐         ┌──────────────┐         ┌─────────────────┐                 │
-│   │ NGINX Proxy  ├────────►│  AURA (PWA)  ├────────►│ FastAPI Gateway │                 │
-│   │   (:80/443)  │         │   (:3000)    │         │     (:8000)     │                 │
-│   └──────────────┘         └──────────────┘         └────────┬────────┘                 │
-│                                                              │                          │
-│   ┌──────────────┐         ┌──────────────┐                  │                          │
-│   │  PostgreSQL  │         │    Redis     │         ┌────────▼────────┐                 │
-│   │   (:5432)    │         │   (:6379)    │         │ LangGraph Engine│                 │
-│   └──────────────┘         └──────────────┘         └────────┬────────┘                 │
-└──────────────────────────────────────────────────────────────┼──────────────────────────┘
-                                                               │
-        ┌──────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┐
-        │ HTTP (Inference Router)                              │ HTTP (Vector & Rerank Client)                        │
-        │                                                      │                                                      │
-┌───────▼───────────────────────────┐      ┌───────────────────▼───────────────────────────┐      ┌────────────────────▼──────────────────────────┐
-│ NODE 2: vLLM NODE 1 (GPU)         │      │ NODE 3: vLLM NODE 2 (GPU)         │      │ NODE 4: RETRIEVAL & INFRASTRUCTURE NODE       │
-│                                   │      │                                   │      │                                               │
-│  ┌─────────────────────────────┐  │      │  ┌─────────────────────────────┐  │      │  ┌──────────────┐       ┌──────────────────┐  │
-│  │ vLLM Engine (Qwen3-32B)     │  │      │  │ vLLM Engine (Qwen3-32B)     │  │      │  │ Qdrant Vector│       │ Embedding Service│  │
-│  │ OpenAI API (:8000)          │  │      │  │ OpenAI API (:8000)          │  │      │  │ DB (:6333)   │       │ TEI / FastEmbed  │  │
-│  └─────────────────────────────┘  │      │  └─────────────────────────────┘  │      │  └──────────────┘       └────────┬─────────┘  │
-└───────────────────────────────────┘      └───────────────────────────────────┘      │                                  │            │
-                                                                                      │  ┌──────────────┐       ┌────────▼─────────┐  │
-                                                                                      │  │  Prometheus  │       │ Reranker Service │  │
-                                                                                      │  │   (:9090)    │       │ TEI / BGE-v2     │  │
-                                                                                      │  └──────┬───────┘       └──────────────────┘  │
-                                                                                      │         │                                     │
-                                                                                      │  ┌──────▼───────┐                             │
-                                                                                      │  │   Grafana    │                             │
-                                                                                      │  │   (:3000)    │                             │
-                                                                                      │  └──────────────┘                             │
-                                                                                      └───────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+  subgraph clients["User clients"]
+    U[Browser / PWA]
+  end
+
+  subgraph node1["Node 1 — Gateway & orchestration"]
+    N[NGINX :80/:443]
+    A[AURA Next.js :3000]
+    B[FastAPI gateway :8000]
+    L[LangGraph engine]
+    PG[(PostgreSQL :5432)]
+    R[(Redis :6379)]
+  end
+
+  subgraph node2["Node 2 — vLLM GPU"]
+    V2[vLLM Qwen3-32B :8000]
+  end
+
+  subgraph node3["Node 3 — vLLM GPU"]
+    V3[vLLM Qwen3-32B :8000]
+  end
+
+  subgraph node4["Node 4 — Retrieval & monitoring"]
+    Q[(Qdrant :6333)]
+    E[Embedding service :8001]
+    RR[Reranker service]
+    P[Prometheus :9090]
+    G[Grafana :3000]
+  end
+
+  U -->|HTTPS| N --> A --> B --> L
+  B --- PG
+  B --- R
+  L -->|InferenceRouter| V2
+  L -->|InferenceRouter| V3
+  L -->|retrieve / embed / rerank| Q
+  L --> E --> RR
+  P --> G
 ```
 
 ---
@@ -221,10 +220,16 @@ Orchestrator:
 
 ## Auto-deploy (optional — Node 1 self-hosted runner)
 
-CD rebuilds **only** `aura` + `backend` (+ refresh `nginx`) when app paths
-change, and separately syncs Node 4 monitoring when `deploy/monitoring/**` /
-`deploy/node4/**` change. **Never** restarts Postgres, Redis, Qdrant, or vLLM
-from CD.
+One CD job plans targets from path changes (or a manual `target` input) and
+runs `deploy-cluster.sh`:
+
+| Target | CD action |
+|--------|-----------|
+| Node 1 apps | Rebuild `aura` + `backend`, refresh `nginx` |
+| Node 2 / 3 | rsync `deploy/` + `services/` only (**no** vLLM restart) |
+| Node 4 | rsync + recreate prometheus/grafana (**no** Qdrant / `--with-search`) |
+
+**Never** restarts Postgres, Redis, Qdrant, or vLLM from CD.
 
 ### 1. Install the runner on Node 1
 
@@ -301,26 +306,32 @@ Do **not** put `GITHUB_TOKEN` / PATs / `RUNNER_TOKEN` in `deploy/node1/.env`.
 
 Workflow: [`.github/workflows/cd-auto-deploy.yml`](../.github/workflows/cd-auto-deploy.yml)
 
+Single job `deploy-cluster` on `aura-node1`:
+
 | Triggers | Action |
 |----------|--------|
-| `workflow_dispatch` target=`apps` / `node4` / `both` | Deploy chosen scope |
-| `push` to `main` touching `aura/**`, `server/**`, `deploy/node1/**`, … | Auto-deploy Node 1 apps |
-| `push` to `main` touching `deploy/node4/**`, `deploy/monitoring/**`, … | Auto-deploy Node 4 monitoring |
+| `workflow_dispatch` target=`apps` / `node2` / `node3` / `node4` / `all-safe` | Deploy chosen scope |
+| `push` to `main` touching `aura/**`, `server/**`, `deploy/node1/**`, … | Node 1 apps |
+| `push` to `main` touching `deploy/node2/**`, … | Node 2 sync-only |
+| `push` to `main` touching `deploy/node3/**`, … | Node 3 sync-only |
+| `push` to `main` touching `deploy/node4/**`, `deploy/monitoring/**`, `services/**`, … | Node 4 monitoring |
 
-Scripts:
-
-- [`deploy/scripts/deploy-apps.sh`](scripts/deploy-apps.sh) — Node 1 apps
-- [`deploy/scripts/deploy-node4.sh`](scripts/deploy-node4.sh) — rsync + prometheus/grafana
+Orchestrator: [`deploy/scripts/deploy-cluster.sh`](scripts/deploy-cluster.sh)
 
 ```bash
 # Equivalent manual deploys on Node 1
-/opt/aura/app/deploy/scripts/deploy-apps.sh main
-AURA_NODE4_HOST=<NODE_4_IP> /opt/aura/app/deploy/scripts/deploy-node4.sh
+/opt/aura/app/deploy/scripts/deploy-cluster.sh --all-safe main
+/opt/aura/app/deploy/scripts/deploy-cluster.sh --apps main
+/opt/aura/app/deploy/scripts/deploy-cluster.sh --node4
 ```
+
+Set `AURA_NODE{2,3,4}_HOST` in `deploy/node1/.env` (or GitHub Actions variables).
+Optional per-node SSH users: `AURA_NODE{2,3,4}_SSH_USER`.
 
 `deploy-apps.sh` uses `docker compose up -d --build --no-deps aura backend` so
 database containers are not touched. `deploy-node4.sh` uses
 `--no-deps --force-recreate` for prometheus/grafana so Qdrant stays up.
+Node 2/3 CD never passes `--restart-vllm`.
 ## Health Checks & Verification
 
 On **Node 1**:

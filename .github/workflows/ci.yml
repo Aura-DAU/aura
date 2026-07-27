@@ -1,5 +1,5 @@
 # CI workflow for Aura app
-name: CI workflow
+name: Aura CI workflow
 
 on:
   push:

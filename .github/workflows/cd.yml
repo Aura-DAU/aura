@@ -1,0 +1,188 @@
+# Unified CD for the AURA 4-node cluster (runs on Node 1 self-hosted runner).
+#
+# Safe by default:
+#   - Node 1: rebuild aura + backend + refresh nginx (never Postgres/Redis)
+#   - Node 2/3: rsync only (never restart vLLM from CD)
+#   - Node 4: rsync + recreate prometheus/grafana (never Qdrant; no --with-search)
+
+name: CD — Aura GPU cluster deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to deploy (branch or tag)"
+        required: true
+        default: "main"
+        type: string
+      target:
+        description: "What to deploy"
+        required: true
+        default: all-safe
+        type: choice
+        options:
+          - apps
+          - node2
+          - node3
+          - node4
+          - all-safe
+  push:
+    branches: [main]
+    paths:
+      - "aura/**"
+      - "server/**"
+      - "deploy/node1/**"
+      - "deploy/node2/**"
+      - "deploy/node3/**"
+      - "deploy/node4/**"
+      - "deploy/monitoring/**"
+      - "deploy/nginx/**"
+      - "deploy/scripts/deploy-apps.sh"
+      - "deploy/scripts/deploy-node2.sh"
+      - "deploy/scripts/deploy-node3.sh"
+      - "deploy/scripts/deploy-node4.sh"
+      - "deploy/scripts/deploy-cluster.sh"
+      - "deploy/scripts/lib/**"
+      - "services/**"
+      - ".github/workflows/cd-auto-deploy.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-cluster:
+    name: Deploy cluster (aura-node1)
+    runs-on: [self-hosted, Linux, aura-node1]
+    timeout-minutes: 60
+    concurrency:
+      group: cd-aura-cluster-deploy
+      cancel-in-progress: false
+    steps:
+      - name: Pull ref and plan targets
+        id: plan
+        env:
+          AURA_APP_ROOT: /opt/aura/app
+          GITHUB_TOKEN: ${{ secrets.AURA_DEPLOY_GIT_TOKEN || github.token }}
+        run: |
+          set -euo pipefail
+          REF="${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.ref_name }}"
+          cd "${AURA_APP_ROOT}"
+          git -c "url.https://x-access-token:${GITHUB_TOKEN}@github.com/.insteadOf=https://github.com/" \
+            fetch --prune origin
+          git checkout "${REF}"
+          git -c "url.https://x-access-token:${GITHUB_TOKEN}@github.com/.insteadOf=https://github.com/" \
+            pull --ff-only origin "${REF}"
+          echo "ref=${REF}" >> "${GITHUB_OUTPUT}"
+
+          deploy_apps=false
+          deploy_node2=false
+          deploy_node3=false
+          deploy_node4=false
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            case "${{ inputs.target }}" in
+              apps) deploy_apps=true ;;
+              node2) deploy_node2=true ;;
+              node3) deploy_node3=true ;;
+              node4) deploy_node4=true ;;
+              all-safe)
+                deploy_apps=true
+                deploy_node2=true
+                deploy_node3=true
+                deploy_node4=true
+                ;;
+            esac
+          else
+            BEFORE="${{ github.event.before }}"
+            AFTER="${{ github.sha }}"
+            if [[ "${BEFORE}" == "0000000000000000000000000000000000000000" ]]; then
+              # New branch / first push — deploy everything safe.
+              deploy_apps=true
+              deploy_node2=true
+              deploy_node3=true
+              deploy_node4=true
+            else
+              changed="$(git diff --name-only "${BEFORE}" "${AFTER}")"
+              if printf '%s\n' "${changed}" | grep -E \
+                '^(aura/|server/|deploy/node1/|deploy/scripts/deploy-apps\.sh|deploy/nginx/|\.github/workflows/cd-auto-deploy\.yml)' \
+                >/dev/null; then
+                deploy_apps=true
+              fi
+              if printf '%s\n' "${changed}" | grep -E \
+                '^(deploy/node2/|deploy/scripts/deploy-node2\.sh|deploy/scripts/lib/|deploy/scripts/deploy-cluster\.sh)' \
+                >/dev/null; then
+                deploy_node2=true
+              fi
+              if printf '%s\n' "${changed}" | grep -E \
+                '^(deploy/node3/|deploy/scripts/deploy-node3\.sh|deploy/scripts/lib/|deploy/scripts/deploy-cluster\.sh)' \
+                >/dev/null; then
+                deploy_node3=true
+              fi
+              if printf '%s\n' "${changed}" | grep -E \
+                '^(deploy/node4/|deploy/monitoring/|deploy/scripts/deploy-node4\.sh|deploy/scripts/lib/|deploy/scripts/deploy-cluster\.sh|services/)' \
+                >/dev/null; then
+                deploy_node4=true
+              fi
+            fi
+          fi
+
+          {
+            echo "deploy_apps=${deploy_apps}"
+            echo "deploy_node2=${deploy_node2}"
+            echo "deploy_node3=${deploy_node3}"
+            echo "deploy_node4=${deploy_node4}"
+          } >> "${GITHUB_OUTPUT}"
+
+          echo "plan ref=${REF} apps=${deploy_apps} node2=${deploy_node2} node3=${deploy_node3} node4=${deploy_node4}"
+
+      - name: Deploy selected nodes
+        if: >-
+          steps.plan.outputs.deploy_apps == 'true' ||
+          steps.plan.outputs.deploy_node2 == 'true' ||
+          steps.plan.outputs.deploy_node3 == 'true' ||
+          steps.plan.outputs.deploy_node4 == 'true'
+        env:
+          AURA_APP_ROOT: /opt/aura/app
+          AURA_ENV_FILE: /opt/aura/app/deploy/node1/.env
+          GITHUB_TOKEN: ${{ secrets.AURA_DEPLOY_GIT_TOKEN || github.token }}
+          AURA_NODE2_HOST: ${{ vars.AURA_NODE2_HOST }}
+          AURA_NODE3_HOST: ${{ vars.AURA_NODE3_HOST }}
+          AURA_NODE4_HOST: ${{ vars.AURA_NODE4_HOST }}
+          AURA_SSH_USER: ${{ vars.AURA_SSH_USER }}
+          AURA_SSH_KEY: ${{ vars.AURA_SSH_KEY }}
+          AURA_NODE2_SSH_USER: ${{ vars.AURA_NODE2_SSH_USER }}
+          AURA_NODE3_SSH_USER: ${{ vars.AURA_NODE3_SSH_USER }}
+          AURA_NODE4_SSH_USER: ${{ vars.AURA_NODE4_SSH_USER }}
+          DEPLOY_APPS: ${{ steps.plan.outputs.deploy_apps }}
+          DEPLOY_NODE2: ${{ steps.plan.outputs.deploy_node2 }}
+          DEPLOY_NODE3: ${{ steps.plan.outputs.deploy_node3 }}
+          DEPLOY_NODE4: ${{ steps.plan.outputs.deploy_node4 }}
+          DEPLOY_REF: ${{ steps.plan.outputs.ref }}
+        run: |
+          set -euo pipefail
+          : "${AURA_SSH_KEY:=/opt/aura/.ssh/cluster_deploy}"
+          export AURA_SSH_KEY
+
+          chmod +x \
+            "${AURA_APP_ROOT}/deploy/scripts/deploy-apps.sh" \
+            "${AURA_APP_ROOT}/deploy/scripts/deploy-node2.sh" \
+            "${AURA_APP_ROOT}/deploy/scripts/deploy-node3.sh" \
+            "${AURA_APP_ROOT}/deploy/scripts/deploy-node4.sh" \
+            "${AURA_APP_ROOT}/deploy/scripts/deploy-cluster.sh"
+
+          args=()
+          [[ "${DEPLOY_APPS}" == "true" ]] && args+=(--apps)
+          [[ "${DEPLOY_NODE2}" == "true" ]] && args+=(--node2)
+          [[ "${DEPLOY_NODE3}" == "true" ]] && args+=(--node3)
+          [[ "${DEPLOY_NODE4}" == "true" ]] && args+=(--node4)
+
+          echo "==> Running deploy-cluster.sh ${args[*]} ${DEPLOY_REF}"
+          "${AURA_APP_ROOT}/deploy/scripts/deploy-cluster.sh" "${args[@]}" "${DEPLOY_REF}"
+
+      - name: Nothing to deploy
+        if: >-
+          steps.plan.outputs.deploy_apps != 'true' &&
+          steps.plan.outputs.deploy_node2 != 'true' &&
+          steps.plan.outputs.deploy_node3 != 'true' &&
+          steps.plan.outputs.deploy_node4 != 'true'
+        run: echo "No matching path changes; skipping cluster deploy"
