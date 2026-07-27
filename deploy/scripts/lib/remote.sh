@@ -124,11 +124,13 @@ aura_rsync() {
       "mkdir -p '${AURA_REMOTE_APP_ROOT}/deploy' '${AURA_REMOTE_APP_ROOT}/services'"
   fi
 
-  # Only skip files named exactly .env (per-node secrets). Example templates sync.
+  # Skip per-node secrets and Node-1-only TLS material (often root-only readable).
+  # Example templates (.env.*.example) still sync.
   echo "==> Syncing deploy/ → ${host}:${AURA_REMOTE_APP_ROOT}/deploy/"
   rsync "${rsync_flags[@]}" \
     -e "${ssh_e}" \
     --exclude '.env' \
+    --exclude 'certs/' \
     --exclude 'node_modules/' \
     --exclude '.DS_Store' \
     "${AURA_APP_ROOT}/deploy/" \
