@@ -123,10 +123,12 @@ def _require_cohort(identity) -> tuple[int, int, str]:
         except Exception:
             pass
 
-    # Safe defaults if anything is still None
-    year = year if year is not None else 1
-    sem = sem if sem is not None else 1
-    sec = sec if sec else "A"
+    # All resolution paths exhausted — missing cohort is a hard error.
+    if year is None or sem is None or not sec:
+        raise TimetableError(
+            "Your year, semester, and section are not set up in AURA yet. "
+            "Please contact your administrator or set your cohort before using timetable features."
+        )
 
     return int(year), int(sem), str(sec)
 
