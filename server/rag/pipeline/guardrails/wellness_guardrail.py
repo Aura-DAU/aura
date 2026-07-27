@@ -125,6 +125,7 @@ class WellnessGuardrail:
                 {"role": "system", "content": _SYSTEM_PROMPT},
                 {"role": "user", "content": query},
             ],
+            extra_body=InferenceRouter.no_think_extra_body(),
         )
         result = response.choices[0].message.content.strip().upper()
         # Guard against the model echoing "NOT_DISTRESS" which contains "DISTRESS"

@@ -86,6 +86,7 @@ UNSAFE
             model=self.model,
             max_tokens=10,
             temperature=0.0,
+            extra_body=InferenceRouter.no_think_extra_body(),
         )
         result = response.choices[0].message.content.strip().upper()
 

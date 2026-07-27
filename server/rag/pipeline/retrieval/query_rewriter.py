@@ -89,7 +89,8 @@ Latest Question:
                         "role": "user",
                         "content": prompt
                     }
-                ]
+                ],
+                extra_body=InferenceRouter.no_think_extra_body(),
             )
 
         response = InferenceRouter.call_with_rotation(_execute_rewrite, max_retries=5)

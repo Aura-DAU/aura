@@ -90,6 +90,7 @@ class PersonalQueryClassifier:
                     {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
                     {"role": "user",   "content": safe_query},
                 ],
+                extra_body=InferenceRouter.no_think_extra_body(),
             )
             raw = response.choices[0].message.content.strip()
             raw = raw.replace("```json", "").replace("```", "").strip()
