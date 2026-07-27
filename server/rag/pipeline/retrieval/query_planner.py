@@ -973,7 +973,8 @@ class QueryPlanner:
                         "role": "user",
                         "content": query
                     }
-                ]
+                ],
+                extra_body=InferenceRouter.no_think_extra_body(),
             )
 
         response = InferenceRouter.call_with_rotation(_execute_plan, max_retries=5)

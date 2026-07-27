@@ -59,6 +59,7 @@ class AuraState(TypedDict, total=False):
     history: list
     identity: Any
     display_profile: Any
+    on_delta: Any  # token-streaming callback, threaded straight to the generator
 
     query_type: Optional[str]
     classification: dict
@@ -319,6 +320,7 @@ class AuraChatGraph:
                 history=state["history"],
                 profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                on_delta=state.get("on_delta"),
             )
 
         state["result"] = {
@@ -376,7 +378,7 @@ class AuraChatGraph:
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────
 
-    def chat(self, query, history=None, identity=None, display_profile=None):
+    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None):
         if isinstance(identity, dict):
             identity = SimpleIdentity(
                 erp_id=identity.get("erp_id"),
@@ -390,6 +392,7 @@ class AuraChatGraph:
                 "history": history or [],
                 "identity": identity,
                 "display_profile": display_profile,
+                "on_delta": on_delta,
                 "result": None,
             }
             final_state = self._graph.invoke(initial_state)

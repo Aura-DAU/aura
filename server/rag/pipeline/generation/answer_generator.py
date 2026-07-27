@@ -35,6 +35,20 @@ def _approx_token_count(text: str) -> int:
     return len(text) // _TOKEN_CHARS_PER_TOKEN
 
 
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int((os.getenv(name) or "").strip() or default)
+    except (TypeError, ValueError):
+        return default
+
+
+# Hard ceiling on answer decode length. Without it vLLM lets a single answer
+# run to the model's full context window, so one rambling generation can hang a
+# worker for minutes. env-tunable for eval runs that legitimately need longer
+# completions.
+_MAX_ANSWER_TOKENS = _env_int("AURA_MAX_ANSWER_TOKENS", 768)
+
+
 # ── Streaming sanitizer ─────────────────────────────────────────────────────
 # The non-streaming path post-processes the FULL answer (strip <think> blocks,
 # strip inline [N] citations, append a consolidated [Sources: …] line). When
@@ -754,6 +768,7 @@ Retrieved Documents
 
                     temperature=0.2,
                     top_p=0.9,
+                    max_tokens=_MAX_ANSWER_TOKENS,
 
                     messages=[
                         {
@@ -764,7 +779,8 @@ Retrieved Documents
                             "role": "user",
                             "content": prompt
                         }
-                    ]
+                    ],
+                    extra_body=InferenceRouter.answer_extra_body(),
                 )
 
             response = InferenceRouter.call_with_rotation(_execute_generate, max_retries=5)
@@ -806,16 +822,18 @@ Retrieved Documents
         # Token-by-token path: sanitises deltas on the fly (think blocks and
         # inline citations never reach the client) and returns EXACTLY the
         # concatenation of emitted deltas, so callers can rely on
-        # streamed-content == returned answer. Stream-creation failures go
-        # through KeyManager rotation like the buffered path; a mid-stream
-        # provider failure after first emission surfaces as a truncated
-        # answer (the client keeps what it already received).
+        # streamed-content == returned answer. Stream-creation failures fail
+        # over across the vLLM pool via InferenceRouter.call_with_rotation like
+        # the buffered path; a mid-stream provider failure after first emission
+        # surfaces as a truncated answer (the client keeps what it already
+        # received) because rotation can't replay an already-emitted stream.
         def _execute_generate_stream(client):
             return client.chat.completions.create(
                 model=self.model,
 
                 temperature=0.2,
                 top_p=0.9,
+                max_tokens=_MAX_ANSWER_TOKENS,
 
                 messages=[
                     {
@@ -827,10 +845,11 @@ Retrieved Documents
                         "content": user_prompt
                     }
                 ],
-                stream=True
+                stream=True,
+                extra_body=InferenceRouter.answer_extra_body(),
             )
 
-        stream = KeyManager.call_with_rotation(_execute_generate_stream, max_retries=5)
+        stream = InferenceRouter.call_with_rotation(_execute_generate_stream, max_retries=5)
 
         if not stream:
             raise RAGPipelineError("Sorry, I encountered an error while generating a response.")

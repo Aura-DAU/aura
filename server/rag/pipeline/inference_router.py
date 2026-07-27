@@ -32,6 +32,13 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
+def _env_bool(name: str, default: bool) -> bool:
+    val = (os.getenv(name) or "").strip().lower()
+    if not val:
+        return default
+    return val in ("1", "true", "yes", "on")
+
+
 class InferenceRouter:
     # ── Topology / model (immutable once initialized) ────────────────────────
     _nodes: list[str] = []
@@ -110,6 +117,34 @@ class InferenceRouter:
         if env_var:
             return os.getenv(env_var, default or cls._model)
         return cls._model
+
+    # ── Reasoning-mode control (single source of truth) ──────────────────────
+    # Qwen3 and other hybrid-reasoning models emit a <think>…</think> preamble
+    # before every answer unless the chat template is told not to. vLLM exposes
+    # that switch through `chat_template_kwargs` on the OpenAI-compatible body,
+    # so every call site passes `extra_body=` from one of the two helpers below
+    # rather than hardcoding the dict. That preamble is hundreds-to-thousands of
+    # decode tokens the caller immediately strips — pure latency on a 32B model.
+
+    @staticmethod
+    def no_think_extra_body() -> dict:
+        """Reasoning ALWAYS off. For structured / short-output calls (guardrails,
+        classifier, query rewriter/planner) whose small max_tokens budget leaves
+        no room to think and whose output is terse by design — a <think> block
+        there is wasted latency and can truncate the real answer before it's
+        emitted."""
+        return {"chat_template_kwargs": {"enable_thinking": False}}
+
+    @staticmethod
+    def answer_extra_body() -> dict:
+        """Reasoning control for FINAL answer generation, where thinking is a
+        genuine quality/latency trade-off. Defaults to off (fast); set
+        AURA_ENABLE_THINKING=true to let the model reason first (slower, can
+        improve adherence on tricky negation / false-premise prompts — validate
+        with the eval suite before enabling in prod)."""
+        if _env_bool("AURA_ENABLE_THINKING", False):
+            return {}
+        return {"chat_template_kwargs": {"enable_thinking": False}}
 
     # ── Node selection & accounting ──────────────────────────────────────────
     @classmethod

@@ -55,7 +55,8 @@ export default function RootLayout({
         <Providers>
           {children}
           <Toaster theme="dark" position="top-center" />
-          {process.env.NODE_ENV === 'production' && <Analytics />}
+          {/* @vercel/analytics only works on Vercel; self-hosted nginx returns HTML 404 for /_vercel/insights. */}
+          {process.env.VERCEL === '1' && <Analytics />}
         </Providers>
       </body>
     </html>
