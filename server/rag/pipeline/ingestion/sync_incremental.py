@@ -154,22 +154,35 @@ def main():
         logger.warning("No new chunks generated and no files to delete. Exiting.")
         sys.exit(0)
 
-    # 2. Embed only new chunks via TEI
+    # 2. Embed only new chunks via Node 4 embedding-reranker
     new_embeddings = None
     if new_chunks:
-        embedding_url = os.getenv("EMBEDDING_URL", "http://10.100.97.74:8081")
-        tei_endpoint = f"{embedding_url.rstrip('/')}/embed"
+        embedding_url = os.getenv("EMBEDDING_URL") or os.getenv(
+            "EMBEDDING_SERVICE_URL", "http://10.100.97.74:8001"
+        )
+        embed_endpoint = f"{embedding_url.rstrip('/')}/embed"
         texts = [c["text"] for c in new_chunks]
-        logger.info("Generating embeddings for %d new chunks via TEI (%s)...", len(texts), tei_endpoint)
+        logger.info(
+            "Generating embeddings for %d new chunks via %s...",
+            len(texts),
+            embed_endpoint,
+        )
 
         all_embeddings = []
         batch_size = 32
         for i in range(0, len(texts), batch_size):
             batch = texts[i : i + batch_size]
-            payload = {"inputs": batch, "truncate": True}
-            res = requests.post(tei_endpoint, json=payload, headers={"Content-Type": "application/json"})
+            payload = {"texts": batch, "normalize": True}
+            res = requests.post(
+                embed_endpoint,
+                json=payload,
+                headers={"Content-Type": "application/json"},
+                timeout=120,
+            )
             res.raise_for_status()
-            all_embeddings.extend(res.json())
+            data = res.json()
+            batch_vecs = data["embeddings"] if isinstance(data, dict) else data
+            all_embeddings.extend(batch_vecs)
 
         new_embeddings = np.array(all_embeddings, dtype="float32")
         norms = np.linalg.norm(new_embeddings, axis=1, keepdims=True)

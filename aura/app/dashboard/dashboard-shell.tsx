@@ -4,6 +4,7 @@ import React from "react"
 import { useRouter } from "next/navigation"
 import { StudentDashboard } from "@/components/features/chat-ui/StudentDashboard"
 import { FacultyDashboard } from "@/components/features/chat-ui/FacultyDashboard"
+import { InstallPromptBanner } from "@/components/features/chat-ui/InstallPromptBanner"
 import AdminBindingsClient from "./admin-client"
 
 interface DashboardShellProps {
@@ -32,8 +33,10 @@ export default function DashboardShell({ user }: DashboardShellProps) {
   const userName = user.name || "User"
   const departmentName = user.department
 
+  let body: React.ReactNode
+
   if (role === "student") {
-    return (
+    body = (
       <StudentDashboard
         userName={userName}
         departmentName={departmentName}
@@ -43,25 +46,28 @@ export default function DashboardShell({ user }: DashboardShellProps) {
         onSelectPrompt={handleSelectPrompt}
       />
     )
-  }
-
-  if (role.startsWith("faculty") || role.startsWith("dean") || role === "registrar") {
-    return (
+  } else if (role.startsWith("faculty") || role.startsWith("dean") || role === "registrar") {
+    body = (
       <FacultyDashboard
         userName={userName}
         departmentName={departmentName}
         onSelectPrompt={handleSelectPrompt}
       />
     )
-  }
-
-  if (role === "admin") {
-    return <AdminBindingsClient />
+  } else if (role === "admin") {
+    body = <AdminBindingsClient />
+  } else {
+    body = (
+      <div className="flex h-screen items-center justify-center bg-theme-black text-neutral-100 font-sans">
+        <p className="text-sm text-neutral-400">Unauthorized role access: {role}</p>
+      </div>
+    )
   }
 
   return (
-    <div className="flex h-screen items-center justify-center bg-theme-black text-neutral-100 font-sans">
-      <p className="text-sm text-neutral-400">Unauthorized role access: {role}</p>
-    </div>
+    <>
+      {body}
+      <InstallPromptBanner />
+    </>
   )
 }

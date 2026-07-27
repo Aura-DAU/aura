@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { WifiOff } from "lucide-react"
 import { useAuraChat } from "@/hooks/use-aura-chat"
+import { usePWAInstall } from "@/hooks/use-pwa-install"
 import { DocumentViewerProvider } from "@/hooks/use-document-viewer"
 import { Sidebar } from "./Sidebar"
 import { Header } from "./Header"
@@ -12,14 +13,12 @@ import { Composer } from "./Composer"
 import { EmptyState } from "./EmptyState"
 import { ProfileModal } from "./ProfileModal"
 import { DocumentViewerSheet } from "./DocumentViewerSheet"
+import { InstallPromptBanner } from "./InstallPromptBanner"
 import { AuroraBackground } from "@/components/ui/aurora-background"
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>
-}
 
 export function ChatShell() {
   const chat = useAuraChat()
+  const { canInstall, promptInstall } = usePWAInstall()
   const router = useRouter()
   const searchParams = useSearchParams()
   const promptHandled = useRef(false)
@@ -31,7 +30,6 @@ export function ChatShell() {
   // Always false for SSR + first client paint; only show after mount to avoid hydration mismatch.
   const [isOffline, setIsOffline] = useState(false)
   const [offlineReady, setOfflineReady] = useState(false)
-  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
 
   useEffect(() => {
     const goOnline = () => setIsOffline(false)
@@ -44,15 +42,6 @@ export function ChatShell() {
       window.removeEventListener("online", goOnline)
       window.removeEventListener("offline", goOffline)
     }
-  }, [])
-
-  useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault()
-      setInstallPrompt(e as BeforeInstallPromptEvent)
-    }
-    window.addEventListener("beforeinstallprompt", handler)
-    return () => window.removeEventListener("beforeinstallprompt", handler)
   }, [])
 
   // Consume ?prompt= from dashboard quick actions once, then clear the URL.
@@ -85,12 +74,6 @@ export function ChatShell() {
       return next
     })
   }, [])
-
-  const handleInstall = useCallback(async () => {
-    if (!installPrompt) return
-    await installPrompt.prompt()
-    setInstallPrompt(null)
-  }, [installPrompt])
 
   const handleRegenerate = useCallback(() => {
     const lastUser = chat.messages.findLast((m) => m.role === "user")
@@ -144,8 +127,10 @@ export function ChatShell() {
               onToggleDesktopSidebar={toggleDesktopSidebar}
               desktopSidebarOpen={desktopSidebarOpen}
               onClearChat={chat.handleClearChat}
-              canInstall={Boolean(installPrompt)}
-              onInstall={handleInstall}
+              canInstall={canInstall}
+              onInstall={() => {
+                void promptInstall()
+              }}
             />
 
             {offlineReady && isOffline ? (
@@ -198,6 +183,7 @@ export function ChatShell() {
         />
 
         <DocumentViewerSheet />
+        <InstallPromptBanner />
       </div>
     </DocumentViewerProvider>
   )
