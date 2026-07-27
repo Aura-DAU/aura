@@ -2,13 +2,16 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Download, LogIn, LogOut, Menu, Trash2 } from "lucide-react"
+import { Download, LogIn, LogOut, Menu, PanelLeftOpen, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSession, signOut } from "next-auth/react"
 import { BrandMark } from "@/components/ui/brand-mark"
 
 interface HeaderProps {
   onToggleSidebar: () => void
+  /** Desktop-only: show/hide the collapsible sidebar. */
+  onToggleDesktopSidebar: () => void
+  desktopSidebarOpen: boolean
   onClearChat: () => void
   canInstall: boolean
   onInstall: () => void
@@ -16,6 +19,8 @@ interface HeaderProps {
 
 export function Header({
   onToggleSidebar,
+  onToggleDesktopSidebar,
+  desktopSidebarOpen,
   onClearChat,
   canInstall,
   onInstall,
@@ -56,6 +61,18 @@ export function Header({
             className="rounded-xl p-2 text-neutral-300 transition-colors hover:bg-theme-gray-light active:scale-95 md:hidden"
           >
             <Menu className="size-5" />
+          </button>
+          <button
+            type="button"
+            onClick={onToggleDesktopSidebar}
+            aria-label="Show sidebar"
+            title="Show sidebar"
+            className={cn(
+              "rounded-xl p-2 text-neutral-300 transition-colors hover:bg-theme-gray-light active:scale-95",
+              desktopSidebarOpen ? "hidden" : "hidden md:inline-flex",
+            )}
+          >
+            <PanelLeftOpen className="size-5" />
           </button>
           <BrandMark className="size-7 md:hidden" />
           <div className="flex flex-col leading-none">

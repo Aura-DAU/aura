@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
 import { Sparkles, Loader2, GraduationCap, BookOpen, AlertCircle, Shield } from "lucide-react"
 import { AnimatedBrandMark } from "@/components/ui/animated-brand-mark"
+import { AuroraBackground } from "@/components/ui/aurora-background"
 import { toastError } from "@/lib/toast"
 
 function GoogleIcon({ className }: { className?: string }) {
@@ -158,11 +159,13 @@ function LoginCard() {
 export default function LoginPage() {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-theme-black px-4 py-10">
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:24px_24px]" />
-        <div className="absolute -left-32 -top-32 size-96 rounded-full bg-theme-red/20 blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 size-96 rounded-full bg-theme-yellow/20 blur-3xl" />
+      {/* Background: minimal ambient aurora + a warm focal bloom, framed by a vignette. */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <AuroraBackground className="absolute inset-0 opacity-70" showRadialGradient={false} />
+        {/* Warm bloom behind the card for focus. */}
+        <div className="absolute left-1/2 top-1/2 size-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,80,59,0.14),transparent_68%)] blur-2xl" />
+        {/* Vignette to deepen the edges and draw focus to the sign-in card. */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_28%,rgba(0,0,0,0.62))]" />
       </div>
 
       <div className="relative z-10 w-full max-w-md">

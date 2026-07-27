@@ -14,7 +14,7 @@ export function StreamingIndicator({ thinkingStep }: StreamingIndicatorProps) {
           <span className="chat-v2-dot size-1.5 rounded-full bg-theme-yellow" style={{ animationDelay: "150ms" }} />
           <span className="chat-v2-dot size-1.5 rounded-full bg-theme-red" style={{ animationDelay: "300ms" }} />
         </div>
-        <span className="text-sm text-neutral-500 transition-opacity duration-300">
+        <span className="text-shimmer text-sm font-medium transition-opacity duration-300">
           {thinkingStep || "Thinking…"}
         </span>
         <span className="sr-only">AURA is responding</span>

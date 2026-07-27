@@ -1,7 +1,7 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { MessageSquare, Plus, Trash2, User, LogOut, LayoutDashboard } from "lucide-react"
+import { MessageSquare, Plus, Trash2, User, LogOut, LayoutDashboard, PanelLeftClose } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { ChatThread, StudentProfile } from "@/lib/chat-types"
 import { useSession, signOut } from "next-auth/react"
@@ -17,13 +17,58 @@ interface SidebarProps {
   studentProfile: StudentProfile
   mobileOpen: boolean
   onCloseMobile: () => void
+  /** Desktop-only: sidebar is hidden (width collapsed to 0). */
+  collapsed: boolean
+  /** Desktop-only: toggle the collapsed state. */
+  onCollapse: () => void
+}
+
+interface ThreadGroup {
+  label: string
+  threads: ChatThread[]
+}
+
+const DAY_MS = 24 * 60 * 60 * 1000
+
+/** Buckets threads into recency groups (ChatGPT/Claude-style history), keeping input order within each. */
+function groupThreadsByRecency(threads: ChatThread[]): ThreadGroup[] {
+  const now = new Date()
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime()
+  const startOfYesterday = startOfToday - DAY_MS
+  const startOf7Days = startOfToday - 7 * DAY_MS
+
+  const groups: ThreadGroup[] = [
+    { label: "Today", threads: [] },
+    { label: "Yesterday", threads: [] },
+    { label: "Previous 7 days", threads: [] },
+    { label: "Older", threads: [] },
+  ]
+
+  for (const thread of threads) {
+    const ts = thread.updatedAt ?? 0
+    if (ts >= startOfToday) groups[0].threads.push(thread)
+    else if (ts >= startOfYesterday) groups[1].threads.push(thread)
+    else if (ts >= startOf7Days) groups[2].threads.push(thread)
+    else groups[3].threads.push(thread)
+  }
+
+  return groups.filter((g) => g.threads.length > 0)
 }
 
 export function Sidebar(props: SidebarProps) {
   return (
     <>
-      <aside className="hidden w-72 shrink-0 border-r border-theme-gray-light bg-theme-gray md:block">
-        <SidebarContent {...props} />
+      <aside
+        className={cn(
+          "hidden shrink-0 overflow-hidden border-r border-theme-gray-light bg-theme-gray transition-[width] duration-300 ease-in-out md:block",
+          props.collapsed ? "md:w-0 md:border-r-0" : "md:w-72",
+        )}
+        aria-hidden={props.collapsed}
+      >
+        {/* Fixed inner width so content doesn't reflow while the panel animates. */}
+        <div className="h-full w-72">
+          <SidebarContent {...props} />
+        </div>
       </aside>
 
       <AnimatePresence>
@@ -62,6 +107,7 @@ function SidebarContent({
   onOpenProfile,
   studentProfile,
   onCloseMobile,
+  onCollapse,
 }: SidebarProps) {
   const { data: session } = useSession()
   const displayName = session?.user ? (studentProfile.name || session.user.name || "User") : "Guest Account"
@@ -69,14 +115,25 @@ function SidebarContent({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-2.5 px-4 py-4">
-        <BrandMark className="size-8 shadow-[0_0_20px_-6px_rgba(244,80,59,0.55)]" />
-        <div className="flex flex-col leading-tight">
-          <span className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text font-semibold tracking-tight text-transparent">
-            AURA
-          </span>
-          <span className="text-[10px] text-neutral-500">Your campus AI</span>
+      <div className="flex items-center justify-between px-4 py-4">
+        <div className="flex items-center gap-2.5">
+          <BrandMark className="size-8 shadow-[0_0_20px_-6px_rgba(244,80,59,0.55)]" />
+          <div className="flex flex-col leading-tight">
+            <span className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text font-semibold tracking-tight text-transparent">
+              AURA
+            </span>
+            <span className="text-[10px] text-neutral-500">Your campus AI</span>
+          </div>
         </div>
+        <button
+          type="button"
+          onClick={onCollapse}
+          aria-label="Hide sidebar"
+          title="Hide sidebar"
+          className="hidden shrink-0 rounded-lg p-1.5 text-neutral-400 transition-colors hover:bg-theme-gray-light hover:text-neutral-100 active:scale-95 md:inline-flex"
+        >
+          <PanelLeftClose className="size-4" />
+        </button>
       </div>
 
       <div className="flex flex-col gap-2 px-3">
@@ -103,52 +160,58 @@ function SidebarContent({
         )}
       </div>
 
-      <nav className="chat-v2-scroll mt-4 flex-1 space-y-1 overflow-y-auto px-3 pb-4">
-        <p className="mb-2 px-2 text-[10px] font-medium uppercase tracking-wider text-neutral-600">
-          Conversations
-        </p>
+      <nav className="chat-v2-scroll mt-4 flex-1 overflow-y-auto px-3 pb-4">
         {threads.length === 0 ? (
           <p className="px-2 py-4 text-xs text-neutral-500">
             No conversations yet.
           </p>
         ) : (
-          threads.map((thread) => {
-            const active = thread.id === activeThreadId
-            return (
-              <div
-                key={thread.id}
-                className={cn(
-                  "group relative flex items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-all duration-150",
-                  active
-                    ? "bg-theme-gray-light text-neutral-100"
-                    : "text-neutral-400 hover:bg-theme-gray-light/55 hover:text-neutral-200",
-                )}
-              >
-                {active ? (
-                  <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-gradient-to-b from-theme-red to-theme-yellow" />
-                ) : null}
-                <button
-                  type="button"
-                  onClick={() => {
-                    onSelectThread(thread.id)
-                    onCloseMobile()
-                  }}
-                  className="flex min-w-0 flex-1 items-center gap-2 text-left"
-                >
-                  <MessageSquare className={cn("size-4 shrink-0", active && "text-theme-yellow")} />
-                  <span className="truncate">{thread.title}</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onDeleteThread(thread.id)}
-                  aria-label={`Delete ${thread.title}`}
-                  className="shrink-0 rounded-md p-1 text-neutral-500 opacity-0 transition-opacity hover:text-theme-red group-hover:opacity-100 focus-visible:opacity-100 max-md:opacity-100"
-                >
-                  <Trash2 className="size-3.5" />
-                </button>
+          groupThreadsByRecency(threads).map((group) => (
+            <div key={group.label} className="mb-3">
+              <p className="mb-1 px-2 text-[10px] font-medium uppercase tracking-wider text-neutral-600">
+                {group.label}
+              </p>
+              <div className="space-y-1">
+                {group.threads.map((thread) => {
+                  const active = thread.id === activeThreadId
+                  return (
+                    <div
+                      key={thread.id}
+                      className={cn(
+                        "group relative flex items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-all duration-150",
+                        active
+                          ? "bg-theme-gray-light text-neutral-100"
+                          : "text-neutral-400 hover:bg-theme-gray-light/55 hover:text-neutral-200",
+                      )}
+                    >
+                      {active ? (
+                        <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-gradient-to-b from-theme-red to-theme-yellow" />
+                      ) : null}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          onSelectThread(thread.id)
+                          onCloseMobile()
+                        }}
+                        className="flex min-w-0 flex-1 items-center gap-2 text-left"
+                      >
+                        <MessageSquare className={cn("size-4 shrink-0", active && "text-theme-yellow")} />
+                        <span className="truncate">{thread.title}</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onDeleteThread(thread.id)}
+                        aria-label={`Delete ${thread.title}`}
+                        className="shrink-0 rounded-md p-1 text-neutral-500 opacity-0 transition-opacity hover:text-theme-red group-hover:opacity-100 focus-visible:opacity-100 max-md:opacity-100"
+                      >
+                        <Trash2 className="size-3.5" />
+                      </button>
+                    </div>
+                  )
+                })}
               </div>
-            )
-          })
+            </div>
+          ))
         )}
       </nav>
       <div className="flex items-center gap-2 border-t border-theme-gray-light p-3">

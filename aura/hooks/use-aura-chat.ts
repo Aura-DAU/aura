@@ -473,7 +473,12 @@ export function useAuraChat() {
   // Stable identity unless threads actually change — consumers (Sidebar) can
   // skip re-renders instead of receiving a fresh array every hook render.
   const threadSummaries = useMemo(
-    () => threads.map(({ id, title }) => ({ id, title })),
+    () =>
+      threads.map(({ id, title, messages }) => ({
+        id,
+        title,
+        updatedAt: messages[messages.length - 1]?.timestamp ?? messages[0]?.timestamp,
+      })),
     [threads],
   )
 
