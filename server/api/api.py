@@ -12,6 +12,10 @@ for p in (str(server_dir), str(rag_dir)):
     if p not in sys.path:
         sys.path.insert(0, p)
 
+#Loading dotenv file
+from dotenv import load_dotenv
+load_dotenv(server_dir / ".env")
+
 from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool

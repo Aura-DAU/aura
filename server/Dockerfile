@@ -22,9 +22,8 @@ RUN apt-get update \
 
 WORKDIR /app/server
 
-COPY rag/requirements.txt ./rag/requirements.txt
-RUN pip install --no-cache-dir -r rag/requirements.txt \
- && pip install --no-cache-dir gunicorn
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # api.py inserts server_dir and rag_dir onto sys.path itself, so the image
 # just needs the whole server/ tree with this as the working directory.

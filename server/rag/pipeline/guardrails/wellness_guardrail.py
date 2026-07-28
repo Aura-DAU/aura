@@ -90,7 +90,17 @@ class WellnessGuardrail:
         self.client = InferenceRouter.get_client()
         # llama-3.3-70b-versatile: fast, instruction-following, available on Groq.
         # Override via VLLM_WELLNESS_MODEL env var if needed.
-        self.model = os.getenv("VLLM_WELLNESS_MODEL", os.getenv("GROQ_WELLNESS_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        # Falls back to VLLM_MODEL (the pool's served id) before the hardcoded
+        # default, matching every other call site. Without that link this
+        # guardrail asked for a model the pool doesn't serve, 404'd, and
+        # silently degraded to the keyword fallback on every request.
+        self.model = os.getenv(
+            "VLLM_WELLNESS_MODEL",
+            os.getenv(
+                "GROQ_WELLNESS_MODEL",
+                os.getenv("VLLM_MODEL", "Qwen/Qwen3-32B-AWQ"),
+            ),
+        )
 
     # ------------------------------------------------------------------
     # Public API
