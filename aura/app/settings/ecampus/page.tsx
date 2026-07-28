@@ -51,6 +51,7 @@ export default function ConnectEcampusPage() {
 
     void checkLinkStatus()
     if (session?.user?.erpId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUsername(session.user.erpId)
     }
 

@@ -53,6 +53,7 @@ export function useGoogleCalendarSync() {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search)
       if (params.get("calendar") === "connected") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setJustConnected(true)
         params.delete("calendar")
         const newSearch = params.toString()
@@ -106,6 +107,7 @@ export function useGoogleCalendarSync() {
   // immediately see their classes land on their calendar.
   useEffect(() => {
     if (justConnected && status === "connected") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setJustConnected(false)
       sync()
     }

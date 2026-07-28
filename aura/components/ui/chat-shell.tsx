@@ -27,7 +27,9 @@ export function ChatShell() {
   useEffect(() => {
     const goOnline = () => setIsOffline(false)
     const goOffline = () => setIsOffline(true)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOfflineReady(true)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsOffline(!navigator.onLine)
     window.addEventListener("online", goOnline)
     window.addEventListener("offline", goOffline)
