@@ -69,13 +69,16 @@ class QdrantIndexAdapter:
         query_filter = translate_filter(filter)
 
         try:
-            hits = self._client.search(
+            # query_points, not the older search(): qdrant-client removed
+            # .search() in 1.16. Same ScoredPoint shape, wrapped in a
+            # QueryResponse whose .points holds the hits.
+            hits = self._client.query_points(
                 collection_name=self._collection,
-                query_vector=vector,
+                query=vector,
                 limit=top_k,
                 query_filter=query_filter,
                 with_payload=include_metadata,
-            )
+            ).points
         except Exception as e:
             logger.warning("Qdrant query failed: %s", e)
             return {"matches": []}
