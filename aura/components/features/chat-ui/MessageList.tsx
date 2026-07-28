@@ -58,7 +58,7 @@ export function MessageList({
   }, [messages, loading, thinkingStep])
 
   return (
-    <div ref={containerRef} className="relative mx-auto w-full max-w-3xl px-4 py-6 md:py-8">
+    <div ref={containerRef} className="relative mx-auto w-full max-w-3xl 2xl:max-w-5xl px-4 py-6 md:py-8" aria-live="polite" aria-atomic="false">
       <div className="space-y-8">
         {messages.map((message, index) => {
           const isStreaming =

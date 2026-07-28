@@ -101,7 +101,7 @@ export function Composer({
         onSubmit={handleSubmit}
         className={cn(
           "w-full",
-          variant === "docked" && "mx-auto max-w-3xl px-4 pb-3 md:pb-4",
+          variant === "docked" && "mx-auto max-w-3xl 2xl:max-w-5xl px-4 pb-3 md:pb-4",
         )}
       >
         {quotaExhausted ? (
@@ -119,7 +119,7 @@ export function Composer({
                 Sign in with @dau.ac.in for unlimited access
               </a>
             ) : (
-              <p className="text-xs text-neutral-500">Please try again tomorrow.</p>
+              <p className="text-xs text-neutral-400">Please try again tomorrow.</p>
             )}
           </div>
         ) : (
@@ -140,7 +140,7 @@ export function Composer({
               maxLength={MAX_CHARS}
               placeholder={dynamicPlaceholder}
               aria-label="Message AURA"
-              className="chat-v2-scroll block w-full resize-none bg-transparent px-2 pb-1.5 pt-2 text-[15px] leading-relaxed text-neutral-100 outline-none placeholder:text-neutral-500"
+              className="chat-v2-scroll block w-full resize-none bg-transparent px-2 pb-1.5 pt-2 text-[15px] leading-relaxed text-neutral-100 outline-none placeholder:text-neutral-400"
             />
 
             <div className="flex items-center justify-between gap-2 pl-2">

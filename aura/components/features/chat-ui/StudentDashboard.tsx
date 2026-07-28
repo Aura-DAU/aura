@@ -118,7 +118,7 @@ export function StudentDashboard({
   const grouped = data ? groupByDay(data.timetable) : []
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 text-left animate-in fade-in slide-in-from-bottom-3 duration-200">
+    <div className="mx-auto w-full max-w-3xl 2xl:max-w-5xl px-4 py-8 text-left animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Welcome banner */}
       <div className="mb-6 rounded-2xl border border-theme-gray-light bg-theme-gray/40 p-6 backdrop-blur-md">
         <h1 className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-xl font-bold text-transparent md:text-2xl">

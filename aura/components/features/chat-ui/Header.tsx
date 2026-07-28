@@ -79,7 +79,7 @@ export function Header({
             <span className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-lg font-semibold tracking-tight text-transparent">
               AURA
             </span>
-            <span className="hidden text-[10px] text-neutral-500 sm:block">
+            <span className="hidden text-[10px] text-neutral-400 sm:block">
               DAU Assistant
             </span>
           </div>
@@ -94,6 +94,7 @@ export function Header({
           <button
             type="button"
             onClick={handleClear}
+            aria-label={confirmClear ? "Confirm clear chat" : "Clear chat"}
             className={cn(
               "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-sm transition-all active:scale-[0.98]",
               confirmClear

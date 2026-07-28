@@ -1,6 +1,6 @@
 "use client"
 
-import { type FormEvent, useState } from "react"
+import { type FormEvent, useState, useEffect, useRef } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { X } from "lucide-react"
 import { toast } from "sonner"
@@ -40,6 +40,16 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
   const [draft, setDraft] = useState<StudentProfile>(profile)
   const [saving, setSaving] = useState(false)
   const { data: session } = useSession()
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", handleEscape)
+    closeButtonRef.current?.focus()
+    return () => document.removeEventListener("keydown", handleEscape)
+  }, [onClose])
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -82,6 +92,7 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
             Your profile
           </h2>
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={onClose}
             aria-label="Close"

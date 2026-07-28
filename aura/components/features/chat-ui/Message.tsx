@@ -97,7 +97,7 @@ export function Message({
   if (message.role === "user") {
     return (
       <div className="msg-enter flex justify-end">
-        <div className="max-w-[min(75%,42rem)] rounded-[22px] rounded-br-lg bg-theme-gray-light px-4 py-2.5 text-[15px] leading-relaxed text-neutral-100 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]">
+        <div className="max-w-[min(75%,42rem)] 2xl:max-w-[min(75%,56rem)] rounded-[22px] rounded-br-lg bg-theme-gray-light px-4 py-2.5 text-[15px] leading-relaxed text-neutral-100 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]">
           {message.content}
         </div>
       </div>
@@ -185,6 +185,7 @@ export function Message({
                       onMouseEnter={() => prefetchDocument(viewerTarget)}
                       onClick={() => openDocument(viewerTarget)}
                       className={pillClasses}
+                      aria-label={`View source: ${c.title ?? c.file}`}
                     >
                       {label}
                     </button>
