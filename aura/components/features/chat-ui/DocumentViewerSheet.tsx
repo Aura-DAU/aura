@@ -42,9 +42,20 @@ function DocumentViewerPanel({
   )
   const highlightRef = useRef<HTMLDivElement | null>(null)
   const scrollRef = useRef<HTMLDivElement | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", handleEscape)
+    closeButtonRef.current?.focus()
+    return () => document.removeEventListener("keydown", handleEscape)
+  }, [onClose])
 
   useEffect(() => {
     if (documentCache.has(target.path)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setState({ status: "loaded", content: documentCache.get(target.path) })
       return
     }
@@ -116,6 +127,7 @@ function DocumentViewerPanel({
             </div>
           </div>
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={onClose}
             aria-label="Close document viewer"

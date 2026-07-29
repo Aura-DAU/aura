@@ -1,6 +1,7 @@
 {
   "name": "AURA — DAU Assistant",
   "short_name": "AURA",
+  "id": "/",
   "description": "AI assistant for Dhirubhai Ambani University",
   "start_url": "/",
   "scope": "/",

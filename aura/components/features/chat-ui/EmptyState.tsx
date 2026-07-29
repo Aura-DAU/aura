@@ -56,6 +56,7 @@ export function EmptyState({ onSelectPrompt, userName, children }: EmptyStatePro
   // Time- and name-based greeting resolves client-side; keep the server/first paint neutral
   // so hydration matches, then personalise once mounted and the session is known.
   const [mounted, setMounted] = useState(false)
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), [])
 
   const firstName = (userName || session?.user?.name || "").trim().split(" ")[0]
@@ -63,7 +64,7 @@ export function EmptyState({ onSelectPrompt, userName, children }: EmptyStatePro
     mounted && firstName ? `${timeGreeting(new Date())}, ${firstName}` : "How can I help you today?"
 
   return (
-    <div className="w-full max-w-3xl px-4 py-10">
+    <div className="w-full max-w-3xl 2xl:max-w-5xl px-4 py-10">
       <div className="mb-6 flex flex-col items-center gap-4 text-center animate-in fade-in slide-in-from-bottom-2 duration-500">
         <AnimatedBrandMark className="size-14 shadow-[0_0_44px_-12px_rgba(244,80,59,0.5)]" />
         <h1 className="text-balance text-[1.7rem] font-semibold tracking-tight md:text-[2.25rem]">

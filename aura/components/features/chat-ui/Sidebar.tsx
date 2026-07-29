@@ -176,7 +176,7 @@ function SidebarContent({
 
       <nav className="chat-v2-scroll mt-4 flex-1 overflow-y-auto px-3 pb-4">
         {threads.length === 0 ? (
-          <p className="px-2 py-4 text-xs text-neutral-500">No conversations yet.</p>
+          <p className="px-2 py-4 text-xs text-neutral-400">No conversations yet.</p>
         ) : (
           groupThreadsByRecency(threads).map((group) => (
             <div key={group.label} className="mb-3">
@@ -373,7 +373,7 @@ function AccountFooter({
               {department}
             </span>
           ) : null}
-          <span suppressHydrationWarning className="block truncate text-xs text-neutral-500">
+          <span suppressHydrationWarning className="block truncate text-xs text-neutral-400">
             {displayEmail}
           </span>
         </span>
