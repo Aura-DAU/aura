@@ -21,7 +21,13 @@ class ContextBuilder:
         documents = []
 
         sources = []
-        seen_urls = set()
+        seen_urls = {}
+        # doc id (the `id` attribute the LLM cites) → index into `sources`.
+        # Not the identity map: several chunks can dedup onto one source, and
+        # a chunk whose source was already seen still gets its own doc id. So
+        # sources[i] does NOT correspond to <doc id="i+1"> and callers must
+        # resolve cited ids through this map rather than by position.
+        citation_map = {}
 
         context_tokens_used = 0
 
@@ -143,18 +149,20 @@ scraped_date="{metadata.get('scraped_date', '')}"
             # this chunk was drawn from.
             dedup_key = url or relative_path or title_str
 
-            if dedup_key and dedup_key not in seen_urls:
+            if dedup_key:
+                if dedup_key not in seen_urls:
+                    seen_urls[dedup_key] = len(sources)
 
-                sources.append({
-                    "title": metadata.get("title"),
-                    "url": url or None,
-                    "path": relative_path or None,
-                    "start_line": start_line_val or None,
-                    "end_line": end_line_val or None,
-                    "cluster": metadata.get("cluster")
-                })
+                    sources.append({
+                        "title": metadata.get("title"),
+                        "url": url or None,
+                        "path": relative_path or None,
+                        "start_line": start_line_val or None,
+                        "end_line": end_line_val or None,
+                        "cluster": metadata.get("cluster")
+                    })
 
-                seen_urls.add(dedup_key)
+                citation_map[idx] = seen_urls[dedup_key]
 
         context = (
             "<context>\n"
@@ -164,5 +172,6 @@ scraped_date="{metadata.get('scraped_date', '')}"
 
         return {
             "context": context,
-            "sources": sources
+            "sources": sources,
+            "citation_map": citation_map
         }
