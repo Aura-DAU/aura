@@ -138,7 +138,7 @@ export function Message({
           </div>
         ) : (
           <div className="text-[15px] leading-[1.7]">
-            <MarkdownContent content={message.content} />
+            <MarkdownContent content={message.content} citations={citations} />
           </div>
         )}
 
@@ -175,20 +175,24 @@ export function Message({
 
               return (
                 <div key={`${c.file}-${i}`} className="inline-flex items-center gap-1.5">
-                  {isUrl ? (
-                    <a href={c.file} target="_blank" rel="noopener noreferrer" className={pillClasses}>
-                      {label}
-                    </a>
-                  ) : viewerTarget ? (
+                  {/* Prefer the document viewer when a source path exists */}
+                  {viewerTarget ? (
                     <button
                       type="button"
-                      onMouseEnter={() => prefetchDocument(viewerTarget)}
+                      onMouseEnter={() => {
+                        prefetchDocument(viewerTarget)
+                        openDocument(viewerTarget)
+                      }}
                       onClick={() => openDocument(viewerTarget)}
                       className={pillClasses}
                       aria-label={`View source: ${c.title ?? c.file}`}
                     >
                       {label}
                     </button>
+                  ) : isUrl ? (
+                    <a href={c.file} target="_blank" rel="noopener noreferrer" className={pillClasses}>
+                      {label}
+                    </a>
                   ) : (
                     <span className={pillClasses}>{label}</span>
                   )}
