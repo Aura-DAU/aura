@@ -91,6 +91,24 @@ aura_ssh() {
   ssh "${opts[@]}" "${AURA_SSH_USER}@${host}" "$@"
 }
 
+# Test whether SSH connection to host is reachable (returns 0 for success, 1 for failure).
+aura_check_ssh() {
+  local host="$1"
+  if [[ "${AURA_DRY_RUN}" == "1" ]]; then
+    return 0
+  fi
+  if [[ ! -f "${AURA_SSH_KEY}" ]]; then
+    return 1
+  fi
+  local -a opts=()
+  local opt
+  while IFS= read -r opt; do
+    [[ -n "${opt}" ]] && opts+=("${opt}")
+  done < <(aura_ssh_opts_lines)
+
+  ssh "${opts[@]}" -o ConnectTimeout=5 "${AURA_SSH_USER}@${host}" "exit 0" >/dev/null 2>&1
+}
+
 # Sync deploy/ + services/ to the remote app root. Never overwrites remote .env files.
 aura_rsync() {
   local host="$1"
