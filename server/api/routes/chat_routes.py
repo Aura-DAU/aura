@@ -2,18 +2,23 @@
 # POST /chat/stream — same pipeline, answer deltas streamed over SSE.
 import asyncio
 import json
+import logging
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import StreamingResponse
 
 from api.auth import Identity, require_identity
+from api.request_context import AcademicScopeResolver, RequestContext
 from api.deps import chat_queue_lock, get_aura
 from api.schemas import ChatRequest
 from pipeline.memory.conversation_memory import get_conversation_memory
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota
+from access_control import resolve_effective_role
 
 router = APIRouter(tags=["chat"])
+_scope_resolver = AcademicScopeResolver()
+logger = logging.getLogger(__name__)
 
 
 def _resolve_request(request: ChatRequest, identity: Identity):
@@ -32,7 +37,23 @@ def _resolve_request(request: ChatRequest, identity: Identity):
             status_code=429,
             detail=f"Question limit reached ({exc.limit}/day).",
         ) from exc
-    return history, display_profile
+
+    try:
+        effective_role = resolve_effective_role(identity)
+    except Exception as exc:
+        logger.warning("Effective role resolution failed for %s: %s", identity.erp_id, exc)
+        effective_role = identity.role
+
+    try:
+        request_context = _scope_resolver.resolve(identity, effective_role)
+    except Exception as exc:
+        logger.warning("Request context resolution failed for %s: %s", identity.erp_id, exc)
+        request_context = RequestContext(
+            identity=identity,
+            effective_role=effective_role,
+            academic_scope=None,
+        )
+    return history, display_profile, request_context
 
 
 @router.post("/chat")
@@ -40,15 +61,15 @@ async def chat(
     request: ChatRequest,
     identity: Identity = Depends(require_identity),
 ):
-    history, display_profile = _resolve_request(request, identity)
+    history, display_profile, request_context = _resolve_request(request, identity)
 
     async with chat_queue_lock:
         return await run_in_threadpool(
-            _ask_with_memory, request, identity, history, display_profile
+            _ask_with_memory, request, identity, history, display_profile, request_context
         )
 
 
-def _ask_with_memory(request, identity, history, display_profile) -> dict:
+def _ask_with_memory(request, identity, history, display_profile, request_context) -> dict:
     # Compact older turns into the running summary before generating, then return
     # the updated summary + memory metadata so the (stateless) client can persist
     # the digest and advance its per-thread pointer.
@@ -59,6 +80,7 @@ def _ask_with_memory(request, identity, history, display_profile) -> dict:
         identity=identity.as_dict(),
         display_profile=display_profile,
         summary=mem_result.summary,
+        request_context=request_context,
     )
     result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
     result["memory"] = {
@@ -84,7 +106,7 @@ async def chat_stream(
     # proxy route can pipe the body through untouched. Quota and auth errors
     # are raised before streaming starts and reach the client as real HTTP
     # status codes.
-    history, display_profile = _resolve_request(request, identity)
+    history, display_profile, request_context = _resolve_request(request, identity)
 
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
@@ -103,6 +125,7 @@ async def chat_stream(
                 display_profile=display_profile,
                 on_delta=on_delta,
                 summary=mem_result.summary,
+                request_context=request_context,
             )
         except Exception as exc:  # e.g. AURA init failure — never kill the stream silently
             loop.call_soon_threadsafe(events.put_nowait, ("error", str(exc)))

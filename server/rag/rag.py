@@ -20,6 +20,7 @@ class AURA:
         display_profile=None,
         on_delta=None,
         summary=None,
+        request_context=None,
     ):
         return self.chatbot.chat(
             query=question,
@@ -28,4 +29,5 @@ class AURA:
             display_profile=display_profile,
             on_delta=on_delta,
             summary=summary,
+            request_context=request_context,
         )

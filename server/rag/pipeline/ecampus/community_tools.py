@@ -14,6 +14,21 @@ from dotenv import load_dotenv
 from pipeline.key_manager import KeyManager
 from ..personal_data.audit import audit_log
 
+
+def _identity_payload(identity):
+    if identity is None:
+        return {}
+    if isinstance(identity, dict):
+        return identity
+    return getattr(identity, "as_dict", lambda: {})()
+
+
+def _identity_role(identity) -> str | None:
+    payload = _identity_payload(identity)
+    if not payload:
+        return None
+    return payload.get("role")
+
 load_dotenv()
 
 _retrieval = None
@@ -49,8 +64,17 @@ retrieved ToR document" for that section rather than guessing.
 """
 
 
-def _run(query: str, user_role: str, system_prompt: str, user_message: str) -> dict:
-    result = _get_retrieval_pipeline().get_context(query, user_role=user_role)
+def _run(query: str, user_role: str, system_prompt: str, user_message: str, request_context=None) -> dict:
+    academic_scope = getattr(request_context, "academic_scope", None) if request_context else None
+    pipeline = _get_retrieval_pipeline()
+    try:
+        result = pipeline.get_context(
+            query,
+            user_role=user_role,
+            academic_scope=academic_scope,
+        )
+    except TypeError:
+        result = pipeline.get_context(query, user_role=user_role)
     context = result.get("context", "")
     sources = result.get("sources", [])
 
@@ -80,26 +104,29 @@ def _run(query: str, user_role: str, system_prompt: str, user_message: str) -> d
 
 
 # ── event_club_registration_guidance ────────────────────────────────────────
-def handle_event_club_registration_guidance(identity, name: str, **kwargs) -> dict:
+def handle_event_club_registration_guidance(identity, name: str, request_context=None, **kwargs) -> dict:
     """name = club or event name. Read-only advisory, no registration write."""
     query = f"{name} club event membership registration process convenor contact"
-    out = _run(query, "student", _EVENT_SYSTEM_PROMPT, f"Club/event: {name}")
-    audit_log(identity, query="event_club_registration_guidance", allowed=True,
+    out = _run(query, "student", _EVENT_SYSTEM_PROMPT, f"Club/event: {name}", request_context=request_context)
+    payload = _identity_payload(identity)
+    audit_log(payload, query="event_club_registration_guidance", allowed=True,
               target=name)
     return out
 
 
 # ── faculty_committee_responsibilities ──────────────────────────────────────
-def handle_faculty_committee_responsibilities(identity, committee_name: str, **kwargs) -> dict:
+def handle_faculty_committee_responsibilities(identity, committee_name: str, request_context=None, **kwargs) -> dict:
     """committee_name e.g. 'Academic Council', 'BTP Committee', 'POSH Committee'."""
-    if not identity or identity.get("role") not in (
+    role = _identity_role(identity)
+    if role not in (
         "faculty", "faculty_general", "faculty_coord",
         "faculty_convenor_ug", "faculty_convenor_pg",
         "dean_faculty", "dean_academic", "superadmin",
     ):
         raise PermissionError("This tool is for faculty members.")
     query = f"{committee_name} terms of reference composition responsibilities"
-    out = _run(query, "faculty_general", _TOR_SYSTEM_PROMPT, f"Committee: {committee_name}")
-    audit_log(identity, query="faculty_committee_responsibilities", allowed=True,
+    out = _run(query, "faculty_general", _TOR_SYSTEM_PROMPT, f"Committee: {committee_name}", request_context=request_context)
+    payload = _identity_payload(identity)
+    audit_log(payload, query="faculty_committee_responsibilities", allowed=True,
               target=committee_name)
     return out
