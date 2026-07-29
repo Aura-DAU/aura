@@ -93,9 +93,25 @@ function DocumentViewerPanel({
     return () => cancelAnimationFrame(id)
   }, [state.status])
 
-  const lines = useMemo(() => state.content?.split("\n") ?? [], [state.content])
-  const startLine = target.startLine
-  const endLine = target.endLine ?? target.startLine
+  const { lines, startLine, endLine } = useMemo(() => {
+    const rawLines = state.content?.split("\n") ?? []
+    let offset = 0
+    if (rawLines[0]?.trim() === "---") {
+      const frontmatterEndIndex = rawLines.findIndex((line, i) => i > 0 && line.trim() === "---")
+      if (frontmatterEndIndex !== -1) {
+        offset = frontmatterEndIndex + 1
+        rawLines.splice(0, offset)
+      }
+    }
+    
+    return {
+      lines: rawLines,
+      startLine: target.startLine ? Math.max(1, target.startLine - offset) : undefined,
+      endLine: (target.endLine ?? target.startLine) 
+        ? Math.max(1, (target.endLine ?? target.startLine)! - offset) 
+        : undefined,
+    }
+  }, [state.content, target.startLine, target.endLine])
 
   return (
     <>
@@ -168,7 +184,7 @@ function DocumentViewerPanel({
                   </div>
                 </>
               ) : (
-                <MarkdownContent content={state.content ?? ""} />
+                <MarkdownContent content={lines.join("\n")} />
               )}
             </div>
           )}

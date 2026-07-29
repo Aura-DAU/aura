@@ -18,7 +18,7 @@ function isSafeDocumentPath(path: string): boolean {
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions)
 
-  let role = "guest"
+  let role: "student" | "faculty" | "admin" | "guest" = "guest"
   let erpId = ""
   let department, email, fullName, currentYear, currentSem, currentSec
   let newGuestId: string | undefined = undefined

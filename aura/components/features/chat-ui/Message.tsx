@@ -38,11 +38,13 @@ export function Message({
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { openDocument, prefetchDocument } = useDocumentViewer()
 
   useEffect(() => {
     return () => {
       if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
+      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
     }
   }, [])
 
@@ -181,7 +183,13 @@ export function Message({
                       type="button"
                       onMouseEnter={() => {
                         prefetchDocument(viewerTarget)
-                        openDocument(viewerTarget)
+                        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
+                        hoverTimerRef.current = setTimeout(() => {
+                          openDocument(viewerTarget)
+                        }, 500)
+                      }}
+                      onMouseLeave={() => {
+                        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                       }}
                       onClick={() => openDocument(viewerTarget)}
                       className={pillClasses}
