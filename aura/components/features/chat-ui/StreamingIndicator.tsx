@@ -7,7 +7,7 @@ interface StreamingIndicatorProps {
 export function StreamingIndicator({ thinkingStep }: StreamingIndicatorProps) {
   return (
     <div className="msg-enter flex items-start gap-3">
-      <BrandMark className="mt-0.5 size-8" />
+      <BrandMark className="mt-0.5 size-8" isActive />
       <div className="flex min-h-9 items-center gap-2.5 pt-1">
         <div className="flex items-center gap-1" aria-hidden="true">
           <span className="chat-v2-dot size-1.5 rounded-full bg-theme-red" style={{ animationDelay: "0ms" }} />
@@ -22,3 +22,4 @@ export function StreamingIndicator({ thinkingStep }: StreamingIndicatorProps) {
     </div>
   )
 }
+
