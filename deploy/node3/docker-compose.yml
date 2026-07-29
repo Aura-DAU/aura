@@ -1,15 +1,17 @@
 # AURA Distributed Cluster — Node 3 (vLLM GPU Node 2)
 # Services: vLLM OpenAI-Compatible API Engine
-#
-# See deploy/node2/docker-compose.yml for the note on MAX_MODEL_LEN=16384 and
-# why --gpu-memory-utilization/--max-num-seqs are set explicitly below rather
-# than left to vLLM's defaults.
 
 services:
   vllm-node2:
     image: vllm/vllm-openai:latest
     restart: unless-stopped
-    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--host", "0.0.0.0", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-64}" ]
+    command: [
+      "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}",
+      "--port", "8000",
+      "--host", "0.0.0.0",
+      "--enable-prefix-caching",
+      "--max-model-len", "${MAX_MODEL_LEN:-8192}"
+    ]
     ports:
       - "8000:8000"
     volumes:
@@ -22,9 +24,15 @@ services:
           devices:
             - driver: nvidia
               count: all
-              capabilities: [ gpu ]
+              capabilities: [gpu]
     healthcheck:
-      test: [ "CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)" ]
+      test:
+        [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)",
+        ]
       interval: 30s
       timeout: 10s
       retries: 20
