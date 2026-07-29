@@ -102,6 +102,46 @@ def test_fallback_check_embedded_in_sentence(guardrail):
 
 
 # ---------------------------------------------------------------------------
+# Academic-context suppression.
+# "can't cope / can't take it / can't go on" is everyday coursework idiom.
+# On its own it still routes to the wellness block (see TRIGGER_PHRASES);
+# alongside academic framing it must not, or a routine question gets the
+# crisis block instead of an answer.
+# ---------------------------------------------------------------------------
+ACADEMIC_STRESS_QUERIES = [
+    "I can't cope with this course load, when is the drop deadline?",
+    "I can't take it anymore with this assignment, how do I request an extension?",
+    "I can't cope with the exam schedule — what is the re-exam policy?",
+    "Can't go on with this elective, how do I withdraw from the course?",
+    "I can't take this semester's workload, what is the minimum credit requirement?",
+]
+
+
+@pytest.mark.parametrize("query", ACADEMIC_STRESS_QUERIES)
+def test_academic_context_suppresses_ambiguous_phrase(guardrail, query):
+    assert guardrail._fallback_check(query) is False, (
+        f"Expected no distress trigger for academic query: {query!r}"
+    )
+
+
+UNAMBIGUOUS_WITH_ACADEMIC_CONTEXT = [
+    "I want to kill myself over this exam",
+    "I failed the course and I want to die",
+    "This semester made me suicidal",
+    "I have been cutting myself since the assignment deadline",
+]
+
+
+@pytest.mark.parametrize("query", UNAMBIGUOUS_WITH_ACADEMIC_CONTEXT)
+def test_academic_context_never_suppresses_explicit_distress(guardrail, query):
+    # Suppression applies only to the ambiguous patterns. An explicit statement
+    # of self-harm must fire regardless of surrounding coursework wording.
+    assert guardrail._fallback_check(query) is True, (
+        f"Expected distress trigger despite academic context: {query!r}"
+    )
+
+
+# ---------------------------------------------------------------------------
 # Response content
 # ---------------------------------------------------------------------------
 def test_get_response_is_nonempty_string(guardrail):
