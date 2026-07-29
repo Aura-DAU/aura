@@ -1,5 +1,11 @@
 # AURA Distributed Cluster — Node 2 (vLLM GPU Node 1)
 # Services: vLLM OpenAI-Compatible API Engine
+#
+# NOTE on MAX_MODEL_LEN=16384 (raised from 8192): the AWQ 4-bit weights leave
+# most of a 24GB 4090 free, but KV cache still scales with context length ×
+# concurrent requests. If you see CUDA OOM on startup or under load, either
+# lower MAX_MODEL_LEN back down or add "--gpu-memory-utilization", "0.95" (or
+# lower --max-num-seqs) to this command to trade concurrency for headroom.
 
 services:
   vllm-node1:
@@ -10,7 +16,7 @@ services:
       "--port", "8000",
       "--host", "0.0.0.0",
       "--enable-prefix-caching",
-      "--max-model-len", "${MAX_MODEL_LEN:-8192}"
+      "--max-model-len", "${MAX_MODEL_LEN:-16384}"
     ]
     ports:
       - "8000:8000"
