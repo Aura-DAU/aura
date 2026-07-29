@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "October 2025 SBG event report.docx"
 authorization: ["student", "faculty"]
+document_year: 2025
 ---
 
 # October 2025 SBG event report

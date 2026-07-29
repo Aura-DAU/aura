@@ -5,6 +5,7 @@ scraped_by: "Antigravity Scraper"
 scraped_date: "2026-07-04"
 team: "Scraping Team"
 authorization: ["student", "faculty"]
+document_year: "2023-24"
 ---
 
 # Sports Committee Achievement Reports

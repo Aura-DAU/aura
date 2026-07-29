@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "Event Brief 25-26.pdf"
 authorization: ["student", "faculty"]
+document_year: "2025-26"
 ---
 
 # Event Brief 25-26

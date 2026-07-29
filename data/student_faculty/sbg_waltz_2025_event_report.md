@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Waltz 2025 - Event Report.docx"
 authorization: ["student", "faculty"]
+document_year: 2025
 ---
 
 # Waltz 2025 Event Report

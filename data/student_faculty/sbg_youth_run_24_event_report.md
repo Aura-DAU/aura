@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Youth Run _24 Event Report.docx"
 authorization: ["student", "faculty"]
+document_year: 2024
 ---
 
 # Youth Run 24 Event Report

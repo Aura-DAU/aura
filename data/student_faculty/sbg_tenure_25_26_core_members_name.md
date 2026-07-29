@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "XLSX"
 original_name: "Tenure 25-26 Core Members Name.xlsx"
 authorization: ["student", "faculty"]
+document_year: "2025-26"
 ---
 
 # Tenure 25-26 Core Members Name

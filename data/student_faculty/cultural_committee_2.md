@@ -6,6 +6,7 @@ scraped_by: "OmPatel"
 scraped_date: "2026-07-04"
 team: "Scraping Team"
 authorisation: ["student", "faculty"]
+document_year: "2025-26"
 ---
 
 # Raaga and Rhyme — Cultural & Other Event Report (2025-26)

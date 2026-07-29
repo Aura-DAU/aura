@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "Copy of GenMeet_Feb26_Minutes.pdf"
 authorization: ["student", "faculty"]
+document_year: 2026
 ---
 
 # Copy of GenMeet Feb26 Minutes

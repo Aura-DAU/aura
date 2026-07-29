@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "SBG General Meet Aug_25 MoM.pdf"
 authorization: ["student", "faculty"]
+document_year: 2025
 ---
 
 # SBG General Meet Aug 25 MoM

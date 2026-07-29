@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Anti-Ragging Week Event Report - format by QAC.docx"
 authorization: ["student", "faculty"]
+document_year: 2025
 ---
 
 # Anti-Ragging Week Event Report Format by QAC

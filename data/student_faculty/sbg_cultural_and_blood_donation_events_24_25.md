@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Cultural and blood donation events 24-25.docx"
 authorization: ["student", "faculty"]
+document_year: "2024-25"
 ---
 
 # Cultural and blood donation events 24 25

@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Internal Hackathon (SIH) 2025 Event Report - format by QAC.docx"
 authorization: ["student", "faculty"]
+document_year: 2025
 ---
 
 # Internal Hackathon SIH 2025 Event Report Format by QAC

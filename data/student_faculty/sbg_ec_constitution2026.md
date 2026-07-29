@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "EC_Constitution2026.pdf"
 authorization: ["student", "faculty"]
+document_year: 2026
 ---
 
 # EC Constitution2026

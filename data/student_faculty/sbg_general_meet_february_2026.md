@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "PPTX"
 original_name: "SBG General Meet February 2026.pptx"
 authorization: ["student", "faculty"]
+document_year: 2026
 ---
 
 # SBG General Meet February 2026

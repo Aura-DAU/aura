@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Tarang 2024 - Event Report.docx"
 authorization: ["student", "faculty"]
+document_year: 2024
 ---
 
 # Tarang 2024 Event Report

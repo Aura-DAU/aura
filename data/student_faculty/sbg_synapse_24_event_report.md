@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Synapse _24 Event Report.docx"
 authorization: ["student", "faculty"]
+document_year: 2024
 ---
 
 # Synapse 24 Event Report

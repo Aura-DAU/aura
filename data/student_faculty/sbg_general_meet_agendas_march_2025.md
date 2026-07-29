@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "PPTX"
 original_name: "General Meet Agendas (March 2025).pptx"
 authorization: ["student", "faculty"]
+document_year: 2025
 ---
 
 # General Meet Agendas (March 2025)
