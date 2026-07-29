@@ -26,8 +26,15 @@ Step 7: If PUBLIC/MIXED → run existing RAG pipeline
 import re
 from typing import Optional
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
-from pipeline.generation.answer_generator import AnswerGenerator
-from pipeline.guardrails.query_guardrail import QueryGuardrail
+from pipeline.generation.answer_generator import (
+    AnswerGenerator,
+    filter_sources_by_citations,
+)
+from pipeline.guardrails.query_guardrail import (
+    OFF_TOPIC_RESPONSE,
+    QueryGuardrail,
+    Verdict,
+)
 from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
 
 from erp_connector import ERPConnector
@@ -107,13 +114,20 @@ class AuraChat:
             )
 
         try:
-            # ── Safety guardrail (applies to every query) ──────────────
+            # ── Safety + scope guardrail (applies to every query) ───────
             from pipeline.latency_tracker import track_segment
             with track_segment("guardrail_time"):
-                is_safe = self.guardrail.is_safe(query)
-            if not is_safe:
+                verdict = self.guardrail.classify(query)
+            # None = classifier unreachable; fails OPEN here. The personal-data
+            # path below re-checks with is_safe_strict(), which fails closed.
+            if verdict is Verdict.UNSAFE:
                 return {
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                    "sources": [],
+                }
+            if verdict is Verdict.OFF_TOPIC:
+                return {
+                    "answer": OFF_TOPIC_RESPONSE,
                     "sources": [],
                 }
 
@@ -268,7 +282,13 @@ class AuraChat:
 
             return {
                 "answer": answer,
-                "sources": sources,          # public sources only — never ERP data
+                # public sources only — never ERP data — and narrowed to the
+                # docs the answer actually cited
+                "sources": filter_sources_by_citations(
+                    sources,
+                    retrieval_result.get("citation_map", {}),
+                    answer,
+                ),
                 "is_personal_data": is_personal,
             }
 
@@ -341,4 +361,12 @@ class AuraChat:
                 history=history,
                 profile=profile,
             )
-        return {"answer": answer, "sources": retrieval_result["sources"], "is_personal_data": False}
+        return {
+            "answer": answer,
+            "sources": filter_sources_by_citations(
+                retrieval_result["sources"],
+                retrieval_result.get("citation_map", {}),
+                answer,
+            ),
+            "is_personal_data": False,
+        }

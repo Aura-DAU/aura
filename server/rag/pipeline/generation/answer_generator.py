@@ -48,6 +48,15 @@ def _env_int(name: str, default: int) -> int:
 # completions.
 _MAX_ANSWER_TOKENS = _env_int("AURA_MAX_ANSWER_TOKENS", 768)
 
+# Kill switch for citation-filtered sources. On by default: only sources the
+# answer actually cited are returned. Set to 0/false to fall back to returning
+# every retrieved source, without a redeploy, if the model's citation
+# discipline turns out to be worse than the eval suggests.
+_STRICT_CITATIONS = (
+    (os.getenv("AURA_STRICT_CITATIONS") or "true").strip().lower()
+    not in ("0", "false", "no", "off")
+)
+
 
 # ── Streaming sanitizer ─────────────────────────────────────────────────────
 # The non-streaming path post-processes the FULL answer (strip <think> blocks,
@@ -62,6 +71,54 @@ _CITATION_RE = re.compile(r"[ \t]*\[\d+(?:\s*,\s*\d+)*\]")
 # Trailing text that could still turn into a citation (or is bare whitespace,
 # held back so the final answer is emitted right-stripped).
 _PARTIAL_TAIL_RE = re.compile(r"(?:\s*\[[\d\s,]*|\s+)$")
+
+
+# Matches the consolidated marker both generation paths append — the buffered
+# path via _clean_citations(), the streaming path via _StreamSanitizer.
+_SOURCES_MARKER_RE = re.compile(r"\[Sources:\s*([\d\s,]+)\]")
+
+
+def extract_cited_ids(answer: str) -> set[int]:
+    # Doc ids the model actually cited, read back off the answer text.
+    #
+    # Deliberately parsed from the returned string rather than recorded on the
+    # AnswerGenerator: one generator instance serves ~25 concurrent requests,
+    # so per-instance citation state would race across them.
+    #
+    # An empty set means the model cited nothing. That is a real signal, not a
+    # parse failure — an answer with no citations is ungrounded by definition,
+    # and callers should show no sources for it.
+    if not answer:
+        return set()
+    return {
+        int(n)
+        for m in _SOURCES_MARKER_RE.finditer(answer)
+        for n in re.findall(r"\d+", m.group(1))
+    }
+
+
+def filter_sources_by_citations(sources, citation_map, answer):
+    # Narrow a retrieval source list to those the answer actually cited.
+    #
+    # Without this every answer carries a citation pill for every retrieved
+    # chunk, so an ungrounded answer ("the retrieved documents do not provide
+    # information about him") still renders a source card and reads as
+    # grounded. Order is preserved so the highest-ranked source stays first.
+    if not sources:
+        return []
+    if not _STRICT_CITATIONS:
+        return sources
+
+    cited_ids = extract_cited_ids(answer)
+    if not cited_ids:
+        return []
+
+    # No map (older callers, or an ERP-only turn) → cite-by-position fallback.
+    if not citation_map:
+        return [sources[i - 1] for i in sorted(cited_ids) if 1 <= i <= len(sources)]
+
+    keep = {citation_map[i] for i in cited_ids if i in citation_map}
+    return [s for idx, s in enumerate(sources) if idx in keep]
 
 
 class _StreamSanitizer:
