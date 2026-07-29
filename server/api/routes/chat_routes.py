@@ -22,17 +22,13 @@ def _resolve_request(request: ChatRequest, identity: Identity):
 
     quota_key = identity.email or identity.erp_id
     try:
-        remaining = enforce_quota(quota_key, identity.role)
+        enforce_quota(quota_key, identity.role)
     except QuotaExceeded as exc:
         raise HTTPException(
             status_code=429,
             detail=f"Question limit reached ({exc.limit}/day).",
         ) from exc
-    # `remaining` (None for unlimited roles) is the server's authoritative
-    # count. Callers surface it back to the client on every response so the
-    # UI counter can never silently drift from what the server will actually
-    # enforce (see aura/hooks/use-aura-chat.ts).
-    return history, display_profile, remaining
+    return history, display_profile
 
 
 @router.post("/chat")
@@ -40,19 +36,16 @@ async def chat(
     request: ChatRequest,
     identity: Identity = Depends(require_identity),
 ):
-    history, display_profile, remaining = _resolve_request(request, identity)
+    history, display_profile = _resolve_request(request, identity)
 
     async with chat_queue_lock:
-        result = await run_in_threadpool(
+        return await run_in_threadpool(
             get_aura().ask,
             question=request.question,
             history=history,
             identity=identity.as_dict(),
             display_profile=display_profile,
         )
-    if isinstance(result, dict):
-        result["quota_remaining"] = remaining
-    return result
 
 
 def _sse(payload: dict) -> str:
@@ -69,7 +62,7 @@ async def chat_stream(
     # proxy route can pipe the body through untouched. Quota and auth errors
     # are raised before streaming starts and reach the client as real HTTP
     # status codes.
-    history, display_profile, remaining = _resolve_request(request, identity)
+    history, display_profile = _resolve_request(request, identity)
 
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
@@ -133,25 +126,16 @@ async def chat_stream(
                         yield _sse({"type": "citations", "citations": citations})
                     if result.get("is_personal_data"):
                         yield _sse({"type": "personal-data-flag"})
-                    yield _sse({"type": "quota", "remaining": remaining})
                     yield "data: [DONE]\n\n"
                     break
             finally:
                 await worker
 
-    headers = {
-        "Cache-Control": "no-cache, no-transform",
-        "X-Accel-Buffering": "no",
-    }
-    # Set even though the body streams the same value as a "quota" event —
-    # some proxies/clients read remaining-quota from headers before the
-    # body is fully parsed. `remaining` is known upfront since enforce_quota
-    # already ran in _resolve_request, before any streaming starts.
-    if remaining is not None:
-        headers["X-Quota-Remaining"] = str(remaining)
-
     return StreamingResponse(
         event_source(),
         media_type="text/event-stream",
-        headers=headers,
+        headers={
+            "Cache-Control": "no-cache, no-transform",
+            "X-Accel-Buffering": "no",
+        },
     )

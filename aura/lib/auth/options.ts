@@ -3,8 +3,8 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { backendUrl } from "@/lib/api/backend"
 import {
-  getGoogleOAuthCredentials,
   getNextAuthSecret,
+  requireGoogleOAuthCredentials,
   requireInternalResolveSecret,
 } from "@/lib/auth/secrets"
 
@@ -95,37 +95,21 @@ async function lookupErpIdentity(email: string): Promise<ErpIdentity | null> {
   }
 }
 
+const googleCreds = requireGoogleOAuthCredentials()
+
 export const authOptions: NextAuthOptions = {
-  // A getter, not a plain array: NextAuth (and every getServerSession(authOptions)
-  // call across the app) reads `.providers` fresh on each access instead of once
-  // at module import. Previously `googleCreds` was resolved to a top-level const
-  // and baked into a static providers array at cold-start/import time — on a
-  // serverless or edge deployment that import can happen before secrets are
-  // injected, or the module can simply stay warm for a long time, so a
-  // credential fix/rotation wouldn't take effect until the process restarted.
-  get providers() {
-    const googleCreds = getGoogleOAuthCredentials()
-    if (!googleCreds && process.env.NODE_ENV === "production") {
-      console.warn(
-        "[auth] GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET unset — Google Workspace sign-in disabled; guest chat still works.",
-      )
-    }
-    return [
-      ...(googleCreds
-        ? [
-          GoogleProvider({
-            clientId: googleCreds.clientId,
-            clientSecret: googleCreds.clientSecret,
-            authorization: {
-              params: {
-                prompt: "select_account",
-              },
-            },
-          }),
-        ]
-        : []),
-      ...(process.env.NODE_ENV === "development"
-        ? [
+  providers: [
+    GoogleProvider({
+      clientId: googleCreds.clientId,
+      clientSecret: googleCreds.clientSecret,
+      authorization: {
+        params: {
+          prompt: "select_account",
+        },
+      },
+    }),
+    ...(process.env.NODE_ENV === "development"
+      ? [
           CredentialsProvider({
             name: "Demo Account",
             credentials: {
@@ -155,9 +139,8 @@ export const authOptions: NextAuthOptions = {
             },
           }),
         ]
-        : []),
-    ]
-  },
+      : []),
+  ],
   session: {
     strategy: "jwt",
     // Bound session lifetime so stolen cookies expire without waiting for
