@@ -34,7 +34,7 @@ services:
       NODE_ENV: production
       PORT: "3000"
       BACKEND_URL: http://backend:8000
-      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://aura.daiict.ac.in}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://aura.dau.ac.in}
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
@@ -78,7 +78,7 @@ services:
       CHAT_CONCURRENCY: ${CHAT_CONCURRENCY:-4}
       AUTH_DB_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       REDIS_URL: redis://redis:6379/0
-      PROD_FRONTEND_ORIGIN: ${PROD_FRONTEND_ORIGIN:-https://aura.daiict.ac.in}
+      PROD_FRONTEND_ORIGIN: ${PROD_FRONTEND_ORIGIN:-https://aura.dau.ac.in}
       INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
       INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
 
