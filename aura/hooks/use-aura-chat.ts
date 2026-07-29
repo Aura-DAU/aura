@@ -209,9 +209,7 @@ export function useAuraChat() {
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setThreads(parsed)
         if (parsed[0]) {
-          // eslint-disable-next-line react-hooks/set-state-in-effect
           setActiveThreadIdState(parsed[0].id)
-          // eslint-disable-next-line react-hooks/set-state-in-effect
           setMessages(parsed[0].messages)
         }
       }
