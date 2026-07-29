@@ -1,14 +1,13 @@
 ---
-title: "Sports Committee Members and Contacts (2025-26, 2026-27)"
+title: "Sports Committee Members and Contacts"
 category: "Committees"
-document_year: "2025-26"
 scraped_by: "Bhagyashree"
 scraped_date: "2026-07-04"
 team: "Scraping Team"
 authorization: ["student", "faculty"]
 ---
 
-# Sports Committee Members and Contacts (2025-26, 2026-27)
+# Sports Committee Members and Contacts
 
 Below is the official list of members of the Dhirubhai Ambani University Sports Committee, along with their student IDs and contact details:
 
