@@ -13,8 +13,8 @@ import { apiFetch } from "@/lib/auth-client"
 import { getUserMessage, toastAppError, toastError, appErrorFromResponse } from "@/lib/toast"
 import { AppError, isAbortError } from "@/lib/errors"
 
-const STORAGE_KEY  = "aura-threads-v2"
-const PROFILE_KEY  = "aura-profile-v2"
+const STORAGE_KEY = "aura-threads-v2"
+const PROFILE_KEY = "aura-profile-v2"
 
 interface StoredThread extends ChatThread {
   messages: ChatMessage[]
@@ -87,7 +87,7 @@ async function* parseSSEStream(response: Response, signal?: AbortSignal) {
   try {
     while (true) {
       if (signal?.aborted) {
-        await reader.cancel().catch(() => {})
+        await reader.cancel().catch(() => { })
         return
       }
       const { done, value } = await reader.read()
@@ -167,6 +167,29 @@ export function useAuraChat() {
     }
   }, [session, sessionStatus])
 
+  // Authoritative sync from the server's response (see "quota" SSE event /
+  // X-Quota-Remaining header). This is the source of truth — it replaces
+  // whatever the client's own optimistic counter believed, so the two can
+  // never silently drift apart (which previously could make the UI show
+  // "quota reached" far earlier than 10 real questions if the server-side
+  // count was already ahead of what the client had locally tracked).
+  const syncQuotaFromServer = useCallback((remaining: number) => {
+    setRemainingQuotaState(Math.max(0, remaining))
+    if (!session?.user) {
+      const maxQuota = GUEST_DAILY_QUOTA
+      const date = new Date().toISOString().split('T')[0]
+      try {
+        localStorage.setItem(
+          GUEST_QUOTA_KEY,
+          JSON.stringify({ date, count: Math.max(0, maxQuota - remaining) }),
+        )
+      } catch { }
+    }
+  }, [session])
+
+  // Optimistic local decrement — used only as an immediate UI response
+  // before the server's authoritative count (syncQuotaFromServer) arrives
+  // for this same request.
   const decrementQuota = useCallback(() => {
     setRemainingQuotaState(prev => {
       if (prev === null) return null;
@@ -177,7 +200,7 @@ export function useAuraChat() {
         const key = GUEST_QUOTA_KEY
         try {
           localStorage.setItem(key, JSON.stringify({ date, count: maxQuota - newVal }))
-        } catch {}
+        } catch { }
       }
       return newVal
     })
@@ -239,7 +262,7 @@ export function useAuraChat() {
         animationFrameRef.current = null
       }
       if (audioContextRef.current) {
-        void audioContextRef.current.close().catch(() => {})
+        void audioContextRef.current.close().catch(() => { })
         audioContextRef.current = null
       }
       if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
@@ -403,6 +426,8 @@ export function useAuraChat() {
             setActiveCitations(citations)
           } else if (chunk.type === "personal-data-flag") {
             isPersonalData = true
+          } else if (chunk.type === "quota" && typeof chunk.remaining === "number") {
+            syncQuotaFromServer(chunk.remaining)
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&
@@ -449,7 +474,7 @@ export function useAuraChat() {
         }
       }
     },
-    [activeThreadId, loading, messages, persistMessages, studentProfile, session, remainingQuota, decrementQuota],
+    [activeThreadId, loading, messages, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer],
   )
 
   const handleClearChat = useCallback(() => {
@@ -643,7 +668,7 @@ export function useAuraChat() {
           animationFrameRef.current = null
         }
         if (audioContextRef.current) {
-          void audioContextRef.current.close().catch(() => {})
+          void audioContextRef.current.close().catch(() => { })
           audioContextRef.current = null
         }
         setRecordingVolume(0)
