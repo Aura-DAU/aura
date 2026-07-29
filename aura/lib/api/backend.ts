@@ -27,15 +27,18 @@ export interface BackendChatResponse {
   sources: Array<
     | string
     | {
-        file?: string
-        url?: string
-        title?: string
-        path?: string
-        start_line?: number | string | null
-        end_line?: number | string | null
-        visibility?: string
-        authorization?: string[]
-      }
+      file?: string
+      url?: string
+      title?: string
+      path?: string
+      start_line?: number | string | null
+      end_line?: number | string | null
+      visibility?: string
+      authorization?: string[]
+    }
   >
   is_personal_data?: boolean
+  // Server's authoritative remaining-quota count for this identity (null for
+  // unlimited @dau.ac.in roles). See server/api/routes/chat_routes.py.
+  quota_remaining?: number | null
 }

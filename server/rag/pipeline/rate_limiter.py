@@ -10,15 +10,41 @@ no email for a guest). Signed-in users are keyed by email when present.
 
 Uses Redis when REDIS_URL is set (shared across workers); otherwise an
 in-memory store for single-process dev/tests.
+
+v9 fix: the window used to be a rolling 24h lookback from "now" on every
+check, while the client's counter (aura/hooks/use-aura-chat.ts) resets on
+the UTC calendar day. The two never agreed on what "a day" meant — a guest
+who asked questions late in one UTC day could still be blocked deep into
+the next day even though the client-side counter had already shown a fresh
+10, and (worse) the server never told the client its real remaining count,
+so the two could silently drift apart until a guest hit 429 far earlier
+than 10 real questions. The window is now anchored to the current UTC
+calendar day (`_day_start`) so both sides reset at the same instant, and
+`enforce_quota`'s returned remaining count is now surfaced back to the
+client on every response (see chat_routes.py) instead of relying on a
+client-only optimistic counter.
 """
 
 import os
 import time
 import threading
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Optional, Protocol
 
-QUOTA_WINDOW_SECONDS = 24 * 60 * 60  # 24h rolling window
+QUOTA_WINDOW_SECONDS = 24 * 60 * 60  # kept for reference/back-compat only
+
+
+def _day_start(now: float) -> float:
+    """Epoch seconds for the most recent UTC midnight <= now.
+
+    Anchoring the window to the calendar day (instead of "now - 24h")
+    keeps the server's reset in lockstep with the client's calendar-day
+    counter in use-aura-chat.ts.
+    """
+    dt = datetime.fromtimestamp(now, tz=timezone.utc)
+    midnight = dt.replace(hour=0, minute=0, second=0, microsecond=0)
+    return midnight.timestamp()
 
 # None == unlimited (no quota check performed at all).
 QUOTA_LIMITS: dict[str, Optional[int]] = {
@@ -46,7 +72,7 @@ class _Bucket:
     timestamps: list = field(default_factory=list)
 
     def prune(self, now: float):
-        cutoff = now - QUOTA_WINDOW_SECONDS
+        cutoff = _day_start(now)
         self.timestamps = [t for t in self.timestamps if t > cutoff]
 
 
@@ -77,7 +103,7 @@ class InMemoryQuotaStore:
 
 
 class RedisQuotaStore:
-    """Sliding 24h window via Redis sorted sets — shared across workers."""
+    """UTC-calendar-day window via Redis sorted sets — shared across workers."""
 
     def __init__(self, redis_url: str):
         import redis  # lazy — only required when REDIS_URL is configured
@@ -90,7 +116,7 @@ class RedisQuotaStore:
 
     def check_and_increment(self, key: str, limit: int) -> int:
         now = time.time()
-        cutoff = now - QUOTA_WINDOW_SECONDS
+        cutoff = _day_start(now)
         rkey = self._key(key)
         pipe = self._r.pipeline()
         pipe.zremrangebyscore(rkey, 0, cutoff)
@@ -101,14 +127,16 @@ class RedisQuotaStore:
         member = f"{now}:{os.getpid()}:{id(object())}"
         pipe = self._r.pipeline()
         pipe.zadd(rkey, {member: now})
-        pipe.expire(rkey, QUOTA_WINDOW_SECONDS + 60)
+        # Expire a little after the next UTC midnight so a quiet guest's key
+        # is cleaned up rather than lingering forever.
+        pipe.expire(rkey, int(cutoff + QUOTA_WINDOW_SECONDS + 60 - now))
         pipe.zcard(rkey)
         _, _, new_count = pipe.execute()
         return max(0, limit - int(new_count))
 
     def remaining(self, key: str, limit: int) -> int:
         now = time.time()
-        cutoff = now - QUOTA_WINDOW_SECONDS
+        cutoff = _day_start(now)
         rkey = self._key(key)
         pipe = self._r.pipeline()
         pipe.zremrangebyscore(rkey, 0, cutoff)
