@@ -108,7 +108,7 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
     return result
 
 
-def _ask_with_memory(request, identity, history, display_profile) -> dict:
+def _ask_with_memory(request, identity, history, display_profile, request_context) -> dict:
     # Compact older turns into the running summary before generating, then return
     # the updated summary + memory metadata so the (stateless) client can persist
     # the digest and advance its per-thread pointer.
@@ -119,6 +119,7 @@ def _ask_with_memory(request, identity, history, display_profile) -> dict:
         identity=identity.as_dict(),
         display_profile=display_profile,
         summary=mem_result.summary,
+        request_context=request_context,
     )
     result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
     result["memory"] = {
