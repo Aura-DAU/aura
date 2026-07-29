@@ -29,8 +29,15 @@ from typing import Optional, TypedDict, Any
 from langgraph.graph import StateGraph, END
 
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
-from pipeline.generation.answer_generator import AnswerGenerator
-from pipeline.guardrails.query_guardrail import QueryGuardrail
+from pipeline.generation.answer_generator import (
+    AnswerGenerator,
+    filter_sources_by_citations,
+)
+from pipeline.guardrails.query_guardrail import (
+    OFF_TOPIC_RESPONSE,
+    QueryGuardrail,
+    Verdict,
+)
 from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
 from pipeline.latency_tracker import track_segment
 
@@ -144,10 +151,18 @@ class AuraChatGraph:
 
     def _n_safety_guardrail(self, state: AuraState) -> AuraState:
         with track_segment("guardrail_time"):
-            is_safe = self.guardrail.is_safe(state["query"])
-        if not is_safe:
+            verdict = self.guardrail.classify(state["query"])
+        # None = classifier unreachable. Fails OPEN on the public RAG path,
+        # matching is_safe(); the personal-data path re-checks with
+        # is_safe_strict() further down the graph, which fails closed.
+        if verdict is Verdict.UNSAFE:
             state["result"] = {
                 "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                "sources": [],
+            }
+        elif verdict is Verdict.OFF_TOPIC:
+            state["result"] = {
+                "answer": OFF_TOPIC_RESPONSE,
                 "sources": [],
             }
         return state
@@ -335,7 +350,11 @@ class AuraChatGraph:
 
         state["result"] = {
             "answer": answer,
-            "sources": state.get("sources", []),
+            "sources": filter_sources_by_citations(
+                state.get("sources", []),
+                retrieval_result.get("citation_map", {}),
+                answer,
+            ),
             "is_personal_data": is_personal,
         }
         return state

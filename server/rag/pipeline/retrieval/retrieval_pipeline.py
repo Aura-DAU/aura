@@ -981,6 +981,9 @@ class RetrievalPipeline:
             "sources":
                 built["sources"],
 
+            "citation_map":
+                built.get("citation_map", {}),
+
             "top_k_before_rerank":
                 len(results),
 

@@ -47,22 +47,47 @@ Please reach out to one of the contacts above.
 # that a keyword list cannot. Do not expand this list as a substitute
 # for the LLM — fix the LLM integration instead.
 # ---------------------------------------------------------------------------
-_FALLBACK_DISTRESS_PATTERNS: list[str] = [
+_FALLBACK_UNCONDITIONAL_PATTERNS: list[str] = [
     r"\bsuicid",
     r"\bkill\s+my\s*self\b",
     r"\bend\s+(my\s+)?(life|it\s+all)\b",
     r"\bself[\s\-]?harm",
     r"\bhurt(ing)?\s+my\s*self\b",
-    r"\bcut\s+my\s*self\b",
+    r"\bcut(ting)?\s+my\s*self\b",
     r"\bwant\s+to\s+die\b",
     r"\bno\s+reason\s+to\s+live\b",
-    r"\bcan['\u2019]?t\s+(take(\s+it)?|go\s+on|cope)(\s+anymore)?\b",
     r"\bdon['\u2019]?t\s+want\s+to\s+(live|be\s+alive)\b",
 ]
 
-_FALLBACK_COMPILED: list[re.Pattern[str]] = [
-    re.compile(p, re.IGNORECASE | re.UNICODE) for p in _FALLBACK_DISTRESS_PATTERNS
+# Everyday academic-stress idiom that also reads as distress in isolation.
+# Kept in the fallback, but suppressed when the query carries academic framing
+# \u2014 see _fallback_check.
+_FALLBACK_CONTEXTUAL_PATTERNS: list[str] = [
+    r"\bcan['\u2019]?t\s+(take(\s+it)?|go\s+on|cope)(\s+anymore)?\b",
 ]
+
+_FALLBACK_DISTRESS_PATTERNS: list[str] = (
+    _FALLBACK_UNCONDITIONAL_PATTERNS + _FALLBACK_CONTEXTUAL_PATTERNS
+)
+
+
+def _compile(patterns: list[str]) -> list[re.Pattern[str]]:
+    return [re.compile(p, re.IGNORECASE | re.UNICODE) for p in patterns]
+
+
+_FALLBACK_UNCONDITIONAL_COMPILED = _compile(_FALLBACK_UNCONDITIONAL_PATTERNS)
+_FALLBACK_CONTEXTUAL_COMPILED = _compile(_FALLBACK_CONTEXTUAL_PATTERNS)
+_FALLBACK_COMPILED: list[re.Pattern[str]] = _compile(
+    _FALLBACK_DISTRESS_PATTERNS
+)
+
+_ACADEMIC_CONTEXT = re.compile(
+    r"\b(assignment|deadline|submission|exam|quiz|midsem|endsem|syllabus|"
+    r"workload|course|credit|elective|semester|registration|attendance|"
+    r"fee|hostel|mess|timetable|lab|project|placement|internship|"
+    r"drop|withdraw|backlog|grade|cgpa|spi|cpi)\b",
+    re.IGNORECASE | re.UNICODE,
+)
 
 # ---------------------------------------------------------------------------
 # LLM system prompt for the classifier call.
@@ -142,4 +167,13 @@ class WellnessGuardrail:
         return result == "DISTRESS"
 
     def _fallback_check(self, query: str) -> bool:
-        return any(p.search(query) for p in _FALLBACK_COMPILED)
+        if any(p.search(query) for p in _FALLBACK_UNCONDITIONAL_COMPILED):
+            return True
+        # "I can't cope with this course load, when is the drop deadline?" is a
+        # routine academic query. Firing the crisis block on it swallows the
+        # answer entirely, so ambiguous phrasings count as distress only when
+        # nothing in the query frames it as coursework. Unconditional patterns
+        # above are checked first and are never suppressed.
+        if any(p.search(query) for p in _FALLBACK_CONTEXTUAL_COMPILED):
+            return _ACADEMIC_CONTEXT.search(query) is None
+        return False
