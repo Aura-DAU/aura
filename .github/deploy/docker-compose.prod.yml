@@ -1,0 +1,313 @@
+# AURA production stack — Phase E (DO-5)
+#
+# Architecture alignment with the system-architecture doc:
+#   - `nginx`        — edge reverse proxy + SSL termination (aura-nginx)
+#   - `aura`         — Next.js PWA / BFF (monorepo frontend; not in PDF table)
+#   - `backend`      — FastAPI gateway + RAG; LangGraph orchestrator runs
+#                      in-process (AuraChatGraph). Embedding + Cross-Encoder
+#                      also in-process until Phase F microservice split.
+#   - `qdrant`       — vector DB (doc §10)
+#   - `vllm-node*`   — inference pool (doc §14–16); Compose profile `gpu`
+#   - `postgres`     — long-term / auth DB (doc §8)
+#   - `redis`        — short-term memory / quota / push (doc §7)
+#   - `prometheus` / `grafana` — observability
+#
+# InferenceRouter (pipeline/inference_router.py) load-balances across
+# VLLM_ENDPOINTS. Keep GPU addresses in .env.prod — not in application code.
+# Same-host: use Compose DNS (vllm-node1, …). Multi-host: set LAN IPs/hostnames.
+#
+# GPU note: vllm-node* need NVIDIA drivers + Container Toolkit
+# (`nvidia-ctk runtime configure --runtime=docker`). Adjust device_ids to
+# match host GPU indices. Single GPU: run only node1 and set one endpoint.
+#
+# Usage:
+#   cp deploy/.env.prod.example deploy/.env.prod   # fill in secrets
+#   mkdir -p deploy/certs && # add fullchain.pem / privkey.pem
+#   # Core stack (no host GPUs required):
+#   docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.prod up -d --build
+#   # With local vLLM GPU nodes:
+#   docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.prod --profile gpu up -d --build
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      aura:
+        condition: service_started
+      backend:
+        condition: service_healthy
+    networks:
+      - aura-edge
+
+  aura:
+    build:
+      context: ../aura
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      BACKEND_URL: http://backend:8000
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
+      INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - aura-edge
+      - aura-internal
+
+  backend:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "8000"
+    environment:
+      ENV: production
+      PORT: "8000"
+      WEB_CONCURRENCY: ${BACKEND_WORKERS:-2}
+      AUTH_DB_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://redis:6379/0
+      PROD_FRONTEND_ORIGIN: ${PROD_FRONTEND_ORIGIN}
+      INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
+      INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+      # Override in .env.prod for multi-host GPU IPs / single-node pools.
+      VLLM_ENDPOINTS: ${VLLM_ENDPOINTS:-http://vllm-node1:8000/v1,http://vllm-node2:8000/v1,http://vllm-node3:8000/v1}
+      VLLM_MODEL: ${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}
+      VLLM_API_KEY: ${VLLM_API_KEY:-EMPTY}
+      QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
+      QDRANT_API_KEY: ${QDRANT_API_KEY:-}
+      QDRANT_COLLECTION: ${QDRANT_COLLECTION:-aura-knowledge-base}
+      RERANKER_DEVICE: ${RERANKER_DEVICE:-cpu}
+      GOOGLE_CALENDAR_CLIENT_ID: ${GOOGLE_CALENDAR_CLIENT_ID}
+      GOOGLE_CALENDAR_CLIENT_SECRET: ${GOOGLE_CALENDAR_CLIENT_SECRET}
+      GOOGLE_CALENDAR_VAULT_KEY: ${GOOGLE_CALENDAR_VAULT_KEY}
+      GOOGLE_CALENDAR_VAULT_DB: /var/lib/aura/google_calendar_vault.db
+      ECAMPUS_VAULT_KEY: ${ECAMPUS_VAULT_KEY}
+      ECAMPUS_VAULT_DB: /var/lib/aura/ecampus_credentials.db
+      ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db
+      AURA_AUDIT_LOG: /var/log/aura/personal_data_audit.log
+    volumes:
+      # Raw markdown knowledge base — /documents + ad-hoc ingestion.
+      - ../data:/app/data:ro
+      - aura-vault:/var/lib/aura
+      - aura-logs:/var/log/aura
+    # Note: do NOT depends_on vllm-node* here — those services use profile
+    # `gpu`. Referencing them would break non-GPU `compose up`. Start with
+    # `--profile gpu` (or point VLLM_ENDPOINTS at external nodes).
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    networks:
+      - aura-internal
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - aura-internal
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    networks:
+      - aura-internal
+
+  # Vector DB (architecture doc §10)
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: unless-stopped
+    expose:
+      - "6333"
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    healthcheck:
+      # Qdrant image has no curl; TCP accept on 6333 is enough for start order.
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    networks:
+      - aura-internal
+
+  # ── Inference pool (architecture doc §14–16) — profile: gpu ──────────
+  # Enable with: docker compose ... --profile gpu up -d
+  # InferenceRouter implements least-loaded selection + failover; Compose
+  # only declares the pool topology.
+  vllm-node1:
+    image: vllm/vllm-openai:latest
+    profiles: ["gpu"]
+    restart: unless-stopped
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
+    expose:
+      - "8000"
+    volumes:
+      - vllm-cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 300s
+    networks:
+      - aura-internal
+
+  vllm-node2:
+    image: vllm/vllm-openai:latest
+    profiles: ["gpu"]
+    restart: unless-stopped
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
+    expose:
+      - "8000"
+    volumes:
+      - vllm-cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["1"]
+              capabilities: [gpu]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 300s
+    networks:
+      - aura-internal
+
+  vllm-node3:
+    image: vllm/vllm-openai:latest
+    profiles: ["gpu"]
+    restart: unless-stopped
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
+    expose:
+      - "8000"
+    volumes:
+      - vllm-cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["2"]
+              capabilities: [gpu]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 300s
+    networks:
+      - aura-internal
+
+  # Observability (aura-prometheus / aura-grafana)
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    expose:
+      - "9090"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - aura-internal
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
+    expose:
+      - "3000"
+    depends_on:
+      - prometheus
+    networks:
+      - aura-internal
+
+networks:
+  aura-edge:
+  aura-internal:
+
+volumes:
+  postgres-data:
+  redis-data:
+  aura-vault:
+  aura-logs:
+  qdrant-storage:
+  vllm-cache:
+  prometheus-data:
+  grafana-data:
