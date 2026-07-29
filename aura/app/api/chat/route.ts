@@ -55,15 +55,15 @@ function normaliseSource(
   s:
     | string
     | {
-        file?: string
-        url?: string
-        title?: string
-        path?: string
-        start_line?: number | string | null
-        end_line?: number | string | null
-        visibility?: string
-        authorization?: string[]
-      },
+      file?: string
+      url?: string
+      title?: string
+      path?: string
+      start_line?: number | string | null
+      end_line?: number | string | null
+      visibility?: string
+      authorization?: string[]
+    },
 ): {
   file: string
   title?: string
@@ -225,6 +225,10 @@ async function handleChatPost(req: Request): Promise<Response> {
   const citations = (data?.sources ?? [])
     .map(normaliseSource)
     .filter((c): c is NonNullable<ReturnType<typeof normaliseSource>> => c !== null)
+  // Server-authoritative remaining count (undefined/null for unlimited
+  // @dau.ac.in roles). Forwarded to the client so its counter can never
+  // drift from what the backend will actually enforce next time.
+  const quotaRemaining = typeof data?.quota_remaining === "number" ? data.quota_remaining : null
 
   const stream = new ReadableStream<Uint8Array>({
     start(controller) {
@@ -236,6 +240,9 @@ async function handleChatPost(req: Request): Promise<Response> {
       if (isPersonalData) {
         controller.enqueue(encoder.encode(sseLine({ type: "personal-data-flag" })))
       }
+      if (quotaRemaining !== null) {
+        controller.enqueue(encoder.encode(sseLine({ type: "quota", remaining: quotaRemaining })))
+      }
       controller.enqueue(encoder.encode("data: [DONE]\n\n"))
       controller.close()
     },
@@ -246,6 +253,7 @@ async function handleChatPost(req: Request): Promise<Response> {
       "Content-Type": "text/event-stream; charset=utf-8",
       "Cache-Control": "no-cache, no-transform",
       Connection: "keep-alive",
+      ...(quotaRemaining !== null ? { "X-Quota-Remaining": String(quotaRemaining) } : {}),
     },
   })
 }
