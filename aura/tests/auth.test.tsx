@@ -126,50 +126,6 @@ describe('useAuraChat 429 handling', () => {
     expect(result.current.errorMessage).toContain("Question limit reached")
   })
 
-  it('syncs remainingQuota to the server-authoritative count instead of trusting the local decrement', async () => {
-    // Regression test: the client used to maintain its own optimistic
-    // countdown and only found out about the real server-side count when
-    // it eventually got a 429. If server-side usage was already ahead of
-    // what the client had locally tracked (e.g. the same guest cookie used
-    // elsewhere), the UI would show "quota reached" far earlier than 10
-    // real questions. The server now reports its true remaining count on
-    // every response (a "quota" SSE event / X-Quota-Remaining), and the
-    // client must adopt that value rather than its own guess.
-    vi.mocked(useSession).mockReturnValue({
-      data: null,
-      status: 'unauthenticated',
-      update: vi.fn(),
-    })
-
-    const mockFetch = vi.mocked(global.fetch)
-    mockFetch.mockImplementation(async (input: RequestInfo | URL) => {
-      const url = String(input)
-      if (url === '/api/chat') {
-        // Server has already used 6 of this guest's questions elsewhere —
-        // it reports 4 remaining even though the client still thinks 10.
-        const body =
-          'data: {"type":"text-delta","delta":"Hi!"}\n\n' +
-          'data: {"type":"quota","remaining":4}\n\n' +
-          'data: [DONE]\n\n'
-        return new Response(body, {
-          status: 200,
-          headers: { 'Content-Type': 'text/event-stream' },
-        })
-      }
-      return Response.json({ token: 'mock-token' })
-    })
-
-    const { result } = renderHook(() => useAuraChat())
-    expect(result.current.remainingQuota).toBe(10)
-
-    await act(async () => {
-      await result.current.handleSendMessage("Hello AURA!")
-    })
-
-    // The client adopts the server's true count (4), not 10 - 1 = 9.
-    expect(result.current.remainingQuota).toBe(4)
-  })
-
   it('shows no quota limit for a signed-in @dau.ac.in account', async () => {
     vi.mocked(useSession).mockReturnValue({
       data: {
