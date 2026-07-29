@@ -90,6 +90,7 @@ export function useCohortProfile() {
   }, [fetchProfile])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true)
     Promise.all([fetchProfile(), fetchOptions()]).finally(() => setLoading(false))
   }, [fetchProfile, fetchOptions])

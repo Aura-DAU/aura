@@ -44,6 +44,7 @@ export function useTimetable() {
   }, [])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     refetch()
 
     // The agent can change the timetable mid-conversation (in another tab

@@ -51,4 +51,50 @@ const serwist = new Serwist({
   },
 })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+self.addEventListener("push", (event: any) => {
+  let data = { title: "AURA", body: "You have a class coming up.", url: "/dashboard" }
+  try {
+    if (event.data) {
+      data = { ...data, ...event.data.json() }
+    }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (err) {
+    // Non-JSON push payload — fall back to defaults above.
+  }
+
+  event.waitUntil(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (self as any).registration.showNotification(data.title, {
+      body: data.body,
+      icon: "/icon-light-32x32.png",
+      badge: "/icon-light-32x32.png",
+      data: { url: data.url || "/dashboard" },
+      tag: "aura-timetable-reminder",
+    })
+  )
+})
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+self.addEventListener("notificationclick", (event: any) => {
+  event.notification.close()
+  const url = (event.notification.data && event.notification.data.url) || "/dashboard"
+
+  event.waitUntil(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (self as any).clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList: any[]) => {
+      for (const client of clientList) {
+        if (client.url.includes(url) && "focus" in client) {
+          return client.focus()
+        }
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((self as any).clients.openWindow) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return (self as any).clients.openWindow(url)
+      }
+    })
+  )
+})
+
 serwist.addEventListeners()

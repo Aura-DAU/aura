@@ -141,6 +141,7 @@ export function useAuraChat() {
   useEffect(() => {
     if (sessionStatus === "loading") return
     if (session?.user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setRemainingQuotaState(null)
       return
     }
@@ -205,6 +206,7 @@ export function useAuraChat() {
       const rawThreads = localStorage.getItem(STORAGE_KEY)
       if (rawThreads) {
         const parsed = JSON.parse(rawThreads) as StoredThread[]
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setThreads(parsed)
         if (parsed[0]) {
           setActiveThreadIdState(parsed[0].id)
