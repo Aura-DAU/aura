@@ -108,6 +108,28 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
     return result
 
 
+def _ask_with_memory(request, identity, history, display_profile) -> dict:
+    # Compact older turns into the running summary before generating, then return
+    # the updated summary + memory metadata so the (stateless) client can persist
+    # the digest and advance its per-thread pointer.
+    mem_result = get_conversation_memory().prepare(request.summary, history)
+    result = get_aura().ask(
+        question=request.question,
+        history=mem_result.history,
+        identity=identity.as_dict(),
+        display_profile=display_profile,
+        summary=mem_result.summary,
+    )
+    result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
+    result["memory"] = {
+        "summary": mem_result.summary,
+        "foldedTurns": mem_result.folded_turns,
+        "summaryChanged": mem_result.summary_changed,
+        "shouldFork": mem_result.should_fork,
+    }
+    return result
+
+
 def _sse(payload: dict) -> str:
     return f"data: {json.dumps(payload)}\n\n"
 
