@@ -158,6 +158,7 @@ export function ChatShell() {
                     thinkingStep={chat.thinkingStep}
                     activeCitations={chat.activeCitations}
                     onRegenerate={handleRegenerate}
+                    continuation={chat.activeThreadIsContinuation}
                   />
                 </div>
                 {composer}

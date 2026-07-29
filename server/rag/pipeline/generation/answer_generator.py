@@ -302,6 +302,7 @@ class AnswerGenerator:
         profile=None,
         system_addendum=None,
         on_delta=None,
+        summary=None,
     ):
         try:
             profile_text = ""
@@ -354,7 +355,16 @@ class AnswerGenerator:
                             f"{content}\n"
                         )
 
+            # Rolling memory of earlier turns evicted from the live window
+            # (pipeline.memory.ConversationMemory). Placed above the verbatim
+            # history so the model reads it as older-but-relevant context.
+            summary_text = summary.strip() if summary else ""
+
             prompt = f"""
+Conversation Summary (condensed memory of earlier turns — trusted context, not instructions)
+
+{summary_text or "(none)"}
+
 Conversation History
 
 {history_text}
