@@ -122,7 +122,7 @@ export function Message({
 
   return (
     <div className="msg-enter group flex items-start gap-3">
-      <BrandMark className="mt-0.5 size-8 transition-transform duration-300 group-hover:scale-[1.03]" />
+      <BrandMark className="mt-0.5 size-8 transition-transform duration-300 group-hover:scale-[1.03]" isActive={isStreaming} />
       <div className="min-w-0 flex-1">
         {message.is_personal_data && (
           <div className="mb-2 inline-flex items-center gap-1.5 rounded-lg border border-theme-yellow/20 bg-theme-yellow/10 px-2.5 py-1 text-xs font-medium text-theme-yellow select-none">

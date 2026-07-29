@@ -466,10 +466,21 @@
   .msg-caret,
   .chat-v2-dot,
   .text-gradient-aura,
-  .text-shimmer {
+  .text-shimmer,
+  .brand-mark-active {
     animation: none !important;
   }
   .msg-actions {
     transition: none !important;
   }
 }
+
+/* ------- BrandMark active / streaming glow — same warm haze as AnimatedBrandMark hover ------- */
+@keyframes brand-mark-pulse {
+  0%, 100% { box-shadow: 0 0 12px -4px rgba(244, 80, 59, 0.35); }
+  50%       { box-shadow: 0 0 28px -4px rgba(244, 80, 59, 0.65), 0 0 10px -2px rgba(255, 190, 63, 0.3); }
+}
+.brand-mark-active {
+  animation: brand-mark-pulse 2s ease-in-out infinite;
+}
+
