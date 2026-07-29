@@ -3,8 +3,8 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { backendUrl } from "@/lib/api/backend"
 import {
-  getGoogleOAuthCredentials,
   getNextAuthSecret,
+  requireGoogleOAuthCredentials,
   requireInternalResolveSecret,
 } from "@/lib/auth/secrets"
 
@@ -95,28 +95,19 @@ async function lookupErpIdentity(email: string): Promise<ErpIdentity | null> {
   }
 }
 
-const googleCreds = getGoogleOAuthCredentials()
-if (!googleCreds && process.env.NODE_ENV === "production") {
-  console.warn(
-    "[auth] GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET unset — Google Workspace sign-in disabled; guest chat still works.",
-  )
-}
+const googleCreds = requireGoogleOAuthCredentials()
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    ...(googleCreds
-      ? [
-          GoogleProvider({
-            clientId: googleCreds.clientId,
-            clientSecret: googleCreds.clientSecret,
-            authorization: {
-              params: {
-                prompt: "select_account",
-              },
-            },
-          }),
-        ]
-      : []),
+    GoogleProvider({
+      clientId: googleCreds.clientId,
+      clientSecret: googleCreds.clientSecret,
+      authorization: {
+        params: {
+          prompt: "select_account",
+        },
+      },
+    }),
     ...(process.env.NODE_ENV === "development"
       ? [
           CredentialsProvider({
