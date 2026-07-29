@@ -8,19 +8,22 @@ team: "Madhav Thesiya"
 source_type: "XLSX"
 original_name: "SBG Team & Other Important Committees.xlsx"
 authorization: ["student", "faculty"]
+document_year: "2026-27"
 ---
 
 # SBG Team and Other Important Committees
 
 ## SBG Core Team
 
-- **Club/Committee:** SBG Core Team | **Name:** Yash Judal | **Role:** Convener
+### Tenure 26-27 (Current Latest)
 
-- **Club/Committee:** SBG Core Team | **Name:** Dev Sanghani | **Role:** Deputy Convener
+- **Club/Committee:** SBG Core Team - Tenure 26-27 | **Name:** Yash Judal | **Role:** Convener
 
-- **Club/Committee:** SBG Core Team | **Name:** Madhav Bhatt | **Role:** Treasurer
+- **Club/Committee:** SBG Core Team - Tenure 26-27 | **Name:** Dev Sanghani | **Role:** Deputy Convener
 
-- **Club/Committee:** SBG Core Team | **Name:** Siddh Shah | **Role:** Secretary
+- **Club/Committee:** SBG Core Team - Tenure 26-27 | **Name:** Madhav Bhatt | **Role:** Treasurer
+
+- **Club/Committee:** SBG Core Team - Tenure 26-27 | **Name:** Siddh Shah | **Role:** Secretary
 
 ### Tenure 25-26
 

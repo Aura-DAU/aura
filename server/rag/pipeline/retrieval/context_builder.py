@@ -21,13 +21,7 @@ class ContextBuilder:
         documents = []
 
         sources = []
-        seen_urls = {}
-        # doc id (the `id` attribute the LLM cites) → index into `sources`.
-        # Not the identity map: several chunks can dedup onto one source, and
-        # a chunk whose source was already seen still gets its own doc id. So
-        # sources[i] does NOT correspond to <doc id="i+1"> and callers must
-        # resolve cited ids through this map rather than by position.
-        citation_map = {}
+        seen_urls = set()
 
         context_tokens_used = 0
 
@@ -77,10 +71,38 @@ class ContextBuilder:
             # Fix CB5: moved `import re` to the top of the file (was imported
             # inside this loop on every chunk iteration, which is unnecessary).
             title_str = metadata.get("title", "")
-            doc_rule_year = metadata.get("document_year", "")
+            doc_rule_year = metadata.get("rule_year") or metadata.get("document_year", "")
+            if doc_rule_year:
+                doc_rule_year = str(doc_rule_year)
+            if not doc_rule_year or not re.search(r"\d", doc_rule_year):
+                search_targets = [
+                    title_str,
+                    metadata.get("h1", ""),
+                    metadata.get("relative_path", "")
+                ]
+                for target in search_targets:
+                    if not target:
+                        continue
+                    m4 = re.search(r"(?<!\d)(20\d{2})[\s\-_\u2013](\d{2}|\d{4})(?!\d)", target)
+                    if m4:
+                        y1_int = int(m4.group(1))
+                        y2_int = int(m4.group(2)[-2:])
+                        if y2_int == (y1_int + 1) % 100:
+                            doc_rule_year = f"{y1_int}-{y2_int:02d}"
+                            break
+                    m2 = re.search(r"(?<!\d)(2\d)[\s\-_\u2013](\d{2})(?!\d)", target)
+                    if m2:
+                        y1 = int(m2.group(1))
+                        y2 = int(m2.group(2))
+                        if 20 <= y1 <= 35 and y2 == (y1 + 1) % 100:
+                            doc_rule_year = f"20{y1:02d}-{y2:02d}"
+                            break
+                    m1 = re.search(r"(?<!\d)(20\d{2})(?!\d)", target)
+                    if m1:
+                        doc_rule_year = m1.group(1)
+                        break
             if not doc_rule_year:
-                year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
-                doc_rule_year = year_match.group(1) if year_match else ""
+                doc_rule_year = ""
 
             start_line_val = metadata.get("start_line", "")
             end_line_val = metadata.get("end_line", "")
@@ -121,20 +143,18 @@ scraped_date="{metadata.get('scraped_date', '')}"
             # this chunk was drawn from.
             dedup_key = url or relative_path or title_str
 
-            if dedup_key:
-                if dedup_key not in seen_urls:
-                    seen_urls[dedup_key] = len(sources)
+            if dedup_key and dedup_key not in seen_urls:
 
-                    sources.append({
-                        "title": metadata.get("title"),
-                        "url": url or None,
-                        "path": relative_path or None,
-                        "start_line": start_line_val or None,
-                        "end_line": end_line_val or None,
-                        "cluster": metadata.get("cluster")
-                    })
+                sources.append({
+                    "title": metadata.get("title"),
+                    "url": url or None,
+                    "path": relative_path or None,
+                    "start_line": start_line_val or None,
+                    "end_line": end_line_val or None,
+                    "cluster": metadata.get("cluster")
+                })
 
-                citation_map[idx] = seen_urls[dedup_key]
+                seen_urls.add(dedup_key)
 
         context = (
             "<context>\n"
@@ -144,6 +164,5 @@ scraped_date="{metadata.get('scraped_date', '')}"
 
         return {
             "context": context,
-            "sources": sources,
-            "citation_map": citation_map
+            "sources": sources
         }

@@ -280,6 +280,12 @@ class Reranker:
             )
         )
 
+        candidate_years = [
+            y for y in [self._extract_start_year(res.get("metadata", {})) for res in results]
+            if y is not None and y > 2000
+        ]
+        max_year = max(candidate_years) if candidate_years else None
+
         for result, cross_score in zip(
             results,
             cross_scores
@@ -418,20 +424,32 @@ class Reranker:
 
 
             # Fix #12: cap variable boost components to [0.0, 1.0] so the
-            # weighted sum stays on a consistent scale. Without this, multiple
-            # matching sections can accumulate metadata_boost > 1.0, inflating
-            # final scores beyond the intended [0, 1] range and making them
-            # incomparable across queries.
+            # weighted sum stays on a consistent scale.
             metadata_boost = min(metadata_boost, 1.0)
             required_section_boost = min(required_section_boost, 1.0)
             section_boost = min(section_boost, 1.0)
             course_match_boost = min(course_match_boost, 1.0)
 
-            # Fix #4: all components are now on comparable scales [0, 1].
-            # course_match_boost is weighted at 0.20 (was a raw +0.35 add).
-            # semester_penalty is applied to the normalised cross component.
+            # Recency / Year-match boost logic
+            recency_boost = 0.0
+            chunk_year = self._extract_start_year(metadata)
+            
+            # Check if query asks for a specific year
+            import re
+            query_year_match = re.search(r"\b(20\d{2}|2\d[\-_]\d{2})\b", query)
+            if query_year_match and chunk_year:
+                q_year_str = query_year_match.group(1)
+                q_year = int("20" + q_year_str[:2]) if len(q_year_str) == 5 and q_year_str[:2].isdigit() else (int(q_year_str[:4]) if q_year_str[:4].isdigit() else None)
+                if q_year and chunk_year == q_year:
+                    recency_boost = 1.0
+            elif chunk_year and max_year and max_year > 2000:
+                if chunk_year == max_year:
+                    recency_boost = 1.0
+                elif chunk_year == max_year - 1:
+                    recency_boost = 0.5
+
             final_score = (
-                (0.65 * norm_cross)
+                (0.60 * norm_cross)
                 +
                 (0.15 * dense_score)
                 +
@@ -443,8 +461,8 @@ class Reranker:
                 +
                 (0.05 * course_match_boost)
                 +
-                # Fix #13: penalty is now a fraction of the normalised cross
-                # score so it remains meaningful even at high relevance.
+                (0.05 * recency_boost)
+                +
                 (semester_penalty * norm_cross)
             )
 
@@ -469,3 +487,35 @@ class Reranker:
         )
 
         return reranked
+
+    def _extract_start_year(self, metadata: dict) -> int | None:
+        import re
+        doc_year = str(metadata.get("document_year") or metadata.get("rule_year") or "")
+        title_str = str(metadata.get("title") or "")
+        h1_str = str(metadata.get("h1") or "")
+        rel_path = str(metadata.get("relative_path") or "")
+
+        text_to_search = f"{doc_year} {title_str} {h1_str} {rel_path}"
+
+        m4 = re.search(r"(?<!\d)(20\d{2})[\s\-_\u2013](\d{2}|\d{4})(?!\d)", text_to_search)
+        if m4:
+            y1_int = int(m4.group(1))
+            y2_int = int(m4.group(2)[-2:])
+            if y2_int == (y1_int + 1) % 100:
+                return y1_int
+
+        m2 = re.search(r"(?<!\d)(2\d)[\s\-_\u2013](\d{2})(?!\d)", text_to_search)
+        if m2:
+            y1 = int(m2.group(1))
+            y2 = int(m2.group(2))
+            if 20 <= y1 <= 35 and y2 == (y1 + 1) % 100:
+                return 2000 + y1
+
+        m1 = re.search(r"(?<!\d)(20\d{2})(?!\d)", text_to_search)
+        if m1:
+            try:
+                return int(m1.group(1))
+            except ValueError:
+                pass
+
+        return None
