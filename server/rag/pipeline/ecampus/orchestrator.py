@@ -79,7 +79,7 @@ class EcampusOrchestrator:
             for t in _tools_for_role(role)
         ]
 
-    def run(self, query: str, identity: dict, history: Optional[list] = None) -> dict:
+    def run(self, query: str, identity: dict, history: Optional[list] = None, request_context=None) -> dict:
         history = (history or [])[-6:]
         messages = (
             [{"role": "system", "content": SYSTEM_PROMPT}]
@@ -117,7 +117,12 @@ class EcampusOrchestrator:
                 except json.JSONDecodeError:
                     args = {}
                 try:
-                    result = tool.handler(identity, **args)
+                    result = tool.handler(identity, request_context=request_context, **args)
+                except TypeError as exc:
+                    if "unexpected keyword argument 'request_context'" in str(exc):
+                        result = tool.handler(identity, **args)
+                    else:
+                        raise
                 except Exception as e:
                     result = {"error": str(e)}
 

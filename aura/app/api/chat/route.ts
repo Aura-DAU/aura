@@ -3,11 +3,7 @@ import { cookies } from "next/headers"
 import { randomUUID } from "crypto"
 import { z } from "zod"
 
-import {
-  backendUrl,
-  type BackendChatRequest,
-  type BackendChatResponse,
-} from "@/lib/api/backend"
+import { backendUrl, type BackendChatRequest } from "@/lib/api/backend"
 import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
@@ -36,6 +32,7 @@ const studentProfileSchema = z.object({
 const requestSchema = z.object({
   question: z.string().min(1, "question is required").max(2000),
   history: z.array(historyTurnSchema).max(20).optional(),
+  summary: z.string().max(20_000).optional(),
   studentProfile: studentProfileSchema.optional(),
 })
 
@@ -170,16 +167,19 @@ async function handleChatPost(req: Request): Promise<Response> {
     )
   }
 
-  // Map studentProfile → userProfile for FastAPI; cap history for cost/latency.
+  // Map studentProfile → userProfile for FastAPI. History is the client's
+  // unsummarised tail — the backend's ConversationMemory folds the rest into
+  // `summary` — so forward it as-is rather than re-truncating here.
   const payload: BackendChatRequest = {
     question: parsed.data.question,
-    history: parsed.data.history?.slice(-6),
+    history: parsed.data.history,
+    summary: parsed.data.summary,
     studentProfile: parsed.data.studentProfile,
   }
 
   let backendRes: Response
   try {
-    backendRes = await fetch(backendUrl("/chat"), {
+    backendRes = await fetch(backendUrl("/chat/stream"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -188,6 +188,7 @@ async function handleChatPost(req: Request): Promise<Response> {
       body: JSON.stringify({
         question: payload.question,
         history: payload.history,
+        summary: payload.summary,
         userProfile: payload.studentProfile,
       }),
       signal: req.signal,
@@ -207,37 +208,51 @@ async function handleChatPost(req: Request): Promise<Response> {
     return new Response("Backend error", { status: 502 })
   }
 
-  const rawBody = await backendRes.text()
-  let data: BackendChatResponse
-  try {
-    data = JSON.parse(rawBody) as BackendChatResponse
-  } catch {
-    console.error(
-      "[chat] backend returned non-JSON:",
-      backendRes.status,
-      rawBody.slice(0, 200),
-    )
+  if (!backendRes.body) {
+    console.error("[chat] backend returned no body for stream")
     return new Response("Invalid backend response", { status: 502 })
   }
 
-  const answer = data?.answer ?? ""
-  const isPersonalData = data?.is_personal_data === true
-  const citations = (data?.sources ?? [])
-    .map(normaliseSource)
-    .filter((c): c is NonNullable<ReturnType<typeof normaliseSource>> => c !== null)
+  // Relay the backend SSE stream token-by-token instead of buffering the whole
+  // answer (the old /chat proxy faked streaming by emitting one big delta).
+  // text-delta / personal-data-flag / summary-update / thread-continuation and
+  // [DONE] pass through untouched; citation events are re-normalised so the
+  // client keeps its camelCased, side-drawer-ready Citation shape.
+  const encoder = new TextEncoder()
+  const decoder = new TextDecoder()
 
   const stream = new ReadableStream<Uint8Array>({
-    start(controller) {
-      const encoder = new TextEncoder()
-      controller.enqueue(encoder.encode(sseLine({ type: "text-delta", delta: answer })))
-      if (citations.length > 0) {
-        controller.enqueue(encoder.encode(sseLine({ type: "citations", citations })))
+    async start(controller) {
+      const reader = backendRes.body!.getReader()
+      let buffer = ""
+
+      const emit = (rawEvent: string): void => {
+        const out = relaySseEvent(rawEvent)
+        if (out) controller.enqueue(encoder.encode(out))
       }
-      if (isPersonalData) {
-        controller.enqueue(encoder.encode(sseLine({ type: "personal-data-flag" })))
+
+      try {
+        for (;;) {
+          const { done, value } = await reader.read()
+          if (done) break
+          buffer += decoder.decode(value, { stream: true })
+          // SSE events are delimited by a blank line.
+          let sep: number
+          while ((sep = buffer.indexOf("\n\n")) !== -1) {
+            emit(buffer.slice(0, sep))
+            buffer = buffer.slice(sep + 2)
+          }
+        }
+        if (buffer.trim()) emit(buffer)
+      } catch (err) {
+        console.error("[chat] stream relay error:", err)
+      } finally {
+        controller.close()
       }
-      controller.enqueue(encoder.encode("data: [DONE]\n\n"))
-      controller.close()
+    },
+    cancel() {
+      // Client disconnected — tear down the upstream connection.
+      void backendRes.body?.cancel().catch(() => {})
     },
   })
 
@@ -246,6 +261,45 @@ async function handleChatPost(req: Request): Promise<Response> {
       "Content-Type": "text/event-stream; charset=utf-8",
       "Cache-Control": "no-cache, no-transform",
       Connection: "keep-alive",
+      "X-Accel-Buffering": "no",
     },
   })
+}
+
+// Transforms one raw SSE event from the backend into the event forwarded to the
+// browser. Returns null for events with no data payload. Citation events are
+// re-normalised (snake_case → camelCased Citation); every other event type
+// (text-delta, personal-data-flag, summary-update, thread-continuation,
+// calendar-action, …) is forwarded unchanged.
+function relaySseEvent(rawEvent: string): string | null {
+  const data = rawEvent
+    .split("\n")
+    .filter((line) => line.startsWith("data:"))
+    .map((line) => line.slice(5).replace(/^ /, ""))
+    .join("\n")
+
+  if (!data) return null
+  if (data === "[DONE]") return "data: [DONE]\n\n"
+
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(data)
+  } catch {
+    // Unrecognised payload — forward verbatim rather than dropping it.
+    return `data: ${data}\n\n`
+  }
+
+  if (
+    parsed &&
+    typeof parsed === "object" &&
+    (parsed as { type?: unknown }).type === "citations"
+  ) {
+    const raw = (parsed as { citations?: unknown[] }).citations ?? []
+    const citations = raw
+      .map((c) => normaliseSource(c as Parameters<typeof normaliseSource>[0]))
+      .filter((c): c is NonNullable<ReturnType<typeof normaliseSource>> => c !== null)
+    return sseLine({ type: "citations", citations })
+  }
+
+  return sseLine(parsed)
 }
