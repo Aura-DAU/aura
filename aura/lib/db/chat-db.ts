@@ -21,20 +21,25 @@ async function readStore(): Promise<ChatStore> {
     const data = await fs.readFile(DB_PATH, "utf-8")
     return JSON.parse(data) as ChatStore
   } catch {
-    await fs.mkdir(DB_DIR, { recursive: true })
-    await fs.writeFile(DB_PATH, "{}", "utf-8")
+    try {
+      await fs.mkdir(DB_DIR, { recursive: true })
+      await fs.writeFile(DB_PATH, "{}", "utf-8")
+    } catch {
+      // Ignore directory creation errors when filesystem is read-only
+    }
     return {}
   }
 }
 
 async function writeStore(store: ChatStore): Promise<void> {
-  await fs.mkdir(DB_DIR, { recursive: true })
-  // Atomic write: write to a .tmp file then rename over the real file.
-  // On Linux, rename() within the same filesystem is atomic, so concurrent
-  // writes cannot produce a half-written JSON file.
-  const tmpPath = `${DB_PATH}.${Math.random().toString(36).slice(2)}.tmp`
-  await fs.writeFile(tmpPath, JSON.stringify(store, null, 2), "utf-8")
-  await fs.rename(tmpPath, DB_PATH)
+  try {
+    await fs.mkdir(DB_DIR, { recursive: true })
+    const tmpPath = `${DB_PATH}.${Math.random().toString(36).slice(2)}.tmp`
+    await fs.writeFile(tmpPath, JSON.stringify(store, null, 2), "utf-8")
+    await fs.rename(tmpPath, DB_PATH)
+  } catch (err) {
+    console.error("[chat-db] Unable to persist thread history:", err)
+  }
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
