@@ -1,5 +1,6 @@
 import os
 import math
+import re
 import torch
 from transformers import (
     AutoTokenizer,
@@ -427,11 +428,32 @@ class Reranker:
             section_boost = min(section_boost, 1.0)
             course_match_boost = min(course_match_boost, 1.0)
 
+            # Soft recency boost when the user did not name a year: prefer
+            # convener" answers stop citing superseded rosters.
+            recency_boost = 0.0
+            if not entities.get("rule_year"):
+                year_text = " ".join(
+                    str(metadata.get(k) or "")
+                    for k in ("academic_year", "title", "source_file", "relative_path")
+                )
+                year_match = re.search(
+                    r"(?:20)?(\d{2})[_\-\u2013](\d{2})(?!\d)",
+                    year_text,
+                )
+                if year_match:
+                    start_yy = int(year_match.group(1))
+                    end_yy = int(year_match.group(2))
+                    # Only boost plausible academic years (end == start+1).
+                    if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
+                        recency_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
+                elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
+                    recency_boost = 0.6
+
             # Fix #4: all components are now on comparable scales [0, 1].
             # course_match_boost is weighted at 0.20 (was a raw +0.35 add).
             # semester_penalty is applied to the normalised cross component.
             final_score = (
-                (0.65 * norm_cross)
+                (0.60 * norm_cross)
                 +
                 (0.15 * dense_score)
                 +
@@ -442,6 +464,8 @@ class Reranker:
                 (0.05 * section_boost)
                 +
                 (0.05 * course_match_boost)
+                +
+                (0.05 * recency_boost)
                 +
                 # Fix #13: penalty is now a fraction of the normalised cross
                 # score so it remains meaningful even at high relevance.

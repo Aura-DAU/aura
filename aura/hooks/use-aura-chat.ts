@@ -36,6 +36,23 @@ function deriveTitle(text: string): string {
   return clean.length > 40 ? `${clean.slice(0, 40)}…` : clean || "New chat"
 }
 
+/** Last-activity timestamp for sidebar ordering / server merge. */
+function threadUpdatedAt(messages: ChatMessage[], fallback = Date.now()): number {
+  for (let i = messages.length - 1; i >= 0; i--) {
+    const ts = messages[i]?.timestamp
+    if (typeof ts === "number" && ts > 0) return ts
+  }
+  return fallback
+}
+
+function sortThreadsByRecency(threads: StoredThread[]): StoredThread[] {
+  return [...threads].sort(
+    (a, b) =>
+      (b.updatedAt ?? threadUpdatedAt(b.messages, 0)) -
+      (a.updatedAt ?? threadUpdatedAt(a.messages, 0)),
+  )
+}
+
 function toBackendProfile(p: StudentProfile) {
   const out: Record<string, string> = {}
   if (p.name) out.name = p.name
@@ -52,17 +69,35 @@ function toBackendHistory(messages: ChatMessage[]) {
   return messages.map(({ role, content }) => ({ role, content }))
 }
 
-// Fire-and-forget — never blocks the UI
+// Fire-and-forget — never blocks the UI. Coalesces concurrent saves so an
+// older in-flight POST cannot overwrite a newer snapshot on the server.
+let historySyncSeq = 0
+
 function saveHistoryToServer(
   email: string,
   threads: (StoredThread & { messages: ChatMessage[] })[]
 ): void {
   const payload = threads.slice(0, 10)
+  const seq = ++historySyncSeq
   apiFetch("/api/auth/history", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, threads: payload }),
-  }).catch(() => { /* ignore network errors */ })
+    body: JSON.stringify({
+      email,
+      threads: payload,
+      // Monotonic client watermark — server rejects older snapshots.
+      clientSyncAt: Math.max(
+        Date.now(),
+        ...payload.map((t) => t.updatedAt ?? 0),
+      ),
+    }),
+  })
+    .then(async (res) => {
+      if (!res.ok && seq === historySyncSeq) {
+        /* ignore — next successful sync will catch up */
+      }
+    })
+    .catch(() => { /* ignore network errors */ })
 }
 
 /**
@@ -148,26 +183,35 @@ export function useAuraChat() {
       setRemainingQuotaState(null)
       return
     }
-    const maxQuota = GUEST_DAILY_QUOTA
-    const date = new Date().toISOString().split('T')[0]
-    const key = GUEST_QUOTA_KEY
 
-    try {
-      const stored = localStorage.getItem(key)
-      if (stored) {
-        const parsed = JSON.parse(stored)
-        if (parsed.date === date) {
-          setRemainingQuotaState(Math.max(0, maxQuota - parsed.count))
-        } else {
-          setRemainingQuotaState(maxQuota)
-          localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+    const refreshGuestQuota = () => {
+      const maxQuota = GUEST_DAILY_QUOTA
+      const date = new Date().toISOString().split("T")[0]
+      try {
+        const stored = localStorage.getItem(GUEST_QUOTA_KEY)
+        if (stored) {
+          const parsed = JSON.parse(stored) as { date?: string; count?: number }
+          if (parsed.date === date) {
+            setRemainingQuotaState(Math.max(0, maxQuota - (parsed.count ?? 0)))
+            return
+          }
         }
-      } else {
         setRemainingQuotaState(maxQuota)
-        localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+        localStorage.setItem(GUEST_QUOTA_KEY, JSON.stringify({ date, count: 0 }))
+      } catch {
+        setRemainingQuotaState(maxQuota)
       }
-    } catch {
-      setRemainingQuotaState(maxQuota)
+    }
+
+    refreshGuestQuota()
+    const onVisible = () => {
+      if (document.visibilityState === "visible") refreshGuestQuota()
+    }
+    window.addEventListener("focus", refreshGuestQuota)
+    document.addEventListener("visibilitychange", onVisible)
+    return () => {
+      window.removeEventListener("focus", refreshGuestQuota)
+      document.removeEventListener("visibilitychange", onVisible)
     }
   }, [session, sessionStatus])
 
@@ -221,6 +265,11 @@ export function useAuraChat() {
   const pendingContinuationRef = useRef<{ fromId: string; toId: string } | null>(null)
   const lastVolumeUpdateRef = useRef(0)
   const mountedRef = useRef(true)
+  const activeThreadIdRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    activeThreadIdRef.current = activeThreadId
+  }, [activeThreadId])
 
   useEffect(() => {
     mountedRef.current = true
@@ -234,12 +283,16 @@ export function useAuraChat() {
     try {
       const rawThreads = localStorage.getItem(STORAGE_KEY)
       if (rawThreads) {
-        const parsed = JSON.parse(rawThreads) as StoredThread[]
+        const parsed = (JSON.parse(rawThreads) as StoredThread[]).map((t) => ({
+          ...t,
+          updatedAt: t.updatedAt ?? threadUpdatedAt(t.messages, 0),
+        }))
+        const sorted = sortThreadsByRecency(parsed)
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setThreads(parsed)
-        if (parsed[0]) {
-          setActiveThreadIdState(parsed[0].id)
-          setMessages(parsed[0].messages)
+        setThreads(sorted)
+        if (sorted[0]) {
+          setActiveThreadIdState(sorted[0].id)
+          setMessages(sorted[0].messages)
         }
       }
       const rawProfile = localStorage.getItem(PROFILE_KEY)
@@ -259,20 +312,39 @@ export function useAuraChat() {
           if (data.threads && Array.isArray(data.threads)) {
             setThreads(prev => {
               const map = new Map<string, StoredThread>()
-              for (const t of data.threads) map.set(t.id, t)
+              const activity = (t: StoredThread) =>
+                t.updatedAt ?? threadUpdatedAt(t.messages, 0)
+              for (const t of data.threads as StoredThread[]) {
+                map.set(t.id, {
+                  ...t,
+                  updatedAt: activity(t),
+                })
+              }
               for (const t of prev) {
                 const existing = map.get(t.id)
-                if (!existing || (t.updatedAt ?? 0) >= (existing.updatedAt ?? 0)) {
+                if (!existing || activity(t) >= activity(existing)) {
                   map.set(t.id, t)
                 }
               }
-              const merged = Array.from(map.values()).sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
-              
+              const merged = sortThreadsByRecency(Array.from(map.values()))
+
+              const activeId = activeThreadIdRef.current
               if (!prev.length && merged[0]) {
                 setActiveThreadIdState(merged[0].id)
                 setMessages(merged[0].messages)
+              } else if (activeId) {
+                // Only replace the open transcript when the merge actually
+                // chose a newer copy (avoids clobbering an in-progress stream).
+                const active = merged.find((t) => t.id === activeId)
+                const prevActive = prev.find((t) => t.id === activeId)
+                if (
+                  active &&
+                  (!prevActive || activity(active) > activity(prevActive))
+                ) {
+                  setMessages(active.messages)
+                }
               }
-              
+
               return merged
             })
           }
@@ -312,15 +384,27 @@ export function useAuraChat() {
 
   const persistMessages = useCallback(
     (threadId: string, next: ChatMessage[], title?: string) => {
+      const updatedAt = threadUpdatedAt(next)
       setThreads((prev) =>
-        prev.map((t) =>
-          t.id === threadId
-            ? { ...t, messages: next, title: title ?? t.title }
-            : t,
+        sortThreadsByRecency(
+          prev.map((t) =>
+            t.id === threadId
+              ? { ...t, messages: next, title: title ?? t.title, updatedAt }
+              : t,
+          ),
         ),
       )
     },
     [],
+  )
+
+  const syncThreadsToServer = useCallback(
+    (next: StoredThread[]) => {
+      const email = session?.user?.email
+      if (!email) return
+      saveHistoryToServer(email, redactPersonalDataMessages(next))
+    },
+    [session?.user?.email],
   )
 
   const setActiveThreadId = useCallback(
@@ -363,10 +447,12 @@ export function useAuraChat() {
             setMessages([])
           }
         }
+        // Persist the omission so a later history GET cannot revive the thread.
+        syncThreadsToServer(next)
         return next
       })
     },
-    [activeThreadId],
+    [activeThreadId, syncThreadsToServer],
   )
 
   const saveProfile = useCallback(async (p: StudentProfile) => {
@@ -379,7 +465,7 @@ export function useAuraChat() {
   }, [])
 
   const handleSendMessage = useCallback(
-    async (text: string) => {
+    async (text: string, options?: { regenerate?: boolean }) => {
       const trimmed = text.trim()
       if (!trimmed || loading || remainingQuota === 0) return
 
@@ -388,7 +474,9 @@ export function useAuraChat() {
       abortRef.current = controller
 
       setErrorMessage(null)
-      setInputText("")
+      if (!options?.regenerate) {
+        setInputText("")
+      }
 
       // If the previous turn hard-overflowed, continue in the fresh thread we
       // forked for it. Deferred to now (not at fork time) so the answer the user
@@ -411,20 +499,40 @@ export function useAuraChat() {
         timestamp: Date.now(),
       }
 
-      if (!threadId) {
-        threadId = uid()
-        const newThread: StoredThread = {
-          id: threadId,
-          title: deriveTitle(trimmed),
-          messages: [userMsg],
+      // Regenerate: transcript already ends at the last user turn — do not
+      // append a duplicate user message. History sent to the backend must
+      // exclude that current user turn (same as a normal send).
+      let baseMessages: ChatMessage[]
+      if (options?.regenerate) {
+        if (!threadId) return
+        const last = priorMessages[priorMessages.length - 1]
+        if (last?.role === "user" && last.content.trim() === trimmed) {
+          baseMessages = priorMessages
+          priorMessages = priorMessages.slice(0, -1)
+        } else {
+          baseMessages = [...priorMessages, userMsg]
         }
-        setThreads((prev) => [newThread, ...prev])
-        setActiveThreadIdState(threadId)
+      } else {
+        if (!threadId) {
+          threadId = uid()
+          const newThread: StoredThread = {
+            id: threadId,
+            title: deriveTitle(trimmed),
+            messages: [userMsg],
+            updatedAt: userMsg.timestamp,
+          }
+          setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
+          setActiveThreadIdState(threadId)
+        }
+        baseMessages = [...priorMessages, userMsg]
+        persistMessages(
+          threadId,
+          baseMessages,
+          deriveTitle(priorMessages[0]?.content ?? trimmed),
+        )
       }
 
-      const baseMessages = [...priorMessages, userMsg]
       setMessages(baseMessages)
-      persistMessages(threadId, baseMessages, deriveTitle(priorMessages[0]?.content ?? trimmed))
 
       // Rolling memory: send the running summary + only the unsummarised tail,
       // bounded so the request stays under the 20-turn API cap. The backend
@@ -455,7 +563,11 @@ export function useAuraChat() {
         if (controller.signal.aborted || !mountedRef.current) return
 
         if (response.status === 429) {
-          setRemainingQuotaState(0)
+          // Only pin the guest counter to 0. Signed-in users are unlimited;
+          // a transient 429 must not permanently lock the composer.
+          if (!session?.user) {
+            setRemainingQuotaState(0)
+          }
           throw AppError.rateLimited()
         }
         if (!response.ok || !response.body) {
@@ -533,10 +645,17 @@ export function useAuraChat() {
           const capturedSummary = newSummary
           const advancedCount = tailStart + foldedTurns
           setThreads((prev) =>
-            prev.map((t) =>
-              t.id === threadId
-                ? { ...t, summary: capturedSummary, summaryTurnCount: advancedCount }
-                : t,
+            sortThreadsByRecency(
+              prev.map((t) =>
+                t.id === threadId
+                  ? {
+                      ...t,
+                      summary: capturedSummary,
+                      summaryTurnCount: advancedCount,
+                      updatedAt: t.updatedAt ?? threadUpdatedAt(t.messages),
+                    }
+                  : t,
+              ),
             ),
           )
         }
@@ -554,8 +673,9 @@ export function useAuraChat() {
             summary: carriedSummary,
             summaryTurnCount: 0,
             continuedFromId: threadId,
+            updatedAt: Date.now(),
           }
-          setThreads((prev) => [contThread, ...prev])
+          setThreads((prev) => sortThreadsByRecency([contThread, ...prev]))
           pendingContinuationRef.current = { fromId: threadId, toId: contId }
           toastSuccess(
             "This chat is getting long — I'll continue in a new thread and keep the summary.",
@@ -564,7 +684,7 @@ export function useAuraChat() {
 
         if (session?.user?.email) {
           setThreads((current) => {
-            saveHistoryToServer(session.user.email!, redactPersonalDataMessages(current))
+            syncThreadsToServer(current)
             return current
           })
         }
@@ -583,17 +703,58 @@ export function useAuraChat() {
         }
       }
     },
-    [activeThreadId, loading, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer],
+    [activeThreadId, loading, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer, syncThreadsToServer],
   )
 
   const handleClearChat = useCallback(() => {
     if (activeThreadId) {
-      persistMessages(activeThreadId, [])
+      setThreads((prev) => {
+        const next = sortThreadsByRecency(
+          prev.map((t) =>
+            t.id === activeThreadId
+              ? {
+                  ...t,
+                  messages: [],
+                  summary: undefined,
+                  summaryTurnCount: undefined,
+                  continuedFromId: undefined,
+                  updatedAt: Date.now(),
+                }
+              : t,
+          ),
+        )
+        syncThreadsToServer(next)
+        return next
+      })
     }
     setMessages([])
     setActiveCitations([])
     setErrorMessage(null)
-  }, [activeThreadId, persistMessages])
+    pendingContinuationRef.current = null
+  }, [activeThreadId, syncThreadsToServer])
+
+  /** Re-ask the last user turn without duplicating it in history. */
+  const handleRegenerate = useCallback(() => {
+    if (loading) return
+    let lastUserIdx = -1
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i]?.role === "user") {
+        lastUserIdx = i
+        break
+      }
+    }
+    if (lastUserIdx < 0) return
+    const lastUser = messages[lastUserIdx]
+    if (!lastUser?.content.trim()) return
+
+    // Keep the last user turn; drop the assistant reply that followed it.
+    const trimmedMessages = messages.slice(0, lastUserIdx + 1)
+    setMessages(trimmedMessages)
+    if (activeThreadId) {
+      persistMessages(activeThreadId, trimmedMessages)
+    }
+    void handleSendMessage(lastUser.content, { regenerate: true })
+  }, [loading, messages, activeThreadId, persistMessages, handleSendMessage])
 
   const stopGeneration = useCallback(() => {
     abortRef.current?.abort()
@@ -608,10 +769,10 @@ export function useAuraChat() {
   // skip re-renders instead of receiving a fresh array every hook render.
   const threadSummaries = useMemo(
     () =>
-      threads.map(({ id, title, messages }) => ({
+      threads.map(({ id, title, messages, updatedAt }) => ({
         id,
         title,
-        updatedAt: messages[messages.length - 1]?.timestamp ?? messages[0]?.timestamp,
+        updatedAt: updatedAt ?? threadUpdatedAt(messages, 0),
       })),
     [threads],
   )
@@ -825,6 +986,7 @@ export function useAuraChat() {
     saveProfile,
     handleMicClick,
     handleSendMessage,
+    handleRegenerate,
     handleClearChat,
     stopGeneration,
     lastUserMessage,
