@@ -228,6 +228,37 @@ export function useAuraChat() {
   }, [])
 
   useEffect(() => {
+    // Fetch history from server to synchronize across devices
+    if (session?.user?.email) {
+      apiFetch("/api/auth/history")
+        .then(res => res.json())
+        .then(data => {
+          if (data.threads && Array.isArray(data.threads)) {
+            setThreads(prev => {
+              const map = new Map<string, StoredThread>()
+              for (const t of data.threads) map.set(t.id, t)
+              for (const t of prev) {
+                const existing = map.get(t.id)
+                if (!existing || (t.updatedAt ?? 0) >= (existing.updatedAt ?? 0)) {
+                  map.set(t.id, t)
+                }
+              }
+              const merged = Array.from(map.values()).sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
+              
+              if (!prev.length && merged[0]) {
+                setActiveThreadIdState(merged[0].id)
+                setMessages(merged[0].messages)
+              }
+              
+              return merged
+            })
+          }
+        })
+        .catch(() => {})
+    }
+  }, [session?.user?.email])
+
+  useEffect(() => {
     if (!hasHydrated) return
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(redactPersonalDataMessages(threads)))

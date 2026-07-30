@@ -336,6 +336,8 @@ def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end
     for phrase in lines_to_search:
         for idx in range(search_range_start, search_range_end):
             file_line = file_lines[idx].strip()
+            if not file_line:
+                continue
             if phrase in file_line or file_line in phrase:
                 if first_match is None or idx < first_match:
                     first_match = idx
