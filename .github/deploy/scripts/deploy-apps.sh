@@ -11,13 +11,16 @@
 #
 # Expected layout on aura-node1:
 #   /opt/aura/app                  — git clone of DAU-pwa
+#   /opt/aura/app/.github/deploy/  — tracked deploy configs (git)
+#   /opt/aura/app/deploy/          — runtime tree (materialized from above;
+#                                    host-local .env + certs/ preserved)
 #   /opt/aura/app/deploy/node1/.env  (preferred) OR /opt/aura/.env (legacy fallback)
 #   /opt/aura/app/deploy/node1/certs/{fullchain.pem,privkey.pem}  — host-local TLS
 #   /opt/aura/actions-runner       — self-hosted GitHub Actions runner
 #
 # Usage:
-#   AURA_APP_ROOT=/opt/aura/app ./deploy/scripts/deploy-apps.sh
-#   ./deploy/scripts/deploy-apps.sh main   # optional branch/ref (default: main)
+#   AURA_APP_ROOT=/opt/aura/app ./.github/deploy/scripts/deploy-apps.sh
+#   ./.github/deploy/scripts/deploy-apps.sh main   # optional branch/ref (default: main)
 
 set -euo pipefail
 
@@ -46,10 +49,71 @@ resolve_env_file() {
   return 1
 }
 
+require_path() {
+  local path="$1"
+  local kind="$2"
+  if [[ "${kind}" == "dir" ]]; then
+    if [[ ! -d "${path}" ]]; then
+      echo "error: required directory missing: ${path}" >&2
+      exit 1
+    fi
+  elif [[ ! -f "${path}" ]]; then
+    echo "error: required file missing: ${path}" >&2
+    exit 1
+  fi
+}
+
+# Self-hosted runners have no interactive HTTPS credentials. Prefer either:
+#   - GITHUB_TOKEN / GH_TOKEN in the environment (CD workflow), or
+#   - SSH remote + read-only deploy key on the host (manual deploys).
+git_with_auth() {
+  if [[ -n "${GITHUB_TOKEN:-${GH_TOKEN:-}}" ]]; then
+    local token="${GITHUB_TOKEN:-${GH_TOKEN}}"
+    # Ephemeral — never writes the token into .git/config remotes.
+    git -c "url.https://x-access-token:${token}@github.com/.insteadOf=https://github.com/" "$@"
+  else
+    git "$@"
+  fi
+}
+
+# Repo source-of-truth is .github/deploy/; runtime install path stays
+# ${APP_ROOT}/deploy/ (host-local .env + certs). Same remap as aura_rsync for
+# remote nodes — without this, git checkout alone leaves deploy/node1 without
+# docker-compose.yml after the deploy/ → .github/deploy/ move.
+materialize_deploy_tree() {
+  local src="${APP_ROOT}/.github/deploy"
+  local dst="${APP_ROOT}/deploy"
+  if [[ ! -d "${src}" ]]; then
+    # Legacy branches still keep tracked files under deploy/.
+    return 0
+  fi
+  if ! command -v rsync >/dev/null 2>&1; then
+    echo "error: rsync required to materialize ${src} → ${dst}" >&2
+    exit 1
+  fi
+  echo "==> Materializing ${src}/ → ${dst}/ (preserving .env + certs/)"
+  mkdir -p "${dst}"
+  rsync -a --delete \
+    --exclude '.env' \
+    --exclude 'certs/' \
+    --exclude 'node_modules/' \
+    --exclude '.DS_Store' \
+    "${src}/" "${dst}/"
+}
+
 if [[ ! -d "${APP_ROOT}/.git" ]]; then
   echo "error: ${APP_ROOT} is not a git checkout" >&2
   exit 1
 fi
+
+echo "==> Updating ${APP_ROOT} to ${REF}"
+cd "${APP_ROOT}"
+git_with_auth fetch --prune origin
+git checkout "${REF}"
+git_with_auth pull --ff-only origin "${REF}"
+
+materialize_deploy_tree
+
 if ! ENV_FILE="$(resolve_env_file)"; then
   echo "error: env file not found. Tried:" >&2
   echo "  \${AURA_ENV_FILE} (if set)" >&2
@@ -68,19 +132,6 @@ if [[ ! -f "${COMPOSE_DIR}/docker-compose.yml" ]]; then
 fi
 
 # Fail fast on stale/missing paths left over from the deploy/ layout move.
-require_path() {
-  local path="$1"
-  local kind="$2"
-  if [[ "${kind}" == "dir" ]]; then
-    if [[ ! -d "${path}" ]]; then
-      echo "error: required directory missing: ${path}" >&2
-      exit 1
-    fi
-  elif [[ ! -f "${path}" ]]; then
-    echo "error: required file missing: ${path}" >&2
-    exit 1
-  fi
-}
 require_path "${APP_ROOT}/aura" dir
 require_path "${APP_ROOT}/server" dir
 require_path "${APP_ROOT}/data" dir
@@ -113,25 +164,6 @@ elif [[ -e "${STALE_NGINX_MOUNT}" && ! -f "${APP_ROOT}/deploy/nginx/nginx.conf" 
   echo "error: unexpected ${STALE_NGINX_MOUNT}; canonical conf is deploy/nginx/nginx.conf" >&2
   exit 1
 fi
-
-# Self-hosted runners have no interactive HTTPS credentials. Prefer either:
-#   - GITHUB_TOKEN / GH_TOKEN in the environment (CD workflow), or
-#   - SSH remote + read-only deploy key on the host (manual deploys).
-git_with_auth() {
-  if [[ -n "${GITHUB_TOKEN:-${GH_TOKEN:-}}" ]]; then
-    local token="${GITHUB_TOKEN:-${GH_TOKEN}}"
-    # Ephemeral — never writes the token into .git/config remotes.
-    git -c "url.https://x-access-token:${token}@github.com/.insteadOf=https://github.com/" "$@"
-  else
-    git "$@"
-  fi
-}
-
-echo "==> Updating ${APP_ROOT} to ${REF}"
-cd "${APP_ROOT}"
-git_with_auth fetch --prune origin
-git checkout "${REF}"
-git_with_auth pull --ff-only origin "${REF}"
 
 echo "==> Rebuilding application services only (aura, backend)"
 cd "${COMPOSE_DIR}"

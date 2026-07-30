@@ -296,7 +296,8 @@ services:
       - grafana-data:/var/lib/grafana
       - ./monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
       - ./monitoring/grafana-dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml:ro
-      - ./monitoring/dashboards:/etc/grafana/provisioning/dashboards:ro
+      # JSON dashboards on a separate path from the provider YAML mount.
+      - ./monitoring/dashboards:/etc/grafana/dashboards:ro
     expose:
       - "3000"
     depends_on:
