@@ -1,4 +1,6 @@
-# Auto-provisions dashboard JSON files from /etc/grafana/provisioning/dashboards
+# Auto-provisions dashboard JSON files from /etc/grafana/dashboards
+# (provider YAML mounts separately under provisioning/dashboards/ — do not
+# bind-mount the JSON dir onto the same path or Docker hits ROFS nesting).
 apiVersion: 1
 
 providers:
@@ -9,4 +11,4 @@ providers:
     disableDeletion: false
     editable: true
     options:
-      path: /etc/grafana/provisioning/dashboards
+      path: /etc/grafana/dashboards
