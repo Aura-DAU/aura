@@ -15,6 +15,7 @@ from api.deps import chat_queue_lock, get_aura
 from api.schemas import ChatRequest
 from pipeline.memory.conversation_memory import get_conversation_memory
 from pipeline.memory.user_memory import get_user_memory_store
+from pipeline.memory.response_cache import get_response_cache
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota
 from access_control import resolve_effective_role
 
@@ -102,12 +103,38 @@ async def chat(
 ):
     history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
 
+    # Cache lookup: guest public standalone queries only
+    is_guest_public = (identity.role == "guest" and len(history) == 0)
+    if is_guest_public:
+        cache = get_response_cache()
+        cached = cache.get(body.question)
+        if cached:
+            cached["quota_remaining"] = remaining
+            return cached
+
     async with chat_queue_lock:
         result = await run_in_threadpool(
             _ask_with_memory, body, identity, history, display_profile, request_context
         )
     if isinstance(result, dict):
         result["quota_remaining"] = remaining
+        # Cache write: guest public standalone queries only (exclude error/rejection responses)
+        if is_guest_public and "answer" in result and "error" not in result:
+            ans = result["answer"]
+            from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
+            from pipeline.aura_chat import GENERIC_DENIAL
+            is_error_response = (
+                ans == GENERIC_DENIAL or
+                ans == "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries." or
+                ans == OFF_TOPIC_RESPONSE or
+                ans.startswith("I'm having trouble retrieving") or
+                ans.startswith("Sorry, I encountered an error")
+            )
+            if not is_error_response:
+                cache.set(body.question, {
+                    "answer": ans,
+                    "sources": result.get("sources") or []
+                })
     return result
 
 
@@ -155,6 +182,31 @@ async def chat_stream(
     # are raised before streaming starts and reach the client as real HTTP
     # status codes.
     history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
+
+    # Cache lookup: guest public standalone queries only
+    is_guest_public = (identity.role == "guest" and len(history) == 0)
+    if is_guest_public:
+        cache = get_response_cache()
+        cached = cache.get(body.question)
+        if cached:
+            async def cached_stream():
+                yield _sse({"type": "quota", "remaining": remaining})
+                yield _sse({"type": "text-delta", "delta": cached["answer"]})
+                if cached.get("sources"):
+                    yield _sse({"type": "citations", "citations": cached["sources"]})
+                yield "data: [DONE]\n\n"
+
+            headers = {
+                "Cache-Control": "no-cache, no-transform",
+                "X-Accel-Buffering": "no",
+            }
+            if remaining is not None:
+                headers["X-Quota-Remaining"] = str(remaining)
+            return StreamingResponse(
+                cached_stream(),
+                media_type="text/event-stream",
+                headers=headers,
+            )
 
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
@@ -260,6 +312,24 @@ async def chat_stream(
                             "summary": mem_result.summary,
                         })
                     yield _sse({"type": "quota", "remaining": remaining})
+
+                    # Cache write: guest public standalone queries only (exclude error/rejection responses)
+                    if is_guest_public and answer and "error" not in result:
+                        from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
+                        from pipeline.aura_chat import GENERIC_DENIAL
+                        is_error_response = (
+                            answer == GENERIC_DENIAL or
+                            answer == "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries." or
+                            answer == OFF_TOPIC_RESPONSE or
+                            answer.startswith("I'm having trouble retrieving") or
+                            answer.startswith("Sorry, I encountered an error")
+                        )
+                        if not is_error_response:
+                            get_response_cache().set(body.question, {
+                                "answer": answer,
+                                "sources": citations
+                            })
+
                     yield "data: [DONE]\n\n"
                     break
             finally:
