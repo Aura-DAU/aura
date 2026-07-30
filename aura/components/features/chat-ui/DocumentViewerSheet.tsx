@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { FileText, Loader2, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useDocumentViewer } from "@/hooks/use-document-viewer"
+import { MarkdownContent } from "@/components/ui/markdown-content"
 
 // Module-level cache so hovering multiple citation cards for the same file
 // (or reopening a document already viewed) doesn't refetch every time.
@@ -92,9 +93,25 @@ function DocumentViewerPanel({
     return () => cancelAnimationFrame(id)
   }, [state.status])
 
-  const lines = useMemo(() => state.content?.split("\n") ?? [], [state.content])
-  const startLine = target.startLine
-  const endLine = target.endLine ?? target.startLine
+  const { lines, startLine, endLine } = useMemo(() => {
+    const rawLines = state.content?.split("\n") ?? []
+    let offset = 0
+    if (rawLines[0]?.trim() === "---") {
+      const frontmatterEndIndex = rawLines.findIndex((line, i) => i > 0 && line.trim() === "---")
+      if (frontmatterEndIndex !== -1) {
+        offset = frontmatterEndIndex + 1
+        rawLines.splice(0, offset)
+      }
+    }
+    
+    return {
+      lines: rawLines,
+      startLine: target.startLine ? Math.max(1, target.startLine - offset) : undefined,
+      endLine: (target.endLine ?? target.startLine) 
+        ? Math.max(1, (target.endLine ?? target.startLine)! - offset) 
+        : undefined,
+    }
+  }, [state.content, target.startLine, target.endLine])
 
   return (
     <>
@@ -146,28 +163,30 @@ function DocumentViewerPanel({
           ) : state.status === "error" ? (
             <div className="p-4 text-sm text-theme-red">{state.error}</div>
           ) : (
-            <pre className="min-w-full whitespace-pre-wrap break-words px-0 py-2 font-mono text-xs leading-relaxed text-neutral-300">
-              {lines.map((line, i) => {
-                const lineNo = i + 1
-                const isHighlighted =
-                  startLine != null && lineNo >= startLine && lineNo <= (endLine ?? startLine)
-                return (
-                  <div
-                    key={lineNo}
-                    ref={isHighlighted && lineNo === startLine ? highlightRef : undefined}
-                    className={cn(
-                      "flex gap-3 px-4",
-                      isHighlighted && "bg-theme-yellow/20 border-l-2 border-theme-yellow",
-                    )}
-                  >
-                    <span className="w-10 shrink-0 select-none text-right text-neutral-600">
-                      {lineNo}
-                    </span>
-                    <span className={cn(isHighlighted && "text-neutral-100")}>{line || " "}</span>
+            <div className="px-6 py-6 font-sans text-[15px] leading-relaxed text-neutral-300">
+              {startLine ? (
+                <>
+                  <div className="opacity-50 transition-opacity hover:opacity-100">
+                    <MarkdownContent content={lines.slice(0, startLine - 1).join("\n")} />
                   </div>
-                )
-              })}
-            </pre>
+                  
+                  <div 
+                    ref={highlightRef}
+                    className="my-6 -mx-6 px-6 py-4 bg-theme-yellow/10 border-l-[3px] border-theme-yellow shadow-[inset_0_1px_0_0_rgba(255,190,63,0.1)] transition-colors"
+                  >
+                    <div className="text-neutral-100">
+                      <MarkdownContent content={lines.slice(startLine - 1, endLine).join("\n")} />
+                    </div>
+                  </div>
+                  
+                  <div className="opacity-50 transition-opacity hover:opacity-100">
+                    <MarkdownContent content={lines.slice(endLine).join("\n")} />
+                  </div>
+                </>
+              ) : (
+                <MarkdownContent content={lines.join("\n")} />
+              )}
+            </div>
           )}
         </div>
       </motion.aside>

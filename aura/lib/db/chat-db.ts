@@ -32,7 +32,7 @@ async function writeStore(store: ChatStore): Promise<void> {
   // Atomic write: write to a .tmp file then rename over the real file.
   // On Linux, rename() within the same filesystem is atomic, so concurrent
   // writes cannot produce a half-written JSON file.
-  const tmpPath = `${DB_PATH}.tmp`
+  const tmpPath = `${DB_PATH}.${Math.random().toString(36).slice(2)}.tmp`
   await fs.writeFile(tmpPath, JSON.stringify(store, null, 2), "utf-8")
   await fs.rename(tmpPath, DB_PATH)
 }
