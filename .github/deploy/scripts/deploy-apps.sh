@@ -173,8 +173,8 @@ docker compose --env-file "${ENV_FILE}" up -d --build --no-deps --force-recreate
   backend
 
 echo "==> Refreshing nginx (no image build; no DB deps)"
-# nginx publishes host 80/443 only; backend stays expose:8000 on aura-edge +
-# aura-internal (never host 8000:8000). Recreate so network attachments match compose.
+# nginx publishes host 80/443; backend publishes host 8000:8000 for Prometheus metrics scraping over LAN.
+# Recreate so network attachments and port bindings match compose.
 docker compose --env-file "${ENV_FILE}" up -d --no-deps --no-build --force-recreate nginx
 
 if ! docker compose --env-file "${ENV_FILE}" ps --status running --services | grep -qx nginx; then
