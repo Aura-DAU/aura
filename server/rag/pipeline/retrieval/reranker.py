@@ -10,8 +10,18 @@ from transformers import (
 class Reranker:
 
     def __init__(self):
-        env_device = os.getenv("RERANKER_DEVICE")
-        if env_device:
+        import logging
+        self._log = logging.getLogger(__name__)
+
+        env_device = (os.getenv("RERANKER_DEVICE") or "").strip()
+        if env_device == "cuda" and not torch.cuda.is_available():
+            # Backend containers on Node 1 often have no NVIDIA runtime; a hard
+            # cuda device here crashes the whole chat pipeline at init.
+            self._log.warning(
+                "RERANKER_DEVICE=cuda but CUDA is unavailable; falling back to cpu"
+            )
+            self.device = torch.device("cpu")
+        elif env_device:
             self.device = torch.device(env_device)
         elif torch.cuda.is_available():
             self.device = torch.device("cuda")
@@ -20,24 +30,28 @@ class Reranker:
         else:
             self.device = torch.device("cpu")
 
-        self.tokenizer = (
-            AutoTokenizer.from_pretrained(
-                "BAAI/bge-reranker-v2-m3"
-            )
-        )
-
-        self.model = (
-            AutoModelForSequenceClassification
-            .from_pretrained(
-                "BAAI/bge-reranker-v2-m3"
-            )
-        ).to(self.device)
-
-        self.model.eval()
+        self.tokenizer = None
+        self.model = None
+        # Prefer remote RERANKER_SERVICE_URL; only load the local cross-encoder
+        # when no remote is configured (eager) or when remote fails (lazy).
+        if not (os.getenv("RERANKER_SERVICE_URL") or "").strip():
+            self._ensure_local_model()
 
         self.H1_BOOST = 0.10
         self.H2_BOOST = 0.20
         self.H3_BOOST = 0.15
+
+    def _ensure_local_model(self):
+        if self.model is not None:
+            return
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "BAAI/bge-reranker-v2-m3"
+        )
+        self.model = (
+            AutoModelForSequenceClassification
+            .from_pretrained("BAAI/bge-reranker-v2-m3")
+        ).to(self.device)
+        self.model.eval()
 
     def rerank(
         self,
@@ -91,6 +105,7 @@ class Reranker:
                 logging.getLogger(__name__).warning("Remote reranker service failed: %s. Falling back to local model.", e)
 
         if cross_scores is None:
+            self._ensure_local_model()
             inputs = self.tokenizer(
                 pairs,
                 padding=True,

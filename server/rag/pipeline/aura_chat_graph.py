@@ -52,6 +52,8 @@ from pipeline.aura_chat import (
     PERSONAL_DATA_SYSTEM_ADDENDUM,
     is_greeting_or_meta,
 )
+from pipeline.ecampus.intent_router import PersonalDataIntentRouter
+from pipeline.ecampus.orchestrator import EcampusOrchestrator
 from api.request_context import RequestContext
 
 
@@ -106,6 +108,8 @@ class AuraChatGraph:
         self.context_builder = ERPContextBuilder()
         self.access_gate = AccessControlGate(erp)
         self.audit_log = AuditLog()
+        self.intent_router = PersonalDataIntentRouter()
+        self.ecampus_orchestrator = EcampusOrchestrator()
 
         self._graph = self._build_graph()
 
@@ -117,6 +121,7 @@ class AuraChatGraph:
         graph.add_node("safety_guardrail", self._n_safety_guardrail)
         graph.add_node("wellness_check", self._n_wellness_check)
         graph.add_node("greeting_check", self._n_greeting_check)
+        graph.add_node("community_tools", self._n_community_tools)
         graph.add_node("classify", self._n_classify)
         graph.add_node("guest_gate", self._n_guest_gate)
         graph.add_node("strict_guardrail", self._n_strict_guardrail)
@@ -137,7 +142,8 @@ class AuraChatGraph:
 
         graph.add_conditional_edges("safety_guardrail", route_or("wellness_check"))
         graph.add_conditional_edges("wellness_check", route_or("greeting_check"))
-        graph.add_conditional_edges("greeting_check", route_or("classify"))
+        graph.add_conditional_edges("greeting_check", route_or("community_tools"))
+        graph.add_conditional_edges("community_tools", route_or("classify"))
         graph.add_conditional_edges("classify", route_or("guest_gate"))
         graph.add_conditional_edges("guest_gate", route_or("strict_guardrail"))
         graph.add_conditional_edges("strict_guardrail", route_or("personal_data"))
@@ -209,6 +215,55 @@ class AuraChatGraph:
             )
 
         state["result"] = {"answer": ans, "sources": [], "is_personal_data": False}
+        return state
+
+    def _n_community_tools(self, state: AuraState) -> AuraState:
+        # Clubs / SBG / faculty ToR / domain KB skills → EcampusOrchestrator
+        # with public KB tools only. Guests and non-COMMUNITY queries fall
+        # through to classify → public RAG (or the personal ERP path).
+        # Personal ERP tools are never exposed on this branch.
+        identity = state.get("identity")
+        if not identity or getattr(identity, "role", None) in (None, "guest"):
+            return state
+
+        with track_segment("community_intent_time"):
+            intent = self.intent_router.classify(state["query"])
+        if intent != "COMMUNITY":
+            return state
+
+        tool_role = identity.role if identity.role in ("student", "faculty") else None
+        if tool_role is None:
+            # Broad JWT role is student|faculty|admin; map elevated faculty
+            # effective roles if present on request_context.
+            request_context = state.get("request_context")
+            effective = getattr(request_context, "effective_role", None) or ""
+            if effective.startswith("faculty") or effective in (
+                "dean_faculty", "dean_academic", "dean_students", "superadmin",
+            ):
+                tool_role = "faculty"
+            elif effective == "student":
+                tool_role = "student"
+            else:
+                return state
+
+        identity_payload = {
+            "erp_id": identity.erp_id,
+            "role": tool_role,
+            "dept": getattr(identity, "dept", None),
+        }
+        with track_segment("community_orchestrator_time"):
+            result = self.ecampus_orchestrator.run(
+                query=state["query"],
+                identity=identity_payload,
+                history=state.get("history") or [],
+                request_context=state.get("request_context"),
+                tool_scope="public_kb",
+            )
+        state["result"] = {
+            "answer": result.get("answer") or "",
+            "sources": result.get("sources") or [],
+            "is_personal_data": False,
+        }
         return state
 
     def _n_classify(self, state: AuraState) -> AuraState:
@@ -346,6 +401,7 @@ class AuraChatGraph:
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
                 on_delta=state.get("on_delta"),
                 summary=state.get("summary"),
+                tracking_flags=state.get("request_context").tracking_flags if state.get("request_context") else None,
             )
 
         state["result"] = {

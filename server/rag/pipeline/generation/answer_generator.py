@@ -360,6 +360,7 @@ class AnswerGenerator:
         system_addendum=None,
         on_delta=None,
         summary=None,
+        tracking_flags=None,
     ):
         try:
             profile_text = ""
@@ -376,6 +377,13 @@ class AnswerGenerator:
                 if fields:
                     profile_text += "User Profile Info:\n" + "\n".join(fields) + "\n\n"
 
+            if tracking_flags:
+                profile_text += "User Tracked Facts (Remember these):\n"
+                for k, v in tracking_flags.items():
+                    profile_text += f"- {k}: {v}\n"
+                profile_text += "\n"
+
+
                 # Inject RBAC Rules
                 profile_text += "--- ACCESS CONTROL RULES ---\n"
                 if role == "student":
@@ -389,11 +397,11 @@ class AnswerGenerator:
                         profile_text += "CRITICAL: You are assisting a PROFESSOR with no assigned subjects. You MUST NOT provide specific student records. Politely decline.\n\n"
 
             # Fix #1/#14: plan is None for pure PERSONAL queries (no RAG path).
-            # Guard access so we never raise TypeError on plan["retrieval_intent"].
+            # Guard access so we never raise TypeError or KeyError on plan.
             if plan:
                 planner_hint = {
-                    "intent": plan["retrieval_intent"],
-                    "entities": plan["entities"],
+                    "intent": plan.get("retrieval_intent", "general"),
+                    "entities": plan.get("entities", {}),
                 }
             else:
                 planner_hint = {"intent": "personal_data", "entities":{}}
@@ -582,7 +590,7 @@ Retrieved Documents
             return self._clean_citations(answer)
 
         except Exception as e:
-            print(e)
+            import traceback; traceback.print_exc()
             return "Sorry, I encountered an error while generating a response."
 
     def _generate_streaming(self, system_prompt, user_prompt, on_delta):

@@ -11,6 +11,12 @@ scrape_configs:
     static_configs:
       - targets: ["<NODE_1_IP>:8000"]
 
+  # Node 1: nginx edge — per-endpoint request rate + latency
+  # (prometheus-nginxlog-exporter, LAN-published on node 1).
+  - job_name: "node1-nginx-edge"
+    static_configs:
+      - targets: ["10.100.97.71:9113"]
+
   # Node 2 & Node 3: vLLM Open Source Qwen GPU Inference Engines
   - job_name: "vllm-inference-nodes"
     static_configs:

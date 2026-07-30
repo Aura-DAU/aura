@@ -171,6 +171,29 @@ export function useAuraChat() {
     }
   }, [session, sessionStatus])
 
+  // Authoritative sync from the server's response (see "quota" SSE event /
+  // X-Quota-Remaining header). This is the source of truth — it replaces
+  // whatever the client's own optimistic counter believed, so the two can
+  // never silently drift apart (which previously could make the UI show
+  // "quota reached" far earlier than 10 real questions if the server-side
+  // count was already ahead of what the client had locally tracked).
+  const syncQuotaFromServer = useCallback((remaining: number) => {
+    setRemainingQuotaState(Math.max(0, remaining))
+    if (!session?.user) {
+      const maxQuota = GUEST_DAILY_QUOTA
+      const date = new Date().toISOString().split('T')[0]
+      try {
+        localStorage.setItem(
+          GUEST_QUOTA_KEY,
+          JSON.stringify({ date, count: Math.max(0, maxQuota - remaining) }),
+        )
+      } catch { }
+    }
+  }, [session])
+
+  // Optimistic local decrement — used only as an immediate UI response
+  // before the server's authoritative count (syncQuotaFromServer) arrives
+  // for this same request.
   const decrementQuota = useCallback(() => {
     setRemainingQuotaState(prev => {
       if (prev === null) return null;
@@ -226,6 +249,37 @@ export function useAuraChat() {
     }
     setHasHydrated(true)
   }, [])
+
+  useEffect(() => {
+    // Fetch history from server to synchronize across devices
+    if (session?.user?.email) {
+      apiFetch("/api/auth/history")
+        .then(res => res.json())
+        .then(data => {
+          if (data.threads && Array.isArray(data.threads)) {
+            setThreads(prev => {
+              const map = new Map<string, StoredThread>()
+              for (const t of data.threads) map.set(t.id, t)
+              for (const t of prev) {
+                const existing = map.get(t.id)
+                if (!existing || (t.updatedAt ?? 0) >= (existing.updatedAt ?? 0)) {
+                  map.set(t.id, t)
+                }
+              }
+              const merged = Array.from(map.values()).sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
+              
+              if (!prev.length && merged[0]) {
+                setActiveThreadIdState(merged[0].id)
+                setMessages(merged[0].messages)
+              }
+              
+              return merged
+            })
+          }
+        })
+        .catch(() => {})
+    }
+  }, [session?.user?.email])
 
   useEffect(() => {
     if (!hasHydrated) return
@@ -446,6 +500,8 @@ export function useAuraChat() {
           } else if (chunk.type === "thread-continuation" && typeof chunk.summary === "string") {
             // Hard overflow — the summary itself is full; continue in a new thread.
             continuationSummary = chunk.summary
+          } else if (chunk.type === "quota" && typeof chunk.remaining === "number") {
+            syncQuotaFromServer(chunk.remaining)
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&
@@ -527,7 +583,7 @@ export function useAuraChat() {
         }
       }
     },
-    [activeThreadId, loading, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota],
+    [activeThreadId, loading, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer],
   )
 
   const handleClearChat = useCallback(() => {

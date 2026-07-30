@@ -286,6 +286,7 @@ class AuraChat:
                     history=history,
                     profile=display_profile,
                     system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                    tracking_flags=request_context.tracking_flags if request_context else None,
                 )
 
             return {

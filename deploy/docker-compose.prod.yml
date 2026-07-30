@@ -93,6 +93,9 @@ services:
       QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
       QDRANT_API_KEY: ${QDRANT_API_KEY:-}
       QDRANT_COLLECTION: ${QDRANT_COLLECTION:-aura-knowledge-base}
+      EMBEDDING_SERVICE_URL: ${EMBEDDING_SERVICE_URL:-}
+      RERANKER_SERVICE_URL: ${RERANKER_SERVICE_URL:-}
+      # Use cpu unless backend has NVIDIA runtime + GPU mounted.
       RERANKER_DEVICE: ${RERANKER_DEVICE:-cpu}
       GOOGLE_CALENDAR_CLIENT_ID: ${GOOGLE_CALENDAR_CLIENT_ID}
       GOOGLE_CALENDAR_CLIENT_SECRET: ${GOOGLE_CALENDAR_CLIENT_SECRET}
@@ -118,6 +121,7 @@ services:
       qdrant:
         condition: service_healthy
     networks:
+      - aura-edge
       - aura-internal
 
   postgres:
@@ -179,7 +183,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching"]
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
     expose:
       - "8000"
     volumes:
@@ -210,7 +214,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching"]
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
     expose:
       - "8000"
     volumes:
@@ -241,7 +245,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching"]
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
     expose:
       - "8000"
     volumes:
