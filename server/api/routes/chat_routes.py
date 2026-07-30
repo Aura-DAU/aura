@@ -40,12 +40,16 @@ def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
         quota_key = identity.email or identity.erp_id
 
     try:
-        enforce_quota(quota_key, identity.role)
+        remaining = enforce_quota(quota_key, identity.role)
     except QuotaExceeded as exc:
         raise HTTPException(
             status_code=429,
             detail=f"Question limit reached ({exc.limit}/day).",
         ) from exc
+    # `remaining` (None for unlimited roles) is the server's authoritative
+    # count. Callers surface it back to the client on every response so the
+    # UI counter can never silently drift from what the server will actually
+    # enforce (see aura/hooks/use-aura-chat.ts).
 
     try:
         effective_role = resolve_effective_role(identity)
@@ -62,7 +66,7 @@ def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
             effective_role=effective_role,
             academic_scope=None,
         )
-    return history, display_profile, request_context
+    return history, display_profile, request_context, remaining
 
 
 def _summary_for_generation(user_memory: str, thread_summary: str) -> str:
@@ -80,12 +84,38 @@ async def chat(
     body: ChatRequest,
     identity: Identity = Depends(require_identity),
 ):
-    history, display_profile, request_context = _resolve_request(body, identity, req)
+    history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
 
     async with chat_queue_lock:
-        return await run_in_threadpool(
+        result = await run_in_threadpool(
             _ask_with_memory, body, identity, history, display_profile, request_context
         )
+    if isinstance(result, dict):
+        result["quota_remaining"] = remaining
+    return result
+
+
+def _ask_with_memory(request, identity, history, display_profile, request_context) -> dict:
+    # Compact older turns into the running summary before generating, then return
+    # the updated summary + memory metadata so the (stateless) client can persist
+    # the digest and advance its per-thread pointer.
+    mem_result = get_conversation_memory().prepare(body.summary, history)
+    result = get_aura().ask(
+        question=request.question,
+        history=mem_result.history,
+        identity=identity.as_dict(),
+        display_profile=display_profile,
+        summary=mem_result.summary,
+        request_context=request_context,
+    )
+    result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
+    result["memory"] = {
+        "summary": mem_result.summary,
+        "foldedTurns": mem_result.folded_turns,
+        "summaryChanged": mem_result.summary_changed,
+        "shouldFork": mem_result.should_fork,
+    }
+    return result
 
 
 def _ask_with_memory(request, identity, history, display_profile, request_context) -> dict:
@@ -131,7 +161,7 @@ async def chat_stream(
     # proxy route can pipe the body through untouched. Quota and auth errors
     # are raised before streaming starts and reach the client as real HTTP
     # status codes.
-    history, display_profile, request_context = _resolve_request(body, identity, req)
+    history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
 
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
@@ -236,16 +266,25 @@ async def chat_stream(
                             "type": "thread-continuation",
                             "summary": mem_result.summary,
                         })
+                    yield _sse({"type": "quota", "remaining": remaining})
                     yield "data: [DONE]\n\n"
                     break
             finally:
                 await worker
 
+    headers = {
+        "Cache-Control": "no-cache, no-transform",
+        "X-Accel-Buffering": "no",
+    }
+    # Set even though the body streams the same value as a "quota" event —
+    # some proxies/clients read remaining-quota from headers before the
+    # body is fully parsed. `remaining` is known upfront since enforce_quota
+    # already ran in _resolve_request, before any streaming starts.
+    if remaining is not None:
+        headers["X-Quota-Remaining"] = str(remaining)
+
     return StreamingResponse(
         event_source(),
         media_type="text/event-stream",
-        headers={
-            "Cache-Control": "no-cache, no-transform",
-            "X-Accel-Buffering": "no",
-        },
+        headers=headers,
     )
