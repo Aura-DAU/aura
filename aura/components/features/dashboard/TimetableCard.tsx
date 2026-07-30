@@ -2,6 +2,8 @@
 
 import { CalendarDays, Loader2 } from "lucide-react"
 import { useTimetable } from "@/hooks/use-timetable"
+import { useCohortProfile } from "@/hooks/use-cohort-profile"
+import { TimetableSetupCard } from "@/components/features/dashboard/TimetableSetupCard"
 
 const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const
 
@@ -11,14 +13,41 @@ function todayDayOfWeek(): number {
   return jsDay === 0 ? 7 : jsDay
 }
 
-/** Displays today's classes from the live AURA timetable API. */
+/** Displays today's classes from the live AURA timetable API.
+ *  Shows a setup wizard on first visit when no cohort is configured. */
 export function TimetableCard() {
   const { data, loading, error, refetch } = useTimetable()
+  const { profile, loading: profileLoading } = useCohortProfile()
   const today = todayDayOfWeek()
+
   const entries = (data?.timetable ?? [])
-    .filter((slot) => slot.day_of_week === today)
+    .filter((slot) => slot.day_of_week === today - 1)
     .slice()
     .sort((a, b) => a.start_time.localeCompare(b.start_time))
+
+  // Show setup card when profile is not yet configured or timetable returned a
+  // cohort-not-found error (the backend returns a 409 with a descriptive message).
+  const notConfigured =
+    (!profileLoading && profile && !profile.is_configured) ||
+    (error !== null && (
+      error.toLowerCase().includes("not set up") ||
+      error.toLowerCase().includes("cohort") ||
+      error.toLowerCase().includes("section")
+    ))
+
+  if (profileLoading && !data) {
+    return (
+      <div className="rounded-2xl border border-theme-gray-light bg-theme-gray p-5">
+        <div className="flex items-center gap-2 text-xs text-neutral-500">
+          <Loader2 className="size-3.5 animate-spin" /> Loading your timetable…
+        </div>
+      </div>
+    )
+  }
+
+  if (notConfigured) {
+    return <TimetableSetupCard onComplete={() => void refetch()} />
+  }
 
   return (
     <div className="rounded-2xl border border-theme-gray-light bg-theme-gray p-5">
@@ -44,7 +73,7 @@ export function TimetableCard() {
           </button>
         </p>
       ) : entries.length === 0 ? (
-        <p className="text-xs text-neutral-500">No classes today.</p>
+        <p className="text-xs text-neutral-500">No classes today. Enjoy your break!</p>
       ) : (
         <ul className="space-y-2">
           {entries.map((slot) => (
@@ -59,6 +88,9 @@ export function TimetableCard() {
                 </p>
                 {slot.room ? (
                   <p className="mt-0.5 text-xs text-neutral-500">{slot.room}</p>
+                ) : null}
+                {slot.faculty_name ? (
+                  <p className="mt-0.5 text-xs text-neutral-500">{slot.faculty_name}</p>
                 ) : null}
               </div>
               <span className="shrink-0 rounded-full bg-theme-gray-lighter px-2 py-0.5 text-xs text-neutral-400">

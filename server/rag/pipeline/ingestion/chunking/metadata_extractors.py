@@ -1,5 +1,111 @@
 import re
 
+# Academic-year labels like "2024-25", "24-25", "2026_27". Used so scraped_date
+# (ingest timestamp) never masquerades as the roster/policy year — that bug made
+# "Club Committee Data 24-25" surface as rule_year=2026 and beat newer C_DCs sheets.
+_ACADEMIC_YEAR_RE = re.compile(
+    r"(?:(?P<y4>20\d{2})|(?<!\d)(?P<y2>\d{2}))[_\-\u2013](?P<yend>\d{2})(?!\d)"
+)
+
+
+def normalize_academic_year_label(text: str | None) -> str | None:
+    """Return a canonical 'YYYY-YY' academic year from free text, or None.
+
+    Rejects non-academic ranges (e.g. room codes like '12-34') by requiring
+    the end year to be start+1.
+    """
+    if not text:
+        return None
+    match = _ACADEMIC_YEAR_RE.search(str(text))
+    if not match:
+        return None
+    start = int(match.group("y4") or f"20{match.group('y2')}")
+    end_raw = match.group("yend")
+    end = int(end_raw) if len(end_raw) == 4 else (start // 100) * 100 + int(end_raw)
+    # Two-digit end years wrap the century boundary (e.g. 1999-00).
+    if end < start:
+        end += 100
+    if end != start + 1:
+        return None
+    # Bound to plausible DAU academic years; rejects room/time ranges like 10-11.
+    if start < 2015 or start > 2035:
+        return None
+    return f"{start}-{end % 100:02d}"
+
+
+def academic_year_start(label: str | None) -> int | None:
+    """Sort key: start calendar year of a 'YYYY-YY' label."""
+    if not label:
+        return None
+    match = re.match(r"^(20\d{2})-\d{2}$", str(label).strip())
+    return int(match.group(1)) if match else None
+
+
+def resolve_document_academic_year(metadata: dict, file_path, body: str = "") -> tuple:
+    """Pick the authoritative academic year for a corpus file.
+
+    Preference order (title/filename beat scraped_date on purpose):
+      1. Explicit frontmatter academic label (document_year/year/academic_year
+         when it parses as YYYY-YY)
+      2. Academic-year pattern in title, original_name, or filename
+      3. Bare 20xx calendar year in title / filename / path / body head
+      4. Bare numeric frontmatter year (last among calendar-year sources)
+      5. scraped_date year (ingest time — last resort only)
+      6. Today's calendar year
+
+    Returns (document_year:int, academic_year:str|None).
+    """
+    import datetime
+    from pathlib import Path
+
+    path = Path(file_path) if not isinstance(file_path, Path) else file_path
+    title = str(metadata.get("title") or "")
+    original_name = str(metadata.get("original_name") or "")
+    path_name = path.name
+    path_str = str(path)
+
+    # 1. Explicit academic *label* in frontmatter only (not bare ints — those
+    # often come from scraped_date backfills and must lose to title years).
+    for key in ("academic_year", "document_year", "year"):
+        raw = metadata.get(key)
+        if raw is None:
+            continue
+        label = normalize_academic_year_label(str(raw))
+        if label:
+            return academic_year_start(label) or int(label[:4]), label
+
+    # 2. Title / filename academic labels beat bare calendar years.
+    for candidate in (title, original_name, path_name, path_str):
+        label = normalize_academic_year_label(candidate)
+        if label:
+            return academic_year_start(label) or int(label[:4]), label
+
+    # 3. Bare 20xx in title/path/body.
+    for candidate in (title, path_name, path_str, (body or "")[:1000]):
+        year_match = re.search(r"\b(20\d{2})\b", str(candidate))
+        if year_match:
+            return int(year_match.group(1)), None
+
+    # 4. Bare numeric frontmatter year (after title/path opportunities).
+    for key in ("document_year", "year"):
+        raw = metadata.get(key)
+        if raw is None:
+            continue
+        try:
+            year_int = int(str(raw).strip()[:4])
+            if 2000 <= year_int <= 2100:
+                return year_int, None
+        except (TypeError, ValueError):
+            pass
+
+    scraped = metadata.get("scraped_date")
+    if scraped is not None:
+        year_match = re.search(r"\b(20\d{2})\b", str(scraped))
+        if year_match:
+            return int(year_match.group(1)), None
+
+    return datetime.date.today().year, None
+
 
 def extract_academic_applicability(metadata, file_path, body):
     """Deterministically classify document applicability for student scope.
