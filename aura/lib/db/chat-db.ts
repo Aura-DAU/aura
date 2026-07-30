@@ -57,7 +57,28 @@ export async function saveThreadsForUser(
         : m
     ),
   }))
+  
   const store = await readStore()
-  store[email.toLowerCase()] = sanitised.slice(0, MAX_THREADS)
+  const userEmail = email.toLowerCase()
+  const existingThreads = store[userEmail] ?? []
+  
+  // Merge incoming threads with existing threads by ID, keeping the newest version
+  const mergedMap = new Map<string, StoredThread>()
+  
+  for (const t of existingThreads) {
+    mergedMap.set(t.id, t)
+  }
+  
+  for (const t of sanitised) {
+    const existing = mergedMap.get(t.id)
+    if (!existing || (t.updatedAt ?? 0) >= (existing.updatedAt ?? 0)) {
+      mergedMap.set(t.id, t)
+    }
+  }
+  
+  const mergedThreads = Array.from(mergedMap.values())
+  mergedThreads.sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
+  
+  store[userEmail] = mergedThreads.slice(0, MAX_THREADS)
   await writeStore(store)
 }
