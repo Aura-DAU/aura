@@ -20,6 +20,38 @@ from dotenv import load_dotenv
 from pipeline.inference_router import InferenceRouter
 from ..personal_data.audit import audit_log
 
+
+def _identity_payload(identity):
+    if identity is None:
+        return {}
+    if isinstance(identity, dict):
+        return identity
+    return getattr(identity, "as_dict", lambda: {})()
+
+
+def _identity_role(identity) -> str | None:
+    payload = _identity_payload(identity)
+    if not payload:
+        return None
+    return payload.get("role")
+
+
+def _profile_from_request_context(request_context=None) -> dict | None:
+    if not request_context:
+        return None
+    academic_scope = getattr(request_context, "academic_scope", None)
+    if academic_scope is None:
+        return None
+    branch = academic_scope.branch_id or academic_scope.programme_id
+    year = None
+    if academic_scope.current_semester is not None:
+        year = max(1, (academic_scope.current_semester + 1) // 2)
+    return {
+        "branch": branch,
+        "year": year,
+        "category": academic_scope.academic_status or "Not specified",
+    }
+
 load_dotenv()
 
 _retrieval = None
@@ -68,22 +100,40 @@ Output ONLY valid JSON, no markdown fences, matching this shape:
 
 
 def screen_scholarship_eligibility(
-    identity, branch: str, year: int, category: str, cgpa: float,
-    annual_income: float | None = None, **kwargs
+    identity, branch: str | None = None, year: int | None = None, category: str | None = None,
+    cgpa: float | None = None, annual_income: float | None = None, request_context=None, **kwargs
 ) -> dict:
     """
     Advisory-only: retrieves scholarship/financial-aid policy from the KB
     and cross-references it against the requester's own stated profile.
     No ERP write, no application submission.
     """
-    if not identity or identity.get("role") not in ("student", "guest"):
+    role = _identity_role(identity)
+    if role not in ("student", "guest"):
         raise PermissionError("This tool is for students screening their own eligibility.")
+
+    scope_profile = _profile_from_request_context(request_context)
+    if scope_profile is not None:
+        branch = scope_profile["branch"]
+        year = scope_profile["year"]
+        category = scope_profile["category"]
+        cgpa = None
+        annual_income = None
 
     query = (
         "scholarships and financial aid eligibility conditions criteria "
         "merit cum means fellowship DAFS category income CGPA"
     )
-    result = _get_retrieval_pipeline().get_context(query, user_role="student")
+    academic_scope = getattr(request_context, "academic_scope", None) if request_context else None
+    pipeline = _get_retrieval_pipeline()
+    try:
+        result = pipeline.get_context(
+            query,
+            user_role="student",
+            academic_scope=academic_scope,
+        )
+    except TypeError:
+        result = pipeline.get_context(query, user_role="student")
     context = result.get("context", "")
     sources = result.get("sources", [])
 
@@ -96,15 +146,16 @@ def screen_scholarship_eligibility(
             ],
             "sources": [],
         }
-        audit_log(identity, query="screen_scholarship_eligibility", allowed=True,
-                  target=identity.get("erp_id"))
+        payload = _identity_payload(identity)
+        audit_log(payload, query="screen_scholarship_eligibility", allowed=True,
+                  target=payload.get("erp_id"))
         return out
 
     student_profile = (
-        f"Branch/Program: {branch}\n"
-        f"Current Year of Study: {year}\n"
-        f"Admission Category: {category}\n"
-        f"Current CGPA/CPI: {cgpa}\n"
+        f"Branch/Program: {branch or 'Not specified'}\n"
+        f"Current Year of Study: {year if year is not None else 'Not specified'}\n"
+        f"Admission Category: {category or 'Not specified'}\n"
+        f"Current CGPA/CPI: {cgpa if cgpa is not None else 'Not specified'}\n"
         f"Annual Family Income (INR): {annual_income if annual_income is not None else 'Not provided'}"
     )
 
@@ -142,6 +193,7 @@ def screen_scholarship_eligibility(
         ]
 
     parsed["sources"] = sources
-    audit_log(identity, query=f"screen_scholarship_eligibility:{branch}:{category}",
-              allowed=True, target=identity.get("erp_id"))
+    payload = _identity_payload(identity)
+    audit_log(payload, query=f"screen_scholarship_eligibility:{branch}:{category}",
+              allowed=True, target=payload.get("erp_id"))
     return parsed

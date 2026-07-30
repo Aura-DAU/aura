@@ -31,6 +31,10 @@ class UserProfile(BaseModel):
 class ChatRequest(BaseModel):
     question: str = Field(..., min_length=1, max_length=2000)
     history: Optional[List[HistoryTurn]] = Field(None, max_length=20)
+    # Client-owned rolling conversation memory (pipeline.memory). The server is
+    # stateless: the client sends this digest plus the unsummarised tail each
+    # turn and gets an updated digest back to persist.
+    summary: Optional[str] = Field(None, max_length=20_000)
     userProfile: Optional[UserProfile] = None
     studentProfile: Optional[UserProfile] = None
 

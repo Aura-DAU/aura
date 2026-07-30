@@ -62,12 +62,10 @@ class Retriever:
         allowed_roles=None
     ):
 
-        # TEMPORARY FIX: metadata used to lack the 'allowed_roles' field,
-        # so applying the DLS metadata_filter returned 0 chunks for ALL queries.
-        # Disabling filter until vectors are re-ingested with correct metadata.
+        # Metadata filters include authorization and, for authenticated
+        # students, hard academic applicability. Never disable the complete
+        # filter: doing so would allow a maintenance flag to bypass scope.
         pinecone_filter = metadata_filter
-        if os.getenv("DISABLE_DLS_FILTER", os.getenv("DISABLE_PINECONE_DLS_FILTER", "false")).lower() == "true":
-            pinecone_filter = None
         
         query_text = (
             "Represent this sentence for searching relevant passages: "

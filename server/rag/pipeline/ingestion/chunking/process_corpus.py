@@ -5,7 +5,12 @@ from pathlib import Path
 from parser import extract_frontmatter
 from section_extracter import extract_sections
 from chunker import split_section
-from metadata_extractors import extract_event_metadata, extract_program_name, extract_section_type
+from metadata_extractors import (
+    extract_academic_applicability,
+    extract_event_metadata,
+    extract_program_name,
+    extract_section_type,
+)
 
 
 def extract_curriculum_chunks(body, metadata, file_path):
@@ -371,6 +376,7 @@ def process_markdown_file(file_path):
     file_lines = raw_content.replace("\r\n", "\n").split("\n")
 
     metadata, body = extract_frontmatter(raw_content)
+    academic_applicability = extract_academic_applicability(metadata, file_path, body)
 
     # 1. Calculate frontmatter offset (1-indexed start of body)
     content_clean = raw_content.lstrip("\ufeff").replace("\r\n", "\n")
@@ -537,6 +543,7 @@ def process_markdown_file(file_path):
                 "end_line": end_line,
                 "document_year": document_year
             }
+            chunk_record.update(academic_applicability)
 
             if section_faculty:
                 chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
@@ -601,6 +608,7 @@ def process_markdown_file(file_path):
             "end_line": end_line,
             "document_year": document_year
         }
+        chunk_record.update(academic_applicability)
 
         if program_name or fm_program_name:
             chunk_record["program_name"] = program_name or fm_program_name
