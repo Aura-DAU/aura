@@ -81,6 +81,25 @@ class ERPContextBuilder:
                 )
             lines.append("")
 
+        if "timetable" in erp_results and erp_results["timetable"]:
+            tt = erp_results["timetable"]
+            if isinstance(tt, dict) and "timetable" in tt:
+                cohort = tt.get("cohort", {})
+                slots = tt.get("timetable", [])
+                lines.append(f"Student Timetable (Year {cohort.get('year', 'N/A')}, Sem {cohort.get('sem', 'N/A')}, Section {cohort.get('sec', 'N/A')}):")
+                if not slots:
+                    lines.append("  No class slots found.")
+                else:
+                    for s in slots:
+                        lines.append(
+                            f"  [{s.get('day_of_week')}] {s.get('start_time')}-{s.get('end_time')}: "
+                            f"{s.get('course_code')} {s.get('course_name')} ({s.get('session_type', 'lecture')}) "
+                            f"in Room {s.get('room', 'N/A')}, Faculty: {s.get('faculty_name', 'N/A')}"
+                        )
+                if not tt.get("electives_configured", True):
+                    lines.append("  Note to AI: Electives are NOT yet configured for this student. Show their current base timetable and politely ask them which electives they are taking so you can save them.")
+                lines.append("")
+
         lines.append("</personal_data>")
         return "\n".join(lines)
 

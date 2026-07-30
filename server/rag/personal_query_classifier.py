@@ -51,7 +51,7 @@ If PERSONAL or MIXED, extract:
     - null          → unclear
   "erp_fields": list of data categories needed. Choose from:
     ["cgpa", "grades", "attendance", "profile", "advisees", "courses",
-     "fees", "hostel", "btp_students", "mentees", "teaching_schedule",
+     "timetable", "fees", "hostel", "btp_students", "mentees", "teaching_schedule",
      "grievances", "disciplinary", "scholarship", "hostel_master",
      "program_students", "program_courses"]
 

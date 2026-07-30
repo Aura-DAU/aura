@@ -1,5 +1,5 @@
 -- Migration: Create latency_logs table
-CREATE TABLE latency_logs (
+CREATE TABLE IF NOT EXISTS latency_logs (
     id SERIAL PRIMARY KEY,
     guardrail_time DOUBLE PRECISION NOT NULL,
     retrieval_time DOUBLE PRECISION NOT NULL,

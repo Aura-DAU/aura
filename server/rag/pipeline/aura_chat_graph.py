@@ -333,15 +333,20 @@ class AuraChatGraph:
         has_rag = query_type in ("PUBLIC", "MIXED") and bool(rag_context)
 
         with track_segment("generation_time"):
-            answer = self.generator.generate(
-                query=retrieval_result.get("corrected_query", state["query"]) if has_rag else state["query"],
-                context=combined_context,
-                plan=retrieval_result.get("plan") if has_rag else None,
-                history=state["history"],
-                profile=state.get("display_profile"),
-                system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
-                on_delta=state.get("on_delta"),
-            )
+            try:
+                answer = self.generator.generate(
+                    query=retrieval_result.get("corrected_query", state["query"]) if has_rag else state["query"],
+                    context=combined_context,
+                    plan=retrieval_result.get("plan") if has_rag else None,
+                    history=state["history"],
+                    profile=state.get("display_profile"),
+                    system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                    on_delta=state.get("on_delta"),
+                )
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning("LLM generation failed (%s), using direct ERP answer fallback", e)
+                answer = self._format_direct_erp_answer(state.get("erp_data"), erp_context)
 
         state["result"] = {
             "answer": answer,
@@ -398,7 +403,41 @@ class AuraChatGraph:
             data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
         if "courses" in fields and requester_erp_id:
             data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
+        if "timetable" in fields or any(k in str(fields).lower() for k in ["timetable", "schedule"]):
+            try:
+                from pipeline.timetable import service as timetable_service
+                data["timetable"] = timetable_service.get_effective_timetable(
+                    access_result.identity if hasattr(access_result, 'identity') else {"role": "student", "erp_id": roll_number}
+                )
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning("Failed to fetch timetable in ERP data: %s", e)
+                data["timetable"] = {"error": str(e)}
         return data
+
+    def _format_direct_erp_answer(self, erp_data: Optional[dict], erp_context: str) -> str:
+        if erp_data and "timetable" in erp_data:
+            tt = erp_data["timetable"]
+            if isinstance(tt, dict) and "timetable" in tt:
+                cohort = tt.get("cohort", {})
+                slots = tt.get("timetable", [])
+                lines = [
+                    f"### 📅 Your Weekly Timetable (Year {cohort.get('year')}, Sem {cohort.get('sem')}, Section {cohort.get('sec')})\n"
+                ]
+                if not slots:
+                    lines.append("No classes scheduled.")
+                else:
+                    lines.append("| Day | Time | Course | Room | Faculty |")
+                    lines.append("| --- | --- | --- | --- | --- |")
+                    for s in slots:
+                        lines.append(f"| {s.get('day_of_week')} | {s.get('start_time')}-{s.get('end_time')} | **{s.get('course_code')}** - {s.get('course_name')} | {s.get('room', 'N/A')} | {s.get('faculty_name', 'N/A')} |")
+                
+                if not tt.get("electives_configured", True):
+                    lines.append("\n> 💡 **Note**: You haven't configured your electives yet! Please tell me your section and which electives you are taking, or select them on your dashboard banner above.")
+                return "\n".join(lines)
+
+        clean_lines = [l for l in erp_context.splitlines() if not l.startswith("<") and not l.startswith("Access scope:")]
+        return "\n".join(clean_lines).strip() or "Here is your requested personal data."
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────
 
