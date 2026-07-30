@@ -125,23 +125,46 @@ class InferenceRouter:
     # so every call site passes `extra_body=` from one of the two helpers below
     # rather than hardcoding the dict. That preamble is hundreds-to-thousands of
     # decode tokens the caller immediately strips — pure latency on a 32B model.
+    #
+    # IMPORTANT: `chat_template_kwargs` is a vLLM-only extension. Hosted APIs
+    # like Groq reject it with HTTP 400. The helpers below return {} when the
+    # configured endpoint is not a local vLLM instance so that the same code
+    # path works whether we're pointed at a GPU cluster or Groq fallback.
 
-    @staticmethod
-    def no_think_extra_body() -> dict:
+    @classmethod
+    def _is_vllm(cls) -> bool:
+        """Return True only when the first configured endpoint looks like a
+        local/private vLLM server (not groq.com, openai.com, or similar)."""
+        cls._initialize()
+        if not cls._nodes:
+            return False
+        first = cls._nodes[0].lower()
+        # Hosted APIs that do NOT support chat_template_kwargs
+        hosted = ("groq.com", "openai.com", "anthropic.com", "together.ai",
+                  "fireworks.ai", "mistral.ai", "cohere.com")
+        return not any(h in first for h in hosted)
+
+    @classmethod
+    def no_think_extra_body(cls) -> dict:
         """Reasoning ALWAYS off. For structured / short-output calls (guardrails,
         classifier, query rewriter/planner) whose small max_tokens budget leaves
         no room to think and whose output is terse by design — a <think> block
         there is wasted latency and can truncate the real answer before it's
-        emitted."""
+        emitted. Returns {} for hosted APIs that don't support this extension."""
+        if not cls._is_vllm():
+            return {}
         return {"chat_template_kwargs": {"enable_thinking": False}}
 
-    @staticmethod
-    def answer_extra_body() -> dict:
+    @classmethod
+    def answer_extra_body(cls) -> dict:
         """Reasoning control for FINAL answer generation, where thinking is a
         genuine quality/latency trade-off. Defaults to off (fast); set
         AURA_ENABLE_THINKING=true to let the model reason first (slower, can
         improve adherence on tricky negation / false-premise prompts — validate
-        with the eval suite before enabling in prod)."""
+        with the eval suite before enabling in prod). Returns {} for hosted APIs
+        that don't support this extension."""
+        if not cls._is_vllm():
+            return {}
         if _env_bool("AURA_ENABLE_THINKING", False):
             return {}
         return {"chat_template_kwargs": {"enable_thinking": False}}

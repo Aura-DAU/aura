@@ -8,7 +8,7 @@ const PUBLIC_PATHS = ["/login", "/api/auth", "/_next", "/favicon.ico", "/offline
 // Anonymous guest chat (#206): /api/chat mints its own guest JWT + cookie
 // quota key. Must stay reachable without a NextAuth session, otherwise the
 // proxy 401s guests before the BFF can call the backend LLM.
-const PUBLIC_API_PATHS = ["/api/chat"]
+const PUBLIC_API_PATHS = ["/api/chat", "/api/documents"]
 const EXACT_PUBLIC_PATHS = ["/"]
 const PUBLIC_FILE =
   /\.(?:svg|png|jpg|jpeg|gif|webp|ico|json|webmanifest|js|css|map|txt|woff2?)$/i

@@ -22,6 +22,7 @@ from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
 from api.auth import require_identity, Identity
+from api.request_context import AcademicScopeResolver
 from api.middleware.security_headers import SecurityHeadersMiddleware
 from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
@@ -38,6 +39,7 @@ app = FastAPI(title="AURA API")
 # so /health and auth routes stay available during cold start.
 _aura = None
 _aura_lock = threading.Lock()
+_scope_resolver = AcademicScopeResolver()
 
 
 def get_aura():
