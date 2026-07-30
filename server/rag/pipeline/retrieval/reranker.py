@@ -1,27 +1,29 @@
 import os
 import math
-import torch
-from transformers import (
-    AutoTokenizer,
-    AutoModelForSequenceClassification
-)
 
 
 class Reranker:
 
     def __init__(self):
-        import logging
-        self._log = logging.getLogger(__name__)
+        self.device = None
+        self.tokenizer = None
+        self.model = None
+        self.H1_BOOST = 0.10
+        self.H2_BOOST = 0.20
+        self.H3_BOOST = 0.15
 
-        env_device = (os.getenv("RERANKER_DEVICE") or "").strip()
-        if env_device == "cuda" and not torch.cuda.is_available():
-            # Backend containers on Node 1 often have no NVIDIA runtime; a hard
-            # cuda device here crashes the whole chat pipeline at init.
-            self._log.warning(
-                "RERANKER_DEVICE=cuda but CUDA is unavailable; falling back to cpu"
-            )
-            self.device = torch.device("cpu")
-        elif env_device:
+    def _ensure_local_model(self):
+        if self.model is not None and self.tokenizer is not None:
+            return
+
+        import torch
+        from transformers import (
+            AutoTokenizer,
+            AutoModelForSequenceClassification
+        )
+
+        env_device = os.getenv("RERANKER_DEVICE")
+        if env_device:
             self.device = torch.device(env_device)
         elif torch.cuda.is_available():
             self.device = torch.device("cuda")
@@ -106,6 +108,7 @@ class Reranker:
 
         if cross_scores is None:
             self._ensure_local_model()
+            import torch
             inputs = self.tokenizer(
                 pairs,
                 padding=True,

@@ -312,10 +312,11 @@ export function useAuraChat() {
 
   const persistMessages = useCallback(
     (threadId: string, next: ChatMessage[], title?: string) => {
+      const updatedAt = next[next.length - 1]?.timestamp ?? Date.now()
       setThreads((prev) =>
         prev.map((t) =>
           t.id === threadId
-            ? { ...t, messages: next, title: title ?? t.title }
+            ? { ...t, messages: next, title: title ?? t.title, updatedAt }
             : t,
         ),
       )
@@ -417,6 +418,7 @@ export function useAuraChat() {
           id: threadId,
           title: deriveTitle(trimmed),
           messages: [userMsg],
+          updatedAt: userMsg.timestamp,
         }
         setThreads((prev) => [newThread, ...prev])
         setActiveThreadIdState(threadId)
@@ -551,6 +553,7 @@ export function useAuraChat() {
             id: contId,
             title: `${activeThread?.title ?? deriveTitle(trimmed)} (cont.)`,
             messages: [],
+            updatedAt: Date.now(),
             summary: carriedSummary,
             summaryTurnCount: 0,
             continuedFromId: threadId,
