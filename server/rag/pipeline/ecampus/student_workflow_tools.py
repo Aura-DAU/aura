@@ -148,3 +148,24 @@ def handle_hostel_complaint_guidance(identity, complaint_type: str = "", complai
     audit_log(payload, query="hostel_complaint_guidance", allowed=True,
               target=payload.get("erp_id"))
     return out
+
+
+# ── update_tracking_flags ───────────────────────────────────────────────────
+def handle_update_tracking_flags(identity, facts: dict, **kwargs) -> dict:
+    """Updates the user's persistent personal tracking flags (e.g. dob, age, interests)."""
+    from ..personal_data.tracking_store import update_tracking_flags
+    
+    role = _identity_role(identity)
+    if role not in ("student", "guest", "faculty", "admin"):
+        raise PermissionError("Only valid identities can track personal data.")
+        
+    payload = _identity_payload(identity)
+    erp_id = payload.get("erp_id")
+    if not erp_id:
+        return {"response": "No user ID found; cannot save personal facts."}
+        
+    if not isinstance(facts, dict):
+        return {"response": "Invalid facts format."}
+        
+    updated = update_tracking_flags(erp_id, facts)
+    return {"response": f"Successfully updated profile facts."}

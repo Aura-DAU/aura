@@ -293,6 +293,23 @@ SCREEN_SCHOLARSHIP_ELIGIBILITY = Tool(
     handler=scholarship_tools.screen_scholarship_eligibility,
 )
 
+UPDATE_TRACKING_FLAGS = Tool(
+    name="update_tracking_flags",
+    description="Updates the user's persistent personal profile facts (e.g., DOB, age, interests) shared conversationally.",
+    parameters={
+        "type": "object",
+        "properties": {
+            "facts": {
+                "type": "object", 
+                "description": "A dictionary of key-value pairs representing the user's personal facts to track (e.g., {'dob': '1999-05-12', 'age': 25})"
+            }
+        },
+        "required": ["facts"]
+    },
+    category="write", allowed_roles=["student", "guest", "faculty", "admin"],
+    handler=student_workflow_tools.handle_update_tracking_flags,
+)
+
 
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
@@ -304,7 +321,7 @@ TOOL_REGISTRY: dict[str, Tool] = {
         LEAVE_APPLICATION_GUIDANCE, CPDA_TRAVEL_APPROVAL_GUIDANCE, SEED_GRANT_GUIDANCE,
         CERTIFICATE_REQUEST_GUIDANCE, HOSTEL_COMPLAINT_GUIDANCE,
         EVENT_CLUB_REGISTRATION_GUIDANCE, FACULTY_COMMITTEE_RESPONSIBILITIES,
-        SCREEN_SCHOLARSHIP_ELIGIBILITY,
+        SCREEN_SCHOLARSHIP_ELIGIBILITY, UPDATE_TRACKING_FLAGS,
     ]
 }
 

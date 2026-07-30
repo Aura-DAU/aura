@@ -360,6 +360,7 @@ class AnswerGenerator:
         system_addendum=None,
         on_delta=None,
         summary=None,
+        tracking_flags=None,
     ):
         try:
             profile_text = ""
@@ -375,6 +376,13 @@ class AnswerGenerator:
                 profile_text = f"User Role: {role.upper()}\n"
                 if fields:
                     profile_text += "User Profile Info:\n" + "\n".join(fields) + "\n\n"
+
+            if tracking_flags:
+                profile_text += "User Tracked Facts (Remember these):\n"
+                for k, v in tracking_flags.items():
+                    profile_text += f"- {k}: {v}\n"
+                profile_text += "\n"
+
 
                 # Inject RBAC Rules
                 profile_text += "--- ACCESS CONTROL RULES ---\n"

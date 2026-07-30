@@ -346,6 +346,7 @@ class AuraChatGraph:
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
                 on_delta=state.get("on_delta"),
                 summary=state.get("summary"),
+                tracking_flags=state.get("request_context").tracking_flags if state.get("request_context") else None,
             )
 
         state["result"] = {
