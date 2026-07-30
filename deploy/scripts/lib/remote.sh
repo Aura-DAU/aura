@@ -104,14 +104,16 @@ aura_rsync() {
   aura_require_ssh_key
   aura_require_host "${host}" "rsync host"
 
-  # Repo layout: deploy configs live under .github/deploy/. Remote nodes still
+  # Repo layout: deploy configs live under deploy/. Remote nodes still
   # receive them at ${AURA_REMOTE_APP_ROOT}/deploy/ (install path unchanged).
-  local local_deploy="${AURA_APP_ROOT}/.github/deploy"
+  local local_deploy="${AURA_APP_ROOT}/deploy"
   if [[ ! -d "${local_deploy}" ]]; then
-    local_deploy="${AURA_APP_ROOT}/deploy"
+    echo "error: local deploy tree missing: ${local_deploy}" >&2
+    echo "  Expected layout after the deploy/ move (not .github/deploy/)." >&2
+    return 1
   fi
-  if [[ ! -d "${local_deploy}" ]]; then
-    echo "error: local deploy missing under ${AURA_APP_ROOT}/.github/deploy (or deploy/)" >&2
+  if [[ ! -f "${local_deploy}/node1/docker-compose.yml" ]]; then
+    echo "error: expected ${local_deploy}/node1/docker-compose.yml not found" >&2
     return 1
   fi
 
@@ -162,7 +164,6 @@ aura_rsync() {
 aura_load_node1_env() {
   local candidates=(
     "${AURA_ENV_FILE:-}"
-    "${AURA_APP_ROOT}/.github/deploy/node1/.env"
     "${AURA_APP_ROOT}/deploy/node1/.env"
     "/opt/aura/.env"
   )

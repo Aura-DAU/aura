@@ -32,19 +32,27 @@ class Reranker:
         else:
             self.device = torch.device("cpu")
 
-        self.tokenizer = (
-            AutoTokenizer.from_pretrained(
-                "BAAI/bge-reranker-v2-m3"
-            )
-        )
+        self.tokenizer = None
+        self.model = None
+        # Prefer remote RERANKER_SERVICE_URL; only load the local cross-encoder
+        # when no remote is configured (eager) or when remote fails (lazy).
+        if not (os.getenv("RERANKER_SERVICE_URL") or "").strip():
+            self._ensure_local_model()
 
+        self.H1_BOOST = 0.10
+        self.H2_BOOST = 0.20
+        self.H3_BOOST = 0.15
+
+    def _ensure_local_model(self):
+        if self.model is not None:
+            return
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "BAAI/bge-reranker-v2-m3"
+        )
         self.model = (
             AutoModelForSequenceClassification
-            .from_pretrained(
-                "BAAI/bge-reranker-v2-m3"
-            )
+            .from_pretrained("BAAI/bge-reranker-v2-m3")
         ).to(self.device)
-
         self.model.eval()
 
     def rerank(
