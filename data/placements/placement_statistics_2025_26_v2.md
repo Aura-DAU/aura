@@ -1,5 +1,6 @@
 ---
 title: "Placement Brochure 2025-26"
+document_year: "2025-26"
 category: "Placement Cell"
 url: "Placement-Brochure_2025-26.pdf"
 scraped_by: "Pushkar"

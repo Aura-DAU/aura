@@ -1,5 +1,6 @@
 ﻿---
 title: "Expert Talk: Visual Data Analytics for Wide Area Motion Imagery"
+document_year: "2003"
 url: "https://www.daiict.ac.in/events/6623"
 category: "Events"
 scraped_by: "Dhruvam"

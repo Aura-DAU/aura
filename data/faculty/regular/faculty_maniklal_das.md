@@ -1,5 +1,6 @@
 ---
 title: "Maniklal Das"
+document_year: "2006"
 url: "https://www.daiict.ac.in/faculty/maniklal-das"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

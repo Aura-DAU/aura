@@ -21,7 +21,7 @@
 
 # `/metrics` is intentionally unauthenticated (Prometheus scrapes it directly,
 # container-to-container, and it is never routed through the public NGINX
-# edge — see .github/deploy/nginx.conf, which only proxies /api/*, /backend/, and /).
+# edge — see deploy/nginx.conf, which only proxies /api/*, /backend/, and /).
 
 from prometheus_client import (
     Counter,

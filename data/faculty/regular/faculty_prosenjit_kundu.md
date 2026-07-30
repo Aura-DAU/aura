@@ -1,5 +1,6 @@
 ---
 title: "Prosenjit Kundu"
+document_year: "2019"
 url: "https://www.daiict.ac.in/faculty/prosenjit-kundu"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

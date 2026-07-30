@@ -1,5 +1,6 @@
 ﻿---
 title: "Book talk by Dr. Janaki Srinivasan (IIIT Bangalore) about her recent book, The Political L…"
+document_year: "2022"
 url: "https://www.daiict.ac.in/events/6367"
 category: "Events"
 scraped_by: "Dhruvam"

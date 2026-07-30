@@ -1,5 +1,6 @@
 ﻿---
 title: "Harpreet Singh Jattana"
+document_year: "2021"
 url: "https://www.daiict.ac.in/professor-practice/harpreet-singh-jattana"
 category: "Faculty"
 scraped_by: "Madhav Thesiya"

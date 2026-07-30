@@ -1,5 +1,6 @@
 ﻿---
 title: "Artificial Intelligence in Internet of Things (AIoT): Concepts, Architectures, and Hands-o…"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/7078"
 category: "Events"
 scraped_by: "Dhruvam"

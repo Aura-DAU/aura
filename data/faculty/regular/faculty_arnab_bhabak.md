@@ -1,5 +1,6 @@
 ---
 title: "Arnab Bhabak"
+document_year: "2024"
 url: "https://www.daiict.ac.in/faculty/arnab-bhabak"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

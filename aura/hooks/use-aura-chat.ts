@@ -10,11 +10,11 @@ import type {
 } from "@/lib/chat-types"
 import { useSession } from "next-auth/react"
 import { apiFetch } from "@/lib/auth-client"
-import { getUserMessage, toastAppError, toastError, toastSuccess, appErrorFromResponse } from "@/lib/toast"
+import { getUserMessage, toastAppError, toastError, appErrorFromResponse } from "@/lib/toast"
 import { AppError, isAbortError } from "@/lib/errors"
 
-const STORAGE_KEY  = "aura-threads-v2"
-const PROFILE_KEY  = "aura-profile-v2"
+const STORAGE_KEY = "aura-threads-v2"
+const PROFILE_KEY = "aura-profile-v2"
 
 interface StoredThread extends ChatThread {
   messages: ChatMessage[]
@@ -45,11 +45,8 @@ function toBackendProfile(p: StudentProfile) {
   return Object.keys(out).length ? out : undefined
 }
 
-// Maps messages to the backend turn shape. Callers pass an already-bounded
-// tail (the unsummarised turns); the backend's ConversationMemory folds any
-// overflow into the running summary, so no fixed slice is applied here.
 function toBackendHistory(messages: ChatMessage[]) {
-  return messages.map(({ role, content }) => ({ role, content }))
+  return messages.slice(-6).map(({ role, content }) => ({ role, content }))
 }
 
 // Fire-and-forget — never blocks the UI
@@ -90,7 +87,7 @@ async function* parseSSEStream(response: Response, signal?: AbortSignal) {
   try {
     while (true) {
       if (signal?.aborted) {
-        await reader.cancel().catch(() => {})
+        await reader.cancel().catch(() => { })
         return
       }
       const { done, value } = await reader.read()
@@ -144,7 +141,6 @@ export function useAuraChat() {
   useEffect(() => {
     if (sessionStatus === "loading") return
     if (session?.user) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setRemainingQuotaState(null)
       return
     }
@@ -204,7 +200,7 @@ export function useAuraChat() {
         const key = GUEST_QUOTA_KEY
         try {
           localStorage.setItem(key, JSON.stringify({ date, count: maxQuota - newVal }))
-        } catch {}
+        } catch { }
       }
       return newVal
     })
@@ -216,9 +212,6 @@ export function useAuraChat() {
   const audioContextRef = useRef<AudioContext | null>(null)
   const animationFrameRef = useRef<number | null>(null)
   const abortRef = useRef<AbortController | null>(null)
-  // Set when a turn hard-overflows: the fork target for the NEXT message, so the
-  // just-finished answer stays on screen until the user actually continues.
-  const pendingContinuationRef = useRef<{ fromId: string; toId: string } | null>(null)
   const lastVolumeUpdateRef = useRef(0)
   const mountedRef = useRef(true)
 
@@ -235,7 +228,6 @@ export function useAuraChat() {
       const rawThreads = localStorage.getItem(STORAGE_KEY)
       if (rawThreads) {
         const parsed = JSON.parse(rawThreads) as StoredThread[]
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setThreads(parsed)
         if (parsed[0]) {
           setActiveThreadIdState(parsed[0].id)
@@ -249,37 +241,6 @@ export function useAuraChat() {
     }
     setHasHydrated(true)
   }, [])
-
-  useEffect(() => {
-    // Fetch history from server to synchronize across devices
-    if (session?.user?.email) {
-      apiFetch("/api/auth/history")
-        .then(res => res.json())
-        .then(data => {
-          if (data.threads && Array.isArray(data.threads)) {
-            setThreads(prev => {
-              const map = new Map<string, StoredThread>()
-              for (const t of data.threads) map.set(t.id, t)
-              for (const t of prev) {
-                const existing = map.get(t.id)
-                if (!existing || (t.updatedAt ?? 0) >= (existing.updatedAt ?? 0)) {
-                  map.set(t.id, t)
-                }
-              }
-              const merged = Array.from(map.values()).sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
-              
-              if (!prev.length && merged[0]) {
-                setActiveThreadIdState(merged[0].id)
-                setMessages(merged[0].messages)
-              }
-              
-              return merged
-            })
-          }
-        })
-        .catch(() => {})
-    }
-  }, [session?.user?.email])
 
   useEffect(() => {
     if (!hasHydrated) return
@@ -301,7 +262,7 @@ export function useAuraChat() {
         animationFrameRef.current = null
       }
       if (audioContextRef.current) {
-        void audioContextRef.current.close().catch(() => {})
+        void audioContextRef.current.close().catch(() => { })
         audioContextRef.current = null
       }
       if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
@@ -390,21 +351,7 @@ export function useAuraChat() {
       setErrorMessage(null)
       setInputText("")
 
-      // If the previous turn hard-overflowed, continue in the fresh thread we
-      // forked for it. Deferred to now (not at fork time) so the answer the user
-      // just read stayed on screen; use locals, not state, to dodge stale
-      // closures within this tick.
-      const pending = pendingContinuationRef.current
       let threadId = activeThreadId
-      let priorMessages = messages
-      if (pending && activeThreadId === pending.fromId) {
-        pendingContinuationRef.current = null
-        threadId = pending.toId
-        priorMessages = []
-        setActiveThreadIdState(pending.toId)
-        setActiveCitations([])
-      }
-
       const userMsg: ChatMessage = {
         role: "user",
         content: trimmed,
@@ -422,19 +369,9 @@ export function useAuraChat() {
         setActiveThreadIdState(threadId)
       }
 
-      const baseMessages = [...priorMessages, userMsg]
+      const baseMessages = [...messages, userMsg]
       setMessages(baseMessages)
-      persistMessages(threadId, baseMessages, deriveTitle(priorMessages[0]?.content ?? trimmed))
-
-      // Rolling memory: send the running summary + only the unsummarised tail,
-      // bounded so the request stays under the 20-turn API cap. The backend
-      // folds any overflow into the summary and streams the update back.
-      const activeThread = threads.find((t) => t.id === threadId)
-      const priorSummaryCount = activeThread?.summaryTurnCount ?? 0
-      const threadSummary = activeThread?.summary
-      const MAX_TAIL_TURNS = 16
-      const tailStart = Math.max(priorSummaryCount, priorMessages.length - MAX_TAIL_TURNS)
-      const tail = priorMessages.slice(tailStart)
+      persistMessages(threadId, baseMessages, deriveTitle(messages[0]?.content ?? trimmed))
 
       setLoading(true)
       setThinkingStep("Thinking…")
@@ -445,8 +382,7 @@ export function useAuraChat() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             question: trimmed,
-            history: toBackendHistory(tail),
-            summary: threadSummary,
+            history: toBackendHistory(messages),
             studentProfile: toBackendProfile(studentProfile),
           }),
           signal: controller.signal,
@@ -468,9 +404,6 @@ export function useAuraChat() {
         let citations: Citation[] = []
         let isPersonalData = false
         let calendarAction: CalendarActionData | undefined
-        let newSummary: string | undefined
-        let foldedTurns = 0
-        let continuationSummary: string | undefined
         const assistantMsg: ChatMessage = {
           role: "assistant",
           content: "",
@@ -493,13 +426,6 @@ export function useAuraChat() {
             setActiveCitations(citations)
           } else if (chunk.type === "personal-data-flag") {
             isPersonalData = true
-          } else if (chunk.type === "summary-update" && typeof chunk.summary === "string") {
-            // Backend compacted older turns into the running summary this turn.
-            newSummary = chunk.summary
-            foldedTurns = typeof chunk.foldedTurns === "number" ? chunk.foldedTurns : 0
-          } else if (chunk.type === "thread-continuation" && typeof chunk.summary === "string") {
-            // Hard overflow — the summary itself is full; continue in a new thread.
-            continuationSummary = chunk.summary
           } else if (chunk.type === "quota" && typeof chunk.remaining === "number") {
             syncQuotaFromServer(chunk.remaining)
           } else if (
@@ -527,41 +453,6 @@ export function useAuraChat() {
         setMessages(finalMessages)
         persistMessages(threadId, finalMessages)
 
-        // Persist this turn's rolling-memory bookkeeping onto the thread so the
-        // next request sends the updated digest and the advanced tail pointer.
-        if (newSummary !== undefined) {
-          const capturedSummary = newSummary
-          const advancedCount = tailStart + foldedTurns
-          setThreads((prev) =>
-            prev.map((t) =>
-              t.id === threadId
-                ? { ...t, summary: capturedSummary, summaryTurnCount: advancedCount }
-                : t,
-            ),
-          )
-        }
-
-        // Hard overflow: fork a fresh thread seeded with the summary and defer
-        // the switch (pendingContinuationRef) so the just-read answer stays on
-        // screen; the user's next message continues in the new thread.
-        if (continuationSummary) {
-          const contId = uid()
-          const carriedSummary = newSummary ?? continuationSummary
-          const contThread: StoredThread = {
-            id: contId,
-            title: `${activeThread?.title ?? deriveTitle(trimmed)} (cont.)`,
-            messages: [],
-            summary: carriedSummary,
-            summaryTurnCount: 0,
-            continuedFromId: threadId,
-          }
-          setThreads((prev) => [contThread, ...prev])
-          pendingContinuationRef.current = { fromId: threadId, toId: contId }
-          toastSuccess(
-            "This chat is getting long — I'll continue in a new thread and keep the summary.",
-          )
-        }
-
         if (session?.user?.email) {
           setThreads((current) => {
             saveHistoryToServer(session.user.email!, redactPersonalDataMessages(current))
@@ -583,7 +474,7 @@ export function useAuraChat() {
         }
       }
     },
-    [activeThreadId, loading, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer],
+    [activeThreadId, loading, messages, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer],
   )
 
   const handleClearChat = useCallback(() => {
@@ -614,13 +505,6 @@ export function useAuraChat() {
         updatedAt: messages[messages.length - 1]?.timestamp ?? messages[0]?.timestamp,
       })),
     [threads],
-  )
-
-  // True when the active thread was auto-forked on context overflow — drives the
-  // "Continued from previous conversation" divider in MessageList.
-  const activeThreadIsContinuation = useMemo(
-    () => Boolean(threads.find((t) => t.id === activeThreadId)?.continuedFromId),
-    [threads, activeThreadId],
   )
 
   const transcribeAudio = useCallback(
@@ -784,7 +668,7 @@ export function useAuraChat() {
           animationFrameRef.current = null
         }
         if (audioContextRef.current) {
-          void audioContextRef.current.close().catch(() => {})
+          void audioContextRef.current.close().catch(() => { })
           audioContextRef.current = null
         }
         setRecordingVolume(0)
@@ -816,7 +700,6 @@ export function useAuraChat() {
     activeCitations,
     remainingQuota,
     threads: threadSummaries,
-    activeThreadIsContinuation,
     activeThreadId,
     setActiveThreadId,
     startNewChat,

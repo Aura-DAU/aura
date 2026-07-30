@@ -1,5 +1,6 @@
 ---
 title: "Sunitha V"
+document_year: "2066"
 url: "https://www.daiict.ac.in/faculty/sunitha-v"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

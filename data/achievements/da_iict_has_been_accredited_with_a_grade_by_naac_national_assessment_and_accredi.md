@@ -1,5 +1,6 @@
 ---
 title: "DA-IICT has been accredited with A grade by NAAC (National Assessment and Accreditation Council) after their visit to the campus from 13th to 15th November, 2017."
+document_year: "2017"
 url: "https://www.daiict.ac.in/achievements/1004"
 category: "Achievements"
 scraped_by: "Dhruvam"

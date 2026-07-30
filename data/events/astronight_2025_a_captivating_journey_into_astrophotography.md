@@ -1,5 +1,6 @@
 ﻿---
 title: "Astronight 2025: A Captivating Journey into Astrophotography"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6622"
 category: "Events"
 scraped_by: "Dhruvam"

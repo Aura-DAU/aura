@@ -1,5 +1,6 @@
 ﻿---
 title: "People / Alumini / Events Photo Gallery"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events-campus"
 category: "Events"
 scraped_by: "Dhruvam"

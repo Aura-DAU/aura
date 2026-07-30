@@ -1,5 +1,6 @@
 ﻿---
 title: "A talk by our Alumni, Dr. Ronak Kosti"
+document_year: "2012"
 url: "https://www.daiict.ac.in/events/6648"
 category: "Events"
 scraped_by: "Dhruvam"

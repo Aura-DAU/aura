@@ -1,5 +1,6 @@
 ---
 title: "UGC Proforma"
+document_year: "2025"
 url: "https://www.daiict.ac.in/ugc-proforma"
 category: "administration"
 scraped_by: "Om Patel"

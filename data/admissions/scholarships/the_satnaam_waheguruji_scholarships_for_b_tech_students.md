@@ -1,5 +1,6 @@
 ---
 title: "The Satnaam WaheGuruji Scholarships for B.Tech Students"
+document_year: "2023-24"
 url: "https://www.daiict.ac.in/satnaam-waheguruji-scholarships-btech-students"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ---
 title: "Abhijit Mukherjee"
+document_year: "2023"
 url: "https://www.daiict.ac.in/adjunct-faculty/abhijit-mukherjee"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

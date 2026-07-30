@@ -1,5 +1,6 @@
 ---
 title: "Policies/Whistle Blowers Policy"
+document_year: "2024"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Whistle-Blowers-Policy.pdf"
 category: "administration"
 scraped_by: "Om Patel"

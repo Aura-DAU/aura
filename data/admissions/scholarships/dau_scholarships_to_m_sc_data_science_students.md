@@ -1,5 +1,6 @@
 ---
 title: "DAU Scholarships to M.Sc (Data Science) Students"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/da-iict-scholarships-msc-data-science-students"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

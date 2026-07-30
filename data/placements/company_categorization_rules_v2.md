@@ -1,5 +1,6 @@
 ---
 title: "Company Categorization Rules (2025-26)"
+document_year: "2025-26"
 category: "Placement Policy"
 url: "company_categorization_rules.md"
 scraped_by: "Pushkar"

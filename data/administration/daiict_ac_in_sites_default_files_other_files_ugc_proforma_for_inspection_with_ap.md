@@ -1,5 +1,6 @@
 ---
 title: "UGC Proforma/Proforma for Inspection by UGC – 2025"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/UGC-Proforma-for-inspection-with-Appendices-and-Annexures_2025.pdf"
 category: "administration"
 scraped_by: "Om Patel"

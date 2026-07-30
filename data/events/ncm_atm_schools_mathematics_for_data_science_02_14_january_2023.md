@@ -1,5 +1,6 @@
 ﻿---
 title: "NCM-ATM Schools - Mathematics for Data Science (02-14 January 2023)"
+document_year: "2023"
 url: "https://www.daiict.ac.in/events/5183"
 category: "Events"
 scraped_by: "Dhruvam"

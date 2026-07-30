@@ -95,11 +95,6 @@ when the topic sounds sensitive — salary bands, leave entitlements,
 disciplinary procedures, penalties, eligibility rules, approval authorities,
 or a named person's public role.
 
-A bare "Who is [Name]?" (including with a typo or stray character) asks about
-someone's public role or position at DAU — treat it as SAFE by default. Institutional
-policies for a category of people, approval workflows, and directory facts are SAFE.
-Club and student organization questions about DAU campus life are ON-TOPIC/SAFE.
-
 If you are unsure between SAFE and OFF_TOPIC, answer SAFE. If you are unsure
 between SAFE and UNSAFE, answer SAFE. Access control and document grounding
 handle edge cases downstream; a wrongly blocked legitimate question is a

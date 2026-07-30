@@ -1,5 +1,6 @@
 ---
 title: "Sanjay Srivastava"
+document_year: "2017"
 url: "https://www.daiict.ac.in/faculty/sanjay-srivastava"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

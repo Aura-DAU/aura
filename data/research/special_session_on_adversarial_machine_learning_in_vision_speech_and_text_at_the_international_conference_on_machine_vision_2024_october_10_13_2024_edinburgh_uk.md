@@ -1,5 +1,6 @@
 ---
 title: "Special session on \"Adversarial Machine Learning in Vision, Speech, and Text\" at the International Conference on Machine Vision, 2024 (October 10-13, 2024 | Edinburgh, UK)"
+document_year: "2024"
 url: "https://www.daiict.ac.in/news/6461"
 category: "Announcements"
 scraped_by: "Vedant Shah"

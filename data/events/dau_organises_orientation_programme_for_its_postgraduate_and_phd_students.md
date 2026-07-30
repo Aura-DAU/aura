@@ -1,5 +1,6 @@
 ---
 title: "DAU Organises Orientation Programme for its Postgraduate and PhD Students"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6835"
 category: "Announcements"
 scraped_by: "Vedant Shah"

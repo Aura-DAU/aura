@@ -1,5 +1,6 @@
 ---
 title: "Tenders/EE2526003 tender pdf"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Admin-Parking-Offices-Arrangement_TandC_150525.pdf"
 category: "administration"
 scraped_by: "Om Patel"

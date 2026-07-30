@@ -1,5 +1,6 @@
 ---
 title: "sites/default/files/other-files/IIRF_Ranking-appeared-uder-University-special-edition-of_Education-Post.pdf"
+document_year: "2023"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/IIRF_Ranking-appeared-uder-University-special-edition-of_Education-Post.pdf"
 category: "administration"
 scraped_by: "Om Patel"

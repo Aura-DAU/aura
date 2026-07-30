@@ -1,5 +1,6 @@
 ---
 title: "tenders"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender_TandC_Wi-Fi_Set-up_for_Refurbishing_of_CEP_Classrooms_220526.pdf"
 category: "administration"
 scraped_by: "Om Patel"

@@ -14,8 +14,7 @@ class QueryRewriter:
     def rewrite(
         self,
         query,
-        history=None,
-        academic_scope=None,
+        history=None
     ):
 
         if not history:
@@ -30,15 +29,6 @@ class QueryRewriter:
             history_text += (
                 f"{turn['role']}: "
                 f"{turn['content']}\n"
-            )
-
-        scope_hint = ""
-        if academic_scope is not None:
-            scope_hint = (
-                "Verified student context (use only to resolve references such as 'my curriculum'; "
-                "do not add new facts): "
-                f"programme={academic_scope.programme_id}, admission_year={academic_scope.admission_year}, "
-                f"semester={academic_scope.current_semester}.\n"
             )
 
         prompt = f"""
@@ -87,7 +77,6 @@ Conversation History:
 
 Latest Question:
 
-{scope_hint}
 {query}
 """
 

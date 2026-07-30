@@ -1,5 +1,6 @@
 ---
 title: "Aditya Tatu"
+document_year: "2010"
 url: "https://www.daiict.ac.in/faculty/aditya-tatu"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

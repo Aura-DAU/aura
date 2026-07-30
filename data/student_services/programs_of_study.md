@@ -1,5 +1,6 @@
 ﻿---
 title: "Programs of Study"
+document_year: "2001"
 url: "https://daiict.ac.in/programs-of-study"
 category: "Academic"
 scraped_by: "Madhav Thesiya"

@@ -1,5 +1,6 @@
 ﻿---
 title: "Seminar on Emerging Technologies for a Sustainable and Intelligent Future"
+document_year: "2001"
 url: "https://www.daiict.ac.in/events/6995"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ---
 title: "Anil Maheshwari"
+document_year: "2007"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/anil-maheshwari"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

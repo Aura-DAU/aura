@@ -1,5 +1,6 @@
 ---
 title: "M.Sc. (IT) Scholarships"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/msc-it-scholarships"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ---
 title: "Tenders/EE2526005 pdf"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender-Renovation-of-Basketball-Courts_TandC_07-08-25.pdf"
 category: "administration"
 scraped_by: "Om Patel"

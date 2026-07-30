@@ -1,5 +1,6 @@
 ---
 title: "Policies/E-Governance Policy"
+document_year: "2017-18"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/E-Governance_Policy.pdf"
 category: "administration"
 scraped_by: "Om Patel"

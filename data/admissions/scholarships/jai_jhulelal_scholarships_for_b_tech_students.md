@@ -1,5 +1,6 @@
 ---
 title: "Jai Jhulelal Scholarships for B.Tech. Students"
+document_year: "2015"
 url: "https://www.daiict.ac.in/jai-jhulelal-scholarships-btech-students"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ---
 title: "Idea selected in the VLSID-2024 Design Contest"
+document_year: "2024"
 url: "https://www.daiict.ac.in/news/5795"
 category: "Announcements"
 scraped_by: "Vedant Shah"

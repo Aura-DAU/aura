@@ -264,8 +264,13 @@ class AuraChat:
                 rag_context = retrieval_result.get("context", "")
                 sources   = retrieval_result.get("sources", [])
 
-                if not chunks and query_type == "PUBLIC":
-                    return {"answer": "I'm having trouble retrieving information right now. Please try again.", "sources": [], "is_personal_data": False}
+                # Bug fix: zero chunks isn't a technical failure — it just
+                # means no close match exists in the knowledge base for this
+                # question. Fall through to generation instead of returning a
+                # misleading "try again" message; AnswerGenerator.generate()
+                # already detects an empty context and returns a proper,
+                # helpful "not found, here's who to contact" fallback (see
+                # its Fix AG3), which is both more honest and more useful.
 
             # ── Step 8: Merge and generate ─────────────────────────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
@@ -278,7 +283,6 @@ class AuraChat:
                     history=history,
                     profile=display_profile,
                     system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
-                    tracking_flags=request_context.tracking_flags if request_context else None,
                 )
 
             return {
@@ -352,8 +356,8 @@ class AuraChat:
         with track_segment("retrieval_time"):
             retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
         chunks    = retrieval_result.get("chunks", [])
-        if not chunks:
-            return {"answer": "I'm having trouble retrieving information. Please try again.", "sources": [], "is_personal_data": False}
+        # Bug fix: as above — let AnswerGenerator's empty-context fallback
+        # produce the answer instead of a misleading "try again" short-circuit.
         with track_segment("generation_time"):
             answer = self.generator.generate(
                 query=retrieval_result.get("corrected_query", query),

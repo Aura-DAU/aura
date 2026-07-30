@@ -1,5 +1,6 @@
 ---
 title: "AnnualReport 2024-25 pdf"
+document_year: "2024-25"
 url: "https://daiict.ac.in/sites/default/files/other-files/annual-report-2024-25-25326.pdf"
 category: "administration"
 scraped_by: "Om Patel"

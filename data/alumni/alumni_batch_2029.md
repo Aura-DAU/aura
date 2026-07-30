@@ -1,5 +1,6 @@
 ---
 title: "DA-IICT Alumni Batch 2029 "
+document_year: "2029"
 category: "Alumni Batch Index"
 batch_year: "2029"
 scraped_by: "AI Agent"

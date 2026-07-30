@@ -1,5 +1,6 @@
 ---
 title: "Copy of GenMeet Feb26 Minutes"
+document_year: "2026"
 url: "#"
 category: "SBG & Clubs - General Meets"
 scraped_by: "Madhav Thesiya"

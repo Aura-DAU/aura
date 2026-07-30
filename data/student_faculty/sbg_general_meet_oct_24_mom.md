@@ -1,5 +1,6 @@
 ---
 title: "SBG General Meet Oct 24 MoM"
+document_year: "2024-25"
 url: "#"
 category: "SBG & Clubs - General Meets"
 scraped_by: "Madhav Thesiya"

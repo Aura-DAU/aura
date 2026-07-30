@@ -1,5 +1,6 @@
 ---
 title: "Minal Bhise"
+document_year: "2017"
 url: "https://www.daiict.ac.in/faculty/minal-bhise"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

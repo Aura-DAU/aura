@@ -1,5 +1,6 @@
 ---
 title: "Synapse 24 Event Report"
+document_year: "2024"
 url: "#"
 category: "SBG & Clubs - Events"
 scraped_by: "Madhav Thesiya"

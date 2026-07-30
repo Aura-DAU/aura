@@ -1,5 +1,6 @@
 ---
 title: "Policies"
+document_year: "2026"
 url: "https://www.daiict.ac.in/policies"
 category: "Policies"
 scraped_by: "Meet Virugama"

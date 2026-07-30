@@ -1,5 +1,6 @@
 ﻿---
 title: "Celebrate International Yoga Day at DAU!"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6811"
 category: "Events"
 scraped_by: "Dhruvam"

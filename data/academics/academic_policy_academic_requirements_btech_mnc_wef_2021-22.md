@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements BTech MnC wef 2021-22"
+document_year: "2021-22"
 url: "https://intranet.daiict.ac.in/academics/Copy of Academic requirements_BTech(MnC)_wef_2021-22.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Madhav (AI-assisted)"

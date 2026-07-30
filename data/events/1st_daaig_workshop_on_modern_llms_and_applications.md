@@ -1,5 +1,6 @@
 ﻿---
 title: "1st DAAIG Workshop on Modern LLMs and Applications"
+document_year: "2022-23"
 url: "https://www.daiict.ac.in/events/6680"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ---
 title: "Shruti Bhilare"
+document_year: "2019"
 url: "https://www.daiict.ac.in/faculty/shruti-bhilare"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

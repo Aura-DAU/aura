@@ -1,5 +1,6 @@
 ---
 title: "Silver Jubilee Seminar at DAU | ETSIF 2026"
+document_year: "2026"
 url: "https://www.daiict.ac.in/news/7070"
 category: "Announcements"
 scraped_by: "Vedant Shah"

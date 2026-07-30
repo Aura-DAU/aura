@@ -1,5 +1,6 @@
 ---
 title: "DAIICT Team comprising of Ganeshsai Garikipati, Roshani, Anish Mathuria and Priyanka Singh won the best student paper award at SPACE ’20"
+document_year: "2020"
 url: "https://www.daiict.ac.in/achievements/690"
 category: "Achievements"
 scraped_by: "Dhruvam"

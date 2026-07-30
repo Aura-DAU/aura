@@ -1,5 +1,6 @@
 ---
 title: "Sports Committee Event Reports (2025-26)"
+document_year: "2025-26"
 category: "Reports"
 scraped_by: "Bhagyashree Khemwani"
 scraped_date: "2026-07-04"

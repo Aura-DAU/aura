@@ -1,5 +1,6 @@
 ---
 title: "Abhishek Jindal"
+document_year: "2017-18"
 url: "https://www.daiict.ac.in/faculty/abhishek-jindal"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

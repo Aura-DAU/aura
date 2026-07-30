@@ -1,5 +1,6 @@
 ---
 title: "Undergraduate Admissions – Gujarat Category"
+document_year: "2026"
 url: "https://www.daiict.ac.in/undergraduate-admissions-gujarat-category"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

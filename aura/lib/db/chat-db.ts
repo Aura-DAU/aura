@@ -32,7 +32,7 @@ async function writeStore(store: ChatStore): Promise<void> {
   // Atomic write: write to a .tmp file then rename over the real file.
   // On Linux, rename() within the same filesystem is atomic, so concurrent
   // writes cannot produce a half-written JSON file.
-  const tmpPath = `${DB_PATH}.${Math.random().toString(36).slice(2)}.tmp`
+  const tmpPath = `${DB_PATH}.tmp`
   await fs.writeFile(tmpPath, JSON.stringify(store, null, 2), "utf-8")
   await fs.rename(tmpPath, DB_PATH)
 }
@@ -57,28 +57,7 @@ export async function saveThreadsForUser(
         : m
     ),
   }))
-  
   const store = await readStore()
-  const userEmail = email.toLowerCase()
-  const existingThreads = store[userEmail] ?? []
-  
-  // Merge incoming threads with existing threads by ID, keeping the newest version
-  const mergedMap = new Map<string, StoredThread>()
-  
-  for (const t of existingThreads) {
-    mergedMap.set(t.id, t)
-  }
-  
-  for (const t of sanitised) {
-    const existing = mergedMap.get(t.id)
-    if (!existing || (t.updatedAt ?? 0) >= (existing.updatedAt ?? 0)) {
-      mergedMap.set(t.id, t)
-    }
-  }
-  
-  const mergedThreads = Array.from(mergedMap.values())
-  mergedThreads.sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
-  
-  store[userEmail] = mergedThreads.slice(0, MAX_THREADS)
+  store[email.toLowerCase()] = sanitised.slice(0, MAX_THREADS)
   await writeStore(store)
 }

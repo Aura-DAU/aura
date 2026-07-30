@@ -1,5 +1,6 @@
 ---
 title: "Appendix"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/academics/Appendix - Specialization-wise M Tech (ICT) Course struture from 2024-25.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

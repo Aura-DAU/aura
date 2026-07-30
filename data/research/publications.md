@@ -1,5 +1,6 @@
 ---
 title: "Publications"
+document_year: "2026"
 url: "https://www.daiict.ac.in/faculty-publications"
 category: "Research"
 scraped_by: "Khushi Gandhi"

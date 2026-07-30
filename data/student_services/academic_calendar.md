@@ -1,5 +1,6 @@
 ---
 title: "Academic Calendar"
+document_year: "2026-27"
 url: "https://daiict.ac.in/academic-calendar"
 category: "Academic"
 scraped_by: "Meet Virugama"

@@ -1,5 +1,6 @@
 ---
 title: "Purbasha Das"
+document_year: "2019-20"
 url: "https://www.daiict.ac.in/faculty/purbasha-das"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

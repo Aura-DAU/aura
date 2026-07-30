@@ -1,5 +1,6 @@
 ---
 title: "N.I.R.F. / PG campus Placement"
+document_year: "2015-16"
 url: "https://www.daiict.ac.in/sites/default/files/PGPlacement.xls"
 category: "administration"
 scraped_by: "Om Patel"

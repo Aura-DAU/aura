@@ -1,5 +1,6 @@
 ---
 title: "People / Teaching Fellow"
+document_year: "2026"
 url: "https://www.daiict.ac.in/teaching-fellows"
 category: "Faculty"
 scraped_by: "Meet Virugama"

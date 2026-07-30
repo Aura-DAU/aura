@@ -1,5 +1,6 @@
 ---
 title: "M.Des. (Communication Design)"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/mdes-communication-design"
 category: "Academics"
 scraped_by: "Khushi Gandhi"

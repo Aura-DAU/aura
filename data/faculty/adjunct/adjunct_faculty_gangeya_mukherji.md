@@ -1,5 +1,6 @@
 ---
 title: "Gangeya Mukherji"
+document_year: "2021"
 url: "https://www.daiict.ac.in/adjunct-faculty/gangeya-m"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

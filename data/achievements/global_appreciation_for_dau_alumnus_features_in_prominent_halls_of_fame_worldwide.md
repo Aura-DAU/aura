@@ -1,5 +1,6 @@
 ---
 title: "Global Appreciation for DAU Alumnus: Features in prominent Halls of Fame worldwide"
+document_year: "2020"
 url: "https://www.daiict.ac.in/news/6726"
 category: "Announcements"
 scraped_by: "Vedant Shah"

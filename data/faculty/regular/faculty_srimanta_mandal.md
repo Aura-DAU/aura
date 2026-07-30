@@ -1,5 +1,6 @@
 ---
 title: "Srimanta Mandal"
+document_year: "2017"
 url: "https://www.daiict.ac.in/faculty/srimanta-mandal"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

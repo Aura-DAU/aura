@@ -1,5 +1,6 @@
 ---
 title: "Document"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/One-Time-Purchase-Open-Inquiry-Oct25.pdf"
 category: "administration"
 scraped_by: "Om Patel"

@@ -1,5 +1,6 @@
 ---
 title: "Arpit Rana"
+document_year: "2020"
 url: "https://www.daiict.ac.in/faculty/arpit-rana"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

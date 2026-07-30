@@ -1,5 +1,6 @@
 ---
 title: "B.Tech. (EVD)"
+document_year: "2023-24"
 url: "https://www.daiict.ac.in/btech-evd"
 category: "Academics"
 scraped_by: "Khushi Gandhi"

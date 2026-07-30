@@ -1,5 +1,6 @@
 ﻿---
 title: "Holiday List 2026"
+document_year: "2026"
 url: "https://daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf"
 category: "Student Services"
 scraped_by: "Madhav Thesiya"

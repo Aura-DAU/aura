@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements M Sc (IT) wef 2023-24 as of August 2023"
+document_year: "2023-24"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Academic%20Requirements_M%20Sc%20(IT)_wef%202023-24%20as%20of%20August%202023.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

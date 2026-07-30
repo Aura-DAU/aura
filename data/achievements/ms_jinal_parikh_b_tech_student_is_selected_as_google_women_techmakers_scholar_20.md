@@ -1,5 +1,6 @@
 ---
 title: "Ms. Jinal Parikh, B.Tech student, is selected as Google Women Techmakers Scholar 2017"
+document_year: "2017"
 url: "https://www.daiict.ac.in/achievements/1056"
 category: "Achievements"
 scraped_by: "Dhruvam"

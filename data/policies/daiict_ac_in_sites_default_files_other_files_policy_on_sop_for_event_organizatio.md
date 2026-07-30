@@ -1,5 +1,6 @@
 ---
 title: "Policies/Standard Operating Procedure (SOP) for Event Organisation at DAU"
+document_year: "2026"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy-on_SOP_for_Event_Organization-Apr_2026.pdf"
 category: "policies"
 scraped_by: "Om Patel"

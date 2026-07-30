@@ -52,9 +52,6 @@ from pipeline.aura_chat import (
     PERSONAL_DATA_SYSTEM_ADDENDUM,
     is_greeting_or_meta,
 )
-from pipeline.ecampus.intent_router import PersonalDataIntentRouter
-from pipeline.ecampus.orchestrator import EcampusOrchestrator
-from api.request_context import RequestContext
 
 
 class SimpleIdentity:
@@ -68,11 +65,8 @@ class AuraState(TypedDict, total=False):
     query: str
     history: list
     identity: Any
-    request_context: RequestContext
-    academic_scope: Any
     display_profile: Any
     on_delta: Any  # token-streaming callback, threaded straight to the generator
-    summary: Optional[str]  # rolling conversation memory (pipeline.memory)
 
     query_type: Optional[str]
     classification: dict
@@ -108,8 +102,6 @@ class AuraChatGraph:
         self.context_builder = ERPContextBuilder()
         self.access_gate = AccessControlGate(erp)
         self.audit_log = AuditLog()
-        self.intent_router = PersonalDataIntentRouter()
-        self.ecampus_orchestrator = EcampusOrchestrator()
 
         self._graph = self._build_graph()
 
@@ -121,7 +113,6 @@ class AuraChatGraph:
         graph.add_node("safety_guardrail", self._n_safety_guardrail)
         graph.add_node("wellness_check", self._n_wellness_check)
         graph.add_node("greeting_check", self._n_greeting_check)
-        graph.add_node("community_tools", self._n_community_tools)
         graph.add_node("classify", self._n_classify)
         graph.add_node("guest_gate", self._n_guest_gate)
         graph.add_node("strict_guardrail", self._n_strict_guardrail)
@@ -142,8 +133,7 @@ class AuraChatGraph:
 
         graph.add_conditional_edges("safety_guardrail", route_or("wellness_check"))
         graph.add_conditional_edges("wellness_check", route_or("greeting_check"))
-        graph.add_conditional_edges("greeting_check", route_or("community_tools"))
-        graph.add_conditional_edges("community_tools", route_or("classify"))
+        graph.add_conditional_edges("greeting_check", route_or("classify"))
         graph.add_conditional_edges("classify", route_or("guest_gate"))
         graph.add_conditional_edges("guest_gate", route_or("strict_guardrail"))
         graph.add_conditional_edges("strict_guardrail", route_or("personal_data"))
@@ -217,55 +207,6 @@ class AuraChatGraph:
         state["result"] = {"answer": ans, "sources": [], "is_personal_data": False}
         return state
 
-    def _n_community_tools(self, state: AuraState) -> AuraState:
-        # Clubs / SBG / faculty ToR / domain KB skills → EcampusOrchestrator
-        # with public KB tools only. Guests and non-COMMUNITY queries fall
-        # through to classify → public RAG (or the personal ERP path).
-        # Personal ERP tools are never exposed on this branch.
-        identity = state.get("identity")
-        if not identity or getattr(identity, "role", None) in (None, "guest"):
-            return state
-
-        with track_segment("community_intent_time"):
-            intent = self.intent_router.classify(state["query"])
-        if intent != "COMMUNITY":
-            return state
-
-        tool_role = identity.role if identity.role in ("student", "faculty") else None
-        if tool_role is None:
-            # Broad JWT role is student|faculty|admin; map elevated faculty
-            # effective roles if present on request_context.
-            request_context = state.get("request_context")
-            effective = getattr(request_context, "effective_role", None) or ""
-            if effective.startswith("faculty") or effective in (
-                "dean_faculty", "dean_academic", "dean_students", "superadmin",
-            ):
-                tool_role = "faculty"
-            elif effective == "student":
-                tool_role = "student"
-            else:
-                return state
-
-        identity_payload = {
-            "erp_id": identity.erp_id,
-            "role": tool_role,
-            "dept": getattr(identity, "dept", None),
-        }
-        with track_segment("community_orchestrator_time"):
-            result = self.ecampus_orchestrator.run(
-                query=state["query"],
-                identity=identity_payload,
-                history=state.get("history") or [],
-                request_context=state.get("request_context"),
-                tool_scope="public_kb",
-            )
-        state["result"] = {
-            "answer": result.get("answer") or "",
-            "sources": result.get("sources") or [],
-            "is_personal_data": False,
-        }
-        return state
-
     def _n_classify(self, state: AuraState) -> AuraState:
         classification = self.classifier.classify(state["query"])
         state["classification"] = classification
@@ -275,8 +216,8 @@ class AuraChatGraph:
     def _n_guest_gate(self, state: AuraState) -> AuraState:
         query_type = state["query_type"]
         if query_type in ("PERSONAL", "MIXED", "AGGREGATE"):
-            request_context = state.get("request_context")
-            user_role = request_context.effective_role if request_context else "guest"
+            identity = state.get("identity")
+            user_role = resolve_effective_role(identity) if identity else "guest"
             if user_role == "guest":
                 state["result"] = {
                     "answer": GENERIC_DENIAL,
@@ -358,26 +299,26 @@ class AuraChatGraph:
         if query_type not in ("PUBLIC", "MIXED", "AGGREGATE"):
             return state
 
-        request_context = state.get("request_context")
-        user_role = request_context.effective_role if request_context else "public"
+        identity = state.get("identity")
+        user_role = resolve_effective_role(identity) if identity else "public"
         with track_segment("retrieval_time"):
-            retrieval_result = self.pipeline.get_context(
-                state["query"],
-                state["history"],
-                user_role=user_role,
-                academic_scope=state.get("academic_scope"),
-            )
+            retrieval_result = self.pipeline.get_context(state["query"], state["history"], user_role=user_role)
         state["retrieval_result"] = retrieval_result
         state["chunks"] = retrieval_result.get("chunks", [])
         state["rag_context"] = retrieval_result.get("context", "")
         state["sources"] = retrieval_result.get("sources", [])
 
-        if not state["chunks"] and query_type == "PUBLIC":
-            state["result"] = {
-                "answer": "I'm having trouble retrieving information right now. Please try again.",
-                "sources": [],
-                "is_personal_data": False,
-            }
+        # Bug fix: zero retrieved chunks does NOT mean a technical failure —
+        # it usually means the knowledge base has no close match for this
+        # question. Previously this short-circuited straight to a generic
+        # "trouble retrieving information, try again" message, which both
+        # misdiagnoses the situation (implies a transient fault, so retrying
+        # never helps) and skips AnswerGenerator's proper empty-context
+        # fallback (AG3), which gives a clearer, more useful "not found in
+        # the knowledge base, here's who to contact" answer. So we now let
+        # the query fall through to generation exactly like a MIXED/AGGREGATE
+        # query with no rag_context does; AnswerGenerator.generate() already
+        # detects an empty context and returns the graceful fallback itself.
         return state
 
     def _n_generate(self, state: AuraState) -> AuraState:
@@ -397,11 +338,9 @@ class AuraChatGraph:
                 context=combined_context,
                 plan=retrieval_result.get("plan") if has_rag else None,
                 history=state["history"],
-                profile=self._answer_profile(state),
+                profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
                 on_delta=state.get("on_delta"),
-                summary=state.get("summary"),
-                tracking_flags=state.get("request_context").tracking_flags if state.get("request_context") else None,
             )
 
         state["result"] = {
@@ -463,25 +402,7 @@ class AuraChatGraph:
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────
 
-    def _answer_profile(self, state: AuraState) -> dict | None:
-        scope = state.get("academic_scope")
-        display_profile = state.get("display_profile") or {}
-        if not scope:
-            return display_profile or None
-        profile = {
-            "role": "student",
-            "programme": scope.programme_id,
-            "degree_level": scope.degree_level,
-            "admission_year": scope.admission_year,
-            "current_semester": scope.current_semester,
-        }
-        if scope.branch_id:
-            profile["branch"] = scope.branch_id
-        return profile
-
-    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None, summary=None, request_context=None):
-        if request_context is not None:
-            identity = request_context.identity
+    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None):
         if isinstance(identity, dict):
             identity = SimpleIdentity(
                 erp_id=identity.get("erp_id"),
@@ -494,11 +415,8 @@ class AuraChatGraph:
                 "query": query,
                 "history": history or [],
                 "identity": identity,
-                "request_context": request_context,
-                "academic_scope": request_context.academic_scope if request_context else None,
                 "display_profile": display_profile,
                 "on_delta": on_delta,
-                "summary": summary or "",
                 "result": None,
             }
             final_state = self._graph.invoke(initial_state)

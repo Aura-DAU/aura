@@ -1,5 +1,6 @@
 ---
 title: "DAU Notification UGC 2024"
+document_year: "2024"
 url: "https://daiict.ac.in/sites/default/files/other-files/UGC-Notification-Change-of-name_DAU_2F_25-June-2024.pdf"
 category: "administration"
 scraped_by: "Om Patel"

@@ -1,5 +1,6 @@
 ---
 title: "Courses Through CEP & AIP/CEP Policy pdf"
+document_year: "2024"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/CEP_Policy_May-2024.pdf"
 category: "administration"
 scraped_by: "Om Patel"

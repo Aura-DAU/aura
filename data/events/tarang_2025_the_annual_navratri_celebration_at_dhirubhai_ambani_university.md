@@ -1,5 +1,6 @@
 ---
 title: "Tarang 2025, the annual Navratri Celebration at Dhirubhai Ambani University"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6905"
 category: "Announcements"
 scraped_by: "Vedant Shah"

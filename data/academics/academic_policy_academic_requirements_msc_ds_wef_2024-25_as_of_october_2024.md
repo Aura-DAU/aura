@@ -1,5 +1,6 @@
 ---
 title: "Academic requirements MSc(DS) wef 2024 25 as of October 2024"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/academics/Academic requirements_MSc(DS)_wef_2024-25 as of October 2024.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

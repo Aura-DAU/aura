@@ -1,5 +1,6 @@
 ﻿---
 title: "Academic Bank of Credit: Interactive Student Session"
+document_year: "2020"
 url: "https://www.daiict.ac.in/events/6834"
 category: "Events"
 scraped_by: "Dhruvam"

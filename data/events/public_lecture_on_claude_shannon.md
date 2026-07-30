@@ -1,5 +1,6 @@
 ﻿---
 title: "Public Lecture on Claude Shannon!"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6501"
 category: "Events"
 scraped_by: "Dhruvam"

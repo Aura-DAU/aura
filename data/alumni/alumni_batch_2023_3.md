@@ -1,5 +1,6 @@
 ---
 title: "DA-IICT Alumni Batch 2023 Part 3"
+document_year: "2023"
 category: "Alumni Batch Index"
 batch_year: "2023"
 scraped_by: "AI Agent"

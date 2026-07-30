@@ -1,5 +1,6 @@
 ---
 title: "Subhas Chandra Nandy"
+document_year: "2024"
 url: "https://www.daiict.ac.in/adjunct-faculty/subhas-chandra-nandy"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

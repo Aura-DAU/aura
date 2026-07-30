@@ -1,5 +1,6 @@
 ---
 title: "An Achievement of our PhD Student"
+document_year: "2022"
 url: "https://www.daiict.ac.in/news/4270"
 category: "Announcements"
 scraped_by: "Vedant Shah"

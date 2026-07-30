@@ -1,5 +1,6 @@
 ---
 title: "Manoj Raut"
+document_year: "2015"
 url: "https://www.daiict.ac.in/faculty/manoj-raut"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

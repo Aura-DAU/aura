@@ -1,5 +1,6 @@
 ﻿---
 title: "Workshop on Digital Psychology: Harnessing Smartphone-Mediated Tools to Assess Mental Heal…"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6218"
 category: "Events"
 scraped_by: "Dhruvam"

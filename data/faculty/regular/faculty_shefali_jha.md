@@ -1,5 +1,6 @@
 ---
 title: "Shefali Jha"
+document_year: "2019"
 url: "https://www.daiict.ac.in/faculty/shefali-jha"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ﻿---
 title: "Institute Public Lecture Series Talk"
+document_year: "2015"
 url: "https://www.daiict.ac.in/events/6540"
 category: "Events"
 scraped_by: "Dhruvam"

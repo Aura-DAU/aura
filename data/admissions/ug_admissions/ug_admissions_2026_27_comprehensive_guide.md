@@ -1,5 +1,6 @@
 ---
 title: "UG Admissions 2026-27: Comprehensive Guide"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/undergraduate-admissions"
 category: "Admissions"
 scraped_by: "Pushkar"

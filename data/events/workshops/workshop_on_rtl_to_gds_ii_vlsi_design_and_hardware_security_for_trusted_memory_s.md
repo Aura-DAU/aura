@@ -1,5 +1,6 @@
 ﻿---
 title: "Workshop on RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/7059"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements M Tech (ICT) Program wef 2022 23"
+document_year: "2022-23"
 url: "https://intranet.daiict.ac.in/academics/Academic Requirements_M Tech_(ICT)_Program_wef 2022-23.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

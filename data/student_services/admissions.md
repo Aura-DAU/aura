@@ -1,5 +1,6 @@
 ﻿---
 title: "Admissions"
+document_year: "2026-27"
 url: "https://daiict.ac.in/admissions"
 category: "Academic"
 scraped_by: "Madhav Thesiya"

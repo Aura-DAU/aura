@@ -1,5 +1,6 @@
 ---
 title: "DAU celebrates National Sports Day on the theme ‘Ek Ghanta Khel Ke Maidaan Mein’ under Fit India Mission"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6863"
 category: "Announcements"
 scraped_by: "Vedant Shah"

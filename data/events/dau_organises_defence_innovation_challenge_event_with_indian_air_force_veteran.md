@@ -1,5 +1,6 @@
 ---
 title: "DAU organises Defence Innovation Challenge Event with Indian Air Force Veteran"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6888"
 category: "Announcements"
 scraped_by: "Vedant Shah"

@@ -1,5 +1,6 @@
 ﻿---
 title: "BIRD STORIES: Classification, Conservation and Communication Design seminar!"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6254"
 category: "Events"
 scraped_by: "Dhruvam"

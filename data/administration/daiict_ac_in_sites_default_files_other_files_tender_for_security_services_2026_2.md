@@ -1,5 +1,6 @@
 ---
 title: "Document"
+document_year: "2026"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender-for-Security-Services_2026-27_V1_200326.pdf"
 category: "administration"
 scraped_by: "Om Patel"

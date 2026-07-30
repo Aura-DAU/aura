@@ -1,5 +1,6 @@
 ---
 title: "GSIRF Five Star Rating - 2023-24"
+document_year: "2023-24"
 url: "https://daiict.ac.in/sites/default/files/other-files/GSIRF-Certificate_2023.pdf"
 category: "administration"
 scraped_by: "Om Patel"

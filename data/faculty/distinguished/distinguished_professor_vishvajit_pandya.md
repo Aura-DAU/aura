@@ -1,5 +1,6 @@
 ---
 title: "Vishvajit Pandya"
+document_year: "2003"
 url: "https://www.daiict.ac.in/distinguished-professor/vishvajit-pandya"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

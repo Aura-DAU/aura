@@ -1,5 +1,6 @@
 ---
 title: "MC321/IE406 Machine Learning Winter 2025-2026"
+document_year: "2025-26"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

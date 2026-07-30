@@ -1,5 +1,6 @@
 ---
 title: "Puneet Bhateja"
+document_year: "2010-11"
 url: "https://www.daiict.ac.in/faculty/puneet-bhateja"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

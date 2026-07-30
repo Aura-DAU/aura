@@ -1,5 +1,6 @@
 ---
 title: "All India Rank 2 among all private universities in IIRF 2025!"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6805"
 category: "Announcements"
 scraped_by: "Vedant Shah"

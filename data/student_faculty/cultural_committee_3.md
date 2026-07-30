@@ -1,5 +1,6 @@
 ---
 title: "Ganesh Chaturthi — Cultural Event Report 2025"
+document_year: "2025"
 url: "https://docs.google.com/document/d/1kIMwAX6wK3Iw6G_sAevHt9QJGPcBfymR0pVIg7GI48Q/edit?usp=drive_link"
 category: "Committees"
 scraped_by: "OmPatel"

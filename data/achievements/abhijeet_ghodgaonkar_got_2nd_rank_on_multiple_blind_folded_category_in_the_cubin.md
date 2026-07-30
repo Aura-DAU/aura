@@ -1,5 +1,6 @@
 ---
 title: "Abhijeet Ghodgaonkar got 2nd rank on Multiple Blind Folded category in the Cubing Competition “SCMU 2017” (WCA) held in Mumbai."
+document_year: "2017"
 url: "https://www.daiict.ac.in/achievements/1054"
 category: "Achievements"
 scraped_by: "Dhruvam"

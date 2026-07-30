@@ -1,5 +1,6 @@
 ---
 title: "Admissions - M.Des."
+document_year: "2026"
 url: "https://www.daiict.ac.in/admissions-mdes"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

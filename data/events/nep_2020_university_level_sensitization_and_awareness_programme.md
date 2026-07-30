@@ -1,5 +1,6 @@
 ﻿---
 title: "NEP-2020: University-Level Sensitization and Awareness Programme"
+document_year: "2020"
 url: "https://www.daiict.ac.in/events/6982"
 category: "Events"
 scraped_by: "Dhruvam"

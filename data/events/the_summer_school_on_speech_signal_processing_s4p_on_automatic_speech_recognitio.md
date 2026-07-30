@@ -1,5 +1,6 @@
 ﻿---
 title: "The Summer School on Speech Signal Processing (S4P) on Automatic Speech Recognition at DA-…"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6372"
 category: "Events"
 scraped_by: "Dhruvam"

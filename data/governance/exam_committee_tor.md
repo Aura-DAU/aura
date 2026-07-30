@@ -1,5 +1,6 @@
 ﻿---
 title: "Examination Department & Committee — Terms of Reference"
+document_year: "2024-25"
 category: "Governance"
 source: "examination_department.md (scraped 2026-06-01) + Committees_T&R_2024-25_updated.pdf"
 authored_by: "AURA KB Team"

@@ -1,5 +1,6 @@
 ---
 title: "People / Parents"
+document_year: "2026"
 url: "https://www.daiict.ac.in/parents"
 category: "Student_services"
 scraped_by: "Meet Virugama"

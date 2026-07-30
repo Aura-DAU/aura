@@ -1,5 +1,6 @@
 ---
 title: "Manish Chaturvedi"
+document_year: "2025"
 url: "https://www.daiict.ac.in/faculty/manish-chaturvedi"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ---
 title: "Gopinath Panda"
+document_year: "2022"
 url: "https://www.daiict.ac.in/faculty/gopinath-panda"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

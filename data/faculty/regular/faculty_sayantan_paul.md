@@ -1,5 +1,6 @@
 ---
 title: "Sayantan Paul"
+document_year: "2017"
 url: "https://www.daiict.ac.in/faculty/sayantan-paul"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

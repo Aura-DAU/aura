@@ -1,5 +1,6 @@
 ---
 title: "Rahul Muthu"
+document_year: "2008"
 url: "https://www.daiict.ac.in/faculty/rahul-muthu"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

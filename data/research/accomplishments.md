@@ -1,5 +1,6 @@
 ---
 title: "Accomplishments"
+document_year: "2025"
 url: "https://www.daiict.ac.in/accomplishments"
 category: "Research"
 scraped_by: "Khushi Gandhi"

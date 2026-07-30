@@ -1,5 +1,6 @@
 ---
 title: "CEP/List of workshops held under CEP pdf"
+document_year: "2018-19"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/List-of-Completed-Programs-under-the_Continuing-Education-Program_at_DAU_DA-IICT.pdf"
 category: "administration"
 scraped_by: "Om Patel"

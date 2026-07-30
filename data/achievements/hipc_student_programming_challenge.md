@@ -1,5 +1,6 @@
 ---
 title: "HiPC Student Programming Challenge"
+document_year: "2016"
 url: "https://www.daiict.ac.in/achievements/1053"
 category: "Achievements"
 scraped_by: "Dhruvam"

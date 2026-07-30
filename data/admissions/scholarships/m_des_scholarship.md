@@ -1,5 +1,6 @@
 ---
 title: "M.Des. Scholarship"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/mdes-scholarship"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

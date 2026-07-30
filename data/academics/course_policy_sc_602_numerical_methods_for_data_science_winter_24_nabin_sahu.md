@@ -1,5 +1,6 @@
 ---
 title: "SC 602 Numerical Methods for Data Science Winter 24 - Nabin Sahu"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/SC%20602_%20Numerical%20Methods%20for%20Data%20Science_Winter%2024%20-%20Nabin%20Sahu.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

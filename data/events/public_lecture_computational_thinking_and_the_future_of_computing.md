@@ -1,5 +1,6 @@
 ﻿---
 title: "PUBLIC LECTURE - Computational Thinking ... and the future of computing"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6679"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ﻿---
 title: "One-Day Workshop on Exploring Differential Equations through MATLAB: Applications and Insi…"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6562"
 category: "Events"
 scraped_by: "Dhruvam"

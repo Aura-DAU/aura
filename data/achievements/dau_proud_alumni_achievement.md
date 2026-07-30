@@ -1,5 +1,6 @@
 ---
 title: "DAU Proud Alumni Achievement"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6780"
 category: "Announcements"
 scraped_by: "Vedant Shah"

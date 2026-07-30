@@ -1,5 +1,6 @@
 ---
 title: "B. Tech DAFS Merit Scholarships at DA-IICT"
+document_year: "2019-20"
 url: "https://www.daiict.ac.in/b-tech-dafs-merit-scholarships-da-iict"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

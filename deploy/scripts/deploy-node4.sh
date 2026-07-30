@@ -54,6 +54,11 @@ aura_use_node_ssh_user 4
 aura_require_host "${AURA_NODE4_HOST:-}" "AURA_NODE4_HOST"
 
 echo "==> Node 4 deploy → ${AURA_SSH_USER}@${AURA_NODE4_HOST}:${AURA_REMOTE_APP_ROOT}"
+if ! aura_check_ssh "${AURA_NODE4_HOST}"; then
+  echo "==> [WARNING] Node 4 (${AURA_SSH_USER}@${AURA_NODE4_HOST}) is not reachable via SSH."
+  echo "==> Skipping Node 4 deploy step without breaking the build pipeline."
+  exit 0
+fi
 aura_rsync "${AURA_NODE4_HOST}"
 
 if [[ "${SYNC_ONLY}" == "1" ]]; then

@@ -1,5 +1,6 @@
 ﻿---
 title: "Convocation/18th"
+document_year: "2024"
 url: "https://www.daiict.ac.in/da-iict-18th-convocation"
 category: "Events"
 scraped_by: "Dhruvam"

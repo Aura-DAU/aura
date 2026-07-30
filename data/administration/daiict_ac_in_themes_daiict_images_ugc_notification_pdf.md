@@ -1,5 +1,6 @@
 ---
 title: "UGC letter of notification"
+document_year: "2004"
 url: "https://daiict.ac.in/themes/daiict/images/UGC-Notification.pdf"
 category: "administration"
 scraped_by: "Om Patel"

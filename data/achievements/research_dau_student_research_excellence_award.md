@@ -1,5 +1,6 @@
 ---
 title: "Research / DAU Student Research Excellence Award"
+document_year: "2025"
 url: "https://www.daiict.ac.in/dau-student-research-excellence-award"
 category: "Achievements"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ---
 title: "Rajib Lochan Das"
+document_year: "2000"
 url: "https://www.daiict.ac.in/faculty/rajib-lochan-das"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

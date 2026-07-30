@@ -1,5 +1,6 @@
 ---
 title: "Policies/PhD Student Travel and Research Allowance Policy"
+document_year: "2026"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-PhD-Students-Travel-and-Research-Development-Allowance.pdf"
 category: "policies"
 scraped_by: "Om Patel"

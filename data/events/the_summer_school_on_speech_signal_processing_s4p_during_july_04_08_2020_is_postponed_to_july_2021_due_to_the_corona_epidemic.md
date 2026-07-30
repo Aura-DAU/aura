@@ -1,5 +1,6 @@
 ---
 title: "The Summer School on Speech Signal Processing (S4P) during July 04-08, 2020 is postponed to July 2021 due to the Corona epidemic."
+document_year: "2020"
 url: "https://www.daiict.ac.in/news/417"
 category: "Announcements"
 scraped_by: "Vedant Shah"

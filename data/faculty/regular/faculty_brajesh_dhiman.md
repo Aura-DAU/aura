@@ -1,5 +1,6 @@
 ---
 title: "Brajesh Dhiman"
+document_year: "2025"
 url: "https://www.daiict.ac.in/faculty/brajesh-dhiman"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

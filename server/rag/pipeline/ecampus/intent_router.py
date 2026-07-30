@@ -1,7 +1,6 @@
-# Classifies whether a query needs the eCampus tool/orchestrator path (live
-# person-specific data or public KB tools) or should continue through the
-# existing general RAG flow in aura_chat / aura_chat_graph.
-# Same pattern as QueryGuardrail.
+# Classifies whether a query needs the eCampus tool/orchestrator path (live,
+# person-specific data) or should continue through the existing general-
+# same pattern as QueryGuardrail.
 
 import os
 from dotenv import load_dotenv
@@ -14,7 +13,7 @@ class PersonalDataIntentRouter:
         self.client = InferenceRouter.get_client()
         self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
         self.system_prompt = """
-Classify the user's query as PERSONAL_DATA, COMMUNITY, or GENERAL.
+Classify the user's query as PERSONAL_DATA or GENERAL.
 
 PERSONAL_DATA: the user is asking about their own (or, if they are faculty,
 a specific named student's) CGPA, grades, attendance, fee dues, hostel
@@ -24,44 +23,23 @@ unlink, or check the status of an eCampus account; requests to share or
 revoke sharing of academic data with a faculty member; requests to refresh
 cached personal data; and requests to change, add, remove, or undo a change
 to their OWN timetable (e.g. "move my 5pm class to Room 204", "add a lab on
-Friday", "undo that timetable change I made yesterday"). Personal scholarship
-eligibility screening ("am I eligible for X scholarship given my CGPA") is
-PERSONAL_DATA.
+Friday", "undo that timetable change I made yesterday").
 
-COMMUNITY: public campus KB tool lookups — NOT private ERP records. Includes:
-- Student clubs / SBG (list clubs, purpose, how to join, published rosters,
-  convenor / office-bearers / club email) and campus event club-registration
-  guidance.
-- Faculty/institutional governance committee ToR.
-- Faculty / staff / people directory: "who is X", bare name, faculty profile,
-  search people by department/role.
-- Academic calendar / deadlines, course policy for a named course, program
-  academic requirements, admissions info, published public timetable docs.
-- University / administration policies (attendance rules, fees policy,
-  anti-ragging, hostel allotment rules — the RULE, not the user's own dues).
-- Research areas/labs/policies, placements/careers info, campus events and
-  notices, facilities/infrastructure, student services, alumni, achievements,
-  Continuing Education (CEP).
-Examples: "what clubs for music", "who is the convenor of Programming Club",
-"Who is Aditya Tatu?", "Aditya Tatu", "when is mid-sem", "BTech ICT admissions",
-"placement statistics", "hostel facilities", "anti-ragging policy".
+GENERAL: anything about public university information — policies (including
+the attendance policy's percentage threshold as a general rule, not the
+user's own attendance number), faculty bios, admissions, events, campus
+facilities, course catalogs, club info, placement statistics in aggregate,
+scholarship eligibility RULES (not "am I eligible"), and any greeting or
+meta question about AURA itself.
 
-GENERAL: greetings, thanks, meta questions about AURA itself, short follow-ups
-with no topic of their own, and queries too vague to map to a campus tool
-(prefer RAG). Do NOT put faculty who-is / campus directory / clubs /
-calendar / admissions / placements / facilities questions here — those are
-COMMUNITY.
+If genuinely ambiguous, prefer GENERAL — the existing RAG pipeline is safer
+to fall back to than the tool-calling path, since the personal-data tools
+have to actively check eligibility/consent if invoked at all.
 
-If genuinely ambiguous between COMMUNITY and GENERAL, prefer COMMUNITY when
-any campus KB domain above is involved. Prefer GENERAL over PERSONAL_DATA
-when unsure — the personal-data tools must check eligibility/consent if
-invoked at all.
-
-Return exactly one word: PERSONAL_DATA, COMMUNITY, or GENERAL.
+Return exactly one word: PERSONAL_DATA or GENERAL.
 """
 
-    def classify(self, query: str) -> str:
-        """Return PERSONAL_DATA | COMMUNITY | GENERAL. Fail toward GENERAL."""
+    def is_personal_data_query(self, query: str) -> bool:
         try:
             resp = self.client.chat.completions.create(
                 model=self.model,
@@ -69,22 +47,11 @@ Return exactly one word: PERSONAL_DATA, COMMUNITY, or GENERAL.
                     {"role": "system", "content": self.system_prompt.strip()},
                     {"role": "user", "content": query},
                 ],
-                max_tokens=8,
+                max_tokens=5,
                 temperature=0.0,
             )
-            raw = (resp.choices[0].message.content or "").strip().upper()
-            if "PERSONAL_DATA" in raw or "PERSONAL DATA" in raw:
-                return "PERSONAL_DATA"
-            # PUBLIC_KB is an accepted synonym for the community/public-KB path.
-            if "COMMUNITY" in raw or "PUBLIC_KB" in raw or "PUBLIC KB" in raw:
-                return "COMMUNITY"
-            return "GENERAL"
+            return "PERSONAL_DATA" in (resp.choices[0].message.content or "").strip().upper()
         except Exception:
-            # Fail toward GENERAL/RAG, never silently fail toward a tool path.
-            return "GENERAL"
-
-    def is_personal_data_query(self, query: str) -> bool:
-        return self.classify(query) == "PERSONAL_DATA"
-
-    def is_community_query(self, query: str) -> bool:
-        return self.classify(query) == "COMMUNITY"
+            # Fail toward GENERAL/RAG, never silently fail toward the
+            # personal-data path on an error.
+            return False

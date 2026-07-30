@@ -5,12 +5,8 @@ from pathlib import Path
 from parser import extract_frontmatter
 from section_extracter import extract_sections
 from chunker import split_section
-from metadata_extractors import (
-    extract_academic_applicability,
-    extract_event_metadata,
-    extract_program_name,
-    extract_section_type,
-)
+from metadata_extractors import extract_event_metadata, extract_program_name, extract_section_type
+from year_extraction import extract_academic_or_calendar_year
 
 
 def extract_curriculum_chunks(body, metadata, file_path):
@@ -336,8 +332,6 @@ def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end
     for phrase in lines_to_search:
         for idx in range(search_range_start, search_range_end):
             file_line = file_lines[idx].strip()
-            if not file_line:
-                continue
             if phrase in file_line or file_line in phrase:
                 if first_match is None or idx < first_match:
                     first_match = idx
@@ -351,6 +345,7 @@ def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end
         return first_match + 1, first_match + 1
     
     return section_start, section_end or len(file_lines)
+
 
 
 def process_markdown_file(file_path):
@@ -370,57 +365,61 @@ def process_markdown_file(file_path):
         parts[data_index + 2:-1]
     )
 
-    import datetime
-
     with open(file_path, "r", encoding="utf-8") as f:
         raw_content = f.read()
 
     file_lines = raw_content.replace("\r\n", "\n").split("\n")
 
     metadata, body = extract_frontmatter(raw_content)
-    academic_applicability = extract_academic_applicability(metadata, file_path, body)
 
     # 1. Calculate frontmatter offset (1-indexed start of body)
     content_clean = raw_content.lstrip("\ufeff").replace("\r\n", "\n")
     match = re.match(r"^---\n(.*?)\n---\n", content_clean, re.DOTALL)
     frontmatter_offset = match.group(0).count('\n') if match else 0
 
-    # 2. Extract document_year
+    # 2. Extract document_year with proper precedence:
+    # Frontmatter document_year/year/tenure/semester -> Title/original_name ->
+    # Filename -> Path -> Body.
+    #
+    # Bug fix: scraped_date and "current date" were previously used as final
+    # fallbacks here. scraped_date is when Squad D's scraper touched the page,
+    # not the year the policy/content applies to — a 2021-22 admission-rules
+    # PDF scraped in July 2026 has nothing to do with 2026, and stamping it
+    # with document_year=2026 makes it look like the newest, most authoritative
+    # version in every recency-based tie-break (reranker year-match boost,
+    # AnswerGenerator's SELECT step) even though it's actually old. Likewise,
+    # falling back to today's date for genuinely year-agnostic pages (campus
+    # facilities, contact info, general policies with no version) invents a
+    # "year" that doesn't exist for that content. Both fallbacks are removed:
+    # if no real year signal exists anywhere, document_year stays None, and
+    # downstream code (rule_year XML attribute, reranker recency boost) is
+    # already null-safe for that.
     document_year = None
     if metadata.get("document_year") is not None:
-        try:
-            document_year = int(metadata.get("document_year"))
-        except (ValueError, TypeError):
-            document_year = str(metadata.get("document_year"))
+        document_year = extract_academic_or_calendar_year(metadata.get("document_year"))
     elif metadata.get("year") is not None:
-        try:
-            document_year = int(metadata.get("year"))
-        except (ValueError, TypeError):
-            document_year = str(metadata.get("year"))
-    elif metadata.get("scraped_date") is not None:
-        scraped_date_str = str(metadata.get("scraped_date"))
-        year_match = re.search(r"\b(20\d{2})\b", scraped_date_str)
-        if year_match:
-            document_year = int(year_match.group(1))
+        document_year = extract_academic_or_calendar_year(metadata.get("year"))
+    elif metadata.get("tenure") is not None:
+        document_year = extract_academic_or_calendar_year(metadata.get("tenure"))
+    elif metadata.get("semester") is not None:
+        document_year = extract_academic_or_calendar_year(metadata.get("semester"))
 
     if document_year is None:
-        year_match = re.search(r"\b(20\d{2})\b", file_path.name)
-        if year_match:
-            document_year = int(year_match.group(1))
+        title_val = metadata.get("title") or metadata.get("original_name")
+        if title_val:
+            document_year = extract_academic_or_calendar_year(title_val)
+
+    if document_year is None:
+        document_year = extract_academic_or_calendar_year(file_path.name)
 
     if document_year is None:
         for part in file_path.parts:
-            year_match = re.search(r"\b(20\d{2})\b", part)
-            if year_match:
-                document_year = int(year_match.group(1))
+            document_year = extract_academic_or_calendar_year(part)
+            if document_year is not None:
                 break
 
     if document_year is None:
-        year_match = re.search(r"\b(20\d{2})\b", body[:1000])
-        if year_match:
-            document_year = int(year_match.group(1))
-        else:
-            document_year = datetime.date.today().year
+        document_year = extract_academic_or_calendar_year(body[:1000])
 
     authorization = metadata.get("authorization") or metadata.get("authorisation") or ["public"]
     if isinstance(authorization, str):
@@ -545,7 +544,6 @@ def process_markdown_file(file_path):
                 "end_line": end_line,
                 "document_year": document_year
             }
-            chunk_record.update(academic_applicability)
 
             if section_faculty:
                 chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
@@ -610,7 +608,6 @@ def process_markdown_file(file_path):
             "end_line": end_line,
             "document_year": document_year
         }
-        chunk_record.update(academic_applicability)
 
         if program_name or fm_program_name:
             chunk_record["program_name"] = program_name or fm_program_name

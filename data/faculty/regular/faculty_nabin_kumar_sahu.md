@@ -1,5 +1,6 @@
 ---
 title: "Nabin Kumar Sahu"
+document_year: "2014"
 url: "https://www.daiict.ac.in/faculty/nabin-kumar-sahu"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

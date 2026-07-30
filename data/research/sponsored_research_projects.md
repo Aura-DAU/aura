@@ -1,5 +1,6 @@
 ---
 title: "Sponsored Research Projects"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sponsored-projects"
 category: "Research"
 scraped_by: "Khushi Gandhi"

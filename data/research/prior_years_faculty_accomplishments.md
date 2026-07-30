@@ -1,5 +1,6 @@
 ---
 title: "Prior Years (Faculty Accomplishments)"
+document_year: "2019"
 url: "https://www.daiict.ac.in/prior-years-faculty-accomplishments"
 category: "Research"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ---
 title: "Sudip Bera"
+document_year: "2023"
 url: "https://www.daiict.ac.in/faculty/sudip-bera"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

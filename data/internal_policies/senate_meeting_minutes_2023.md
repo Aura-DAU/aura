@@ -1,5 +1,6 @@
 ---
 title: "Senate Meeting Minutes 2023"
+document_year: "2023"
 category: "Internal Policy"
 authorization:
   - "dean_academic"

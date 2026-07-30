@@ -1,5 +1,6 @@
 ---
 title: "Anish Mathuria"
+document_year: "2005"
 url: "https://www.daiict.ac.in/faculty/anish-mathuria"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

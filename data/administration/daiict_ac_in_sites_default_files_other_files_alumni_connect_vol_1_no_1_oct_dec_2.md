@@ -1,5 +1,6 @@
 ---
 title: "People / Alumini / Alumini Newsletter Vol1 No1"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf"
 category: "administration"
 scraped_by: "Om Patel"

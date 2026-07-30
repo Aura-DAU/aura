@@ -1,5 +1,6 @@
 ---
 title: "Dhirubhai Ambani University hosted the Faculty and Staff Sports Event"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6645"
 category: "Announcements"
 scraped_by: "Vedant Shah"

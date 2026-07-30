@@ -1,5 +1,6 @@
 ﻿---
 title: "Two-day workshop on Design Thinking for Innovation and Entrepreneurship"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/6971"
 category: "Events"
 scraped_by: "Dhruvam"

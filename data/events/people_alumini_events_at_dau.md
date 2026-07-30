@@ -1,5 +1,6 @@
 ﻿---
 title: "People / Alumini / Events at DAU"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events"
 category: "Events"
 scraped_by: "Dhruvam"

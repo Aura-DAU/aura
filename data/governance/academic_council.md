@@ -1,5 +1,6 @@
 ﻿---
 title: "Academic Council — DA-IICT / DAU"
+document_year: "2024-25"
 url: "https://daiict.ac.in/academic-council"
 category: "Governance"
 source: "academic_council.md (scraped 2026-06-01) + Committees_T&R_2024-25_updated.pdf + dean_academic_programs.md"

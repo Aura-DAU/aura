@@ -1,5 +1,6 @@
 ---
 title: "Subhasish Basak"
+document_year: "2019"
 url: "https://www.daiict.ac.in/faculty/subhasish-basak"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

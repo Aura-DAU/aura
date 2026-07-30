@@ -1,5 +1,6 @@
 ---
 title: "E-Cell, IIT Kharagpur and DCEI Fuel Gujarat's Startup Culture with Entrepreneurship Awareness Drive 2025"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6906"
 category: "Announcements"
 scraped_by: "Vedant Shah"

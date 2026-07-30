@@ -1,5 +1,6 @@
 ---
 title: "Shaping the Future of Power: DAU Hosts Panel on Technology Adoption in the Power Sector"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6947"
 category: "Announcements"
 scraped_by: "Vedant Shah"

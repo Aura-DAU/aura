@@ -1,5 +1,6 @@
 ---
 title: "Faculty Research Publication Incentive"
+document_year: "2026"
 url: "https://www.daiict.ac.in/faculty-research-publication-incentive"
 category: "Research"
 scraped_by: "Khushi Gandhi"

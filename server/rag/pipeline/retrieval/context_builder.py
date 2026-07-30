@@ -77,10 +77,52 @@ class ContextBuilder:
             # Fix CB5: moved `import re` to the top of the file (was imported
             # inside this loop on every chunk iteration, which is unnecessary).
             title_str = metadata.get("title", "")
-            doc_rule_year = metadata.get("document_year", "")
+            doc_rule_year = metadata.get("rule_year") or metadata.get("document_year", "")
+            if doc_rule_year:
+                doc_rule_year = str(doc_rule_year)
+            if not doc_rule_year or not re.search(r"\d", doc_rule_year):
+                search_targets = [
+                    title_str,
+                    metadata.get("h1", ""),
+                    metadata.get("relative_path", "")
+                ]
+                for target in search_targets:
+                    if not target:
+                        continue
+                    m4 = re.search(r"(?<!\d)(20\d{2})[\s\-_\u2013](\d{2}|\d{4})(?!\d)", target)
+                    if m4:
+                        y1_int = int(m4.group(1))
+                        y2_int = int(m4.group(2)[-2:])
+                        if y2_int == (y1_int + 1) % 100:
+                            doc_rule_year = f"{y1_int}-{y2_int:02d}"
+                            break
+                    m2 = re.search(r"(?<!\d)(2\d)[\s\-_\u2013](\d{2})(?!\d)", target)
+                    if m2:
+                        y1 = int(m2.group(1))
+                        y2 = int(m2.group(2))
+                        if 20 <= y1 <= 35 and y2 == (y1 + 1) % 100:
+                            doc_rule_year = f"20{y1:02d}-{y2:02d}"
+                            break
+                    # Bug fix: bare season/term + 2-digit year with no range
+                    # given (e.g. "Winter25", "Autumn 2025") previously fell
+                    # through this whole chain. Same convention as ingestion:
+                    # Winter NN and Autumn NN both belong to academic year
+                    # NN-(NN+1).
+                    m3 = re.search(
+                        r"(?i)\b(?:autumn|winter|monsoon|spring|summer)[\s_-]?(?:20)?(\d{2})\b(?![\s_-]?\d)",
+                        target,
+                    )
+                    if m3:
+                        y1 = int(m3.group(1))
+                        if 20 <= y1 <= 35:
+                            doc_rule_year = f"20{y1:02d}-{(y1 + 1) % 100:02d}"
+                            break
+                    m1 = re.search(r"(?<!\d)(20\d{2})(?!\d)", target)
+                    if m1:
+                        doc_rule_year = m1.group(1)
+                        break
             if not doc_rule_year:
-                year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
-                doc_rule_year = year_match.group(1) if year_match else ""
+                doc_rule_year = ""
 
             start_line_val = metadata.get("start_line", "")
             end_line_val = metadata.get("end_line", "")
@@ -133,6 +175,26 @@ scraped_date="{metadata.get('scraped_date', '')}"
                         "end_line": end_line_val or None,
                         "cluster": metadata.get("cluster")
                     })
+                else:
+                    # Bug fix: a second chunk from the same document (dedup
+                    # collapses it onto the existing source card) was
+                    # previously invisible to the card's start_line/end_line —
+                    # they stayed frozen on whichever chunk was seen first,
+                    # even if THIS chunk is the one the model actually cites
+                    # its answer from. Widen the line range to cover every
+                    # chunk that maps to this source instead.
+                    existing = sources[seen_urls[dedup_key]]
+                    try:
+                        if start_line_val and existing.get("start_line"):
+                            existing["start_line"] = min(int(existing["start_line"]), int(start_line_val))
+                        elif start_line_val and not existing.get("start_line"):
+                            existing["start_line"] = start_line_val
+                        if end_line_val and existing.get("end_line"):
+                            existing["end_line"] = max(int(existing["end_line"]), int(end_line_val))
+                        elif end_line_val and not existing.get("end_line"):
+                            existing["end_line"] = end_line_val
+                    except (TypeError, ValueError):
+                        pass
 
                 citation_map[idx] = seen_urls[dedup_key]
 

@@ -1,5 +1,6 @@
 ---
 title: "DA MUN 3.0 - Model United Nations Conference at DAU"
+document_year: "2026"
 url: "https://www.daiict.ac.in/"
 category: "Events"
 scraped_by: "madhav thesiya"

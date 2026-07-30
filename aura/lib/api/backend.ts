@@ -20,8 +20,6 @@ export interface BackendChatRequest {
   question: string
   history?: BackendHistoryTurn[]
   studentProfile?: BackendStudentProfile
-  /** Client-owned rolling conversation memory (see lib/chat-types ChatThread.summary). */
-  summary?: string
 }
 
 export interface BackendChatResponse {

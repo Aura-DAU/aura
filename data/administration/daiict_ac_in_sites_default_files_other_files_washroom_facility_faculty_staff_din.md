@@ -1,5 +1,6 @@
 ---
 title: "Tenders/EE2526006 tender pdf"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Washroom-facility-Faculty-Staff-Dining-Hall_Creche_Admin-Store-TandC_26-09-25.pdf"
 category: "administration"
 scraped_by: "Om Patel"

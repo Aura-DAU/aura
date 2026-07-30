@@ -1,5 +1,6 @@
 ---
 title: "Registration Notice Summer 2025 26"
+document_year: "2025-26"
 url: "https://intranet.daiict.ac.in/academics/Registration Notice Summer 2025-26.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

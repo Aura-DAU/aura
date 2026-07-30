@@ -1,5 +1,6 @@
 ---
 title: "Arpita Mal"
+document_year: "2023"
 url: "https://www.daiict.ac.in/faculty/arpita-mal"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

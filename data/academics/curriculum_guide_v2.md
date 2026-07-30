@@ -1,5 +1,6 @@
 ---
 title: "Curriculum Guide"
+document_year: "2016"
 url: "https://daiict.ac.in/"
 category: "Academics"
 scraped_by: "Meet Virugama"

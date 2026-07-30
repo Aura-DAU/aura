@@ -1,5 +1,6 @@
 ﻿---
 title: "Winter School on AI-Infused Software Engineering Research and Practice (AISE), 7-10 Januar…"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/6858"
 category: "Events"
 scraped_by: "Dhruvam"

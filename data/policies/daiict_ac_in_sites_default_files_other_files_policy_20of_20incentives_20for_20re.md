@@ -1,5 +1,6 @@
 ---
 title: "Policies/Policy of Incentives for Research"
+document_year: "2001"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy%20of%20Incentives%20for%20Research.pdf"
 category: "policies"
 scraped_by: "Om Patel"

@@ -1,5 +1,6 @@
 ---
 title: "People / Alumini"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/alumni"
 category: "Student_services"
 scraped_by: "Meet Virugama"

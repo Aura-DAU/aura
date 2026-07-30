@@ -1,5 +1,6 @@
 ---
 title: "Policies/DAU Student Research Excellence Award"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy_Student-Research-Excellence-VER_1.pdf"
 category: "policies"
 scraped_by: "Om Patel"

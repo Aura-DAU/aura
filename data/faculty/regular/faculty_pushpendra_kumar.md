@@ -1,5 +1,6 @@
 ---
 title: "Pushpendra Kumar"
+document_year: "2023"
 url: "https://www.daiict.ac.in/faculty/pushpendra-kumar"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

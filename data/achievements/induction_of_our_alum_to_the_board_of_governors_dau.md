@@ -1,5 +1,6 @@
 ---
 title: "Induction of our alum to the Board of Governors, DAU"
+document_year: "2001"
 url: "https://www.daiict.ac.in/news/6681"
 category: "Announcements"
 scraped_by: "Vedant Shah"

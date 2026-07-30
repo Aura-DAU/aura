@@ -1,5 +1,6 @@
 ---
 title: "B.Tech. - FAQ"
+document_year: "2026"
 url: "https://www.daiict.ac.in/btech-faq"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

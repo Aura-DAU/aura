@@ -1,5 +1,6 @@
 ﻿---
 title: "Events"
+document_year: "2026"
 url: "https://daiict.ac.in/events"
 category: "Student Services"
 scraped_by: "Madhav Thesiya"

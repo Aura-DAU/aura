@@ -1,5 +1,6 @@
 ---
 title: "Event Reports November 25 to May 26"
+document_year: "2025"
 url: "#"
 category: "SBG & Clubs - Events"
 scraped_by: "Madhav Thesiya"

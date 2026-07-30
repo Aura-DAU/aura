@@ -1,5 +1,6 @@
 ---
 title: "SBG General Meet February 2026"
+document_year: "2026"
 url: "#"
 category: "SBG & Clubs - General Meets"
 scraped_by: "Madhav Thesiya"

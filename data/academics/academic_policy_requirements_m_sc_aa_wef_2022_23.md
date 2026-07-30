@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements M Sc (AA) wef 2022-23"
+document_year: "2022-23"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Academic%20Requirements_M%20Sc%20(AA)_wef%202022-23.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

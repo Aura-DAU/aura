@@ -13,8 +13,6 @@ interface MessageListProps {
   thinkingStep?: string
   activeCitations: Citation[]
   onRegenerate: () => void
-  /** True when this thread was auto-forked from a full one — shows a divider. */
-  continuation?: boolean
 }
 
 export function MessageList({
@@ -23,7 +21,6 @@ export function MessageList({
   thinkingStep,
   activeCitations,
   onRegenerate,
-  continuation = false,
 }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -63,13 +60,6 @@ export function MessageList({
   return (
     <div ref={containerRef} className="relative mx-auto w-full max-w-3xl 2xl:max-w-5xl px-4 py-6 md:py-8" aria-live="polite" aria-atomic="false">
       <div className="space-y-8">
-        {continuation ? (
-          <div className="flex items-center gap-3 text-xs text-neutral-500">
-            <span className="h-px flex-1 bg-theme-gray-light" />
-            <span className="whitespace-nowrap">Continued from a previous conversation</span>
-            <span className="h-px flex-1 bg-theme-gray-light" />
-          </div>
-        ) : null}
         {messages.map((message, index) => {
           const isStreaming =
             loading && index === lastAssistantIndex && message.role === "assistant"

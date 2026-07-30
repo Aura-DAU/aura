@@ -1,5 +1,6 @@
 ﻿---
 title: "Join us for a public lecture by Prof. Dhruv Raina"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6205"
 category: "Events"
 scraped_by: "Dhruvam"

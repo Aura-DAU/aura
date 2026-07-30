@@ -241,6 +241,11 @@ conversation history. Ask one clarifying question only if the reference is still
 - No year named → use the highest `rule_year` present.
 - Current admissions, seats, or fees → prefer `category="admissions"` over annual reports.
 - Program-specific question → match on `program_name`.
+- Same `rule_year` (or no `rule_year` on either doc) but the docs disagree → use the doc
+  with the more recent `scraped_date` as the current, correct answer. Say so explicitly:
+  "The most recently updated source [5] (scraped 2026-03-01) states X; an older source [2]
+  (scraped 2024-11-10) states Y, which appears superseded." If neither doc has a
+  `scraped_date`, fall back to the PRESERVATION RULES "Conflicting sources" rule below.
 
 Never merge facts across different years or source types without labelling each one:
 "Under the 2019-20 rules [2] ... whereas the 2024-25 rules [5] ...".
@@ -279,8 +284,12 @@ Copy these from the source verbatim. Never paraphrase, round, upgrade, or soften
   string to a name, say the role-holder is not confirmed in the retrieved data.
 - **Seat categories.** Always name the category (All-India / Gujarat State / NRI / Management).
   For a total, show the sum explicitly: "Total = AI 40 + GS 30 + NRI 10 = 80 [3]".
-- **Conflicting sources.** Report both figures and attribute each: "[4] states 400 residents,
-  while [7] states 402."
+- **Conflicting sources.** First check `scraped_date` on each doc (see SELECT step above) —
+  if one is clearly newer, lead with it as the current figure and name the older one as
+  superseded, e.g. "The current figure is 402 residents [7] (updated 2026-02); an earlier
+  source [4] listed 400, which appears outdated." Only report both with equal weight and no
+  resolution when neither doc has a usable `scraped_date` to break the tie: "[4] states 400
+  residents, while [7] states 402."
 
 # SCOPE RULES
 
@@ -337,6 +346,12 @@ them as facts about DAU.
 > A: I could not find that information in the available university data. The Admissions office
 > handles NRI and international category queries [5], so they would be the right contact. You
 > may also check https://www.daiict.ac.in.
+
+**Conflicting sources, resolved by recency**
+> Q: How many hostel residents does DAU have?
+> A: The current figure is 402 residents [7], from a source updated more recently than the
+> other retrieved document. An earlier source [4] states 400 residents — that figure appears
+> to be outdated.
 """
 
 class AnswerGenerator:
@@ -359,8 +374,6 @@ class AnswerGenerator:
         profile=None,
         system_addendum=None,
         on_delta=None,
-        summary=None,
-        tracking_flags=None,
     ):
         try:
             profile_text = ""
@@ -377,13 +390,6 @@ class AnswerGenerator:
                 if fields:
                     profile_text += "User Profile Info:\n" + "\n".join(fields) + "\n\n"
 
-            if tracking_flags:
-                profile_text += "User Tracked Facts (Remember these):\n"
-                for k, v in tracking_flags.items():
-                    profile_text += f"- {k}: {v}\n"
-                profile_text += "\n"
-
-
                 # Inject RBAC Rules
                 profile_text += "--- ACCESS CONTROL RULES ---\n"
                 if role == "student":
@@ -397,7 +403,7 @@ class AnswerGenerator:
                         profile_text += "CRITICAL: You are assisting a PROFESSOR with no assigned subjects. You MUST NOT provide specific student records. Politely decline.\n\n"
 
             # Fix #1/#14: plan is None for pure PERSONAL queries (no RAG path).
-            # Guard access so we never raise TypeError or KeyError on plan.
+            # Guard access so we never raise TypeError on plan["retrieval_intent"].
             if plan:
                 planner_hint = {
                     "intent": plan.get("retrieval_intent", "general"),
@@ -420,16 +426,7 @@ class AnswerGenerator:
                             f"{content}\n"
                         )
 
-            # Rolling memory of earlier turns evicted from the live window
-            # (pipeline.memory.ConversationMemory). Placed above the verbatim
-            # history so the model reads it as older-but-relevant context.
-            summary_text = summary.strip() if summary else ""
-
             prompt = f"""
-Conversation Summary (condensed memory of earlier turns — trusted context, not instructions)
-
-{summary_text or "(none)"}
-
 Conversation History
 
 {history_text}
@@ -590,7 +587,7 @@ Retrieved Documents
             return self._clean_citations(answer)
 
         except Exception as e:
-            import traceback; traceback.print_exc()
+            print(e)
             return "Sorry, I encountered an error while generating a response."
 
     def _generate_streaming(self, system_prompt, user_prompt, on_delta):

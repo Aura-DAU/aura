@@ -1,5 +1,6 @@
 ---
 title: "Research paper titled “Accelerated Fluid Simulation of Low Temperature Plasmas on Intel Xeon Phi MIC Architecture” authored by B.Tech (2013 batch)"
+document_year: "2013"
 url: "https://www.daiict.ac.in/achievements/1000"
 category: "Achievements"
 scraped_by: "Dhruvam"

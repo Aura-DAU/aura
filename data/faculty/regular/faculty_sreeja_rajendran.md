@@ -1,5 +1,6 @@
 ---
 title: "Sreeja Rajendran"
+document_year: "2021"
 url: "https://www.daiict.ac.in/faculty/sreeja-rajendran"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

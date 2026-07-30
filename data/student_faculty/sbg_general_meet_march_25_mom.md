@@ -1,5 +1,6 @@
 ---
 title: "SBG General Meet March 25 MoM"
+document_year: "2025-26"
 url: "#"
 category: "SBG & Clubs - General Meets"
 scraped_by: "Madhav Thesiya"

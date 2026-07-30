@@ -1,5 +1,6 @@
 ---
 title: "Undergraduate Programs"
+document_year: "2001"
 url: "https://www.daiict.ac.in/programs-of-study"
 category: "Academics"
 scraped_by: "Khushi Gandhi"

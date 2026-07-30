@@ -1,5 +1,6 @@
 ---
 title: "Policies/Policy on the Sponsored Research Projects"
+document_year: "2024"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-the_Sponsored-Projects-23.5.24.pdf"
 category: "policies"
 scraped_by: "Om Patel"

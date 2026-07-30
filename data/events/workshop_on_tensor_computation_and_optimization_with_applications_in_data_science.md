@@ -1,5 +1,6 @@
 ---
 title: "Workshop on Tensor Computation and Optimization with Applications in Data Science"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6931"
 category: "Announcements"
 scraped_by: "Vedant Shah"

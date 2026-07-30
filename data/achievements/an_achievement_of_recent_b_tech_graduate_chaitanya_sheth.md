@@ -1,5 +1,6 @@
 ---
 title: "An Achievement of recent B.Tech. Graduate Chaitanya Sheth"
+document_year: "2025"
 url: "https://www.daiict.ac.in/achievements/6913"
 category: "Achievements"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ---
 title: "Placement Cell Overview and Policies"
+document_year: "2023-24"
 category: "Placement Cell"
 url: "placement_cell.md"
 scraped_by: "Pushkar"

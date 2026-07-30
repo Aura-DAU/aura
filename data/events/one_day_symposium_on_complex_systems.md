@@ -1,5 +1,6 @@
 ﻿---
 title: "One Day Symposium on Complex Systems"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6533"
 category: "Events"
 scraped_by: "Dhruvam"

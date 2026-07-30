@@ -1,5 +1,6 @@
 ---
 title: "HM333 Human Behavior Management Course Proposal (New 2025)"
+document_year: "2025"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

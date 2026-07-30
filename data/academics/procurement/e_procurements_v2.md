@@ -1,5 +1,6 @@
 ---
 title: "E-Procurements"
+document_year: "2024-25"
 url: "https://www.daiict.ac.in/da-iict-e-procurements"
 category: "Academics"
 scraped_by: "Meet Virugama"

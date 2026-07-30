@@ -1,5 +1,6 @@
 ---
 title: "Tapas Kumar Maiti"
+document_year: "2019"
 url: "https://www.daiict.ac.in/faculty/tapas-kumar-maiti"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

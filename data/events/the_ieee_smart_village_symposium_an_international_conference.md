@@ -1,5 +1,6 @@
 ﻿---
 title: "The IEEE Smart Village Symposium, an international conference"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6532"
 category: "Events"
 scraped_by: "Dhruvam"

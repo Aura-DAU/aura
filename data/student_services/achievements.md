@@ -1,5 +1,6 @@
 ﻿---
 title: "Achievements"
+document_year: "2025"
 url: "https://daiict.ac.in/achievements"
 category: "Achievements"
 scraped_by: "Madhav Thesiya"

@@ -1,5 +1,6 @@
 ---
 title: "Nikita Desai"
+document_year: "2017"
 url: "https://www.daiict.ac.in/adjunct-faculty/nikita-desai"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ---
 title: "CoE certificate (April 2025)"
+document_year: "2025"
 url: "https://daiict.ac.in/sites/default/files/other-files/COE_Notification_28-April-2025.pdf"
 category: "administration"
 scraped_by: "Om Patel"

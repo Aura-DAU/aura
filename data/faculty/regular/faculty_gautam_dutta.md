@@ -1,5 +1,6 @@
 ---
 title: "Gautam Dutta"
+document_year: "2016"
 url: "https://www.daiict.ac.in/faculty/gautam-dutta"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

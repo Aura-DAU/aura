@@ -1,5 +1,6 @@
 ﻿---
 title: "Ajay Tomar"
+document_year: "2005"
 url: "https://www.daiict.ac.in/professor-practice/ajay-tomar"
 category: "Faculty"
 scraped_by: "Madhav Thesiya"

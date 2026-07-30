@@ -1,5 +1,6 @@
 ﻿---
 title: "Teaching Fellows"
+document_year: "2026"
 url: "https://daiict.ac.in/teaching-fellows"
 category: "Faculty"
 scraped_by: "Madhav Thesiya"

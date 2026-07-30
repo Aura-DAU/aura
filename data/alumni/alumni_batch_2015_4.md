@@ -1,5 +1,6 @@
 ---
 title: "DA-IICT Alumni Batch 2015 Part 4"
+document_year: "2015"
 category: "Alumni Batch Index"
 batch_year: "2015"
 scraped_by: "AI Agent"

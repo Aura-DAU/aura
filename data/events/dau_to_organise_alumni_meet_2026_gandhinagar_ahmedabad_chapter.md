@@ -1,5 +1,6 @@
 ﻿---
 title: "DAU to organise Alumni Meet 2026 – Gandhinagar-Ahmedabad Chapter"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/7055"
 category: "Events"
 scraped_by: "Dhruvam"

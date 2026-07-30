@@ -1,5 +1,6 @@
 ---
 title: "Dev-o-lution organized by the Google Developer Groups at the University"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6650"
 category: "Announcements"
 scraped_by: "Vedant Shah"

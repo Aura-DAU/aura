@@ -1,5 +1,6 @@
 ﻿---
 title: "Workshop on Artificial Intelligence and its Applications in VLSI Design and Technology"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6411"
 category: "Events"
 scraped_by: "Dhruvam"

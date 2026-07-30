@@ -1,5 +1,6 @@
 ---
 title: "P M Jat"
+document_year: "2014"
 url: "https://www.daiict.ac.in/faculty/p-m-jat"
 category: "Faculty"
 scraped_by: "Khushi Gandhi"

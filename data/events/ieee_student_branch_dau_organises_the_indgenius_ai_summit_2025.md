@@ -1,5 +1,6 @@
 ---
 title: "IEEE Student Branch, DAU organises the INDGenius AI Summit 2025"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6893"
 category: "Announcements"
 scraped_by: "Vedant Shah"

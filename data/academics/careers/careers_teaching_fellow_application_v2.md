@@ -1,5 +1,6 @@
 ---
 title: "Careers / Teaching Fellow Positions Open at DAU / Application Form Submission Link"
+document_year: "2026-27"
 url: "https://forms.gle/uz2z4RWWtkRJW8ZE6"
 category: "Academics"
 scraped_by: "Meet Virugama"

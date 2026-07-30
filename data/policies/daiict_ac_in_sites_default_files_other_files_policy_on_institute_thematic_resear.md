@@ -1,5 +1,6 @@
 ---
 title: "Policies/Policy on Institute Thematic Research Areas (TRAs)"
+document_year: "2026"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Policy_on_Institute_Thematic_Research_Areas-Apr_2026.pdf"
 category: "policies"
 scraped_by: "Om Patel"

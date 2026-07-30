@@ -1,5 +1,6 @@
 ---
 title: "Scholarships Offered to Students"
+document_year: "2024-25"
 url: "https://www.daiict.ac.in/scholarships-offered-students"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

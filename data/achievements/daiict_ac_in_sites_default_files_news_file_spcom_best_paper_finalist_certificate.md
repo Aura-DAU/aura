@@ -1,5 +1,6 @@
 ---
 title: "sites/default/files/news_files/SPCOM_best_paper_finaist_certificate"
+document_year: "2022"
 url: "https://www.daiict.ac.in/sites/default/files/news_file/SPCOM_best_paper_finalist_certificate.pdf"
 category: "announcements"
 scraped_by: "Om Patel"
