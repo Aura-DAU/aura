@@ -497,6 +497,8 @@ export function useAuraChat() {
         timestamp: Date.now(),
       }
 
+      const baseMessages = [...priorMessages, userMsg]
+
       if (!threadId) {
         threadId = uid()
         const newThread: StoredThread = {
@@ -505,7 +507,6 @@ export function useAuraChat() {
           messages: [userMsg],
           updatedAt: userMsg.timestamp,
         }
-        baseMessages = [...priorMessages, userMsg]
         persistMessages(
           threadId,
           baseMessages,
@@ -655,7 +656,6 @@ export function useAuraChat() {
             summary: carriedSummary,
             summaryTurnCount: 0,
             continuedFromId: threadId,
-            updatedAt: Date.now(),
           }
           setThreads((prev) => sortThreadsByRecency([contThread, ...prev]))
           pendingContinuationRef.current = { fromId: threadId, toId: contId }
