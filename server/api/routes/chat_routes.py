@@ -70,9 +70,17 @@ def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
 
 
 def _summary_for_generation(user_memory: str, thread_summary: str) -> str:
+    from pipeline.memory.conversation_memory import get_conversation_memory, _approx_tokens, _truncate_tokens
+    
+    max_tokens = get_conversation_memory().summary_max_tokens
+    thread_len = _approx_tokens(thread_summary)
+    rem_tokens = max(0, max_tokens - thread_len)
+    
     parts = []
     if user_memory:
-        parts.append("Persistent User Memory\n" + user_memory)
+        user_memory = _truncate_tokens(user_memory, rem_tokens)
+        if user_memory:
+            parts.append("Persistent User Memory\n" + user_memory)
     if thread_summary:
         parts.append("Current Thread Summary\n" + thread_summary)
     return "\n\n".join(parts)

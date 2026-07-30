@@ -96,10 +96,26 @@ class RedisUserMemoryStore:
         key = self._redis_key(identity)
         if key is None:
             return ""
-        existing = self._r.get(key) or ""
-        merged = _merge_memory(existing, thread_summary)
-        self._r.set(key, merged)
-        return merged
+        
+        import redis
+        try:
+            with self._r.pipeline() as pipe:
+                while True:
+                    try:
+                        pipe.watch(key)
+                        existing = pipe.get(key) or ""
+                        merged = _merge_memory(existing, thread_summary)
+                        pipe.multi()
+                        pipe.set(key, merged)
+                        pipe.execute()
+                        return merged
+                    except redis.WatchError:
+                        continue
+        except redis.RedisError:
+            existing = self._r.get(key) or ""
+            merged = _merge_memory(existing, thread_summary)
+            self._r.set(key, merged)
+            return merged
 
 
 def _build_store() -> UserMemoryStore:

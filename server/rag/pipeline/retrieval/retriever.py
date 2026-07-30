@@ -80,12 +80,16 @@ class Retriever:
             except Exception as e:
                 logger.warning("Remote embedding service failed: %s. Falling back to local model.", e)
 
-        query_embedding = self._local_model().encode(
-            [query_text],
-            normalize_embeddings=True,
-            convert_to_numpy=True
-        )
-        return query_embedding[0].tolist()
+        try:
+            query_embedding = self._local_model().encode(
+                [query_text],
+                normalize_embeddings=True,
+                convert_to_numpy=True
+            )
+            return query_embedding[0].tolist()
+        except Exception as e:
+            logger.warning("Local embedding model failed: %s", e)
+            return None
 
     def retrieve(
         self,
@@ -100,7 +104,7 @@ class Retriever:
         # filter: doing so would allow a maintenance flag to bypass scope.
         pinecone_filter = metadata_filter
 
-        query_embedding_list = self.embed_query(query)
+        query_embedding_list = self.embed_query(query) if self.index else None
 
         dense_results = []
         if self.index and query_embedding_list is not None:

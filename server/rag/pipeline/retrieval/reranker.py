@@ -100,6 +100,7 @@ class Reranker:
 
         if cross_scores is None:
             self._ensure_local_model()
+            import torch
             inputs = self.tokenizer(
                 pairs,
                 padding=True,
