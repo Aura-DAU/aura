@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT628_System Programming.pdf"
 course_code: "IT628"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # IT628: Systems Programming

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE410_IntroductionToRobotics_Winter26 - Sujay Kadam.pdf"
 course_code: "IE410"
 semester: "Winter Semester (AY 24-25)"
+authorization: ["student"]
 ---
 
 # IE410: Introduction to Robotics

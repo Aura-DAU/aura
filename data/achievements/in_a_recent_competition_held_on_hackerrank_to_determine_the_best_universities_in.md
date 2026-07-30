@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # In a recent competition held on Hackerrank to determine the best universities in terms of coders, students from DA-IICT gave a great performance.

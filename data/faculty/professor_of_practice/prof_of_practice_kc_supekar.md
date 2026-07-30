@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "K C Supekar"
 url: "https://www.daiict.ac.in/professor-practice/kc-supekar"

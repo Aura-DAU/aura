@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Book talk by Dr. Janaki Srinivasan (IIIT Bangalore) about her recent book, The Political L…"
 url: "https://www.daiict.ac.in/events/6367"

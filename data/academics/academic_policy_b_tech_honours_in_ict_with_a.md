@@ -7,6 +7,7 @@ scraped_date: "2026-06-01"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Minor_RAS_Policy_Document.pdf"
+authorization: ["student"]
 ---
 
 # B.Tech. (Honours) in ICT with a (UNKNOWN)

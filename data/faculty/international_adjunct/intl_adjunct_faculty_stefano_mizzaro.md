@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Stefano Mizzaro"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/stefano-mizzaro"

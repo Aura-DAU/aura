@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC475_Time_Series_Analysis_Winter26 - Mukesh Tiwari.pdf"
 course_code: "SC475"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # SC475: Time Series Analysis

@@ -13,6 +13,7 @@ gap_fixes:
   - "Gap 1 – Mattress provision clarified"
   - "Gap 2 – B.Tech mandatory residency confirmed"
   - "Gap 3 – Internet type per hostel specified"
+authorization: ["public"]
 ---
 
 # Halls of Residence – Dhirubhai Ambani University (DAU)

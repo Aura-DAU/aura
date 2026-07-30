@@ -10,6 +10,7 @@ pdf_name: "MC111- Mathematical, Algorithmic, and Computational Thinking.pdf"
 course_code: "MC111"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # MC111: Mathematical, Algorithmic, and Computational Thinking

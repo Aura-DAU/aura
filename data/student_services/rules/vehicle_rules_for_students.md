@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Vehicle Rules for Students"
 url: "https://daiict.ac.in/sites/default/files/other-files/DA-IICT_Vehicle_Rules_for_Students.pdf"

@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Holiday List 2026"
 url: "https://daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf"

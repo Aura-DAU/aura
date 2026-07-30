@@ -10,6 +10,7 @@ pdf_name: "EL111_Basic Electronic Circuits_Autumn25 - Rajib Das.pdf"
 course_code: "EL111"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # EL111: Basic Electronic Circuits

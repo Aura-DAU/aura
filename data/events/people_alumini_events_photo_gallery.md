@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "People / Alumini / Events Photo Gallery"
 url: "https://www.daiict.ac.in/events-campus"

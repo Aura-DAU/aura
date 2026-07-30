@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DAU to organise the 8th International Conference on Complex Dynamical Systems and Applicat…"
 url: "https://www.daiict.ac.in/events/6864"

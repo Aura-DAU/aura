@@ -11,6 +11,7 @@ course_code: "unknown"
 semester: "Autumn 2025-26"
 pdf_page_start: 112
 pdf_page_end: 112
+authorization: ["student"]
 ---
 
 # Principles of Economics (unknown)

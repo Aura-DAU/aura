@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Appendix - Specialization-wise M Tech (ICT) Course struture from 2024-25.pdf"
+authorization: ["student"]
 ---
 
 # Appendix

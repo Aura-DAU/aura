@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC224_Parallel and Distributed Algorithms - Anuj Tawari.pdf"
 course_code: "MC224"
 semester: "Not stated in source document"
+authorization: ["student"]
 ---
 
 # MC224: Parallel and Distributed Algorithms

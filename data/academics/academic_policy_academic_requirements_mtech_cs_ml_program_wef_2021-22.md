@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Academic Requirements_MTech(CS&ML)_Program_wef 2021-22.pdf"
+authorization: ["student"]
 ---
 
 # Academic Requirements MTech(CS&ML) Program wef 2021 22

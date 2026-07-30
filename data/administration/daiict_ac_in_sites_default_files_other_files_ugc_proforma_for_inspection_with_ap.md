@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "UGC Proforma/Proforma for Inspection by UGC – 2025"
+authorization: ["public"]
 ---
 
 # UGC Proforma/Proforma for Inspection by UGC – 2025

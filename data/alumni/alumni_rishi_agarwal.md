@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Rishi Agarwal" url: "https://alumni.dau.edu.in/alumni_rishi_agarwal.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
 # Rishi Agarwal
 

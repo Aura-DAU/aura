@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Thomas Mandl"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/thomas-mandl"

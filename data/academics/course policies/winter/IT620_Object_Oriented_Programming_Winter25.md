@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT620_ObjectOrientedProgramming_Winter25.docx - Sourish Dasgupta.pdf"
 course_code: "IT620"
 semester: "Winter 2025"
+authorization: ["student"]
 ---
 
 # IT620: Object Oriented Programming

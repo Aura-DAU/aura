@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Anirban Dutta Gupta"
 url: "https://www.daiict.ac.in/professor-practice/anirban-dutta-gupta"

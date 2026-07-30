@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "The IEEE Smart Village Symposium, an international conference"
 url: "https://www.daiict.ac.in/events/6532"

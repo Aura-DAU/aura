@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "DCEI - DA-IICT Centre for Entrepreneurship and Incubation"
 url: "http://ceid.daiict.ac.in/"

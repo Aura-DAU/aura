@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Infrastructure/Lecture Complex"
 url: "https://www.daiict.ac.in/lecture-complex"

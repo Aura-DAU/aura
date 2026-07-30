@@ -10,6 +10,7 @@ pdf_name: "SC107 -  Calculus.pdf"
 course_code: "SC107"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # SC107: Calculus

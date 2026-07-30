@@ -11,6 +11,7 @@ course_code: "HMXXX"
 semester: "Autumn 2025-26"
 pdf_page_start: 302
 pdf_page_end: 304
+authorization: ["student"]
 ---
 
 # Introduction to Speculative Fiction and Films (HMXXX)

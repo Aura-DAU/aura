@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT205_Data_Structures_Winter26 - Arpit Rana.pdf"
 course_code: "IT205"
 semester: "Academic Year 2025-26 (Winter)"
+authorization: ["student"]
 ---
 
 # IT205: Data Structures

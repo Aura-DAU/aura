@@ -17,6 +17,7 @@ gap_fixes:
   - "Q124 – Phase I coaching dates"
   - "Q125 – Phase II coaching dates"
   - "Q126 – Inter-collegiate tournaments"
+authorization: ["public"]
 ---
 
 # Sports Complex – Dhirubhai Ambani University (DAU)

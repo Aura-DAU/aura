@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Student Leave Policy"
 url: "https://daiict.ac.in/sites/default/files/other-files/Student_Leave_Policy_wef_AY2021-22.pdf"

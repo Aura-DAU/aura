@@ -7,6 +7,7 @@ scraped_date: "2026-06-01"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Disciplinary guidelines for students.pdf"
+authorization: ["student"]
 ---
 
 # DA-IICT (UNKNOWN)

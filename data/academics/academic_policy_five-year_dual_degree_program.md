@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Five-Year Dual Degree Program.pdf"
+authorization: ["student"]
 ---
 
 # Five Year Dual Degree Program

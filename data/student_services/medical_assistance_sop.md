@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "SOP - Healthcare Facilities and Medical Emergencies"
 url: "https://daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf"

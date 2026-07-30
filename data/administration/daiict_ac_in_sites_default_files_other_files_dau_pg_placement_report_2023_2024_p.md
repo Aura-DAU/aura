@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Placement / Placement Cell / DAU PG Placement Report(2023-2024)"
+authorization: ["public"]
 ---
 
 # Placement / Placement Cell / DAU PG Placement Report(2023-2024)

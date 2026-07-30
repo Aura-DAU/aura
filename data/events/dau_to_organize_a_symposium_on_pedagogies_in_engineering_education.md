@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DAU to organize a Symposium on Pedagogies in Engineering Education"
 url: "https://www.daiict.ac.in/events/6920"

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "achievements/3444"
 url: "https://www.daiict.ac.in/achievements/3444"

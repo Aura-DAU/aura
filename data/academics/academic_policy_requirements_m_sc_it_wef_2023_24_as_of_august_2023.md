@@ -4,6 +4,7 @@ url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Academic%20Requirement
 category: "Academics"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
+authorization: ["student"]
 ---# Academic Requirements M Sc (IT) wef 2023-24 as of August 2023
 
 **Last Modified:** 2024-11-06

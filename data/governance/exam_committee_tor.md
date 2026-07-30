@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Examination Department & Committee — Terms of Reference"
 category: "Governance"

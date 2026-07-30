@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC752 - Interaction Design.pdf"
 course_code: "PC752"
 semester: "M.Des Semester II"
+authorization: ["student"]
 ---
 
 # PC752: Principles of Interaction Design (Interactive Spaces and New Media)

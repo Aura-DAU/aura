@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Launching of UG Admission Portal of ERP System for DA-IICT"
 url: "https://www.daiict.ac.in/events/5594"

@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "MA613 Earth Observation Systems Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

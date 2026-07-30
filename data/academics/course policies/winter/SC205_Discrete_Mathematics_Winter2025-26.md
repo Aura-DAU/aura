@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC205_DiscreteMathematics_Winter2025_26 - Aditya Tatu.pdf"
 course_code: "SC205"
 semester: "Winter Semester AY 2025-26"
+authorization: ["student"]
 ---
 
 # SC205: Discrete Mathematics

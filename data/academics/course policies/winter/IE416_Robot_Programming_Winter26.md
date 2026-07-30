@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE416_Robot_Programming_Winter26 - Tapas Kumar Maiti.pdf"
 course_code: "IE416"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IE416: Robot Programming

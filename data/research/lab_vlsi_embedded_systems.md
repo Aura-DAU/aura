@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "VLSI & Embedded Systems Research Group"
 category: "Research"

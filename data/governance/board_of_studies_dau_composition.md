@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DAU Board of Studies – Composition and Member Count"
 category: "Governance"

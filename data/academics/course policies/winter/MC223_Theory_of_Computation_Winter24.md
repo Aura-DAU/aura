@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC223_Theory_of_computation_Winter24.pdf - Puneet Bhateja.pdf"
 course_code: "MC223"
 semester: "Winter 2024"
+authorization: ["student"]
 ---
 
 # MC223: Theory of Computation

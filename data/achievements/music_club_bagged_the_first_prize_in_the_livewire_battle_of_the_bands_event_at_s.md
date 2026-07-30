@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Music Club bagged the first prize in the Livewire/Battle of the bands event at Spectrum, NIFT.

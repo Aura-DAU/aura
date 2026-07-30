@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Policies/Vision, Mission and Strategic Plan"
+authorization: ["public"]
 ---
 
 # Policies/Vision, Mission and Strategic Plan

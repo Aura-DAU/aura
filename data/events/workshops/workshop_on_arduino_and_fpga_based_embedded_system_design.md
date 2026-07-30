@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Workshop on Arduino and FPGA Based Embedded System Design"
 url: "https://www.daiict.ac.in/events/6760"

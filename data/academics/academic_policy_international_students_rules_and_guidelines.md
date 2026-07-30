@@ -7,6 +7,7 @@ scraped_date: "2026-06-01"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "International Students_Rules and Guidelines.pdf"
+authorization: ["student"]
 ---
 
 # (DA-IICT) (UNKNOWN)

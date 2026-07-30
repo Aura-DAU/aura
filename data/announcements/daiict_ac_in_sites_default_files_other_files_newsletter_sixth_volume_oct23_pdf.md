@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 title: "DA-IICT Newsletter Jan - Sept 2023 (Curated)"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Newsletter_Sixth_Volume_Oct23.pdf"
 category: "Achievements"

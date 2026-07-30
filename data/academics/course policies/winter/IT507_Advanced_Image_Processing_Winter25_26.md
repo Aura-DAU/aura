@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT507_Advanced Image Processing_Winter26 - Srimanta Mandal.pdf"
 course_code: "IT507"
 semester: "AY 2025-2026 (Winter)"
+authorization: ["student"]
 ---
 
 # IT507: Advanced Image Processing

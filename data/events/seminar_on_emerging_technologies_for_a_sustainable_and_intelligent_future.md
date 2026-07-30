@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Seminar on Emerging Technologies for a Sustainable and Intelligent Future"
 url: "https://www.daiict.ac.in/events/6995"

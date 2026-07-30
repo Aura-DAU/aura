@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "IT586 Trustworthy AI - Theory and Practice Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

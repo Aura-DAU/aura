@@ -11,6 +11,7 @@ course_code: "LM741"
 semester: "Autumn 2025-26"
 pdf_page_start: 92
 pdf_page_end: 92
+authorization: ["student"]
 ---
 
 # Electronic Design Lab (LM741)

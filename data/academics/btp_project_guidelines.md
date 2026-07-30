@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "Squad D"
 authorization: ["student", "faculty"]
 source_file: " BTP Project Guidelines & Related Information.docx"
+authorization: ["student"]
 ---
 
 # B.Tech Project (BTP) Guidelines and Related Information

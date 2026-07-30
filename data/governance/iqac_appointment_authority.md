@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "IQAC Member Appointment Authority – DAU Specific"
 category: "Governance"

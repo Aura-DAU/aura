@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT443_ResamplingTechniquesandBayesianComputation_Winter26 - Subhasish Basak.pdf"
 course_code: "IT443"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT443: Resampling Techniques and Bayesian Computation

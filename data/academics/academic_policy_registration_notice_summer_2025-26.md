@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Registration Notice Summer 2025-26.pdf"
+authorization: ["student"]
 ---
 
 # Registration Notice Summer 2025 26

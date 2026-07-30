@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM469_Approaches to Globalization_Winter25 - Madhumita Mazumdar - Madhumita Mazumdar.pdf"
 course_code: "HM469 (filename); listed as \"HM 467\" in source document body — see Additional Notes"
 semester: "Winter 2025"
+authorization: ["student"]
 ---
 
 # HM469: Approaches to Globalization

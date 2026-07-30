@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Abhijeet Dwivedi" url: "https://alumni.dau.edu.in/alumni_abhijeet_dwivedi.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-07" team: "Alumni Team"
 # Abhijeet Dwivedi
 

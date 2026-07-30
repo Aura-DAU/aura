@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC402 Introduction to Cryptography_Winter 2025-27 - Maniklal Das.pdf"
 course_code: "SC402"
 semester: "Winter 2025-26 (see Additional Notes on filename)"
+authorization: ["student"]
 ---
 
 # SC402: Introduction to Cryptography

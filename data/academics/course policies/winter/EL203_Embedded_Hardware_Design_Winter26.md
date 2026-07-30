@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "EL203_EmbeddedHardwareDesign_Winter26 - Tapas Kumar Maiti.pdf"
 course_code: "EL203"
 semester: "Winter Semester (AY 25-26)"
+authorization: ["student"]
 ---
 
 # EL203: Embedded Hardware Design

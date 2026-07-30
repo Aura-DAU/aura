@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Academic Requirements_Ph D Program_EnggScience_wef 2024-25 as of July 2024.pdf"
+authorization: ["student"]
 ---
 
 # Academic Requirements Ph D Program EnggScience wef 2024 25 as of July 2024

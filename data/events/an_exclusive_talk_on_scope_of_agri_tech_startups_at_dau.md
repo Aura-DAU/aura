@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "An Exclusive Talk on Scope of Agri-Tech Startups at DAU"
 url: "https://www.daiict.ac.in/events/6626"

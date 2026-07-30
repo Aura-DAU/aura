@@ -11,6 +11,7 @@ course_code: "unknown"
 semester: "Autumn 2025-26"
 pdf_page_start: 330
 pdf_page_end: 331
+authorization: ["student"]
 ---
 
 # Management Skills for Professional Excellence (unknown)

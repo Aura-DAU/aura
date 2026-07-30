@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC409_Introduction_To_Financial_Mathematics_Winter26 - Abhishek Tilva.pdf"
 course_code: "SC409"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # SC409: Introduction to Financial Mathematics

@@ -15,6 +15,7 @@ gap_fixes:
   - "Q234 – Freshers Weekend explained"
   - "Q237 – i.Fest and organizing club"
   - "Q216 – Anti-ragging information location"
+authorization: ["student"]
 ---
 
 # Dean (Students) – Dhirubhai Ambani University (DAU)

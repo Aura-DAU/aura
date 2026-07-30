@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "The Summer School on Speech Signal Processing (S4P) on Automatic Speech Recognition at DA-…"
 url: "https://www.daiict.ac.in/events/6372"

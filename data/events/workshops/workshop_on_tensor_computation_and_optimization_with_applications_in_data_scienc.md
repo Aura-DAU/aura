@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Workshop on Tensor Computation and Optimization with Applications in Data Science"
 url: "https://www.daiict.ac.in/events/6921"

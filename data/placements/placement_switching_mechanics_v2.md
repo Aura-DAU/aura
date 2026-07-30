@@ -6,6 +6,7 @@ scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
 
+authorization: ["public"]
 ---
 
 # Offer Switching Mechanics

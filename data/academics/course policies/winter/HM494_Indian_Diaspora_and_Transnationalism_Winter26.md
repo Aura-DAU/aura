@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM494_Indian Diaspora and Transnationalism_WinterSemester2026 - Ratna Bharati Bhamidipati.pdf"
 course_code: "HM494"
 semester: "Winter Semester 2026"
+authorization: ["student"]
 ---
 
 # HM494: Indian Diaspora and Transnationalism: An Introduction

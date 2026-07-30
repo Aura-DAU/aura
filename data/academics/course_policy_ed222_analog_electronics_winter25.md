@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "ED222_AnalogElectronics_Winter25 - Rutu Parekh.pdf"
 course_code: "ED222"
 semester: "Winter25"
+authorization: ["student"]
 ---
 # ED222: Analog Electronics
 

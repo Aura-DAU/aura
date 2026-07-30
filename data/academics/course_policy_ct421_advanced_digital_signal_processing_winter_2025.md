@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CT421_ADSP_Winter2025.pdf"
 course_code: "CT421"
 semester: "Winter 2025"
+authorization: ["student"]
 ---
 # CT421: Advanced Digital Signal Processing
 

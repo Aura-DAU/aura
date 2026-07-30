@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC746 -Information Design.pdf"
 course_code: "PC746"
 semester: "Semester 2"
+authorization: ["student"]
 ---
 
 # PC746: Information Design

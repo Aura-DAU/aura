@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "PPTX"
 original_name: "General Meet_ 22 Oct 2024.pptx"
 authorization: ["student", "faculty"]
+authorization: ["student", "faculty"]
 ---
 
 # General Meet  22 Oct 2024

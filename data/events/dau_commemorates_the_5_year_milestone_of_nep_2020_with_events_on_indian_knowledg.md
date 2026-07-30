@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DAU commemorates the 5-year Milestone of NEP 2020 with Events on Indian Knowledge Systems"
 url: "https://www.daiict.ac.in/events/6838"

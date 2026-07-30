@@ -5,6 +5,7 @@ url: "placement_process_steps.md"
 scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
+authorization: ["public"]
 ---
 
 # The Placement Process Pipeline

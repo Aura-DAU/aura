@@ -8,27 +8,39 @@ from typing import Optional
 
 # ── Role allowed-sets for Pinecone DLS filter ─────────────────────────────
 # Exported so Pushkar's retrieval_pipeline.py can import and use directly.
+#
+# Batch-year student roles (student_2026 = 1st year, student_2025 = 2nd year, etc.)
+# Each year role can see: public data + all-student data + their own batch year data.
+# Faculty and admin roles see all year-tagged data in addition to their own sets.
+_ALL_YEAR_TAGS = {"2026", "2025", "2024", "2023"}
+
 ROLE_ALLOWED_SETS: dict[str, set[str]] = {
     "public":              {"public"},
+    # Batch-year student roles — derived from ERP ID prefix (e.g. 202601001 → student_2026)
+    "student_2026":        {"public", "student", "2026"},
+    "student_2025":        {"public", "student", "2025"},
+    "student_2024":        {"public", "student", "2024"},
+    "student_2023":        {"public", "student", "2023"},
+    # Fallback: student without a recognised batch year sees public + student only
     "student":             {"public", "student"},
-    "faculty_general":     {"public", "faculty"},
-    "faculty_coord":       {"public", "faculty", "faculty_coord"},
-    "faculty_convenor_ug": {"public", "faculty", "faculty_coord", "faculty_convenor_ug"},
-    "faculty_convenor_pg": {"public", "faculty", "faculty_coord", "faculty_convenor_pg"},
-    "dean_students":       {"public", "student", "faculty", "dean_students"},
-    "dean_faculty":        {"public", "faculty", "dean_faculty"},
-    "dean_academic":       {"public", "faculty", "faculty_coord",
-                            "faculty_convenor_ug", "faculty_convenor_pg", "dean_academic"},
-    "registrar":           {"public", "faculty", "dean_academic", "registrar"},
-    "admin_staff":         {"public", "student", "faculty", "admin_staff"},
+    "faculty_general":     {"public", "student", "faculty"} | _ALL_YEAR_TAGS,
+    "faculty_coord":       {"public", "student", "faculty", "faculty_coord"} | _ALL_YEAR_TAGS,
+    "faculty_convenor_ug": {"public", "student", "faculty", "faculty_coord", "faculty_convenor_ug"} | _ALL_YEAR_TAGS,
+    "faculty_convenor_pg": {"public", "student", "faculty", "faculty_coord", "faculty_convenor_pg"} | _ALL_YEAR_TAGS,
+    "dean_students":       {"public", "student", "faculty", "dean_students"} | _ALL_YEAR_TAGS,
+    "dean_faculty":        {"public", "student", "faculty", "dean_faculty"} | _ALL_YEAR_TAGS,
+    "dean_academic":       {"public", "student", "faculty", "faculty_coord",
+                            "faculty_convenor_ug", "faculty_convenor_pg", "dean_academic"} | _ALL_YEAR_TAGS,
+    "registrar":           {"public", "student", "faculty", "dean_academic", "registrar"} | _ALL_YEAR_TAGS,
+    "admin_staff":         {"public", "student", "faculty", "admin_staff"} | _ALL_YEAR_TAGS,
     "superadmin":          set(ROLE_ALLOWED_SETS_PLACEHOLDER := [
                                "public", "student", "faculty", "faculty_coord",
                                "faculty_convenor_ug", "faculty_convenor_pg",
                                "dean_students", "dean_faculty", "dean_academic",
-                               "registrar", "admin_staff", "superadmin"]),
+                               "registrar", "admin_staff", "superadmin"]) | _ALL_YEAR_TAGS,
 }
 # Fix the forward-reference placeholder
-ROLE_ALLOWED_SETS["superadmin"] = set(ROLE_ALLOWED_SETS_PLACEHOLDER)
+ROLE_ALLOWED_SETS["superadmin"] = set(ROLE_ALLOWED_SETS_PLACEHOLDER) | _ALL_YEAR_TAGS
 del ROLE_ALLOWED_SETS_PLACEHOLDER
 
 # Legacy binding strings → canonical effective role

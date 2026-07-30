@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "SBG_Constitution 25-26.pdf"
 authorization: ["student", "faculty"]
+authorization: ["student", "faculty"]
 ---
 
 # SBG Constitution 25 26

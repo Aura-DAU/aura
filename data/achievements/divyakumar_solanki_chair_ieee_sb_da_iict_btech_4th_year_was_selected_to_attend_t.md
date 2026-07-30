@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Divyakumar Solanki, Chair, IEEE SB DA-IICT (BTech 4th Year) was selected to attend the All India Students – Young Professionals Women In Engineering Congress(AISYWC), VVIET, Mysore, Karnataka during 28-30 September 2018.

@@ -10,6 +10,7 @@ pdf_name: "IE407_Internet of things.pdf"
 course_code: "IE407"
 semester: "Autumn 2024"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # IE407: Internet of Things

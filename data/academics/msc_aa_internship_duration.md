@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "M.Sc. Agriculture Analytics – Internship Duration"
 category: "Academics"

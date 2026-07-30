@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE422_Soft Computing_Winter26 - Pushpendra Kumar.pdf"
 course_code: "IE422"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IE422: Soft Computing

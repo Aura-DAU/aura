@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "CEP/List of workshops held under CEP pdf"
+authorization: ["public"]
 ---
 
 # CEP/List of workshops held under CEP pdf

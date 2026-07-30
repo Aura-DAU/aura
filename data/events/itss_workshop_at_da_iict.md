@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "ITSS Workshop at DA-IICT"
 url: "https://www.daiict.ac.in/events/6286"

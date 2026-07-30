@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 # Timetable — B.Tech ICT-CS — 3rd Year (Semester 5), Section A (Autumn 2026-27)
 
 Source: derived from the official DAU Autumn 2026-27 combined lecture timetable, filtered to this branch/year by course code.

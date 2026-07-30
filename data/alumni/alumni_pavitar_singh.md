@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Pavitar Singh" url: "https://alumni.dau.edu.in/alumni_pavitar_singh.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
 # Pavitar Singh
 

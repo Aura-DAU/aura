@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM377_TheEnglishNovelFormandHistory_Winter2026 - Amishal Modi.pdf"
 course_code: "HM377 (filename); listed as \"HM 477\" in source document body — see Additional Notes"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # HM377: The English Novel: Form and History

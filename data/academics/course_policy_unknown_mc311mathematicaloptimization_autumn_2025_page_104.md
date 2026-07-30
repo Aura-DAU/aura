@@ -11,6 +11,7 @@ course_code: "unknown"
 semester: "Autumn 2025-26"
 pdf_page_start: 105
 pdf_page_end: 106
+authorization: ["student"]
 ---
 
 # MC311MathematicalOptimization (unknown)

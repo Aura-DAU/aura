@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "S. Lakshmivarahan"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/s-lakshmivarahan"

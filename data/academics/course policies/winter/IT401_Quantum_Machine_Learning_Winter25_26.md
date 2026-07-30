@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT401_Quantum_Machine_Learning_II - Manjunath Joshi.pdf"
 course_code: "IT401"
 semester: "Winter Semester (AY 25-26)"
+authorization: ["student"]
 ---
 
 # IT401: Quantum Machine Learning (QML)

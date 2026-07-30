@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Photo Gallery"
 url: "https://daiict.ac.in/photo-gallery"

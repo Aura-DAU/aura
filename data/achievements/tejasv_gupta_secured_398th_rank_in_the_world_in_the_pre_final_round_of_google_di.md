@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Tejasv Gupta secured 398th rank in the world in the Pre-Final round of Google Distributed Code Jam. He is one of the two Indians who reached till Semi-Final round in both the tracks.

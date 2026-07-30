@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE407_InternetOfThings_Winter26 - manish chaturvedi.pdf"
 course_code: "IE407"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IE407: Internet of Things

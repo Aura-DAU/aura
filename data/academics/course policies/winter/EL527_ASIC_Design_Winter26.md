@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "EL527_ ASIC Design_Winter26 - Rutu Parekh.pdf"
 course_code: "EL527"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # EL527: ASIC Design

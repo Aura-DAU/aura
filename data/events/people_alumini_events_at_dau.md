@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "People / Alumini / Events at DAU"
 url: "https://www.daiict.ac.in/events"

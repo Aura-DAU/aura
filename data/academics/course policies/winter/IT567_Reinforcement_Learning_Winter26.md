@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT567_Reinforcement_Learning_Winter_26 - Abhishek Jindal.pdf"
 course_code: "IT567"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT567: Reinforcement Learning

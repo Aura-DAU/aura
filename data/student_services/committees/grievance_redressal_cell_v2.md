@@ -8,6 +8,7 @@ team: "Team B"
 version: "v2"
 gap_fixes:
   - "Q243 – First step for dispute resolution at DAU"
+authorization: ["student"]
 ---
 
 # Grievance Redressal Cell – Dhirubhai Ambani University (DAU)

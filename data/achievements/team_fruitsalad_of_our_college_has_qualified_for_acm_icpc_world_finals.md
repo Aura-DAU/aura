@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Team FruitSalad of our college has qualified for ACM-ICPC World Finals.

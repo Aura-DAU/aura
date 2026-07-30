@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Public Lecture on Claude Shannon!"
 url: "https://www.daiict.ac.in/events/6501"

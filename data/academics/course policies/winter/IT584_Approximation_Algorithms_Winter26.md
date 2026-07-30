@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT584_Approximation Algorithms_Winter2026 - Rachit Chhaya.pdf"
 course_code: "IT584"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT584: Approximation Algorithms

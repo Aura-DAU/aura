@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Vandana Ravindran, a Ph. D. student at DA-IICT successfully defended her thesis on 17th January, 2018.

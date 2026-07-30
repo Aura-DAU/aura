@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Public Lecture: Robots that learn by physically interacting with their surroundings"
 url: "https://www.daiict.ac.in/events/6323"

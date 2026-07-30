@@ -5,6 +5,7 @@ url: "offer_rejection_policy.md"
 scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
+authorization: ["public"]
 ---
 
 # Offer Rejection Policy

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT585_Advanced Machine Learning_Winter2026 - Rachit Chhaya.pdf"
 course_code: "IT585"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT585: Advanced Machine Learning

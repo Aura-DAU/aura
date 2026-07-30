@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Programs of Study"
 url: "https://daiict.ac.in/programs-of-study"

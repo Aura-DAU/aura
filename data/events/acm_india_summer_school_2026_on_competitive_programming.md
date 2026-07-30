@@ -5,6 +5,7 @@ category: "Events"
 scraped_by: "madhav thesiya"
 scraped_date: "2026-06-25"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # ACM India Summer School 2026 on Competitive Programming

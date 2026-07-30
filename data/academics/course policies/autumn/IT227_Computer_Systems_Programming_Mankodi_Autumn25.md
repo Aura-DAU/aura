@@ -10,6 +10,7 @@ pdf_name: "IT227_Computer_Systems_Programming_Autumn25 - Amit Mankodi.pdf"
 course_code: "IT227"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # IT227: Computer Systems Programming (Section — Amit Mankodi)

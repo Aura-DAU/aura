@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "EL495_Sensors_and_Instrumentation_Winter26_AB - Ajay Beniwal.pdf"
 course_code: "EL495"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # EL495: Sensors and Instrumentation

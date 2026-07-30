@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Press Release"
 url: "https://www.daiict.ac.in/prof-avinash-dadhich-appointed-founding-director-establish-proposed-school-law"

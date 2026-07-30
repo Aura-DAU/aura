@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 title: "DA-IICT Newsletter Jan - Jun 2020 (Curated)"
 url: "https://www.daiict.ac.in/themes/daiict/images/Newsletter-jan-june-2020.pdf"
 category: "Achievements"

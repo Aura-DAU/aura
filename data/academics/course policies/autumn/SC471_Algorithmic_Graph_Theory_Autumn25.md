@@ -10,6 +10,7 @@ pdf_name: "SC471_Algorithmic Graph Theory_Autumn 2025-26 - Sunitha Vadivel Murug
 course_code: "SC471"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # SC471: Algorithmic Graph Theory

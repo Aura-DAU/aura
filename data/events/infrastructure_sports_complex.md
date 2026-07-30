@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Infrastructure/Sports Complex"
 url: "https://www.daiict.ac.in/sports-complex"

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE423_AI Literacy, Efficiency, and Ethics_Winter26 - Sanjay Srivastava.pdf"
 course_code: "IE423"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IE423: AI Literacy, Efficiency, and Ethics

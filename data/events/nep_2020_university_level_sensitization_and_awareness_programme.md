@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "NEP-2020: University-Level Sensitization and Awareness Programme"
 url: "https://www.daiict.ac.in/events/6982"

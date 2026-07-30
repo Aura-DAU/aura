@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "PhD Engineering (2017-18) – Coursework Credit Requirements"
 category: "Academics"

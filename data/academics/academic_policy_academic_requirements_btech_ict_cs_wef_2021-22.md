@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "AI Scraper"
 source_type: "PDF"
 pdf_name: "Copy of Academic Requirements_BTech(ICT_CS)2021_wef Aut 2021-22.pdf"
+authorization: ["student"]
 ---
 
 # Academic Requirements for B.Tech. (Honours) in ICT with Minor in Computational Science Program

@@ -11,6 +11,7 @@ gap_fixes:
   - "Q161 – Ragging policy and consequences"
   - "Q166 – 4-wheeler parking policy for students"
   - "Q172 – Fine for entertaining visitor without prior intimation"
+authorization: ["student"]
 ---
 
 # Hostel Rules and Regulations – Dhirubhai Ambani University (DAU)

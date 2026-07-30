@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Three of our B.Tech. students, Abhin Kakkad, Piyush Ajmeria and Rajat Garg are selected for the Postgraduate Management Program at IIM- Ahmedabad.

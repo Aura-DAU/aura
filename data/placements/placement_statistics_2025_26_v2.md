@@ -5,6 +5,7 @@ url: "Placement-Brochure_2025-26.pdf"
 scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
+authorization: ["public"]
 ---
 
 ## Dhirubhai Ambani University Technology

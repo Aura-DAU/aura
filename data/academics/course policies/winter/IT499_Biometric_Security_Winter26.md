@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT499_BiometricSecurity_Winter26 - Shruti Bhilare.pdf"
 course_code: "IT499"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT499: Biometric Security

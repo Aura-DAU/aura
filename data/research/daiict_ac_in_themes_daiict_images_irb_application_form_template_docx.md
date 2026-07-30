@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: DOCX
 pdf_name: "Research / IRB / IRB Application Form"
+authorization: ["public"]
 ---
 
 # Research / IRB / IRB Application Form

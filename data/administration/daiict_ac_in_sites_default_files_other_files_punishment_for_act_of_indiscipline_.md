@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Students / DAC/ Act of indiscipline and indicative list of punishment"
+authorization: ["public"]
 ---
 
 # Students / DAC/ Act of indiscipline and indicative list of punishment

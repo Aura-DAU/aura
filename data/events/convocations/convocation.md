@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Convocation"
 url: "https://www.daiict.ac.in/dhirubhai-ambani-university-convocation-ceremonies"

@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "XLSX"
 original_name: "Club_Committee C_DCs Information 2026-27_.xlsx"
 authorization: ["student", "faculty"]
+authorization: ["student", "faculty"]
 ---
 
 # Club Committee C_DCs Information 2026-27

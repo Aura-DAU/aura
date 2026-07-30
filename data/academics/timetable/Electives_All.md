@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 # Timetable — All Electives (Autumn 2026-27) (Autumn 2026-27)
 
 Source: official DAU Autumn 2026-27 lecture timetable.

@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Academic Requirements_M Tech_(EC)_Program_wef 2022-23.pdf"
+authorization: ["student"]
 ---
 
 # Academic Requirements M Tech (EC) Program wef 2022 23

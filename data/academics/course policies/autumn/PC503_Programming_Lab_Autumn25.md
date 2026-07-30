@@ -10,6 +10,7 @@ pdf_name: "PC503_ProgrammingLab_Autumn25 - Ankit Vijayvargiya.pdf"
 course_code: "PC503"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # PC503: Programming Lab

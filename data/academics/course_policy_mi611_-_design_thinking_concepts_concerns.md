@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "MI611 - Design Thinking Concepts & concerns.pdf"
+authorization: ["student"]
 ---
 
 # MI611 (MI611)

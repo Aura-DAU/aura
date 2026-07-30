@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "IT1001 Introduction to Programming in C Autumn 2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

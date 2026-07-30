@@ -10,6 +10,7 @@ pdf_name: "EL401_PHYSICS OF SEMICONDUCTORS_AUTUMN2025 - Harpreet Singh Jattana.p
 course_code: "EL401"
 semester: "Autumn 2025"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # EL401: Physics of Semiconductor Devices

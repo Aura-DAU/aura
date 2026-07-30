@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CT548_ AdvancedWirelessCommunications_Winter2026 - Manish Kumar.pdf"
 course_code: "CT548"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # CT548: Advanced Wireless Communication

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Institute Public Lecture Series Talk"
 url: "https://www.daiict.ac.in/events/6540"

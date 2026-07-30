@@ -5,6 +5,7 @@ category: "CEP"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+authorization: ["public"]
 ---
 
 # Overview

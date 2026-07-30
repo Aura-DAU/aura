@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT637_Introduction_to_Algorithms_Winter26 - Amit Mankodi.pdf"
 course_code: "IT637"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT637: Introduction to Algorithms

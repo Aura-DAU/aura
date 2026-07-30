@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Anthony R. Noerpel"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/anthony-r-noerpel"

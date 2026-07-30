@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "One Day Interactive Workshop on Design Thinking and The Business of AI"
 url: "https://www.daiict.ac.in/events/6732"

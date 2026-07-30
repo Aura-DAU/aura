@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # PhD Scholar Madhvi Ramrakhiyani has recently won the Best Poster Presentation Award

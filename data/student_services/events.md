@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Events"
 url: "https://daiict.ac.in/events"

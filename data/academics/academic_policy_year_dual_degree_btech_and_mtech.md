@@ -7,6 +7,7 @@ scraped_date: "2026-06-01"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Five-Year Dual Degree Program.pdf"
+authorization: ["student"]
 ---
 
 # Year Dual Degree (BTech and MTech) (UNKNOWN)

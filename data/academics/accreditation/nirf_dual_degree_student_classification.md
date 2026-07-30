@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "NIRF Classification of Five-Year Dual Degree Students"
 category: "Accreditation"

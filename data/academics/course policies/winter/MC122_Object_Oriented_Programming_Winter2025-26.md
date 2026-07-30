@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC122_ObjectOrientedProgramming_Winter25 - Ankit Vijayvargiya.pdf"
 course_code: "MC122"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # MC122: Object Oriented Programming

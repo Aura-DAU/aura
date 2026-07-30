@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Research paper titled “Accelerated Fluid Simulation of Low Temperature Plasmas on Intel Xeon Phi MIC Architecture” authored by B.Tech (2013 batch)

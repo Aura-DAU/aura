@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # DA-IICT team selected for level I (Ideation) to Level II (Proof of Concept) of India’s biggest Robotics competition: “ROBOFEST-GUJARAT 3.0

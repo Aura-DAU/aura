@@ -10,6 +10,7 @@ pdf_name: "MA614 – Preparatory Mathematics.pdf"
 course_code: "MA614"
 semester: "Academic Year 2025-2026"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # MA614: Preparatory Mathematics

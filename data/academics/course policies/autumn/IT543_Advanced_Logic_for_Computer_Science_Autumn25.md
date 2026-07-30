@@ -10,6 +10,7 @@ pdf_name: "IT543_Advanced Logic for Computer Science_Autumn25 - Manoj Raut.pdf"
 course_code: "IT543"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # IT543: Advanced Logic for Computer Science

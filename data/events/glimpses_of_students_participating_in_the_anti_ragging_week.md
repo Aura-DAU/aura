@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Glimpses of students participating in the Anti-Ragging week"
 url: "https://www.daiict.ac.in/events/6509"

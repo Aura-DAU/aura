@@ -6,6 +6,7 @@ scraped_by: "Squad D Scraper"
 scraped_date: "2026-07-06"
 team: "Squad D"
 source_file: " Academic Calendar.docx"
+authorization: ["student"]
 ---
 
 # Academic Calendar 2026-27

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Prasenjit Majumder"
 url: "https://www.daiict.ac.in/faculty/prasenjit-majumder"

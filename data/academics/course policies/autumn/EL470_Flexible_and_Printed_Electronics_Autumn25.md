@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "EL470 Printed and Flexible Electronics Autumn 2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

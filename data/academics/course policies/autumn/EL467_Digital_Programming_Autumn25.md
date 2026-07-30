@@ -10,6 +10,7 @@ pdf_name: "EL467_Digital_Programming_Autumn25 - YASH AGRAWAL.pdf"
 course_code: "EL467"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # EL467: Digital Programming

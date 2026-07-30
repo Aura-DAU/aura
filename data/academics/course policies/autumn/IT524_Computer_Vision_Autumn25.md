@@ -10,6 +10,7 @@ pdf_name: "IT524_Computer Vision_Autumn25 - Manjunath Joshi.pdf"
 course_code: "IT524"
 semester: "Autumn 2025"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # IT524: Computer Vision

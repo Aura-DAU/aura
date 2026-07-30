@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Committees_T&R_2024-25 updated.pdf"
+authorization: ["student"]
 ---
 
 # Committees T&R 2024 25 updated

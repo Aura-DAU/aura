@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Jahnvi Trivedi of M.Des 2021 batch shines through the "Firki Ni Dori" Film at the Green Frames: VATAVARAN Short Film Competition & Festival.

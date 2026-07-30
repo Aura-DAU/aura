@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "PUBLIC LECTURE - Computational Thinking ... and the future of computing"
 url: "https://www.daiict.ac.in/events/6679"

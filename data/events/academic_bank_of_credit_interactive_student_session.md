@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Academic Bank of Credit: Interactive Student Session"
 url: "https://www.daiict.ac.in/events/6834"

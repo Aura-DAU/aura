@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Nicholas Belkin"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/nicholas-belkin"

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Vishvajit Pandya"
 url: "https://www.daiict.ac.in/distinguished-professor/vishvajit-pandya"

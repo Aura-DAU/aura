@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC753 -  Fundamentals of Filmmaking.pdf"
 course_code: "PC753"
 semester: "Semester 2, Year 1"
+authorization: ["student"]
 ---
 
 # PC753: Fundamentals of Filmmaking

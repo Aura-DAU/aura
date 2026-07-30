@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC421-Introduction to Modern Algebra - Gautam Dutta.pdf"
 course_code: "SC421"
 semester: "Not stated in source document"
+authorization: ["student"]
 ---
 
 # SC421: Introduction to Modern Algebra

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "A talk by our Alumni, Dr. Ronak Kosti"
 url: "https://www.daiict.ac.in/events/6648"

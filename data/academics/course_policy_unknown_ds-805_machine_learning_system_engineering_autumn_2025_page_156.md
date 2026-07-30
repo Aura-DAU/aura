@@ -11,6 +11,7 @@ course_code: "unknown"
 semester: "Autumn 2025-26"
 pdf_page_start: 157
 pdf_page_end: 158
+authorization: ["student"]
 ---
 
 # DS-805 (Machine Learning System Engineering (unknown)

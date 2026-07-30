@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT414_SoftwareProjectManagement.pdf"
 course_code: "IT414"
 semester: "Not specified in source document"
+authorization: ["student"]
 ---
 
 # IT414: Software Project Management

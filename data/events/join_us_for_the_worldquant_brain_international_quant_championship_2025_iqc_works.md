@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Join us for the WorldQuant BRAIN International Quant Championship 2025 (IQC) Workshop"
 url: "https://www.daiict.ac.in/events/6704"

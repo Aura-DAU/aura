@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Symposium Concept Note: Debating the Digital Transition: Society, Politics, Culture"
 url: "https://www.daiict.ac.in/events/6368"

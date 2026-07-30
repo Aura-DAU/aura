@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DA-IICT 19th Convocation"
 url: "https://www.daiict.ac.in/events/6576"

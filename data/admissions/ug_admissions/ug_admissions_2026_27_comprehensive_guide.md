@@ -5,6 +5,7 @@ category: "Admissions"
 scraped_by: "Pushkar"
 scraped_date: "2026-07-01"
 team: "Team A"
+authorization: ["public"]
 ---
 
 # UG Admissions 2026-27: Comprehensive Data & Guidelines

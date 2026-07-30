@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "ED322_EL464 _VLSI Testing and Validation_Winter 2025 - Sreeja Rajendran.pdf"
 course_code: "ED322 / EL464"
 semester: "Winter 2025"
+authorization: ["student"]
 ---
 
 # ED322 / EL464: VLSI Testing and Validation

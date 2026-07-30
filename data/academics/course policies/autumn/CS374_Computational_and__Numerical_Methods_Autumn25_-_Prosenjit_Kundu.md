@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "CS374 Computational and Numerical Methods Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CS302_Modelling_Simulation_Winter25 - Arnab Kumar Ray.pdf"
 course_code: "CS302"
 semester: "Winter 2025"
+authorization: ["student"]
 ---
 
 # CS302: Modeling and Simulation

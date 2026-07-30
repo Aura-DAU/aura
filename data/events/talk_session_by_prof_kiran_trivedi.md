@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Talk Session by Prof. Kiran Trivedi"
 url: "https://www.daiict.ac.in/events/6543"

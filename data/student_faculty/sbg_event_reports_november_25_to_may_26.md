@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Event Reports November_25 to May_26.docx"
 authorization: ["student", "faculty"]
+authorization: ["student", "faculty"]
 ---
 
 # Event Reports November 25 to May 26

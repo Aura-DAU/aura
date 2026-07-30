@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Yognik Baghel" url: "https://alumni.dau.edu.in/alumni_yognik_baghel.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
 # Yognik Baghel
 

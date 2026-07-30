@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT568_GenAI4SoftwareEngineering_Winter26 - Saurabh Tiwari.pdf"
 course_code: "IT568"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT568: GenAI for Software Engineering

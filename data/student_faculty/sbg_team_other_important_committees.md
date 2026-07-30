@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "XLSX"
 original_name: "SBG Team & Other Important Committees.xlsx"
 authorization: ["student", "faculty"]
+authorization: ["student", "faculty"]
 ---
 
 # SBG Team and Other Important Committees

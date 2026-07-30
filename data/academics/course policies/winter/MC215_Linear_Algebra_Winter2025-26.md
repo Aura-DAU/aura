@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC215 - Linear Algebra.pdf"
 course_code: "MC215"
 semester: "Winter Semester AY 2025-26"
+authorization: ["student"]
 ---
 
 # MC215: Linear Algebra

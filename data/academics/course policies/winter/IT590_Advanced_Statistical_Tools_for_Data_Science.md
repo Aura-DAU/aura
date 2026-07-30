@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT590-Advanced Statistical Tools for Data Science.pdf"
 course_code: "IT590"
 semester: "Not specified in source document"
+authorization: ["student"]
 ---
 
 # IT590: Advanced Statistical Tools for Data Science

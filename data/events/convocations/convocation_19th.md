@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Convocation/19th"
 url: "https://www.daiict.ac.in/da-iict-19th-convocation"

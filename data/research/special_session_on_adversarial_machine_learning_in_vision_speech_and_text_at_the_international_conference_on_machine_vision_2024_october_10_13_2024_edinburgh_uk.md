@@ -5,6 +5,7 @@ category: "Announcements"
 scraped_by: "Vedant Shah"
 scraped_date: "2026-05-31"
 team: "Team C"
+authorization: ["public"]
 ---
 
 # Overview

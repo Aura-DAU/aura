@@ -9,6 +9,7 @@ source_type: "PDF (image-based; recovered via OCR)"
 pdf_name: "IE411_Operating Systems_Winter26_AG1 - Abhishek Gupta.pdf"
 course_code: "IE411"
 semester: "Winter Term 2025-2026"
+authorization: ["student"]
 ---
 
 # IE411: Operating Systems

@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: DOCX
 pdf_name: "Research / IRB / IRB Participation Consent Details and Form"
+authorization: ["public"]
 ---
 
 # Research / IRB / IRB Participation Consent Details and Form

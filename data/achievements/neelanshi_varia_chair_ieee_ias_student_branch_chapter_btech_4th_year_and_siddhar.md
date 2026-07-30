@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Neelanshi Varia, Chair, IEEE IAS Student Branch Chapter (BTech 4th year) and Siddharth Mishra, Vice Chair, IEEE SB DA-IICT (BTech 4th Year) have received travel grant to attend the IAS Annual Meeting held at Portland, USA during 23-27 September 2018.

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Two-Day School on AI and Law, DA-IICT, Gandhinagar"
 url: "https://www.daiict.ac.in/events/6298"

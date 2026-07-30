@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "ACM India Winter School 2024 at DA-IICT"
 url: "https://www.daiict.ac.in/events/6578"

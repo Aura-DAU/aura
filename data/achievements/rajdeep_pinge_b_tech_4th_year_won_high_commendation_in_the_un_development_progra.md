@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Rajdeep Pinge (B.Tech 4th Year) won High Commendation in the UN Development Programme of the AYMUN.

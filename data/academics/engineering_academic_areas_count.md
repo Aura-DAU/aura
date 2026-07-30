@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Engineering Academic Areas – Total Count at DAU"
 category: "Academics"

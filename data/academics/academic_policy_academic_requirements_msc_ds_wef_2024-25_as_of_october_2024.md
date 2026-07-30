@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Academic requirements_MSc(DS)_wef_2024-25 as of October 2024.pdf"
+authorization: ["student"]
 ---
 
 # Academic requirements MSc(DS) wef 2024 25 as of October 2024

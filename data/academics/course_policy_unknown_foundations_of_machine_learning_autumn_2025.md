@@ -7,6 +7,7 @@ scraped_date: "2026-06-01"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Course_Booklet_for_Autumn_2025-26.pdf"
+authorization: ["student"]
 ---
 
 # Foundations of Machine  Learning (UNKNOWN)

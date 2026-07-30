@@ -184,7 +184,11 @@ class AuraChat:
             # ── Guest / No-identity check for personal paths ───────────
             if query_type in ("PERSONAL", "MIXED", "AGGREGATE"):
                 from access_control import resolve_effective_role
+                from api.auth import resolve_student_year_role
                 user_role = resolve_effective_role(identity) if identity else "guest"
+                # For students, narrow to batch-year role for DLS filtering
+                if identity and identity.role == "student":
+                    user_role = resolve_student_year_role(identity.erp_id)
                 if user_role == "guest":
                     return {
                         "answer": GENERIC_DENIAL,
@@ -257,7 +261,11 @@ class AuraChat:
             sources     = []
             if query_type in ("PUBLIC", "MIXED", "AGGREGATE"):
                 from access_control import resolve_effective_role
+                from api.auth import resolve_student_year_role
                 user_role = resolve_effective_role(identity) if identity else "public"
+                # For students, narrow to batch-year role for DLS filtering
+                if identity and identity.role == "student":
+                    user_role = resolve_student_year_role(identity.erp_id)
                 with track_segment("retrieval_time"):
                     retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
                 chunks    = retrieval_result.get("chunks", [])

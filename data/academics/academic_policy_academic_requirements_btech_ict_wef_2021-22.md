@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "AI Scraper"
 source_type: "PDF"
 pdf_name: "Copy of Academic Requirements_BTech(ICT)2021_wef Aut2021-22.pdf"
+authorization: ["student"]
 ---
 
 # Academic Requirements for B.Tech (ICT) Program

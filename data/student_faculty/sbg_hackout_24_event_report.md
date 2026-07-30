@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Hackout _24 Event Report.docx"
 authorization: ["student", "faculty"]
+authorization: ["student", "faculty"]
 ---
 
 # Hackout 24 Event Report

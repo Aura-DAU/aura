@@ -4,6 +4,7 @@ category: "Internal Policy"
 authorization:
   - "faculty"
   - "dean_academic"
+authorization: ["faculty"]
 ---
 
 # Faculty Evaluation Rubric

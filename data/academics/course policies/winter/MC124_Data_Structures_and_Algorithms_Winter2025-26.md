@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC124 Data Structures and Algorithms_Winter 2025-26 - Maniklal Das.pdf"
 course_code: "MC124"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # MC124: Data Structures and Algorithms

@@ -5,6 +5,7 @@ url: "iprs_report_2025_26.md"
 scraped_by: "Pushkar"
 scraped_date: "2026-06-12"
 team: "Team D"
+authorization: ["public"]
 ---
 
 # Independent Placement Reporting Standards (IPRS)

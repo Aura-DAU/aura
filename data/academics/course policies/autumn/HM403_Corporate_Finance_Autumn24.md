@@ -10,6 +10,7 @@ pdf_name: "HM403_Corporate Finance_Autumn24 - Cyril Jos Nazhicheril.pdf"
 course_code: "HM403"
 semester: "Autumn 2024"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # HM403: Corporate Finance

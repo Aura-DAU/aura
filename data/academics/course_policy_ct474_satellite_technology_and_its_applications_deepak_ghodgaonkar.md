@@ -4,6 +4,7 @@ url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_
 category: "Academics"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
+authorization: ["student"]
 ---# CT474 Satellite Technology and Its Applications - Deepak Ghodgaonkar
 
 **Last Modified:** 2023-12-16

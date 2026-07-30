@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE301_Fundamentals of AI.pdf"
 course_code: "IE301"
 semester: "Btech"
+authorization: ["student"]
 ---
 
 # IE301: Fundamentals of AI

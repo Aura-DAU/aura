@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "sites/default/files/other-files/IIRF_Ranking-appeared-uder-University-special-edition-of_Education-Post.pdf"
+authorization: ["public"]
 ---
 
 # sites/default/files/other-files/IIRF_Ranking-appeared-uder-University-special-edition-of_Education-Post.pdf

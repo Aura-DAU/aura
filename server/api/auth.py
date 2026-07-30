@@ -44,6 +44,11 @@ BROAD_ROLES = {"student", "faculty", "admin", "guest"}
 ALL_ROLES = {
     "public",
     "student",
+    # Batch-year student roles (derived from ERP ID prefix)
+    "student_2026",
+    "student_2025",
+    "student_2024",
+    "student_2023",
     "faculty_general",
     "faculty_coord",
     "faculty_convenor_ug",
@@ -56,6 +61,35 @@ ALL_ROLES = {
     "superadmin",
     "guest",
 }
+
+# ── Batch-year role resolution ─────────────────────────────────────────────
+# CURRENT_BATCH_YEAR is the admission year of the current 1st-year batch.
+# Update this env var each academic year; no code change required.
+_CURRENT_BATCH_YEAR: int = int(os.environ.get("CURRENT_BATCH_YEAR", "2026"))
+
+_YEAR_ROLE_MAP: dict[int, str] = {
+    _CURRENT_BATCH_YEAR:     "student_2026",  # 1st year
+    _CURRENT_BATCH_YEAR - 1: "student_2025",  # 2nd year
+    _CURRENT_BATCH_YEAR - 2: "student_2024",  # 3rd year
+    _CURRENT_BATCH_YEAR - 3: "student_2023",  # 4th year
+}
+
+
+def resolve_student_year_role(erp_id: str) -> str:
+    """Derive the batch-year DLS role from a 9-digit student ERP ID.
+
+    The first four characters of the ERP ID encode the admission year
+    (e.g. '2026' in '202601001'). This is compared against
+    CURRENT_BATCH_YEAR to produce a role such as 'student_2026'.
+
+    Falls back to the generic 'student' role if the prefix is not a
+    recognised batch year (e.g. PhD students or unrecognised IDs).
+    """
+    if erp_id and len(erp_id) >= 4 and erp_id[:4].isdigit():
+        prefix = int(erp_id[:4])
+        return _YEAR_ROLE_MAP.get(prefix, "student")
+    return "student"
+
 
 # auto_error=False so we can return 401 (not 403) for missing credentials.
 security = HTTPBearer(auto_error=False)

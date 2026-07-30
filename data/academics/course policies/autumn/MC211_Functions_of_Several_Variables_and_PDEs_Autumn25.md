@@ -10,6 +10,7 @@ pdf_name: "MC211_Functions of Several Variables and PDEs_Autumn25 - MadhuKant Sh
 course_code: "MC211"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # MC211: Functions of Several Variables and PDEs

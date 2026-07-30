@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "IEEE Lecture Series on 2D Materials for Nanoelectronics"
 url: "https://www.daiict.ac.in/events/6583"

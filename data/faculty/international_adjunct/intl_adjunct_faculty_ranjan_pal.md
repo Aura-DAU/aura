@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Ranjan Pal"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/ranjan-pal"

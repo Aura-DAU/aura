@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Policy for Late Registration or Course Adjustment and Fixation of Fine.pdf"
+authorization: ["student"]
 ---
 
 # Policy for Late Registration or Course Adjustment and Fixation of Fine

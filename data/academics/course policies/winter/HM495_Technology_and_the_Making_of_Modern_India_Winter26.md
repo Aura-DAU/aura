@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM495 - Technology and the Making Modern of India.pdf"
 course_code: "HM495"
 semester: "Winter Semester 2026"
+authorization: ["student"]
 ---
 
 # HM495: Technology and the Making of Modern India

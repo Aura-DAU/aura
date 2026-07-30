@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Join us for a public lecture by Prof. Dhruv Raina"
 url: "https://www.daiict.ac.in/events/6205"

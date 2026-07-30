@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 title: "DA-IICT Newsletter Jan - Jun 2021 (Curated)"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Newsletter_Vol-3.pdf"
 category: "Achievements"

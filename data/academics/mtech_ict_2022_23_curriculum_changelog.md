@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "M.Tech ICT (2022-23) Curriculum Change Log vs Previous Version"
 category: "Academics"

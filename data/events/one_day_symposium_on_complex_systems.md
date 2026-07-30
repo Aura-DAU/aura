@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "One Day Symposium on Complex Systems"
 url: "https://www.daiict.ac.in/events/6533"

@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "M.Tech Electronics & Communication (EC) 2022-23 Curriculum"
 category: "Academics"

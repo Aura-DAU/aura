@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Annual Conference of ISMMACS and the International Conference on Differential Equations: T…"
 url: "https://www.daiict.ac.in/events/6907"

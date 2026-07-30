@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "M.Sc-DS-Project-Guidelines.pdf"
+authorization: ["student"]
 ---
 
 # M.Sc DS Project Guidelines

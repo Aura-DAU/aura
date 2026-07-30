@@ -10,6 +10,7 @@ gap_fixes:
   - "Gap 5 – Mess & Canteen policies (new document)"
   - "Food court operations documented"
   - "CMC committee role documented"
+authorization: ["public"]
 ---
 
 # Food Court & Cafeteria Operations – Dhirubhai Ambani University (DAU)

@@ -5,6 +5,7 @@ category: "policies"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
+authorization: ["student"]
 ---
 
 # Grievance Redressal Cell (Students and Employees)

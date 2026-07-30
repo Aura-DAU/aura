@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT449_Specification_And_Verification_of_systems_Winter24.pdf - Puneet Bhateja.pdf"
 course_code: "IT449"
 semester: "Winter 2024"
+authorization: ["student"]
 ---
 
 # IT449: Specification and Verification of Systems

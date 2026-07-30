@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DA-IICT Achieves NAAC Grade A+ Accreditation"
 url: "https://www.daiict.ac.in/da-iict-achieves-naac-grade-accreditation"

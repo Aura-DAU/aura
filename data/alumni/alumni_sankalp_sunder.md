@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Sankalp Sunder" url: "https://alumni.dau.edu.in/alumni_sankalp_sunder.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
 # Sankalp Sunder
 

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CS301-High-Performance-Computing-winter26 - Bhaskar Chaudhury.pdf"
 course_code: "CS301"
 semester: "Winter Semester (AY 25-26)"
+authorization: ["student"]
 ---
 
 # CS301: High Performance Computing (HPC)

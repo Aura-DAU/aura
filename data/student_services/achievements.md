@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Achievements"
 url: "https://daiict.ac.in/achievements"

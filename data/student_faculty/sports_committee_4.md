@@ -5,6 +5,7 @@ scraped_by: "Bhagyashree Khemwani"
 scraped_date: "2026-07-04"
 team: "Scraping Team"
 authorization: ["student", "faculty"]
+authorization: ["student", "faculty"]
 ---
 
 # Sports Committee Event Reports (2025-26)

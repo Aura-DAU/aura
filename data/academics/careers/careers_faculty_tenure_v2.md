@@ -5,6 +5,7 @@ category: "Academics"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-05-31"
 team: "Team D"
+authorization: ["public"]
 ---
 
 # Overview

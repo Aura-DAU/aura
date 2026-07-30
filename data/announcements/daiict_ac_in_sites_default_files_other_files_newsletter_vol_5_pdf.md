@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 title: "DA-IICT Newsletter Jul - Dec 2022 (Curated)"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Newsletter_Vol-5.pdf"
 category: "Achievements"

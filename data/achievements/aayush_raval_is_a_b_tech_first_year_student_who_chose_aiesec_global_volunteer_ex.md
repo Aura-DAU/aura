@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Aayush Raval is a B. Tech. first year student, who chose AIESEC Global Volunteer Exchange Program in Egypt.

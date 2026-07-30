@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CS201_Introduction to Computational Physics_Winter26 - Pratim Roy.pdf"
 course_code: "CS201"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # CS201: Introduction to Computational Physics

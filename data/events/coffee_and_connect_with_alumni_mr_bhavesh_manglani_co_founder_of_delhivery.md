@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Coffee and Connect with Alumni Mr. Bhavesh Manglani, Co-Founder of Delhivery"
 url: "https://www.daiict.ac.in/events/7061"

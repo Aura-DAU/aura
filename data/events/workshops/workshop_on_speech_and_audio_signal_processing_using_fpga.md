@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Workshop on Speech and Audio Signal Processing using FPGA"
 url: "https://www.daiict.ac.in/events/6759"

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Vinay Kulkarni"
 url: "https://www.daiict.ac.in/professor-practice/vinay-kulkarni"

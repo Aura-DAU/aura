@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Gabriella Pasi"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/gabriella-pasi"

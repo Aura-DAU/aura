@@ -10,6 +10,7 @@ pdf_name: "EL453_Nanoelectronics_Autumn25 - Rutu Parekh.pdf"
 course_code: "EL453"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # EL453: Nanoelectronics

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Workshop on Digital Psychology: Harnessing Smartphone-Mediated Tools to Assess Mental Heal…"
 url: "https://www.daiict.ac.in/events/6218"

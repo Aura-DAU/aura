@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT632_SoftwareEngg_Winter2026 - JayPrakash Lalchandani.pdf"
 course_code: "IT632"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT632: Software Engineering

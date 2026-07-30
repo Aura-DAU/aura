@@ -10,6 +10,7 @@ pdf_name: "CT303_Digital_Communication_Autumn_25_26 - Abhishek Jindal.pdf"
 course_code: "CT303"
 semester: "Autumn Semester 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # CT303: Digital Communication

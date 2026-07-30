@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Rohan Bhatia" url: "https://alumni.dau.edu.in/alumni_rohan_bhatia.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
 # Rohan Bhatia
 

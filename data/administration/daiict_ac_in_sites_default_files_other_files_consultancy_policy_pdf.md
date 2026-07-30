@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Policies/Consultancy Policy"
+authorization: ["public"]
 ---
 
 # Policies/Consultancy Policy

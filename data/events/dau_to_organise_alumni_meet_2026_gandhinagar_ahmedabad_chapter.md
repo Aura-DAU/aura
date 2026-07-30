@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DAU to organise Alumni Meet 2026 – Gandhinagar-Ahmedabad Chapter"
 url: "https://www.daiict.ac.in/events/7055"

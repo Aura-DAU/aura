@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 # Timetable — MSc (AA) (Autumn 2026-27)
 
 Source: official DAU Autumn 2026-27 lecture timetable.

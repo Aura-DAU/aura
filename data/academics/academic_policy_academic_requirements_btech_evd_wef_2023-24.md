@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "AI Scraper"
 source_type: "PDF"
 pdf_name: "Academic requirements_BTech(EVD)_wef_2023-24(1).pdf"
+authorization: ["student"]
 ---
 
 # Academic Requirement for B.Tech (EVD) Program

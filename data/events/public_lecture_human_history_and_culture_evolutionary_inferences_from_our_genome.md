@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "PUBLIC LECTURE - Human History and Culture: Evolutionary Inferences from our Genomes"
 url: "https://www.daiict.ac.in/events/6728"

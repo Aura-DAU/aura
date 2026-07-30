@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM106_Approaches to Indian Society_WinterSemester2026 .docx - Ratna Bharati Bhamidipati.pdf"
 course_code: "HM106"
 semester: "Winter Semester 2026"
+authorization: ["student"]
 ---
 
 # HM106: Approaches to Indian Society

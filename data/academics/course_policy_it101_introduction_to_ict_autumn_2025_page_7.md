@@ -11,6 +11,7 @@ course_code: "IT101"
 semester: "Autumn 2025-26"
 pdf_page_start: 8
 pdf_page_end: 9
+authorization: ["student"]
 ---
 
 # Introduction to ICT (IT101)

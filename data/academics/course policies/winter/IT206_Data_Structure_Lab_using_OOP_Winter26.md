@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT206_Data_Structure_Lab_using _OOP_Winter26 - Sandip Modha.pdf"
 course_code: "IT206"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT206: Data Structure Lab using OOP

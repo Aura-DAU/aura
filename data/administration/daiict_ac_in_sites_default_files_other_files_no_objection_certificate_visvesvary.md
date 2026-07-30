@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Admissions / Ph.D. Admissions/ Visvesvaraya Ph.D. Scheme/ Selection Process / No objection Certificate"
+authorization: ["public"]
 ---
 
 # Admissions / Ph.D. Admissions/ Visvesvaraya Ph.D. Scheme/ Selection Process / No objection Certificate

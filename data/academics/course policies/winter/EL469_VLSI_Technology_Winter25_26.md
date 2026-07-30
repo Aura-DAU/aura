@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "EL469-VLSI_TECHNOLOGY_WINTER2025 26 - Harpreet Singh Jattana.pdf"
 course_code: "EL469"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # EL469: VLSI Technology

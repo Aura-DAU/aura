@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Policies/PhD Student Travel and Research Allowance Policy"
+authorization: ["student"]
 ---
 
 # Policies/PhD Student Travel and Research Allowance Policy

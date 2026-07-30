@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC224_Probability_and_Statistics_Winter_26 - MadhuKant Sharma.pdf"
 course_code: "SC224"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # SC224: Probability and Statistics

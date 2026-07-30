@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "CT546 Introduction to Wireless Communication Autumn Semester 2026-2027"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

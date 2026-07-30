@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Inauguration of the Smart Energy Learning Centre (SELC), DAU campus"
 url: "https://www.daiict.ac.in/events/6727"

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "One-Day Workshop on 5G and Beyond 5G Wireless Technologies"
 url: "https://www.daiict.ac.in/events/5994"

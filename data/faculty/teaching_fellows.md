@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Teaching Fellows"
 url: "https://daiict.ac.in/teaching-fellows"

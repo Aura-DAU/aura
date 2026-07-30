@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC301 - Numerical_Linear_Algebra - Aditya Tatu.pdf"
 course_code: "SC301"
 semester: "Not stated in source document"
+authorization: ["student"]
 ---
 
 # SC301: Numerical Linear Algebra

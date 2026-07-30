@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Tenders/EE2526006 make and model list pdf"
+authorization: ["public"]
 ---
 
 # Tenders/EE2526006 make and model list pdf

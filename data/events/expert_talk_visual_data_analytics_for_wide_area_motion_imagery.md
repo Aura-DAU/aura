@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Expert Talk: Visual Data Analytics for Wide Area Motion Imagery"
 url: "https://www.daiict.ac.in/events/6623"

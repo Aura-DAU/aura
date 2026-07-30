@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Nilotpal Chakravarti"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/nilotpal-chakravarti"

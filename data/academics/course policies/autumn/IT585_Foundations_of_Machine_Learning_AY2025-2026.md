@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "IT585 Foundations of Machine Learning AY 2025-2026 (Autumn)"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

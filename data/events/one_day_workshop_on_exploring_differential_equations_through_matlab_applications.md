@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "One-Day Workshop on Exploring Differential Equations through MATLAB: Applications and Insi…"
 url: "https://www.daiict.ac.in/events/6562"

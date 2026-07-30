@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Prof. S.C. Sahasrabudhe - A Memoir"
 url: "https://www.daiict.ac.in/prof-sc-sahasrabudhe-memoir"

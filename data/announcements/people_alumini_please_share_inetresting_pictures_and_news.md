@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 title: "People / Alumini / Please share inetresting pictures and news" url: "https://docs.google.com/forms/d/e/1FAIpQLSf_vCvybta3bQ57aPxMe94qW-OSL85eSuVWFIlTGdHP7Nz27Q/viewform" category: "Announcements" scraped_by: "Vedant Shah"
 scraped_date: "2026-05-31" team: "Team 3"
 

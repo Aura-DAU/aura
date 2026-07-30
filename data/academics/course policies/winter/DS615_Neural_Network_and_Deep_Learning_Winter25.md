@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS615_NeuralNetworksandDeepLearning_Winter25 (1) (1) - Sourish Dasgupta.pdf"
 course_code: "DS615"
 semester: "Winter 2025"
+authorization: ["student"]
 ---
 
 # DS615: Neural Network and Deep Learning

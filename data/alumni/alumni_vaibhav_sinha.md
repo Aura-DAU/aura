@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Vaibhav Sinha" url: "https://alumni.dau.edu.in/alumni_vaibhav_sinha.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
 # Vaibhav Sinha
 

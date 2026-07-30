@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Sumeet Varma secured 3rd rank in India and 189th rank in the world in the Pre-Final round of Google Code Jam.

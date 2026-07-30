@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "HM484 Modern European Philosophy Winter 2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

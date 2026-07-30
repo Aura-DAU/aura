@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Ms Malvika Singh, a B.Tech 2014 batch student, has been selected for PennApps XV, a application development competition to be held at Penn Engineering, University of Pennsylvania during January 20 to 22nd 2017.

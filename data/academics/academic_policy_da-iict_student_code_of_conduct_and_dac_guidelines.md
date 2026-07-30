@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "DA-IICT_Student Code of Conduct and DAC Guidelines.pdf"
+authorization: ["student"]
 ---
 
 # DA IICT Student Code of Conduct and DAC Guidelines

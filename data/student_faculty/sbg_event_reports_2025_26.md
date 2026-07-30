@@ -8,6 +8,7 @@ team: "Madhav Thesiya"
 source_type: "XLSX"
 original_name: "Event Reports 2025-26_.xlsx"
 authorization: ["student", "faculty"]
+authorization: ["student", "faculty"]
 ---
 
 # Event Reports 2025-26

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Artificial Intelligence in Internet of Things (AIoT): Concepts, Architectures, and Hands-o…"
 url: "https://www.daiict.ac.in/events/7078"

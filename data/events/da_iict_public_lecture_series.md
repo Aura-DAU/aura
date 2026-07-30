@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DA-IICT PUBLIC LECTURE SERIES"
 url: "https://www.daiict.ac.in/events/6518"

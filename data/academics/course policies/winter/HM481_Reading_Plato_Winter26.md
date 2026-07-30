@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM481_Reading Plato_Winter 26 - Bharani Kollipara.pdf"
 course_code: "HM481"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # HM481: Reading Plato: Between Philosophy and Literature

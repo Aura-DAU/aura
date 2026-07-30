@@ -11,6 +11,7 @@ course_code: "ITXXX"
 semester: "Autumn 2025-26"
 pdf_page_start: 278
 pdf_page_end: 280
+authorization: ["student"]
 ---
 
 # Information Visualization and Analysis (ITXXX)

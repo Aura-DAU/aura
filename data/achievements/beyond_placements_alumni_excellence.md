@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Antigravity AI Agent"
 scraped_date: "2026-07-02"
 team: "DAU PWA Team"
+authorization: ["public"]
 ---
 
 # Overview

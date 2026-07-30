@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT504_Distributed Database Systems_MTech SS Core II Semester - Minal Bhise.pdf"
 course_code: "IT504"
 semester: "Not specified in source document (MTech ICT-SS Core, Semester II)"
+authorization: ["student"]
 ---
 
 # IT504: Distributed Database Systems

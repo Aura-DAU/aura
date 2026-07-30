@@ -10,6 +10,7 @@ pdf_name: "HM411_IntroductionToSpeculativeFictionAndFilms_Autumn25.docx - Satvik
 course_code: "HM411"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # HM411: Introduction to Speculative Fiction and Films

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Speech Signal Processing Lab"
 category: "Research"

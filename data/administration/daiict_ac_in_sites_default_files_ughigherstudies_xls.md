@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: Excel
 pdf_name: "N.I.R.F. / UG Higher Studies"
+authorization: ["public"]
 ---
 
 # N.I.R.F. / UG Higher Studies

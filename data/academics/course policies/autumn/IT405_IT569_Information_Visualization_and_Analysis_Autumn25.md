@@ -10,6 +10,7 @@ pdf_name: "IT405-information-visualization-analysis-Autumn25-26 - Bhaskar Chaudh
 course_code: "IT405 / IT569"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # IT405 / IT569: Information Visualization and Analysis

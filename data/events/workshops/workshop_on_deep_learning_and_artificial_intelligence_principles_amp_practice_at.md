@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Workshop on Deep Learning and Artificial Intelligence: Principles &amp; Practice at DAU"
 url: "https://www.daiict.ac.in/events/7038"

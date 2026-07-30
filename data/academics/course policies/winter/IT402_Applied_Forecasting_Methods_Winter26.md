@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT402 _Applied_Forecasting_Methods_Winter_2026 - Pritam Anand.pdf"
 course_code: "IT402 (filename); listed as \"SC475\" in source document body — see Additional Notes"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT402: Applied Forecasting Methods

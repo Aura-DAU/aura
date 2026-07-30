@@ -4,6 +4,7 @@ category: "Internal Policy"
 authorization:
   - "dean_academic"
   - "superadmin"
+authorization: ["faculty"]
 ---
 
 # Senate Meeting Minutes 2023

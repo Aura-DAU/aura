@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Dhruvil Bhatt" url: "https://alumni.dau.edu.in/alumni_dhruvil_bhatt.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-07" team: "Alumni Team"
 # Dhruvil Bhatt
 

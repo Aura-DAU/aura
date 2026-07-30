@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Workshop on Artificial Intelligence and its Applications in VLSI Design and Technology"
 url: "https://www.daiict.ac.in/events/6411"

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Formal Methods Update Meeting 2025"
 url: "https://www.daiict.ac.in/events/6827"

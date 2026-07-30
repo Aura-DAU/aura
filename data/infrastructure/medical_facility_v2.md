@@ -18,6 +18,7 @@ gap_fixes:
   - "Q197 – Type of medical treatment covered"
   - "Q202 – Medical Centre email contact"
   - "Q203 – Full list of empanelled hospitals"
+authorization: ["public"]
 ---
 
 # Medical Facility – Dhirubhai Ambani University (DAU)

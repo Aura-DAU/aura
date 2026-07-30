@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Two-day workshop on Design Thinking for Innovation and Entrepreneurship"
 url: "https://www.daiict.ac.in/events/6971"

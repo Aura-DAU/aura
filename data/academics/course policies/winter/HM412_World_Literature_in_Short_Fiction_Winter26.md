@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM412_World_Literature_In_Short_Fiction_Winter26_SG - Satvik Gupta.pdf"
 course_code: "HM412"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # HM412: World Literature in Short Fiction

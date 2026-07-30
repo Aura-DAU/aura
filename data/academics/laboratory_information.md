@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "Squad D"
 authorization: ["student", "faculty"]
 source_file: " Laboratory-Related Information.docx"
+authorization: ["student"]
 ---
 
 # Laboratory-Related Information

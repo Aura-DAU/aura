@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "CONFERENCE ON TOPICS IN COMPLEX SYSTEMS"
 url: "https://www.daiict.ac.in/events/6524"

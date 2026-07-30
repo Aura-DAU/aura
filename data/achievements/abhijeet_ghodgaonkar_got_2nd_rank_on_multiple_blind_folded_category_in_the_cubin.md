@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Abhijeet Ghodgaonkar got 2nd rank on Multiple Blind Folded category in the Cubing Competition “SCMU 2017” (WCA) held in Mumbai.

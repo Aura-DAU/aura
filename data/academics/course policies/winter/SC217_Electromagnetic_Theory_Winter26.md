@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC217_ElectromagneticTheory_Winter26 - Pratim Roy.pdf"
 course_code: "SC217"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # SC217: Electromagnetic Theory

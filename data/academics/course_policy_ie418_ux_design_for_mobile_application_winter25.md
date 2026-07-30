@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE418_UX Design for Mobile Applications_Winter25 - Anupam Rana.pdf"
 course_code: "IE418"
 semester: "Winter25"
+authorization: ["student"]
 ---
 # IE418: UX Design for Mobile Application
 

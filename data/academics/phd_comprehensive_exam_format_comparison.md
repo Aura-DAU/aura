@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "PhD Comprehensive Examination Formats – Engineering vs HSS Comparison"
 category: "Academics"

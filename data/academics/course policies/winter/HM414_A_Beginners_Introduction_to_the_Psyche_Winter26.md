@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM414_A Beginner_s Introduction to the Psyche _Winter26 - Jenson Joseph.pdf"
 course_code: "HM414"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # HM414: A Beginner's Introduction to the Psyche

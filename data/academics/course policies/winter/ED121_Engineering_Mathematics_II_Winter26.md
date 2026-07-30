@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "ED121_EngineeringMathematicsII_Winter2026 - Prosenjit Kundu.pdf"
 course_code: "ED121"
 semester: "Winter Semester (AY 25-26)"
+authorization: ["student"]
 ---
 
 # ED121: Engineering Mathematics II

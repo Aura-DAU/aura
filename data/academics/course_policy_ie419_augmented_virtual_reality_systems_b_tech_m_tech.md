@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE419_Augmented & Virtual Reality Systems.pdf"
 course_code: "IE419"
 semester: "B.Tech/M.tech"
+authorization: ["student"]
 ---
 # IE419: Augmented & Virtual Reality Systems
 

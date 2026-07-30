@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IC121_DLCO_Winter25 - Sreeja Rajendran.pdf"
 course_code: "IC121"
 semester: "Winter 2025"
+authorization: ["student"]
 ---
 
 # IC121: Digital Logic and Computer Organization

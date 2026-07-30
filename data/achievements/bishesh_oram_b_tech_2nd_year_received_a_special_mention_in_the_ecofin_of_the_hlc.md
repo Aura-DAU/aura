@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Bishesh Oram (B.Tech 2nd Year) received a Special Mention in the Ecofin of the HLCC MUN.

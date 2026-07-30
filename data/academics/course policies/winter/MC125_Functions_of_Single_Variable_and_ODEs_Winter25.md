@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC125_FunctionsOfSingleVariableAndODEs_Winter25 - MadhuKant Sharma.pdf"
 course_code: "MC125"
 semester: "Winter 2025"
+authorization: ["student"]
 ---
 
 # MC125: Functions of Single Variable and ODEs

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DA-IICT 18th Convocation Announcement"
 url: "https://www.daiict.ac.in/events/6058"

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Public lecture on Optimization: Theory and Practice"
 url: "https://www.daiict.ac.in/events/6256"

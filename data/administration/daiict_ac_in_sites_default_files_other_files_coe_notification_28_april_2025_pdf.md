@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "CoE certificate (April 2025)"
+authorization: ["public"]
 ---
 
 # CoE certificate (April 2025)

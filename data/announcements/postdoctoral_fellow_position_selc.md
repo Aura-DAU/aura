@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Post-doctoral Fellow Position for Project CSR-25/BSES/A10-PK/SELC"
 url: "https://www.daiict.ac.in/node/7076"

@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Location & Contact"
 url: "https://daiict.ac.in/contact-0"

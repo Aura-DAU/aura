@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Intellectual Property Rights Returns 2023"
 url: "https://www.daiict.ac.in/events/5524"

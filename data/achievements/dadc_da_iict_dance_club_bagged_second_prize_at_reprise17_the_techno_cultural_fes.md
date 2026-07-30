@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # DADC (DA-IICT Dance Club) bagged second prize at Reprise’17, the techno-cultural fest of SPM, PDPU.

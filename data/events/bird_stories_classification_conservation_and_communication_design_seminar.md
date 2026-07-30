@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "BIRD STORIES: Classification, Conservation and Communication Design seminar!"
 url: "https://www.daiict.ac.in/events/6254"

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CT423_Wavelet Signal Processing_Winter2026 - hemant patil.pdf"
 course_code: "CT423"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # CT423: Wavelet Signal Processing

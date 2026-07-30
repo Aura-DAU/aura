@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC754-  Introduction to Photography.pdf"
 course_code: "PC754"
 semester: "Semester 2, Year 1"
+authorization: ["student"]
 ---
 
 # PC754: Introduction to Photography

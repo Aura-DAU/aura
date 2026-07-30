@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Workshop on Data Analysis using Python"
 url: "https://www.daiict.ac.in/events/6412"

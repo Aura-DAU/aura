@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC726_MultimodalStorytelling_Winter25 - Jenson Joseph.pdf"
 course_code: "PC726"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # PC726: Multi-Modal Storytelling

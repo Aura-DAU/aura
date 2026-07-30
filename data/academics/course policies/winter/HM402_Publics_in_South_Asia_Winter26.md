@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM402_PublicsinSouth Asia_Winter26 - Shefali Jha.pdf"
 course_code: "HM402"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # HM402: Publics in South Asia: Contemporary Perspectives

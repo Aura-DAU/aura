@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Teacher’s Enrichment Workshop (TEW) on Ordinary Differential Equations, Dynamical Systems…"
 url: "https://www.daiict.ac.in/events/6525"

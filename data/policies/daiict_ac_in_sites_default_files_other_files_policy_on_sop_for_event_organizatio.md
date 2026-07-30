@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Policies/Standard Operating Procedure (SOP) for Event Organisation at DAU"
+authorization: ["student"]
 ---
 
 # Policies/Standard Operating Procedure (SOP) for Event Organisation at DAU

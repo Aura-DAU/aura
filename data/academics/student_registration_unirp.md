@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "Squad D"
 authorization: ["student"]
 source_file: "Student Registration Details in UniRP.PDF"
+authorization: ["student"]
 ---
 
 # Student Registration Details in UniRP

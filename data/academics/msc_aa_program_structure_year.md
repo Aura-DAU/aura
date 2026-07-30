@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "M.Sc. Agriculture Analytics – Year of Current Program Structure Adoption"
 category: "Academics"

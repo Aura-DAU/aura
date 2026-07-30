@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Pankaj Srivastava" url: "https://alumni.dau.edu.in/alumni_pankaj_srivastava.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
 # Pankaj Srivastava
 

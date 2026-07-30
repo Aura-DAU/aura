@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Academic Council — DA-IICT / DAU"
 url: "https://daiict.ac.in/academic-council"

@@ -13,6 +13,7 @@ gap_fixes:
   - "Gap 4 – Full official university name clarified"
   - "Name change history DA-IICT to DAU documented"
   - "Q227 – Campus location with geographic detail"
+authorization: ["student"]
 ---
 
 # Location, Contact & University Identity – Dhirubhai Ambani University (DAU)

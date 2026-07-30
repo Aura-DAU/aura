@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "HM116/MC314 Principles of Economics Autumn 2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

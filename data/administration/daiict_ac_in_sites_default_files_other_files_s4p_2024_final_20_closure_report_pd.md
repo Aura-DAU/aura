@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "sites/default/files/other-files/S4P-2024_final%20_Closure-Report.pdf"
+authorization: ["public"]
 ---
 
 # sites/default/files/other-files/S4P-2024_final%20_Closure-Report.pdf

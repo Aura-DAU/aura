@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Ajay Tomar"
 url: "https://www.daiict.ac.in/professor-practice/ajay-tomar"

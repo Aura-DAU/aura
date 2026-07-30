@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Astronight 2025: A Captivating Journey into Astrophotography"
 url: "https://www.daiict.ac.in/events/6622"

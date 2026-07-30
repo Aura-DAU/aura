@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "ED223_EntrepreneurshipAndProductDesign_Winter26_Updated - Amitava Ghosh.pdf"
 course_code: "ED223"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # ED223: Entrepreneurship and Product Design

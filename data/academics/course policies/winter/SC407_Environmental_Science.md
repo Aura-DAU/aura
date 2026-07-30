@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC407 - Environmental Science.pdf"
 course_code: "SC407"
 semester: "Not stated in source document"
+authorization: ["student"]
 ---
 
 # SC407: Environmental Science

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "High End Workshop on AI/ML Algorithms and Applications in VLSI Design and Technology"
 url: "https://www.daiict.ac.in/events/5644"

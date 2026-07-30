@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Software Systems, Security & Networking Research Group"
 category: "Research"

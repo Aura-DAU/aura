@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT549_ Deep_Learning_Winter_26 - Arpit Rana.pdf"
 course_code: "IT549"
 semester: "Academic Year 2025-26 (Winter)"
+authorization: ["student"]
 ---
 
 # IT549: Deep Learning

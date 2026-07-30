@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CT216_Introduction_to_Communication_Systems_Winter2026 - Yash Vasavada.pdf"
 course_code: "CT216"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # CT216: Introduction to Communication Systems

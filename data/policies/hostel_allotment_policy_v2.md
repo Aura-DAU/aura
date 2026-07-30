@@ -6,6 +6,7 @@ scraped_by: "Om Patel"
 scraped_date: "2026-06-10"
 team: "Team E"
 source_type: "Web"
+authorization: ["student"]
 ---
 
 # Hostel Allotment Policy — Halls of Residence

@@ -10,6 +10,7 @@ pdf_name: "PC721 - APPROACHES TO CULTURE AND COMMUNICATION.pdf"
 course_code: "PC721"
 semester: "Not specified in source document"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # PC721: Approaches to Culture and Communication

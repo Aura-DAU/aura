@@ -5,6 +5,7 @@ category: "Academics"
 scraped_by: "Antigravity OCR"
 scraped_date: "2026-06-15"
 source_pdf: "/Users/vedant_shah/Desktop/1-Curriculum-BTech-ICT.pdf"
+authorization: ["student"]
 ---
 
 # B.Tech. (ICT) Curriculum and Syllabus

@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "DA-IICT_Vehicle Rules for Students.pdf"
+authorization: ["student"]
 ---
 
 # DA IICT Vehicle Rules for Students

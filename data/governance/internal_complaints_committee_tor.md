@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Internal Complaints Committee (ICC) — Terms of Reference"
 category: "Governance"

@@ -9,6 +9,7 @@ source_type: "PDF (scanned/image-based; recovered via OCR)"
 pdf_name: "IE406 - Machine Learning.pdf"
 course_code: "IE406"
 semester: "Winter AY 2023-2024"
+authorization: ["student"]
 ---
 
 # IE406: Machine Learning

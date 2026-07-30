@@ -5,6 +5,7 @@ category: "Events"
 scraped_by: "madhav thesiya"
 scraped_date: "2026-06-25"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # DA MUN 3.0 - Model United Nations Conference at DAU

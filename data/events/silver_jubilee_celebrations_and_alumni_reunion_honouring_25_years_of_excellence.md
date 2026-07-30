@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Silver Jubilee Celebrations and Alumni Reunion: Honouring 25 Years of Excellence of DAU"
 url: "https://www.daiict.ac.in/events/6909"

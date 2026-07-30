@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Examination Rules"
 url: "https://daiict.ac.in/examination-rules"

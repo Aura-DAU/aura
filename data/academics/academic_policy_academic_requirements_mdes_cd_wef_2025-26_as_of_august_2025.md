@@ -7,6 +7,7 @@ scraped_date: "2026-06-08"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Academic Requirements_MDes(CD)_wef 2025-26  as of August 2025.pdf"
+authorization: ["student"]
 ---
 
 # Academic Requirements MDes(CD) wef 2025 26 as of August 2025

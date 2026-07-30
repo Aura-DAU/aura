@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "sites/default/files/news_files/SPCOM_best_paper_finaist_certificate"
+authorization: ["public"]
 ---
 
 # sites/default/files/news_files/SPCOM_best_paper_finaist_certificate

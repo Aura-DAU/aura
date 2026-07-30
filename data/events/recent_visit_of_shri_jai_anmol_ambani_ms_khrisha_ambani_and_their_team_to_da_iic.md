@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Recent visit of Shri Jai Anmol Ambani, Ms. Khrisha Ambani, and their team to DA-IICT"
 url: "https://www.daiict.ac.in/events/6160"

@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "Squad D"
 authorization: ["student", "faculty"]
 source_file: "Notices & Circulars.docx"
+authorization: ["student"]
 ---
 
 # Notices and Circulars

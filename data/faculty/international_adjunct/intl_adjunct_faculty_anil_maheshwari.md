@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Anil Maheshwari"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/anil-maheshwari"

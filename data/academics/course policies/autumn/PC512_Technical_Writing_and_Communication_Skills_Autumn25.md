@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "PC512 Technical Writing and Communication Skills Autumn 2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

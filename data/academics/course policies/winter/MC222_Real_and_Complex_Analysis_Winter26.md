@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC222_Real and Complex Analysis_Winter26 - Sudip Bera.pdf"
 course_code: "MC222"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # MC222: Real and Complex Analysis

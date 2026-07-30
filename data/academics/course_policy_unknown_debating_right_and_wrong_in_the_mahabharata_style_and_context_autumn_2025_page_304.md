@@ -11,6 +11,7 @@ course_code: "unknown"
 semester: "Autumn 2025-26"
 pdf_page_start: 305
 pdf_page_end: 309
+authorization: ["student"]
 ---
 
 # Debating Right and Wrong in the Mahabharata: Style and Context (unknown)

@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "AI Scraper"
 source_type: "PDF"
 pdf_name: "Copy of Academic requirements_BTech(MnC)_wef_2021-22.pdf"
+authorization: ["student"]
 ---
 
 # Academic Requirements for B.Tech. (MnC) Program

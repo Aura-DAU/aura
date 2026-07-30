@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "PUBLIC LECTURE: CONVERGENCE OF TECHNOLOGIES IN THE DIGITAL WORLD"
 url: "https://www.daiict.ac.in/events/6621"

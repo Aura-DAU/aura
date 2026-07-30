@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Placement Cell"
 url: "https://daiict.ac.in/placements"

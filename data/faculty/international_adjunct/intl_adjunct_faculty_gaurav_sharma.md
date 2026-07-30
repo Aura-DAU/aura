@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Gaurav Sharma"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/gaurav-sharma"

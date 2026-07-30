@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Convocation/20th"
 url: "https://www.daiict.ac.in/20th-convocation-dhirubhai-ambani-university"

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM489_ International Economics_Winter26 - Cyril Jos Nazhicheril.pdf"
 course_code: "HM489"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # HM489: International Economics

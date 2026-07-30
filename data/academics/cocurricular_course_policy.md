@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "Squad D"
 authorization: ["student"]
 source_file: "CoCurriculur Course Policy.pdf"
+authorization: ["student"]
 ---
 
 # Co-Curricular Activities Course Policy

@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 # Timetable — Mtech (Core) (Autumn 2026-27)
 
 Source: official DAU Autumn 2026-27 lecture timetable.

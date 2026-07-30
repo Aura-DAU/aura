@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "DAU Notification UGC 2024"
+authorization: ["public"]
 ---
 
 # DAU Notification UGC 2024

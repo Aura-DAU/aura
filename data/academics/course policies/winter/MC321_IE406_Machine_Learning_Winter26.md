@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC321_IE406_Machine Learning_Winter26 - Srimanta Mandal.pdf"
 course_code: "MC321/IE406"
 semester: "AY 2025-2026 (Winter)"
+authorization: ["student"]
 ---
 
 # MC321/IE406: Machine Learning

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DA-IICT proudly celebrated the 78th Independence Day with a flag-hoisting ceremony"
 url: "https://www.daiict.ac.in/events/6508"

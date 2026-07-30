@@ -10,6 +10,7 @@ pdf_name: "CT505_Detection_And_Estimation_Theory_Autumn_25_26 - Abhishek Jindal.
 course_code: "CT505"
 semester: "Autumn Semester 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # CT505: Detection and Estimation Theory

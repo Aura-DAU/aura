@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC226 - Environmental Studies - Nandini Banerjee.pdf"
 course_code: "MC226"
 semester: "Not stated in source document"
+authorization: ["student"]
 ---
 
 # MC226: Environmental Studies

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Dhirubhai Ambani University Rated Among India's Best Engineering Institutes 2025"
 url: "https://www.daiict.ac.in/dhirubhai-ambani-university-rated-among-indias-best-engineering-institutes-2025"

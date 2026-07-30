@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Rita Chakravarti"
 url: "https://www.daiict.ac.in/adjunct-faculty-international/rita-chakravarti"

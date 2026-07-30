@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "DAIICT Ammendment ACT 2024"
+authorization: ["public"]
 ---
 
 # DAIICT Ammendment ACT 2024

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Anil Roy"
 url: "https://www.daiict.ac.in/faculty/anil-roy"

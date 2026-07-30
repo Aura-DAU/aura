@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM116_PrinciplesofEconomics_Winter26 - Parul Gupta.pdf"
 course_code: "HM116"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # HM116: Principles of Economics

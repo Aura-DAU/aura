@@ -11,6 +11,7 @@ course_code: "IT555"
 semester: "Autumn 2025-26"
 pdf_page_start: 284
 pdf_page_end: 286
+authorization: ["student"]
 ---
 
 # Deep Neural NLP & Applications (IT555)

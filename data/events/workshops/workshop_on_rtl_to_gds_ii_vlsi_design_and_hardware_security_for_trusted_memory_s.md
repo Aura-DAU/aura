@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Workshop on RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems"
 url: "https://www.daiict.ac.in/events/7059"

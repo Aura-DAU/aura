@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS612-Interactive_Data_Visualization-winter26 - Bhaskar Chaudhury.pdf"
 course_code: "DS612"
 semester: "Winter Semester (AY 25-26)"
+authorization: ["student"]
 ---
 
 # DS612: Interactive Data Visualization

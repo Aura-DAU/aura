@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS611 - Numerical Optimization.pdf"
 course_code: "DS611"
 semester: "Winter Semester (AY 2025-26)"
+authorization: ["student"]
 ---
 
 # DS611: Numerical Optimization

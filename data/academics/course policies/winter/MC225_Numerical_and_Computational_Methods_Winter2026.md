@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC225_Numerical and Computational Methods_Winter 2026 - Nabin Sahu.pdf"
 course_code: "MC225"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # MC225: Numerical and Computational Methods

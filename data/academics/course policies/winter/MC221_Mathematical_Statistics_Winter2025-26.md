@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "MC221_MathematicalStatistics_Winter26 - Gopinath Panda.pdf"
 course_code: "MC221"
 semester: "Winter Semester AY 2025-26"
+authorization: ["student"]
 ---
 
 # MC221: Mathematical Statistics

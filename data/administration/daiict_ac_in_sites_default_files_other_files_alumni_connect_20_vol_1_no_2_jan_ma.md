@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "People / Alumini / Alumini Newsletter Vol1 No2"
+authorization: ["public"]
 ---
 
 # People / Alumini / Alumini Newsletter Vol1 No2

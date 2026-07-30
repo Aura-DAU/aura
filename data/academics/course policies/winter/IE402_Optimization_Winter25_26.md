@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IE402 - Optimization.pdf"
 course_code: "IE402"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # IE402: Optimization

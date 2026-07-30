@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "CSPMI Lab — Communications, Signal Processing & Machine Intelligence"
 category: "Research"

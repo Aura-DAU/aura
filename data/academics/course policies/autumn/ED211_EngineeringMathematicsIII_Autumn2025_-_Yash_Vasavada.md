@@ -10,6 +10,7 @@ pdf_name: "ED211_EngineeringMathematicsIII_Autumn2025 - Yash Vasavada.pdf"
 course_code: "ED211"
 semester: "Autumn 2025"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # ED211: Engineering Mathematics III

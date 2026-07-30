@@ -5,6 +5,7 @@ category: "General"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Research / Notewothy Contributions / Accomplishments / Prior years

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "High End Workshop on Image Processing and its Applications using VLSI Architectures"
 url: "https://www.daiict.ac.in/events/5636"

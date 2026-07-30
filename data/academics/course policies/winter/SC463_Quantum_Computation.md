@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC463_Quantum-Computation - Gautam Dutta.pdf"
 course_code: "SC463"
 semester: "Not stated in source document"
+authorization: ["student"]
 ---
 
 # SC463: Quantum Computation

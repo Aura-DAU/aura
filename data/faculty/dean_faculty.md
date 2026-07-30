@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Dean (Faculty)"
 url: "https://www.daiict.ac.in/dean-faculty"

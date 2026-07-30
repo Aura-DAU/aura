@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Faculty-Staff Sports Gathering"
 url: "https://www.daiict.ac.in/events/6167"

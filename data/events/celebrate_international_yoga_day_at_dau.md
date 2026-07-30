@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Celebrate International Yoga Day at DAU!"
 url: "https://www.daiict.ac.in/events/6811"

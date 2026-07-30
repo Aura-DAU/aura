@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Disciplinary Rules"
 url: "https://daiict.ac.in/disciplinary-rules"

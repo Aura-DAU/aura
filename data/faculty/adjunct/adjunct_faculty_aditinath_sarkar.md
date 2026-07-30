@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Aditi Nath Sarkar"
 url: "https://www.daiict.ac.in/adjunct-faculty/aditinath-sarkar"

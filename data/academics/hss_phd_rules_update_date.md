@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "HSS PhD Rules – Most Recent Update / Revision Date"
 category: "Academics"

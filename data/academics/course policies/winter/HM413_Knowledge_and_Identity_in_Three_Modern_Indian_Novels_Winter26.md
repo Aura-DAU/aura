@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "HM413_Knowledge and Identity in Three Modern Indian Novels_Winter_2025_26 - Gangeya Mukherji.pdf"
 course_code: "HM413"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # HM413: Knowledge and Identity in Three Modern Indian Novels

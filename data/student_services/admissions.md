@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Admissions"
 url: "https://daiict.ac.in/admissions"

@@ -5,6 +5,7 @@ url: "placement_cell.md"
 scraped_by: "Pushkar"
 scraped_date: "2026-06-10"
 team: "Team D"
+authorization: ["public"]
 ---
 
 # DAU Placement Cell 

@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "EL435 - Analog and mixed signal design.pdf"
 course_code: "EL435"
 semester: "Not specified in source document"
+authorization: ["student"]
 ---
 
 # EL435: Analog and Mixed Signal IC

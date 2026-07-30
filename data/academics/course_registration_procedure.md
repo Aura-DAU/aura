@@ -7,6 +7,7 @@ scraped_date: "2026-07-06"
 team: "Squad D"
 authorization: ["student"]
 source_file: "Course Registration Procedure.docx"
+authorization: ["student"]
 ---
 
 # Course Registration Procedure

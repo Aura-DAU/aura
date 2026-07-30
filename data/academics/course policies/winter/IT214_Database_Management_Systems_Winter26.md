@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT214_Database_Management_Systems_Winter26_PMJ.pdf"
 course_code: "IT214"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT214: Database Management Systems

@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "DAIICT Campus Bird Count"
 url: "https://www.daiict.ac.in/events/6181"

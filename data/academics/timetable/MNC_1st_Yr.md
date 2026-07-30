@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 # Timetable — B.Tech MNC — 1st Year (Autumn 2026-27)
 
 Source: derived from the official DAU Autumn 2026-27 combined lecture timetable, filtered by course code.

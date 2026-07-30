@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Research / Reasearch Overview R&D pdf"
+authorization: ["public"]
 ---
 
 # Research / Reasearch Overview R&D pdf

@@ -7,6 +7,7 @@ scraped_date: "2026-06-01"
 team: "Squad D"
 source_type: "PDF"
 pdf_name: "Certificate of Academic Accomplishment.pdf"
+authorization: ["student"]
 ---
 
 # CERTIFICATE OF ACADEMIC ACCOMPLISHMENT (UNKNOWN)

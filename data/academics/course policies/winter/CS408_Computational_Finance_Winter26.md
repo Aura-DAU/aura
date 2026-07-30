@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "CS408_ComputationalFinance_Winter26 - Arnab Kumar Ray.pdf"
 course_code: "CS408 (internally listed as CS 401 in source document)"
 semester: "Winter 2025-26"
+authorization: ["student"]
 ---
 
 # CS408: Computational Finance

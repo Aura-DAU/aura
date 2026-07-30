@@ -10,6 +10,7 @@ pdf_name: "SC404 - Advanced Matrix Theory.pdf"
 course_code: "SC404"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # SC404: Advanced Matrix Theory

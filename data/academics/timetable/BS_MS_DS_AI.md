@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 # Timetable — BS-MS (DS + AI) (Autumn 2026-27)
 
 Source: official DAU Autumn 2026-27 lecture timetable.

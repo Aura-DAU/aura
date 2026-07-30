@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "Jayanth Varma"
 url: "https://www.daiict.ac.in/distinguished-professor/jayanth-varma"

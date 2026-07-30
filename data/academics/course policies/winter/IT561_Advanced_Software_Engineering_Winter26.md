@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT561_ASE_Winter26 - JayPrakash Lalchandani.pdf"
 course_code: "IT561"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT561: Advanced Software Engineering

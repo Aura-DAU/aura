@@ -5,6 +5,7 @@ category: "Faculty"
 scraped_by: "Bhagyashree Khemwani"
 scraped_date: "2026-06-10"
 team: "Team C"
+authorization: ["public"]
 ---
 
 # Special Recruitment Drive – Teaching Track Faculty (on Contract)

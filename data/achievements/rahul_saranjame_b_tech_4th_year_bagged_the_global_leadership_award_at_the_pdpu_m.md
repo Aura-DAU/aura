@@ -5,6 +5,7 @@ category: "Achievements"
 scraped_by: "Dhruvam"
 scraped_date: "2026-06-01"
 team: "Team 2"
+authorization: ["public"]
 ---
 
 # Rahul Saranjame (B.Tech 4th year), bagged the Global Leadership Award at the PDPU MUN

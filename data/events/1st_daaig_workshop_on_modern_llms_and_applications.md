@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 ﻿---
 title: "1st DAAIG Workshop on Modern LLMs and Applications"
 url: "https://www.daiict.ac.in/events/6680"

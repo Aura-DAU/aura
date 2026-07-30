@@ -10,6 +10,7 @@ pdf_name: "SC435-Complex-Network_Autumn_25 - Mukesh Tiwari.pdf"
 course_code: "SC435"
 semester: "Autumn 2025-26"
 authorization: ["student", "faculty"]
+authorization: ["student"]
 ---
 
 # SC435: Introduction to Complex Networks

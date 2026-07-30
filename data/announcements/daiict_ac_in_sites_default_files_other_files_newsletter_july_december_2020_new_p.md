@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 title: "DA-IICT Newsletter July - December 2020 (Curated)"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Newsletter-july-december-2020-new.pdf"
 category: "Achievements"

@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "IE494 Big Data Processing Autumn 2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

@@ -5,6 +5,7 @@ category: "faculty"
 scraped_by: "Bhagyashree Khemwani"
 scraped_date: "2026-06-10"
 team: "Team C"
+authorization: ["public"]
 ---
 
 # Board Of Studies

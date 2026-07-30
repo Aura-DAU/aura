@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "IT694_ComputerNetworks_Winter2026 - kalyan sasidhar P S.pdf"
 course_code: "IT694"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # IT694: Computer Networks

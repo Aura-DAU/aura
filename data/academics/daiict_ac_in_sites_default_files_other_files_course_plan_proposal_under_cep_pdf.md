@@ -7,6 +7,7 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
 pdf_name: "Courses Through CEP & AIP/Course Plan under CEP form pdf"
+authorization: ["student"]
 ---
 
 # Courses Through CEP & AIP/Course Plan under CEP form pdf

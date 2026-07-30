@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "PC731- Ethnography and Applications.pdf"
 course_code: "PC731"
 semester: "Not stated in source document"
+authorization: ["student"]
 ---
 
 # PC731: Ethnography and Applications

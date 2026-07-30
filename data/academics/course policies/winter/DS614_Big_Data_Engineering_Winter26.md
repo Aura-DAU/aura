@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "DS614_BigDataEngineering_Winter26 - Ankush Chander.pdf"
 course_code: "DS614"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # DS614: Big Data Engineering

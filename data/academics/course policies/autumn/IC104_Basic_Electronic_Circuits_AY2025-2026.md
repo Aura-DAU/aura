@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "IC104 Basic Electronic Circuits AY 2025-2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"

@@ -1,3 +1,7 @@
+---
+authorization: ["student"]
+---
+
 ﻿---
 title: "Five-Year Dual Degree (B.Tech + M.Tech) – Total Credits by End of Semester 10"
 category: "Academics"

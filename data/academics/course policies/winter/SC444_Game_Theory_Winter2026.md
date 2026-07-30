@@ -9,6 +9,7 @@ source_type: "PDF"
 pdf_name: "SC444_GameTheory_Winter2026 - G Venkatesh.pdf"
 course_code: "SC444"
 semester: "Winter 2026"
+authorization: ["student"]
 ---
 
 # SC444: Game Theory

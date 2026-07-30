@@ -1,3 +1,7 @@
+---
+authorization: ["public"]
+---
+
 title: "Vinish Kumar" url: "https://alumni.dau.edu.in/alumni_vinish_kumar.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
 # Vinish Kumar
 
