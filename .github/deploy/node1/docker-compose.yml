@@ -100,8 +100,8 @@ services:
       context: ../../server
       dockerfile: Dockerfile
     restart: unless-stopped
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     environment:
       ENV: production
       PORT: "8000"
