@@ -66,6 +66,26 @@ if [[ ! -f "${COMPOSE_DIR}/docker-compose.yml" ]]; then
   exit 1
 fi
 
+# Fail fast on stale/missing paths left over from the deploy/ layout move.
+require_path() {
+  local path="$1"
+  local kind="$2"
+  if [[ "${kind}" == "dir" ]]; then
+    if [[ ! -d "${path}" ]]; then
+      echo "error: required directory missing: ${path}" >&2
+      exit 1
+    fi
+  elif [[ ! -f "${path}" ]]; then
+    echo "error: required file missing: ${path}" >&2
+    exit 1
+  fi
+}
+require_path "${APP_ROOT}/aura" dir
+require_path "${APP_ROOT}/server" dir
+require_path "${APP_ROOT}/data" dir
+require_path "${APP_ROOT}/deploy/nginx/nginx.conf" file
+require_path "${APP_ROOT}/deploy/monitoring/prometheus.yml" file
+
 # Self-hosted runners have no interactive HTTPS credentials. Prefer either:
 #   - GITHUB_TOKEN / GH_TOKEN in the environment (CD workflow), or
 #   - SSH remote + read-only deploy key on the host (manual deploys).

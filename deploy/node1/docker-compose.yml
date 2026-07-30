@@ -21,12 +21,12 @@
 # match host GPU indices. Single GPU: run only node1 and set one endpoint.
 #
 # Usage:
-#   cp deploy/.env.prod.example deploy/.env.prod   # fill in secrets
-#   mkdir -p deploy/certs && # add fullchain.pem / privkey.pem
+#   cp deploy/node1/.env.node1.example deploy/node1/.env   # fill in secrets
+#   mkdir -p deploy/node1/certs && # add fullchain.pem / privkey.pem
 #   # Core stack (no host GPUs required):
-#   docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.prod up -d --build
+#   docker compose -f deploy/node1/docker-compose.yml --env-file deploy/node1/.env up -d --build
 #   # With local vLLM GPU nodes:
-#   docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.prod --profile gpu up -d --build
+#   docker compose -f deploy/node1/docker-compose.yml --env-file deploy/node1/.env --profile gpu up -d --build
 
 services:
   nginx:
@@ -37,6 +37,7 @@ services:
       - "443:443"
     volumes:
       - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      # TLS material stays on Node 1 under deploy/node1/certs/ (not rsynced).
       - ./certs:/etc/nginx/certs:ro
     depends_on:
       aura:
@@ -103,8 +104,8 @@ services:
       ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db
       AURA_AUDIT_LOG: /var/log/aura/personal_data_audit.log
     volumes:
-      # Raw markdown knowledge base — /documents + ad-hoc ingestion.
-      - ../data:/app/data:ro
+      # Raw markdown knowledge base — repo-root data/ (two levels up from node1/).
+      - ../../data:/app/data:ro
       - aura-vault:/var/lib/aura
       - aura-logs:/var/log/aura
     # Note: do NOT depends_on vllm-node* here — those services use profile
@@ -262,7 +263,7 @@ services:
     image: prom/prometheus:latest
     restart: unless-stopped
     volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus-data:/prometheus
     expose:
       - "9090"
@@ -279,7 +280,7 @@ services:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
     volumes:
       - grafana-data:/var/lib/grafana
-      - ./monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
+      - ../monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
     expose:
       - "3000"
     depends_on:
