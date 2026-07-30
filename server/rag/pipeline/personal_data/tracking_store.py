@@ -39,8 +39,12 @@ def _write_store(store: dict) -> None:
         if os.path.exists(tmp_path):
             try:
                 os.remove(tmp_path)
-            except Exception:
-                pass
+            except Exception as cleanup_error:
+                logger.warning(
+                    "Failed to remove temporary tracking store file '%s': %s",
+                    tmp_path,
+                    cleanup_error,
+                )
 
 def get_tracking_flags(erp_id: str) -> dict:
     """Returns the tracked facts for the given user."""
