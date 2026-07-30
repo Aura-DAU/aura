@@ -34,7 +34,7 @@ const historyThreadSchema = z.object({
   // sidebar never got updatedAt from the server and summary was lost on sync.
   updatedAt: z.number().optional(),
   summary: z.string().max(20_000).optional(),
-  summaryTurnCount: z.number().int().min(0).optional(),
+  summaryTurnCount: z.number().int().nonnegative().optional(),
   continuedFromId: z.string().min(1).max(128).optional(),
 })
 

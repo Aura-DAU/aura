@@ -1,16 +1,32 @@
 import os
 import math
 import re
-import torch
-from transformers import (
-    AutoTokenizer,
-    AutoModelForSequenceClassification
-)
 
 
 class Reranker:
 
     def __init__(self):
+        self.device = None
+        self.tokenizer = None
+        self.model = None
+        self.H1_BOOST = 0.10
+        self.H2_BOOST = 0.20
+        self.H3_BOOST = 0.15
+        # Prefer remote RERANKER_SERVICE_URL; only load the local cross-encoder
+        # eagerly when no remote is configured (lazy fallback still happens in rerank).
+        if not (os.getenv("RERANKER_SERVICE_URL") or "").strip():
+            self._ensure_local_model()
+
+    def _ensure_local_model(self):
+        if self.model is not None and self.tokenizer is not None:
+            return
+
+        import torch
+        from transformers import (
+            AutoTokenizer,
+            AutoModelForSequenceClassification
+        )
+
         env_device = os.getenv("RERANKER_DEVICE")
         if env_device:
             self.device = torch.device(env_device)
@@ -21,26 +37,17 @@ class Reranker:
         else:
             self.device = torch.device("cpu")
 
-        self.tokenizer = (
-            AutoTokenizer.from_pretrained(
-                "BAAI/bge-reranker-v2-m3"
-            )
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "BAAI/bge-reranker-v2-m3"
         )
-
         self.model = (
             AutoModelForSequenceClassification
-            .from_pretrained(
-                "BAAI/bge-reranker-v2-m3"
-            )
+            .from_pretrained("BAAI/bge-reranker-v2-m3")
         ).to(self.device)
-
         self.model.eval()
 
-        self.H1_BOOST = 0.10
-        self.H2_BOOST = 0.20
-        self.H3_BOOST = 0.15
-
     def rerank(
+
         self,
         query,
         results,
@@ -92,6 +99,8 @@ class Reranker:
                 logging.getLogger(__name__).warning("Remote reranker service failed: %s. Falling back to local model.", e)
 
         if cross_scores is None:
+            self._ensure_local_model()
+            import torch
             inputs = self.tokenizer(
                 pairs,
                 padding=True,
@@ -429,7 +438,7 @@ class Reranker:
             course_match_boost = min(course_match_boost, 1.0)
 
             # Soft recency boost when the user did not name a year: prefer
-            # convener" answers stop citing superseded rosters.
+            # newer C_DCs sheets over superseded Club Committee Data rosters.
             recency_boost = 0.0
             if not entities.get("rule_year"):
                 year_text = " ".join(
@@ -443,15 +452,12 @@ class Reranker:
                 if year_match:
                     start_yy = int(year_match.group(1))
                     end_yy = int(year_match.group(2))
-                    # Only boost plausible academic years (end == start+1).
                     if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
                         recency_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
                 elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
                     recency_boost = 0.6
 
             # Fix #4: all components are now on comparable scales [0, 1].
-            # course_match_boost is weighted at 0.20 (was a raw +0.35 add).
-            # semester_penalty is applied to the normalised cross component.
             final_score = (
                 (0.60 * norm_cross)
                 +
@@ -467,8 +473,6 @@ class Reranker:
                 +
                 (0.05 * recency_boost)
                 +
-                # Fix #13: penalty is now a fraction of the normalised cross
-                # score so it remains meaningful even at high relevance.
                 (semester_penalty * norm_cross)
             )
 

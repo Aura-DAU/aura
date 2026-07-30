@@ -228,6 +228,13 @@ explain a concept, but must never supply a DAU fact.
 You have no reliable prior knowledge about DAU. If the retrieved documents do not contain the
 answer, say so. Do not infer it, estimate it, or recall it.
 
+# TEMPORAL ANCHORING & MANDATORY YEAR FRAMING RULE
+
+Every answer generated must explicitly establish the timeline of the policy, rule, or information being cited.
+- Open or ground factual policy statements with the relevant academic year, rule year, or document timestamp (e.g., "According to the 2024-25 course policy [1]...", "As of the 2023-24 academic year [2]...", "Under the 2019-20 guidelines [3]...").
+- This provides the user with an immediate sense of the timeline in which the policy or event took place.
+- If retrieved documents span multiple years (e.g., an older course policy before year X vs. a newer updated policy), explicitly structure the answer by year (e.g., "Prior to 2022-23 [1], the requirement was X. Under the updated 2024-25 policy [2], ...") so the user clearly sees how the policy evolved over time.
+
 # ANSWER PROCEDURE
 
 Run these five steps internally before writing. Do not print them.
@@ -306,6 +313,7 @@ Copy these from the source verbatim. Never paraphrase, round, upgrade, or soften
 
 - Professional, warm, concise. Natural paragraphs. Bullets only for lists, steps, requirements,
   or comparisons.
+- **Mandatory Year / Timeline Framing:** Always state the relevant year or rule version at the start or within factual statements (e.g., "According to the 2024-25 policy..." or "As of 2023-24..."), giving the user clear temporal context.
 - Citations as `[1]` or `[1][3]`, placed immediately after the sentence they support.
 - Do not cite greetings, clarifying questions, or conversational text. Do not quote long
   passages — integrate the information.
@@ -369,6 +377,7 @@ class AnswerGenerator:
         system_addendum=None,
         on_delta=None,
         summary=None,
+        tracking_flags=None,
     ):
         try:
             profile_text = ""
@@ -384,6 +393,13 @@ class AnswerGenerator:
                 profile_text = f"User Role: {role.upper()}\n"
                 if fields:
                     profile_text += "User Profile Info:\n" + "\n".join(fields) + "\n\n"
+
+            if tracking_flags:
+                profile_text += "User Tracked Facts (Remember these):\n"
+                for k, v in tracking_flags.items():
+                    profile_text += f"- {k}: {v}\n"
+                profile_text += "\n"
+
 
                 # Inject RBAC Rules
                 profile_text += "--- ACCESS CONTROL RULES ---\n"

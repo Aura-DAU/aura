@@ -93,6 +93,9 @@ services:
       QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
       QDRANT_API_KEY: ${QDRANT_API_KEY:-}
       QDRANT_COLLECTION: ${QDRANT_COLLECTION:-aura-knowledge-base}
+      EMBEDDING_SERVICE_URL: ${EMBEDDING_SERVICE_URL:-}
+      RERANKER_SERVICE_URL: ${RERANKER_SERVICE_URL:-}
+      # Use cpu unless backend has NVIDIA runtime + GPU mounted.
       RERANKER_DEVICE: ${RERANKER_DEVICE:-cpu}
       GOOGLE_CALENDAR_CLIENT_ID: ${GOOGLE_CALENDAR_CLIENT_ID}
       GOOGLE_CALENDAR_CLIENT_SECRET: ${GOOGLE_CALENDAR_CLIENT_SECRET}
@@ -118,6 +121,7 @@ services:
       qdrant:
         condition: service_healthy
     networks:
+      - aura-edge
       - aura-internal
 
   postgres:
@@ -291,6 +295,8 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
       - ./monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
+      - ./monitoring/grafana-dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml:ro
+      - ./monitoring/dashboards:/etc/grafana/provisioning/dashboards:ro
     expose:
       - "3000"
     depends_on:

@@ -44,7 +44,7 @@ on:
       - ".github/deploy/scripts/deploy-cluster.sh"
       - ".github/deploy/scripts/lib/**"
       - "services/**"
-      - ".github/workflows/cd-auto-deploy.yml"
+      - ".github/workflows/cd.yml"
 
 permissions:
   contents: read
@@ -189,7 +189,7 @@ jobs:
             else
               changed="$(git diff --name-only "${BEFORE}" "${AFTER}")"
               if printf '%s\n' "${changed}" | grep -E \
-                '^(aura/|server/|.github/deploy/node1/|.github/deploy/scripts/deploy-apps\.sh|.github/deploy/nginx/|\.github/workflows/cd-auto-deploy\.yml)' \
+                '^(aura/|server/|\.github/deploy/node1/|\.github/deploy/scripts/deploy-apps\.sh|\.github/deploy/nginx/|\.github/workflows/cd\.yml)' \
                 >/dev/null; then
                 deploy_apps=true
               fi
@@ -230,6 +230,9 @@ jobs:
           AURA_APP_ROOT: /opt/aura/app
           AURA_ENV_FILE: /opt/aura/app/deploy/node1/.env
           GITHUB_TOKEN: ${{ secrets.AURA_DEPLOY_GIT_TOKEN || github.token }}
+          # Host/SSH settings: prefer non-empty GitHub Actions vars; empty vars
+          # stay empty so deploy/scripts/lib/remote.sh can fill from
+          # deploy/node1/.env (intentional fallback).
           AURA_NODE2_HOST: ${{ vars.AURA_NODE2_HOST }}
           AURA_NODE3_HOST: ${{ vars.AURA_NODE3_HOST }}
           AURA_NODE4_HOST: ${{ vars.AURA_NODE4_HOST }}
