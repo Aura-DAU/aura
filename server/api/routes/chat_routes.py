@@ -156,7 +156,7 @@ async def chat_stream(
 
     def _run() -> None:
         try:
-            mem_result = get_conversation_memory().prepare(request.summary, history)
+            mem_result = get_conversation_memory().prepare(body.summary, history)
             loop.call_soon_threadsafe(events.put_nowait, ("summary", mem_result))
             result = get_aura().ask(
                 question=body.question,
