@@ -31,18 +31,18 @@ on:
     paths:
       - "aura/**"
       - "server/**"
-      - "deploy/node1/**"
-      - "deploy/node2/**"
-      - "deploy/node3/**"
-      - "deploy/node4/**"
-      - "deploy/monitoring/**"
-      - "deploy/nginx/**"
-      - "deploy/scripts/deploy-apps.sh"
-      - "deploy/scripts/deploy-node2.sh"
-      - "deploy/scripts/deploy-node3.sh"
-      - "deploy/scripts/deploy-node4.sh"
-      - "deploy/scripts/deploy-cluster.sh"
-      - "deploy/scripts/lib/**"
+      - ".github/deploy/node1/**"
+      - ".github/deploy/node2/**"
+      - ".github/deploy/node3/**"
+      - ".github/deploy/node4/**"
+      - ".github/deploy/monitoring/**"
+      - ".github/deploy/nginx/**"
+      - ".github/deploy/scripts/deploy-apps.sh"
+      - ".github/deploy/scripts/deploy-node2.sh"
+      - ".github/deploy/scripts/deploy-node3.sh"
+      - ".github/deploy/scripts/deploy-node4.sh"
+      - ".github/deploy/scripts/deploy-cluster.sh"
+      - ".github/deploy/scripts/lib/**"
       - "services/**"
       - ".github/workflows/cd.yml"
 
@@ -150,7 +150,7 @@ jobs:
           # Deploy tree must match the remote ref exactly. Reset instead of
           # pull --ff-only so stray local edits on the runner (e.g. a hand-edited
           # tracked file) can never abort the deploy. Untracked files such as
-          # deploy/node1/.env are left in place (no git clean).
+          # .github/deploy/node1/.env are left in place (no git clean).
           git checkout -f "${REF}"
           if git show-ref --verify --quiet "refs/remotes/origin/${REF}"; then
             git reset --hard "origin/${REF}"
@@ -189,22 +189,22 @@ jobs:
             else
               changed="$(git diff --name-only "${BEFORE}" "${AFTER}")"
               if printf '%s\n' "${changed}" | grep -E \
-                '^(aura/|server/|deploy/node1/|deploy/scripts/deploy-apps\.sh|deploy/nginx/|\.github/workflows/cd\.yml)' \
+                '^(aura/|server/|\.github/deploy/node1/|\.github/deploy/scripts/deploy-apps\.sh|\.github/deploy/nginx/|\.github/workflows/cd\.yml)' \
                 >/dev/null; then
                 deploy_apps=true
               fi
               if printf '%s\n' "${changed}" | grep -E \
-                '^(deploy/node2/|deploy/scripts/deploy-node2\.sh|deploy/scripts/lib/|deploy/scripts/deploy-cluster\.sh)' \
+                '^(\.github/deploy/node2/|.github/deploy/scripts/deploy-node2\.sh|.github/deploy/scripts/lib/|.github/deploy/scripts/deploy-cluster\.sh)' \
                 >/dev/null; then
                 deploy_node2=true
               fi
               if printf '%s\n' "${changed}" | grep -E \
-                '^(deploy/node3/|deploy/scripts/deploy-node3\.sh|deploy/scripts/lib/|deploy/scripts/deploy-cluster\.sh)' \
+                '^(\.github/deploy/node3/|.github/deploy/scripts/deploy-node3\.sh|.github/deploy/scripts/lib/|.github/deploy/scripts/deploy-cluster\.sh)' \
                 >/dev/null; then
                 deploy_node3=true
               fi
               if printf '%s\n' "${changed}" | grep -E \
-                '^(deploy/node4/|deploy/monitoring/|deploy/scripts/deploy-node4\.sh|deploy/scripts/lib/|deploy/scripts/deploy-cluster\.sh|services/)' \
+                '^(\.github/deploy/node4/|.github/deploy/monitoring/|.github/deploy/scripts/deploy-node4\.sh|.github/deploy/scripts/lib/|.github/deploy/scripts/deploy-cluster\.sh|services/)' \
                 >/dev/null; then
                 deploy_node4=true
               fi
@@ -252,11 +252,11 @@ jobs:
           export AURA_SSH_KEY
 
           chmod +x \
-            "${AURA_APP_ROOT}/deploy/scripts/deploy-apps.sh" \
-            "${AURA_APP_ROOT}/deploy/scripts/deploy-node2.sh" \
-            "${AURA_APP_ROOT}/deploy/scripts/deploy-node3.sh" \
-            "${AURA_APP_ROOT}/deploy/scripts/deploy-node4.sh" \
-            "${AURA_APP_ROOT}/deploy/scripts/deploy-cluster.sh"
+            "${AURA_APP_ROOT}/.github/deploy/scripts/deploy-apps.sh" \
+            "${AURA_APP_ROOT}/.github/deploy/scripts/deploy-node2.sh" \
+            "${AURA_APP_ROOT}/.github/deploy/scripts/deploy-node3.sh" \
+            "${AURA_APP_ROOT}/.github/deploy/scripts/deploy-node4.sh" \
+            "${AURA_APP_ROOT}/.github/deploy/scripts/deploy-cluster.sh"
 
           args=()
           [[ "${DEPLOY_APPS}" == "true" ]] && args+=(--apps)
@@ -265,7 +265,7 @@ jobs:
           [[ "${DEPLOY_NODE4}" == "true" ]] && args+=(--node4)
 
           echo "==> Running deploy-cluster.sh ${args[*]} ${DEPLOY_REF}"
-          "${AURA_APP_ROOT}/deploy/scripts/deploy-cluster.sh" "${args[@]}" "${DEPLOY_REF}"
+          "${AURA_APP_ROOT}/.github/deploy/scripts/deploy-cluster.sh" "${args[@]}" "${DEPLOY_REF}"
 
       - name: Nothing to deploy
         if: >-

@@ -77,7 +77,7 @@ from fastapi import Response
 from api.metrics import REQUEST_COUNT, REQUEST_LATENCY, STAGE_LATENCY, metrics_response
 
 # ── Prometheus scrape endpoint (architecture doc: aura-prometheus) ────────
-# Never routed through the public NGINX edge — see deploy/nginx/nginx.conf, which
+# Never routed through the public NGINX edge — see .github/deploy/nginx.conf, which
 # only proxies /api/*, /backend/, and /. Prometheus scrapes this container
 # directly over the internal Docker network.
 @app.get("/metrics")

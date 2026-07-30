@@ -10,6 +10,7 @@ from metadata_extractors import (
     extract_event_metadata,
     extract_program_name,
     extract_section_type,
+    resolve_document_academic_year,
 )
 
 
@@ -370,8 +371,6 @@ def process_markdown_file(file_path):
         parts[data_index + 2:-1]
     )
 
-    import datetime
-
     with open(file_path, "r", encoding="utf-8") as f:
         raw_content = f.read()
 
@@ -385,42 +384,12 @@ def process_markdown_file(file_path):
     match = re.match(r"^---\n(.*?)\n---\n", content_clean, re.DOTALL)
     frontmatter_offset = match.group(0).count('\n') if match else 0
 
-    # 2. Extract document_year
-    document_year = None
-    if metadata.get("document_year") is not None:
-        try:
-            document_year = int(metadata.get("document_year"))
-        except (ValueError, TypeError):
-            document_year = str(metadata.get("document_year"))
-    elif metadata.get("year") is not None:
-        try:
-            document_year = int(metadata.get("year"))
-        except (ValueError, TypeError):
-            document_year = str(metadata.get("year"))
-    elif metadata.get("scraped_date") is not None:
-        scraped_date_str = str(metadata.get("scraped_date"))
-        year_match = re.search(r"\b(20\d{2})\b", scraped_date_str)
-        if year_match:
-            document_year = int(year_match.group(1))
-
-    if document_year is None:
-        year_match = re.search(r"\b(20\d{2})\b", file_path.name)
-        if year_match:
-            document_year = int(year_match.group(1))
-
-    if document_year is None:
-        for part in file_path.parts:
-            year_match = re.search(r"\b(20\d{2})\b", part)
-            if year_match:
-                document_year = int(year_match.group(1))
-                break
-
-    if document_year is None:
-        year_match = re.search(r"\b(20\d{2})\b", body[:1000])
-        if year_match:
-            document_year = int(year_match.group(1))
-        else:
-            document_year = datetime.date.today().year
+    # 2. Extract document_year / academic_year.
+    # Prefer title/filename academic labels (e.g. "24-25", "2026-27") over
+    # scraped_date — ingest time is not the roster year.
+    document_year, academic_year = resolve_document_academic_year(
+        metadata, file_path, body
+    )
 
     authorization = metadata.get("authorization") or metadata.get("authorisation") or ["public"]
     if isinstance(authorization, str):
@@ -543,8 +512,10 @@ def process_markdown_file(file_path):
                 
                 "start_line": start_line,
                 "end_line": end_line,
-                "document_year": document_year
+                "document_year": document_year,
             }
+            if academic_year:
+                chunk_record["academic_year"] = academic_year
             chunk_record.update(academic_applicability)
 
             if section_faculty:
@@ -608,8 +579,10 @@ def process_markdown_file(file_path):
             
             "start_line": start_line,
             "end_line": end_line,
-            "document_year": document_year
+            "document_year": document_year,
         }
+        if academic_year:
+            chunk_record["academic_year"] = academic_year
         chunk_record.update(academic_applicability)
 
         if program_name or fm_program_name:
