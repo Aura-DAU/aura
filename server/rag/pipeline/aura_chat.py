@@ -248,6 +248,7 @@ class AuraChat:
                         target_erp_id,
                         access_result,
                         requester_erp_id=identity.erp_id,
+                        identity=identity,
                     )
                 erp_context = self.context_builder.build(erp_data, identity, access_result)
                 is_personal = True
@@ -265,12 +266,7 @@ class AuraChat:
                 sources   = retrieval_result.get("sources", [])
 
                 if not chunks and query_type == "PUBLIC":
-                    reason = retrieval_result.get("abstention_reason")
-                    if reason == "academic_scope_unavailable":
-                        msg = "I need your academic profile to answer this accurately, but it seems your profile is not fully synced in the system yet. Please try again later."
-                    else:
-                        msg = "I couldn't find any relevant documents in the knowledge base for your query. Please try rephrasing or ask about something else."
-                    return {"answer": msg, "sources": [], "is_personal_data": False}
+                    return {"answer": "I'm having trouble retrieving information right now. Please try again.", "sources": [], "is_personal_data": False}
 
             # ── Step 8: Merge and generate ─────────────────────────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
@@ -322,6 +318,7 @@ class AuraChat:
         roll_number: Optional[str],
         access_result,
         requester_erp_id: Optional[str] = None,
+        identity=None,
     ) -> dict:
         if not roll_number:
             return {}
@@ -350,6 +347,16 @@ class AuraChat:
             data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
         if "courses" in fields and requester_erp_id:
             data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
+        # Timetable is in AURA's own PostgreSQL — never goes through RAG/Qdrant.
+        if "timetable" in fields and identity is not None:
+            try:
+                from pipeline.timetable.service import get_effective_timetable
+                data["timetable"] = get_effective_timetable(identity)
+            except Exception as _tt_err:
+                import logging
+                logging.getLogger(__name__).warning(
+                    "Timetable fetch skipped in _fetch_erp_data: %s", _tt_err
+                )
         return data
 
     def _rag_only(self, query, history, profile, user_role: str = "public") -> dict:
@@ -358,12 +365,7 @@ class AuraChat:
             retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
         chunks    = retrieval_result.get("chunks", [])
         if not chunks:
-            reason = retrieval_result.get("abstention_reason")
-            if reason == "academic_scope_unavailable":
-                msg = "I need your academic profile to answer this accurately, but it seems your profile is not fully synced in the system yet. Please try again later."
-            else:
-                msg = "I couldn't find any relevant documents in the knowledge base for your query. Please try rephrasing or ask about something else."
-            return {"answer": msg, "sources": [], "is_personal_data": False}
+            return {"answer": "I'm having trouble retrieving information. Please try again.", "sources": [], "is_personal_data": False}
         with track_segment("generation_time"):
             answer = self.generator.generate(
                 query=retrieval_result.get("corrected_query", query),

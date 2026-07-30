@@ -81,6 +81,48 @@ class ERPContextBuilder:
                 )
             lines.append("")
 
+        if "timetable" in erp_results and erp_results["timetable"]:
+            tt = erp_results["timetable"]
+            slots = tt.get("timetable", []) if isinstance(tt, dict) else []
+            cohort = tt.get("cohort", {}) if isinstance(tt, dict) else {}
+            is_common = tt.get("is_common", False) if isinstance(tt, dict) else False
+            if slots:
+                label = (
+                    f"Year {cohort.get('year','?')}, Sem {cohort.get('sem','?')}, "
+                    f"Section {cohort.get('sec','?')}"
+                )
+                if is_common:
+                    lines.append(f"Weekly Timetable (common schedule — section not yet configured, {label}):")
+                else:
+                    lines.append(f"Weekly Timetable ({label}):")
+                # Group by day
+                by_day: dict = {}
+                for s in slots:
+                    day = s.get("day", "Unknown")
+                    by_day.setdefault(day, []).append(s)
+                day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                for day in day_order:
+                    if day not in by_day:
+                        continue
+                    lines.append(f"  {day}:")
+                    for s in by_day[day]:
+                        start = str(s.get("start_time", ""))[:5]
+                        end   = str(s.get("end_time",   ""))[:5]
+                        code  = s.get("course_code", "")
+                        name  = s.get("course_name", "")
+                        room  = s.get("room", "")
+                        fac   = s.get("faculty_name", "")
+                        stype = s.get("session_type", "")
+                        detail = f"{start}–{end}  {code} {name}"
+                        if stype:
+                            detail += f" [{stype}]"
+                        if room:
+                            detail += f"  Room: {room}"
+                        if fac:
+                            detail += f"  Faculty: {fac}"
+                        lines.append(f"    {detail}")
+                lines.append("")
+
         lines.append("</personal_data>")
         return "\n".join(lines)
 

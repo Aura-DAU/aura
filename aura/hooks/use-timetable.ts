@@ -29,18 +29,32 @@ export function useTimetable() {
   const refetch = useCallback(async () => {
     setLoading(true)
     setError(null)
+    const controller = new AbortController()
     try {
-      const res = await fetch("/api/timetable/me", { cache: "no-store" })
-      const json = await res.json()
+      const res = await fetch("/api/timetable/me", {
+        cache: "no-store",
+        signal: controller.signal,
+      })
       if (!res.ok) {
-        throw new Error(json?.error || "Failed to load timetable")
+        // Safely parse JSON error body — fall back if it isn't JSON (e.g. nginx 502 HTML)
+        let msg = "Failed to load timetable"
+        try {
+          const errJson = await res.json()
+          if (errJson?.error) msg = errJson.error
+        } catch {
+          // non-JSON body — keep the default message
+        }
+        throw new Error(msg)
       }
+      const json = await res.json()
       setData(json)
     } catch (err) {
+      if (err instanceof Error && err.name === "AbortError") return
       setError(err instanceof Error ? err.message : "Failed to load timetable")
     } finally {
       setLoading(false)
     }
+    return () => controller.abort()
   }, [])
 
   useEffect(() => {
