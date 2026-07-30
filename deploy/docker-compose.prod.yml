@@ -118,6 +118,7 @@ services:
       qdrant:
         condition: service_healthy
     networks:
+      - aura-edge
       - aura-internal
 
   postgres:

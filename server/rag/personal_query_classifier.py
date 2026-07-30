@@ -21,11 +21,12 @@ Classify the query into one of four types:
 
 PUBLIC: Answer is in public university documents — policies, course catalogs,
 events, faculty research profiles, placement aggregate stats, scholarship
-rules (not a specific student's eligibility), general campus info.
+rules (not a specific student's eligibility), general campus info, student clubs,
+club convenors, club leadership/structure, and student organizations (e.g. "Who is the convenor of AI Club?").
 
 PERSONAL: Requires looking up a specific person's private record:
   For STUDENTS — CGPA, attendance, grades, fees, hostel allotment, BTP status,
-    enrollment status, timetable, transcript, club memberships.
+    enrollment status, timetable, transcript, personal private club membership status/dues of an individual student (NOT public club convenors or general club leadership).
   For FACULTY — their own teaching schedule, BTP students under them,
     exploration project mentees, office hour slots, course student list,
     CPDA/leave status, payslip, assigned exam duties.

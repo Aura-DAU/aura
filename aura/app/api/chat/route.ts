@@ -205,7 +205,10 @@ async function handleChatPost(req: Request): Promise<Response> {
   if (!backendRes.ok) {
     const text = await backendRes.text().catch(() => "")
     console.error("[chat] backend error:", backendRes.status, text)
-    return new Response("Backend error", { status: 502 })
+    return new Response(text || backendRes.statusText || "Backend error", {
+      status: backendRes.status,
+      headers: { "Content-Type": backendRes.headers.get("Content-Type") || "text/plain" },
+    })
   }
 
   if (!backendRes.body) {
