@@ -8,17 +8,47 @@ import { Citation } from "@/lib/chat-types"
 import { useDocumentViewer } from "@/hooks/use-document-viewer"
 
 // Allow fragment-only hrefs (#citation-N) through the sanitizer.
+// Also allow className on all elements for our highlight plugin.
 const sanitizeSchema = {
   ...defaultSchema,
   protocols: {
     ...defaultSchema.protocols,
     href: [...(defaultSchema.protocols?.href ?? []), "#"],
   },
+  attributes: {
+    ...defaultSchema.attributes,
+    "*": [...(defaultSchema.attributes?.["*"] ?? []), "className", "data-highlighted"],
+  }
 }
 
 interface MarkdownContentProps {
   content: string
   citations?: Citation[]
+  highlightStart?: number
+  highlightEnd?: number
+  sanitize?: boolean
+}
+
+function walk(node: any, callback: (n: any) => void) {
+  if (!node) return
+  callback(node)
+  if (Array.isArray(node.children)) {
+    for (const child of node.children) {
+      walk(child, callback)
+    }
+  }
+}
+
+function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: number) {
+  if (highlightStart) {
+    console.log("shouldHighlight node:", node);
+  }
+  if (!node || !node.position || !highlightStart) return undefined;
+  const start = node.position.start.line;
+  const end = node.position.end.line;
+  const targetEnd = highlightEnd ?? highlightStart;
+  if (start <= targetEnd && end >= highlightStart) return "true";
+  return undefined;
 }
 
 function InlineCitation({ index, citation }: { index: number; citation: Citation }) {
@@ -44,10 +74,18 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
     <button
       type="button"
       onMouseEnter={() => {
+        if (typeof window !== 'undefined' && window.innerWidth < 768) return;
         prefetchDocument(viewerTarget)
         openDocument(viewerTarget)
       }}
-      onClick={() => openDocument(viewerTarget)}
+      onClick={() => {
+        const isUrl = citation.file.startsWith("http://") || citation.file.startsWith("https://")
+        if (isUrl) {
+          window.open(citation.file, "_blank", "noopener,noreferrer")
+        } else {
+          openDocument(viewerTarget)
+        }
+      }}
       className="inline-flex items-center justify-center rounded-full bg-theme-gray px-1.5 py-0.5 text-[10px] font-medium text-theme-yellow hover:bg-theme-gray-light hover:text-neutral-100 transition-colors mx-0.5 cursor-pointer"
       aria-label={`View source: ${citation.title ?? citation.file}`}
     >
@@ -56,48 +94,69 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
   )
 }
 
-/** Walk React children, splitting text nodes that contain [N] citation references. */
-function processCitationChildren(
-  children: React.ReactNode,
-  citations: Citation[] | undefined,
-): React.ReactNode {
+function processCitationChildren(children: React.ReactNode, citations?: Citation[]) {
   if (!citations || citations.length === 0) return children
 
-  return React.Children.map(children, (child) => {
+  return React.Children.map(children, (child, i) => {
     if (typeof child !== "string") return child
 
-    // Split on [1], [2], etc.  Keep delimiters via capture group.
-    const parts = child.split(/(\[\d+\])/)
-    if (parts.length === 1) return child // no citations found
-
-    return parts.map((part, i) => {
-      const match = /^\[(\d+)\]$/.exec(part)
-      if (!match) return part
-      const idx = parseInt(match[1], 10)
-      const citation = citations[idx - 1]
-      if (!citation) return part
-      return <InlineCitation key={`cit-${idx}-${i}`} index={idx} citation={citation} />
+    // Regex to match [1], [2], etc.
+    const parts = child.split(/(\[\d+\])/g)
+    return parts.map((part, idx) => {
+      const match = part.match(/^\[(\d+)\]$/)
+      if (match) {
+        const index = parseInt(match[1], 10)
+        const citation = citations[index - 1]
+        if (!citation) return part
+        return <InlineCitation key={`cit-${idx}-${i}`} index={index} citation={citation} />
+      }
+      return part
     })
   })
 }
 
-function MarkdownContentInner({ content, citations }: MarkdownContentProps) {
+function MarkdownContentInner({ content, citations, highlightStart, highlightEnd, sanitize = true }: MarkdownContentProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    if (highlightStart) {
+      // A small timeout ensures the DOM has updated and layout is calculated
+      const id = requestAnimationFrame(() => {
+        const el = containerRef.current?.querySelector("[data-highlighted='true']")
+        if (el) {
+          el.scrollIntoView({ block: "center", behavior: "smooth" })
+        }
+      })
+      return () => cancelAnimationFrame(id)
+    }
+  }, [highlightStart, highlightEnd, content])
+
+  const rehypePlugins = sanitize ? [[rehypeSanitize, sanitizeSchema]] as any : []
+
   return (
-    <div className="chat-v2-prose prose prose-invert max-w-none">
+    <div ref={containerRef} className="chat-v2-prose prose prose-invert max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[[rehypeSanitize, sanitizeSchema]]}
+        rehypePlugins={rehypePlugins}
         components={{
           // Process inline [N] citations inside paragraph text.
-          p({ children, ...props }) {
-            return <p {...props}>{processCitationChildren(children, citations)}</p>
+          p({ node, children, ...props }) {
+            return <p {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)}>{processCitationChildren(children, citations)}</p>
           },
-          li({ children, ...props }) {
-            return <li {...props}>{processCitationChildren(children, citations)}</li>
+          li({ node, children, ...props }) {
+            return <li {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)}>{processCitationChildren(children, citations)}</li>
           },
-          td({ children, ...props }) {
-            return <td {...props}>{processCitationChildren(children, citations)}</td>
+          td({ node, children, ...props }) {
+            return <td {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)}>{processCitationChildren(children, citations)}</td>
           },
+          h1: ({ node, ...props }) => <h1 {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)} />,
+          h2: ({ node, ...props }) => <h2 {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)} />,
+          h3: ({ node, ...props }) => <h3 {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)} />,
+          h4: ({ node, ...props }) => <h4 {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)} />,
+          ul: ({ node, ...props }) => <ul {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)} />,
+          ol: ({ node, ...props }) => <ol {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)} />,
+          blockquote: ({ node, ...props }) => <blockquote {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)} />,
+          table: ({ node, ...props }) => <table {...props} data-highlighted={shouldHighlight(node, highlightStart, highlightEnd)} />,
           // Also handle any that survived as markdown links (backup).
           a({ href, children, ...props }) {
             if (href?.startsWith("#citation-")) {

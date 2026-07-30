@@ -16,7 +16,7 @@ interface FetchState {
   content?: string
   error?: string
 }
-
+3
 export function DocumentViewerSheet() {
   const { target, isOpen, closeDocument } = useDocumentViewer()
 
@@ -41,7 +41,6 @@ function DocumentViewerPanel({
       ? { status: "loaded", content: documentCache.get(target.path) }
       : { status: "idle" },
   )
-  const highlightRef = useRef<HTMLDivElement | null>(null)
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -84,35 +83,25 @@ function DocumentViewerPanel({
     }
   }, [target.path])
 
-  // Auto-scroll to the cited line range once content is rendered.
-  useEffect(() => {
-    if (state.status !== "loaded") return
-    const id = requestAnimationFrame(() => {
-      highlightRef.current?.scrollIntoView({ block: "center", behavior: "smooth" })
-    })
-    return () => cancelAnimationFrame(id)
-  }, [state.status])
 
-  const { lines, startLine, endLine } = useMemo(() => {
+  const { strippedContent, startLine, endLine } = useMemo(() => {
     const rawLines = state.content?.split("\n") ?? []
     let offset = 0
     if (rawLines[0]?.trim() === "---") {
       const frontmatterEndIndex = rawLines.findIndex((line, i) => i > 0 && line.trim() === "---")
       if (frontmatterEndIndex !== -1) {
         offset = frontmatterEndIndex + 1
-        rawLines.splice(0, offset)
       }
     }
     
     return {
-      lines: rawLines,
+      strippedContent: rawLines.slice(offset).join("\n"),
       startLine: target.startLine ? Math.max(1, target.startLine - offset) : undefined,
-      endLine: (target.endLine ?? target.startLine) 
-        ? Math.max(1, (target.endLine ?? target.startLine)! - offset) 
-        : undefined,
+      endLine: target.endLine 
+        ? Math.max(1, target.endLine - offset) 
+        : (target.startLine ? Math.max(1, target.startLine - offset) : undefined),
     }
   }, [state.content, target.startLine, target.endLine])
-
   return (
     <>
       <motion.div
@@ -164,28 +153,12 @@ function DocumentViewerPanel({
             <div className="p-4 text-sm text-theme-red">{state.error}</div>
           ) : (
             <div className="px-6 py-6 font-sans text-[15px] leading-relaxed text-neutral-300">
-              {startLine ? (
-                <>
-                  <div className="opacity-50 transition-opacity hover:opacity-100">
-                    <MarkdownContent content={lines.slice(0, startLine - 1).join("\n")} />
-                  </div>
-                  
-                  <div 
-                    ref={highlightRef}
-                    className="my-6 -mx-6 px-6 py-4 bg-theme-yellow/10 border-l-[3px] border-theme-yellow shadow-[inset_0_1px_0_0_rgba(255,190,63,0.1)] transition-colors"
-                  >
-                    <div className="text-neutral-100">
-                      <MarkdownContent content={lines.slice(startLine - 1, endLine).join("\n")} />
-                    </div>
-                  </div>
-                  
-                  <div className="opacity-50 transition-opacity hover:opacity-100">
-                    <MarkdownContent content={lines.slice(endLine).join("\n")} />
-                  </div>
-                </>
-              ) : (
-                <MarkdownContent content={lines.join("\n")} />
-              )}
+              <MarkdownContent 
+                content={strippedContent} 
+                highlightStart={startLine} 
+                highlightEnd={endLine} 
+                sanitize={false}
+              />
             </div>
           )}
         </div>
