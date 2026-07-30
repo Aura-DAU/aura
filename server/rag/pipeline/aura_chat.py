@@ -265,7 +265,12 @@ class AuraChat:
                 sources   = retrieval_result.get("sources", [])
 
                 if not chunks and query_type == "PUBLIC":
-                    return {"answer": "I'm having trouble retrieving information right now. Please try again.", "sources": [], "is_personal_data": False}
+                    reason = retrieval_result.get("abstention_reason")
+                    if reason == "academic_scope_unavailable":
+                        msg = "I need your academic profile to answer this accurately, but it seems your profile is not fully synced in the system yet. Please try again later."
+                    else:
+                        msg = "I couldn't find any relevant documents in the knowledge base for your query. Please try rephrasing or ask about something else."
+                    return {"answer": msg, "sources": [], "is_personal_data": False}
 
             # ── Step 8: Merge and generate ─────────────────────────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
@@ -353,7 +358,12 @@ class AuraChat:
             retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
         chunks    = retrieval_result.get("chunks", [])
         if not chunks:
-            return {"answer": "I'm having trouble retrieving information. Please try again.", "sources": [], "is_personal_data": False}
+            reason = retrieval_result.get("abstention_reason")
+            if reason == "academic_scope_unavailable":
+                msg = "I need your academic profile to answer this accurately, but it seems your profile is not fully synced in the system yet. Please try again later."
+            else:
+                msg = "I couldn't find any relevant documents in the knowledge base for your query. Please try rephrasing or ask about something else."
+            return {"answer": msg, "sources": [], "is_personal_data": False}
         with track_segment("generation_time"):
             answer = self.generator.generate(
                 query=retrieval_result.get("corrected_query", query),

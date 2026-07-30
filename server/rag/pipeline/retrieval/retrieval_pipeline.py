@@ -229,37 +229,6 @@ class RetrievalPipeline:
                 
         return query
 
-    @staticmethod
-    def _canonical_semester_values(semester_raw):
-        if not semester_raw:
-            return []
-        sem_str = str(semester_raw).strip()
-        arabic_to_roman = {
-            "1": "I", "2": "II", "3": "III", "4": "IV",
-            "5": "V", "6": "VI", "7": "VII", "8": "VIII"
-        }
-        roman_to_arabic = {v: k for k, v in arabic_to_roman.items()}
-        m_digit = re.search(r"\b([1-8])\b", sem_str)
-        m_roman = re.search(r"\b(VIII|VII|VI|V|IV|III|II|I)\b", sem_str, re.IGNORECASE)
-        digit = m_digit.group(1) if m_digit else None
-        roman = m_roman.group(1).upper() if m_roman else None
-        if not digit and roman:
-            digit = roman_to_arabic.get(roman)
-        elif digit and not roman:
-            roman = arabic_to_roman.get(digit)
-        variants = []
-        if roman:
-            variants.extend([f"Semester {roman}", roman])
-        if digit:
-            variants.extend([f"Semester {digit}", f"Sem {digit}", digit])
-        seen = set()
-        out = []
-        for v in variants:
-            if v not in seen:
-                seen.add(v)
-                out.append(v)
-        return out or [sem_str]
-
     def _build_metadata_filter(
         self,
         plan
@@ -349,18 +318,14 @@ class RetrievalPipeline:
             )
         )
 
-        if semester:
-            sem_vals = self._canonical_semester_values(semester)
-            sem_clause = {"semester": {"$in": sem_vals}} if len(sem_vals) > 1 else {"semester": {"$eq": sem_vals[0]}}
-            if program_name:
-                prog_clause = as_filter("program_name", program_name)
-                return {
-                    "$and": [
-                        prog_clause,
-                        sem_clause
-                    ]
-                }
-            return sem_clause
+        if program_name and semester:
+            prog_clause = as_filter("program_name", program_name)
+            return {
+                "$and": [
+                    prog_clause,
+                    {"semester": {"$eq": semester}}
+                ]
+            }
 
         if program_name:
             return as_filter("program_name", program_name)
@@ -399,6 +364,10 @@ class RetrievalPipeline:
 
     @staticmethod
     def _requires_academic_scope(plan: dict) -> bool:
+        entities = plan.get("entities", {})
+        if any(entities.get(k) for k in ["program_name", "course_code", "course_name"]):
+            return False
+
         return plan.get("category") == "academics" or plan.get("retrieval_intent") in {
             "program_curriculum", "program_overview", "policy_version", "rules",
         }
@@ -595,14 +564,6 @@ class RetrievalPipeline:
         )
 
         plan = future_plan.result()
-
-        # Infer user program from academic_scope if available and not present in plan entities
-        if academic_scope and getattr(academic_scope, "programme_id", None):
-            entities = plan.setdefault("entities", {})
-            if not entities.get("program_name"):
-                inferred_prog = self._canonical_program_name(academic_scope.programme_id)
-                if inferred_prog:
-                    entities["program_name"] = inferred_prog
 
         # Check if the plan contains anything that modifies retrieval or query
         entities = plan.get("entities", {})
@@ -1163,15 +1124,17 @@ class RetrievalPipeline:
             logger.info("Semantic retrieval disabled because the vector index is unavailable; continuing with entity-path results only.")
         else:
             try:
-                query_embedding = self.retriever.embed_query(query)
-                if query_embedding is None:
-                    raise RuntimeError("Query embedding unavailable")
+                query_embedding = self.retriever.model.encode(
+                    ["Represent this sentence for searching relevant passages: " + query],
+                    normalize_embeddings=True,
+                    convert_to_numpy=True
+                )
                 semantic_filter = self._combine_filters(
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )
                 results = self.retriever.index.query(
-                    vector=query_embedding,
+                    vector=query_embedding[0].tolist(),
                     top_k=50,
                     include_metadata=True,
                     filter=semantic_filter

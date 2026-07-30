@@ -373,8 +373,14 @@ class AuraChatGraph:
         state["sources"] = retrieval_result.get("sources", [])
 
         if not state["chunks"] and query_type == "PUBLIC":
+            reason = retrieval_result.get("abstention_reason")
+            if reason == "academic_scope_unavailable":
+                msg = "I need your academic profile to answer this accurately, but it seems your profile is not fully synced in the system yet. Please try again later."
+            else:
+                msg = "I couldn't find any relevant documents in the knowledge base for your query. Please try rephrasing or ask about something else."
+            
             state["result"] = {
-                "answer": "I'm having trouble retrieving information right now. Please try again.",
+                "answer": msg,
                 "sources": [],
                 "is_personal_data": False,
             }
