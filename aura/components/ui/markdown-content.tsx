@@ -29,16 +29,9 @@ interface MarkdownContentProps {
   sanitize?: boolean
 }
 
-function walk(node: any, callback: (n: any) => void) {
-  if (!node) return
-  callback(node)
-  if (Array.isArray(node.children)) {
-    for (const child of node.children) {
-      walk(child, callback)
-    }
-  }
-}
 
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: number) {
   if (highlightStart) {
     console.log("shouldHighlight node:", node);
@@ -131,6 +124,7 @@ function MarkdownContentInner({ content, citations, highlightStart, highlightEnd
     }
   }, [highlightStart, highlightEnd, content])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const rehypePlugins = sanitize ? [[rehypeSanitize, sanitizeSchema]] as any : []
 
   return (

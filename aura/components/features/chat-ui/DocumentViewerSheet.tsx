@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { FileText, Loader2, X } from "lucide-react"
-import { cn } from "@/lib/utils"
+
 import { useDocumentViewer } from "@/hooks/use-document-viewer"
 import { MarkdownContent } from "@/components/ui/markdown-content"
 
@@ -16,7 +16,7 @@ interface FetchState {
   content?: string
   error?: string
 }
-3
+
 export function DocumentViewerSheet() {
   const { target, isOpen, closeDocument } = useDocumentViewer()
 

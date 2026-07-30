@@ -499,12 +499,7 @@ export function useAuraChat() {
 
       if (!threadId) {
         threadId = uid()
-        const newThread: StoredThread = {
-          id: threadId,
-          title: deriveTitle(trimmed),
-          messages: [userMsg],
-          updatedAt: userMsg.timestamp,
-        }
+
         baseMessages = [...priorMessages, userMsg]
         persistMessages(
           threadId,
