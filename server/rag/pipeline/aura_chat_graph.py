@@ -228,7 +228,7 @@ class AuraChatGraph:
 
         with track_segment("community_intent_time"):
             intent = self.intent_router.classify(state["query"])
-        if intent != "COMMUNITY":
+        if intent not in ("COMMUNITY", "PERSONAL_DATA"):
             return state
 
         tool_role = identity.role if identity.role in ("student", "faculty") else None
@@ -251,6 +251,23 @@ class AuraChatGraph:
             "role": tool_role,
             "dept": getattr(identity, "dept", None),
         }
+        
+        if intent == "PERSONAL_DATA":
+            with track_segment("community_orchestrator_time"):
+                result = self.ecampus_orchestrator.run(
+                    query=state["query"],
+                    identity=identity_payload,
+                    history=state.get("history") or [],
+                    request_context=state.get("request_context"),
+                    tool_scope="personal",
+                )
+            state["result"] = {
+                "answer": result.get("answer") or "",
+                "sources": result.get("sources") or [],
+                "is_personal_data": True,
+            }
+            return state
+
         with track_segment("community_orchestrator_time"):
             result = self.ecampus_orchestrator.run(
                 query=state["query"],
