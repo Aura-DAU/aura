@@ -3,7 +3,7 @@ import os
 import time
 
 from dotenv import load_dotenv
-from pipeline.key_manager import KeyManager
+from pipeline.inference_router import InferenceRouter
 
 
 SYSTEM_PROMPT = """
@@ -948,11 +948,21 @@ class QueryPlanner:
         load_dotenv()
 
         self.model = os.getenv(
-            "GROQ_MODEL",
-            "openai/gpt-oss-120b"
+            "VLLM_MODEL",
+            os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
-    def plan(self, query):
+    def plan(self, query, academic_scope=None):
+
+        scope_hint = ""
+        if academic_scope is not None:
+            scope_hint = (
+                "\nVerified student context (relevance only; never override it): "
+                f"programme={academic_scope.programme_id}, "
+                f"degree_level={academic_scope.degree_level}, "
+                f"admission_year={academic_scope.admission_year}, "
+                f"semester={academic_scope.current_semester}.\n"
+            )
 
         def _execute_plan(client):
             return client.chat.completions.create(
@@ -971,12 +981,13 @@ class QueryPlanner:
                     },
                     {
                         "role": "user",
-                        "content": query
+                        "content": scope_hint + "\nUser query: " + query
                     }
-                ]
+                ],
+                extra_body=InferenceRouter.no_think_extra_body(),
             )
 
-        response = KeyManager.call_with_rotation(_execute_plan, max_retries=5)
+        response = InferenceRouter.call_with_rotation(_execute_plan, max_retries=5)
 
         if not response:
             raise RuntimeError("Failed to generate plan due to API errors.")

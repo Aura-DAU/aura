@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
+import Providers from './providers'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
   description:
     'AURA is the AI assistant for Dhirubhai Ambani University — ask about programs, admissions, and campus life.',
   generator: 'v0.app',
+  manifest: '/manifest.json',
   icons: {
     icon: [
       {
@@ -50,9 +52,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-theme-black`}>
       <body className="font-sans antialiased">
-        {children}
-        <Toaster theme="dark" position="top-center" />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-theme-yellow focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-black focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
+        <Providers>
+          {children}
+          <Toaster theme="dark" position="top-center" />
+          {/* @vercel/analytics only works on Vercel; self-hosted nginx returns HTML 404 for /_vercel/insights. */}
+          {process.env.VERCEL === '1' && <Analytics />}
+        </Providers>
       </body>
     </html>
   )

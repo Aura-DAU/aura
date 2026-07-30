@@ -1,0 +1,160 @@
+# AURA Distributed Cluster — Node 1 (Gateway & Orchestration Node)
+# Services: NGINX, AURA (Next.js PWA), Backend (FastAPI + LangGraph), PostgreSQL, Redis, Prometheus, Grafana
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../certs:/etc/nginx/certs:ro
+    depends_on:
+      aura:
+        condition: service_started
+      backend:
+        condition: service_healthy
+    networks:
+      - aura-edge
+
+  aura:
+    build:
+      context: ../../aura
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      BACKEND_URL: http://backend:8000
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://aura.dau.ac.in}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
+      INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+    # Probes /api/auth/session because it imports lib/auth/options.ts, whose
+    # module-scope secret readers throw in production when NEXTAUTH_SECRET or
+    # GOOGLE_CLIENT_* are unset. A page route would still 200 in that state and
+    # report a container as Up while every authenticated request 500s.
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:3000/api/auth/session >/dev/null 2>&1 || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - aura-edge
+      - aura-internal
+
+  backend:
+    build:
+      context: ../../server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Do NOT publish 8000 to the host — that bypasses nginx denies on
+    # /backend/internal and /backend/metrics. Reach the API only via
+    # nginx (/backend/) or the Docker network (aura → backend:8000).
+    expose:
+      - "8000"
+    environment:
+      ENV: production
+      PORT: "8000"
+      WEB_CONCURRENCY: ${BACKEND_WORKERS:-2}
+      CHAT_CONCURRENCY: ${CHAT_CONCURRENCY:-4}
+      AUTH_DB_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://redis:6379/0
+      PROD_FRONTEND_ORIGIN: ${PROD_FRONTEND_ORIGIN:-https://aura.dau.ac.in}
+      INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
+      INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+
+      # Remote Cluster Service Endpoints (Nodes 2, 3, and 4)
+      VLLM_ENDPOINTS: ${VLLM_ENDPOINTS:-http://node2_ip:8000/v1,http://node3_ip:8000/v1}
+      VLLM_MODEL: ${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}
+      VLLM_API_KEY: ${VLLM_API_KEY:-EMPTY}
+
+      QDRANT_URL: ${QDRANT_URL:-http://node4_ip:6333}
+      QDRANT_API_KEY: ${QDRANT_API_KEY:-}
+      QDRANT_COLLECTION: ${QDRANT_COLLECTION:-aura-knowledge-base}
+
+      EMBEDDING_SERVICE_URL: ${EMBEDDING_SERVICE_URL:-http://node4_ip:8001}
+      RERANKER_SERVICE_URL: ${RERANKER_SERVICE_URL:-http://node4_ip:8001}
+
+      GOOGLE_CALENDAR_CLIENT_ID: ${GOOGLE_CALENDAR_CLIENT_ID}
+      GOOGLE_CALENDAR_CLIENT_SECRET: ${GOOGLE_CALENDAR_CLIENT_SECRET}
+      GOOGLE_CALENDAR_VAULT_KEY: ${GOOGLE_CALENDAR_VAULT_KEY}
+      GOOGLE_CALENDAR_VAULT_DB: /var/lib/aura/google_calendar_vault.db
+      ECAMPUS_VAULT_KEY: ${ECAMPUS_VAULT_KEY}
+      ECAMPUS_VAULT_DB: /var/lib/aura/ecampus_credentials.db
+      ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db
+      AURA_AUDIT_LOG: /var/log/aura/personal_data_audit.log
+    volumes:
+      - ../../data:/app/data:ro
+      - aura-vault:/var/lib/aura
+      - aura-logs:/var/log/aura
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      # edge: nginx upstream "backend:8000"; internal: postgres/redis
+      - aura-edge
+      - aura-internal
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-aura}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-aurasecret}
+      POSTGRES_DB: ${POSTGRES_DB:-auradb}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - aura-internal
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    networks:
+      - aura-internal
+
+networks:
+  aura-edge:
+  aura-internal:
+
+volumes:
+  postgres-data:
+  redis-data:
+  aura-vault:
+  aura-logs:

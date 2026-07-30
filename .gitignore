@@ -47,6 +47,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# npm is the lockfile source of truth for aura/ (package-lock.json tracked)
+yarn.lock
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
@@ -75,6 +78,8 @@ web_modules/
 .env
 .env.*
 !.env.example
+!.env.*.example
+!deploy/.env.prod.example
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -83,6 +88,10 @@ web_modules/
 # Next.js build output
 .next
 out
+
+# Serwist
+aura/public/sw*
+aura/public/swe-worker*
 
 # Nuxt.js build / generate output
 .nuxt
@@ -164,3 +173,9 @@ server/rag/processed_chunks/
 server/rag/pipeline/processed_chunks/
 server/rag/pipeline/vector_store/
 server/rag/.venv/
+
+# Local UI mocks / chat state
+aura/db/
+
+# Local documentation / cluster reports
+docs/

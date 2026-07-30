@@ -3,7 +3,9 @@ from pipeline.retrieval.retriever import Retriever
 from pipeline.retrieval.reranker import Reranker
 from pipeline.retrieval.context_builder import ContextBuilder
 from pipeline.retrieval.entity_retriever import EntityRetriever
+from pipeline.retrieval.rbac import get_allowed_roles
 
+import os
 import re
 import logging
 
@@ -23,6 +25,9 @@ class RetrievalPipeline:
 
         from pipeline.retrieval.query_rewriter import QueryRewriter
         self.rewriter = QueryRewriter()
+
+        from concurrent.futures import ThreadPoolExecutor
+        self.executor = ThreadPoolExecutor(max_workers=2)
 
         # Shared: load metadata.json once for both faculty fuzzy-matching
         # and entity-based retrieval (professor's algorithm).
@@ -174,7 +179,6 @@ class RetrievalPipeline:
         "m tech": "M.Tech.",
 
         # MSc IT variants
-        "msc it": "M.Sc. (IT)",
         "m.sc it": "M.Sc. (IT)",
         "msc information technology": "M.Sc. (IT)",
 
@@ -193,24 +197,15 @@ class RetrievalPipeline:
         "b tech": "B.Tech.",
         "msc": "M.Sc.",
         "m sc": "M.Sc.",
-        "mtech ict": "M.Tech. (ICT)",
-        "msc data science": "M.Sc. (Data Science)",
-        "msc agriculture analytics": "M.Sc. (Agriculture Analytics)",
         "phd regular": "Ph.D.",
         "phd part time": "Ph.D.",
         "doctoral": "Ph.D."
     }
 
-    # Fix AL1-SENTINEL: broad program sentinels are valid alias targets
-    # (e.g. "mtech" → "M.Tech.") but they do NOT exist as values in the
-    # Pinecone index — the index only stores specific specialisations like
-    # "M.Tech. (ICT)". Building a filter {"program_name": {"$eq": "M.Tech."}}
-    # therefore always returns zero results, and the fallback filter-free
-    # search then runs with top_k=5 instead of the intended 15.
-    # Listing them here lets both _build_metadata_filter and the
-    # alias_resolved check treat them as "unresolved / broad".
-    BROAD_PROGRAM_SENTINELS = {"B.Tech.", "M.Tech.", "M.Sc.", "M.Des."}
-
+    BROAD_PROGRAM_SENTINELS = {
+        "M.Tech.", "B.Tech.", "M.Sc.", "M.Des.", "Ph.D."
+    }
+    
     def _expand_semesters(self, query):
         arabic_to_roman = {
             "1": "I", "2": "II", "3": "III", "4": "IV",
@@ -265,10 +260,7 @@ class RetrievalPipeline:
         course_code_raw = entities.get("course_code")
         course_code = first_value(course_code_raw)
 
-        # Fix F: canonicalise all program values, not just the first one.
-        # Fix AL1-SENTINEL: after canonicalisation, strip broad sentinel values
-        # ("B.Tech.", "M.Tech.", "M.Sc.", "M.Des.") so they never produce a
-        # Pinecone filter clause — those strings do not exist in the index.
+        # Fix F: canonicalise all program values, not just the first one
         program_name_raw = entities.get("program_name")
         if isinstance(program_name_raw, list):
             program_names = [
@@ -276,14 +268,9 @@ class RetrievalPipeline:
                     self._canonical_program_name(p) for p in program_name_raw
                 ) if p
             ]
-            # Remove broad sentinels from the list
-            program_names = [p for p in program_names if p not in self.BROAD_PROGRAM_SENTINELS]
             program_name = program_names[0] if len(program_names) == 1 else (program_names or None)
         else:
             program_name = self._canonical_program_name(program_name_raw)
-            # A broad sentinel must not become a filter clause
-            if program_name in self.BROAD_PROGRAM_SENTINELS:
-                program_name = None
 
         if course_code:
 
@@ -344,6 +331,51 @@ class RetrievalPipeline:
             return as_filter("program_name", program_name)
 
         return None
+
+    @staticmethod
+    def _combine_filters(*filters):
+        active = [item for item in filters if item]
+        if not active:
+            return None
+        return active[0] if len(active) == 1 else {"$and": active}
+
+    @staticmethod
+    def _academic_scope_filter(academic_scope):
+        if academic_scope is None:
+            return None
+        scoped = {
+            "$and": [
+                {"applicability_scope": {"$in": ["programme", "curriculum", "course"]}},
+                {"programme_id": {"$eq": academic_scope.programme_id}},
+                {"degree_level": {"$eq": academic_scope.degree_level}},
+                {"admission_year_from": {"$lte": academic_scope.admission_year}},
+                {"admission_year_to": {"$gte": academic_scope.admission_year}},
+            ]
+        }
+        # A missing branch on a document means programme-wide applicability;
+        # branch equality is enforced by the post-retrieval predicate when a
+        # document declares one, without excluding those programme-wide docs.
+        return {
+            "$or": [
+                {"applicability_scope": {"$eq": "global"}},
+                scoped,
+            ]
+        }
+
+    @staticmethod
+    def _requires_academic_scope(plan: dict) -> bool:
+        return plan.get("category") == "academics" or plan.get("retrieval_intent") in {
+            "program_curriculum", "program_overview", "policy_version", "rules",
+        }
+
+    @staticmethod
+    def _eligible_results(results: list[dict], academic_scope) -> list[dict]:
+        if academic_scope is None:
+            return results
+        return [
+            result for result in results
+            if academic_scope.document_is_eligible(result.get("metadata", {}))
+        ]
 
     def _normalize_program_name(self, name):
         if not name:
@@ -473,8 +505,11 @@ class RetrievalPipeline:
     def get_context(
         self,
         query,
-        history=None
+        history=None,
+        user_role: str = "public",
+        academic_scope=None,
     ):
+        allowed_roles = get_allowed_roles(user_role)
         original_query = query
 
         query_lower = query.lower()
@@ -508,280 +543,336 @@ class RetrievalPipeline:
             query = (
                 self.rewriter.rewrite(
                     query,
-                    history
+                    history,
+                    academic_scope=academic_scope,
                 )
             )
 
-        plan = self.planner.plan(
-            query
+        # Submit the planning LLM call to executor
+        future_plan = self.executor.submit(self.planner.plan, query, academic_scope)
+
+        # Submit the speculative retrieval call to executor. Speculative retrieval
+        # runs the semester-expanded query with an empty plan ({}) which results
+        # in a standard semantic search.
+        query_speculative = self._expand_semesters(query)
+        future_speculative = self.executor.submit(
+            self._retrieve_dual_path, query_speculative, {}, allowed_roles, academic_scope
         )
 
-        # Fix RP-MYTH: replaces the old static MYTH_BUST_PATTERNS keyword list
-        # that lived in aura_chat.py. The query_planner LLM already classifies
-        # every query's intent and entities — it is the single correct place
-        # to also flag claim-verification framing ("is this true", "I was told
-        # that...", etc.), since that classification generalizes to any phrasing
-        # in any language/dialect mix the planner sees, unlike a static list of
-        # English phrases. If the plan signals claim verification, append a
-        # retrieval-side directive so the matched chunk's policy/rule language
-        # ranks higher — this also lets the answer generator give a direct
-        # verdict instead of exploring multiple interpretations (Type9 latency).
-        if plan.get("is_claim_verification"):
-            query = query + " policy rule regulation verify"
+        plan = future_plan.result()
 
-        # Fix RP-FEE: replaces the old static FEE_KEYWORDS list. The retrieval
-        # intent "admissions_information" combined with required_sections
-        # already containing "Fee"/"Fees Structure"/"Tuition" (set generically
-        # by the planner's few-shot examples, not by string-matching here) is
-        # sufficient signal — no separate keyword list needed. We simply
-        # surface the planner's own required_sections into the BM25 query
-        # so its classification has retrieval-side effect.
-        plan_required_sections = plan.get("retrieval_hints", {}).get("required_sections", [])
-        if plan_required_sections:
-            # Append a small number of the most specific (longest) section
-            # names so BM25 keyword matching benefits from exactly what the
-            # planner identified as relevant — generalizes to ANY section
-            # heading the planner names (Fee, Dean of Academic Programs,
-            # Board of Studies, etc.) without a static list of any kind.
-            top_sections = sorted(plan_required_sections, key=len, reverse=True)[:3]
-            query = query + " " + " ".join(top_sections)
-
-        # Fix RP-VOCAB: replaces the old static LAUNDRY_KEYWORDS / MOVEIN_KEYWORDS
-        # lists. The planner's expanded_terms field (Fix QP7) does the same
-        # informal-to-formal vocabulary translation generically, per-query,
-        # using the LLM's own knowledge of DAU document phrasing — instead of
-        # a fixed Python list that only covers terms already seen in testing.
-        # This is the single mechanism that handles ANY future vocabulary gap
-        # (dhobi, mattress, role-name confusion, or anything not yet tested)
-        # without requiring a code change.
-        expanded_terms = plan.get("expanded_terms", [])
-        if expanded_terms:
-            query = query + " " + " ".join(expanded_terms[:5])
-
-        # Fix RP-COMPLETE: negation ("What is NOT X") and enumeration
-        # ("how many total X") questions need the FULL set of relevant
-        # chunks, not just the top-5 semantically closest ones — otherwise
-        # the LLM only sees a partial list and cannot correctly identify
-        # what is missing or excluded. Widen top_k generically using the
-        # planner's requires_complete_list signal rather than hardcoding
-        # per-entity-type retrieval counts.
-        if plan.get("requires_complete_list"):
-            plan["top_k"] = max(plan.get("top_k", 5), 12)
-
-        # Correct entities inside the plan (e.g. fuzzy match faculty and program names)
+        # Check if the plan contains anything that modifies retrieval or query
         entities = plan.get("entities", {})
-        
-        # 1. Correct faculty_name
-        faculty_val = entities.get("faculty_name")
-        if faculty_val:
-            if isinstance(faculty_val, list):
-                corrected_list = []
-                for name in faculty_val:
-                    corrected_name = self._canonical_faculty_name(name)
-                    corrected_list.append(corrected_name)
-                    # Replace the typo name in query and decomposed queries, retaining any title prefix
-                    if corrected_name != name:
-                        title_match = re.match(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", name, flags=re.IGNORECASE)
+        has_entities = any(entities.get(k) for k in [
+            "faculty_name", "event_name", "program_name", "department_name", 
+            "scholarship_name", "course_code", "course_name", "semester", "rule_year"
+        ])
+        decomposed_queries = plan.get("query_decomposition")
+        is_claim_verification = plan.get("is_claim_verification", False)
+        requires_complete_list = plan.get("requires_complete_list", False)
+        plan_required_sections = plan.get("retrieval_hints", {}).get("required_sections", [])
+        expanded_terms = plan.get("expanded_terms", [])
+
+        use_speculative = (
+            not has_entities
+            and not decomposed_queries
+            and not is_claim_verification
+            and not requires_complete_list
+            and not plan_required_sections
+            and not expanded_terms
+        )
+
+        retrieval_intent = plan.get("retrieval_intent", "general")
+
+        if user_role == "student" and self._requires_academic_scope(plan) and academic_scope is None:
+            return {
+                "query": original_query,
+                "corrected_query": query,
+                "plan": plan,
+                "chunks": [],
+                "context": "<context>\n</context>",
+                "sources": [],
+                "top_k_before_rerank": 0,
+                "top_k_after_rerank": 0,
+                "abstention_reason": "academic_scope_unavailable",
+            }
+
+        if use_speculative:
+            logger.info("Speculative retrieval query matched; reusing speculative results.")
+            results = future_speculative.result()
+            corrected_query = query
+        else:
+            # Fix RP-MYTH: replaces the old static MYTH_BUST_PATTERNS keyword list
+            # that lived in aura_chat.py. The query_planner LLM already classifies
+            # every query's intent and entities — it is the single correct place
+            # to also flag claim-verification framing ("is this true", "I was told
+            # that...", etc.), since that classification generalizes to any phrasing
+            # in any language/dialect mix the planner sees, unlike a static list of
+            # English phrases. If the plan signals claim verification, append a
+            # retrieval-side directive so the matched chunk's policy/rule language
+            # ranks higher — this also lets the answer generator give a direct
+            # verdict instead of exploring multiple interpretations (Type9 latency).
+            if is_claim_verification:
+                query = query + " policy rule regulation verify"
+
+            # Fix RP-FEE: replaces the old static FEE_KEYWORDS list. The retrieval
+            # intent "admissions_information" combined with required_sections
+            # already containing "Fee"/"Fees Structure"/"Tuition" (set generically
+            # by the planner's few-shot examples, not by string-matching here) is
+            # sufficient signal — no separate keyword list needed. We simply
+            # surface the planner's own required_sections into the BM25 query
+            # so its classification has retrieval-side effect.
+            if plan_required_sections:
+                # Append a small number of the most specific (longest) section
+                # names so BM25 keyword matching benefits from exactly what the
+                # planner identified as relevant — generalizes to ANY section
+                # heading the planner names (Fee, Dean of Academic Programs,
+                # Board of Studies, etc.) without a static list of any kind.
+                top_sections = sorted(plan_required_sections, key=len, reverse=True)[:3]
+                query = query + " " + " ".join(top_sections)
+
+            # Fix RP-VOCAB: replaces the old static LAUNDRY_KEYWORDS / MOVEIN_KEYWORDS
+            # lists. The planner's expanded_terms field (Fix QP7) does the same
+            # informal-to-formal vocabulary translation generically, per-query,
+            # using the LLM's own knowledge of DAU document phrasing — instead of
+            # a fixed Python list that only covers terms already seen in testing.
+            # This is the single mechanism that handles ANY future vocabulary gap
+            # (dhobi, mattress, role-name confusion, or anything not yet tested)
+            # without requiring a code change.
+            if expanded_terms:
+                query = query + " " + " ".join(expanded_terms[:5])
+
+            # Fix RP-COMPLETE: negation ("What is NOT X") and enumeration
+            # ("how many total X") questions need the FULL set of relevant
+            # chunks, not just the top-5 semantically closest ones — otherwise
+            # the LLM only sees a partial list and cannot correctly identify
+            # what is missing or excluded. Widen top_k generically using the
+            # planner's requires_complete_list signal rather than hardcoding
+            # per-entity-type retrieval counts.
+            if requires_complete_list:
+                plan["top_k"] = max(plan.get("top_k", 5), 12)
+
+            # Correct entities inside the plan (e.g. fuzzy match faculty and program names)
+            entities = plan.get("entities", {})
+            
+            # 1. Correct faculty_name
+            faculty_val = entities.get("faculty_name")
+            if faculty_val:
+                if isinstance(faculty_val, list):
+                    corrected_list = []
+                    for name in faculty_val:
+                        corrected_name = self._canonical_faculty_name(name)
+                        corrected_list.append(corrected_name)
+                        # Replace the typo name in query and decomposed queries, retaining any title prefix
+                        if corrected_name != name:
+                            title_match = re.match(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", name, flags=re.IGNORECASE)
+                            title_part = title_match.group(0) if title_match else ""
+                            replacement = title_part + corrected_name
+                            query = re.sub(re.escape(name), replacement, query, flags=re.IGNORECASE)
+                            if plan.get("query_decomposition"):
+                                plan["query_decomposition"] = [
+                                    re.sub(re.escape(name), replacement, dq, flags=re.IGNORECASE)
+                                    for dq in plan["query_decomposition"]
+                                ]
+                    entities["faculty_name"] = corrected_list
+                elif isinstance(faculty_val, str):
+                    corrected_name = self._canonical_faculty_name(faculty_val)
+                    if corrected_name != faculty_val:
+                        title_match = re.match(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", faculty_val, flags=re.IGNORECASE)
                         title_part = title_match.group(0) if title_match else ""
                         replacement = title_part + corrected_name
-                        query = re.sub(re.escape(name), replacement, query, flags=re.IGNORECASE)
+                        query = re.sub(re.escape(faculty_val), replacement, query, flags=re.IGNORECASE)
                         if plan.get("query_decomposition"):
                             plan["query_decomposition"] = [
-                                re.sub(re.escape(name), replacement, dq, flags=re.IGNORECASE)
+                                re.sub(re.escape(faculty_val), replacement, dq, flags=re.IGNORECASE)
                                 for dq in plan["query_decomposition"]
                             ]
-                entities["faculty_name"] = corrected_list
-            elif isinstance(faculty_val, str):
-                corrected_name = self._canonical_faculty_name(faculty_val)
-                if corrected_name != faculty_val:
-                    title_match = re.match(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", faculty_val, flags=re.IGNORECASE)
-                    title_part = title_match.group(0) if title_match else ""
-                    replacement = title_part + corrected_name
-                    query = re.sub(re.escape(faculty_val), replacement, query, flags=re.IGNORECASE)
-                    if plan.get("query_decomposition"):
-                        plan["query_decomposition"] = [
-                            re.sub(re.escape(faculty_val), replacement, dq, flags=re.IGNORECASE)
-                            for dq in plan["query_decomposition"]
-                        ]
-                entities["faculty_name"] = corrected_name
+                    entities["faculty_name"] = corrected_name
 
-        # 2. Correct program_name
-        program_val = entities.get("program_name")
-        if program_val:
-            if isinstance(program_val, list):
-                corrected_list = []
-                for prog in program_val:
-                    canonical_prog = self._canonical_program_name(prog)
+            # 2. Correct program_name
+            program_val = entities.get("program_name")
+            if program_val:
+                if isinstance(program_val, list):
+                    corrected_list = []
+                    for prog in program_val:
+                        canonical_prog = self._canonical_program_name(prog)
+                        if canonical_prog:
+                            corrected_list.append(canonical_prog)
+                        else:
+                            corrected_list.append(prog)
+                    entities["program_name"] = corrected_list
+                elif isinstance(program_val, str):
+                    canonical_prog = self._canonical_program_name(program_val)
                     if canonical_prog:
-                        corrected_list.append(canonical_prog)
-                    else:
-                        corrected_list.append(prog)
-                entities["program_name"] = corrected_list
-            elif isinstance(program_val, str):
-                canonical_prog = self._canonical_program_name(program_val)
-                if canonical_prog:
-                    entities["program_name"] = canonical_prog
+                        entities["program_name"] = canonical_prog
 
-        corrected_query = query
+            corrected_query = query
 
-        query = self._expand_semesters(query)
+            query = self._expand_semesters(query)
 
-        entities = plan.get("entities", {})
+            entities = plan.get("entities", {})
 
-        event_name = entities.get("event_name")
+            event_name = entities.get("event_name")
 
-        program_name = entities.get("program_name")
+            program_name = entities.get("program_name")
 
-        # Fix E: only augment the query string with entity names when the
-        # planner is confident about the extraction (entity_confidence >= 0.80).
-        # A low-confidence wrong extraction (e.g. program_name on a general
-        # internship question) biases the embedding toward wrong chunks.
-        entity_confidence = plan.get("entity_confidence", 0.5)
+            # Fix E: only augment the query string with entity names when the
+            # planner is confident about the extraction (entity_confidence >= 0.80).
+            # A low-confidence wrong extraction (e.g. program_name on a general
+            # internship question) biases the embedding toward wrong chunks.
+            entity_confidence = plan.get("entity_confidence", 0.5)
 
-        if entity_confidence >= 0.80:
-            if isinstance(event_name, str):
-                query += " " + event_name
-            elif isinstance(event_name, list):
-                query += " " + " ".join(str(e) for e in event_name)
+            if entity_confidence >= 0.80:
+                if isinstance(event_name, str):
+                    query += " " + event_name
+                elif isinstance(event_name, list):
+                    query += " " + " ".join(str(e) for e in event_name)
 
-            if isinstance(program_name, str):
-                query += " " + program_name
-            elif isinstance(program_name, list):
-                query += " " + " ".join(program_name)
+                if isinstance(program_name, str):
+                    query += " " + program_name
+                elif isinstance(program_name, list):
+                    query += " " + " ".join(program_name)
 
-        metadata_filter = (
-            self._build_metadata_filter(
-                plan
+            metadata_filter = self._combine_filters(
+                self._build_metadata_filter(plan),
+                self._academic_scope_filter(academic_scope),
             )
-        )
 
-        # Fix DEG1: dead-end guard for policy version/metadata queries.
-        retrieval_intent = plan.get("retrieval_intent", "general")
-        if retrieval_intent == "policy_version" and metadata_filter:
-            metadata_filter = None
+            # Policy-version queries may relax planner entity constraints, but
+            # never the authenticated student's academic applicability scope.
+            if retrieval_intent == "policy_version":
+                metadata_filter = self._academic_scope_filter(academic_scope)
 
-        # Fix TY1: temporal year anchor — if the planner extracted a rule_year
-        # (e.g. "2024-25") from the query, inject it into the retrieval query
-        # so BM25 keyword matching prioritises documents whose title or heading
-        # contains that year string. This fixes Om report failures where
-        # "under the 2024-25 PhD rules" retrieves the 2019-20 document instead.
-        rule_year = plan.get("entities", {}).get("rule_year")
-        if rule_year:
-            # Augment the query string so BM25 scores year-matching chunks higher
-            query = query + " " + rule_year
-            # Also boost it as a required section heading in the plan hints
-            plan.setdefault("retrieval_hints", {})
-            existing_sections = plan["retrieval_hints"].get("required_sections", [])
-            if rule_year not in existing_sections:
-                existing_sections.append(rule_year)
-            plan["retrieval_hints"]["required_sections"] = existing_sections
+            # Fix TY1: temporal year anchor — if the planner extracted a rule_year
+            # (e.g. "2024-25") from the query, inject it into the retrieval query
+            # so BM25 keyword matching prioritises documents whose title or heading
+            # contains that year string. This fixes Om report failures where
+            # "under the 2024-25 PhD rules" retrieves the 2019-20 document instead.
+            rule_year = plan.get("entities", {}).get("rule_year")
+            if rule_year:
+                # Augment the query string so BM25 scores year-matching chunks higher
+                query = query + " " + rule_year
+                # Also boost it as a required section heading in the plan hints
+                plan.setdefault("retrieval_hints", {})
+                existing_sections = plan["retrieval_hints"].get("required_sections", [])
+                if rule_year not in existing_sections:
+                    existing_sections.append(rule_year)
+                plan["retrieval_hints"]["required_sections"] = existing_sections
 
-        decomposed_queries = plan.get(
-            "query_decomposition"
-        )
-
-        if decomposed_queries:
-            all_results = []
-
-            # Fix Bug1: retrieval_top_k was referenced but never defined,
-            # causing a NameError that silently crashed the decomposed-query
-            # branch and returned zero results ("not in database" false positive).
-            # Use plan["top_k"] (already boosted for multi-entity queries) or
-            # fall back to 5 per sub-query.
-            # Fix AL2: when the metadata filter will be None (because program_name
-            # canonicalized to None — bare alias like "M.Tech" with no specialization),
-            # raise top_k to 15 so the answer isn't buried under noise.
-            # The filter being None means the entire index is searched; top_k=5
-            # is far too narrow for broad-corpus sub-queries.
+            # Fix #10: compute alias_resolved / top_k boost BEFORE the decomposed
+            # branch so the same widened top_k applies to non-decomposed queries
+            # entering _retrieve_dual_path. Previously this lived only inside the
+            # decomposed block, so bare sentinel aliases ("mtech") got top_k=5
+            # on non-decomposed paths — too narrow for an unfiltered index search.
             base_top_k = plan.get("top_k", 5)
-            # Fix AL1-SENTINEL: alias_resolved must be False for broad sentinels
-            # ("M.Tech.", "B.Tech.", etc.) so the top_k=15 boost fires.
-            # The old code treated any non-None canonical as resolved, but
-            # sentinels are non-None yet still unresolved — they only mean
-            # "user said mtech without specifying a specialisation".
             raw_program = plan.get("entities", {}).get("program_name", "")
-            canonical_program = self._canonical_program_name(raw_program) if raw_program else None
+            # Guard: program_name may be a list for multi-program queries; take the
+            # first element for the alias-resolved / top_k heuristic only.
+            if isinstance(raw_program, list):
+                raw_program_scalar = raw_program[0] if raw_program else ""
+            else:
+                raw_program_scalar = raw_program
+            canonical_program = self._canonical_program_name(raw_program_scalar) if raw_program_scalar else None
             alias_resolved = (
                 canonical_program is not None
                 and canonical_program not in self.BROAD_PROGRAM_SENTINELS
             )
-            retrieval_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
+            effective_top_k = base_top_k if alias_resolved else max(base_top_k, 15)
+            # Write it back so _retrieve_dual_path and sub-query loops both see it.
+            plan["top_k"] = effective_top_k
 
-            for subquery in decomposed_queries:
-                subquery_expanded = self._expand_semesters(subquery)
+            if decomposed_queries:
+                all_results = []
 
-                # Fix #8: build a sub-query-specific metadata filter.
-                # Previously always None, causing sub-queries to scan the full
-                # corpus and pull in noise from unrelated programs/faculty.
-                sub_metadata_filter = (
-                    self._build_metadata_filter(plan)
-                )
+                # Fix #10: top_k already computed above (applies to both paths)
+                retrieval_top_k = effective_top_k
 
-                sub_results = (
-                    self.retriever.retrieve(
-                        query=subquery_expanded,
-                        top_k=retrieval_top_k,
-                        metadata_filter=sub_metadata_filter
+                for subquery in decomposed_queries:
+                    subquery_expanded = self._expand_semesters(subquery)
+
+                    sub_metadata_filter = self._combine_filters(
+                        self._build_metadata_filter(plan),
+                        self._academic_scope_filter(academic_scope),
                     )
-                )
+                    if allowed_roles:
+                        auth_filter = {"authorization": {"$in": allowed_roles}}
+                        sub_metadata_filter = self._combine_filters(sub_metadata_filter, auth_filter)
 
-                # Fallback: if the filter yields nothing, retry without it
-                if not sub_results and sub_metadata_filter:
                     sub_results = (
                         self.retriever.retrieve(
                             query=subquery_expanded,
                             top_k=retrieval_top_k,
-                            metadata_filter=None
+                            metadata_filter=sub_metadata_filter,
+                            allowed_roles=allowed_roles
                         )
                     )
 
-                # Fix CP1: for cross-policy comparison queries, even if the
-                # filtered retrieval returns some results, those may all be
-                # from ONE policy. If this sub-query is retrieving the second
-                # leg and results overlap heavily with already-seen chunk IDs,
-                # also retry filter-free to maximise distinct coverage.
-                if sub_results and sub_metadata_filter:
-                    already_seen_ids = {r["id"] for r in all_results}
-                    new_in_sub = [r for r in sub_results if r["id"] not in already_seen_ids]
-                    if len(new_in_sub) == 0:
-                        # All sub-results already collected — retry without filter
-                        extra = self.retriever.retrieve(
+                    # Query entity filters may be relaxed only within the same
+                    # role and academic scope. Applicability never broadens.
+                    if not sub_results and sub_metadata_filter:
+                        fallback_filter = self._combine_filters(
+                            {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                            self._academic_scope_filter(academic_scope),
+                        )
+                        sub_results = (
+                            self.retriever.retrieve(
+                                query=subquery_expanded,
+                                top_k=retrieval_top_k,
+                                metadata_filter=fallback_filter,
+                                allowed_roles=allowed_roles
+                            )
+                        )
+
+                    # Fix CP1: for cross-policy comparison queries, even if the
+                    # filtered retrieval returns some results, those may all be
+                    # from ONE policy. If this sub-query is retrieving the second
+                    # leg and results overlap heavily with already-seen chunk IDs,
+                    # also retry filter-free (preserving DLS) to maximise distinct coverage.
+                    if sub_results and sub_metadata_filter:
+                        already_seen_ids = {r["id"] for r in all_results}
+                        new_in_sub = [r for r in sub_results if r["id"] not in already_seen_ids]
+                        if len(new_in_sub) == 0:
+                            # All sub-results already collected — retry without filter (preserving DLS)
+                            fallback_filter = self._combine_filters(
+                                {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                                self._academic_scope_filter(academic_scope),
+                            )
+                            extra = self.retriever.retrieve(
+                                query=subquery_expanded,
+                                top_k=retrieval_top_k,
+                                metadata_filter=fallback_filter,
+                                allowed_roles=allowed_roles
+                            )
+                            new_extra = [r for r in extra if r["id"] not in already_seen_ids]
+                            if new_extra:
+                                sub_results = new_extra
+
+                    sub_reranked = (
+                        self.reranker.rerank(
                             query=subquery_expanded,
-                            top_k=retrieval_top_k,
-                            metadata_filter=None
+                            results=sub_results,
+                            plan=plan
                         )
-                        new_extra = [r for r in extra if r["id"] not in already_seen_ids]
-                        if new_extra:
-                            sub_results = new_extra
-
-                sub_reranked = (
-                    self.reranker.rerank(
-                        query=subquery_expanded,
-                        results=sub_results,
-                        plan=plan
                     )
+
+                    # Fix SR1: raised per-sub-query cap from 3 → 4 for multi-entity
+                    # (comparison) queries. With 3 chunks per sub-query and 2 sub-
+                    # queries, the joint rerank pool was only 6 items — often not
+                    # enough distinct coverage when one leg returns weak results.
+                    # 4 per sub-query gives an 8-item joint pool for 2-way comparisons.
+                    sub_limit = 4 if plan.get("multi_entity_query") else 3
+                    all_results.extend(
+                        sub_reranked[:sub_limit]
+                    )
+
+                results = all_results
+            
+            else:
+                # Main query retrieval using dual path (returns 50-60 chunks)
+                results = self._retrieve_dual_path(
+                    query, plan, allowed_roles=allowed_roles, academic_scope=academic_scope
                 )
 
-                # Fix SR1: raised per-sub-query cap from 3 → 4 for multi-entity
-                # (comparison) queries. With 3 chunks per sub-query and 2 sub-
-                # queries, the joint rerank pool was only 6 items — often not
-                # enough distinct coverage when one leg returns weak results.
-                # 4 per sub-query gives an 8-item joint pool for 2-way comparisons.
-                sub_limit = 4 if plan.get("multi_entity_query") else 3
-                all_results.extend(
-                    sub_reranked[:sub_limit]
-                )
-
-            results = all_results
-        
-        else:
-            # Main query retrieval using dual path
-            results = self._retrieve_dual_path(query, plan)
-            # Fix J2: use a wider context window for policy_version queries
-            # so that version history sections (which may be 1-2 chunks after
-            # the main policy heading) are always included in context.
-            expand_window = 2 if retrieval_intent == "policy_version" else 1
-            results = self._expand_adjacent_chunks(results, window=expand_window)
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
         # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
         # the vector/BM25 results into a unified chunk pool for reranking.
@@ -793,7 +884,9 @@ class RetrievalPipeline:
         if self.entity_retriever:
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
-                    entities
+                    entities,
+                    allowed_roles=allowed_roles,
+                    academic_scope=academic_scope,
                 )
             )
             if entity_chunks:
@@ -812,7 +905,7 @@ class RetrievalPipeline:
                 deduped.append(result)
                 seen.add(chunk_id)
 
-        results = deduped
+        results = self._eligible_results(deduped, academic_scope)
 
         if decomposed_queries:
             # Fix A: run a final joint cross-encoder rerank over the merged
@@ -829,9 +922,27 @@ class RetrievalPipeline:
             )
 
         else:
-            reranked = self.reranker.rerank(
+            # ── TWO-STAGE RERANKING ──
+            # Stage 1: Fast rerank on unexpanded chunks
+            stage1_reranked = self.reranker.rerank(
                 query=query,
                 results=results,
+                plan=plan
+            )
+            
+            # Select top 12 candidates
+            top_candidates = stage1_reranked[:12]
+            
+            # Expand only the top 12 candidates
+            expand_window = 2 if retrieval_intent == "policy_version" else 1
+            expanded_candidates = self._eligible_results(
+                self._expand_adjacent_chunks(top_candidates, window=expand_window), academic_scope
+            )
+            
+            # Stage 2: Final precise rerank on expanded top 12 chunks
+            reranked = self.reranker.rerank(
+                query=query,
+                results=expanded_candidates,
                 plan=plan
             )
 
@@ -869,6 +980,9 @@ class RetrievalPipeline:
 
             "sources":
                 built["sources"],
+
+            "citation_map":
+                built.get("citation_map", {}),
 
             "top_k_before_rerank":
                 len(results),
@@ -919,7 +1033,7 @@ class RetrievalPipeline:
 
         return expanded_candidates
 
-    def _retrieve_dual_path(self, query, plan):
+    def _retrieve_dual_path(self, query, plan, allowed_roles=None, academic_scope=None):
         """
         Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
         Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
@@ -951,10 +1065,30 @@ class RetrievalPipeline:
 
         entity_pool = {}
         for ent_text, ent_filter in entity_queries:
+            combined_filter = self._combine_filters(
+                ent_filter,
+                {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                self._academic_scope_filter(academic_scope),
+            )
+
             # Query retriever to get top 3 fused BM25 + dense chunks for this entity
-            res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=ent_filter)
+            res_list = self.retriever.retrieve(
+                query=ent_text,
+                top_k=3,
+                metadata_filter=combined_filter,
+                allowed_roles=allowed_roles
+            )
             if not res_list and ent_filter:
-                res_list = self.retriever.retrieve(query=ent_text, top_k=3, metadata_filter=None)
+                fallback_filter = self._combine_filters(
+                    {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                    self._academic_scope_filter(academic_scope),
+                )
+                res_list = self.retriever.retrieve(
+                    query=ent_text,
+                    top_k=3,
+                    metadata_filter=fallback_filter,
+                    allowed_roles=allowed_roles
+                )
             
             for rank, res in enumerate(res_list, start=1):
                 chunk_id = res["id"]
@@ -981,31 +1115,41 @@ class RetrievalPipeline:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
         # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
-        query_embedding = self.retriever.model.encode(
-            ["Represent this sentence for searching relevant passages: " + query],
-            normalize_embeddings=True,
-            convert_to_numpy=True
-        )
-        results = self.retriever.index.query(
-            vector=query_embedding[0].tolist(),
-            top_k=50,
-            include_metadata=True,
-            filter=None
-        )
         semantic_list = []
-        for match in results["matches"]:
-            semantic_list.append({
-                "id": match["id"],
-                "score": match["score"],
-                # Fix RP2: cosine_score explicitly stored so the confidence
-                # router in aura_chat.py can read it via c.get("cosine_score").
-                # Previously dual-path candidates only had "score"/"fusion_score"
-                # so the router always saw top_cosine=0.0 and relied entirely
-                # on top_cross for routing decisions.
-                "cosine_score": match["score"],
-                "metadata": match["metadata"],
-                "semantic_score": match["score"]
-            })
+        if self.retriever.index is None:
+            logger.info("Semantic retrieval disabled because the vector index is unavailable; continuing with entity-path results only.")
+        else:
+            try:
+                query_embedding = self.retriever.model.encode(
+                    ["Represent this sentence for searching relevant passages: " + query],
+                    normalize_embeddings=True,
+                    convert_to_numpy=True
+                )
+                semantic_filter = self._combine_filters(
+                    {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                    self._academic_scope_filter(academic_scope),
+                )
+                results = self.retriever.index.query(
+                    vector=query_embedding[0].tolist(),
+                    top_k=50,
+                    include_metadata=True,
+                    filter=semantic_filter
+                )
+                for match in results.get("matches", []):
+                    semantic_list.append({
+                        "id": match["id"],
+                        "score": match["score"],
+                        # Fix RP2: cosine_score explicitly stored so the confidence
+                        # router in aura_chat.py can read it via c.get("cosine_score").
+                        # Previously dual-path candidates only had "score"/"fusion_score"
+                        # so the router always saw top_cosine=0.0 and relied entirely
+                        # on top_cross for routing decisions.
+                        "cosine_score": match["score"],
+                        "metadata": match["metadata"],
+                        "semantic_score": match["score"]
+                    })
+            except Exception as exc:
+                logger.warning("Semantic retrieval failed; continuing without it: %s", exc)
 
         # Min-Max normalize semantic path scores
         if semantic_list:
@@ -1060,4 +1204,4 @@ class RetrievalPipeline:
 
         # Sort candidates by final fusion score descending
         final_candidates.sort(key=lambda x: x["fusion_score"], reverse=True)
-        return final_candidates
+        return self._eligible_results(final_candidates, academic_scope)

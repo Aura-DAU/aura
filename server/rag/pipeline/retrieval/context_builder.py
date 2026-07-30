@@ -13,7 +13,7 @@ class ContextBuilder:
     MAX_CONTEXT_TOKENS = 3000
 
     def _estimate_tokens(self, text: str) -> int:
-        """Rough token estimate: word count × 1.3 (accounts for sub-word splits)."""
+        # Rough token estimate: word count × 1.3 (accounts for sub-word splits).
         return int(len(text.split()) * 1.3)
 
     def build(self, chunks, retrieval_intent="general"):
@@ -21,7 +21,13 @@ class ContextBuilder:
         documents = []
 
         sources = []
-        seen_urls = set()
+        seen_urls = {}
+        # doc id (the `id` attribute the LLM cites) → index into `sources`.
+        # Not the identity map: several chunks can dedup onto one source, and
+        # a chunk whose source was already seen still gets its own doc id. So
+        # sources[i] does NOT correspond to <doc id="i+1"> and callers must
+        # resolve cited ids through this map rather than by position.
+        citation_map = {}
 
         context_tokens_used = 0
 
@@ -71,14 +77,21 @@ class ContextBuilder:
             # Fix CB5: moved `import re` to the top of the file (was imported
             # inside this loop on every chunk iteration, which is unnecessary).
             title_str = metadata.get("title", "")
-            year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
-            doc_rule_year = year_match.group(1) if year_match else ""
+            doc_rule_year = metadata.get("document_year", "")
+            if not doc_rule_year:
+                year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
+                doc_rule_year = year_match.group(1) if year_match else ""
+
+            start_line_val = metadata.get("start_line", "")
+            end_line_val = metadata.get("end_line", "")
 
             document = f"""
 <doc
 id="{idx}"
 title="{title_str}"
 rule_year="{doc_rule_year}"
+start_line="{start_line_val}"
+end_line="{end_line_val}"
 program_name="{metadata.get('program_name', '')}"
 cluster="{metadata.get('cluster', '')}"
 category="{metadata.get('category', '')}"
@@ -97,16 +110,31 @@ scraped_date="{metadata.get('scraped_date', '')}"
             documents.append(document)
 
             url = metadata.get("url")
+            relative_path = metadata.get("relative_path")
 
-            if url and url not in seen_urls:
+            # Fix CB6 (Phase C): previously a chunk was only ever cited if it
+            # had a public "url" — internal-only markdown (no website URL)
+            # silently produced no citation card at all. Dedup key now falls
+            # back to relative_path, then title, so every retrieved chunk is
+            # citeable. relative_path/start_line/end_line let the frontend
+            # side-drawer open the exact source file and highlight the lines
+            # this chunk was drawn from.
+            dedup_key = url or relative_path or title_str
 
-                sources.append({
-                    "title": metadata.get("title"),
-                    "url": url,
-                    "cluster": metadata.get("cluster")
-                })
+            if dedup_key:
+                if dedup_key not in seen_urls:
+                    seen_urls[dedup_key] = len(sources)
 
-                seen_urls.add(url)
+                    sources.append({
+                        "title": metadata.get("title"),
+                        "url": url or None,
+                        "path": relative_path or None,
+                        "start_line": start_line_val or None,
+                        "end_line": end_line_val or None,
+                        "cluster": metadata.get("cluster")
+                    })
+
+                citation_map[idx] = seen_urls[dedup_key]
 
         context = (
             "<context>\n"
@@ -116,5 +144,6 @@ scraped_date="{metadata.get('scraped_date', '')}"
 
         return {
             "context": context,
-            "sources": sources
+            "sources": sources,
+            "citation_map": citation_map
         }

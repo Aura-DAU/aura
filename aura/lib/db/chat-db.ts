@@ -1,6 +1,5 @@
 import fs from "fs/promises"
 import path from "path"
-import { fileURLToPath } from "url"
 import type { ChatMessage, ChatThread } from "@/lib/chat-types"
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -11,8 +10,6 @@ export interface StoredThread extends ChatThread {
 type ChatStore = Record<string, StoredThread[]> // email -> threads
 
 // ─── File path ────────────────────────────────────────────────────────
-const __filename = fileURLToPath(import.meta.url)
-const __dirname  = path.dirname(__filename)
 // For local hosting, store the DB outside the compiled .next build directory
 const DB_DIR  = path.join(process.cwd(), "db")
 const DB_PATH = path.join(DB_DIR, "chats.json")
@@ -32,7 +29,12 @@ async function readStore(): Promise<ChatStore> {
 
 async function writeStore(store: ChatStore): Promise<void> {
   await fs.mkdir(DB_DIR, { recursive: true })
-  await fs.writeFile(DB_PATH, JSON.stringify(store, null, 2), "utf-8")
+  // Atomic write: write to a .tmp file then rename over the real file.
+  // On Linux, rename() within the same filesystem is atomic, so concurrent
+  // writes cannot produce a half-written JSON file.
+  const tmpPath = `${DB_PATH}.${Math.random().toString(36).slice(2)}.tmp`
+  await fs.writeFile(tmpPath, JSON.stringify(store, null, 2), "utf-8")
+  await fs.rename(tmpPath, DB_PATH)
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
@@ -45,8 +47,17 @@ export async function saveThreadsForUser(
   email: string,
   threads: StoredThread[]
 ): Promise<void> {
+  // Defence-in-depth: strip personal-data content at the server persistence
+  // layer even if the client-side redaction in use-aura-chat.ts were bypassed.
+  const sanitised = threads.map((t) => ({
+    ...t,
+    messages: t.messages.map((m) =>
+      m.is_personal_data
+        ? { ...m, content: "[Personal data — not stored]" }
+        : m
+    ),
+  }))
   const store = await readStore()
-  // Keep only the most recent MAX_THREADS
-  store[email.toLowerCase()] = threads.slice(0, MAX_THREADS)
+  store[email.toLowerCase()] = sanitised.slice(0, MAX_THREADS)
   await writeStore(store)
 }

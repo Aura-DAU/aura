@@ -1,15 +1,2 @@
-fastapi
-uvicorn
-pydantic
-groq
-pinecone
-sentence-transformers
-torch
-openai-whisper
-python-dotenv
-python-multipart
-PyYAML
-numpy
-transformers
-rapidfuzz>=3.5.0
-rank-bm25
+# Canonical list lives at server/requirements.txt
+-r ../requirements.txt

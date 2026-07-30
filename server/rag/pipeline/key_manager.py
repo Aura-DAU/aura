@@ -1,3 +1,9 @@
+"""
+DEPRECATED — superseded by pipeline/inference_router.py (InferenceRouter)
+as part of the Groq → self-hosted vLLM migration. Nothing in pipeline/
+imports this module anymore. Kept only for reference; requires the `groq`
+package.
+"""
 import os
 import re
 import time
@@ -11,6 +17,20 @@ class KeyManager:
     _current_idx = 0
     _initialized = False
     _lock = threading.Lock()
+    # One Groq client per key, reused across requests — a fresh client per
+    # call would pay TCP+TLS setup on every generation instead of reusing
+    # the pooled connection (Groq's SDK is thread-safe, same as the shared
+    # per-instance clients in the guardrail/classifier classes).
+    _clients = {}
+
+    @classmethod
+    def _client_for(cls, api_key):
+        with cls._lock:
+            client = cls._clients.get(api_key)
+            if client is None:
+                client = Groq(api_key=api_key)
+                cls._clients[api_key] = client
+            return client
     
     @classmethod
     def _initialize_keys(cls):
@@ -64,13 +84,9 @@ class KeyManager:
 
     @classmethod
     def call_with_rotation(cls, fn, max_retries=5, initial_retry_delay=5.0):
-        """
-        Executes fn(client) using a Groq client instance.
-        If Groq rate limits, capacity constraints, or connection/timeout errors are hit:
-          - Automatically rotates the key for daily limits (TPD/RPD) and retries.
-          - Backs off exponentially and retries for transient limits.
-        Raises RAGPipelineError when all options are exhausted.
-        """
+        # Executes fn(client) using a Groq client instance.
+        # If Groq rate limits, capacity constraints, or connection/timeout errors are hit:
+        # Raises RAGPipelineError when all options are exhausted.
         cls._initialize_keys()
         
         # Keep track of keys tried in this request to avoid infinite loops
@@ -79,9 +95,9 @@ class KeyManager:
         retry_delay = initial_retry_delay
         attempt = 0
         
-        # Instantiate the client once initially
+        # Reuse the pooled client for the current key
         current_key = cls.get_current_key()
-        client = Groq(api_key=current_key)
+        client = cls._client_for(current_key)
         
         while attempt < max_retries:
             try:
@@ -93,11 +109,18 @@ class KeyManager:
                 # Check for daily-limit detection
                 is_daily_limit = False
                 if status_code == 429:
-                    match = re.search(r"try again in (\d+(?:\.\d+)?)s", error_msg)
-                    has_seconds_retry = bool(match)
-                    is_daily_limit = ("tpd" in error_msg or "tokens per day" in error_msg or 
-                                      "rpd" in error_msg or "requests per day" in error_msg or 
-                                      not has_seconds_retry)
+                    # A 429 with "try again in Xs" is a burst/minute limit —
+                    # back off and retry WITHOUT rotating the key, to avoid
+                    # wasting the backup key's burst budget unnecessarily.
+                    # Only explicit TPD/RPD keywords should trigger key rotation.
+                    is_minute_burst = bool(
+                        re.search(r"try again in (\d+(?:\.\d+)?)s", error_msg)
+                    )
+                    is_daily_limit = (
+                        not is_minute_burst and
+                        ("tpd" in error_msg or "tokens per day" in error_msg or
+                         "rpd" in error_msg or "requests per day" in error_msg)
+                    )
                 
                 if is_daily_limit:
                     with cls._lock:
@@ -108,8 +131,8 @@ class KeyManager:
                         
                     print(f"[KeyManager] Daily rate limit hit: {e}. Rotating API key...")
                     current_key = cls.rotate_key()
-                    # Re-instantiate the client only on key rotation
-                    client = Groq(api_key=current_key)
+                    # Swap to the rotated key's pooled client
+                    client = cls._client_for(current_key)
                     continue
                 
                 is_retryable = (status_code in [429, 500, 502, 503, 504]) or isinstance(e, APIConnectionError)

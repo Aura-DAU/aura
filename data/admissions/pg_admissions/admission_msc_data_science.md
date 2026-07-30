@@ -229,6 +229,10 @@ The students can also avail loan from banks of their choice, and in either case,
 
 At the time of admission, an amount of Rs. 1,80,000/- (Rs. 1,50,000/- towards Tuition Fee for the First Semester, Rs. 5,000/- for Value Added Courses, and Rs. 25,000/- towards a Caution Deposit) - The registration fee is payable at the time of registration and hostel rent on allotment of the hostel room.
 
+### What is the difference in initial counseling payment between M.Sc. (Data Science) and M.Sc. (IT)?
+
+The initial counseling payment for M.Sc. (Data Science) is **Rs. 1,80,000**, which is **Rs. 5,000 higher** than the M.Sc. (IT) initial payment of **Rs. 1,75,000**. This Rs. 5,000 difference is due to the mandatory Value Added Course (VAC) fee of Rs. 5,000 per semester required for M.Sc. (Data Science), which is not charged for the M.Sc. (IT) program.
+
 ### Is a BCA student eligible for admission in Data science? Can they appear in both entrances- M.Sc. (IT) and M.Sc. (Data Science)?
 
 Yes, the candidate can apply for both the programs, however, he has to submit two separate applications for both the programs.

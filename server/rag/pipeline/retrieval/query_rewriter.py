@@ -1,20 +1,21 @@
 import os
 from dotenv import load_dotenv
-from pipeline.key_manager import KeyManager
+from pipeline.inference_router import InferenceRouter
 
 class QueryRewriter:
 
     def __init__(self):
         load_dotenv()
         self.model = os.getenv(
-            "GROQ_MODEL",
-            "openai/gpt-oss-120b"
+            "VLLM_MODEL",
+            os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
     def rewrite(
         self,
         query,
-        history=None
+        history=None,
+        academic_scope=None,
     ):
 
         if not history:
@@ -29,6 +30,15 @@ class QueryRewriter:
             history_text += (
                 f"{turn['role']}: "
                 f"{turn['content']}\n"
+            )
+
+        scope_hint = ""
+        if academic_scope is not None:
+            scope_hint = (
+                "Verified student context (use only to resolve references such as 'my curriculum'; "
+                "do not add new facts): "
+                f"programme={academic_scope.programme_id}, admission_year={academic_scope.admission_year}, "
+                f"semester={academic_scope.current_semester}.\n"
             )
 
         prompt = f"""
@@ -77,6 +87,7 @@ Conversation History:
 
 Latest Question:
 
+{scope_hint}
 {query}
 """
 
@@ -84,16 +95,16 @@ Latest Question:
             return client.chat.completions.create(
                 model=self.model,
                 temperature=0,
-                # reasoning_effort="none",
                 messages=[
                     {
                         "role": "user",
                         "content": prompt
                     }
-                ]
+                ],
+                extra_body=InferenceRouter.no_think_extra_body(),
             )
 
-        response = KeyManager.call_with_rotation(_execute_rewrite, max_retries=5)
+        response = InferenceRouter.call_with_rotation(_execute_rewrite, max_retries=5)
 
         # Fix QR1: if the LLM returns an empty string (hallucination or API
         # edge case), fall back to the original query rather than passing ""

@@ -1,0 +1,12 @@
+# Auto-provisions Prometheus as Grafana's default datasource on first boot,
+# so `docker compose up -d` alone is enough (matching the doc's "Build
+# services, not servers" philosophy — no manual click-ops setup step).
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true

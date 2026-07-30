@@ -1,17 +1,20 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import type {
   ChatMessage,
   ChatThread,
   Citation,
   StudentProfile,
-  UserSession,
+  CalendarActionData,
 } from "@/lib/chat-types"
+import { useSession } from "next-auth/react"
+import { apiFetch } from "@/lib/auth-client"
+import { getUserMessage, toastAppError, toastError, toastSuccess, appErrorFromResponse } from "@/lib/toast"
+import { AppError, isAbortError } from "@/lib/errors"
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
-const SESSION_KEY  = "aura-session-v1"
 
 interface StoredThread extends ChatThread {
   messages: ChatMessage[]
@@ -42,6 +45,9 @@ function toBackendProfile(p: StudentProfile) {
   return Object.keys(out).length ? out : undefined
 }
 
+// Maps messages to the backend turn shape. Callers pass an already-bounded
+// tail (the unsummarised turns); the backend's ConversationMemory folds any
+// overflow into the running summary, so no fixed slice is applied here.
 function toBackendHistory(messages: ChatMessage[]) {
   return messages.map(({ role, content }) => ({ role, content }))
 }
@@ -52,37 +58,61 @@ function saveHistoryToServer(
   threads: (StoredThread & { messages: ChatMessage[] })[]
 ): void {
   const payload = threads.slice(0, 10)
-  fetch("/api/auth/history", {
+  apiFetch("/api/auth/history", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, threads: payload }),
   }).catch(() => { /* ignore network errors */ })
 }
 
-async function* parseSSEStream(response: Response) {
+/**
+ * Returns a copy of threads with personal-data assistant message content
+ * replaced by a redaction placeholder. The live UI state is unaffected —
+ * only the copy written to localStorage / the server is redacted.
+ */
+function redactPersonalDataMessages(threads: StoredThread[]): StoredThread[] {
+  return threads.map((t) => ({
+    ...t,
+    messages: t.messages.map((m) =>
+      m.is_personal_data
+        ? { ...m, content: "[Personal data — not stored]" }
+        : m
+    ),
+  }))
+}
+
+async function* parseSSEStream(response: Response, signal?: AbortSignal) {
   if (!response.body) throw new Error("No response body")
   const reader = response.body.getReader()
   const decoder = new TextDecoder()
   let buffer = ""
 
-  while (true) {
-    const { done, value } = await reader.read()
-    if (done) break
-    buffer += decoder.decode(value, { stream: true })
-    const lines = buffer.split("\n")
-    buffer = lines.pop() || ""
-    for (const line of lines) {
-      const trimmed = line.trim()
-      if (trimmed.startsWith("data:")) {
-        const data = trimmed.slice(5).trim()
-        if (data === "[DONE]") return
-        try {
-          yield JSON.parse(data)
-        } catch {
-          /* skip malformed chunk */
+  try {
+    while (true) {
+      if (signal?.aborted) {
+        await reader.cancel().catch(() => {})
+        return
+      }
+      const { done, value } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+      const lines = buffer.split("\n")
+      buffer = lines.pop() || ""
+      for (const line of lines) {
+        const trimmed = line.trim()
+        if (trimmed.startsWith("data:")) {
+          const data = trimmed.slice(5).trim()
+          if (data === "[DONE]") return
+          try {
+            yield JSON.parse(data)
+          } catch {
+            /* skip malformed chunk */
+          }
         }
       }
     }
+  } finally {
+    reader.releaseLock()
   }
 }
 
@@ -99,20 +129,90 @@ export function useAuraChat() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [activeCitations, setActiveCitations] = useState<Citation[]>([])
   const [studentProfile, setStudentProfile] = useState<StudentProfile>(DEFAULT_PROFILE)
-  const [userSession, setUserSession] = useState<UserSession | null>(null)
+  const [remainingQuota, setRemainingQuotaState] = useState<number | null>(null)
+  const [hasHydrated, setHasHydrated] = useState(false)
+  const { data: session, status: sessionStatus } = useSession()
+
+  // Guest quota policy: signed-in @dau.ac.in accounts (student/faculty/admin)
+  // are unlimited — the backend never returns a limit for them, so we show
+  // no counter. Anonymous guests (no session at all) get 10 questions/day;
+  // the real enforcement lives server-side against a cookie-scoped
+  // anonymous id, this is just a local mirror for the UI counter.
+  const GUEST_DAILY_QUOTA = 10
+  const GUEST_QUOTA_KEY = "aura-quota-guest"
+
+  useEffect(() => {
+    if (sessionStatus === "loading") return
+    if (session?.user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setRemainingQuotaState(null)
+      return
+    }
+    const maxQuota = GUEST_DAILY_QUOTA
+    const date = new Date().toISOString().split('T')[0]
+    const key = GUEST_QUOTA_KEY
+
+    try {
+      const stored = localStorage.getItem(key)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (parsed.date === date) {
+          setRemainingQuotaState(Math.max(0, maxQuota - parsed.count))
+        } else {
+          setRemainingQuotaState(maxQuota)
+          localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+        }
+      } else {
+        setRemainingQuotaState(maxQuota)
+        localStorage.setItem(key, JSON.stringify({ date, count: 0 }))
+      }
+    } catch {
+      setRemainingQuotaState(maxQuota)
+    }
+  }, [session, sessionStatus])
+
+  const decrementQuota = useCallback(() => {
+    setRemainingQuotaState(prev => {
+      if (prev === null) return null;
+      const newVal = Math.max(0, prev - 1)
+      if (!session?.user) {
+        const maxQuota = GUEST_DAILY_QUOTA
+        const date = new Date().toISOString().split('T')[0]
+        const key = GUEST_QUOTA_KEY
+        try {
+          localStorage.setItem(key, JSON.stringify({ date, count: maxQuota - newVal }))
+        } catch {}
+      }
+      return newVal
+    })
+  }, [session])
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const audioChunksRef = useRef<Blob[]>([])
   const audioContextRef = useRef<AudioContext | null>(null)
   const animationFrameRef = useRef<number | null>(null)
-  const hydrated = useRef(false)
+  const abortRef = useRef<AbortController | null>(null)
+  // Set when a turn hard-overflows: the fork target for the NEXT message, so the
+  // just-finished answer stays on screen until the user actually continues.
+  const pendingContinuationRef = useRef<{ fromId: string; toId: string } | null>(null)
+  const lastVolumeUpdateRef = useRef(0)
+  const mountedRef = useRef(true)
+
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+      abortRef.current?.abort()
+    }
+  }, [])
 
   useEffect(() => {
     try {
       const rawThreads = localStorage.getItem(STORAGE_KEY)
       if (rawThreads) {
         const parsed = JSON.parse(rawThreads) as StoredThread[]
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setThreads(parsed)
         if (parsed[0]) {
           setActiveThreadIdState(parsed[0].id)
@@ -121,22 +221,20 @@ export function useAuraChat() {
       }
       const rawProfile = localStorage.getItem(PROFILE_KEY)
       if (rawProfile) setStudentProfile(JSON.parse(rawProfile) as StudentProfile)
-      const rawSession = localStorage.getItem(SESSION_KEY)
-      if (rawSession) setUserSession(JSON.parse(rawSession) as UserSession)
     } catch {
       /* ignore corrupt storage */
     }
-    hydrated.current = true
+    setHasHydrated(true)
   }, [])
 
   useEffect(() => {
-    if (!hydrated.current) return
+    if (!hasHydrated) return
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(threads))
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(redactPersonalDataMessages(threads)))
     } catch {
       /* quota or unavailable */
     }
-  }, [threads])
+  }, [threads, hasHydrated])
 
   useEffect(() => {
     return () => {
@@ -173,6 +271,10 @@ export function useAuraChat() {
 
   const setActiveThreadId = useCallback(
     (id: string) => {
+      abortRef.current?.abort()
+      abortRef.current = null
+      setLoading(false)
+      setThinkingStep(undefined)
       setActiveThreadIdState(id)
       const thread = threads.find((t) => t.id === id)
       setMessages(thread ? thread.messages : [])
@@ -183,6 +285,10 @@ export function useAuraChat() {
   )
 
   const startNewChat = useCallback(() => {
+    abortRef.current?.abort()
+    abortRef.current = null
+    setLoading(false)
+    setThinkingStep(undefined)
     setActiveThreadIdState(null)
     setMessages([])
     setActiveCitations([])
@@ -221,12 +327,30 @@ export function useAuraChat() {
   const handleSendMessage = useCallback(
     async (text: string) => {
       const trimmed = text.trim()
-      if (!trimmed || loading) return
+      if (!trimmed || loading || remainingQuota === 0) return
+
+      abortRef.current?.abort()
+      const controller = new AbortController()
+      abortRef.current = controller
 
       setErrorMessage(null)
       setInputText("")
 
+      // If the previous turn hard-overflowed, continue in the fresh thread we
+      // forked for it. Deferred to now (not at fork time) so the answer the user
+      // just read stayed on screen; use locals, not state, to dodge stale
+      // closures within this tick.
+      const pending = pendingContinuationRef.current
       let threadId = activeThreadId
+      let priorMessages = messages
+      if (pending && activeThreadId === pending.fromId) {
+        pendingContinuationRef.current = null
+        threadId = pending.toId
+        priorMessages = []
+        setActiveThreadIdState(pending.toId)
+        setActiveCitations([])
+      }
+
       const userMsg: ChatMessage = {
         role: "user",
         content: trimmed,
@@ -244,30 +368,55 @@ export function useAuraChat() {
         setActiveThreadIdState(threadId)
       }
 
-      const baseMessages = [...messages, userMsg]
+      const baseMessages = [...priorMessages, userMsg]
       setMessages(baseMessages)
-      persistMessages(threadId, baseMessages, deriveTitle(messages[0]?.content ?? trimmed))
+      persistMessages(threadId, baseMessages, deriveTitle(priorMessages[0]?.content ?? trimmed))
+
+      // Rolling memory: send the running summary + only the unsummarised tail,
+      // bounded so the request stays under the 20-turn API cap. The backend
+      // folds any overflow into the summary and streams the update back.
+      const activeThread = threads.find((t) => t.id === threadId)
+      const priorSummaryCount = activeThread?.summaryTurnCount ?? 0
+      const threadSummary = activeThread?.summary
+      const MAX_TAIL_TURNS = 16
+      const tailStart = Math.max(priorSummaryCount, priorMessages.length - MAX_TAIL_TURNS)
+      const tail = priorMessages.slice(tailStart)
 
       setLoading(true)
       setThinkingStep("Thinking…")
 
       try {
-        const response = await fetch("/api/chat", {
+        const response = await apiFetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             question: trimmed,
-            history: toBackendHistory(messages),
+            history: toBackendHistory(tail),
+            summary: threadSummary,
             studentProfile: toBackendProfile(studentProfile),
           }),
+          signal: controller.signal,
         })
 
-        if (!response.ok || !response.body) {
-          throw new Error("Request failed")
+        if (controller.signal.aborted || !mountedRef.current) return
+
+        if (response.status === 429) {
+          setRemainingQuotaState(0)
+          throw AppError.rateLimited()
         }
+        if (!response.ok || !response.body) {
+          throw await appErrorFromResponse(response)
+        }
+
+        decrementQuota()
 
         let assistantText = ""
         let citations: Citation[] = []
+        let isPersonalData = false
+        let calendarAction: CalendarActionData | undefined
+        let newSummary: string | undefined
+        let foldedTurns = 0
+        let continuationSummary: string | undefined
         const assistantMsg: ChatMessage = {
           role: "assistant",
           content: "",
@@ -275,7 +424,8 @@ export function useAuraChat() {
         }
         setMessages([...baseMessages, assistantMsg])
 
-        for await (const chunk of parseSSEStream(response)) {
+        for await (const chunk of parseSSEStream(response, controller.signal)) {
+          if (controller.signal.aborted || !mountedRef.current) return
           if (chunk.type === "text-delta" && typeof chunk.delta === "string") {
             setThinkingStep(undefined)
             assistantText += chunk.delta
@@ -287,38 +437,97 @@ export function useAuraChat() {
           } else if (chunk.type === "citations" && Array.isArray(chunk.citations)) {
             citations = chunk.citations as Citation[]
             setActiveCitations(citations)
+          } else if (chunk.type === "personal-data-flag") {
+            isPersonalData = true
+          } else if (chunk.type === "summary-update" && typeof chunk.summary === "string") {
+            // Backend compacted older turns into the running summary this turn.
+            newSummary = chunk.summary
+            foldedTurns = typeof chunk.foldedTurns === "number" ? chunk.foldedTurns : 0
+          } else if (chunk.type === "thread-continuation" && typeof chunk.summary === "string") {
+            // Hard overflow — the summary itself is full; continue in a new thread.
+            continuationSummary = chunk.summary
+          } else if (
+            chunk.type === "calendar-action" &&
+            chunk.action !== null &&
+            typeof chunk.action === "object"
+          ) {
+            // Backend M3 (Dhruvam) owns the calendar tool logic.
+            // This handler activates when the backend emits a calendar-action event.
+            calendarAction = chunk.action as CalendarActionData
           }
         }
 
+        if (controller.signal.aborted || !mountedRef.current) return
+
         const finalMessages: ChatMessage[] = [
           ...baseMessages,
-          { ...assistantMsg, content: assistantText },
+          {
+            ...assistantMsg,
+            content: assistantText,
+            is_personal_data: isPersonalData || undefined,
+            calendar_action: calendarAction,
+          },
         ]
+        setMessages(finalMessages)
         persistMessages(threadId, finalMessages)
 
-        // Sync to server (fire-and-forget) if a user is logged in
-        try {
-          const rawSession = localStorage.getItem(SESSION_KEY)
-          if (rawSession) {
-            const session = JSON.parse(rawSession) as { email: string }
-            if (session.email) {
-              // Build latest snapshot of threads to sync
-              setThreads((current) => {
-                saveHistoryToServer(session.email, current)
-                return current
-              })
-            }
+        // Persist this turn's rolling-memory bookkeeping onto the thread so the
+        // next request sends the updated digest and the advanced tail pointer.
+        if (newSummary !== undefined) {
+          const capturedSummary = newSummary
+          const advancedCount = tailStart + foldedTurns
+          setThreads((prev) =>
+            prev.map((t) =>
+              t.id === threadId
+                ? { ...t, summary: capturedSummary, summaryTurnCount: advancedCount }
+                : t,
+            ),
+          )
+        }
+
+        // Hard overflow: fork a fresh thread seeded with the summary and defer
+        // the switch (pendingContinuationRef) so the just-read answer stays on
+        // screen; the user's next message continues in the new thread.
+        if (continuationSummary) {
+          const contId = uid()
+          const carriedSummary = newSummary ?? continuationSummary
+          const contThread: StoredThread = {
+            id: contId,
+            title: `${activeThread?.title ?? deriveTitle(trimmed)} (cont.)`,
+            messages: [],
+            summary: carriedSummary,
+            summaryTurnCount: 0,
+            continuedFromId: threadId,
           }
-        } catch { /* ignore */ }
-      } catch {
-        setErrorMessage("Something went wrong. Please try again.")
+          setThreads((prev) => [contThread, ...prev])
+          pendingContinuationRef.current = { fromId: threadId, toId: contId }
+          toastSuccess(
+            "This chat is getting long — I'll continue in a new thread and keep the summary.",
+          )
+        }
+
+        if (session?.user?.email) {
+          setThreads((current) => {
+            saveHistoryToServer(session.user.email!, redactPersonalDataMessages(current))
+            return current
+          })
+        }
+      } catch (err) {
+        if (controller.signal.aborted || !mountedRef.current) return
+        if (isAbortError(err)) return
+        const msg = getUserMessage(err)
+        setErrorMessage(msg)
+        toastAppError(err)
         setMessages(baseMessages)
       } finally {
-        setLoading(false)
-        setThinkingStep(undefined)
+        if (abortRef.current === controller) abortRef.current = null
+        if (mountedRef.current && !controller.signal.aborted) {
+          setLoading(false)
+          setThinkingStep(undefined)
+        }
       }
     },
-    [activeThreadId, loading, messages, persistMessages, studentProfile],
+    [activeThreadId, loading, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota],
   )
 
   const handleClearChat = useCallback(() => {
@@ -329,6 +538,34 @@ export function useAuraChat() {
     setActiveCitations([])
     setErrorMessage(null)
   }, [activeThreadId, persistMessages])
+
+  const stopGeneration = useCallback(() => {
+    abortRef.current?.abort()
+    abortRef.current = null
+    setLoading(false)
+    setThinkingStep(undefined)
+  }, [])
+
+  const lastUserMessage = messages.findLast((m) => m.role === "user")?.content ?? null
+
+  // Stable identity unless threads actually change — consumers (Sidebar) can
+  // skip re-renders instead of receiving a fresh array every hook render.
+  const threadSummaries = useMemo(
+    () =>
+      threads.map(({ id, title, messages }) => ({
+        id,
+        title,
+        updatedAt: messages[messages.length - 1]?.timestamp ?? messages[0]?.timestamp,
+      })),
+    [threads],
+  )
+
+  // True when the active thread was auto-forked on context overflow — drives the
+  // "Continued from previous conversation" divider in MessageList.
+  const activeThreadIsContinuation = useMemo(
+    () => Boolean(threads.find((t) => t.id === activeThreadId)?.continuedFromId),
+    [threads, activeThreadId],
+  )
 
   const transcribeAudio = useCallback(
     async (blob: Blob) => {
@@ -351,16 +588,27 @@ export function useAuraChat() {
 
         const form = new FormData()
         form.append("audio", blob, `recording.${extension}`)
-        const res = await fetch("/api/speech", { method: "POST", body: form })
-        const data = (await res.json()) as { text?: string; error?: string }
+        const res = await apiFetch("/api/speech", { method: "POST", body: form })
+        if (!res.ok) {
+          const err = await appErrorFromResponse(res)
+          setErrorMessage(err.message)
+          toastAppError(err)
+          return
+        }
+        const data = (await res.json()) as { text?: string }
         const transcript = data.text
         if (transcript) {
           setInputText((prev) => (prev ? `${prev} ${transcript}` : transcript))
         } else {
-          setErrorMessage(data.error ?? "Could not transcribe audio.")
+          const msg = "Could not transcribe audio. Please try again."
+          setErrorMessage(msg)
+          toastError(msg)
         }
-      } catch {
-        setErrorMessage("Could not transcribe audio.")
+      } catch (err) {
+        if (isAbortError(err)) return
+        const msg = getUserMessage(err, "Could not transcribe audio. Please try again.")
+        setErrorMessage(msg)
+        toastAppError(err, msg)
       } finally {
         setIsTranscribing(false)
       }
@@ -393,7 +641,9 @@ export function useAuraChat() {
       }
 
       if (!detectedMimeType) {
-        setErrorMessage("Audio recording is not supported in this browser.")
+        const msg = "Audio recording is not supported in this browser."
+        setErrorMessage(msg)
+        toastError(msg)
         return
       }
 
@@ -406,7 +656,13 @@ export function useAuraChat() {
       }
 
       // Initialize AudioContext for Silence Detection & Volume Visualizer
-      const AudioCtxClass = typeof window !== "undefined" ? (window.AudioContext || (window as any).webkitAudioContext) : null
+      type WindowWithWebkitAudio = Window & {
+        webkitAudioContext?: typeof AudioContext
+      }
+      const AudioCtxClass =
+        typeof window !== "undefined"
+          ? window.AudioContext || (window as WindowWithWebkitAudio).webkitAudioContext
+          : null
       if (AudioCtxClass) {
         try {
           const audioCtx = new AudioCtxClass()
@@ -433,9 +689,12 @@ export function useAuraChat() {
             }
             const avgVol = sum / bufferLength
 
-            // Map average volume to a 0-1 scale for UI Visualizer
             const normalizedVol = Math.min(avgVol / 120, 1)
-            setRecordingVolume(normalizedVol)
+            const now = performance.now()
+            if (now - lastVolumeUpdateRef.current >= 80) {
+              lastVolumeUpdateRef.current = now
+              setRecordingVolume(normalizedVol)
+            }
 
             if (avgVol < SILENCE_THRESHOLD_DB) {
               if (silentSince === null) {
@@ -481,14 +740,11 @@ export function useAuraChat() {
       recorder.start()
       setIsRecording(true)
     } catch {
-      setErrorMessage("Microphone access was denied.")
+      const msg = "Microphone access was denied."
+      setErrorMessage(msg)
+      toastError(msg)
     }
   }, [isRecording, transcribeAudio])
-
-  const logout = useCallback(async () => {
-    setUserSession(null)
-    try { localStorage.removeItem(SESSION_KEY) } catch { /* ignore */ }
-  }, [])
 
   return {
     messages,
@@ -502,7 +758,9 @@ export function useAuraChat() {
     errorMessage,
     setErrorMessage,
     activeCitations,
-    threads: threads.map(({ id, title }) => ({ id, title })),
+    remainingQuota,
+    threads: threadSummaries,
+    activeThreadIsContinuation,
     activeThreadId,
     setActiveThreadId,
     startNewChat,
@@ -512,7 +770,7 @@ export function useAuraChat() {
     handleMicClick,
     handleSendMessage,
     handleClearChat,
-    userSession,
-    logout,
+    stopGeneration,
+    lastUserMessage,
   }
 }

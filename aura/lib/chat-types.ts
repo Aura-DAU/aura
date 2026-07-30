@@ -1,17 +1,49 @@
+/**
+ * Structured data returned by the backend calendar tool when a booking
+ * or reminder is created. Populated only when chunk.type === "calendar-action"
+ * arrives in the SSE stream. Backend M3 (Dhruvam) owns the tool logic.
+ */
+export interface CalendarActionData {
+  event_title?: string
+  date?: string
+  time?: string
+  attendees?: string[]
+  status?: "confirmed" | "pending" | "failed"
+  calendar_link?: string
+  description?: string
+}
+
 export interface ChatMessage {
   role: "user" | "assistant"
   content: string
   timestamp?: number
+  is_personal_data?: boolean
+  /** Set when the backend emits a calendar-action SSE event for this turn. */
+  calendar_action?: CalendarActionData
 }
 
 export interface Citation {
   file: string
   title?: string
+  visibility?: string
+  authorization?: string[]
+  /** Relative path to the raw markdown source (e.g. "infrastructure/foo.md"), used to open the citation side-drawer. Absent for citations that are external URLs only. */
+  path?: string
+  startLine?: number
+  endLine?: number
 }
 
 export interface ChatThread {
   id: string
   title: string
+  /** Epoch ms of the most recent message; used to group threads by recency in the sidebar. */
+  updatedAt?: number
+  /** Rolling conversation memory: a digest of the turns older than `summaryTurnCount`, maintained by the backend (pipeline.memory) and persisted here so a long chat keeps its context. */
+  summary?: string
+  /** Count of leading messages already folded into `summary`. The client sends only `messages.slice(summaryTurnCount)` (plus `summary`) to the backend. */
+  summaryTurnCount?: number
+  /** Set when this thread was auto-created as the continuation of another on hard context overflow; drives the "Continued from previous conversation" divider. */
+  continuedFromId?: string
 }
 
 export interface StudentProfile {
@@ -24,4 +56,6 @@ export interface StudentProfile {
 export interface UserSession {
   name: string
   email: string
+  role?: "student" | "faculty" | "admin" | "faculty_coord" | "faculty_convenor_ug" | "faculty_convenor_pg" | "dean_students" | "dean_faculty" | "dean_academic" | "registrar" | "admin_staff" | "superadmin"
+  department?: string
 }

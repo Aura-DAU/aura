@@ -71,26 +71,47 @@ class Reranker:
                 [query, text]
             )
 
-        inputs = self.tokenizer(
-            pairs,
-            padding=True,
-            truncation=True,
-            max_length=512,
-            return_tensors="pt"
-        )
+        reranker_service_url = os.getenv("RERANKER_SERVICE_URL")
+        cross_scores = None
 
-        inputs = {k: v.to(self.device) for k, v in inputs.items()}
-
-        with torch.no_grad():
-
-            cross_scores = (
-                self.model(
-                    **inputs
+        if reranker_service_url:
+            try:
+                import requests
+                resp = requests.post(
+                    f"{reranker_service_url.rstrip('/')}/rerank",
+                    json={"pairs": pairs},
+                    timeout=10
                 )
-                .logits
-                .squeeze(-1)
-                .tolist()
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if "scores" in data:
+                        cross_scores = data["scores"]
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning("Remote reranker service failed: %s. Falling back to local model.", e)
+
+        if cross_scores is None:
+            inputs = self.tokenizer(
+                pairs,
+                padding=True,
+                truncation=True,
+                max_length=512,
+                return_tensors="pt"
             )
+
+            inputs = {k: v.to(self.device) for k, v in inputs.items()}
+
+            with torch.no_grad():
+                cross_scores = (
+                    self.model(
+                        **inputs
+                    )
+                    .logits
+                    .squeeze(-1)
+                    .tolist()
+                )
+                if isinstance(cross_scores, float):
+                    cross_scores = [cross_scores]
 
         reranked = []
 
@@ -326,17 +347,17 @@ class Reranker:
             h1 = str(
                 metadata.get("h1") or ""
             ).lower()
-            
+
 
             h2 = str(
                 metadata.get("h2") or ""
             ).lower()
-            
+
 
             h3 = str(
                 metadata.get("h3") or ""
             ).lower()
-            
+
 
             metadata_boost = 0.0
 
@@ -395,6 +416,16 @@ class Reranker:
             if target_section and section_type == target_section:
                 section_boost += 0.25
 
+
+            # Fix #12: cap variable boost components to [0.0, 1.0] so the
+            # weighted sum stays on a consistent scale. Without this, multiple
+            # matching sections can accumulate metadata_boost > 1.0, inflating
+            # final scores beyond the intended [0, 1] range and making them
+            # incomparable across queries.
+            metadata_boost = min(metadata_boost, 1.0)
+            required_section_boost = min(required_section_boost, 1.0)
+            section_boost = min(section_boost, 1.0)
+            course_match_boost = min(course_match_boost, 1.0)
 
             # Fix #4: all components are now on comparable scales [0, 1].
             # course_match_boost is weighted at 0.20 (was a raw +0.35 add).

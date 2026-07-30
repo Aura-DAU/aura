@@ -1,3 +1,4 @@
+import heapq
 import json
 import re
 
@@ -196,6 +197,9 @@ class BM25Retriever:
 
             )
 
+        if "$not" in metadata_filter:
+            return not self._matches_filter(chunk, metadata_filter["$not"])
+
         for key, condition in metadata_filter.items():
 
             if isinstance(condition, dict):
@@ -212,8 +216,23 @@ class BM25Retriever:
                 # compared the chunk's string value to the dict object → always
                 # False → zero BM25 results for all multi-program queries.
                 elif "$in" in condition:
+                    val = chunk.get(key)
+                    if isinstance(val, list):
+                        # Array intersection: True if any element in val is in condition["$in"]
+                        if not any(v in condition["$in"] for v in val):
+                            return False
+                    else:
+                        if val not in condition["$in"]:
+                            return False
 
-                    if chunk.get(key) not in condition["$in"]:
+                elif "$gte" in condition:
+                    value = chunk.get(key)
+                    if not isinstance(value, (int, float)) or value < condition["$gte"]:
+                        return False
+
+                elif "$lte" in condition:
+                    value = chunk.get(key)
+                    if not isinstance(value, (int, float)) or value > condition["$lte"]:
                         return False
 
             else:
@@ -228,24 +247,23 @@ class BM25Retriever:
         self,
         query,
         top_k=10,
-        metadata_filter=None
+        metadata_filter=None,
+        allowed_roles=None
     ):
 
         query_tokens = (
             self._tokenize(query)
         )
 
-        candidate_indices = []
-
-        for idx, chunk in enumerate(self.chunks):
-
-            if not self._matches_filter(
-                chunk,
-                metadata_filter
-            ):
-                continue
-
-            candidate_indices.append(idx)
+        if metadata_filter:
+            candidate_indices = [
+                idx
+                for idx, chunk in enumerate(self.chunks)
+                if self._matches_filter(chunk, metadata_filter)
+            ]
+        else:
+            # No filter → every chunk is a candidate; skip the per-chunk scan.
+            candidate_indices = range(len(self.chunks))
 
         scores = (
             self.bm25.get_scores(
@@ -253,15 +271,21 @@ class BM25Retriever:
             )
         )
 
-        ranked_indices = sorted(
+        # nlargest is O(n log k) vs O(n log n) for a full sort, and matches
+        # sorted(..., reverse=True)[:k] exactly (including tie order).
+        ranked_indices = heapq.nlargest(
+            top_k,
             candidate_indices,
-            key=lambda i: scores[i],
-            reverse=True
-        )[:top_k]
+            key=scores.__getitem__
+        )
 
         results = []
 
+        max_score = max(scores[i] for i in ranked_indices) if ranked_indices else 0.0
+
         for idx in ranked_indices:
+            raw_score = float(scores[idx])
+            norm_score = raw_score / max_score if max_score > 0.0 else 0.0
 
             results.append({
 
@@ -271,7 +295,7 @@ class BM25Retriever:
                     ],
 
                 "score":
-                    float(scores[idx]),
+                    norm_score,
 
                 "metadata":
                     self.chunks[idx]

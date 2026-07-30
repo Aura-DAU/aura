@@ -2,7 +2,6 @@ import os
 import logging
 from pathlib import Path
 from dotenv import load_dotenv
-from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 
 # Query-time embeddings MUST use the same model as ingestion-time
@@ -11,6 +10,7 @@ from pipeline.ingestion.chunking.config import MODEL_NAME
 
 from pipeline.retrieval.bm25_retriever import BM25Retriever
 from pipeline.retrieval.rrf import fuse
+from pipeline.retrieval.qdrant_client import build_index_adapter
 
 logger = logging.getLogger(__name__)
 TOP_K = 3
@@ -47,65 +47,86 @@ class Retriever:
                 metadata_path
             )
         
-        pc = Pinecone(
-            api_key=os.getenv(
-                "PINECONE_API_KEY"
-            )
-        )
-
-        self.index = pc.Index(
-            os.getenv(
-                "PINECONE_INDEX"
-            )
-        )
+        # Phase A: dense vector search now goes through Qdrant instead of
+        # Pinecone (see qdrant_client.py). build_index_adapter() returns an
+        # object with the same .query(vector=, top_k=, include_metadata=,
+        # filter=) shape pinecone.Index had, so nothing below this line
+        # needed to change.
+        self.index = build_index_adapter()
 
     def retrieve(
         self,
         query,
         top_k=TOP_K,
-        metadata_filter=None
+        metadata_filter=None,
+        allowed_roles=None
     ):
 
-        query_embedding = self.model.encode(
-            [
-                "Represent this sentence for searching relevant passages: "
-                + query
-            ],
-            normalize_embeddings=True,
-            convert_to_numpy=True
+        # Metadata filters include authorization and, for authenticated
+        # students, hard academic applicability. Never disable the complete
+        # filter: doing so would allow a maintenance flag to bypass scope.
+        pinecone_filter = metadata_filter
+        
+        query_text = (
+            "Represent this sentence for searching relevant passages: "
+            + query
         )
+        embedding_service_url = os.getenv("EMBEDDING_SERVICE_URL")
+        query_embedding_list = None
 
-        results = self.index.query(
-            vector=query_embedding[0].tolist(),
-            top_k=top_k,
-            include_metadata=True,
-            filter=metadata_filter
-        )
+        if embedding_service_url:
+            try:
+                import requests
+                resp = requests.post(
+                    f"{embedding_service_url.rstrip('/')}/embed",
+                    json={"texts": [query_text], "normalize": True},
+                    timeout=5
+                )
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if "embeddings" in data and len(data["embeddings"]) > 0:
+                        query_embedding_list = data["embeddings"][0]
+            except Exception as e:
+                logger.warning("Remote embedding service failed: %s. Falling back to local model.", e)
 
-        chunks = []
-
-        for match in results["matches"]:
-
-            chunks.append(
-                {
-                    "id": 
-                        match["id"],
-                        
-                    # Fix #1A: store the raw Pinecone cosine score separately
-                    # so the confidence router can use it even after RRF fusion
-                    # overwrites 'score' with the hybrid rrf_score.
-                    "score":
-                        match["score"],
-
-                    "cosine_score":
-                        match["score"],
-
-                    "metadata":
-                        match["metadata"]
-                }
+        if query_embedding_list is None:
+            query_embedding = self.model.encode(
+                [query_text],
+                normalize_embeddings=True,
+                convert_to_numpy=True
             )
+            query_embedding_list = query_embedding[0].tolist()
 
-        dense_results = chunks
+        dense_results = []
+        if self.index:
+            try:
+                results = self.index.query(
+                    vector=query_embedding_list,
+                    top_k=top_k,
+                    include_metadata=True,
+                    filter=pinecone_filter
+                )
+                for match in results["matches"]:
+                    dense_results.append(
+                        {
+                            "id":
+                                match["id"],
+
+                            # Fix #1A: store the raw Pinecone cosine score separately
+                            # so the confidence router can use it even after RRF fusion
+                            # overwrites 'score' with the hybrid rrf_score.
+                            "score":
+                                match["score"],
+
+                            "cosine_score":
+                                match["score"],
+
+                            "metadata":
+                                match["metadata"]
+                        }
+                    )
+            except Exception as e:
+                logger.warning("Pinecone query failed: %s", e)
 
         if not self.bm25:
             return dense_results
@@ -113,7 +134,8 @@ class Retriever:
         bm25_results = self.bm25.retrieve(
             query=query,
             top_k=top_k,
-            metadata_filter=metadata_filter
+            metadata_filter=metadata_filter,
+            allowed_roles=allowed_roles
         )
 
         fused_results = fuse(
