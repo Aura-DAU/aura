@@ -1,10 +1,38 @@
 import os
 import math
 import torch
+import re
+from datetime import datetime
 from transformers import (
     AutoTokenizer,
     AutoModelForSequenceClassification
 )
+
+from typing import Optional
+
+def extract_latest_year(metadata: dict) -> Optional[int]:
+    """Extract the most recent year from a document's metadata."""
+    doc_year = metadata.get("document_year", "")
+    if doc_year:
+        m = re.search(r"(20[1-3]\d)", str(doc_year))
+        if m:
+            return int(m.group(1))
+
+    texts_to_search = [
+        metadata.get("title", ""),
+        metadata.get("h1", ""),
+        metadata.get("h2", ""),
+        metadata.get("h3", ""),
+        metadata.get("text", "")
+    ]
+
+    for text in texts_to_search:
+        if not text:
+            continue
+        matches = re.findall(r"\b(20[1-3]\d)(?:[-\u2013/]\d{2,4})?\b", str(text))
+        if matches:
+            return max(int(m) for m in matches)
+    return None
 
 
 class Reranker:
@@ -295,6 +323,9 @@ class Reranker:
             )
         )
 
+        explicit_rule_year = entities.get("rule_year")
+        current_year = datetime.now().year
+
         for result, cross_score in zip(
             results,
             cross_scores
@@ -442,11 +473,21 @@ class Reranker:
             section_boost = min(section_boost, 1.0)
             course_match_boost = min(course_match_boost, 1.0)
 
+            temporal_boost = 0.0
+            if not explicit_rule_year:
+                doc_year = extract_latest_year(metadata)
+                if doc_year:
+                    diff = current_year - doc_year
+                    if diff <= 0:
+                        temporal_boost = 1.0
+                    elif diff <= 5:
+                        temporal_boost = max(0.0, 1.0 - (diff * 0.2))
+
             # Fix #4: all components are now on comparable scales [0, 1].
             # course_match_boost is weighted at 0.20 (was a raw +0.35 add).
             # semester_penalty is applied to the normalised cross component.
             final_score = (
-                (0.65 * norm_cross)
+                (0.60 * norm_cross)
                 +
                 (0.15 * dense_score)
                 +
@@ -457,6 +498,8 @@ class Reranker:
                 (0.05 * section_boost)
                 +
                 (0.05 * course_match_boost)
+                +
+                (0.05 * temporal_boost)
                 +
                 # Fix #13: penalty is now a fraction of the normalised cross
                 # score so it remains meaningful even at high relevance.
