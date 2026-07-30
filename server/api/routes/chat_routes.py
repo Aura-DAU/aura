@@ -226,7 +226,7 @@ async def chat_stream(
                     # done — canned/denial paths stream nothing, so emit the whole
                     # answer as a single delta to match the non-streaming UX.
                     result, mem_result = payload if payload else ({}, None)
-                    result = result or {}
+                    result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
                     answer = result.get("answer", "")
                     if not streamed_any and answer:
                         yield _sse({"type": "text-delta", "delta": answer})
