@@ -48,7 +48,7 @@ services:
 
   aura:
     build:
-      context: ../aura
+      context: ../../aura
       dockerfile: Dockerfile
     restart: unless-stopped
     expose:
@@ -72,7 +72,7 @@ services:
 
   backend:
     build:
-      context: ../server
+      context: ../../server
       dockerfile: Dockerfile
     restart: unless-stopped
     expose:
