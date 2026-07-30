@@ -1,12 +1,37 @@
 import os
 import math
-import re
 
 
 class Reranker:
 
     def __init__(self):
         self.device = None
+        self.tokenizer = None
+        self.model = None
+        self.H1_BOOST = 0.10
+        self.H2_BOOST = 0.20
+        self.H3_BOOST = 0.15
+
+    def _ensure_local_model(self):
+        if self.model is not None and self.tokenizer is not None:
+            return
+
+        import torch
+        from transformers import (
+            AutoTokenizer,
+            AutoModelForSequenceClassification
+        )
+
+        env_device = os.getenv("RERANKER_DEVICE")
+        if env_device:
+            self.device = torch.device(env_device)
+        elif torch.cuda.is_available():
+            self.device = torch.device("cuda")
+        elif torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        else:
+            self.device = torch.device("cpu")
+
         self.tokenizer = None
         self.model = None
         self.H1_BOOST = 0.10

@@ -384,14 +384,12 @@ export function useAuraChat() {
 
   const persistMessages = useCallback(
     (threadId: string, next: ChatMessage[], title?: string) => {
-      const updatedAt = threadUpdatedAt(next)
+      const updatedAt = next[next.length - 1]?.timestamp ?? Date.now()
       setThreads((prev) =>
-        sortThreadsByRecency(
-          prev.map((t) =>
-            t.id === threadId
-              ? { ...t, messages: next, title: title ?? t.title, updatedAt }
-              : t,
-          ),
+        prev.map((t) =>
+          t.id === threadId
+            ? { ...t, messages: next, title: title ?? t.title, updatedAt }
+            : t,
         ),
       )
     },
@@ -499,30 +497,13 @@ export function useAuraChat() {
         timestamp: Date.now(),
       }
 
-      // Regenerate: transcript already ends at the last user turn — do not
-      // append a duplicate user message. History sent to the backend must
-      // exclude that current user turn (same as a normal send).
-      let baseMessages: ChatMessage[]
-      if (options?.regenerate) {
-        if (!threadId) return
-        const last = priorMessages[priorMessages.length - 1]
-        if (last?.role === "user" && last.content.trim() === trimmed) {
-          baseMessages = priorMessages
-          priorMessages = priorMessages.slice(0, -1)
-        } else {
-          baseMessages = [...priorMessages, userMsg]
-        }
-      } else {
-        if (!threadId) {
-          threadId = uid()
-          const newThread: StoredThread = {
-            id: threadId,
-            title: deriveTitle(trimmed),
-            messages: [userMsg],
-            updatedAt: userMsg.timestamp,
-          }
-          setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
-          setActiveThreadIdState(threadId)
+      if (!threadId) {
+        threadId = uid()
+        const newThread: StoredThread = {
+          id: threadId,
+          title: deriveTitle(trimmed),
+          messages: [userMsg],
+          updatedAt: userMsg.timestamp,
         }
         baseMessages = [...priorMessages, userMsg]
         persistMessages(
@@ -670,6 +651,7 @@ export function useAuraChat() {
             id: contId,
             title: `${activeThread?.title ?? deriveTitle(trimmed)} (cont.)`,
             messages: [],
+            updatedAt: Date.now(),
             summary: carriedSummary,
             summaryTurnCount: 0,
             continuedFromId: threadId,
