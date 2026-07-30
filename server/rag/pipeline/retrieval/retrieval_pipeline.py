@@ -380,29 +380,36 @@ class RetrievalPipeline:
             return None
         scoped = {
             "$and": [
-                {"applicability_scope": {"$in": ["programme", "curriculum", "course"]}},
+                {"applicability_scope": {"$in": ["programme", "curriculum"]}},
                 {"programme_id": {"$eq": academic_scope.programme_id}},
                 {"degree_level": {"$eq": academic_scope.degree_level}},
                 {"admission_year_from": {"$lte": academic_scope.admission_year}},
                 {"admission_year_to": {"$gte": academic_scope.admission_year}},
             ]
         }
+        # Course-policy documents are keyed by course_code, not by
+        # programme_id/degree_level/admission_year (they never populate those
+        # fields — the same course is often shared across programmes). They
+        # need their own clause instead of being forced through the
+        # programme/curriculum clause above, which they can never satisfy.
+        or_clauses = [
+            {"applicability_scope": {"$eq": "global"}},
+            scoped,
+        ]
+        if academic_scope.registered_course_codes:
+            or_clauses.append({
+                "$and": [
+                    {"applicability_scope": {"$eq": "course"}},
+                    {"course_code": {"$in": list(academic_scope.registered_course_codes)}},
+                ]
+            })
         # A missing branch on a document means programme-wide applicability;
         # branch equality is enforced by the post-retrieval predicate when a
         # document declares one, without excluding those programme-wide docs.
-        return {
-            "$or": [
-                {"applicability_scope": {"$eq": "global"}},
-                scoped,
-            ]
-        }
+        return {"$or": or_clauses}
 
     @staticmethod
     def _requires_academic_scope(plan: dict) -> bool:
-        entities = plan.get("entities", {})
-        if any(entities.get(k) for k in ["program_name", "course_code", "course_name"]):
-            return False
-
         return plan.get("category") == "academics" or plan.get("retrieval_intent") in {
             "program_curriculum", "program_overview", "policy_version", "rules",
         }

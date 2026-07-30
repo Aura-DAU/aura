@@ -143,32 +143,68 @@ def extract_academic_applicability(metadata, file_path, body):
     path_text = str(file_path).replace("\\", "/").lower()
     title = str(metadata.get("title") or "")
     haystack = " ".join([title, path_text, body[:4000]]).lower()
+    # Programme-name regexes below match on whitespace-separated tokens, but
+    # real titles/filenames use periods, parentheses, and underscores too
+    # (e.g. "B.Tech. (ICT)", "btech_ict"). Collapsing all non-alphanumeric
+    # separators to a single space before matching means those variants are
+    # actually detected, instead of silently falling through to
+    # "unclassified" the way "B.Tech. (ICT) Curriculum and Syllabus" did.
+    normalized_haystack = re.sub(r"[^a-z0-9]+", " ", haystack)
     academic = "academics" in path_text or "academic" in category
     if not academic:
         return {"applicability_scope": "global"}
+
+    # Course-policy documents already carry an explicit course_code in their
+    # own frontmatter (see the "Squad D Scraper" course policy files). Scope
+    # these by course rather than by programme+admission-year: the same
+    # course is frequently taken across several programmes as an elective, it
+    # is almost never phrased with "admitted"/"wef <year>" language, and
+    # forcing a programme/year match here was silently dropping every course
+    # policy document into "unclassified" (i.e. permanently excluded from
+    # every logged-in student's retrieval, regardless of programme).
+    course_code = metadata.get("course_code")
+    if course_code:
+        return {
+            "applicability_scope": "course",
+            "course_code": str(course_code),
+        }
 
     programme_patterns = [
         (r"b\.?\s*tech\s*\(?\s*ict\s*\)?", "btech-ict", "undergraduate"),
         (r"(?:b\.?\s*tech\s*\(?\s*mnc|mathematics and computing)", "btech-mnc", "undergraduate"),
         (r"(?:b\.?\s*tech\s*\(?\s*evd|electronics and vlsi)", "btech-evd", "undergraduate"),
+        (r"(?:b\.?\s*tech\s*\(?\s*cs\s*(?:and|&)?\s*ai|computer science and artificial intelligence)", "btech-csai", "undergraduate"),
+        (r"(?:b\.?\s*tech\s*\(?\s*ece[\s\-]*ai|electronics and communication)", "btech-ece-ai", "undergraduate"),
         (r"(?:m\.?\s*sc\s*\(?\s*ds|m\.sc.*data science)", "msc-ds", "postgraduate"),
         (r"(?:m\.?\s*sc\s*\(?\s*it|m\.sc.*information technology)", "msc-it", "postgraduate"),
+        (r"(?:m\.?\s*sc\s*\(?\s*agri|agriculture analytics)", "msc-agri-analytics", "postgraduate"),
         (r"m\.?\s*tech\s*\(?\s*ict", "mtech-ict", "postgraduate"),
-        (r"m\.?\s*tech\s*\(?\s*ec", "mtech-ec", "postgraduate"),
+        (r"m\.?\s*tech\s*\(?\s*ec\b", "mtech-ec", "postgraduate"),
+        (r"(?:m\.?\s*tech\s*\(?\s*cs\s*(?:and|&)?\s*ml|m\.?\s*tech\s*\(?\s*cs\b)", "mtech-cs-ml", "postgraduate"),
+        (r"bs[\s\-]*ms\s*\(?\s*(?:ds|data science|artificial intelligence)", "bs-ms-dsai", "undergraduate"),
+        (r"bs[\s\-]*ms\s*\(?\s*it|information technology", "bs-ms-it", "undergraduate"),
+        (r"m\.?\s*des\.?\s*\(?\s*cd", "mdes-cd", "postgraduate"),
+        (r"m\.?\s*des\.?\s*\(?\s*iuxd", "mdes-iuxd", "postgraduate"),
         (r"ph\.?\s*d", "phd", "doctoral"),
     ]
-    programme = next(((pid, level) for pattern, pid, level in programme_patterns if re.search(pattern, haystack)), None)
+    programme = next(((pid, level) for pattern, pid, level in programme_patterns if re.search(pattern, normalized_haystack)), None)
+    if not programme:
+        return {"applicability_scope": "unclassified"}
+
     admitted = re.search(r"(?:admitted|admission)\D{0,40}(20\d{2})(?:\s*[-–/]\s*\d{2,4})?", haystack)
     effective = re.search(r"(?:wef|effective from)\D{0,25}(20\d{2})(?:\s*[-–/]\s*\d{2,4})?", haystack)
     year = int((admitted or effective).group(1)) if (admitted or effective) else None
-    if not programme or year is None:
-        return {"applicability_scope": "unclassified"}
     programme_id, degree_level = programme
     return {
         "applicability_scope": "curriculum",
         "programme_id": programme_id,
         "degree_level": degree_level,
-        "admission_year_from": year,
+        # A confident programme match with no explicit admission-year phrase
+        # (e.g. a general curriculum/syllabus overview page) applies to every
+        # admission cohort of that programme rather than being thrown away —
+        # only a document that fails to name a programme at all should become
+        # "unclassified".
+        "admission_year_from": year if year is not None else 2000,
         "admission_year_to": 9999,
     }
 
