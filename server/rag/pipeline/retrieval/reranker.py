@@ -1,13 +1,7 @@
 import os
 import math
-import torch
 import re
 from datetime import datetime
-from transformers import (
-    AutoTokenizer,
-    AutoModelForSequenceClassification
-)
-
 from typing import Optional
 
 def extract_latest_year(metadata: dict) -> Optional[int]:
@@ -38,18 +32,25 @@ def extract_latest_year(metadata: dict) -> Optional[int]:
 class Reranker:
 
     def __init__(self):
-        import logging
-        self._log = logging.getLogger(__name__)
+        self.device = None
+        self.tokenizer = None
+        self.model = None
+        self.H1_BOOST = 0.10
+        self.H2_BOOST = 0.20
+        self.H3_BOOST = 0.15
 
-        env_device = (os.getenv("RERANKER_DEVICE") or "").strip()
-        if env_device == "cuda" and not torch.cuda.is_available():
-            # Backend containers on Node 1 often have no NVIDIA runtime; a hard
-            # cuda device here crashes the whole chat pipeline at init.
-            self._log.warning(
-                "RERANKER_DEVICE=cuda but CUDA is unavailable; falling back to cpu"
-            )
-            self.device = torch.device("cpu")
-        elif env_device:
+    def _ensure_local_model(self):
+        if self.model is not None and self.tokenizer is not None:
+            return
+
+        import torch
+        from transformers import (
+            AutoTokenizer,
+            AutoModelForSequenceClassification
+        )
+
+        env_device = os.getenv("RERANKER_DEVICE")
+        if env_device:
             self.device = torch.device(env_device)
         elif torch.cuda.is_available():
             self.device = torch.device("cuda")
@@ -60,18 +61,34 @@ class Reranker:
 
         self.tokenizer = None
         self.model = None
-        # Prefer remote RERANKER_SERVICE_URL; only load the local cross-encoder
-        # when no remote is configured (eager) or when remote fails (lazy).
-        if not (os.getenv("RERANKER_SERVICE_URL") or "").strip():
-            self._ensure_local_model()
-
         self.H1_BOOST = 0.10
         self.H2_BOOST = 0.20
         self.H3_BOOST = 0.15
+        # Prefer remote RERANKER_SERVICE_URL; only load the local cross-encoder
+        # eagerly when no remote is configured (lazy fallback still happens in rerank).
+        if not (os.getenv("RERANKER_SERVICE_URL") or "").strip():
+            self._ensure_local_model()
 
     def _ensure_local_model(self):
-        if self.model is not None:
+        if self.model is not None and self.tokenizer is not None:
             return
+
+        import torch
+        from transformers import (
+            AutoTokenizer,
+            AutoModelForSequenceClassification
+        )
+
+        env_device = os.getenv("RERANKER_DEVICE")
+        if env_device:
+            self.device = torch.device(env_device)
+        elif torch.cuda.is_available():
+            self.device = torch.device("cuda")
+        elif torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        else:
+            self.device = torch.device("cpu")
+
         self.tokenizer = AutoTokenizer.from_pretrained(
             "BAAI/bge-reranker-v2-m3"
         )
@@ -82,6 +99,7 @@ class Reranker:
         self.model.eval()
 
     def rerank(
+
         self,
         query,
         results,
@@ -134,6 +152,7 @@ class Reranker:
 
         if cross_scores is None:
             self._ensure_local_model()
+            import torch
             inputs = self.tokenizer(
                 pairs,
                 padding=True,
@@ -482,10 +501,24 @@ class Reranker:
                         temporal_boost = 1.0
                     elif diff <= 5:
                         temporal_boost = max(0.0, 1.0 - (diff * 0.2))
+                else:
+                    year_text = " ".join(
+                        str(metadata.get(k) or "")
+                        for k in ("academic_year", "title", "source_file", "relative_path")
+                    )
+                    year_match = re.search(
+                        r"(?:20)?(\d{2})[_\-\u2013](\d{2})(?!\d)",
+                        year_text,
+                    )
+                    if year_match:
+                        start_yy = int(year_match.group(1))
+                        end_yy = int(year_match.group(2))
+                        if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
+                            temporal_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
+                    elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
+                        temporal_boost = 0.6
 
             # Fix #4: all components are now on comparable scales [0, 1].
-            # course_match_boost is weighted at 0.20 (was a raw +0.35 add).
-            # semester_penalty is applied to the normalised cross component.
             final_score = (
                 (0.60 * norm_cross)
                 +
@@ -501,8 +534,6 @@ class Reranker:
                 +
                 (0.05 * temporal_boost)
                 +
-                # Fix #13: penalty is now a fraction of the normalised cross
-                # score so it remains meaningful even at high relevance.
                 (semester_penalty * norm_cross)
             )
 

@@ -130,8 +130,9 @@ office-bearers / points of contact:
 
 Rules:
 - Use ONLY names and contacts present in the retrieved text. Never invent.
-- Prefer C_DCs / convenor sheets and the latest academic year when available;
-  mention which year you used.
+- Prefer C_DCs / convenor sheets with the highest academic year (e.g. 2026-27
+  over 2025-26 over 24-25). Never treat scraped_date as the roster year.
+- If older and newer rosters both appear, answer from the newest and name the year.
 - If office-bearers are not in the retrieved context, say so — do not guess
   from unrelated clubs.
 - This is published SBG roster data, not an ERP personal-data lookup.
@@ -321,8 +322,8 @@ def handle_get_club_members(identity, club_name: str, request_context=None, **kw
         }
     query = (
         f"{club_name} club committee core members list roster convenor "
-        f"dy convenor member student ID position Club Committee Data "
-        f"Core Members Winter C_DCs"
+        f"dy convenor member student ID position C_DCs Information "
+        f"Core Members office bearers"
     )
     out = _run(
         query, "student", _CLUB_MEMBERS_SYSTEM_PROMPT,
@@ -353,7 +354,8 @@ def handle_lookup_club_office_bearers(identity, club_name: str, request_context=
         }
     query = (
         f"{club_name} club committee convenor dy convenor deputy faculty mentor "
-        f"email contact C_DCs Information office bearers"
+        f"email contact C_DCs Information office bearers "
+        f"Convener Name Dy. Convener Name"
     )
     out = _run(
         query, "student", _OFFICE_BEARERS_SYSTEM_PROMPT,

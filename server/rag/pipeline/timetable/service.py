@@ -224,13 +224,61 @@ def get_effective_timetable(identity) -> dict:
     sorted by day/time, for the identity's own (year, sem, sec), merged with
     their overrides and selected electives.
     """
-    year, sem, sec = _require_cohort(identity)
+    is_common = False
+    try:
+        year, sem, sec = _require_cohort(identity)
+    except TimetableError as e:
+        # Student doesn't have cohort setup yet: let's try to infer year/sem from ERP ID or email
+        # so we can show a default common timetable of their year/semester.
+        erp_id = _field(identity, "erp_id")
+        role = _field(identity, "role")
+        if role != "student":
+            raise
+        
+        # Try to resolve year/sem/sec from user_identity_map or infer from erp_id
+        year = _field(identity, "current_year")
+        sem = _field(identity, "current_sem")
+        sec = _field(identity, "current_sec")
+        
+        if (year is None or sem is None) and erp_id:
+            try:
+                from api.routes.identity_routes import _infer_role_and_cohort
+                inferred = _infer_role_and_cohort(f"{erp_id}@dau.ac.in")
+                if inferred["role"] == "student":
+                    year = year if year is not None else inferred["current_year"]
+                    sem = sem if sem is not None else inferred["current_sem"]
+                    sec = sec if sec else inferred["current_sec"]
+            except Exception:
+                pass
+        
+        # Fallback to year 1 if not inferrable
+        if year is None: year = 1
+        if sem is None: sem = 1
+        
+        is_common = True
+        sec = None
+
     erp_id = _field(identity, "erp_id")
-    master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec)}
-    overrides = get_overrides(erp_id)
+    
+    if sec is None:
+        # Fetch common courses (where sec is null/empty or default to 'A' as representative)
+        master_rows = {row["id"]: row for row in db_conn.query(
+            """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                      course_code, course_name, session_type, room, faculty_name,
+                      course_type
+               FROM timetable_master
+               WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = 'A')
+               ORDER BY day_of_week, start_time""",
+            (year, sem),
+        )}
+        is_common = True
+    else:
+        master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec)}
+        
+    overrides = get_overrides(erp_id) if erp_id else []
 
     # Elective filtering & inclusion
-    selected_ids = _get_selected_elective_ids(erp_id)
+    selected_ids = _get_selected_elective_ids(erp_id) if erp_id else set()
     electives_configured = len(selected_ids) > 0
     if electives_configured:
         all_electives = get_all_elective_rows(year, sem)
@@ -269,10 +317,13 @@ def get_effective_timetable(identity) -> dict:
 
     slots.sort(key=lambda s: (s["day_of_week"], s["start_time"]))
     return {
-        "cohort": {"year": year, "sem": sem, "sec": sec},
+        "cohort": {"year": year, "sem": sem, "sec": sec or "A"},
         "electives_configured": electives_configured,
         "timetable": slots,
+        "is_common": is_common,
+        "needs_configuration": is_common or not electives_configured
     }
+
 
 
 def list_my_changes(identity) -> list[dict]:

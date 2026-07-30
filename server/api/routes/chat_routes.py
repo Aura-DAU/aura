@@ -3,6 +3,7 @@
 import asyncio
 import json
 import logging
+import os
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
@@ -13,12 +14,21 @@ from api.request_context import AcademicScopeResolver, RequestContext
 from api.deps import chat_queue_lock, get_aura
 from api.schemas import ChatRequest
 from pipeline.memory.conversation_memory import get_conversation_memory
+from pipeline.memory.user_memory import get_user_memory_store
+from pipeline.memory.response_cache import get_response_cache
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota
 from access_control import resolve_effective_role
 
 router = APIRouter(tags=["chat"])
 _scope_resolver = AcademicScopeResolver()
 logger = logging.getLogger(__name__)
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int((os.getenv(name) or "").strip() or default)
+    except (TypeError, ValueError):
+        return default
 
 
 def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
@@ -68,6 +78,23 @@ def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
     return history, display_profile, request_context, remaining
 
 
+def _summary_for_generation(user_memory: str, thread_summary: str) -> str:
+    from pipeline.memory.conversation_memory import _truncate_tokens
+
+    conversation_memory = get_conversation_memory()
+    thread_summary = _truncate_tokens(thread_summary or "", conversation_memory.summary_max_tokens)
+    user_memory_tokens = _env_int("AURA_USER_MEMORY_TOKENS", 400)
+
+    parts = []
+    if user_memory:
+        user_memory = _truncate_tokens(user_memory, user_memory_tokens)
+        if user_memory:
+            parts.append("Persistent User Memory\n" + user_memory)
+    if thread_summary:
+        parts.append("Current Thread Summary\n" + thread_summary)
+    return "\n\n".join(parts)
+
+
 @router.post("/chat")
 async def chat(
     req: Request,
@@ -76,12 +103,38 @@ async def chat(
 ):
     history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
 
+    # Cache lookup: guest public standalone queries only
+    is_guest_public = (identity.role == "guest" and len(history) == 0)
+    if is_guest_public:
+        cache = get_response_cache()
+        cached = cache.get(body.question)
+        if cached:
+            cached["quota_remaining"] = remaining
+            return cached
+
     async with chat_queue_lock:
         result = await run_in_threadpool(
             _ask_with_memory, body, identity, history, display_profile, request_context
         )
     if isinstance(result, dict):
         result["quota_remaining"] = remaining
+        # Cache write: guest public standalone queries only (exclude error/rejection responses)
+        if is_guest_public and "answer" in result and "error" not in result:
+            ans = result["answer"]
+            from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
+            from pipeline.aura_chat import GENERIC_DENIAL
+            is_error_response = (
+                ans == GENERIC_DENIAL or
+                ans == "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries." or
+                ans == OFF_TOPIC_RESPONSE or
+                ans.startswith("I'm having trouble retrieving") or
+                ans.startswith("Sorry, I encountered an error")
+            )
+            if not is_error_response:
+                cache.set(body.question, {
+                    "answer": ans,
+                    "sources": result.get("sources") or []
+                })
     return result
 
 
@@ -89,38 +142,20 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
     # Compact older turns into the running summary before generating, then return
     # the updated summary + memory metadata so the (stateless) client can persist
     # the digest and advance its per-thread pointer.
-    mem_result = get_conversation_memory().prepare(body.summary, history)
+    mem_result = get_conversation_memory().prepare(request.summary, history)
+    user_memory_store = get_user_memory_store()
+    identity_dict = identity.as_dict()
+    user_memory = user_memory_store.get(identity_dict)
     result = get_aura().ask(
         question=request.question,
         history=mem_result.history,
-        identity=identity.as_dict(),
+        identity=identity_dict,
         display_profile=display_profile,
-        summary=mem_result.summary,
+        summary=_summary_for_generation(user_memory, mem_result.summary),
         request_context=request_context,
     )
-    result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
-    result["memory"] = {
-        "summary": mem_result.summary,
-        "foldedTurns": mem_result.folded_turns,
-        "summaryChanged": mem_result.summary_changed,
-        "shouldFork": mem_result.should_fork,
-    }
-    return result
-
-
-def _ask_with_memory(request, identity, history, display_profile, request_context) -> dict:
-    # Compact older turns into the running summary before generating, then return
-    # the updated summary + memory metadata so the (stateless) client can persist
-    # the digest and advance its per-thread pointer.
-    mem_result = get_conversation_memory().prepare(body.summary, history)
-    result = get_aura().ask(
-        question=request.question,
-        history=mem_result.history,
-        identity=identity.as_dict(),
-        display_profile=display_profile,
-        summary=mem_result.summary,
-        request_context=request_context,
-    )
+    if mem_result.summary_changed:
+        user_memory_store.merge(identity_dict, mem_result.summary, request.summary or "")
     result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
     result["memory"] = {
         "summary": mem_result.summary,
@@ -148,6 +183,31 @@ async def chat_stream(
     # status codes.
     history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
 
+    # Cache lookup: guest public standalone queries only
+    is_guest_public = (identity.role == "guest" and len(history) == 0)
+    if is_guest_public:
+        cache = get_response_cache()
+        cached = cache.get(body.question)
+        if cached:
+            async def cached_stream():
+                yield _sse({"type": "quota", "remaining": remaining})
+                yield _sse({"type": "text-delta", "delta": cached["answer"]})
+                if cached.get("sources"):
+                    yield _sse({"type": "citations", "citations": cached["sources"]})
+                yield "data: [DONE]\n\n"
+
+            headers = {
+                "Cache-Control": "no-cache, no-transform",
+                "X-Accel-Buffering": "no",
+            }
+            if remaining is not None:
+                headers["X-Quota-Remaining"] = str(remaining)
+            return StreamingResponse(
+                cached_stream(),
+                media_type="text/event-stream",
+                headers=headers,
+            )
+
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
 
@@ -158,15 +218,20 @@ async def chat_stream(
         try:
             mem_result = get_conversation_memory().prepare(body.summary, history)
             loop.call_soon_threadsafe(events.put_nowait, ("summary", mem_result))
+            user_memory_store = get_user_memory_store()
+            identity_dict = identity.as_dict()
+            user_memory = user_memory_store.get(identity_dict)
             result = get_aura().ask(
                 question=body.question,
                 history=mem_result.history,
-                identity=identity.as_dict(),
+                identity=identity_dict,
                 display_profile=display_profile,
                 on_delta=on_delta,
-                summary=mem_result.summary,
+                summary=_summary_for_generation(user_memory, mem_result.summary),
                 request_context=request_context,
             )
+            if mem_result.summary_changed:
+                user_memory_store.merge(identity_dict, mem_result.summary, body.summary or "")
         except Exception as exc:  # e.g. AURA init failure — never kill the stream silently
             loop.call_soon_threadsafe(events.put_nowait, ("error", str(exc)))
         else:
@@ -247,6 +312,24 @@ async def chat_stream(
                             "summary": mem_result.summary,
                         })
                     yield _sse({"type": "quota", "remaining": remaining})
+
+                    # Cache write: guest public standalone queries only (exclude error/rejection responses)
+                    if is_guest_public and answer and "error" not in result:
+                        from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
+                        from pipeline.aura_chat import GENERIC_DENIAL
+                        is_error_response = (
+                            answer == GENERIC_DENIAL or
+                            answer == "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries." or
+                            answer == OFF_TOPIC_RESPONSE or
+                            answer.startswith("I'm having trouble retrieving") or
+                            answer.startswith("Sorry, I encountered an error")
+                        )
+                        if not is_error_response:
+                            get_response_cache().set(body.question, {
+                                "answer": answer,
+                                "sources": citations
+                            })
+
                     yield "data: [DONE]\n\n"
                     break
             finally:

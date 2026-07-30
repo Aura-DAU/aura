@@ -49,6 +49,11 @@ Rules:
   clearing cache), you must get the user's explicit confirmation before it
   executes. The orchestrator will return a confirmation prompt instead of a
   result on the first attempt — relay that prompt to the user as-is.
+- If the timetable tool returns "is_common": true or "needs_configuration": true:
+  1. Inform the user that this is the common timetable for their year.
+  2. Display the timetable clearly.
+  3. Proactively ask the user for their section (e.g. A, B, C, D) and any electives they have, so you can update and customize it for them.
+  4. Once they provide the section/electives, use the set_my_cohort tool (for section) and save_my_elective_selections tool (for electives) to save their preferences.
 - Keep answers concise and grounded only in what the tools returned.
 """
 

@@ -12,6 +12,47 @@ class ContextBuilder:
     # history ~500 + 3000 context = ~3950 tokens, safe for all hosted models).
     MAX_CONTEXT_TOKENS = 3000
 
+    @staticmethod
+    def _rule_year_from_metadata(metadata: dict) -> str:
+        """Prefer title/path academic labels over ingest scraped_date years.
+
+        Club Committee Data 24-25 was being labeled rule_year=2026 because
+        document_year was taken from scraped_date. Title/filename win here
+        even for already-indexed chunks that still carry the bad year.
+        """
+        # Local import keeps this file free of package-path coupling for tests
+        # that import ContextBuilder without the full ingestion package.
+        try:
+            from pipeline.ingestion.chunking.metadata_extractors import (
+                normalize_academic_year_label,
+            )
+        except ImportError:
+            normalize_academic_year_label = None  # type: ignore[assignment]
+
+        title = str(metadata.get("title") or "")
+        source_file = str(metadata.get("source_file") or metadata.get("relative_path") or "")
+        academic = metadata.get("academic_year")
+        candidates = [academic, title, source_file]
+        if normalize_academic_year_label:
+            for raw in candidates:
+                label = normalize_academic_year_label(raw)
+                if label:
+                    return label
+        # Fallback: full 20xx-yy in title only (legacy behaviour).
+        year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title)
+        if year_match:
+            return year_match.group(1).replace("\u2013", "-")
+        # Never surface a bare scraped calendar year as rule_year when the
+        # title clearly encodes a short academic year (e.g. "24-25").
+        short = re.search(r"(?<!\d)(\d{2})[-\u2013](\d{2})(?!\d)", title)
+        if short:
+            start = int(short.group(1))
+            end = int(short.group(2))
+            if 15 <= start <= 35 and end == (start + 1) % 100:
+                return f"20{start:02d}-{short.group(2)}"
+        doc_year = metadata.get("document_year", "")
+        return str(doc_year) if doc_year else ""
+
     def _estimate_tokens(self, text: str) -> int:
         # Rough token estimate: word count × 1.3 (accounts for sub-word splits).
         return int(len(text.split()) * 1.3)
@@ -70,17 +111,11 @@ class ContextBuilder:
             # ("compare BTech ICT vs BS-MS fees") where two chunks about
             # different programs would otherwise look identical to the model.
             # Fix #9: internal reranked_score is still omitted from the XML.
-            # Fix CB4: rule_year extracted from title heuristically
-            # (e.g. "Academic Requirements PhD wef 2024-25" → "2024-25")
-            # and added as an XML attribute. This lets the LLM explicitly see
-            # which year's document it is reading and cite the year correctly.
-            # Fix CB5: moved `import re` to the top of the file (was imported
-            # inside this loop on every chunk iteration, which is unnecessary).
+            # Fix CB4 / CB4b: rule_year from title/filename academic label —
+            # never prefer scraped_date-derived document_year when the title
+            # encodes a real roster year (24-25, 2025-26, 2026-27).
             title_str = metadata.get("title", "")
-            doc_rule_year = metadata.get("document_year", "")
-            if not doc_rule_year:
-                year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
-                doc_rule_year = year_match.group(1) if year_match else ""
+            doc_rule_year = self._rule_year_from_metadata(metadata)
 
             start_line_val = metadata.get("start_line", "")
             end_line_val = metadata.get("end_line", "")

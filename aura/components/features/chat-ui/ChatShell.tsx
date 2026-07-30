@@ -77,11 +77,10 @@ export function ChatShell() {
     })
   }, [])
 
+  const regenerate = chat.handleRegenerate
   const handleRegenerate = useCallback(() => {
-    const lastUser = chat.messages.findLast((m) => m.role === "user")
-    if (lastUser) void chat.handleSendMessage(lastUser.content)
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- avoid depending on whole chat object
-  }, [chat.messages, chat.handleSendMessage])
+    void regenerate()
+  }, [regenerate])
 
   const hasMessages = chat.messages.length > 0
 

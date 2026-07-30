@@ -22,6 +22,9 @@ class FakeDB:
     def query(self, sql, params=()):
         sql_norm = " ".join(sql.split())
         if "FROM timetable_master" in sql_norm:
+            if len(params) == 2:
+                year, sem = params
+                return [r for r in self.master if r["year"] == year and r["sem"] == sem and (r["sec"] is None or r["sec"] == "" or r["sec"] == "A")]
             year, sem, sec = params
             return [r for r in self.master if r["year"] == year and r["sem"] == sem and r["sec"] == sec]
         if "FROM timetable_overrides" in sql_norm:
@@ -142,7 +145,8 @@ def test_non_student_role_is_rejected(fake_db):
         service.get_effective_timetable({"role": "faculty", "erp_id": "F1"})
 
 
-def test_missing_cohort_is_rejected(fake_db):
-    with pytest.raises(service.TimetableError):
-        service.get_effective_timetable({"role": "student", "erp_id": "S3", "current_year": None,
+def test_missing_cohort_fallback_to_common(fake_db):
+    res = service.get_effective_timetable({"role": "student", "erp_id": "S3", "current_year": None,
                                           "current_sem": None, "current_sec": None})
+    assert res["is_common"] is True
+    assert res["needs_configuration"] is True
