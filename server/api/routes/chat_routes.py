@@ -3,6 +3,7 @@
 import asyncio
 import json
 import logging
+import os
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
@@ -13,12 +14,20 @@ from api.request_context import AcademicScopeResolver, RequestContext
 from api.deps import chat_queue_lock, get_aura
 from api.schemas import ChatRequest
 from pipeline.memory.conversation_memory import get_conversation_memory
+from pipeline.memory.user_memory import get_user_memory_store
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota
 from access_control import resolve_effective_role
 
 router = APIRouter(tags=["chat"])
 _scope_resolver = AcademicScopeResolver()
 logger = logging.getLogger(__name__)
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int((os.getenv(name) or "").strip() or default)
+    except (TypeError, ValueError):
+        return default
 
 
 def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
@@ -68,6 +77,23 @@ def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
     return history, display_profile, request_context, remaining
 
 
+def _summary_for_generation(user_memory: str, thread_summary: str) -> str:
+    from pipeline.memory.conversation_memory import _truncate_tokens
+
+    conversation_memory = get_conversation_memory()
+    thread_summary = _truncate_tokens(thread_summary or "", conversation_memory.summary_max_tokens)
+    user_memory_tokens = _env_int("AURA_USER_MEMORY_TOKENS", 400)
+
+    parts = []
+    if user_memory:
+        user_memory = _truncate_tokens(user_memory, user_memory_tokens)
+        if user_memory:
+            parts.append("Persistent User Memory\n" + user_memory)
+    if thread_summary:
+        parts.append("Current Thread Summary\n" + thread_summary)
+    return "\n\n".join(parts)
+
+
 @router.post("/chat")
 async def chat(
     req: Request,
@@ -89,38 +115,20 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
     # Compact older turns into the running summary before generating, then return
     # the updated summary + memory metadata so the (stateless) client can persist
     # the digest and advance its per-thread pointer.
-    mem_result = get_conversation_memory().prepare(body.summary, history)
+    mem_result = get_conversation_memory().prepare(request.summary, history)
+    user_memory_store = get_user_memory_store()
+    identity_dict = identity.as_dict()
+    user_memory = user_memory_store.get(identity_dict)
     result = get_aura().ask(
         question=request.question,
         history=mem_result.history,
-        identity=identity.as_dict(),
+        identity=identity_dict,
         display_profile=display_profile,
-        summary=mem_result.summary,
+        summary=_summary_for_generation(user_memory, mem_result.summary),
         request_context=request_context,
     )
-    result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
-    result["memory"] = {
-        "summary": mem_result.summary,
-        "foldedTurns": mem_result.folded_turns,
-        "summaryChanged": mem_result.summary_changed,
-        "shouldFork": mem_result.should_fork,
-    }
-    return result
-
-
-def _ask_with_memory(request, identity, history, display_profile, request_context) -> dict:
-    # Compact older turns into the running summary before generating, then return
-    # the updated summary + memory metadata so the (stateless) client can persist
-    # the digest and advance its per-thread pointer.
-    mem_result = get_conversation_memory().prepare(body.summary, history)
-    result = get_aura().ask(
-        question=request.question,
-        history=mem_result.history,
-        identity=identity.as_dict(),
-        display_profile=display_profile,
-        summary=mem_result.summary,
-        request_context=request_context,
-    )
+    if mem_result.summary_changed:
+        user_memory_store.merge(identity_dict, mem_result.summary, request.summary or "")
     result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
     result["memory"] = {
         "summary": mem_result.summary,
@@ -158,15 +166,20 @@ async def chat_stream(
         try:
             mem_result = get_conversation_memory().prepare(body.summary, history)
             loop.call_soon_threadsafe(events.put_nowait, ("summary", mem_result))
+            user_memory_store = get_user_memory_store()
+            identity_dict = identity.as_dict()
+            user_memory = user_memory_store.get(identity_dict)
             result = get_aura().ask(
                 question=body.question,
                 history=mem_result.history,
-                identity=identity.as_dict(),
+                identity=identity_dict,
                 display_profile=display_profile,
                 on_delta=on_delta,
-                summary=mem_result.summary,
+                summary=_summary_for_generation(user_memory, mem_result.summary),
                 request_context=request_context,
             )
+            if mem_result.summary_changed:
+                user_memory_store.merge(identity_dict, mem_result.summary, body.summary or "")
         except Exception as exc:  # e.g. AURA init failure — never kill the stream silently
             loop.call_soon_threadsafe(events.put_nowait, ("error", str(exc)))
         else:
