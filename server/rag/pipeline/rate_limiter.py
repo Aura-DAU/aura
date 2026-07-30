@@ -144,6 +144,7 @@ class RedisQuotaStore:
         if int(allowed) == 0:
             raise QuotaExceeded(limit=limit, remaining=0)
         return max(0, limit - int(count))
+
     def remaining(self, key: str, limit: int) -> int:
         now = time.time()
         cutoff = _day_start(now)
