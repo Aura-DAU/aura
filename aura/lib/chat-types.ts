@@ -38,6 +38,12 @@ export interface ChatThread {
   title: string
   /** Epoch ms of the most recent message; used to group threads by recency in the sidebar. */
   updatedAt?: number
+  /** Rolling conversation memory: a digest of the turns older than `summaryTurnCount`, maintained by the backend (pipeline.memory) and persisted here so a long chat keeps its context. */
+  summary?: string
+  /** Count of leading messages already folded into `summary`. The client sends only `messages.slice(summaryTurnCount)` (plus `summary`) to the backend. */
+  summaryTurnCount?: number
+  /** Set when this thread was auto-created as the continuation of another on hard context overflow; drives the "Continued from previous conversation" divider. */
+  continuedFromId?: string
 }
 
 export interface StudentProfile {

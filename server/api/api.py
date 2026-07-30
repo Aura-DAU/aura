@@ -22,6 +22,7 @@ from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
 from api.auth import require_identity, Identity
+from api.request_context import AcademicScopeResolver
 from api.middleware.security_headers import SecurityHeadersMiddleware
 from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
@@ -31,6 +32,7 @@ from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
 from pipeline.rate_limiter import enforce_quota, QuotaExceeded
+from access_control import resolve_effective_role
 
 app = FastAPI(title="AURA API")
 
@@ -38,6 +40,7 @@ app = FastAPI(title="AURA API")
 # so /health and auth routes stay available during cold start.
 _aura = None
 _aura_lock = threading.Lock()
+_scope_resolver = AcademicScopeResolver()
 
 
 def get_aura():
@@ -272,12 +275,17 @@ async def chat(
         ) from exc
 
     async with chat_queue_lock:
+        request_context = _scope_resolver.resolve(
+            identity,
+            resolve_effective_role(identity),
+        )
         return await run_in_threadpool(
             get_aura().ask,
             question=request.question,
             history=history,
             identity=identity.as_dict(),
             display_profile=display_profile,
+            request_context=request_context,
         )
 
 # ── eCampus account linking ───────────────────────────────────────────────

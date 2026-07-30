@@ -52,6 +52,7 @@ from pipeline.aura_chat import (
     PERSONAL_DATA_SYSTEM_ADDENDUM,
     is_greeting_or_meta,
 )
+from api.request_context import RequestContext
 
 
 class SimpleIdentity:
@@ -65,8 +66,11 @@ class AuraState(TypedDict, total=False):
     query: str
     history: list
     identity: Any
+    request_context: RequestContext
+    academic_scope: Any
     display_profile: Any
     on_delta: Any  # token-streaming callback, threaded straight to the generator
+    summary: Optional[str]  # rolling conversation memory (pipeline.memory)
 
     query_type: Optional[str]
     classification: dict
@@ -216,8 +220,8 @@ class AuraChatGraph:
     def _n_guest_gate(self, state: AuraState) -> AuraState:
         query_type = state["query_type"]
         if query_type in ("PERSONAL", "MIXED", "AGGREGATE"):
-            identity = state.get("identity")
-            user_role = resolve_effective_role(identity) if identity else "guest"
+            request_context = state.get("request_context")
+            user_role = request_context.effective_role if request_context else "guest"
             if user_role == "guest":
                 state["result"] = {
                     "answer": GENERIC_DENIAL,
@@ -299,10 +303,15 @@ class AuraChatGraph:
         if query_type not in ("PUBLIC", "MIXED", "AGGREGATE"):
             return state
 
-        identity = state.get("identity")
-        user_role = resolve_effective_role(identity) if identity else "public"
+        request_context = state.get("request_context")
+        user_role = request_context.effective_role if request_context else "public"
         with track_segment("retrieval_time"):
-            retrieval_result = self.pipeline.get_context(state["query"], state["history"], user_role=user_role)
+            retrieval_result = self.pipeline.get_context(
+                state["query"],
+                state["history"],
+                user_role=user_role,
+                academic_scope=state.get("academic_scope"),
+            )
         state["retrieval_result"] = retrieval_result
         state["chunks"] = retrieval_result.get("chunks", [])
         state["rag_context"] = retrieval_result.get("context", "")
@@ -333,9 +342,10 @@ class AuraChatGraph:
                 context=combined_context,
                 plan=retrieval_result.get("plan") if has_rag else None,
                 history=state["history"],
-                profile=state.get("display_profile"),
+                profile=self._answer_profile(state),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
                 on_delta=state.get("on_delta"),
+                summary=state.get("summary"),
             )
 
         state["result"] = {
@@ -397,7 +407,25 @@ class AuraChatGraph:
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────
 
-    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None):
+    def _answer_profile(self, state: AuraState) -> dict | None:
+        scope = state.get("academic_scope")
+        display_profile = state.get("display_profile") or {}
+        if not scope:
+            return display_profile or None
+        profile = {
+            "role": "student",
+            "programme": scope.programme_id,
+            "degree_level": scope.degree_level,
+            "admission_year": scope.admission_year,
+            "current_semester": scope.current_semester,
+        }
+        if scope.branch_id:
+            profile["branch"] = scope.branch_id
+        return profile
+
+    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None, summary=None, request_context=None):
+        if request_context is not None:
+            identity = request_context.identity
         if isinstance(identity, dict):
             identity = SimpleIdentity(
                 erp_id=identity.get("erp_id"),
@@ -410,8 +438,11 @@ class AuraChatGraph:
                 "query": query,
                 "history": history or [],
                 "identity": identity,
+                "request_context": request_context,
+                "academic_scope": request_context.academic_scope if request_context else None,
                 "display_profile": display_profile,
                 "on_delta": on_delta,
+                "summary": summary or "",
                 "result": None,
             }
             final_state = self._graph.invoke(initial_state)

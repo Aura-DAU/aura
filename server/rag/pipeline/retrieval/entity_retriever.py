@@ -87,6 +87,7 @@ class EntityRetriever:
         max_chunks_per_field: int = MAX_ENTITY_CHUNKS_PER_FIELD,
         max_chunks_total: int = MAX_ENTITY_CHUNKS_TOTAL,
         allowed_roles: list[str] = None,
+        academic_scope=None,
     ) -> list[dict]:
         # Return chunk records whose entity fields overlap with `entities`.
         # Fix #2: each entity field gets its own independent budget
@@ -157,6 +158,8 @@ class EntityRetriever:
                         chunk_auth = [chunk_auth]
                     if not any(role in allowed_roles for role in chunk_auth):
                         continue
+                if academic_scope is not None and not academic_scope.document_is_eligible(chunk):
+                    continue
                 results.append({
                     "id": chunk_id,
                     # Entity-matched chunks start with a neutral score;

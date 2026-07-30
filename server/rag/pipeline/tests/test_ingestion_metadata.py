@@ -7,6 +7,7 @@ sys.path.insert(0, str(chunking_dir))
 
 from section_extracter import extract_sections
 from process_corpus import find_line_range_in_file, process_markdown_file
+from metadata_extractors import extract_academic_applicability
 
 def test_extract_sections_line_ranges():
     markdown = """# Title
@@ -78,3 +79,37 @@ This is some content for registration.
         assert chunk["document_year"] == 2025
         assert chunk["start_line"] is not None
         assert chunk["end_line"] is not None
+
+
+def test_academic_applicability_is_extracted_deterministically():
+    metadata = {"title": "Academic Requirements BTech ICT 2021 wef Autumn 2021-22", "category": "Academics"}
+    body = "These rules are applicable to students admitted to the program in the academic year 2021-22 and onwards."
+    result = extract_academic_applicability(metadata, "data/academics/requirements.md", body)
+    assert result == {
+        "applicability_scope": "curriculum",
+        "programme_id": "btech-ict",
+        "degree_level": "undergraduate",
+        "admission_year_from": 2021,
+        "admission_year_to": 9999,
+    }
+
+
+def test_explicit_academic_applicability_takes_precedence():
+    metadata = {
+        "category": "Academics",
+        "applicability_scope": "course",
+        "programme_id": "btech-ict",
+        "course_code": "ICT101",
+        "degree_level": "undergraduate",
+        "admission_year_from": "2024",
+        "admission_year_to": "2026",
+    }
+    result = extract_academic_applicability(metadata, "data/academics/custom.md", "")
+    assert result == {
+        "applicability_scope": "course",
+        "programme_id": "btech-ict",
+        "course_code": "ICT101",
+        "degree_level": "undergraduate",
+        "admission_year_from": 2024,
+        "admission_year_to": 2026,
+    }
