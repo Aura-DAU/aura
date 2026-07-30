@@ -19,8 +19,11 @@ MAX_USER_MEMORY_CHARS = 20_000
 
 
 class UserMemoryStore(Protocol):
-    def get(self, identity: dict) -> str: ...
-    def merge(self, identity: dict, thread_summary: str) -> str: ...
+    def get(self, identity: dict) -> str:
+        pass
+
+    def merge(self, identity: dict, thread_summary: str) -> str:
+        pass
 
 
 def _identity_key(identity: dict) -> Optional[str]:
