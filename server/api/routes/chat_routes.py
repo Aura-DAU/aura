@@ -112,7 +112,7 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
     # Compact older turns into the running summary before generating, then return
     # the updated summary + memory metadata so the (stateless) client can persist
     # the digest and advance its per-thread pointer.
-    mem_result = get_conversation_memory().prepare(request.summary, history)
+    mem_result = get_conversation_memory().prepare(body.summary, history)
     result = get_aura().ask(
         question=request.question,
         history=mem_result.history,
@@ -156,7 +156,7 @@ async def chat_stream(
 
     def _run() -> None:
         try:
-            mem_result = get_conversation_memory().prepare(request.summary, history)
+            mem_result = get_conversation_memory().prepare(body.summary, history)
             loop.call_soon_threadsafe(events.put_nowait, ("summary", mem_result))
             result = get_aura().ask(
                 question=body.question,
