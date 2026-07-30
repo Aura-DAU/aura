@@ -267,19 +267,18 @@ async def chat_stream(
                         err_str = str(payload or "")
                         logger.error("[chat_stream] Pipeline error: %s", err_str)
 
-                        # Classify explicit error code for client-side visibility & tracing
+                        # Classify explicit error code for developer tracing & telemetry
                         if "Connection error" in err_str or "exhausted" in err_str or "Timeout" in err_str or "timeout" in err_str:
                             error_code = "VLLM_TIMEOUT"
-                            user_msg = "The AI inference engine is currently busy or timing out. Please try again shortly."
                         elif "RETRIEVAL_EMPTY" in err_str or "No relevant documents" in err_str:
                             error_code = "RETRIEVAL_EMPTY"
-                            user_msg = "No relevant documents were found in the knowledge base for this query."
                         elif "GUARDRAIL_BLOCKED" in err_str or "violates safety" in err_str:
                             error_code = "GUARDRAIL_BLOCKED"
-                            user_msg = "This query was blocked by safety or scope policy guardrails."
                         else:
                             error_code = "RAG_PIPELINE_ERROR"
-                            user_msg = f"I encountered a pipeline processing error ({error_code}). Please try again."
+
+                        # Soft, polite user-facing message for the chat interface
+                        user_msg = "Sorry, I encountered an error while processing your request. Please try again in a few moments."
 
                         yield _sse({
                             "type": "error",
