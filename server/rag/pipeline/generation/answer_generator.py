@@ -271,6 +271,14 @@ Restating the positive set is not an answer to a negation question.
 - every cited id exists in `<context>`,
 - every number, name, and modal verb matches the source exactly.
 
+# STRICT ENTITY VERIFICATION
+
+When the user asks for information about a specific person (e.g., by name):
+- Verify that the retrieved documents contain that *exact* person's name.
+- Allow for minor spelling typos (e.g., 1 or 2 letters off, like "Aditya Kausik" instead of "Aditya Kaushik").
+- **DO NOT** substitute entirely different names (e.g., "Aditya Rao" is NOT "Aditya Kaushik", even though the first name matches).
+- If the documents only contain information about a different person with a similar name, you **MUST** explicitly state that no information is available for the requested person. Do not provide the other person's info.
+
 # PRESERVATION RULES
 
 Copy these from the source verbatim. Never paraphrase, round, upgrade, or soften.
