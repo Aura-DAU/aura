@@ -142,7 +142,7 @@ class MemoryResult:
 class ConversationMemory:
     def __init__(self, summariser: Optional[Summariser] = None):
         # vLLM is launched with `--max-model-len ${MAX_MODEL_LEN:-8192}`
-        # (.github/deploy/node*/docker-compose.yml), so read the same env var to stay in
+        # (deploy/node*/docker-compose.yml), so read the same env var to stay in
         # lockstep with whatever the running pool actually accepts.
         self.model_context_tokens = _env_int("MAX_MODEL_LEN", 8192)
         self.reserved_answer = _env_int("AURA_MAX_ANSWER_TOKENS", 768)

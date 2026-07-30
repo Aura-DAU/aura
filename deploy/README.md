@@ -117,7 +117,7 @@ On **Node 1**:
 cd deploy/node1
 cp .env.node1.example .env
 # Edit .env and replace <NODE_2_IP>, <NODE_3_IP>, <NODE_4_IP> with actual LAN IPs!
-mkdir -p ../certs # add fullchain.pem / privkey.pem
+mkdir -p ./certs # add fullchain.pem / privkey.pem (mounted as ./certs in compose)
 docker compose up -d --build
 ```
 
@@ -323,8 +323,10 @@ Orchestrator: [`deploy/scripts/deploy-cluster.sh`](scripts/deploy-cluster.sh)
 /opt/aura/app/deploy/scripts/deploy-cluster.sh --node4
 ```
 
-Set `AURA_NODE{2,3,4}_HOST` in `deploy/node1/.env` (or GitHub Actions variables).
-Optional per-node SSH users: `AURA_NODE{2,3,4}_SSH_USER`.
+Set `AURA_NODE{2,3,4}_HOST` in `deploy/node1/.env` (preferred) and/or GitHub
+Actions repository variables. Empty Actions variables do not block the `.env`
+fallback — scripts only keep non-empty exported values. Optional per-node SSH
+users: `AURA_NODE{2,3,4}_SSH_USER`.
 
 `deploy-apps.sh` uses `docker compose up -d --build --no-deps aura backend` so
 database containers are not touched. `deploy-node4.sh` uses
