@@ -104,8 +104,14 @@ aura_rsync() {
   aura_require_ssh_key
   aura_require_host "${host}" "rsync host"
 
-  if [[ ! -d "${AURA_APP_ROOT}/deploy" ]]; then
-    echo "error: local deploy/ missing under ${AURA_APP_ROOT}" >&2
+  # Repo layout: deploy configs live under .github/deploy/. Remote nodes still
+  # receive them at ${AURA_REMOTE_APP_ROOT}/deploy/ (install path unchanged).
+  local local_deploy="${AURA_APP_ROOT}/.github/deploy"
+  if [[ ! -d "${local_deploy}" ]]; then
+    local_deploy="${AURA_APP_ROOT}/deploy"
+  fi
+  if [[ ! -d "${local_deploy}" ]]; then
+    echo "error: local deploy missing under ${AURA_APP_ROOT}/.github/deploy (or deploy/)" >&2
     return 1
   fi
 
@@ -126,14 +132,14 @@ aura_rsync() {
 
   # Skip per-node secrets and Node-1-only TLS material (often root-only readable).
   # Example templates (.env.*.example) still sync.
-  echo "==> Syncing deploy/ → ${host}:${AURA_REMOTE_APP_ROOT}/deploy/"
+  echo "==> Syncing ${local_deploy}/ → ${host}:${AURA_REMOTE_APP_ROOT}/deploy/"
   rsync "${rsync_flags[@]}" \
     -e "${ssh_e}" \
     --exclude '.env' \
     --exclude 'certs/' \
     --exclude 'node_modules/' \
     --exclude '.DS_Store' \
-    "${AURA_APP_ROOT}/deploy/" \
+    "${local_deploy}/" \
     "${AURA_SSH_USER}@${host}:${AURA_REMOTE_APP_ROOT}/deploy/"
 
   if [[ -d "${AURA_APP_ROOT}/services" ]]; then
@@ -156,6 +162,7 @@ aura_rsync() {
 aura_load_node1_env() {
   local candidates=(
     "${AURA_ENV_FILE:-}"
+    "${AURA_APP_ROOT}/.github/deploy/node1/.env"
     "${AURA_APP_ROOT}/deploy/node1/.env"
     "/opt/aura/.env"
   )

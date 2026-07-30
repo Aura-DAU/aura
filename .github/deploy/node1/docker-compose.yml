@@ -130,7 +130,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -141,11 +141,11 @@ services:
   redis:
     image: redis:7-alpine
     restart: unless-stopped
-    command: ["redis-server", "--appendonly", "yes"]
+    command: [ "redis-server", "--appendonly", "yes" ]
     volumes:
       - redis-data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 5s
       timeout: 3s
       retries: 10
@@ -163,7 +163,7 @@ services:
       - qdrant-storage:/qdrant/storage
     healthcheck:
       # Qdrant image has no curl; TCP accept on 6333 is enough for start order.
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333'"]
+      test: [ "CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333'" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -175,11 +175,18 @@ services:
   # Enable with: docker compose ... --profile gpu up -d
   # InferenceRouter implements least-loaded selection + failover; Compose
   # only declares the pool topology.
+  #
+  # --gpu-memory-utilization/--max-num-seqs are load-bearing, not just
+  # tuning knobs: MAX_MODEL_LEN=16384 means each active sequence can
+  # reserve up to ~2x the KV-cache blocks it did at the old 8192 context,
+  # under PagedAttention. Without an explicit --max-num-seqs cap, vLLM
+  # will keep admitting concurrent sequences and can exhaust/fragment the
+  # KV cache under peak traffic.
   vllm-node1:
     image: vllm/vllm-openai:latest
-    profiles: ["gpu"]
+    profiles: [ "gpu" ]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching"]
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-64}" ]
     expose:
       - "8000"
     volumes:
@@ -189,16 +196,10 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              device_ids: ["0"]
-              capabilities: [gpu]
+              device_ids: [ "0" ]
+              capabilities: [ gpu ]
     healthcheck:
-      test:
-        [
-          "CMD",
-          "python",
-          "-c",
-          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)",
-        ]
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)" ]
       interval: 30s
       timeout: 10s
       retries: 20
@@ -208,9 +209,9 @@ services:
 
   vllm-node2:
     image: vllm/vllm-openai:latest
-    profiles: ["gpu"]
+    profiles: [ "gpu" ]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching"]
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-64}" ]
     expose:
       - "8000"
     volumes:
@@ -220,16 +221,10 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              device_ids: ["1"]
-              capabilities: [gpu]
+              device_ids: [ "1" ]
+              capabilities: [ gpu ]
     healthcheck:
-      test:
-        [
-          "CMD",
-          "python",
-          "-c",
-          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)",
-        ]
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)" ]
       interval: 30s
       timeout: 10s
       retries: 20
@@ -239,9 +234,9 @@ services:
 
   vllm-node3:
     image: vllm/vllm-openai:latest
-    profiles: ["gpu"]
+    profiles: [ "gpu" ]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching"]
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-64}" ]
     expose:
       - "8000"
     volumes:
@@ -251,16 +246,10 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              device_ids: ["2"]
-              capabilities: [gpu]
+              device_ids: [ "2" ]
+              capabilities: [ gpu ]
     healthcheck:
-      test:
-        [
-          "CMD",
-          "python",
-          "-c",
-          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)",
-        ]
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)" ]
       interval: 30s
       timeout: 10s
       retries: 20

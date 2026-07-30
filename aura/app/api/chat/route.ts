@@ -256,12 +256,14 @@ async function handleChatPost(req: Request): Promise<Response> {
     },
   })
 
+  const quotaHeader = backendRes.headers.get("X-Quota-Remaining")
   return new Response(stream, {
     headers: {
       "Content-Type": "text/event-stream; charset=utf-8",
       "Cache-Control": "no-cache, no-transform",
       Connection: "keep-alive",
       "X-Accel-Buffering": "no",
+      ...(quotaHeader ? { "X-Quota-Remaining": quotaHeader } : {}),
     },
   })
 }

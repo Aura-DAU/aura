@@ -23,7 +23,12 @@ export type GoogleOAuthCredentials = {
   clientSecret: string
 }
 
-function readGoogleOAuthCredentials(): GoogleOAuthCredentials | null {
+/**
+ * Returns Google OAuth creds when both env vars are set; otherwise null.
+ * Guest chat and /api/auth/session must keep working without Google —
+ * only the Google sign-in provider is omitted when these are missing.
+ */
+export function getGoogleOAuthCredentials(): GoogleOAuthCredentials | null {
   const clientId = process.env.GOOGLE_CLIENT_ID?.trim()
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim()
   if (clientId && clientSecret) {
@@ -32,13 +37,18 @@ function readGoogleOAuthCredentials(): GoogleOAuthCredentials | null {
   return null
 }
 
+/** Prefer getGoogleOAuthCredentials — Google is optional for guest chat. */
 export function requireGoogleOAuthCredentials(): GoogleOAuthCredentials {
-  const creds = readGoogleOAuthCredentials()
+  const creds = getGoogleOAuthCredentials()
   if (creds) return creds
   if (isProductionRuntime()) {
-    throw new Error(
-      "FATAL: GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be set in production.",
+    console.warn(
+      "[auth] GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET unset — Google sign-in disabled.",
     )
+    return {
+      clientId: "missing-google-client-id",
+      clientSecret: "missing-google-client-secret",
+    }
   }
   return {
     clientId: "mock-client-id",
