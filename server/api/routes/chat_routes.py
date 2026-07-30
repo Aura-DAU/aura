@@ -4,7 +4,7 @@ import asyncio
 import json
 import logging
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import StreamingResponse
 
@@ -21,15 +21,23 @@ _scope_resolver = AcademicScopeResolver()
 logger = logging.getLogger(__name__)
 
 
-def _resolve_request(request: ChatRequest, identity: Identity):
+def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
     # No fixed truncation: ConversationMemory.prepare() budgets the full tail
     # against the model window and folds the overflow into the summary. Pydantic
     # already caps history at 20 turns (schemas.ChatRequest).
-    history = [t.model_dump() for t in (request.history or [])]
-    profile = request.resolved_profile()
+    history = [t.model_dump() for t in (body.history or [])]
+    profile = body.resolved_profile()
     display_profile = profile.model_dump(exclude_none=True) if profile else None
 
-    quota_key = identity.email or identity.erp_id
+    if identity.role == "guest":
+        forwarded = req.headers.get("x-forwarded-for")
+        if forwarded:
+            quota_key = forwarded.split(",")[0].strip()
+        else:
+            quota_key = req.client.host if req.client else "unknown_ip"
+    else:
+        quota_key = identity.email or identity.erp_id
+
     try:
         enforce_quota(quota_key, identity.role)
     except QuotaExceeded as exc:
@@ -58,14 +66,15 @@ def _resolve_request(request: ChatRequest, identity: Identity):
 
 @router.post("/chat")
 async def chat(
-    request: ChatRequest,
+    req: Request,
+    body: ChatRequest,
     identity: Identity = Depends(require_identity),
 ):
-    history, display_profile, request_context = _resolve_request(request, identity)
+    history, display_profile, request_context = _resolve_request(body, identity, req)
 
     async with chat_queue_lock:
         return await run_in_threadpool(
-            _ask_with_memory, request, identity, history, display_profile, request_context
+            _ask_with_memory, body, identity, history, display_profile, request_context
         )
 
 
@@ -98,7 +107,8 @@ def _sse(payload: dict) -> str:
 
 @router.post("/chat/stream")
 async def chat_stream(
-    request: ChatRequest,
+    req: Request,
+    body: ChatRequest,
     identity: Identity = Depends(require_identity),
 ):
     # Emits the SSE event shapes the Next.js client already parses
@@ -106,7 +116,7 @@ async def chat_stream(
     # proxy route can pipe the body through untouched. Quota and auth errors
     # are raised before streaming starts and reach the client as real HTTP
     # status codes.
-    history, display_profile, request_context = _resolve_request(request, identity)
+    history, display_profile, request_context = _resolve_request(body, identity, req)
 
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
@@ -119,7 +129,7 @@ async def chat_stream(
             mem_result = get_conversation_memory().prepare(request.summary, history)
             loop.call_soon_threadsafe(events.put_nowait, ("summary", mem_result))
             result = get_aura().ask(
-                question=request.question,
+                question=body.question,
                 history=mem_result.history,
                 identity=identity.as_dict(),
                 display_profile=display_profile,
@@ -183,7 +193,7 @@ async def chat_stream(
                                 # file/title) so the frontend can render the
                                 # clickable document side-drawer and auth badge
                                 # for streamed answers, matching the blocking path.
-                                citations.append({
+                                citation_obj = {
                                     "file": file,
                                     "title": source.get("title"),
                                     "path": source.get("path"),
@@ -191,7 +201,8 @@ async def chat_stream(
                                     "end_line": source.get("end_line"),
                                     "visibility": source.get("visibility"),
                                     "authorization": source.get("authorization"),
-                                })
+                                }
+                                citations.append({k: v for k, v in citation_obj.items() if v is not None})
                         elif source:
                             citations.append({"file": str(source), "title": None})
                     if citations:
