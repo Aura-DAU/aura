@@ -1,4 +1,5 @@
 import os
+import shutil
 import wave
 import struct
 import pytest
@@ -47,6 +48,10 @@ def dummy_wav_file(tmp_path):
         f.writeframes(struct.pack("<h", 0) * 16000)
     return wav_path
 
+@pytest.mark.skipif(
+    shutil.which("ffmpeg") is None,
+    reason="Whisper decodes audio via ffmpeg; not available in the lightweight CI runner.",
+)
 def test_transcribe_audio_synthetic_wav(dummy_wav_file):
     """Test full transcribe_audio pipeline with a synthetic wav file."""
     result = transcribe_audio(dummy_wav_file)
