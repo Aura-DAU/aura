@@ -732,6 +732,287 @@ LOOKUP_CEP_INFO = Tool(
 )
 
 
+# ── Domain KB retrieval skills (read-only, non-ERP) ─────────────────────────
+
+LOOKUP_ACADEMIC_CALENDAR = Tool(
+    name="lookup_academic_calendar",
+    description=(
+        "Look up academic calendar dates, semester deadlines, and holidays from "
+        "published academics KB documents. Use for 'when is mid-sem' / 'academic calendar'."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Date topic or semester; omit for overview."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=academic_kb_tools.handle_lookup_academic_calendar,
+)
+
+LOOKUP_COURSE_POLICY = Tool(
+    name="lookup_course_policy",
+    description=(
+        "Look up a named course's published course policy (evaluation scheme, attendance, "
+        "instructor if listed) from academics course-policy documents. Use when the user "
+        "asks about a specific course code/title policy — not personal ERP grades."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {"course": {"type": "string", "description": "Course code or title."}},
+        "required": ["course"],
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=academic_kb_tools.handle_lookup_course_policy,
+)
+
+LOOKUP_ACADEMIC_REQUIREMENTS = Tool(
+    name="lookup_academic_requirements",
+    description=(
+        "Look up degree/program academic requirements, credits, and curriculum rules from "
+        "academics policy documents (BTech/MTech/MSc/PhD etc.)."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "program": {"type": "string", "description": "Program name; omit for broad overview."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=academic_kb_tools.handle_lookup_academic_requirements,
+)
+
+LOOKUP_ADMISSIONS_INFO = Tool(
+    name="lookup_admissions_info",
+    description=(
+        "Look up UG/PG/PhD/dual-degree admissions eligibility, process, seats, or fees "
+        "from admissions KB documents. Not for personal scholarship screening — use "
+        "screen_scholarship_eligibility for that."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Program or admissions topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=academic_kb_tools.handle_lookup_admissions_info,
+)
+
+LOOKUP_PUBLIC_TIMETABLE_DOCS = Tool(
+    name="lookup_public_timetable_docs",
+    description=(
+        "Look up published public lecture-timetable / programme TT documents from the KB "
+        "(academics/timetable, time_table). Do NOT use for the user's personal editable "
+        "timetable — use personal timetable tools (get_my_timetable etc.) for that."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "program": {"type": "string", "description": "Programme/section name for the public TT doc."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=academic_kb_tools.handle_lookup_public_timetable_docs,
+)
+
+LOOKUP_UNIVERSITY_POLICY = Tool(
+    name="lookup_university_policy",
+    description=(
+        "Look up campus/institutional policies and administration guidelines (attendance, "
+        "fees, grievance, anti-ragging, hostel allotment, IT, etc.) from policies / "
+        "administration / internal_policies KB. Not for faculty ToR committees (use "
+        "faculty_committee tools) or student clubs (use club tools)."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {"topic": {"type": "string"}},
+        "required": ["topic"],
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=admin_people_kb_tools.handle_lookup_university_policy,
+)
+
+LOOKUP_FACULTY_PROFILE = Tool(
+    name="lookup_faculty_profile",
+    description=(
+        "Look up a named faculty/staff member's published profile (designation, research "
+        "areas, contact if listed) from faculty/people KB. Not for student club convenors "
+        "— use lookup_club_office_bearers for those."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {"name": {"type": "string"}},
+        "required": ["name"],
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=admin_people_kb_tools.handle_lookup_faculty_profile,
+)
+
+SEARCH_PEOPLE_DIRECTORY = Tool(
+    name="search_people_directory",
+    description=(
+        "Search faculty/staff/people directories by department, role, or keyword. "
+        "Do NOT use for student club member rosters — use get_club_members instead."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "query": {"type": "string", "description": "Department, role, or keyword."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=admin_people_kb_tools.handle_search_people_directory,
+)
+
+LOOKUP_RESEARCH_INFO = Tool(
+    name="lookup_research_info",
+    description=(
+        "Look up research areas, labs, publications, IRB, and research policies from "
+        "research KB. For personal faculty seed-grant / CPDA application checklists use "
+        "seed_grant_guidance / cpda_travel_approval_guidance instead."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Research area, lab, or policy topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=research_careers_kb_tools.handle_lookup_research_info,
+)
+
+LOOKUP_PLACEMENT_CAREERS_INFO = Tool(
+    name="lookup_placement_careers_info",
+    description=(
+        "Look up placement process, policies, statistics, brochure facts, and careers "
+        "information from placements/careers KB. Advisory only — does not register the "
+        "student with the Placement Cell."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Placement/careers topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=research_careers_kb_tools.handle_lookup_placement_careers_info,
+)
+
+LOOKUP_CAMPUS_EVENTS_NOTICES = Tool(
+    name="lookup_campus_events_notices",
+    description=(
+        "Look up campus events, announcements, notices, and news articles. For joining a "
+        "student club (not a one-off event), prefer get_student_club_info / "
+        "event_club_registration_guidance."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Event, announcement, or news topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=campus_info_kb_tools.handle_lookup_campus_events_notices,
+)
+
+LOOKUP_CAMPUS_FACILITIES = Tool(
+    name="lookup_campus_facilities",
+    description=(
+        "Look up campus infrastructure/facilities (hostel halls, sports complex, resource "
+        "centre, medical, food court, ICT, lecture complex, security, directions). For a "
+        "specific hostel complaint to route, prefer hostel_complaint_guidance."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Facility or infrastructure topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=campus_info_kb_tools.handle_lookup_campus_facilities,
+)
+
+LOOKUP_STUDENT_SERVICES_INFO = Tool(
+    name="lookup_student_services_info",
+    description=(
+        "Look up non-club student services (dean of students, medical SOP, holiday list, "
+        "contacts, first-year guidance). For bonafide/transcript/ID use "
+        "certificate_request_guidance; for club membership use club tools."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Student-services topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=campus_info_kb_tools.handle_lookup_student_services_info,
+)
+
+LOOKUP_ALUMNI_INFO = Tool(
+    name="lookup_alumni_info",
+    description=(
+        "Look up alumni profiles, batches, or alumni services from alumni KB documents."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Alumni name, batch, or topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=campus_info_kb_tools.handle_lookup_alumni_info,
+)
+
+LOOKUP_ACHIEVEMENTS = Tool(
+    name="lookup_achievements",
+    description=(
+        "Look up student/faculty awards and recognitions from achievements KB documents."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "Award, competition, or achievement topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=campus_info_kb_tools.handle_lookup_achievements,
+)
+
+LOOKUP_CEP_INFO = Tool(
+    name="lookup_cep_info",
+    description=(
+        "Look up Continuing Education Programme (CEP) courses and policy from cep KB. "
+        "Advisory only — does not enrol anyone."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string", "description": "CEP course or policy topic."},
+        },
+    },
+    category="read",
+    allowed_roles=["student", "faculty"],
+    handler=campus_info_kb_tools.handle_lookup_cep_info,
+)
+
+
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
         GET_STUDENT_DETAIL, GET_REGISTRATION_STATUS, GET_COURSE_ADJUSTMENTS,
