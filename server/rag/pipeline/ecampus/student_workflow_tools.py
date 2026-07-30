@@ -167,5 +167,5 @@ def handle_update_tracking_flags(identity, facts: dict, **kwargs) -> dict:
     if not isinstance(facts, dict):
         return {"response": "Invalid facts format."}
         
-    updated = update_tracking_flags(erp_id, facts)
+    update_tracking_flags(erp_id, facts)
     return {"response": f"Successfully updated profile facts."}
