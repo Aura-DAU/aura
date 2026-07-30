@@ -12,6 +12,7 @@
 # Expected layout on aura-node1:
 #   /opt/aura/app                  — git clone of DAU-pwa
 #   /opt/aura/app/deploy/node1/.env  (preferred) OR /opt/aura/.env (legacy fallback)
+#   /opt/aura/app/deploy/node1/certs/{fullchain.pem,privkey.pem}  — host-local TLS
 #   /opt/aura/actions-runner       — self-hosted GitHub Actions runner
 #
 # Usage:
@@ -86,6 +87,33 @@ require_path "${APP_ROOT}/data" dir
 require_path "${APP_ROOT}/deploy/nginx/nginx.conf" file
 require_path "${APP_ROOT}/deploy/monitoring/prometheus.yml" file
 
+# TLS certs are host-local (not in git / not rsynced). Compose mounts
+# deploy/node1/certs -> /etc/nginx/certs. Fail before rebuild if missing —
+# redeploying apps cannot fix an empty certs volume.
+CERTS_DIR="${COMPOSE_DIR}/certs"
+require_path "${CERTS_DIR}/fullchain.pem" file
+require_path "${CERTS_DIR}/privkey.pem" file
+if [[ ! -s "${CERTS_DIR}/fullchain.pem" || ! -s "${CERTS_DIR}/privkey.pem" ]]; then
+  echo "error: TLS cert files under ${CERTS_DIR} are empty" >&2
+  echo "  Place fullchain.pem + privkey.pem here (e.g. from the operator Mac" >&2
+  echo "  Documents/aura/ssl-cert/), then re-run. Do not blind-redeploy." >&2
+  exit 1
+fi
+echo "==> TLS certs present: ${CERTS_DIR}/{fullchain.pem,privkey.pem}"
+
+# Pre-#252 compose mounted ./nginx.conf (deploy/node1/nginx.conf). When that
+# path was missing, Docker created a directory and nginx failed to start with
+# "not a directory" when bind-mounting onto /etc/nginx/nginx.conf. Remove any
+# leftover directory so refresh can succeed with ../nginx/nginx.conf.
+STALE_NGINX_MOUNT="${COMPOSE_DIR}/nginx.conf"
+if [[ -d "${STALE_NGINX_MOUNT}" ]]; then
+  echo "==> Removing stale directory ${STALE_NGINX_MOUNT} (blocks nginx conf bind-mount)"
+  rm -rf "${STALE_NGINX_MOUNT}"
+elif [[ -e "${STALE_NGINX_MOUNT}" && ! -f "${APP_ROOT}/deploy/nginx/nginx.conf" ]]; then
+  echo "error: unexpected ${STALE_NGINX_MOUNT}; canonical conf is deploy/nginx/nginx.conf" >&2
+  exit 1
+fi
+
 # Self-hosted runners have no interactive HTTPS credentials. Prefer either:
 #   - GITHUB_TOKEN / GH_TOKEN in the environment (CD workflow), or
 #   - SSH remote + read-only deploy key on the host (manual deploys).
@@ -108,12 +136,25 @@ git_with_auth pull --ff-only origin "${REF}"
 echo "==> Rebuilding application services only (aura, backend)"
 cd "${COMPOSE_DIR}"
 # --no-deps: do not start/restart postgres or redis via depends_on
-docker compose --env-file "${ENV_FILE}" up -d --build --no-deps --remove-orphans=false \
+docker compose --env-file "${ENV_FILE}" up -d --build --no-deps --force-recreate --remove-orphans=false \
   aura \
   backend
 
 echo "==> Refreshing nginx (no image build; no DB deps)"
-docker compose --env-file "${ENV_FILE}" up -d --no-deps --no-build nginx
+# nginx publishes host 80/443 only; backend stays expose:8000 on aura-edge +
+# aura-internal (never host 8000:8000). Recreate so network attachments match compose.
+docker compose --env-file "${ENV_FILE}" up -d --no-deps --no-build --force-recreate nginx
+
+if ! docker compose --env-file "${ENV_FILE}" ps --status running --services | grep -qx nginx; then
+  echo "error: nginx is not running after refresh" >&2
+  docker compose --env-file "${ENV_FILE}" ps -a nginx >&2 || true
+  docker compose --env-file "${ENV_FILE}" logs --tail 80 nginx >&2 || true
+  exit 1
+fi
+if ! docker compose --env-file "${ENV_FILE}" exec -T nginx nginx -t; then
+  echo "error: nginx -t failed (check conf mount and TLS certs under deploy/node1/certs)" >&2
+  exit 1
+fi
 
 echo "==> Health check"
 # Backend is not published on the host (security: no host :8000 bypass of nginx).
