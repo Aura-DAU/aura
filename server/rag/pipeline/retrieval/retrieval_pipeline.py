@@ -1120,17 +1120,15 @@ class RetrievalPipeline:
             logger.info("Semantic retrieval disabled because the vector index is unavailable; continuing with entity-path results only.")
         else:
             try:
-                query_embedding = self.retriever.model.encode(
-                    ["Represent this sentence for searching relevant passages: " + query],
-                    normalize_embeddings=True,
-                    convert_to_numpy=True
-                )
+                query_embedding = self.retriever.embed_query(query)
+                if query_embedding is None:
+                    raise RuntimeError("Query embedding unavailable")
                 semantic_filter = self._combine_filters(
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )
                 results = self.retriever.index.query(
-                    vector=query_embedding[0].tolist(),
+                    vector=query_embedding,
                     top_k=50,
                     include_metadata=True,
                     filter=semantic_filter

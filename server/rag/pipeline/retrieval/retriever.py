@@ -1,8 +1,8 @@
 import os
 import logging
 from pathlib import Path
+from typing import Optional
 from dotenv import load_dotenv
-from sentence_transformers import SentenceTransformer
 
 # Query-time embeddings MUST use the same model as ingestion-time
 # embeddings or retrieval silently degrades — single source of truth.
@@ -22,9 +22,7 @@ class Retriever:
 
         load_dotenv()
 
-        self.model = SentenceTransformer(
-            MODEL_NAME
-        )
+        self.model = None
 
         metadata_path = (
             Path(__file__).resolve().parent.parent
@@ -54,25 +52,18 @@ class Retriever:
         # needed to change.
         self.index = build_index_adapter()
 
-    def retrieve(
-        self,
-        query,
-        top_k=TOP_K,
-        metadata_filter=None,
-        allowed_roles=None
-    ):
+    def _local_model(self):
+        if self.model is None:
+            from sentence_transformers import SentenceTransformer
+            self.model = SentenceTransformer(MODEL_NAME)
+        return self.model
 
-        # Metadata filters include authorization and, for authenticated
-        # students, hard academic applicability. Never disable the complete
-        # filter: doing so would allow a maintenance flag to bypass scope.
-        pinecone_filter = metadata_filter
-        
+    def embed_query(self, query: str) -> Optional[list[float]]:
         query_text = (
             "Represent this sentence for searching relevant passages: "
             + query
         )
         embedding_service_url = os.getenv("EMBEDDING_SERVICE_URL")
-        query_embedding_list = None
 
         if embedding_service_url:
             try:
@@ -85,20 +76,34 @@ class Retriever:
                 if resp.status_code == 200:
                     data = resp.json()
                     if "embeddings" in data and len(data["embeddings"]) > 0:
-                        query_embedding_list = data["embeddings"][0]
+                        return data["embeddings"][0]
             except Exception as e:
                 logger.warning("Remote embedding service failed: %s. Falling back to local model.", e)
 
-        if query_embedding_list is None:
-            query_embedding = self.model.encode(
-                [query_text],
-                normalize_embeddings=True,
-                convert_to_numpy=True
-            )
-            query_embedding_list = query_embedding[0].tolist()
+        query_embedding = self._local_model().encode(
+            [query_text],
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
+        return query_embedding[0].tolist()
+
+    def retrieve(
+        self,
+        query,
+        top_k=TOP_K,
+        metadata_filter=None,
+        allowed_roles=None
+    ):
+
+        # Metadata filters include authorization and, for authenticated
+        # students, hard academic applicability. Never disable the complete
+        # filter: doing so would allow a maintenance flag to bypass scope.
+        pinecone_filter = metadata_filter
+
+        query_embedding_list = self.embed_query(query)
 
         dense_results = []
-        if self.index:
+        if self.index and query_embedding_list is not None:
             try:
                 results = self.index.query(
                     vector=query_embedding_list,

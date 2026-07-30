@@ -15,6 +15,7 @@ in-memory store for single-process dev/tests.
 import os
 import time
 import threading
+import uuid
 from dataclasses import dataclass, field
 from typing import Optional, Protocol
 
@@ -92,19 +93,31 @@ class RedisQuotaStore:
         now = time.time()
         cutoff = now - QUOTA_WINDOW_SECONDS
         rkey = self._key(key)
-        pipe = self._r.pipeline()
-        pipe.zremrangebyscore(rkey, 0, cutoff)
-        pipe.zcard(rkey)
-        _, count = pipe.execute()
-        if count >= limit:
+        ttl = QUOTA_WINDOW_SECONDS + 60
+        member = f"{now}:{os.getpid()}:{uuid.uuid4().hex}"
+        allowed, count = self._r.eval(
+            """
+            redis.call('ZREMRANGEBYSCORE', KEYS[1], 0, ARGV[1])
+            local count = redis.call('ZCARD', KEYS[1])
+            local limit = tonumber(ARGV[2])
+            if count >= limit then
+              return {0, count}
+            end
+            redis.call('ZADD', KEYS[1], ARGV[4], ARGV[3])
+            redis.call('EXPIRE', KEYS[1], ARGV[5])
+            return {1, redis.call('ZCARD', KEYS[1])}
+            """,
+            1,
+            rkey,
+            cutoff,
+            limit,
+            member,
+            now,
+            ttl,
+        )
+        if int(allowed) == 0:
             raise QuotaExceeded(limit=limit, remaining=0)
-        member = f"{now}:{os.getpid()}:{id(object())}"
-        pipe = self._r.pipeline()
-        pipe.zadd(rkey, {member: now})
-        pipe.expire(rkey, QUOTA_WINDOW_SECONDS + 60)
-        pipe.zcard(rkey)
-        _, _, new_count = pipe.execute()
-        return max(0, limit - int(new_count))
+        return max(0, limit - int(count))
 
     def remaining(self, key: str, limit: int) -> int:
         now = time.time()
