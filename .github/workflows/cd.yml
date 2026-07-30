@@ -230,6 +230,9 @@ jobs:
           AURA_APP_ROOT: /opt/aura/app
           AURA_ENV_FILE: /opt/aura/app/deploy/node1/.env
           GITHUB_TOKEN: ${{ secrets.AURA_DEPLOY_GIT_TOKEN || github.token }}
+          # Host/SSH settings: prefer non-empty GitHub Actions vars; empty vars
+          # stay empty so deploy/scripts/lib/remote.sh can fill from
+          # deploy/node1/.env (intentional fallback).
           AURA_NODE2_HOST: ${{ vars.AURA_NODE2_HOST }}
           AURA_NODE3_HOST: ${{ vars.AURA_NODE3_HOST }}
           AURA_NODE4_HOST: ${{ vars.AURA_NODE4_HOST }}
