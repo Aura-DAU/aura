@@ -1,4 +1,8 @@
+---
 title: "Drashti Koladiya" url: "https://alumni.dau.edu.in/alumni_drashti_koladiya.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-07" team: "Alumni Team"
+document_year: "2023"
+batch_year: "2023"
+---
 # Drashti Koladiya
 
 ## Profile Overview

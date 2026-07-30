@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements Ph D Program EnggScience wef 2024 25 as of July 2024"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/academics/Academic Requirements_Ph D Program_EnggScience_wef 2024-25 as of July 2024.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

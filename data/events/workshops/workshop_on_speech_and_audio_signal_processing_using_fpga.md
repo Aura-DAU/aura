@@ -1,5 +1,6 @@
 ﻿---
 title: "Workshop on Speech and Audio Signal Processing using FPGA"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6759"
 category: "Events"
 scraped_by: "Dhruvam"

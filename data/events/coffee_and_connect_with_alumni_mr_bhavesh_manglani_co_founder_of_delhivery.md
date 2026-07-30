@@ -1,5 +1,6 @@
 ﻿---
 title: "Coffee and Connect with Alumni Mr. Bhavesh Manglani, Co-Founder of Delhivery"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/7061"
 category: "Events"
 scraped_by: "Dhruvam"

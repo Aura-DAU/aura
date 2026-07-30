@@ -1,5 +1,6 @@
 ---
 title: "B.Tech. Scholarships at DAU"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/btech-merit-and-mcm-scholarships"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

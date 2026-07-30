@@ -1,5 +1,6 @@
 ---
 title: "Research / Noteworthy Contributions / Accomplishments"
+document_year: "2025"
 url: "https://www.daiict.ac.in/accomplishments"
 category: "Achievements"
 scraped_by: "Dhruvam"

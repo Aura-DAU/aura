@@ -1,5 +1,6 @@
 ﻿---
 title: "Workshop on Deep Learning and Artificial Intelligence: Principles and Practice (DLAI 2026)"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/6972"
 category: "Events"
 scraped_by: "Dhruvam"

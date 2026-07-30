@@ -1,5 +1,6 @@
 ---
 title: "BS-MS Scholarships at DAU"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/bs-ms-scholarships-dau"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

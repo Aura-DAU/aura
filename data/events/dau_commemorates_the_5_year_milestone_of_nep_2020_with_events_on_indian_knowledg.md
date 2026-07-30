@@ -1,5 +1,6 @@
 ﻿---
 title: "DAU commemorates the 5-year Milestone of NEP 2020 with Events on Indian Knowledge Systems"
+document_year: "2020"
 url: "https://www.daiict.ac.in/events/6838"
 category: "Events"
 scraped_by: "Dhruvam"

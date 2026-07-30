@@ -1,5 +1,6 @@
 ﻿---
 title: "Join us for the WorldQuant BRAIN International Quant Championship 2025 (IQC) Workshop"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6704"
 category: "Events"
 scraped_by: "Dhruvam"

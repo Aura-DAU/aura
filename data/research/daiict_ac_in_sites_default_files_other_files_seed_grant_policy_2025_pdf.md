@@ -1,5 +1,6 @@
 ---
 title: "Policies/Seed Grant Policy"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Seed-grant-policy_2025.pdf"
 category: "research"
 scraped_by: "Om Patel"

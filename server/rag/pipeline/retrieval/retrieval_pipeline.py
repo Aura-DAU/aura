@@ -332,51 +332,6 @@ class RetrievalPipeline:
 
         return None
 
-    @staticmethod
-    def _combine_filters(*filters):
-        active = [item for item in filters if item]
-        if not active:
-            return None
-        return active[0] if len(active) == 1 else {"$and": active}
-
-    @staticmethod
-    def _academic_scope_filter(academic_scope):
-        if academic_scope is None:
-            return None
-        scoped = {
-            "$and": [
-                {"applicability_scope": {"$in": ["programme", "curriculum", "course"]}},
-                {"programme_id": {"$eq": academic_scope.programme_id}},
-                {"degree_level": {"$eq": academic_scope.degree_level}},
-                {"admission_year_from": {"$lte": academic_scope.admission_year}},
-                {"admission_year_to": {"$gte": academic_scope.admission_year}},
-            ]
-        }
-        # A missing branch on a document means programme-wide applicability;
-        # branch equality is enforced by the post-retrieval predicate when a
-        # document declares one, without excluding those programme-wide docs.
-        return {
-            "$or": [
-                {"applicability_scope": {"$eq": "global"}},
-                scoped,
-            ]
-        }
-
-    @staticmethod
-    def _requires_academic_scope(plan: dict) -> bool:
-        return plan.get("category") == "academics" or plan.get("retrieval_intent") in {
-            "program_curriculum", "program_overview", "policy_version", "rules",
-        }
-
-    @staticmethod
-    def _eligible_results(results: list[dict], academic_scope) -> list[dict]:
-        if academic_scope is None:
-            return results
-        return [
-            result for result in results
-            if academic_scope.document_is_eligible(result.get("metadata", {}))
-        ]
-
     def _normalize_program_name(self, name):
         if not name:
             return ""
@@ -506,8 +461,7 @@ class RetrievalPipeline:
         self,
         query,
         history=None,
-        user_role: str = "public",
-        academic_scope=None,
+        user_role: str = "public"
     ):
         allowed_roles = get_allowed_roles(user_role)
         original_query = query
@@ -543,20 +497,19 @@ class RetrievalPipeline:
             query = (
                 self.rewriter.rewrite(
                     query,
-                    history,
-                    academic_scope=academic_scope,
+                    history
                 )
             )
 
         # Submit the planning LLM call to executor
-        future_plan = self.executor.submit(self.planner.plan, query, academic_scope)
+        future_plan = self.executor.submit(self.planner.plan, query)
 
         # Submit the speculative retrieval call to executor. Speculative retrieval
         # runs the semester-expanded query with an empty plan ({}) which results
         # in a standard semantic search.
         query_speculative = self._expand_semesters(query)
         future_speculative = self.executor.submit(
-            self._retrieve_dual_path, query_speculative, {}, allowed_roles, academic_scope
+            self._retrieve_dual_path, query_speculative, {}, allowed_roles
         )
 
         plan = future_plan.result()
@@ -583,19 +536,6 @@ class RetrievalPipeline:
         )
 
         retrieval_intent = plan.get("retrieval_intent", "general")
-
-        if user_role == "student" and self._requires_academic_scope(plan) and academic_scope is None:
-            return {
-                "query": original_query,
-                "corrected_query": query,
-                "plan": plan,
-                "chunks": [],
-                "context": "<context>\n</context>",
-                "sources": [],
-                "top_k_before_rerank": 0,
-                "top_k_after_rerank": 0,
-                "abstention_reason": "academic_scope_unavailable",
-            }
 
         if use_speculative:
             logger.info("Speculative retrieval query matched; reusing speculative results.")
@@ -733,15 +673,15 @@ class RetrievalPipeline:
                 elif isinstance(program_name, list):
                     query += " " + " ".join(program_name)
 
-            metadata_filter = self._combine_filters(
-                self._build_metadata_filter(plan),
-                self._academic_scope_filter(academic_scope),
+            metadata_filter = (
+                self._build_metadata_filter(
+                    plan
+                )
             )
 
-            # Policy-version queries may relax planner entity constraints, but
-            # never the authenticated student's academic applicability scope.
-            if retrieval_intent == "policy_version":
-                metadata_filter = self._academic_scope_filter(academic_scope)
+            # Fix DEG1: dead-end guard for policy version/metadata queries.
+            if retrieval_intent == "policy_version" and metadata_filter:
+                metadata_filter = None
 
             # Fix TY1: temporal year anchor — if the planner extracted a rule_year
             # (e.g. "2024-25") from the query, inject it into the retrieval query
@@ -790,13 +730,15 @@ class RetrievalPipeline:
                 for subquery in decomposed_queries:
                     subquery_expanded = self._expand_semesters(subquery)
 
-                    sub_metadata_filter = self._combine_filters(
-                        self._build_metadata_filter(plan),
-                        self._academic_scope_filter(academic_scope),
+                    sub_metadata_filter = (
+                        self._build_metadata_filter(plan)
                     )
                     if allowed_roles:
                         auth_filter = {"authorization": {"$in": allowed_roles}}
-                        sub_metadata_filter = self._combine_filters(sub_metadata_filter, auth_filter)
+                        if sub_metadata_filter:
+                            sub_metadata_filter = {"$and": [sub_metadata_filter, auth_filter]}
+                        else:
+                            sub_metadata_filter = auth_filter
 
                     sub_results = (
                         self.retriever.retrieve(
@@ -807,13 +749,9 @@ class RetrievalPipeline:
                         )
                     )
 
-                    # Query entity filters may be relaxed only within the same
-                    # role and academic scope. Applicability never broadens.
+                    # Fallback: if the filter yields nothing, retry without it (preserving DLS)
                     if not sub_results and sub_metadata_filter:
-                        fallback_filter = self._combine_filters(
-                            {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
-                            self._academic_scope_filter(academic_scope),
-                        )
+                        fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
                         sub_results = (
                             self.retriever.retrieve(
                                 query=subquery_expanded,
@@ -833,10 +771,7 @@ class RetrievalPipeline:
                         new_in_sub = [r for r in sub_results if r["id"] not in already_seen_ids]
                         if len(new_in_sub) == 0:
                             # All sub-results already collected — retry without filter (preserving DLS)
-                            fallback_filter = self._combine_filters(
-                                {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
-                                self._academic_scope_filter(academic_scope),
-                            )
+                            fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
                             extra = self.retriever.retrieve(
                                 query=subquery_expanded,
                                 top_k=retrieval_top_k,
@@ -869,9 +804,7 @@ class RetrievalPipeline:
             
             else:
                 # Main query retrieval using dual path (returns 50-60 chunks)
-                results = self._retrieve_dual_path(
-                    query, plan, allowed_roles=allowed_roles, academic_scope=academic_scope
-                )
+                results = self._retrieve_dual_path(query, plan, allowed_roles=allowed_roles)
 
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
         # Merge entity-matched chunks (Step 2: Chunks→Triples→Entity) with
@@ -885,8 +818,7 @@ class RetrievalPipeline:
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
                     entities,
-                    allowed_roles=allowed_roles,
-                    academic_scope=academic_scope,
+                    allowed_roles=allowed_roles
                 )
             )
             if entity_chunks:
@@ -905,7 +837,7 @@ class RetrievalPipeline:
                 deduped.append(result)
                 seen.add(chunk_id)
 
-        results = self._eligible_results(deduped, academic_scope)
+        results = deduped
 
         if decomposed_queries:
             # Fix A: run a final joint cross-encoder rerank over the merged
@@ -935,9 +867,7 @@ class RetrievalPipeline:
             
             # Expand only the top 12 candidates
             expand_window = 2 if retrieval_intent == "policy_version" else 1
-            expanded_candidates = self._eligible_results(
-                self._expand_adjacent_chunks(top_candidates, window=expand_window), academic_scope
-            )
+            expanded_candidates = self._expand_adjacent_chunks(top_candidates, window=expand_window)
             
             # Stage 2: Final precise rerank on expanded top 12 chunks
             reranked = self.reranker.rerank(
@@ -998,6 +928,12 @@ class RetrievalPipeline:
         for policy_version queries to capture version history sections that may
         be one or two chunks away from the main policy chunk.
         """
+        def _as_int(v):
+            try:
+                return int(v)
+            except (TypeError, ValueError):
+                return None
+
         expanded_candidates = []
         for cand in candidates:
             metadata = cand.get("metadata", {})
@@ -1010,30 +946,66 @@ class RetrievalPipeline:
             chunk_idx = int(chunk_idx)
             parts = []
 
+            # Bug fix: the merged text below can span the center chunk plus
+            # up to `window` chunks on either side, but start_line/end_line
+            # (used to build the citation card / deep-link) previously stayed
+            # pinned to the center chunk alone. If the fact the model actually
+            # answered from lived in a prepended/appended neighbor chunk —
+            # common for policy_version queries with window=2 pulling in a
+            # version-history section a chunk or two away — the citation
+            # pointed at the wrong lines of the (correct) document, which
+            # reads to the user as "right answer, wrong source". Track the
+            # full min/max line span and freshest scraped_date across every
+            # chunk actually merged in, and use that for the citation instead.
+            included_chunks = []
+
             # Collect preceding chunks within window
             for offset in range(window, 0, -1):
                 prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - offset))
                 if prev_chunk:
                     parts.append(prev_chunk.get("text", ""))
+                    included_chunks.append(prev_chunk)
 
             parts.append(metadata.get("text", ""))
+            included_chunks.append(metadata)
 
             # Collect following chunks within window
             for offset in range(1, window + 1):
                 next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + offset))
                 if next_chunk:
                     parts.append(next_chunk.get("text", ""))
+                    included_chunks.append(next_chunk)
 
             expanded_text = "\n\n".join(filter(None, parts))
+
+            start_lines = [
+                v for v in (_as_int(c.get("start_line")) for c in included_chunks) if v is not None
+            ]
+            end_lines = [
+                v for v in (_as_int(c.get("end_line")) for c in included_chunks) if v is not None
+            ]
+            scraped_dates = sorted(
+                (d for d in (c.get("scraped_date") for c in included_chunks) if d),
+                reverse=True,
+            )
 
             new_cand = dict(cand)
             new_cand["metadata"] = dict(metadata)
             new_cand["metadata"]["text"] = expanded_text
+            if start_lines:
+                new_cand["metadata"]["start_line"] = min(start_lines)
+            if end_lines:
+                new_cand["metadata"]["end_line"] = max(end_lines)
+            if scraped_dates:
+                # Most recent scraped_date among merged chunks, so the
+                # recency-based conflict resolution rule in AnswerGenerator
+                # (see SELECT step) also stays accurate post-expansion.
+                new_cand["metadata"]["scraped_date"] = scraped_dates[0]
             expanded_candidates.append(new_cand)
 
         return expanded_candidates
 
-    def _retrieve_dual_path(self, query, plan, allowed_roles=None, academic_scope=None):
+    def _retrieve_dual_path(self, query, plan, allowed_roles=None):
         """
         Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
         Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
@@ -1065,11 +1037,13 @@ class RetrievalPipeline:
 
         entity_pool = {}
         for ent_text, ent_filter in entity_queries:
-            combined_filter = self._combine_filters(
-                ent_filter,
-                {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
-                self._academic_scope_filter(academic_scope),
-            )
+            combined_filter = ent_filter
+            if allowed_roles:
+                auth_filter = {"authorization": {"$in": allowed_roles}}
+                if combined_filter:
+                    combined_filter = {"$and": [combined_filter, auth_filter]}
+                else:
+                    combined_filter = auth_filter
 
             # Query retriever to get top 3 fused BM25 + dense chunks for this entity
             res_list = self.retriever.retrieve(
@@ -1079,10 +1053,7 @@ class RetrievalPipeline:
                 allowed_roles=allowed_roles
             )
             if not res_list and ent_filter:
-                fallback_filter = self._combine_filters(
-                    {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
-                    self._academic_scope_filter(academic_scope),
-                )
+                fallback_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
                 res_list = self.retriever.retrieve(
                     query=ent_text,
                     top_k=3,
@@ -1115,41 +1086,35 @@ class RetrievalPipeline:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
         # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
+        query_embedding = self.retriever.model.encode(
+            ["Represent this sentence for searching relevant passages: " + query],
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
+        semantic_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
+        if os.getenv("DISABLE_DLS_FILTER", os.getenv("DISABLE_PINECONE_DLS_FILTER", "false")).lower() == "true":
+            semantic_filter = None
+
+        results = self.retriever.index.query(
+            vector=query_embedding[0].tolist(),
+            top_k=50,
+            include_metadata=True,
+            filter=semantic_filter
+        )
         semantic_list = []
-        if self.retriever.index is None:
-            logger.info("Semantic retrieval disabled because the vector index is unavailable; continuing with entity-path results only.")
-        else:
-            try:
-                query_embedding = self.retriever.model.encode(
-                    ["Represent this sentence for searching relevant passages: " + query],
-                    normalize_embeddings=True,
-                    convert_to_numpy=True
-                )
-                semantic_filter = self._combine_filters(
-                    {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
-                    self._academic_scope_filter(academic_scope),
-                )
-                results = self.retriever.index.query(
-                    vector=query_embedding[0].tolist(),
-                    top_k=50,
-                    include_metadata=True,
-                    filter=semantic_filter
-                )
-                for match in results.get("matches", []):
-                    semantic_list.append({
-                        "id": match["id"],
-                        "score": match["score"],
-                        # Fix RP2: cosine_score explicitly stored so the confidence
-                        # router in aura_chat.py can read it via c.get("cosine_score").
-                        # Previously dual-path candidates only had "score"/"fusion_score"
-                        # so the router always saw top_cosine=0.0 and relied entirely
-                        # on top_cross for routing decisions.
-                        "cosine_score": match["score"],
-                        "metadata": match["metadata"],
-                        "semantic_score": match["score"]
-                    })
-            except Exception as exc:
-                logger.warning("Semantic retrieval failed; continuing without it: %s", exc)
+        for match in results["matches"]:
+            semantic_list.append({
+                "id": match["id"],
+                "score": match["score"],
+                # Fix RP2: cosine_score explicitly stored so the confidence
+                # router in aura_chat.py can read it via c.get("cosine_score").
+                # Previously dual-path candidates only had "score"/"fusion_score"
+                # so the router always saw top_cosine=0.0 and relied entirely
+                # on top_cross for routing decisions.
+                "cosine_score": match["score"],
+                "metadata": match["metadata"],
+                "semantic_score": match["score"]
+            })
 
         # Min-Max normalize semantic path scores
         if semantic_list:
@@ -1204,4 +1169,4 @@ class RetrievalPipeline:
 
         # Sort candidates by final fusion score descending
         final_candidates.sort(key=lambda x: x["fusion_score"], reverse=True)
-        return self._eligible_results(final_candidates, academic_scope)
+        return final_candidates

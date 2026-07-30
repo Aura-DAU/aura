@@ -1,5 +1,6 @@
 ---
 title: "Events"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6676"
 category: "events"
 scraped_by: "Om Patel"

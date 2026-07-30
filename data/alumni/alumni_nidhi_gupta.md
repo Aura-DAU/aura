@@ -1,4 +1,8 @@
+---
 title: "Nidhi Gupta" url: "https://alumni.dau.edu.in/alumni_nidhi_gupta.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2022"
+batch_year: "2022"
+---
 # Nidhi Gupta
 
 ## Profile Overview

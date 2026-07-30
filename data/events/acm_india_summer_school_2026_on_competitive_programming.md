@@ -1,5 +1,6 @@
 ---
 title: "ACM India Summer School 2026 on Competitive Programming"
+document_year: "2026"
 url: ""
 category: "Events"
 scraped_by: "madhav thesiya"

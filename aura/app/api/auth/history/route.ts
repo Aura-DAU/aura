@@ -68,20 +68,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
-
-export async function GET() {
-  const session = await getServerSession(authOptions)
-  const sessionEmail = session?.user?.email
-  if (!sessionEmail) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  }
-
-  try {
-    const { getThreadsForUser } = await import("@/lib/db/chat-db")
-    const threads = await getThreadsForUser(sessionEmail)
-    return NextResponse.json({ threads })
-  } catch (err) {
-    console.error("[history GET]", err)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
-  }
-}

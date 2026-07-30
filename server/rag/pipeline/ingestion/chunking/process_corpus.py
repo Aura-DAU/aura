@@ -5,12 +5,8 @@ from pathlib import Path
 from parser import extract_frontmatter
 from section_extracter import extract_sections
 from chunker import split_section
-from metadata_extractors import (
-    extract_academic_applicability,
-    extract_event_metadata,
-    extract_program_name,
-    extract_section_type,
-)
+from metadata_extractors import extract_event_metadata, extract_program_name, extract_section_type
+from year_extraction import extract_academic_or_calendar_year
 
 
 def extract_curriculum_chunks(body, metadata, file_path):
@@ -336,8 +332,6 @@ def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end
     for phrase in lines_to_search:
         for idx in range(search_range_start, search_range_end):
             file_line = file_lines[idx].strip()
-            if not file_line:
-                continue
             if phrase in file_line or file_line in phrase:
                 if first_match is None or idx < first_match:
                     first_match = idx
@@ -352,36 +346,6 @@ def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end
     
     return section_start, section_end or len(file_lines)
 
-
-def extract_academic_or_calendar_year(text):
-    if not text:
-        return None
-    text_str = str(text)
-    # 1. 4-digit academic year range (e.g. 2024-25, 2024_25, 2024 25, 2024-2025)
-    m4 = re.search(r"(?<!\d)(20\d{2})[\s\-_\u2013](\d{2}|\d{4})(?!\d)", text_str)
-    if m4:
-        y1_int = int(m4.group(1))
-        y2_int = int(m4.group(2)[-2:])
-        if y2_int == (y1_int + 1) % 100:
-            return f"{y1_int}-{y2_int:02d}"
-    
-    # 2. 2-digit academic year range (e.g. 24_25, 24-25, 25_26, 25-26, 26_27, 26-27)
-    m2 = re.search(r"(?<!\d)(2\d)[\s\-_\u2013](\d{2})(?!\d)", text_str)
-    if m2:
-        y1 = int(m2.group(1))
-        y2 = int(m2.group(2))
-        if 20 <= y1 <= 35 and y2 == (y1 + 1) % 100:
-            return f"20{y1:02d}-{y2:02d}"
-
-    # 3. 4-digit single calendar year (e.g. 2025)
-    m1 = re.search(r"(?<!\d)(20\d{2})(?!\d)", text_str)
-    if m1:
-        try:
-            return int(m1.group(1))
-        except ValueError:
-            return m1.group(1)
-            
-    return None
 
 
 def process_markdown_file(file_path):
@@ -401,15 +365,12 @@ def process_markdown_file(file_path):
         parts[data_index + 2:-1]
     )
 
-    import datetime
-
     with open(file_path, "r", encoding="utf-8") as f:
         raw_content = f.read()
 
     file_lines = raw_content.replace("\r\n", "\n").split("\n")
 
     metadata, body = extract_frontmatter(raw_content)
-    academic_applicability = extract_academic_applicability(metadata, file_path, body)
 
     # 1. Calculate frontmatter offset (1-indexed start of body)
     content_clean = raw_content.lstrip("\ufeff").replace("\r\n", "\n")
@@ -417,14 +378,35 @@ def process_markdown_file(file_path):
     frontmatter_offset = match.group(0).count('\n') if match else 0
 
     # 2. Extract document_year with proper precedence:
-    # Frontmatter document_year/year/tenure -> Title/original_name -> Filename -> Path -> Body -> scraped_date -> Current year
+    # Frontmatter document_year/year/tenure/semester -> Title/original_name ->
+    # Filename -> Path -> Body.
+    #
+    # Bug fix: scraped_date and "current date" were previously used as final
+    # fallbacks here. scraped_date is when Squad D's scraper touched the page,
+    # not the year the policy/content applies to — a 2021-22 admission-rules
+    # PDF scraped in July 2026 has nothing to do with 2026, and stamping it
+    # with document_year=2026 makes it look like the newest, most authoritative
+    # version in every recency-based tie-break (reranker year-match boost,
+    # AnswerGenerator's SELECT step) even though it's actually old. Likewise,
+    # falling back to today's date for genuinely year-agnostic pages (campus
+    # facilities, contact info, general policies with no version) invents a
+    # "year" that doesn't exist for that content. Both fallbacks are removed:
+    # if no real year signal exists anywhere, document_year stays None, and
+    # downstream code (rule_year XML attribute, reranker recency boost) is
+    # already null-safe for that.
     document_year = None
     if metadata.get("document_year") is not None:
         document_year = extract_academic_or_calendar_year(metadata.get("document_year"))
     elif metadata.get("year") is not None:
         document_year = extract_academic_or_calendar_year(metadata.get("year"))
+    elif metadata.get("batch_year") is not None:
+        document_year = extract_academic_or_calendar_year(metadata.get("batch_year"))
+    elif metadata.get("batch") is not None:
+        document_year = extract_academic_or_calendar_year(metadata.get("batch"))
     elif metadata.get("tenure") is not None:
         document_year = extract_academic_or_calendar_year(metadata.get("tenure"))
+    elif metadata.get("semester") is not None:
+        document_year = extract_academic_or_calendar_year(metadata.get("semester"))
 
     if document_year is None:
         title_val = metadata.get("title") or metadata.get("original_name")
@@ -442,18 +424,6 @@ def process_markdown_file(file_path):
 
     if document_year is None:
         document_year = extract_academic_or_calendar_year(body[:1000])
-
-    if document_year is None and metadata.get("scraped_date") is not None:
-        scraped_date_str = str(metadata.get("scraped_date"))
-        year_match = re.search(r"\b(20\d{2})\b", scraped_date_str)
-        if year_match:
-            try:
-                document_year = int(year_match.group(1))
-            except ValueError:
-                document_year = year_match.group(1)
-
-    if document_year is None:
-        document_year = datetime.date.today().year
 
     authorization = metadata.get("authorization") or metadata.get("authorisation") or ["public"]
     if isinstance(authorization, str):
@@ -578,7 +548,6 @@ def process_markdown_file(file_path):
                 "end_line": end_line,
                 "document_year": document_year
             }
-            chunk_record.update(academic_applicability)
 
             if section_faculty:
                 chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
@@ -643,7 +612,6 @@ def process_markdown_file(file_path):
             "end_line": end_line,
             "document_year": document_year
         }
-        chunk_record.update(academic_applicability)
 
         if program_name or fm_program_name:
             chunk_record["program_name"] = program_name or fm_program_name

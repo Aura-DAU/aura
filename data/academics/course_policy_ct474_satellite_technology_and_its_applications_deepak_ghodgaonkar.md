@@ -1,5 +1,6 @@
 ---
 title: "CT474 Satellite Technology and Its Applications - Deepak Ghodgaonkar"
+document_year: "2023"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/CT474_Satellite%20Technology%20and%20Its%20Applications%20-%20Deepak%20Ghodgaonkar.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

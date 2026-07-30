@@ -1,5 +1,6 @@
 ---
 title: "CoE certificate (Jan 2022)"
+document_year: "2022"
 url: "https://daiict.ac.in/sites/default/files/other-files/CoE-Certificate.pdf"
 category: "administration"
 scraped_by: "Om Patel"

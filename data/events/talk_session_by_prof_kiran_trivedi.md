@@ -1,5 +1,6 @@
 ﻿---
 title: "Talk Session by Prof. Kiran Trivedi"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6543"
 category: "Events"
 scraped_by: "Dhruvam"

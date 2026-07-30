@@ -1,5 +1,6 @@
 ---
 title: "EL497 Introduction to Autonomous Vehicles Winter24 - Sujay Kadam"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/EL497_Introduction_to_Autonomous_Vehicles_Winter24%20-%20Sujay%20Kadam.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

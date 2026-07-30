@@ -1,5 +1,6 @@
 ﻿---
 title: "High End Workshop on Image Processing and its Applications using VLSI Architectures"
+document_year: "2023"
 url: "https://www.daiict.ac.in/events/5636"
 category: "Events"
 scraped_by: "Dhruvam"

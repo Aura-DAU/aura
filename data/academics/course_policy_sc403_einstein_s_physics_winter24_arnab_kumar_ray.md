@@ -1,5 +1,6 @@
 ---
 title: "SC403 Einstein s Physics Winter24 - Arnab Kumar Ray"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/SC403_Einstein_s_Physics_Winter24%20-%20Arnab%20Kumar%20Ray.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

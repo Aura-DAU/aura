@@ -1,5 +1,6 @@
 ---
 title: "Parent Letter 2020"
+document_year: "2020"
 url: "https://daiict.ac.in/"
 category: "Academics"
 scraped_by: "Meet Virugama"

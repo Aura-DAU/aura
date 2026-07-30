@@ -1,5 +1,6 @@
 ---
 title: "CERTIFICATE OF ACADEMIC ACCOMPLISHMENT"
+document_year: "2009"
 url: "https://intranet.daiict.ac.in/academics/Certificate of Academic Accomplishment.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"

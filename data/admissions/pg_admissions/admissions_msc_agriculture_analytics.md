@@ -1,5 +1,6 @@
 ---
 title: "Admissions - M.Sc. (Agriculture Analytics)"
+document_year: "2026"
 url: "https://www.daiict.ac.in/admissions-msc-agriculture-analytics"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ---
 title: "Academic Calendar 2026-27"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/academics/academic-calendar"
 category: "Academics - Calendar"
 scraped_by: "Squad D Scraper"

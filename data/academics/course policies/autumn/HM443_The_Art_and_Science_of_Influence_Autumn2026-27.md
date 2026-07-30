@@ -1,5 +1,6 @@
 ﻿---
 title: "HM443 The Art & Science of Influence Autumn Semester 2026-27"
+document_year: "2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

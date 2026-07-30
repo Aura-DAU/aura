@@ -1,5 +1,6 @@
 ---
 title: "PhD Scholar Madhvi Ramrakhiyani has recently won the Best Poster Presentation Award"
+document_year: "2025"
 url: "https://www.daiict.ac.in/achievements/6625"
 category: "Achievements"
 scraped_by: "Dhruvam"

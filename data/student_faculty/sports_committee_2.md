@@ -1,5 +1,6 @@
 ---
 title: "Sports Committee Achievements (2023-24, 2024-25, 2025-26)"
+document_year: "2023-24"
 category: "Committees"
 scraped_by: "Antigravity Scraper"
 scraped_date: "2026-07-04"

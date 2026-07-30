@@ -1,5 +1,6 @@
 ﻿---
 title: "Student Leave Policy"
+document_year: "2021-22"
 url: "https://daiict.ac.in/sites/default/files/other-files/Student_Leave_Policy_wef_AY2021-22.pdf"
 category: "Student Services"
 scraped_by: "Madhav Thesiya"

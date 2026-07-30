@@ -1,5 +1,6 @@
 ﻿---
 title: "16th edition of the Forum for Information Retrieval Evaluation (FIRE 2024)"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6535"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ---
 title: "General Meet Agendas (March 2025)"
+document_year: "2025"
 url: "#"
 category: "SBG & Clubs - General Meets"
 scraped_by: "Madhav Thesiya"

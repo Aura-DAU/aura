@@ -1,5 +1,6 @@
 ---
 title: "Undergraduate Admissions – All India Category"
+document_year: "2026"
 url: "https://www.daiict.ac.in/undergraduate-admissions-all-india-category"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

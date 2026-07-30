@@ -1,5 +1,6 @@
 ---
 title: "Academia & Industry Connect: Dhirubhai Ambani University at Colgate Global Business Services Pvt Ltd"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6943"
 category: "Announcements"
 scraped_by: "Vedant Shah"

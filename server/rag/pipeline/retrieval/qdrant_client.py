@@ -26,10 +26,6 @@ def _translate_condition(field: str, op_value: dict) -> qmodels.Condition:
         return qmodels.FieldCondition(key=field, match=qmodels.MatchValue(value=op_value["$eq"]))
     if "$in" in op_value:
         return qmodels.FieldCondition(key=field, match=qmodels.MatchAny(any=list(op_value["$in"])))
-    if "$gte" in op_value:
-        return qmodels.FieldCondition(key=field, range=qmodels.Range(gte=op_value["$gte"]))
-    if "$lte" in op_value:
-        return qmodels.FieldCondition(key=field, range=qmodels.Range(lte=op_value["$lte"]))
     raise ValueError(f"Unsupported Pinecone-style filter operator in {op_value!r} for field {field!r}")
 
 
@@ -57,14 +53,6 @@ def translate_filter(pinecone_filter: Optional[dict]) -> Optional[qmodels.Filter
             if sub_filter.must:
                 must.extend(sub_filter.must)
         return qmodels.Filter(must=must) if must else None
-
-    if "$or" in pinecone_filter:
-        should: list[qmodels.Filter] = []
-        for sub in pinecone_filter["$or"]:
-            sub_filter = translate_filter(sub)
-            if sub_filter is not None:
-                should.append(sub_filter)
-        return qmodels.Filter(should=should) if should else None
 
     must = [_translate_condition(field, op_value) for field, op_value in pinecone_filter.items()]
     return qmodels.Filter(must=must) if must else None

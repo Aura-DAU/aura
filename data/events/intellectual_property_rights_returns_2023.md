@@ -1,5 +1,6 @@
 ﻿---
 title: "Intellectual Property Rights Returns 2023"
+document_year: "2023"
 url: "https://www.daiict.ac.in/events/5524"
 category: "Events"
 scraped_by: "Dhruvam"

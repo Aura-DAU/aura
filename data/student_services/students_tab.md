@@ -1,5 +1,6 @@
 ---
 title: "Students"
+document_year: "2026"
 url: "https://daiict.ac.in/#tab-4"
 category: "Student_services"
 scraped_by: "Meet Virugama"

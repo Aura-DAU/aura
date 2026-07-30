@@ -1,5 +1,6 @@
 ---
 title: "DAU Organises Orientation Programme for its Undergraduate Students"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6859"
 category: "Announcements"
 scraped_by: "Vedant Shah"

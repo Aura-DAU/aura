@@ -1,5 +1,6 @@
 ---
 title: "Outreach and Contributions"
+document_year: "2024"
 url: "https://www.daiict.ac.in/outreach-and-contributions"
 category: "Research"
 scraped_by: "Khushi Gandhi"

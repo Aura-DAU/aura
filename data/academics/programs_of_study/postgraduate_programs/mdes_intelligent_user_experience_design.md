@@ -1,5 +1,6 @@
 ---
 title: "M.Des. (Intelligent User Experience Design)"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/mdes-intelligent-user-experience-design"
 category: "Academics"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ---
 title: "Admissions - M.Sc. (IT)"
+document_year: "2026"
 url: "https://www.daiict.ac.in/admission-msc-it"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

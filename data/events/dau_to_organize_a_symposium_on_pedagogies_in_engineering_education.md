@@ -1,5 +1,6 @@
 ﻿---
 title: "DAU to organize a Symposium on Pedagogies in Engineering Education"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6920"
 category: "Events"
 scraped_by: "Dhruvam"

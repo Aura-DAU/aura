@@ -1,5 +1,6 @@
 ---
 title: "Panel Discussion on Bouncing Back: The Art of Resilience by Psychology Cell, DAU"
+document_year: "2017"
 url: "https://www.daiict.ac.in/news/6862"
 category: "Announcements"
 scraped_by: "Vedant Shah"

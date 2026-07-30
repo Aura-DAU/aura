@@ -1,5 +1,6 @@
 ---
 title: "HM 344 Semiotics Winter 24 - Bharani Kollipara"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/HM%20344_Semiotics_Winter%2024%20-%20Bharani%20Kollipara.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

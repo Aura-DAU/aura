@@ -38,13 +38,11 @@ export function Message({
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { openDocument, prefetchDocument } = useDocumentViewer()
 
   useEffect(() => {
     return () => {
       if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
     }
   }, [])
 
@@ -140,7 +138,7 @@ export function Message({
           </div>
         ) : (
           <div className="text-[15px] leading-[1.7]">
-            <MarkdownContent content={message.content} citations={citations} />
+            <MarkdownContent content={message.content} />
           </div>
         )}
 
@@ -177,30 +175,20 @@ export function Message({
 
               return (
                 <div key={`${c.file}-${i}`} className="inline-flex items-center gap-1.5">
-                  {/* Prefer the document viewer when a source path exists */}
-                  {viewerTarget ? (
+                  {isUrl ? (
+                    <a href={c.file} target="_blank" rel="noopener noreferrer" className={pillClasses}>
+                      {label}
+                    </a>
+                  ) : viewerTarget ? (
                     <button
                       type="button"
-                      onMouseEnter={() => {
-                        prefetchDocument(viewerTarget)
-                        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-                        hoverTimerRef.current = setTimeout(() => {
-                          openDocument(viewerTarget)
-                        }, 500)
-                      }}
-                      onMouseLeave={() => {
-                        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-                      }}
+                      onMouseEnter={() => prefetchDocument(viewerTarget)}
                       onClick={() => openDocument(viewerTarget)}
                       className={pillClasses}
                       aria-label={`View source: ${c.title ?? c.file}`}
                     >
                       {label}
                     </button>
-                  ) : isUrl ? (
-                    <a href={c.file} target="_blank" rel="noopener noreferrer" className={pillClasses}>
-                      {label}
-                    </a>
                   ) : (
                     <span className={pillClasses}>{label}</span>
                   )}

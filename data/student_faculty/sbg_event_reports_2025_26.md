@@ -1,5 +1,6 @@
 ---
 title: "Event Reports 2025-26"
+document_year: "2025-26"
 url: "#"
 category: "SBG & Clubs - Events"
 scraped_by: "Madhav Thesiya"

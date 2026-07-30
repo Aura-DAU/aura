@@ -1,5 +1,6 @@
 ---
 title: "UGC Proforma/Public Self-Disclosure"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Public-Self-Disclosure_2025.pdf"
 category: "administration"
 scraped_by: "Om Patel"

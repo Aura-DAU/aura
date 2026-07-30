@@ -1,4 +1,8 @@
+---
 title: "Siddharth Maheshwari" url: "https://alumni.dau.edu.in/alumni_siddharth_maheshwari.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2012"
+batch_year: "2012"
+---
 # Siddharth Maheshwari
 
 ## Profile Overview

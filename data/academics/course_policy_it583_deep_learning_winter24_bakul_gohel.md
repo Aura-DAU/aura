@@ -1,5 +1,6 @@
 ---
 title: "IT583 DEEP LEARNING winter24 - Bakul Gohel"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/IT583_DEEP_LEARNING_winter24%20-%20Bakul%20Gohel.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

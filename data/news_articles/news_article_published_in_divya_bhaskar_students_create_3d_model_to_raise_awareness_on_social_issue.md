@@ -1,5 +1,6 @@
 ---
 title: "News Article Published in Divya Bhaskar Students create 3D model to raise awareness on social issue"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6591"
 category: "Announcements"
 scraped_by: "Vedant Shah"

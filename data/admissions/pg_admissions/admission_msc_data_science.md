@@ -1,5 +1,6 @@
 ---
 title: "Admissions - M.Sc. (Data Science)"
+document_year: "2026"
 url: "https://www.daiict.ac.in/admission-msc-data-science"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

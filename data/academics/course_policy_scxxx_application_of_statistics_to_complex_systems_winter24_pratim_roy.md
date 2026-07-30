@@ -1,5 +1,6 @@
 ---
 title: "SCxxx Application of Statistics to Complex Systems Winter24 - Pratim Roy"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/SCxxx_Application_of_Statistics_to_Complex_Systems_Winter24%20-%20Pratim%20Roy.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

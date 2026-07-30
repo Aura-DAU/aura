@@ -1,5 +1,6 @@
 ---
 title: "SBG Team and Other Important Committees"
+document_year: "2025-26"
 url: "#"
 category: "SBG & Clubs - Clubs And Committees"
 scraped_by: "Madhav Thesiya"

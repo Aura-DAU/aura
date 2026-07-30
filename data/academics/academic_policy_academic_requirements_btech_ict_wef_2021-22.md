@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements BTech ICT 2021 wef Autumn 2021-22"
+document_year: "2021-22"
 url: "https://intranet.daiict.ac.in/academics/Copy of Academic Requirements_BTech(ICT)2021_wef Aut2021-22.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Madhav (AI-assisted)"

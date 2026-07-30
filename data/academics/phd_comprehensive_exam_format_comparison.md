@@ -1,5 +1,6 @@
 ﻿---
 title: "PhD Comprehensive Examination Formats – Engineering vs HSS Comparison"
+document_year: "2017-18"
 category: "Academics"
 synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"

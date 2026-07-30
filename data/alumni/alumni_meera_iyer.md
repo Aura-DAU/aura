@@ -1,4 +1,8 @@
+---
 title: "Meera Iyer" url: "https://alumni.dau.edu.in/alumni_meera_iyer.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2014"
+batch_year: "2014"
+---
 # Meera Iyer
 
 ## Profile Overview

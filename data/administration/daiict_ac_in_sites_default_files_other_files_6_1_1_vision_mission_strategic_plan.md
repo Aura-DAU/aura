@@ -1,5 +1,6 @@
 ---
 title: "Policies/Vision, Mission and Strategic Plan"
+document_year: "2022"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/6.1.1_Vision-Mission-Strategic-Plan.pdf"
 category: "administration"
 scraped_by: "Om Patel"

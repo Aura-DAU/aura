@@ -1,5 +1,6 @@
 ---
 title: "Grievance Redressal Cell (Students and Employees)"
+document_year: "2024"
 url: "https://daiict.ac.in/grievance-redressal-cell"
 category: "policies"
 scraped_by: "Om Patel"

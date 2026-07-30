@@ -1,5 +1,6 @@
 ﻿---
 title: "Convocation/20th"
+document_year: "2026"
 url: "https://www.daiict.ac.in/20th-convocation-dhirubhai-ambani-university"
 category: "Events"
 scraped_by: "Dhruvam"

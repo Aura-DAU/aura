@@ -1,5 +1,6 @@
 ---
 title: "Internal Hackathon SIH 2025 Event Report Format by QAC"
+document_year: "2025"
 url: "#"
 category: "SBG & Clubs - Events"
 scraped_by: "Madhav Thesiya"

@@ -1,5 +1,6 @@
 ---
 title: "EC Constitution2026"
+document_year: "2026"
 url: "#"
 category: "SBG & Clubs - Policies And Guidelines"
 scraped_by: "Madhav Thesiya"

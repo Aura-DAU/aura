@@ -1,5 +1,6 @@
 ---
 title: "Chosen for award of 'Center of Excellence' by the Government of Gujarat"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/chosen-award-center-excellence-government-gujarat"
 category: "Achievements"
 scraped_by: "Dhruvam"

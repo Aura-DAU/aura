@@ -21,21 +21,6 @@ from dotenv import load_dotenv
 from pipeline.key_manager import KeyManager
 from ..personal_data.audit import audit_log
 
-
-def _identity_payload(identity):
-    if identity is None:
-        return {}
-    if isinstance(identity, dict):
-        return identity
-    return getattr(identity, "as_dict", lambda: {})()
-
-
-def _identity_role(identity) -> str | None:
-    payload = _identity_payload(identity)
-    if not payload:
-        return None
-    return payload.get("role")
-
 load_dotenv()
 
 _retrieval = None
@@ -77,17 +62,8 @@ Rules:
 """
 
 
-def _generate_checklist(query_for_retrieval: str, user_facing_context: str, request_context=None) -> dict:
-    academic_scope = getattr(request_context, "academic_scope", None) if request_context else None
-    pipeline = _get_retrieval_pipeline()
-    try:
-        result = pipeline.get_context(
-            query_for_retrieval,
-            user_role="faculty_general",
-            academic_scope=academic_scope,
-        )
-    except TypeError:
-        result = pipeline.get_context(query_for_retrieval, user_role="faculty_general")
+def _generate_checklist(query_for_retrieval: str, user_facing_context: str) -> dict:
+    result = _get_retrieval_pipeline().get_context(query_for_retrieval, user_role="faculty_general")
     context = result.get("context", "")
     sources = result.get("sources", [])
 
@@ -127,13 +103,12 @@ def _generate_checklist(query_for_retrieval: str, user_facing_context: str, requ
 
 
 def _require_faculty(identity: dict):
-    role = _identity_role(identity)
-    if role not in _FACULTY_ROLES:
+    if not identity or identity.get("role") not in _FACULTY_ROLES:
         raise PermissionError("Only faculty members can use faculty workflow tools.")
 
 
 # ── leave_application_guidance ──────────────────────────────────────────────
-def handle_leave_application_guidance(identity, leave_type: str = "", request_context=None, **kwargs) -> dict:
+def handle_leave_application_guidance(identity, leave_type: str = "", **kwargs) -> dict:
     """
     Advisory-only: identifies leave type, retrieves faculty leave policy from
     the KB, and returns an eligibility + document + approval-routing checklist.
@@ -141,38 +116,35 @@ def handle_leave_application_guidance(identity, leave_type: str = "", request_co
     """
     _require_faculty(identity)
     query = f"faculty leave application policy {leave_type}".strip()
-    out = _generate_checklist(query, f"Faculty leave application ({leave_type or 'general'})", request_context=request_context)
-    payload = _identity_payload(identity)
-    audit_log(payload, query="leave_application_guidance", allowed=True,
-              target=payload.get("erp_id"))
+    out = _generate_checklist(query, f"Faculty leave application ({leave_type or 'general'})")
+    audit_log(identity, query="leave_application_guidance", allowed=True,
+              target=identity.get("erp_id"))
     return out
 
 
 # ── cpda_travel_approval_guidance ────────────────────────────────────────────
-def handle_cpda_travel_approval_guidance(identity, purpose: str = "", request_context=None, **kwargs) -> dict:
+def handle_cpda_travel_approval_guidance(identity, purpose: str = "", **kwargs) -> dict:
     """
     Advisory-only: retrieves the CPDA / conference travel policy and returns
     eligibility, required documents, and approval steps. No ERP write.
     """
     _require_faculty(identity)
     query = f"CPDA conference travel approval policy {purpose}".strip()
-    out = _generate_checklist(query, f"CPDA / conference travel approval ({purpose or 'general'})", request_context=request_context)
-    payload = _identity_payload(identity)
-    audit_log(payload, query="cpda_travel_approval_guidance", allowed=True,
-              target=payload.get("erp_id"))
+    out = _generate_checklist(query, f"CPDA / conference travel approval ({purpose or 'general'})")
+    audit_log(identity, query="cpda_travel_approval_guidance", allowed=True,
+              target=identity.get("erp_id"))
     return out
 
 
 # ── seed_grant_guidance ──────────────────────────────────────────────────────
-def handle_seed_grant_guidance(identity, research_area: str = "", request_context=None, **kwargs) -> dict:
+def handle_seed_grant_guidance(identity, research_area: str = "", **kwargs) -> dict:
     """
     Advisory-only: retrieves the seed grant policy and returns eligibility,
     proposal structure, deadlines, and reporting obligations. No ERP write.
     """
     _require_faculty(identity)
     query = f"seed grant application policy eligibility deadlines {research_area}".strip()
-    out = _generate_checklist(query, f"Seed grant application ({research_area or 'general'})", request_context=request_context)
-    payload = _identity_payload(identity)
-    audit_log(payload, query="seed_grant_guidance", allowed=True,
-              target=payload.get("erp_id"))
+    out = _generate_checklist(query, f"Seed grant application ({research_area or 'general'})")
+    audit_log(identity, query="seed_grant_guidance", allowed=True,
+              target=identity.get("erp_id"))
     return out

@@ -1,5 +1,6 @@
 ﻿---
 title: "Two-Day School on AI and Law, DA-IICT, Gandhinagar"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6298"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ---
 title: "CT421 Advanced Digital Signal Processing Winter 2025"
+document_year: "2025-26"
 url: "#"
 category: "Academics - Course Policies"
 scraped_by: "Madhav Thesiya"

@@ -1,4 +1,8 @@
+---
 title: "Dr. Rajesh Iyer" url: "https://alumni.dau.edu.in/alumni_dr_rajesh_iyer.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2010"
+batch_year: "2010"
+---
 # Dr. Rajesh Iyer
 
 ## Profile Overview

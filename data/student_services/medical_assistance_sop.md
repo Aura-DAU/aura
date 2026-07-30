@@ -1,5 +1,6 @@
 ﻿---
 title: "SOP - Healthcare Facilities and Medical Emergencies"
+document_year: "2025-26"
 url: "https://daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf"
 category: "Student Services"
 scraped_by: "Madhav Thesiya"

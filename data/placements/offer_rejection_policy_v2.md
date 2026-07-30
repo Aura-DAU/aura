@@ -1,5 +1,6 @@
 ---
 title: "Offer Rejection Policy (2025-26)"
+document_year: "2025-26"
 category: "Placement Policy"
 url: "offer_rejection_policy.md"
 scraped_by: "Pushkar"

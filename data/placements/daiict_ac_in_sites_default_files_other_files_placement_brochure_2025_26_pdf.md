@@ -1,5 +1,6 @@
 ---
 title: "Placement / Placement Cell / PLACEMENT BROCHURE 2025-26"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Placement-Brochure_2025-26.pdf"
 category: "placements"
 scraped_by: "Om Patel"

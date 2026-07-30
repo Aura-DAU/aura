@@ -1,5 +1,6 @@
 ---
 title: "Policies/Academic Integrity Policy"
+document_year: "2001"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Plagiarism-Prevention-Framework_rev1-Director-2-EDITEDMM-1.pdf"
 category: "administration"
 scraped_by: "Om Patel"

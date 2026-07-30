@@ -1,5 +1,6 @@
 ---
 title: "IT492 Recommendation Systems Winter24 - Arpit Rana"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/IT492_Recommendation_Systems_Winter24%20-%20Arpit%20Rana.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

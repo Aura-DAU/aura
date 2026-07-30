@@ -1,5 +1,6 @@
 ---
 title: "Students / ANTI-RAGGING Committees & Squad Details"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Anti-Ragging-Committee_2025-26-18082025.pdf"
 category: "policies"
 scraped_by: "Om Patel"

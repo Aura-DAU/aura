@@ -26,12 +26,22 @@ for p in (str(RAG_DIR),):
         sys.path.insert(0, p)
 
 import pytest
+from unittest.mock import patch
 from pipeline.guardrails.query_guardrail import QueryGuardrail, Verdict
 
 LIVE = os.getenv("AURA_GUARDRAIL_LIVE", "").lower() in ("1", "true", "yes")
 requires_live = pytest.mark.skipif(
     not LIVE, reason="set AURA_GUARDRAIL_LIVE=1 to run against a real endpoint"
 )
+
+
+@pytest.fixture(autouse=True)
+def _stop_call_with_rotation_patches():
+    # _guardrail_returning() below patches InferenceRouter.call_with_rotation
+    # for the lifetime of a single test; guarantee it never leaks into the
+    # next test regardless of how the test exits.
+    yield
+    patch.stopall()
 
 
 # ---------------------------------------------------------------------------
@@ -160,12 +170,24 @@ class _StubCompletions:
 
 
 def _guardrail_returning(content: str | None, raises: bool = False) -> QueryGuardrail:
-    g = QueryGuardrail()
-    g.client = type(
+    # QueryGuardrail no longer holds a single bound client (see
+    # InferenceRouter.call_with_rotation fix) — it asks InferenceRouter for a
+    # node client per call. Patch call_with_rotation itself so _classify's
+    # request-building/parsing logic still gets exercised against the stub.
+    stub_client = type(
         "_StubClient",
         (),
         {"chat": type("_Chat", (), {"completions": _StubCompletions(content, raises)})()},
     )()
+
+    def _fake_call_with_rotation(fn, max_retries=3):
+        return fn(stub_client)
+
+    g = QueryGuardrail()
+    patch(
+        "pipeline.guardrails.query_guardrail.InferenceRouter.call_with_rotation",
+        side_effect=_fake_call_with_rotation,
+    ).start()
     return g
 
 

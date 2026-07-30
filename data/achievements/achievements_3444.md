@@ -1,5 +1,6 @@
 ﻿---
 title: "achievements/3444"
+document_year: "2021"
 url: "https://www.daiict.ac.in/achievements/3444"
 category: "Achievements"
 scraped_by: "Dhruvam"

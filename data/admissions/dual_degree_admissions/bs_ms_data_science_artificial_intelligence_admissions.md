@@ -1,5 +1,6 @@
 ---
 title: "BS–MS (Data Science & Artificial Intelligence) Admissions"
+document_year: "2026"
 url: "https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence-admissions"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

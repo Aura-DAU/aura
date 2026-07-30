@@ -1,5 +1,6 @@
 ---
 title: "Fee Structure — BTech and PG Programs"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/admissions"
 category: "policies"
 scraped_by: "Om Patel"

@@ -1,5 +1,6 @@
 ---
 title: "MC112 Computer Organization and Programming Autumn 2022"
+document_year: "2022-23"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

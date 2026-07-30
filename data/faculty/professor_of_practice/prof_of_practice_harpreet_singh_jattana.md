@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Harpreet Singh Jattana"
 url: "https://www.daiict.ac.in/professor-practice/harpreet-singh-jattana"
 category: "Faculty"

@@ -3,35 +3,31 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { LayoutDashboard, ArrowLeft, Settings, ArrowRight } from "lucide-react"
-import type { CgpaData, RegistrationData, FeeDuesData } from "@/lib/api/ecampus.action"
 import { TimetableCard } from "@/components/features/dashboard/TimetableCard"
-import { CgpaCard } from "@/components/features/dashboard/CgpaCard"
-import { CoursesCard } from "@/components/features/dashboard/CoursesCard"
-import { FeeDuesCard } from "@/components/features/dashboard/FeeDuesCard"
 import { InstallPromptBanner } from "@/components/features/chat-ui/InstallPromptBanner"
 
 interface StudentAcademicDashboardProps {
   userName: string
   departmentName?: string
-  cgpa: { data: CgpaData | null; error: string | null }
-  registration: { data: RegistrationData | null; error: string | null }
-  feeDues: { data: FeeDuesData | null; error: string | null }
 }
 
 const QUICK_PROMPTS = [
   "What's my next class today?",
-  "What is my attendance status?",
-  "Show my fee structure",
-  "When is the next exam?",
+  "Show me my full weekly timetable",
+  "What electives am I taking?",
+  "Move my 5 PM class to a different room",
 ]
 
-/** Student academic dashboard restored from eCampus cards + live timetable. */
+/**
+ * Student dashboard — timetable-only by design. AURA's dashboard exists to
+ * give students an at-a-glance view of their schedule (kept live via the
+ * timetable-bus refresh signal — see hooks/use-timetable.ts); CGPA,
+ * registration, and fee-dues lookups are handled conversationally in chat
+ * instead, where the underlying eCampus tools already live.
+ */
 export function StudentAcademicDashboard({
   userName,
   departmentName = "Information & Communication Technology",
-  cgpa,
-  registration,
-  feeDues,
 }: StudentAcademicDashboardProps) {
   const router = useRouter()
 
@@ -48,12 +44,12 @@ export function StudentAcademicDashboard({
           <div className="absolute -bottom-24 -right-24 size-72 rounded-full bg-theme-yellow/10 blur-3xl" />
         </div>
 
-        <div className="relative mx-auto max-w-5xl">
+        <div className="relative mx-auto max-w-3xl">
           <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <LayoutDashboard className="size-5 text-theme-yellow" />
               <h1 className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-xl font-semibold text-transparent">
-                My Dashboard
+                My Timetable
               </h1>
             </div>
             <div className="flex items-center gap-2">
@@ -83,16 +79,7 @@ export function StudentAcademicDashboard({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="sm:col-span-2 lg:col-span-2">
-              <TimetableCard />
-            </div>
-            <CgpaCard data={cgpa.data} error={cgpa.error} />
-            <div className="sm:col-span-2 lg:col-span-2">
-              <CoursesCard data={registration.data} error={registration.error} />
-            </div>
-            <FeeDuesCard data={feeDues.data} error={feeDues.error} />
-          </div>
+          <TimetableCard />
 
           <div className="mt-8">
             <h3 className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-neutral-500">

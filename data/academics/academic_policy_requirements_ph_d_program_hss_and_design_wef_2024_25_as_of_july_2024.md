@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements Ph D Program -HSS&Design wef 2024-25 as of July 2024"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Academic%20Requirements_Ph%20D%20Program_-HSS&amp;Design_wef%202024-25%20as%20of%20July%202024.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

@@ -1,5 +1,6 @@
 ---
 title: "Copy of SBG General Meet August 2025"
+document_year: "2025"
 url: "#"
 category: "SBG & Clubs - General Meets"
 scraped_by: "Madhav Thesiya"

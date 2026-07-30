@@ -20,6 +20,14 @@ export interface ChatMessage {
   is_personal_data?: boolean
   /** Set when the backend emits a calendar-action SSE event for this turn. */
   calendar_action?: CalendarActionData
+  /**
+   * Set when the backend applied a change to the student's timetable,
+   * elective selections, or cohort (year/sem/section) while answering this
+   * turn — see chunk.type === "timetable-updated" in the SSE stream. Used to
+   * refresh the dashboard's timetable card without waiting for a
+   * window-focus refetch (see lib/timetable-bus.ts).
+   */
+  timetable_updated?: boolean
 }
 
 export interface Citation {
@@ -38,12 +46,6 @@ export interface ChatThread {
   title: string
   /** Epoch ms of the most recent message; used to group threads by recency in the sidebar. */
   updatedAt?: number
-  /** Rolling conversation memory: a digest of the turns older than `summaryTurnCount`, maintained by the backend (pipeline.memory) and persisted here so a long chat keeps its context. */
-  summary?: string
-  /** Count of leading messages already folded into `summary`. The client sends only `messages.slice(summaryTurnCount)` (plus `summary`) to the backend. */
-  summaryTurnCount?: number
-  /** Set when this thread was auto-created as the continuation of another on hard context overflow; drives the "Continued from previous conversation" divider. */
-  continuedFromId?: string
 }
 
 export interface StudentProfile {

@@ -1,5 +1,6 @@
 ﻿---
 title: "An Exclusive Talk on Scope of Agri-Tech Startups at DAU"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6626"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Anil Roy"
 url: "https://www.daiict.ac.in/faculty/anil-roy"
 category: "Faculty"

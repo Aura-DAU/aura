@@ -1,5 +1,6 @@
 ---
 title: "Vandana Ravindran, a Ph. D. student at DA-IICT successfully defended her thesis on 17th January, 2018."
+document_year: "2018"
 url: "https://www.daiict.ac.in/achievements/1051"
 category: "Achievements"
 scraped_by: "Dhruvam"

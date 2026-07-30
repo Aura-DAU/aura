@@ -1,4 +1,8 @@
+---
 title: "Subhash Chandra" url: "https://alumni.dau.edu.in/alumni_subhash_chandra.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2007"
+batch_year: "2007"
+---
 # Subhash Chandra
 
 ## Profile Overview

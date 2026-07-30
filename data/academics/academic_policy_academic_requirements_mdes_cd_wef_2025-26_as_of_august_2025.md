@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements MDes(CD) wef 2025 26 as of August 2025"
+document_year: "2025-26"
 url: "https://intranet.daiict.ac.in/academics/Academic Requirements_MDes(CD)_wef 2025-26  as of August 2025.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

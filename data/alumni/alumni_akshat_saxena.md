@@ -1,4 +1,8 @@
+---
 title: "Akshat Saxena" url: "https://alumni.dau.edu.in/alumni_akshat_saxena.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2006"
+batch_year: "2006"
+---
 # Akshat Saxena
 
 ## Profile Overview

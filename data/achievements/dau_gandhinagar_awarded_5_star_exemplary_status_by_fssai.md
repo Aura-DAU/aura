@@ -1,5 +1,6 @@
 ---
 title: "DAU Gandhinagar Awarded 5-Star \"Exemplary\" Status by FSSAI"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6779"
 category: "Announcements"
 scraped_by: "Vedant Shah"

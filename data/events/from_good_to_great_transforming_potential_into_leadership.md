@@ -1,5 +1,6 @@
 ---
 title: "From Good to Great: Transforming Potential into Leadership"
+document_year: "2026"
 url: "https://www.daiict.ac.in/news/6990"
 category: "Announcements"
 scraped_by: "Vedant Shah"

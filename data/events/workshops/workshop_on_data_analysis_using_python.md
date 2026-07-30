@@ -1,5 +1,6 @@
 ﻿---
 title: "Workshop on Data Analysis using Python"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6412"
 category: "Events"
 scraped_by: "Dhruvam"

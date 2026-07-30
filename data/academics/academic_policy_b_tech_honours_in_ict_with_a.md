@@ -1,5 +1,6 @@
 ---
 title: "B.Tech. (Honours) in ICT with a"
+document_year: "2021"
 url: "https://intranet.daiict.ac.in/academics/Minor_RAS_Policy_Document.pdf"
 category: "Academics"
 scraped_by: "Squad D Scraper"

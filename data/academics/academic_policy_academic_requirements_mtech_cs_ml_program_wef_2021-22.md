@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements MTech(CS&ML) Program wef 2021 22"
+document_year: "2021-22"
 url: "https://intranet.daiict.ac.in/academics/Academic Requirements_MTech(CS&ML)_Program_wef 2021-22.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

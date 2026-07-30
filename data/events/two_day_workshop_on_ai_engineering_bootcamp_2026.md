@@ -1,5 +1,6 @@
 ﻿---
 title: "Two-Day Workshop on AI Engineering Bootcamp 2026"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/7069"
 category: "Events"
 scraped_by: "Dhruvam"

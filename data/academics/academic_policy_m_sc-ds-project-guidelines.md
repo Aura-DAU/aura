@@ -1,5 +1,6 @@
 ---
 title: "M.Sc DS Project Guidelines"
+document_year: "2020-21"
 url: "https://intranet.daiict.ac.in/academics/M.Sc-DS-Project-Guidelines.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

@@ -1,5 +1,6 @@
 ---
 title: "Data Privacy Policy"
+document_year: "2024"
 url: "https://www.daiict.ac.in/alumni/data-privacy-policy"
 category: "policies"
 scraped_by: "Om Patel"

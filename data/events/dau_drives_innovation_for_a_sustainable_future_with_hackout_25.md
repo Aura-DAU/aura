@@ -1,5 +1,6 @@
 ---
 title: "DAU Drives Innovation for a Sustainable Future with HackOut'25"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6895"
 category: "Announcements"
 scraped_by: "Vedant Shah"

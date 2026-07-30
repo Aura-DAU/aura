@@ -1,5 +1,6 @@
 ---
 title: "ED222 Analog Electronics Winter25"
+document_year: "2025-26"
 url: "#"
 category: "Academics - Course Policies"
 scraped_by: "Madhav Thesiya"

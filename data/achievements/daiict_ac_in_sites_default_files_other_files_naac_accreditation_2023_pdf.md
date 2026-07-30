@@ -1,5 +1,6 @@
 ---
 title: "NAAC Credition Certificate"
+document_year: "2023"
 url: "https://daiict.ac.in/sites/default/files/other-files/NAAC_Accreditation_2023.pdf"
 category: "achievements"
 scraped_by: "Om Patel"

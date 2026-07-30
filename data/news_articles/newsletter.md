@@ -1,5 +1,6 @@
 ---
 title: "Newsletter"
+document_year: "2023"
 url: "https://www.daiict.ac.in/newsletter"
 category: "Announcements"
 scraped_by: "Vedant Shah"

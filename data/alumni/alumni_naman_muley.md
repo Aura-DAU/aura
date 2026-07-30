@@ -1,4 +1,8 @@
+---
 title: "Naman Muley" url: "https://alumni.dau.edu.in/alumni_naman_muley.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2012"
+batch_year: "2012"
+---
 # Naman Muley
 
 ## Profile Overview

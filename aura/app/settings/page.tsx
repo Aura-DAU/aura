@@ -6,14 +6,97 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import {
   ArrowLeft,
-  KeyRound,
+  CalendarDays,
+  CheckCircle2,
   Loader2,
-  ShieldAlert,
+  RefreshCw,
   Settings,
+  Unlink,
 } from "lucide-react"
+import { useGoogleCalendarSync } from "@/hooks/use-google-calendar-sync"
+
+function GoogleCalendarCard() {
+  const { status, lastSync, error, connect, sync, disconnect } = useGoogleCalendarSync()
+
+  return (
+    <div className="rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5">
+      <div className="flex items-start gap-4">
+        <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-theme-yellow/10 text-theme-yellow">
+          <CalendarDays className="size-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <span className="block text-sm font-semibold text-neutral-100">
+            Connect Google Calendar
+          </span>
+          <span className="mt-1 block text-xs leading-relaxed text-neutral-400">
+            Sync your AURA timetable to Google Calendar as recurring weekly events, with
+            reminders before every class — kept up to date every time your schedule changes.
+          </span>
+
+          <div className="mt-4">
+            {status === "loading" ? (
+              <span className="inline-flex items-center gap-1.5 text-xs text-neutral-500">
+                <Loader2 className="size-3.5 animate-spin" /> Checking connection…
+              </span>
+            ) : status === "not_connected" ? (
+              <button
+                type="button"
+                onClick={connect}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-theme-yellow px-4 py-2 text-xs font-semibold text-theme-black transition-opacity hover:opacity-90"
+              >
+                <CalendarDays className="size-3.5" />
+                Connect Google Calendar
+              </button>
+            ) : (
+              <div className="space-y-3">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1.5 text-[11px] font-medium text-green-400">
+                  <CheckCircle2 className="size-3" /> Connected
+                </span>
+
+                {lastSync ? (
+                  <p className="text-xs text-neutral-500">
+                    Last sync: {lastSync.created ?? 0} added, {lastSync.updated ?? 0} updated
+                    {typeof lastSync.removed === "number" ? `, ${lastSync.removed} removed` : ""}.
+                  </p>
+                ) : null}
+
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={sync}
+                    disabled={status === "syncing"}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-theme-gray-light bg-theme-black/30 px-3 py-1.5 text-xs font-medium text-neutral-200 transition-colors hover:border-theme-gray-lighter hover:text-neutral-100 disabled:opacity-50"
+                  >
+                    {status === "syncing" ? (
+                      <Loader2 className="size-3.5 animate-spin" />
+                    ) : (
+                      <RefreshCw className="size-3.5" />
+                    )}
+                    Sync now
+                  </button>
+                  <button
+                    type="button"
+                    onClick={disconnect}
+                    disabled={status === "syncing"}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-theme-red/20 bg-theme-red/5 px-3 py-1.5 text-xs font-medium text-theme-red transition-colors hover:bg-theme-red/10 disabled:opacity-50"
+                  >
+                    <Unlink className="size-3.5" />
+                    Disconnect
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {error ? <p className="mt-3 text-xs text-theme-red">{error}</p> : null}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function SettingsHubPage() {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const router = useRouter()
 
   useEffect(() => {
@@ -29,8 +112,6 @@ export default function SettingsHubPage() {
       </div>
     )
   }
-
-  const isStudent = session?.user?.role === "student"
 
   return (
     <div className="relative min-h-screen bg-theme-black px-4 py-10 text-neutral-100">
@@ -57,46 +138,12 @@ export default function SettingsHubPage() {
             Settings
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-neutral-400">
-            Manage your eCampus connection and privacy preferences.
+            Connect your Google Calendar so your timetable stays in sync.
           </p>
         </div>
 
         <div className="space-y-3">
-          {isStudent ? (
-            <Link
-              href="/settings/ecampus"
-              className="flex items-start gap-4 rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 transition-colors hover:border-theme-gray-lighter hover:bg-theme-gray"
-            >
-              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-theme-red/10 text-theme-red">
-                <KeyRound className="size-5" />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-sm font-semibold text-neutral-100">
-                  Connect eCampus
-                </span>
-                <span className="mt-1 block text-xs leading-relaxed text-neutral-400">
-                  Link your ERP credentials so AURA can fetch your timetable, CGPA, and courses.
-                </span>
-              </span>
-            </Link>
-          ) : null}
-
-          <Link
-            href="/settings/privacy"
-            className="flex items-start gap-4 rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 transition-colors hover:border-theme-gray-lighter hover:bg-theme-gray"
-          >
-            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-theme-yellow/10 text-theme-yellow">
-              <ShieldAlert className="size-5" />
-            </span>
-            <span className="min-w-0">
-              <span className="block text-sm font-semibold text-neutral-100">
-                Privacy &amp; Data Sharing
-              </span>
-              <span className="mt-1 block text-xs leading-relaxed text-neutral-400">
-                Control which faculty members can access your academic snapshot.
-              </span>
-            </span>
-          </Link>
+          <GoogleCalendarCard />
 
           <Link
             href="/dashboard"

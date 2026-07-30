@@ -1,5 +1,6 @@
 ﻿---
 title: "Teacher’s Enrichment Workshop (TEW) on Ordinary Differential Equations, Dynamical Systems…"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6525"
 category: "Events"
 scraped_by: "Dhruvam"

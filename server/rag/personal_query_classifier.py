@@ -76,23 +76,28 @@ class PersonalQueryClassifier:
 
     def __init__(self):
         load_dotenv()
-        self.client = InferenceRouter.get_client()
         self.model  = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
     def classify(self, query: str) -> dict:
         # Injection defence: delimit user input clearly
         safe_query = f"<query>\n{query}\n</query>"
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                temperature=0,
-                max_tokens=200,
-                messages=[
-                    {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
-                    {"role": "user",   "content": safe_query},
-                ],
-                extra_body=InferenceRouter.no_think_extra_body(),
-            )
+            def _execute(client):
+                return client.chat.completions.create(
+                    model=self.model,
+                    temperature=0,
+                    max_tokens=200,
+                    messages=[
+                        {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
+                        {"role": "user",   "content": safe_query},
+                    ],
+                    extra_body=InferenceRouter.no_think_extra_body(),
+                )
+
+            # Fail over across the vLLM pool instead of permanently defaulting
+            # every query to PUBLIC for the rest of this instance's lifetime
+            # the moment its one bound node hiccups (previously: no retry).
+            response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
             raw = response.choices[0].message.content.strip()
             raw = raw.replace("```json", "").replace("```", "").strip()
             result = json.loads(raw)

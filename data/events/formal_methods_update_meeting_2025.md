@@ -1,5 +1,6 @@
 ﻿---
 title: "Formal Methods Update Meeting 2025"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6827"
 category: "Events"
 scraped_by: "Dhruvam"

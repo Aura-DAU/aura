@@ -1,5 +1,6 @@
 ---
 title: "Postgraduate Programs"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/programs-of-study"
 category: "Academics"
 scraped_by: "Khushi Gandhi"

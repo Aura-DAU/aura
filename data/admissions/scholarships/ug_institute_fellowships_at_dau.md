@@ -1,5 +1,6 @@
 ---
 title: "UG Institute Fellowships at DAU"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/btech-institute-fellowships"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

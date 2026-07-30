@@ -1,5 +1,6 @@
 ---
 title: "ACM SIGAPP STAP Grant"
+document_year: "2015"
 url: "https://www.daiict.ac.in/news/419"
 category: "Announcements"
 scraped_by: "Vedant Shah"

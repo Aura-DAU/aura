@@ -1,5 +1,6 @@
 ---
 title: "Concours 2025: A Celebration of Sports and Spirit at Dhirubhai Ambani University"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6942"
 category: "Announcements"
 scraped_by: "Vedant Shah"

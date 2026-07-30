@@ -1,4 +1,8 @@
+---
 title: "Aisha Khan" url: "https://alumni.dau.edu.in/alumni_aisha_khan.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2021"
+batch_year: "2021"
+---
 # Aisha Khan
 
 ## Profile Overview

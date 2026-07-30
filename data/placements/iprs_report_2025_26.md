@@ -1,5 +1,6 @@
 ---
 title: "DAU UG Placement Report (2025-2026)"
+document_year: "2025-26"
 category: "Placement Audit Reports"
 url: "iprs_report_2025_26.md"
 scraped_by: "Pushkar"

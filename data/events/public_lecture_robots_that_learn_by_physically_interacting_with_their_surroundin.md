@@ -1,5 +1,6 @@
 ﻿---
 title: "Public Lecture: Robots that learn by physically interacting with their surroundings"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6323"
 category: "Events"
 scraped_by: "Dhruvam"

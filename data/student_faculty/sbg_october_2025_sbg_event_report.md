@@ -1,5 +1,6 @@
 ---
 title: "October 2025 SBG event report"
+document_year: "2025"
 url: "#"
 category: "SBG & Clubs - Events"
 scraped_by: "Madhav Thesiya"

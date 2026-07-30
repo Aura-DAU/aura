@@ -1,5 +1,6 @@
 ---
 title: "DAU Silver Jubilee Celebrations and Alumni Reunion 2025"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6953"
 category: "Announcements"
 scraped_by: "Vedant Shah"

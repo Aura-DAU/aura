@@ -1,5 +1,6 @@
 ---
 title: "HM495 Technology and the Making of Modern India Winter Semester 2026"
+document_year: "2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

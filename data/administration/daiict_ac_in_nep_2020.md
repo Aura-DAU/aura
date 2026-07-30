@@ -1,5 +1,6 @@
 ---
 title: "National Education Policy 2020"
+document_year: "2020"
 url: "https://www.daiict.ac.in/nep-2020"
 category: "administration"
 scraped_by: "Om Patel"

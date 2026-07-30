@@ -1,5 +1,6 @@
 ---
 title: "DAIICT 2023-24 placement: Two students bag highest package of Rs 82 lakh"
+document_year: "2023-24"
 url: "https://www.daiict.ac.in/news/6207"
 category: "Announcements"
 scraped_by: "Vedant Shah"

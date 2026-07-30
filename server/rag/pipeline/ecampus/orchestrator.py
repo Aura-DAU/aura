@@ -1,23 +1,19 @@
 """
-Agent orchestrator for tool-backed queries (personal/eCampus or public KB).
-This is a SEPARATE path from the existing RAG flow in aura_chat.py — it only
-runs when intent_router.py classifies a query as PERSONAL_DATA or COMMUNITY
-rather than GENERAL. General / vague queries continue through the existing
-RAG pipeline in aura_chat_graph.
+Agent orchestrator for personal/eCampus-backed queries. This is a SEPARATE
+path from the existing RAG flow in aura_chat.py — it only runs when
+intent_router.py classifies a query as needing live, person-specific data
+(CGPA, attendance, fees, faculty schedule, etc.) rather than general
+knowledge. General knowledge questions continue through the existing,
+unmodified RAG pipeline in aura_chat.py.
 """
 
 import os
 import json
-from typing import Optional
+from typing import Optional, List
 from dotenv import load_dotenv
 
 from ..inference_router import InferenceRouter
-from .tool_registry import (
-    tools_for_role as _ecampus_tools_for_role,
-    public_kb_tools_for_role as _public_kb_tools_for_role,
-    TOOL_REGISTRY as _ECAMPUS_TOOL_REGISTRY,
-    PUBLIC_KB_TOOL_NAMES,
-)
+from .tool_registry import tools_for_role as _ecampus_tools_for_role, TOOL_REGISTRY as _ECAMPUS_TOOL_REGISTRY
 from ..timetable.tool_registry import tools_for_role as _timetable_tools_for_role, TOOL_REGISTRY as _TIMETABLE_TOOL_REGISTRY
 
 # Merged view used by this orchestrator. Kept as two separate source-of-truth
@@ -31,8 +27,7 @@ MERGED_TOOL_REGISTRY = {**_ECAMPUS_TOOL_REGISTRY, **_TIMETABLE_TOOL_REGISTRY}
 def _tools_for_role(role: str):
     return _ecampus_tools_for_role(role) + _timetable_tools_for_role(role)
 
-
-PERSONAL_SYSTEM_PROMPT = """You are AURA, DAU's academic assistant, handling a request that
+SYSTEM_PROMPT = """You are AURA, DAU's academic assistant, handling a request that
 needs the requester's own live academic data (or, for faculty, data a student has
 explicitly shared with them).
 
@@ -48,30 +43,59 @@ Rules:
 - For any tool whose category is "write" (sharing data, applying for things,
   clearing cache), you must get the user's explicit confirmation before it
   executes. The orchestrator will return a confirmation prompt instead of a
-  result on the first attempt — relay that prompt to the user as-is.
+  result on the first attempt — relay that prompt to the user as-is. Once the
+  user replies with something that clearly agrees to what you just previewed
+  (e.g. answering your own question with their choice), that reply itself is
+  their confirmation — call the same tool again with confirm=true, you do not
+  need a separate round of "do you confirm?" small talk on top of it.
+
+TIMETABLE & ELECTIVES — first-time flow:
+- get_my_timetable's result includes "electives_configured": true/false. This
+  tells you whether the student has ever saved which electives they're taking.
+- If the student asks to see their timetable/schedule/classes and
+  electives_configured is false:
+    1. Show their current timetable right away in this same reply — it will
+       only contain their core courses, which is expected and NOT an error or
+       missing data, so don't apologize for it.
+    2. Immediately after, in that same reply, ask which elective course(s)
+       they are taking this semester so their timetable can include them (call
+       get_available_electives first if you need the valid options/codes to
+       offer them). If their section looks like it may be unset or wrong, ask
+       them to confirm their section too, in the same message.
+    3. Never ask about electives again once electives_configured is true —
+       only bring electives up if the student themselves raises it.
+- Once the student answers with their elective choice(s) and/or section:
+    1. Preview with save_my_elective_selections (confirm=false), then apply
+       with confirm=true per the confirmation rule above. Do the same with
+       set_my_cohort if they also gave you a section.
+    2. After the write(s) are applied, call get_my_timetable again in this
+       same turn and present the student's updated, personalized timetable
+       (core courses + their chosen electives) — don't make them ask again.
+    3. This is saved in AURA's database, so every future timetable request
+       will already include their electives automatically.
 - Keep answers concise and grounded only in what the tools returned.
 """
 
-PUBLIC_KB_SYSTEM_PROMPT = """You are AURA, DAU's campus knowledge assistant.
+# Tool names that mutate the student's own AURA-side timetable/cohort state.
+# When one of these is called with confirm=true and actually applies (as
+# opposed to returning a confirmation_required preview or an error), the
+# frontend needs to know so it can refresh the dashboard's timetable card —
+# see the "timetable_updated" flag this module adds to its return value.
+_TIMETABLE_MUTATING_TOOLS = {
+    "update_my_timetable",
+    "undo_timetable_change",
+    "save_my_elective_selections",
+    "set_my_cohort",
+}
+_APPLIED_STATUSES = {"applied", "saved", "updated"}
 
-Rules:
-- Use the available tools to answer from published campus documents. Prefer the
-  most specific tool (faculty profile, club roster, academic calendar,
-  admissions, placements, facilities, policy, etc.) over guessing.
-- Never invent people, club members, convenors, emails, dates, fees, or
-  committee composition — if a tool returns empty or missing fields, say the
-  published campus documents do not list that detail.
-- Never call or imply personal ERP records (CGPA, fees, attendance, hostel
-  allotment) for another student. These tools only return KB-published facts.
-- Keep answers concise and grounded only in what the tools returned.
-"""
 
-# Backward-compatible aliases.
-COMMUNITY_SYSTEM_PROMPT = PUBLIC_KB_SYSTEM_PROMPT
-SYSTEM_PROMPT = PERSONAL_SYSTEM_PROMPT
-
-# tool_scope values that expose public KB tools (community + domain KB).
-_PUBLIC_KB_SCOPES = frozenset({"community", "public_kb"})
+def _tool_call_mutated_timetable(tool_name: str, result: object) -> bool:
+    if tool_name not in _TIMETABLE_MUTATING_TOOLS:
+        return False
+    if not isinstance(result, dict):
+        return False
+    return result.get("status") in _APPLIED_STATUSES
 
 
 class EcampusOrchestrator:
@@ -92,11 +116,7 @@ class EcampusOrchestrator:
             return client.chat.completions.create(**kwargs)
         return InferenceRouter.call_with_rotation(_fn, max_retries=3)
 
-    def _tool_schemas(self, role: str, tool_scope: str = "personal") -> list[dict]:
-        if tool_scope in _PUBLIC_KB_SCOPES:
-            selected = _public_kb_tools_for_role(role)
-        else:
-            selected = _tools_for_role(role)
+    def _tool_schemas(self, role: str) -> list[dict]:
         return [
             {
                 "type": "function",
@@ -106,88 +126,88 @@ class EcampusOrchestrator:
                     "parameters": t.parameters,
                 },
             }
-            for t in selected
+            for t in _tools_for_role(role)
         ]
 
-    def run(
-        self,
-        query: str,
-        identity: dict,
-        history: Optional[list] = None,
-        request_context=None,
-        tool_scope: str = "personal",
-    ) -> dict:
+    def run(self, query: str, identity: dict, history: Optional[list] = None, max_tool_rounds: int = 4) -> dict:
         history = (history or [])[-6:]
-        use_public_kb = tool_scope in _PUBLIC_KB_SCOPES
-        system = PUBLIC_KB_SYSTEM_PROMPT if use_public_kb else PERSONAL_SYSTEM_PROMPT
         messages = (
-            [{"role": "system", "content": system}]
+            [{"role": "system", "content": SYSTEM_PROMPT}]
             + [{"role": h.get("role", "user"), "content": h.get("content", "")} for h in history]
             + [{"role": "user", "content": query}]
         )
 
-        tool_schemas = self._tool_schemas(identity["role"], tool_scope=tool_scope)
+        tool_schemas = self._tool_schemas(identity["role"])
         if not tool_schemas:
-            if use_public_kb:
-                return {
-                    "answer": "I don't have campus knowledge tools available for your account type.",
-                    "sources": [],
-                }
             return {
                 "answer": "I don't have any personal-data tools available for your account type.",
                 "sources": [],
+                "timetable_updated": False,
             }
 
-        response = self._call_llm(
-            messages=messages,
-            tools=tool_schemas,
-            tool_choice="auto",
-        )
-        msg = response.choices[0].message
+        timetable_updated = False
 
-        if not msg.tool_calls:
-            return {"answer": msg.content, "sources": []}
+        # Bounded tool-calling loop. Most requests resolve in one round (one
+        # batch of tool calls, then a final text answer); the timetable
+        # onboarding flow needs up to a few more, e.g.:
+        #   get_my_timetable -> (ask electives, no tool call, ends here) OR
+        #   save_my_elective_selections(confirm=true) -> get_my_timetable
+        #   (fetch the now-updated schedule before writing the final answer).
+        for _round in range(max_tool_rounds):
+            response = self._call_llm(
+                messages=messages,
+                tools=tool_schemas,
+                tool_choice="auto",
+            )
+            msg = response.choices[0].message
 
-        tool_messages = []
-        for call in msg.tool_calls:
-            tool = MERGED_TOOL_REGISTRY.get(call.function.name)
-            # Public-KB path: refuse personal ERP / write tools even if named
-            # (defense in depth — personal ERP stays gated).
-            if use_public_kb and call.function.name not in PUBLIC_KB_TOOL_NAMES:
-                result = {"error": "Tool not available on the public KB path."}
-            elif tool is None or identity["role"] not in tool.allowed_roles:
-                # Defense in depth: even if the model somehow names a tool it
-                # wasn't given a schema for, refuse rather than execute it.
-                result = {"error": "Tool not available for this account type."}
-            else:
-                try:
-                    args = json.loads(call.function.arguments or "{}")
-                except json.JSONDecodeError:
-                    args = {}
-                try:
-                    result = tool.handler(identity, request_context=request_context, **args)
-                except TypeError as exc:
-                    if "unexpected keyword argument 'request_context'" in str(exc):
-                        result = tool.handler(identity, **args)
-                    else:
-                        raise
-                except Exception as e:
-                    result = {"error": str(e)}
+            if not msg.tool_calls:
+                return {
+                    "answer": msg.content,
+                    "sources": [],
+                    "timetable_updated": timetable_updated,
+                }
 
-            tool_messages.append({
-                "role": "tool",
-                "tool_call_id": call.id,
-                "content": json.dumps(result, default=str),
-            })
-
-        follow_up = self._call_llm(
-            messages=messages + [
-                {"role": "assistant", "content": msg.content, "tool_calls": [
+            messages.append({
+                "role": "assistant",
+                "content": msg.content,
+                "tool_calls": [
                     {"id": c.id, "type": "function",
                      "function": {"name": c.function.name, "arguments": c.function.arguments}}
                     for c in msg.tool_calls
-                ]},
-                *tool_messages,
-            ],
-        )
-        return {"answer": follow_up.choices[0].message.content, "sources": []}
+                ],
+            })
+
+            for call in msg.tool_calls:
+                tool = MERGED_TOOL_REGISTRY.get(call.function.name)
+                if tool is None or identity["role"] not in tool.allowed_roles:
+                    # Defense in depth: even if the model somehow names a tool it
+                    # wasn't given a schema for, refuse rather than execute it.
+                    result = {"error": "Tool not available for this account type."}
+                else:
+                    try:
+                        args = json.loads(call.function.arguments or "{}")
+                    except json.JSONDecodeError:
+                        args = {}
+                    try:
+                        result = tool.handler(identity, **args)
+                    except Exception as e:
+                        result = {"error": str(e)}
+                    if _tool_call_mutated_timetable(call.function.name, result):
+                        timetable_updated = True
+
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": call.id,
+                    "content": json.dumps(result, default=str),
+                })
+
+        # Ran out of rounds without the model settling on a final text
+        # answer — force one last non-tool call so the user still gets a
+        # reply instead of nothing.
+        final = self._call_llm(messages=messages)
+        return {
+            "answer": final.choices[0].message.content,
+            "sources": [],
+            "timetable_updated": timetable_updated,
+        }

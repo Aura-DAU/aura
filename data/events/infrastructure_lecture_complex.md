@@ -1,5 +1,6 @@
 ﻿---
 title: "Infrastructure/Lecture Complex"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/lecture-complex"
 category: "Events"
 scraped_by: "Dhruvam"

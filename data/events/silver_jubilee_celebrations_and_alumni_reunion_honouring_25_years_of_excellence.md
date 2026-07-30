@@ -1,5 +1,6 @@
 ﻿---
 title: "Silver Jubilee Celebrations and Alumni Reunion: Honouring 25 Years of Excellence of DAU"
+document_year: "2001"
 url: "https://www.daiict.ac.in/events/6909"
 category: "Events"
 scraped_by: "Dhruvam"

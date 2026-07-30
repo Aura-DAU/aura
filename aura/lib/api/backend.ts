@@ -20,8 +20,6 @@ export interface BackendChatRequest {
   question: string
   history?: BackendHistoryTurn[]
   studentProfile?: BackendStudentProfile
-  /** Client-owned rolling conversation memory (see lib/chat-types ChatThread.summary). */
-  summary?: string
 }
 
 export interface BackendChatResponse {
@@ -40,6 +38,10 @@ export interface BackendChatResponse {
     }
   >
   is_personal_data?: boolean
+  // Set by the timetable orchestrator (pipeline/ecampus/orchestrator.py)
+  // when it applied a change to the student's timetable, electives, or
+  // cohort while answering this turn.
+  timetable_updated?: boolean
   // Server's authoritative remaining-quota count for this identity (null for
   // unlimited @dau.ac.in roles). See server/api/routes/chat_routes.py.
   quota_remaining?: number | null

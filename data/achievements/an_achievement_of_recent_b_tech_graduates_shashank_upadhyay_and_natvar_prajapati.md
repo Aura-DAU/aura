@@ -1,5 +1,6 @@
 ---
 title: "An Achievement of recent B.Tech. Graduates Shashank Upadhyay and Natvar Prajapati"
+document_year: "2025"
 url: "https://www.daiict.ac.in/achievements/6914"
 category: "Achievements"
 scraped_by: "Dhruvam"

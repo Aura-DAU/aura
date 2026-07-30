@@ -1,5 +1,6 @@
 ---
 title: "IT441 ComputerGraphics Win2024 - Aditya Tatu"
+document_year: "2024"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/IT441_ComputerGraphics_Win2024%20-%20Aditya%20Tatu.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

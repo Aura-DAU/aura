@@ -1,5 +1,6 @@
 ---
 title: "Read the news/views invited article of Professor Manish K. Gupta in Nature Computational Science"
+document_year: "2022"
 url: "https://www.daiict.ac.in/news/4093"
 category: "Announcements"
 scraped_by: "Vedant Shah"

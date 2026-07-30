@@ -1,5 +1,6 @@
 ---
 title: "FSSAI Certificate"
+document_year: "2025"
 url: "https://daiict.ac.in/sites/default/files/other-files/FSSAI-Campus-Certificate-DAIICT_2025.pdf"
 category: "administration"
 scraped_by: "Om Patel"

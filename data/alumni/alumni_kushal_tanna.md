@@ -1,4 +1,8 @@
+---
 title: "Kushal Tanna" url: "https://alumni.dau.edu.in/alumni_kushal_tanna.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-07" team: "Alumni Team"
+document_year: "2023"
+batch_year: "2023"
+---
 # Kushal Tanna
 
 ## Profile Overview

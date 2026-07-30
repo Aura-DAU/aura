@@ -1,5 +1,6 @@
 ﻿---
 title: "PUBLIC LECTURE: CONVERGENCE OF TECHNOLOGIES IN THE DIGITAL WORLD"
+document_year: "2002"
 url: "https://www.daiict.ac.in/events/6621"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ﻿---
 title: "M.Tech Electronics & Communication (EC) 2022-23 Curriculum"
+document_year: "2022-23"
 category: "Academics"
 synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"

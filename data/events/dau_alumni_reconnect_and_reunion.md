@@ -1,5 +1,6 @@
 ﻿---
 title: "DAU Alumni Reconnect and Reunion"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6731"
 category: "Events"
 scraped_by: "Dhruvam"

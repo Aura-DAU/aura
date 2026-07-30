@@ -1,5 +1,6 @@
 ---
 title: "HM106 Approaches to Indian Society Winter Semester 2026"
+document_year: "2026"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

@@ -1,5 +1,6 @@
 ---
 title: "Ph.D. (Regular & Part-Time) Admissions"
+document_year: "2026"
 url: "https://www.daiict.ac.in/admission-phd"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

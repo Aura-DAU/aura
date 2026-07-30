@@ -1,4 +1,8 @@
+---
 title: "Jatin Patel" url: "https://alumni.dau.edu.in/alumni_jatin_patel.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2010"
+batch_year: "2010"
+---
 # Jatin Patel
 
 ## Profile Overview

@@ -1,5 +1,6 @@
 ---
 title: "Event Reports Winter Sem 25"
+document_year: "2025"
 url: "#"
 category: "SBG & Clubs - Events"
 scraped_by: "Madhav Thesiya"

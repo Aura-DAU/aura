@@ -103,6 +103,20 @@ class ContextBuilder:
                         if 20 <= y1 <= 35 and y2 == (y1 + 1) % 100:
                             doc_rule_year = f"20{y1:02d}-{y2:02d}"
                             break
+                    # Bug fix: bare season/term + 2-digit year with no range
+                    # given (e.g. "Winter25", "Autumn 2025") previously fell
+                    # through this whole chain. Same convention as ingestion:
+                    # Winter NN and Autumn NN both belong to academic year
+                    # NN-(NN+1).
+                    m3 = re.search(
+                        r"(?i)\b(?:autumn|winter|monsoon|spring|summer)[\s_-]?(?:20)?(\d{2})\b(?![\s_-]?\d)",
+                        target,
+                    )
+                    if m3:
+                        y1 = int(m3.group(1))
+                        if 20 <= y1 <= 35:
+                            doc_rule_year = f"20{y1:02d}-{(y1 + 1) % 100:02d}"
+                            break
                     m1 = re.search(r"(?<!\d)(20\d{2})(?!\d)", target)
                     if m1:
                         doc_rule_year = m1.group(1)
@@ -161,6 +175,26 @@ scraped_date="{metadata.get('scraped_date', '')}"
                         "end_line": end_line_val or None,
                         "cluster": metadata.get("cluster")
                     })
+                else:
+                    # Bug fix: a second chunk from the same document (dedup
+                    # collapses it onto the existing source card) was
+                    # previously invisible to the card's start_line/end_line —
+                    # they stayed frozen on whichever chunk was seen first,
+                    # even if THIS chunk is the one the model actually cites
+                    # its answer from. Widen the line range to cover every
+                    # chunk that maps to this source instead.
+                    existing = sources[seen_urls[dedup_key]]
+                    try:
+                        if start_line_val and existing.get("start_line"):
+                            existing["start_line"] = min(int(existing["start_line"]), int(start_line_val))
+                        elif start_line_val and not existing.get("start_line"):
+                            existing["start_line"] = start_line_val
+                        if end_line_val and existing.get("end_line"):
+                            existing["end_line"] = max(int(existing["end_line"]), int(end_line_val))
+                        elif end_line_val and not existing.get("end_line"):
+                            existing["end_line"] = end_line_val
+                    except (TypeError, ValueError):
+                        pass
 
                 citation_map[idx] = seen_urls[dedup_key]
 

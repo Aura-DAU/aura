@@ -1,5 +1,6 @@
 ﻿---
 title: "HSS PhD Rules – Most Recent Update / Revision Date"
+document_year: "2024-25"
 category: "Academics"
 synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"

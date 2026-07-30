@@ -1,5 +1,6 @@
 ---
 title: "Cultural and blood donation events 24 25"
+document_year: "2024-25"
 url: "#"
 category: "SBG & Clubs - Events"
 scraped_by: "Madhav Thesiya"

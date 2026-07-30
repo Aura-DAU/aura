@@ -1,5 +1,6 @@
 ---
 title: "Careers / Current Position / Old Position"
+document_year: "2025"
 url: "https://www.daiict.ac.in/old-positions"
 category: "Academics"
 scraped_by: "Meet Virugama"

@@ -1,5 +1,6 @@
 ---
 title: "Workshop on Mental Wellness and Workplace Harmony Held at DAU"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6733"
 category: "Announcements"
 scraped_by: "Vedant Shah"

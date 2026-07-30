@@ -1,5 +1,6 @@
 ---
 title: "IT495 ExploratoryDataAnalysis Winter24 - Gopinath Panda"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/IT495_ExploratoryDataAnalysis_Winter24%20-%20Gopinath%20Panda.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

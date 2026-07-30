@@ -1,5 +1,6 @@
 ---
 title: "AnnualReport 2022-23 pdf"
+document_year: "2022-23"
 url: "https://daiict.ac.in/sites/default/files/other-files/Annual-Report_2022-23.pdf"
 category: "administration"
 scraped_by: "Om Patel"

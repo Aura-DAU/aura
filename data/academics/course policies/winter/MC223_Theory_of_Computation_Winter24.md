@@ -1,5 +1,6 @@
 ---
 title: "MC223 Theory of Computation Winter 2024"
+document_year: "2024-25"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

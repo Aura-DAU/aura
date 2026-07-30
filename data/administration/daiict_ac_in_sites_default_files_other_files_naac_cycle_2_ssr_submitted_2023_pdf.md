@@ -1,5 +1,6 @@
 ---
 title: "NAAC / NAAC Cycle 2"
+document_year: "2023"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/NAAC_Cycle-2_SSR_Submitted_2023.pdf"
 category: "administration"
 scraped_by: "Om Patel"

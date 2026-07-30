@@ -1,5 +1,6 @@
 ---
 title: "Celebrating 25 Years: DAU's Silver Jubilee Sports Day Event"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6932"
 category: "Announcements"
 scraped_by: "Vedant Shah"

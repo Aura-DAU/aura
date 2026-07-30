@@ -952,17 +952,7 @@ class QueryPlanner:
             os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
-    def plan(self, query, academic_scope=None):
-
-        scope_hint = ""
-        if academic_scope is not None:
-            scope_hint = (
-                "\nVerified student context (relevance only; never override it): "
-                f"programme={academic_scope.programme_id}, "
-                f"degree_level={academic_scope.degree_level}, "
-                f"admission_year={academic_scope.admission_year}, "
-                f"semester={academic_scope.current_semester}.\n"
-            )
+    def plan(self, query):
 
         def _execute_plan(client):
             return client.chat.completions.create(
@@ -981,7 +971,7 @@ class QueryPlanner:
                     },
                     {
                         "role": "user",
-                        "content": scope_hint + "\nUser query: " + query
+                        "content": query
                     }
                 ],
                 extra_body=InferenceRouter.no_think_extra_body(),

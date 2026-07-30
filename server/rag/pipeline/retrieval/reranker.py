@@ -511,6 +511,20 @@ class Reranker:
             if 20 <= y1 <= 35 and y2 == (y1 + 1) % 100:
                 return 2000 + y1
 
+        # Bug fix: bare season/term + 2-digit year with no range given (e.g.
+        # "Winter25", "Autumn 2025") previously returned None here, so these
+        # chunks got no recency boost / year-match at all. Same convention as
+        # ingestion: Winter NN and Autumn NN both belong to academic year
+        # NN-(NN+1), so the start year is NN.
+        m3 = re.search(
+            r"(?i)\b(?:autumn|winter|monsoon|spring|summer)[\s_-]?(?:20)?(\d{2})\b(?![\s_-]?\d)",
+            text_to_search,
+        )
+        if m3:
+            y1 = int(m3.group(1))
+            if 20 <= y1 <= 35:
+                return 2000 + y1
+
         m1 = re.search(r"(?<!\d)(20\d{2})(?!\d)", text_to_search)
         if m1:
             try:

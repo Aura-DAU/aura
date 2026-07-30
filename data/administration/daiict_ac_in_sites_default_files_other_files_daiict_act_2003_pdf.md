@@ -1,5 +1,6 @@
 ---
 title: "DAIICT ACT"
+document_year: "2003"
 url: "https://daiict.ac.in/sites/default/files/other-files/DAIICT_Act-2003.pdf"
 category: "administration"
 scraped_by: "Om Patel"

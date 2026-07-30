@@ -1,5 +1,6 @@
 ---
 title: "MC215 Linear Algebra Winter Semester (AY 25-26)"
+document_year: "2025-26"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

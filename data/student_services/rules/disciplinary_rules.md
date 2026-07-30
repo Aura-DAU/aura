@@ -1,5 +1,6 @@
 ﻿---
 title: "Disciplinary Rules"
+document_year: "2024"
 url: "https://daiict.ac.in/disciplinary-rules"
 category: "Student Services"
 scraped_by: "Madhav Thesiya"

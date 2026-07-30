@@ -1,5 +1,6 @@
 ---
 title: "Triumph at CyPhySS-2023 Summit"
+document_year: "2023"
 url: "https://www.daiict.ac.in/achievements/5721"
 category: "Achievements"
 scraped_by: "Dhruvam"

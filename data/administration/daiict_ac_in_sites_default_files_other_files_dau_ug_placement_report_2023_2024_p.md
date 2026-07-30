@@ -1,5 +1,6 @@
 ---
 title: "Placement / Placement Cell / DAU UG Placement Report(2023-2024)"
+document_year: "2023-24"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/DAU-UG-Placement-Report-2023-2024.pdf"
 category: "administration"
 scraped_by: "Om Patel"

@@ -1,4 +1,8 @@
+---
 title: "Neha Sharma" url: "https://alumni.dau.edu.in/alumni_neha_sharma.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2016"
+batch_year: "2016"
+---
 # Neha Sharma
 
 ## Profile Overview

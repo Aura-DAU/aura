@@ -1,5 +1,6 @@
 ﻿---
 title: "Workshop on Deep Learning and Artificial Intelligence: Principles &amp; Practice at DAU"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/7038"
 category: "Events"
 scraped_by: "Dhruvam"

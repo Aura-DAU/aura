@@ -1,5 +1,6 @@
 ---
 title: "List of Club Committee Core Members Winter 2026"
+document_year: "2026-27"
 url: "#"
 category: "SBG & Clubs - Clubs And Committees"
 scraped_by: "Madhav Thesiya"

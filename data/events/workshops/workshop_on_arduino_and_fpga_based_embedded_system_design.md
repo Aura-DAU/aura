@@ -1,5 +1,6 @@
 ﻿---
 title: "Workshop on Arduino and FPGA Based Embedded System Design"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6760"
 category: "Events"
 scraped_by: "Dhruvam"

@@ -1,5 +1,6 @@
 ---
 title: "Committees T&R 2024 25 updated"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/academics/Committees_T&R_2024-25 updated.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"

@@ -1,5 +1,6 @@
 ---
 title: "Director General"
+document_year: "2021"
 url: "https://daiict.ac.in/director"
 category: "Academic"
 scraped_by: "Madhav Thesiya"

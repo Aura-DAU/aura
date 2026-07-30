@@ -1,5 +1,6 @@
 ﻿---
 title: "High End Workshop on AI/ML Algorithms and Applications in VLSI Design and Technology"
+document_year: "2023"
 url: "https://www.daiict.ac.in/events/5644"
 category: "Events"
 scraped_by: "Dhruvam"

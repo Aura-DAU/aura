@@ -1,5 +1,6 @@
 ---
 title: "SHE PLAYS – Women’s Sports Day 2026 at DAU"
+document_year: "2026"
 url: "https://www.daiict.ac.in/news/7067"
 category: "Announcements"
 scraped_by: "Vedant Shah"

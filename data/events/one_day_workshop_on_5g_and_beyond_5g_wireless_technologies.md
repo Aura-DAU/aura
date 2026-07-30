@@ -1,5 +1,6 @@
 ﻿---
 title: "One-Day Workshop on 5G and Beyond 5G Wireless Technologies"
+document_year: "2023"
 url: "https://www.daiict.ac.in/events/5994"
 category: "Events"
 scraped_by: "Dhruvam"

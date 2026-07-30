@@ -1,5 +1,6 @@
 ---
 title: "Summer Research Internship at DAU"
+document_year: "2026"
 url: "https://www.daiict.ac.in/summer-research-internship-dau"
 category: "Research"
 scraped_by: "Khushi Gandhi"

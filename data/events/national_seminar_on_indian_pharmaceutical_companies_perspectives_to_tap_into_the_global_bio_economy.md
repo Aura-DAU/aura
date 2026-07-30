@@ -1,5 +1,6 @@
 ---
 title: "National Seminar on Indian Pharmaceutical Companies Perspectives to tap into the Global Bio-Economy"
+document_year: "2024"
 url: "https://www.daiict.ac.in/news/6572"
 category: "Announcements"
 scraped_by: "Vedant Shah"

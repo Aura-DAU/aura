@@ -1,4 +1,8 @@
+---
 title: "Vikrant Singh Tomar" url: "https://alumni.dau.edu.in/alumni_vikrant_singh_tomar.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2008"
+batch_year: "2008"
+---
 # Vikrant Singh Tomar
 
 ## Profile Overview

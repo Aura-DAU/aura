@@ -1,5 +1,6 @@
 ---
 title: "DA-IICT Alumni Batch 2020 Part 5"
+document_year: "2020"
 category: "Alumni Batch Index"
 batch_year: "2020"
 scraped_by: "AI Agent"

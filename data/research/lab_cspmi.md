@@ -1,5 +1,6 @@
 ﻿---
 title: "CSPMI Lab — Communications, Signal Processing & Machine Intelligence"
+document_year: "2020"
 category: "Research"
 source: "research_areas/communications_and_signal_processing.md + dean_research.md (scraped 2026-06-01)"
 authorisation: ["student", "faculty"]

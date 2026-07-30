@@ -1,5 +1,6 @@
 ---
 title: "N.I.R.F. **"
+document_year: "2026"
 url: "https://www.daiict.ac.in/index.ph%70/nirf-national-institutional-ranking-framework"
 category: "Academics"
 scraped_by: "Meet Virugama"

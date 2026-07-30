@@ -1,5 +1,6 @@
 ---
 title: "News Article Published in Sandesh National Seminar on Navigating the IP Landscape"
+document_year: "2024"
 url: "https://www.daiict.ac.in/news/6581"
 category: "Announcements"
 scraped_by: "Vedant Shah"

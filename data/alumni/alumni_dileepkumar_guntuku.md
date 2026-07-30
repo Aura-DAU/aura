@@ -1,4 +1,8 @@
+---
 title: "Dileepkumar Guntuku" url: "https://alumni.dau.edu.in/alumni_dileepkumar_guntuku.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2010"
+batch_year: "2010"
+---
 # Dileepkumar Guntuku
 
 ## Profile Overview

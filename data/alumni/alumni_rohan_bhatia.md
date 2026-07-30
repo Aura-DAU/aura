@@ -1,4 +1,8 @@
+---
 title: "Rohan Bhatia" url: "https://alumni.dau.edu.in/alumni_rohan_bhatia.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2021"
+batch_year: "2021"
+---
 # Rohan Bhatia
 
 ## Profile Overview

@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
+import { subscribeTimetableUpdated } from "@/lib/timetable-bus"
 
 export interface TimetableSlot {
   id: string
@@ -49,10 +50,21 @@ export function useTimetable() {
 
     // The agent can change the timetable mid-conversation (in another tab
     // or the chat panel). Re-fetching on window focus keeps the dashboard
-    // card showing the latest version without needing a websocket.
+    // card showing the latest version even as a fallback with no explicit
+    // signal; the timetable-bus subscription below makes it near-instant.
     const onFocus = () => refetch()
     window.addEventListener("focus", onFocus)
-    return () => window.removeEventListener("focus", onFocus)
+
+    // Fires the moment chat applies a timetable/elective/cohort change —
+    // see lib/timetable-bus.ts and use-aura-chat.ts's "timetable-updated"
+    // SSE handling. Works across tabs (BroadcastChannel) and within this
+    // tab (CustomEvent), so the dashboard updates without needing focus.
+    const unsubscribe = subscribeTimetableUpdated(() => refetch())
+
+    return () => {
+      window.removeEventListener("focus", onFocus)
+      unsubscribe()
+    }
   }, [refetch])
 
   return { data, loading, error, refetch }

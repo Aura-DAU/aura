@@ -1,5 +1,6 @@
 ---
 title: "Undergraduate Admissions - NRI and Foreign National (DAFS) Category"
+document_year: "2026"
 url: "https://www.daiict.ac.in/undergraduate-admissions-nri-and-foreign-national-category"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Ajay Tomar"
 url: "https://www.daiict.ac.in/professor-practice/ajay-tomar"
 category: "Faculty"

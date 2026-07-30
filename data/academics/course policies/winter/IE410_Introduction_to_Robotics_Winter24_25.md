@@ -1,5 +1,6 @@
 ---
 title: "IE410 Introduction to Robotics Winter (AY 2024-25)"
+document_year: "2024-25"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

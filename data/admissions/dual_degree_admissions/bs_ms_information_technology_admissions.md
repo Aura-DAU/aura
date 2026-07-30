@@ -1,5 +1,6 @@
 ---
 title: "BS–MS (Information Technology) Admissions"
+document_year: "2026"
 url: "https://www.daiict.ac.in/bs-ms-information-technology-admissions"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

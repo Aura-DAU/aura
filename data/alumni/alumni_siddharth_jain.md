@@ -1,4 +1,8 @@
+---
 title: "Siddharth Jain" url: "https://alumni.dau.edu.in/alumni_siddharth_jain.md" category: "Alumni Profile" scraped_by: "AI Agent" scraped_date: "2026-07-08" team: "Alumni Team"
+document_year: "2014"
+batch_year: "2014"
+---
 # Siddharth Jain
 
 ## Profile Overview

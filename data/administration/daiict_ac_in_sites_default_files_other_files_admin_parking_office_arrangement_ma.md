@@ -1,5 +1,6 @@
 ---
 title: "Tenders/EE2526003 material specification pdf"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Admin-Parking-Office-Arrangement-Material-Specification_150525.pdf"
 category: "administration"
 scraped_by: "Om Patel"

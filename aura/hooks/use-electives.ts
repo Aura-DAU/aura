@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
+import { subscribeTimetableUpdated } from "@/lib/timetable-bus"
 
 export interface ElectiveSlot {
   master_id: string
@@ -78,6 +79,10 @@ export function useElectives() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     refetch()
+    // If the student picks/changes electives conversationally in chat
+    // (see the orchestrator's first-time onboarding flow), this refetches
+    // so any open electives UI reflects it immediately.
+    return subscribeTimetableUpdated(() => refetch())
   }, [refetch])
 
   return { data, loading, error, saving, refetch, saveSelections }

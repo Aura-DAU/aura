@@ -1,5 +1,6 @@
 ﻿---
 title: "DAU to organise the 8th International Conference on Complex Dynamical Systems and Applicat…"
+document_year: "2026"
 url: "https://www.daiict.ac.in/events/6864"
 category: "Events"
 scraped_by: "Dhruvam"

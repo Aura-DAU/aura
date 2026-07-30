@@ -1,5 +1,6 @@
 ---
 title: "MC125 Functions of Single Variable and ODEs Winter 2025"
+document_year: "2025-26"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

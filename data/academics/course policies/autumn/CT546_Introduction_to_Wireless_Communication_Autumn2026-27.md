@@ -1,5 +1,6 @@
 ﻿---
 title: "CT546 Introduction to Wireless Communication Autumn Semester 2026-2027"
+document_year: "2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"

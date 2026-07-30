@@ -1,5 +1,6 @@
 ---
 title: "Careers / Teaching Fellow Positions Open at DAU"
+document_year: "2026-27"
 url: "https://www.daiict.ac.in/teaching-fellow-positions-open-dau"
 category: "Academics"
 scraped_by: "Meet Virugama"

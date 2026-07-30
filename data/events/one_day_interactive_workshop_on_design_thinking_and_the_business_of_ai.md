@@ -1,5 +1,6 @@
 ﻿---
 title: "One Day Interactive Workshop on Design Thinking and The Business of AI"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6732"
 category: "Events"
 scraped_by: "Dhruvam"

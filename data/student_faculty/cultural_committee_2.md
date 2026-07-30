@@ -1,5 +1,6 @@
 ---
 title: "Raaga and Rhyme — Cultural Event Report 2025-26"
+document_year: "2025-26"
 url: "https://docs.google.com/document/d/1r3lsDun56HcGbNcwSrvqvxS8HcakIf6U/edit?usp=drive_link"
 category: "Committees"
 scraped_by: "OmPatel"

@@ -1,17 +1,12 @@
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth/options"
 import { redirect } from "next/navigation"
-import {
-  getCgpa,
-  getRegistration,
-  getFeeDues,
-} from "@/lib/api/ecampus.action"
 import { StudentAcademicDashboard } from "@/components/features/dashboard/StudentAcademicDashboard"
 import DashboardShell from "./dashboard-shell"
 
 export const metadata = {
   title: "Dashboard · AURA",
-  description: "Your personal academic dashboard — timetable, CGPA, courses, and fees.",
+  description: "Your personal timetable — synced with your latest changes in chat.",
 }
 
 export default async function DashboardPage() {
@@ -24,29 +19,14 @@ export default async function DashboardPage() {
   const user = session.user
   const role = (user.role as string) || ""
 
+  // The student dashboard is timetable-only by design (see
+  // StudentAcademicDashboard) — it no longer fetches CGPA, registration, or
+  // fee-dues data, so there's nothing to await here before rendering.
   if (role === "student") {
-    const [cgpaResult, registrationResult, feeDuesResult] = await Promise.all([
-      getCgpa(),
-      getRegistration(),
-      getFeeDues(),
-    ])
-
     return (
       <StudentAcademicDashboard
         userName={user.name || "Student"}
         departmentName={user.department}
-        cgpa={{
-          data: cgpaResult.ok ? cgpaResult.data : null,
-          error: cgpaResult.ok ? null : cgpaResult.error,
-        }}
-        registration={{
-          data: registrationResult.ok ? registrationResult.data : null,
-          error: registrationResult.ok ? null : registrationResult.error,
-        }}
-        feeDues={{
-          data: feeDuesResult.ok ? feeDuesResult.data : null,
-          error: feeDuesResult.ok ? null : feeDuesResult.error,
-        }}
       />
     )
   }

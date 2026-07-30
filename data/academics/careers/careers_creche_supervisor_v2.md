@@ -1,5 +1,6 @@
 ---
 title: "Careers / Non-Teaching Staff Positions / Crèche Supervisor"
+document_year: "2026"
 url: "https://www.daiict.ac.in/creche-supervisor"
 category: "Academics"
 scraped_by: "Meet Virugama"

@@ -1,5 +1,6 @@
 ﻿---
 title: "Summer School on Speech Signal Processing (S4P) - July 05-09, 2025"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6620"
 category: "Events"
 scraped_by: "Dhruvam"

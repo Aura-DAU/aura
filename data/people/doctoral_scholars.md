@@ -1,5 +1,6 @@
 ---
 title: "Doctoral Scholars"
+document_year: "2026"
 url: "https://www.daiict.ac.in/doctoral-scholars"
 category: "Doctoral Scholars"
 scraped_by: "Khushi Gandhi"

@@ -1,5 +1,6 @@
 ﻿---
 title: "DA-IICT 18th Convocation Announcement"
+document_year: "2024"
 url: "https://www.daiict.ac.in/events/6058"
 category: "Events"
 scraped_by: "Dhruvam"

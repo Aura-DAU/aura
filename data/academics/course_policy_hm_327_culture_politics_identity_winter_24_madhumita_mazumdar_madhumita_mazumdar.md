@@ -1,5 +1,6 @@
 ---
 title: "HM 327 CULTURE,POLITICS, IDENTITY WINTER 24 Madhumita Mazumdar - Madhumita Mazumdar"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/HM%20327%20_CULTURE,POLITICS,%20IDENTITY_WINTER%20_24%20Madhumita%20Mazumdar%20-%20Madhumita%20Mazumdar.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

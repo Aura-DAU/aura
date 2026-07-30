@@ -1,5 +1,6 @@
 ---
 title: "Team FruitSalad of our college has qualified for ACM-ICPC World Finals."
+document_year: "2017"
 url: "https://www.daiict.ac.in/achievements/1010"
 category: "Achievements"
 scraped_by: "Dhruvam"

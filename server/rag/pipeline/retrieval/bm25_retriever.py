@@ -197,9 +197,6 @@ class BM25Retriever:
 
             )
 
-        if "$not" in metadata_filter:
-            return not self._matches_filter(chunk, metadata_filter["$not"])
-
         for key, condition in metadata_filter.items():
 
             if isinstance(condition, dict):
@@ -224,16 +221,6 @@ class BM25Retriever:
                     else:
                         if val not in condition["$in"]:
                             return False
-
-                elif "$gte" in condition:
-                    value = chunk.get(key)
-                    if not isinstance(value, (int, float)) or value < condition["$gte"]:
-                        return False
-
-                elif "$lte" in condition:
-                    value = chunk.get(key)
-                    if not isinstance(value, (int, float)) or value > condition["$lte"]:
-                        return False
 
             else:
 

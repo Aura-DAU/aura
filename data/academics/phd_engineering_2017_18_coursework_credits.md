@@ -1,5 +1,6 @@
 ﻿---
 title: "PhD Engineering (2017-18) – Coursework Credit Requirements"
+document_year: "2017-18"
 category: "Academics"
 synthesized_by: "Knowledge Gap Fix"
 synthesis_date: "2026-07-05"

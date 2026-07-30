@@ -28,7 +28,6 @@ OFF_TOPIC_RESPONSE = (
 class QueryGuardrail:
     def __init__(self):
         load_dotenv()
-        self.client = InferenceRouter.get_client()
         self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
         self.system_prompt = """
 You are the security and scope filter for AURA, the assistant for Dhirubhai
@@ -94,11 +93,6 @@ student handbook, or in a policy document, the query is SAFE. This holds even
 when the topic sounds sensitive — salary bands, leave entitlements,
 disciplinary procedures, penalties, eligibility rules, approval authorities,
 or a named person's public role.
-
-A bare "Who is [Name]?" (including with a typo or stray character) asks about
-someone's public role or position at DAU — treat it as SAFE by default. Institutional
-policies for a category of people, approval workflows, and directory facts are SAFE.
-Club and student organization questions about DAU campus life are ON-TOPIC/SAFE.
 
 If you are unsure between SAFE and OFF_TOPIC, answer SAFE. If you are unsure
 between SAFE and UNSAFE, answer SAFE. Access control and document grounding
@@ -178,16 +172,22 @@ No explanation, no punctuation, no JSON, no additional text.
 """
 
     def _classify(self, query: str) -> "Verdict":
-        response = self.client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": self.system_prompt.strip()},
-                {"role": "user", "content": f"Query to evaluate:\n{query}"},
-            ],
-            model=self.model,
-            max_tokens=12,
-            temperature=0.0,
-            extra_body=InferenceRouter.no_think_extra_body(),
-        )
+        def _execute(client):
+            return client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": self.system_prompt.strip()},
+                    {"role": "user", "content": f"Query to evaluate:\n{query}"},
+                ],
+                model=self.model,
+                max_tokens=12,
+                temperature=0.0,
+                extra_body=InferenceRouter.no_think_extra_body(),
+            )
+
+        # Fail over across the vLLM pool on a bad/overloaded node instead of
+        # permanently degrading this guardrail for the rest of the process
+        # lifetime (was: a single bound client with zero retry/failover).
+        response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
         result = response.choices[0].message.content.strip().upper()
 
         if os.getenv("DEBUG", "false").lower() == "true":

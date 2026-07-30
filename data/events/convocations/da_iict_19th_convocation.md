@@ -1,5 +1,6 @@
 ﻿---
 title: "DA-IICT 19th Convocation"
+document_year: "2025"
 url: "https://www.daiict.ac.in/events/6576"
 category: "Events"
 scraped_by: "Dhruvam"

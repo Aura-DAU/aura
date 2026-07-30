@@ -1,5 +1,6 @@
 ---
 title: "Cybage Khushboo Scholarships"
+document_year: "2025-26"
 url: "https://www.daiict.ac.in/ugpg-cybage-khushboo-scholarships"
 category: "Admissions"
 scraped_by: "Khushi Gandhi"

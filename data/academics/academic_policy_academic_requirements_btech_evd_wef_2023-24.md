@@ -1,5 +1,6 @@
 ---
 title: "Academic Requirements BTech EVD 2023 wef Autumn 2023-24"
+document_year: "2023-24"
 url: "https://intranet.daiict.ac.in/academics/Academic requirements_BTech(EVD)_wef_2023-24(1).pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Madhav (AI-assisted)"

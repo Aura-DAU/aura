@@ -1,5 +1,6 @@
 ---
 title: "SC472 Econometric Data Analysis Using R Winter24 - Gaurav Kumar Singh"
+document_year: "2024-25"
 url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_Winter_2023_2024/SC472_Econometric_Data_Analysis_Using_R_Winter24%20-%20Gaurav%20Kumar%20Singh.pdf"
 category: "Academics"
 scraped_by: "Madhav Thesiya"

@@ -1,5 +1,6 @@
 ---
 title: "DAIICT Ammendment ACT 2024"
+document_year: "2024"
 url: "https://daiict.ac.in/sites/default/files/other-files/Amended_DA-IICT_Act-Gazette_June-2024.pdf"
 category: "administration"
 scraped_by: "Om Patel"

@@ -1,5 +1,6 @@
 ---
 title: "Research Paper by Mayank Patel, Nitish Yadav, and Minal Bhise gets Best Paper Award at FTNCT 2021"
+document_year: "2021"
 url: "https://www.daiict.ac.in/news/3811"
 category: "Announcements"
 scraped_by: "Vedant Shah"

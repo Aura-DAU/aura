@@ -1,5 +1,6 @@
 ---
 title: "Tenders/EE2425001 pdf"
+document_year: "2025"
 url: "https://www.daiict.ac.in/sites/default/files/other-files/Tender-for-replacement-of-Window-AC-with-Split-AC.pdf"
 category: "administration"
 scraped_by: "Om Patel"

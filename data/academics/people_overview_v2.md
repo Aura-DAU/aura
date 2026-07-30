@@ -1,5 +1,6 @@
 ---
 title: "People"
+document_year: "2026"
 url: "https://daiict.ac.in/#tab-1"
 category: "Academics"
 scraped_by: "Meet Virugama"

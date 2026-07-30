@@ -6,9 +6,11 @@ import { useTimetable } from "@/hooks/use-timetable"
 const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const
 
 function todayDayOfWeek(): number {
-  // JS: 0=Sun … 6=Sat → convert to 1=Mon … 7=Sun used by timetable slots
+  // JS Date#getDay(): 0=Sun … 6=Sat. The backend's day_of_week (see
+  // pipeline/timetable/service.py DAY_NAMES) is 0=Mon … 6=Sun. Convert
+  // so slot.day_of_week comparisons below actually match today.
   const jsDay = new Date().getDay()
-  return jsDay === 0 ? 7 : jsDay
+  return (jsDay + 6) % 7
 }
 
 /** Displays today's classes from the live AURA timetable API. */

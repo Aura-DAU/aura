@@ -1,5 +1,6 @@
 ---
 title: "Library (Resource Centre) Usage Policy"
+document_year: "2024"
 url: "https://www.daiict.ac.in/resource-centre"
 category: "policies"
 scraped_by: "Om Patel"

@@ -1,5 +1,6 @@
 ---
 title: "DAU celebrated International Day of Yoga 2025"
+document_year: "2025"
 url: "https://www.daiict.ac.in/news/6815"
 category: "Announcements"
 scraped_by: "Vedant Shah"

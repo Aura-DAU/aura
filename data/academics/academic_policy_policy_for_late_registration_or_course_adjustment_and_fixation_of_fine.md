@@ -1,5 +1,6 @@
 ---
 title: "Policy for Late Registration or Course Adjustment and Fixation of Fine"
+document_year: "2014"
 url: "https://intranet.daiict.ac.in/academics/Policy for Late Registration or Course Adjustment and Fixation of Fine.pdf"
 category: "Academics - Academic Policies"
 scraped_by: "Squad D Scraper"
