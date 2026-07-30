@@ -73,7 +73,7 @@ graph TB
   L --> E --> RR
 ```
 
-Production multi-node layout, compose files, and CD: [`.github/deploy/README.md`](./.github/deploy/README.md).
+Production multi-node layout, compose files, and CD: [`deploy/README.md`](./deploy/README.md).
 
 ---
 
