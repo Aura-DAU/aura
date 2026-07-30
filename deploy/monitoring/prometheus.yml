@@ -9,10 +9,9 @@ scrape_configs:
   # Node 1: FastAPI Gateway & LangGraph Orchestrator
   - job_name: "node1-gateway-backend"
     static_configs:
-      - targets: ["<NODE_1_IP>:8000"]
+      - targets: ["10.100.97.71:8000"]
 
-  # Node 1: nginx edge — per-endpoint request rate + latency
-  # (prometheus-nginxlog-exporter, LAN-published on node 1).
+  # Node 1: NGINX Edge Proxy (prometheus-nginxlog-exporter)
   - job_name: "node1-nginx-edge"
     static_configs:
       - targets: ["10.100.97.71:9113"]
@@ -21,10 +20,26 @@ scrape_configs:
   - job_name: "vllm-inference-nodes"
     static_configs:
       - targets:
-          - "<NODE_2_IP>:8000"
-          - "<NODE_3_IP>:8000"
+          - "10.100.97.72:8000"
+          - "10.100.97.73:8000"
         labels:
           pool: "inference"
+
+  # Host Hardware Telemetry (Node Exporter)
+  - job_name: "node-exporter"
+    static_configs:
+      - targets:
+          - "10.100.97.71:9100"
+          - "10.100.97.72:9100"
+          - "10.100.97.73:9100"
+          - "10.100.97.74:9100"
+
+  # NVIDIA GPU Telemetry (DCGM Exporter)
+  - job_name: "dcgm-exporter"
+    static_configs:
+      - targets:
+          - "10.100.97.72:9400"
+          - "10.100.97.73:9400"
 
   # Node 4: Local Embedding & Reranker Microservice
   - job_name: "node4-embedding-reranker"
