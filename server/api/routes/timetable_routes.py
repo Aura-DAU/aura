@@ -15,6 +15,7 @@ in 10 minutes" reminder feature.
 
 import os
 import uuid
+from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
