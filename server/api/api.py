@@ -28,11 +28,10 @@ from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
 from api.routes.calendar_routes import router as calendar_router
 from api.routes.timetable_routes import router as timetable_router, push_router
+from api.routes.chat_routes import router as chat_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
-from pipeline.rate_limiter import enforce_quota, QuotaExceeded
-from access_control import resolve_effective_role
 
 app = FastAPI(title="AURA API")
 
@@ -172,6 +171,10 @@ app.include_router(admin_router)
 app.include_router(calendar_router)
 app.include_router(timetable_router)
 app.include_router(push_router)
+# chat_router: /chat (blocking) + /chat/stream (SSE) — the Next.js proxy at
+# app/api/chat/route.ts calls /chat/stream. Must be registered here or the
+# frontend gets 502 "Backend error" ("AURA temporarily unavailable").
+app.include_router(chat_router)
 
 
 @app.on_event("startup")
@@ -254,39 +257,6 @@ class LinkEcampusRequest(BaseModel):
 
 ALLOWED_AUDIO   = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 MAX_AUDIO_BYTES = 25 * 1024 * 1024
-
-# ── /chat ─────────────────────────────────────────────────────────────────
-@app.post("/chat")
-async def chat(
-    request:  ChatRequest,
-    identity: Identity = Depends(require_identity),   # verifies Next.js JWT
-):
-    history = [t.model_dump() for t in (request.history or [])][-6:]
-    profile = request.resolved_profile()
-    display_profile = profile.model_dump(exclude_none=True) if profile else None
-
-    quota_key = identity.email or identity.erp_id
-    try:
-        enforce_quota(quota_key, identity.role)
-    except QuotaExceeded as exc:
-        raise HTTPException(
-            status_code=429,
-            detail=f"Question limit reached ({exc.limit}/day).",
-        ) from exc
-
-    async with chat_queue_lock:
-        request_context = _scope_resolver.resolve(
-            identity,
-            resolve_effective_role(identity),
-        )
-        return await run_in_threadpool(
-            get_aura().ask,
-            question=request.question,
-            history=history,
-            identity=identity.as_dict(),
-            display_profile=display_profile,
-            request_context=request_context,
-        )
 
 # ── eCampus account linking ───────────────────────────────────────────────
 # These three endpoints handle optional eCampus credential storage for the
