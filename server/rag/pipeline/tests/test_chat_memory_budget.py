@@ -13,7 +13,7 @@ class _FakeConversationMemory:
 
 def test_persistent_memory_has_dedicated_generation_budget(monkeypatch):
     monkeypatch.setenv("AURA_USER_MEMORY_TOKENS", "1")
-    monkeypatch.setattr(chat_routes, "get_conversation_memory", lambda: _FakeConversationMemory())
+    monkeypatch.setattr(chat_routes, "get_conversation_memory", _FakeConversationMemory)
 
     summary = chat_routes._summary_for_generation(
         "User prefers short direct answers and timetable examples.",
