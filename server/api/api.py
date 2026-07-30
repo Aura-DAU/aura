@@ -26,7 +26,7 @@ from api.middleware.security_headers import SecurityHeadersMiddleware
 from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
 from api.routes.calendar_routes import router as calendar_router
-from api.routes.timetable_routes import router as timetable_router, push_router
+from api.routes.timetable_routes import router as timetable_router, push_router, profile_router
 from api.routes.chat_routes import router as chat_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
@@ -169,6 +169,7 @@ app.include_router(admin_router)
 app.include_router(calendar_router)
 app.include_router(timetable_router)
 app.include_router(push_router)
+app.include_router(profile_router)
 # chat_router: /chat (blocking) + /chat/stream (SSE) — the Next.js proxy at
 # app/api/chat/route.ts calls /chat/stream. Must be registered here or the
 # frontend gets 502 "Backend error" ("AURA temporarily unavailable").
