@@ -433,6 +433,23 @@ SCREEN_SCHOLARSHIP_ELIGIBILITY = Tool(
     handler=scholarship_tools.screen_scholarship_eligibility,
 )
 
+UPDATE_TRACKING_FLAGS = Tool(
+    name="update_tracking_flags",
+    description="Updates the user's persistent personal profile facts (e.g., DOB, age, interests) shared conversationally.",
+    parameters={
+        "type": "object",
+        "properties": {
+            "facts": {
+                "type": "object", 
+                "description": "A dictionary of key-value pairs representing the user's personal facts to track (e.g., {'dob': '1999-05-12', 'age': 25})"
+            }
+        },
+        "required": ["facts"]
+    },
+    category="write", allowed_roles=["student", "guest", "faculty", "admin"],
+    handler=student_workflow_tools.handle_update_tracking_flags,
+)
+
 
 # ── Domain KB retrieval skills (read-only, non-ERP) ─────────────────────────
 
@@ -728,7 +745,7 @@ TOOL_REGISTRY: dict[str, Tool] = {
         GET_CLUB_MEMBERS, LOOKUP_CLUB_OFFICE_BEARERS,
         EVENT_CLUB_REGISTRATION_GUIDANCE,
         SEARCH_FACULTY_COMMITTEES, FACULTY_COMMITTEE_RESPONSIBILITIES,
-        SCREEN_SCHOLARSHIP_ELIGIBILITY,
+        SCREEN_SCHOLARSHIP_ELIGIBILITY, UPDATE_TRACKING_FLAGS,
         LOOKUP_ACADEMIC_CALENDAR, LOOKUP_COURSE_POLICY, LOOKUP_ACADEMIC_REQUIREMENTS,
         LOOKUP_ADMISSIONS_INFO, LOOKUP_PUBLIC_TIMETABLE_DOCS,
         LOOKUP_UNIVERSITY_POLICY, LOOKUP_FACULTY_PROFILE, SEARCH_PEOPLE_DIRECTORY,

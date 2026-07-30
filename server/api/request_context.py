@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from threading import Lock
 from concurrent.futures import ThreadPoolExecutor
@@ -76,6 +76,7 @@ class RequestContext:
     identity: Identity
     effective_role: str
     academic_scope: Optional[AcademicScope]
+    tracking_flags: dict = field(default_factory=dict)
 
 
 def _sync_scope_snapshot(erp_id: str) -> None:
@@ -131,8 +132,15 @@ class AcademicScopeResolver:
     """Resolves the canonical student context once for a request."""
 
     def resolve(self, identity: Identity, effective_role: str) -> RequestContext:
+        try:
+            from pipeline.personal_data.tracking_store import get_tracking_flags
+            tracking_flags = get_tracking_flags(identity.erp_id)
+        except Exception as exc:
+            logger.warning("Failed to fetch tracking flags for %s: %s", identity.erp_id, exc)
+            tracking_flags = {}
+
         if identity.role != "student":
-            return RequestContext(identity=identity, effective_role=effective_role, academic_scope=None)
+            return RequestContext(identity=identity, effective_role=effective_role, academic_scope=None, tracking_flags=tracking_flags)
 
         try:
             import db.connection as db_conn
@@ -153,7 +161,7 @@ class AcademicScopeResolver:
                (identity.erp_id,),
             )
             if not rows:
-               return RequestContext(identity=identity, effective_role=effective_role, academic_scope=None)
+               return RequestContext(identity=identity, effective_role=effective_role, academic_scope=None, tracking_flags=tracking_flags)
 
             row = rows[0]
             courses: list[dict] = []
@@ -197,7 +205,7 @@ class AcademicScopeResolver:
             )
             if profile_stale or enrollment_stale:
                _enqueue_scope_refresh(identity.erp_id)
-            return RequestContext(identity=identity, effective_role=effective_role, academic_scope=scope)
+            return RequestContext(identity=identity, effective_role=effective_role, academic_scope=scope, tracking_flags=tracking_flags)
         except Exception as exc:
             logger.warning("Academic scope resolution failed for %s: %s", identity.erp_id, exc)
-            return RequestContext(identity=identity, effective_role=effective_role, academic_scope=None)
+            return RequestContext(identity=identity, effective_role=effective_role, academic_scope=None, tracking_flags=tracking_flags)
