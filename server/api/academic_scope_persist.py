@@ -6,11 +6,7 @@ Maps dept codes written into ``user_identity_map`` (e.g. ICT, ICTCS) onto the
 ``student_academic_profile`` so ``AcademicScopeResolver`` can resolve scope.
 
 Gaps / best-effort limits (documented intentionally):
-- ICTCS → ``programme_id=btech-ict`` with ``branch_id=ict-cs``. The corpus
-  treats ICT-CS as a specialisation of B.Tech. (ICT) — shared rules, shared
-  early-semester timetables, plus ICT-CS-only companions — not a disjoint
-  programme. Retrieval therefore keeps programme-wide ICT docs eligible and
-  prefers branch-tagged ICT-CS docs when present.
+- ICTCS → ``btech-ict`` (no separate ``btech-ict-cs`` corpus taxonomy yet).
 - MTech → ``mtech-ict`` (email/dept alone cannot distinguish EC vs ICT).
 - ``admission_year`` from the first four digits of a 9-digit ERP id when present.
 - ``curriculum_version`` / ``regulation_version`` are not available from identity.
@@ -77,47 +73,6 @@ def infer_admission_year(erp_id: str) -> Optional[int]:
     year = int(erp_id[:4])
     if 2000 <= year <= 2100:
         return year
-    return None
-
-
-def infer_dept_from_erp_id(erp_id: str) -> Optional[str]:
-    """Best-effort dept code from a 9-digit student ERP id (same rules as identity resolve)."""
-    if not erp_id or not re.match(r"^\d{9}$", erp_id):
-        return None
-    prog3 = erp_id[4:7]
-    prog2 = erp_id[4:6]
-    if prog3 == "014":
-        return "ICTCS"
-    if prog2 == "01":
-        return "ICT"
-    if prog2 == "03":
-        return "MnC"
-    if prog2 == "04":
-        return "EVD"
-    if prog2 == "11":
-        return "MTech"
-    if prog2 == "12":
-        return "MScIT"
-    if prog2 == "18":
-        return "MScDS"
-    if prog2 == "21":
-        return "PhD"
-    return None
-
-
-def _lookup_dept_from_identity_map(erp_id: str) -> Optional[str]:
-    """Read dept from user_identity_map when JWT/identity omitted it."""
-    try:
-        import db.connection as db_conn
-
-        rows = db_conn.query(
-            "SELECT dept FROM user_identity_map WHERE erp_id = %s AND is_active = TRUE LIMIT 1",
-            (erp_id,),
-        )
-        if rows and rows[0].get("dept"):
-            return str(rows[0]["dept"]).strip() or None
-    except Exception as exc:
-        logger.warning("dept lookup failed for %s: %s", erp_id, exc)
     return None
 
 
@@ -247,11 +202,8 @@ def ensure_student_academic_scope(identity: Identity) -> bool:
     erp_id = getattr(identity, "erp_id", None)
     if not erp_id:
         return False
-    dept = getattr(identity, "dept", None)
-    if not dept:
-        dept = _lookup_dept_from_identity_map(erp_id) or infer_dept_from_erp_id(erp_id)
     return upsert_student_academic_scope(
         erp_id=erp_id,
-        dept=dept,
+        dept=getattr(identity, "dept", None),
         admission_year=infer_admission_year(erp_id),
     )

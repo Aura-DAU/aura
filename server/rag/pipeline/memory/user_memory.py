@@ -5,8 +5,7 @@ backend-owned layer: every conversation contributes one *block* — keyed by its
 thread id — so future threads inherit useful questions/preferences/facts even
 when a chat was too short to ever compact. Blocks are kept newest-first; a new
 turn for a thread replaces that thread's block in place rather than appending a
-duplicate. Keying by thread id is also what makes "clear chat" mean deletion:
-`delete(identity, thread_id)` drops exactly that conversation's block.
+duplicate.
 
 Each block is a self-contained per-conversation capture, which is exactly the
 granularity Phase 2 (semantic recall over Qdrant) will embed: one point per
@@ -145,15 +144,6 @@ def _merge_memory(existing: str, block: str, thread_id: Optional[str] = None) ->
     blocks = [(t, x) for (t, x) in blocks if t != tid]
     blocks.insert(0, (tid, block))
     return _cap_storage(blocks)
-
-
-def _delete_memory(existing: str, thread_id: str) -> tuple[str, bool]:
-    """Drop one thread's block. Returns (remaining storage string, removed?)."""
-    blocks = _parse_blocks(existing)
-    kept = [(t, x) for (t, x) in blocks if t != thread_id]
-    if len(kept) == len(blocks):
-        return _normalise(existing), False
-    return _render_storage(kept), True
 
 
 def _display_from_storage(existing: str, exclude_thread: Optional[str] = None) -> str:

@@ -679,6 +679,7 @@ export function useAuraChat() {
           setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
           setActiveThreadIdState(threadId)
         }
+        baseMessages = [...priorMessages, userMsg]
         persistMessages(
           threadId,
           baseMessages,

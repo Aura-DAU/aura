@@ -667,11 +667,8 @@ class RetrievalPipeline:
                 )
             )
 
-        # Submit the planning LLM call to executor (pass history + identity so
-        # continuation and personalized "my programme" rewrites apply).
-        future_plan = self.executor.submit(
-            self.planner.plan, query, academic_scope, history, identity
-        )
+        # Submit the planning LLM call to executor
+        future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
 
         # Submit the speculative retrieval call to executor. Speculative retrieval
         # runs the semester-expanded query with an empty plan ({}) which results

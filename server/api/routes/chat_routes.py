@@ -12,14 +12,8 @@ from fastapi.responses import JSONResponse, StreamingResponse
 
 from api.auth import Identity, require_identity
 from api.request_context import AcademicScopeResolver, RequestContext
-from api.deps import (
-    chat_queue_lock,
-    CHAT_QUEUE_WAIT_TIMEOUT,
-    CHAT_RETRY_AFTER_SECONDS,
-    get_aura,
-)
+from api.deps import chat_queue_lock, CHAT_QUEUE_WAIT_TIMEOUT, get_aura
 from api.schemas import ChatRequest
-from pipeline.exceptions import ContextLengthExceeded, RAGPipelineError
 from pipeline.memory.conversation_memory import get_conversation_memory, _truncate_tokens
 from pipeline.memory.user_memory import get_user_memory_store
 from pipeline.memory.response_cache import get_response_cache
@@ -43,95 +37,18 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
-def _admission_shed_response() -> JSONResponse:
-    # Flat JSON matching the edge @aura_shed body so the frontend can parse
-    # either layer the same way. Distinguishing fields vs the edge's 429:
-    #   - HTTP 503 (edge uses 429)
-    #   - code ADMISSION_OVERLOADED (edge uses EDGE_OVERLOADED)
-    #   - shedBy backend (edge sets shedBy edge)
-    #   - X-Aura-Shed-By: backend header (edge sets edge)
-    return JSONResponse(
-        status_code=503,
-        content={
-            "detail": "AURA is at peak load right now — please retry in a few seconds.",
-            "code": "ADMISSION_OVERLOADED",
-            "shedBy": "backend",
-            "retryAfter": CHAT_RETRY_AFTER_SECONDS,
-        },
-        headers={
-            "Retry-After": str(CHAT_RETRY_AFTER_SECONDS),
-            "X-Aura-Shed-By": "backend",
-            "Cache-Control": "no-store",
-        },
-    )
-
-
-CONTEXT_LENGTH_DETAIL = (
-    "This conversation is too long for AURA's context window. "
-    "Try a shorter question or start a new chat."
-)
-
-PIPELINE_ERROR_DETAIL = (
-    "AURA could not complete that request — please try again in a few moments."
-)
-
-
-def _pipeline_error_response(exc: Exception) -> JSONResponse:
-    # AnswerGenerator already degrades a context overflow to CONTEXT_LENGTH_ANSWER
-    # (AURA-CTX-001) inside the generation stage, but the memory/budget stages
-    # that run before it — and any caller that bypasses AuraChatGraph.chat()'s
-    # catch-all — can still raise. Without this the exception reached Starlette
-    # and the browser got an opaque 500 with nothing to key off.
-    #
-    # Same flat body shape as _admission_shed_response so the frontend parses
-    # every backend rejection the same way.
-    if is_context_length_error(exc):
-        logger.error(
-            "chat_pipeline_error code=AURA-CTX-001 status=413 exc_type=%s: %s",
-            type(exc).__name__,
-            exc,
-        )
-        return JSONResponse(
-            status_code=413,
-            content={"detail": CONTEXT_LENGTH_DETAIL, "code": "AURA-CTX-001"},
-            headers={"Cache-Control": "no-store"},
-        )
-
-    logger.error(
-        "chat_pipeline_error code=RAG_PIPELINE_ERROR status=503 exc_type=%s: %s",
-        type(exc).__name__,
-        exc,
-        exc_info=exc,
-    )
-    return JSONResponse(
-        status_code=503,
-        content={
-            "detail": PIPELINE_ERROR_DETAIL,
-            "code": "RAG_PIPELINE_ERROR",
-            "retryAfter": CHAT_RETRY_AFTER_SECONDS,
-        },
-        headers={
-            "Retry-After": str(CHAT_RETRY_AFTER_SECONDS),
-            "Cache-Control": "no-store",
-        },
-    )
-
-
 async def _acquire_chat_slot() -> None:
     # Bounded backpressure: wait briefly for a concurrency slot, then shed load
     # with a retryable 503 rather than queueing unbounded under a traffic spike.
-    # Caller owns the release (see _chat_slot / the streaming finally) and must
-    # convert ChatAdmissionShed into _admission_shed_response().
+    # Caller owns the release (see _chat_slot / the streaming finally).
     try:
         await asyncio.wait_for(chat_queue_lock.acquire(), timeout=CHAT_QUEUE_WAIT_TIMEOUT)
     except asyncio.TimeoutError:
-        logger.warning(
-            "chat_admission_shed shed_by=backend status=503 "
-            "retry_after=%s wait_timeout=%s",
-            CHAT_RETRY_AFTER_SECONDS,
-            CHAT_QUEUE_WAIT_TIMEOUT,
+        raise HTTPException(
+            status_code=503,
+            detail="AURA is at peak load right now — please retry in a few seconds.",
+            headers={"Retry-After": "5"},
         )
-        raise ChatAdmissionShed from None
 
 
 @asynccontextmanager
@@ -253,22 +170,10 @@ async def chat(
             cached["quota_remaining"] = remaining
             return cached
 
-    try:
-        async with _chat_slot():
-            result = await run_in_threadpool(
-                _ask_with_memory, body, identity, history, display_profile, request_context
-            )
-    except ChatAdmissionShed:
-        return _admission_shed_response()
-    except RAGPipelineError as exc:
-        return _pipeline_error_response(exc)
-    except Exception as exc:
-        # An SDK BadRequestError reaches here unwrapped whenever the 400 is
-        # raised outside inference_router's rotation wrapper; everything else
-        # keeps its existing 500 so genuine bugs stay loud.
-        if not is_context_length_error(exc):
-            raise
-        return _pipeline_error_response(exc)
+    async with _chat_slot():
+        result = await run_in_threadpool(
+            _ask_with_memory, body, identity, history, display_profile, request_context
+        )
     if isinstance(result, dict):
         result["quota_remaining"] = remaining
         # Cache write: guest public standalone queries only (exclude error/rejection responses)
@@ -446,10 +351,9 @@ async def chat_stream(
             chat_queue_lock.release()
 
     async def event_source():
-        # Release on completion, pipeline error, or client disconnect.
-        # On cancel, release BEFORE awaiting the worker thread — otherwise
-        # disconnected browsers hold CHAT_CONCURRENCY slots for the full
-        # remaining LLM generation and starve everyone else.
+        # The concurrency slot was acquired in the endpoint (admission control),
+        # so overload already failed fast with a 503 before this 200 stream began.
+        # Release it when the stream ends: completion, error, or client disconnect.
         try:
             # to_thread copies contextvars, so latency_tracker segments recorded
             # inside the pipeline still land in this request's middleware dict.
@@ -566,21 +470,28 @@ async def chat_stream(
                 _release_slot()
                 raise
             finally:
-                # Always join the worker so the thread isn't abandoned; the
-                # admission slot may already be free if the client cancelled.
-                try:
-                    await worker
-                except Exception:
-                    logger.exception("[chat_stream] worker finished with error after stream end")
+                await worker
         finally:
-            _release_slot()
+            chat_queue_lock.release()
 
-    try:
-        return StreamingResponse(
-            event_source(),
-            media_type="text/event-stream",
-            headers=headers,
-        )
-    except Exception:
-        _release_slot()
-        raise
+    headers = {
+        "Cache-Control": "no-cache, no-transform",
+        "X-Accel-Buffering": "no",
+    }
+    # Set even though the body streams the same value as a "quota" event —
+    # some proxies/clients read remaining-quota from headers before the
+    # body is fully parsed. `remaining` is known upfront since enforce_quota
+    # already ran in _resolve_request, before any streaming starts.
+    if remaining is not None:
+        headers["X-Quota-Remaining"] = str(remaining)
+
+    # Admission control: take the concurrency slot (bounded wait → 503 on
+    # overload) BEFORE returning the 200 SSE response, so peak load is a clean,
+    # retryable rejection rather than a stream that dies mid-flight. The
+    # event_source() finally releases the slot when the stream ends.
+    await _acquire_chat_slot()
+    return StreamingResponse(
+        event_source(),
+        media_type="text/event-stream",
+        headers=headers,
+    )
