@@ -318,7 +318,7 @@ class AuraChat:
                 from access_control import resolve_effective_role
                 user_role = resolve_effective_role(identity) if identity else "public"
                 with track_segment("retrieval_time"):
-                    retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
+                    retrieval_result = self.pipeline.get_context(resolved_query, history, user_role=user_role)
                 chunks    = retrieval_result.get("chunks", [])
                 rag_context = retrieval_result.get("context", "")
                 sources   = retrieval_result.get("sources", [])
@@ -338,7 +338,7 @@ class AuraChat:
 
             with track_segment("generation_time"):
                 answer = self.generator.generate(
-                    query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
+                    query=retrieval_result.get("corrected_query", resolved_query) if query_type in ("PUBLIC", "MIXED") and rag_context else resolved_query,
                     context=combined_context,
                     plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
                     history=history,
