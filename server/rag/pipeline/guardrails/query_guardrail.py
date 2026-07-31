@@ -215,6 +215,9 @@ No explanation, no punctuation, no JSON, no additional text.
         if "UNSAFE" in result:
             return Verdict.UNSAFE
         if any(t in result for t in ("OFF_TOPIC", "OFF-TOPIC", "OFFTOPIC")):
+            # Scope Fallback Override: If LLM returns OFF_TOPIC but query contains implicit campus terms, override to SAFE
+            if IMPLICIT_DAU_PAT.search(query):
+                return Verdict.SAFE
             return Verdict.OFF_TOPIC
         return Verdict.SAFE
 
