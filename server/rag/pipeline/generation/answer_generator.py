@@ -395,6 +395,7 @@ class AnswerGenerator:
     ):
         try:
             profile_text = ""
+            role = "student"  # fail-closed default: RBAC block reads role even when profile is absent
 
             if profile:
                 role = profile.get("role", "student")
@@ -593,7 +594,7 @@ Retrieved Documents
             if not response:
                 raise RAGPipelineError("Sorry, I encountered an error while generating a response.")
 
-            answer = response.choices[0].message.content
+            answer = response.choices[0].message.content or ""
 
             answer = re.sub(
                 r"<think>.*?</think>",

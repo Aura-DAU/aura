@@ -1045,10 +1045,7 @@ class QueryPlanner:
             raise RuntimeError("Failed to generate plan due to API errors.")
 
         content = (
-            response
-            .choices[0]
-            .message
-            .content
+            (response.choices[0].message.content or "")
             .strip()
         )
 
