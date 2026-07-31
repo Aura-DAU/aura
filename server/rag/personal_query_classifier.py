@@ -68,13 +68,23 @@ Output ONLY valid JSON — no markdown fences:
 }
 """
 
-def get_safe_default():
-    return {"type": "PUBLIC", "target": None, "erp_fields": []}
+SAFE_DEFAULT = {"type": "PUBLIC", "target": None, "erp_fields": [], "intent": "RAG"}
 
+def get_safe_default():
+    return SAFE_DEFAULT.copy()
 VALID_TYPES  = {"PUBLIC", "PERSONAL", "MIXED", "AGGREGATE"}
 
-
 import re
+
+# Pure Profile Questions Fast-Path Regex (Instant <1ms classification)
+PURE_PROFILE_PAT = re.compile(
+    r"\b(?:who\s+am\s+i|"
+    r"what(?:\s+'s|\s+is)?\s+my\s+(?:name|email|roll\s+number|id|student\s+id|erp\s+id|branch|programme|program|dept|department|semester|current\s+semester|year|course|enrolled\s+course)|"
+    r"what\s+(?:course|programme|program|branch|dept|department)\s+(?:am\s+i|do\s+i|are\s+we)\s*(?:in|enrolled\s+in|study|belong\s+to)?|"
+    r"which\s+(?:course|programme|program|branch|dept|department|semester)\s+(?:am\s+i|do\s+i|belong\s+to|enrolled\s+in|study)|"
+    r"what\s+semester\s+am\s+i\s+(?:currently\s+)?in)\b",
+    re.IGNORECASE
+)
 
 PERSONAL_KEYWORDS_PAT = re.compile(
     r"\b(?:what(?:\s+'s|\s+is)?\s+my\s+(?:branch|programme|program|dept|department|roll\s+number|id|student\s+id|erp\s+id|email|name|cgpa|gpa|attendance|timetable|schedule)|"
@@ -84,6 +94,19 @@ PERSONAL_KEYWORDS_PAT = re.compile(
     r"who\s+am\s+i)\b",
     re.IGNORECASE
 )
+
+# Multi-intent keyword maps
+TIMETABLE_PAT = re.compile(r"\b(?:timetable|schedule|class(?:es)?\s+today|class(?:es)?\s+tomorrow)\b", re.IGNORECASE)
+ATTENDANCE_PAT = re.compile(r"\b(?:attendance|present|absent)\b", re.IGNORECASE)
+CALENDAR_PAT = re.compile(r"\b(?:calendar|academic\s+calendar|holiday|vacation|exam\s+dates?)\b", re.IGNORECASE)
+ACADEMIC_PAT = re.compile(r"\b(?:curriculum|syllabus|credits?|course|subject|elective|prerequisite|cs\d{3}|ict|btech|mtech)\b", re.IGNORECASE)
+
+
+def is_pure_profile_query(query: str) -> bool:
+    """Return True if query is a direct pure profile request (e.g. 'Who am I?', 'What branch am I in?')."""
+    if not query:
+        return False
+    return bool(PURE_PROFILE_PAT.search(query))
 
 
 class PersonalQueryClassifier:
@@ -97,17 +120,34 @@ class PersonalQueryClassifier:
         if not query:
             return SAFE_DEFAULT.copy()
 
-        # Deterministic Fast-Path: Immediately route direct student profile queries
+        # Pure profile questions fast-path
+        if is_pure_profile_query(query):
+            return {"type": "PERSONAL", "target": "self", "erp_fields": ["profile"], "intent": "PROFILE"}
+
+        # Deterministic Fast-Path: Immediately route direct student profile/personal queries
         if PERSONAL_KEYWORDS_PAT.search(query):
             fields = ["profile"]
             q_lower = query.lower()
-            if "timetable" in q_lower or "schedule" in q_lower or "class" in q_lower:
+            intent = "PROFILE"
+            if TIMETABLE_PAT.search(q_lower):
                 fields.append("courses")
-            if "attendance" in q_lower:
+                intent = "TIMETABLE"
+            if ATTENDANCE_PAT.search(q_lower):
                 fields.append("attendance")
+                intent = "ATTENDANCE"
             if "cgpa" in q_lower or "gpa" in q_lower or "grade" in q_lower:
                 fields.append("cgpa")
-            return {"type": "PERSONAL", "target": "self", "erp_fields": fields}
+                intent = "PROFILE"
+            return {"type": "PERSONAL", "target": "self", "erp_fields": fields, "intent": intent}
+
+        # Multi-intent pre-categorization
+        q_lower = query.lower()
+        if CALENDAR_PAT.search(q_lower):
+            intent = "CALENDAR"
+        elif ACADEMIC_PAT.search(q_lower):
+            intent = "ACADEMIC"
+        else:
+            intent = "RAG"
 
         # LLM-Based Classifier Fallback
         safe_query = f"<query>\n{query}\n</query>"
