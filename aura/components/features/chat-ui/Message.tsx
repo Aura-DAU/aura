@@ -187,7 +187,7 @@ export function Message({
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                         hoverTimerRef.current = setTimeout(() => {
                           openDocument(viewerTarget)
-                        }, 2000)
+                        }, 1000)
                       }}
                       onMouseLeave={() => {
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
