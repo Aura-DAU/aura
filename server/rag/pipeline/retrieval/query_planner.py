@@ -1067,9 +1067,15 @@ class QueryPlanner:
             os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
-    def plan(self, query, academic_scope=None, history=None, identity=None):
-        effective_query = resolve_continuation_query(query, history)
         effective_query = rewrite_personalized_academic_query(effective_query, academic_scope, identity)
+
+        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
+        try:
+            from institution_resolver import get_institution_resolver
+            resolver = get_institution_resolver()
+            effective_query = resolver.resolve(effective_query)
+        except Exception as e:
+            pass
 
         # Implicit DAU Context Injection: Ensure university context is explicit for retrieval
         if "dau" not in effective_query.lower() and "dhirubhai" not in effective_query.lower():
