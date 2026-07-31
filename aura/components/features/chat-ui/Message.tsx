@@ -182,6 +182,7 @@ export function Message({
                     <button
                       type="button"
                       onMouseEnter={() => {
+                        if (typeof window !== 'undefined' && window.innerWidth < 768) return;
                         prefetchDocument(viewerTarget)
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                         hoverTimerRef.current = setTimeout(() => {
@@ -191,7 +192,13 @@ export function Message({
                       onMouseLeave={() => {
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                       }}
-                      onClick={() => openDocument(viewerTarget)}
+                      onClick={() => {
+                        if (isUrl) {
+                          window.open(c.file, "_blank", "noopener,noreferrer")
+                        } else {
+                          openDocument(viewerTarget)
+                        }
+                      }}
                       className={pillClasses}
                       aria-label={`View source: ${c.title ?? c.file}`}
                     >

@@ -312,8 +312,8 @@ async def chat_stream(
                                     "file": file,
                                     "title": source.get("title"),
                                     "path": source.get("path"),
-                                    "start_line": source.get("start_line"),
-                                    "end_line": source.get("end_line"),
+                                    "startLine": source.get("start_line"),
+                                    "endLine": source.get("end_line"),
                                     "visibility": source.get("visibility"),
                                     "authorization": source.get("authorization"),
                                 }
