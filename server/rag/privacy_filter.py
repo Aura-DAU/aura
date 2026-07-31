@@ -59,6 +59,13 @@ AUTHORIZED_ROLES: Set[str] = {
     "registrar"
 }
 
+# Keywords for public institutional helplines and emergency services
+PUBLIC_HELPLINE_TERMS: Set[str] = {
+    "helpline", "emergency", "security", "reception", "desk", "hospital",
+    "ambulance", "toll free", "1800", "landline", "office number",
+    "medical emergency", "police", "fire", "anti-ragging", "counseling"
+}
+
 # Regex patterns for scanning PII leaks in raw text
 STUDENT_ID_PAT = re.compile(r"\b20\d{7}\b", re.IGNORECASE) # e.g. 202401001
 MOBILE_PAT = re.compile(r"\b(?:\+91[\s\-]?)?[6-9]\d{9}\b") # e.g. +91 9876543210 or 9876543210
@@ -69,6 +76,8 @@ class ResponsePrivacyFilter:
     """
     Response Privacy Filter & Attribute RBAC Engine.
     Enforces the Principle of Least Disclosure across retrieved context and LLM outputs.
+    Protects private living entity PII (Student IDs, personal mobile numbers) while preserving
+    public institutional helplines, emergency contacts, and desk landlines.
     """
 
     def __init__(self, user_role: str = "student"):
@@ -99,18 +108,21 @@ class ResponsePrivacyFilter:
 
     def check_explicit_privacy_request(self, query: str) -> Tuple[bool, Optional[str]]:
         """
-        Inspect if the user is explicitly requesting restricted sensitive fields
+        Inspect if the user is explicitly requesting restricted sensitive fields of a living individual
         (e.g., 'What is the mobile number of the convenor?', 'What is the student ID?').
         
-        Returns:
-            (is_blocked, refusal_message)
+        Public helplines, security desks, and emergency contacts are explicitly EXEMPT and ALLOWED.
         """
         if not query:
             return False, None
 
         q_lower = query.lower()
 
-        # Check if query requests mobile / phone number
+        # Exempt public institutional helplines & emergency contacts
+        if any(term in q_lower for term in PUBLIC_HELPLINE_TERMS):
+            return False, None
+
+        # Check if query requests private mobile / phone number of an individual
         requests_mobile = any(term in q_lower for term in ("mobile", "phone", "contact number", "cell number", "whatsapp number"))
         # Check if query requests student ID / roll number
         requests_student_id = any(term in q_lower for term in ("student id", "student number", "roll number", "erp id", "uid"))
@@ -118,7 +130,7 @@ class ResponsePrivacyFilter:
         if requests_mobile or requests_student_id:
             if not self.is_authorized:
                 refusal = (
-                    "Mobile numbers and Student IDs are restricted private records under the university privacy policy "
+                    "Personal mobile numbers and Student IDs are restricted private records under the university privacy policy "
                     "and cannot be disclosed."
                 )
                 return True, refusal
@@ -127,8 +139,9 @@ class ResponsePrivacyFilter:
 
     def sanitize_retrieved_context(self, context_text: str) -> str:
         """
-        Filter raw text chunks retrieved from vector search to remove embedded PII
-        (student IDs, phone numbers, personal emails) unless the user is authorized.
+        Filter raw text chunks retrieved from vector search to remove embedded personal PII
+        (student IDs, personal mobile numbers) unless the user is authorized.
+        Preserves public helplines and emergency contacts.
         """
         if not context_text or self.is_authorized:
             return context_text
@@ -137,18 +150,37 @@ class ResponsePrivacyFilter:
         
         # Scrub 9-digit Student IDs when listed as private attributes
         sanitized = re.sub(r"(?i)(?:student\s*id|roll\s*no|roll\s*number|erp\s*id)\s*[:=]?\s*20\d{7}", "[REDACTED_STUDENT_ID]", sanitized)
-        # Scrub Mobile Numbers
-        sanitized = re.sub(r"(?i)(?:mobile|phone|contact)\s*(?:no|number)?\s*[:=]?\s*(?:\+91[\s\-]?)?[6-9]\d{9}", "[REDACTED_MOBILE_NUMBER]", sanitized)
+        
+        # Scrub personal mobile numbers except lines labeled as helpline/emergency/security/desk
+        lines = sanitized.splitlines()
+        filtered_lines = []
+        for line in lines:
+            if any(term in line.lower() for term in PUBLIC_HELPLINE_TERMS) or "1800" in line or "079-" in line:
+                filtered_lines.append(line)
+            else:
+                line_scrubbed = re.sub(r"(?i)(?:mobile|phone|contact)\s*(?:no|number)?\s*[:=]?\s*(?:\+91[\s\-]?)?[6-9]\d{9}", "[REDACTED_MOBILE_NUMBER]", line)
+                filtered_lines.append(line_scrubbed)
 
-        return sanitized
+        return "\n".join(filtered_lines)
 
     def filter_response_text(self, response_text: str, query: str = "") -> str:
         """
         Post-generation sanitizer: Scans final LLM response text to guarantee no leak
-        of restricted attributes (Student ID, Mobile Number, UUIDs). Note: Email addresses are allowed for contact.
+        of living entity PII (Student ID, Personal Mobile Number, UUIDs).
+        Preserves public helplines and emergency desk numbers.
         """
         if not response_text or self.is_authorized:
             return response_text
+
+        # If query or response is explicitly about public helplines, exempt text from phone redaction
+        q_lower = query.lower()
+        resp_lower = response_text.lower()
+        if any(term in q_lower or term in resp_lower for term in PUBLIC_HELPLINE_TERMS):
+            # Only redact 9-digit Student IDs & UUIDs
+            sanitized = re.sub(r"(?i)(?:student\s*id|roll\s*number|roll\s*no|student\s*#)\s*[:=]?\s*20\d{7}", "Student ID: [REDACTED]", response_text)
+            sanitized = STUDENT_ID_PAT.sub("[REDACTED_ID]", sanitized)
+            sanitized = UUID_PAT.sub("[REDACTED_UUID]", sanitized)
+            return sanitized
 
         sanitized = response_text
 
@@ -156,7 +188,7 @@ class ResponsePrivacyFilter:
         sanitized = re.sub(r"(?i)(?:student\s*id|roll\s*number|roll\s*no|student\s*#)\s*[:=]?\s*20\d{7}", "Student ID: [REDACTED]", sanitized)
         sanitized = STUDENT_ID_PAT.sub("[REDACTED_ID]", sanitized)
 
-        # 2. Redact Phone / Mobile numbers if leaked in text
+        # 2. Redact personal Phone / Mobile numbers if leaked in text
         sanitized = re.sub(r"(?i)(?:mobile|phone|contact)\s*(?:number|no)?\s*[:=]?\s*(?:\+91[\s\-]?)?[6-9]\d{9}", "Mobile: [REDACTED]", sanitized)
         sanitized = MOBILE_PAT.sub("[REDACTED_PHONE]", sanitized)
 

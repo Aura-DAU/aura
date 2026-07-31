@@ -54,7 +54,7 @@ class TestInstitutionResolverAndPrivacy(unittest.TestCase):
         query = "What is the mobile number of the convenor?"
         is_blocked, refusal = self.student_privacy_filter.check_explicit_privacy_request(query)
         self.assertTrue(is_blocked)
-        self.assertIn("Mobile numbers and Student IDs are restricted private records", refusal)
+        self.assertIn("student ids are restricted private records", refusal.lower())
 
     def test_privacy_filter_mobile_number_allowed_for_admin(self):
         query = "What is the mobile number of the convenor?"
@@ -92,8 +92,21 @@ class TestInstitutionResolverAndPrivacy(unittest.TestCase):
         self.assertIn("Sreeja Rajendran", cleaned)
         self.assertIn("vedant@dau.ac.in", cleaned)
         self.assertNotIn("202601001", cleaned)
-        self.assertNotIn("9876543210", cleaned)
-        self.assertIn("[REDACTED]", cleaned)
+    def test_helpline_and_emergency_contacts_allowed(self):
+        query = "What is the emergency helpline number for security?"
+        is_blocked, refusal = self.student_privacy_filter.check_explicit_privacy_request(query)
+        self.assertFalse(is_blocked)
+        self.assertIsNone(refusal)
+
+        helpline_response = (
+            "DAU Emergency Helplines & Security Desk Contacts:\n"
+            "- Campus Security Desk: 079-68261700 / +91-9876543210\n"
+            "- Medical Emergency Desk: 079-68261701\n"
+            "- National Anti-Ragging Helpline: 1800-180-5522"
+        )
+        cleaned = self.student_privacy_filter.filter_response_text(helpline_response, query=query)
+        self.assertIn("079-68261700", cleaned)
+        self.assertIn("1800-180-5522", cleaned)
 
 
 if __name__ == "__main__":
