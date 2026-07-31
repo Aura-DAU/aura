@@ -509,6 +509,94 @@ def get_faculty_timetable(identity) -> dict:
     }
 
 
+# -- Any-cohort timetable lookup (read-only, not scoped to the requester) -----
+
+
+def get_timetable_for_cohort(
+    year: Optional[int] = None,
+    sem: Optional[int] = None,
+    sec: Optional[str] = None,
+    branch: Optional[str] = None,
+    program: Optional[str] = None,
+) -> dict:
+    """Read-only lookup of ANY cohort's master timetable by semester/section
+    (+ optional branch/program), for chat queries like "give me the timetable
+    of BTech ICT 3rd sem sec A" that are NOT about the requester's own
+    schedule. Unlike get_effective_timetable, this never applies a specific
+    student's personal overrides or elective picks -- it's the plain master
+    schedule for whichever cohort was asked about.
+
+    `sec` defaults to 'A' when omitted, matching the rest of the timetable
+    feature's default section. `branch`/`program` are a soft filter only:
+    timetable_master.branch/program can be NULL on rows imported before
+    those columns existed (see migration 007), so a non-matching/empty
+    result after filtering falls back to the unfiltered sem+sec rows rather
+    than reporting "not found" over a cosmetic label mismatch.
+    """
+    if sem is None and year is not None:
+        # Only the academic year was given -- approximate with that year's
+        # first (odd) semester, same mapping the dashboard setup wizard uses.
+        sem = year * 2 - 1
+
+    if sem is None:
+        raise TimetableError(
+            "Please tell me the semester (or academic year) you'd like the timetable for."
+        )
+
+    sec_norm = (sec or "A").strip().upper()
+
+    where = ["sem = %s", "sec = %s"]
+    params: list = [int(sem), sec_norm]
+    if year is not None:
+        where.append("year = %s")
+        params.append(int(year))
+
+    rows = db_conn.query(
+        f"""SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                   course_code, course_name, session_type, room, faculty_name,
+                   course_type, branch, program
+            FROM timetable_master
+            WHERE {' AND '.join(where)}
+            ORDER BY day_of_week, start_time""",
+        tuple(params),
+    )
+
+    needle = (branch or program or "").strip().lower()
+    if needle and rows:
+        narrowed = [
+            r for r in rows
+            if needle in (r.get("branch") or "").lower() or needle in (r.get("program") or "").lower()
+        ]
+        if narrowed:
+            rows = narrowed
+
+    if not rows:
+        where_desc = f"Semester {sem}, Section '{sec_norm}'"
+        if year is not None:
+            where_desc = f"Year {year}, " + where_desc
+        if branch:
+            where_desc += f", Branch '{branch}'"
+        raise TimetableError(
+            f"I couldn't find a timetable for {where_desc}. "
+            "Double check the year/semester, branch, and section."
+        )
+
+    slots = [_row_to_slot(r) for r in rows]
+    slots.sort(key=lambda s: (s["day_of_week"], s["start_time"]))
+    resolved_year = rows[0].get("year", year)
+    resolved_branch = next((r.get("branch") for r in rows if r.get("branch")), branch)
+
+    return {
+        "cohort": {
+            "year": resolved_year,
+            "sem": int(sem),
+            "sec": sec_norm,
+            "branch": resolved_branch,
+        },
+        "timetable": slots,
+    }
+
+
 # -- Elective selection -------------------------------------------------------
 
 

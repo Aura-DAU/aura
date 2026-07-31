@@ -19,6 +19,14 @@ export interface TimetableSlot {
 interface TimetableResponse {
   cohort: { year: number; sem: number; sec: string }
   timetable: TimetableSlot[]
+  // True when the backend couldn't find this student's own configured
+  // section yet and fell back to the shared default timetable for their
+  // inferred year (section "A"). See service.get_effective_timetable.
+  is_common?: boolean
+  // True when is_common, OR the student hasn't picked their electives yet.
+  // Used to show the "personalize in chat" nudge without blocking the view.
+  needs_configuration?: boolean
+  electives_configured?: boolean
 }
 
 export function useTimetable() {

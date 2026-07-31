@@ -37,6 +37,12 @@ COMMUNITY: public campus KB tool lookups — NOT private ERP records. Includes:
   search people by department/role.
 - Academic calendar / deadlines, course policy for a named course, program
   academic requirements, admissions info, published public timetable docs.
+- The class timetable/schedule for a NAMED cohort that is not phrased as
+  the requester's own — a specific year/semester + branch + section, e.g.
+  "give me the timetable of BTech ICT 3rd sem section A" or "schedule for
+  2nd year MnC section B". Only "my timetable" / "my schedule" (no cohort
+  named) is PERSONAL_DATA — a request that names its own year/sem/branch/
+  section is COMMUNITY even if the requester happens to be in that cohort.
 - University / administration policies (attendance rules, fees policy,
   anti-ragging, hostel allotment rules — the RULE, not the user's own dues).
 - Research areas/labs/policies, placements/careers info, campus events and
@@ -44,7 +50,8 @@ COMMUNITY: public campus KB tool lookups — NOT private ERP records. Includes:
   Continuing Education (CEP).
 Examples: "what clubs for music", "who is the convenor of Programming Club",
 "Who is Aditya Tatu?", "Aditya Tatu", "when is mid-sem", "BTech ICT admissions",
-"placement statistics", "hostel facilities", "anti-ragging policy".
+"placement statistics", "hostel facilities", "anti-ragging policy",
+"give me timetable of BTech ICT 3rd sem sec A", "schedule for 2nd year MnC section B".
 
 GENERAL: greetings, thanks, meta questions about AURA itself, short follow-ups
 with no topic of their own, and queries too vague to map to a campus tool

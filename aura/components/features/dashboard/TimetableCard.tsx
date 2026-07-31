@@ -1,13 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import { CalendarDays, Loader2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { CalendarDays, Loader2, Sparkles, Settings2 } from "lucide-react"
 import { useTimetable, TimetableSlot } from "@/hooks/use-timetable"
-import { useCohortProfile } from "@/hooks/use-cohort-profile"
 import { TimetableSetupCard } from "@/components/features/dashboard/TimetableSetupCard"
 
 const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const
 const DAY_SHORT_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const
+
+const SETUP_PROMPT =
+  "I'd like to set up my personal timetable — please ask me for my section and electives."
 
 function todayDayOfWeek(): number {
   // JS: 0=Sun … 6=Sat → convert to 1=Mon … 7=Sun used by timetable slots
@@ -36,24 +39,25 @@ function ClassCard({ slot }: { slot: TimetableSlot }) {
 }
 
 /** Displays the live AURA timetable API in a weekly grid (desktop) or day-pills (mobile).
- *  Shows a setup wizard on first visit when no cohort is configured. */
+ *
+ *  On first login, before the student has told AURA their section/electives, the backend
+ *  already returns a sensible default (year/branch inferred from their email, section "A")
+ *  — see service.get_effective_timetable's `is_common` fallback. This card shows that
+ *  default immediately rather than gating the whole view behind a setup wizard; a small
+ *  banner nudges the student to personalize it in chat instead. */
 export function TimetableCard() {
   const { data, loading, error, refetch } = useTimetable()
-  const { profile, loading: profileLoading } = useCohortProfile()
-  
+  const router = useRouter()
+
   const todayIndex = todayDayOfWeek() - 1 // 0=Mon, 6=Sun
   const [selectedDay, setSelectedDay] = useState(todayIndex)
+  const [showManualSetup, setShowManualSetup] = useState(false)
 
-  // Show setup card when profile is not yet configured or timetable returned a cohort-not-found error.
-  const notConfigured =
-    (!profileLoading && profile && !profile.is_configured) ||
-    (error !== null && (
-      error.toLowerCase().includes("not set up") ||
-      error.toLowerCase().includes("cohort") ||
-      error.toLowerCase().includes("section")
-    ))
+  const handlePersonalizeInChat = () => {
+    router.push(`/?prompt=${encodeURIComponent(SETUP_PROMPT)}`)
+  }
 
-  if (profileLoading && !data) {
+  if (loading && !data) {
     return (
       <div className="rounded-2xl border border-theme-gray-light bg-theme-gray p-5">
         <div className="flex items-center gap-2 text-xs text-neutral-500">
@@ -63,11 +67,19 @@ export function TimetableCard() {
     )
   }
 
-  if (notConfigured) {
-    return <TimetableSetupCard onComplete={() => void refetch()} />
+  if (showManualSetup) {
+    return (
+      <TimetableSetupCard
+        onComplete={() => {
+          setShowManualSetup(false)
+          void refetch()
+        }}
+      />
+    )
   }
 
   const allSlots = data?.timetable ?? []
+  const needsConfiguration = Boolean(data?.needs_configuration || data?.is_common)
 
   // Helper to get sorted slots for a specific day
   const getSlotsForDay = (dayIndex: number) => {
@@ -81,12 +93,37 @@ export function TimetableCard() {
 
   return (
     <div className="rounded-2xl border border-theme-gray-light bg-theme-gray p-5">
-      <div className="mb-4 flex items-center gap-2">
-        <CalendarDays className="size-4 shrink-0 text-theme-yellow" />
-        <h2 className="text-sm font-semibold text-neutral-200">
-          My Timetable
-        </h2>
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <CalendarDays className="size-4 shrink-0 text-theme-yellow" />
+          <h2 className="text-sm font-semibold text-neutral-200">
+            My Timetable
+          </h2>
+        </div>
+        <button
+          type="button"
+          onClick={() => setShowManualSetup(true)}
+          className="flex shrink-0 items-center gap-1 text-[10px] font-medium text-neutral-500 hover:text-neutral-300"
+        >
+          <Settings2 className="size-3" /> Customize
+        </button>
       </div>
+
+      {needsConfiguration && !loading && !error && (
+        <button
+          type="button"
+          onClick={handlePersonalizeInChat}
+          className="mb-4 flex w-full items-start gap-2 rounded-xl border border-theme-yellow/30 bg-theme-yellow/5 px-3 py-2.5 text-left transition-colors hover:bg-theme-yellow/10"
+        >
+          <Sparkles className="mt-0.5 size-3.5 shrink-0 text-theme-yellow" />
+          <span className="text-[11px] leading-relaxed text-neutral-300">
+            {data?.is_common
+              ? "This is the default timetable for your year (Section A). "
+              : "Your core schedule is set — "}
+            Tell AURA your section and electives in chat to personalize it.
+          </span>
+        </button>
+      )}
 
       {loading ? (
         <div className="flex items-center gap-2 text-xs text-neutral-500">
@@ -109,11 +146,10 @@ export function TimetableCard() {
                   key={day}
                   type="button"
                   onClick={() => setSelectedDay(idx)}
-                  className={`shrink-0 snap-start rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
-                    selectedDay === idx
-                      ? "bg-theme-yellow text-theme-black"
-                      : "bg-theme-gray-light text-neutral-400 hover:bg-theme-gray-lighter hover:text-neutral-200"
-                  }`}
+                  className={`shrink-0 snap-start rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${selectedDay === idx
+                    ? "bg-theme-yellow text-theme-black"
+                    : "bg-theme-gray-light text-neutral-400 hover:bg-theme-gray-lighter hover:text-neutral-200"
+                    }`}
                 >
                   {day}
                 </button>
