@@ -6,16 +6,19 @@ import { CalendarDays, Loader2, Sparkles, Settings2 } from "lucide-react"
 import { useTimetable, TimetableSlot } from "@/hooks/use-timetable"
 import { TimetableSetupCard } from "@/components/features/dashboard/TimetableSetupCard"
 
-const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const
-const DAY_SHORT_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const
+// Classes only run Monday–Friday, so that's all we show.
+const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const
+const DAY_SHORT_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri"] as const
 
 const SETUP_PROMPT =
   "I'd like to set up my personal timetable — please ask me for my section and electives."
 
 function todayDayOfWeek(): number {
-  // JS: 0=Sun … 6=Sat → convert to 1=Mon … 7=Sun used by timetable slots
+  // JS: 0=Sun … 6=Sat → convert to 0=Mon … 4=Fri used by DAY_NAMES/DAY_SHORT_NAMES.
+  // On a Saturday or Sunday there's no matching column, so default to Monday.
   const jsDay = new Date().getDay()
-  return jsDay === 0 ? 7 : jsDay
+  if (jsDay === 0 || jsDay === 6) return 0
+  return jsDay - 1
 }
 
 function ClassCard({ slot }: { slot: TimetableSlot }) {
@@ -49,7 +52,7 @@ export function TimetableCard() {
   const { data, loading, error, refetch } = useTimetable()
   const router = useRouter()
 
-  const todayIndex = todayDayOfWeek() - 1 // 0=Mon, 6=Sun
+  const todayIndex = todayDayOfWeek() // 0=Mon … 4=Fri (weekends default to Monday)
   const [selectedDay, setSelectedDay] = useState(todayIndex)
   const [showManualSetup, setShowManualSetup] = useState(false)
 
@@ -167,9 +170,8 @@ export function TimetableCard() {
           </div>
 
           {/* DESKTOP VIEW: Weekly Grid */}
-          <div className="hidden md:grid grid-cols-6 xl:grid-cols-7 gap-3">
-            {/* Show Mon-Sat always, include Sun only on extra large screens or if needed */}
-            {DAY_NAMES.slice(0, 6).map((day, idx) => {
+          <div className="hidden md:grid grid-cols-5 gap-3">
+            {DAY_NAMES.map((day, idx) => {
               const daySlots = getSlotsForDay(idx)
               const isToday = todayIndex === idx
               return (

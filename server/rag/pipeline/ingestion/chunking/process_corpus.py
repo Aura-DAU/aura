@@ -5,6 +5,7 @@ from pathlib import Path
 from parser import extract_frontmatter
 from section_extracter import extract_sections
 from chunker import split_section
+from chunk_id_generator import generate_deterministic_chunk_id
 from metadata_extractors import (
     extract_academic_applicability,
     extract_event_metadata,
@@ -483,8 +484,14 @@ def process_markdown_file(file_path):
                 section_start=section["start_line"],
                 section_end=section["end_line"]
             )
+            section_header_key = section.get("h1") or section.get("h2") or ""
+            chunk_id = generate_deterministic_chunk_id(
+                relative_path=relative_path,
+                chunk_text=chunk_text,
+                section_key=section_header_key
+            )
             chunk_record = {
-                "chunk_id": str(uuid.uuid4()),
+                "chunk_id": chunk_id,
                 "text": chunk_text,
 
                 "title": metadata.get("title"),
@@ -550,8 +557,14 @@ def process_markdown_file(file_path):
             section_start=frontmatter_offset + 1,
             section_end=len(file_lines)
         )
+        custom_header_key = custom.get("h1") or custom.get("h2") or ""
+        custom_chunk_id = generate_deterministic_chunk_id(
+            relative_path=relative_path,
+            chunk_text=custom["text"],
+            section_key=custom_header_key
+        )
         chunk_record = {
-            "chunk_id": str(uuid.uuid4()),
+            "chunk_id": custom_chunk_id,
             "text": custom["text"],
 
             "title": metadata.get("title"),

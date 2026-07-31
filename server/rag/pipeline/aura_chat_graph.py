@@ -32,6 +32,7 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    log_soft_failure,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -144,6 +145,7 @@ class AuraChatGraph:
         graph.add_node("safety_guardrail", self._n_safety_guardrail)
         graph.add_node("wellness_check", self._n_wellness_check)
         graph.add_node("greeting_check", self._n_greeting_check)
+        graph.add_node("profile_fast_path", self._n_profile_fast_path)
         graph.add_node("community_tools", self._n_community_tools)
         graph.add_node("classify", self._n_classify)
         graph.add_node("guest_gate", self._n_guest_gate)
@@ -165,7 +167,8 @@ class AuraChatGraph:
 
         graph.add_conditional_edges("safety_guardrail", route_or("wellness_check"))
         graph.add_conditional_edges("wellness_check", route_or("greeting_check"))
-        graph.add_conditional_edges("greeting_check", route_or("community_tools"))
+        graph.add_conditional_edges("greeting_check", route_or("profile_fast_path"))
+        graph.add_conditional_edges("profile_fast_path", route_or("community_tools"))
         graph.add_conditional_edges("community_tools", route_or("classify"))
         graph.add_conditional_edges("classify", route_or("guest_gate"))
         graph.add_conditional_edges("guest_gate", route_or("strict_guardrail"))
@@ -240,6 +243,65 @@ class AuraChatGraph:
         state["result"] = {"answer": ans, "sources": [], "is_personal_data": False}
         return state
 
+    def _n_profile_fast_path(self, state: AuraState) -> AuraState:
+        """Answer pure identity questions without RAG/ERP (mirrors AuraChat)."""
+        from personal_query_classifier import is_pure_profile_query
+
+        query = state["query"]
+        identity = state.get("identity")
+        if not identity or not is_pure_profile_query(query):
+            return state
+        if getattr(identity, "role", None) in (None, "guest"):
+            return state
+
+        name = getattr(identity, "full_name", None) or "Student"
+        roll = getattr(identity, "roll_number", None) or getattr(identity, "erp_id", "N/A")
+        scope = state.get("academic_scope")
+        prog = (
+            (getattr(scope, "programme_id", None) if scope else None)
+            or getattr(identity, "program", None)
+            or getattr(identity, "programme", None)
+            or "your programme"
+        )
+        branch = (
+            getattr(identity, "dept", None)
+            or getattr(identity, "branch", None)
+            or (getattr(scope, "department_id", None) if scope else None)
+            or "your department"
+        )
+        sem = (
+            getattr(identity, "current_sem", None)
+            or (getattr(scope, "current_semester", None) if scope else None)
+        )
+        email = getattr(identity, "email", None) or (
+            f"{str(roll).lower()}@dau.ac.in" if roll and roll != "N/A" else None
+        )
+
+        q_lower = query.lower()
+        if "name" in q_lower or "who am i" in q_lower:
+            ans = f"You are **{name}** (Roll Number: `{roll}`)."
+        elif "roll" in q_lower or ("id" in q_lower and "student" in q_lower):
+            ans = f"Your roll number is `{roll}`."
+        elif "email" in q_lower:
+            ans = f"Your official university email is `{email}`." if email else (
+                f"Your roll number is `{roll}`; use `{str(roll).lower()}@dau.ac.in` if that is your institutional mailbox."
+            )
+        elif "branch" in q_lower or "dept" in q_lower:
+            ans = f"You are in the **{branch}** department."
+        elif "semester" in q_lower:
+            if sem is not None:
+                ans = f"You are currently in **Semester {sem}** of the {prog} program."
+            else:
+                ans = f"You are enrolled in the **{prog}** program ({branch})."
+        else:
+            sem_bit = f"**Semester {sem}** of " if sem is not None else ""
+            ans = (
+                f"You are **{name}** (Roll Number: `{roll}`), currently enrolled in "
+                f"{sem_bit}the **{prog}** program in the **{branch}** department."
+            )
+        state["result"] = {"answer": ans, "sources": [], "is_personal_data": True}
+        return state
+
     def _n_community_tools(self, state: AuraState) -> AuraState:
         # Clubs / SBG / faculty ToR / domain KB skills → EcampusOrchestrator
         # with public KB tools only. Guests and non-COMMUNITY queries fall
@@ -274,16 +336,35 @@ class AuraChatGraph:
             "role": tool_role,
             "dept": getattr(identity, "dept", None),
         }
-        with track_segment("community_orchestrator_time"):
-            result = self.ecampus_orchestrator.run(
-                query=state["query"],
-                identity=identity_payload,
-                history=state.get("history") or [],
-                request_context=state.get("request_context"),
-                tool_scope="public_kb",
+        try:
+            with track_segment("community_orchestrator_time"):
+                result = self.ecampus_orchestrator.run(
+                    query=state["query"],
+                    identity=identity_payload,
+                    history=state.get("history") or [],
+                    request_context=state.get("request_context"),
+                    tool_scope="public_kb",
+                )
+        except Exception as exc:
+            # Orchestrator/LLM failure must not kill the request — fall through
+            # to classify → public RAG, which has its own error handling. This
+            # is not itself a soft error, but it silently degrades a COMMUNITY
+            # query to generic RAG, so it has to be attributable too.
+            log_soft_failure(
+                "AURA-GRAPH-003",
+                "community_orchestrator",
+                exc=exc,
+                degraded_to="public_rag",
             )
+            return state
+
+        answer = (result.get("answer") or "").strip()
+        if not answer:
+            # Empty tool answer → let public RAG try instead of blank SSE.
+            return state
+
         state["result"] = {
-            "answer": result.get("answer") or "",
+            "answer": answer,
             "sources": result.get("sources") or [],
             "is_personal_data": False,
         }
@@ -421,6 +502,7 @@ class AuraChatGraph:
                 state["history"],
                 user_role=user_role,
                 academic_scope=state.get("academic_scope"),
+                identity=state.get("identity"),
             )
         state["retrieval_result"] = retrieval_result
         state["chunks"] = retrieval_result.get("chunks", [])
@@ -459,6 +541,11 @@ class AuraChatGraph:
         has_rag = query_type in ("PUBLIC", "MIXED") and bool(rag_context)
 
         with track_segment("generation_time"):
+            # on_delta / summary are stored on state by chat() and must be
+            # forwarded — without them /chat/stream silently buffers, and the
+            # rolling conversation digest never reaches the generator (so the
+            # token budget under-counts what the prompt would include once
+            # memory is wired).
             answer = self.generator.generate(
                 query=retrieval_result.get("corrected_query", state["query"]) if has_rag else state["query"],
                 context=combined_context,
@@ -466,6 +553,8 @@ class AuraChatGraph:
                 history=state.get("history") or [],
                 profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                on_delta=state.get("on_delta"),
+                summary=(state.get("summary") or None),
                 tracking_flags=request_context.tracking_flags if request_context else None,
             )
 
@@ -574,15 +663,25 @@ class AuraChatGraph:
             if result is None:
                 # Should be unreachable — every path sets "result" before
                 # END — but fail safe rather than return None to the API.
+                log_soft_failure(
+                    "AURA-GRAPH-001",
+                    "graph.invoke",
+                    detail="graph reached END without setting result",
+                    visited=",".join(sorted(k for k in final_state if final_state.get(k) is not None)),
+                )
                 return {"answer": "Sorry, I encountered an error while generating a response. Please try again.", "sources": [], "is_personal_data": False}
             return result
 
         except Exception as e:
-            import traceback
-            traceback.print_exc()
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+            log_soft_failure(
+                "AURA-GRAPH-002",
+                "graph.invoke",
+                exc=e,
+                user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
+            )
             return {"answer": msg, "sources": [], "is_personal_data": False}

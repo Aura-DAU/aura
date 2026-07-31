@@ -88,9 +88,15 @@ class AcademicScope:
             return False
         start = metadata.get("admission_year_from")
         end = metadata.get("admission_year_to")
-        if not isinstance(start, int) or not isinstance(end, int):
+        # Coerce string years from older/partially-migrated chunk metadata.
+        try:
+            start_i = int(start) if start is not None else None
+            end_i = int(end) if end is not None else None
+        except (TypeError, ValueError):
             return False
-        if not start <= self.admission_year <= end:
+        if start_i is None or end_i is None:
+            return False
+        if not start_i <= self.admission_year <= end_i:
             return False
         return True
 

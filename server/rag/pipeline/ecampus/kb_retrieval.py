@@ -75,6 +75,9 @@ def run_kb_query(
     sources = result.get("sources", [])
 
     if not context.strip():
+        if result.get("abstention_reason") == "academic_scope_unavailable":
+            from pipeline.aura_chat import ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE
+            return {"response": ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE, "sources": []}
         return {
             "response": empty_response or (
                 "I couldn't find that in the knowledge base. Try a more specific "

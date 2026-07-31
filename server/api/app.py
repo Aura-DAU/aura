@@ -25,6 +25,7 @@ from api.routes.chat_routes import router as chat_router
 from api.routes.ecampus_routes import router as ecampus_router
 from api.routes.health_routes import router as health_router
 from api.routes.identity_routes import router as identity_router
+from api.routes.memory_routes import router as memory_router
 from api.routes.speech_routes import router as speech_router
 from api.routes.timetable_routes import router as timetable_router, push_router, profile_router
 
@@ -110,6 +111,7 @@ def create_app() -> FastAPI:
     application.include_router(push_router)
     application.include_router(profile_router)
     application.include_router(chat_router)
+    application.include_router(memory_router)
     application.include_router(speech_router)
     application.include_router(ecampus_router)
     application.include_router(health_router)

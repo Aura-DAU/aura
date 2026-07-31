@@ -996,19 +996,38 @@ def rewrite_personalized_academic_query(query: str, academic_scope=None, identit
         if academic_scope and getattr(academic_scope, "programme_id", None):
             program_name = academic_scope.programme_id
         elif identity:
-            program_name = getattr(identity, "program", None) or getattr(identity, "programme", None) or getattr(identity, "branch", None)
-            
+            program_name = (
+                getattr(identity, "program", None)
+                or getattr(identity, "programme", None)
+                or getattr(identity, "dept", None)
+                or getattr(identity, "branch", None)
+            )
+
+        # Never invent a default programme — that would silently answer MnC/EVD
+        # students with ICT curriculum and also bypass academic_scope abstention.
         if not program_name:
-            program_name = "B.Tech. (ICT)"
-            
-        # Clean program name (e.g. 'B.Tech. (ICT)' -> 'ICT')
-        prog_clean = program_name.replace("B.Tech.", "").replace("M.Tech.", "").replace("(", "").replace(")", "").strip() or program_name
-        
-        # Rewrite query to include explicit program name and university
+            return query
+
+        # Clean program name (e.g. 'B.Tech. (ICT)' -> 'ICT', 'btech-ict' -> 'btech ict')
+        prog_clean = (
+            program_name.replace("B.Tech.", "")
+            .replace("M.Tech.", "")
+            .replace("(", "")
+            .replace(")", "")
+            .replace("-", " ")
+            .strip()
+            or program_name
+        )
+
         rewritten = query
         for trigger in personal_prog_triggers:
             if trigger in q_lower:
-                rewritten = re.sub(re.escape(trigger), f"the {prog_clean} program", rewritten, flags=re.IGNORECASE)
+                rewritten = re.sub(
+                    re.escape(trigger),
+                    f"the {prog_clean} program",
+                    rewritten,
+                    flags=re.IGNORECASE,
+                )
                 break
         if "dau" not in rewritten.lower() and "dhirubhai ambani" not in rewritten.lower():
             rewritten += " at Dhirubhai Ambani University (DAU)"
@@ -1055,7 +1074,6 @@ class QueryPlanner:
         # Implicit DAU Context Injection: Ensure university context is explicit for retrieval
         if "dau" not in effective_query.lower() and "dhirubhai" not in effective_query.lower():
             effective_query += " (DAU Dhirubhai Ambani University context)"
-
         # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
         try:
             from institution_resolver import get_institution_resolver
@@ -1103,10 +1121,7 @@ class QueryPlanner:
             raise RuntimeError("Failed to generate plan due to API errors.")
 
         content = (
-            response
-            .choices[0]
-            .message
-            .content
+            (response.choices[0].message.content or "")
             .strip()
         )
 

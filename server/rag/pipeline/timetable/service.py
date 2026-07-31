@@ -75,6 +75,67 @@ def _fmt_time(t) -> str:
     return t.strftime("%H:%M")
 
 
+def _resolve_dept(identity) -> Optional[str]:
+    """Best-effort resolution of the student's branch/department (e.g. 'ICT',
+    'MnC', 'ICTCS'), used to keep two different branches that happen to share
+    the same (year, sem, sec) label — e.g. both have a 'Section A' — from
+    being merged into a single combined timetable. Never raises: a student
+    whose department can't be determined simply gets the old unfiltered
+    behaviour rather than an error."""
+    dept = _field(identity, "dept")
+    if dept:
+        return str(dept)
+
+    erp_id = _field(identity, "erp_id")
+    if not erp_id:
+        return None
+
+    try:
+        rows = db_conn.query(
+            "SELECT dept, email FROM user_identity_map WHERE erp_id = %s AND is_active = TRUE",
+            (erp_id,),
+        )
+        if rows:
+            r = rows[0]
+            if r.get("dept"):
+                return str(r["dept"])
+            email = r.get("email") or f"{erp_id}@dau.ac.in"
+            from api.routes.identity_routes import _infer_role_and_cohort
+            inferred = _infer_role_and_cohort(email)
+            if inferred.get("dept"):
+                return str(inferred["dept"])
+    except Exception:
+        pass
+
+    try:
+        from api.routes.identity_routes import _infer_role_and_cohort
+        inferred = _infer_role_and_cohort(f"{erp_id}@dau.ac.in")
+        if inferred.get("dept"):
+            return str(inferred["dept"])
+    except Exception:
+        pass
+
+    return None
+
+
+def _narrow_by_dept(rows: list[dict], dept: Optional[str]) -> list[dict]:
+    """Soft-filters master rows down to just this student's branch/programme,
+    e.g. so an ICT student doesn't see MnC's classes mixed into their own
+    timetable just because both cohorts share the same (year, sem, sec)
+    label. Mirrors get_timetable_for_cohort's branch narrowing: only applies
+    when it's known AND actually narrows to a non-empty set, so rows with
+    NULL branch/program (not backfilled yet, see migration 007) keep showing
+    everything rather than being filtered down to nothing."""
+    needle = (dept or "").strip().lower()
+    if not needle or not rows:
+        return rows
+    narrowed = [
+        r for r in rows
+        if needle in (r.get("branch") or "").lower() or needle in (r.get("program") or "").lower()
+    ]
+    return narrowed if narrowed else rows
+
+
 def _require_cohort(identity) -> tuple[int, int, str]:
     role = _field(identity, "role")
     if role != "student":
@@ -133,16 +194,17 @@ def _require_cohort(identity) -> tuple[int, int, str]:
     return int(year), int(sem), str(sec)
 
 
-def get_master_rows(year: int, sem: int, sec: str) -> list[dict]:
-    return db_conn.query(
+def get_master_rows(year: int, sem: int, sec: str, dept: Optional[str] = None) -> list[dict]:
+    rows = db_conn.query(
         """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
                   course_code, course_name, session_type, room, faculty_name,
-                  course_type
+                  course_type, branch, program
            FROM timetable_master
            WHERE year = %s AND sem = %s AND sec = %s
            ORDER BY day_of_week, start_time""",
         (year, sem, sec),
     )
+    return _narrow_by_dept(rows, dept)
 
 
 def get_overrides(erp_id: str) -> list[dict]:
@@ -259,21 +321,25 @@ def get_effective_timetable(identity) -> dict:
         sec = None
 
     erp_id = _field(identity, "erp_id")
-    
+    dept = _resolve_dept(identity)
+
     if sec is None:
-        # Fetch common courses (where sec is null/empty or default to 'A' as representative)
-        master_rows = {row["id"]: row for row in db_conn.query(
+        # Fetch common courses (where sec is null/empty or default to 'A' as representative).
+        # Narrowed by dept (when known) so e.g. an ICT student doesn't also get
+        # MnC's classes just because both cohorts happen to use section 'A'.
+        common_rows = db_conn.query(
             """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
                       course_code, course_name, session_type, room, faculty_name,
-                      course_type
+                      course_type, branch, program
                FROM timetable_master
                WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = 'A')
                ORDER BY day_of_week, start_time""",
             (year, sem),
-        )}
+        )
+        master_rows = {row["id"]: row for row in _narrow_by_dept(common_rows, dept)}
         is_common = True
     else:
-        master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec)}
+        master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec, dept)}
         
     overrides = get_overrides(erp_id) if erp_id else []
 

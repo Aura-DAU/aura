@@ -11,6 +11,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# Canonical program_name for the ICT-CS specialisation. Matches the title the
+# corpus uses on the programmes-of-study page ("B.Tech. (Honours) in ICT with
+# minor in Computational Science"), which is what ingestion writes into
+# program_name for that document.
+ICT_CS_PROGRAM_NAME = "B.Tech. (Honours) in ICT with minor in Computational Science"
+
+# branch_id values, as derived by api.academic_scope_persist, mapped to the
+# canonical program_name that identifies that branch's own documents. Used to
+# widen — never narrow — the program entity inferred from a student's scope.
+BRANCH_PROGRAM_NAMES = {
+    "ict-cs": ICT_CS_PROGRAM_NAME,
+}
+
 class RetrievalPipeline:
 
     def __init__(self):
@@ -104,6 +117,24 @@ class RetrievalPipeline:
         "b.tech ict": "B.Tech. (ICT)",
         "b.tech. ict": "B.Tech. (ICT)",
         "b.tech. (ict)": "B.Tech. (ICT)",
+
+        # CHAT-02: ICT-CS is a specialisation of B.Tech. (ICT), not a separate
+        # programme (see academic_scope_persist and the ingestion extractor).
+        # It gets its own canonical program_name so ICT-CS-specific documents
+        # can be preferentially matched, while the academic-scope filter still
+        # admits generic btech-ict material for an ICT-CS student.
+        "ict cs": ICT_CS_PROGRAM_NAME,
+        "ictcs": ICT_CS_PROGRAM_NAME,
+        "btech ict cs": ICT_CS_PROGRAM_NAME,
+        "b tech ict cs": ICT_CS_PROGRAM_NAME,
+        "ict honours": ICT_CS_PROGRAM_NAME,
+        "honours ict": ICT_CS_PROGRAM_NAME,
+        "btech honours ict": ICT_CS_PROGRAM_NAME,
+        "btech honours in ict": ICT_CS_PROGRAM_NAME,
+        "ict with minor in computational science": ICT_CS_PROGRAM_NAME,
+        "btech honours in ict with minor in computational science": ICT_CS_PROGRAM_NAME,
+        "computational science": ICT_CS_PROGRAM_NAME,
+        "ict computational science": ICT_CS_PROGRAM_NAME,
 
         "csai": "B.Tech. (CS and AI)",
         "cs ai": "B.Tech. (CS and AI)",
@@ -420,6 +451,16 @@ class RetrievalPipeline:
         }
 
     @staticmethod
+    def _has_explicit_programme_context(plan: dict) -> bool:
+        """True when the query already names a programme/course — no personal scope needed."""
+        entities = plan.get("entities") or {}
+        return bool(
+            entities.get("program_name")
+            or entities.get("course_code")
+            or entities.get("course_name")
+        )
+
+    @staticmethod
     def _eligible_results(results: list[dict], academic_scope) -> list[dict]:
         if academic_scope is None:
             return results
@@ -427,6 +468,32 @@ class RetrievalPipeline:
             result for result in results
             if academic_scope.document_is_eligible(result.get("metadata", {}))
         ]
+
+    def _scope_program_names(self, academic_scope):
+        """Program entity value(s) implied by a student's own academic scope.
+
+        For a student on a branch that has its own corpus material (today only
+        ICT-CS), this returns BOTH the branch's canonical name and the parent
+        programme's, branch-specific first. That ordering matters and the list
+        matters:
+
+        - As a metadata filter, a multi-value list becomes ``$in``, so it
+          widens the candidate set instead of pinning it to one program_name.
+          Returning the branch name alone would exclude the generic
+          B.Tech. (ICT) material that still applies to an ICT-CS student.
+        - In `_retrieve_dual_path`, each value gets its own entity retrieval
+          whose results are fused by RRF, so ICT-CS-specific documents get an
+          independent shot at the pool rather than competing inside a single
+          B.Tech. (ICT) query they would usually lose.
+        """
+        programme_id = getattr(academic_scope, "programme_id", None)
+        if not programme_id:
+            return []
+        parent = self._canonical_program_name(programme_id)
+        branch_name = BRANCH_PROGRAM_NAMES.get(getattr(academic_scope, "branch_id", None))
+        names = [name for name in (branch_name, parent) if name]
+        # Preserve order while dropping duplicates.
+        return list(dict.fromkeys(names))
 
     def _normalize_program_name(self, name):
         if not name:
@@ -559,6 +626,7 @@ class RetrievalPipeline:
         history=None,
         user_role: str = "public",
         academic_scope=None,
+        identity=None,
     ):
         allowed_roles = get_allowed_roles(user_role)
         original_query = query
@@ -600,7 +668,7 @@ class RetrievalPipeline:
             )
 
         # Submit the planning LLM call to executor
-        future_plan = self.executor.submit(self.planner.plan, query, academic_scope)
+        future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
 
         # Submit the speculative retrieval call to executor. Speculative retrieval
         # runs the semester-expanded query with an empty plan ({}) which results
@@ -616,9 +684,11 @@ class RetrievalPipeline:
         if academic_scope and getattr(academic_scope, "programme_id", None):
             entities = plan.setdefault("entities", {})
             if not entities.get("program_name"):
-                inferred_prog = self._canonical_program_name(academic_scope.programme_id)
-                if inferred_prog:
-                    entities["program_name"] = inferred_prog
+                inferred_progs = self._scope_program_names(academic_scope)
+                if inferred_progs:
+                    entities["program_name"] = (
+                        inferred_progs[0] if len(inferred_progs) == 1 else inferred_progs
+                    )
 
         # Check if the plan contains anything that modifies retrieval or query
         entities = plan.get("entities", {})
@@ -643,7 +713,16 @@ class RetrievalPipeline:
 
         retrieval_intent = plan.get("retrieval_intent", "general")
 
-        if user_role == "student" and self._requires_academic_scope(plan) and academic_scope is None:
+        # Abstain only for personal/"my programme" curriculum questions when we
+        # cannot resolve the student's AcademicScope. If the user (or rewriter)
+        # already named a programme/course, retrieve without personal scope —
+        # curriculum docs are public and the named entity is enough to filter.
+        if (
+            user_role == "student"
+            and self._requires_academic_scope(plan)
+            and academic_scope is None
+            and not self._has_explicit_programme_context(plan)
+        ):
             return {
                 "query": original_query,
                 "corrected_query": query,
