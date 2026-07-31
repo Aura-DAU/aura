@@ -223,6 +223,8 @@ No explanation, no punctuation, no JSON, no additional text.
             return self._classify(query)
         except Exception as e:
             print(f"[Guardrail] Error evaluating query: {e}")
+            if IMPLICIT_DAU_PAT.search(query):
+                return Verdict.SAFE
             return None
 
     def evaluate(self, query: str):
