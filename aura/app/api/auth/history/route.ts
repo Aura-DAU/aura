@@ -30,12 +30,6 @@ const historyThreadSchema = z.object({
   id: z.string().min(1).max(128),
   title: z.string().max(500),
   messages: z.array(historyMessageSchema).max(MAX_MESSAGES_PER_THREAD),
-  // Recency + rolling-memory fields — previously stripped by Zod, so the
-  // sidebar never got updatedAt from the server and summary was lost on sync.
-  updatedAt: z.number().optional(),
-  summary: z.string().max(20_000).optional(),
-  summaryTurnCount: z.number().int().nonnegative().optional(),
-  continuedFromId: z.string().min(1).max(128).optional(),
 })
 
 const historySchema = z.object({

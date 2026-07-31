@@ -1,5 +1,32 @@
 import os
 import math
+import re
+from datetime import datetime
+from typing import Optional
+
+def extract_latest_year(metadata: dict) -> Optional[int]:
+    """Extract the most recent year from a document's metadata."""
+    doc_year = metadata.get("document_year", "")
+    if doc_year:
+        m = re.search(r"(20[1-3]\d)", str(doc_year))
+        if m:
+            return int(m.group(1))
+
+    texts_to_search = [
+        metadata.get("title", ""),
+        metadata.get("h1", ""),
+        metadata.get("h2", ""),
+        metadata.get("h3", ""),
+        metadata.get("text", "")
+    ]
+
+    for text in texts_to_search:
+        if not text:
+            continue
+        matches = re.findall(r"\b(20[1-3]\d)(?:[-\u2013/]\d{2,4})?\b", str(text))
+        if matches:
+            return max(int(m) for m in matches)
+    return None
 
 
 class Reranker:
@@ -315,6 +342,9 @@ class Reranker:
             )
         )
 
+        explicit_rule_year = entities.get("rule_year")
+        current_year = datetime.now().year
+
         for result, cross_score in zip(
             results,
             cross_scores
@@ -462,49 +492,38 @@ class Reranker:
             section_boost = min(section_boost, 1.0)
             course_match_boost = min(course_match_boost, 1.0)
 
-            # Soft recency boost when the user did not name a year: prefer
-            # newer C_DCs sheets over superseded Club Committee Data rosters.
-            #
-            # Fix RR-RECENCY: two problems were making this boost unreliable
-            # for exactly the case it exists for — several near-duplicate
-            # yearly rosters (club committees, academic requirements, etc.)
-            # competing for the same query:
-            #   1. The YY-YY regex only matched titles like "2026-27". A
-            #      title like "List of Club Committee Core Members Winter
-            #      2026" (a bare 4-digit year, no dash) got recency_boost=0
-            #      even though it is one of the most current documents,
-            #      letting an older dashed-year doc win purely by luck of
-            #      phrasing.
-            #   2. At weight 0.05, even a "perfect" recency_boost of 1.0 only
-            #      ever changes final_score by 0.05 — far smaller than the
-            #      cross-encoder noise between two near-duplicate documents
-            #      describing the same kind of content (club rosters, academic
-            #      requirement sheets), so recency essentially never decided
-            #      the winner in practice.
-            recency_boost = 0.0
-            if not entities.get("rule_year"):
-                year_text = " ".join(
-                    str(metadata.get(k) or "")
-                    for k in ("academic_year", "title", "source_file", "relative_path")
-                )
-                year_match = re.search(
-                    r"(?:20)?(\d{2})[_\-\u2013](\d{2})(?!\d)",
-                    year_text,
-                )
-                bare_year_match = re.search(r"(20\d{2})(?!\d)", year_text)
-                if year_match:
-                    start_yy = int(year_match.group(1))
-                    end_yy = int(year_match.group(2))
-                    if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
-                        recency_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
-                elif bare_year_match:
-                    # No "YY-YY" academic-year pattern, but a plain 4-digit
-                    # year is present (e.g. "Winter 2026") — still a genuine
-                    # recency signal, just a different phrasing.
-                    yyyy = int(bare_year_match.group(1))
-                    recency_boost = min(max((yyyy - 2020) / 10.0, 0.0), 1.0)
-                elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
-                    recency_boost = 0.6
+            temporal_boost = 0.0
+            if not explicit_rule_year:
+                doc_year = extract_latest_year(metadata)
+                if doc_year:
+                    diff = current_year - doc_year
+                    if diff <= 0:
+                        temporal_boost = 1.0
+                    elif diff <= 5:
+                        temporal_boost = max(0.0, 1.0 - (diff * 0.2))
+                else:
+                    year_text = " ".join(
+                        str(metadata.get(k) or "")
+                        for k in ("academic_year", "title", "source_file", "relative_path")
+                    )
+                    year_match = re.search(
+                        r"(?:20)?(\d{2})[_\-\u2013](\d{2})(?!\d)",
+                        year_text,
+                    )
+                    bare_year_match = re.search(r"(20\d{2})(?!\d)", year_text)
+                    if year_match:
+                        start_yy = int(year_match.group(1))
+                        end_yy = int(year_match.group(2))
+                        if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
+                            temporal_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
+                    elif bare_year_match:
+                        # No "YY-YY" academic-year pattern, but a plain 4-digit
+                        # year is present (e.g. "Winter 2026") — still a genuine
+                        # recency signal, just a different phrasing.
+                        yyyy = int(bare_year_match.group(1))
+                        temporal_boost = min(max((yyyy - 2020) / 10.0, 0.0), 1.0)
+                    elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
+                        temporal_boost = 0.6
 
             # Fix #4 / Fix RR-RECENCY: all components on comparable scales
             # [0, 1]. recency_boost's weight raised 0.05 → 0.15 (taken from
@@ -526,7 +545,7 @@ class Reranker:
                 +
                 (0.05 * course_match_boost)
                 +
-                (0.15 * recency_boost)
+                (0.15 * temporal_boost)
                 +
                 (semester_penalty * norm_cross)
             )

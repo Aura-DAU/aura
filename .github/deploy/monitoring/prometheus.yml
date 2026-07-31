@@ -43,7 +43,7 @@ scrape_configs:
 
   # Node 4: Local Embedding & Reranker Microservice
   - job_name: "node4-embedding-reranker"
-    metrics_path: /health
+    metrics_path: /metrics
     static_configs:
       - targets: ["embedding-reranker:8001"]
 
