@@ -46,7 +46,15 @@ def _env_int(name: str, default: int) -> int:
 # run to the model's full context window, so one rambling generation can hang a
 # worker for minutes. env-tunable for eval runs that legitimately need longer
 # completions.
-_MAX_ANSWER_TOKENS = _env_int("AURA_MAX_ANSWER_TOKENS", 768)
+#
+# Fix AG-TRUNC: 768 was silently truncating any answer that has to enumerate
+# a real list from the corpus (e.g. all 30+ SBG clubs/committees with
+# convener + deputy + faculty-mentor per row runs well past 2,000 tokens).
+# The model has no way to signal "I was cut off mid-sentence" — the client
+# just renders a partial list that looks complete (e.g. "top 10 clubs").
+# 2048 gives headroom for the longest legitimate enumerations in this corpus
+# while still bounding worst-case generation time; still env-tunable.
+_MAX_ANSWER_TOKENS = _env_int("AURA_MAX_ANSWER_TOKENS", 2048)
 
 # Kill switch for citation-filtered sources. On by default: only sources the
 # answer actually cited are returned. Set to 0/false to fall back to returning

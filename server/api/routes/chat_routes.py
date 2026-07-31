@@ -64,11 +64,14 @@ def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
     display_profile = profile.model_dump(exclude_none=True) if profile else None
 
     if identity.role == "guest":
-        forwarded = req.headers.get("x-forwarded-for")
-        if forwarded:
-            quota_key = forwarded.split(",")[0].strip()
-        else:
-            quota_key = req.client.host if req.client else "unknown_ip"
+        # Guests have no email, but Next.js mints a stable anonymous erp_id
+        # per browser (stored in a cookie) specifically so each guest gets
+        # their own quota bucket — see rate_limiter.py's module docstring.
+        # Keying by IP instead (the old behavior) put every guest behind
+        # the same NAT/campus Wi-Fi/mobile carrier into one shared bucket,
+        # so one guest's questions could exhaust another's quota and trip
+        # a 429 long before that guest's own 10 questions were used.
+        quota_key = identity.erp_id
     else:
         quota_key = identity.email or identity.erp_id
 
@@ -353,7 +356,7 @@ async def chat_stream(
                     # done — canned/denial paths stream nothing, so emit the whole
                     # answer as a single delta to match the non-streaming UX.
                     result, mem_result = payload if payload else ({}, None)
-                    result = result or {}
+                    result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
                     answer = result.get("answer", "")
                     if not streamed_any and answer:
                         yield _sse({"type": "text-delta", "delta": answer})

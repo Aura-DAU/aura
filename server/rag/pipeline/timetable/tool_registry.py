@@ -100,6 +100,21 @@ def _handle_sync_timetable_to_google_calendar(identity, **kwargs):
     return timetable_sync.apply(identity)
 
 
+# -- Any-cohort read tool (not scoped to the requester's own cohort) ----------
+
+def _handle_get_cohort_timetable(identity, **kwargs):
+    try:
+        return service.get_timetable_for_cohort(
+            year=kwargs.get("year"),
+            sem=kwargs.get("sem"),
+            sec=kwargs.get("sec"),
+            branch=kwargs.get("branch"),
+            program=kwargs.get("program"),
+        )
+    except service.TimetableError as e:
+        return {"error": str(e)}
+
+
 # -- Faculty read tools --------------------------------------------------------
 
 def _handle_get_faculty_timetable(identity, **kwargs):
@@ -191,6 +206,44 @@ GET_MY_TIMETABLE = Tool(
     ),
     parameters={"type": "object", "properties": {}},
     category="read", allowed_roles=["student"], handler=_handle_get_my_timetable,
+)
+
+GET_COHORT_TIMETABLE = Tool(
+    name="get_cohort_timetable",
+    description=(
+        "Look up the published weekly class timetable for ANY cohort by semester/year, "
+        "section, and branch/programme -- e.g. 'give me the timetable of BTech ICT 3rd sem "
+        "section A' or 'what's the schedule for 2nd year MnC section B'. Returns the plain "
+        "master schedule only (no personal overrides or elective picks applied). Use "
+        "get_my_timetable instead when the requester is asking about their OWN timetable. "
+        "Section defaults to 'A' if the user doesn't name one."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "sem": {
+                "type": "integer",
+                "description": "Semester number, e.g. 1, 3, 5, 7. Prefer this when the user names a semester.",
+            },
+            "year": {
+                "type": "integer",
+                "description": "Academic year 1-4, if the user says 'year' instead of 'semester'.",
+            },
+            "sec": {
+                "type": "string",
+                "description": "Section letter, e.g. 'A', 'B', 'C', 'D'. Defaults to 'A' if not given.",
+            },
+            "branch": {
+                "type": "string",
+                "description": "Branch, e.g. 'ICT', 'ICT-CS', 'MnC', 'EVD'.",
+            },
+            "program": {
+                "type": "string",
+                "description": "Degree programme, e.g. 'BTech', 'MTech', 'MSc'.",
+            },
+        },
+    },
+    category="read", allowed_roles=["student", "faculty"], handler=_handle_get_cohort_timetable,
 )
 
 LIST_MY_TIMETABLE_CHANGES = Tool(
@@ -323,12 +376,18 @@ SAVE_MY_ELECTIVE_SELECTIONS = Tool(
 
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
-        GET_MY_TIMETABLE, LIST_MY_TIMETABLE_CHANGES, UPDATE_MY_TIMETABLE,
+        GET_MY_TIMETABLE, GET_COHORT_TIMETABLE, LIST_MY_TIMETABLE_CHANGES, UPDATE_MY_TIMETABLE,
         UNDO_TIMETABLE_CHANGE, SYNC_TIMETABLE_TO_GOOGLE_CALENDAR,
         GET_FACULTY_TIMETABLE, GET_AVAILABLE_ELECTIVES, SAVE_MY_ELECTIVE_SELECTIONS,
         SET_MY_COHORT,
     ]
 }
+
+# Exposed on the public-KB / COMMUNITY orchestrator path too (see
+# pipeline.ecampus.orchestrator) -- looking up another cohort's published
+# timetable isn't the requester's own private data, so a student should be
+# able to ask for it even when the query doesn't classify as PERSONAL_DATA.
+PUBLIC_TOOL_NAMES: frozenset[str] = frozenset({"get_cohort_timetable"})
 
 
 def tools_for_role(role: str) -> list[Tool]:

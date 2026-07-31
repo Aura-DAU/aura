@@ -58,7 +58,9 @@ from api.request_context import RequestContext
 
 
 class SimpleIdentity:
-    def __init__(self, d):
+    def __init__(self, d=None, **kwargs):
+        if d is None:
+            d = kwargs
         if isinstance(d, dict):
             self.erp_id = d.get("erp_id") or d.get("erpId")
             self.role = d.get("role", "student")
@@ -356,14 +358,41 @@ class AuraChatGraph:
 
         if query_type == "AGGREGATE":
             course_code = (access_result.course_codes[0] if access_result.course_codes else None)
-            erp_data = {"aggregate": self.erp_connector.get_class_aggregate(course_code) if course_code else {}}
+            try:
+                erp_data = {"aggregate": self.erp_connector.get_class_aggregate(course_code) if course_code else {}}
+            except Exception:
+                import traceback; traceback.print_exc()
+                state["result"] = {
+                    "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
+                    "sources": [], "is_personal_data": False,
+                }
+                return state
         else:
-            erp_data = self._fetch_erp_data(
-                classification["erp_fields"],
-                target_erp_id,
-                access_result,
-                requester_erp_id=identity.erp_id,
-            )
+            # Fix PD-DEGRADE: this is the one DB-dependent step in this node
+            # without its own error handling (audit_log.record above never
+            # raises by design; access_gate.evaluate for "self" queries — the
+            # overwhelming majority — makes no DB call at all). A transient
+            # Postgres hiccup while fetching profile/cgpa/grades/attendance
+            # used to propagate uncaught all the way to chat()'s top-level
+            # except block, which returns "Sorry, I encountered an error
+            # while generating a response" — a generation-stage message that
+            # is actively misleading for what is really a data-fetch failure,
+            # and specifically explains why this surfaced on personal
+            # questions (profile/grades/attendance) more than public ones.
+            try:
+                erp_data = self._fetch_erp_data(
+                    classification["erp_fields"],
+                    target_erp_id,
+                    access_result,
+                    requester_erp_id=identity.erp_id,
+                )
+            except Exception:
+                import traceback; traceback.print_exc()
+                state["result"] = {
+                    "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
+                    "sources": [], "is_personal_data": False,
+                }
+                return state
 
         state["erp_context"] = self.context_builder.build(erp_data, identity, access_result)
         state["is_personal"] = True

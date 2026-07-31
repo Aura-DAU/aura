@@ -385,22 +385,33 @@ class RetrievalPipeline:
             return None
         scoped = {
             "$and": [
-                {"applicability_scope": {"$in": ["programme", "curriculum", "course"]}},
+                {"applicability_scope": {"$in": ["programme", "curriculum"]}},
                 {"programme_id": {"$eq": academic_scope.programme_id}},
                 {"degree_level": {"$eq": academic_scope.degree_level}},
                 {"admission_year_from": {"$lte": academic_scope.admission_year}},
                 {"admission_year_to": {"$gte": academic_scope.admission_year}},
             ]
         }
+        # Course-policy documents are keyed by course_code, not by
+        # programme_id/degree_level/admission_year (they never populate those
+        # fields — the same course is often shared across programmes). They
+        # need their own clause instead of being forced through the
+        # programme/curriculum clause above, which they can never satisfy.
+        or_clauses = [
+            {"applicability_scope": {"$eq": "global"}},
+            scoped,
+        ]
+        if academic_scope.registered_course_codes:
+            or_clauses.append({
+                "$and": [
+                    {"applicability_scope": {"$eq": "course"}},
+                    {"course_code": {"$in": list(academic_scope.registered_course_codes)}},
+                ]
+            })
         # A missing branch on a document means programme-wide applicability;
         # branch equality is enforced by the post-retrieval predicate when a
         # document declares one, without excluding those programme-wide docs.
-        return {
-            "$or": [
-                {"applicability_scope": {"$eq": "global"}},
-                scoped,
-            ]
-        }
+        return {"$or": or_clauses}
 
     @staticmethod
     def _requires_academic_scope(plan: dict) -> bool:
@@ -999,14 +1010,30 @@ class RetrievalPipeline:
         # For multi-entity queries 2 entities need at least 3 chunks each = 6.
         # Cap raised to 8 to give comparison queries enough chunks while staying
         # within the context token budget (3000 tokens ≈ 8-9 chunks).
-        max_final = 8 if plan.get("multi_entity_query") else 5
+        #
+        # Fix TK2: this cap was silently undoing the requires_complete_list
+        # top_k=12 boost set above — "which clubs does DAU have" and similar
+        # enumeration queries got plan["top_k"]=12 but then
+        # min(12, 5)=5 threw 7 of those chunks away before they ever reached
+        # the LLM, producing partial lists (e.g. "top 10 clubs" out of 30+).
+        # requires_complete_list queries now get the same higher ceiling as
+        # multi_entity_query, and the effective context-token budget is
+        # widened to match (see ContextBuilder.build's retrieval_intent
+        # handling) so those extra chunks aren't cut again downstream.
+        if requires_complete_list:
+            max_final = 15
+        elif plan.get("multi_entity_query"):
+            max_final = 8
+        else:
+            max_final = 5
         final_top_k = min(plan.get("top_k", 5), max_final)
         final_chunks = reranked[:final_top_k]
 
         built = (
             self.builder.build(
                 final_chunks,
-                retrieval_intent=retrieval_intent
+                retrieval_intent=retrieval_intent,
+                requires_complete_list=requires_complete_list,
             )
         )
 

@@ -57,7 +57,7 @@ class ContextBuilder:
         # Rough token estimate: word count × 1.3 (accounts for sub-word splits).
         return int(len(text.split()) * 1.3)
 
-    def build(self, chunks, retrieval_intent="general"):
+    def build(self, chunks, retrieval_intent="general", requires_complete_list=False):
 
         documents = []
 
@@ -77,8 +77,15 @@ class ContextBuilder:
         # policy document — are not dropped by the budget cap before they are
         # included in the context. 4000 tokens is still safe for all models
         # (system ~450 + history ~500 + 4000 = ~4950 tokens).
+        #
+        # Fix CB7 / TK2: requires_complete_list queries (enumerations like
+        # "which clubs does DAU have", negation questions) get the same
+        # widened budget — raising final_top_k in retrieval_pipeline.py to 15
+        # for these queries had no effect while this budget stayed at 3000,
+        # since the extra chunks would just get dropped again by the
+        # token-budget `break` below.
         effective_max_tokens = (
-            4000 if retrieval_intent == "policy_version"
+            4000 if retrieval_intent == "policy_version" or requires_complete_list
             else self.MAX_CONTEXT_TOKENS
         )
 

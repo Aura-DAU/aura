@@ -251,6 +251,7 @@ class AuraChat:
                         target_erp_id,
                         access_result,
                         requester_erp_id=identity.erp_id,
+                        identity=identity,
                     )
                 erp_context = self.context_builder.build(erp_data, identity, access_result)
                 is_personal = True
@@ -320,6 +321,7 @@ class AuraChat:
         roll_number: Optional[str],
         access_result,
         requester_erp_id: Optional[str] = None,
+        identity=None,
     ) -> dict:
         if not roll_number:
             return {}
@@ -348,6 +350,16 @@ class AuraChat:
             data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
         if "courses" in fields and requester_erp_id:
             data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
+        # Timetable is in AURA's own PostgreSQL — never goes through RAG/Qdrant.
+        if "timetable" in fields and identity is not None:
+            try:
+                from pipeline.timetable.service import get_effective_timetable
+                data["timetable"] = get_effective_timetable(identity)
+            except Exception as _tt_err:
+                import logging
+                logging.getLogger(__name__).warning(
+                    "Timetable fetch skipped in _fetch_erp_data: %s", _tt_err
+                )
         return data
 
     def _rag_only(self, query, history, profile, user_role: str = "public") -> dict:

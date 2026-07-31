@@ -267,7 +267,6 @@ async function handleChatPost(req: Request): Promise<Response> {
     headers: {
       "Content-Type": "text/event-stream; charset=utf-8",
       "Cache-Control": "no-cache, no-transform",
-      Connection: "keep-alive",
       "X-Accel-Buffering": "no",
       ...(quotaHeader ? { "X-Quota-Remaining": quotaHeader } : {}),
     },

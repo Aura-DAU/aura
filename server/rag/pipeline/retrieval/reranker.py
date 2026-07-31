@@ -484,19 +484,32 @@ class Reranker:
                         r"(?:20)?(\d{2})[_\-\u2013](\d{2})(?!\d)",
                         year_text,
                     )
+                    bare_year_match = re.search(r"(20\d{2})(?!\d)", year_text)
                     if year_match:
                         start_yy = int(year_match.group(1))
                         end_yy = int(year_match.group(2))
                         if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
                             temporal_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
+                    elif bare_year_match:
+                        # No "YY-YY" academic-year pattern, but a plain 4-digit
+                        # year is present (e.g. "Winter 2026") — still a genuine
+                        # recency signal, just a different phrasing.
+                        yyyy = int(bare_year_match.group(1))
+                        temporal_boost = min(max((yyyy - 2020) / 10.0, 0.0), 1.0)
                     elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
                         temporal_boost = 0.6
 
-            # Fix #4: all components are now on comparable scales [0, 1].
+            # Fix #4 / Fix RR-RECENCY: all components on comparable scales
+            # [0, 1]. recency_boost's weight raised 0.05 → 0.15 (taken from
+            # dense_score, 0.15 → 0.05) so that among documents the
+            # cross-encoder scores as similarly relevant — which is exactly
+            # what happens across several yearly versions of the same roster
+            # — the newest one reliably wins instead of the tie effectively
+            # being broken by noise.
             final_score = (
                 (0.60 * norm_cross)
                 +
-                (0.15 * dense_score)
+                (0.05 * dense_score)
                 +
                 (0.05 * metadata_boost)
                 +
@@ -506,7 +519,7 @@ class Reranker:
                 +
                 (0.05 * course_match_boost)
                 +
-                (0.05 * temporal_boost)
+                (0.15 * temporal_boost)
                 +
                 (semester_penalty * norm_cross)
             )

@@ -130,7 +130,7 @@ def test_orchestrator_public_kb_scope_schemas_exclude_erp():
             s["function"]["name"]
             for s in orch._tool_schemas("student", tool_scope=scope)
         }
-        assert names <= PUBLIC_KB_TOOL_NAMES
+        assert names <= (PUBLIC_KB_TOOL_NAMES | {"get_cohort_timetable"})
         assert "get_cgpa" not in names
         assert "search_student_clubs" in names
         assert "lookup_faculty_profile" in names

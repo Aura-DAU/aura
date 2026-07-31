@@ -525,9 +525,12 @@ LOOKUP_ADMISSIONS_INFO = Tool(
 LOOKUP_PUBLIC_TIMETABLE_DOCS = Tool(
     name="lookup_public_timetable_docs",
     description=(
-        "Look up published public lecture-timetable / programme TT documents from the KB "
-        "(academics/timetable, time_table). Do NOT use for the user's personal editable "
-        "timetable — use personal timetable tools (get_my_timetable etc.) for that."
+        "Look up published campus TT/timetable PDFs, notices, or announcements about the "
+        "timetable itself (e.g. 'where is the official timetable notice', 'when was the TT "
+        "revised'). Do NOT use this for an actual class schedule by year/sem/branch/section — "
+        "use get_cohort_timetable for that (it queries the live schedule directly and is far "
+        "more reliable). Do NOT use for the user's personal editable timetable — use personal "
+        "timetable tools (get_my_timetable etc.) for that."
     ),
     parameters={
         "type": "object",
@@ -806,9 +809,12 @@ LOOKUP_ADMISSIONS_INFO = Tool(
 LOOKUP_PUBLIC_TIMETABLE_DOCS = Tool(
     name="lookup_public_timetable_docs",
     description=(
-        "Look up published public lecture-timetable / programme TT documents from the KB "
-        "(academics/timetable, time_table). Do NOT use for the user's personal editable "
-        "timetable — use personal timetable tools (get_my_timetable etc.) for that."
+        "Look up published campus TT/timetable PDFs, notices, or announcements about the "
+        "timetable itself (e.g. 'where is the official timetable notice', 'when was the TT "
+        "revised'). Do NOT use this for an actual class schedule by year/sem/branch/section — "
+        "use get_cohort_timetable for that (it queries the live schedule directly and is far "
+        "more reliable). Do NOT use for the user's personal editable timetable — use personal "
+        "timetable tools (get_my_timetable etc.) for that."
     ),
     parameters={
         "type": "object",
