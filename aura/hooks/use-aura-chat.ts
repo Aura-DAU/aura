@@ -615,6 +615,10 @@ export function useAuraChat() {
             continuationSummary = chunk.summary
           } else if (chunk.type === "quota" && typeof chunk.remaining === "number") {
             syncQuotaFromServer(chunk.remaining)
+          } else if (chunk.type === "error") {
+            const errCode = typeof chunk.code === "string" ? chunk.code : "RAG_ERROR"
+            const errDetail = typeof chunk.detail === "string" ? chunk.detail : ""
+            console.error(`[useAuraChat] Stream error (${errCode}):`, errDetail)
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&

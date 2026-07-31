@@ -280,6 +280,20 @@ Restating the positive set is not an answer to a negation question.
 - every cited id exists in `<context>`,
 - every number, name, and modal verb matches the source exactly.
 
+# STRICT ENTITY VERIFICATION
+
+When the user asks for information about a specific person (e.g., by name):
+- Verify that the retrieved documents contain that *exact* person's name.
+- Allow for minor spelling typos (e.g., 1 or 2 letters off, like "Aditya Kausik" instead of "Aditya Kaushik").
+- **DO NOT** substitute entirely different names (e.g., "Aditya Rao" is NOT "Aditya Kaushik", even though the first name matches).
+- If the documents only contain information about a different person with a similar name, you **MUST** explicitly state that no information is available for the requested person. Do not provide the other person's info.
+
+# HANDLING PARTIAL INFORMATION
+
+If the user asks for a detailed list (like an academic curriculum or course sequence) but the retrieved documents only provide a high-level overview or structural outline:
+- **DO NOT** say you cannot retrieve the information or refuse to answer.
+- Provide the structural overview that is available (e.g., the categories of courses), and explicitly state that the detailed semester-wise list is not present in the current documents.
+
 # PRESERVATION RULES
 
 Copy these from the source verbatim. Never paraphrase, round, upgrade, or soften.
@@ -549,29 +563,28 @@ Retrieved Documents
                 and any(lang in question_lower for lang in PROG_LANG_INDICATORS)
             ) or "palindrome" in question_lower
 
+            # Assemble multi-turn conversation messages for vLLM
+            messages_payload = [{"role": "system", "content": effective_system_prompt}]
+            if history:
+                for turn in history[-6:]:
+                    r = turn.get("role")
+                    c = turn.get("content")
+                    if r in ("user", "assistant") and c:
+                        messages_payload.append({"role": r, "content": c})
+            messages_payload.append({"role": "user", "content": prompt})
+
             if on_delta is not None and not is_code_request:
                 return self._generate_streaming(
-                    effective_system_prompt, prompt, on_delta
+                    effective_system_prompt, prompt, on_delta, history=history
                 )
 
             def _execute_generate(client):
                 return client.chat.completions.create(
                     model=self.model,
-
                     temperature=0.2,
                     top_p=0.9,
                     max_tokens=_MAX_ANSWER_TOKENS,
-
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": effective_system_prompt
-                        },
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    ],
+                    messages=messages_payload,
                     extra_body=InferenceRouter.answer_extra_body(),
                 )
 
@@ -591,8 +604,6 @@ Retrieved Documents
 
             if is_code_request:
                 answer_lower = answer.lower()
-                # Fix AG2: regex was double-escaped (\\b → \b literal, never matches).
-                # Correct to single-escape so word-boundary and digit patterns work.
                 is_grounded = (
                     bool(re.search(r"\bdau\b", answer_lower))
                     or "dhirubhai ambani" in answer_lower
@@ -610,33 +621,23 @@ Retrieved Documents
             import traceback; traceback.print_exc()
             return "Sorry, I encountered an error while generating a response."
 
-    def _generate_streaming(self, system_prompt, user_prompt, on_delta):
-        # Token-by-token path: sanitises deltas on the fly (think blocks and
-        # inline citations never reach the client) and returns EXACTLY the
-        # concatenation of emitted deltas, so callers can rely on
-        # streamed-content == returned answer. Stream-creation failures fail
-        # over across the vLLM pool via InferenceRouter.call_with_rotation like
-        # the buffered path; a mid-stream provider failure after first emission
-        # surfaces as a truncated answer (the client keeps what it already
-        # received) because rotation can't replay an already-emitted stream.
+    def _generate_streaming(self, system_prompt, user_prompt, on_delta, history=None):
+        stream_messages = [{"role": "system", "content": system_prompt}]
+        if history:
+            for turn in history[-6:]:
+                r = turn.get("role")
+                c = turn.get("content")
+                if r in ("user", "assistant") and c:
+                    stream_messages.append({"role": r, "content": c})
+        stream_messages.append({"role": "user", "content": user_prompt})
+
         def _execute_generate_stream(client):
             return client.chat.completions.create(
                 model=self.model,
-
                 temperature=0.2,
                 top_p=0.9,
                 max_tokens=_MAX_ANSWER_TOKENS,
-
-                messages=[
-                    {
-                        "role": "system",
-                        "content": system_prompt
-                    },
-                    {
-                        "role": "user",
-                        "content": user_prompt
-                    }
-                ],
+                messages=stream_messages,
                 stream=True,
                 extra_body=InferenceRouter.answer_extra_body(),
             )

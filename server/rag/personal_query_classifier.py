@@ -72,6 +72,18 @@ SAFE_DEFAULT = {"type": "PUBLIC", "target": None, "erp_fields": []}
 VALID_TYPES  = {"PUBLIC", "PERSONAL", "MIXED", "AGGREGATE"}
 
 
+import re
+
+PERSONAL_KEYWORDS_PAT = re.compile(
+    r"\b(?:what(?:\s+'s|\s+is)?\s+my\s+(?:branch|programme|program|dept|department|roll\s+number|id|student\s+id|erp\s+id|email|name|cgpa|gpa|attendance|timetable|schedule)|"
+    r"what\s+(?:branch|programme|program|dept|department)\s+(?:am\s+i|are\s+we|do\s+i)\s*(?:in|belong\s+to)?|"
+    r"which\s+(?:branch|programme|program|dept|department)\s+(?:am\s+i|do\s+i|belong\s+to)|"
+    r"show\s+(?:my\s+)?(?:timetable|schedule|attendance|cgpa|grades|profile)|"
+    r"who\s+am\s+i)\b",
+    re.IGNORECASE
+)
+
+
 class PersonalQueryClassifier:
 
     def __init__(self):
@@ -80,7 +92,22 @@ class PersonalQueryClassifier:
         self.model  = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
     def classify(self, query: str) -> dict:
-        # Injection defence: delimit user input clearly
+        if not query:
+            return SAFE_DEFAULT.copy()
+
+        # Deterministic Fast-Path: Immediately route direct student profile queries
+        if PERSONAL_KEYWORDS_PAT.search(query):
+            fields = ["profile"]
+            q_lower = query.lower()
+            if "timetable" in q_lower or "schedule" in q_lower or "class" in q_lower:
+                fields.append("courses")
+            if "attendance" in q_lower:
+                fields.append("attendance")
+            if "cgpa" in q_lower or "gpa" in q_lower or "grade" in q_lower:
+                fields.append("cgpa")
+            return {"type": "PERSONAL", "target": "self", "erp_fields": fields}
+
+        # LLM-Based Classifier Fallback
         safe_query = f"<query>\n{query}\n</query>"
         try:
             response = self.client.chat.completions.create(

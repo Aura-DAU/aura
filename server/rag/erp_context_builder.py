@@ -20,6 +20,16 @@ class ERPContextBuilder:
             "",
         ]
 
+        if ("profile" not in erp_results or not erp_results["profile"]) and identity is not None:
+            erp_results["profile"] = {
+                "full_name": getattr(identity, "full_name", None) or getattr(identity, "fullName", None) or "N/A",
+                "roll_number": getattr(identity, "roll_number", None) or getattr(identity, "rollNumber", None) or getattr(identity, "erp_id", "N/A"),
+                "program": getattr(identity, "program", None) or getattr(identity, "programme", "B.Tech. (ICT)"),
+                "dept": getattr(identity, "dept", None) or getattr(identity, "department", None) or getattr(identity, "branch", "ICT"),
+                "batch_year": getattr(identity, "batch_year", None) or getattr(identity, "batchYear", "2023"),
+                "current_semester": getattr(identity, "current_sem", None) or getattr(identity, "currentSem", None) or getattr(identity, "current_semester", 5),
+            }
+
         if "profile" in erp_results and erp_results["profile"]:
             p = erp_results["profile"]
             lines += [

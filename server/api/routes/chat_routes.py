@@ -16,6 +16,7 @@ from api.deps import chat_queue_lock, CHAT_QUEUE_WAIT_TIMEOUT, get_aura
 from api.schemas import ChatRequest
 from pipeline.memory.conversation_memory import get_conversation_memory, _truncate_tokens
 from pipeline.memory.user_memory import get_user_memory_store
+from pipeline.memory.response_cache import get_response_cache
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota
 from access_control import resolve_effective_role
 
@@ -152,12 +153,38 @@ async def chat(
 ):
     history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
 
+    # Cache lookup: guest public standalone queries only
+    is_guest_public = (identity.role == "guest" and len(history) == 0)
+    if is_guest_public:
+        cache = get_response_cache()
+        cached = cache.get(body.question)
+        if cached:
+            cached["quota_remaining"] = remaining
+            return cached
+
     async with _chat_slot():
         result = await run_in_threadpool(
             _ask_with_memory, body, identity, history, display_profile, request_context
         )
     if isinstance(result, dict):
         result["quota_remaining"] = remaining
+        # Cache write: guest public standalone queries only (exclude error/rejection responses)
+        if is_guest_public and "answer" in result and "error" not in result:
+            ans = result["answer"]
+            from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
+            from pipeline.aura_chat import GENERIC_DENIAL
+            is_error_response = (
+                ans == GENERIC_DENIAL or
+                ans == "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries." or
+                ans == OFF_TOPIC_RESPONSE or
+                ans.startswith("I'm having trouble retrieving") or
+                ans.startswith("Sorry, I encountered an error")
+            )
+            if not is_error_response:
+                cache.set(body.question, {
+                    "answer": ans,
+                    "sources": result.get("sources") or []
+                })
     return result
 
 
@@ -210,6 +237,31 @@ async def chat_stream(
     # are raised before streaming starts and reach the client as real HTTP
     # status codes.
     history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
+
+    # Cache lookup: guest public standalone queries only
+    is_guest_public = (identity.role == "guest" and len(history) == 0)
+    if is_guest_public:
+        cache = get_response_cache()
+        cached = cache.get(body.question)
+        if cached:
+            async def cached_stream():
+                yield _sse({"type": "quota", "remaining": remaining})
+                yield _sse({"type": "text-delta", "delta": cached["answer"]})
+                if cached.get("sources"):
+                    yield _sse({"type": "citations", "citations": cached["sources"]})
+                yield "data: [DONE]\n\n"
+
+            headers = {
+                "Cache-Control": "no-cache, no-transform",
+                "X-Accel-Buffering": "no",
+            }
+            if remaining is not None:
+                headers["X-Quota-Remaining"] = str(remaining)
+            return StreamingResponse(
+                cached_stream(),
+                media_type="text/event-stream",
+                headers=headers,
+            )
 
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
@@ -270,11 +322,31 @@ async def chat_stream(
                             })
                         continue
                     if kind == "error":
-                        print(f"[chat_stream] pipeline error: {payload}")
+                        err_str = str(payload or "")
+                        logger.error("[chat_stream] Pipeline error: %s", err_str)
+
+                        # Classify explicit error code for developer tracing & telemetry
+                        if "Connection error" in err_str or "exhausted" in err_str or "Timeout" in err_str or "timeout" in err_str:
+                            error_code = "VLLM_TIMEOUT"
+                        elif "RETRIEVAL_EMPTY" in err_str or "No relevant documents" in err_str:
+                            error_code = "RETRIEVAL_EMPTY"
+                        elif "GUARDRAIL_BLOCKED" in err_str or "violates safety" in err_str:
+                            error_code = "GUARDRAIL_BLOCKED"
+                        else:
+                            error_code = "RAG_PIPELINE_ERROR"
+
+                        # Soft, polite user-facing message for the chat interface
+                        user_msg = "Sorry, I encountered an error while processing your request. Please try again in a few moments."
+
+                        yield _sse({
+                            "type": "error",
+                            "code": error_code,
+                            "detail": err_str,
+                        })
                         if not streamed_any:
                             yield _sse({
                                 "type": "text-delta",
-                                "delta": "Sorry, I encountered an error while generating a response. Please try again.",
+                                "delta": user_msg,
                             })
                         yield "data: [DONE]\n\n"
                         break
@@ -298,8 +370,8 @@ async def chat_stream(
                                     "file": file,
                                     "title": source.get("title"),
                                     "path": source.get("path"),
-                                    "start_line": source.get("start_line"),
-                                    "end_line": source.get("end_line"),
+                                    "startLine": source.get("start_line"),
+                                    "endLine": source.get("end_line"),
                                     "visibility": source.get("visibility"),
                                     "authorization": source.get("authorization"),
                                 }
@@ -318,6 +390,24 @@ async def chat_stream(
                             "summary": mem_result.summary,
                         })
                     yield _sse({"type": "quota", "remaining": remaining})
+
+                    # Cache write: guest public standalone queries only (exclude error/rejection responses)
+                    if is_guest_public and answer and "error" not in result:
+                        from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
+                        from pipeline.aura_chat import GENERIC_DENIAL
+                        is_error_response = (
+                            answer == GENERIC_DENIAL or
+                            answer == "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries." or
+                            answer == OFF_TOPIC_RESPONSE or
+                            answer.startswith("I'm having trouble retrieving") or
+                            answer.startswith("Sorry, I encountered an error")
+                        )
+                        if not is_error_response:
+                            get_response_cache().set(body.question, {
+                                "answer": answer,
+                                "sources": citations
+                            })
+
                     yield "data: [DONE]\n\n"
                     break
             finally:
