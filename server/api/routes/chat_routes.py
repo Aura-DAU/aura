@@ -12,14 +12,8 @@ from fastapi.responses import JSONResponse, StreamingResponse
 
 from api.auth import Identity, require_identity
 from api.request_context import AcademicScopeResolver, RequestContext
-from api.deps import (
-    chat_queue_lock,
-    CHAT_QUEUE_WAIT_TIMEOUT,
-    CHAT_RETRY_AFTER_SECONDS,
-    get_aura,
-)
+from api.deps import chat_queue_lock, CHAT_QUEUE_WAIT_TIMEOUT, get_aura
 from api.schemas import ChatRequest
-from pipeline.exceptions import ContextLengthExceeded, RAGPipelineError
 from pipeline.memory.conversation_memory import get_conversation_memory, _truncate_tokens
 from pipeline.memory.user_memory import get_user_memory_store
 from pipeline.memory.response_cache import get_response_cache
@@ -41,80 +35,6 @@ def _env_int(name: str, default: int) -> int:
         return int((os.getenv(name) or "").strip() or default)
     except (TypeError, ValueError):
         return default
-
-
-def _admission_shed_response() -> JSONResponse:
-    # Flat JSON matching the edge @aura_shed body so the frontend can parse
-    # either layer the same way. Distinguishing fields vs the edge's 429:
-    #   - HTTP 503 (edge uses 429)
-    #   - code ADMISSION_OVERLOADED (edge uses EDGE_OVERLOADED)
-    #   - shedBy backend (edge sets shedBy edge)
-    #   - X-Aura-Shed-By: backend header (edge sets edge)
-    return JSONResponse(
-        status_code=503,
-        content={
-            "detail": "AURA is at peak load right now — please retry in a few seconds.",
-            "code": "ADMISSION_OVERLOADED",
-            "shedBy": "backend",
-            "retryAfter": CHAT_RETRY_AFTER_SECONDS,
-        },
-        headers={
-            "Retry-After": str(CHAT_RETRY_AFTER_SECONDS),
-            "X-Aura-Shed-By": "backend",
-            "Cache-Control": "no-store",
-        },
-    )
-
-
-CONTEXT_LENGTH_DETAIL = (
-    "This conversation is too long for AURA's context window. "
-    "Try a shorter question or start a new chat."
-)
-
-PIPELINE_ERROR_DETAIL = (
-    "AURA could not complete that request — please try again in a few moments."
-)
-
-
-def _pipeline_error_response(exc: Exception) -> JSONResponse:
-    # AnswerGenerator already degrades a context overflow to CONTEXT_LENGTH_ANSWER
-    # (AURA-CTX-001) inside the generation stage, but the memory/budget stages
-    # that run before it — and any caller that bypasses AuraChatGraph.chat()'s
-    # catch-all — can still raise. Without this the exception reached Starlette
-    # and the browser got an opaque 500 with nothing to key off.
-    #
-    # Same flat body shape as _admission_shed_response so the frontend parses
-    # every backend rejection the same way.
-    if is_context_length_error(exc):
-        logger.error(
-            "chat_pipeline_error code=AURA-CTX-001 status=413 exc_type=%s: %s",
-            type(exc).__name__,
-            exc,
-        )
-        return JSONResponse(
-            status_code=413,
-            content={"detail": CONTEXT_LENGTH_DETAIL, "code": "AURA-CTX-001"},
-            headers={"Cache-Control": "no-store"},
-        )
-
-    logger.error(
-        "chat_pipeline_error code=RAG_PIPELINE_ERROR status=503 exc_type=%s: %s",
-        type(exc).__name__,
-        exc,
-        exc_info=exc,
-    )
-    return JSONResponse(
-        status_code=503,
-        content={
-            "detail": PIPELINE_ERROR_DETAIL,
-            "code": "RAG_PIPELINE_ERROR",
-            "retryAfter": CHAT_RETRY_AFTER_SECONDS,
-        },
-        headers={
-            "Retry-After": str(CHAT_RETRY_AFTER_SECONDS),
-            "Cache-Control": "no-store",
-        },
-    )
 
 
 async def _acquire_chat_slot() -> None:
