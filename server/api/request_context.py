@@ -65,6 +65,19 @@ class AcademicScope:
             return True
         if scope not in {"programme", "curriculum", "course"}:
             return False
+
+        if scope == "course":
+            # Course-policy documents are keyed by course_code enrollment,
+            # not programme identity — the same course is routinely taken by
+            # students from several programmes (electives, cross-listed
+            # courses), so it must not be required to match programme_id,
+            # degree_level, or admission_year fields that course-policy docs
+            # never carry in the first place.
+            course_code = metadata.get("course_code")
+            if course_code and course_code not in self.registered_course_codes:
+                return False
+            return True
+
         if metadata.get("programme_id") != self.programme_id:
             return False
         degree_level = metadata.get("degree_level")
@@ -75,14 +88,16 @@ class AcademicScope:
             return False
         start = metadata.get("admission_year_from")
         end = metadata.get("admission_year_to")
-        if not isinstance(start, int) or not isinstance(end, int):
+        # Coerce string years from older/partially-migrated chunk metadata.
+        try:
+            start_i = int(start) if start is not None else None
+            end_i = int(end) if end is not None else None
+        except (TypeError, ValueError):
             return False
-        if not start <= self.admission_year <= end:
+        if start_i is None or end_i is None:
             return False
-        if scope == "course":
-            course_code = metadata.get("course_code")
-            if course_code and course_code not in self.registered_course_codes:
-                return False
+        if not start_i <= self.admission_year <= end_i:
+            return False
         return True
 
 

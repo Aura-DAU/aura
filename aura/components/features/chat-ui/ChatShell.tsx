@@ -143,8 +143,19 @@ export function ChatShell() {
             ) : null}
 
             {chat.errorMessage ? (
-              <div className="flex items-center justify-center border-b border-theme-red/20 bg-theme-red/10 px-4 py-2 text-xs text-theme-red">
-                {chat.errorMessage}
+              <div
+                role="alert"
+                className="flex items-center justify-center gap-3 border-b border-theme-red/20 bg-theme-red/10 px-4 py-2 text-xs text-theme-red"
+              >
+                <span className="min-w-0 text-center">{chat.errorMessage}</span>
+                <button
+                  type="button"
+                  onClick={() => chat.setErrorMessage(null)}
+                  aria-label="Dismiss error"
+                  className="shrink-0 rounded-md px-1.5 py-0.5 text-[11px] font-medium text-theme-red/80 transition-colors hover:bg-theme-red/15 hover:text-theme-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-red/40"
+                >
+                  Dismiss
+                </button>
               </div>
             ) : null}
 
@@ -168,6 +179,7 @@ export function ChatShell() {
                   <EmptyState
                     onSelectPrompt={chat.handleSendMessage}
                     userName={chat.studentProfile.name}
+                    disabled={chat.loading}
                   >
                     {composer}
                   </EmptyState>

@@ -33,9 +33,6 @@ interface MarkdownContentProps {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: number) {
-  if (highlightStart) {
-    console.log("shouldHighlight node:", node);
-  }
   if (!node || !node.position || !highlightStart) return undefined;
   const start = node.position.start.line;
   const end = node.position.end.line;
@@ -47,6 +44,7 @@ function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: numb
 function InlineCitation({ index, citation }: { index: number; citation: Citation }) {
   const { prefetchDocument, openDocument } = useDocumentViewer()
   const hasSource = Boolean(citation.path)
+  const hoverTimerRef = React.useRef<NodeJS.Timeout | null>(null)
 
   if (!hasSource) {
     return (
@@ -67,17 +65,11 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
     <button
       type="button"
       onMouseEnter={() => {
-        if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+        if (typeof window !== "undefined" && window.innerWidth < 768) return
         prefetchDocument(viewerTarget)
-        openDocument(viewerTarget)
       }}
       onClick={() => {
-        const isUrl = citation.file.startsWith("http://") || citation.file.startsWith("https://")
-        if (isUrl) {
-          window.open(citation.file, "_blank", "noopener,noreferrer")
-        } else {
-          openDocument(viewerTarget)
-        }
+        window.open(citation.file, "_blank", "noopener,noreferrer")
       }}
       className="inline-flex items-center justify-center rounded-full bg-theme-gray px-1.5 py-0.5 text-[10px] font-medium text-theme-yellow hover:bg-theme-gray-light hover:text-neutral-100 transition-colors mx-0.5 cursor-pointer"
       aria-label={`View source: ${citation.title ?? citation.file}`}

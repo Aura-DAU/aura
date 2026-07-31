@@ -1,41 +1,66 @@
 "use client"
 
-import { CalendarDays, Loader2 } from "lucide-react"
-import { useTimetable } from "@/hooks/use-timetable"
-import { useCohortProfile } from "@/hooks/use-cohort-profile"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { CalendarDays, Loader2, Sparkles, Settings2 } from "lucide-react"
+import { useTimetable, TimetableSlot } from "@/hooks/use-timetable"
 import { TimetableSetupCard } from "@/components/features/dashboard/TimetableSetupCard"
 
-const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const
+// Classes only run Monday–Friday, so that's all we show.
+const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const
+const DAY_SHORT_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri"] as const
+
+const SETUP_PROMPT =
+  "I'd like to set up my personal timetable — please ask me for my section and electives."
 
 function todayDayOfWeek(): number {
-  // JS: 0=Sun … 6=Sat → convert to 1=Mon … 7=Sun used by timetable slots
+  // JS: 0=Sun … 6=Sat → convert to 0=Mon … 4=Fri used by DAY_NAMES/DAY_SHORT_NAMES.
+  // On a Saturday or Sunday there's no matching column, so default to Monday.
   const jsDay = new Date().getDay()
-  return jsDay === 0 ? 7 : jsDay
+  if (jsDay === 0 || jsDay === 6) return 0
+  return jsDay - 1
 }
 
-/** Displays today's classes from the live AURA timetable API.
- *  Shows a setup wizard on first visit when no cohort is configured. */
+function ClassCard({ slot }: { slot: TimetableSlot }) {
+  return (
+    <div className="flex flex-col rounded-xl border border-theme-gray-light bg-theme-gray-light/40 px-3 py-2.5 hover:bg-theme-gray-light/60 transition-colors">
+      <p className="text-xs font-semibold text-neutral-100 leading-snug">
+        {slot.course_name}
+        {slot.course_code ? ` (${slot.course_code})` : ""}
+      </p>
+      <div className="mt-2 flex items-end justify-between gap-2">
+        <div className="min-w-0 flex-1 text-[10px] text-neutral-400">
+          {slot.room ? <p className="truncate text-theme-yellow/80">{slot.room}</p> : null}
+          {slot.faculty_name ? <p className="truncate">{slot.faculty_name}</p> : null}
+        </div>
+        <span className="shrink-0 rounded-md bg-theme-gray-lighter/80 px-1.5 py-0.5 text-[10px] font-medium text-neutral-300">
+          {slot.start_time} – {slot.end_time}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+/** Displays the live AURA timetable API in a weekly grid (desktop) or day-pills (mobile).
+ *
+ *  On first login, before the student has told AURA their section/electives, the backend
+ *  already returns a sensible default (year/branch inferred from their email, section "A")
+ *  — see service.get_effective_timetable's `is_common` fallback. This card shows that
+ *  default immediately rather than gating the whole view behind a setup wizard; a small
+ *  banner nudges the student to personalize it in chat instead. */
 export function TimetableCard() {
   const { data, loading, error, refetch } = useTimetable()
-  const { profile, loading: profileLoading } = useCohortProfile()
-  const today = todayDayOfWeek()
+  const router = useRouter()
 
-  const entries = (data?.timetable ?? [])
-    .filter((slot) => slot.day_of_week === today - 1)
-    .slice()
-    .sort((a, b) => a.start_time.localeCompare(b.start_time))
+  const todayIndex = todayDayOfWeek() // 0=Mon … 4=Fri (weekends default to Monday)
+  const [selectedDay, setSelectedDay] = useState(todayIndex)
+  const [showManualSetup, setShowManualSetup] = useState(false)
 
-  // Show setup card when profile is not yet configured or timetable returned a
-  // cohort-not-found error (the backend returns a 409 with a descriptive message).
-  const notConfigured =
-    (!profileLoading && profile && !profile.is_configured) ||
-    (error !== null && (
-      error.toLowerCase().includes("not set up") ||
-      error.toLowerCase().includes("cohort") ||
-      error.toLowerCase().includes("section")
-    ))
+  const handlePersonalizeInChat = () => {
+    router.push(`/?prompt=${encodeURIComponent(SETUP_PROMPT)}`)
+  }
 
-  if (profileLoading && !data) {
+  if (loading && !data) {
     return (
       <div className="rounded-2xl border border-theme-gray-light bg-theme-gray p-5">
         <div className="flex items-center gap-2 text-xs text-neutral-500">
@@ -45,25 +70,67 @@ export function TimetableCard() {
     )
   }
 
-  if (notConfigured) {
-    return <TimetableSetupCard onComplete={() => void refetch()} />
+  if (showManualSetup) {
+    return (
+      <TimetableSetupCard
+        onComplete={() => {
+          setShowManualSetup(false)
+          void refetch()
+        }}
+      />
+    )
   }
+
+  const allSlots = data?.timetable ?? []
+  const needsConfiguration = Boolean(data?.needs_configuration || data?.is_common)
+
+  // Helper to get sorted slots for a specific day
+  const getSlotsForDay = (dayIndex: number) => {
+    return allSlots
+      .filter((slot) => slot.day_of_week === dayIndex)
+      .slice()
+      .sort((a, b) => a.start_time.localeCompare(b.start_time))
+  }
+
+  const mobileEntries = getSlotsForDay(selectedDay)
 
   return (
     <div className="rounded-2xl border border-theme-gray-light bg-theme-gray p-5">
-      <div className="mb-4 flex items-center gap-2">
-        <CalendarDays className="size-4 shrink-0 text-theme-yellow" />
-        <h2 className="text-sm font-semibold text-neutral-200">
-          Today&apos;s Timetable
-          <span className="ml-1.5 text-xs font-normal text-neutral-500">
-            — {DAY_NAMES[today - 1]}
-          </span>
-        </h2>
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <CalendarDays className="size-4 shrink-0 text-theme-yellow" />
+          <h2 className="text-sm font-semibold text-neutral-200">
+            My Timetable
+          </h2>
+        </div>
+        <button
+          type="button"
+          onClick={() => setShowManualSetup(true)}
+          className="flex shrink-0 items-center gap-1 text-[10px] font-medium text-neutral-500 hover:text-neutral-300"
+        >
+          <Settings2 className="size-3" /> Customize
+        </button>
       </div>
+
+      {needsConfiguration && !loading && !error && (
+        <button
+          type="button"
+          onClick={handlePersonalizeInChat}
+          className="mb-4 flex w-full items-start gap-2 rounded-xl border border-theme-yellow/30 bg-theme-yellow/5 px-3 py-2.5 text-left transition-colors hover:bg-theme-yellow/10"
+        >
+          <Sparkles className="mt-0.5 size-3.5 shrink-0 text-theme-yellow" />
+          <span className="text-[11px] leading-relaxed text-neutral-300">
+            {data?.is_common
+              ? "This is the default timetable for your year (Section A). "
+              : "Your core schedule is set — "}
+            Tell AURA your section and electives in chat to personalize it.
+          </span>
+        </button>
+      )}
 
       {loading ? (
         <div className="flex items-center gap-2 text-xs text-neutral-500">
-          <Loader2 className="size-3.5 animate-spin" /> Loading today&apos;s classes…
+          <Loader2 className="size-3.5 animate-spin" /> Loading classes…
         </div>
       ) : error ? (
         <p className="text-xs text-neutral-500">
@@ -72,33 +139,58 @@ export function TimetableCard() {
             Try again
           </button>
         </p>
-      ) : entries.length === 0 ? (
-        <p className="text-xs text-neutral-500">No classes today. Enjoy your break!</p>
       ) : (
-        <ul className="space-y-2">
-          {entries.map((slot) => (
-            <li
-              key={slot.id}
-              className="flex items-start justify-between gap-3 rounded-xl border border-theme-gray-light bg-theme-gray-light/40 px-3 py-2.5"
-            >
-              <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-neutral-100">
-                  {slot.course_name}
-                  {slot.course_code ? ` (${slot.course_code})` : ""}
-                </p>
-                {slot.room ? (
-                  <p className="mt-0.5 text-xs text-neutral-500">{slot.room}</p>
-                ) : null}
-                {slot.faculty_name ? (
-                  <p className="mt-0.5 text-xs text-neutral-500">{slot.faculty_name}</p>
-                ) : null}
+        <>
+          {/* MOBILE VIEW: Day Selector + List */}
+          <div className="block md:hidden">
+            <div className="mb-4 flex snap-x gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              {DAY_SHORT_NAMES.map((day, idx) => (
+                <button
+                  key={day}
+                  type="button"
+                  onClick={() => setSelectedDay(idx)}
+                  className={`shrink-0 snap-start rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${selectedDay === idx
+                    ? "bg-theme-yellow text-theme-black"
+                    : "bg-theme-gray-light text-neutral-400 hover:bg-theme-gray-lighter hover:text-neutral-200"
+                    }`}
+                >
+                  {day}
+                </button>
+              ))}
+            </div>
+            {mobileEntries.length === 0 ? (
+              <p className="text-xs text-neutral-500 py-4 text-center">No classes scheduled.</p>
+            ) : (
+              <div className="flex flex-col gap-2">
+                {mobileEntries.map((slot) => (
+                  <ClassCard key={slot.id} slot={slot} />
+                ))}
               </div>
-              <span className="shrink-0 rounded-full bg-theme-gray-lighter px-2 py-0.5 text-xs text-neutral-400">
-                {slot.start_time} – {slot.end_time}
-              </span>
-            </li>
-          ))}
-        </ul>
+            )}
+          </div>
+
+          {/* DESKTOP VIEW: Weekly Grid */}
+          <div className="hidden md:grid grid-cols-5 gap-3">
+            {DAY_NAMES.map((day, idx) => {
+              const daySlots = getSlotsForDay(idx)
+              const isToday = todayIndex === idx
+              return (
+                <div key={day} className="flex flex-col gap-2">
+                  <div className={`text-center py-1 text-xs font-semibold rounded-md ${isToday ? 'bg-theme-yellow/20 text-theme-yellow' : 'text-neutral-400'}`}>
+                    {day}
+                  </div>
+                  {daySlots.length === 0 ? (
+                    <div className="flex-1 rounded-xl border border-dashed border-theme-gray-light/30 flex items-center justify-center py-6">
+                      <span className="text-[10px] text-neutral-600">Free</span>
+                    </div>
+                  ) : (
+                    daySlots.map((slot) => <ClassCard key={slot.id} slot={slot} />)
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </>
       )}
     </div>
   )

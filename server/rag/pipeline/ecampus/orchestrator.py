@@ -18,7 +18,11 @@ from .tool_registry import (
     TOOL_REGISTRY as _ECAMPUS_TOOL_REGISTRY,
     PUBLIC_KB_TOOL_NAMES,
 )
-from ..timetable.tool_registry import tools_for_role as _timetable_tools_for_role, TOOL_REGISTRY as _TIMETABLE_TOOL_REGISTRY
+from ..timetable.tool_registry import (
+    tools_for_role as _timetable_tools_for_role,
+    TOOL_REGISTRY as _TIMETABLE_TOOL_REGISTRY,
+    PUBLIC_TOOL_NAMES as _TIMETABLE_PUBLIC_TOOL_NAMES,
+)
 
 # Merged view used by this orchestrator. Kept as two separate source-of-truth
 # registries (pipeline.ecampus.tool_registry stays strictly read-only against
@@ -63,6 +67,11 @@ Rules:
 - Use the available tools to answer from published campus documents. Prefer the
   most specific tool (faculty profile, club roster, academic calendar,
   admissions, placements, facilities, policy, etc.) over guessing.
+- For "what's the timetable for <year/sem> <branch> section <X>"-style questions
+  about a cohort that is NOT the requester's own, use get_cohort_timetable —
+  it queries the live master schedule directly. Don't fall back to a generic
+  "couldn't find that" answer for these; call the tool with whatever
+  sem/year/section/branch the user gave (section defaults to 'A').
 - Never invent people, club members, convenors, emails, dates, fees, or
   committee composition — if a tool returns empty or missing fields, say the
   published campus documents do not list that detail.
@@ -99,7 +108,10 @@ class EcampusOrchestrator:
 
     def _tool_schemas(self, role: str, tool_scope: str = "personal") -> list[dict]:
         if tool_scope in _PUBLIC_KB_SCOPES:
-            selected = _public_kb_tools_for_role(role)
+            selected = _public_kb_tools_for_role(role) + [
+                t for t in _timetable_tools_for_role(role)
+                if t.name in _TIMETABLE_PUBLIC_TOOL_NAMES
+            ]
         else:
             selected = _tools_for_role(role)
         return [
@@ -158,7 +170,11 @@ class EcampusOrchestrator:
             tool = MERGED_TOOL_REGISTRY.get(call.function.name)
             # Public-KB path: refuse personal ERP / write tools even if named
             # (defense in depth — personal ERP stays gated).
-            if use_public_kb and call.function.name not in PUBLIC_KB_TOOL_NAMES:
+            if (
+                use_public_kb
+                and call.function.name not in PUBLIC_KB_TOOL_NAMES
+                and call.function.name not in _TIMETABLE_PUBLIC_TOOL_NAMES
+            ):
                 result = {"error": "Tool not available on the public KB path."}
             elif tool is None or identity["role"] not in tool.allowed_roles:
                 # Defense in depth: even if the model somehow names a tool it

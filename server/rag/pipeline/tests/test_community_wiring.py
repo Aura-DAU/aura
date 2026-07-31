@@ -51,14 +51,24 @@ class _StubCompletions:
 
 
 def _router_returning(content: str, raises: bool = False) -> PersonalDataIntentRouter:
+    """Build a router whose LLM call is stubbed via call_with_rotation.
+
+    PersonalDataIntentRouter no longer holds a sticky client — every classify()
+    goes through InferenceRouter.call_with_rotation — so the stub has to land
+    there, not on router.client.
+    """
     router = PersonalDataIntentRouter()
     completions = _StubCompletions(content, raises=raises)
-    router.client = type(
-        "_StubClient",
-        (),
-        {"chat": type("_Chat", (), {"completions": completions})()},
-    )()
+
+    class _StubClient:
+        base_url = "http://stub-node/v1"
+        chat = type("_Chat", (), {"completions": completions})()
+
+    def _fake_rotation(fn, max_retries=3, **_kwargs):
+        return fn(_StubClient())
+
     router._stub = completions
+    router._fake_rotation = _fake_rotation
     return router
 
 
@@ -73,14 +83,53 @@ def _router_returning(content: str, raises: bool = False) -> PersonalDataIntentR
         ("something else", "GENERAL"),
     ],
 )
-def test_intent_router_classify_parsing(raw, expected):
-    assert _router_returning(raw).classify("q") == expected
+def test_intent_router_classify_parsing(raw, expected, monkeypatch):
+    router = _router_returning(raw)
+    monkeypatch.setattr(
+        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
+        router._fake_rotation,
+    )
+    assert router.classify("q") == expected
 
 
-def test_intent_router_fails_toward_general():
-    assert _router_returning("", raises=True).classify("my CGPA") == "GENERAL"
-    assert _router_returning("", raises=True).is_community_query("clubs") is False
-    assert _router_returning("", raises=True).is_personal_data_query("cgpa") is False
+def test_intent_router_fails_toward_general(monkeypatch):
+    router = _router_returning("", raises=True)
+    monkeypatch.setattr(
+        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
+        router._fake_rotation,
+    )
+    assert router.classify("my CGPA") == "GENERAL"
+    assert router.is_community_query("clubs") is False
+    assert router.is_personal_data_query("cgpa") is False
+
+
+def test_intent_router_parse_failure_emits_soft_failure_code(monkeypatch, caplog):
+    """CHAT-05: an unparsed classifier reply must not be silent."""
+    import logging
+
+    router = _router_returning("NOT_A_LABEL")
+    monkeypatch.setattr(
+        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
+        router._fake_rotation,
+    )
+    with caplog.at_level(logging.ERROR):
+        assert router.classify("q") == "GENERAL"
+    assert any("AURA-ROUTE-002" in r.message for r in caplog.records)
+
+
+def test_intent_router_exception_emits_soft_failure_code(monkeypatch, caplog):
+    """CHAT-05: classifier exceptions must log AURA-ROUTE-001, not vanish."""
+    import logging
+
+    router = _router_returning("", raises=True)
+    monkeypatch.setattr(
+        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
+        router._fake_rotation,
+    )
+    with caplog.at_level(logging.ERROR):
+        assert router.classify("q") == "GENERAL"
+    assert any("AURA-ROUTE-001" in r.message for r in caplog.records)
+    assert any("exc_type=RuntimeError" in r.message for r in caplog.records)
 
 
 def test_intent_router_prompt_includes_public_kb_domains():
@@ -130,7 +179,7 @@ def test_orchestrator_public_kb_scope_schemas_exclude_erp():
             s["function"]["name"]
             for s in orch._tool_schemas("student", tool_scope=scope)
         }
-        assert names <= PUBLIC_KB_TOOL_NAMES
+        assert names <= (PUBLIC_KB_TOOL_NAMES | {"get_cohort_timetable"})
         assert "get_cgpa" not in names
         assert "search_student_clubs" in names
         assert "lookup_faculty_profile" in names

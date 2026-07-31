@@ -10,6 +10,7 @@ function buildToken(session: Session | null) {
     role: session.user.role,
     erpId: session.user.erpId,
     department: session.user.department,
+    email: session.user.email ?? undefined,
     fullName: session.user.fullName,
     currentYear: session.user.currentYear,
     currentSem: session.user.currentSem,

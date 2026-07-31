@@ -11,7 +11,14 @@ import type {
 import { useSession } from "next-auth/react"
 import { apiFetch } from "@/lib/auth-client"
 import { getUserMessage, toastAppError, toastError, toastSuccess, appErrorFromResponse } from "@/lib/toast"
-import { AppError, isAbortError } from "@/lib/errors"
+import { AppError, ErrorCode, isAbortError, sanitizePublicMessage } from "@/lib/errors"
+
+/** Soft failure copy the pipeline sometimes returns as a normal answer. */
+const SOFT_FAILURE_ANSWER =
+  /i'?m having trouble (retrieving information|reaching the student records)/i
+
+const STREAM_ERROR_FALLBACK =
+  "Something went wrong while processing your request. Please try again."
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
@@ -37,7 +44,8 @@ function deriveTitle(text: string): string {
 }
 
 /** Last-activity timestamp for sidebar ordering / server merge. */
-function threadUpdatedAt(messages: ChatMessage[], fallback = Date.now()): number {
+function threadUpdatedAt(messages: ChatMessage[] | undefined, fallback = Date.now()): number {
+  if (!messages || messages.length === 0) return fallback
   for (let i = messages.length - 1; i >= 0; i--) {
     const ts = messages[i]?.timestamp
     if (typeof ts === "number" && ts > 0) return ts
@@ -69,6 +77,96 @@ function toBackendHistory(messages: ChatMessage[]) {
   return messages.map(({ role, content }) => ({ role, content }))
 }
 
+/** Seconds to wait after a load shed when no usable Retry-After is present. */
+const DEFAULT_RETRY_AFTER_SECONDS = 5
+
+export interface ShedSignal {
+  /** Which layer shed the request — the edge (429) or backend admission (503). */
+  shedBy: "edge" | "backend"
+  retryAfterSeconds: number
+}
+
+export function parseRetryAfterSeconds(
+  value: string | null | undefined,
+  fallback = DEFAULT_RETRY_AFTER_SECONDS,
+): number {
+  if (!value) return fallback
+  const seconds = Number(value)
+  if (Number.isFinite(seconds) && seconds > 0) return Math.ceil(seconds)
+  const at = Date.parse(value)
+  if (!Number.isNaN(at)) {
+    const delta = Math.ceil((at - Date.now()) / 1000)
+    if (delta > 0) return delta
+  }
+  return fallback
+}
+
+/**
+ * Distinguishes a capacity shed from the per-identity question quota.
+ *
+ * The edge sheds with 429 + `EDGE_OVERLOADED` / `X-Aura-Shed-By: edge` and
+ * backend admission with 503 + `ADMISSION_OVERLOADED` / `X-Aura-Shed-By:
+ * backend`; a real quota exhaustion is a 429 carrying neither. Treating every
+ * 429 as quota would zero a guest's counter for the rest of the day over what
+ * is actually a transient overload they can retry in seconds.
+ *
+ * Pass a clone — this consumes the body.
+ */
+export async function readShedSignal(res: Response): Promise<ShedSignal | null> {
+  if (res.status !== 429 && res.status !== 503) return null
+
+  let payload: { code?: string; shedBy?: string; retryAfter?: number } | null = null
+  try {
+    payload = (await res.json()) as { code?: string; shedBy?: string; retryAfter?: number }
+  } catch {
+    payload = null
+  }
+
+  const shedBy = res.headers.get("X-Aura-Shed-By") ?? payload?.shedBy
+  const code = payload?.code
+  const isOverload =
+    code === "EDGE_OVERLOADED" ||
+    code === "ADMISSION_OVERLOADED" ||
+    shedBy === "edge" ||
+    shedBy === "backend"
+  if (!isOverload) return null
+
+  const bodyRetry =
+    typeof payload?.retryAfter === "number" && payload.retryAfter > 0
+      ? Math.ceil(payload.retryAfter)
+      : DEFAULT_RETRY_AFTER_SECONDS
+
+  return {
+    shedBy: shedBy === "backend" ? "backend" : "edge",
+    retryAfterSeconds: parseRetryAfterSeconds(res.headers.get("Retry-After"), bodyRetry),
+  }
+}
+
+export function shedErrorFor(shed: ShedSignal): AppError {
+  const s = shed.retryAfterSeconds
+  return new AppError({
+    code: ErrorCode.BACKEND_UNAVAILABLE,
+    message: `AURA is busy right now — please retry in ${s} second${s === 1 ? "" : "s"}.`,
+    detail: `shed_by=${shed.shedBy}`,
+  })
+}
+
+/**
+ * Index into `priorMessages` for the start of the unsummarised tail.
+ *
+ * Always `priorSummaryCount` (clamped to the transcript). Never advance past it:
+ * a turn past that pointer is not yet in the summary, so skipping it here would
+ * drop it from the model's context entirely. Compaction of an over-long
+ * unsummarised span is the backend's job (`AURA_MAX_TAIL_TURNS`); this helper
+ * must not invent a second, silent drop.
+ */
+export function computeHistoryTailStart(
+  priorSummaryCount: number,
+  priorMessageCount: number,
+): number {
+  return Math.min(Math.max(priorSummaryCount, 0), priorMessageCount)
+}
+
 // Fire-and-forget — never blocks the UI. Coalesces concurrent saves so an
 // older in-flight POST cannot overwrite a newer snapshot on the server.
 let historySyncSeq = 0
@@ -98,6 +196,28 @@ function saveHistoryToServer(
       }
     })
     .catch(() => { /* ignore network errors */ })
+}
+
+/**
+ * Drops this conversation's block from the backend's persistent per-user
+ * memory. Clearing or deleting a chat has to reach storage: the block is keyed
+ * by thread id and otherwise survives for the full retention window (90 days by
+ * default), still being injected into later conversations. Guests are a no-op —
+ * they have no stored memory. Failures are surfaced, because silently keeping
+ * memory the user asked to delete is a privacy problem, not a cosmetic one.
+ */
+function forgetThreadMemory(threadId: string): void {
+  apiFetch(`/api/memory?threadId=${encodeURIComponent(threadId)}`, {
+    method: "DELETE",
+  })
+    .then((res) => {
+      if (!res.ok) {
+        toastError("Couldn't delete this chat's saved memory. Please try again.")
+      }
+    })
+    .catch(() => {
+      toastError("Couldn't delete this chat's saved memory. Please try again.")
+    })
 }
 
 /**
@@ -266,10 +386,15 @@ export function useAuraChat() {
   const lastVolumeUpdateRef = useRef(0)
   const mountedRef = useRef(true)
   const activeThreadIdRef = useRef<string | null>(null)
+  const loadingRef = useRef(false)
 
   useEffect(() => {
     activeThreadIdRef.current = activeThreadId
   }, [activeThreadId])
+
+  useEffect(() => {
+    loadingRef.current = loading
+  }, [loading])
 
   useEffect(() => {
     mountedRef.current = true
@@ -283,10 +408,14 @@ export function useAuraChat() {
     try {
       const rawThreads = localStorage.getItem(STORAGE_KEY)
       if (rawThreads) {
-        const parsed = (JSON.parse(rawThreads) as StoredThread[]).map((t) => ({
-          ...t,
-          updatedAt: t.updatedAt ?? threadUpdatedAt(t.messages, 0),
-        }))
+        const parsed = (JSON.parse(rawThreads) as StoredThread[]).map((t) => {
+          const safeMessages = Array.isArray(t.messages) ? t.messages : []
+          return {
+            ...t,
+            messages: safeMessages,
+            updatedAt: t.updatedAt ?? threadUpdatedAt(safeMessages, 0),
+          }
+        })
         const sorted = sortThreadsByRecency(parsed)
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setThreads(sorted)
@@ -315,9 +444,11 @@ export function useAuraChat() {
               const activity = (t: StoredThread) =>
                 t.updatedAt ?? threadUpdatedAt(t.messages, 0)
               for (const t of data.threads as StoredThread[]) {
+                const safeMessages = Array.isArray(t.messages) ? t.messages : []
                 map.set(t.id, {
                   ...t,
-                  updatedAt: activity(t),
+                  messages: safeMessages,
+                  updatedAt: t.updatedAt ?? threadUpdatedAt(safeMessages, 0),
                 })
               }
               for (const t of prev) {
@@ -332,9 +463,9 @@ export function useAuraChat() {
               if (!prev.length && merged[0]) {
                 setActiveThreadIdState(merged[0].id)
                 setMessages(merged[0].messages)
-              } else if (activeId) {
+              } else if (activeId && !loadingRef.current) {
                 // Only replace the open transcript when the merge actually
-                // chose a newer copy (avoids clobbering an in-progress stream).
+                // chose a newer copy. Never clobber while a reply is streaming.
                 const active = merged.find((t) => t.id === activeId)
                 const prevActive = prev.find((t) => t.id === activeId)
                 if (
@@ -411,6 +542,7 @@ export function useAuraChat() {
     (id: string) => {
       abortRef.current?.abort()
       abortRef.current = null
+      loadingRef.current = false
       setLoading(false)
       setThinkingStep(undefined)
       setActiveThreadIdState(id)
@@ -425,6 +557,7 @@ export function useAuraChat() {
   const startNewChat = useCallback(() => {
     abortRef.current?.abort()
     abortRef.current = null
+    loadingRef.current = false
     setLoading(false)
     setThinkingStep(undefined)
     setActiveThreadIdState(null)
@@ -451,6 +584,7 @@ export function useAuraChat() {
         syncThreadsToServer(next)
         return next
       })
+      forgetThreadMemory(id)
     },
     [activeThreadId, syncThreadsToServer],
   )
@@ -467,12 +601,15 @@ export function useAuraChat() {
   const handleSendMessage = useCallback(
     async (text: string, options?: { regenerate?: boolean }) => {
       const trimmed = text.trim()
-      if (!trimmed || loading || remainingQuota === 0) return
+      if (!trimmed || loadingRef.current || remainingQuota === 0) return
 
       abortRef.current?.abort()
       const controller = new AbortController()
       abortRef.current = controller
 
+      loadingRef.current = true
+      setLoading(true)
+      setThinkingStep("Thinking…")
       setErrorMessage(null)
       if (!options?.regenerate) {
         setInputText("")
@@ -502,17 +639,35 @@ export function useAuraChat() {
       // Regenerate: transcript already ends at the last user turn — do not
       // append a duplicate user message. History sent to the backend must
       // exclude that current user turn (same as a normal send).
+      // Strip trailing assistant turns first: handleRegenerate calls setState
+      // then send in the same tick, so `messages` here can still include the
+      // old reply (stale closure).
       let baseMessages: ChatMessage[]
       if (options?.regenerate) {
-        if (!threadId) return
-        const last = priorMessages[priorMessages.length - 1]
-        if (last?.role === "user" && last.content.trim() === trimmed) {
-          baseMessages = priorMessages
-          priorMessages = priorMessages.slice(0, -1)
-        } else {
-          baseMessages = [...priorMessages, userMsg]
+        if (!threadId) {
+          loadingRef.current = false
+          setLoading(false)
+          setThinkingStep(undefined)
+          return
         }
+        let transcript = priorMessages
+        while (
+          transcript.length > 0 &&
+          transcript[transcript.length - 1]?.role === "assistant"
+        ) {
+          transcript = transcript.slice(0, -1)
+        }
+        const last = transcript[transcript.length - 1]
+        if (last?.role === "user" && last.content.trim() === trimmed) {
+          baseMessages = transcript
+          priorMessages = transcript.slice(0, -1)
+        } else {
+          baseMessages = [...transcript, userMsg]
+          priorMessages = transcript
+        }
+        persistMessages(threadId, baseMessages)
       } else {
+        baseMessages = [...priorMessages, userMsg]
         if (!threadId) {
           threadId = uid()
           const newThread: StoredThread = {
@@ -534,18 +689,18 @@ export function useAuraChat() {
 
       setMessages(baseMessages)
 
-      // Rolling memory: send the running summary + only the unsummarised tail,
-      // bounded so the request stays under the 20-turn API cap. The backend
-      // folds any overflow into the summary and streams the update back.
+      // Rolling memory: send the running summary plus every turn after it. The
+      // start must never move past priorSummaryCount — a turn skipped here is in
+      // neither the summary nor the tail, so it disappears from the model's
+      // context with no user-visible signal. The backend compacts an over-long
+      // tail itself (ConversationMemory.prepare folds once the span passes
+      // AURA_MAX_TAIL_TURNS, well under the API's 20-turn history cap) and
+      // reports foldedTurns so this pointer advances on the next request.
       const activeThread = threads.find((t) => t.id === threadId)
       const priorSummaryCount = activeThread?.summaryTurnCount ?? 0
       const threadSummary = activeThread?.summary
-      const MAX_TAIL_TURNS = 16
-      const tailStart = Math.max(priorSummaryCount, priorMessages.length - MAX_TAIL_TURNS)
+      const tailStart = computeHistoryTailStart(priorSummaryCount, priorMessages.length)
       const tail = priorMessages.slice(tailStart)
-
-      setLoading(true)
-      setThinkingStep("Thinking…")
 
       try {
         const response = await apiFetch("/api/chat", {
@@ -563,15 +718,23 @@ export function useAuraChat() {
 
         if (controller.signal.aborted || !mountedRef.current) return
 
-        if (response.status === 429) {
-          // Only pin the guest counter to 0. Signed-in users are unlimited;
-          // a transient 429 must not permanently lock the composer.
-          if (!session?.user) {
-            setRemainingQuotaState(0)
-          }
-          throw AppError.rateLimited()
-        }
         if (!response.ok || !response.body) {
+          // A capacity shed (edge 429 EDGE_OVERLOADED / backend 503
+          // ADMISSION_OVERLOADED) is retryable and says nothing about how many
+          // questions the user has left — it must not touch the quota counter.
+          const shed = response.ok ? null : await readShedSignal(response.clone())
+          if (shed) {
+            throw shedErrorFor(shed)
+          }
+          if (response.status === 429) {
+            // Genuine quota exhaustion. Only pin the guest counter to 0;
+            // signed-in users are unlimited, so a transient 429 must not
+            // permanently lock the composer.
+            if (!session?.user) {
+              setRemainingQuotaState(0)
+            }
+            throw AppError.rateLimited()
+          }
           throw await appErrorFromResponse(response)
         }
 
@@ -584,6 +747,7 @@ export function useAuraChat() {
         let newSummary: string | undefined
         let foldedTurns = 0
         let continuationSummary: string | undefined
+        let streamErrorMessage: string | null = null
         const assistantMsg: ChatMessage = {
           role: "assistant",
           content: "",
@@ -619,6 +783,13 @@ export function useAuraChat() {
             const errCode = typeof chunk.code === "string" ? chunk.code : "RAG_ERROR"
             const errDetail = typeof chunk.detail === "string" ? chunk.detail : ""
             console.error(`[useAuraChat] Stream error (${errCode}):`, errDetail)
+            // Prefer an explicit safe `message` if the BFF/backend adds one;
+            // never surface raw `detail` (stack / infra strings).
+            const fromChunk =
+              typeof chunk.message === "string"
+                ? sanitizePublicMessage(chunk.message)
+                : undefined
+            streamErrorMessage = fromChunk ?? STREAM_ERROR_FALLBACK
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&
@@ -631,6 +802,35 @@ export function useAuraChat() {
         }
 
         if (controller.signal.aborted || !mountedRef.current) return
+
+        // Empty reply or mid-stream failure with no usable text — roll back the
+        // blank assistant bubble and surface a clear, actionable error.
+        if (!assistantText.trim()) {
+          const msg = streamErrorMessage ?? STREAM_ERROR_FALLBACK
+          setErrorMessage(msg)
+          toastError(msg)
+          setMessages(baseMessages)
+          persistMessages(threadId, baseMessages)
+          return
+        }
+
+        if (streamErrorMessage) {
+          // Partial tokens before failure — surface clearly. When the backend
+          // already streamed an apology delta, skip toast/banner spam.
+          const bubbleIsApology =
+            assistantText.trim() === streamErrorMessage ||
+            /sorry, i encountered an error/i.test(assistantText)
+          if (!bubbleIsApology) {
+            setErrorMessage(streamErrorMessage)
+            toastError(streamErrorMessage)
+          }
+        } else if (SOFT_FAILURE_ANSWER.test(assistantText)) {
+          // Pipeline returned a soft-failure sentence as the answer. Keep the
+          // copy in-thread; banner nudges the user toward regenerate.
+          setErrorMessage(
+            "I couldn't retrieve that information. You can try regenerating the reply.",
+          )
+        }
 
         const finalMessages: ChatMessage[] = [
           ...baseMessages,
@@ -703,12 +903,13 @@ export function useAuraChat() {
       } finally {
         if (abortRef.current === controller) abortRef.current = null
         if (mountedRef.current && !controller.signal.aborted) {
+          loadingRef.current = false
           setLoading(false)
           setThinkingStep(undefined)
         }
       }
     },
-    [activeThreadId, loading, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer, syncThreadsToServer],
+    [activeThreadId, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer, syncThreadsToServer],
   )
 
   const handleClearChat = useCallback(() => {
@@ -731,6 +932,7 @@ export function useAuraChat() {
         syncThreadsToServer(next)
         return next
       })
+      forgetThreadMemory(activeThreadId)
     }
     setMessages([])
     setActiveCitations([])
@@ -764,9 +966,24 @@ export function useAuraChat() {
   const stopGeneration = useCallback(() => {
     abortRef.current?.abort()
     abortRef.current = null
+    loadingRef.current = false
     setLoading(false)
     setThinkingStep(undefined)
-  }, [])
+    // Drop an empty assistant placeholder (stop before first token). Persist
+    // any partial text so a thread switch does not lose it.
+    setMessages((prev) => {
+      const last = prev[prev.length - 1]
+      if (!last || last.role !== "assistant") return prev
+      const tid = activeThreadIdRef.current
+      if (!last.content.trim()) {
+        const next = prev.slice(0, -1)
+        if (tid) persistMessages(tid, next)
+        return next
+      }
+      if (tid) persistMessages(tid, prev)
+      return prev
+    })
+  }, [persistMessages])
 
   const lastUserMessage = messages.findLast((m) => m.role === "user")?.content ?? null
 

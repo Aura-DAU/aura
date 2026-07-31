@@ -1,4 +1,5 @@
 import os
+import re
 from enum import Enum
 
 from dotenv import load_dotenv
@@ -25,10 +26,19 @@ OFF_TOPIC_RESPONSE = (
 )
 
 
+# Implicit DAU campus keywords that naturally imply university context for authenticated users
+IMPLICIT_DAU_PAT = re.compile(
+    r"\b(?:club|clubs|canteen|mess|hostel|campus|library|attendance|semester|credits?|curriculum|course|courses|"
+    r"faculty|professor|department|dept|event|events|exam|exams|placement|placements|cgpa|cpi|minor|major|"
+    r"convocation|transport|bus|buses|student|registration|fees|admission|timetable|calendar|facility|facilities|"
+    r"canteen|where\s+is|what\s+clubs|what\s+events|what\s+courses)\b",
+    re.IGNORECASE
+)
+
+
 class QueryGuardrail:
     def __init__(self):
         load_dotenv()
-        self.client = InferenceRouter.get_client()
         self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
         self.system_prompt = """
 You are the security and scope filter for AURA, the assistant for Dhirubhai
@@ -178,16 +188,23 @@ No explanation, no punctuation, no JSON, no additional text.
 """
 
     def _classify(self, query: str) -> "Verdict":
-        response = self.client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": self.system_prompt.strip()},
-                {"role": "user", "content": f"Query to evaluate:\n{query}"},
-            ],
-            model=self.model,
-            max_tokens=12,
-            temperature=0.0,
-            extra_body=InferenceRouter.no_think_extra_body(),
-        )
+        model = self.model
+        system = self.system_prompt.strip()
+        user = f"Query to evaluate:\n{query}"
+
+        def _execute(client):
+            return client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                model=model,
+                max_tokens=12,
+                temperature=0.0,
+                extra_body=InferenceRouter.no_think_extra_body(),
+            )
+
+        response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
         result = response.choices[0].message.content.strip().upper()
 
         if os.getenv("DEBUG", "false").lower() == "true":
@@ -198,6 +215,9 @@ No explanation, no punctuation, no JSON, no additional text.
         if "UNSAFE" in result:
             return Verdict.UNSAFE
         if any(t in result for t in ("OFF_TOPIC", "OFF-TOPIC", "OFFTOPIC")):
+            # Scope Fallback Override: If LLM returns OFF_TOPIC but query contains implicit campus terms, override to SAFE
+            if IMPLICIT_DAU_PAT.search(query):
+                return Verdict.SAFE
             return Verdict.OFF_TOPIC
         return Verdict.SAFE
 

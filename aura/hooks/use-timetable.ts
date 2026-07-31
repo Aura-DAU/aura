@@ -19,6 +19,14 @@ export interface TimetableSlot {
 interface TimetableResponse {
   cohort: { year: number; sem: number; sec: string }
   timetable: TimetableSlot[]
+  // True when the backend couldn't find this student's own configured
+  // section yet and fell back to the shared default timetable for their
+  // inferred year (section "A"). See service.get_effective_timetable.
+  is_common?: boolean
+  // True when is_common, OR the student hasn't picked their electives yet.
+  // Used to show the "personalize in chat" nudge without blocking the view.
+  needs_configuration?: boolean
+  electives_configured?: boolean
 }
 
 export function useTimetable() {
@@ -29,18 +37,32 @@ export function useTimetable() {
   const refetch = useCallback(async () => {
     setLoading(true)
     setError(null)
+    const controller = new AbortController()
     try {
-      const res = await fetch("/api/timetable/me", { cache: "no-store" })
-      const json = await res.json()
+      const res = await fetch("/api/timetable/me", {
+        cache: "no-store",
+        signal: controller.signal,
+      })
       if (!res.ok) {
-        throw new Error(json?.error || "Failed to load timetable")
+        // Safely parse JSON error body — fall back if it isn't JSON (e.g. nginx 502 HTML)
+        let msg = "Failed to load timetable"
+        try {
+          const errJson = await res.json()
+          if (errJson?.error) msg = errJson.error
+        } catch {
+          // non-JSON body — keep the default message
+        }
+        throw new Error(msg)
       }
+      const json = await res.json()
       setData(json)
     } catch (err) {
+      if (err instanceof Error && err.name === "AbortError") return
       setError(err instanceof Error ? err.message : "Failed to load timetable")
     } finally {
       setLoading(false)
     }
+    return () => controller.abort()
   }, [])
 
   useEffect(() => {

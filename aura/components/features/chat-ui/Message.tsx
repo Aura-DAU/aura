@@ -122,6 +122,11 @@ export function Message({
     toast.success("Thanks for the feedback")
   }
 
+  const looksLikeSoftFailure =
+    /i'?m having trouble (retrieving information|reaching the student records)/i.test(
+      message.content,
+    ) || /sorry, i encountered an error while processing/i.test(message.content)
+
   return (
     <div className="msg-enter group flex items-start gap-3">
       <BrandMark className="mt-0.5 size-8 transition-transform duration-300 group-hover:scale-[1.03]" isActive={isStreaming} />
@@ -138,11 +143,33 @@ export function Message({
             {message.content}
             <span className="msg-caret ml-0.5 inline-block align-text-bottom" />
           </div>
-        ) : (
-          <div className="text-[15px] leading-[1.7]">
+        ) : message.content.trim() ? (
+          <div
+            className={cn(
+              "text-[15px] leading-[1.7]",
+              looksLikeSoftFailure && "text-neutral-300",
+            )}
+          >
             <MarkdownContent content={message.content} citations={citations} />
           </div>
+        ) : (
+          <p className="text-[15px] leading-[1.7] text-neutral-500">
+            No response generated.
+          </p>
         )}
+
+        {!isStreaming && looksLikeSoftFailure && onRegenerate ? (
+          <p className="mt-2 text-xs text-neutral-500">
+            Something went wrong retrieving that answer.{" "}
+            <button
+              type="button"
+              onClick={onRegenerate}
+              className="font-medium text-theme-yellow underline-offset-2 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-yellow/35"
+            >
+              Try regenerating
+            </button>
+          </p>
+        ) : null}
 
         {message.calendar_action && (
           <BookingConfirmationCard action={message.calendar_action} />
@@ -187,17 +214,13 @@ export function Message({
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                         hoverTimerRef.current = setTimeout(() => {
                           openDocument(viewerTarget)
-                        }, 500)
+                        }, 1000)
                       }}
                       onMouseLeave={() => {
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                       }}
                       onClick={() => {
-                        if (isUrl) {
-                          window.open(c.file, "_blank", "noopener,noreferrer")
-                        } else {
-                          openDocument(viewerTarget)
-                        }
+                        window.open(c.file, "_blank", "noopener,noreferrer")
                       }}
                       className={pillClasses}
                       aria-label={`View source: ${c.title ?? c.file}`}

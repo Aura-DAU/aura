@@ -11,6 +11,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# Canonical program_name for the ICT-CS specialisation. Matches the title the
+# corpus uses on the programmes-of-study page ("B.Tech. (Honours) in ICT with
+# minor in Computational Science"), which is what ingestion writes into
+# program_name for that document.
+ICT_CS_PROGRAM_NAME = "B.Tech. (Honours) in ICT with minor in Computational Science"
+
+# branch_id values, as derived by api.academic_scope_persist, mapped to the
+# canonical program_name that identifies that branch's own documents. Used to
+# widen — never narrow — the program entity inferred from a student's scope.
+BRANCH_PROGRAM_NAMES = {
+    "ict-cs": ICT_CS_PROGRAM_NAME,
+}
+
 class RetrievalPipeline:
 
     def __init__(self):
@@ -104,6 +117,24 @@ class RetrievalPipeline:
         "b.tech ict": "B.Tech. (ICT)",
         "b.tech. ict": "B.Tech. (ICT)",
         "b.tech. (ict)": "B.Tech. (ICT)",
+
+        # CHAT-02: ICT-CS is a specialisation of B.Tech. (ICT), not a separate
+        # programme (see academic_scope_persist and the ingestion extractor).
+        # It gets its own canonical program_name so ICT-CS-specific documents
+        # can be preferentially matched, while the academic-scope filter still
+        # admits generic btech-ict material for an ICT-CS student.
+        "ict cs": ICT_CS_PROGRAM_NAME,
+        "ictcs": ICT_CS_PROGRAM_NAME,
+        "btech ict cs": ICT_CS_PROGRAM_NAME,
+        "b tech ict cs": ICT_CS_PROGRAM_NAME,
+        "ict honours": ICT_CS_PROGRAM_NAME,
+        "honours ict": ICT_CS_PROGRAM_NAME,
+        "btech honours ict": ICT_CS_PROGRAM_NAME,
+        "btech honours in ict": ICT_CS_PROGRAM_NAME,
+        "ict with minor in computational science": ICT_CS_PROGRAM_NAME,
+        "btech honours in ict with minor in computational science": ICT_CS_PROGRAM_NAME,
+        "computational science": ICT_CS_PROGRAM_NAME,
+        "ict computational science": ICT_CS_PROGRAM_NAME,
 
         "csai": "B.Tech. (CS and AI)",
         "cs ai": "B.Tech. (CS and AI)",
@@ -385,28 +416,49 @@ class RetrievalPipeline:
             return None
         scoped = {
             "$and": [
-                {"applicability_scope": {"$in": ["programme", "curriculum", "course"]}},
+                {"applicability_scope": {"$in": ["programme", "curriculum"]}},
                 {"programme_id": {"$eq": academic_scope.programme_id}},
                 {"degree_level": {"$eq": academic_scope.degree_level}},
                 {"admission_year_from": {"$lte": academic_scope.admission_year}},
                 {"admission_year_to": {"$gte": academic_scope.admission_year}},
             ]
         }
+        # Course-policy documents are keyed by course_code, not by
+        # programme_id/degree_level/admission_year (they never populate those
+        # fields — the same course is often shared across programmes). They
+        # need their own clause instead of being forced through the
+        # programme/curriculum clause above, which they can never satisfy.
+        or_clauses = [
+            {"applicability_scope": {"$eq": "global"}},
+            scoped,
+        ]
+        if academic_scope.registered_course_codes:
+            or_clauses.append({
+                "$and": [
+                    {"applicability_scope": {"$eq": "course"}},
+                    {"course_code": {"$in": list(academic_scope.registered_course_codes)}},
+                ]
+            })
         # A missing branch on a document means programme-wide applicability;
         # branch equality is enforced by the post-retrieval predicate when a
         # document declares one, without excluding those programme-wide docs.
-        return {
-            "$or": [
-                {"applicability_scope": {"$eq": "global"}},
-                scoped,
-            ]
-        }
+        return {"$or": or_clauses}
 
     @staticmethod
     def _requires_academic_scope(plan: dict) -> bool:
         return plan.get("category") == "academics" or plan.get("retrieval_intent") in {
             "program_curriculum", "program_overview", "policy_version", "rules",
         }
+
+    @staticmethod
+    def _has_explicit_programme_context(plan: dict) -> bool:
+        """True when the query already names a programme/course — no personal scope needed."""
+        entities = plan.get("entities") or {}
+        return bool(
+            entities.get("program_name")
+            or entities.get("course_code")
+            or entities.get("course_name")
+        )
 
     @staticmethod
     def _eligible_results(results: list[dict], academic_scope) -> list[dict]:
@@ -416,6 +468,32 @@ class RetrievalPipeline:
             result for result in results
             if academic_scope.document_is_eligible(result.get("metadata", {}))
         ]
+
+    def _scope_program_names(self, academic_scope):
+        """Program entity value(s) implied by a student's own academic scope.
+
+        For a student on a branch that has its own corpus material (today only
+        ICT-CS), this returns BOTH the branch's canonical name and the parent
+        programme's, branch-specific first. That ordering matters and the list
+        matters:
+
+        - As a metadata filter, a multi-value list becomes ``$in``, so it
+          widens the candidate set instead of pinning it to one program_name.
+          Returning the branch name alone would exclude the generic
+          B.Tech. (ICT) material that still applies to an ICT-CS student.
+        - In `_retrieve_dual_path`, each value gets its own entity retrieval
+          whose results are fused by RRF, so ICT-CS-specific documents get an
+          independent shot at the pool rather than competing inside a single
+          B.Tech. (ICT) query they would usually lose.
+        """
+        programme_id = getattr(academic_scope, "programme_id", None)
+        if not programme_id:
+            return []
+        parent = self._canonical_program_name(programme_id)
+        branch_name = BRANCH_PROGRAM_NAMES.get(getattr(academic_scope, "branch_id", None))
+        names = [name for name in (branch_name, parent) if name]
+        # Preserve order while dropping duplicates.
+        return list(dict.fromkeys(names))
 
     def _normalize_program_name(self, name):
         if not name:
@@ -548,6 +626,7 @@ class RetrievalPipeline:
         history=None,
         user_role: str = "public",
         academic_scope=None,
+        identity=None,
     ):
         allowed_roles = get_allowed_roles(user_role)
         original_query = query
@@ -605,9 +684,11 @@ class RetrievalPipeline:
         if academic_scope and getattr(academic_scope, "programme_id", None):
             entities = plan.setdefault("entities", {})
             if not entities.get("program_name"):
-                inferred_prog = self._canonical_program_name(academic_scope.programme_id)
-                if inferred_prog:
-                    entities["program_name"] = inferred_prog
+                inferred_progs = self._scope_program_names(academic_scope)
+                if inferred_progs:
+                    entities["program_name"] = (
+                        inferred_progs[0] if len(inferred_progs) == 1 else inferred_progs
+                    )
 
         # Check if the plan contains anything that modifies retrieval or query
         entities = plan.get("entities", {})
@@ -632,7 +713,16 @@ class RetrievalPipeline:
 
         retrieval_intent = plan.get("retrieval_intent", "general")
 
-        if user_role == "student" and self._requires_academic_scope(plan) and academic_scope is None:
+        # Abstain only for personal/"my programme" curriculum questions when we
+        # cannot resolve the student's AcademicScope. If the user (or rewriter)
+        # already named a programme/course, retrieve without personal scope —
+        # curriculum docs are public and the named entity is enough to filter.
+        if (
+            user_role == "student"
+            and self._requires_academic_scope(plan)
+            and academic_scope is None
+            and not self._has_explicit_programme_context(plan)
+        ):
             return {
                 "query": original_query,
                 "corrected_query": query,
@@ -999,14 +1089,30 @@ class RetrievalPipeline:
         # For multi-entity queries 2 entities need at least 3 chunks each = 6.
         # Cap raised to 8 to give comparison queries enough chunks while staying
         # within the context token budget (3000 tokens ≈ 8-9 chunks).
-        max_final = 8 if plan.get("multi_entity_query") else 5
+        #
+        # Fix TK2: this cap was silently undoing the requires_complete_list
+        # top_k=12 boost set above — "which clubs does DAU have" and similar
+        # enumeration queries got plan["top_k"]=12 but then
+        # min(12, 5)=5 threw 7 of those chunks away before they ever reached
+        # the LLM, producing partial lists (e.g. "top 10 clubs" out of 30+).
+        # requires_complete_list queries now get the same higher ceiling as
+        # multi_entity_query, and the effective context-token budget is
+        # widened to match (see ContextBuilder.build's retrieval_intent
+        # handling) so those extra chunks aren't cut again downstream.
+        if requires_complete_list:
+            max_final = 15
+        elif plan.get("multi_entity_query"):
+            max_final = 8
+        else:
+            max_final = 5
         final_top_k = min(plan.get("top_k", 5), max_final)
         final_chunks = reranked[:final_top_k]
 
         built = (
             self.builder.build(
                 final_chunks,
-                retrieval_intent=retrieval_intent
+                retrieval_intent=retrieval_intent,
+                requires_complete_list=requires_complete_list,
             )
         )
 
