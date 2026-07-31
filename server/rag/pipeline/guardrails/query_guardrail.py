@@ -189,12 +189,6 @@ No explanation, no punctuation, no JSON, no additional text.
 """
 
     def _classify(self, query: str) -> "Verdict":
-        # Implicit Campus Pre-pass: Queries containing implicit university keywords are always ON-TOPIC / SAFE
-        if IMPLICIT_DAU_PAT.search(query):
-            q_lower = query.lower()
-            if not any(k in q_lower for k in ("system prompt", "api_key", "password", "secret", "bypass")):
-                return Verdict.SAFE
-
         response = self.client.chat.completions.create(
             messages=[
                 {"role": "system", "content": self.system_prompt.strip()},
