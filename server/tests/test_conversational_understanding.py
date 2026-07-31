@@ -46,8 +46,8 @@ class TestConversationalUnderstanding(unittest.TestCase):
         for q in implicit_queries:
             with self.subTest(query=q):
                 self.assertTrue(bool(IMPLICIT_DAU_PAT.search(q)), f"Query '{q}' should match IMPLICIT_DAU_PAT")
-                verdict = self.guardrail.classify(q)
-                self.assertEqual(verdict, Verdict.SAFE, f"Query '{q}' should be classified as SAFE")
+                is_safe = self.guardrail.is_safe(q)
+                self.assertTrue(is_safe, f"Query '{q}' should be classified as SAFE")
 
     # 2. Pure Profile Queries Test (Fast-path <1ms, bypasses RAG & Wellness)
     def test_pure_profile_queries(self):
