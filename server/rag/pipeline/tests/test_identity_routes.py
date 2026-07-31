@@ -60,7 +60,8 @@ def test_unknown_email_returns_guest():
 
 
 def test_valid_range_student_email_resolves():
-    with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db:
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db, \
+         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert:
         res = client.get("/internal/resolve-identity?email=202401475@dau.ac.in",
                          headers=GOOD_HEADERS)
     assert res.status_code == 200
@@ -70,6 +71,7 @@ def test_valid_range_student_email_resolves():
     assert data["department"] == "ICTCS"  # prog code "014" → ICTCS
     # Ensure write-through cache called db_conn.execute
     assert mock_db.execute.called
+    upsert.assert_called_once_with(erp_id="202401475", dept="ICTCS")
 
 
 # ---------------------------------------------------------------------------
@@ -79,7 +81,8 @@ def test_valid_range_student_email_resolves():
 
 def _student_dept(erp_id: str) -> str:
     """Helper: fetch dept for a fresh student login (no DB row)."""
-    with patch("api.routes.identity_routes.db_conn", _mock_db([])):
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])), \
+         patch("api.routes.identity_routes.upsert_student_academic_scope"):
         res = client.get(f"/internal/resolve-identity?email={erp_id}@dau.ac.in",
                          headers=GOOD_HEADERS)
     assert res.status_code == 200
@@ -131,8 +134,6 @@ def test_branch_code_unknown_defaults_to_ict():
     assert _student_dept("202499001") == "ICT"
 
 
-
-
 def test_out_of_range_student_email_resolves_as_guest():
     with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db:
         res = client.get("/internal/resolve-identity?email=202101002@dau.ac.in",
@@ -146,7 +147,8 @@ def test_out_of_range_student_email_resolves_as_guest():
 
 
 def test_matching_faculty_email_resolves():
-    with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db:
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db, \
+         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert:
         res = client.get("/internal/resolve-identity?email=abhishek.gupta@dau.ac.in",
                          headers=GOOD_HEADERS)
     assert res.status_code == 200
@@ -154,6 +156,8 @@ def test_matching_faculty_email_resolves():
     assert data["role"] == "faculty"
     assert data["erp_id"] == "FAC_ABHISHEK.GUPTA"
     assert mock_db.execute.called
+    # Faculty should not get academic-scope student rows
+    upsert.assert_not_called()
 
 
 def test_non_matching_faculty_email_resolves_as_guest():
@@ -169,7 +173,8 @@ def test_non_matching_faculty_email_resolves_as_guest():
 
 def test_known_student_email_returns_identity():
     fake_row = [{"erp_id": "202301234", "role": "student", "dept": "ICT"}]
-    with patch("api.routes.identity_routes.db_conn", _mock_db(fake_row)):
+    with patch("api.routes.identity_routes.db_conn", _mock_db(fake_row)), \
+         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert:
         res = client.get("/internal/resolve-identity?email=parth@dau.ac.in",
                          headers=GOOD_HEADERS)
     assert res.status_code == 200
@@ -177,21 +182,43 @@ def test_known_student_email_returns_identity():
     assert data["erp_id"]     == "202301234"
     assert data["role"]        == "student"
     assert data["department"]  == "ICT"
+    upsert.assert_called_once_with(erp_id="202301234", dept="ICT")
+
+
+def test_known_student_email_persists_academic_scope():
+    fake_row = [{
+        "erp_id": "202301234",
+        "role": "student",
+        "dept": "ICT",
+        "full_name": "Parth Agrawal",
+        "current_year": 3,
+        "current_sem": 5,
+        "current_sec": "A",
+    }]
+    with patch("api.routes.identity_routes.db_conn", _mock_db(fake_row)), \
+         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert:
+        res = client.get("/internal/resolve-identity?email=parth@dau.ac.in",
+                         headers=GOOD_HEADERS)
+    assert res.status_code == 200
+    upsert.assert_called_once_with(erp_id="202301234", dept="ICT")
 
 
 def test_known_faculty_email_returns_faculty_role():
     fake_row = [{"erp_id": "FAC001", "role": "faculty", "dept": "ICT"}]
-    with patch("api.routes.identity_routes.db_conn", _mock_db(fake_row)):
+    with patch("api.routes.identity_routes.db_conn", _mock_db(fake_row)), \
+         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert:
         res = client.get("/internal/resolve-identity?email=prof@daiict.ac.in",
                          headers=GOOD_HEADERS)
     assert res.status_code == 200
     assert res.json()["role"] == "faculty"
+    upsert.assert_not_called()
 
 
 def test_both_dau_and_daiict_domains_accepted():
     fake_row = [{"erp_id": "S1", "role": "student", "dept": "ICT"}]
     for domain in ("dau.ac.in", "daiict.ac.in"):
-        with patch("api.routes.identity_routes.db_conn", _mock_db(fake_row)):
+        with patch("api.routes.identity_routes.db_conn", _mock_db(fake_row)), \
+             patch("api.routes.identity_routes.upsert_student_academic_scope"):
             res = client.get(f"/internal/resolve-identity?email=user@{domain}",
                              headers=GOOD_HEADERS)
         assert res.status_code == 200, f"domain {domain} should be accepted"

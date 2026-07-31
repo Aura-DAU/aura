@@ -49,6 +49,16 @@ GENERIC_DENIAL = (
     "please contact the Academic Office."
 )
 
+ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE = (
+    "I don't have your academic programme details on file yet, so I can't "
+    "retrieve curriculum-specific information accurately. Please sign out and "
+    "sign back in once, then try your question again."
+)
+
+RETRIEVAL_FAILURE_RESPONSE = (
+    "I'm having trouble retrieving information right now. Please try again."
+)
+
 PERSONAL_DATA_SYSTEM_ADDENDUM = """
 ------------------------------------------------------------
 PERSONAL DATA IN CONTEXT
@@ -269,7 +279,13 @@ class AuraChat:
                 sources   = retrieval_result.get("sources", [])
 
                 if not chunks and query_type == "PUBLIC":
-                    return {"answer": "I'm having trouble retrieving information right now. Please try again.", "sources": [], "is_personal_data": False}
+                    reason = retrieval_result.get("abstention_reason")
+                    answer = (
+                        ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE
+                        if reason == "academic_scope_unavailable"
+                        else RETRIEVAL_FAILURE_RESPONSE
+                    )
+                    return {"answer": answer, "sources": [], "is_personal_data": False}
 
             # ── Step 8: Merge and generate ─────────────────────────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))

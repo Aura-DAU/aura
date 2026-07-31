@@ -49,6 +49,8 @@ from personal_query_classifier import PersonalQueryClassifier
 
 from pipeline.aura_chat import (
     GENERIC_DENIAL,
+    ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE,
+    RETRIEVAL_FAILURE_RESPONSE,
     PERSONAL_DATA_SYSTEM_ADDENDUM,
     is_greeting_or_meta,
 )
@@ -421,8 +423,14 @@ class AuraChatGraph:
         state["sources"] = retrieval_result.get("sources", [])
 
         if not state["chunks"] and query_type == "PUBLIC":
+            reason = retrieval_result.get("abstention_reason")
+            answer = (
+                ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE
+                if reason == "academic_scope_unavailable"
+                else RETRIEVAL_FAILURE_RESPONSE
+            )
             state["result"] = {
-                "answer": "I'm having trouble retrieving information right now. Please try again.",
+                "answer": answer,
                 "sources": [],
                 "is_personal_data": False,
             }
