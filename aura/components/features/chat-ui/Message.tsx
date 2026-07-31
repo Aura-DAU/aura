@@ -187,17 +187,13 @@ export function Message({
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                         hoverTimerRef.current = setTimeout(() => {
                           openDocument(viewerTarget)
-                        }, 500)
+                        }, 1000)
                       }}
                       onMouseLeave={() => {
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                       }}
                       onClick={() => {
-                        if (isUrl) {
-                          window.open(c.file, "_blank", "noopener,noreferrer")
-                        } else {
-                          openDocument(viewerTarget)
-                        }
+                        window.open(c.file, "_blank", "noopener,noreferrer")
                       }}
                       className={pillClasses}
                       aria-label={`View source: ${c.title ?? c.file}`}

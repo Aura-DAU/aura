@@ -1,4 +1,5 @@
 import os
+import re
 from enum import Enum
 
 from dotenv import load_dotenv
@@ -22,6 +23,16 @@ OFF_TOPIC_RESPONSE = (
     "admissions, academics, faculty, research, campus life, policies, "
     "placements, and your own student records.\n\n"
     "Ask me something about DAU and I'll do my best to help."
+)
+
+
+# Implicit DAU campus keywords that naturally imply university context for authenticated users
+IMPLICIT_DAU_PAT = re.compile(
+    r"\b(?:club|clubs|canteen|mess|hostel|campus|library|attendance|semester|credits?|curriculum|course|courses|"
+    r"faculty|professor|department|dept|event|events|exam|exams|placement|placements|cgpa|cpi|minor|major|"
+    r"convocation|transport|bus|buses|student|registration|fees|admission|timetable|calendar|facility|facilities|"
+    r"canteen|where\s+is|what\s+clubs|what\s+events|what\s+courses)\b",
+    re.IGNORECASE
 )
 
 
@@ -198,6 +209,9 @@ No explanation, no punctuation, no JSON, no additional text.
         if "UNSAFE" in result:
             return Verdict.UNSAFE
         if any(t in result for t in ("OFF_TOPIC", "OFF-TOPIC", "OFFTOPIC")):
+            # Scope Fallback Override: If LLM returns OFF_TOPIC but query contains implicit campus terms, override to SAFE
+            if IMPLICIT_DAU_PAT.search(query):
+                return Verdict.SAFE
             return Verdict.OFF_TOPIC
         return Verdict.SAFE
 

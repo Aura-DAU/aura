@@ -84,14 +84,30 @@ def is_greeting_or_meta(query):
         "hi", "hello", "hey", "hola", "greetings", "good morning",
         "good afternoon", "good evening", "how are you", "who are you",
         "who is aura", "what is aura", "what can you do", "help", "menu",
-        "intro", "introduce yourself"
+        "intro", "introduce yourself", "thank you", "thanks", "bye",
+        "goodbye", "see you", "good night", "have a nice day", "have a good day",
+        "cya", "cheers", "thanks aura"
     }
     if q in greetings:
         return True
     words = q.split()
-    if len(words) <= 3 and any(w in greetings for w in words):
+    if len(words) <= 4 and any(w in greetings for w in words):
         return True
     return False
+
+
+class SimpleIdentity:
+    def __init__(self, d):
+        self.erp_id = d.get("erp_id") or d.get("erpId")
+        self.role = d.get("role", "student")
+        self.dept = d.get("dept") or d.get("department") or d.get("branch") or "ICT"
+        self.email = d.get("email")
+        self.full_name = d.get("full_name") or d.get("fullName") or d.get("name")
+        self.roll_number = d.get("roll_number") or d.get("rollNumber") or self.erp_id
+        self.program = d.get("program") or d.get("programme") or "B.Tech. (ICT)"
+        self.branch = d.get("branch") or self.dept
+        self.current_year = d.get("current_year") or d.get("currentYear") or 3
+        self.current_sem = d.get("current_sem") or d.get("currentSem") or 5
 
 
 class AuraChat:
@@ -112,18 +128,6 @@ class AuraChat:
     def chat(self, query, history=None, identity=None, display_profile=None):
         # Convert dict identity to a simple object with dot-attribute access to avoid AttributeError
         if isinstance(identity, dict):
-            class SimpleIdentity:
-                def __init__(self, d):
-                    self.erp_id = d.get("erp_id") or d.get("erpId")
-                    self.role = d.get("role", "student")
-                    self.dept = d.get("dept") or d.get("department") or d.get("branch") or "ICT"
-                    self.email = d.get("email")
-                    self.full_name = d.get("full_name") or d.get("fullName") or d.get("name")
-                    self.roll_number = d.get("roll_number") or d.get("rollNumber") or self.erp_id
-                    self.program = d.get("program") or d.get("programme") or "B.Tech. (ICT)"
-                    self.branch = d.get("branch") or self.dept
-                    self.current_year = d.get("current_year") or d.get("currentYear") or 3
-                    self.current_sem = d.get("current_sem") or d.get("currentSem") or 5
             identity = SimpleIdentity(identity)
 
         try:
@@ -145,41 +149,15 @@ class AuraChat:
                 }
 
             # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
-            resolved_query = get_institution_resolver().resolve(query)
+            query = get_institution_resolver().resolve(query)
 
-            # ── Safety + scope guardrail (applies to every query) ───────
             from pipeline.latency_tracker import track_segment
-            with track_segment("guardrail_time"):
-                verdict = self.guardrail.classify(query)
-            # None = classifier unreachable; fails OPEN here. The personal-data
-            # path below re-checks with is_safe_strict(), which fails closed.
-            if verdict is Verdict.UNSAFE:
-                return {
-                    "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
-                    "sources": [],
-                }
-            if verdict is Verdict.OFF_TOPIC:
-                return {
-                    "answer": OFF_TOPIC_RESPONSE,
-                    "sources": [],
-                }
-
-            # ── Wellness/distress check ───────────────────────────────
-            if self.wellness.check(query):
-                return {
-                    "answer": self.wellness.get_response(),
-                    "sources": [],
-                    "is_personal_data": False,
-                }
-
             history = history or []
 
-            # ── Greetings bypass classifier ────────────────────────────
+            # ── 1. Greetings & Meta Fast-Path ─────────────────────────
             if is_greeting_or_meta(query):
                 q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
                 words = q.split()
-                
-                # Check for help/capabilities queries
                 help_words = {"what can you do", "help", "menu", "intro", "introduce yourself"}
                 who_words = {"who are you", "who is aura", "what is aura"}
                 
@@ -204,13 +182,59 @@ class AuraChat:
                         "I can help you with questions about admissions, academics, faculty, courses, campus life, "
                         "and your personal student records (like CGPA, grades, and attendance). How can I assist you today?"
                     )
+                return {"answer": ans, "sources": [], "is_personal_data": False}
+
+            # ── 2. Pure Profile Questions Fast-Path (<1ms, Bypasses RAG & Wellness) ──
+            from personal_query_classifier import is_pure_profile_query
+            if is_pure_profile_query(query) and identity:
+                name = getattr(identity, "full_name", None) or "Student"
+                roll = getattr(identity, "roll_number", None) or getattr(identity, "erp_id", "N/A")
+                prog = getattr(identity, "program", None) or "B.Tech. (ICT)"
+                branch = getattr(identity, "branch", None) or getattr(identity, "dept", "ICT")
+                sem = getattr(identity, "current_sem", None) or 5
+                email = getattr(identity, "email", None) or f"{roll.lower()}@dau.ac.in"
+
+                q_lower = query.lower()
+                if "name" in q_lower or "who am i" in q_lower:
+                    ans = f"You are **{name}** (Roll Number: `{roll}`)."
+                elif "roll" in q_lower or "id" in q_lower:
+                    ans = f"Your roll number is `{roll}`."
+                elif "email" in q_lower:
+                    ans = f"Your official university email is `{email}`."
+                elif "branch" in q_lower or "dept" in q_lower:
+                    ans = f"You are in the **{branch}** department."
+                elif "semester" in q_lower:
+                    ans = f"You are currently in **Semester {sem}** of the {prog} program."
+                else:
+                    ans = (
+                        f"You are **{name}** (Roll Number: `{roll}`), currently enrolled in "
+                        f"**Semester {sem}** of the **{prog}** program in the **{branch}** department."
+                    )
+                return {"answer": ans, "sources": [], "is_personal_data": True}
+
+            # ── 3. Wellness / Distress Check ────────────────────────────
+            if self.wellness.check(query):
                 return {
-                    "answer": ans,
+                    "answer": self.wellness.get_response(),
                     "sources": [],
-                    "is_personal_data": False
+                    "is_personal_data": False,
                 }
 
-            # ── Step 1: Classify ────────────────────────────────────────
+            # ── 4. Safety + Scope Guardrail ────────────────────────────
+            with track_segment("guardrail_time"):
+                verdict = self.guardrail.classify(query)
+            if verdict is Verdict.UNSAFE:
+                return {
+                    "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                    "sources": [],
+                }
+            if verdict is Verdict.OFF_TOPIC:
+                return {
+                    "answer": OFF_TOPIC_RESPONSE,
+                    "sources": [],
+                }
+
+            # ── 5. Intent Classification ────────────────────────────────
             classification = self.classifier.classify(query)
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
 
