@@ -511,6 +511,7 @@ export function useAuraChat() {
           baseMessages = [...priorMessages, userMsg]
         }
       } else {
+        baseMessages = [...priorMessages, userMsg]
         if (!threadId) {
           threadId = uid()
           const newThread: StoredThread = {
