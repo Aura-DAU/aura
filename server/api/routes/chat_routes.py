@@ -170,10 +170,20 @@ async def chat(
             cached["quota_remaining"] = remaining
             return cached
 
-    async with _chat_slot():
-        result = await run_in_threadpool(
-            _ask_with_memory, body, identity, history, display_profile, request_context
-        )
+    try:
+        async with _chat_slot():
+            result = await run_in_threadpool(
+                _ask_with_memory, body, identity, history, display_profile, request_context
+            )
+    except RAGPipelineError as exc:
+        return _pipeline_error_response(exc)
+    except Exception as exc:
+        # An SDK BadRequestError reaches here unwrapped whenever the 400 is
+        # raised outside inference_router's rotation wrapper; everything else
+        # keeps its existing 500 so genuine bugs stay loud.
+        if not is_context_length_error(exc):
+            raise
+        return _pipeline_error_response(exc)
     if isinstance(result, dict):
         result["quota_remaining"] = remaining
         # Cache write: guest public standalone queries only (exclude error/rejection responses)
