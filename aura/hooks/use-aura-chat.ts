@@ -37,7 +37,8 @@ function deriveTitle(text: string): string {
 }
 
 /** Last-activity timestamp for sidebar ordering / server merge. */
-function threadUpdatedAt(messages: ChatMessage[], fallback = Date.now()): number {
+function threadUpdatedAt(messages: ChatMessage[] | undefined, fallback = Date.now()): number {
+  if (!messages || messages.length === 0) return fallback
   for (let i = messages.length - 1; i >= 0; i--) {
     const ts = messages[i]?.timestamp
     if (typeof ts === "number" && ts > 0) return ts
@@ -283,10 +284,14 @@ export function useAuraChat() {
     try {
       const rawThreads = localStorage.getItem(STORAGE_KEY)
       if (rawThreads) {
-        const parsed = (JSON.parse(rawThreads) as StoredThread[]).map((t) => ({
-          ...t,
-          updatedAt: t.updatedAt ?? threadUpdatedAt(t.messages, 0),
-        }))
+        const parsed = (JSON.parse(rawThreads) as StoredThread[]).map((t) => {
+          const safeMessages = Array.isArray(t.messages) ? t.messages : []
+          return {
+            ...t,
+            messages: safeMessages,
+            updatedAt: t.updatedAt ?? threadUpdatedAt(safeMessages, 0),
+          }
+        })
         const sorted = sortThreadsByRecency(parsed)
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setThreads(sorted)
@@ -315,9 +320,11 @@ export function useAuraChat() {
               const activity = (t: StoredThread) =>
                 t.updatedAt ?? threadUpdatedAt(t.messages, 0)
               for (const t of data.threads as StoredThread[]) {
+                const safeMessages = Array.isArray(t.messages) ? t.messages : []
                 map.set(t.id, {
                   ...t,
-                  updatedAt: activity(t),
+                  messages: safeMessages,
+                  updatedAt: t.updatedAt ?? threadUpdatedAt(safeMessages, 0),
                 })
               }
               for (const t of prev) {
@@ -513,6 +520,7 @@ export function useAuraChat() {
           baseMessages = [...priorMessages, userMsg]
         }
       } else {
+        baseMessages = [...priorMessages, userMsg]
         if (!threadId) {
           threadId = uid()
           const newThread: StoredThread = {
