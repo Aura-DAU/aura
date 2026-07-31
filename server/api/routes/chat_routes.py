@@ -12,8 +12,14 @@ from fastapi.responses import JSONResponse, StreamingResponse
 
 from api.auth import Identity, require_identity
 from api.request_context import AcademicScopeResolver, RequestContext
-from api.deps import chat_queue_lock, CHAT_QUEUE_WAIT_TIMEOUT, get_aura
+from api.deps import (
+    chat_queue_lock,
+    CHAT_QUEUE_WAIT_TIMEOUT,
+    CHAT_RETRY_AFTER_SECONDS,
+    get_aura,
+)
 from api.schemas import ChatRequest
+from pipeline.exceptions import ContextLengthExceeded, RAGPipelineError
 from pipeline.memory.conversation_memory import get_conversation_memory, _truncate_tokens
 from pipeline.memory.user_memory import get_user_memory_store
 from pipeline.memory.response_cache import get_response_cache
@@ -35,6 +41,49 @@ def _env_int(name: str, default: int) -> int:
         return int((os.getenv(name) or "").strip() or default)
     except (TypeError, ValueError):
         return default
+
+
+CONTEXT_LENGTH_DETAIL = (
+    "This conversation is too long for AURA's context window. "
+    "Try a shorter question or start a new chat."
+)
+
+PIPELINE_ERROR_DETAIL = (
+    "AURA could not complete that request — please try again in a few moments."
+)
+
+
+def _pipeline_error_response(exc: Exception) -> JSONResponse:
+    if is_context_length_error(exc):
+        logger.error(
+            "chat_pipeline_error code=AURA-CTX-001 status=413 exc_type=%s: %s",
+            type(exc).__name__,
+            exc,
+        )
+        return JSONResponse(
+            status_code=413,
+            content={"detail": CONTEXT_LENGTH_DETAIL, "code": "AURA-CTX-001"},
+            headers={"Cache-Control": "no-store"},
+        )
+
+    logger.error(
+        "chat_pipeline_error code=RAG_PIPELINE_ERROR status=503 exc_type=%s: %s",
+        type(exc).__name__,
+        exc,
+        exc_info=exc,
+    )
+    return JSONResponse(
+        status_code=503,
+        content={
+            "detail": PIPELINE_ERROR_DETAIL,
+            "code": "RAG_PIPELINE_ERROR",
+            "retryAfter": CHAT_RETRY_AFTER_SECONDS,
+        },
+        headers={
+            "Retry-After": str(CHAT_RETRY_AFTER_SECONDS),
+            "Cache-Control": "no-store",
+        },
+    )
 
 
 async def _acquire_chat_slot() -> None:
