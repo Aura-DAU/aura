@@ -4,6 +4,7 @@ import asyncio
 import json
 import logging
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
@@ -11,9 +12,9 @@ from fastapi.responses import StreamingResponse
 
 from api.auth import Identity, require_identity
 from api.request_context import AcademicScopeResolver, RequestContext
-from api.deps import chat_queue_lock, get_aura
+from api.deps import chat_queue_lock, CHAT_QUEUE_WAIT_TIMEOUT, get_aura
 from api.schemas import ChatRequest
-from pipeline.memory.conversation_memory import get_conversation_memory
+from pipeline.memory.conversation_memory import get_conversation_memory, _truncate_tokens
 from pipeline.memory.user_memory import get_user_memory_store
 from pipeline.memory.response_cache import get_response_cache
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota
@@ -29,6 +30,29 @@ def _env_int(name: str, default: int) -> int:
         return int((os.getenv(name) or "").strip() or default)
     except (TypeError, ValueError):
         return default
+
+
+async def _acquire_chat_slot() -> None:
+    # Bounded backpressure: wait briefly for a concurrency slot, then shed load
+    # with a retryable 503 rather than queueing unbounded under a traffic spike.
+    # Caller owns the release (see _chat_slot / the streaming finally).
+    try:
+        await asyncio.wait_for(chat_queue_lock.acquire(), timeout=CHAT_QUEUE_WAIT_TIMEOUT)
+    except asyncio.TimeoutError:
+        raise HTTPException(
+            status_code=503,
+            detail="AURA is at peak load right now — please retry in a few seconds.",
+            headers={"Retry-After": "5"},
+        )
+
+
+@asynccontextmanager
+async def _chat_slot():
+    await _acquire_chat_slot()
+    try:
+        yield
+    finally:
+        chat_queue_lock.release()
 
 
 def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
@@ -78,9 +102,35 @@ def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
     return history, display_profile, request_context, remaining
 
 
-def _summary_for_generation(user_memory: str, thread_summary: str) -> str:
-    from pipeline.memory.conversation_memory import _truncate_tokens
+def _conversation_capture(thread_summary: str, history: "list[dict]", question: str) -> str:
+    """A compact, embeddable memory of THIS conversation for the per-user store.
 
+    Prefers the LLM thread digest when the conversation has compacted; otherwise
+    records the user's actual questions so even a short chat that never compacts
+    still leaves a durable, retrievable trace. No extra LLM call — the digest is
+    reused when present and the short-thread path is purely extractive."""
+    thread_summary = (thread_summary or "").strip()
+    questions = [
+        (t.get("content") or "").strip()
+        for t in (history or [])
+        if t.get("role") == "user" and (t.get("content") or "").strip()
+    ]
+    q = (question or "").strip()
+    if q:
+        questions.append(q)
+
+    if thread_summary:
+        base = thread_summary
+        if questions:
+            base = f"{thread_summary}\nLatest question: {questions[-1]}"
+    elif questions:
+        base = "Questions asked: " + " | ".join(questions[-6:])
+    else:
+        return ""
+    return _truncate_tokens(base, _env_int("AURA_CONVERSATION_CAPTURE_TOKENS", 200))
+
+
+def _summary_for_generation(user_memory: str, thread_summary: str) -> str:
     conversation_memory = get_conversation_memory()
     thread_summary = _truncate_tokens(thread_summary or "", conversation_memory.summary_max_tokens)
     user_memory_tokens = _env_int("AURA_USER_MEMORY_TOKENS", 400)
@@ -112,7 +162,7 @@ async def chat(
             cached["quota_remaining"] = remaining
             return cached
 
-    async with chat_queue_lock:
+    async with _chat_slot():
         result = await run_in_threadpool(
             _ask_with_memory, body, identity, history, display_profile, request_context
         )
@@ -145,7 +195,9 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
     mem_result = get_conversation_memory().prepare(request.summary, history)
     user_memory_store = get_user_memory_store()
     identity_dict = identity.as_dict()
-    user_memory = user_memory_store.get(identity_dict)
+    # Inject the OTHER conversations' memory; this thread is already represented
+    # by its own summary + verbatim tail, so exclude it to avoid duplication.
+    user_memory = user_memory_store.get(identity_dict, exclude_thread=request.threadId)
     result = get_aura().ask(
         question=request.question,
         history=mem_result.history,
@@ -154,8 +206,11 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
         summary=_summary_for_generation(user_memory, mem_result.summary),
         request_context=request_context,
     )
-    if mem_result.summary_changed:
-        user_memory_store.merge(identity_dict, mem_result.summary, request.summary or "")
+    # Persist EVERY conversation (not just compacted ones), keyed by thread id so
+    # this chat's block updates in place across turns. Guests no-op in the store.
+    capture = _conversation_capture(mem_result.summary, mem_result.history, request.question)
+    if capture:
+        user_memory_store.merge(identity_dict, capture, thread_id=request.threadId)
     result = dict(result) if isinstance(result, dict) else {"answer": str(result)}
     result["memory"] = {
         "summary": mem_result.summary,
@@ -220,7 +275,7 @@ async def chat_stream(
             loop.call_soon_threadsafe(events.put_nowait, ("summary", mem_result))
             user_memory_store = get_user_memory_store()
             identity_dict = identity.as_dict()
-            user_memory = user_memory_store.get(identity_dict)
+            user_memory = user_memory_store.get(identity_dict, exclude_thread=body.threadId)
             result = get_aura().ask(
                 question=body.question,
                 history=mem_result.history,
@@ -230,17 +285,20 @@ async def chat_stream(
                 summary=_summary_for_generation(user_memory, mem_result.summary),
                 request_context=request_context,
             )
-            if mem_result.summary_changed:
-                user_memory_store.merge(identity_dict, mem_result.summary, body.summary or "")
+            # Persist every conversation, keyed by thread id (see _ask_with_memory).
+            capture = _conversation_capture(mem_result.summary, mem_result.history, body.question)
+            if capture:
+                user_memory_store.merge(identity_dict, capture, thread_id=body.threadId)
         except Exception as exc:  # e.g. AURA init failure — never kill the stream silently
             loop.call_soon_threadsafe(events.put_nowait, ("error", str(exc)))
         else:
             loop.call_soon_threadsafe(events.put_nowait, ("done", (result, mem_result)))
 
     async def event_source():
-        # Hold a concurrency slot for the whole stream so authenticated
-        # floods cannot open unbounded parallel RAG/LLM jobs.
-        async with chat_queue_lock:
+        # The concurrency slot was acquired in the endpoint (admission control),
+        # so overload already failed fast with a 503 before this 200 stream began.
+        # Release it when the stream ends: completion, error, or client disconnect.
+        try:
             # to_thread copies contextvars, so latency_tracker segments recorded
             # inside the pipeline still land in this request's middleware dict.
             worker = asyncio.create_task(asyncio.to_thread(_run))
@@ -354,6 +412,8 @@ async def chat_stream(
                     break
             finally:
                 await worker
+        finally:
+            chat_queue_lock.release()
 
     headers = {
         "Cache-Control": "no-cache, no-transform",
@@ -366,6 +426,11 @@ async def chat_stream(
     if remaining is not None:
         headers["X-Quota-Remaining"] = str(remaining)
 
+    # Admission control: take the concurrency slot (bounded wait → 503 on
+    # overload) BEFORE returning the 200 SSE response, so peak load is a clean,
+    # retryable rejection rather than a stream that dies mid-flight. The
+    # event_source() finally releases the slot when the stream ends.
+    await _acquire_chat_slot()
     return StreamingResponse(
         event_source(),
         media_type="text/event-stream",

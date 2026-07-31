@@ -35,6 +35,10 @@ class ChatRequest(BaseModel):
     # stateless: the client sends this digest plus the unsummarised tail each
     # turn and gets an updated digest back to persist.
     summary: Optional[str] = Field(None, max_length=20_000)
+    # Stable per-conversation id (client-owned thread id). Keys this chat's block
+    # in the persistent per-user memory so every conversation — even a short one
+    # that never compacts — is captured and updated in place across turns.
+    threadId: Optional[str] = Field(None, max_length=64)
     userProfile: Optional[UserProfile] = None
     studentProfile: Optional[UserProfile] = None
 

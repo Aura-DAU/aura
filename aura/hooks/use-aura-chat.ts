@@ -384,12 +384,14 @@ export function useAuraChat() {
 
   const persistMessages = useCallback(
     (threadId: string, next: ChatMessage[], title?: string) => {
-      const updatedAt = next[next.length - 1]?.timestamp ?? Date.now()
+      const updatedAt = threadUpdatedAt(next)
       setThreads((prev) =>
-        prev.map((t) =>
-          t.id === threadId
-            ? { ...t, messages: next, title: title ?? t.title, updatedAt }
-            : t,
+        sortThreadsByRecency(
+          prev.map((t) =>
+            t.id === threadId
+              ? { ...t, messages: next, title: title ?? t.title, updatedAt }
+              : t,
+          ),
         ),
       )
     },
@@ -522,6 +524,7 @@ export function useAuraChat() {
           setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
           setActiveThreadIdState(threadId)
         }
+        baseMessages = [...priorMessages, userMsg]
         persistMessages(
           threadId,
           baseMessages,
@@ -552,6 +555,7 @@ export function useAuraChat() {
             question: trimmed,
             history: toBackendHistory(tail),
             summary: threadSummary,
+            threadId,
             studentProfile: toBackendProfile(studentProfile),
           }),
           signal: controller.signal,
@@ -674,6 +678,7 @@ export function useAuraChat() {
             summary: carriedSummary,
             summaryTurnCount: 0,
             continuedFromId: threadId,
+            updatedAt: Date.now(),
           }
           setThreads((prev) => sortThreadsByRecency([contThread, ...prev]))
           pendingContinuationRef.current = { fromId: threadId, toId: contId }
