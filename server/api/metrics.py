@@ -44,13 +44,20 @@ REQUEST_LATENCY = Histogram(
 )
 
 # Mirrors pipeline/latency_tracker.py's segments so the doc's critical-path
-# stages (embedding+retrieval, cross-encoder rerank, LLM generation) are each
-# independently observable rather than only visible as one blended total.
+# stages (guardrail, planner, embedding, qdrant_retrieval, reranker, prompt_assembly,
+# inference_router, vllm_generation, streaming, total) are each independently observable.
 STAGE_LATENCY = Histogram(
     "aura_chat_stage_duration_seconds",
     "Per-stage latency within the /chat pipeline (guardrail, retrieval, generation)",
     ["stage"],
     buckets=(0.01, 0.05, 0.1, 0.25, 0.5, 1, 2, 3, 4, 5, 8),
+)
+
+RAG_STAGE_LATENCY = Histogram(
+    "aura_rag_stage_duration_seconds",
+    "Detailed 11-stage latency within the RAG processing pipeline",
+    ["stage"],
+    buckets=(0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 3.0, 5.0, 8.0, 13.0, 21.0),
 )
 
 # One counter per vLLM node, incremented by InferenceRouter on dispatch —
