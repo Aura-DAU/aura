@@ -59,14 +59,11 @@ class Retriever:
         return self.model
 
     def embed_query(self, query: str) -> Optional[list[float]]:
-        import time
-        t0 = time.time()
         query_text = (
             "Represent this sentence for searching relevant passages: "
             + query
         )
         embedding_service_url = os.getenv("EMBEDDING_SERVICE_URL")
-        embedding = None
 
         if embedding_service_url:
             try:
@@ -79,26 +76,20 @@ class Retriever:
                 if resp.status_code == 200:
                     data = resp.json()
                     if "embeddings" in data and len(data["embeddings"]) > 0:
-                        embedding = data["embeddings"][0]
+                        return data["embeddings"][0]
             except Exception as e:
                 logger.warning("Remote embedding service failed: %s. Falling back to local model.", e)
 
-        if embedding is None:
-            try:
-                query_embedding = self._local_model().encode(
-                    [query_text],
-                    normalize_embeddings=True,
-                    convert_to_numpy=True
-                )
-                embedding = query_embedding[0].tolist()
-            except Exception as e:
-                logger.warning("Local embedding model failed: %s", e)
-                embedding = None
-
-        t_elapsed = time.time() - t0
-        dim = len(embedding) if embedding else 0
-        print(f"\n===== QUERY EMBEDDING =====\nDimension: {dim} | Time: {t_elapsed:.4f}s")
-        return embedding
+        try:
+            query_embedding = self._local_model().encode(
+                [query_text],
+                normalize_embeddings=True,
+                convert_to_numpy=True
+            )
+            return query_embedding[0].tolist()
+        except Exception as e:
+            logger.warning("Local embedding model failed: %s", e)
+            return None
 
     def retrieve(
         self,
@@ -146,21 +137,6 @@ class Retriever:
             except Exception as e:
                 logger.warning("Pinecone query failed: %s", e)
 
-        print("\n" + "=" * 60)
-        print("===== DENSE RESULTS (QDRANT) =====")
-        if dense_results:
-            for rank, item in enumerate(dense_results, start=1):
-                meta = item.get("metadata", {})
-                h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
-                print(f"{rank}. score={item.get('score', 0.0):.4f} | chunk={item.get('id')}")
-                print(f"   title={meta.get('title', 'N/A')}")
-                print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
-                if h_str:
-                    print(f"   headers={h_str}")
-        else:
-            print("   (No dense results returned)")
-        print("=" * 60)
-
         if not self.bm25:
             return dense_results
 
@@ -170,21 +146,6 @@ class Retriever:
             metadata_filter=metadata_filter,
             allowed_roles=allowed_roles
         )
-
-        print("\n" + "=" * 60)
-        print("===== BM25 RESULTS =====")
-        if bm25_results:
-            for rank, item in enumerate(bm25_results, start=1):
-                meta = item.get("metadata", {})
-                h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
-                print(f"{rank}. score={item.get('score', 0.0):.4f} | chunk={item.get('id')}")
-                print(f"   title={meta.get('title', 'N/A')}")
-                print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
-                if h_str:
-                    print(f"   headers={h_str}")
-        else:
-            print("   (No BM25 results returned)")
-        print("=" * 60)
 
         fused_results = fuse(
             dense_results,

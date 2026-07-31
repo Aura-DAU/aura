@@ -658,7 +658,6 @@ class RetrievalPipeline:
         )
         needs_rewrite = bool(history) and (has_pronoun or is_short_fragment)
 
-        rewritten_query = query
         if needs_rewrite:
             query = (
                 self.rewriter.rewrite(
@@ -667,13 +666,6 @@ class RetrievalPipeline:
                     academic_scope=academic_scope,
                 )
             )
-            rewritten_query = query
-
-        print("\n" + "=" * 60)
-        print("===== QUERY =====")
-        print(f"Original Query: {original_query}")
-        print(f"Rewritten Query (QueryRewriter): {rewritten_query}")
-        print("=" * 60)
 
         # Submit the planning LLM call to executor
         future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
@@ -1161,8 +1153,6 @@ class RetrievalPipeline:
         be one or two chunks away from the main policy chunk.
         """
         expanded_candidates = []
-        print("\n" + "=" * 60)
-        print("===== ADJACENT CHUNK EXPANSION =====")
         for cand in candidates:
             metadata = cand.get("metadata", {})
             doc_id = metadata.get("document_id")
@@ -1173,14 +1163,12 @@ class RetrievalPipeline:
 
             chunk_idx = int(chunk_idx)
             parts = []
-            added_adjacent = []
 
             # Collect preceding chunks within window
             for offset in range(window, 0, -1):
                 prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - offset))
                 if prev_chunk:
                     parts.append(prev_chunk.get("text", ""))
-                    added_adjacent.append(f"prev (-{offset}): {prev_chunk.get('chunk_id')}")
 
             parts.append(metadata.get("text", ""))
 
@@ -1189,7 +1177,6 @@ class RetrievalPipeline:
                 next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + offset))
                 if next_chunk:
                     parts.append(next_chunk.get("text", ""))
-                    added_adjacent.append(f"next (+{offset}): {next_chunk.get('chunk_id')}")
 
             expanded_text = "\n\n".join(filter(None, parts))
 
@@ -1197,13 +1184,6 @@ class RetrievalPipeline:
             new_cand["metadata"] = dict(metadata)
             new_cand["metadata"]["text"] = expanded_text
             expanded_candidates.append(new_cand)
-
-            print(f"Triggering Chunk: {cand.get('id')} ({metadata.get('title')})")
-            if added_adjacent:
-                print("   Added Neighbor Chunks: " + ", ".join(added_adjacent))
-            else:
-                print("   (No adjacent chunks found in store)")
-        print("=" * 60)
 
         return expanded_candidates
 
