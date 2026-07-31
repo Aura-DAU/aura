@@ -58,10 +58,29 @@ from api.request_context import RequestContext
 
 
 class SimpleIdentity:
-    def __init__(self, erp_id, role, dept=None):
-        self.erp_id = erp_id
-        self.role = role
-        self.dept = dept
+    def __init__(self, d):
+        if isinstance(d, dict):
+            self.erp_id = d.get("erp_id") or d.get("erpId")
+            self.role = d.get("role", "student")
+            self.dept = d.get("dept") or d.get("department") or d.get("branch") or "ICT"
+            self.email = d.get("email")
+            self.full_name = d.get("full_name") or d.get("fullName") or d.get("name")
+            self.roll_number = d.get("roll_number") or d.get("rollNumber") or self.erp_id
+            self.program = d.get("program") or d.get("programme") or "B.Tech. (ICT)"
+            self.branch = d.get("branch") or self.dept
+            self.current_year = d.get("current_year") or d.get("currentYear") or 3
+            self.current_sem = d.get("current_sem") or d.get("currentSem") or 5
+        else:
+            self.erp_id = getattr(d, "erp_id", None)
+            self.role = getattr(d, "role", "student")
+            self.dept = getattr(d, "dept", None)
+            self.email = getattr(d, "email", None)
+            self.full_name = getattr(d, "full_name", None)
+            self.roll_number = getattr(d, "roll_number", None) or self.erp_id
+            self.program = getattr(d, "program", None)
+            self.branch = getattr(d, "branch", None) or self.dept
+            self.current_year = getattr(d, "current_year", None)
+            self.current_sem = getattr(d, "current_sem", None)
 
 
 class AuraState(TypedDict, total=False):

@@ -979,6 +979,19 @@ def canonicalize_informal_semester(query: str, entities: dict) -> dict:
     return entities
 
 
+def resolve_continuation_query(query: str, history: list = None) -> str:
+    """Rewrite continuation prompts ('continue', 'more', 'go on') using the previous user topic in history."""
+    if not query or not history:
+        return query
+    q_clean = query.strip().lower().rstrip(".!?")
+    continuation_keywords = {"continue", "more", "go on", "tell me more", "expand on that", "keep going", "what else"}
+    if q_clean in continuation_keywords:
+        last_user = next((h["content"] for h in reversed(history) if h.get("role") == "user" and h.get("content")), "")
+        if last_user:
+            return f"{last_user} (continue details)"
+    return query
+
+
 class QueryPlanner:
 
     def __init__(self):
@@ -990,7 +1003,8 @@ class QueryPlanner:
             os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
-    def plan(self, query, academic_scope=None):
+    def plan(self, query, academic_scope=None, history=None):
+        effective_query = resolve_continuation_query(query, history)
 
         scope_hint = ""
         if academic_scope is not None:
@@ -1019,7 +1033,7 @@ class QueryPlanner:
                     },
                     {
                         "role": "user",
-                        "content": scope_hint + "\nUser query: " + query
+                        "content": scope_hint + "\nUser query: " + effective_query
                     }
                 ],
                 extra_body=InferenceRouter.no_think_extra_body(),

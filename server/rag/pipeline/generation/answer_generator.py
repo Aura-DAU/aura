@@ -571,29 +571,28 @@ Retrieved Documents
                 and any(lang in question_lower for lang in PROG_LANG_INDICATORS)
             ) or "palindrome" in question_lower
 
+            # Assemble multi-turn conversation messages for vLLM
+            messages_payload = [{"role": "system", "content": effective_system_prompt}]
+            if history:
+                for turn in history[-6:]:
+                    r = turn.get("role")
+                    c = turn.get("content")
+                    if r in ("user", "assistant") and c:
+                        messages_payload.append({"role": r, "content": c})
+            messages_payload.append({"role": "user", "content": prompt})
+
             if on_delta is not None and not is_code_request:
                 return self._generate_streaming(
-                    effective_system_prompt, prompt, on_delta
+                    effective_system_prompt, prompt, on_delta, history=history
                 )
 
             def _execute_generate(client):
                 return client.chat.completions.create(
                     model=self.model,
-
                     temperature=0.2,
                     top_p=0.9,
                     max_tokens=_MAX_ANSWER_TOKENS,
-
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": effective_system_prompt
-                        },
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    ],
+                    messages=messages_payload,
                     extra_body=InferenceRouter.answer_extra_body(),
                 )
 
@@ -613,8 +612,6 @@ Retrieved Documents
 
             if is_code_request:
                 answer_lower = answer.lower()
-                # Fix AG2: regex was double-escaped (\\b → \b literal, never matches).
-                # Correct to single-escape so word-boundary and digit patterns work.
                 is_grounded = (
                     bool(re.search(r"\bdau\b", answer_lower))
                     or "dhirubhai ambani" in answer_lower
@@ -632,33 +629,23 @@ Retrieved Documents
             import traceback; traceback.print_exc()
             return "Sorry, I encountered an error while generating a response."
 
-    def _generate_streaming(self, system_prompt, user_prompt, on_delta):
-        # Token-by-token path: sanitises deltas on the fly (think blocks and
-        # inline citations never reach the client) and returns EXACTLY the
-        # concatenation of emitted deltas, so callers can rely on
-        # streamed-content == returned answer. Stream-creation failures fail
-        # over across the vLLM pool via InferenceRouter.call_with_rotation like
-        # the buffered path; a mid-stream provider failure after first emission
-        # surfaces as a truncated answer (the client keeps what it already
-        # received) because rotation can't replay an already-emitted stream.
+    def _generate_streaming(self, system_prompt, user_prompt, on_delta, history=None):
+        stream_messages = [{"role": "system", "content": system_prompt}]
+        if history:
+            for turn in history[-6:]:
+                r = turn.get("role")
+                c = turn.get("content")
+                if r in ("user", "assistant") and c:
+                    stream_messages.append({"role": r, "content": c})
+        stream_messages.append({"role": "user", "content": user_prompt})
+
         def _execute_generate_stream(client):
             return client.chat.completions.create(
                 model=self.model,
-
                 temperature=0.2,
                 top_p=0.9,
                 max_tokens=_MAX_ANSWER_TOKENS,
-
-                messages=[
-                    {
-                        "role": "system",
-                        "content": system_prompt
-                    },
-                    {
-                        "role": "user",
-                        "content": user_prompt
-                    }
-                ],
+                messages=stream_messages,
                 stream=True,
                 extra_body=InferenceRouter.answer_extra_body(),
             )
