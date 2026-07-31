@@ -103,15 +103,18 @@ class AuraChat:
         # Convert dict identity to a simple object with dot-attribute access to avoid AttributeError
         if isinstance(identity, dict):
             class SimpleIdentity:
-                def __init__(self, erp_id, role, dept=None):
-                    self.erp_id = erp_id
-                    self.role = role
-                    self.dept = dept
-            identity = SimpleIdentity(
-                erp_id=identity.get("erp_id"),
-                role=identity.get("role"),
-                dept=identity.get("dept")
-            )
+                def __init__(self, d):
+                    self.erp_id = d.get("erp_id") or d.get("erpId")
+                    self.role = d.get("role", "student")
+                    self.dept = d.get("dept") or d.get("department") or d.get("branch") or "ICT"
+                    self.email = d.get("email")
+                    self.full_name = d.get("full_name") or d.get("fullName") or d.get("name")
+                    self.roll_number = d.get("roll_number") or d.get("rollNumber") or self.erp_id
+                    self.program = d.get("program") or d.get("programme") or "B.Tech. (ICT)"
+                    self.branch = d.get("branch") or self.dept
+                    self.current_year = d.get("current_year") or d.get("currentYear") or 3
+                    self.current_sem = d.get("current_sem") or d.get("currentSem") or 5
+            identity = SimpleIdentity(identity)
 
         try:
             # ── Safety + scope guardrail (applies to every query) ───────
