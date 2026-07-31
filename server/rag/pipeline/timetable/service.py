@@ -411,7 +411,6 @@ def get_effective_timetable(identity) -> dict:
                ORDER BY day_of_week, start_time""",
             (year, sem),
         )
-<<<<<<< HEAD
         common_rows = _narrow_by_dept(common_rows, dept)
         common_rows = _narrow_by_course_branch_map(common_rows, dept)
         common_rows = _exclude_electives(common_rows)
@@ -422,12 +421,6 @@ def get_effective_timetable(identity) -> dict:
         rows = _narrow_by_course_branch_map(rows, dept)
         rows = _exclude_electives(rows)
         master_rows = {row["id"]: row for row in rows}
-=======
-        master_rows = {row["id"]: row for row in _narrow_by_dept(common_rows, dept)}
-        is_common = True
-    else:
-        master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec, dept)}
->>>>>>> a26e7dd3d650956aa5a340adc2f7a54aba1f8eae
         
     overrides = get_overrides(erp_id) if erp_id else []
 
