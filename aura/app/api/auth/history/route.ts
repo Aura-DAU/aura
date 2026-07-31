@@ -29,10 +29,6 @@ const historyMessageSchema = z.object({
 const historyThreadSchema = z.object({
   id: z.string().min(1).max(128),
   title: z.string().max(500),
-  updatedAt: z.number().optional(),
-  summary: z.string().max(20_000).optional(),
-  summaryTurnCount: z.number().int().nonnegative().optional(),
-  continuedFromId: z.string().min(1).max(128).optional(),
   messages: z.array(historyMessageSchema).max(MAX_MESSAGES_PER_THREAD),
 })
 
