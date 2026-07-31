@@ -29,6 +29,7 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    log_soft_failure,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -131,26 +132,6 @@ class AuraChat:
             identity = SimpleIdentity(identity)
 
         try:
-            # ── Middleware 1: Institution Context Resolver & Privacy Gate ──
-            from access_control import resolve_effective_role
-            from institution_resolver import get_institution_resolver
-            from privacy_filter import ResponsePrivacyFilter
-
-            user_role = resolve_effective_role(identity) if identity else "public"
-            privacy_filter = ResponsePrivacyFilter(user_role=user_role)
-
-            # Check explicit privacy policy violation requests (e.g. mobile numbers, student IDs for unauthorized roles)
-            is_blocked, refusal_msg = privacy_filter.check_explicit_privacy_request(query)
-            if is_blocked:
-                return {
-                    "answer": refusal_msg,
-                    "sources": [],
-                    "is_personal_data": False,
-                }
-
-            # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
-            query = get_institution_resolver().resolve(query)
-
             from pipeline.latency_tracker import track_segment
             history = history or []
 
@@ -362,13 +343,17 @@ class AuraChat:
             }
 
         except Exception as e:
-            import traceback
-            traceback.print_exc()
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+            log_soft_failure(
+                "AURA-CHAT-001",
+                "aura_chat.chat",
+                exc=e,
+                user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
+            )
             return {"answer": msg, "sources": [], "is_personal_data": False}
 
     def _resolve_target(self, target_label: Optional[str], identity) -> Optional[str]:

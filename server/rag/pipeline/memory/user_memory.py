@@ -5,7 +5,8 @@ backend-owned layer: every conversation contributes one *block* — keyed by its
 thread id — so future threads inherit useful questions/preferences/facts even
 when a chat was too short to ever compact. Blocks are kept newest-first; a new
 turn for a thread replaces that thread's block in place rather than appending a
-duplicate.
+duplicate. Keying by thread id is also what makes "clear chat" mean deletion:
+`delete(identity, thread_id)` drops exactly that conversation's block.
 
 Each block is a self-contained per-conversation capture, which is exactly the
 granularity Phase 2 (semantic recall over Qdrant) will embed: one point per
@@ -48,6 +49,12 @@ class UserMemoryStore(Protocol):
         block: str,
         thread_id: Optional[str] = None,
     ) -> str:
+        pass
+
+    def delete(self, identity: dict, thread_id: str) -> bool:
+        pass
+
+    def delete_all(self, identity: dict) -> bool:
         pass
 
 
@@ -140,6 +147,15 @@ def _merge_memory(existing: str, block: str, thread_id: Optional[str] = None) ->
     return _cap_storage(blocks)
 
 
+def _delete_memory(existing: str, thread_id: str) -> tuple[str, bool]:
+    """Drop one thread's block. Returns (remaining storage string, removed?)."""
+    blocks = _parse_blocks(existing)
+    kept = [(t, x) for (t, x) in blocks if t != thread_id]
+    if len(kept) == len(blocks):
+        return _normalise(existing), False
+    return _render_storage(kept), True
+
+
 def _display_from_storage(existing: str, exclude_thread: Optional[str] = None) -> str:
     blocks = _parse_blocks(existing)
     if exclude_thread:
@@ -173,6 +189,27 @@ class InMemoryUserMemoryStore:
             merged = _merge_memory(self._data.get(key, ""), block, thread_id)
             self._data[key] = merged
             return merged
+
+    def delete(self, identity: dict, thread_id: str) -> bool:
+        key = _identity_key(identity)
+        if key is None or not thread_id:
+            return False
+        with self._lock:
+            remaining, removed = _delete_memory(self._data.get(key, ""), thread_id)
+            if not removed:
+                return False
+            if remaining:
+                self._data[key] = remaining
+            else:
+                self._data.pop(key, None)
+            return True
+
+    def delete_all(self, identity: dict) -> bool:
+        key = _identity_key(identity)
+        if key is None:
+            return False
+        with self._lock:
+            return self._data.pop(key, None) is not None
 
 
 class RedisUserMemoryStore:
@@ -233,6 +270,56 @@ class RedisUserMemoryStore:
         except redis.RedisError:
             logger.warning("Redis user-memory merge failed for %s", key, exc_info=True)
             return ""
+
+    def delete(self, identity: dict, thread_id: str) -> bool:
+        """Remove one conversation's block. Same WATCH/MULTI retry as merge, so a
+        concurrent merge for another thread cannot be lost by this rewrite."""
+        key = self._redis_key(identity)
+        if key is None or not thread_id:
+            return False
+
+        import redis
+        try:
+            with self._r.pipeline() as pipe:
+                while True:
+                    try:
+                        pipe.watch(key)
+                        existing = pipe.get(key) or ""
+                        remaining, removed = _delete_memory(existing, thread_id)
+                        if not removed:
+                            pipe.unwatch()
+                            return False
+                        # Preserve the key's remaining retention rather than
+                        # restarting the 90-day clock on the surviving blocks.
+                        ttl = pipe.ttl(key)
+                        pipe.multi()
+                        if not remaining:
+                            pipe.delete(key)
+                        elif isinstance(ttl, int) and ttl > 0:
+                            pipe.set(key, remaining, ex=ttl)
+                        elif self._ttl_seconds > 0:
+                            pipe.set(key, remaining, ex=self._ttl_seconds)
+                        else:
+                            pipe.set(key, remaining)
+                        pipe.execute()
+                        return True
+                    except redis.WatchError:
+                        continue
+        except redis.RedisError:
+            logger.warning("Redis user-memory delete failed for %s", key, exc_info=True)
+            return False
+
+    def delete_all(self, identity: dict) -> bool:
+        key = self._redis_key(identity)
+        if key is None:
+            return False
+
+        import redis
+        try:
+            return bool(self._r.delete(key))
+        except redis.RedisError:
+            logger.warning("Redis user-memory delete_all failed for %s", key, exc_info=True)
+            return False
 
 
 def _env_int(name: str, default: int) -> int:
