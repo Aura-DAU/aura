@@ -91,7 +91,7 @@ def test_personal_query_extracts_self_target():
 # ── Failure-mode tests (no real key needed) ───────────────────────────────
 
 def test_defaults_to_public_on_llm_timeout():
-    from personal_query_classifier import PersonalQueryClassifier, SAFE_DEFAULT
+    from personal_query_classifier import PersonalQueryClassifier
     clf = PersonalQueryClassifier.__new__(PersonalQueryClassifier)
     clf.client = MagicMock()
     clf.model  = "test"

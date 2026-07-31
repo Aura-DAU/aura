@@ -138,7 +138,12 @@ def test_orchestrator_public_kb_scope_schemas_exclude_erp():
 
 
 def test_aura_chat_graph_community_node_invokes_orchestrator(monkeypatch):
-    from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
+    from pipeline.aura_chat_graph import AuraChatGraph
+    class DummyIdentity:
+        def __init__(self, erp_id, role, dept=None):
+            self.erp_id = erp_id
+            self.role = role
+            self.dept = dept
 
     def _fake_init(self):
         self.intent_router = SimpleNamespace(
@@ -156,7 +161,7 @@ def test_aura_chat_graph_community_node_invokes_orchestrator(monkeypatch):
     state = {
         "query": "Who is the convenor of the Programming Club?",
         "history": [],
-        "identity": SimpleIdentity(erp_id="S1", role="student", dept="ICT"),
+        "identity": DummyIdentity(erp_id="S1", role="student", dept="ICT"),
         "request_context": None,
         "result": None,
     }
@@ -169,7 +174,7 @@ def test_aura_chat_graph_community_node_invokes_orchestrator(monkeypatch):
     who_state = {
         "query": "Who is Aditya Tatu?",
         "history": [],
-        "identity": SimpleIdentity(erp_id="S1", role="student"),
+        "identity": DummyIdentity(erp_id="S1", role="student"),
         "request_context": None,
         "result": None,
     }
@@ -178,7 +183,12 @@ def test_aura_chat_graph_community_node_invokes_orchestrator(monkeypatch):
 
 
 def test_aura_chat_graph_community_skips_guests_and_general(monkeypatch):
-    from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
+    from pipeline.aura_chat_graph import AuraChatGraph
+    class DummyIdentity:
+        def __init__(self, erp_id, role, dept=None):
+            self.erp_id = erp_id
+            self.role = role
+            self.dept = dept
 
     calls = []
 
@@ -194,7 +204,7 @@ def test_aura_chat_graph_community_skips_guests_and_general(monkeypatch):
     guest_state = {
         "query": "What clubs for music?",
         "history": [],
-        "identity": SimpleIdentity(erp_id=None, role="guest"),
+        "identity": DummyIdentity(erp_id=None, role="guest"),
         "result": None,
     }
     assert graph._n_community_tools(guest_state).get("result") is None
@@ -204,7 +214,7 @@ def test_aura_chat_graph_community_skips_guests_and_general(monkeypatch):
     student_state = {
         "query": "hello there vaguely",
         "history": [],
-        "identity": SimpleIdentity(erp_id="S1", role="student"),
+        "identity": DummyIdentity(erp_id="S1", role="student"),
         "result": None,
     }
     assert graph._n_community_tools(student_state).get("result") is None
