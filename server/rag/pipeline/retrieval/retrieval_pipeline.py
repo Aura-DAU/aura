@@ -47,11 +47,16 @@ class RetrievalPipeline:
             try:
                 with open(metadata_path, "r", encoding="utf-8") as f:
                     chunks = json.load(f)
-                self.faculty_names = sorted(list({
-                    chunk["faculty_name"]
-                    for chunk in chunks
-                    if chunk.get("faculty_name")
-                }))
+                raw_faculty = set()
+                for chunk in chunks:
+                    fn = chunk.get("faculty_name")
+                    if isinstance(fn, str) and fn.strip():
+                        raw_faculty.add(fn.strip())
+                    elif isinstance(fn, list):
+                        for item in fn:
+                            if isinstance(item, str) and item.strip():
+                                raw_faculty.add(item.strip())
+                self.faculty_names = sorted(list(raw_faculty))
                 self.faculty_names_lower = [n.lower() for n in self.faculty_names]
                 self.faculty_names_map = {n.lower(): n for n in self.faculty_names}
                 logger.info("Loaded %d unique faculty names for fuzzy matching.", len(self.faculty_names))
