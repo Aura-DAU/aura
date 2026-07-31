@@ -5,6 +5,7 @@ from pathlib import Path
 from parser import extract_frontmatter
 from section_extracter import extract_sections
 from chunker import split_section
+from strategies import ChunkingStrategyRegistry
 from chunk_id_generator import generate_deterministic_chunk_id
 from metadata_extractors import (
     extract_academic_applicability,
@@ -474,7 +475,7 @@ def process_markdown_file(file_path):
         # Parse table markdown to text sentences
         section_text += convert_tables_to_sentences(section["content"])
 
-        split_chunks = split_section(section_text)
+        split_chunks = ChunkingStrategyRegistry.chunk_section(section_text, metadata, file_path)
 
         for chunk_text in split_chunks:
             # Find start_line and end_line for this chunk

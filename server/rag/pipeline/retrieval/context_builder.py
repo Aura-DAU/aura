@@ -10,7 +10,12 @@ class ContextBuilder:
     # ~1800 tokens. 3000 gives headroom for fee + scholarship + other data
     # while staying well under model context limits (system prompt ~450 +
     # history ~500 + 3000 context = ~3950 tokens, safe for all hosted models).
-    MAX_CONTEXT_TOKENS = 3000
+    # Import centralized token budget configuration
+    try:
+        from config.token_budget_config import LLM_MAX_CONTEXT_BUDGET
+        MAX_CONTEXT_TOKENS = LLM_MAX_CONTEXT_BUDGET
+    except ImportError:
+        MAX_CONTEXT_TOKENS = 4000
 
     @staticmethod
     def _rule_year_from_metadata(metadata: dict) -> str:
