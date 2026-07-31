@@ -13,7 +13,10 @@ PUBLIC_FIELDS: Set[str] = {
     "department",
     "faculty_mentor",
     "official_email",
-    "email",  # Official DAU email (@dau.ac.in / @daiict.ac.in)
+    "email",
+    "email_id",
+    "contact_email",
+    "personal_email",
     "office_location",
     "office_room",
     "office_timings",
@@ -34,7 +37,6 @@ RESTRICTED_FIELDS: Set[str] = {
     "phone",
     "phone_number",
     "contact_number",
-    "personal_email",
     "erp_id",
     "uid",
     "auth_id",
@@ -60,7 +62,6 @@ AUTHORIZED_ROLES: Set[str] = {
 # Regex patterns for scanning PII leaks in raw text
 STUDENT_ID_PAT = re.compile(r"\b20\d{7}\b", re.IGNORECASE) # e.g. 202401001
 MOBILE_PAT = re.compile(r"\b(?:\+91[\s\-]?)?[6-9]\d{9}\b") # e.g. +91 9876543210 or 9876543210
-PERSONAL_EMAIL_PAT = re.compile(r"\b[A-Za-z0-9._%+-]+@(?!dau\.ac\.in|daiict\.ac\.in)[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b", re.IGNORECASE)
 UUID_PAT = re.compile(r"\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b")
 
 
@@ -138,15 +139,13 @@ class ResponsePrivacyFilter:
         sanitized = re.sub(r"(?i)(?:student\s*id|roll\s*no|roll\s*number|erp\s*id)\s*[:=]?\s*20\d{7}", "[REDACTED_STUDENT_ID]", sanitized)
         # Scrub Mobile Numbers
         sanitized = re.sub(r"(?i)(?:mobile|phone|contact)\s*(?:no|number)?\s*[:=]?\s*(?:\+91[\s\-]?)?[6-9]\d{9}", "[REDACTED_MOBILE_NUMBER]", sanitized)
-        # Scrub Personal Emails
-        sanitized = PERSONAL_EMAIL_PAT.sub("[REDACTED_PERSONAL_EMAIL]", sanitized)
 
         return sanitized
 
     def filter_response_text(self, response_text: str, query: str = "") -> str:
         """
         Post-generation sanitizer: Scans final LLM response text to guarantee no leak
-        of restricted attributes (Student ID, Mobile Number, Personal Email, UUIDs).
+        of restricted attributes (Student ID, Mobile Number, UUIDs). Note: Email addresses are allowed for contact.
         """
         if not response_text or self.is_authorized:
             return response_text
@@ -161,10 +160,7 @@ class ResponsePrivacyFilter:
         sanitized = re.sub(r"(?i)(?:mobile|phone|contact)\s*(?:number|no)?\s*[:=]?\s*(?:\+91[\s\-]?)?[6-9]\d{9}", "Mobile: [REDACTED]", sanitized)
         sanitized = MOBILE_PAT.sub("[REDACTED_PHONE]", sanitized)
 
-        # 3. Redact Personal Email addresses
-        sanitized = PERSONAL_EMAIL_PAT.sub("[REDACTED_EMAIL]", sanitized)
-
-        # 4. Redact UUIDs
+        # 3. Redact UUIDs
         sanitized = UUID_PAT.sub("[REDACTED_UUID]", sanitized)
 
         return sanitized
