@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 # Tests for the QueryGuardrail security filter.
 #
 # Two things are being protected here, and they pull in opposite directions:
