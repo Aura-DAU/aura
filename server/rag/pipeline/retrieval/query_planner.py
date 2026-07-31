@@ -1005,6 +1005,14 @@ class QueryPlanner:
 
     def plan(self, query, academic_scope=None, history=None):
         effective_query = resolve_continuation_query(query, history)
+        
+        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
+        try:
+            from institution_resolver import get_institution_resolver
+            resolver = get_institution_resolver()
+            effective_query = resolver.resolve(effective_query)
+        except Exception as e:
+            pass
 
         scope_hint = ""
         if academic_scope is not None:
