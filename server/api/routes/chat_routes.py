@@ -32,10 +32,6 @@ _scope_resolver = AcademicScopeResolver()
 logger = logging.getLogger(__name__)
 
 
-class ChatAdmissionShed(Exception):
-    """Concurrency semaphore timed out — convert to a retryable 503 response."""
-
-
 def _env_int(name: str, default: int) -> int:
     try:
         return int((os.getenv(name) or "").strip() or default)
@@ -382,33 +378,6 @@ async def chat_stream(
         else:
             loop.call_soon_threadsafe(events.put_nowait, ("done", (result, mem_result)))
 
-    headers = {
-        "Cache-Control": "no-cache, no-transform",
-        "X-Accel-Buffering": "no",
-    }
-    # Set even though the body streams the same value as a "quota" event —
-    # some proxies/clients read remaining-quota from headers before the
-    # body is fully parsed. `remaining` is known upfront since enforce_quota
-    # already ran in _resolve_request, before any streaming starts.
-    if remaining is not None:
-        headers["X-Quota-Remaining"] = str(remaining)
-
-    # Admission control: take the concurrency slot (bounded wait → 503 on
-    # overload) BEFORE returning the 200 SSE response, so peak load is a clean,
-    # retryable rejection rather than a stream that dies mid-flight.
-    # Ownership transfers to event_source(); release on construction failure too.
-    try:
-        await _acquire_chat_slot()
-    except ChatAdmissionShed:
-        return _admission_shed_response()
-    slot_held = True
-
-    def _release_slot() -> None:
-        nonlocal slot_held
-        if slot_held:
-            slot_held = False
-            chat_queue_lock.release()
-
     async def event_source():
         # The concurrency slot was acquired in the endpoint (admission control),
         # so overload already failed fast with a 503 before this 200 stream began.
@@ -525,12 +494,12 @@ async def chat_stream(
 
                     yield "data: [DONE]\n\n"
                     break
-            except asyncio.CancelledError:
-                _release_slot()
-                raise
             finally:
                 await worker
         finally:
+            # Single release paired 1:1 with the single _acquire_chat_slot()
+            # below. This finally runs on every exit — normal completion, error,
+            # or client-disconnect cancellation — so the slot is never leaked.
             chat_queue_lock.release()
 
     headers = {
