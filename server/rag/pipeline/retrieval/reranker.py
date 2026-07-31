@@ -464,6 +464,23 @@ class Reranker:
 
             # Soft recency boost when the user did not name a year: prefer
             # newer C_DCs sheets over superseded Club Committee Data rosters.
+            #
+            # Fix RR-RECENCY: two problems were making this boost unreliable
+            # for exactly the case it exists for — several near-duplicate
+            # yearly rosters (club committees, academic requirements, etc.)
+            # competing for the same query:
+            #   1. The YY-YY regex only matched titles like "2026-27". A
+            #      title like "List of Club Committee Core Members Winter
+            #      2026" (a bare 4-digit year, no dash) got recency_boost=0
+            #      even though it is one of the most current documents,
+            #      letting an older dashed-year doc win purely by luck of
+            #      phrasing.
+            #   2. At weight 0.05, even a "perfect" recency_boost of 1.0 only
+            #      ever changes final_score by 0.05 — far smaller than the
+            #      cross-encoder noise between two near-duplicate documents
+            #      describing the same kind of content (club rosters, academic
+            #      requirement sheets), so recency essentially never decided
+            #      the winner in practice.
             recency_boost = 0.0
             if not entities.get("rule_year"):
                 year_text = " ".join(
@@ -474,19 +491,32 @@ class Reranker:
                     r"(?:20)?(\d{2})[_\-\u2013](\d{2})(?!\d)",
                     year_text,
                 )
+                bare_year_match = re.search(r"(20\d{2})(?!\d)", year_text)
                 if year_match:
                     start_yy = int(year_match.group(1))
                     end_yy = int(year_match.group(2))
                     if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
                         recency_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
+                elif bare_year_match:
+                    # No "YY-YY" academic-year pattern, but a plain 4-digit
+                    # year is present (e.g. "Winter 2026") — still a genuine
+                    # recency signal, just a different phrasing.
+                    yyyy = int(bare_year_match.group(1))
+                    recency_boost = min(max((yyyy - 2020) / 10.0, 0.0), 1.0)
                 elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
                     recency_boost = 0.6
 
-            # Fix #4: all components are now on comparable scales [0, 1].
+            # Fix #4 / Fix RR-RECENCY: all components on comparable scales
+            # [0, 1]. recency_boost's weight raised 0.05 → 0.15 (taken from
+            # dense_score, 0.15 → 0.05) so that among documents the
+            # cross-encoder scores as similarly relevant — which is exactly
+            # what happens across several yearly versions of the same roster
+            # — the newest one reliably wins instead of the tie effectively
+            # being broken by noise.
             final_score = (
                 (0.60 * norm_cross)
                 +
-                (0.15 * dense_score)
+                (0.05 * dense_score)
                 +
                 (0.05 * metadata_boost)
                 +
@@ -496,7 +526,7 @@ class Reranker:
                 +
                 (0.05 * course_match_boost)
                 +
-                (0.05 * recency_boost)
+                (0.15 * recency_boost)
                 +
                 (semester_penalty * norm_cross)
             )
