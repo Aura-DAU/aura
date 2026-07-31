@@ -497,10 +497,32 @@ export function useAuraChat() {
         timestamp: Date.now(),
       }
 
-      let baseMessages = [...priorMessages, userMsg]
-      if (!threadId) {
-        threadId = uid()
-
+      // Regenerate: transcript already ends at the last user turn — do not
+      // append a duplicate user message. History sent to the backend must
+      // exclude that current user turn (same as a normal send).
+      let baseMessages: ChatMessage[]
+      if (options?.regenerate) {
+        if (!threadId) return
+        const last = priorMessages[priorMessages.length - 1]
+        if (last?.role === "user" && last.content.trim() === trimmed) {
+          baseMessages = priorMessages
+          priorMessages = priorMessages.slice(0, -1)
+        } else {
+          baseMessages = [...priorMessages, userMsg]
+        }
+      } else {
+        baseMessages = [...priorMessages, userMsg]
+        if (!threadId) {
+          threadId = uid()
+          const newThread: StoredThread = {
+            id: threadId,
+            title: deriveTitle(trimmed),
+            messages: [userMsg],
+            updatedAt: userMsg.timestamp,
+          }
+          setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
+          setActiveThreadIdState(threadId)
+        }
         persistMessages(
           threadId,
           baseMessages,
@@ -590,6 +612,10 @@ export function useAuraChat() {
             continuationSummary = chunk.summary
           } else if (chunk.type === "quota" && typeof chunk.remaining === "number") {
             syncQuotaFromServer(chunk.remaining)
+          } else if (chunk.type === "error") {
+            const errCode = typeof chunk.code === "string" ? chunk.code : "RAG_ERROR"
+            const errDetail = typeof chunk.detail === "string" ? chunk.detail : ""
+            console.error(`[useAuraChat] Stream error (${errCode}):`, errDetail)
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&
@@ -646,7 +672,6 @@ export function useAuraChat() {
             id: contId,
             title: `${activeThread?.title ?? deriveTitle(trimmed)} (cont.)`,
             messages: [],
-            updatedAt: Date.now(),
             summary: carriedSummary,
             summaryTurnCount: 0,
             continuedFromId: threadId,
