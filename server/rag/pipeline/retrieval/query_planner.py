@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import time
 
 from dotenv import load_dotenv
@@ -935,11 +936,48 @@ How many core courses are in the first semester of M.Tech EC (2022-23)?
   "query_decomposition": null,
   "retrieval_hints": {
     "required_sections": ["Core Courses", "Semester I", "Curriculum"]
-  }
-}
-
 If no specific year is mentioned in the question, omit "rule_year" entirely.
 """
+
+SEMESTER_MAP = {
+    "1": 1, "i": 1, "1st": 1, "first": 1,
+    "2": 2, "ii": 2, "2nd": 2, "second": 2,
+    "3": 3, "iii": 3, "3rd": 3, "third": 3,
+    "4": 4, "iv": 4, "4th": 4, "fourth": 4,
+    "5": 5, "v": 5, "5th": 5, "fifth": 5,
+    "6": 6, "vi": 6, "6th": 6, "sixth": 6,
+    "7": 7, "vii": 7, "7th": 7, "seventh": 7,
+    "8": 8, "viii": 8, "8th": 8, "eighth": 8,
+}
+ROMAN_SEMESTER_MAP = {
+    1: "I", 2: "II", 3: "III", 4: "IV",
+    5: "V", 6: "VI", 7: "VII", 8: "VIII"
+}
+
+def canonicalize_informal_semester(query: str, entities: dict) -> dict:
+    """Parse informal semester references ('sem V', 'sem 5', '5th sem', 'fifth sem', 'semester 5') into integer (1..8) & section titles."""
+    if not query:
+        return entities
+    pat = re.compile(
+        r"\b(?:sem(?:ester)?\s*([1-8]|i{1,3}|iv|v|vi{0,3}|vii{0,2}|viii|1st|2nd|3rd|[4-8]th|first|second|third|fourth|fifth|sixth|seventh|eighth))\b|"
+        r"\b([1-8]|1st|2nd|3rd|[4-8]th|first|second|third|fourth|fifth|sixth|seventh|eighth)\s*sem(?:ester)?\b",
+        re.IGNORECASE
+    )
+    m = pat.search(query)
+    if m:
+        val = (m.group(1) or m.group(2) or "").lower().strip()
+        sem_num = SEMESTER_MAP.get(val)
+        if sem_num:
+            roman_sem = ROMAN_SEMESTER_MAP.get(sem_num, str(sem_num))
+            entities["semester"] = sem_num
+            entities["semester_roman"] = roman_sem
+            req_sec = entities.setdefault("required_sections", [])
+            sec_variants = [f"Semester {roman_sem}", f"Semester {sem_num}", f"Semester {roman_sem} Curriculum"]
+            for sec in sec_variants:
+                if sec not in req_sec:
+                    req_sec.append(sec)
+    return entities
+
 
 class QueryPlanner:
 
@@ -1004,6 +1042,7 @@ class QueryPlanner:
             
             plan = json.loads(content)
             plan.setdefault("entities", {})
+            canonicalize_informal_semester(query, plan["entities"])
             plan.setdefault("retrieval_hints", {})
             plan.setdefault("top_k", 5)
             plan.setdefault(
