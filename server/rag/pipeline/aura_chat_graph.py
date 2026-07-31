@@ -410,9 +410,14 @@ class AuraChatGraph:
 
         request_context = state.get("request_context")
         user_role = request_context.effective_role if request_context else "public"
+        
+        # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
+        from institution_resolver import get_institution_resolver
+        resolved_query = get_institution_resolver().resolve(state["query"])
+
         with track_segment("retrieval_time"):
             retrieval_result = self.pipeline.get_context(
-                state["query"],
+                resolved_query,
                 state["history"],
                 user_role=user_role,
                 academic_scope=state.get("academic_scope"),
@@ -442,8 +447,14 @@ class AuraChatGraph:
         is_personal = state.get("is_personal", False)
         query_type = state["query_type"]
         retrieval_result = state.get("retrieval_result", {})
+        request_context = state.get("request_context")
+        user_role = request_context.effective_role if request_context else "public"
+
+        from privacy_filter import ResponsePrivacyFilter
+        privacy_filter = ResponsePrivacyFilter(user_role=user_role)
 
         combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
+        combined_context = privacy_filter.sanitize_retrieved_context(combined_context)
 
         has_rag = query_type in ("PUBLIC", "MIXED") and bool(rag_context)
 
@@ -452,13 +463,14 @@ class AuraChatGraph:
                 query=retrieval_result.get("corrected_query", state["query"]) if has_rag else state["query"],
                 context=combined_context,
                 plan=retrieval_result.get("plan") if has_rag else None,
-                history=state["history"],
-                profile=self._answer_profile(state),
+                history=state.get("history") or [],
+                profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
-                on_delta=state.get("on_delta"),
-                summary=state.get("summary"),
-                tracking_flags=state.get("request_context").tracking_flags if state.get("request_context") else None,
+                tracking_flags=request_context.tracking_flags if request_context else None,
             )
+
+        # Apply post-generation privacy filter
+        answer = privacy_filter.filter_response_text(answer, query=state["query"])
 
         state["result"] = {
             "answer": answer,
