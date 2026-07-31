@@ -146,6 +146,15 @@ def _merge_memory(existing: str, block: str, thread_id: Optional[str] = None) ->
     return _cap_storage(blocks)
 
 
+def _delete_memory(existing: str, thread_id: str) -> tuple[str, bool]:
+    """Drop one thread's block. Returns (remaining storage string, removed?)."""
+    blocks = _parse_blocks(existing)
+    kept = [(t, x) for (t, x) in blocks if t != thread_id]
+    if len(kept) == len(blocks):
+        return _normalise(existing), False
+    return _render_storage(kept), True
+
+
 def _display_from_storage(existing: str, exclude_thread: Optional[str] = None) -> str:
     blocks = _parse_blocks(existing)
     if exclude_thread:

@@ -90,14 +90,19 @@ def test_personal_query_extracts_self_target():
 
 # ── Failure-mode tests (no real key needed) ───────────────────────────────
 
-def test_defaults_to_public_on_llm_timeout():
-    from personal_query_classifier import PersonalQueryClassifier, SAFE_DEFAULT
-    clf = PersonalQueryClassifier.__new__(PersonalQueryClassifier)
-    clf.client = MagicMock()
-    clf.model  = "test"
-    clf.client.chat.completions.create.side_effect = Exception("timeout")
-    # Avoid PERSONAL_KEYWORDS_PAT fast-path so this exercises the LLM fallback.
-    assert clf.classify("What are the hostel allotment rules?")["type"] == "PUBLIC"
+def _stub_client(monkeypatch) -> MagicMock:
+    """Return the fake OpenAI client the classifier's LLM call will receive.
+
+    PersonalQueryClassifier holds no sticky client — classify() dispatches
+    through InferenceRouter.call_with_rotation, which hands a pooled client to
+    the callback — so the stub lands on call_with_rotation, not on clf.client.
+    """
+    client = MagicMock()
+    monkeypatch.setattr(
+        "personal_query_classifier.InferenceRouter.call_with_rotation",
+        lambda fn, max_retries=3, **_kwargs: fn(client),
+    )
+    return client
 
 
 def _classifier():
@@ -120,7 +125,7 @@ def test_defaults_to_public_on_json_parse_error(monkeypatch):
     client = _stub_client(monkeypatch)
     resp = MagicMock()
     resp.choices[0].message.content = "not valid json!!!"
-    clf.client.chat.completions.create.return_value = resp
+    client.chat.completions.create.return_value = resp
     # Avoid PERSONAL_KEYWORDS_PAT fast-path so this exercises the LLM fallback.
     assert clf.classify("What are the hostel allotment rules?")["type"] == "PUBLIC"
 
