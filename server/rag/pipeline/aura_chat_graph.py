@@ -218,23 +218,23 @@ class AuraChatGraph:
         return state
 
     def _n_community_tools(self, state: AuraState) -> AuraState:
-        # Routes queries to EcampusOrchestrator based on intent:
-        #   COMMUNITY     → public KB tools only (clubs, faculty directory, calendar…)
-        #   PERSONAL_DATA → full personal tools (timetable, grades, CGPA, attendance…)
-        #   GENERAL       → fall through to classify → public RAG
-        # Guests always fall through — the guest_gate node handles denial.
+        # Clubs / SBG / faculty ToR / domain KB skills → EcampusOrchestrator
+        # with public KB tools only. Guests and non-COMMUNITY queries fall
+        # through to classify → public RAG (or the personal ERP path).
+        # Personal ERP tools are never exposed on this branch.
         identity = state.get("identity")
         if not identity or getattr(identity, "role", None) in (None, "guest"):
             return state
 
         with track_segment("community_intent_time"):
             intent = self.intent_router.classify(state["query"])
-        if intent == "GENERAL":
+        if intent != "COMMUNITY":
             return state
 
         tool_role = identity.role if identity.role in ("student", "faculty") else None
         if tool_role is None:
-            # Map elevated faculty effective roles from request_context.
+            # Broad JWT role is student|faculty|admin; map elevated faculty
+            # effective roles if present on request_context.
             request_context = state.get("request_context")
             effective = getattr(request_context, "effective_role", None) or ""
             if effective.startswith("faculty") or effective in (
@@ -251,24 +251,18 @@ class AuraChatGraph:
             "role": tool_role,
             "dept": getattr(identity, "dept", None),
         }
-
-        # PERSONAL_DATA: use the full personal tool set (timetable, CGPA,
-        # grades, attendance, electives …).  COMMUNITY: public KB tools only.
-        tool_scope = "public_kb" if intent == "COMMUNITY" else "personal"
-        is_personal = (tool_scope == "personal")
-
         with track_segment("community_orchestrator_time"):
             result = self.ecampus_orchestrator.run(
                 query=state["query"],
                 identity=identity_payload,
                 history=state.get("history") or [],
                 request_context=state.get("request_context"),
-                tool_scope=tool_scope,
+                tool_scope="public_kb",
             )
         state["result"] = {
             "answer": result.get("answer") or "",
             "sources": result.get("sources") or [],
-            "is_personal_data": is_personal,
+            "is_personal_data": False,
         }
         return state
 
@@ -343,15 +337,41 @@ class AuraChatGraph:
 
         if query_type == "AGGREGATE":
             course_code = (access_result.course_codes[0] if access_result.course_codes else None)
-            erp_data = {"aggregate": self.erp_connector.get_class_aggregate(course_code) if course_code else {}}
+            try:
+                erp_data = {"aggregate": self.erp_connector.get_class_aggregate(course_code) if course_code else {}}
+            except Exception:
+                import traceback; traceback.print_exc()
+                state["result"] = {
+                    "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
+                    "sources": [], "is_personal_data": False,
+                }
+                return state
         else:
-            erp_data = self._fetch_erp_data(
-                classification["erp_fields"],
-                target_erp_id,
-                access_result,
-                requester_erp_id=identity.erp_id,
-                identity=identity,
-            )
+            # Fix PD-DEGRADE: this is the one DB-dependent step in this node
+            # without its own error handling (audit_log.record above never
+            # raises by design; access_gate.evaluate for "self" queries — the
+            # overwhelming majority — makes no DB call at all). A transient
+            # Postgres hiccup while fetching profile/cgpa/grades/attendance
+            # used to propagate uncaught all the way to chat()'s top-level
+            # except block, which returns "Sorry, I encountered an error
+            # while generating a response" — a generation-stage message that
+            # is actively misleading for what is really a data-fetch failure,
+            # and specifically explains why this surfaced on personal
+            # questions (profile/grades/attendance) more than public ones.
+            try:
+                erp_data = self._fetch_erp_data(
+                    classification["erp_fields"],
+                    target_erp_id,
+                    access_result,
+                    requester_erp_id=identity.erp_id,
+                )
+            except Exception:
+                import traceback; traceback.print_exc()
+                state["result"] = {
+                    "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
+                    "sources": [], "is_personal_data": False,
+                }
+                return state
 
         state["erp_context"] = self.context_builder.build(erp_data, identity, access_result)
         state["is_personal"] = True
@@ -438,7 +458,6 @@ class AuraChatGraph:
         roll_number: Optional[str],
         access_result,
         requester_erp_id: Optional[str] = None,
-        identity=None,
     ) -> dict:
         if not roll_number:
             return {}
@@ -467,18 +486,6 @@ class AuraChatGraph:
             data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
         if "courses" in fields and requester_erp_id:
             data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
-        # Timetable is stored in AURA's own PostgreSQL (timetable_master +
-        # timetable_overrides), completely separate from the ERP / RAG path.
-        # Fetch it directly from the timetable service — never via Qdrant.
-        if "timetable" in fields and identity is not None:
-            try:
-                from pipeline.timetable.service import get_effective_timetable
-                data["timetable"] = get_effective_timetable(identity)
-            except Exception as _tt_err:
-                import logging
-                logging.getLogger(__name__).warning(
-                    "Timetable fetch skipped in _fetch_erp_data: %s", _tt_err
-                )
         return data
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────
