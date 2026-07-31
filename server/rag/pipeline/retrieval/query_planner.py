@@ -1088,7 +1088,9 @@ class QueryPlanner:
             resolver = get_institution_resolver()
             effective_query = resolver.resolve(effective_query)
         except Exception as e:
-            pass
+            # Fail open: institution resolver is an optional enrichment layer.
+            # If it fails, continue planning with the unmodified query.
+            print(f"[QueryPlanner] Institution resolver unavailable; continuing without resolver: {e}")
 
         scope_hint = ""
         if academic_scope is not None:
