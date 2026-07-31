@@ -420,6 +420,16 @@ class RetrievalPipeline:
         }
 
     @staticmethod
+    def _has_explicit_programme_context(plan: dict) -> bool:
+        """True when the query already names a programme/course — no personal scope needed."""
+        entities = plan.get("entities") or {}
+        return bool(
+            entities.get("program_name")
+            or entities.get("course_code")
+            or entities.get("course_name")
+        )
+
+    @staticmethod
     def _eligible_results(results: list[dict], academic_scope) -> list[dict]:
         if academic_scope is None:
             return results
@@ -559,6 +569,7 @@ class RetrievalPipeline:
         history=None,
         user_role: str = "public",
         academic_scope=None,
+        identity=None,
     ):
         allowed_roles = get_allowed_roles(user_role)
         original_query = query
@@ -599,8 +610,11 @@ class RetrievalPipeline:
                 )
             )
 
-        # Submit the planning LLM call to executor
-        future_plan = self.executor.submit(self.planner.plan, query, academic_scope)
+        # Submit the planning LLM call to executor (pass history + identity so
+        # continuation and personalized "my programme" rewrites apply).
+        future_plan = self.executor.submit(
+            self.planner.plan, query, academic_scope, history, identity
+        )
 
         # Submit the speculative retrieval call to executor. Speculative retrieval
         # runs the semester-expanded query with an empty plan ({}) which results
@@ -643,7 +657,16 @@ class RetrievalPipeline:
 
         retrieval_intent = plan.get("retrieval_intent", "general")
 
-        if user_role == "student" and self._requires_academic_scope(plan) and academic_scope is None:
+        # Abstain only for personal/"my programme" curriculum questions when we
+        # cannot resolve the student's AcademicScope. If the user (or rewriter)
+        # already named a programme/course, retrieve without personal scope —
+        # curriculum docs are public and the named entity is enough to filter.
+        if (
+            user_role == "student"
+            and self._requires_academic_scope(plan)
+            and academic_scope is None
+            and not self._has_explicit_programme_context(plan)
+        ):
             return {
                 "query": original_query,
                 "corrected_query": query,

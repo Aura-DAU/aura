@@ -33,9 +33,6 @@ interface MarkdownContentProps {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: number) {
-  if (highlightStart) {
-    console.log("shouldHighlight node:", node);
-  }
   if (!node || !node.position || !highlightStart) return undefined;
   const start = node.position.start.line;
   const end = node.position.end.line;
@@ -68,15 +65,8 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
     <button
       type="button"
       onMouseEnter={() => {
-        if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+        if (typeof window !== "undefined" && window.innerWidth < 768) return
         prefetchDocument(viewerTarget)
-        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-        hoverTimerRef.current = setTimeout(() => {
-          openDocument(viewerTarget)
-        }, 1000)
-      }}
-      onMouseLeave={() => {
-        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
       }}
       onClick={() => {
         window.open(citation.file, "_blank", "noopener,noreferrer")
