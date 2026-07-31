@@ -522,7 +522,6 @@ export function useAuraChat() {
           setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
           setActiveThreadIdState(threadId)
         }
-        baseMessages = [...priorMessages, userMsg]
         persistMessages(
           threadId,
           baseMessages,
@@ -612,6 +611,10 @@ export function useAuraChat() {
             continuationSummary = chunk.summary
           } else if (chunk.type === "quota" && typeof chunk.remaining === "number") {
             syncQuotaFromServer(chunk.remaining)
+          } else if (chunk.type === "error") {
+            const errCode = typeof chunk.code === "string" ? chunk.code : "RAG_ERROR"
+            const errDetail = typeof chunk.detail === "string" ? chunk.detail : ""
+            console.error(`[useAuraChat] Stream error (${errCode}):`, errDetail)
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&
@@ -671,7 +674,6 @@ export function useAuraChat() {
             summary: carriedSummary,
             summaryTurnCount: 0,
             continuedFromId: threadId,
-            updatedAt: Date.now(),
           }
           setThreads((prev) => sortThreadsByRecency([contThread, ...prev]))
           pendingContinuationRef.current = { fromId: threadId, toId: contId }

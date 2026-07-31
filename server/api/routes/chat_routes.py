@@ -264,11 +264,31 @@ async def chat_stream(
                             })
                         continue
                     if kind == "error":
-                        print(f"[chat_stream] pipeline error: {payload}")
+                        err_str = str(payload or "")
+                        logger.error("[chat_stream] Pipeline error: %s", err_str)
+
+                        # Classify explicit error code for developer tracing & telemetry
+                        if "Connection error" in err_str or "exhausted" in err_str or "Timeout" in err_str or "timeout" in err_str:
+                            error_code = "VLLM_TIMEOUT"
+                        elif "RETRIEVAL_EMPTY" in err_str or "No relevant documents" in err_str:
+                            error_code = "RETRIEVAL_EMPTY"
+                        elif "GUARDRAIL_BLOCKED" in err_str or "violates safety" in err_str:
+                            error_code = "GUARDRAIL_BLOCKED"
+                        else:
+                            error_code = "RAG_PIPELINE_ERROR"
+
+                        # Soft, polite user-facing message for the chat interface
+                        user_msg = "Sorry, I encountered an error while processing your request. Please try again in a few moments."
+
+                        yield _sse({
+                            "type": "error",
+                            "code": error_code,
+                            "detail": err_str,
+                        })
                         if not streamed_any:
                             yield _sse({
                                 "type": "text-delta",
-                                "delta": "Sorry, I encountered an error while generating a response. Please try again.",
+                                "delta": user_msg,
                             })
                         yield "data: [DONE]\n\n"
                         break
@@ -292,8 +312,8 @@ async def chat_stream(
                                     "file": file,
                                     "title": source.get("title"),
                                     "path": source.get("path"),
-                                    "start_line": source.get("start_line"),
-                                    "end_line": source.get("end_line"),
+                                    "startLine": source.get("start_line"),
+                                    "endLine": source.get("end_line"),
                                     "visibility": source.get("visibility"),
                                     "authorization": source.get("authorization"),
                                 }
