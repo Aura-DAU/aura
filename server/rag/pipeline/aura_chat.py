@@ -131,6 +131,26 @@ class AuraChat:
             identity = SimpleIdentity(identity)
 
         try:
+            # ── Middleware 1: Institution Context Resolver & Privacy Gate ──
+            from access_control import resolve_effective_role
+            from institution_resolver import get_institution_resolver
+            from privacy_filter import ResponsePrivacyFilter
+
+            user_role = resolve_effective_role(identity) if identity else "public"
+            privacy_filter = ResponsePrivacyFilter(user_role=user_role)
+
+            # Check explicit privacy policy violation requests (e.g. mobile numbers, student IDs for unauthorized roles)
+            is_blocked, refusal_msg = privacy_filter.check_explicit_privacy_request(query)
+            if is_blocked:
+                return {
+                    "answer": refusal_msg,
+                    "sources": [],
+                    "is_personal_data": False,
+                }
+
+            # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
+            query = get_institution_resolver().resolve(query)
+
             from pipeline.latency_tracker import track_segment
             history = history or []
 
@@ -297,7 +317,7 @@ class AuraChat:
                 from access_control import resolve_effective_role
                 user_role = resolve_effective_role(identity) if identity else "public"
                 with track_segment("retrieval_time"):
-                    retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
+                    retrieval_result = self.pipeline.get_context(resolved_query, history, user_role=user_role)
                 chunks    = retrieval_result.get("chunks", [])
                 rag_context = retrieval_result.get("context", "")
                 sources   = retrieval_result.get("sources", [])
@@ -311,12 +331,13 @@ class AuraChat:
                     )
                     return {"answer": answer, "sources": [], "is_personal_data": False}
 
-            # ── Step 8: Merge and generate ─────────────────────────────
+            # ── Step 8: Merge, Sanitize Context, and Generate ─────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
+            combined_context = privacy_filter.sanitize_retrieved_context(combined_context)
 
             with track_segment("generation_time"):
                 answer = self.generator.generate(
-                    query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
+                    query=retrieval_result.get("corrected_query", resolved_query) if query_type in ("PUBLIC", "MIXED") and rag_context else resolved_query,
                     context=combined_context,
                     plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
                     history=history,
@@ -324,6 +345,9 @@ class AuraChat:
                     system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
                     tracking_flags=request_context.tracking_flags if request_context else None,
                 )
+
+            # Apply Post-generation Privacy Filter (scans and redacts leaked PII / restricted fields)
+            answer = privacy_filter.filter_response_text(answer, query=query)
 
             return {
                 "answer": answer,

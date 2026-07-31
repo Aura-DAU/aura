@@ -1056,6 +1056,14 @@ class QueryPlanner:
         if "dau" not in effective_query.lower() and "dhirubhai" not in effective_query.lower():
             effective_query += " (DAU Dhirubhai Ambani University context)"
 
+        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
+        try:
+            from institution_resolver import get_institution_resolver
+            resolver = get_institution_resolver()
+            effective_query = resolver.resolve(effective_query)
+        except Exception as e:
+            pass
+
         scope_hint = ""
         if academic_scope is not None:
             scope_hint = (
