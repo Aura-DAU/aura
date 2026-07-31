@@ -91,12 +91,13 @@ def test_personal_query_extracts_self_target():
 # ── Failure-mode tests (no real key needed) ───────────────────────────────
 
 def test_defaults_to_public_on_llm_timeout():
-    from personal_query_classifier import PersonalQueryClassifier, SAFE_DEFAULT
+    from personal_query_classifier import PersonalQueryClassifier
     clf = PersonalQueryClassifier.__new__(PersonalQueryClassifier)
     clf.client = MagicMock()
     clf.model  = "test"
     clf.client.chat.completions.create.side_effect = Exception("timeout")
-    assert clf.classify("test query")["type"] == "PUBLIC"
+    # Avoid PERSONAL_KEYWORDS_PAT fast-path so this exercises the LLM fallback.
+    assert clf.classify("What are the hostel allotment rules?")["type"] == "PUBLIC"
 
 
 def test_defaults_to_public_on_json_parse_error():
@@ -107,7 +108,8 @@ def test_defaults_to_public_on_json_parse_error():
     resp = MagicMock()
     resp.choices[0].message.content = "not valid json!!!"
     clf.client.chat.completions.create.return_value = resp
-    assert clf.classify("test query")["type"] == "PUBLIC"
+    # Avoid PERSONAL_KEYWORDS_PAT fast-path so this exercises the LLM fallback.
+    assert clf.classify("What are the hostel allotment rules?")["type"] == "PUBLIC"
 
 
 def test_defaults_to_public_on_unknown_type():

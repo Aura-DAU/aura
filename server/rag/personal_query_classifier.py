@@ -68,7 +68,9 @@ Output ONLY valid JSON — no markdown fences:
 }
 """
 
-SAFE_DEFAULT = {"type": "PUBLIC", "target": None, "erp_fields": []}
+def get_safe_default():
+    return {"type": "PUBLIC", "target": None, "erp_fields": []}
+
 VALID_TYPES  = {"PUBLIC", "PERSONAL", "MIXED", "AGGREGATE"}
 
 
@@ -127,8 +129,8 @@ class PersonalQueryClassifier:
             result.setdefault("target",     None)
             result.setdefault("erp_fields", [])
             if result["type"] not in VALID_TYPES:
-                return SAFE_DEFAULT.copy()
+                return get_safe_default()
             return result
         except Exception as e:
             logger.warning("PersonalQueryClassifier failed (%s) — defaulting to PUBLIC", e)
-            return SAFE_DEFAULT.copy()
+            return get_safe_default()
