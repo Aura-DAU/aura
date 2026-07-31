@@ -555,6 +555,7 @@ export function useAuraChat() {
             question: trimmed,
             history: toBackendHistory(tail),
             summary: threadSummary,
+            threadId,
             studentProfile: toBackendProfile(studentProfile),
           }),
           signal: controller.signal,

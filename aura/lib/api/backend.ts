@@ -22,6 +22,8 @@ export interface BackendChatRequest {
   studentProfile?: BackendStudentProfile
   /** Client-owned rolling conversation memory (see lib/chat-types ChatThread.summary). */
   summary?: string
+  /** Stable per-conversation id; keys this chat's block in the persistent per-user memory. */
+  threadId?: string
 }
 
 export interface BackendChatResponse {
