@@ -181,14 +181,6 @@ scraped_date="{metadata.get('scraped_date', '')}"
             + "\n</context>"
         )
 
-        print("\n" + "=" * 60)
-        print("===== CONTEXT BUILDER (FINAL CONTEXT TO LLM) =====")
-        print(f"Selected Chunks Count: {len(documents)}")
-        print(f"Estimated Context Tokens Used: {context_tokens_used} / {effective_max_tokens}")
-        for idx, src in enumerate(sources, start=1):
-            print(f"{idx}. title={src.get('title')} | file={src.get('path')} | url={src.get('url')}")
-        print("=" * 60)
-
         return {
             "context": context,
             "sources": sources,

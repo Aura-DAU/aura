@@ -544,17 +544,4 @@ class Reranker:
             reverse=True
         )
 
-        print("\n" + "=" * 60)
-        print("===== CROSS-ENCODER RERANK RESULTS =====")
-        print(f"Query: {query}")
-        for rank, item in enumerate(reranked, start=1):
-            meta = item.get("metadata", {})
-            h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
-            print(f"{rank}. reranked_score={item.get('reranked_score', 0.0):.4f} (cross_logit={item.get('cross_score', 0.0):.4f}) | chunk={item.get('id')}")
-            print(f"   title={meta.get('title', 'N/A')}")
-            print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
-            if h_str:
-                print(f"   headers={h_str}")
-        print("=" * 60)
-
         return reranked
