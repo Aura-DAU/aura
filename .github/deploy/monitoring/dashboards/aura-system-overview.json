@@ -87,7 +87,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum(rate(nginx_http_requests_total[1m])) by (request_uri)",
+          "expr": "sum(rate(nginx_http_response_count_total[1m])) by (request_uri)",
           "legendFormat": "Route: {{request_uri}}",
           "refId": "A"
         }

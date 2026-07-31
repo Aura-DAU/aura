@@ -21,6 +21,21 @@ _SCOPE_REFRESH_QUEUE: set[str] = set()
 _SCOPE_REFRESH_EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="academic-scope-refresh")
 logger = logging.getLogger(__name__)
 
+_SCOPE_LOOKUP_SQL = """
+SELECT si.identity_version, si.admission_year, si.programme_id,
+       si.branch_id, si.department_id, si.degree_level,
+       sap.profile_version, sap.academic_status,
+       sap.expected_graduation_year, sap.curriculum_version,
+       sap.regulation_version, sap.synced_at,
+       ses.id AS enrollment_snapshot_id, ses.current_semester,
+       ses.captured_at AS enrollment_captured_at
+  FROM student_identity si
+  JOIN student_academic_profile sap ON sap.erp_id = si.erp_id
+  LEFT JOIN student_enrollment_snapshot ses
+    ON ses.erp_id = si.erp_id AND ses.is_current = TRUE
+ WHERE si.erp_id = %s
+"""
+
 
 @dataclass(frozen=True)
 class AcademicScope:
@@ -145,23 +160,28 @@ class AcademicScopeResolver:
         try:
             import db.connection as db_conn
 
-            rows = db_conn.query(
-               """SELECT si.identity_version, si.admission_year, si.programme_id,
-                        si.branch_id, si.department_id, si.degree_level,
-                        sap.profile_version, sap.academic_status,
-                        sap.expected_graduation_year, sap.curriculum_version,
-                        sap.regulation_version, sap.synced_at,
-                        ses.id AS enrollment_snapshot_id, ses.current_semester,
-                        ses.captured_at AS enrollment_captured_at
-                   FROM student_identity si
-                   JOIN student_academic_profile sap ON sap.erp_id = si.erp_id
-                   LEFT JOIN student_enrollment_snapshot ses
-                     ON ses.erp_id = si.erp_id AND ses.is_current = TRUE
-                   WHERE si.erp_id = %s""",
-               (identity.erp_id,),
-            )
+            rows = db_conn.query(_SCOPE_LOOKUP_SQL, (identity.erp_id,))
             if not rows:
-               return RequestContext(identity=identity, effective_role=effective_role, academic_scope=None, tracking_flags=tracking_flags)
+                # Backfill for students who logged in before academic-scope
+                # persistence shipped, or whose resolve write failed.
+                try:
+                    from api.academic_scope_persist import ensure_student_academic_scope
+
+                    if ensure_student_academic_scope(identity):
+                        rows = db_conn.query(_SCOPE_LOOKUP_SQL, (identity.erp_id,))
+                except Exception as backfill_exc:
+                    logger.warning(
+                        "Academic scope backfill failed for %s: %s",
+                        identity.erp_id,
+                        backfill_exc,
+                    )
+                if not rows:
+                    return RequestContext(
+                        identity=identity,
+                        effective_role=effective_role,
+                        academic_scope=None,
+                        tracking_flags=tracking_flags,
+                    )
 
             row = rows[0]
             courses: list[dict] = []
