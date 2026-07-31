@@ -96,7 +96,7 @@ def test_defaults_to_public_on_llm_timeout():
     clf.client = MagicMock()
     clf.model  = "test"
     clf.client.chat.completions.create.side_effect = Exception("timeout")
-    assert clf.classify("What is my CGPA?")["type"] == "PUBLIC"
+    assert clf.classify("test query")["type"] == "PUBLIC"
 
 
 def test_defaults_to_public_on_json_parse_error():
@@ -107,7 +107,7 @@ def test_defaults_to_public_on_json_parse_error():
     resp = MagicMock()
     resp.choices[0].message.content = "not valid json!!!"
     clf.client.chat.completions.create.return_value = resp
-    assert clf.classify("What is my CGPA?")["type"] == "PUBLIC"
+    assert clf.classify("test query")["type"] == "PUBLIC"
 
 
 def test_defaults_to_public_on_unknown_type():

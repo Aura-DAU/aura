@@ -58,7 +58,9 @@ from api.request_context import RequestContext
 
 
 class SimpleIdentity:
-    def __init__(self, d):
+    def __init__(self, d=None, **kwargs):
+        if d is None:
+            d = kwargs
         if isinstance(d, dict):
             self.erp_id = d.get("erp_id") or d.get("erpId")
             self.role = d.get("role", "student")
