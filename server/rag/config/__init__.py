@@ -1,3 +1,0 @@
-"""
-RAG Configuration Package
-"""

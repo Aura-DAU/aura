@@ -367,8 +367,6 @@ class AuraChat:
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
-            elif any(kw in err_str for kw in ["400", "bad request", "badrequesterror", "context_length_exceeded", "maximum context length"]):
-                msg = "I apologize, but the retrieved information and prompt context exceeded the model's context length limit. Please try asking a more specific question."
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
             return {"answer": msg, "sources": [], "is_personal_data": False}
