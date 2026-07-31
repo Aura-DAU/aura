@@ -105,6 +105,12 @@ services:
       ECAMPUS_VAULT_DB: /var/lib/aura/ecampus_credentials.db
       ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db
       AURA_AUDIT_LOG: /var/log/aura/personal_data_audit.log
+      # OBS-01: every gunicorn worker writes its samples here so /metrics
+      # aggregates instead of reporting whichever worker answered the scrape.
+      # Must land on the aura-vault mount below — the path has to be shared by
+      # all workers and writable by the aura user. Omit to fall back to
+      # per-worker registries.
+      PROMETHEUS_MULTIPROC_DIR: ${PROMETHEUS_MULTIPROC_DIR:-/var/lib/aura/prometheus}
     volumes:
       # Raw markdown knowledge base — /documents + ad-hoc ingestion.
       - ../data:/app/data:ro
@@ -179,11 +185,14 @@ services:
   # Enable with: docker compose ... --profile gpu up -d
   # InferenceRouter implements least-loaded selection + failover; Compose
   # only declares the pool topology.
+  # --max-num-seqs is pinned (not left to vLLM's ~256 default): 24 matches the
+  # live ceiling and measured KV cache, above which the scheduler admits
+  # sequences KV cannot back and they preempt instead of running.
   vllm-node1:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
     expose:
       - "8000"
     volumes:
@@ -214,7 +223,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
     expose:
       - "8000"
     volumes:
@@ -245,7 +254,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}"]
+    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
     expose:
       - "8000"
     volumes:

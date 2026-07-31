@@ -41,6 +41,87 @@ function sseLine(data: unknown): string {
   return `data: ${JSON.stringify(data)}\n\n`
 }
 
+interface ShedPayload {
+  detail?: string
+  code?: string
+  shedBy?: string
+  retryAfter?: number
+}
+
+/**
+ * Retryability signals must survive the BFF hop. Without `Retry-After` the
+ * client cannot say how long to wait, and without `X-Aura-Shed-By` it cannot
+ * tell a capacity shed from the per-identity question quota — both of which
+ * arrive as a 429.
+ */
+function passthroughShedHeaders(res: Response, into: Record<string, string>): Record<string, string> {
+  const retryAfter = res.headers.get("Retry-After")
+  const shedBy = res.headers.get("X-Aura-Shed-By")
+  if (retryAfter) into["Retry-After"] = retryAfter
+  if (shedBy) into["X-Aura-Shed-By"] = shedBy
+  return into
+}
+
+/**
+ * Maps an upstream failure onto the client-facing error contract.
+ *
+ * Three distinct cases share the 429/503 space:
+ *   - edge capacity shed     → 429 EDGE_OVERLOADED      (X-Aura-Shed-By: edge)
+ *   - backend admission shed → 503 ADMISSION_OVERLOADED (X-Aura-Shed-By: backend)
+ *   - per-identity quota     → 429 with neither marker
+ * Only the last one means the user is actually out of questions.
+ */
+async function relayErrorResponse(res: Response): Promise<Response> {
+  const text = await res.text().catch(() => "")
+  let payload: ShedPayload | null = null
+  try {
+    payload = text ? (JSON.parse(text) as ShedPayload) : null
+  } catch {
+    payload = null
+  }
+
+  const shedBy = res.headers.get("X-Aura-Shed-By") ?? payload?.shedBy
+  const code = payload?.code
+  const isOverload =
+    code === "EDGE_OVERLOADED" ||
+    code === "ADMISSION_OVERLOADED" ||
+    shedBy === "edge" ||
+    shedBy === "backend"
+
+  const headers = passthroughShedHeaders(res, {})
+
+  if (isOverload) {
+    const resolvedCode =
+      code ?? (shedBy === "backend" ? "ADMISSION_OVERLOADED" : "EDGE_OVERLOADED")
+    console.warn("[chat] load shed:", res.status, resolvedCode, shedBy ?? "unknown")
+    return Response.json(
+      {
+        error: payload?.detail ?? "AURA is busy right now. Please retry in a few seconds.",
+        code: resolvedCode,
+        shedBy: shedBy ?? undefined,
+        retryAfter: payload?.retryAfter ?? undefined,
+      },
+      { status: res.status, headers },
+    )
+  }
+
+  if (res.status === 429) {
+    return Response.json(
+      { error: "Question limit reached", code: "RATE_LIMITED" },
+      { status: 429, headers },
+    )
+  }
+
+  console.error("[chat] backend error:", res.status, text)
+  return new Response(text || res.statusText || "Backend error", {
+    status: res.status,
+    headers: {
+      ...headers,
+      "Content-Type": res.headers.get("Content-Type") || "text/plain",
+    },
+  })
+}
+
 function toLineNumber(v: unknown): number | undefined {
   if (typeof v === "number" && Number.isFinite(v)) return v
   if (typeof v === "string" && v.trim() !== "" && !Number.isNaN(Number(v))) {
@@ -201,17 +282,8 @@ async function handleChatPost(req: Request): Promise<Response> {
     return new Response("Backend unavailable", { status: 502 })
   }
 
-  if (backendRes.status === 429) {
-    return new Response("Question limit reached", { status: 429 })
-  }
-
   if (!backendRes.ok) {
-    const text = await backendRes.text().catch(() => "")
-    console.error("[chat] backend error:", backendRes.status, text)
-    return new Response(text || backendRes.statusText || "Backend error", {
-      status: backendRes.status,
-      headers: { "Content-Type": backendRes.headers.get("Content-Type") || "text/plain" },
-    })
+    return await relayErrorResponse(backendRes)
   }
 
   if (!backendRes.body) {

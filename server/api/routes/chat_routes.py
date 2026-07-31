@@ -8,16 +8,23 @@ from contextlib import asynccontextmanager
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
-from fastapi.responses import StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 
 from api.auth import Identity, require_identity
 from api.request_context import AcademicScopeResolver, RequestContext
-from api.deps import chat_queue_lock, CHAT_QUEUE_WAIT_TIMEOUT, get_aura
+from api.deps import (
+    chat_queue_lock,
+    CHAT_QUEUE_WAIT_TIMEOUT,
+    CHAT_RETRY_AFTER_SECONDS,
+    get_aura,
+)
 from api.schemas import ChatRequest
+from pipeline.exceptions import ContextLengthExceeded, RAGPipelineError
 from pipeline.memory.conversation_memory import get_conversation_memory, _truncate_tokens
 from pipeline.memory.user_memory import get_user_memory_store
 from pipeline.memory.response_cache import get_response_cache
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota
+from pipeline.token_budget import is_context_length_error
 from access_control import resolve_effective_role
 
 router = APIRouter(tags=["chat"])
@@ -25,11 +32,58 @@ _scope_resolver = AcademicScopeResolver()
 logger = logging.getLogger(__name__)
 
 
+class ChatAdmissionShed(Exception):
+    """Concurrency semaphore timed out — convert to a retryable 503 response."""
+
+
 def _env_int(name: str, default: int) -> int:
     try:
         return int((os.getenv(name) or "").strip() or default)
     except (TypeError, ValueError):
         return default
+
+
+CONTEXT_LENGTH_DETAIL = (
+    "This conversation is too long for AURA's context window. "
+    "Try a shorter question or start a new chat."
+)
+
+PIPELINE_ERROR_DETAIL = (
+    "AURA could not complete that request — please try again in a few moments."
+)
+
+
+def _pipeline_error_response(exc: Exception) -> JSONResponse:
+    if is_context_length_error(exc):
+        logger.error(
+            "chat_pipeline_error code=AURA-CTX-001 status=413 exc_type=%s: %s",
+            type(exc).__name__,
+            exc,
+        )
+        return JSONResponse(
+            status_code=413,
+            content={"detail": CONTEXT_LENGTH_DETAIL, "code": "AURA-CTX-001"},
+            headers={"Cache-Control": "no-store"},
+        )
+
+    logger.error(
+        "chat_pipeline_error code=RAG_PIPELINE_ERROR status=503 exc_type=%s: %s",
+        type(exc).__name__,
+        exc,
+        exc_info=exc,
+    )
+    return JSONResponse(
+        status_code=503,
+        content={
+            "detail": PIPELINE_ERROR_DETAIL,
+            "code": "RAG_PIPELINE_ERROR",
+            "retryAfter": CHAT_RETRY_AFTER_SECONDS,
+        },
+        headers={
+            "Retry-After": str(CHAT_RETRY_AFTER_SECONDS),
+            "Cache-Control": "no-store",
+        },
+    )
 
 
 async def _acquire_chat_slot() -> None:
@@ -165,10 +219,20 @@ async def chat(
             cached["quota_remaining"] = remaining
             return cached
 
-    async with _chat_slot():
-        result = await run_in_threadpool(
-            _ask_with_memory, body, identity, history, display_profile, request_context
-        )
+    try:
+        async with _chat_slot():
+            result = await run_in_threadpool(
+                _ask_with_memory, body, identity, history, display_profile, request_context
+            )
+    except RAGPipelineError as exc:
+        return _pipeline_error_response(exc)
+    except Exception as exc:
+        # An SDK BadRequestError reaches here unwrapped whenever the 400 is
+        # raised outside inference_router's rotation wrapper; everything else
+        # keeps its existing 500 so genuine bugs stay loud.
+        if not is_context_length_error(exc):
+            raise
+        return _pipeline_error_response(exc)
     if isinstance(result, dict):
         result["quota_remaining"] = remaining
         # Cache write: guest public standalone queries only (exclude error/rejection responses)
@@ -311,9 +375,39 @@ async def chat_stream(
             if capture:
                 user_memory_store.merge(identity_dict, capture, thread_id=body.threadId)
         except Exception as exc:  # e.g. AURA init failure — never kill the stream silently
-            loop.call_soon_threadsafe(events.put_nowait, ("error", str(exc)))
+            # The exception itself, not str(exc): the consumer needs the object
+            # to attribute a context overflow, whose marker often lives on the
+            # wrapped __cause__ rather than in the message.
+            loop.call_soon_threadsafe(events.put_nowait, ("error", exc))
         else:
             loop.call_soon_threadsafe(events.put_nowait, ("done", (result, mem_result)))
+
+    headers = {
+        "Cache-Control": "no-cache, no-transform",
+        "X-Accel-Buffering": "no",
+    }
+    # Set even though the body streams the same value as a "quota" event —
+    # some proxies/clients read remaining-quota from headers before the
+    # body is fully parsed. `remaining` is known upfront since enforce_quota
+    # already ran in _resolve_request, before any streaming starts.
+    if remaining is not None:
+        headers["X-Quota-Remaining"] = str(remaining)
+
+    # Admission control: take the concurrency slot (bounded wait → 503 on
+    # overload) BEFORE returning the 200 SSE response, so peak load is a clean,
+    # retryable rejection rather than a stream that dies mid-flight.
+    # Ownership transfers to event_source(); release on construction failure too.
+    try:
+        await _acquire_chat_slot()
+    except ChatAdmissionShed:
+        return _admission_shed_response()
+    slot_held = True
+
+    def _release_slot() -> None:
+        nonlocal slot_held
+        if slot_held:
+            slot_held = False
+            chat_queue_lock.release()
 
     async def event_source():
         # The concurrency slot was acquired in the endpoint (admission control),
@@ -343,11 +437,16 @@ async def chat_stream(
                             })
                         continue
                     if kind == "error":
+                        exc = payload if isinstance(payload, BaseException) else None
                         err_str = str(payload or "")
                         logger.error("[chat_stream] Pipeline error: %s", err_str)
 
                         # Classify explicit error code for developer tracing & telemetry
-                        if "Connection error" in err_str or "exhausted" in err_str or "Timeout" in err_str or "timeout" in err_str:
+                        if isinstance(exc, ContextLengthExceeded) or is_context_length_error(exc):
+                            # Matches the 413 code the blocking path returns, so a
+                            # context overflow is attributable on both surfaces.
+                            error_code = "AURA-CTX-001"
+                        elif "Connection error" in err_str or "exhausted" in err_str or "Timeout" in err_str or "timeout" in err_str:
                             error_code = "VLLM_TIMEOUT"
                         elif "RETRIEVAL_EMPTY" in err_str or "No relevant documents" in err_str:
                             error_code = "RETRIEVAL_EMPTY"
@@ -357,7 +456,11 @@ async def chat_stream(
                             error_code = "RAG_PIPELINE_ERROR"
 
                         # Soft, polite user-facing message for the chat interface
-                        user_msg = "Sorry, I encountered an error while processing your request. Please try again in a few moments."
+                        user_msg = (
+                            CONTEXT_LENGTH_DETAIL
+                            if error_code == "AURA-CTX-001"
+                            else "Sorry, I encountered an error while processing your request. Please try again in a few moments."
+                        )
 
                         yield _sse({
                             "type": "error",
@@ -422,6 +525,9 @@ async def chat_stream(
 
                     yield "data: [DONE]\n\n"
                     break
+            except asyncio.CancelledError:
+                _release_slot()
+                raise
             finally:
                 await worker
         finally:

@@ -26,6 +26,11 @@ chat_queue_lock = asyncio.Semaphore(_chat_limit)
 # backpressure the client can retry. Tune with CHAT_QUEUE_WAIT_TIMEOUT.
 CHAT_QUEUE_WAIT_TIMEOUT = float(os.getenv("CHAT_QUEUE_WAIT_TIMEOUT", "8"))
 
+# Seconds the client is told to wait before retrying a shed ask. Kept in one
+# place so the 503 header, the JSON body, and the edge's matching Retry-After
+# stay aligned.
+CHAT_RETRY_AFTER_SECONDS = 5
+
 
 def get_aura():
     # Defer heavy Pinecone/embedding import until first /chat.
@@ -40,7 +45,7 @@ def get_aura():
 
 def warm_aura_in_background() -> None:
     # Without warm-up the first /chat after boot pays the full embedding +
-    # reranker + Pinecone init (tens of seconds). Daemon thread so startup
+    # reranker + Qdrant init (tens of seconds). Daemon thread so startup
     # and serving are never blocked; a /chat arriving mid-warm-up simply
     # waits on _aura_lock and reuses the same instance.
     def _warm() -> None:

@@ -29,6 +29,7 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    log_soft_failure,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -362,13 +363,17 @@ class AuraChat:
             }
 
         except Exception as e:
-            import traceback
-            traceback.print_exc()
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+            log_soft_failure(
+                "AURA-CHAT-001",
+                "aura_chat.chat",
+                exc=e,
+                user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
+            )
             return {"answer": msg, "sources": [], "is_personal_data": False}
 
     def _resolve_target(self, target_label: Optional[str], identity) -> Optional[str]:

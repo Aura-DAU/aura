@@ -32,6 +32,7 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    log_soft_failure,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -344,11 +345,17 @@ class AuraChatGraph:
                     request_context=state.get("request_context"),
                     tool_scope="public_kb",
                 )
-        except Exception:
+        except Exception as exc:
             # Orchestrator/LLM failure must not kill the request — fall through
-            # to classify → public RAG, which has its own error handling.
-            import traceback
-            traceback.print_exc()
+            # to classify → public RAG, which has its own error handling. This
+            # is not itself a soft error, but it silently degrades a COMMUNITY
+            # query to generic RAG, so it has to be attributable too.
+            log_soft_failure(
+                "AURA-GRAPH-003",
+                "community_orchestrator",
+                exc=exc,
+                degraded_to="public_rag",
+            )
             return state
 
         answer = (result.get("answer") or "").strip()
@@ -534,6 +541,11 @@ class AuraChatGraph:
         has_rag = query_type in ("PUBLIC", "MIXED") and bool(rag_context)
 
         with track_segment("generation_time"):
+            # on_delta / summary are stored on state by chat() and must be
+            # forwarded — without them /chat/stream silently buffers, and the
+            # rolling conversation digest never reaches the generator (so the
+            # token budget under-counts what the prompt would include once
+            # memory is wired).
             answer = self.generator.generate(
                 query=retrieval_result.get("corrected_query", state["query"]) if has_rag else state["query"],
                 context=combined_context,
@@ -541,6 +553,8 @@ class AuraChatGraph:
                 history=state.get("history") or [],
                 profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                on_delta=state.get("on_delta"),
+                summary=(state.get("summary") or None),
                 tracking_flags=request_context.tracking_flags if request_context else None,
             )
 
@@ -649,15 +663,25 @@ class AuraChatGraph:
             if result is None:
                 # Should be unreachable — every path sets "result" before
                 # END — but fail safe rather than return None to the API.
+                log_soft_failure(
+                    "AURA-GRAPH-001",
+                    "graph.invoke",
+                    detail="graph reached END without setting result",
+                    visited=",".join(sorted(k for k in final_state if final_state.get(k) is not None)),
+                )
                 return {"answer": "Sorry, I encountered an error while generating a response. Please try again.", "sources": [], "is_personal_data": False}
             return result
 
         except Exception as e:
-            import traceback
-            traceback.print_exc()
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+            log_soft_failure(
+                "AURA-GRAPH-002",
+                "graph.invoke",
+                exc=e,
+                user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
+            )
             return {"answer": msg, "sources": [], "is_personal_data": False}

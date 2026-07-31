@@ -118,7 +118,7 @@ def build_index_adapter() -> Optional[QdrantIndexAdapter]:
 
     url = os.getenv("QDRANT_URL", "http://localhost:6333")
     api_key = os.getenv("QDRANT_API_KEY") or None
-    collection = os.getenv("QDRANT_COLLECTION", "aura-knowledge-base")
+    collection = os.getenv("QDRANT_COLLECTION", "aura_documents")
 
     try:
         client = QdrantClient(url=url, api_key=api_key)
