@@ -33,6 +33,7 @@ const requestSchema = z.object({
   question: z.string().min(1, "question is required").max(2000),
   history: z.array(historyTurnSchema).max(20).optional(),
   summary: z.string().max(20_000).optional(),
+  threadId: z.string().max(64).optional(),
   studentProfile: studentProfileSchema.optional(),
 })
 
@@ -174,6 +175,7 @@ async function handleChatPost(req: Request): Promise<Response> {
     question: parsed.data.question,
     history: parsed.data.history,
     summary: parsed.data.summary,
+    threadId: parsed.data.threadId,
     studentProfile: parsed.data.studentProfile,
   }
 
@@ -189,6 +191,7 @@ async function handleChatPost(req: Request): Promise<Response> {
         question: payload.question,
         history: payload.history,
         summary: payload.summary,
+        threadId: payload.threadId,
         userProfile: payload.studentProfile,
       }),
       signal: req.signal,

@@ -11,8 +11,20 @@ speech_queue_lock = asyncio.Semaphore(1)
 
 # Cap concurrent RAG/LLM asks so a burst of authenticated users cannot pin
 # every worker on long-running inference. Override via CHAT_CONCURRENCY.
+# Size this to what ONE api replica should push at the vLLM pool: roughly
+# (pool's real concurrent-sequence capacity / number of api replicas). Too high
+# just converts queueing here into 429 storms at vLLM; scale out with more
+# replicas rather than a giant per-process limit.
 _chat_limit = max(1, int(os.getenv("CHAT_CONCURRENCY", "4")))
 chat_queue_lock = asyncio.Semaphore(_chat_limit)
+
+# Load-shedding budget: how long a request may WAIT for a concurrency slot
+# before it's rejected with a retryable 503 instead of queueing unbounded. Under
+# a 1000-user burst the semaphore's waiter queue would otherwise grow without
+# bound — every waiter pinning a socket + request buffers — until the event loop
+# starves or the process OOMs. A bounded wait turns overload into fast, honest
+# backpressure the client can retry. Tune with CHAT_QUEUE_WAIT_TIMEOUT.
+CHAT_QUEUE_WAIT_TIMEOUT = float(os.getenv("CHAT_QUEUE_WAIT_TIMEOUT", "8"))
 
 
 def get_aura():
