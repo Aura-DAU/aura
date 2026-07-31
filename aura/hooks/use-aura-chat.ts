@@ -11,7 +11,14 @@ import type {
 import { useSession } from "next-auth/react"
 import { apiFetch } from "@/lib/auth-client"
 import { getUserMessage, toastAppError, toastError, toastSuccess, appErrorFromResponse } from "@/lib/toast"
-import { AppError, isAbortError } from "@/lib/errors"
+import { AppError, isAbortError, sanitizePublicMessage } from "@/lib/errors"
+
+/** Soft failure copy the pipeline sometimes returns as a normal answer. */
+const SOFT_FAILURE_ANSWER =
+  /i'?m having trouble (retrieving information|reaching the student records)/i
+
+const STREAM_ERROR_FALLBACK =
+  "Something went wrong while processing your request. Please try again."
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
@@ -267,10 +274,15 @@ export function useAuraChat() {
   const lastVolumeUpdateRef = useRef(0)
   const mountedRef = useRef(true)
   const activeThreadIdRef = useRef<string | null>(null)
+  const loadingRef = useRef(false)
 
   useEffect(() => {
     activeThreadIdRef.current = activeThreadId
   }, [activeThreadId])
+
+  useEffect(() => {
+    loadingRef.current = loading
+  }, [loading])
 
   useEffect(() => {
     mountedRef.current = true
@@ -339,9 +351,9 @@ export function useAuraChat() {
               if (!prev.length && merged[0]) {
                 setActiveThreadIdState(merged[0].id)
                 setMessages(merged[0].messages)
-              } else if (activeId) {
+              } else if (activeId && !loadingRef.current) {
                 // Only replace the open transcript when the merge actually
-                // chose a newer copy (avoids clobbering an in-progress stream).
+                // chose a newer copy. Never clobber while a reply is streaming.
                 const active = merged.find((t) => t.id === activeId)
                 const prevActive = prev.find((t) => t.id === activeId)
                 if (
@@ -418,6 +430,7 @@ export function useAuraChat() {
     (id: string) => {
       abortRef.current?.abort()
       abortRef.current = null
+      loadingRef.current = false
       setLoading(false)
       setThinkingStep(undefined)
       setActiveThreadIdState(id)
@@ -432,6 +445,7 @@ export function useAuraChat() {
   const startNewChat = useCallback(() => {
     abortRef.current?.abort()
     abortRef.current = null
+    loadingRef.current = false
     setLoading(false)
     setThinkingStep(undefined)
     setActiveThreadIdState(null)
@@ -474,12 +488,15 @@ export function useAuraChat() {
   const handleSendMessage = useCallback(
     async (text: string, options?: { regenerate?: boolean }) => {
       const trimmed = text.trim()
-      if (!trimmed || loading || remainingQuota === 0) return
+      if (!trimmed || loadingRef.current || remainingQuota === 0) return
 
       abortRef.current?.abort()
       const controller = new AbortController()
       abortRef.current = controller
 
+      loadingRef.current = true
+      setLoading(true)
+      setThinkingStep("Thinking…")
       setErrorMessage(null)
       if (!options?.regenerate) {
         setInputText("")
@@ -509,16 +526,33 @@ export function useAuraChat() {
       // Regenerate: transcript already ends at the last user turn — do not
       // append a duplicate user message. History sent to the backend must
       // exclude that current user turn (same as a normal send).
+      // Strip trailing assistant turns first: handleRegenerate calls setState
+      // then send in the same tick, so `messages` here can still include the
+      // old reply (stale closure).
       let baseMessages: ChatMessage[]
       if (options?.regenerate) {
-        if (!threadId) return
-        const last = priorMessages[priorMessages.length - 1]
-        if (last?.role === "user" && last.content.trim() === trimmed) {
-          baseMessages = priorMessages
-          priorMessages = priorMessages.slice(0, -1)
-        } else {
-          baseMessages = [...priorMessages, userMsg]
+        if (!threadId) {
+          loadingRef.current = false
+          setLoading(false)
+          setThinkingStep(undefined)
+          return
         }
+        let transcript = priorMessages
+        while (
+          transcript.length > 0 &&
+          transcript[transcript.length - 1]?.role === "assistant"
+        ) {
+          transcript = transcript.slice(0, -1)
+        }
+        const last = transcript[transcript.length - 1]
+        if (last?.role === "user" && last.content.trim() === trimmed) {
+          baseMessages = transcript
+          priorMessages = transcript.slice(0, -1)
+        } else {
+          baseMessages = [...transcript, userMsg]
+          priorMessages = transcript
+        }
+        persistMessages(threadId, baseMessages)
       } else {
         baseMessages = [...priorMessages, userMsg]
         if (!threadId) {
@@ -532,7 +566,6 @@ export function useAuraChat() {
           setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
           setActiveThreadIdState(threadId)
         }
-        baseMessages = [...priorMessages, userMsg]
         persistMessages(
           threadId,
           baseMessages,
@@ -551,9 +584,6 @@ export function useAuraChat() {
       const MAX_TAIL_TURNS = 16
       const tailStart = Math.max(priorSummaryCount, priorMessages.length - MAX_TAIL_TURNS)
       const tail = priorMessages.slice(tailStart)
-
-      setLoading(true)
-      setThinkingStep("Thinking…")
 
       try {
         const response = await apiFetch("/api/chat", {
@@ -592,6 +622,7 @@ export function useAuraChat() {
         let newSummary: string | undefined
         let foldedTurns = 0
         let continuationSummary: string | undefined
+        let streamErrorMessage: string | null = null
         const assistantMsg: ChatMessage = {
           role: "assistant",
           content: "",
@@ -627,6 +658,13 @@ export function useAuraChat() {
             const errCode = typeof chunk.code === "string" ? chunk.code : "RAG_ERROR"
             const errDetail = typeof chunk.detail === "string" ? chunk.detail : ""
             console.error(`[useAuraChat] Stream error (${errCode}):`, errDetail)
+            // Prefer an explicit safe `message` if the BFF/backend adds one;
+            // never surface raw `detail` (stack / infra strings).
+            const fromChunk =
+              typeof chunk.message === "string"
+                ? sanitizePublicMessage(chunk.message)
+                : undefined
+            streamErrorMessage = fromChunk ?? STREAM_ERROR_FALLBACK
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&
@@ -639,6 +677,35 @@ export function useAuraChat() {
         }
 
         if (controller.signal.aborted || !mountedRef.current) return
+
+        // Empty reply or mid-stream failure with no usable text — roll back the
+        // blank assistant bubble and surface a clear, actionable error.
+        if (!assistantText.trim()) {
+          const msg = streamErrorMessage ?? STREAM_ERROR_FALLBACK
+          setErrorMessage(msg)
+          toastError(msg)
+          setMessages(baseMessages)
+          persistMessages(threadId, baseMessages)
+          return
+        }
+
+        if (streamErrorMessage) {
+          // Partial tokens before failure — surface clearly. When the backend
+          // already streamed an apology delta, skip toast/banner spam.
+          const bubbleIsApology =
+            assistantText.trim() === streamErrorMessage ||
+            /sorry, i encountered an error/i.test(assistantText)
+          if (!bubbleIsApology) {
+            setErrorMessage(streamErrorMessage)
+            toastError(streamErrorMessage)
+          }
+        } else if (SOFT_FAILURE_ANSWER.test(assistantText)) {
+          // Pipeline returned a soft-failure sentence as the answer. Keep the
+          // copy in-thread; banner nudges the user toward regenerate.
+          setErrorMessage(
+            "I couldn't retrieve that information. You can try regenerating the reply.",
+          )
+        }
 
         const finalMessages: ChatMessage[] = [
           ...baseMessages,
@@ -711,12 +778,13 @@ export function useAuraChat() {
       } finally {
         if (abortRef.current === controller) abortRef.current = null
         if (mountedRef.current && !controller.signal.aborted) {
+          loadingRef.current = false
           setLoading(false)
           setThinkingStep(undefined)
         }
       }
     },
-    [activeThreadId, loading, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer, syncThreadsToServer],
+    [activeThreadId, messages, threads, persistMessages, studentProfile, session, remainingQuota, decrementQuota, syncQuotaFromServer, syncThreadsToServer],
   )
 
   const handleClearChat = useCallback(() => {
@@ -772,9 +840,24 @@ export function useAuraChat() {
   const stopGeneration = useCallback(() => {
     abortRef.current?.abort()
     abortRef.current = null
+    loadingRef.current = false
     setLoading(false)
     setThinkingStep(undefined)
-  }, [])
+    // Drop an empty assistant placeholder (stop before first token). Persist
+    // any partial text so a thread switch does not lose it.
+    setMessages((prev) => {
+      const last = prev[prev.length - 1]
+      if (!last || last.role !== "assistant") return prev
+      const tid = activeThreadIdRef.current
+      if (!last.content.trim()) {
+        const next = prev.slice(0, -1)
+        if (tid) persistMessages(tid, next)
+        return next
+      }
+      if (tid) persistMessages(tid, prev)
+      return prev
+    })
+  }, [persistMessages])
 
   const lastUserMessage = messages.findLast((m) => m.role === "user")?.content ?? null
 

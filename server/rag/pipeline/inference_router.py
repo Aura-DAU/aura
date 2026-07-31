@@ -1,3 +1,4 @@
+from __future__ import annotations
 # Inference-Router for the Aura GPU cluster.
 #
 # Client-side load balancer + failover sitting in front of the vLLM inference

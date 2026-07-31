@@ -211,8 +211,6 @@ def _exclude_electives(rows: list[dict]) -> list[dict]:
     the 'sec is blank' rows the common-fallback query matches — leaks into
     every student's timetable regardless of whether they've picked it."""
     return [row for row in rows if not _is_elective(row.get("course_type", ""))]
-
-
 def _require_cohort(identity) -> tuple[int, int, str]:
     role = _field(identity, "role")
     if role != "student":
@@ -413,6 +411,7 @@ def get_effective_timetable(identity) -> dict:
                ORDER BY day_of_week, start_time""",
             (year, sem),
         )
+<<<<<<< HEAD
         common_rows = _narrow_by_dept(common_rows, dept)
         common_rows = _narrow_by_course_branch_map(common_rows, dept)
         common_rows = _exclude_electives(common_rows)
@@ -423,6 +422,12 @@ def get_effective_timetable(identity) -> dict:
         rows = _narrow_by_course_branch_map(rows, dept)
         rows = _exclude_electives(rows)
         master_rows = {row["id"]: row for row in rows}
+=======
+        master_rows = {row["id"]: row for row in _narrow_by_dept(common_rows, dept)}
+        is_common = True
+    else:
+        master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec, dept)}
+>>>>>>> a26e7dd3d650956aa5a340adc2f7a54aba1f8eae
         
     overrides = get_overrides(erp_id) if erp_id else []
 

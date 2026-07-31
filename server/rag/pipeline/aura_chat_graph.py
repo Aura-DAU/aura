@@ -144,6 +144,7 @@ class AuraChatGraph:
         graph.add_node("safety_guardrail", self._n_safety_guardrail)
         graph.add_node("wellness_check", self._n_wellness_check)
         graph.add_node("greeting_check", self._n_greeting_check)
+        graph.add_node("profile_fast_path", self._n_profile_fast_path)
         graph.add_node("community_tools", self._n_community_tools)
         graph.add_node("classify", self._n_classify)
         graph.add_node("guest_gate", self._n_guest_gate)
@@ -165,7 +166,8 @@ class AuraChatGraph:
 
         graph.add_conditional_edges("safety_guardrail", route_or("wellness_check"))
         graph.add_conditional_edges("wellness_check", route_or("greeting_check"))
-        graph.add_conditional_edges("greeting_check", route_or("community_tools"))
+        graph.add_conditional_edges("greeting_check", route_or("profile_fast_path"))
+        graph.add_conditional_edges("profile_fast_path", route_or("community_tools"))
         graph.add_conditional_edges("community_tools", route_or("classify"))
         graph.add_conditional_edges("classify", route_or("guest_gate"))
         graph.add_conditional_edges("guest_gate", route_or("strict_guardrail"))
@@ -240,6 +242,65 @@ class AuraChatGraph:
         state["result"] = {"answer": ans, "sources": [], "is_personal_data": False}
         return state
 
+    def _n_profile_fast_path(self, state: AuraState) -> AuraState:
+        """Answer pure identity questions without RAG/ERP (mirrors AuraChat)."""
+        from personal_query_classifier import is_pure_profile_query
+
+        query = state["query"]
+        identity = state.get("identity")
+        if not identity or not is_pure_profile_query(query):
+            return state
+        if getattr(identity, "role", None) in (None, "guest"):
+            return state
+
+        name = getattr(identity, "full_name", None) or "Student"
+        roll = getattr(identity, "roll_number", None) or getattr(identity, "erp_id", "N/A")
+        scope = state.get("academic_scope")
+        prog = (
+            (getattr(scope, "programme_id", None) if scope else None)
+            or getattr(identity, "program", None)
+            or getattr(identity, "programme", None)
+            or "your programme"
+        )
+        branch = (
+            getattr(identity, "dept", None)
+            or getattr(identity, "branch", None)
+            or (getattr(scope, "department_id", None) if scope else None)
+            or "your department"
+        )
+        sem = (
+            getattr(identity, "current_sem", None)
+            or (getattr(scope, "current_semester", None) if scope else None)
+        )
+        email = getattr(identity, "email", None) or (
+            f"{str(roll).lower()}@dau.ac.in" if roll and roll != "N/A" else None
+        )
+
+        q_lower = query.lower()
+        if "name" in q_lower or "who am i" in q_lower:
+            ans = f"You are **{name}** (Roll Number: `{roll}`)."
+        elif "roll" in q_lower or ("id" in q_lower and "student" in q_lower):
+            ans = f"Your roll number is `{roll}`."
+        elif "email" in q_lower:
+            ans = f"Your official university email is `{email}`." if email else (
+                f"Your roll number is `{roll}`; use `{str(roll).lower()}@dau.ac.in` if that is your institutional mailbox."
+            )
+        elif "branch" in q_lower or "dept" in q_lower:
+            ans = f"You are in the **{branch}** department."
+        elif "semester" in q_lower:
+            if sem is not None:
+                ans = f"You are currently in **Semester {sem}** of the {prog} program."
+            else:
+                ans = f"You are enrolled in the **{prog}** program ({branch})."
+        else:
+            sem_bit = f"**Semester {sem}** of " if sem is not None else ""
+            ans = (
+                f"You are **{name}** (Roll Number: `{roll}`), currently enrolled in "
+                f"{sem_bit}the **{prog}** program in the **{branch}** department."
+            )
+        state["result"] = {"answer": ans, "sources": [], "is_personal_data": True}
+        return state
+
     def _n_community_tools(self, state: AuraState) -> AuraState:
         # Clubs / SBG / faculty ToR / domain KB skills → EcampusOrchestrator
         # with public KB tools only. Guests and non-COMMUNITY queries fall
@@ -274,16 +335,29 @@ class AuraChatGraph:
             "role": tool_role,
             "dept": getattr(identity, "dept", None),
         }
-        with track_segment("community_orchestrator_time"):
-            result = self.ecampus_orchestrator.run(
-                query=state["query"],
-                identity=identity_payload,
-                history=state.get("history") or [],
-                request_context=state.get("request_context"),
-                tool_scope="public_kb",
-            )
+        try:
+            with track_segment("community_orchestrator_time"):
+                result = self.ecampus_orchestrator.run(
+                    query=state["query"],
+                    identity=identity_payload,
+                    history=state.get("history") or [],
+                    request_context=state.get("request_context"),
+                    tool_scope="public_kb",
+                )
+        except Exception:
+            # Orchestrator/LLM failure must not kill the request — fall through
+            # to classify → public RAG, which has its own error handling.
+            import traceback
+            traceback.print_exc()
+            return state
+
+        answer = (result.get("answer") or "").strip()
+        if not answer:
+            # Empty tool answer → let public RAG try instead of blank SSE.
+            return state
+
         state["result"] = {
-            "answer": result.get("answer") or "",
+            "answer": answer,
             "sources": result.get("sources") or [],
             "is_personal_data": False,
         }
@@ -410,12 +484,18 @@ class AuraChatGraph:
 
         request_context = state.get("request_context")
         user_role = request_context.effective_role if request_context else "public"
+        
+        # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
+        from institution_resolver import get_institution_resolver
+        resolved_query = get_institution_resolver().resolve(state["query"])
+
         with track_segment("retrieval_time"):
             retrieval_result = self.pipeline.get_context(
-                state["query"],
+                resolved_query,
                 state["history"],
                 user_role=user_role,
                 academic_scope=state.get("academic_scope"),
+                identity=state.get("identity"),
             )
         state["retrieval_result"] = retrieval_result
         state["chunks"] = retrieval_result.get("chunks", [])
@@ -442,8 +522,14 @@ class AuraChatGraph:
         is_personal = state.get("is_personal", False)
         query_type = state["query_type"]
         retrieval_result = state.get("retrieval_result", {})
+        request_context = state.get("request_context")
+        user_role = request_context.effective_role if request_context else "public"
+
+        from privacy_filter import ResponsePrivacyFilter
+        privacy_filter = ResponsePrivacyFilter(user_role=user_role)
 
         combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
+        combined_context = privacy_filter.sanitize_retrieved_context(combined_context)
 
         has_rag = query_type in ("PUBLIC", "MIXED") and bool(rag_context)
 
@@ -452,13 +538,14 @@ class AuraChatGraph:
                 query=retrieval_result.get("corrected_query", state["query"]) if has_rag else state["query"],
                 context=combined_context,
                 plan=retrieval_result.get("plan") if has_rag else None,
-                history=state["history"],
-                profile=self._answer_profile(state),
+                history=state.get("history") or [],
+                profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
-                on_delta=state.get("on_delta"),
-                summary=state.get("summary"),
-                tracking_flags=state.get("request_context").tracking_flags if state.get("request_context") else None,
+                tracking_flags=request_context.tracking_flags if request_context else None,
             )
+
+        # Apply post-generation privacy filter
+        answer = privacy_filter.filter_response_text(answer, query=state["query"])
 
         state["result"] = {
             "answer": answer,

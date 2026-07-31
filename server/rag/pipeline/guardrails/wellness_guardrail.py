@@ -132,9 +132,15 @@ class WellnessGuardrail:
     # ------------------------------------------------------------------
 
     def check(self, query: str) -> bool:
-        # Return True if the query should be routed to the wellness block.
-        # Tries the LLM classifier first; falls back to keyword regex if
-        # the API call fails for any reason.
+        if not query:
+            return False
+
+        # Bypass wellness check for pure student profile queries and greetings to eliminate false positives
+        from personal_query_classifier import is_pure_profile_query
+        from pipeline.aura_chat import is_greeting_or_meta
+        if is_pure_profile_query(query) or is_greeting_or_meta(query):
+            return False
+
         try:
             return self._llm_check(query)
         except Exception as exc:
