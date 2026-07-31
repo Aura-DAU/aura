@@ -6,7 +6,11 @@ Maps dept codes written into ``user_identity_map`` (e.g. ICT, ICTCS) onto the
 ``student_academic_profile`` so ``AcademicScopeResolver`` can resolve scope.
 
 Gaps / best-effort limits (documented intentionally):
-- ICTCS → ``btech-ict`` (no separate ``btech-ict-cs`` corpus taxonomy yet).
+- ICTCS → ``programme_id=btech-ict`` with ``branch_id=ict-cs``. The corpus
+  treats ICT-CS as a specialisation of B.Tech. (ICT) — shared rules, shared
+  early-semester timetables, plus ICT-CS-only companions — not a disjoint
+  programme. Retrieval therefore keeps programme-wide ICT docs eligible and
+  prefers branch-tagged ICT-CS docs when present.
 - MTech → ``mtech-ict`` (email/dept alone cannot distinguish EC vs ICT).
 - ``admission_year`` from the first four digits of a 9-digit ERP id when present.
 - ``curriculum_version`` / ``regulation_version`` are not available from identity.

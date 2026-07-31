@@ -21,7 +21,14 @@ class ResponseCache:
 
     def _key(self, query: str) -> str:
         import hashlib
+        import re
+        # Collapse whitespace + casefold, then strip trailing sentence punctuation
+        # so "hostel rules?" and "hostel rules" share a cache entry. Guests are
+        # the highest-volume path and the only consumers of this cache; do not
+        # strip leading question words here — that would conflate distinct asks
+        # ("what is X" vs "why is X").
         cleaned = " ".join(query.strip().lower().split())
+        cleaned = re.sub(r"[?!.]+$", "", cleaned).strip()
         digest = hashlib.sha256(cleaned.encode()).hexdigest()
         return f"{self._prefix}{digest}"
 

@@ -113,8 +113,7 @@ class PersonalQueryClassifier:
 
     def __init__(self):
         load_dotenv()
-        self.client = InferenceRouter.get_client()
-        self.model  = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
     def classify(self, query: str) -> dict:
         if not query:
@@ -151,22 +150,26 @@ class PersonalQueryClassifier:
 
         # LLM-Based Classifier Fallback
         safe_query = f"<query>\n{query}\n</query>"
+        model = self.model
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                temperature=0,
-                max_tokens=200,
-                messages=[
-                    {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
-                    {"role": "user",   "content": safe_query},
-                ],
-                extra_body=InferenceRouter.no_think_extra_body(),
-            )
+            def _execute(client):
+                return client.chat.completions.create(
+                    model=model,
+                    temperature=0,
+                    max_tokens=200,
+                    messages=[
+                        {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
+                        {"role": "user", "content": safe_query},
+                    ],
+                    extra_body=InferenceRouter.no_think_extra_body(),
+                )
+
+            response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
             raw = response.choices[0].message.content.strip()
             raw = raw.replace("```json", "").replace("```", "").strip()
             result = json.loads(raw)
-            result.setdefault("type",       "PUBLIC")
-            result.setdefault("target",     None)
+            result.setdefault("type", "PUBLIC")
+            result.setdefault("target", None)
             result.setdefault("erp_fields", [])
             if result["type"] not in VALID_TYPES:
                 return get_safe_default()

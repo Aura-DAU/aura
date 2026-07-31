@@ -200,6 +200,11 @@ async def _start_timetable_scheduler():
                 "Production config incomplete — set: " + ", ".join(missing)
             )
 
+    # One line per worker naming the metrics mode — during an incident this is
+    # how you tell whether /metrics is aggregated or per-worker (OBS-01).
+    from api.metrics_multiproc import status as _metrics_status
+    print(f"[metrics] pid {os.getpid()}: {_metrics_status()}", flush=True)
+
     from pipeline.timetable.notifier import start_scheduler
     start_scheduler()
 
