@@ -174,16 +174,7 @@ async def chat(
         # Cache write: guest public standalone queries only (exclude error/rejection responses)
         if is_guest_public and "answer" in result and "error" not in result:
             ans = result["answer"]
-            from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
-            from pipeline.aura_chat import GENERIC_DENIAL
-            is_error_response = (
-                ans == GENERIC_DENIAL or
-                ans == "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries." or
-                ans == OFF_TOPIC_RESPONSE or
-                ans.startswith("I'm having trouble retrieving") or
-                ans.startswith("Sorry, I encountered an error")
-            )
-            if not is_error_response:
+            if not _is_cacheable_error_answer(ans):
                 cache.set(body.question, {
                     "answer": ans,
                     "sources": result.get("sources") or []
@@ -222,6 +213,33 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
         "shouldFork": mem_result.should_fork,
     }
     return result
+
+
+def _is_cacheable_error_answer(answer: str) -> bool:
+    """True when a guest-cache write must be skipped (canned errors / abstentions)."""
+    from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
+    from pipeline.aura_chat import (
+        GENERIC_DENIAL,
+        ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE,
+        RETRIEVAL_FAILURE_RESPONSE,
+    )
+
+    if not answer:
+        return True
+    if answer in (
+        GENERIC_DENIAL,
+        OFF_TOPIC_RESPONSE,
+        ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE,
+        RETRIEVAL_FAILURE_RESPONSE,
+        "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+    ):
+        return True
+    return (
+        answer.startswith("I'm having trouble retrieving")
+        or answer.startswith("Sorry, I encountered an error")
+        or answer.startswith("I'm experiencing a temporary connection")
+        or answer.startswith("I don't have your academic programme details")
+    )
 
 
 def _sse(payload: dict) -> str:
@@ -396,16 +414,7 @@ async def chat_stream(
 
                     # Cache write: guest public standalone queries only (exclude error/rejection responses)
                     if is_guest_public and answer and "error" not in result:
-                        from pipeline.guardrails.query_guardrail import OFF_TOPIC_RESPONSE
-                        from pipeline.aura_chat import GENERIC_DENIAL
-                        is_error_response = (
-                            answer == GENERIC_DENIAL or
-                            answer == "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries." or
-                            answer == OFF_TOPIC_RESPONSE or
-                            answer.startswith("I'm having trouble retrieving") or
-                            answer.startswith("Sorry, I encountered an error")
-                        )
-                        if not is_error_response:
+                        if not _is_cacheable_error_answer(answer):
                             get_response_cache().set(body.question, {
                                 "answer": answer,
                                 "sources": citations

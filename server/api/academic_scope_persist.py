@@ -76,6 +76,47 @@ def infer_admission_year(erp_id: str) -> Optional[int]:
     return None
 
 
+def infer_dept_from_erp_id(erp_id: str) -> Optional[str]:
+    """Best-effort dept code from a 9-digit student ERP id (same rules as identity resolve)."""
+    if not erp_id or not re.match(r"^\d{9}$", erp_id):
+        return None
+    prog3 = erp_id[4:7]
+    prog2 = erp_id[4:6]
+    if prog3 == "014":
+        return "ICTCS"
+    if prog2 == "01":
+        return "ICT"
+    if prog2 == "03":
+        return "MnC"
+    if prog2 == "04":
+        return "EVD"
+    if prog2 == "11":
+        return "MTech"
+    if prog2 == "12":
+        return "MScIT"
+    if prog2 == "18":
+        return "MScDS"
+    if prog2 == "21":
+        return "PhD"
+    return None
+
+
+def _lookup_dept_from_identity_map(erp_id: str) -> Optional[str]:
+    """Read dept from user_identity_map when JWT/identity omitted it."""
+    try:
+        import db.connection as db_conn
+
+        rows = db_conn.query(
+            "SELECT dept FROM user_identity_map WHERE erp_id = %s AND is_active = TRUE LIMIT 1",
+            (erp_id,),
+        )
+        if rows and rows[0].get("dept"):
+            return str(rows[0]["dept"]).strip() or None
+    except Exception as exc:
+        logger.warning("dept lookup failed for %s: %s", erp_id, exc)
+    return None
+
+
 def derive_academic_identity(
     *,
     erp_id: str,
@@ -202,8 +243,11 @@ def ensure_student_academic_scope(identity: Identity) -> bool:
     erp_id = getattr(identity, "erp_id", None)
     if not erp_id:
         return False
+    dept = getattr(identity, "dept", None)
+    if not dept:
+        dept = _lookup_dept_from_identity_map(erp_id) or infer_dept_from_erp_id(erp_id)
     return upsert_student_academic_scope(
         erp_id=erp_id,
-        dept=getattr(identity, "dept", None),
+        dept=dept,
         admission_year=infer_admission_year(erp_id),
     )
