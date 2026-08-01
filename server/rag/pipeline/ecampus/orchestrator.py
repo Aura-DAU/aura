@@ -12,6 +12,7 @@ from typing import Optional
 from dotenv import load_dotenv
 
 from ..inference_router import InferenceRouter
+from ..prompt_loader import load_calendar_mcp_system_prompt
 from .tool_registry import (
     tools_for_role as _ecampus_tools_for_role,
     public_kb_tools_for_role as _public_kb_tools_for_role,
@@ -46,6 +47,9 @@ def _tools_for_role(role: str):
     )
 
 
+CALENDAR_MCP_SYSTEM_PROMPT = load_calendar_mcp_system_prompt()
+
+
 PERSONAL_SYSTEM_PROMPT = """You are AURA, DAU's academic assistant, handling a request that
 needs the requester's own live academic data (or, for faculty, data a student has
 explicitly shared with them).
@@ -63,12 +67,7 @@ Rules:
   clearing cache), you must get the user's explicit confirmation before it
   executes. The orchestrator will return a confirmation prompt instead of a
   result on the first attempt — relay that prompt to the user as-is.
-- Google Calendar sync works only after the student has connected their Google
-  Calendar from AURA Settings > Calendar. If a calendar tool returns status
-  "calendar_not_connected", tell them to connect it there first — do not retry.
-  Always call preview_timetable_sync and relay the class count to the user
-  before calling sync_timetable_to_calendar, and only sync after they explicitly
-  confirm.
+""" + CALENDAR_MCP_SYSTEM_PROMPT + """
 - If the timetable tool returns "is_common": true or "needs_configuration": true:
   1. Inform the user that this is the common timetable for their year.
   2. Display the timetable clearly.

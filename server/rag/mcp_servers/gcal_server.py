@@ -17,18 +17,12 @@ for _root in (_RAG_ROOT, _SERVER_ROOT):
 from mcp.server import MCPServer  # noqa: E402  (after sys.path bootstrap)
 
 from pipeline.google_calendar import timetable_sync  # noqa: E402
+from pipeline.prompt_loader import load_calendar_mcp_system_prompt  # noqa: E402
 
 mcp = MCPServer(
     name="aura-google-calendar",
     version="0.1.0",
-    instructions=(
-        "Tools to connect a DAU student's own Google Calendar to their AURA "
-        "class timetable. Always call preview_timetable_sync first, show the "
-        "user how many events will be created, and only call "
-        "sync_timetable_to_calendar after the student explicitly confirms. "
-        "If a tool returns status 'calendar_not_connected', tell the student "
-        "to connect Google Calendar from AURA Settings first -- do not retry."
-    ),
+    instructions=load_calendar_mcp_system_prompt(),
 )
 
 
