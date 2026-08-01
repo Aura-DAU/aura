@@ -7,28 +7,18 @@ from typing import Optional
 def extract_latest_year(metadata: dict) -> Optional[int]:
     """Extract a document's version year from its authoritative metadata.
 
-    Only structured version signals are consulted: the ingested ``document_year``
-    first, then the title and section headings. The free-text chunk body is
-    deliberately NOT scanned \u2014 it routinely carries incidental or future dates
-    (graduation years, application deadlines, validity periods, historical
-    references) that are not the document's version. Reading those as recency
-    let a stale chunk that merely *mentions* a recent/future year win the
-    reranker's temporal_boost over the actually-current chunk. Every other
-    year-extraction path avoids the body for the same reason: this function's
-    caller falls back to academic_year/title/source_file/relative_path, and
-    ContextBuilder._rule_year_from_metadata uses title/filename/academic_year.
+    Extraction priority order:
+    academic_year -> title -> h1 -> h2 -> h3 -> source_file -> relative_path -> document_year (LAST fallback)
     """
-    doc_year = metadata.get("document_year", "")
-    if doc_year:
-        m = re.search(r"(20[1-3]\d)", str(doc_year))
-        if m:
-            return int(m.group(1))
-
     texts_to_search = [
+        metadata.get("academic_year", ""),
         metadata.get("title", ""),
         metadata.get("h1", ""),
         metadata.get("h2", ""),
         metadata.get("h3", ""),
+        metadata.get("source_file", ""),
+        metadata.get("relative_path", ""),
+        metadata.get("document_year", ""),
     ]
 
     for text in texts_to_search:
@@ -104,6 +94,9 @@ class Reranker:
                 filter(
                     None,
                     [
+                        metadata.get("title"),
+                        metadata.get("category"),
+                        metadata.get("cluster"),
                         metadata.get("h1"),
                         metadata.get("h2"),
                         metadata.get("h3"),
@@ -517,6 +510,42 @@ class Reranker:
             # what happens across several yearly versions of the same roster
             # — the newest one reliably wins instead of the tie effectively
             # being broken by noise.
+            answerability_boost = 0.0
+            lookup_keywords = [
+                "who", "who is", "name", "convener", "convenor", "coordinator",
+                "faculty advisor", "faculty adviser", "advisor", "mentor", "chair",
+                "chairperson", "contact", "contact information", "email", "email id",
+                "phone", "phone number", "mobile", "mobile number", "student id",
+                "erp", "credits", "credit", "credit structure", "prerequisite",
+                "prerequisites", "fee", "fees", "fee structure", "duration",
+                "office", "policy", "syllabus"
+            ]
+            structured_fields = {
+                "convener", "convenor", "coordinator", "faculty advisor", "faculty adviser",
+                "advisor", "mentor", "chair", "chairperson", "student id", "erp",
+                "email", "phone", "mobile", "contact", "credits", "credit",
+                "prerequisite", "fee", "fees", "duration", "office", "policy", "syllabus"
+            }
+            query_lower = query.lower()
+            keyword_pattern = r"\b(" + "|".join(re.escape(k) for k in lookup_keywords) + r")\b"
+            if re.search(keyword_pattern, query_lower):
+                chunk_full_text = "\n".join(
+                    filter(
+                        None,
+                        [
+                            metadata.get("title"),
+                            metadata.get("category"),
+                            metadata.get("cluster"),
+                            metadata.get("h1"),
+                            metadata.get("h2"),
+                            metadata.get("h3"),
+                            metadata.get("text"),
+                        ]
+                    )
+                ).lower()
+                if any(field in chunk_full_text for field in structured_fields):
+                    answerability_boost = 1.0
+
             final_score = (
                 (0.60 * norm_cross)
                 +
@@ -531,6 +560,8 @@ class Reranker:
                 (0.05 * course_match_boost)
                 +
                 (0.15 * temporal_boost)
+                +
+                (0.05 * answerability_boost)
                 +
                 (semester_penalty * norm_cross)
             )
