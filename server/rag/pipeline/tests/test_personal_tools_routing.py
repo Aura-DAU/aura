@@ -6,8 +6,9 @@ stay fast and free of the full graph's heavy collaborators.
 Guarantees:
   1. the keyword gate matches sync requests but not ordinary schedule lookups;
   2. the node surfaces a connect action for a student calendar-sync request;
-  3. it never fires for non-student, non-PERSONAL_DATA, or non-calendar queries
-     (the orchestrator is not even invoked), so the ERP path is untouched;
+  3. it never fires for non-student or non-calendar queries (the orchestrator
+     is not even invoked), so the ERP path is untouched; and it does not depend
+     on the fallible general-purpose intent classifier for calendar actions;
   4. a no-tool orchestrator run falls through instead of committing prose.
 """
 
@@ -16,6 +17,7 @@ import types
 from pipeline.aura_chat_graph import (
     AuraChatGraph,
     SimpleIdentity,
+    _is_calendar_connect_intent,
     _is_calendar_sync_intent,
 )
 
@@ -26,6 +28,12 @@ def test_keyword_gate_matches_sync_not_lookup():
     assert _is_calendar_sync_intent("add my classes to my calendar")
     assert not _is_calendar_sync_intent("what's my timetable today")
     assert not _is_calendar_sync_intent("what is my cgpa")
+
+
+def test_connect_gate_matches_explicit_connect_requests():
+    assert _is_calendar_connect_intent("connect to Google Calendar")
+    assert _is_calendar_connect_intent("link my calendar")
+    assert not _is_calendar_connect_intent("sync my timetable to Google Calendar")
 
 
 def _fake_self(run_return, counter=None):
@@ -65,6 +73,16 @@ def test_node_surfaces_connect_action():
     assert result["answer"] == "Connect your Google Calendar."
 
 
+def test_connect_request_returns_cta_without_calling_the_llm_agent():
+    counter = {"n": 0}
+    fake = _fake_self({"used_tools": True, "answer": "unexpected"}, counter)
+    out = AuraChatGraph._n_personal_tools(fake, _student_state("connect to Google Calendar"))
+    result = out["result"]
+    assert result["action_required"]["type"] == "connect_required"
+    assert result["action_required"]["connect_path"] == "/settings/calendar"
+    assert counter["n"] == 0
+
+
 def test_node_skips_non_calendar_query_without_calling_orchestrator():
     counter = {"n": 0}
     fake = _fake_self({"used_tools": True, "answer": "x"}, counter)
@@ -81,6 +99,19 @@ def test_node_skips_non_student():
     )
     assert out.get("result") is None
     assert counter["n"] == 0
+
+
+def test_node_routes_calendar_request_when_intent_classifier_falls_back_to_general():
+    """Calendar actions have their own deterministic gate, so an unavailable
+    intent classifier cannot make the MCP tools unreachable from chat."""
+    counter = {"n": 0}
+    fake = _fake_self({"used_tools": True, "answer": "Calendar status checked."}, counter)
+    out = AuraChatGraph._n_personal_tools(
+        fake,
+        _student_state("show my Google Calendar status", intent="GENERAL"),
+    )
+    assert out["result"]["answer"] == "Calendar status checked."
+    assert counter["n"] == 1
 
 
 def test_node_falls_through_when_no_tool_used():
