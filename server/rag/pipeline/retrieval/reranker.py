@@ -5,7 +5,19 @@ from datetime import datetime
 from typing import Optional
 
 def extract_latest_year(metadata: dict) -> Optional[int]:
-    """Extract the most recent year from a document's metadata."""
+    """Extract a document's version year from its authoritative metadata.
+
+    Only structured version signals are consulted: the ingested ``document_year``
+    first, then the title and section headings. The free-text chunk body is
+    deliberately NOT scanned \u2014 it routinely carries incidental or future dates
+    (graduation years, application deadlines, validity periods, historical
+    references) that are not the document's version. Reading those as recency
+    let a stale chunk that merely *mentions* a recent/future year win the
+    reranker's temporal_boost over the actually-current chunk. Every other
+    year-extraction path avoids the body for the same reason: this function's
+    caller falls back to academic_year/title/source_file/relative_path, and
+    ContextBuilder._rule_year_from_metadata uses title/filename/academic_year.
+    """
     doc_year = metadata.get("document_year", "")
     if doc_year:
         m = re.search(r"(20[1-3]\d)", str(doc_year))
@@ -17,7 +29,6 @@ def extract_latest_year(metadata: dict) -> Optional[int]:
         metadata.get("h1", ""),
         metadata.get("h2", ""),
         metadata.get("h3", ""),
-        metadata.get("text", "")
     ]
 
     for text in texts_to_search:
@@ -543,5 +554,18 @@ class Reranker:
                 x["reranked_score"],
             reverse=True
         )
+
+        print("\n" + "=" * 60)
+        print("===== CROSS-ENCODER RERANK RESULTS =====")
+        print(f"Query: {query}")
+        for rank, item in enumerate(reranked, start=1):
+            meta = item.get("metadata", {})
+            h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
+            print(f"{rank}. reranked_score={item.get('reranked_score', 0.0):.4f} (cross_logit={item.get('cross_score', 0.0):.4f}) | chunk={item.get('id')}")
+            print(f"   title={meta.get('title', 'N/A')}")
+            print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
+            if h_str:
+                print(f"   headers={h_str}")
+        print("=" * 60)
 
         return reranked

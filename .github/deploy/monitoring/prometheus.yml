@@ -16,10 +16,14 @@ scrape_configs:
     static_configs:
       - targets: ["10.100.97.71:9113"]
 
-  # Node 2 & Node 3: vLLM Open Source Qwen GPU Inference Engines
+  # vLLM Open Source Qwen GPU Inference Engines.
+  # Node 1 publishes the container's :8000 as host :8001 (host :8000 is FastAPI).
+  # Nodes 2 and 3 publish vLLM directly on :8000. Scraping the wrong port returns
+  # FastAPI's /metrics (or 404) and silently drops GPU-queue panels.
   - job_name: "vllm-inference-nodes"
     static_configs:
       - targets:
+          - "10.100.97.71:8001"
           - "10.100.97.72:8000"
           - "10.100.97.73:8000"
         labels:

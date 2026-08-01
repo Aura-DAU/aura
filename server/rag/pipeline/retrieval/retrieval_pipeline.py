@@ -11,6 +11,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# Canonical program_name for the ICT-CS specialisation. Matches the title the
+# corpus uses on the programmes-of-study page ("B.Tech. (Honours) in ICT with
+# minor in Computational Science"), which is what ingestion writes into
+# program_name for that document.
+ICT_CS_PROGRAM_NAME = "B.Tech. (Honours) in ICT with minor in Computational Science"
+
+# branch_id values, as derived by api.academic_scope_persist, mapped to the
+# canonical program_name that identifies that branch's own documents. Used to
+# widen — never narrow — the program entity inferred from a student's scope.
+BRANCH_PROGRAM_NAMES = {
+    "ict-cs": ICT_CS_PROGRAM_NAME,
+}
+
 class RetrievalPipeline:
 
     def __init__(self):
@@ -104,6 +117,24 @@ class RetrievalPipeline:
         "b.tech ict": "B.Tech. (ICT)",
         "b.tech. ict": "B.Tech. (ICT)",
         "b.tech. (ict)": "B.Tech. (ICT)",
+
+        # CHAT-02: ICT-CS is a specialisation of B.Tech. (ICT), not a separate
+        # programme (see academic_scope_persist and the ingestion extractor).
+        # It gets its own canonical program_name so ICT-CS-specific documents
+        # can be preferentially matched, while the academic-scope filter still
+        # admits generic btech-ict material for an ICT-CS student.
+        "ict cs": ICT_CS_PROGRAM_NAME,
+        "ictcs": ICT_CS_PROGRAM_NAME,
+        "btech ict cs": ICT_CS_PROGRAM_NAME,
+        "b tech ict cs": ICT_CS_PROGRAM_NAME,
+        "ict honours": ICT_CS_PROGRAM_NAME,
+        "honours ict": ICT_CS_PROGRAM_NAME,
+        "btech honours ict": ICT_CS_PROGRAM_NAME,
+        "btech honours in ict": ICT_CS_PROGRAM_NAME,
+        "ict with minor in computational science": ICT_CS_PROGRAM_NAME,
+        "btech honours in ict with minor in computational science": ICT_CS_PROGRAM_NAME,
+        "computational science": ICT_CS_PROGRAM_NAME,
+        "ict computational science": ICT_CS_PROGRAM_NAME,
 
         "csai": "B.Tech. (CS and AI)",
         "cs ai": "B.Tech. (CS and AI)",
@@ -438,6 +469,32 @@ class RetrievalPipeline:
             if academic_scope.document_is_eligible(result.get("metadata", {}))
         ]
 
+    def _scope_program_names(self, academic_scope):
+        """Program entity value(s) implied by a student's own academic scope.
+
+        For a student on a branch that has its own corpus material (today only
+        ICT-CS), this returns BOTH the branch's canonical name and the parent
+        programme's, branch-specific first. That ordering matters and the list
+        matters:
+
+        - As a metadata filter, a multi-value list becomes ``$in``, so it
+          widens the candidate set instead of pinning it to one program_name.
+          Returning the branch name alone would exclude the generic
+          B.Tech. (ICT) material that still applies to an ICT-CS student.
+        - In `_retrieve_dual_path`, each value gets its own entity retrieval
+          whose results are fused by RRF, so ICT-CS-specific documents get an
+          independent shot at the pool rather than competing inside a single
+          B.Tech. (ICT) query they would usually lose.
+        """
+        programme_id = getattr(academic_scope, "programme_id", None)
+        if not programme_id:
+            return []
+        parent = self._canonical_program_name(programme_id)
+        branch_name = BRANCH_PROGRAM_NAMES.get(getattr(academic_scope, "branch_id", None))
+        names = [name for name in (branch_name, parent) if name]
+        # Preserve order while dropping duplicates.
+        return list(dict.fromkeys(names))
+
     def _normalize_program_name(self, name):
         if not name:
             return ""
@@ -601,6 +658,7 @@ class RetrievalPipeline:
         )
         needs_rewrite = bool(history) and (has_pronoun or is_short_fragment)
 
+        rewritten_query = query
         if needs_rewrite:
             query = (
                 self.rewriter.rewrite(
@@ -609,12 +667,16 @@ class RetrievalPipeline:
                     academic_scope=academic_scope,
                 )
             )
+            rewritten_query = query
 
-        # Submit the planning LLM call to executor (pass history + identity so
-        # continuation and personalized "my programme" rewrites apply).
-        future_plan = self.executor.submit(
-            self.planner.plan, query, academic_scope, history, identity
-        )
+        print("\n" + "=" * 60)
+        print("===== QUERY =====")
+        print(f"Original Query: {original_query}")
+        print(f"Rewritten Query (QueryRewriter): {rewritten_query}")
+        print("=" * 60)
+
+        # Submit the planning LLM call to executor
+        future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
 
         # Submit the speculative retrieval call to executor. Speculative retrieval
         # runs the semester-expanded query with an empty plan ({}) which results
@@ -630,9 +692,11 @@ class RetrievalPipeline:
         if academic_scope and getattr(academic_scope, "programme_id", None):
             entities = plan.setdefault("entities", {})
             if not entities.get("program_name"):
-                inferred_prog = self._canonical_program_name(academic_scope.programme_id)
-                if inferred_prog:
-                    entities["program_name"] = inferred_prog
+                inferred_progs = self._scope_program_names(academic_scope)
+                if inferred_progs:
+                    entities["program_name"] = (
+                        inferred_progs[0] if len(inferred_progs) == 1 else inferred_progs
+                    )
 
         # Check if the plan contains anything that modifies retrieval or query
         entities = plan.get("entities", {})
@@ -815,15 +879,13 @@ class RetrievalPipeline:
                 elif isinstance(program_name, list):
                     query += " " + " ".join(program_name)
 
-            metadata_filter = self._combine_filters(
-                self._build_metadata_filter(plan),
-                self._academic_scope_filter(academic_scope),
-            )
-
-            # Policy-version queries may relax planner entity constraints, but
-            # never the authenticated student's academic applicability scope.
-            if retrieval_intent == "policy_version":
-                metadata_filter = self._academic_scope_filter(academic_scope)
+            # Retrieval filters are constructed inside _retrieve_dual_path (and,
+            # for decomposed plans, per sub-query below) — not here. Building a
+            # metadata_filter at this point would be dead code, and wiring it into
+            # the dual path would wrongly entity-filter the semantic path, which is
+            # deliberately entity-free. policy_version breadth (retrieving across
+            # policy editions) comes from that entity-free semantic search plus the
+            # reranker's policy_version section boosts, so no override is needed.
 
             # Fix TY1: temporal year anchor — if the planner extracted a rule_year
             # (e.g. "2024-25") from the query, inject it into the retrieval query
@@ -1097,6 +1159,8 @@ class RetrievalPipeline:
         be one or two chunks away from the main policy chunk.
         """
         expanded_candidates = []
+        print("\n" + "=" * 60)
+        print("===== ADJACENT CHUNK EXPANSION =====")
         for cand in candidates:
             metadata = cand.get("metadata", {})
             doc_id = metadata.get("document_id")
@@ -1107,12 +1171,14 @@ class RetrievalPipeline:
 
             chunk_idx = int(chunk_idx)
             parts = []
+            added_adjacent = []
 
             # Collect preceding chunks within window
             for offset in range(window, 0, -1):
                 prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - offset))
                 if prev_chunk:
                     parts.append(prev_chunk.get("text", ""))
+                    added_adjacent.append(f"prev (-{offset}): {prev_chunk.get('chunk_id')}")
 
             parts.append(metadata.get("text", ""))
 
@@ -1121,6 +1187,7 @@ class RetrievalPipeline:
                 next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + offset))
                 if next_chunk:
                     parts.append(next_chunk.get("text", ""))
+                    added_adjacent.append(f"next (+{offset}): {next_chunk.get('chunk_id')}")
 
             expanded_text = "\n\n".join(filter(None, parts))
 
@@ -1128,6 +1195,13 @@ class RetrievalPipeline:
             new_cand["metadata"] = dict(metadata)
             new_cand["metadata"]["text"] = expanded_text
             expanded_candidates.append(new_cand)
+
+            print(f"Triggering Chunk: {cand.get('id')} ({metadata.get('title')})")
+            if added_adjacent:
+                print("   Added Neighbor Chunks: " + ", ".join(added_adjacent))
+            else:
+                print("   (No adjacent chunks found in store)")
+        print("=" * 60)
 
         return expanded_candidates
 

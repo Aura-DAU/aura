@@ -1032,7 +1032,7 @@ def rewrite_personalized_academic_query(query: str, academic_scope=None, identit
         if "dau" not in rewritten.lower() and "dhirubhai ambani" not in rewritten.lower():
             rewritten += " at Dhirubhai Ambani University (DAU)"
         return rewritten
-
+        
     return query
 
 
@@ -1082,6 +1082,15 @@ class QueryPlanner:
         # Implicit DAU Context Injection: Ensure university context is explicit for retrieval
         if "dau" not in effective_query.lower() and "dhirubhai" not in effective_query.lower():
             effective_query += " (DAU Dhirubhai Ambani University context)"
+        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
+        try:
+            from institution_resolver import get_institution_resolver
+            resolver = get_institution_resolver()
+            effective_query = resolver.resolve(effective_query)
+        except Exception as e:
+            # Fail open: institution resolver is an optional enrichment layer.
+            # If it fails, continue planning with the unmodified query.
+            print(f"[QueryPlanner] Institution resolver unavailable; continuing without resolver: {e}")
 
         scope_hint = ""
         if academic_scope is not None:
@@ -1122,10 +1131,7 @@ class QueryPlanner:
             raise RuntimeError("Failed to generate plan due to API errors.")
 
         content = (
-            response
-            .choices[0]
-            .message
-            .content
+            (response.choices[0].message.content or "")
             .strip()
         )
 

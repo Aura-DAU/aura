@@ -39,7 +39,6 @@ IMPLICIT_DAU_PAT = re.compile(
 class QueryGuardrail:
     def __init__(self):
         load_dotenv()
-        self.client = InferenceRouter.get_client()
         self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
         self.system_prompt = """
 You are the security and scope filter for AURA, the assistant for Dhirubhai
@@ -189,16 +188,23 @@ No explanation, no punctuation, no JSON, no additional text.
 """
 
     def _classify(self, query: str) -> "Verdict":
-        response = self.client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": self.system_prompt.strip()},
-                {"role": "user", "content": f"Query to evaluate:\n{query}"},
-            ],
-            model=self.model,
-            max_tokens=12,
-            temperature=0.0,
-            extra_body=InferenceRouter.no_think_extra_body(),
-        )
+        model = self.model
+        system = self.system_prompt.strip()
+        user = f"Query to evaluate:\n{query}"
+
+        def _execute(client):
+            return client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                model=model,
+                max_tokens=12,
+                temperature=0.0,
+                extra_body=InferenceRouter.no_think_extra_body(),
+            )
+
+        response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
         result = response.choices[0].message.content.strip().upper()
 
         if os.getenv("DEBUG", "false").lower() == "true":

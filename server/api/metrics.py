@@ -23,12 +23,39 @@
 # container-to-container, and it is never routed through the public NGINX
 # edge — see .github/deploy/nginx.conf, which only proxies /api/*, /backend/, and /).
 
-from prometheus_client import (
+# ── Multiprocess mode (OBS-01) ────────────────────────────────────────────
+# Must run before prometheus_client is imported: that import binds
+# ValueClass from PROMETHEUS_MULTIPROC_DIR once and for all. See
+# api/metrics_multiproc.py for the directory lifecycle and the fallback rules.
+from api import metrics_multiproc
+
+MULTIPROC_DIR = metrics_multiproc.bootstrap()
+
+from prometheus_client import (  # noqa: E402 — must follow bootstrap()
     Counter,
     Histogram,
     CONTENT_TYPE_LATEST,
     generate_latest,
 )
+
+# Metric-type audit for multiprocess mode. Every metric below is a Counter or a
+# Histogram; both aggregate across workers by summing their per-process samples,
+# which is the correct semantic for "requests dispatched" and for latency
+# buckets, and needs no extra configuration.
+#
+# No Gauge, Summary, Info or Enum is defined here, and that is deliberate — in
+# multiprocess mode a Gauge REQUIRES an explicit `multiprocess_mode` (the
+# default, 'all', fans every worker out as its own series with a synthetic `pid`
+# label, which is almost never what a dashboard wants). If you add one, choose
+# the mode from what the number means: 'livesum' for additive per-worker state
+# such as in-flight requests or admission slots in use, 'max'/'min' for
+# watermarks, 'liveall' only when per-worker breakdown is genuinely wanted, and
+# 'mostrecent' for a value that is process-independent (a config or build stamp).
+# test_metrics_multiproc.py fails the build if a gauge lands here without one.
+#
+# Also note: `process_*` and `python_info` are absent from /metrics whenever
+# multiprocess mode is on. They are per-process by nature and prometheus_client
+# cannot aggregate them; the dashboards do not reference them.
 
 REQUEST_COUNT = Counter(
     "aura_http_requests_total",
@@ -77,6 +104,29 @@ INFERENCE_NODE_FAILURES = Counter(
 )
 
 
+_multiproc_registry = None
+
+
+def _registry():
+    """The aggregating registry, built once and re-read on every collect.
+
+    MultiProcessCollector re-globs the sample directory each time it collects,
+    so one long-lived instance always sees newly forked workers.
+    """
+    global _multiproc_registry
+    if _multiproc_registry is None:
+        _multiproc_registry = metrics_multiproc.build_registry()
+    return _multiproc_registry
+
+
 def metrics_response():
     """Return (body_bytes, content_type) for the /metrics endpoint."""
+    if MULTIPROC_DIR:
+        try:
+            return generate_latest(_registry()), CONTENT_TYPE_LATEST
+        except Exception as exc:
+            # A scrape must never 500 the endpoint that operators reach for
+            # during an incident — fall back to this worker's own view.
+            print(f"[metrics] multiprocess collect failed ({exc}); "
+                  "serving this worker's registry only", flush=True)
     return generate_latest(), CONTENT_TYPE_LATEST
