@@ -554,6 +554,8 @@ class AuraChatGraph:
                 profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
                 on_delta=state.get("on_delta"),
+                on_profile_update=state.get("on_profile_update"),
+                profile_erp_id=state.get("identity").erp_id if state.get("identity") else None,
                 summary=(state.get("summary") or None),
                 tracking_flags=request_context.tracking_flags if request_context else None,
             )
@@ -636,7 +638,7 @@ class AuraChatGraph:
             profile["branch"] = scope.branch_id
         return profile
 
-    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None, summary=None, request_context=None):
+    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None, on_profile_update=None, summary=None, request_context=None):
         if request_context is not None:
             identity = request_context.identity
         if isinstance(identity, dict):
@@ -655,6 +657,7 @@ class AuraChatGraph:
                 "academic_scope": request_context.academic_scope if request_context else None,
                 "display_profile": display_profile,
                 "on_delta": on_delta,
+                "on_profile_update": on_profile_update,
                 "summary": summary or "",
                 "result": None,
             }
