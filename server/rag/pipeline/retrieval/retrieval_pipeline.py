@@ -300,7 +300,7 @@ class RetrievalPipeline:
         self,
         plan
     ):
-        """Build a metadata filter dictionary from planner entities when entity_confidence >= 0.80."""
+        """Build an entity-priority metadata filter dictionary from planner entities when entity_confidence >= 0.80."""
         entity_confidence = plan.get("entity_confidence", 1.0) if isinstance(plan, dict) else 1.0
         if entity_confidence < 0.80:
             return None
@@ -309,50 +309,81 @@ class RetrievalPipeline:
         if not entities:
             return None
 
-        supported_fields = [
-            "course_code",
-            "faculty_name",
-            "program_name",
-            "event_name",
-            "semester"
-        ]
-
-        clauses = []
-        for field in supported_fields:
-            val = entities.get(field)
-            if not val:
-                continue
+        def _make_clause(field, raw_val):
+            if not raw_val:
+                return None
             if field == "program_name":
-                if isinstance(val, list):
-                    progs = [p for p in (self._canonical_program_name(item) for item in val) if p]
-                    val = progs if progs else val
+                if isinstance(raw_val, list):
+                    progs = [p for p in (self._canonical_program_name(item) for item in raw_val) if p]
+                    val = progs if progs else raw_val
                 else:
-                    canonical_prog = self._canonical_program_name(val)
-                    val = [canonical_prog] if canonical_prog else [val]
+                    canonical_prog = self._canonical_program_name(raw_val)
+                    val = [canonical_prog] if canonical_prog else [raw_val]
             elif field == "semester":
-                if isinstance(val, list):
+                if isinstance(raw_val, list):
                     sem_vals = []
-                    for item in val:
+                    for item in raw_val:
                         sem_vals.extend(self._canonical_semester_values(item))
-                    val = sorted(list(set(sem_vals))) if sem_vals else val
+                    val = sorted(list(set(sem_vals))) if sem_vals else raw_val
                 else:
-                    sem_vals = self._canonical_semester_values(val)
-                    val = sem_vals if sem_vals else [val]
+                    sem_vals = self._canonical_semester_values(raw_val)
+                    val = sem_vals if sem_vals else [raw_val]
+            else:
+                val = raw_val
 
             if isinstance(val, (list, tuple, set)):
                 val_list = [str(x).strip() for x in val if x and str(x).strip()]
                 if val_list:
-                    clauses.append({field: {"$in": sorted(list(set(val_list)))}})
+                    return {field: {"$in": sorted(list(set(val_list)))}}
             else:
                 s_val = str(val).strip()
                 if s_val:
-                    clauses.append({field: {"$in": [s_val]}})
-
-        if not clauses:
+                    return {field: {"$in": [s_val]}}
             return None
-        if len(clauses) == 1:
-            return clauses[0]
-        return {"$and": clauses}
+
+        # Priority 1: course_code (highest specificity)
+        if entities.get("course_code"):
+            clause = _make_clause("course_code", entities.get("course_code"))
+            if clause:
+                return clause
+
+        # Priority 2: faculty_name
+        if entities.get("faculty_name"):
+            clause = _make_clause("faculty_name", entities.get("faculty_name"))
+            if clause:
+                return clause
+
+        # Priority 3: event_name (+ optional semester)
+        if entities.get("event_name"):
+            clauses = []
+            ev_clause = _make_clause("event_name", entities.get("event_name"))
+            if ev_clause:
+                clauses.append(ev_clause)
+                if entities.get("semester"):
+                    sem_clause = _make_clause("semester", entities.get("semester"))
+                    if sem_clause:
+                        clauses.append(sem_clause)
+                return clauses[0] if len(clauses) == 1 else {"$and": clauses}
+
+        # Priority 4: program_name (+ optional semester)
+        if entities.get("program_name"):
+            clauses = []
+            prog_clause = _make_clause("program_name", entities.get("program_name"))
+            if prog_clause:
+                clauses.append(prog_clause)
+                if entities.get("semester"):
+                    sem_clause = _make_clause("semester", entities.get("semester"))
+                    if sem_clause:
+                        clauses.append(sem_clause)
+                return clauses[0] if len(clauses) == 1 else {"$and": clauses}
+
+        # Priority 5: semester only
+        if entities.get("semester"):
+            clause = _make_clause("semester", entities.get("semester"))
+            if clause:
+                return clause
+
+        return None
 
     @staticmethod
     def _combine_filters(*filters):
