@@ -32,6 +32,15 @@ class ERPContextBuilder:
 
         if "profile" in erp_results and erp_results["profile"]:
             p = erp_results["profile"]
+            # user_identity_map (Postgres, AURA-owned) is authoritative for the
+            # display name — it's what [UPDATE_PROFILE_NAME] writes to. The ERP
+            # system's `students.full_name` (queried by ERPConnector.get_student_profile)
+            # is a separate, read-only external record that a chat-side name
+            # update never touches, so prefer identity.full_name here whenever
+            # it's set rather than letting the ERP-sourced value win.
+            identity_name = getattr(identity, "full_name", None) if identity is not None else None
+            if identity_name:
+                p["full_name"] = identity_name
             lines += [
                 "Student Profile:",
                 f"  Name: {p.get('full_name', 'N/A')}",

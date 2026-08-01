@@ -141,7 +141,7 @@ def require_identity(
     if dept is not None and (not isinstance(dept, str) or len(dept) > 128):
         raise HTTPException(status_code=401, detail="Invalid department claim")
 
-    return Identity(
+    identity = Identity(
         erp_id=erp_id,
         role=role,
         dept=dept,
@@ -151,6 +151,41 @@ def require_identity(
         current_sem=claims.get("currentSem") if isinstance(claims.get("currentSem"), int) else None,
         current_sec=claims.get("currentSec") if isinstance(claims.get("currentSec"), str) else None,
     )
+
+    # The JWT is minted once at login and can go stale for the lifetime of the
+    # session — e.g. a name saved mid-conversation via [UPDATE_PROFILE_NAME]
+    # (see answer_generator._update_db_profile_name) lands in
+    # user_identity_map immediately, but every subsequent request in the same
+    # session would keep reading the old name back out of the token unless we
+    # re-check Postgres here. user_identity_map is the single source of truth
+    # for these display fields, so refresh them from it on every request.
+    # Fail-open to the JWT values on any DB hiccup so a transient Postgres
+    # blip never turns into a 401/500 for an otherwise-valid session.
+    if role in ("student", "faculty"):
+        try:
+            import db.connection as db_conn
+
+            rows = db_conn.query(
+                """SELECT full_name, current_year, current_sem, current_sec
+                   FROM user_identity_map
+                   WHERE erp_id = %s AND is_active = TRUE""",
+                (erp_id,),
+            )
+            if rows:
+                row = rows[0]
+                if row.get("full_name") is not None:
+                    identity.full_name = row["full_name"]
+                if row.get("current_year") is not None:
+                    identity.current_year = row["current_year"]
+                if row.get("current_sem") is not None:
+                    identity.current_sem = row["current_sem"]
+                if row.get("current_sec") is not None:
+                    identity.current_sec = row["current_sec"]
+        except Exception:
+            # Keep whatever the JWT already gave us — never fail auth over this.
+            pass
+
+    return identity
 
 
 get_current_identity = require_identity
