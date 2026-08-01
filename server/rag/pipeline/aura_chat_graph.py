@@ -72,10 +72,37 @@ _SCHEDULE_ACTION_RE = re.compile(
     r"|\b(schedule|timetable|classes)\b.{0,20}\bcalendar\b",
     re.IGNORECASE,
 )
+_CALENDAR_CONNECT_RE = re.compile(
+    r"\b(?:connect|link)\b.{0,30}\b(?:my\s+)?(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b.{0,30}\b(?:connect|link)\b",
+    re.IGNORECASE,
+)
+_CLUB_OFFICE_BEARER_RE = re.compile(
+    r"\b(conven(?:er|or)|coordinator|office[ -]?bearer|"
+    r"deputy[ -]?conven(?:er|or)|dy\.?[ -]?conven(?:er|or)|"
+    r"faculty mentor|club email)\b",
+    re.IGNORECASE,
+)
+_CLUB_CONTEXT_RE = re.compile(r"\b(club|sbg|committee)\b", re.IGNORECASE)
 
 
 def _is_calendar_sync_intent(query: str) -> bool:
     return bool(_CALENDAR_KEYWORD_RE.search(query) or _SCHEDULE_ACTION_RE.search(query))
+
+
+def _is_calendar_connect_intent(query: str) -> bool:
+    return bool(_CALENDAR_CONNECT_RE.search(query))
+
+
+def _is_club_office_bearer_intent(query: str) -> bool:
+    """Route published club contacts to the C_DCs-aware lookup path.
+
+    This is intentionally narrower than all club requests: only questions that
+    ask for office-bearers bypass the general-purpose intent classifier, whose
+    unavailable/invalid fallback is GENERAL and otherwise sends the request to
+    the legacy RAG path.
+    """
+    return bool(_CLUB_CONTEXT_RE.search(query) and _CLUB_OFFICE_BEARER_RE.search(query))
 
 
 class SimpleIdentity:
@@ -332,8 +359,11 @@ class AuraChatGraph:
         if not identity or getattr(identity, "role", None) in (None, "guest"):
             return state
 
-        with track_segment("community_intent_time"):
-            intent = self.intent_router.classify(state["query"])
+        if _is_club_office_bearer_intent(state["query"]):
+            intent = "COMMUNITY"
+        else:
+            with track_segment("community_intent_time"):
+                intent = self.intent_router.classify(state["query"])
         # Stash the verdict so _n_personal_tools can reuse it without a second
         # classifier round-trip.
         state["ecampus_intent"] = intent
@@ -404,9 +434,25 @@ class AuraChatGraph:
         identity = state.get("identity")
         if not identity or getattr(identity, "role", None) != "student":
             return state
-        if state.get("ecampus_intent") != "PERSONAL_DATA":
-            return state
         if not _is_calendar_sync_intent(state["query"]):
+            return state
+
+        # OAuth is initiated by the client-side connect CTA, not an MCP tool.
+        # Returning it directly avoids relying on the model to infer a status
+        # lookup before it can offer the student the OAuth flow.
+        if _is_calendar_connect_intent(state["query"]):
+            state["result"] = {
+                "answer": "Connect your Google Calendar to sync your timetable.",
+                "sources": [],
+                "is_personal_data": True,
+                "action_required": {
+                    "type": "connect_required",
+                    "provider": "google_calendar",
+                    "connect_path": "/settings/calendar",
+                    "reason": "connect_google_calendar",
+                    "message": "Connect your Google Calendar to sync your timetable.",
+                },
+            }
             return state
 
         identity_payload = {
