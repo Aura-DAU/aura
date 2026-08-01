@@ -89,6 +89,49 @@ def print_ingestion_quality_report():
     print("=" * 65 + "\n")
 
 
+def _normalize_metadata_value(val):
+    """Helper to clean, trim, deduplicate, and return deterministic string or sorted list."""
+    if val is None:
+        return None
+    if isinstance(val, (list, tuple, set)):
+        cleaned = []
+        seen = set()
+        for item in val:
+            if item is None:
+                continue
+            s = str(item).strip()
+            if s and s not in seen:
+                seen.add(s)
+                cleaned.append(s)
+        if not cleaned:
+            return None
+        return cleaned[0] if len(cleaned) == 1 else sorted(cleaned)
+    s = str(val).strip()
+    return s if s else None
+
+
+def _extract_program_name_from_text(text):
+    """Extracts Program(s) / Program name explicitly declared in body text."""
+    patterns = [
+        r"(?:Program\(s\)|Programs?|Degree|Branch)\s*:\s*([^\r\n]+)",
+        r"\b(B\.?\s*Tech\.?\s*(?:ICT-CS|ICT|MnC|EAS)?|M\.?\s*Tech\.?\s*(?:ICT|EC)?|M\.?\s*Sc\.?\s*(?:IT|DS|AA)|Ph\.?\s*D\.?)\b"
+    ]
+    extracted = []
+    seen = set()
+    for pat in patterns:
+        matches = re.findall(pat, text, re.IGNORECASE)
+        for m in matches:
+            if isinstance(m, tuple):
+                m = m[0]
+            parts = re.split(r",|/|and", m, flags=re.IGNORECASE)
+            for p in parts:
+                p_clean = p.strip()
+                if p_clean and len(p_clean) > 1 and p_clean not in seen:
+                    seen.add(p_clean)
+                    extracted.append(p_clean)
+    return extracted
+
+
 def extract_curriculum_chunks(body, metadata, file_path):
     """Preserved curriculum extraction logic for course catalogues and syllabi."""
     lines = body.split("\n")
@@ -692,16 +735,36 @@ def process_markdown_file(file_path):
         faculty_name = metadata.get("title") or file_path.stem.replace("_", " ").title()
 
     event_metadata = {}
-    program_name = extract_program_name(metadata, cluster, subclusters)
+
+    # ── DETERMINISTIC METADATA RESOLUTION (PRECEDENCE ENFORCING) ──
+    # 1. Program Name Precedence: Frontmatter -> Structured Body Text -> Fallback Inference
+    fm_program = metadata.get("program_name") or metadata.get("programs") or metadata.get("program")
+    body_programs = _extract_program_name_from_text(body)
+    inferred_program = extract_program_name(metadata, cluster, subclusters)
+    
+    effective_program_name = (
+        _normalize_metadata_value(fm_program) or
+        _normalize_metadata_value(body_programs) or
+        inferred_program
+    )
+
+    # 2. Semester Precedence: Frontmatter (Highest) -> Metadata -> None
+    fm_semester = metadata.get("semester")
+    effective_semester = _normalize_metadata_value(fm_semester)
+
+    # 3. Course Code Precedence: Document-Type Aware
+    fm_course_code = metadata.get("course_code")
+    is_single_course_doc = (
+        bool(fm_course_code) or
+        category in ["courses", "course_policy", "course"] or
+        "course_policy" in relative_path.lower()
+    )
 
     if category == "events":
         event_metadata = extract_event_metadata(sections)
         event_metadata["event_name"] = metadata.get("title")
 
-    fm_course_code = metadata.get("course_code")
-    fm_semester = metadata.get("semester")
     fm_faculty_name = metadata.get("faculty_name")
-    fm_program_name = metadata.get("program_name")
     fm_event_name = metadata.get("event_name")
 
     chunks = []
@@ -744,23 +807,46 @@ def process_markdown_file(file_path):
 
             # Step C: For each detected entity block, assemble context and chunk adaptively
             for entity_text in raw_entity_blocks:
-                section_faculty = []
+                # Faculty Metadata Resolution
                 if category == "faculty" and faculty_name:
-                    section_faculty.append(faculty_name)
+                    section_faculty = [faculty_name]
                     INGESTION_METRICS["faculty_chunks"] += 1
                 else:
-                    section_faculty.extend(extract_faculty_from_text(entity_text))
+                    extracted_fac = extract_faculty_from_text(entity_text)
+                    merged_fac = []
                     if fm_faculty_name:
                         if isinstance(fm_faculty_name, list):
-                            section_faculty.extend(fm_faculty_name)
+                            merged_fac.extend(fm_faculty_name)
                         else:
-                            section_faculty.append(fm_faculty_name)
-                    section_faculty = list(set(section_faculty))
+                            merged_fac.append(fm_faculty_name)
+                    merged_fac.extend(extracted_fac)
+                    section_faculty = _normalize_metadata_value(merged_fac)
+                    if isinstance(section_faculty, str):
+                        section_faculty = [section_faculty]
+                    elif section_faculty is None:
+                        section_faculty = []
 
-                section_course_codes = extract_course_codes_from_text(entity_text)
-                if fm_course_code:
-                    section_course_codes.append(fm_course_code)
-                section_course_codes = list(set(section_course_codes))
+                # Course Code Resolution (Document-Type Aware)
+                if is_single_course_doc and fm_course_code:
+                    # Trust Frontmatter ONLY for single-course documents (prevent pollution from body text)
+                    section_course_codes = _normalize_metadata_value(fm_course_code)
+                else:
+                    # Merge section-local codes for multi-course documents (curriculum, timetables)
+                    extracted_codes = extract_course_codes_from_text(entity_text)
+                    merged_codes = []
+                    if fm_course_code:
+                        if isinstance(fm_course_code, list):
+                            merged_codes.extend(fm_course_code)
+                        else:
+                            merged_codes.append(fm_course_code)
+                    merged_codes.extend(extracted_codes)
+                    section_course_codes = _normalize_metadata_value(merged_codes)
+
+                if isinstance(section_course_codes, str):
+                    section_course_codes = [section_course_codes]
+                elif section_course_codes is None:
+                    section_course_codes = []
+
                 if section_course_codes:
                     INGESTION_METRICS["course_chunks"] += 1
 
@@ -846,13 +932,12 @@ def process_markdown_file(file_path):
                     if section_course_codes:
                         chunk_record["course_code"] = section_course_codes if len(section_course_codes) > 1 else section_course_codes[0]
 
-                    target_semester = fm_semester or metadata.get("semester")
+                    target_semester = effective_semester or metadata.get("semester")
                     if target_semester:
                         chunk_record["semester"] = target_semester
 
-                    target_program = program_name or fm_program_name
-                    if target_program:
-                        chunk_record["program_name"] = target_program
+                    if effective_program_name:
+                        chunk_record["program_name"] = effective_program_name
 
                     target_event = event_metadata.get("event_name") or fm_event_name
                     if target_event:
@@ -911,11 +996,11 @@ def process_markdown_file(file_path):
             chunk_record["academic_year"] = academic_year
         chunk_record.update(academic_applicability)
 
-        if program_name or fm_program_name:
-            chunk_record["program_name"] = program_name or fm_program_name
+        if effective_program_name:
+            chunk_record["program_name"] = effective_program_name
             
-        chunk_record["semester"] = custom.get("semester") or fm_semester
-        chunk_record["course_code"] = custom.get("course_code") or fm_course_code
+        chunk_record["semester"] = _normalize_metadata_value(custom.get("semester") or effective_semester)
+        chunk_record["course_code"] = _normalize_metadata_value(custom.get("course_code") or fm_course_code)
         chunk_record["course_name"] = custom.get("course_name")
         chunk_record["course_type"] = custom.get("course_type")
         chunk_record["credits"] = custom.get("credits")
