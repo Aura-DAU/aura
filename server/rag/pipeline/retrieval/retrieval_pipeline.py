@@ -871,15 +871,13 @@ class RetrievalPipeline:
                 elif isinstance(program_name, list):
                     query += " " + " ".join(program_name)
 
-            metadata_filter = self._combine_filters(
-                self._build_metadata_filter(plan),
-                self._academic_scope_filter(academic_scope),
-            )
-
-            # Policy-version queries may relax planner entity constraints, but
-            # never the authenticated student's academic applicability scope.
-            if retrieval_intent == "policy_version":
-                metadata_filter = self._academic_scope_filter(academic_scope)
+            # Retrieval filters are constructed inside _retrieve_dual_path (and,
+            # for decomposed plans, per sub-query below) — not here. Building a
+            # metadata_filter at this point would be dead code, and wiring it into
+            # the dual path would wrongly entity-filter the semantic path, which is
+            # deliberately entity-free. policy_version breadth (retrieving across
+            # policy editions) comes from that entity-free semantic search plus the
+            # reranker's policy_version section boosts, so no override is needed.
 
             # Fix TY1: temporal year anchor — if the planner extracted a rule_year
             # (e.g. "2024-25") from the query, inject it into the retrieval query
