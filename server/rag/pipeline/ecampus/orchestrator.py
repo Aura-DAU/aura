@@ -23,6 +23,10 @@ from ..timetable.tool_registry import (
     TOOL_REGISTRY as _TIMETABLE_TOOL_REGISTRY,
     PUBLIC_TOOL_NAMES as _TIMETABLE_PUBLIC_TOOL_NAMES,
 )
+from ..timetable.calendar_mcp_client import (
+    calendar_mcp_tools_for_role as _calendar_mcp_tools_for_role,
+    calendar_mcp_registry as _calendar_mcp_registry,
+)
 
 # Merged view used by this orchestrator. Kept as two separate source-of-truth
 # registries (pipeline.ecampus.tool_registry stays strictly read-only against
@@ -33,7 +37,13 @@ MERGED_TOOL_REGISTRY = {**_ECAMPUS_TOOL_REGISTRY, **_TIMETABLE_TOOL_REGISTRY}
 
 
 def _tools_for_role(role: str):
-    return _ecampus_tools_for_role(role) + _timetable_tools_for_role(role)
+    # Calendar MCP tools are personal-scope only (a student's own calendar), so
+    # they're added here on the personal path -- never on the public-KB path.
+    return (
+        _ecampus_tools_for_role(role)
+        + _timetable_tools_for_role(role)
+        + _calendar_mcp_tools_for_role(role)
+    )
 
 
 PERSONAL_SYSTEM_PROMPT = """You are AURA, DAU's academic assistant, handling a request that
@@ -53,6 +63,12 @@ Rules:
   clearing cache), you must get the user's explicit confirmation before it
   executes. The orchestrator will return a confirmation prompt instead of a
   result on the first attempt — relay that prompt to the user as-is.
+- Google Calendar sync works only after the student has connected their Google
+  Calendar from AURA Settings > Calendar. If a calendar tool returns status
+  "calendar_not_connected", tell them to connect it there first — do not retry.
+  Always call preview_timetable_sync and relay the class count to the user
+  before calling sync_timetable_to_calendar, and only sync after they explicitly
+  confirm.
 - If the timetable tool returns "is_common": true or "needs_configuration": true:
   1. Inform the user that this is the common timetable for their year.
   2. Display the timetable clearly.
@@ -167,7 +183,7 @@ class EcampusOrchestrator:
 
         tool_messages = []
         for call in msg.tool_calls:
-            tool = MERGED_TOOL_REGISTRY.get(call.function.name)
+            tool = MERGED_TOOL_REGISTRY.get(call.function.name) or _calendar_mcp_registry().get(call.function.name)
             # Public-KB path: refuse personal ERP / write tools even if named
             # (defense in depth — personal ERP stays gated).
             if (
