@@ -74,13 +74,13 @@ function isElective(slot: TimetableSlot): boolean {
 // class looks the same regardless of subject.
 const SLOT_COLOR = { bg: "bg-theme-gray-light/40", text: "text-neutral-100", border: "border-theme-gray-light" } as const
 
-function colorForSubject(_key: string) {
+function colorForSubject() {
   return SLOT_COLOR
 }
 
 /** One cell in the weekly grid: subject code, room, and a color tied to the subject. */
 function GridCell({ slot, onClick }: { slot: TimetableSlot; onClick?: () => void }) {
-  const color = colorForSubject(slot.course_code || slot.course_name)
+  const color = colorForSubject()
   const classes = `flex h-full w-full flex-col items-center justify-center gap-0.5 rounded-lg border px-1 py-2 text-center leading-tight transition-transform ${color.bg} ${color.border} ${onClick ? "hover:scale-[1.03] hover:ring-1 hover:ring-theme-yellow/50" : ""
     }`
   const inner = (

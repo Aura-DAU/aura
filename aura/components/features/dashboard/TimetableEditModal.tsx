@@ -136,8 +136,8 @@ export function TimetableEditModal({
         {isLockedOverride ? (
           <div className="space-y-4">
             <p className="text-xs leading-relaxed text-neutral-400">
-              This class already has a personal change on it, so it can't be edited further from here —
-              remove the change first, then add it again the way you'd like.
+              This class already has a personal change on it, so it can&apos;t be edited further from here —
+              remove the change first, then add it again the way you&apos;d like.
             </p>
             <div className="rounded-xl border border-theme-gray-light bg-theme-gray-light/40 px-3 py-2.5 text-xs">
               <p className="font-semibold text-neutral-100">

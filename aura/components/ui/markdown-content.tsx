@@ -42,9 +42,8 @@ function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: numb
 }
 
 function InlineCitation({ index, citation }: { index: number; citation: Citation }) {
-  const { prefetchDocument, openDocument } = useDocumentViewer()
+  const { prefetchDocument } = useDocumentViewer()
   const hasSource = Boolean(citation.path)
-  const hoverTimerRef = React.useRef<NodeJS.Timeout | null>(null)
 
   if (!hasSource) {
     return (
