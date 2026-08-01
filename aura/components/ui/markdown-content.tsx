@@ -67,13 +67,6 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
       onMouseEnter={() => {
         if (typeof window !== "undefined" && window.innerWidth < 768) return
         prefetchDocument(viewerTarget)
-        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-        hoverTimerRef.current = setTimeout(() => {
-          openDocument(viewerTarget)
-        }, 1000)
-      }}
-      onMouseLeave={() => {
-        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
       }}
       onClick={() => {
         window.open(citation.file, "_blank", "noopener,noreferrer")

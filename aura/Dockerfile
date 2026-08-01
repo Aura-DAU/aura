@@ -43,12 +43,6 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Chat history store (lib/db/chat-db.ts writes to $PWD/db). /app is root-owned,
-# so the unprivileged runtime user cannot mkdir it on first write — create it
-# up front owned by nextjs, otherwise every /api/auth/history POST 500s with
-# EACCES. Mount a volume here in compose if history must survive redeploys.
-RUN mkdir -p /app/db && chown nextjs:nodejs /app/db
-
 USER nextjs
 EXPOSE 3000
 

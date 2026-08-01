@@ -11,6 +11,7 @@
 #   POST /calendar/timetable/sync/preview — preview what sync would create/update/delete
 
 import datetime
+import logging
 import os
 import urllib.parse
 
@@ -18,6 +19,8 @@ import jwt
 from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, Field
+
+logger = logging.getLogger(__name__)
 
 from api.auth import (
     ALGORITHM,
@@ -104,6 +107,21 @@ def get_faculty_slots(
 
 # ── OAuth connect / callback / disconnect / status ──────────────────────────
 
+# SEC-05 fix: return_to used to be accepted as any string, lstrip("/")'d,
+# and echoed back into a redirect after the OAuth callback. lstrip("/")
+# blocks an absolute "//evil.com"-style open redirect, but path traversal
+# ("../") or query-string injection ("?token=...") were never rejected, and
+# the value was never checked against what the frontend actually has routes
+# for before being signed into the JWT. Only known-safe paths are allowed now.
+ALLOWED_RETURN_TO_PATHS = {"/dashboard", "/settings/calendar"}
+
+
+def _validate_return_to(value: str) -> str:
+    if value in ALLOWED_RETURN_TO_PATHS:
+        return value
+    return "/dashboard"
+
+
 @router.get("/connect")
 def start_calendar_oauth(
     identity: Identity = Depends(require_identity),
@@ -121,7 +139,7 @@ def start_calendar_oauth(
     state_payload = {
         "erp_id":    identity.erp_id,
         "role":      identity.role,
-        "return_to": return_to,
+        "return_to": _validate_return_to(return_to),
         "typ":       GCAL_OAUTH_STATE_TYP,
         "iss":       GCAL_OAUTH_STATE_ISSUER,
         "aud":       GCAL_OAUTH_STATE_AUDIENCE,
@@ -177,7 +195,8 @@ def calendar_oauth_callback(
         "grant_type":    "authorization_code",
     }, timeout=10)
     if not resp.ok:
-        raise HTTPException(status_code=400, detail=f"Token exchange failed: {resp.text}")
+        logger.warning("Google Calendar token exchange failed (status %s): %s", resp.status_code, resp.text)
+        raise HTTPException(status_code=400, detail="Google Calendar authorisation failed. Please try again.")
 
     data          = resp.json()
     access_token  = data.get("access_token")
@@ -213,7 +232,7 @@ def calendar_oauth_callback(
 
     log_action(erp_id, "connect", "success", {"role": role, "scope": scope})
 
-    return_to = claims.get("return_to", "/dashboard").lstrip("/")
+    return_to = _validate_return_to(claims.get("return_to", "/dashboard")).lstrip("/")
     return RedirectResponse(url=f"{_frontend_origin()}/{return_to}?calendar=connected")
 
 
