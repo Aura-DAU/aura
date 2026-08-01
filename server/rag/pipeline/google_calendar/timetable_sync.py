@@ -142,3 +142,29 @@ def unsync(identity, *, keep_events: bool = False) -> dict:
         "removed":      removed,
         "events_kept":  keep_events,
     }
+
+
+def resync_if_linked(identity) -> dict:
+    """Best-effort Google Calendar refresh, called right after any
+    timetable-changing action -- whether that action came from the
+    dashboard's edit form or the chat agent's update_my_timetable /
+    undo_timetable_change tools. Both callers funnel through here so there
+    is exactly one place deciding "is this student's calendar linked with
+    write access, and should we push the new timetable to it" -- same
+    reasoning as preview()/apply() above.
+
+    Deliberately does NOT prompt for a fresh confirm/OAuth step: if the
+    student hasn't already granted calendar write access, this is a no-op
+    rather than an error, since a small timetable edit shouldn't force a
+    Google consent screen on someone who never asked to sync in the first
+    place. And a failure here must never bubble up as a failure of the
+    edit itself -- the timetable change already succeeded by the time this
+    runs, so at worst the calendar is left stale until the next sync.
+    """
+    erp_id = _erp_id(identity)
+    if not erp_id or not is_linked(erp_id) or not has_write_scope(erp_id):
+        return {"status": "not_connected"}
+    try:
+        return apply(identity, async_mode=False)
+    except Exception as e:  # noqa: BLE001 -- deliberately broad, see docstring
+        return {"status": "error", "message": str(e)}

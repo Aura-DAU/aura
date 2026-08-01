@@ -42,9 +42,8 @@ function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: numb
 }
 
 function InlineCitation({ index, citation }: { index: number; citation: Citation }) {
-  const { prefetchDocument, openDocument } = useDocumentViewer()
+  const { prefetchDocument } = useDocumentViewer()
   const hasSource = Boolean(citation.path)
-  const hoverTimerRef = React.useRef<NodeJS.Timeout | null>(null)
 
   if (!hasSource) {
     return (
@@ -67,13 +66,6 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
       onMouseEnter={() => {
         if (typeof window !== "undefined" && window.innerWidth < 768) return
         prefetchDocument(viewerTarget)
-        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-        hoverTimerRef.current = setTimeout(() => {
-          openDocument(viewerTarget)
-        }, 1000)
-      }}
-      onMouseLeave={() => {
-        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
       }}
       onClick={() => {
         window.open(citation.file, "_blank", "noopener,noreferrer")

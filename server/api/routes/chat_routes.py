@@ -4,6 +4,7 @@ import asyncio
 import json
 import logging
 import os
+import time
 from contextlib import asynccontextmanager
 
 from fastapi import APIRouter, Depends, HTTPException, Request
@@ -23,7 +24,7 @@ from pipeline.exceptions import ContextLengthExceeded, RAGPipelineError
 from pipeline.memory.conversation_memory import get_conversation_memory, _truncate_tokens
 from pipeline.memory.user_memory import get_user_memory_store
 from pipeline.memory.response_cache import get_response_cache
-from pipeline.rate_limiter import QuotaExceeded, enforce_quota
+from pipeline.rate_limiter import QuotaExceeded, enforce_quota, _day_start
 from pipeline.token_budget import is_context_length_error
 from access_control import resolve_effective_role
 
@@ -128,9 +129,12 @@ def _resolve_request(body: ChatRequest, identity: Identity, req: Request):
     try:
         remaining = enforce_quota(quota_key, identity.role)
     except QuotaExceeded as exc:
+        now = time.time()
+        seconds_to_reset = max(1, int(_day_start(now) + 86400 - now))
         raise HTTPException(
             status_code=429,
             detail=f"Question limit reached ({exc.limit}/day).",
+            headers={"Retry-After": str(seconds_to_reset)},
         ) from exc
     # `remaining` (None for unlimited roles) is the server's authoritative
     # count. Callers surface it back to the client on every response so the

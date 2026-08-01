@@ -1,10 +1,16 @@
 import { getServerSession } from "next-auth"
 import { NextResponse } from "next/server"
 import { cookies } from "next/headers"
-import { randomUUID } from "crypto"
 import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 import { backendUrl } from "@/lib/api/backend"
+import {
+  readOrMintGuestCookies,
+  guestErpId,
+  guestCookieOptions,
+  GUEST_ID_COOKIE,
+  GUEST_SECRET_COOKIE,
+} from "@/lib/auth/guest-identity"
 
 function isSafeDocumentPath(path: string): boolean {
   if (path.includes("\0")) return false
@@ -22,6 +28,7 @@ export async function GET(req: Request) {
   let erpId = ""
   let department, email, fullName, currentYear, currentSem, currentSec
   let newGuestId: string | undefined = undefined
+  let newGuestSecret: string | undefined = undefined
 
   if (session?.user?.erpId && session.user.role) {
     role = session.user.role
@@ -36,25 +43,20 @@ export async function GET(req: Request) {
     // If no session exists, check for the guest cookie.
     // If missing, generate one now so they aren't blocked.
     const cookieStore = await cookies()
-    let guestId = cookieStore.get("aura-guest-id")?.value
-
-    if (!guestId || guestId.length > 64) {
-      guestId = `GUEST-${randomUUID()}`
-      newGuestId = guestId // Flag to attach this cookie to the response
+    const guestCookies = readOrMintGuestCookies(cookieStore)
+    if (guestCookies.isNew) {
+      newGuestId = guestCookies.guestId
+      newGuestSecret = guestCookies.guestSecret
     }
-    erpId = guestId
+    erpId = guestErpId(guestCookies)
   }
 
-  // Helper to attach the guest cookie to outgoing responses if we just minted it
+  // Helper to attach the guest cookies to outgoing responses if we just minted them
   const sendResponse = (res: NextResponse) => {
-    if (newGuestId) {
-      res.cookies.set("aura-guest-id", newGuestId, {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        maxAge: 60 * 60 * 24 * 365,
-      })
+    if (newGuestId && newGuestSecret) {
+      const opts = guestCookieOptions()
+      res.cookies.set(GUEST_ID_COOKIE, newGuestId, opts)
+      res.cookies.set(GUEST_SECRET_COOKIE, newGuestSecret, opts)
     }
     return res
   }

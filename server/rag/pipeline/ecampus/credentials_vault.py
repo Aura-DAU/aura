@@ -66,11 +66,28 @@ def _connect():
     return conn
 
 
-def store_credentials(erp_id: str, ecampus_username: str, ecampus_password: str) -> None:
+def store_credentials(erp_id: str, ecampus_username: str, ecampus_password) -> None:
     # Called once, during the explicit 'Connect your eCampus account' flow —
     # never inferred or auto-populated from any other source.
-    blob = json.dumps({"username": ecampus_username, "password": ecampus_password}).encode()
-    encrypted = _get_fernet().encrypt(blob)
+    #
+    # SEC-03 fix: `ecampus_password` is a pydantic SecretStr all the way from
+    # the request schema down to here — its repr/str never renders the raw
+    # value, so a stack trace, log line, or OOM dump captured anywhere
+    # between the FastAPI route and this function can't leak it. We only
+    # call get_secret_value() at the last possible moment, immediately
+    # before encrypting, and drop the local plaintext reference right after.
+    plain_password = (
+        ecampus_password.get_secret_value()
+        if hasattr(ecampus_password, "get_secret_value")
+        else ecampus_password
+    )
+    blob = None
+    try:
+        blob = json.dumps({"username": ecampus_username, "password": plain_password}).encode()
+        encrypted = _get_fernet().encrypt(blob)
+    finally:
+        del plain_password
+        blob = None
     with _connect() as conn:
         conn.execute(
             """INSERT INTO ecampus_credentials (erp_id, encrypted_blob, linked_at)

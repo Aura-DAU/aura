@@ -2,9 +2,12 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { CalendarDays, Loader2, Sparkles, Settings2 } from "lucide-react"
+import Link from "next/link"
+import { CalendarDays, Loader2, Sparkles, Settings2, Pencil, Plus, CalendarCheck2 } from "lucide-react"
 import { useTimetable, TimetableSlot } from "@/hooks/use-timetable"
+import { useGoogleCalendarSync } from "@/hooks/use-google-calendar-sync"
 import { TimetableSetupCard } from "@/components/features/dashboard/TimetableSetupCard"
+import { TimetableEditModal } from "@/components/features/dashboard/TimetableEditModal"
 
 // Classes only run Monday–Friday, so that's all we show.
 const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const
@@ -21,9 +24,9 @@ function todayDayOfWeek(): number {
   return jsDay - 1
 }
 
-function ClassCard({ slot }: { slot: TimetableSlot }) {
-  return (
-    <div className="flex flex-col rounded-xl border border-theme-gray-light bg-theme-gray-light/40 px-3 py-2.5 hover:bg-theme-gray-light/60 transition-colors">
+function ClassCard({ slot, onClick }: { slot: TimetableSlot; onClick?: () => void }) {
+  const content = (
+    <>
       <p className="text-xs font-semibold text-neutral-100 leading-snug">
         {slot.course_name}
         {slot.course_code ? ` (${slot.course_code})` : ""}
@@ -37,6 +40,24 @@ function ClassCard({ slot }: { slot: TimetableSlot }) {
           {slot.start_time} – {slot.end_time}
         </span>
       </div>
+    </>
+  )
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className="flex w-full flex-col rounded-xl border border-theme-gray-light bg-theme-gray-light/40 px-3 py-2.5 text-left transition-colors hover:bg-theme-gray-light/60 hover:ring-1 hover:ring-theme-yellow/40"
+      >
+        {content}
+      </button>
+    )
+  }
+
+  return (
+    <div className="flex flex-col rounded-xl border border-theme-gray-light bg-theme-gray-light/40 px-3 py-2.5 hover:bg-theme-gray-light/60 transition-colors">
+      {content}
     </div>
   )
 }
@@ -48,41 +69,58 @@ function isElective(slot: TimetableSlot): boolean {
 // Deterministic pastel color per course_code, so the same subject always
 // lands on the same color every time the grid re-renders (mirrors the
 // source timetable spreadsheet, where each subject has its own fill color).
-const SUBJECT_PALETTE = [
-  { bg: "bg-orange-400/25", text: "text-orange-200", border: "border-orange-400/40" },
-  { bg: "bg-sky-400/25", text: "text-sky-200", border: "border-sky-400/40" },
-  { bg: "bg-emerald-400/25", text: "text-emerald-200", border: "border-emerald-400/40" },
-  { bg: "bg-neutral-400/25", text: "text-neutral-200", border: "border-neutral-400/40" },
-  { bg: "bg-fuchsia-400/25", text: "text-fuchsia-200", border: "border-fuchsia-400/40" },
-  { bg: "bg-amber-400/25", text: "text-amber-200", border: "border-amber-400/40" },
-  { bg: "bg-indigo-400/25", text: "text-indigo-200", border: "border-indigo-400/40" },
-  { bg: "bg-rose-400/25", text: "text-rose-200", border: "border-rose-400/40" },
-] as const
+// Single fixed color for every grid cell — matches the neutral dark card
+// style used elsewhere in the timetable (mobile ClassCard, etc.), so every
+// class looks the same regardless of subject.
+const SLOT_COLOR = { bg: "bg-theme-gray-light/40", text: "text-neutral-100", border: "border-theme-gray-light" } as const
 
-function colorForSubject(key: string) {
-  let hash = 0
-  for (let i = 0; i < key.length; i++) hash = (hash * 31 + key.charCodeAt(i)) >>> 0
-  return SUBJECT_PALETTE[hash % SUBJECT_PALETTE.length]
+function colorForSubject() {
+  return SLOT_COLOR
 }
 
 /** One cell in the weekly grid: subject code, room, and a color tied to the subject. */
-function GridCell({ slot }: { slot: TimetableSlot }) {
-  const color = colorForSubject(slot.course_code || slot.course_name)
-  return (
-    <div
-      title={`${slot.course_name}${slot.faculty_name ? ` • ${slot.faculty_name}` : ""}`}
-      className={`flex h-full flex-col items-center justify-center gap-0.5 rounded-lg border px-1 py-2 text-center leading-tight ${color.bg} ${color.border}`}
-    >
+function GridCell({ slot, onClick }: { slot: TimetableSlot; onClick?: () => void }) {
+  const color = colorForSubject()
+  const classes = `flex h-full w-full flex-col items-center justify-center gap-0.5 rounded-lg border px-1 py-2 text-center leading-tight transition-transform ${color.bg} ${color.border} ${onClick ? "hover:scale-[1.03] hover:ring-1 hover:ring-theme-yellow/50" : ""
+    }`
+  const inner = (
+    <>
       <p className={`text-[10px] font-semibold ${color.text}`}>
         {slot.course_code || slot.course_name}
       </p>
       {slot.room ? <p className="text-[9px] text-neutral-300/70">{slot.room}</p> : null}
+    </>
+  )
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} title={`${slot.course_name}${slot.faculty_name ? ` • ${slot.faculty_name}` : ""} — tap to edit`} className={classes}>
+        {inner}
+      </button>
+    )
+  }
+  return (
+    <div title={`${slot.course_name}${slot.faculty_name ? ` • ${slot.faculty_name}` : ""}`} className={classes}>
+      {inner}
     </div>
   )
 }
 
-/** A blank cell for a day/time with nothing scheduled. */
-function EmptyCell() {
+/** A blank cell for a day/time with nothing scheduled. In edit mode this
+ * becomes a "+" button that opens the add-class modal prefilled for that
+ * exact day and time row. */
+function EmptyCell({ onClick }: { onClick?: () => void }) {
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        title="Add a class here"
+        className="flex h-full w-full items-center justify-center rounded-lg border border-dashed border-theme-gray-light/40 py-2 text-neutral-600 transition-colors hover:border-theme-yellow/50 hover:text-theme-yellow"
+      >
+        <Plus className="size-3" />
+      </button>
+    )
+  }
   return (
     <div className="flex h-full items-center justify-center rounded-lg border border-dashed border-theme-gray-light/30 py-2">
       <span className="text-[10px] text-neutral-600">–</span>
@@ -123,13 +161,27 @@ function buildGridRows(slots: TimetableSlot[]): GridRow[] {
 export function TimetableCard() {
   const { data, loading, error, refetch } = useTimetable()
   const router = useRouter()
+  const { status: calendarStatus } = useGoogleCalendarSync()
 
   const todayIndex = todayDayOfWeek() // 0=Mon … 4=Fri (weekends default to Monday)
   const [selectedDay, setSelectedDay] = useState(todayIndex)
   const [showManualSetup, setShowManualSetup] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+
+  // Describes whichever add/edit modal is currently open, or null when closed.
+  const [activeEdit, setActiveEdit] = useState<
+    | { mode: "edit"; slot: TimetableSlot }
+    | { mode: "add"; day: string; start?: string; end?: string }
+    | null
+  >(null)
 
   const handlePersonalizeInChat = () => {
     router.push(`/?prompt=${encodeURIComponent(SETUP_PROMPT)}`)
+  }
+
+  const handleSaved = () => {
+    setActiveEdit(null)
+    void refetch()
   }
 
   if (loading && !data) {
@@ -179,15 +231,57 @@ export function TimetableCard() {
           <h2 className="text-sm font-semibold text-neutral-200">
             My Timetable
           </h2>
+          {calendarStatus === "connected" && (
+            <span
+              title="Changes here keep your Google Calendar in sync"
+              className="hidden items-center gap-1 rounded-full bg-emerald-400/10 px-2 py-0.5 text-[9px] font-medium text-emerald-300 sm:flex"
+            >
+              <CalendarCheck2 className="size-2.5" /> Synced
+            </span>
+          )}
         </div>
-        <button
-          type="button"
-          onClick={() => setShowManualSetup(true)}
-          className="flex shrink-0 items-center gap-1 text-[10px] font-medium text-neutral-500 hover:text-neutral-300"
-        >
-          <Settings2 className="size-3" /> Customize
-        </button>
+        <div className="flex shrink-0 items-center gap-3">
+          {editMode && (
+            <button
+              type="button"
+              onClick={() => setActiveEdit({ mode: "add", day: DAY_NAMES[todayIndex] })}
+              className="flex items-center gap-1 text-[10px] font-medium text-theme-yellow hover:text-theme-yellow/80"
+            >
+              <Plus className="size-3" /> Add class
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => setEditMode((v) => !v)}
+            className={`flex items-center gap-1 text-[10px] font-medium transition-colors ${editMode ? "text-theme-yellow" : "text-neutral-500 hover:text-neutral-300"
+              }`}
+          >
+            <Pencil className="size-3" /> {editMode ? "Done" : "Edit"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowManualSetup(true)}
+            className="flex items-center gap-1 text-[10px] font-medium text-neutral-500 hover:text-neutral-300"
+          >
+            <Settings2 className="size-3" /> Customize
+          </button>
+        </div>
       </div>
+
+      {editMode && (
+        <p className="mb-3 text-[10px] leading-relaxed text-neutral-500">
+          Tap any class to edit or remove it, or tap a blank slot to add one.
+          {calendarStatus !== "connected" && (
+            <>
+              {" "}
+              <Link href="/settings/calendar" className="underline underline-offset-2 hover:text-neutral-300">
+                Connect Google Calendar
+              </Link>{" "}
+              to keep changes synced automatically.
+            </>
+          )}
+        </p>
+      )}
 
       {needsConfiguration && !loading && !error && (
         <button
@@ -240,9 +334,22 @@ export function TimetableCard() {
             ) : (
               <div className="flex flex-col gap-2">
                 {mobileEntries.map((slot) => (
-                  <ClassCard key={slot.id} slot={slot} />
+                  <ClassCard
+                    key={slot.id}
+                    slot={slot}
+                    onClick={editMode ? () => setActiveEdit({ mode: "edit", slot }) : undefined}
+                  />
                 ))}
               </div>
+            )}
+            {editMode && (
+              <button
+                type="button"
+                onClick={() => setActiveEdit({ mode: "add", day: DAY_NAMES[selectedDay] })}
+                className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-xl border border-dashed border-theme-gray-light/50 py-2 text-xs font-medium text-neutral-400 hover:border-theme-yellow/50 hover:text-theme-yellow"
+              >
+                <Plus className="size-3.5" /> Add a class on {DAY_NAMES[selectedDay]}
+              </button>
             )}
           </div>
 
@@ -286,9 +393,22 @@ export function TimetableCard() {
                         <br />
                         {row.end}
                       </td>
-                      {DAY_NAMES.map((_, idx) => (
+                      {DAY_NAMES.map((dayName, idx) => (
                         <td key={idx} className="h-16 align-middle">
-                          {row.cells[idx] ? <GridCell slot={row.cells[idx]!} /> : <EmptyCell />}
+                          {row.cells[idx] ? (
+                            <GridCell
+                              slot={row.cells[idx]!}
+                              onClick={editMode ? () => setActiveEdit({ mode: "edit", slot: row.cells[idx]! }) : undefined}
+                            />
+                          ) : (
+                            <EmptyCell
+                              onClick={
+                                editMode
+                                  ? () => setActiveEdit({ mode: "add", day: dayName, start: row.start, end: row.end })
+                                  : undefined
+                              }
+                            />
+                          )}
                         </td>
                       ))}
                     </tr>
@@ -311,9 +431,22 @@ export function TimetableCard() {
                           <br />
                           {row.end}
                         </td>
-                        {DAY_NAMES.map((_, idx) => (
+                        {DAY_NAMES.map((dayName, idx) => (
                           <td key={idx} className="h-16 align-middle">
-                            {row.cells[idx] ? <GridCell slot={row.cells[idx]!} /> : <EmptyCell />}
+                            {row.cells[idx] ? (
+                              <GridCell
+                                slot={row.cells[idx]!}
+                                onClick={editMode ? () => setActiveEdit({ mode: "edit", slot: row.cells[idx]! }) : undefined}
+                              />
+                            ) : (
+                              <EmptyCell
+                                onClick={
+                                  editMode
+                                    ? () => setActiveEdit({ mode: "add", day: dayName, start: row.start, end: row.end })
+                                    : undefined
+                                }
+                              />
+                            )}
                           </td>
                         ))}
                       </tr>
@@ -324,6 +457,18 @@ export function TimetableCard() {
             </table>
           </div>
         </>
+      )}
+
+      {activeEdit && (
+        <TimetableEditModal
+          mode={activeEdit.mode}
+          slot={activeEdit.mode === "edit" ? activeEdit.slot : undefined}
+          defaultDay={activeEdit.mode === "add" ? activeEdit.day : undefined}
+          defaultStart={activeEdit.mode === "add" ? activeEdit.start : undefined}
+          defaultEnd={activeEdit.mode === "add" ? activeEdit.end : undefined}
+          onClose={() => setActiveEdit(null)}
+          onSaved={handleSaved}
+        />
       )}
     </div>
   )

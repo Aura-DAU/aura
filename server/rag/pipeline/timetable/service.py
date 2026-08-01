@@ -20,6 +20,29 @@ import db.connection as db_conn
 DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 VALID_SESSION_TYPES = {"lecture", "lab", "tutorial"}
 
+# BUG-02 fix: start_time/end_time arrive as raw strings from LLM tool-call
+# arguments. Without a format check here, malformed values (e.g. "8:00 AM",
+# "25:00") reach the DB and either raise an unhandled psycopg2 exception
+# (leaking a DB traceback to the LLM/client) or silently misbehave.
+_TIME_RE = re.compile(r"^([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$")
+
+
+def _validate_time(t: Optional[str], field_name: str) -> Optional[str]:
+    if t is None:
+        return None
+    if not _TIME_RE.match(t):
+        raise TimetableError(f"{field_name} must be in 24-hour HH:MM format (e.g. '09:00').")
+    return t
+
+
+def _to_minutes(t: str) -> int:
+    parts = t.split(":")
+    return int(parts[0]) * 60 + int(parts[1])
+
+
+def _slots_overlap(start_a: str, end_a: str, start_b: str, end_b: str) -> bool:
+    return _to_minutes(start_a) < _to_minutes(end_b) and _to_minutes(start_b) < _to_minutes(end_a)
+
 
 @dataclass
 class _CohortLookup:
@@ -34,7 +57,25 @@ class _CohortLookup:
 
 
 class TimetableError(Exception):
-    """Raised for user-facing validation problems (bad day name, missing cohort, etc.)."""
+    """Raised for user-facing validation problems (bad day name, missing cohort, etc.).
+
+    API-03 fix: carries an explicit `status_code` (default 400, the common
+    case — bad input / not-yet-configured state) so route handlers can map
+    it correctly instead of blanket-returning 409 for everything. Pass
+    status_code=404 for "couldn't find the thing you're referring to" and
+    status_code=409 for a genuine resource conflict (e.g. overlapping slot).
+    """
+
+    def __init__(self, message: str, status_code: int = 400):
+        super().__init__(message)
+        self.status_code = status_code
+
+
+class TimetableForbiddenError(TimetableError):
+    """Role-mismatch errors (e.g. a faculty-only tool called by a student)."""
+
+    def __init__(self, message: str):
+        super().__init__(message, status_code=403)
 
 
 def _field(identity, name: str):
@@ -214,7 +255,7 @@ def _exclude_electives(rows: list[dict]) -> list[dict]:
 def _require_cohort(identity) -> tuple[int, int, str]:
     role = _field(identity, "role")
     if role != "student":
-        raise TimetableError("Only students have a personal timetable in AURA.")
+        raise TimetableForbiddenError("Only students have a personal timetable in AURA.")
 
     erp_id = _field(identity, "erp_id")
     year = sem = sec = None
@@ -294,8 +335,17 @@ def get_overrides(erp_id: str) -> list[dict]:
 
 
 def _row_to_slot(row: dict, is_custom: bool = False, override_id=None) -> dict:
+    # BUG-03 support: expose the underlying master_id so overlap detection
+    # can exclude a slot from colliding with the very master row it's
+    # replacing. An override row (fetched via get_overrides) already carries
+    # its own "master_id" column (None for a plain 'add'); a plain master
+    # row, or a replace-merged dict copied from one, has no "master_id" key
+    # and its "id" field IS the master id.
+    master_id_val = row.get("master_id") if "master_id" in row else row.get("id")
+
     return {
         "id": str(override_id or row["id"]),
+        "master_id": str(master_id_val) if master_id_val else None,
         "day_of_week": row["day_of_week"],
         "day": day_name(row["day_of_week"]),
         "start_time": _fmt_time(row["start_time"]),
@@ -475,7 +525,7 @@ def get_effective_timetable(identity) -> dict:
 
 def list_my_changes(identity) -> list[dict]:
     if _field(identity, "role") != "student":
-        raise TimetableError("Only students have a personal timetable in AURA.")
+        raise TimetableForbiddenError("Only students have a personal timetable in AURA.")
     overrides = get_overrides(_field(identity, "erp_id"))
     return [
         {
@@ -526,6 +576,12 @@ def apply_change(
     if session_type and session_type not in VALID_SESSION_TYPES:
         raise TimetableError("session_type must be 'lecture', 'lab', or 'tutorial'.")
 
+    # BUG-02 fix: validate time format before it ever reaches the DB.
+    start_time = _validate_time(start_time, "start_time")
+    end_time = _validate_time(end_time, "end_time")
+    if start_time and end_time and _to_minutes(end_time) <= _to_minutes(start_time):
+        raise TimetableError("end_time must be after start_time.")
+
     day_of_week = parse_day(day) if day is not None else None
 
     master_id = None
@@ -536,13 +592,32 @@ def apply_change(
         if master_id is None:
             raise TimetableError(
                 "I couldn't find a matching class on your timetable for that day/time/course — "
-                "could you double check the details?"
+                "could you double check the details?",
+                status_code=404,
             )
     elif kind == "add":
         if day_of_week is None or not start_time or not end_time or not course_name:
             raise TimetableError(
                 "To add a new class I need at least the day, start time, end time, and course name."
             )
+
+    # BUG-03 fix: for 'add' and 'replace', reject a slot that overlaps an
+    # existing slot on the same day in the student's *effective* timetable
+    # (skipping the slot being replaced itself), so a student can't end up
+    # with two classes at the same time.
+    if kind in ("add", "replace") and day_of_week is not None and start_time and end_time:
+        effective = get_effective_timetable(identity)
+        for slot in effective["timetable"]:
+            if slot["day_of_week"] != day_of_week:
+                continue
+            if kind == "replace" and master_id is not None and slot.get("master_id") == master_id:
+                continue
+            if _slots_overlap(start_time, end_time, slot["start_time"], slot["end_time"]):
+                raise TimetableError(
+                    f"That overlaps with {slot.get('course_code') or 'an existing class'} "
+                    f"({slot['start_time']}\u2013{slot['end_time']}) on {day_name(day_of_week)}.",
+                    status_code=409,
+                )
 
     db_conn.execute(
         """INSERT INTO timetable_overrides
@@ -562,7 +637,7 @@ def clear_change(identity, override_id: str) -> dict:
     """Soft-deletes one of the requester's OWN overrides (never another
     student's — the WHERE clause is scoped to erp_id)."""
     if _field(identity, "role") != "student":
-        raise TimetableError("Only students have a personal timetable in AURA.")
+        raise TimetableForbiddenError("Only students have a personal timetable in AURA.")
     db_conn.execute(
         """UPDATE timetable_overrides SET is_active = FALSE, updated_at = now()
            WHERE id = %s AND erp_id = %s""",
@@ -629,7 +704,7 @@ def get_faculty_timetable(identity) -> dict:
     faculty member is listed as the instructor."""
     role = _field(identity, "role")
     if role != "faculty":
-        raise TimetableError("This tool is only available to faculty members.")
+        raise TimetableForbiddenError("This tool is only available to faculty members.")
 
     faculty_name = _field(identity, "faculty_initials") or _field(identity, "erp_id")
     if not faculty_name:
@@ -725,7 +800,8 @@ def get_timetable_for_cohort(
             where_desc += f", Branch '{branch}'"
         raise TimetableError(
             f"I couldn't find a timetable for {where_desc}. "
-            "Double check the year/semester, branch, and section."
+            "Double check the year/semester, branch, and section.",
+            status_code=404,
         )
 
     slots = [_row_to_slot(r) for r in rows]
@@ -772,10 +848,8 @@ def get_available_electives(identity) -> dict:
                 "course_name": row["course_name"],
                 "course_type": row.get("course_type", ""),
                 "selected": mid in selected_ids if electives_configured else False,
-                "master_ids": [],
                 "slots": [],
             }
-        courses[code]["master_ids"].append(mid)
         # If any slot for this course is selected, mark the course as selected
         if electives_configured and mid in selected_ids:
             courses[code]["selected"] = True
@@ -806,8 +880,23 @@ def save_elective_selections(identity, course_codes: list[str]) -> dict:
     year, sem, sec = _require_cohort(identity)
     erp_id = _field(identity, "erp_id")
 
+    # BUG-09 fix: an empty course_codes list is now a valid "reset" request —
+    # it clears any saved selections and reverts the student to the
+    # pre-configuration state where every elective is shown, rather than
+    # being rejected outright.
     if not course_codes:
-        raise TimetableError("Please select at least one elective course.")
+        with db_conn.get_conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "DELETE FROM student_elective_selections WHERE erp_id = %s",
+                    (erp_id,),
+                )
+        return {
+            "status": "reset",
+            "selected_courses": [],
+            "total_slots": 0,
+            "timetable": get_effective_timetable(identity),
+        }
 
     # Resolve course_codes to master_ids — scoped to the student's own
     # (year, sem) so they can only select electives actually offered to
@@ -830,21 +919,31 @@ def save_elective_selections(identity, course_codes: list[str]) -> dict:
             f"{', '.join(sorted(unmatched))}. Use get_available_electives to see valid options."
         )
 
-    # Atomic replace: delete old, insert new
-    db_conn.execute(
-        "DELETE FROM student_elective_selections WHERE erp_id = %s",
-        (erp_id,),
-    )
-    for mid in matched_ids:
-        db_conn.execute(
-            "INSERT INTO student_elective_selections (erp_id, master_id) VALUES (%s, %s)",
-            (erp_id, mid),
-        )
+    # BUG-01 fix: DELETE + N x INSERT must be one transaction, not N+1
+    # separate db_conn.execute() calls (each of which checks out its own
+    # connection and commits independently). A single get_conn() block
+    # keeps the replace atomic — a concurrent reader never observes a
+    # window with zero electives, and a crash mid-write rolls back fully
+    # instead of losing the student's prior selections.
+    with db_conn.get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "DELETE FROM student_elective_selections WHERE erp_id = %s",
+                (erp_id,),
+            )
+            for mid in matched_ids:
+                cur.execute(
+                    "INSERT INTO student_elective_selections (erp_id, master_id) VALUES (%s, %s)",
+                    (erp_id, mid),
+                )
 
+    # API-02 fix: return the updated effective timetable inline so the
+    # frontend doesn't need a second round trip to /timetable/me.
     return {
         "status": "saved",
         "selected_courses": sorted(matched_codes),
         "total_slots": len(matched_ids),
+        "timetable": get_effective_timetable(identity),
     }
 
 
@@ -852,7 +951,7 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
     """Updates the student's cohort (year, semester, section) in user_identity_map."""
     role = _field(identity, "role")
     if role != "student":
-        raise TimetableError("Only students can set their cohort.")
+        raise TimetableForbiddenError("Only students can set their cohort.")
     erp_id = _field(identity, "erp_id")
 
     cur_year = _field(identity, "current_year")
@@ -875,7 +974,10 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
         (new_year, new_sem, new_sec),
     )
     if not check:
-        raise TimetableError(f"No timetable found for Year {new_year}, Semester {new_sem}, Section '{new_sec}'.")
+        raise TimetableError(
+            f"No timetable found for Year {new_year}, Semester {new_sem}, Section '{new_sec}'.",
+            status_code=404,
+        )
 
     db_conn.execute(
         "UPDATE user_identity_map SET current_year = %s, current_sem = %s, current_sec = %s WHERE erp_id = %s",
