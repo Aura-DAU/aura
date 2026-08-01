@@ -211,11 +211,13 @@ def extract_curriculum_chunks(body, metadata, file_path):
         for row in rows:
             if len(row) <= max(col_code, col_name):
                 continue
-            course_code = row[col_code].strip()
+            course_code_raw = row[col_code].strip()
             course_name = row[col_name].strip()
             
-            if not course_code or not course_name or course_code == "Course Code":
+            if not course_code_raw or not course_name or course_code_raw.lower() == "course code":
                 continue
+                
+            course_code = re.sub(r"[\s\-]", "", course_code_raw).upper()
                 
             if col_sem != -1 and col_sem < len(row):
                 sem_raw = row[col_sem].strip()
@@ -654,7 +656,8 @@ def extract_faculty_from_text(text):
 
 
 def extract_course_codes_from_text(text):
-    codes = set(re.findall(r"\b[A-Z]{2,3}\d{3}\b", text))
+    matches = re.findall(r"\b([A-Z]{2,3})[\s\-]?(\d{3})\b", text)
+    codes = set(f"{m[0]}{m[1]}" for m in matches)
     return list(codes)
 
 
@@ -753,7 +756,14 @@ def process_markdown_file(file_path):
     effective_semester = _normalize_metadata_value(fm_semester)
 
     # 3. Course Code Precedence: Document-Type Aware
-    fm_course_code = metadata.get("course_code")
+    fm_course_code_raw = metadata.get("course_code")
+    fm_course_code = None
+    if fm_course_code_raw:
+        if isinstance(fm_course_code_raw, list):
+            fm_course_code = [re.sub(r"[\s\-]", "", str(c)).upper() for c in fm_course_code_raw if c]
+        else:
+            fm_course_code = re.sub(r"[\s\-]", "", str(fm_course_code_raw)).upper()
+            
     is_single_course_doc = (
         bool(fm_course_code) or
         category in ["courses", "course_policy", "course"] or
