@@ -17,6 +17,7 @@ import type { ChatMessage, Citation, CalendarActionData } from "@/lib/chat-types
 import { BrandMark } from "@/components/ui/brand-mark"
 import { MarkdownContent } from "@/components/ui/markdown-content"
 import { useDocumentViewer } from "@/hooks/use-document-viewer"
+import { useGoogleCalendarSync } from "@/hooks/use-google-calendar-sync"
 
 interface MessageProps {
   message: ChatMessage
@@ -171,9 +172,12 @@ export function Message({
           </p>
         ) : null}
 
-        {message.calendar_action && (
-          <BookingConfirmationCard action={message.calendar_action} />
-        )}
+        {message.calendar_action &&
+          (message.calendar_action.type === "connect_required" ? (
+            <ConnectCalendarCard action={message.calendar_action} />
+          ) : (
+            <BookingConfirmationCard action={message.calendar_action} />
+          ))}
 
         {citations && citations.length > 0 ? (
           <div className="mt-3 flex flex-wrap gap-2">
@@ -379,6 +383,49 @@ function BookingConfirmationCard({ action }: { action: CalendarActionData }) {
             >
               View in Google Calendar →
             </a>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Inline "Connect Google Calendar" CTA — the GPT/Claude connector pattern.
+// Rendered when a calendar tool reports the student hasn't linked their calendar
+// yet. Reuses useGoogleCalendarSync so the button starts the same OAuth flow as
+// Settings, and the card resolves to a "connected" state (no stale CTA on an old
+// turn) once the account is linked.
+function ConnectCalendarCard({ action }: { action: CalendarActionData }) {
+  const { status, error, connect } = useGoogleCalendarSync()
+  const connected = status === "connected"
+
+  return (
+    <div className="mt-3 rounded-xl border border-theme-yellow/20 bg-theme-yellow/5 p-4 animate-in fade-in slide-in-from-bottom-1 duration-300">
+      <div className="flex items-start gap-2.5">
+        <CalendarCheck className="mt-0.5 size-4 shrink-0 text-theme-yellow" />
+        <div className="min-w-0 flex-1">
+          <p className="mb-1 text-xs font-semibold text-theme-yellow">
+            {connected ? "Google Calendar connected" : "Connect Google Calendar"}
+          </p>
+          <p className="text-sm text-neutral-300">
+            {action.message ??
+              "Connect your Google Calendar to add your timetable to your schedule."}
+          </p>
+          {error && <p className="mt-1.5 text-xs text-theme-red">{error}</p>}
+          {connected ? (
+            <p className="mt-2 inline-flex items-center gap-1 text-xs text-green-400">
+              <Check className="size-3.5" /> Connected — ask me again to sync your timetable.
+            </p>
+          ) : (
+            <button
+              type="button"
+              onClick={() => void connect()}
+              disabled={status === "loading"}
+              className="mt-3 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-theme-red to-theme-yellow px-4 py-2 text-sm font-bold text-black transition-opacity hover:opacity-90 disabled:opacity-60"
+            >
+              <CalendarCheck className="size-4" />
+              Connect Google Calendar
+            </button>
           )}
         </div>
       </div>
