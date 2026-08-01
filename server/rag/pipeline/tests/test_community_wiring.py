@@ -226,6 +226,39 @@ def test_aura_chat_graph_community_node_invokes_orchestrator(monkeypatch):
     assert who_out["result"]["answer"] == "orchestrated:public_kb:student"
 
 
+def test_aura_chat_graph_routes_club_office_bearers_when_classifier_falls_back(monkeypatch):
+    """A classifier outage must not send club convenor lookups to legacy RAG."""
+    from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
+
+    calls = []
+
+    def _fake_init(self):
+        self.intent_router = SimpleNamespace(
+            classify=lambda _q: (_ for _ in ()).throw(AssertionError("classifier should not run")),
+        )
+        self.ecampus_orchestrator = SimpleNamespace(
+            run=lambda **kwargs: calls.append(kwargs) or {
+                "answer": "current C_DCs office-bearer",
+                "sources": ["sbg_club_committee_c_dcs_information_2026_27.md"],
+            }
+        )
+
+    monkeypatch.setattr(AuraChatGraph, "__init__", _fake_init)
+    graph = AuraChatGraph()
+    state = {
+        "query": "Who is the convenor of the Programming Club?",
+        "history": [],
+        "identity": SimpleIdentity({"erp_id": "S1", "role": "student", "dept": "ICT"}),
+        "request_context": None,
+        "result": None,
+    }
+
+    out = graph._n_community_tools(state)
+
+    assert out["result"]["answer"] == "current C_DCs office-bearer"
+    assert calls[0]["tool_scope"] == "public_kb"
+
+
 def test_aura_chat_graph_community_skips_guests_and_general(monkeypatch):
     from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
 

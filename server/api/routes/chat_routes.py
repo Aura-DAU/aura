@@ -354,6 +354,9 @@ async def chat_stream(
     def on_delta(text: str) -> None:
         loop.call_soon_threadsafe(events.put_nowait, ("delta", text))
 
+    def on_profile_update(name: str) -> None:
+        loop.call_soon_threadsafe(events.put_nowait, ("profile_update", name))
+
     def _run() -> None:
         try:
             mem_result = get_conversation_memory().prepare(body.summary, history)
@@ -367,6 +370,7 @@ async def chat_stream(
                 identity=identity_dict,
                 display_profile=display_profile,
                 on_delta=on_delta,
+                on_profile_update=on_profile_update,
                 summary=_summary_for_generation(user_memory, mem_result.summary),
                 request_context=request_context,
             )
@@ -408,6 +412,12 @@ async def chat_stream(
                                 "summary": payload.summary,
                                 "foldedTurns": payload.folded_turns,
                             })
+                        continue
+                    if kind == "profile_update":
+                        yield _sse({
+                            "type": "profile-update",
+                            "profile": {"name": payload}
+                        })
                         continue
                     if kind == "error":
                         exc = payload if isinstance(payload, BaseException) else None
@@ -479,6 +489,13 @@ async def chat_stream(
                         yield _sse({"type": "citations", "citations": citations})
                     if result.get("is_personal_data"):
                         yield _sse({"type": "personal-data-flag"})
+                    # Inline connector prompt (e.g. "connect Google Calendar"):
+                    # the orchestrator sets action_required when a tool needs an
+                    # account the student hasn't linked yet. Rides the existing
+                    # calendar-action SSE channel the client already parses.
+                    action_required = result.get("action_required")
+                    if isinstance(action_required, dict):
+                        yield _sse({"type": "calendar-action", "action": action_required})
                     if mem_result is not None and mem_result.should_fork:
                         # Hard overflow: the digest itself is at capacity. Tell the
                         # client to continue in a fresh thread seeded with it.

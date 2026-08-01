@@ -598,6 +598,21 @@ export function useAuraChat() {
     }
   }, [])
 
+  const insertGreeting = useCallback((text: string) => {
+    if (messages.length > 0) return
+    const threadId = uid()
+    const msg: ChatMessage = { role: "assistant", content: text, timestamp: Date.now() }
+    const newThread: StoredThread = {
+      id: threadId,
+      title: "New chat",
+      messages: [msg],
+      updatedAt: msg.timestamp,
+    }
+    setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
+    setActiveThreadIdState(threadId)
+    setMessages([msg])
+  }, [messages.length])
+
   const handleSendMessage = useCallback(
     async (text: string, options?: { regenerate?: boolean }) => {
       const trimmed = text.trim()
@@ -790,6 +805,12 @@ export function useAuraChat() {
                 ? sanitizePublicMessage(chunk.message)
                 : undefined
             streamErrorMessage = fromChunk ?? STREAM_ERROR_FALLBACK
+          } else if (chunk.type === "profile-update" && chunk.profile && chunk.profile.name) {
+            setStudentProfile(prev => {
+              const next = { ...prev, name: chunk.profile.name }
+              try { localStorage.setItem(PROFILE_KEY, JSON.stringify(next)) } catch {}
+              return next
+            })
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&
@@ -1212,5 +1233,7 @@ export function useAuraChat() {
     handleClearChat,
     stopGeneration,
     lastUserMessage,
+    insertGreeting,
+    hasHydrated,
   }
 }

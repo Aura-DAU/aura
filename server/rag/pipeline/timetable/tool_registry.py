@@ -18,7 +18,6 @@ from dataclasses import dataclass
 from typing import Callable
 
 from . import service
-from ..google_calendar import timetable_sync
 
 
 @dataclass
@@ -89,18 +88,6 @@ def _handle_undo_timetable_change(identity, **kwargs):
         return {"status": "applied", **result}
     except service.TimetableError as e:
         return {"error": str(e)}
-
-
-# -- Google Calendar sync ------------------------------------------------------
-
-def _handle_sync_timetable_to_google_calendar(identity, **kwargs):
-    """Same confirm-gate pattern as _handle_update_my_timetable: first call
-    (confirm missing/false) returns a preview, second call with
-    confirm=true actually writes the events."""
-    confirm = bool(kwargs.pop("confirm", False))
-    if not confirm:
-        return timetable_sync.preview(identity)
-    return timetable_sync.apply(identity)
 
 
 # -- Any-cohort read tool (not scoped to the requester's own cohort) ----------
@@ -305,26 +292,6 @@ UNDO_TIMETABLE_CHANGE = Tool(
     category="write", allowed_roles=["student"], handler=_handle_undo_timetable_change,
 )
 
-SYNC_TIMETABLE_TO_GOOGLE_CALENDAR = Tool(
-    name="sync_timetable_to_google_calendar",
-    description=(
-        "Create/update recurring weekly events on the requester's own Google Calendar for every "
-        "class on their current AURA timetable, with popup reminders before each class, running "
-        "until the end of the semester. Requires the student to have already connected Google "
-        "Calendar (with write access) from Settings -- if they haven't, this returns a message "
-        "telling them to do that first. Always call this once with confirm=false first to preview "
-        "how many events will be created, relay that to the user, and only call it again with "
-        "confirm=true after they explicitly agree."
-    ),
-    parameters={
-        "type": "object",
-        "properties": {
-            "confirm": {"type": "boolean", "description": "Set true only after the user has confirmed the previewed sync."},
-        },
-    },
-    category="write", allowed_roles=["student"], handler=_handle_sync_timetable_to_google_calendar,
-)
-
 GET_FACULTY_TIMETABLE = Tool(
     name="get_my_teaching_schedule",
     description=(
@@ -382,7 +349,7 @@ SAVE_MY_ELECTIVE_SELECTIONS = Tool(
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
         GET_MY_TIMETABLE, GET_COHORT_TIMETABLE, LIST_MY_TIMETABLE_CHANGES, UPDATE_MY_TIMETABLE,
-        UNDO_TIMETABLE_CHANGE, SYNC_TIMETABLE_TO_GOOGLE_CALENDAR,
+        UNDO_TIMETABLE_CHANGE,
         GET_FACULTY_TIMETABLE, GET_AVAILABLE_ELECTIVES, SAVE_MY_ELECTIVE_SELECTIONS,
         SET_MY_COHORT,
     ]

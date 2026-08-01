@@ -300,106 +300,88 @@ class RetrievalPipeline:
         self,
         plan
     ):
-        """Build a Pinecone metadata filter from extracted entities.
+        """Build an entity-priority metadata filter dictionary from planner entities when entity_confidence >= 0.80."""
+        entity_confidence = plan.get("entity_confidence", 1.0) if isinstance(plan, dict) else 1.0
+        if entity_confidence < 0.80:
+            return None
 
-        Fix F: multi-value entity lists (e.g. two programs in a comparison
-        query) now use the $in operator instead of discarding all but the
-        first value via first_value().
-        """
+        entities = plan.get("entities", {}) if isinstance(plan, dict) else {}
+        if not entities:
+            return None
 
-        def first_value(value):
-            if isinstance(value, list):
-                return value[0] if value else None
-            return value
+        def _make_clause(field, raw_val):
+            if not raw_val:
+                return None
+            if field == "program_name":
+                if isinstance(raw_val, list):
+                    progs = [p for p in (self._canonical_program_name(item) for item in raw_val) if p]
+                    val = progs if progs else raw_val
+                else:
+                    canonical_prog = self._canonical_program_name(raw_val)
+                    val = [canonical_prog] if canonical_prog else [raw_val]
+            elif field == "semester":
+                if isinstance(raw_val, list):
+                    sem_vals = []
+                    for item in raw_val:
+                        sem_vals.extend(self._canonical_semester_values(item))
+                    val = sorted(list(set(sem_vals))) if sem_vals else raw_val
+                else:
+                    sem_vals = self._canonical_semester_values(raw_val)
+                    val = sem_vals if sem_vals else [raw_val]
+            else:
+                val = raw_val
 
-        def as_filter(field, value):
-            """Return a Pinecone filter clause for one or many values."""
-            if isinstance(value, list) and len(value) > 1:
-                return {field: {"$in": value}}
-            scalar = value[0] if isinstance(value, list) else value
-            return {field: {"$eq": scalar}}
+            if isinstance(val, (list, tuple, set)):
+                val_list = [str(x).strip() for x in val if x and str(x).strip()]
+                if val_list:
+                    return {field: {"$in": sorted(list(set(val_list)))}}
+            else:
+                s_val = str(val).strip()
+                if s_val:
+                    return {field: {"$in": [s_val]}}
+            return None
 
-        entities = plan.get(
-            "entities",
-            {}
-        )
+        # Priority 1: course_code (highest specificity)
+        if entities.get("course_code"):
+            clause = _make_clause("course_code", entities.get("course_code"))
+            if clause:
+                return clause
 
-        course_code_raw = entities.get("course_code")
-        course_code = first_value(course_code_raw)
+        # Priority 2: faculty_name
+        if entities.get("faculty_name"):
+            clause = _make_clause("faculty_name", entities.get("faculty_name"))
+            if clause:
+                return clause
 
-        # Fix F: canonicalise all program values, not just the first one
-        program_name_raw = entities.get("program_name")
-        if isinstance(program_name_raw, list):
-            program_names = [
-                p for p in (
-                    self._canonical_program_name(p) for p in program_name_raw
-                ) if p
-            ]
-            program_name = program_names[0] if len(program_names) == 1 else (program_names or None)
-        else:
-            program_name = self._canonical_program_name(program_name_raw)
+        # Priority 3: event_name (+ optional semester)
+        if entities.get("event_name"):
+            clauses = []
+            ev_clause = _make_clause("event_name", entities.get("event_name"))
+            if ev_clause:
+                clauses.append(ev_clause)
+                if entities.get("semester"):
+                    sem_clause = _make_clause("semester", entities.get("semester"))
+                    if sem_clause:
+                        clauses.append(sem_clause)
+                return clauses[0] if len(clauses) == 1 else {"$and": clauses}
 
-        if course_code:
+        # Priority 4: program_name (+ optional semester)
+        if entities.get("program_name"):
+            clauses = []
+            prog_clause = _make_clause("program_name", entities.get("program_name"))
+            if prog_clause:
+                clauses.append(prog_clause)
+                if entities.get("semester"):
+                    sem_clause = _make_clause("semester", entities.get("semester"))
+                    if sem_clause:
+                        clauses.append(sem_clause)
+                return clauses[0] if len(clauses) == 1 else {"$and": clauses}
 
-            if program_name:
-                prog_clause = as_filter("program_name", program_name)
-                return {
-                    "$and": [
-                        {"course_code": {"$eq": course_code}},
-                        prog_clause
-                    ]
-                }
-
-            return {
-                "course_code": {
-                    "$eq": course_code
-                }
-            }
-
-        # Fix F: support multi-faculty queries with $in
-        faculty_name_raw = entities.get("faculty_name")
-        if faculty_name_raw:
-            if isinstance(faculty_name_raw, list) and len(faculty_name_raw) > 1:
-                return {"faculty_name": {"$in": faculty_name_raw}}
-            faculty_name = first_value(faculty_name_raw)
-            if faculty_name:
-                return {"faculty_name": {"$eq": faculty_name}}
-
-        event_name = first_value(
-            entities.get(
-                "event_name"
-            )
-        )
-
-        if event_name:
-
-            return {
-                "event_name": {
-                    "$eq": event_name
-                }
-            }
-
-        semester = first_value(
-            entities.get(
-                "semester"
-            )
-        )
-
-        if semester:
-            sem_vals = self._canonical_semester_values(semester)
-            sem_clause = {"semester": {"$in": sem_vals}} if len(sem_vals) > 1 else {"semester": {"$eq": sem_vals[0]}}
-            if program_name:
-                prog_clause = as_filter("program_name", program_name)
-                return {
-                    "$and": [
-                        prog_clause,
-                        sem_clause
-                    ]
-                }
-            return sem_clause
-
-        if program_name:
-            return as_filter("program_name", program_name)
+        # Priority 5: semester only
+        if entities.get("semester"):
+            clause = _make_clause("semester", entities.get("semester"))
+            if clause:
+                return clause
 
         return None
 
@@ -1286,7 +1268,7 @@ class RetrievalPipeline:
             for c in entity_list:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
-        # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
+        # 2. Semantic Path: Top-50 vector search (using Pinecone/Qdrant index query directly)
         semantic_list = []
         if self.retriever.index is None:
             logger.info("Semantic retrieval disabled because the vector index is unavailable; continuing with entity-path results only.")
@@ -1295,7 +1277,34 @@ class RetrievalPipeline:
                 query_embedding = self.retriever.embed_query(query)
                 if query_embedding is None:
                     raise RuntimeError("Query embedding unavailable")
+                
+                entity_filter = self._build_metadata_filter(plan)
+                
+                print("\n" + "=" * 60)
+                print("===== METADATA FILTER =====")
+                if not entity_filter:
+                    print("None")
+                else:
+                    def _parse(clause):
+                        if not isinstance(clause, dict):
+                            return
+                        for k, v in clause.items():
+                            if k == "$and" and isinstance(v, list):
+                                for item in v:
+                                    _parse(item)
+                            elif not k.startswith("$"):
+                                if isinstance(v, dict) and "$in" in v:
+                                    val_str = ", ".join(str(x) for x in v["$in"])
+                                    print(f"{k} = {val_str}")
+                                elif isinstance(v, dict) and "$eq" in v:
+                                    print(f"{k} = {v['$eq']}")
+                                else:
+                                    print(f"{k} = {v}")
+                    _parse(entity_filter)
+                print("=" * 60)
+
                 semantic_filter = self._combine_filters(
+                    entity_filter,
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )
@@ -1309,11 +1318,6 @@ class RetrievalPipeline:
                     semantic_list.append({
                         "id": match["id"],
                         "score": match["score"],
-                        # Fix RP2: cosine_score explicitly stored so the confidence
-                        # router in aura_chat.py can read it via c.get("cosine_score").
-                        # Previously dual-path candidates only had "score"/"fusion_score"
-                        # so the router always saw top_cosine=0.0 and relied entirely
-                        # on top_cross for routing decisions.
                         "cosine_score": match["score"],
                         "metadata": match["metadata"],
                         "semantic_score": match["score"]
