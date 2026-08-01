@@ -511,20 +511,40 @@ class Reranker:
             # — the newest one reliably wins instead of the tie effectively
             # being broken by noise.
             answerability_boost = 0.0
-            lookup_keywords = {
-                "who is", "convener", "convenor", "coordinator", "contact", "email",
-                "phone", "student id", "credits", "prerequisite", "fee", "duration", "office"
-            }
+            lookup_keywords = [
+                "who", "who is", "name", "convener", "convenor", "coordinator",
+                "faculty advisor", "faculty adviser", "advisor", "mentor", "chair",
+                "chairperson", "contact", "contact information", "email", "email id",
+                "phone", "phone number", "mobile", "mobile number", "student id",
+                "erp", "credits", "credit", "credit structure", "prerequisite",
+                "prerequisites", "fee", "fees", "fee structure", "duration",
+                "office", "policy", "syllabus"
+            ]
             structured_fields = {
                 "convener", "convenor", "coordinator", "faculty advisor", "faculty adviser",
-                "student id", "erp", "email", "phone", "mobile", "credits", "credit",
-                "prerequisite", "fee", "duration", "office", "contact"
+                "advisor", "mentor", "chair", "chairperson", "student id", "erp",
+                "email", "phone", "mobile", "contact", "credits", "credit",
+                "prerequisite", "fee", "fees", "duration", "office", "policy", "syllabus"
             }
             query_lower = query.lower()
-            if any(k in query_lower for k in lookup_keywords):
-                chunk_full_text = (metadata.get("text") or "").lower()
+            keyword_pattern = r"\b(" + "|".join(re.escape(k) for k in lookup_keywords) + r")\b"
+            if re.search(keyword_pattern, query_lower):
+                chunk_full_text = "\n".join(
+                    filter(
+                        None,
+                        [
+                            metadata.get("title"),
+                            metadata.get("category"),
+                            metadata.get("cluster"),
+                            metadata.get("h1"),
+                            metadata.get("h2"),
+                            metadata.get("h3"),
+                            metadata.get("text"),
+                        ]
+                    )
+                ).lower()
                 if any(field in chunk_full_text for field in structured_fields):
-                    answerability_boost = 0.05
+                    answerability_boost = 1.0
 
             final_score = (
                 (0.60 * norm_cross)
