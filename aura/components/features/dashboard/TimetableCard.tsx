@@ -41,6 +41,78 @@ function ClassCard({ slot }: { slot: TimetableSlot }) {
   )
 }
 
+function isElective(slot: TimetableSlot): boolean {
+  return (slot.course_type ?? "").toLowerCase().includes("elective")
+}
+
+// Deterministic pastel color per course_code, so the same subject always
+// lands on the same color every time the grid re-renders (mirrors the
+// source timetable spreadsheet, where each subject has its own fill color).
+const SUBJECT_PALETTE = [
+  { bg: "bg-orange-400/25", text: "text-orange-200", border: "border-orange-400/40" },
+  { bg: "bg-sky-400/25", text: "text-sky-200", border: "border-sky-400/40" },
+  { bg: "bg-emerald-400/25", text: "text-emerald-200", border: "border-emerald-400/40" },
+  { bg: "bg-neutral-400/25", text: "text-neutral-200", border: "border-neutral-400/40" },
+  { bg: "bg-fuchsia-400/25", text: "text-fuchsia-200", border: "border-fuchsia-400/40" },
+  { bg: "bg-amber-400/25", text: "text-amber-200", border: "border-amber-400/40" },
+  { bg: "bg-indigo-400/25", text: "text-indigo-200", border: "border-indigo-400/40" },
+  { bg: "bg-rose-400/25", text: "text-rose-200", border: "border-rose-400/40" },
+] as const
+
+function colorForSubject(key: string) {
+  let hash = 0
+  for (let i = 0; i < key.length; i++) hash = (hash * 31 + key.charCodeAt(i)) >>> 0
+  return SUBJECT_PALETTE[hash % SUBJECT_PALETTE.length]
+}
+
+/** One cell in the weekly grid: subject code, room, and a color tied to the subject. */
+function GridCell({ slot }: { slot: TimetableSlot }) {
+  const color = colorForSubject(slot.course_code || slot.course_name)
+  return (
+    <div
+      title={`${slot.course_name}${slot.faculty_name ? ` • ${slot.faculty_name}` : ""}`}
+      className={`flex h-full flex-col items-center justify-center gap-0.5 rounded-lg border px-1 py-2 text-center leading-tight ${color.bg} ${color.border}`}
+    >
+      <p className={`text-[10px] font-semibold ${color.text}`}>
+        {slot.course_code || slot.course_name}
+      </p>
+      {slot.room ? <p className="text-[9px] text-neutral-300/70">{slot.room}</p> : null}
+    </div>
+  )
+}
+
+/** A blank cell for a day/time with nothing scheduled. */
+function EmptyCell() {
+  return (
+    <div className="flex h-full items-center justify-center rounded-lg border border-dashed border-theme-gray-light/30 py-2">
+      <span className="text-[10px] text-neutral-600">–</span>
+    </div>
+  )
+}
+
+interface GridRow {
+  start: string
+  end: string
+  cells: Partial<Record<number, TimetableSlot>>
+}
+
+/** Buckets slots into one row per distinct start time, with a column per
+ * weekday — the same "time down the side, day across the top" shape as
+ * the source timetable spreadsheet, instead of one independent list per day. */
+function buildGridRows(slots: TimetableSlot[]): GridRow[] {
+  const byStart = new Map<string, GridRow>()
+  for (const slot of slots) {
+    let row = byStart.get(slot.start_time)
+    if (!row) {
+      row = { start: slot.start_time, end: slot.end_time, cells: {} }
+      byStart.set(slot.start_time, row)
+    }
+    row.cells[slot.day_of_week] = slot
+    if (slot.end_time > row.end) row.end = slot.end_time
+  }
+  return Array.from(byStart.values()).sort((a, b) => a.start.localeCompare(b.start))
+}
+
 /** Displays the live AURA timetable API in a weekly grid (desktop) or day-pills (mobile).
  *
  *  On first login, before the student has told AURA their section/electives, the backend
@@ -93,6 +165,11 @@ export function TimetableCard() {
   }
 
   const mobileEntries = getSlotsForDay(selectedDay)
+
+  const coreSlots = allSlots.filter((slot) => !isElective(slot))
+  const electiveSlots = allSlots.filter(isElective)
+  const coreRows = buildGridRows(coreSlots)
+  const electiveRows = buildGridRows(electiveSlots)
 
   return (
     <div className="rounded-2xl border border-theme-gray-light bg-theme-gray p-5">
@@ -169,26 +246,82 @@ export function TimetableCard() {
             )}
           </div>
 
-          {/* DESKTOP VIEW: Weekly Grid */}
-          <div className="hidden md:grid grid-cols-5 gap-3">
-            {DAY_NAMES.map((day, idx) => {
-              const daySlots = getSlotsForDay(idx)
-              const isToday = todayIndex === idx
-              return (
-                <div key={day} className="flex flex-col gap-2">
-                  <div className={`text-center py-1 text-xs font-semibold rounded-md ${isToday ? 'bg-theme-yellow/20 text-theme-yellow' : 'text-neutral-400'}`}>
-                    {day}
-                  </div>
-                  {daySlots.length === 0 ? (
-                    <div className="flex-1 rounded-xl border border-dashed border-theme-gray-light/30 flex items-center justify-center py-6">
-                      <span className="text-[10px] text-neutral-600">Free</span>
-                    </div>
-                  ) : (
-                    daySlots.map((slot) => <ClassCard key={slot.id} slot={slot} />)
-                  )}
-                </div>
-              )
-            })}
+          {/* DESKTOP VIEW: Weekly Grid — time down the side, day across the top,
+              same shape as the source timetable spreadsheet, with electives
+              broken out into their own band underneath. */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full table-fixed border-separate border-spacing-1.5">
+              <colgroup>
+                <col className="w-14" />
+                {DAY_NAMES.map((day) => (
+                  <col key={day} />
+                ))}
+              </colgroup>
+              <thead>
+                <tr>
+                  <th aria-hidden className="p-0" />
+                  {DAY_NAMES.map((day, idx) => (
+                    <th
+                      key={day}
+                      className={`rounded-md py-1 text-xs font-semibold ${todayIndex === idx ? "bg-theme-yellow/20 text-theme-yellow" : "text-neutral-400"
+                        }`}
+                    >
+                      {day}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {coreRows.length === 0 ? (
+                  <tr>
+                    <td colSpan={DAY_NAMES.length + 1} className="py-6 text-center text-[10px] text-neutral-600">
+                      No classes scheduled.
+                    </td>
+                  </tr>
+                ) : (
+                  coreRows.map((row) => (
+                    <tr key={row.start} className="h-16">
+                      <td className="align-middle text-[10px] font-medium leading-tight text-neutral-500">
+                        {row.start}
+                        <br />
+                        {row.end}
+                      </td>
+                      {DAY_NAMES.map((_, idx) => (
+                        <td key={idx} className="h-16 align-middle">
+                          {row.cells[idx] ? <GridCell slot={row.cells[idx]!} /> : <EmptyCell />}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                )}
+
+                {electiveRows.length > 0 && (
+                  <>
+                    <tr>
+                      <td colSpan={DAY_NAMES.length + 1} className="pt-2">
+                        <div className="rounded-md bg-theme-yellow/15 py-1 text-center text-[10px] font-semibold uppercase tracking-wide text-theme-yellow">
+                          Elective
+                        </div>
+                      </td>
+                    </tr>
+                    {electiveRows.map((row) => (
+                      <tr key={row.start} className="h-16">
+                        <td className="align-middle text-[10px] font-medium leading-tight text-neutral-500">
+                          {row.start}
+                          <br />
+                          {row.end}
+                        </td>
+                        {DAY_NAMES.map((_, idx) => (
+                          <td key={idx} className="h-16 align-middle">
+                            {row.cells[idx] ? <GridCell slot={row.cells[idx]!} /> : <EmptyCell />}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </>
+                )}
+              </tbody>
+            </table>
           </div>
         </>
       )}

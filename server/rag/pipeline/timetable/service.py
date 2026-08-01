@@ -11,6 +11,7 @@ arguments — a student can only ever change their own timetable.
 from __future__ import annotations
 
 import datetime
+import re
 from dataclasses import dataclass
 from typing import Optional
 
@@ -136,6 +137,80 @@ def _narrow_by_dept(rows: list[dict], dept: Optional[str]) -> list[dict]:
     return narrowed if narrowed else rows
 
 
+def _normalize_dept(value: Optional[str]) -> str:
+    """'ICT-CS' / 'ICT_CS' / 'ict cs' all normalize to 'ICTCS' so dept values
+    coming from different places (email-inferred 'ICTCS', curated doc labels
+    'ICT-CS', DB free text, etc.) compare equal."""
+    return re.sub(r"[^A-Z0-9]", "", (value or "").upper())
+
+
+# Course-code → branch(es) lookup, hand-verified against the curated
+# per-branch timetable docs in data/academics/timetable/*.md (produced by
+# cross-referencing the raw combined sheet against the registrar's course
+# structure). The source spreadsheet's "Core" batch blocks for 2nd/3rd year
+# don't tag each row with a branch at all — course codes are the only signal
+# — so this map exists to fill that gap for the specific codes that were
+# actually confirmed. Deliberately NOT exhaustive: a course_code with no
+# entry here is left unfiltered (shown to every branch), matching the
+# curated docs' own approach of flagging genuine ambiguity instead of
+# guessing. Extend this as more cohorts/years get verified.
+#
+# Year 3 / Sem 5 (see ICT_3rd_Yr_Sem5.md, ICT-CS_3rd_Yr_Sem5.md,
+# MNC_3rd_Yr_Sem5.md, EVD_3rd_Yr_Sem5.md):
+#   - IT304/IT314/CT303 are the shared ICT + ICT-CS core (ICT-CS only
+#     diverges starting Sem 4, and CS374 is its one added specialization
+#     course this semester).
+#   - MC311-314 are MnC-only; ED311/ED312 + HM116 are EVD-only. MC314 and
+#     HM116 are the SAME Principles of Economics class recorded under two
+#     different codes for MnC vs EVD — not two separate classes.
+# Year 2 / Sem 3 (see ICT_and_ICT-CS_2nd_Yr_Sem3.md, MNC_2nd_Yr_Sem3.md,
+# EVD_2nd_Yr_Sem3.md): ICT and ICT-CS are still on an identical curriculum
+# this semester, so both map to the same course codes (that's correct, not
+# a mixing bug). HM216 is intentionally left OUT of this map — it's a large
+# shared lecture taken by all four branches, just split into two
+# room-capacity sections, so it should stay visible to everyone.
+COURSE_BRANCH_MAP: dict[str, set[str]] = {
+    # Year 3 / Sem 5
+    "IT304": {"ICT", "ICTCS"},
+    "IT314": {"ICT", "ICTCS"},
+    "CT303": {"ICT", "ICTCS"},
+    "CS374": {"ICTCS"},
+    "MC311": {"MNC"}, "MC312": {"MNC"}, "MC313": {"MNC"}, "MC314": {"MNC"},
+    "ED311": {"EVD"}, "ED312": {"EVD"}, "HM116": {"EVD"},
+    # Year 2 / Sem 3
+    "SC223": {"ICT", "ICTCS"}, "IT227": {"ICT", "ICTCS"},
+    "CT204": {"ICT", "ICTCS"}, "IT216": {"ICT", "ICTCS"},
+    "MC211": {"MNC"}, "MC212": {"MNC"}, "MC213": {"MNC"},
+    "MC214": {"MNC"}, "MC216": {"MNC"},
+    "ED211": {"EVD"}, "ED212": {"EVD"}, "ED213": {"EVD"}, "ED214": {"EVD"},
+}
+
+
+def _narrow_by_course_branch_map(rows: list[dict], dept: Optional[str]) -> list[dict]:
+    """Drops rows whose course_code is confirmed (via COURSE_BRANCH_MAP) to
+    belong to a *different* branch than the student's. Unknown course codes
+    and unknown student dept both pass through unfiltered — this only acts
+    where we have a verified answer, never a guess."""
+    dept_norm = _normalize_dept(dept)
+    if not dept_norm:
+        return rows
+    out = []
+    for row in rows:
+        branches = COURSE_BRANCH_MAP.get((row.get("course_code") or "").strip().upper())
+        if branches and dept_norm not in branches:
+            continue
+        out.append(row)
+    return out
+
+
+def _exclude_electives(rows: list[dict]) -> list[dict]:
+    """Electives must only ever enter the timetable through the explicit
+    selection step below (get_all_elective_rows + selected_ids) — never
+    through the general per-cohort query. Without this, an elective master
+    row that happens to share the student's (year, sem, sec) — including
+    the 'sec is blank' rows the common-fallback query matches — leaks into
+    every student's timetable regardless of whether they've picked it."""
+    return [row for row in rows if not _is_elective(row.get("course_type", ""))]
 def _require_cohort(identity) -> tuple[int, int, str]:
     role = _field(identity, "role")
     if role != "student":
@@ -336,10 +411,16 @@ def get_effective_timetable(identity) -> dict:
                ORDER BY day_of_week, start_time""",
             (year, sem),
         )
-        master_rows = {row["id"]: row for row in _narrow_by_dept(common_rows, dept)}
+        common_rows = _narrow_by_dept(common_rows, dept)
+        common_rows = _narrow_by_course_branch_map(common_rows, dept)
+        common_rows = _exclude_electives(common_rows)
+        master_rows = {row["id"]: row for row in common_rows}
         is_common = True
     else:
-        master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec, dept)}
+        rows = get_master_rows(year, sem, sec, dept)
+        rows = _narrow_by_course_branch_map(rows, dept)
+        rows = _exclude_electives(rows)
+        master_rows = {row["id"]: row for row in rows}
         
     overrides = get_overrides(erp_id) if erp_id else []
 
@@ -816,4 +897,3 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
         "message": f"Successfully updated your cohort to Year {new_year}, Semester {new_sem}, Section {new_sec}.",
         "timetable": get_effective_timetable(identity),
     }
-

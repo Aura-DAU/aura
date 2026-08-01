@@ -14,6 +14,9 @@ export interface TimetableSlot {
   room?: string | null
   faculty_name?: string | null
   is_custom: boolean
+  // Used to split the grid into the core weekly table vs. the ELECTIVE
+  // band underneath it (see service._is_elective on the backend).
+  course_type?: string | null
 }
 
 interface TimetableResponse {

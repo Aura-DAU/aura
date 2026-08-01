@@ -210,6 +210,19 @@ async def _start_timetable_scheduler():
     from pipeline.timetable.notifier import start_scheduler
     start_scheduler()
 
+    # Start the Google Calendar nightly auto-sync + retry worker.
+    # Idempotent — safe to call even if GOOGLE_CALENDAR_VAULT_KEY is not yet
+    # configured (e.g. in dev without calendar integration).
+    try:
+        from pipeline.google_calendar.scheduler import start_scheduler as gcal_start
+        gcal_start()
+    except Exception as _gcal_exc:
+        import logging as _log
+        _log.getLogger("aura.gcal.scheduler").warning(
+            "Google Calendar scheduler could not start (calendar integration may not be configured): %s",
+            _gcal_exc,
+        )
+
 
 @app.on_event("shutdown")
 async def _stop_timetable_scheduler():
