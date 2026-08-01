@@ -301,7 +301,7 @@ class RetrievalPipeline:
         plan
     ):
         """Build a metadata filter dictionary from planner entities when entity_confidence >= 0.80."""
-        entity_confidence = plan.get("entity_confidence", 0.0) if isinstance(plan, dict) else 0.0
+        entity_confidence = plan.get("entity_confidence", 1.0) if isinstance(plan, dict) else 1.0
         if entity_confidence < 0.80:
             return None
 
