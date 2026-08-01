@@ -999,3 +999,179 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
         "message": f"Successfully updated your cohort to Year {new_year}, Semester {new_sem}, Section {new_sec}.",
         "timetable": get_effective_timetable(identity),
     }
+
+
+# ── Derived / time-aware queries ──────────────────────────────────────────────
+
+def get_today_schedule(identity) -> dict:
+    """
+    Returns today's classes from the student's effective timetable, each
+    annotated with a status: 'upcoming', 'in_progress', or 'done'.
+    Sorted by start_time ascending.
+    """
+    now = datetime.datetime.now()
+    today_dow = now.weekday()  # 0=Monday … 6=Sunday
+    today_str = DAY_NAMES[today_dow]
+    now_mins = now.hour * 60 + now.minute
+
+    effective = get_effective_timetable(identity)
+    all_slots = effective.get("timetable", [])
+
+    today_slots = [s for s in all_slots if s.get("day_of_week") == today_dow]
+    today_slots.sort(key=lambda s: _to_minutes(_fmt_time(s.get("start_time", "00:00"))))
+
+    annotated = []
+    for slot in today_slots:
+        start_mins = _to_minutes(_fmt_time(slot.get("start_time", "00:00")))
+        end_mins   = _to_minutes(_fmt_time(slot.get("end_time",   "00:00")))
+        if now_mins < start_mins:
+            status = "upcoming"
+            mins_until = start_mins - now_mins
+        elif now_mins < end_mins:
+            status = "in_progress"
+            mins_until = 0
+        else:
+            status = "done"
+            mins_until = None
+        annotated.append({**slot, "status": status, "mins_until": mins_until})
+
+    return {
+        "date": now.strftime("%A, %d %B %Y"),
+        "day": today_str,
+        "slots": annotated,
+        "total": len(annotated),
+        "upcoming_count": sum(1 for s in annotated if s["status"] in ("upcoming", "in_progress")),
+    }
+
+
+def get_next_class(identity) -> dict:
+    """
+    Returns the single next upcoming or in-progress class for today.
+    If no more classes today, returns the first class of the next weekday
+    that has classes. This is optimised for the 'what's my next class?' quick action.
+    """
+    now = datetime.datetime.now()
+    today_dow = now.weekday()
+    now_mins = now.hour * 60 + now.minute
+
+    effective = get_effective_timetable(identity)
+    all_slots = effective.get("timetable", [])
+
+    # Try today first
+    today_remaining = [
+        s for s in all_slots
+        if s.get("day_of_week") == today_dow
+        and _to_minutes(_fmt_time(s.get("end_time", "00:00"))) > now_mins
+    ]
+    today_remaining.sort(key=lambda s: _to_minutes(_fmt_time(s.get("start_time", "00:00"))))
+
+    if today_remaining:
+        slot = today_remaining[0]
+        start_mins = _to_minutes(_fmt_time(slot.get("start_time", "00:00")))
+        end_mins   = _to_minutes(_fmt_time(slot.get("end_time",   "00:00")))
+        if now_mins >= start_mins:
+            status = "in_progress"
+            mins_until = 0
+            mins_remaining = end_mins - now_mins
+        else:
+            status = "upcoming"
+            mins_until = start_mins - now_mins
+            mins_remaining = None
+        return {
+            "found": True,
+            "day": DAY_NAMES[today_dow],
+            "is_today": True,
+            "status": status,
+            "mins_until": mins_until,
+            "mins_remaining": mins_remaining,
+            **slot,
+        }
+
+    # Look ahead up to 5 weekdays
+    for offset in range(1, 6):
+        next_dow = (today_dow + offset) % 7
+        next_slots = [s for s in all_slots if s.get("day_of_week") == next_dow]
+        next_slots.sort(key=lambda s: _to_minutes(_fmt_time(s.get("start_time", "00:00"))))
+        if next_slots:
+            return {
+                "found": True,
+                "day": DAY_NAMES[next_dow],
+                "is_today": False,
+                "status": "upcoming",
+                "mins_until": None,
+                "mins_remaining": None,
+                **next_slots[0],
+            }
+
+    return {"found": False, "message": "No upcoming classes found in your timetable this week."}
+
+
+def get_upcoming_exams(identity, limit: int = 5) -> dict:
+    """
+    Returns the student's upcoming exam schedule from the exam_schedule table,
+    filtered to their cohort (year, sem, branch). If the exam_schedule table
+    does not yet exist, returns a graceful empty response.
+    """
+    role = _field(identity, "role")
+    if role not in ("student", "faculty"):
+        raise TimetableForbiddenError("Only students and faculty can view exam schedules.")
+
+    try:
+        year, sem, _ = _require_cohort(identity)
+    except TimetableError:
+        year, sem = None, None
+
+    dept = _field(identity, "dept") or _field(identity, "branch")
+
+    try:
+        params: list = []
+        where_clauses = ["exam_date >= CURRENT_DATE"]
+        if year is not None:
+            where_clauses.append("(year IS NULL OR year = %s)")
+            params.append(year)
+        if sem is not None:
+            where_clauses.append("(sem IS NULL OR sem = %s)")
+            params.append(sem)
+        where_sql = " AND ".join(where_clauses)
+        params.append(limit)
+
+        rows = db_conn.query(
+            f"""
+            SELECT
+                id, course_code, course_name, exam_date,
+                start_time, end_time, venue, year, sem, branch, program
+            FROM exam_schedule
+            WHERE {where_sql}
+            ORDER BY exam_date, start_time
+            LIMIT %s
+            """,
+            tuple(params),
+        )
+    except Exception:
+        # Table may not exist yet — return graceful empty
+        return {
+            "exams": [],
+            "total": 0,
+            "note": "Exam schedule is not yet available. Check back closer to exam time or visit the ERP portal.",
+        }
+
+    exams = []
+    for r in (rows or []):
+        exam_date = r["exam_date"]
+        days_away = (exam_date - datetime.date.today()).days if exam_date else None
+        exams.append({
+            "course_code":  r.get("course_code"),
+            "course_name":  r.get("course_name"),
+            "date":         exam_date.strftime("%A, %d %B %Y") if exam_date else None,
+            "start_time":   _fmt_time(r.get("start_time")),
+            "end_time":     _fmt_time(r.get("end_time")),
+            "venue":        r.get("venue"),
+            "days_away":    days_away,
+        })
+
+    next_exam = exams[0] if exams else None
+    return {
+        "exams": exams,
+        "total": len(exams),
+        "next_exam": next_exam,
+    }

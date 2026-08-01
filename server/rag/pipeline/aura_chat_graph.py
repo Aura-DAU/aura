@@ -58,6 +58,7 @@ from pipeline.aura_chat import (
 from pipeline.ecampus.intent_router import PersonalDataIntentRouter
 from pipeline.ecampus.orchestrator import EcampusOrchestrator
 from api.request_context import RequestContext
+from personal_query_classifier import TIMETABLE_PAT as _TIMETABLE_PAT, TIMETABLE_MODIFY_PAT as _TIMETABLE_MODIFY_PAT
 
 
 class SimpleIdentity:
@@ -75,6 +76,7 @@ class SimpleIdentity:
             self.branch = d.get("branch") or self.dept
             self.current_year = d.get("current_year") or d.get("currentYear") or 3
             self.current_sem = d.get("current_sem") or d.get("currentSem") or 5
+            self.current_sec = d.get("current_sec") or d.get("currentSec")
         else:
             self.erp_id = getattr(d, "erp_id", None)
             self.role = getattr(d, "role", "student")
@@ -86,6 +88,7 @@ class SimpleIdentity:
             self.branch = getattr(d, "branch", None) or self.dept
             self.current_year = getattr(d, "current_year", None)
             self.current_sem = getattr(d, "current_sem", None)
+            self.current_sec = getattr(d, "current_sec", None)
 
 
 class AuraState(TypedDict, total=False):
@@ -150,6 +153,7 @@ class AuraChatGraph:
         graph.add_node("classify", self._n_classify)
         graph.add_node("guest_gate", self._n_guest_gate)
         graph.add_node("strict_guardrail", self._n_strict_guardrail)
+        graph.add_node("personal_tools", self._n_personal_tools)  # timetable tool orchestration
         graph.add_node("personal_data", self._n_personal_data)
         graph.add_node("public_rag", self._n_public_rag)
         graph.add_node("generate", self._n_generate)
@@ -172,7 +176,8 @@ class AuraChatGraph:
         graph.add_conditional_edges("community_tools", route_or("classify"))
         graph.add_conditional_edges("classify", route_or("guest_gate"))
         graph.add_conditional_edges("guest_gate", route_or("strict_guardrail"))
-        graph.add_conditional_edges("strict_guardrail", route_or("personal_data"))
+        graph.add_conditional_edges("strict_guardrail", route_or("personal_tools"))
+        graph.add_conditional_edges("personal_tools", route_or("personal_data"))
         graph.add_conditional_edges("personal_data", route_or("public_rag"))
         graph.add_conditional_edges("public_rag", route_or("generate"))
         graph.add_edge("generate", END)
@@ -401,6 +406,83 @@ class AuraChatGraph:
                     "sources": [],
                     "is_personal_data": False,
                 }
+        return state
+
+    def _n_personal_tools(self, state: AuraState) -> AuraState:
+        """
+        Intercepts personal timetable queries BEFORE the static ERP fetch.
+        Calls EcampusOrchestrator with the full personal tool set (including
+        all timetable read/write tools). If the orchestrator returns a
+        non-empty answer, short-circuits and skips _n_personal_data.
+        Falls through transparently for non-timetable personal queries
+        (CGPA, attendance, grades) so they continue to the static ERP fetch.
+        """
+        query_type = state.get("query_type")
+        identity = state.get("identity")
+
+        # Only active for personal queries on authenticated non-guest users.
+        if query_type not in ("PERSONAL", "MIXED") or not identity:
+            return state
+
+        # Guard: only activate for timetable-related queries so CGPA/grades
+        # queries still fall through to the ERP static fetch that answers them.
+        query = state["query"]
+        classification = state.get("classification") or {}
+        is_timetable = (
+            classification.get("intent") == "TIMETABLE"
+            or "timetable" in (classification.get("erp_fields") or [])
+            or _TIMETABLE_PAT.search(query)
+            or _TIMETABLE_MODIFY_PAT.search(query)
+        )
+        if not is_timetable:
+            return state
+
+        role = getattr(identity, "role", None)
+        tool_role = role if role in ("student", "faculty") else None
+        if not tool_role:
+            return state
+
+        # Build identity dict with full cohort fields — timetable service
+        # _require_cohort() needs current_year, current_sem, current_sec.
+        identity_payload = {
+            "erp_id":       getattr(identity, "erp_id", None),
+            "role":         tool_role,
+            "dept":         getattr(identity, "dept", None),
+            "current_year": getattr(identity, "current_year", None),
+            "current_sem":  getattr(identity, "current_sem", None),
+            "current_sec":  getattr(identity, "current_sec", None),
+        }
+
+        try:
+            with track_segment("personal_tools_time"):
+                result = self.ecampus_orchestrator.run(
+                    query=query,
+                    identity=identity_payload,
+                    history=state.get("history") or [],
+                    request_context=state.get("request_context"),
+                    tool_scope="personal",
+                )
+        except Exception as exc:
+            # Orchestrator failure must never kill the request — fall through
+            # to the static ERP fetch path which has its own answer strategy.
+            log_soft_failure(
+                "AURA-GRAPH-004",
+                "personal_tools_orchestrator",
+                exc=exc,
+                degraded_to="personal_data_static",
+            )
+            return state
+
+        answer = (result.get("answer") or "").strip()
+        if not answer:
+            # Orchestrator made no tool call or returned empty — fall through.
+            return state
+
+        state["result"] = {
+            "answer": answer,
+            "sources": result.get("sources") or [],
+            "is_personal_data": True,
+        }
         return state
 
     def _n_personal_data(self, state: AuraState) -> AuraState:

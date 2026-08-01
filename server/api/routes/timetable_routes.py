@@ -357,3 +357,52 @@ def get_cohort_options(identity: Identity = Depends(require_identity)):
         
     return {"options": options}
 
+
+# ── Derived / time-aware endpoints ────────────────────────────────────────────
+
+@router.get("/me/today")
+def get_my_today_schedule(identity: Identity = Depends(require_identity)):
+    """
+    Today's classes from the student's effective timetable, each annotated
+    with status: 'upcoming' | 'in_progress' | 'done'. Sorted by start_time.
+    Used by the dashboard's TodayClassCard widget and the chat quick action
+    'What's my next class today?'.
+    """
+    if identity.role != "student":
+        raise HTTPException(status_code=403, detail="Only students have a personal timetable.")
+    try:
+        return service.get_today_schedule(identity)
+    except TimetableError as e:
+        raise HTTPException(status_code=e.status_code, detail=str(e))
+
+
+@router.get("/me/next-class")
+def get_my_next_class(identity: Identity = Depends(require_identity)):
+    """
+    The single next upcoming or in-progress class. If no classes remain today
+    looks ahead to the next weekday that has classes.
+    """
+    if identity.role != "student":
+        raise HTTPException(status_code=403, detail="Only students have a personal timetable.")
+    try:
+        return service.get_next_class(identity)
+    except TimetableError as e:
+        raise HTTPException(status_code=e.status_code, detail=str(e))
+
+
+@router.get("/me/exams")
+def get_my_upcoming_exams(
+    limit: int = Query(default=5, ge=1, le=30),
+    identity: Identity = Depends(require_identity),
+):
+    """
+    Upcoming exam schedule filtered to the student's cohort (year, sem, branch).
+    If the exam_schedule table has not been populated yet, returns a graceful
+    empty payload with a descriptive note rather than an error.
+    """
+    if identity.role not in ("student", "faculty"):
+        raise HTTPException(status_code=403, detail="Only students and faculty can view exam schedules.")
+    try:
+        return service.get_upcoming_exams(identity, limit=limit)
+    except TimetableError as e:
+        raise HTTPException(status_code=e.status_code, detail=str(e))

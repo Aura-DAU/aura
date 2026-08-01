@@ -58,31 +58,60 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
     }
   }
 
+  // Track whether cohort was already persisted so a retry of the electives
+  // step doesn't re-call saveCohort and double-write (or fail) unnecessarily.
+  const [cohortSaved, setCohortSaved] = useState(false)
+
   const handleSave = async (electives: string[]) => {
     if (!selectedYear || !selectedSection || !selectedSem) return
     setStep("saving")
     setError(null)
-    try {
-      await saveCohort({
-        program: "BTech",
-        year: selectedYear,
-        semester: selectedSem,
-        section: selectedSection,
-      })
-      // Save elective selections if any
-      if (electives.length > 0) {
-        await fetch("/api/timetable/electives", {
+
+    // ── Step A: save cohort (skip if already persisted from a previous attempt) ──
+    if (!cohortSaved) {
+      try {
+        await saveCohort({
+          program: "BTech",
+          year: selectedYear,
+          semester: selectedSem,
+          section: selectedSection,
+        })
+        setCohortSaved(true)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to save your year/section. Please try again.")
+        setStep("section")  // go back to section step, not electives
+        return
+      }
+    }
+
+    // ── Step B: save elective selections (best-effort; retry-safe) ──────────
+    if (electives.length > 0) {
+      try {
+        const res = await fetch("/api/timetable/electives", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ course_codes: electives }),
         })
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}))
+          throw new Error((body as { error?: string }).error ?? `Server error ${res.status}`)
+        }
+      } catch (err) {
+        // Cohort is already saved — surface a targeted error and let the user
+        // retry just the electives step without losing their year/section choice.
+        setError(
+          `Your year and section were saved, but elective selections couldn't be saved: ${
+            err instanceof Error ? err.message : "please try again."
+          }`
+        )
+        setStep("electives")
+        return
       }
-      onComplete()
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to save. Please try again.")
-      setStep("electives")
     }
+
+    onComplete()
   }
+
 
   const toggleElective = (code: string) => {
     setSelectedElectives((prev) =>

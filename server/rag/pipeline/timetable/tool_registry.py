@@ -180,6 +180,30 @@ def _handle_set_my_cohort(identity, **kwargs):
         return {"error": str(e)}
 
 
+# -- Derived / time-aware tool handlers ----------------------------------------
+
+def _handle_get_next_class(identity, **kwargs):
+    try:
+        return service.get_next_class(identity)
+    except service.TimetableError as e:
+        return {"error": str(e)}
+
+
+def _handle_get_today_schedule(identity, **kwargs):
+    try:
+        return service.get_today_schedule(identity)
+    except service.TimetableError as e:
+        return {"error": str(e)}
+
+
+def _handle_get_upcoming_exams(identity, **kwargs):
+    try:
+        limit = int(kwargs.get("limit", 5))
+        return service.get_upcoming_exams(identity, limit=limit)
+    except service.TimetableError as e:
+        return {"error": str(e)}
+
+
 # -- Tool definitions ----------------------------------------------------------
 
 SET_MY_COHORT = Tool(
@@ -378,6 +402,50 @@ SAVE_MY_ELECTIVE_SELECTIONS = Tool(
     category="write", allowed_roles=["student"], handler=_handle_save_my_elective_selections,
 )
 
+GET_NEXT_CLASS = Tool(
+    name="get_next_class",
+    description=(
+        "Get the single next upcoming or in-progress class for the requester today. "
+        "If no more classes remain today, returns the first class on the next weekday "
+        "that has classes. Use this for questions like 'what's my next class?', "
+        "'when is my next lecture?', 'what do I have now?'."
+    ),
+    parameters={"type": "object", "properties": {}},
+    category="derived", allowed_roles=["student"], handler=_handle_get_next_class,
+)
+
+GET_TODAY_SCHEDULE = Tool(
+    name="get_today_schedule",
+    description=(
+        "Get all of today's classes for the requester, each annotated with a status: "
+        "'upcoming', 'in_progress', or 'done'. Sorted by start time. Use this for "
+        "questions like 'what classes do I have today?', 'show me today's schedule', "
+        "'what's on for today?'. For just the next single class, use get_next_class instead."
+    ),
+    parameters={"type": "object", "properties": {}},
+    category="derived", allowed_roles=["student"], handler=_handle_get_today_schedule,
+)
+
+GET_UPCOMING_EXAMS = Tool(
+    name="get_upcoming_exams",
+    description=(
+        "Get the student's upcoming exam schedule — dates, times, venues, and course names — "
+        "filtered to their cohort. Use this for questions like 'when is my next exam?', "
+        "'show me the exam schedule', 'when is the CS301 exam?'. Returns up to 5 exams "
+        "by default. If no exam schedule has been loaded yet, returns a helpful message."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "limit": {
+                "type": "integer",
+                "description": "Maximum number of upcoming exams to return. Defaults to 5.",
+            },
+        },
+    },
+    category="derived", allowed_roles=["student", "faculty"], handler=_handle_get_upcoming_exams,
+)
+
 
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
@@ -385,6 +453,7 @@ TOOL_REGISTRY: dict[str, Tool] = {
         UNDO_TIMETABLE_CHANGE, SYNC_TIMETABLE_TO_GOOGLE_CALENDAR,
         GET_FACULTY_TIMETABLE, GET_AVAILABLE_ELECTIVES, SAVE_MY_ELECTIVE_SELECTIONS,
         SET_MY_COHORT,
+        GET_NEXT_CLASS, GET_TODAY_SCHEDULE, GET_UPCOMING_EXAMS,
     ]
 }
 
@@ -397,3 +466,4 @@ PUBLIC_TOOL_NAMES: frozenset[str] = frozenset({"get_cohort_timetable"})
 
 def tools_for_role(role: str) -> list[Tool]:
     return [t for t in TOOL_REGISTRY.values() if role in t.allowed_roles]
+

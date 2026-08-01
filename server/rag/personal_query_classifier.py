@@ -96,7 +96,29 @@ PERSONAL_KEYWORDS_PAT = re.compile(
 )
 
 # Multi-intent keyword maps
-TIMETABLE_PAT = re.compile(r"\b(?:timetable|schedule|class(?:es)?\s+today|class(?:es)?\s+tomorrow)\b", re.IGNORECASE)
+TIMETABLE_PAT = re.compile(
+    r"\b(?:"
+    r"timetable|my\s+schedule|my\s+class(?:es)?|"
+    r"next\s+class|today(?:'s|\s+class(?:es)?)|tomorrow(?:'s|\s+class(?:es)?)|"
+    r"weekly\s+(?:timetable|schedule)|class(?:es)?\s+(?:today|tomorrow|this\s+week)|"
+    r"my\s+(?:lab|lecture|tutorial)|which\s+electives?|my\s+elective(?:\s+selection)?s?|"
+    r"exam\s+schedule|next\s+exam"
+    r")\b",
+    re.IGNORECASE
+)
+
+# Matches timetable modification requests that start with an action verb
+# (not captured by the "what's my X" PERSONAL_KEYWORDS_PAT pattern).
+TIMETABLE_MODIFY_PAT = re.compile(
+    r"\b(?:"
+    r"(?:move|change|reschedule|shift|update|edit|modify)\s+my\s+(?:class|lab|lecture|tutorial|timetable|schedule)|"
+    r"(?:add|create|schedule|put)\s+(?:a\s+|an\s+)?(?:new\s+)?(?:class|lab|lecture|tutorial|session)|"
+    r"(?:remove|delete|cancel|hide|drop)\s+(?:a\s+|my\s+)?(?:class|lab|lecture|tutorial)|"
+    r"undo\s+(?:my\s+last\s+)?(?:timetable\s+)?change"
+    r")\b",
+    re.IGNORECASE
+)
+
 ATTENDANCE_PAT = re.compile(r"\b(?:attendance|present|absent)\b", re.IGNORECASE)
 CALENDAR_PAT = re.compile(r"\b(?:calendar|academic\s+calendar|holiday|vacation|exam\s+dates?)\b", re.IGNORECASE)
 ACADEMIC_PAT = re.compile(r"\b(?:curriculum|syllabus|credits?|course|subject|elective|prerequisite|cs\d{3}|ict|btech|mtech)\b", re.IGNORECASE)
@@ -129,7 +151,7 @@ class PersonalQueryClassifier:
             q_lower = query.lower()
             intent = "PROFILE"
             if TIMETABLE_PAT.search(q_lower):
-                fields.append("courses")
+                fields = ["timetable"]  # timetable tool handles this; profile not needed
                 intent = "TIMETABLE"
             if ATTENDANCE_PAT.search(q_lower):
                 fields.append("attendance")
@@ -138,6 +160,12 @@ class PersonalQueryClassifier:
                 fields.append("cgpa")
                 intent = "PROFILE"
             return {"type": "PERSONAL", "target": "self", "erp_fields": fields, "intent": intent}
+
+        # Fast-path for timetable modification queries (move/add/remove/undo a class)
+        # These don't match PERSONAL_KEYWORDS_PAT (no "my timetable/schedule" prefix)
+        # but are clearly personal + timetable-scoped action requests.
+        if TIMETABLE_MODIFY_PAT.search(query) or TIMETABLE_PAT.search(query):
+            return {"type": "PERSONAL", "target": "self", "erp_fields": ["timetable"], "intent": "TIMETABLE"}
 
         # Multi-intent pre-categorization
         q_lower = query.lower()
