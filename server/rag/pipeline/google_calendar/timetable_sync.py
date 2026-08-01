@@ -1,9 +1,11 @@
 """
 timetable_sync.py — glue between a student's AURA timetable and their
 Google Calendar. Shared by:
-  - api/routes/calendar_routes.py  (POST/DELETE /calendar/timetable/sync)
-  - pipeline/timetable/tool_registry.py (sync_timetable_to_google_calendar
-    agent tool, so a student can trigger this conversationally)
+  - api/routes/calendar_routes.py  (POST/DELETE /calendar/timetable/sync — the
+    manual Settings > Calendar flow)
+  - mcp_servers/gcal_server.py (the Google Calendar MCP server, reached by the
+    agent orchestrator via pipeline/timetable/calendar_mcp_client.py, so a
+    student can trigger this conversationally)
 
 Kept out of both callers so there's exactly one place that decides "is this
 student allowed to have events written, and what happens if the calendar
