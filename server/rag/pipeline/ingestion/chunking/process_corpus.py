@@ -50,6 +50,7 @@ INGESTION_METRICS = {
     "h4_splits": 0,
     "table_row_splits": 0,
     "faq_splits": 0,
+    "bold_entity_splits": 0,
     "course_chunks": 0,
     "club_chunks": 0,
     "committee_chunks": 0,
@@ -76,6 +77,7 @@ def print_ingestion_quality_report():
     print("ENTITY SPLIT METRICS:")
     print(f"  • H3 Entity Splits   : {m['h3_splits']}")
     print(f"  • H4 Entity Splits   : {m['h4_splits']}")
+    print(f"  • Bold Entity Splits : {m['bold_entity_splits']}")
     print(f"  • Table Row Splits   : {m['table_row_splits']}")
     print(f"  • FAQ Pair Splits    : {m['faq_splits']}")
     print("-" * 65)
@@ -284,10 +286,21 @@ def convert_tables_to_sentences(text):
     return "\n".join(processed_lines)
 
 
+# Non-entity structural H4 headers that should NOT cause H4 entity splits
+STRUCTURAL_H4_TITLES = {
+    "description", "overview", "objectives", "events", "activities",
+    "rules", "guidelines", "eligibility", "requirements", "details",
+    "background", "about", "scope", "responsibilities", "members", "contact",
+    "procedure", "process", "note", "notes", "summary", "fees", "structure"
+}
+
+
 def _split_content_by_subheadings(content):
     """
-    H3 / H4 Rule: Splits section content at sub-heading boundaries (### or ####).
-    Returns list of dicts: [{"h3": title, "h4": title, "content": text}]
+    H3 / H4 Rule Tuning:
+    - Always splits by H3 (###) by default.
+    - Splits by H4 (####) ONLY when H4 represents an independent semantic entity
+      (e.g., a specific named entity or person), NOT for structural fields like Description/Objectives.
     """
     lines = content.split("\n")
     sub_entities = []
@@ -299,23 +312,38 @@ def _split_content_by_subheadings(content):
     for line in lines:
         match = re.match(r"^(#{3,4})\s+(.+)$", line.strip())
         if match:
-            if current_lines or current_h3 or current_h4:
-                sub_entities.append({
-                    "h3": current_h3,
-                    "h4": current_h4,
-                    "content": "\n".join(current_lines).strip()
-                })
-                current_lines = []
-            
             level = len(match.group(1))
             title = match.group(2).strip()
-            if level == 3:
-                current_h3 = title
-                current_h4 = None
-                INGESTION_METRICS["h3_splits"] += 1
+            title_lower = title.lower()
+
+            # Check if this H4 is a non-entity structural field
+            is_structural_h4 = (
+                level == 4 and (
+                    title_lower in STRUCTURAL_H4_TITLES or
+                    any(title_lower.startswith(s) for s in ["description", "overview", "objective", "event", "rule", "note"])
+                )
+            )
+
+            # Split only on H3, or on entity-level H4
+            if level == 3 or (level == 4 and not is_structural_h4):
+                if current_lines or current_h3 or current_h4:
+                    sub_entities.append({
+                        "h3": current_h3,
+                        "h4": current_h4,
+                        "content": "\n".join(current_lines).strip()
+                    })
+                    current_lines = []
+                
+                if level == 3:
+                    current_h3 = title
+                    current_h4 = None
+                    INGESTION_METRICS["h3_splits"] += 1
+                else:
+                    current_h4 = title
+                    INGESTION_METRICS["h4_splits"] += 1
             else:
-                current_h4 = title
-                INGESTION_METRICS["h4_splits"] += 1
+                # Treat structural H4 as body text under current H3
+                current_lines.append(f"#### {title}")
         else:
             current_lines.append(line)
             
@@ -329,10 +357,42 @@ def _split_content_by_subheadings(content):
     return sub_entities if sub_entities else [{"h3": None, "h4": None, "content": content}]
 
 
+def _is_directory_table_by_headers(sub_content, relative_path="", title=""):
+    """
+    Structure-Based Directory Table Detection:
+    Inspects table header columns to detect directory/roster tables (Clubs, Committees, Contacts, Faculty, Staff)
+    rather than relying solely on filenames.
+    """
+    lines = [l.strip() for l in sub_content.split("\n") if l.strip().startswith("|")]
+    if not lines:
+        return False
+
+    header_line = lines[0]
+    headers = [h.strip().lower() for h in header_line.split("|")[1:-1]]
+    header_str = " ".join(headers)
+
+    # Exclude curriculum / course list tables
+    if any(k in header_str for k in ["l-t-p-c", "credits", "semester", "course code"]):
+        return False
+
+    dir_header_keywords = [
+        "name", "designation", "email", "phone", "contact", "convenor", "convener",
+        "mentor", "advisor", "club", "committee", "office", "post", "position",
+        "role", "room", "member", "scholarship", "head", "chair", "deputy"
+    ]
+
+    matches = sum(1 for k in dir_header_keywords if any(k in h for h in headers))
+    if matches >= 1:
+        return True
+
+    path_title = (relative_path + " " + title).lower()
+    return any(k in path_title for k in ["club", "committee", "contact", "faculty", "staff", "desk", "directory"])
+
+
 def _split_directory_table_rows(content, headers_context):
     """
-    Table Row Rule: Splits tables representing directories (clubs, committees, contacts, faculty)
-    into individual entity items so 1 row = 1 semantic entity chunk.
+    Table Row Rule: Converts table rows of directory tables into individual entity items
+    so 1 row = 1 semantic entity chunk.
     """
     lines = content.split("\n")
     entities = []
@@ -370,9 +430,9 @@ def _split_directory_table_rows(content, headers_context):
 
 def _split_faqs(content):
     """
-    FAQ Rule: Splits Q&A pairs into standalone entity blocks so 1 Q&A pair = 1 chunk.
+    Enhanced FAQ Detection: Splits Q&A pairs (supporting Q:, Question:, ### Question, **Q:**, **Question:**).
     """
-    pattern = r"(?:^|\n)(?:\*\*|\#\#\#|\#\#)?\s*(?:Q|Question)\s*\d*[\.\:]\s*(.*?)(?=\n(?:\*\*|\#\#\#|\#\#)?\s*(?:Q|Question)\s*\d*[\.\:]|\Z)"
+    pattern = r"(?:^|\n)(?:\*{1,2}|\#{1,4})?\s*(?:Q|Question)\s*\d*[\.\:]\s*(.*?)(?=\n(?:\*{1,2}|\#{1,4})?\s*(?:Q|Question)\s*\d*[\.\:]|\Z)"
     matches = re.findall(pattern, content, re.DOTALL | re.IGNORECASE)
     if len(matches) > 1:
         INGESTION_METRICS["faq_splits"] += len(matches)
@@ -380,11 +440,33 @@ def _split_faqs(content):
     return [content]
 
 
+def _split_bold_entity_blocks(content):
+    """
+    Semantic Entity Boundary Detection:
+    Splits sections without H3 into independent semantic entity blocks when items are formatted as
+    bold headers (e.g. **Hostel A:** ..., **Scholarship 1:** ...).
+    """
+    pattern = r"(?:^|\n)(?:\d+\.\s*)?\*\*(.*?)\*\*\s*[\:\-]?\s*"
+    matches = list(re.finditer(pattern, content))
+    if len(matches) > 1:
+        blocks = []
+        for idx in range(len(matches)):
+            start_pos = matches[idx].start()
+            end_pos = matches[idx + 1].start() if idx + 1 < len(matches) else len(content)
+            block_text = content[start_pos:end_pos].strip()
+            if block_text:
+                blocks.append(block_text)
+                INGESTION_METRICS["bold_entity_splits"] += 1
+        if blocks:
+            return blocks
+    return [content]
+
+
 def _adaptive_split_entity(entity_text, max_tokens=256):
     """
     Adaptive Chunking:
     - If entity <= 256 tokens -> Return exactly 1 chunk.
-    - If entity > 256 tokens -> Split semantically (Paragraphs -> Bullets -> Token fallback).
+    - If entity > 256 tokens -> Split semantically preserving structure (Paragraphs -> Bullets -> Lines -> Token fallback).
     """
     words = entity_text.split()
     if len(words) <= max_tokens:
@@ -405,7 +487,6 @@ def _adaptive_split_entity(entity_text, max_tokens=256):
                 if current:
                     chunks.append("\n\n".join(current))
                 if p_len > max_tokens:
-                    # Paragraph itself is too large -> fallback to line/bullet splitting
                     chunks.extend(_split_by_lines_or_bullets(p, max_tokens))
                     current = []
                     curr_len = 0
@@ -540,7 +621,7 @@ def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end
         line_clean = line.strip()
         if not line_clean:
             continue
-        if line_clean.startswith(("H1:", "H2:", "H3:", "Faculty Name:", "Document Title:", "Course Name:", "Course Code:", "Semester:", "Credits:")):
+        if line_clean.startswith(("H1:", "H2:", "H3:", "H4:", "Faculty Name:", "Document Title:", "Course Name:", "Course Code:", "Semester:", "Credits:")):
             continue
         line_clean = line_clean.replace("**", "").replace("__", "").replace("*", "").strip()
         if len(line_clean) > 5:
@@ -625,11 +706,18 @@ def process_markdown_file(file_path):
 
     chunks = []
 
+    # Check if custom curriculum extraction will generate chunks for this document
+    has_curriculum_chunks = ("curriculum" in relative_path.lower() or "syllabus" in relative_path.lower())
+
     for section in sections:
         section_type = extract_section_type(section, subclusters)
+
+        # Curriculum Duplication Guard: Skip raw section processing if section_type is curriculum
+        if section_type == "curriculum" and has_curriculum_chunks:
+            continue
         
         # ── ENTITY DETECTION STAGE ──
-        # Step A: Split section content by H3 / H4 sub-headings
+        # Step A: Split section content by H3 / H4 sub-headings (selective H4 splitting)
         sub_heading_blocks = _split_content_by_subheadings(section["content"])
 
         for sub_block in sub_heading_blocks:
@@ -637,16 +725,22 @@ def process_markdown_file(file_path):
             effective_h4 = sub_block["h4"]
             sub_content = sub_block["content"]
 
-            # Step B: Check for Table Directory Row Splitting vs Table Conversion
+            # Step B: Structure-Based Directory Table Detection vs FAQ vs Bold Entity Detection
             headers_ctx = f"H1: {section['h1'] or ''}\nH2: {section['h2'] or ''}\nH3: {effective_h3 or ''}".strip()
-            is_dir_table = any(k in relative_path.lower() or k in (metadata.get("title") or "").lower() 
-                               for k in ["club", "committee", "contact", "faculty", "staff", "desk"])
+            is_dir_table = _is_directory_table_by_headers(sub_content, relative_path, metadata.get("title") or "")
             
             if is_dir_table and "|" in sub_content:
                 raw_entity_blocks = _split_directory_table_rows(sub_content, headers_ctx)
             else:
                 converted_content = convert_tables_to_sentences(sub_content)
-                raw_entity_blocks = _split_faqs(converted_content)
+                faq_blocks = _split_faqs(converted_content)
+                raw_entity_blocks = []
+                for b in faq_blocks:
+                    # Semantic Boundary Detection for sections without H3
+                    if not effective_h3:
+                        raw_entity_blocks.extend(_split_bold_entity_blocks(b))
+                    else:
+                        raw_entity_blocks.append(b)
 
             # Step C: For each detected entity block, assemble context and chunk adaptively
             for entity_text in raw_entity_blocks:
