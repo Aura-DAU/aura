@@ -489,6 +489,13 @@ async def chat_stream(
                         yield _sse({"type": "citations", "citations": citations})
                     if result.get("is_personal_data"):
                         yield _sse({"type": "personal-data-flag"})
+                    # Inline connector prompt (e.g. "connect Google Calendar"):
+                    # the orchestrator sets action_required when a tool needs an
+                    # account the student hasn't linked yet. Rides the existing
+                    # calendar-action SSE channel the client already parses.
+                    action_required = result.get("action_required")
+                    if isinstance(action_required, dict):
+                        yield _sse({"type": "calendar-action", "action": action_required})
                     if mem_result is not None and mem_result.should_fork:
                         # Hard overflow: the digest itself is at capacity. Tell the
                         # client to continue in a fresh thread seeded with it.
