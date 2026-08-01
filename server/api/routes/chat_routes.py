@@ -354,6 +354,9 @@ async def chat_stream(
     def on_delta(text: str) -> None:
         loop.call_soon_threadsafe(events.put_nowait, ("delta", text))
 
+    def on_profile_update(name: str) -> None:
+        loop.call_soon_threadsafe(events.put_nowait, ("profile_update", name))
+
     def _run() -> None:
         try:
             mem_result = get_conversation_memory().prepare(body.summary, history)
@@ -367,6 +370,7 @@ async def chat_stream(
                 identity=identity_dict,
                 display_profile=display_profile,
                 on_delta=on_delta,
+                on_profile_update=on_profile_update,
                 summary=_summary_for_generation(user_memory, mem_result.summary),
                 request_context=request_context,
             )
@@ -408,6 +412,12 @@ async def chat_stream(
                                 "summary": payload.summary,
                                 "foldedTurns": payload.folded_turns,
                             })
+                        continue
+                    if kind == "profile_update":
+                        yield _sse({
+                            "type": "profile-update",
+                            "profile": {"name": payload}
+                        })
                         continue
                     if kind == "error":
                         exc = payload if isinstance(payload, BaseException) else None

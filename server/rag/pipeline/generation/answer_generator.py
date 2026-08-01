@@ -411,6 +411,8 @@ class AnswerGenerator:
         profile=None,
         system_addendum=None,
         on_delta=None,
+        on_profile_update=None,
+        profile_erp_id=None,
         summary=None,
         tracking_flags=None,
     ):
@@ -432,6 +434,15 @@ class AnswerGenerator:
                 profile_text = f"User Role: {role.upper()}\n"
                 if fields:
                     profile_text += "User Profile Info:\n" + "\n".join(fields) + "\n\n"
+                
+                if not profile.get("name") and role in ("student", "faculty"):
+                    profile_text += (
+                        "CRITICAL: The user has not set their preferred name yet. "
+                        "Start your response by asking what they would like to be called. "
+                        "If the user just told you their name, you MUST output the exact tag "
+                        "`[UPDATE_PROFILE_NAME: Their Name]` (e.g. `[UPDATE_PROFILE_NAME: John]`) "
+                        "in your response to save it, then continue assisting them.\n\n"
+                    )
 
             if tracking_flags:
                 profile_text += "User Tracked Facts (Remember these):\n"
@@ -608,6 +619,8 @@ Retrieved Documents
                 return self._generate_streaming(
                     effective_system_prompt, prompt, on_delta, history=history,
                     dispatch=dispatch, max_tokens=answer_max_tokens,
+                    on_profile_update=on_profile_update,
+                    profile_erp_id=profile_erp_id,
                 )
 
             # The router picks the node internally and does not report which one
@@ -637,6 +650,16 @@ Retrieved Documents
                 raise RAGPipelineError(SOFT_FAILURE_ANSWER)
 
             answer = response.choices[0].message.content or ""
+
+            # Check for [UPDATE_PROFILE_NAME: <name>]
+            if on_profile_update:
+                match = re.search(r"\[UPDATE_PROFILE_NAME:\s*(.+?)\]", answer)
+                if match:
+                    new_name = match.group(1).strip()
+                    answer = answer[:match.start()] + answer[match.end():]
+                    if profile_erp_id:
+                        self._update_db_profile_name(profile_erp_id, new_name)
+                        on_profile_update(new_name)
 
             answer = re.sub(
                 r"<think>.*?</think>",
@@ -763,6 +786,8 @@ Retrieved Documents
         history=None,
         dispatch=None,
         max_tokens=None,
+        on_profile_update=None,
+        profile_erp_id=None,
     ):
         stream_messages = [{"role": "system", "content": system_prompt}]
         if history:
@@ -803,11 +828,69 @@ Retrieved Documents
 
         sanitizer = _StreamSanitizer()
         emitted = []
+        profile_update_buffer = ""
+        profile_updated = False
 
         def _emit(piece: str) -> None:
-            if piece:
-                emitted.append(piece)
-                on_delta(piece)
+            nonlocal profile_update_buffer, profile_updated
+            if not piece:
+                return
+            
+            # If we haven't found the tag yet, buffer and check
+            if not profile_updated and on_profile_update:
+                profile_update_buffer += piece
+                
+                # Check for the tag in the buffer
+                match = re.search(r"\[UPDATE_PROFILE_NAME:\s*(.+?)\]", profile_update_buffer)
+                if match:
+                    new_name = match.group(1).strip()
+                    
+                    # Remove the tag from the buffer
+                    clean_text = profile_update_buffer[:match.start()] + profile_update_buffer[match.end():]
+                    
+                    # Process the update
+                    if profile_erp_id:
+                        self._update_db_profile_name(profile_erp_id, new_name)
+                        on_profile_update(new_name)
+                    
+                    profile_updated = True
+                    
+                    # Emit whatever was before/after the tag
+                    if clean_text:
+                        emitted.append(clean_text)
+                        on_delta(clean_text)
+                    return
+                
+                # If we have [UPDATE_PROFILE_NAME partially in the buffer, hold it
+                # otherwise flush everything except a potential partial tag
+                partial_idx = profile_update_buffer.rfind("[UPDATE_PROFILE_NAME")
+                if partial_idx != -1:
+                    # Flush before the partial tag
+                    if partial_idx > 0:
+                        flush_piece = profile_update_buffer[:partial_idx]
+                        emitted.append(flush_piece)
+                        on_delta(flush_piece)
+                        profile_update_buffer = profile_update_buffer[partial_idx:]
+                    return
+                else:
+                    # Ensure we don't hold back a '[' that might be the start of the tag
+                    partial_bracket = profile_update_buffer.rfind("[")
+                    if partial_bracket != -1:
+                        if partial_bracket > 0:
+                            flush_piece = profile_update_buffer[:partial_bracket]
+                            emitted.append(flush_piece)
+                            on_delta(flush_piece)
+                            profile_update_buffer = profile_update_buffer[partial_bracket:]
+                        return
+                    else:
+                        flush_piece = profile_update_buffer
+                        profile_update_buffer = ""
+                        emitted.append(flush_piece)
+                        on_delta(flush_piece)
+                        return
+
+            emitted.append(piece)
+            on_delta(piece)
 
         for chunk in stream:
             choices = getattr(chunk, "choices", None)
@@ -846,3 +929,14 @@ Retrieved Documents
             text_clean += f"\n\n[Sources: {citation_str}]"
 
         return text_clean
+
+    def _update_db_profile_name(self, erp_id: str, new_name: str) -> None:
+        try:
+            import db.connection as db_conn
+            db_conn.execute(
+                "UPDATE user_identity_map SET full_name = %s WHERE erp_id = %s",
+                (new_name, erp_id)
+            )
+            logger.info("Updated profile name for %s to %s", erp_id, new_name)
+        except Exception as e:
+            logger.error("Failed to update profile name in DB: %s", e)

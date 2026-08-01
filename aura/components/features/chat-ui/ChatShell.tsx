@@ -13,6 +13,7 @@ import { Composer } from "./Composer"
 import { EmptyState } from "./EmptyState"
 import { ProfileModal } from "./ProfileModal"
 import { DocumentViewerSheet } from "./DocumentViewerSheet"
+import { useSession } from "next-auth/react"
 import { InstallPromptBanner } from "./InstallPromptBanner"
 import { AuroraBackground } from "@/components/ui/aurora-background"
 
@@ -21,7 +22,9 @@ export function ChatShell() {
   const { canInstall, promptInstall } = usePWAInstall()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { data: session } = useSession()
   const promptHandled = useRef(false)
+  const greetingDone = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   // Desktop sidebar visibility. Default open for SSR/first paint; hydrate the
   // persisted preference after mount to avoid a hydration mismatch.
@@ -58,6 +61,22 @@ export function ChatShell() {
     void chat.handleSendMessage(prompt)
     // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot handoff
   }, [searchParams, router])
+
+  useEffect(() => {
+    if (!chat.hasHydrated) return
+    if (
+      !greetingDone.current &&
+      session?.user &&
+      !session.user.fullName &&
+      !chat.studentProfile.name &&
+      chat.threads.length === 0
+    ) {
+      greetingDone.current = true
+      chat.insertGreeting(
+        "Welcome to DAU! I noticed you haven't set your preferred name yet. What would you like me to call you?"
+      )
+    }
+  }, [chat.hasHydrated, chat.threads.length, chat.studentProfile.name, session, chat])
 
   useEffect(() => {
     const stored = localStorage.getItem("aura-sidebar-open")
