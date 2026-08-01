@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 export interface TimetableSlot {
   id: string
@@ -14,6 +14,9 @@ export interface TimetableSlot {
   room?: string | null
   faculty_name?: string | null
   is_custom: boolean
+  // Used to split the grid into the core weekly table vs. the ELECTIVE
+  // band underneath it (see service._is_elective on the backend).
+  course_type?: string | null
 }
 
 interface TimetableResponse {
@@ -33,11 +36,23 @@ export function useTimetable() {
   const [data, setData] = useState<TimetableResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  // BUG-07 fix: `refetch` used to create its own AbortController and
+  // `return () => controller.abort()` — but since refetch is an async
+  // function called as `refetch()` (not awaited/returned) inside the
+  // effect, that cleanup closure was just the resolved value of a
+  // discarded Promise. It was never invoked, so in-flight requests were
+  // never aborted on unmount or when a newer refetch superseded them.
+  // Tracking the controller in a ref lets both the effect's cleanup AND
+  // a fresh refetch() call reach and abort the actual in-flight request.
+  const controllerRef = useRef<AbortController | null>(null)
 
   const refetch = useCallback(async () => {
+    controllerRef.current?.abort()
+    const controller = new AbortController()
+    controllerRef.current = controller
+
     setLoading(true)
     setError(null)
-    const controller = new AbortController()
     try {
       const res = await fetch("/api/timetable/me", {
         cache: "no-store",
@@ -62,7 +77,6 @@ export function useTimetable() {
     } finally {
       setLoading(false)
     }
-    return () => controller.abort()
   }, [])
 
   useEffect(() => {
@@ -74,7 +88,10 @@ export function useTimetable() {
     // card showing the latest version without needing a websocket.
     const onFocus = () => refetch()
     window.addEventListener("focus", onFocus)
-    return () => window.removeEventListener("focus", onFocus)
+    return () => {
+      window.removeEventListener("focus", onFocus)
+      controllerRef.current?.abort()
+    }
   }, [refetch])
 
   return { data, loading, error, refetch }

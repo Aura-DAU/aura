@@ -1,6 +1,29 @@
+from __future__ import annotations
+import sys
+import importlib.abc
+import importlib.util
 import uuid
 import re
+import logging
 from pathlib import Path
+
+# Python 3.9 compatibility hook for metadata_extractors without mutating files on disk
+class _FutureAnnotationsFinder(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path, target=None):
+        if fullname == "metadata_extractors":
+            mod_path = Path(__file__).parent / "metadata_extractors.py"
+            if mod_path.exists():
+                class _Loader(importlib.abc.Loader):
+                    def exec_module(self, module):
+                        with open(mod_path, "r", encoding="utf-8") as f:
+                            code_text = "from __future__ import annotations\n" + f.read()
+                        code_obj = compile(code_text, str(mod_path), "exec")
+                        exec(code_obj, module.__dict__)
+                return importlib.util.spec_from_loader(fullname, _Loader())
+        return None
+
+if "metadata_extractors" not in sys.modules:
+    sys.meta_path.insert(0, _FutureAnnotationsFinder())
 
 from parser import extract_frontmatter
 from section_extracter import extract_sections
@@ -14,8 +37,103 @@ from metadata_extractors import (
     resolve_document_academic_year,
 )
 
+logger = logging.getLogger(__name__)
+
+# Global metrics for entity-first ingestion quality report
+INGESTION_METRICS = {
+    "files_processed": 0,
+    "chunks_generated": 0,
+    "total_characters": 0,
+    "total_tokens": 0,
+    "max_chunk_tokens": 0,
+    "h3_splits": 0,
+    "h4_splits": 0,
+    "table_row_splits": 0,
+    "faq_splits": 0,
+    "bold_entity_splits": 0,
+    "course_chunks": 0,
+    "club_chunks": 0,
+    "committee_chunks": 0,
+    "faculty_chunks": 0,
+}
+
+
+def print_ingestion_quality_report():
+    """Prints a detailed Quality Report summarizing entity-first chunking results."""
+    m = INGESTION_METRICS
+    chunks_count = m["chunks_generated"]
+    avg_tokens = (m["total_tokens"] / chunks_count) if chunks_count > 0 else 0
+    avg_chars = (m["total_characters"] / chunks_count) if chunks_count > 0 else 0
+
+    print("\n" + "=" * 65)
+    print("      AURA INGESTION PIPELINE — CHUNKING QUALITY REPORT      ")
+    print("=" * 65)
+    print(f"Files Processed        : {m['files_processed']}")
+    print(f"Total Chunks Generated : {chunks_count}")
+    print(f"Average Chunk Tokens   : {avg_tokens:.1f} tokens")
+    print(f"Average Chunk Length   : {avg_chars:.1f} chars")
+    print(f"Maximum Chunk Size     : {m['max_chunk_tokens']} tokens")
+    print("-" * 65)
+    print("ENTITY SPLIT METRICS:")
+    print(f"  • H3 Entity Splits   : {m['h3_splits']}")
+    print(f"  • H4 Entity Splits   : {m['h4_splits']}")
+    print(f"  • Bold Entity Splits : {m['bold_entity_splits']}")
+    print(f"  • Table Row Splits   : {m['table_row_splits']}")
+    print(f"  • FAQ Pair Splits    : {m['faq_splits']}")
+    print("-" * 65)
+    print("ENTITY TYPE BREAKDOWN:")
+    print(f"  • Club Chunks        : {m['club_chunks']}")
+    print(f"  • Faculty Chunks     : {m['faculty_chunks']}")
+    print(f"  • Course Chunks      : {m['course_chunks']}")
+    print(f"  • Committee Chunks   : {m['committee_chunks']}")
+    print("=" * 65 + "\n")
+
+
+def _normalize_metadata_value(val):
+    """Helper to clean, trim, deduplicate, and return deterministic string or sorted list."""
+    if val is None:
+        return None
+    if isinstance(val, (list, tuple, set)):
+        cleaned = []
+        seen = set()
+        for item in val:
+            if item is None:
+                continue
+            s = str(item).strip()
+            if s and s not in seen:
+                seen.add(s)
+                cleaned.append(s)
+        if not cleaned:
+            return None
+        return cleaned[0] if len(cleaned) == 1 else sorted(cleaned)
+    s = str(val).strip()
+    return s if s else None
+
+
+def _extract_program_name_from_text(text):
+    """Extracts Program(s) / Program name explicitly declared in body text."""
+    patterns = [
+        r"(?:Program\(s\)|Programs?|Degree|Branch)\s*:\s*([^\r\n]+)",
+        r"\b(B\.?\s*Tech\.?\s*(?:ICT-CS|ICT|MnC|EAS)?|M\.?\s*Tech\.?\s*(?:ICT|EC)?|M\.?\s*Sc\.?\s*(?:IT|DS|AA)|Ph\.?\s*D\.?)\b"
+    ]
+    extracted = []
+    seen = set()
+    for pat in patterns:
+        matches = re.findall(pat, text, re.IGNORECASE)
+        for m in matches:
+            if isinstance(m, tuple):
+                m = m[0]
+            parts = re.split(r",|/|and", m, flags=re.IGNORECASE)
+            for p in parts:
+                p_clean = p.strip()
+                if p_clean and len(p_clean) > 1 and p_clean not in seen:
+                    seen.add(p_clean)
+                    extracted.append(p_clean)
+    return extracted
+
 
 def extract_curriculum_chunks(body, metadata, file_path):
+    """Preserved curriculum extraction logic for course catalogues and syllabi."""
     lines = body.split("\n")
     current_semester = None
     table_started = False
@@ -167,22 +285,17 @@ def extract_curriculum_chunks(body, metadata, file_path):
 
 
 def convert_tables_to_sentences(text):
-    # Finds markdown tables in text and converts them into semantic sentences
-    # to prevent tabular fragmentation during chunking.
+    """Converts markdown table rows into descriptive key-value sentences."""
     lines = text.split("\n")
     processed_lines = []
     i = 0
     while i < len(lines):
         line = lines[i].strip()
-        # A markdown table header starts and ends with pipes
         if line.startswith("|") and line.endswith("|"):
             if i + 1 < len(lines):
                 next_line = lines[i+1].strip()
-                # A separator line starts and ends with pipes, contains dashes and colons/spaces
                 if next_line.startswith("|") and next_line.endswith("|") and "-" in next_line and all(c in " |:-" for c in next_line):
-                    # Extracted headers
                     headers = [h.strip() for h in line.split("|")[1:-1]]
-                    
                     table_rows = []
                     j = i + 2
                     while j < len(lines):
@@ -194,7 +307,6 @@ def convert_tables_to_sentences(text):
                         else:
                             break
                     
-                    # Convert each row to a list of "Header: Value" and join them into a sentence
                     table_sentences = []
                     for row in table_rows:
                         row_parts = []
@@ -215,6 +327,250 @@ def convert_tables_to_sentences(text):
         processed_lines.append(lines[i])
         i += 1
     return "\n".join(processed_lines)
+
+
+# Non-entity structural H4 headers that should NOT cause H4 entity splits
+STRUCTURAL_H4_TITLES = {
+    "description", "overview", "objectives", "events", "activities",
+    "rules", "guidelines", "eligibility", "requirements", "details",
+    "background", "about", "scope", "responsibilities", "members", "contact",
+    "procedure", "process", "note", "notes", "summary", "fees", "structure"
+}
+
+
+def _split_content_by_subheadings(content):
+    """
+    H3 / H4 Rule Tuning:
+    - Always splits by H3 (###) by default.
+    - Splits by H4 (####) ONLY when H4 represents an independent semantic entity
+      (e.g., a specific named entity or person), NOT for structural fields like Description/Objectives.
+    """
+    lines = content.split("\n")
+    sub_entities = []
+    
+    current_h3 = None
+    current_h4 = None
+    current_lines = []
+    
+    for line in lines:
+        match = re.match(r"^(#{3,4})\s+(.+)$", line.strip())
+        if match:
+            level = len(match.group(1))
+            title = match.group(2).strip()
+            title_lower = title.lower()
+
+            # Check if this H4 is a non-entity structural field
+            is_structural_h4 = (
+                level == 4 and (
+                    title_lower in STRUCTURAL_H4_TITLES or
+                    any(title_lower.startswith(s) for s in ["description", "overview", "objective", "event", "rule", "note"])
+                )
+            )
+
+            # Split only on H3, or on entity-level H4
+            if level == 3 or (level == 4 and not is_structural_h4):
+                if current_lines or current_h3 or current_h4:
+                    sub_entities.append({
+                        "h3": current_h3,
+                        "h4": current_h4,
+                        "content": "\n".join(current_lines).strip()
+                    })
+                    current_lines = []
+                
+                if level == 3:
+                    current_h3 = title
+                    current_h4 = None
+                    INGESTION_METRICS["h3_splits"] += 1
+                else:
+                    current_h4 = title
+                    INGESTION_METRICS["h4_splits"] += 1
+            else:
+                # Treat structural H4 as body text under current H3
+                current_lines.append(f"#### {title}")
+        else:
+            current_lines.append(line)
+            
+    if current_lines or current_h3 or current_h4:
+        sub_entities.append({
+            "h3": current_h3,
+            "h4": current_h4,
+            "content": "\n".join(current_lines).strip()
+        })
+        
+    return sub_entities if sub_entities else [{"h3": None, "h4": None, "content": content}]
+
+
+def _is_directory_table_by_headers(sub_content, relative_path="", title=""):
+    """
+    Structure-Based Directory Table Detection:
+    Inspects table header columns to detect directory/roster tables (Clubs, Committees, Contacts, Faculty, Staff)
+    rather than relying solely on filenames.
+    """
+    lines = [l.strip() for l in sub_content.split("\n") if l.strip().startswith("|")]
+    if not lines:
+        return False
+
+    header_line = lines[0]
+    headers = [h.strip().lower() for h in header_line.split("|")[1:-1]]
+    header_str = " ".join(headers)
+
+    # Exclude curriculum / course list tables
+    if any(k in header_str for k in ["l-t-p-c", "credits", "semester", "course code"]):
+        return False
+
+    dir_header_keywords = [
+        "name", "designation", "email", "phone", "contact", "convenor", "convener",
+        "mentor", "advisor", "club", "committee", "office", "post", "position",
+        "role", "room", "member", "scholarship", "head", "chair", "deputy"
+    ]
+
+    matches = sum(1 for k in dir_header_keywords if any(k in h for h in headers))
+    if matches >= 1:
+        return True
+
+    path_title = (relative_path + " " + title).lower()
+    return any(k in path_title for k in ["club", "committee", "contact", "faculty", "staff", "desk", "directory"])
+
+
+def _split_directory_table_rows(content, headers_context):
+    """
+    Table Row Rule: Converts table rows of directory tables into individual entity items
+    so 1 row = 1 semantic entity chunk.
+    """
+    lines = content.split("\n")
+    entities = []
+    i = 0
+    non_table_lines = []
+    
+    while i < len(lines):
+        line = lines[i].strip()
+        if line.startswith("|") and line.endswith("|") and i + 1 < len(lines):
+            next_line = lines[i+1].strip()
+            if next_line.startswith("|") and next_line.endswith("|") and "-" in next_line:
+                headers = [h.strip() for h in line.split("|")[1:-1]]
+                j = i + 2
+                while j < len(lines):
+                    row_line = lines[j].strip()
+                    if row_line.startswith("|") and row_line.endswith("|"):
+                        cells = [c.strip() for c in row_line.split("|")[1:-1]]
+                        row_str = ". ".join(f"{h}: {c}" for h, c in zip(headers, cells) if c)
+                        if row_str:
+                            entities.append(f"{headers_context}\n{row_str}")
+                            INGESTION_METRICS["table_row_splits"] += 1
+                        j += 1
+                    else:
+                        break
+                i = j
+                continue
+        non_table_lines.append(lines[i])
+        i += 1
+        
+    remainder = "\n".join(non_table_lines).strip()
+    if remainder:
+        entities.append(remainder)
+    return entities if entities else [content]
+
+
+def _split_faqs(content):
+    """
+    Enhanced FAQ Detection: Splits Q&A pairs (supporting Q:, Question:, ### Question, **Q:**, **Question:**).
+    """
+    pattern = r"(?:^|\n)(?:\*{1,2}|\#{1,4})?\s*(?:Q|Question)\s*\d*[\.\:]\s*(.*?)(?=\n(?:\*{1,2}|\#{1,4})?\s*(?:Q|Question)\s*\d*[\.\:]|\Z)"
+    matches = re.findall(pattern, content, re.DOTALL | re.IGNORECASE)
+    if len(matches) > 1:
+        INGESTION_METRICS["faq_splits"] += len(matches)
+        return [f"Question: {m.strip()}" for m in matches if m.strip()]
+    return [content]
+
+
+def _split_bold_entity_blocks(content):
+    """
+    Semantic Entity Boundary Detection:
+    Splits sections without H3 into independent semantic entity blocks when items are formatted as
+    bold headers (e.g. **Hostel A:** ..., **Scholarship 1:** ...).
+    """
+    pattern = r"(?:^|\n)(?:\d+\.\s*)?\*\*(.*?)\*\*\s*[\:\-]?\s*"
+    matches = list(re.finditer(pattern, content))
+    if len(matches) > 1:
+        blocks = []
+        for idx in range(len(matches)):
+            start_pos = matches[idx].start()
+            end_pos = matches[idx + 1].start() if idx + 1 < len(matches) else len(content)
+            block_text = content[start_pos:end_pos].strip()
+            if block_text:
+                blocks.append(block_text)
+                INGESTION_METRICS["bold_entity_splits"] += 1
+        if blocks:
+            return blocks
+    return [content]
+
+
+def _adaptive_split_entity(entity_text, max_tokens=256):
+    """
+    Adaptive Chunking:
+    - If entity <= 256 tokens -> Return exactly 1 chunk.
+    - If entity > 256 tokens -> Split semantically preserving structure (Paragraphs -> Bullets -> Lines -> Token fallback).
+    """
+    words = entity_text.split()
+    if len(words) <= max_tokens:
+        return [entity_text]
+
+    # 1. Split by Paragraph Boundaries (\n\n)
+    paragraphs = [p.strip() for p in entity_text.split("\n\n") if p.strip()]
+    if len(paragraphs) > 1:
+        chunks = []
+        current = []
+        curr_len = 0
+        for p in paragraphs:
+            p_len = len(p.split())
+            if curr_len + p_len <= max_tokens:
+                current.append(p)
+                curr_len += p_len
+            else:
+                if current:
+                    chunks.append("\n\n".join(current))
+                if p_len > max_tokens:
+                    chunks.extend(_split_by_lines_or_bullets(p, max_tokens))
+                    current = []
+                    curr_len = 0
+                else:
+                    current = [p]
+                    curr_len = p_len
+        if current:
+            chunks.append("\n\n".join(current))
+        return chunks
+
+    # 2. Line / Bullet splitting
+    return _split_by_lines_or_bullets(entity_text, max_tokens)
+
+
+def _split_by_lines_or_bullets(text, max_tokens=256):
+    """Splits large text blocks by bullet points or line boundaries."""
+    lines = text.split("\n")
+    chunks = []
+    current = []
+    curr_len = 0
+    for line in lines:
+        l_len = len(line.split())
+        if curr_len + l_len <= max_tokens:
+            current.append(line)
+            curr_len += l_len
+        else:
+            if current:
+                chunks.append("\n".join(current))
+            if l_len > max_tokens:
+                # Raw token fallback
+                chunks.extend(split_section(line))
+                current = []
+                curr_len = 0
+            else:
+                current = [line]
+                curr_len = l_len
+    if current:
+        chunks.append("\n".join(current))
+    return chunks
+
+
 _CANONICAL_FACULTY_NAMES = None
 
 def get_canonical_faculty_names():
@@ -223,7 +579,6 @@ def get_canonical_faculty_names():
         return _CANONICAL_FACULTY_NAMES
         
     current_dir = Path(__file__).resolve().parent
-    # Under server/rag/pipeline/ingestion/chunking/
     data_dir = current_dir.parent.parent.parent.parent.parent / "data"
     f_dir = data_dir / "faculty"
     
@@ -246,8 +601,6 @@ def get_canonical_faculty_names():
                         names.add(m.group(1).strip().strip("'").strip('"'))
                         continue
             except Exception as e:
-                # Non-fatal: if a faculty markdown file cannot be read/parsed,
-                # fall back to deriving the name from the filename below.
                 _ = e
             name = f.stem.replace("faculty_", "").replace("_", " ").title()
             names.add(name)
@@ -272,11 +625,7 @@ def map_to_canonical_faculty(name):
 
 
 def extract_faculty_from_text(text):
-    # Search text for Advisor: ... or similar lines and extract faculty names.
-    # Also scan text for any matches of canonical faculty names.
     faculty_names = set()
-    
-    # 1. Scoped advisor lines
     pattern = r"\bAdvisors?\s*:\s*(.*)"
     for line in text.split("\n"):
         m = re.search(pattern, line, re.IGNORECASE)
@@ -295,7 +644,6 @@ def extract_faculty_from_text(text):
                     mapped = map_to_canonical_faculty(part_cleaned)
                     faculty_names.add(mapped)
                     
-    # 2. General substring mention matching
     canonical_list = get_canonical_faculty_names()
     for name in canonical_list:
         name_pattern = rf"\b{re.escape(name)}\b"
@@ -306,22 +654,18 @@ def extract_faculty_from_text(text):
 
 
 def extract_course_codes_from_text(text):
-    # Find course codes (2-3 letters followed by 3 digits) in the text.
     codes = set(re.findall(r"\b[A-Z]{2,3}\d{3}\b", text))
     return list(codes)
 
 
 def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end=None):
-    # Given the chunk text and the original lines of the file, find the 1-indexed
-    # start_line and end_line in the file where this chunk's content resides.
     lines_to_search = []
     for line in chunk_text.split("\n"):
         line_clean = line.strip()
         if not line_clean:
             continue
-        if line_clean.startswith(("H1:", "H2:", "H3:", "Faculty Name:", "Document Title:", "Course Name:", "Course Code:", "Semester:", "Credits:")):
+        if line_clean.startswith(("H1:", "H2:", "H3:", "H4:", "Faculty Name:", "Document Title:", "Course Name:", "Course Code:", "Semester:", "Credits:")):
             continue
-        # Strip markdown syntax
         line_clean = line_clean.replace("**", "").replace("__", "").replace("*", "").strip()
         if len(line_clean) > 5:
             lines_to_search.append(line_clean)
@@ -357,20 +701,13 @@ def find_line_range_in_file(chunk_text, file_lines, section_start=1, section_end
 
 def process_markdown_file(file_path):
     file_path = Path(file_path)
+    INGESTION_METRICS["files_processed"] += 1
     
     parts = file_path.parts
     data_index = parts.index("data")
     cluster = parts[data_index + 1]
-
-    # Stable, portable path (e.g. "data/infrastructure/ict_infrastructure.md")
-    # used by the /documents API to serve the raw markdown source for the
-    # Phase C citation side-drawer. Unlike str(file_path), this is the same
-    # value regardless of which machine ran ingestion.
     relative_path = "/".join(parts[data_index:])
-
-    subclusters = list(
-        parts[data_index + 2:-1]
-    )
+    subclusters = list(parts[data_index + 2:-1])
 
     with open(file_path, "r", encoding="utf-8") as f:
         raw_content = f.read()
@@ -380,175 +717,238 @@ def process_markdown_file(file_path):
     metadata, body = extract_frontmatter(raw_content)
     academic_applicability = extract_academic_applicability(metadata, file_path, body)
 
-    # 1. Calculate frontmatter offset (1-indexed start of body)
     content_clean = raw_content.lstrip("\ufeff").replace("\r\n", "\n")
     match = re.match(r"^---\n(.*?)\n---\n", content_clean, re.DOTALL)
     frontmatter_offset = match.group(0).count('\n') if match else 0
 
-    # 2. Extract document_year / academic_year.
-    # Prefer title/filename academic labels (e.g. "24-25", "2026-27") over
-    # scraped_date — ingest time is not the roster year.
-    document_year, academic_year = resolve_document_academic_year(
-        metadata, file_path, body
-    )
+    document_year, academic_year = resolve_document_academic_year(metadata, file_path, body)
 
     authorization = metadata.get("authorization") or metadata.get("authorisation") or ["public"]
     if isinstance(authorization, str):
         authorization = [authorization]
 
     sections = extract_sections(body, start_line_offset=frontmatter_offset + 1)
-
     category = metadata.get("category", "").strip().lower()
 
     faculty_name = None
-
     if category == "faculty":
         faculty_name = metadata.get("title") or file_path.stem.replace("_", " ").title()
 
     event_metadata = {}
+
+    # ── DETERMINISTIC METADATA RESOLUTION (PRECEDENCE ENFORCING) ──
+    # 1. Program Name Precedence: Frontmatter -> Structured Body Text -> Fallback Inference
+    fm_program = metadata.get("program_name") or metadata.get("programs") or metadata.get("program")
+    body_programs = _extract_program_name_from_text(body)
+    inferred_program = extract_program_name(metadata, cluster, subclusters)
     
-    program_name = extract_program_name(
-        metadata,
-        cluster,
-        subclusters
+    effective_program_name = (
+        _normalize_metadata_value(fm_program) or
+        _normalize_metadata_value(body_programs) or
+        inferred_program
+    )
+
+    # 2. Semester Precedence: Frontmatter (Highest) -> Metadata -> None
+    fm_semester = metadata.get("semester")
+    effective_semester = _normalize_metadata_value(fm_semester)
+
+    # 3. Course Code Precedence: Document-Type Aware
+    fm_course_code = metadata.get("course_code")
+    is_single_course_doc = (
+        bool(fm_course_code) or
+        category in ["courses", "course_policy", "course"] or
+        "course_policy" in relative_path.lower()
     )
 
     if category == "events":
         event_metadata = extract_event_metadata(sections)
         event_metadata["event_name"] = metadata.get("title")
 
-    # Frontmatter fields copy
-    fm_course_code = metadata.get("course_code")
-    fm_semester = metadata.get("semester")
     fm_faculty_name = metadata.get("faculty_name")
-    fm_program_name = metadata.get("program_name")
     fm_event_name = metadata.get("event_name")
 
     chunks = []
 
-    for section in sections:
+    # Check if custom curriculum extraction will generate chunks for this document
+    has_curriculum_chunks = ("curriculum" in relative_path.lower() or "syllabus" in relative_path.lower())
 
+    for section in sections:
         section_type = extract_section_type(section, subclusters)
 
-        section_text = ""
+        # Curriculum Duplication Guard: Skip raw section processing if section_type is curriculum
+        if section_type == "curriculum" and has_curriculum_chunks:
+            continue
+        
+        # ── ENTITY DETECTION STAGE ──
+        # Step A: Split section content by H3 / H4 sub-headings (selective H4 splitting)
+        sub_heading_blocks = _split_content_by_subheadings(section["content"])
 
-        # Extract advisors and mentioned faculty from the section content
-        section_faculty = []
-        if category == "faculty" and faculty_name:
-            section_faculty.append(faculty_name)
-        else:
-            # Extract mentioned faculty members
-            section_faculty.extend(extract_faculty_from_text(section["content"]))
-            # Also add frontmatter faculty if defined
-            if fm_faculty_name:
-                if isinstance(fm_faculty_name, list):
-                    section_faculty.extend(fm_faculty_name)
+        for sub_block in sub_heading_blocks:
+            effective_h3 = sub_block["h3"] or section["h3"]
+            effective_h4 = sub_block["h4"]
+            sub_content = sub_block["content"]
+
+            # Step B: Structure-Based Directory Table Detection vs FAQ vs Bold Entity Detection
+            headers_ctx = f"H1: {section['h1'] or ''}\nH2: {section['h2'] or ''}\nH3: {effective_h3 or ''}".strip()
+            is_dir_table = _is_directory_table_by_headers(sub_content, relative_path, metadata.get("title") or "")
+            
+            if is_dir_table and "|" in sub_content:
+                raw_entity_blocks = _split_directory_table_rows(sub_content, headers_ctx)
+            else:
+                converted_content = convert_tables_to_sentences(sub_content)
+                faq_blocks = _split_faqs(converted_content)
+                raw_entity_blocks = []
+                for b in faq_blocks:
+                    # Semantic Boundary Detection for sections without H3
+                    if not effective_h3:
+                        raw_entity_blocks.extend(_split_bold_entity_blocks(b))
+                    else:
+                        raw_entity_blocks.append(b)
+
+            # Step C: For each detected entity block, assemble context and chunk adaptively
+            for entity_text in raw_entity_blocks:
+                # Faculty Metadata Resolution
+                if category == "faculty" and faculty_name:
+                    section_faculty = [faculty_name]
+                    INGESTION_METRICS["faculty_chunks"] += 1
                 else:
-                    section_faculty.append(fm_faculty_name)
-            # Deduplicate
-            section_faculty = list(set(section_faculty))
+                    extracted_fac = extract_faculty_from_text(entity_text)
+                    merged_fac = []
+                    if fm_faculty_name:
+                        if isinstance(fm_faculty_name, list):
+                            merged_fac.extend(fm_faculty_name)
+                        else:
+                            merged_fac.append(fm_faculty_name)
+                    merged_fac.extend(extracted_fac)
+                    section_faculty = _normalize_metadata_value(merged_fac)
+                    if isinstance(section_faculty, str):
+                        section_faculty = [section_faculty]
+                    elif section_faculty is None:
+                        section_faculty = []
 
-        # Extract course codes from section content and combine with frontmatter course_code
-        section_course_codes = extract_course_codes_from_text(section["content"])
-        if fm_course_code:
-            section_course_codes.append(fm_course_code)
-        section_course_codes = list(set(section_course_codes))
+                # Course Code Resolution (Document-Type Aware)
+                if is_single_course_doc and fm_course_code:
+                    # Trust Frontmatter ONLY for single-course documents (prevent pollution from body text)
+                    section_course_codes = _normalize_metadata_value(fm_course_code)
+                else:
+                    # Merge section-local codes for multi-course documents (curriculum, timetables)
+                    extracted_codes = extract_course_codes_from_text(entity_text)
+                    merged_codes = []
+                    if fm_course_code:
+                        if isinstance(fm_course_code, list):
+                            merged_codes.extend(fm_course_code)
+                        else:
+                            merged_codes.append(fm_course_code)
+                    merged_codes.extend(extracted_codes)
+                    section_course_codes = _normalize_metadata_value(merged_codes)
 
-        # Prepends contextual lines
-        if section_faculty:
-            section_text += f"Faculty Name: {', '.join(section_faculty)}\n\n"
+                if isinstance(section_course_codes, str):
+                    section_course_codes = [section_course_codes]
+                elif section_course_codes is None:
+                    section_course_codes = []
 
-        if category == "doctoral scholars" and metadata.get("title"):
-            section_text += f"Document Title: {metadata.get('title')}\n"
+                if section_course_codes:
+                    INGESTION_METRICS["course_chunks"] += 1
 
-        if section["h1"]:
-            section_text += f"H1: {section['h1']}\n"
-        
-        if section["h2"]:
-            section_text += f"H2: {section['h2']}\n"
-        
-        if section["h3"]:
-            section_text += f"H3: {section['h3']}\n"
+                # Build preserved self-contained heading context
+                context_prefix = ""
+                if section_faculty:
+                    context_prefix += f"Faculty Name: {', '.join(section_faculty)}\n\n"
 
-        section_text += "\n"
-        # Parse table markdown to text sentences
-        section_text += convert_tables_to_sentences(section["content"])
+                if category == "doctoral scholars" and metadata.get("title"):
+                    context_prefix += f"Document Title: {metadata.get('title')}\n"
 
-        split_chunks = split_section(section_text)
+                if section["h1"]:
+                    context_prefix += f"H1: {section['h1']}\n"
+                if section["h2"]:
+                    context_prefix += f"H2: {section['h2']}\n"
+                if effective_h3:
+                    context_prefix += f"H3: {effective_h3}\n"
+                if effective_h4:
+                    context_prefix += f"H4: {effective_h4}\n"
 
-        for chunk_text in split_chunks:
-            # Find start_line and end_line for this chunk
-            start_line, end_line = find_line_range_in_file(
-                chunk_text,
-                file_lines,
-                section_start=section["start_line"],
-                section_end=section["end_line"]
-            )
-            section_header_key = section.get("h1") or section.get("h2") or ""
-            chunk_id = generate_deterministic_chunk_id(
-                relative_path=relative_path,
-                chunk_text=chunk_text,
-                section_key=section_header_key
-            )
-            chunk_record = {
-                "chunk_id": chunk_id,
-                "text": chunk_text,
+                contextualized_entity = (context_prefix + "\n" + entity_text).strip()
 
-                "title": metadata.get("title"),
-                "url": metadata.get("url"),
-                "category": metadata.get("category"),
+                # Step D: Adaptive Chunking (1 entity <= 256 tokens -> 1 chunk, else semantic split)
+                split_chunks = _adaptive_split_entity(contextualized_entity, max_tokens=256)
 
-                "document_type": category,
-                "cluster": cluster,
-                "subclusters": subclusters,
-                
-                "h1": section["h1"],
-                "h2": section["h2"],
-                "h3": section["h3"],
-                "section_type": section_type,
+                # Track entity counts
+                if "club" in relative_path.lower() or "club" in (metadata.get("title") or "").lower():
+                    INGESTION_METRICS["club_chunks"] += len(split_chunks)
+                if "committee" in relative_path.lower() or "sbg" in relative_path.lower():
+                    INGESTION_METRICS["committee_chunks"] += len(split_chunks)
 
-                "path": str(file_path),
-                "source_file": file_path.name,
-                "relative_path": relative_path,
+                for chunk_text in split_chunks:
+                    start_line, end_line = find_line_range_in_file(
+                        chunk_text,
+                        file_lines,
+                        section_start=section["start_line"],
+                        section_end=section["end_line"]
+                    )
+                    section_header_key = section.get("h1") or section.get("h2") or effective_h3 or ""
+                    chunk_id = generate_deterministic_chunk_id(
+                        relative_path=relative_path,
+                        chunk_text=chunk_text,
+                        section_key=section_header_key
+                    )
 
-                "scraped_date": metadata.get("scraped_date"),
-                "authorization": authorization,
+                    token_est = len(chunk_text.split())
+                    INGESTION_METRICS["chunks_generated"] += 1
+                    INGESTION_METRICS["total_characters"] += len(chunk_text)
+                    INGESTION_METRICS["total_tokens"] += token_est
+                    if token_est > INGESTION_METRICS["max_chunk_tokens"]:
+                        INGESTION_METRICS["max_chunk_tokens"] = token_est
 
-                "char_length": len(chunk_text),
-                "token_estimate": len(chunk_text.split()),
-                
-                "start_line": start_line,
-                "end_line": end_line,
-                "document_year": document_year,
-            }
-            if academic_year:
-                chunk_record["academic_year"] = academic_year
-            chunk_record.update(academic_applicability)
+                    chunk_record = {
+                        "chunk_id": chunk_id,
+                        "text": chunk_text,
+                        "title": metadata.get("title"),
+                        "url": metadata.get("url"),
+                        "category": metadata.get("category"),
+                        "document_type": category,
+                        "cluster": cluster,
+                        "subclusters": subclusters,
+                        "h1": section["h1"],
+                        "h2": section["h2"],
+                        "h3": effective_h3,
+                        "section_type": section_type,
+                        "path": str(file_path),
+                        "source_file": file_path.name,
+                        "relative_path": relative_path,
+                        "scraped_date": metadata.get("scraped_date"),
+                        "authorization": authorization,
+                        "char_length": len(chunk_text),
+                        "token_estimate": token_est,
+                        "start_line": start_line,
+                        "end_line": end_line,
+                        "document_year": document_year,
+                    }
+                    if academic_year:
+                        chunk_record["academic_year"] = academic_year
+                    chunk_record.update(academic_applicability)
 
-            if section_faculty:
-                chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
+                    if section_faculty:
+                        chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
+                    if section_course_codes:
+                        chunk_record["course_code"] = section_course_codes if len(section_course_codes) > 1 else section_course_codes[0]
 
-            if section_course_codes:
-                chunk_record["course_code"] = section_course_codes if len(section_course_codes) > 1 else section_course_codes[0]
+                    target_semester = effective_semester or metadata.get("semester")
+                    if target_semester:
+                        chunk_record["semester"] = target_semester
 
-            target_semester = fm_semester or metadata.get("semester")
-            if target_semester:
-                chunk_record["semester"] = target_semester
+                    if effective_program_name:
+                        chunk_record["program_name"] = effective_program_name
 
-            target_program = program_name or fm_program_name
-            if target_program:
-                chunk_record["program_name"] = target_program
+                    target_event = event_metadata.get("event_name") or fm_event_name
+                    if target_event:
+                        chunk_record["event_name"] = target_event
 
-            target_event = event_metadata.get("event_name") or fm_event_name
-            if target_event:
-                chunk_record["event_name"] = target_event
+                    if event_metadata:
+                        chunk_record.update({k: v for k, v in event_metadata.items() if k != "event_name"})
 
-            if event_metadata:
-                chunk_record.update({k: v for k, v in event_metadata.items() if k != "event_name"})
+                    chunks.append(chunk_record)
 
-            chunks.append(chunk_record)
-
-    # Add custom curriculum chunks
+    # Add custom curriculum chunks (Preserved intact)
     curriculum_chunks = extract_curriculum_chunks(body, metadata, file_path)
     for custom in curriculum_chunks:
         start_line, end_line = find_line_range_in_file(
@@ -563,33 +963,31 @@ def process_markdown_file(file_path):
             chunk_text=custom["text"],
             section_key=custom_header_key
         )
+        token_est = len(custom["text"].split())
+        INGESTION_METRICS["chunks_generated"] += 1
+        INGESTION_METRICS["total_characters"] += len(custom["text"])
+        INGESTION_METRICS["total_tokens"] += token_est
+
         chunk_record = {
             "chunk_id": custom_chunk_id,
             "text": custom["text"],
-
             "title": metadata.get("title"),
             "url": metadata.get("url"),
             "category": metadata.get("category"),
-
             "document_type": category,
             "cluster": cluster,
             "subclusters": subclusters,
-            
             "h1": custom["h1"],
             "h2": custom["h2"],
             "h3": custom["h3"],
             "section_type": custom["section_type"],
-
             "path": str(file_path),
             "source_file": file_path.name,
             "relative_path": relative_path,
-
             "scraped_date": metadata.get("scraped_date"),
             "authorization": authorization,
-
             "char_length": len(custom["text"]),
-            "token_estimate": len(custom["text"].split()),
-            
+            "token_estimate": token_est,
             "start_line": start_line,
             "end_line": end_line,
             "document_year": document_year,
@@ -598,11 +996,11 @@ def process_markdown_file(file_path):
             chunk_record["academic_year"] = academic_year
         chunk_record.update(academic_applicability)
 
-        if program_name or fm_program_name:
-            chunk_record["program_name"] = program_name or fm_program_name
+        if effective_program_name:
+            chunk_record["program_name"] = effective_program_name
             
-        chunk_record["semester"] = custom.get("semester") or fm_semester
-        chunk_record["course_code"] = custom.get("course_code") or fm_course_code
+        chunk_record["semester"] = _normalize_metadata_value(custom.get("semester") or effective_semester)
+        chunk_record["course_code"] = _normalize_metadata_value(custom.get("course_code") or fm_course_code)
         chunk_record["course_name"] = custom.get("course_name")
         chunk_record["course_type"] = custom.get("course_type")
         chunk_record["credits"] = custom.get("credits")

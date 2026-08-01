@@ -72,6 +72,7 @@ def _handle_update_my_timetable(identity, **kwargs):
                 "cohort": {"year": year, "sem": sem, "sec": sec},
             }
         result = service.apply_change(identity, **kwargs)
+        result["calendar_sync"] = timetable_sync.resync_if_linked(identity)
         return {"status": "applied", **result}
     except service.TimetableError as e:
         return {"error": str(e)}
@@ -82,7 +83,9 @@ def _handle_undo_timetable_change(identity, **kwargs):
         override_id = kwargs.get("override_id")
         if not override_id:
             return {"error": "override_id is required -- use list_my_timetable_changes to find it."}
-        return {"status": "applied", **service.clear_change(identity, override_id)}
+        result = service.clear_change(identity, override_id)
+        result["calendar_sync"] = timetable_sync.resync_if_linked(identity)
+        return {"status": "applied", **result}
     except service.TimetableError as e:
         return {"error": str(e)}
 
@@ -257,7 +260,9 @@ UPDATE_MY_TIMETABLE = Tool(
                 "enum": ["replace", "add", "remove"],
                 "description": (
                     "'replace' to change an existing class's time/room/etc, 'add' for a brand-new "
-                    "class that isn't on the master timetable, 'remove' to hide an existing class."
+                    "class that isn't on the master timetable, 'remove' to hide an existing class. "
+                    "If the student already connected Google Calendar with write access, a confirmed "
+                    "change also refreshes their synced calendar automatically -- no separate sync call needed."
                 ),
             },
             "day": {"type": "string", "description": "Weekday name, e.g. 'Tuesday'."},

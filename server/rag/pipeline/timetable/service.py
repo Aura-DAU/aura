@@ -11,6 +11,7 @@ arguments — a student can only ever change their own timetable.
 from __future__ import annotations
 
 import datetime
+import re
 from dataclasses import dataclass
 from typing import Optional
 
@@ -18,6 +19,29 @@ import db.connection as db_conn
 
 DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 VALID_SESSION_TYPES = {"lecture", "lab", "tutorial"}
+
+# BUG-02 fix: start_time/end_time arrive as raw strings from LLM tool-call
+# arguments. Without a format check here, malformed values (e.g. "8:00 AM",
+# "25:00") reach the DB and either raise an unhandled psycopg2 exception
+# (leaking a DB traceback to the LLM/client) or silently misbehave.
+_TIME_RE = re.compile(r"^([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$")
+
+
+def _validate_time(t: Optional[str], field_name: str) -> Optional[str]:
+    if t is None:
+        return None
+    if not _TIME_RE.match(t):
+        raise TimetableError(f"{field_name} must be in 24-hour HH:MM format (e.g. '09:00').")
+    return t
+
+
+def _to_minutes(t: str) -> int:
+    parts = t.split(":")
+    return int(parts[0]) * 60 + int(parts[1])
+
+
+def _slots_overlap(start_a: str, end_a: str, start_b: str, end_b: str) -> bool:
+    return _to_minutes(start_a) < _to_minutes(end_b) and _to_minutes(start_b) < _to_minutes(end_a)
 
 
 @dataclass
@@ -33,7 +57,25 @@ class _CohortLookup:
 
 
 class TimetableError(Exception):
-    """Raised for user-facing validation problems (bad day name, missing cohort, etc.)."""
+    """Raised for user-facing validation problems (bad day name, missing cohort, etc.).
+
+    API-03 fix: carries an explicit `status_code` (default 400, the common
+    case — bad input / not-yet-configured state) so route handlers can map
+    it correctly instead of blanket-returning 409 for everything. Pass
+    status_code=404 for "couldn't find the thing you're referring to" and
+    status_code=409 for a genuine resource conflict (e.g. overlapping slot).
+    """
+
+    def __init__(self, message: str, status_code: int = 400):
+        super().__init__(message)
+        self.status_code = status_code
+
+
+class TimetableForbiddenError(TimetableError):
+    """Role-mismatch errors (e.g. a faculty-only tool called by a student)."""
+
+    def __init__(self, message: str):
+        super().__init__(message, status_code=403)
 
 
 def _field(identity, name: str):
@@ -136,10 +178,84 @@ def _narrow_by_dept(rows: list[dict], dept: Optional[str]) -> list[dict]:
     return narrowed if narrowed else rows
 
 
+def _normalize_dept(value: Optional[str]) -> str:
+    """'ICT-CS' / 'ICT_CS' / 'ict cs' all normalize to 'ICTCS' so dept values
+    coming from different places (email-inferred 'ICTCS', curated doc labels
+    'ICT-CS', DB free text, etc.) compare equal."""
+    return re.sub(r"[^A-Z0-9]", "", (value or "").upper())
+
+
+# Course-code → branch(es) lookup, hand-verified against the curated
+# per-branch timetable docs in data/academics/timetable/*.md (produced by
+# cross-referencing the raw combined sheet against the registrar's course
+# structure). The source spreadsheet's "Core" batch blocks for 2nd/3rd year
+# don't tag each row with a branch at all — course codes are the only signal
+# — so this map exists to fill that gap for the specific codes that were
+# actually confirmed. Deliberately NOT exhaustive: a course_code with no
+# entry here is left unfiltered (shown to every branch), matching the
+# curated docs' own approach of flagging genuine ambiguity instead of
+# guessing. Extend this as more cohorts/years get verified.
+#
+# Year 3 / Sem 5 (see ICT_3rd_Yr_Sem5.md, ICT-CS_3rd_Yr_Sem5.md,
+# MNC_3rd_Yr_Sem5.md, EVD_3rd_Yr_Sem5.md):
+#   - IT304/IT314/CT303 are the shared ICT + ICT-CS core (ICT-CS only
+#     diverges starting Sem 4, and CS374 is its one added specialization
+#     course this semester).
+#   - MC311-314 are MnC-only; ED311/ED312 + HM116 are EVD-only. MC314 and
+#     HM116 are the SAME Principles of Economics class recorded under two
+#     different codes for MnC vs EVD — not two separate classes.
+# Year 2 / Sem 3 (see ICT_and_ICT-CS_2nd_Yr_Sem3.md, MNC_2nd_Yr_Sem3.md,
+# EVD_2nd_Yr_Sem3.md): ICT and ICT-CS are still on an identical curriculum
+# this semester, so both map to the same course codes (that's correct, not
+# a mixing bug). HM216 is intentionally left OUT of this map — it's a large
+# shared lecture taken by all four branches, just split into two
+# room-capacity sections, so it should stay visible to everyone.
+COURSE_BRANCH_MAP: dict[str, set[str]] = {
+    # Year 3 / Sem 5
+    "IT304": {"ICT", "ICTCS"},
+    "IT314": {"ICT", "ICTCS"},
+    "CT303": {"ICT", "ICTCS"},
+    "CS374": {"ICTCS"},
+    "MC311": {"MNC"}, "MC312": {"MNC"}, "MC313": {"MNC"}, "MC314": {"MNC"},
+    "ED311": {"EVD"}, "ED312": {"EVD"}, "HM116": {"EVD"},
+    # Year 2 / Sem 3
+    "SC223": {"ICT", "ICTCS"}, "IT227": {"ICT", "ICTCS"},
+    "CT204": {"ICT", "ICTCS"}, "IT216": {"ICT", "ICTCS"},
+    "MC211": {"MNC"}, "MC212": {"MNC"}, "MC213": {"MNC"},
+    "MC214": {"MNC"}, "MC216": {"MNC"},
+    "ED211": {"EVD"}, "ED212": {"EVD"}, "ED213": {"EVD"}, "ED214": {"EVD"},
+}
+
+
+def _narrow_by_course_branch_map(rows: list[dict], dept: Optional[str]) -> list[dict]:
+    """Drops rows whose course_code is confirmed (via COURSE_BRANCH_MAP) to
+    belong to a *different* branch than the student's. Unknown course codes
+    and unknown student dept both pass through unfiltered — this only acts
+    where we have a verified answer, never a guess."""
+    dept_norm = _normalize_dept(dept)
+    if not dept_norm:
+        return rows
+    out = []
+    for row in rows:
+        branches = COURSE_BRANCH_MAP.get((row.get("course_code") or "").strip().upper())
+        if branches and dept_norm not in branches:
+            continue
+        out.append(row)
+    return out
+
+
+def _exclude_electives(rows: list[dict]) -> list[dict]:
+    """Electives must only ever enter the timetable through the explicit
+    selection step below (get_all_elective_rows + selected_ids) — never
+    through the general per-cohort query. Without this, an elective master
+    row that happens to share the student's (year, sem, sec) — including
+    the 'sec is blank' rows the common-fallback query matches — leaks into
+    every student's timetable regardless of whether they've picked it."""
+    return [row for row in rows if not _is_elective(row.get("course_type", ""))]
 def _require_cohort(identity) -> tuple[int, int, str]:
     role = _field(identity, "role")
     if role != "student":
-        raise TimetableError("Only students have a personal timetable in AURA.")
+        raise TimetableForbiddenError("Only students have a personal timetable in AURA.")
 
     erp_id = _field(identity, "erp_id")
     year = sem = sec = None
@@ -219,8 +335,17 @@ def get_overrides(erp_id: str) -> list[dict]:
 
 
 def _row_to_slot(row: dict, is_custom: bool = False, override_id=None) -> dict:
+    # BUG-03 support: expose the underlying master_id so overlap detection
+    # can exclude a slot from colliding with the very master row it's
+    # replacing. An override row (fetched via get_overrides) already carries
+    # its own "master_id" column (None for a plain 'add'); a plain master
+    # row, or a replace-merged dict copied from one, has no "master_id" key
+    # and its "id" field IS the master id.
+    master_id_val = row.get("master_id") if "master_id" in row else row.get("id")
+
     return {
         "id": str(override_id or row["id"]),
+        "master_id": str(master_id_val) if master_id_val else None,
         "day_of_week": row["day_of_week"],
         "day": day_name(row["day_of_week"]),
         "start_time": _fmt_time(row["start_time"]),
@@ -336,10 +461,16 @@ def get_effective_timetable(identity) -> dict:
                ORDER BY day_of_week, start_time""",
             (year, sem),
         )
-        master_rows = {row["id"]: row for row in _narrow_by_dept(common_rows, dept)}
+        common_rows = _narrow_by_dept(common_rows, dept)
+        common_rows = _narrow_by_course_branch_map(common_rows, dept)
+        common_rows = _exclude_electives(common_rows)
+        master_rows = {row["id"]: row for row in common_rows}
         is_common = True
     else:
-        master_rows = {row["id"]: row for row in get_master_rows(year, sem, sec, dept)}
+        rows = get_master_rows(year, sem, sec, dept)
+        rows = _narrow_by_course_branch_map(rows, dept)
+        rows = _exclude_electives(rows)
+        master_rows = {row["id"]: row for row in rows}
         
     overrides = get_overrides(erp_id) if erp_id else []
 
@@ -394,7 +525,7 @@ def get_effective_timetable(identity) -> dict:
 
 def list_my_changes(identity) -> list[dict]:
     if _field(identity, "role") != "student":
-        raise TimetableError("Only students have a personal timetable in AURA.")
+        raise TimetableForbiddenError("Only students have a personal timetable in AURA.")
     overrides = get_overrides(_field(identity, "erp_id"))
     return [
         {
@@ -445,6 +576,12 @@ def apply_change(
     if session_type and session_type not in VALID_SESSION_TYPES:
         raise TimetableError("session_type must be 'lecture', 'lab', or 'tutorial'.")
 
+    # BUG-02 fix: validate time format before it ever reaches the DB.
+    start_time = _validate_time(start_time, "start_time")
+    end_time = _validate_time(end_time, "end_time")
+    if start_time and end_time and _to_minutes(end_time) <= _to_minutes(start_time):
+        raise TimetableError("end_time must be after start_time.")
+
     day_of_week = parse_day(day) if day is not None else None
 
     master_id = None
@@ -455,13 +592,32 @@ def apply_change(
         if master_id is None:
             raise TimetableError(
                 "I couldn't find a matching class on your timetable for that day/time/course — "
-                "could you double check the details?"
+                "could you double check the details?",
+                status_code=404,
             )
     elif kind == "add":
         if day_of_week is None or not start_time or not end_time or not course_name:
             raise TimetableError(
                 "To add a new class I need at least the day, start time, end time, and course name."
             )
+
+    # BUG-03 fix: for 'add' and 'replace', reject a slot that overlaps an
+    # existing slot on the same day in the student's *effective* timetable
+    # (skipping the slot being replaced itself), so a student can't end up
+    # with two classes at the same time.
+    if kind in ("add", "replace") and day_of_week is not None and start_time and end_time:
+        effective = get_effective_timetable(identity)
+        for slot in effective["timetable"]:
+            if slot["day_of_week"] != day_of_week:
+                continue
+            if kind == "replace" and master_id is not None and slot.get("master_id") == master_id:
+                continue
+            if _slots_overlap(start_time, end_time, slot["start_time"], slot["end_time"]):
+                raise TimetableError(
+                    f"That overlaps with {slot.get('course_code') or 'an existing class'} "
+                    f"({slot['start_time']}\u2013{slot['end_time']}) on {day_name(day_of_week)}.",
+                    status_code=409,
+                )
 
     db_conn.execute(
         """INSERT INTO timetable_overrides
@@ -481,7 +637,7 @@ def clear_change(identity, override_id: str) -> dict:
     """Soft-deletes one of the requester's OWN overrides (never another
     student's — the WHERE clause is scoped to erp_id)."""
     if _field(identity, "role") != "student":
-        raise TimetableError("Only students have a personal timetable in AURA.")
+        raise TimetableForbiddenError("Only students have a personal timetable in AURA.")
     db_conn.execute(
         """UPDATE timetable_overrides SET is_active = FALSE, updated_at = now()
            WHERE id = %s AND erp_id = %s""",
@@ -548,7 +704,7 @@ def get_faculty_timetable(identity) -> dict:
     faculty member is listed as the instructor."""
     role = _field(identity, "role")
     if role != "faculty":
-        raise TimetableError("This tool is only available to faculty members.")
+        raise TimetableForbiddenError("This tool is only available to faculty members.")
 
     faculty_name = _field(identity, "faculty_initials") or _field(identity, "erp_id")
     if not faculty_name:
@@ -644,7 +800,8 @@ def get_timetable_for_cohort(
             where_desc += f", Branch '{branch}'"
         raise TimetableError(
             f"I couldn't find a timetable for {where_desc}. "
-            "Double check the year/semester, branch, and section."
+            "Double check the year/semester, branch, and section.",
+            status_code=404,
         )
 
     slots = [_row_to_slot(r) for r in rows]
@@ -691,10 +848,8 @@ def get_available_electives(identity) -> dict:
                 "course_name": row["course_name"],
                 "course_type": row.get("course_type", ""),
                 "selected": mid in selected_ids if electives_configured else False,
-                "master_ids": [],
                 "slots": [],
             }
-        courses[code]["master_ids"].append(mid)
         # If any slot for this course is selected, mark the course as selected
         if electives_configured and mid in selected_ids:
             courses[code]["selected"] = True
@@ -725,8 +880,23 @@ def save_elective_selections(identity, course_codes: list[str]) -> dict:
     year, sem, sec = _require_cohort(identity)
     erp_id = _field(identity, "erp_id")
 
+    # BUG-09 fix: an empty course_codes list is now a valid "reset" request —
+    # it clears any saved selections and reverts the student to the
+    # pre-configuration state where every elective is shown, rather than
+    # being rejected outright.
     if not course_codes:
-        raise TimetableError("Please select at least one elective course.")
+        with db_conn.get_conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "DELETE FROM student_elective_selections WHERE erp_id = %s",
+                    (erp_id,),
+                )
+        return {
+            "status": "reset",
+            "selected_courses": [],
+            "total_slots": 0,
+            "timetable": get_effective_timetable(identity),
+        }
 
     # Resolve course_codes to master_ids — scoped to the student's own
     # (year, sem) so they can only select electives actually offered to
@@ -749,21 +919,31 @@ def save_elective_selections(identity, course_codes: list[str]) -> dict:
             f"{', '.join(sorted(unmatched))}. Use get_available_electives to see valid options."
         )
 
-    # Atomic replace: delete old, insert new
-    db_conn.execute(
-        "DELETE FROM student_elective_selections WHERE erp_id = %s",
-        (erp_id,),
-    )
-    for mid in matched_ids:
-        db_conn.execute(
-            "INSERT INTO student_elective_selections (erp_id, master_id) VALUES (%s, %s)",
-            (erp_id, mid),
-        )
+    # BUG-01 fix: DELETE + N x INSERT must be one transaction, not N+1
+    # separate db_conn.execute() calls (each of which checks out its own
+    # connection and commits independently). A single get_conn() block
+    # keeps the replace atomic — a concurrent reader never observes a
+    # window with zero electives, and a crash mid-write rolls back fully
+    # instead of losing the student's prior selections.
+    with db_conn.get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "DELETE FROM student_elective_selections WHERE erp_id = %s",
+                (erp_id,),
+            )
+            for mid in matched_ids:
+                cur.execute(
+                    "INSERT INTO student_elective_selections (erp_id, master_id) VALUES (%s, %s)",
+                    (erp_id, mid),
+                )
 
+    # API-02 fix: return the updated effective timetable inline so the
+    # frontend doesn't need a second round trip to /timetable/me.
     return {
         "status": "saved",
         "selected_courses": sorted(matched_codes),
         "total_slots": len(matched_ids),
+        "timetable": get_effective_timetable(identity),
     }
 
 
@@ -771,7 +951,7 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
     """Updates the student's cohort (year, semester, section) in user_identity_map."""
     role = _field(identity, "role")
     if role != "student":
-        raise TimetableError("Only students can set their cohort.")
+        raise TimetableForbiddenError("Only students can set their cohort.")
     erp_id = _field(identity, "erp_id")
 
     cur_year = _field(identity, "current_year")
@@ -794,7 +974,10 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
         (new_year, new_sem, new_sec),
     )
     if not check:
-        raise TimetableError(f"No timetable found for Year {new_year}, Semester {new_sem}, Section '{new_sec}'.")
+        raise TimetableError(
+            f"No timetable found for Year {new_year}, Semester {new_sem}, Section '{new_sec}'.",
+            status_code=404,
+        )
 
     db_conn.execute(
         "UPDATE user_identity_map SET current_year = %s, current_sem = %s, current_sec = %s WHERE erp_id = %s",
@@ -816,4 +999,3 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
         "message": f"Successfully updated your cohort to Year {new_year}, Semester {new_sem}, Section {new_sec}.",
         "timetable": get_effective_timetable(identity),
     }
-
