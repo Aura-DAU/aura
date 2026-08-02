@@ -455,11 +455,11 @@ class AnswerGenerator:
                 
                 if not profile.get("name") and role in ("student", "faculty"):
                     profile_text += (
-                        "CRITICAL: The user has not set their preferred name yet. "
-                        "Start your response by asking what they would like to be called. "
-                        "If the user just told you their name, you MUST output the exact tag "
-                        "`[UPDATE_PROFILE_NAME: Their Name]` (e.g. `[UPDATE_PROFILE_NAME: John]`) "
-                        "in your response to save it, then continue assisting them.\n\n"
+                        "The user has not set their preferred name yet. "
+                        "Before answering their question, politely ask them what they would like to be called. "
+                        "IMPORTANT: ONLY if the user's VERY LAST message explicitly states their name, "
+                        "you should output the exact tag `[UPDATE_PROFILE_NAME: <their name>]` (e.g. `[UPDATE_PROFILE_NAME: Alice]`) "
+                        "to save it. DO NOT output this tag if they haven't told you their name yet.\n\n"
                     )
 
             if tracking_flags:

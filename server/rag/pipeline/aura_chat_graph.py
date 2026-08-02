@@ -141,6 +141,7 @@ class AuraState(TypedDict, total=False):
     academic_scope: Any
     display_profile: Any
     on_delta: Any  # token-streaming callback, threaded straight to the generator
+    on_profile_update: Any  # name extraction callback
     summary: Optional[str]  # rolling conversation memory (pipeline.memory)
 
     query_type: Optional[str]

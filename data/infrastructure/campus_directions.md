@@ -6,7 +6,8 @@ scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
 version: "v2"
 description: "A complete and exhaustive database of walking and driving directions covering every possible route between all buildings, facilities, and landmarks on the DA-IICT campus."
----# Exhaustive DA-IICT Campus Navigation and Walking Directions
+---
+# Exhaustive DA-IICT Campus Navigation and Walking Directions
 
 **Last Modified:** Unknown
 
