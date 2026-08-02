@@ -1050,12 +1050,15 @@ class RetrievalPipeline:
         if os.getenv("DISABLE_DLS_FILTER", os.getenv("DISABLE_PINECONE_DLS_FILTER", "false")).lower() == "true":
             semantic_filter = None
 
-        results = self.retriever.index.query(
-            vector=query_embedding[0].tolist(),
-            top_k=50,
-            include_metadata=True,
-            filter=semantic_filter
-        )
+        if self.retriever.index:
+            results = self.retriever.index.query(
+                vector=query_embedding[0].tolist(),
+                top_k=50,
+                include_metadata=True,
+                filter=semantic_filter
+            )
+        else:
+            results = {"matches": []}
         semantic_list = []
         for match in results["matches"]:
             semantic_list.append({

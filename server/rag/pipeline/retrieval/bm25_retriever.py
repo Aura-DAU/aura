@@ -166,6 +166,21 @@ class BM25Retriever:
         chunk,
         metadata_filter
     ):
+        import os
+        if os.getenv("DISABLE_DLS_FILTER", "false").lower() == "true" or os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
+            def strip_auth(f):
+                if not isinstance(f, dict): return f
+                nf = {}
+                for k, v in f.items():
+                    if k == "authorization": continue
+                    elif k in ["$and", "$or"]:
+                        nl = [strip_auth(x) for x in v]
+                        nl = [x for x in nl if x]
+                        if nl: nf[k] = nl
+                    else:
+                        nf[k] = v
+                return nf
+            metadata_filter = strip_auth(metadata_filter)
 
         if not metadata_filter:
             return True
