@@ -23,21 +23,10 @@ export default function PrivacySettingsPage() {
     }
     if (status !== "authenticated") return
 
-    loadTimerRef.current = setTimeout(() => {
-      setAdvisors(["EMP1001", "EMP1002"])
-      setLoading(false)
-    }, 600)
-
-    return () => {
-      if (loadTimerRef.current) clearTimeout(loadTimerRef.current)
-    }
+    // Immediately load data without delay
+    setAdvisors(["EMP1001", "EMP1002"])
+    setLoading(false)
   }, [status, router])
-
-  useEffect(() => {
-    return () => {
-      if (toggleTimerRef.current) clearTimeout(toggleTimerRef.current)
-    }
-  }, [])
 
   if (status === "loading" || loading) {
     return (
@@ -53,13 +42,11 @@ export default function PrivacySettingsPage() {
       `[DUMMY] ${currentAccess ? "Revoking" : "Granting"} access for advisor ${advisorId}`
     )
 
-    if (toggleTimerRef.current) clearTimeout(toggleTimerRef.current)
-    toggleTimerRef.current = setTimeout(() => {
-      setAdvisors((prev) =>
-        currentAccess ? prev.filter((id) => id !== advisorId) : [...prev, advisorId]
-      )
-      setToggling(null)
-    }, 500)
+    // Immediately update state without delay
+    setAdvisors((prev) =>
+      currentAccess ? prev.filter((id) => id !== advisorId) : [...prev, advisorId]
+    )
+    setToggling(null)
   }
 
   return (
