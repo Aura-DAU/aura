@@ -35,6 +35,7 @@ from metadata_extractors import (
     extract_program_name,
     extract_section_type,
     resolve_document_academic_year,
+    extract_research_domains,
 )
 
 logger = logging.getLogger(__name__)
@@ -943,6 +944,11 @@ def process_markdown_file(file_path):
 
                     if section_faculty:
                         chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
+                        # Also extract research domain for faculty profiles
+                        domains = extract_research_domains(body)
+                        if domains:
+                            chunk_record["research_domain"] = domains if len(domains) > 1 else domains[0]
+                            
                     if alumni_name:
                         chunk_record["alumni_name"] = alumni_name
                     if section_course_codes:

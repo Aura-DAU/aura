@@ -132,6 +132,7 @@ Entity Types
 - course_code
 - course_name
 - semester
+- research_domain
 
 ------------------------------------------------------------
 OUTPUT SCHEMA
@@ -181,6 +182,7 @@ RULES
 - Output every field exactly once.
 - Do not omit fields.
 - Course codes (e.g. IT205, CS301, MA101, ICT623) must always be extracted as course_code entities, even if the query does not explicitly use the word "course".
+- Course Name to Course Code Resolution: If the user query contains a natural language course name (e.g., "Machine Learning", "Data Structures", "Operating Systems", "Computer Networks", "Database Management Systems", "Software Engineering"), you MUST translate it to the exact course code if known and include BOTH `course_name` and `course_code` in the entities. Examples: "Machine Learning" -> IT206, "Data Structures" -> IT205, "Operating Systems" -> CS301, "Computer Networks" -> IT314, "Database Management Systems" -> IT314 or IT206 depending on curriculum, "Software Engineering" -> IT314. This is critical for timetable and faculty lookup.
 
 ------------------------------------------------------------
 SPECIAL CASES

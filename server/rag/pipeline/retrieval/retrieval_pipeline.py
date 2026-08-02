@@ -492,6 +492,22 @@ class RetrievalPipeline:
         # bypass this via _has_explicit_programme_context below regardless.
         return plan.get("retrieval_intent") in {"program_curriculum", "program_overview"}
 
+    # Matches explicit programme abbreviations, year ordinals, or semester
+    # numbers in the raw query text — a signal that the question is about a
+    # public timetable/curriculum document, not the user's own ERP record.
+    # Referenced by the abstention gate in get_context().
+    _EXPLICIT_PROGRAMME_IN_QUERY_RE = re.compile(
+        r"\b(?:"
+        r"b\.?tech|m\.?tech|m\.?sc|bs[\s\-]ms|b\.?des|m\.?des|ph\.?d|"
+        r"ict(?:[\s\-]cs)?|mnc|evd|ece[\s\-]ai|cs[\s\-]ai|data\s+science|"
+        r"first[\s-]year|second[\s-]year|third[\s-]year|fourth[\s-]year|"
+        r"1st[\s-]year|2nd[\s-]year|3rd[\s-]year|4th[\s-]year|"
+        r"semester\s+[1-8]|sem(?:ester)?\s+[1-8]|\bsem\s*[1-8]\b|"
+        r"postgraduate|undergraduate|all\s+(?:students?|branches?|programs?)"
+        r")\b",
+        re.IGNORECASE,
+    )
+
     @staticmethod
     def _has_explicit_programme_context(plan: dict) -> bool:
         """True when the query already has enough non-personal context that
@@ -788,11 +804,18 @@ class RetrievalPipeline:
         # cannot resolve the student's AcademicScope. If the user (or rewriter)
         # already named a programme/course, retrieve without personal scope —
         # curriculum docs are public and the named entity is enough to filter.
+        # Fix EP-OVERRIDE (rag_detailed_report Aug 2026): also bypass when the
+        # raw query explicitly names a programme abbreviation, year ordinal, or
+        # semester number — these are always public timetable/curriculum queries.
+        _explicit_prog_in_query = bool(
+            RetrievalPipeline._EXPLICIT_PROGRAMME_IN_QUERY_RE.search(original_query or "")
+        )
         if (
             user_role == "student"
             and self._requires_academic_scope(plan)
             and academic_scope is None
             and not self._has_explicit_programme_context(plan)
+            and not _explicit_prog_in_query
         ):
             return {
                 "query": original_query,
@@ -1358,7 +1381,7 @@ class RetrievalPipeline:
                         entity_queries.append((val_str, {metadata_key: {"$eq": canonical_val}}))
                     else:
                         entity_queries.append((val_str, None))
-                elif metadata_key in ["faculty_name", "event_name", "course_code", "course_name", "semester"]:
+                elif metadata_key in ["faculty_name", "event_name", "course_code", "course_name", "semester", "research_domain"]:
                     entity_queries.append((val_str, {metadata_key: {"$eq": val_str}}))
                 else:
                     entity_queries.append((val_str, None))

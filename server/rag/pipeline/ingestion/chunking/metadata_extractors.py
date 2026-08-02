@@ -394,6 +394,24 @@ def extract_program_name(
     return None
 
 
+def extract_research_domains(body_text: str) -> list[str]:
+    """Extracts research domains or interests from a faculty profile."""
+    domains = set()
+    
+    # Common headers for research interests
+    match = re.search(r"(?:Research Interests?|Areas of Interest|Specialization)[\s:]*(.*?)(?:\n\n|\n[A-Z]|$)", body_text, re.IGNORECASE | re.DOTALL)
+    if match:
+        interests_str = match.group(1).strip()
+        # Split by commas, newlines, or semicolons
+        parts = re.split(r"[,\n;]", interests_str)
+        for part in parts:
+            clean_part = re.sub(r"^[-\*\u2022]\s*", "", part.strip())
+            if clean_part and len(clean_part) > 2 and len(clean_part) < 100:
+                domains.add(clean_part.title())
+                
+    return sorted(list(domains))
+
+
 def extract_section_type(
     section,
     subclusters
