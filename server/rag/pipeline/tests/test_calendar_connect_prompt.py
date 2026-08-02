@@ -80,7 +80,7 @@ def test_connect_required_surfaced_when_calendar_not_linked(monkeypatch):
     # With no linked calendar, the direct sync reports calendar_not_connected →
     # a structured connect CTA, with no LLM or request for timetable details.
     monkeypatch.setattr(
-        timetable_sync, "preview",
+        timetable_sync, "apply",
         lambda identity, **k: {"status": "calendar_not_connected", "message": "Not linked."},
     )
     orch = _no_llm_orch(monkeypatch)
