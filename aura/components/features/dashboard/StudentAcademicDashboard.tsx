@@ -27,12 +27,24 @@ export function StudentAcademicDashboard({
   const router = useRouter()
   const [showTimetable, setShowTimetable] = useState(true)
   const [isMounted, setIsMounted] = useState(false)
+  const [preferredName, setPreferredName] = useState(userName)
 
   useEffect(() => {
     setIsMounted(true)
     const saved = localStorage.getItem("aura_dashboard_show_timetable")
     if (saved !== null) {
       setShowTimetable(saved === "true")
+    }
+    try {
+      const rawProfile = localStorage.getItem("aura-profile-v2")
+      if (rawProfile) {
+        const profile = JSON.parse(rawProfile)
+        if (profile.name) {
+          setPreferredName(profile.name)
+        }
+      }
+    } catch {
+      // ignore parse errors
     }
   }, [])
 
@@ -86,7 +98,7 @@ export function StudentAcademicDashboard({
           <div className="mb-6 flex flex-col justify-between gap-4 rounded-2xl border border-theme-gray-light bg-theme-gray/40 p-6 backdrop-blur-md sm:flex-row sm:items-center">
             <div>
               <h2 className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-xl font-bold text-transparent md:text-2xl">
-                Welcome back, {userName}!
+                Welcome back, {preferredName}!
               </h2>
               <p className="mt-1 text-xs text-neutral-400">
                 Student · {departmentName}

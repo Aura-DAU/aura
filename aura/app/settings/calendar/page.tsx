@@ -62,7 +62,7 @@ export default function CalendarSettingsPage() {
   const isNotConnected = calStatus === "not_connected"
 
   return (
-    <div className="relative min-h-screen bg-theme-black px-4 py-10 text-neutral-100">
+    <div className="relative min-h-screen bg-theme-black px-4 py-10 sm:px-6 lg:px-8 text-neutral-100">
       {/* Background decoration */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:24px_24px]" />
@@ -70,7 +70,7 @@ export default function CalendarSettingsPage() {
         <div className="absolute -bottom-32 -right-32 size-96 rounded-full bg-theme-yellow/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-xl">
+      <div className="relative z-10 mx-auto w-full max-w-xl md:max-w-2xl lg:max-w-3xl">
         {/* Nav bar */}
         <div className="mb-6 flex items-center justify-between">
           <Link
@@ -84,11 +84,11 @@ export default function CalendarSettingsPage() {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="flex items-center gap-2.5 text-2xl font-black tracking-tight text-neutral-100 sm:text-3xl">
-            <CalendarCheck2 className="size-7 text-theme-yellow" />
+          <h1 className="flex items-center gap-2.5 text-2xl font-black tracking-tight text-neutral-100 sm:text-3xl lg:text-4xl">
+            <CalendarCheck2 className="size-7 sm:size-8 text-theme-yellow" />
             Google Calendar Sync
           </h1>
-          <p className="mt-2 text-sm leading-relaxed text-neutral-400">
+          <p className="mt-2 text-sm sm:text-base leading-relaxed text-neutral-400">
             Sync your AURA timetable to Google Calendar as recurring weekly events.
             Google Calendar handles reminders on all your devices automatically.
           </p>
