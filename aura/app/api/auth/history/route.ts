@@ -15,7 +15,15 @@ const historyMessageSchema = z.object({
   is_personal_data: z.boolean().optional(),
   calendar_action: z
     .object({
-      type: z.enum(["booking", "connect_required"]).optional(),
+      type: z
+        .enum([
+          "booking",
+          "connect_required",
+          "timetable_sync",
+          "timetable_sync_confirmation",
+          "confirmation_required",
+        ])
+        .optional(),
       event_title: z.string().max(500).optional(),
       date: z.string().max(64).optional(),
       time: z.string().max(64).optional(),
@@ -27,6 +35,8 @@ const historyMessageSchema = z.object({
       connect_path: z.string().max(256).optional(),
       reason: z.string().max(128).optional(),
       message: z.string().max(2000).optional(),
+      event_count: z.number().int().nonnegative().optional(),
+      action: z.enum(["sync_timetable", "unsync_timetable"]).optional(),
     })
     .optional(),
 })
