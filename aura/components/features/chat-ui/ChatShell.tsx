@@ -13,6 +13,7 @@ import { Composer } from "./Composer"
 import { EmptyState } from "./EmptyState"
 import { ProfileModal } from "./ProfileModal"
 import { DocumentViewerSheet } from "./DocumentViewerSheet"
+import { useSession } from "next-auth/react"
 import { InstallPromptBanner } from "./InstallPromptBanner"
 import { AuroraBackground } from "@/components/ui/aurora-background"
 
@@ -21,7 +22,9 @@ export function ChatShell() {
   const { canInstall, promptInstall } = usePWAInstall()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { data: session } = useSession()
   const promptHandled = useRef(false)
+  const greetingDone = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   // Desktop sidebar visibility. Default open for SSR/first paint; hydrate the
   // persisted preference after mount to avoid a hydration mismatch.
@@ -60,6 +63,22 @@ export function ChatShell() {
   }, [searchParams, router])
 
   useEffect(() => {
+    if (!chat.hasHydrated) return
+    if (
+      !greetingDone.current &&
+      session?.user &&
+      !session.user.fullName &&
+      !chat.studentProfile.name &&
+      chat.threads.length === 0
+    ) {
+      greetingDone.current = true
+      chat.insertGreeting(
+        "Welcome to DAU! I noticed you haven't set your preferred name yet. What would you like me to call you?"
+      )
+    }
+  }, [chat.hasHydrated, chat.threads.length, chat.studentProfile.name, session, chat])
+
+  useEffect(() => {
     const stored = localStorage.getItem("aura-sidebar-open")
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (stored !== null) setDesktopSidebarOpen(stored === "1")
@@ -77,11 +96,10 @@ export function ChatShell() {
     })
   }, [])
 
+  const regenerate = chat.handleRegenerate
   const handleRegenerate = useCallback(() => {
-    const lastUser = chat.messages.findLast((m) => m.role === "user")
-    if (lastUser) void chat.handleSendMessage(lastUser.content)
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- avoid depending on whole chat object
-  }, [chat.messages, chat.handleSendMessage])
+    void regenerate()
+  }, [regenerate])
 
   const hasMessages = chat.messages.length > 0
 
@@ -144,8 +162,19 @@ export function ChatShell() {
             ) : null}
 
             {chat.errorMessage ? (
-              <div className="flex items-center justify-center border-b border-theme-red/20 bg-theme-red/10 px-4 py-2 text-xs text-theme-red">
-                {chat.errorMessage}
+              <div
+                role="alert"
+                className="flex items-center justify-center gap-3 border-b border-theme-red/20 bg-theme-red/10 px-4 py-2 text-xs text-theme-red"
+              >
+                <span className="min-w-0 text-center">{chat.errorMessage}</span>
+                <button
+                  type="button"
+                  onClick={() => chat.setErrorMessage(null)}
+                  aria-label="Dismiss error"
+                  className="shrink-0 rounded-md px-1.5 py-0.5 text-[11px] font-medium text-theme-red/80 transition-colors hover:bg-theme-red/15 hover:text-theme-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-red/40"
+                >
+                  Dismiss
+                </button>
               </div>
             ) : null}
 
@@ -169,6 +198,7 @@ export function ChatShell() {
                   <EmptyState
                     onSelectPrompt={chat.handleSendMessage}
                     userName={chat.studentProfile.name}
+                    disabled={chat.loading}
                   >
                     {composer}
                   </EmptyState>

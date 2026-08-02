@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import {
   ArrowLeft,
-  KeyRound,
+  CalendarCheck2,
   Loader2,
   ShieldAlert,
   Settings,
@@ -48,7 +48,7 @@ export default function SettingsHubPage() {
           >
             <ArrowLeft className="size-3.5" /> Back to Chat
           </Link>
-          <span className="text-xs font-mono text-neutral-500">AURA SETTINGS</span>
+          <span className="font-mono text-xs text-neutral-500">AURA SETTINGS</span>
         </div>
 
         <div className="mb-8">
@@ -57,25 +57,25 @@ export default function SettingsHubPage() {
             Settings
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-neutral-400">
-            Manage your eCampus connection and privacy preferences.
+            Manage your Google Calendar connection and privacy preferences.
           </p>
         </div>
 
         <div className="space-y-3">
           {isStudent ? (
             <Link
-              href="/settings/ecampus"
+              href="/settings/calendar"
               className="flex items-start gap-4 rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 transition-colors hover:border-theme-gray-lighter hover:bg-theme-gray"
             >
-              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-theme-red/10 text-theme-red">
-                <KeyRound className="size-5" />
+              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-theme-yellow/10 text-theme-yellow">
+                <CalendarCheck2 className="size-5" />
               </span>
               <span className="min-w-0">
                 <span className="block text-sm font-semibold text-neutral-100">
-                  Connect eCampus
+                  Connect Google Calendar
                 </span>
                 <span className="mt-1 block text-xs leading-relaxed text-neutral-400">
-                  Link your ERP credentials so AURA can fetch your timetable, CGPA, and courses.
+                  Link your Google account so AURA can sync your timetable as weekly recurring events with reminders.
                 </span>
               </span>
             </Link>

@@ -1,37 +1,39 @@
 import os
 import math
+import re
+from datetime import datetime
+from typing import Optional
+
+def extract_latest_year(metadata: dict) -> Optional[int]:
+    """Extract a document's version year from its authoritative metadata.
+
+    Extraction priority order:
+    academic_year -> title -> h1 -> h2 -> h3 -> source_file -> relative_path -> document_year (LAST fallback)
+    """
+    texts_to_search = [
+        metadata.get("academic_year", ""),
+        metadata.get("title", ""),
+        metadata.get("h1", ""),
+        metadata.get("h2", ""),
+        metadata.get("h3", ""),
+        metadata.get("source_file", ""),
+        metadata.get("relative_path", ""),
+        metadata.get("document_year", ""),
+    ]
+
+    for text in texts_to_search:
+        if not text:
+            continue
+        matches = re.findall(r"\b(20[1-3]\d)(?:[-\u2013/]\d{2,4})?\b", str(text))
+        if matches:
+            return max(int(m) for m in matches)
+    return None
 
 
 class Reranker:
 
     def __init__(self):
         self.device = None
-        self.tokenizer = None
-        self.model = None
-        self.H1_BOOST = 0.10
-        self.H2_BOOST = 0.20
-        self.H3_BOOST = 0.15
-
-    def _ensure_local_model(self):
-        if self.model is not None and self.tokenizer is not None:
-            return
-
-        import torch
-        from transformers import (
-            AutoTokenizer,
-            AutoModelForSequenceClassification
-        )
-
-        env_device = os.getenv("RERANKER_DEVICE")
-        if env_device:
-            self.device = torch.device(env_device)
-        elif torch.cuda.is_available():
-            self.device = torch.device("cuda")
-        elif torch.backends.mps.is_available():
-            self.device = torch.device("mps")
-        else:
-            self.device = torch.device("cpu")
-
         self.tokenizer = None
         self.model = None
         self.H1_BOOST = 0.10
@@ -92,6 +94,9 @@ class Reranker:
                 filter(
                     None,
                     [
+                        metadata.get("title"),
+                        metadata.get("category"),
+                        metadata.get("cluster"),
                         metadata.get("h1"),
                         metadata.get("h2"),
                         metadata.get("h3"),
@@ -315,6 +320,9 @@ class Reranker:
             )
         )
 
+        explicit_rule_year = entities.get("rule_year")
+        current_year = datetime.now().year
+
         for result, cross_score in zip(
             results,
             cross_scores
@@ -462,49 +470,38 @@ class Reranker:
             section_boost = min(section_boost, 1.0)
             course_match_boost = min(course_match_boost, 1.0)
 
-            # Soft recency boost when the user did not name a year: prefer
-            # newer C_DCs sheets over superseded Club Committee Data rosters.
-            #
-            # Fix RR-RECENCY: two problems were making this boost unreliable
-            # for exactly the case it exists for — several near-duplicate
-            # yearly rosters (club committees, academic requirements, etc.)
-            # competing for the same query:
-            #   1. The YY-YY regex only matched titles like "2026-27". A
-            #      title like "List of Club Committee Core Members Winter
-            #      2026" (a bare 4-digit year, no dash) got recency_boost=0
-            #      even though it is one of the most current documents,
-            #      letting an older dashed-year doc win purely by luck of
-            #      phrasing.
-            #   2. At weight 0.05, even a "perfect" recency_boost of 1.0 only
-            #      ever changes final_score by 0.05 — far smaller than the
-            #      cross-encoder noise between two near-duplicate documents
-            #      describing the same kind of content (club rosters, academic
-            #      requirement sheets), so recency essentially never decided
-            #      the winner in practice.
-            recency_boost = 0.0
-            if not entities.get("rule_year"):
-                year_text = " ".join(
-                    str(metadata.get(k) or "")
-                    for k in ("academic_year", "title", "source_file", "relative_path")
-                )
-                year_match = re.search(
-                    r"(?:20)?(\d{2})[_\-\u2013](\d{2})(?!\d)",
-                    year_text,
-                )
-                bare_year_match = re.search(r"(20\d{2})(?!\d)", year_text)
-                if year_match:
-                    start_yy = int(year_match.group(1))
-                    end_yy = int(year_match.group(2))
-                    if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
-                        recency_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
-                elif bare_year_match:
-                    # No "YY-YY" academic-year pattern, but a plain 4-digit
-                    # year is present (e.g. "Winter 2026") — still a genuine
-                    # recency signal, just a different phrasing.
-                    yyyy = int(bare_year_match.group(1))
-                    recency_boost = min(max((yyyy - 2020) / 10.0, 0.0), 1.0)
-                elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
-                    recency_boost = 0.6
+            temporal_boost = 0.0
+            if not explicit_rule_year:
+                doc_year = extract_latest_year(metadata)
+                if doc_year:
+                    diff = current_year - doc_year
+                    if diff <= 0:
+                        temporal_boost = 1.0
+                    elif diff <= 5:
+                        temporal_boost = max(0.0, 1.0 - (diff * 0.2))
+                else:
+                    year_text = " ".join(
+                        str(metadata.get(k) or "")
+                        for k in ("academic_year", "title", "source_file", "relative_path")
+                    )
+                    year_match = re.search(
+                        r"(?:20)?(\d{2})[_\-\u2013](\d{2})(?!\d)",
+                        year_text,
+                    )
+                    bare_year_match = re.search(r"(20\d{2})(?!\d)", year_text)
+                    if year_match:
+                        start_yy = int(year_match.group(1))
+                        end_yy = int(year_match.group(2))
+                        if end_yy == (start_yy + 1) % 100 or end_yy == start_yy + 1:
+                            temporal_boost = min(max((2000 + start_yy - 2020) / 10.0, 0.0), 1.0)
+                    elif bare_year_match:
+                        # No "YY-YY" academic-year pattern, but a plain 4-digit
+                        # year is present (e.g. "Winter 2026") — still a genuine
+                        # recency signal, just a different phrasing.
+                        yyyy = int(bare_year_match.group(1))
+                        temporal_boost = min(max((yyyy - 2020) / 10.0, 0.0), 1.0)
+                    elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
+                        temporal_boost = 0.6
 
             # Fix #4 / Fix RR-RECENCY: all components on comparable scales
             # [0, 1]. recency_boost's weight raised 0.05 → 0.15 (taken from
@@ -513,6 +510,42 @@ class Reranker:
             # what happens across several yearly versions of the same roster
             # — the newest one reliably wins instead of the tie effectively
             # being broken by noise.
+            answerability_boost = 0.0
+            lookup_keywords = [
+                "who", "who is", "name", "convener", "convenor", "coordinator",
+                "faculty advisor", "faculty adviser", "advisor", "mentor", "chair",
+                "chairperson", "contact", "contact information", "email", "email id",
+                "phone", "phone number", "mobile", "mobile number", "student id",
+                "erp", "credits", "credit", "credit structure", "prerequisite",
+                "prerequisites", "fee", "fees", "fee structure", "duration",
+                "office", "policy", "syllabus"
+            ]
+            structured_fields = {
+                "convener", "convenor", "coordinator", "faculty advisor", "faculty adviser",
+                "advisor", "mentor", "chair", "chairperson", "student id", "erp",
+                "email", "phone", "mobile", "contact", "credits", "credit",
+                "prerequisite", "fee", "fees", "duration", "office", "policy", "syllabus"
+            }
+            query_lower = query.lower()
+            keyword_pattern = r"\b(" + "|".join(re.escape(k) for k in lookup_keywords) + r")\b"
+            if re.search(keyword_pattern, query_lower):
+                chunk_full_text = "\n".join(
+                    filter(
+                        None,
+                        [
+                            metadata.get("title"),
+                            metadata.get("category"),
+                            metadata.get("cluster"),
+                            metadata.get("h1"),
+                            metadata.get("h2"),
+                            metadata.get("h3"),
+                            metadata.get("text"),
+                        ]
+                    )
+                ).lower()
+                if any(field in chunk_full_text for field in structured_fields):
+                    answerability_boost = 1.0
+
             final_score = (
                 (0.60 * norm_cross)
                 +
@@ -526,7 +559,9 @@ class Reranker:
                 +
                 (0.05 * course_match_boost)
                 +
-                (0.15 * recency_boost)
+                (0.15 * temporal_boost)
+                +
+                (0.05 * answerability_boost)
                 +
                 (semester_penalty * norm_cross)
             )
@@ -550,5 +585,18 @@ class Reranker:
                 x["reranked_score"],
             reverse=True
         )
+
+        print("\n" + "=" * 60)
+        print("===== CROSS-ENCODER RERANK RESULTS =====")
+        print(f"Query: {query}")
+        for rank, item in enumerate(reranked, start=1):
+            meta = item.get("metadata", {})
+            h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
+            print(f"{rank}. reranked_score={item.get('reranked_score', 0.0):.4f} (cross_logit={item.get('cross_score', 0.0):.4f}) | chunk={item.get('id')}")
+            print(f"   title={meta.get('title', 'N/A')}")
+            print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
+            if h_str:
+                print(f"   headers={h_str}")
+        print("=" * 60)
 
         return reranked

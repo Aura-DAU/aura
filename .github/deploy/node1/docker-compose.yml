@@ -1,0 +1,349 @@
+# AURA production stack — Phase E (DO-5)
+#
+# Architecture alignment with the system-architecture doc:
+#   - `nginx`        — edge reverse proxy + SSL termination (aura-nginx)
+#   - `aura`         — Next.js PWA / BFF (monorepo frontend; not in PDF table)
+#   - `backend`      — FastAPI gateway + RAG; LangGraph orchestrator runs
+#                      in-process (AuraChatGraph). Embedding + Cross-Encoder
+#                      also in-process until Phase F microservice split.
+#   - `qdrant`       — vector DB (doc §10)
+#   - `vllm-node*`   — inference pool (doc §14–16); Compose profile `gpu`
+#   - `postgres`     — long-term / auth DB (doc §8)
+#   - `redis`        — short-term memory / quota / push (doc §7)
+#   - `prometheus` / `grafana` — observability
+#
+# InferenceRouter (pipeline/inference_router.py) load-balances across
+# VLLM_ENDPOINTS. Keep GPU addresses in .env.prod — not in application code.
+# Same-host: use Compose DNS (vllm-node1, …). Multi-host: set LAN IPs/hostnames.
+#
+# GPU note: vllm-node* need NVIDIA drivers + Container Toolkit
+# (`nvidia-ctk runtime configure --runtime=docker`). Adjust device_ids to
+# match host GPU indices. Single GPU: run only node1 and set one endpoint.
+#
+# Usage:
+#   cp deploy/node1/.env.node1.example deploy/node1/.env   # fill in secrets
+#   mkdir -p deploy/node1/certs
+#   # Copy host-local TLS (not in git; deploy-apps.sh fail-fasts if missing):
+#   #   scp fullchain.pem privkey.pem aura1@node1:/opt/aura/app/deploy/node1/certs/
+#   # Core stack (no host GPUs required):
+#   docker compose -f deploy/node1/docker-compose.yml --env-file deploy/node1/.env up -d --build
+#   # With local vLLM GPU nodes:
+#   docker compose -f deploy/node1/docker-compose.yml --env-file deploy/node1/.env --profile gpu up -d --build
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      # TLS: host path deploy/node1/certs/{fullchain,privkey}.pem (not rsynced).
+      # Empty/missing dir → nginx crash-loop: cannot load certificate.
+      - ./certs:/etc/nginx/certs:ro
+      # Access-log volume shared (read-only) with nginx-log-exporter below.
+      - nginx-logs:/var/log/nginx
+    depends_on:
+      aura:
+        condition: service_started
+      backend:
+        condition: service_healthy
+    networks:
+      # backend + aura must share aura-edge or nginx gets "host not found in upstream".
+      - aura-edge
+
+  # nginx access-log → Prometheus metrics (per-endpoint request rate + latency).
+  # Reads the shared nginx-logs volume and publishes on the LAN so node 4's
+  # Prometheus can scrape it (the backend :8000 is not host-published; this
+  # exporter deliberately is). Config: deploy/monitoring/nginxlog-exporter.hcl.
+  nginx-log-exporter:
+    image: quay.io/martinhelmich/prometheus-nginxlog-exporter:v1.11.0
+    restart: unless-stopped
+    command: ["-config-file", "/etc/nginxlog-exporter.hcl"]
+    ports:
+      - "${NODE1_METRICS_BIND:-10.100.97.71}:9113:9113"
+    volumes:
+      - nginx-logs:/var/log/nginx:ro
+      - ../monitoring/nginxlog-exporter.hcl:/etc/nginxlog-exporter.hcl:ro
+    depends_on:
+      - nginx
+    networks:
+      - aura-edge
+
+  aura:
+    build:
+      context: ../../aura
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      BACKEND_URL: http://backend:8000
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
+      INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - aura-edge
+      - aura-internal
+
+  backend:
+    build:
+      context: ../../server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      ENV: production
+      PORT: "8000"
+      WEB_CONCURRENCY: ${BACKEND_WORKERS:-2}
+      AUTH_DB_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://redis:6379/0
+      PROD_FRONTEND_ORIGIN: ${PROD_FRONTEND_ORIGIN}
+      INTERNAL_JWT_SECRET: ${INTERNAL_JWT_SECRET}
+      INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
+      # Override in .env.prod for multi-host GPU IPs / single-node pools.
+      VLLM_ENDPOINTS: ${VLLM_ENDPOINTS:-http://vllm-node1:8000/v1,http://vllm-node2:8000/v1,http://vllm-node3:8000/v1}
+      VLLM_MODEL: ${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}
+      VLLM_API_KEY: ${VLLM_API_KEY:-EMPTY}
+      QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
+      QDRANT_API_KEY: ${QDRANT_API_KEY:-}
+      QDRANT_COLLECTION: ${QDRANT_COLLECTION:-aura-knowledge-base}
+      # Node 4 embedding/reranker microservice (preferred). Without these,
+      # the backend falls back to in-process models — and RERANKER_DEVICE=cuda
+      # then crashes when the backend container has no NVIDIA runtime.
+      EMBEDDING_SERVICE_URL: ${EMBEDDING_SERVICE_URL:-}
+      RERANKER_SERVICE_URL: ${RERANKER_SERVICE_URL:-}
+      # Use cpu on Node 1 unless the backend service is given --gpus / nvidia runtime.
+      RERANKER_DEVICE: ${RERANKER_DEVICE:-cpu}
+      GOOGLE_CALENDAR_CLIENT_ID: ${GOOGLE_CALENDAR_CLIENT_ID}
+      GOOGLE_CALENDAR_CLIENT_SECRET: ${GOOGLE_CALENDAR_CLIENT_SECRET}
+      GOOGLE_CALENDAR_REDIRECT_URI: ${GOOGLE_CALENDAR_REDIRECT_URI:-https://aura.dau.ac.in/backend/calendar/callback}
+      GOOGLE_CALENDAR_VAULT_KEY: ${GOOGLE_CALENDAR_VAULT_KEY}
+      GOOGLE_CALENDAR_VAULT_DB: /var/lib/aura/google_calendar_vault.db
+      ECAMPUS_VAULT_KEY: ${ECAMPUS_VAULT_KEY}
+      ECAMPUS_VAULT_DB: /var/lib/aura/ecampus_credentials.db
+      ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db
+      AURA_AUDIT_LOG: /var/log/aura/personal_data_audit.log
+      # OBS-01: every gunicorn worker writes its samples here so /metrics
+      # aggregates instead of reporting whichever worker answered the scrape.
+      # Must land on the aura-vault mount below — the path has to be shared by
+      # all workers and writable by the aura user. Omit to fall back to
+      # per-worker registries.
+      PROMETHEUS_MULTIPROC_DIR: ${PROMETHEUS_MULTIPROC_DIR:-/var/lib/aura/prometheus}
+    volumes:
+      # Raw markdown knowledge base — repo-root data/ (two levels up from node1/).
+      - ../../data:/app/data:ro
+      - aura-vault:/var/lib/aura
+      - aura-logs:/var/log/aura
+    # Note: do NOT depends_on vllm-node* here — those services use profile
+    # `gpu`. Referencing them would break non-GPU `compose up`. Start with
+    # `--profile gpu` (or point VLLM_ENDPOINTS at external nodes).
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    networks:
+      - aura-edge
+      - aura-internal
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - aura-internal
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: [ "redis-server", "--appendonly", "yes" ]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    networks:
+      - aura-internal
+
+  # Vector DB (architecture doc §10)
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: unless-stopped
+    expose:
+      - "6333"
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    healthcheck:
+      # Qdrant image has no curl; TCP accept on 6333 is enough for start order.
+      test: [ "CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    networks:
+      - aura-internal
+
+  # ── Inference pool (architecture doc §14–16) — profile: gpu ──────────
+  # Enable with: docker compose ... --profile gpu up -d
+  # InferenceRouter implements least-loaded selection + failover; Compose
+  # only declares the pool topology.
+  #
+  # --gpu-memory-utilization/--max-num-seqs are load-bearing, not just
+  # tuning knobs: MAX_MODEL_LEN=16384 means each active sequence can
+  # reserve up to ~2x the KV-cache blocks it did at the old 8192 context,
+  # under PagedAttention. Without an explicit --max-num-seqs cap, vLLM
+  # will keep admitting concurrent sequences and can exhaust/fragment the
+  # KV cache under peak traffic.
+  #
+  # The 24 default matches the live ceiling and KV reality (measured
+  # kv_cache_max_concurrency≈2.9 at max_model_len 8192); revisit upward only
+  # after a max_model_len cutover toward 4096.
+  vllm-node1:
+    image: vllm/vllm-openai:latest
+    profiles: [ "gpu" ]
+    restart: unless-stopped
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}" ]
+    expose:
+      - "8000"
+    volumes:
+      - vllm-cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ "0" ]
+              capabilities: [ gpu ]
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)" ]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 300s
+    networks:
+      - aura-internal
+
+  vllm-node2:
+    image: vllm/vllm-openai:latest
+    profiles: [ "gpu" ]
+    restart: unless-stopped
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}" ]
+    expose:
+      - "8000"
+    volumes:
+      - vllm-cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ "1" ]
+              capabilities: [ gpu ]
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)" ]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 300s
+    networks:
+      - aura-internal
+
+  vllm-node3:
+    image: vllm/vllm-openai:latest
+    profiles: [ "gpu" ]
+    restart: unless-stopped
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}" ]
+    expose:
+      - "8000"
+    volumes:
+      - vllm-cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ "2" ]
+              capabilities: [ gpu ]
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/v1/models', timeout=5)" ]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 300s
+    networks:
+      - aura-internal
+
+  # Observability (aura-prometheus / aura-grafana)
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    volumes:
+      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    expose:
+      - "9090"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - aura-internal
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ../monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
+      - ../monitoring/grafana-dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml:ro
+      # JSON dashboards on a separate path from the provider YAML mount.
+      - ../monitoring/dashboards:/etc/grafana/dashboards:ro
+    expose:
+      - "3000"
+    depends_on:
+      - prometheus
+    networks:
+      - aura-internal
+
+networks:
+  aura-edge:
+  aura-internal:
+
+volumes:
+  nginx-logs:
+  postgres-data:
+  redis-data:
+  aura-vault:
+  aura-logs:
+  qdrant-storage:
+  vllm-cache:
+  prometheus-data:
+  grafana-data:

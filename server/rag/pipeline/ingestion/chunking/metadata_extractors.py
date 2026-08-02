@@ -1,3 +1,4 @@
+import os
 import re
 
 # Academic-year labels like "2024-25", "24-25", "2026_27". Used so scraped_date
@@ -107,11 +108,61 @@ def resolve_document_academic_year(metadata: dict, file_path, body: str = "") ->
     return datetime.date.today().year, None
 
 
+def _detect_ict_cs(identity_text: str):
+    """Return ``("btech-ict", "undergraduate", "ict-cs")`` for ICT-CS-only docs.
+
+    ``identity_text`` must be built from the document's IDENTITY — frontmatter
+    title, top-level heading, and filename — never from prose deep in the body.
+    Branch specialisation is a property of what a document *is*, and the corpus
+    signals it there. Generic documents routinely *mention* ICT-CS in prose: the
+    main "B.Tech. (ICT) Curriculum and Syllabus" describes both degrees in its
+    opening paragraph, and MNC_1st_Yr.md names ICT-CS in a note about shared
+    Institute Core courses. Matching on the body tagged both as
+    branch_id=ict-cs, which would have hidden the primary ICT curriculum from
+    every plain-ICT student: a widening turned into an exclusion, strictly worse
+    than the bug being fixed.
+
+    Returns None when the document is not ICT-CS, and also when it is a SHARED
+    ICT + ICT-CS document ("ICT_and_ICT-CS_2nd_Yr_Sem3", whose own body says
+    "In Semester 3, ICT and ICT-CS follow an identical curriculum"). Those fall
+    through to the plain btech-ict pattern with no branch, so both cohorts keep
+    them.
+
+    ``identity_text`` arrives lowercased with every non-alphanumeric run
+    collapsed to a single space, so "ICT-CS", "ICT_CS" and "ICT CS" all read as
+    "ict cs".
+    """
+    # Shared-cohort phrasings must win over the ICT-CS markers below.
+    if re.search(r"\bict\s+(?:and|&|amp)\s+ict\s+cs\b", identity_text):
+        return None
+    if re.search(r"\bict\s+cs\s+(?:and|&|amp)\s+ict\b", identity_text):
+        return None
+
+    ict_cs_markers = (
+        # "B.Tech ICT-CS", "BTech(ICT_CS)", "ICT-CS 1st Yr"
+        r"\bict\s+cs\b",
+        r"\bictcs\b",
+        # The full programme name, as used on the programmes-of-study page.
+        r"\bict\s+with\s+minor\s+in\s+computational\s+science\b",
+        r"\bhonours\s+in\s+ict\b",
+        r"\bhonours\s+ict\s+minor\s+computational\s+science\b",
+    )
+    if any(re.search(marker, identity_text) for marker in ict_cs_markers):
+        return ("btech-ict", "undergraduate", "ict-cs")
+    return None
+
+
 def extract_academic_applicability(metadata, file_path, body):
     """Deterministically classify document applicability for student scope.
 
-    Academic policy documents without a confident programme and admission range
-    remain unclassified; they are intentionally excluded from scoped retrieval.
+    "unclassified" is now reachable only via an explicit, reviewed
+    frontmatter override (see explicit_scope below) — the heuristic path
+    defaults an academic-section document with no detected course or
+    programme to "global" rather than excluding it, since a live audit of
+    this corpus found that documents naming neither were essentially always
+    genuinely general campus-wide content (exam rules, leadership pages,
+    procurement, etc.), not programme-specific content that failed
+    detection.
     """
     # Explicit, reviewed frontmatter is authoritative. This lets the content
     # owner safely tag exceptions that cannot be inferred from a filename or
@@ -150,6 +201,27 @@ def extract_academic_applicability(metadata, file_path, body):
     # actually detected, instead of silently falling through to
     # "unclassified" the way "B.Tech. (ICT) Curriculum and Syllabus" did.
     normalized_haystack = re.sub(r"[^a-z0-9]+", " ", haystack)
+
+    # Fix MX-BODYPIN: which programme a document BELONGS TO is decided from its
+    # identity — frontmatter title, filename, and top-level heading — never from
+    # prose deep in the body. Matching programme names anywhere in body[:4000]
+    # pinned 32 genuinely campus-wide pages to one arbitrary programme, so every
+    # student on a different programme lost them: "Grading Policy" became
+    # btech-ict-only because it mentions ICT in passing, the careers and
+    # leadership pages became phd-only, and the postgraduate/undergraduate
+    # programme index pages became single-programme. It also mislabelled the two
+    # M.Tech (EC) requirement documents as btech-ece-ai, because the
+    # "electronics and communication" alternative in the ECE-AI pattern matched
+    # their prose and that pattern is tested first. The H1 is included because
+    # the timetable documents carry no frontmatter at all — their identity lives
+    # entirely in the heading ("# Timetable — B.Tech ICT-CS — 1st Year").
+    heading_match = re.search(r"^#\s+(.+)$", body or "", re.MULTILINE)
+    identity_text = re.sub(
+        r"[^a-z0-9]+",
+        " ",
+        " ".join([title, heading_match.group(1) if heading_match else "", path_text]).lower(),
+    )
+
     academic = "academics" in path_text or "academic" in category
     if not academic:
         return {"applicability_scope": "global"}
@@ -163,50 +235,113 @@ def extract_academic_applicability(metadata, file_path, body):
     # policy document into "unclassified" (i.e. permanently excluded from
     # every logged-in student's retrieval, regardless of programme).
     course_code = metadata.get("course_code")
+    if not course_code:
+        # Fix MX-COURSECODE: older course-policy files (filenames like
+        # "course_policy_it495_exploratorydataanalysis_winter24_....md",
+        # or "course_policy_hm_327_...md" where the letters/digits are
+        # split across an underscore) never got a course_code frontmatter
+        # field — the code only ever lived in the filename, and since
+        # underscore is a \w character, a \b-anchored regex on the raw path
+        # can never find a boundary immediately before "it495" inside
+        # "policy_it495". Splitting on non-alphanumeric characters first and
+        # matching each token (and adjacent letter+digit token pairs)
+        # avoids that trap.
+        tokens = re.split(r"[^a-z0-9]+", os.path.basename(path_text))
+        # Words that can precede a 3-digit number without being a course-code
+        # prefix (page numbers, "unknown" placeholders in scraped filenames).
+        _NON_COURSE_TOKENS = {"page", "unknown", "no", "fig", "img", "pg"}
+        for i, tok in enumerate(tokens):
+            if tok in _NON_COURSE_TOKENS:
+                continue
+            m = re.match(r"^([a-z]{2,4})(\d{3})$", tok)
+            if m:
+                course_code = m.group(1) + m.group(2)
+                break
+            if re.match(r"^[a-z]{2,4}$", tok) and i + 1 < len(tokens) and re.match(r"^\d{3}$", tokens[i + 1]):
+                course_code = tok + tokens[i + 1]
+                break
+        if course_code:
+            course_code = course_code.upper()
     if course_code:
         return {
             "applicability_scope": "course",
             "course_code": str(course_code),
         }
 
+    # (pattern, programme_id, degree_level, branch_id)
+    #
+    # ICT-CS is a SPECIALISATION of B.Tech. (ICT), not a separate programme —
+    # the corpus is explicit about this: the ICT-CS requirements document calls
+    # itself "a companion document to the main Academic Requirements for
+    # B.Tech. (ICT) Program" and states "All other rules apply uniformly to all
+    # B.Tech. (ICT) programs as stated in that document". So it keeps
+    # programme_id=btech-ict (which is what makes generic ICT material stay
+    # eligible for an ICT-CS student) and is distinguished only by branch_id.
+    # It must be matched BEFORE the plain ICT pattern, which would otherwise
+    # swallow it.
     programme_patterns = [
-        (r"b\.?\s*tech\s*\(?\s*ict\s*\)?", "btech-ict", "undergraduate"),
-        (r"(?:b\.?\s*tech\s*\(?\s*mnc|mathematics and computing)", "btech-mnc", "undergraduate"),
-        (r"(?:b\.?\s*tech\s*\(?\s*evd|electronics and vlsi)", "btech-evd", "undergraduate"),
-        (r"(?:b\.?\s*tech\s*\(?\s*cs\s*(?:and|&)?\s*ai|computer science and artificial intelligence)", "btech-csai", "undergraduate"),
-        (r"(?:b\.?\s*tech\s*\(?\s*ece[\s\-]*ai|electronics and communication)", "btech-ece-ai", "undergraduate"),
-        (r"(?:m\.?\s*sc\s*\(?\s*ds|m\.sc.*data science)", "msc-ds", "postgraduate"),
-        (r"(?:m\.?\s*sc\s*\(?\s*it|m\.sc.*information technology)", "msc-it", "postgraduate"),
-        (r"(?:m\.?\s*sc\s*\(?\s*agri|agriculture analytics)", "msc-agri-analytics", "postgraduate"),
-        (r"m\.?\s*tech\s*\(?\s*ict", "mtech-ict", "postgraduate"),
-        (r"m\.?\s*tech\s*\(?\s*ec\b", "mtech-ec", "postgraduate"),
-        (r"(?:m\.?\s*tech\s*\(?\s*cs\s*(?:and|&)?\s*ml|m\.?\s*tech\s*\(?\s*cs\b)", "mtech-cs-ml", "postgraduate"),
-        (r"bs[\s\-]*ms\s*\(?\s*(?:ds|data science|artificial intelligence)", "bs-ms-dsai", "undergraduate"),
-        (r"bs[\s\-]*ms\s*\(?\s*it|information technology", "bs-ms-it", "undergraduate"),
-        (r"m\.?\s*des\.?\s*\(?\s*cd", "mdes-cd", "postgraduate"),
-        (r"m\.?\s*des\.?\s*\(?\s*iuxd", "mdes-iuxd", "postgraduate"),
-        (r"ph\.?\s*d", "phd", "doctoral"),
+        (r"b\.?\s*tech\s*\(?\s*ict\s*\)?", "btech-ict", "undergraduate", None),
+        (r"(?:b\.?\s*tech\s*\(?\s*mnc|mathematics and computing)", "btech-mnc", "undergraduate", None),
+        (r"(?:b\.?\s*tech\s*\(?\s*evd|electronics and vlsi)", "btech-evd", "undergraduate", None),
+        (r"(?:b\.?\s*tech\s*\(?\s*cs\s*(?:and|&)?\s*ai|computer science and artificial intelligence)", "btech-csai", "undergraduate", None),
+        (r"(?:b\.?\s*tech\s*\(?\s*ece[\s\-]*ai|electronics and communication)", "btech-ece-ai", "undergraduate", None),
+        (r"(?:m\.?\s*sc\s*\(?\s*ds|m\.sc.*data science)", "msc-ds", "postgraduate", None),
+        (r"(?:m\.?\s*sc\s*\(?\s*it|m\.sc.*information technology)", "msc-it", "postgraduate", None),
+        (r"(?:m\.?\s*sc\s*\(?\s*agri|agriculture analytics)", "msc-agri-analytics", "postgraduate", None),
+        (r"m\.?\s*tech\s*\(?\s*ict", "mtech-ict", "postgraduate", None),
+        (r"m\.?\s*tech\s*\(?\s*ec\b", "mtech-ec", "postgraduate", None),
+        (r"(?:m\.?\s*tech\s*\(?\s*cs\s*(?:and|&)?\s*ml|m\.?\s*tech\s*\(?\s*cs\b)", "mtech-cs-ml", "postgraduate", None),
+        (r"bs[\s\-]*ms\s*\(?\s*(?:ds|data science|artificial intelligence)", "bs-ms-dsai", "undergraduate", None),
+        (r"bs[\s\-]*ms\s*\(?\s*it|information technology", "bs-ms-it", "undergraduate", None),
+        (r"m\.?\s*des\.?\s*\(?\s*cd", "mdes-cd", "postgraduate", None),
+        (r"m\.?\s*des\.?\s*\(?\s*iuxd", "mdes-iuxd", "postgraduate", None),
+        (r"ph\.?\s*d", "phd", "doctoral", None),
     ]
-    programme = next(((pid, level) for pattern, pid, level in programme_patterns if re.search(pattern, normalized_haystack)), None)
+    ict_cs = _detect_ict_cs(identity_text)
+    if ict_cs is not None:
+        programme = ict_cs
+    else:
+        programme = next(
+            ((pid, level, branch) for pattern, pid, level, branch in programme_patterns
+             if re.search(pattern, identity_text)),
+            None,
+        )
     if not programme:
-        return {"applicability_scope": "unclassified"}
+        # Fix MX-UNCLASSIFIED: a document under an "academics" path/category
+        # that names no course and no programme is, overwhelmingly, a
+        # general campus-wide page — examination rules, BTP guidelines,
+        # disciplinary guidelines, the academic calendar, semester
+        # registration, add/drop guidelines, board of studies, or even
+        # leadership pages (President, Founder, Executive Registrar) that
+        # simply live under the academics section of the site. A live audit
+        # of this corpus found 75 such documents, essentially all of them
+        # genuinely general rather than programme-specific, being hard-
+        # excluded from every logged-in student's retrieval (while a guest
+        # or faculty account — for whom academic_scope is always None —
+        # could see them fine). "unclassified" as a fail-closed default was
+        # solving the wrong failure mode: it protects against showing
+        # programme-A-only content to a programme-B student, but there is no
+        # detected programme here to leak in the first place. Defaulting to
+        # "global" is the behavior actually intended for this content.
+        return {"applicability_scope": "global"}
 
     admitted = re.search(r"(?:admitted|admission)\D{0,40}(20\d{2})(?:\s*[-–/]\s*\d{2,4})?", haystack)
     effective = re.search(r"(?:wef|effective from)\D{0,25}(20\d{2})(?:\s*[-–/]\s*\d{2,4})?", haystack)
     year = int((admitted or effective).group(1)) if (admitted or effective) else None
-    programme_id, degree_level = programme
-    return {
+    programme_id, degree_level, branch_id = programme
+    result = {
         "applicability_scope": "curriculum",
         "programme_id": programme_id,
         "degree_level": degree_level,
         # A confident programme match with no explicit admission-year phrase
         # (e.g. a general curriculum/syllabus overview page) applies to every
-        # admission cohort of that programme rather than being thrown away —
-        # only a document that fails to name a programme at all should become
-        # "unclassified".
+        # admission cohort of that programme rather than being thrown away.
         "admission_year_from": year if year is not None else 2000,
         "admission_year_to": 9999,
     }
+    if branch_id:
+        result["branch_id"] = branch_id
+    return result
 
 
 def extract_program_name(

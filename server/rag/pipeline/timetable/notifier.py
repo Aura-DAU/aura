@@ -109,6 +109,14 @@ def run_scheduler_tick(now: datetime.datetime | None = None) -> int:
     now = now or datetime.datetime.now()
     sent_count = 0
 
+    # BUG-04 fix: the scheduler runs every minute with no day-of-week guard.
+    # The academic calendar only has classes Mon–Fri; if a bad timetable
+    # import ever produces a day_of_week=5/6 row (Sat/Sun), this tick would
+    # otherwise notify every subscribed student every weekend for a class
+    # that was never supposed to exist on that day.
+    if now.weekday() >= 5:  # Saturday or Sunday
+        return 0
+
     subscriptions_by_erp: dict[str, list[dict]] = {}
     for sub in _get_active_subscriptions():
         subscriptions_by_erp.setdefault(sub["erp_id"], []).append(sub)

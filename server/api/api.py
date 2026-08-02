@@ -26,8 +26,9 @@ from api.middleware.security_headers import SecurityHeadersMiddleware
 from api.routes.identity_routes import router as identity_router
 from api.routes.admin_routes import router as admin_router
 from api.routes.calendar_routes import router as calendar_router
-from api.routes.timetable_routes import router as timetable_router, push_router
+from api.routes.timetable_routes import router as timetable_router, push_router, profile_router
 from api.routes.chat_routes import router as chat_router
+from api.routes.memory_routes import router as memory_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
@@ -77,7 +78,7 @@ from fastapi import Response
 from api.metrics import REQUEST_COUNT, REQUEST_LATENCY, STAGE_LATENCY, metrics_response
 
 # ── Prometheus scrape endpoint (architecture doc: aura-prometheus) ────────
-# Never routed through the public NGINX edge — see deploy/nginx/nginx.conf, which
+# Never routed through the public NGINX edge — see .github/deploy/nginx.conf, which
 # only proxies /api/*, /backend/, and /. Prometheus scrapes this container
 # directly over the internal Docker network.
 @app.get("/metrics")
@@ -169,10 +170,12 @@ app.include_router(admin_router)
 app.include_router(calendar_router)
 app.include_router(timetable_router)
 app.include_router(push_router)
+app.include_router(profile_router)
 # chat_router: /chat (blocking) + /chat/stream (SSE) — the Next.js proxy at
 # app/api/chat/route.ts calls /chat/stream. Must be registered here or the
 # frontend gets 502 "Backend error" ("AURA temporarily unavailable").
 app.include_router(chat_router)
+app.include_router(memory_router)
 
 
 @app.on_event("startup")
@@ -199,8 +202,26 @@ async def _start_timetable_scheduler():
                 "Production config incomplete — set: " + ", ".join(missing)
             )
 
+    # One line per worker naming the metrics mode — during an incident this is
+    # how you tell whether /metrics is aggregated or per-worker (OBS-01).
+    from api.metrics_multiproc import status as _metrics_status
+    print(f"[metrics] pid {os.getpid()}: {_metrics_status()}", flush=True)
+
     from pipeline.timetable.notifier import start_scheduler
     start_scheduler()
+
+    # Start the Google Calendar nightly auto-sync + retry worker.
+    # Idempotent — safe to call even if GOOGLE_CALENDAR_VAULT_KEY is not yet
+    # configured (e.g. in dev without calendar integration).
+    try:
+        from pipeline.google_calendar.scheduler import start_scheduler as gcal_start
+        gcal_start()
+    except Exception as _gcal_exc:
+        import logging as _log
+        _log.getLogger("aura.gcal.scheduler").warning(
+            "Google Calendar scheduler could not start (calendar integration may not be configured): %s",
+            _gcal_exc,
+        )
 
 
 @app.on_event("shutdown")

@@ -11,6 +11,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# Canonical program_name for the ICT-CS specialisation. Matches the title the
+# corpus uses on the programmes-of-study page ("B.Tech. (Honours) in ICT with
+# minor in Computational Science"), which is what ingestion writes into
+# program_name for that document.
+ICT_CS_PROGRAM_NAME = "B.Tech. (Honours) in ICT with minor in Computational Science"
+
+# branch_id values, as derived by api.academic_scope_persist, mapped to the
+# canonical program_name that identifies that branch's own documents. Used to
+# widen — never narrow — the program entity inferred from a student's scope.
+BRANCH_PROGRAM_NAMES = {
+    "ict-cs": ICT_CS_PROGRAM_NAME,
+}
+
 class RetrievalPipeline:
 
     def __init__(self):
@@ -47,11 +60,16 @@ class RetrievalPipeline:
             try:
                 with open(metadata_path, "r", encoding="utf-8") as f:
                     chunks = json.load(f)
-                self.faculty_names = sorted(list({
-                    chunk["faculty_name"]
-                    for chunk in chunks
-                    if chunk.get("faculty_name")
-                }))
+                raw_faculty = set()
+                for chunk in chunks:
+                    fn = chunk.get("faculty_name")
+                    if isinstance(fn, str) and fn.strip():
+                        raw_faculty.add(fn.strip())
+                    elif isinstance(fn, list):
+                        for item in fn:
+                            if isinstance(item, str) and item.strip():
+                                raw_faculty.add(item.strip())
+                self.faculty_names = sorted(list(raw_faculty))
                 self.faculty_names_lower = [n.lower() for n in self.faculty_names]
                 self.faculty_names_map = {n.lower(): n for n in self.faculty_names}
                 logger.info("Loaded %d unique faculty names for fuzzy matching.", len(self.faculty_names))
@@ -99,6 +117,24 @@ class RetrievalPipeline:
         "b.tech ict": "B.Tech. (ICT)",
         "b.tech. ict": "B.Tech. (ICT)",
         "b.tech. (ict)": "B.Tech. (ICT)",
+
+        # CHAT-02: ICT-CS is a specialisation of B.Tech. (ICT), not a separate
+        # programme (see academic_scope_persist and the ingestion extractor).
+        # It gets its own canonical program_name so ICT-CS-specific documents
+        # can be preferentially matched, while the academic-scope filter still
+        # admits generic btech-ict material for an ICT-CS student.
+        "ict cs": ICT_CS_PROGRAM_NAME,
+        "ictcs": ICT_CS_PROGRAM_NAME,
+        "btech ict cs": ICT_CS_PROGRAM_NAME,
+        "b tech ict cs": ICT_CS_PROGRAM_NAME,
+        "ict honours": ICT_CS_PROGRAM_NAME,
+        "honours ict": ICT_CS_PROGRAM_NAME,
+        "btech honours ict": ICT_CS_PROGRAM_NAME,
+        "btech honours in ict": ICT_CS_PROGRAM_NAME,
+        "ict with minor in computational science": ICT_CS_PROGRAM_NAME,
+        "btech honours in ict with minor in computational science": ICT_CS_PROGRAM_NAME,
+        "computational science": ICT_CS_PROGRAM_NAME,
+        "ict computational science": ICT_CS_PROGRAM_NAME,
 
         "csai": "B.Tech. (CS and AI)",
         "cs ai": "B.Tech. (CS and AI)",
@@ -264,106 +300,88 @@ class RetrievalPipeline:
         self,
         plan
     ):
-        """Build a Pinecone metadata filter from extracted entities.
+        """Build an entity-priority metadata filter dictionary from planner entities when entity_confidence >= 0.80."""
+        entity_confidence = plan.get("entity_confidence", 1.0) if isinstance(plan, dict) else 1.0
+        if entity_confidence < 0.80:
+            return None
 
-        Fix F: multi-value entity lists (e.g. two programs in a comparison
-        query) now use the $in operator instead of discarding all but the
-        first value via first_value().
-        """
+        entities = plan.get("entities", {}) if isinstance(plan, dict) else {}
+        if not entities:
+            return None
 
-        def first_value(value):
-            if isinstance(value, list):
-                return value[0] if value else None
-            return value
+        def _make_clause(field, raw_val):
+            if not raw_val:
+                return None
+            if field == "program_name":
+                if isinstance(raw_val, list):
+                    progs = [p for p in (self._canonical_program_name(item) for item in raw_val) if p]
+                    val = progs if progs else raw_val
+                else:
+                    canonical_prog = self._canonical_program_name(raw_val)
+                    val = [canonical_prog] if canonical_prog else [raw_val]
+            elif field == "semester":
+                if isinstance(raw_val, list):
+                    sem_vals = []
+                    for item in raw_val:
+                        sem_vals.extend(self._canonical_semester_values(item))
+                    val = sorted(list(set(sem_vals))) if sem_vals else raw_val
+                else:
+                    sem_vals = self._canonical_semester_values(raw_val)
+                    val = sem_vals if sem_vals else [raw_val]
+            else:
+                val = raw_val
 
-        def as_filter(field, value):
-            """Return a Pinecone filter clause for one or many values."""
-            if isinstance(value, list) and len(value) > 1:
-                return {field: {"$in": value}}
-            scalar = value[0] if isinstance(value, list) else value
-            return {field: {"$eq": scalar}}
+            if isinstance(val, (list, tuple, set)):
+                val_list = [str(x).strip() for x in val if x and str(x).strip()]
+                if val_list:
+                    return {field: {"$in": sorted(list(set(val_list)))}}
+            else:
+                s_val = str(val).strip()
+                if s_val:
+                    return {field: {"$in": [s_val]}}
+            return None
 
-        entities = plan.get(
-            "entities",
-            {}
-        )
+        # Priority 1: course_code (highest specificity)
+        if entities.get("course_code"):
+            clause = _make_clause("course_code", entities.get("course_code"))
+            if clause:
+                return clause
 
-        course_code_raw = entities.get("course_code")
-        course_code = first_value(course_code_raw)
+        # Priority 2: faculty_name
+        if entities.get("faculty_name"):
+            clause = _make_clause("faculty_name", entities.get("faculty_name"))
+            if clause:
+                return clause
 
-        # Fix F: canonicalise all program values, not just the first one
-        program_name_raw = entities.get("program_name")
-        if isinstance(program_name_raw, list):
-            program_names = [
-                p for p in (
-                    self._canonical_program_name(p) for p in program_name_raw
-                ) if p
-            ]
-            program_name = program_names[0] if len(program_names) == 1 else (program_names or None)
-        else:
-            program_name = self._canonical_program_name(program_name_raw)
+        # Priority 3: event_name (+ optional semester)
+        if entities.get("event_name"):
+            clauses = []
+            ev_clause = _make_clause("event_name", entities.get("event_name"))
+            if ev_clause:
+                clauses.append(ev_clause)
+                if entities.get("semester"):
+                    sem_clause = _make_clause("semester", entities.get("semester"))
+                    if sem_clause:
+                        clauses.append(sem_clause)
+                return clauses[0] if len(clauses) == 1 else {"$and": clauses}
 
-        if course_code:
+        # Priority 4: program_name (+ optional semester)
+        if entities.get("program_name"):
+            clauses = []
+            prog_clause = _make_clause("program_name", entities.get("program_name"))
+            if prog_clause:
+                clauses.append(prog_clause)
+                if entities.get("semester"):
+                    sem_clause = _make_clause("semester", entities.get("semester"))
+                    if sem_clause:
+                        clauses.append(sem_clause)
+                return clauses[0] if len(clauses) == 1 else {"$and": clauses}
 
-            if program_name:
-                prog_clause = as_filter("program_name", program_name)
-                return {
-                    "$and": [
-                        {"course_code": {"$eq": course_code}},
-                        prog_clause
-                    ]
-                }
-
-            return {
-                "course_code": {
-                    "$eq": course_code
-                }
-            }
-
-        # Fix F: support multi-faculty queries with $in
-        faculty_name_raw = entities.get("faculty_name")
-        if faculty_name_raw:
-            if isinstance(faculty_name_raw, list) and len(faculty_name_raw) > 1:
-                return {"faculty_name": {"$in": faculty_name_raw}}
-            faculty_name = first_value(faculty_name_raw)
-            if faculty_name:
-                return {"faculty_name": {"$eq": faculty_name}}
-
-        event_name = first_value(
-            entities.get(
-                "event_name"
-            )
-        )
-
-        if event_name:
-
-            return {
-                "event_name": {
-                    "$eq": event_name
-                }
-            }
-
-        semester = first_value(
-            entities.get(
-                "semester"
-            )
-        )
-
-        if semester:
-            sem_vals = self._canonical_semester_values(semester)
-            sem_clause = {"semester": {"$in": sem_vals}} if len(sem_vals) > 1 else {"semester": {"$eq": sem_vals[0]}}
-            if program_name:
-                prog_clause = as_filter("program_name", program_name)
-                return {
-                    "$and": [
-                        prog_clause,
-                        sem_clause
-                    ]
-                }
-            return sem_clause
-
-        if program_name:
-            return as_filter("program_name", program_name)
+        # Priority 5: semester only
+        if entities.get("semester"):
+            clause = _make_clause("semester", entities.get("semester"))
+            if clause:
+                return clause
 
         return None
 
@@ -415,6 +433,16 @@ class RetrievalPipeline:
         }
 
     @staticmethod
+    def _has_explicit_programme_context(plan: dict) -> bool:
+        """True when the query already names a programme/course — no personal scope needed."""
+        entities = plan.get("entities") or {}
+        return bool(
+            entities.get("program_name")
+            or entities.get("course_code")
+            or entities.get("course_name")
+        )
+
+    @staticmethod
     def _eligible_results(results: list[dict], academic_scope) -> list[dict]:
         if academic_scope is None:
             return results
@@ -422,6 +450,32 @@ class RetrievalPipeline:
             result for result in results
             if academic_scope.document_is_eligible(result.get("metadata", {}))
         ]
+
+    def _scope_program_names(self, academic_scope):
+        """Program entity value(s) implied by a student's own academic scope.
+
+        For a student on a branch that has its own corpus material (today only
+        ICT-CS), this returns BOTH the branch's canonical name and the parent
+        programme's, branch-specific first. That ordering matters and the list
+        matters:
+
+        - As a metadata filter, a multi-value list becomes ``$in``, so it
+          widens the candidate set instead of pinning it to one program_name.
+          Returning the branch name alone would exclude the generic
+          B.Tech. (ICT) material that still applies to an ICT-CS student.
+        - In `_retrieve_dual_path`, each value gets its own entity retrieval
+          whose results are fused by RRF, so ICT-CS-specific documents get an
+          independent shot at the pool rather than competing inside a single
+          B.Tech. (ICT) query they would usually lose.
+        """
+        programme_id = getattr(academic_scope, "programme_id", None)
+        if not programme_id:
+            return []
+        parent = self._canonical_program_name(programme_id)
+        branch_name = BRANCH_PROGRAM_NAMES.get(getattr(academic_scope, "branch_id", None))
+        names = [name for name in (branch_name, parent) if name]
+        # Preserve order while dropping duplicates.
+        return list(dict.fromkeys(names))
 
     def _normalize_program_name(self, name):
         if not name:
@@ -554,6 +608,7 @@ class RetrievalPipeline:
         history=None,
         user_role: str = "public",
         academic_scope=None,
+        identity=None,
     ):
         allowed_roles = get_allowed_roles(user_role)
         original_query = query
@@ -585,6 +640,7 @@ class RetrievalPipeline:
         )
         needs_rewrite = bool(history) and (has_pronoun or is_short_fragment)
 
+        rewritten_query = query
         if needs_rewrite:
             query = (
                 self.rewriter.rewrite(
@@ -593,9 +649,16 @@ class RetrievalPipeline:
                     academic_scope=academic_scope,
                 )
             )
+            rewritten_query = query
+
+        print("\n" + "=" * 60)
+        print("===== QUERY =====")
+        print(f"Original Query: {original_query}")
+        print(f"Rewritten Query (QueryRewriter): {rewritten_query}")
+        print("=" * 60)
 
         # Submit the planning LLM call to executor
-        future_plan = self.executor.submit(self.planner.plan, query, academic_scope)
+        future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
 
         # Submit the speculative retrieval call to executor. Speculative retrieval
         # runs the semester-expanded query with an empty plan ({}) which results
@@ -611,9 +674,11 @@ class RetrievalPipeline:
         if academic_scope and getattr(academic_scope, "programme_id", None):
             entities = plan.setdefault("entities", {})
             if not entities.get("program_name"):
-                inferred_prog = self._canonical_program_name(academic_scope.programme_id)
-                if inferred_prog:
-                    entities["program_name"] = inferred_prog
+                inferred_progs = self._scope_program_names(academic_scope)
+                if inferred_progs:
+                    entities["program_name"] = (
+                        inferred_progs[0] if len(inferred_progs) == 1 else inferred_progs
+                    )
 
         # Check if the plan contains anything that modifies retrieval or query
         entities = plan.get("entities", {})
@@ -638,7 +703,16 @@ class RetrievalPipeline:
 
         retrieval_intent = plan.get("retrieval_intent", "general")
 
-        if user_role == "student" and self._requires_academic_scope(plan) and academic_scope is None:
+        # Abstain only for personal/"my programme" curriculum questions when we
+        # cannot resolve the student's AcademicScope. If the user (or rewriter)
+        # already named a programme/course, retrieve without personal scope —
+        # curriculum docs are public and the named entity is enough to filter.
+        if (
+            user_role == "student"
+            and self._requires_academic_scope(plan)
+            and academic_scope is None
+            and not self._has_explicit_programme_context(plan)
+        ):
             return {
                 "query": original_query,
                 "corrected_query": query,
@@ -787,15 +861,13 @@ class RetrievalPipeline:
                 elif isinstance(program_name, list):
                     query += " " + " ".join(program_name)
 
-            metadata_filter = self._combine_filters(
-                self._build_metadata_filter(plan),
-                self._academic_scope_filter(academic_scope),
-            )
-
-            # Policy-version queries may relax planner entity constraints, but
-            # never the authenticated student's academic applicability scope.
-            if retrieval_intent == "policy_version":
-                metadata_filter = self._academic_scope_filter(academic_scope)
+            # Retrieval filters are constructed inside _retrieve_dual_path (and,
+            # for decomposed plans, per sub-query below) — not here. Building a
+            # metadata_filter at this point would be dead code, and wiring it into
+            # the dual path would wrongly entity-filter the semantic path, which is
+            # deliberately entity-free. policy_version breadth (retrieving across
+            # policy editions) comes from that entity-free semantic search plus the
+            # reranker's policy_version section boosts, so no override is needed.
 
             # Fix TY1: temporal year anchor — if the planner extracted a rule_year
             # (e.g. "2024-25") from the query, inject it into the retrieval query
@@ -1069,6 +1141,8 @@ class RetrievalPipeline:
         be one or two chunks away from the main policy chunk.
         """
         expanded_candidates = []
+        print("\n" + "=" * 60)
+        print("===== ADJACENT CHUNK EXPANSION =====")
         for cand in candidates:
             metadata = cand.get("metadata", {})
             doc_id = metadata.get("document_id")
@@ -1079,12 +1153,14 @@ class RetrievalPipeline:
 
             chunk_idx = int(chunk_idx)
             parts = []
+            added_adjacent = []
 
             # Collect preceding chunks within window
             for offset in range(window, 0, -1):
                 prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - offset))
                 if prev_chunk:
                     parts.append(prev_chunk.get("text", ""))
+                    added_adjacent.append(f"prev (-{offset}): {prev_chunk.get('chunk_id')}")
 
             parts.append(metadata.get("text", ""))
 
@@ -1093,6 +1169,7 @@ class RetrievalPipeline:
                 next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + offset))
                 if next_chunk:
                     parts.append(next_chunk.get("text", ""))
+                    added_adjacent.append(f"next (+{offset}): {next_chunk.get('chunk_id')}")
 
             expanded_text = "\n\n".join(filter(None, parts))
 
@@ -1100,6 +1177,13 @@ class RetrievalPipeline:
             new_cand["metadata"] = dict(metadata)
             new_cand["metadata"]["text"] = expanded_text
             expanded_candidates.append(new_cand)
+
+            print(f"Triggering Chunk: {cand.get('id')} ({metadata.get('title')})")
+            if added_adjacent:
+                print("   Added Neighbor Chunks: " + ", ".join(added_adjacent))
+            else:
+                print("   (No adjacent chunks found in store)")
+        print("=" * 60)
 
         return expanded_candidates
 
@@ -1184,7 +1268,7 @@ class RetrievalPipeline:
             for c in entity_list:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
-        # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
+        # 2. Semantic Path: Top-50 vector search (using Pinecone/Qdrant index query directly)
         semantic_list = []
         if self.retriever.index is None:
             logger.info("Semantic retrieval disabled because the vector index is unavailable; continuing with entity-path results only.")
@@ -1193,7 +1277,34 @@ class RetrievalPipeline:
                 query_embedding = self.retriever.embed_query(query)
                 if query_embedding is None:
                     raise RuntimeError("Query embedding unavailable")
+                
+                entity_filter = self._build_metadata_filter(plan)
+                
+                print("\n" + "=" * 60)
+                print("===== METADATA FILTER =====")
+                if not entity_filter:
+                    print("None")
+                else:
+                    def _parse(clause):
+                        if not isinstance(clause, dict):
+                            return
+                        for k, v in clause.items():
+                            if k == "$and" and isinstance(v, list):
+                                for item in v:
+                                    _parse(item)
+                            elif not k.startswith("$"):
+                                if isinstance(v, dict) and "$in" in v:
+                                    val_str = ", ".join(str(x) for x in v["$in"])
+                                    print(f"{k} = {val_str}")
+                                elif isinstance(v, dict) and "$eq" in v:
+                                    print(f"{k} = {v['$eq']}")
+                                else:
+                                    print(f"{k} = {v}")
+                    _parse(entity_filter)
+                print("=" * 60)
+
                 semantic_filter = self._combine_filters(
+                    entity_filter,
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )
@@ -1207,11 +1318,6 @@ class RetrievalPipeline:
                     semantic_list.append({
                         "id": match["id"],
                         "score": match["score"],
-                        # Fix RP2: cosine_score explicitly stored so the confidence
-                        # router in aura_chat.py can read it via c.get("cosine_score").
-                        # Previously dual-path candidates only had "score"/"fusion_score"
-                        # so the router always saw top_cosine=0.0 and relied entirely
-                        # on top_cross for routing decisions.
                         "cosine_score": match["score"],
                         "metadata": match["metadata"],
                         "semantic_score": match["score"]

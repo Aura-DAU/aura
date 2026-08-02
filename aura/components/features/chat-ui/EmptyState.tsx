@@ -17,6 +17,8 @@ interface EmptyStateProps {
   onSelectPrompt: (text: string) => void
   /** Preferred display name (from the student profile); falls back to the session name. */
   userName?: string
+  /** Disable starter prompts (e.g. while a reply is already in flight). */
+  disabled?: boolean
   /** The composer, rendered between the greeting and the starter prompts. */
   children?: ReactNode
 }
@@ -51,7 +53,7 @@ function timeGreeting(date: Date): string {
   return "Good evening"
 }
 
-export function EmptyState({ onSelectPrompt, userName, children }: EmptyStateProps) {
+export function EmptyState({ onSelectPrompt, userName, disabled = false, children }: EmptyStateProps) {
   const { data: session } = useSession()
   // Time- and name-based greeting resolves client-side; keep the server/first paint neutral
   // so hydration matches, then personalise once mounted and the session is known.
@@ -82,6 +84,7 @@ export function EmptyState({ onSelectPrompt, userName, children }: EmptyStatePro
           <button
             key={prompt}
             type="button"
+            disabled={disabled}
             onClick={() => onSelectPrompt(prompt)}
             style={{ animationDelay: `${120 + index * 55}ms` }}
             className={cn(
@@ -90,6 +93,7 @@ export function EmptyState({ onSelectPrompt, userName, children }: EmptyStatePro
               "active:translate-y-0 active:scale-[0.985]",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-yellow/35",
               "animate-in fade-in slide-in-from-bottom-2 fill-mode-both duration-500",
+              disabled && "pointer-events-none opacity-50",
             )}
           >
             <span

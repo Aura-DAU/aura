@@ -58,6 +58,18 @@ def _make_store_with_fake_zset():
     client = MagicMock()
     client.pipeline.side_effect = lambda: FakePipe()
 
+    def eval_script(_script, _numkeys, key, cutoff, limit, member, now, _ttl):
+        bucket = zsets.setdefault(key, {})
+        for existing_member, score in list(bucket.items()):
+            if score <= cutoff:
+                del bucket[existing_member]
+        if len(bucket) >= limit:
+            return [0, len(bucket)]
+        bucket[member] = now
+        return [1, len(bucket)]
+
+    client.eval.side_effect = eval_script
+
     with patch("redis.Redis.from_url", return_value=client):
         store = RedisQuotaStore("redis://localhost:6379/0")
     return store

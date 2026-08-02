@@ -1,8 +1,8 @@
 import os
 import logging
 from pathlib import Path
+from typing import Optional
 from dotenv import load_dotenv
-from sentence_transformers import SentenceTransformer
 
 # Query-time embeddings MUST use the same model as ingestion-time
 # embeddings or retrieval silently degrades — single source of truth.
@@ -22,9 +22,7 @@ class Retriever:
 
         load_dotenv()
 
-        self.model = SentenceTransformer(
-            MODEL_NAME
-        )
+        self.model = None
 
         metadata_path = (
             Path(__file__).resolve().parent.parent
@@ -54,25 +52,21 @@ class Retriever:
         # needed to change.
         self.index = build_index_adapter()
 
-    def retrieve(
-        self,
-        query,
-        top_k=TOP_K,
-        metadata_filter=None,
-        allowed_roles=None
-    ):
+    def _local_model(self):
+        if self.model is None:
+            from sentence_transformers import SentenceTransformer
+            self.model = SentenceTransformer(MODEL_NAME)
+        return self.model
 
-        # Metadata filters include authorization and, for authenticated
-        # students, hard academic applicability. Never disable the complete
-        # filter: doing so would allow a maintenance flag to bypass scope.
-        pinecone_filter = metadata_filter
-        
+    def embed_query(self, query: str) -> Optional[list[float]]:
+        import time
+        t0 = time.time()
         query_text = (
             "Represent this sentence for searching relevant passages: "
             + query
         )
         embedding_service_url = os.getenv("EMBEDDING_SERVICE_URL")
-        query_embedding_list = None
+        embedding = None
 
         if embedding_service_url:
             try:
@@ -85,20 +79,44 @@ class Retriever:
                 if resp.status_code == 200:
                     data = resp.json()
                     if "embeddings" in data and len(data["embeddings"]) > 0:
-                        query_embedding_list = data["embeddings"][0]
+                        embedding = data["embeddings"][0]
             except Exception as e:
                 logger.warning("Remote embedding service failed: %s. Falling back to local model.", e)
 
-        if query_embedding_list is None:
-            query_embedding = self.model.encode(
-                [query_text],
-                normalize_embeddings=True,
-                convert_to_numpy=True
-            )
-            query_embedding_list = query_embedding[0].tolist()
+        if embedding is None:
+            try:
+                query_embedding = self._local_model().encode(
+                    [query_text],
+                    normalize_embeddings=True,
+                    convert_to_numpy=True
+                )
+                embedding = query_embedding[0].tolist()
+            except Exception as e:
+                logger.warning("Local embedding model failed: %s", e)
+                embedding = None
+
+        t_elapsed = time.time() - t0
+        dim = len(embedding) if embedding else 0
+        print(f"\n===== QUERY EMBEDDING =====\nDimension: {dim} | Time: {t_elapsed:.4f}s")
+        return embedding
+
+    def retrieve(
+        self,
+        query,
+        top_k=TOP_K,
+        metadata_filter=None,
+        allowed_roles=None
+    ):
+
+        # Metadata filters include authorization and, for authenticated
+        # students, hard academic applicability. Never disable the complete
+        # filter: doing so would allow a maintenance flag to bypass scope.
+        pinecone_filter = metadata_filter
+
+        query_embedding_list = self.embed_query(query) if self.index else None
 
         dense_results = []
-        if self.index:
+        if self.index and query_embedding_list is not None:
             try:
                 results = self.index.query(
                     vector=query_embedding_list,
@@ -128,6 +146,21 @@ class Retriever:
             except Exception as e:
                 logger.warning("Pinecone query failed: %s", e)
 
+        print("\n" + "=" * 60)
+        print("===== DENSE RESULTS (QDRANT) =====")
+        if dense_results:
+            for rank, item in enumerate(dense_results, start=1):
+                meta = item.get("metadata", {})
+                h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
+                print(f"{rank}. score={item.get('score', 0.0):.4f} | chunk={item.get('id')}")
+                print(f"   title={meta.get('title', 'N/A')}")
+                print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
+                if h_str:
+                    print(f"   headers={h_str}")
+        else:
+            print("   (No dense results returned)")
+        print("=" * 60)
+
         if not self.bm25:
             return dense_results
 
@@ -137,6 +170,21 @@ class Retriever:
             metadata_filter=metadata_filter,
             allowed_roles=allowed_roles
         )
+
+        print("\n" + "=" * 60)
+        print("===== BM25 RESULTS =====")
+        if bm25_results:
+            for rank, item in enumerate(bm25_results, start=1):
+                meta = item.get("metadata", {})
+                h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
+                print(f"{rank}. score={item.get('score', 0.0):.4f} | chunk={item.get('id')}")
+                print(f"   title={meta.get('title', 'N/A')}")
+                print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
+                if h_str:
+                    print(f"   headers={h_str}")
+        else:
+            print("   (No BM25 results returned)")
+        print("=" * 60)
 
         fused_results = fuse(
             dense_results,

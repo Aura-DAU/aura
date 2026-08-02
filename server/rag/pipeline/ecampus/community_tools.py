@@ -25,6 +25,7 @@ club-membership connector, and private student data must not be invented.
 """
 
 import os
+from datetime import date
 from dotenv import load_dotenv
 from pipeline.key_manager import KeyManager
 from ..personal_data.audit import audit_log
@@ -57,6 +58,12 @@ _FACULTY_ROLES = (
 )
 # Club discovery is useful to faculty mentors as well as students.
 _CLUB_READER_ROLES = _STUDENT_ROLES + _FACULTY_ROLES
+
+
+def _current_academic_year(today: date | None = None) -> str:
+    current = today or date.today()
+    start = current.year if current.month >= 7 else current.year - 1
+    return f"{start}-{(start + 1) % 100:02d}"
 
 
 def _get_retrieval_pipeline():
@@ -130,8 +137,9 @@ office-bearers / points of contact:
 
 Rules:
 - Use ONLY names and contacts present in the retrieved text. Never invent.
-- Prefer C_DCs / convenor sheets and the latest academic year when available;
-  mention which year you used.
+- Prefer C_DCs / convenor sheets with the highest academic year (e.g. 2026-27
+  over 2025-26 over 24-25). Never treat scraped_date as the roster year.
+- If older and newer rosters both appear, answer from the newest and name the year.
 - If office-bearers are not in the retrieved context, say so — do not guess
   from unrelated clubs.
 - This is published SBG roster data, not an ERP personal-data lookup.
@@ -214,6 +222,9 @@ def _run(
     sources = result.get("sources", [])
 
     if not context.strip():
+        if result.get("abstention_reason") == "academic_scope_unavailable":
+            from pipeline.aura_chat import ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE
+            return {"response": ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE, "sources": []}
         return {
             "response": empty_response or (
                 "I couldn't find that in the knowledge base — try the exact "
@@ -321,8 +332,8 @@ def handle_get_club_members(identity, club_name: str, request_context=None, **kw
         }
     query = (
         f"{club_name} club committee core members list roster convenor "
-        f"dy convenor member student ID position Club Committee Data "
-        f"Core Members Winter C_DCs"
+        f"dy convenor member student ID position C_DCs Information "
+        f"Core Members office bearers"
     )
     out = _run(
         query, "student", _CLUB_MEMBERS_SYSTEM_PROMPT,
@@ -351,13 +362,17 @@ def handle_lookup_club_office_bearers(identity, club_name: str, request_context=
             "response": "Please provide a student club or SBG committee name.",
             "sources": [],
         }
+    academic_year = _current_academic_year()
     query = (
         f"{club_name} club committee convenor dy convenor deputy faculty mentor "
-        f"email contact C_DCs Information office bearers"
+        f"email contact C_DCs Information office bearers "
+        f"Convener Name Dy. Convener Name current latest academic year {academic_year}"
     )
     out = _run(
         query, "student", _OFFICE_BEARERS_SYSTEM_PROMPT,
-        f"Office-bearers / contacts for student club / SBG committee: {club_name}",
+        f"Office-bearers / contacts for student club / SBG committee: {club_name}. "
+        f"Use the {academic_year} roster; use an older roster only if no "
+        "current-year record exists, and state that limitation.",
         request_context=request_context,
         empty_response=(
             "I couldn't find published office-bearer contacts for that club. "

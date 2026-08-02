@@ -40,8 +40,19 @@ from pathlib import Path
 from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request
 
 import db.connection as db_conn
+from api.academic_scope_persist import upsert_student_academic_scope
 
 router = APIRouter(prefix="/internal", tags=["internal"])
+
+
+def _persist_student_scope(erp_id: str, role: str, dept) -> None:
+    """Best-effort write of AcademicScope tables after identity resolve."""
+    if role != "student" or not erp_id:
+        return
+    try:
+        upsert_student_academic_scope(erp_id=erp_id, dept=dept)
+    except Exception as exc:
+        print(f"Warning: Failed to persist academic scope for {erp_id}: {exc}")
 
 INTERNAL_RESOLVE_SECRET = os.environ.get("INTERNAL_RESOLVE_SECRET", "")
 ALLOWED_DOMAINS = {"dau.ac.in", "daiict.ac.in"}
@@ -208,6 +219,8 @@ def resolve_identity(
             sec = sec if sec else inferred["current_sec"]
             dept = dept if dept else inferred["dept"]
 
+        _persist_student_scope(row["erp_id"], row["role"], dept)
+
         return {
             "erp_id": row["erp_id"],
             "role": row["role"],
@@ -243,6 +256,9 @@ def resolve_identity(
             )
         except Exception as db_err:
             print(f"Warning: Failed to cache dynamic user in DB: {db_err}")
+
+        # Scope tables FK user_identity_map — only after the map row exists.
+        _persist_student_scope(erp_id, role, dept)
 
     return {
         "erp_id": erp_id,

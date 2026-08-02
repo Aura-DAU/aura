@@ -8,17 +8,27 @@ RAG pipeline in aura_chat_graph.
 
 import os
 import json
+import re
 from typing import Optional
 from dotenv import load_dotenv
 
 from ..inference_router import InferenceRouter
+from ..prompt_loader import load_calendar_mcp_system_prompt
 from .tool_registry import (
     tools_for_role as _ecampus_tools_for_role,
     public_kb_tools_for_role as _public_kb_tools_for_role,
     TOOL_REGISTRY as _ECAMPUS_TOOL_REGISTRY,
     PUBLIC_KB_TOOL_NAMES,
 )
-from ..timetable.tool_registry import tools_for_role as _timetable_tools_for_role, TOOL_REGISTRY as _TIMETABLE_TOOL_REGISTRY
+from ..timetable.tool_registry import (
+    tools_for_role as _timetable_tools_for_role,
+    TOOL_REGISTRY as _TIMETABLE_TOOL_REGISTRY,
+    PUBLIC_TOOL_NAMES as _TIMETABLE_PUBLIC_TOOL_NAMES,
+)
+from ..timetable.calendar_mcp_client import (
+    calendar_mcp_tools_for_role as _calendar_mcp_tools_for_role,
+    calendar_mcp_registry as _calendar_mcp_registry,
+)
 
 # Merged view used by this orchestrator. Kept as two separate source-of-truth
 # registries (pipeline.ecampus.tool_registry stays strictly read-only against
@@ -29,7 +39,16 @@ MERGED_TOOL_REGISTRY = {**_ECAMPUS_TOOL_REGISTRY, **_TIMETABLE_TOOL_REGISTRY}
 
 
 def _tools_for_role(role: str):
-    return _ecampus_tools_for_role(role) + _timetable_tools_for_role(role)
+    # Calendar MCP tools are personal-scope only (a student's own calendar), so
+    # they're added here on the personal path -- never on the public-KB path.
+    return (
+        _ecampus_tools_for_role(role)
+        + _timetable_tools_for_role(role)
+        + _calendar_mcp_tools_for_role(role)
+    )
+
+
+CALENDAR_MCP_SYSTEM_PROMPT = load_calendar_mcp_system_prompt()
 
 
 PERSONAL_SYSTEM_PROMPT = """You are AURA, DAU's academic assistant, handling a request that
@@ -49,6 +68,12 @@ Rules:
   clearing cache), you must get the user's explicit confirmation before it
   executes. The orchestrator will return a confirmation prompt instead of a
   result on the first attempt — relay that prompt to the user as-is.
+""" + CALENDAR_MCP_SYSTEM_PROMPT + """
+- If the timetable tool returns "is_common": true or "needs_configuration": true:
+  1. Inform the user that this is the common timetable for their year.
+  2. Display the timetable clearly.
+  3. Proactively ask the user for their section (e.g. A, B, C, D) and any electives they have, so you can update and customize it for them.
+  4. Once they provide the section/electives, use the set_my_cohort tool (for section) and save_my_elective_selections tool (for electives) to save their preferences.
 - Keep answers concise and grounded only in what the tools returned.
 """
 
@@ -58,6 +83,11 @@ Rules:
 - Use the available tools to answer from published campus documents. Prefer the
   most specific tool (faculty profile, club roster, academic calendar,
   admissions, placements, facilities, policy, etc.) over guessing.
+- For "what's the timetable for <year/sem> <branch> section <X>"-style questions
+  about a cohort that is NOT the requester's own, use get_cohort_timetable —
+  it queries the live master schedule directly. Don't fall back to a generic
+  "couldn't find that" answer for these; call the tool with whatever
+  sem/year/section/branch the user gave (section defaults to 'A').
 - Never invent people, club members, convenors, emails, dates, fees, or
   committee composition — if a tool returns empty or missing fields, say the
   published campus documents do not list that detail.
@@ -70,8 +100,82 @@ Rules:
 COMMUNITY_SYSTEM_PROMPT = PUBLIC_KB_SYSTEM_PROMPT
 SYSTEM_PROMPT = PERSONAL_SYSTEM_PROMPT
 
+
+def _connect_action_required(tool_results: list[dict]) -> dict | None:
+    """When a calendar tool reported the student hasn't linked Google Calendar,
+    return a structured connect prompt for the client to render as an inline
+    "Connect Google Calendar" CTA (the GPT/Claude connector pattern) instead of
+    leaving it to the model's prose. None when no connect action is needed."""
+    for r in tool_results:
+        if isinstance(r, dict) and r.get("status") == "calendar_not_connected":
+            return {
+                "type": "connect_required",
+                "provider": "google_calendar",
+                "connect_path": "/settings/calendar",
+                "reason": "sync_timetable",
+                "message": (
+                    r.get("message")
+                    or "Connect your Google Calendar to add your timetable to your schedule."
+                ),
+            }
+    return None
+
 # tool_scope values that expose public KB tools (community + domain KB).
 _PUBLIC_KB_SCOPES = frozenset({"community", "public_kb"})
+
+# Narrow personal scope for the in-chat "actions" path: the student's own
+# timetable + Google Calendar MCP tools ONLY -- deliberately NOT the ecampus
+# ERP read tools, so routing a calendar/schedule request here can never bypass
+# the curated _n_personal_data ERP path for CGPA / attendance / grades.
+_PERSONAL_ACTIONS_SCOPE = "personal_actions"
+
+_CALENDAR_STATUS_RE = re.compile(
+    r"\b(?:calendar\s+status|(?:calendar|it)\s+(?:is\s+)?(?:connected|linked)|"
+    r"(?:is|has)\s+(?:my\s+)?(?:google\s+)?calendar\s+(?:connected|linked))\b",
+    re.IGNORECASE,
+)
+_CALENDAR_SYNC_RE = re.compile(
+    r"\b(?:add|sync|put|export|save)\b.{0,40}\b(?:calendar|schedule|timetable|classes?)\b"
+    r"|\b(?:schedule|timetable|classes?)\b.{0,30}\bcalendar\b",
+    re.IGNORECASE,
+)
+_CONFIRMATION_RE = re.compile(
+    r"^\s*(?:yes|yep|yeah|confirm(?:ed)?|proceed|go ahead|do it|please do|sync it)"
+    r"[\s.!]*$",
+    re.IGNORECASE,
+)
+_CALENDAR_CONFIRMATION_CONTEXT_RE = re.compile(
+    r"\bgoogle calendar\b.*\b(?:confirm|proceed)\b"
+    r"|\b(?:confirm|proceed)\b.*\bgoogle calendar\b",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
+    """Pin supported calendar intents to their MCP tool.
+
+    Prompt-only tool selection is not reliable enough here: if the model emits
+    prose instead of a tool call, the graph falls back to the personal-data
+    responder. A write is forced only when the immediately preceding assistant
+    turn contains the calendar preview's explicit confirmation request.
+    """
+    if _CONFIRMATION_RE.fullmatch(query):
+        previous_assistant = next(
+            (
+                str(turn.get("content", ""))
+                for turn in reversed(history)
+                if turn.get("role") == "assistant"
+            ),
+            "",
+        )
+        if _CALENDAR_CONFIRMATION_CONTEXT_RE.search(previous_assistant):
+            return "sync_timetable_to_calendar"
+
+    if _CALENDAR_STATUS_RE.search(query):
+        return "calendar_status"
+    if _CALENDAR_SYNC_RE.search(query):
+        return "preview_timetable_sync"
+    return None
 
 
 class EcampusOrchestrator:
@@ -82,7 +186,12 @@ class EcampusOrchestrator:
         # so this orchestrator participates in key rotation just like every
         # other pipeline component.
 
-    def _call_llm(self, messages: list, tools: Optional[list] = None, tool_choice: Optional[str] = None) -> object:
+    def _call_llm(
+        self,
+        messages: list,
+        tools: Optional[list] = None,
+        tool_choice: Optional[str | dict] = None,
+    ) -> object:
         """Single LLM call through InferenceRouter so node failover applies here too."""
         model = self.model
         def _fn(client):
@@ -94,7 +203,12 @@ class EcampusOrchestrator:
 
     def _tool_schemas(self, role: str, tool_scope: str = "personal") -> list[dict]:
         if tool_scope in _PUBLIC_KB_SCOPES:
-            selected = _public_kb_tools_for_role(role)
+            selected = _public_kb_tools_for_role(role) + [
+                t for t in _timetable_tools_for_role(role)
+                if t.name in _TIMETABLE_PUBLIC_TOOL_NAMES
+            ]
+        elif tool_scope == _PERSONAL_ACTIONS_SCOPE:
+            selected = _timetable_tools_for_role(role) + _calendar_mcp_tools_for_role(role)
         else:
             selected = _tools_for_role(role)
         return [
@@ -138,22 +252,39 @@ class EcampusOrchestrator:
                 "sources": [],
             }
 
+        required_tool = (
+            _required_calendar_tool(query, history)
+            if tool_scope == _PERSONAL_ACTIONS_SCOPE
+            else None
+        )
+        tool_choice: str | dict = "auto"
+        if required_tool:
+            tool_choice = {
+                "type": "function",
+                "function": {"name": required_tool},
+            }
+
         response = self._call_llm(
             messages=messages,
             tools=tool_schemas,
-            tool_choice="auto",
+            tool_choice=tool_choice,
         )
         msg = response.choices[0].message
 
         if not msg.tool_calls:
-            return {"answer": msg.content, "sources": []}
+            return {"answer": msg.content, "sources": [], "used_tools": False}
 
         tool_messages = []
+        tool_results: list[dict] = []
         for call in msg.tool_calls:
-            tool = MERGED_TOOL_REGISTRY.get(call.function.name)
+            tool = MERGED_TOOL_REGISTRY.get(call.function.name) or _calendar_mcp_registry().get(call.function.name)
             # Public-KB path: refuse personal ERP / write tools even if named
             # (defense in depth — personal ERP stays gated).
-            if use_public_kb and call.function.name not in PUBLIC_KB_TOOL_NAMES:
+            if (
+                use_public_kb
+                and call.function.name not in PUBLIC_KB_TOOL_NAMES
+                and call.function.name not in _TIMETABLE_PUBLIC_TOOL_NAMES
+            ):
                 result = {"error": "Tool not available on the public KB path."}
             elif tool is None or identity["role"] not in tool.allowed_roles:
                 # Defense in depth: even if the model somehow names a tool it
@@ -174,6 +305,7 @@ class EcampusOrchestrator:
                 except Exception as e:
                     result = {"error": str(e)}
 
+            tool_results.append(result if isinstance(result, dict) else {})
             tool_messages.append({
                 "role": "tool",
                 "tool_call_id": call.id,
@@ -190,4 +322,12 @@ class EcampusOrchestrator:
                 *tool_messages,
             ],
         )
-        return {"answer": follow_up.choices[0].message.content, "sources": []}
+        out: dict = {
+            "answer": follow_up.choices[0].message.content,
+            "sources": [],
+            "used_tools": True,
+        }
+        action_required = _connect_action_required(tool_results)
+        if action_required:
+            out["action_required"] = action_required
+        return out
