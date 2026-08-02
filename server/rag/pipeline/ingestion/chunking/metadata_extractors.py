@@ -82,8 +82,19 @@ def resolve_document_academic_year(metadata: dict, file_path, body: str = "") ->
             return academic_year_start(label) or int(label[:4]), label
 
     # 3. Bare 20xx in title/path/body.
+    #
+    # Fix YEAR-UB1 (spot-check finding): this corpus's filenames are almost
+    # all snake_case ("..._autumn_2025_page_7.md"), and `_` is a \w
+    # character, so a \b...\b year regex never matches "_2025_" — there's no
+    # word-boundary transition between an underscore and a digit. That
+    # silently skipped this entire step for the majority of course-policy
+    # filenames and let extraction fall through to scraped_date (the
+    # ingest date), mistagging dozens of "Autumn 2025" documents as 2026
+    # simply because they happened to be scraped in 2026. Digit-adjacency
+    # lookaround (no digit immediately before/after) still rejects things
+    # like "20255" or a stray "42025", but does match "_2025_" and "-2025-".
     for candidate in (title, path_name, path_str, (body or "")[:1000]):
-        year_match = re.search(r"\b(20\d{2})\b", str(candidate))
+        year_match = re.search(r"(?<!\d)(20\d{2})(?!\d)", str(candidate))
         if year_match:
             return int(year_match.group(1)), None
 
@@ -101,7 +112,7 @@ def resolve_document_academic_year(metadata: dict, file_path, body: str = "") ->
 
     scraped = metadata.get("scraped_date")
     if scraped is not None:
-        year_match = re.search(r"\b(20\d{2})\b", str(scraped))
+        year_match = re.search(r"(?<!\d)(20\d{2})(?!\d)", str(scraped))
         if year_match:
             return int(year_match.group(1)), None
 
@@ -531,3 +542,123 @@ def extract_event_metadata(sections):
             )
 
     return metadata
+
+
+# ── Issue 4 fix: Faculty Research Domain Extractor ───────────────────────────
+# Faculty profile documents list research interests/areas in a variety of
+# formats. This extractor normalises them into a ``research_domain`` list so
+# that scatter-gather queries (e.g., "all faculty doing NLP") can use structured
+# metadata filtering instead of relying solely on semantic similarity.
+#
+# Callers (process_corpus.py) should invoke this on every faculty-category chunk
+# and store the returned list under the ``research_domain`` key in the chunk's
+# payload. The retrieval pipeline can then emit ``research_domain`` filters for
+# directory questions.
+
+_RESEARCH_SECTION_RE = re.compile(
+    r"(?:research\s+(?:interests?|areas?|focus|domains?|specializ[ae]ations?)"
+    r"|areas?\s+of\s+(?:research|interest|expertise)"
+    r"|specializ[ae]ations?)",
+    re.IGNORECASE,
+)
+
+# Maps abbreviated/variant domain strings to a canonical label.
+_DOMAIN_ALIAS: dict[str, str] = {
+    "nlp": "Natural Language Processing",
+    "natural language processing": "Natural Language Processing",
+    "ml": "Machine Learning",
+    "machine learning": "Machine Learning",
+    "deep learning": "Deep Learning",
+    "dl": "Deep Learning",
+    "computer vision": "Computer Vision",
+    "cv": "Computer Vision",
+    "data science": "Data Science",
+    "data mining": "Data Mining",
+    "information retrieval": "Information Retrieval",
+    "ir": "Information Retrieval",
+    "artificial intelligence": "Artificial Intelligence",
+    "ai": "Artificial Intelligence",
+    "robotics": "Robotics",
+    "human computer interaction": "Human-Computer Interaction",
+    "hci": "Human-Computer Interaction",
+    "cybersecurity": "Cybersecurity",
+    "information security": "Cybersecurity",
+    "cryptography": "Cryptography",
+    "embedded systems": "Embedded Systems",
+    "vlsi": "VLSI Design",
+    "signal processing": "Signal Processing",
+    "image processing": "Image Processing",
+    "network security": "Network Security",
+    "distributed systems": "Distributed Systems",
+    "cloud computing": "Cloud Computing",
+    "iot": "Internet of Things",
+    "internet of things": "Internet of Things",
+    "bioinformatics": "Bioinformatics",
+    "computational biology": "Computational Biology",
+    "optimization": "Optimization",
+    "operations research": "Operations Research",
+    "formal methods": "Formal Methods",
+    "software engineering": "Software Engineering",
+    "theoretical computer science": "Theoretical CS",
+    "graph theory": "Graph Theory",
+    "algorithms": "Algorithms",
+}
+
+
+def extract_research_domain(body: str, metadata: dict) -> list[str]:
+    """Extract a deduplicated list of canonical research domain strings.
+
+    Searches for a ``Research Interests`` (or similar) section heading in
+    ``body``, then collects bullet/comma-separated items from the lines that
+    immediately follow it.  Falls back to scanning the entire body when no
+    dedicated section is found.
+
+    Returns a (possibly empty) list of canonical domain strings suitable for
+    storing as a filterable ``research_domain`` metadata field.
+    """
+    if not body:
+        return []
+
+    domains: list[str] = []
+    lines = body.splitlines()
+
+    # Phase 1: find the research section and collect items from it.
+    in_research_section = False
+    section_lines: list[str] = []
+    for line in lines:
+        stripped = line.strip()
+        if _RESEARCH_SECTION_RE.search(stripped):
+            in_research_section = True
+            continue
+        if in_research_section:
+            # A blank line or a new heading ends the section.
+            if not stripped or re.match(r"^#+\s", stripped):
+                break
+            section_lines.append(stripped)
+
+    # Phase 2: if we found section lines, parse them; else scan full body.
+    candidate_text = " ".join(section_lines) if section_lines else body[:3000]
+
+    # Split on bullets, commas, semicolons, and newlines.
+    tokens = re.split(r"[,;\n\-•*]+", candidate_text)
+
+    for token in tokens:
+        token_clean = token.strip().lower()
+        # Skip very short tokens (likely punctuation artefacts).
+        if len(token_clean) < 3:
+            continue
+        canonical = _DOMAIN_ALIAS.get(token_clean)
+        if canonical and canonical not in domains:
+            domains.append(canonical)
+
+    # Also check explicit frontmatter field if present.
+    fm_domains = metadata.get("research_domain") or metadata.get("research_areas")
+    if fm_domains:
+        if isinstance(fm_domains, str):
+            fm_domains = [fm_domains]
+        for d in fm_domains:
+            canonical = _DOMAIN_ALIAS.get(d.strip().lower(), d.strip())
+            if canonical and canonical not in domains:
+                domains.append(canonical)
+
+    return domains

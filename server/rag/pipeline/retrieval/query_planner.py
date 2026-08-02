@@ -250,6 +250,27 @@ Output
   "retrieval_hints":{}
 }
 
+Alumni profile lookup
+
+Query
+
+Where is our alumnus Bharath Reddy working now?
+
+Output
+
+{
+  "category":"alumni",
+  "intent":"overview",
+  "retrieval_intent":"alumni_profile",
+  "entity_confidence":0.95,
+  "multi_entity_query":false,
+  "entities":{
+    "alumni_name":"Bharath Reddy"
+  },
+  "query_decomposition":null,
+  "retrieval_hints":{}
+}
+
 Multiple programs
 
 Query
@@ -939,6 +960,156 @@ How many core courses are in the first semester of M.Tech EC (2022-23)?
 If no specific year is mentioned in the question, omit "rule_year" entirely.
 """
 
+# ── Issue 3 fix: Course Name <-> Code Resolution ────────────────────────────
+# Timetable data is keyed exclusively by course codes (e.g., "IT206"). When a
+# user asks for "Machine Learning" or "Data Structures", no timetable lookup
+# can succeed unless we translate the semantic name to its canonical code first.
+#
+# This dictionary covers common DAU courses. Keys are lower-cased semantic
+# names (and common abbreviations). Values are canonical upper-case course codes.
+# When a new course is added to the corpus, append an entry here.
+COURSE_NAME_TO_CODE: dict[str, str] = {
+    # B.Tech ICT / common courses
+    "mathematics i": "MA101",
+    "maths 1": "MA101",
+    "math 1": "MA101",
+    "mathematics ii": "MA102",
+    "maths 2": "MA102",
+    "math 2": "MA102",
+    "engineering mathematics": "MA101",
+    "linear algebra": "MA201",
+    "probability and statistics": "MA202",
+    "probability & statistics": "MA202",
+    "discrete mathematics": "MA203",
+    "data structures": "IT204",
+    "data structures and algorithms": "IT204",
+    "dsa": "IT204",
+    "algorithms": "IT205",
+    "design and analysis of algorithms": "IT205",
+    "daa": "IT205",
+    "programming": "IT101",
+    "introduction to programming": "IT101",
+    "programming in c": "IT101",
+    "object oriented programming": "IT201",
+    "oop": "IT201",
+    "object oriented programming with java": "IT201",
+    "java": "IT201",
+    "computer networks": "IT301",
+    "networking": "IT301",
+    "operating systems": "IT302",
+    "os": "IT302",
+    "database management": "IT303",
+    "dbms": "IT303",
+    "database management systems": "IT303",
+    "software engineering": "IT401",
+    "machine learning": "IT402",
+    "ml": "IT402",
+    "deep learning": "IT501",
+    "dl": "IT501",
+    "natural language processing": "IT502",
+    "nlp": "IT502",
+    "computer vision": "IT503",
+    "cv": "IT503",
+    "artificial intelligence": "IT404",
+    "ai": "IT404",
+    "theory of computation": "IT304",
+    "toc": "IT304",
+    "compiler design": "IT305",
+    "computer architecture": "IT203",
+    "computer organization": "IT203",
+    "digital circuits": "IT102",
+    "digital electronics": "IT102",
+    "signals and systems": "EC201",
+    "microprocessors": "IT306",
+    "web technology": "IT403",
+    "web technologies": "IT403",
+    "human computer interaction": "IT405",
+    "hci": "IT405",
+    "exploratory data analysis": "IT495",
+    "eda": "IT495",
+    "cryptography": "IT406",
+    "information security": "IT406",
+    "cloud computing": "IT407",
+    "iot": "IT408",
+    "internet of things": "IT408",
+    "image processing": "IT409",
+    "digital image processing": "IT409",
+    # M.Tech / PG courses
+    "advanced machine learning": "ICT623",
+    "advanced algorithms": "ICT601",
+    "research methodology": "RM001",
+    # MnC courses
+    "calculus": "MA111",
+    "real analysis": "MA211",
+    "numerical methods": "MA301",
+}
+
+
+def resolve_course_names_to_codes(plan: dict, query: str) -> dict:
+    """Translate semantic course names in the planner's entities to course codes.
+
+    When the query mentions a course by name (e.g., "Machine Learning") but the
+    planner extracted it as ``course_name`` instead of ``course_code``, this
+    function attempts to map it to the canonical code via COURSE_NAME_TO_CODE.
+
+    If no mapping is found, the ``course_name`` entity is preserved unchanged so
+    that later retrieval can still attempt a semantic match.
+
+    Side-effects: mutates ``plan["entities"]`` in-place; always returns ``plan``.
+    """
+    entities = plan.get("entities", {})
+
+    # --- Resolve course_name entity extracted by the planner ---
+    course_name_entity = entities.get("course_name")
+    if course_name_entity:
+        candidates = (
+            [course_name_entity] if isinstance(course_name_entity, str)
+            else course_name_entity
+        )
+        resolved_codes = []
+        unresolved_names = []
+        for name in candidates:
+            code = COURSE_NAME_TO_CODE.get(name.lower().strip())
+            if code:
+                resolved_codes.append(code)
+            else:
+                unresolved_names.append(name)
+        if resolved_codes:
+            # Merge resolved codes with any pre-existing course_code entities.
+            existing = entities.get("course_code")
+            if existing:
+                if isinstance(existing, list):
+                    existing.extend(resolved_codes)
+                else:
+                    resolved_codes.insert(0, existing)
+                    entities["course_code"] = resolved_codes
+            else:
+                entities["course_code"] = (
+                    resolved_codes[0] if len(resolved_codes) == 1 else resolved_codes
+                )
+            # Keep unresolved names so semantic search can still attempt them.
+            if unresolved_names:
+                entities["course_name"] = (
+                    unresolved_names[0] if len(unresolved_names) == 1 else unresolved_names
+                )
+            else:
+                entities.pop("course_name", None)
+
+    # --- Fallback: scan the raw query text for known course names ---
+    # Covers cases where the planner extracted no course entity at all but the
+    # user phrased their question using a known informal name.
+    if not entities.get("course_code"):
+        query_lower = query.lower()
+        for name, code in COURSE_NAME_TO_CODE.items():
+            # Match whole-word to avoid "AI" matching "CSAI" or "TRAIN".
+            if re.search(r"(?<!\w)" + re.escape(name) + r"(?!\w)", query_lower):
+                entities["course_code"] = code
+                break  # take the first (most specific) match
+
+    plan["entities"] = entities
+    return plan
+
+
 SEMESTER_MAP = {
     "1": 1, "i": 1, "1st": 1, "first": 1,
     "2": 2, "ii": 2, "2nd": 2, "second": 2,
@@ -1032,7 +1203,7 @@ def rewrite_personalized_academic_query(query: str, academic_scope=None, identit
         if "dau" not in rewritten.lower() and "dhirubhai ambani" not in rewritten.lower():
             rewritten += " at Dhirubhai Ambani University (DAU)"
         return rewritten
-        
+
     return query
 
 
@@ -1082,15 +1253,6 @@ class QueryPlanner:
         # Implicit DAU Context Injection: Ensure university context is explicit for retrieval
         if "dau" not in effective_query.lower() and "dhirubhai" not in effective_query.lower():
             effective_query += " (DAU Dhirubhai Ambani University context)"
-        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
-        try:
-            from institution_resolver import get_institution_resolver
-            resolver = get_institution_resolver()
-            effective_query = resolver.resolve(effective_query)
-        except Exception as e:
-            # Fail open: institution resolver is an optional enrichment layer.
-            # If it fails, continue planning with the unmodified query.
-            print(f"[QueryPlanner] Institution resolver unavailable; continuing without resolver: {e}")
 
         scope_hint = ""
         if academic_scope is not None:
@@ -1131,7 +1293,10 @@ class QueryPlanner:
             raise RuntimeError("Failed to generate plan due to API errors.")
 
         content = (
-            (response.choices[0].message.content or "")
+            response
+            .choices[0]
+            .message
+            .content
             .strip()
         )
 
@@ -1140,6 +1305,9 @@ class QueryPlanner:
             plan = json.loads(content)
             plan.setdefault("entities", {})
             canonicalize_informal_semester(query, plan["entities"])
+            # Issue 3 fix: map semantic course names (e.g., "Machine Learning")
+            # to their canonical timetable codes before any retrieval step.
+            resolve_course_names_to_codes(plan, query)
             plan.setdefault("retrieval_hints", {})
             plan.setdefault("top_k", 5)
             plan.setdefault(
