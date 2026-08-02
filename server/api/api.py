@@ -2,6 +2,7 @@ import os
 import sys
 import tempfile
 import asyncio
+import logging
 import threading
 from typing import Annotated, List, Optional
 from pathlib import Path
@@ -11,6 +12,8 @@ rag_dir    = server_dir / "rag"
 for p in (str(server_dir), str(rag_dir)):
     if p not in sys.path:
         sys.path.insert(0, p)
+
+logger = logging.getLogger(__name__)
 
 #Loading dotenv file
 from dotenv import load_dotenv
@@ -28,7 +31,6 @@ from api.routes.admin_routes import router as admin_router
 from api.routes.calendar_routes import router as calendar_router
 from api.routes.timetable_routes import router as timetable_router, push_router, profile_router
 from api.routes.chat_routes import router as chat_router
-from api.routes.memory_routes import router as memory_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
@@ -139,7 +141,7 @@ async def log_latency_middleware(request, call_next):
                     )
                 )
             except Exception as e:
-                print(f"[latency_middleware] Failed to log latency: {e}")
+                logger.warning("[latency_middleware] Failed to log latency: %s", e)
                 
         bg_tasks.add_task(_write_log)
         response.background = bg_tasks
@@ -175,7 +177,6 @@ app.include_router(profile_router)
 # app/api/chat/route.ts calls /chat/stream. Must be registered here or the
 # frontend gets 502 "Backend error" ("AURA temporarily unavailable").
 app.include_router(chat_router)
-app.include_router(memory_router)
 
 
 @app.on_event("startup")
@@ -201,11 +202,6 @@ async def _start_timetable_scheduler():
             raise RuntimeError(
                 "Production config incomplete — set: " + ", ".join(missing)
             )
-
-    # One line per worker naming the metrics mode — during an incident this is
-    # how you tell whether /metrics is aggregated or per-worker (OBS-01).
-    from api.metrics_multiproc import status as _metrics_status
-    print(f"[metrics] pid {os.getpid()}: {_metrics_status()}", flush=True)
 
     from pipeline.timetable.notifier import start_scheduler
     start_scheduler()
@@ -343,7 +339,7 @@ async def speech(
     except HTTPException:
         raise
     except Exception as e:
-        print(f"[speech] transcription failed: {e}")
+        logger.error("[speech] transcription failed: %s", e)
         raise HTTPException(status_code=500, detail="Transcription failed. Please try again.")
     finally:
         if temp_path and os.path.exists(temp_path):

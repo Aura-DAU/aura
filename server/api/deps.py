@@ -1,7 +1,10 @@
 # Shared FastAPI dependencies (lazy AURA init, speech/chat concurrency).
 import asyncio
+import logging
 import os
 import threading
+
+logger = logging.getLogger(__name__)
 
 _aura = None
 _aura_lock = threading.Lock()
@@ -26,11 +29,6 @@ chat_queue_lock = asyncio.Semaphore(_chat_limit)
 # backpressure the client can retry. Tune with CHAT_QUEUE_WAIT_TIMEOUT.
 CHAT_QUEUE_WAIT_TIMEOUT = float(os.getenv("CHAT_QUEUE_WAIT_TIMEOUT", "8"))
 
-# Seconds the client is told to wait before retrying a shed ask. Kept in one
-# place so the 503 header, the JSON body, and the edge's matching Retry-After
-# stay aligned.
-CHAT_RETRY_AFTER_SECONDS = 5
-
 
 def get_aura():
     # Defer heavy Pinecone/embedding import until first /chat.
@@ -45,14 +43,14 @@ def get_aura():
 
 def warm_aura_in_background() -> None:
     # Without warm-up the first /chat after boot pays the full embedding +
-    # reranker + Qdrant init (tens of seconds). Daemon thread so startup
+    # reranker + Pinecone init (tens of seconds). Daemon thread so startup
     # and serving are never blocked; a /chat arriving mid-warm-up simply
     # waits on _aura_lock and reuses the same instance.
     def _warm() -> None:
         try:
             get_aura()
-            print("[deps] AURA warm-up complete.")
+            logger.info("[deps] AURA warm-up complete.")
         except Exception as exc:
-            print(f"[deps] AURA warm-up failed (will lazy-init on first /chat): {exc}")
+            logger.warning("[deps] AURA warm-up failed (will lazy-init on first /chat): %s", exc)
 
     threading.Thread(target=_warm, name="aura-warmup", daemon=True).start()

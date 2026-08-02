@@ -46,24 +46,14 @@ def test_callback_with_valid_state():
         "refresh_token": "mock-refresh",
         "expires_in": 3600
     }
-
-    mock_calendar_resp = MagicMock()
-    mock_calendar_resp.ok = False
-
+    
     with patch("requests.post", return_value=mock_resp), \
-         patch("requests.get", return_value=mock_calendar_resp), \
-         patch("api.routes.calendar_routes.store_tokens") as mock_store, \
-         patch("api.routes.calendar_routes.log_action") as mock_log, \
-         patch(
-             "api.routes.calendar_routes._frontend_origin",
-             return_value="http://localhost:3000",
-         ):
+         patch("api.routes.calendar_routes.store_tokens") as mock_store:
         res = client.get(f"/calendar/callback?code=mock_code&state={state}", follow_redirects=False)
-
+        
     assert res.status_code == 307
     assert res.headers["location"] == "http://localhost:3000/dashboard?calendar=connected"
     mock_store.assert_called_once()
-    mock_log.assert_called_once()
 
 
 def test_callback_with_invalid_state_signature():

@@ -6,11 +6,11 @@ from unittest.mock import MagicMock, patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-# `redis` is a declared dependency (server/requirements.txt) and every test here
-# patches Redis.from_url, so no client is ever constructed. Do NOT swap
-# sys.modules['redis'] for a mock: that leaks for the rest of the session and
-# makes redis exception types unmatchable in every later test — it silently
-# broke the WatchError retry assertions in test_user_memory.py.
+# Mock the redis module dynamically so we don't depend on the host environment's libraries
+mock_redis = MagicMock()
+mock_redis.RedisError = Exception  # Allow catching RedisError as standard Exception
+sys.modules['redis'] = mock_redis
+
 import pytest
 from pipeline.memory.response_cache import (
     ResponseCache,

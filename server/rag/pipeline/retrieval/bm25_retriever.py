@@ -8,18 +8,21 @@ from rank_bm25 import BM25Okapi
 class BM25Retriever:
 
     def __init__(self, metadata_path):
+        self.metadata_path = metadata_path
+        self.rebuild_index()
 
+    def rebuild_index(self):
         with open(
-            metadata_path,
+            self.metadata_path,
             "r",
             encoding="utf-8"
         ) as f:
 
-            self.chunks = json.load(f)
+            chunks = json.load(f)
 
         corpus = []
 
-        for chunk in self.chunks:
+        for chunk in chunks:
 
             text = self._build_text(
                 chunk
@@ -29,6 +32,7 @@ class BM25Retriever:
                 self._tokenize(text)
             )
 
+        self.chunks = chunks
         self.bm25 = BM25Okapi(
             corpus
         )
@@ -167,21 +171,6 @@ class BM25Retriever:
         chunk,
         metadata_filter
     ):
-        import os
-        if os.getenv("DISABLE_DLS_FILTER", "false").lower() == "true" or os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
-            def strip_auth(f):
-                if not isinstance(f, dict): return f
-                nf = {}
-                for k, v in f.items():
-                    if k == "authorization": continue
-                    elif k in ["$and", "$or"]:
-                        nl = [strip_auth(x) for x in v]
-                        nl = [x for x in nl if x]
-                        if nl: nf[k] = nl
-                    else:
-                        nf[k] = v
-                return nf
-            metadata_filter = strip_auth(metadata_filter)
 
         if not metadata_filter:
             return True
@@ -215,7 +204,12 @@ class BM25Retriever:
         if "$not" in metadata_filter:
             return not self._matches_filter(chunk, metadata_filter["$not"])
 
+        import os
+
         for key, condition in metadata_filter.items():
+
+            if key == "authorization" and os.environ.get("DISABLE_DLS_FILTER", "").lower() == "true":
+                continue
 
             if isinstance(condition, dict):
 

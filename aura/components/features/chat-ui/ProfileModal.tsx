@@ -135,7 +135,6 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
             placeholder="B.Tech CSE"
             value={draft.program}
             onChange={(v) => setDraft((d) => ({ ...d, program: v }))}
-            hint={session?.user ? "Auto-filled from your ERP ID — edit if it's wrong" : undefined}
           />
           <Field
             id="year"
@@ -143,7 +142,6 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
             placeholder="2nd year"
             value={draft.year}
             onChange={(v) => setDraft((d) => ({ ...d, year: v }))}
-            hint={session?.user ? "Auto-filled from your ERP ID — edit if it's wrong" : undefined}
           />
           <Field
             id="interests"
@@ -171,10 +169,9 @@ interface FieldProps {
   value: string
   onChange: (v: string) => void
   placeholder?: string
-  hint?: string
 }
 
-function Field({ id, label, value, onChange, placeholder, hint }: FieldProps) {
+function Field({ id, label, value, onChange, placeholder }: FieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="text-xs font-medium text-neutral-400">
@@ -188,9 +185,6 @@ function Field({ id, label, value, onChange, placeholder, hint }: FieldProps) {
         onChange={(e) => onChange(e.target.value)}
         className="rounded-xl border border-theme-gray-light bg-theme-black px-3 py-2 text-sm text-neutral-100 outline-none transition-colors focus:border-theme-gray-lighter placeholder:text-neutral-600"
       />
-      {hint && value ? (
-        <span className="text-[11px] text-neutral-500">{hint}</span>
-      ) : null}
     </div>
   )
 }

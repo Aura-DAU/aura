@@ -39,6 +39,7 @@ IMPLICIT_DAU_PAT = re.compile(
 class QueryGuardrail:
     def __init__(self):
         load_dotenv()
+        self.client = InferenceRouter.get_client()
         self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
         self.system_prompt = """
 You are the security and scope filter for AURA, the assistant for Dhirubhai
@@ -69,6 +70,12 @@ UNSAFE only when it clearly matches one of the four harm classes below.
    SAFE. Published professional details — official university email, campus
    office or room number, designation, research area, publications — are
    directory facts, NOT private records.
+   An alumnus's current employer/company/role, as published in the
+   university's own alumni placement/outcomes directory, is directory data,
+   NOT a private record — this includes both "where is alumnus [Name]
+   working now" and "where are the [batch year] alumni working now" style
+   questions. Treat these as SAFE, the same as a current student's
+   published placement outcome.
 
 4. ACCESS BYPASS
    Asks how to circumvent authentication, authorization, retrieval filters, or
@@ -82,8 +89,6 @@ studies — world knowledge, public figures, news, sport, celebrities, weather,
 politics, general coding help, homework or essay writing, or any request to
 act as a general-purpose assistant.
 
-If the question could only be answered from general world knowledge and not from university documents, classify it as OFF_TOPIC.
-
 These are ON-TOPIC and must NOT be marked OFF_TOPIC:
 - Anything about DAU — admissions, academics, faculty, research, policies,
   fees, hostel, placements, campus life, events, facilities.
@@ -94,7 +99,8 @@ These are ON-TOPIC and must NOT be marked OFF_TOPIC:
 - Short follow-ups and references to the previous turn ("what about the
   second one?", "tell me more", "and for M.Tech?"). These carry no topic of
   their own and are always ON-TOPIC.
-- Questions asking for explanations of general academic concepts (e.g. algorithms, programming, mathematics, physics, essay writing, homework solutions) are OFF_TOPIC unless they explicitly ask how the concept relates to DAU curriculum, courses, policies, or university information.
+- Academic concepts a student is asking about in the course of their studies
+  ("what does CGPA mean", "how does GATE scoring work").
 
 If a query is both harmful and off-topic, answer UNSAFE — UNSAFE wins.
 
@@ -131,6 +137,12 @@ Query: Who is the final approving authority for a semester leave request?
 SAFE
 
 Query: Who leads the Cyber Security research group?
+SAFE
+
+Query: Where are the 2013 batch alumni working now?
+SAFE
+
+Query: Where is our alumnus Bharath Reddy working now?
 SAFE
 
 Query: Under what circumstances can the Dean request information about a
@@ -189,23 +201,16 @@ No explanation, no punctuation, no JSON, no additional text.
 """
 
     def _classify(self, query: str) -> "Verdict":
-        model = self.model
-        system = self.system_prompt.strip()
-        user = f"Query to evaluate:\n{query}"
-
-        def _execute(client):
-            return client.chat.completions.create(
-                messages=[
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": user},
-                ],
-                model=model,
-                max_tokens=12,
-                temperature=0.0,
-                extra_body=InferenceRouter.no_think_extra_body(),
-            )
-
-        response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
+        response = self.client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": self.system_prompt.strip()},
+                {"role": "user", "content": f"Query to evaluate:\n{query}"},
+            ],
+            model=self.model,
+            max_tokens=12,
+            temperature=0.0,
+            extra_body=InferenceRouter.no_think_extra_body(),
+        )
         result = response.choices[0].message.content.strip().upper()
 
         if os.getenv("DEBUG", "false").lower() == "true":

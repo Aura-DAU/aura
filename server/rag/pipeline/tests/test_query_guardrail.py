@@ -161,26 +161,13 @@ class _StubCompletions:
         return _Resp()
 
 
-def _guardrail_returning(
-    monkeypatch, content: str | None, raises: bool = False
-) -> QueryGuardrail:
-    """Build a guardrail whose LLM call is stubbed via call_with_rotation.
-
-    QueryGuardrail holds no sticky client — every _classify() dispatches through
-    InferenceRouter.call_with_rotation — so the stub has to land there rather
-    than on a guardrail.client attribute.
-    """
+def _guardrail_returning(content: str | None, raises: bool = False) -> QueryGuardrail:
     g = QueryGuardrail()
-    completions = _StubCompletions(content, raises)
-
-    class _StubClient:
-        base_url = "http://stub-node/v1"
-        chat = type("_Chat", (), {"completions": completions})()
-
-    monkeypatch.setattr(
-        "pipeline.guardrails.query_guardrail.InferenceRouter.call_with_rotation",
-        lambda fn, max_retries=3, **_kwargs: fn(_StubClient()),
-    )
+    g.client = type(
+        "_StubClient",
+        (),
+        {"chat": type("_Chat", (), {"completions": _StubCompletions(content, raises)})()},
+    )()
     return g
 
 
@@ -195,8 +182,8 @@ def _guardrail_returning(
         ("NOT UNSAFE", False),
     ],
 )
-def test_verdict_parsing(verdict, expected, monkeypatch):
-    assert _guardrail_returning(monkeypatch, verdict).evaluate("any query") is expected
+def test_verdict_parsing(verdict, expected):
+    assert _guardrail_returning(verdict).evaluate("any query") is expected
 
 
 @pytest.mark.parametrize(
@@ -211,33 +198,33 @@ def test_verdict_parsing(verdict, expected, monkeypatch):
         ("UNSAFE OFF_TOPIC", Verdict.UNSAFE),
     ],
 )
-def test_classify_verdict_parsing(raw, expected, monkeypatch):
-    assert _guardrail_returning(monkeypatch, raw).classify("any query") is expected
+def test_classify_verdict_parsing(raw, expected):
+    assert _guardrail_returning(raw).classify("any query") is expected
 
 
-def test_off_topic_is_not_a_security_failure(monkeypatch):
+def test_off_topic_is_not_a_security_failure():
     # evaluate() is the security-only view: an off-topic query is in scope
     # violation, not a security violation, and must not be reported as UNSAFE.
-    g = _guardrail_returning(monkeypatch, "OFF_TOPIC")
+    g = _guardrail_returning("OFF_TOPIC")
     assert g.classify("Who is Donald Trump?") is Verdict.OFF_TOPIC
     assert g.evaluate("Who is Donald Trump?") is True
 
 
-def test_evaluate_returns_none_when_endpoint_down(monkeypatch):
-    down = _guardrail_returning(monkeypatch, None, raises=True)
+def test_evaluate_returns_none_when_endpoint_down():
+    down = _guardrail_returning(None, raises=True)
     assert down.evaluate("any query") is None
     assert down.classify("any query") is None
 
 
-def test_is_safe_fails_open(monkeypatch):
+def test_is_safe_fails_open():
     # Public RAG path: an unreachable classifier must not block every query.
-    down = _guardrail_returning(monkeypatch, None, raises=True)
+    down = _guardrail_returning(None, raises=True)
     assert down.is_safe("What are library timings?") is True
 
 
-def test_is_safe_strict_fails_closed(monkeypatch):
+def test_is_safe_strict_fails_closed():
     # Personal-data path: an unreachable classifier must deny.
-    down = _guardrail_returning(monkeypatch, None, raises=True)
+    down = _guardrail_returning(None, raises=True)
     assert down.is_safe_strict("What is my CGPA?") is False
 
 

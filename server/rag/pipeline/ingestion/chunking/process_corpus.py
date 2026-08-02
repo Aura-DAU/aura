@@ -737,6 +737,10 @@ def process_markdown_file(file_path):
     if category == "faculty":
         faculty_name = metadata.get("title") or file_path.stem.replace("_", " ").title()
 
+    alumni_name = None
+    if category == "alumni profile":
+        alumni_name = metadata.get("title") or file_path.stem.replace("alumni_", "").replace("_", " ").title()
+
     event_metadata = {}
 
     # ── DETERMINISTIC METADATA RESOLUTION (PRECEDENCE ENFORCING) ──
@@ -939,6 +943,8 @@ def process_markdown_file(file_path):
 
                     if section_faculty:
                         chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
+                    if alumni_name:
+                        chunk_record["alumni_name"] = alumni_name
                     if section_course_codes:
                         chunk_record["course_code"] = section_course_codes if len(section_course_codes) > 1 else section_course_codes[0]
 

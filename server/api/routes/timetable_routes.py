@@ -2,27 +2,12 @@
 timetable_routes.py — direct (non-chat) endpoints for the dashboard.
 
 The dashboard's timetable card calls GET /timetable/me directly (not through
-the chat pipeline) so it renders instantly on login.
-
-Editing the timetable can happen two ways, both funneling into the exact
-same service.apply_change / service.clear_change functions so there is one
-place that decides what a valid edit looks like and one place that writes
-the override row:
-  - Conversationally, through the agent tools in pipeline.timetable.tool_registry
-    (update_my_timetable / undo_timetable_change), which use a confirm=false
-    preview step before confirm=true actually writes -- appropriate for a
-    multi-turn chat where the model needs to check its own understanding of
-    a free-text request against the student before acting.
-  - Directly, through POST/DELETE /me/changes below, used by the dashboard's
-    inline edit form. There's no confirm-preview step here: filling out a
-    form and pressing "Save" (or "Remove") already *is* the confirmation --
-    the same way any other web form submit is -- so gating it behind a
-    second round-trip would just be friction with no safety benefit.
-
-Both paths also refresh the student's Google Calendar afterwards (best
-effort, only if already linked with write access) via
-pipeline.google_calendar.timetable_sync.resync_if_linked, so a change made
-in the dashboard shows up on Google Calendar without a separate manual sync.
+the chat pipeline) so it renders instantly on login. Editing the timetable,
+by contrast, only happens conversationally through the agent tools in
+pipeline.timetable.tool_registry (update_my_timetable / undo_timetable_change)
+— there is deliberately no PATCH/PUT endpoint here, so every change to a
+student's timetable goes through the confirm-before-write agent flow and
+gets a natural-language record of *why* the student wanted it changed.
 
 Also exposes the Web Push subscribe/unsubscribe endpoints used by the "class
 in 10 minutes" reminder feature.
@@ -39,7 +24,6 @@ import db.connection as db_conn
 from api.auth import require_identity, Identity
 from pipeline.timetable import service
 from pipeline.timetable.service import TimetableError
-from pipeline.google_calendar import timetable_sync
 
 router = APIRouter(prefix="/timetable", tags=["timetable"])
 push_router = APIRouter(prefix="/push", tags=["push"])
@@ -55,65 +39,6 @@ def get_my_timetable(identity: Identity = Depends(require_identity)):
         return service.get_effective_timetable(identity)
     except TimetableError as e:
         raise HTTPException(status_code=e.status_code, detail=str(e))
-
-
-class TimetableChangeIn(BaseModel):
-    kind: str = Field(..., pattern="^(replace|add|remove)$")
-    day: Optional[str] = Field(None, max_length=16)
-    start_time: Optional[str] = Field(None, max_length=8)
-    end_time: Optional[str] = Field(None, max_length=8)
-    course_code: Optional[str] = Field(None, max_length=32)
-    course_name: Optional[str] = Field(None, max_length=256)
-    session_type: Optional[str] = Field(None, max_length=16)
-    room: Optional[str] = Field(None, max_length=64)
-    faculty_name: Optional[str] = Field(None, max_length=128)
-    note: Optional[str] = Field(None, max_length=500)
-
-
-@router.post("/me/changes")
-def add_my_timetable_change(body: TimetableChangeIn, identity: Identity = Depends(require_identity)):
-    """Dashboard write path for one timetable edit — the direct-call sibling
-    of the chat agent's update_my_timetable tool (see module docstring for
-    why no confirm-preview step is needed here). Writes exactly one
-    override row scoped to identity.erp_id via service.apply_change, same
-    as the chat tool."""
-    if identity.role != "student":
-        raise HTTPException(status_code=403, detail="Only students have a personal timetable.")
-    try:
-        result = service.apply_change(
-            identity,
-            kind=body.kind,
-            day=body.day,
-            start_time=body.start_time,
-            end_time=body.end_time,
-            course_code=body.course_code,
-            course_name=body.course_name,
-            session_type=body.session_type,
-            room=body.room,
-            faculty_name=body.faculty_name,
-            note=body.note,
-        )
-    except TimetableError as e:
-        raise HTTPException(status_code=e.status_code, detail=str(e))
-
-    result["calendar_sync"] = timetable_sync.resync_if_linked(identity)
-    return result
-
-
-@router.delete("/me/changes/{override_id}")
-def remove_my_timetable_change(override_id: str, identity: Identity = Depends(require_identity)):
-    """Soft-deletes one of the student's own overrides (service.clear_change
-    already scopes the WHERE clause to erp_id, so this can never touch
-    another student's row) and refreshes their calendar if linked."""
-    if identity.role != "student":
-        raise HTTPException(status_code=403, detail="Only students have a personal timetable.")
-    try:
-        result = service.clear_change(identity, override_id)
-    except TimetableError as e:
-        raise HTTPException(status_code=e.status_code, detail=str(e))
-
-    result["calendar_sync"] = timetable_sync.resync_if_linked(identity)
-    return result
 
 
 @router.get("/me/changes")
