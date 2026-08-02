@@ -12,6 +12,15 @@ import datetime
 
 logger = logging.getLogger(__name__)
 
+RECENCY_INTENT_RE = re.compile(
+    r"\b(latest|newest|most recent|most up[- ]to[- ]date|up[- ]to[- ]date|"
+    r"this semester|current semester|this year|current year|currently|"
+    r"upcoming|recently updated|"
+    r"new (?:schedule|timetable|syllabus|curriculum|policy|rules|circular|"
+    r"notice|semester|calendar))\b",
+    re.IGNORECASE,
+)
+
 # Canonical program_name for the ICT-CS specialisation. Matches the title the
 # corpus uses on the programmes-of-study page ("B.Tech. (Honours) in ICT with
 # minor in Computational Science"), which is what ingestion writes into

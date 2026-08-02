@@ -428,6 +428,8 @@ class AuraChatGraph:
         if intent != "COMMUNITY":
             return state
 
+        tool_scope = "public_kb"
+
         tool_role = identity.role if identity.role in ("student", "faculty") else None
         if tool_role is None:
             # Broad JWT role is student|faculty|admin; map elevated faculty
