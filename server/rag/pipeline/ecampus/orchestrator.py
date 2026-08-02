@@ -218,6 +218,14 @@ _TIMETABLE_EDIT_RE = re.compile(
     r"|\badd\b.{0,60}\b(?:class|lecture|lab|tutorial)\b",
     re.IGNORECASE,
 )
+_TIMETABLE_EDIT_RE = re.compile(
+    r"\b(?:change|edit|update|move|reschedule|shift|remove|delete|cancel|undo|revert)\b"
+    r".{0,60}\b(?:my\s+)?(?:timetable|schedule|class|lecture|lab|tutorial)\b"
+    r"|\b(?:my\s+)?(?:timetable|schedule|class|lecture|lab|tutorial)\b.{0,60}"
+    r"\b(?:change|edit|update|move|reschedule|shift|remove|delete|cancel|undo|revert)\b"
+    r"|\badd\b.{0,60}\b(?:class|lecture|lab|tutorial)\b",
+    re.IGNORECASE,
+)
 _CONFIRMATION_RE = re.compile(
     r"^\s*(?:yes|yep|yeah|confirm(?:ed)?|proceed|go ahead|do it|please do|sync it)"
     r"[\s.!]*$",

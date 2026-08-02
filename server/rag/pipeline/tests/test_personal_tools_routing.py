@@ -24,6 +24,10 @@ from pipeline.ecampus.orchestrator import (
     _is_timetable_edit_confirmation,
     _is_timetable_edit_intent,
 )
+from pipeline.ecampus.orchestrator import (
+    _is_timetable_edit_confirmation,
+    _is_timetable_edit_intent,
+)
 
 
 def test_keyword_gate_matches_sync_not_lookup():

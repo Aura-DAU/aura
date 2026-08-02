@@ -95,6 +95,11 @@ PERSONAL_KEYWORDS_PAT = re.compile(
     re.IGNORECASE
 )
 
+NAME_SETTING_PAT = re.compile(
+    r"^\s*(?:please\s+)?(?:call\s+me|my\s+name\s+is|i\s+am|i'm)\s+([a-zA-Z\s]{2,30})\s*$",
+    re.IGNORECASE
+)
+
 # Multi-intent keyword maps
 TIMETABLE_PAT = re.compile(r"\b(?:timetable|schedule|class(?:es)?\s+today|class(?:es)?\s+tomorrow)\b", re.IGNORECASE)
 ATTENDANCE_PAT = re.compile(r"\b(?:attendance|present|absent)\b", re.IGNORECASE)
@@ -115,9 +120,29 @@ class PersonalQueryClassifier:
         load_dotenv()
         self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
-    def classify(self, query: str) -> dict:
+    def classify(self, query: str, history: list = None) -> dict:
         if not query:
             return SAFE_DEFAULT.copy()
+
+        # Name setting fast-path
+        if NAME_SETTING_PAT.match(query):
+            return {"type": "PERSONAL", "target": "self", "erp_fields": [], "intent": "SET_NAME"}
+
+        if history and history[-1].get("role") == "assistant":
+            last_msg = history[-1].get("content", "").lower()
+            name_prompts = [
+                "like to be called",
+                "should i call you",
+                "preferred name",
+                "your name",
+                "address you"
+            ]
+            if any(p in last_msg for p in name_prompts) and "?" in last_msg:
+                # User is likely responding with their name
+                import string
+                clean_query = query.translate(str.maketrans('', '', string.punctuation)).replace(" ", "")
+                if len(query.split()) <= 3 and clean_query.isalpha():
+                    return {"type": "PERSONAL", "target": "self", "erp_fields": [], "intent": "SET_NAME"}
 
         # Pure profile questions fast-path
         if is_pure_profile_query(query):
