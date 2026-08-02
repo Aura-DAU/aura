@@ -1,5 +1,5 @@
 ---
-title: "Club Committee Data 24-25"
+title: "Club Committee Data 2024-2025"
 url: "#"
 category: "SBG & Clubs - Clubs And Committees"
 scraped_by: "Madhav Thesiya"
