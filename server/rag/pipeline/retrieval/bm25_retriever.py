@@ -14,6 +14,25 @@ class BM25Retriever:
     def __init__(self, metadata_path):
         self.metadata_path = metadata_path
         self._metadata_mtime = None
+        # Security: DISABLE_DLS_FILTER / DISABLE_PINECONE_DLS_FILTER strip the
+        # "authorization" clause from every BM25 metadata filter below, which
+        # means a request would no longer be scoped to the roles it's allowed
+        # to see. This exists for local evaluation only (see RAG_Coverage_Report
+        # Aug 2026), where the eval harness has no real caller identity to
+        # filter on. It must NEVER be true in a real deployment. Logged loudly
+        # and exactly once at startup (not per-query, to avoid log-flooding)
+        # so an accidental production misconfiguration is visible immediately
+        # in logs/monitoring instead of silently serving out-of-scope documents.
+        if (
+            os.getenv("DISABLE_DLS_FILTER", "false").lower() == "true"
+            or os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true"
+        ):
+            logger.warning(
+                "SECURITY: DISABLE_DLS_FILTER/DISABLE_PINECONE_DLS_FILTER is "
+                "TRUE — BM25 retrieval is bypassing role-based authorization "
+                "filtering. This must only ever be set for local evaluation, "
+                "never in a real deployment."
+            )
         self.rebuild_index()
 
     def rebuild_index(self):
@@ -199,7 +218,6 @@ class BM25Retriever:
         chunk,
         metadata_filter
     ):
-        import os
         if os.getenv("DISABLE_DLS_FILTER", "false").lower() == "true" or os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
             def strip_auth(f):
                 if not isinstance(f, dict): return f
@@ -246,8 +264,6 @@ class BM25Retriever:
 
         if "$not" in metadata_filter:
             return not self._matches_filter(chunk, metadata_filter["$not"])
-
-        import os
 
         for key, condition in metadata_filter.items():
 
