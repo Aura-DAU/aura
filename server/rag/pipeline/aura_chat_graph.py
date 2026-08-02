@@ -56,7 +56,11 @@ from pipeline.aura_chat import (
     is_greeting_or_meta,
 )
 from pipeline.ecampus.intent_router import PersonalDataIntentRouter
-from pipeline.ecampus.orchestrator import EcampusOrchestrator, _required_calendar_tool
+from pipeline.ecampus.orchestrator import (
+    EcampusOrchestrator,
+    _required_calendar_tool,
+    _is_calendar_unsync_intent,
+)
 from api.request_context import RequestContext
 
 
@@ -364,6 +368,7 @@ class AuraChatGraph:
         # public-KB prose before _n_personal_tools gets a chance to call MCP.
         if getattr(identity, "role", None) == "student" and (
             _is_calendar_connect_intent(state["query"])
+            or _is_calendar_unsync_intent(state["query"])
             or _required_calendar_tool(
                 state["query"],
                 state.get("history") or [],
@@ -447,7 +452,10 @@ class AuraChatGraph:
         history = state.get("history") or []
         required_calendar_tool = _required_calendar_tool(state["query"], history)
         is_connect_intent = _is_calendar_connect_intent(state["query"])
-        is_calendar_action = bool(required_calendar_tool or is_connect_intent)
+        is_unsync_intent = _is_calendar_unsync_intent(state["query"])
+        is_calendar_action = bool(
+            required_calendar_tool or is_connect_intent or is_unsync_intent
+        )
         identity = state.get("identity")
 
         if getattr(identity, "role", None) == "guest" and is_calendar_action:
@@ -463,7 +471,11 @@ class AuraChatGraph:
 
         if not identity or getattr(identity, "role", None) != "student":
             return state
-        if not _is_calendar_sync_intent(state["query"]) and not required_calendar_tool:
+        if (
+            not _is_calendar_sync_intent(state["query"])
+            and not is_unsync_intent
+            and not required_calendar_tool
+        ):
             return state
 
         # OAuth is initiated by the client-side connect CTA, not an MCP tool.
@@ -481,6 +493,22 @@ class AuraChatGraph:
                     "reason": "connect_google_calendar",
                     "message": "Connect your Google Calendar to sync your timetable.",
                 },
+            }
+            return state
+
+        # Removing events is a write, so the model is never asked to delete:
+        # a first-time remove/unsync request gets a deterministic confirmation
+        # prompt here, and the follow-up "yes" runs unsync_timetable_from_calendar
+        # via _required_calendar_tool. The prompt keeps the "remove ... Google
+        # Calendar ... proceed" phrasing that the confirmation gate keys on.
+        if is_unsync_intent and not required_calendar_tool:
+            state["result"] = {
+                "answer": (
+                    "This will remove the timetable events AURA added to your "
+                    "Google Calendar. Confirm to proceed and I'll clear them."
+                ),
+                "sources": [],
+                "is_personal_data": True,
             }
             return state
 
@@ -531,7 +559,7 @@ class AuraChatGraph:
         return state
 
     def _n_classify(self, state: AuraState) -> AuraState:
-        classification = self.classifier.classify(state["query"])
+        classification = self.classifier.classify(state["query"], history=state.get("history"))
         state["classification"] = classification
         state["query_type"] = classification["type"]
         return state

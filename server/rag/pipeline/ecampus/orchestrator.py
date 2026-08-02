@@ -120,6 +120,68 @@ def _connect_action_required(tool_results: list[dict]) -> dict | None:
             }
     return None
 
+
+def _phrase_calendar_result(tool_name: str, result: dict) -> str:
+    """Deterministic, user-facing phrasing for a calendar tool result.
+
+    The deterministic calendar path (see EcampusOrchestrator._run_calendar_tool)
+    does not route the tool result back through the model, so the answer is built
+    here instead. This guarantees two things a paraphrasing LLM turn does not:
+    the request never degrades to a generic "I can't access your calendar"
+    refusal, and a preview always ends with the "Google Calendar ... proceed"
+    phrasing that the confirmation gate (_CALENDAR_CONFIRMATION_CONTEXT_RE) keys
+    on, so the follow-up "yes" reliably triggers the sync."""
+    message = result.get("message")
+    status = result.get("status")
+
+    if status == "calendar_not_connected":
+        return message or (
+            "Your Google Calendar isn't connected for writing yet. Connect it "
+            "from Settings > Calendar, then ask me to sync your timetable again."
+        )
+    if "error" in result:
+        return (
+            "I couldn't complete that Google Calendar action just now. "
+            "Please try again in a moment."
+        )
+
+    if tool_name == "calendar_status":
+        if result.get("calendar_linked"):
+            return (
+                "Your Google Calendar is connected. Ask me to sync your timetable "
+                "to it whenever you like."
+            )
+        return (
+            "Your Google Calendar isn't connected yet. Connect it from "
+            "Settings > Calendar, then ask me to sync your timetable."
+        )
+    if tool_name == "preview_timetable_sync":
+        if message:
+            return message
+        count = result.get("class_count", 0)
+        return (
+            f"This will create or update {count} recurring weekly events on your "
+            "Google Calendar — one per class. Confirm to proceed."
+        )
+    if tool_name == "sync_timetable_to_calendar":
+        if status == "synced":
+            created = result.get("created", 0)
+            updated = result.get("updated", 0)
+            removed = result.get("removed", 0)
+            return (
+                f"Done — your timetable is synced to Google Calendar "
+                f"({created} created, {updated} updated, {removed} removed)."
+            )
+        return message or "Your timetable sync to Google Calendar has started."
+    if tool_name == "unsync_timetable_from_calendar":
+        removed = result.get("removed", 0)
+        return (
+            f"Removed {removed} timetable event(s) that AURA had added to your "
+            "Google Calendar."
+        )
+    return message or "Done."
+
+
 # tool_scope values that expose public KB tools (community + domain KB).
 _PUBLIC_KB_SCOPES = frozenset({"community", "public_kb"})
 
@@ -149,6 +211,35 @@ _CALENDAR_CONFIRMATION_CONTEXT_RE = re.compile(
     r"|\b(?:confirm|proceed)\b.*\bgoogle calendar\b",
     re.IGNORECASE | re.DOTALL,
 )
+# A remove/unsync request (e.g. "delete my timetable from my calendar"). Kept
+# separate from _CALENDAR_SYNC_RE because that pattern's "timetable ... calendar"
+# arm also matches a *removal* phrasing -- unsync must win, so it is checked
+# first and the sync arm never sees a removal request.
+_CALENDAR_UNSYNC_RE = re.compile(
+    r"\b(?:unsync|remove|delete|clear|wipe)\b.{0,40}"
+    r"\b(?:calendar|timetable|classes?|schedule|events?)\b"
+    r"|\b(?:calendar|timetable|classes?|schedule)\b.{0,30}"
+    r"\b(?:unsync|remove|delete|clear|wipe)\b",
+    re.IGNORECASE,
+)
+# The confirmation context for a *removal*. The unsync confirmation prompt also
+# contains "...Google Calendar... proceed", so the sync context would otherwise
+# swallow it -- this is checked first and keys on the removal verb the sync
+# preview prompt never contains.
+_CALENDAR_UNSYNC_CONFIRMATION_CONTEXT_RE = re.compile(
+    r"\b(?:remove|delete|unsync|clear)\b.*\b(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b.*\b(?:remove|delete|unsync|clear)\b",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _is_calendar_unsync_intent(query: str) -> bool:
+    """True for a request to remove AURA's timetable events from the calendar.
+
+    A removal is a write, so it is never dispatched directly: the graph emits a
+    confirmation prompt first (see _n_personal_tools) and the follow-up "yes"
+    reaches the unsync tool through _required_calendar_tool's confirmation arm."""
+    return bool(_CALENDAR_UNSYNC_RE.search(query))
 
 
 def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
@@ -157,7 +248,7 @@ def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
     Prompt-only tool selection is not reliable enough here: if the model emits
     prose instead of a tool call, the graph falls back to the personal-data
     responder. A write is forced only when the immediately preceding assistant
-    turn contains the calendar preview's explicit confirmation request.
+    turn contains the calendar preview's/removal's explicit confirmation request.
     """
     if _CONFIRMATION_RE.fullmatch(query):
         previous_assistant = next(
@@ -168,11 +259,22 @@ def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
             ),
             "",
         )
+        # Removal is checked before sync: the unsync prompt matches both
+        # contexts, so sync would otherwise win and add events instead.
+        if _CALENDAR_UNSYNC_CONFIRMATION_CONTEXT_RE.search(previous_assistant):
+            return "unsync_timetable_from_calendar"
         if _CALENDAR_CONFIRMATION_CONTEXT_RE.search(previous_assistant):
             return "sync_timetable_to_calendar"
 
     if _CALENDAR_STATUS_RE.search(query):
         return "calendar_status"
+    # A first-time removal request is not dispatched here (no tool returned): the
+    # graph asks for confirmation, and the "yes" hits the confirmation arm above.
+    # Returning None -- rather than falling through to the sync arm, whose regex
+    # also matches "remove ... timetable ... calendar" -- is what stops an
+    # unconfirmed request from ever deleting events.
+    if _CALENDAR_UNSYNC_RE.search(query):
+        return None
     if _CALENDAR_SYNC_RE.search(query):
         return "preview_timetable_sync"
     return None
@@ -257,17 +359,22 @@ class EcampusOrchestrator:
             if tool_scope == _PERSONAL_ACTIONS_SCOPE
             else None
         )
-        tool_choice: str | dict = "auto"
+
+        # Deterministic calendar path: the intent gate has already decided
+        # exactly which calendar tool to run, and every calendar tool takes zero
+        # model-chosen arguments (erp_id is injected from the verified identity).
+        # So run it ourselves rather than asking the model to emit a tool call --
+        # a self-hosted model that ignores a forced tool_choice would otherwise
+        # answer in prose, and the request would silently degrade to a generic
+        # "I can't access your calendar" refusal. This is what lets the agent act
+        # on Google Calendar autonomously whenever a student asks, on any model.
         if required_tool:
-            tool_choice = {
-                "type": "function",
-                "function": {"name": required_tool},
-            }
+            return self._run_calendar_tool(required_tool, identity)
 
         response = self._call_llm(
             messages=messages,
             tools=tool_schemas,
-            tool_choice=tool_choice,
+            tool_choice="auto",
         )
         msg = response.choices[0].message
 
@@ -328,6 +435,38 @@ class EcampusOrchestrator:
             "used_tools": True,
         }
         action_required = _connect_action_required(tool_results)
+        if action_required:
+            out["action_required"] = action_required
+        return out
+
+    def _run_calendar_tool(self, tool_name: str, identity: dict) -> dict:
+        """Execute a decided calendar MCP tool directly and phrase the result.
+
+        No LLM tool-calling is involved: the tool name is fixed by the intent
+        gate and the tool takes no model-chosen arguments (erp_id is injected by
+        the MCP adapter from the verified identity). The trust boundary is
+        unchanged -- the model never picks whose calendar is touched. Returns the
+        same {answer, sources, used_tools[, action_required]} shape the
+        model-driven path returns, so _n_personal_tools consumes it identically."""
+        tool = _calendar_mcp_registry().get(tool_name)
+        if tool is None or identity["role"] not in tool.allowed_roles:
+            # Discovery failed (MCP unreachable) or the role isn't allowed. Not
+            # used_tools, so _n_personal_tools falls through to the curated path.
+            return {"answer": "", "sources": [], "used_tools": False}
+
+        try:
+            result = tool.handler(identity)
+        except Exception as e:  # noqa: BLE001 -- surfaced as a soft calendar error
+            result = {"error": str(e)}
+        if not isinstance(result, dict):
+            result = {}
+
+        out: dict = {
+            "answer": _phrase_calendar_result(tool_name, result),
+            "sources": [],
+            "used_tools": True,
+        }
+        action_required = _connect_action_required([result])
         if action_required:
             out["action_required"] = action_required
         return out
