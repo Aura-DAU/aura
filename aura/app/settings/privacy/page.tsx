@@ -23,21 +23,10 @@ export default function PrivacySettingsPage() {
     }
     if (status !== "authenticated") return
 
-    loadTimerRef.current = setTimeout(() => {
-      setAdvisors(["EMP1001", "EMP1002"])
-      setLoading(false)
-    }, 600)
-
-    return () => {
-      if (loadTimerRef.current) clearTimeout(loadTimerRef.current)
-    }
+    // Immediately load data without delay
+    setAdvisors(["EMP1001", "EMP1002"])
+    setLoading(false)
   }, [status, router])
-
-  useEffect(() => {
-    return () => {
-      if (toggleTimerRef.current) clearTimeout(toggleTimerRef.current)
-    }
-  }, [])
 
   if (status === "loading" || loading) {
     return (
@@ -53,19 +42,17 @@ export default function PrivacySettingsPage() {
       `[DUMMY] ${currentAccess ? "Revoking" : "Granting"} access for advisor ${advisorId}`
     )
 
-    if (toggleTimerRef.current) clearTimeout(toggleTimerRef.current)
-    toggleTimerRef.current = setTimeout(() => {
-      setAdvisors((prev) =>
-        currentAccess ? prev.filter((id) => id !== advisorId) : [...prev, advisorId]
-      )
-      setToggling(null)
-    }, 500)
+    // Immediately update state without delay
+    setAdvisors((prev) =>
+      currentAccess ? prev.filter((id) => id !== advisorId) : [...prev, advisorId]
+    )
+    setToggling(null)
   }
 
   return (
     <div className="relative min-h-screen bg-theme-black px-4 py-10 sm:px-6 lg:px-8 text-neutral-100">
       {/* Background decoration */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:24px_24px]" />
         <div className="absolute -left-32 -top-32 size-96 rounded-full bg-theme-red/10 blur-3xl" />
         <div className="absolute -bottom-32 -right-32 size-96 rounded-full bg-theme-yellow/10 blur-3xl" />
