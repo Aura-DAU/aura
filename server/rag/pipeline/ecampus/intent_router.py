@@ -29,7 +29,9 @@ cached personal data; and requests to change, add, remove, or undo a change
 to their OWN timetable (e.g. "move my 5pm class to Room 204", "add a lab on
 Friday", "undo that timetable change I made yesterday"). Personal scholarship
 eligibility screening ("am I eligible for X scholarship given my CGPA") is
-PERSONAL_DATA.
+PERSONAL_DATA. Requests to connect, link, check, sync, export, or add the
+requester's timetable/classes to their own Google Calendar are also
+PERSONAL_DATA. Google Calendar actions are not academic-calendar lookups.
 
 COMMUNITY: public campus KB tool lookups — NOT private ERP records. Includes:
 - Student clubs / SBG (list clubs, purpose, how to join, published rosters,
@@ -59,8 +61,9 @@ Examples: "what clubs for music", "who is the convenor of Programming Club",
 GENERAL: greetings, thanks, meta questions about AURA itself, short follow-ups
 with no topic of their own, and queries too vague to map to a campus tool
 (prefer RAG). Do NOT put faculty who-is / campus directory / clubs /
-calendar / admissions / placements / facilities questions here — those are
-COMMUNITY.
+academic-calendar dates / admissions / placements / facilities questions here
+— those are COMMUNITY. Do not apply that academic-calendar rule to requests
+about the user's connected Google Calendar.
 
 If genuinely ambiguous between COMMUNITY and GENERAL, prefer COMMUNITY when
 any campus KB domain above is involved. Prefer GENERAL over PERSONAL_DATA

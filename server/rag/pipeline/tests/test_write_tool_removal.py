@@ -66,13 +66,31 @@ ALLOWED_HTTP_WRITE_MODULES = {
         ),
     },
     "writer.py": {
-        "methods": {"post", "patch", "delete"},
+        "methods": {"post", "delete"},
         "reason": (
             "Google Calendar timetable sync — the one module in AURA that "
             "writes calendar events, by design. Touches only events it "
             "created itself (tagged extendedProperties.private.aura_slot_key) "
             "on the calendar of the erp_id that granted the calendar.events "
-            "scope. Added in 893130f (#195); see the module docstring."
+            "scope. Updates are encoded inside its batch POST; stale and "
+            "unsynced AURA-managed events use direct DELETE requests. Added "
+            "in 893130f (#195); see the module docstring."
+        ),
+    },
+    "revoke.py": {
+        "methods": {"post"},
+        "reason": (
+            "Best-effort Google OAuth revocation during calendar disconnect. "
+            "The POST targets Google's revocation endpoint before AURA deletes "
+            "the calling user's locally stored token. Added in a206b1cd (#303)."
+        ),
+    },
+    "retry_queue.py": {
+        "methods": {"post"},
+        "reason": (
+            "Retries a failed Google Calendar event creation for the same "
+            "authenticated user and slot previously approved for timetable "
+            "sync. Added in a206b1cd (#303)."
         ),
     },
 }
