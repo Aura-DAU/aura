@@ -97,9 +97,14 @@ export function ChatShell() {
   }, [])
 
   const regenerate = chat.handleRegenerate
+  const sendMessage = chat.handleSendMessage
   const handleRegenerate = useCallback(() => {
     void regenerate()
   }, [regenerate])
+
+  const handleCalendarSyncConfirm = useCallback(() => {
+    void sendMessage("confirm")
+  }, [sendMessage])
 
   const hasMessages = chat.messages.length > 0
 
@@ -187,6 +192,7 @@ export function ChatShell() {
                     thinkingStep={chat.thinkingStep}
                     activeCitations={chat.activeCitations}
                     onRegenerate={handleRegenerate}
+                    onCalendarSyncConfirm={handleCalendarSyncConfirm}
                     continuation={chat.activeThreadIsContinuation}
                   />
                 </div>

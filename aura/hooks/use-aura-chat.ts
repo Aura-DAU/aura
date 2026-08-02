@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react"
 import { apiFetch } from "@/lib/auth-client"
 import { getUserMessage, toastAppError, toastError, toastSuccess, appErrorFromResponse } from "@/lib/toast"
 import { AppError, ErrorCode, isAbortError, sanitizePublicMessage } from "@/lib/errors"
+import { toCalendarSyncAction } from "@/components/features/chat-ui/calendar-sync-presentation"
 
 /** Soft failure copy the pipeline sometimes returns as a normal answer. */
 const SOFT_FAILURE_ANSWER =
@@ -775,9 +776,20 @@ export function useAuraChat() {
           if (chunk.type === "text-delta" && typeof chunk.delta === "string") {
             setThinkingStep(undefined)
             assistantText += chunk.delta
+            const syncAction = toCalendarSyncAction(assistantText)
+            if (syncAction) {
+              calendarAction = syncAction
+              if (syncAction.type === "timetable_sync") {
+                assistantText = "Syncing your timetable with Google Calendar."
+              }
+            }
             setMessages((prev) => {
               const next = [...prev]
-              next[next.length - 1] = { ...assistantMsg, content: assistantText }
+              next[next.length - 1] = {
+                ...assistantMsg,
+                content: assistantText,
+                calendar_action: calendarAction,
+              }
               return next
             })
           } else if (chunk.type === "citations" && Array.isArray(chunk.citations)) {
@@ -826,7 +838,7 @@ export function useAuraChat() {
 
         // Empty reply or mid-stream failure with no usable text — roll back the
         // blank assistant bubble and surface a clear, actionable error.
-        if (!assistantText.trim()) {
+        if (!assistantText.trim() && !calendarAction) {
           const msg = streamErrorMessage ?? STREAM_ERROR_FALLBACK
           setErrorMessage(msg)
           toastError(msg)

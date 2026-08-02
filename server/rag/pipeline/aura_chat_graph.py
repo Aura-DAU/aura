@@ -60,6 +60,8 @@ from pipeline.ecampus.orchestrator import (
     EcampusOrchestrator,
     _required_calendar_tool,
     _is_calendar_unsync_intent,
+    _is_timetable_edit_confirmation,
+    _is_timetable_edit_intent,
 )
 from api.request_context import RequestContext
 
@@ -370,6 +372,11 @@ class AuraChatGraph:
         if getattr(identity, "role", None) == "student" and (
             _is_calendar_connect_intent(state["query"])
             or _is_calendar_unsync_intent(state["query"])
+            or _is_timetable_edit_intent(state["query"])
+            or _is_timetable_edit_confirmation(
+                state["query"],
+                state.get("history") or [],
+            )
             or _required_calendar_tool(
                 state["query"],
                 state.get("history") or [],
@@ -444,26 +451,30 @@ class AuraChatGraph:
         return state
 
     def _n_personal_tools(self, state: AuraState) -> AuraState:
-        # In-chat "add this to my schedule" → Google Calendar sync (the GPT/Claude
-        # connector pattern). Signed-in students reach the calendar MCP tools;
-        # guests get sign-in guidance. The actions scope exposes just the
-        # student's own timetable + calendar tools, never ERP reads. Anything
-        # else — every CGPA/attendance/grade lookup — falls straight through to
-        # the existing personal_data path, so this node has no blast radius.
+        # Signed-in students reach personal timetable writes and Google Calendar
+        # actions here; guests get sign-in guidance. The actions scope exposes
+        # only the student's timetable + calendar tools, never ERP reads.
         history = state.get("history") or []
         required_calendar_tool = _required_calendar_tool(state["query"], history)
         is_connect_intent = _is_calendar_connect_intent(state["query"])
         is_unsync_intent = _is_calendar_unsync_intent(state["query"])
+        is_timetable_edit = _is_timetable_edit_intent(state["query"])
+        is_timetable_confirmation = _is_timetable_edit_confirmation(
+            state["query"], history
+        )
         is_calendar_action = bool(
             required_calendar_tool or is_connect_intent or is_unsync_intent
         )
+        is_personal_action = bool(
+            is_calendar_action or is_timetable_edit or is_timetable_confirmation
+        )
         identity = state.get("identity")
 
-        if getattr(identity, "role", None) == "guest" and is_calendar_action:
+        if getattr(identity, "role", None) == "guest" and is_personal_action:
             state["result"] = {
                 "answer": (
                     "Sign in with your DAU student account first, then ask me "
-                    "again to sync your timetable with Google Calendar."
+                    "again to manage your timetable."
                 ),
                 "sources": [],
                 "is_personal_data": False,
@@ -476,6 +487,8 @@ class AuraChatGraph:
             not _is_calendar_sync_intent(state["query"])
             and not is_unsync_intent
             and not required_calendar_tool
+            and not is_timetable_edit
+            and not is_timetable_confirmation
         ):
             return state
 

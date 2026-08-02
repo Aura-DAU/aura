@@ -1,14 +1,13 @@
 """
-Routing tests for the in-chat calendar-sync node (_n_personal_tools) added to
+Routing tests for the in-chat personal-actions node (_n_personal_tools) in
 AuraChatGraph. The node is exercised in isolation on a stand-in `self` so these
 stay fast and free of the full graph's heavy collaborators.
 
 Guarantees:
-  1. the keyword gate matches sync requests but not ordinary schedule lookups;
+  1. the gates match calendar syncs and timetable edits, not ordinary lookups;
   2. the node surfaces a connect action for a student calendar-sync request;
-  3. it never fires for non-student or non-calendar queries (the orchestrator
-     is not even invoked), so the ERP path is untouched; and it does not depend
-     on the fallible general-purpose intent classifier for calendar actions;
+  3. it never fires for non-student or unrelated queries (the orchestrator is
+     not invoked), so the ERP path stays untouched;
   4. a no-tool orchestrator run falls through instead of committing prose.
 """
 
@@ -19,6 +18,10 @@ from pipeline.aura_chat_graph import (
     SimpleIdentity,
     _is_calendar_connect_intent,
     _is_calendar_sync_intent,
+)
+from pipeline.ecampus.orchestrator import (
+    _is_timetable_edit_confirmation,
+    _is_timetable_edit_intent,
 )
 
 
@@ -34,6 +37,14 @@ def test_connect_gate_matches_explicit_connect_requests():
     assert _is_calendar_connect_intent("connect to Google Calendar")
     assert _is_calendar_connect_intent("link my calendar")
     assert not _is_calendar_connect_intent("sync my timetable to Google Calendar")
+
+
+def test_timetable_edit_gate_matches_personal_changes():
+    assert _is_timetable_edit_intent("move my Monday lecture to 3 PM")
+    assert _is_timetable_edit_intent("add a lab on Friday to my timetable")
+    assert _is_timetable_edit_intent("remove my Tuesday class")
+    assert _is_timetable_edit_intent("undo my last timetable change")
+    assert not _is_timetable_edit_intent("what's my timetable today")
 
 
 def _fake_self(run_return, counter=None):
@@ -118,6 +129,44 @@ def test_node_falls_through_when_no_tool_used():
     fake = _fake_self({"answer": "I couldn't help.", "sources": [], "used_tools": False})
     out = AuraChatGraph._n_personal_tools(fake, _student_state("add this to my schedule"))
     assert out.get("result") is None
+
+
+def test_node_routes_timetable_edit_to_personal_actions():
+    calls = []
+    fake = _fake_self({
+        "used_tools": True,
+        "answer": "I can move that class. Confirm to apply the timetable change.",
+        "sources": [],
+    })
+    fake.ecampus_orchestrator.run = lambda **kwargs: calls.append(kwargs) or {
+        "used_tools": True,
+        "answer": "I can move that class. Confirm to apply the timetable change.",
+        "sources": [],
+    }
+
+    out = AuraChatGraph._n_personal_tools(
+        fake,
+        _student_state("move my Monday lecture to 3 PM"),
+    )
+
+    assert "Confirm" in out["result"]["answer"]
+    assert calls[0]["tool_scope"] == "personal_actions"
+
+
+def test_node_routes_timetable_edit_confirmation_with_history():
+    counter = {"n": 0}
+    fake = _fake_self({"used_tools": True, "answer": "Your timetable was updated."}, counter)
+    state = _student_state("confirm", intent="GENERAL")
+    state["history"] = [{
+        "role": "assistant",
+        "content": "I'll move your Monday lecture to 3 PM. Confirm to apply this timetable change.",
+    }]
+
+    assert _is_timetable_edit_confirmation(state["query"], state["history"])
+    out = AuraChatGraph._n_personal_tools(fake, state)
+
+    assert out["result"]["answer"] == "Your timetable was updated."
+    assert counter["n"] == 1
 
 
 def test_node_routes_confirmation_after_calendar_preview():
