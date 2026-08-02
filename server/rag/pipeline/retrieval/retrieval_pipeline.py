@@ -1033,6 +1033,34 @@ class RetrievalPipeline:
 
         results = self._eligible_results(deduped, academic_scope)
 
+        def _log_candidates(title_header, candidates):
+            print("\n" + "=" * 80)
+            print(title_header)
+            print()
+            top20 = candidates[:20] if candidates else []
+            for idx, item in enumerate(top20, start=1):
+                meta = item.get("metadata", {}) if isinstance(item, dict) else {}
+                cc = meta.get("course_code") or "N/A"
+                t_val = meta.get("title") or "N/A"
+                h1_val = meta.get("h1") or "N/A"
+                s_val = item.get("fusion_score")
+                if s_val is None:
+                    s_val = item.get("rerank_score")
+                if s_val is None:
+                    s_val = item.get("score")
+                if s_val is None:
+                    s_val = item.get("cosine_score")
+                if s_val is None:
+                    s_val = 0.0
+                print(f"{idx:02d}. Course: {cc}")
+                print(f"    Title: {t_val}")
+                print(f"    H1: {h1_val}")
+                print(f"    Score: {float(s_val):.4f}")
+                print()
+            print("=" * 80)
+
+        _log_candidates("RETRIEVAL RESULTS BEFORE RERANK", results)
+
         if decomposed_queries:
             # Fix A: run a final joint cross-encoder rerank over the merged
             # pool using the original user query (not a sub-query string).
@@ -1046,6 +1074,7 @@ class RetrievalPipeline:
                     plan=plan
                 )
             )
+            _log_candidates("FINAL RERANK", reranked)
 
         else:
             # ── TWO-STAGE RERANKING ──
@@ -1055,6 +1084,7 @@ class RetrievalPipeline:
                 results=results,
                 plan=plan
             )
+            _log_candidates("AFTER STAGE-1 RERANK", stage1_reranked)
             
             # Select top 12 candidates
             top_candidates = stage1_reranked[:12]
@@ -1071,6 +1101,7 @@ class RetrievalPipeline:
                 results=expanded_candidates,
                 plan=plan
             )
+            _log_candidates("FINAL RERANK", reranked)
 
         # Fix TK1: previously capped at min(plan["top_k"], 5) which destroyed
         # the multi-entity boost (num_entities*3 was always clamped back to 5).
