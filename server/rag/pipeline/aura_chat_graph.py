@@ -425,10 +425,12 @@ class AuraChatGraph:
         # Stash the verdict so _n_personal_tools can reuse it without a second
         # classifier round-trip.
         state["ecampus_intent"] = intent
-        if intent != "COMMUNITY":
+        if intent == "COMMUNITY":
+            tool_scope = "public_kb"
+        elif intent == "PERSONAL_DATA":
+            tool_scope = "personal"
+        else:
             return state
-
-        tool_scope = "public_kb"
 
         tool_role = identity.role if identity.role in ("student", "faculty") else None
         if tool_role is None:
