@@ -1,5 +1,5 @@
 ---
-title: "Cafeteria Management Committee: Vendors and Prices"
+title: "CMC_MenuPrices"
 url: "https://drive.google.com/file/d/1Ctvw9GKgkKdAW8lChFq35hfZsRs6VRur/view?usp=sharing"
 category: "Committees"
 scraped_by: "DhruvamPanchal"
