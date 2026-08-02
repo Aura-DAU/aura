@@ -88,6 +88,7 @@ def test_connect_required_surfaced_when_calendar_not_linked(monkeypatch):
         identity={"role": "student", "erp_id": "S1"},
         tool_scope="personal_actions",
     )
+    print("DEBUG: result =", result)
     assert result["used_tools"] is True
     action = result["action_required"]
     assert action["type"] == "connect_required"
