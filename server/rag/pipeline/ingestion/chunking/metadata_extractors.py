@@ -585,3 +585,21 @@ def extract_research_domain(text):
     ]
 
     return sorted(matched) if matched else None
+
+
+def extract_program_list_category(file_path, text):
+    """Detect if this chunk is part of a broad overview document that lists
+    programs (e.g. undergraduate_programs.md). This helps the query planner
+    fetch these specific documents for broad 'What programs does DAU offer?'
+    queries without getting truncated by top-K vector search limitations.
+    """
+    if not file_path or not text:
+        return None
+
+    path_lower = str(file_path).lower()
+    
+    # Specific known overview files
+    if "programs_of_study" in path_lower and ("undergraduate_programs.md" in path_lower or "postgraduate_programs.md" in path_lower or "doctoral_program.md" in path_lower or "dual_degree_programs.md" in path_lower):
+        return "program_list"
+        
+    return None

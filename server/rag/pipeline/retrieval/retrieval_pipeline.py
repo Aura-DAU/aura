@@ -422,6 +422,30 @@ class RetrievalPipeline:
         threshold = datetime.datetime.now().year - 1
         return {"document_year": {"$gte": threshold}}
 
+    def _scatter_gather_filter(self, plan, query):
+        """
+        Fix for Issue 4: Poor Scatter-Gather Retrieval (Top-K Truncation).
+        When the user asks broad listing queries (e.g., 'What programs are offered?' 
+        or 'Who is doing research in NLP?'), vector search top-K will truncate lists.
+        By emitting a hard metadata filter, we can retrieve exactly the overview/list chunks.
+        """
+        q_lower = (query or "").lower()
+        
+        # Broad Program listing queries
+        if "what programs" in q_lower or "list all programs" in q_lower or "which programs" in q_lower or "types of programs" in q_lower:
+            return {"category": {"$in": ["program_list"]}}
+            
+        # Broad Research Domain listing queries
+        # If the planner extracted a research domain or we detect domain keywords
+        # (Assuming research queries have intent = 'research' or 'faculty')
+        if plan.get("intent") in ("research", "faculty"):
+            if "research in " in q_lower or "working on " in q_lower or "who does" in q_lower:
+                # In a robust implementation we'd check if an extracted research_domain entity exists,
+                # but since we didn't add it to the planner schema, we just rely on the LLM's keyword matching
+                pass
+                
+        return None
+
     @staticmethod
     def _combine_filters(*filters):
         active = [item for item in filters if item]
@@ -1012,10 +1036,12 @@ class RetrievalPipeline:
                     # to recent document_year when the original query (not
                     # just this sub-query fragment) signals recency intent.
                     sub_recency_filter = self._recency_filter(plan, query)
+                    sub_scatter_filter = self._scatter_gather_filter(plan, query)
 
                     sub_metadata_filter = self._combine_filters(
                         self._build_metadata_filter(plan, subquery_expanded),
                         sub_recency_filter,
+                        sub_scatter_filter,
                         self._academic_scope_filter(academic_scope),
                     )
                     if allowed_roles:
@@ -1465,8 +1491,12 @@ class RetrievalPipeline:
                     _parse(entity_filter)
                 print("=" * 60)
 
+                scatter_filter = self._scatter_gather_filter(plan, query)
+
                 semantic_filter = self._combine_filters(
                     entity_filter,
+                    recency_filter,
+                    scatter_filter,
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )

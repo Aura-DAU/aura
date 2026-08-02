@@ -35,6 +35,8 @@ from metadata_extractors import (
     extract_program_name,
     extract_section_type,
     resolve_document_academic_year,
+    extract_research_domain,
+    extract_program_list_category,
 )
 
 logger = logging.getLogger(__name__)
@@ -945,6 +947,15 @@ def process_markdown_file(file_path):
                         chunk_record["faculty_name"] = section_faculty if len(section_faculty) > 1 else section_faculty[0]
                     if section_course_codes:
                         chunk_record["course_code"] = section_course_codes if len(section_course_codes) > 1 else section_course_codes[0]
+
+                    r_domain = extract_research_domain(chunk_text)
+                    if r_domain:
+                        chunk_record["research_domain"] = r_domain
+
+                    p_category = extract_program_list_category(relative_path, chunk_text)
+                    if p_category:
+                        # Overwrite or append to existing category
+                        chunk_record["category"] = p_category
 
                     target_semester = effective_semester or metadata.get("semester")
                     if target_semester:
