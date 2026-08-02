@@ -164,12 +164,14 @@ class PersonalQueryClassifier:
             intent = "PROFILE"
             if TIMETABLE_PAT.search(q_lower):
                 fields.append("courses")
+                fields.append("teaching_schedule")
                 intent = "TIMETABLE"
             if ATTENDANCE_PAT.search(q_lower):
                 fields.append("attendance")
                 intent = "ATTENDANCE"
             if "cgpa" in q_lower or "gpa" in q_lower or "grade" in q_lower:
                 fields.append("cgpa")
+                fields.append("grades")
                 intent = "PROFILE"
             return {"type": "PERSONAL", "target": "self", "erp_fields": fields, "intent": intent}
 

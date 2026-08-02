@@ -964,6 +964,8 @@ class AuraChatGraph:
             data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
         if "courses" in fields and requester_erp_id:
             data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
+        if "teaching_schedule" in fields and requester_erp_id:
+            data["teaching_schedule"] = self.erp_connector.get_faculty_teaching_schedule(requester_erp_id)
         return data
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────
