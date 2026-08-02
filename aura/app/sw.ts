@@ -22,6 +22,13 @@ const SENSITIVE_API_PREFIXES = [
   "/api/admin",
   "/api/documents",
   "/api/speech",
+  // Memory/profile/calendar deletes and writes are mutating, per-identity
+  // requests — a stale/cached response here can make a successful delete
+  // look like it failed (or vice versa). Always hit the network directly.
+  "/api/memory",
+  "/api/profile",
+  "/api/push",
+  "/api/calendar",
 ]
 
 const runtimeCaching: RuntimeCaching[] = [
