@@ -197,8 +197,33 @@ _CALENDAR_STATUS_RE = re.compile(
     re.IGNORECASE,
 )
 _CALENDAR_SYNC_RE = re.compile(
-    r"\b(?:add|sync|put|export|save)\b.{0,40}\b(?:calendar|schedule|timetable|classes?)\b"
-    r"|\b(?:schedule|timetable|classes?)\b.{0,30}\bcalendar\b",
+    r"\b(?:add|sync|put|export|save)\b.{0,40}\b(?:calendar|schedule|time\s*table|classes?)\b"
+    r"|\b(?:schedule|time\s*table|classes?)\b.{0,30}\bcalendar\b",
+    re.IGNORECASE,
+)
+_TIMETABLE_SYNC_DETAILS_CONTEXT_RE = re.compile(
+    r"\bsync(?:ing)?\b.{0,80}\btime\s*table\b.{0,120}\b(?:section|elective)\b",
+    re.IGNORECASE | re.DOTALL,
+)
+_TIMETABLE_DETAILS_FETCH_RE = re.compile(
+    r"^\s*(?:please\s+)?(?:fetch|get|read|use|take)\b.{0,40}"
+    r"\b(?:from\s+)?(?:my\s+)?time\s*table\b[\s.!?]*$",
+    re.IGNORECASE,
+)
+_TIMETABLE_EDIT_RE = re.compile(
+    r"\b(?:change|edit|update|move|reschedule|shift|remove|delete|cancel|undo|revert)\b"
+    r".{0,60}\b(?:my\s+)?(?:timetable|schedule|class|lecture|lab|tutorial)\b"
+    r"|\b(?:my\s+)?(?:timetable|schedule|class|lecture|lab|tutorial)\b.{0,60}"
+    r"\b(?:change|edit|update|move|reschedule|shift|remove|delete|cancel|undo|revert)\b"
+    r"|\badd\b.{0,60}\b(?:class|lecture|lab|tutorial)\b",
+    re.IGNORECASE,
+)
+_TIMETABLE_EDIT_RE = re.compile(
+    r"\b(?:change|edit|update|move|reschedule|shift|remove|delete|cancel|undo|revert)\b"
+    r".{0,60}\b(?:my\s+)?(?:timetable|schedule|class|lecture|lab|tutorial)\b"
+    r"|\b(?:my\s+)?(?:timetable|schedule|class|lecture|lab|tutorial)\b.{0,60}"
+    r"\b(?:change|edit|update|move|reschedule|shift|remove|delete|cancel|undo|revert)\b"
+    r"|\badd\b.{0,60}\b(?:class|lecture|lab|tutorial)\b",
     re.IGNORECASE,
 )
 _CONFIRMATION_RE = re.compile(
@@ -231,6 +256,33 @@ _CALENDAR_UNSYNC_CONFIRMATION_CONTEXT_RE = re.compile(
     r"|\b(?:google\s+)?calendar\b.*\b(?:remove|delete|unsync|clear)\b",
     re.IGNORECASE | re.DOTALL,
 )
+_TIMETABLE_EDIT_CONFIRMATION_CONTEXT_RE = re.compile(
+    r"\b(?:timetable|schedule|class|lecture|lab|tutorial)\b.*\b(?:confirm|apply|proceed)\b"
+    r"|\b(?:confirm|apply|proceed)\b.*\b(?:timetable|schedule|class|lecture|lab|tutorial)\b",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _is_timetable_edit_intent(query: str) -> bool:
+    """Recognise changes to AURA's personal timetable, not calendar export."""
+    return bool(_TIMETABLE_EDIT_RE.search(query))
+
+
+def _is_timetable_edit_confirmation(query: str, history: list[dict]) -> bool:
+    if not _CONFIRMATION_RE.fullmatch(query):
+        return False
+    previous_assistant = next(
+        (
+            str(turn.get("content", ""))
+            for turn in reversed(history)
+            if turn.get("role") == "assistant"
+        ),
+        "",
+    )
+    return bool(
+        _TIMETABLE_EDIT_CONFIRMATION_CONTEXT_RE.search(previous_assistant)
+        and not _CALENDAR_CONFIRMATION_CONTEXT_RE.search(previous_assistant)
+    )
 
 
 def _is_calendar_unsync_intent(query: str) -> bool:
@@ -239,6 +291,12 @@ def _is_calendar_unsync_intent(query: str) -> bool:
     A removal is a write, so it is never dispatched directly: the graph emits a
     confirmation prompt first (see _n_personal_tools) and the follow-up "yes"
     reaches the unsync tool through _required_calendar_tool's confirmation arm."""
+    if _is_timetable_edit_intent(query) and not re.search(
+        r"\b(?:from|off)\b.{0,30}\b(?:google\s+)?calendar\b",
+        query,
+        re.IGNORECASE,
+    ):
+        return False
     return bool(_CALENDAR_UNSYNC_RE.search(query))
 
 
@@ -247,8 +305,9 @@ def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
 
     Prompt-only tool selection is not reliable enough here: if the model emits
     prose instead of a tool call, the graph falls back to the personal-data
-    responder. A write is forced only when the immediately preceding assistant
-    turn contains the calendar preview's/removal's explicit confirmation request.
+    responder. An explicit sync request is itself authorization to update the
+    signed-in student's calendar; destructive unsync requests still require a
+    separate confirmation.
     """
     if _CONFIRMATION_RE.fullmatch(query):
         previous_assistant = next(
@@ -268,6 +327,26 @@ def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
 
     if _CALENDAR_STATUS_RE.search(query):
         return "calendar_status"
+
+    previous_assistant = next(
+        (
+            str(turn.get("content", ""))
+            for turn in reversed(history)
+            if turn.get("role") == "assistant"
+        ),
+        "",
+    )
+    if (
+        _TIMETABLE_DETAILS_FETCH_RE.fullmatch(query)
+        and _TIMETABLE_SYNC_DETAILS_CONTEXT_RE.search(previous_assistant)
+    ):
+        return "sync_timetable_to_calendar"
+
+    # Timetable edits use update_my_timetable. They may contain words such as
+    # "add", "remove", or "schedule", which also occur in calendar requests;
+    # keep them out of the deterministic calendar tool path.
+    if _is_timetable_edit_intent(query):
+        return None
     # A first-time removal request is not dispatched here (no tool returned): the
     # graph asks for confirmation, and the "yes" hits the confirmation arm above.
     # Returning None -- rather than falling through to the sync arm, whose regex
@@ -276,7 +355,7 @@ def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
     if _CALENDAR_UNSYNC_RE.search(query):
         return None
     if _CALENDAR_SYNC_RE.search(query):
-        return "preview_timetable_sync"
+        return "sync_timetable_to_calendar"
     return None
 
 

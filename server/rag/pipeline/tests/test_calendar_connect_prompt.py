@@ -21,6 +21,7 @@ from pipeline.ecampus.orchestrator import (
     _ECAMPUS_TOOL_REGISTRY,
     _required_calendar_tool,
     _is_calendar_unsync_intent,
+    _is_timetable_edit_intent,
 )
 from pipeline.google_calendar import timetable_sync
 
@@ -76,8 +77,8 @@ def _no_llm_orch(monkeypatch):
 
 
 def test_connect_required_surfaced_when_calendar_not_linked(monkeypatch):
-    # A sync request previews first (the write gate). With no linked calendar the
-    # tool reports calendar_not_connected → structured connect CTA, no LLM.
+    # With no linked calendar, the direct sync reports calendar_not_connected →
+    # a structured connect CTA, with no LLM or request for timetable details.
     monkeypatch.setattr(
         timetable_sync, "preview",
         lambda identity, **k: {"status": "calendar_not_connected", "message": "Not linked."},
@@ -96,35 +97,35 @@ def test_connect_required_surfaced_when_calendar_not_linked(monkeypatch):
     assert action["connect_path"] == "/settings/calendar"
 
 
-def test_sync_request_runs_preview_deterministically(monkeypatch):
-    # "sync my calendar" runs the preview tool directly (no model tool-calling),
-    # surfaces the class count, and keeps the phrasing the confirmation gate keys
-    # on so the follow-up "yes" reliably triggers the write.
+def test_sync_request_runs_sync_deterministically(monkeypatch):
+    # An explicit sync request authorizes the idempotent write. The effective
+    # timetable service resolves section/electives without another user turn.
     seen = {}
 
-    def _preview(identity, **k):
-        seen["called"] = True
+    def _apply(identity, **kwargs):
+        seen.update({"identity": identity, **kwargs})
         return {
-            "status": "confirmation_required",
-            "class_count": 20,
-            "message": (
-                "This will create or update 20 recurring weekly events on your "
-                "Google Calendar — one per class. Confirm to proceed."
-            ),
+            "status": "synced",
+            "created": 20,
+            "updated": 0,
+            "removed": 0,
         }
 
-    monkeypatch.setattr(timetable_sync, "preview", _preview)
+    monkeypatch.setattr(timetable_sync, "apply", _apply)
     orch = _no_llm_orch(monkeypatch)
     result = orch.run(
         query="can you sync my google calendar",
         identity={"role": "student", "erp_id": "S1"},
         tool_scope="personal_actions",
     )
-    assert seen.get("called") is True
+    assert seen == {
+        "identity": {"role": "student", "erp_id": "S1"},
+        "async_mode": False,
+    }
     assert result["used_tools"] is True
     assert "action_required" not in result
     assert "Google Calendar" in result["answer"]
-    assert "proceed" in result["answer"].lower()
+    assert "20 created" in result["answer"]
 
 
 def test_confirmation_runs_the_sync_and_carries_no_connect_action(monkeypatch):
@@ -132,7 +133,7 @@ def test_confirmation_runs_the_sync_and_carries_no_connect_action(monkeypatch):
     called = {}
 
     def _apply(identity, **k):
-        called["synced"] = True
+        called.update({"synced": True, **k})
         return {"status": "queued", "message": "Sync started in the background."}
 
     monkeypatch.setattr(timetable_sync, "apply", _apply)
@@ -147,6 +148,7 @@ def test_confirmation_runs_the_sync_and_carries_no_connect_action(monkeypatch):
         tool_scope="personal_actions",
     )
     assert called.get("synced") is True
+    assert called["async_mode"] is False
     assert result["used_tools"] is True
     assert "action_required" not in result
 
@@ -174,8 +176,41 @@ def test_confirmation_requires_sync_tool_only_after_calendar_preview():
     assert _required_calendar_tool("yes", []) is None
 
 
+def test_explicit_sync_request_needs_no_separate_confirmation():
+    assert _required_calendar_tool("sync my time table", []) == "sync_timetable_to_calendar"
+    assert _required_calendar_tool(
+        "sync my Google Calendar", []
+    ) == "sync_timetable_to_calendar"
+
+
+def test_timetable_details_follow_up_resumes_sync_without_manual_input():
+    history = [{
+        "role": "assistant",
+        "content": (
+            "To sync your timetable, I need your section and elective details."
+        ),
+    }]
+
+    assert _required_calendar_tool(
+        "fetch them from my timetable", history
+    ) == "sync_timetable_to_calendar"
+
+
 def test_academic_calendar_lookup_does_not_select_personal_calendar_tool():
     assert _required_calendar_tool("When is the academic calendar deadline?", []) is None
+
+
+def test_timetable_edits_do_not_select_calendar_tools():
+    edit_requests = [
+        "move my Monday lecture to 3 PM",
+        "add a lab on Friday to my timetable",
+        "remove my Tuesday class",
+    ]
+
+    for request in edit_requests:
+        assert _is_timetable_edit_intent(request)
+        assert not _is_calendar_unsync_intent(request)
+        assert _required_calendar_tool(request, []) is None
 
 
 def test_unsync_intent_detected_but_not_dispatched_without_confirmation():

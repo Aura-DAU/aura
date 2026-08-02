@@ -60,6 +60,8 @@ from pipeline.ecampus.orchestrator import (
     EcampusOrchestrator,
     _required_calendar_tool,
     _is_calendar_unsync_intent,
+    _is_timetable_edit_confirmation,
+    _is_timetable_edit_intent,
 )
 from api.request_context import RequestContext
 
@@ -72,8 +74,27 @@ from api.request_context import RequestContext
 # falls through — but keeping it tight avoids a needless extra LLM call.
 _CALENDAR_KEYWORD_RE = re.compile(r"\bcalendar\b", re.IGNORECASE)
 _SCHEDULE_ACTION_RE = re.compile(
-    r"\b(add|sync|put|export|save)\b.{0,40}\b(schedule|timetable|classes|class)\b"
-    r"|\b(schedule|timetable|classes)\b.{0,20}\bcalendar\b",
+    r"\b(add|sync|put|export|save)\b.{0,40}\b(schedule|time\s*table|classes|class)\b"
+    r"|\b(schedule|time\s*table|classes)\b.{0,20}\bcalendar\b",
+    re.IGNORECASE,
+)
+_LOW_RISK_TIMETABLE_SYNC_RE = re.compile(
+    r"^\s*(?:please\s+)?(?:"
+    r"(?:sync|export|add|put|save)\s+(?:this\s+to\s+)?(?:my\s+)?"
+    r"(?:time\s*table|schedule|classes?)(?:\s+(?:to|with|into|on)\s+"
+    r"(?:my\s+)?(?:google\s+)?calendar)?"
+    r"|sync\s+(?:my\s+)?(?:google\s+)?calendar"
+    r")\s*[.!?]*\s*$",
+    re.IGNORECASE,
+)
+_LOW_RISK_TIMETABLE_FETCH_RE = re.compile(
+    r"^\s*(?:please\s+)?(?:fetch|get|read|use|take)\b.{0,40}"
+    r"\b(?:from\s+)?(?:my\s+)?time\s*table\b[\s.!?]*$",
+    re.IGNORECASE,
+)
+_LOW_RISK_CONFIRMATION_RE = re.compile(
+    r"^\s*(?:yes|yep|yeah|confirm(?:ed)?|proceed|go ahead|do it|please do|sync it)"
+    r"[\s.!]*$",
     re.IGNORECASE,
 )
 _CALENDAR_CONNECT_RE = re.compile(
@@ -96,6 +117,18 @@ def _is_calendar_sync_intent(query: str) -> bool:
 
 def _is_calendar_connect_intent(query: str) -> bool:
     return bool(_CALENDAR_CONNECT_RE.search(query))
+
+
+def _is_low_risk_timetable_sync_turn(query: str, history: list[dict]) -> bool:
+    """Allow-list deterministic sync turns that do not need an LLM guardrail."""
+    required_tool = _required_calendar_tool(query, history)
+    if required_tool == "sync_timetable_to_calendar":
+        return bool(
+            _LOW_RISK_TIMETABLE_SYNC_RE.fullmatch(query)
+            or _LOW_RISK_TIMETABLE_FETCH_RE.fullmatch(query)
+            or _LOW_RISK_CONFIRMATION_RE.fullmatch(query)
+        )
+    return False
 
 
 def _is_club_office_bearer_intent(query: str) -> bool:
@@ -248,6 +281,14 @@ class AuraChatGraph:
     # ── Nodes (each mirrors one guarded step of AuraChat.chat()) ────────
 
     def _n_safety_guardrail(self, state: AuraState) -> AuraState:
+        # Calendar sync is a deterministic, student-scoped automation. Avoid an
+        # unrelated LLM safety-classifier round trip for its tightly allow-listed
+        # request/confirmation turns; the downstream role, OAuth-scope, timetable
+        # ownership, explicit-request, and destructive-unsync checks remain.
+        if _is_low_risk_timetable_sync_turn(
+            state["query"], state.get("history") or []
+        ):
+            return state
         with track_segment("guardrail_time"):
             verdict = self.guardrail.classify(state["query"])
         # None = classifier unreachable. Fails OPEN on the public RAG path,
@@ -409,6 +450,11 @@ class AuraChatGraph:
         if getattr(identity, "role", None) == "student" and (
             _is_calendar_connect_intent(state["query"])
             or _is_calendar_unsync_intent(state["query"])
+            or _is_timetable_edit_intent(state["query"])
+            or _is_timetable_edit_confirmation(
+                state["query"],
+                state.get("history") or [],
+            )
             or _required_calendar_tool(
                 state["query"],
                 state.get("history") or [],
@@ -492,26 +538,30 @@ class AuraChatGraph:
         return state
 
     def _n_personal_tools(self, state: AuraState) -> AuraState:
-        # In-chat "add this to my schedule" → Google Calendar sync (the GPT/Claude
-        # connector pattern). Signed-in students reach the calendar MCP tools;
-        # guests get sign-in guidance. The actions scope exposes just the
-        # student's own timetable + calendar tools, never ERP reads. Anything
-        # else — every CGPA/attendance/grade lookup — falls straight through to
-        # the existing personal_data path, so this node has no blast radius.
+        # Signed-in students reach personal timetable writes and Google Calendar
+        # actions here; guests get sign-in guidance. The actions scope exposes
+        # only the student's timetable + calendar tools, never ERP reads.
         history = state.get("history") or []
         required_calendar_tool = _required_calendar_tool(state["query"], history)
         is_connect_intent = _is_calendar_connect_intent(state["query"])
         is_unsync_intent = _is_calendar_unsync_intent(state["query"])
+        is_timetable_edit = _is_timetable_edit_intent(state["query"])
+        is_timetable_confirmation = _is_timetable_edit_confirmation(
+            state["query"], history
+        )
         is_calendar_action = bool(
             required_calendar_tool or is_connect_intent or is_unsync_intent
         )
+        is_personal_action = bool(
+            is_calendar_action or is_timetable_edit or is_timetable_confirmation
+        )
         identity = state.get("identity")
 
-        if getattr(identity, "role", None) == "guest" and is_calendar_action:
+        if getattr(identity, "role", None) == "guest" and is_personal_action:
             state["result"] = {
                 "answer": (
                     "Sign in with your DAU student account first, then ask me "
-                    "again to sync your timetable with Google Calendar."
+                    "again to manage your timetable."
                 ),
                 "sources": [],
                 "is_personal_data": False,
@@ -524,6 +574,8 @@ class AuraChatGraph:
             not _is_calendar_sync_intent(state["query"])
             and not is_unsync_intent
             and not required_calendar_tool
+            and not is_timetable_edit
+            and not is_timetable_confirmation
         ):
             return state
 

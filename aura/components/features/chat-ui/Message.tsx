@@ -18,6 +18,8 @@ import { BrandMark } from "@/components/ui/brand-mark"
 import { MarkdownContent } from "@/components/ui/markdown-content"
 import { useDocumentViewer } from "@/hooks/use-document-viewer"
 import { useGoogleCalendarSync } from "@/hooks/use-google-calendar-sync"
+import { TimetableSyncCard } from "./TimetableSyncCard"
+import { TimetableSyncConfirmationCard } from "./TimetableSyncConfirmationCard"
 
 interface MessageProps {
   message: ChatMessage
@@ -27,6 +29,7 @@ interface MessageProps {
   isStreaming?: boolean
   /** Keep action toolbar visible (ChatGPT pattern for the latest reply). */
   showActions?: boolean
+  onCalendarSyncConfirm?: () => void
 }
 
 export function Message({
@@ -35,6 +38,7 @@ export function Message({
   onRegenerate,
   isStreaming = false,
   showActions = false,
+  onCalendarSyncConfirm,
 }: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
@@ -139,7 +143,8 @@ export function Message({
           </div>
         )}
 
-        {isStreaming ? (
+        {message.calendar_action?.type === "timetable_sync" ||
+        message.calendar_action?.type === "timetable_sync_confirmation" ? null : isStreaming ? (
           <div className="whitespace-pre-wrap text-[15px] leading-[1.7] text-neutral-100">
             {message.content}
             <span className="msg-caret ml-0.5 inline-block align-text-bottom" />
@@ -173,7 +178,14 @@ export function Message({
         ) : null}
 
         {message.calendar_action &&
-          (message.calendar_action.type === "connect_required" ? (
+          (message.calendar_action.type === "timetable_sync" ? (
+            <TimetableSyncCard eventCount={message.calendar_action.event_count} />
+          ) : message.calendar_action.type === "timetable_sync_confirmation" ? (
+            <TimetableSyncConfirmationCard
+              eventCount={message.calendar_action.event_count}
+              onConfirm={onCalendarSyncConfirm}
+            />
+          ) : message.calendar_action.type === "connect_required" ? (
             <ConnectCalendarCard action={message.calendar_action} />
           ) : (
             <BookingConfirmationCard action={message.calendar_action} />

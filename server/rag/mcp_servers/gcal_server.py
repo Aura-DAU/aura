@@ -53,10 +53,11 @@ def preview_timetable_sync(erp_id: str) -> dict:
 def sync_timetable_to_calendar(erp_id: str) -> dict:
     """Create/update recurring weekly events for every class on the student's
     current AURA timetable -- with popup reminders, running until the end of
-    the semester. Only call after preview_timetable_sync and explicit user
-    confirmation. Returns status 'synced' with created/updated/removed counts,
-    or 'calendar_not_connected' if the student hasn't linked write access."""
-    return timetable_sync.apply(_identity(erp_id))
+    the semester. An explicit sync request authorizes the write, so no separate
+    preview confirmation is required. Returns status 'synced' with
+    created/updated/removed counts, or 'calendar_not_connected' if the student
+    hasn't linked write access."""
+    return timetable_sync.apply(_identity(erp_id), async_mode=False)
 
 
 @mcp.tool()

@@ -7,9 +7,17 @@
  *     linked Google Calendar — rendered as an inline "Connect Google Calendar"
  *     CTA (the GPT/Claude connector pattern). Set by the orchestrator when a
  *     calendar tool returns calendar_not_connected.
+ *   - "timetable_sync": a background timetable sync was accepted — rendered
+ *     as a progress card while the frontend polls the app's calendar facade.
+ *   - "timetable_sync_confirmation": a preview is ready for explicit user
+ *     confirmation before any calendar events are written.
  */
 export interface CalendarActionData {
-  type?: "booking" | "connect_required"
+  type?:
+    | "booking"
+    | "connect_required"
+    | "timetable_sync"
+    | "timetable_sync_confirmation"
   event_title?: string
   date?: string
   time?: string
@@ -22,6 +30,7 @@ export interface CalendarActionData {
   connect_path?: string
   reason?: string
   message?: string
+  event_count?: number
 }
 
 export interface ChatMessage {
