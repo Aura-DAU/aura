@@ -44,9 +44,7 @@ def preview_timetable_sync(erp_id: str) -> dict:
     """Dry run: show how many class events WOULD be created/updated on the
     student's Google Calendar, without writing anything. Call this first and
     relay the count to the user before syncing."""
-    res = timetable_sync.preview(_identity(erp_id))
-    print("DEBUG GCAL SERVER preview_timetable_sync RES:", res)
-    return res
+    return timetable_sync.preview(_identity(erp_id))
 
 
 @mcp.tool()

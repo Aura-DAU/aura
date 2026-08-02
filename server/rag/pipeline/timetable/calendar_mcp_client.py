@@ -92,7 +92,6 @@ def _parse_result(name: str, result: Any) -> dict[str, Any]:
     with structured output). Prefer structured_content if a future version sets
     it, else parse the text block."""
     structured = getattr(result, "structured_content", None)
-    print("DEBUG CLIENT _parse_result structured:", structured, "content:", getattr(result, "content", None), "is_error:", getattr(result, "is_error", False))
     if isinstance(structured, dict):
         return structured
 
