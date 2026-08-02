@@ -161,6 +161,18 @@ class ContextBuilder:
             # ≈ 72 tokens at 3.5 chars/token), not just the body.
             estimated_tokens = self._estimate_tokens(chunk_text) + 72
 
+            # Fix P2 (rag_debug_report Stage: Context Builder, Bug 1): the old
+            # "idx > 1" guard let chunk 1 through unconditionally, so a single
+            # oversized top-ranked chunk could consume the entire budget and
+            # leave zero room for every other piece of evidence. Cap any one
+            # chunk's contribution to a third of the budget; the trimmed tail
+            # is dropped rather than the whole chunk being excluded.
+            MAX_SINGLE_CHUNK_TOKENS = effective_max_tokens // 3
+            if estimated_tokens > MAX_SINGLE_CHUNK_TOKENS:
+                max_chars = max(MAX_SINGLE_CHUNK_TOKENS * 4, 1)
+                chunk_text = chunk_text[:max_chars]
+                estimated_tokens = MAX_SINGLE_CHUNK_TOKENS + 72
+
             # Enforce token budget — stop at the first lowest-ranked chunk that
             # would push us over. Chunks are already in rank order (best first).
             if context_tokens_used + estimated_tokens > effective_max_tokens and idx > 1:
@@ -280,14 +292,6 @@ scraped_date="{metadata.get('scraped_date', '')}"
                     "  source[%d] title=%r url=%r",
                     _src_idx, _src.get("title"), _src.get("url")
                 )
-
-        print("\n" + "=" * 60)
-        print("===== CONTEXT BUILDER (FINAL CONTEXT TO LLM) =====")
-        print(f"Selected Chunks Count: {len(documents)}")
-        print(f"Estimated Context Tokens Used: {context_tokens_used} / {effective_max_tokens}")
-        for idx, src in enumerate(sources, start=1):
-            print(f"{idx}. title={src.get('title')} | file={src.get('path')} | url={src.get('url')}")
-        print("=" * 60)
 
         return {
             "context": context,
