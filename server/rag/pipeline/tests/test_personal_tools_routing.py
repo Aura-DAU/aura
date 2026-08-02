@@ -171,3 +171,39 @@ def test_guest_calendar_sync_gets_sign_in_guidance_without_tool_call():
 
     assert "Sign in with your DAU student account" in out["result"]["answer"]
     assert counter["n"] == 0
+
+
+def test_first_unsync_request_asks_for_confirmation_without_tool_call():
+    # A remove/unsync request is a write, so the node returns a deterministic
+    # confirmation prompt and never calls the orchestrator (the model is never
+    # asked to delete). The prompt carries the phrasing the confirmation gate
+    # keys on so the follow-up "yes" reaches the unsync tool.
+    counter = {"n": 0}
+    fake = _fake_self({"used_tools": True, "answer": "unexpected"}, counter)
+    out = AuraChatGraph._n_personal_tools(
+        fake, _student_state("remove my timetable from my google calendar")
+    )
+    answer = out["result"]["answer"]
+    assert "remove" in answer.lower()
+    assert "Google Calendar" in answer
+    assert "proceed" in answer.lower()
+    assert counter["n"] == 0
+
+
+def test_unsync_confirmation_reaches_orchestrator():
+    # After the removal prompt, "yes" routes to the orchestrator's unsync tool.
+    counter = {"n": 0}
+    fake = _fake_self({"used_tools": True, "answer": "Removed 7 events."}, counter)
+    state = _student_state("yes")
+    state["history"] = [{
+        "role": "assistant",
+        "content": (
+            "This will remove the timetable events AURA added to your Google "
+            "Calendar. Confirm to proceed and I'll clear them."
+        ),
+    }]
+
+    out = AuraChatGraph._n_personal_tools(fake, state)
+
+    assert out["result"]["answer"] == "Removed 7 events."
+    assert counter["n"] == 1
