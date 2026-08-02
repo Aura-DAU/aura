@@ -20,3 +20,14 @@ def test_calendar_mcp_prompt_is_loaded_by_the_orchestrator():
     assert "CALENDAR_MCP_SYSTEM_PROMPT" in orchestrator
     assert "load_calendar_mcp_system_prompt" in orchestrator
     assert "instructions=load_calendar_mcp_system_prompt()" in mcp_server
+
+
+def test_calendar_mcp_prompt_overrides_generic_personal_data_refusals():
+    prompt = load_calendar_mcp_system_prompt()
+    normalized_prompt = " ".join(prompt.split())
+
+    assert "take precedence over generic rules about personal data" in normalized_prompt
+    assert '"sync my Google Calendar"' in normalized_prompt
+    assert "call `preview_timetable_sync` immediately" in normalized_prompt
+    assert "Google Calendar only, not Google Classroom" in normalized_prompt
+    assert "Never answer a supported request with a generic refusal" in normalized_prompt

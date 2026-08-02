@@ -56,7 +56,7 @@ from pipeline.aura_chat import (
     is_greeting_or_meta,
 )
 from pipeline.ecampus.intent_router import PersonalDataIntentRouter
-from pipeline.ecampus.orchestrator import EcampusOrchestrator
+from pipeline.ecampus.orchestrator import EcampusOrchestrator, _required_calendar_tool
 from api.request_context import RequestContext
 
 
@@ -359,6 +359,20 @@ class AuraChatGraph:
         if not identity or getattr(identity, "role", None) in (None, "guest"):
             return state
 
+        # Google Calendar actions belong to the personal MCP path, not the
+        # public academic-calendar KB path. This node runs first, so relying on
+        # the intent model to preserve that distinction can end the graph with
+        # public-KB prose before _n_personal_tools gets a chance to call MCP.
+        if getattr(identity, "role", None) == "student" and (
+            _is_calendar_connect_intent(state["query"])
+            or _required_calendar_tool(
+                state["query"],
+                state.get("history") or [],
+            )
+        ):
+            state["ecampus_intent"] = "PERSONAL_DATA"
+            return state
+
         if _is_club_office_bearer_intent(state["query"]):
             intent = "COMMUNITY"
         else:
@@ -426,21 +440,37 @@ class AuraChatGraph:
 
     def _n_personal_tools(self, state: AuraState) -> AuraState:
         # In-chat "add this to my schedule" → Google Calendar sync (the GPT/Claude
-        # connector pattern). Fires ONLY for a signed-in student whose message is
-        # a calendar-sync request; the actions scope exposes just the student's
-        # own timetable + calendar MCP tools, never ERP reads. Anything else —
-        # every CGPA/attendance/grade lookup — falls straight through to the
-        # existing personal_data path, so this node has no blast radius on it.
+        # connector pattern). Signed-in students reach the calendar MCP tools;
+        # guests get sign-in guidance. The actions scope exposes just the
+        # student's own timetable + calendar tools, never ERP reads. Anything
+        # else — every CGPA/attendance/grade lookup — falls straight through to
+        # the existing personal_data path, so this node has no blast radius.
+        history = state.get("history") or []
+        required_calendar_tool = _required_calendar_tool(state["query"], history)
+        is_connect_intent = _is_calendar_connect_intent(state["query"])
+        is_calendar_action = bool(required_calendar_tool or is_connect_intent)
         identity = state.get("identity")
+
+        if getattr(identity, "role", None) == "guest" and is_calendar_action:
+            state["result"] = {
+                "answer": (
+                    "Sign in with your DAU student account first, then ask me "
+                    "again to sync your timetable with Google Calendar."
+                ),
+                "sources": [],
+                "is_personal_data": False,
+            }
+            return state
+
         if not identity or getattr(identity, "role", None) != "student":
             return state
-        if not _is_calendar_sync_intent(state["query"]):
+        if not _is_calendar_sync_intent(state["query"]) and not required_calendar_tool:
             return state
 
         # OAuth is initiated by the client-side connect CTA, not an MCP tool.
         # Returning it directly avoids relying on the model to infer a status
         # lookup before it can offer the student the OAuth flow.
-        if _is_calendar_connect_intent(state["query"]):
+        if is_connect_intent:
             state["result"] = {
                 "answer": "Connect your Google Calendar to sync your timetable.",
                 "sources": [],
@@ -465,7 +495,7 @@ class AuraChatGraph:
                 result = self.ecampus_orchestrator.run(
                     query=state["query"],
                     identity=identity_payload,
-                    history=state.get("history") or [],
+                    history=history,
                     request_context=state.get("request_context"),
                     tool_scope="personal_actions",
                 )

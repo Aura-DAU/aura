@@ -1273,7 +1273,25 @@ class RetrievalPipeline:
             for c in entity_list:
                 c["normalized_score"] = (c["entity_score"] - min_val) / val_range if val_range > 0 else 1.0
 
-        # 2. Semantic Path: Top-50 vector search (using Pinecone/Qdrant index query directly)
+        # 2. Semantic Path: Top-50 vector search (using Pinecone index query directly)
+        query_embedding = self.retriever.model.encode(
+            ["Represent this sentence for searching relevant passages: " + query],
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
+        semantic_filter = {"authorization": {"$in": allowed_roles}} if allowed_roles else None
+        if os.getenv("DISABLE_DLS_FILTER", os.getenv("DISABLE_PINECONE_DLS_FILTER", "false")).lower() == "true":
+            semantic_filter = None
+
+        if self.retriever.index:
+            results = self.retriever.index.query(
+                vector=query_embedding[0].tolist(),
+                top_k=50,
+                include_metadata=True,
+                filter=semantic_filter
+            )
+        else:
+            results = {"matches": []}
         semantic_list = []
         if self.retriever.index is None:
             logger.info("Semantic retrieval disabled because the vector index is unavailable; continuing with entity-path results only.")

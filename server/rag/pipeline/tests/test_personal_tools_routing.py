@@ -118,3 +118,56 @@ def test_node_falls_through_when_no_tool_used():
     fake = _fake_self({"answer": "I couldn't help.", "sources": [], "used_tools": False})
     out = AuraChatGraph._n_personal_tools(fake, _student_state("add this to my schedule"))
     assert out.get("result") is None
+
+
+def test_node_routes_confirmation_after_calendar_preview():
+    counter = {"n": 0}
+    fake = _fake_self({"used_tools": True, "answer": "Sync started."}, counter)
+    state = _student_state("yes")
+    state["history"] = [{
+        "role": "assistant",
+        "content": "This will create 20 events on Google Calendar. Confirm to proceed.",
+    }]
+
+    out = AuraChatGraph._n_personal_tools(fake, state)
+
+    assert out["result"]["answer"] == "Sync started."
+    assert counter["n"] == 1
+
+
+def test_google_calendar_sync_bypasses_public_kb_and_reaches_personal_tools():
+    calls = []
+
+    def fail_public_route(_query):
+        raise AssertionError("Google Calendar action reached the public-KB classifier")
+
+    fake = types.SimpleNamespace(
+        intent_router=types.SimpleNamespace(classify=fail_public_route),
+        ecampus_orchestrator=types.SimpleNamespace(
+            run=lambda **kwargs: calls.append(kwargs) or {
+                "used_tools": True,
+                "answer": "Calendar sync preview ready.",
+                "sources": [],
+            }
+        ),
+    )
+    state = _student_state("sync my google calendar")
+
+    after_community = AuraChatGraph._n_community_tools(fake, state)
+    out = AuraChatGraph._n_personal_tools(fake, after_community)
+
+    assert after_community["ecampus_intent"] == "PERSONAL_DATA"
+    assert out["result"]["answer"] == "Calendar sync preview ready."
+    assert calls[0]["tool_scope"] == "personal_actions"
+
+
+def test_guest_calendar_sync_gets_sign_in_guidance_without_tool_call():
+    counter = {"n": 0}
+    fake = _fake_self({"used_tools": True, "answer": "unexpected"}, counter)
+    out = AuraChatGraph._n_personal_tools(
+        fake,
+        _student_state("sync my calendar", role="guest"),
+    )
+
+    assert "Sign in with your DAU student account" in out["result"]["answer"]
+    assert counter["n"] == 0
