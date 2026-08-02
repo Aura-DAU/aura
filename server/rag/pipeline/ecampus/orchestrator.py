@@ -8,6 +8,7 @@ RAG pipeline in aura_chat_graph.
 
 import os
 import json
+import logging
 import re
 from typing import Optional
 from dotenv import load_dotenv
@@ -29,6 +30,8 @@ from ..timetable.calendar_mcp_client import (
     calendar_mcp_tools_for_role as _calendar_mcp_tools_for_role,
     calendar_mcp_registry as _calendar_mcp_registry,
 )
+
+logger = logging.getLogger(__name__)
 
 # Merged view used by this orchestrator. Kept as two separate source-of-truth
 # registries (pipeline.ecampus.tool_registry stays strictly read-only against
@@ -536,9 +539,14 @@ class EcampusOrchestrator:
         try:
             result = tool.handler(identity)
         except Exception as e:  # noqa: BLE001 -- surfaced as a soft calendar error
+            logger.exception("Calendar MCP tool %s raised", tool_name)
             result = {"error": str(e)}
         if not isinstance(result, dict):
             result = {}
+        if "error" in result:
+            # _phrase_calendar_result turns this into a generic "try again"
+            # answer; keep the real cause visible in server logs.
+            logger.error("Calendar MCP tool %s errored: %s", tool_name, result["error"])
 
         out: dict = {
             "answer": _phrase_calendar_result(tool_name, result),
