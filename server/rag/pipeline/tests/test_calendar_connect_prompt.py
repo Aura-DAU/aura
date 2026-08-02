@@ -21,6 +21,7 @@ from pipeline.ecampus.orchestrator import (
     _ECAMPUS_TOOL_REGISTRY,
     _required_calendar_tool,
     _is_calendar_unsync_intent,
+    _is_timetable_edit_intent,
 )
 from pipeline.google_calendar import timetable_sync
 
@@ -175,6 +176,19 @@ def test_confirmation_requires_sync_tool_only_after_calendar_preview():
 
 def test_academic_calendar_lookup_does_not_select_personal_calendar_tool():
     assert _required_calendar_tool("When is the academic calendar deadline?", []) is None
+
+
+def test_timetable_edits_do_not_select_calendar_tools():
+    edit_requests = [
+        "move my Monday lecture to 3 PM",
+        "add a lab on Friday to my timetable",
+        "remove my Tuesday class",
+    ]
+
+    for request in edit_requests:
+        assert _is_timetable_edit_intent(request)
+        assert not _is_calendar_unsync_intent(request)
+        assert _required_calendar_tool(request, []) is None
 
 
 def test_unsync_intent_detected_but_not_dispatched_without_confirmation():

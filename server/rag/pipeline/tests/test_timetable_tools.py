@@ -7,7 +7,7 @@ master-timetable rows are merged correctly with per-student overrides.
 import uuid
 import pytest
 
-from pipeline.timetable import service
+from pipeline.timetable import service, tool_registry
 
 
 class FakeDB:
@@ -110,6 +110,30 @@ def test_apply_change_replace_only_affects_requesting_student(fake_db):
     s2_view = service.get_effective_timetable(student("S2"))
     assert s2_view["timetable"][0]["room"] == "Room 102"
     assert s2_view["timetable"][0]["is_custom"] is False
+
+
+def test_agent_timetable_change_accepts_orchestrator_context(fake_db, monkeypatch):
+    fake_db.master.append(_master_row())
+    monkeypatch.setattr(
+        tool_registry.timetable_sync,
+        "resync_if_linked",
+        lambda identity: {"status": "not_linked"},
+    )
+
+    result = tool_registry._handle_update_my_timetable(
+        student("S1"),
+        kind="replace",
+        day="Tuesday",
+        start_time="17:00",
+        course_code="IT302",
+        room="Room 999",
+        confirm=True,
+        request_context=object(),
+    )
+
+    assert result["status"] == "applied"
+    assert result["timetable"][0]["room"] == "Room 999"
+    assert result["calendar_sync"]["status"] == "not_linked"
 
 
 def test_clear_change_cannot_touch_another_students_override(fake_db):
