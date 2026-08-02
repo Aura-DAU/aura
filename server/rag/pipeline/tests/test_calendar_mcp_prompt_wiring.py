@@ -28,6 +28,7 @@ def test_calendar_mcp_prompt_overrides_generic_personal_data_refusals():
 
     assert "take precedence over generic rules about personal data" in normalized_prompt
     assert '"sync my Google Calendar"' in normalized_prompt
-    assert "call `preview_timetable_sync` immediately" in normalized_prompt
+    assert "call `sync_timetable_to_calendar` immediately" in normalized_prompt
+    assert "do not ask for section, electives, or another confirmation" in normalized_prompt
     assert "Google Calendar only, not Google Classroom" in normalized_prompt
     assert "Never answer a supported request with a generic refusal" in normalized_prompt

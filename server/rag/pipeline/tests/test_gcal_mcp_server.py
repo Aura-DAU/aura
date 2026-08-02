@@ -32,11 +32,17 @@ def test_sync_delegates_to_timetable_sync_apply_with_identity(monkeypatch):
     seen = {}
     monkeypatch.setattr(
         timetable_sync, "apply",
-        lambda identity: seen.update(identity) or {"status": "synced", "created": 5},
+        lambda identity, **kwargs: (
+            seen.update({"identity": identity, **kwargs})
+            or {"status": "synced", "created": 5}
+        ),
     )
     result = gcal_server.sync_timetable_to_calendar("S1")
     assert result == {"status": "synced", "created": 5}
-    assert seen == {"role": "student", "erp_id": "S1"}
+    assert seen == {
+        "identity": {"role": "student", "erp_id": "S1"},
+        "async_mode": False,
+    }
 
 
 def test_preview_does_not_call_apply(monkeypatch):
