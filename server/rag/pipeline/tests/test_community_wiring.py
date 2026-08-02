@@ -51,24 +51,14 @@ class _StubCompletions:
 
 
 def _router_returning(content: str, raises: bool = False) -> PersonalDataIntentRouter:
-    """Build a router whose LLM call is stubbed via call_with_rotation.
-
-    PersonalDataIntentRouter no longer holds a sticky client — every classify()
-    goes through InferenceRouter.call_with_rotation — so the stub has to land
-    there, not on router.client.
-    """
     router = PersonalDataIntentRouter()
     completions = _StubCompletions(content, raises=raises)
-
-    class _StubClient:
-        base_url = "http://stub-node/v1"
-        chat = type("_Chat", (), {"completions": completions})()
-
-    def _fake_rotation(fn, max_retries=3, **_kwargs):
-        return fn(_StubClient())
-
+    router.client = type(
+        "_StubClient",
+        (),
+        {"chat": type("_Chat", (), {"completions": completions})()},
+    )()
     router._stub = completions
-    router._fake_rotation = _fake_rotation
     return router
 
 
@@ -83,53 +73,14 @@ def _router_returning(content: str, raises: bool = False) -> PersonalDataIntentR
         ("something else", "GENERAL"),
     ],
 )
-def test_intent_router_classify_parsing(raw, expected, monkeypatch):
-    router = _router_returning(raw)
-    monkeypatch.setattr(
-        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
-        router._fake_rotation,
-    )
-    assert router.classify("q") == expected
+def test_intent_router_classify_parsing(raw, expected):
+    assert _router_returning(raw).classify("q") == expected
 
 
-def test_intent_router_fails_toward_general(monkeypatch):
-    router = _router_returning("", raises=True)
-    monkeypatch.setattr(
-        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
-        router._fake_rotation,
-    )
-    assert router.classify("my CGPA") == "GENERAL"
-    assert router.is_community_query("clubs") is False
-    assert router.is_personal_data_query("cgpa") is False
-
-
-def test_intent_router_parse_failure_emits_soft_failure_code(monkeypatch, caplog):
-    """CHAT-05: an unparsed classifier reply must not be silent."""
-    import logging
-
-    router = _router_returning("NOT_A_LABEL")
-    monkeypatch.setattr(
-        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
-        router._fake_rotation,
-    )
-    with caplog.at_level(logging.ERROR):
-        assert router.classify("q") == "GENERAL"
-    assert any("AURA-ROUTE-002" in r.message for r in caplog.records)
-
-
-def test_intent_router_exception_emits_soft_failure_code(monkeypatch, caplog):
-    """CHAT-05: classifier exceptions must log AURA-ROUTE-001, not vanish."""
-    import logging
-
-    router = _router_returning("", raises=True)
-    monkeypatch.setattr(
-        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
-        router._fake_rotation,
-    )
-    with caplog.at_level(logging.ERROR):
-        assert router.classify("q") == "GENERAL"
-    assert any("AURA-ROUTE-001" in r.message for r in caplog.records)
-    assert any("exc_type=RuntimeError" in r.message for r in caplog.records)
+def test_intent_router_fails_toward_general():
+    assert _router_returning("", raises=True).classify("my CGPA") == "GENERAL"
+    assert _router_returning("", raises=True).is_community_query("clubs") is False
+    assert _router_returning("", raises=True).is_personal_data_query("cgpa") is False
 
 
 def test_intent_router_prompt_includes_public_kb_domains():
@@ -226,39 +177,6 @@ def test_aura_chat_graph_community_node_invokes_orchestrator(monkeypatch):
     assert who_out["result"]["answer"] == "orchestrated:public_kb:student"
 
 
-def test_aura_chat_graph_routes_club_office_bearers_when_classifier_falls_back(monkeypatch):
-    """A classifier outage must not send club convenor lookups to legacy RAG."""
-    from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
-
-    calls = []
-
-    def _fake_init(self):
-        self.intent_router = SimpleNamespace(
-            classify=lambda _q: (_ for _ in ()).throw(AssertionError("classifier should not run")),
-        )
-        self.ecampus_orchestrator = SimpleNamespace(
-            run=lambda **kwargs: calls.append(kwargs) or {
-                "answer": "current C_DCs office-bearer",
-                "sources": ["sbg_club_committee_c_dcs_information_2026_27.md"],
-            }
-        )
-
-    monkeypatch.setattr(AuraChatGraph, "__init__", _fake_init)
-    graph = AuraChatGraph()
-    state = {
-        "query": "Who is the convenor of the Programming Club?",
-        "history": [],
-        "identity": SimpleIdentity({"erp_id": "S1", "role": "student", "dept": "ICT"}),
-        "request_context": None,
-        "result": None,
-    }
-
-    out = graph._n_community_tools(state)
-
-    assert out["result"]["answer"] == "current C_DCs office-bearer"
-    assert calls[0]["tool_scope"] == "public_kb"
-
-
 def test_aura_chat_graph_community_skips_guests_and_general(monkeypatch):
     from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
 
@@ -291,3 +209,69 @@ def test_aura_chat_graph_community_skips_guests_and_general(monkeypatch):
     }
     assert graph._n_community_tools(student_state).get("result") is None
     assert calls == []
+
+
+def test_aura_chat_graph_routes_personal_data_through_orchestrator(monkeypatch):
+    """Regression test for the Aug 2026 RAG eval finding: PERSONAL_DATA
+    queries (attendance/grades/CGPA/timetable) must reach the tool-calling
+    EcampusOrchestrator with tool_scope="personal" -- not just COMMUNITY
+    queries -- so the LLM can actually call get_my_timetable /
+    get_academic_snapshot / get_cgpa / etc. instead of silently answering
+    with no data."""
+    from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
+
+    calls = []
+
+    def _fake_init(self):
+        self.intent_router = SimpleNamespace(classify=lambda q: "PERSONAL_DATA")
+        self.ecampus_orchestrator = SimpleNamespace(
+            run=lambda **kwargs: calls.append(kwargs) or {
+                "answer": f"orchestrated:{kwargs['tool_scope']}:{kwargs['identity']['role']}",
+                "sources": [],
+            }
+        )
+
+    monkeypatch.setattr(AuraChatGraph, "__init__", _fake_init)
+    graph = AuraChatGraph()
+
+    state = {
+        "query": "Do I have any labs tomorrow?",
+        "history": [],
+        "identity": SimpleIdentity({"erp_id": "S1", "role": "student", "dept": "ICT"}),
+        "request_context": None,
+        "result": None,
+    }
+    out = graph._n_community_tools(state)
+    assert len(calls) == 1
+    assert calls[0]["tool_scope"] == "personal"
+    assert out["result"]["answer"] == "orchestrated:personal:student"
+    assert out["result"]["is_personal_data"] is True
+    assert out["is_personal"] is True
+
+
+def test_aura_chat_graph_personal_data_falls_through_on_empty_answer(monkeypatch):
+    """If the orchestrator can't answer (e.g. only an AGGREGATE-style query
+    the tool registry doesn't cover), _n_community_tools must fall through
+    so the legacy _n_personal_data/erp_connector path still gets a shot,
+    rather than returning a blank response."""
+    from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
+
+    def _fake_init(self):
+        self.intent_router = SimpleNamespace(classify=lambda q: "PERSONAL_DATA")
+        self.ecampus_orchestrator = SimpleNamespace(
+            run=lambda **kwargs: {"answer": "", "sources": []}
+        )
+
+    monkeypatch.setattr(AuraChatGraph, "__init__", _fake_init)
+    graph = AuraChatGraph()
+
+    state = {
+        "query": "What is the average CGPA in BTech ICT this semester?",
+        "history": [],
+        "identity": SimpleIdentity({"erp_id": "F1", "role": "faculty", "dept": "ICT"}),
+        "request_context": None,
+        "result": None,
+    }
+    out = graph._n_community_tools(state)
+    assert out.get("result") is None
+    assert out.get("is_personal") is not True

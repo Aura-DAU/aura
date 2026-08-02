@@ -22,6 +22,7 @@ sys.path.insert(0, str(INGESTION_DIR / "chunking"))
 
 from process_corpus import process_markdown_file
 from build_entity_index import build_entity_index
+from chunk_quality import annotate_duplicate_chunks, compute_content_hash
 
 DATA_DIR = INGESTION_DIR.parent.parent.parent.parent / "data"
 VECTOR_STORE_DIR = INGESTION_DIR.parent / "vector_store"
@@ -154,6 +155,21 @@ def main():
         logger.warning("No new chunks generated and no files to delete. Exiting.")
         sys.exit(0)
 
+    # 1b. Duplicate detection (Fix #10) — check new/modified chunks against
+    # content already in the index, not just against each other. Flags
+    # `duplicate_of_chunk_id` for retrieval-time use; does not skip
+    # embedding the duplicate (see chunk_quality.py scope note) — the
+    # embeddings.npy/metadata.json row-alignment invariant below is too
+    # sensitive to change without real test data.
+    if new_chunks:
+        existing_hashes = {}
+        for chunk in metadata:
+            content_hash = compute_content_hash(chunk.get("text", ""))
+            existing_hashes.setdefault(content_hash, chunk.get("chunk_id"))
+        new_chunks, duplicate_count = annotate_duplicate_chunks(new_chunks, existing_hashes)
+        if duplicate_count:
+            logger.info("Flagged %d duplicate chunk(s) in this run.", duplicate_count)
+
     # 2. Embed only new chunks via Node 4 embedding-reranker
     new_embeddings = None
     if new_chunks:
@@ -167,6 +183,21 @@ def main():
             len(texts),
             embed_endpoint,
         )
+
+        # Fix #11: tag every new chunk with the embedding model that
+        # produced its vector, same as the full-corpus path in
+        # generate_embeddings.py. Best-effort — an incremental sync
+        # shouldn't fail outright just because /health is briefly
+        # unreachable, but the model name is worth knowing when available.
+        embedding_model = "unknown"
+        try:
+            health_res = requests.get(f"{embedding_url.rstrip('/')}/health", timeout=10)
+            health_res.raise_for_status()
+            embedding_model = health_res.json().get("embedding_model") or "unknown"
+        except Exception as e:
+            logger.warning("Could not fetch embedding model name from /health: %s", e)
+        for chunk in new_chunks:
+            chunk["embedding_model"] = embedding_model
 
         all_embeddings = []
         batch_size = 32

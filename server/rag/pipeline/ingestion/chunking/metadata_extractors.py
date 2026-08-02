@@ -82,8 +82,19 @@ def resolve_document_academic_year(metadata: dict, file_path, body: str = "") ->
             return academic_year_start(label) or int(label[:4]), label
 
     # 3. Bare 20xx in title/path/body.
+    #
+    # Fix YEAR-UB1 (spot-check finding): this corpus's filenames are almost
+    # all snake_case ("..._autumn_2025_page_7.md"), and `_` is a \w
+    # character, so a \b...\b year regex never matches "_2025_" — there's no
+    # word-boundary transition between an underscore and a digit. That
+    # silently skipped this entire step for the majority of course-policy
+    # filenames and let extraction fall through to scraped_date (the
+    # ingest date), mistagging dozens of "Autumn 2025" documents as 2026
+    # simply because they happened to be scraped in 2026. Digit-adjacency
+    # lookaround (no digit immediately before/after) still rejects things
+    # like "20255" or a stray "42025", but does match "_2025_" and "-2025-".
     for candidate in (title, path_name, path_str, (body or "")[:1000]):
-        year_match = re.search(r"\b(20\d{2})\b", str(candidate))
+        year_match = re.search(r"(?<!\d)(20\d{2})(?!\d)", str(candidate))
         if year_match:
             return int(year_match.group(1)), None
 
@@ -101,7 +112,7 @@ def resolve_document_academic_year(metadata: dict, file_path, body: str = "") ->
 
     scraped = metadata.get("scraped_date")
     if scraped is not None:
-        year_match = re.search(r"\b(20\d{2})\b", str(scraped))
+        year_match = re.search(r"(?<!\d)(20\d{2})(?!\d)", str(scraped))
         if year_match:
             return int(year_match.group(1)), None
 

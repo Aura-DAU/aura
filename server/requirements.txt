@@ -44,11 +44,6 @@ bcrypt
 redis
 pywebpush
 
-# Model Context Protocol SDK — agentic Google Calendar tools. The 2.x API is
-# required: mcp_servers/gcal_server.py uses `mcp.server.MCPServer` and the
-# in-process `mcp.Client`, neither of which exists in mcp 1.x.
-mcp>=2.0.0
-
 # Observability (architecture doc §Containerization — aura-prometheus / aura-grafana)
 prometheus-client
 

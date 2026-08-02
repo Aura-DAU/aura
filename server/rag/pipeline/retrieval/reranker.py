@@ -24,7 +24,14 @@ def extract_latest_year(metadata: dict) -> Optional[int]:
     for text in texts_to_search:
         if not text:
             continue
-        matches = re.findall(r"\b(20[1-3]\d)(?:[-\u2013/]\d{2,4})?\b", str(text))
+        # Fix YEAR-UB1 (same bug as ingestion's resolve_document_academic_year):
+        # \b treats "_" as a word character, so a \b-bounded year regex never
+        # matches years embedded in snake_case source_file/relative_path
+        # values like "..._autumn_2025_page_7.md" — this silently skipped
+        # straight to document_year (a much weaker signal) for the majority
+        # of this corpus's filenames. Digit-adjacency lookaround still
+        # rejects non-year digit runs (e.g. "42025" or "20255").
+        matches = re.findall(r"(?<!\d)(20[1-3]\d)(?:[-\u2013/]\d{2,4})?(?!\d)", str(text))
         if matches:
             return max(int(m) for m in matches)
     return None
@@ -105,6 +112,10 @@ class Reranker:
                 )
             )
 
+            MAX_RERANK_CHARS = 1600 # Approx 400 tokens
+            if len(text) > MAX_RERANK_CHARS:
+                text = text[:MAX_RERANK_CHARS]
+
             pairs.append(
                 [query, text]
             )
@@ -135,7 +146,15 @@ class Reranker:
                 pairs,
                 padding=True,
                 truncation=True,
-                max_length=512,
+                # Issue 1 fix #1: chunks are 256 tokens, but stage-2 adjacent-
+                # chunk expansion (_expand_adjacent_chunks) concatenates up to
+                # 5 neighboring chunks (up to ~1280 tokens) before this text
+                # reaches the reranker. 512 was silently truncating the
+                # "next" chunk(s) off expanded candidates — exactly defeating
+                # the point of window expansion. BAAI recommends max_length
+                # =1024 for bge-reranker-v2-m3 (model supports up to 8192,
+                # but was fine-tuned at 1024).
+                max_length=1024,
                 return_tensors="pt"
             )
 

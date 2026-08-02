@@ -76,27 +76,6 @@ def test_save_elective_selections_cannot_pick_a_different_cohorts_offering(monke
         [{"current_year": 2, "current_sem": 3, "current_sec": "A", "email": None}]
     ))
     executed = []
-    
-    from contextlib import contextmanager
-    @contextmanager
-    def fake_get_conn():
-        class FakeCursor:
-            def execute(self, sql, params=()):
-                executed.append((sql, params))
-            def __enter__(self):
-                return self
-            def __exit__(self, exc_type, exc_val, exc_tb):
-                pass
-        class FakeConnection:
-            def cursor(self):
-                return FakeCursor()
-            def commit(self):
-                pass
-            def rollback(self):
-                pass
-        yield FakeConnection()
-
-    monkeypatch.setattr(service.db_conn, "get_conn", fake_get_conn)
     monkeypatch.setattr(service.db_conn, "execute", lambda sql, params=(): executed.append((sql, params)))
 
     result = service.save_elective_selections(student("S1", 2, 3, "A"), ["SC452"])

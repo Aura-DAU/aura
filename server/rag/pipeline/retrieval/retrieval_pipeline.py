@@ -8,8 +8,26 @@ from pipeline.retrieval.rbac import get_allowed_roles
 import os
 import re
 import logging
+import datetime
 
 logger = logging.getLogger(__name__)
+
+# Issue 2 fix: phrases that signal the user wants the *newest* version of
+# something (a schedule, a policy, a semester's info, ...). When one of
+# these fires, "latest" is treated as a hard document_year filter sent to
+# the vector DB — not just a soft recency boost applied after retrieval —
+# so old chunks are excluded from the candidate pool instead of merely
+# being outscored. Deliberately does NOT include a bare "new" (too broad —
+# "New Delhi", department names, etc.); "new" only counts when paired with
+# a time-sensitive noun.
+RECENCY_INTENT_RE = re.compile(
+    r"\b(latest|newest|most recent|most up[- ]to[- ]date|up[- ]to[- ]date|"
+    r"this semester|current semester|this year|current year|currently|"
+    r"upcoming|recently updated|"
+    r"new (?:schedule|timetable|syllabus|curriculum|policy|rules|circular|"
+    r"notice|semester|calendar))\b",
+    re.IGNORECASE,
+)
 
 # Canonical program_name for the ICT-CS specialisation. Matches the title the
 # corpus uses on the programmes-of-study page ("B.Tech. (Honours) in ICT with
@@ -385,6 +403,32 @@ class RetrievalPipeline:
 
         return None
 
+    def _recency_filter(self, plan, query):
+        """
+        Issue 2 fix: turn "latest/current/this semester"-type queries into a
+        hard `document_year >= threshold` filter sent to the vector DB,
+        instead of relying only on the reranker's soft temporal_boost.
+
+        An explicit rule_year entity (e.g. "under the 2022-23 PhD rules")
+        means the user named a specific — possibly non-current — year on
+        purpose, so it always wins over the generic "latest" heuristic and
+        no hard filter is applied.
+
+        threshold = current_year - 1 rather than exactly current_year: chunk
+        document_year is the *start* year of an academic-year label (e.g.
+        "2025-26" -> 2025), so a query made partway into 2026 about "this
+        semester" can legitimately hit a chunk tagged 2025. Using a 1-year
+        tolerance window avoids punishing that labeling convention while
+        still hard-excluding anything older.
+        """
+        entities = plan.get("entities", {}) if isinstance(plan, dict) else {}
+        if entities.get("rule_year"):
+            return None
+        if not RECENCY_INTENT_RE.search(query or ""):
+            return None
+        threshold = datetime.datetime.now().year - 1
+        return {"document_year": {"$gte": threshold}}
+
     @staticmethod
     def _combine_filters(*filters):
         active = [item for item in filters if item]
@@ -428,19 +472,49 @@ class RetrievalPipeline:
 
     @staticmethod
     def _requires_academic_scope(plan: dict) -> bool:
-        return plan.get("category") == "academics" or plan.get("retrieval_intent") in {
-            "program_curriculum", "program_overview", "policy_version", "rules",
-        }
+        # Bug fix (RAG_Detailed_Report Aug 2026 -- Q1-Q9 all abstaining with
+        # "I don't have your academic programme details on file yet..." on
+        # plain university-wide policy questions like "minimum attendance
+        # requirement", "what does a DX grade mean", "who maintains
+        # attendance records"): this used to fire for ANY category=="academics"
+        # plan regardless of retrieval_intent, which is far broader than the
+        # documented intent just above (see the abstention call site's own
+        # comment: "Abstain only for personal/'my programme' curriculum
+        # questions"). Universal rules/policy-version lookups apply
+        # identically to every student and don't need the asker's own
+        # programme/branch/year resolved -- only genuine "my programme's
+        # curriculum" lookups do. Named-programme/course questions still
+        # bypass this via _has_explicit_programme_context below regardless.
+        return plan.get("retrieval_intent") in {"program_curriculum", "program_overview"}
 
     @staticmethod
     def _has_explicit_programme_context(plan: dict) -> bool:
-        """True when the query already names a programme/course — no personal scope needed."""
+        """True when the query already has enough non-personal context that
+        the academic-scope gate isn't needed — no personal scope required."""
         entities = plan.get("entities") or {}
-        return bool(
+        if (
             entities.get("program_name")
             or entities.get("course_code")
             or entities.get("course_name")
-        )
+        ):
+            return True
+        # Fix #4 (RAG_Final_Benchmark_Report): "Can you explain 'NIRF
+        # Classification of Five-Year Dual Degree Students'?" and similar
+        # self-contained "explain/define this named policy or
+        # classification" questions were falling through to the
+        # ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE bail-out ("I don't have your
+        # academic programme details on file yet...") purely because
+        # category=="academics", even though the question asks to explain
+        # a rule in general, not "how does this apply to me" — it doesn't
+        # need the asker's own year/semester/branch at all. intent=="general"
+        # is the planner's own established signal for exactly this: a
+        # non-personalized, definitional/comparison query (see the library
+        # borrowing-limit examples above), so it's a reliable bypass here
+        # too, without loosening the gate for genuinely personal curriculum
+        # questions like "what electives can I take this semester".
+        if plan.get("intent") == "general":
+            return True
+        return False
 
     @staticmethod
     def _eligible_results(results: list[dict], academic_scope) -> list[dict]:
@@ -609,6 +683,7 @@ class RetrievalPipeline:
         user_role: str = "public",
         academic_scope=None,
         identity=None,
+        title_hint: str = None,
     ):
         allowed_roles = get_allowed_roles(user_role)
         original_query = query
@@ -624,7 +699,8 @@ class RetrievalPipeline:
         PRONOUN_REFS = [
             "he", "his", "him", "she", "her", "they", "their", "them",
             "it", "its", "that faculty", "that professor", "that event",
-            "that program", "this program", "this event"
+            "that program", "this program", "this event",
+            "the same one", "the same"
         ]
         SHORT_PRONOUN_STARTERS = {
             "he", "his", "him", "she", "her", "they", "their", "them",
@@ -916,8 +992,14 @@ class RetrievalPipeline:
                 for subquery in decomposed_queries:
                     subquery_expanded = self._expand_semesters(subquery)
 
+                    # Issue 2 fix: hard-filter this sub-query's candidate pool
+                    # to recent document_year when the original query (not
+                    # just this sub-query fragment) signals recency intent.
+                    sub_recency_filter = self._recency_filter(plan, query)
+
                     sub_metadata_filter = self._combine_filters(
                         self._build_metadata_filter(plan),
+                        sub_recency_filter,
                         self._academic_scope_filter(academic_scope),
                     )
                     if allowed_roles:
@@ -1039,10 +1121,30 @@ class RetrievalPipeline:
             # Previously, sub-results were merged raw with no joint scoring,
             # so poorly-scored chunks from one sub-query could displace
             # high-quality chunks from another.
-            reranked = (
+            #
+            # Issue 1 fix #4: chunk-window expansion previously only ran on
+            # the non-decomposed path below, so multi-part/comparison
+            # queries never got adjacent-chunk context even when the real
+            # answer for one leg of the comparison spanned two chunks.
+            # Mirror the same two-stage expand+rerank here.
+            stage1_reranked = (
                 self.reranker.rerank(
                     query=original_query,
                     results=results,
+                    plan=plan
+                )
+            )
+
+            top_candidates = stage1_reranked[:12]
+            expand_window = 2 if retrieval_intent == "policy_version" else 1
+            expanded_candidates = self._eligible_results(
+                self._expand_adjacent_chunks(top_candidates, window=expand_window), academic_scope
+            )
+
+            reranked = (
+                self.reranker.rerank(
+                    query=original_query,
+                    results=expanded_candidates,
                     plan=plan
                 )
             )
@@ -1094,6 +1196,36 @@ class RetrievalPipeline:
         else:
             max_final = 5
         final_top_k = min(plan.get("top_k", 5), max_final)
+
+        # Fix C (source_match_analysis Root Cause 4): Apply title_hint boost.
+        # When the original query contains an explicit document title like
+        # "According to 'Director General', ..." we lift any chunks from that
+        # exact document to the front of the reranked list before slicing.
+        # This prevents a thematically similar but wrong document (e.g. the
+        # Organogram page) from displacing the explicitly-named one when both
+        # receive similar reranker scores.
+        if title_hint:
+            _hint_lower = title_hint.lower()
+            _title_match = []
+            _rest = []
+            for chunk in reranked:
+                doc_title = (
+                    chunk.get("metadata", {}).get("title", "")
+                    or chunk.get("metadata", {}).get("document_title", "")
+                    or ""
+                )
+                if _hint_lower in doc_title.lower():
+                    _title_match.append(chunk)
+                else:
+                    _rest.append(chunk)
+            if _title_match:
+                logger.debug(
+                    "title_hint '%s' boosted %d chunk(s) to front of reranked list.",
+                    title_hint,
+                    len(_title_match),
+                )
+                reranked = _title_match + _rest
+
         final_chunks = reranked[:final_top_k]
 
         built = (
@@ -1187,12 +1319,21 @@ class RetrievalPipeline:
 
         return expanded_candidates
 
-    def _retrieve_dual_path(self, query, plan, allowed_roles=None, academic_scope=None):
+    def _retrieve_dual_path(self, query, plan, allowed_roles=None, academic_scope=None, _skip_recency=False):
         """
         Runs dual-path retrieval: Entity Path (BM25 + Semantic fused via RRF) and
         Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
         combines them with an equal 50/50 weighted sum.
         """
+        # Issue 2 fix: "latest"/"this semester"/... becomes a hard document_year
+        # filter applied to both paths below, not just a reranker-side boost.
+        recency_filter = None if _skip_recency else self._recency_filter(plan, query)
+        if recency_filter:
+            print("\n" + "=" * 60)
+            print("===== RECENCY HARD FILTER =====")
+            print(f"Query: {query!r} -> {recency_filter}")
+            print("=" * 60)
+
         # 1. Entity Path
         entities = plan.get("entities", {})
         entity_queries = []
@@ -1221,6 +1362,7 @@ class RetrievalPipeline:
         for ent_text, ent_filter in entity_queries:
             combined_filter = self._combine_filters(
                 ent_filter,
+                recency_filter,
                 {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                 self._academic_scope_filter(academic_scope),
             )
@@ -1233,7 +1375,11 @@ class RetrievalPipeline:
                 allowed_roles=allowed_roles
             )
             if not res_list and ent_filter:
+                # Relax the entity clause first but keep the recency hard
+                # filter — only the outer retry (below, when the whole dual
+                # path comes back empty) drops recency entirely.
                 fallback_filter = self._combine_filters(
+                    recency_filter,
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )
@@ -1301,10 +1447,13 @@ class RetrievalPipeline:
                                 else:
                                     print(f"{k} = {v}")
                     _parse(entity_filter)
+                if recency_filter:
+                    print(f"document_year >= {recency_filter['document_year']['$gte']} (recency hard filter)")
                 print("=" * 60)
 
                 semantic_filter = self._combine_filters(
                     entity_filter,
+                    recency_filter,
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )
@@ -1378,4 +1527,20 @@ class RetrievalPipeline:
 
         # Sort candidates by final fusion score descending
         final_candidates.sort(key=lambda x: x["fusion_score"], reverse=True)
-        return self._eligible_results(final_candidates, academic_scope)
+        eligible = self._eligible_results(final_candidates, academic_scope)
+
+        # Issue 2 fix: the hard recency filter can legitimately zero out a
+        # pool if year-tagging is incomplete for this document type. Rather
+        # than surface "no results" to the user, retry once without it —
+        # this is the ONLY point recency is dropped entirely; every filter
+        # above this still preferred it first.
+        if not eligible and recency_filter and not _skip_recency:
+            logger.info(
+                "Recency hard filter (%s) returned zero candidates for %r; retrying without it.",
+                recency_filter, query,
+            )
+            return self._retrieve_dual_path(
+                query, plan, allowed_roles=allowed_roles, academic_scope=academic_scope, _skip_recency=True
+            )
+
+        return eligible
