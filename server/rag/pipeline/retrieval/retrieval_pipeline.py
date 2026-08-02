@@ -229,6 +229,37 @@ class RetrievalPipeline:
                 
         return query
 
+    @staticmethod
+    def _canonical_semester_values(semester_raw):
+        if not semester_raw:
+            return []
+        sem_str = str(semester_raw).strip()
+        arabic_to_roman = {
+            "1": "I", "2": "II", "3": "III", "4": "IV",
+            "5": "V", "6": "VI", "7": "VII", "8": "VIII"
+        }
+        roman_to_arabic = {v: k for k, v in arabic_to_roman.items()}
+        m_digit = re.search(r"\b([1-8])\b", sem_str)
+        m_roman = re.search(r"\b(VIII|VII|VI|V|IV|III|II|I)\b", sem_str, re.IGNORECASE)
+        digit = m_digit.group(1) if m_digit else None
+        roman = m_roman.group(1).upper() if m_roman else None
+        if not digit and roman:
+            digit = roman_to_arabic.get(roman)
+        elif digit and not roman:
+            roman = arabic_to_roman.get(digit)
+        variants = []
+        if roman:
+            variants.extend([f"Semester {roman}", roman])
+        if digit:
+            variants.extend([f"Semester {digit}", f"Sem {digit}", digit])
+        seen = set()
+        out = []
+        for v in variants:
+            if v not in seen:
+                seen.add(v)
+                out.append(v)
+        return out or [sem_str]
+
     def _build_metadata_filter(
         self,
         plan
@@ -318,14 +349,18 @@ class RetrievalPipeline:
             )
         )
 
-        if program_name and semester:
-            prog_clause = as_filter("program_name", program_name)
-            return {
-                "$and": [
-                    prog_clause,
-                    {"semester": {"$eq": semester}}
-                ]
-            }
+        if semester:
+            sem_vals = self._canonical_semester_values(semester)
+            sem_clause = {"semester": {"$in": sem_vals}} if len(sem_vals) > 1 else {"semester": {"$eq": sem_vals[0]}}
+            if program_name:
+                prog_clause = as_filter("program_name", program_name)
+                return {
+                    "$and": [
+                        prog_clause,
+                        sem_clause
+                    ]
+                }
+            return sem_clause
 
         if program_name:
             return as_filter("program_name", program_name)
@@ -345,22 +380,33 @@ class RetrievalPipeline:
             return None
         scoped = {
             "$and": [
-                {"applicability_scope": {"$in": ["programme", "curriculum", "course"]}},
+                {"applicability_scope": {"$in": ["programme", "curriculum"]}},
                 {"programme_id": {"$eq": academic_scope.programme_id}},
                 {"degree_level": {"$eq": academic_scope.degree_level}},
                 {"admission_year_from": {"$lte": academic_scope.admission_year}},
                 {"admission_year_to": {"$gte": academic_scope.admission_year}},
             ]
         }
+        # Course-policy documents are keyed by course_code, not by
+        # programme_id/degree_level/admission_year (they never populate those
+        # fields — the same course is often shared across programmes). They
+        # need their own clause instead of being forced through the
+        # programme/curriculum clause above, which they can never satisfy.
+        or_clauses = [
+            {"applicability_scope": {"$eq": "global"}},
+            scoped,
+        ]
+        if academic_scope.registered_course_codes:
+            or_clauses.append({
+                "$and": [
+                    {"applicability_scope": {"$eq": "course"}},
+                    {"course_code": {"$in": list(academic_scope.registered_course_codes)}},
+                ]
+            })
         # A missing branch on a document means programme-wide applicability;
         # branch equality is enforced by the post-retrieval predicate when a
         # document declares one, without excluding those programme-wide docs.
-        return {
-            "$or": [
-                {"applicability_scope": {"$eq": "global"}},
-                scoped,
-            ]
-        }
+        return {"$or": or_clauses}
 
     @staticmethod
     def _requires_academic_scope(plan: dict) -> bool:
@@ -560,6 +606,14 @@ class RetrievalPipeline:
         )
 
         plan = future_plan.result()
+
+        # Infer user program from academic_scope if available and not present in plan entities
+        if academic_scope and getattr(academic_scope, "programme_id", None):
+            entities = plan.setdefault("entities", {})
+            if not entities.get("program_name"):
+                inferred_prog = self._canonical_program_name(academic_scope.programme_id)
+                if inferred_prog:
+                    entities["program_name"] = inferred_prog
 
         # Check if the plan contains anything that modifies retrieval or query
         entities = plan.get("entities", {})
@@ -951,14 +1005,30 @@ class RetrievalPipeline:
         # For multi-entity queries 2 entities need at least 3 chunks each = 6.
         # Cap raised to 8 to give comparison queries enough chunks while staying
         # within the context token budget (3000 tokens ≈ 8-9 chunks).
-        max_final = 8 if plan.get("multi_entity_query") else 5
+        #
+        # Fix TK2: this cap was silently undoing the requires_complete_list
+        # top_k=12 boost set above — "which clubs does DAU have" and similar
+        # enumeration queries got plan["top_k"]=12 but then
+        # min(12, 5)=5 threw 7 of those chunks away before they ever reached
+        # the LLM, producing partial lists (e.g. "top 10 clubs" out of 30+).
+        # requires_complete_list queries now get the same higher ceiling as
+        # multi_entity_query, and the effective context-token budget is
+        # widened to match (see ContextBuilder.build's retrieval_intent
+        # handling) so those extra chunks aren't cut again downstream.
+        if requires_complete_list:
+            max_final = 15
+        elif plan.get("multi_entity_query"):
+            max_final = 8
+        else:
+            max_final = 5
         final_top_k = min(plan.get("top_k", 5), max_final)
         final_chunks = reranked[:final_top_k]
 
         built = (
             self.builder.build(
                 final_chunks,
-                retrieval_intent=retrieval_intent
+                retrieval_intent=retrieval_intent,
+                requires_complete_list=requires_complete_list,
             )
         )
 
@@ -1120,17 +1190,15 @@ class RetrievalPipeline:
             logger.info("Semantic retrieval disabled because the vector index is unavailable; continuing with entity-path results only.")
         else:
             try:
-                query_embedding = self.retriever.model.encode(
-                    ["Represent this sentence for searching relevant passages: " + query],
-                    normalize_embeddings=True,
-                    convert_to_numpy=True
-                )
+                query_embedding = self.retriever.embed_query(query)
+                if query_embedding is None:
+                    raise RuntimeError("Query embedding unavailable")
                 semantic_filter = self._combine_filters(
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )
                 results = self.retriever.index.query(
-                    vector=query_embedding[0].tolist(),
+                    vector=query_embedding,
                     top_k=50,
                     include_metadata=True,
                     filter=semantic_filter

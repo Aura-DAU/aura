@@ -1,0 +1,118 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-07-31",
+  "aliases": [
+    {
+      "canonical_name": "Dance Club (DADC)",
+      "abbreviation": "DADC",
+      "synonyms": ["Dance Club", "DAU Dance Club", "Dance Committee", "DADC Club"],
+      "category": "Club",
+      "description": "Official Student Dance Club of Dhirubhai Ambani University"
+    },
+    {
+      "canonical_name": "Artificial Intelligence Club (AI Club)",
+      "abbreviation": "AI Club",
+      "synonyms": ["AI Club", "DAU AI Club", "Artificial Intelligence Club", "AI Committee"],
+      "category": "Club",
+      "description": "Official AI & ML Student Interest Group"
+    },
+    {
+      "canonical_name": "Career Development Cell (CDC)",
+      "abbreviation": "CDC",
+      "synonyms": ["CDC", "Placement Cell", "Career Development Cell", "Placement Committee", "CDC Office"],
+      "category": "Department",
+      "description": "Official Placement and Internship Assistance Cell"
+    },
+    {
+      "canonical_name": "Student Affairs Council (SAC)",
+      "abbreviation": "SAC",
+      "synonyms": ["SAC", "Student Affairs Council", "Student Council", "Student Affairs Office"],
+      "category": "Administrative Body",
+      "description": "Apex Student Representative Body at DAU"
+    },
+    {
+      "canonical_name": "University Hostel Office",
+      "abbreviation": "Hostel Office",
+      "synonyms": ["Hostel Office", "Hostel Warden Office", "Chief Warden Office", "Hostel Admin"],
+      "category": "Facility",
+      "description": "Administrative office for student residential housing"
+    },
+    {
+      "canonical_name": "University Dining Services (Mess)",
+      "abbreviation": "Mess",
+      "synonyms": ["Mess", "Dining Hall", "Canteen", "Cafeteria", "Student Mess", "DAU Mess"],
+      "category": "Facility",
+      "description": "Campus Dining and Meal Service Operations"
+    },
+    {
+      "canonical_name": "University ERP Portal",
+      "abbreviation": "ERP",
+      "synonyms": ["ERP", "ERP Portal", "Student Portal", "Academic Portal", "DAU ERP"],
+      "category": "System",
+      "description": "Enterprise Resource Planning system for academics and records"
+    },
+    {
+      "canonical_name": "Student Body Governance (SBG)",
+      "abbreviation": "SBG",
+      "synonyms": ["SBG", "Student Body Governance", "SBG Committee"],
+      "category": "Administrative Body",
+      "description": "Student Activity and Governance Committee"
+    },
+    {
+      "canonical_name": "Music Club (DMC)",
+      "abbreviation": "DMC",
+      "synonyms": ["Music Club", "DAU Music Club", "DMC"],
+      "category": "Club",
+      "description": "Official Student Music Club"
+    },
+    {
+      "canonical_name": "Sports Committee (DAUSC)",
+      "abbreviation": "DAUSC",
+      "synonyms": ["Sports Club", "Sports Committee", "DAUSC"],
+      "category": "Club",
+      "description": "Official Student Sports Council"
+    },
+    {
+      "canonical_name": "Cumulative Grade Point Average (CGPA)",
+      "abbreviation": "CGPA",
+      "synonyms": ["CGPA", "cumulative GPA", "overall GPA"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion): overall grade-point average across all completed semesters"
+    },
+    {
+      "canonical_name": "Semester Grade Point Average (SGPA)",
+      "abbreviation": "SGPA",
+      "synonyms": ["SGPA", "semester GPA"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion): grade-point average for a single semester"
+    },
+    {
+      "canonical_name": "Head of Department (HOD)",
+      "abbreviation": "HOD",
+      "synonyms": ["HOD", "department head", "head of dept"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion)"
+    },
+    {
+      "canonical_name": "Graduate Aptitude Test in Engineering (GATE)",
+      "abbreviation": "GATE",
+      "synonyms": ["GATE exam", "GATE score"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion)"
+    },
+    {
+      "canonical_name": "National Programme on Technology Enhanced Learning (NPTEL)",
+      "abbreviation": "NPTEL",
+      "synonyms": ["NPTEL", "NPTEL course"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion)"
+    },
+    {
+      "canonical_name": "Teaching Assistant (TA)",
+      "abbreviation": "TA",
+      "synonyms": ["TA", "teaching assistantship"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion)"
+    }
+  ]
+}

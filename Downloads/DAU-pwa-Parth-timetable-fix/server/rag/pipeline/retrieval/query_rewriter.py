@@ -1,0 +1,119 @@
+import os
+from dotenv import load_dotenv
+from pipeline.inference_router import InferenceRouter
+
+class QueryRewriter:
+
+    def __init__(self):
+        load_dotenv()
+        self.model = os.getenv(
+            "VLLM_MODEL",
+            os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
+        )
+
+    def rewrite(
+        self,
+        query,
+        history=None,
+        academic_scope=None,
+    ):
+
+        if not history:
+            return query
+
+        history_text = ""
+
+        # Fix #10: aligned to 6 turns (was 8) so the rewriter uses the same
+        # history window as the answer generator, preventing context mismatch.
+        for turn in history[-6:]:
+
+            history_text += (
+                f"{turn['role']}: "
+                f"{turn['content']}\n"
+            )
+
+        scope_hint = ""
+        if academic_scope is not None:
+            scope_hint = (
+                "Verified student context (use only to resolve references such as 'my curriculum'; "
+                "do not add new facts): "
+                f"programme={academic_scope.programme_id}, admission_year={academic_scope.admission_year}, "
+                f"semester={academic_scope.current_semester}.\n"
+            )
+
+        prompt = f"""
+You are the query rewriting component for AURA, the AI assistant for Dhirubhai Ambani University (DAU).
+
+Your task is to rewrite the latest user question so it is fully self-contained.
+
+Use the conversation history to resolve references such as:
+- he
+- she
+- they
+- him
+- her
+- them
+- it
+- its
+- this faculty member
+- that professor
+- this program
+- that course
+- this event
+- the first one
+- the second one
+- the latter
+- the former
+
+Rules
+
+- Preserve the original intent exactly.
+- Resolve references using only the provided conversation history.
+- Do not add, remove, or infer information.
+- Do not answer the question.
+- Do not rewrite unnecessarily.
+- If the latest question is already self-contained, return it unchanged.
+
+Output Requirements
+
+- Return only the rewritten question.
+- Do not include quotation marks.
+- Do not include explanations.
+- Do not include any additional text.
+
+Conversation History:
+
+{history_text}
+
+Latest Question:
+
+{scope_hint}
+{query}
+"""
+
+        def _execute_rewrite(client):
+            return client.chat.completions.create(
+                model=self.model,
+                temperature=0,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                extra_body=InferenceRouter.no_think_extra_body(),
+            )
+
+        response = InferenceRouter.call_with_rotation(_execute_rewrite, max_retries=5)
+
+        # Fix QR1: if the LLM returns an empty string (hallucination or API
+        # edge case), fall back to the original query rather than passing ""
+        # to the retrieval pipeline (which would destroy BM25 term matching).
+        rewritten = (
+            response
+            .choices[0]
+            .message
+            .content
+            .strip()
+        )
+        return rewritten if rewritten else query

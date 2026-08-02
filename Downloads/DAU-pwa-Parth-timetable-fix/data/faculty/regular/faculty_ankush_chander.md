@@ -1,0 +1,32 @@
+---
+title: "Ankush Chander"
+url: "https://www.daiict.ac.in/adjunct-faculty/ankush-chander"
+category: "Faculty"
+scraped_by: "Khushi Gandhi"
+scraped_date: "2026-06-01"
+team: "Team A"
+---
+
+# Overview
+
+Profile of Ankush Chander
+
+# Main Content
+
+# Ankush Chander
+
+## Education
+
+M.Tech. (ICT), DA-IICT Gandhinagar
+
+## Contact Information
+
+- Phone: 079-68261581
+- Email: ankush_chander@dau.ac.in
+- Address: # 3209, FB-3, DA-IICT, Gandhinagar, Gujarat, India – 382007
+
+## Specialization
+
+Natural Language Processing, Information Retrieval, Operating systems
+
+

@@ -1,0 +1,2 @@
+# Canonical list lives at server/requirements.txt
+-r ../requirements.txt

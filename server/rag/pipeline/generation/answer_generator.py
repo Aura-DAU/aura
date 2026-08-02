@@ -46,7 +46,15 @@ def _env_int(name: str, default: int) -> int:
 # run to the model's full context window, so one rambling generation can hang a
 # worker for minutes. env-tunable for eval runs that legitimately need longer
 # completions.
-_MAX_ANSWER_TOKENS = _env_int("AURA_MAX_ANSWER_TOKENS", 768)
+#
+# Fix AG-TRUNC: 768 was silently truncating any answer that has to enumerate
+# a real list from the corpus (e.g. all 30+ SBG clubs/committees with
+# convener + deputy + faculty-mentor per row runs well past 2,000 tokens).
+# The model has no way to signal "I was cut off mid-sentence" — the client
+# just renders a partial list that looks complete (e.g. "top 10 clubs").
+# 2048 gives headroom for the longest legitimate enumerations in this corpus
+# while still bounding worst-case generation time; still env-tunable.
+_MAX_ANSWER_TOKENS = _env_int("AURA_MAX_ANSWER_TOKENS", 2048)
 
 # Kill switch for citation-filtered sources. On by default: only sources the
 # answer actually cited are returned. Set to 0/false to fall back to returning
@@ -228,6 +236,13 @@ explain a concept, but must never supply a DAU fact.
 You have no reliable prior knowledge about DAU. If the retrieved documents do not contain the
 answer, say so. Do not infer it, estimate it, or recall it.
 
+# TEMPORAL ANCHORING & MANDATORY YEAR FRAMING RULE
+
+Every answer generated must explicitly establish the timeline of the policy, rule, or information being cited.
+- Open or ground factual policy statements with the relevant academic year, rule year, or document timestamp (e.g., "According to the 2024-25 course policy [1]...", "As of the 2023-24 academic year [2]...", "Under the 2019-20 guidelines [3]...").
+- This provides the user with an immediate sense of the timeline in which the policy or event took place.
+- If retrieved documents span multiple years (e.g., an older course policy before year X vs. a newer updated policy), explicitly structure the answer by year (e.g., "Prior to 2022-23 [1], the requirement was X. Under the updated 2024-25 policy [2], ...") so the user clearly sees how the policy evolved over time.
+
 # ANSWER PROCEDURE
 
 Run these five steps internally before writing. Do not print them.
@@ -238,12 +253,21 @@ conversation history. Ask one clarifying question only if the reference is still
 **2. SELECT.** Choose which docs apply, using their attributes:
 - Question names a year → use only that `rule_year`.
 - Question says "before / prior to <year>" → use the immediately preceding `rule_year`.
-- No year named → use the highest `rule_year` present.
+- No year named / "current" → use the highest academic `rule_year` present
+  (e.g. prefer `2026-27` over `2025-26` over `2024-25` / `24-25`).
+- Current club / committee office-bearers (convener, dy. convener, mentor) → prefer
+  documents titled "C_DCs Information" or "Club Committee C_DCs" with the highest
+  `rule_year`. Do not treat older "Club Committee Data 24-25" (or similar) as current
+  when a newer C_DCs sheet is in context.
+- Never treat `scraped_date` as the academic year. If a title says "24-25", that doc
+  is 2024-25 even if `scraped_date` is in 2026.
+- Always name the academic year you used when answering who currently holds a role.
 - Current admissions, seats, or fees → prefer `category="admissions"` over annual reports.
 - Program-specific question → match on `program_name`.
 
 Never merge facts across different years or source types without labelling each one:
 "Under the 2019-20 rules [2] ... whereas the 2024-25 rules [5] ...".
+If two docs disagree on a current office-bearer, prefer the higher `rule_year` and say so.
 
 **3. CHECK PREMISES.** List every factual claim the question asserts — numbers, limits,
 durations, eligibility, "since X is true...". Compare each one against the selected docs:
@@ -297,6 +321,7 @@ Copy these from the source verbatim. Never paraphrase, round, upgrade, or soften
 
 - Professional, warm, concise. Natural paragraphs. Bullets only for lists, steps, requirements,
   or comparisons.
+- **Mandatory Year / Timeline Framing:** Always state the relevant year or rule version at the start or within factual statements (e.g., "According to the 2024-25 policy..." or "As of 2023-24..."), giving the user clear temporal context.
 - Citations as `[1]` or `[1][3]`, placed immediately after the sentence they support.
 - Do not cite greetings, clarifying questions, or conversational text. Do not quote long
   passages — integrate the information.
