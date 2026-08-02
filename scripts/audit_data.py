@@ -24,7 +24,6 @@ import json
 import argparse
 from pathlib import Path
 from typing import Dict, List
-
 # ---------------------------------------------------------------------------
 # Token counter — lightweight estimate for audit (no model download needed)
 # For exact counts, see format_for_rag.py which loads BAAI/bge-base-en-v1.5

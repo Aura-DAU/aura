@@ -1,14 +1,14 @@
----
-title: "IT623 Data Structures Autumn 2025-26"
+﻿---
+title: "IT623 Data Structures Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "IT623_DataStructures_Autumn25 - Supantha Pandit.pdf"
+pdf_name: "IT623__2026-27__IT623_DataStructures_Autumn26nter25 - Supantha Pandit.pdf"
 course_code: "IT623"
-semester: "Autumn 2025-26"
+semester: "Autumn 2026-2027"
 authorization: ["student", "faculty"]
 ---
 
@@ -22,11 +22,11 @@ authorization: ["student", "faculty"]
 | **Course Name** | Data Structures |
 | **Instructor(s)** | Dr. Supantha Pandit (supantha_pandit@dau.ac.in) |
 | **Credits** | 4 Credits (3-0-2) |
-| **Semester Offered** | Academic Year 2025-2026 (Autumn) |
-| **Type** | Core |
+| **Semester Offered** | Academic Year 2026-2027 (Autumn) |
+| **Type** | Core Course |
 | **Program(s)** | M.Sc. IT |
 | **Year / Semester in Program** | Semester I |
-| **Associated Lab** | Integrated (2 practical hours per week as part of the 3-0-2 structure) |
+| **Associated Lab** | Embedded lab component, per 3-0-2 credit structure |
 | **Prerequisites** | Discrete Mathematics, C Programming |
 | **Foundation For** | CS/IT stream of courses |
 
@@ -34,19 +34,21 @@ authorization: ["student", "faculty"]
 
 ## Course Description
 
-This course aims to introduce the concept of data structures, their indispensability in implementing algorithms, and how they aid in improving performance. Extensive coverage of the well-known and essential data structures such as arrays, linked lists, queues, stacks, hash tables, binary search trees, AVL trees, red-black trees, 2-3-4 trees, heaps, along with associated routines/algorithms such as dictionary operations, order statistics, and sorting, will constitute the contents of the course.
+This course introduces the fundamental concepts of data structures and algorithm analysis, emphasizing their role in designing efficient computational solutions. It covers the representation and implementation of linear and non-linear data structures, including arrays, linked lists, stacks, queues, hash tables, heaps, binary search trees, AVL trees, red-black trees, and B-trees. The course also discusses fundamental algorithms and operations associated with these data structures, such as dictionary operations, order statistics, searching, sorting, and priority queues. In addition, students will learn graph representations and basic graph traversal algorithms, including Breadth-First Search (BFS) and Depth-First Search (DFS). The course emphasizes the analysis of algorithmic efficiency using asymptotic notations and recurrence relations, enabling students to select appropriate data structures and algorithms for solving computational problems efficiently.
 
 ---
 
 ## Course Outcomes (COs)
 
-After successful completion of the course, the student will have the ability to:
+After successful completion of the course, the student will be able to:
 
 | CO | Description |
 |---|---|
-| CO1 | Utilize appropriate simple data structures in problem-solving. |
-| CO2 | Understand data abstraction and order statistics. |
-| CO3 | Understand program efficiency through analysis of algorithms. |
+| CO1 | Analyze the time and space complexity of algorithms using asymptotic notations and recurrence relations |
+| CO2 | Select and implement appropriate linear and non-linear data structures to solve computational problems efficiently |
+| CO3 | Design and analyze fundamental algorithms for searching, sorting, hashing, and order statistics |
+| CO4 | Apply advanced tree-based data structures, including AVL trees, Red-Black trees, heaps, and B-trees, to support efficient dictionary operations |
+| CO5 | Represent graphs using suitable data structures and apply graph traversal algorithms such as Breadth-First Search (BFS) and Depth-First Search (DFS) |
 
 ---
 
@@ -60,23 +62,25 @@ After successful completion of the course, the student will have the ability to:
 
 ## Course Structure
 
+*Tentative Course Plan (subject to change without notice).*
+
 | Unit | Topic | No. of Lectures |
 |---|---|---|
 | Preliminaries | Representation of data on a computer, data types; array and linked list representations; ways of representing programs and associated data on computers | 3 |
 | Analysis Tools | The notion of the running time of an algorithm, Recurrences, Parameters of performance | 3 |
 | Dictionary Operations | Find, Max, Min, Successor, Predecessor (query operations); Insert, Delete (modify operations) | 6 |
 | List Data | Stacks, queues, variant implementations using arrays and linked lists, hashing | 6 |
-| Sorting | Comparison-based sorting algorithms, other sorting algorithms; lower bounds for comparison-based sorting algorithms; best-case, worst-case, and average-case running times; Heap Sort, Bubble Sort, etc. | 9 |
+| Sorting | Comparison-based sorting algorithms, other sorting algorithms; lower bounds for comparison-based sorting algorithms; best-case, worst-case, and average-case running times; Heap Sort, Bubble Sort, etc | 9 |
 | Order Statistics | Maximum and minimum elements of a set, finding median, searching for an element of a given rank, finding the rank of a given element, ranks of a subset of elements, maintaining rank information for a dynamic set | 3 |
 | Trees | Heaps, Binary Search Trees (BSTs), height of BSTs, Tries, Balanced BSTs: Red-Black Trees, AVL Trees, B-Trees | 9 |
 | Graphs | Representation using adjacency matrices and adjacency lists; graph searching algorithms: BFS and DFS | 3 |
 | **Total** | | **42** |
 
-*Note: This course plan is labeled "Tentative" and is subject to change without notice, per the source document.*
-
 ---
 
 ## Weekly Schedule / Lecture Plan
+
+*Tentative Weekly Schedule (as stated in source, without specific calendar dates):*
 
 | Week | Topics |
 |---|---|
@@ -95,20 +99,19 @@ After successful completion of the course, the student will have the ability to:
 | Week 13 | Heaps: Insertion, Deletion, Heapify, HeapSort, Priority Queues |
 | Week 14 | Graphs: Representations using Adjacency Matrix/List; BFS and DFS Algorithms |
 
-*Note: This weekly schedule is labeled "Tentative" in the source document.*
-
 ---
 
 ## Evaluation / Grading Scheme
 
+*This evaluation scheme may slightly deviate and is subject to change without notice.*
+
 | Component | Weightage |
 |---|---|
-| In-Semester Exams (I & II) | 40% (20% + 20%) |
-| Course Project/Lab Assignments | 20% |
+| In-Semester Exam I | 20% |
+| In-Semester Exam II | 20% |
+| Course Project / Lab Assignments | 20% |
 | End-Semester Exam | 40% |
 | **Total** | **100%** |
-
-*Note: This evaluation scheme may slightly deviate and is subject to change without notice, per the source document.*
 
 ---
 
@@ -116,30 +119,29 @@ After successful completion of the course, the student will have the ability to:
 
 ### Textbook(s)
 
-1. Aho, Hopcroft, and Ullman, *Data Structures and Algorithms*, Addison-Wesley, 1999.
+1. Mark Allen Weiss, *Data Structures and Algorithm Analysis in C++*, Pearson, Fourth Edition, 2013.
 
 ### Reference Books
 
-1. Goodrich, Tamassia, and Goldberg, *Data Structures and Algorithms in C++/Java*, Wiley, 2011.
-2. Cormen, Leiserson, Rivest, and Stein, *Introduction to Algorithms*, PHI, 2010.
+1. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein, *Introduction to Algorithms*, MIT Press, Fourth Edition, 2022.
+2. Michael T. Goodrich, Roberto Tamassia, and David M. Mount, *Data Structures and Algorithms in C++*, Wiley, Second Edition, 2011.
+3. Debasis Samanta, *Classic Data Structures*, PHI Learning Pvt. Ltd., Second Edition, 2008.
 
 ### Online Resources
 
-*None stated in source document.*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-IT623 Data Structures is a Core course for M.Sc. IT Semester I students, with a 4-credit structure (3-0-2). It requires Discrete Mathematics and C Programming as prerequisites, and forms a foundation for the CS/IT stream of courses.
+IT623 is a Core Course for M.Sc. IT students in Semester I, offered in Academic Year 2026-2027 (Autumn).
 
 ---
 
 ## Additional Notes
 
-- Lecture timings ("Lectures: TBD") and TA contact info ("TBD") are both listed as To Be Decided in the source document.
-- Week 11 is explicitly designated as a "Class rescheduling window" in the weekly schedule.
-- Both the course plan and evaluation scheme are explicitly marked as tentative/subject to change without notice.
+None stated in source document beyond what is captured above.
 
 ---
 
@@ -147,7 +149,7 @@ IT623 Data Structures is a Core course for M.Sc. IT Semester I students, with a 
 
 | Resource | Type | Link |
 |---|---|---|
-| IT623_DataStructures_Autumn25 - Supantha Pandit.pdf | PDF | [Download IT623_DataStructures_Autumn25 - Supantha Pandit.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| IT623__2026-27__IT623_DataStructures_Autumn26nter25 - Supantha Pandit.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -155,7 +157,7 @@ IT623 Data Structures is a Core course for M.Sc. IT Semester I students, with a 
 
 | Field | Value |
 |---|---|
-| **Source PDF** | IT623_DataStructures_Autumn25 - Supantha Pandit.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | IT623__2026-27__IT623_DataStructures_Autumn26nter25 - Supantha Pandit.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

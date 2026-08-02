@@ -1,10 +1,6 @@
-"""
-Tests for require_identity() — the FastAPI dependency that verifies
-the internal JWT minted by Next.js.
-
-Verifies: missing token → 401, valid token → Identity extracted,
-expired → 401, wrong secret → 401, bad role → 403.
-"""
+# Tests for require_identity() — the FastAPI dependency that verifies
+# the internal JWT minted by Next.js.
+# expired → 401, wrong secret → 401, bad role → 403.
 
 import sys, os, datetime
 from pathlib import Path
@@ -29,7 +25,13 @@ client = TestClient(app, raise_server_exceptions=False)
 
 
 def make_token(payload: dict, secret: str = SECRET, exp_delta_seconds: int = 60) -> str:
-    payload = {**payload, "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=exp_delta_seconds)}
+    from api.auth import INTERNAL_JWT_AUDIENCE, INTERNAL_JWT_ISSUER
+    payload = {
+        **payload,
+        "iss": INTERNAL_JWT_ISSUER,
+        "aud": INTERNAL_JWT_AUDIENCE,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=exp_delta_seconds),
+    }
     return jwt.encode(payload, secret, algorithm="HS256")
 
 
@@ -78,6 +80,12 @@ def test_unrecognized_role_returns_403():
     assert res.status_code == 403
 
 
+def test_oversized_erp_id_returns_401():
+    token = make_token({"erpId": "X" * 65, "role": "student"})
+    res = client.get("/protected", headers=auth(token))
+    assert res.status_code == 401
+
+
 def test_missing_erp_id_claim_returns_401():
     token = make_token({"role": "student"})   # no erpId
     res = client.get("/protected", headers=auth(token))
@@ -85,7 +93,7 @@ def test_missing_erp_id_claim_returns_401():
 
 
 def test_user_id_property_equals_erp_id():
-    """Backward-compat: identity.user_id must return erp_id."""
+    # Backward-compat: identity.user_id must return erp_id.
     token = make_token({"erpId": "202301234", "role": "student"})
     res = client.get("/protected", headers=auth(token))
     assert res.status_code == 200
@@ -94,7 +102,7 @@ def test_user_id_property_equals_erp_id():
 
 
 def test_camelcase_erpId_claim_is_read_correctly():
-    """Next.js mints camelCase 'erpId' — must be parsed, not 'erp_id'."""
+    # Next.js mints camelCase 'erpId' — must be parsed, not 'erp_id'.
     token = make_token({"erpId": "202399999", "role": "student"})
     res = client.get("/protected", headers=auth(token))
     assert res.status_code == 200

@@ -2,10 +2,9 @@ import { NextAuthOptions, DefaultSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { backendUrl } from "@/lib/api/backend"
-import { signInternalJwt } from "@/lib/auth/internal-jwt"
 import {
+  getGoogleOAuthCredentials,
   getNextAuthSecret,
-  requireGoogleOAuthCredentials,
   requireInternalResolveSecret,
 } from "@/lib/auth/secrets"
 
@@ -13,7 +12,6 @@ type Role = "student" | "faculty" | "admin" | "guest"
 
 declare module "next-auth" {
   interface Session {
-    accessToken?: string
     user: {
       role: Role
       erpId: string
@@ -43,7 +41,6 @@ declare module "next-auth/jwt" {
     role?: Role
     erpId?: string
     department?: string
-    accessToken?: string
     fullName?: string
     currentYear?: number
     currentSem?: number
@@ -98,53 +95,118 @@ async function lookupErpIdentity(email: string): Promise<ErpIdentity | null> {
   }
 }
 
-const googleCreds = requireGoogleOAuthCredentials()
-
 export const authOptions: NextAuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: googleCreds.clientId,
-      clientSecret: googleCreds.clientSecret,
-      authorization: {
-        params: {
-          prompt: "select_account",
-        },
-      },
-    }),
-    ...(process.env.NODE_ENV === "development" ? [
-      CredentialsProvider({
-        name: "Demo Account",
-        credentials: {
-          email: { label: "Email", type: "text" },
-          password: { label: "Password", type: "password" }
-        },
-        async authorize(credentials) {
-          if (credentials?.email === "demo.student@dau.ac.in" && credentials?.password === "Student@123") {
-            return { id: "demo-stud", email: credentials.email, name: "Demo Student" }
-          }
-          if (credentials?.email === "demo.faculty@daiict.ac.in" && credentials?.password === "Faculty@123") {
-            return { id: "demo-fac", email: credentials.email, name: "Demo Faculty" }
-          }
-          if (credentials?.email === "demo.admin@dau.ac.in" && credentials?.password === "Admin@123") {
-            return { id: "demo-admin", email: credentials.email, name: "Demo Admin" }
-          }
-          return null
-        }
-      })
-    ] : [])
-  ],
+  // A getter, not a plain array: NextAuth (and every getServerSession(authOptions)
+  // call across the app) reads `.providers` fresh on each access instead of once
+  // at module import. Previously `googleCreds` was resolved to a top-level const
+  // and baked into a static providers array at cold-start/import time — on a
+  // serverless or edge deployment that import can happen before secrets are
+  // injected, or the module can simply stay warm for a long time, so a
+  // credential fix/rotation wouldn't take effect until the process restarted.
+  get providers() {
+    const googleCreds = getGoogleOAuthCredentials()
+    if (!googleCreds && process.env.NODE_ENV === "production") {
+      console.warn(
+        "[auth] GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET unset — Google Workspace sign-in disabled; guest chat still works.",
+      )
+    }
+    return [
+      ...(googleCreds
+        ? [
+          GoogleProvider({
+            clientId: googleCreds.clientId,
+            clientSecret: googleCreds.clientSecret,
+            authorization: {
+              params: {
+                prompt: "select_account",
+              },
+            },
+          }),
+        ]
+        : []),
+      // SEC-02 fix: previously gated only on `NODE_ENV === "development"`
+      // with hardcoded passwords (Student@123, Faculty@123, Admin@123)
+      // baked into the source. If NODE_ENV were ever left unset/misconfigured
+      // in staging (a common operator mistake), those hardcoded passwords
+      // would grant real login — including admin — in a deployed instance.
+      // Now: (1) demo accounts require an explicit opt-in flag, (2) that
+      // flag is hard-blocked in production no matter what, and (3) the
+      // passwords themselves must come from the environment — there is no
+      // in-source fallback to leak.
+      ...(process.env.ENABLE_DEMO_ACCOUNTS === "true" && process.env.NODE_ENV !== "production"
+        ? [
+          CredentialsProvider({
+            name: "Demo Account",
+            credentials: {
+              email: { label: "Email", type: "text" },
+              password: { label: "Password", type: "password" },
+            },
+            async authorize(credentials) {
+              const studentPw = process.env.DEMO_STUDENT_PASSWORD
+              const facultyPw = process.env.DEMO_FACULTY_PASSWORD
+              const adminPw = process.env.DEMO_ADMIN_PASSWORD
+
+              if (
+                studentPw &&
+                credentials?.email === "demo.student@dau.ac.in" &&
+                credentials?.password === studentPw
+              ) {
+                return { id: "demo-stud", email: credentials.email, name: "Demo Student" }
+              }
+              if (
+                facultyPw &&
+                credentials?.email === "demo.faculty@daiict.ac.in" &&
+                credentials?.password === facultyPw
+              ) {
+                return { id: "demo-fac", email: credentials.email, name: "Demo Faculty" }
+              }
+              if (
+                adminPw &&
+                credentials?.email === "demo.admin@dau.ac.in" &&
+                credentials?.password === adminPw
+              ) {
+                return { id: "demo-admin", email: credentials.email, name: "Demo Admin" }
+              }
+              return null
+            },
+          }),
+        ]
+        : []),
+    ]
+  },
   session: {
     strategy: "jwt",
+    // Bound session lifetime so stolen cookies expire without waiting for
+    // Google account recovery. Sliding refresh still renews while active.
+    maxAge: 8 * 60 * 60, // 8 hours
+    updateAge: 60 * 60, // refresh JWT at most once per hour
+  },
+  // Force Secure cookies in production (NextAuth also sets httpOnly + SameSite=lax).
+  useSecureCookies: process.env.NODE_ENV === "production",
+  cookies: {
+    sessionToken: {
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.session-token"
+          : "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
   },
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === "google") {
         const email = user.email || ""
-        if (!email.endsWith("@dau.ac.in") && !email.endsWith("@daiict.ac.in")) {
-          user.role = "guest"
-          user.erpId = "GUEST"
-          user.department = "GUEST"
-          return true
+        // Only official @dau.ac.in accounts may sign in. Anyone else
+        // (including personal Gmail addresses) should use the anonymous
+        // guest chat instead — see the "Continue as Guest" option on
+        // /login and the anonymous cookie flow in app/api/chat/route.ts.
+        if (!email.endsWith("@dau.ac.in")) {
+          return "/login?error=DomainNotAllowed"
         }
 
         try {
@@ -180,8 +242,10 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user }) {
       // If it's the first sign-in (user object is available), lookup the ERP identity
+      const demoAccountsEnabled =
+        process.env.ENABLE_DEMO_ACCOUNTS === "true" && process.env.NODE_ENV !== "production"
       if (user && user.email) {
-        if (process.env.NODE_ENV === "development" && user.email === "demo.student@dau.ac.in") {
+        if (demoAccountsEnabled && user.email === "demo.student@dau.ac.in") {
           token.role = "student"
           token.erpId = "DEMO123"
           token.department = "ICT"
@@ -189,12 +253,12 @@ export const authOptions: NextAuthOptions = {
           token.currentYear = 3
           token.currentSem = 5
           token.currentSec = "A"
-        } else if (process.env.NODE_ENV === "development" && user.email === "demo.faculty@daiict.ac.in") {
+        } else if (demoAccountsEnabled && user.email === "demo.faculty@daiict.ac.in") {
           token.role = "faculty"
           token.erpId = "FAC123"
           token.department = "ICT"
           token.fullName = "Demo Faculty"
-        } else if (process.env.NODE_ENV === "development" && user.email === "demo.admin@dau.ac.in") {
+        } else if (demoAccountsEnabled && user.email === "demo.admin@dau.ac.in") {
           token.role = "admin"
           token.erpId = "ADM123"
           token.department = "IT"
@@ -219,20 +283,6 @@ export const authOptions: NextAuthOptions = {
             token.currentSec = erpData.currentSec
           }
         }
-      }
-
-      // Mint a fresh short-lived internal JWT on every token update
-      if (token.role && token.erpId) {
-        token.accessToken = signInternalJwt({
-          role: token.role as Role,
-          erpId: token.erpId,
-          department: token.department || undefined,
-          email: typeof token.email === "string" ? token.email : undefined,
-          fullName: token.fullName || undefined,
-          currentYear: token.currentYear,
-          currentSem: token.currentSem,
-          currentSec: token.currentSec,
-        })
       }
 
       return token

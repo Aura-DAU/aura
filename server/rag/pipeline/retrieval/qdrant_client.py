@@ -26,6 +26,10 @@ def _translate_condition(field: str, op_value: dict) -> qmodels.Condition:
         return qmodels.FieldCondition(key=field, match=qmodels.MatchValue(value=op_value["$eq"]))
     if "$in" in op_value:
         return qmodels.FieldCondition(key=field, match=qmodels.MatchAny(any=list(op_value["$in"])))
+    if "$gte" in op_value:
+        return qmodels.FieldCondition(key=field, range=qmodels.Range(gte=op_value["$gte"]))
+    if "$lte" in op_value:
+        return qmodels.FieldCondition(key=field, range=qmodels.Range(lte=op_value["$lte"]))
     raise ValueError(f"Unsupported Pinecone-style filter operator in {op_value!r} for field {field!r}")
 
 
@@ -47,12 +51,31 @@ def translate_filter(pinecone_filter: Optional[dict]) -> Optional[qmodels.Filter
             sub_filter = translate_filter(sub)
             if sub_filter is None:
                 continue
-            # A translated sub-clause is itself a Filter(must=[...]) with a
-            # single condition (from as_filter()/auth_filter shapes in
-            # retrieval_pipeline.py) — flatten it into the outer `must` list.
-            if sub_filter.must:
+            # A sub-clause that translated to a pure conjunction (only `must`
+            # populated — the common as_filter()/auth_filter shape) is flattened
+            # into the outer `must` list to keep the filter shallow and readable.
+            #
+            # A sub-clause carrying `should`/`must_not` (a nested `$or`, which is
+            # exactly what _academic_scope_filter emits) must NOT be flattened
+            # that way: its OR-semantics live in `should`, not `must`. The old
+            # code extended only `.must`, so such a clause was silently dropped —
+            # an authenticated student's academic-applicability scope never
+            # reached Qdrant and the dense candidate pool filled with
+            # out-of-scope documents. Qdrant allows nesting a Filter inside
+            # `must`, so append it whole to preserve the AND(OR(...)) semantics.
+            if sub_filter.must and not sub_filter.should and not sub_filter.must_not:
                 must.extend(sub_filter.must)
+            else:
+                must.append(sub_filter)
         return qmodels.Filter(must=must) if must else None
+
+    if "$or" in pinecone_filter:
+        should: list[qmodels.Filter] = []
+        for sub in pinecone_filter["$or"]:
+            sub_filter = translate_filter(sub)
+            if sub_filter is not None:
+                should.append(sub_filter)
+        return qmodels.Filter(should=should) if should else None
 
     must = [_translate_condition(field, op_value) for field, op_value in pinecone_filter.items()]
     return qmodels.Filter(must=must) if must else None
@@ -69,13 +92,16 @@ class QdrantIndexAdapter:
         query_filter = translate_filter(filter)
 
         try:
-            hits = self._client.search(
+            # query_points, not the older search(): qdrant-client removed
+            # .search() in 1.16. Same ScoredPoint shape, wrapped in a
+            # QueryResponse whose .points holds the hits.
+            hits = self._client.query_points(
                 collection_name=self._collection,
-                query_vector=vector,
+                query=vector,
                 limit=top_k,
                 query_filter=query_filter,
                 with_payload=include_metadata,
-            )
+            ).points
         except Exception as e:
             logger.warning("Qdrant query failed: %s", e)
             return {"matches": []}
@@ -103,7 +129,7 @@ def build_index_adapter() -> Optional[QdrantIndexAdapter]:
 
     url = os.getenv("QDRANT_URL", "http://localhost:6333")
     api_key = os.getenv("QDRANT_API_KEY") or None
-    collection = os.getenv("QDRANT_COLLECTION", "aura-knowledge-base")
+    collection = os.getenv("QDRANT_COLLECTION", "aura_documents")
 
     try:
         client = QdrantClient(url=url, api_key=api_key)

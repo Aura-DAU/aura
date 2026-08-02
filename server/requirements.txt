@@ -1,0 +1,60 @@
+# AURA backend (api/ + rag/ + db/) — install from server/:
+#   python -m venv .venv && .venv/bin/pip install -r requirements.txt
+#
+# gunicorn is production-only (Dockerfile CMD); uvicorn alone is enough for
+# local: uvicorn api.api:app --reload
+
+fastapi
+uvicorn
+pydantic
+# Phase B (vLLM migration): vLLM's OpenAI-compatible server is called via
+# the standard `openai` client (see pipeline/inference_router.py). `groq`
+# is no longer imported anywhere in pipeline/ except the deprecated,
+# unused pipeline/key_manager.py (kept for reference).
+openai
+groq
+# Phase A (Qdrant migration): replaces `pinecone` as the vector store client
+# (see pipeline/retrieval/qdrant_client.py). `pinecone` is no longer
+# imported anywhere in pipeline/ except the deprecated, unused
+# upload_to_pinecone.py (kept for reference).
+qdrant-client
+pinecone
+langgraph
+sentence-transformers
+torch
+openai-whisper
+python-dotenv
+python-multipart
+PyYAML
+numpy
+transformers
+rapidfuzz>=3.5.0
+rank-bm25
+redis>=5.0.0
+
+# Auth, ERP integration, security
+requests
+beautifulsoup4
+cryptography
+PyJWT
+psycopg2-binary
+bcrypt
+
+# Timetable notifications
+redis
+pywebpush
+
+# Model Context Protocol SDK — agentic Google Calendar tools. The 2.x API is
+# required: mcp_servers/gcal_server.py uses `mcp.server.MCPServer` and the
+# in-process `mcp.Client`, neither of which exists in mcp 1.x.
+mcp>=2.0.0
+
+# Observability (architecture doc §Containerization — aura-prometheus / aura-grafana)
+prometheus-client
+
+# Testing (CI unit suite — httpx backs FastAPI's TestClient)
+httpx
+pytest
+
+# Production WSGI (Dockerfile)
+gunicorn

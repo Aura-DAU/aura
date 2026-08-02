@@ -1,22 +1,6 @@
-"""
-Session handling for ecampus.daiict.ac.in.
-
-This is a classic ASP.NET WebForms portal: pages carry hidden __VIEWSTATE /
-__EVENTVALIDATION / __VIEWSTATEGENERATOR fields that MUST be resubmitted with
-every POST (including login), or the server rejects the request. Tab
-navigation on WebForms sites is frequently a __doPostBack(target, argument)
-call rather than a plain <a href>, so we support both plain GET navigation
-and postback-style navigation.
-
-TODO once you have access to the live login page source:
-  - Confirm the actual login form's field names (commonly
-    "txtUserName"/"txtPassword" or similar ASP.NET auto-generated IDs like
-    "ctl00$ContentPlaceHolder1$txtUser") — replace LOGIN_FIELD_USER /
-    LOGIN_FIELD_PASS below.
-  - Confirm LOGIN_PATH (the .aspx file the login form posts to).
-  - Confirm whether tabs are plain links (easy) or __doPostBack calls
-    (need the exact __EVENTTARGET string per tab, visible in page source).
-"""
+# Session handling for ecampus.daiict.ac.in.
+# This is a classic ASP.NET WebForms portal: pages carry hidden __VIEWSTATE /
+# (need the exact __EVENTTARGET string per tab, visible in page source).
 
 import os
 import re
@@ -41,11 +25,9 @@ class ECampusLoginError(Exception):
 
 
 class ECampusSession:
-    """One instance per scrape operation. Not meant to be held open for the
-    lifetime of a user's AURA session — log in, fetch what's needed, let it
-    go out of scope. eCampus is likely to have its own idle-session timeout
-    and possibly account lockout after repeated rapid logins, so the caller
-    (client.py, via cache.py) should avoid re-logging-in more than necessary."""
+    # One instance per scrape operation. Not meant to be held open for the
+    # lifetime of a user's AURA session — log in, fetch what's needed, let it
+    # (client.py, via cache.py) should avoid re-logging-in more than necessary.
 
     def __init__(self):
         self.http = requests.Session()
@@ -99,7 +81,7 @@ class ECampusSession:
 
     def post_back(self, path: str, event_target: str, event_argument: str = "",
                    extra_fields: Optional[dict] = None) -> str:
-        """For tabs implemented as __doPostBack(...) rather than plain links."""
+        # For tabs implemented as __doPostBack(...) rather than plain links.
         if not self._logged_in:
             raise ECampusLoginError("Must call login() before post_back().")
         current_html = self.get_page(path)

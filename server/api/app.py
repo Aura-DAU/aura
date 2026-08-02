@@ -18,13 +18,16 @@ for _p in (str(_server_dir), str(_rag_dir)):
 
 from api.deps import warm_aura_in_background
 from api.middleware.latency import register_latency_middleware
+from api.middleware.security_headers import SecurityHeadersMiddleware
 from api.routes.admin_routes import router as admin_router
 from api.routes.calendar_routes import router as calendar_router
 from api.routes.chat_routes import router as chat_router
 from api.routes.ecampus_routes import router as ecampus_router
 from api.routes.health_routes import router as health_router
 from api.routes.identity_routes import router as identity_router
+from api.routes.memory_routes import router as memory_router
 from api.routes.speech_routes import router as speech_router
+from api.routes.timetable_routes import router as timetable_router, push_router, profile_router
 
 
 def _is_production() -> bool:
@@ -44,6 +47,10 @@ def _validate_production_config() -> None:
         missing.append("INTERNAL_JWT_SECRET")
     if not os.getenv("INTERNAL_RESOLVE_SECRET"):
         missing.append("INTERNAL_RESOLVE_SECRET")
+    # Shared question quota across gunicorn workers — in-memory fallback is
+    # worker-local and lets a botnet burn daily limits N×workers times.
+    if not os.getenv("REDIS_URL", "").strip():
+        missing.append("REDIS_URL")
     # eCampus scrape mode stores credentials — require vault key in prod.
     if not os.getenv("ERP_DB_HOST") and not os.getenv("ECAMPUS_VAULT_KEY"):
         missing.append("ECAMPUS_VAULT_KEY (required when ERP_DB_HOST is unset)")
@@ -84,6 +91,10 @@ def create_app() -> FastAPI:
 
     register_latency_middleware(application)
 
+    # Defense-in-depth security headers on every backend response. Added last
+    # so it wraps outermost; pure-ASGI so it never buffers SSE responses.
+    application.add_middleware(SecurityHeadersMiddleware)
+
     application.add_middleware(
         CORSMiddleware,
         allow_origins=allowed_origins,
@@ -96,7 +107,11 @@ def create_app() -> FastAPI:
     application.include_router(identity_router)
     application.include_router(admin_router)
     application.include_router(calendar_router)
+    application.include_router(timetable_router)
+    application.include_router(push_router)
+    application.include_router(profile_router)
     application.include_router(chat_router)
+    application.include_router(memory_router)
     application.include_router(speech_router)
     application.include_router(ecampus_router)
     application.include_router(health_router)

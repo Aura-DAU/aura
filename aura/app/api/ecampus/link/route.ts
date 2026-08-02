@@ -1,8 +1,14 @@
 import { getServerSession } from "next-auth"
+import { z } from "zod"
 import { authOptions } from "@/lib/auth/options"
 import { backendUrl } from "@/lib/api/backend"
 import { NextResponse } from "next/server"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
+
+const linkSchema = z.object({
+  ecampus_username: z.string().min(1).max(256),
+  ecampus_password: z.string().min(1).max(1024),
+})
 
 export async function GET() {
   const session = await getServerSession(authOptions)
@@ -26,7 +32,11 @@ export async function GET() {
     })
 
     if (!res.ok) {
-      const errText = await res.text()
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to fetch linking status" }, { status: res.status })
+      }
+      const errText = await res.text().catch(() => "")
       return NextResponse.json({ error: errText || "Failed to fetch linking status" }, { status: res.status })
     }
 
@@ -51,17 +61,18 @@ export async function POST(req: Request) {
     email: session.user.email ?? undefined,
   })
 
-  let body
+  let body: unknown
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
 
-  const { ecampus_username, ecampus_password } = body
-  if (!ecampus_username || !ecampus_password) {
+  const parsed = linkSchema.safeParse(body)
+  if (!parsed.success) {
     return NextResponse.json({ error: "Username and password are required" }, { status: 400 })
   }
+  const { ecampus_username, ecampus_password } = parsed.data
 
   try {
     const res = await fetch(backendUrl("/ecampus/link"), {
@@ -74,6 +85,10 @@ export async function POST(req: Request) {
     })
 
     if (!res.ok) {
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to link eCampus account" }, { status: res.status })
+      }
       let errDetail = "Failed to link eCampus account"
       try {
         const errJson = await res.json()
@@ -115,7 +130,11 @@ export async function DELETE() {
     })
 
     if (!res.ok) {
-      const errText = await res.text()
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to unlink eCampus account" }, { status: res.status })
+      }
+      const errText = await res.text().catch(() => "")
       return NextResponse.json({ error: errText || "Failed to unlink eCampus account" }, { status: res.status })
     }
 

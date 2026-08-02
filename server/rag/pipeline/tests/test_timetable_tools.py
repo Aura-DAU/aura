@@ -22,6 +22,9 @@ class FakeDB:
     def query(self, sql, params=()):
         sql_norm = " ".join(sql.split())
         if "FROM timetable_master" in sql_norm:
+            if len(params) == 2:
+                year, sem = params
+                return [r for r in self.master if r["year"] == year and r["sem"] == sem and (r["sec"] is None or r["sec"] == "" or r["sec"] == "A")]
             year, sem, sec = params
             return [r for r in self.master if r["year"] == year and r["sem"] == sem and r["sec"] == sec]
         if "FROM timetable_overrides" in sql_norm:
@@ -31,6 +34,12 @@ class FakeDB:
             erp_id = params[0]
             row = self.identity_map.get(erp_id)
             return [row] if row else []
+        if "FROM student_elective_selections" in sql_norm:
+            # No test in this file exercises the elective-selection feature
+            # itself (see test_elective_and_cohort_scoping.py for that) —
+            # zero selections is service.py's documented default, meaning
+            # every elective is shown unfiltered.
+            return []
         raise AssertionError(f"Unexpected query: {sql_norm}")
 
     def execute(self, sql, params=()):
@@ -136,7 +145,8 @@ def test_non_student_role_is_rejected(fake_db):
         service.get_effective_timetable({"role": "faculty", "erp_id": "F1"})
 
 
-def test_missing_cohort_is_rejected(fake_db):
-    with pytest.raises(service.TimetableError):
-        service.get_effective_timetable({"role": "student", "erp_id": "S3", "current_year": None,
+def test_missing_cohort_fallback_to_common(fake_db):
+    res = service.get_effective_timetable({"role": "student", "erp_id": "S3", "current_year": None,
                                           "current_sem": None, "current_sec": None})
+    assert res["is_common"] is True
+    assert res["needs_configuration"] is True

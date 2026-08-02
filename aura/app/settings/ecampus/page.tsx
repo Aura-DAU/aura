@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 import { Loader2, KeyRound, AlertTriangle, ShieldCheck, UserCheck, Trash2, ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { toastError, toastSuccess } from "@/lib/toast"
 
 export default function ConnectEcampusPage() {
   const { data: session, status } = useSession()
@@ -35,9 +36,14 @@ export default function ConnectEcampusPage() {
         if (res.ok) {
           const data = await res.json()
           setLinked(data.linked)
+        } else {
+          toastError("Could not check eCampus link status.")
         }
       } catch (err) {
-        if (!cancelled) console.error("Failed to fetch link status:", err)
+        if (!cancelled) {
+          console.error("Failed to fetch link status:", err)
+          toastError("Could not check eCampus link status.")
+        }
       } finally {
         if (!cancelled) setStatusLoading(false)
       }
@@ -45,6 +51,7 @@ export default function ConnectEcampusPage() {
 
     void checkLinkStatus()
     if (session?.user?.erpId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUsername(session.user.erpId)
     }
 
@@ -103,14 +110,20 @@ export default function ConnectEcampusPage() {
       const data = await res.json()
 
       if (!res.ok) {
-        setError(data.error || "Failed to link credentials.")
+        const msg = data.error || "Failed to link credentials."
+        setError(msg)
+        toastError(msg)
       } else {
         setLinked(true)
-        setSuccessMsg("Your eCampus account has been connected successfully!")
+        const msg = "Your eCampus account has been connected successfully!"
+        setSuccessMsg(msg)
+        toastSuccess(msg)
         setPassword("")
       }
     } catch {
-      setError("Network error. Please try again.")
+      const msg = "Network error. Please try again."
+      setError(msg)
+      toastError(msg)
     } finally {
       setLoading(false)
     }
@@ -134,13 +147,19 @@ export default function ConnectEcampusPage() {
       const data = await res.json()
 
       if (!res.ok) {
-        setError(data.error || "Failed to unlink credentials.")
+        const msg = data.error || "Failed to unlink credentials."
+        setError(msg)
+        toastError(msg)
       } else {
         setLinked(false)
-        setSuccessMsg("Your eCampus account has been disconnected.")
+        const msg = "Your eCampus account has been disconnected."
+        setSuccessMsg(msg)
+        toastSuccess(msg)
       }
     } catch {
-      setError("Network error. Please try again.")
+      const msg = "Network error. Please try again."
+      setError(msg)
+      toastError(msg)
     } finally {
       setLoading(false)
     }

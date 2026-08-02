@@ -1,5 +1,5 @@
 # Shared request/response models for AURA API routes.
-from typing import List, Optional
+from typing import Annotated, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -25,12 +25,20 @@ class UserProfile(BaseModel):
     year: Optional[str] = Field(None, max_length=50)
     semester: Optional[str] = Field(None, max_length=50)
     interests: Optional[str] = Field(None, max_length=1000)
-    subjects: Optional[List[str]] = None
+    subjects: Optional[List[Annotated[str, Field(max_length=100)]]] = Field(None, max_length=50)
 
 
 class ChatRequest(BaseModel):
     question: str = Field(..., min_length=1, max_length=2000)
     history: Optional[List[HistoryTurn]] = Field(None, max_length=20)
+    # Client-owned rolling conversation memory (pipeline.memory). The server is
+    # stateless: the client sends this digest plus the unsummarised tail each
+    # turn and gets an updated digest back to persist.
+    summary: Optional[str] = Field(None, max_length=20_000)
+    # Stable per-conversation id (client-owned thread id). Keys this chat's block
+    # in the persistent per-user memory so every conversation — even a short one
+    # that never compacts — is captured and updated in place across turns.
+    threadId: Optional[str] = Field(None, max_length=64)
     userProfile: Optional[UserProfile] = None
     studentProfile: Optional[UserProfile] = None
 

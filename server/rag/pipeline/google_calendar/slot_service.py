@@ -1,11 +1,6 @@
-"""
-Slot service — derives available booking windows from a faculty's calendar.
-
-Takes the raw Google Calendar events for a day and returns time windows
-where the faculty member has no conflicting events — their "available slots".
-Faculty publish these slots; students see only the slots for their own
-enrolled courses or BTP guide.
-"""
+# Slot service — derives available booking windows from a faculty's calendar.
+# Takes the raw Google Calendar events for a day and returns time windows
+# enrolled courses or BTP guide.
 
 import datetime
 from typing import Optional
@@ -25,14 +20,19 @@ def _time_range_overlaps(
     return s1 < e2 and s2 < e1
 
 
+# Bug 7 fix: define IST as a proper timezone object instead of hard-coding
+# a +5:30 offset arithmetic, so astimezone() works correctly regardless of
+# the source offset in the event's dateTime string.
+_IST = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
+
+
 def _parse_time(dt_str: Optional[str]) -> Optional[datetime.time]:
     if not dt_str:
         return None
     try:
-        # ISO format: 2026-07-04T10:30:00Z
+        # ISO format: 2026-07-04T10:30:00Z or with +HH:MM offset
         dt = datetime.datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
-        # Convert to IST (UTC+5:30)
-        dt_ist = dt + datetime.timedelta(hours=5, minutes=30)
+        dt_ist = dt.astimezone(_IST)
         return dt_ist.time().replace(tzinfo=None)
     except (ValueError, AttributeError):
         return None
@@ -42,19 +42,9 @@ def get_available_slots(
     faculty_erp_id: str,
     date: datetime.date,
 ) -> dict:
-    """
-    Returns available 30-minute slot windows for a faculty member on a date.
-    Used by students to see when they can book a meeting.
-
-    Returns:
-      {
-        "faculty_erp_id": ...,
-        "date": "2026-07-04",
-        "calendar_linked": bool,
-        "available_slots": [{"start": "10:00", "end": "10:30"}, ...],
-        "note": "..."
-      }
-    """
+    # Returns available 30-minute slot windows for a faculty member on a date.
+    # Used by students to see when they can book a meeting.
+    # }
     if not is_linked(faculty_erp_id):
         return {
             "faculty_erp_id":  faculty_erp_id,

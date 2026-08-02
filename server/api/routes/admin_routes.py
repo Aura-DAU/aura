@@ -28,11 +28,12 @@ Example admin workflow:
 
 import re
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 import db.connection as db_conn
 from api.auth import require_identity, Identity
+from access_control import resolve_effective_role
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -84,8 +85,17 @@ def _validate_binding(binding: str) -> None:
     )
 
 
+ADMIN_LEVEL_ROLES = {"admin_staff", "superadmin"}
+
+
 def _require_admin(identity: Identity = Depends(require_identity)) -> Identity:
-    if identity.role != "admin":
+    # SEC-08 fix: previously checked only identity.role != "admin", which
+    # ignores the fine-grained role_bindings system entirely — a faculty
+    # member whose JWT carries role="faculty" but who has an admin_staff or
+    # superadmin binding (the RBAC system's actual source of truth for
+    # elevated access) was incorrectly locked out of every admin endpoint.
+    effective_role = resolve_effective_role(identity)
+    if effective_role not in ADMIN_LEVEL_ROLES:
         raise HTTPException(status_code=403, detail="Admin access required.")
     return identity
 
@@ -103,8 +113,8 @@ def _check_erp_exists(erp_id: str) -> None:
 
 
 class AddBindingRequest(BaseModel):
-    binding:    str
-    expires_at: Optional[str] = None   # ISO-8601 datetime string, or null = permanent
+    binding:    str = Field(..., min_length=1, max_length=128)
+    expires_at: Optional[str] = Field(None, max_length=64)   # ISO-8601 datetime string, or null = permanent
 
 
 @router.get("/users/{erp_id}/bindings")

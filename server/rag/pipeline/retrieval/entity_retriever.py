@@ -1,17 +1,6 @@
-"""
-entity_retriever.py
-===================
-Implements Step 2→3 of the professor's algorithm:
-
-    Chunks → Triples → Entity → Chunk Pool (entity-based side)
-
-Loads entity_index.json (built by build_entity_index.py) and, given the
-entities extracted from the query plan, returns all chunk records whose
-stored entity fields intersect with the query entities.
-
-These results are merged with the standard vector/BM25 results by
-retrieval_pipeline.py to form the unified "chunk pool" before reranking.
-"""
+# entity_retriever.py
+# Implements Step 2→3 of the professor's algorithm:
+# retrieval_pipeline.py to form the unified "chunk pool" before reranking.
 
 import json
 import logging
@@ -35,20 +24,14 @@ MAX_ENTITY_CHUNKS_TOTAL = 24      # hard cap on the combined pool
 
 
 class EntityRetriever:
-    """
-    Retrieves chunks by matching query entities against the pre-built
-    entity index.  Uses the same metadata store as BM25Retriever so no
-    extra I/O is needed at query time after initialisation.
-    """
+    # Retrieves chunks by matching query entities against the pre-built
+    # entity index.  Uses the same metadata store as BM25Retriever so no
+    # extra I/O is needed at query time after initialisation.
 
     def __init__(self, metadata_path: str):
-        """
-        Parameters
-        ----------
-        metadata_path : str
-            Absolute path to vector_store/metadata.json.
-            entity_index.json is expected in the same directory.
-        """
+        # Parameters
+        # metadata_path : str
+        # entity_index.json is expected in the same directory.
         metadata_path = Path(metadata_path)
         entity_index_path = metadata_path.parent / "entity_index.json"
 
@@ -85,6 +68,17 @@ class EntityRetriever:
                 entity_index_path,
             )
 
+        # Lowercased mirror of the index so case-insensitive fallback lookups
+        # are O(1) instead of a linear scan over every key in the field map.
+        # setdefault keeps the FIRST key on case-collisions, matching the old
+        # scan's first-match-wins behaviour.
+        self._entity_index_lower: dict[str, dict[str, list[str]]] = {}
+        for field, field_map in self._entity_index.items():
+            lower_map: dict[str, list[str]] = {}
+            for key, ids in field_map.items():
+                lower_map.setdefault(key.lower(), ids)
+            self._entity_index_lower[field] = lower_map
+
     # ── Public API ─────────────────────────────────────────────────────────
 
     def retrieve_by_entities(
@@ -93,35 +87,11 @@ class EntityRetriever:
         max_chunks_per_field: int = MAX_ENTITY_CHUNKS_PER_FIELD,
         max_chunks_total: int = MAX_ENTITY_CHUNKS_TOTAL,
         allowed_roles: list[str] = None,
+        academic_scope=None,
     ) -> list[dict]:
-        """
-        Return chunk records whose entity fields overlap with `entities`.
-
-        Fix #2: each entity field gets its own independent budget
-        (max_chunks_per_field) so that a high-cardinality field like
-        faculty_name can no longer starve course_code, program_name, etc.
-        A combined total cap (max_chunks_total) is still enforced.
-
-        Parameters
-        ----------
-        entities : dict
-            Entity dict from the QueryPlanner plan, e.g.
-            {"faculty_name": "Arpit Rana", "program_name": "B.Tech. (ICT)"}
-        max_chunks_per_field : int
-            Maximum number of entity-matched chunks per field.
-        max_chunks_total : int
-            Hard cap on the combined chunk pool returned.
-        allowed_roles : list[str]
-            List of allowed document authorization roles for DLS.
-
-        Returns
-        -------
-        list[dict]
-            Each element has the same shape as Retriever/BM25 results:
-            {"id": chunk_id, "score": 0.0, "metadata": {...}}
-            score is set to 0.0 because entity matching is boolean;
-            the cross-encoder reranker will assign the real score.
-        """
+        # Return chunk records whose entity fields overlap with `entities`.
+        # Fix #2: each entity field gets its own independent budget
+        # the cross-encoder reranker will assign the real score.
         if not self._entity_index or not entities:
             return []
 
@@ -155,13 +125,11 @@ class EntityRetriever:
             for v in values:
                 matched_ids = field_map.get(v, [])
 
-                # Also try case-insensitive fallback
+                # Also try case-insensitive fallback (precomputed lower index)
                 if not matched_ids:
-                    v_lower = v.lower()
-                    for key, ids in field_map.items():
-                        if key.lower() == v_lower:
-                            matched_ids = ids
-                            break
+                    matched_ids = self._entity_index_lower.get(field, {}).get(
+                        v.lower(), []
+                    )
 
                 for chunk_id in matched_ids:
                     if field_count >= max_chunks_per_field:
@@ -190,6 +158,8 @@ class EntityRetriever:
                         chunk_auth = [chunk_auth]
                     if not any(role in allowed_roles for role in chunk_auth):
                         continue
+                if academic_scope is not None and not academic_scope.document_is_eligible(chunk):
+                    continue
                 results.append({
                     "id": chunk_id,
                     # Entity-matched chunks start with a neutral score;

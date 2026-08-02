@@ -1,8 +1,6 @@
-"""
-Configures env vars and sys.path for all test modules.
-Updated for SSO architecture: AURA_JWT_SECRET removed (FastAPI no longer
-issues its own JWTs). Added INTERNAL_JWT_SECRET and INTERNAL_RESOLVE_SECRET.
-"""
+# Configures env vars and sys.path for all test modules.
+# Updated for SSO architecture: AURA_JWT_SECRET removed (FastAPI no longer
+# issues its own JWTs). Added INTERNAL_JWT_SECRET and INTERNAL_RESOLVE_SECRET.
 
 import os, sys, uuid
 from pathlib import Path

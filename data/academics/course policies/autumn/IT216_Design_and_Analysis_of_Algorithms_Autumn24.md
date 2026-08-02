@@ -1,99 +1,97 @@
----
-title: "IT216 Design and Analysis of Algorithms Autumn 2024"
+﻿---
+title: "IT216 Design & Analysis of Algorithms Autumn Semester 2026-27"
 url: "https://ecampus.daiict.ac.in/webapp/intranet/index.jsp"
 category: "Academics - Course Policies"
 scraped_by: "Squad D Scraper"
-scraped_date: "2025-07-10"
+scraped_date: "2026-07-23"
 team: "Squad D"
 source_type: "PDF"
-pdf_name: "IT216_Design&AnalysisOfAlgo_Autumn24 - Puneet Bhateja.pdf"
+pdf_name: "IT216__2026-27__IT216_Design & Analysis of Algorithms_Autumn26 - Rahul Muthu.pdf"
 course_code: "IT216"
-semester: "Autumn 2024"
+semester: "Autumn Semester 2026-27"
 authorization: ["student", "faculty"]
 ---
 
-# IT216: Design and Analysis of Algorithms
+# IT216: Design & Analysis of Algorithms
 
 ## Course Overview
 
 | Field | Details |
 |---|---|
 | **Course Code** | IT216 |
-| **Course Name** | Design and Analysis of Algorithms |
-| **Instructor(s)** | Puneet Bhateja |
+| **Course Name** | Design & Analysis of Algorithms |
+| **Instructor(s)** | Rahul Muthu |
 | **Credits** | 3-0-2-4 |
-| **Semester Offered** | Autumn 2024 |
+| **Semester Offered** | Autumn Semester (AY 2026-27) |
 | **Type** | Core |
-| **Program(s)** | ICT and CS |
-| **Year / Semester in Program** | Semester III |
-| **Associated Lab** | Integrated (2 practical hours per week as part of the 3-0-2-4 structure; weekly lab assignments) |
-| **Prerequisites** | None explicitly stated |
+| **Program(s)** | UG (ICT & CS) |
+| **Year / Semester in Program** | Not specified beyond program level |
+| **Associated Lab** | Embedded lab component (weekly lab assignment testing programming and algorithm design skills) |
+| **Prerequisites** | Programming; Data Structures; Discrete Mathematics |
 | **Foundation For** | None stated |
 
 ---
 
 ## Course Description
 
-*Note: The source document does not contain a dedicated prose course description/abstract section. Course content and objectives can be inferred from the Course Contents and Course Outcomes sections below.*
+Through this course, students can develop ability to understand, design and analyse algorithms and solve problems using this powerful class of tools.
 
 ---
 
 ## Course Outcomes (COs)
 
-Through this course, students can develop the ability to:
-
 | CO | Description |
 |---|---|
-| CO1 | Design and analyze the major classes of algorithms. |
-| CO2 | Develop their own versions for a given computational task and compare and contrast their performance. |
-| CO3 | Understand mathematical structures such as graphs and trees, and learn their uses. |
+| CO1 | Design and analysis of the major classes of algorithms |
+| CO2 | Develop their own versions for a given computational task and to compare and contrast their performance |
+| CO3 | Understand mathematical structures such as graphs, trees and learn their uses |
 
 ---
 
 ## Program Outcome Mapping (PO Mapping)
 
-*Note: No PO mapping table is present in the source document.*
+*Note: The source document uses "Y" rather than "X"/"×" to mark applicable outcomes.*
+
+| PO1 | PO2 | PO3 | PO4 | PO5 | PO6 | PO7 | PO8 | PO9 | PO10 | PO11 | PO12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| X | X | | | | | | | | | | X |
 
 ---
 
 ## Course Structure
 
-*Note: The source document presents course contents (labeled "tentative") as a topic outline without explicit per-unit lecture-hour counts.*
-
-| Unit | Topic |
-|---|---|
-| 1 | Introduction: What is an algorithm?; Notation for programs; Proof techniques; Basics review — Sets, Functions, Limits, Simple series |
-| 2 | Fundamentals: Instances and problems, elementary operations; Efficiency; Average and worst-case analysis; Examples |
-| 3 | Asymptotic notation: Introduction; A notation for "the order of"; The omega notation, the 'oh' (O) notation, the theta notation |
-| 4 | Analysis of algorithms: Solving recurrences; Data structures; Arrays, stacks and queues; Records and pointers; Lists, graphs, trees and associative tables; Heaps; Disjoint set structures |
-| 5 | Greedy algorithms: Making change; General characteristics of Greedy algorithms; Graphs MST — Kruskal's and Prim's algorithms; Graphs: shortest paths; Knapsack problem; Scheduling |
-| 6 | Divide-and-Conquer: Multiplying large integers; Binary search; Sorting by merging and quicksort; Finding the median; Matrix multiplication; Exponentiation |
-| 7 | Dynamic programming: Basics of dynamic programming; Rod cutting problem; Chained matrix multiplication; The knapsack problem |
-| 8 | Introduction to probabilistic algorithms — Parallel algorithms |
-| 9 | Introduction to computational complexity |
-| 10 | Approximation Algorithms |
-| **Total** | Not specified in source |
+| Unit | Topic | No. of Lectures |
+|---|---|---|
+| 1. Introduction | (a) What is an algorithm? (b) Notation for programs (c) Proof techniques (d) Basics review: Sets, Functions, Limits, Simple series | 3 |
+| 2. Fundamentals | (a) Instances and problems - elementary operations (b) Efficiency (c) Average and worst-case analysis (d) Examples | 2 |
+| 3. Asymptotic notation | (a) Introduction (b) A notation for "the order of" (c) The omega notation, the 'oh' (O) notation, the theta notation | 2 |
+| 4. Analysis of algorithms | (a) Solving recurrences (b) Data structures (c) Arrays, stacks and queues (d) Records and pointers (e) Lists, graphs, trees and associative tables (f) Heaps (g) Disjoint set structures | 6 |
+| 5. Greedy algorithms | (a) Making change (b) General characteristics of Greedy algorithms (c) Graphs MST - Kruskal's and Prim's algorithms (d) Graphs: shortest paths (e) Knapsack problem (f) Scheduling | 7 |
+| 6. Divide-and-Conquer | (a) Multiplying large integers (b) Binary search (c) Sorting by merging and quicksort (d) Finding the median (e) Matrix multiplication (f) Exponentiation | 4 |
+| 7. Dynamic programming | (a) Basics of dynamic programming (b) Rod cutting problem (c) Chained matrix multiplication (d) The knapsack problem | 7 |
+| 8. Advanced topics | Introduction to probabilistic algorithms, parallel algorithms, introduction to computational complexity, approximation algorithm | 7 |
+| **Total** | | **38** |
 
 ---
 
 ## Weekly Schedule / Lecture Plan
 
-*Note: No weekly schedule with dates is available in the source document. There is a lab assignment each week that tests students' programming as well as algorithm design skills.*
+*Note: No weekly (dated) lecture schedule is available in the source document; only the unit-wise lecture distribution shown above is provided.*
 
 ---
 
 ## Evaluation / Grading Scheme
 
+*(Tentative, as stated in source)*
+
 | Component | Weightage |
 |---|---|
-| Mid Sem | 40 marks |
-| End Sem | 40 marks |
-| Class Participation and Labs | 20% |
-| **Total** | **100** |
+| Mid sem marks | 40% |
+| End sem marks | 40% |
+| Class participation and labs | 20% |
+| **Total** | **100%** |
 
-*Note: This grading policy is labeled "tentative" in the source document. The grade earned by a student will depend on (1) total marks earned in all exams conducted over the entire semester, and (2) active participation in class discussions and labs.*
-
-**Attendance:** There is likely to be an institute-wide attendance policy, which will be applicable to this course and will be announced in due course.
+Each student has to undertake in-semester and final examinations, plus a lab assignment each week testing programming and algorithm design skills. The grade earned depends on total marks earned in all exams conducted over the entire semester, and active participation in class discussions and labs.
 
 ---
 
@@ -103,26 +101,21 @@ Through this course, students can develop the ability to:
 
 1. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, *Introduction to Algorithms*, 3rd Edition, MIT Press.
 
-### Reference Books
-
-*None stated separately in source document.*
-
 ### Online Resources
 
-*None stated in source document.*
+None stated in source document.
 
 ---
 
 ## Program Structure Context
 
-IT216 Design and Analysis of Algorithms is a core course for ICT and CS students in Semester III, with a 3-0-2-4 credit structure including integrated lab work with weekly assignments.
+IT216 is a Core UG course (ICT & CS) offered in the Autumn Semester (AY 2026-27).
 
 ---
 
 ## Additional Notes
 
-- Evaluation process: Each student must undertake in-semester and final examinations, and will be given a grade based on their performance in these examinations. There is also a lab assignment each week that tests programming and algorithm design skills.
-- The course contents and grading policy are both explicitly labeled "tentative" in the source document.
+**Attendance Policy (as stated in source)**: There is likely to be an institute-wide attendance policy, which will be applicable to this course and will be announced in due course.
 
 ---
 
@@ -130,7 +123,7 @@ IT216 Design and Analysis of Algorithms is a core course for ICT and CS students
 
 | Resource | Type | Link |
 |---|---|---|
-| IT216_Design&AnalysisOfAlgo_Autumn24 - Puneet Bhateja.pdf | PDF | [Download IT216_Design&AnalysisOfAlgo_Autumn24 - Puneet Bhateja.pdf](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
+| IT216__2026-27__IT216_Design & Analysis of Algorithms_Autumn26 - Rahul Muthu.pdf | PDF | [Download PDF]({ORIGINAL_URL}) |
 
 ---
 
@@ -138,7 +131,7 @@ IT216 Design and Analysis of Algorithms is a core course for ICT and CS students
 
 | Field | Value |
 |---|---|
-| **Source PDF** | IT216_Design&AnalysisOfAlgo_Autumn24 - Puneet Bhateja.pdf |
-| **Scraped Date** | 2025-07-10 |
+| **Source PDF** | IT216__2026-27__IT216_Design & Analysis of Algorithms_Autumn26 - Rahul Muthu.pdf |
+| **Scraped Date** | 2026-07-23 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **Academic Guidelines** | [DAU Academics](https://daiict.ac.in/academics) |

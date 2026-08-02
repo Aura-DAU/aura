@@ -1,9 +1,15 @@
 /**
- * Structured data returned by the backend calendar tool when a booking
- * or reminder is created. Populated only when chunk.type === "calendar-action"
- * arrives in the SSE stream. Backend M3 (Dhruvam) owns the tool logic.
+ * Structured data carried on the "calendar-action" SSE event. Two variants
+ * share the channel, discriminated by `type`:
+ *   - "booking" (default): a booking/reminder was created — Backend M3 (Dhruvam)
+ *     owns that tool logic; rendered as a confirmation card.
+ *   - "connect_required": the student asked for a calendar action but hasn't
+ *     linked Google Calendar — rendered as an inline "Connect Google Calendar"
+ *     CTA (the GPT/Claude connector pattern). Set by the orchestrator when a
+ *     calendar tool returns calendar_not_connected.
  */
 export interface CalendarActionData {
+  type?: "booking" | "connect_required"
   event_title?: string
   date?: string
   time?: string
@@ -11,6 +17,11 @@ export interface CalendarActionData {
   status?: "confirmed" | "pending" | "failed"
   calendar_link?: string
   description?: string
+  // connect_required variant
+  provider?: string
+  connect_path?: string
+  reason?: string
+  message?: string
 }
 
 export interface ChatMessage {
@@ -36,6 +47,14 @@ export interface Citation {
 export interface ChatThread {
   id: string
   title: string
+  /** Epoch ms of the most recent message; used to group threads by recency in the sidebar. */
+  updatedAt?: number
+  /** Rolling conversation memory: a digest of the turns older than `summaryTurnCount`, maintained by the backend (pipeline.memory) and persisted here so a long chat keeps its context. */
+  summary?: string
+  /** Count of leading messages already folded into `summary`. The client sends only `messages.slice(summaryTurnCount)` (plus `summary`) to the backend. */
+  summaryTurnCount?: number
+  /** Set when this thread was auto-created as the continuation of another on hard context overflow; drives the "Continued from previous conversation" divider. */
+  continuedFromId?: string
 }
 
 export interface StudentProfile {

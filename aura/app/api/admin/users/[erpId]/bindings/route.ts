@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
+import { z } from "zod"
 import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 import { backendUrl } from "@/lib/api/backend"
+
+const bindingSchema = z.object({
+  binding: z.string().min(1).max(512),
+  expires_at: z.string().max(64).nullable().optional(),
+})
 
 export async function GET(
   req: Request,
@@ -30,7 +36,11 @@ export async function GET(
     })
 
     if (!res.ok) {
-      const errText = await res.text()
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to fetch bindings" }, { status: res.status })
+      }
+      const errText = await res.text().catch(() => "")
       return NextResponse.json({ error: errText || "Failed to fetch bindings" }, { status: res.status })
     }
 
@@ -52,12 +62,18 @@ export async function POST(
   }
 
   const { erpId } = await params
-  let body: Record<string, unknown>
+  let rawBody: unknown
   try {
-    body = (await req.json()) as Record<string, unknown>
+    rawBody = await req.json()
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
+
+  const parsed = bindingSchema.safeParse(rawBody)
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid binding payload" }, { status: 400 })
+  }
+  const body = parsed.data
 
   const internalToken = await signInternalJwt({
     role: "admin",
@@ -77,7 +93,11 @@ export async function POST(
     })
 
     if (!res.ok) {
-      const errText = await res.text()
+      // Do not forward raw backend 5xx bodies — they can leak internals.
+      if (res.status >= 500) {
+        return NextResponse.json({ error: "Failed to add binding" }, { status: res.status })
+      }
+      const errText = await res.text().catch(() => "")
       return NextResponse.json({ error: errText || "Failed to add binding" }, { status: res.status })
     }
 

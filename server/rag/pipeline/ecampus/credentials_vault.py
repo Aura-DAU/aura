@@ -1,27 +1,6 @@
-"""
-Encrypted storage for per-user eCampus credentials (Option A from the guide).
-
-This is the single most security-sensitive file in the whole integration —
-it is the only place a student's eCampus password touches AURA's
-infrastructure. Treat changes to this file with the same rigor as anything
-touching auth.
-
-Design choices and why:
-  - Fernet (symmetric AES) encryption at rest, keyed by a secret that lives
-    ONLY in environment/secrets-manager config, never in source control.
-  - Credentials are looked up by the student's AURA-verified erp_id (from
-    the signed internal JWT — see the RBAC guide), never by anything
-    client-supplied.
-  - No plaintext password is ever logged. If you add logging here later,
-    audit it specifically for this.
-  - This module deliberately does NOT cache decrypted passwords in memory
-    beyond the single login() call that needs them.
-
-Before going to production, get sign-off (from whoever owns DAU's data
-protection policy) on storing student portal passwords at all — pushing for
-Option B (proper backend access, no stored passwords) remains the better
-long-term answer; this module exists to unblock a working prototype now.
-"""
+# Encrypted storage for per-user eCampus credentials (Option A from the guide).
+# This is the single most security-sensitive file in the whole integration —
+# long-term answer; this module exists to unblock a working prototype now.
 
 import os
 import json
@@ -53,14 +32,16 @@ DB_PATH = Path(os.environ.get("ECAMPUS_VAULT_DB", "/var/lib/aura/ecampus_credent
 
 
 class CredentialsNotLinked(Exception):
-    """Raised when a student hasn't completed the 'Connect your eCampus
-    account' step yet. The caller should prompt them to link it, not fail
-    silently."""
+    # Raised when a student hasn't completed the 'Connect your eCampus
+    # account' step yet. The caller should prompt them to link it, not fail
+    # silently.
     pass
 
 
 def _connect():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    # mode=0o700 restricts a vault dir AURA creates itself; it does not loosen
+    # (or tighten) an already-existing shared parent such as /tmp.
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     conn = sqlite3.connect(DB_PATH)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS ecampus_credentials (
@@ -85,11 +66,28 @@ def _connect():
     return conn
 
 
-def store_credentials(erp_id: str, ecampus_username: str, ecampus_password: str) -> None:
-    """Called once, during the explicit 'Connect your eCampus account' flow —
-    never inferred or auto-populated from any other source."""
-    blob = json.dumps({"username": ecampus_username, "password": ecampus_password}).encode()
-    encrypted = _get_fernet().encrypt(blob)
+def store_credentials(erp_id: str, ecampus_username: str, ecampus_password) -> None:
+    # Called once, during the explicit 'Connect your eCampus account' flow —
+    # never inferred or auto-populated from any other source.
+    #
+    # SEC-03 fix: `ecampus_password` is a pydantic SecretStr all the way from
+    # the request schema down to here — its repr/str never renders the raw
+    # value, so a stack trace, log line, or OOM dump captured anywhere
+    # between the FastAPI route and this function can't leak it. We only
+    # call get_secret_value() at the last possible moment, immediately
+    # before encrypting, and drop the local plaintext reference right after.
+    plain_password = (
+        ecampus_password.get_secret_value()
+        if hasattr(ecampus_password, "get_secret_value")
+        else ecampus_password
+    )
+    blob = None
+    try:
+        blob = json.dumps({"username": ecampus_username, "password": plain_password}).encode()
+        encrypted = _get_fernet().encrypt(blob)
+    finally:
+        del plain_password
+        blob = None
     with _connect() as conn:
         conn.execute(
             """INSERT INTO ecampus_credentials (erp_id, encrypted_blob, linked_at)
@@ -102,8 +100,8 @@ def store_credentials(erp_id: str, ecampus_username: str, ecampus_password: str)
 
 
 def get_credentials(erp_id: str) -> tuple[str, str]:
-    """Returns (username, password). Raises CredentialsNotLinked if the
-    student hasn't connected their eCampus account yet."""
+    # Returns (username, password). Raises CredentialsNotLinked if the
+    # student hasn't connected their eCampus account yet.
     with _connect() as conn:
         row = conn.execute(
             "SELECT encrypted_blob FROM ecampus_credentials WHERE erp_id = ?",
@@ -120,8 +118,8 @@ def get_credentials(erp_id: str) -> tuple[str, str]:
 
 
 def unlink_credentials(erp_id: str) -> None:
-    """Lets a student revoke AURA's access to their eCampus account at any
-    time — surface this clearly in the UI, not just as a buried API call."""
+    # Lets a student revoke AURA's access to their eCampus account at any
+    # time — surface this clearly in the UI, not just as a buried API call.
     with _connect() as conn:
         conn.execute("DELETE FROM ecampus_credentials WHERE erp_id = ?", (erp_id,))
 
@@ -143,9 +141,9 @@ def is_linked(erp_id: str) -> bool:
 # before access_control.authorize_personal_query() ever runs.
 
 def grant_advisor_consent(student_erp_id: str, faculty_erp_id: str) -> None:
-    """Student-initiated only — never call this from a faculty-facing code
-    path. The UI for this should show the faculty member's name clearly
-    before the student confirms."""
+    # Student-initiated only — never call this from a faculty-facing code
+    # path. The UI for this should show the faculty member's name clearly
+    # before the student confirms.
     with _connect() as conn:
         conn.execute(
             """INSERT INTO advisor_consent (student_erp_id, faculty_erp_id, granted_at)
@@ -174,7 +172,7 @@ def has_advisor_consent(student_erp_id: str, faculty_erp_id: str) -> bool:
 
 
 def list_consented_faculty(student_erp_id: str) -> list[str]:
-    """For the student-facing 'who currently has access to my data' UI."""
+    # For the student-facing 'who currently has access to my data' UI.
     with _connect() as conn:
         rows = conn.execute(
             "SELECT faculty_erp_id FROM advisor_consent WHERE student_erp_id = ?",
@@ -184,7 +182,7 @@ def list_consented_faculty(student_erp_id: str) -> list[str]:
 
 
 def list_consenting_students(faculty_erp_id: str) -> list[str]:
-    """For a faculty member's view: which students have shared data with them."""
+    # For a faculty member's view: which students have shared data with them.
     with _connect() as conn:
         rows = conn.execute(
             "SELECT student_erp_id FROM advisor_consent WHERE faculty_erp_id = ?",

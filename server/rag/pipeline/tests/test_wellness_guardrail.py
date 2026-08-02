@@ -1,23 +1,6 @@
-"""
-Tests for the WellnessGuardrail classifier.
-
-Covers:
-- Distress phrases that must trigger the guardrail (keyword-fallback path).
-- Normal university queries that must NOT trigger it.
-- Edge cases: empty string, whitespace-only.
-- Response content: get_response() returns the fixed contact block.
-
-NOTE: PR #144's original version of this file called `guardrail.is_distress()`
-and `guardrail.wellness_response()`. Neither method exists on WellnessGuardrail
-(the class only defines `check()` / `get_response()` / `_llm_check()` /
-`_fallback_check()`), and aura_chat.py's actual call site uses `check()` /
-`get_response()`. Running the original file would raise AttributeError on
-every test. This version is rewritten against the real API so it can pass.
-
-All tests here exercise `_fallback_check()` directly (not `check()`), the
-same way test_quota_enforcement.py's wellness tests do — this avoids making
-a live Groq API call in CI, matching the project's existing test pattern.
-"""
+# Tests for the WellnessGuardrail classifier.
+# Covers:
+# a live Groq API call in CI, matching the project's existing test pattern.
 
 import sys
 from pathlib import Path
@@ -106,16 +89,56 @@ def test_whitespace_only_does_not_trigger(guardrail):
 
 
 def test_fallback_check_case_insensitive(guardrail):
-    """Pattern matching must be case-insensitive."""
+    # Pattern matching must be case-insensitive.
     assert guardrail._fallback_check("I WANT TO KILL MYSELF") is True
     assert guardrail._fallback_check("I Want To Kill Myself") is True
 
 
 def test_fallback_check_embedded_in_sentence(guardrail):
-    """Trigger phrase embedded mid-sentence must still fire."""
+    # Trigger phrase embedded mid-sentence must still fire.
     assert guardrail._fallback_check(
         "Lately I have been thinking I want to end my life because of pressure"
     ) is True
+
+
+# ---------------------------------------------------------------------------
+# Academic-context suppression.
+# "can't cope / can't take it / can't go on" is everyday coursework idiom.
+# On its own it still routes to the wellness block (see TRIGGER_PHRASES);
+# alongside academic framing it must not, or a routine question gets the
+# crisis block instead of an answer.
+# ---------------------------------------------------------------------------
+ACADEMIC_STRESS_QUERIES = [
+    "I can't cope with this course load, when is the drop deadline?",
+    "I can't take it anymore with this assignment, how do I request an extension?",
+    "I can't cope with the exam schedule — what is the re-exam policy?",
+    "Can't go on with this elective, how do I withdraw from the course?",
+    "I can't take this semester's workload, what is the minimum credit requirement?",
+]
+
+
+@pytest.mark.parametrize("query", ACADEMIC_STRESS_QUERIES)
+def test_academic_context_suppresses_ambiguous_phrase(guardrail, query):
+    assert guardrail._fallback_check(query) is False, (
+        f"Expected no distress trigger for academic query: {query!r}"
+    )
+
+
+UNAMBIGUOUS_WITH_ACADEMIC_CONTEXT = [
+    "I want to kill myself over this exam",
+    "I failed the course and I want to die",
+    "This semester made me suicidal",
+    "I have been cutting myself since the assignment deadline",
+]
+
+
+@pytest.mark.parametrize("query", UNAMBIGUOUS_WITH_ACADEMIC_CONTEXT)
+def test_academic_context_never_suppresses_explicit_distress(guardrail, query):
+    # Suppression applies only to the ambiguous patterns. An explicit statement
+    # of self-harm must fire regardless of surrounding coursework wording.
+    assert guardrail._fallback_check(query) is True, (
+        f"Expected distress trigger despite academic context: {query!r}"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -128,7 +151,7 @@ def test_get_response_is_nonempty_string(guardrail):
 
 
 def test_get_response_contains_contact_info(guardrail):
-    """Wellness response must contain at least one real contact."""
+    # Wellness response must contain at least one real contact.
     response = guardrail.get_response()
     assert any(
         contact in response

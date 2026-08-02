@@ -1,39 +1,94 @@
 import re
 
+from pipeline.token_budget import TokenBudget
+
+
 class ContextBuilder:
 
-    # Fix G (original): cap context to avoid LLM truncation.
-    # Fix Bug4: raised from 2000 → 3000 tokens. The original 2000-token cap
-    # was too tight: a BS-MS admissions page has a long eligibility section
-    # before the Fees Structure, so the fee chunk (chunk #3-4) was being
-    # silently dropped when added after the eligibility chunks already consumed
-    # ~1800 tokens. 3000 gives headroom for fee + scholarship + other data
-    # while staying well under model context limits (system prompt ~450 +
-    # history ~500 + 3000 context = ~3950 tokens, safe for all hosted models).
-    MAX_CONTEXT_TOKENS = 3000
+    # Retrieved-context cap is read per-call from TokenBudget
+    # (AURA_MAX_CONTEXT_TOKENS, default 1400) rather than held as a class
+    # constant, so a runtime max_model_len change is picked up without a
+    # redeploy. Sized for the near-term max_model_len≈4096 cutover and for
+    # KV-cache concurrency — eight concurrent ~5k-token RAG prompts previously
+    # drove KV to 92% and blew short-query p95 13×. Do not raise this just
+    # because the live window is still 8192.
+
+    @staticmethod
+    def _rule_year_from_metadata(metadata: dict) -> str:
+        """Prefer title/path academic labels over ingest scraped_date years.
+
+        Club Committee Data 24-25 was being labeled rule_year=2026 because
+        document_year was taken from scraped_date. Title/filename win here
+        even for already-indexed chunks that still carry the bad year.
+        """
+        # Local import keeps this file free of package-path coupling for tests
+        # that import ContextBuilder without the full ingestion package.
+        try:
+            from pipeline.ingestion.chunking.metadata_extractors import (
+                normalize_academic_year_label,
+            )
+        except ImportError:
+            normalize_academic_year_label = None  # type: ignore[assignment]
+
+        title = str(metadata.get("title") or "")
+        source_file = str(metadata.get("source_file") or metadata.get("relative_path") or "")
+        academic = metadata.get("academic_year")
+        candidates = [academic, title, source_file]
+        if normalize_academic_year_label:
+            for raw in candidates:
+                label = normalize_academic_year_label(raw)
+                if label:
+                    return label
+        # Fallback: full 20xx-yy in title only (legacy behaviour).
+        year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title)
+        if year_match:
+            return year_match.group(1).replace("\u2013", "-")
+        # Never surface a bare scraped calendar year as rule_year when the
+        # title clearly encodes a short academic year (e.g. "24-25").
+        short = re.search(r"(?<!\d)(\d{2})[-\u2013](\d{2})(?!\d)", title)
+        if short:
+            start = int(short.group(1))
+            end = int(short.group(2))
+            if 15 <= start <= 35 and end == (start + 1) % 100:
+                return f"20{start:02d}-{short.group(2)}"
+        doc_year = metadata.get("document_year", "")
+        return str(doc_year) if doc_year else ""
 
     def _estimate_tokens(self, text: str) -> int:
-        """Rough token estimate: word count × 1.3 (accounts for sub-word splits)."""
-        return int(len(text.split()) * 1.3)
+        # Delegate to TokenBudget so retrieval and generation share one
+        # conservative estimator (≈3.5 chars/token, over-counts on English).
+        # The previous words×1.3 heuristic under-counted the live Qwen tokenizer
+        # by ~15% on the system prompt and would silently over-admit chunks.
+        return TokenBudget.from_env(discover=False).estimate_tokens(text)
 
-    def build(self, chunks, retrieval_intent="general"):
+    def build(self, chunks, retrieval_intent="general", requires_complete_list=False):
 
         documents = []
 
         sources = []
-        seen_urls = set()
+        seen_urls = {}
+        # doc id (the `id` attribute the LLM cites) → index into `sources`.
+        # Not the identity map: several chunks can dedup onto one source, and
+        # a chunk whose source was already seen still gets its own doc id. So
+        # sources[i] does NOT correspond to <doc id="i+1"> and callers must
+        # resolve cited ids through this map rather than by position.
+        citation_map = {}
 
         context_tokens_used = 0
+        budget = TokenBudget.from_env(discover=False)
+        base_cap = budget.config.max_retrieved_context_tokens
 
-        # Fix CB3: for policy_version queries, raise the token budget so that
-        # version history sections — which often appear at the end of a long
-        # policy document — are not dropped by the budget cap before they are
-        # included in the context. 4000 tokens is still safe for all models
-        # (system ~450 + history ~500 + 4000 = ~4950 tokens).
-        effective_max_tokens = (
-            4000 if retrieval_intent == "policy_version"
-            else self.MAX_CONTEXT_TOKENS
-        )
+        # policy_version / complete-list queries used to widen to a hard-coded
+        # 4000, which cannot fit under max_model_len≈4096 with a real system
+        # prompt + 1024 reserved output. Allow a modest 25% bump, still clamped
+        # to whatever input budget the live window actually leaves.
+        if retrieval_intent == "policy_version" or requires_complete_list:
+            effective_max_tokens = min(
+                int(base_cap * 1.25),
+                max(base_cap, budget.config.max_input_tokens // 2),
+            )
+        else:
+            effective_max_tokens = base_cap
 
         for idx, chunk in enumerate(
             chunks,
@@ -44,16 +99,12 @@ class ContextBuilder:
 
             chunk_text = metadata.get("text", "")
 
-            # Fix CB1: token estimate previously only included title/h1/h2 in
-            # xml_attrs, underestimating the real XML overhead (12 attributes +
-            # tag structure ≈ 250 chars). Estimate now covers the full document
-            # string so the token budget is accurate and chunks aren't silently
-            # over-admitted.
-            xml_overhead_words = 50  # ~250 chars / avg 5 chars-per-word
-            estimated_tokens = self._estimate_tokens(chunk_text) + xml_overhead_words
+            # Estimate the full rendered <doc> (12 attributes + tags ≈ 250 chars
+            # ≈ 72 tokens at 3.5 chars/token), not just the body.
+            estimated_tokens = self._estimate_tokens(chunk_text) + 72
 
-            # Fix G: enforce token budget — skip lower-ranked chunks that
-            # would push us over the limit.
+            # Enforce token budget — stop at the first lowest-ranked chunk that
+            # would push us over. Chunks are already in rank order (best first).
             if context_tokens_used + estimated_tokens > effective_max_tokens and idx > 1:
                 break
 
@@ -64,17 +115,11 @@ class ContextBuilder:
             # ("compare BTech ICT vs BS-MS fees") where two chunks about
             # different programs would otherwise look identical to the model.
             # Fix #9: internal reranked_score is still omitted from the XML.
-            # Fix CB4: rule_year extracted from title heuristically
-            # (e.g. "Academic Requirements PhD wef 2024-25" → "2024-25")
-            # and added as an XML attribute. This lets the LLM explicitly see
-            # which year's document it is reading and cite the year correctly.
-            # Fix CB5: moved `import re` to the top of the file (was imported
-            # inside this loop on every chunk iteration, which is unnecessary).
+            # Fix CB4 / CB4b: rule_year from title/filename academic label —
+            # never prefer scraped_date-derived document_year when the title
+            # encodes a real roster year (24-25, 2025-26, 2026-27).
             title_str = metadata.get("title", "")
-            doc_rule_year = metadata.get("document_year", "")
-            if not doc_rule_year:
-                year_match = re.search(r"(20\d{2}[-\u2013]\d{2,4})", title_str)
-                doc_rule_year = year_match.group(1) if year_match else ""
+            doc_rule_year = self._rule_year_from_metadata(metadata)
 
             start_line_val = metadata.get("start_line", "")
             end_line_val = metadata.get("end_line", "")
@@ -115,18 +160,20 @@ scraped_date="{metadata.get('scraped_date', '')}"
             # this chunk was drawn from.
             dedup_key = url or relative_path or title_str
 
-            if dedup_key and dedup_key not in seen_urls:
+            if dedup_key:
+                if dedup_key not in seen_urls:
+                    seen_urls[dedup_key] = len(sources)
 
-                sources.append({
-                    "title": metadata.get("title"),
-                    "url": url or None,
-                    "path": relative_path or None,
-                    "start_line": start_line_val or None,
-                    "end_line": end_line_val or None,
-                    "cluster": metadata.get("cluster")
-                })
+                    sources.append({
+                        "title": metadata.get("title"),
+                        "url": url or None,
+                        "path": relative_path or None,
+                        "start_line": start_line_val or None,
+                        "end_line": end_line_val or None,
+                        "cluster": metadata.get("cluster")
+                    })
 
-                seen_urls.add(dedup_key)
+                citation_map[idx] = seen_urls[dedup_key]
 
         context = (
             "<context>\n"
@@ -134,7 +181,16 @@ scraped_date="{metadata.get('scraped_date', '')}"
             + "\n</context>"
         )
 
+        print("\n" + "=" * 60)
+        print("===== CONTEXT BUILDER (FINAL CONTEXT TO LLM) =====")
+        print(f"Selected Chunks Count: {len(documents)}")
+        print(f"Estimated Context Tokens Used: {context_tokens_used} / {effective_max_tokens}")
+        for idx, src in enumerate(sources, start=1):
+            print(f"{idx}. title={src.get('title')} | file={src.get('path')} | url={src.get('url')}")
+        print("=" * 60)
+
         return {
             "context": context,
-            "sources": sources
+            "sources": sources,
+            "citation_map": citation_map
         }

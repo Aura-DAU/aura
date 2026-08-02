@@ -1,0 +1,111 @@
+# AURA Distributed Cluster — Node 4 (Search & Vector Engine)
+# Services: Qdrant Vector DB & Standalone Embedding/Reranker Microservice
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Publish on the private LAN bind only in production (set NODE4_PUBLISH_BIND
+    # to the node LAN IP). Default 0.0.0.0 requires a host firewall that denies
+    # public internet access to 6333/6334/8001.
+    ports:
+      - "${NODE4_PUBLISH_BIND:-0.0.0.0}:6333:6333"
+      - "${NODE4_PUBLISH_BIND:-0.0.0.0}:6334:6334"
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    networks:
+      - aura-search-net
+
+  embedding-reranker:
+    build:
+      context: ../../services/embedding-reranker
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "${NODE4_PUBLISH_BIND:-0.0.0.0}:8001:8001"
+    volumes:
+      # Persist HF model weights across recreates (first download is large).
+      - embedding-hf-cache:/home/appuser/.cache/huggingface
+    environment:
+      - EMBEDDING_MODEL_NAME=${EMBEDDING_MODEL_NAME:-BAAI/bge-m3}
+      - RERANKER_MODEL_NAME=${RERANKER_MODEL_NAME:-BAAI/bge-reranker-v2-m3}
+      - RERANKER_DEVICE=${RERANKER_DEVICE:-cuda}
+      - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
+      - MAX_CONCURRENT_INFERENCE=${MAX_CONCURRENT_INFERENCE:-2}
+      - MAX_REQUEST_BYTES=${MAX_REQUEST_BYTES:-1048576}
+    # Compose v5 was ignoring deploy.resources.devices (DeviceRequests=null),
+    # so the container had no /dev/nvidia* despite a working host toolkit.
+    # `gpus: all` is the reliable attach path; keep deploy. for swarm/docs parity.
+    gpus: all
+    # Requires NVIDIA Container Toolkit on the host
+    # (`nvidia-ctk runtime configure --runtime=docker`).
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8001/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      # First boot downloads embedding + reranker weights.
+      start_period: 300s
+    networks:
+      - aura-search-net
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Bind to localhost on Node 4 — scrape from the LAN, not the public internet.
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - aura-search-net
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Ops UI — localhost only; tunnel/SSH for remote access.
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ../monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
+      - ../monitoring/grafana-dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml:ro
+      # JSON dashboards on a separate path from the provider YAML mount.
+      - ../monitoring/dashboards:/etc/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+    networks:
+      - aura-search-net
+
+networks:
+  aura-search-net:
+
+volumes:
+  qdrant-storage:
+  embedding-hf-cache:
+  prometheus-data:
+  grafana-data:

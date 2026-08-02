@@ -1,22 +1,4 @@
-"""
-access_control.py — Full RBAC policy gate (B2-AUTH-4).
-
-Two public surfaces:
-  1. resolve_effective_role(identity, db) → str
-     Maps the JWT's broad role (student/faculty/admin) to the most elevated
-     fine-grained role based on role_bindings. Used by:
-       - Pushkar's DLS Pinecone filter (builds the allowed-set from this)
-       - AccessControlGate (determines which evaluation path to take)
-
-  2. AccessControlGate.evaluate(identity, query_intent, target_identifier)
-     The main per-request authorization decision. Returns AccessResult.
-
-Role hierarchy (fine-grained):
-  public < student < faculty_general < faculty_coord < faculty_convenor_ug/pg
-                                                      < dean_* (parallel)
-                                                      < registrar (parallel)
-                                                      < superadmin (top)
-"""
+# Full RBAC policy gate — ROLE_ALLOWED_SETS for DLS + resolve_effective_role().
 
 from __future__ import annotations
 from dataclasses import dataclass, field
@@ -70,17 +52,15 @@ def _is_pg(program_id: str) -> bool:
 
 # ── resolve_effective_role ─────────────────────────────────────────────────
 def resolve_effective_role(identity, db_module=None) -> str:
-    """
-    Resolves the JWT's broad role → most elevated fine-grained effective role.
-
-    Called by:
-      • retrieval_pipeline.py (Pushkar) to build the Pinecone filter set
-      • AccessControlGate to pick the right evaluation path
-
-    Returns one of the keys in ROLE_ALLOWED_SETS.
-    """
+    # Resolves the JWT's broad role → most elevated fine-grained effective role.
+    # Called by:
+    # Returns one of the keys in ROLE_ALLOWED_SETS.
     if identity.role == "student":
         return "student"
+    # Guests have no role_bindings rows — skip the DB round-trip used for
+    # faculty/admin elevation. Maps to public DLS via get_allowed_roles().
+    if identity.role == "guest":
+        return "guest"
 
     if db_module is None:
         import db.connection as db_module  # noqa: PLC0415
@@ -186,7 +166,7 @@ class AccessControlGate:
         return AccessResult(AccessDecision.DENIED, f"unrecognised role: {identity.role!r}")
 
     def _evaluate_elevated_access(self, identity, target_identifier: str) -> AccessResult:
-        """Handles all faculty and admin sub-roles."""
+        # Handles all faculty and admin sub-roles.
         bindings = self._get_bindings(identity.erp_id)
         effective = resolve_effective_role(identity, self._db)
 
@@ -253,6 +233,25 @@ class AccessControlGate:
                         scope_context=f"coordinator:{program_id}",
                     )
 
+        # ── Course instructor binding: course_instructor:{code} ────────────
+        instructor_courses = [
+            b.split(":", 1)[1]
+            for b in bindings
+            if b.startswith("course_instructor:")
+        ]
+        if instructor_courses:
+            shared_via_binding = self.erp.get_shared_courses(identity.erp_id, target_identifier)
+            allowed_codes = [c for c in instructor_courses if c in shared_via_binding]
+            if allowed_codes:
+                return AccessResult(
+                    AccessDecision.ALLOWED,
+                    f"course instructor binding for {allowed_codes}",
+                    allowed_roll_numbers=[target_identifier],
+                    scope_type="course",
+                    course_codes=allowed_codes,
+                    scope_context=f"course_instructor:{','.join(allowed_codes)}",
+                )
+
         # ── Standard faculty: advisee, shared course, class advisor ─────────
         if self.erp.is_advisee(identity.erp_id, target_identifier):
             return AccessResult(
@@ -287,7 +286,7 @@ class AccessControlGate:
         )
 
     def _evaluate_aggregate(self, identity) -> AccessResult:
-        """AGGREGATE queries — anonymized class-level stats."""
+        # AGGREGATE queries — anonymized class-level stats.
         if identity.role == "student":
             return AccessResult(AccessDecision.DENIED, "students may not request aggregate statistics")
 

@@ -3,13 +3,9 @@ import yaml
 
 def extract_frontmatter(content):
 
-    """
-    Extract YAML frontmatter from markdown files.
-
-    Returns:
-        metadata (dict)
-        body (str)
-    """
+    # Extract YAML frontmatter from markdown files.
+    # Returns:
+    # body (str)
 
     content = content.lstrip("\ufeff").replace("\r\n", "\n")
 

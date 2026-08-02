@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import time
 
 from dotenv import load_dotenv
@@ -935,11 +936,125 @@ How many core courses are in the first semester of M.Tech EC (2022-23)?
   "query_decomposition": null,
   "retrieval_hints": {
     "required_sections": ["Core Courses", "Semester I", "Curriculum"]
-  }
-}
-
 If no specific year is mentioned in the question, omit "rule_year" entirely.
 """
+
+SEMESTER_MAP = {
+    "1": 1, "i": 1, "1st": 1, "first": 1,
+    "2": 2, "ii": 2, "2nd": 2, "second": 2,
+    "3": 3, "iii": 3, "3rd": 3, "third": 3,
+    "4": 4, "iv": 4, "4th": 4, "fourth": 4,
+    "5": 5, "v": 5, "5th": 5, "fifth": 5,
+    "6": 6, "vi": 6, "6th": 6, "sixth": 6,
+    "7": 7, "vii": 7, "7th": 7, "seventh": 7,
+    "8": 8, "viii": 8, "8th": 8, "eighth": 8,
+}
+ROMAN_SEMESTER_MAP = {
+    1: "I", 2: "II", 3: "III", 4: "IV",
+    5: "V", 6: "VI", 7: "VII", 8: "VIII"
+}
+
+def canonicalize_informal_semester(query: str, entities: dict) -> dict:
+    """Parse informal semester references ('sem V', 'sem 5', '5th sem', 'fifth sem', 'semester 5') into integer (1..8) & section titles."""
+    if not query:
+        return entities
+    pat = re.compile(
+        r"\b(?:sem(?:ester)?\s*([1-8]|i{1,3}|iv|v|vi{0,3}|vii{0,2}|viii|1st|2nd|3rd|[4-8]th|first|second|third|fourth|fifth|sixth|seventh|eighth))\b|"
+        r"\b([1-8]|1st|2nd|3rd|[4-8]th|first|second|third|fourth|fifth|sixth|seventh|eighth)\s*sem(?:ester)?\b",
+        re.IGNORECASE
+    )
+    m = pat.search(query)
+    if m:
+        val = (m.group(1) or m.group(2) or "").lower().strip()
+        sem_num = SEMESTER_MAP.get(val)
+        if sem_num:
+            roman_sem = ROMAN_SEMESTER_MAP.get(sem_num, str(sem_num))
+            entities["semester"] = sem_num
+            entities["semester_roman"] = roman_sem
+            req_sec = entities.setdefault("required_sections", [])
+            sec_variants = [f"Semester {roman_sem}", f"Semester {sem_num}", f"Semester {roman_sem} Curriculum"]
+            for sec in sec_variants:
+                if sec not in req_sec:
+                    req_sec.append(sec)
+    return entities
+
+
+def rewrite_personalized_academic_query(query: str, academic_scope=None, identity=None) -> str:
+    """Rewrite personalized academic queries ('my program', 'my electives') into explicit program strings using student identity."""
+    if not query:
+        return query
+    q_lower = query.lower()
+    
+    # Check for personal program references
+    personal_prog_triggers = [
+        "my program", "my programme", "my branch", "my course", "my curriculum",
+        "my credit structure", "my electives", "my degree", "my subjects"
+    ]
+    
+    if any(t in q_lower for t in personal_prog_triggers):
+        program_name = None
+        if academic_scope and getattr(academic_scope, "programme_id", None):
+            program_name = academic_scope.programme_id
+        elif identity:
+            program_name = (
+                getattr(identity, "program", None)
+                or getattr(identity, "programme", None)
+                or getattr(identity, "dept", None)
+                or getattr(identity, "branch", None)
+            )
+
+        # Never invent a default programme — that would silently answer MnC/EVD
+        # students with ICT curriculum and also bypass academic_scope abstention.
+        if not program_name:
+            return query
+
+        # Clean program name (e.g. 'B.Tech. (ICT)' -> 'ICT', 'btech-ict' -> 'btech ict')
+        prog_clean = (
+            program_name.replace("B.Tech.", "")
+            .replace("M.Tech.", "")
+            .replace("(", "")
+            .replace(")", "")
+            .replace("-", " ")
+            .strip()
+            or program_name
+        )
+
+        rewritten = query
+        for trigger in personal_prog_triggers:
+            if trigger in q_lower:
+                rewritten = re.sub(
+                    re.escape(trigger),
+                    f"the {prog_clean} program",
+                    rewritten,
+                    flags=re.IGNORECASE,
+                )
+                break
+        if "dau" not in rewritten.lower() and "dhirubhai ambani" not in rewritten.lower():
+            rewritten += " at Dhirubhai Ambani University (DAU)"
+        return rewritten
+        
+    return query
+
+
+def resolve_continuation_query(query: str, history: list = None) -> str:
+    """Rewrite continuation prompts ('continue', 'more', 'which one is the biggest', 'Semester 4?') using the previous user topic in history."""
+    if not query or not history:
+        return query
+    q_clean = query.strip().lower().rstrip(".!?")
+    continuation_keywords = {
+        "continue", "more", "go on", "tell me more", "expand on that", "keep going", "what else",
+        "which one is the biggest", "which one is biggest", "which ones", "how many",
+        "semester 4?", "semester 4", "faculty?", "faculty", "credits?", "credits", "prerequisites?", "prerequisites"
+    }
+    
+    is_continuation = q_clean in continuation_keywords or q_clean.startswith(("which one", "what about", "and for"))
+    
+    if is_continuation:
+        last_user = next((h["content"] for h in reversed(history) if h.get("role") == "user" and h.get("content")), "")
+        if last_user:
+            return f"{last_user} — follow up: {query}"
+    return query
+
 
 class QueryPlanner:
 
@@ -952,7 +1067,40 @@ class QueryPlanner:
             os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
-    def plan(self, query):
+    def plan(self, query, academic_scope=None, history=None, identity=None):
+        effective_query = resolve_continuation_query(query, history)
+        effective_query = rewrite_personalized_academic_query(effective_query, academic_scope, identity)
+
+        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
+        try:
+            from institution_resolver import get_institution_resolver
+            resolver = get_institution_resolver()
+            effective_query = resolver.resolve(effective_query)
+        except Exception as e:
+            pass
+
+        # Implicit DAU Context Injection: Ensure university context is explicit for retrieval
+        if "dau" not in effective_query.lower() and "dhirubhai" not in effective_query.lower():
+            effective_query += " (DAU Dhirubhai Ambani University context)"
+        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
+        try:
+            from institution_resolver import get_institution_resolver
+            resolver = get_institution_resolver()
+            effective_query = resolver.resolve(effective_query)
+        except Exception as e:
+            # Fail open: institution resolver is an optional enrichment layer.
+            # If it fails, continue planning with the unmodified query.
+            print(f"[QueryPlanner] Institution resolver unavailable; continuing without resolver: {e}")
+
+        scope_hint = ""
+        if academic_scope is not None:
+            scope_hint = (
+                "\nVerified student context (relevance only; never override it): "
+                f"programme={academic_scope.programme_id}, "
+                f"degree_level={academic_scope.degree_level}, "
+                f"admission_year={academic_scope.admission_year}, "
+                f"semester={academic_scope.current_semester}.\n"
+            )
 
         def _execute_plan(client):
             return client.chat.completions.create(
@@ -971,9 +1119,10 @@ class QueryPlanner:
                     },
                     {
                         "role": "user",
-                        "content": query
+                        "content": scope_hint + "\nUser query: " + effective_query
                     }
-                ]
+                ],
+                extra_body=InferenceRouter.no_think_extra_body(),
             )
 
         response = InferenceRouter.call_with_rotation(_execute_plan, max_retries=5)
@@ -982,10 +1131,7 @@ class QueryPlanner:
             raise RuntimeError("Failed to generate plan due to API errors.")
 
         content = (
-            response
-            .choices[0]
-            .message
-            .content
+            (response.choices[0].message.content or "")
             .strip()
         )
 
@@ -993,6 +1139,7 @@ class QueryPlanner:
             
             plan = json.loads(content)
             plan.setdefault("entities", {})
+            canonicalize_informal_semester(query, plan["entities"])
             plan.setdefault("retrieval_hints", {})
             plan.setdefault("top_k", 5)
             plan.setdefault(

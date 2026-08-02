@@ -1,7 +1,2 @@
-packages:
-  - "."
-
-# pnpm 10 stores build-script approvals here; pnpm 9 requires `packages`.
-onlyBuiltDependencies:
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  sharp: set this to true or false

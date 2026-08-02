@@ -1,23 +1,6 @@
-"""
-Wellness guardrail — detects signs of distress in a query BEFORE it reaches
-answer_generator / the RAG pipeline, and routes to a fixed, human-reviewed
-wellness-contact block instead of a generated answer.
-
-This is deliberately NOT an LLM-generated response for the distress case
-itself — the contact block is fixed and human-reviewed so AURA never
-improvises in a safety-critical moment. The LLM call here is used only to
-CLASSIFY (distress / not distress), matching query_guardrail.py's pattern.
-
-Fails OPEN for the classification step (same as QueryGuardrail.is_safe):
-if the guardrail LLM is unavailable, we do not silently swallow a
-potentially distressed message — we fall back to a lightweight keyword
-check so we never regress to "no safety net at all".
-
-NOTE ON API: aura_chat.py calls `check(query)` / `get_response()` — keep
-these two names stable. (PR #144 introduced a second, incompatible call
-site using `is_distress()` / `wellness_response()` that does not exist on
-this class; that hunk was intentionally NOT applied — see review notes.)
-"""
+# Wellness guardrail — detects signs of distress in a query BEFORE it reaches
+# answer_generator / the RAG pipeline, and routes to a fixed, human-reviewed
+# this class; that hunk was intentionally NOT applied — see review notes.)
 
 import os
 import re
@@ -64,22 +47,47 @@ Please reach out to one of the contacts above.
 # that a keyword list cannot. Do not expand this list as a substitute
 # for the LLM — fix the LLM integration instead.
 # ---------------------------------------------------------------------------
-_FALLBACK_DISTRESS_PATTERNS: list[str] = [
+_FALLBACK_UNCONDITIONAL_PATTERNS: list[str] = [
     r"\bsuicid",
     r"\bkill\s+my\s*self\b",
     r"\bend\s+(my\s+)?(life|it\s+all)\b",
     r"\bself[\s\-]?harm",
     r"\bhurt(ing)?\s+my\s*self\b",
-    r"\bcut\s+my\s*self\b",
+    r"\bcut(ting)?\s+my\s*self\b",
     r"\bwant\s+to\s+die\b",
     r"\bno\s+reason\s+to\s+live\b",
-    r"\bcan['\u2019]?t\s+(take(\s+it)?|go\s+on|cope)(\s+anymore)?\b",
     r"\bdon['\u2019]?t\s+want\s+to\s+(live|be\s+alive)\b",
 ]
 
-_FALLBACK_COMPILED: list[re.Pattern[str]] = [
-    re.compile(p, re.IGNORECASE | re.UNICODE) for p in _FALLBACK_DISTRESS_PATTERNS
+# Everyday academic-stress idiom that also reads as distress in isolation.
+# Kept in the fallback, but suppressed when the query carries academic framing
+# \u2014 see _fallback_check.
+_FALLBACK_CONTEXTUAL_PATTERNS: list[str] = [
+    r"\bcan['\u2019]?t\s+(take(\s+it)?|go\s+on|cope)(\s+anymore)?\b",
 ]
+
+_FALLBACK_DISTRESS_PATTERNS: list[str] = (
+    _FALLBACK_UNCONDITIONAL_PATTERNS + _FALLBACK_CONTEXTUAL_PATTERNS
+)
+
+
+def _compile(patterns: list[str]) -> list[re.Pattern[str]]:
+    return [re.compile(p, re.IGNORECASE | re.UNICODE) for p in patterns]
+
+
+_FALLBACK_UNCONDITIONAL_COMPILED = _compile(_FALLBACK_UNCONDITIONAL_PATTERNS)
+_FALLBACK_CONTEXTUAL_COMPILED = _compile(_FALLBACK_CONTEXTUAL_PATTERNS)
+_FALLBACK_COMPILED: list[re.Pattern[str]] = _compile(
+    _FALLBACK_DISTRESS_PATTERNS
+)
+
+_ACADEMIC_CONTEXT = re.compile(
+    r"\b(assignment|deadline|submission|exam|quiz|midsem|endsem|syllabus|"
+    r"workload|course|credit|elective|semester|registration|attendance|"
+    r"fee|hostel|mess|timetable|lab|project|placement|internship|"
+    r"drop|withdraw|backlog|grade|cgpa|spi|cpi)\b",
+    re.IGNORECASE | re.UNICODE,
+)
 
 # ---------------------------------------------------------------------------
 # LLM system prompt for the classifier call.
@@ -99,47 +107,38 @@ explanation.
 
 
 class WellnessGuardrail:
-    """
-    LLM-based distress classifier with a keyword-regex fallback.
-
-    Primary path — Groq LLM call: handles nuanced, paraphrased, and
-    non-obvious distress signals that a keyword list misses.
-    Fallback path — regex keyword check: fires only when the Groq API is
-    unavailable so there is always some safety net.
-
-    Usage in aura_chat.py::
-
-        from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
-
-        self.wellness_guardrail = WellnessGuardrail()
-
-        # Inside chat() — before answer_generator runs:
-        if self.wellness_guardrail.check(query):
-            return {
-                "answer": self.wellness_guardrail.get_response(),
-                "sources": [],
-                "is_personal_data": False,
-                "is_wellness_response": True,
-            }
-    """
+    # LLM-based distress classifier with a keyword-regex fallback.
+    # Primary path — Groq LLM call: handles nuanced, paraphrased, and
+    # }
 
     def __init__(self) -> None:
-        self.client = InferenceRouter.get_client()
-        # llama-3.3-70b-versatile: fast, instruction-following, available on Groq.
         # Override via VLLM_WELLNESS_MODEL env var if needed.
-        self.model = os.getenv("VLLM_WELLNESS_MODEL", os.getenv("GROQ_WELLNESS_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        # Falls back to VLLM_MODEL (the pool's served id) before the hardcoded
+        # default, matching every other call site. Without that link this
+        # guardrail asked for a model the pool doesn't serve, 404'd, and
+        # silently degraded to the keyword fallback on every request.
+        self.model = os.getenv(
+            "VLLM_WELLNESS_MODEL",
+            os.getenv(
+                "GROQ_WELLNESS_MODEL",
+                os.getenv("VLLM_MODEL", "Qwen/Qwen3-32B-AWQ"),
+            ),
+        )
 
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
 
     def check(self, query: str) -> bool:
-        """
-        Return True if the query should be routed to the wellness block.
+        if not query:
+            return False
 
-        Tries the LLM classifier first; falls back to keyword regex if
-        the API call fails for any reason.
-        """
+        # Bypass wellness check for pure student profile queries and greetings to eliminate false positives
+        from personal_query_classifier import is_pure_profile_query
+        from pipeline.aura_chat import is_greeting_or_meta
+        if is_pure_profile_query(query) or is_greeting_or_meta(query):
+            return False
+
         try:
             return self._llm_check(query)
         except Exception as exc:
@@ -149,7 +148,7 @@ class WellnessGuardrail:
             return self._fallback_check(query)
 
     def get_response(self) -> str:
-        """Return the fixed, human-reviewed wellness contact block."""
+        # Return the fixed, human-reviewed wellness contact block.
         return WELLNESS_CONTACT_BLOCK
 
     # ------------------------------------------------------------------
@@ -157,18 +156,33 @@ class WellnessGuardrail:
     # ------------------------------------------------------------------
 
     def _llm_check(self, query: str) -> bool:
-        response = self.client.chat.completions.create(
-            model=self.model,
-            temperature=0.0,
-            max_tokens=5,
-            messages=[
-                {"role": "system", "content": _SYSTEM_PROMPT},
-                {"role": "user", "content": query},
-            ],
-        )
+        model = self.model
+
+        def _execute(client):
+            return client.chat.completions.create(
+                model=model,
+                temperature=0.0,
+                max_tokens=5,
+                messages=[
+                    {"role": "system", "content": _SYSTEM_PROMPT},
+                    {"role": "user", "content": query},
+                ],
+                extra_body=InferenceRouter.no_think_extra_body(),
+            )
+
+        response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
         result = response.choices[0].message.content.strip().upper()
         # Guard against the model echoing "NOT_DISTRESS" which contains "DISTRESS"
         return result == "DISTRESS"
 
     def _fallback_check(self, query: str) -> bool:
-        return any(p.search(query) for p in _FALLBACK_COMPILED)
+        if any(p.search(query) for p in _FALLBACK_UNCONDITIONAL_COMPILED):
+            return True
+        # "I can't cope with this course load, when is the drop deadline?" is a
+        # routine academic query. Firing the crisis block on it swallows the
+        # answer entirely, so ambiguous phrasings count as distress only when
+        # nothing in the query frames it as coursework. Unconditional patterns
+        # above are checked first and are never suppressed.
+        if any(p.search(query) for p in _FALLBACK_CONTEXTUAL_COMPILED):
+            return _ACADEMIC_CONTEXT.search(query) is None
+        return False

@@ -14,6 +14,21 @@ from dotenv import load_dotenv
 from pipeline.key_manager import KeyManager
 from ..personal_data.audit import audit_log
 
+
+def _identity_payload(identity):
+    if identity is None:
+        return {}
+    if isinstance(identity, dict):
+        return identity
+    return getattr(identity, "as_dict", lambda: {})()
+
+
+def _identity_role(identity) -> str | None:
+    payload = _identity_payload(identity)
+    if not payload:
+        return None
+    return payload.get("role")
+
 load_dotenv()
 
 _retrieval = None
@@ -57,8 +72,17 @@ complaint. Using ONLY the retrieved hostel policy/contact context:
 """
 
 
-def _run_checklist(query: str, system_prompt: str, user_message: str) -> dict:
-    result = _get_retrieval_pipeline().get_context(query, user_role="student")
+def _run_checklist(query: str, system_prompt: str, user_message: str, request_context=None) -> dict:
+    academic_scope = getattr(request_context, "academic_scope", None) if request_context else None
+    pipeline = _get_retrieval_pipeline()
+    try:
+        result = pipeline.get_context(
+            query,
+            user_role="student",
+            academic_scope=academic_scope,
+        )
+    except TypeError:
+        result = pipeline.get_context(query, user_role="student")
     context = result.get("context", "")
     sources = result.get("sources", [])
 
@@ -91,30 +115,57 @@ def _run_checklist(query: str, system_prompt: str, user_message: str) -> dict:
 
 
 # ── certificate_request_guidance ────────────────────────────────────────────
-def handle_certificate_request_guidance(identity, document_type: str = "", **kwargs) -> dict:
+def handle_certificate_request_guidance(identity, document_type: str = "", request_context=None, **kwargs) -> dict:
     """Advisory-only checklist for requesting bonafide / transcript / ID-card. No writes."""
-    if not identity or identity.get("role") not in ("student", "guest"):
+    role = _identity_role(identity)
+    if role not in ("student", "guest"):
         raise PermissionError("This tool is for students requesting their own documents.")
     query = f"how to request {document_type or 'bonafide certificate transcript ID card'} procedure"
     out = _run_checklist(
         query, _CERT_SYSTEM_PROMPT,
         f"Student wants to request: {document_type or 'a document (unspecified type)'}",
+        request_context=request_context,
     )
-    audit_log(identity, query="certificate_request_guidance", allowed=True,
-              target=identity.get("erp_id"))
+    payload = _identity_payload(identity)
+    audit_log(payload, query="certificate_request_guidance", allowed=True,
+              target=payload.get("erp_id"))
     return out
 
 
 # ── hostel_complaint_guidance ────────────────────────────────────────────────
-def handle_hostel_complaint_guidance(identity, complaint_type: str = "", complaint_detail: str = "", **kwargs) -> dict:
+def handle_hostel_complaint_guidance(identity, complaint_type: str = "", complaint_detail: str = "", request_context=None, **kwargs) -> dict:
     """Advisory-only: summarizes complaint + names contact. Never files a ticket."""
-    if not identity or identity.get("role") not in ("student", "guest"):
+    role = _identity_role(identity)
+    if role not in ("student", "guest"):
         raise PermissionError("This tool is for students reporting their own hostel issue.")
     query = f"hostel complaint {complaint_type} contact warden maintenance procedure"
     out = _run_checklist(
         query, _HOSTEL_SYSTEM_PROMPT,
         f"Complaint type: {complaint_type or 'unspecified'}. Details: {complaint_detail or 'none given'}",
+        request_context=request_context,
     )
-    audit_log(identity, query="hostel_complaint_guidance", allowed=True,
-              target=identity.get("erp_id"))
+    payload = _identity_payload(identity)
+    audit_log(payload, query="hostel_complaint_guidance", allowed=True,
+              target=payload.get("erp_id"))
     return out
+
+
+# ── update_tracking_flags ───────────────────────────────────────────────────
+def handle_update_tracking_flags(identity, facts: dict, **kwargs) -> dict:
+    """Updates the user's persistent personal tracking flags (e.g. dob, age, interests)."""
+    from ..personal_data.tracking_store import update_tracking_flags
+    
+    role = _identity_role(identity)
+    if role not in ("student", "guest", "faculty", "admin"):
+        raise PermissionError("Only valid identities can track personal data.")
+        
+    payload = _identity_payload(identity)
+    erp_id = payload.get("erp_id")
+    if not erp_id:
+        return {"response": "No user ID found; cannot save personal facts."}
+        
+    if not isinstance(facts, dict):
+        return {"response": "Invalid facts format."}
+        
+    update_tracking_flags(erp_id, facts)
+    return {"response": f"Successfully updated profile facts."}

@@ -1,30 +1,15 @@
-"""
-B6 — ERP Context Builder.
-
-Converts raw ERP data (dicts from ERPConnector) into a readable
-<personal_data> XML block that the LLM can parse unambiguously.
-The wrapper tag tells the LLM this is live, authoritative personal data
-— not a scraped public document — and the answer_generator system prompt
-(see file 07 of the RBAC guide) tells it to say "Your CGPA is 8.34"
-instead of "According to the retrieved document...".
-
-Personal data is NEVER included in the public RAG `sources` list — the
-`build()` method returns a string, not a sources dict, exactly because
-there is no URL to cite for live ERP data.
-"""
+# B6 — ERP Context Builder.
+# Converts raw ERP data (dicts from ERPConnector) into a readable
+# there is no URL to cite for live ERP data.
 
 
 
 class ERPContextBuilder:
 
     def build(self, erp_results: dict, identity, access_result) -> str:
-        """
-        erp_results: dict of field → value, as returned by ERPConnector methods.
-        identity:    Identity object (for display name / role context).
-        access_result: AccessResult — scope_type is included so the LLM
-                       knows whether it's seeing all grades or just one course.
-        Returns: a plain-text string ready to be injected into the LLM context.
-        """
+        # erp_results: dict of field → value, as returned by ERPConnector methods.
+        # identity:    Identity object (for display name / role context).
+        # Returns: a plain-text string ready to be injected into the LLM context.
         if not erp_results:
             return ""
 
@@ -34,6 +19,16 @@ class ERPContextBuilder:
             f"Access scope: {getattr(access_result, 'scope_type', 'self')}",
             "",
         ]
+
+        if ("profile" not in erp_results or not erp_results["profile"]) and identity is not None:
+            erp_results["profile"] = {
+                "full_name": getattr(identity, "full_name", None) or getattr(identity, "fullName", None) or "N/A",
+                "roll_number": getattr(identity, "roll_number", None) or getattr(identity, "rollNumber", None) or getattr(identity, "erp_id", "N/A"),
+                "program": getattr(identity, "program", None) or getattr(identity, "programme", "B.Tech. (ICT)"),
+                "dept": getattr(identity, "dept", None) or getattr(identity, "department", None) or getattr(identity, "branch", "ICT"),
+                "batch_year": getattr(identity, "batch_year", None) or getattr(identity, "batchYear", "2023"),
+                "current_semester": getattr(identity, "current_sem", None) or getattr(identity, "currentSem", None) or getattr(identity, "current_semester", 5),
+            }
 
         if "profile" in erp_results and erp_results["profile"]:
             p = erp_results["profile"]
@@ -95,6 +90,48 @@ class ERPContextBuilder:
                     f"(Sem {c.get('semester','')})"
                 )
             lines.append("")
+
+        if "timetable" in erp_results and erp_results["timetable"]:
+            tt = erp_results["timetable"]
+            slots = tt.get("timetable", []) if isinstance(tt, dict) else []
+            cohort = tt.get("cohort", {}) if isinstance(tt, dict) else {}
+            is_common = tt.get("is_common", False) if isinstance(tt, dict) else False
+            if slots:
+                label = (
+                    f"Year {cohort.get('year','?')}, Sem {cohort.get('sem','?')}, "
+                    f"Section {cohort.get('sec','?')}"
+                )
+                if is_common:
+                    lines.append(f"Weekly Timetable (common schedule — section not yet configured, {label}):")
+                else:
+                    lines.append(f"Weekly Timetable ({label}):")
+                # Group by day
+                by_day: dict = {}
+                for s in slots:
+                    day = s.get("day", "Unknown")
+                    by_day.setdefault(day, []).append(s)
+                day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                for day in day_order:
+                    if day not in by_day:
+                        continue
+                    lines.append(f"  {day}:")
+                    for s in by_day[day]:
+                        start = str(s.get("start_time", ""))[:5]
+                        end   = str(s.get("end_time",   ""))[:5]
+                        code  = s.get("course_code", "")
+                        name  = s.get("course_name", "")
+                        room  = s.get("room", "")
+                        fac   = s.get("faculty_name", "")
+                        stype = s.get("session_type", "")
+                        detail = f"{start}–{end}  {code} {name}"
+                        if stype:
+                            detail += f" [{stype}]"
+                        if room:
+                            detail += f"  Room: {room}"
+                        if fac:
+                            detail += f"  Faculty: {fac}"
+                        lines.append(f"    {detail}")
+                lines.append("")
 
         lines.append("</personal_data>")
         return "\n".join(lines)
