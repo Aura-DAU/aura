@@ -23,8 +23,10 @@ PUBLIC: Answer is in public university documents — policies, course catalogs,
 events, faculty research profiles, placement aggregate stats, scholarship
 rules (not a specific student's eligibility), general campus info, student clubs,
 club convenors, club leadership/structure, and student organizations (e.g. "Who is the convenor of AI Club?").
+General university policies, grading rules, attendance thresholds, exam rules,
+and fee structures are ALWAYS PUBLIC (e.g., "What is the minimum attendance?").
 
-PERSONAL: Requires looking up a specific person's private record:
+PERSONAL: Requires looking up a specific person's private record (MUST use pronouns like "my", "I", or a specific name):
   For STUDENTS — CGPA, attendance, grades, fees, hostel allotment, BTP status,
     enrollment status, timetable, transcript, personal private club membership status/dues of an individual student (NOT public club convenors or general club leadership).
   For FACULTY — their own teaching schedule, BTP students under them,
@@ -123,6 +125,10 @@ class PersonalQueryClassifier:
     def classify(self, query: str, history: list = None) -> dict:
         if not query:
             return SAFE_DEFAULT.copy()
+
+        # Document Citation fast-path
+        if re.search(r"according\s+to\s+(?:the\s+document\s+)?['\"].*?['\"]", query, re.IGNORECASE):
+            return {"type": "PUBLIC", "target": None, "erp_fields": [], "intent": "RAG"}
 
         # Name setting fast-path
         if NAME_SETTING_PAT.match(query):
