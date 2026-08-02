@@ -8,6 +8,7 @@ RAG pipeline in aura_chat_graph.
 
 import os
 import json
+import re
 from typing import Optional
 from dotenv import load_dotenv
 
@@ -128,6 +129,54 @@ _PUBLIC_KB_SCOPES = frozenset({"community", "public_kb"})
 # the curated _n_personal_data ERP path for CGPA / attendance / grades.
 _PERSONAL_ACTIONS_SCOPE = "personal_actions"
 
+_CALENDAR_STATUS_RE = re.compile(
+    r"\b(?:calendar\s+status|(?:calendar|it)\s+(?:is\s+)?(?:connected|linked)|"
+    r"(?:is|has)\s+(?:my\s+)?(?:google\s+)?calendar\s+(?:connected|linked))\b",
+    re.IGNORECASE,
+)
+_CALENDAR_SYNC_RE = re.compile(
+    r"\b(?:add|sync|put|export|save)\b.{0,40}\b(?:calendar|schedule|timetable|classes?)\b"
+    r"|\b(?:schedule|timetable|classes?)\b.{0,30}\bcalendar\b",
+    re.IGNORECASE,
+)
+_CONFIRMATION_RE = re.compile(
+    r"^\s*(?:yes|yep|yeah|confirm(?:ed)?|proceed|go ahead|do it|please do|sync it)"
+    r"[\s.!]*$",
+    re.IGNORECASE,
+)
+_CALENDAR_CONFIRMATION_CONTEXT_RE = re.compile(
+    r"\bgoogle calendar\b.*\b(?:confirm|proceed)\b"
+    r"|\b(?:confirm|proceed)\b.*\bgoogle calendar\b",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
+    """Pin supported calendar intents to their MCP tool.
+
+    Prompt-only tool selection is not reliable enough here: if the model emits
+    prose instead of a tool call, the graph falls back to the personal-data
+    responder. A write is forced only when the immediately preceding assistant
+    turn contains the calendar preview's explicit confirmation request.
+    """
+    if _CONFIRMATION_RE.fullmatch(query):
+        previous_assistant = next(
+            (
+                str(turn.get("content", ""))
+                for turn in reversed(history)
+                if turn.get("role") == "assistant"
+            ),
+            "",
+        )
+        if _CALENDAR_CONFIRMATION_CONTEXT_RE.search(previous_assistant):
+            return "sync_timetable_to_calendar"
+
+    if _CALENDAR_STATUS_RE.search(query):
+        return "calendar_status"
+    if _CALENDAR_SYNC_RE.search(query):
+        return "preview_timetable_sync"
+    return None
+
 
 class EcampusOrchestrator:
     def __init__(self):
@@ -137,7 +186,12 @@ class EcampusOrchestrator:
         # so this orchestrator participates in key rotation just like every
         # other pipeline component.
 
-    def _call_llm(self, messages: list, tools: Optional[list] = None, tool_choice: Optional[str] = None) -> object:
+    def _call_llm(
+        self,
+        messages: list,
+        tools: Optional[list] = None,
+        tool_choice: Optional[str | dict] = None,
+    ) -> object:
         """Single LLM call through InferenceRouter so node failover applies here too."""
         model = self.model
         def _fn(client):
@@ -198,10 +252,22 @@ class EcampusOrchestrator:
                 "sources": [],
             }
 
+        required_tool = (
+            _required_calendar_tool(query, history)
+            if tool_scope == _PERSONAL_ACTIONS_SCOPE
+            else None
+        )
+        tool_choice: str | dict = "auto"
+        if required_tool:
+            tool_choice = {
+                "type": "function",
+                "function": {"name": required_tool},
+            }
+
         response = self._call_llm(
             messages=messages,
             tools=tool_schemas,
-            tool_choice="auto",
+            tool_choice=tool_choice,
         )
         msg = response.choices[0].message
 

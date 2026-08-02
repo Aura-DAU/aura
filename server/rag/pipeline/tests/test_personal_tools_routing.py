@@ -118,3 +118,18 @@ def test_node_falls_through_when_no_tool_used():
     fake = _fake_self({"answer": "I couldn't help.", "sources": [], "used_tools": False})
     out = AuraChatGraph._n_personal_tools(fake, _student_state("add this to my schedule"))
     assert out.get("result") is None
+
+
+def test_node_routes_confirmation_after_calendar_preview():
+    counter = {"n": 0}
+    fake = _fake_self({"used_tools": True, "answer": "Sync started."}, counter)
+    state = _student_state("yes")
+    state["history"] = [{
+        "role": "assistant",
+        "content": "This will create 20 events on Google Calendar. Confirm to proceed.",
+    }]
+
+    out = AuraChatGraph._n_personal_tools(fake, state)
+
+    assert out["result"]["answer"] == "Sync started."
+    assert counter["n"] == 1
