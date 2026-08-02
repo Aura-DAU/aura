@@ -23,8 +23,10 @@ PUBLIC: Answer is in public university documents — policies, course catalogs,
 events, faculty research profiles, placement aggregate stats, scholarship
 rules (not a specific student's eligibility), general campus info, student clubs,
 club convenors, club leadership/structure, and student organizations (e.g. "Who is the convenor of AI Club?").
+General university policies, grading rules, attendance thresholds, exam rules,
+and fee structures are ALWAYS PUBLIC (e.g., "What is the minimum attendance?").
 
-PERSONAL: Requires looking up a specific person's private record:
+PERSONAL: Requires looking up a specific person's private record (MUST use pronouns like "my", "I", or a specific name):
   For STUDENTS — CGPA, attendance, grades, fees, hostel allotment, BTP status,
     enrollment status, timetable, transcript, personal private club membership status/dues of an individual student (NOT public club convenors or general club leadership).
   For FACULTY — their own teaching schedule, BTP students under them,
@@ -95,20 +97,9 @@ PERSONAL_KEYWORDS_PAT = re.compile(
     re.IGNORECASE
 )
 
-# Override: if the query names an explicit programme, branch, year, or semester number,
-# it refers to public timetable/curriculum data — not the user's personal ERP record.
-# This prevents queries like "What is the timetable for M.Tech IT first year?" or
-# "Show me the schedule for B.Tech ICT Semester 3" from being mis-classified as PERSONAL.
-PUBLIC_PROGRAMME_OVERRIDE_PAT = re.compile(
-    r"\b(?:"
-    r"b\.?tech|m\.?tech|m\.?sc|bs[\s\-]ms|b\.?des|m\.?des|ph\.?d|"
-    r"ict(?:[\s\-]cs)?|mnc|evd|ece[\s\-]ai|cs[\s\-]ai|data\s+science|"
-    r"first[\s-]year|second[\s-]year|third[\s-]year|fourth[\s-]year|"
-    r"1st[\s-]year|2nd[\s-]year|3rd[\s-]year|4th[\s-]year|"
-    r"semester\s+[1-8]|sem(?:ester)?\s+[1-8]|\bsem\s*[1-8]\b|"
-    r"postgraduate|undergraduate|all\s+(?:students?|branches?|programs?)"
-    r")\b",
-    re.IGNORECASE,
+NAME_SETTING_PAT = re.compile(
+    r"^\s*(?:please\s+)?(?:call\s+me|my\s+name\s+is|i\s+am|i'm)\s+([a-zA-Z\s]{2,30})\s*$",
+    re.IGNORECASE
 )
 
 # Multi-intent keyword maps
@@ -129,12 +120,35 @@ class PersonalQueryClassifier:
 
     def __init__(self):
         load_dotenv()
-        self.client = InferenceRouter.get_client()
-        self.model  = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
-    def classify(self, query: str) -> dict:
+    def classify(self, query: str, history: list = None) -> dict:
         if not query:
             return SAFE_DEFAULT.copy()
+
+        # Document Citation fast-path
+        if re.search(r"according\s+to\s+(?:the\s+document\s+)?['\"].*?['\"]", query, re.IGNORECASE):
+            return {"type": "PUBLIC", "target": None, "erp_fields": [], "intent": "RAG"}
+
+        # Name setting fast-path
+        if NAME_SETTING_PAT.match(query):
+            return {"type": "PERSONAL", "target": "self", "erp_fields": [], "intent": "SET_NAME"}
+
+        if history and history[-1].get("role") == "assistant":
+            last_msg = history[-1].get("content", "").lower()
+            name_prompts = [
+                "like to be called",
+                "should i call you",
+                "preferred name",
+                "your name",
+                "address you"
+            ]
+            if any(p in last_msg for p in name_prompts) and "?" in last_msg:
+                # User is likely responding with their name
+                import string
+                clean_query = query.translate(str.maketrans('', '', string.punctuation)).replace(" ", "")
+                if len(query.split()) <= 3 and clean_query.isalpha():
+                    return {"type": "PERSONAL", "target": "self", "erp_fields": [], "intent": "SET_NAME"}
 
         # Pure profile questions fast-path
         if is_pure_profile_query(query):
@@ -170,22 +184,26 @@ class PersonalQueryClassifier:
 
         # LLM-Based Classifier Fallback
         safe_query = f"<query>\n{query}\n</query>"
+        model = self.model
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                temperature=0,
-                max_tokens=200,
-                messages=[
-                    {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
-                    {"role": "user",   "content": safe_query},
-                ],
-                extra_body=InferenceRouter.no_think_extra_body(),
-            )
+            def _execute(client):
+                return client.chat.completions.create(
+                    model=model,
+                    temperature=0,
+                    max_tokens=200,
+                    messages=[
+                        {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
+                        {"role": "user", "content": safe_query},
+                    ],
+                    extra_body=InferenceRouter.no_think_extra_body(),
+                )
+
+            response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
             raw = response.choices[0].message.content.strip()
             raw = raw.replace("```json", "").replace("```", "").strip()
             result = json.loads(raw)
-            result.setdefault("type",       "PUBLIC")
-            result.setdefault("target",     None)
+            result.setdefault("type", "PUBLIC")
+            result.setdefault("target", None)
             result.setdefault("erp_fields", [])
             if result["type"] not in VALID_TYPES:
                 return get_safe_default()
