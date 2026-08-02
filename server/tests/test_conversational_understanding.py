@@ -1,6 +1,8 @@
 import unittest
 import sys
 import os
+from types import SimpleNamespace
+from unittest.mock import patch
 
 # Add server and server/rag to sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -43,11 +45,25 @@ class TestConversationalUnderstanding(unittest.TestCase):
             "What buses are available?",
             "What courses are offered?"
         ]
-        for q in implicit_queries:
-            with self.subTest(query=q):
-                self.assertTrue(bool(IMPLICIT_DAU_PAT.search(q)), f"Query '{q}' should match IMPLICIT_DAU_PAT")
-                is_safe = self.guardrail.is_safe(q)
-                self.assertTrue(is_safe, f"Query '{q}' should be classified as SAFE")
+        mock_response = SimpleNamespace(
+            choices=[
+                SimpleNamespace(
+                    message=SimpleNamespace(content="OFF_TOPIC"),
+                )
+            ]
+        )
+        with patch("pipeline.guardrails.query_guardrail.InferenceRouter.get_client") as mock_get_client:
+            mock_client = mock_get_client.return_value
+            mock_client.chat.completions.create.return_value = mock_response
+            
+            # Re-init the guardrail so it picks up the mocked client
+            self.guardrail = QueryGuardrail()
+            
+            for q in implicit_queries:
+                with self.subTest(query=q):
+                    self.assertTrue(bool(IMPLICIT_DAU_PAT.search(q)), f"Query '{q}' should match IMPLICIT_DAU_PAT")
+                    verdict = self.guardrail.classify(q)
+                    self.assertEqual(verdict, Verdict.SAFE, f"Query '{q}' should be classified as SAFE")
 
     # 2. Pure Profile Queries Test (Fast-path <1ms, bypasses RAG & Wellness)
     def test_pure_profile_queries(self):

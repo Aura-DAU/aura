@@ -242,21 +242,20 @@ class AuraChatGraph:
                 "I can help you with a wide range of questions about Dhirubhai Ambani University, including:\n"
                 "- **Admissions & Academics**: Program details, fee structures, eligibility criteria, and academic policies.\n"
                 "- **Campus & Facilities**: Hostel rules, dining details, medical SOPs, and general guidelines.\n"
-                "- **Personal ERP Records**: You can check your CPI/CGPA, attendance, and course grades securely.\n"
                 "- **Calendar Actions**: I can help you schedule appointments or check event dates.\n\n"
                 "How can I assist you today?"
             )
         elif q in who_words or any(w in who_words for w in words):
             ans = (
                 "I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                "I am here to help you navigate university life, policies, academics, admissions, "
-                "and connect you with your personal academic data from the ERP system. How can I help you today?"
+                "I am here to help you navigate university life, policies, academics, and admissions. "
+                "How can I help you today?"
             )
         else:
             ans = (
                 "Hello! I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                "I can help you with questions about admissions, academics, faculty, courses, campus life, "
-                "and your personal student records (like CGPA, grades, and attendance). How can I assist you today?"
+                "I can help you with questions about admissions, academics, faculty, courses, and campus life. "
+                "How can I assist you today?"
             )
 
         state["result"] = {"answer": ans, "sources": [], "is_personal_data": False, "is_guardrail": True}
@@ -350,8 +349,30 @@ class AuraChatGraph:
         if not identity or getattr(identity, "role", None) in (None, "guest"):
             return state
 
-        with track_segment("community_intent_time"):
-            intent = self.intent_router.classify(state["query"])
+        # Google Calendar actions belong to the personal MCP path, not the
+        # public academic-calendar KB path. This node runs first, so relying on
+        # the intent model to preserve that distinction can end the graph with
+        # public-KB prose before _n_personal_tools gets a chance to call MCP.
+        if getattr(identity, "role", None) == "student" and (
+            _is_calendar_connect_intent(state["query"])
+            or _required_calendar_tool(
+                state["query"],
+                state.get("history") or [],
+            )
+        ):
+            state["ecampus_intent"] = "PERSONAL_DATA"
+            return state
+
+        if _is_club_office_bearer_intent(state["query"]):
+            intent = "COMMUNITY"
+        else:
+            with track_segment("community_intent_time"):
+                intent = self.intent_router.classify(state["query"])
+                
+        # Stash the verdict so _n_personal_tools can reuse it without a second
+        # classifier round-trip.
+        state["ecampus_intent"] = intent
+        
         if intent == "COMMUNITY":
             tool_scope = "public_kb"
         elif intent == "PERSONAL_DATA":
@@ -411,6 +432,100 @@ class AuraChatGraph:
         }
         if tool_scope == "personal":
             state["is_personal"] = True
+        return state
+
+    def _n_personal_tools(self, state: AuraState) -> AuraState:
+        # In-chat "add this to my schedule" → Google Calendar sync (the GPT/Claude
+        # connector pattern). Signed-in students reach the calendar MCP tools;
+        # guests get sign-in guidance. The actions scope exposes just the
+        # student's own timetable + calendar tools, never ERP reads. Anything
+        # else — every CGPA/attendance/grade lookup — falls straight through to
+        # the existing personal_data path, so this node has no blast radius.
+        history = state.get("history") or []
+        required_calendar_tool = _required_calendar_tool(state["query"], history)
+        is_connect_intent = _is_calendar_connect_intent(state["query"])
+        is_calendar_action = bool(required_calendar_tool or is_connect_intent)
+        identity = state.get("identity")
+
+        if getattr(identity, "role", None) == "guest" and is_calendar_action:
+            state["result"] = {
+                "answer": (
+                    "Sign in with your DAU student account first, then ask me "
+                    "again to sync your timetable with Google Calendar."
+                ),
+                "sources": [],
+                "is_personal_data": False,
+            }
+            return state
+
+        if not identity or getattr(identity, "role", None) != "student":
+            return state
+        if not _is_calendar_sync_intent(state["query"]) and not required_calendar_tool:
+            return state
+
+        # OAuth is initiated by the client-side connect CTA, not an MCP tool.
+        # Returning it directly avoids relying on the model to infer a status
+        # lookup before it can offer the student the OAuth flow.
+        if is_connect_intent:
+            state["result"] = {
+                "answer": "Connect your Google Calendar to sync your timetable.",
+                "sources": [],
+                "is_personal_data": True,
+                "action_required": {
+                    "type": "connect_required",
+                    "provider": "google_calendar",
+                    "connect_path": "/settings/calendar",
+                    "reason": "connect_google_calendar",
+                    "message": "Connect your Google Calendar to sync your timetable.",
+                },
+            }
+            return state
+
+        identity_payload = {
+            "erp_id": identity.erp_id,
+            "role": "student",
+            "dept": getattr(identity, "dept", None),
+        }
+        try:
+            with track_segment("personal_tools_time"):
+                result = self.ecampus_orchestrator.run(
+                    query=state["query"],
+                    identity=identity_payload,
+                    history=history,
+                    request_context=state.get("request_context"),
+                    tool_scope="personal_actions",
+                )
+        except Exception as exc:
+            # Never kill the request — degrade to the ERP/RAG path, but keep it
+            # attributable (same policy as _n_community_tools).
+            log_soft_failure(
+                "AURA-GRAPH-004",
+                "personal_tools_orchestrator",
+                exc=exc,
+                degraded_to="personal_data",
+            )
+            return state
+
+        # Only commit if a tool actually ran. A no-tool run means the agent had
+        # nothing to act on (e.g. the gate over-triggered) — let the curated ERP
+        # path answer rather than surfacing the model's unfounded prose.
+        if not result.get("used_tools"):
+            return state
+
+        answer = (result.get("answer") or "").strip()
+        action_required = result.get("action_required")
+        if not answer and not action_required:
+            return state
+
+        out: dict = {
+            "answer": answer or (action_required or {}).get("message", ""),
+            "sources": result.get("sources") or [],
+            "is_personal_data": True,
+        }
+        if action_required:
+            out["action_required"] = action_required
+        state["result"] = out
+>>>>>>> origin/main
         return state
 
     def _n_classify(self, state: AuraState) -> AuraState:

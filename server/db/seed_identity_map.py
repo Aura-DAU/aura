@@ -35,6 +35,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import db.connection as db_conn
+from api.academic_scope_persist import (
+    DERIVATION_RULE_VERSION,
+    upsert_student_academic_scope,
+)
 
 VALID_ROLES    = {"student", "faculty", "admin"}
 ALLOWED_DOMAINS = {"dau.ac.in", "daiict.ac.in"}
@@ -129,6 +133,36 @@ def upsert(user: dict, dry_run: bool) -> str:
     return "NOOP"
 
 
+def sync_academic_scope(user: dict, dry_run: bool) -> str:
+    """Ensure seeded students have the derived rows required by retrieval."""
+    if user["role"] != "student":
+        return "SKIP"
+
+    rows = db_conn.query(
+        """SELECT si.department_id, si.derivation_rule_version,
+                  sap.erp_id AS profile_erp_id
+           FROM student_identity si
+           LEFT JOIN student_academic_profile sap ON sap.erp_id = si.erp_id
+           WHERE si.erp_id = %s""",
+        (user["erp_id"],),
+    )
+    if (
+        rows
+        and rows[0]["department_id"] == user["dept"]
+        and rows[0]["derivation_rule_version"] == DERIVATION_RULE_VERSION
+        and rows[0]["profile_erp_id"] is not None
+    ):
+        return "NOOP"
+    if dry_run:
+        return "SYNC"
+
+    synced = upsert_student_academic_scope(
+        erp_id=user["erp_id"],
+        dept=user["dept"],
+    )
+    return "SYNC" if synced else "ERROR"
+
+
 def deactivate_missing(csv_ids: set[str], dry_run: bool) -> int:
     active = db_conn.query("SELECT erp_id FROM user_identity_map WHERE is_active=TRUE")
     missing = {r["erp_id"] for r in active} - csv_ids
@@ -155,6 +189,7 @@ def main():
     print(f"Loaded {len(rows)} valid rows.\n")
 
     counts = {"INSERT": 0, "UPDATE": 0, "NOOP": 0}
+    scope_counts = {"SYNC": 0, "NOOP": 0, "SKIP": 0, "ERROR": 0}
     for user in rows:
         action = upsert(user, dry_run=args.dry_run)
         counts[action] += 1
@@ -162,11 +197,25 @@ def main():
             tag = "[DRY]" if args.dry_run else "     "
             print(f"  {tag} [{action}] {user['erp_id']} / {user['email']} ({user['role']})")
 
+        scope_action = sync_academic_scope(user, dry_run=args.dry_run)
+        scope_counts[scope_action] += 1
+        if scope_action in {"SYNC", "ERROR"}:
+            tag = "[DRY]" if args.dry_run else "     "
+            print(f"  {tag} [SCOPE {scope_action}] {user['erp_id']}")
+
     print(f"\nSummary: {counts['INSERT']} inserted, {counts['UPDATE']} updated, {counts['NOOP']} unchanged.")
+    print(
+        "Academic scope: "
+        f"{scope_counts['SYNC']} synced, {scope_counts['NOOP']} unchanged, "
+        f"{scope_counts['SKIP']} not applicable, {scope_counts['ERROR']} failed."
+    )
 
     if args.deactivate_missing:
         n = deactivate_missing({r["erp_id"] for r in rows}, dry_run=args.dry_run)
         print(f"Deactivated: {n} users not in CSV.")
+
+    if scope_counts["ERROR"]:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

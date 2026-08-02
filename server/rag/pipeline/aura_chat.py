@@ -168,21 +168,20 @@ class AuraChat:
                         "I can help you with a wide range of questions about Dhirubhai Ambani University, including:\n"
                         "- **Admissions & Academics**: Program details, fee structures, eligibility criteria, and academic policies.\n"
                         "- **Campus & Facilities**: Hostel rules, dining details, medical SOPs, and general guidelines.\n"
-                        "- **Personal ERP Records**: You can check your CPI/CGPA, attendance, and course grades securely.\n"
                         "- **Calendar Actions**: I can help you schedule appointments or check event dates.\n\n"
                         "How can I assist you today?"
                     )
                 elif q in who_words or any(w in who_words for w in words):
                     ans = (
                         "I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                        "I am here to help you navigate university life, policies, academics, admissions, "
-                        "and connect you with your personal academic data from the ERP system. How can I help you today?"
+                        "I am here to help you navigate university life, policies, academics, and admissions. "
+                        "How can I help you today?"
                     )
                 else:
                     ans = (
                         "Hello! I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                        "I can help you with questions about admissions, academics, faculty, courses, campus life, "
-                        "and your personal student records (like CGPA, grades, and attendance). How can I assist you today?"
+                        "I can help you with questions about admissions, academics, faculty, courses, and campus life. "
+                        "How can I assist you today?"
                     )
                 return {"answer": ans, "sources": [], "is_personal_data": False}
 

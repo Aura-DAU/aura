@@ -89,6 +89,8 @@ studies — world knowledge, public figures, news, sport, celebrities, weather,
 politics, general coding help, homework or essay writing, or any request to
 act as a general-purpose assistant.
 
+If the question could only be answered from general world knowledge and not from university documents, classify it as OFF_TOPIC.
+
 These are ON-TOPIC and must NOT be marked OFF_TOPIC:
 - Anything about DAU — admissions, academics, faculty, research, policies,
   fees, hostel, placements, campus life, events, facilities.
@@ -99,8 +101,7 @@ These are ON-TOPIC and must NOT be marked OFF_TOPIC:
 - Short follow-ups and references to the previous turn ("what about the
   second one?", "tell me more", "and for M.Tech?"). These carry no topic of
   their own and are always ON-TOPIC.
-- Academic concepts a student is asking about in the course of their studies
-  ("what does CGPA mean", "how does GATE scoring work").
+- Questions asking for explanations of general academic concepts (e.g. algorithms, programming, mathematics, physics, essay writing, homework solutions) are OFF_TOPIC unless they explicitly ask how the concept relates to DAU curriculum, courses, policies, or university information.
 
 If a query is both harmful and off-topic, answer UNSAFE — UNSAFE wins.
 

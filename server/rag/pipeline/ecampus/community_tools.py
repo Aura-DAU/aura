@@ -25,6 +25,7 @@ club-membership connector, and private student data must not be invented.
 """
 
 import os
+from datetime import date
 from dotenv import load_dotenv
 from pipeline.key_manager import KeyManager
 from ..personal_data.audit import audit_log
@@ -57,6 +58,12 @@ _FACULTY_ROLES = (
 )
 # Club discovery is useful to faculty mentors as well as students.
 _CLUB_READER_ROLES = _STUDENT_ROLES + _FACULTY_ROLES
+
+
+def _current_academic_year(today: date | None = None) -> str:
+    current = today or date.today()
+    start = current.year if current.month >= 7 else current.year - 1
+    return f"{start}-{(start + 1) % 100:02d}"
 
 
 def _get_retrieval_pipeline():
@@ -355,14 +362,17 @@ def handle_lookup_club_office_bearers(identity, club_name: str, request_context=
             "response": "Please provide a student club or SBG committee name.",
             "sources": [],
         }
+    academic_year = _current_academic_year()
     query = (
         f"{club_name} club committee convenor dy convenor deputy faculty mentor "
         f"email contact C_DCs Information office bearers "
-        f"Convener Name Dy. Convener Name"
+        f"Convener Name Dy. Convener Name current latest academic year {academic_year}"
     )
     out = _run(
         query, "student", _OFFICE_BEARERS_SYSTEM_PROMPT,
-        f"Office-bearers / contacts for student club / SBG committee: {club_name}",
+        f"Office-bearers / contacts for student club / SBG committee: {club_name}. "
+        f"Use the {academic_year} roster; use an older roster only if no "
+        "current-year record exists, and state that limitation.",
         request_context=request_context,
         empty_response=(
             "I couldn't find published office-bearer contacts for that club. "

@@ -34,6 +34,30 @@ const DEFAULT_PROFILE: StudentProfile = {
   interests: "",
 }
 
+/**
+ * Dept codes resolved server-side from the student's ERP id (see
+ * server/api/identity_routes.py / academic_scope_persist.py) mapped to the
+ * same display labels the RAG pipeline uses (retrieval_pipeline.py). Used to
+ * auto-fill the profile modal's Program field so a student never has to type
+ * something the system already knows from their ERP id.
+ */
+const DEPT_TO_PROGRAM_LABEL: Record<string, string> = {
+  ICT: "B.Tech. (ICT)",
+  ICTCS: "B.Tech. (ICT)",
+  MnC: "B.Tech. (MnC)",
+  EVD: "B.Tech. (EVD)",
+  MTech: "M.Tech. (ICT)",
+  MScIT: "M.Sc. (IT)",
+  MScDS: "M.Sc. (Data Science)",
+  PhD: "Ph.D.",
+}
+
+function ordinalYearLabel(year: number): string {
+  const suffix =
+    year === 1 ? "st" : year === 2 ? "nd" : year === 3 ? "rd" : "th"
+  return `${year}${suffix} year`
+}
+
 function uid(): string {
   return Math.random().toString(36).slice(2, 10)
 }
@@ -106,6 +130,44 @@ function saveHistoryToServer(
       }
     })
     .catch(() => { /* ignore network errors */ })
+}
+
+/**
+ * Drops this conversation's block from the backend's persistent per-user
+ * memory. Clearing or deleting a chat has to reach storage: the block is keyed
+ * by thread id and otherwise survives for the full retention window (90 days by
+ * default), still being injected into later conversations. Guests are a no-op —
+ * they have no stored memory. Failures are surfaced, because silently keeping
+ * memory the user asked to delete is a privacy problem, not a cosmetic one.
+ */
+function requestThreadMemoryDelete(threadId: string): Promise<Response> {
+  return apiFetch(`/api/memory?threadId=${encodeURIComponent(threadId)}`, {
+    method: "DELETE",
+  })
+}
+
+function forgetThreadMemory(threadId: string): void {
+  requestThreadMemoryDelete(threadId)
+    .then((res) => {
+      if (res.ok) return
+      // One retry after a short delay — the chat is already gone from the
+      // user's chat list by the time this runs, so a single transient
+      // network/backend blip shouldn't read as a failed deletion.
+      return new Promise((resolve) => setTimeout(resolve, 1200))
+        .then(() => requestThreadMemoryDelete(threadId))
+        .then((retryRes) => {
+          if (!retryRes.ok) {
+            toastError("The chat was deleted, but its saved memory couldn't be cleared. Please try again.")
+          }
+        })
+    })
+    .catch(() => {
+      return new Promise((resolve) => setTimeout(resolve, 1200))
+        .then(() => requestThreadMemoryDelete(threadId))
+        .catch(() => {
+          toastError("The chat was deleted, but its saved memory couldn't be cleared. Please try again.")
+        })
+    })
 }
 
 /**
@@ -381,6 +443,36 @@ export function useAuraChat() {
     }
   }, [threads, hasHydrated])
 
+  // Auto-fill Program/Year from the student's verified ERP identity
+  // (department + currentYear, resolved server-side from their ERP id at
+  // login — see server/api/identity_routes.py). Only fills fields the
+  // student hasn't already set themselves, and only once per field, so an
+  // edit they save is never silently overwritten on a later session.
+  useEffect(() => {
+    if (!hasHydrated) return
+    const dept = session?.user?.department
+    const year = session?.user?.currentYear
+    const programLabel = dept ? DEPT_TO_PROGRAM_LABEL[dept] : undefined
+    const yearLabel = typeof year === "number" ? ordinalYearLabel(year) : undefined
+    if (!programLabel && !yearLabel) return
+
+    setStudentProfile((prev) => {
+      if (prev.program && prev.year) return prev
+      const next = {
+        ...prev,
+        program: prev.program || programLabel || prev.program,
+        year: prev.year || yearLabel || prev.year,
+      }
+      if (next.program === prev.program && next.year === prev.year) return prev
+      try {
+        localStorage.setItem(PROFILE_KEY, JSON.stringify(next))
+      } catch {
+        /* ignore */
+      }
+      return next
+    })
+  }, [hasHydrated, session?.user?.department, session?.user?.currentYear])
+
   useEffect(() => {
     return () => {
       if (streamRef.current) {
@@ -472,6 +564,7 @@ export function useAuraChat() {
         syncThreadsToServer(next)
         return next
       })
+      forgetThreadMemory(id)
     },
     [activeThreadId, syncThreadsToServer],
   )
@@ -807,6 +900,7 @@ export function useAuraChat() {
         syncThreadsToServer(next)
         return next
       })
+      forgetThreadMemory(activeThreadId)
     }
     setMessages([])
     setActiveCitations([])
