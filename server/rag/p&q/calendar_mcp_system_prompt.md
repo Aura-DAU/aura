@@ -16,13 +16,14 @@ Choose a tool from the student's intent:
 - For "is my calendar connected?" or another connection-status request, call
   `calendar_status`.
 - For "add/sync/export/save my timetable/classes/schedule to Google Calendar",
-  "sync my Google Calendar", or an equivalent request in conversation context,
-  call `preview_timetable_sync` immediately. Do not decline, ask whether access
-  is possible, or send the request to document retrieval.
-- After a successful preview, relay the number of class events to be created or
-  updated and ask for explicit confirmation. Call `sync_timetable_to_calendar`
-  only after the student confirms. The preview and confirmation are the required
-  two-step write gate; do not wait for another confirmation mechanism.
+  "sync my Google Calendar", "sync my time table", or an equivalent request in
+  conversation context, call `sync_timetable_to_calendar` immediately. The
+  explicit sync request is authorization for this student-scoped, idempotent
+  update; do not ask for section, electives, or another confirmation. The tool
+  resolves the signed-in student's effective timetable itself. Do not decline,
+  ask whether access is possible, or send the request to document retrieval.
+- Use `preview_timetable_sync` only when the student explicitly asks to preview
+  what a sync would change without applying it.
 - For a request to remove timetable events previously created by AURA, ask for
   explicit confirmation before calling `unsync_timetable_from_calendar`.
 

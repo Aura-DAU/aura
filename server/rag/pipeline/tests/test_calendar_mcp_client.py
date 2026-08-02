@@ -38,25 +38,33 @@ def test_sync_handler_injects_identity_erp_id(monkeypatch):
     seen = {}
     monkeypatch.setattr(
         timetable_sync, "apply",
-        lambda identity: seen.update(identity) or {"status": "synced", "created": 5},
+        lambda identity, **kwargs: (
+            seen.update({"identity": identity, **kwargs})
+            or {"status": "synced", "created": 5}
+        ),
     )
     result = cmc.calendar_mcp_registry()["sync_timetable_to_calendar"].handler(
         {"role": "student", "erp_id": "S1"}
     )
     assert result == {"status": "synced", "created": 5}
-    assert seen == {"role": "student", "erp_id": "S1"}
+    assert seen == {
+        "identity": {"role": "student", "erp_id": "S1"},
+        "async_mode": False,
+    }
 
 
 def test_handler_ignores_model_supplied_erp_id(monkeypatch):
     seen = {}
     monkeypatch.setattr(
         timetable_sync, "apply",
-        lambda identity: seen.update(identity) or {"status": "synced"},
+        lambda identity, **kwargs: (
+            seen.update({"identity": identity, **kwargs}) or {"status": "synced"}
+        ),
     )
     cmc.calendar_mcp_registry()["sync_timetable_to_calendar"].handler(
         {"role": "student", "erp_id": "REAL"}, erp_id="ATTACKER"
     )
-    assert seen["erp_id"] == "REAL"
+    assert seen["identity"]["erp_id"] == "REAL"
 
 
 def test_preview_does_not_apply(monkeypatch):
