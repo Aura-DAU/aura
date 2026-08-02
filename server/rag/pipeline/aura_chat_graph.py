@@ -559,7 +559,7 @@ class AuraChatGraph:
         return state
 
     def _n_classify(self, state: AuraState) -> AuraState:
-        classification = self.classifier.classify(state["query"])
+        classification = self.classifier.classify(state["query"], history=state.get("history"))
         state["classification"] = classification
         state["query_type"] = classification["type"]
         return state

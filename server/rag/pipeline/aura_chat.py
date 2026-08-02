@@ -235,7 +235,7 @@ class AuraChat:
                 }
 
             # ── 5. Intent Classification ────────────────────────────────
-            classification = self.classifier.classify(query)
+            classification = self.classifier.classify(query, history=history)
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
 
             # ── Guest / No-identity check for personal paths ───────────
