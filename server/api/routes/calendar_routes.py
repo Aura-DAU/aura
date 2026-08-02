@@ -50,7 +50,7 @@ CLIENT_ID         = os.environ.get("GOOGLE_CALENDAR_CLIENT_ID", "")
 CLIENT_SECRET     = os.environ.get("GOOGLE_CALENDAR_CLIENT_SECRET", "")
 REDIRECT_URI      = os.environ.get(
     "GOOGLE_CALENDAR_REDIRECT_URI",
-    "https://aura.daiict.ac.in/backend/calendar/callback",
+    "https://aura.dau.ac.in/backend/calendar/callback",
 )
 CALENDAR_SCOPE_READONLY = "https://www.googleapis.com/auth/calendar.readonly"
 CALENDAR_SCOPE_EVENTS   = "https://www.googleapis.com/auth/calendar.events"
