@@ -20,6 +20,7 @@ import { useDocumentViewer } from "@/hooks/use-document-viewer"
 import { useGoogleCalendarSync } from "@/hooks/use-google-calendar-sync"
 import { TimetableSyncCard } from "./TimetableSyncCard"
 import { TimetableSyncConfirmationCard } from "./TimetableSyncConfirmationCard"
+import { CalendarConfirmationCard } from "./CalendarConfirmationCard"
 
 interface MessageProps {
   message: ChatMessage
@@ -183,6 +184,11 @@ export function Message({
           ) : message.calendar_action.type === "timetable_sync_confirmation" ? (
             <TimetableSyncConfirmationCard
               eventCount={message.calendar_action.event_count}
+              onConfirm={onCalendarSyncConfirm}
+            />
+          ) : message.calendar_action.type === "confirmation_required" ? (
+            <CalendarConfirmationCard
+              action={message.calendar_action}
               onConfirm={onCalendarSyncConfirm}
             />
           ) : message.calendar_action.type === "connect_required" ? (

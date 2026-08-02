@@ -124,6 +124,29 @@ def _connect_action_required(tool_results: list[dict]) -> dict | None:
     return None
 
 
+def _confirmation_action_required(tool_results: list[dict]) -> dict | None:
+    """When a calendar tool returned a preview that awaits the student's
+    go-ahead (status "confirmation_required"), return a structured confirmation
+    prompt for the client to render as an inline Confirm button — the same
+    pattern as _connect_action_required. The click still travels back as a
+    normal "confirm" chat message, so the confirmation regex gate
+    (_CONFIRMATION_RE / _CALENDAR_CONFIRMATION_CONTEXT_RE) is untouched.
+    None when nothing awaits confirmation."""
+    for r in tool_results:
+        if isinstance(r, dict) and r.get("status") == "confirmation_required":
+            action: dict = {
+                "type": "confirmation_required",
+                "provider": "google_calendar",
+                "action": "sync_timetable",
+                "message": _phrase_calendar_result("preview_timetable_sync", r),
+            }
+            count = r.get("class_count")
+            if isinstance(count, int):
+                action["event_count"] = count
+            return action
+    return None
+
+
 def _phrase_calendar_result(tool_name: str, result: dict) -> str:
     """Deterministic, user-facing phrasing for a calendar tool result.
 
@@ -516,7 +539,9 @@ class EcampusOrchestrator:
             "sources": [],
             "used_tools": True,
         }
-        action_required = _connect_action_required(tool_results)
+        action_required = _connect_action_required(
+            tool_results
+        ) or _confirmation_action_required(tool_results)
         if action_required:
             out["action_required"] = action_required
         return out
@@ -553,7 +578,9 @@ class EcampusOrchestrator:
             "sources": [],
             "used_tools": True,
         }
-        action_required = _connect_action_required([result])
+        action_required = _connect_action_required(
+            [result]
+        ) or _confirmation_action_required([result])
         if action_required:
             out["action_required"] = action_required
         return out
