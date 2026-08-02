@@ -30,6 +30,7 @@ export function StudentAcademicDashboard({
   const [preferredName, setPreferredName] = useState(userName)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true)
     const saved = localStorage.getItem("aura_dashboard_show_timetable")
     if (saved !== null) {

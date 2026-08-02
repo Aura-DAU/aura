@@ -546,6 +546,7 @@ export function useAuraChat() {
     const yearLabel = typeof year === "number" ? ordinalYearLabel(year) : undefined
     if (!programLabel && !yearLabel) return
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStudentProfile((prev) => {
       if (prev.program && prev.year) return prev
       const next = {

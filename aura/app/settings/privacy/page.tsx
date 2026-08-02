@@ -147,5 +147,6 @@ export default function PrivacySettingsPage() {
         </div>
       </div>
     </div>
+    </div>
   )
 }
