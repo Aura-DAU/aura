@@ -1,7 +1,10 @@
 # Shared FastAPI dependencies (lazy AURA init, speech/chat concurrency).
 import asyncio
+import logging
 import os
 import threading
+
+logger = logging.getLogger(__name__)
 
 _aura = None
 _aura_lock = threading.Lock()
@@ -46,8 +49,8 @@ def warm_aura_in_background() -> None:
     def _warm() -> None:
         try:
             get_aura()
-            print("[deps] AURA warm-up complete.")
+            logger.info("[deps] AURA warm-up complete.")
         except Exception as exc:
-            print(f"[deps] AURA warm-up failed (will lazy-init on first /chat): {exc}")
+            logger.warning("[deps] AURA warm-up failed (will lazy-init on first /chat): %s", exc)
 
     threading.Thread(target=_warm, name="aura-warmup", daemon=True).start()

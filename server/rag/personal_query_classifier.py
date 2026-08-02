@@ -90,9 +90,25 @@ PERSONAL_KEYWORDS_PAT = re.compile(
     r"\b(?:what(?:\s+'s|\s+is)?\s+my\s+(?:branch|programme|program|dept|department|roll\s+number|id|student\s+id|erp\s+id|email|name|cgpa|gpa|attendance|timetable|schedule)|"
     r"what\s+(?:branch|programme|program|dept|department)\s+(?:am\s+i|are\s+we|do\s+i)\s*(?:in|belong\s+to)?|"
     r"which\s+(?:branch|programme|program|dept|department)\s+(?:am\s+i|do\s+i|belong\s+to)|"
-    r"show\s+(?:my\s+)?(?:timetable|schedule|attendance|cgpa|grades|profile)|"
+    r"show\s+my\s+(?:timetable|schedule|attendance|cgpa|grades|profile)|"
     r"who\s+am\s+i)\b",
     re.IGNORECASE
+)
+
+# Override: if the query names an explicit programme, branch, year, or semester number,
+# it refers to public timetable/curriculum data — not the user's personal ERP record.
+# This prevents queries like "What is the timetable for M.Tech IT first year?" or
+# "Show me the schedule for B.Tech ICT Semester 3" from being mis-classified as PERSONAL.
+PUBLIC_PROGRAMME_OVERRIDE_PAT = re.compile(
+    r"\b(?:"
+    r"b\.?tech|m\.?tech|m\.?sc|bs[\s\-]ms|b\.?des|m\.?des|ph\.?d|"
+    r"ict(?:[\s\-]cs)?|mnc|evd|ece[\s\-]ai|cs[\s\-]ai|data\s+science|"
+    r"first[\s-]year|second[\s-]year|third[\s-]year|fourth[\s-]year|"
+    r"1st[\s-]year|2nd[\s-]year|3rd[\s-]year|4th[\s-]year|"
+    r"semester\s+[1-8]|sem(?:ester)?\s+[1-8]|\bsem\s*[1-8]\b|"
+    r"postgraduate|undergraduate|all\s+(?:students?|branches?|programs?)"
+    r")\b",
+    re.IGNORECASE,
 )
 
 # Multi-intent keyword maps
@@ -124,8 +140,11 @@ class PersonalQueryClassifier:
         if is_pure_profile_query(query):
             return {"type": "PERSONAL", "target": "self", "erp_fields": ["profile"], "intent": "PROFILE"}
 
-        # Deterministic Fast-Path: Immediately route direct student profile/personal queries
-        if PERSONAL_KEYWORDS_PAT.search(query):
+        # Deterministic Fast-Path: Immediately route direct student profile/personal queries.
+        # Guard: if the query explicitly names a programme, branch, year, or semester, it is
+        # asking about public timetable/curriculum data — skip the PERSONAL fast-path so the
+        # LLM classifier (or PUBLIC default) handles it correctly.
+        if PERSONAL_KEYWORDS_PAT.search(query) and not PUBLIC_PROGRAMME_OVERRIDE_PAT.search(query):
             fields = ["profile"]
             q_lower = query.lower()
             intent = "PROFILE"

@@ -288,6 +288,25 @@ def test_abstention_applies_without_named_programme():
     assert not pipeline._has_explicit_programme_context(plan)
 
 
+def test_universal_policy_question_does_not_require_academic_scope():
+    """Regression test for RAG_Detailed_Report Aug 2026: "What is the
+    minimum attendance requirement for each course?", "What does a DX
+    grade mean?", "Who maintains attendance records?" etc. are
+    category=="academics" with intent=="rules", but apply identically to
+    every student regardless of programme/branch/year -- they must not be
+    forced through the "I don't have your academic programme details on
+    file yet..." abstention just because the category is "academics"."""
+    pipeline = RetrievalPipeline.__new__(RetrievalPipeline)
+    for retrieval_intent in ("general", "policy_version"):
+        plan = {
+            "category": "academics",
+            "intent": "rules",
+            "retrieval_intent": retrieval_intent,
+            "entities": {},
+        }
+        assert not pipeline._requires_academic_scope(plan), retrieval_intent
+
+
 def test_infer_dept_from_erp_id():
     from api.academic_scope_persist import infer_dept_from_erp_id
 

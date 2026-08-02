@@ -1,13 +1,7 @@
 # Shared request/response models for AURA API routes.
 from typing import Annotated, List, Optional
 
-from pydantic import BaseModel, Field
-
-UNIVERSITY_PROMPT = (
-    "Dhirubhai Ambani University, DAU, DA-IICT, Gandhinagar. "
-    "B.Tech ICT, B.Tech CS AI, B.Tech ECE, BS-MS, M.Tech, M.Sc, M.Des, Ph.D. "
-    "AURA, CGPA, semester, admissions, fees, hostel, scholarship, placement."
-)
+from pydantic import BaseModel, Field, SecretStr
 
 ALLOWED_AUDIO = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 MAX_AUDIO_BYTES = 25 * 1024 * 1024
@@ -48,4 +42,9 @@ class ChatRequest(BaseModel):
 
 class LinkEcampusRequest(BaseModel):
     ecampus_username: str = Field(..., min_length=1, max_length=200)
-    ecampus_password: str = Field(..., min_length=1, max_length=500)
+    # SEC-03 fix: SecretStr instead of str. pydantic's repr/str/logging never
+    # exposes the raw value (renders as `SecretStr('**********')`), so an
+    # exception or log line captured between this schema and the point of
+    # encryption can't leak the password. get_secret_value() is called only
+    # at the moment of encryption, in credentials_vault.store_credentials.
+    ecampus_password: SecretStr = Field(..., min_length=1, max_length=500)

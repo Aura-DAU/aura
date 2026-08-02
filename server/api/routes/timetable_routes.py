@@ -38,7 +38,7 @@ def get_my_timetable(identity: Identity = Depends(require_identity)):
     try:
         return service.get_effective_timetable(identity)
     except TimetableError as e:
-        raise HTTPException(status_code=409, detail=str(e))
+        raise HTTPException(status_code=e.status_code, detail=str(e))
 
 
 @router.get("/me/changes")
@@ -49,7 +49,7 @@ def get_my_timetable_changes(identity: Identity = Depends(require_identity)):
     try:
         return {"changes": service.list_my_changes(identity)}
     except TimetableError as e:
-        raise HTTPException(status_code=409, detail=str(e))
+        raise HTTPException(status_code=e.status_code, detail=str(e))
 
 
 class ElectiveSelectionsIn(BaseModel):
@@ -67,7 +67,7 @@ def get_electives(identity: Identity = Depends(require_identity)):
     try:
         return service.get_available_electives(identity)
     except TimetableError as e:
-        raise HTTPException(status_code=409, detail=str(e))
+        raise HTTPException(status_code=e.status_code, detail=str(e))
 
 
 @router.post("/electives")
@@ -79,7 +79,7 @@ def post_electives(body: ElectiveSelectionsIn, identity: Identity = Depends(requ
     try:
         return service.save_elective_selections(identity, body.course_codes)
     except TimetableError as e:
-        raise HTTPException(status_code=409, detail=str(e))
+        raise HTTPException(status_code=e.status_code, detail=str(e))
 
 
 class PushSubscriptionKeys(BaseModel):
@@ -197,11 +197,20 @@ def post_cohort_profile(body: SaveCohortIn, identity: Identity = Depends(require
             sec=body.section
         )
     except service.TimetableError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=e.status_code, detail=str(e))
 
 
 @profile_router.get("/cohort-options")
 def get_cohort_options(identity: Identity = Depends(require_identity)):
+    # C-6 fix: require_identity alone also accepts the "guest" role (any
+    # anonymous demo visitor — see the guest-cookie flow), which let anyone
+    # on the internet enumerate every program/year/sem/section combination
+    # in the university via this endpoint with no real authentication.
+    # This data is only needed for a signed-in student/faculty/admin
+    # setting up their own cohort, so guests are excluded here.
+    if identity.role not in ("student", "faculty", "admin"):
+        raise HTTPException(status_code=403, detail="Sign in to view cohort options.")
+
     rows = db_conn.query(
         "SELECT DISTINCT program, year, sem, sec FROM timetable_master WHERE program IS NOT NULL ORDER BY program, year, sem, sec"
     )

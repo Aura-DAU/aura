@@ -202,7 +202,13 @@ GET_MY_TIMETABLE = Tool(
     name="get_my_timetable",
     description=(
         "Get the requester's own current weekly class timetable (lectures, labs, tutorials), "
-        "already merged with any personal changes they've previously asked AURA to make."
+        "already merged with any personal changes they've previously asked AURA to make. "
+        "Use this ONLY when the requester is asking about their own enrolled cohort with no "
+        "other year/semester/section/branch explicitly named. If the query names a SPECIFIC "
+        "cohort (e.g. 'what's my timetable for ICT 1st Yr Sec A' or 'my timetable for 2nd year "
+        "MnC section B'), that named cohort is what they want to see -- even though the query "
+        "says 'my', use get_cohort_timetable with the named year/sem/section/branch instead. "
+        "The word 'my' alone is not enough signal; an explicitly named cohort always wins."
     ),
     parameters={"type": "object", "properties": {}},
     category="read", allowed_roles=["student"], handler=_handle_get_my_timetable,
@@ -213,9 +219,14 @@ GET_COHORT_TIMETABLE = Tool(
     description=(
         "Look up the published weekly class timetable for ANY cohort by semester/year, "
         "section, and branch/programme -- e.g. 'give me the timetable of BTech ICT 3rd sem "
-        "section A' or 'what's the schedule for 2nd year MnC section B'. Returns the plain "
-        "master schedule only (no personal overrides or elective picks applied). Use "
-        "get_my_timetable instead when the requester is asking about their OWN timetable. "
+        "section A' or 'what's the schedule for 2nd year MnC section B'. This is also the "
+        "right tool when a query says 'my timetable' but explicitly names a different year/"
+        "semester/section/branch than the requester's own profile -- e.g. 'what's my "
+        "timetable for ICT 1st Yr Sec A' from a 3rd-year student names a specific OTHER "
+        "cohort, so look that cohort up here rather than treating 'my' as meaning their own "
+        "enrolled timetable. Returns the plain master schedule only (no personal overrides or "
+        "elective picks applied). Use get_my_timetable instead only when the requester is "
+        "asking about their own timetable with no other cohort named. "
         "Section defaults to 'A' if the user doesn't name one."
     ),
     parameters={

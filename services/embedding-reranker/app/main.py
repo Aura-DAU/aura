@@ -234,7 +234,11 @@ def rerank_pairs(req: RerankPairRequest):
             req.pairs,
             padding=True,
             truncation=True,
-            max_length=512,
+            # Kept in sync with the local fallback in pipeline/retrieval/reranker.py:
+            # expanded (adjacent-chunk) candidates can run to ~1280 tokens, and
+            # 512 was silently truncating them. BAAI recommends max_length=1024
+            # for bge-reranker-v2-m3.
+            max_length=1024,
             return_tensors="pt"
         )
         inputs = {k: v.to(device) for k, v in inputs.items()}

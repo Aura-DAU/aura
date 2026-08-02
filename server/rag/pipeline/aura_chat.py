@@ -56,7 +56,9 @@ ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE = (
 )
 
 RETRIEVAL_FAILURE_RESPONSE = (
-    "I'm having trouble retrieving information right now. Please try again."
+    "I could not find specific information about that in the university's knowledge base. "
+    "For accurate details, please visit <https://www.daiict.ac.in> or contact the "
+    "relevant office directly."
 )
 
 PERSONAL_DATA_SYSTEM_ADDENDUM = """
@@ -131,6 +133,26 @@ class AuraChat:
             identity = SimpleIdentity(identity)
 
         try:
+            # ── Middleware 1: Institution Context Resolver & Privacy Gate ──
+            from access_control import resolve_effective_role
+            from institution_resolver import get_institution_resolver
+            from privacy_filter import ResponsePrivacyFilter
+
+            user_role = resolve_effective_role(identity) if identity else "public"
+            privacy_filter = ResponsePrivacyFilter(user_role=user_role)
+
+            # Check explicit privacy policy violation requests (e.g. mobile numbers, student IDs for unauthorized roles)
+            is_blocked, refusal_msg = privacy_filter.check_explicit_privacy_request(query)
+            if is_blocked:
+                return {
+                    "answer": refusal_msg,
+                    "sources": [],
+                    "is_personal_data": False,
+                }
+
+            # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
+            query = get_institution_resolver().resolve(query)
+
             from pipeline.latency_tracker import track_segment
             history = history or []
 

@@ -1,4 +1,5 @@
 # Logs per-stage timings for /chat without blocking the response.
+import logging
 import time
 
 from fastapi import FastAPI
@@ -6,6 +7,8 @@ from fastapi.background import BackgroundTasks
 
 from db.connection import execute
 from pipeline.latency_tracker import init_tracker, reset_tracker
+
+logger = logging.getLogger(__name__)
 
 
 def register_latency_middleware(app: FastAPI) -> None:
@@ -38,7 +41,7 @@ def register_latency_middleware(app: FastAPI) -> None:
                         ),
                     )
                 except Exception as e:
-                    print(f"[latency_middleware] Failed to log latency: {e}")
+                    logger.warning("[latency_middleware] Failed to log latency: %s", e)
 
             bg_tasks.add_task(_write_log)
             response.background = bg_tasks

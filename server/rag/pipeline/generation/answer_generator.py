@@ -96,13 +96,18 @@ def extract_cited_ids(answer: str) -> set[int]:
     # An empty set means the model cited nothing. That is a real signal, not a
     # parse failure — an answer with no citations is ungrounded by definition,
     # and callers should show no sources for it.
+    #
+    # Fix P1 (rag_debug_report Root Cause D): Only parse the LAST [Sources: ...]
+    # block — the one appended by _StreamSanitizer / _clean_citations.
+    # Earlier occurrences can be LLM-hallucinated text in the answer body;
+    # matching them would double-count ids and return wrong source cards.
     if not answer:
         return set()
-    return {
-        int(n)
-        for m in _SOURCES_MARKER_RE.finditer(answer)
-        for n in re.findall(r"\d+", m.group(1))
-    }
+    matches = list(_SOURCES_MARKER_RE.finditer(answer))
+    if not matches:
+        return set()
+    last = matches[-1]
+    return {int(n) for n in re.findall(r"\d+", last.group(1))}
 
 
 def filter_sources_by_citations(sources, citation_map, answer):
@@ -122,7 +127,20 @@ def filter_sources_by_citations(sources, citation_map, answer):
         return []
 
     # No map (older callers, or an ERP-only turn) → cite-by-position fallback.
+    # Fix P1 (rag_debug_report Root Cause A): Log a warning so this silent
+    # fallback is visible in production logs. This path is inherently imprecise
+    # because cited_ids are doc-chunk positions while sources is a deduplicated
+    # list (len(sources) ≤ len(chunks)), so position i may not correspond to
+    # sources[i-1]. The permanent fix is to ensure all call paths supply
+    # a citation_map — never call this function with an empty map intentionally.
     if not citation_map:
+        import logging as _logging
+        _logging.getLogger(__name__).warning(
+            "filter_sources_by_citations: no citation_map — cite-by-position "
+            "fallback active (cited_ids=%s, sources_count=%d). "
+            "Ensure every code path that produces sources also produces a citation_map.",
+            sorted(cited_ids), len(sources)
+        )
         return [sources[i - 1] for i in sorted(cited_ids) if 1 <= i <= len(sources)]
 
     keep = {citation_map[i] for i in cited_ids if i in citation_map}
@@ -264,6 +282,12 @@ conversation history. Ask one clarifying question only if the reference is still
 - Always name the academic year you used when answering who currently holds a role.
 - Current admissions, seats, or fees → prefer `category="admissions"` over annual reports.
 - Program-specific question → match on `program_name`.
+- **Document Recency Warning**: If the highest available `rule_year` across all retrieved
+  documents is 2025-26 or older (i.e., more than one academic year behind the current
+  2026-27 year), begin your answer with a brief caveat such as:
+  "*(Note: The most recent information I have is from [rule_year]. Please verify with
+  the university for the current academic year's details.)*"
+  Do this only when the user did not explicitly ask about that older year.
 
 Never merge facts across different years or source types without labelling each one:
 "Under the 2019-20 rules [2] ... whereas the 2024-25 rules [5] ...".
@@ -295,6 +319,22 @@ When the user asks for information about a specific person (e.g., by name):
 - Allow for minor spelling typos (e.g., 1 or 2 letters off, like "Aditya Kausik" instead of "Aditya Kaushik").
 - **DO NOT** substitute entirely different names (e.g., "Aditya Rao" is NOT "Aditya Kaushik", even though the first name matches).
 - If the documents only contain information about a different person with a similar name, you **MUST** explicitly state that no information is available for the requested person. Do not provide the other person's info.
+
+# ANTI-SYNTHESIS RULE
+
+Do not rank, rate, or synthesize a subjective judgment (e.g. "best club", "optimal roadmap",
+"top faculty") unless a retrieved document itself states that ranking or recommendation. If
+asked for one and no document ranks or recommends among the options, say the documents do not
+rank or recommend among them, then list the documented options neutrally instead of guessing.
+
+# NAMED-ENTITY EXISTENCE CHECK
+
+Before affirming that a specific named entity exists or happened at DAU (an award, an event, a
+title, an organization -- e.g. "Nobel Prize winner", "Google I/O", "Head of Department"),
+verify that entity's exact name appears in a retrieved `<doc>`, the same way STRICT ENTITY
+VERIFICATION above requires for a person's name. Do not treat general world knowledge about
+the entity as evidence it applies to DAU. If it does not appear in the retrieved documents,
+state plainly that it is not documented in the retrieved data rather than guessing or assuming.
 
 # HANDLING PARTIAL INFORMATION
 

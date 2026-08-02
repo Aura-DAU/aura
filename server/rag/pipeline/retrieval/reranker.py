@@ -5,25 +5,33 @@ from datetime import datetime
 from typing import Optional
 
 def extract_latest_year(metadata: dict) -> Optional[int]:
-    """Extract the most recent year from a document's metadata."""
-    doc_year = metadata.get("document_year", "")
-    if doc_year:
-        m = re.search(r"(20[1-3]\d)", str(doc_year))
-        if m:
-            return int(m.group(1))
+    """Extract a document's version year from its authoritative metadata.
 
+    Extraction priority order:
+    academic_year -> title -> h1 -> h2 -> h3 -> source_file -> relative_path -> document_year (LAST fallback)
+    """
     texts_to_search = [
+        metadata.get("academic_year", ""),
         metadata.get("title", ""),
         metadata.get("h1", ""),
         metadata.get("h2", ""),
         metadata.get("h3", ""),
-        metadata.get("text", "")
+        metadata.get("source_file", ""),
+        metadata.get("relative_path", ""),
+        metadata.get("document_year", ""),
     ]
 
     for text in texts_to_search:
         if not text:
             continue
-        matches = re.findall(r"\b(20[1-3]\d)(?:[-\u2013/]\d{2,4})?\b", str(text))
+        # Fix YEAR-UB1 (same bug as ingestion's resolve_document_academic_year):
+        # \b treats "_" as a word character, so a \b-bounded year regex never
+        # matches years embedded in snake_case source_file/relative_path
+        # values like "..._autumn_2025_page_7.md" — this silently skipped
+        # straight to document_year (a much weaker signal) for the majority
+        # of this corpus's filenames. Digit-adjacency lookaround still
+        # rejects non-year digit runs (e.g. "42025" or "20255").
+        matches = re.findall(r"(?<!\d)(20[1-3]\d)(?:[-\u2013/]\d{2,4})?(?!\d)", str(text))
         if matches:
             return max(int(m) for m in matches)
     return None
@@ -93,6 +101,9 @@ class Reranker:
                 filter(
                     None,
                     [
+                        metadata.get("title"),
+                        metadata.get("category"),
+                        metadata.get("cluster"),
                         metadata.get("h1"),
                         metadata.get("h2"),
                         metadata.get("h3"),
@@ -100,6 +111,10 @@ class Reranker:
                     ]
                 )
             )
+
+            MAX_RERANK_CHARS = 1600 # Approx 400 tokens
+            if len(text) > MAX_RERANK_CHARS:
+                text = text[:MAX_RERANK_CHARS]
 
             pairs.append(
                 [query, text]
@@ -131,7 +146,15 @@ class Reranker:
                 pairs,
                 padding=True,
                 truncation=True,
-                max_length=512,
+                # Issue 1 fix #1: chunks are 256 tokens, but stage-2 adjacent-
+                # chunk expansion (_expand_adjacent_chunks) concatenates up to
+                # 5 neighboring chunks (up to ~1280 tokens) before this text
+                # reaches the reranker. 512 was silently truncating the
+                # "next" chunk(s) off expanded candidates — exactly defeating
+                # the point of window expansion. BAAI recommends max_length
+                # =1024 for bge-reranker-v2-m3 (model supports up to 8192,
+                # but was fine-tuned at 1024).
+                max_length=1024,
                 return_tensors="pt"
             )
 
@@ -506,6 +529,42 @@ class Reranker:
             # what happens across several yearly versions of the same roster
             # — the newest one reliably wins instead of the tie effectively
             # being broken by noise.
+            answerability_boost = 0.0
+            lookup_keywords = [
+                "who", "who is", "name", "convener", "convenor", "coordinator",
+                "faculty advisor", "faculty adviser", "advisor", "mentor", "chair",
+                "chairperson", "contact", "contact information", "email", "email id",
+                "phone", "phone number", "mobile", "mobile number", "student id",
+                "erp", "credits", "credit", "credit structure", "prerequisite",
+                "prerequisites", "fee", "fees", "fee structure", "duration",
+                "office", "policy", "syllabus"
+            ]
+            structured_fields = {
+                "convener", "convenor", "coordinator", "faculty advisor", "faculty adviser",
+                "advisor", "mentor", "chair", "chairperson", "student id", "erp",
+                "email", "phone", "mobile", "contact", "credits", "credit",
+                "prerequisite", "fee", "fees", "duration", "office", "policy", "syllabus"
+            }
+            query_lower = query.lower()
+            keyword_pattern = r"\b(" + "|".join(re.escape(k) for k in lookup_keywords) + r")\b"
+            if re.search(keyword_pattern, query_lower):
+                chunk_full_text = "\n".join(
+                    filter(
+                        None,
+                        [
+                            metadata.get("title"),
+                            metadata.get("category"),
+                            metadata.get("cluster"),
+                            metadata.get("h1"),
+                            metadata.get("h2"),
+                            metadata.get("h3"),
+                            metadata.get("text"),
+                        ]
+                    )
+                ).lower()
+                if any(field in chunk_full_text for field in structured_fields):
+                    answerability_boost = 1.0
+
             final_score = (
                 (0.60 * norm_cross)
                 +
@@ -520,6 +579,8 @@ class Reranker:
                 (0.05 * course_match_boost)
                 +
                 (0.15 * temporal_boost)
+                +
+                (0.05 * answerability_boost)
                 +
                 (semester_penalty * norm_cross)
             )
@@ -543,5 +604,18 @@ class Reranker:
                 x["reranked_score"],
             reverse=True
         )
+
+        print("\n" + "=" * 60)
+        print("===== CROSS-ENCODER RERANK RESULTS =====")
+        print(f"Query: {query}")
+        for rank, item in enumerate(reranked, start=1):
+            meta = item.get("metadata", {})
+            h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
+            print(f"{rank}. reranked_score={item.get('reranked_score', 0.0):.4f} (cross_logit={item.get('cross_score', 0.0):.4f}) | chunk={item.get('id')}")
+            print(f"   title={meta.get('title', 'N/A')}")
+            print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
+            if h_str:
+                print(f"   headers={h_str}")
+        print("=" * 60)
 
         return reranked

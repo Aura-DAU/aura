@@ -2,6 +2,7 @@ import os
 import sys
 import tempfile
 import asyncio
+import logging
 import threading
 from typing import Annotated, List, Optional
 from pathlib import Path
@@ -11,6 +12,8 @@ rag_dir    = server_dir / "rag"
 for p in (str(server_dir), str(rag_dir)):
     if p not in sys.path:
         sys.path.insert(0, p)
+
+logger = logging.getLogger(__name__)
 
 #Loading dotenv file
 from dotenv import load_dotenv
@@ -138,7 +141,7 @@ async def log_latency_middleware(request, call_next):
                     )
                 )
             except Exception as e:
-                print(f"[latency_middleware] Failed to log latency: {e}")
+                logger.warning("[latency_middleware] Failed to log latency: %s", e)
                 
         bg_tasks.add_task(_write_log)
         response.background = bg_tasks
@@ -202,6 +205,19 @@ async def _start_timetable_scheduler():
 
     from pipeline.timetable.notifier import start_scheduler
     start_scheduler()
+
+    # Start the Google Calendar nightly auto-sync + retry worker.
+    # Idempotent — safe to call even if GOOGLE_CALENDAR_VAULT_KEY is not yet
+    # configured (e.g. in dev without calendar integration).
+    try:
+        from pipeline.google_calendar.scheduler import start_scheduler as gcal_start
+        gcal_start()
+    except Exception as _gcal_exc:
+        import logging as _log
+        _log.getLogger("aura.gcal.scheduler").warning(
+            "Google Calendar scheduler could not start (calendar integration may not be configured): %s",
+            _gcal_exc,
+        )
 
 
 @app.on_event("shutdown")
@@ -323,7 +339,7 @@ async def speech(
     except HTTPException:
         raise
     except Exception as e:
-        print(f"[speech] transcription failed: {e}")
+        logger.error("[speech] transcription failed: %s", e)
         raise HTTPException(status_code=500, detail="Transcription failed. Please try again.")
     finally:
         if temp_path and os.path.exists(temp_path):

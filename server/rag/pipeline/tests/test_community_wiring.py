@@ -209,3 +209,69 @@ def test_aura_chat_graph_community_skips_guests_and_general(monkeypatch):
     }
     assert graph._n_community_tools(student_state).get("result") is None
     assert calls == []
+
+
+def test_aura_chat_graph_routes_personal_data_through_orchestrator(monkeypatch):
+    """Regression test for the Aug 2026 RAG eval finding: PERSONAL_DATA
+    queries (attendance/grades/CGPA/timetable) must reach the tool-calling
+    EcampusOrchestrator with tool_scope="personal" -- not just COMMUNITY
+    queries -- so the LLM can actually call get_my_timetable /
+    get_academic_snapshot / get_cgpa / etc. instead of silently answering
+    with no data."""
+    from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
+
+    calls = []
+
+    def _fake_init(self):
+        self.intent_router = SimpleNamespace(classify=lambda q: "PERSONAL_DATA")
+        self.ecampus_orchestrator = SimpleNamespace(
+            run=lambda **kwargs: calls.append(kwargs) or {
+                "answer": f"orchestrated:{kwargs['tool_scope']}:{kwargs['identity']['role']}",
+                "sources": [],
+            }
+        )
+
+    monkeypatch.setattr(AuraChatGraph, "__init__", _fake_init)
+    graph = AuraChatGraph()
+
+    state = {
+        "query": "Do I have any labs tomorrow?",
+        "history": [],
+        "identity": SimpleIdentity({"erp_id": "S1", "role": "student", "dept": "ICT"}),
+        "request_context": None,
+        "result": None,
+    }
+    out = graph._n_community_tools(state)
+    assert len(calls) == 1
+    assert calls[0]["tool_scope"] == "personal"
+    assert out["result"]["answer"] == "orchestrated:personal:student"
+    assert out["result"]["is_personal_data"] is True
+    assert out["is_personal"] is True
+
+
+def test_aura_chat_graph_personal_data_falls_through_on_empty_answer(monkeypatch):
+    """If the orchestrator can't answer (e.g. only an AGGREGATE-style query
+    the tool registry doesn't cover), _n_community_tools must fall through
+    so the legacy _n_personal_data/erp_connector path still gets a shot,
+    rather than returning a blank response."""
+    from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
+
+    def _fake_init(self):
+        self.intent_router = SimpleNamespace(classify=lambda q: "PERSONAL_DATA")
+        self.ecampus_orchestrator = SimpleNamespace(
+            run=lambda **kwargs: {"answer": "", "sources": []}
+        )
+
+    monkeypatch.setattr(AuraChatGraph, "__init__", _fake_init)
+    graph = AuraChatGraph()
+
+    state = {
+        "query": "What is the average CGPA in BTech ICT this semester?",
+        "history": [],
+        "identity": SimpleIdentity({"erp_id": "F1", "role": "faculty", "dept": "ICT"}),
+        "request_context": None,
+        "result": None,
+    }
+    out = graph._n_community_tools(state)
+    assert out.get("result") is None
+    assert out.get("is_personal") is not True

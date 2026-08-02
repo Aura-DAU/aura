@@ -19,6 +19,16 @@ warnings.filterwarnings("ignore", message="FP16 is not supported on CPU")
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
 
+# CQ-07 fix: moved from api/schemas.py, which should only hold Pydantic
+# request/response models. This is domain content specific to Whisper
+# transcription (passed as `initial_prompt` below), so it belongs in the
+# speech pipeline module that actually uses it.
+UNIVERSITY_PROMPT = (
+    "Dhirubhai Ambani University, DAU, DA-IICT, Gandhinagar. "
+    "B.Tech ICT, B.Tech CS AI, B.Tech ECE, BS-MS, M.Tech, M.Sc, M.Des, Ph.D. "
+    "AURA, CGPA, semester, admissions, fees, hostel, scholarship, placement."
+)
+
 # System user `aura` has HOME=/nonexistent; Whisper must not write there.
 # Prefer WHISPER_CACHE_DIR; default to /tmp so a root-owned vault volume cannot block boot.
 _WHISPER_CACHE = os.environ.get("WHISPER_CACHE_DIR", "/tmp/whisper-cache")
