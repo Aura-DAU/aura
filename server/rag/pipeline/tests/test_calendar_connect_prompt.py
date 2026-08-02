@@ -16,7 +16,11 @@ The LLM is stubbed; tool dispatch runs through the real in-process MCP server.
 import types
 
 from pipeline.ecampus import orchestrator as orch_mod
-from pipeline.ecampus.orchestrator import EcampusOrchestrator, _ECAMPUS_TOOL_REGISTRY
+from pipeline.ecampus.orchestrator import (
+    EcampusOrchestrator,
+    _ECAMPUS_TOOL_REGISTRY,
+    _required_calendar_tool,
+)
 from pipeline.google_calendar import timetable_sync
 
 
@@ -104,3 +108,34 @@ def test_no_tool_call_sets_used_tools_false(monkeypatch):
     )
     assert result["used_tools"] is False
     assert "action_required" not in result
+
+
+def test_sync_request_requires_preview_tool(monkeypatch):
+    orch = EcampusOrchestrator()
+    choices = []
+
+    def fake_call_llm(messages, tools=None, tool_choice=None):
+        choices.append(tool_choice)
+        return _response(_msg(content="unexpected refusal", tool_calls=None))
+
+    monkeypatch.setattr(orch, "_call_llm", fake_call_llm)
+    orch.run(
+        query="can you sync my google calendar",
+        identity={"role": "student", "erp_id": "S1"},
+        tool_scope="personal_actions",
+    )
+
+    assert choices[0] == {
+        "type": "function",
+        "function": {"name": "preview_timetable_sync"},
+    }
+
+
+def test_confirmation_requires_sync_tool_only_after_calendar_preview():
+    preview_history = [{
+        "role": "assistant",
+        "content": "This will create 20 events on Google Calendar. Confirm to proceed.",
+    }]
+
+    assert _required_calendar_tool("yes", preview_history) == "sync_timetable_to_calendar"
+    assert _required_calendar_tool("yes", []) is None

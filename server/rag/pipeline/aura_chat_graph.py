@@ -56,7 +56,7 @@ from pipeline.aura_chat import (
     is_greeting_or_meta,
 )
 from pipeline.ecampus.intent_router import PersonalDataIntentRouter
-from pipeline.ecampus.orchestrator import EcampusOrchestrator
+from pipeline.ecampus.orchestrator import EcampusOrchestrator, _required_calendar_tool
 from api.request_context import RequestContext
 
 
@@ -434,7 +434,9 @@ class AuraChatGraph:
         identity = state.get("identity")
         if not identity or getattr(identity, "role", None) != "student":
             return state
-        if not _is_calendar_sync_intent(state["query"]):
+        history = state.get("history") or []
+        required_calendar_tool = _required_calendar_tool(state["query"], history)
+        if not _is_calendar_sync_intent(state["query"]) and not required_calendar_tool:
             return state
 
         # OAuth is initiated by the client-side connect CTA, not an MCP tool.
@@ -465,7 +467,7 @@ class AuraChatGraph:
                 result = self.ecampus_orchestrator.run(
                     query=state["query"],
                     identity=identity_payload,
-                    history=state.get("history") or [],
+                    history=history,
                     request_context=state.get("request_context"),
                     tool_scope="personal_actions",
                 )
