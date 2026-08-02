@@ -18,6 +18,7 @@ from dataclasses import dataclass
 from typing import Callable
 
 from . import service
+from ..google_calendar import timetable_sync
 
 
 @dataclass
@@ -55,6 +56,7 @@ def _handle_update_my_timetable(identity, **kwargs):
     expected to show the user the preview and only call again with
     confirm=true once the user explicitly agrees."""
     confirm = bool(kwargs.pop("confirm", False))
+    kwargs.pop("request_context", None)
     try:
         if not confirm:
             year = sem = sec = None
