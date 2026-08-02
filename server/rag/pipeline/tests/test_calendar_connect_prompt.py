@@ -139,3 +139,7 @@ def test_confirmation_requires_sync_tool_only_after_calendar_preview():
 
     assert _required_calendar_tool("yes", preview_history) == "sync_timetable_to_calendar"
     assert _required_calendar_tool("yes", []) is None
+
+
+def test_academic_calendar_lookup_does_not_select_personal_calendar_tool():
+    assert _required_calendar_tool("When is the academic calendar deadline?", []) is None
