@@ -220,4 +220,4 @@ def test_aura_chat_graph_exception_emits_graph_002(monkeypatch, caplog):
 
 def test_user_facing_copy_unchanged():
     """Frontend matches on this substring — do not drift it."""
-    assert SOFT_FAILURE_ANSWER == "Sorry, I encountered an error while generating a response. Please try asking your question again in a few moments, or contact the IT helpdesk if the issue persists."
+    assert SOFT_FAILURE_ANSWER == "Sorry, I encountered an error while generating a response. Please try asking your question again in a few moments."

@@ -101,7 +101,7 @@ _STRICT_CITATIONS = (
 # leading hypothesis for the observed occurrences is LLM call failure under GPU
 # saturation, and that has to be separable from a pipeline bug at a glance.
 
-SOFT_FAILURE_ANSWER = "Sorry, I encountered an error while generating a response. Please try asking your question again in a few moments, or contact the IT helpdesk if the issue persists."
+SOFT_FAILURE_ANSWER = "Sorry, I encountered an error while generating a response. Please try asking your question again in a few moments."
 
 _TIMEOUT_MARKERS = (
     "timeout", "timed out", "deadline exceeded", "read timed out",
