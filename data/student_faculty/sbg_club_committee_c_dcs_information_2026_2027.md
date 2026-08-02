@@ -1,5 +1,5 @@
 ---
-title: "Club Committee C_DCs Information 2026-27"
+title: "Club Committee C_DCs Information 2026-2027"
 url: "#"
 category: "SBG & Clubs - Clubs And Committees"
 scraped_by: "Madhav Thesiya"
