@@ -328,11 +328,6 @@ class RetrievalPipeline:
                 else:
                     sem_vals = self._canonical_semester_values(raw_val)
                     val = sem_vals if sem_vals else [raw_val]
-            elif field == "course_code":
-                if isinstance(raw_val, list):
-                    val = [re.sub(r"[\s\-]", "", str(c)).upper() for c in raw_val if c]
-                else:
-                    val = [re.sub(r"[\s\-]", "", str(raw_val)).upper()]
             else:
                 val = raw_val
 
