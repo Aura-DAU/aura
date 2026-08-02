@@ -32,6 +32,7 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    log_soft_failure,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -55,8 +56,57 @@ from pipeline.aura_chat import (
     is_greeting_or_meta,
 )
 from pipeline.ecampus.intent_router import PersonalDataIntentRouter
-from pipeline.ecampus.orchestrator import EcampusOrchestrator
+from pipeline.ecampus.orchestrator import (
+    EcampusOrchestrator,
+    _required_calendar_tool,
+    _is_calendar_unsync_intent,
+)
 from api.request_context import RequestContext
+
+
+# Keyword gate for the in-chat calendar-sync path (_n_personal_tools). Kept
+# deliberately narrow: only calendar/schedule *sync* requests are routed to the
+# tool agent, so ordinary personal lookups ("what's my timetable today",
+# "my CGPA") never leave the curated ERP path. Over-triggering is safe — the
+# actions scope exposes no ERP tools, so a non-matching query calls no tool and
+# falls through — but keeping it tight avoids a needless extra LLM call.
+_CALENDAR_KEYWORD_RE = re.compile(r"\bcalendar\b", re.IGNORECASE)
+_SCHEDULE_ACTION_RE = re.compile(
+    r"\b(add|sync|put|export|save)\b.{0,40}\b(schedule|timetable|classes|class)\b"
+    r"|\b(schedule|timetable|classes)\b.{0,20}\bcalendar\b",
+    re.IGNORECASE,
+)
+_CALENDAR_CONNECT_RE = re.compile(
+    r"\b(?:connect|link)\b.{0,30}\b(?:my\s+)?(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b.{0,30}\b(?:connect|link)\b",
+    re.IGNORECASE,
+)
+_CLUB_OFFICE_BEARER_RE = re.compile(
+    r"\b(conven(?:er|or)|coordinator|office[ -]?bearer|"
+    r"deputy[ -]?conven(?:er|or)|dy\.?[ -]?conven(?:er|or)|"
+    r"faculty mentor|club email)\b",
+    re.IGNORECASE,
+)
+_CLUB_CONTEXT_RE = re.compile(r"\b(club|sbg|committee)\b", re.IGNORECASE)
+
+
+def _is_calendar_sync_intent(query: str) -> bool:
+    return bool(_CALENDAR_KEYWORD_RE.search(query) or _SCHEDULE_ACTION_RE.search(query))
+
+
+def _is_calendar_connect_intent(query: str) -> bool:
+    return bool(_CALENDAR_CONNECT_RE.search(query))
+
+
+def _is_club_office_bearer_intent(query: str) -> bool:
+    """Route published club contacts to the C_DCs-aware lookup path.
+
+    This is intentionally narrower than all club requests: only questions that
+    ask for office-bearers bypass the general-purpose intent classifier, whose
+    unavailable/invalid fallback is GENERAL and otherwise sends the request to
+    the legacy RAG path.
+    """
+    return bool(_CLUB_CONTEXT_RE.search(query) and _CLUB_OFFICE_BEARER_RE.search(query))
 
 
 class SimpleIdentity:
@@ -100,6 +150,7 @@ class AuraState(TypedDict, total=False):
     query_type: Optional[str]
     classification: dict
     user_role: str
+    ecampus_intent: Optional[str]  # PersonalDataIntentRouter verdict, computed once
 
     target_erp_id: Optional[str]
     access_result: Any
@@ -160,6 +211,7 @@ class AuraChatGraph:
         graph.add_node("greeting_check", self._n_greeting_check)
         graph.add_node("profile_fast_path", self._n_profile_fast_path)
         graph.add_node("community_tools", self._n_community_tools)
+        graph.add_node("personal_tools", self._n_personal_tools)
         graph.add_node("classify", self._n_classify)
         graph.add_node("guest_gate", self._n_guest_gate)
         graph.add_node("strict_guardrail", self._n_strict_guardrail)
@@ -182,7 +234,8 @@ class AuraChatGraph:
         graph.add_conditional_edges("wellness_check", route_or("greeting_check"))
         graph.add_conditional_edges("greeting_check", route_or("profile_fast_path"))
         graph.add_conditional_edges("profile_fast_path", route_or("community_tools"))
-        graph.add_conditional_edges("community_tools", route_or("classify"))
+        graph.add_conditional_edges("community_tools", route_or("personal_tools"))
+        graph.add_conditional_edges("personal_tools", route_or("classify"))
         graph.add_conditional_edges("classify", route_or("guest_gate"))
         graph.add_conditional_edges("guest_gate", route_or("strict_guardrail"))
         graph.add_conditional_edges("strict_guardrail", route_or("personal_data"))
@@ -242,21 +295,20 @@ class AuraChatGraph:
                 "I can help you with a wide range of questions about Dhirubhai Ambani University, including:\n"
                 "- **Admissions & Academics**: Program details, fee structures, eligibility criteria, and academic policies.\n"
                 "- **Campus & Facilities**: Hostel rules, dining details, medical SOPs, and general guidelines.\n"
-                "- **Personal ERP Records**: You can check your CPI/CGPA, attendance, and course grades securely.\n"
                 "- **Calendar Actions**: I can help you schedule appointments or check event dates.\n\n"
                 "How can I assist you today?"
             )
         elif q in who_words or any(w in who_words for w in words):
             ans = (
                 "I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                "I am here to help you navigate university life, policies, academics, admissions, "
-                "and connect you with your personal academic data from the ERP system. How can I help you today?"
+                "I am here to help you navigate university life, policies, academics, and admissions. "
+                "How can I help you today?"
             )
         else:
             ans = (
                 "Hello! I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                "I can help you with questions about admissions, academics, faculty, courses, campus life, "
-                "and your personal student records (like CGPA, grades, and attendance). How can I assist you today?"
+                "I can help you with questions about admissions, academics, faculty, courses, and campus life. "
+                "How can I assist you today?"
             )
 
         state["result"] = {"answer": ans, "sources": [], "is_personal_data": False, "is_guardrail": True}
@@ -350,13 +402,30 @@ class AuraChatGraph:
         if not identity or getattr(identity, "role", None) in (None, "guest"):
             return state
 
-        with track_segment("community_intent_time"):
-            intent = self.intent_router.classify(state["query"])
-        if intent == "COMMUNITY":
-            tool_scope = "public_kb"
-        elif intent == "PERSONAL_DATA":
-            tool_scope = "personal"
+        # Google Calendar actions belong to the personal MCP path, not the
+        # public academic-calendar KB path. This node runs first, so relying on
+        # the intent model to preserve that distinction can end the graph with
+        # public-KB prose before _n_personal_tools gets a chance to call MCP.
+        if getattr(identity, "role", None) == "student" and (
+            _is_calendar_connect_intent(state["query"])
+            or _is_calendar_unsync_intent(state["query"])
+            or _required_calendar_tool(
+                state["query"],
+                state.get("history") or [],
+            )
+        ):
+            state["ecampus_intent"] = "PERSONAL_DATA"
+            return state
+
+        if _is_club_office_bearer_intent(state["query"]):
+            intent = "COMMUNITY"
         else:
+            with track_segment("community_intent_time"):
+                intent = self.intent_router.classify(state["query"])
+        # Stash the verdict so _n_personal_tools can reuse it without a second
+        # classifier round-trip.
+        state["ecampus_intent"] = intent
+        if intent != "COMMUNITY":
             return state
 
         tool_role = identity.role if identity.role in ("student", "faculty") else None
@@ -388,12 +457,17 @@ class AuraChatGraph:
                     request_context=state.get("request_context"),
                     tool_scope=tool_scope,
                 )
-        except Exception:
-            # Orchestrator/LLM failure must not kill the request -- fall
-            # through to classify → public RAG / legacy personal-data path,
-            # which has its own error handling.
-            import traceback
-            traceback.print_exc()
+        except Exception as exc:
+            # Orchestrator/LLM failure must not kill the request — fall through
+            # to classify → public RAG, which has its own error handling. This
+            # is not itself a soft error, but it silently degrades a COMMUNITY
+            # query to generic RAG, so it has to be attributable too.
+            log_soft_failure(
+                "AURA-GRAPH-003",
+                "community_orchestrator",
+                exc=exc,
+                degraded_to="public_rag",
+            )
             return state
 
         answer = (result.get("answer") or "").strip()
@@ -413,34 +487,124 @@ class AuraChatGraph:
             state["is_personal"] = True
         return state
 
-    def _n_classify(self, state: AuraState) -> AuraState:
-        query = state["query"]
-
-        # Fix B (source_match_analysis Root Cause 1): Pre-classify explicit
-        # document-lookup questions as PUBLIC before the LLM classifier runs.
-        # Pattern: 'According to (the document) \'Title\',...' — these are
-        # always public knowledge-base questions even if the topic sounds
-        # personal. Without this, queries like 'According to Academic Areas,
-        # what does the Overview say?' were mis-classified as PERSONAL by the
-        # LLM classifier ("academic programme" triggers personal intent), then
-        # routed to _n_personal_data → ERP fails → guardrail response returned
-        # with sources=[].
-        _ACCORDING_TO_RE = re.compile(
-            r"^\s*according\s+to\s+(?:the\s+document\s+)?['\"]?",
-            re.IGNORECASE,
+    def _n_personal_tools(self, state: AuraState) -> AuraState:
+        # In-chat "add this to my schedule" → Google Calendar sync (the GPT/Claude
+        # connector pattern). Signed-in students reach the calendar MCP tools;
+        # guests get sign-in guidance. The actions scope exposes just the
+        # student's own timetable + calendar tools, never ERP reads. Anything
+        # else — every CGPA/attendance/grade lookup — falls straight through to
+        # the existing personal_data path, so this node has no blast radius.
+        history = state.get("history") or []
+        required_calendar_tool = _required_calendar_tool(state["query"], history)
+        is_connect_intent = _is_calendar_connect_intent(state["query"])
+        is_unsync_intent = _is_calendar_unsync_intent(state["query"])
+        is_calendar_action = bool(
+            required_calendar_tool or is_connect_intent or is_unsync_intent
         )
-        if _ACCORDING_TO_RE.match(query):
-            state["classification"] = {
-                "type": "PUBLIC",
-                "target": None,
-                "erp_fields": [],
-                "confidence": 1.0,
-                "reason": "explicit_document_lookup_override",
+        identity = state.get("identity")
+
+        if getattr(identity, "role", None) == "guest" and is_calendar_action:
+            state["result"] = {
+                "answer": (
+                    "Sign in with your DAU student account first, then ask me "
+                    "again to sync your timetable with Google Calendar."
+                ),
+                "sources": [],
+                "is_personal_data": False,
             }
-            state["query_type"] = "PUBLIC"
             return state
 
-        classification = self.classifier.classify(query)
+        if not identity or getattr(identity, "role", None) != "student":
+            return state
+        if (
+            not _is_calendar_sync_intent(state["query"])
+            and not is_unsync_intent
+            and not required_calendar_tool
+        ):
+            return state
+
+        # OAuth is initiated by the client-side connect CTA, not an MCP tool.
+        # Returning it directly avoids relying on the model to infer a status
+        # lookup before it can offer the student the OAuth flow.
+        if is_connect_intent:
+            state["result"] = {
+                "answer": "Connect your Google Calendar to sync your timetable.",
+                "sources": [],
+                "is_personal_data": True,
+                "action_required": {
+                    "type": "connect_required",
+                    "provider": "google_calendar",
+                    "connect_path": "/settings/calendar",
+                    "reason": "connect_google_calendar",
+                    "message": "Connect your Google Calendar to sync your timetable.",
+                },
+            }
+            return state
+
+        # Removing events is a write, so the model is never asked to delete:
+        # a first-time remove/unsync request gets a deterministic confirmation
+        # prompt here, and the follow-up "yes" runs unsync_timetable_from_calendar
+        # via _required_calendar_tool. The prompt keeps the "remove ... Google
+        # Calendar ... proceed" phrasing that the confirmation gate keys on.
+        if is_unsync_intent and not required_calendar_tool:
+            state["result"] = {
+                "answer": (
+                    "This will remove the timetable events AURA added to your "
+                    "Google Calendar. Confirm to proceed and I'll clear them."
+                ),
+                "sources": [],
+                "is_personal_data": True,
+            }
+            return state
+
+        identity_payload = {
+            "erp_id": identity.erp_id,
+            "role": "student",
+            "dept": getattr(identity, "dept", None),
+        }
+        try:
+            with track_segment("personal_tools_time"):
+                result = self.ecampus_orchestrator.run(
+                    query=state["query"],
+                    identity=identity_payload,
+                    history=history,
+                    request_context=state.get("request_context"),
+                    tool_scope="personal_actions",
+                )
+        except Exception as exc:
+            # Never kill the request — degrade to the ERP/RAG path, but keep it
+            # attributable (same policy as _n_community_tools).
+            log_soft_failure(
+                "AURA-GRAPH-004",
+                "personal_tools_orchestrator",
+                exc=exc,
+                degraded_to="personal_data",
+            )
+            return state
+
+        # Only commit if a tool actually ran. A no-tool run means the agent had
+        # nothing to act on (e.g. the gate over-triggered) — let the curated ERP
+        # path answer rather than surfacing the model's unfounded prose.
+        if not result.get("used_tools"):
+            return state
+
+        answer = (result.get("answer") or "").strip()
+        action_required = result.get("action_required")
+        if not answer and not action_required:
+            return state
+
+        out: dict = {
+            "answer": answer or (action_required or {}).get("message", ""),
+            "sources": result.get("sources") or [],
+            "is_personal_data": True,
+        }
+        if action_required:
+            out["action_required"] = action_required
+        state["result"] = out
+        return state
+
+    def _n_classify(self, state: AuraState) -> AuraState:
+        classification = self.classifier.classify(state["query"], history=state.get("history"))
         state["classification"] = classification
         state["query_type"] = classification["type"]
         return state
@@ -651,6 +815,11 @@ class AuraChatGraph:
         has_rag = query_type in ("PUBLIC", "MIXED") and bool(rag_context)
 
         with track_segment("generation_time"):
+            # on_delta / summary are stored on state by chat() and must be
+            # forwarded — without them /chat/stream silently buffers, and the
+            # rolling conversation digest never reaches the generator (so the
+            # token budget under-counts what the prompt would include once
+            # memory is wired).
             answer = self.generator.generate(
                 query=retrieval_result.get("corrected_query", state["query"]) if has_rag else state["query"],
                 context=combined_context,
@@ -658,6 +827,10 @@ class AuraChatGraph:
                 history=state.get("history") or [],
                 profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
+                on_delta=state.get("on_delta"),
+                on_profile_update=state.get("on_profile_update"),
+                profile_erp_id=state.get("identity").erp_id if state.get("identity") else None,
+                summary=(state.get("summary") or None),
                 tracking_flags=request_context.tracking_flags if request_context else None,
             )
 
@@ -755,7 +928,7 @@ class AuraChatGraph:
             profile["branch"] = scope.branch_id
         return profile
 
-    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None, summary=None, request_context=None):
+    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None, on_profile_update=None, summary=None, request_context=None):
         if request_context is not None:
             identity = request_context.identity
         if isinstance(identity, dict):
@@ -774,6 +947,7 @@ class AuraChatGraph:
                 "academic_scope": request_context.academic_scope if request_context else None,
                 "display_profile": display_profile,
                 "on_delta": on_delta,
+                "on_profile_update": on_profile_update,
                 "summary": summary or "",
                 "result": None,
             }
@@ -782,15 +956,25 @@ class AuraChatGraph:
             if result is None:
                 # Should be unreachable — every path sets "result" before
                 # END — but fail safe rather than return None to the API.
+                log_soft_failure(
+                    "AURA-GRAPH-001",
+                    "graph.invoke",
+                    detail="graph reached END without setting result",
+                    visited=",".join(sorted(k for k in final_state if final_state.get(k) is not None)),
+                )
                 return {"answer": "Sorry, I encountered an error while generating a response. Please try again.", "sources": [], "is_personal_data": False}
             return result
 
         except Exception as e:
-            import traceback
-            traceback.print_exc()
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+            log_soft_failure(
+                "AURA-GRAPH-002",
+                "graph.invoke",
+                exc=e,
+                user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
+            )
             return {"answer": msg, "sources": [], "is_personal_data": False}

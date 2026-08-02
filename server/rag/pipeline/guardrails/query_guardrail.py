@@ -39,7 +39,6 @@ IMPLICIT_DAU_PAT = re.compile(
 class QueryGuardrail:
     def __init__(self):
         load_dotenv()
-        self.client = InferenceRouter.get_client()
         self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
         self.system_prompt = """
 You are the security and scope filter for AURA, the assistant for Dhirubhai
@@ -89,6 +88,8 @@ studies — world knowledge, public figures, news, sport, celebrities, weather,
 politics, general coding help, homework or essay writing, or any request to
 act as a general-purpose assistant.
 
+If the question could only be answered from general world knowledge and not from university documents, classify it as OFF_TOPIC.
+
 These are ON-TOPIC and must NOT be marked OFF_TOPIC:
 - Anything about DAU — admissions, academics, faculty, research, policies,
   fees, hostel, placements, campus life, events, facilities.
@@ -99,8 +100,7 @@ These are ON-TOPIC and must NOT be marked OFF_TOPIC:
 - Short follow-ups and references to the previous turn ("what about the
   second one?", "tell me more", "and for M.Tech?"). These carry no topic of
   their own and are always ON-TOPIC.
-- Academic concepts a student is asking about in the course of their studies
-  ("what does CGPA mean", "how does GATE scoring work").
+- Questions asking for explanations of general academic concepts (e.g. algorithms, programming, mathematics, physics, essay writing, homework solutions) are OFF_TOPIC unless they explicitly ask how the concept relates to DAU curriculum, courses, policies, or university information.
 
 If a query is both harmful and off-topic, answer UNSAFE — UNSAFE wins.
 
@@ -201,16 +201,23 @@ No explanation, no punctuation, no JSON, no additional text.
 """
 
     def _classify(self, query: str) -> "Verdict":
-        response = self.client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": self.system_prompt.strip()},
-                {"role": "user", "content": f"Query to evaluate:\n{query}"},
-            ],
-            model=self.model,
-            max_tokens=12,
-            temperature=0.0,
-            extra_body=InferenceRouter.no_think_extra_body(),
-        )
+        model = self.model
+        system = self.system_prompt.strip()
+        user = f"Query to evaluate:\n{query}"
+
+        def _execute(client):
+            return client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                model=model,
+                max_tokens=12,
+                temperature=0.0,
+                extra_body=InferenceRouter.no_think_extra_body(),
+            )
+
+        response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
         result = response.choices[0].message.content.strip().upper()
 
         if os.getenv("DEBUG", "false").lower() == "true":

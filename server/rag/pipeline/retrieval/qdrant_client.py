@@ -51,11 +51,22 @@ def translate_filter(pinecone_filter: Optional[dict]) -> Optional[qmodels.Filter
             sub_filter = translate_filter(sub)
             if sub_filter is None:
                 continue
-            # A translated sub-clause is itself a Filter(must=[...]) with a
-            # single condition (from as_filter()/auth_filter shapes in
-            # retrieval_pipeline.py) — flatten it into the outer `must` list.
-            if sub_filter.must:
+            # A sub-clause that translated to a pure conjunction (only `must`
+            # populated — the common as_filter()/auth_filter shape) is flattened
+            # into the outer `must` list to keep the filter shallow and readable.
+            #
+            # A sub-clause carrying `should`/`must_not` (a nested `$or`, which is
+            # exactly what _academic_scope_filter emits) must NOT be flattened
+            # that way: its OR-semantics live in `should`, not `must`. The old
+            # code extended only `.must`, so such a clause was silently dropped —
+            # an authenticated student's academic-applicability scope never
+            # reached Qdrant and the dense candidate pool filled with
+            # out-of-scope documents. Qdrant allows nesting a Filter inside
+            # `must`, so append it whole to preserve the AND(OR(...)) semantics.
+            if sub_filter.must and not sub_filter.should and not sub_filter.must_not:
                 must.extend(sub_filter.must)
+            else:
+                must.append(sub_filter)
         return qmodels.Filter(must=must) if must else None
 
     if "$or" in pinecone_filter:
@@ -118,7 +129,7 @@ def build_index_adapter() -> Optional[QdrantIndexAdapter]:
 
     url = os.getenv("QDRANT_URL", "http://localhost:6333")
     api_key = os.getenv("QDRANT_API_KEY") or None
-    collection = os.getenv("QDRANT_COLLECTION", "aura-knowledge-base")
+    collection = os.getenv("QDRANT_COLLECTION", "aura_documents")
 
     try:
         client = QdrantClient(url=url, api_key=api_key)

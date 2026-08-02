@@ -12,23 +12,6 @@ import datetime
 
 logger = logging.getLogger(__name__)
 
-# Issue 2 fix: phrases that signal the user wants the *newest* version of
-# something (a schedule, a policy, a semester's info, ...). When one of
-# these fires, "latest" is treated as a hard document_year filter sent to
-# the vector DB — not just a soft recency boost applied after retrieval —
-# so old chunks are excluded from the candidate pool instead of merely
-# being outscored. Deliberately does NOT include a bare "new" (too broad —
-# "New Delhi", department names, etc.); "new" only counts when paired with
-# a time-sensitive noun.
-RECENCY_INTENT_RE = re.compile(
-    r"\b(latest|newest|most recent|most up[- ]to[- ]date|up[- ]to[- ]date|"
-    r"this semester|current semester|this year|current year|currently|"
-    r"upcoming|recently updated|"
-    r"new (?:schedule|timetable|syllabus|curriculum|policy|rules|circular|"
-    r"notice|semester|calendar))\b",
-    re.IGNORECASE,
-)
-
 # Canonical program_name for the ICT-CS specialisation. Matches the title the
 # corpus uses on the programmes-of-study page ("B.Tech. (Honours) in ICT with
 # minor in Computational Science"), which is what ingestion writes into
@@ -325,34 +308,6 @@ class RetrievalPipeline:
             return None
 
         entities = plan.get("entities", {}) if isinstance(plan, dict) else {}
-
-        # Issue 4 fix (Scatter-Gather Retrieval): directory queries like "all
-        # faculty doing NLP" name a research domain, not a faculty_name/
-        # program_name entity the planner already extracts, so they fell
-        # through to plain top-K semantic search, which truncates the full
-        # list. Match the same domain vocabulary used at ingestion time
-        # (extract_research_domain) against the raw query text and, when no
-        # specific faculty is already named, filter on the exact tag instead.
-        if query and not entities.get("faculty_name"):
-            # Local import mirrors ContextBuilder._rule_year_from_metadata --
-            # keeps this file free of package-path coupling for tests that
-            # import RetrievalPipeline without the full ingestion package.
-            try:
-                from pipeline.ingestion.chunking.metadata_extractors import (
-                    RESEARCH_DOMAIN_KEYWORDS,
-                )
-            except ImportError:
-                RESEARCH_DOMAIN_KEYWORDS = None  # type: ignore[assignment]
-            if RESEARCH_DOMAIN_KEYWORDS:
-                query_lower = query.lower()
-                matched_domains = [
-                    domain
-                    for domain, keywords in RESEARCH_DOMAIN_KEYWORDS.items()
-                    if any(keyword in query_lower for keyword in keywords)
-                ]
-                if matched_domains:
-                    return {"research_domain": {"$in": sorted(matched_domains)}}
-
         if not entities:
             return None
 
@@ -375,11 +330,6 @@ class RetrievalPipeline:
                 else:
                     sem_vals = self._canonical_semester_values(raw_val)
                     val = sem_vals if sem_vals else [raw_val]
-            elif field == "course_code":
-                if isinstance(raw_val, list):
-                    val = [re.sub(r"[\s\-]", "", str(c)).upper() for c in raw_val if c]
-                else:
-                    val = [re.sub(r"[\s\-]", "", str(raw_val)).upper()]
             else:
                 val = raw_val
 
@@ -1481,7 +1431,7 @@ class RetrievalPipeline:
                 if query_embedding is None:
                     raise RuntimeError("Query embedding unavailable")
                 
-                entity_filter = self._build_metadata_filter(plan, query)
+                entity_filter = self._build_metadata_filter(plan)
                 
                 print("\n" + "=" * 60)
                 print("===== METADATA FILTER =====")
@@ -1504,13 +1454,10 @@ class RetrievalPipeline:
                                 else:
                                     print(f"{k} = {v}")
                     _parse(entity_filter)
-                if recency_filter:
-                    print(f"document_year >= {recency_filter['document_year']['$gte']} (recency hard filter)")
                 print("=" * 60)
 
                 semantic_filter = self._combine_filters(
                     entity_filter,
-                    recency_filter,
                     {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
                     self._academic_scope_filter(academic_scope),
                 )

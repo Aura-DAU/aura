@@ -124,7 +124,16 @@ export const authOptions: NextAuthOptions = {
           }),
         ]
         : []),
-      ...(process.env.NODE_ENV === "development"
+      // SEC-02 fix: previously gated only on `NODE_ENV === "development"`
+      // with hardcoded passwords (Student@123, Faculty@123, Admin@123)
+      // baked into the source. If NODE_ENV were ever left unset/misconfigured
+      // in staging (a common operator mistake), those hardcoded passwords
+      // would grant real login — including admin — in a deployed instance.
+      // Now: (1) demo accounts require an explicit opt-in flag, (2) that
+      // flag is hard-blocked in production no matter what, and (3) the
+      // passwords themselves must come from the environment — there is no
+      // in-source fallback to leak.
+      ...(process.env.ENABLE_DEMO_ACCOUNTS === "true" && process.env.NODE_ENV !== "production"
         ? [
           CredentialsProvider({
             name: "Demo Account",
@@ -133,21 +142,28 @@ export const authOptions: NextAuthOptions = {
               password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
+              const studentPw = process.env.DEMO_STUDENT_PASSWORD
+              const facultyPw = process.env.DEMO_FACULTY_PASSWORD
+              const adminPw = process.env.DEMO_ADMIN_PASSWORD
+
               if (
+                studentPw &&
                 credentials?.email === "demo.student@dau.ac.in" &&
-                credentials?.password === "Student@123"
+                credentials?.password === studentPw
               ) {
                 return { id: "demo-stud", email: credentials.email, name: "Demo Student" }
               }
               if (
+                facultyPw &&
                 credentials?.email === "demo.faculty@daiict.ac.in" &&
-                credentials?.password === "Faculty@123"
+                credentials?.password === facultyPw
               ) {
                 return { id: "demo-fac", email: credentials.email, name: "Demo Faculty" }
               }
               if (
+                adminPw &&
                 credentials?.email === "demo.admin@dau.ac.in" &&
-                credentials?.password === "Admin@123"
+                credentials?.password === adminPw
               ) {
                 return { id: "demo-admin", email: credentials.email, name: "Demo Admin" }
               }
@@ -226,8 +242,10 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user }) {
       // If it's the first sign-in (user object is available), lookup the ERP identity
+      const demoAccountsEnabled =
+        process.env.ENABLE_DEMO_ACCOUNTS === "true" && process.env.NODE_ENV !== "production"
       if (user && user.email) {
-        if (process.env.NODE_ENV === "development" && user.email === "demo.student@dau.ac.in") {
+        if (demoAccountsEnabled && user.email === "demo.student@dau.ac.in") {
           token.role = "student"
           token.erpId = "DEMO123"
           token.department = "ICT"
@@ -235,12 +253,12 @@ export const authOptions: NextAuthOptions = {
           token.currentYear = 3
           token.currentSem = 5
           token.currentSec = "A"
-        } else if (process.env.NODE_ENV === "development" && user.email === "demo.faculty@daiict.ac.in") {
+        } else if (demoAccountsEnabled && user.email === "demo.faculty@daiict.ac.in") {
           token.role = "faculty"
           token.erpId = "FAC123"
           token.department = "ICT"
           token.fullName = "Demo Faculty"
-        } else if (process.env.NODE_ENV === "development" && user.email === "demo.admin@dau.ac.in") {
+        } else if (demoAccountsEnabled && user.email === "demo.admin@dau.ac.in") {
           token.role = "admin"
           token.erpId = "ADM123"
           token.department = "IT"

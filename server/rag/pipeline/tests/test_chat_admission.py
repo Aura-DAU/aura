@@ -61,3 +61,64 @@ def test_chat_slot_releases_even_when_body_raises(monkeypatch):
         return sem._value
 
     assert asyncio.run(scenario()) == 1  # not leaked despite the error
+
+
+class _MemResult:
+    history: list = []
+    summary = ""
+    summary_changed = False
+    folded_turns = 0
+    should_fork = False
+
+
+class _ConvMem:
+    summary_max_tokens = 512
+
+    def prepare(self, summary, history):
+        return _MemResult()
+
+
+class _UserMem:
+    def get(self, identity_dict, exclude_thread=None):
+        return ""
+
+    def merge(self, identity_dict, capture, thread_id=None):
+        return None
+
+
+class _Aura:
+    def ask(self, **kwargs):
+        return {"answer": "hi", "sources": []}
+
+
+def _stub_stream_pipeline(monkeypatch):
+    monkeypatch.setattr(chat_routes, "enforce_quota", lambda key, role: 5)
+    monkeypatch.setattr(chat_routes, "resolve_effective_role", lambda identity: identity.role)
+    monkeypatch.setattr(chat_routes, "get_conversation_memory", lambda: _ConvMem())
+    monkeypatch.setattr(chat_routes, "get_user_memory_store", lambda: _UserMem())
+    monkeypatch.setattr(chat_routes, "get_aura", lambda: _Aura())
+
+
+def test_chat_stream_releases_slot_after_completion(monkeypatch):
+    # Regression: chat_stream once acquired the concurrency slot twice but
+    # released it once, so every streamed request leaked a slot until the pool
+    # drained and all chats shed a 503. Consuming a full stream must return the
+    # slot to the pool (acquire and release paired exactly 1:1).
+    from api.auth import Identity
+    from api.schemas import ChatRequest
+
+    sem = asyncio.Semaphore(2)
+    monkeypatch.setattr(chat_routes, "chat_queue_lock", sem)
+    monkeypatch.setattr(chat_routes, "CHAT_QUEUE_WAIT_TIMEOUT", 1.0)
+    _stub_stream_pipeline(monkeypatch)
+
+    identity = Identity(erp_id="stu-1", role="student", email="stu-1@dau.ac.in")
+    body = ChatRequest(question="hello", threadId="t1")
+
+    async def scenario():
+        response = await chat_routes.chat_stream(req=object(), body=body, identity=identity)
+        async for _ in response.body_iterator:
+            pass
+        return sem._value
+
+    assert asyncio.run(scenario()) == 2  # slot returned; nothing leaked

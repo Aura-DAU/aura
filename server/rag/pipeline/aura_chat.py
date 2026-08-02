@@ -29,6 +29,7 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    log_soft_failure,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -168,21 +169,20 @@ class AuraChat:
                         "I can help you with a wide range of questions about Dhirubhai Ambani University, including:\n"
                         "- **Admissions & Academics**: Program details, fee structures, eligibility criteria, and academic policies.\n"
                         "- **Campus & Facilities**: Hostel rules, dining details, medical SOPs, and general guidelines.\n"
-                        "- **Personal ERP Records**: You can check your CPI/CGPA, attendance, and course grades securely.\n"
                         "- **Calendar Actions**: I can help you schedule appointments or check event dates.\n\n"
                         "How can I assist you today?"
                     )
                 elif q in who_words or any(w in who_words for w in words):
                     ans = (
                         "I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                        "I am here to help you navigate university life, policies, academics, admissions, "
-                        "and connect you with your personal academic data from the ERP system. How can I help you today?"
+                        "I am here to help you navigate university life, policies, academics, and admissions. "
+                        "How can I help you today?"
                     )
                 else:
                     ans = (
                         "Hello! I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                        "I can help you with questions about admissions, academics, faculty, courses, campus life, "
-                        "and your personal student records (like CGPA, grades, and attendance). How can I assist you today?"
+                        "I can help you with questions about admissions, academics, faculty, courses, and campus life. "
+                        "How can I assist you today?"
                     )
                 return {"answer": ans, "sources": [], "is_personal_data": False}
 
@@ -237,7 +237,7 @@ class AuraChat:
                 }
 
             # ── 5. Intent Classification ────────────────────────────────
-            classification = self.classifier.classify(query)
+            classification = self.classifier.classify(query, history=history)
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
 
             # ── Guest / No-identity check for personal paths ───────────
@@ -319,7 +319,7 @@ class AuraChat:
                 from access_control import resolve_effective_role
                 user_role = resolve_effective_role(identity) if identity else "public"
                 with track_segment("retrieval_time"):
-                    retrieval_result = self.pipeline.get_context(resolved_query, history, user_role=user_role)
+                    retrieval_result = self.pipeline.get_context(query, history, user_role=user_role)
                 chunks    = retrieval_result.get("chunks", [])
                 rag_context = retrieval_result.get("context", "")
                 sources   = retrieval_result.get("sources", [])
@@ -339,7 +339,7 @@ class AuraChat:
 
             with track_segment("generation_time"):
                 answer = self.generator.generate(
-                    query=retrieval_result.get("corrected_query", resolved_query) if query_type in ("PUBLIC", "MIXED") and rag_context else resolved_query,
+                    query=retrieval_result.get("corrected_query", query) if query_type in ("PUBLIC", "MIXED") and rag_context else query,
                     context=combined_context,
                     plan=retrieval_result.get("plan") if query_type in ("PUBLIC", "MIXED") and rag_context else None,
                     history=history,
@@ -364,13 +364,17 @@ class AuraChat:
             }
 
         except Exception as e:
-            import traceback
-            traceback.print_exc()
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+            log_soft_failure(
+                "AURA-CHAT-001",
+                "aura_chat.chat",
+                exc=e,
+                user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
+            )
             return {"answer": msg, "sources": [], "is_personal_data": False}
 
     def _resolve_target(self, target_label: Optional[str], identity) -> Optional[str]:

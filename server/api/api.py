@@ -31,6 +31,7 @@ from api.routes.admin_routes import router as admin_router
 from api.routes.calendar_routes import router as calendar_router
 from api.routes.timetable_routes import router as timetable_router, push_router, profile_router
 from api.routes.chat_routes import router as chat_router
+from api.routes.memory_routes import router as memory_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
@@ -177,6 +178,7 @@ app.include_router(profile_router)
 # app/api/chat/route.ts calls /chat/stream. Must be registered here or the
 # frontend gets 502 "Backend error" ("AURA temporarily unavailable").
 app.include_router(chat_router)
+app.include_router(memory_router)
 
 
 @app.on_event("startup")
@@ -202,6 +204,11 @@ async def _start_timetable_scheduler():
             raise RuntimeError(
                 "Production config incomplete — set: " + ", ".join(missing)
             )
+
+    # One line per worker naming the metrics mode — during an incident this is
+    # how you tell whether /metrics is aggregated or per-worker (OBS-01).
+    from api.metrics_multiproc import status as _metrics_status
+    print(f"[metrics] pid {os.getpid()}: {_metrics_status()}", flush=True)
 
     from pipeline.timetable.notifier import start_scheduler
     start_scheduler()

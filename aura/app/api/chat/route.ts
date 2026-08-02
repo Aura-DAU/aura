@@ -1,20 +1,25 @@
 import { getServerSession } from "next-auth"
 import { cookies } from "next/headers"
-import { randomUUID } from "crypto"
 import { z } from "zod"
 
 import { backendUrl, type BackendChatRequest } from "@/lib/api/backend"
 import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
+import {
+  readOrMintGuestCookies,
+  guestErpId,
+  guestCookieOptions,
+  GUEST_ID_COOKIE,
+  GUEST_SECRET_COOKIE,
+} from "@/lib/auth/guest-identity"
 
 export const maxDuration = 60
 
 // Cookie identifying an anonymous guest browser (no Google sign-in). It
 // carries no PII — just a random id — and lets the backend's 10/day quota
 // (see server/rag/pipeline/rate_limiter.py) key on a stable per-browser
-// identity instead of resetting on every request.
-const GUEST_COOKIE = "aura-guest-id"
-const GUEST_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
+// identity instead of resetting on every request. See lib/auth/guest-identity.ts
+// (SEC-07) for why this is now two HMAC-bound cookies instead of one.
 
 const historyTurnSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -126,18 +131,13 @@ async function handleChatPost(req: Request): Promise<Response> {
     }
   } else {
     const cookieStore = await cookies()
-    let guestId = cookieStore.get(GUEST_COOKIE)?.value
-    if (!guestId || guestId.length > 64) {
-      guestId = `GUEST-${randomUUID()}`
-      cookieStore.set(GUEST_COOKIE, guestId, {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        maxAge: GUEST_COOKIE_MAX_AGE,
-      })
+    const guestCookies = readOrMintGuestCookies(cookieStore)
+    if (guestCookies.isNew) {
+      const opts = guestCookieOptions()
+      cookieStore.set(GUEST_ID_COOKIE, guestCookies.guestId, opts)
+      cookieStore.set(GUEST_SECRET_COOKIE, guestCookies.guestSecret, opts)
     }
-    identity = { role: "guest", erpId: guestId }
+    identity = { role: "guest", erpId: guestErpId(guestCookies) }
   }
 
   let body: unknown

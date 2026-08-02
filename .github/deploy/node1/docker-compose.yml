@@ -127,12 +127,19 @@ services:
       RERANKER_DEVICE: ${RERANKER_DEVICE:-cpu}
       GOOGLE_CALENDAR_CLIENT_ID: ${GOOGLE_CALENDAR_CLIENT_ID}
       GOOGLE_CALENDAR_CLIENT_SECRET: ${GOOGLE_CALENDAR_CLIENT_SECRET}
+      GOOGLE_CALENDAR_REDIRECT_URI: ${GOOGLE_CALENDAR_REDIRECT_URI:-https://aura.dau.ac.in/backend/calendar/callback}
       GOOGLE_CALENDAR_VAULT_KEY: ${GOOGLE_CALENDAR_VAULT_KEY}
       GOOGLE_CALENDAR_VAULT_DB: /var/lib/aura/google_calendar_vault.db
       ECAMPUS_VAULT_KEY: ${ECAMPUS_VAULT_KEY}
       ECAMPUS_VAULT_DB: /var/lib/aura/ecampus_credentials.db
       ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db
       AURA_AUDIT_LOG: /var/log/aura/personal_data_audit.log
+      # OBS-01: every gunicorn worker writes its samples here so /metrics
+      # aggregates instead of reporting whichever worker answered the scrape.
+      # Must land on the aura-vault mount below — the path has to be shared by
+      # all workers and writable by the aura user. Omit to fall back to
+      # per-worker registries.
+      PROMETHEUS_MULTIPROC_DIR: ${PROMETHEUS_MULTIPROC_DIR:-/var/lib/aura/prometheus}
     volumes:
       # Raw markdown knowledge base — repo-root data/ (two levels up from node1/).
       - ../../data:/app/data:ro
@@ -214,11 +221,15 @@ services:
   # under PagedAttention. Without an explicit --max-num-seqs cap, vLLM
   # will keep admitting concurrent sequences and can exhaust/fragment the
   # KV cache under peak traffic.
+  #
+  # The 24 default matches the live ceiling and KV reality (measured
+  # kv_cache_max_concurrency≈2.9 at max_model_len 8192); revisit upward only
+  # after a max_model_len cutover toward 4096.
   vllm-node1:
     image: vllm/vllm-openai:latest
     profiles: [ "gpu" ]
     restart: unless-stopped
-    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-64}" ]
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}" ]
     expose:
       - "8000"
     volumes:
@@ -243,7 +254,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: [ "gpu" ]
     restart: unless-stopped
-    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-64}" ]
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}" ]
     expose:
       - "8000"
     volumes:
@@ -268,7 +279,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: [ "gpu" ]
     restart: unless-stopped
-    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-64}" ]
+    command: [ "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--gpu-memory-utilization", "${VLLM_GPU_MEM_UTIL:-0.92}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}" ]
     expose:
       - "8000"
     volumes:

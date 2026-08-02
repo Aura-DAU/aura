@@ -11,7 +11,7 @@ import type {
 import { useSession } from "next-auth/react"
 import { apiFetch } from "@/lib/auth-client"
 import { getUserMessage, toastAppError, toastError, toastSuccess, appErrorFromResponse } from "@/lib/toast"
-import { AppError, isAbortError, sanitizePublicMessage } from "@/lib/errors"
+import { AppError, ErrorCode, isAbortError, sanitizePublicMessage } from "@/lib/errors"
 
 /** Soft failure copy the pipeline sometimes returns as a normal answer. */
 const SOFT_FAILURE_ANSWER =
@@ -32,6 +32,30 @@ const DEFAULT_PROFILE: StudentProfile = {
   program: "",
   year: "",
   interests: "",
+}
+
+/**
+ * Dept codes resolved server-side from the student's ERP id (see
+ * server/api/identity_routes.py / academic_scope_persist.py) mapped to the
+ * same display labels the RAG pipeline uses (retrieval_pipeline.py). Used to
+ * auto-fill the profile modal's Program field so a student never has to type
+ * something the system already knows from their ERP id.
+ */
+const DEPT_TO_PROGRAM_LABEL: Record<string, string> = {
+  ICT: "B.Tech. (ICT)",
+  ICTCS: "B.Tech. (ICT)",
+  MnC: "B.Tech. (MnC)",
+  EVD: "B.Tech. (EVD)",
+  MTech: "M.Tech. (ICT)",
+  MScIT: "M.Sc. (IT)",
+  MScDS: "M.Sc. (Data Science)",
+  PhD: "Ph.D.",
+}
+
+function ordinalYearLabel(year: number): string {
+  const suffix =
+    year === 1 ? "st" : year === 2 ? "nd" : year === 3 ? "rd" : "th"
+  return `${year}${suffix} year`
 }
 
 function uid(): string {
@@ -77,6 +101,96 @@ function toBackendHistory(messages: ChatMessage[]) {
   return messages.map(({ role, content }) => ({ role, content }))
 }
 
+/** Seconds to wait after a load shed when no usable Retry-After is present. */
+const DEFAULT_RETRY_AFTER_SECONDS = 5
+
+export interface ShedSignal {
+  /** Which layer shed the request — the edge (429) or backend admission (503). */
+  shedBy: "edge" | "backend"
+  retryAfterSeconds: number
+}
+
+export function parseRetryAfterSeconds(
+  value: string | null | undefined,
+  fallback = DEFAULT_RETRY_AFTER_SECONDS,
+): number {
+  if (!value) return fallback
+  const seconds = Number(value)
+  if (Number.isFinite(seconds) && seconds > 0) return Math.ceil(seconds)
+  const at = Date.parse(value)
+  if (!Number.isNaN(at)) {
+    const delta = Math.ceil((at - Date.now()) / 1000)
+    if (delta > 0) return delta
+  }
+  return fallback
+}
+
+/**
+ * Distinguishes a capacity shed from the per-identity question quota.
+ *
+ * The edge sheds with 429 + `EDGE_OVERLOADED` / `X-Aura-Shed-By: edge` and
+ * backend admission with 503 + `ADMISSION_OVERLOADED` / `X-Aura-Shed-By:
+ * backend`; a real quota exhaustion is a 429 carrying neither. Treating every
+ * 429 as quota would zero a guest's counter for the rest of the day over what
+ * is actually a transient overload they can retry in seconds.
+ *
+ * Pass a clone — this consumes the body.
+ */
+export async function readShedSignal(res: Response): Promise<ShedSignal | null> {
+  if (res.status !== 429 && res.status !== 503) return null
+
+  let payload: { code?: string; shedBy?: string; retryAfter?: number } | null = null
+  try {
+    payload = (await res.json()) as { code?: string; shedBy?: string; retryAfter?: number }
+  } catch {
+    payload = null
+  }
+
+  const shedBy = res.headers.get("X-Aura-Shed-By") ?? payload?.shedBy
+  const code = payload?.code
+  const isOverload =
+    code === "EDGE_OVERLOADED" ||
+    code === "ADMISSION_OVERLOADED" ||
+    shedBy === "edge" ||
+    shedBy === "backend"
+  if (!isOverload) return null
+
+  const bodyRetry =
+    typeof payload?.retryAfter === "number" && payload.retryAfter > 0
+      ? Math.ceil(payload.retryAfter)
+      : DEFAULT_RETRY_AFTER_SECONDS
+
+  return {
+    shedBy: shedBy === "backend" ? "backend" : "edge",
+    retryAfterSeconds: parseRetryAfterSeconds(res.headers.get("Retry-After"), bodyRetry),
+  }
+}
+
+export function shedErrorFor(shed: ShedSignal): AppError {
+  const s = shed.retryAfterSeconds
+  return new AppError({
+    code: ErrorCode.BACKEND_UNAVAILABLE,
+    message: `AURA is busy right now — please retry in ${s} second${s === 1 ? "" : "s"}.`,
+    detail: `shed_by=${shed.shedBy}`,
+  })
+}
+
+/**
+ * Index into `priorMessages` for the start of the unsummarised tail.
+ *
+ * Always `priorSummaryCount` (clamped to the transcript). Never advance past it:
+ * a turn past that pointer is not yet in the summary, so skipping it here would
+ * drop it from the model's context entirely. Compaction of an over-long
+ * unsummarised span is the backend's job (`AURA_MAX_TAIL_TURNS`); this helper
+ * must not invent a second, silent drop.
+ */
+export function computeHistoryTailStart(
+  priorSummaryCount: number,
+  priorMessageCount: number,
+): number {
+  return Math.min(Math.max(priorSummaryCount, 0), priorMessageCount)
+}
+
 // Fire-and-forget — never blocks the UI. Coalesces concurrent saves so an
 // older in-flight POST cannot overwrite a newer snapshot on the server.
 let historySyncSeq = 0
@@ -106,6 +220,44 @@ function saveHistoryToServer(
       }
     })
     .catch(() => { /* ignore network errors */ })
+}
+
+/**
+ * Drops this conversation's block from the backend's persistent per-user
+ * memory. Clearing or deleting a chat has to reach storage: the block is keyed
+ * by thread id and otherwise survives for the full retention window (90 days by
+ * default), still being injected into later conversations. Guests are a no-op —
+ * they have no stored memory. Failures are surfaced, because silently keeping
+ * memory the user asked to delete is a privacy problem, not a cosmetic one.
+ */
+function requestThreadMemoryDelete(threadId: string): Promise<Response> {
+  return apiFetch(`/api/memory?threadId=${encodeURIComponent(threadId)}`, {
+    method: "DELETE",
+  })
+}
+
+function forgetThreadMemory(threadId: string): void {
+  requestThreadMemoryDelete(threadId)
+    .then((res) => {
+      if (res.ok) return
+      // One retry after a short delay — the chat is already gone from the
+      // user's chat list by the time this runs, so a single transient
+      // network/backend blip shouldn't read as a failed deletion.
+      return new Promise((resolve) => setTimeout(resolve, 1200))
+        .then(() => requestThreadMemoryDelete(threadId))
+        .then((retryRes) => {
+          if (!retryRes.ok) {
+            toastError("The chat was deleted, but its saved memory couldn't be cleared. Please try again.")
+          }
+        })
+    })
+    .catch(() => {
+      return new Promise((resolve) => setTimeout(resolve, 1200))
+        .then(() => requestThreadMemoryDelete(threadId))
+        .catch(() => {
+          toastError("The chat was deleted, but its saved memory couldn't be cleared. Please try again.")
+        })
+    })
 }
 
 /**
@@ -381,6 +533,36 @@ export function useAuraChat() {
     }
   }, [threads, hasHydrated])
 
+  // Auto-fill Program/Year from the student's verified ERP identity
+  // (department + currentYear, resolved server-side from their ERP id at
+  // login — see server/api/identity_routes.py). Only fills fields the
+  // student hasn't already set themselves, and only once per field, so an
+  // edit they save is never silently overwritten on a later session.
+  useEffect(() => {
+    if (!hasHydrated) return
+    const dept = session?.user?.department
+    const year = session?.user?.currentYear
+    const programLabel = dept ? DEPT_TO_PROGRAM_LABEL[dept] : undefined
+    const yearLabel = typeof year === "number" ? ordinalYearLabel(year) : undefined
+    if (!programLabel && !yearLabel) return
+
+    setStudentProfile((prev) => {
+      if (prev.program && prev.year) return prev
+      const next = {
+        ...prev,
+        program: prev.program || programLabel || prev.program,
+        year: prev.year || yearLabel || prev.year,
+      }
+      if (next.program === prev.program && next.year === prev.year) return prev
+      try {
+        localStorage.setItem(PROFILE_KEY, JSON.stringify(next))
+      } catch {
+        /* ignore */
+      }
+      return next
+    })
+  }, [hasHydrated, session?.user?.department, session?.user?.currentYear])
+
   useEffect(() => {
     return () => {
       if (streamRef.current) {
@@ -472,6 +654,7 @@ export function useAuraChat() {
         syncThreadsToServer(next)
         return next
       })
+      forgetThreadMemory(id)
     },
     [activeThreadId, syncThreadsToServer],
   )
@@ -484,6 +667,21 @@ export function useAuraChat() {
       /* ignore */
     }
   }, [])
+
+  const insertGreeting = useCallback((text: string) => {
+    if (messages.length > 0) return
+    const threadId = uid()
+    const msg: ChatMessage = { role: "assistant", content: text, timestamp: Date.now() }
+    const newThread: StoredThread = {
+      id: threadId,
+      title: "New chat",
+      messages: [msg],
+      updatedAt: msg.timestamp,
+    }
+    setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
+    setActiveThreadIdState(threadId)
+    setMessages([msg])
+  }, [messages.length])
 
   const handleSendMessage = useCallback(
     async (text: string, options?: { regenerate?: boolean }) => {
@@ -566,6 +764,7 @@ export function useAuraChat() {
           setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
           setActiveThreadIdState(threadId)
         }
+        baseMessages = [...priorMessages, userMsg]
         persistMessages(
           threadId,
           baseMessages,
@@ -575,14 +774,17 @@ export function useAuraChat() {
 
       setMessages(baseMessages)
 
-      // Rolling memory: send the running summary + only the unsummarised tail,
-      // bounded so the request stays under the 20-turn API cap. The backend
-      // folds any overflow into the summary and streams the update back.
+      // Rolling memory: send the running summary plus every turn after it. The
+      // start must never move past priorSummaryCount — a turn skipped here is in
+      // neither the summary nor the tail, so it disappears from the model's
+      // context with no user-visible signal. The backend compacts an over-long
+      // tail itself (ConversationMemory.prepare folds once the span passes
+      // AURA_MAX_TAIL_TURNS, well under the API's 20-turn history cap) and
+      // reports foldedTurns so this pointer advances on the next request.
       const activeThread = threads.find((t) => t.id === threadId)
       const priorSummaryCount = activeThread?.summaryTurnCount ?? 0
       const threadSummary = activeThread?.summary
-      const MAX_TAIL_TURNS = 16
-      const tailStart = Math.max(priorSummaryCount, priorMessages.length - MAX_TAIL_TURNS)
+      const tailStart = computeHistoryTailStart(priorSummaryCount, priorMessages.length)
       const tail = priorMessages.slice(tailStart)
 
       try {
@@ -601,15 +803,23 @@ export function useAuraChat() {
 
         if (controller.signal.aborted || !mountedRef.current) return
 
-        if (response.status === 429) {
-          // Only pin the guest counter to 0. Signed-in users are unlimited;
-          // a transient 429 must not permanently lock the composer.
-          if (!session?.user) {
-            setRemainingQuotaState(0)
-          }
-          throw AppError.rateLimited()
-        }
         if (!response.ok || !response.body) {
+          // A capacity shed (edge 429 EDGE_OVERLOADED / backend 503
+          // ADMISSION_OVERLOADED) is retryable and says nothing about how many
+          // questions the user has left — it must not touch the quota counter.
+          const shed = response.ok ? null : await readShedSignal(response.clone())
+          if (shed) {
+            throw shedErrorFor(shed)
+          }
+          if (response.status === 429) {
+            // Genuine quota exhaustion. Only pin the guest counter to 0;
+            // signed-in users are unlimited, so a transient 429 must not
+            // permanently lock the composer.
+            if (!session?.user) {
+              setRemainingQuotaState(0)
+            }
+            throw AppError.rateLimited()
+          }
           throw await appErrorFromResponse(response)
         }
 
@@ -665,6 +875,12 @@ export function useAuraChat() {
                 ? sanitizePublicMessage(chunk.message)
                 : undefined
             streamErrorMessage = fromChunk ?? STREAM_ERROR_FALLBACK
+          } else if (chunk.type === "profile-update" && chunk.profile && chunk.profile.name) {
+            setStudentProfile(prev => {
+              const next = { ...prev, name: chunk.profile.name }
+              try { localStorage.setItem(PROFILE_KEY, JSON.stringify(next)) } catch {}
+              return next
+            })
           } else if (
             chunk.type === "calendar-action" &&
             chunk.action !== null &&
@@ -807,6 +1023,7 @@ export function useAuraChat() {
         syncThreadsToServer(next)
         return next
       })
+      forgetThreadMemory(activeThreadId)
     }
     setMessages([])
     setActiveCitations([])
@@ -1086,5 +1303,7 @@ export function useAuraChat() {
     handleClearChat,
     stopGeneration,
     lastUserMessage,
+    insertGreeting,
+    hasHydrated,
   }
 }

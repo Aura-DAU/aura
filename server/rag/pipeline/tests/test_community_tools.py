@@ -6,6 +6,7 @@ mirroring test_ecampus_scope_propagation.py / student_workflow patterns.
 """
 
 from types import SimpleNamespace
+from datetime import date
 
 import pytest
 
@@ -159,6 +160,12 @@ def test_lookup_club_office_bearers(monkeypatch):
     assert "Mahek" in result["response"]
     assert "convenor" in pipeline.last["query"].lower()
     assert "C_DCs" in pipeline.last["query"] or "office" in pipeline.last["query"].lower()
+    assert community_tools._current_academic_year() in pipeline.last["query"]
+
+
+def test_current_academic_year_rolls_over_in_july():
+    assert community_tools._current_academic_year(date(2026, 6, 30)) == "2025-26"
+    assert community_tools._current_academic_year(date(2026, 7, 1)) == "2026-27"
 
 
 def test_get_club_members_empty_kb(monkeypatch):
