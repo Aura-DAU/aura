@@ -110,5 +110,9 @@ def test_streaming_generation_appends_period_before_sources():
         "Data period: Academic Year 2025-2026.\n\n"
         "[Sources: 1]"
     )
+    expected_emitted = (
+        "The fee is listed.\n\n"
+        "Data period: Academic Year 2025-2026."
+    )
     assert answer == expected
-    assert "".join(emitted) == expected
+    assert "".join(emitted) == expected_emitted

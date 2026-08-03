@@ -238,6 +238,113 @@ def strip_sources_marker(answer: str) -> str:
     return _SOURCES_MARKER_RE.sub("", answer).rstrip()
 
 
+def _extract_inline_cited_ids(answer: str) -> set[int]:
+    return {
+        int(n)
+        for marker in _CITATION_RE.finditer(answer or "")
+        for n in re.findall(r"\d+", marker.group(0))
+    }
+
+
+def _normalize_academic_year(value: str) -> str | None:
+    match = _ACADEMIC_YEAR_RE.search(value or "")
+    if not match:
+        return None
+
+    start_raw = match.group("start")
+    end_raw = match.group("end")
+    start = int(start_raw) if len(start_raw) == 4 else 2000 + int(start_raw)
+    if len(end_raw) == 4:
+        end = int(end_raw)
+    else:
+        end = (start // 100) * 100 + int(end_raw)
+        if end < start:
+            end += 100
+
+    if end != start + 1:
+        return None
+    return f"{start:04d}-{end:04d}"
+
+
+def _document_date_metadata(context: str) -> dict[int, tuple[str, str]]:
+    documents = {}
+    for doc_match in _DOC_OPEN_TAG_RE.finditer(context or ""):
+        attrs = {
+            match.group("name").lower(): match.group("value").strip()
+            for match in _DOC_DATE_ATTRIBUTE_RE.finditer(doc_match.group("attrs"))
+        }
+        try:
+            doc_id = int(attrs.get("id", ""))
+        except ValueError:
+            continue
+        documents[doc_id] = (
+            attrs.get("rule_year", ""),
+            attrs.get("scraped_date", ""),
+        )
+    return documents
+
+
+def build_data_period_note(context: str, cited_ids: set[int]) -> str:
+    """Describe the currency of the source documents actually used."""
+    metadata = _document_date_metadata(context)
+    academic_years = []
+    fetched_dates = []
+    undated = False
+
+    for doc_id in sorted(cited_ids):
+        rule_year, scraped_date = metadata.get(doc_id, ("", ""))
+        academic_year = _normalize_academic_year(rule_year)
+        if academic_year:
+            if academic_year not in academic_years:
+                academic_years.append(academic_year)
+            continue
+
+        fetched_match = _CALENDAR_DATE_RE.search(scraped_date)
+        if fetched_match:
+            fetched_date = fetched_match.group(1)
+            if fetched_date not in fetched_dates:
+                fetched_dates.append(fetched_date)
+            continue
+
+        year_match = _CALENDAR_DATE_RE.search(rule_year)
+        if year_match:
+            year = year_match.group(1)
+            if year not in fetched_dates:
+                fetched_dates.append(year)
+            continue
+
+        undated = True
+
+    if not cited_ids:
+        return "Data period: No dated source was cited for this response."
+
+    parts = []
+    if academic_years:
+        label = "Academic Year" if len(academic_years) == 1 else "Academic Years"
+        parts.append(f"{label} {', '.join(academic_years)}")
+    if fetched_dates:
+        label = "source fetched as of" if len(fetched_dates) == 1 else "sources fetched as of"
+        parts.append(f"{label} {', '.join(fetched_dates)}")
+
+    if not parts:
+        return "Data period: The cited source does not specify a date."
+
+    note = f"Data period: {'; '.join(parts)}."
+    if undated:
+        note += " Some cited sources do not specify a date."
+    return note
+
+
+def append_data_period_note(answer: str, context: str, cited_ids: set[int]) -> str:
+    note = build_data_period_note(context, cited_ids)
+    marker = _SOURCES_MARKER_RE.search(answer or "")
+    if marker:
+        body = answer[:marker.start()].rstrip()
+        sources = answer[marker.start():]
+        return f"{body}\n\n{note}\n\n{sources}"
+    return f"{(answer or '').rstrip()}\n\n{note}".lstrip()
+
+
 def filter_sources_by_citations(sources, citation_map, answer):
     # Narrow a retrieval source list to those the answer actually cited.
     #
@@ -958,6 +1065,19 @@ Retrieved Documents
                 emitted.append(final_piece)
                 on_delta(final_piece)
 
+        # Check if we have generated any actual answer text before adding footnotes
+        if not "".join(emitted).strip():
+            log_soft_failure(
+                "AURA-GEN-005",
+                "generation.streaming",
+                node=dispatch["node"],
+                detail="model stream had no usable content",
+            )
+            return SOFT_FAILURE_ANSWER
+
+        # Stream the data period note to the client since it is user-facing.
+        _emit("\n\n" + build_data_period_note(context, sanitizer.cited))
+
         # The consolidated "[Sources: N, M]" marker is only for the
         # downstream filter_sources_by_citations() call (it reads cited ids
         # back off the returned answer string) — it must NEVER reach the
@@ -970,16 +1090,7 @@ Retrieved Documents
         if tail:
             emitted.append(tail)
 
-        answer = "".join(emitted)
-        if not answer.strip():
-            log_soft_failure(
-                "AURA-GEN-005",
-                "generation.streaming",
-                node=dispatch["node"],
-                detail="model stream had no usable content",
-            )
-            return SOFT_FAILURE_ANSWER
-        return answer
+        return "".join(emitted)
 
     def _clean_citations(self, text: str) -> str:
         # Strips all inline bracketed citations (e.g. [1], [2, 3]) from the
