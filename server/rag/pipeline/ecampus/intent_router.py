@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 class PersonalDataIntentRouter:
     def __init__(self):
         load_dotenv()
-        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "aura-llm"))
         self.system_prompt = """
 Classify the user's query as PERSONAL_DATA, COMMUNITY, or GENERAL.
 

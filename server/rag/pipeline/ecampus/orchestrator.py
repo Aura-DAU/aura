@@ -388,7 +388,7 @@ def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
 class EcampusOrchestrator:
     def __init__(self):
         load_dotenv()
-        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "aura-llm"))
         # No self.client — every LLM call goes through InferenceRouter.call_with_rotation
         # so this orchestrator participates in key rotation just like every
         # other pipeline component.

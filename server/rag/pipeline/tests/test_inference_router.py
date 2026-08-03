@@ -54,6 +54,12 @@ def _enable_queue_aware(monkeypatch) -> None:
     monkeypatch.setattr(InferenceRouter, "_ensure_queue_thread", classmethod(lambda cls: None))
 
 
+def test_default_model_matches_live_served_id(monkeypatch):
+    monkeypatch.delenv("VLLM_MODEL", raising=False)
+
+    assert InferenceRouter.model_name() == "aura-llm"
+
+
 def test_pick_node_random_tie_break_spreads_cold_start(monkeypatch):
     # Freeze random.choice to cycle through tied candidates so we can assert
     # the tie-break path is used (not always candidates[0]).

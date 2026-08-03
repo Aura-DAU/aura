@@ -39,7 +39,7 @@ IMPLICIT_DAU_PAT = re.compile(
 class QueryGuardrail:
     def __init__(self):
         load_dotenv()
-        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "aura-llm"))
         self.system_prompt = """
 You are the security and scope filter for AURA, the assistant for Dhirubhai
 Ambani University (DAU). Classify the user's query as SAFE, UNSAFE, or

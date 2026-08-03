@@ -21,7 +21,8 @@ services:
     image: vllm/vllm-openai:latest
     restart: unless-stopped
     command: [
-      "--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}",
+      "--model", "${VLLM_MODEL_PATH:-Qwen/Qwen3-32B-AWQ}",
+      "--served-model-name", "${VLLM_MODEL:-aura-llm}",
       "--port", "8000",
       "--host", "0.0.0.0",
       "--enable-prefix-caching",

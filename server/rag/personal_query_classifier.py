@@ -142,7 +142,7 @@ class PersonalQueryClassifier:
 
     def __init__(self):
         load_dotenv()
-        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "aura-llm"))
 
     def classify(self, query: str, history: list = None) -> dict:
         if not query:

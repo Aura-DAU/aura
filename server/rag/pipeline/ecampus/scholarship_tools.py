@@ -161,7 +161,7 @@ def screen_scholarship_eligibility(
 
     def _execute(client):
         return client.chat.completions.create(
-            model=os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")),
+            model=os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "aura-llm")),
             temperature=0,
             messages=[
                 {"role": "system", "content": _SCHOLARSHIP_SYSTEM_PROMPT.strip()},

@@ -88,7 +88,7 @@ services:
       INTERNAL_RESOLVE_SECRET: ${INTERNAL_RESOLVE_SECRET}
       # Override in .env.prod for multi-host GPU IPs / single-node pools.
       VLLM_ENDPOINTS: ${VLLM_ENDPOINTS:-http://vllm-node1:8000/v1,http://vllm-node2:8000/v1,http://vllm-node3:8000/v1}
-      VLLM_MODEL: ${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}
+      VLLM_MODEL: ${VLLM_MODEL:-aura-llm}
       VLLM_API_KEY: ${VLLM_API_KEY:-EMPTY}
       QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
       QDRANT_API_KEY: ${QDRANT_API_KEY:-}
@@ -193,7 +193,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
+    command: ["--model", "${VLLM_MODEL_PATH:-Qwen/Qwen3-32B-AWQ}", "--served-model-name", "${VLLM_MODEL:-aura-llm}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
     expose:
       - "8000"
     volumes:
@@ -224,7 +224,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
+    command: ["--model", "${VLLM_MODEL_PATH:-Qwen/Qwen3-32B-AWQ}", "--served-model-name", "${VLLM_MODEL:-aura-llm}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
     expose:
       - "8000"
     volumes:
@@ -255,7 +255,7 @@ services:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     restart: unless-stopped
-    command: ["--model", "${VLLM_MODEL:-Qwen/Qwen3-32B-AWQ}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
+    command: ["--model", "${VLLM_MODEL_PATH:-Qwen/Qwen3-32B-AWQ}", "--served-model-name", "${VLLM_MODEL:-aura-llm}", "--port", "8000", "--enable-prefix-caching", "--max-model-len", "${MAX_MODEL_LEN:-16384}", "--max-num-seqs", "${VLLM_MAX_NUM_SEQS:-24}"]
     expose:
       - "8000"
     volumes:

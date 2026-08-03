@@ -121,7 +121,7 @@ class WellnessGuardrail:
             "VLLM_WELLNESS_MODEL",
             os.getenv(
                 "GROQ_WELLNESS_MODEL",
-                os.getenv("VLLM_MODEL", "Qwen/Qwen3-32B-AWQ"),
+                os.getenv("VLLM_MODEL", "aura-llm"),
             ),
         )
 
