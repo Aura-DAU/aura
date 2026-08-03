@@ -438,7 +438,8 @@ class RetrievalPipeline:
         # Broad Research Domain listing queries
         # If the planner extracted a research domain or we detect domain keywords
         # (Assuming research queries have intent = 'research' or 'faculty')
-        if plan.get("intent") in ("research", "faculty"):
+        intent = plan.get("intent") if isinstance(plan, dict) else None
+        if intent in ("research", "faculty"):
             if "research in " in q_lower or "working on " in q_lower or "who does" in q_lower:
                 # In a robust implementation we'd check if an extracted research_domain entity exists,
                 # but since we didn't add it to the planner schema, we just rely on the LLM's keyword matching
