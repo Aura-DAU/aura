@@ -1,9 +1,28 @@
 /**
- * Structured data returned by the backend calendar tool when a booking
- * or reminder is created. Populated only when chunk.type === "calendar-action"
- * arrives in the SSE stream. Backend M3 (Dhruvam) owns the tool logic.
+ * Structured data carried on the "calendar-action" SSE event. Two variants
+ * share the channel, discriminated by `type`:
+ *   - "booking" (default): a booking/reminder was created — Backend M3 (Dhruvam)
+ *     owns that tool logic; rendered as a confirmation card.
+ *   - "connect_required": the student asked for a calendar action but hasn't
+ *     linked Google Calendar — rendered as an inline "Connect Google Calendar"
+ *     CTA (the GPT/Claude connector pattern). Set by the orchestrator when a
+ *     calendar tool returns calendar_not_connected.
+ *   - "timetable_sync": a background timetable sync was accepted — rendered
+ *     as a progress card while the frontend polls the app's calendar facade.
+ *   - "timetable_sync_confirmation": a preview is ready for explicit user
+ *     confirmation before any calendar events are written.
+ *   - "confirmation_required": the backend is asking the student to confirm a
+ *     calendar write (sync preview or unsync). Rendered as inline Confirm /
+ *     Cancel buttons; Confirm sends "confirm" through the normal chat path so
+ *     the backend confirmation gate is unchanged.
  */
 export interface CalendarActionData {
+  type?:
+    | "booking"
+    | "connect_required"
+    | "timetable_sync"
+    | "timetable_sync_confirmation"
+    | "confirmation_required"
   event_title?: string
   date?: string
   time?: string
@@ -11,6 +30,14 @@ export interface CalendarActionData {
   status?: "confirmed" | "pending" | "failed"
   calendar_link?: string
   description?: string
+  // connect_required variant
+  provider?: string
+  connect_path?: string
+  reason?: string
+  message?: string
+  event_count?: number
+  // confirmation_required variant: which calendar write awaits the go-ahead.
+  action?: "sync_timetable" | "unsync_timetable"
 }
 
 export interface ChatMessage {
@@ -20,6 +47,8 @@ export interface ChatMessage {
   is_personal_data?: boolean
   /** Set when the backend emits a calendar-action SSE event for this turn. */
   calendar_action?: CalendarActionData
+  /** Sources returned by the backend for this turn (assistant messages only). Persisted per-message so citations survive thread switches and reloads. */
+  citations?: Citation[]
 }
 
 export interface Citation {

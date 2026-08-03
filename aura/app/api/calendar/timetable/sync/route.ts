@@ -17,6 +17,57 @@ function buildToken(session: Session | null) {
   })
 }
 
+type PublicSyncState = "idle" | "syncing" | "completed" | "failed"
+
+interface BackendSyncStatus {
+  status?: unknown
+  created?: unknown
+  updated?: unknown
+  removed?: unknown
+  errors?: unknown
+}
+
+function count(value: unknown): number {
+  return typeof value === "number" && Number.isFinite(value) ? value : 0
+}
+
+function publicSyncState(status: unknown): PublicSyncState {
+  if (status === "PENDING" || status === "RUNNING") return "syncing"
+  if (status === "COMPLETED") return "completed"
+  if (status === "FAILED" || status === "CANCELLED") return "failed"
+  return "idle"
+}
+
+export async function GET() {
+  const session = await getServerSession(authOptions)
+  const token = buildToken(session)
+  if (!token) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  try {
+    const res = await fetch(backendUrl("/calendar/timetable/sync/status"), {
+      cache: "no-store",
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    if (!res.ok) {
+      return NextResponse.json({ error: "Could not check calendar sync" }, { status: res.status })
+    }
+
+    const data = (await res.json()) as BackendSyncStatus
+    return NextResponse.json({
+      state: publicSyncState(data.status),
+      created: count(data.created),
+      updated: count(data.updated),
+      removed: count(data.removed),
+      hasWarnings: Array.isArray(data.errors) && data.errors.length > 0,
+    })
+  } catch (err) {
+    console.error("[calendar/timetable/sync] GET failed:", err)
+    return NextResponse.json({ error: "Calendar sync status unavailable" }, { status: 502 })
+  }
+}
+
 export async function POST() {
   const session = await getServerSession(authOptions)
   const token = buildToken(session)

@@ -68,13 +68,20 @@
       "gridPos": { "h": 8, "w": 6, "x": 18, "y": 0 },
       "id": 4,
       "title": "vLLM Dispatched Requests per Node",
+      "description": "Backend InferenceRouter dispatch counters (aura_inference_node_requests_total). Requires PROMETHEUS_MULTIPROC_DIR so every gunicorn worker is aggregated; without it scrapes alternate between workers and the split is unverifiable (OBS-01).",
       "type": "timeseries",
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
           "expr": "sum(rate(aura_inference_node_requests_total[1m])) by (node)",
-          "legendFormat": "Node: {{node}}",
+          "legendFormat": "rate {{node}}",
           "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(increase(aura_inference_node_requests_total[5m])) by (node)",
+          "legendFormat": "5m Δ {{node}}",
+          "refId": "B"
         }
       ]
     },
@@ -87,7 +94,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum(rate(nginx_http_requests_total[1m])) by (request_uri)",
+          "expr": "sum(rate(nginx_http_response_count_total[1m])) by (request_uri)",
           "legendFormat": "Route: {{request_uri}}",
           "refId": "A"
         }
@@ -98,18 +105,19 @@
       "gridPos": { "h": 8, "w": 8, "x": 8, "y": 8 },
       "id": 6,
       "title": "vLLM Inference Engine Queue & Running Requests",
+      "description": "Ground-truth GPU queues from each vLLM node's own /metrics. Use alongside the dispatch-share panel: a node with waiting≈0 that still absorbs most backend dispatches is the GPU-07 failure mode.",
       "type": "timeseries",
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
           "expr": "vllm:num_requests_running",
-          "legendFormat": "Running Requests",
+          "legendFormat": "running {{instance}}",
           "refId": "A"
         },
         {
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
           "expr": "vllm:num_requests_waiting",
-          "legendFormat": "Waiting Queue",
+          "legendFormat": "waiting {{instance}}",
           "refId": "B"
         }
       ]
@@ -124,10 +132,34 @@
         {
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
           "expr": "vllm:avg_generation_throughput_tok_per_s",
-          "legendFormat": "Tok/s",
+          "legendFormat": "tok/s {{instance}}",
           "refId": "A"
         }
       ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 8, "w": 6, "x": 0, "y": 16 },
+      "id": 8,
+      "title": "Inference Dispatch Share (5m)",
+      "description": "Fraction of InferenceRouter dispatches per node over the last 5 minutes. Use this panel to confirm a routing fix (W1 / GPU-01) actually rebalanced the pool — every node should take a non-zero share under load once OBS-01 multiprocess collection is on.",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(increase(aura_inference_node_requests_total[5m])) by (node) / ignoring(node) group_left sum(increase(aura_inference_node_requests_total[5m]))",
+          "legendFormat": "share {{node}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      }
     }
   ],
   "refresh": "5s",

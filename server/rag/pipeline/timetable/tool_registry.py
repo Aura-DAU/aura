@@ -56,6 +56,7 @@ def _handle_update_my_timetable(identity, **kwargs):
     expected to show the user the preview and only call again with
     confirm=true once the user explicitly agrees."""
     confirm = bool(kwargs.pop("confirm", False))
+    kwargs.pop("request_context", None)
     try:
         if not confirm:
             year = sem = sec = None
@@ -73,6 +74,7 @@ def _handle_update_my_timetable(identity, **kwargs):
                 "cohort": {"year": year, "sem": sem, "sec": sec},
             }
         result = service.apply_change(identity, **kwargs)
+        result["calendar_sync"] = timetable_sync.resync_if_linked(identity)
         return {"status": "applied", **result}
     except service.TimetableError as e:
         return {"error": str(e)}
@@ -83,21 +85,26 @@ def _handle_undo_timetable_change(identity, **kwargs):
         override_id = kwargs.get("override_id")
         if not override_id:
             return {"error": "override_id is required -- use list_my_timetable_changes to find it."}
-        return {"status": "applied", **service.clear_change(identity, override_id)}
+        result = service.clear_change(identity, override_id)
+        result["calendar_sync"] = timetable_sync.resync_if_linked(identity)
+        return {"status": "applied", **result}
     except service.TimetableError as e:
         return {"error": str(e)}
 
 
-# -- Google Calendar sync ------------------------------------------------------
+# -- Any-cohort read tool (not scoped to the requester's own cohort) ----------
 
-def _handle_sync_timetable_to_google_calendar(identity, **kwargs):
-    """Same confirm-gate pattern as _handle_update_my_timetable: first call
-    (confirm missing/false) returns a preview, second call with
-    confirm=true actually writes the events."""
-    confirm = bool(kwargs.pop("confirm", False))
-    if not confirm:
-        return timetable_sync.preview(identity)
-    return timetable_sync.apply(identity)
+def _handle_get_cohort_timetable(identity, **kwargs):
+    try:
+        return service.get_timetable_for_cohort(
+            year=kwargs.get("year"),
+            sem=kwargs.get("sem"),
+            sec=kwargs.get("sec"),
+            branch=kwargs.get("branch"),
+            program=kwargs.get("program"),
+        )
+    except service.TimetableError as e:
+        return {"error": str(e)}
 
 
 # -- Faculty read tools --------------------------------------------------------
@@ -193,6 +200,44 @@ GET_MY_TIMETABLE = Tool(
     category="read", allowed_roles=["student"], handler=_handle_get_my_timetable,
 )
 
+GET_COHORT_TIMETABLE = Tool(
+    name="get_cohort_timetable",
+    description=(
+        "Look up the published weekly class timetable for ANY cohort by semester/year, "
+        "section, and branch/programme -- e.g. 'give me the timetable of BTech ICT 3rd sem "
+        "section A' or 'what's the schedule for 2nd year MnC section B'. Returns the plain "
+        "master schedule only (no personal overrides or elective picks applied). Use "
+        "get_my_timetable instead when the requester is asking about their OWN timetable. "
+        "Section defaults to 'A' if the user doesn't name one."
+    ),
+    parameters={
+        "type": "object",
+        "properties": {
+            "sem": {
+                "type": "integer",
+                "description": "Semester number, e.g. 1, 3, 5, 7. Prefer this when the user names a semester.",
+            },
+            "year": {
+                "type": "integer",
+                "description": "Academic year 1-4, if the user says 'year' instead of 'semester'.",
+            },
+            "sec": {
+                "type": "string",
+                "description": "Section letter, e.g. 'A', 'B', 'C', 'D'. Defaults to 'A' if not given.",
+            },
+            "branch": {
+                "type": "string",
+                "description": "Branch, e.g. 'ICT', 'ICT-CS', 'MnC', 'EVD'.",
+            },
+            "program": {
+                "type": "string",
+                "description": "Degree programme, e.g. 'BTech', 'MTech', 'MSc'.",
+            },
+        },
+    },
+    category="read", allowed_roles=["student", "faculty"], handler=_handle_get_cohort_timetable,
+)
+
 LIST_MY_TIMETABLE_CHANGES = Tool(
     name="list_my_timetable_changes",
     description="List the personal changes the requester has previously made to their own timetable.",
@@ -217,7 +262,9 @@ UPDATE_MY_TIMETABLE = Tool(
                 "enum": ["replace", "add", "remove"],
                 "description": (
                     "'replace' to change an existing class's time/room/etc, 'add' for a brand-new "
-                    "class that isn't on the master timetable, 'remove' to hide an existing class."
+                    "class that isn't on the master timetable, 'remove' to hide an existing class. "
+                    "If the student already connected Google Calendar with write access, a confirmed "
+                    "change also refreshes their synced calendar automatically -- no separate sync call needed."
                 ),
             },
             "day": {"type": "string", "description": "Weekday name, e.g. 'Tuesday'."},
@@ -245,26 +292,6 @@ UNDO_TIMETABLE_CHANGE = Tool(
         "required": ["override_id"],
     },
     category="write", allowed_roles=["student"], handler=_handle_undo_timetable_change,
-)
-
-SYNC_TIMETABLE_TO_GOOGLE_CALENDAR = Tool(
-    name="sync_timetable_to_google_calendar",
-    description=(
-        "Create/update recurring weekly events on the requester's own Google Calendar for every "
-        "class on their current AURA timetable, with popup reminders before each class, running "
-        "until the end of the semester. Requires the student to have already connected Google "
-        "Calendar (with write access) from Settings -- if they haven't, this returns a message "
-        "telling them to do that first. Always call this once with confirm=false first to preview "
-        "how many events will be created, relay that to the user, and only call it again with "
-        "confirm=true after they explicitly agree."
-    ),
-    parameters={
-        "type": "object",
-        "properties": {
-            "confirm": {"type": "boolean", "description": "Set true only after the user has confirmed the previewed sync."},
-        },
-    },
-    category="write", allowed_roles=["student"], handler=_handle_sync_timetable_to_google_calendar,
 )
 
 GET_FACULTY_TIMETABLE = Tool(
@@ -323,12 +350,18 @@ SAVE_MY_ELECTIVE_SELECTIONS = Tool(
 
 TOOL_REGISTRY: dict[str, Tool] = {
     t.name: t for t in [
-        GET_MY_TIMETABLE, LIST_MY_TIMETABLE_CHANGES, UPDATE_MY_TIMETABLE,
-        UNDO_TIMETABLE_CHANGE, SYNC_TIMETABLE_TO_GOOGLE_CALENDAR,
+        GET_MY_TIMETABLE, GET_COHORT_TIMETABLE, LIST_MY_TIMETABLE_CHANGES, UPDATE_MY_TIMETABLE,
+        UNDO_TIMETABLE_CHANGE,
         GET_FACULTY_TIMETABLE, GET_AVAILABLE_ELECTIVES, SAVE_MY_ELECTIVE_SELECTIONS,
         SET_MY_COHORT,
     ]
 }
+
+# Exposed on the public-KB / COMMUNITY orchestrator path too (see
+# pipeline.ecampus.orchestrator) -- looking up another cohort's published
+# timetable isn't the requester's own private data, so a student should be
+# able to ask for it even when the query doesn't classify as PERSONAL_DATA.
+PUBLIC_TOOL_NAMES: frozenset[str] = frozenset({"get_cohort_timetable"})
 
 
 def tools_for_role(role: str) -> list[Tool]:

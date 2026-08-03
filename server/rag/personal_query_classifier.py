@@ -68,40 +68,137 @@ Output ONLY valid JSON — no markdown fences:
 }
 """
 
-SAFE_DEFAULT = {"type": "PUBLIC", "target": None, "erp_fields": []}
+SAFE_DEFAULT = {"type": "PUBLIC", "target": None, "erp_fields": [], "intent": "RAG"}
+
+def get_safe_default():
+    return SAFE_DEFAULT.copy()
 VALID_TYPES  = {"PUBLIC", "PERSONAL", "MIXED", "AGGREGATE"}
+
+import re
+
+# Pure Profile Questions Fast-Path Regex (Instant <1ms classification)
+PURE_PROFILE_PAT = re.compile(
+    r"\b(?:who\s+am\s+i|"
+    r"what(?:\s+'s|\s+is)?\s+my\s+(?:name|email|roll\s+number|id|student\s+id|erp\s+id|branch|programme|program|dept|department|semester|current\s+semester|year|course|enrolled\s+course)|"
+    r"what\s+(?:course|programme|program|branch|dept|department)\s+(?:am\s+i|do\s+i|are\s+we)\s*(?:in|enrolled\s+in|study|belong\s+to)?|"
+    r"which\s+(?:course|programme|program|branch|dept|department|semester)\s+(?:am\s+i|do\s+i|belong\s+to|enrolled\s+in|study)|"
+    r"what\s+semester\s+am\s+i\s+(?:currently\s+)?in)\b",
+    re.IGNORECASE
+)
+
+PERSONAL_KEYWORDS_PAT = re.compile(
+    r"\b(?:what(?:\s+'s|\s+is)?\s+my\s+(?:branch|programme|program|dept|department|roll\s+number|id|student\s+id|erp\s+id|email|name|cgpa|gpa|attendance|timetable|schedule)|"
+    r"what\s+(?:branch|programme|program|dept|department)\s+(?:am\s+i|are\s+we|do\s+i)\s*(?:in|belong\s+to)?|"
+    r"which\s+(?:branch|programme|program|dept|department)\s+(?:am\s+i|do\s+i|belong\s+to)|"
+    r"show\s+(?:my\s+)?(?:timetable|schedule|attendance|cgpa|grades|profile)|"
+    r"who\s+am\s+i)\b",
+    re.IGNORECASE
+)
+
+NAME_SETTING_PAT = re.compile(
+    r"^\s*(?:please\s+)?(?:call\s+me|my\s+name\s+is|i\s+am|i'm)\s+([a-zA-Z\s]{2,30})\s*$",
+    re.IGNORECASE
+)
+
+# Multi-intent keyword maps
+TIMETABLE_PAT = re.compile(r"\b(?:timetable|schedule|class(?:es)?\s+today|class(?:es)?\s+tomorrow)\b", re.IGNORECASE)
+ATTENDANCE_PAT = re.compile(r"\b(?:attendance|present|absent)\b", re.IGNORECASE)
+CALENDAR_PAT = re.compile(r"\b(?:calendar|academic\s+calendar|holiday|vacation|exam\s+dates?)\b", re.IGNORECASE)
+ACADEMIC_PAT = re.compile(r"\b(?:curriculum|syllabus|credits?|course|subject|elective|prerequisite|cs\d{3}|ict|btech|mtech)\b", re.IGNORECASE)
+
+
+def is_pure_profile_query(query: str) -> bool:
+    """Return True if query is a direct pure profile request (e.g. 'Who am I?', 'What branch am I in?')."""
+    if not query:
+        return False
+    return bool(PURE_PROFILE_PAT.search(query))
 
 
 class PersonalQueryClassifier:
 
     def __init__(self):
         load_dotenv()
-        self.client = InferenceRouter.get_client()
-        self.model  = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
+        self.model = os.getenv("VLLM_MODEL", os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ"))
 
-    def classify(self, query: str) -> dict:
-        # Injection defence: delimit user input clearly
+    def classify(self, query: str, history: list = None) -> dict:
+        if not query:
+            return SAFE_DEFAULT.copy()
+
+        # Name setting fast-path
+        if NAME_SETTING_PAT.match(query):
+            return {"type": "PERSONAL", "target": "self", "erp_fields": [], "intent": "SET_NAME"}
+
+        if history and history[-1].get("role") == "assistant":
+            last_msg = history[-1].get("content", "").lower()
+            name_prompts = [
+                "like to be called",
+                "should i call you",
+                "preferred name",
+                "your name",
+                "address you"
+            ]
+            if any(p in last_msg for p in name_prompts) and "?" in last_msg:
+                # User is likely responding with their name
+                import string
+                clean_query = query.translate(str.maketrans('', '', string.punctuation)).replace(" ", "")
+                if len(query.split()) <= 3 and clean_query.isalpha():
+                    return {"type": "PERSONAL", "target": "self", "erp_fields": [], "intent": "SET_NAME"}
+
+        # Pure profile questions fast-path
+        if is_pure_profile_query(query):
+            return {"type": "PERSONAL", "target": "self", "erp_fields": ["profile"], "intent": "PROFILE"}
+
+        # Deterministic Fast-Path: Immediately route direct student profile/personal queries
+        if PERSONAL_KEYWORDS_PAT.search(query):
+            fields = ["profile"]
+            q_lower = query.lower()
+            intent = "PROFILE"
+            if TIMETABLE_PAT.search(q_lower):
+                fields.append("courses")
+                intent = "TIMETABLE"
+            if ATTENDANCE_PAT.search(q_lower):
+                fields.append("attendance")
+                intent = "ATTENDANCE"
+            if "cgpa" in q_lower or "gpa" in q_lower or "grade" in q_lower:
+                fields.append("cgpa")
+                intent = "PROFILE"
+            return {"type": "PERSONAL", "target": "self", "erp_fields": fields, "intent": intent}
+
+        # Multi-intent pre-categorization
+        q_lower = query.lower()
+        if CALENDAR_PAT.search(q_lower):
+            intent = "CALENDAR"
+        elif ACADEMIC_PAT.search(q_lower):
+            intent = "ACADEMIC"
+        else:
+            intent = "RAG"
+
+        # LLM-Based Classifier Fallback
         safe_query = f"<query>\n{query}\n</query>"
+        model = self.model
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                temperature=0,
-                max_tokens=200,
-                messages=[
-                    {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
-                    {"role": "user",   "content": safe_query},
-                ],
-                extra_body=InferenceRouter.no_think_extra_body(),
-            )
+            def _execute(client):
+                return client.chat.completions.create(
+                    model=model,
+                    temperature=0,
+                    max_tokens=200,
+                    messages=[
+                        {"role": "system", "content": CLASSIFIER_PROMPT.strip()},
+                        {"role": "user", "content": safe_query},
+                    ],
+                    extra_body=InferenceRouter.no_think_extra_body(),
+                )
+
+            response = InferenceRouter.call_with_rotation(_execute, max_retries=3)
             raw = response.choices[0].message.content.strip()
             raw = raw.replace("```json", "").replace("```", "").strip()
             result = json.loads(raw)
-            result.setdefault("type",       "PUBLIC")
-            result.setdefault("target",     None)
+            result.setdefault("type", "PUBLIC")
+            result.setdefault("target", None)
             result.setdefault("erp_fields", [])
             if result["type"] not in VALID_TYPES:
-                return SAFE_DEFAULT.copy()
+                return get_safe_default()
             return result
         except Exception as e:
             logger.warning("PersonalQueryClassifier failed (%s) — defaulting to PUBLIC", e)
-            return SAFE_DEFAULT.copy()
+            return get_safe_default()

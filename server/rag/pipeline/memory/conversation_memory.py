@@ -17,6 +17,7 @@
 
 from __future__ import annotations
 
+import logging
 import os
 import re
 from dataclasses import dataclass
@@ -24,6 +25,8 @@ from typing import Callable, Optional
 
 Turn = dict  # {"role": str, "content": str}
 Summariser = Callable[[str, "list[Turn]"], str]
+
+logger = logging.getLogger(__name__)
 
 
 def _env_int(name: str, default: int) -> int:
@@ -141,17 +144,35 @@ class MemoryResult:
 
 class ConversationMemory:
     def __init__(self, summariser: Optional[Summariser] = None):
-        # vLLM is launched with `--max-model-len ${MAX_MODEL_LEN:-8192}`
-        # (.github/deploy/node*/docker-compose.yml), so read the same env var to stay in
-        # lockstep with whatever the running pool actually accepts.
-        self.model_context_tokens = _env_int("MAX_MODEL_LEN", 8192)
-        self.reserved_answer = _env_int("AURA_MAX_ANSWER_TOKENS", 768)
-        self.reserved_context = _env_int("AURA_MAX_CONTEXT_TOKENS", 3000)
+        # vLLM is launched with `--max-model-len ${MAX_MODEL_LEN:-16384}`
+        # (.github/deploy/node*/docker-compose.yml) while the node env files pin
+        # MAX_MODEL_LEN=8192, so read the same env var to stay in lockstep with
+        # whatever the running pool actually accepts.
+        # Defaults mirror pipeline/token_budget.py (TokenBudget.from_env) so the
+        # memory budget and the generation budget cannot drift apart — they read
+        # the same env names and must agree on what they reserve. Sized for the
+        # 4096 cutover: the old 8192/768/3000/2200/512 set went *negative* at
+        # 4096 (4096-768-3000-2200-512 = -2384), collapsing _raw_budget to 0 and
+        # leaving no room for a summary or a verbatim tail. Not imported from
+        # token_budget on purpose: that module pulls httpx and does network
+        # discovery, and this one must stay importable without either.
+        self.model_context_tokens = _env_int("MAX_MODEL_LEN", 4096)
+        self.reserved_answer = _env_int("AURA_MAX_ANSWER_TOKENS", 1024)
+        self.reserved_context = _env_int("AURA_MAX_CONTEXT_TOKENS", 1400)
         # The system prompt (answer_generator.SYSTEM_PROMPT) is a large, static
         # prefix; reserve a flat estimate rather than importing/measuring it here.
-        self.reserved_system = _env_int("AURA_RESERVED_SYSTEM_TOKENS", 2200)
-        self.safety_margin = _env_int("AURA_MEMORY_SAFETY_TOKENS", 512)
+        self.reserved_system = _env_int("AURA_RESERVED_SYSTEM_TOKENS", 1100)
+        self.safety_margin = _env_int("AURA_MEMORY_SAFETY_TOKENS", 256)
         self.keep_verbatim = max(2, _env_int("AURA_KEEP_VERBATIM_TURNS", 6))
+        # Compaction trigger that does not depend on token size. Many short turns
+        # can stay under history_budget indefinitely, and the client cannot send
+        # an unbounded tail — schemas.ChatRequest caps `history` at 20 turns — so
+        # without this the unsummarised span grows past what a request can carry
+        # and the client is forced to drop turns that were never summarised.
+        # Keep it below that cap so a compacting request still fits.
+        self.max_tail_turns = max(
+            self.keep_verbatim + 1, _env_int("AURA_MAX_TAIL_TURNS", 16)
+        )
         # Never summarise away the last exchange — the immediate question and its
         # answer must always survive verbatim for coherent follow-ups.
         self.min_verbatim = 2
@@ -225,6 +246,8 @@ class ConversationMemory:
 
     # ── Budgeting helpers ────────────────────────────────────────────────────
     def _within_budget(self, summary: str, history: "list[Turn]") -> bool:
+        if len(history) > self.max_tail_turns:
+            return False
         return _approx_tokens(summary) + self._turns_tokens(history) <= self.history_budget
 
     def _turns_tokens(self, history: "list[Turn]") -> int:
@@ -259,7 +282,18 @@ class ConversationMemory:
             if result and result.strip():
                 return result.strip()
         except Exception as exc:  # noqa: BLE001 — memory is best-effort, never fatal
-            print(f"[ConversationMemory] summariser failed, using fallback: {exc}")
+            # Structured so a summariser context-length 400 (AURA-CTX-001) is
+            # attributable rather than blending into the generic soft-failure
+            # noise: this path is silent to the user, so the log is the only
+            # signal that digests have stopped being generated.
+            logger.warning(
+                "summariser failed; continuing without a digest "
+                "(code=%s folded_turns=%d): %s",
+                getattr(exc, "code", type(exc).__name__),
+                len(older),
+                exc,
+                exc_info=True,
+            )
 
         folded = " ".join(
             t.get("content", "") for t in older if t.get("role") == "user"
@@ -286,6 +320,25 @@ class ConversationMemory:
         # "{{MAX_WORDS}}" placeholder would be sent to the model.
         max_words = max(60, int(self.summary_max_tokens * 0.75))
         system_prompt = SUMMARY_SYSTEM_PROMPT.replace("{{MAX_WORDS}}", str(max_words))
+
+        # The digest request has to fit the window too. `older` is unbounded —
+        # a long thread folds many turns at once — and an over-length prompt is
+        # a hard 400 from vLLM, which _safe_summarise then swallows into the
+        # extractive fallback. So without this clamp the LLM digest silently
+        # stops working on exactly the long conversations that need it. Keeps
+        # the oldest turns, matching the prompt's "oldest first" contract.
+        overhead = (
+            _approx_tokens(system_prompt)
+            + _approx_tokens(prior)
+            + self.summary_max_tokens
+            + self.safety_margin
+        )
+        budget = max(self.model_context_tokens - overhead, 256)
+        if _approx_tokens(conversation) > budget:
+            user_prompt = SUMMARY_USER_TEMPLATE.format(
+                prior=prior or "(none yet)",
+                conversation=_truncate_tokens(conversation, budget),
+            )
 
         def _call(client):
             return client.chat.completions.create(

@@ -13,6 +13,7 @@ interface MessageListProps {
   thinkingStep?: string
   activeCitations: Citation[]
   onRegenerate: () => void
+  onCalendarSyncConfirm: () => void
   /** True when this thread was auto-forked from a full one — shows a divider. */
   continuation?: boolean
 }
@@ -23,6 +24,7 @@ export function MessageList({
   thinkingStep,
   activeCitations,
   onRegenerate,
+  onCalendarSyncConfirm,
   continuation = false,
 }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -81,8 +83,16 @@ export function MessageList({
               message={message}
               isStreaming={isStreaming}
               showActions={isLatestAssistant}
-              citations={index === lastAssistantIndex ? activeCitations : undefined}
+              citations={
+                message.citations ??
+                (index === lastAssistantIndex ? activeCitations : undefined)
+              }
               onRegenerate={isLatestAssistant ? onRegenerate : undefined}
+              onCalendarSyncConfirm={
+                !loading && index === messages.length - 1
+                  ? onCalendarSyncConfirm
+                  : undefined
+              }
             />
           )
         })}

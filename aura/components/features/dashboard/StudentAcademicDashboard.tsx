@@ -1,8 +1,9 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { LayoutDashboard, ArrowLeft, Settings, ArrowRight } from "lucide-react"
+import { LayoutDashboard, ArrowLeft, Settings, ArrowRight, Eye, EyeOff } from "lucide-react"
 import { TimetableCard } from "@/components/features/dashboard/TimetableCard"
 import { InstallPromptBanner } from "@/components/features/chat-ui/InstallPromptBanner"
 
@@ -24,6 +25,35 @@ export function StudentAcademicDashboard({
   departmentName = "Information & Communication Technology",
 }: StudentAcademicDashboardProps) {
   const router = useRouter()
+  const [showTimetable, setShowTimetable] = useState(true)
+  const [isMounted, setIsMounted] = useState(false)
+  const [preferredName, setPreferredName] = useState(userName)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true)
+    const saved = localStorage.getItem("aura_dashboard_show_timetable")
+    if (saved !== null) {
+      setShowTimetable(saved === "true")
+    }
+    try {
+      const rawProfile = localStorage.getItem("aura-profile-v2")
+      if (rawProfile) {
+        const profile = JSON.parse(rawProfile)
+        if (profile.name) {
+          setPreferredName(profile.name)
+        }
+      }
+    } catch {
+      // ignore parse errors
+    }
+  }, [])
+
+  const handleToggleTimetable = () => {
+    const next = !showTimetable
+    setShowTimetable(next)
+    localStorage.setItem("aura_dashboard_show_timetable", next.toString())
+  }
 
   const handleSelectPrompt = (text: string) => {
     router.push(`/?prompt=${encodeURIComponent(text)}`)
@@ -66,17 +96,41 @@ export function StudentAcademicDashboard({
           </div>
 
           {/* Welcome banner */}
-          <div className="mb-6 rounded-2xl border border-theme-gray-light bg-theme-gray/40 p-6 backdrop-blur-md">
-            <h2 className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-xl font-bold text-transparent md:text-2xl">
-              Welcome back, {userName}!
-            </h2>
-            <p className="mt-1 text-xs text-neutral-400">
-              Student · {departmentName}
-            </p>
+          <div className="mb-6 flex flex-col justify-between gap-4 rounded-2xl border border-theme-gray-light bg-theme-gray/40 p-6 backdrop-blur-md sm:flex-row sm:items-center">
+            <div>
+              <h2 className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-xl font-bold text-transparent md:text-2xl">
+                Welcome back, {preferredName}!
+              </h2>
+              <p className="mt-1 text-xs text-neutral-400">
+                Student · {departmentName}
+              </p>
+            </div>
+            
+            {isMounted && (
+              <button
+                onClick={handleToggleTimetable}
+                className="inline-flex items-center gap-1.5 self-start rounded-xl border border-theme-gray-light bg-theme-gray/40 px-3 py-1.5 text-xs font-medium text-neutral-300 transition-colors hover:border-theme-gray-lighter hover:bg-theme-gray/60 hover:text-neutral-100 sm:self-auto"
+                title={showTimetable ? "Hide Timetable" : "Show Timetable"}
+              >
+                {showTimetable ? (
+                  <>
+                    <EyeOff className="size-3.5" />
+                    Hide Timetable
+                  </>
+                ) : (
+                  <>
+                    <Eye className="size-3.5 text-theme-yellow" />
+                    Show Timetable
+                  </>
+                )}
+              </button>
+            )}
           </div>
 
           {/* Timetable — full width */}
-          <TimetableCard />
+          {(!isMounted || showTimetable) && (
+            <TimetableCard />
+          )}
 
           {/* Quick actions */}
           <div className="mt-8">
@@ -103,3 +157,4 @@ export function StudentAcademicDashboard({
     </>
   )
 }
+

@@ -15,6 +15,15 @@ const historyMessageSchema = z.object({
   is_personal_data: z.boolean().optional(),
   calendar_action: z
     .object({
+      type: z
+        .enum([
+          "booking",
+          "connect_required",
+          "timetable_sync",
+          "timetable_sync_confirmation",
+          "confirmation_required",
+        ])
+        .optional(),
       event_title: z.string().max(500).optional(),
       date: z.string().max(64).optional(),
       time: z.string().max(64).optional(),
@@ -22,7 +31,29 @@ const historyMessageSchema = z.object({
       status: z.enum(["confirmed", "pending", "failed"]).optional(),
       calendar_link: z.string().max(2048).optional(),
       description: z.string().max(2000).optional(),
+      provider: z.string().max(64).optional(),
+      connect_path: z.string().max(256).optional(),
+      reason: z.string().max(128).optional(),
+      message: z.string().max(2000).optional(),
+      event_count: z.number().int().nonnegative().optional(),
+      action: z.enum(["sync_timetable", "unsync_timetable"]).optional(),
     })
+    .optional(),
+  // Sources for this turn — previously absent here, so Zod silently
+  // stripped citations on every sync and they vanished on reload/thread switch.
+  citations: z
+    .array(
+      z.object({
+        file: z.string().max(1024),
+        title: z.string().max(500).optional(),
+        visibility: z.string().max(64).optional(),
+        authorization: z.array(z.string().max(128)).max(50).optional(),
+        path: z.string().max(1024).optional(),
+        startLine: z.number().int().nonnegative().optional(),
+        endLine: z.number().int().nonnegative().optional(),
+      }),
+    )
+    .max(50)
     .optional(),
 })
 

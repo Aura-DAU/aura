@@ -17,7 +17,6 @@ export interface ElectiveCourse {
   course_name: string
   course_type: string
   selected: boolean
-  master_ids: string[]
   slots: ElectiveSlot[]
 }
 

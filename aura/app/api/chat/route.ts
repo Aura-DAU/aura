@@ -1,20 +1,25 @@
 import { getServerSession } from "next-auth"
 import { cookies } from "next/headers"
-import { randomUUID } from "crypto"
 import { z } from "zod"
 
 import { backendUrl, type BackendChatRequest } from "@/lib/api/backend"
 import { authOptions } from "@/lib/auth/options"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
+import {
+  readOrMintGuestCookies,
+  guestErpId,
+  guestCookieOptions,
+  GUEST_ID_COOKIE,
+  GUEST_SECRET_COOKIE,
+} from "@/lib/auth/guest-identity"
 
 export const maxDuration = 60
 
 // Cookie identifying an anonymous guest browser (no Google sign-in). It
 // carries no PII — just a random id — and lets the backend's 10/day quota
 // (see server/rag/pipeline/rate_limiter.py) key on a stable per-browser
-// identity instead of resetting on every request.
-const GUEST_COOKIE = "aura-guest-id"
-const GUEST_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
+// identity instead of resetting on every request. See lib/auth/guest-identity.ts
+// (SEC-07) for why this is now two HMAC-bound cookies instead of one.
 
 const historyTurnSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -33,6 +38,7 @@ const requestSchema = z.object({
   question: z.string().min(1, "question is required").max(2000),
   history: z.array(historyTurnSchema).max(20).optional(),
   summary: z.string().max(20_000).optional(),
+  threadId: z.string().max(64).optional(),
   studentProfile: studentProfileSchema.optional(),
 })
 
@@ -125,18 +131,13 @@ async function handleChatPost(req: Request): Promise<Response> {
     }
   } else {
     const cookieStore = await cookies()
-    let guestId = cookieStore.get(GUEST_COOKIE)?.value
-    if (!guestId || guestId.length > 64) {
-      guestId = `GUEST-${randomUUID()}`
-      cookieStore.set(GUEST_COOKIE, guestId, {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        maxAge: GUEST_COOKIE_MAX_AGE,
-      })
+    const guestCookies = readOrMintGuestCookies(cookieStore)
+    if (guestCookies.isNew) {
+      const opts = guestCookieOptions()
+      cookieStore.set(GUEST_ID_COOKIE, guestCookies.guestId, opts)
+      cookieStore.set(GUEST_SECRET_COOKIE, guestCookies.guestSecret, opts)
     }
-    identity = { role: "guest", erpId: guestId }
+    identity = { role: "guest", erpId: guestErpId(guestCookies) }
   }
 
   let body: unknown
@@ -174,6 +175,7 @@ async function handleChatPost(req: Request): Promise<Response> {
     question: parsed.data.question,
     history: parsed.data.history,
     summary: parsed.data.summary,
+    threadId: parsed.data.threadId,
     studentProfile: parsed.data.studentProfile,
   }
 
@@ -189,6 +191,7 @@ async function handleChatPost(req: Request): Promise<Response> {
         question: payload.question,
         history: payload.history,
         summary: payload.summary,
+        threadId: payload.threadId,
         userProfile: payload.studentProfile,
       }),
       signal: req.signal,
@@ -264,7 +267,6 @@ async function handleChatPost(req: Request): Promise<Response> {
     headers: {
       "Content-Type": "text/event-stream; charset=utf-8",
       "Cache-Control": "no-cache, no-transform",
-      Connection: "keep-alive",
       "X-Accel-Buffering": "no",
       ...(quotaHeader ? { "X-Quota-Remaining": quotaHeader } : {}),
     },

@@ -29,6 +29,7 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    log_soft_failure,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -47,6 +48,16 @@ GENERIC_DENIAL = (
     "I'm not able to retrieve that information. "
     "If you believe you should have access to this data, "
     "please contact the Academic Office."
+)
+
+ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE = (
+    "I don't have your academic programme details on file yet, so I can't "
+    "retrieve curriculum-specific information accurately. Please sign out and "
+    "sign back in once, then try your question again."
+)
+
+RETRIEVAL_FAILURE_RESPONSE = (
+    "I'm having trouble retrieving information right now. Please try again."
 )
 
 PERSONAL_DATA_SYSTEM_ADDENDUM = """
@@ -74,14 +85,30 @@ def is_greeting_or_meta(query):
         "hi", "hello", "hey", "hola", "greetings", "good morning",
         "good afternoon", "good evening", "how are you", "who are you",
         "who is aura", "what is aura", "what can you do", "help", "menu",
-        "intro", "introduce yourself"
+        "intro", "introduce yourself", "thank you", "thanks", "bye",
+        "goodbye", "see you", "good night", "have a nice day", "have a good day",
+        "cya", "cheers", "thanks aura"
     }
     if q in greetings:
         return True
     words = q.split()
-    if len(words) <= 3 and any(w in greetings for w in words):
+    if len(words) <= 4 and any(w in greetings for w in words):
         return True
     return False
+
+
+class SimpleIdentity:
+    def __init__(self, d):
+        self.erp_id = d.get("erp_id") or d.get("erpId")
+        self.role = d.get("role", "student")
+        self.dept = d.get("dept") or d.get("department") or d.get("branch") or "ICT"
+        self.email = d.get("email")
+        self.full_name = d.get("full_name") or d.get("fullName") or d.get("name")
+        self.roll_number = d.get("roll_number") or d.get("rollNumber") or self.erp_id
+        self.program = d.get("program") or d.get("programme") or "B.Tech. (ICT)"
+        self.branch = d.get("branch") or self.dept
+        self.current_year = d.get("current_year") or d.get("currentYear") or 3
+        self.current_sem = d.get("current_sem") or d.get("currentSem") or 5
 
 
 class AuraChat:
@@ -102,24 +129,100 @@ class AuraChat:
     def chat(self, query, history=None, identity=None, display_profile=None):
         # Convert dict identity to a simple object with dot-attribute access to avoid AttributeError
         if isinstance(identity, dict):
-            class SimpleIdentity:
-                def __init__(self, erp_id, role, dept=None):
-                    self.erp_id = erp_id
-                    self.role = role
-                    self.dept = dept
-            identity = SimpleIdentity(
-                erp_id=identity.get("erp_id"),
-                role=identity.get("role"),
-                dept=identity.get("dept")
-            )
+            identity = SimpleIdentity(identity)
 
         try:
-            # ── Safety + scope guardrail (applies to every query) ───────
+            # ── Middleware 1: Institution Context Resolver & Privacy Gate ──
+            from access_control import resolve_effective_role
+            from institution_resolver import get_institution_resolver
+            from privacy_filter import ResponsePrivacyFilter
+
+            user_role = resolve_effective_role(identity) if identity else "public"
+            privacy_filter = ResponsePrivacyFilter(user_role=user_role)
+
+            # Check explicit privacy policy violation requests (e.g. mobile numbers, student IDs for unauthorized roles)
+            is_blocked, refusal_msg = privacy_filter.check_explicit_privacy_request(query)
+            if is_blocked:
+                return {
+                    "answer": refusal_msg,
+                    "sources": [],
+                    "is_personal_data": False,
+                }
+
+            # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
+            query = get_institution_resolver().resolve(query)
+
             from pipeline.latency_tracker import track_segment
+            history = history or []
+
+            # ── 1. Greetings & Meta Fast-Path ─────────────────────────
+            if is_greeting_or_meta(query):
+                q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
+                words = q.split()
+                help_words = {"what can you do", "help", "menu", "intro", "introduce yourself"}
+                who_words = {"who are you", "who is aura", "what is aura"}
+                
+                if q in help_words or any(w in help_words for w in words):
+                    ans = (
+                        "I can help you with a wide range of questions about Dhirubhai Ambani University, including:\n"
+                        "- **Admissions & Academics**: Program details, fee structures, eligibility criteria, and academic policies.\n"
+                        "- **Campus & Facilities**: Hostel rules, dining details, medical SOPs, and general guidelines.\n"
+                        "- **Calendar Actions**: I can help you schedule appointments or check event dates.\n\n"
+                        "How can I assist you today?"
+                    )
+                elif q in who_words or any(w in who_words for w in words):
+                    ans = (
+                        "I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
+                        "I am here to help you navigate university life, policies, academics, and admissions. "
+                        "How can I help you today?"
+                    )
+                else:
+                    ans = (
+                        "Hello! I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
+                        "I can help you with questions about admissions, academics, faculty, courses, and campus life. "
+                        "How can I assist you today?"
+                    )
+                return {"answer": ans, "sources": [], "is_personal_data": False}
+
+            # ── 2. Pure Profile Questions Fast-Path (<1ms, Bypasses RAG & Wellness) ──
+            from personal_query_classifier import is_pure_profile_query
+            if is_pure_profile_query(query) and identity:
+                name = getattr(identity, "full_name", None) or "Student"
+                roll = getattr(identity, "roll_number", None) or getattr(identity, "erp_id", "N/A")
+                prog = getattr(identity, "program", None) or "B.Tech. (ICT)"
+                branch = getattr(identity, "branch", None) or getattr(identity, "dept", "ICT")
+                sem = getattr(identity, "current_sem", None) or 5
+                email = getattr(identity, "email", None) or f"{roll.lower()}@dau.ac.in"
+
+                q_lower = query.lower()
+                if "name" in q_lower or "who am i" in q_lower:
+                    ans = f"You are **{name}** (Roll Number: `{roll}`)."
+                elif "roll" in q_lower or "id" in q_lower:
+                    ans = f"Your roll number is `{roll}`."
+                elif "email" in q_lower:
+                    ans = f"Your official university email is `{email}`."
+                elif "branch" in q_lower or "dept" in q_lower:
+                    ans = f"You are in the **{branch}** department."
+                elif "semester" in q_lower:
+                    ans = f"You are currently in **Semester {sem}** of the {prog} program."
+                else:
+                    ans = (
+                        f"You are **{name}** (Roll Number: `{roll}`), currently enrolled in "
+                        f"**Semester {sem}** of the **{prog}** program in the **{branch}** department."
+                    )
+                return {"answer": ans, "sources": [], "is_personal_data": True}
+
+            # ── 3. Wellness / Distress Check ────────────────────────────
+            if self.wellness.check(query):
+                return {
+                    "answer": self.wellness.get_response(),
+                    "sources": [],
+                    "is_personal_data": False,
+                }
+
+            # ── 4. Safety + Scope Guardrail ────────────────────────────
             with track_segment("guardrail_time"):
                 verdict = self.guardrail.classify(query)
-            # None = classifier unreachable; fails OPEN here. The personal-data
-            # path below re-checks with is_safe_strict(), which fails closed.
             if verdict is Verdict.UNSAFE:
                 return {
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
@@ -131,54 +234,8 @@ class AuraChat:
                     "sources": [],
                 }
 
-            # ── Wellness/distress check ───────────────────────────────
-            if self.wellness.check(query):
-                return {
-                    "answer": self.wellness.get_response(),
-                    "sources": [],
-                    "is_personal_data": False,
-                }
-
-            history = history or []
-
-            # ── Greetings bypass classifier ────────────────────────────
-            if is_greeting_or_meta(query):
-                q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
-                words = q.split()
-                
-                # Check for help/capabilities queries
-                help_words = {"what can you do", "help", "menu", "intro", "introduce yourself"}
-                who_words = {"who are you", "who is aura", "what is aura"}
-                
-                if q in help_words or any(w in help_words for w in words):
-                    ans = (
-                        "I can help you with a wide range of questions about Dhirubhai Ambani University, including:\n"
-                        "- **Admissions & Academics**: Program details, fee structures, eligibility criteria, and academic policies.\n"
-                        "- **Campus & Facilities**: Hostel rules, dining details, medical SOPs, and general guidelines.\n"
-                        "- **Personal ERP Records**: You can check your CPI/CGPA, attendance, and course grades securely.\n"
-                        "- **Calendar Actions**: I can help you schedule appointments or check event dates.\n\n"
-                        "How can I assist you today?"
-                    )
-                elif q in who_words or any(w in who_words for w in words):
-                    ans = (
-                        "I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                        "I am here to help you navigate university life, policies, academics, admissions, "
-                        "and connect you with your personal academic data from the ERP system. How can I help you today?"
-                    )
-                else:
-                    ans = (
-                        "Hello! I am AURA, the official AI assistant for Dhirubhai Ambani University (DAU). "
-                        "I can help you with questions about admissions, academics, faculty, courses, campus life, "
-                        "and your personal student records (like CGPA, grades, and attendance). How can I assist you today?"
-                    )
-                return {
-                    "answer": ans,
-                    "sources": [],
-                    "is_personal_data": False
-                }
-
-            # ── Step 1: Classify ────────────────────────────────────────
-            classification = self.classifier.classify(query)
+            # ── 5. Intent Classification ────────────────────────────────
+            classification = self.classifier.classify(query, history=history)
             query_type     = classification["type"]   # PUBLIC | PERSONAL | MIXED
 
             # ── Guest / No-identity check for personal paths ───────────
@@ -248,6 +305,7 @@ class AuraChat:
                         target_erp_id,
                         access_result,
                         requester_erp_id=identity.erp_id,
+                        identity=identity,
                     )
                 erp_context = self.context_builder.build(erp_data, identity, access_result)
                 is_personal = True
@@ -265,10 +323,17 @@ class AuraChat:
                 sources   = retrieval_result.get("sources", [])
 
                 if not chunks and query_type == "PUBLIC":
-                    return {"answer": "I'm having trouble retrieving information right now. Please try again.", "sources": [], "is_personal_data": False}
+                    reason = retrieval_result.get("abstention_reason")
+                    answer = (
+                        ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE
+                        if reason == "academic_scope_unavailable"
+                        else RETRIEVAL_FAILURE_RESPONSE
+                    )
+                    return {"answer": answer, "sources": [], "is_personal_data": False}
 
-            # ── Step 8: Merge and generate ─────────────────────────────
+            # ── Step 8: Merge, Sanitize Context, and Generate ─────────
             combined_context = "\n\n".join(filter(None, [erp_context, rag_context]))
+            combined_context = privacy_filter.sanitize_retrieved_context(combined_context)
 
             with track_segment("generation_time"):
                 answer = self.generator.generate(
@@ -280,6 +345,9 @@ class AuraChat:
                     system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
                     tracking_flags=request_context.tracking_flags if request_context else None,
                 )
+
+            # Apply Post-generation Privacy Filter (scans and redacts leaked PII / restricted fields)
+            answer = privacy_filter.filter_response_text(answer, query=query)
 
             return {
                 "answer": answer,
@@ -294,13 +362,17 @@ class AuraChat:
             }
 
         except Exception as e:
-            import traceback
-            traceback.print_exc()
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+            log_soft_failure(
+                "AURA-CHAT-001",
+                "aura_chat.chat",
+                exc=e,
+                user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
+            )
             return {"answer": msg, "sources": [], "is_personal_data": False}
 
     def _resolve_target(self, target_label: Optional[str], identity) -> Optional[str]:
@@ -317,6 +389,7 @@ class AuraChat:
         roll_number: Optional[str],
         access_result,
         requester_erp_id: Optional[str] = None,
+        identity=None,
     ) -> dict:
         if not roll_number:
             return {}
@@ -345,6 +418,16 @@ class AuraChat:
             data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
         if "courses" in fields and requester_erp_id:
             data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
+        # Timetable is in AURA's own PostgreSQL — never goes through RAG/Qdrant.
+        if "timetable" in fields and identity is not None:
+            try:
+                from pipeline.timetable.service import get_effective_timetable
+                data["timetable"] = get_effective_timetable(identity)
+            except Exception as _tt_err:
+                import logging
+                logging.getLogger(__name__).warning(
+                    "Timetable fetch skipped in _fetch_erp_data: %s", _tt_err
+                )
         return data
 
     def _rag_only(self, query, history, profile, user_role: str = "public") -> dict:
