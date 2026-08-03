@@ -933,6 +933,7 @@ Retrieved Documents
             if delta:
                 _emit(sanitizer.feed(delta))
         _emit(sanitizer.flush())
+        _emit(sanitizer.sources_tail())
         if profile_update_buffer:
             final_piece = re.sub(
                 r"\[UPDATE_PROFILE_NAME:[^\]]*$",
@@ -943,18 +944,6 @@ Retrieved Documents
             if final_piece:
                 emitted.append(final_piece)
                 on_delta(final_piece)
-
-        # The consolidated "[Sources: N, M]" marker is only for the
-        # downstream filter_sources_by_citations() call (it reads cited ids
-        # back off the returned answer string) — it must NEVER reach the
-        # client as visible text. The UI renders sources as citation pills
-        # from the separate `sources`/`citations` payload, so streaming this
-        # raw bracket text via on_delta would just dump ugly literal text
-        # into the chat bubble. Append to `emitted` (kept in the return
-        # value) WITHOUT calling on_delta.
-        tail = sanitizer.sources_tail()
-        if tail:
-            emitted.append(tail)
 
         answer = "".join(emitted)
         if not answer.strip():
