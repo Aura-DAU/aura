@@ -195,6 +195,15 @@ _PARTIAL_TAIL_RE = re.compile(r"(?:\s*\[[\d\s,]*|\s+)$")
 # Matches the consolidated marker both generation paths append — the buffered
 # path via _clean_citations(), the streaming path via _StreamSanitizer.
 _SOURCES_MARKER_RE = re.compile(r"\[Sources:\s*([\d\s,]+)\]")
+_DOC_OPEN_TAG_RE = re.compile(r"<doc\b(?P<attrs>.*?)>", re.DOTALL | re.IGNORECASE)
+_DOC_DATE_ATTRIBUTE_RE = re.compile(
+    r'\b(?P<name>id|rule_year|scraped_date)="(?P<value>[^"]*)"',
+    re.IGNORECASE,
+)
+_ACADEMIC_YEAR_RE = re.compile(
+    r"(?<!\d)(?P<start>(?:20)?\d{2})\s*[-\u2013]\s*(?P<end>(?:20)?\d{2})(?!\d)"
+)
+_CALENDAR_DATE_RE = re.compile(r"(?<!\d)(20\d{2}(?:-\d{2}(?:-\d{2})?)?)(?!\d)")
 
 
 def extract_cited_ids(answer: str) -> set[int]:
@@ -216,17 +225,111 @@ def extract_cited_ids(answer: str) -> set[int]:
     }
 
 
-def strip_sources_marker(answer: str) -> str:
-    # Remove the internal "[Sources: N, M]" marker before the answer is
-    # shown to the user. The marker exists only so extract_cited_ids() /
-    # filter_sources_by_citations() can read back which doc ids the model
-    # cited — callers must extract citations from the marker-bearing string
-    # FIRST, then pass the result of this function through as the visible
-    # answer text. The UI renders sources as clickable citation pills from
-    # the separate `sources` payload, never from this raw bracket text.
-    if not answer:
-        return answer
-    return _SOURCES_MARKER_RE.sub("", answer).rstrip()
+def _extract_inline_cited_ids(answer: str) -> set[int]:
+    return {
+        int(n)
+        for marker in _CITATION_RE.finditer(answer or "")
+        for n in re.findall(r"\d+", marker.group(0))
+    }
+
+
+def _normalize_academic_year(value: str) -> str | None:
+    match = _ACADEMIC_YEAR_RE.search(value or "")
+    if not match:
+        return None
+
+    start_raw = match.group("start")
+    end_raw = match.group("end")
+    start = int(start_raw) if len(start_raw) == 4 else 2000 + int(start_raw)
+    if len(end_raw) == 4:
+        end = int(end_raw)
+    else:
+        end = (start // 100) * 100 + int(end_raw)
+        if end < start:
+            end += 100
+
+    if end != start + 1:
+        return None
+    return f"{start:04d}-{end:04d}"
+
+
+def _document_date_metadata(context: str) -> dict[int, tuple[str, str]]:
+    documents = {}
+    for doc_match in _DOC_OPEN_TAG_RE.finditer(context or ""):
+        attrs = {
+            match.group("name").lower(): match.group("value").strip()
+            for match in _DOC_DATE_ATTRIBUTE_RE.finditer(doc_match.group("attrs"))
+        }
+        try:
+            doc_id = int(attrs.get("id", ""))
+        except ValueError:
+            continue
+        documents[doc_id] = (
+            attrs.get("rule_year", ""),
+            attrs.get("scraped_date", ""),
+        )
+    return documents
+
+
+def build_data_period_note(context: str, cited_ids: set[int]) -> str:
+    """Describe the currency of the source documents actually used."""
+    metadata = _document_date_metadata(context)
+    academic_years = []
+    fetched_dates = []
+    undated = False
+
+    for doc_id in sorted(cited_ids):
+        rule_year, scraped_date = metadata.get(doc_id, ("", ""))
+        academic_year = _normalize_academic_year(rule_year)
+        if academic_year:
+            if academic_year not in academic_years:
+                academic_years.append(academic_year)
+            continue
+
+        fetched_match = _CALENDAR_DATE_RE.search(scraped_date)
+        if fetched_match:
+            fetched_date = fetched_match.group(1)
+            if fetched_date not in fetched_dates:
+                fetched_dates.append(fetched_date)
+            continue
+
+        year_match = _CALENDAR_DATE_RE.search(rule_year)
+        if year_match:
+            year = year_match.group(1)
+            if year not in fetched_dates:
+                fetched_dates.append(year)
+            continue
+
+        undated = True
+
+    if not cited_ids:
+        return "Data period: No dated source was cited for this response."
+
+    parts = []
+    if academic_years:
+        label = "Academic Year" if len(academic_years) == 1 else "Academic Years"
+        parts.append(f"{label} {', '.join(academic_years)}")
+    if fetched_dates:
+        label = "source fetched as of" if len(fetched_dates) == 1 else "sources fetched as of"
+        parts.append(f"{label} {', '.join(fetched_dates)}")
+
+    if not parts:
+        return "Data period: The cited source does not specify a date."
+
+    note = f"Data period: {'; '.join(parts)}."
+    if undated:
+        note += " Some cited sources do not specify a date."
+    return note
+
+
+def append_data_period_note(answer: str, context: str, cited_ids: set[int]) -> str:
+    note = build_data_period_note(context, cited_ids)
+    marker = _SOURCES_MARKER_RE.search(answer or "")
+    if marker:
+        body = answer[:marker.start()].rstrip()
+        sources = answer[marker.start():]
+        return f"{body}\n\n{note}\n\n{sources}"
+    return f"{(answer or '').rstrip()}\n\n{note}".lstrip()
 
 
 def filter_sources_by_citations(sources, citation_map, answer):
@@ -417,6 +520,7 @@ If the question is primarily outside DAU's scope, do not answer it using retriev
 
 - Professional, warm, concise. Paragraphs by default; bullets for lists/steps/requirements/comparisons.
 - Ground factual policy with academic/rule year; if docs span years, structure by year.
+- Always disclose source currency: use `rule_year` as the academic year when present; otherwise use `scraped_date` as the fetch date. Never present `scraped_date` as an academic year, and say when a cited source is undated.
 - Citations `[1]` or `[1][3]` right after the supported sentence. No citations on greetings/clarifying/conversational text. Integrate — do not quote long passages.
 - Partial coverage: answer what is supported, then state what is missing.
 - No coverage: "I could not find that information in the available university data." Name the responsible office if identified; point to https://www.daiict.ac.in.
@@ -635,6 +739,7 @@ Retrieved Documents
                     dispatch=dispatch, max_tokens=answer_max_tokens,
                     on_profile_update=on_profile_update,
                     profile_erp_id=profile_erp_id,
+                    context=context,
                 )
 
             # The router picks the node internally and does not report which one
@@ -714,7 +819,9 @@ Retrieved Documents
                 if "```" in answer or not is_grounded:
                     return out_of_scope_response
 
-            return self._clean_citations(answer)
+            cited_ids = _extract_inline_cited_ids(answer)
+            cleaned_answer = self._clean_citations(answer)
+            return append_data_period_note(cleaned_answer, context, cited_ids)
 
         except ContextLengthExceeded as e:
             log_soft_failure(
@@ -821,6 +928,7 @@ Retrieved Documents
         max_tokens=None,
         on_profile_update=None,
         profile_erp_id=None,
+        context="",
     ):
         stream_messages = [{"role": "system", "content": system_prompt}]
         if history:
@@ -933,6 +1041,7 @@ Retrieved Documents
             if delta:
                 _emit(sanitizer.feed(delta))
         _emit(sanitizer.flush())
+        _emit("\n\n" + build_data_period_note(context, sanitizer.cited))
         _emit(sanitizer.sources_tail())
         if profile_update_buffer:
             final_piece = re.sub(
