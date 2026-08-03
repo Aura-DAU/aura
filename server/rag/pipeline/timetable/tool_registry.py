@@ -161,7 +161,8 @@ def _handle_set_my_cohort(identity, **kwargs):
                 "preview": {"year": year, "sem": sem, "sec": sec},
                 "message": (
                     f"I will update your profile section/cohort to Year {year or 'current'}, "
-                    f"Semester {sem or 'current'}, Section {sec or 'current'}. Confirm to save."
+                    f"Semester {sem or 'current'}, Section {sec or 'current'}. "
+                    "This updates the timetable you see. Confirm to save."
                 ),
             }
         return service.update_student_cohort(identity, year=year, sem=sem, sec=sec)
@@ -176,7 +177,7 @@ SET_MY_COHORT = Tool(
     description=(
         "Update the student's cohort section, semester, or academic year (e.g. changing from Section A to Section B). "
         "This saves the student's section into PostgreSQL user_identity_map for all future sessions. "
-        "Always call with confirm=false first to preview, then confirm=true after user agrees."
+        "The orchestrator will automatically preview this change and require user confirmation."
     ),
     parameters={
         "type": "object",
@@ -184,7 +185,6 @@ SET_MY_COHORT = Tool(
             "sec": {"type": "string", "description": "Section letter, e.g. 'A', 'B', 'C', 'D'."},
             "sem": {"type": "integer", "description": "Semester number, e.g. 1, 3, 5, 7."},
             "year": {"type": "integer", "description": "Academic year number, e.g. 1, 2, 3, 4."},
-            "confirm": {"type": "boolean", "description": "Set true after user confirms."},
         },
     },
     category="write", allowed_roles=["student"], handler=_handle_set_my_cohort,
@@ -194,7 +194,13 @@ GET_MY_TIMETABLE = Tool(
     name="get_my_timetable",
     description=(
         "Get the requester's own current weekly class timetable (lectures, labs, tutorials), "
-        "already merged with any personal changes they've previously asked AURA to make."
+        "already merged with any personal changes they've previously asked AURA to make. "
+        "Use this ONLY when the requester is asking about their own enrolled cohort with no "
+        "other year/semester/section/branch explicitly named. If the query names a SPECIFIC "
+        "cohort (e.g. 'what's my timetable for ICT 1st Yr Sec A' or 'my timetable for 2nd year "
+        "MnC section B'), that named cohort is what they want to see -- even though the query "
+        "says 'my', use get_cohort_timetable with the named year/sem/section/branch instead. "
+        "The word 'my' alone is not enough signal; an explicitly named cohort always wins."
     ),
     parameters={"type": "object", "properties": {}},
     category="read", allowed_roles=["student"], handler=_handle_get_my_timetable,
@@ -205,9 +211,14 @@ GET_COHORT_TIMETABLE = Tool(
     description=(
         "Look up the published weekly class timetable for ANY cohort by semester/year, "
         "section, and branch/programme -- e.g. 'give me the timetable of BTech ICT 3rd sem "
-        "section A' or 'what's the schedule for 2nd year MnC section B'. Returns the plain "
-        "master schedule only (no personal overrides or elective picks applied). Use "
-        "get_my_timetable instead when the requester is asking about their OWN timetable. "
+        "section A' or 'what's the schedule for 2nd year MnC section B'. This is also the "
+        "right tool when a query says 'my timetable' but explicitly names a different year/"
+        "semester/section/branch than the requester's own profile -- e.g. 'what's my "
+        "timetable for ICT 1st Yr Sec A' from a 3rd-year student names a specific OTHER "
+        "cohort, so look that cohort up here rather than treating 'my' as meaning their own "
+        "enrolled timetable. Returns the plain master schedule only (no personal overrides or "
+        "elective picks applied). Use get_my_timetable instead only when the requester is "
+        "asking about their own timetable with no other cohort named. "
         "Section defaults to 'A' if the user doesn't name one."
     ),
     parameters={
@@ -250,9 +261,8 @@ UPDATE_MY_TIMETABLE = Tool(
     description=(
         "Change, add, or remove ONE entry on the requester's own timetable -- for example moving "
         "a class to a different room/time, or adding a new lab session. This ONLY ever affects "
-        "the requester's own view; nobody else's timetable is touched. Always call this once "
-        "with confirm=false first to preview the change, then relay the preview to the user and "
-        "only call it again with confirm=true after they explicitly agree."
+        "the requester's own view; nobody else's timetable is touched. The orchestrator will "
+        "automatically preview this change and require user confirmation before saving."
     ),
     parameters={
         "type": "object",
@@ -276,7 +286,6 @@ UPDATE_MY_TIMETABLE = Tool(
             "room": {"type": "string"},
             "faculty_name": {"type": "string"},
             "note": {"type": "string", "description": "Short note on why, for the student's own record."},
-            "confirm": {"type": "boolean", "description": "Set true only after the user has confirmed the previewed change."},
         },
         "required": ["kind"],
     },
@@ -323,8 +332,8 @@ SAVE_MY_ELECTIVE_SELECTIONS = Tool(
         "Save the student's chosen elective courses for this semester. After saving, the "
         "student's timetable will only show their core courses plus the selected electives "
         "(other electives they didn't pick will be hidden). The student can change their "
-        "selections at any time by calling this tool again with the updated list. Always "
-        "call with confirm=false first to preview, then confirm=true after student agrees."
+        "selections at any time by calling this tool again with the updated list. The orchestrator "
+        "will automatically preview this change and require user confirmation before saving."
     ),
     parameters={
         "type": "object",
@@ -336,10 +345,6 @@ SAVE_MY_ELECTIVE_SELECTIONS = Tool(
                     "List of course codes for the electives the student is taking, "
                     "e.g. ['IT301', 'SC205']. Use get_available_electives to see valid codes."
                 ),
-            },
-            "confirm": {
-                "type": "boolean",
-                "description": "Set true only after the user has confirmed the previewed selection.",
             },
         },
         "required": ["course_codes"],

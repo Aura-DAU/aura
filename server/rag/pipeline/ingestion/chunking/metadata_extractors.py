@@ -82,8 +82,19 @@ def resolve_document_academic_year(metadata: dict, file_path, body: str = "") ->
             return academic_year_start(label) or int(label[:4]), label
 
     # 3. Bare 20xx in title/path/body.
+    #
+    # Fix YEAR-UB1 (spot-check finding): this corpus's filenames are almost
+    # all snake_case ("..._autumn_2025_page_7.md"), and `_` is a \w
+    # character, so a \b...\b year regex never matches "_2025_" — there's no
+    # word-boundary transition between an underscore and a digit. That
+    # silently skipped this entire step for the majority of course-policy
+    # filenames and let extraction fall through to scraped_date (the
+    # ingest date), mistagging dozens of "Autumn 2025" documents as 2026
+    # simply because they happened to be scraped in 2026. Digit-adjacency
+    # lookaround (no digit immediately before/after) still rejects things
+    # like "20255" or a stray "42025", but does match "_2025_" and "-2025-".
     for candidate in (title, path_name, path_str, (body or "")[:1000]):
-        year_match = re.search(r"\b(20\d{2})\b", str(candidate))
+        year_match = re.search(r"(?<!\d)(20\d{2})(?!\d)", str(candidate))
         if year_match:
             return int(year_match.group(1)), None
 
@@ -101,7 +112,7 @@ def resolve_document_academic_year(metadata: dict, file_path, body: str = "") ->
 
     scraped = metadata.get("scraped_date")
     if scraped is not None:
-        year_match = re.search(r"\b(20\d{2})\b", str(scraped))
+        year_match = re.search(r"(?<!\d)(20\d{2})(?!\d)", str(scraped))
         if year_match:
             return int(year_match.group(1)), None
 
@@ -531,3 +542,64 @@ def extract_event_metadata(sections):
             )
 
     return metadata
+
+
+# Issue 4 fix (Scatter-Gather Retrieval): faculty profiles were only chunked
+# as raw text with no filterable tag for what a faculty member researches, so
+# aggregation queries like "all faculty doing NLP" fell back to top-K semantic
+# search, which truncates the full list instead of returning every match.
+# This mapping is deliberately a small, exact-match vocabulary (not fuzzy
+# NLP) so tagging stays predictable and auditable at ingestion time.
+RESEARCH_DOMAIN_KEYWORDS = {
+    "Machine Learning": ["machine learning", "deep learning", "neural network"],
+    "Natural Language Processing": ["natural language processing", "nlp", "computational linguistics"],
+    "Computer Vision": ["computer vision", "image processing", "image analysis"],
+    "Data Science": ["data science", "data mining", "big data"],
+    "Networks": ["computer networks", "wireless networks", "network security"],
+    "Signal Processing": ["signal processing", "dsp"],
+    "VLSI": ["vlsi", "microelectronics", "semiconductor"],
+    "Robotics": ["robotics", "autonomous systems"],
+    "Cybersecurity": ["cybersecurity", "information security", "cryptography"],
+    "Internet of Things": ["internet of things", "iot"],
+}
+
+
+def extract_research_domain(text):
+    """Tag a faculty profile/research-section chunk with its research
+    domain(s), e.g. 'Natural Language Processing', 'Computer Vision', by
+    matching RESEARCH_DOMAIN_KEYWORDS against the chunk text.
+
+    Returns a sorted list of matched canonical domain labels, or None if no
+    domain keyword is present -- mirrors extract_event_metadata's "only set
+    what's actually there" behaviour.
+    """
+    if not text:
+        return None
+
+    text_lower = str(text).lower()
+
+    matched = [
+        domain
+        for domain, keywords in RESEARCH_DOMAIN_KEYWORDS.items()
+        if any(keyword in text_lower for keyword in keywords)
+    ]
+
+    return sorted(matched) if matched else None
+
+
+def extract_program_list_category(file_path, text):
+    """Detect if this chunk is part of a broad overview document that lists
+    programs (e.g. undergraduate_programs.md). This helps the query planner
+    fetch these specific documents for broad 'What programs does DAU offer?'
+    queries without getting truncated by top-K vector search limitations.
+    """
+    if not file_path or not text:
+        return None
+
+    path_lower = str(file_path).lower()
+    
+    # Specific known overview files
+    if "programs_of_study" in path_lower and ("undergraduate_programs.md" in path_lower or "postgraduate_programs.md" in path_lower or "doctoral_program.md" in path_lower or "dual_degree_programs.md" in path_lower):
+        return "program_list"
+        
+    return None

@@ -1,25 +1,52 @@
 import heapq
 import json
+import logging
+import os
 import re
 
 from rank_bm25 import BM25Okapi
+
+logger = logging.getLogger(__name__)
 
 
 class BM25Retriever:
 
     def __init__(self, metadata_path):
+        self.metadata_path = metadata_path
+        self._metadata_mtime = None
+        # Security: DISABLE_DLS_FILTER / DISABLE_PINECONE_DLS_FILTER strip the
+        # "authorization" clause from every BM25 metadata filter below, which
+        # means a request would no longer be scoped to the roles it's allowed
+        # to see. This exists for local evaluation only (see RAG_Coverage_Report
+        # Aug 2026), where the eval harness has no real caller identity to
+        # filter on. It must NEVER be true in a real deployment. Logged loudly
+        # and exactly once at startup (not per-query, to avoid log-flooding)
+        # so an accidental production misconfiguration is visible immediately
+        # in logs/monitoring instead of silently serving out-of-scope documents.
+        if (
+            os.getenv("DISABLE_DLS_FILTER", "false").lower() == "true"
+            or os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true"
+        ):
+            logger.warning(
+                "SECURITY: DISABLE_DLS_FILTER/DISABLE_PINECONE_DLS_FILTER is "
+                "TRUE — BM25 retrieval is bypassing role-based authorization "
+                "filtering. This must only ever be set for local evaluation, "
+                "never in a real deployment."
+            )
+        self.rebuild_index()
 
+    def rebuild_index(self):
         with open(
-            metadata_path,
+            self.metadata_path,
             "r",
             encoding="utf-8"
         ) as f:
 
-            self.chunks = json.load(f)
+            chunks = json.load(f)
 
         corpus = []
 
-        for chunk in self.chunks:
+        for chunk in chunks:
 
             text = self._build_text(
                 chunk
@@ -29,9 +56,33 @@ class BM25Retriever:
                 self._tokenize(text)
             )
 
+        self.chunks = chunks
         self.bm25 = BM25Okapi(
             corpus
         )
+        try:
+            self._metadata_mtime = os.path.getmtime(self.metadata_path)
+        except OSError:
+            self._metadata_mtime = None
+
+    def _refresh_if_stale(self):
+        # Fix P3 (rag_debug_report Stage: BM25, Bug 1): the index was only
+        # ever built once, at process startup. New documents ingested after
+        # that point never entered BM25 scoring until the process restarted,
+        # so BM25 silently drifted out of sync with Qdrant/metadata.json.
+        # Cheap mtime check on every retrieve() call keeps it current without
+        # needing a separate scheduler process; ingestion writes a new
+        # metadata.json file (or bumps its mtime) whenever it runs.
+        try:
+            current_mtime = os.path.getmtime(self.metadata_path)
+        except OSError:
+            return
+        if self._metadata_mtime is None or current_mtime > self._metadata_mtime:
+            logger.info(
+                "bm25_retriever: metadata_path changed (mtime %s -> %s), rebuilding index",
+                self._metadata_mtime, current_mtime
+            )
+            self.rebuild_index()
 
     def _build_text(
         self,
@@ -167,7 +218,6 @@ class BM25Retriever:
         chunk,
         metadata_filter
     ):
-        import os
         if os.getenv("DISABLE_DLS_FILTER", "false").lower() == "true" or os.getenv("DISABLE_PINECONE_DLS_FILTER", "false").lower() == "true":
             def strip_auth(f):
                 if not isinstance(f, dict): return f
@@ -217,6 +267,9 @@ class BM25Retriever:
 
         for key, condition in metadata_filter.items():
 
+            if key == "authorization" and os.environ.get("DISABLE_DLS_FILTER", "").lower() == "true":
+                continue
+
             if isinstance(condition, dict):
 
                 if "$eq" in condition:
@@ -265,6 +318,8 @@ class BM25Retriever:
         metadata_filter=None,
         allowed_roles=None
     ):
+
+        self._refresh_if_stale()
 
         query_tokens = (
             self._tokenize(query)

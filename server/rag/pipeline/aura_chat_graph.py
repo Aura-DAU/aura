@@ -199,6 +199,20 @@ class AuraState(TypedDict, total=False):
     answer: str
     result: Optional[dict]  # set by any node that wants to short-circuit
 
+    # Fix P0 (rag_debug_report Issue 2): is_guardrail marks responses that come
+    # from static/predefined handlers (safety, wellness, greeting, guest gate,
+    # strict guardrail, ERP errors). When True, sources must be [] regardless
+    # of what earlier nodes wrote to state["sources"] — prevents source bleed
+    # from a prior _n_community_tools run into a guardrail reply.
+    is_guardrail: bool
+
+    # Fix A (source_match_analysis Root Cause 2): Stores the sources + citation_map
+    # from the most recent successful RAG retrieval. When a follow-up turn answers
+    # from LLM memory (no new RAG call), these are forwarded so sources[] is never
+    # empty due to the absence of a fresh retrieval.
+    last_rag_sources: list
+    last_rag_citation_map: dict
+
 
 class AuraChatGraph:
     """Drop-in replacement for AuraChat.chat() — same call signature and
@@ -285,12 +299,16 @@ class AuraChatGraph:
             state["result"] = {
                 "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                 "sources": [],
+                "is_guardrail": True,
             }
+            state["is_guardrail"] = True
         elif verdict is Verdict.OFF_TOPIC:
             state["result"] = {
                 "answer": OFF_TOPIC_RESPONSE,
                 "sources": [],
+                "is_guardrail": True,
             }
+            state["is_guardrail"] = True
         return state
 
     def _n_wellness_check(self, state: AuraState) -> AuraState:
@@ -299,7 +317,9 @@ class AuraChatGraph:
                 "answer": self.wellness.get_response(),
                 "sources": [],
                 "is_personal_data": False,
+                "is_guardrail": True,
             }
+            state["is_guardrail"] = True
         return state
 
     def _n_greeting_check(self, state: AuraState) -> AuraState:
@@ -333,7 +353,8 @@ class AuraChatGraph:
                 "How can I assist you today?"
             )
 
-        state["result"] = {"answer": ans, "sources": [], "is_personal_data": False}
+        state["result"] = {"answer": ans, "sources": [], "is_personal_data": False, "is_guardrail": True}
+        state["is_guardrail"] = True
         return state
 
     def _n_profile_fast_path(self, state: AuraState) -> AuraState:
@@ -392,14 +413,33 @@ class AuraChatGraph:
                 f"You are **{name}** (Roll Number: `{roll}`), currently enrolled in "
                 f"{sem_bit}the **{prog}** program in the **{branch}** department."
             )
-        state["result"] = {"answer": ans, "sources": [], "is_personal_data": True}
+        state["result"] = {"answer": ans, "sources": [], "is_personal_data": True, "is_guardrail": True}
+        state["is_guardrail"] = True
         return state
 
     def _n_community_tools(self, state: AuraState) -> AuraState:
         # Clubs / SBG / faculty ToR / domain KB skills → EcampusOrchestrator
-        # with public KB tools only. Guests and non-COMMUNITY queries fall
-        # through to classify → public RAG (or the personal ERP path).
-        # Personal ERP tools are never exposed on this branch.
+        # with public KB tools only, OR a student/faculty's own live eCampus
+        # data (attendance, grades, CGPA, timetable, fees, hostel, teaching
+        # schedule, ...) → the same EcampusOrchestrator with tool_scope=
+        # "personal". Guests and GENERAL queries fall through to
+        # classify → public RAG (or the legacy ERP-connector path in
+        # _n_personal_data, which now only serves as a fallback for erp
+        # categories the tool registry doesn't cover, e.g. AGGREGATE stats).
+        #
+        # Bug fix (see RAG eval reports Aug 2026 -- 34/40 personalized queries
+        # failing with "AURA failed to invoke external tools"): PERSONAL_DATA
+        # queries used to be routed exclusively to _n_personal_data, which
+        # calls self.erp_connector directly. erp_connector has no student-
+        # facing timetable/attendance-detail methods (those live in
+        # pipeline.ecampus's tool registry, added later) -- for a student
+        # asking "do I have labs tomorrow" the old path fetched an empty
+        # erp_context and the model had nothing to answer from. Routing
+        # PERSONAL_DATA through the tool-calling orchestrator first (same as
+        # COMMUNITY already was) fixes this: the LLM actually calls
+        # get_my_timetable / get_academic_snapshot / get_result / get_cgpa /
+        # etc. and answers from real data, or surfaces the correct
+        # "link_ecampus_account" prompt instead of a generic failure message.
         identity = state.get("identity")
         if not identity or getattr(identity, "role", None) in (None, "guest"):
             return state
@@ -432,7 +472,11 @@ class AuraChatGraph:
         # Stash the verdict so _n_personal_tools can reuse it without a second
         # classifier round-trip.
         state["ecampus_intent"] = intent
-        if intent != "COMMUNITY":
+        if intent == "COMMUNITY":
+            tool_scope = "public_kb"
+        elif intent == "PERSONAL_DATA":
+            tool_scope = "personal"
+        else:
             return state
 
         tool_role = identity.role if identity.role in ("student", "faculty") else None
@@ -462,7 +506,7 @@ class AuraChatGraph:
                     identity=identity_payload,
                     history=state.get("history") or [],
                     request_context=state.get("request_context"),
-                    tool_scope="public_kb",
+                    tool_scope=tool_scope,
                 )
         except Exception as exc:
             # Orchestrator/LLM failure must not kill the request — fall through
@@ -479,14 +523,19 @@ class AuraChatGraph:
 
         answer = (result.get("answer") or "").strip()
         if not answer:
-            # Empty tool answer → let public RAG try instead of blank SSE.
+            # Empty tool answer → for PERSONAL_DATA let the legacy
+            # _n_personal_data node (AGGREGATE / erp_connector-only fields)
+            # have a shot instead of returning a blank SSE; for public_kb,
+            # let public RAG try.
             return state
 
         state["result"] = {
             "answer": answer,
             "sources": result.get("sources") or [],
-            "is_personal_data": False,
+            "is_personal_data": tool_scope == "personal",
         }
+        if tool_scope == "personal":
+            state["is_personal"] = True
         return state
 
     def _n_personal_tools(self, state: AuraState) -> AuraState:
@@ -637,7 +686,9 @@ class AuraChatGraph:
                     "answer": GENERIC_DENIAL,
                     "sources": [],
                     "is_personal_data": False,
+                    "is_guardrail": True,
                 }
+                state["is_guardrail"] = True
         return state
 
     def _n_strict_guardrail(self, state: AuraState) -> AuraState:
@@ -651,7 +702,9 @@ class AuraChatGraph:
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                     "sources": [],
                     "is_personal_data": False,
+                    "is_guardrail": True,
                 }
+                state["is_guardrail"] = True
         return state
 
     def _n_personal_data(self, state: AuraState) -> AuraState:
@@ -687,7 +740,8 @@ class AuraChatGraph:
         )
 
         if access_result.decision == AccessDecision.DENIED:
-            state["result"] = {"answer": GENERIC_DENIAL, "sources": [], "is_personal_data": False}
+            state["result"] = {"answer": GENERIC_DENIAL, "sources": [], "is_personal_data": False, "is_guardrail": True}
+            state["is_guardrail"] = True
             return state
 
         if query_type == "AGGREGATE":
@@ -698,8 +752,9 @@ class AuraChatGraph:
                 import traceback; traceback.print_exc()
                 state["result"] = {
                     "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
-                    "sources": [], "is_personal_data": False,
+                    "sources": [], "is_personal_data": False, "is_guardrail": True,
                 }
+                state["is_guardrail"] = True
                 return state
         else:
             # Fix PD-DEGRADE: this is the one DB-dependent step in this node
@@ -724,9 +779,11 @@ class AuraChatGraph:
                 import traceback; traceback.print_exc()
                 state["result"] = {
                     "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
-                    "sources": [], "is_personal_data": False,
+                    "sources": [], "is_personal_data": False, "is_guardrail": True,
                 }
+                state["is_guardrail"] = True
                 return state
+
 
         state["erp_context"] = self.context_builder.build(erp_data, identity, access_result)
         state["is_personal"] = True
@@ -742,7 +799,23 @@ class AuraChatGraph:
 
         request_context = state.get("request_context")
         user_role = request_context.effective_role if request_context else "public"
-        
+
+        # Fix C (source_match_analysis Root Cause 4): Extract an explicit
+        # document title from 'According to \'Title\'' phrasing and inject it
+        # as a retrieval hint so the exact-title document is boosted to the
+        # top of the candidate pool. Without this, explicit-title queries like
+        # 'According to the document \'Director General\', ...' retrieved a
+        # thematically related but wrong document (e.g. Organogram) because
+        # the query plan had no signal that a specific title was requested.
+        _TITLE_EXTRACT_RE = re.compile(
+            r"according\s+to\s+(?:the\s+document\s+)?['\"]([^'\"]+)['\"]\s*,",
+            re.IGNORECASE,
+        )
+        _title_hint: Optional[str] = None
+        _m = _TITLE_EXTRACT_RE.search(state["query"])
+        if _m:
+            _title_hint = _m.group(1).strip()
+
         # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
         from institution_resolver import get_institution_resolver
         resolved_query = get_institution_resolver().resolve(state["query"])
@@ -754,11 +827,19 @@ class AuraChatGraph:
                 user_role=user_role,
                 academic_scope=state.get("academic_scope"),
                 identity=state.get("identity"),
+                title_hint=_title_hint,
             )
         state["retrieval_result"] = retrieval_result
         state["chunks"] = retrieval_result.get("chunks", [])
         state["rag_context"] = retrieval_result.get("context", "")
         state["sources"] = retrieval_result.get("sources", [])
+
+        # Fix A (source_match_analysis Root Cause 2): Persist the sources from
+        # every successful RAG retrieval so follow-up turns that re-use the LLM
+        # memory can still return the same citation cards.
+        if state["sources"]:
+            state["last_rag_sources"] = retrieval_result.get("sources", [])
+            state["last_rag_citation_map"] = retrieval_result.get("citation_map", {})
 
         if not state["chunks"] and query_type == "PUBLIC":
             reason = retrieval_result.get("abstention_reason")
@@ -775,6 +856,15 @@ class AuraChatGraph:
         return state
 
     def _n_generate(self, state: AuraState) -> AuraState:
+        # Fix P0 (rag_debug_report Issue 2 + Root Cause E): If a guardrail node
+        # already finalised the answer, enforce zero sources and return.
+        # Without this, sources accumulated by a prior _n_community_tools run
+        # persist in state and bleed into the guardrail reply (graph state bleed).
+        if state.get("is_guardrail") or state.get("result", {}).get("is_guardrail"):
+            if state.get("result") is not None:
+                state["result"]["sources"] = []
+            return state
+
         erp_context = state.get("erp_context", "")
         rag_context = state.get("rag_context", "")
         is_personal = state.get("is_personal", False)
@@ -814,11 +904,27 @@ class AuraChatGraph:
         # Apply post-generation privacy filter
         answer = privacy_filter.filter_response_text(answer, query=state["query"])
 
+        # Resolve which sources and citation_map to use for this turn.
+        # Fix A (source_match_analysis Root Cause 2): Multi-turn follow-up turns
+        # often answer from the LLM's memory of the prior conversation summary
+        # rather than triggering a new RAG retrieval. In those cases
+        # retrieval_result is empty and sources would be []. Instead of returning
+        # an empty source list (which fails the evaluator's source_matched check),
+        # forward the sources from the last successful RAG call. This mirrors
+        # what the user experience should be: if AURA answers about document X
+        # in Turn 1 and references the same content in Turn 3, the citation card
+        # for document X should still appear.
+        effective_sources = state.get("sources", [])
+        effective_citation_map = retrieval_result.get("citation_map", {})
+        if not effective_sources and state.get("last_rag_sources"):
+            effective_sources = state["last_rag_sources"]
+            effective_citation_map = state.get("last_rag_citation_map", {})
+
         state["result"] = {
             "answer": answer,
             "sources": filter_sources_by_citations(
-                state.get("sources", []),
-                retrieval_result.get("citation_map", {}),
+                effective_sources,
+                effective_citation_map,
                 answer,
             ),
             "is_personal_data": is_personal,
@@ -869,6 +975,8 @@ class AuraChatGraph:
             data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
         if "courses" in fields and requester_erp_id:
             data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
+        if "teaching_schedule" in fields and requester_erp_id:
+            data["teaching_schedule"] = self.erp_connector.get_faculty_teaching_schedule(requester_erp_id)
         return data
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────
