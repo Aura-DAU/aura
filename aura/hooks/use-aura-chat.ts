@@ -547,6 +547,7 @@ export function useAuraChat() {
     const yearLabel = typeof year === "number" ? ordinalYearLabel(year) : undefined
     if (!programLabel && !yearLabel) return
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStudentProfile((prev) => {
       if (prev.program && prev.year) return prev
       const next = {
@@ -942,6 +943,7 @@ export function useAuraChat() {
             content: assistantText,
             is_personal_data: isPersonalData || undefined,
             calendar_action: calendarAction,
+            citations: citations.length > 0 ? citations : undefined,
           },
         ]
         setMessages(finalMessages)

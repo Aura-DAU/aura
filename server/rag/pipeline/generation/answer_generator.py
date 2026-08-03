@@ -216,6 +216,19 @@ def extract_cited_ids(answer: str) -> set[int]:
     }
 
 
+def strip_sources_marker(answer: str) -> str:
+    # Remove the internal "[Sources: N, M]" marker before the answer is
+    # shown to the user. The marker exists only so extract_cited_ids() /
+    # filter_sources_by_citations() can read back which doc ids the model
+    # cited — callers must extract citations from the marker-bearing string
+    # FIRST, then pass the result of this function through as the visible
+    # answer text. The UI renders sources as clickable citation pills from
+    # the separate `sources` payload, never from this raw bracket text.
+    if not answer:
+        return answer
+    return _SOURCES_MARKER_RE.sub("", answer).rstrip()
+
+
 def filter_sources_by_citations(sources, citation_map, answer):
     # Narrow a retrieval source list to those the answer actually cited.
     #

@@ -47,6 +47,8 @@ export interface ChatMessage {
   is_personal_data?: boolean
   /** Set when the backend emits a calendar-action SSE event for this turn. */
   calendar_action?: CalendarActionData
+  /** Sources returned by the backend for this turn (assistant messages only). Persisted per-message so citations survive thread switches and reloads. */
+  citations?: Citation[]
 }
 
 export interface Citation {
