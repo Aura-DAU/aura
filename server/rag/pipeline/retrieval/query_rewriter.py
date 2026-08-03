@@ -64,6 +64,9 @@ Use the conversation history to resolve references such as:
 - the second one
 - the latter
 - the former
+- the same one
+- the same
+- that one
 
 Rules
 

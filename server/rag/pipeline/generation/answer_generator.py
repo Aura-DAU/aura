@@ -103,7 +103,7 @@ _STRICT_CITATIONS = (
 # leading hypothesis for the observed occurrences is LLM call failure under GPU
 # saturation, and that has to be separable from a pipeline bug at a glance.
 
-SOFT_FAILURE_ANSWER = "Sorry, I encountered an error while generating a response."
+SOFT_FAILURE_ANSWER = "Sorry, I encountered an error while generating a response. Please try asking your question again in a few moments."
 
 _TIMEOUT_MARKERS = (
     "timeout", "timed out", "deadline exceeded", "read timed out",
@@ -216,13 +216,31 @@ def extract_cited_ids(answer: str) -> set[int]:
     # An empty set means the model cited nothing. That is a real signal, not a
     # parse failure — an answer with no citations is ungrounded by definition,
     # and callers should show no sources for it.
+    #
+    # Fix P1 (rag_debug_report Root Cause D): Only parse the LAST [Sources: ...]
+    # block — the one appended by _StreamSanitizer / _clean_citations.
+    # Earlier occurrences can be LLM-hallucinated text in the answer body;
+    # matching them would double-count ids and return wrong source cards.
     if not answer:
         return set()
-    return {
-        int(n)
-        for m in _SOURCES_MARKER_RE.finditer(answer)
-        for n in re.findall(r"\d+", m.group(1))
-    }
+    matches = list(_SOURCES_MARKER_RE.finditer(answer))
+    if not matches:
+        return set()
+    last = matches[-1]
+    return {int(n) for n in re.findall(r"\d+", last.group(1))}
+
+
+def strip_sources_marker(answer: str) -> str:
+    # Remove the internal "[Sources: N, M]" marker before the answer is
+    # shown to the user. The marker exists only so extract_cited_ids() /
+    # filter_sources_by_citations() can read back which doc ids the model
+    # cited — callers must extract citations from the marker-bearing string
+    # FIRST, then pass the result of this function through as the visible
+    # answer text. The UI renders sources as clickable citation pills from
+    # the separate `sources` payload, never from this raw bracket text.
+    if not answer:
+        return answer
+    return _SOURCES_MARKER_RE.sub("", answer).rstrip()
 
 
 def _extract_inline_cited_ids(answer: str) -> set[int]:
@@ -349,7 +367,20 @@ def filter_sources_by_citations(sources, citation_map, answer):
         return []
 
     # No map (older callers, or an ERP-only turn) → cite-by-position fallback.
+    # Fix P1 (rag_debug_report Root Cause A): Log a warning so this silent
+    # fallback is visible in production logs. This path is inherently imprecise
+    # because cited_ids are doc-chunk positions while sources is a deduplicated
+    # list (len(sources) ≤ len(chunks)), so position i may not correspond to
+    # sources[i-1]. The permanent fix is to ensure all call paths supply
+    # a citation_map — never call this function with an empty map intentionally.
     if not citation_map:
+        import logging as _logging
+        _logging.getLogger(__name__).warning(
+            "filter_sources_by_citations: no citation_map — cite-by-position "
+            "fallback active (cited_ids=%s, sources_count=%d). "
+            "Ensure every code path that produces sources also produces a citation_map.",
+            sorted(cited_ids), len(sources)
+        )
         return [sources[i - 1] for i in sorted(cited_ids) if 1 <= i <= len(sources)]
 
     keep = {citation_map[i] for i in cited_ids if i in citation_map}
@@ -488,6 +519,22 @@ If no retrieved document is genuinely relevant, follow the "No coverage" rule.
 # STRICT ENTITY VERIFICATION
 
 For a named person: require the *exact* name in docs (allow 1–2 letter typos). **DO NOT** substitute a different person with a similar/shared first name. If only a similar-name person appears, say no information is available for the requested person — do not give the other person's info.
+
+# ANTI-SYNTHESIS RULE
+
+Do not rank, rate, or synthesize a subjective judgment (e.g. "best club", "optimal roadmap",
+"top faculty") unless a retrieved document itself states that ranking or recommendation. If
+asked for one and no document ranks or recommends among the options, say the documents do not
+rank or recommend among them, then list the documented options neutrally instead of guessing.
+
+# NAMED-ENTITY EXISTENCE CHECK
+
+Before affirming that a specific named entity exists or happened at DAU (an award, an event, a
+title, an organization -- e.g. "Nobel Prize winner", "Google I/O", "Head of Department"),
+verify that entity's exact name appears in a retrieved `<doc>`, the same way STRICT ENTITY
+VERIFICATION above requires for a person's name. Do not treat general world knowledge about
+the entity as evidence it applies to DAU. If it does not appear in the retrieved documents,
+state plainly that it is not documented in the retrieved data rather than guessing or assuming.
 
 # HANDLING PARTIAL INFORMATION
 
@@ -750,7 +797,7 @@ Retrieved Documents
                 dispatch["node"] = str(getattr(client, "base_url", "") or "") or None
                 return client.chat.completions.create(
                     model=self.model,
-                    temperature=0.2,
+                    temperature=0.0,
                     top_p=0.9,
                     max_tokens=answer_max_tokens,
                     messages=messages_payload,
@@ -948,7 +995,7 @@ Retrieved Documents
             dispatch["node"] = str(getattr(client, "base_url", "") or "") or None
             return client.chat.completions.create(
                 model=self.model,
-                temperature=0.2,
+                temperature=0.0,
                 top_p=0.9,
                 max_tokens=answer_max_tokens,
                 messages=stream_messages,
@@ -1041,8 +1088,6 @@ Retrieved Documents
             if delta:
                 _emit(sanitizer.feed(delta))
         _emit(sanitizer.flush())
-        _emit("\n\n" + build_data_period_note(context, sanitizer.cited))
-        _emit(sanitizer.sources_tail())
         if profile_update_buffer:
             final_piece = re.sub(
                 r"\[UPDATE_PROFILE_NAME:[^\]]*$",
@@ -1054,8 +1099,8 @@ Retrieved Documents
                 emitted.append(final_piece)
                 on_delta(final_piece)
 
-        answer = "".join(emitted)
-        if not answer.strip():
+        # Check if we have generated any actual answer text before adding footnotes
+        if not "".join(emitted).strip():
             log_soft_failure(
                 "AURA-GEN-005",
                 "generation.streaming",
@@ -1063,7 +1108,23 @@ Retrieved Documents
                 detail="model stream had no usable content",
             )
             return SOFT_FAILURE_ANSWER
-        return answer
+
+        # Stream the data period note to the client since it is user-facing.
+        _emit("\n\n" + build_data_period_note(context, sanitizer.cited))
+
+        # The consolidated "[Sources: N, M]" marker is only for the
+        # downstream filter_sources_by_citations() call (it reads cited ids
+        # back off the returned answer string) — it must NEVER reach the
+        # client as visible text. The UI renders sources as citation pills
+        # from the separate `sources`/`citations` payload, so streaming this
+        # raw bracket text via on_delta would just dump ugly literal text
+        # into the chat bubble. Append to `emitted` (kept in the return
+        # value) WITHOUT calling on_delta.
+        tail = sanitizer.sources_tail()
+        if tail:
+            emitted.append(tail)
+
+        return "".join(emitted)
 
     def _clean_citations(self, text: str) -> str:
         # Strips all inline bracketed citations (e.g. [1], [2, 3]) from the

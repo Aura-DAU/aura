@@ -1,4 +1,5 @@
 # POST /speech — Whisper transcription (serialized).
+import logging
 import os
 import tempfile
 
@@ -7,7 +8,10 @@ from fastapi.concurrency import run_in_threadpool
 
 from api.auth import Identity, require_identity
 from api.deps import speech_queue_lock
-from api.schemas import ALLOWED_AUDIO, MAX_AUDIO_BYTES, UNIVERSITY_PROMPT
+from api.schemas import ALLOWED_AUDIO, MAX_AUDIO_BYTES
+from pipeline.speech import UNIVERSITY_PROMPT
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["speech"])
 
@@ -49,7 +53,7 @@ async def speech(
     except HTTPException:
         raise
     except Exception as e:
-        print(f"[speech] transcription failed: {e}")
+        logger.error("[speech] transcription failed: %s", e)
         raise HTTPException(status_code=500, detail="Transcription failed. Please try again.")
     finally:
         if temp_path and os.path.exists(temp_path):
