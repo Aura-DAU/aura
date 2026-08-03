@@ -4,7 +4,8 @@ url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_
 category: "Academics"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
----# IT609 Big Data Processing Winter24 - Sandip Modha
+---
+# IT609 Big Data Processing Winter24 - Sandip Modha
 
 **Last Modified:** 2023-12-22
 
