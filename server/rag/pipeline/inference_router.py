@@ -169,7 +169,7 @@ class InferenceRouter:
             cls._QUEUE_SCRAPE_TIMEOUT = _env_float("VLLM_QUEUE_SCRAPE_TIMEOUT", 1.0)
             cls._QUEUE_KV_SOFT = _env_float("VLLM_QUEUE_KV_SOFT", 0.85)
             cls._QUEUE_KV_PENALTY = _env_float("VLLM_QUEUE_KV_PENALTY", 8.0)
-            cls._model = os.getenv("VLLM_MODEL", "aura-llm")
+            cls._model = os.getenv("VLLM_MODEL") or os.getenv("GROQ_MODEL") or "aura-llm"
             cls._initialized = True
             print(f"[InferenceRouter] Initialized with {len(cls._nodes)} vLLM node(s): {cls._nodes} (model={cls._model})")
 
