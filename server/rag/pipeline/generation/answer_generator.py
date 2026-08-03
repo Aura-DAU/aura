@@ -214,6 +214,19 @@ def extract_cited_ids(answer: str) -> set[int]:
     }
 
 
+def strip_sources_marker(answer: str) -> str:
+    # Remove the internal "[Sources: N, M]" marker before the answer is
+    # shown to the user. The marker exists only so extract_cited_ids() /
+    # filter_sources_by_citations() can read back which doc ids the model
+    # cited — callers must extract citations from the marker-bearing string
+    # FIRST, then pass the result of this function through as the visible
+    # answer text. The UI renders sources as clickable citation pills from
+    # the separate `sources` payload, never from this raw bracket text.
+    if not answer:
+        return answer
+    return _SOURCES_MARKER_RE.sub("", answer).rstrip()
+
+
 def filter_sources_by_citations(sources, citation_map, answer):
     # Narrow a retrieval source list to those the answer actually cited.
     #
@@ -455,11 +468,11 @@ class AnswerGenerator:
                 
                 if not profile.get("name") and role in ("student", "faculty"):
                     profile_text += (
-                        "CRITICAL: The user has not set their preferred name yet. "
-                        "Start your response by asking what they would like to be called. "
-                        "If the user just told you their name, you MUST output the exact tag "
-                        "`[UPDATE_PROFILE_NAME: Their Name]` (e.g. `[UPDATE_PROFILE_NAME: John]`) "
-                        "in your response to save it, then continue assisting them.\n\n"
+                        "The user has not set their preferred name yet. "
+                        "Before answering their question, politely ask them what they would like to be called. "
+                        "IMPORTANT: ONLY if the user's VERY LAST message explicitly states their name, "
+                        "you should output the exact tag `[UPDATE_PROFILE_NAME: <their name>]` (e.g. `[UPDATE_PROFILE_NAME: Alice]`) "
+                        "to save it. DO NOT output this tag if they haven't told you their name yet.\n\n"
                     )
 
             if tracking_flags:
@@ -918,7 +931,18 @@ Retrieved Documents
             if delta:
                 _emit(sanitizer.feed(delta))
         _emit(sanitizer.flush())
-        _emit(sanitizer.sources_tail())
+
+        # The consolidated "[Sources: N, M]" marker is only for the
+        # downstream filter_sources_by_citations() call (it reads cited ids
+        # back off the returned answer string) — it must NEVER reach the
+        # client as visible text. The UI renders sources as citation pills
+        # from the separate `sources`/`citations` payload, so streaming this
+        # raw bracket text via on_delta would just dump ugly literal text
+        # into the chat bubble. Append to `emitted` (kept in the return
+        # value) WITHOUT calling on_delta.
+        tail = sanitizer.sources_tail()
+        if tail:
+            emitted.append(tail)
 
         return "".join(emitted)
 
