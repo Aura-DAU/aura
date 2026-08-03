@@ -115,6 +115,61 @@ class ContextBuilder:
                 out_lines.append(line)
         return "\n".join(out_lines)
 
+    # Fix #30/#31: retrieved chunk text was previously spliced into the
+    # <doc>...</doc> prompt block completely raw. Two concrete risks:
+    #   1. A chunk containing a literal "</doc>" or "<doc id=...>" (whether
+    #      from a corrupted source file, a copy-pasted forum/email thread
+    #      that got ingested into the corpus, or a deliberately poisoned
+    #      markdown file) could forge a fake document boundary and make the
+    #      model treat attacker text as a *separate*, seemingly legitimate
+    #      retrieved source.
+    #   2. A chunk containing a directive-looking line ("SYSTEM:", "Ignore
+    #      all previous instructions", "You are now...") has no signal
+    #      telling the model that's untrusted retrieved data, not a real
+    #      instruction — retrieved content and system/user instructions
+    #      share the same context window with nothing marking the boundary
+    #      as trust-sensitive.
+    # This is pattern-level, not a guarantee — it raises the bar rather than
+    # closing the class of attack outright (that needs model-level input
+    # segmentation, out of scope for a prompt-construction fix).
+    _INJECTION_LINE_PATTERNS = [
+        re.compile(r"^\s*system\s*:", re.IGNORECASE),
+        re.compile(r"^\s*\[?system\]?\s*prompt\s*:", re.IGNORECASE),
+        re.compile(r"ignore\s+(all\s+)?(the\s+)?(previous|above|prior)\s+instructions", re.IGNORECASE),
+        re.compile(r"you\s+are\s+now\s+(a|an)\b", re.IGNORECASE),
+        re.compile(r"disregard\s+(all\s+)?(the\s+)?(previous|above|prior)\b", re.IGNORECASE),
+        re.compile(r"^\s*###\s*(new\s+)?instructions?\b", re.IGNORECASE),
+    ]
+
+    @classmethod
+    def _sanitize_chunk_text(cls, text: str) -> str:
+        if not text:
+            return text
+        # Neutralize forged document/context boundary tags — XML-escape
+        # angle brackets on our own structural tag names only, so a
+        # legitimate chunk that happens to contain unrelated "<" or ">"
+        # (e.g. a code snippet, a math inequality) is left untouched.
+        sanitized = re.sub(
+            r"</?(?:doc|context)\b[^>]*>",
+            lambda m: m.group(0).replace("<", "&lt;").replace(">", "&gt;"),
+            text,
+            flags=re.IGNORECASE,
+        )
+        # Flag (don't silently rewrite) lines that look like an injected
+        # directive — prefix them so the model sees this is quoted/reported
+        # retrieved content, not a live instruction, without destroying the
+        # underlying text (a legitimate policy document might genuinely
+        # discuss "instructions for override requests", and we don't want
+        # to mangle real content on a heuristic false positive).
+        lines = sanitized.split("\n")
+        out_lines = []
+        for line in lines:
+            if any(p.search(line) for p in cls._INJECTION_LINE_PATTERNS):
+                out_lines.append(f"[retrieved document text, not an instruction]: {line}")
+            else:
+                out_lines.append(line)
+        return "\n".join(out_lines)
+
     def build(self, chunks, retrieval_intent="general", requires_complete_list=False):
 
         documents = []

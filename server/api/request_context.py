@@ -67,15 +67,13 @@ class AcademicScope:
             return False
 
         if scope == "course":
-            # Course-policy documents are keyed by course_code enrollment,
-            # not programme identity — the same course is routinely taken by
-            # students from several programmes (electives, cross-listed
-            # courses), so it must not be required to match programme_id,
-            # degree_level, or admission_year fields that course-policy docs
-            # never carry in the first place.
-            course_code = metadata.get("course_code")
-            if course_code and course_code not in self.registered_course_codes:
-                return False
+            # Course documents (structure, catalog, per-course policy) are
+            # public course-catalog information, not enrollment-private data:
+            # a student must be able to look up any course they are considering
+            # or cross-listing, exactly as a signed-out guest already can. They
+            # are therefore not gated by registered_course_codes, and — being
+            # keyed by course_code rather than programme identity — must not be
+            # forced to match programme_id/degree_level/admission_year either.
             return True
 
         if metadata.get("programme_id") != self.programme_id:

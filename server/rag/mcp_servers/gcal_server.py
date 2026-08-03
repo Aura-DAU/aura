@@ -14,14 +14,13 @@ for _root in (_RAG_ROOT, _SERVER_ROOT):
     if str(_root) not in sys.path:
         sys.path.insert(0, str(_root))
 
-from mcp.server import MCPServer  # noqa: E402  (after sys.path bootstrap)
+from mcp.server import FastMCP  # noqa: E402  (after sys.path bootstrap)
 
 from pipeline.google_calendar import timetable_sync  # noqa: E402
 from pipeline.prompt_loader import load_calendar_mcp_system_prompt  # noqa: E402
 
-mcp = MCPServer(
+mcp = FastMCP(
     name="aura-google-calendar",
-    version="0.1.0",
     instructions=load_calendar_mcp_system_prompt(),
 )
 
@@ -51,10 +50,11 @@ def preview_timetable_sync(erp_id: str) -> dict:
 def sync_timetable_to_calendar(erp_id: str) -> dict:
     """Create/update recurring weekly events for every class on the student's
     current AURA timetable -- with popup reminders, running until the end of
-    the semester. Only call after preview_timetable_sync and explicit user
-    confirmation. Returns status 'synced' with created/updated/removed counts,
-    or 'calendar_not_connected' if the student hasn't linked write access."""
-    return timetable_sync.apply(_identity(erp_id))
+    the semester. An explicit sync request authorizes the write, so no separate
+    preview confirmation is required. Returns status 'synced' with
+    created/updated/removed counts, or 'calendar_not_connected' if the student
+    hasn't linked write access."""
+    return timetable_sync.apply(_identity(erp_id), async_mode=False)
 
 
 @mcp.tool()

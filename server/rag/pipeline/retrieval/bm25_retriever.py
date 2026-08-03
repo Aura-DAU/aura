@@ -1,8 +1,12 @@
 import heapq
 import json
+import logging
+import os
 import re
 
 from rank_bm25 import BM25Okapi
+
+logger = logging.getLogger(__name__)
 
 
 class BM25Retriever:
@@ -36,6 +40,29 @@ class BM25Retriever:
         self.bm25 = BM25Okapi(
             corpus
         )
+        try:
+            self._metadata_mtime = os.path.getmtime(self.metadata_path)
+        except OSError:
+            self._metadata_mtime = None
+
+    def _refresh_if_stale(self):
+        # Fix P3 (rag_debug_report Stage: BM25, Bug 1): the index was only
+        # ever built once, at process startup. New documents ingested after
+        # that point never entered BM25 scoring until the process restarted,
+        # so BM25 silently drifted out of sync with Qdrant/metadata.json.
+        # Cheap mtime check on every retrieve() call keeps it current without
+        # needing a separate scheduler process; ingestion writes a new
+        # metadata.json file (or bumps its mtime) whenever it runs.
+        try:
+            current_mtime = os.path.getmtime(self.metadata_path)
+        except OSError:
+            return
+        if self._metadata_mtime is None or current_mtime > self._metadata_mtime:
+            logger.info(
+                "bm25_retriever: metadata_path changed (mtime %s -> %s), rebuilding index",
+                self._metadata_mtime, current_mtime
+            )
+            self.rebuild_index()
 
     def _build_text(
         self,
@@ -259,6 +286,8 @@ class BM25Retriever:
         metadata_filter=None,
         allowed_roles=None
     ):
+
+        self._refresh_if_stale()
 
         query_tokens = (
             self._tokenize(query)

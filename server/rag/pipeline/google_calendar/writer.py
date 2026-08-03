@@ -239,6 +239,12 @@ def _batch_upsert(
         for line in part_headers.splitlines():
             if line.lower().startswith("content-id:"):
                 content_id = line.split(":", 1)[1].strip().strip("<>")
+                # Google's batch API echoes each request's Content-ID back
+                # prefixed with "response-" (request "create_42" comes back
+                # as "<response-create_42>"). Strip it so the key matches
+                # the operation's original content_id.
+                if content_id.startswith("response-"):
+                    content_id = content_id[len("response-"):]
         if not content_id:
             continue
         # Inner HTTP response

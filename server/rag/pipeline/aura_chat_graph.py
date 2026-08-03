@@ -95,6 +95,7 @@ class AuraState(TypedDict, total=False):
     academic_scope: Any
     display_profile: Any
     on_delta: Any  # token-streaming callback, threaded straight to the generator
+    on_profile_update: Any  # name extraction callback
     summary: Optional[str]  # rolling conversation memory (pipeline.memory)
 
     query_type: Optional[str]
@@ -195,6 +196,14 @@ class AuraChatGraph:
     # ── Nodes (each mirrors one guarded step of AuraChat.chat()) ────────
 
     def _n_safety_guardrail(self, state: AuraState) -> AuraState:
+        # Calendar sync is a deterministic, student-scoped automation. Avoid an
+        # unrelated LLM safety-classifier round trip for its tightly allow-listed
+        # request/confirmation turns; the downstream role, OAuth-scope, timetable
+        # ownership, explicit-request, and destructive-unsync checks remain.
+        if _is_low_risk_timetable_sync_turn(
+            state["query"], state.get("history") or []
+        ):
+            return state
         with track_segment("guardrail_time"):
             verdict = self.guardrail.classify(state["query"])
         # None = classifier unreachable. Fails OPEN on the public RAG path,
@@ -735,6 +744,8 @@ class AuraChatGraph:
             data["advisees"] = self.erp_connector.get_advisees(requester_erp_id)
         if "courses" in fields and requester_erp_id:
             data["courses"] = self.erp_connector.get_faculty_courses(requester_erp_id)
+        if "teaching_schedule" in fields and requester_erp_id:
+            data["teaching_schedule"] = self.erp_connector.get_faculty_teaching_schedule(requester_erp_id)
         return data
 
     # ── Public entrypoint (same signature/contract as AuraChat.chat) ────

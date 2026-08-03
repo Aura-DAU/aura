@@ -26,6 +26,7 @@ interface MessageProps {
   isStreaming?: boolean
   /** Keep action toolbar visible (ChatGPT pattern for the latest reply). */
   showActions?: boolean
+  onCalendarSyncConfirm?: () => void
 }
 
 export function Message({
@@ -34,6 +35,7 @@ export function Message({
   onRegenerate,
   isStreaming = false,
   showActions = false,
+  onCalendarSyncConfirm,
 }: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
@@ -138,7 +140,8 @@ export function Message({
           </div>
         )}
 
-        {isStreaming ? (
+        {message.calendar_action?.type === "timetable_sync" ||
+        message.calendar_action?.type === "timetable_sync_confirmation" ? null : isStreaming ? (
           <div className="whitespace-pre-wrap text-[15px] leading-[1.7] text-neutral-100">
             {message.content}
             <span className="msg-caret ml-0.5 inline-block align-text-bottom" />

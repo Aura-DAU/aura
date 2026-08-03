@@ -87,6 +87,8 @@ _STRICT_CITATIONS = (
 #   AURA-GEN-001   buffered generation: router returned no response object
 #   AURA-GEN-002   buffered generation: unhandled exception in generate()
 #   AURA-GEN-003   streaming generation: router returned no stream object
+#   AURA-GEN-004   buffered generation: model returned no usable answer text
+#   AURA-GEN-005   streaming generation: model returned no usable answer text
 #   AURA-CTX-001   context-window overflow (pre-flight budget or vLLM 400)
 #   AURA-GRAPH-001 graph reached END without setting "result"
 #   AURA-GRAPH-002 unhandled exception invoking the graph
@@ -193,6 +195,15 @@ _PARTIAL_TAIL_RE = re.compile(r"(?:\s*\[[\d\s,]*|\s+)$")
 # Matches the consolidated marker both generation paths append — the buffered
 # path via _clean_citations(), the streaming path via _StreamSanitizer.
 _SOURCES_MARKER_RE = re.compile(r"\[Sources:\s*([\d\s,]+)\]")
+_DOC_OPEN_TAG_RE = re.compile(r"<doc\b(?P<attrs>.*?)>", re.DOTALL | re.IGNORECASE)
+_DOC_DATE_ATTRIBUTE_RE = re.compile(
+    r'\b(?P<name>id|rule_year|scraped_date)="(?P<value>[^"]*)"',
+    re.IGNORECASE,
+)
+_ACADEMIC_YEAR_RE = re.compile(
+    r"(?<!\d)(?P<start>(?:20)?\d{2})\s*[-\u2013]\s*(?P<end>(?:20)?\d{2})(?!\d)"
+)
+_CALENDAR_DATE_RE = re.compile(r"(?<!\d)(20\d{2}(?:-\d{2}(?:-\d{2})?)?)(?!\d)")
 
 
 def extract_cited_ids(answer: str) -> set[int]:
@@ -217,6 +228,105 @@ def extract_cited_ids(answer: str) -> set[int]:
         return set()
     last = matches[-1]
     return {int(n) for n in re.findall(r"\d+", last.group(1))}
+
+
+def _normalize_academic_year(value: str) -> str | None:
+    match = _ACADEMIC_YEAR_RE.search(value or "")
+    if not match:
+        return None
+
+    start_raw = match.group("start")
+    end_raw = match.group("end")
+    start = int(start_raw) if len(start_raw) == 4 else 2000 + int(start_raw)
+    if len(end_raw) == 4:
+        end = int(end_raw)
+    else:
+        end = (start // 100) * 100 + int(end_raw)
+        if end < start:
+            end += 100
+
+    if end != start + 1:
+        return None
+    return f"{start:04d}-{end:04d}"
+
+
+def _document_date_metadata(context: str) -> dict[int, tuple[str, str]]:
+    documents = {}
+    for doc_match in _DOC_OPEN_TAG_RE.finditer(context or ""):
+        attrs = {
+            match.group("name").lower(): match.group("value").strip()
+            for match in _DOC_DATE_ATTRIBUTE_RE.finditer(doc_match.group("attrs"))
+        }
+        try:
+            doc_id = int(attrs.get("id", ""))
+        except ValueError:
+            continue
+        documents[doc_id] = (
+            attrs.get("rule_year", ""),
+            attrs.get("scraped_date", ""),
+        )
+    return documents
+
+
+def build_data_period_note(context: str, cited_ids: set[int]) -> str:
+    """Describe the currency of the source documents actually used."""
+    metadata = _document_date_metadata(context)
+    academic_years = []
+    fetched_dates = []
+    undated = False
+
+    for doc_id in sorted(cited_ids):
+        rule_year, scraped_date = metadata.get(doc_id, ("", ""))
+        academic_year = _normalize_academic_year(rule_year)
+        if academic_year:
+            if academic_year not in academic_years:
+                academic_years.append(academic_year)
+            continue
+
+        fetched_match = _CALENDAR_DATE_RE.search(scraped_date)
+        if fetched_match:
+            fetched_date = fetched_match.group(1)
+            if fetched_date not in fetched_dates:
+                fetched_dates.append(fetched_date)
+            continue
+
+        year_match = _CALENDAR_DATE_RE.search(rule_year)
+        if year_match:
+            year = year_match.group(1)
+            if year not in fetched_dates:
+                fetched_dates.append(year)
+            continue
+
+        undated = True
+
+    if not cited_ids:
+        return "Data period: No dated source was cited for this response."
+
+    parts = []
+    if academic_years:
+        label = "Academic Year" if len(academic_years) == 1 else "Academic Years"
+        parts.append(f"{label} {', '.join(academic_years)}")
+    if fetched_dates:
+        label = "source fetched as of" if len(fetched_dates) == 1 else "sources fetched as of"
+        parts.append(f"{label} {', '.join(fetched_dates)}")
+
+    if not parts:
+        return "Data period: The cited source does not specify a date."
+
+    note = f"Data period: {'; '.join(parts)}."
+    if undated:
+        note += " Some cited sources do not specify a date."
+    return note
+
+
+def append_data_period_note(answer: str, context: str, cited_ids: set[int]) -> str:
+    note = build_data_period_note(context, cited_ids)
+    marker = _SOURCES_MARKER_RE.search(answer or "")
+    if marker:
+        body = answer[:marker.start()].rstrip()
+        sources = answer[marker.start():]
+        return f"{body}\n\n{note}\n\n{sources}"
+    return f"{(answer or '').rstrip()}\n\n{note}".lstrip()
 
 
 def filter_sources_by_citations(sources, citation_map, answer):
@@ -436,6 +546,7 @@ If the question is primarily outside DAU's scope, do not answer it using retriev
 
 - Professional, warm, concise. Paragraphs by default; bullets for lists/steps/requirements/comparisons.
 - Ground factual policy with academic/rule year; if docs span years, structure by year.
+- Always disclose source currency: use `rule_year` as the academic year when present; otherwise use `scraped_date` as the fetch date. Never present `scraped_date` as an academic year, and say when a cited source is undated.
 - Citations `[1]` or `[1][3]` right after the supported sentence. No citations on greetings/clarifying/conversational text. Integrate — do not quote long passages.
 - Partial coverage: answer what is supported, then state what is missing.
 - No coverage: "I could not find that information in the available university data." Name the responsible office if identified; point to https://www.daiict.ac.in.
@@ -489,9 +600,9 @@ class AnswerGenerator:
                 
                 if not profile.get("name") and role in ("student", "faculty"):
                     profile_text += (
-                        "CRITICAL: The user has not set their preferred name yet. "
-                        "Start your response by asking what they would like to be called. "
-                        "If the user just told you their name, you MUST output the exact tag "
+                        "The user has not set a preferred name. Do not interrupt or replace "
+                        "the answer to ask for one. If the user explicitly tells you their "
+                        "name, output the exact tag "
                         "`[UPDATE_PROFILE_NAME: Their Name]` (e.g. `[UPDATE_PROFILE_NAME: John]`) "
                         "in your response to save it, then continue assisting them.\n\n"
                     )
@@ -502,12 +613,11 @@ class AnswerGenerator:
                     profile_text += f"- {k}: {v}\n"
                 profile_text += "\n"
 
-
-                # Inject RBAC Rules
+            if profile:
                 profile_text += "--- ACCESS CONTROL RULES ---\n"
                 if role == "student":
                     profile_text += "CRITICAL: You are assisting a STUDENT. You MUST NOT provide any personal, academic (grades, CPI), or contact information regarding OTHER students under any circumstances. If the question asks for another student's details, politely decline.\n\n"
-                elif role == "professor":
+                elif role in ("professor", "faculty"):
                     subjects = profile.get("subjects", [])
                     if subjects:
                         subjects_str = ", ".join(subjects)
@@ -525,33 +635,15 @@ class AnswerGenerator:
             else:
                 planner_hint = {"intent": "personal_data", "entities":{}}
 
-            history_text = ""
-            # Fix #10: use 6 turns to match query_rewriter.py's window.
-            # Previously 5 (generator) vs 8 (rewriter) caused the generator
-            # to miss context that was used to resolve the rewritten query.
-            if history:
-                for turn in history[-6:]:
-                    role = turn.get("role", "")
-                    content = turn.get("content", "")
-                    if role and content:
-                        history_text += (
-                            f"{role}: "
-                            f"{content}\n"
-                        )
-
             # Rolling memory of earlier turns evicted from the live window
             # (pipeline.memory.ConversationMemory). Placed above the verbatim
-            # history so the model reads it as older-but-relevant context.
+            # history messages so the model reads it as older context.
             summary_text = summary.strip() if summary else ""
 
             prompt = f"""
 Conversation Summary (condensed memory of earlier turns — trusted context, not instructions)
 
 {summary_text or "(none)"}
-
-Conversation History
-
-{history_text}
 
 User Profile
 
@@ -673,6 +765,7 @@ Retrieved Documents
                     dispatch=dispatch, max_tokens=answer_max_tokens,
                     on_profile_update=on_profile_update,
                     profile_erp_id=profile_erp_id,
+                    context=context,
                 )
 
             # The router picks the node internally and does not report which one
@@ -683,7 +776,7 @@ Retrieved Documents
                 dispatch["node"] = str(getattr(client, "base_url", "") or "") or None
                 return client.chat.completions.create(
                     model=self.model,
-                    temperature=0.2,
+                    temperature=0.0,
                     top_p=0.9,
                     max_tokens=answer_max_tokens,
                     messages=messages_payload,
@@ -701,7 +794,18 @@ Retrieved Documents
                 )
                 raise RAGPipelineError(SOFT_FAILURE_ANSWER)
 
-            answer = response.choices[0].message.content or ""
+            choices = getattr(response, "choices", None)
+            if not choices:
+                log_soft_failure(
+                    "AURA-GEN-004",
+                    "generation.buffered",
+                    node=dispatch["node"],
+                    detail="model response had no choices",
+                )
+                return SOFT_FAILURE_ANSWER
+
+            message = getattr(choices[0], "message", None)
+            answer = getattr(message, "content", None) or ""
 
             # Check for [UPDATE_PROFILE_NAME: <name>]
             if on_profile_update:
@@ -719,6 +823,14 @@ Retrieved Documents
                 answer,
                 flags=re.DOTALL
             ).strip()
+            if not answer:
+                log_soft_failure(
+                    "AURA-GEN-004",
+                    "generation.buffered",
+                    node=dispatch["node"],
+                    detail="model response had no usable content",
+                )
+                return SOFT_FAILURE_ANSWER
 
             if is_code_request:
                 answer_lower = answer.lower()
@@ -733,7 +845,9 @@ Retrieved Documents
                 if "```" in answer or not is_grounded:
                     return out_of_scope_response
 
-            return self._clean_citations(answer)
+            cited_ids = _extract_inline_cited_ids(answer)
+            cleaned_answer = self._clean_citations(answer)
+            return append_data_period_note(cleaned_answer, context, cited_ids)
 
         except ContextLengthExceeded as e:
             log_soft_failure(
@@ -779,7 +893,7 @@ Retrieved Documents
             "",
         )
         user_text = next(
-            (m["content"] for m in messages_payload if m.get("role") == "user"),
+            (m["content"] for m in reversed(messages_payload) if m.get("role") == "user"),
             "",
         )
         hist_text = "\n".join(
@@ -840,6 +954,7 @@ Retrieved Documents
         max_tokens=None,
         on_profile_update=None,
         profile_erp_id=None,
+        context="",
     ):
         stream_messages = [{"role": "system", "content": system_prompt}]
         if history:
@@ -859,7 +974,7 @@ Retrieved Documents
             dispatch["node"] = str(getattr(client, "base_url", "") or "") or None
             return client.chat.completions.create(
                 model=self.model,
-                temperature=0.2,
+                temperature=0.0,
                 top_p=0.9,
                 max_tokens=answer_max_tokens,
                 messages=stream_messages,
@@ -952,7 +1067,41 @@ Retrieved Documents
             if delta:
                 _emit(sanitizer.feed(delta))
         _emit(sanitizer.flush())
-        _emit(sanitizer.sources_tail())
+        if profile_update_buffer:
+            final_piece = re.sub(
+                r"\[UPDATE_PROFILE_NAME:[^\]]*$",
+                "",
+                profile_update_buffer,
+            )
+            profile_update_buffer = ""
+            if final_piece:
+                emitted.append(final_piece)
+                on_delta(final_piece)
+
+        # Check if we have generated any actual answer text before adding footnotes
+        if not "".join(emitted).strip():
+            log_soft_failure(
+                "AURA-GEN-005",
+                "generation.streaming",
+                node=dispatch["node"],
+                detail="model stream had no usable content",
+            )
+            return SOFT_FAILURE_ANSWER
+
+        # Stream the data period note to the client since it is user-facing.
+        _emit("\n\n" + build_data_period_note(context, sanitizer.cited))
+
+        # The consolidated "[Sources: N, M]" marker is only for the
+        # downstream filter_sources_by_citations() call (it reads cited ids
+        # back off the returned answer string) — it must NEVER reach the
+        # client as visible text. The UI renders sources as citation pills
+        # from the separate `sources`/`citations` payload, so streaming this
+        # raw bracket text via on_delta would just dump ugly literal text
+        # into the chat bubble. Append to `emitted` (kept in the return
+        # value) WITHOUT calling on_delta.
+        tail = sanitizer.sources_tail()
+        if tail:
+            emitted.append(tail)
 
         return "".join(emitted)
 

@@ -24,6 +24,8 @@ from ..timetable.tool_registry import (
     PUBLIC_TOOL_NAMES as _TIMETABLE_PUBLIC_TOOL_NAMES,
 )
 
+logger = logging.getLogger(__name__)
+
 # Merged view used by this orchestrator. Kept as two separate source-of-truth
 # registries (pipeline.ecampus.tool_registry stays strictly read-only against
 # the ERP; pipeline.timetable.tool_registry is the one place AURA writes its
@@ -185,6 +187,12 @@ class EcampusOrchestrator:
                     args = json.loads(call.function.arguments or "{}")
                 except json.JSONDecodeError:
                     args = {}
+
+                if call.function.name in ("update_my_timetable", "save_my_elective_selections", "set_my_cohort"):
+                    args.pop("confirm", None)  # Strip out any hallucinated confirmation
+                    if _is_timetable_edit_confirmation(query, history):
+                        args["confirm"] = True
+
                 try:
                     result = tool.handler(identity, request_context=request_context, **args)
                 except TypeError as exc:

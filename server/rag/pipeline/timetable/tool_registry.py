@@ -56,6 +56,7 @@ def _handle_update_my_timetable(identity, **kwargs):
     expected to show the user the preview and only call again with
     confirm=true once the user explicitly agrees."""
     confirm = bool(kwargs.pop("confirm", False))
+    kwargs.pop("request_context", None)
     try:
         if not confirm:
             year = sem = sec = None
@@ -169,7 +170,8 @@ def _handle_set_my_cohort(identity, **kwargs):
                 "preview": {"year": year, "sem": sem, "sec": sec},
                 "message": (
                     f"I will update your profile section/cohort to Year {year or 'current'}, "
-                    f"Semester {sem or 'current'}, Section {sec or 'current'}. Confirm to save."
+                    f"Semester {sem or 'current'}, Section {sec or 'current'}. "
+                    "This updates the timetable you see. Confirm to save."
                 ),
             }
         return service.update_student_cohort(identity, year=year, sem=sem, sec=sec)
@@ -184,7 +186,7 @@ SET_MY_COHORT = Tool(
     description=(
         "Update the student's cohort section, semester, or academic year (e.g. changing from Section A to Section B). "
         "This saves the student's section into PostgreSQL user_identity_map for all future sessions. "
-        "Always call with confirm=false first to preview, then confirm=true after user agrees."
+        "The orchestrator will automatically preview this change and require user confirmation."
     ),
     parameters={
         "type": "object",
@@ -192,7 +194,6 @@ SET_MY_COHORT = Tool(
             "sec": {"type": "string", "description": "Section letter, e.g. 'A', 'B', 'C', 'D'."},
             "sem": {"type": "integer", "description": "Semester number, e.g. 1, 3, 5, 7."},
             "year": {"type": "integer", "description": "Academic year number, e.g. 1, 2, 3, 4."},
-            "confirm": {"type": "boolean", "description": "Set true after user confirms."},
         },
     },
     category="write", allowed_roles=["student"], handler=_handle_set_my_cohort,
@@ -269,9 +270,8 @@ UPDATE_MY_TIMETABLE = Tool(
     description=(
         "Change, add, or remove ONE entry on the requester's own timetable -- for example moving "
         "a class to a different room/time, or adding a new lab session. This ONLY ever affects "
-        "the requester's own view; nobody else's timetable is touched. Always call this once "
-        "with confirm=false first to preview the change, then relay the preview to the user and "
-        "only call it again with confirm=true after they explicitly agree."
+        "the requester's own view; nobody else's timetable is touched. The orchestrator will "
+        "automatically preview this change and require user confirmation before saving."
     ),
     parameters={
         "type": "object",
@@ -293,7 +293,6 @@ UPDATE_MY_TIMETABLE = Tool(
             "room": {"type": "string"},
             "faculty_name": {"type": "string"},
             "note": {"type": "string", "description": "Short note on why, for the student's own record."},
-            "confirm": {"type": "boolean", "description": "Set true only after the user has confirmed the previewed change."},
         },
         "required": ["kind"],
     },
@@ -360,8 +359,8 @@ SAVE_MY_ELECTIVE_SELECTIONS = Tool(
         "Save the student's chosen elective courses for this semester. After saving, the "
         "student's timetable will only show their core courses plus the selected electives "
         "(other electives they didn't pick will be hidden). The student can change their "
-        "selections at any time by calling this tool again with the updated list. Always "
-        "call with confirm=false first to preview, then confirm=true after student agrees."
+        "selections at any time by calling this tool again with the updated list. The orchestrator "
+        "will automatically preview this change and require user confirmation before saving."
     ),
     parameters={
         "type": "object",
@@ -373,10 +372,6 @@ SAVE_MY_ELECTIVE_SELECTIONS = Tool(
                     "List of course codes for the electives the student is taking, "
                     "e.g. ['IT301', 'SC205']. Use get_available_electives to see valid codes."
                 ),
-            },
-            "confirm": {
-                "type": "boolean",
-                "description": "Set true only after the user has confirmed the previewed selection.",
             },
         },
         "required": ["course_codes"],

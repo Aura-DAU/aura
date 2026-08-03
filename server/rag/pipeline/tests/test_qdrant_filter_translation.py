@@ -136,4 +136,7 @@ def test_student_semantic_path_filter_carries_scope_end_to_end():
     assert "authorization" in blob
     assert "applicability_scope" in blob  # scope survived translation
     assert "programme_id" in blob
-    assert "course_code" in blob
+    # Course docs are admitted unconditionally now (no registered-course gate),
+    # so the scope $or carries a bare applicability_scope == "course" value
+    # rather than a course_code filter.
+    assert "course" in blob

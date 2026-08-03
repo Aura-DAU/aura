@@ -4,7 +4,8 @@ url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Academic%20Requirement
 category: "Academics"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
----# Academic Requirements Ph D Program -HSS&Design wef 2024-25 as of July 2024
+---
+# Academic Requirements Ph D Program -HSS&Design wef 2024-25 as of July 2024
 
 **Last Modified:** 2025-12-04
 
