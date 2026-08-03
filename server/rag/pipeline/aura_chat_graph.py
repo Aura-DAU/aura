@@ -33,6 +33,7 @@ from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
     log_soft_failure,
+    strip_sources_marker,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -814,13 +815,18 @@ class AuraChatGraph:
         # Apply post-generation privacy filter
         answer = privacy_filter.filter_response_text(answer, query=state["query"])
 
+        cited_sources = filter_sources_by_citations(
+            state.get("sources", []),
+            retrieval_result.get("citation_map", {}),
+            answer,
+        )
         state["result"] = {
-            "answer": answer,
-            "sources": filter_sources_by_citations(
-                state.get("sources", []),
-                retrieval_result.get("citation_map", {}),
-                answer,
-            ),
+            # Extract citations from `answer` (above) BEFORE stripping the
+            # "[Sources: N, M]" marker — the marker is internal bookkeeping,
+            # never meant to reach the user as literal text. Sources render
+            # as citation pills from the `sources` field, not raw brackets.
+            "answer": strip_sources_marker(answer),
+            "sources": cited_sources,
             "is_personal_data": is_personal,
         }
         return state
