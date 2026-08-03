@@ -1054,6 +1054,50 @@ class RetrievalPipeline:
 
         results = self._eligible_results(deduped, academic_scope)
 
+        # Diagnostic 4: Verify whether IE402 course policy exists anywhere in retrieval pool
+        found_ie402 = []
+        for cand in results:
+            meta = cand.get("metadata", {}) if isinstance(cand, dict) else {}
+            sf = str(meta.get("source_file") or meta.get("path") or meta.get("file") or "")
+            t_val = str(meta.get("title") or "")
+            h1_val = str(meta.get("h1") or "")
+            if "IE402" in sf.upper() or "IE402" in t_val.upper() or "IE402" in h1_val.upper():
+                found_ie402.append((cand, sf, t_val, h1_val))
+
+        print("\n" + "=" * 80)
+        if found_ie402:
+            print("FOUND COURSE DOCUMENT:")
+            for cand, sf, t_val, h1_val in found_ie402:
+                meta = cand.get("metadata", {})
+                print(f"ID          : {cand.get('id')}")
+                print(f"Title       : {meta.get('title', 'N/A')}")
+                print(f"Source File : {meta.get('source_file') or meta.get('path') or meta.get('file')}")
+                print(f"H1          : {meta.get('h1', 'N/A')}")
+                print(f"Course Code : {meta.get('course_code', 'N/A')}")
+                print(f"Program     : {meta.get('program_name', 'N/A')}")
+                print(f"Chunk Index : {meta.get('chunk_index', 'N/A')}")
+                print("-" * 60)
+        else:
+            print("NO IE402 COURSE DOCUMENT FOUND IN RETRIEVAL POOL")
+        print("=" * 80 + "\n")
+
+        # Diagnostic 5: Log retrieval pool composition grouped by source file
+        counts = {}
+        for cand in results:
+            meta = cand.get("metadata", {}) if isinstance(cand, dict) else {}
+            sf = meta.get("source_file") or meta.get("path") or meta.get("file") or "Unknown"
+            sf_name = os.path.basename(str(sf))
+            counts[sf_name] = counts.get(sf_name, 0) + 1
+
+        if "IE402.md" not in counts:
+            counts["IE402.md"] = 0
+
+        print("\n" + "=" * 80)
+        print("RETRIEVAL POOL COMPOSITION BY SOURCE FILE")
+        for src, count in sorted(counts.items(), key=lambda x: x[1], reverse=True):
+            print(f"{src} : {count} chunks")
+        print("=" * 80 + "\n")
+
         def _log_candidates(title_header, candidates):
             print("\n" + "=" * 80)
             print(title_header)
@@ -1311,6 +1355,25 @@ class RetrievalPipeline:
             chunk_item["entity_score"] = info["rrf_score"]
             entity_list.append(chunk_item)
 
+        # Diagnostic 2: Log raw BM25 / Entity results
+        print("\n" + "=" * 80)
+        print("===== RAW BM25 / ENTITY RESULTS (TOP 20) =====")
+        if not entity_list:
+            print("BM25 returned 0 documents.")
+        else:
+            for idx, item in enumerate(entity_list[:20], start=1):
+                meta = item.get("metadata", {})
+                src_file = meta.get("source_file") or meta.get("path") or meta.get("file") or "N/A"
+                print(f"{idx:02d}. ID         : {item.get('id')}")
+                print(f"    Score      : {item.get('entity_score', 0.0):.4f}")
+                print(f"    Title      : {meta.get('title', 'N/A')}")
+                print(f"    Source File: {src_file}")
+                print(f"    H1         : {meta.get('h1', 'N/A')}")
+                print(f"    Course Code: {meta.get('course_code', 'N/A')}")
+                print(f"    Program    : {meta.get('program_name', 'N/A')}")
+                print("-" * 40)
+        print("=" * 80)
+
         # Min-Max normalize entity path scores
         if entity_list:
             scores = [c["entity_score"] for c in entity_list]
@@ -1366,6 +1429,27 @@ class RetrievalPipeline:
                     include_metadata=True,
                     filter=semantic_filter
                 )
+
+                # Diagnostic 1: Log raw Qdrant / Dense results
+                print("\n" + "=" * 80)
+                print("===== RAW DENSE (QDRANT) RESULTS (TOP 20) =====")
+                matches = results.get("matches", [])
+                if not matches:
+                    print("Dense search returned 0 documents.")
+                else:
+                    for idx, match in enumerate(matches[:20], start=1):
+                        meta = match.get("metadata", {})
+                        src_file = meta.get("source_file") or meta.get("path") or meta.get("file") or "N/A"
+                        print(f"{idx:02d}. ID         : {match.get('id')}")
+                        print(f"    Score      : {match.get('score', 0.0):.4f}")
+                        print(f"    Title      : {meta.get('title', 'N/A')}")
+                        print(f"    Source File: {src_file}")
+                        print(f"    H1         : {meta.get('h1', 'N/A')}")
+                        print(f"    Course Code: {meta.get('course_code', 'N/A')}")
+                        print(f"    Program    : {meta.get('program_name', 'N/A')}")
+                        print("-" * 40)
+                print("=" * 80)
+
                 for match in results.get("matches", []):
                     semantic_list.append({
                         "id": match["id"],
@@ -1385,6 +1469,12 @@ class RetrievalPipeline:
             val_range = max_val - min_val
             for c in semantic_list:
                 c["normalized_score"] = (c["semantic_score"] - min_val) / val_range if val_range > 0 else 1.0
+
+        # Diagnostic 3 (Part A): Log RRF inputs before fusion
+        print("\n" + "=" * 80)
+        print(f"Dense candidates: {len(semantic_list)}")
+        print(f"BM25 candidates: {len(entity_list)}")
+        print("=" * 80)
 
         # 3. Global 50/50 Fusion
         # Fix RP2 (cont.): cosine_score is tracked through the fused pool
@@ -1427,6 +1517,11 @@ class RetrievalPipeline:
                 "fusion_score": final_score
             }
             final_candidates.append(cand)
+
+        # Diagnostic 3 (Part B): Log RRF candidates after fusion
+        print("\n" + "=" * 80)
+        print(f"Merged candidates: {len(final_candidates)}")
+        print("=" * 80 + "\n")
 
         # Sort candidates by final fusion score descending
         final_candidates.sort(key=lambda x: x["fusion_score"], reverse=True)
