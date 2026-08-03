@@ -1008,6 +1008,11 @@ class RetrievalPipeline:
         # (before dedup). Collapsed into a single unconditional block so
         # entity retrieval runs exactly once for all query types.
         if self.entity_retriever:
+            print("\n" + "=" * 80)
+            print("PLANNER ENTITIES")
+            print(entities)
+            print("=" * 80)
+
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
                     entities,
@@ -1015,6 +1020,22 @@ class RetrievalPipeline:
                     academic_scope=academic_scope,
                 )
             )
+
+            print("\n" + "=" * 80)
+            print(f"ENTITY RETRIEVER RETURNED {len(entity_chunks)} CHUNKS")
+
+            for idx, chunk in enumerate(entity_chunks[:20], start=1):
+                meta = chunk.get("metadata", {})
+
+                print(f"{idx:02d}.")
+                print(f"Title      : {meta.get('title', 'N/A')}")
+                print(f"Course Code: {meta.get('course_code', 'N/A')}")
+                print(f"Program    : {meta.get('program_name', 'N/A')}")
+                print(f"H1         : {meta.get('h1', 'N/A')}")
+                print("-" * 60)
+
+            print("=" * 80)
+
             if entity_chunks:
                 logger.debug(
                     "Entity retriever added %d candidate chunks to pool.",
