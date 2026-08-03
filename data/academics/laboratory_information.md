@@ -5,7 +5,7 @@ category: "Academics - Laboratories"
 scraped_by: "Squad D Scraper"
 scraped_date: "2026-07-06"
 team: "Squad D"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 source_file: " Laboratory-Related Information.docx"
 ---
 

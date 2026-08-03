@@ -4,7 +4,7 @@ category: "Committees"
 scraped_by: "Bhagyashree"
 scraped_date: "2026-07-04"
 team: "Scraping Team"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Sports Committee Members and Contacts

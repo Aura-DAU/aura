@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC612__2026-27__SC612_Discrete Mathematics_Autumn26 - Gopinath Panda.pdf"
 course_code: "SC612"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC612: Discrete Mathematics

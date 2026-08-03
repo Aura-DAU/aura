@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC112_Computer_Organization_and_Programming_Autumn22 (1).pdf"
 course_code: "MC112"
 semester: "Autumn 2022"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC112: Computer Organization and Programming

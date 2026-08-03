@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Slot Booking Policy.docx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Slot Booking Policy

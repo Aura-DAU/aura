@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM405_The Idea of India_Autum26 - Gangeya Mukherji.pdf"
 course_code: "HM405"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM405: The Idea of India: Swami Vivekananda, Rabindranath Tagore, M.K. Gandhi

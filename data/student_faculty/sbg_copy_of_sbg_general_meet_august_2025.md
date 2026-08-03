@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "PPTX"
 original_name: "Copy of SBG General Meet August 2025.pptx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Copy of SBG General Meet August 2025

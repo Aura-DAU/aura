@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM333 - Human Behavioural Management - Nandini Banerjee.pdf"
 course_code: "HM333"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM333: Human Behavior Management

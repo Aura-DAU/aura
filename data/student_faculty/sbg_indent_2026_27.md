@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Indent_2026-27 .docx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Indent 2026 27

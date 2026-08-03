@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC453_Applied_Quantitative_Finance_Autumn26 - Jayanth Varma.pdf"
 course_code: "SC453"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC453: Applied Quantitative Finance

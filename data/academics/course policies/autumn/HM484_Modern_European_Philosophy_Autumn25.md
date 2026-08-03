@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM484_Modern European Philosophy_Winter 26 - Bharani Kollipara.pdf"
 course_code: "HM484"
 semester: "Winter 2026"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM484: Modern European Philosophy: From Descartes to Nietzsche

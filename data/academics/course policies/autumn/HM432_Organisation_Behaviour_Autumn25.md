@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM432 _Organizational Behaviour 2026 - Nandini Banerjee.pdf"
 course_code: "HM432"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM432: Organisation Behaviour

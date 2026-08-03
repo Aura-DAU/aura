@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MA613__2026-27__MA613_EarthObservationSystems_Autumn26 - Swati Priya.pdf"
 course_code: "MA613"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MA613: Earth Observation Systems

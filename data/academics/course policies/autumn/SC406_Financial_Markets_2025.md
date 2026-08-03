@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC406 Financial Markets.pdf"
 course_code: "SC406"
 semester: "2025"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC406: Financial Markets

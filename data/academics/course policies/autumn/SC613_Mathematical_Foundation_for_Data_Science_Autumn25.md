@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC613_Mathematical Foundation for Data Science_Autumn - Pritam Anand.pdf"
 course_code: "SC613"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC613: Mathematical Foundation for Data Science

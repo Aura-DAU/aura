@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC213__2026-27__MC213_Design and Analysis of Algorithms - Subhasish Basak.pdf"
 course_code: "MC213"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC213: Design and Analysis of Algorithms

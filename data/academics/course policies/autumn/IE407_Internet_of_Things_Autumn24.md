@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE407_Internet of things.pdf"
 course_code: "IE407"
 semester: "Autumn 2024"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IE407: Internet of Things

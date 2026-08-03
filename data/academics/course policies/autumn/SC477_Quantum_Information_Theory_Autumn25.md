@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC477-Quantum-Information-aut-2025 - Gautam Dutta.pdf"
 course_code: "SC477"
 semester: "Autumn 2025"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC477: Quantum Information Theory

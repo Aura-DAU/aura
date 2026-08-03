@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC312__2026-27__MC312_Modelling_and_Simulation - Mukesh Tiwari.pdf"
 course_code: "MC312"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC312: Modelling and Simulation

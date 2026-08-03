@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS401__2026-27__DS401_Causal_Inference - Abhishek Tripathy.pdf"
 course_code: "DS401"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # DS401: Causal Inference

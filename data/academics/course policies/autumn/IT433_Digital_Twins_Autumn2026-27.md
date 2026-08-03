@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT433_Digital Twins - Vinay Kulkarni.pdf"
 course_code: "IT433"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT433: Digital Twins

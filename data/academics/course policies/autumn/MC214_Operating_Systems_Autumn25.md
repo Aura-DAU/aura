@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC214__2026-27__MC214_OperatingSystems_Autumn26 - manish chaturvedi.pdf"
 course_code: "MC214"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC214: Operating Systems

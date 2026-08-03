@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "PC110__2026-27__PC110_Introduction to Language and Literature_Autumn_26.pdf - Gangeya Mukherji.pdf"
 course_code: "PC110"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # PC 110: Introduction to Language and Literature (Instructor: Gangeya Mukherji)

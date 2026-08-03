@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS602__2026-27__DS602_Statistical Methods - Subhasish Basak.pdf"
 course_code: "DS602"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # DS602: Statistical Methods (Lab: Python)

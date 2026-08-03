@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS601-Mathematical-Foundation-For-Data-Science - Bhaskar Chaudhury.pdf"
 course_code: "DS601"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # DS601: Mathematical Foundation for Data Science

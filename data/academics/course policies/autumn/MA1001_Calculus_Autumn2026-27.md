@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MA1001_Calculus_Autumn26 - Pushpendra Kumar.pdf"
 course_code: "MA1001"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MA1001: Calculus

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM443_The Art & Science Of Influence_Winter25 - Suraja Kishore.pdf"
 course_code: "HM443"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM443: The Art & Science of Influence: Communication, Storytelling & Personal Branding

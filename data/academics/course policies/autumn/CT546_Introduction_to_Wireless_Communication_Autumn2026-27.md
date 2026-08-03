@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CT546_Introduction_to_Wireless_Communication_Autumn2026-27 - Manish Kumar.pdf"
 course_code: "CT546"
 semester: "Autumn Semester 2026-2027"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # CT546: Introduction to Wireless Communication

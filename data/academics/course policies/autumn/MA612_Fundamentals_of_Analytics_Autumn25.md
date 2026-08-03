@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MA612__2026-27__MA612_Fundamentals-Analytics_Statistical-Methods_PrinceVijay_11July26 - Prince Vijay.pdf"
 course_code: "MA612"
 semester: "Semester 1: 2026-2027"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MA612: Fundamentals of Analytics / Statistical Methods

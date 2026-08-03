@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "SBG General Meet Oct_24 MoM.pdf"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SBG General Meet Oct 24 MoM

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT486_Blockchains_Cryptocurrencies_Autumn25 - Anish Mathuria.pdf"
 course_code: "IT486"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT486: Blockchains and Cryptocurrencies

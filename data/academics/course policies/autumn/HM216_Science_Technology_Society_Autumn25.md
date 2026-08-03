@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM216__2026-27__HM216_Science Technology and Society_Autumn26 - Purbasha Das.pdf"
 course_code: "HM216"
 semester: "Autumn 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM216: Science, Technology, Society (Instructor: Purbasha Das)

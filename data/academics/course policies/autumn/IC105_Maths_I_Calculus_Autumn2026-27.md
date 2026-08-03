@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IC105_MathsI(Calculus)_Autumn26 - Sayantan Paul.pdf"
 course_code: "IC105"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IC105: Maths I (Calculus)

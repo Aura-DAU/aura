@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MA1002_LinearAlgebra_Autumn26 - Abhishek Tilva.pdf"
 course_code: "MA1002"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MA1002: Linear Algebra

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "ED111 - Engineering Mathematics.pdf"
 course_code: "ED111"
 semester: "Autumn 2025"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # ED111: Engineering Mathematics I

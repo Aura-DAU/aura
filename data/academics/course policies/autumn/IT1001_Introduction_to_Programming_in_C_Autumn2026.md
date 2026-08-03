@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT1001_Introduction to Programming( C)_Autumn2026 - Amit Mankodi.pdf"
 course_code: "IT1001"
 semester: "Autumn 2026"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT1001: Introduction to Programming in C

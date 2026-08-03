@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC311_MathematicalOptimization_Autumn2025 - Aditya Tatu.pdf"
 course_code: "MC311"
 semester: "Autumn 2025"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC311: Mathematical Optimization

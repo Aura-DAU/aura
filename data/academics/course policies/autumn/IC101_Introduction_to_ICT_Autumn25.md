@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IC101 - Introduction to ICT.pdf"
 course_code: "IC101"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IC101: Introduction to ICT

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT216__2026-27__IT216_Design & Analysis of Algorithms_Autumn26 - Rahul Muthu.pdf"
 course_code: "IT216"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT216: Design & Analysis of Algorithms

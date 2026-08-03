@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT457__2026-27__IT457_CloudComputing - kalyan sasidhar P S.pdf"
 course_code: "IT457"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT457: Cloud Computing

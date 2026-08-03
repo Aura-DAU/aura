@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "EL470__2026-27__EL470_Printed and Flexible Electronics_Autumn2026 - Ajay Beniwal.pdf"
 course_code: "EL470"
 semester: "Autumn 2026"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # EL470: Printed and Flexible Electronics

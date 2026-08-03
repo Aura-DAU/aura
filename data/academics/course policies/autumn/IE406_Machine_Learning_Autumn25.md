@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE406__2026-27__IE406_MachineLearning_Autumn26 - Arunava Chakravarty.pdf"
 course_code: "IE406"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IE406: Machine Learning

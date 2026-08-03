@@ -5,7 +5,7 @@ category: "Committees"
 scraped_by: "DhruvamPanchal"
 scraped_date: "2026-07-04"
 team: "Scraping Team"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Cafeteria Management Committee (CMC) — Canteen Menu & Vendor List

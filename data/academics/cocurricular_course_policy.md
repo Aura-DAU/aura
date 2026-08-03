@@ -5,7 +5,7 @@ category: "Student Affairs - Co-Curricular"
 scraped_by: "Squad D Scraper"
 scraped_date: "2026-07-06"
 team: "Squad D"
-authorization: ["student"]
+authorization: ["public"]
 source_file: "CoCurriculur Course Policy.pdf"
 ---
 

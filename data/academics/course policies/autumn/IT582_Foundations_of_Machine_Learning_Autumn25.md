@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT582_Foundations_of Machine Learning_Autumn25 - Manjunath Joshi.pdf"
 course_code: "IT582"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT582: Foundations of Machine Learning

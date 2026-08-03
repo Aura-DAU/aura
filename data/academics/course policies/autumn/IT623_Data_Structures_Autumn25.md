@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT623__2026-27__IT623_DataStructures_Autumn26nter25 - Supantha Pandit.pdf"
 course_code: "IT623"
 semester: "Autumn 2026-2027"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT623: Data Structures

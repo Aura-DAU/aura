@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "EC_Constitution2026.pdf"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # EC Constitution2026

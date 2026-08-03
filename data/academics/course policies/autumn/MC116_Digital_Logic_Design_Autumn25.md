@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC116_DigitalLogicDesign_Autumn25 - Sujay Kadam.pdf"
 course_code: "MC116"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC116: Digital Logic Design

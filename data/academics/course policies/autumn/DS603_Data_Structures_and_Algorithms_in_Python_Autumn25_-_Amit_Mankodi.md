@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS603__2026-27__DS603_Data Structures & Algorithms with Python_Autumn26 - Maniklal Das.pdf"
 course_code: "DS603"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # DS603: Data Structures & Algorithms with Python

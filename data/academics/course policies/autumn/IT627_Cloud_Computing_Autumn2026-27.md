@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT627 -Cloud Computing .pdf"
 course_code: "IT627"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT627: Cloud Computing

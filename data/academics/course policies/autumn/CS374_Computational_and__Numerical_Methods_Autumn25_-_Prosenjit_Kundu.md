@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CS374__2026-27__CS374_Computational_and_numerical_methods - Prosenjit Kundu.pdf"
 course_code: "CS374"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # CS374: Computational and Numerical Methods

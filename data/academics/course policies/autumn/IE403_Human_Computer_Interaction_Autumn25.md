@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE403__2026-27__IE403_Human-Computer Interaction - kalyan sasidhar P S.pdf"
 course_code: "IE403"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IE-403: Human Computer Interaction

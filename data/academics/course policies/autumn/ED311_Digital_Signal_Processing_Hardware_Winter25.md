@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "ED311__2026-27__ED311_DSP Hardware_Autumn26 - YASH AGRAWAL.pdf"
 course_code: "ED311"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # ED311: DSP Hardware

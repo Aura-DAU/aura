@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "SBG_Constitution 25-26.pdf"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SBG Constitution 25 26

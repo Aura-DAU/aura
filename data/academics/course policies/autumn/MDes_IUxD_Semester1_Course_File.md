@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "M.Des. IUxD sem-1 Course file (1).pdf"
 course_code: "MI601 / MI602 / MI603 / MI604 / MI605"
 semester: "Semester 1"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # M.Des. Intelligent User Experience Design (IUxD) — Semester 1 Course File

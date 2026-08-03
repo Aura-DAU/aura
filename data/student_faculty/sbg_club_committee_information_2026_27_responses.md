@@ -7,7 +7,7 @@ scraped_date: "2026-07-31"
 team: "SBG Data"
 source_type: "XLSX"
 original_name: "Club_Committee Information 2026-27 (Responses).xlsx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Club Committee Information 2026-27 Responses

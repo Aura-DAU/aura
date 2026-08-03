@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC212_DBMS_Autumn 2025 - Minal Bhise.pdf"
 course_code: "MC212"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC212: Database Management System (DBMS)

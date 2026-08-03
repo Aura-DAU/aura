@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC452_Processes_on_Networks - Prosenjit Kundu.pdf"
 course_code: "SC452"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC452: Processes on Networks

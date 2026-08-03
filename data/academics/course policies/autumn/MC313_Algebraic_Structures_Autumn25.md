@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC313__2026-27__MC313_Algebraic Structure_Autumn_26 - Sudip Bera.pdf"
 course_code: "MC313"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC313: Algebraic Structure

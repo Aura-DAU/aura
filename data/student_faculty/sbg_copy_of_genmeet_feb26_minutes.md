@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "Copy of GenMeet_Feb26_Minutes.pdf"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Copy of GenMeet Feb26 Minutes

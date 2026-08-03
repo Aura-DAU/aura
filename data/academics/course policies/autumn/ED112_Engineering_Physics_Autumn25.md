@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "ED112_ENGINEERING PHYSICS__Autumn23_AG (1).pdf"
 course_code: "ED112"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # ED112: Engineering Physics

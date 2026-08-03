@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "XLSX"
 original_name: "Club_Committee Data 24-25.xlsx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Club Committee Data 24-25

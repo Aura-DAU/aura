@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC223__2026-27__SC223_Linear Algebra _Autumn26 - Abhishek Tilva(1).pdf"
 course_code: "SC223"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC223: Linear Algebra

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IC104_Basic_Electronic_Circuits_Course_File - Pankaj Kumar.pdf"
 course_code: "IC104"
 semester: "AY 2025-2026"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IC104: Basic Electronic Circuits

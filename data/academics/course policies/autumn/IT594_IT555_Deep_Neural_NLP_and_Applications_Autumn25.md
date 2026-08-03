@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT594__2026-27__IT594_DeepNeuralNLP&Applications - Sourish Dasgupta.pdf"
 course_code: "IT594"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT594: Deep Neural NLP & Applications

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT585_Foundations of Machine Learning_Aut26-27 - Srimanta Mandal.pdf"
 course_code: "IT585"
 semester: "AY 2025-2026 (Autumn)"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT585: Foundations of Machine Learning

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT305_Computer Networks_Autumn2025.pdf"
 course_code: "IT305"
 semester: "Autumn 2025"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT305: Computer Networks

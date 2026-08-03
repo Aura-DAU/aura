@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC408 - Applied Probability and Statistics.pdf"
 course_code: "SC408"
 semester: "Not specified in source document"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC408: Applied Probability and Statistics

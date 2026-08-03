@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT603__2026-27__IT603_Introduction_to_Programming - Sandip Modha.pdf"
 course_code: "IT603"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT603: Introduction to Programming

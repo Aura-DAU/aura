@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DE401_Creative Intelligence for Engineers_Autumn Semester 2026-27 - Brajesh Dhiman.pdf"
 course_code: "DE401"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # DE401: Creative Intelligence for Engineers

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT586__2026-27__IT586 - Trustworthy_AI - Ajeet Kumar Singh.pdf"
 course_code: "IT586"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT586: Trustworthy AI - Theory and Practice

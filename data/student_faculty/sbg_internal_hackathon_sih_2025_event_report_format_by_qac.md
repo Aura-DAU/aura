@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Internal Hackathon (SIH) 2025 Event Report - format by QAC.docx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Internal Hackathon SIH 2025 Event Report Format by QAC

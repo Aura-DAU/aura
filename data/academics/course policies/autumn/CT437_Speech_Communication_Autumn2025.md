@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "CT437__2026-27__CT437 - Speech_Communication.pdf"
 course_code: "CT437"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # CT437 / CT540: Speech Communication

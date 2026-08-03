@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "XLSX"
 original_name: "Tenure 25-26 Core Members Name.xlsx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Tenure 25-26 Core Members Name

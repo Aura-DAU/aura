@@ -5,7 +5,7 @@ batch_year: "2019"
 scraped_by: "AI Agent"
 scraped_date: "2026-07-08"
 team: "Alumni Team"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 # DA-IICT / DAU Alumni — Batch 2019 Part 8
 

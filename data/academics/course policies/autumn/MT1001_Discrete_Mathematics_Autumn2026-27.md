@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MT1001_Discrete Mathematics - Sandeep Sharma.pdf"
 course_code: "MT1001"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MT1001: Discrete Mathematics

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC503_AppliedProbabilityAndStatistics_Autumn2025 - Abhishek Tilva.pdf"
 course_code: "SC503"
 semester: "Autumn 2025"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC503: Applied Probability and Statistics

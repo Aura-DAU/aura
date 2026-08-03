@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Synapse_25 event report.docx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Synapse 25 Event Report

@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "PPTX"
 original_name: "SBG General Meet February 2026.pptx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SBG General Meet February 2026

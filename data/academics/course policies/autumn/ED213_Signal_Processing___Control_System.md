@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "ED213_Signal Processing & Control System.pdf"
 course_code: "ED213"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # ED213: Signal Processing and Control Systems

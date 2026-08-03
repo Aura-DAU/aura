@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM404 Indian Society and Governance Course structure - Vinod Mall.pdf"
 course_code: "HM404"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM404: Indian Society and Governance

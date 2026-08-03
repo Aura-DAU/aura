@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MDes (CD) - (PC722) Fundamentals of Design I.pdf"
 course_code: "PC722"
 semester: "Semester 1"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # PC722: Fundamentals of Design - I (Drawing, Observation & Composition)

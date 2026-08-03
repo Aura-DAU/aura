@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "September 2025 SBG event report.docx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # September 2025 SBG event report

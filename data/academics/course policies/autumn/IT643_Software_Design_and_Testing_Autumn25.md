@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT643__2026-27__IT643_SoftwareDesignAndTesting_Autumn26 - Ankush Chander.pdf"
 course_code: "IT643"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT643: Software Design and Testing

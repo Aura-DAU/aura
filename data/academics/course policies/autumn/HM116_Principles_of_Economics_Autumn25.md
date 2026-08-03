@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM116__2026-27__HM116_MC314_ Principles of Economics_Autumn2026 - Parul Gupta.pdf"
 course_code: "HM116"
 semester: "Autumn 2026"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM116 / MC314: Principles of Economics

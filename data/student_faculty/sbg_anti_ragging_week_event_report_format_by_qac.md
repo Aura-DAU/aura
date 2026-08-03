@@ -7,7 +7,7 @@ scraped_date: "2026-07-04"
 team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Anti-Ragging Week Event Report - format by QAC.docx"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # Anti-Ragging Week Event Report Format by QAC

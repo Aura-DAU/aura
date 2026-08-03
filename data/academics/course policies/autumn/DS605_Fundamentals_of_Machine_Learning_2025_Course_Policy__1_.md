@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS605_Fundamentals_of_Machine_Learning_2025_Course_Policy (1).pdf"
 course_code: "DS605"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # DS605: Fundamentals of Machine Learning

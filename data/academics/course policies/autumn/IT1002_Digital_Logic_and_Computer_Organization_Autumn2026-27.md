@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IT1002_Digital Logic and Computer Organization - Tapas Kumar Maiti.pdf"
 course_code: "IT1002"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IT1002: Digital Logic and Computer Organization

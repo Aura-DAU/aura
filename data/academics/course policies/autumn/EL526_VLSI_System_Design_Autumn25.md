@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "EL526__2026-27__EL526_VLSI_System_Design_Autumn26 - Maunang Gor.pdf"
 course_code: "EL526"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # EL526: VLSI System Design

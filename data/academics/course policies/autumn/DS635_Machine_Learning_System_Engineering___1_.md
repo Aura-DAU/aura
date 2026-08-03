@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "DS635__2026-27__DS635_Machine Learning System Engineering_Autumn26 - Ankush Chander.pdf"
 course_code: "DS635"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # DS635: Machine Learning System Engineering

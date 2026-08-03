@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "HM406_Migration and Transnational Identities.docx - Ratna Bharati Bhamidipati.pdf"
 course_code: "HM406"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # HM406: Migration and Transnational Identities

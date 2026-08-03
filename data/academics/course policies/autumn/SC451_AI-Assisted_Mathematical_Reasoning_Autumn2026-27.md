@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC451_AI-Assisted Mathematical Reasoning - Sunitha Vadivel Murugan.pdf"
 course_code: "SC451"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC451: AI-Assisted Mathematical Reasoning — Using AI creatively without giving up mathematical rigour

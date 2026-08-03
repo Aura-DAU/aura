@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "EL411 _DESIGN OF ANALOG CMOS IC - Harpreet Singh Jattana.pdf"
 course_code: "EL411"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # EL411: Design of Analog CMOS IC

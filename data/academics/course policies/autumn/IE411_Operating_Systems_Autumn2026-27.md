@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE411_OS_Aut26 - Anish Mathuria.pdf"
 course_code: "IE411"
 semester: "Autumn 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IE411: Operating Systems

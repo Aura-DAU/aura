@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "IE420_EL434_EL518_RealTimeEmbeddedSoftware_Winter24 - Tapas Kumar Maiti.pdf"
 course_code: "IE420 / EL434 / EL518"
 semester: "Winter 2024"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # IE420 / EL434 / EL518: Real Time Embedded Software

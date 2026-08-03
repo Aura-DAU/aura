@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "MC216_Probability_and_Random_Processes_Autumn24 - Sujay Kadam.pdf"
 course_code: "MC216"
 semester: "Autumn 2024"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # MC216: Probability and Random Processes

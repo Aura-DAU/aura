@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "PC613__2026-27__PC613 - Communication Skills_ NEW - Nandini Banerjee.pdf"
 course_code: "PC613"
 semester: "Autumn Semester 2026-27"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # PC-613: Communication Skills

@@ -9,7 +9,7 @@ source_type: "PDF"
 pdf_name: "SC478_ApplicationofStatisticstoComplexSystems_Autumn25 - Pratim Roy.pdf"
 course_code: "SC478"
 semester: "Autumn 2025-26"
-authorization: ["student", "faculty"]
+authorization: ["public"]
 ---
 
 # SC478: Application of Statistical Physics to Complex Systems
