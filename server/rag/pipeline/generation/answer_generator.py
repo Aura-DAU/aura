@@ -225,6 +225,19 @@ def extract_cited_ids(answer: str) -> set[int]:
     }
 
 
+def strip_sources_marker(answer: str) -> str:
+    # Remove the internal "[Sources: N, M]" marker before the answer is
+    # shown to the user. The marker exists only so extract_cited_ids() /
+    # filter_sources_by_citations() can read back which doc ids the model
+    # cited -- callers must extract citations from the marker-bearing string
+    # FIRST, then pass the result of this function through as the visible
+    # answer text. The UI renders sources as clickable citation pills from
+    # the separate `sources` payload, never from this raw bracket text.
+    if not answer:
+        return answer
+    return _SOURCES_MARKER_RE.sub("", answer).rstrip()
+
+
 def _extract_inline_cited_ids(answer: str) -> set[int]:
     return {
         int(n)
@@ -1041,8 +1054,6 @@ Retrieved Documents
             if delta:
                 _emit(sanitizer.feed(delta))
         _emit(sanitizer.flush())
-        _emit("\n\n" + build_data_period_note(context, sanitizer.cited))
-        _emit(sanitizer.sources_tail())
         if profile_update_buffer:
             final_piece = re.sub(
                 r"\[UPDATE_PROFILE_NAME:[^\]]*$",
@@ -1054,8 +1065,8 @@ Retrieved Documents
                 emitted.append(final_piece)
                 on_delta(final_piece)
 
-        answer = "".join(emitted)
-        if not answer.strip():
+        # Check if we have generated any actual answer text before adding footnotes
+        if not "".join(emitted).strip():
             log_soft_failure(
                 "AURA-GEN-005",
                 "generation.streaming",
@@ -1063,7 +1074,23 @@ Retrieved Documents
                 detail="model stream had no usable content",
             )
             return SOFT_FAILURE_ANSWER
-        return answer
+
+        # Stream the data period note to the client since it is user-facing.
+        _emit("\n\n" + build_data_period_note(context, sanitizer.cited))
+
+        # The consolidated "[Sources: N, M]" marker is only for the
+        # downstream filter_sources_by_citations() call (it reads cited ids
+        # back off the returned answer string) — it must NEVER reach the
+        # client as visible text. The UI renders sources as citation pills
+        # from the separate `sources`/`citations` payload, so streaming this
+        # raw bracket text via on_delta would just dump ugly literal text
+        # into the chat bubble. Append to `emitted` (kept in the return
+        # value) WITHOUT calling on_delta.
+        tail = sanitizer.sources_tail()
+        if tail:
+            emitted.append(tail)
+
+        return "".join(emitted)
 
     def _clean_citations(self, text: str) -> str:
         # Strips all inline bracketed citations (e.g. [1], [2, 3]) from the

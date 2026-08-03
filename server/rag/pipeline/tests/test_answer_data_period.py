@@ -14,6 +14,7 @@ if str(ROOT) not in sys.path:
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     build_data_period_note,
+    strip_sources_marker,
 )
 
 
@@ -110,5 +111,22 @@ def test_streaming_generation_appends_period_before_sources():
         "Data period: Academic Year 2025-2026.\n\n"
         "[Sources: 1]"
     )
+    expected_emitted = (
+        "The fee is listed.\n\n"
+        "Data period: Academic Year 2025-2026."
+    )
     assert answer == expected
-    assert "".join(emitted) == expected
+    assert "".join(emitted) == expected_emitted
+
+
+def test_strip_sources_marker_keeps_data_period_visible():
+    answer = (
+        "The fee is listed.\n\n"
+        "Data period: Academic Year 2025-2026.\n\n"
+        "[Sources: 1]"
+    )
+
+    assert strip_sources_marker(answer) == (
+        "The fee is listed.\n\n"
+        "Data period: Academic Year 2025-2026."
+    )

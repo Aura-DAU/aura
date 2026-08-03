@@ -210,4 +210,4 @@ def test_streaming_profile_callback_does_not_swallow_source_marker():
         )
 
     assert "[Sources: 1]" in answer
-    assert "[Sources: 1]" in "".join(deltas)
+    assert "[Sources: 1]" not in "".join(deltas)

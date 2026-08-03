@@ -419,19 +419,7 @@ class RetrievalPipeline:
             {"applicability_scope": {"$eq": "course"}},
             scoped,
         ]
-        if academic_scope.registered_course_codes:
-            or_clauses.append({
-                "$and": [
-                    {"applicability_scope": {"$eq": "course"}},
-                    {"course_code": {"$in": list(academic_scope.registered_course_codes)}},
-                ]
-            })
-        else:
-            # Enrollment is not populated by the identity-derived scope and an
-            # empty snapshot is not yet authoritative. Temporarily admit
-            # course-scoped candidates; the separately combined authorization
-            # filter still enforces RBAC.
-            or_clauses.append({"applicability_scope": {"$eq": "course"}})
+
         # A missing branch on a document means programme-wide applicability;
         # branch equality is enforced by the post-retrieval predicate when a
         # document declares one, without excluding those programme-wide docs.
@@ -1167,16 +1155,16 @@ class RetrievalPipeline:
             )
             _log_candidates("AFTER STAGE-1 RERANK", stage1_reranked)
             
-            # Select top 12 candidates
-            top_candidates = stage1_reranked[:12]
+            # Select top 18 candidates
+            top_candidates = stage1_reranked[:18]
             
-            # Expand only the top 12 candidates
+            # Expand only the top 18 candidates
             expand_window = 2 if retrieval_intent == "policy_version" else 1
             expanded_candidates = self._eligible_results(
                 self._expand_adjacent_chunks(top_candidates, window=expand_window), academic_scope
             )
             
-            # Stage 2: Final precise rerank on expanded top 12 chunks
+            # Stage 2: Final precise rerank on expanded top 18 chunks
             reranked = self.reranker.rerank(
                 query=query,
                 results=expanded_candidates,
