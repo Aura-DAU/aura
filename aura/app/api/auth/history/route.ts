@@ -39,6 +39,22 @@ const historyMessageSchema = z.object({
       action: z.enum(["sync_timetable", "unsync_timetable"]).optional(),
     })
     .optional(),
+  // Sources for this turn — previously absent here, so Zod silently
+  // stripped citations on every sync and they vanished on reload/thread switch.
+  citations: z
+    .array(
+      z.object({
+        file: z.string().max(1024),
+        title: z.string().max(500).optional(),
+        visibility: z.string().max(64).optional(),
+        authorization: z.array(z.string().max(128)).max(50).optional(),
+        path: z.string().max(1024).optional(),
+        startLine: z.number().int().nonnegative().optional(),
+        endLine: z.number().int().nonnegative().optional(),
+      }),
+    )
+    .max(50)
+    .optional(),
 })
 
 const historyThreadSchema = z.object({
