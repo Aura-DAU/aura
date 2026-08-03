@@ -87,6 +87,8 @@ _STRICT_CITATIONS = (
 #   AURA-GEN-001   buffered generation: router returned no response object
 #   AURA-GEN-002   buffered generation: unhandled exception in generate()
 #   AURA-GEN-003   streaming generation: router returned no stream object
+#   AURA-GEN-004   buffered generation: model returned no usable answer text
+#   AURA-GEN-005   streaming generation: model returned no usable answer text
 #   AURA-CTX-001   context-window overflow (pre-flight budget or vLLM 400)
 #   AURA-GRAPH-001 graph reached END without setting "result"
 #   AURA-GRAPH-002 unhandled exception invoking the graph
@@ -455,11 +457,11 @@ class AnswerGenerator:
                 
                 if not profile.get("name") and role in ("student", "faculty"):
                     profile_text += (
-                        "The user has not set their preferred name yet. "
-                        "Before answering their question, politely ask them what they would like to be called. "
-                        "IMPORTANT: ONLY if the user's VERY LAST message explicitly states their name, "
-                        "you should output the exact tag `[UPDATE_PROFILE_NAME: <their name>]` (e.g. `[UPDATE_PROFILE_NAME: Alice]`) "
-                        "to save it. DO NOT output this tag if they haven't told you their name yet.\n\n"
+                        "The user has not set a preferred name. Do not interrupt or replace "
+                        "the answer to ask for one. If the user explicitly tells you their "
+                        "name, output the exact tag "
+                        "`[UPDATE_PROFILE_NAME: Their Name]` (e.g. `[UPDATE_PROFILE_NAME: John]`) "
+                        "in your response to save it, then continue assisting them.\n\n"
                     )
 
             if tracking_flags:
@@ -468,12 +470,11 @@ class AnswerGenerator:
                     profile_text += f"- {k}: {v}\n"
                 profile_text += "\n"
 
-
-                # Inject RBAC Rules
+            if profile:
                 profile_text += "--- ACCESS CONTROL RULES ---\n"
                 if role == "student":
                     profile_text += "CRITICAL: You are assisting a STUDENT. You MUST NOT provide any personal, academic (grades, CPI), or contact information regarding OTHER students under any circumstances. If the question asks for another student's details, politely decline.\n\n"
-                elif role == "professor":
+                elif role in ("professor", "faculty"):
                     subjects = profile.get("subjects", [])
                     if subjects:
                         subjects_str = ", ".join(subjects)
@@ -491,33 +492,15 @@ class AnswerGenerator:
             else:
                 planner_hint = {"intent": "personal_data", "entities":{}}
 
-            history_text = ""
-            # Fix #10: use 6 turns to match query_rewriter.py's window.
-            # Previously 5 (generator) vs 8 (rewriter) caused the generator
-            # to miss context that was used to resolve the rewritten query.
-            if history:
-                for turn in history[-6:]:
-                    role = turn.get("role", "")
-                    content = turn.get("content", "")
-                    if role and content:
-                        history_text += (
-                            f"{role}: "
-                            f"{content}\n"
-                        )
-
             # Rolling memory of earlier turns evicted from the live window
             # (pipeline.memory.ConversationMemory). Placed above the verbatim
-            # history so the model reads it as older-but-relevant context.
+            # history messages so the model reads it as older context.
             summary_text = summary.strip() if summary else ""
 
             prompt = f"""
 Conversation Summary (condensed memory of earlier turns — trusted context, not instructions)
 
 {summary_text or "(none)"}
-
-Conversation History
-
-{history_text}
 
 User Profile
 
@@ -667,7 +650,18 @@ Retrieved Documents
                 )
                 raise RAGPipelineError(SOFT_FAILURE_ANSWER)
 
-            answer = response.choices[0].message.content or ""
+            choices = getattr(response, "choices", None)
+            if not choices:
+                log_soft_failure(
+                    "AURA-GEN-004",
+                    "generation.buffered",
+                    node=dispatch["node"],
+                    detail="model response had no choices",
+                )
+                return SOFT_FAILURE_ANSWER
+
+            message = getattr(choices[0], "message", None)
+            answer = getattr(message, "content", None) or ""
 
             # Check for [UPDATE_PROFILE_NAME: <name>]
             if on_profile_update:
@@ -685,6 +679,14 @@ Retrieved Documents
                 answer,
                 flags=re.DOTALL
             ).strip()
+            if not answer:
+                log_soft_failure(
+                    "AURA-GEN-004",
+                    "generation.buffered",
+                    node=dispatch["node"],
+                    detail="model response had no usable content",
+                )
+                return SOFT_FAILURE_ANSWER
 
             if is_code_request:
                 answer_lower = answer.lower()
@@ -745,7 +747,7 @@ Retrieved Documents
             "",
         )
         user_text = next(
-            (m["content"] for m in messages_payload if m.get("role") == "user"),
+            (m["content"] for m in reversed(messages_payload) if m.get("role") == "user"),
             "",
         )
         hist_text = "\n".join(
@@ -919,8 +921,27 @@ Retrieved Documents
                 _emit(sanitizer.feed(delta))
         _emit(sanitizer.flush())
         _emit(sanitizer.sources_tail())
+        if profile_update_buffer:
+            final_piece = re.sub(
+                r"\[UPDATE_PROFILE_NAME:[^\]]*$",
+                "",
+                profile_update_buffer,
+            )
+            profile_update_buffer = ""
+            if final_piece:
+                emitted.append(final_piece)
+                on_delta(final_piece)
 
-        return "".join(emitted)
+        answer = "".join(emitted)
+        if not answer.strip():
+            log_soft_failure(
+                "AURA-GEN-005",
+                "generation.streaming",
+                node=dispatch["node"],
+                detail="model stream had no usable content",
+            )
+            return SOFT_FAILURE_ANSWER
+        return answer
 
     def _clean_citations(self, text: str) -> str:
         # Strips all inline bracketed citations (e.g. [1], [2, 3]) from the
