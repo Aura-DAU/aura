@@ -69,6 +69,12 @@ UNSAFE only when it clearly matches one of the four harm classes below.
    SAFE. Published professional details — official university email, campus
    office or room number, designation, research area, publications — are
    directory facts, NOT private records.
+   An alumnus's current employer/company/role, as published in the
+   university's own alumni placement/outcomes directory, is directory data,
+   NOT a private record — this includes both "where is alumnus [Name]
+   working now" and "where are the [batch year] alumni working now" style
+   questions. Treat these as SAFE, the same as a current student's
+   published placement outcome.
 
 4. ACCESS BYPASS
    Asks how to circumvent authentication, authorization, retrieval filters, or
@@ -131,6 +137,12 @@ Query: Who is the final approving authority for a semester leave request?
 SAFE
 
 Query: Who leads the Cyber Security research group?
+SAFE
+
+Query: Where are the 2013 batch alumni working now?
+SAFE
+
+Query: Where is our alumnus Bharath Reddy working now?
 SAFE
 
 Query: Under what circumstances can the Dean request information about a

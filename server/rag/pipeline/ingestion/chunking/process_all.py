@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from process_corpus import process_markdown_file
+from chunk_quality import annotate_duplicate_chunks
 
 
 # ==========================================
@@ -65,6 +66,18 @@ def main():
                 f"[ERROR] {md_file}\n"
                 f"Reason: {e}\n"
             )
+
+    # ======================================
+    # DUPLICATE DETECTION (Fix #10)
+    # ======================================
+    # Cross-file content duplicates (e.g. a disclaimer or boilerplate
+    # section repeated on many pages) are annotated, not deleted — each
+    # stays retrievable from its own document. `duplicate_of_chunk_id` is
+    # available for retrieval-time result collapsing; re-embedding is not
+    # yet skipped for duplicates (see chunk_quality.py scope note).
+    all_chunks, duplicate_count = annotate_duplicate_chunks(all_chunks)
+    if duplicate_count:
+        print(f"\n[dedup] Flagged {duplicate_count} duplicate chunk(s) across the corpus.\n")
 
     # ======================================
     # SAVE OUTPUT

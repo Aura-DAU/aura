@@ -174,7 +174,7 @@ def test_semantic_entity_fallback_preserves_authorization_and_academic_scope():
     assert _contains_field(fallback_filter, "programme_id")
 
 
-def test_empty_registrations_admit_course_scope_but_populated_stays_restricted():
+def test_registrations_admit_course_scope_regardless_of_enrollment():
     unavailable_scope = _scope()
     empty_snapshot_scope = _scope(enrollment_snapshot_id="snapshot-1")
     populated_scope = _scope(("IT205",))
@@ -185,9 +185,9 @@ def test_empty_registrations_admit_course_scope_but_populated_stays_restricted()
     assert empty_snapshot_scope.document_is_eligible(it205)
     assert empty_snapshot_scope.document_is_eligible(it999)
     assert populated_scope.document_is_eligible(it205)
-    assert not populated_scope.document_is_eligible(it999)
+    assert populated_scope.document_is_eligible(it999)
 
     empty_filter = RetrievalPipeline._academic_scope_filter(empty_snapshot_scope)
     populated_filter = RetrievalPipeline._academic_scope_filter(populated_scope)
     assert not _contains_field(empty_filter, "course_code")
-    assert _contains_field(populated_filter, "course_code")
+    assert not _contains_field(populated_filter, "course_code")

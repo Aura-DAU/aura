@@ -71,6 +71,48 @@
       "synonyms": ["Sports Club", "Sports Committee", "DAUSC"],
       "category": "Club",
       "description": "Official Student Sports Council"
+    },
+    {
+      "canonical_name": "Cumulative Grade Point Average (CGPA)",
+      "abbreviation": "CGPA",
+      "synonyms": ["CGPA", "cumulative GPA", "overall GPA"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion): overall grade-point average across all completed semesters"
+    },
+    {
+      "canonical_name": "Semester Grade Point Average (SGPA)",
+      "abbreviation": "SGPA",
+      "synonyms": ["SGPA", "semester GPA"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion): grade-point average for a single semester"
+    },
+    {
+      "canonical_name": "Head of Department (HOD)",
+      "abbreviation": "HOD",
+      "synonyms": ["HOD", "department head", "head of dept"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion)"
+    },
+    {
+      "canonical_name": "Graduate Aptitude Test in Engineering (GATE)",
+      "abbreviation": "GATE",
+      "synonyms": ["GATE exam", "GATE score"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion)"
+    },
+    {
+      "canonical_name": "National Programme on Technology Enhanced Learning (NPTEL)",
+      "abbreviation": "NPTEL",
+      "synonyms": ["NPTEL", "NPTEL course"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion)"
+    },
+    {
+      "canonical_name": "Teaching Assistant (TA)",
+      "abbreviation": "TA",
+      "synonyms": ["TA", "teaching assistantship"],
+      "category": "Academic Term",
+      "description": "Fix #22 (query expansion)"
     }
   ]
 }
