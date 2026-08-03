@@ -1349,6 +1349,36 @@ class RetrievalPipeline:
                     }
                 entity_pool[chunk_id]["rrf_score"] += 1.0 / (60.0 + rank)
 
+        # Full-query lexical (BM25) pass. The per-entity loop above only runs
+        # BM25 for planner-extracted entities, so a query that carries strong
+        # keyword signal but yields no high-confidence entity (e.g. "what are
+        # the hostel rules", "course policy of EL470") reached this pool empty
+        # and fusion collapsed to pure dense search — which buries the exact
+        # document under near-duplicate chunks. Running BM25 on the raw query
+        # and folding it into the same RRF pool restores the lexical half of
+        # hybrid retrieval for every query, not just entity queries. The same
+        # authorization + academic-scope filter is applied so role/scope
+        # gating is never bypassed.
+        if getattr(self.retriever, "bm25", None):
+            lexical_filter = self._combine_filters(
+                {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                self._academic_scope_filter(academic_scope),
+            )
+            lexical_results = self.retriever.bm25.retrieve(
+                query=query,
+                top_k=20,
+                metadata_filter=lexical_filter,
+                allowed_roles=allowed_roles,
+            )
+            for rank, res in enumerate(lexical_results, start=1):
+                chunk_id = res["id"]
+                if chunk_id not in entity_pool:
+                    entity_pool[chunk_id] = {
+                        "chunk": res,
+                        "rrf_score": 0.0
+                    }
+                entity_pool[chunk_id]["rrf_score"] += 1.0 / (60.0 + rank)
+
         entity_list = []
         for chunk_id, info in entity_pool.items():
             chunk_item = dict(info["chunk"])
