@@ -181,6 +181,7 @@ RULES
 - Output every field exactly once.
 - Do not omit fields.
 - Course codes (e.g. IT205, CS301, MA101, ICT623) must always be extracted as course_code entities, even if the query does not explicitly use the word "course".
+- NEVER confuse "year" and "semester". If a user asks for a specific YEAR (e.g., "1st year", "3rd year"), do NOT extract it as a single semester. A year contains two semesters (e.g., 1st year = Semesters 1 and 2, 2nd year = Semesters 3 and 4, 3rd year = Semesters 5 and 6, 4th year = Semesters 7 and 8). Extract the corresponding semesters as an array (e.g., ["5", "6"] for 3rd year).
 
 ------------------------------------------------------------
 SPECIAL CASES

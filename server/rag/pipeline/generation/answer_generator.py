@@ -683,7 +683,7 @@ Retrieved Documents
                 dispatch["node"] = str(getattr(client, "base_url", "") or "") or None
                 return client.chat.completions.create(
                     model=self.model,
-                    temperature=0.2,
+                    temperature=0.0,
                     top_p=0.9,
                     max_tokens=answer_max_tokens,
                     messages=messages_payload,
@@ -859,7 +859,7 @@ Retrieved Documents
             dispatch["node"] = str(getattr(client, "base_url", "") or "") or None
             return client.chat.completions.create(
                 model=self.model,
-                temperature=0.2,
+                temperature=0.0,
                 top_p=0.9,
                 max_tokens=answer_max_tokens,
                 messages=stream_messages,
