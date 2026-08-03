@@ -32,6 +32,7 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    strip_sources_marker,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -689,13 +690,15 @@ class AuraChatGraph:
             effective_sources = state["last_rag_sources"]
             effective_citation_map = state.get("last_rag_citation_map", {})
 
+        cited_sources = filter_sources_by_citations(
+            effective_sources,
+            effective_citation_map,
+            answer,
+        )
+
         state["result"] = {
-            "answer": answer,
-            "sources": filter_sources_by_citations(
-                effective_sources,
-                effective_citation_map,
-                answer,
-            ),
+            "answer": strip_sources_marker(answer),
+            "sources": cited_sources,
             "is_personal_data": is_personal,
         }
         return state
