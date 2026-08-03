@@ -195,6 +195,15 @@ _PARTIAL_TAIL_RE = re.compile(r"(?:\s*\[[\d\s,]*|\s+)$")
 # Matches the consolidated marker both generation paths append — the buffered
 # path via _clean_citations(), the streaming path via _StreamSanitizer.
 _SOURCES_MARKER_RE = re.compile(r"\[Sources:\s*([\d\s,]+)\]")
+_DOC_OPEN_TAG_RE = re.compile(r"<doc\b(?P<attrs>.*?)>", re.DOTALL | re.IGNORECASE)
+_DOC_DATE_ATTRIBUTE_RE = re.compile(
+    r'\b(?P<name>id|rule_year|scraped_date)="(?P<value>[^"]*)"',
+    re.IGNORECASE,
+)
+_ACADEMIC_YEAR_RE = re.compile(
+    r"(?<!\d)(?P<start>(?:20)?\d{2})\s*[-\u2013]\s*(?P<end>(?:20)?\d{2})(?!\d)"
+)
+_CALENDAR_DATE_RE = re.compile(r"(?<!\d)(20\d{2}(?:-\d{2}(?:-\d{2})?)?)(?!\d)")
 
 
 def extract_cited_ids(answer: str) -> set[int]:
@@ -417,6 +426,7 @@ If the question is primarily outside DAU's scope, do not answer it using retriev
 
 - Professional, warm, concise. Paragraphs by default; bullets for lists/steps/requirements/comparisons.
 - Ground factual policy with academic/rule year; if docs span years, structure by year.
+- Always disclose source currency: use `rule_year` as the academic year when present; otherwise use `scraped_date` as the fetch date. Never present `scraped_date` as an academic year, and say when a cited source is undated.
 - Citations `[1]` or `[1][3]` right after the supported sentence. No citations on greetings/clarifying/conversational text. Integrate — do not quote long passages.
 - Partial coverage: answer what is supported, then state what is missing.
 - No coverage: "I could not find that information in the available university data." Name the responsible office if identified; point to https://www.daiict.ac.in.
@@ -635,6 +645,7 @@ Retrieved Documents
                     dispatch=dispatch, max_tokens=answer_max_tokens,
                     on_profile_update=on_profile_update,
                     profile_erp_id=profile_erp_id,
+                    context=context,
                 )
 
             # The router picks the node internally and does not report which one
@@ -714,7 +725,9 @@ Retrieved Documents
                 if "```" in answer or not is_grounded:
                     return out_of_scope_response
 
-            return self._clean_citations(answer)
+            cited_ids = _extract_inline_cited_ids(answer)
+            cleaned_answer = self._clean_citations(answer)
+            return append_data_period_note(cleaned_answer, context, cited_ids)
 
         except ContextLengthExceeded as e:
             log_soft_failure(
@@ -821,6 +834,7 @@ Retrieved Documents
         max_tokens=None,
         on_profile_update=None,
         profile_erp_id=None,
+        context="",
     ):
         stream_messages = [{"role": "system", "content": system_prompt}]
         if history:
