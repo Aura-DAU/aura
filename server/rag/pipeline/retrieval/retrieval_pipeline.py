@@ -405,22 +405,20 @@ class RetrievalPipeline:
                 {"admission_year_to": {"$gte": academic_scope.admission_year}},
             ]
         }
-        # Course-policy documents are keyed by course_code, not by
-        # programme_id/degree_level/admission_year (they never populate those
-        # fields — the same course is often shared across programmes). They
-        # need their own clause instead of being forced through the
-        # programme/curriculum clause above, which they can never satisfy.
+        # Course documents (structure, catalog, per-course policy) are public
+        # course-catalog information: a signed-in student may look up any
+        # course, exactly as a signed-out guest can, so they are admitted
+        # unconditionally rather than gated by registered_course_codes. They
+        # are keyed by course_code, not by programme_id/degree_level/
+        # admission_year (they never populate those fields — the same course is
+        # often shared across programmes), so they need their own clause
+        # instead of being forced through the programme/curriculum clause
+        # above, which they can never satisfy.
         or_clauses = [
             {"applicability_scope": {"$eq": "global"}},
+            {"applicability_scope": {"$eq": "course"}},
             scoped,
         ]
-        if academic_scope.registered_course_codes:
-            or_clauses.append({
-                "$and": [
-                    {"applicability_scope": {"$eq": "course"}},
-                    {"course_code": {"$in": list(academic_scope.registered_course_codes)}},
-                ]
-            })
         # A missing branch on a document means programme-wide applicability;
         # branch equality is enforced by the post-retrieval predicate when a
         # document declares one, without excluding those programme-wide docs.
