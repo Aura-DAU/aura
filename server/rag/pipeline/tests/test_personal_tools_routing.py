@@ -313,6 +313,13 @@ def test_first_unsync_request_asks_for_confirmation_without_tool_call():
     assert "Google Calendar" in answer
     assert "proceed" in answer.lower()
     assert counter["n"] == 0
+    # The prompt also carries the structured confirmation action so the client
+    # renders an inline Confirm button instead of requiring a typed "confirm".
+    action = out["result"]["action_required"]
+    assert action["type"] == "confirmation_required"
+    assert action["provider"] == "google_calendar"
+    assert action["action"] == "unsync_timetable"
+    assert action["message"] == answer
 
 
 def test_unsync_confirmation_reaches_orchestrator():

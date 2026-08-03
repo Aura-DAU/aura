@@ -4,7 +4,8 @@ url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_
 category: "Academics"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
----# IE404 Digital Image Processing Winter24 - Manish Khare
+---
+# IE404 Digital Image Processing Winter24 - Manish Khare
 
 **Last Modified:** 2023-12-19
 

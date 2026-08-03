@@ -11,6 +11,10 @@
  *     as a progress card while the frontend polls the app's calendar facade.
  *   - "timetable_sync_confirmation": a preview is ready for explicit user
  *     confirmation before any calendar events are written.
+ *   - "confirmation_required": the backend is asking the student to confirm a
+ *     calendar write (sync preview or unsync). Rendered as inline Confirm /
+ *     Cancel buttons; Confirm sends "confirm" through the normal chat path so
+ *     the backend confirmation gate is unchanged.
  */
 export interface CalendarActionData {
   type?:
@@ -18,6 +22,7 @@ export interface CalendarActionData {
     | "connect_required"
     | "timetable_sync"
     | "timetable_sync_confirmation"
+    | "confirmation_required"
   event_title?: string
   date?: string
   time?: string
@@ -31,6 +36,8 @@ export interface CalendarActionData {
   reason?: string
   message?: string
   event_count?: number
+  // confirmation_required variant: which calendar write awaits the go-ahead.
+  action?: "sync_timetable" | "unsync_timetable"
 }
 
 export interface ChatMessage {
