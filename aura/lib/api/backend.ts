@@ -1,5 +1,5 @@
 export function backendUrl(path: string): string {
-  const base = process.env.BACKEND_URL?.replace(/\/$/, "") ?? "http://localhost:8000"
+  const base = process.env.BACKEND_URL?.replace(/\/$/, "") ?? "http://127.0.0.1:8000"
   return `${base}${path.startsWith("/") ? path : `/${path}`}`
 }
 

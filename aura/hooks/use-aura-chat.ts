@@ -238,6 +238,7 @@ function requestThreadMemoryDelete(threadId: string): Promise<Response> {
 }
 
 function forgetThreadMemory(threadId: string): void {
+  if (!threadId || typeof threadId !== "string" || !threadId.trim()) return
   requestThreadMemoryDelete(threadId)
     .then((res) => {
       if (res.ok) return

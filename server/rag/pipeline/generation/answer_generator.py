@@ -1101,3 +1101,11 @@ Retrieved Documents
             logger.info("Updated profile name for %s to %s", erp_id, new_name)
         except Exception as e:
             logger.error("Failed to update profile name in DB: %s", e)
+
+
+def strip_sources_marker(text: str) -> str:
+    """Strips the tail `[Sources: ...]` marker from answer text."""
+    if not text:
+        return ""
+    return re.sub(r"\n\n\[Sources:[^\]]*\]$", "", text).strip()
+
