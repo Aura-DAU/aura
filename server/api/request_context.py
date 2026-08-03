@@ -72,9 +72,17 @@ class AcademicScope:
             # students from several programmes (electives, cross-listed
             # courses), so it must not be required to match programme_id,
             # degree_level, or admission_year fields that course-policy docs
-            # never carry in the first place.
+            # never carry in the first place. Identity-derived scopes currently
+            # have no enrollment snapshot, and some snapshots have no course
+            # rows; until that feed is authoritative, an empty tuple means the
+            # registration restriction is unavailable rather than "no access".
+            # RBAC remains enforced by the retrieval authorization filter.
             course_code = metadata.get("course_code")
-            if course_code and course_code not in self.registered_course_codes:
+            if (
+                self.registered_course_codes
+                and course_code
+                and course_code not in self.registered_course_codes
+            ):
                 return False
             return True
 

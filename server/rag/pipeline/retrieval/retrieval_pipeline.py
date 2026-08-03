@@ -421,6 +421,12 @@ class RetrievalPipeline:
                     {"course_code": {"$in": list(academic_scope.registered_course_codes)}},
                 ]
             })
+        else:
+            # Enrollment is not populated by the identity-derived scope and an
+            # empty snapshot is not yet authoritative. Temporarily admit
+            # course-scoped candidates; the separately combined authorization
+            # filter still enforces RBAC.
+            or_clauses.append({"applicability_scope": {"$eq": "course"}})
         # A missing branch on a document means programme-wide applicability;
         # branch equality is enforced by the post-retrieval predicate when a
         # document declares one, without excluding those programme-wide docs.
@@ -660,28 +666,36 @@ class RetrievalPipeline:
         # Submit the planning LLM call to executor
         future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
 
-        # Submit the speculative retrieval call to executor. Speculative retrieval
-        # runs the semester-expanded query with an empty plan ({}) which results
-        # in a standard semantic search.
+        # Scope-derived programme names are soft retrieval signals. Keeping them
+        # separate from planner entities lets the entity path use them without
+        # turning them into a semantic metadata filter or disabling speculation.
+        scope_entities = {}
+        if academic_scope and getattr(academic_scope, "programme_id", None):
+            inferred_progs = self._scope_program_names(academic_scope)
+            if inferred_progs:
+                scope_entities["program_name"] = (
+                    inferred_progs[0] if len(inferred_progs) == 1 else inferred_progs
+                )
+
+        # Submit the speculative retrieval call to executor. It runs the
+        # semester-expanded query without query entities, while retaining the
+        # student's programme only as a soft entity-path signal.
         query_speculative = self._expand_semesters(query)
         future_speculative = self.executor.submit(
-            self._retrieve_dual_path, query_speculative, {}, allowed_roles, academic_scope
+            self._retrieve_dual_path,
+            query_speculative,
+            {"scope_entities": scope_entities},
+            allowed_roles,
+            academic_scope,
         )
 
         plan = future_plan.result()
 
-        # Infer user program from academic_scope if available and not present in plan entities
-        if academic_scope and getattr(academic_scope, "programme_id", None):
-            entities = plan.setdefault("entities", {})
-            if not entities.get("program_name"):
-                inferred_progs = self._scope_program_names(academic_scope)
-                if inferred_progs:
-                    entities["program_name"] = (
-                        inferred_progs[0] if len(inferred_progs) == 1 else inferred_progs
-                    )
+        entities = plan.setdefault("entities", {})
+        if scope_entities and not entities.get("program_name"):
+            plan["scope_entities"] = scope_entities
 
         # Check if the plan contains anything that modifies retrieval or query
-        entities = plan.get("entities", {})
         has_entities = any(entities.get(k) for k in [
             "faculty_name", "event_name", "program_name", "department_name", 
             "scholarship_name", "course_code", "course_name", "semester", "rule_year"
@@ -1008,9 +1022,11 @@ class RetrievalPipeline:
         # (before dedup). Collapsed into a single unconditional block so
         # entity retrieval runs exactly once for all query types.
         if self.entity_retriever:
+            soft_entities = dict(plan.get("scope_entities") or {})
+            soft_entities.update(entities)
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
-                    entities,
+                    soft_entities,
                     allowed_roles=allowed_roles,
                     academic_scope=academic_scope,
                 )
@@ -1194,7 +1210,8 @@ class RetrievalPipeline:
         combines them with an equal 50/50 weighted sum.
         """
         # 1. Entity Path
-        entities = plan.get("entities", {})
+        entities = dict(plan.get("scope_entities") or {})
+        entities.update(plan.get("entities", {}))
         entity_queries = []
         for entity_type, entity_val in entities.items():
             if not entity_val:
@@ -1314,7 +1331,31 @@ class RetrievalPipeline:
                     include_metadata=True,
                     filter=semantic_filter
                 )
-                for match in results.get("matches", []):
+                matches = list(results.get("matches", []))
+                useful_matches = self._eligible_results(
+                    [{"metadata": match.get("metadata", {})} for match in matches],
+                    academic_scope,
+                )
+                minimum_useful = min(max(int(plan.get("top_k", 5)), 1), 5)
+                if entity_filter and len(useful_matches) < minimum_useful:
+                    fallback_filter = self._combine_filters(
+                        {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                        self._academic_scope_filter(academic_scope),
+                    )
+                    fallback_results = self.retriever.index.query(
+                        vector=query_embedding,
+                        top_k=50,
+                        include_metadata=True,
+                        filter=fallback_filter,
+                    )
+                    seen_match_ids = {match.get("id") for match in matches}
+                    matches.extend(
+                        match
+                        for match in fallback_results.get("matches", [])
+                        if match.get("id") not in seen_match_ids
+                    )
+
+                for match in matches:
                     semantic_list.append({
                         "id": match["id"],
                         "score": match["score"],
