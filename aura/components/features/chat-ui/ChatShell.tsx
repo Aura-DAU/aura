@@ -67,16 +67,18 @@ export function ChatShell() {
     if (
       !greetingDone.current &&
       session?.user &&
+      session.user.role !== "guest" &&
       !session.user.fullName &&
       !chat.studentProfile.name &&
-      chat.threads.length === 0
+      chat.threads.length === 0 &&
+      !searchParams.get("prompt")
     ) {
       greetingDone.current = true
       chat.insertGreeting(
         "Welcome to DAU! I noticed you haven't set your preferred name yet. What would you like me to call you?"
       )
     }
-  }, [chat.hasHydrated, chat.threads.length, chat.studentProfile.name, session, chat])
+  }, [chat.hasHydrated, chat.threads.length, chat.studentProfile.name, session, chat, searchParams])
 
   useEffect(() => {
     const stored = localStorage.getItem("aura-sidebar-open")

@@ -14,14 +14,13 @@ for _root in (_RAG_ROOT, _SERVER_ROOT):
     if str(_root) not in sys.path:
         sys.path.insert(0, str(_root))
 
-from mcp.server import MCPServer  # noqa: E402  (after sys.path bootstrap)
+from mcp.server import FastMCP  # noqa: E402  (after sys.path bootstrap)
 
 from pipeline.google_calendar import timetable_sync  # noqa: E402
 from pipeline.prompt_loader import load_calendar_mcp_system_prompt  # noqa: E402
 
-mcp = MCPServer(
+mcp = FastMCP(
     name="aura-google-calendar",
-    version="0.1.0",
     instructions=load_calendar_mcp_system_prompt(),
 )
 
@@ -42,8 +41,8 @@ def calendar_status(erp_id: str) -> dict:
 @mcp.tool()
 def preview_timetable_sync(erp_id: str) -> dict:
     """Dry run: show how many class events WOULD be created/updated on the
-    student's Google Calendar, without writing anything. Use when the student
-    explicitly requests a preview instead of an immediate sync."""
+    student's Google Calendar, without writing anything. Call this first and
+    relay the count to the user before syncing."""
     return timetable_sync.preview(_identity(erp_id))
 
 

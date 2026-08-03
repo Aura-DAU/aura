@@ -30,6 +30,7 @@ from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
     log_soft_failure,
+    strip_sources_marker,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -57,7 +58,9 @@ ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE = (
 )
 
 RETRIEVAL_FAILURE_RESPONSE = (
-    "I'm having trouble retrieving information right now. Please try again."
+    "I could not find specific information about that in the university's knowledge base. "
+    "For accurate details, please visit <https://www.daiict.ac.in> or contact the "
+    "relevant office directly."
 )
 
 PERSONAL_DATA_SYSTEM_ADDENDUM = """
@@ -349,15 +352,19 @@ class AuraChat:
             # Apply Post-generation Privacy Filter (scans and redacts leaked PII / restricted fields)
             answer = privacy_filter.filter_response_text(answer, query=query)
 
+            cited_sources = filter_sources_by_citations(
+                sources,
+                retrieval_result.get("citation_map", {}),
+                answer,
+            )
             return {
-                "answer": answer,
+                # Marker stripped only AFTER citation extraction above — it's
+                # internal bookkeeping and must never reach the user as
+                # literal "[Sources: N, M]" text.
+                "answer": strip_sources_marker(answer),
                 # public sources only — never ERP data — and narrowed to the
                 # docs the answer actually cited
-                "sources": filter_sources_by_citations(
-                    sources,
-                    retrieval_result.get("citation_map", {}),
-                    answer,
-                ),
+                "sources": cited_sources,
                 "is_personal_data": is_personal,
             }
 
@@ -445,12 +452,13 @@ class AuraChat:
                 history=history,
                 profile=profile,
             )
+        cited_sources = filter_sources_by_citations(
+            retrieval_result["sources"],
+            retrieval_result.get("citation_map", {}),
+            answer,
+        )
         return {
-            "answer": answer,
-            "sources": filter_sources_by_citations(
-                retrieval_result["sources"],
-                retrieval_result.get("citation_map", {}),
-                answer,
-            ),
+            "answer": strip_sources_marker(answer),
+            "sources": cited_sources,
             "is_personal_data": False,
         }
