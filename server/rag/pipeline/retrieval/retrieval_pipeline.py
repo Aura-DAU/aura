@@ -393,6 +393,34 @@ class RetrievalPipeline:
         return active[0] if len(active) == 1 else {"$and": active}
 
     @staticmethod
+    def _normalize_allowed_roles(allowed_roles, user_role=None, identity=None):
+        if isinstance(allowed_roles, (list, tuple, set)):
+            normalized = []
+            for role in allowed_roles:
+                if not isinstance(role, str):
+                    break
+                trimmed = role.strip()
+                if not trimmed:
+                    break
+                normalized.append(trimmed)
+            else:
+                if normalized:
+                    return normalized
+
+        identity_tag = None
+        if identity is not None:
+            identity_tag = getattr(identity, "erpId", None) or getattr(identity, "email", None) or getattr(identity, "id", None) or repr(identity)
+
+        logger.warning(
+            "Retrieval authorization fallback triggered; falling back to ['public']. "
+            "user_role=%s original_allowed_roles=%r identity=%s",
+            user_role,
+            allowed_roles,
+            identity_tag,
+        )
+        return ["public"]
+
+    @staticmethod
     def _academic_scope_filter(academic_scope):
         if academic_scope is None:
             return None
@@ -608,7 +636,11 @@ class RetrievalPipeline:
         academic_scope=None,
         identity=None,
     ):
-        allowed_roles = get_allowed_roles(user_role)
+        allowed_roles = self._normalize_allowed_roles(
+            get_allowed_roles(user_role),
+            user_role=user_role,
+            identity=identity,
+        )
         original_query = query
 
         query_lower = query.lower()
@@ -1287,6 +1319,7 @@ class RetrievalPipeline:
         Semantic Path (Top 50 cosine similarity). Norms both pools using Min-Max and
         combines them with an equal 50/50 weighted sum.
         """
+        allowed_roles = self._normalize_allowed_roles(allowed_roles)
         # 1. Entity Path
         entities = plan.get("entities", {})
         entity_queries = []

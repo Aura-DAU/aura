@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 from unittest.mock import MagicMock, patch
+import pytest
 
 # Add rag directory to path so we can import from pipeline
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
@@ -70,6 +71,56 @@ def test_pipeline_get_context_applies_dls_filter_superadmin(
     allowed_roles = called_kwargs["filter"]["authorization"]["$in"]
     assert "superadmin" in allowed_roles
     assert "dean_academic" in allowed_roles
+
+
+@patch("pipeline.retrieval.query_rewriter.QueryRewriter", MagicMock)
+@patch("pipeline.retrieval.retrieval_pipeline.Reranker")
+@patch("pipeline.retrieval.retrieval_pipeline.QueryPlanner")
+@patch("pipeline.retrieval.retrieval_pipeline.Retriever")
+def test_pipeline_falls_back_to_public_on_none_allowed_roles(
+    mock_retriever_class, _mock_planner, _mock_reranker
+):
+    pipeline, mock_retriever = _build_mocked_pipeline(mock_retriever_class)
+
+    pipeline._retrieve_dual_path("what is the fee?", {"entities": {}}, allowed_roles=None, academic_scope=None)
+
+    mock_retriever.index.query.assert_called()
+    called_filter = mock_retriever.index.query.call_args.kwargs["filter"]
+    assert called_filter["authorization"]["$in"] == ["public"]
+
+
+@patch("pipeline.retrieval.query_rewriter.QueryRewriter", MagicMock)
+@patch("pipeline.retrieval.retrieval_pipeline.Reranker")
+@patch("pipeline.retrieval.retrieval_pipeline.QueryPlanner")
+@patch("pipeline.retrieval.retrieval_pipeline.Retriever")
+def test_pipeline_falls_back_to_public_on_empty_allowed_roles(
+    mock_retriever_class, _mock_planner, _mock_reranker
+):
+    pipeline, mock_retriever = _build_mocked_pipeline(mock_retriever_class)
+
+    pipeline._retrieve_dual_path("what is the fee?", {"entities": {}}, allowed_roles=[], academic_scope=None)
+
+    mock_retriever.index.query.assert_called()
+    called_filter = mock_retriever.index.query.call_args.kwargs["filter"]
+    assert called_filter["authorization"]["$in"] == ["public"]
+
+
+@patch("pipeline.retrieval.query_rewriter.QueryRewriter", MagicMock)
+@patch("pipeline.retrieval.retrieval_pipeline.Reranker")
+@patch("pipeline.retrieval.retrieval_pipeline.QueryPlanner")
+@patch("pipeline.retrieval.retrieval_pipeline.Retriever")
+def test_pipeline_falls_back_to_public_on_malformed_allowed_roles(
+    mock_retriever_class, _mock_planner, _mock_reranker, caplog
+):
+    pipeline, mock_retriever = _build_mocked_pipeline(mock_retriever_class)
+
+    with caplog.at_level("WARNING"):
+        pipeline._retrieve_dual_path("what is the fee?", {"entities": {}}, allowed_roles="public", academic_scope=None)
+
+    mock_retriever.index.query.assert_called()
+    called_filter = mock_retriever.index.query.call_args.kwargs["filter"]
+    assert called_filter["authorization"]["$in"] == ["public"]
+    assert "Retrieval authorization fallback triggered" in caplog.text
 
 
 @patch("pipeline.retrieval.query_rewriter.QueryRewriter", MagicMock)
