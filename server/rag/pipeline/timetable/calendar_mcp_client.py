@@ -5,10 +5,10 @@ Calendar MCP server (mcp_servers.gcal_server) to the agent orchestrator.
 Why MCP and not a direct import of timetable_sync: the calendar-sync capability
 is delivered *agentically* through the Model Context Protocol. The same
 gcal_server an external MCP host could launch over stdio is connected here
-in-process (the mcp SDK's in-memory transport), so the orchestrator drives the
-real MCP protocol -- tool discovery + call_tool -- instead of calling the
-calendar internals itself. This is the single, agentic path; the old native
-sync_timetable_to_google_calendar tool has been removed.
+in-process through the MCP SDK's FastMCP surface, so the orchestrator drives
+tool discovery + call_tool instead of calling the calendar internals itself.
+This is the single, agentic path; the old native sync_timetable_to_google_calendar
+tool has been removed.
 
 Trust boundary (the one property the in-app JWT path gets for free): every
 gcal_server tool takes `erp_id` and TRUSTS it. The model must never choose
@@ -17,10 +17,10 @@ whose calendar to write to. This adapter therefore
   2. injects it from the verified identity at dispatch time,
 discarding any erp_id the model tried to supply.
 
-Bridging: the mcp client is async; the orchestrator is synchronous. Calendar
-calls are infrequent (a student explicitly syncing), so each call runs on a
-short-lived worker thread with its own event loop rather than sharing a loop or
-a long-lived server session across threads.
+Bridging: FastMCP tool calls are async; the orchestrator is synchronous.
+Calendar calls are infrequent (a student explicitly syncing), so each call runs
+on a short-lived worker thread with its own event loop rather than sharing a
+loop or a long-lived server session across threads.
 """
 
 from __future__ import annotations
@@ -30,8 +30,6 @@ import json
 import logging
 import threading
 from typing import Any, Awaitable, Callable
-
-from mcp import Client
 
 from mcp_servers import gcal_server
 
@@ -76,13 +74,11 @@ def _run(make_coro: Callable[[], Awaitable[Any]]) -> Any:
 
 
 async def _list_mcp_tools() -> list[Any]:
-    async with Client(gcal_server.mcp) as client:
-        return (await client.list_tools()).tools
+    return await gcal_server.mcp.list_tools()
 
 
 async def _call_mcp_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
-    async with Client(gcal_server.mcp) as client:
-        result = await client.call_tool(name, arguments)
+    result = await gcal_server.mcp.call_tool(name, arguments)
     return _parse_result(name, result)
 
 
@@ -91,12 +87,22 @@ def _parse_result(name: str, result: Any) -> dict[str, Any]:
     text block (structured_content stays None because the tools aren't declared
     with structured output). Prefer structured_content if a future version sets
     it, else parse the text block."""
+    if isinstance(result, dict):
+        return result
+
     structured = getattr(result, "structured_content", None)
     if isinstance(structured, dict):
         return structured
 
-    text = result.content[0].text if getattr(result, "content", None) else ""
+    content = getattr(result, "content", None)
+    if content is None and isinstance(result, list):
+        content = result
+
+    text = getattr(content[0], "text", "") if content else ""
     if getattr(result, "is_error", False):
+        # The orchestrator phrases {"error": ...} as a generic "try again"
+        # message, so this log line is the only place the real cause surfaces.
+        logger.error("Google Calendar MCP tool %s failed: %s", name, text)
         return {"error": text or f"MCP tool {name} failed."}
     try:
         return json.loads(text)
@@ -145,7 +151,9 @@ def _build_tools() -> list[Tool]:
         Tool(
             name=t.name,
             description=t.description or "",
-            parameters=_public_schema(getattr(t, "input_schema", None)),
+            parameters=_public_schema(
+                getattr(t, "input_schema", None) or getattr(t, "inputSchema", None)
+            ),
             category="write" if t.name in _WRITE_TOOLS else "read",
             allowed_roles=list(_ALLOWED_ROLES),
             handler=_make_handler(t.name),

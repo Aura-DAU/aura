@@ -51,7 +51,10 @@ function MessageListInner({
     <div ref={containerRef} className="mx-auto w-full max-w-3xl space-y-6 px-4 py-6">
       {messages.map((message, index) => {
         const isStreaming =
-          loading && index === lastAssistantIndex && message.role === "assistant"
+          loading &&
+          index === lastAssistantIndex &&
+          message.role === "assistant" &&
+          index === messages.length - 1
         return (
           <Message
             key={`${message.timestamp ?? index}-${message.role}-${index}`}

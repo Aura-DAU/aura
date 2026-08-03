@@ -4,7 +4,8 @@ url: "https://intranet.daiict.ac.in/~daiict_nt01/Academic/Courses/Courses_Files_
 category: "Academics"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
----# CT502 ADAPTIVE SIGNAL PROCESSING Winter24 - Rajib Das
+---
+# CT502 ADAPTIVE SIGNAL PROCESSING Winter24 - Rajib Das
 
 **Last Modified:** 2023-12-19
 

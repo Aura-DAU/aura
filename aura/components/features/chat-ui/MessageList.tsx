@@ -74,7 +74,10 @@ export function MessageList({
         ) : null}
         {messages.map((message, index) => {
           const isStreaming =
-            loading && index === lastAssistantIndex && message.role === "assistant"
+            loading &&
+            index === lastAssistantIndex &&
+            message.role === "assistant" &&
+            index === messages.length - 1
           const isLatestAssistant =
             message.role === "assistant" && index === lastAssistantIndex && !loading
           return (
@@ -83,7 +86,10 @@ export function MessageList({
               message={message}
               isStreaming={isStreaming}
               showActions={isLatestAssistant}
-              citations={index === lastAssistantIndex ? activeCitations : undefined}
+              citations={
+                message.citations ??
+                (index === lastAssistantIndex ? activeCitations : undefined)
+              }
               onRegenerate={isLatestAssistant ? onRegenerate : undefined}
               onCalendarSyncConfirm={
                 !loading && index === messages.length - 1

@@ -33,6 +33,7 @@ from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
     log_soft_failure,
+    strip_sources_marker,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
@@ -178,6 +179,7 @@ class AuraState(TypedDict, total=False):
     academic_scope: Any
     display_profile: Any
     on_delta: Any  # token-streaming callback, threaded straight to the generator
+    on_profile_update: Any  # name extraction callback
     summary: Optional[str]  # rolling conversation memory (pipeline.memory)
 
     query_type: Optional[str]
@@ -603,13 +605,23 @@ class AuraChatGraph:
         # via _required_calendar_tool. The prompt keeps the "remove ... Google
         # Calendar ... proceed" phrasing that the confirmation gate keys on.
         if is_unsync_intent and not required_calendar_tool:
+            unsync_prompt = (
+                "This will remove the timetable events AURA added to your "
+                "Google Calendar. Confirm to proceed and I'll clear them."
+            )
             state["result"] = {
-                "answer": (
-                    "This will remove the timetable events AURA added to your "
-                    "Google Calendar. Confirm to proceed and I'll clear them."
-                ),
+                "answer": unsync_prompt,
                 "sources": [],
                 "is_personal_data": True,
+                # Inline Confirm button (same channel as connect_required). The
+                # click sends "confirm" as a normal chat message, so the regex
+                # confirmation gate above stays the single write authorizer.
+                "action_required": {
+                    "type": "confirmation_required",
+                    "provider": "google_calendar",
+                    "action": "unsync_timetable",
+                    "message": unsync_prompt,
+                },
             }
             return state
 
@@ -909,13 +921,19 @@ class AuraChatGraph:
             effective_sources = state["last_rag_sources"]
             effective_citation_map = state.get("last_rag_citation_map", {})
 
+        cited_sources = filter_sources_by_citations(
+            effective_sources,
+            effective_citation_map,
+            answer,
+        )
+
         state["result"] = {
-            "answer": answer,
-            "sources": filter_sources_by_citations(
-                effective_sources,
-                effective_citation_map,
-                answer,
-            ),
+            # Extract citations from `answer` (above) BEFORE stripping the
+            # "[Sources: N, M]" marker — the marker is internal bookkeeping,
+            # never meant to reach the user as literal text. Sources render
+            # as citation pills from the `sources` field, not raw brackets.
+            "answer": strip_sources_marker(answer),
+            "sources": cited_sources,
             "is_personal_data": is_personal,
         }
         return state

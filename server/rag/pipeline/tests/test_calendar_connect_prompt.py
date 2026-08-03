@@ -152,6 +152,35 @@ def test_confirmation_runs_the_sync_and_carries_no_connect_action(monkeypatch):
     assert "action_required" not in result
 
 
+def test_preview_confirmation_surfaces_structured_confirm_action(monkeypatch):
+    # A preview awaiting the student's go-ahead carries a structured
+    # confirmation_required action (rendered as an inline Confirm button),
+    # not just prose the student must answer by typing "confirm".
+    monkeypatch.setattr(
+        timetable_sync, "preview",
+        lambda identity, **k: {"status": "confirmation_required", "class_count": 12},
+    )
+    orch = _orch_with_llm(
+        monkeypatch,
+        _msg(tool_calls=[_FakeToolCall("preview_timetable_sync")]),
+        follow_up=(
+            "This will create or update 12 recurring weekly events on your "
+            "Google Calendar. Confirm to proceed."
+        ),
+    )
+    result = orch.run(
+        query="show me what that would do first",
+        identity={"role": "student", "erp_id": "S1"},
+        tool_scope="personal_actions",
+    )
+    assert result["used_tools"] is True
+    action = result["action_required"]
+    assert action["type"] == "confirmation_required"
+    assert action["provider"] == "google_calendar"
+    assert action["action"] == "sync_timetable"
+    assert action["event_count"] == 12
+
+
 def test_no_tool_call_sets_used_tools_false(monkeypatch):
     # A non-calendar query has no decided tool, so it falls to the model path;
     # a model that emits no tool call yields used_tools False (curated fallback).

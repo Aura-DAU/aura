@@ -38,6 +38,7 @@ from metadata_extractors import (
     extract_research_domain,
     extract_program_list_category,
 )
+from program_names import canonicalize_program_value
 
 logger = logging.getLogger(__name__)
 
@@ -751,10 +752,13 @@ def process_markdown_file(file_path):
     body_programs = _extract_program_name_from_text(body)
     inferred_program = extract_program_name(metadata, cluster, subclusters)
     
+    # Canonicalize at each precedence level independently: a frontmatter value
+    # that canonicalizes to nothing must fall through to body text, not win
+    # the precedence race with a value retrieval can never filter on.
     effective_program_name = (
-        _normalize_metadata_value(fm_program) or
-        _normalize_metadata_value(body_programs) or
-        inferred_program
+        canonicalize_program_value(_normalize_metadata_value(fm_program)) or
+        canonicalize_program_value(_normalize_metadata_value(body_programs)) or
+        canonicalize_program_value(inferred_program)
     )
 
     # 2. Semester Precedence: Frontmatter (Highest) -> Metadata -> None

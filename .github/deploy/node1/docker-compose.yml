@@ -130,6 +130,9 @@ services:
       GOOGLE_CALENDAR_REDIRECT_URI: ${GOOGLE_CALENDAR_REDIRECT_URI:-https://aura.dau.ac.in/backend/calendar/callback}
       GOOGLE_CALENDAR_VAULT_KEY: ${GOOGLE_CALENDAR_VAULT_KEY}
       GOOGLE_CALENDAR_VAULT_DB: /var/lib/aura/google_calendar_vault.db
+      # Last day of the semester (YYYY-MM-DD); bounds the recurring timetable
+      # events. Read at import in writer.py — timetable sync fails without it.
+      GOOGLE_CALENDAR_SEMESTER_END: ${GOOGLE_CALENDAR_SEMESTER_END}
       ECAMPUS_VAULT_KEY: ${ECAMPUS_VAULT_KEY}
       ECAMPUS_VAULT_DB: /var/lib/aura/ecampus_credentials.db
       ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db

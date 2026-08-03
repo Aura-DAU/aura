@@ -166,7 +166,7 @@ export default function ConnectEcampusPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-theme-black text-neutral-100 flex flex-col justify-between py-10 px-4">
+    <div className="relative min-h-screen bg-theme-black text-neutral-100 flex flex-col justify-between py-10 px-4 sm:px-6 lg:px-8">
       {/* Background layout decoration */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:24px_24px]" />
@@ -174,7 +174,7 @@ export default function ConnectEcampusPage() {
         <div className="absolute -bottom-32 -right-32 size-96 rounded-full bg-theme-yellow/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 w-full max-w-xl mx-auto flex-1 flex flex-col justify-center">
+      <div className="relative z-10 mx-auto w-full max-w-xl md:max-w-2xl lg:max-w-3xl flex-1 flex flex-col justify-center">
         {/* Navigation Bar */}
         <div className="mb-6 flex justify-between items-center">
           <Link
@@ -188,11 +188,11 @@ export default function ConnectEcampusPage() {
 
         {/* Header Section */}
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-100 flex items-center gap-2.5">
-            <KeyRound className="text-theme-red size-7" />
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-100 flex items-center gap-2.5">
+            <KeyRound className="text-theme-yellow size-7 sm:size-8" />
             Connect eCampus Account
           </h1>
-          <p className="text-neutral-400 mt-2 text-sm leading-relaxed">
+          <p className="text-neutral-400 mt-2 text-sm sm:text-base leading-relaxed">
             AURA needs to fetch your academic snapshot, timetable, and exam eligibility from the eCampus portal on your behalf.
           </p>
         </div>
