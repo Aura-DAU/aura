@@ -861,7 +861,7 @@ class AuraChatGraph:
         # already finalised the answer, enforce zero sources and return.
         # Without this, sources accumulated by a prior _n_community_tools run
         # persist in state and bleed into the guardrail reply (graph state bleed).
-        if state.get("is_guardrail") or state.get("result", {}).get("is_guardrail"):
+        if state.get("is_guardrail") or (state.get("result") or {}).get("is_guardrail"):
             if state.get("result") is not None:
                 state["result"]["sources"] = []
             return state
