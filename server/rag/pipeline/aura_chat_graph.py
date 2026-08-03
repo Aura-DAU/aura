@@ -916,7 +916,7 @@ class AuraChatGraph:
         # in Turn 1 and references the same content in Turn 3, the citation card
         # for document X should still appear.
         effective_sources = state.get("sources", [])
-        effective_citation_map = retrieval_result.get("citation_map", {})
+        effective_citation_map = (retrieval_result or {}).get("citation_map", {})
         if not effective_sources and state.get("last_rag_sources"):
             effective_sources = state["last_rag_sources"]
             effective_citation_map = state.get("last_rag_citation_map", {})
