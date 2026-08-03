@@ -507,12 +507,6 @@ class EcampusOrchestrator:
                     args = json.loads(call.function.arguments or "{}")
                 except json.JSONDecodeError:
                     args = {}
-
-                if call.function.name in ("update_my_timetable", "save_my_elective_selections", "set_my_cohort"):
-                    args.pop("confirm", None)  # Strip out any hallucinated confirmation
-                    if _is_timetable_edit_confirmation(query, history):
-                        args["confirm"] = True
-
                 try:
                     result = tool.handler(identity, request_context=request_context, **args)
                 except TypeError as exc:

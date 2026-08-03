@@ -40,11 +40,7 @@ def norm_time(t):
     t = (t or "").strip()
     p = t.split(":")
     if len(p) == 2:
-        hr = int(p[0])
-        # Classes between 1:00 and 7:59 are PM classes; convert to 24-hour time
-        if 1 <= hr <= 7:
-            hr += 12
-        return "{:02d}:{}".format(hr, p[1].zfill(2))
+        return "{:02d}:{}".format(int(p[0]), p[1].zfill(2))
     return t
 
 

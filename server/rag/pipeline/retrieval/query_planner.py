@@ -250,27 +250,6 @@ Output
   "retrieval_hints":{}
 }
 
-Alumni profile lookup
-
-Query
-
-Where is our alumnus Bharath Reddy working now?
-
-Output
-
-{
-  "category":"alumni",
-  "intent":"overview",
-  "retrieval_intent":"alumni_profile",
-  "entity_confidence":0.95,
-  "multi_entity_query":false,
-  "entities":{
-    "alumni_name":"Bharath Reddy"
-  },
-  "query_decomposition":null,
-  "retrieval_hints":{}
-}
-
 Multiple programs
 
 Query
@@ -975,52 +954,6 @@ ROMAN_SEMESTER_MAP = {
     5: "V", 6: "VI", 7: "VII", 8: "VIII"
 }
 
-# Issue 3 fix (Course Code <-> Title Resolution): the timetable data is
-# strictly keyed by course_code (see server/rag/pipeline/timetable/service.py),
-# but users ask timetable questions using the informal course *name*
-# ("Machine Learning") rather than the code ("IT608"). Left unresolved, the
-# course_name entity never matches timetable rows and the query fails.
-#
-# Built from the official course catalog (data/academics/course_catalog_v2.md)
-# so codes are never guessed -- only names the catalog itself binds to a code
-# are included here.
-COURSE_NAME_TO_CODE = {
-    "introduction to programming": ["IT112", "IT603"],
-    "data structures and algorithms": ["IT205", "IT623"],
-    "data structures": ["IT205", "IT623"],
-    "design and analysis of algorithms": ["IT216"],
-}
-
-
-def resolve_course_name_to_code(query: str, entities: dict) -> dict:
-    """Resolve an informal course_name entity ('Data Structures') to its exact
-    course_code(s) via COURSE_NAME_TO_CODE, so timetable lookups keyed by code
-    don't fail on natural-language course names. Never overrides a course_code
-    the planner already extracted."""
-    if not entities or entities.get("course_code"):
-        return entities
-
-    course_name = entities.get("course_name")
-    candidates = []
-    if isinstance(course_name, list):
-        candidates.extend(c for c in course_name if c)
-    elif course_name:
-        candidates.append(course_name)
-    if not candidates and query:
-        candidates.append(query)
-
-    for candidate in candidates:
-        cand_lower = str(candidate).strip().lower()
-        if not cand_lower:
-            continue
-        for name, codes in COURSE_NAME_TO_CODE.items():
-            if name in cand_lower or cand_lower in name:
-                entities["course_code"] = codes if len(codes) > 1 else codes[0]
-                return entities
-
-    return entities
-
-
 def canonicalize_informal_semester(query: str, entities: dict) -> dict:
     """Parse informal semester references ('sem V', 'sem 5', '5th sem', 'fifth sem', 'semester 5') into integer (1..8) & section titles."""
     if not query:
@@ -1207,9 +1140,6 @@ class QueryPlanner:
             plan = json.loads(content)
             plan.setdefault("entities", {})
             canonicalize_informal_semester(query, plan["entities"])
-            # Issue 3 fix: translate informal course names to their exact
-            # course_code(s) before retrieval/timetable lookups run.
-            resolve_course_name_to_code(query, plan["entities"])
             plan.setdefault("retrieval_hints", {})
             plan.setdefault("top_k", 5)
             plan.setdefault(
