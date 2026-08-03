@@ -555,13 +555,23 @@ class AuraChatGraph:
         # via _required_calendar_tool. The prompt keeps the "remove ... Google
         # Calendar ... proceed" phrasing that the confirmation gate keys on.
         if is_unsync_intent and not required_calendar_tool:
+            unsync_prompt = (
+                "This will remove the timetable events AURA added to your "
+                "Google Calendar. Confirm to proceed and I'll clear them."
+            )
             state["result"] = {
-                "answer": (
-                    "This will remove the timetable events AURA added to your "
-                    "Google Calendar. Confirm to proceed and I'll clear them."
-                ),
+                "answer": unsync_prompt,
                 "sources": [],
                 "is_personal_data": True,
+                # Inline Confirm button (same channel as connect_required). The
+                # click sends "confirm" as a normal chat message, so the regex
+                # confirmation gate above stays the single write authorizer.
+                "action_required": {
+                    "type": "confirmation_required",
+                    "provider": "google_calendar",
+                    "action": "unsync_timetable",
+                    "message": unsync_prompt,
+                },
             }
             return state
 

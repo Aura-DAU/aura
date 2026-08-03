@@ -8,6 +8,7 @@ RAG pipeline in aura_chat_graph.
 
 import os
 import json
+import logging
 import re
 from typing import Optional
 from dotenv import load_dotenv
@@ -29,6 +30,8 @@ from ..timetable.calendar_mcp_client import (
     calendar_mcp_tools_for_role as _calendar_mcp_tools_for_role,
     calendar_mcp_registry as _calendar_mcp_registry,
 )
+
+logger = logging.getLogger(__name__)
 
 # Merged view used by this orchestrator. Kept as two separate source-of-truth
 # registries (pipeline.ecampus.tool_registry stays strictly read-only against
@@ -118,6 +121,29 @@ def _connect_action_required(tool_results: list[dict]) -> dict | None:
                     or "Connect your Google Calendar to add your timetable to your schedule."
                 ),
             }
+    return None
+
+
+def _confirmation_action_required(tool_results: list[dict]) -> dict | None:
+    """When a calendar tool returned a preview that awaits the student's
+    go-ahead (status "confirmation_required"), return a structured confirmation
+    prompt for the client to render as an inline Confirm button — the same
+    pattern as _connect_action_required. The click still travels back as a
+    normal "confirm" chat message, so the confirmation regex gate
+    (_CONFIRMATION_RE / _CALENDAR_CONFIRMATION_CONTEXT_RE) is untouched.
+    None when nothing awaits confirmation."""
+    for r in tool_results:
+        if isinstance(r, dict) and r.get("status") == "confirmation_required":
+            action: dict = {
+                "type": "confirmation_required",
+                "provider": "google_calendar",
+                "action": "sync_timetable",
+                "message": _phrase_calendar_result("preview_timetable_sync", r),
+            }
+            count = r.get("class_count")
+            if isinstance(count, int):
+                action["event_count"] = count
+            return action
     return None
 
 
@@ -513,7 +539,9 @@ class EcampusOrchestrator:
             "sources": [],
             "used_tools": True,
         }
-        action_required = _connect_action_required(tool_results)
+        action_required = _connect_action_required(
+            tool_results
+        ) or _confirmation_action_required(tool_results)
         if action_required:
             out["action_required"] = action_required
         return out
@@ -536,16 +564,23 @@ class EcampusOrchestrator:
         try:
             result = tool.handler(identity)
         except Exception as e:  # noqa: BLE001 -- surfaced as a soft calendar error
+            logger.exception("Calendar MCP tool %s raised", tool_name)
             result = {"error": str(e)}
         if not isinstance(result, dict):
             result = {}
+        if "error" in result:
+            # _phrase_calendar_result turns this into a generic "try again"
+            # answer; keep the real cause visible in server logs.
+            logger.error("Calendar MCP tool %s errored: %s", tool_name, result["error"])
 
         out: dict = {
             "answer": _phrase_calendar_result(tool_name, result),
             "sources": [],
             "used_tools": True,
         }
-        action_required = _connect_action_required([result])
+        action_required = _connect_action_required(
+            [result]
+        ) or _confirmation_action_required([result])
         if action_required:
             out["action_required"] = action_required
         return out

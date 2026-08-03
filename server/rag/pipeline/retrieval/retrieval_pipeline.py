@@ -405,13 +405,18 @@ class RetrievalPipeline:
                 {"admission_year_to": {"$gte": academic_scope.admission_year}},
             ]
         }
-        # Course-policy documents are keyed by course_code, not by
-        # programme_id/degree_level/admission_year (they never populate those
-        # fields — the same course is often shared across programmes). They
-        # need their own clause instead of being forced through the
-        # programme/curriculum clause above, which they can never satisfy.
+        # Course documents (structure, catalog, per-course policy) are public
+        # course-catalog information: a signed-in student may look up any
+        # course, exactly as a signed-out guest can, so they are admitted
+        # unconditionally rather than gated by registered_course_codes. They
+        # are keyed by course_code, not by programme_id/degree_level/
+        # admission_year (they never populate those fields — the same course is
+        # often shared across programmes), so they need their own clause
+        # instead of being forced through the programme/curriculum clause
+        # above, which they can never satisfy.
         or_clauses = [
             {"applicability_scope": {"$eq": "global"}},
+            {"applicability_scope": {"$eq": "course"}},
             scoped,
         ]
         if academic_scope.registered_course_codes:
@@ -421,6 +426,12 @@ class RetrievalPipeline:
                     {"course_code": {"$in": list(academic_scope.registered_course_codes)}},
                 ]
             })
+        else:
+            # Enrollment is not populated by the identity-derived scope and an
+            # empty snapshot is not yet authoritative. Temporarily admit
+            # course-scoped candidates; the separately combined authorization
+            # filter still enforces RBAC.
+            or_clauses.append({"applicability_scope": {"$eq": "course"}})
         # A missing branch on a document means programme-wide applicability;
         # branch equality is enforced by the post-retrieval predicate when a
         # document declares one, without excluding those programme-wide docs.
@@ -660,28 +671,36 @@ class RetrievalPipeline:
         # Submit the planning LLM call to executor
         future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
 
-        # Submit the speculative retrieval call to executor. Speculative retrieval
-        # runs the semester-expanded query with an empty plan ({}) which results
-        # in a standard semantic search.
+        # Scope-derived programme names are soft retrieval signals. Keeping them
+        # separate from planner entities lets the entity path use them without
+        # turning them into a semantic metadata filter or disabling speculation.
+        scope_entities = {}
+        if academic_scope and getattr(academic_scope, "programme_id", None):
+            inferred_progs = self._scope_program_names(academic_scope)
+            if inferred_progs:
+                scope_entities["program_name"] = (
+                    inferred_progs[0] if len(inferred_progs) == 1 else inferred_progs
+                )
+
+        # Submit the speculative retrieval call to executor. It runs the
+        # semester-expanded query without query entities, while retaining the
+        # student's programme only as a soft entity-path signal.
         query_speculative = self._expand_semesters(query)
         future_speculative = self.executor.submit(
-            self._retrieve_dual_path, query_speculative, {}, allowed_roles, academic_scope
+            self._retrieve_dual_path,
+            query_speculative,
+            {"scope_entities": scope_entities},
+            allowed_roles,
+            academic_scope,
         )
 
         plan = future_plan.result()
 
-        # Infer user program from academic_scope if available and not present in plan entities
-        if academic_scope and getattr(academic_scope, "programme_id", None):
-            entities = plan.setdefault("entities", {})
-            if not entities.get("program_name"):
-                inferred_progs = self._scope_program_names(academic_scope)
-                if inferred_progs:
-                    entities["program_name"] = (
-                        inferred_progs[0] if len(inferred_progs) == 1 else inferred_progs
-                    )
+        entities = plan.setdefault("entities", {})
+        if scope_entities and not entities.get("program_name"):
+            plan["scope_entities"] = scope_entities
 
         # Check if the plan contains anything that modifies retrieval or query
-        entities = plan.get("entities", {})
         has_entities = any(entities.get(k) for k in [
             "faculty_name", "event_name", "program_name", "department_name", 
             "scholarship_name", "course_code", "course_name", "semester", "rule_year"
@@ -1008,13 +1027,31 @@ class RetrievalPipeline:
         # (before dedup). Collapsed into a single unconditional block so
         # entity retrieval runs exactly once for all query types.
         if self.entity_retriever:
+            soft_entities = dict(plan.get("scope_entities") or {})
+            soft_entities.update(entities)
             entity_chunks = (
                 self.entity_retriever.retrieve_by_entities(
-                    entities,
+                    soft_entities,
                     allowed_roles=allowed_roles,
                     academic_scope=academic_scope,
                 )
             )
+
+            print("\n" + "=" * 80)
+            print(f"ENTITY RETRIEVER RETURNED {len(entity_chunks)} CHUNKS")
+
+            for idx, chunk in enumerate(entity_chunks[:20], start=1):
+                meta = chunk.get("metadata", {})
+
+                print(f"{idx:02d}.")
+                print(f"Title      : {meta.get('title', 'N/A')}")
+                print(f"Course Code: {meta.get('course_code', 'N/A')}")
+                print(f"Program    : {meta.get('program_name', 'N/A')}")
+                print(f"H1         : {meta.get('h1', 'N/A')}")
+                print("-" * 60)
+
+            print("=" * 80)
+
             if entity_chunks:
                 logger.debug(
                     "Entity retriever added %d candidate chunks to pool.",
@@ -1033,6 +1070,78 @@ class RetrievalPipeline:
 
         results = self._eligible_results(deduped, academic_scope)
 
+        # Diagnostic 4: Verify whether IE402 course policy exists anywhere in retrieval pool
+        found_ie402 = []
+        for cand in results:
+            meta = cand.get("metadata", {}) if isinstance(cand, dict) else {}
+            sf = str(meta.get("source_file") or meta.get("path") or meta.get("file") or "")
+            t_val = str(meta.get("title") or "")
+            h1_val = str(meta.get("h1") or "")
+            if "IE402" in sf.upper() or "IE402" in t_val.upper() or "IE402" in h1_val.upper():
+                found_ie402.append((cand, sf, t_val, h1_val))
+
+        print("\n" + "=" * 80)
+        if found_ie402:
+            print("FOUND COURSE DOCUMENT:")
+            for cand, sf, t_val, h1_val in found_ie402:
+                meta = cand.get("metadata", {})
+                print(f"ID          : {cand.get('id')}")
+                print(f"Title       : {meta.get('title', 'N/A')}")
+                print(f"Source File : {meta.get('source_file') or meta.get('path') or meta.get('file')}")
+                print(f"H1          : {meta.get('h1', 'N/A')}")
+                print(f"Course Code : {meta.get('course_code', 'N/A')}")
+                print(f"Program     : {meta.get('program_name', 'N/A')}")
+                print(f"Chunk Index : {meta.get('chunk_index', 'N/A')}")
+                print("-" * 60)
+        else:
+            print("NO IE402 COURSE DOCUMENT FOUND IN RETRIEVAL POOL")
+        print("=" * 80 + "\n")
+
+        # Diagnostic 5: Log retrieval pool composition grouped by source file
+        counts = {}
+        for cand in results:
+            meta = cand.get("metadata", {}) if isinstance(cand, dict) else {}
+            sf = meta.get("source_file") or meta.get("path") or meta.get("file") or "Unknown"
+            sf_name = os.path.basename(str(sf))
+            counts[sf_name] = counts.get(sf_name, 0) + 1
+
+        if "IE402.md" not in counts:
+            counts["IE402.md"] = 0
+
+        print("\n" + "=" * 80)
+        print("RETRIEVAL POOL COMPOSITION BY SOURCE FILE")
+        for src, count in sorted(counts.items(), key=lambda x: x[1], reverse=True):
+            print(f"{src} : {count} chunks")
+        print("=" * 80 + "\n")
+
+        def _log_candidates(title_header, candidates):
+            print("\n" + "=" * 80)
+            print(title_header)
+            print()
+            top20 = candidates[:20] if candidates else []
+            for idx, item in enumerate(top20, start=1):
+                meta = item.get("metadata", {}) if isinstance(item, dict) else {}
+                cc = meta.get("course_code") or "N/A"
+                t_val = meta.get("title") or "N/A"
+                h1_val = meta.get("h1") or "N/A"
+                s_val = item.get("fusion_score")
+                if s_val is None:
+                    s_val = item.get("rerank_score")
+                if s_val is None:
+                    s_val = item.get("score")
+                if s_val is None:
+                    s_val = item.get("cosine_score")
+                if s_val is None:
+                    s_val = 0.0
+                print(f"{idx:02d}. Course: {cc}")
+                print(f"    Title: {t_val}")
+                print(f"    H1: {h1_val}")
+                print(f"    Score: {float(s_val):.4f}")
+                print()
+            print("=" * 80)
+
+        _log_candidates("RETRIEVAL RESULTS BEFORE RERANK", results)
+
         if decomposed_queries:
             # Fix A: run a final joint cross-encoder rerank over the merged
             # pool using the original user query (not a sub-query string).
@@ -1046,6 +1155,7 @@ class RetrievalPipeline:
                     plan=plan
                 )
             )
+            _log_candidates("FINAL RERANK", reranked)
 
         else:
             # ── TWO-STAGE RERANKING ──
@@ -1055,6 +1165,7 @@ class RetrievalPipeline:
                 results=results,
                 plan=plan
             )
+            _log_candidates("AFTER STAGE-1 RERANK", stage1_reranked)
             
             # Select top 12 candidates
             top_candidates = stage1_reranked[:12]
@@ -1071,6 +1182,7 @@ class RetrievalPipeline:
                 results=expanded_candidates,
                 plan=plan
             )
+            _log_candidates("FINAL RERANK", reranked)
 
         # Fix TK1: previously capped at min(plan["top_k"], 5) which destroyed
         # the multi-entity boost (num_entities*3 was always clamped back to 5).
@@ -1194,7 +1306,8 @@ class RetrievalPipeline:
         combines them with an equal 50/50 weighted sum.
         """
         # 1. Entity Path
-        entities = plan.get("entities", {})
+        entities = dict(plan.get("scope_entities") or {})
+        entities.update(plan.get("entities", {}))
         entity_queries = []
         for entity_type, entity_val in entities.items():
             if not entity_val:
@@ -1253,11 +1366,60 @@ class RetrievalPipeline:
                     }
                 entity_pool[chunk_id]["rrf_score"] += 1.0 / (60.0 + rank)
 
+        # Full-query lexical (BM25) pass. The per-entity loop above only runs
+        # BM25 for planner-extracted entities, so a query that carries strong
+        # keyword signal but yields no high-confidence entity (e.g. "what are
+        # the hostel rules", "course policy of EL470") reached this pool empty
+        # and fusion collapsed to pure dense search — which buries the exact
+        # document under near-duplicate chunks. Running BM25 on the raw query
+        # and folding it into the same RRF pool restores the lexical half of
+        # hybrid retrieval for every query, not just entity queries. The same
+        # authorization + academic-scope filter is applied so role/scope
+        # gating is never bypassed.
+        if getattr(self.retriever, "bm25", None):
+            lexical_filter = self._combine_filters(
+                {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                self._academic_scope_filter(academic_scope),
+            )
+            lexical_results = self.retriever.bm25.retrieve(
+                query=query,
+                top_k=20,
+                metadata_filter=lexical_filter,
+                allowed_roles=allowed_roles,
+            )
+            for rank, res in enumerate(lexical_results, start=1):
+                chunk_id = res["id"]
+                if chunk_id not in entity_pool:
+                    entity_pool[chunk_id] = {
+                        "chunk": res,
+                        "rrf_score": 0.0
+                    }
+                entity_pool[chunk_id]["rrf_score"] += 1.0 / (60.0 + rank)
+
         entity_list = []
         for chunk_id, info in entity_pool.items():
             chunk_item = dict(info["chunk"])
             chunk_item["entity_score"] = info["rrf_score"]
             entity_list.append(chunk_item)
+
+        # Diagnostic 2: Log raw BM25 / Entity results
+        print("\n" + "=" * 80)
+        print("===== RAW BM25 / ENTITY RESULTS (TOP 20) =====")
+        if not entity_list:
+            print("BM25 returned 0 documents.")
+        else:
+            for idx, item in enumerate(entity_list[:20], start=1):
+                meta = item.get("metadata", {})
+                src_file = meta.get("source_file") or meta.get("path") or meta.get("file") or "N/A"
+                print(f"{idx:02d}. ID         : {item.get('id')}")
+                print(f"    Score      : {item.get('entity_score', 0.0):.4f}")
+                print(f"    Title      : {meta.get('title', 'N/A')}")
+                print(f"    Source File: {src_file}")
+                print(f"    H1         : {meta.get('h1', 'N/A')}")
+                print(f"    Course Code: {meta.get('course_code', 'N/A')}")
+                print(f"    Program    : {meta.get('program_name', 'N/A')}")
+                print("-" * 40)
+        print("=" * 80)
 
         # Min-Max normalize entity path scores
         if entity_list:
@@ -1314,7 +1476,31 @@ class RetrievalPipeline:
                     include_metadata=True,
                     filter=semantic_filter
                 )
-                for match in results.get("matches", []):
+                matches = list(results.get("matches", []))
+                useful_matches = self._eligible_results(
+                    [{"metadata": match.get("metadata", {})} for match in matches],
+                    academic_scope,
+                )
+                minimum_useful = min(max(int(plan.get("top_k", 5)), 1), 5)
+                if entity_filter and len(useful_matches) < minimum_useful:
+                    fallback_filter = self._combine_filters(
+                        {"authorization": {"$in": allowed_roles}} if allowed_roles else None,
+                        self._academic_scope_filter(academic_scope),
+                    )
+                    fallback_results = self.retriever.index.query(
+                        vector=query_embedding,
+                        top_k=50,
+                        include_metadata=True,
+                        filter=fallback_filter,
+                    )
+                    seen_match_ids = {match.get("id") for match in matches}
+                    matches.extend(
+                        match
+                        for match in fallback_results.get("matches", [])
+                        if match.get("id") not in seen_match_ids
+                    )
+
+                for match in matches:
                     semantic_list.append({
                         "id": match["id"],
                         "score": match["score"],
@@ -1333,6 +1519,12 @@ class RetrievalPipeline:
             val_range = max_val - min_val
             for c in semantic_list:
                 c["normalized_score"] = (c["semantic_score"] - min_val) / val_range if val_range > 0 else 1.0
+
+        # Diagnostic 3 (Part A): Log RRF inputs before fusion
+        print("\n" + "=" * 80)
+        print(f"Dense candidates: {len(semantic_list)}")
+        print(f"BM25 candidates: {len(entity_list)}")
+        print("=" * 80)
 
         # 3. Global 50/50 Fusion
         # Fix RP2 (cont.): cosine_score is tracked through the fused pool
@@ -1375,6 +1567,11 @@ class RetrievalPipeline:
                 "fusion_score": final_score
             }
             final_candidates.append(cand)
+
+        # Diagnostic 3 (Part B): Log RRF candidates after fusion
+        print("\n" + "=" * 80)
+        print(f"Merged candidates: {len(final_candidates)}")
+        print("=" * 80 + "\n")
 
         # Sort candidates by final fusion score descending
         final_candidates.sort(key=lambda x: x["fusion_score"], reverse=True)

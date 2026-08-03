@@ -943,6 +943,7 @@ export function useAuraChat() {
             content: assistantText,
             is_personal_data: isPersonalData || undefined,
             calendar_action: calendarAction,
+            citations: citations.length > 0 ? citations : undefined,
           },
         ]
         setMessages(finalMessages)

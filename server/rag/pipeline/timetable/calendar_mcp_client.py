@@ -97,6 +97,9 @@ def _parse_result(name: str, result: Any) -> dict[str, Any]:
 
     text = result.content[0].text if getattr(result, "content", None) else ""
     if getattr(result, "is_error", False):
+        # The orchestrator phrases {"error": ...} as a generic "try again"
+        # message, so this log line is the only place the real cause surfaces.
+        logger.error("Google Calendar MCP tool %s failed: %s", name, text)
         return {"error": text or f"MCP tool {name} failed."}
     try:
         return json.loads(text)

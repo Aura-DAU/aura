@@ -83,7 +83,10 @@ export function MessageList({
               message={message}
               isStreaming={isStreaming}
               showActions={isLatestAssistant}
-              citations={index === lastAssistantIndex ? activeCitations : undefined}
+              citations={
+                message.citations ??
+                (index === lastAssistantIndex ? activeCitations : undefined)
+              }
               onRegenerate={isLatestAssistant ? onRegenerate : undefined}
               onCalendarSyncConfirm={
                 !loading && index === messages.length - 1

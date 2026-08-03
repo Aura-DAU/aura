@@ -63,7 +63,7 @@ def test_scope_rejects_other_programme_and_unclassified_academic_documents():
     assert not academic_scope.document_is_eligible({"applicability_scope": "unclassified"})
 
 
-def test_scope_rejects_out_of_range_and_unregistered_course():
+def test_scope_rejects_out_of_range_curriculum():
     academic_scope = scope()
     assert not academic_scope.document_is_eligible({
         "applicability_scope": "curriculum",
@@ -72,7 +72,13 @@ def test_scope_rejects_out_of_range_and_unregistered_course():
         "admission_year_from": 2025,
         "admission_year_to": 9999,
     })
-    assert not academic_scope.document_is_eligible({
+
+
+def test_scope_allows_course_docs_regardless_of_enrollment():
+    # Course docs are public course-catalog information: a signed-in student
+    # may look up any course, even one they are not registered for.
+    academic_scope = scope()
+    assert academic_scope.document_is_eligible({
         "applicability_scope": "course",
         "programme_id": "btech-ict",
         "degree_level": "undergraduate",
