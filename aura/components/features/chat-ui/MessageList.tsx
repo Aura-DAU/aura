@@ -74,7 +74,10 @@ export function MessageList({
         ) : null}
         {messages.map((message, index) => {
           const isStreaming =
-            loading && index === lastAssistantIndex && message.role === "assistant"
+            loading &&
+            index === lastAssistantIndex &&
+            message.role === "assistant" &&
+            index === messages.length - 1
           const isLatestAssistant =
             message.role === "assistant" && index === lastAssistantIndex && !loading
           return (
