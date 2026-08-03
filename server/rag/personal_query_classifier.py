@@ -108,6 +108,28 @@ ATTENDANCE_PAT = re.compile(r"\b(?:attendance|present|absent)\b", re.IGNORECASE)
 CALENDAR_PAT = re.compile(r"\b(?:calendar|academic\s+calendar|holiday|vacation|exam\s+dates?)\b", re.IGNORECASE)
 ACADEMIC_PAT = re.compile(r"\b(?:curriculum|syllabus|credits?|course|subject|elective|prerequisite|cs\d{3}|ict|btech|mtech)\b", re.IGNORECASE)
 
+# Fix (2026-08 hotfix): guards PERSONAL_KEYWORDS_PAT above. A query can contain
+# a personal-sounding keyword ("my") while actually naming a specific OTHER
+# cohort's public timetable/curriculum data — e.g. "what's my timetable for
+# ICT 1st Yr Sec A" from a 3rd-year student, or "show my schedule for BTech
+# MnC section B". When the query explicitly names a programme/branch
+# abbreviation, a year ordinal, or a semester/section, that named cohort is
+# what's being asked about, not the requester's own enrolled record, so the
+# PERSONAL fast-path must be skipped and the query left to the LLM
+# classifier (or the timetable tool-routing logic downstream) to resolve
+# against the correct cohort instead of the requester's own profile.
+PUBLIC_PROGRAMME_OVERRIDE_PAT = re.compile(
+    r"\b(?:"
+    r"b\.?tech|m\.?tech|m\.?sc|bs[\s\-]ms|b\.?des|m\.?des|ph\.?d|"
+    r"ict(?:[\s\-]cs)?|mnc|evd|ece(?:[\s\-]ai)?|cs(?:[\s\-]ai)?|"
+    r"first[\s-]year|second[\s-]year|third[\s-]year|fourth[\s-]year|"
+    r"1st[\s-]year|2nd[\s-]year|3rd[\s-]year|4th[\s-]year|"
+    r"semester\s+[1-8]|sem(?:ester)?\s+[1-8]|\bsem\s*[1-8]\b|"
+    r"section\s+[a-d]\b"
+    r")\b",
+    re.IGNORECASE,
+)
+
 
 def is_pure_profile_query(query: str) -> bool:
     """Return True if query is a direct pure profile request (e.g. 'Who am I?', 'What branch am I in?')."""
