@@ -25,19 +25,6 @@ class SecurityHeadersMiddleware:
                 headers.setdefault("X-Content-Type-Options", "nosniff")
                 headers.setdefault("X-Frame-Options", "DENY")
                 headers.setdefault("Referrer-Policy", "no-referrer")
-                # SEC-01 fix: this backend is directly reachable at /backend/
-                # (see nginx config), bypassing the Next.js layer entirely, so
-                # the CSP set in next.config.mjs never applies to those
-                # requests. This API only ever returns JSON/SSE — it never
-                # serves HTML/JS/CSS itself — so the policy can be maximally
-                # strict: no script/style/frame sources of any kind.
-                headers.setdefault(
-                    "Content-Security-Policy",
-                    "default-src 'none'; "
-                    "base-uri 'none'; "
-                    "frame-ancestors 'none'; "
-                    "form-action 'none'"
-                )
             await send(message)
 
         await self.app(scope, receive, send_with_headers)

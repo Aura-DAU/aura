@@ -22,7 +22,6 @@ ENTITY_INDEX_PATH = VECTOR_STORE_DIR / "entity_index.json"
 # Entity fields we index.  Add new fields here as the corpus grows.
 ENTITY_FIELDS = [
     "faculty_name",
-    "alumni_name",
     "course_code",
     "program_name",
     "event_name",

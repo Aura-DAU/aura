@@ -32,7 +32,6 @@ JWT that FastAPI's require_identity() verifies on every chat request.
 
 import ipaddress
 import json
-import logging
 import os
 import re
 import secrets
@@ -42,8 +41,6 @@ from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request
 
 import db.connection as db_conn
 from api.academic_scope_persist import upsert_student_academic_scope
-
-logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -55,7 +52,7 @@ def _persist_student_scope(erp_id: str, role: str, dept) -> None:
     try:
         upsert_student_academic_scope(erp_id=erp_id, dept=dept)
     except Exception as exc:
-        logger.warning("Failed to persist academic scope for %s: %s", erp_id, exc)
+        print(f"Warning: Failed to persist academic scope for {erp_id}: {exc}")
 
 INTERNAL_RESOLVE_SECRET = os.environ.get("INTERNAL_RESOLVE_SECRET", "")
 ALLOWED_DOMAINS = {"dau.ac.in", "daiict.ac.in"}
@@ -68,7 +65,7 @@ if FACULTY_EMAILS_PATH.exists():
         with open(FACULTY_EMAILS_PATH, "r", encoding="utf-8") as f:
             FACULTY_EMAILS = set(json.load(f))
     except Exception as e:
-        logger.warning("Failed to load faculty_emails.json: %s", e)
+        print(f"Warning: Failed to load faculty_emails.json: {e}")
 
 
 def _allowlist() -> list[str]:
@@ -258,7 +255,7 @@ def resolve_identity(
                 (email.lower().strip(), erp_id, role, dept, current_year, current_sem, current_sec),
             )
         except Exception as db_err:
-            logger.warning("Failed to cache dynamic user in DB: %s", db_err)
+            print(f"Warning: Failed to cache dynamic user in DB: {db_err}")
 
         # Scope tables FK user_identity_map — only after the map row exists.
         _persist_student_scope(erp_id, role, dept)

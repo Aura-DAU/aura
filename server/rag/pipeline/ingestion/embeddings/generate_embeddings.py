@@ -29,7 +29,7 @@ def load_chunks(filepath):
         return json.load(f)
 
 
-def ensure_service_ready(embedding_url: str) -> str:
+def ensure_service_ready(embedding_url: str) -> None:
     health_url = f"{embedding_url.rstrip('/')}/health"
     try:
         resp = requests.get(health_url, timeout=10)
@@ -46,15 +46,7 @@ def ensure_service_ready(embedding_url: str) -> str:
             f"Embedding model not loaded on {health_url}: {health}. "
             "Restart embedding-reranker on Node 4 and wait until /health shows embedding_loaded=true."
         )
-    model_name = health.get("embedding_model") or "unknown"
-    print(f"Embedding service healthy: model={model_name} device={health.get('device')}")
-    # Fix #11: return the model identifier so callers can stamp it onto
-    # every chunk's metadata (embedding_model field below). Previously this
-    # was printed and discarded — there was no way to tell, after the fact,
-    # which model produced a given vector in Qdrant, which matters the
-    # moment the embedding model is ever upgraded (old and new vectors are
-    # not comparable, and a mixed index degrades retrieval silently).
-    return model_name
+    print(f"Embedding service healthy: model={health.get('embedding_model')} device={health.get('device')}")
 
 
 def post_embed(endpoint: str, batch_texts: list[str]) -> list:
@@ -93,7 +85,7 @@ def post_embed(endpoint: str, batch_texts: list[str]) -> list:
 
 
 def generate_embeddings(texts, embedding_url, batch_size=32):
-    model_name = ensure_service_ready(embedding_url)
+    ensure_service_ready(embedding_url)
     endpoint = f"{embedding_url.rstrip('/')}/embed"
     all_embeddings = []
     total = len(texts)
@@ -112,7 +104,7 @@ def generate_embeddings(texts, embedding_url, batch_size=32):
     norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
     embeddings = (embeddings / np.maximum(norms, 1e-12)).astype("float32")
 
-    return embeddings, model_name
+    return embeddings
 
 
 def main():
@@ -123,15 +115,9 @@ def main():
     texts = [chunk["text"] for chunk in chunks]
 
     print("Generating embeddings via embedding-reranker service...")
-    embeddings, model_name = generate_embeddings(texts, EMBEDDING_URL, BATCH_SIZE)
+    embeddings = generate_embeddings(texts, EMBEDDING_URL, BATCH_SIZE)
 
     print(f"\nEmbedding shape: {embeddings.shape}")
-
-    # Fix #11: stamp the embedding model identifier onto every chunk so a
-    # future model upgrade can tell old vectors from new ones instead of
-    # silently mixing incompatible embeddings in the same Qdrant collection.
-    for chunk in chunks:
-        chunk["embedding_model"] = model_name
 
     # SAVE OUTPUTS
     VECTOR_STORE_DIR.mkdir(parents=True, exist_ok=True)

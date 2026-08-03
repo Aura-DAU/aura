@@ -57,9 +57,7 @@ ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE = (
 )
 
 RETRIEVAL_FAILURE_RESPONSE = (
-    "I could not find specific information about that in the university's knowledge base. "
-    "For accurate details, please visit <https://www.daiict.ac.in> or contact the "
-    "relevant office directly."
+    "I'm having trouble retrieving information right now. Please try again."
 )
 
 PERSONAL_DATA_SYSTEM_ADDENDUM = """

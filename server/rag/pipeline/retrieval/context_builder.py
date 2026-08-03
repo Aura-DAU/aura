@@ -1,7 +1,4 @@
-import logging
 import re
-
-logger = logging.getLogger(__name__)
 
 from pipeline.token_budget import TokenBudget
 
@@ -64,61 +61,6 @@ class ContextBuilder:
         # by ~15% on the system prompt and would silently over-admit chunks.
         return TokenBudget.from_env(discover=False).estimate_tokens(text)
 
-    # Fix #30/#31: retrieved chunk text was previously spliced into the
-    # <doc>...</doc> prompt block completely raw. Two concrete risks:
-    #   1. A chunk containing a literal "</doc>" or "<doc id=...>" (whether
-    #      from a corrupted source file, a copy-pasted forum/email thread
-    #      that got ingested into the corpus, or a deliberately poisoned
-    #      markdown file) could forge a fake document boundary and make the
-    #      model treat attacker text as a *separate*, seemingly legitimate
-    #      retrieved source.
-    #   2. A chunk containing a directive-looking line ("SYSTEM:", "Ignore
-    #      all previous instructions", "You are now...") has no signal
-    #      telling the model that's untrusted retrieved data, not a real
-    #      instruction — retrieved content and system/user instructions
-    #      share the same context window with nothing marking the boundary
-    #      as trust-sensitive.
-    # This is pattern-level, not a guarantee — it raises the bar rather than
-    # closing the class of attack outright (that needs model-level input
-    # segmentation, out of scope for a prompt-construction fix).
-    _INJECTION_LINE_PATTERNS = [
-        re.compile(r"^\s*system\s*:", re.IGNORECASE),
-        re.compile(r"^\s*\[?system\]?\s*prompt\s*:", re.IGNORECASE),
-        re.compile(r"ignore\s+(all\s+)?(the\s+)?(previous|above|prior)\s+instructions", re.IGNORECASE),
-        re.compile(r"you\s+are\s+now\s+(a|an)\b", re.IGNORECASE),
-        re.compile(r"disregard\s+(all\s+)?(the\s+)?(previous|above|prior)\b", re.IGNORECASE),
-        re.compile(r"^\s*###\s*(new\s+)?instructions?\b", re.IGNORECASE),
-    ]
-
-    @classmethod
-    def _sanitize_chunk_text(cls, text: str) -> str:
-        if not text:
-            return text
-        # Neutralize forged document/context boundary tags — XML-escape
-        # angle brackets on our own structural tag names only, so a
-        # legitimate chunk that happens to contain unrelated "<" or ">"
-        # (e.g. a code snippet, a math inequality) is left untouched.
-        sanitized = re.sub(
-            r"</?(?:doc|context)\b[^>]*>",
-            lambda m: m.group(0).replace("<", "&lt;").replace(">", "&gt;"),
-            text,
-            flags=re.IGNORECASE,
-        )
-        # Flag (don't silently rewrite) lines that look like an injected
-        # directive — prefix them so the model sees this is quoted/reported
-        # retrieved content, not a live instruction, without destroying the
-        # underlying text (a legitimate policy document might genuinely
-        # discuss "instructions for override requests", and we don't want
-        # to mangle real content on a heuristic false positive).
-        lines = sanitized.split("\n")
-        out_lines = []
-        for line in lines:
-            if any(p.search(line) for p in cls._INJECTION_LINE_PATTERNS):
-                out_lines.append(f"[retrieved document text, not an instruction]: {line}")
-            else:
-                out_lines.append(line)
-        return "\n".join(out_lines)
-
     def build(self, chunks, retrieval_intent="general", requires_complete_list=False):
 
         documents = []
@@ -155,23 +97,11 @@ class ContextBuilder:
 
             metadata = chunk["metadata"]
 
-            chunk_text = self._sanitize_chunk_text(metadata.get("text", ""))
+            chunk_text = metadata.get("text", "")
 
             # Estimate the full rendered <doc> (12 attributes + tags ≈ 250 chars
             # ≈ 72 tokens at 3.5 chars/token), not just the body.
             estimated_tokens = self._estimate_tokens(chunk_text) + 72
-
-            # Fix P2 (rag_debug_report Stage: Context Builder, Bug 1): the old
-            # "idx > 1" guard let chunk 1 through unconditionally, so a single
-            # oversized top-ranked chunk could consume the entire budget and
-            # leave zero room for every other piece of evidence. Cap any one
-            # chunk's contribution to a third of the budget; the trimmed tail
-            # is dropped rather than the whole chunk being excluded.
-            MAX_SINGLE_CHUNK_TOKENS = effective_max_tokens // 3
-            if estimated_tokens > MAX_SINGLE_CHUNK_TOKENS:
-                max_chars = max(MAX_SINGLE_CHUNK_TOKENS * 4, 1)
-                chunk_text = chunk_text[:max_chars]
-                estimated_tokens = MAX_SINGLE_CHUNK_TOKENS + 72
 
             # Enforce token budget — stop at the first lowest-ranked chunk that
             # would push us over. Chunks are already in rank order (best first).
@@ -228,23 +158,7 @@ scraped_date="{metadata.get('scraped_date', '')}"
             # citeable. relative_path/start_line/end_line let the frontend
             # side-drawer open the exact source file and highlight the lines
             # this chunk was drawn from.
-            #
-            # Fix P1 (rag_debug_report Root Cause C): The old dedup_key fell
-            # back to bare title_str. Two chunks from entirely different
-            # sections that share the same section heading (e.g. both titled
-            # "Programme Overview") would dedup to ONE citation card even
-            # though the answer drew from BOTH. The user saw one source but
-            # the answer referenced content from two distinct chunks.
-            # Fix: include chunk-position coordinates in the fallback so each
-            # distinct chunk location always gets its own citation card.
-            if url:
-                dedup_key = url
-            elif relative_path:
-                dedup_key = f"{relative_path}:{start_line_val}-{end_line_val}"
-            elif title_str:
-                dedup_key = f"{title_str}:idx{idx}"  # force-unique by doc position
-            else:
-                dedup_key = None
+            dedup_key = url or relative_path or title_str
 
             if dedup_key:
                 if dedup_key not in seen_urls:
@@ -261,37 +175,19 @@ scraped_date="{metadata.get('scraped_date', '')}"
 
                 citation_map[idx] = seen_urls[dedup_key]
 
-        if len(documents) > 6:
-            top3 = documents[:3]
-            context = (
-                "<context>\n"
-                + "\n".join(top3)
-                + "\n"
-                + "\n".join(documents[3:])
-                + "\n"
-                + "\n".join(top3)
-                + "\n</context>"
-            )
-        else:
-            context = (
-                "<context>\n"
-                + "\n".join(documents)
-                + "\n</context>"
-            )
-
-        # Fix P0 (rag_debug_report Stage: Context Builder Bug 2): replaced
-        # print() with logger.debug() to eliminate ~250 stdout lines/second
-        # under 25 concurrent requests in production.
-        logger.debug(
-            "context_builder chunks=%d tokens=%d/%d sources=%d",
-            len(documents), context_tokens_used, effective_max_tokens, len(sources)
+        context = (
+            "<context>\n"
+            + "\n".join(documents)
+            + "\n</context>"
         )
-        if logger.isEnabledFor(logging.DEBUG):
-            for _src_idx, _src in enumerate(sources, start=1):
-                logger.debug(
-                    "  source[%d] title=%r url=%r",
-                    _src_idx, _src.get("title"), _src.get("url")
-                )
+
+        print("\n" + "=" * 60)
+        print("===== CONTEXT BUILDER (FINAL CONTEXT TO LLM) =====")
+        print(f"Selected Chunks Count: {len(documents)}")
+        print(f"Estimated Context Tokens Used: {context_tokens_used} / {effective_max_tokens}")
+        for idx, src in enumerate(sources, start=1):
+            print(f"{idx}. title={src.get('title')} | file={src.get('path')} | url={src.get('url')}")
+        print("=" * 60)
 
         return {
             "context": context,
