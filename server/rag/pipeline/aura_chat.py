@@ -29,6 +29,8 @@ from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
+    log_soft_failure,
+    strip_sources_marker,
 )
 from pipeline.guardrails.query_guardrail import (
     OFF_TOPIC_RESPONSE,
