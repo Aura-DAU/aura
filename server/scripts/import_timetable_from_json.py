@@ -172,7 +172,7 @@ def main():
         pairs = sorted(set((r[0], r[1]) for r in rows))
         print("\n[CLEAR] Deleting for (year,sem):", pairs)
         for yr, sm in pairs:
-            dbc.execute("DELETE FROM timetable_master WHERE year=%s AND sem=%s", (yr, sm))
+            dbc.execute("DELETE FROM timetable_master WHERE year=%s AND sem=%s AND (lab_group IS NULL AND session_type NOT IN ('lab', 'tutorial'))", (yr, sm))
         print("[CLEAR] Done.")
 
     SQL = (
