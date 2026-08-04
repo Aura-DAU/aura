@@ -67,7 +67,7 @@ export function Composer({
   if (role === "student") {
     dynamicPlaceholder = "Ask about your timetable, attendance, or requirements..."
   } else if (role.startsWith("faculty") || role.startsWith("dean") || role === "registrar") {
-    dynamicPlaceholder = "Ask about class schedule, grade submission, or mentoring..."
+    dynamicPlaceholder = "Ask AURA anything about DAU…"
   } else if (role === "admin" || role === "superadmin" || role === "admin_staff") {
     dynamicPlaceholder = "Ask about administration, role bindings, or settings..."
   }
@@ -138,9 +138,10 @@ export function Composer({
               minRows={1}
               maxRows={8}
               maxLength={MAX_CHARS}
+              enterKeyHint="send"
               placeholder={dynamicPlaceholder}
               aria-label="Message AURA"
-              className="chat-v2-scroll block w-full resize-none bg-transparent px-2 pb-1.5 pt-2 text-[15px] leading-relaxed text-neutral-100 outline-none placeholder:text-neutral-400"
+              className="chat-v2-scroll block w-full resize-none bg-transparent px-2 pb-1.5 pt-2 text-base leading-relaxed text-neutral-100 caret-theme-yellow outline-none placeholder:text-neutral-400 sm:text-[15px]"
             />
 
             <div className="flex items-center justify-between gap-2 pl-2">

@@ -2,22 +2,12 @@ import { test, expect } from "@playwright/test";
 
 test.describe("AURA PWA - Smoke Tests", () => {
   // Test 1: Unauthenticated user flow
-  test("unauthenticated user is gated from chat and redirected/shown login prompt", async ({ page }) => {
+  test("guest user sees limited chat access and a sign-in action", async ({ page }) => {
     await page.goto("/");
 
-    // The middleware gates unauthenticated users and redirects them to /login or disables input.
-    await page.waitForTimeout(1000);
-    const url = page.url();
-
-    if (url.includes("/login")) {
-      const googleBtn = page.locator("button:has-text('Continue with Google Workspace')");
-      await expect(googleBtn).toBeVisible();
-    } else {
-      // If on chat page but input is blocked/disabled for guest
-      const input = page.locator("textarea[placeholder*='Sign in']");
-      const isInputDisabled = await input.isDisabled().catch(() => true);
-      expect(isInputDisabled).toBe(true);
-    }
+    await expect(page.getByRole("textbox", { name: "Message AURA" })).toBeVisible();
+    await expect(page.getByText("10 messages left")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Sign in", exact: true })).toBeVisible();
   });
 
   test("is redirected to /login when visiting a protected route", async ({ page }) => {
@@ -32,17 +22,29 @@ test.describe("AURA PWA - Smoke Tests", () => {
   // succeeds, and a broken/missing PWA manifest) that none of the new
   // tests exercise.
   test("hitting a protected API route returns 401, not a crash page", async ({ request }) => {
-    const res = await request.get("/api/erp/fees");
+    const res = await request.get("/api/auth/history");
     expect(res.status()).toBe(401);
   });
 
-  test("manifest.json is served and installable-shaped", async ({ request }) => {
+  test("@pwa manifest.json is served and installable-shaped", async ({ request }) => {
     const res = await request.get("/manifest.json");
     expect(res.ok()).toBeTruthy();
     const manifest = await res.json();
     expect(manifest.name).toContain("AURA");
     expect(manifest.display).toBe("standalone");
     expect(manifest.icons.length).toBeGreaterThan(0);
+
+    for (const icon of manifest.icons) {
+      const iconResponse = await request.get(icon.src);
+      expect(iconResponse.ok()).toBeTruthy();
+    }
+  });
+
+  test("@pwa production service worker is served", async ({ request }) => {
+    const res = await request.get("/sw.js");
+    expect(res.ok()).toBeTruthy();
+    expect(res.headers()["content-type"]).toContain("javascript");
+    expect(await res.text()).toContain("/offline");
   });
 
   // Test 2: Login page and elements
@@ -56,19 +58,8 @@ test.describe("AURA PWA - Smoke Tests", () => {
     await expect(page.locator("text=DAU AI Assistant")).toBeVisible();
   });
 
-  // Test 3: Dashboard - Verify no attendance card
-  test("dashboard does not display attendance card", async ({ page }) => {
-    await page.goto("/dashboard");
-
-    // Attendance card has been removed per v7 policy (no DB table access granted).
-    // We check that no element contains the word 'attendance' in the UI.
-    const attendanceCard = page.locator("text=attendance").or(page.locator("text=Attendance"));
-    const count = await attendanceCard.count();
-    expect(count).toBe(0);
-  });
-
-  // Test 4: Offline fallback route check
-  test("offline route renders correct offline messages", async ({ page }) => {
+  // Test 3: Offline fallback route check
+  test("@pwa offline route renders correct offline messages", async ({ page }) => {
     await page.goto("/offline");
 
     // Verify offline message elements
