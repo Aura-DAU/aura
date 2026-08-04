@@ -9,9 +9,6 @@ const PUBLIC_PATHS = ["/login", "/api/auth", "/_next", "/favicon.ico", "/offline
 // quota key. Must stay reachable without a NextAuth session, otherwise the
 // proxy 401s guests before the BFF can call the backend LLM.
 const PUBLIC_API_PATHS = ["/api/chat", "/api/documents", "/api/memory"]
-/** Cookie set by /api/chat on a guest's first message — lets returning guests
- *  bypass the login gate without a NextAuth session token. */
-const GUEST_ID_COOKIE = "aura-guest-id"
 const PUBLIC_FILE =
   /\.(?:svg|png|jpg|jpeg|gif|webp|ico|json|webmanifest|js|css|map|txt|woff2?)$/i
 
@@ -27,11 +24,6 @@ export async function proxy(req: NextRequest) {
     return NextResponse.next()
   }
 
-  // Returning guests (have the guest-id cookie but no NextAuth token) should
-  // pass straight through to the chat rather than being sent to /login.
-  if (req.cookies.has(GUEST_ID_COOKIE)) {
-    return NextResponse.next()
-  }
 
   let secret: string
   try {
