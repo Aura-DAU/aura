@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { Loader2, ShieldAlert, UserCheck, UserX, ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -10,25 +10,16 @@ export default function PrivacySettingsPage() {
   const { status } = useSession()
   const router = useRouter()
 
-  const [advisors, setAdvisors] = useState<string[]>([])
-  const [loading, setLoading] = useState(true)
+  const [advisors, setAdvisors] = useState<string[]>(["EMP1001", "EMP1002"])
   const [toggling, setToggling] = useState<string | null>(null)
-  const loadTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const toggleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login")
-      return
     }
-    if (status !== "authenticated") return
-
-    // Immediately load data without delay
-    setAdvisors(["EMP1001", "EMP1002"])
-    setLoading(false)
   }, [status, router])
 
-  if (status === "loading" || loading) {
+  if (status === "loading") {
     return (
       <div className="flex justify-center p-10">
         <Loader2 className="animate-spin text-theme-yellow" />

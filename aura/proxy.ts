@@ -4,24 +4,23 @@ import { getToken } from "next-auth/jwt"
 
 import { getNextAuthSecret } from "@/lib/auth/secrets"
 
-const PUBLIC_PATHS = ["/login", "/api/auth", "/_next", "/favicon.ico", "/offline"]
+/** Paths that never need an auth check at all (assets, NextAuth internals, etc.) */
+const ALWAYS_PUBLIC_PATHS = ["/api/auth", "/_next", "/favicon.ico", "/offline"]
 // Anonymous guest chat (#206): /api/chat mints its own guest JWT + cookie
 // quota key. Must stay reachable without a NextAuth session, otherwise the
 // proxy 401s guests before the BFF can call the backend LLM.
-const PUBLIC_API_PATHS = ["/api/chat", "/api/documents"]
-const EXACT_PUBLIC_PATHS = ["/"]
+const PUBLIC_API_PATHS = ["/api/chat", "/api/documents", "/api/memory"]
 const PUBLIC_FILE =
   /\.(?:svg|png|jpg|jpeg|gif|webp|ico|json|webmanifest|js|css|map|txt|woff2?)$/i
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  // Allow public paths and static assets from /public through
+  // Static assets and NextAuth internals — never need a session check.
   if (
     PUBLIC_FILE.test(pathname) ||
-    PUBLIC_PATHS.some((p) => pathname.startsWith(p)) ||
-    PUBLIC_API_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`)) ||
-    EXACT_PUBLIC_PATHS.includes(pathname)
+    ALWAYS_PUBLIC_PATHS.some((p) => pathname.startsWith(p)) ||
+    PUBLIC_API_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`))
   ) {
     return NextResponse.next()
   }
@@ -37,18 +36,23 @@ export async function proxy(req: NextRequest) {
     )
   }
 
-  // Check for a valid NextAuth session token
-  const token = await getToken({
-    req,
-    secret,
-  })
+  const token = await getToken({ req, secret })
 
+  // Already signed in → skip the login page and go straight to the app.
+  if (token && pathname === "/login") {
+    return NextResponse.redirect(new URL("/", req.url))
+  }
+
+  // Not signed in → gate all non-login pages.
   if (!token) {
+    if (pathname === "/login") {
+      // Let unauthenticated users see the login page.
+      return NextResponse.next()
+    }
     if (pathname.startsWith("/api/")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
-    const loginUrl = new URL("/login", req.url)
-    return NextResponse.redirect(loginUrl)
+    return NextResponse.redirect(new URL("/login", req.url))
   }
 
   return NextResponse.next()
