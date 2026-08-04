@@ -234,7 +234,7 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
              onClick={() => { setSelectedLabGroup(null); handleLabGroupNext(); }}
              className="mt-2 w-full text-center text-[10px] text-neutral-500 underline underline-offset-2"
           >
-             I don't have a lab group
+             I don&apos;t have a lab group
           </button>
         </div>
       )}
