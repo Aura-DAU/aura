@@ -9,194 +9,134 @@ source_type: PDF
 pdf_name: "Policies/Consultancy Policy"
 ---
 
-# Policies/Consultancy Policy
+# Consultancy Policy
 
 ## Overview
 
-This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+This verified transcription is based on the official three-page DA-IICT policy. The policy is dated 31 August 2018 and took effect on 1 September 2018.
 
-## Main Content
+## 1. Preamble
 
-hi
+### 1.1 Purpose
 
-2.1
+The purpose of the consultancy policy is to set out the guidelines and procedures governing consultancy assignments taken by faculty members of DA-IICT. Faculty members may take up consultancy assignments provided they do not adversely affect their ongoing academic and administrative responsibilities to the institute.
 
-2.2
+The goal is to enhance faculty members' professional and/or academic competence and experience. Consultancy also establishes links between DA-IICT and external organizations, including industry, the service sector, government departments, and other agencies, which may increase research opportunities and student placement.
 
-2d
+### 1.2 Scope
 
-2.4
+The standard terms and conditions for consultancy assignments are described in Section 2. Consultancy does not include sponsored research projects or other engagements where DA-IICT has a memorandum of understanding with the sponsoring organization.
 
-J Dhirubhai Ambani Institute of
-Information and Communication Technology
+## 2. Consultancy Terms and Conditions
 
-Consultancy Policy
+### 2.1 Duration
 
-Preamble:
+A consultancy assignment will not exceed one year. If an assignment is likely to exceed one year, a detailed justification covering the quantum of work and intellectual challenges must be explicitly included in the proposal.
 
-The purpose of the consultancy policy is to set out the guidelines and procedures
-governing consultancy assignments taken by the faculty members of DA-IICT.
-Faculty members may take up consultancy assignments provided they do not have any
-adverse impact on their ongoing academic and administrative responsibilities to the
-institute. The goal of the consultancy is to enhance their professional and/or academic
-competence and experience. This will also establish the link between the DA-IICT
-and external organizations (Industry, Service Sector, Government Departments and
-other agencies) that will aid DA-IICT in areas such as increasing research
-opportunities and student placement.
+### 2.2 Time commitment
 
-The standard terms and conditions for consultancy assignment are described in
-section-2. The scope of the consultancy does not include sponsored research projects
-and other engagements where DA-IICT has a MoU with concerned sponsoring
-organization.
+Time spent on consultancy by the faculty consultant is limited to 52 working days in a year, counted from the project start date upon receipt of advance payment. During the regular semester, the maximum is one working day per week. Consultancy may also extend to non-working days. During summer and winter vacation, a faculty member may use no more than 20 consecutive days for consultancy.
 
-Consultancy Terms and Conditions:
+### 2.3 Minimum consultancy fee
 
-The period of the consultancy assignment will not exceed one year. In exceptional
-case where the consultancy assignment is likely to exceed one year, a detailed
-justification is required in terms of quantum of work and intellectual challenges and it
-must be explicitly mentioned in the proposal.
+The minimum consultancy fee is Rs. 5,000 per day plus GST at the prevailing rate or another applicable tax prescribed by the Government of India. The minimum fee is subject to amendment from time to time.
 
-The time spent on consultancy assignment by the faculty (consultant) shall be limited
-to 52 working days in a year (from the start date of the project on receipt of advance
-payment), maximum one working day per week during the regular semester.
-However, the consultancy may be extended to non-working days of the week. The
-faculty member may be permitted to utilize not more than twenty consecutive days
-towards consultancy during the vacation period (summer and winter).
+### 2.4 Fee disbursement
 
-The minimum consultant fees per day will be Rs. 5,000/- plus GST at the prevailing
-rate or any applicable tax as prescribed by the Government of India from time to time.
-The minimum consultant fees as mentioned, is subject to amendment from time to
-time.
+- 70% of the consultancy fee is credited to the faculty member's salary account through the DA-IICT payroll system.
+- 10% is credited to the faculty member's Cumulative Professional Development Allowance (CPDA).
+- 20% is credited toward institute overheads.
 
-The disbursement of the consultant fees will be as follows:
+### 2.5 Use of institute resources
 
-(i) 70% of the consultant fees will be credited to the faculty’s salary account
-through DA-IICT’s payroll system.
+If a consultancy project requires significant use of institute resources, such as high-end computational software tools or specialized laboratory equipment, the Dean (R&D), in consultation with the concerned faculty member and Director, will recommend additional usage charges. These charges must be budgeted in the consultancy proposal.
 
-(ii) 10% will be credited to the concerned faculty’s Cumulative Professional
-Development Allowance (CPDA). fope He ~\
+### 2.6 Capital equipment and consumables
 
-(iii) | 20% will be credited towards Institute overheads. [ teN
+The consultancy proposal will not include additional cost toward purchasing capital equipment and consumables.
 
-Pur : 4,\ @
+### 2.7 Additional manpower
 
-a Ne
+The proposal may include hiring additional manpower, which must be incorporated into the proposal.
 
-to
-7)
+### 2.8 Other expenses
 
-3.1
+Other expenses, including travel and logistics, will be reimbursed at actual cost directly to the faculty member by the sponsoring organization (client).
 
-3.3
+## 3. Methodology for Accepting Consultancy
 
-3.4
+### 3.1 Initiating an assignment
 
-Ee
+A consultancy assignment may be initiated either through a request or enquiry from an industry, company, or organization directly to the institute, or through discussion between the client and a faculty consultant or group of faculty members.
 
-3.6
+- If the institute receives the enquiry directly, the Director will identify specific consultants based on their expertise.
+- If a client prefers a specific faculty member, the assignment may normally be assigned to that faculty member.
 
-If the consultancy project requires significant use of available institute resources
-(high-end computational software tools, specialized laboratory equipments, etc.),
-Dean (R&D) in consultation with the concerned faculty and Director, will recommend
-additional usage charges for usage of the institute resources; and it should be budgeted
-in the consultancy proposal.
+### 3.2 Proposal and approval
 
-The consultancy proposal will not include additional cost towards purchase of capital
-equipments and consumables.
+The faculty member prepares the consultancy proposal and submits it to the Dean (R&D) for approval by the Director. The proposal must include:
 
-The consultancy proposal may include hiring of additional manpower and it must be
-incorporated in the proposal.
+1. Scope of work
+2. Duration
+3. Stage-wise deliverable schedule
+4. Stage-wise payment schedule, including advance payment
+5. Relevant terms and conditions
+6. Requirement for additional manpower
+7. Consultancy costing
 
-Any other expenses (including travel and logistics) involved as a part of the
-consultancy assignment will be as per actuals, and reimbursed directly to the faculty
-by the sponsoring organization (client).
+### 3.3 Advance payment
 
-Methodology for Accepting Consultancy:
+The advance payment stated in the proposal must be paid before the consultancy project starts, through NEFT transfer or a crossed demand draft drawn in favour of DA-IICT. A demand draft must be mailed to the Executive Registrar, DA-IICT.
 
-A consultancy assignment may be initiated either (i) by requests / enquiries from the
-industry / company / organization (client) directly to the Institute, or (ii) by discussion
-between the client and the faculty (consultant) / group of faculty.
+### 3.4 Project account
 
-(i) In case the enquiry is directly received by the Institute, specific consultant(s)
-depending on their expertise, will be identified by the Director.
+After DA-IICT receives the advance payment, the Registrar's Office will create an account in the consultancy project's name, assign an account number, and inform the concerned faculty member.
 
-(ii) | In the event of a client preferring the services of a specific faculty, the
-assignment may normally be assigned to that faculty.
+### 3.5 Hiring additional manpower
 
-The consultancy proposal is to be prepared by the faculty and submitted to Dean
-(R&D) for approval by the Director. It should include (i) the scope of work, (ii)
-duration, (iii) stage-wise deliverable schedule, (iv) stage-wise payment schedule
-(including advance payment), (v) relevant terms and conditions, (vi) requirement of
-additional manpower, and (vii) consultancy costing.
+After the client approves the consultancy project, the consultant may hire additional manpower, preferably a DA-IICT student, as stated in the proposal. A selection committee will select this manpower. The total consultancy days contributed by additional manpower are limited to one-fourth of the total consultancy period.
 
-The advance payment as mentioned in the consultancy proposal has to be paid before
-the start of the consultancy project, through NEFT transfer / crossed demand draft
-(drawn in favour of DA-IICT). In case of demand draft, it is to be mailed to the
-Executive Registrar, DA-IICT.
+### 3.6 Travel outside campus
 
-On receipt of the advance payment from the client by DA-IICT, the Registrar’s Office
-will set-up an account in the name of the consultancy project, assign an account
-number, and inform the concerned faculty.
+Travel outside campus for consultancy activities on a working day requires prior intimation to the Director.
 
-After approval of the consultancy project by the client, the consultant may hire
-additional manpower (preferably DA-IICT student) as per the proposal. This
-additional manpower will be selected by a selection committee. Total number of
-days for consultancy by this additional manpower is limited to one-fourth of the
-total consultancy period.
+### 3.7 Disbursement timeline
 
-Travel out of campus on account of consultancy activi fesohl ©
+The consultancy amount will be disbursed to the faculty member within 15 days of receipt of payment from the client.
 
-rking day should be
-taken with prior intimation to the Director. v, ‘site,
+### 3.8 Payment statement
 
-3.7
+The Registrar's Office will inform the faculty member of amounts credited to the consultant's salary account after TDS, CPDA, and institute overheads. It will also provide the utilization certificate.
 
-3.8
+### 3.9 Closure report
 
-39
+After the consultancy assignment is completed, the client's certified copy of the closure report must be submitted to the Dean (R&D).
 
-4.1
+## 4. Intellectual Property Rights
 
-The consultancy amount will be disbursed to the faculty within 15 days on the
-receipt of the payment from the client.
+The terms and conditions concerning rights to intellectual property generated during the consultancy assignment will be worked out jointly with the client based on the nature of the consultancy.
 
-The Registrar’s Office will intimate the faculty regarding the amounts credited to
-the concerned consultant’s salary account (after TDS) and CPDA, and the amount
-credited to the institute overheads. It will also provide the utilization certificate.
+## Sample Costing of a Consultancy Assignment
 
-After the completion of the consultancy assignment, client’s certified copy of the
-closure report must be submitted to the Dean (R&D).
+The source gives an example for a 10-week assignment at one working day per week, using specialized equipment for 10 hours at Rs. 1,000 per hour and hiring additional manpower for 2.5 days at Rs. 1,500 per day.
 
-Intellectual Property Rights
-The terms and conditions regarding the rights pertaining to any intellectual property
+| Cost item | Calculation | Amount |
+| --- | --- | ---: |
+| Consultant fees | Rs. 5,000 x 10 days | Rs. 50,000 |
+| Additional manpower (student) | Rs. 1,500 x 2.5 days | Rs. 3,750 |
+| GST paid to the Government | 18% of consultant and manpower fees | Rs. 9,675 |
+| Institute resource usage | Rs. 1,000 x 10 hours | Rs. 10,000 |
+| **Net total** |  | **Rs. 73,425** |
 
-generated in due course of the consultancy assignment will be jointly worked out with
-the client based on the nature of consultancy.
+### Example disbursement on completion
 
-DA-IICT, Gandhinagar
-August 31, 2018
+| Recipient | Calculation | Amount |
+| --- | --- | ---: |
+| Consultant's salary | 70% of consultant fees | Rs. 35,000 |
+| Consultant's CPDA | 10% of consultant fees | Rs. 5,000 |
+| DA-IICT overheads | 20% of consultant fees | Rs. 10,000 |
+| Additional manpower | Full manpower charge | Rs. 3,750 |
 
-Sample Costing of the Consultancy Assignment:
+**Policy date:** 31 August 2018
 
-Cost Estimate for Consultancy Assignment of 10 weeks’ duration @ 1 working day per week
-— (i) involving use of specialized equipment for 10 hours @ Rs. 1,000/- per hour, and
-(ii) hiring of additional manpower for 2.5 working days @ Rs. 1,500/- per day
-
-(i) Consultant Fees [Rs. 5,000 < 10 days] Rs. 50,000
-(ii) Hiring Charges for Additional Manpower (Student)
-[Rs. 1,500 per day x 2.5 days] Rs. 3,750
-
-(iii) GST [18% of (i)+(ii)] - will be paid to the Government Rs. 9,675
-(iv) | Usage Charges for Institute Resources
-[Rs. 1,000 per hour x 10 hours] Rs. 10,000
-
-Net Total [ (i)+(ii)+Gii)+(iv)] Rs. 73,425
-
-Disbursement (on completion of consultancy assignment):
-
-Effective date of this policy document: 01 September 2018
-
-(a) Credited to the Consultant’s Salary [70% of (i)] Rs. 35,000
-(b) Credited to the Consultant’s CPDA [10% of (i)] Rs. 5,000
-(c) Credited to DA-IICT [20% of (i)] Rs. 10,000
-To Additional Manpower [ii] Rs. 3,750
+**Effective date:** 1 September 2018

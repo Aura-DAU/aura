@@ -96,7 +96,7 @@ def test_always_keeps_last_exchange_verbatim():
 
 def test_should_fork_when_summary_exceeds_its_cap():
     # Summariser returns a summary far bigger than summary_max_tokens → hard
-    # overflow → fork signal.
+    # overflow → one fork with a bounded continuation seed.
     def big_summariser(prior, older):
         return "y" * 5000  # ~1250 tokens, well over the 20-token cap
 
@@ -106,7 +106,21 @@ def test_should_fork_when_summary_exceeds_its_cap():
     result = mem.prepare("", history)
 
     assert result.should_fork is True
-    assert _approx_tokens(result.summary) > mem.summary_max_tokens
+    assert _approx_tokens(result.summary) <= mem.summary_max_tokens
+
+    continuation = mem.prepare(result.summary, [])
+    assert continuation.should_fork is False
+
+
+def test_oversized_incoming_continuation_seed_self_heals_once():
+    mem = _mem()
+
+    result = mem.prepare("z" * 5000, [])
+
+    assert result.should_fork is True
+    assert result.summary_changed is True
+    assert _approx_tokens(result.summary) <= mem.summary_max_tokens
+    assert mem.prepare(result.summary, []).should_fork is False
 
 
 def test_summariser_failure_falls_back_without_raising():

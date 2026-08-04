@@ -23,6 +23,7 @@ const STREAM_ERROR_FALLBACK =
 
 const STORAGE_KEY  = "aura-threads-v2"
 const PROFILE_KEY  = "aura-profile-v2"
+const ACTIVE_THREAD_KEY = "aura-active-thread-v2"
 
 interface StoredThread extends ChatThread {
   messages: ChatMessage[]
@@ -459,11 +460,18 @@ export function useAuraChat() {
           }
         })
         const sorted = sortThreadsByRecency(parsed)
+        const storedActiveId = localStorage.getItem(ACTIVE_THREAD_KEY)
+        const initialThread =
+          storedActiveId === ""
+            ? undefined
+            : storedActiveId
+              ? sorted.find((thread) => thread.id === storedActiveId) ?? sorted[0]
+              : sorted[0]
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setThreads(sorted)
-        if (sorted[0]) {
-          setActiveThreadIdState(sorted[0].id)
-          setMessages(sorted[0].messages)
+        if (initialThread) {
+          setActiveThreadIdState(initialThread.id)
+          setMessages(initialThread.messages)
         }
       }
       const rawProfile = localStorage.getItem(PROFILE_KEY)
@@ -534,6 +542,15 @@ export function useAuraChat() {
       /* quota or unavailable */
     }
   }, [threads, hasHydrated])
+
+  useEffect(() => {
+    if (!hasHydrated) return
+    try {
+      localStorage.setItem(ACTIVE_THREAD_KEY, activeThreadId ?? "")
+    } catch {
+      /* unavailable */
+    }
+  }, [activeThreadId, hasHydrated])
 
   // Auto-fill Program/Year from the student's verified ERP identity
   // (department + currentYear, resolved server-side from their ERP id at
@@ -672,19 +689,30 @@ export function useAuraChat() {
   }, [])
 
   const insertGreeting = useCallback((text: string) => {
-    if (messages.length > 0) return
+    const existing = threads.find(
+      (thread) =>
+        thread.messages.length === 1 &&
+        thread.messages[0]?.role === "assistant" &&
+        thread.messages[0].content === text,
+    )
+    if (existing) {
+      setActiveThreadIdState(existing.id)
+      setMessages(existing.messages)
+      return
+    }
+
     const threadId = uid()
     const msg: ChatMessage = { role: "assistant", content: text, timestamp: Date.now() }
     const newThread: StoredThread = {
       id: threadId,
-      title: "New chat",
+      title: "Welcome to AURA",
       messages: [msg],
       updatedAt: msg.timestamp,
     }
     setThreads((prev) => sortThreadsByRecency([newThread, ...prev]))
     setActiveThreadIdState(threadId)
     setMessages([msg])
-  }, [messages.length])
+  }, [threads])
 
   const handleSendMessage = useCallback(
     async (text: string, options?: { regenerate?: boolean }) => {
@@ -699,6 +727,7 @@ export function useAuraChat() {
       setLoading(true)
       setThinkingStep("Thinking…")
       setErrorMessage(null)
+      setActiveCitations([])
       if (!options?.regenerate) {
         setInputText("")
       }

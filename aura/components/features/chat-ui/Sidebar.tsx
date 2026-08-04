@@ -233,7 +233,7 @@ function SidebarContent({
         displayName={displayName}
         displayEmail={displayEmail}
         role={session?.user?.role}
-        department={session?.user?.department}
+        department={session?.user?.role === "student" ? session.user.department : undefined}
         signedIn={Boolean(session?.user)}
         onOpenProfile={onOpenProfile}
         onCloseMobile={onCloseMobile}

@@ -1,9 +1,9 @@
 # Conversation memory — summary-buffer compaction with overflow forking.
 # When even the summary outgrows its own budget the chat has accumulated more
 # than one thread can usefully hold, so ``prepare()`` raises ``should_fork`` and
-# the API emits a ``thread-continuation`` event — the frontend then starts a
-# fresh thread seeded with that summary (see ``chat_routes.py`` and
-# ``use-aura-chat.ts``).
+# the API emits a ``thread-continuation`` event. The continuation seed is always
+# bounded before it reaches the frontend; carrying an over-budget seed would
+# make every message in the new thread fork again.
 
 # The server is stateless: the client owns the thread and its running summary and
 # sends ``summary`` + the *unsummarised tail* of turns each request. We fold the
@@ -217,10 +217,25 @@ class ConversationMemory:
         summary = (summary or "").strip()
         history = [t for t in (history or []) if t.get("content")]
 
+        # A summariser may ignore its requested output limit, and older clients
+        # may send back an already oversized continuation seed. Preserve the
+        # one-time fork signal, but bound the seed before it is reused. Otherwise
+        # the continuation starts over capacity and emits another fork after
+        # every subsequent message.
+        summary_was_over_cap = self._over_cap(summary)
+        if summary_was_over_cap:
+            summary = _truncate_tokens(summary, self.summary_max_tokens)
+
         # Fast path: it already fits — no LLM call, no added latency. This is the
         # common case for all but the longest conversations.
         if self._within_budget(summary, history):
-            return MemoryResult(summary, history, 0, False, self._over_cap(summary))
+            return MemoryResult(
+                summary,
+                history,
+                0,
+                summary_was_over_cap,
+                summary_was_over_cap,
+            )
 
         # Reserve room for the (post-compaction) summary, then keep as many of the
         # most recent turns verbatim as fit in what's left.
@@ -233,15 +248,18 @@ class ConversationMemory:
             # The tail is already down to the last exchange yet still over budget
             # (e.g. one enormous turn, or a summary that alone fills the window).
             # Nothing more to fold — force a fresh thread instead of looping.
-            return MemoryResult(summary, tail, 0, False, True)
+            return MemoryResult(summary, tail, 0, summary_was_over_cap, True)
 
         new_summary = self._safe_summarise(summary, older)
+        new_summary_over_cap = self._over_cap(new_summary)
+        if new_summary_over_cap:
+            new_summary = _truncate_tokens(new_summary, self.summary_max_tokens)
         return MemoryResult(
             summary=new_summary,
             history=tail,
             folded_turns=len(older),
             summary_changed=True,
-            should_fork=self._over_cap(new_summary),
+            should_fork=summary_was_over_cap or new_summary_over_cap,
         )
 
     # ── Budgeting helpers ────────────────────────────────────────────────────

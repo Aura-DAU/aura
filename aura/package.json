@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
-    "check:pwa": "npx --yes lighthouse https://10.100.97.71 --only-categories=pwa --output=json --chrome-flags='--ignore-certificate-errors'"
+    "test:e2e": "playwright test",
+    "check:pwa": "playwright test tests/e2e/smoke.spec.ts --grep @pwa"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.208",
@@ -39,6 +40,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "1.61.0",
     "@tailwindcss/postcss": "^4.2.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -52,7 +54,7 @@
     "eslint-config-next": "^16.2.11",
     "jsdom": "^29.1.1",
     "jsonwebtoken": "^9.0.3",
-    "postcss": "8.5.16",
+    "postcss": "8.5.25",
     "serwist": "^9.5.11",
     "tailwindcss": "^4.2.0",
     "typescript": "5.7.3",
@@ -61,12 +63,31 @@
   "overrides": {
     "@hono/node-server": "2.0.11",
     "body-parser": "2.3.0",
-    "brace-expansion@5": "5.0.7",
-    "fast-uri": "3.1.4",
-    "hono": "4.12.31",
-    "js-yaml": "4.3.0",
-    "postcss": "8.5.16",
+    "brace-expansion@1": "1.1.18",
+    "brace-expansion@5": "5.0.9",
+    "fast-uri": "3.1.5",
+    "hono": "4.13.0",
+    "ip-address": "10.4.0",
+    "js-yaml": "4.3.1",
+    "postcss": "8.5.25",
     "sharp": "0.35.3",
+    "undici": "7.29.0",
     "uuid": "11.1.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@hono/node-server": "2.0.11",
+      "body-parser": "2.3.0",
+      "brace-expansion@1": "1.1.18",
+      "brace-expansion@5": "5.0.9",
+      "fast-uri": "3.1.5",
+      "hono": "4.13.0",
+      "ip-address": "10.4.0",
+      "js-yaml": "4.3.1",
+      "postcss": "8.5.25",
+      "sharp": "0.35.3",
+      "undici": "7.29.0",
+      "uuid": "11.1.1"
+    }
   }
 }
