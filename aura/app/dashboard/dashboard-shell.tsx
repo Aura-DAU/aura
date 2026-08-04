@@ -50,7 +50,6 @@ export default function DashboardShell({ user }: DashboardShellProps) {
     body = (
       <FacultyDashboard
         userName={userName}
-        departmentName={departmentName}
         onSelectPrompt={handleSelectPrompt}
       />
     )

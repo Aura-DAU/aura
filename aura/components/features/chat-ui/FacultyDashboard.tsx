@@ -6,7 +6,6 @@ import { apiFetch, ensureSession } from "@/lib/auth-client"
 
 interface FacultyDashboardProps {
   userName: string
-  departmentName?: string
   onSelectPrompt: (text: string) => void
 }
 
@@ -88,7 +87,6 @@ function CardSkeleton({ rows = 2 }: { rows?: number }) {
 
 export function FacultyDashboard({
   userName,
-  departmentName = "Information & Communication Technology",
   onSelectPrompt,
 }: FacultyDashboardProps) {
   const [scheduleText, setScheduleText] = useState("")
@@ -156,7 +154,7 @@ export function FacultyDashboard({
           Welcome back, Prof. {userName}!
         </h1>
         <p className="mt-1 text-xs text-neutral-400">
-          Faculty · {departmentName}
+          Faculty
         </p>
       </div>
 

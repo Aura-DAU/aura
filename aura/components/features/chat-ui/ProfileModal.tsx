@@ -41,6 +41,11 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
   const [saving, setSaving] = useState(false)
   const { data: session } = useSession()
   const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const role: string = session?.user?.role ?? ""
+  const isFacultyProfile =
+    role.startsWith("faculty") ||
+    role.startsWith("dean") ||
+    role === "registrar"
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -110,11 +115,13 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
                 <div className="text-xs text-neutral-500 mb-1">Role</div>
                 <div className="text-sm text-neutral-200 capitalize">{session.user.role}</div>
               </div>
-              <div>
-                <div className="text-xs text-neutral-500 mb-1">Department</div>
-                <div className="text-sm text-neutral-200">{session.user.department || "N/A"}</div>
-              </div>
-              <div className="col-span-2">
+              {!isFacultyProfile ? (
+                <div>
+                  <div className="text-xs text-neutral-500 mb-1">Department</div>
+                  <div className="text-sm text-neutral-200">{session.user.department || "N/A"}</div>
+                </div>
+              ) : null}
+              <div className={isFacultyProfile ? "" : "col-span-2"}>
                 <div className="text-xs text-neutral-500 mb-1">ERP ID</div>
                 <div className="text-sm text-neutral-200">{session.user.erpId}</div>
               </div>
@@ -129,26 +136,30 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
             value={draft.name}
             onChange={(v) => setDraft((d) => ({ ...d, name: v }))}
           />
-          <Field
-            id="program"
-            label="Program"
-            placeholder="B.Tech CSE"
-            value={draft.program}
-            onChange={(v) => setDraft((d) => ({ ...d, program: v }))}
-            hint={session?.user ? "Auto-filled from your ERP ID — edit if it's wrong" : undefined}
-          />
-          <Field
-            id="year"
-            label="Year"
-            placeholder="2nd year"
-            value={draft.year}
-            onChange={(v) => setDraft((d) => ({ ...d, year: v }))}
-            hint={session?.user ? "Auto-filled from your ERP ID — edit if it's wrong" : undefined}
-          />
+          {!isFacultyProfile ? (
+            <>
+              <Field
+                id="program"
+                label="Program"
+                placeholder="B.Tech CSE"
+                value={draft.program}
+                onChange={(v) => setDraft((d) => ({ ...d, program: v }))}
+                hint={session?.user ? "Auto-filled from your ERP ID — edit if it's wrong" : undefined}
+              />
+              <Field
+                id="year"
+                label="Year"
+                placeholder="2nd year"
+                value={draft.year}
+                onChange={(v) => setDraft((d) => ({ ...d, year: v }))}
+                hint={session?.user ? "Auto-filled from your ERP ID — edit if it's wrong" : undefined}
+              />
+            </>
+          ) : null}
           <Field
             id="interests"
             label="Interests"
-            placeholder="AI, robotics, design"
+            placeholder={isFacultyProfile ? "Research, teaching, mentoring" : "AI, robotics, design"}
             value={draft.interests}
             onChange={(v) => setDraft((d) => ({ ...d, interests: v }))}
           />
