@@ -9,167 +9,111 @@ source_type: PDF
 pdf_name: "Policies/Seed Grant Policy"
 ---
 
-# Policies/Seed Grant Policy
+# Seed Grant Policy (2025)
 
 ## Overview
 
-This document is a PDF resource from DA-IICT / DAU. Content below has been extracted and structured for the DAU PWA knowledge base.
+This verified transcription is based on the official three-page Dhirubhai Ambani University policy dated 11 September 2025. It supersedes the previous seed grant policy.
 
-## Main Content
+## Preamble
 
-pr
+The seed grant policy sets out guidelines and procedures through which newly recruited faculty members early in their careers may obtain seed funding from the university. The funding supports faculty members in initiating research activities and developing proof-of-concept studies that may lead to industry or agency research funding or publications in reputed journals.
 
-Dhirubhai Ambani
-University
+## Eligibility
 
-Seed Grant Policy
+A newly joined faculty member whose Ph.D. was awarded within the previous three years may apply for a seed grant.
 
-Preamble
+## Grant Amount and Duration
 
-The purpose of the seed grant policy is to set out the guidelines and procedures for the newly recruited
-faculty members early at their career to obtain seed funding from the institute. The goal of the seed
-funding is to support such faculty members for initiating their research activities and developing proof of
-concept studies which may lead to research funding from the relevant industry or different funding
-agencies or may result in publications in reputed journals.
+Seed grant support is available up to Rs. 10,00,000 across three research-project categories. A new faculty member may apply only once, within one year of joining the university, and must choose Category A, B, or C. The project duration may be at most two years.
 
-Who Can Apply for Seed Grant Research?
-A newly joined faculty member early at their career (Ph.D. degree awarded within last three years) can
-apply for seed grant.
+| Category | Grant amount |
+| --- | --- |
+| Category A | Up to Rs. 2,00,000 |
+| Category B | More than Rs. 2,00,000 and up to Rs. 5,00,000 |
+| Category C | More than Rs. 5,00,000 and up to Rs. 10,00,000 |
 
-Seed Grant Amount
+## Application and Approval Process
 
-The support of seed grant is up to Rs. 10,00,000/- (Rupees Ten Lakh) for three categories of research
-project. A new faculty member can apply for the seed grant only once within a year after joining the university
-and has to make a choice whether to apply for category A or B or C as mentioned below. The project duration
-can be at the most two years.
+A faculty member submits the proposal to the Dean (R&D) using the prescribed format. Annexure 1 applies to Category A, while Annexure 2 gives the Category B and C format.
 
-e Category A: Seed Grant proposal up to Rs. 2,00,000/- (Rupees Two Lakh)
+### Category A review
 
-e Category B: Seed Grant proposal more than Rs. 2,00,000/- (Rupees Two Lakh) but less than equal
-to Rs. 5,00,000/- (Rupees Five Lakh)
+An internal subject-matter expert identified by the Dean (R&D) reviews the proposal. The Dean (R&D) may request revisions addressing the reviewer's comments or suggestions.
 
-e Category C: Seed Grant proposal more than Rs. 5,00,000/- (Rupees Five Lakh) but less than
-equal to Rs. 10,00,000/- (Rupees Ten Lakh)
+### Category B review
 
-Mode of Application and Approval Process
-A faculty can submit the proposal to the Dean(R&D) with the details as per the prescribed format
-(Annexure 1). This format applies to all three categories of the proposal.
+Two subject-matter experts, internal or external, review the proposal. Based on their reviews, the Dean (R&D) may request revisions. If approved, the Dean (R&D) forms a Research Progress Committee (RPC) of internal and external experts in the proposal area. The RPC evaluates progress once every six months.
 
-Category A: The proposal will be reviewed by an internal subject-matter expert to be identified by the
-Dean(R&D). The Dean(R&D) may then request a revision, as applicable, of the proposal addressing the
-comments/suggestions of the reviewer.
+### Category C review
 
-Category B: The proposal will be reviewed by two subject-matter experts (either internal or external) to
-be identified by the Dean(R&D). Based on the reviews, the Dean(R&D) may request revision of the
-proposal as applicable If the proposal is approved, the Dean(R&D) will constitute a Research Progress
-Committee (RPC), comprising internal and external experts in the area of the proposal, which will
-evaluate the progress of the work once in six months.
+Three subject-matter experts review the proposal, at least two of whom must be external. Based on their reviews, the Dean (R&D) may request revisions. If approved, the Dean (R&D) forms an RPC of internal and external experts in the proposal area. The RPC evaluates progress once every six months.
 
-Category C: The proposal will be reviewed by three subject-matter experts with at least two of them
-external to be identified by the Dean(R&D). Based on the reviews, the Dean(R&D) may request revision
-of the proposal as applicable. If the proposal is approved, the Dean(R&D) will constitute a Research
+## Funding Conditions
 
-Page 1 of 3
+- After reviewers clear a proposal, the Dean (R&D) recommends it to the Director for funding approval.
+- A seed grant is not expected to cover the complete research plan. It provides assistance to initiate the project.
+- The proposal should explain the overall research goal, approaches, required facilities, equipment and consumables, expected outcomes and possible applications, and agencies that may fund the work in the future.
+- Category A cannot cover technical-staff expenses. Categories B and C may allow technical-staff expenses up to 50% of the sanctioned proposal amount.
+- The Dean (R&D) approves financial aspects, including equipment, technical staff, and travel.
+- DAU's Accounts Office manages accounts and auditing.
 
-Progress Committee (RPC), comprising internal and external experts in the area of the proposal, which
-will evaluate the progress of the work once in six months.
+## Annexure 1: Category A Proposal Format
 
-Note
+1. Name of the investigator
+2. Title of the seed grant research proposal
+3. Name of the area or department
+4. Background of the research
+   - Context and importance of the research problem
+   - Gaps in existing knowledge or technology
+5. Research objective, methodology, and timeline
+   - Research problem and significance
+   - Novelty or innovation
+   - Methodology
+   - Potential impact
+   - Timeline
+6. Year-wise budget estimate and justification
+   - Equipment, materials, or cases
+   - Travel
+   - Consumables
+7. Expected outcomes and impact
+   - Anticipated research results, including publications and patents
+   - Contribution to science, technology, education, or society
+   - Pathways for external funding
+   - Potential interdisciplinary collaboration
+8. Investigator's dated signature
 
-Once a proposal is cleared by the reviewers, the Dean(R&D) will recommend it to the director for
-funding approval.
+## Annexure 2: Category B and C Proposal Format
 
-Seed Grant is not expected to cover the costs for the full research plan, but only provide
-assistance to a faculty member to initiate their research project. The proposal should explain overall
-research goal, approach(es), the type of facilities/equipment/consumables that are required, the
-expected outcome and possible uses/applications, and the agencies that can be approached to
-fund the projects in future.
+1. Name of the investigator
+2. Title of the seed grant research proposal
+3. Name of the area or department
+4. Background of the research
+   - Context and importance of the research problem
+   - Gaps in existing knowledge or technology
+5. Research objective
+   - Research problem and significance
+   - Novelty or innovation
+   - Objectives
+   - Expected outcomes
+   - Potential impact
+6. Research methodology and approach
+   - Research design and methods
+   - Expected challenges and mitigation strategies
+   - Timeline or milestones
+7. Year-wise budget estimate and justification
+   - Project personnel, such as a student or research assistant
+   - Equipment, materials, or cases
+   - Travel
+   - Consumables
+8. Expected outcomes and impact
+   - Anticipated research results, including publications and patents
+   - Contribution to science, technology, education, or society
+   - Pathways for external funding
+   - Potential interdisciplinary collaboration
+9. Names of three external experts, preferably from premier institutions or R&D laboratories, in the proposal's research field
+10. Investigator's dated signature
 
-Seed Grant of Category A cannot cover expenses of technical staff, but the Calagory B and
-Category C may allow expenses of technical staff with a limit upto 50% of the sanctioned fund of
-the proposal.
+**Policy date:** 11 September 2025
 
-This policy supersedes the previous policy of Seed Grant.
-
-The office of Dean (R&D) will approve the financial aspects including the equipment, technical staff, travel
-under the seed grant. The accounts and auditing will be managed by DAU’s account office.
-
-Cy ul
-
-Date: 11 September 2025 G Venkatesh
-
-(Director - School of Technology)
-
-Page 2 of 3
-
-. “a —
-
-Annexure 1: Format for Seed Grant for the Category-A Proposal
-1. Name of the Investigator
-
-2. Title of the Seed Grant Research Proposal
-3. Name of the Area/Department:
-
-4. Background of the Research
-o Context and importance of the research problem
-o Gaps in existing knowledge/technology
-5. Research Objective, Methodology, Timeline
-o Research problem and significance
-o  Novelty/innovation
-o Methodology
-o - Potential impact
-o Timeline
-
-6. Budget Estimate and Justification (year-wise)
-o Equipment/ materials / Cases
-o Travel
-o Consumables
-7. Expected Outcomes and Impact
-o Anticipated research results in terms publications, patents
-o Contribution to science/technology/education/society
-o Pathways for external funding
-o Potential interdisciplinary collaboration
-8. Signature (with date) of the Investigator
-
-Annexure 2: Format for Seed Grant for the Category-B and Category-C Proposal
-1, Name of the Investigator
-
-2. Title of the Seed Grant Research Proposal
-3. Name of the Area/Department:
-
-4. Background of the Research
-© Context and importance of the research problem
-o Gaps in existing knowledge/technology
-5. Research Objective
-o Research problem and significance
-Novelty/innovation
-Objectives
-Expected outcomes
-Potential impact
-
-Orig Or oO
-
-6. Research Methodology and Approach
-o Research design and methods
-o Expected challenges and mitigation strategies
-© Timeline / milestones
-
-7. Budget Estimate and Justification (year-wise)
-o Project personnel (student, Research Assistant)
-o Equipment/ materials / Cases
-o. Travel
-o Consumables
-
-8. Expected Outcomes and Impact
-
-co Anticipated research results in terms publications, patents
-© Contribution to science/technology/education/society
-
-o Pathways for external funding
-
-o Potential interdisciplinary collaboration
-
-9. Name of three external experts (preferably from premier institutions, R&D labs) in the field of research/proposal
-10. Signature (with date) of the Investigator
-
-Page 3 of 3
+**Signed by:** G. Venkatesh, Director - School of Technology
