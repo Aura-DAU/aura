@@ -493,8 +493,22 @@ def _split_bold_entity_blocks(content):
     Semantic Entity Boundary Detection:
     Splits sections without H3 into independent semantic entity blocks when items are formatted as
     bold headers (e.g. **Hostel A:** ..., **Scholarship 1:** ...).
+
+    Regression note: the trailing `\\s*` used to greedily eat the newline that
+    separates one bold entity from the next (markdown hard-breaks end a line
+    with two trailing spaces + \\n). That swallowed \\n was exactly the anchor
+    `(?:^|\\n)` needed to detect the *following* entity, so every other bold
+    item in a tightly-packed list (e.g. a numbered "1. **A** / 2. **B** /
+    3. **C**" list with no blank lines between items) silently failed to
+    start its own match and got absorbed into the previous entity's block
+    instead of becoming its own chunk — e.g. a 6-item enumerated list would
+    fragment into 4 uneven blocks instead of 6, making later items a
+    retrieval top-k lottery instead of a guaranteed-together group. Trailing
+    whitespace here is intentionally restricted to spaces/tabs only ([ \\t]*)
+    so a real newline is never consumed as part of one match, leaving it
+    available as the next entity's anchor.
     """
-    pattern = r"(?:^|\n)(?:\d+\.\s*)?\*\*(.*?)\*\*\s*[\:\-]?\s*"
+    pattern = r"(?:^|\n)(?:\d+\.\s*)?\*\*(.*?)\*\*[ \t]*[\:\-]?[ \t]*"
     matches = list(re.finditer(pattern, content))
     if len(matches) > 1:
         blocks = []
