@@ -400,9 +400,8 @@ def get_all_elective_rows(year: int, sem: int) -> list[dict]:
                   course_type
            FROM timetable_master
            WHERE (course_type ILIKE '%%Elective%%' OR program ILIKE '%%Elective%%')
-             AND year = %s AND sem = %s
+             AND year = 0 AND sem = 0
            ORDER BY course_code, day_of_week, start_time""",
-        (year, sem),
     )
 
 
@@ -756,9 +755,14 @@ def get_timetable_for_cohort(
     than reporting "not found" over a cosmetic label mismatch.
     """
     if sem is None and year is not None:
-        # Only the academic year was given -- approximate with that year's
-        # first (odd) semester, same mapping the dashboard setup wizard uses.
-        sem = year * 2 - 1
+        # Infer current semester from the current month:
+        # Autumn (Jul-Dec) -> odd semesters; Spring (Jan-Jun) -> even semesters.
+        import datetime
+        current_month = datetime.datetime.now().month
+        if 7 <= current_month <= 12:
+            sem = year * 2 - 1
+        else:
+            sem = year * 2
 
     if sem is None:
         raise TimetableError(

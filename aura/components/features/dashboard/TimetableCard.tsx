@@ -17,9 +17,12 @@ const SETUP_PROMPT =
   "I'd like to set up my personal timetable — please ask me for my section and electives."
 
 function todayDayOfWeek(): number {
-  // JS: 0=Sun … 6=Sat → convert to 0=Mon … 4=Fri used by DAY_NAMES/DAY_SHORT_NAMES.
+  // Get current time in IST so the schedule rolls over at university midnight,
+  // not the student's local OS midnight if they are traveling.
+  const istString = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  const jsDay = new Date(istString).getDay() // 0=Sun … 6=Sat
+  // Convert to 0=Mon … 4=Fri used by DAY_NAMES/DAY_SHORT_NAMES.
   // On a Saturday or Sunday there's no matching column, so default to Monday.
-  const jsDay = new Date().getDay()
   if (jsDay === 0 || jsDay === 6) return 0
   return jsDay - 1
 }
