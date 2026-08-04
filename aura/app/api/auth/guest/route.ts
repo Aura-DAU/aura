@@ -21,7 +21,7 @@ const SESSION_MAX_AGE = 8 * 60 * 60 // 8 h — matches authOptions
  *
  * Flow: /login → (click "Continue as Guest") → /api/auth/guest → /
  */
-export async function GET(request: Request) {
+export async function GET() {
   const cookieStore = await cookies()
   const guestCookies = readOrMintGuestCookies(cookieStore)
   const erpId = guestErpId(guestCookies)
@@ -46,7 +46,14 @@ export async function GET(request: Request) {
     ? "__Secure-next-auth.session-token"
     : "next-auth.session-token"
 
-  const response = NextResponse.redirect(new URL("/", request.url))
+  // Relative Location, not NextResponse.redirect(new URL("/", request.url)):
+  // in the standalone production server `request.url` is rebuilt from the
+  // container's bind address (HOSTNAME=0.0.0.0, PORT=3000), not the public
+  // host, so an absolute redirect sent the browser to https://0.0.0.0:3000/.
+  const response = new NextResponse(null, {
+    status: 307,
+    headers: { Location: "/" },
+  })
 
   // Set the guest identity cookies (used by /api/chat for quota keying).
   const guestOpts = guestCookieOptions()
