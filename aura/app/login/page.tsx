@@ -109,7 +109,7 @@ function LoginCard() {
       </div>
 
       <Link
-        href="/"
+        href="/api/auth/guest"
         className="mt-5 flex w-full cursor-pointer items-center justify-center rounded-xl border border-theme-gray-lighter bg-transparent py-3 text-sm font-medium text-neutral-300 transition-all hover:border-neutral-500 hover:text-white"
       >
         Continue as Guest
