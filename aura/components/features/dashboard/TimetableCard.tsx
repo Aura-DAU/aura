@@ -221,10 +221,12 @@ export function TimetableCard() {
 
   const mobileEntries = getSlotsForDay(selectedDay)
 
-  const coreSlots = allSlots.filter((slot) => !isElective(slot))
-  const electiveSlots = allSlots.filter(isElective)
+  const coreSlots = allSlots.filter((slot) => !isElective(slot) && slot.session_type !== "lab" && slot.session_type !== "tutorial")
+  const electiveSlots = allSlots.filter((slot) => isElective(slot) && slot.session_type !== "lab" && slot.session_type !== "tutorial")
+  const labSlots = allSlots.filter((slot) => slot.session_type === "lab" || slot.session_type === "tutorial")
   const coreRows = buildGridRows(coreSlots)
   const electiveRows = buildGridRows(electiveSlots)
+  const labRows = buildGridRows(labSlots)
 
   return (
     <div className="rounded-2xl border border-theme-gray-light bg-theme-gray p-5">
@@ -428,6 +430,45 @@ export function TimetableCard() {
                       </td>
                     </tr>
                     {electiveRows.map((row) => (
+                      <tr key={row.start} className="h-16">
+                        <td className="align-middle text-[10px] font-medium leading-tight text-neutral-500">
+                          {row.start}
+                          <br />
+                          {row.end}
+                        </td>
+                        {DAY_NAMES.map((dayName, idx) => (
+                          <td key={idx} className="h-16 align-middle">
+                            {row.cells[idx] ? (
+                              <GridCell
+                                slot={row.cells[idx]!}
+                                onClick={editMode ? () => setActiveEdit({ mode: "edit", slot: row.cells[idx]! }) : undefined}
+                              />
+                            ) : (
+                              <EmptyCell
+                                onClick={
+                                  editMode
+                                    ? () => setActiveEdit({ mode: "add", day: dayName, start: row.start, end: row.end })
+                                    : undefined
+                                }
+                              />
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </>
+                )}
+
+                {labRows.length > 0 && (
+                  <>
+                    <tr>
+                      <td colSpan={DAY_NAMES.length + 1} className="pt-2">
+                        <div className="rounded-md bg-theme-yellow/15 py-1 text-center text-[10px] font-semibold uppercase tracking-wide text-theme-yellow">
+                          Lab / Tutorial
+                        </div>
+                      </td>
+                    </tr>
+                    {labRows.map((row) => (
                       <tr key={row.start} className="h-16">
                         <td className="align-middle text-[10px] font-medium leading-tight text-neutral-500">
                           {row.start}
