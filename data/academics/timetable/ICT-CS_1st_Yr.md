@@ -19,9 +19,9 @@ DA-IICT's 1st-year curriculum runs on a shared "Common Curriculum Framework" —
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 09:00-09:50 | PC1 | SB2 | CEP-108 |
-| Wednesday | 08:00-08:50 | PC1 | SB2 | CEP-108 |
-| Thursday | 10:00-10:50 | PC1 | SB2 | CEP-108 |
+| Monday | 09:00-09:50 | PC1 | AB | CEP-206 |
+| Wednesday | 08:00-08:50 | PC1 | AB | CEP-206 |
+| Thursday | 10:00-10:50 | PC1 | AB | CEP-206 |
 
 ## Institute Core (IC) — shared by ALL branches, not branch-specific
 

@@ -6,9 +6,9 @@ Source: derived from the official DAU Autumn 2026-27 combined lecture timetable,
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 09:00-09:50 | PC1 (EVD) | AR | CEP-205 |
-| Wednesday | 08:00-08:50 | PC1 (EVD) | AR | CEP-205 |
-| Thursday | 10:00-10:50 | PC1 (EVD) | AR | CEP-205 |
+| Monday | 09:00-09:50 | PC1 (EVD) | AB | CEP-206 |
+| Wednesday | 08:00-08:50 | PC1 (EVD) | AB | CEP-206 |
+| Thursday | 10:00-10:50 | PC1 (EVD) | AB | CEP-206 |
 
 ## Institute Core (IC) — Section B
 

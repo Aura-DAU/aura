@@ -8,9 +8,9 @@ Note: The source timetable has no PC1 row explicitly labeled "ICT-CS." This is a
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 09:00-09:50 | PC1 | SB2 | CEP-108 |
-| Wednesday | 08:00-08:50 | PC1 | SB2 | CEP-108 |
-| Thursday | 10:00-10:50 | PC1 | SB2 | CEP-108 |
+| Monday | 09:00-09:50 | PC1 | AB | CEP-206 |
+| Wednesday | 08:00-08:50 | PC1 | AB | CEP-206 |
+| Thursday | 10:00-10:50 | PC1 | AB | CEP-206 |
 
 ## Institute Core (IC) — Section C
 
