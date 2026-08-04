@@ -8,15 +8,15 @@ Note: the source timetable lists 'MC314' and 'HM116' as two separate rows at the
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 8:00-8:50 | MC314 — Principles of Economics (duplicate listing of HM116) | SMD | CEP-102 |
+| Monday | 08:00-08:50 | MC314 — Principles of Economics (duplicate listing of HM116) | SMD | CEP-102 |
 | Monday | 10:00-10:50 | MC313 — Algebraic Structures | SB2 | CEP-205 |
-| Tuesday | 8:00-8:50 | MC312 — Modelling and Simulation | MT | CEP-205 |
-| Tuesday | 9:00-9:50 | MC311 — Mathematical Optimization | AT | CEP-205 |
+| Tuesday | 08:00-08:50 | MC312 — Modelling and Simulation | MT | CEP-205 |
+| Tuesday | 09:00-09:50 | MC311 — Mathematical Optimization | AT | CEP-205 |
 | Tuesday | 10:00-10:50 | MC314 — Principles of Economics (duplicate listing of HM116) | SMD | CEP-102 |
-| Wednesday | 9:00-9:50 | MC313 — Algebraic Structures | SB2 | CEP-205 |
+| Wednesday | 09:00-09:50 | MC313 — Algebraic Structures | SB2 | CEP-205 |
 | Wednesday | 10:00-10:50 | MC312 — Modelling and Simulation | MT | CEP-205 |
-| Thursday | 8:00-8:50 | MC311 — Mathematical Optimization | AT | CEP-205 |
-| Thursday | 9:00-9:50 | MC314 — Principles of Economics (duplicate listing of HM116) | SMD | CEP-102 |
-| Friday | 8:00-8:50 | MC313 — Algebraic Structures | SB2 | CEP-205 |
-| Friday | 9:00-9:50 | MC312 — Modelling and Simulation | MT | CEP-205 |
+| Thursday | 08:00-08:50 | MC311 — Mathematical Optimization | AT | CEP-205 |
+| Thursday | 09:00-09:50 | MC314 — Principles of Economics (duplicate listing of HM116) | SMD | CEP-102 |
+| Friday | 08:00-08:50 | MC313 — Algebraic Structures | SB2 | CEP-205 |
+| Friday | 09:00-09:50 | MC312 — Modelling and Simulation | MT | CEP-205 |
 | Friday | 10:00-10:50 | MC311 — Mathematical Optimization | AT | CEP-205 |

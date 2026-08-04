@@ -11,16 +11,16 @@ Note: Science, Technology and Society (HM216) is a large lecture shared across a
 | Monday | 12:00-12:50 | HM216 (Sec A) — Science, Technology and Society | PD | CEP-102 |
 | Monday | 12:00-12:50 | HM216 (Sec B) — Science, Technology and Society | JJ | CEP-110 |
 | Monday | 12:00-12:50 | ED211 — Engineering Mathematics III | YV | CEP-104 |
-| Monday | 4:00-4:50 | ED212 — Solid State Devices | PK | CEP-104 |
+| Monday | 16:00-16:50 | ED212 — Solid State Devices | PK | CEP-104 |
 | Tuesday | 12:00-12:50 | ED213 — Signal Processing and Control Systems | HP | CEP-104 |
-| Tuesday | 4:00-4:50 | HM216 (Sec A) — Science, Technology and Society | PD | CEP-102 |
-| Tuesday | 4:00-4:50 | HM216 (Sec B) — Science, Technology and Society | JJ | CEP-110 |
+| Tuesday | 16:00-16:50 | HM216 (Sec A) — Science, Technology and Society | PD | CEP-102 |
+| Tuesday | 16:00-16:50 | HM216 (Sec B) — Science, Technology and Society | JJ | CEP-110 |
 | Wednesday | 11:00-11:50 | ED213 — Signal Processing and Control Systems | HP | CEP-104 |
 | Wednesday | 12:00-12:50 | ED211 — Engineering Mathematics III | YV | CEP-104 |
 | Wednesday | 12:00-12:50 | ED212 — Solid State Devices | PK | CEP-104 |
 | Thursday | 12:00-12:50 | ED214 — Electronic Design Lab | BM | CEP-104 |
 | Thursday | 12:00-12:50 | HM216 (Sec A) — Science, Technology and Society | PD | CEP-102 |
 | Thursday | 12:00-12:50 | HM216 (Sec B) — Science, Technology and Society | JJ | CEP-110 |
-| Thursday | 4:00-4:50 | ED211 — Engineering Mathematics III | YV | CEP-104 |
+| Thursday | 16:00-16:50 | ED211 — Engineering Mathematics III | YV | CEP-104 |
 | Friday | 12:00-12:50 | ED212 — Solid State Devices | PK | CEP-104 |
 | Friday | 12:00-12:50 | ED213 — Signal Processing and Control Systems | HP | CEP-104 |

@@ -8,12 +8,12 @@ Note: Principles of Economics (HM116) is shared with MNC this semester (ICT/ICT-
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 8:00-8:50 | HM116 — Principles of Economics | SMD | CEP-102 |
-| Monday | 9:00-9:50 | ED312 — VLSI Design | SR | CEP-105 |
-| Tuesday | 8:00-8:50 | ED311 — Digital Signal Processing Hardware | YA | CEP-104 |
+| Monday | 08:00-08:50 | HM116 — Principles of Economics | SMD | CEP-102 |
+| Monday | 09:00-09:50 | ED312 — VLSI Design | SR | CEP-105 |
+| Tuesday | 08:00-08:50 | ED311 — Digital Signal Processing Hardware | YA | CEP-104 |
 | Tuesday | 10:00-10:50 | HM116 — Principles of Economics | SMD | CEP-102 |
-| Wednesday | 8:00-8:50 | ED312 — VLSI Design | SR | CEP-105 |
+| Wednesday | 08:00-08:50 | ED312 — VLSI Design | SR | CEP-105 |
 | Wednesday | 10:00-10:50 | ED311 — Digital Signal Processing Hardware | YA | CEP-104 |
-| Thursday | 9:00-9:50 | HM116 — Principles of Economics | SMD | CEP-102 |
+| Thursday | 09:00-09:50 | HM116 — Principles of Economics | SMD | CEP-102 |
 | Thursday | 10:00-10:50 | ED312 — VLSI Design | SR | CEP-105 |
-| Friday | 9:00-9:50 | ED311 — Digital Signal Processing Hardware | YA | CEP-104 |
+| Friday | 09:00-09:50 | ED311 — Digital Signal Processing Hardware | YA | CEP-104 |
