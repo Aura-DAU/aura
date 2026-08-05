@@ -143,7 +143,6 @@ export function FacultyDashboard({
     "What is the consultancy policy?",
     "How do I apply for a seed grant?",
     "Where can I find the course file template?",
-    "List my BTP mentee groups",
   ]
 
   return (
