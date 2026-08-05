@@ -366,11 +366,47 @@ class AuraChatGraph:
         identity = state.get("identity")
         if not identity or not is_pure_profile_query(query):
             return state
-        if getattr(identity, "role", None) in (None, "guest"):
+        role = getattr(identity, "role", None)
+        if role in (None, "guest"):
             return state
 
-        name = getattr(identity, "full_name", None) or "Student"
+        is_faculty = str(role).startswith("faculty") or str(role) in ("dean", "registrar")
+        default_name = "Faculty member" if is_faculty else "Student"
+        name = getattr(identity, "full_name", None) or default_name
         roll = getattr(identity, "roll_number", None) or getattr(identity, "erp_id", "N/A")
+        branch = (
+            getattr(identity, "dept", None)
+            or getattr(identity, "branch", None)
+            or "your department"
+        )
+        email = getattr(identity, "email", None) or (
+            f"{str(roll).lower()}@dau.ac.in" if roll and roll != "N/A" else None
+        )
+
+        q_lower = query.lower()
+
+        if is_faculty:
+            # Faculty identity has no roll number/programme/semester — use
+            # employee-appropriate labels instead of the student fast-path copy.
+            if "name" in q_lower or "who am i" in q_lower:
+                ans = f"You are **{name}** (Employee ID: `{roll}`)."
+            elif "roll" in q_lower or "id" in q_lower or "employee" in q_lower:
+                ans = f"Your employee ID is `{roll}`."
+            elif "email" in q_lower:
+                ans = f"Your official university email is `{email}`." if email else (
+                    f"Your employee ID is `{roll}`; use `{str(roll).lower()}@dau.ac.in` if that is your institutional mailbox."
+                )
+            elif "branch" in q_lower or "dept" in q_lower or "department" in q_lower:
+                ans = f"You are in the **{branch}** department."
+            else:
+                ans = (
+                    f"You are **{name}** (Employee ID: `{roll}`), a faculty member in the "
+                    f"**{branch}** department."
+                )
+            state["result"] = {"answer": ans, "sources": [], "is_personal_data": True, "is_guardrail": True}
+            state["is_guardrail"] = True
+            return state
+
         scope = state.get("academic_scope")
         prog = (
             (getattr(scope, "programme_id", None) if scope else None)
@@ -379,8 +415,7 @@ class AuraChatGraph:
             or "your programme"
         )
         branch = (
-            getattr(identity, "dept", None)
-            or getattr(identity, "branch", None)
+            branch
             or (getattr(scope, "department_id", None) if scope else None)
             or "your department"
         )
@@ -388,11 +423,7 @@ class AuraChatGraph:
             getattr(identity, "current_sem", None)
             or (getattr(scope, "current_semester", None) if scope else None)
         )
-        email = getattr(identity, "email", None) or (
-            f"{str(roll).lower()}@dau.ac.in" if roll and roll != "N/A" else None
-        )
 
-        q_lower = query.lower()
         if "name" in q_lower or "who am i" in q_lower:
             ans = f"You are **{name}** (Roll Number: `{roll}`)."
         elif "roll" in q_lower or ("id" in q_lower and "student" in q_lower):
