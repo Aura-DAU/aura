@@ -45,12 +45,15 @@ export function Message({
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Tracks pending single/double-click timers per citation pill (keyed by "file-index")
+  const citationClickRef = useRef<Map<string, { timer: ReturnType<typeof setTimeout> | null; count: number }>>(new Map())
   const { openDocument, prefetchDocument } = useDocumentViewer()
 
   useEffect(() => {
     return () => {
       if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
       if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
+      citationClickRef.current.forEach(s => { if (s.timer) clearTimeout(s.timer) })
     }
   }, [])
 
@@ -242,7 +245,26 @@ export function Message({
                         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
                       }}
                       onClick={() => {
-                        window.open(c.file, "_blank", "noopener,noreferrer")
+                        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+                        if (isMobile) {
+                          // Mobile: single tap → viewer, double tap → new tab
+                          const key = `${c.file}-${i}`
+                          const state = citationClickRef.current.get(key) ?? { timer: null, count: 0 }
+                          state.count += 1
+                          if (state.timer) clearTimeout(state.timer)
+                          state.timer = setTimeout(() => {
+                            if (state.count === 1) {
+                              openDocument(viewerTarget)
+                            } else {
+                              window.open(c.file, "_blank", "noopener,noreferrer")
+                            }
+                            citationClickRef.current.delete(key)
+                          }, 300)
+                          citationClickRef.current.set(key, state)
+                        } else {
+                          // Desktop: click opens raw file in new tab; hover handles the viewer
+                          window.open(c.file, "_blank", "noopener,noreferrer")
+                        }
                       }}
                       className={pillClasses}
                       aria-label={`View source: ${c.title ?? c.file}`}
