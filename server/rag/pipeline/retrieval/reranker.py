@@ -94,6 +94,81 @@ class Reranker:
         ).to(self.device)
         self.model.eval()
 
+    # Matches a trailing "(Qualifier)" or a dash-separated short capitalized
+    # tail, e.g. "Dean (Students)", "Hall of Residence (Men)",
+    # "Executive Assistant – Dean (AP)" (paren wins if both are present).
+    _QUALIFIER_RE = re.compile(
+        r"\(([^)]{1,40})\)|[-\u2013]\s*([A-Z][A-Za-z .]{1,40})$"
+    )
+
+    @classmethod
+    def _extract_qualifier(cls, label: str):
+        label = (label or "").strip()
+        if not label:
+            return None, None
+        m = cls._QUALIFIER_RE.search(label)
+        if not m:
+            return None, None
+        qualifier = (m.group(1) or m.group(2) or "").strip().lower()
+        base = (label[: m.start()] + label[m.end():]).strip(" -\u2013").lower()
+        if not qualifier or not base:
+            return None, None
+        return base, qualifier
+
+    @staticmethod
+    def _qualifier_matches_query(qualifier: str, query_lower: str) -> bool:
+        if not qualifier:
+            return False
+        if qualifier in query_lower:
+            return True
+        for word in re.findall(r"[a-z]{2,}", qualifier):
+            if re.search(rf"\b{re.escape(word)}\b", query_lower):
+                return True
+        return False
+
+    def _build_entity_adjustments(self, query, results):
+        """Group candidates sharing a base label with differing qualifiers,
+        and — only when the query names exactly one qualifier in a group —
+        return {result_id: +0.20/-0.20} boosting the match and penalizing
+        the rest of that group. Groups the query doesn't disambiguate (zero
+        or 2+ qualifiers named) are left alone (no adjustment)."""
+
+        groups: dict[str, dict[str, list]] = {}
+        for r in results:
+            metadata = r.get("metadata", {}) or {}
+            label = (
+                metadata.get("h3")
+                or metadata.get("h2")
+                or metadata.get("h1")
+                or metadata.get("title")
+                or ""
+            )
+            base, qualifier = self._extract_qualifier(label)
+            if base is None:
+                continue
+            rid = r.get("id")
+            if rid is None:
+                continue
+            groups.setdefault(base, {}).setdefault(qualifier, []).append(rid)
+
+        query_lower = query.lower()
+        adjustment: dict = {}
+        for base, qualifier_map in groups.items():
+            if len(qualifier_map) < 2:
+                continue  # no ambiguity for this base entity in this pool
+            matched = [
+                q for q in qualifier_map
+                if self._qualifier_matches_query(q, query_lower)
+            ]
+            if len(matched) != 1:
+                continue  # query doesn't disambiguate, or names several
+            winner = matched[0]
+            for q, ids in qualifier_map.items():
+                adj = 0.20 if q == winner else -0.20
+                for rid in ids:
+                    adjustment[rid] = adj
+        return adjustment
+
     def rerank(
 
         self,
@@ -385,6 +460,30 @@ class Reranker:
         explicit_rule_year = entities.get("rule_year")
         current_year = datetime.now().year
 
+        # ── Generic entity/qualifier disambiguation ─────────────────────
+        # DAU's corpus is full of near-duplicate structured entries that
+        # share a base role/office name but differ by a bracketed or
+        # dash-suffixed qualifier: "Dean (Students)" vs "Dean (Academic
+        # Programs)", "Hall of Residence (Men)" vs "(Women)", "Convener" vs
+        # "Deputy Convener", etc. The cross-encoder alone often can't
+        # separate these — same structure, same keywords, one differing
+        # word — and once only a handful of chunks survive the token
+        # budget (see AURA_MAX_CONTEXT_TOKENS in token_budget.py), whichever
+        # lookalike ranks a hair higher can be the wrong one, with the model
+        # then mislabeling it as whichever entity the user actually asked
+        # about (this is what happened with the Dean Students/AP mix-up).
+        #
+        # Rather than hardcode specific office/role names, we extract a
+        # "qualifier" from each candidate's own title/h1/h2/h3 — anything in
+        # parentheses, or a short capitalized phrase after a trailing
+        # " - "/" – " — group candidates that share the same base text with
+        # the qualifier stripped, and only when the query names exactly one
+        # qualifier within that group do we boost the matching chunk and
+        # penalize the rest. If the query is ambiguous (names none or more
+        # than one) we leave the group untouched so multi-entity comparison
+        # queries aren't penalized.
+        entity_adjustment = self._build_entity_adjustments(query, results)
+
         for result, cross_score in zip(
             results,
             cross_scores
@@ -425,62 +524,11 @@ class Reranker:
                     # is negligible at high logit values (e.g. +5.0 → +4.80).
                     semester_penalty = -0.10  # applied to the normalised score
 
-            # Fix DEAN-CONFUSION: DAU has two near-identical "Executive
-            # Assistant – Dean (X)" entries — Dean (Students) and Dean
-            # (Academic Programs) — same phrasing/structure/format, different
-            # office and different person. The cross-encoder alone doesn't
-            # reliably separate them, and since the latency-driven token
-            # budget cut (see token_budget.py AURA_MAX_CONTEXT_TOKENS) now
-            # keeps fewer chunks, only one of the two lookalikes often
-            # survives — sometimes the wrong one — and the model mislabels
-            # it with the office the user actually asked about. Detect an
-            # explicit office qualifier in the query and penalize a chunk
-            # that names only the *other* office.
-            dean_entity_penalty = 0.0
-            _chunk_text_lower = "\n".join(
-                filter(
-                    None,
-                    [
-                        metadata.get("title"),
-                        metadata.get("h1"),
-                        metadata.get("h2"),
-                        metadata.get("h3"),
-                        metadata.get("text"),
-                    ],
-                )
-            ).lower()
-            _query_lower_early = query.lower()
-
-            def _mentions_students_dean(text):
-                return bool(re.search(
-                    r"dean[\s_\-]*\(?\s*students?\)?|dean[-_]?students?_office",
-                    text,
-                ))
-
-            def _mentions_ap_dean(text):
-                return bool(re.search(
-                    r"dean[\s_\-]*\(?\s*(academic\s+programs?|ap)\)?|dean[-_]?ap_office",
-                    text,
-                ))
-
-            _wants_students = (
-                _mentions_students_dean(_query_lower_early)
-                or ("dean" in _query_lower_early and "student" in _query_lower_early)
-            )
-            _wants_ap = (
-                _mentions_ap_dean(_query_lower_early)
-                or (
-                    "dean" in _query_lower_early
-                    and ("academic program" in _query_lower_early or re.search(r"\bap\b", _query_lower_early))
-                )
-            )
-
-            if _wants_students and not _wants_ap:
-                if _mentions_ap_dean(_chunk_text_lower) and not _mentions_students_dean(_chunk_text_lower):
-                    dean_entity_penalty = -0.25
-            elif _wants_ap and not _wants_students:
-                if _mentions_students_dean(_chunk_text_lower) and not _mentions_ap_dean(_chunk_text_lower):
-                    dean_entity_penalty = -0.25
+            # Generic entity/qualifier disambiguation (replaces the earlier
+            # DEAN-CONFUSION hardcode — see _build_entity_adjustments above
+            # for how this is computed once per candidate pool). Applies to
+            # any "Base (Qualifier)" pair in the pool, not just Dean offices.
+            entity_penalty = entity_adjustment.get(result.get("id"), 0.0)
 
             course_match_boost = 0.0
 
@@ -684,7 +732,7 @@ class Reranker:
                 +
                 (semester_penalty * norm_cross)
                 +
-                dean_entity_penalty
+                entity_penalty
             )
 
             result[
