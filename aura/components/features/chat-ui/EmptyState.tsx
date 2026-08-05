@@ -1,12 +1,15 @@
 "use client"
 
-import { type ReactNode, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import {
   ArrowUpRight,
   GraduationCap,
   Home,
   Award,
   ClipboardList,
+  Landmark,
+  FileText,
+  CalendarClock,
 } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { cn } from "@/lib/utils"
@@ -19,8 +22,6 @@ interface EmptyStateProps {
   userName?: string
   /** Disable starter prompts (e.g. while a reply is already in flight). */
   disabled?: boolean
-  /** The composer, rendered between the greeting and the starter prompts. */
-  children?: ReactNode
 }
 
 const STARTER_PROMPTS = [
@@ -46,6 +47,29 @@ const STARTER_PROMPTS = [
   },
 ] as const
 
+const FACULTY_STARTER_PROMPTS = [
+  {
+    prompt: "What is the consultancy policy?",
+    icon: Landmark,
+    iconWrap: "bg-theme-yellow/10 text-theme-yellow ring-theme-yellow/20",
+  },
+  {
+    prompt: "How do I apply for a seed grant?",
+    icon: Award,
+    iconWrap: "bg-aura-sky/10 text-aura-sky ring-aura-sky/20",
+  },
+  {
+    prompt: "Where can I find the course file template?",
+    icon: FileText,
+    iconWrap: "bg-aura-mint/10 text-aura-mint ring-aura-mint/20",
+  },
+  {
+    prompt: "What is my class schedule today?",
+    icon: CalendarClock,
+    iconWrap: "bg-brand-400/10 text-brand-400 ring-brand-400/20",
+  },
+] as const
+
 function timeGreeting(date: Date): string {
   const hour = date.getHours()
   if (hour < 12) return "Good morning"
@@ -53,7 +77,7 @@ function timeGreeting(date: Date): string {
   return "Good evening"
 }
 
-export function EmptyState({ onSelectPrompt, userName, disabled = false, children }: EmptyStateProps) {
+export function EmptyState({ onSelectPrompt, userName, disabled = false }: EmptyStateProps) {
   const { data: session } = useSession()
   // Time- and name-based greeting resolves client-side; keep the server/first paint neutral
   // so hydration matches, then personalise once mounted and the session is known.
@@ -64,6 +88,11 @@ export function EmptyState({ onSelectPrompt, userName, disabled = false, childre
   const firstName = (userName || session?.user?.name || "").trim().split(" ")[0]
   const heading =
     mounted && firstName ? `${timeGreeting(new Date())}, ${firstName}` : "How can I help you today?"
+
+  const role = session?.user?.role as string | undefined
+  const isFaculty =
+    !!role && (role.startsWith("faculty") || role.startsWith("dean") || role === "registrar")
+  const starterPrompts = isFaculty ? FACULTY_STARTER_PROMPTS : STARTER_PROMPTS
 
   return (
     <div className="w-full max-w-3xl 2xl:max-w-5xl px-4 py-10">
@@ -77,10 +106,8 @@ export function EmptyState({ onSelectPrompt, userName, disabled = false, childre
         </p>
       </div>
 
-      {children ? <div className="w-full">{children}</div> : null}
-
       <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-2 sm:grid-cols-2">
-        {STARTER_PROMPTS.map(({ prompt, icon: Icon, iconWrap }, index) => (
+        {starterPrompts.map(({ prompt, icon: Icon, iconWrap }, index) => (
           <button
             key={prompt}
             type="button"
