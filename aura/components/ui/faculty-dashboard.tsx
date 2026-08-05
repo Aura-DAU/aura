@@ -6,7 +6,6 @@ import { apiFetch, ensureSession } from "@/lib/auth-client"
 
 interface FacultyDashboardProps {
   userName: string
-  departmentName?: string
   onSelectPrompt: (text: string) => void
 }
 
@@ -88,7 +87,6 @@ function CardSkeleton({ rows = 2 }: { rows?: number }) {
 
 export function FacultyDashboard({
   userName,
-  departmentName = "Information & Communication Technology",
   onSelectPrompt,
 }: FacultyDashboardProps) {
   const [scheduleText, setScheduleText] = useState("")
@@ -142,21 +140,21 @@ export function FacultyDashboard({
   // eCampus attendance data is unavailable. Revisit when UniRP exposes this endpoint.
 
   const quickPrompts = [
-    "What is my class schedule today?",
+    "What is the consultancy policy?",
+    "How do I apply for a seed grant?",
+    "Where can I find the course file template?",
     "List my BTP mentee groups",
-    "Check room availability for seminar",
-    "What are my responsibilities on the exam committee?",
   ]
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 text-left animate-in fade-in slide-in-from-bottom-3 duration-200">
+    <div className="mx-auto w-full max-w-3xl 2xl:max-w-5xl px-4 py-8 text-left animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Welcome banner */}
       <div className="mb-6 rounded-2xl border border-theme-gray-light bg-theme-gray/40 p-6 backdrop-blur-md">
         <h1 className="bg-gradient-to-r from-theme-red to-theme-yellow bg-clip-text text-xl font-bold text-transparent md:text-2xl">
           Welcome back, Prof. {userName}!
         </h1>
         <p className="mt-1 text-xs text-neutral-400">
-          Faculty · {departmentName}
+          Faculty
         </p>
       </div>
 
