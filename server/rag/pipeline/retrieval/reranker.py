@@ -425,6 +425,63 @@ class Reranker:
                     # is negligible at high logit values (e.g. +5.0 → +4.80).
                     semester_penalty = -0.10  # applied to the normalised score
 
+            # Fix DEAN-CONFUSION: DAU has two near-identical "Executive
+            # Assistant – Dean (X)" entries — Dean (Students) and Dean
+            # (Academic Programs) — same phrasing/structure/format, different
+            # office and different person. The cross-encoder alone doesn't
+            # reliably separate them, and since the latency-driven token
+            # budget cut (see token_budget.py AURA_MAX_CONTEXT_TOKENS) now
+            # keeps fewer chunks, only one of the two lookalikes often
+            # survives — sometimes the wrong one — and the model mislabels
+            # it with the office the user actually asked about. Detect an
+            # explicit office qualifier in the query and penalize a chunk
+            # that names only the *other* office.
+            dean_entity_penalty = 0.0
+            _chunk_text_lower = "\n".join(
+                filter(
+                    None,
+                    [
+                        metadata.get("title"),
+                        metadata.get("h1"),
+                        metadata.get("h2"),
+                        metadata.get("h3"),
+                        metadata.get("text"),
+                    ],
+                )
+            ).lower()
+            _query_lower_early = query.lower()
+
+            def _mentions_students_dean(text):
+                return bool(re.search(
+                    r"dean[\s_\-]*\(?\s*students?\)?|dean[-_]?students?_office",
+                    text,
+                ))
+
+            def _mentions_ap_dean(text):
+                return bool(re.search(
+                    r"dean[\s_\-]*\(?\s*(academic\s+programs?|ap)\)?|dean[-_]?ap_office",
+                    text,
+                ))
+
+            _wants_students = (
+                _mentions_students_dean(_query_lower_early)
+                or ("dean" in _query_lower_early and "student" in _query_lower_early)
+            )
+            _wants_ap = (
+                _mentions_ap_dean(_query_lower_early)
+                or (
+                    "dean" in _query_lower_early
+                    and ("academic program" in _query_lower_early or re.search(r"\bap\b", _query_lower_early))
+                )
+            )
+
+            if _wants_students and not _wants_ap:
+                if _mentions_ap_dean(_chunk_text_lower) and not _mentions_students_dean(_chunk_text_lower):
+                    dean_entity_penalty = -0.25
+            elif _wants_ap and not _wants_students:
+                if _mentions_students_dean(_chunk_text_lower) and not _mentions_ap_dean(_chunk_text_lower):
+                    dean_entity_penalty = -0.25
+
             course_match_boost = 0.0
 
             query_course = entities.get(
@@ -626,6 +683,8 @@ class Reranker:
                 (0.05 * answerability_boost)
                 +
                 (semester_penalty * norm_cross)
+                +
+                dean_entity_penalty
             )
 
             result[
