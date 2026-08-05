@@ -1,9 +1,11 @@
 "use client"
 
-import { memo, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { ArrowDown } from "lucide-react"
+import { cn } from "@/lib/utils"
 import type { ChatMessage, Citation } from "@/lib/chat-types"
-import { Message } from "./message"
-import { StreamingIndicator } from "./streaming-indicator"
+import { Message } from "./Message"
+import { StreamingIndicator } from "./StreamingIndicator"
 
 interface MessageListProps {
   messages: ChatMessage[]
@@ -11,18 +13,24 @@ interface MessageListProps {
   thinkingStep?: string
   activeCitations: Citation[]
   onRegenerate: () => void
+  onCalendarSyncConfirm: () => void
+  /** True when this thread was auto-forked from a full one — shows a divider. */
+  continuation?: boolean
 }
 
-function MessageListInner({
+export function MessageList({
   messages,
   loading,
   thinkingStep,
   activeCitations,
   onRegenerate,
+  onCalendarSyncConfirm,
+  continuation = false,
 }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const stickToBottomRef = useRef(true)
+  const [showScrollButton, setShowScrollButton] = useState(false)
   const lastAssistantIndex = messages.findLastIndex((m) => m.role === "assistant")
   const showIndicator = loading && messages[messages.length - 1]?.role !== "assistant"
 
@@ -33,10 +41,17 @@ function MessageListInner({
     const onScroll = () => {
       const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight
       stickToBottomRef.current = distanceFromBottom < 120
+      setShowScrollButton(distanceFromBottom > 240)
     }
 
     el.addEventListener("scroll", onScroll, { passive: true })
     return () => el.removeEventListener("scroll", onScroll)
+  }, [])
+
+  const scrollToBottom = useCallback(() => {
+    stickToBottomRef.current = true
+    setShowScrollButton(false)
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
   }, [])
 
   useEffect(() => {
@@ -48,35 +63,69 @@ function MessageListInner({
   }, [messages, loading, thinkingStep])
 
   return (
-    <div ref={containerRef} className="mx-auto w-full max-w-3xl space-y-6 px-4 py-6">
-      {messages.map((message, index) => {
-        const isStreaming =
-          loading &&
-          index === lastAssistantIndex &&
-          message.role === "assistant" &&
-          index === messages.length - 1
-        return (
-          <Message
-            key={`${message.timestamp ?? index}-${message.role}-${index}`}
-            message={message}
-            isStreaming={isStreaming}
-            citations={
-              index === lastAssistantIndex ? activeCitations : undefined
-            }
-            onRegenerate={
-              message.role === "assistant" && index === lastAssistantIndex && !loading
-                ? onRegenerate
-                : undefined
-            }
-          />
-        )
-      })}
-      {showIndicator ? <StreamingIndicator thinkingStep={thinkingStep} /> : null}
-      <div ref={bottomRef} />
+    <div ref={containerRef} className="relative mx-auto w-full max-w-3xl 2xl:max-w-5xl px-4 py-6 md:py-8" aria-live="polite" aria-atomic="false">
+      <div className="space-y-8">
+        {continuation ? (
+          <div className="flex items-center gap-3 text-xs text-neutral-500">
+            <span className="h-px flex-1 bg-theme-gray-light" />
+            <span className="whitespace-nowrap">Continued from a previous conversation</span>
+            <span className="h-px flex-1 bg-theme-gray-light" />
+          </div>
+        ) : null}
+        {messages.map((message, index) => {
+          const isStreaming =
+            loading &&
+            index === lastAssistantIndex &&
+            message.role === "assistant" &&
+            index === messages.length - 1
+          const isLatestAssistant =
+            message.role === "assistant" && index === lastAssistantIndex && !loading
+          return (
+            <Message
+              key={`${message.timestamp ?? index}-${message.role}-${index}`}
+              message={message}
+              isStreaming={isStreaming}
+              showActions={isLatestAssistant}
+              citations={
+                message.citations ??
+                // Only fall back to the live `activeCitations` stream state while
+                // this message is still actively streaming its reply — once a
+                // message is persisted it always carries its own (possibly
+                // empty) `citations` array, so this branch never shows a stale
+                // source card left over from a previous question.
+                (isStreaming ? activeCitations : undefined)
+              }
+              onRegenerate={isLatestAssistant ? onRegenerate : undefined}
+              onCalendarSyncConfirm={
+                !loading && index === messages.length - 1
+                  ? onCalendarSyncConfirm
+                  : undefined
+              }
+            />
+          )
+        })}
+        {showIndicator ? <StreamingIndicator thinkingStep={thinkingStep} /> : null}
+        <div ref={bottomRef} className="h-2" />
+      </div>
+
+      <div className="pointer-events-none sticky bottom-3 z-10 h-0">
+        <button
+          type="button"
+          onClick={scrollToBottom}
+          aria-label="Scroll to latest message"
+          aria-hidden={!showScrollButton}
+          tabIndex={showScrollButton ? 0 : -1}
+          className={cn(
+            "absolute bottom-0 left-1/2 inline-flex size-9 -translate-x-1/2 items-center justify-center rounded-full border border-theme-gray-light bg-theme-gray/90 text-neutral-300 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.9)] backdrop-blur-md transition-all duration-200",
+            "hover:border-theme-gray-lighter hover:text-neutral-100 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-yellow/35",
+            showScrollButton
+              ? "pointer-events-auto scale-100 opacity-100"
+              : "pointer-events-none scale-90 opacity-0",
+          )}
+        >
+          <ArrowDown className="size-4" />
+        </button>
+      </div>
     </div>
   )
 }
-
-// All props are referentially stable while the user types or records audio,
-// so memo skips the whole message subtree on those high-frequency re-renders.
-export const MessageList = memo(MessageListInner)
