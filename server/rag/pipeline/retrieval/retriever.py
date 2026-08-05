@@ -15,6 +15,12 @@ from pipeline.retrieval.qdrant_client import build_index_adapter
 logger = logging.getLogger(__name__)
 TOP_K = 3
 
+# One brief retry before local fallback: a 503 from node4's concurrency gate
+# usually clears within a second, while the local SentenceTransformer fallback
+# runs on CPU and may pay a first-time model load.
+EMBED_REMOTE_ATTEMPTS = max(1, int(os.getenv("EMBED_REMOTE_ATTEMPTS", "2")))
+EMBED_REMOTE_BACKOFF_S = max(0.0, float(os.getenv("EMBED_REMOTE_BACKOFF_S", "0.3")))
+
 
 class Retriever:
 
@@ -69,19 +75,39 @@ class Retriever:
         embedding = None
 
         if embedding_service_url:
-            try:
-                import requests
-                resp = requests.post(
-                    f"{embedding_service_url.rstrip('/')}/embed",
-                    json={"texts": [query_text], "normalize": True},
-                    timeout=5
-                )
-                if resp.status_code == 200:
-                    data = resp.json()
-                    if "embeddings" in data and len(data["embeddings"]) > 0:
-                        embedding = data["embeddings"][0]
-            except Exception as e:
-                logger.warning("Remote embedding service failed: %s. Falling back to local model.", e)
+            import requests
+            for attempt in range(1, EMBED_REMOTE_ATTEMPTS + 1):
+                try:
+                    resp = requests.post(
+                        f"{embedding_service_url.rstrip('/')}/embed",
+                        json={"texts": [query_text], "normalize": True},
+                        timeout=5
+                    )
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        if "embeddings" in data and len(data["embeddings"]) > 0:
+                            embedding = data["embeddings"][0]
+                        break
+                    if resp.status_code != 503:
+                        # Non-503 failures won't heal on retry — fall back now.
+                        logger.warning(
+                            "Remote embedding service returned HTTP %s. Falling back to local model.",
+                            resp.status_code,
+                        )
+                        break
+                    logger.warning(
+                        "Remote embedding service busy (503), attempt %d/%d.",
+                        attempt, EMBED_REMOTE_ATTEMPTS,
+                    )
+                except Exception as e:
+                    logger.warning(
+                        "Remote embedding service failed (attempt %d/%d): %s",
+                        attempt, EMBED_REMOTE_ATTEMPTS, e,
+                    )
+                if attempt < EMBED_REMOTE_ATTEMPTS:
+                    time.sleep(EMBED_REMOTE_BACKOFF_S)
+            if embedding is None:
+                logger.warning("Remote embedding service unavailable. Falling back to local model.")
 
         if embedding is None:
             try:

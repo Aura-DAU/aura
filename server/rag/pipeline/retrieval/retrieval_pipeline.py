@@ -34,6 +34,25 @@ BRANCH_PROGRAM_NAMES = {
     "ict-cs": ICT_CS_PROGRAM_NAME,
 }
 
+# Stage-1 rerank pool cap. Cross-encoding the full merged pool (50 dense +
+# 20 BM25 + up to 24 entity chunks ≈ 60-90 pairs) dominates retrieval latency
+# — especially on the CPU fallback path — while stage 2 only ever consumes
+# the top ~18. See _trim_stage1_pool for how entity-matched chunks are kept.
+STAGE1_RERANK_POOL_CAP = max(1, int(os.getenv("STAGE1_RERANK_POOL_CAP", "30")))
+
+# Speculative-retrieval gate: the plan fields that decide use_speculative
+# aren't known until the planner LLM returns, so this is a conservative
+# upper-bound heuristic. Long or comparison/enumeration queries almost always
+# produce entities or decomposition, so their speculative retrieval would be
+# discarded — while still consuming node4 embed/rerank slots and worsening
+# 503 contention for the retrieval that IS used.
+SPECULATIVE_MAX_QUERY_WORDS = 12
+SPECULATION_BLOCKERS_RE = re.compile(
+    r"\b(?:compare|comparison|versus|vs\.?|difference(?:s)? between|"
+    r"list all|and)(?=\W|$)",
+    re.IGNORECASE,
+)
+
 class RetrievalPipeline:
 
     def __init__(self):
@@ -707,7 +726,50 @@ class RetrievalPipeline:
                 return corrected
                 
         return name
-            
+
+    @staticmethod
+    def _should_speculate(query: str) -> bool:
+        """Cheap pre-planner guess at whether use_speculative could be true.
+
+        Only short queries without multi-entity/comparison markers stand a
+        realistic chance of producing an entity-free, non-decomposed plan
+        (the conditions use_speculative checks). False negatives are safe:
+        get_context falls back to running the dual path synchronously.
+        """
+        words = (query or "").split()
+        if not words or len(words) > SPECULATIVE_MAX_QUERY_WORDS:
+            return False
+        return not SPECULATION_BLOCKERS_RE.search(query)
+
+    @staticmethod
+    def _trim_stage1_pool(results, cap=None):
+        """Cap the stage-1 rerank pool to the strongest retrieval candidates.
+
+        Entity-matched chunks (entity_match=True) are kept unconditionally:
+        they enter the pool with score 0.0 by design (the cross-encoder
+        assigns their real score), so any score-sorted cap would evict
+        exactly the chunks the entity path exists to protect. The remaining
+        slots go to the best of the rest by best-available retrieval score
+        (fusion_score for dual-path chunks, reranked_score for decomposed
+        sub-query survivors, then raw score/cosine_score).
+        """
+        if cap is None:
+            cap = STAGE1_RERANK_POOL_CAP
+        if len(results) <= cap:
+            return results
+
+        def best_score(item):
+            for key in ("fusion_score", "reranked_score", "entity_score", "score", "cosine_score"):
+                value = item.get(key)
+                if value is not None:
+                    return float(value)
+            return 0.0
+
+        entity_matched = [r for r in results if r.get("entity_match")]
+        others = [r for r in results if not r.get("entity_match")]
+        remaining_slots = max(cap - len(entity_matched), 0)
+        others = sorted(others, key=best_score, reverse=True)[:remaining_slots]
+        return entity_matched + others
 
     def get_context(
         self,
@@ -783,14 +845,21 @@ class RetrievalPipeline:
         # Submit the speculative retrieval call to executor. It runs the
         # semester-expanded query without query entities, while retaining the
         # student's programme only as a soft entity-path signal.
+        # Gated by _should_speculate: queries whose plans will almost surely
+        # discard the speculative result (entities/decomposition/etc.) no
+        # longer pay for it or contend for node4 inference slots. If skipped
+        # but the plan turns out simple, the use_speculative branch below
+        # runs the same dual path synchronously.
         query_speculative = self._expand_semesters(query)
-        future_speculative = self.executor.submit(
-            self._retrieve_dual_path,
-            query_speculative,
-            {"scope_entities": scope_entities},
-            allowed_roles,
-            academic_scope,
-        )
+        future_speculative = None
+        if self._should_speculate(query):
+            future_speculative = self.executor.submit(
+                self._retrieve_dual_path,
+                query_speculative,
+                {"scope_entities": scope_entities},
+                allowed_roles,
+                academic_scope,
+            )
 
         plan = future_plan.result()
 
@@ -850,8 +919,17 @@ class RetrievalPipeline:
             }
 
         if use_speculative:
-            logger.info("Speculative retrieval query matched; reusing speculative results.")
-            results = future_speculative.result()
+            if future_speculative is not None:
+                logger.info("Speculative retrieval query matched; reusing speculative results.")
+                results = future_speculative.result()
+            else:
+                logger.info("Speculation was skipped by heuristic but plan is simple; running dual path synchronously.")
+                results = self._retrieve_dual_path(
+                    query_speculative,
+                    {"scope_entities": scope_entities},
+                    allowed_roles,
+                    academic_scope,
+                )
             corrected_query = query
         else:
             # Fix RP-MYTH: replaces the old static MYTH_BUST_PATTERNS keyword list
@@ -1170,6 +1248,10 @@ class RetrievalPipeline:
                     "Entity retriever added %d candidate chunks to pool.",
                     len(entity_chunks),
                 )
+                # Tagged so _trim_stage1_pool keeps them unconditionally —
+                # they carry score 0.0 until the cross-encoder scores them.
+                for chunk in entity_chunks:
+                    chunk["entity_match"] = True
                 results = results + entity_chunks
 
         seen = set()
@@ -1255,6 +1337,10 @@ class RetrievalPipeline:
 
         _log_candidates("RETRIEVAL RESULTS BEFORE RERANK", results)
 
+        # Trim the pool before the stage-1 cross-encoder pass (both branches
+        # below) — see STAGE1_RERANK_POOL_CAP / _trim_stage1_pool.
+        results = self._trim_stage1_pool(results)
+
         if decomposed_queries:
             # Fix A: run a final joint cross-encoder rerank over the merged
             # pool using the original user query (not a sub-query string).
@@ -1274,7 +1360,11 @@ class RetrievalPipeline:
                     plan=plan
                 )
             )
-            _log_candidates("FINAL RERANK", reranked)
+            # Bug fix: this used to call _log_candidates("FINAL RERANK",
+            # reranked) here, before `reranked` was assigned — a NameError on
+            # every decomposed query. Mirror the non-decomposed branch: log
+            # stage 1 here, log FINAL RERANK after the stage-2 rerank below.
+            _log_candidates("AFTER STAGE-1 RERANK", stage1_reranked)
 
             top_candidates = stage1_reranked[:12]
             expand_window = 2 if retrieval_intent == "policy_version" else 1
@@ -1289,6 +1379,7 @@ class RetrievalPipeline:
                     plan=plan
                 )
             )
+            _log_candidates("FINAL RERANK", reranked)
 
         else:
             # ── TWO-STAGE RERANKING ──
