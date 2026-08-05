@@ -28,7 +28,9 @@ and fee structures are ALWAYS PUBLIC (e.g., "What is the minimum attendance?").
 
 PERSONAL: Requires looking up a specific person's private record (MUST use pronouns like "my", "I", or a specific name):
   For STUDENTS — CGPA, attendance, grades, fees, hostel allotment, BTP status,
-    enrollment status, timetable, transcript, personal private club membership status/dues of an individual student (NOT public club convenors or general club leadership).
+    enrollment status, their own timetable/class schedule (any spelling:
+    "timetable", "time table", "my schedule", "what classes do I have"),
+    transcript, personal private club membership status/dues of an individual student (NOT public club convenors or general club leadership).
   For FACULTY — their own teaching schedule, BTP students under them,
     exploration project mentees, office hour slots, course student list,
     CPDA/leave status, payslip, assigned exam duties.
@@ -88,11 +90,18 @@ PURE_PROFILE_PAT = re.compile(
     re.IGNORECASE
 )
 
+# "time\s*table" covers the two-word "time table" spelling users actually
+# type; show/display/view + optional "me" covers "can you display my time
+# table" / "show me my timetable" phrasings that previously fell through to
+# the LLM classifier (and from there to a PUBLIC misroute).
 PERSONAL_KEYWORDS_PAT = re.compile(
-    r"\b(?:what(?:\s+'s|\s+is)?\s+my\s+(?:branch|programme|program|dept|department|roll\s+number|id|student\s+id|erp\s+id|email|name|cgpa|gpa|attendance|timetable|schedule)|"
+    r"\b(?:what(?:\s+'s|\s+is)?\s+my\s+(?:branch|programme|program|dept|department|roll\s+number|id|student\s+id|erp\s+id|email|name|cgpa|gpa|attendance|time\s*table|schedule)|"
     r"what\s+(?:branch|programme|program|dept|department)\s+(?:am\s+i|are\s+we|do\s+i)\s*(?:in|belong\s+to)?|"
     r"which\s+(?:branch|programme|program|dept|department)\s+(?:am\s+i|do\s+i|belong\s+to)|"
-    r"show\s+my\s+(?:timetable|schedule|attendance|cgpa|grades|profile)|"
+    r"(?:show|display|view)\s+(?:me\s+)?my\s+(?:time\s*table|schedule|attendance|cgpa|grades|profile)|"
+    r"my\s+(?:time\s*table|class\s+schedule)|"
+    r"what\s+classes\s+do\s+i\s+have|"
+    r"do\s+i\s+have\s+(?:any\s+)?(?:class(?:es)?|labs?|lectures?)|"
     r"who\s+am\s+i)\b",
     re.IGNORECASE
 )
@@ -103,7 +112,11 @@ NAME_SETTING_PAT = re.compile(
 )
 
 # Multi-intent keyword maps
-TIMETABLE_PAT = re.compile(r"\b(?:timetable|schedule|class(?:es)?\s+today|class(?:es)?\s+tomorrow)\b", re.IGNORECASE)
+TIMETABLE_PAT = re.compile(
+    r"\b(?:time\s*table|schedule|class(?:es)?\s+(?:today|tomorrow)|"
+    r"what\s+classes\s+do\s+i\s+have|do\s+i\s+have\s+(?:any\s+)?(?:class(?:es)?|labs?|lectures?))\b",
+    re.IGNORECASE,
+)
 ATTENDANCE_PAT = re.compile(r"\b(?:attendance|present|absent)\b", re.IGNORECASE)
 CALENDAR_PAT = re.compile(r"\b(?:calendar|academic\s+calendar|holiday|vacation|exam\s+dates?)\b", re.IGNORECASE)
 ACADEMIC_PAT = re.compile(r"\b(?:curriculum|syllabus|credits?|course|subject|elective|prerequisite|cs\d{3}|ict|btech|mtech)\b", re.IGNORECASE)

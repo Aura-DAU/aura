@@ -145,6 +145,44 @@ def test_aggregate_is_a_valid_type(monkeypatch):
     assert "cgpa" in result["erp_fields"]
 
 
+@pytest.mark.parametrize(
+    "query",
+    [
+        "What is my time table?",
+        "can you display my time table",
+        "show my timetable",
+        "Show me my timetable for this week.",
+        "my class schedule today",
+        "what classes do I have tomorrow",
+    ],
+)
+def test_timetable_fast_path_covers_two_word_and_display_phrasings(monkeypatch, query):
+    """These phrasings previously missed the deterministic fast-path (only
+    one-word 'timetable' and 'show my' were matched), fell to the LLM, and
+    could misroute to PUBLIC RAG. They must classify without any LLM call."""
+    clf = _classifier()
+    client = _stub_client(monkeypatch)
+    client.chat.completions.create.side_effect = AssertionError(
+        "fast-path query must not reach the LLM classifier"
+    )
+    result = clf.classify(query)
+    assert result["type"] == "PERSONAL"
+    assert result["target"] == "self"
+    assert result["intent"] == "TIMETABLE"
+
+
+def test_timetable_fast_path_skips_named_cohort_queries(monkeypatch):
+    # Named-cohort timetable requests are public data — the 2026-08 hotfix
+    # guard must keep routing them to the LLM classifier, not PERSONAL.
+    clf = _classifier()
+    client = _stub_client(monkeypatch)
+    resp = MagicMock()
+    resp.choices[0].message.content = '{"type":"PUBLIC","target":null,"erp_fields":[]}'
+    client.chat.completions.create.return_value = resp
+    result = clf.classify("what's my time table for ICT 1st year sec A")
+    assert result["type"] == "PUBLIC"
+
+
 def test_prompt_injection_query_is_sent_wrapped_in_delimiters(monkeypatch):
     # The classifier must wrap user input in <query>...</query> so the model
     # sees a clear boundary between its instructions and user text.

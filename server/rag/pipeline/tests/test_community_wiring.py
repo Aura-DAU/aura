@@ -132,6 +132,42 @@ def test_intent_router_exception_emits_soft_failure_code(monkeypatch, caplog):
     assert any("exc_type=RuntimeError" in r.message for r in caplog.records)
 
 
+@pytest.mark.parametrize(
+    "query",
+    [
+        "What is my time table?",
+        "can you display my time table",
+        "show my timetable",
+        "my class schedule today",
+        "what classes do I have tomorrow",
+        "do I have any labs tomorrow?",
+        "what is my teaching schedule",
+    ],
+)
+def test_intent_router_own_schedule_fast_path_needs_no_llm(query, monkeypatch):
+    """First-person timetable reads must classify PERSONAL_DATA even when the
+    LLM is unreachable — otherwise the fail-toward-GENERAL policy degrades
+    them to public RAG and a false 'I don't have access' answer."""
+    router = _router_returning("", raises=True)
+    monkeypatch.setattr(
+        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
+        router._fake_rotation,
+    )
+    assert router.classify(query) == "PERSONAL_DATA"
+
+
+def test_intent_router_named_cohort_timetable_skips_fast_path(monkeypatch):
+    """'my timetable for <named cohort>' stays with the LLM so the COMMUNITY
+    named-cohort rule (2026-08 hotfix) keeps applying."""
+    router = _router_returning("COMMUNITY")
+    monkeypatch.setattr(
+        "pipeline.ecampus.intent_router.InferenceRouter.call_with_rotation",
+        router._fake_rotation,
+    )
+    assert router.classify("what's my timetable for ICT 1st year sec A") == "COMMUNITY"
+    assert router._stub.calls, "expected the LLM classifier to be consulted"
+
+
 def test_intent_router_prompt_includes_public_kb_domains():
     prompt = PersonalDataIntentRouter().system_prompt
     assert "COMMUNITY" in prompt
