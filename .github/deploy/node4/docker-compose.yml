@@ -41,7 +41,9 @@ services:
       - RERANKER_MODEL_NAME=${RERANKER_MODEL_NAME:-BAAI/bge-reranker-v2-m3}
       - RERANKER_DEVICE=${RERANKER_DEVICE:-cuda}
       - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
-      - MAX_CONCURRENT_INFERENCE=${MAX_CONCURRENT_INFERENCE:-2}
+      - MAX_CONCURRENT_INFERENCE=${MAX_CONCURRENT_INFERENCE:-4}
+      - INFERENCE_QUEUE_TIMEOUT=${INFERENCE_QUEUE_TIMEOUT:-5}
+      - INFERENCE_MAX_QUEUE=${INFERENCE_MAX_QUEUE:-16}
       - MAX_REQUEST_BYTES=${MAX_REQUEST_BYTES:-1048576}
     # Compose v5 was ignoring deploy.resources.devices (DeviceRequests=null),
     # so the container had no /dev/nvidia* despite a working host toolkit.
