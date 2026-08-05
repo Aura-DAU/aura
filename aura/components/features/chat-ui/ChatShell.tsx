@@ -12,6 +12,7 @@ import { MessageList } from "./MessageList"
 import { Composer } from "./Composer"
 import { EmptyState } from "./EmptyState"
 import { ProfileModal } from "./ProfileModal"
+import { BugReportModal } from "./BugReportModal"
 import { DocumentViewerSheet } from "./DocumentViewerSheet"
 import { useSession } from "next-auth/react"
 import { InstallPromptBanner } from "./InstallPromptBanner"
@@ -30,6 +31,7 @@ export function ChatShell() {
   // persisted preference after mount to avoid a hydration mismatch.
   const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [bugReportOpen, setBugReportOpen] = useState(false)
   // Always false for SSR + first client paint; only show after mount to avoid hydration mismatch.
   const [isOffline, setIsOffline] = useState(false)
   const [offlineReady, setOfflineReady] = useState(false)
@@ -135,6 +137,7 @@ export function ChatShell() {
           onNewChat={chat.startNewChat}
           onDeleteThread={chat.deleteThread}
           onOpenProfile={() => setProfileOpen(true)}
+          onOpenBugReport={() => setBugReportOpen(true)}
           studentProfile={chat.studentProfile}
           mobileOpen={sidebarOpen}
           onCloseMobile={() => setSidebarOpen(false)}
@@ -185,20 +188,17 @@ export function ChatShell() {
             ) : null}
 
             {hasMessages ? (
-              <>
-                <div className="flex-1 overflow-y-auto chat-v2-scroll">
-                  <MessageList
-                    messages={chat.messages}
-                    loading={chat.loading}
-                    thinkingStep={chat.thinkingStep}
-                    activeCitations={chat.activeCitations}
-                    onRegenerate={handleRegenerate}
-                    onCalendarSyncConfirm={handleCalendarSyncConfirm}
-                    continuation={chat.activeThreadIsContinuation}
-                  />
-                </div>
-                {composer}
-              </>
+              <div className="flex-1 overflow-y-auto chat-v2-scroll">
+                <MessageList
+                  messages={chat.messages}
+                  loading={chat.loading}
+                  thinkingStep={chat.thinkingStep}
+                  activeCitations={chat.activeCitations}
+                  onRegenerate={handleRegenerate}
+                  onCalendarSyncConfirm={handleCalendarSyncConfirm}
+                  continuation={chat.activeThreadIsContinuation}
+                />
+              </div>
             ) : (
               <div className="flex-1 overflow-y-auto chat-v2-scroll">
                 <AuroraBackground className="flex min-h-full items-center justify-center">
@@ -206,12 +206,22 @@ export function ChatShell() {
                     onSelectPrompt={chat.handleSendMessage}
                     userName={chat.studentProfile.name}
                     disabled={chat.loading}
-                  >
-                    {composer}
-                  </EmptyState>
+                  />
                 </AuroraBackground>
               </div>
             )}
+            {/*
+              The composer renders exactly once, in this single stable tree
+              position, regardless of `hasMessages`. It previously lived
+              nested inside <EmptyState> while empty and as a bare sibling
+              once messages existed — two different places in the tree — so
+              React unmounted and remounted the underlying <textarea> the
+              instant the first message was sent. On mobile that mid-typing
+              remount is what caused the software keyboard to flicker and the
+              caret/cursor to jump or vanish. Only the `variant` prop (visual
+              styling) changes now; the DOM node itself never gets recreated.
+            */}
+            {composer}
           </div>
         </main>
 
@@ -220,6 +230,11 @@ export function ChatShell() {
           onClose={() => setProfileOpen(false)}
           profile={chat.studentProfile}
           onSave={chat.saveProfile}
+        />
+
+        <BugReportModal
+          open={bugReportOpen}
+          onClose={() => setBugReportOpen(false)}
         />
 
         <DocumentViewerSheet />

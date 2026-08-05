@@ -136,7 +136,7 @@ export function AnimatedBrandMark({ className }: AnimatedBrandMarkProps) {
       </span>
       <svg
         viewBox="0 0 100 100"
-        className="pointer-events-none absolute -inset-[45%] z-20 overflow-visible [filter:drop-shadow(0_0_2px_rgba(255,150,70,0.55))]"
+        className="pointer-events-none absolute -inset-[30%] sm:-inset-[45%] z-20 overflow-visible [filter:drop-shadow(0_0_2px_rgba(255,150,70,0.55))]"
       >
         {PARTICLES.map((p, i) => (
           <circle

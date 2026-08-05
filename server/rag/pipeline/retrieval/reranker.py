@@ -1,8 +1,22 @@
 import os
 import math
 import re
+import time
+import logging
 from datetime import datetime
 from typing import Optional
+
+logger = logging.getLogger(__name__)
+
+# Remote-first reranking: a 503 from node4's concurrency gate (or a transient
+# connection blip) usually clears within a second, so retry briefly before
+# paying for the local fallback — bge-reranker-v2-m3 on CPU takes 15-40s per
+# pool vs <1s on the remote GPU service.
+RERANKER_REMOTE_ATTEMPTS = max(1, int(os.getenv("RERANKER_REMOTE_ATTEMPTS", "3")))
+RERANKER_REMOTE_BACKOFF_S = max(0.0, float(os.getenv("RERANKER_REMOTE_BACKOFF_S", "0.5")))
+# Local-fallback mini-batch size: one giant padded batch over the whole pool
+# makes every pair pay the longest pair's token length and spikes memory.
+RERANKER_LOCAL_BATCH_SIZE = max(1, int(os.getenv("RERANKER_LOCAL_BATCH_SIZE", "8")))
 
 def extract_latest_year(metadata: dict) -> Optional[int]:
     """Extract a document's version year from its authoritative metadata.
@@ -124,53 +138,82 @@ class Reranker:
         cross_scores = None
 
         if reranker_service_url:
-            try:
-                import requests
-                resp = requests.post(
-                    f"{reranker_service_url.rstrip('/')}/rerank",
-                    json={"pairs": pairs},
-                    timeout=10
-                )
-                if resp.status_code == 200:
-                    data = resp.json()
-                    if "scores" in data:
-                        cross_scores = data["scores"]
-            except Exception as e:
-                import logging
-                logging.getLogger(__name__).warning("Remote reranker service failed: %s. Falling back to local model.", e)
+            import requests
+            for attempt in range(1, RERANKER_REMOTE_ATTEMPTS + 1):
+                try:
+                    resp = requests.post(
+                        f"{reranker_service_url.rstrip('/')}/rerank",
+                        json={"pairs": pairs},
+                        timeout=10
+                    )
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        if "scores" in data:
+                            cross_scores = data["scores"]
+                        break
+                    if resp.status_code != 503:
+                        # Non-503 failures (validation, model not loaded)
+                        # won't heal on retry — fall back to local right away.
+                        logger.warning(
+                            "Remote reranker service returned HTTP %s. Falling back to local model.",
+                            resp.status_code,
+                        )
+                        break
+                    logger.warning(
+                        "Remote reranker service busy (503), attempt %d/%d.",
+                        attempt, RERANKER_REMOTE_ATTEMPTS,
+                    )
+                except Exception as e:
+                    logger.warning(
+                        "Remote reranker service failed (attempt %d/%d): %s",
+                        attempt, RERANKER_REMOTE_ATTEMPTS, e,
+                    )
+                if attempt < RERANKER_REMOTE_ATTEMPTS:
+                    time.sleep(RERANKER_REMOTE_BACKOFF_S)
+            if cross_scores is None:
+                logger.warning("Remote reranker service unavailable after %d attempt(s). Falling back to local model.", RERANKER_REMOTE_ATTEMPTS)
 
         if cross_scores is None:
             self._ensure_local_model()
             import torch
-            inputs = self.tokenizer(
-                pairs,
-                padding=True,
-                truncation=True,
-                # Issue 1 fix #1: chunks are 256 tokens, but stage-2 adjacent-
-                # chunk expansion (_expand_adjacent_chunks) concatenates up to
-                # 5 neighboring chunks (up to ~1280 tokens) before this text
-                # reaches the reranker. 512 was silently truncating the
-                # "next" chunk(s) off expanded candidates — exactly defeating
-                # the point of window expansion. BAAI recommends max_length
-                # =1024 for bge-reranker-v2-m3 (model supports up to 8192,
-                # but was fine-tuned at 1024).
-                max_length=1024,
-                return_tensors="pt"
-            )
-
-            inputs = {k: v.to(self.device) for k, v in inputs.items()}
-
-            with torch.no_grad():
-                cross_scores = (
-                    self.model(
-                        **inputs
-                    )
-                    .logits
-                    .squeeze(-1)
-                    .tolist()
+            # Mini-batched forward pass (RERANKER_LOCAL_BATCH_SIZE): running
+            # the whole 60-90 pair pool as ONE padded batch made every pair
+            # pay the longest pair's length and dominated CPU-fallback
+            # latency. Batches are processed in input order and scores are
+            # concatenated, so score order still matches the input pairs.
+            cross_scores = []
+            for batch_start in range(0, len(pairs), RERANKER_LOCAL_BATCH_SIZE):
+                batch_pairs = pairs[batch_start:batch_start + RERANKER_LOCAL_BATCH_SIZE]
+                inputs = self.tokenizer(
+                    batch_pairs,
+                    padding=True,
+                    truncation=True,
+                    # Issue 1 fix #1: chunks are 256 tokens, but stage-2 adjacent-
+                    # chunk expansion (_expand_adjacent_chunks) concatenates up to
+                    # 5 neighboring chunks (up to ~1280 tokens) before this text
+                    # reaches the reranker. 512 was silently truncating the
+                    # "next" chunk(s) off expanded candidates — exactly defeating
+                    # the point of window expansion. BAAI recommends max_length
+                    # =1024 for bge-reranker-v2-m3 (model supports up to 8192,
+                    # but was fine-tuned at 1024).
+                    max_length=1024,
+                    return_tensors="pt"
                 )
-                if isinstance(cross_scores, float):
-                    cross_scores = [cross_scores]
+
+                inputs = {k: v.to(self.device) for k, v in inputs.items()}
+
+                with torch.no_grad():
+                    batch_scores = (
+                        self.model(
+                            **inputs
+                        )
+                        .logits
+                        .squeeze(-1)
+                        .tolist()
+                    )
+                    if isinstance(batch_scores, float):
+                        batch_scores = [batch_scores]
+                cross_scores.extend(batch_scores)
 
         reranked = []
 
