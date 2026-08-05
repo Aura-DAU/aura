@@ -255,7 +255,7 @@ class RedisUserMemoryStore:
                 while True:
                     try:
                         pipe.watch(key)
-                        existing = pipe.get(key) or ""
+                        existing = self._r.get(key) or ""
                         merged = _merge_memory(existing, block, thread_id)
                         pipe.multi()
                         if self._ttl_seconds > 0:
@@ -283,14 +283,14 @@ class RedisUserMemoryStore:
                 while True:
                     try:
                         pipe.watch(key)
-                        existing = pipe.get(key) or ""
+                        existing = self._r.get(key) or ""
                         remaining, removed = _delete_memory(existing, thread_id)
                         if not removed:
                             pipe.unwatch()
                             return False
                         # Preserve the key's remaining retention rather than
                         # restarting the 90-day clock on the surviving blocks.
-                        ttl = pipe.ttl(key)
+                        ttl = self._r.ttl(key)
                         pipe.multi()
                         if not remaining:
                             pipe.delete(key)

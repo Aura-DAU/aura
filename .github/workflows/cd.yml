@@ -186,6 +186,15 @@ jobs:
               deploy_node2=true
               deploy_node3=true
               deploy_node4=true
+            elif ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null || ! git cat-file -e "${AFTER}^{commit}" 2>/dev/null; then
+              # Force-pushes can point github.event.before at a commit this
+              # long-lived runner clone does not have. Deploy everything safe
+              # instead of failing the deploy before planning.
+              echo "Diff endpoint unavailable: before=${BEFORE} after=${AFTER}; deploying all safe targets"
+              deploy_apps=true
+              deploy_node2=true
+              deploy_node3=true
+              deploy_node4=true
             else
               changed="$(git diff --name-only "${BEFORE}" "${AFTER}")"
               if printf '%s\n' "${changed}" | grep -E \

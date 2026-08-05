@@ -34,7 +34,7 @@ export async function DELETE(req: Request) {
   let path: string
   if (all === "1" || all === "true") {
     path = "/memory"
-  } else if (threadId && threadId.length <= 64) {
+  } else if (threadId && threadId.length <= 128) {
     path = `/memory/thread/${encodeURIComponent(threadId)}`
   } else {
     return NextResponse.json({ error: "threadId is required" }, { status: 400 })
@@ -59,7 +59,11 @@ export async function DELETE(req: Request) {
       headers: { Authorization: `Bearer ${internalToken}` },
     })
     if (!backendRes.ok) {
-      console.error("[memory] backend error:", backendRes.status)
+      if (backendRes.status === 404) {
+        return NextResponse.json({ ok: true, deleted: false })
+      }
+      const errText = await backendRes.text().catch(() => "")
+      console.error("[memory] backend error:", backendRes.status, errText)
       return NextResponse.json({ error: "Backend error" }, { status: 502 })
     }
     return NextResponse.json(await backendRes.json())

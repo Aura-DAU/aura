@@ -144,6 +144,7 @@ def test_redis_user_memory_sets_retention_ttl():
     pipe = FakePipe()
     client = MagicMock()
     client.pipeline.return_value = pipe
+    client.get.return_value = ""
     with patch("redis.Redis.from_url", return_value=client):
         store = RedisUserMemoryStore("redis://localhost:6379/0")
 
@@ -262,6 +263,8 @@ def test_redis_delete_uses_watch_and_preserves_ttl():
     pipe = FakePipe()
     client = MagicMock()
     client.pipeline.return_value = pipe
+    client.get.side_effect = lambda _key: pipe._value
+    client.ttl.return_value = 12_345
     with patch("redis.Redis.from_url", return_value=client):
         store = RedisUserMemoryStore("redis://localhost:6379/0")
 
@@ -337,6 +340,8 @@ def test_redis_delete_retries_on_watch_error():
     pipe = FlakyPipe()
     client = MagicMock()
     client.pipeline.return_value = pipe
+    client.get.side_effect = lambda _key: pipe._value
+    client.ttl.return_value = -1
     with patch("redis.Redis.from_url", return_value=client):
         store = RedisUserMemoryStore("redis://localhost:6379/0")
 

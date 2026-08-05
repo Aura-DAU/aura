@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 @router.delete("/thread/{thread_id}")
 async def delete_thread_memory(
-    thread_id: str = Path(..., min_length=1, max_length=64),
+    thread_id: str = Path(..., min_length=1, max_length=128),
     identity: Identity = Depends(require_identity),
 ):
     # Guests have no stored memory at all (_identity_key returns None), so the

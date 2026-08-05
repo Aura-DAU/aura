@@ -191,14 +191,32 @@ class AuraChat:
             # ── 2. Pure Profile Questions Fast-Path (<1ms, Bypasses RAG & Wellness) ──
             from personal_query_classifier import is_pure_profile_query
             if is_pure_profile_query(query) and identity:
-                name = getattr(identity, "full_name", None) or "Student"
+                role = getattr(identity, "role", None)
+                is_faculty = str(role).startswith("faculty") or str(role) in ("dean", "registrar")
+                name = getattr(identity, "full_name", None) or ("Faculty member" if is_faculty else "Student")
                 roll = getattr(identity, "roll_number", None) or getattr(identity, "erp_id", "N/A")
-                prog = getattr(identity, "program", None) or "B.Tech. (ICT)"
                 branch = getattr(identity, "branch", None) or getattr(identity, "dept", "ICT")
-                sem = getattr(identity, "current_sem", None) or 5
                 email = getattr(identity, "email", None) or f"{roll.lower()}@dau.ac.in"
 
                 q_lower = query.lower()
+                if is_faculty:
+                    if "name" in q_lower or "who am i" in q_lower:
+                        ans = f"You are **{name}** (Employee ID: `{roll}`)."
+                    elif "roll" in q_lower or "id" in q_lower or "employee" in q_lower:
+                        ans = f"Your employee ID is `{roll}`."
+                    elif "email" in q_lower:
+                        ans = f"Your official university email is `{email}`."
+                    elif "branch" in q_lower or "dept" in q_lower or "department" in q_lower:
+                        ans = f"You are in the **{branch}** department."
+                    else:
+                        ans = (
+                            f"You are **{name}** (Employee ID: `{roll}`), a faculty member in the "
+                            f"**{branch}** department."
+                        )
+                    return {"answer": ans, "sources": [], "is_personal_data": True}
+
+                prog = getattr(identity, "program", None) or "B.Tech. (ICT)"
+                sem = getattr(identity, "current_sem", None) or 5
                 if "name" in q_lower or "who am i" in q_lower:
                     ans = f"You are **{name}** (Roll Number: `{roll}`)."
                 elif "roll" in q_lower or "id" in q_lower:
