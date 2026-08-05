@@ -54,26 +54,27 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
     setStep("lab_group")
   }
 
-  const handleLabGroupNext = () => {
+  const handleLabGroupNext = (overrideLabGroup?: string | null) => {
     // Offer elective selection only for years ≥ 3 where electives exist
-    if (selectedYear && selectedYear >= 3 && electives.length > 0) {
+    if (selectedYear && selectedYear >= 3 && (electives.length > 0 || electivesLoading)) {
       setStep("electives")
     } else {
-      void handleSave([])
+      void handleSave([], overrideLabGroup)
     }
   }
 
-  const handleSave = async (electives: string[]) => {
+  const handleSave = async (electives: string[], overrideLabGroup?: string | null) => {
     if (!selectedYear || !selectedSection || !selectedSem) return
     setStep("saving")
     setError(null)
+    const finalLabGroup = overrideLabGroup !== undefined ? overrideLabGroup : selectedLabGroup;
     try {
       await saveCohort({
         program: "BTech",
         year: selectedYear,
         semester: selectedSem,
         section: selectedSection,
-        lab_group: selectedLabGroup,
+        lab_group: finalLabGroup,
       })
       // Save elective selections if any
       if (electives.length > 0) {
@@ -216,7 +217,7 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
           </div>
           <button
             type="button"
-            onClick={handleLabGroupNext}
+            onClick={() => handleLabGroupNext()}
             disabled={!selectedLabGroup}
             className="mt-4 flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-theme-red to-theme-yellow py-2.5 text-xs font-bold text-black transition-opacity hover:opacity-90 disabled:opacity-40"
           >
@@ -231,7 +232,7 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
           </button>
           <button
              type="button"
-             onClick={() => { setSelectedLabGroup(null); handleLabGroupNext(); }}
+             onClick={() => { setSelectedLabGroup(null); handleLabGroupNext(null); }}
              className="mt-2 w-full text-center text-[10px] text-neutral-500 underline underline-offset-2"
           >
              I don&apos;t have a lab group

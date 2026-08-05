@@ -53,7 +53,7 @@ def norm_time(t):
                 # DAU classes heuristic: 8:00 to 19:00.
                 if 1 <= hr <= 7:
                     hr += 12
-            return "{:02d}:{}".format(hr, int(p[1]))
+            return "{:02d}:{:02d}".format(hr, int(p[1]))
         except ValueError:
             pass
     return t
@@ -172,7 +172,7 @@ def main():
         pairs = sorted(set((r[0], r[1]) for r in rows))
         print("\n[CLEAR] Deleting for (year,sem):", pairs)
         for yr, sm in pairs:
-            dbc.execute("DELETE FROM timetable_master WHERE year=%s AND sem=%s AND (lab_group IS NULL AND session_type NOT IN ('lab', 'tutorial'))", (yr, sm))
+            dbc.execute("DELETE FROM timetable_master WHERE year=%s AND sem=%s AND (lab_group IS NULL AND (session_type IS NULL OR session_type NOT IN ('lab', 'tutorial')))", (yr, sm))
         print("[CLEAR] Done.")
 
     SQL = (

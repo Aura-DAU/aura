@@ -134,7 +134,7 @@ def _event_body(
     until  = _semester_end_date().strftime("%Y%m%dT235959Z")
     rrule  = f"RRULE:FREQ=WEEKLY;BYDAY={_RRULE_DAY[slot['day_of_week']]};UNTIL={until}"
     exdate = _build_exdates(holidays)
-    recurrence = [rrule + exdate] if exdate else [rrule]
+    recurrence = [rrule, exdate.strip()] if exdate else [rrule]
 
     description_lines = [f"{slot['session_type'].capitalize()} — synced from AURA."]
     if slot.get("faculty_name"):

@@ -28,10 +28,15 @@ def parse_filename(filename):
     # Defaults
     program = "BTech"
     if "MSc_" in name or "Mtech_" in name or "BS_MS_" in name:
-        if "MSc_" in name: program = "MSc"
-        elif "Mtech_" in name: program = "MTech"
-        elif "BS_MS_" in name: program = "BS-MS"
-        name = name.replace(program + "_", "")
+        if "MSc_" in name: 
+            program = "MSc"
+            name = name.replace("MSc_", "")
+        elif "Mtech_" in name: 
+            program = "MTech"
+            name = name.replace("Mtech_", "")
+        elif "BS_MS_" in name: 
+            program = "BS-MS"
+            name = name.replace("BS_MS_", "")
     
     year = 1
     sem = 1

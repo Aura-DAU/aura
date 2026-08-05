@@ -17,14 +17,14 @@ const SETUP_PROMPT =
   "I'd like to set up my personal timetable — please ask me for my section and electives."
 
 function todayDayOfWeek(): number {
-  // Get current time in IST so the schedule rolls over at university midnight,
-  // not the student's local OS midnight if they are traveling.
-  const istString = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
-  const jsDay = new Date(istString).getDay() // 0=Sun … 6=Sat
-  // Convert to 0=Mon … 4=Fri used by DAY_NAMES/DAY_SHORT_NAMES.
-  // On a Saturday or Sunday there's no matching column, so default to Monday.
-  if (jsDay === 0 || jsDay === 6) return 0
-  return jsDay - 1
+  // Get current day of week in IST so the schedule rolls over at university midnight.
+  const istWeekday = new Intl.DateTimeFormat("en-US", { 
+    timeZone: "Asia/Kolkata", 
+    weekday: "short" 
+  }).format(new Date());
+
+  const dayMap: Record<string, number> = { "Mon": 0, "Tue": 1, "Wed": 2, "Thu": 3, "Fri": 4 };
+  return dayMap[istWeekday] ?? 0;
 }
 
 function ClassCard({ slot, onClick }: { slot: TimetableSlot; onClick?: () => void }) {
