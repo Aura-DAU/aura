@@ -39,11 +39,22 @@ Determine:
 10. requires_complete_list — true if answering correctly REQUIRES seeing the
     full enumerated set of items (e.g. negation questions like "what is NOT
     a member", "which of these is NOT included"; or "how many total X are
-    there"; or comparison-of-a-set questions). When true, the retrieval
-    pipeline will fetch more candidates than usual before reranking, since
-    a partial list is insufficient to answer a negation or completeness
-    question correctly — the model must see every item to correctly
-    identify what is missing or excluded.
+    there"; or comparison-of-a-set questions); OR if the user is asking for
+    the full content of one specific, named document/entity rather than a
+    single fact about it — e.g. "give me the CT303 course file", "what's
+    the grading pattern/scheme for CT303", "full syllabus for X", "complete
+    policy on Y". These single-document deep-dive queries need every
+    section of that document (Overview, Course Structure, Evaluation,
+    Textbooks, etc., or the equivalent sections for a policy doc), not just
+    the top handful of chunks that best match the query's specific wording
+    — a query about "grading pattern" can otherwise retrieve only 1-2 of
+    the several rows/components that make up the real evaluation scheme.
+    When true, the retrieval pipeline will fetch more candidates than usual
+    before reranking, since a partial list/document is insufficient to
+    answer a negation, completeness, or full-document question correctly —
+    the model must see every item (or every section of the named document)
+    to answer correctly and avoid asserting something is unavailable when
+    it was simply never retrieved.
 11. expanded_terms — a short list (max 5) of formal/document terminology
     that DAU's official documents would likely use for the informal or
     colloquial concepts in the query, if they differ from the query's own
@@ -891,6 +902,56 @@ The Board of Studies at DAU does NOT serve which function: curriculum oversight,
   "query_decomposition": null,
   "retrieval_hints": {
     "required_sections": ["Board of Studies", "Functions", "Responsibilities"]
+  },
+  "is_claim_verification": false,
+  "requires_complete_list": true
+}
+
+------------------------------------------------------------
+SINGLE-DOCUMENT FULL-CONTENT QUERIES — requires_complete_list example
+------------------------------------------------------------
+These are NOT negation/enumeration questions, but they still need
+requires_complete_list=true: the user wants everything about one specific
+named document/course, not a single fact pulled from it. A narrow top-k
+tuned to the query's literal wording (e.g. "grading pattern") will rank
+chunks that mention grading highest and may cut off before every row of
+the evaluation table is retrieved — this flag is what prevents that.
+
+Query:
+What is the grading pattern for CT303?
+
+{
+  "category": "academics",
+  "intent": "course_policy",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.9,
+  "multi_entity_query": false,
+  "entities": {
+    "course_code": "CT303"
+  },
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Evaluation", "Grading Scheme", "Weightage"]
+  },
+  "is_claim_verification": false,
+  "requires_complete_list": true
+}
+
+Query:
+Can you give me the CT303 course file?
+
+{
+  "category": "academics",
+  "intent": "course_policy",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.9,
+  "multi_entity_query": false,
+  "entities": {
+    "course_code": "CT303"
+  },
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Course Overview", "Course Description", "Course Outcomes", "Course Structure", "Evaluation", "Textbooks"]
   },
   "is_claim_verification": false,
   "requires_complete_list": true
