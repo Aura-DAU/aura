@@ -63,11 +63,6 @@ const FACULTY_STARTER_PROMPTS = [
     icon: FileText,
     iconWrap: "bg-aura-mint/10 text-aura-mint ring-aura-mint/20",
   },
-  {
-    prompt: "What is my class schedule today?",
-    icon: CalendarClock,
-    iconWrap: "bg-brand-400/10 text-brand-400 ring-brand-400/20",
-  },
 ] as const
 
 function timeGreeting(date: Date): string {
