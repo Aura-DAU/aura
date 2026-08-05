@@ -42,8 +42,11 @@ function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: numb
 }
 
 function InlineCitation({ index, citation }: { index: number; citation: Citation }) {
-  const { prefetchDocument } = useDocumentViewer()
+  const { openDocument, prefetchDocument } = useDocumentViewer()
   const hasSource = Boolean(citation.path)
+  // Track taps for single (open viewer) vs double (open new tab) click detection
+  const clickCountRef = useRef(0)
+  const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   if (!hasSource) {
     return (
@@ -60,6 +63,26 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
     endLine: citation.endLine,
   }
 
+  const handleClick = () => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+    if (isMobile) {
+      // Mobile: single tap → viewer, double tap → new tab
+      clickCountRef.current += 1
+      if (clickTimerRef.current) clearTimeout(clickTimerRef.current)
+      clickTimerRef.current = setTimeout(() => {
+        if (clickCountRef.current === 1) {
+          openDocument(viewerTarget)
+        } else {
+          window.open(citation.file, "_blank", "noopener,noreferrer")
+        }
+        clickCountRef.current = 0
+      }, 300)
+    } else {
+      // Desktop: click opens raw file in new tab; hover handles the viewer
+      window.open(citation.file, "_blank", "noopener,noreferrer")
+    }
+  }
+
   return (
     <button
       type="button"
@@ -67,9 +90,7 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
         if (typeof window !== "undefined" && window.innerWidth < 768) return
         prefetchDocument(viewerTarget)
       }}
-      onClick={() => {
-        window.open(citation.file, "_blank", "noopener,noreferrer")
-      }}
+      onClick={handleClick}
       className="inline-flex items-center justify-center rounded-full bg-theme-gray px-1.5 py-0.5 text-[10px] font-medium text-theme-yellow hover:bg-theme-gray-light hover:text-neutral-100 transition-colors mx-0.5 cursor-pointer"
       aria-label={`View source: ${citation.title ?? citation.file}`}
     >
