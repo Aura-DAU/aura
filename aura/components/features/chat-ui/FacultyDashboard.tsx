@@ -140,10 +140,10 @@ export function FacultyDashboard({
   // eCampus attendance data is unavailable. Revisit when UniRP exposes this endpoint.
 
   const quickPrompts = [
-    "What is my class schedule today?",
+    "What is the consultancy policy?",
+    "How do I apply for a seed grant?",
+    "Where can I find the course file template?",
     "List my BTP mentee groups",
-    "Check room availability for seminar",
-    "What are my responsibilities on the exam committee?",
   ]
 
   return (
