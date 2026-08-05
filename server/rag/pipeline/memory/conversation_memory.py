@@ -245,26 +245,10 @@ class ConversationMemory:
         older, tail = history[:split], history[split:]
 
         if not older:
-            # The tail is already down to the last exchange yet still over the
-            # *soft* history_budget (e.g. one long turn, or a trimmed summary
-            # that alone fills most of the window). That soft budget is a
-            # conservative internal target, not the model's real limit —
-            # forking every time it's merely exceeded (rather than the model's
-            # actual context window) meant a single verbose answer could fork
-            # a fresh thread on every following message. Only force a
-            # brand-new thread if the tail genuinely can't fit the model's
-            # real context window even after the summary was trimmed above.
-            hard_ceiling = max(
-                self.model_context_tokens
-                - self.reserved_answer
-                - self.reserved_system
-                - self.safety_margin,
-                0,
-            )
-            still_over_hard_ceiling = (
-                _approx_tokens(summary) + self._turns_tokens(tail) > hard_ceiling
-            )
-            return MemoryResult(summary, tail, 0, summary_was_over_cap, still_over_hard_ceiling)
+            # The tail is already down to the last exchange yet still over budget
+            # (e.g. one enormous turn, or a summary that alone fills the window).
+            # Nothing more to fold — force a fresh thread instead of looping.
+            return MemoryResult(summary, tail, 0, summary_was_over_cap, True)
 
         new_summary = self._safe_summarise(summary, older)
         new_summary_over_cap = self._over_cap(new_summary)
