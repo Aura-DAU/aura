@@ -973,7 +973,12 @@ export function useAuraChat() {
             content: assistantText,
             is_personal_data: isPersonalData || undefined,
             calendar_action: calendarAction,
-            citations: citations.length > 0 ? citations : undefined,
+            // Always persist the resolved list (even when empty) so a reply with
+            // no sources is stored as "no sources" rather than `undefined` — an
+            // `undefined` value here would fall back to the shared
+            // `activeCitations` state in MessageList and could show the
+            // previous message's source card on an answer that has none.
+            citations,
           },
         ]
         setMessages(finalMessages)

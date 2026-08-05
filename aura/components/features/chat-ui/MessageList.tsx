@@ -88,7 +88,12 @@ export function MessageList({
               showActions={isLatestAssistant}
               citations={
                 message.citations ??
-                (index === lastAssistantIndex ? activeCitations : undefined)
+                // Only fall back to the live `activeCitations` stream state while
+                // this message is still actively streaming its reply — once a
+                // message is persisted it always carries its own (possibly
+                // empty) `citations` array, so this branch never shows a stale
+                // source card left over from a previous question.
+                (isStreaming ? activeCitations : undefined)
               }
               onRegenerate={isLatestAssistant ? onRegenerate : undefined}
               onCalendarSyncConfirm={

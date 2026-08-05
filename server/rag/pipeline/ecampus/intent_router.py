@@ -5,11 +5,32 @@
 
 import logging
 import os
+import re
 from dotenv import load_dotenv
 from pipeline.inference_router import InferenceRouter
 from pipeline.generation.answer_generator import log_soft_failure
+# Single source of truth for "the query names a cohort" (programme/branch/
+# year/sem/section) — the 2026-08 hotfix guard in the personal classifier.
+from personal_query_classifier import PUBLIC_PROGRAMME_OVERRIDE_PAT
 
 logger = logging.getLogger(__name__)
+
+# Deterministic fast-path for first-person timetable/schedule reads. Phrasings
+# like "what is my time table?" (two words), "display my timetable", or "my
+# class schedule today" were intermittently classified GENERAL by the LLM,
+# which degrades the query to public RAG — where the generator truthfully
+# answers "I don't have access to your timetable in the provided context".
+# The requester's own schedule is always PERSONAL_DATA (get_my_timetable /
+# get_my_teaching_schedule exist for exactly this), so decide it without an
+# LLM round-trip — same pattern as the calendar gates in aura_chat_graph.
+# Queries that also name a cohort (year/sem/branch/section) are left to the
+# LLM so the COMMUNITY named-cohort rule below still applies.
+_OWN_SCHEDULE_PAT = re.compile(
+    r"\bmy\s+(?:time\s*table|(?:class\s+|teaching\s+)?schedule|classes)\b"
+    r"|\bwhat\s+classes\s+do\s+i\s+have\b"
+    r"|\bdo\s+i\s+have\s+(?:any\s+)?(?:class(?:es)?|labs?|lectures?|tutorials?)\b",
+    re.IGNORECASE,
+)
 
 
 class PersonalDataIntentRouter:
@@ -21,8 +42,14 @@ Classify the user's query as PERSONAL_DATA, COMMUNITY, or GENERAL.
 
 PERSONAL_DATA: the user is asking about their own (or, if they are faculty,
 a specific named student's) CGPA, grades, attendance, fee dues, hostel
-allocation, registration status, course adjustments, personal timetable, or
-a faculty member's teaching schedule. Also PERSONAL_DATA: requests to link,
+allocation, registration status, course adjustments, or electives. The
+requester's OWN class timetable is PERSONAL_DATA in every phrasing — AURA
+has a live tool for it, so these must never go to GENERAL: "timetable",
+"time table" (two words), "schedule", "my classes". Examples (all
+PERSONAL_DATA): "What is my time table?", "can you display my time table",
+"show my timetable", "my class schedule today", "what classes do I have
+tomorrow". A faculty member's own teaching schedule is likewise
+PERSONAL_DATA. Also PERSONAL_DATA: requests to link,
 unlink, or check the status of an eCampus account; requests to share or
 revoke sharing of academic data with a faculty member; requests to refresh
 cached personal data; and requests to change, add, remove, or undo a change
@@ -42,12 +69,12 @@ COMMUNITY: public campus KB tool lookups — NOT private ERP records. Includes:
   search people by department/role.
 - Academic calendar / deadlines, course policy for a named course, program
   academic requirements, admissions info, published public timetable docs.
-- The class timetable/schedule for a NAMED cohort that is not phrased as
-  the requester's own — a specific year/semester + branch + section, e.g.
-  "give me the timetable of BTech ICT 3rd sem section A" or "schedule for
-  2nd year MnC section B". Only "my timetable" / "my schedule" (no cohort
-  named) is PERSONAL_DATA — a request that names its own year/sem/branch/
-  section is COMMUNITY even if the requester happens to be in that cohort.
+- The class timetable/schedule for a NAMED cohort — a specific year/semester
+  + branch + section, e.g. "give me the timetable of BTech ICT 3rd sem
+  section A" or "schedule for 2nd year MnC section B". A request that names
+  a year/sem/branch/section is COMMUNITY even if it says "my" and the
+  requester happens to be in that cohort; a first-person request with NO
+  cohort named ("what is my time table?") is PERSONAL_DATA.
 - University / administration policies (attendance rules, fees policy,
   anti-ragging, hostel allotment rules — the RULE, not the user's own dues).
 - Research areas/labs/policies, placements/careers info, campus events and
@@ -67,14 +94,21 @@ about the user's connected Google Calendar.
 
 If genuinely ambiguous between COMMUNITY and GENERAL, prefer COMMUNITY when
 any campus KB domain above is involved. Prefer GENERAL over PERSONAL_DATA
-when unsure — the personal-data tools must check eligibility/consent if
-invoked at all.
+only when the query names no personal record at all — a first-person
+timetable/schedule/grades/attendance/fees request is always PERSONAL_DATA
+(the personal-data tools enforce eligibility and consent themselves).
 
 Return exactly one word: PERSONAL_DATA, COMMUNITY, or GENERAL.
 """
 
     def classify(self, query: str) -> str:
         """Return PERSONAL_DATA | COMMUNITY | GENERAL. Fail toward GENERAL."""
+        # First-person schedule reads never depend on the LLM verdict — see
+        # _OWN_SCHEDULE_PAT. Without this, a classifier outage (which fails
+        # toward GENERAL by design) silently degrades "what is my time table?"
+        # to public RAG and a false "I don't have access" answer.
+        if _OWN_SCHEDULE_PAT.search(query) and not PUBLIC_PROGRAMME_OVERRIDE_PAT.search(query):
+            return "PERSONAL_DATA"
         model = self.model
         system = self.system_prompt.strip()
         dispatch = {"node": None}

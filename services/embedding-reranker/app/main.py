@@ -73,11 +73,36 @@ MAX_EMBED_TEXTS = int(os.getenv("MAX_EMBED_TEXTS", "64"))
 MAX_RERANK_PAIRS = int(os.getenv("MAX_RERANK_PAIRS", "64"))
 MAX_TEXT_CHARS = int(os.getenv("MAX_TEXT_CHARS", "8000"))
 # Cap parallel GPU/CPU inference so a flood cannot OOM the node.
-MAX_CONCURRENT_INFERENCE = max(1, int(os.getenv("MAX_CONCURRENT_INFERENCE", "2")))
+# Default raised 2 → 4: this is a GPU service hosting two small models, and 2
+# slots caused constant 503s under the backend's parallel embed+rerank
+# traffic — each 503 pushed the caller onto its 15-40s local CPU fallback.
+MAX_CONCURRENT_INFERENCE = max(1, int(os.getenv("MAX_CONCURRENT_INFERENCE", "4")))
 # Reject bodies larger than this before parsing (default 1 MiB).
 MAX_REQUEST_BYTES = max(64_000, int(os.getenv("MAX_REQUEST_BYTES", str(1 * 1024 * 1024))))
+# Short bounded queue instead of an instant 503 when all slots are busy: a
+# slot usually frees within tens of milliseconds, so a brief wait is vastly
+# cheaper for callers than their CPU fallback path. Waiters are counted and
+# capped so a stampede cannot stack unbounded threads behind the semaphore.
+INFERENCE_QUEUE_TIMEOUT = max(0.0, float(os.getenv("INFERENCE_QUEUE_TIMEOUT", "5")))
+INFERENCE_MAX_QUEUE = max(0, int(os.getenv("INFERENCE_MAX_QUEUE", "16")))
 
 _inference_sem = threading.Semaphore(MAX_CONCURRENT_INFERENCE)
+_queue_lock = threading.Lock()
+_queued_waiters = 0
+
+
+def _acquire_inference_slot() -> bool:
+    """Wait up to INFERENCE_QUEUE_TIMEOUT for a slot; False means 503."""
+    global _queued_waiters
+    with _queue_lock:
+        if _queued_waiters >= INFERENCE_MAX_QUEUE:
+            return False
+        _queued_waiters += 1
+    try:
+        return _inference_sem.acquire(timeout=INFERENCE_QUEUE_TIMEOUT)
+    finally:
+        with _queue_lock:
+            _queued_waiters -= 1
 
 if os.getenv("RERANKER_DEVICE"):
     DEVICE_NAME = os.getenv("RERANKER_DEVICE")
@@ -179,10 +204,13 @@ def embed_texts(req: EmbedRequest):
         EMBED_REQUESTS_TOTAL.labels(status_code="200").inc()
         return EmbedResponse(embeddings=[], model=EMBEDDING_MODEL_NAME, dimension=0)
 
-    acquired = _inference_sem.acquire(blocking=False)
-    if not acquired:
+    if not _acquire_inference_slot():
         EMBED_REQUESTS_TOTAL.labels(status_code="503").inc()
-        raise HTTPException(status_code=503, detail="Embedding service busy — retry shortly")
+        raise HTTPException(
+            status_code=503,
+            detail="Embedding service busy — retry shortly",
+            headers={"Retry-After": "1"},
+        )
 
     start_time = time.monotonic()
     ACTIVE_INFERENCE_REQUESTS.inc()
@@ -222,10 +250,13 @@ def rerank_pairs(req: RerankPairRequest):
         RERANK_REQUESTS_TOTAL.labels(status_code="200").inc()
         return RerankResponse(scores=[], model=RERANKER_MODEL_NAME)
 
-    acquired = _inference_sem.acquire(blocking=False)
-    if not acquired:
+    if not _acquire_inference_slot():
         RERANK_REQUESTS_TOTAL.labels(status_code="503").inc()
-        raise HTTPException(status_code=503, detail="Reranker service busy — retry shortly")
+        raise HTTPException(
+            status_code=503,
+            detail="Reranker service busy — retry shortly",
+            headers={"Retry-After": "1"},
+        )
 
     start_time = time.monotonic()
     ACTIVE_INFERENCE_REQUESTS.inc()
