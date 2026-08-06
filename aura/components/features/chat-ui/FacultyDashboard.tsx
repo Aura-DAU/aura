@@ -263,7 +263,7 @@ export function FacultyDashboard({
         <h3 className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-neutral-500">
           Quick Actions
         </h3>
-        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
           {quickPrompts.map((prompt) => (
             <button
               key={prompt}

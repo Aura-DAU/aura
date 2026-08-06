@@ -23,8 +23,8 @@ Note: included as a bonus since it showed up in the raw data — this program is
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 9:00-9:50 | PC1 (CS-AI) | SCN | CEP-103 |
-| Wednesday | 8:00-8:50 | PC1 (CS-AI) | SCN | CEP-103 |
+| Monday | 09:00-09:50 | PC1 (CS-AI) | SCN | CEP-103 |
+| Wednesday | 08:00-08:50 | PC1 (CS-AI) | SCN | CEP-103 |
 | Thursday | 10:00-10:50 | PC1 (CS-AI) | SCN | CEP-103 |
 
 ## Institute Core (IC) — shared by ALL branches, not branch-specific
@@ -33,50 +33,50 @@ These four courses are mandatory for every 1st-year B.Tech student regardless of
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 8:00-8:50 | IC101 (Sec A) — Introduction to ICT | AM | CEP-103 |
-| Monday | 8:00-8:50 | IC102 (Sec B) — Introduction to Programming (in C) | AG1 | CEP-106 |
-| Monday | 8:00-8:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
-| Monday | 8:00-8:50 | IC105 (Sec C) — Mathematics I / Calculus | AB1 | CEP-108 |
+| Monday | 08:00-08:50 | IC101 (Sec A) — Introduction to ICT | AM | CEP-103 |
+| Monday | 08:00-08:50 | IC102 (Sec B) — Introduction to Programming (in C) | AG1 | CEP-106 |
+| Monday | 08:00-08:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
+| Monday | 08:00-08:50 | IC105 (Sec C) — Mathematics I / Calculus | AB1 | CEP-108 |
 | Monday | 10:00-10:50 | IC101 (Sec C) — Introduction to ICT | AM | CEP-108 |
 | Monday | 10:00-10:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
 | Monday | 10:00-10:50 | IC104 (Sec A) — Basic Electronic Circuits | RP | CEP-103 |
 | Monday | 10:00-10:50 | IC105 (Sec B) — Mathematics I / Calculus | SP2 | CEP-106 |
-| Tuesday | 8:00-8:50 | IC101 (Sec B) — Introduction to ICT | GM | CEP-106 |
-| Tuesday | 8:00-8:50 | IC102 (Sec A) — Introduction to Programming (in C) | PA | CEP-103 |
-| Tuesday | 8:00-8:50 | IC104 (Sec C) — Basic Electronic Circuits | PK | CEP-108 |
-| Tuesday | 8:00-8:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
-| Tuesday | 9:00-9:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
-| Tuesday | 9:00-9:50 | IC102 (Sec C) — Introduction to Programming (in C) | RC | CEP-108 |
-| Tuesday | 9:00-9:50 | IC104 (Sec B) — Basic Electronic Circuits | RLD | CEP-106 |
-| Tuesday | 9:00-9:50 | IC105 (Sec A) — Mathematics I / Calculus | PK3 | CEP-103 |
+| Tuesday | 08:00-08:50 | IC101 (Sec B) — Introduction to ICT | GM | CEP-106 |
+| Tuesday | 08:00-08:50 | IC102 (Sec A) — Introduction to Programming (in C) | PA | CEP-103 |
+| Tuesday | 08:00-08:50 | IC104 (Sec C) — Basic Electronic Circuits | PK | CEP-108 |
+| Tuesday | 08:00-08:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
+| Tuesday | 09:00-09:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
+| Tuesday | 09:00-09:50 | IC102 (Sec C) — Introduction to Programming (in C) | RC | CEP-108 |
+| Tuesday | 09:00-09:50 | IC104 (Sec B) — Basic Electronic Circuits | RLD | CEP-106 |
+| Tuesday | 09:00-09:50 | IC105 (Sec A) — Mathematics I / Calculus | PK3 | CEP-103 |
 | Tuesday | 10:00-10:50 | IC101 (Sec A) — Introduction to ICT | AM | CEP-103 |
 | Tuesday | 10:00-10:50 | IC102 (Sec B) — Introduction to Programming (in C) | AG1 | CEP-106 |
 | Tuesday | 10:00-10:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
 | Tuesday | 10:00-10:50 | IC105 (Sec C) — Mathematics I / Calculus | AB1 | CEP-108 |
-| Wednesday | 9:00-9:50 | IC101 (Sec C) — Introduction to ICT | AM | CEP-108 |
-| Wednesday | 9:00-9:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
-| Wednesday | 9:00-9:50 | IC104 (Sec A) — Basic Electronic Circuits | RP | CEP-103 |
-| Wednesday | 9:00-9:50 | IC105 (Sec B) — Mathematics I / Calculus | SP2 | CEP-106 |
+| Wednesday | 09:00-09:50 | IC101 (Sec C) — Introduction to ICT | AM | CEP-108 |
+| Wednesday | 09:00-09:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
+| Wednesday | 09:00-09:50 | IC104 (Sec A) — Basic Electronic Circuits | RP | CEP-103 |
+| Wednesday | 09:00-09:50 | IC105 (Sec B) — Mathematics I / Calculus | SP2 | CEP-106 |
 | Wednesday | 10:00-10:50 | IC101 (Sec B) — Introduction to ICT | GM | CEP-106 |
 | Wednesday | 10:00-10:50 | IC102 (Sec A) — Introduction to Programming (in C) | PA | CEP-103 |
 | Wednesday | 10:00-10:50 | IC104 (Sec C) — Basic Electronic Circuits | PK | CEP-108 |
 | Wednesday | 10:00-10:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
-| Thursday | 8:00-8:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
-| Thursday | 8:00-8:50 | IC102 (Sec C) — Introduction to Programming (in C) | RC | CEP-108 |
-| Thursday | 8:00-8:50 | IC104 (Sec B) — Basic Electronic Circuits | RLD | CEP-106 |
-| Thursday | 8:00-8:50 | IC105 (Sec A) — Mathematics I / Calculus | PK3 | CEP-103 |
-| Thursday | 9:00-9:50 | IC101 (Sec A) — Introduction to ICT | AM | CEP-103 |
-| Thursday | 9:00-9:50 | IC102 (Sec B) — Introduction to Programming (in C) | AG1 | CEP-106 |
-| Thursday | 9:00-9:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
-| Thursday | 9:00-9:50 | IC105 (Sec C) — Mathematics I / Calculus | AB1 | CEP-108 |
-| Friday | 8:00-8:50 | IC101 (Sec C) — Introduction to ICT | AM | CEP-108 |
-| Friday | 8:00-8:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
-| Friday | 8:00-8:50 | IC104 (Sec A) — Basic Electronic Circuits | RP | CEP-103 |
-| Friday | 8:00-8:50 | IC105 (Sec B) — Mathematics I / Calculus | SP2 | CEP-106 |
-| Friday | 9:00-9:50 | IC101 (Sec B) — Introduction to ICT | GM | CEP-106 |
-| Friday | 9:00-9:50 | IC102 (Sec A) — Introduction to Programming (in C) | PA | CEP-103 |
-| Friday | 9:00-9:50 | IC104 (Sec C) — Basic Electronic Circuits | PK | CEP-108 |
-| Friday | 9:00-9:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
+| Thursday | 08:00-08:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
+| Thursday | 08:00-08:50 | IC102 (Sec C) — Introduction to Programming (in C) | RC | CEP-108 |
+| Thursday | 08:00-08:50 | IC104 (Sec B) — Basic Electronic Circuits | RLD | CEP-106 |
+| Thursday | 08:00-08:50 | IC105 (Sec A) — Mathematics I / Calculus | PK3 | CEP-103 |
+| Thursday | 09:00-09:50 | IC101 (Sec A) — Introduction to ICT | AM | CEP-103 |
+| Thursday | 09:00-09:50 | IC102 (Sec B) — Introduction to Programming (in C) | AG1 | CEP-106 |
+| Thursday | 09:00-09:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
+| Thursday | 09:00-09:50 | IC105 (Sec C) — Mathematics I / Calculus | AB1 | CEP-108 |
+| Friday | 08:00-08:50 | IC101 (Sec C) — Introduction to ICT | AM | CEP-108 |
+| Friday | 08:00-08:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
+| Friday | 08:00-08:50 | IC104 (Sec A) — Basic Electronic Circuits | RP | CEP-103 |
+| Friday | 08:00-08:50 | IC105 (Sec B) — Mathematics I / Calculus | SP2 | CEP-106 |
+| Friday | 09:00-09:50 | IC101 (Sec B) — Introduction to ICT | GM | CEP-106 |
+| Friday | 09:00-09:50 | IC102 (Sec A) — Introduction to Programming (in C) | PA | CEP-103 |
+| Friday | 09:00-09:50 | IC104 (Sec C) — Basic Electronic Circuits | PK | CEP-108 |
+| Friday | 09:00-09:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
 | Friday | 10:00-10:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
 | Friday | 10:00-10:50 | IC102 (Sec C) — Introduction to Programming (in C) | RC | CEP-108 |
 | Friday | 10:00-10:50 | IC104 (Sec B) — Basic Electronic Circuits | RLD | CEP-106 |
