@@ -343,6 +343,11 @@ def test_sync_followup_routes_to_sync_tool_with_calendar_context():
         "my calendar is not synced",
         "it's not syncing",
         "please sync it again",
+        # System-prompt vocabulary that previously missed the follow-up regex.
+        "calendar not updated",
+        "my calendar is not updated",
+        "it's not updated",
+        "not updated",
     ]
     for query in followups:
         assert (

@@ -20,6 +20,24 @@ function forbidden() {
   return NextResponse.json({ error: "Forbidden: Admin access required" }, { status: 403 })
 }
 
+/** Prefer FastAPI's `detail` field over the raw JSON body for client toasts. */
+async function backendErrorMessage(res: Response, fallback: string): Promise<string> {
+  const errText = await res.text().catch(() => "")
+  if (!errText) return fallback
+  try {
+    const parsed = JSON.parse(errText) as { detail?: unknown; error?: unknown }
+    if (typeof parsed.detail === "string" && parsed.detail.trim()) {
+      return parsed.detail
+    }
+    if (typeof parsed.error === "string" && parsed.error.trim()) {
+      return parsed.error
+    }
+  } catch {
+    // Non-JSON backend body — return as-is.
+  }
+  return errText
+}
+
 export async function GET() {
   const session = await getServerSession(authOptions)
   if (!session?.user || session.user.role !== "admin") {
@@ -43,8 +61,10 @@ export async function GET() {
       if (res.status >= 500) {
         return NextResponse.json({ error: "Failed to fetch admin users" }, { status: res.status })
       }
-      const errText = await res.text().catch(() => "")
-      return NextResponse.json({ error: errText || "Failed to fetch admin users" }, { status: res.status })
+      return NextResponse.json(
+        { error: await backendErrorMessage(res, "Failed to fetch admin users") },
+        { status: res.status },
+      )
     }
 
     return NextResponse.json(await res.json())
@@ -93,8 +113,10 @@ export async function POST(req: Request) {
       if (res.status >= 500) {
         return NextResponse.json({ error: "Failed to grant admin access" }, { status: res.status })
       }
-      const errText = await res.text().catch(() => "")
-      return NextResponse.json({ error: errText || "Failed to grant admin access" }, { status: res.status })
+      return NextResponse.json(
+        { error: await backendErrorMessage(res, "Failed to grant admin access") },
+        { status: res.status },
+      )
     }
 
     return NextResponse.json(await res.json())
@@ -143,8 +165,10 @@ export async function DELETE(req: Request) {
       if (res.status >= 500) {
         return NextResponse.json({ error: "Failed to revoke admin access" }, { status: res.status })
       }
-      const errText = await res.text().catch(() => "")
-      return NextResponse.json({ error: errText || "Failed to revoke admin access" }, { status: res.status })
+      return NextResponse.json(
+        { error: await backendErrorMessage(res, "Failed to revoke admin access") },
+        { status: res.status },
+      )
     }
 
     return NextResponse.json(await res.json())
