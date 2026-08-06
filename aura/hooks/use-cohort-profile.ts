@@ -23,6 +23,7 @@ export interface CohortProfile {
   current_year: number | null
   current_sem: number | null
   current_sec: string | null
+  current_lab_group: string | null
   is_configured: boolean
 }
 
@@ -32,6 +33,7 @@ export interface SaveCohortRequest {
   semester: number
   section: string
   branch?: string
+  lab_group?: string | null
 }
 
 export function useCohortProfile() {

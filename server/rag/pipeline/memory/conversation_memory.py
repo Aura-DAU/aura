@@ -153,12 +153,16 @@ class ConversationMemory:
         # the same env names and must agree on what they reserve. Sized for the
         # 4096 cutover: the old 8192/768/3000/2200/512 set went *negative* at
         # 4096 (4096-768-3000-2200-512 = -2384), collapsing _raw_budget to 0 and
-        # leaving no room for a summary or a verbatim tail. Not imported from
+        # leaving no room for a summary or a verbatim tail. AURA_MAX_CONTEXT_TOKENS
+        # was nudged 1400 → 1600 alongside token_budget.py's default (see that
+        # module for why) — still leaves _raw_budget barely positive (~116) if
+        # max_model_len is ever truly 4096; comfortably positive at today's live
+        # 8192. Not imported from
         # token_budget on purpose: that module pulls httpx and does network
         # discovery, and this one must stay importable without either.
         self.model_context_tokens = _env_int("MAX_MODEL_LEN", 4096)
         self.reserved_answer = _env_int("AURA_MAX_ANSWER_TOKENS", 1024)
-        self.reserved_context = _env_int("AURA_MAX_CONTEXT_TOKENS", 1400)
+        self.reserved_context = _env_int("AURA_MAX_CONTEXT_TOKENS", 1600)
         # The system prompt (answer_generator.SYSTEM_PROMPT) is a large, static
         # prefix; reserve a flat estimate rather than importing/measuring it here.
         self.reserved_system = _env_int("AURA_RESERVED_SYSTEM_TOKENS", 1100)

@@ -74,8 +74,10 @@ def get_events_on_date(erp_id: str, date: datetime.date) -> list[dict]:
     # Fetches all calendar events for a faculty member on a given date.
     # Returns a list of {summary, start, end, is_busy} dicts.
     access_token = _get_valid_access_token(erp_id)
-    day_start    = datetime.datetime.combine(date, datetime.time.min).isoformat() + "Z"
-    day_end      = datetime.datetime.combine(date, datetime.time.max).isoformat() + "Z"
+    import zoneinfo
+    tz = zoneinfo.ZoneInfo("Asia/Kolkata")
+    day_start = datetime.datetime.combine(date, datetime.time.min, tzinfo=tz).isoformat()
+    day_end   = datetime.datetime.combine(date, datetime.time.max, tzinfo=tz).isoformat()
 
     resp = requests.get(
         GOOGLE_EVENTS_URL.format(cal_id="primary"),
