@@ -42,6 +42,7 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
   const { data: session } = useSession()
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const role: string = session?.user?.role ?? ""
+  const isGuestProfile = role === "guest"
   const isFacultyProfile =
     role.startsWith("faculty") ||
     role.startsWith("dean") ||
@@ -111,20 +112,22 @@ function ProfileModalDialog({ onClose, profile, onSave }: ProfileModalDialogProp
           <div className="mb-6 rounded-xl border border-theme-gray-lighter bg-theme-black p-4">
             <div className="text-xs font-semibold text-theme-yellow uppercase tracking-wider mb-3">Verified Identity</div>
             <div className="grid grid-cols-2 gap-4">
-              <div>
+              <div className={isGuestProfile ? "col-span-2" : ""}>
                 <div className="text-xs text-neutral-500 mb-1">Role</div>
                 <div className="text-sm text-neutral-200 capitalize">{session.user.role}</div>
               </div>
-              {!isFacultyProfile ? (
+              {!isFacultyProfile && !isGuestProfile ? (
                 <div>
                   <div className="text-xs text-neutral-500 mb-1">Department</div>
                   <div className="text-sm text-neutral-200">{session.user.department || "N/A"}</div>
                 </div>
               ) : null}
-              <div className={isFacultyProfile ? "" : "col-span-2"}>
-                <div className="text-xs text-neutral-500 mb-1">ERP ID</div>
-                <div className="text-sm text-neutral-200">{session.user.erpId}</div>
-              </div>
+              {!isGuestProfile ? (
+                <div className={isFacultyProfile ? "" : "col-span-2"}>
+                  <div className="text-xs text-neutral-500 mb-1">ERP ID</div>
+                  <div className="text-sm text-neutral-200">{session.user.erpId}</div>
+                </div>
+              ) : null}
             </div>
           </div>
         )}

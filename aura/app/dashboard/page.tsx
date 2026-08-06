@@ -19,6 +19,10 @@ export default async function DashboardPage() {
   const user = session.user
   const role = (user.role as string) || ""
 
+  if (role === "guest") {
+    redirect("/")
+  }
+
   if (role === "student") {
     return (
       <StudentAcademicDashboard
