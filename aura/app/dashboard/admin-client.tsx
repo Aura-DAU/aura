@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import { Search, Plus, Trash2, Shield, Calendar, Loader2, CheckCircle2, AlertCircle, Activity, Clock } from "lucide-react"
 import { ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { getErrorMessage, toastError, toastSuccess } from "@/lib/toast"
+import { UserActivityStats } from "@/components/features/dashboard/UserActivityStats"
 
 interface Binding {
   id: string
@@ -232,6 +233,9 @@ export default function AdminBindingsClient() {
             </p>
           </div>
         </div>
+
+        {/* User Activity Stats */}
+        <UserActivityStats />
 
         {/* Search Card */}
         <div className="rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 mb-6">

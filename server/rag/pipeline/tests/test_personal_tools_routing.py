@@ -23,10 +23,7 @@ from pipeline.aura_chat_graph import (
 from pipeline.ecampus.orchestrator import (
     _is_timetable_edit_confirmation,
     _is_timetable_edit_intent,
-)
-from pipeline.ecampus.orchestrator import (
-    _is_timetable_edit_confirmation,
-    _is_timetable_edit_intent,
+    _required_calendar_tool,
 )
 
 
@@ -320,6 +317,112 @@ def test_first_unsync_request_asks_for_confirmation_without_tool_call():
     assert action["provider"] == "google_calendar"
     assert action["action"] == "unsync_timetable"
     assert action["message"] == answer
+
+
+_POST_CONNECT_HISTORY = [{
+    "role": "assistant",
+    "content": "Connect your Google Calendar to sync your timetable.",
+}]
+
+
+def test_sync_followup_routes_to_sync_tool_with_calendar_context():
+    """Regression: after the OAuth connect card ("Connected — ask me again to
+    sync your timetable"), follow-ups like "it's not synced" carry no
+    \\bsync\\b + object phrase, fell through every deterministic gate, and
+    degraded to public RAG — where the generator denied the sync capability."""
+    followups = [
+        "it's not synced",
+        "it is not synced",
+        "its not synced",
+        "still not synced",
+        "sync it again",
+        "sync again",
+        "sync it",
+        "it didn't sync",
+        "it hasn't synced",
+        "my calendar is not synced",
+        "it's not syncing",
+        "please sync it again",
+    ]
+    for query in followups:
+        assert (
+            _required_calendar_tool(query, _POST_CONNECT_HISTORY)
+            == "sync_timetable_to_calendar"
+        ), query
+    # Also after a completed sync ("Done — ... synced to Google Calendar"),
+    # so "it's still not synced" re-runs the idempotent sync.
+    synced_history = [{
+        "role": "assistant",
+        "content": "Done — your timetable is synced to Google Calendar "
+                   "(13 created, 0 updated, 0 removed).",
+    }]
+    assert (
+        _required_calendar_tool("it's still not synced", synced_history)
+        == "sync_timetable_to_calendar"
+    )
+    # The _connect_action_required fallback CTA has no "sync" word — the
+    # connect...calendar...timetable arm of the context regex covers it.
+    fallback_cta_history = [{
+        "role": "assistant",
+        "content": "Connect your Google Calendar to add your timetable "
+                   "to your schedule.",
+    }]
+    assert (
+        _required_calendar_tool("it's not synced", fallback_cta_history)
+        == "sync_timetable_to_calendar"
+    )
+
+
+def test_sync_followup_needs_calendar_context():
+    # Without a calendar-sync assistant turn, "it's not synced" stays out of
+    # the calendar tool path (it could be about anything).
+    assert _required_calendar_tool("it's not synced", []) is None
+    unrelated = [{
+        "role": "assistant",
+        "content": "The mid-semester exams start on 20 August.",
+    }]
+    assert _required_calendar_tool("it's not synced", unrelated) is None
+    # Longer sentences about other records never match the follow-up shape.
+    assert _required_calendar_tool(
+        "my grades are not synced with the portal", _POST_CONNECT_HISTORY
+    ) is None
+    # Removal verbs keep going through the unsync confirmation flow.
+    assert _required_calendar_tool("unsync it", _POST_CONNECT_HISTORY) is None
+
+
+def test_sync_followup_is_low_risk_and_skips_general_guardrail():
+    assert _is_low_risk_timetable_sync_turn("it's not synced", _POST_CONNECT_HISTORY)
+    assert not _is_low_risk_timetable_sync_turn("it's not synced", [])
+
+
+def test_post_connect_sync_followup_reaches_personal_tools():
+    """End-to-end through the graph nodes: the follow-up must bypass the LLM
+    intent classifier in _n_community_tools and run the deterministic
+    personal-actions path in _n_personal_tools."""
+    calls = []
+    fake = types.SimpleNamespace(
+        intent_router=types.SimpleNamespace(
+            classify=lambda _query: (_ for _ in ()).throw(
+                AssertionError("sync follow-up reached the public-KB classifier")
+            )
+        ),
+        ecampus_orchestrator=types.SimpleNamespace(
+            run=lambda **kwargs: calls.append(kwargs) or {
+                "used_tools": True,
+                "answer": "Done — your timetable is synced to Google Calendar.",
+                "sources": [],
+            }
+        ),
+    )
+    state = _student_state("it's not synced")
+    state["history"] = list(_POST_CONNECT_HISTORY)
+
+    after_community = AuraChatGraph._n_community_tools(fake, state)
+    out = AuraChatGraph._n_personal_tools(fake, after_community)
+
+    assert after_community["ecampus_intent"] == "PERSONAL_DATA"
+    assert out["result"]["answer"] == "Done — your timetable is synced to Google Calendar."
+    assert calls[0]["tool_scope"] == "personal_actions"
 
 
 def test_unsync_confirmation_reaches_orchestrator():

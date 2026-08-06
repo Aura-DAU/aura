@@ -226,6 +226,52 @@ def list_deans(admin: Identity = Depends(_require_admin)):
     return {"dean_bindings": [dict(r) for r in rows]}
 
 
+@router.get("/stats/users")
+def get_user_stats(days: int = 7, admin: Identity = Depends(_require_admin)):
+    """
+    User counts for the admin dashboard, split by role.
+
+    registered       — active accounts in user_identity_map (is_active = TRUE)
+    recently_active  — distinct users seen in audit_log within the window.
+                       audit_log only records personal-data queries, so this
+                       undercounts users who exclusively ask public questions.
+    """
+    if days <= 0 or days > 90:
+        raise HTTPException(
+            status_code=400,
+            detail="Days parameter must be between 1 and 90.",
+        )
+
+    registered_rows = db_conn.query(
+        """SELECT role, COUNT(*) AS count
+           FROM user_identity_map
+           WHERE is_active = TRUE
+           GROUP BY role""",
+        (),
+    )
+    active_rows = db_conn.query(
+        """SELECT role, COUNT(DISTINCT erp_id) AS count
+           FROM audit_log
+           WHERE ts >= NOW() - %s * INTERVAL '1 day'
+           GROUP BY role""",
+        (days,),
+    )
+
+    def _by_role(rows) -> dict:
+        counts = {"student": 0, "faculty": 0, "admin": 0}
+        for r in rows:
+            if r["role"] in counts:
+                counts[r["role"]] = r["count"]
+        counts["total"] = sum(counts.values())
+        return counts
+
+    return {
+        "registered": _by_role(registered_rows),
+        "recently_active": _by_role(active_rows),
+        "window_days": days,
+    }
+
+
 @router.get("/latency")
 def get_latency_stats(hours: int = 24, admin: Identity = Depends(_require_admin)):
     if hours <= 0 or hours > 720:
