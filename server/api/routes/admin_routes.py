@@ -28,14 +28,18 @@ Example admin workflow:
 
 import re
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel, Field
-from typing import Optional
+from pydantic import BaseModel, Field, field_validator
+from typing import Literal, Optional
 
 import db.connection as db_conn
 from api.auth import require_identity, Identity
 from access_control import resolve_effective_role
 
 router = APIRouter(prefix="/admin", tags=["admin"])
+
+_DAU_EMAIL_DOMAIN = "dau.ac.in"
+_STUDENT_ERP_PATTERN = re.compile(r"^\d{9}$")
+_ADMIN_STAFF_BINDING = "admin_staff"
 
 # ── Valid binding patterns ─────────────────────────────────────────────────
 # Simple exact-match strings
@@ -115,6 +119,218 @@ def _check_erp_exists(erp_id: str) -> None:
 class AddBindingRequest(BaseModel):
     binding:    str = Field(..., min_length=1, max_length=128)
     expires_at: Optional[str] = Field(None, max_length=64)   # ISO-8601 datetime string, or null = permanent
+
+
+class GrantDashboardAccessRequest(BaseModel):
+    email:  str = Field(..., min_length=5, max_length=320)
+    role:   Literal["admin"] = "admin"
+    erp_id: Optional[str] = Field(None, min_length=1, max_length=64)
+    dept:   Optional[str] = Field(None, max_length=64)
+
+    @field_validator("email")
+    @classmethod
+    def _normalize_email(cls, value: str) -> str:
+        return value.strip().lower()
+
+
+class RevokeDashboardAccessRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=320)
+
+    @field_validator("email")
+    @classmethod
+    def _normalize_email(cls, value: str) -> str:
+        return value.strip().lower()
+
+
+def _validate_dau_email(email: str) -> None:
+    if "@" not in email:
+        raise HTTPException(status_code=400, detail="Invalid email address.")
+    local, domain = email.rsplit("@", 1)
+    if not local or domain != _DAU_EMAIL_DOMAIN:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Email must be an @{_DAU_EMAIL_DOMAIN} address.",
+        )
+
+
+def _resolve_erp_id(email: str, erp_id: Optional[str]) -> str:
+    if erp_id:
+        erp_id = erp_id.strip()
+        if not erp_id:
+            raise HTTPException(status_code=400, detail="erp_id cannot be empty.")
+        return erp_id
+
+    local = email.split("@", 1)[0]
+    if _STUDENT_ERP_PATTERN.match(local):
+        return local
+
+    raise HTTPException(
+        status_code=400,
+        detail=(
+            "erp_id is required when the email local-part is not a 9-digit student ID."
+        ),
+    )
+
+
+def _ensure_admin_staff_binding(erp_id: str, granted_by: str) -> bool:
+    rows = db_conn.query(
+        """SELECT id FROM role_bindings
+           WHERE erp_id = %s AND binding = %s AND revoked = FALSE
+             AND (expires_at IS NULL OR expires_at > NOW())""",
+        (erp_id, _ADMIN_STAFF_BINDING),
+    )
+    if rows:
+        return False
+
+    db_conn.execute(
+        """INSERT INTO role_bindings (erp_id, binding, granted_by, expires_at)
+           VALUES (%s, %s, %s, NULL)""",
+        (erp_id, _ADMIN_STAFF_BINDING, granted_by),
+    )
+    return True
+
+
+def _revoke_admin_staff_bindings(erp_id: str) -> int:
+    rows = db_conn.query(
+        """SELECT id FROM role_bindings
+           WHERE erp_id = %s AND binding = %s AND revoked = FALSE""",
+        (erp_id, _ADMIN_STAFF_BINDING),
+    )
+    if not rows:
+        return 0
+
+    db_conn.execute(
+        """UPDATE role_bindings SET revoked = TRUE
+           WHERE erp_id = %s AND binding = %s AND revoked = FALSE""",
+        (erp_id, _ADMIN_STAFF_BINDING),
+    )
+    return len(rows)
+
+
+@router.get("/users/access")
+def list_dashboard_access(admin: Identity = Depends(_require_admin)):
+    """List active dashboard admin users (user_identity_map.role = admin)."""
+    rows = db_conn.query(
+        """SELECT uim.email, uim.erp_id, uim.dept, uim.created_at,
+                  EXISTS (
+                    SELECT 1 FROM role_bindings rb
+                    WHERE rb.erp_id = uim.erp_id
+                      AND rb.binding = %s
+                      AND rb.revoked = FALSE
+                      AND (rb.expires_at IS NULL OR rb.expires_at > NOW())
+                  ) AS has_admin_staff_binding
+           FROM user_identity_map uim
+           WHERE uim.role = 'admin' AND uim.is_active = TRUE
+           ORDER BY uim.email""",
+        (_ADMIN_STAFF_BINDING,),
+    )
+    return {
+        "admins": [
+            {
+                "email": r["email"],
+                "erp_id": r["erp_id"],
+                "dept": r.get("dept"),
+                "created_at": r.get("created_at"),
+                "has_admin_staff_binding": bool(r["has_admin_staff_binding"]),
+            }
+            for r in rows
+        ],
+    }
+
+
+@router.post("/users/access")
+def grant_dashboard_access(
+    body: GrantDashboardAccessRequest,
+    admin: Identity = Depends(_require_admin),
+):
+    """Grant admin dashboard access by email (upserts user_identity_map + admin_staff binding)."""
+    _validate_dau_email(body.email)
+    erp_id = _resolve_erp_id(body.email, body.erp_id)
+
+    existing = db_conn.query(
+        "SELECT erp_id, email FROM user_identity_map WHERE email = %s OR erp_id = %s",
+        (body.email, erp_id),
+    )
+    if existing:
+        row = existing[0]
+        if row["email"] != body.email:
+            raise HTTPException(
+                status_code=409,
+                detail=f"erp_id '{erp_id}' is already assigned to another email.",
+            )
+        if row["erp_id"] != erp_id:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Email '{body.email}' is already mapped to erp_id '{row['erp_id']}'.",
+            )
+
+    db_conn.execute(
+        """INSERT INTO user_identity_map (email, erp_id, role, dept, is_active)
+           VALUES (%s, %s, %s, %s, TRUE)
+           ON CONFLICT (email) DO UPDATE
+           SET erp_id = EXCLUDED.erp_id,
+               role = EXCLUDED.role,
+               dept = COALESCE(EXCLUDED.dept, user_identity_map.dept),
+               is_active = TRUE""",
+        (body.email, erp_id, body.role, body.dept),
+    )
+
+    binding_added = _ensure_admin_staff_binding(erp_id, admin.erp_id)
+
+    return {
+        "status": "granted",
+        "email": body.email,
+        "erp_id": erp_id,
+        "role": body.role,
+        "admin_staff_binding_added": binding_added,
+        "granted_by": admin.erp_id,
+    }
+
+
+@router.delete("/users/access")
+def revoke_dashboard_access(
+    body: RevokeDashboardAccessRequest,
+    admin: Identity = Depends(_require_admin),
+):
+    """Deactivate dashboard admin access for an email and revoke admin_staff bindings."""
+    _validate_dau_email(body.email)
+
+    rows = db_conn.query(
+        "SELECT erp_id, role, is_active FROM user_identity_map WHERE email = %s",
+        (body.email,),
+    )
+    if not rows:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No user found for email '{body.email}'.",
+        )
+
+    target = rows[0]
+    if target["role"] != "admin":
+        raise HTTPException(
+            status_code=400,
+            detail=f"User '{body.email}' does not have admin dashboard access.",
+        )
+
+    if target["erp_id"] == admin.erp_id:
+        raise HTTPException(
+            status_code=400,
+            detail="You cannot revoke your own admin dashboard access.",
+        )
+
+    db_conn.execute(
+        "UPDATE user_identity_map SET is_active = FALSE WHERE email = %s",
+        (body.email,),
+    )
+    bindings_revoked = _revoke_admin_staff_bindings(target["erp_id"])
+
+    return {
+        "status": "revoked",
+        "email": body.email,
+        "erp_id": target["erp_id"],
+        "bindings_revoked": bindings_revoked,
+        "revoked_by": admin.erp_id,
+    }
 
 
 @router.get("/users/{erp_id}/bindings")
