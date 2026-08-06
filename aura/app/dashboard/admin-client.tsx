@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import { Search, Plus, Trash2, Shield, Calendar, Loader2, CheckCircle2, AlertCircle, Activity, Clock } from "lucide-react"
 import { ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { getErrorMessage, toastError, toastSuccess } from "@/lib/toast"
+import { AdminAccessManager } from "@/components/features/dashboard/AdminAccessManager"
 import { UserActivityStats } from "@/components/features/dashboard/UserActivityStats"
 
 interface Binding {
@@ -229,13 +230,16 @@ export default function AdminBindingsClient() {
               Admin Dashboard
             </h1>
             <p className="text-xs text-neutral-400 mt-0.5 font-sans">
-              Manage scope bindings and monitor system latency metrics.
+              Manage scope bindings, admin access, and monitor system latency metrics.
             </p>
           </div>
         </div>
 
         {/* User Activity Stats */}
         <UserActivityStats />
+
+        {/* Dashboard Admin Access */}
+        <AdminAccessManager />
 
         {/* Search Card */}
         <div className="rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 mb-6">
