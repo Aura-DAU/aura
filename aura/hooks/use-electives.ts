@@ -32,20 +32,24 @@ export function useElectives() {
   const [error, setError] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
 
-  const refetch = useCallback(async () => {
+  const refetch = useCallback(async (signal?: AbortSignal) => {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch("/api/timetable/electives", { cache: "no-store" })
+      const res = await fetch("/api/timetable/electives", {
+        cache: "no-store",
+        signal,
+      })
       const json = await res.json()
       if (!res.ok) {
         throw new Error(json?.detail || json?.error || "Failed to load electives")
       }
       setData(json)
     } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return
       setError(err instanceof Error ? err.message : "Failed to load electives")
     } finally {
-      setLoading(false)
+      if (!signal?.aborted) setLoading(false)
     }
   }, [])
 
@@ -62,7 +66,6 @@ export function useElectives() {
       if (!res.ok) {
         throw new Error(json?.detail || json?.error || "Failed to save selections")
       }
-      // Refetch to get updated selection status
       await refetch()
       return json
     } catch (err) {
@@ -75,8 +78,10 @@ export function useElectives() {
   }, [refetch])
 
   useEffect(() => {
+    const controller = new AbortController()
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    refetch()
+    void refetch(controller.signal)
+    return () => controller.abort()
   }, [refetch])
 
   return { data, loading, error, saving, refetch, saveSelections }

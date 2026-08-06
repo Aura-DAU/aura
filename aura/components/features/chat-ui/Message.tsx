@@ -31,6 +31,8 @@ interface MessageProps {
   /** Keep action toolbar visible (ChatGPT pattern for the latest reply). */
   showActions?: boolean
   onCalendarSyncConfirm?: () => void
+  /** Only the latest timetable_sync card should poll status. */
+  activeTimetableSync?: boolean
 }
 
 export function Message({
@@ -40,17 +42,16 @@ export function Message({
   isStreaming = false,
   showActions = false,
   onCalendarSyncConfirm,
+  activeTimetableSync = false,
 }: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { openDocument, prefetchDocument } = useDocumentViewer()
 
   useEffect(() => {
     return () => {
       if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
     }
   }, [])
 
@@ -180,7 +181,10 @@ export function Message({
 
         {message.calendar_action &&
           (message.calendar_action.type === "timetable_sync" ? (
-            <TimetableSyncCard eventCount={message.calendar_action.event_count} />
+            <TimetableSyncCard
+              eventCount={message.calendar_action.event_count}
+              active={activeTimetableSync}
+            />
           ) : message.calendar_action.type === "timetable_sync_confirmation" ? (
             <TimetableSyncConfirmationCard
               eventCount={message.calendar_action.event_count}
@@ -231,19 +235,10 @@ export function Message({
                     <button
                       type="button"
                       onMouseEnter={() => {
-                        if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+                        if (typeof window !== "undefined" && window.innerWidth < 768) return
                         prefetchDocument(viewerTarget)
-                        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-                        hoverTimerRef.current = setTimeout(() => {
-                          openDocument(viewerTarget)
-                        }, 1000)
                       }}
-                      onMouseLeave={() => {
-                        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-                      }}
-                      onClick={() => {
-                        window.open(c.file, "_blank", "noopener,noreferrer")
-                      }}
+                      onClick={() => openDocument(viewerTarget)}
                       className={pillClasses}
                       aria-label={`View source: ${c.title ?? c.file}`}
                     >
@@ -415,7 +410,7 @@ function BookingConfirmationCard({ action }: { action: CalendarActionData }) {
 // turn) once the account is linked.
 function ConnectCalendarCard({ action }: { action: CalendarActionData }) {
   const { status, error, connect } = useGoogleCalendarSync()
-  const connected = status === "connected"
+  const connected = status === "connected" || status === "syncing"
 
   return (
     <div className="mt-3 rounded-xl border border-theme-yellow/20 bg-theme-yellow/5 p-4 animate-in fade-in slide-in-from-bottom-1 duration-300">
@@ -432,12 +427,15 @@ function ConnectCalendarCard({ action }: { action: CalendarActionData }) {
           {error && <p className="mt-1.5 text-xs text-theme-red">{error}</p>}
           {connected ? (
             <p className="mt-2 inline-flex items-center gap-1 text-xs text-green-400">
-              <Check className="size-3.5" /> Connected — ask me again to sync your timetable.
+              <Check className="size-3.5" />
+              {status === "syncing"
+                ? "Connected — syncing your timetable now."
+                : "Connected — ask me again to sync or book."}
             </p>
           ) : (
             <button
               type="button"
-              onClick={() => void connect()}
+              onClick={() => void connect({ returnTo: "/" })}
               disabled={status === "loading"}
               className="mt-3 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-theme-red to-theme-yellow px-4 py-2 text-sm font-bold text-black transition-opacity hover:opacity-90 disabled:opacity-60"
             >

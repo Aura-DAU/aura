@@ -6,10 +6,7 @@ import { FileText, Loader2, X } from "lucide-react"
 
 import { useDocumentViewer } from "@/hooks/use-document-viewer"
 import { MarkdownContent } from "@/components/ui/markdown-content"
-
-// Module-level cache so hovering multiple citation cards for the same file
-// (or reopening a document already viewed) doesn't refetch every time.
-const documentCache = new Map<string, string>()
+import { getCachedDocument, prefetchDocumentContent } from "@/lib/document-cache"
 
 interface FetchState {
   status: "idle" | "loading" | "loaded" | "error"
@@ -36,11 +33,12 @@ function DocumentViewerPanel({
   target: { path: string; title?: string; startLine?: number; endLine?: number }
   onClose: () => void
 }) {
-  const [state, setState] = useState<FetchState>(() =>
-    documentCache.has(target.path)
-      ? { status: "loaded", content: documentCache.get(target.path) }
-      : { status: "idle" },
-  )
+  const [state, setState] = useState<FetchState>(() => {
+    const cached = getCachedDocument(target.path)
+    return cached !== undefined
+      ? { status: "loaded", content: cached }
+      : { status: "idle" }
+  })
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -54,25 +52,18 @@ function DocumentViewerPanel({
   }, [onClose])
 
   useEffect(() => {
-    if (documentCache.has(target.path)) {
+    const cached = getCachedDocument(target.path)
+    if (cached !== undefined) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setState({ status: "loaded", content: documentCache.get(target.path) })
+      setState({ status: "loaded", content: cached })
       return
     }
     let cancelled = false
     setState({ status: "loading" })
-    fetch(`/api/documents?path=${encodeURIComponent(target.path)}`)
-      .then(async (res) => {
-        if (!res.ok) {
-          const body = await res.json().catch(() => null)
-          throw new Error(body?.error ?? "Failed to load document")
-        }
-        return res.json() as Promise<{ content: string }>
-      })
-      .then((data) => {
+    void prefetchDocumentContent(target.path)
+      .then((content) => {
         if (cancelled) return
-        documentCache.set(target.path, data.content)
-        setState({ status: "loaded", content: data.content })
+        setState({ status: "loaded", content })
       })
       .catch((err: Error) => {
         if (cancelled) return
@@ -83,7 +74,6 @@ function DocumentViewerPanel({
     }
   }, [target.path])
 
-
   const { strippedContent, startLine, endLine } = useMemo(() => {
     const rawLines = state.content?.split("\n") ?? []
     let offset = 0
@@ -93,15 +83,18 @@ function DocumentViewerPanel({
         offset = frontmatterEndIndex + 1
       }
     }
-    
+
     return {
       strippedContent: rawLines.slice(offset).join("\n"),
       startLine: target.startLine ? Math.max(1, target.startLine - offset) : undefined,
-      endLine: target.endLine 
-        ? Math.max(1, target.endLine - offset) 
-        : (target.startLine ? Math.max(1, target.startLine - offset) : undefined),
+      endLine: target.endLine
+        ? Math.max(1, target.endLine - offset)
+        : target.startLine
+          ? Math.max(1, target.startLine - offset)
+          : undefined,
     }
   }, [state.content, target.startLine, target.endLine])
+
   return (
     <>
       <motion.div
@@ -153,10 +146,10 @@ function DocumentViewerPanel({
             <div className="p-4 text-sm text-theme-red">{state.error}</div>
           ) : (
             <div className="px-6 py-6 font-sans text-[15px] leading-relaxed text-neutral-300">
-              <MarkdownContent 
-                content={strippedContent} 
-                highlightStart={startLine} 
-                highlightEnd={endLine} 
+              <MarkdownContent
+                content={strippedContent}
+                highlightStart={startLine}
+                highlightEnd={endLine}
                 sanitize={false}
               />
             </div>
