@@ -221,7 +221,7 @@ export function ChatShell() {
               caret/cursor to jump or vanish. Only the `variant` prop (visual
               styling) changes now; the DOM node itself never gets recreated.
             */}
-            {composer}
+            <div className="shrink-0">{composer}</div>
             {/* Reserve space so the install banner does not cover the composer. */}
             {showInstallUi ? <div className="h-24 shrink-0 sm:h-28" aria-hidden /> : null}
           </div>

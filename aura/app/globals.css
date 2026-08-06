@@ -476,11 +476,19 @@
   .text-gradient-aura,
   .text-shimmer,
   .loading-msg-fade,
-  .brand-mark-active {
+  .brand-mark-active,
+  .composer-thinking-wrap.is-thinking::before,
+  .composer-thinking-wrap.is-thinking::after {
     animation: none !important;
   }
   .msg-actions {
     transition: none !important;
+  }
+  .composer-thinking-wrap.is-thinking::before {
+    background: linear-gradient(100deg, #4285f4, #9b72cb, #d96570, #ffbe3f);
+  }
+  .composer-thinking-wrap.is-thinking::after {
+    opacity: 0.28;
   }
 }
 
@@ -491,6 +499,77 @@
 }
 .brand-mark-active {
   animation: brand-mark-pulse 2s ease-in-out infinite;
+}
+
+/* ------- Gemini-style rotating outline on the composer while thinking ------- */
+@property --composer-spin-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes composer-outline-spin {
+  to {
+    --composer-spin-angle: 360deg;
+  }
+}
+
+.composer-thinking-wrap {
+  position: relative;
+  border-radius: 26px;
+}
+
+.composer-thinking-wrap.is-thinking::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--composer-spin-angle),
+    #4285f4 0%,
+    #9b72cb 22%,
+    #d96570 42%,
+    #f4503b 55%,
+    #ffbe3f 72%,
+    #4285f4 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: composer-outline-spin 2s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.composer-thinking-wrap.is-thinking::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--composer-spin-angle),
+    rgba(66, 133, 244, 0.45) 0%,
+    rgba(155, 114, 203, 0.35) 22%,
+    rgba(217, 101, 112, 0.3) 42%,
+    rgba(244, 80, 59, 0.28) 55%,
+    rgba(255, 190, 63, 0.35) 72%,
+    rgba(66, 133, 244, 0.45) 100%
+  );
+  filter: blur(12px);
+  opacity: 0.45;
+  animation: composer-outline-spin 2s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.composer-thinking-wrap.is-thinking > .composer-shell {
+  border-color: transparent;
 }
 
 /* ------- Document Viewer AST highlight ------- */
