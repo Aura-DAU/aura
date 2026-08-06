@@ -63,6 +63,7 @@ from pipeline.ecampus.orchestrator import (
     _is_calendar_unsync_intent,
     _is_timetable_edit_confirmation,
     _is_timetable_edit_intent,
+    _CALENDAR_SYNC_FOLLOWUP_RE,
 )
 from api.request_context import RequestContext
 
@@ -128,6 +129,11 @@ def _is_low_risk_timetable_sync_turn(query: str, history: list[dict]) -> bool:
             _LOW_RISK_TIMETABLE_SYNC_RE.fullmatch(query)
             or _LOW_RISK_TIMETABLE_FETCH_RE.fullmatch(query)
             or _LOW_RISK_CONFIRMATION_RE.fullmatch(query)
+            # Post-connect follow-ups ("it's not synced", "sync it again").
+            # _required_calendar_tool only maps these to the sync tool when
+            # the previous assistant turn was calendar-sync context, so this
+            # arm is already context-gated.
+            or _CALENDAR_SYNC_FOLLOWUP_RE.fullmatch(query)
         )
     return False
 

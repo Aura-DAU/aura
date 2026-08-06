@@ -237,6 +237,38 @@ _CALENDAR_SYNC_RE = re.compile(
     r"|\b(?:schedule|time\s*table|classes?)\b.{0,30}\bcalendar\b",
     re.IGNORECASE,
 )
+# Follow-up sync requests after an assistant turn that offered or performed a
+# timetable -> Google Calendar sync (the post-OAuth-connect card literally says
+# "ask me again to sync your timetable"). None of these carry the verb+object
+# shape _CALENDAR_SYNC_RE needs -- "synced" is not \bsync\b -- so without this
+# arm "it's not synced" / "sync it again" fell through every deterministic gate
+# to the GENERAL/RAG path, whose generator then denied the sync capability.
+# Only meaningful in context: _required_calendar_tool gates it on the previous
+# assistant turn matching _CALENDAR_SYNC_CONTEXT_RE.
+_CALENDAR_SYNC_FOLLOWUP_RE = re.compile(
+    r"^\s*(?:please\s+)?(?:"
+    r"(?:it|it'?s|its|that|this|my\s+(?:google\s+)?calendar|"
+    r"my\s+(?:time\s*table|schedule|classes))?\s*"
+    r"(?:is|was|has|have)?\s*(?:still\s+)?"
+    r"(?:not|isn'?t|hasn'?t|didn'?t|wasn'?t|won'?t|never)\s*"
+    r"(?:been\s+|got(?:ten)?\s+)?sync(?:ed|ing)?"
+    r"|(?:re-?)?sync(?:\s+(?:it|that|this|them|my\s+(?:google\s+)?calendar|"
+    r"my\s+(?:time\s*table|schedule|classes)))?(?:\s+again)?"
+    r")\s*[.!?]*\s*$",
+    re.IGNORECASE,
+)
+# The assistant turns that make a bare sync follow-up unambiguous: connect
+# CTAs ("Connect your Google Calendar to sync your timetable."), calendar
+# status answers, sync completions, and the calendar_not_connected phrasing --
+# every one mentions sync and (Google) Calendar near each other. The last arm
+# covers the _connect_action_required fallback CTA, which says "add your
+# timetable to your schedule" without the word "sync".
+_CALENDAR_SYNC_CONTEXT_RE = re.compile(
+    r"\bsync(?:ed|ing)?\b[\s\S]{0,200}\b(?:google\s+)?calendar\b"
+    r"|\bcalendar\b[\s\S]{0,200}\bsync(?:ed|ing)?\b"
+    r"|\bconnect\b[\s\S]{0,80}\b(?:google\s+)?calendar\b[\s\S]{0,120}\btime\s*table\b",
+    re.IGNORECASE,
+)
 _TIMETABLE_SYNC_DETAILS_CONTEXT_RE = re.compile(
     r"\bsync(?:ing)?\b.{0,80}\btime\s*table\b.{0,120}\b(?:section|elective)\b",
     re.IGNORECASE | re.DOTALL,
@@ -391,6 +423,15 @@ def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
     if _CALENDAR_UNSYNC_RE.search(query):
         return None
     if _CALENDAR_SYNC_RE.search(query):
+        return "sync_timetable_to_calendar"
+    # Post-connect / post-sync follow-ups ("it's not synced", "sync it
+    # again"). Sync is idempotent (create/update/remove per class), so
+    # re-running it on a "not synced" report is safe; removal phrasings were
+    # already diverted to the unsync arms above.
+    if (
+        _CALENDAR_SYNC_FOLLOWUP_RE.fullmatch(query)
+        and _CALENDAR_SYNC_CONTEXT_RE.search(previous_assistant)
+    ):
         return "sync_timetable_to_calendar"
     return None
 
