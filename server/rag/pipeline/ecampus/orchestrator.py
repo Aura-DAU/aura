@@ -247,11 +247,16 @@ _CALENDAR_SYNC_RE = re.compile(
 # assistant turn matching _CALENDAR_SYNC_CONTEXT_RE.
 _CALENDAR_SYNC_FOLLOWUP_RE = re.compile(
     r"^\s*(?:please\s+)?(?:"
-    r"(?:it|it'?s|its|that|this|my\s+(?:google\s+)?calendar|"
+    # Subject is optional; bare "calendar not updated" (prompt vocabulary) must
+    # match without requiring "my".
+    r"(?:it|it'?s|its|that|this|(?:my\s+)?(?:google\s+)?calendar|"
     r"my\s+(?:time\s*table|schedule|classes))?\s*"
     r"(?:is|was|has|have)?\s*(?:still\s+)?"
     r"(?:not|isn'?t|hasn'?t|didn'?t|wasn'?t|won'?t|never)\s*"
-    r"(?:been\s+|got(?:ten)?\s+)?sync(?:ed|ing)?"
+    # "synced" and "updated" — the system prompt lists "calendar not updated"
+    # alongside "it's not synced"; without "updated" that phrasing fell through
+    # to public RAG and denied the sync capability.
+    r"(?:been\s+|got(?:ten)?\s+)?(?:sync(?:ed|ing)?|updated)"
     r"|(?:re-?)?sync(?:\s+(?:it|that|this|them|my\s+(?:google\s+)?calendar|"
     r"my\s+(?:time\s*table|schedule|classes)))?(?:\s+again)?"
     r")\s*[.!?]*\s*$",

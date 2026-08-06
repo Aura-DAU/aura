@@ -129,6 +129,13 @@ def mock_db(monkeypatch):
                 store["users"][email]["is_active"] = False
             return
 
+        if "UPDATE user_identity_map" in sql_norm and "SET role =" in sql_norm:
+            role, email = params
+            if email in store["users"]:
+                store["users"][email]["role"] = role
+                store["users"][email]["is_active"] = True
+            return
+
         if "UPDATE role_bindings SET revoked = TRUE" in sql_norm:
             erp_id, binding = params
             for b in store["bindings"]:
@@ -221,7 +228,38 @@ def test_revoke_dashboard_access(mock_db):
     )
     assert res.status_code == 200
     assert res.json()["status"] == "revoked"
-    assert mock_db["users"]["202401475@dau.ac.in"]["is_active"] is False
+    assert res.json()["restored_role"] == "student"
+    user = mock_db["users"]["202401475@dau.ac.in"]
+    # Revoke must demote, not deactivate — is_active=FALSE bans SSO login.
+    assert user["is_active"] is True
+    assert user["role"] == "student"
+    assert all(
+        b["revoked"]
+        for b in mock_db["bindings"]
+        if b["erp_id"] == "202401475" and b["binding"] == "admin_staff"
+    )
+
+
+def test_revoke_faculty_admin_restores_faculty_role(mock_db):
+    client.post(
+        "/admin/users/access",
+        headers=auth_headers(),
+        json={"email": "prof.sharma@dau.ac.in", "erp_id": "FAC001"},
+    )
+    res = client.request(
+        "DELETE",
+        "/admin/users/access",
+        headers={
+            **auth_headers(make_admin_token("ADMIN001")),
+            "Content-Type": "application/json",
+        },
+        content=json.dumps({"email": "prof.sharma@dau.ac.in"}),
+    )
+    assert res.status_code == 200
+    assert res.json()["restored_role"] == "faculty"
+    user = mock_db["users"]["prof.sharma@dau.ac.in"]
+    assert user["is_active"] is True
+    assert user["role"] == "faculty"
 
 
 def test_revoke_blocks_self(mock_db):

@@ -70,8 +70,7 @@ export function AdminAccessManager() {
         throw new Error(data.error || "Failed to grant admin access")
       }
 
-      const successText = `Admin access granted to ${body.email}`
-      toastSuccess(successText)
+      toastSuccess(`Admin access granted to ${body.email}. They must sign out and sign back in.`)
       setEmail("")
       setErpId("")
       await fetchAdmins()

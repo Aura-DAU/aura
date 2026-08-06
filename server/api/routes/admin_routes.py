@@ -172,6 +172,17 @@ def _resolve_erp_id(email: str, erp_id: Optional[str]) -> str:
     )
 
 
+def _infer_base_role(erp_id: str) -> Literal["student", "faculty"]:
+    """Map an erp_id back to student/faculty after admin dashboard access is revoked.
+
+    user_identity_map only stores student|faculty|admin. 9-digit IDs are students;
+    everything else (FAC…, staff codes) is treated as faculty.
+    """
+    if _STUDENT_ERP_PATTERN.match(erp_id):
+        return "student"
+    return "faculty"
+
+
 def _ensure_admin_staff_binding(erp_id: str, granted_by: str) -> bool:
     rows = db_conn.query(
         """SELECT id FROM role_bindings
@@ -292,7 +303,10 @@ def revoke_dashboard_access(
     body: RevokeDashboardAccessRequest,
     admin: Identity = Depends(_require_admin),
 ):
-    """Deactivate dashboard admin access for an email and revoke admin_staff bindings."""
+    """Revoke dashboard admin access: demote role to student/faculty, revoke admin_staff bindings.
+
+    Keeps the account active so SSO login continues to work.
+    """
     _validate_dau_email(body.email)
 
     rows = db_conn.query(
@@ -318,9 +332,15 @@ def revoke_dashboard_access(
             detail="You cannot revoke your own admin dashboard access.",
         )
 
+    # Demote to student/faculty and keep the account active. Setting is_active=FALSE
+    # would ban the user from SSO entirely (/internal/resolve-identity requires
+    # is_active=TRUE) — revoke must only remove dashboard admin access.
+    restored_role = _infer_base_role(target["erp_id"])
     db_conn.execute(
-        "UPDATE user_identity_map SET is_active = FALSE WHERE email = %s",
-        (body.email,),
+        """UPDATE user_identity_map
+           SET role = %s, is_active = TRUE
+           WHERE email = %s""",
+        (restored_role, body.email),
     )
     bindings_revoked = _revoke_admin_staff_bindings(target["erp_id"])
 
@@ -328,6 +348,7 @@ def revoke_dashboard_access(
         "status": "revoked",
         "email": body.email,
         "erp_id": target["erp_id"],
+        "restored_role": restored_role,
         "bindings_revoked": bindings_revoked,
         "revoked_by": admin.erp_id,
     }
