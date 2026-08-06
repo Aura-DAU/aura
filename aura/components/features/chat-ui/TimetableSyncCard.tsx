@@ -6,10 +6,12 @@ import { useCalendarSyncStatus } from "@/hooks/use-calendar-sync-status"
 
 interface TimetableSyncCardProps {
   eventCount?: number
+  /** When false, skip polling (historical cards in old threads). */
+  active?: boolean
 }
 
-export function TimetableSyncCard({ eventCount }: TimetableSyncCardProps) {
-  const status = useCalendarSyncStatus()
+export function TimetableSyncCard({ eventCount, active = true }: TimetableSyncCardProps) {
+  const status = useCalendarSyncStatus(active)
 
   if (status.state === "completed") {
     return (
@@ -19,9 +21,13 @@ export function TimetableSyncCard({ eventCount }: TimetableSyncCardProps) {
           <div>
             <p className="text-sm font-semibold text-neutral-100">Timetable synced</p>
             <p className="mt-0.5 text-xs text-neutral-400">
-              {status.created} created · {status.updated} updated · {status.removed} removed
+              {active
+                ? `${status.created} created · ${status.updated} updated · ${status.removed} removed`
+                : eventCount
+                  ? `${eventCount} recurring class events were queued for Google Calendar.`
+                  : "Your recurring class events were synced to Google Calendar."}
             </p>
-            {status.hasWarnings ? (
+            {active && status.hasWarnings ? (
               <p className="mt-1 text-xs text-theme-yellow">
                 Some events need another sync attempt.
               </p>

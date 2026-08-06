@@ -43,25 +43,33 @@ export function useCohortProfile() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchProfile = useCallback(async () => {
+  const fetchProfile = useCallback(async (signal?: AbortSignal) => {
     try {
-      const res = await fetch("/api/profile/cohort", { cache: "no-store" })
+      const res = await fetch("/api/profile/cohort", {
+        cache: "no-store",
+        signal,
+      })
       if (res.ok) {
         setProfile(await res.json())
       }
-    } catch {
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return
       // Non-fatal: profile might not be accessible yet
     }
   }, [])
 
-  const fetchOptions = useCallback(async () => {
+  const fetchOptions = useCallback(async (signal?: AbortSignal) => {
     try {
-      const res = await fetch("/api/profile/cohort-options", { cache: "no-store" })
+      const res = await fetch("/api/profile/cohort-options", {
+        cache: "no-store",
+        signal,
+      })
       if (res.ok) {
         const data = await res.json()
         setOptions(data.options || [])
       }
-    } catch {
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return
       // Non-fatal
     }
   }, [])
@@ -79,7 +87,6 @@ export function useCohortProfile() {
       if (!res.ok) {
         throw new Error(json?.detail || json?.error || "Failed to save profile")
       }
-      // Refresh profile after save
       await fetchProfile()
       return json
     } catch (err) {
@@ -92,9 +99,16 @@ export function useCohortProfile() {
   }, [fetchProfile])
 
   useEffect(() => {
+    const controller = new AbortController()
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true)
-    Promise.all([fetchProfile(), fetchOptions()]).finally(() => setLoading(false))
+    Promise.all([
+      fetchProfile(controller.signal),
+      fetchOptions(controller.signal),
+    ]).finally(() => {
+      if (!controller.signal.aborted) setLoading(false)
+    })
+    return () => controller.abort()
   }, [fetchProfile, fetchOptions])
 
   return { profile, options, loading, saving, error, saveCohort, refetch: fetchProfile }

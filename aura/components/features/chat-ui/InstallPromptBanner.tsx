@@ -18,7 +18,7 @@ export function InstallPromptBanner() {
     <div
       role="status"
       aria-live="polite"
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-30 flex justify-center p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4"
     >
       <div className="pointer-events-auto flex w-full max-w-md items-start gap-3 rounded-2xl border border-theme-yellow/30 bg-theme-gray-light/95 px-4 py-3 text-neutral-100 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.65)] backdrop-blur-md">
         <div className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl bg-theme-yellow/15 text-theme-yellow">

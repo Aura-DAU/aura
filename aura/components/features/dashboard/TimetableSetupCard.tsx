@@ -20,8 +20,13 @@ const YEAR_OPTIONS = [
 
 /** First-time setup wizard shown when a student has no cohort configured. */
 export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
-  const { options, saving, saveCohort } = useCohortProfile()
-  const { data: electivesData, loading: electivesLoading } = useElectives()
+  const { options, saving, saveCohort, error: cohortError } = useCohortProfile()
+  const {
+    data: electivesData,
+    loading: electivesLoading,
+    error: electivesError,
+    saveSelections,
+  } = useElectives()
 
   const [step, setStep] = useState<Step>("year")
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
@@ -76,18 +81,13 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
         section: selectedSection,
         lab_group: finalLabGroup,
       })
-      // Save elective selections if any
       if (electives.length > 0) {
-        await fetch("/api/timetable/electives", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ course_codes: electives }),
-        })
+        await saveSelections(electives)
       }
       onComplete()
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to save. Please try again.")
-      setStep("electives")
+      setStep(electives.length > 0 ? "electives" : "section")
     }
   }
 
@@ -111,9 +111,9 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
         This only takes a few seconds.
       </p>
 
-      {error && (
+      {(error || cohortError || electivesError) && (
         <p className="mb-4 rounded-lg border border-theme-red/30 bg-theme-red/10 px-3 py-2 text-xs text-red-400">
-          {error}
+          {error || cohortError || electivesError}
         </p>
       )}
 
