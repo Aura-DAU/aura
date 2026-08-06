@@ -154,18 +154,19 @@ def _handle_set_my_cohort(identity, **kwargs):
     year = kwargs.get("year")
     sem = kwargs.get("sem")
     sec = kwargs.get("sec")
+    lab_group = kwargs.get("lab_group")
     try:
         if not confirm:
             return {
                 "status": "confirmation_required",
-                "preview": {"year": year, "sem": sem, "sec": sec},
+                "preview": {"year": year, "sem": sem, "sec": sec, "lab_group": lab_group},
                 "message": (
                     f"I will update your profile section/cohort to Year {year or 'current'}, "
-                    f"Semester {sem or 'current'}, Section {sec or 'current'}. "
+                    f"Semester {sem or 'current'}, Section {sec or 'current'}, Lab Group {lab_group or 'none'}. "
                     "This updates the timetable you see. Confirm to save."
                 ),
             }
-        return service.update_student_cohort(identity, year=year, sem=sem, sec=sec)
+        return service.update_student_cohort(identity, year=year, sem=sem, sec=sec, lab_group=lab_group)
     except service.TimetableError as e:
         return {"error": str(e)}
 
@@ -185,6 +186,7 @@ SET_MY_COHORT = Tool(
             "sec": {"type": "string", "description": "Section letter, e.g. 'A', 'B', 'C', 'D'."},
             "sem": {"type": "integer", "description": "Semester number, e.g. 1, 3, 5, 7."},
             "year": {"type": "integer", "description": "Academic year number, e.g. 1, 2, 3, 4."},
+            "lab_group": {"type": "string", "description": "Lab group, e.g. 'G1', 'G2'. Optional."},
         },
     },
     category="write", allowed_roles=["student"], handler=_handle_set_my_cohort,

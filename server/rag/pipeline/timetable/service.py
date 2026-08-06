@@ -310,15 +310,16 @@ def _require_cohort(identity) -> tuple[int, int, str]:
     return int(year), int(sem), str(sec)
 
 
-def get_master_rows(year: int, sem: int, sec: str, dept: Optional[str] = None) -> list[dict]:
+def get_master_rows(year: int, sem: int, sec: str, dept: Optional[str] = None, lab_group: Optional[str] = None) -> list[dict]:
     rows = db_conn.query(
         """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
                   course_code, course_name, session_type, room, faculty_name,
                   course_type, branch, program
            FROM timetable_master
-           WHERE year = %s AND sem = %s AND sec = %s
+           WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = %s)
+             AND (lab_group IS NULL OR lab_group = '' OR lab_group = %s)
            ORDER BY day_of_week, start_time""",
-        (year, sem, sec),
+        (year, sem, sec, lab_group or ""),
     )
     return _narrow_by_dept(rows, dept)
 
@@ -400,9 +401,8 @@ def get_all_elective_rows(year: int, sem: int) -> list[dict]:
                   course_type
            FROM timetable_master
            WHERE (course_type ILIKE '%%Elective%%' OR program ILIKE '%%Elective%%')
-             AND year = %s AND sem = %s
+             AND year = 0 AND sem = 0
            ORDER BY course_code, day_of_week, start_time""",
-        (year, sem),
     )
 
 
@@ -447,6 +447,7 @@ def get_effective_timetable(identity) -> dict:
 
     erp_id = _field(identity, "erp_id")
     dept = _resolve_dept(identity)
+    lab_group = _field(identity, "current_lab_group")
 
     if sec is None:
         # Fetch common courses (where sec is null/empty or default to 'A' as representative).
@@ -458,8 +459,9 @@ def get_effective_timetable(identity) -> dict:
                       course_type, branch, program
                FROM timetable_master
                WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = 'A')
+                 AND (lab_group IS NULL OR lab_group = '' OR lab_group = %s)
                ORDER BY day_of_week, start_time""",
-            (year, sem),
+            (year, sem, lab_group or ""),
         )
         common_rows = _narrow_by_dept(common_rows, dept)
         common_rows = _narrow_by_course_branch_map(common_rows, dept)
@@ -467,7 +469,7 @@ def get_effective_timetable(identity) -> dict:
         master_rows = {row["id"]: row for row in common_rows}
         is_common = True
     else:
-        rows = get_master_rows(year, sem, sec, dept)
+        rows = get_master_rows(year, sem, sec, dept, lab_group)
         rows = _narrow_by_course_branch_map(rows, dept)
         rows = _exclude_electives(rows)
         master_rows = {row["id"]: row for row in rows}
@@ -756,9 +758,14 @@ def get_timetable_for_cohort(
     than reporting "not found" over a cosmetic label mismatch.
     """
     if sem is None and year is not None:
-        # Only the academic year was given -- approximate with that year's
-        # first (odd) semester, same mapping the dashboard setup wizard uses.
-        sem = year * 2 - 1
+        # Infer current semester from the current month:
+        # Autumn (Jul-Dec) -> odd semesters; Spring (Jan-Jun) -> even semesters.
+        import datetime
+        current_month = datetime.datetime.now().month
+        if 7 <= current_month <= 12:
+            sem = year * 2 - 1
+        else:
+            sem = year * 2
 
     if sem is None:
         raise TimetableError(
@@ -947,7 +954,13 @@ def save_elective_selections(identity, course_codes: list[str]) -> dict:
     }
 
 
-def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[int] = None, sec: Optional[str] = None) -> dict:
+def update_student_cohort(
+    identity: Union[Identity, Dict[str, Any]],
+    year: Optional[int] = None,
+    sem: Optional[int] = None,
+    sec: Optional[str] = None,
+    lab_group: Optional[str] = None,
+) -> Dict[str, Any]:
     """Updates the student's cohort (year, semester, section) in user_identity_map."""
     role = _field(identity, "role")
     if role != "student":
@@ -957,10 +970,12 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
     cur_year = _field(identity, "current_year")
     cur_sem = _field(identity, "current_sem")
     cur_sec = _field(identity, "current_sec") or "A"
+    cur_lab = _field(identity, "current_lab_group")
 
     new_year = int(year) if year is not None else cur_year
     new_sem = int(sem) if sem is not None else cur_sem
     new_sec = str(sec).strip().upper() if sec else cur_sec
+    new_lab = str(lab_group).strip().upper() if lab_group else cur_lab
 
     if new_year is None or new_sem is None:
         raise TimetableError(
@@ -969,6 +984,7 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
         )
 
     # Validate against timetable_master
+    # Note: we don't strictly require lab_group to match because they might not have a lab group selected yet
     check = db_conn.query(
         "SELECT 1 FROM timetable_master WHERE year = %s AND sem = %s AND sec = %s LIMIT 1",
         (new_year, new_sem, new_sec),
@@ -980,18 +996,20 @@ def update_student_cohort(identity, year: Optional[int] = None, sem: Optional[in
         )
 
     db_conn.execute(
-        "UPDATE user_identity_map SET current_year = %s, current_sem = %s, current_sec = %s WHERE erp_id = %s",
-        (new_year, new_sem, new_sec, erp_id),
+        "UPDATE user_identity_map SET current_year = %s, current_sem = %s, current_sec = %s, current_lab_group = %s WHERE erp_id = %s",
+        (new_year, new_sem, new_sec, new_lab, erp_id),
     )
 
     if isinstance(identity, dict):
         identity["current_year"] = new_year
         identity["current_sem"] = new_sem
         identity["current_sec"] = new_sec
+        identity["current_lab_group"] = new_lab
     else:
         setattr(identity, "current_year", new_year)
         setattr(identity, "current_sem", new_sem)
         setattr(identity, "current_sec", new_sec)
+        setattr(identity, "current_lab_group", new_lab)
 
     return {
         "status": "updated",

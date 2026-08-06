@@ -32,6 +32,7 @@ from api.routes.calendar_routes import router as calendar_router
 from api.routes.timetable_routes import router as timetable_router, push_router, profile_router
 from api.routes.chat_routes import router as chat_router
 from api.routes.memory_routes import router as memory_router
+from api.routes.bug_report_routes import router as bug_report_router
 from pipeline.ecampus.credentials_vault import (
     store_credentials, unlink_credentials, is_linked
 )
@@ -179,6 +180,7 @@ app.include_router(profile_router)
 # frontend gets 502 "Backend error" ("AURA temporarily unavailable").
 app.include_router(chat_router)
 app.include_router(memory_router)
+app.include_router(bug_report_router)
 
 
 @app.on_event("startup")

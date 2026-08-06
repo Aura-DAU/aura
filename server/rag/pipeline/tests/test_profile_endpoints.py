@@ -38,7 +38,7 @@ def _fake_db_query(sql, params=()):
         if "SEC = %S" in sql_upper or "SEC IS NULL" in sql_upper:
             # We want to filter ALL_MASTER_ROWS
             year, sem = params[0], params[1]
-            if len(params) > 2:
+            if len(params) == 4:
                 sec = params[2]
                 return [r for r in ALL_MASTER_ROWS if r["year"] == year and r["sem"] == sem and (r["sec"] == sec or r["sec"] is None)]
             else:

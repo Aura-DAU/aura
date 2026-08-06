@@ -233,6 +233,7 @@ describe("faculty chat presentation", () => {
         onNewChat={vi.fn()}
         onDeleteThread={vi.fn()}
         onOpenProfile={vi.fn()}
+        onOpenBugReport={vi.fn()}
         studentProfile={{ name: "Prof. User", program: "", year: "", interests: "" }}
         mobileOpen={false}
         onCloseMobile={vi.fn()}
