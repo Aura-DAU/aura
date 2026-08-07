@@ -553,9 +553,9 @@ def _parse_v2_3col(
                 eh, em = end_t.split(":")
                 sh_i, eh_i = int(sh), int(eh)
                 if sh_i < 12 and sh_i != 0:
-                    start_t = "{:02d}:{}".format(sh_i + 12, sm)
+                    start_t = "{:02d}:{:02d}".format(sh_i + 12, int(sm))
                 if eh_i < 12 and eh_i != 0:
-                    end_t = "{:02d}:{}".format(eh_i + 12, em)
+                    end_t = "{:02d}:{:02d}".format(eh_i + 12, int(em))
             time_slots.append({
                 "row": row_idx,
                 "start": start_t,

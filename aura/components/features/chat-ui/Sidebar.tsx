@@ -14,6 +14,7 @@ import {
   PanelLeftClose,
   ChevronUp,
   Pencil,
+  Bug,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { ChatThread, StudentProfile } from "@/lib/chat-types"
@@ -27,6 +28,7 @@ interface SidebarProps {
   onNewChat: () => void
   onDeleteThread: (id: string) => void
   onOpenProfile: () => void
+  onOpenBugReport: () => void
   studentProfile: StudentProfile
   mobileOpen: boolean
   onCloseMobile: () => void
@@ -117,6 +119,7 @@ function SidebarContent({
   onNewChat,
   onDeleteThread,
   onOpenProfile,
+  onOpenBugReport,
   studentProfile,
   onCloseMobile,
   onCollapse,
@@ -238,6 +241,7 @@ function SidebarContent({
         signedIn={Boolean(session?.user)}
         isGuest={isGuest}
         onOpenProfile={onOpenProfile}
+        onOpenBugReport={onOpenBugReport}
         onCloseMobile={onCloseMobile}
       />
     </div>
@@ -252,6 +256,7 @@ interface AccountFooterProps {
   signedIn: boolean
   isGuest: boolean
   onOpenProfile: () => void
+  onOpenBugReport: () => void
   onCloseMobile: () => void
 }
 
@@ -263,6 +268,7 @@ function AccountFooter({
   signedIn,
   isGuest,
   onOpenProfile,
+  onOpenBugReport,
   onCloseMobile,
 }: AccountFooterProps) {
   const router = useRouter()
@@ -328,6 +334,14 @@ function AccountFooter({
               onClick={() => {
                 setOpen(false)
                 onOpenProfile()
+              }}
+            />
+            <MenuItem
+              icon={<Bug className="size-4" />}
+              label="Report a Bug"
+              onClick={() => {
+                setOpen(false)
+                onOpenBugReport()
               }}
             />
             <div className="h-px bg-theme-gray-light" />

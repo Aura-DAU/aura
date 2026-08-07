@@ -12,6 +12,7 @@ import { MessageList } from "./MessageList"
 import { Composer } from "./Composer"
 import { EmptyState } from "./EmptyState"
 import { ProfileModal } from "./ProfileModal"
+import { BugReportModal } from "./BugReportModal"
 import { DocumentViewerSheet } from "./DocumentViewerSheet"
 import { useSession } from "next-auth/react"
 import { InstallPromptBanner } from "./InstallPromptBanner"
@@ -19,7 +20,7 @@ import { AuroraBackground } from "@/components/ui/aurora-background"
 
 export function ChatShell() {
   const chat = useAuraChat()
-  const { canInstall, promptInstall } = usePWAInstall()
+  const { canInstall, promptInstall, showInstallUi } = usePWAInstall()
   const router = useRouter()
   const searchParams = useSearchParams()
   const { data: session } = useSession()
@@ -30,6 +31,7 @@ export function ChatShell() {
   // persisted preference after mount to avoid a hydration mismatch.
   const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [bugReportOpen, setBugReportOpen] = useState(false)
   // Always false for SSR + first client paint; only show after mount to avoid hydration mismatch.
   const [isOffline, setIsOffline] = useState(false)
   const [offlineReady, setOfflineReady] = useState(false)
@@ -135,6 +137,7 @@ export function ChatShell() {
           onNewChat={chat.startNewChat}
           onDeleteThread={chat.deleteThread}
           onOpenProfile={() => setProfileOpen(true)}
+          onOpenBugReport={() => setBugReportOpen(true)}
           studentProfile={chat.studentProfile}
           mobileOpen={sidebarOpen}
           onCloseMobile={() => setSidebarOpen(false)}
@@ -218,7 +221,9 @@ export function ChatShell() {
               caret/cursor to jump or vanish. Only the `variant` prop (visual
               styling) changes now; the DOM node itself never gets recreated.
             */}
-            {composer}
+            <div className="shrink-0">{composer}</div>
+            {/* Reserve space so the install banner does not cover the composer. */}
+            {showInstallUi ? <div className="h-24 shrink-0 sm:h-28" aria-hidden /> : null}
           </div>
         </main>
 
@@ -227,6 +232,11 @@ export function ChatShell() {
           onClose={() => setProfileOpen(false)}
           profile={chat.studentProfile}
           onSave={chat.saveProfile}
+        />
+
+        <BugReportModal
+          open={bugReportOpen}
+          onClose={() => setBugReportOpen(false)}
         />
 
         <DocumentViewerSheet />

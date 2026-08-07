@@ -96,14 +96,18 @@ def _next_occurrence(
     day_of_week: int,
     start_time: str,
     end_time: str,
+    tz: str,
 ) -> tuple[datetime.datetime, datetime.datetime]:
     """First future occurrence of a weekly slot as DTSTART/DTEND."""
-    today = datetime.date.today()
+    import zoneinfo
+    tz_info = zoneinfo.ZoneInfo(tz)
+    today_dt = datetime.datetime.now(tz_info)
+    today = today_dt.date()
     days_ahead = (day_of_week - today.weekday()) % 7
     candidate = today + datetime.timedelta(days=days_ahead)
     sh, sm = (int(x) for x in start_time.split(":")[:2])
     eh, em = (int(x) for x in end_time.split(":")[:2])
-    if days_ahead == 0 and datetime.datetime.now().time() > datetime.time(sh, sm):
+    if days_ahead == 0 and today_dt.time() > datetime.time(sh, sm):
         candidate += datetime.timedelta(days=7)
     start = datetime.datetime.combine(candidate, datetime.time(sh, sm))
     end   = datetime.datetime.combine(candidate, datetime.time(eh, em))
@@ -114,8 +118,8 @@ def _build_exdates(holidays: list[datetime.date]) -> str:
     """Build EXDATE RFC-5545 line to exclude university holidays from RRULE."""
     if not holidays:
         return ""
-    dates = ";".join(d.strftime("%Y%m%dT000000Z") for d in holidays)
-    return f"\nEXDATE;TZID=Asia/Kolkata:{dates}"
+    dates = ",".join(d.strftime("%Y%m%d") for d in holidays)
+    return f"\nEXDATE;VALUE=DATE:{dates}"
 
 
 def _event_body(
@@ -126,11 +130,11 @@ def _event_body(
     holidays: list[datetime.date],
     cal_id: str,
 ) -> dict:
-    start, end = _next_occurrence(slot["day_of_week"], slot["start_time"], slot["end_time"])
-    until  = _semester_end_date().strftime("%Y%m%d")
+    start, end = _next_occurrence(slot["day_of_week"], slot["start_time"], slot["end_time"], tz)
+    until  = _semester_end_date().strftime("%Y%m%dT235959Z")
     rrule  = f"RRULE:FREQ=WEEKLY;BYDAY={_RRULE_DAY[slot['day_of_week']]};UNTIL={until}"
     exdate = _build_exdates(holidays)
-    recurrence = [rrule + exdate] if exdate else [rrule]
+    recurrence = [rrule, exdate.strip()] if exdate else [rrule]
 
     description_lines = [f"{slot['session_type'].capitalize()} — synced from AURA."]
     if slot.get("faculty_name"):

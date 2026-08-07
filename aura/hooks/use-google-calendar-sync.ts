@@ -11,6 +11,58 @@ interface SyncResult {
   errors?: string[]
 }
 
+export interface ConnectOptions {
+  /** Frontend path to land on after OAuth. Must be allowlisted by the backend. */
+  returnTo?: string
+}
+
+const ALLOWED_RETURN_TO = new Set(["/", "/dashboard", "/settings/calendar"])
+
+/** Consume ?calendar=connected at most once across hook instances on a page. */
+let calendarConnectedConsumed = false
+const PENDING_AUTO_SYNC_KEY = "aura.calendar.pendingAutoSync"
+
+function consumeCalendarConnectedFlag(): boolean {
+  if (typeof window === "undefined") return false
+  if (calendarConnectedConsumed) return false
+  const params = new URLSearchParams(window.location.search)
+  if (params.get("calendar") !== "connected") return false
+  calendarConnectedConsumed = true
+  try {
+    sessionStorage.setItem(PENDING_AUTO_SYNC_KEY, "1")
+  } catch {
+    // sessionStorage may be unavailable; in-memory justConnected still works.
+  }
+  params.delete("calendar")
+  const newSearch = params.toString()
+  window.history.replaceState(
+    {},
+    "",
+    window.location.pathname + (newSearch ? `?${newSearch}` : ""),
+  )
+  return true
+}
+
+function takePendingAutoSync(): boolean {
+  if (typeof window === "undefined") return false
+  try {
+    if (sessionStorage.getItem(PENDING_AUTO_SYNC_KEY) === "1") {
+      sessionStorage.removeItem(PENDING_AUTO_SYNC_KEY)
+      return true
+    }
+  } catch {
+    return false
+  }
+  return false
+}
+
+function resolveReturnTo(preferred?: string): string {
+  const candidate =
+    preferred ??
+    (typeof window !== "undefined" ? window.location.pathname : "/dashboard")
+  return ALLOWED_RETURN_TO.has(candidate) ? candidate : "/dashboard"
+}
+
 /**
  * Manages "sync my timetable to Google Calendar": connecting the student's
  * Google account with write access (calendar.events), triggering a sync of
@@ -46,34 +98,48 @@ export function useGoogleCalendarSync() {
   }, [])
 
   useEffect(() => {
-    // The OAuth callback (server/api/routes/calendar_routes.py) redirects
-    // back to /dashboard?calendar=connected once the student grants access.
-    // Pick that up once, then strip it from the URL so a refresh doesn't
-    // re-trigger it.
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search)
-      if (params.get("calendar") === "connected") {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setJustConnected(true)
-        params.delete("calendar")
-        const newSearch = params.toString()
-        window.history.replaceState({}, "", window.location.pathname + (newSearch ? `?${newSearch}` : ""))
-      }
+    // OAuth callback redirects to {return_to}?calendar=connected.
+    // sessionStorage keeps the pending auto-sync if a later hook instance
+    // mounts after the URL flag was already consumed (e.g. chat CTA card).
+    if (consumeCalendarConnectedFlag()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setJustConnected(true)
+    } else if (takePendingAutoSync()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setJustConnected(true)
     }
-    checkStatus()
+    void checkStatus()
   }, [checkStatus])
 
-  const connect = useCallback(async () => {
+  // Re-check when the tab becomes visible again so Connect CTAs in chat
+  // don't stay stuck on "not connected" after the user linked elsewhere.
+  useEffect(() => {
+    const refresh = () => {
+      if (document.visibilityState === "visible") void checkStatus()
+    }
+    document.addEventListener("visibilitychange", refresh)
+    window.addEventListener("focus", refresh)
+    return () => {
+      document.removeEventListener("visibilitychange", refresh)
+      window.removeEventListener("focus", refresh)
+    }
+  }, [checkStatus])
+
+  const connect = useCallback(async (opts?: ConnectOptions) => {
     setError(null)
     try {
-      const res = await fetch("/api/calendar/connect", { cache: "no-store" })
+      const returnTo = resolveReturnTo(opts?.returnTo)
+      const res = await fetch(
+        `/api/calendar/connect?return_to=${encodeURIComponent(returnTo)}`,
+        { cache: "no-store" },
+      )
       const data = await res.json()
       if (!res.ok || !data.url) {
         setError(data.detail || data.error || "Could not start Google Calendar connection.")
         return
       }
       // Full-page navigation to Google's consent screen — the OAuth
-      // callback redirects back to /dashboard?calendar=connected when done.
+      // callback redirects back to return_to?calendar=connected when done.
       window.location.href = data.url
     } catch {
       setError("Network error while starting the Google Calendar connection.")
@@ -109,7 +175,12 @@ export function useGoogleCalendarSync() {
     if (justConnected && status === "connected") {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setJustConnected(false)
-      sync()
+      try {
+        sessionStorage.removeItem(PENDING_AUTO_SYNC_KEY)
+      } catch {
+        // ignore
+      }
+      void sync()
     }
   }, [justConnected, status, sync])
 

@@ -23,10 +23,10 @@ class FakeDB:
         sql_norm = " ".join(sql.split())
         if "FROM timetable_master" in sql_norm:
             if len(params) == 2:
-                year, sem = params
+                year, sem = params[0], params[1]
                 return [r for r in self.master if r["year"] == year and r["sem"] == sem and (r["sec"] is None or r["sec"] == "" or r["sec"] == "A")]
-            year, sem, sec = params
-            return [r for r in self.master if r["year"] == year and r["sem"] == sem and r["sec"] == sec]
+            year, sem, sec = params[0], params[1], params[2]
+            return [r for r in self.master if r["year"] == year and r["sem"] == sem and (r["sec"] == sec or r["sec"] is None)]
         if "FROM timetable_overrides" in sql_norm:
             erp_id = params[0]
             return [r for r in self.overrides if r["erp_id"] == erp_id and r["is_active"]]

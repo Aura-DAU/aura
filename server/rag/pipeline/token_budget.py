@@ -187,8 +187,18 @@ class TokenBudget:
             # knob drives both memory compaction and generation budgeting.
             max_system_prompt_tokens=_env_int("AURA_RESERVED_SYSTEM_TOKENS", 1100),
             # Aligned with ContextBuilder / ConversationMemory env name.
-            # 1400 @ 4096 leaves ~500 for history+user after a ~1100 system.
-            max_retrieved_context_tokens=_env_int("AURA_MAX_CONTEXT_TOKENS", 1400),
+            # Raised 1400 → 1600 after the Dean Students/AP mix-up: with the
+            # reranker's entity-disambiguation fix the correct chunk should
+            # now win outright, but a little extra headroom means a close
+            # near-duplicate is less likely to get trimmed away entirely.
+            # Keep this in lockstep with ConversationMemory.reserved_context
+            # (memory/conversation_memory.py) — they must not drift apart.
+            # NOTE: 1600 still leaves only ~116 tokens of ConversationMemory
+            # headroom if max_model_len is ever actually 4096 (see that
+            # module's _raw_budget) — fine at today's live 8192 window, but
+            # revisit this value (or AURA_RESERVED_SYSTEM_TOKENS) before any
+            # real cutover to a 4096 window.
+            max_retrieved_context_tokens=_env_int("AURA_MAX_CONTEXT_TOKENS", 1600),
             safety_margin_tokens=_env_int("AURA_TOKEN_SAFETY_MARGIN", 64),
             tokenize_enabled=_env_bool("AURA_TOKENIZE_ENABLED", True),
             tokenize_timeout_s=_env_float("AURA_TOKENIZE_TIMEOUT", 0.5),

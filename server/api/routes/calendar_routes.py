@@ -113,7 +113,7 @@ def get_faculty_slots(
 # ("../") or query-string injection ("?token=...") were never rejected, and
 # the value was never checked against what the frontend actually has routes
 # for before being signed into the JWT. Only known-safe paths are allowed now.
-ALLOWED_RETURN_TO_PATHS = {"/dashboard", "/settings/calendar"}
+ALLOWED_RETURN_TO_PATHS = {"/", "/dashboard", "/settings/calendar"}
 
 
 def _validate_return_to(value: str) -> str:
