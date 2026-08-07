@@ -114,6 +114,12 @@ COMMUNITY_SYSTEM_PROMPT = PUBLIC_KB_SYSTEM_PROMPT
 SYSTEM_PROMPT = PERSONAL_SYSTEM_PROMPT
 
 
+_CONNECT_THEN_SYNC_MESSAGE = (
+    "Connect your Google Calendar to sync your timetable. "
+    "After you connect, I'll sync your classes automatically."
+)
+
+
 def _connect_action_required(tool_results: list[dict]) -> dict | None:
     """When a calendar tool reported the student hasn't linked Google Calendar,
     return a structured connect prompt for the client to render as an inline
@@ -126,10 +132,9 @@ def _connect_action_required(tool_results: list[dict]) -> dict | None:
                 "provider": "google_calendar",
                 "connect_path": "/settings/calendar",
                 "reason": "sync_timetable",
-                "message": (
-                    r.get("message")
-                    or "Connect your Google Calendar to add your timetable to your schedule."
-                ),
+                # Prefer the stable connect→auto-sync copy over opaque tool
+                # strings like "Not linked." so the student knows what happens next.
+                "message": _CONNECT_THEN_SYNC_MESSAGE,
             }
     return None
 
@@ -171,10 +176,7 @@ def _phrase_calendar_result(tool_name: str, result: dict) -> str:
     status = result.get("status")
 
     if status == "calendar_not_connected":
-        return message or (
-            "Your Google Calendar isn't connected for writing yet. Connect it "
-            "from Settings > Calendar, then ask me to sync your timetable again."
-        )
+        return _CONNECT_THEN_SYNC_MESSAGE
     if "error" in result:
         return (
             "I couldn't complete that Google Calendar action just now. "
@@ -187,10 +189,7 @@ def _phrase_calendar_result(tool_name: str, result: dict) -> str:
                 "Your Google Calendar is connected. Ask me to sync your timetable "
                 "to it whenever you like."
             )
-        return (
-            "Your Google Calendar isn't connected yet. Connect it from "
-            "Settings > Calendar, then ask me to sync your timetable."
-        )
+        return _CONNECT_THEN_SYNC_MESSAGE
     if tool_name == "preview_timetable_sync":
         if message:
             return message
@@ -233,8 +232,12 @@ _CALENDAR_STATUS_RE = re.compile(
     re.IGNORECASE,
 )
 _CALENDAR_SYNC_RE = re.compile(
-    r"\b(?:add|sync|put|export|save)\b.{0,40}\b(?:calendar|schedule|time\s*table|classes?)\b"
-    r"|\b(?:schedule|time\s*table|classes?)\b.{0,30}\bcalendar\b",
+    r"\b(?:add|sync|put|export|save|push|import|transfer|mirror|update)\b"
+    r".{0,50}\b(?:calendar|schedule|time\s*table|classes?)\b"
+    r"|\b(?:schedule|time\s*table|classes?)\b.{0,40}\b(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b.{0,40}\b(?:sync|export|import|update)\b"
+    r"|\bsync\b.{0,40}\b(?:google\s+)?calendar\b.{0,40}\b(?:time\s*table|schedule|classes?)\b"
+    r"|\b(?:time\s*table|schedule|classes?)\b.{0,40}\bsync\b.{0,40}\b(?:google\s+)?calendar\b",
     re.IGNORECASE,
 )
 # Follow-up sync requests after an assistant turn that offered or performed a
@@ -300,13 +303,22 @@ _TIMETABLE_EDIT_RE = re.compile(
     re.IGNORECASE,
 )
 _CONFIRMATION_RE = re.compile(
-    r"^\s*(?:yes|yep|yeah|confirm(?:ed)?|proceed|go ahead|do it|please do|sync it)"
+    r"^\s*(?:yes|yep|yeah|yup|sure|ok(?:ay)?|confirm(?:ed)?|proceed|"
+    r"go\s+ahead|go\s+for\s+it|do\s+it(?:\s+for\s+me)?|do\s+that|"
+    r"please(?:\s+do(?:\s+it(?:\s+for\s+me)?)?)?|please\s+proceed|sync\s+it)"
     r"[\s.!]*$",
     re.IGNORECASE,
 )
+# Sync-preview confirmations ("Confirm to proceed") and connect CTAs
+# ("Connect your Google Calendar to sync your timetable") both authorize a
+# follow-up affirmative to stay on the calendar path. Affirmatives after a
+# connect CTA re-run sync, which surfaces connect_required when OAuth is still
+# missing — the same CTA the student already saw.
 _CALENDAR_CONFIRMATION_CONTEXT_RE = re.compile(
     r"\bgoogle calendar\b.*\b(?:confirm|proceed)\b"
-    r"|\b(?:confirm|proceed)\b.*\bgoogle calendar\b",
+    r"|\b(?:confirm|proceed)\b.*\bgoogle calendar\b"
+    r"|\bconnect\b[\s\S]{0,80}\b(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b[\s\S]{0,80}\bconnect\b",
     re.IGNORECASE | re.DOTALL,
 )
 # A remove/unsync request (e.g. "delete my timetable from my calendar"). Kept
