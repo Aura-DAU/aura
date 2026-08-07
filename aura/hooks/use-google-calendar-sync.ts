@@ -20,6 +20,7 @@ const ALLOWED_RETURN_TO = new Set(["/", "/dashboard", "/settings/calendar"])
 
 /** Consume ?calendar=connected at most once across hook instances on a page. */
 let calendarConnectedConsumed = false
+const PENDING_AUTO_SYNC_KEY = "aura.calendar.pendingAutoSync"
 
 function consumeCalendarConnectedFlag(): boolean {
   if (typeof window === "undefined") return false
@@ -27,6 +28,11 @@ function consumeCalendarConnectedFlag(): boolean {
   const params = new URLSearchParams(window.location.search)
   if (params.get("calendar") !== "connected") return false
   calendarConnectedConsumed = true
+  try {
+    sessionStorage.setItem(PENDING_AUTO_SYNC_KEY, "1")
+  } catch {
+    // sessionStorage may be unavailable; in-memory justConnected still works.
+  }
   params.delete("calendar")
   const newSearch = params.toString()
   window.history.replaceState(
@@ -35,6 +41,19 @@ function consumeCalendarConnectedFlag(): boolean {
     window.location.pathname + (newSearch ? `?${newSearch}` : ""),
   )
   return true
+}
+
+function takePendingAutoSync(): boolean {
+  if (typeof window === "undefined") return false
+  try {
+    if (sessionStorage.getItem(PENDING_AUTO_SYNC_KEY) === "1") {
+      sessionStorage.removeItem(PENDING_AUTO_SYNC_KEY)
+      return true
+    }
+  } catch {
+    return false
+  }
+  return false
 }
 
 function resolveReturnTo(preferred?: string): string {
@@ -80,7 +99,12 @@ export function useGoogleCalendarSync() {
 
   useEffect(() => {
     // OAuth callback redirects to {return_to}?calendar=connected.
+    // sessionStorage keeps the pending auto-sync if a later hook instance
+    // mounts after the URL flag was already consumed (e.g. chat CTA card).
     if (consumeCalendarConnectedFlag()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setJustConnected(true)
+    } else if (takePendingAutoSync()) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setJustConnected(true)
     }
@@ -151,6 +175,11 @@ export function useGoogleCalendarSync() {
     if (justConnected && status === "connected") {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setJustConnected(false)
+      try {
+        sessionStorage.removeItem(PENDING_AUTO_SYNC_KEY)
+      } catch {
+        // ignore
+      }
       void sync()
     }
   }, [justConnected, status, sync])

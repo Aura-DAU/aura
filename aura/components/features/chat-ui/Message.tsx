@@ -409,8 +409,28 @@ function BookingConfirmationCard({ action }: { action: CalendarActionData }) {
 // Settings, and the card resolves to a "connected" state (no stale CTA on an old
 // turn) once the account is linked.
 function ConnectCalendarCard({ action }: { action: CalendarActionData }) {
-  const { status, error, connect } = useGoogleCalendarSync()
+  // After OAuth returns to /?calendar=connected, this same hook auto-runs
+  // timetable sync (see useGoogleCalendarSync) so the student does not have
+  // to ask again. Surface that progress / result here in chat.
+  const { status, error, connect, lastSync } = useGoogleCalendarSync()
   const connected = status === "connected" || status === "syncing"
+
+  let body: string
+  if (status === "syncing") {
+    body = "Connected — syncing your timetable to Google Calendar now…"
+  } else if (connected && lastSync) {
+    const created = lastSync.created ?? 0
+    const updated = lastSync.updated ?? 0
+    const removed = lastSync.removed ?? 0
+    body = `Done — your timetable is synced to Google Calendar (${created} created, ${updated} updated, ${removed} removed).`
+  } else if (connected) {
+    body =
+      "Connected — syncing your timetable automatically. If classes are missing, ask me to sync again."
+  } else {
+    body =
+      action.message ??
+      "Connect your Google Calendar to sync your timetable. After you connect, I'll sync your classes automatically."
+  }
 
   return (
     <div className="mt-3 rounded-xl border border-theme-yellow/20 bg-theme-yellow/5 p-4 animate-in fade-in slide-in-from-bottom-1 duration-300">
@@ -420,17 +440,16 @@ function ConnectCalendarCard({ action }: { action: CalendarActionData }) {
           <p className="mb-1 text-xs font-semibold text-theme-yellow">
             {connected ? "Google Calendar connected" : "Connect Google Calendar"}
           </p>
-          <p className="text-sm text-neutral-300">
-            {action.message ??
-              "Connect your Google Calendar to add your timetable to your schedule."}
-          </p>
+          <p className="text-sm text-neutral-300">{body}</p>
           {error && <p className="mt-1.5 text-xs text-theme-red">{error}</p>}
           {connected ? (
             <p className="mt-2 inline-flex items-center gap-1 text-xs text-green-400">
               <Check className="size-3.5" />
               {status === "syncing"
-                ? "Connected — syncing your timetable now."
-                : "Connected — ask me again to sync or book."}
+                ? "Auto-sync in progress"
+                : lastSync
+                  ? "Timetable synced"
+                  : "Connected"}
             </p>
           ) : (
             <button

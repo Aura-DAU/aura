@@ -235,7 +235,9 @@ class AuraChat:
                 return {"answer": ans, "sources": [], "is_personal_data": True}
 
             # ── 3. Wellness / Distress Check ────────────────────────────
-            if self.wellness.check(query):
+            # Pass history so calendar-context affirmatives ("do it for me")
+            # are not false-positived as distress by the LLM classifier.
+            if self.wellness.check(query, history=history):
                 return {
                     "answer": self.wellness.get_response(),
                     "sources": [],
