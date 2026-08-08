@@ -63,6 +63,7 @@ from pipeline.ecampus.orchestrator import (
     _is_calendar_unsync_intent,
     _is_timetable_edit_confirmation,
     _is_timetable_edit_intent,
+    _CALENDAR_SYNC_FOLLOWUP_RE,
 )
 from api.request_context import RequestContext
 
@@ -73,18 +74,24 @@ from api.request_context import RequestContext
 # "my CGPA") never leave the curated ERP path. Over-triggering is safe — the
 # actions scope exposes no ERP tools, so a non-matching query calls no tool and
 # falls through — but keeping it tight avoids a needless extra LLM call.
-_CALENDAR_KEYWORD_RE = re.compile(r"\bcalendar\b", re.IGNORECASE)
+_CALENDAR_KEYWORD_RE = re.compile(r"\b(?:google\s+)?calendar\b", re.IGNORECASE)
 _SCHEDULE_ACTION_RE = re.compile(
-    r"\b(add|sync|put|export|save)\b.{0,40}\b(schedule|time\s*table|classes|class)\b"
-    r"|\b(schedule|time\s*table|classes)\b.{0,20}\bcalendar\b",
+    r"\b(?:add|sync|put|export|save|push|import|transfer|mirror|update)\b"
+    r".{0,50}\b(?:schedule|time\s*table|classes?|calendar)\b"
+    r"|\b(?:schedule|time\s*table|classes?)\b.{0,40}\b(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b.{0,40}\b(?:sync|export|import|update)\b",
     re.IGNORECASE,
 )
 _LOW_RISK_TIMETABLE_SYNC_RE = re.compile(
     r"^\s*(?:please\s+)?(?:"
-    r"(?:sync|export|add|put|save)\s+(?:this\s+to\s+)?(?:my\s+)?"
+    r"(?:sync|export|add|put|save|push|import|transfer|mirror|update)\s+"
+    r"(?:this\s+to\s+)?(?:my\s+)?"
     r"(?:time\s*table|schedule|classes?)(?:\s+(?:to|with|into|on)\s+"
     r"(?:my\s+)?(?:google\s+)?calendar)?"
-    r"|sync\s+(?:my\s+)?(?:google\s+)?calendar"
+    r"|(?:sync|update)\s+(?:my\s+)?(?:google\s+)?calendar"
+    r"(?:\s+(?:with|to|from)\s+(?:my\s+)?(?:time\s*table|schedule|classes?))?"
+    r"|(?:sync|add|export|push|import)\s+(?:my\s+)?(?:google\s+)?calendar\s+"
+    r"(?:with|to|from)\s+(?:my\s+)?(?:time\s*table|schedule|classes?)"
     r")\s*[.!?]*\s*$",
     re.IGNORECASE,
 )
@@ -94,13 +101,18 @@ _LOW_RISK_TIMETABLE_FETCH_RE = re.compile(
     re.IGNORECASE,
 )
 _LOW_RISK_CONFIRMATION_RE = re.compile(
-    r"^\s*(?:yes|yep|yeah|confirm(?:ed)?|proceed|go ahead|do it|please do|sync it)"
+    r"^\s*(?:yes|yep|yeah|yup|sure|ok(?:ay)?|confirm(?:ed)?|proceed|"
+    r"go\s+ahead|go\s+for\s+it|do\s+it(?:\s+for\s+me)?|do\s+that|"
+    r"please(?:\s+do(?:\s+it(?:\s+for\s+me)?)?)?|please\s+proceed|sync\s+it)"
     r"[\s.!]*$",
     re.IGNORECASE,
 )
 _CALENDAR_CONNECT_RE = re.compile(
-    r"\b(?:connect|link)\b.{0,30}\b(?:my\s+)?(?:google\s+)?calendar\b"
-    r"|\b(?:google\s+)?calendar\b.{0,30}\b(?:connect|link)\b",
+    r"\b(?:connect|link|authorize|authorise|enable|integrate|pair|bind|"
+    r"set\s*up|setup)\b.{0,40}\b(?:my\s+)?(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b.{0,40}\b(?:connect|link|authorize|authorise|"
+    r"enable|integrate|pair|bind|set\s*up|setup)\b"
+    r"|\b(?:log|sign)\s+in\s+(?:to\s+)?(?:my\s+)?(?:google\s+)?calendar\b",
     re.IGNORECASE,
 )
 _CLUB_OFFICE_BEARER_RE = re.compile(
@@ -120,15 +132,47 @@ def _is_calendar_connect_intent(query: str) -> bool:
     return bool(_CALENDAR_CONNECT_RE.search(query))
 
 
+def _is_calendar_workflow_turn(query: str, history: list[dict] | None = None) -> bool:
+    """True when the turn belongs on the Google Calendar connect/sync path.
+
+    Used to keep wellness/safety LLM classifiers from flagging ordinary
+    calendar phrasings (and short affirmatives in calendar context) as
+    distress or unsafe before personal_tools can run.
+    """
+    history = history or []
+    if (
+        _is_calendar_connect_intent(query)
+        or _is_calendar_unsync_intent(query)
+        or _required_calendar_tool(query, history)
+    ):
+        return True
+    # Explicit sync/add phrasings even when the deterministic tool pin is
+    # unavailable (e.g. MCP discovery lag) — still never crisis content.
+    if _SCHEDULE_ACTION_RE.search(query) and _CALENDAR_KEYWORD_RE.search(query):
+        return True
+    return False
+
+
 def _is_low_risk_timetable_sync_turn(query: str, history: list[dict]) -> bool:
-    """Allow-list deterministic sync turns that do not need an LLM guardrail."""
+    """Allow-list deterministic calendar turns that do not need an LLM guardrail."""
+    if _is_calendar_connect_intent(query) or _is_calendar_unsync_intent(query):
+        return True
     required_tool = _required_calendar_tool(query, history)
     if required_tool == "sync_timetable_to_calendar":
         return bool(
             _LOW_RISK_TIMETABLE_SYNC_RE.fullmatch(query)
             or _LOW_RISK_TIMETABLE_FETCH_RE.fullmatch(query)
             or _LOW_RISK_CONFIRMATION_RE.fullmatch(query)
+            # Post-connect follow-ups ("it's not synced", "sync it again").
+            # _required_calendar_tool only maps these to the sync tool when
+            # the previous assistant turn was calendar-sync context, so this
+            # arm is already context-gated.
+            or _CALENDAR_SYNC_FOLLOWUP_RE.fullmatch(query)
         )
+    if required_tool == "unsync_timetable_from_calendar":
+        return bool(_LOW_RISK_CONFIRMATION_RE.fullmatch(query))
+    if required_tool == "calendar_status":
+        return True
     return False
 
 
@@ -283,10 +327,11 @@ class AuraChatGraph:
     # ── Nodes (each mirrors one guarded step of AuraChat.chat()) ────────
 
     def _n_safety_guardrail(self, state: AuraState) -> AuraState:
-        # Calendar sync is a deterministic, student-scoped automation. Avoid an
-        # unrelated LLM safety-classifier round trip for its tightly allow-listed
-        # request/confirmation turns; the downstream role, OAuth-scope, timetable
-        # ownership, explicit-request, and destructive-unsync checks remain.
+        # Calendar connect/sync is a deterministic, student-scoped automation.
+        # Avoid an unrelated LLM safety-classifier round trip for allow-listed
+        # calendar turns; the downstream role, OAuth-scope, timetable ownership,
+        # explicit-request, and destructive-unsync checks remain. Jailbreak-
+        # flavored sync phrasings still hit the safety classifier.
         if _is_low_risk_timetable_sync_turn(
             state["query"], state.get("history") or []
         ):
@@ -313,7 +358,13 @@ class AuraChatGraph:
         return state
 
     def _n_wellness_check(self, state: AuraState) -> AuraState:
-        if self.wellness.check(state["query"]):
+        # Calendar OAuth/sync requests (and short affirmatives in that context)
+        # are never crisis content. The distress LLM has false-positived on
+        # "connect …" / "do it for me" and swallowed the connect CTA.
+        history = state.get("history") or []
+        if _is_calendar_workflow_turn(state["query"], history):
+            return state
+        if self.wellness.check(state["query"], history=history):
             state["result"] = {
                 "answer": self.wellness.get_response(),
                 "sources": [],
@@ -477,21 +528,15 @@ class AuraChatGraph:
             return state
 
         # Google Calendar actions belong to the personal MCP path, not the
-        # public academic-calendar KB path. This node runs first, so relying on
-        # the intent model to preserve that distinction can end the graph with
-        # public-KB prose before _n_personal_tools gets a chance to call MCP.
+        # public academic-calendar KB path or the personal ERP fetch path.
+        # This node runs first; without the short-circuit the intent model can
+        # end the graph with public-KB prose or a student-records error before
+        # _n_personal_tools gets a chance to call MCP.
+        history = state.get("history") or []
         if getattr(identity, "role", None) == "student" and (
-            _is_calendar_connect_intent(state["query"])
-            or _is_calendar_unsync_intent(state["query"])
+            _is_calendar_workflow_turn(state["query"], history)
             or _is_timetable_edit_intent(state["query"])
-            or _is_timetable_edit_confirmation(
-                state["query"],
-                state.get("history") or [],
-            )
-            or _required_calendar_tool(
-                state["query"],
-                state.get("history") or [],
-            )
+            or _is_timetable_edit_confirmation(state["query"], history)
         ):
             state["ecampus_intent"] = "PERSONAL_DATA"
             return state
@@ -605,6 +650,7 @@ class AuraChatGraph:
             return state
         if (
             not _is_calendar_sync_intent(state["query"])
+            and not is_connect_intent
             and not is_unsync_intent
             and not required_calendar_tool
             and not is_timetable_edit
@@ -616,8 +662,12 @@ class AuraChatGraph:
         # Returning it directly avoids relying on the model to infer a status
         # lookup before it can offer the student the OAuth flow.
         if is_connect_intent:
+            connect_message = (
+                "Connect your Google Calendar to sync your timetable. "
+                "After you connect, I'll sync your classes automatically."
+            )
             state["result"] = {
-                "answer": "Connect your Google Calendar to sync your timetable.",
+                "answer": connect_message,
                 "sources": [],
                 "is_personal_data": True,
                 "action_required": {
@@ -625,7 +675,7 @@ class AuraChatGraph:
                     "provider": "google_calendar",
                     "connect_path": "/settings/calendar",
                     "reason": "connect_google_calendar",
-                    "message": "Connect your Google Calendar to sync your timetable.",
+                    "message": connect_message,
                 },
             }
             return state

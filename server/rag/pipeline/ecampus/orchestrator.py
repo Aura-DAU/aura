@@ -114,6 +114,12 @@ COMMUNITY_SYSTEM_PROMPT = PUBLIC_KB_SYSTEM_PROMPT
 SYSTEM_PROMPT = PERSONAL_SYSTEM_PROMPT
 
 
+_CONNECT_THEN_SYNC_MESSAGE = (
+    "Connect your Google Calendar to sync your timetable. "
+    "After you connect, I'll sync your classes automatically."
+)
+
+
 def _connect_action_required(tool_results: list[dict]) -> dict | None:
     """When a calendar tool reported the student hasn't linked Google Calendar,
     return a structured connect prompt for the client to render as an inline
@@ -126,10 +132,9 @@ def _connect_action_required(tool_results: list[dict]) -> dict | None:
                 "provider": "google_calendar",
                 "connect_path": "/settings/calendar",
                 "reason": "sync_timetable",
-                "message": (
-                    r.get("message")
-                    or "Connect your Google Calendar to add your timetable to your schedule."
-                ),
+                # Prefer the stable connect→auto-sync copy over opaque tool
+                # strings like "Not linked." so the student knows what happens next.
+                "message": _CONNECT_THEN_SYNC_MESSAGE,
             }
     return None
 
@@ -171,10 +176,7 @@ def _phrase_calendar_result(tool_name: str, result: dict) -> str:
     status = result.get("status")
 
     if status == "calendar_not_connected":
-        return message or (
-            "Your Google Calendar isn't connected for writing yet. Connect it "
-            "from Settings > Calendar, then ask me to sync your timetable again."
-        )
+        return _CONNECT_THEN_SYNC_MESSAGE
     if "error" in result:
         return (
             "I couldn't complete that Google Calendar action just now. "
@@ -187,10 +189,7 @@ def _phrase_calendar_result(tool_name: str, result: dict) -> str:
                 "Your Google Calendar is connected. Ask me to sync your timetable "
                 "to it whenever you like."
             )
-        return (
-            "Your Google Calendar isn't connected yet. Connect it from "
-            "Settings > Calendar, then ask me to sync your timetable."
-        )
+        return _CONNECT_THEN_SYNC_MESSAGE
     if tool_name == "preview_timetable_sync":
         if message:
             return message
@@ -233,8 +232,49 @@ _CALENDAR_STATUS_RE = re.compile(
     re.IGNORECASE,
 )
 _CALENDAR_SYNC_RE = re.compile(
-    r"\b(?:add|sync|put|export|save)\b.{0,40}\b(?:calendar|schedule|time\s*table|classes?)\b"
-    r"|\b(?:schedule|time\s*table|classes?)\b.{0,30}\bcalendar\b",
+    r"\b(?:add|sync|put|export|save|push|import|transfer|mirror|update)\b"
+    r".{0,50}\b(?:calendar|schedule|time\s*table|classes?)\b"
+    r"|\b(?:schedule|time\s*table|classes?)\b.{0,40}\b(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b.{0,40}\b(?:sync|export|import|update)\b"
+    r"|\bsync\b.{0,40}\b(?:google\s+)?calendar\b.{0,40}\b(?:time\s*table|schedule|classes?)\b"
+    r"|\b(?:time\s*table|schedule|classes?)\b.{0,40}\bsync\b.{0,40}\b(?:google\s+)?calendar\b",
+    re.IGNORECASE,
+)
+# Follow-up sync requests after an assistant turn that offered or performed a
+# timetable -> Google Calendar sync (the post-OAuth-connect card literally says
+# "ask me again to sync your timetable"). None of these carry the verb+object
+# shape _CALENDAR_SYNC_RE needs -- "synced" is not \bsync\b -- so without this
+# arm "it's not synced" / "sync it again" fell through every deterministic gate
+# to the GENERAL/RAG path, whose generator then denied the sync capability.
+# Only meaningful in context: _required_calendar_tool gates it on the previous
+# assistant turn matching _CALENDAR_SYNC_CONTEXT_RE.
+_CALENDAR_SYNC_FOLLOWUP_RE = re.compile(
+    r"^\s*(?:please\s+)?(?:"
+    # Subject is optional; bare "calendar not updated" (prompt vocabulary) must
+    # match without requiring "my".
+    r"(?:it|it'?s|its|that|this|(?:my\s+)?(?:google\s+)?calendar|"
+    r"my\s+(?:time\s*table|schedule|classes))?\s*"
+    r"(?:is|was|has|have)?\s*(?:still\s+)?"
+    r"(?:not|isn'?t|hasn'?t|didn'?t|wasn'?t|won'?t|never)\s*"
+    # "synced" and "updated" — the system prompt lists "calendar not updated"
+    # alongside "it's not synced"; without "updated" that phrasing fell through
+    # to public RAG and denied the sync capability.
+    r"(?:been\s+|got(?:ten)?\s+)?(?:sync(?:ed|ing)?|updated)"
+    r"|(?:re-?)?sync(?:\s+(?:it|that|this|them|my\s+(?:google\s+)?calendar|"
+    r"my\s+(?:time\s*table|schedule|classes)))?(?:\s+again)?"
+    r")\s*[.!?]*\s*$",
+    re.IGNORECASE,
+)
+# The assistant turns that make a bare sync follow-up unambiguous: connect
+# CTAs ("Connect your Google Calendar to sync your timetable."), calendar
+# status answers, sync completions, and the calendar_not_connected phrasing --
+# every one mentions sync and (Google) Calendar near each other. The last arm
+# covers the _connect_action_required fallback CTA, which says "add your
+# timetable to your schedule" without the word "sync".
+_CALENDAR_SYNC_CONTEXT_RE = re.compile(
+    r"\bsync(?:ed|ing)?\b[\s\S]{0,200}\b(?:google\s+)?calendar\b"
+    r"|\bcalendar\b[\s\S]{0,200}\bsync(?:ed|ing)?\b"
+    r"|\bconnect\b[\s\S]{0,80}\b(?:google\s+)?calendar\b[\s\S]{0,120}\btime\s*table\b",
     re.IGNORECASE,
 )
 _TIMETABLE_SYNC_DETAILS_CONTEXT_RE = re.compile(
@@ -263,13 +303,22 @@ _TIMETABLE_EDIT_RE = re.compile(
     re.IGNORECASE,
 )
 _CONFIRMATION_RE = re.compile(
-    r"^\s*(?:yes|yep|yeah|confirm(?:ed)?|proceed|go ahead|do it|please do|sync it)"
+    r"^\s*(?:yes|yep|yeah|yup|sure|ok(?:ay)?|confirm(?:ed)?|proceed|"
+    r"go\s+ahead|go\s+for\s+it|do\s+it(?:\s+for\s+me)?|do\s+that|"
+    r"please(?:\s+do(?:\s+it(?:\s+for\s+me)?)?)?|please\s+proceed|sync\s+it)"
     r"[\s.!]*$",
     re.IGNORECASE,
 )
+# Sync-preview confirmations ("Confirm to proceed") and connect CTAs
+# ("Connect your Google Calendar to sync your timetable") both authorize a
+# follow-up affirmative to stay on the calendar path. Affirmatives after a
+# connect CTA re-run sync, which surfaces connect_required when OAuth is still
+# missing — the same CTA the student already saw.
 _CALENDAR_CONFIRMATION_CONTEXT_RE = re.compile(
     r"\bgoogle calendar\b.*\b(?:confirm|proceed)\b"
-    r"|\b(?:confirm|proceed)\b.*\bgoogle calendar\b",
+    r"|\b(?:confirm|proceed)\b.*\bgoogle calendar\b"
+    r"|\bconnect\b[\s\S]{0,80}\b(?:google\s+)?calendar\b"
+    r"|\b(?:google\s+)?calendar\b[\s\S]{0,80}\bconnect\b",
     re.IGNORECASE | re.DOTALL,
 )
 # A remove/unsync request (e.g. "delete my timetable from my calendar"). Kept
@@ -391,6 +440,15 @@ def _required_calendar_tool(query: str, history: list[dict]) -> str | None:
     if _CALENDAR_UNSYNC_RE.search(query):
         return None
     if _CALENDAR_SYNC_RE.search(query):
+        return "sync_timetable_to_calendar"
+    # Post-connect / post-sync follow-ups ("it's not synced", "sync it
+    # again"). Sync is idempotent (create/update/remove per class), so
+    # re-running it on a "not synced" report is safe; removal phrasings were
+    # already diverted to the unsync arms above.
+    if (
+        _CALENDAR_SYNC_FOLLOWUP_RE.fullmatch(query)
+        and _CALENDAR_SYNC_CONTEXT_RE.search(previous_assistant)
+    ):
         return "sync_timetable_to_calendar"
     return None
 

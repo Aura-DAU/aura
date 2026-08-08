@@ -32,3 +32,10 @@ def test_calendar_mcp_prompt_overrides_generic_personal_data_refusals():
     assert "do not ask for section, electives, or another confirmation" in normalized_prompt
     assert "Google Calendar only, not Google Classroom" in normalized_prompt
     assert "Never answer a supported request with a generic refusal" in normalized_prompt
+    assert "sync my google calendar with my time table" in normalized_prompt
+    assert "add my timetable to google calendar" in normalized_prompt
+    assert "do it for me" in normalized_prompt
+    assert "connect to my google calendar" in normalized_prompt
+    assert "syncs their timetable automatically" in normalized_prompt
+    assert "crisis counseling" in normalized_prompt
+    assert "student-records/ERP path" in normalized_prompt

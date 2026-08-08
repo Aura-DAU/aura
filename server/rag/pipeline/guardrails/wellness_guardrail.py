@@ -129,7 +129,7 @@ class WellnessGuardrail:
     # Public API
     # ------------------------------------------------------------------
 
-    def check(self, query: str) -> bool:
+    def check(self, query: str, history: list | None = None) -> bool:
         if not query:
             return False
 
@@ -137,6 +137,12 @@ class WellnessGuardrail:
         from personal_query_classifier import is_pure_profile_query
         from pipeline.aura_chat import is_greeting_or_meta
         if is_pure_profile_query(query) or is_greeting_or_meta(query):
+            return False
+
+        # Calendar connect/sync (and affirmatives in that context) are never
+        # crisis content. Lazy import avoids a load-time cycle with the graph.
+        from pipeline.aura_chat_graph import _is_calendar_workflow_turn
+        if _is_calendar_workflow_turn(query, history):
             return False
 
         try:

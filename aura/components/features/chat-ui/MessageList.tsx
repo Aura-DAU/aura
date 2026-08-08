@@ -32,6 +32,9 @@ export function MessageList({
   const stickToBottomRef = useRef(true)
   const [showScrollButton, setShowScrollButton] = useState(false)
   const lastAssistantIndex = messages.findLastIndex((m) => m.role === "assistant")
+  const latestTimetableSyncIndex = messages.findLastIndex(
+    (m) => m.calendar_action?.type === "timetable_sync",
+  )
   const showIndicator = loading && messages[messages.length - 1]?.role !== "assistant"
 
   useEffect(() => {
@@ -101,6 +104,7 @@ export function MessageList({
                   ? onCalendarSyncConfirm
                   : undefined
               }
+              activeTimetableSync={index === latestTimetableSyncIndex}
             />
           )
         })}

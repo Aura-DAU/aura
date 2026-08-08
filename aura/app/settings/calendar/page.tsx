@@ -136,7 +136,7 @@ export default function CalendarSettingsPage() {
             <button
               id="google-calendar-connect-btn"
               type="button"
-              onClick={() => void connect()}
+              onClick={() => void connect({ returnTo: "/settings/calendar" })}
               className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-theme-red to-theme-yellow py-3 text-sm font-bold text-black transition-opacity hover:opacity-90"
             >
               <CalendarCheck2 className="size-4" />

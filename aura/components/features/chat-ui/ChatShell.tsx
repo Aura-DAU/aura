@@ -20,7 +20,7 @@ import { AuroraBackground } from "@/components/ui/aurora-background"
 
 export function ChatShell() {
   const chat = useAuraChat()
-  const { canInstall, promptInstall } = usePWAInstall()
+  const { canInstall, promptInstall, showInstallUi } = usePWAInstall()
   const router = useRouter()
   const searchParams = useSearchParams()
   const { data: session } = useSession()
@@ -221,7 +221,9 @@ export function ChatShell() {
               caret/cursor to jump or vanish. Only the `variant` prop (visual
               styling) changes now; the DOM node itself never gets recreated.
             */}
-            {composer}
+            <div className="shrink-0">{composer}</div>
+            {/* Reserve space so the install banner does not cover the composer. */}
+            {showInstallUi ? <div className="h-24 shrink-0 sm:h-28" aria-hidden /> : null}
           </div>
         </main>
 

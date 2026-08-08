@@ -1,10 +1,12 @@
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth/options"
 import { backendUrl } from "@/lib/api/backend"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { signInternalJwt } from "@/lib/auth/internal-jwt"
 
-export async function GET() {
+const ALLOWED_RETURN_TO = new Set(["/", "/dashboard", "/settings/calendar"])
+
+export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions)
   if (!session?.user?.erpId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -20,13 +22,19 @@ export async function GET() {
     currentSec: session.user.currentSec,
   })
 
+  const requested = req.nextUrl.searchParams.get("return_to") ?? "/dashboard"
+  const returnTo = ALLOWED_RETURN_TO.has(requested) ? requested : "/dashboard"
+
   try {
     // Backend returns JSON {"url": "..."} pointing at Google's OAuth consent
     // screen — it can't 307 to an external host that fetch() would follow —
     // so we forward that URL and the frontend does a full-page navigation.
-    const res = await fetch(backendUrl("/calendar/connect"), {
-      headers: { "Authorization": `Bearer ${token}` },
-    })
+    const res = await fetch(
+      backendUrl(`/calendar/connect?return_to=${encodeURIComponent(returnTo)}`),
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    )
 
     const data = await res.json().catch(() => null)
 

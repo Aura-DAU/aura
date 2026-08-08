@@ -42,7 +42,7 @@ function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: numb
 }
 
 function InlineCitation({ index, citation }: { index: number; citation: Citation }) {
-  const { prefetchDocument } = useDocumentViewer()
+  const { openDocument, prefetchDocument } = useDocumentViewer()
   const hasSource = Boolean(citation.path)
 
   if (!hasSource) {
@@ -67,9 +67,7 @@ function InlineCitation({ index, citation }: { index: number; citation: Citation
         if (typeof window !== "undefined" && window.innerWidth < 768) return
         prefetchDocument(viewerTarget)
       }}
-      onClick={() => {
-        window.open(citation.file, "_blank", "noopener,noreferrer")
-      }}
+      onClick={() => openDocument(viewerTarget)}
       className="inline-flex items-center justify-center rounded-full bg-theme-gray px-1.5 py-0.5 text-[10px] font-medium text-theme-yellow hover:bg-theme-gray-light hover:text-neutral-100 transition-colors mx-0.5 cursor-pointer"
       aria-label={`View source: ${citation.title ?? citation.file}`}
     >

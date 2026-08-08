@@ -6,6 +6,11 @@ from pydantic import BaseModel, Field, SecretStr
 ALLOWED_AUDIO = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 MAX_AUDIO_BYTES = 25 * 1024 * 1024
 
+# Bug-report screenshot upload — mirrors the 5 MB limit enforced client-side
+# in BugReportModal.tsx and the frontend proxy (app/api/bug-report/route.ts).
+ALLOWED_IMAGE = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
+MAX_IMAGE_BYTES = 5 * 1024 * 1024
+
 
 class HistoryTurn(BaseModel):
     role: str = Field(..., max_length=32)

@@ -9,7 +9,7 @@ interface TimetableSetupCardProps {
   onComplete: () => void
 }
 
-type Step = "year" | "section" | "electives" | "saving"
+type Step = "year" | "section" | "lab_group" | "electives" | "saving"
 
 const YEAR_OPTIONS = [
   { value: 1, label: "1st Year", sem: 1 },
@@ -20,13 +20,19 @@ const YEAR_OPTIONS = [
 
 /** First-time setup wizard shown when a student has no cohort configured. */
 export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
-  const { options, saving, saveCohort } = useCohortProfile()
-  const { data: electivesData, loading: electivesLoading } = useElectives()
+  const { options, saving, saveCohort, error: cohortError } = useCohortProfile()
+  const {
+    data: electivesData,
+    loading: electivesLoading,
+    error: electivesError,
+    saveSelections,
+  } = useElectives()
 
   const [step, setStep] = useState<Step>("year")
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
   const [selectedSem, setSelectedSem] = useState<number | null>(null)
   const [selectedSection, setSelectedSection] = useState<string | null>(null)
+  const [selectedLabGroup, setSelectedLabGroup] = useState<string | null>(null)
   const [selectedElectives, setSelectedElectives] = useState<string[]>([])
   const [error, setError] = useState<string | null>(null)
 
@@ -50,37 +56,38 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
 
   const handleSectionNext = () => {
     if (!selectedSection) return
+    setStep("lab_group")
+  }
+
+  const handleLabGroupNext = (overrideLabGroup?: string | null) => {
     // Offer elective selection only for years ≥ 3 where electives exist
-    if (selectedYear && selectedYear >= 3 && electives.length > 0) {
+    if (selectedYear && selectedYear >= 3 && (electives.length > 0 || electivesLoading)) {
       setStep("electives")
     } else {
-      void handleSave([])
+      void handleSave([], overrideLabGroup)
     }
   }
 
-  const handleSave = async (electives: string[]) => {
+  const handleSave = async (electives: string[], overrideLabGroup?: string | null) => {
     if (!selectedYear || !selectedSection || !selectedSem) return
     setStep("saving")
     setError(null)
+    const finalLabGroup = overrideLabGroup !== undefined ? overrideLabGroup : selectedLabGroup;
     try {
       await saveCohort({
         program: "BTech",
         year: selectedYear,
         semester: selectedSem,
         section: selectedSection,
+        lab_group: finalLabGroup,
       })
-      // Save elective selections if any
       if (electives.length > 0) {
-        await fetch("/api/timetable/electives", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ course_codes: electives }),
-        })
+        await saveSelections(electives)
       }
       onComplete()
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to save. Please try again.")
-      setStep("electives")
+      setStep(electives.length > 0 ? "electives" : "section")
     }
   }
 
@@ -104,9 +111,9 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
         This only takes a few seconds.
       </p>
 
-      {error && (
+      {(error || cohortError || electivesError) && (
         <p className="mb-4 rounded-lg border border-theme-red/30 bg-theme-red/10 px-3 py-2 text-xs text-red-400">
-          {error}
+          {error || cohortError || electivesError}
         </p>
       )}
 
@@ -114,7 +121,7 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
       {step === "year" && (
         <div>
           <p className="mb-3 text-xs font-medium text-neutral-300">
-            Step 1 of 3 — Which year are you in?
+            Step 1 of 4 — Which year are you in?
           </p>
           <div className="grid grid-cols-2 gap-2">
             {YEAR_OPTIONS.map((opt) => (
@@ -150,7 +157,7 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
       {step === "section" && (
         <div>
           <p className="mb-3 text-xs font-medium text-neutral-300">
-            Step 2 of 3 — Which section are you in?
+            Step 2 of 4 — Which section are you in?
           </p>
           <div className="grid grid-cols-4 gap-2">
             {availableSections.map((sec) => (
@@ -186,11 +193,58 @@ export function TimetableSetupCard({ onComplete }: TimetableSetupCardProps) {
         </div>
       )}
 
+      {/* ── Step: Lab Group ──────────────────────────────────────── */}
+      {step === "lab_group" && (
+        <div>
+          <p className="mb-3 text-xs font-medium text-neutral-300">
+            Step 3 of 4 — Which lab group are you in?
+          </p>
+          <div className="grid grid-cols-4 gap-2">
+            {["G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8"].map((grp) => (
+              <button
+                key={grp}
+                type="button"
+                onClick={() => setSelectedLabGroup(grp)}
+                className={`rounded-xl border px-3 py-3 text-center text-sm font-bold transition-colors ${
+                  selectedLabGroup === grp
+                    ? "border-theme-yellow bg-theme-yellow/10 text-theme-yellow"
+                    : "border-theme-gray-light bg-theme-gray-light/40 text-neutral-300 hover:border-theme-gray-lighter"
+                }`}
+              >
+                {grp}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => handleLabGroupNext()}
+            disabled={!selectedLabGroup}
+            className="mt-4 flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-theme-red to-theme-yellow py-2.5 text-xs font-bold text-black transition-opacity hover:opacity-90 disabled:opacity-40"
+          >
+            Next <ChevronRight className="size-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => setStep("section")}
+            className="mt-2 w-full text-center text-[10px] text-neutral-500 underline underline-offset-2"
+          >
+            ← Back
+          </button>
+          <button
+             type="button"
+             onClick={() => { setSelectedLabGroup(null); handleLabGroupNext(null); }}
+             className="mt-2 w-full text-center text-[10px] text-neutral-500 underline underline-offset-2"
+          >
+             I don&apos;t have a lab group
+          </button>
+        </div>
+      )}
+
       {/* ── Step: Electives ────────────────────────────────────── */}
       {step === "electives" && (
         <div>
           <p className="mb-3 text-xs font-medium text-neutral-300">
-            Step 3 of 3 — Select your elective courses (optional)
+            Step 4 of 4 — Select your elective courses (optional)
           </p>
           {electivesLoading ? (
             <div className="flex items-center gap-2 text-xs text-neutral-500">

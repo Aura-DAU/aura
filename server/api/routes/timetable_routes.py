@@ -225,6 +225,7 @@ class SaveCohortIn(BaseModel):
     semester: int
     section: str
     branch: Optional[str] = None
+    lab_group: Optional[str] = None
 
 
 @profile_router.get("/cohort")
@@ -233,7 +234,7 @@ def get_cohort_profile(identity: Identity = Depends(require_identity)):
         raise HTTPException(status_code=403, detail="Only students have a cohort profile.")
     
     rows = db_conn.query(
-        "SELECT current_year, current_sem, current_sec FROM user_identity_map WHERE erp_id = %s AND is_active = TRUE",
+        "SELECT current_year, current_sem, current_sec, current_lab_group FROM user_identity_map WHERE erp_id = %s AND is_active = TRUE",
         (identity.erp_id,),
     )
     if not rows:
@@ -242,6 +243,7 @@ def get_cohort_profile(identity: Identity = Depends(require_identity)):
             "current_year": None,
             "current_sem": None,
             "current_sec": None,
+            "current_lab_group": None,
             "is_configured": False
         }
         
@@ -249,6 +251,7 @@ def get_cohort_profile(identity: Identity = Depends(require_identity)):
     year = row.get("current_year")
     sem = row.get("current_sem")
     sec = row.get("current_sec")
+    lab_group = row.get("current_lab_group")
     is_configured = (year is not None) and (sem is not None) and (sec is not None and sec != "")
     
     return {
@@ -256,6 +259,7 @@ def get_cohort_profile(identity: Identity = Depends(require_identity)):
         "current_year": year,
         "current_sem": sem,
         "current_sec": sec,
+        "current_lab_group": lab_group,
         "is_configured": is_configured
     }
 
@@ -269,7 +273,8 @@ def post_cohort_profile(body: SaveCohortIn, identity: Identity = Depends(require
             identity,
             year=body.year,
             sem=body.semester,
-            sec=body.section
+            sec=body.section,
+            lab_group=body.lab_group
         )
     except service.TimetableError as e:
         raise HTTPException(status_code=e.status_code, detail=str(e))

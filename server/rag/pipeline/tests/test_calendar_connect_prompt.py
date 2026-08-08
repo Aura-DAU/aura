@@ -94,6 +94,8 @@ def test_connect_required_surfaced_when_calendar_not_linked(monkeypatch):
     assert action["type"] == "connect_required"
     assert action["provider"] == "google_calendar"
     assert action["connect_path"] == "/settings/calendar"
+    assert "sync your classes automatically" in action["message"].lower()
+    assert "sync your classes automatically" in result["answer"].lower()
 
 
 def test_sync_request_runs_sync_deterministically(monkeypatch):

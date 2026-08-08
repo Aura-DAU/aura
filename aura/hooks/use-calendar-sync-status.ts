@@ -22,6 +22,14 @@ const INITIAL_STATUS: TimetableSyncStatus = {
   hasWarnings: false,
 }
 
+const SETTLED_STATUS: TimetableSyncStatus = {
+  state: "completed",
+  created: 0,
+  updated: 0,
+  removed: 0,
+  hasWarnings: false,
+}
+
 const POLL_INTERVAL_MS = 1500
 const MAX_STATUS_FAILURES = 3
 const MAX_IDLE_POLLS = 5
@@ -45,10 +53,23 @@ function isSyncStatus(value: unknown): value is CalendarSyncResponse {
   )
 }
 
-export function useCalendarSyncStatus(): TimetableSyncStatus {
-  const [status, setStatus] = useState<TimetableSyncStatus>(INITIAL_STATUS)
+/**
+ * Poll calendar sync status. Pass `enabled: false` for historical sync cards
+ * so reopening old threads does not restart a poller that eventually marks
+ * idle as "failed".
+ */
+export function useCalendarSyncStatus(enabled = true): TimetableSyncStatus {
+  const [status, setStatus] = useState<TimetableSyncStatus>(
+    enabled ? INITIAL_STATUS : SETTLED_STATUS,
+  )
 
   useEffect(() => {
+    if (!enabled) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setStatus(SETTLED_STATUS)
+      return
+    }
+
     const controller = new AbortController()
     let timer: ReturnType<typeof setTimeout> | undefined
     let failedPolls = 0
@@ -101,13 +122,14 @@ export function useCalendarSyncStatus(): TimetableSyncStatus {
       }
     }
 
+    setStatus(INITIAL_STATUS)
     void poll()
 
     return () => {
       controller.abort()
       if (timer) clearTimeout(timer)
     }
-  }, [])
+  }, [enabled])
 
   return status
 }

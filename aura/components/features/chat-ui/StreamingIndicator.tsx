@@ -44,7 +44,6 @@ export function StreamingIndicator({ thinkingStep }: StreamingIndicatorProps) {
       return
     }
 
-    setMessageIndex(0)
     intervalRef.current = setInterval(() => {
       setMessageIndex((prev) => (prev + 1) % DEFAULT_LOADING_MESSAGES.length)
     }, ROTATION_INTERVAL_MS)

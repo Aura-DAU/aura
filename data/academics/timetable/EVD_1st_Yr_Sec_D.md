@@ -6,9 +6,9 @@ Source: derived from the official DAU Autumn 2026-27 combined lecture timetable,
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 9:00-9:50 | PC1 (EVD) | AR | CEP-205 |
-| Wednesday | 8:00-8:50 | PC1 (EVD) | AR | CEP-205 |
-| Thursday | 10:00-10:50 | PC1 (EVD) | AR | CEP-205 |
+| Monday | 09:00-09:50 | PC1 (EVD) | AB | CEP-206 |
+| Wednesday | 08:00-08:50 | PC1 (EVD) | AB | CEP-206 |
+| Thursday | 10:00-10:50 | PC1 (EVD) | AB | CEP-206 |
 
 ## Institute Core (IC) — Section D
 
@@ -16,15 +16,15 @@ Note: IC sections (A–D) mix students from all branches for room-capacity reaso
 
 | Day | Time | Course | Faculty | Room |
 |---|---|---|---|---|
-| Monday | 8:00-8:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
+| Monday | 08:00-08:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
 | Monday | 10:00-10:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
-| Tuesday | 8:00-8:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
-| Tuesday | 9:00-9:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
+| Tuesday | 08:00-08:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
+| Tuesday | 09:00-09:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
 | Tuesday | 10:00-10:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
-| Wednesday | 9:00-9:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
+| Wednesday | 09:00-09:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
 | Wednesday | 10:00-10:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
-| Thursday | 8:00-8:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
-| Thursday | 9:00-9:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
-| Friday | 8:00-8:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
-| Friday | 9:00-9:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
+| Thursday | 08:00-08:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
+| Thursday | 09:00-09:50 | IC104 (Sec D) — Basic Electronic Circuits | AV | CEP-110 |
+| Friday | 08:00-08:50 | IC102 (Sec D) — Introduction to Programming (in C) | JM | CEP-110 |
+| Friday | 09:00-09:50 | IC105 (Sec D) — Mathematics I / Calculus | NKS | CEP-110 |
 | Friday | 10:00-10:50 | IC101 (Sec D) — Introduction to ICT | AN | CEP-110 |
