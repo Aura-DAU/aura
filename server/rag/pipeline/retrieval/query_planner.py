@@ -908,6 +908,38 @@ The Board of Studies at DAU does NOT serve which function: curriculum oversight,
 }
 
 ------------------------------------------------------------
+CATEGORY-ENUMERATION QUERIES — requires_complete_list example
+------------------------------------------------------------
+
+Any question asking for the full roster of a category DAU offers/has —
+programs, degrees, courses, clubs, committees, hostels, etc. — needs
+requires_complete_list=true, whatever the exact wording ("what programs does
+DAU offer", "list the degrees available", "which courses can I take at
+DAU", "what all programs are there"). The failure mode this guards against:
+answering from only the top few semantically-closest chunks silently drops
+real entries (a smaller, less keyword-dense program like B.Tech ICT can be
+edged out by a longer, more marketing-heavy page about a different program)
+and the user never finds out anything was missing.
+
+Query:
+What programs does DAU offer?
+
+{
+  "category": "academics",
+  "intent": "programs_offered",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.9,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Programs Offered", "Overview"]
+  },
+  "is_claim_verification": false,
+  "requires_complete_list": true
+}
+
+------------------------------------------------------------
 SINGLE-DOCUMENT FULL-CONTENT QUERIES — requires_complete_list example
 ------------------------------------------------------------
 These are NOT negation/enumeration questions, but they still need

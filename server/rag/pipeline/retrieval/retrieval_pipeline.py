@@ -449,9 +449,24 @@ class RetrievalPipeline:
         By emitting a hard metadata filter, we can retrieve exactly the overview/list chunks.
         """
         q_lower = (query or "").lower()
-        
-        # Broad Program listing queries
-        if "what programs" in q_lower or "list all programs" in q_lower or "which programs" in q_lower or "types of programs" in q_lower:
+
+        # Broad Program listing queries. Matches on the *shape* of the
+        # question (asking about "program(s)"/"degree(s)"/"course(s)" DAU
+        # "offers"/"has"/"provides", or a bare "list ... programs"), not on
+        # any specific program's name — so it applies uniformly to every
+        # program_list-tagged doc (UG, PG, dual-degree, doctoral) and never
+        # needs updating when a program is added, renamed, or removed.
+        _PROGRAM_NOUN_RE = r"programs?|degrees?|courses?"
+        _OFFER_VERB_RE = r"offer|offers|offered|offering|provide|provides|has|have|available"
+        is_broad_program_listing = bool(
+            re.search(rf"\b({_PROGRAM_NOUN_RE})\b.*\b({_OFFER_VERB_RE})\b", q_lower)
+            or re.search(rf"\b({_OFFER_VERB_RE})\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+            or re.search(rf"\blist\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+            or re.search(rf"\btypes? of\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+            or re.search(rf"\bwhich\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+            or re.search(rf"\ball\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+        )
+        if is_broad_program_listing:
             return {"category": {"$in": ["program_list"]}}
             
         # Broad Research Domain listing queries
@@ -785,12 +800,23 @@ class RetrievalPipeline:
 
         query_lower = query.lower()
 
-        # Fix #6: narrow the rewrite trigger to avoid spurious LLM calls for
-        # short but self-contained questions (e.g. "What is the fee?").
-        # Rewrite only when:
+        # Fix #6 (original): narrow the rewrite trigger to avoid spurious LLM
+        # calls for short but self-contained questions (e.g. "What is the
+        # fee?"). Rewrite only when:
         #   (a) a pronoun / reference phrase is present in the query, OR
         #   (b) the query is <=3 words AND the first word is a pronoun
         #       (genuine fragment follow-up like "And him?" or "What about it?")
+        #
+        # Fix #11 (context-loss regression): (a)/(b) alone missed the far more
+        # common case of a topic-continuation follow-up that carries no
+        # pronoun at all — "All programs combined in BSMS" right after "what
+        # is total no. of seats in BSMS?" — which retrieval then answered as
+        # a brand-new, unrelated question instead of resolving it against the
+        # prior turn. Pronoun-spotting can't generalize to that pattern, so
+        # (c) also rewrites any short-ish query once real history exists:
+        # short follow-ups are exactly where implicit context is common,
+        # whether or not they use a pronoun. Longer queries still skip the
+        # LLM call since they're overwhelmingly self-contained on their own.
         PRONOUN_REFS = [
             "he", "his", "him", "she", "her", "they", "their", "them",
             "it", "its", "that faculty", "that professor", "that event",
@@ -801,6 +827,7 @@ class RetrievalPipeline:
             "he", "his", "him", "she", "her", "they", "their", "them",
             "it", "its", "what about", "how about"
         }
+        SHORT_FOLLOWUP_WORD_LIMIT = 8
         has_pronoun = any(
             re.search(rf"\b{re.escape(ref)}\b", query_lower)
             for ref in PRONOUN_REFS
@@ -809,7 +836,8 @@ class RetrievalPipeline:
             len(query.split()) <= 3
             and any(query_lower.startswith(p) for p in SHORT_PRONOUN_STARTERS)
         )
-        needs_rewrite = bool(history) and (has_pronoun or is_short_fragment)
+        is_short_followup = len(query.split()) <= SHORT_FOLLOWUP_WORD_LIMIT
+        needs_rewrite = bool(history) and (has_pronoun or is_short_fragment or is_short_followup)
 
         rewritten_query = query
         if needs_rewrite:
@@ -874,7 +902,21 @@ class RetrievalPipeline:
         ])
         decomposed_queries = plan.get("query_decomposition")
         is_claim_verification = plan.get("is_claim_verification", False)
-        requires_complete_list = plan.get("requires_complete_list", False)
+        # Fix RP-PROGLIST: requires_complete_list was left entirely to the
+        # planner LLM's per-turn judgment, which flagged broad "what
+        # programs does DAU offer?"-style queries inconsistently — on the
+        # turns it missed, the final top_k stayed at the default cap (5),
+        # the cross-encoder reranker then favoured longer, keyword-dense
+        # dual-degree (BS-MS) chunks over the plainer B.Tech ICT bullet, and
+        # BS-MS silently displaced B.Tech ICT out of the answer. Since
+        # _scatter_gather_filter already deterministically (and generically,
+        # for any current or future program_list-tagged doc) detects this
+        # query shape for the metadata filter, reuse that same signal here
+        # so the complete-list top_k boost fires every time, not just when
+        # the planner also happens to notice.
+        requires_complete_list = plan.get("requires_complete_list", False) or bool(
+            self._scatter_gather_filter(plan, query)
+        )
         plan_required_sections = plan.get("retrieval_hints", {}).get("required_sections", [])
         expanded_terms = plan.get("expanded_terms", [])
 

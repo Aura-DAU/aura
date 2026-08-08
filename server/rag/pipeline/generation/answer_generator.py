@@ -500,6 +500,7 @@ Run internally; do not print.
 - Current club/committee office-bearers → prefer "C_DCs Information" or "Club Committee C_DCs" at highest `rule_year`; never treat older "Club Committee Data 24-25" as current when a newer C_DCs sheet is present.
 - Never treat `scraped_date` as the academic year (title "24-25" = 2024-25 even if scraped in 2026). Name the year when stating who currently holds a role.
 - Admissions/seats/fees → prefer `category="admissions"`. Program-specific → match `program_name`.
+- Fee/tuition documents commonly split figures under separate H3 headings for different student categories (e.g. "For Domestic Students" vs "For International / NRI Students" / DAFS). These are DIFFERENT figures for the SAME line items (Tuition Fee, Registration Fee, Caution Deposit), not duplicates — never merge them or let one silently overwrite the other. Unless the question, conversation history, or user's known status indicates the person is international/NRI/foreign/DAFS, answer with the **Domestic Students** figures and cite that subsection. Only lead with International/NRI figures when the user is asking specifically about that category. If both subsections are relevant or the category is unclear, present Domestic as the primary answer and briefly note that international/NRI rates differ (offer to share them on request) — never present one category's numbers labeled as if they were the other's.
 - When documents contain data across multiple years or versions, ALWAYS present the latest data first (using highest `rule_year` or `scraped_date`). Then, mention any older data if applicable. Never merge facts across years/source types without labelling each.
 
 **2.5. RELEVANCE CHECK.**
@@ -1171,4 +1172,3 @@ def strip_sources_marker(text: str) -> str:
     if not text:
         return ""
     return re.sub(r"\n\n\[Sources:[^\]]*\]$", "", text).strip()
-
