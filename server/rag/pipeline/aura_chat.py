@@ -196,7 +196,7 @@ class AuraChat:
                 name = getattr(identity, "full_name", None) or ("Faculty member" if is_faculty else "Student")
                 roll = getattr(identity, "roll_number", None) or getattr(identity, "erp_id", "N/A")
                 branch = getattr(identity, "branch", None) or getattr(identity, "dept", "ICT")
-                email = getattr(identity, "email", None) or f"{roll.lower()}@dau.ac.in"
+                email = getattr(identity, "email", None) or f"{str(roll).lower()}@dau.ac.in"
 
                 q_lower = query.lower()
                 if is_faculty:
@@ -235,7 +235,9 @@ class AuraChat:
                 return {"answer": ans, "sources": [], "is_personal_data": True}
 
             # ── 3. Wellness / Distress Check ────────────────────────────
-            if self.wellness.check(query):
+            # Pass history so calendar-context affirmatives ("do it for me")
+            # are not false-positived as distress by the LLM classifier.
+            if self.wellness.check(query, history=history):
                 return {
                     "answer": self.wellness.get_response(),
                     "sources": [],

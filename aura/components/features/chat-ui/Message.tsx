@@ -31,6 +31,8 @@ interface MessageProps {
   /** Keep action toolbar visible (ChatGPT pattern for the latest reply). */
   showActions?: boolean
   onCalendarSyncConfirm?: () => void
+  /** Only the latest timetable_sync card should poll status. */
+  activeTimetableSync?: boolean
 }
 
 export function Message({
@@ -40,17 +42,16 @@ export function Message({
   isStreaming = false,
   showActions = false,
   onCalendarSyncConfirm,
+  activeTimetableSync = false,
 }: MessageProps) {
   const [copied, setCopied] = useState(false)
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null)
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { openDocument, prefetchDocument } = useDocumentViewer()
 
   useEffect(() => {
     return () => {
       if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
     }
   }, [])
 
@@ -180,7 +181,10 @@ export function Message({
 
         {message.calendar_action &&
           (message.calendar_action.type === "timetable_sync" ? (
-            <TimetableSyncCard eventCount={message.calendar_action.event_count} />
+            <TimetableSyncCard
+              eventCount={message.calendar_action.event_count}
+              active={activeTimetableSync}
+            />
           ) : message.calendar_action.type === "timetable_sync_confirmation" ? (
             <TimetableSyncConfirmationCard
               eventCount={message.calendar_action.event_count}
@@ -231,19 +235,10 @@ export function Message({
                     <button
                       type="button"
                       onMouseEnter={() => {
-                        if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+                        if (typeof window !== "undefined" && window.innerWidth < 768) return
                         prefetchDocument(viewerTarget)
-                        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-                        hoverTimerRef.current = setTimeout(() => {
-                          openDocument(viewerTarget)
-                        }, 1000)
                       }}
-                      onMouseLeave={() => {
-                        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
-                      }}
-                      onClick={() => {
-                        window.open(c.file, "_blank", "noopener,noreferrer")
-                      }}
+                      onClick={() => openDocument(viewerTarget)}
                       className={pillClasses}
                       aria-label={`View source: ${c.title ?? c.file}`}
                     >
@@ -414,8 +409,28 @@ function BookingConfirmationCard({ action }: { action: CalendarActionData }) {
 // Settings, and the card resolves to a "connected" state (no stale CTA on an old
 // turn) once the account is linked.
 function ConnectCalendarCard({ action }: { action: CalendarActionData }) {
-  const { status, error, connect } = useGoogleCalendarSync()
-  const connected = status === "connected"
+  // After OAuth returns to /?calendar=connected, this same hook auto-runs
+  // timetable sync (see useGoogleCalendarSync) so the student does not have
+  // to ask again. Surface that progress / result here in chat.
+  const { status, error, connect, lastSync } = useGoogleCalendarSync()
+  const connected = status === "connected" || status === "syncing"
+
+  let body: string
+  if (status === "syncing") {
+    body = "Connected — syncing your timetable to Google Calendar now…"
+  } else if (connected && lastSync) {
+    const created = lastSync.created ?? 0
+    const updated = lastSync.updated ?? 0
+    const removed = lastSync.removed ?? 0
+    body = `Done — your timetable is synced to Google Calendar (${created} created, ${updated} updated, ${removed} removed).`
+  } else if (connected) {
+    body =
+      "Connected — syncing your timetable automatically. If classes are missing, ask me to sync again."
+  } else {
+    body =
+      action.message ??
+      "Connect your Google Calendar to sync your timetable. After you connect, I'll sync your classes automatically."
+  }
 
   return (
     <div className="mt-3 rounded-xl border border-theme-yellow/20 bg-theme-yellow/5 p-4 animate-in fade-in slide-in-from-bottom-1 duration-300">
@@ -425,19 +440,21 @@ function ConnectCalendarCard({ action }: { action: CalendarActionData }) {
           <p className="mb-1 text-xs font-semibold text-theme-yellow">
             {connected ? "Google Calendar connected" : "Connect Google Calendar"}
           </p>
-          <p className="text-sm text-neutral-300">
-            {action.message ??
-              "Connect your Google Calendar to add your timetable to your schedule."}
-          </p>
+          <p className="text-sm text-neutral-300">{body}</p>
           {error && <p className="mt-1.5 text-xs text-theme-red">{error}</p>}
           {connected ? (
             <p className="mt-2 inline-flex items-center gap-1 text-xs text-green-400">
-              <Check className="size-3.5" /> Connected — ask me again to sync your timetable.
+              <Check className="size-3.5" />
+              {status === "syncing"
+                ? "Auto-sync in progress"
+                : lastSync
+                  ? "Timetable synced"
+                  : "Connected"}
             </p>
           ) : (
             <button
               type="button"
-              onClick={() => void connect()}
+              onClick={() => void connect({ returnTo: "/" })}
               disabled={status === "loading"}
               className="mt-3 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-theme-red to-theme-yellow px-4 py-2 text-sm font-bold text-black transition-opacity hover:opacity-90 disabled:opacity-60"
             >

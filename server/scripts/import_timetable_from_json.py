@@ -24,7 +24,7 @@ BATCH_MAP = {
     "Btech 1st Yr":    ("BTech",  1, 1, ""),
     "Btech 2nd Yr":    ("BTech",  2, 3, ""),
     "Btech 3rd Yr":    ("BTech",  3, 5, ""),
-    "Elective":        ("BTech",  3, 5, "Elective"),
+    "Elective":        ("All",    0, 0, "Elective"),
     "MSc (AA)":        ("MSc",    1, 1, "AA"),
     "MSc DS (Core)":   ("MSc",    1, 1, "DS"),
     "MSc IT (Core)":   ("MSc",    1, 1, "IT"),
@@ -37,14 +37,25 @@ DAY_MAP = {"Monday":0,"Tuesday":1,"Wednesday":2,"Thursday":3,
 
 
 def norm_time(t):
-    t = (t or "").strip()
+    t = (t or "").strip().lower()
+    is_pm = "pm" in t
+    is_am = "am" in t
+    t = t.replace("am", "").replace("pm", "").strip()
     p = t.split(":")
     if len(p) == 2:
-        hr = int(p[0])
-        # Classes between 1:00 and 7:59 are PM classes; convert to 24-hour time
-        if 1 <= hr <= 7:
-            hr += 12
-        return "{:02d}:{}".format(hr, p[1].zfill(2))
+        try:
+            hr = int(p[0])
+            if is_pm and hr != 12:
+                hr += 12
+            elif is_am and hr == 12:
+                hr = 0
+            elif not is_pm and not is_am:
+                # DAU classes heuristic: 8:00 to 19:00.
+                if 1 <= hr <= 7:
+                    hr += 12
+            return "{:02d}:{:02d}".format(hr, int(p[1]))
+        except ValueError:
+            pass
     return t
 
 
@@ -161,7 +172,7 @@ def main():
         pairs = sorted(set((r[0], r[1]) for r in rows))
         print("\n[CLEAR] Deleting for (year,sem):", pairs)
         for yr, sm in pairs:
-            dbc.execute("DELETE FROM timetable_master WHERE year=%s AND sem=%s", (yr, sm))
+            dbc.execute("DELETE FROM timetable_master WHERE year=%s AND sem=%s AND (lab_group IS NULL AND (session_type IS NULL OR session_type NOT IN ('lab', 'tutorial')))", (yr, sm))
         print("[CLEAR] Done.")
 
     SQL = (

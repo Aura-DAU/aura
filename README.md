@@ -29,7 +29,7 @@ DAU PWA (codename **AURA**) is a monorepo with two parts:
 | Directory | What it is | Stack |
 |-----------|------------|-------|
 | [`aura/`](./aura) | The installable PWA frontend | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, shadcn/ui, Serwist (service worker), NextAuth |
-| [`server/`](./server) | API gateway + AI/RAG backend | FastAPI, PostgreSQL, RAG pipeline (Pinecone + Groq) |
+| [`server/`](./server) | API gateway + AI/RAG backend | FastAPI, PostgreSQL, RAG pipeline (Qdrant + HF) |
 
 See [`server/README.md`](./server/README.md) for backend-specific setup.
 

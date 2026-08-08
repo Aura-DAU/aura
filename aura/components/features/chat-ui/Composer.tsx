@@ -92,17 +92,15 @@ export function Composer({
   return (
     <div
       className={cn(
-        "relative",
-        variant === "docked" &&
-          "bg-gradient-to-t from-theme-black via-theme-black/92 to-transparent pt-3",
+        "relative shrink-0",
+        variant === "docked"
+          ? "bg-gradient-to-t from-theme-black via-theme-black/92 to-transparent pt-3"
+          : "pt-1",
       )}
     >
       <form
         onSubmit={handleSubmit}
-        className={cn(
-          "w-full",
-          variant === "docked" && "mx-auto max-w-3xl 2xl:max-w-5xl px-4 pb-3 md:pb-4",
-        )}
+        className="mx-auto w-full max-w-3xl 2xl:max-w-5xl px-4 pb-3 md:pb-4"
       >
         {quotaExhausted ? (
           <div className="flex flex-col items-center justify-center rounded-[26px] border border-theme-gray-light bg-theme-gray/80 px-4 py-7 text-center shadow-[0_18px_50px_-24px_rgba(0,0,0,0.9)] backdrop-blur-xl">
@@ -125,12 +123,21 @@ export function Composer({
         ) : (
           <div
             className={cn(
-              "composer-shell group relative rounded-[26px] border bg-theme-gray/95 px-2.5 pb-2 pt-1.5 backdrop-blur-xl transition-all duration-300",
-              "border-theme-gray-light shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04),0_18px_50px_-22px_rgba(0,0,0,0.9)]",
-              "focus-within:border-theme-gray-lighter focus-within:shadow-[0_0_0_1px_rgba(255,190,63,0.22),0_22px_56px_-20px_rgba(0,0,0,0.95)]",
-              isRecording && "border-theme-red/50 focus-within:border-theme-red/50 focus-within:shadow-[0_0_0_1px_rgba(244,80,59,0.3),0_22px_56px_-20px_rgba(0,0,0,0.95)]",
+              "composer-thinking-wrap",
+              loading && "is-thinking",
             )}
           >
+            <div
+              className={cn(
+                "composer-shell group relative z-[1] rounded-[26px] border bg-theme-gray/95 px-2.5 pb-2 pt-1.5 backdrop-blur-xl transition-all duration-300",
+                "border-theme-gray-light shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04),0_18px_50px_-22px_rgba(0,0,0,0.9)]",
+                !loading &&
+                  "focus-within:border-theme-gray-lighter focus-within:shadow-[0_0_0_1px_rgba(255,190,63,0.22),0_22px_56px_-20px_rgba(0,0,0,0.95)]",
+                isRecording &&
+                  !loading &&
+                  "border-theme-red/50 focus-within:border-theme-red/50 focus-within:shadow-[0_0_0_1px_rgba(244,80,59,0.3),0_22px_56px_-20px_rgba(0,0,0,0.95)]",
+              )}
+            >
             <TextareaAutosize
               value={inputText}
               onChange={(e) => setInputText(e.target.value.slice(0, MAX_CHARS))}
@@ -141,7 +148,9 @@ export function Composer({
               enterKeyHint="send"
               placeholder={dynamicPlaceholder}
               aria-label="Message AURA"
-              className="chat-v2-scroll block w-full resize-none bg-transparent px-2 pb-1.5 pt-2 text-base leading-relaxed text-neutral-100 caret-theme-yellow outline-none placeholder:text-neutral-400 sm:text-[15px]"
+              // Explicit min height so the first paint matches the autosized
+              // single-row height (avoids a tall flash / overlap on load).
+              className="chat-v2-scroll block w-full min-h-[2.75rem] resize-none overflow-y-auto bg-transparent px-2 pb-1.5 pt-2 text-base leading-relaxed text-neutral-100 caret-theme-yellow outline-none placeholder:text-neutral-400 sm:text-[15px]"
             />
 
             <div className="flex items-center justify-between gap-2 pl-2">
@@ -243,6 +252,7 @@ export function Composer({
                 )}
               </div>
             </div>
+          </div>
           </div>
         )}
 

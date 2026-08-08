@@ -2,10 +2,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC101",
-    "section": "A",
     "faculty": "AM",
     "room": "CEP-103",
     "is_elective": false
@@ -13,10 +12,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC101",
-    "section": "B",
     "faculty": "GM",
     "room": "CEP-106",
     "is_elective": false
@@ -24,10 +22,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
-    "course_code": "PC1 (ICT)",
-    "section": null,
+    "start": "08:00",
+    "end": "08:50",
+    "course_code": "PC1",
     "faculty": "RM",
     "room": "CEP-106",
     "is_elective": false
@@ -35,10 +32,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Thursday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC101",
-    "section": "D",
     "faculty": "AN",
     "room": "CEP-110",
     "is_elective": false
@@ -46,10 +42,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC101",
-    "section": "C",
     "faculty": "AM",
     "room": "CEP-108",
     "is_elective": false
@@ -57,10 +52,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC102",
-    "section": "B",
     "faculty": "AG1",
     "room": "CEP-106",
     "is_elective": false
@@ -68,10 +62,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC102",
-    "section": "A",
     "faculty": "PA",
     "room": "CEP-103",
     "is_elective": false
@@ -79,10 +72,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "PC1",
-    "section": null,
     "faculty": "SB2",
     "room": "CEP-108",
     "is_elective": false
@@ -90,10 +82,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Thursday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC102",
-    "section": "C",
     "faculty": "RC",
     "room": "CEP-108",
     "is_elective": false
@@ -101,10 +92,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC102",
-    "section": "D",
     "faculty": "JM",
     "room": "CEP-110",
     "is_elective": false
@@ -112,10 +102,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC104",
-    "section": "D",
     "faculty": "AV",
     "room": "CEP-110",
     "is_elective": false
@@ -123,10 +112,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC104",
-    "section": "C",
     "faculty": "PK",
     "room": "CEP-108",
     "is_elective": false
@@ -134,10 +122,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
-    "course_code": "PC1 (MNC)",
-    "section": null,
+    "start": "08:00",
+    "end": "08:50",
+    "course_code": "PC1",
     "faculty": "VS",
     "room": "CEP-204",
     "is_elective": false
@@ -145,10 +132,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Thursday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC104",
-    "section": "B",
     "faculty": "RLD",
     "room": "CEP-106",
     "is_elective": false
@@ -156,10 +142,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC104",
-    "section": "A",
     "faculty": "RP",
     "room": "CEP-103",
     "is_elective": false
@@ -167,10 +152,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC105",
-    "section": "C",
     "faculty": "AB1",
     "room": "CEP-108",
     "is_elective": false
@@ -178,10 +162,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC105",
-    "section": "D",
     "faculty": "NKS",
     "room": "CEP-110",
     "is_elective": false
@@ -189,10 +172,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
-    "course_code": "PC1 (EVD)",
-    "section": null,
+    "start": "08:00",
+    "end": "08:50",
+    "course_code": "PC1",
     "faculty": "AR",
     "room": "CEP-205",
     "is_elective": false
@@ -200,10 +182,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Thursday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC105",
-    "section": "A",
     "faculty": "PK3",
     "room": "CEP-103",
     "is_elective": false
@@ -211,10 +192,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IC105",
-    "section": "B",
     "faculty": "SP2",
     "room": "CEP-106",
     "is_elective": false
@@ -222,10 +202,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
-    "course_code": "PC1 (CS-AI)",
-    "section": null,
+    "start": "08:00",
+    "end": "08:50",
+    "course_code": "PC1",
     "faculty": "SCN",
     "room": "CEP-103",
     "is_elective": false
@@ -233,10 +212,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "PC1",
-    "section": null,
     "faculty": "AB",
     "room": "CEP-206",
     "is_elective": false
@@ -244,10 +222,9 @@
   {
     "batch": "BS-MS (IT)",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IT1001",
-    "section": null,
     "faculty": "AMK",
     "room": "CEP-207",
     "is_elective": false
@@ -255,10 +232,9 @@
   {
     "batch": "BS-MS (IT)",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MT1001",
-    "section": null,
     "faculty": "SS1",
     "room": "CEP-207",
     "is_elective": false
@@ -266,21 +242,19 @@
   {
     "batch": "BS-MS (IT)",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IT1003",
-    "section": null,
     "faculty": "SS",
-    "room": "CEP-207",
+    "room": "CEP-209",
     "is_elective": false
   },
   {
     "batch": "BS-MS (IT)",
     "day": "Thursday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IT1002",
-    "section": null,
     "faculty": "TKM",
     "room": "CEP-207",
     "is_elective": false
@@ -288,10 +262,9 @@
   {
     "batch": "BS-MS (IT)",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "HM1001",
-    "section": null,
     "faculty": "JJ",
     "room": "CEP-207",
     "is_elective": false
@@ -299,10 +272,9 @@
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "CP1001",
-    "section": null,
     "faculty": "GV",
     "room": "CEP-209",
     "is_elective": false
@@ -310,10 +282,9 @@
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MA1002",
-    "section": null,
     "faculty": "AKT",
     "room": "CEP-209",
     "is_elective": false
@@ -321,21 +292,19 @@
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MA1001",
-    "section": null,
     "faculty": "PK3",
-    "room": "CEP-209",
+    "room": "CEP-207",
     "is_elective": false
   },
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Thursday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "CP1002",
-    "section": null,
     "faculty": "AMM",
     "room": "CEP-209",
     "is_elective": false
@@ -343,21 +312,19 @@
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "HS1001",
-    "section": null,
     "faculty": "BK",
-    "room": "CEP-209",
+    "room": "CEP-204",
     "is_elective": false
   },
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MC212",
-    "section": null,
     "faculty": "MB",
     "room": "CEP-203",
     "is_elective": false
@@ -365,10 +332,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "CT303",
-    "section": "A",
     "faculty": "AJ",
     "room": "LT-2",
     "is_elective": false
@@ -376,10 +342,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "ED312",
-    "section": null,
     "faculty": "SR",
     "room": "CEP-105",
     "is_elective": false
@@ -387,10 +352,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Thursday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MC311",
-    "section": null,
     "faculty": "AT",
     "room": "CEP-205",
     "is_elective": false
@@ -398,10 +362,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MC313",
-    "section": null,
     "faculty": "SB2",
     "room": "CEP-205",
     "is_elective": false
@@ -409,10 +372,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IT314",
-    "section": "A",
     "faculty": "ST",
     "room": "LT-2",
     "is_elective": false
@@ -420,21 +382,29 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "CT303",
-    "section": "B",
     "faculty": "MK2",
     "room": "LT-3",
     "is_elective": false
   },
   {
     "batch": "Btech 3rd Yr",
+    "day": "Friday",
+    "start": "08:00",
+    "end": "08:50",
+    "course_code": ".",
+    "faculty": "",
+    "room": "",
+    "is_elective": false
+  },
+  {
+    "batch": "Btech 3rd Yr",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "ED311",
-    "section": null,
     "faculty": "YA",
     "room": "CEP-104",
     "is_elective": false
@@ -442,10 +412,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IT314",
-    "section": "B",
     "faculty": "ST",
     "room": "LT-2",
     "is_elective": false
@@ -453,10 +422,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IT304",
-    "section": "A",
     "faculty": "MC",
     "room": "LT-2",
     "is_elective": false
@@ -464,10 +432,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MC314",
-    "section": null,
     "faculty": "SMD",
     "room": "CEP-102",
     "is_elective": false
@@ -475,10 +442,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Thursday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "IT304",
-    "section": "B",
     "faculty": "SS",
     "room": "LT-3",
     "is_elective": false
@@ -486,10 +452,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "HM116",
-    "section": null,
     "faculty": "SMD",
     "room": "CEP-102",
     "is_elective": false
@@ -497,43 +462,49 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MC312",
-    "section": null,
     "faculty": "MT",
     "room": "CEP-205",
     "is_elective": false
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Unknown",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "PC512",
-    "section": null,
     "faculty": "PD",
     "room": "CEP-203",
     "is_elective": false
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Unknown",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "PC503",
-    "section": null,
     "faculty": "AV",
     "room": "CEP-202",
     "is_elective": false
   },
   {
+    "batch": "MSc IT (Core)",
+    "day": "Friday",
+    "start": "08:00",
+    "end": "08:50",
+    "course_code": "IT643",
+    "faculty": "AC",
+    "room": "CEP-209",
+    "is_elective": false
+  },
+  {
     "batch": "MSc (AA)",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MA612",
-    "section": null,
     "faculty": "PV",
     "room": "CEP-211",
     "is_elective": false
@@ -541,10 +512,9 @@
   {
     "batch": "MSc (AA)",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MA614",
-    "section": null,
     "faculty": "BBJ",
     "room": "CEP-211",
     "is_elective": false
@@ -552,10 +522,9 @@
   {
     "batch": "MSc (AA)",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MA611",
-    "section": null,
     "faculty": "AB2",
     "room": "CEP-211",
     "is_elective": false
@@ -563,10 +532,9 @@
   {
     "batch": "MSc (AA)",
     "day": "Friday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "MA613",
-    "section": null,
     "faculty": "SP1",
     "room": "CEP-211",
     "is_elective": false
@@ -574,21 +542,19 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Tuesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "DS635",
-    "section": null,
     "faculty": "AC",
-    "room": "LAB",
+    "room": "LAB A-SF",
     "is_elective": false
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "EL403",
-    "section": null,
     "faculty": "BM",
     "room": "CEP-203",
     "is_elective": true
@@ -596,10 +562,9 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "SC452",
-    "section": null,
     "faculty": "PK2",
     "room": "CEP-102",
     "is_elective": true
@@ -607,10 +572,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "EL505",
-    "section": null,
     "faculty": "BM",
     "room": "CEP-203",
     "is_elective": true
@@ -618,10 +582,9 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "SC478",
-    "section": null,
     "faculty": "PR",
     "room": "CEP-110",
     "is_elective": true
@@ -629,21 +592,19 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "HM484",
-    "section": null,
     "faculty": "BK",
-    "room": "CEP-212",
+    "room": "CEP-104",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "SC453",
-    "section": null,
     "faculty": "JV",
     "room": "LT-3",
     "is_elective": true
@@ -651,21 +612,19 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "HM404",
-    "section": null,
     "faculty": "VM",
-    "room": "CEP-206",
+    "room": "CEP-202",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "DE401",
-    "section": null,
     "faculty": "BD",
     "room": "CEP-204",
     "is_elective": true
@@ -673,32 +632,29 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "HM443",
-    "section": null,
     "faculty": "SK1",
-    "room": "CEP-202",
+    "room": "CEP-205",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "8:00",
-    "end": "8:50",
+    "start": "08:00",
+    "end": "08:50",
     "course_code": "HM409",
-    "section": null,
     "faculty": "AT3",
-    "room": "CEP-104",
+    "room": "CEP-212",
     "is_elective": true
   },
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
-    "course_code": "PC1 (ICT)",
-    "section": null,
+    "start": "09:00",
+    "end": "09:50",
+    "course_code": "PC1",
     "faculty": "RM",
     "room": "CEP-106",
     "is_elective": false
@@ -706,10 +662,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC101",
-    "section": "D",
     "faculty": "AN",
     "room": "CEP-110",
     "is_elective": false
@@ -717,10 +672,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC101",
-    "section": "C",
     "faculty": "AM",
     "room": "CEP-108",
     "is_elective": false
@@ -728,10 +682,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC101",
-    "section": "A",
     "faculty": "AM",
     "room": "CEP-103",
     "is_elective": false
@@ -739,10 +692,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC101",
-    "section": "B",
     "faculty": "GM",
     "room": "CEP-106",
     "is_elective": false
@@ -750,10 +702,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "PC1",
-    "section": null,
     "faculty": "SB2",
     "room": "CEP-108",
     "is_elective": false
@@ -761,10 +712,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC102",
-    "section": "C",
     "faculty": "RC",
     "room": "CEP-108",
     "is_elective": false
@@ -772,10 +722,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC102",
-    "section": "D",
     "faculty": "JM",
     "room": "CEP-110",
     "is_elective": false
@@ -783,10 +732,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC102",
-    "section": "B",
     "faculty": "AG1",
     "room": "CEP-106",
     "is_elective": false
@@ -794,10 +742,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC102",
-    "section": "A",
     "faculty": "PA",
     "room": "CEP-103",
     "is_elective": false
@@ -805,10 +752,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
-    "course_code": "PC1 (MNC)",
-    "section": null,
+    "start": "09:00",
+    "end": "09:50",
+    "course_code": "PC1",
     "faculty": "VS",
     "room": "CEP-204",
     "is_elective": false
@@ -816,10 +762,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC104",
-    "section": "B",
     "faculty": "RLD",
     "room": "CEP-106",
     "is_elective": false
@@ -827,10 +772,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC104",
-    "section": "A",
     "faculty": "RP",
     "room": "CEP-103",
     "is_elective": false
@@ -838,10 +782,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC104",
-    "section": "D",
     "faculty": "AV",
     "room": "CEP-110",
     "is_elective": false
@@ -849,10 +792,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC104",
-    "section": "C",
     "faculty": "PK",
     "room": "CEP-108",
     "is_elective": false
@@ -860,10 +802,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
-    "course_code": "PC1 (EVD)",
-    "section": null,
+    "start": "09:00",
+    "end": "09:50",
+    "course_code": "PC1",
     "faculty": "AR",
     "room": "CEP-205",
     "is_elective": false
@@ -871,10 +812,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC105",
-    "section": "A",
     "faculty": "PK3",
     "room": "CEP-103",
     "is_elective": false
@@ -882,10 +822,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Wednesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC105",
-    "section": "B",
     "faculty": "SP2",
     "room": "CEP-106",
     "is_elective": false
@@ -893,10 +832,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC105",
-    "section": "C",
     "faculty": "AB1",
     "room": "CEP-108",
     "is_elective": false
@@ -904,10 +842,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IC105",
-    "section": "D",
     "faculty": "NKS",
     "room": "CEP-110",
     "is_elective": false
@@ -915,10 +852,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
-    "course_code": "PC1 (CS-AI)",
-    "section": null,
+    "start": "09:00",
+    "end": "09:50",
+    "course_code": "PC1",
     "faculty": "SCN",
     "room": "CEP-103",
     "is_elective": false
@@ -926,10 +862,9 @@
   {
     "batch": "Btech 1st Yr",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "PC1",
-    "section": null,
     "faculty": "AB",
     "room": "CEP-206",
     "is_elective": false
@@ -937,21 +872,19 @@
   {
     "batch": "BS-MS (IT)",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IT1003",
-    "section": null,
     "faculty": "SS",
-    "room": "CEP-207",
+    "room": "CEP-209",
     "is_elective": false
   },
   {
     "batch": "BS-MS (IT)",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IT1002",
-    "section": null,
     "faculty": "TKM",
     "room": "CEP-207",
     "is_elective": false
@@ -959,10 +892,9 @@
   {
     "batch": "BS-MS (IT)",
     "day": "Wednesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "HM1001",
-    "section": null,
     "faculty": "JJ",
     "room": "CEP-207",
     "is_elective": false
@@ -970,10 +902,9 @@
   {
     "batch": "BS-MS (IT)",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IT1001",
-    "section": null,
     "faculty": "AMK",
     "room": "CEP-207",
     "is_elective": false
@@ -981,10 +912,9 @@
   {
     "batch": "BS-MS (IT)",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MT1001",
-    "section": null,
     "faculty": "SS1",
     "room": "CEP-207",
     "is_elective": false
@@ -992,21 +922,19 @@
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MA1001",
-    "section": null,
     "faculty": "PK3",
-    "room": "CEP-209",
+    "room": "CEP-207",
     "is_elective": false
   },
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "CP1002",
-    "section": null,
     "faculty": "AMM",
     "room": "CEP-209",
     "is_elective": false
@@ -1014,21 +942,19 @@
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Wednesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "HS1001",
-    "section": null,
     "faculty": "BK",
-    "room": "CEP-209",
+    "room": "CEP-204",
     "is_elective": false
   },
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "CP1001",
-    "section": null,
     "faculty": "GV",
     "room": "CEP-209",
     "is_elective": false
@@ -1036,10 +962,9 @@
   {
     "batch": "BS-MS (DS + AI)",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MA1002",
-    "section": null,
     "faculty": "AKT",
     "room": "CEP-209",
     "is_elective": false
@@ -1047,10 +972,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "ED312",
-    "section": null,
     "faculty": "SR",
     "room": "CEP-105",
     "is_elective": false
@@ -1058,10 +982,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MC311",
-    "section": null,
     "faculty": "AT",
     "room": "CEP-205",
     "is_elective": false
@@ -1069,10 +992,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Wednesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MC313",
-    "section": null,
     "faculty": "SB2",
     "room": "CEP-205",
     "is_elective": false
@@ -1080,10 +1002,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "CT303",
-    "section": "A",
     "faculty": "AJ",
     "room": "LT-2",
     "is_elective": false
@@ -1091,10 +1012,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IT314",
-    "section": "B",
     "faculty": "ST",
     "room": "LT-2",
     "is_elective": false
@@ -1102,10 +1022,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "CT303",
-    "section": "B",
     "faculty": "MK2",
     "room": "LT-3",
     "is_elective": false
@@ -1113,10 +1032,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IT304",
-    "section": "A",
     "faculty": "MC",
     "room": "LT-2",
     "is_elective": false
@@ -1124,10 +1042,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "ED311",
-    "section": null,
     "faculty": "YA",
     "room": "CEP-104",
     "is_elective": false
@@ -1135,10 +1052,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "IT304",
-    "section": "B",
     "faculty": "SS",
     "room": "LT-3",
     "is_elective": false
@@ -1146,10 +1062,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MC314",
-    "section": null,
     "faculty": "SMD",
     "room": "CEP-102",
     "is_elective": false
@@ -1157,10 +1072,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "HM116",
-    "section": null,
     "faculty": "SMD",
     "room": "CEP-102",
     "is_elective": false
@@ -1168,10 +1082,9 @@
   {
     "batch": "Btech 3rd Yr",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MC312",
-    "section": null,
     "faculty": "MT",
     "room": "CEP-205",
     "is_elective": false
@@ -1179,10 +1092,9 @@
   {
     "batch": "MSc (AA)",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MA611",
-    "section": null,
     "faculty": "AB2",
     "room": "CEP-211",
     "is_elective": false
@@ -1190,10 +1102,9 @@
   {
     "batch": "MSc (AA)",
     "day": "Tuesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MA615",
-    "section": null,
     "faculty": "KCS",
     "room": "CEP-211",
     "is_elective": false
@@ -1201,10 +1112,9 @@
   {
     "batch": "MSc (AA)",
     "day": "Wednesday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MA613",
-    "section": null,
     "faculty": "SP1",
     "room": "CEP-211",
     "is_elective": false
@@ -1212,10 +1122,9 @@
   {
     "batch": "MSc (AA)",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MA612",
-    "section": null,
     "faculty": "PV",
     "room": "CEP-211",
     "is_elective": false
@@ -1223,10 +1132,9 @@
   {
     "batch": "MSc (AA)",
     "day": "Friday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "MA614",
-    "section": null,
     "faculty": "BBJ",
     "room": "CEP-211",
     "is_elective": false
@@ -1234,10 +1142,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "SC452",
-    "section": null,
     "faculty": "PK2",
     "room": "CEP-102",
     "is_elective": true
@@ -1245,10 +1152,9 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "EL403",
-    "section": null,
     "faculty": "BM",
     "room": "CEP-203",
     "is_elective": true
@@ -1256,10 +1162,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "SC478",
-    "section": null,
     "faculty": "PR",
     "room": "CEP-110",
     "is_elective": true
@@ -1267,10 +1172,9 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "EL505",
-    "section": null,
     "faculty": "BM",
     "room": "CEP-203",
     "is_elective": true
@@ -1278,10 +1182,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "SC453",
-    "section": null,
     "faculty": "JV",
     "room": "LT-3",
     "is_elective": true
@@ -1289,23 +1192,21 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "HM484",
-    "section": null,
     "faculty": "BK",
-    "room": "CEP-212",
+    "room": "CEP-104",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "9:00",
-    "end": "9:50",
+    "start": "09:00",
+    "end": "09:50",
     "course_code": "HM404",
-    "section": null,
     "faculty": "VM",
-    "room": "CEP-206",
+    "room": "CEP-202",
     "is_elective": true
   },
   {
@@ -1314,7 +1215,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC101",
-    "section": "C",
     "faculty": "AM",
     "room": "CEP-108",
     "is_elective": false
@@ -1325,7 +1225,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC101",
-    "section": "A",
     "faculty": "AM",
     "room": "CEP-103",
     "is_elective": false
@@ -1336,7 +1235,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC101",
-    "section": "B",
     "faculty": "GM",
     "room": "CEP-106",
     "is_elective": false
@@ -1346,8 +1244,7 @@
     "day": "Thursday",
     "start": "10:00",
     "end": "10:50",
-    "course_code": "PC1 (ICT)",
-    "section": null,
+    "course_code": "PC1",
     "faculty": "RM",
     "room": "CEP-106",
     "is_elective": false
@@ -1358,7 +1255,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC101",
-    "section": "D",
     "faculty": "AN",
     "room": "CEP-110",
     "is_elective": false
@@ -1369,7 +1265,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC102",
-    "section": "D",
     "faculty": "JM",
     "room": "CEP-110",
     "is_elective": false
@@ -1380,7 +1275,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC102",
-    "section": "B",
     "faculty": "AG1",
     "room": "CEP-106",
     "is_elective": false
@@ -1391,7 +1285,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC102",
-    "section": "A",
     "faculty": "PA",
     "room": "CEP-103",
     "is_elective": false
@@ -1402,7 +1295,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "PC1",
-    "section": null,
     "faculty": "SB2",
     "room": "CEP-108",
     "is_elective": false
@@ -1413,7 +1305,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC102",
-    "section": "C",
     "faculty": "RC",
     "room": "CEP-108",
     "is_elective": false
@@ -1424,7 +1315,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC104",
-    "section": "A",
     "faculty": "RP",
     "room": "CEP-103",
     "is_elective": false
@@ -1435,7 +1325,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC104",
-    "section": "D",
     "faculty": "AV",
     "room": "CEP-110",
     "is_elective": false
@@ -1446,7 +1335,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC104",
-    "section": "C",
     "faculty": "PK",
     "room": "CEP-108",
     "is_elective": false
@@ -1456,8 +1344,7 @@
     "day": "Thursday",
     "start": "10:00",
     "end": "10:50",
-    "course_code": "PC1 (MNC)",
-    "section": null,
+    "course_code": "PC1",
     "faculty": "VS",
     "room": "CEP-204",
     "is_elective": false
@@ -1468,7 +1355,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC104",
-    "section": "B",
     "faculty": "RLD",
     "room": "CEP-106",
     "is_elective": false
@@ -1479,7 +1365,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC105",
-    "section": "B",
     "faculty": "SP2",
     "room": "CEP-106",
     "is_elective": false
@@ -1490,7 +1375,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC105",
-    "section": "C",
     "faculty": "AB1",
     "room": "CEP-108",
     "is_elective": false
@@ -1501,7 +1385,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC105",
-    "section": "D",
     "faculty": "NKS",
     "room": "CEP-110",
     "is_elective": false
@@ -1511,8 +1394,7 @@
     "day": "Thursday",
     "start": "10:00",
     "end": "10:50",
-    "course_code": "PC1 (EVD)",
-    "section": null,
+    "course_code": "PC1",
     "faculty": "AR",
     "room": "CEP-205",
     "is_elective": false
@@ -1523,7 +1405,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IC105",
-    "section": "A",
     "faculty": "PK3",
     "room": "CEP-103",
     "is_elective": false
@@ -1533,8 +1414,7 @@
     "day": "Thursday",
     "start": "10:00",
     "end": "10:50",
-    "course_code": "PC1 (CS-AI)",
-    "section": null,
+    "course_code": "PC1",
     "faculty": "SCN",
     "room": "CEP-103",
     "is_elective": false
@@ -1545,7 +1425,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "PC1",
-    "section": null,
     "faculty": "AB",
     "room": "CEP-206",
     "is_elective": false
@@ -1556,7 +1435,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "HM1001",
-    "section": null,
     "faculty": "JJ",
     "room": "CEP-207",
     "is_elective": false
@@ -1567,7 +1445,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IT1001",
-    "section": null,
     "faculty": "AMK",
     "room": "CEP-207",
     "is_elective": false
@@ -1578,7 +1455,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MT1001",
-    "section": null,
     "faculty": "SS1",
     "room": "CEP-207",
     "is_elective": false
@@ -1589,9 +1465,8 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IT1003",
-    "section": null,
     "faculty": "SS",
-    "room": "CEP-207",
+    "room": "CEP-209",
     "is_elective": false
   },
   {
@@ -1600,7 +1475,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IT1002",
-    "section": null,
     "faculty": "TKM",
     "room": "CEP-207",
     "is_elective": false
@@ -1611,9 +1485,8 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "HS1001",
-    "section": null,
     "faculty": "BK",
-    "room": "CEP-209",
+    "room": "CEP-204",
     "is_elective": false
   },
   {
@@ -1622,7 +1495,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "CP1001",
-    "section": null,
     "faculty": "GV",
     "room": "CEP-209",
     "is_elective": false
@@ -1633,7 +1505,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MA1002",
-    "section": null,
     "faculty": "AKT",
     "room": "CEP-209",
     "is_elective": false
@@ -1644,9 +1515,8 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MA1001",
-    "section": null,
     "faculty": "PK3",
-    "room": "CEP-209",
+    "room": "CEP-207",
     "is_elective": false
   },
   {
@@ -1655,51 +1525,46 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "CP1002",
-    "section": null,
     "faculty": "AMM",
     "room": "CEP-209",
     "is_elective": false
   },
   {
-    "batch": "Btech 3rd Yr",
+    "batch": "Unknown",
     "day": "Monday",
     "start": "10:00",
     "end": "10:50",
     "course_code": "MC313",
-    "section": null,
     "faculty": "SB2",
     "room": "CEP-205",
     "is_elective": false
   },
   {
-    "batch": "Btech 3rd Yr",
+    "batch": "Unknown",
     "day": "Wednesday",
     "start": "10:00",
     "end": "10:50",
     "course_code": "CT303",
-    "section": "A",
     "faculty": "AJ",
     "room": "LT-2",
     "is_elective": false
   },
   {
-    "batch": "Btech 3rd Yr",
+    "batch": "Unknown",
     "day": "Thursday",
     "start": "10:00",
     "end": "10:50",
     "course_code": "ED312",
-    "section": null,
     "faculty": "SR",
     "room": "CEP-105",
     "is_elective": false
   },
   {
-    "batch": "Btech 3rd Yr",
+    "batch": "Unknown",
     "day": "Friday",
     "start": "10:00",
     "end": "10:50",
     "course_code": "MC311",
-    "section": null,
     "faculty": "AT",
     "room": "CEP-205",
     "is_elective": false
@@ -1710,7 +1575,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IT314",
-    "section": "A",
     "faculty": "ST",
     "room": "LT-2",
     "is_elective": false
@@ -1721,7 +1585,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "CT303",
-    "section": "B",
     "faculty": "MK2",
     "room": "LT-3",
     "is_elective": false
@@ -1732,7 +1595,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IT314",
-    "section": "B",
     "faculty": "ST",
     "room": "LT-2",
     "is_elective": false
@@ -1743,7 +1605,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "ED311",
-    "section": null,
     "faculty": "YA",
     "room": "CEP-104",
     "is_elective": false
@@ -1754,7 +1615,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IT304",
-    "section": "A",
     "faculty": "MC",
     "room": "LT-2",
     "is_elective": false
@@ -1765,7 +1625,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IT304",
-    "section": "B",
     "faculty": "SS",
     "room": "LT-3",
     "is_elective": false
@@ -1776,7 +1635,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MC314",
-    "section": null,
     "faculty": "SMD",
     "room": "CEP-102",
     "is_elective": false
@@ -1787,7 +1645,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "HM116",
-    "section": null,
     "faculty": "SMD",
     "room": "CEP-102",
     "is_elective": false
@@ -1798,7 +1655,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MC312",
-    "section": null,
     "faculty": "MT",
     "room": "CEP-205",
     "is_elective": false
@@ -1809,7 +1665,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "IT314",
-    "section": "A",
     "faculty": "ST",
     "room": "LT2",
     "is_elective": false
@@ -1820,7 +1675,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MA613",
-    "section": null,
     "faculty": "SP1",
     "room": "CEP-211",
     "is_elective": false
@@ -1831,7 +1685,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MA612",
-    "section": null,
     "faculty": "PV",
     "room": "CEP-211",
     "is_elective": false
@@ -1842,7 +1695,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MA614",
-    "section": null,
     "faculty": "BBJ",
     "room": "CEP-211",
     "is_elective": false
@@ -1853,7 +1705,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MA611",
-    "section": null,
     "faculty": "AB2",
     "room": "CEP-211",
     "is_elective": false
@@ -1864,7 +1715,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "MA615",
-    "section": null,
     "faculty": "KCS",
     "room": "CEP-211",
     "is_elective": false
@@ -1875,7 +1725,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "EL403",
-    "section": null,
     "faculty": "BM",
     "room": "CEP-203",
     "is_elective": true
@@ -1886,7 +1735,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "SC452",
-    "section": null,
     "faculty": "PK2",
     "room": "CEP-102",
     "is_elective": true
@@ -1897,7 +1745,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "EL505",
-    "section": null,
     "faculty": "BM",
     "room": "CEP-203",
     "is_elective": true
@@ -1908,7 +1755,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "SC478",
-    "section": null,
     "faculty": "PR",
     "room": "CEP-110",
     "is_elective": true
@@ -1919,9 +1765,8 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "HM484",
-    "section": null,
     "faculty": "BK",
-    "room": "CEP-212",
+    "room": "CEP-104",
     "is_elective": true
   },
   {
@@ -1930,7 +1775,6 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "SC453",
-    "section": null,
     "faculty": "JV",
     "room": "LT-3",
     "is_elective": true
@@ -1941,9 +1785,8 @@
     "start": "10:00",
     "end": "10:50",
     "course_code": "HM404",
-    "section": null,
     "faculty": "VM",
-    "room": "CEP-206",
+    "room": "CEP-202",
     "is_elective": true
   },
   {
@@ -1952,7 +1795,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT227",
-    "section": "A",
     "faculty": "SB",
     "room": "LT-2",
     "is_elective": false
@@ -1963,7 +1805,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "MC212",
-    "section": null,
     "faculty": "MB",
     "room": "CEP-203",
     "is_elective": false
@@ -1973,8 +1814,7 @@
     "day": "Wednesday",
     "start": "11:00",
     "end": "11:50",
-    "course_code": "IT227",
-    "section": "B",
+    "course_code": "IT227(B)",
     "faculty": "AMK",
     "room": "LT-3",
     "is_elective": false
@@ -1985,7 +1825,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "MC216",
-    "section": null,
     "faculty": "SCN",
     "room": "CEP-103",
     "is_elective": false
@@ -1996,7 +1835,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "ED213",
-    "section": null,
     "faculty": "HP",
     "room": "CEP-104",
     "is_elective": false
@@ -2007,7 +1845,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "CS374",
-    "section": null,
     "faculty": "PK2",
     "room": "CEP-202",
     "is_elective": false
@@ -2018,7 +1855,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT615",
-    "section": null,
     "faculty": "MB",
     "room": "CEP-207",
     "is_elective": false
@@ -2029,7 +1865,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "SC612",
-    "section": null,
     "faculty": "GP",
     "room": "CEP-207",
     "is_elective": false
@@ -2040,7 +1875,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT615",
-    "section": null,
     "faculty": "MB",
     "room": "CEP-207",
     "is_elective": false
@@ -2051,29 +1885,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT645",
-    "section": null,
-    "faculty": "SB",
-    "room": "CEP-209",
-    "is_elective": false
-  },
-  {
-    "batch": "MSc IT (Core)",
-    "day": "Wednesday",
-    "start": "11:00",
-    "end": "11:50",
-    "course_code": "IT643",
-    "section": null,
-    "faculty": "AC",
-    "room": "CEP-209",
-    "is_elective": false
-  },
-  {
-    "batch": "MSc IT (Core)",
-    "day": "Thursday",
-    "start": "11:00",
-    "end": "11:50",
-    "course_code": "IT645",
-    "section": null,
     "faculty": "SB",
     "room": "CEP-209",
     "is_elective": false
@@ -2084,7 +1895,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "DS603",
-    "section": null,
     "faculty": "MLD",
     "room": "LAB A-SF",
     "is_elective": false
@@ -2095,7 +1905,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "DS604",
-    "section": null,
     "faculty": "PMJ",
     "room": "LAB A-SF",
     "is_elective": false
@@ -2106,7 +1915,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "DS603",
-    "section": null,
     "faculty": "MLD",
     "room": "LAB A-SF",
     "is_elective": false
@@ -2117,31 +1925,8 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "DS636",
-    "section": null,
     "faculty": "MM",
     "room": "CEP-103",
-    "is_elective": false
-  },
-  {
-    "batch": "MSc DS (Core)",
-    "day": "Thursday",
-    "start": "11:00",
-    "end": "11:50",
-    "course_code": "DS636",
-    "section": null,
-    "faculty": "MM",
-    "room": "CEP-103",
-    "is_elective": false
-  },
-  {
-    "batch": "MSc DS (Core)",
-    "day": "Friday",
-    "start": "11:00",
-    "end": "11:50",
-    "course_code": "DS635",
-    "section": null,
-    "faculty": "AC",
-    "room": "LAB A-SF",
     "is_elective": false
   },
   {
@@ -2150,175 +1935,159 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "PC512",
-    "section": null,
     "faculty": "PD",
     "room": "CEP-203",
     "is_elective": false
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Wednesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "SC404",
-    "section": null,
     "faculty": "GD",
-    "room": "CEP-106",
-    "is_elective": false
+    "room": "CEP-202",
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Tuesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "CT505",
-    "section": null,
     "faculty": "AJ",
     "room": "CEP-103",
-    "is_elective": false
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Wednesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "SC451",
-    "section": null,
     "faculty": "VS",
-    "room": "CEP-108",
-    "is_elective": false
+    "room": "CEP-105",
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Thursday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "DE401",
-    "section": null,
     "faculty": "BD",
     "room": "CEP-204",
-    "is_elective": false
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Friday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "DE401",
-    "section": null,
     "faculty": "BD",
     "room": "CEP-204",
-    "is_elective": false
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Tuesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "EL467",
-    "section": null,
     "faculty": "YA",
     "room": "CEP-106",
-    "is_elective": false
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Wednesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "HM405",
-    "section": null,
     "faculty": "GM",
-    "room": "CEP-105",
-    "is_elective": false
+    "room": "CEP-108",
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Thursday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "HM443",
-    "section": null,
     "faculty": "SK1",
-    "room": "CEP-202",
-    "is_elective": false
+    "room": "CEP-205",
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Friday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "HM443",
-    "section": null,
     "faculty": "SK1",
-    "room": "CEP-202",
-    "is_elective": false
+    "room": "CEP-205",
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Tuesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "EL411",
-    "section": null,
     "faculty": "HSJ",
     "room": "CEP-108",
-    "is_elective": false
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Wednesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "HM432",
-    "section": null,
     "faculty": "NB",
-    "room": "CEP-107",
-    "is_elective": false
+    "room": "CEP-106",
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Thursday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "HM409",
-    "section": null,
     "faculty": "AT3",
-    "room": "CEP-104",
-    "is_elective": false
+    "room": "CEP-212",
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Friday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "HM409",
-    "section": null,
     "faculty": "AT3",
-    "room": "CEP-104",
-    "is_elective": false
+    "room": "CEP-212",
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Tuesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT457",
-    "section": null,
     "faculty": "PKS",
     "room": "CEP-102",
-    "is_elective": false
+    "is_elective": true
   },
   {
-    "batch": "Mtech (Core)",
+    "batch": "Elective",
     "day": "Wednesday",
     "start": "11:00",
     "end": "11:50",
     "course_code": "HM406",
-    "section": null,
     "faculty": "RB",
-    "room": "CEP-202",
-    "is_elective": false
+    "room": "CEP-209",
+    "is_elective": true
   },
   {
     "batch": "Elective",
@@ -2326,7 +2095,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT594",
-    "section": null,
     "faculty": "SDG",
     "room": "CEP-204",
     "is_elective": true
@@ -2337,7 +2105,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT531",
-    "section": null,
     "faculty": "AG1",
     "room": "CEP-207",
     "is_elective": true
@@ -2348,7 +2115,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT586",
-    "section": null,
     "faculty": "AS",
     "room": "CEP-110",
     "is_elective": true
@@ -2359,7 +2125,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT433",
-    "section": null,
     "faculty": "VK",
     "room": "CEP-212",
     "is_elective": true
@@ -2370,7 +2135,6 @@
     "start": "11:00",
     "end": "11:50",
     "course_code": "IT627",
-    "section": null,
     "faculty": "AM1",
     "room": "CEP-209",
     "is_elective": true
@@ -2381,7 +2145,6 @@
     "start": "12:00",
     "end": "12:50",
     "course_code": "MC212",
-    "section": null,
     "faculty": "MB",
     "room": "CEP-203",
     "is_elective": false
@@ -2392,9 +2155,18 @@
     "start": "12:00",
     "end": "12:50",
     "course_code": "IT615",
-    "section": null,
     "faculty": "MB",
     "room": "CEP-207",
+    "is_elective": false
+  },
+  {
+    "batch": "MSc IT (Core)",
+    "day": "Tuesday",
+    "start": "12:00",
+    "end": "12:50",
+    "course_code": "IT643",
+    "faculty": "AC",
+    "room": "CEP-209",
     "is_elective": false
   },
   {
@@ -2403,7 +2175,26 @@
     "start": "12:00",
     "end": "12:50",
     "course_code": "IT645",
-    "section": null,
+    "faculty": "SB",
+    "room": "CEP-209",
+    "is_elective": false
+  },
+  {
+    "batch": "MSc IT (Core)",
+    "day": "Thursday",
+    "start": "12:00",
+    "end": "12:50",
+    "course_code": "IT643",
+    "faculty": "AC",
+    "room": "CEP-209",
+    "is_elective": false
+  },
+  {
+    "batch": "MSc IT (Core)",
+    "day": "Friday",
+    "start": "12:00",
+    "end": "12:50",
+    "course_code": "IT645",
     "faculty": "SB",
     "room": "CEP-209",
     "is_elective": false
@@ -2414,7 +2205,6 @@
     "start": "12:00",
     "end": "12:50",
     "course_code": "DS603",
-    "section": null,
     "faculty": "MLD",
     "room": "LAB A-SF",
     "is_elective": false
@@ -2425,7 +2215,6 @@
     "start": "12:00",
     "end": "12:50",
     "course_code": "DS635",
-    "section": null,
     "faculty": "AC",
     "room": "LAB A-SF",
     "is_elective": false
@@ -2436,18 +2225,76 @@
     "start": "12:00",
     "end": "12:50",
     "course_code": "DS636",
-    "section": null,
     "faculty": "MM",
     "room": "CEP-103",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
-    "day": "Monday",
+    "batch": "MSc DS (Core)",
+    "day": "Friday",
     "start": "12:00",
     "end": "12:50",
+    "course_code": "DS636",
+    "faculty": "MM",
+    "room": "CEP-103",
+    "is_elective": false
+  },
+  {
+    "batch": "Unknown",
+    "day": "Monday",
+    "start": "14:00",
+    "end": "14:50",
+    "course_code": "COURSE",
+    "faculty": "Name",
+    "room": "Room",
+    "is_elective": false
+  },
+  {
+    "batch": "Unknown",
+    "day": "Tuesday",
+    "start": "14:00",
+    "end": "14:50",
+    "course_code": "COURSE",
+    "faculty": "Name",
+    "room": "Room",
+    "is_elective": false
+  },
+  {
+    "batch": "Unknown",
+    "day": "Wednesday",
+    "start": "14:00",
+    "end": "14:50",
+    "course_code": "COURSE",
+    "faculty": "Name",
+    "room": "Room",
+    "is_elective": false
+  },
+  {
+    "batch": "Unknown",
+    "day": "Thursday",
+    "start": "14:00",
+    "end": "14:50",
+    "course_code": "COURSE",
+    "faculty": "Name",
+    "room": "Room",
+    "is_elective": false
+  },
+  {
+    "batch": "Unknown",
+    "day": "Friday",
+    "start": "14:00",
+    "end": "14:50",
+    "course_code": "COURSE",
+    "faculty": "Name",
+    "room": "Room",
+    "is_elective": false
+  },
+  {
+    "batch": "Btech 2nd Yr",
+    "day": "Monday",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "HM216",
-    "section": "A",
     "faculty": "PD",
     "room": "CEP-102",
     "is_elective": false
@@ -2455,10 +2302,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT227",
-    "section": "A",
     "faculty": "SB",
     "room": "CEP-102",
     "is_elective": false
@@ -2466,10 +2312,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "CT204",
-    "section": "B",
     "faculty": "SM",
     "room": "CEP-102",
     "is_elective": false
@@ -2477,10 +2322,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "SC223",
-    "section": "A",
     "faculty": "AKT",
     "room": "CEP-102",
     "is_elective": false
@@ -2488,10 +2332,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT216",
-    "section": "A",
     "faculty": "PB",
     "room": "CEP-102",
     "is_elective": false
@@ -2499,10 +2342,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "HM216",
-    "section": "B",
     "faculty": "JJ",
     "room": "CEP-110",
     "is_elective": false
@@ -2510,10 +2352,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
-    "course_code": "IT227",
-    "section": "B",
+    "start": "14:00",
+    "end": "14:50",
+    "course_code": "IT227(B)",
     "faculty": "AMK",
     "room": "CEP-110",
     "is_elective": false
@@ -2521,10 +2362,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "CT204",
-    "section": "A",
     "faculty": "RLD",
     "room": "CEP-110",
     "is_elective": false
@@ -2532,10 +2372,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "SC223",
-    "section": "B",
     "faculty": "MKR",
     "room": "CEP-110",
     "is_elective": false
@@ -2543,10 +2382,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT216",
-    "section": "B",
     "faculty": "RM",
     "room": "CEP-110",
     "is_elective": false
@@ -2554,10 +2392,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "MC216",
-    "section": null,
     "faculty": "SCN",
     "room": "CEP-103",
     "is_elective": false
@@ -2565,10 +2402,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "MC211",
-    "section": null,
     "faculty": "MS",
     "room": "CEP-203",
     "is_elective": false
@@ -2576,10 +2412,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "MC213",
-    "section": null,
     "faculty": "SB3",
     "room": "CEP-203",
     "is_elective": false
@@ -2587,10 +2422,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "MC214",
-    "section": null,
     "faculty": "MC",
     "room": "CEP-203",
     "is_elective": false
@@ -2598,10 +2432,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "ED213",
-    "section": null,
     "faculty": "HP",
     "room": "CEP-104",
     "is_elective": false
@@ -2609,10 +2442,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "ED211",
-    "section": null,
     "faculty": "YV",
     "room": "CEP-104",
     "is_elective": false
@@ -2620,10 +2452,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "ED214",
-    "section": null,
     "faculty": "BM",
     "room": "CEP-104",
     "is_elective": false
@@ -2631,10 +2462,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "ED212",
-    "section": null,
     "faculty": "PK",
     "room": "CEP-104",
     "is_elective": false
@@ -2642,10 +2472,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "PC613",
-    "section": null,
     "faculty": "NB",
     "room": "CEP-207",
     "is_elective": false
@@ -2653,10 +2482,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "SC612",
-    "section": null,
     "faculty": "GP",
     "room": "CEP-207",
     "is_elective": false
@@ -2664,10 +2492,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT623",
-    "section": null,
     "faculty": "SP",
     "room": "CEP-207",
     "is_elective": false
@@ -2675,32 +2502,19 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT603",
-    "section": null,
     "faculty": "SM1",
     "room": "CEP-207",
     "is_elective": false
   },
   {
     "batch": "MSc IT (Core)",
-    "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
-    "course_code": "IT643",
-    "section": null,
-    "faculty": "AC",
-    "room": "CEP-209",
-    "is_elective": false
-  },
-  {
-    "batch": "MSc IT (Core)",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT644",
-    "section": null,
     "faculty": "JL",
     "room": "CEP-209",
     "is_elective": false
@@ -2708,10 +2522,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "DS601",
-    "section": null,
     "faculty": "BC",
     "room": "LAB A-SF",
     "is_elective": false
@@ -2719,10 +2532,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "DS604",
-    "section": null,
     "faculty": "PMJ",
     "room": "LAB A-SF",
     "is_elective": false
@@ -2730,10 +2542,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "DS602",
-    "section": null,
     "faculty": "SB3",
     "room": "LAB A-SF",
     "is_elective": false
@@ -2741,54 +2552,59 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "DS605",
-    "section": null,
     "faculty": "AR2",
+    "room": "LAB A-SF",
+    "is_elective": false
+  },
+  {
+    "batch": "MSc DS (Core)",
+    "day": "Friday",
+    "start": "14:00",
+    "end": "14:50",
+    "course_code": "DS635",
+    "faculty": "AC",
     "room": "LAB A-SF",
     "is_elective": false
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IE494",
-    "section": null,
     "faculty": "PMJ",
-    "room": "CEP-106",
+    "room": "LT-2",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "SC404",
-    "section": null,
     "faculty": "GD",
-    "room": "CEP-106",
-    "is_elective": true
-  },
-  {
-    "batch": "Elective",
-    "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
-    "course_code": "IT462",
-    "section": null,
-    "faculty": "GP",
     "room": "CEP-202",
     "is_elective": true
   },
   {
     "batch": "Elective",
+    "day": "Wednesday",
+    "start": "14:00",
+    "end": "14:50",
+    "course_code": "IT462",
+    "faculty": "GP",
+    "room": "CEP-209",
+    "is_elective": true
+  },
+  {
+    "batch": "Elective",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "EL470",
-    "section": null,
     "faculty": "AB",
     "room": "CEP-103",
     "is_elective": true
@@ -2796,10 +2612,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IE402",
-    "section": null,
     "faculty": "NKS",
     "room": "CEP-103",
     "is_elective": true
@@ -2807,43 +2622,39 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "CT437",
-    "section": null,
     "faculty": "HP",
-    "room": "CEP-103",
+    "room": "CEP-107",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "SC451",
-    "section": null,
     "faculty": "VS",
-    "room": "CEP-108",
+    "room": "CEP-105",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT543",
-    "section": null,
     "faculty": "MKR",
-    "room": "CEP-103",
+    "room": "CEP-204",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "EL453",
-    "section": null,
     "faculty": "RP",
     "room": "CEP-106",
     "is_elective": true
@@ -2851,10 +2662,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IE424",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-106",
     "is_elective": true
@@ -2862,32 +2672,29 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IE415",
-    "section": null,
     "faculty": "SK",
-    "room": "CEP-202",
+    "room": "CEP-108",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "HM405",
-    "section": null,
     "faculty": "GM",
-    "room": "CEP-105",
+    "room": "CEP-108",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "SC301",
-    "section": null,
     "faculty": "AT",
     "room": "CEP-103",
     "is_elective": true
@@ -2895,10 +2702,9 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "EL413",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-108",
     "is_elective": true
@@ -2906,10 +2712,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IE406",
-    "section": null,
     "faculty": "AC1",
     "room": "CEP-108",
     "is_elective": true
@@ -2917,10 +2722,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "EL526",
-    "section": null,
     "faculty": "MG",
     "room": "CEP-203",
     "is_elective": true
@@ -2928,21 +2732,19 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "HM432",
-    "section": null,
     "faculty": "NB",
-    "room": "CEP-107",
+    "room": "CEP-106",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT524",
-    "section": null,
     "faculty": "MVJ",
     "room": "CEP-106",
     "is_elective": true
@@ -2950,10 +2752,9 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "DS401",
-    "section": null,
     "faculty": "AT4",
     "room": "CEP-204",
     "is_elective": true
@@ -2961,43 +2762,39 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IE403",
-    "section": null,
     "faculty": "PKS",
-    "room": "CEP-202",
+    "room": "CEP-207",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT550",
-    "section": null,
     "faculty": "SM1",
-    "room": "CEP-205",
+    "room": "CEP-103",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "HM406",
-    "section": null,
     "faculty": "RB",
-    "room": "CEP-202",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "SC477",
-    "section": null,
     "faculty": "GD",
     "room": "CEP-108",
     "is_elective": true
@@ -3005,10 +2802,9 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT582",
-    "section": null,
     "faculty": "SM",
     "room": "CEP-202",
     "is_elective": true
@@ -3016,10 +2812,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IE411",
-    "section": null,
     "faculty": "AMM",
     "room": "CEP-204",
     "is_elective": true
@@ -3027,10 +2822,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "CT546",
-    "section": null,
     "faculty": "MK2",
     "room": "CEP-104",
     "is_elective": true
@@ -3038,21 +2832,19 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IE420",
-    "section": null,
     "faculty": "TKM",
-    "room": "CEP-212",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "IT580",
-    "section": null,
     "faculty": "MLD",
     "room": "CEP-209",
     "is_elective": true
@@ -3060,10 +2852,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "EL412",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-106",
     "is_elective": true
@@ -3071,21 +2862,19 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "14:00",
+    "end": "14:50",
     "course_code": "EL518",
-    "section": null,
     "faculty": "TKM",
-    "room": "CEP-212",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Btech 2nd Yr",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "CT204",
-    "section": "B",
     "faculty": "SM",
     "room": "CEP-102",
     "is_elective": false
@@ -3093,10 +2882,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "SC223",
-    "section": "A",
     "faculty": "AKT",
     "room": "CEP-102",
     "is_elective": false
@@ -3104,10 +2892,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT216",
-    "section": "A",
     "faculty": "PB",
     "room": "LT-2",
     "is_elective": false
@@ -3115,10 +2902,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "HM216",
-    "section": "A",
     "faculty": "PD",
     "room": "CEP-102",
     "is_elective": false
@@ -3126,10 +2912,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT227",
-    "section": "A",
     "faculty": "SB",
     "room": "LT-2",
     "is_elective": false
@@ -3137,10 +2922,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "CT204",
-    "section": "A",
     "faculty": "RLD",
     "room": "CEP-110",
     "is_elective": false
@@ -3148,10 +2932,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "SC223",
-    "section": "B",
     "faculty": "MKR",
     "room": "CEP-110",
     "is_elective": false
@@ -3159,10 +2942,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT216",
-    "section": "B",
     "faculty": "RM",
     "room": "LT-3",
     "is_elective": false
@@ -3170,10 +2952,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "HM216",
-    "section": "B",
     "faculty": "JJ",
     "room": "CEP-110",
     "is_elective": false
@@ -3181,10 +2962,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
-    "course_code": "IT227",
-    "section": "B",
+    "start": "15:00",
+    "end": "15:50",
+    "course_code": "IT227(B)",
     "faculty": "AMK",
     "room": "LT-3",
     "is_elective": false
@@ -3192,10 +2972,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "MC211",
-    "section": null,
     "faculty": "MS",
     "room": "CEP-203",
     "is_elective": false
@@ -3203,10 +2982,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "MC213",
-    "section": null,
     "faculty": "SB3",
     "room": "CEP-203",
     "is_elective": false
@@ -3214,10 +2992,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "MC214",
-    "section": null,
     "faculty": "MC",
     "room": "CEP-203",
     "is_elective": false
@@ -3225,10 +3002,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "MC216",
-    "section": null,
     "faculty": "SCN",
     "room": "CEP-103",
     "is_elective": false
@@ -3236,10 +3012,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "ED211",
-    "section": null,
     "faculty": "YV",
     "room": "CEP-104",
     "is_elective": false
@@ -3247,10 +3022,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Wednesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "ED212",
-    "section": null,
     "faculty": "PK",
     "room": "CEP-104",
     "is_elective": false
@@ -3258,10 +3032,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "ED213",
-    "section": null,
     "faculty": "HP",
     "room": "CEP-104",
     "is_elective": false
@@ -3269,10 +3042,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT623",
-    "section": null,
     "faculty": "SP",
     "room": "CEP-207",
     "is_elective": false
@@ -3280,10 +3052,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT603",
-    "section": null,
     "faculty": "SM1",
     "room": "CEP-207",
     "is_elective": false
@@ -3291,10 +3062,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "PC613",
-    "section": null,
     "faculty": "NB",
     "room": "CEP-207",
     "is_elective": false
@@ -3302,10 +3072,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "SC612",
-    "section": null,
     "faculty": "GP",
     "room": "CEP-207",
     "is_elective": false
@@ -3313,32 +3082,19 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT644",
-    "section": null,
     "faculty": "JL",
-    "room": "CEP-209",
-    "is_elective": false
-  },
-  {
-    "batch": "MSc IT (Core)",
-    "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
-    "course_code": "IT643",
-    "section": null,
-    "faculty": "AC",
     "room": "CEP-209",
     "is_elective": false
   },
   {
     "batch": "MSc DS (Core)",
     "day": "Monday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "DS602",
-    "section": null,
     "faculty": "SB3",
     "room": "LAB A-SF",
     "is_elective": false
@@ -3346,10 +3102,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Tuesday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "DS605",
-    "section": null,
     "faculty": "AR2",
     "room": "LAB A-SF",
     "is_elective": false
@@ -3357,10 +3112,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Thursday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "DS601",
-    "section": null,
     "faculty": "BC",
     "room": "LAB A-SF",
     "is_elective": false
@@ -3368,10 +3122,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Friday",
-    "start": "12:00",
-    "end": "12:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "DS604",
-    "section": null,
     "faculty": "PMJ",
     "room": "LAB A-SF",
     "is_elective": false
@@ -3379,21 +3132,19 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT462",
-    "section": null,
     "faculty": "GP",
-    "room": "CEP-202",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "EL470",
-    "section": null,
     "faculty": "AB",
     "room": "CEP-103",
     "is_elective": true
@@ -3401,10 +3152,9 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IE402",
-    "section": null,
     "faculty": "NKS",
     "room": "CEP-103",
     "is_elective": true
@@ -3412,43 +3162,39 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IE494",
-    "section": null,
     "faculty": "PMJ",
-    "room": "CEP-106",
+    "room": "LT-2",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "SC404",
-    "section": null,
     "faculty": "GD",
-    "room": "CEP-106",
+    "room": "CEP-202",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT543",
-    "section": null,
     "faculty": "MKR",
-    "room": "CEP-103",
+    "room": "CEP-204",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "EL453",
-    "section": null,
     "faculty": "RP",
     "room": "CEP-106",
     "is_elective": true
@@ -3456,10 +3202,9 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IE424",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-106",
     "is_elective": true
@@ -3467,32 +3212,29 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "CT437",
-    "section": null,
     "faculty": "HP",
-    "room": "CEP-103",
+    "room": "CEP-107",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "SC451",
-    "section": null,
     "faculty": "VS",
-    "room": "CEP-108",
+    "room": "CEP-105",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "SC301",
-    "section": null,
     "faculty": "AT",
     "room": "CEP-103",
     "is_elective": true
@@ -3500,10 +3242,9 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "EL413",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-108",
     "is_elective": true
@@ -3511,10 +3252,9 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IE406",
-    "section": null,
     "faculty": "AC1",
     "room": "CEP-108",
     "is_elective": true
@@ -3522,32 +3262,29 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IE415",
-    "section": null,
     "faculty": "SK",
-    "room": "CEP-202",
+    "room": "CEP-108",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "HM405",
-    "section": null,
     "faculty": "GM",
-    "room": "CEP-105",
+    "room": "CEP-108",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT524",
-    "section": null,
     "faculty": "MVJ",
     "room": "CEP-106",
     "is_elective": true
@@ -3555,10 +3292,9 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "DS401",
-    "section": null,
     "faculty": "AT4",
     "room": "CEP-204",
     "is_elective": true
@@ -3566,21 +3302,19 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IE403",
-    "section": null,
     "faculty": "PKS",
-    "room": "CEP-202",
+    "room": "CEP-207",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "EL526",
-    "section": null,
     "faculty": "MG",
     "room": "CEP-203",
     "is_elective": true
@@ -3588,21 +3322,19 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "HM432",
-    "section": null,
     "faculty": "NB",
-    "room": "CEP-107",
+    "room": "CEP-106",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "SC477",
-    "section": null,
     "faculty": "GD",
     "room": "CEP-108",
     "is_elective": true
@@ -3610,10 +3342,9 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT582",
-    "section": null,
     "faculty": "SM",
     "room": "CEP-202",
     "is_elective": true
@@ -3621,10 +3352,9 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IE411",
-    "section": null,
     "faculty": "AMM",
     "room": "CEP-204",
     "is_elective": true
@@ -3632,43 +3362,39 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT550",
-    "section": null,
     "faculty": "SM1",
-    "room": "CEP-205",
+    "room": "CEP-103",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "HM406",
-    "section": null,
     "faculty": "RB",
-    "room": "CEP-202",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IE420",
-    "section": null,
     "faculty": "TKM",
-    "room": "CEP-212",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "CT546",
-    "section": null,
     "faculty": "MK2",
     "room": "CEP-104",
     "is_elective": true
@@ -3676,10 +3402,9 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "EL412",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-106",
     "is_elective": true
@@ -3687,10 +3412,9 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "IT580",
-    "section": null,
     "faculty": "MLD",
     "room": "CEP-209",
     "is_elective": true
@@ -3698,21 +3422,19 @@
   {
     "batch": "Elective",
     "day": "Wednesday",
-    "start": "3:00",
-    "end": "3:50",
+    "start": "15:00",
+    "end": "15:50",
     "course_code": "EL518",
-    "section": null,
     "faculty": "TKM",
-    "room": "CEP-212",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Btech 2nd Yr",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT216",
-    "section": "A",
     "faculty": "PB",
     "room": "LT-2",
     "is_elective": false
@@ -3720,10 +3442,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "HM216",
-    "section": "A",
     "faculty": "PD",
     "room": "CEP-102",
     "is_elective": false
@@ -3731,10 +3452,9 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "CT204",
-    "section": "B",
     "faculty": "SM",
     "room": "CEP-102",
     "is_elective": false
@@ -3742,109 +3462,99 @@
   {
     "batch": "Btech 2nd Yr",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "SC223",
-    "section": "A",
     "faculty": "AKT",
     "room": "CEP-102",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT216",
-    "section": "B",
     "faculty": "RM",
     "room": "LT-3",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "HM216",
-    "section": "B",
     "faculty": "JJ",
     "room": "CEP-110",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "CT204",
-    "section": "A",
     "faculty": "RLD",
     "room": "CEP-110",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "SC223",
-    "section": "B",
     "faculty": "MKR",
     "room": "CEP-110",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "MC214",
-    "section": null,
     "faculty": "MC",
     "room": "CEP-203",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "MC211",
-    "section": null,
     "faculty": "MS",
     "room": "CEP-203",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "MC213",
-    "section": null,
     "faculty": "SB3",
     "room": "CEP-203",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "ED212",
-    "section": null,
     "faculty": "PK",
     "room": "CEP-104",
     "is_elective": false
   },
   {
-    "batch": "Btech 2nd Yr",
+    "batch": "Unknown",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "ED211",
-    "section": null,
     "faculty": "YV",
     "room": "CEP-104",
     "is_elective": false
@@ -3852,10 +3562,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "PC613",
-    "section": null,
     "faculty": "NB",
     "room": "CEP-207",
     "is_elective": false
@@ -3863,10 +3572,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT623",
-    "section": null,
     "faculty": "SP",
     "room": "CEP-207",
     "is_elective": false
@@ -3874,10 +3582,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT603",
-    "section": null,
     "faculty": "SM1",
     "room": "CEP-207",
     "is_elective": false
@@ -3885,10 +3592,9 @@
   {
     "batch": "MSc IT (Core)",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT644",
-    "section": null,
     "faculty": "JL",
     "room": "CEP-209",
     "is_elective": false
@@ -3896,10 +3602,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "DS601",
-    "section": null,
     "faculty": "BC",
     "room": "LAB A-SF",
     "is_elective": false
@@ -3907,10 +3612,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "DS602",
-    "section": null,
     "faculty": "SB3",
     "room": "LAB A-SF",
     "is_elective": false
@@ -3918,10 +3622,9 @@
   {
     "batch": "MSc DS (Core)",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "DS605",
-    "section": null,
     "faculty": "AR2",
     "room": "LAB A-SF",
     "is_elective": false
@@ -3929,10 +3632,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IE402",
-    "section": null,
     "faculty": "NKS",
     "room": "CEP-103",
     "is_elective": true
@@ -3940,32 +3642,29 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IE494",
-    "section": null,
     "faculty": "PMJ",
-    "room": "CEP-106",
+    "room": "LT-2",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT462",
-    "section": null,
     "faculty": "GP",
-    "room": "CEP-202",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "EL470",
-    "section": null,
     "faculty": "AB",
     "room": "CEP-103",
     "is_elective": true
@@ -3973,10 +3672,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IE424",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-106",
     "is_elective": true
@@ -3984,32 +3682,29 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "CT437",
-    "section": null,
     "faculty": "HP",
-    "room": "CEP-103",
+    "room": "CEP-107",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT543",
-    "section": null,
     "faculty": "MKR",
-    "room": "CEP-103",
+    "room": "CEP-204",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "EL453",
-    "section": null,
     "faculty": "RP",
     "room": "CEP-106",
     "is_elective": true
@@ -4017,10 +3712,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IE406",
-    "section": null,
     "faculty": "AC1",
     "room": "CEP-108",
     "is_elective": true
@@ -4028,21 +3722,19 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IE415",
-    "section": null,
     "faculty": "SK",
-    "room": "CEP-202",
+    "room": "CEP-108",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "SC301",
-    "section": null,
     "faculty": "AT",
     "room": "CEP-103",
     "is_elective": true
@@ -4050,10 +3742,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "EL413",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-108",
     "is_elective": true
@@ -4061,21 +3752,19 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IE403",
-    "section": null,
     "faculty": "PKS",
-    "room": "CEP-202",
+    "room": "CEP-207",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "EL526",
-    "section": null,
     "faculty": "MG",
     "room": "CEP-203",
     "is_elective": true
@@ -4083,10 +3772,9 @@
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT524",
-    "section": null,
     "faculty": "MVJ",
     "room": "CEP-106",
     "is_elective": true
@@ -4094,10 +3782,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "DS401",
-    "section": null,
     "faculty": "AT4",
     "room": "CEP-204",
     "is_elective": true
@@ -4105,10 +3792,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IE411",
-    "section": null,
     "faculty": "AMM",
     "room": "CEP-204",
     "is_elective": true
@@ -4116,21 +3802,19 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT550",
-    "section": null,
     "faculty": "SM1",
-    "room": "CEP-205",
+    "room": "CEP-103",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Thursday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "SC477",
-    "section": null,
     "faculty": "GD",
     "room": "CEP-108",
     "is_elective": true
@@ -4138,10 +3822,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT582",
-    "section": null,
     "faculty": "SM",
     "room": "CEP-202",
     "is_elective": true
@@ -4149,21 +3832,19 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IE420",
-    "section": null,
     "faculty": "TKM",
-    "room": "CEP-212",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "CT546",
-    "section": null,
     "faculty": "MK2",
     "room": "CEP-104",
     "is_elective": true
@@ -4171,10 +3852,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "EL412",
-    "section": null,
     "faculty": "VSP",
     "room": "CEP-106",
     "is_elective": true
@@ -4182,10 +3862,9 @@
   {
     "batch": "Elective",
     "day": "Tuesday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "IT580",
-    "section": null,
     "faculty": "MLD",
     "room": "CEP-209",
     "is_elective": true
@@ -4193,32 +3872,29 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "4:00",
-    "end": "4:50",
+    "start": "16:00",
+    "end": "16:50",
     "course_code": "EL518",
-    "section": null,
     "faculty": "TKM",
-    "room": "CEP-212",
+    "room": "CEP-209",
     "is_elective": true
   },
   {
-    "batch": "Btech Core (year unspecified in source \u2014 verify manually)",
+    "batch": "Btech Core",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "CS374",
-    "section": null,
     "faculty": "PK2",
     "room": "CEP-202",
     "is_elective": false
   },
   {
-    "batch": "Btech Core (year unspecified in source \u2014 verify manually)",
+    "batch": "Btech Core",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "CS374",
-    "section": null,
     "faculty": "PK2",
     "room": "CEP-203",
     "is_elective": false
@@ -4226,10 +3902,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "CT505",
-    "section": null,
     "faculty": "AJ",
     "room": "CEP-103",
     "is_elective": true
@@ -4237,10 +3912,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "CT505",
-    "section": null,
     "faculty": "AJ",
     "room": "CEP-103",
     "is_elective": true
@@ -4248,10 +3922,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "EL467",
-    "section": null,
     "faculty": "YA",
     "room": "CEP-106",
     "is_elective": true
@@ -4259,10 +3932,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "EL467",
-    "section": null,
     "faculty": "YA",
     "room": "CEP-106",
     "is_elective": true
@@ -4270,10 +3942,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "EL411",
-    "section": null,
     "faculty": "HSJ",
     "room": "CEP-108",
     "is_elective": true
@@ -4281,10 +3952,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "EL411",
-    "section": null,
     "faculty": "HSJ",
     "room": "CEP-108",
     "is_elective": true
@@ -4292,10 +3962,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT457",
-    "section": null,
     "faculty": "PKS",
     "room": "CEP-102",
     "is_elective": true
@@ -4303,10 +3972,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT457",
-    "section": null,
     "faculty": "PKS",
     "room": "CEP-102",
     "is_elective": true
@@ -4314,10 +3982,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT594",
-    "section": null,
     "faculty": "SDG",
     "room": "CEP-204",
     "is_elective": true
@@ -4325,10 +3992,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT594",
-    "section": null,
     "faculty": "SDG",
     "room": "CEP-204",
     "is_elective": true
@@ -4336,10 +4002,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT531",
-    "section": null,
     "faculty": "AG1",
     "room": "CEP-207",
     "is_elective": true
@@ -4347,10 +4012,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT531",
-    "section": null,
     "faculty": "AG1",
     "room": "CEP-207",
     "is_elective": true
@@ -4358,10 +4022,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT586",
-    "section": null,
     "faculty": "AS",
     "room": "CEP-110",
     "is_elective": true
@@ -4369,10 +4032,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT586",
-    "section": null,
     "faculty": "AS",
     "room": "CEP-110",
     "is_elective": true
@@ -4380,10 +4042,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT433",
-    "section": null,
     "faculty": "VK",
     "room": "CEP-212",
     "is_elective": true
@@ -4391,10 +4052,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT433",
-    "section": null,
     "faculty": "VK",
     "room": "CEP-212",
     "is_elective": true
@@ -4402,10 +4062,9 @@
   {
     "batch": "Elective",
     "day": "Monday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT627",
-    "section": null,
     "faculty": "AM1",
     "room": "CEP-209",
     "is_elective": true
@@ -4413,10 +4072,9 @@
   {
     "batch": "Elective",
     "day": "Friday",
-    "start": "5:00",
-    "end": "5:50",
+    "start": "17:00",
+    "end": "17:50",
     "course_code": "IT627",
-    "section": null,
     "faculty": "AM1",
     "room": "CEP-209",
     "is_elective": true

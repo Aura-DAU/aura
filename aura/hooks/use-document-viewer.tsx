@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useCallback, useContext, useMemo, useState } from "react"
+import { prefetchDocumentContent } from "@/lib/document-cache"
 
 export interface DocumentViewerTarget {
   /** Relative path to the markdown source, e.g. "infrastructure/ict_infrastructure.md". */
@@ -29,11 +30,12 @@ export function DocumentViewerProvider({ children }: { children: React.ReactNode
     setIsOpen(true)
   }, [])
 
-  // Called on hover so the drawer's fetch (in DocumentViewerSheet) has a
-  // head start by the time the user clicks — the sheet itself owns the
-  // request/cache, this just primes `target` without opening the panel.
+  // Warm the module cache on hover. Never mutate `target` here — that used to
+  // swap the open sheet's document when the user hovered a different citation.
   const prefetchDocument = useCallback((next: DocumentViewerTarget) => {
-    setTarget((prev) => (prev?.path === next.path ? prev : next))
+    void prefetchDocumentContent(next.path).catch(() => {
+      /* prefetch is best-effort */
+    })
   }, [])
 
   const closeDocument = useCallback(() => setIsOpen(false), [])
