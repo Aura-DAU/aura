@@ -72,6 +72,13 @@ Determine:
       "Board of Studies Chairman"
     If the query already uses formal/document-like terminology, return an
     empty array — do not pad with redundant terms.
+    Do NOT invent an expansion for an acronym or short ambiguous term you are
+    not confident about (e.g. do not guess that "cot" means some
+    committee/council/body just because DAU has committees). If a short
+    term has an ordinary plain-English meaning (e.g. "cot" = a bed), include
+    that plain meaning as a candidate expanded term rather than fabricating
+    an institution-specific acronym expansion — retrieval should be allowed
+    to find the literal sense, not steered toward a guessed one.
 
 ------------------------------------------------------------
 VALID VALUES
