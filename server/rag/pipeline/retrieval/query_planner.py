@@ -269,6 +269,40 @@ Output
   "retrieval_hints":{}
 }
 
+Staff/officer designation contact lookup
+
+Query
+
+What is the mail id of the sports officer?
+
+Output
+
+{
+  "category":"faculty",
+  "intent":"contact",
+  "retrieval_intent":"faculty_contact",
+  "entity_confidence":0.9,
+  "multi_entity_query":false,
+  "entities":{
+    "designation":"Sports Officer"
+  },
+  "query_decomposition":null,
+  "retrieval_hints":{
+    "required_sections":["Sports Officer", "Officers and Staff", "Contact", "Contact Information"]
+  }
+}
+
+A query naming a specific job title/designation (e.g. "Sports Officer", "Warden", "Assistant
+Registrar", "Chief Proctor") — rather than a person's name or a committee/body — should be
+treated the same way as a faculty-name lookup: extract the exact designation text into
+`entities.designation`, and put that exact designation string into
+`retrieval_hints.required_sections` so retrieval can find the staff-directory entry for that
+literal title (e.g. DAU's staff list), not just documents about the broader committee/body the
+role sits under. Do NOT collapse a specific designation like "Sports Officer" into the name of
+the committee it's associated with (e.g. "Sports Committee") — they are different entities, and
+routing on the committee name alone will surface the committee's office-bearers (Convener,
+Deputy Convener) instead of the actually-named designation.
+
 Alumni profile lookup
 
 Query
