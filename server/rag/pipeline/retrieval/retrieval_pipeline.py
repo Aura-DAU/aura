@@ -730,6 +730,19 @@ class RetrievalPipeline:
         best_match = matches[0]
         s1 = best_match[1]
         if s1 >= 80.0:
+            if not self._first_name_agrees(cleaned.lower(), best_match[0]):
+                # WRatio rewards partial/substring overlap, so a query like
+                # "hari sharma" can score ~85 against "madhu kant sharma"
+                # purely because the surname matches — even though it's a
+                # completely different person. Don't silently swap in the
+                # wrong faculty member just because the surname matched;
+                # require the first name to be reasonably close too.
+                logger.info(
+                    "Rejected fuzzy faculty match '%s' (cleaned: '%s') -> '%s' "
+                    "(Score: %.2f): first name does not match closely enough",
+                    name, cleaned, self.faculty_names_map[best_match[0]], s1,
+                )
+                return name
             if len(matches) == 1:
                 corrected = self.faculty_names_map[best_match[0]]
                 logger.info("Fuzzy matched faculty name '%s' (cleaned: '%s') to '%s' (Score: %.2f)", name, cleaned, corrected, s1)
@@ -741,6 +754,31 @@ class RetrievalPipeline:
                 return corrected
                 
         return name
+
+    @staticmethod
+    def _first_name_agrees(query_lower: str, candidate_lower: str, threshold: float = 60.0) -> bool:
+        """Guard against surname-only fuzzy matches swapping in the wrong person.
+
+        `fuzz.WRatio` rewards overlapping substrings, so a query like "hari
+        sharma" can score ~85 against "madhu kant sharma" purely because of
+        the shared "sharma" — even though the actual person is completely
+        different. Require the first name (first token) to also be a
+        reasonably close match before trusting the correction, unless the
+        whole query is already near-identical to the candidate (a plain
+        typo, e.g. "hari shrma" -> "hari sharma") or the query is a bare
+        single-token surname with nothing to compare.
+        """
+        from rapidfuzz import fuzz
+
+        if fuzz.ratio(query_lower, candidate_lower) >= 92.0:
+            return True
+
+        q_tokens = query_lower.split()
+        c_tokens = candidate_lower.split()
+        if len(q_tokens) < 2 or not c_tokens:
+            return True
+
+        return fuzz.ratio(q_tokens[0], c_tokens[0]) >= threshold
 
     @staticmethod
     def _should_speculate(query: str) -> bool:
