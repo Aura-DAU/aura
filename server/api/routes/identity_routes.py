@@ -135,7 +135,16 @@ def _validate_email_domain(email: str) -> None:
 
 
 def _infer_role_and_cohort(email: str) -> dict:
-    """Infer student/faculty/guest role, branch (dept), and default cohort from email."""
+    """Infer student/faculty/guest role, branch (dept), and default cohort from email.
+
+    Branch is read off digits 5-6 (0-indexed [4:6]) of the 9-digit student id,
+    e.g. 202601010 -> "01". Current (2026 batch) mapping:
+        01 ICT/CS   03 MnC   04 EVD   05 CS-AI   06 ECE-AI
+        31 BS-MS DS 32 BS-MS IT
+    (11/12/18/21 are existing PG/PhD codes, unrelated to this table.)
+    Digits 5-7 == "014" is the pre-existing ICT-CS specialization override
+    within the 01 (ICT) branch and takes precedence over the 2-digit table.
+    """
     prefix = email.split("@")[0].lower().strip()
     role = "guest"
     erp_id = f"GUEST_{prefix.upper()}"
@@ -165,6 +174,10 @@ def _infer_role_and_cohort(email: str) -> dict:
             dept = "MnC"
         elif prog2 == "04":
             dept = "EVD"
+        elif prog2 == "05":
+            dept = "CSAI"
+        elif prog2 == "06":
+            dept = "ECEAI"
         elif prog2 == "11":
             dept = "MTech"
         elif prog2 == "12":
@@ -173,6 +186,10 @@ def _infer_role_and_cohort(email: str) -> dict:
             dept = "MScDS"
         elif prog2 == "21":
             dept = "PhD"
+        elif prog2 == "31":
+            dept = "BSMSDS"
+        elif prog2 == "32":
+            dept = "BSMSIT"
         else:
             dept = "ICT"
 
@@ -272,4 +289,3 @@ def resolve_identity(
         "current_sem": current_sem,
         "current_sec": current_sec,
     }
-
