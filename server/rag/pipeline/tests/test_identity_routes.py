@@ -109,6 +109,26 @@ def test_branch_code_evd():
     assert _student_dept("202404001") == "EVD"
 
 
+def test_branch_code_csai():
+    # prog code "05" (e.g. 202605001) → CSAI
+    assert _student_dept("202605001") == "CSAI"
+
+
+def test_branch_code_eceai():
+    # prog code "06" (e.g. 202606001) → ECEAI
+    assert _student_dept("202606001") == "ECEAI"
+
+
+def test_branch_code_bsms_ds():
+    # prog code "31" (e.g. 202631001) → BSMSDS
+    assert _student_dept("202631001") == "BSMSDS"
+
+
+def test_branch_code_bsms_it():
+    # prog code "32" (e.g. 202632001) → BSMSIT
+    assert _student_dept("202632001") == "BSMSIT"
+
+
 def test_branch_code_mtech():
     # prog code "11" (e.g. 202411001) → MTech
     assert _student_dept("202411001") == "MTech"
