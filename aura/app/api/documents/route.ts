@@ -18,7 +18,7 @@ function isSafeDocumentPath(path: string): boolean {
   if (path.startsWith("/")) return false
   if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(path)) return false
   if (path.split("/").some((segment) => segment === "..")) return false
-  return /^[A-Za-z0-9._/-]+$/.test(path)
+  return /^[A-Za-z0-9 ()\[\]._/-]+$/.test(path)
 }
 
 export async function GET(req: Request) {
