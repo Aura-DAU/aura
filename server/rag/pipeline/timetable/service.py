@@ -117,6 +117,50 @@ def _fmt_time(t) -> str:
     return t.strftime("%H:%M")
 
 
+def _resolve_faculty_initials(identity) -> Optional[str]:
+    """Best-effort resolution of a faculty member's short initials (e.g.
+    'AM1'), used to look up their teaching schedule in timetable_master.
+    Mirrors _resolve_dept() above: the REST /timetable/me path already
+    carries faculty_initials on the JWT, but the chat/agent path keeps its
+    internal JWT deliberately minimal (role/erp_id/department/email only),
+    so this falls back to a DB lookup — and, if that row itself doesn't
+    have it cached yet, to re-inferring it from FACULTY_INITIALS the same
+    way resolve_identity() does at login. Never raises: a faculty member
+    whose initials can't be determined simply gets no personal schedule
+    rather than an error."""
+    initials = _field(identity, "faculty_initials")
+    if initials:
+        return str(initials)
+
+    erp_id = _field(identity, "erp_id")
+    email = _field(identity, "email")
+
+    try:
+        if erp_id:
+            rows = db_conn.query(
+                "SELECT faculty_initials, email FROM user_identity_map WHERE erp_id = %s AND is_active = TRUE",
+                (erp_id,),
+            )
+            if rows:
+                r = rows[0]
+                if r.get("faculty_initials"):
+                    return str(r["faculty_initials"])
+                email = email or r.get("email")
+    except Exception:
+        pass
+
+    if email:
+        try:
+            from api.routes.identity_routes import _infer_role_and_cohort
+            inferred = _infer_role_and_cohort(email)
+            if inferred.get("faculty_initials"):
+                return str(inferred["faculty_initials"])
+        except Exception:
+            pass
+
+    return None
+
+
 def _resolve_dept(identity) -> Optional[str]:
     """Best-effort resolution of the student's branch/department (e.g. 'ICT',
     'MnC', 'ICTCS'), used to keep two different branches that happen to share
@@ -708,7 +752,7 @@ def get_faculty_timetable(identity) -> dict:
     if role != "faculty":
         raise TimetableForbiddenError("This tool is only available to faculty members.")
 
-    faculty_name = _field(identity, "faculty_initials") or _field(identity, "erp_id")
+    faculty_name = _resolve_faculty_initials(identity) or _field(identity, "erp_id")
     if not faculty_name:
         raise TimetableError(
             "Your faculty identifier is not set up in AURA. "

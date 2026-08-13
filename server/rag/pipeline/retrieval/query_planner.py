@@ -135,7 +135,7 @@ Use event_version when the question asks about:
 
 Entity Types
 
-- faculty_name
+- person_name
 - event_name
 - program_name
 - department_name
@@ -235,7 +235,7 @@ Output
   "entity_confidence":0.98,
   "multi_entity_query":false,
   "entities":{
-    "faculty_name":"Abhishek Jindal"
+    "person_name":"Abhishek Jindal"
   },
   "query_decomposition":null,
   "retrieval_hints":{}
@@ -256,7 +256,7 @@ Output
   "entity_confidence":0.98,
   "multi_entity_query":false,
   "entities":{
-    "faculty_name":"Abhishek Jindal"
+    "person_name":"Abhishek Jindal"
   },
   "query_decomposition":null,
   "retrieval_hints":{}
@@ -277,7 +277,7 @@ Output
   "entity_confidence":0.95,
   "multi_entity_query":false,
   "entities":{
-    "alumni_name":"Bharath Reddy"
+    "person_name":"Bharath Reddy"
   },
   "query_decomposition":null,
   "retrieval_hints":{}
@@ -466,7 +466,7 @@ What are Dr. Sourish Dasgupta's research areas?
   "entity_confidence": 0.98,
   "multi_entity_query": false,
   "entities": {
-    "faculty_name": "Sourish Dasgupta"
+    "person_name": "Sourish Dasgupta"
   }
 }
 
@@ -1512,7 +1512,7 @@ class QueryPlanner:
 
             entities = plan["entities"]
             
-            faculty_name = entities.get("faculty_name")
+            person_name = entities.get("person_name")
             department_name = entities.get("department_name")
             intent = plan.get("intent", "general")
             retrieval_intent = plan.get("retrieval_intent", "general")
@@ -1534,7 +1534,7 @@ class QueryPlanner:
 
                 plan["query_decomposition"] = decomposition
 
-            if faculty_name and not plan.get("multi_entity_query"):
+            if person_name and not plan.get("multi_entity_query"):
                 if retrieval_intent == "faculty_profile":
                     plan["top_k"] = 3
 
@@ -1554,7 +1554,7 @@ class QueryPlanner:
 
             if (
                 query_lower.startswith("who is")
-                and not faculty_name
+                and not person_name
             ):
                 plan["retrieval_hints"].setdefault(
                     "boost_sections",
