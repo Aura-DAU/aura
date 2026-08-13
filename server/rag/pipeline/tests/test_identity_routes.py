@@ -167,8 +167,13 @@ def test_out_of_range_student_email_resolves_as_guest():
 
 
 def test_matching_faculty_email_resolves():
+    # Patch both globals explicitly so the test is not coupled to the JSON
+    # files being present on disk in CI (faculty_initials.json is generated
+    # by build_faculty_initials.py and may not exist in the CI checkout).
     with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db, \
-         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert:
+         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert, \
+         patch("api.routes.identity_routes.FACULTY_EMAILS", {"abhishek.gupta"}), \
+         patch("api.routes.identity_routes.FACULTY_INITIALS", {"abhishek.gupta": "AG1"}):
         res = client.get("/internal/resolve-identity?email=abhishek.gupta@dau.ac.in",
                          headers=GOOD_HEADERS)
     assert res.status_code == 200
