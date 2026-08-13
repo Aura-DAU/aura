@@ -1,0 +1,22 @@
+-- ============================================================
+-- 010_faculty_initials.sql
+--
+-- Faculty counterpart to the student profile fields added in
+-- 004/005_student_profile_and_timetable.sql (full_name, current_year,
+-- current_sem, current_sec) -- populated once at Google SSO login time
+-- (see api/routes/identity_routes.py::resolve_identity) so AURA can
+-- resolve "which rows in timetable_master belong to this faculty member"
+-- the same way it already resolves a student's cohort, without ever
+-- touching the ERP DB.
+--
+-- faculty_initials is the short code (e.g. "AM1", "AJ") that
+-- scripts/import_timetable_xlsx.py already writes into
+-- timetable_master.faculty_name for every class row -- see
+-- pipeline/timetable/service.get_faculty_rows(), which matches on it.
+-- Nullable: a faculty login whose name can't yet be resolved to initials
+-- (see server/api/faculty_initials.json / build_faculty_initials.py)
+-- simply gets no personal schedule until that mapping is extended,
+-- rather than blocking login.
+-- ============================================================
+
+ALTER TABLE user_identity_map ADD COLUMN IF NOT EXISTS faculty_initials TEXT;
