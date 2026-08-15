@@ -13,6 +13,43 @@ interface FacultyDashboardProps {
 type CardState = "loading" | "done" | "error"
 
 /**
+ * Fetches today's slots from the faculty member's own teaching schedule
+ * (server/api/routes/timetable_routes.py::get_my_timetable ->
+ * service.get_faculty_timetable, resolved from timetable_master by
+ * faculty_initials — see server/api/faculty_initials.json). Formats them
+ * into the plain-text lines the schedule card renders.
+ */
+async function fetchTodaysSchedule(signal: AbortSignal): Promise<string> {
+  const res = await apiFetch("/api/timetable/me", { cache: "no-store", signal })
+  if (!res.ok) return ""
+
+  const data = (await res.json()) as {
+    timetable?: Array<{
+      day_of_week: number
+      start_time: string
+      end_time: string
+      course_code: string
+      course_name: string
+      room?: string | null
+    }>
+  }
+  const slots = data.timetable ?? []
+
+  // service.py's day_of_week is 0=Monday..6=Sunday; JS Date#getDay() is
+  // 0=Sunday..6=Saturday.
+  const todayIdx = (new Date().getDay() + 6) % 7
+  const today = slots
+    .filter((s) => s.day_of_week === todayIdx)
+    .sort((a, b) => a.start_time.localeCompare(b.start_time))
+
+  if (today.length === 0) return "No classes scheduled today."
+
+  return today
+    .map((s) => `${s.start_time}\u2013${s.end_time}  ${s.course_code} ${s.course_name}${s.room ? ` (${s.room})` : ""}`)
+    .join("\n")
+}
+
+/**
  * Fetches a single AURA chat answer for use in dashboard cards.
  * Returns the accumulated text-delta from the SSE stream.
  *
@@ -112,7 +149,7 @@ export function FacultyDashboard({
       }
 
       await Promise.all([
-        fetchDashboardAnswer("What is my teaching schedule for today?", signal)
+        fetchTodaysSchedule(signal)
           .then((text) => {
             if (signal.aborted) return
             setScheduleText(text)
@@ -161,7 +198,8 @@ export function FacultyDashboard({
       </div>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-        {/* Today's Teaching Schedule — wired to faculty_schedule via AURA chat pipeline */}
+        {/* Today's Teaching Schedule — from timetable_master via /api/timetable/me,
+            resolved by faculty_initials (see server/api/faculty_initials.json) */}
         <div className="rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5">
           <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-400">
             <Calendar className="size-3.5 text-theme-yellow" />
@@ -181,12 +219,13 @@ export function FacultyDashboard({
               </span>
               <span className="text-[10px] leading-relaxed text-neutral-600">
                 {/*
-                  Faculty schedule is derived from aggregated student timetable data.
-                  Coverage grows as more students link their eCampus accounts.
-                  TODO(unirp): Will be replaced by UniRP endpoint when routes are confirmed.
+                  Shown when this faculty account isn't yet resolved to a
+                  faculty_initials code (see server/api/faculty_initials.json
+                  and server/scripts/build_faculty_initials.py), so
+                  timetable_master can't be matched to a person yet.
                 */}
-                AURA derives your schedule from student timetable data. Coverage
-                improves as more students link eCampus.
+                AURA hasn&apos;t linked your account to a teaching schedule yet.
+                Contact the administrator if this persists.
               </span>
             </div>
           ) : (

@@ -19,12 +19,13 @@ Security:
 Returns:
   { "erp_id": "202301234", "role": "student", "department": "ICT",
     "full_name": "Parth Agrawal", "current_year": 3, "current_sem": 5,
-    "current_sec": "A" }
+    "current_sec": "A", "faculty_initials": null }
 
   full_name/current_year/current_sem/current_sec are only populated for
-  students and are used purely to render the correct timetable cohort —
-  they are never used for authorization decisions (the ERP DB remains
-  the source of truth for anything academic).
+  students; faculty_initials is only populated for faculty (see
+  FACULTY_INITIALS below). All of these are used purely to render the
+  correct timetable — they are never used for authorization decisions
+  (the ERP DB remains the source of truth for anything academic).
 
 Next.js uses this to populate the jwt() callback, then mints the internal
 JWT that FastAPI's require_identity() verifies on every chat request.
@@ -69,6 +70,22 @@ if FACULTY_EMAILS_PATH.exists():
             FACULTY_EMAILS = set(json.load(f))
     except Exception as e:
         logger.warning("Failed to load faculty_emails.json: %s", e)
+
+# Load pre-compiled email-prefix -> faculty-initials map on startup. See
+# scripts/build_faculty_initials.py for how this is derived (from the
+# faculty-wise timetable doc, cross-referenced against FACULTY_EMAILS
+# above). A prefix in FACULTY_EMAILS but absent here just means we don't
+# yet have a confident initials mapping for that person -- resolve_identity
+# still logs them in as faculty, they just get no personal schedule until
+# the mapping is extended.
+FACULTY_INITIALS_PATH = Path(__file__).resolve().parent.parent / "faculty_initials.json"
+FACULTY_INITIALS: dict[str, str] = {}
+if FACULTY_INITIALS_PATH.exists():
+    try:
+        with open(FACULTY_INITIALS_PATH, "r", encoding="utf-8") as f:
+            FACULTY_INITIALS = json.load(f)
+    except Exception as e:
+        logger.warning("Failed to load faculty_initials.json: %s", e)
 
 
 def _allowlist() -> list[str]:
@@ -152,6 +169,7 @@ def _infer_role_and_cohort(email: str) -> dict:
     year = None
     sem = None
     sec = None
+    faculty_initials = None
 
     if re.match(r"^\d{9}$", prefix):
         entry_year = int(prefix[:4])
@@ -197,6 +215,7 @@ def _infer_role_and_cohort(email: str) -> dict:
         role = "faculty"
         erp_id = f"FAC_{prefix.upper()}"
         dept = "ICT"
+        faculty_initials = FACULTY_INITIALS.get(prefix)
 
     return {
         "role": role,
@@ -205,6 +224,7 @@ def _infer_role_and_cohort(email: str) -> dict:
         "current_year": year,
         "current_sem": sem,
         "current_sec": sec,
+        "faculty_initials": faculty_initials,
     }
 
 
@@ -220,7 +240,8 @@ def resolve_identity(
     _validate_email_domain(email)
 
     rows = db_conn.query(
-        """SELECT erp_id, role, dept, full_name, current_year, current_sem, current_sec
+        """SELECT erp_id, role, dept, full_name, current_year, current_sem, current_sec,
+                  faculty_initials
            FROM user_identity_map
            WHERE email = %s AND is_active = TRUE""",
         (email.lower().strip(),),
@@ -232,12 +253,24 @@ def resolve_identity(
         sem = row.get("current_sem")
         sec = row.get("current_sec")
         dept = row.get("dept")
+        fac_initials = row.get("faculty_initials")
         if (yr is None or sem is None or not sec or not dept) and row.get("erp_id") and re.match(r"^\d{9}$", row["erp_id"]):
             inferred = _infer_role_and_cohort(email)
             yr = yr if yr is not None else inferred["current_year"]
             sem = sem if sem is not None else inferred["current_sem"]
             sec = sec if sec else inferred["current_sec"]
             dept = dept if dept else inferred["dept"]
+        if not fac_initials and row["role"] == "faculty":
+            inferred = _infer_role_and_cohort(email)
+            fac_initials = inferred["faculty_initials"]
+            if fac_initials:
+                try:
+                    db_conn.execute(
+                        "UPDATE user_identity_map SET faculty_initials = %s WHERE email = %s",
+                        (fac_initials, email.lower().strip()),
+                    )
+                except Exception as db_err:
+                    logger.warning("Failed to backfill faculty_initials for %s: %s", email, db_err)
 
         _persist_student_scope(row["erp_id"], row["role"], dept)
 
@@ -249,6 +282,7 @@ def resolve_identity(
             "current_year": yr,
             "current_sem": sem,
             "current_sec": sec,
+            "faculty_initials": fac_initials,
         }
 
     # Fallback to dynamic classification
@@ -259,20 +293,25 @@ def resolve_identity(
     current_year = inferred["current_year"]
     current_sem = inferred["current_sem"]
     current_sec = inferred["current_sec"]
+    faculty_initials = inferred["faculty_initials"]
 
     if role in ("student", "faculty"):
         try:
             db_conn.execute(
-                """INSERT INTO user_identity_map (email, erp_id, role, dept, current_year, current_sem, current_sec, is_active)
-                   VALUES (%s, %s, %s, %s, %s, %s, %s, TRUE)
+                """INSERT INTO user_identity_map
+                       (email, erp_id, role, dept, current_year, current_sem, current_sec,
+                        faculty_initials, is_active)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, TRUE)
                    ON CONFLICT (email) DO UPDATE
                    SET erp_id = EXCLUDED.erp_id, role = EXCLUDED.role,
                        dept = EXCLUDED.dept,
                        current_year = COALESCE(user_identity_map.current_year, EXCLUDED.current_year),
                        current_sem = COALESCE(user_identity_map.current_sem, EXCLUDED.current_sem),
                        current_sec = COALESCE(user_identity_map.current_sec, EXCLUDED.current_sec),
+                       faculty_initials = COALESCE(user_identity_map.faculty_initials, EXCLUDED.faculty_initials),
                        is_active = TRUE""",
-                (email.lower().strip(), erp_id, role, dept, current_year, current_sem, current_sec),
+                (email.lower().strip(), erp_id, role, dept, current_year, current_sem, current_sec,
+                 faculty_initials),
             )
         except Exception as db_err:
             logger.warning("Failed to cache dynamic user in DB: %s", db_err)
@@ -288,4 +327,6 @@ def resolve_identity(
         "current_year": current_year,
         "current_sem": current_sem,
         "current_sec": current_sec,
+        "faculty_initials": faculty_initials,
     }
+

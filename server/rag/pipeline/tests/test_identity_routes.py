@@ -167,17 +167,41 @@ def test_out_of_range_student_email_resolves_as_guest():
 
 
 def test_matching_faculty_email_resolves():
+    # Patch both globals explicitly so the test is not coupled to the JSON
+    # files being present on disk in CI (faculty_initials.json is generated
+    # by build_faculty_initials.py and may not exist in the CI checkout).
     with patch("api.routes.identity_routes.db_conn", _mock_db([])) as mock_db, \
-         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert:
+         patch("api.routes.identity_routes.upsert_student_academic_scope") as upsert, \
+         patch("api.routes.identity_routes.FACULTY_EMAILS", {"abhishek.gupta"}), \
+         patch("api.routes.identity_routes.FACULTY_INITIALS", {"abhishek.gupta": "AG1"}):
         res = client.get("/internal/resolve-identity?email=abhishek.gupta@dau.ac.in",
                          headers=GOOD_HEADERS)
     assert res.status_code == 200
     data = res.json()
     assert data["role"] == "faculty"
     assert data["erp_id"] == "FAC_ABHISHEK.GUPTA"
+    # Resolved from server/api/faculty_initials.json (Abhishek Gupta -> AG1),
+    # which is what timetable_master.faculty_name is matched against.
+    assert data["faculty_initials"] == "AG1"
     assert mock_db.execute.called
     # Faculty should not get academic-scope student rows
     upsert.assert_not_called()
+
+
+def test_faculty_without_initials_mapping_still_resolves():
+    # A known faculty email whose prefix isn't (yet) in faculty_initials.json
+    # should still log in as faculty -- just with no personal schedule until
+    # the mapping is extended, rather than failing to resolve at all.
+    with patch("api.routes.identity_routes.db_conn", _mock_db([])), \
+         patch("api.routes.identity_routes.upsert_student_academic_scope"), \
+         patch("api.routes.identity_routes.FACULTY_EMAILS", {"nomapping.faculty"}), \
+         patch("api.routes.identity_routes.FACULTY_INITIALS", {}):
+        res = client.get("/internal/resolve-identity?email=nomapping.faculty@dau.ac.in",
+                         headers=GOOD_HEADERS)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["role"] == "faculty"
+    assert data["faculty_initials"] is None
 
 
 def test_non_matching_faculty_email_resolves_as_guest():
