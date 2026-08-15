@@ -72,6 +72,13 @@ Determine:
       "Board of Studies Chairman"
     If the query already uses formal/document-like terminology, return an
     empty array — do not pad with redundant terms.
+    Do NOT invent an expansion for an acronym or short ambiguous term you are
+    not confident about (e.g. do not guess that "cot" means some
+    committee/council/body just because DAU has committees). If a short
+    term has an ordinary plain-English meaning (e.g. "cot" = a bed), include
+    that plain meaning as a candidate expanded term rather than fabricating
+    an institution-specific acronym expansion — retrieval should be allowed
+    to find the literal sense, not steered toward a guessed one.
 
 ------------------------------------------------------------
 VALID VALUES
@@ -261,6 +268,40 @@ Output
   "query_decomposition":null,
   "retrieval_hints":{}
 }
+
+Staff/officer designation contact lookup
+
+Query
+
+What is the mail id of the sports officer?
+
+Output
+
+{
+  "category":"faculty",
+  "intent":"contact",
+  "retrieval_intent":"faculty_contact",
+  "entity_confidence":0.9,
+  "multi_entity_query":false,
+  "entities":{
+    "designation":"Sports Officer"
+  },
+  "query_decomposition":null,
+  "retrieval_hints":{
+    "required_sections":["Sports Officer", "Officers and Staff", "Contact", "Contact Information"]
+  }
+}
+
+A query naming a specific job title/designation (e.g. "Sports Officer", "Warden", "Assistant
+Registrar", "Chief Proctor") — rather than a person's name or a committee/body — should be
+treated the same way as a faculty-name lookup: extract the exact designation text into
+`entities.designation`, and put that exact designation string into
+`retrieval_hints.required_sections` so retrieval can find the staff-directory entry for that
+literal title (e.g. DAU's staff list), not just documents about the broader committee/body the
+role sits under. Do NOT collapse a specific designation like "Sports Officer" into the name of
+the committee it's associated with (e.g. "Sports Committee") — they are different entities, and
+routing on the committee name alone will surface the committee's office-bearers (Convener,
+Deputy Convener) instead of the actually-named designation.
 
 Alumni profile lookup
 
@@ -902,6 +943,38 @@ The Board of Studies at DAU does NOT serve which function: curriculum oversight,
   "query_decomposition": null,
   "retrieval_hints": {
     "required_sections": ["Board of Studies", "Functions", "Responsibilities"]
+  },
+  "is_claim_verification": false,
+  "requires_complete_list": true
+}
+
+------------------------------------------------------------
+CATEGORY-ENUMERATION QUERIES — requires_complete_list example
+------------------------------------------------------------
+
+Any question asking for the full roster of a category DAU offers/has —
+programs, degrees, courses, clubs, committees, hostels, etc. — needs
+requires_complete_list=true, whatever the exact wording ("what programs does
+DAU offer", "list the degrees available", "which courses can I take at
+DAU", "what all programs are there"). The failure mode this guards against:
+answering from only the top few semantically-closest chunks silently drops
+real entries (a smaller, less keyword-dense program like B.Tech ICT can be
+edged out by a longer, more marketing-heavy page about a different program)
+and the user never finds out anything was missing.
+
+Query:
+What programs does DAU offer?
+
+{
+  "category": "academics",
+  "intent": "programs_offered",
+  "retrieval_intent": "general",
+  "entity_confidence": 0.9,
+  "multi_entity_query": false,
+  "entities": {},
+  "query_decomposition": null,
+  "retrieval_hints": {
+    "required_sections": ["Programs Offered", "Overview"]
   },
   "is_claim_verification": false,
   "requires_complete_list": true
