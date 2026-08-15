@@ -898,6 +898,16 @@ export function useAuraChat() {
             setActiveCitations(citations)
           } else if (chunk.type === "personal-data-flag") {
             isPersonalData = true
+          } else if (chunk.type === "timetable-changed") {
+            // A timetable-mutating tool (update_my_timetable,
+            // undo_timetable_change, set_my_cohort,
+            // save_my_elective_selections) actually applied this turn.
+            // Dashboard cards listen for this instead of waiting on the
+            // window-focus refetch in use-timetable.ts, so an edit made in
+            // the chat panel shows up immediately without switching tabs.
+            if (typeof window !== "undefined") {
+              window.dispatchEvent(new Event("aura:timetable-changed"))
+            }
           } else if (chunk.type === "summary-update" && typeof chunk.summary === "string") {
             // Backend compacted older turns into the running summary this turn.
             newSummary = chunk.summary

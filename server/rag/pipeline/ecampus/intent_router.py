@@ -25,10 +25,42 @@ logger = logging.getLogger(__name__)
 # LLM round-trip — same pattern as the calendar gates in aura_chat_graph.
 # Queries that also name a cohort (year/sem/branch/section) are left to the
 # LLM so the COMMUNITY named-cohort rule below still applies.
+# Extended (2026-08) to also catch "next class" and "tomorrow" phrasings,
+# which previously fell outside this pattern and depended entirely on the
+# LLM verdict — unreliable for the same reason as the bug above.
 _OWN_SCHEDULE_PAT = re.compile(
-    r"\bmy\s+(?:time\s*table|(?:class\s+|teaching\s+)?schedule|classes)\b"
+    r"\bmy\s+(?:time\s*table|(?:class\s+|teaching\s+)?schedule|classes|next\s+class)\b"
     r"|\bwhat\s+classes\s+do\s+i\s+have\b"
-    r"|\bdo\s+i\s+have\s+(?:any\s+)?(?:class(?:es)?|labs?|lectures?|tutorials?)\b",
+    r"|\bdo\s+i\s+have\s+(?:any\s+)?(?:class(?:es)?|labs?|lectures?|tutorials?)\b"
+    r"|\b(?:what'?s|what\s+is|when\s+is|when'?s)\s+(?:my\s+)?next\s+class\b"
+    r"|\b(?:my\s+)?(?:time\s*table|schedule|classes)\s+(?:for\s+)?tomorrow\b"
+    r"|\btomorrow'?s\s+(?:time\s*table|schedule|classes)\b",
+    re.IGNORECASE,
+)
+
+# Deterministic fast-path for the OPPOSITE, and more common, failure mode:
+# a timetable/schedule question that does NOT reference the requester
+# personally is a lookup against the published timetable (ingested into RAG
+# from data/academics/timetable/*.md), not a personal-tools call — e.g.
+# "when does the Machine Learning lecture take place", "what time is IT302
+# on Mondays", "which day is the DBMS lab". The LLM classifier below is
+# instructed that "schedule"/"timetable"/"lecture" wording leans
+# PERSONAL_DATA (correctly, for first-person phrasings) but was intermittently
+# over-applying that bias to course-named, no-pronoun questions too, sending
+# them into the personal-tools path — which has no way to answer a
+# not-about-me question and returns a wrong/empty answer instead of the
+# actual published schedule. Restricted to "when/what time/which day ..."
+# question phrasing (rather than any text containing "class" or "schedule")
+# so it doesn't swallow personal timetable EDIT commands like "add a lab on
+# Friday", which correctly have no first-person pronoun either.
+_SELF_REFERENCE_PAT = re.compile(
+    r"\b(?:my|mine|i'?m|i\s+am|am\s+i|i've|i\s+have|do\s+i|i'll|i\s+will)\b",
+    re.IGNORECASE,
+)
+_PUBLIC_TIMETABLE_LOOKUP_PAT = re.compile(
+    r"\b(?:when\s+(?:is|does|are|do)|what\s+time\s+(?:is|does|are|do)|which\s+(?:day|days|time))\b"
+    r".{0,60}?"
+    r"\b(?:lecture|class(?:es)?|lab|tutorial|session|course|time\s*table|schedule|[a-z]{2,4}\d{2,4})\b",
     re.IGNORECASE,
 )
 
@@ -43,13 +75,19 @@ Classify the user's query as PERSONAL_DATA, COMMUNITY, or GENERAL.
 PERSONAL_DATA: the user is asking about their own (or, if they are faculty,
 a specific named student's) CGPA, grades, attendance, fee dues, hostel
 allocation, registration status, course adjustments, or electives. The
-requester's OWN class timetable is PERSONAL_DATA in every phrasing — AURA
-has a live tool for it, so these must never go to GENERAL: "timetable",
-"time table" (two words), "schedule", "my classes". Examples (all
-PERSONAL_DATA): "What is my time table?", "can you display my time table",
-"show my timetable", "my class schedule today", "what classes do I have
-tomorrow". A faculty member's own teaching schedule is likewise
-PERSONAL_DATA. Also PERSONAL_DATA: requests to link,
+requester's OWN class timetable, asked about in first person (using "my",
+"I", "am I", "do I have"), is PERSONAL_DATA — AURA has a live tool for it:
+"What is my time table?", "can you display my time table", "show my
+timetable", "my class schedule today", "what classes do I have tomorrow",
+"what's my next class". A faculty member's own teaching schedule, asked
+about the same way, is likewise PERSONAL_DATA.
+A timetable/schedule/lecture question that does NOT use a first-person
+pronoun is COMMUNITY, not PERSONAL_DATA, even though it uses the same
+words ("timetable", "schedule", "lecture", "class") — e.g. "when does the
+Machine Learning lecture take place", "what time is IT302 on Mondays",
+"which day is the DBMS lab" name a course or subject, not the requester,
+and are answered from the published timetable, not a personal tool.
+Also PERSONAL_DATA: requests to link,
 unlink, or check the status of an eCampus account; requests to share or
 revoke sharing of academic data with a faculty member; requests to refresh
 cached personal data; and requests to change, add, remove, or undo a change
@@ -83,7 +121,8 @@ COMMUNITY: public campus KB tool lookups — NOT private ERP records. Includes:
 Examples: "what clubs for music", "who is the convenor of Programming Club",
 "Who is Aditya Tatu?", "Aditya Tatu", "when is mid-sem", "BTech ICT admissions",
 "placement statistics", "hostel facilities", "anti-ragging policy",
-"give me timetable of BTech ICT 3rd sem sec A", "schedule for 2nd year MnC section B".
+"give me timetable of BTech ICT 3rd sem sec A", "schedule for 2nd year MnC section B",
+"when does the Machine Learning lecture take place", "what time is IT302 on Mondays".
 
 GENERAL: greetings, thanks, meta questions about AURA itself, short follow-ups
 with no topic of their own, and queries too vague to map to a campus tool
@@ -109,6 +148,8 @@ Return exactly one word: PERSONAL_DATA, COMMUNITY, or GENERAL.
         # to public RAG and a false "I don't have access" answer.
         if _OWN_SCHEDULE_PAT.search(query) and not PUBLIC_PROGRAMME_OVERRIDE_PAT.search(query):
             return "PERSONAL_DATA"
+        if _PUBLIC_TIMETABLE_LOOKUP_PAT.search(query) and not _SELF_REFERENCE_PAT.search(query):
+            return "COMMUNITY"
         model = self.model
         system = self.system_prompt.strip()
         dispatch = {"node": None}

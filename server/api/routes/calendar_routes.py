@@ -32,6 +32,7 @@ from api.auth import (
     require_identity,
 )
 from pipeline.google_calendar.slot_service import get_available_slots
+from pipeline.google_calendar.meetings_service import get_my_meetings
 from pipeline.google_calendar.token_vault import (
     store_tokens, unlink_calendar, is_linked, has_write_scope, CalendarNotLinked,
     SCOPE_READONLY, SCOPE_EVENTS, get_preferences, update_preferences,
@@ -103,6 +104,28 @@ def get_faculty_slots(
             )
 
     return get_available_slots(faculty_erp_id, target_date)
+
+
+# ── Own meetings (for the dashboard's merged schedule view) ────────────────
+
+@router.get("/meetings")
+def get_my_calendar_meetings(
+    date: str = Query(..., min_length=10, max_length=10, description="Date in YYYY-MM-DD format"),
+    identity: Identity = Depends(require_identity),
+):
+    """This user's own Google Calendar events for a date — used to merge
+    real meetings alongside their AURA class timetable on the dashboard
+    (see get_faculty_slots above for the DIFFERENT free/busy-only view of
+    someone ELSE's calendar). Always the caller's own erp_id; there is no
+    way to pass another user's id to this endpoint."""
+    if identity.role not in ("student", "faculty"):
+        raise HTTPException(status_code=403, detail="Calendar meetings only available for students and faculty.")
+    try:
+        target_date = datetime.date.fromisoformat(date)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="date must be YYYY-MM-DD format")
+
+    return get_my_meetings(identity.erp_id, target_date)
 
 
 # ── OAuth connect / callback / disconnect / status ──────────────────────────
