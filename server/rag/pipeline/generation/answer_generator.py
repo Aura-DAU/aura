@@ -500,6 +500,8 @@ Run internally; do not print.
 - Current club/committee office-bearers → prefer "C_DCs Information" or "Club Committee C_DCs" at highest `rule_year`; never treat older "Club Committee Data 24-25" as current when a newer C_DCs sheet is present.
 - Never treat `scraped_date` as the academic year (title "24-25" = 2024-25 even if scraped in 2026). Name the year when stating who currently holds a role.
 - Admissions/seats/fees → prefer `category="admissions"`. Program-specific → match `program_name`.
+- Fee/tuition documents commonly split figures under separate H3 headings for different student categories (e.g. "For Domestic Students" vs "For International / NRI Students" / DAFS). These are DIFFERENT figures for the SAME line items (Tuition Fee, Registration Fee, Caution Deposit), not duplicates — never merge them or let one silently overwrite the other. Unless the question, conversation history, or user's known status indicates the person is international/NRI/foreign/DAFS, answer with the **Domestic Students** figures and cite that subsection. Only lead with International/NRI figures when the user is asking specifically about that category. If both subsections are relevant or the category is unclear, present Domestic as the primary answer and briefly note that international/NRI rates differ (offer to share them on request) — never present one category's numbers labeled as if they were the other's.
+
 - When documents contain data across multiple years or versions, ALWAYS present the latest data first (using highest `rule_year` or `scraped_date`). Then, mention any older data if applicable. Never merge facts across years/source types without labelling each.
 
 **2.5. RELEVANCE CHECK.**
@@ -520,6 +522,21 @@ If no retrieved document is genuinely relevant, follow the "No coverage" rule.
 
 For a named person: require the *exact* name in docs (allow 1–2 letter typos). **DO NOT** substitute a different person with a similar/shared first name. If only a similar-name person appears, say no information is available for the requested person — do not give the other person's info.
 
+# ROLE/TITLE SUBSTITUTION CHECK
+
+The same no-substitution rule applies to job titles/designations, not just names. "Sports
+Officer", "Convener", "Deputy Convener", "Warden", "Registrar", "Coordinator", etc. are
+DIFFERENT titles even when they appear in the same document or govern the same
+domain/committee — a query asking about one specific title must be answered using the person
+who literally holds *that* title in the docs, never a different office-bearer of the same
+committee/body used as a stand-in. E.g. if asked for the "Sports Officer" and the retrieved
+context has a Sports Committee's Convener and Deputy Convener but a *different* chunk names
+someone else as "Sports Officer", use the Sports Officer's own contact info — do not answer
+with the Convener/Deputy Convener's details as if they were the same role. If no one is
+documented under the exact title asked about, say so plainly; you may separately mention the
+closest related contact that IS documented, but must label it explicitly as a different role,
+never present it as if it answers the question asked.
+
 # ANTI-SYNTHESIS RULE
 
 Do not rank, rate, or synthesize a subjective judgment (e.g. "best club", "optimal roadmap",
@@ -535,6 +552,19 @@ verify that entity's exact name appears in a retrieved `<doc>`, the same way STR
 VERIFICATION above requires for a person's name. Do not treat general world knowledge about
 the entity as evidence it applies to DAU. If it does not appear in the retrieved documents,
 state plainly that it is not documented in the retrieved data rather than guessing or assuming.
+
+# UNKNOWN ACRONYM / TERM RULE
+
+If the question uses an acronym, abbreviation, or short informal term (e.g. "COT", "cot size",
+"SBG size"), never invent, expand, or define it yourself unless that exact expansion is written
+in a retrieved `<doc>`. This applies even when retrieved documents contain plausible-sounding
+numbers or org-chart data that could be forced to fit — e.g. do NOT read "cot" as an acronym
+for some club/committee/body just because a retrieved doc happens to describe a club or
+committee. Coincidental keyword overlap (e.g. "student body") is not evidence the acronym
+means that. If no retrieved document literally defines the term, say the term is not
+recognized/documented in the available data, and — only if a doc separately and literally
+uses the plain word (e.g. "cot" as hostel furniture) — answer using that literal sense instead.
+Never silently substitute a different, unverified meaning for an ambiguous short query.
 
 # HANDLING PARTIAL INFORMATION
 
@@ -1171,4 +1201,3 @@ def strip_sources_marker(text: str) -> str:
     if not text:
         return ""
     return re.sub(r"\n\n\[Sources:[^\]]*\]$", "", text).strip()
-
