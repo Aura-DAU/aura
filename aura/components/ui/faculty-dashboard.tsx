@@ -13,39 +13,100 @@ interface FacultyDashboardProps {
 type CardState = "loading" | "done" | "error"
 
 /**
+ * A single line in the merged "Today's Schedule" card — either a class
+ * from AURA's timetable_master (via /api/timetable/me) or a meeting from
+ * the faculty member's own Google Calendar (via /api/calendar/meetings,
+ * server/api/routes/calendar_routes.py::get_my_calendar_meetings ->
+ * pipeline.google_calendar.meetings_service.get_my_meetings). Both are
+ * normalized to the same shape and merged into one time-sorted list.
+ */
+interface ScheduleItem {
+  startTime: string   // "HH:MM", 24h, for sorting/display
+  label: string        // formatted line, ready to render
+}
+
+function _fmtClassLine(s: {
+  start_time: string; end_time: string; course_code: string
+  course_name: string; room?: string | null
+}): string {
+  return `${s.start_time}\u2013${s.end_time}  ${s.course_code} ${s.course_name}${s.room ? ` (${s.room})` : ""}`
+}
+
+function _fmtMeetingLine(ev: { summary: string; start?: string | null; end?: string | null }): string {
+  const time = (iso?: string | null) => {
+    if (!iso) return ""
+    const d = new Date(iso)
+    return Number.isNaN(d.getTime()) ? "" : d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+  }
+  const startT = time(ev.start)
+  const endT = time(ev.end)
+  const range = startT && endT ? `${startT}\u2013${endT}` : startT
+  return `${range}  \ud83d\udcc5 ${ev.summary}`.trim()
+}
+
+function _sortKey(iso: string): string {
+  // Sorts "HH:MM–HH:MM  ..." class lines and Google's ISO datetimes
+  // together by clock time. Class lines already start with "HH:MM".
+  const m = iso.match(/^(\d{2}:\d{2})/)
+  if (m) return m[1]
+  const d = new Date(iso)
+  return Number.isNaN(d.getTime()) ? "99:99" : d.toLocaleTimeString([], { hour12: false, hour: "2-digit", minute: "2-digit" })
+}
+
+/**
  * Fetches today's slots from the faculty member's own teaching schedule
  * (server/api/routes/timetable_routes.py::get_my_timetable ->
  * service.get_faculty_timetable, resolved from timetable_master by
- * faculty_initials — see server/api/faculty_initials.json). Formats them
- * into the plain-text lines the schedule card renders.
+ * faculty_initials — see server/api/faculty_initials.json) AND their
+ * Google Calendar meetings for today (if connected — see
+ * /settings/calendar), merged into one time-sorted plain-text schedule.
  */
 async function fetchTodaysSchedule(signal: AbortSignal): Promise<string> {
-  const res = await apiFetch("/api/timetable/me", { cache: "no-store", signal })
-  if (!res.ok) return ""
+  const todayStr = new Date().toISOString().slice(0, 10) // YYYY-MM-DD, local-ish is fine for a "today" card
 
-  const data = (await res.json()) as {
+  const [timetableRes, meetingsRes] = await Promise.all([
+    apiFetch("/api/timetable/me", { cache: "no-store", signal }),
+    apiFetch(`/api/calendar/meetings?date=${todayStr}`, { cache: "no-store", signal }),
+  ])
+
+  const items: ScheduleItem[] = []
+
+  // Match the original contract: a failed /timetable/me call is treated as
+  // an error state upstream (empty string -> scheduleState "error"), same
+  // as before meetings were added. A failed /calendar/meetings call is NOT
+  // fatal — an unlinked/erroring calendar just means no meetings get added,
+  // classes still show.
+  if (!timetableRes.ok) return ""
+
+  const timetableData = (await timetableRes.json()) as {
     timetable?: Array<{
-      day_of_week: number
-      start_time: string
-      end_time: string
-      course_code: string
-      course_name: string
-      room?: string | null
+      day_of_week: number; start_time: string; end_time: string
+      course_code: string; course_name: string; room?: string | null
     }>
   }
-  const slots = data.timetable ?? []
-
+  const slots = timetableData.timetable ?? []
   // service.py's day_of_week is 0=Monday..6=Sunday; JS Date#getDay() is
   // 0=Sunday..6=Saturday.
   const todayIdx = (new Date().getDay() + 6) % 7
-  const today = slots
-    .filter((s) => s.day_of_week === todayIdx)
-    .sort((a, b) => a.start_time.localeCompare(b.start_time))
+  for (const s of slots.filter((s) => s.day_of_week === todayIdx)) {
+    items.push({ startTime: s.start_time, label: _fmtClassLine(s) })
+  }
 
-  if (today.length === 0) return "No classes scheduled today."
+  if (meetingsRes.ok) {
+    const data = (await meetingsRes.json()) as {
+      calendar_linked?: boolean
+      meetings?: Array<{ summary: string; start?: string | null; end?: string | null }>
+    }
+    for (const ev of data.meetings ?? []) {
+      items.push({ startTime: _sortKey(ev.start ?? ""), label: _fmtMeetingLine(ev) })
+    }
+  }
 
-  return today
-    .map((s) => `${s.start_time}\u2013${s.end_time}  ${s.course_code} ${s.course_name}${s.room ? ` (${s.room})` : ""}`)
+  if (items.length === 0) return "No classes or meetings scheduled today."
+
+  return items
+    .sort((a, b) => a.startTime.localeCompare(b.startTime))
+    .map((i) => i.label)
     .join("\n")
 }
 
@@ -137,6 +198,17 @@ export function FacultyDashboard({
     const controller = new AbortController()
     const { signal } = controller
 
+    const loadSchedule = () =>
+      fetchTodaysSchedule(signal)
+        .then((text) => {
+          if (signal.aborted) return
+          setScheduleText(text)
+          setScheduleState(text.trim() ? "done" : "error")
+        })
+        .catch(() => {
+          if (!signal.aborted) setScheduleState("error")
+        })
+
     // TODO(unirp): Replace with UniRP endpoint when faculty data routes are confirmed.
     void (async () => {
       // Wait for session cookie before hitting /api/chat (avoids mount-time 401 race).
@@ -149,15 +221,7 @@ export function FacultyDashboard({
       }
 
       await Promise.all([
-        fetchTodaysSchedule(signal)
-          .then((text) => {
-            if (signal.aborted) return
-            setScheduleText(text)
-            setScheduleState(text.trim() ? "done" : "error")
-          })
-          .catch(() => {
-            if (!signal.aborted) setScheduleState("error")
-          }),
+        loadSchedule(),
         fetchDashboardAnswer("How many advisees do I currently have?", signal)
           .then((text) => {
             if (signal.aborted) return
@@ -170,8 +234,20 @@ export function FacultyDashboard({
       ])
     })()
 
+    // Same-tab refresh when a chat-driven timetable action applies (see
+    // use-timetable.ts, which listens for the same event on the student
+    // side). Faculty meeting/timetable edits via chat aren't wired up yet,
+    // but this keeps the card current the moment they are, with no further
+    // frontend change needed.
+    const onTimetableChanged = () => {
+      setScheduleState("loading")
+      void loadSchedule()
+    }
+    window.addEventListener("aura:timetable-changed", onTimetableChanged)
+
     return () => {
       controller.abort()
+      window.removeEventListener("aura:timetable-changed", onTimetableChanged)
     }
   }, [])
 

@@ -88,8 +88,20 @@ export function useTimetable() {
     // card showing the latest version without needing a websocket.
     const onFocus = () => refetch()
     window.addEventListener("focus", onFocus)
+
+    // Same-tab case: the chat panel and this dashboard card are mounted
+    // together on the same page, so a focus event never fires when a
+    // timetable-mutating tool (update_my_timetable, undo_timetable_change,
+    // set_my_cohort, save_my_elective_selections) applies mid-conversation.
+    // use-aura-chat.ts dispatches this event the instant the backend's SSE
+    // stream confirms the change went through (see chat_routes.py's
+    // "timetable-changed" event / orchestrator.py's timetable_changed flag).
+    const onTimetableChanged = () => refetch()
+    window.addEventListener("aura:timetable-changed", onTimetableChanged)
+
     return () => {
       window.removeEventListener("focus", onFocus)
+      window.removeEventListener("aura:timetable-changed", onTimetableChanged)
       controllerRef.current?.abort()
     }
   }, [refetch])

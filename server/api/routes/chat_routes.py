@@ -489,6 +489,8 @@ async def chat_stream(
                         yield _sse({"type": "citations", "citations": citations})
                     if result.get("is_personal_data"):
                         yield _sse({"type": "personal-data-flag"})
+                    if result.get("timetable_changed"):
+                        yield _sse({"type": "timetable-changed"})
                     # Inline connector prompt (e.g. "connect Google Calendar"):
                     # the orchestrator sets action_required when a tool needs an
                     # account the student hasn't linked yet. Rides the existing

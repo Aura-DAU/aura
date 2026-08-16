@@ -40,6 +40,19 @@ logger = logging.getLogger(__name__)
 # package (test_write_tool_removal.py) keeps guarding just that package.
 MERGED_TOOL_REGISTRY = {**_ECAMPUS_TOOL_REGISTRY, **_TIMETABLE_TOOL_REGISTRY}
 
+# Tool names whose successful ("applied") result means the requester's own
+# timetable actually changed -- used by run() below to tell the frontend to
+# refetch /api/timetable/me. save_my_elective_selections and set_my_cohort
+# are included because both can change which rows get returned for the same
+# student (electives add/remove slots; cohort changes which section's master
+# timetable applies), not just update_my_timetable/undo_timetable_change.
+_TIMETABLE_MUTATING_TOOL_NAMES = {
+    "update_my_timetable",
+    "undo_timetable_change",
+    "set_my_cohort",
+    "save_my_elective_selections",
+}
+
 
 def _tools_for_role(role: str):
     # Calendar MCP tools are personal-scope only (a student's own calendar), so
@@ -81,6 +94,13 @@ Rules:
   clearing cache), you must get the user's explicit confirmation before it
   executes. The orchestrator will return a confirmation prompt instead of a
   result on the first attempt — relay that prompt to the user as-is.
+- Students may describe a timetable addition in a short structured format:
+    Course ID -
+    Days -
+    Time -
+  Parse it the same as a natural-language request and call
+  update_my_timetable with the equivalent fields (course_code, day(s),
+  start_time/end_time) — don't ask them to rephrase it as prose.
 """ + CALENDAR_MCP_SYSTEM_PROMPT + """
 - If the timetable tool returns "is_common": true or "needs_configuration": true:
   1. Inform the user that this is the common timetable for their year.
@@ -124,9 +144,22 @@ def _connect_action_required(tool_results: list[dict]) -> dict | None:
     """When a calendar tool reported the student hasn't linked Google Calendar,
     return a structured connect prompt for the client to render as an inline
     "Connect Google Calendar" CTA (the GPT/Claude connector pattern) instead of
-    leaving it to the model's prose. None when no connect action is needed."""
+    leaving it to the model's prose. None when no connect action is needed.
+
+    Also fires after a plain timetable edit (update_my_timetable /
+    undo_timetable_change) whose nested calendar_sync came back
+    {"status": "not_connected"} — see timetable_sync.resync_if_linked, which
+    deliberately stays silent about this on its own (a small edit shouldn't
+    force a Google consent screen on someone who never asked to sync). This
+    is what actually surfaces the "sync this to Google Calendar?" prompt the
+    student sees right after asking AURA to add/move/remove a class; if they
+    decline, nothing happens and future edits keep applying to AURA's
+    timetable only, exactly as before this existed.
+    """
     for r in tool_results:
-        if isinstance(r, dict) and r.get("status") == "calendar_not_connected":
+        if not isinstance(r, dict):
+            continue
+        if r.get("status") == "calendar_not_connected":
             return {
                 "type": "connect_required",
                 "provider": "google_calendar",
@@ -135,6 +168,19 @@ def _connect_action_required(tool_results: list[dict]) -> dict | None:
                 # Prefer the stable connect→auto-sync copy over opaque tool
                 # strings like "Not linked." so the student knows what happens next.
                 "message": _CONNECT_THEN_SYNC_MESSAGE,
+            }
+        calendar_sync = r.get("calendar_sync")
+        if isinstance(calendar_sync, dict) and calendar_sync.get("status") == "not_connected":
+            return {
+                "type": "connect_required",
+                "provider": "google_calendar",
+                "connect_path": "/settings/calendar",
+                "reason": "sync_timetable_change",
+                "message": (
+                    "Done -- I've updated your AURA timetable. Want me to keep this in "
+                    "sync with your Google Calendar too? Connect it and I'll sync "
+                    "automatically from now on."
+                ),
             }
     return None
 
@@ -618,6 +664,22 @@ class EcampusOrchestrator:
         ) or _confirmation_action_required(tool_results)
         if action_required:
             out["action_required"] = action_required
+        # Signal for the frontend: a timetable-mutating tool actually applied
+        # (not just previewed -- confirmation_required results don't count),
+        # so use-timetable.ts's refetch() should run to pick up the change
+        # without waiting for a window-focus event. Each tool uses its own
+        # success status string ("applied" for update/undo, "saved"/"reset"
+        # for electives, "updated" for cohort) -- treat any non-error,
+        # non-"confirmation_required" status as success. See
+        # aura/hooks/use-timetable.ts and use-aura-chat.ts.
+        if any(
+            call.function.name in _TIMETABLE_MUTATING_TOOL_NAMES
+            and isinstance(result, dict)
+            and not result.get("error")
+            and result.get("status") not in (None, "confirmation_required")
+            for call, result in zip(msg.tool_calls, tool_results)
+        ):
+            out["timetable_changed"] = True
         return out
 
     def _run_calendar_tool(self, tool_name: str, identity: dict) -> dict:
