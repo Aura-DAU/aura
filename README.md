@@ -16,7 +16,7 @@
 > This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
 
 > [!WARNING]
-> **A note for future GDG On Campus & AI Club members:** please take care of this project and keep it alive. Do not delete this file or the project — maintain it, hand it over cleanly to the next batch, and keep the ownership, setup, and contribution notes above up to date.
+> **A note for future GDG On Campus & AI Club members and contributers:** please take care of this project and keep it alive. Do not delete this file or the project — maintain it, hand it over cleanly to the next batch, and keep the ownership, setup, and contribution notes above up to date.
 ---
 
 ## Overview
