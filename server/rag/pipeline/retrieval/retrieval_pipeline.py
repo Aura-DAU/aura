@@ -449,9 +449,24 @@ class RetrievalPipeline:
         By emitting a hard metadata filter, we can retrieve exactly the overview/list chunks.
         """
         q_lower = (query or "").lower()
-        
-        # Broad Program listing queries
-        if "what programs" in q_lower or "list all programs" in q_lower or "which programs" in q_lower or "types of programs" in q_lower:
+
+        # Broad Program listing queries. Matches on the *shape* of the
+        # question (asking about "program(s)"/"degree(s)"/"course(s)" DAU
+        # "offers"/"has"/"provides", or a bare "list ... programs"), not on
+        # any specific program's name — so it applies uniformly to every
+        # program_list-tagged doc (UG, PG, dual-degree, doctoral) and never
+        # needs updating when a program is added, renamed, or removed.
+        _PROGRAM_NOUN_RE = r"programs?|degrees?|courses?"
+        _OFFER_VERB_RE = r"offer|offers|offered|offering|provide|provides|has|have|available"
+        is_broad_program_listing = bool(
+            re.search(rf"\b({_PROGRAM_NOUN_RE})\b.*\b({_OFFER_VERB_RE})\b", q_lower)
+            or re.search(rf"\b({_OFFER_VERB_RE})\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+            or re.search(rf"\blist\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+            or re.search(rf"\btypes? of\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+            or re.search(rf"\bwhich\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+            or re.search(rf"\ball\b.*\b({_PROGRAM_NOUN_RE})\b", q_lower)
+        )
+        if is_broad_program_listing:
             return {"category": {"$in": ["program_list"]}}
             
         # Broad Research Domain listing queries
@@ -696,25 +711,77 @@ class RetrievalPipeline:
 
         return canonical
 
-    def _canonical_faculty_name(self, name):
+    @staticmethod
+    def _smart_score(query: str, candidate: str) -> float:
+        from rapidfuzz import fuzz
+        
+        q_parts = query.lower().split()
+        c_parts = candidate.lower().split()
+        
+        if len(q_parts) == 0 or len(c_parts) == 0:
+            return 0.0
+            
+        full_score = fuzz.WRatio(query, candidate)
+        token_score = fuzz.token_sort_ratio(query, candidate)
+        
+        if len(q_parts) == 1:
+            # Query is a single name. Fallback weights: Full Name 90%, Token 10%
+            return (full_score * 0.90) + (token_score * 0.10)
+            
+        q_first = q_parts[0]
+        q_last = q_parts[-1]
+        
+        if len(c_parts) == 1:
+            c_first = c_parts[0]
+            c_last = c_parts[0]
+        else:
+            c_first = c_parts[0]
+            c_last = c_parts[-1]
+            
+        first_score = fuzz.ratio(q_first, c_first)
+        last_score = fuzz.ratio(q_last, c_last)
+        
+        return (first_score * 0.40) + (last_score * 0.40) + (full_score * 0.15) + (token_score * 0.05)
+
+    def _resolve_person_name(self, name):
+        result = {
+            "original": name,
+            "matches": [],
+            "confidence": 0.0
+        }
+        
         if not name or not hasattr(self, "faculty_names") or not self.faculty_names:
-            return name
+            return result
         
         # Strip common titles before fuzzy matching
         cleaned = re.sub(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", "", name, flags=re.IGNORECASE).strip()
         
         # Avoid matching short, generic terms
         if len(cleaned) < 3:
-            return name
+            return result
             
         from rapidfuzz import fuzz, process
-        matches = process.extract(cleaned.lower(), self.faculty_names_lower, scorer=fuzz.WRatio, limit=2)
+        # Get top 5 matches broadly
+        matches = process.extract(cleaned.lower(), self.faculty_names_lower, scorer=fuzz.WRatio, limit=5)
         if not matches:
-            return name
+            return result
             
         best_match = matches[0]
         s1 = best_match[1]
         if s1 >= 80.0:
+            if not self._first_name_agrees(cleaned.lower(), best_match[0]):
+                # WRatio rewards partial/substring overlap, so a query like
+                # "hari sharma" can score ~85 against "madhu kant sharma"
+                # purely because the surname matches — even though it's a
+                # completely different person. Don't silently swap in the
+                # wrong faculty member just because the surname matched;
+                # require the first name to be reasonably close too.
+                logger.info(
+                    "Rejected fuzzy faculty match '%s' (cleaned: '%s') -> '%s' "
+                    "(Score: %.2f): first name does not match closely enough",
+                    name, cleaned, self.faculty_names_map[best_match[0]], s1,
+                )
+                return name
             if len(matches) == 1:
                 corrected = self.faculty_names_map[best_match[0]]
                 logger.info("Fuzzy matched faculty name '%s' (cleaned: '%s') to '%s' (Score: %.2f)", name, cleaned, corrected, s1)
@@ -726,6 +793,31 @@ class RetrievalPipeline:
                 return corrected
                 
         return name
+
+    @staticmethod
+    def _first_name_agrees(query_lower: str, candidate_lower: str, threshold: float = 60.0) -> bool:
+        """Guard against surname-only fuzzy matches swapping in the wrong person.
+
+        `fuzz.WRatio` rewards overlapping substrings, so a query like "hari
+        sharma" can score ~85 against "madhu kant sharma" purely because of
+        the shared "sharma" — even though the actual person is completely
+        different. Require the first name (first token) to also be a
+        reasonably close match before trusting the correction, unless the
+        whole query is already near-identical to the candidate (a plain
+        typo, e.g. "hari shrma" -> "hari sharma") or the query is a bare
+        single-token surname with nothing to compare.
+        """
+        from rapidfuzz import fuzz
+
+        if fuzz.ratio(query_lower, candidate_lower) >= 92.0:
+            return True
+
+        q_tokens = query_lower.split()
+        c_tokens = candidate_lower.split()
+        if len(q_tokens) < 2 or not c_tokens:
+            return True
+
+        return fuzz.ratio(q_tokens[0], c_tokens[0]) >= threshold
 
     @staticmethod
     def _should_speculate(query: str) -> bool:
@@ -785,12 +877,23 @@ class RetrievalPipeline:
 
         query_lower = query.lower()
 
-        # Fix #6: narrow the rewrite trigger to avoid spurious LLM calls for
-        # short but self-contained questions (e.g. "What is the fee?").
-        # Rewrite only when:
+        # Fix #6 (original): narrow the rewrite trigger to avoid spurious LLM
+        # calls for short but self-contained questions (e.g. "What is the
+        # fee?"). Rewrite only when:
         #   (a) a pronoun / reference phrase is present in the query, OR
         #   (b) the query is <=3 words AND the first word is a pronoun
         #       (genuine fragment follow-up like "And him?" or "What about it?")
+        #
+        # Fix #11 (context-loss regression): (a)/(b) alone missed the far more
+        # common case of a topic-continuation follow-up that carries no
+        # pronoun at all — "All programs combined in BSMS" right after "what
+        # is total no. of seats in BSMS?" — which retrieval then answered as
+        # a brand-new, unrelated question instead of resolving it against the
+        # prior turn. Pronoun-spotting can't generalize to that pattern, so
+        # (c) also rewrites any short-ish query once real history exists:
+        # short follow-ups are exactly where implicit context is common,
+        # whether or not they use a pronoun. Longer queries still skip the
+        # LLM call since they're overwhelmingly self-contained on their own.
         PRONOUN_REFS = [
             "he", "his", "him", "she", "her", "they", "their", "them",
             "it", "its", "that faculty", "that professor", "that event",
@@ -801,6 +904,7 @@ class RetrievalPipeline:
             "he", "his", "him", "she", "her", "they", "their", "them",
             "it", "its", "what about", "how about"
         }
+        SHORT_FOLLOWUP_WORD_LIMIT = 8
         has_pronoun = any(
             re.search(rf"\b{re.escape(ref)}\b", query_lower)
             for ref in PRONOUN_REFS
@@ -809,7 +913,8 @@ class RetrievalPipeline:
             len(query.split()) <= 3
             and any(query_lower.startswith(p) for p in SHORT_PRONOUN_STARTERS)
         )
-        needs_rewrite = bool(history) and (has_pronoun or is_short_fragment)
+        is_short_followup = len(query.split()) <= SHORT_FOLLOWUP_WORD_LIMIT
+        needs_rewrite = bool(history) and (has_pronoun or is_short_fragment or is_short_followup)
 
         rewritten_query = query
         if needs_rewrite:
@@ -869,12 +974,26 @@ class RetrievalPipeline:
 
         # Check if the plan contains anything that modifies retrieval or query
         has_entities = any(entities.get(k) for k in [
-            "faculty_name", "event_name", "program_name", "department_name", 
+            "faculty_name", "person_name", "event_name", "program_name", "department_name", 
             "scholarship_name", "course_code", "course_name", "semester", "rule_year"
         ])
         decomposed_queries = plan.get("query_decomposition")
         is_claim_verification = plan.get("is_claim_verification", False)
-        requires_complete_list = plan.get("requires_complete_list", False)
+        # Fix RP-PROGLIST: requires_complete_list was left entirely to the
+        # planner LLM's per-turn judgment, which flagged broad "what
+        # programs does DAU offer?"-style queries inconsistently — on the
+        # turns it missed, the final top_k stayed at the default cap (5),
+        # the cross-encoder reranker then favoured longer, keyword-dense
+        # dual-degree (BS-MS) chunks over the plainer B.Tech ICT bullet, and
+        # BS-MS silently displaced B.Tech ICT out of the answer. Since
+        # _scatter_gather_filter already deterministically (and generically,
+        # for any current or future program_list-tagged doc) detects this
+        # query shape for the metadata filter, reuse that same signal here
+        # so the complete-list top_k boost fires every time, not just when
+        # the planner also happens to notice.
+        requires_complete_list = plan.get("requires_complete_list", False) or bool(
+            self._scatter_gather_filter(plan, query)
+        )
         plan_required_sections = plan.get("retrieval_hints", {}).get("required_sections", [])
         expanded_terms = plan.get("expanded_terms", [])
 
@@ -985,15 +1104,24 @@ class RetrievalPipeline:
             # Correct entities inside the plan (e.g. fuzzy match faculty and program names)
             entities = plan.get("entities", {})
             
-            # 1. Correct faculty_name
-            faculty_val = entities.get("faculty_name")
-            if faculty_val:
-                if isinstance(faculty_val, list):
-                    corrected_list = []
-                    for name in faculty_val:
-                        corrected_name = self._canonical_faculty_name(name)
-                        corrected_list.append(corrected_name)
-                        # Replace the typo name in query and decomposed queries, retaining any title prefix
+            # 1. Correct person_name
+            person_val = entities.get("person_name")
+            if person_val:
+                names_to_process = person_val if isinstance(person_val, list) else [person_val]
+                
+                final_person_names = []
+                final_faculty_names = []
+                
+                for name in names_to_process:
+                    resolution = self._resolve_person_name(name)
+                    confidence = resolution.get("confidence", 0.0)
+                    matches = resolution.get("matches", [])
+                    
+                    if confidence >= 90.0 and matches:
+                        # High confidence -> Definite Faculty
+                        corrected_name = matches[0]["name"]
+                        final_faculty_names.append(corrected_name)
+                        
                         if corrected_name != name:
                             title_match = re.match(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", name, flags=re.IGNORECASE)
                             title_part = title_match.group(0) if title_match else ""
@@ -1004,20 +1132,27 @@ class RetrievalPipeline:
                                     re.sub(re.escape(name), replacement, dq, flags=re.IGNORECASE)
                                     for dq in plan["query_decomposition"]
                                 ]
-                    entities["faculty_name"] = corrected_list
-                elif isinstance(faculty_val, str):
-                    corrected_name = self._canonical_faculty_name(faculty_val)
-                    if corrected_name != faculty_val:
-                        title_match = re.match(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", faculty_val, flags=re.IGNORECASE)
-                        title_part = title_match.group(0) if title_match else ""
-                        replacement = title_part + corrected_name
-                        query = re.sub(re.escape(faculty_val), replacement, query, flags=re.IGNORECASE)
+                    elif matches:
+                        # Ambiguous or Generic -> Multiple possible answers
+                        final_person_names.append(name)
+                        candidate_names = " ".join([m["name"] for m in matches])
+                        query = query + " " + candidate_names
                         if plan.get("query_decomposition"):
                             plan["query_decomposition"] = [
-                                re.sub(re.escape(faculty_val), replacement, dq, flags=re.IGNORECASE)
+                                dq + " " + candidate_names
                                 for dq in plan["query_decomposition"]
                             ]
-                    entities["faculty_name"] = corrected_name
+                    else:
+                        # Generic person -> No matches at all (empty DB)
+                        final_person_names.append(name)
+                
+                if final_person_names:
+                    entities["person_name"] = final_person_names if len(final_person_names) > 1 else final_person_names[0]
+                else:
+                    entities.pop("person_name", None)
+                    
+                if final_faculty_names:
+                    entities["faculty_name"] = final_faculty_names if len(final_faculty_names) > 1 else final_faculty_names[0]
 
             # 2. Correct program_name
             program_val = entities.get("program_name")

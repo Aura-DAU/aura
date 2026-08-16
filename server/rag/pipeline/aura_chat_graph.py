@@ -749,6 +749,8 @@ class AuraChatGraph:
         }
         if action_required:
             out["action_required"] = action_required
+        if result.get("timetable_changed"):
+            out["timetable_changed"] = True
         state["result"] = out
         return state
 

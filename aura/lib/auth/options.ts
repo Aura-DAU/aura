@@ -22,6 +22,7 @@ declare module "next-auth" {
       currentYear?: number
       currentSem?: number
       currentSec?: string
+      facultyInitials?: string
     } & DefaultSession["user"]
   }
 
@@ -33,6 +34,7 @@ declare module "next-auth" {
     currentYear?: number
     currentSem?: number
     currentSec?: string
+    facultyInitials?: string
   }
 }
 
@@ -45,6 +47,7 @@ declare module "next-auth/jwt" {
     currentYear?: number
     currentSem?: number
     currentSec?: string
+    facultyInitials?: string
   }
 }
 
@@ -56,6 +59,7 @@ interface ErpIdentity {
   currentYear?: number
   currentSem?: number
   currentSec?: string
+  facultyInitials?: string
 }
 
 /**
@@ -88,6 +92,7 @@ async function lookupErpIdentity(email: string): Promise<ErpIdentity | null> {
       currentYear: data.current_year ?? data.currentYear ?? undefined,
       currentSem: data.current_sem ?? data.currentSem ?? undefined,
       currentSec: data.current_sec ?? data.currentSec ?? undefined,
+      facultyInitials: data.faculty_initials ?? data.facultyInitials ?? undefined,
     }
   } catch (error) {
     console.error("[NextAuth] Error calling lookup endpoint:", error)
@@ -232,6 +237,7 @@ export const authOptions: NextAuthOptions = {
           user.currentYear = data.current_year ?? data.currentYear ?? undefined
           user.currentSem = data.current_sem ?? data.currentSem ?? undefined
           user.currentSec = data.current_sec ?? data.currentSec ?? undefined
+          user.facultyInitials = data.faculty_initials ?? data.facultyInitials ?? undefined
           return true
         } catch (err) {
           console.error("[NextAuth] SignIn callback lookup failed:", err)

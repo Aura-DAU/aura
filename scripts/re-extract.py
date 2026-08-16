@@ -238,10 +238,33 @@ def _is_garbled(text: str) -> bool:
     return ctrl > 10
 
 
+class PdfOcrUnavailableError(RuntimeError):
+    """Raised when OCR is needed (sparse/garbled text layer) but the
+    pdf2image/pytesseract deps aren't installed."""
+
+
+class PdfOcrFailedError(RuntimeError):
+    """Raised when OCR was attempted but the OCR engine itself failed."""
+
+
 def extract_pdf_ocr(data: bytes) -> str:
-    """Render PDF pages to images and run Tesseract OCR."""
+    """
+    Render PDF pages to images and run Tesseract OCR.
+
+    Fix OCR-1: this used to return human-readable placeholder strings like
+    "(OCR unavailable — ...)" / "(OCR failed: ...)" on failure. Those
+    strings are 50+ characters, so they silently passed the caller's
+    `len(raw.strip()) < 50` "too little content" guard, got treated as if
+    they were the document's real body text, and — if --dry-run wasn't
+    used — could get written straight into the corpus .md file (and from
+    there embedded/chunked/retrieved as if it were real page content).
+    Raise instead, so the caller's existing error-handling path aborts the
+    re-extraction cleanly rather than writing fake "content" to disk.
+    """
     if not HAS_OCR:
-        return "(OCR unavailable — install pdf2image and pytesseract)"
+        raise PdfOcrUnavailableError(
+            "OCR unavailable — install pdf2image and pytesseract"
+        )
     try:
         images = convert_from_bytes(data, dpi=200)
         pages = []
@@ -250,7 +273,7 @@ def extract_pdf_ocr(data: bytes) -> str:
             pages.append(f"### Page {i+1}\n\n{page_text.strip()}")
         return "\n\n".join(pages)
     except Exception as e:
-        return f"(OCR failed: {e})"
+        raise PdfOcrFailedError(f"OCR failed: {e}") from e
 
 
 def extract_html(data: bytes, url: str) -> str:
@@ -536,15 +559,19 @@ def reextract_file(md_path: Path, dry_run: bool = False, use_llm: bool = True):
 
     # Extract raw content
     print(f"  Type : {content_type}")
-    if "pdf" in content_type:
-        raw = extract_pdf_text(data, url)
-    elif "spreadsheet" in content_type or "excel" in content_type or "xlsx" in content_type:
-        raw = extract_excel(data)
-    elif "wordprocessing" in content_type or "docx" in content_type:
-        raw = extract_docx(data)
-    else:
-        # HTML page — use BeautifulSoup for clean extraction
-        raw = extract_html(data, url)
+    try:
+        if "pdf" in content_type:
+            raw = extract_pdf_text(data, url)
+        elif "spreadsheet" in content_type or "excel" in content_type or "xlsx" in content_type:
+            raw = extract_excel(data)
+        elif "wordprocessing" in content_type or "docx" in content_type:
+            raw = extract_docx(data)
+        else:
+            # HTML page — use BeautifulSoup for clean extraction
+            raw = extract_html(data, url)
+    except (PdfOcrUnavailableError, PdfOcrFailedError) as e:
+        print(f"  ↳ {e} — aborting (not writing placeholder text to the corpus)")
+        return False
 
     raw = local_cleanup(raw)
 
