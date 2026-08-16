@@ -5,13 +5,20 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from dotenv import load_dotenv
-load_dotenv()
+
+_server_dir = Path(__file__).resolve().parent.parent
+_rag_dir = _server_dir / "rag"
+# Load before route imports so GOOGLE_CALENDAR_* / JWT secrets are available
+# when modules read os.environ (including lazily). Docker still injects env
+# directly in production; these files matter for local monorepo layouts.
+load_dotenv(_server_dir / ".env")
+load_dotenv(_rag_dir / ".env")
+load_dotenv(_server_dir.parent / ".env")
+load_dotenv()  # cwd fallback
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-_server_dir = Path(__file__).resolve().parent.parent
-_rag_dir = _server_dir / "rag"
 for _p in (str(_server_dir), str(_rag_dir)):
     if _p not in sys.path:
         sys.path.insert(0, _p)

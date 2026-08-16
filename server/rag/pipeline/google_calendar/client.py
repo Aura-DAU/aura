@@ -24,17 +24,27 @@ from .token_vault import get_tokens, store_tokens, CalendarNotLinked, SCOPE_READ
 GOOGLE_TOKEN_URL  = "https://oauth2.googleapis.com/token"
 GOOGLE_EVENTS_URL = "https://www.googleapis.com/calendar/v3/calendars/{cal_id}/events"
 
-CLIENT_ID     = os.environ.get("GOOGLE_CALENDAR_CLIENT_ID", "")
-CLIENT_SECRET = os.environ.get("GOOGLE_CALENDAR_CLIENT_SECRET", "")
+
+def _google_client_id() -> str:
+    # Lazy — env may be injected after import (tests, dotenv after cold start).
+    return os.environ.get("GOOGLE_CALENDAR_CLIENT_ID", "").strip()
+
+
+def _google_client_secret() -> str:
+    return os.environ.get("GOOGLE_CALENDAR_CLIENT_SECRET", "").strip()
 
 
 def _refresh_access_token(erp_id: str, refresh_token: str, current_scope: str) -> str:
     # Exchange the stored refresh token for a new access token.
     # current_scope is passed in from _get_valid_access_token to avoid
     # a redundant vault read inside here (Bug 5 fix).
+    client_id = _google_client_id()
+    client_secret = _google_client_secret()
+    if not client_id or not client_secret:
+        raise RuntimeError("GOOGLE_CALENDAR_CLIENT_ID / GOOGLE_CALENDAR_CLIENT_SECRET not configured.")
     resp = requests.post(GOOGLE_TOKEN_URL, data={
-        "client_id":     CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
+        "client_id":     client_id,
+        "client_secret": client_secret,
         "refresh_token": refresh_token,
         "grant_type":    "refresh_token",
     }, timeout=10)

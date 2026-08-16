@@ -46,14 +46,47 @@ router = APIRouter(prefix="/calendar", tags=["calendar"])
 
 GOOGLE_AUTH_URL   = "https://accounts.google.com/o/oauth2/v2/auth"
 GOOGLE_TOKEN_URL  = "https://oauth2.googleapis.com/token"
-CLIENT_ID         = os.environ.get("GOOGLE_CALENDAR_CLIENT_ID", "")
-CLIENT_SECRET     = os.environ.get("GOOGLE_CALENDAR_CLIENT_SECRET", "")
-REDIRECT_URI      = os.environ.get(
-    "GOOGLE_CALENDAR_REDIRECT_URI",
-    "https://aura.dau.ac.in/backend/calendar/callback",
-)
+# Default matches nginx: FastAPI is mounted under /backend/ in production.
+_DEFAULT_REDIRECT_URI = "https://aura.dau.ac.in/backend/calendar/callback"
 CALENDAR_SCOPE_READONLY = "https://www.googleapis.com/auth/calendar.readonly"
 CALENDAR_SCOPE_EVENTS   = "https://www.googleapis.com/auth/calendar.events"
+
+
+def _google_client_id() -> str:
+    # Lazy — same Bug-8 pattern as token_vault: env may be loaded after import.
+    return os.environ.get("GOOGLE_CALENDAR_CLIENT_ID", "").strip()
+
+
+def _google_client_secret() -> str:
+    return os.environ.get("GOOGLE_CALENDAR_CLIENT_SECRET", "").strip()
+
+
+def _google_redirect_uri() -> str:
+    """OAuth redirect URI for the FastAPI /calendar/callback route.
+
+    Production (nginx): https://aura.dau.ac.in/backend/calendar/callback
+    Local dev:          http://localhost:8000/calendar/callback
+
+    A common misconfig is https://aura.dau.ac.in/calendar/callback (missing
+    /backend/) — Google then redirects to the Next.js front door, which has
+    no callback handler, and token exchange fails as an auth error.
+    """
+    uri = os.environ.get("GOOGLE_CALENDAR_REDIRECT_URI", _DEFAULT_REDIRECT_URI).strip()
+    if (
+        uri.endswith("/calendar/callback")
+        and "/backend/calendar/callback" not in uri
+        and "localhost" not in uri
+        and "127.0.0.1" not in uri
+    ):
+        logger.warning(
+            "GOOGLE_CALENDAR_REDIRECT_URI=%r is missing the /backend/ proxy "
+            "prefix; OAuth callbacks will 404 on the frontend. Expected "
+            "something like %r (must also match the Google Cloud authorized "
+            "redirect URI).",
+            uri,
+            _DEFAULT_REDIRECT_URI,
+        )
+    return uri or _DEFAULT_REDIRECT_URI
 
 
 def _frontend_origin() -> str:
@@ -122,6 +155,17 @@ def _validate_return_to(value: str) -> str:
     return "/dashboard"
 
 
+def _post_oauth_redirect(return_to: str) -> str:
+    """Build the browser redirect after a successful Google Calendar link."""
+    path = _validate_return_to(return_to)
+    origin = _frontend_origin()
+    # Keep "/" as origin/?… — do not lstrip("/") (home would become an empty
+    # path segment and depend on string formatting quirks).
+    if path == "/":
+        return f"{origin}/?calendar=connected"
+    return f"{origin}{path}?calendar=connected"
+
+
 @router.get("/connect")
 def start_calendar_oauth(
     identity: Identity = Depends(require_identity),
@@ -130,7 +174,8 @@ def start_calendar_oauth(
     """Start Google Calendar OAuth flow. Returns JSON {"url": "..."} for frontend redirect."""
     if identity.role not in ("student", "faculty"):
         raise HTTPException(status_code=403, detail="Only students and faculty can connect a Google Calendar.")
-    if not CLIENT_ID:
+    client_id = _google_client_id()
+    if not client_id:
         raise HTTPException(status_code=500, detail="GOOGLE_CALENDAR_CLIENT_ID not configured.")
     secret = get_internal_jwt_secret()
     if not secret:
@@ -148,8 +193,8 @@ def start_calendar_oauth(
     state_token = jwt.encode(state_payload, secret, algorithm=ALGORITHM)
     scope = CALENDAR_SCOPE_EVENTS if identity.role == "student" else CALENDAR_SCOPE_READONLY
     params = {
-        "client_id":     CLIENT_ID,
-        "redirect_uri":  REDIRECT_URI,
+        "client_id":     client_id,
+        "redirect_uri":  _google_redirect_uri(),
         "response_type": "code",
         "scope":         scope,
         "access_type":   "offline",
@@ -168,7 +213,9 @@ def calendar_oauth_callback(
     secret = get_internal_jwt_secret()
     if not secret:
         raise HTTPException(status_code=500, detail="INTERNAL_JWT_SECRET not configured.")
-    if not CLIENT_ID or not CLIENT_SECRET:
+    client_id = _google_client_id()
+    client_secret = _google_client_secret()
+    if not client_id or not client_secret:
         raise HTTPException(status_code=500, detail="Google OAuth credentials not configured.")
 
     try:
@@ -187,11 +234,12 @@ def calendar_oauth_callback(
     if not erp_id:
         raise HTTPException(status_code=400, detail="State token missing erp_id.")
 
+    redirect_uri = _google_redirect_uri()
     resp = _req.post(GOOGLE_TOKEN_URL, data={
         "code":          code,
-        "client_id":     CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
-        "redirect_uri":  REDIRECT_URI,
+        "client_id":     client_id,
+        "client_secret": client_secret,
+        "redirect_uri":  redirect_uri,
         "grant_type":    "authorization_code",
     }, timeout=10)
     if not resp.ok:
@@ -212,8 +260,17 @@ def calendar_oauth_callback(
 
     role  = claims.get("role", "faculty")
     scope = SCOPE_EVENTS if role == "student" else SCOPE_READONLY
-    store_tokens(erp_id=erp_id, access_token=access_token,
-                 refresh_token=refresh_token, token_expiry=expiry, scope=scope)
+    try:
+        store_tokens(erp_id=erp_id, access_token=access_token,
+                     refresh_token=refresh_token, token_expiry=expiry, scope=scope)
+    except RuntimeError as exc:
+        # Most often: GOOGLE_CALENDAR_VAULT_KEY unset — surface as config error,
+        # not an opaque 500 after the user already completed Google consent.
+        logger.error("Failed to persist Google Calendar tokens for %s: %s", erp_id, exc)
+        raise HTTPException(
+            status_code=500,
+            detail="Google Calendar token storage is not configured. Set GOOGLE_CALENDAR_VAULT_KEY.",
+        ) from exc
 
     # Auto-detect timezone from Google Calendar primary calendar
     try:
@@ -232,8 +289,7 @@ def calendar_oauth_callback(
 
     log_action(erp_id, "connect", "success", {"role": role, "scope": scope})
 
-    return_to = _validate_return_to(claims.get("return_to", "/dashboard")).lstrip("/")
-    return RedirectResponse(url=f"{_frontend_origin()}/{return_to}?calendar=connected")
+    return RedirectResponse(url=_post_oauth_redirect(claims.get("return_to", "/dashboard")))
 
 
 @router.delete("/disconnect")
