@@ -15,9 +15,13 @@ for p in (str(server_dir), str(rag_dir)):
 
 logger = logging.getLogger(__name__)
 
-#Loading dotenv file
+# Load dotenv before route modules that read GOOGLE_CALENDAR_* / JWT secrets
+# at import time. Prefer server/.env, then server/rag/.env, then repo-root .env
+# (common local layout — docker injects env vars directly in production).
 from dotenv import load_dotenv
 load_dotenv(server_dir / ".env")
+load_dotenv(rag_dir / ".env")
+load_dotenv(server_dir.parent / ".env")
 
 from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware

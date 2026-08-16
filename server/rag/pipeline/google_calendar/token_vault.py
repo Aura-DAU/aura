@@ -24,8 +24,9 @@ Setup checklist (IT team):
   1. Create a Google Cloud project.
   2. Enable the Google Calendar API.
   3. Create OAuth 2.0 credentials (Web application type).
-  4. Add the redirect URI:
-       https://aura.dau.ac.in/api/calendar/callback
+  4. Add the redirect URI (must match GOOGLE_CALENDAR_REDIRECT_URI exactly):
+       Production: https://aura.dau.ac.in/backend/calendar/callback
+       Local:      http://localhost:8000/calendar/callback
   5. Set env vars:
        GOOGLE_CALENDAR_CLIENT_ID
        GOOGLE_CALENDAR_CLIENT_SECRET

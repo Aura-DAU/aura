@@ -169,19 +169,6 @@ def _connect_action_required(tool_results: list[dict]) -> dict | None:
                 # strings like "Not linked." so the student knows what happens next.
                 "message": _CONNECT_THEN_SYNC_MESSAGE,
             }
-        calendar_sync = r.get("calendar_sync")
-        if isinstance(calendar_sync, dict) and calendar_sync.get("status") == "not_connected":
-            return {
-                "type": "connect_required",
-                "provider": "google_calendar",
-                "connect_path": "/settings/calendar",
-                "reason": "sync_timetable_change",
-                "message": (
-                    "Done -- I've updated your AURA timetable. Want me to keep this in "
-                    "sync with your Google Calendar too? Connect it and I'll sync "
-                    "automatically from now on."
-                ),
-            }
     return None
 
 
