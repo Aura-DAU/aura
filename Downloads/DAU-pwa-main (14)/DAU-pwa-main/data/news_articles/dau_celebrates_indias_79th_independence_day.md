@@ -1,0 +1,28 @@
+---
+title: "DAU Celebrates India's 79th Independence Day"
+url: "https://www.daiict.ac.in/news/6854"
+category: "Announcements"
+scraped_by: "Vedant Shah"
+scraped_date: "2026-05-31"
+team: "Team C"
+---
+
+# Overview
+
+DAU Celebrates India's 79th Independence Day
+
+The DAU campus was filled with patriotic spirit as the community celebrated the 79th Independence Day of India. The national flag was hoisted by Senior Professor Manjunath V Joshi in the presence of Prof Tathagata Bandyopadhyay, Director General, DAU.
+
+# Main Content
+
+DAU Celebrates India's 79th Independence Day
+
+The DAU campus was filled with patriotic spirit as the community celebrated the 79th Independence Day of India. The national flag was hoisted by Senior Professor Manjunath V Joshi in the presence of Prof Tathagata Bandyopadhyay, Director General, DAU.
+During his address, Prof Joshi shared an inspiring message, emphasizing that identifying one's passion is key to achieving success. He highlighted the importance of education in shaping a student's journey.
+Students, faculty, and staff members came together to take a pledge against substance abuse, ragging, and violence. The event was a powerful reminder of our collective commitment to a positive and respectful campus environment.
+#IndependenceDay
+Photo credit @Photography and Movie Making Club (PMMC)_DAU
+
+# Important Information
+
+- Date of Announcement: 15/08/2025

@@ -1,0 +1,51 @@
+---
+title: "Scholarships at DA-IICT for Students Admitted Under DAFS Category"
+category: "policies"
+scraped_by: "AURA KB Team (manual transcription/OCR from user-uploaded PDF, AURA.zip)"
+scraped_date: "2026-08-15"
+source_type: PDF
+status: "Transcribed from a locally-uploaded source document; no live DAU/DA-IICT web URL was confirmed for this specific file during this pass, so none is asserted here. See the file's own \"Source\"/\"Notes on Extraction\" section below for original filename, OCR notes, and any manual-review flags."
+authorization: ["guest"]
+---
+
+# Scholarships at DA-IICT for Students Admitted Under DAFS Category
+
+*(Direct Admission of Foreign and NRI Students — With effect from Autumn 2022-23)*
+
+## Source
+
+- **Institution:** Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar, Gujarat, India 382007
+- **Original file:** `Scholarships/Scholarships at DA-IICT for NRI-FN-students_wef Autumn 2022-23.pdf`
+- **Signed by:** Dr. K. S. Dasgupta, Director, DA-IICT, Gandhinagar
+
+## 1. Introduction
+
+The Institute awards Merit scholarships to students admitted through the Direct Admission of Foreign and NRI Students (DAFS) category in the B Tech programs. Scholarships of a value equal to **Rs. 70,000/- per semester**, for the duration of the program (maximum eight semesters only), are awarded — the scheme has been in effect since 2019-20 (this document reaffirms it with effect from Autumn 2022-23).
+
+## 2. Selection of Scholarship Awardees
+
+Scholarships are offered to the **five** students with the highest SPI (Semester Performance Index) among students admitted through the DAFS category, provided the student satisfies the conditions below. The Summer Semester is not covered in the scheme; hence a student who does not satisfy a particular condition in the Winter Semester of a particular academic year would not be eligible for the scholarship in the Autumn Semester of the succeeding academic year.
+
+### Minimum SPI
+The SPI obtained by the student should be 7.00/10.00 or above in every semester. If the SPI falls below 7.00/10.00 in a particular semester, the scholarship will not be offered in the succeeding semester. If the SPI in a later semester is again 7.00/10.00 or above, the scholarship is restored from the succeeding semester.
+
+### Pass in All Courses
+The student should not obtain a grade other than a passing grade in all courses taken in a semester (a passing letter grade, or a grade of P for P/F graded courses). If the student gets a non-passing grade (F/NP/X) in any course of a semester, they will not be eligible for the scholarship for one succeeding semester.
+
+A student who undertakes courses of a semester at another institution under the transfer of credits provision will not be eligible for the scholarship for the succeeding semester.
+
+### Duration of Study
+The student should complete all degree requirements within the normal duration of study for the program.
+
+### Probation or Disciplinary Action
+The student should at no time be placed on academic probation or be subjected to any disciplinary action by the Institute, and should not have been subjected to any action for use of unfair means in any examination or for plagiarism in any submission. If this condition is not satisfied, the scholarship will be permanently withdrawn.
+
+### Scholarship Other Than DA-IICT
+The awardee should not be in receipt of any other scholarship — the source document's final clause is cut off before naming the specific bodies excluded (compare the 2019-20 version, which specifies "Govt. of India / State Government / any other agency").
+
+## Notes on Extraction / Manual Review
+
+> ⚠️ This document's terms (5 scholarships × Rs. 70,000/semester, flat rate) differ from the separate `Scholarships at DA-IICT for NRI-FN-students_2021-22_batch.pdf` document (10 scholarships in two bands of Rs. 85,000 / Rs. 70,000, UG 2021-22 batch only). Both documents appear to be in the source folder concurrently and are **not reconciled here** — flagged for manual review to confirm which scheme applies to which admitted batch.
+>
+> The final sentence of the "Scholarship other than DA-IICT" clause is cut off in the source scan (text runs into the signature block). Not completed or guessed — left as extracted.
+> Source document has a partially corrupted embedded text layer (e.g. "SPI" appears as "Spl"); cleaned for these obvious scan artifacts. The passing-grade threshold appears as "DE or above" (likely "D- or above," unverified).

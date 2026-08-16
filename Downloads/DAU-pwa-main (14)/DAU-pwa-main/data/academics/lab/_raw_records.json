@@ -1,0 +1,2111 @@
+{
+  "BTech Core: SEMESTER I (2026 Batch)": [
+    {
+      "day": "Tuesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IC104",
+      "faculty": "AV/PK/RLD/RP",
+      "room": "LAB101 & LAB102",
+      "groups": [
+        3,
+        4
+      ],
+      "raw_cell": "G3/G4"
+    },
+    {
+      "day": "Wednesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IC104",
+      "faculty": "AV/PK/RLD/RP",
+      "room": "LAB101 & LAB102",
+      "groups": [
+        5,
+        6
+      ],
+      "raw_cell": "G5/G6"
+    },
+    {
+      "day": "Thursday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IC104",
+      "faculty": "AV/PK/RLD/RP",
+      "room": "LAB101 & LAB102",
+      "groups": [
+        7,
+        8
+      ],
+      "raw_cell": "G7/G8"
+    },
+    {
+      "day": "Friday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IC104",
+      "faculty": "AV/PK/RLD/RP",
+      "room": "LAB101 & LAB102",
+      "groups": [
+        1,
+        2
+      ],
+      "raw_cell": "G1/G2"
+    },
+    {
+      "day": "Monday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "PC1(EVD)",
+      "faculty": "AR",
+      "room": "LAB207, LAB112 & LAB009",
+      "groups": [],
+      "raw_cell": "PC1(EVD)"
+    },
+    {
+      "day": "Tuesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "LAB004 & LAB005",
+      "groups": [
+        1,
+        2
+      ],
+      "raw_cell": "G1/G2"
+    },
+    {
+      "day": "Wednesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "LAB004 & LAB005",
+      "groups": [
+        3,
+        4
+      ],
+      "raw_cell": "G3/G4"
+    },
+    {
+      "day": "Thursday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "LAB004 & LAB005",
+      "groups": [
+        5,
+        6
+      ],
+      "raw_cell": "G5/G6"
+    },
+    {
+      "day": "Friday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "LAB004 & LAB005",
+      "groups": [
+        7,
+        8
+      ],
+      "raw_cell": "G7/G8"
+    },
+    {
+      "day": "Monday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "PC1(ECE-AI)",
+      "faculty": "AB",
+      "room": "EVD Lab@CEP G.F.",
+      "groups": [],
+      "raw_cell": "PC1(ECE-AI)"
+    },
+    {
+      "day": "Thursday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IC105",
+      "faculty": "AB1/NKS/PK3/SP2",
+      "room": "CEP-103 & CEP-106 & CEP-108",
+      "groups": [
+        1
+      ],
+      "raw_cell": "Tut. G1"
+    },
+    {
+      "day": "Friday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IC105",
+      "faculty": "AB1/NKS/PK3/SP2",
+      "room": "CEP-103 & CEP-106 & CEP-108",
+      "groups": [
+        4
+      ],
+      "raw_cell": "Tut. G4"
+    },
+    {
+      "day": "Thursday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IC105",
+      "faculty": "AB1/NKS/PK3/SP2",
+      "room": "CEP-103 & CEP-106 & CEP-108",
+      "groups": [
+        2
+      ],
+      "raw_cell": "Tut. G2"
+    },
+    {
+      "day": "Friday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IC105",
+      "faculty": "AB1/NKS/PK3/SP2",
+      "room": "CEP-103 & CEP-106 & CEP-108",
+      "groups": [
+        5
+      ],
+      "raw_cell": "Tut. G5"
+    },
+    {
+      "day": "Monday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "PC1 (MnC)",
+      "faculty": "VS",
+      "room": "CEP-106",
+      "groups": [],
+      "raw_cell": "PC1 (MnC)"
+    },
+    {
+      "day": "Monday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "PC1 (ICT & CS)",
+      "faculty": "SB2",
+      "room": "CEP-202",
+      "groups": [],
+      "raw_cell": "PC1 (ICT & CS)"
+    },
+    {
+      "day": "Monday",
+      "start": "14:00",
+      "end": "15:00",
+      "course": "PC1 (ICT)",
+      "faculty": "RM",
+      "room": "CEP-204",
+      "groups": [],
+      "raw_cell": "PC1 (ICT)"
+    },
+    {
+      "day": "Monday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "PC1 (CS-AI)",
+      "faculty": "SCN",
+      "room": "CEP-108",
+      "groups": [],
+      "raw_cell": "PC1 (CS-AI)"
+    },
+    {
+      "day": "Wednesday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "CEP-102 & CEP-110 & CEP-204",
+      "groups": [
+        4
+      ],
+      "raw_cell": "Tut. G4"
+    },
+    {
+      "day": "Wednesday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "CEP-102 & CEP-110 & CEP-204",
+      "groups": [
+        5
+      ],
+      "raw_cell": "Tut. G5"
+    },
+    {
+      "day": "Wednesday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "CEP-102 & CEP-110 & CEP-204",
+      "groups": [
+        6
+      ],
+      "raw_cell": "Tut. G6"
+    },
+    {
+      "day": "Tuesday",
+      "start": "16:00",
+      "end": "17:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "CEP-106 & CEP-202 & CEP-204",
+      "groups": [
+        1
+      ],
+      "raw_cell": "Tut. G1"
+    },
+    {
+      "day": "Tuesday",
+      "start": "16:00",
+      "end": "17:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "CEP-106 & CEP-202 & CEP-204",
+      "groups": [
+        2
+      ],
+      "raw_cell": "Tut. G2"
+    },
+    {
+      "day": "Tuesday",
+      "start": "16:00",
+      "end": "17:00",
+      "course": "IC103",
+      "faculty": "TF/TA",
+      "room": "CEP-106 & CEP-202 & CEP-204",
+      "groups": [
+        3
+      ],
+      "raw_cell": "Tut. G3"
+    }
+  ],
+  "BS-MS (IT) Core: SEMESTER I (2026 Batch)": [
+    {
+      "day": "Thursday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "MT1001",
+      "faculty": "SS1",
+      "room": "CEP-102",
+      "groups": [],
+      "raw_cell": "MT1001"
+    },
+    {
+      "day": "Monday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT1002",
+      "faculty": "TKM",
+      "room": "LAB104 & LAB107",
+      "groups": [],
+      "raw_cell": "IT1002"
+    },
+    {
+      "day": "Tuesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT1001",
+      "faculty": "AKM",
+      "room": "CEP207",
+      "groups": [],
+      "raw_cell": "IT1001"
+    }
+  ],
+  "BS-MS (DS & AI) Core: SEMESTER I (2026 Batch)": [
+    {
+      "day": "Wednesday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "MA1001",
+      "faculty": "PK3",
+      "room": "CEP-103",
+      "groups": [],
+      "raw_cell": "MA1001"
+    },
+    {
+      "day": "Thursday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "MA1002",
+      "faculty": "AKT",
+      "room": "CEP-110",
+      "groups": [],
+      "raw_cell": "MA1002"
+    },
+    {
+      "day": "Tuesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "CP1002",
+      "faculty": "AMM",
+      "room": "CEP103",
+      "groups": [],
+      "raw_cell": "CP1002"
+    }
+  ],
+  "BTech (ICT and CS) Core: SEMESTER III (2025 Batch)": [
+    {
+      "day": "Monday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "CT204",
+      "faculty": "RLD/SM",
+      "room": "LAB101 & LAB102",
+      "groups": [
+        1,
+        2
+      ],
+      "raw_cell": "G1/G2"
+    },
+    {
+      "day": "Tuesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "CT204",
+      "faculty": "RLD/SM",
+      "room": "LAB101 & LAB102",
+      "groups": [
+        3,
+        4
+      ],
+      "raw_cell": "G3/G4"
+    },
+    {
+      "day": "Wednesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "CT204",
+      "faculty": "RLD/SM",
+      "room": "LAB101 & LAB102",
+      "groups": [
+        5,
+        6
+      ],
+      "raw_cell": "G5/G6"
+    },
+    {
+      "day": "Monday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT227",
+      "faculty": "SB/AKM",
+      "room": "LAB007 & LAB008",
+      "groups": [
+        3,
+        4
+      ],
+      "raw_cell": "G3/G4"
+    },
+    {
+      "day": "Tuesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT227",
+      "faculty": "SB/AKM",
+      "room": "LAB007 & LAB008",
+      "groups": [
+        5,
+        6
+      ],
+      "raw_cell": "G5/G6"
+    },
+    {
+      "day": "Wednesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT227",
+      "faculty": "SB/AKM",
+      "room": "LAB007 & LAB008",
+      "groups": [
+        1,
+        2
+      ],
+      "raw_cell": "G1/G2"
+    },
+    {
+      "day": "Monday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IT216",
+      "faculty": "PB/RM",
+      "room": "CEP-102 & CEP-110",
+      "groups": [
+        1
+      ],
+      "raw_cell": "Tut. G1"
+    },
+    {
+      "day": "Friday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IT216",
+      "faculty": "PB/RM",
+      "room": "CEP-102 & CEP-110",
+      "groups": [
+        3
+      ],
+      "raw_cell": "Tut. G3"
+    },
+    {
+      "day": "Monday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IT216",
+      "faculty": "PB/RM",
+      "room": "CEP-102 & CEP-110",
+      "groups": [
+        2
+      ],
+      "raw_cell": "Tut. G2"
+    },
+    {
+      "day": "Friday",
+      "start": "11:00",
+      "end": "12:00",
+      "course": "IT216",
+      "faculty": "PB/RM",
+      "room": "CEP-102 & CEP-110",
+      "groups": [
+        4
+      ],
+      "raw_cell": "Tut. G4"
+    },
+    {
+      "day": "Monday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "SC223",
+      "faculty": "AKT/MKR",
+      "room": "CEP-103 & CEP-106",
+      "groups": [
+        1
+      ],
+      "raw_cell": "Tut. G1"
+    },
+    {
+      "day": "Tuesday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "SC223",
+      "faculty": "AKT/MKR",
+      "room": "CEP-103 & CEP-106",
+      "groups": [
+        3
+      ],
+      "raw_cell": "Tut. G3"
+    },
+    {
+      "day": "Monday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "SC223",
+      "faculty": "AKT/MKR",
+      "room": "CEP-103 & CEP-106",
+      "groups": [
+        2
+      ],
+      "raw_cell": "Tut. G2"
+    },
+    {
+      "day": "Tuesday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "SC223",
+      "faculty": "AKT/MKR",
+      "room": "CEP-103 & CEP-106",
+      "groups": [
+        4
+      ],
+      "raw_cell": "Tut. G4"
+    }
+  ],
+  "BTech (MnC) Core: SEMESTER III (2025 Batch)": [
+    {
+      "day": "Monday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "MC214",
+      "faculty": "MC",
+      "room": "LAB108",
+      "groups": [],
+      "raw_cell": "MC214"
+    },
+    {
+      "day": "Tuesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "MC212",
+      "faculty": "MB",
+      "room": "LAB108",
+      "groups": [],
+      "raw_cell": "MC212"
+    },
+    {
+      "day": "Wednesday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "MC211",
+      "faculty": "MS",
+      "room": "CEP-202",
+      "groups": [],
+      "raw_cell": "MC211"
+    },
+    {
+      "day": "Thursday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "MC213",
+      "faculty": "SB3",
+      "room": "CEP-202",
+      "groups": [],
+      "raw_cell": "MC213"
+    },
+    {
+      "day": "Friday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "MC216",
+      "faculty": "SCN",
+      "room": "CEP-103",
+      "groups": [],
+      "raw_cell": "MC216"
+    }
+  ],
+  "BTech (EVD) Core: SEMESTER III (2025 Batch)": [
+    {
+      "day": "Monday",
+      "start": "09:00",
+      "end": "13:00",
+      "course": "ED214",
+      "faculty": "BM",
+      "room": "EVD Lab@CEP G.F. & LAB00",
+      "groups": [],
+      "raw_cell": "ED214"
+    },
+    {
+      "day": "Tuesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "ED212",
+      "faculty": "PK",
+      "room": "EVD Lab@CEP G.F.",
+      "groups": [],
+      "raw_cell": "ED212"
+    },
+    {
+      "day": "Wednesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "ED213",
+      "faculty": "HP",
+      "room": "EVD Lab@CEP G.F.",
+      "groups": [],
+      "raw_cell": "ED213"
+    },
+    {
+      "day": "Thursday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "ED211",
+      "faculty": "YV",
+      "room": "CEP-104",
+      "groups": [],
+      "raw_cell": "ED211"
+    },
+    {
+      "day": "Friday",
+      "start": "13:00",
+      "end": "14:00",
+      "course": "ED214",
+      "faculty": "BM",
+      "room": "CEP-104",
+      "groups": [],
+      "raw_cell": "ED214"
+    }
+  ],
+  "BTech (ICT and CS) Core: SEMESTER V (2024 Batch)": [
+    {
+      "day": "Tuesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "CT304",
+      "faculty": "MK2/AJ",
+      "room": "LAB104 & LAB107",
+      "groups": [
+        1,
+        2
+      ],
+      "raw_cell": "G1/G2"
+    },
+    {
+      "day": "Wednesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "CT304",
+      "faculty": "MK2/AJ",
+      "room": "LAB104 & LAB107",
+      "groups": [
+        3,
+        4
+      ],
+      "raw_cell": "G3/G4"
+    },
+    {
+      "day": "Thursday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "CT304",
+      "faculty": "MK2/AJ",
+      "room": "LAB104 & LAB107",
+      "groups": [
+        5,
+        6
+      ],
+      "raw_cell": "G5/G6"
+    },
+    {
+      "day": "Tuesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT305",
+      "faculty": "SS/MC",
+      "room": "LAB013 & LAB008",
+      "groups": [
+        3,
+        4
+      ],
+      "raw_cell": "G3/G4"
+    },
+    {
+      "day": "Wednesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT305",
+      "faculty": "SS/MC",
+      "room": "LAB013 & LAB008",
+      "groups": [
+        5,
+        6
+      ],
+      "raw_cell": "G5/G6"
+    },
+    {
+      "day": "Thursday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT305",
+      "faculty": "SS/MC",
+      "room": "LAB013 & LAB008",
+      "groups": [
+        1,
+        2
+      ],
+      "raw_cell": "G1/G2"
+    },
+    {
+      "day": "Tuesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT313",
+      "faculty": "ST",
+      "room": "LAB001 & LAB002",
+      "groups": [
+        5,
+        6
+      ],
+      "raw_cell": "G5/G6"
+    },
+    {
+      "day": "Wednesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT313",
+      "faculty": "ST",
+      "room": "LAB001 & LAB002",
+      "groups": [
+        1,
+        2
+      ],
+      "raw_cell": "G1/G2"
+    },
+    {
+      "day": "Thursday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT313",
+      "faculty": "ST",
+      "room": "LAB001 & LAB002",
+      "groups": [
+        3,
+        4
+      ],
+      "raw_cell": "G3/G4"
+    }
+  ],
+  "BTech (CS) Core: SEMESTER V (2024 Batch)": [
+    {
+      "day": "Wednesday",
+      "start": "11:00",
+      "end": "14:00",
+      "course": "CS374",
+      "faculty": "PK2",
+      "room": "LAB207",
+      "groups": [],
+      "raw_cell": "CS374"
+    }
+  ],
+  "BTech (MnC) Core: SEMESTER V (2024 Batch)": [
+    {
+      "day": "Monday",
+      "start": "09:00",
+      "end": "10:00",
+      "course": "MC313",
+      "faculty": "SB2",
+      "room": "CEP-212",
+      "groups": [],
+      "raw_cell": "MC313"
+    },
+    {
+      "day": "Thursday",
+      "start": "10:00",
+      "end": "11:00",
+      "course": "MC311",
+      "faculty": "AT",
+      "room": "CEP-212",
+      "groups": [],
+      "raw_cell": "MC311"
+    },
+    {
+      "day": "Wednesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "MC312",
+      "faculty": "MT",
+      "room": "LAB207",
+      "groups": [],
+      "raw_cell": "MC312"
+    }
+  ],
+  "BTech (EVD) Core: SEMESTER V (2024 Batch)": [
+    {
+      "day": "Wednesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "ED313",
+      "faculty": "SR",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "ED313"
+    },
+    {
+      "day": "Tuesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "ED313",
+      "faculty": "SR",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "ED313"
+    },
+    {
+      "day": "Thursday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "ED111",
+      "faculty": "YA",
+      "room": "LAB108",
+      "groups": [],
+      "raw_cell": "ED311"
+    }
+  ],
+  "BTech (ICT &  CS) Elective: SEMESTER V (2024 Batch)": [
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE494",
+      "faculty": "PMJ",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IE494"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE415",
+      "faculty": "SK",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "IE415"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "CT437",
+      "faculty": "HP",
+      "room": "LAB108",
+      "groups": [],
+      "raw_cell": "CT437"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL526",
+      "faculty": "MG",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "EL526"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE411",
+      "faculty": "AMM",
+      "room": "LAB008",
+      "groups": [],
+      "raw_cell": "IE411"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE402",
+      "faculty": "NKS",
+      "room": "LAB007",
+      "groups": [],
+      "raw_cell": "IE402"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE424",
+      "faculty": "VSP",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "IE424"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE406",
+      "faculty": "AC1",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "IE406"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE403",
+      "faculty": "PKS",
+      "room": "LAB004",
+      "groups": [],
+      "raw_cell": "IE403"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL470",
+      "faculty": "AB",
+      "room": "LAB204A",
+      "groups": [],
+      "raw_cell": "EL470"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT462",
+      "faculty": "GP",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IT462"
+    }
+  ],
+  "BTech (MNC) Elective: SEMESTER V (2024 Batch)": [
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE494",
+      "faculty": "PMJ",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IE494"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT462",
+      "faculty": "GP",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IT462"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "SC451",
+      "faculty": "VS",
+      "room": "LAB004",
+      "groups": [],
+      "raw_cell": "SC451"
+    }
+  ],
+  "BTech (EVD) Elective: SEMESTER V (2024 Batch)": [
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE415",
+      "faculty": "SK",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "IE415"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "CT437",
+      "faculty": "HP",
+      "room": "LAB108",
+      "groups": [],
+      "raw_cell": "CT437"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE402",
+      "faculty": "NKS",
+      "room": "LAB007",
+      "groups": [],
+      "raw_cell": "IE402"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE411",
+      "faculty": "AMM",
+      "room": "LAB008",
+      "groups": [],
+      "raw_cell": "IE411"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE420",
+      "faculty": "TKM",
+      "room": "LAB101",
+      "groups": [],
+      "raw_cell": "IE420"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE406",
+      "faculty": "AC1",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "IE406"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL467",
+      "faculty": "YA",
+      "room": "LAB104",
+      "groups": [],
+      "raw_cell": "EL467"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL470",
+      "faculty": "AB",
+      "room": "LAB204A",
+      "groups": [],
+      "raw_cell": "EL470"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL403",
+      "faculty": "BM",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "EL403"
+    }
+  ],
+  "BTech (ICT, ICT-CS) Elective (RAS minor): SEMESTER VII (2023 Batch)": [
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE494",
+      "faculty": "PMJ",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IE494"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE415",
+      "faculty": "SK",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "IE415"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "CT437",
+      "faculty": "HP",
+      "room": "LAB108",
+      "groups": [],
+      "raw_cell": "CT437"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "CT546",
+      "faculty": "MK2",
+      "room": "LAB104",
+      "groups": [],
+      "raw_cell": "CT546"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL526",
+      "faculty": "MG",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "EL526"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT550",
+      "faculty": "SM1",
+      "room": "LAB105",
+      "groups": [],
+      "raw_cell": "IT550"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT524",
+      "faculty": "MVJ",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "IT524"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE402",
+      "faculty": "NKS",
+      "room": "LAB007",
+      "groups": [],
+      "raw_cell": "IE402"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE411",
+      "faculty": "AMM",
+      "room": "LAB008",
+      "groups": [],
+      "raw_cell": "IE411"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE424",
+      "faculty": "VSP",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "IE424"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE403",
+      "faculty": "PKS",
+      "room": "LAB004",
+      "groups": [],
+      "raw_cell": "IE403"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE420",
+      "faculty": "TKM",
+      "room": "LAB101",
+      "groups": [],
+      "raw_cell": "IE420"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE406",
+      "faculty": "AC1",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "IE406"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL467",
+      "faculty": "YA",
+      "room": "LAB104",
+      "groups": [],
+      "raw_cell": "EL467"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT531",
+      "faculty": "AG1",
+      "room": "LAB013",
+      "groups": [],
+      "raw_cell": "IT531"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT457",
+      "faculty": "PKS",
+      "room": "LAB005",
+      "groups": [],
+      "raw_cell": "IT457"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT594",
+      "faculty": "SDG",
+      "room": "LAB001",
+      "groups": [],
+      "raw_cell": "IT594"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT586",
+      "faculty": "AS",
+      "room": "LAB105",
+      "groups": [],
+      "raw_cell": "IT586"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL470",
+      "faculty": "AB",
+      "room": "LAB204A",
+      "groups": [],
+      "raw_cell": "EL470"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL413",
+      "faculty": "VSP",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "EL413"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "DS401",
+      "faculty": "AT4",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "DS401"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "SC451",
+      "faculty": "VS",
+      "room": "LAB004",
+      "groups": [],
+      "raw_cell": "SC451"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL403",
+      "faculty": "BM",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "EL403"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "DE401",
+      "faculty": "BD",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "DE401"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "SC453",
+      "faculty": "JV",
+      "room": "LAB013",
+      "groups": [],
+      "raw_cell": "SC453"
+    }
+  ],
+  "BTech (MnC) Elective: SEMESTER VII (2023 Batch)": [
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE494",
+      "faculty": "PMJ",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IE494"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT550",
+      "faculty": "SM1",
+      "room": "LAB105",
+      "groups": [],
+      "raw_cell": "IT550"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE403",
+      "faculty": "PKS",
+      "room": "LAB004",
+      "groups": [],
+      "raw_cell": "IE403"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT457",
+      "faculty": "PKS",
+      "room": "LAB005",
+      "groups": [],
+      "raw_cell": "IT457"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT594",
+      "faculty": "SDG",
+      "room": "LAB001",
+      "groups": [],
+      "raw_cell": "IT594"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT586",
+      "faculty": "AS",
+      "room": "LAB105",
+      "groups": [],
+      "raw_cell": "IT586"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "DS401",
+      "faculty": "AT4",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "DS401"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "DE401",
+      "faculty": "BD",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "DE401"
+    }
+  ],
+  "BTech (EVD) Elective: SEMESTER VII (2023 Batch)": [
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE415",
+      "faculty": "SK",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "IE415"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "CT437",
+      "faculty": "HP",
+      "room": "LAB108",
+      "groups": [],
+      "raw_cell": "CT437"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE402",
+      "faculty": "NKS",
+      "room": "LAB007",
+      "groups": [],
+      "raw_cell": "IE402"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE411",
+      "faculty": "AMM",
+      "room": "LAB008",
+      "groups": [],
+      "raw_cell": "IE411"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL412",
+      "faculty": "VSP",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "EL412"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE420",
+      "faculty": "TKM",
+      "room": "LAB101",
+      "groups": [],
+      "raw_cell": "IE420"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE406",
+      "faculty": "AC1",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "IE406"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL467",
+      "faculty": "YA",
+      "room": "LAB104",
+      "groups": [],
+      "raw_cell": "EL467"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT586",
+      "faculty": "AS",
+      "room": "LAB105",
+      "groups": [],
+      "raw_cell": "IT586"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL470",
+      "faculty": "AB",
+      "room": "LAB204A",
+      "groups": [],
+      "raw_cell": "EL470"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL413",
+      "faculty": "VSP",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "EL413"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT462",
+      "faculty": "GP",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IT462"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "DE401",
+      "faculty": "BD",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "DE401"
+    }
+  ],
+  "MTech (ICT) Core: SEMESTER I (2026 Batch)": [
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "PC503",
+      "faculty": "AV",
+      "room": "CEP108",
+      "groups": [],
+      "raw_cell": "PC503"
+    },
+    {
+      "day": "Thursday",
+      "start": "08:00",
+      "end": "10:00",
+      "course": "PC503",
+      "faculty": "AV",
+      "room": "CEP204",
+      "groups": [],
+      "raw_cell": "PC503"
+    }
+  ],
+  "MTech (ICT) Specialization Core: SEMESTER I (2026 Batch)": [
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT580",
+      "faculty": "MLD",
+      "room": "LAB005",
+      "groups": [],
+      "raw_cell": "IT580"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT582",
+      "faculty": "SM",
+      "room": "LAB004",
+      "groups": [],
+      "raw_cell": "IT582"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL526",
+      "faculty": "MG",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "EL526"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "CT546",
+      "faculty": "MK2",
+      "room": "LAB104",
+      "groups": [],
+      "raw_cell": "CT546"
+    }
+  ],
+  "MTech (ICT , SS, ML, VES, WCSP )Elective: SEMESTER I (2026 Batch)": [
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT580",
+      "faculty": "MLD",
+      "room": "LAB005",
+      "groups": [],
+      "raw_cell": "IT580"
+    },
+    {
+      "day": "Monday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL526",
+      "faculty": "MG",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "EL526"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE402",
+      "faculty": "NKS",
+      "room": "LAB007",
+      "groups": [],
+      "raw_cell": "IE402"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE411",
+      "faculty": "AMM",
+      "room": "LAB008",
+      "groups": [],
+      "raw_cell": "IE411"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IE403",
+      "faculty": "PKS",
+      "room": "lAB004",
+      "groups": [],
+      "raw_cell": "IE403"
+    },
+    {
+      "day": "Tuesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL412",
+      "faculty": "VSP",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "EL412"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT457",
+      "faculty": "PKS",
+      "room": "LAB005",
+      "groups": [],
+      "raw_cell": "IT457"
+    },
+    {
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL467",
+      "faculty": "YA",
+      "room": "LAB104",
+      "groups": [],
+      "raw_cell": "EL467"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT582",
+      "faculty": "SM",
+      "room": "LAB004",
+      "groups": [],
+      "raw_cell": "IT582"
+    },
+    {
+      "day": "Thursday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "EL470",
+      "faculty": "AB",
+      "room": "LAB204A",
+      "groups": [],
+      "raw_cell": "EL470"
+    },
+    {
+      "day": "Friday",
+      "start": "12:00",
+      "end": "14:00",
+      "course": "IT462",
+      "faculty": "GP",
+      "room": "CEP202",
+      "groups": [],
+      "raw_cell": "IT462"
+    }
+  ],
+  "MTech (ICT - SS , ML, VES): SEMESTER III (2025 Batch)": [
+    {
+      "day": "Friday",
+      "start": "08:00",
+      "end": "10:00",
+      "course": "IE494",
+      "faculty": "PMJ",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IE494"
+    },
+    {
+      "day": "Friday",
+      "start": "08:00",
+      "end": "10:00",
+      "course": "IT550",
+      "faculty": "AG1",
+      "room": "LAB105",
+      "groups": [],
+      "raw_cell": "IT550"
+    },
+    {
+      "day": "Friday",
+      "start": "08:00",
+      "end": "10:00",
+      "course": "IT524",
+      "faculty": "MVJ",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "IT524"
+    },
+    {
+      "day": "Tuesday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "EL518",
+      "faculty": "TKM",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "EL518"
+    },
+    {
+      "day": "Wednesday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "DS401",
+      "faculty": "AT4",
+      "room": "CEP205",
+      "groups": [],
+      "raw_cell": "DS401"
+    },
+    {
+      "day": "Wednesday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "EL413",
+      "faculty": "VSP",
+      "room": "LAB213",
+      "groups": [],
+      "raw_cell": "EL413"
+    },
+    {
+      "day": "Thursday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "EL505",
+      "faculty": "BM",
+      "room": "LAB205",
+      "groups": [],
+      "raw_cell": "EL505"
+    },
+    {
+      "day": "Friday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "IT586",
+      "faculty": "AS",
+      "room": "CEP206",
+      "groups": [],
+      "raw_cell": "IT586"
+    },
+    {
+      "day": "Friday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "IT531",
+      "faculty": "AG1",
+      "room": "CEP205",
+      "groups": [],
+      "raw_cell": "IT531"
+    },
+    {
+      "day": "Friday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "IT594",
+      "faculty": "SDG",
+      "room": "CEP107",
+      "groups": [],
+      "raw_cell": "IT594"
+    }
+  ],
+  "MSc (IT): SEMESTER I (2026 Batch)": [
+    {
+      "day": "Tuesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT615",
+      "faculty": "MB",
+      "room": "CEP204",
+      "groups": [],
+      "raw_cell": "IT615"
+    },
+    {
+      "day": "Wednesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT603",
+      "faculty": "SM1",
+      "room": "CEP102",
+      "groups": [],
+      "raw_cell": "IT603"
+    },
+    {
+      "day": "Friday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT623",
+      "faculty": "SP",
+      "room": "CEP204",
+      "groups": [],
+      "raw_cell": "IT623"
+    }
+  ],
+  "MSc (DS): SEMESTER I (2026 Batch)": [
+    {
+      "day": "Tuesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "DS602",
+      "faculty": "SB3",
+      "room": "LAB210",
+      "groups": [],
+      "raw_cell": "DS602"
+    },
+    {
+      "day": "Wednesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "DS603",
+      "faculty": "MLD",
+      "room": "LAB210",
+      "groups": [],
+      "raw_cell": "DS603"
+    },
+    {
+      "day": "Thursday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "DS604",
+      "faculty": "PMJ",
+      "room": "LAB210",
+      "groups": [],
+      "raw_cell": "DS604"
+    },
+    {
+      "day": "Thursday",
+      "start": "17:00",
+      "end": "18:00",
+      "course": "SC612",
+      "faculty": "GP",
+      "room": "CEP-202",
+      "groups": [],
+      "raw_cell": "SC612"
+    },
+    {
+      "day": "Friday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "DS605",
+      "faculty": "AR2",
+      "room": "LAB210",
+      "groups": [],
+      "raw_cell": "DS605"
+    },
+    {
+      "day": "Monday",
+      "start": "17:00",
+      "end": "18:00",
+      "course": "DS601",
+      "faculty": "BC",
+      "room": "CEP-202",
+      "groups": [],
+      "raw_cell": "DS601"
+    }
+  ],
+  "MSc (IT) Core: SEMESTER III (2025 Batch)": [
+    {
+      "day": "Monday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT643",
+      "faculty": "AC",
+      "room": "LAB004 & LAB005",
+      "groups": [],
+      "raw_cell": "IT643"
+    },
+    {
+      "day": "Tuesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT644",
+      "faculty": "JL",
+      "room": "LAB004 & LAB005",
+      "groups": [],
+      "raw_cell": "IT644"
+    },
+    {
+      "day": "Wednesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT645",
+      "faculty": "SB",
+      "room": "LAB004 & LAB005",
+      "groups": [],
+      "raw_cell": "IT645"
+    }
+  ],
+  "MSc (IT) Elective: SEMESTER III (2025 Batch)": [
+    {
+      "day": "Monday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT580",
+      "faculty": "MLD",
+      "room": "CEP104",
+      "groups": [],
+      "raw_cell": "IT580"
+    },
+    {
+      "day": "Monday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IE494",
+      "faculty": "PMJ",
+      "room": "CEP203",
+      "groups": [],
+      "raw_cell": "IE494"
+    },
+    {
+      "day": "Wednesday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "IT462",
+      "faculty": "GP",
+      "room": "CEP202",
+      "groups": [],
+      "raw_cell": "IT462"
+    },
+    {
+      "day": "Thursday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT531",
+      "faculty": "AG1",
+      "room": "LAB004",
+      "groups": [],
+      "raw_cell": "IT531"
+    },
+    {
+      "day": "Thursday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT586",
+      "faculty": "AS",
+      "room": "LAB005",
+      "groups": [],
+      "raw_cell": "IT586"
+    },
+    {
+      "day": "Thursday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT627",
+      "faculty": "AM1",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IT627"
+    },
+    {
+      "day": "Friday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "DE401",
+      "faculty": "BD",
+      "room": "LAB013",
+      "groups": [],
+      "raw_cell": "DE401"
+    }
+  ],
+  "MSc (DS) Coe : SEMESTER III (2025 Batch)": [
+    {
+      "day": "Monday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "DS635",
+      "faculty": "AC",
+      "room": "LAB210",
+      "groups": [],
+      "raw_cell": "DS635"
+    }
+  ],
+  "MSc (DS) Elective: SEMESTER III (2025 Batch)": [
+    {
+      "day": "Monday",
+      "start": "17:00",
+      "end": "19:00",
+      "course": "CT437",
+      "faculty": "HP",
+      "room": "CEP105",
+      "groups": [],
+      "raw_cell": "CT437"
+    },
+    {
+      "day": "Tuesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "DS401",
+      "faculty": "AT4",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "DS401"
+    },
+    {
+      "day": "Wednesday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT594",
+      "faculty": "SDG",
+      "room": "LAB107",
+      "groups": [],
+      "raw_cell": "IT524"
+    },
+    {
+      "day": "Thursday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT524",
+      "faculty": "MVJ",
+      "room": "LAB001",
+      "groups": [],
+      "raw_cell": "IT594"
+    },
+    {
+      "day": "Thursday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "IT627",
+      "faculty": "AM1",
+      "room": "LAB002",
+      "groups": [],
+      "raw_cell": "IT627"
+    },
+    {
+      "day": "Friday",
+      "start": "09:00",
+      "end": "11:00",
+      "course": "DE401",
+      "faculty": "BD",
+      "room": "LAB013",
+      "groups": [],
+      "raw_cell": "DE401"
+    }
+  ],
+  "MSc (AA): SEMESTER I (2026 Batch)": [
+    {
+      "day": "Monday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "MA611",
+      "faculty": "AB2",
+      "room": "CEP211",
+      "groups": [],
+      "raw_cell": "MA611"
+    },
+    {
+      "day": "Tuesday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "MA612",
+      "faculty": "PV",
+      "room": "CEP211",
+      "groups": [],
+      "raw_cell": "MA612"
+    },
+    {
+      "day": "Wednesday",
+      "start": "14:00",
+      "end": "16:00",
+      "course": "MA613",
+      "faculty": "SP1",
+      "room": "CEP211",
+      "groups": [],
+      "raw_cell": "MA613"
+    }
+  ]
+}
