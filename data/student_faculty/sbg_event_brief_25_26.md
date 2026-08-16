@@ -8,152 +8,619 @@ team: "Madhav Thesiya"
 source_type: "PDF"
 original_name: "Event Brief 25-26.pdf"
 authorization: ["student", "faculty"]
+reorganized_date: "2026-08-09"
 ---
 
 # Event Brief 25-26
 
-- **Club/Committee:** Event | **Details:**  IEEE Student Branch INDGenius Al Summit (14th September 2025) |EEE Student Branch DAU organized the INDGenius Al Summit 2025, a one-day event focused on exploring the impact of Artificial Intelligence across domains such as Generative Al and Cybersecurity. The summit featured expert talks, panel discussions, and interactive sessions aimed at encouraging meaningful discussions on emerging Al technologies, innovation, and India’s evolving role in the global Al landscape.
+> Reformatted from a raw PDF text dump (2026-08-09) — the original had all ~120 events run together in a handful of giant paragraphs with event boundaries lost. Split back out into individual entries below using date markers; a small number of boundaries were reconstructed by hand where the automated split was ambiguous.
 
-- **Club/Committee:** Event | **Details:** Bootcamps : ML edition (6th - 7th September & 13th - 14th September 2025) |EEE Student Branch DAU organized The Bootcamps: Machine Learning Edition to provide students with a practical and hands-on introduction to Artificial Intelligence and Machine Learning. The sessions covered MATLAB fundamentals, Al concepts, and deep learning, while industry speakers shared insights into real-world tools, workflows, and applications. The bootcamp encouraged experiential learning and helped students gain exposure to industry-oriented technologies and practices. i.Fest '25: Pixel Paradox (14th - 17th November 2024) |IEEE Student Branch DAU organized i.Fest '25 — Pixel Paradox, Gujarat's leading techno-cultural festival, bringing together innovation, creativity, and technical excellence through a diverse lineup of over 20 technical events.
+### 1. IEEE Student Branch INDGenius Al Summit
+**Date:** 14th September 2025
 
-- **Club/Committee:** Event | **Details:** The festival featured major highlights such as robotics competitions including Roboclash, i.Bot, and RoboSoccer, along with coding events like FizzBuzz, i.Relay, and BlindCode, providing students a platform to showcase problem-solving abilities, technical expertise, and innovation. The event also featured an energetic concert by The 9TEEN, adding to the vibrant atmosphere and overall celebration of technology and youth culture. Tic Tech Toe ’26 (10th April - 12th April 2026) |EEE Student Branch DAU organised Tic Tech Toe '26, a 48-hour hackathon aimed at fostering innovation and real-world problem-solving. The event brought together participants to collaborate on impactful solutions, offering hands-on exposure to emerging technologies while promoting teamwork, creativity, and technical excellence.
+IEEE Student Branch DAU organized the INDGenius Al Summit 2025, a one-day event focused on exploring the impact of Artificial Intelligence across domains such as Generative Al and Cybersecurity. The summit featured expert talks, panel discussions, and interactive sessions aimed at encouraging meaningful discussions on emerging Al technologies, innovation, and India’s evolving role in the global Al landscape.
 
-- **Club/Committee:** Event | **Details:** Google Developers Group on Campus DAU Tech Loop - Introduction Session (25th August 2025) GDG on Campus DAU organised Tech Loop, an introductory session aimed at familiarising students with the fundamentals of development. The session served as a kickstart for participants beginning their journey in the field of development, providing an overview of key concepts and encouraging engagement with the developer community. Semester Long Projects (SLoP) 5.0 (9th September 2025 - 1st January 2026) GDG on Campus DAU organised Semester Long Projects (SLoP) 5.0, an open-source initiative designed to introduce students to real-world software development.
+### 2. Bootcamps : ML edition
+**Date:** 6th - 7th September & 13th - 14th September 2025
 
-- **Club/Committee:** Event | **Details:** Modelled on Google Summer of Code, the programme provided participants with the opportunity to contribute to open-source projects, develop technical skills, and engage with the broader developer community over an extended period. Dev-o-lution'26 (18th January 2026) GDG on Campus DAU organised Dev-o-lution’26 as a technical event aimed at encouraging innovation and development-oriented problem-solving. Participants showcased their technical skills through practical challenges, fostering creativity, collaboration, and learning. The Debating Society Freshers’ GD (2nd September 2025) The Debating Society organised a group discussion event for first-year B.Tech students as an introduction to the society. The event encouraged participants to engage in discussions, share perspectives, and develop confidence in public speaking and critical thinking.
+IEEE Student Branch DAU organized The Bootcamps: Machine Learning Edition to provide students with a practical and hands-on introduction to Artificial Intelligence and Machine Learning. The sessions covered MATLAB fundamentals, Al concepts, and deep learning, while industry speakers shared insights into real-world tools, workflows, and applications. The bootcamp encouraged experiential learning and helped students gain exposure to industry-oriented technologies and practices.
 
-- **Club/Committee:** Event | **Details:** Asian Parliamentary Debate Orientation Session (11th September 2025) The Debating Society organised an Asian Parliamentary Debate orientation session to familiarise students with the debate format and rules. The session served as an introductory platform where participants were guided through the structure of Asian Parliamentary debates, encouraging students to explore debating without any compulsory participation and fostering interest in competitive debating. Prized Asian Parliamentary Debate (14th October 2025) The Debating Society organized a debate event in the Asian Parliamentary format, featuring multiple debates conducted simultaneously across different rooms.
+### 3. i.Fest '25: Pixel Paradox
+**Date:** 14th - 17th November 2024
 
-- **Club/Committee:** Event | **Details:** The event provided participants with a platform to develop public speaking, argumentation, and critical thinking skills in a competitive and engaging environment. The British Parliamentary Debate (8th January 2026) The Debating Society conducted a British Parliamentary Debate, an open campus event featuring a single British Parliamentary round where participants engaged in a battle of wit, argumentation, and persuasion. The event provided a platform for students to develop critical thinking, structured debating skills, and effective communication through competitive and intellectually engaging discourse. Prized British Parliamentary Debate (22nd January 2026) The Debating Society conducted a British Parliamentary Debate competition to provide participants with an opportunity to apply their debating skills in a competitive setting.
+IEEE Student Branch DAU organized i.Fest '25 — Pixel Paradox, Gujarat's leading techno-cultural festival, bringing together innovation, creativity, and technical excellence through a diverse lineup of over 20 technical events. The festival featured major highlights such as robotics competitions including Roboclash, i.Bot, and RoboSoccer, along with coding events like FizzBuzz, i.Relay, and BlindCode, providing students a platform to showcase problem-solving abilities, technical expertise, and innovation. The event also featured an energetic concert by The 9TEEN, adding to the vibrant atmosphere and overall celebration of technology and youth culture.
 
-- **Club/Committee:** Event | **Details:** The event promoted logical reasoning, teamwork, and articulate expression, contributing to the development of structured communication skills. Mega Debating Night (25th February 2026) The Debating Society hosted an open campus event featuring a dynamic General Discussion and an engaging Shipwreck round, where participants exchanged ideas, tackled thought-provoking topics, and showcased their persuasion and decision-making skills in an intense battle of wit and reasoning. British Parliamentary Night (11th March 2026) The Debating Society organized British Parliamentary Night (BP Debate), an open campus event featuring a British Parliamentary round where participants competed in a battle of wit, argumentation, and persuasion. The event encouraged critical thinking, structured debate, and effective communication skills, providing a platform for students to engage in dynamic intellectual discourse.
+### 4. Tic Tech Toe ’26
+**Date:** 10th April - 12th April 2026
 
-- **Club/Committee:** Event | **Details:** Prized British Parliamentary Debate (9th April 2026) The Debating Society conducted a British Parliamentary Debate competition to provide participants with an opportunity to apply their debating skills in a competitive setting. The event promoted logical reasoning, teamwork, and articulate expression, contributing to the development of structured communication skills. Prized British Parliamentary Debate (17th April 2026) The Debating Society conducted a British Parliamentary Debate competition to provide participants with an opportunity to apply their debating skills in a competitive setting. The event promoted logical reasoning, teamwork, and articulate expression, contributing to the development of structured communication skills.
+IEEE Student Branch DAU organised Tic Tech Toe '26, a 48-hour hackathon aimed at fostering innovation and real-world problem-solving. The event brought together participants to collaborate on impactful solutions, offering hands-on exposure to emerging technologies while promoting teamwork, creativity, and technical excellence.
 
-- **Club/Committee:** Event | **Details:** Intra Parliamentary Debate Competition (21st April - 22nd April 2026) The Debating Society organised the Intra Parliamentary Debate Competition, featuring two preliminary British Parliamentary rounds followed by a final debate to determine the best performers. The event provided a competitive platform for participants to engage in structured argumentation, enhance their public speaking skills, and demonstrate critical thinking through rigorous and dynamic debate sessions. Cubing Club Mosaic of Dhirubhai Ambani (01st August 2025) The Cubing Club created a mosaic of Dhirubhai Ambani on the occasion of TEDxDAIICT as a collaborative creative activity to celebrate innovation, vision, and leadership. Participants came together to construct a large Rubik’s Cube mosaic portraying Dhirubhai Ambani, reflecting the spirit of creativity, ambition, and perseverance.
+### 5. Google Developers Group on Campus DAU Tech Loop - Introduction Session
+**Date:** 25th August 2025
 
-- **Club/Committee:** Event | **Details:** Mosaic of Lord Ganesha (26th August 2025) The Cubing Club created a mosaic of Lord Ganesha on the occasion of Ganesh Chaturthi as a collaborative creative activity. Participants came together to celebrate the festival through artistic expression, teamwork, and creativity, fostering enthusiasm and cultural spirit on campus. Cube Solving Workshop (8th September 2025) The Cubing Club organised a Cube Solving Workshop aimed at introducing participants to the techniques and methods of solving Rubik’s Cubes.
+GDG on Campus DAU organised Tech Loop, an introductory session aimed at familiarising students with the fundamentals of development. The session served as a kickstart for participants beginning their journey in the field of development, providing an overview of key concepts and encouraging engagement with the developer community.
 
-- **Club/Committee:** Event | **Details:** During the workshop, club members guided participants through solving 3x3, 4x4, and one-handed 3x3 cubes from scratch, while also teaching advanced methods to experienced cubers to help improve their solving speed and efficiency. Intra-DA Cubing & Sudoku Competition (16th September 2025) The Cubing Club organised an Intra-Institute Cubing and Sudoku Competition featuring multiple events, including 3x3x3, Pyraminx, 2x2x2, and Sudoku. The competition provided students with an engaging platform to showcase their problem-solving speed, logical thinking, and cubing skills while fostering enthusiasm and healthy competition among participants. Mosaic for Early Diwali Celebration (11th October 2025) The Cubing Club created a vibrant Rangoli-themed peacock mosaic on the occasion of Diwali using Rubik’s Cubes to celebrate the festive spirit through creativity and teamwork.
+### 6. Semester Long Projects (SLoP) 5.0
+**Date:** 9th September 2025 - 1st January 2026
 
-- **Club/Committee:** Event | **Details:** The artwork beautifully combined traditional festive elements with innovative cube art, encouraging artistic expression and enthusiastic student participation. DAU Gandhinagar Cube Open 2025 (12th October 2025) The Cubing Club organized DAU Gandhinagar Cube Open 2025, a WCA official speedcubing competition held at DAU. Sponsored by Cubelelo, this flagship event featured five events - 3x3, 2x2, Pyraminx, Megaminx, and 4x4. The full-day competition brought together cubers of all ages, including several young participants, making it a vibrant and inclusive celebration of cubing. As this was a non-institutional event (not under SBG budget), all competition expenses and budget were managed entirely through sponsor support and participant registration fees.
+GDG on Campus DAU organised Semester Long Projects (SLoP) 5.0, an open-source initiative designed to introduce students to real-world software development. Modelled on Google Summer of Code, the programme provided participants with the opportunity to contribute to open-source projects, develop technical skills, and engage with the broader developer community over an extended period.
 
-- **Club/Committee:** Event | **Details:** Winners received certificates and prizes sponsored by Cubelelo, while all participants were awarded digital participation certificates for their enthusiasm and performance. Jemimah Rodrigues mosaic at Concours’25 (5th November 2025) At Concours'25, the Cubing Club presented a cube mosaic tribute to Indian women'’s cricket star Jemimah Rodrigues, celebrating the team’s remarkable World Cup victory. Crafted with precision and passion, this mosaic symbolizes the spirit, strength, and pride of the champions who made the nation roar. Minecraft-themed Mosaic at i.Fest’25 (14th November 2025) The Cubing Club, DAU created a Minecraft-themed mosaic for i.Fest '25, perfectly aligning with the event'’s theme, Pixel Paradox.
+### 7. Dev-o-lution'26
+**Date:** 18th January 2026
 
-- **Club/Committee:** Event | **Details:** This build also marked the first time we implemented a polyacrylic protective sheet, introduced in our budget proposal, to prevent cube tampering and theft. The new system worked flawlessly, ensuring a smooth and secure mosaic display. Aditya Gadhvi Mosaic at Synapse Nexus Night (9th January 2026) A vibrant Mosaic of Aditya Gadhvi was created for Synapse Nexus Night by Cubing Club, DAU. Uniquely crafted using 702 Rubik’s Cubes. Celebrating creativity, culture, and the fusion of art with logic and cubing enthusiasm. Linus Torvalds Mosaic for Dev-o-lution (17th January 2026) The Cubing Club, DAU created a mosaic of Linus Torvalds for Dev-o-lution'26 in collaboration with GDG. The mosaic was created using 750+ Rubik’s cubes.
+GDG on Campus DAU organised Dev-o-lution’26 as a technical event aimed at encouraging innovation and development-oriented problem-solving. Participants showcased their technical skills through practical challenges, fostering creativity, collaboration, and learning.
 
-- **Club/Committee:** Event | **Details:** Cubing Workshop : 2x2, Pyraminx & 3x3 (Beginner & Advanced) (2nd February 2026) The Cubing Club, DAU successfully conducted a Cubing Workshop. The workshop was aimed at helping both beginners and intermediate cubers enhance their solving skills. Participants were introduced to 2x2x2 Cube, Pyraminx, and 3x3x3 solving techniques, covering both beginner methods and advanced methods. Club members guided participants through step-by-step explanations, practical demonstrations, and hands-on practice. The session witnessed enthusiastic participation from students across batches and created an engaging learning environment. Intra-DA Speedcubing and Sudoku Competition (17th February 2026) The Cubing Club, DAU successfully organized the Intra-DA Speedcubing and Sudoku Competition. The competition featured multiple events including 3x3x3, 2x2x2, Pyraminx, and Sudoku, attracting enthusiastic participation from students across batches.
+### 8. The Debating Society Freshers’ GD
+**Date:** 2nd September 2025
 
-- **Club/Committee:** Event | **Details:** Participants showcased impressive speed, focus, and problem-solving skills in a highly competitive yet exciting environment. The event successfully promoted healthy competition, strategic thinking, and the spirit of speedcubing on campus. Synapse'26 Mosaic Construction (26th February 2026) The Cubing Club, DAU created a vibrant Rubik’s Cube mosaic for Synapse’286, inspired by the fest theme “Joker’s Realm.” Built cube by cube by dedicated members, the mosaic brought the Joker’s chaotic essence to life and became a striking visual highlight of the event, showcasing the club’s creativity, teamwork, and passion for cubing art.
+The Debating Society organised a group discussion event for first-year B.Tech students as an introduction to the society. The event encouraged participants to engage in discussions, share perspectives, and develop confidence in public speaking and critical thinking.
 
-- **Club/Committee:** Event | **Details:** Mosaic for Open Source Day 2026 (3rd April 2026) The Cubing Club, DAU created a mosaic for Open Source Day in collaboration with GDG. The mosaic was created using 780+ Rubik’s cubes. The event encouraged teamwork, creativity, and active participation, making it an engaging highlight of Open Source Day. Mosaic for ETSIF (9th April 2026) The Cubing Club, DAU created a mosaic for ETSIF in collaboration with Research Club. The mosaic was created using 720+ Rubik’s cubes. The event encouraged teamwork, creativity, and active participation, making it an engaging highlight of ETSIF. Cultural Committee Janmashtami Celebration (16th August 2025) The Cultural Committee organised a vibrant Janmashtami Celebration on campus to mark the festival with enthusiasm and cultural spirit.
+### 9. Asian Parliamentary Debate Orientation Session
+**Date:** 11th September 2025
 
-- **Club/Committee:** Event | **Details:** The celebration began with an aarti at the SAC-1 foyer, followed by a mud-holi and matki-phod competition at the SAC Ground. The event witnessed enthusiastic participation from students, fostering cultural bonding and festive joy. Ganesh Chaturthi Celebration (27th August 2025) The Cultural Committee organised the Ganesh Chaturthi Celebration to mark the beginning of the five-day festival on campus.
+The Debating Society organised an Asian Parliamentary Debate orientation session to familiarise students with the debate format and rules. The session served as an introductory platform where participants were guided through the structure of Asian Parliamentary debates, encouraging students to explore debating without any compulsory participation and fostering interest in competitive debating.
 
-- **Club/Committee:** Event | **Details:** The celebration welcomed Lord Ganesha and included daily morning and evening aartis throughout the festival period, fostering spiritual involvement, cultural harmony, and enthusiastic participation among students Teacher’s Day Celebration (10th September 2025) The Cultural Committee organised the Teacher’s Day Celebration to honour and appreciate the contributions of faculty members. The event featured music performances, dance acts, and a stage play by various student clubs, creating a lively and memorable evening that reflected gratitude, respect, and enthusiastic student participation. Tarang 2025 (30th September - 1st October 2025) The Cultural Committee organized Tarang 2025, a two-day cultural celebration featuring vibrant musical and traditional performances.
+### 10. Prized Asian Parliamentary Debate
+**Date:** 14th October 2025
 
-- **Club/Committee:** Event | **Details:** The event included performances by Rishikesh Gadhvi and Ishani Dave, along with DA no Dayro and Mandli Garba, creating an engaging atmosphere that celebrated Gujarati music, storytelling, Garba, and Raas traditions. Makar Sankranti (14th January 2026) The Cultural Committee organised Makar Sankranti to celebrate the festival of kites on campus. Students participated enthusiastically in the celebration, creating a vibrant and festive atmosphere that encouraged cultural bonding and marked the traditional occasion with collective spirit. Raaga & Rhyme (19th January 2026) The Cultural Committee organised Raaga & Rhyme as a cultural event celebrating music and poetry. The event provided students with a platform to express themselves through artistic performances, creating an engaging atmosphere that highlighted creativity and cultural appreciation.
+The Debating Society organized a debate event in the Asian Parliamentary format, featuring multiple debates conducted simultaneously across different rooms. The event provided participants with a platform to develop public speaking, argumentation, and critical thinking skills in a competitive and engaging environment.
 
-- **Club/Committee:** Event | **Details:** Bollywood Day (29th January 2026) The Cultural Committee organised Bollywood Day, a vibrant celebration where participants dressed up as iconic Bollywood characters and showcased their creativity through skits, ramp walks, and dance performances. The event brought the spirit of Indian cinema to life on campus, fostering cultural expression, entertainment, and enthusiastic student participation. Headrush Club BuzzQuiz (28th September 2025) The Headrush Club organized BuzzQuiz, a quiz based on pop and meme culture, providing participants with an engaging and entertaining platform to test their knowledge of internet trends, popular media, and contemporary culture.
+### 11. The British Parliamentary Debate
+**Date:** 8th January 2026
 
-- **Club/Committee:** Event | **Details:** The event encouraged enthusiasm, interaction, and active participation while fostering a fun and competitive atmosphere on campus. The Vices Quiz (28th September 2025) The Headrush Club organized The Vices Quiz, a quiz competition featuring creative and thought-provoking questions that encouraged students to test their knowledge and analytical thinking skills. The event witnessed enthusiastic participation and concluded with prizes awarded to the winners, fostering a competitive and engaging atmosphere on campus. H.E.L.M. Quiz (28th September 2025) The Headrush Club organized a quiz on History, Etymology, Literature, and Mythology, providing participants with an engaging platform to test their knowledge across diverse subjects. The event encouraged critical thinking, learning, and enthusiastic participation in a competitive and intellectually stimulating environment.
+The Debating Society conducted a British Parliamentary Debate, an open campus event featuring a single British Parliamentary round where participants engaged in a battle of wit, argumentation, and persuasion. The event provided a platform for students to develop critical thinking, structured debating skills, and effective communication through competitive and intellectually engaging discourse.
 
-- **Club/Committee:** Event | **Details:** Superhero Quiz (29th September 2025) The Headrush Club organized a superhero-themed quiz featuring questions based on Marvel, DC, and Indian movies and comics. The event provided participants with an engaging and competitive platform to test their knowledge of superheroes, popular culture, and comic universes while encouraging enthusiastic student participation. M.E.L.A.S. Quiz (10th April 2026) The Headrush Club organized a quiz on Music, Entertainment, Literature, Arts and Sports (M.E.L.A.S.), providing participants with an engaging platform to test their knowledge across diverse subjects. The event encouraged critical thinking, learning, and enthusiastic participation in a competitive and intellectually stimulating environment.
+### 12. Prized British Parliamentary Debate
+**Date:** 22nd January 2026
 
-- **Club/Committee:** Event | **Details:** Muse - The Design Club ARTBIZZ 2025 (29th August - 6th September 2025) Muse - The Design Club organized ARTBIZZ 2025, an annual doodling competition aimed at introducing freshers to the club through creative expression. Participants were encouraged to showcase their artistic skills by submitting either digital or physical doodles, fostering creativity, imagination, and student engagement in design activities.
+The Debating Society conducted a British Parliamentary Debate competition to provide participants with an opportunity to apply their debating skills in a competitive setting. The event promoted logical reasoning, teamwork, and articulate expression, contributing to the development of structured communication skills.
 
-- **Club/Committee:** Event | **Details:** Nasha Mukti Poster Designing Competition (13th September - 22nd September 2025) Muse - The Design Club organized Nasha Mukti Poster Designing Competition, a poster designing competition aimed at spreading awareness about the importance of maintaining a healthy lifestyle by avoiding intoxication and substance addiction. The event encouraged participants to creatively express social messages related to alcohol, smoking, and narcotics through impactful visual designs. Rangoli Competition (13th October 2025) Muse - The Design Club organized a Rangoli Making Competition in which teams collaborated to create creative and colorful rangoli designs. The event encouraged artistic expression, teamwork, and enthusiastic participation while fostering a vibrant and engaging cultural atmosphere on campus.
+### 13. Mega Debating Night
+**Date:** 25th February 2026
 
-- **Club/Committee:** Event | **Details:** Stir & Stroke - Coffee Painting Workshop and Competition (22nd January 2026) Muse - The Design Club organized a hands-on workshop on the art of coffee painting, where participants explored this unique artistic technique and applied their newly learned skills to create expressive and visually appealing artworks. The session encouraged creativity, experimentation, and appreciation for unconventional art forms. Heritage Sketch Walk (21st February 2026) Muse - The Design Club organised the Heritage Walk to provide participants with an immersive experience of the cultural heritage and architectural richness of Old Ahmedabad.
+The Debating Society hosted an open campus event featuring a dynamic General Discussion and an engaging Shipwreck round, where participants exchanged ideas, tackled thought-provoking topics, and showcased their persuasion and decision-making skills in an intense battle of wit and reasoning.
 
-- **Club/Committee:** Event | **Details:** The event combined exploration with creative expression, allowing participants to observe historic surroundings and capture their impressions through sketches and doodles on postcards. The activity encouraged appreciation of heritage while fostering creativity and artistic engagement among students. Canvas Painting Competition (1st April 2026) Muse - The Design Club organized a creative competition where participants showcased their imagination and design skills through canvas art using acrylic colours. The event encouraged artistic expression, originality, and visual storytelling, allowing participants to experiment with colours, techniques, and concepts to create impactful artworks.
+### 14. British Parliamentary Night
+**Date:** 11th March 2026
 
-- **Club/Committee:** Event | **Details:** Electronics Hobby Club Arduino Session + Workshop (18th - 19th September 2025) The Electronics Hobby Club organized an Introduction to Arduino session followed by a hands-on workshop to familiarize students with Arduino and its practical applications. Participants learned the basics of Arduino programming and electronics while building simple projects through interactive activities, encouraging experiential learning and interest in embedded systems and hardware development. Introduction to ESP-32 (13th October 2025) The Electronics Hobby Club organized a hands-on session on ESP32 and IoT, introducing participants to concepts such as Wi-Fi, Bluetooth, sensors, and cloud connectivity. The session enabled students to build simple interactive projects while gaining practical exposure to loT-based applications and embedded systems development.
+The Debating Society organized British Parliamentary Night (BP Debate), an open campus event featuring a British Parliamentary round where participants competed in a battle of wit, argumentation, and persuasion. The event encouraged critical thinking, structured debate, and effective communication skills, providing a platform for students to engage in dynamic intellectual discourse.
 
-- **Club/Committee:** Event | **Details:** Electrothon Session (8th January 2026) The Electronics Hobby Club organised the Electrothon Session as an introductory event for the month-long Electrothon and Robofest initiatives. The session familiarised participants with the event structure, objectives, and opportunities, encouraging students to engage in innovation, robotics, and practical electronics-based learning. Session on Introduction to STM32 With Live Demo (22nd January 2026) The Electronics Hobby Club conducted a technical session on Introduction to STM32 to familiarize students with the STM32 ecosystem and its practical applications in embedded systems.
+### 15. Prized British Parliamentary Debate
+**Date:** 9th April 2026
 
-- **Club/Committee:** Event | **Details:** The session featured a live demonstration project showcasing the toggling of the on-board LED using an External Interrupt, providing participants with hands-on exposure to embedded systems programming and industry-standard STM32 microcontroller practices. Electrothon 2.0 (15th January - 22nd February 2025) The Electronics Hobby Club organised Electrothon 2.0, a multi-day technical event aimed at fostering hands-on learning and innovation in electronics. Participants worked on problem statements requiring practical application of electronic concepts, encouraging problem-solving, teamwork, and sustained technical engagement throughout the duration of the event. Open Projects 2026 (6th - 8th April 2026) The Electronics Hobby Club organised Open Projects, a hands-on learning initiative designed to provide students with practical exposure to electronics through real-world projects.
+The Debating Society conducted a British Parliamentary Debate competition to provide participants with an opportunity to apply their debating skills in a competitive setting. The event promoted logical reasoning, teamwork, and articulate expression, contributing to the development of structured communication skills.
 
-- **Club/Committee:** Event | **Details:** The event focused on the development of mini battle bots and quadcopter drones, where participants attended guided sessions to learn about electronic components, project design, and implementation. Through interactive learning and live project demonstrations, the initiative encouraged innovation, teamwork, and experiential learning in the field of electronics. Khelaiya Club Garba Night (2nd September 2025) The Khelaiya Club organised Garba Night as a vibrant cultural celebration that brought together enthusiastic participants in a joyful and energetic atmosphere. The event provided students with an opportunity to relax, celebrate, and enjoy traditional Garba dance, with participants enthusiastically dancing and engaging throughout the evening. The celebration fostered cultural participation, togetherness, and a lively festive spirit on campus.
+### 16. Prized British Parliamentary Debate
+**Date:** 17th April 2026
 
-- **Club/Committee:** Event | **Details:** Garba Workshop (11th - 12th September 2025) The Khelaiya Club organized a two-day Garba Workshop ahead of Navratri to help students learn and practice Garba dance forms. Professional instructors guided participants through basic and trendy dance steps in an energetic and engaging environment. The workshop encouraged cultural participation, enthusiasm, and active student involvement in preparation for the festive celebrations. Microsoft Student Technical Club Hacktoberfest 2025 Session (15th October - 8th November 2025) The Microsoft Student Technical Club organised a Hacktoberfest 2025 Session to promote open-source contributions and collaborative development.
+The Debating Society conducted a British Parliamentary Debate competition to provide participants with an opportunity to apply their debating skills in a competitive setting. The event promoted logical reasoning, teamwork, and articulate expression, contributing to the development of structured communication skills.
 
-- **Club/Committee:** Event | **Details:** The session introduced participants to open-source workflows and various development domains, encouraging students to contribute to real-world projects while building technical skills and engaging with the open-source community. CodeChain - ICPC based Coding Contest (30th October 2025) The Microsoft Student Technical Club organized CodeChain, an ICPC-style programming contest where teams collaborated to solve coding problems within a limited time. The event encouraged teamwork, logical thinking, and competitive programming skills while providing participants with an engaging and challenging coding experience.
+### 17. Intra Parliamentary Debate Competition
+**Date:** 21st April - 22nd April 2026
 
-- **Club/Committee:** Event | **Details:** Codechain (Juniors) (17th February 2026) The Microsoft Student Technical Club organized CodeChain (Juniors), an ICPC-style coding contest where teams of up to three members collaborated to solve algorithmic problems within a fixed time frame, fostering competitive programming skills, teamwork, and problem-solving abilities. Winter of Code 8.0 (1st January - 18th February 2026) The Microsoft Student Technical Club organised Winter of Code 8.0, a long-duration technical programme aimed at promoting open-source contribution and collaborative learning. Participants worked on real-world projects over several weeks, enhancing their programming skills,
+The Debating Society organised the Intra Parliamentary Debate Competition, featuring two preliminary British Parliamentary rounds followed by a final debate to determine the best performers. The event provided a competitive platform for participants to engage in structured argumentation, enhance their public speaking skills, and demonstrate critical thinking through rigorous and dynamic debate sessions.
 
-problem-solving abilities, and experience with version control and teamwork.
+### 18. Cubing Club Mosaic of Dhirubhai Ambani
+**Date:** 01st August 2025
 
-- **Club/Committee:** Event | **Details:** Face Off 6.0 (6th - 10th April 2026) The Microsoft Student Technical Club organised Face Off 6.0, a competitive programming contest designed to test participants’ problem-solving abilities and coding proficiency. The event followed a 1v1 competitive format and was conducted across multiple rounds, beginning with a screening round and progressing through elimination stages. Participants competed in different categories based on their academic level, and each round reduced the number of competitors until the final stage. The contest fostered analytical thinking, speed, and accuracy, while providing an engaging and competitive platform for students to showcase their programming skills.
+The Cubing Club created a mosaic of Dhirubhai Ambani on the occasion of TEDxDAIICT as a collaborative creative activity to celebrate innovation, vision, and leadership. Participants came together to construct a large Rubik’s Cube mosaic portraying Dhirubhai Ambani, reflecting the spirit of creativity, ambition, and perseverance.
 
-- **Club/Committee:** Event | **Details:** Chess Club Freshers’ Chess tournament (1st - 2nd September 2025) The Chess Club organized the Freshers’ Chess Tournament as an in-person event to welcome first-year students and encourage interest in chess. Conducted in Swiss format, the tournament provided participants with an engaging and competitive platform to interact, showcase their strategic thinking skills, and foster sportsmanship among students. Online Blitz Tournament (20th September 2025) The Chess Club organized an Online Chess Tournament to provide students with an opportunity to compete, reconnect, and settle past rivalries in a spirited manner. The event welcomed players across different programs, encouraging participation, strategy, and sportsmanship. The tournament was conducted online, ensuring accessibility for all, and concluded with the recognition of top performers.
+### 19. Mosaic of Lord Ganesha
+**Date:** 26th August 2025
 
-- **Club/Committee:** Event | **Details:** Annual Festival Committee Hackout '25 (29th - 31st August 2025) The Annual Festival Committee organized HackOut'25, a 48-hour innovation hackathon centered around the theme “Green Hydrogen and Blue Carbon Ecosystem.” The event brought together students from diverse disciplines to design and develop technology-driven solutions addressing climate and energy challenges using emerging technologies such as Al, blockchain, loT, DevOps, and geospatial systems. The hackathon encouraged innovation, collaboration, and problem-solving in the field of sustainability and technology.
+The Cubing Club created a mosaic of Lord Ganesha on the occasion of Ganesh Chaturthi as a collaborative creative activity. Participants came together to celebrate the festival through artistic expression, teamwork, and creativity, fostering enthusiasm and cultural spirit on campus.
 
-- **Club/Committee:** Event | **Details:** Youth Run ’25 (9th November 2025) The Annual Festival Committee organized Youth Run '25, a 7 km marathon organised as an intra-level sports event to promote awareness about sustainability under the theme “Run for Sustainable Future.” The run was conducted from the DAU Main Gate to GH-3 and back, encouraging student participation while highlighting the importance of sustainable practices through physical activity. Synapse 26 (26th February - 1st March 2026) The Annual Festival Committee organized Synapse’26, the flagship cultural and innovation festival of DAU, bringing together talent from across the nation through music, art, dance, technology, and creative competitions.
+### 20. Cube Solving Workshop
+**Date:** 8th September 2025
 
-- **Club/Committee:** Event | **Details:** Known for its vibrant atmosphere and high-energy events, the festival celebrated youth culture, creativity, and innovation with massive participation and industry collaborations. Sports Committee Freshers’ Weekend (30th - 31st August 2025) The Freshers Weekend was organized by the Sports Committee to welcome new students through a series of sports activities including cricket, table tennis, badminton, volleyball, football, basketball, and carrom. The event aimed to promote teamwork, interaction, and sportsmanship among freshers.Participants actively engaged in all games with great enthusiasm, making the event fun, competitive, and memorable while helping them connect with the campus community. Concours ’25 (6th - 9th November 2025) Organised by the Sports Committee, Concours 2025 was a four-day inter-college sports event organised by DVL (DAU Volleyball League) (2nd February - 22nd February 2026) The Sports Committee organized the DAU Volleyball League (DVL), a structured sports tournament beginning with a team ownership bidding process followed by a player auction.
+The Cubing Club organised a Cube Solving Workshop aimed at introducing participants to the techniques and methods of solving Rubik’s Cubes. During the workshop, club members guided participants through solving 3x3, 4x4, and one-handed 3x3 cubes from scratch, while also teaching advanced methods to experienced cubers to help improve their solving speed and efficiency.
 
-- **Club/Committee:** Event | **Details:** Eight teams were formed and divided into two groups, competing in a round-robin format to ensure multiple matches for each team, fostering competitive spirit, strategic planning, and active student engagement in volleyball. DCL (DAU Cricket League) (31st January - 22nd February 2026) The Sports Committee organized the DAU Cricket League (DCL), a structured cricket tournament beginning with a team ownership bidding process, where club owners competed to acquire teams. The highest bidders proceeded to a player auction, using allocated points to form their squads from a pool of university students.
+### 21. Intra-DA Cubing & Sudoku Competition
+**Date:** 16th September 2025
 
-- **Club/Committee:** Event | **Details:** The eight teams were divided into two groups and competed in a round-robin format, ensuring multiple matches for each team and fostering competitive gameplay, strategic planning, and active student participation throughout the tournament. DBL (DAU Badminton League) (11th March - 13th March 2026) The Sports Committee organized the DAU Badminton League (DBL), featuring 12 teams competing in a structured round-robin format across four groups of three teams each. The top teams from each group advanced to the knockout stage, ensuring a highly competitive progression. The tournament witnessed enthusiastic participation from students across B.Tech, Master’s, and PhD programs, promoting sportsmanship, teamwork, and active student engagement across disciplines.
+The Cubing Club organised an Intra-Institute Cubing and Sudoku Competition featuring multiple events, including 3x3x3, Pyraminx, 2x2x2, and Sudoku. The competition provided students with an engaging platform to showcase their problem-solving speed, logical thinking, and cubing skills while fostering enthusiasm and healthy competition among participants.
 
-- **Club/Committee:** Event | **Details:** Programming Club Introduction to Competitive Programming (1st August 2025) The Programming Club organized an introductory session on Competitive Programming (CP) to familiarize students with the fundamentals and guide them in starting their competitive programming journey. The session included interactive discussions, explanations of concepts, and basic problem-solving activities designed to engage participants and foster their interest in coding and logical thinking. The event fostered a collaborative learning environment and encouraged students to strengthen their programming skills. IPC - 1 (11th September 2025) The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus.
+### 22. Mosaic for Early Diwali Celebration
+**Date:** 11th October 2025
 
-- **Club/Committee:** Event | **Details:** Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition. Introduction to C Programming (17th September 2025) The Programming Club organized an “Introduction to C Programming” session forf irst-year B.Tech students to help them build strong foundational programming skills. The session covered core concepts such as data types, loops, conditional statements, arrays, functions, and operator precedence in an interactive and supportive learning environment. The event encouraged students to strengthen their coding fundamentals while developing an interest in programming, problem-solving, and competitive coding.
+The Cubing Club created a vibrant Rangoli-themed peacock mosaic on the occasion of Diwali using Rubik’s Cubes to celebrate the festive spirit through creativity and teamwork. The artwork beautifully combined traditional festive elements with innovative cube art, encouraging artistic expression and enthusiastic student participation.
 
-- **Club/Committee:** Event | **Details:** IPC - 2 (14th October 2025) The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus. Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition. IPC Junior - 1 (15th October 2025) The Programming Club organized short-duration coding contests exclusively for first-year students to encourage a competitive programming culture on campus. The contests featured problem-solving challenges designed to strengthen coding skills and prepare participants for competitive programming platforms such as Codeforces and CodeChef.
+### 23. DAU Gandhinagar Cube Open 2025
+**Date:** 12th October 2025
 
-- **Club/Committee:** Event | **Details:** Post Contest Discussion (28th October 2025) The Programming Club, DAU, hosted a problem discussion session for the Codeforces Div. 4 contest. Participants first solved beginner-friendly problems and later gathered to explore different approaches and efficient solutions. The session encouraged learning through discussion, sharing coding tricks, and improving problem-solving skills. It served as a great opportunity for first-year students to strengthen their competitive programming foundation. IPC 3 (7th November 2025) The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus.
+The Cubing Club organized DAU Gandhinagar Cube Open 2025, a WCA official speedcubing competition held at DAU. Sponsored by Cubelelo, this flagship event featured five events - 3x3, 2x2, Pyraminx, Megaminx, and 4x4. The full-day competition brought together cubers of all ages, including several young participants, making it a vibrant and inclusive celebration of cubing. As this was a non-institutional event (not under SBG budget), all competition expenses and budget were managed entirely through sponsor support and participant registration fees. Winners received certificates and prizes sponsored by Cubelelo, while all participants were awarded digital participation certificates for their enthusiasm and performance.
 
-- **Club/Committee:** Event | **Details:** Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition. IPC Junior 2 (9th January 2026) The Programming Club organized short-duration coding contests exclusively for first-year students to encourage a competitive programming culture on campus. The contests featured problem-solving challenges designed to strengthen coding skills and prepare participants for competitive programming platforms such as Codeforces and CodeChef. Post Contest Discussion (12th January 2026) The Programming Club, DAU, hosted a problem discussion session for the Codeforces Div. 3 contest.
+### 24. Jemimah Rodrigues mosaic at Concours’25
+**Date:** 5th November 2025
 
-- **Club/Committee:** Event | **Details:** Participants solved beginner-friendly problems and later gathered to explore different approaches and efficient solutions. The session encouraged learning through discussion, sharing coding tricks, and improving problem-solving skills. It was a great opportunity for juniors to strengthen their competitive programming foundation. IPC 4 ( blitz cup round 1) (27th January 2026) The Programming Club organized IPC 4 (Blitz Cup Round 1), a short-duration competitive coding contest designed to promote a healthy and challenging programming environment within the college. The event featured problem-solving-based questions aimed at strengthening participants’ data structures and algorithms skills, while also preparing them for global competitive programming platforms such as Codeforces and CodeChef.
+At Concours'25, the Cubing Club presented a cube mosaic tribute to Indian women'’s cricket star Jemimah Rodrigues, celebrating the team’s remarkable World Cup victory. Crafted with precision and passion, this mosaic symbolizes the spirit, strength, and pride of the champions who made the nation roar.
 
-- **Club/Committee:** Event | **Details:** Blitz cup round 2 (29th January 2026) The Programming Club organized Blitz Cup Round 2, a one-versus-one competitive programming round for qualified participants. In this stage, contestants competed head-to-head in time-bound coding challenges, with a strong emphasis on speed, accuracy, and effective problem-solving under pressure. The matches were conducted in a knockout format until winners were determined, providing a platform to evaluate real-time coding ability and competitive performance. Round Robin Relay (16th February 2026) The Programming Club organized short-duration team coding contests of 1.5 hours featuring 4 problems each.
+### 25. Minecraft-themed Mosaic at i.Fest’25
+**Date:** 14th November 2025
 
-- **Club/Committee:** Event | **Details:** These contests aimed to foster a healthy and competitive coding environment within the college, enhance participants’ problem-solving skills and data structures and algorithms knowledge, and prepare them for global competitive programming platforms such as Codeforces and CodeChef. IPC 5 (25th February 2026) The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus. Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition.
+The Cubing Club, DAU created a Minecraft-themed mosaic for i.Fest '25, perfectly aligning with the event'’s theme, Pixel Paradox. This build also marked the first time we implemented a polyacrylic protective sheet, introduced in our budget proposal, to prevent cube tampering and theft. The new system worked flawlessly, ensuring a smooth and secure mosaic display.
 
-- **Club/Committee:** Event | **Details:** IPC Junior 3 (12th March 2026) The Programming Club organized short-duration coding contests exclusively for first-year students to encourage a competitive programming culture on campus. The contests featured problem-solving challenges designed to strengthen coding skills and prepare participants for competitive programming platforms such as Codeforces and CodeChef. IPC Junior 4 (2nd April 2026) The Programming Club organized short-duration coding contests exclusively for first-year students to encourage a competitive programming culture on campus. The contests featured problem-solving challenges designed to strengthen coding skills and prepare participants for competitive programming platforms such as Codeforces and CodeChef.
+### 26. Aditya Gadhvi Mosaic at Synapse Nexus Night
+**Date:** 9th January 2026
 
-- **Club/Committee:** Event | **Details:** IPC 6 ( Interwing Round 1) (13th April 2026) The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus. Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition. Interwing round 2 (15th April 2026) The Programming Club organized Interwing Round 2, a long-duration competitive coding contest featuring 10 problems to be solved within 5 hours.
+A vibrant Mosaic of Aditya Gadhvi was created for Synapse Nexus Night by Cubing Club, DAU. Uniquely crafted using 702 Rubik’s Cubes. Celebrating creativity, culture, and the fusion of art with logic and cubing enthusiasm.
 
-- **Club/Committee:** Event | **Details:** The event encouraged advanced problem-solving under extended time constraints, helping participants improve analytical thinking, coding efficiency, and competitive performance for international-level programming contests. Business Club Bidding War (29th August 2025) The Business Club organized Bidding War, a competitive ad-skit event where teams showcased creative company advertisements and competed based on judges’ evaluations, bidding rounds, and audience response. The event provided an engaging platform for participants to demonstrate creativity, presentation skills, and teamwork while fostering enthusiasm and active student participation. Cyber Information and Network Security Club Master Cydo’s Scroll (28th August 2025) The Cyber Information and Network Security Club organized Master Cydo’s Scroll aimed at introducing students to the field of cybersecurity and encouraging practical learning.
+### 27. Linus Torvalds Mosaic for Dev-o-lution
+**Date:** 17th January 2026
 
-- **Club/Committee:** Event | **Details:** The event was conducted in two phases: the first phase featured an informative session providing an overview of cybersecurity concepts and career opportunities, while the second phase consisted of an engaging Capture-the-Flag (CTF) competition where participants worked in teams to solve cybersecurity challenges. The event promoted technical learning, teamwork, and problem-solving skills among students. Bug Bounty Webinar (11th September 2025) The Cyber Information and Network Security Club organized a Bug Bounty Webinar featuring guest speaker Jai Niresh J.
+The Cubing Club, DAU created a mosaic of Linus Torvalds for Dev-o-lution'26 in collaboration with GDG. The mosaic was created using 750+ Rubik’s cubes.
 
-- **Club/Committee:** Event | **Details:** The interactive session introduced participants to the fundamentals of bug bounty hunting, including target selection and analysis, followed by a hands-on phase demonstrating real-world bug bounty techniques and tools. The workshop provided students with practical exposure to cybersecurity concepts and encouraged learning through real-life applications and interactive discussions. CTF Training Session by Cyberpedia (13th October 2025) The Cyber Information and Network Security Club organized a CTF Training Session in collaboration with Cyberpedia to introduce students to the fundamentals of Capture The Flag (CTF) competitions and cybersecurity practices. The session included expert guidance, hands-on challenges using Kali Linux, and practical insights into real-world cybersecurity techniques, helping participants strengthen their technical skills and prepare for competitive CTF events.
+### 28. Cubing Workshop : 2x2, Pyraminx & 3x3 (Beginner & Advanced)
+**Date:** 2nd February 2026
 
-- **Club/Committee:** Event | **Details:** AWS Orientation Session (18th February 2026) The Cyber Information and Network Security Club organized an AWS Orientation Session, an intra-university technical event introducing students to Amazon Web Services. Conducted by industry professionals from CyberDojo, the session highlighted AWS applications, key services, and certification opportunities in cloud computing. Bug Bounty Webinar (11th March 2025) The Cyber Information and Network Security Club organized a Bug Bounty Webinar, an intra-university technical workshop conducted by industry expert Aksha Chudasama. The session introduced students to bug bounty programs, providing insights into ethical hacking practices and vulnerability discovery in real-world systems.
+The Cubing Club, DAU successfully conducted a Cubing Workshop. The workshop was aimed at helping both beginners and intermediate cubers enhance their solving skills. Participants were introduced to 2x2x2 Cube, Pyraminx, and 3x3x3 solving techniques, covering both beginner methods and advanced methods. Club members guided participants through step-by-step explanations, practical demonstrations, and hands-on practice. The session witnessed enthusiastic participation from students across batches and created an engaging learning environment.
 
-- **Club/Committee:** Event | **Details:** Readers' Society Book 1: Prologue (28th August 2025) The Readers' Society hosted its inaugural event, Book 01: Prologue, with the aim of bringing together students and faculty members who share an interest in literature, storytelling, and meaningful conversations. The session provided a welcoming space for participants to engage in discussions, exchange perspectives, and foster a vibrant reading culture on campus. An evening of Thrillers (15th September 2025) The Readers' Society hosted a session on the thriller genre in which participants explored and discussed selected short stories shared prior to the event.
+### 29. Intra-DA Speedcubing and Sudoku Competition
+**Date:** 17th February 2026
 
-- **Club/Committee:** Event | **Details:** The session involved literary analysis of the stories, focusing on elements such as plot, characters, themes, writing style, and historical context, encouraging thoughtful discussions and a deeper appreciation of literature among participants. Buttons and Biscuits (30th October 2025) The Readers' Society organized Buttons and Biscuits, a literary discussion on ‘Coraline’ by Neil Gaiman; a horror children’s book later popularized by a stop motion film based on the same.The event revolved around the effects of the book on the general public along with the discussion of character sketches and artstyle. A Kafkaesque Evening (30th October 2025) The Readers' Society organized A Kafkaesque Evening, a literary discussion on Franz Kafka's short stories The Judgment and A Hunger Artist.
+The Cubing Club, DAU successfully organized the Intra-DA Speedcubing and Sudoku Competition. The competition featured multiple events including 3x3x3, 2x2x2, Pyraminx, and Sudoku, attracting enthusiastic participation from students across batches. Participants showcased impressive speed, focus, and problem-solving skills in a highly competitive yet exciting environment. The event successfully promoted healthy competition, strategic thinking, and the spirit of speedcubing on campus.
 
-- **Club/Committee:** Event | **Details:** The session opened with a brief look at Kafka's life and the anxieties that shaped his writing, followed by an engaging discussion on themes of guilt, isolation, and absurdity. Welcoming both avid readers and newcomers, the event explored what it truly means to call something Kafkaesque. An Unexpected Adventure- A discussion on "The Hobbit" (8th January 2026) The Readers’ Society organized An Unexpected Adventure, a literary discussion on ‘The Hobbit’ by J.R.R. Tolkein; a book about dragons, humans, dwarves and ofcourse hobbits. The event revolved around world building and about the genre of fantasy and works about other fantasy literary writers.
+### 30. Synapse'26 Mosaic Construction
+**Date:** 26th February 2026
 
-- **Club/Committee:** Event | **Details:** A Stroll with Dostoevsky (21st January 2026) The Readers’ Society organized A Stroll with Dostoevsky, a discussion on the Russian literary legend, Fyodor Dostoevsky and his works, with special focus on his short story, “White Nights”. Displacement and Dignity- Jhumpa Lahiri (8th April 2026) The Readers’ Society organized Displacement & Dignity, a literary gathering centered on A Real Durwan. The event revolved around Jhumpa Lahiri’s powerful storytelling, how her writing brings attention to voices often overlooked, inviting us to reflect on empathy, identity, and societal structures. Al Club DAU Integration bee (3rd September 2025) Al Club organized an Integration Bee event in which participants competed through multiple rounds of integration problems with increasing levels of difficulty.
+The Cubing Club, DAU created a vibrant Rubik’s Cube mosaic for Synapse’286, inspired by the fest theme “Joker’s Realm.” Built cube by cube by dedicated members, the mosaic brought the Joker’s chaotic essence to life and became a striking visual highlight of the event, showcasing the club’s creativity, teamwork, and passion for cubing art.
 
-- **Club/Committee:** Event | **Details:** The event concluded with an exciting one-on-one final round where finalists solved the same integral side by side to determine the fastest solver. The competition encouraged analytical thinking, mathematical problem-solving, and active student participation. Linear Regression 101 (29th January 2026) This small session on Linear Regression was hosted by the Al Club as a small step towards an initiative to help the students of DAU get better insights and grip on machine learning , so that our students can stay at par with others or even above them. Speaker Session (24th February 2026) The Al Club, DAU, in collaboration with Dr.
+### 31. Mosaic for Open Source Day 2026
+**Date:** 3rd April 2026
 
-- **Club/Committee:** Event | **Details:** Kiran Trivedi, hosted an insightful speaker session on “Building Wearable Al”, highlighting the role of wearable intelligence in shaping the technological future of Bharat. World Quant Session (IQC) (2nd April 2026) The Al Club, DAU, in collaboration with WorldQuant, hosted a speaker session on “IQC Junior world quant competition”. It was hosted by one of the company’s own Ishan Shandaliya sir who provided guidance on how to register and how to go on with the quant competition. Around 100 pizzas were distributed amongst the participants.
+The Cubing Club, DAU created a mosaic for Open Source Day in collaboration with GDG. The mosaic was created using 780+ Rubik’s cubes. The event encouraged teamwork, creativity, and active participation, making it an engaging highlight of Open Source Day.
 
-- **Club/Committee:** Event | **Details:** Kaggle Contest (29th - 31st May 2026) The Al Club at DAU, as part of its initiative to encourage students to learn and compete in the field of Machine Learning, officially introduced Kaggle competitions for the first time at the university. The contests were open to students from all academic categories, providing a platform to develop practical ML skills and engage in real-world data science challenge Heritage Club Gamthi Mela & Swar Sandhya (3rd September 2025) The Heritage Club organized Gamthi Mela and Swar Sandhya as part of a cultural celebration on campus.
+### 32. Mosaic for ETSIF
+**Date:** 9th April 2026
 
-- **Club/Committee:** Event | **Details:** Gamthi Mela featured vibrant food stalls and handmade jewellery displays that showcased local flavours and craftsmanship, while Swar Sandhya presented a soulful musical evening performed by talented local singers. The events created an engaging cultural atmosphere and encouraged community participation and appreciation of local art and traditions. Photography and Movie Making Club FujiFilm Workshop (17th September 2025) The Photography and Movie Making Club organized the Fuijifilm Workshop led by Shadab and his team, offering participants an immersive introduction to photography and videography. The workshop included presentations, demonstrations, and hands-on practice sessions where attendees explored creative techniques and gained experience using a variety of Fujifilm cameras and lenses.
+The Cubing Club, DAU created a mosaic for ETSIF in collaboration with Research Club. The mosaic was created using 720+ Rubik’s cubes. The event encouraged teamwork, creativity, and active participation, making it an engaging highlight of ETSIF.
 
-- **Club/Committee:** Event | **Details:** The event combined conceptual learning with practical exposure, encouraging students to develop their skills and interest in visual storytelling. Astrophotography session (28th March 2026) The Photography and Movie Making Club organized an engaging Astro-Photography Session. The session was led by experienced astrophotographer Dhruv Patel, who guided participants through the basics of astronomy and astrophotography. Three telescopes—a 10” Dobsonian, a 127mm reflector, and a 70mm refractor—were set up for observing celestial objects such as the Moon and Jupiter.
+### 33. Cultural Committee Janmashtami Celebration
+**Date:** 16th August 2025
 
-- **Club/Committee:** Event | **Details:** Participants also learned techniques like long exposure and timelapse photography, making the session a hands-on and enriching experience that sparked interest in exploring the night sky Radio Club Vaani-The Open Mic (9th September 2025) The Radio Club organized an Open Mic event where participants were encouraged to present their own poetry, shayari, monologues, stories, and other creative content. The event provided a platform for students to express themselves creatively while promoting writing, storytelling, and presentation skills in an engaging and supportive environment.
+The Cultural Committee organised a vibrant Janmashtami Celebration on campus to mark the festival with enthusiasm and cultural spirit. The celebration began with an aarti at the SAC-1 foyer, followed by a mud-holi and matki-phod competition at the SAC Ground. The event witnessed enthusiastic participation from students, fostering cultural bonding and festive joy.
 
-- **Club/Committee:** Event | **Details:** DAU Theatres Group (DTG) Krishna Leela (16th April 2026) Krishna Leela is a theatrical production directed with participants from DTG, portraying the life of Lord Krishna through drama, music, and dance, capturing his playful childhood and profound philosophical teachings in an engaging and culturally rich performance. Music Club Open Jamming session (25th August 2025) The Music Club hosted an open jamming session to foster a vibrant musical culture on campus. The event, held near the cafeteria entrance, brought together students in an engaging and lively atmosphere filled with music, creativity, and collaboration. Participants enthusiastically performed and interacted with fellow musicians, encouraging artistic expression and strengthening the sense of community on campus.
+### 34. Ganesh Chaturthi Celebration
+**Date:** 27th August 2025
 
-- **Club/Committee:** Event | **Details:** Film Club Bullet Train- Movie Screening (11th January 2026) The Film Club organized a screening of the action-packed and adrenaline-filled movie Bullet Train starring Brad Pitt, providing students with an engaging cinematic experience and an opportunity to enjoy entertainment and recreation together. Parasite - Movie Screening (30th January 2026) The Film Club organized a screening of the Academy Award-winning movie Parasite, providing students with an engaging cinematic experience while promoting appreciation for globally acclaimed storytelling and filmmaking.
+The Cultural Committee organised the Ganesh Chaturthi Celebration to mark the beginning of the five-day festival on campus.
 
-- **Club/Committee:** Event | **Details:** Romance Classics Nights- Movie Screenings (19th February - 21st February 2026) The Film Club organized a three-day weekend screening series featuring cult classic romantic films, including 10 Things | Hate About You, How to Lose a Guy in 10 Days, and Rockstar. The event offered students an enjoyable cinematic experience, celebrating romance, music, and storytelling through a curated selection of popular films. Spider-Verse- Movie Screening (6th April - 7th April 2026) The Film Club organized a movie marathon featuring the animated superhero films Spider-Man: Into the Spider-Verse and Spider-Man: Across the Spider-Verse. The event provided students with an engaging cinematic experience, showcasing innovative animation, storytelling, and the evolution of the Spider-Verse saga.
+### 35. The celebration welcomed Lord Ganesha and included daily morning and evening aartis throughout the festival period, fostering spiritual involvement, cultural harmony, and enthusiastic participation among students Teacher’s Day Celebration
+**Date:** 10th September 2025
 
-- **Club/Committee:** Event | **Details:** Udta Punjab- Movie Screening (23rd April 2026) The Film Club organized a screening of the movie Udta Punjab as part of the NashaMukti Campaign to raise awareness among students about substance abuse. The screening aimed to highlight the social and personal consequences of addiction, encouraging meaningful discussion and promoting a message of awareness, responsibility, and healthy choices. Student Body Government Felicitation Ceremony (24th April 2026) The SBG organized a Felicitation Ceremony to honour faculty mentors and members of various clubs and committees.
+The Cultural Committee organised the Teacher’s Day Celebration to honour and appreciate the contributions of faculty members. The event featured music performances, dance acts, and a stage play by various student clubs, creating a lively and memorable evening that reflected gratitude, respect, and enthusiastic student participation.
 
-- **Club/Committee:** Event | **Details:** The event recognized their dedication, contributions, and efforts in supporting and managing student activities, while appreciating their role in fostering a vibrant campus culture and strengthening student engagement initiatives. Collaboration Events Fanfiction Writing Competition (8th - 28th September 2025) Press Club, in collaboration with Readers’ Society, organized an online Fanfiction Writing Competition that encouraged participants to showcase their creativity through fanfiction based on their favorite media. The submissions were evaluated on various literary and creative criteria, promoting imaginative storytelling, writing skills, and student engagement in creative expression. Literature Quiz (3rd February 2026) The HeadRush Club, in collaboration with the Readers’ Society, organized a Literature Quiz designed to test and enhance participants’ knowledge of literary works, authors, and genres.
+### 36. Tarang 2025
+**Date:** 30th September - 1st October 2025
 
-- **Club/Committee:** Event | **Details:** The event encouraged critical thinking, quick recall, and a deeper appreciation of literature through an engaging and competitive quiz format.
+The Cultural Committee organized Tarang 2025, a two-day cultural celebration featuring vibrant musical and traditional performances. The event included performances by Rishikesh Gadhvi and Ishani Dave, along with DA no Dayro and Mandli Garba, creating an engaging atmosphere that celebrated Gujarati music, storytelling, Garba, and Raas traditions.
+
+### 37. Makar Sankranti
+**Date:** 14th January 2026
+
+The Cultural Committee organised Makar Sankranti to celebrate the festival of kites on campus. Students participated enthusiastically in the celebration, creating a vibrant and festive atmosphere that encouraged cultural bonding and marked the traditional occasion with collective spirit.
+
+### 38. Raaga & Rhyme
+**Date:** 19th January 2026
+
+The Cultural Committee organised Raaga & Rhyme as a cultural event celebrating music and poetry. The event provided students with a platform to express themselves through artistic performances, creating an engaging atmosphere that highlighted creativity and cultural appreciation.
+
+### 39. Bollywood Day
+**Date:** 29th January 2026
+
+The Cultural Committee organised Bollywood Day, a vibrant celebration where participants dressed up as iconic Bollywood characters and showcased their creativity through skits, ramp walks, and dance performances. The event brought the spirit of Indian cinema to life on campus, fostering cultural expression, entertainment, and enthusiastic student participation.
+
+### 40. Headrush Club BuzzQuiz
+**Date:** 28th September 2025
+
+The Headrush Club organized BuzzQuiz, a quiz based on pop and meme culture, providing participants with an engaging and entertaining platform to test their knowledge of internet trends, popular media, and contemporary culture. The event encouraged enthusiasm, interaction, and active participation while fostering a fun and competitive atmosphere on campus.
+
+### 41. The Vices Quiz
+**Date:** 28th September 2025
+
+The Headrush Club organized The Vices Quiz, a quiz competition featuring creative and thought-provoking questions that encouraged students to test their knowledge and analytical thinking skills. The event witnessed enthusiastic participation and concluded with prizes awarded to the winners, fostering a competitive and engaging atmosphere on campus. H.E.L.M.
+
+### 42. Quiz
+**Date:** 28th September 2025
+
+The Headrush Club organized a quiz on History, Etymology, Literature, and Mythology, providing participants with an engaging platform to test their knowledge across diverse subjects. The event encouraged critical thinking, learning, and enthusiastic participation in a competitive and intellectually stimulating environment.
+
+### 43. Superhero Quiz
+**Date:** 29th September 2025
+
+The Headrush Club organized a superhero-themed quiz featuring questions based on Marvel, DC, and Indian movies and comics. The event provided participants with an engaging and competitive platform to test their knowledge of superheroes, popular culture, and comic universes while encouraging enthusiastic student participation. M.E.L.A.S.
+
+### 44. Quiz
+**Date:** 10th April 2026
+
+The Headrush Club organized a quiz on Music, Entertainment, Literature, Arts and Sports (M.E.L.A.S.), providing participants with an engaging platform to test their knowledge across diverse subjects. The event encouraged critical thinking, learning, and enthusiastic participation in a competitive and intellectually stimulating environment.
+
+### 45. Muse - The Design Club ARTBIZZ 2025
+**Date:** 29th August - 6th September 2025
+
+Muse - The Design Club organized ARTBIZZ 2025, an annual doodling competition aimed at introducing freshers to the club through creative expression. Participants were encouraged to showcase their artistic skills by submitting either digital or physical doodles, fostering creativity, imagination, and student engagement in design activities.
+
+### 46. Nasha Mukti Poster Designing Competition
+**Date:** 13th September - 22nd September 2025
+
+Muse - The Design Club organized Nasha Mukti Poster Designing Competition, a poster designing competition aimed at spreading awareness about the importance of maintaining a healthy lifestyle by avoiding intoxication and substance addiction. The event encouraged participants to creatively express social messages related to alcohol, smoking, and narcotics through impactful visual designs.
+
+### 47. Rangoli Competition
+**Date:** 13th October 2025
+
+Muse - The Design Club organized a Rangoli Making Competition in which teams collaborated to create creative and colorful rangoli designs. The event encouraged artistic expression, teamwork, and enthusiastic participation while fostering a vibrant and engaging cultural atmosphere on campus.
+
+### 48. Stir & Stroke - Coffee Painting Workshop and Competition
+**Date:** 22nd January 2026
+
+Muse - The Design Club organized a hands-on workshop on the art of coffee painting, where participants explored this unique artistic technique and applied their newly learned skills to create expressive and visually appealing artworks. The session encouraged creativity, experimentation, and appreciation for unconventional art forms.
+
+### 49. Heritage Sketch Walk
+**Date:** 21st February 2026
+
+Muse - The Design Club organised the Heritage Walk to provide participants with an immersive experience of the cultural heritage and architectural richness of Old Ahmedabad. The event combined exploration with creative expression, allowing participants to observe historic surroundings and capture their impressions through sketches and doodles on postcards. The activity encouraged appreciation of heritage while fostering creativity and artistic engagement among students.
+
+### 50. Canvas Painting Competition
+**Date:** 1st April 2026
+
+Muse - The Design Club organized a creative competition where participants showcased their imagination and design skills through canvas art using acrylic colours. The event encouraged artistic expression, originality, and visual storytelling, allowing participants to experiment with colours, techniques, and concepts to create impactful artworks.
+
+### 51. Electronics Hobby Club Arduino Session + Workshop
+**Date:** 18th - 19th September 2025
+
+The Electronics Hobby Club organized an Introduction to Arduino session followed by a hands-on workshop to familiarize students with Arduino and its practical applications. Participants learned the basics of Arduino programming and electronics while building simple projects through interactive activities, encouraging experiential learning and interest in embedded systems and hardware development.
+
+### 52. Introduction to ESP-32
+**Date:** 13th October 2025
+
+The Electronics Hobby Club organized a hands-on session on ESP32 and IoT, introducing participants to concepts such as Wi-Fi, Bluetooth, sensors, and cloud connectivity. The session enabled students to build simple interactive projects while gaining practical exposure to loT-based applications and embedded systems development.
+
+### 53. Electrothon Session
+**Date:** 8th January 2026
+
+The Electronics Hobby Club organised the Electrothon Session as an introductory event for the month-long Electrothon and Robofest initiatives. The session familiarised participants with the event structure, objectives, and opportunities, encouraging students to engage in innovation, robotics, and practical electronics-based learning.
+
+### 54. Session on Introduction to STM32 With Live Demo
+**Date:** 22nd January 2026
+
+The Electronics Hobby Club conducted a technical session on Introduction to STM32 to familiarize students with the STM32 ecosystem and its practical applications in embedded systems. The session featured a live demonstration project showcasing the toggling of the on-board LED using an External Interrupt, providing participants with hands-on exposure to embedded systems programming and industry-standard STM32 microcontroller practices.
+
+### 55. Electrothon 2.0
+**Date:** 15th January - 22nd February 2025
+
+The Electronics Hobby Club organised Electrothon 2.0, a multi-day technical event aimed at fostering hands-on learning and innovation in electronics. Participants worked on problem statements requiring practical application of electronic concepts, encouraging problem-solving, teamwork, and sustained technical engagement throughout the duration of the event.
+
+### 56. Open Projects 2026
+**Date:** 6th - 8th April 2026
+
+The Electronics Hobby Club organised Open Projects, a hands-on learning initiative designed to provide students with practical exposure to electronics through real-world projects. The event focused on the development of mini battle bots and quadcopter drones, where participants attended guided sessions to learn about electronic components, project design, and implementation. Through interactive learning and live project demonstrations, the initiative encouraged innovation, teamwork, and experiential learning in the field of electronics.
+
+### 57. Khelaiya Club Garba Night
+**Date:** 2nd September 2025
+
+The Khelaiya Club organised Garba Night as a vibrant cultural celebration that brought together enthusiastic participants in a joyful and energetic atmosphere. The event provided students with an opportunity to relax, celebrate, and enjoy traditional Garba dance, with participants enthusiastically dancing and engaging throughout the evening. The celebration fostered cultural participation, togetherness, and a lively festive spirit on campus.
+
+### 58. Garba Workshop
+**Date:** 11th - 12th September 2025
+
+The Khelaiya Club organized a two-day Garba Workshop ahead of Navratri to help students learn and practice Garba dance forms. Professional instructors guided participants through basic and trendy dance steps in an energetic and engaging environment. The workshop encouraged cultural participation, enthusiasm, and active student involvement in preparation for the festive celebrations.
+
+### 59. Microsoft Student Technical Club Hacktoberfest 2025 Session
+**Date:** 15th October - 8th November 2025
+
+The Microsoft Student Technical Club organised a Hacktoberfest 2025 Session to promote open-source contributions and collaborative development. The session introduced participants to open-source workflows and various development domains, encouraging students to contribute to real-world projects while building technical skills and engaging with the open-source community.
+
+### 60. CodeChain - ICPC based Coding Contest
+**Date:** 30th October 2025
+
+The Microsoft Student Technical Club organized CodeChain, an ICPC-style programming contest where teams collaborated to solve coding problems within a limited time. The event encouraged teamwork, logical thinking, and competitive programming skills while providing participants with an engaging and challenging coding experience.
+
+### 61. Codechain (Juniors)
+**Date:** 17th February 2026
+
+The Microsoft Student Technical Club organized CodeChain (Juniors), an ICPC-style coding contest where teams of up to three members collaborated to solve algorithmic problems within a fixed time frame, fostering competitive programming skills, teamwork, and problem-solving abilities.
+
+### 62. Winter of Code 8.0
+**Date:** 1st January - 18th February 2026
+
+The Microsoft Student Technical Club organised Winter of Code 8.0, a long-duration technical programme aimed at promoting open-source contribution and collaborative learning. Participants worked on real-world projects over several weeks, enhancing their programming skills, problem-solving abilities, and experience with version control and teamwork.
+
+### 63. Face Off 6.0
+**Date:** 6th - 10th April 2026
+
+The Microsoft Student Technical Club organised Face Off 6.0, a competitive programming contest designed to test participants’ problem-solving abilities and coding proficiency. The event followed a 1v1 competitive format and was conducted across multiple rounds, beginning with a screening round and progressing through elimination stages. Participants competed in different categories based on their academic level, and each round reduced the number of competitors until the final stage. The contest fostered analytical thinking, speed, and accuracy, while providing an engaging and competitive platform for students to showcase their programming skills.
+
+### 64. Chess Club Freshers’ Chess tournament
+**Date:** 1st - 2nd September 2025
+
+The Chess Club organized the Freshers’ Chess Tournament as an in-person event to welcome first-year students and encourage interest in chess. Conducted in Swiss format, the tournament provided participants with an engaging and competitive platform to interact, showcase their strategic thinking skills, and foster sportsmanship among students.
+
+### 65. Online Blitz Tournament
+**Date:** 20th September 2025
+
+The Chess Club organized an Online Chess Tournament to provide students with an opportunity to compete, reconnect, and settle past rivalries in a spirited manner. The event welcomed players across different programs, encouraging participation, strategy, and sportsmanship. The tournament was conducted online, ensuring accessibility for all, and concluded with the recognition of top performers.
+
+### 66. Annual Festival Committee Hackout '25
+**Date:** 29th - 31st August 2025
+
+The Annual Festival Committee organized HackOut'25, a 48-hour innovation hackathon centered around the theme “Green Hydrogen and Blue Carbon Ecosystem.” The event brought together students from diverse disciplines to design and develop technology-driven solutions addressing climate and energy challenges using emerging technologies such as Al, blockchain, loT, DevOps, and geospatial systems. The hackathon encouraged innovation, collaboration, and problem-solving in the field of sustainability and technology.
+
+### 67. Youth Run ’25
+**Date:** 9th November 2025
+
+The Annual Festival Committee organized Youth Run '25, a 7 km marathon organised as an intra-level sports event to promote awareness about sustainability under the theme “Run for Sustainable Future.” The run was conducted from the DAU Main Gate to GH-3 and back, encouraging student participation while highlighting the importance of sustainable practices through physical activity.
+
+### 68. Synapse 26
+**Date:** 26th February - 1st March 2026
+
+The Annual Festival Committee organized Synapse’26, the flagship cultural and innovation festival of DAU, bringing together talent from across the nation through music, art, dance, technology, and creative competitions. Known for its vibrant atmosphere and high-energy events, the festival celebrated youth culture, creativity, and innovation with massive participation and industry collaborations.
+
+### 69. Sports Committee Freshers’ Weekend
+**Date:** 30th - 31st August 2025
+
+The Freshers Weekend was organized by the Sports Committee to welcome new students through a series of sports activities including cricket, table tennis, badminton, volleyball, football, basketball, and carrom. The event aimed to promote teamwork, interaction, and sportsmanship among freshers.Participants actively engaged in all games with great enthusiasm, making the event fun, competitive, and memorable while helping them connect with the campus community.
+
+### 70. Concours ’25
+**Date:** 6th - 9th November 2025
+
+
+
+### 71. Organised by the Sports Committee, Concours 2025 was a four-day inter-college sports event organised by DVL (DAU Volleyball League)
+**Date:** 2nd February - 22nd February 2026
+
+The Sports Committee organized the DAU Volleyball League (DVL), a structured sports tournament beginning with a team ownership bidding process followed by a player auction. Eight teams were formed and divided into two groups, competing in a round-robin format to ensure multiple matches for each team, fostering competitive spirit, strategic planning, and active student engagement in volleyball.
+
+### 72. DCL (DAU Cricket League)
+**Date:** 31st January - 22nd February 2026
+
+The Sports Committee organized the DAU Cricket League (DCL), a structured cricket tournament beginning with a team ownership bidding process, where club owners competed to acquire teams. The highest bidders proceeded to a player auction, using allocated points to form their squads from a pool of university students. The eight teams were divided into two groups and competed in a round-robin format, ensuring multiple matches for each team and fostering competitive gameplay, strategic planning, and active student participation throughout the tournament.
+
+### 73. DBL (DAU Badminton League)
+**Date:** 11th March - 13th March 2026
+
+The Sports Committee organized the DAU Badminton League (DBL), featuring 12 teams competing in a structured round-robin format across four groups of three teams each. The top teams from each group advanced to the knockout stage, ensuring a highly competitive progression. The tournament witnessed enthusiastic participation from students across B.Tech, Master’s, and PhD programs, promoting sportsmanship, teamwork, and active student engagement across disciplines.
+
+### 74. Programming Club Introduction to Competitive Programming
+**Date:** 1st August 2025
+
+The Programming Club organized an introductory session on Competitive Programming (CP) to familiarize students with the fundamentals and guide them in starting their competitive programming journey. The session included interactive discussions, explanations of concepts, and basic problem-solving activities designed to engage participants and foster their interest in coding and logical thinking. The event fostered a collaborative learning environment and encouraged students to strengthen their programming skills.
+
+### 75. IPC - 1
+**Date:** 11th September 2025
+
+The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus. Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition.
+
+### 76. Introduction to C Programming
+**Date:** 17th September 2025
+
+The Programming Club organized an “Introduction to C Programming” session forf irst-year B.Tech students to help them build strong foundational programming skills. The session covered core concepts such as data types, loops, conditional statements, arrays, functions, and operator precedence in an interactive and supportive learning environment. The event encouraged students to strengthen their coding fundamentals while developing an interest in programming, problem-solving, and competitive coding.
+
+### 77. IPC - 2
+**Date:** 14th October 2025
+
+The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus. Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition.
+
+### 78. IPC Junior - 1
+**Date:** 15th October 2025
+
+The Programming Club organized short-duration coding contests exclusively for first-year students to encourage a competitive programming culture on campus. The contests featured problem-solving challenges designed to strengthen coding skills and prepare participants for competitive programming platforms such as Codeforces and CodeChef.
+
+### 79. Post Contest Discussion
+**Date:** 28th October 2025
+
+The Programming Club, DAU, hosted a problem discussion session for the Codeforces Div. 4 contest. Participants first solved beginner-friendly problems and later gathered to explore different approaches and efficient solutions. The session encouraged learning through discussion, sharing coding tricks, and improving problem-solving skills. It served as a great opportunity for first-year students to strengthen their competitive programming foundation.
+
+### 80. IPC 3
+**Date:** 7th November 2025
+
+The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus. Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition.
+
+### 81. IPC Junior 2
+**Date:** 9th January 2026
+
+The Programming Club organized short-duration coding contests exclusively for first-year students to encourage a competitive programming culture on campus. The contests featured problem-solving challenges designed to strengthen coding skills and prepare participants for competitive programming platforms such as Codeforces and CodeChef.
+
+### 82. Post Contest Discussion
+**Date:** 12th January 2026
+
+The Programming Club, DAU, hosted a problem discussion session for the Codeforces Div. 3 contest. Participants solved beginner-friendly problems and later gathered to explore different approaches and efficient solutions. The session encouraged learning through discussion, sharing coding tricks, and improving problem-solving skills. It was a great opportunity for juniors to strengthen their competitive programming foundation.
+
+### 83. IPC 4 ( blitz cup round 1)
+**Date:** 27th January 2026
+
+The Programming Club organized IPC 4 (Blitz Cup Round 1), a short-duration competitive coding contest designed to promote a healthy and challenging programming environment within the college. The event featured problem-solving-based questions aimed at strengthening participants’ data structures and algorithms skills, while also preparing them for global competitive programming platforms such as Codeforces and CodeChef.
+
+### 84. Blitz cup round 2
+**Date:** 29th January 2026
+
+The Programming Club organized Blitz Cup Round 2, a one-versus-one competitive programming round for qualified participants. In this stage, contestants competed head-to-head in time-bound coding challenges, with a strong emphasis on speed, accuracy, and effective problem-solving under pressure. The matches were conducted in a knockout format until winners were determined, providing a platform to evaluate real-time coding ability and competitive performance.
+
+### 85. Round Robin Relay
+**Date:** 16th February 2026
+
+The Programming Club organized short-duration team coding contests of 1.5 hours featuring 4 problems each. These contests aimed to foster a healthy and competitive coding environment within the college, enhance participants’ problem-solving skills and data structures and algorithms knowledge, and prepare them for global competitive programming platforms such as Codeforces and CodeChef.
+
+### 86. IPC 5
+**Date:** 25th February 2026
+
+The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus. Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition.
+
+### 87. IPC Junior 3
+**Date:** 12th March 2026
+
+The Programming Club organized short-duration coding contests exclusively for first-year students to encourage a competitive programming culture on campus. The contests featured problem-solving challenges designed to strengthen coding skills and prepare participants for competitive programming platforms such as Codeforces and CodeChef.
+
+### 88. IPC Junior 4
+**Date:** 2nd April 2026
+
+The Programming Club organized short-duration coding contests exclusively for first-year students to encourage a competitive programming culture on campus. The contests featured problem-solving challenges designed to strengthen coding skills and prepare participants for competitive programming platforms such as Codeforces and CodeChef.
+
+### 89. IPC 6 ( Interwing Round 1)
+**Date:** 13th April 2026
+
+The Programming Club organized short-duration coding contests aimed at fostering a healthy and competitive programming environment on campus. Each contest consisted of a set of coding problems designed to enhance participants’ problem-solving abilities and strengthen their understanding of Data Structures and Algorithms (DSA). The event also encouraged students to prepare for competitive programming contests on platforms such as Codeforces and CodeChef through regular practice and competition.
+
+### 90. Interwing round 2
+**Date:** 15th April 2026
+
+The Programming Club organized Interwing Round 2, a long-duration competitive coding contest featuring 10 problems to be solved within 5 hours. The event encouraged advanced problem-solving under extended time constraints, helping participants improve analytical thinking, coding efficiency, and competitive performance for international-level programming contests.
+
+### 91. Business Club Bidding War
+**Date:** 29th August 2025
+
+The Business Club organized Bidding War, a competitive ad-skit event where teams showcased creative company advertisements and competed based on judges’ evaluations, bidding rounds, and audience response. The event provided an engaging platform for participants to demonstrate creativity, presentation skills, and teamwork while fostering enthusiasm and active student participation.
+
+### 92. Cyber Information and Network Security Club Master Cydo’s Scroll
+**Date:** 28th August 2025
+
+The Cyber Information and Network Security Club organized Master Cydo’s Scroll aimed at introducing students to the field of cybersecurity and encouraging practical learning. The event was conducted in two phases: the first phase featured an informative session providing an overview of cybersecurity concepts and career opportunities, while the second phase consisted of an engaging Capture-the-Flag (CTF) competition where participants worked in teams to solve cybersecurity challenges. The event promoted technical learning, teamwork, and problem-solving skills among students.
+
+### 93. Bug Bounty Webinar
+**Date:** 11th September 2025
+
+The Cyber Information and Network Security Club organized a Bug Bounty Webinar featuring guest speaker Jai Niresh J. The interactive session introduced participants to the fundamentals of bug bounty hunting, including target selection and analysis, followed by a hands-on phase demonstrating real-world bug bounty techniques and tools. The workshop provided students with practical exposure to cybersecurity concepts and encouraged learning through real-life applications and interactive discussions.
+
+### 94. CTF Training Session by Cyberpedia
+**Date:** 13th October 2025
+
+The Cyber Information and Network Security Club organized a CTF Training Session in collaboration with Cyberpedia to introduce students to the fundamentals of Capture The Flag (CTF) competitions and cybersecurity practices. The session included expert guidance, hands-on challenges using Kali Linux, and practical insights into real-world cybersecurity techniques, helping participants strengthen their technical skills and prepare for competitive CTF events.
+
+### 95. AWS Orientation Session
+**Date:** 18th February 2026
+
+The Cyber Information and Network Security Club organized an AWS Orientation Session, an intra-university technical event introducing students to Amazon Web Services. Conducted by industry professionals from CyberDojo, the session highlighted AWS applications, key services, and certification opportunities in cloud computing.
+
+### 96. Bug Bounty Webinar
+**Date:** 11th March 2025
+
+The Cyber Information and Network Security Club organized a Bug Bounty Webinar, an intra-university technical workshop conducted by industry expert Aksha Chudasama. The session introduced students to bug bounty programs, providing insights into ethical hacking practices and vulnerability discovery in real-world systems.
+
+### 97. Readers' Society Book 1: Prologue
+**Date:** 28th August 2025
+
+The Readers' Society hosted its inaugural event, Book 01: Prologue, with the aim of bringing together students and faculty members who share an interest in literature, storytelling, and meaningful conversations. The session provided a welcoming space for participants to engage in discussions, exchange perspectives, and foster a vibrant reading culture on campus.
+
+### 98. An evening of Thrillers
+**Date:** 15th September 2025
+
+The Readers' Society hosted a session on the thriller genre in which participants explored and discussed selected short stories shared prior to the event. The session involved literary analysis of the stories, focusing on elements such as plot, characters, themes, writing style, and historical context, encouraging thoughtful discussions and a deeper appreciation of literature among participants.
+
+### 99. Buttons and Biscuits
+**Date:** 30th October 2025
+
+The Readers' Society organized Buttons and Biscuits, a literary discussion on ‘Coraline’ by Neil Gaiman; a horror children’s book later popularized by a stop motion film based on the same.The event revolved around the effects of the book on the general public along with the discussion of character sketches and artstyle.
+
+### 100. A Kafkaesque Evening
+**Date:** 30th October 2025
+
+The Readers' Society organized A Kafkaesque Evening, a literary discussion on Franz Kafka's short stories The Judgment and A Hunger Artist. The session opened with a brief look at Kafka's life and the anxieties that shaped his writing, followed by an engaging discussion on themes of guilt, isolation, and absurdity. Welcoming both avid readers and newcomers, the event explored what it truly means to call something Kafkaesque.
+
+### 101. An Unexpected Adventure- A discussion on "The Hobbit"
+**Date:** 8th January 2026
+
+The Readers’ Society organized An Unexpected Adventure, a literary discussion on ‘The Hobbit’ by J.R.R. Tolkein; a book about dragons, humans, dwarves and ofcourse hobbits. The event revolved around world building and about the genre of fantasy and works about other fantasy literary writers.
+
+### 102. A Stroll with Dostoevsky
+**Date:** 21st January 2026
+
+The Readers’ Society organized A Stroll with Dostoevsky, a discussion on the Russian literary legend, Fyodor Dostoevsky and his works, with special focus on his short story, “White Nights”.
+
+### 103. Displacement and Dignity- Jhumpa Lahiri
+**Date:** 8th April 2026
+
+The Readers’ Society organized Displacement & Dignity, a literary gathering centered on A Real Durwan. The event revolved around Jhumpa Lahiri’s powerful storytelling, how her writing brings attention to voices often overlooked, inviting us to reflect on empathy, identity, and societal structures.
+
+### 104. Al Club DAU Integration bee
+**Date:** 3rd September 2025
+
+Al Club organized an Integration Bee event in which participants competed through multiple rounds of integration problems with increasing levels of difficulty. The event concluded with an exciting one-on-one final round where finalists solved the same integral side by side to determine the fastest solver. The competition encouraged analytical thinking, mathematical problem-solving, and active student participation.
+
+### 105. Linear Regression 101
+**Date:** 29th January 2026
+
+This small session on Linear Regression was hosted by the Al Club as a small step towards an initiative to help the students of DAU get better insights and grip on machine learning , so that our students can stay at par with others or even above them.
+
+### 106. Speaker Session
+**Date:** 24th February 2026
+
+The Al Club, DAU, in collaboration with Dr. Kiran Trivedi, hosted an insightful speaker session on “Building Wearable Al”, highlighting the role of wearable intelligence in shaping the technological future of Bharat.
+
+### 107. World Quant Session (IQC)
+**Date:** 2nd April 2026
+
+The Al Club, DAU, in collaboration with WorldQuant, hosted a speaker session on “IQC Junior world quant competition”. It was hosted by one of the company’s own Ishan Shandaliya sir who provided guidance on how to register and how to go on with the quant competition. Around 100 pizzas were distributed amongst the participants.
+
+### 108. Kaggle Contest
+**Date:** 29th - 31st May 2026
+
+The Al Club at DAU, as part of its initiative to encourage students to learn and compete in the field of Machine Learning, officially introduced Kaggle competitions for the first time at the university.
+
+### 109. The contests were open to students from all academic categories, providing a platform to develop practical ML skills and engage in real-world data science challenge Heritage Club Gamthi Mela & Swar Sandhya
+**Date:** 3rd September 2025
+
+The Heritage Club organized Gamthi Mela and Swar Sandhya as part of a cultural celebration on campus. Gamthi Mela featured vibrant food stalls and handmade jewellery displays that showcased local flavours and craftsmanship, while Swar Sandhya presented a soulful musical evening performed by talented local singers. The events created an engaging cultural atmosphere and encouraged community participation and appreciation of local art and traditions.
+
+### 110. Photography and Movie Making Club FujiFilm Workshop
+**Date:** 17th September 2025
+
+The Photography and Movie Making Club organized the Fuijifilm Workshop led by Shadab and his team, offering participants an immersive introduction to photography and videography. The workshop included presentations, demonstrations, and hands-on practice sessions where attendees explored creative techniques and gained experience using a variety of Fujifilm cameras and lenses. The event combined conceptual learning with practical exposure, encouraging students to develop their skills and interest in visual storytelling.
+
+### 111. Astrophotography session
+**Date:** 28th March 2026
+
+The Photography and Movie Making Club organized an engaging Astro-Photography Session. The session was led by experienced astrophotographer Dhruv Patel, who guided participants through the basics of astronomy and astrophotography. Three telescopes—a 10” Dobsonian, a 127mm reflector, and a 70mm refractor—were set up for observing celestial objects such as the Moon and Jupiter.
+
+### 112. Participants also learned techniques like long exposure and timelapse photography, making the session a hands-on and enriching experience that sparked interest in exploring the night sky Radio Club Vaani-The Open Mic
+**Date:** 9th September 2025
+
+The Radio Club organized an Open Mic event where participants were encouraged to present their own poetry, shayari, monologues, stories, and other creative content. The event provided a platform for students to express themselves creatively while promoting writing, storytelling, and presentation skills in an engaging and supportive environment.
+
+### 113. DAU Theatres Group (DTG) Krishna Leela
+**Date:** 16th April 2026
+
+Krishna Leela is a theatrical production directed with participants from DTG, portraying the life of Lord Krishna through drama, music, and dance, capturing his playful childhood and profound philosophical teachings in an engaging and culturally rich performance.
+
+### 114. Music Club Open Jamming session
+**Date:** 25th August 2025
+
+The Music Club hosted an open jamming session to foster a vibrant musical culture on campus. The event, held near the cafeteria entrance, brought together students in an engaging and lively atmosphere filled with music, creativity, and collaboration. Participants enthusiastically performed and interacted with fellow musicians, encouraging artistic expression and strengthening the sense of community on campus.
+
+### 115. Film Club Bullet Train- Movie Screening
+**Date:** 11th January 2026
+
+The Film Club organized a screening of the action-packed and adrenaline-filled movie Bullet Train starring Brad Pitt, providing students with an engaging cinematic experience and an opportunity to enjoy entertainment and recreation together.
+
+### 116. Parasite - Movie Screening
+**Date:** 30th January 2026
+
+The Film Club organized a screening of the Academy Award-winning movie Parasite, providing students with an engaging cinematic experience while promoting appreciation for globally acclaimed storytelling and filmmaking.
+
+### 117. Romance Classics Nights- Movie Screenings
+**Date:** 19th February - 21st February 2026
+
+The Film Club organized a three-day weekend screening series featuring cult classic romantic films, including 10 Things | Hate About You, How to Lose a Guy in 10 Days, and Rockstar. The event offered students an enjoyable cinematic experience, celebrating romance, music, and storytelling through a curated selection of popular films.
+
+### 118. Spider-Verse- Movie Screening
+**Date:** 6th April - 7th April 2026
+
+The Film Club organized a movie marathon featuring the animated superhero films Spider-Man: Into the Spider-Verse and Spider-Man: Across the Spider-Verse. The event provided students with an engaging cinematic experience, showcasing innovative animation, storytelling, and the evolution of the Spider-Verse saga.
+
+### 119. Udta Punjab- Movie Screening
+**Date:** 23rd April 2026
+
+The Film Club organized a screening of the movie Udta Punjab as part of the NashaMukti Campaign to raise awareness among students about substance abuse. The screening aimed to highlight the social and personal consequences of addiction, encouraging meaningful discussion and promoting a message of awareness, responsibility, and healthy choices.
+
+### 120. Student Body Government Felicitation Ceremony
+**Date:** 24th April 2026
+
+The SBG organized a Felicitation Ceremony to honour faculty mentors and members of various clubs and committees. The event recognized their dedication, contributions, and efforts in supporting and managing student activities, while appreciating their role in fostering a vibrant campus culture and strengthening student engagement initiatives.
+
+### 121. Collaboration Events Fanfiction Writing Competition
+**Date:** 8th - 28th September 2025
+
+Press Club, in collaboration with Readers’ Society, organized an online Fanfiction Writing Competition that encouraged participants to showcase their creativity through fanfiction based on their favorite media. The submissions were evaluated on various literary and creative criteria, promoting imaginative storytelling, writing skills, and student engagement in creative expression.
+
+### 122. Literature Quiz
+**Date:** 3rd February 2026
+
+The HeadRush Club, in collaboration with the Readers’ Society, organized a Literature Quiz designed to test and enhance participants’ knowledge of literary works, authors, and genres. The event encouraged critical thinking, quick recall, and a deeper appreciation of literature through an engaging and competitive quiz format.

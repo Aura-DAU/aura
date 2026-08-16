@@ -13,9 +13,60 @@ Sponsored Research Projects
 
 # Main Content
 
-Policy on the Sponsored Research Projects: [Click Here!](https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-the_Sponsored-Projects-23.5.24.pdf)
+## Policy on the Sponsored Research Projects
 
-**[Compendium of Recent Sponsored Research Projects](https://www.daiict.ac.in/sites/default/files/other-files/Compendium-of-Recent-Sponsored-Research-Projects.pdf)**
+[Full policy PDF](https://www.daiict.ac.in/sites/default/files/other-files/Policy-on-the_Sponsored-Projects-23.5.24.pdf) (dated 23/05/2024, signed by T. Bandyopadhyay, Director, DA-IICT Gandhinagar)
+
+### 1. Hiring of the Research Associates
+
+1. The PI shall ensure that junior research fellows (JRFs) and other research associates are hired **only if** the requisite funds are available from the sponsoring agency for the entire duration of the JRF's contract.
+   - The hiring process shall **not** be initiated when the manpower subhead of the sponsored project does not have the requisite funds.
+2. The sponsoring agency often has a policy to release funds in installments. In these cases, the JRF contract should be aligned with the fund release schedule.[^1]
+   - Example: for a two-year project, if the funding agency provides the first-year fund at commencement and the second-year fund only after successful completion of year one, the JRF contract shall initially cover only the first year and be renewed only after the second-year funds are released.
+
+### 2. Institute Level Support
+
+1. The Institute may extend a loan to the manpower subhead of the sponsored research project in two scenarios:
+   - The sponsoring agency withdraws funds after the JRF is hired and before their contract ends.
+   - The sponsoring agency has not released the next funding installment by the date of termination of the JRF contract. To prevent a discontinuity, the Institute may provide a loan to the manpower subhead, extending the JRF contract for a maximum of **three months**, provided the PI obtains approval from the Director and Dean Research.
+2. The total financial loan provided by the Institute shall not exceed:
+   - **Institute level**: a maximum of **INR 50 lakhs** aggregated over the past three years from the present date.
+   - **Per faculty**: a maximum of **INR 5 lakhs** aggregated over the past three years from the present date.
+   - The per-faculty limit is discretionary and may be adjusted by the Director and Dean Research (e.g., if the per-faculty limit is reached but the Institute-level limit is not).
+   - If either maximum is reached, subsequent loan requests may not be granted.
+
+### 3. Use of Received Grants
+
+1. **Equipment**: all equipment purchases should match the equipment list stated in the research proposal submitted to the funding agency.
+2. **Travel**: the travel component of received funding shall be used for travel related to the project. Specifically:
+   - The purpose of travel should fulfill the research objective of the project and be directly related to it.
+   - The travel component shall **not** be used for attending conferences or workshops, or presenting papers, that are not an outcome of the research project.
+   - Exception: the PI obtains approval from either the PI of the consortium project or the funding agency, via an explicit statement that travel for all research activities of the PI, Co-PI, and research staff (even those not related to the sponsored project's topic) is permissible.
+3. **Consumables and Contingency**: at the discretion of the PI and Co-PI.
+
+### 4. Purchase Process[^2]
+
+**Initiation of purchase process** — the PI prepares an indent setting out: name and code number of project; items to be purchased (specifications, quantity, whether consumable); estimated expenditure; specific budget head to be charged; intended use; and confirmation of availability of project funds.
+
+**Authorisation of purchase:**
+- Items up to Rs 20,000: PI authorizes the purchase directly and sends a copy of the indent to Dean (R&D) for information.
+- Items up to Rs 100,000: Dean (R&D) authorizes the purchase.
+- Items Rs 100,000 and above: Director authorizes the purchase upon recommendation of a procurement committee.
+- In all cases, the PI is responsible for verifying that funds are available in the project for the purchase.
+
+**Purchase and payment process** (a duly authorized indent is used by Commercial as the basis to initiate this process):
+- **Up to Rs 5,000**: Cash/cheque/credit-card purchases of consumables/components are permitted (no indent required), not exceeding Rs 10,000 per month per project in total. Receipts/statements must be submitted for reimbursement by the 10th of the following month, processed by Accounts on approval of Dean (R&D). A consumables register must be maintained by the PI and produced at audit time.
+- **Up to Rs 20,000**: Purchase order placed on approval of the quotation(s) by the Registrar.
+- **Up to Rs 1,00,000**: Three quotations must be obtained by Commercial; purchase order placed on approval of the quotation(s) by the Registrar; proprietary items must be recommended by a procurement committee.
+- **Up to Rs 25 lakhs**: Limited tender enquiry carried out and placed for approval of the Director; proprietary items recommended by a standing purchase committee appointed by the Director.
+- **Above Rs 25 lakhs**: Advertised open tender enquiry carried out and placed before the standing purchase committee for recommendation; purchase order placed on approval of the Director.
+
+[^1]: This requirement may be waived in exceptional cases (see Section 2.1.b).
+[^2]: This section is based on the purchase policy dated 22/10/2010.
+
+## Compendium of Recent Sponsored Research Projects
+
+[Compendium PDF](https://www.daiict.ac.in/sites/default/files/other-files/Compendium-of-Recent-Sponsored-Research-Projects.pdf)
 
 Year 2025
 

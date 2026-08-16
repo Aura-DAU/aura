@@ -2,11 +2,12 @@
 title: "Holiday List 2026"
 url: "https://daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf"
 category: "Student Services"
-scraped_by: "Madhav Thesiya"
-scraped_date: "2026-05-30"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 source_type: "PDF"
 pdf_name: "DAU_Holiday-List-2026"
+note: "Verified directly against the source PDF (user-provided upload) on 2026-08-07. Content confirmed accurate and complete — the web_fetch tool could not extract this scanned PDF, but the uploaded file fully matches the previously scraped data below."
 ---
 
 # Overview

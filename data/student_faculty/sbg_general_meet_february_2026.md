@@ -8,58 +8,42 @@ team: "Madhav Thesiya"
 source_type: "PPTX"
 original_name: "SBG General Meet February 2026.pptx"
 authorization: ["student", "faculty"]
+reorganized_date: "2026-08-09"
 ---
 
-# SBG General Meet February 2026
+# SBG General Meet — 18/02/2026
 
-### SBG General Meet
+> Reformatted (2026-08-09): the original PPTX extraction had each slide's agenda number and title split across broken lines. Reconstructed as a clean numbered agenda below; content unchanged.
 
-### DATE :- 18/02/2026
+**Date:** 18/02/2026
 
-### Agenda
+## Agenda
 
-### I
+### I. Increase in Seat Matrix — Student Placement Cell
+- Extend 1 core seat (selection) for B.Tech first year
+- Extend 1 core seat (selection) for MSc first year
 
-- Increase in Seat Matrix:
-- Student Placement Cell
-- To extend 1 core seat (selection) for B.Tech first year.
-- To extend 1 core seat (selection) for MSc first year.
-### Voting Agenda: 66% required to pass
+**Voting Agenda:** 66% required to pass
 
-### Agenda
+### II. Academic Committee — Proposed Changes in Co-Curricular Activities
 
-### II
+**Non-Voting Agenda**
 
-- Academic Committee
-- Proposed Changes in Co-Curricular Activities
-### Non Voting Agenda
+### III. Formation of a New Club — eSports Social
 
-### Agenda
+**Voting Agenda:** 50% required to pass
 
-### III
+### IV. Formation of a New Club — Fashion Club
 
-- Formation of a new club:
-- eSports Social
-### Voting Agenda: 50% required to pass.
+**Voting Agenda:** 50% required to pass
 
-### Agenda
-
-### IV
-
-- Formation of a new club:
-- Fashion Club
-### Voting Agenda: 50% required to pass.
-
-### Agenda
-
-### V
-
-- Changes in SBG Constitution
+### V. Changes in SBG Constitution
 - Resignations, Impeachments (clause)
 - SBG + Dean Veto
 - Shutting Down a Club
 - Quorums
 - Advisory Capacity
-### Voting Agenda: 50% required to pass
 
-- Open Discussion
+**Voting Agenda:** 50% required to pass
+
+### Open Discussion

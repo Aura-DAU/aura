@@ -1,15 +1,15 @@
 ---
 title: "Students / IEEE Student Branch / Members"
 url: "http://ieee.daiict.ac.in/ieee2018/members.html"
-category: "Student_services"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-05-31"
+category: "Committees"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 
 # Overview
 
-×
+Static, archived roster (dated 2018) of IEEE Student Branch members at DA-IICT, hosted on the legacy `ieee.daiict.ac.in/ieee2018/` microsite. Verified still live and unchanged as of the rescrape date — this is a historical snapshot, not a current member list; the branch's current membership is not published on this page.
 
 # Main Content
 

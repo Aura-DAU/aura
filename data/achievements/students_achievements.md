@@ -9,50 +9,24 @@ team: "Team 2"
 
 # Students / Achievements
 
-# Overview
+## Overview
 
-_No overview available._
+This page is the central hub for all student, faculty, and institutional achievements at Dhirubhai Ambani University (formerly DA-IICT), Gandhinagar. It lists awards, recognitions, and milestones across academic, research, cultural, and sports domains.
 
-# Main Content
+## Main Content
 
-# Pagination
+The Achievements page on the DAU website (https://www.daiict.ac.in/achievements) lists all notable achievements of DA-IICT / DAU students, faculty, and the institution. These span a wide range of categories:
 
-- Current page 1
-- Page 2
-- Page 3
-- Page 4
-- Page 5
-- Page 6
-- Page 7
-- Page 8
-- Next page ››
-- Last page Last »
+- **Academic Awards:** Scholarships, fellowships, gold medals, and rank holders
+- **Research Achievements:** IEEE grants, conference best paper awards, PhD defenses
+- **National and International Rankings:** NAAC A+, IIRF Rank 2, NIRF recognition
+- **Cultural and Sports Achievements:** Prizes won at inter-college fests, MUN commendations, hackathon wins
+- **Institutional Recognitions:** CoE designation by Govt. of Gujarat, FSSAI 5-star campus award, NAAC accreditation
+- **Alumni Achievements:** Notable milestones of DA-IICT alumni in industry, academia, and public service
 
-# Important Information
+The list is paginated across multiple pages and is regularly updated as new achievements are recognized.
 
-- Current page 1
-- Page 2
-- Page 3
-- Page 4
-- Page 5
-- Page 6
-- Page 7
-- Page 8
-- Next page ››
-- Last page Last »
+## Important Information
 
-# Related Links
-
-- [Read More](https://www.daiict.ac.in/achievements/6914)
-- [Read More](https://www.daiict.ac.in/achievements/6913)
-- [Read More](https://www.daiict.ac.in/achievements/6625)
-- [Read More](https://www.daiict.ac.in/achievements/6183)
-- [Read More](https://www.daiict.ac.in/achievements/6037)
-- [Current page1](https://www.daiict.ac.in/achievements?page=0)
-- [Page2](https://www.daiict.ac.in/achievements?page=1)
-- [Page3](https://www.daiict.ac.in/achievements?page=2)
-- [Page4](https://www.daiict.ac.in/achievements?page=3)
-- [Page5](https://www.daiict.ac.in/achievements?page=4)
-- [Page6](https://www.daiict.ac.in/achievements?page=5)
-- [Page7](https://www.daiict.ac.in/achievements?page=6)
-- [Page8](https://www.daiict.ac.in/achievements?page=7)
+- URL: https://www.daiict.ac.in/achievements
+- The page is paginated; visit subsequent pages for older achievements.

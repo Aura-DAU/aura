@@ -26,141 +26,77 @@ SBG Convener, 2024-25 Dean (Students)
 
 Written and Drafted by Pari Chauhan, SBG Secretary, 2024-25
 
-Contents
-
-### 1 Preamble 4
-
-### 2 Membership 4
-
-2.1 Membership definitions ............................................................................... 4
-
-2.2 Elections ........................................................................................................ 5
-
-2.2.1 Election Commission ....................................................................... 5
-
-2.2.2 Eligiblity Criteria ............................................................................ 5
-
-2.2.3 Representation in Committees ....................................................... 6
-
-2.2.4 Retention in Committees ................................................................ 6
-
-### 3 Structures and Functions 7
-
-3.1 Structure ........................................................................................................ 7
-
-3.2 Functions ....................................................................................................... 7
-
-3.2.1 SBG Core Team.............................................................................. 7
-
-3.2.2 Impeachment of the SBG Core Team ........................................... 9
-
-3.2.3 Faculty Mentor ................................................................................ 9
-
-3.2.4 Amendments .................................................................................. 10
-
-### 4 Meetings 10
-
-4.1 Attendance and Quorum ........................................................................... 10
-
-4.2 Calling Meetings ........................................................................................ 11
-
-4.3 Decision making procedures ..................................................................... 11
-
-4.4 Budget Sessions ......................................................................................... 12
-
-### 5 Student Clubs 12
-
-5.1 Definition ..................................................................................................... 12
-
-5.2 Regulations .................................................................................................. 12
-
-### 6 Student Committees 13
-
-6.1 Seat Increment Policy ................................................................................ 13
-
-6.2 Meetings ...................................................................................................... 13
-
-6.3 Absentees at meetings ............................................................................... 14
-
-6.4 Functions of Convener and Deputy Convener ........................................ 14
-
-6.5 Procedure for withdrawal of the Convener from their post ................. 15
-
-6.6 Impeachment of the convener .................................................................. 15
-
-6.7 Inactivity/Misuse of position and expulsion ........................................... 15
-
-6.8 Conflicts ....................................................................................................... 16
-
-6.9 Academic Committee ................................................................................. 16
-
-6.9.1 Preamble ......................................................................................... 16
-
-6.9.2 Functions......................................................................................... 16
-
-6.9.3 Roles and Responsibilities of a member .................................... 16
-
-6.10 Annual Festival Committee ..................................................................... 16
-
-6.10.1 Functions......................................................................................... 16
-
-6.10.2 Activities ........................................................................................ 16
-
-6.11 Cafeteria Management Committee ........................................................... 17
-
-6.11.1 Preamble ......................................................................................... 17
-
-6.11.2 Regulations ..................................................................................... 17
-
-6.11.3 Functions......................................................................................... 18
-
-6.12 Cultural Committee ................................................................................... 18
-
-6.12.1 Preamble ......................................................................................... 18
-
-6.12.2 Functions......................................................................................... 18
-
-6.13 Hostel Management Committee ............................................................... 18
-
-6.13.1 Preamble ......................................................................................... 18
-
-6.13.2 Functions......................................................................................... 19
-
-6.13.3 Roles and Responsibilities of a member .................................... 19
-
-6.14 Sports Committee ...................................................................................... 19
-
-6.14.1 Preamble ......................................................................................... 19
-
-6.15 Student Placement Committee ................................................................. 20
-
-6.15.1 Preamble ......................................................................................... 20
-
-6.15.2 Functions......................................................................................... 20
-
-6.15.3 Placement Policy ........................................................................... 20
-
-6.16 Tech Support Committee .......................................................................... 21
-
-6.16.1 Preamble ......................................................................................... 21
-
-### 7 Budget and Finance 21
-
-7.1 Preamble ..................................................................................................... 21
-
-7.2 The Budgetary Cycle ................................................................................ 21
-
-7.3 Finance policies .......................................................................................... 22
-
-### 8 Breach of the Constitution by Club/Committee 22
-
-8.1 Severity Level 1 ......................................................................................... 23
-
-8.2 Severity Level 2 ......................................................................................... 23
-
-8.3 Severity Level 3 ......................................................................................... 23
-
-### 9 Involvement of SBG and Administration 24
+> Reformatted (2026-08-09): Table of Contents had dot-leader page numbers merged into every entry (PDF-extraction artifact) — cleaned up below. Two stray section headers accidentally created mid-body from a table row and a sentence fragment were also fixed. Body content is otherwise unchanged.
+
+## Contents
+
+- 1. Preamble
+- 2. Membership
+- 2.1 Membership definitions
+- 2.2 Elections
+- 2.2.1 Election Commission
+- 2.2.2 Eligiblity Criteria
+- 2.2.3 Representation in Committees
+- 2.2.4 Retention in Committees
+- 3. Structures and Functions
+- 3.1 Structure
+- 3.2 Functions
+- 3.2.1 SBG Core Team
+- 3.2.2 Impeachment of the SBG Core Team
+- 3.2.3 Faculty Mentor
+- 3.2.4 Amendments
+- 4. Meetings
+- 4.1 Attendance and Quorum
+- 4.2 Calling Meetings
+- 4.3 Decision making procedures
+- 4.4 Budget Sessions
+- 5. Student Clubs
+- 5.1 Definition
+- 5.2 Regulations
+- 6. Student Committees
+- 6.1 Seat Increment Policy
+- 6.2 Meetings
+- 6.3 Absentees at meetings
+- 6.4 Functions of Convener and Deputy Convener
+- 6.5 Procedure for withdrawal of the Convener from their post
+- 6.6 Impeachment of the convener
+- 6.7 Inactivity/Misuse of position and expulsion
+- 6.8 Conflicts
+- 6.9 Academic Committee
+- 6.9.1 Preamble
+- 6.9.2 Functions
+- 6.9.3 Roles and Responsibilities of a member
+- 6.10 Annual Festival Committee
+- 6.10.1 Functions
+- 6.10.2 Activities
+- 6.11 Cafeteria Management Committee
+- 6.11.1 Preamble
+- 6.11.2 Regulations
+- 6.11.3 Functions
+- 6.12 Cultural Committee
+- 6.12.1 Preamble
+- 6.12.2 Functions
+- 6.13 Hostel Management Committee
+- 6.13.1 Preamble
+- 6.13.2 Functions
+- 6.13.3 Roles and Responsibilities of a member
+- 6.14 Sports Committee
+- 6.14.1 Preamble
+- 6.15 Student Placement Committee
+- 6.15.1 Preamble
+- 6.15.2 Functions
+- 6.15.3 Placement Policy
+- 6.16 Tech Support Committee
+- 6.16.1 Preamble
+- 7. Budget and Finance
+- 7.1 Preamble
+- 7.2 The Budgetary Cycle
+- 7.3 Finance policies
+- 8. Breach of the Constitution by Club/Committee
+- 8.1 Severity Level 1
+- 8.2 Severity Level 2
+- 8.3 Severity Level 3
+- 9. Involvement of SBG and Administration
 
 ### 1 Preamble
 
@@ -346,7 +282,7 @@ Sports 3 3(2) 2 0 0 0 2 (Masters) + 1 (Open)
 
 SPC 3(3) 4(5) 9 0(4) 0 0 4 (MSc) + 2 (MDes)
 
-### TSC 2(2) 1(2) 1 0 0 0
+TSC 2(2) 1(2) 1 0 0 0
 
 Figure 1: Seat Matrix, Elected (Selected)
 
@@ -460,7 +396,7 @@ Committee will get it approved (i.e. signed) from the faculty mentor of the part
 
 Committee will give it to the SBG Treasurer for approval, at least
 
-### 3 days prior to the event.
+3 days prior to the event.
 
 (d) The SBG Treasurer will get it certified from the Chief Accounts
 

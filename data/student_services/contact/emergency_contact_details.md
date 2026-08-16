@@ -1,60 +1,46 @@
 ---
-title: "emergency contact detail"
+title: "Emergency Contact Details"
 url: "https://daiict.ac.in/emergency-contact-details"
-category: "Student_services"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-05-31"
+category: "Contact"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
+note: "The dedicated emergency-contact-details page could not be directly re-crawled this pass; numbers below are cross-verified against the live DAU Staff directory (daiict.ac.in/staff) and Dean (Students) page where possible, and flagged where they differ from the prior scrape."
 ---
 
 # Overview
 
-Information page about emergency contact detail at Dhirubhai Ambani University (DAU).
+Emergency contact details for hostel, medical, and safety issues at Dhirubhai Ambani University (DAU), Gandhinagar.
 
 # Main Content
 
-# Emergency Contact Details
+### Mr. Jitendra Parmar — Assistant Manager, Hostel
+Contact No.: (+91) 079-68261544 *(updated — the university Staff directory lists this landline; the previously recorded mobile number 09328994140 may also still be in use)*
 
-### **Mr. Jitendra Parmar**
+### Mr. Shirish Varma — Sr. Executive, Hostels
+Contact No.: (+91) 079-68261545 *(updated from previously recorded 09328994142)*
 
-#### Assistant Manager - Hostel
+### Resident Warden (Dean of Students' Office)
+Contact No.: (+91) 079-68261554, Extn. 554 — confirmed current on the Dean (Students) page.
 
-#### **Contact No.** : 09328994140
+### Women Safety / ICC Helpline — Ms. Geeta Nair, Assistant Manager, Faculty Block 4
+Contact No.: (+91) 079-68261573 — confirmed current (also listed on the ICC page).
 
-### **Mr. Shirish Varma**
-
-#### Sr. Executive – Hostels
-
-#### **Contact No.** : 09328994142
-
-### **Prof Madhukant Sharma**
-
-#### Resident Warden
-
-#### **Contact No.** : (+91) 079-68261554
-
-### **Mrs Geeta Nair**
-
-#### Assistant Manager - Faculty Block 4
-
-#### **For the Women Safety / ICC Helpline** : (+91) 079-68261573
-
-### **24/7 Campus Ambulance Service**
-
-#### **For Medical Emergency**
-
-#### **Contact No.** : (+91) 079-68261566
+### 24/7 Campus Ambulance Service — Medical Emergency
+Contact No.: (+91) 079-68261566
 
 # Contact Information
 
-- **Phone:** 079-68261566
-- **Phone:** 09328994140
-- **Phone:** 09328994142
-- **Phone:** 079-68261554
-- **Phone:** 079-68261573
+- Hostel (Jitendra Parmar): (+91) 079-68261544
+- Hostel (Shirish Varma): (+91) 079-68261545
+- Resident Warden: (+91) 079-68261554
+- Women Safety / ICC: (+91) 079-68261573
+- Medical Emergency / Ambulance: (+91) 079-68261566
 
 # Related Links
 
-- [emergency contact detail](https://daiict.ac.in/emergency-contact-details)
-- [Dhirubhai Ambani University Website](https://www.daiict.ac.in)
-
+- [Original Page](https://daiict.ac.in/emergency-contact-details)
+- [DAU Staff Directory](https://www.daiict.ac.in/staff)
+- [Dean (Students) Office](https://www.daiict.ac.in/dean-students)
+- [Internal Complaints Committee](https://www.daiict.ac.in/internal-complaint-committee)
+- [DAU Website](https://www.daiict.ac.in)

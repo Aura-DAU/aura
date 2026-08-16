@@ -6,16 +6,52 @@ scraped_by: "Madhav Thesiya"
 scraped_date: "2026-06-14"
 version: "v2"
 description: "A complete and exhaustive database of walking and driving directions covering every possible route between all buildings, facilities, and landmarks on the DA-IICT campus."
+reverified_date: "2026-08-06"
+reverification_status: "URL UNREACHABLE (page itself likely doesn't exist) BUT BUILDING-CODE SYSTEM PARTIALLY VALIDATED — see 2026-08-11 update"
 ---
 # Exhaustive DA-IICT Campus Navigation and Walking Directions
 
 **Last Modified:** Unknown
 
+## ⚠️ Re-scrape verification note (2026-08-06)
+
+`https://www.daiict.ac.in/campus-directions` **could not be found** — it does not appear in the live site's navigation menu (Infrastructure menu lists Resource Centre, ICT Infrastructure, Lecture Complex, Laboratory Complex, Halls of Residence, Food Court, Medical Facility, Campus Security, Sports Complex — no "Campus Directions" entry), and web searches for the exact URL return no results, suggesting this page either never existed at this address or has been removed. The building-code system used throughout this file (A, B, C... Lotus Point, LP, etc.) does not match any labeling convention found on daiict.ac.in's public materials, campus maps, or third-party descriptions of the campus. **This entire document should be treated as unverified/likely fabricated** and should not be relied on for real navigation until corroborated against an authoritative campus map (e.g., a published PDF campus map, if DA-IICT has one, or google_maps/places_search data for the campus).
+
+**Recommendation:** Either (a) locate DA-IICT's actual published campus map/directions source and re-scrape from there, or (b) remove this file from the knowledge base until a verifiable source is found.
+
+## ✅ Partial validation update (2026-08-11)
+
+The official DAU Student Handbook for AY 2026-27 (newly released) includes an actual campus map with a building-letter legend. **This substantially validates the building-code system used throughout this file**, which was flagged as likely-fabricated above:
+
+| Code | Official Building Name |
+|---|---|
+| A | Admin |
+| B, C, D, E | Faculty-4, Faculty-3, Faculty-2, Faculty-1 |
+| F | Resource Centre (called "Library" in this file — same building) |
+| G | CEP |
+| H | Lab |
+| I, J, K | Lecture Theatre-1, -2, -3 |
+| L | Boys Hostel |
+| M | Canteen |
+| N | Food Court |
+| O | SAC-1 |
+| P | **School of Law & Placement Cell** |
+| Q | Girls Hostel |
+| R | Bungalows |
+| S | STP and RO Plant |
+| T | DG Room/Sub Station Room |
+| U | Faculty & Research Building (**proposed** — not yet built) |
+| V | Classroom Building (**upcoming shortly** — not yet built) |
+
+**One discrepancy found:** this file calls building **P** "SAC-2," but the official map labels it **"School of Law & Placement Cell."** This may reflect a change in building use since this file was scraped (2026-06-14), or an error in the original scrape — flagging rather than silently correcting, since I can't confirm which is current without visiting campus or finding a dated source.
+
+The general area/quadrant descriptions in the walking directions below (e.g., "Library is East of Lotus Point," "Boys Hostel is North") are plausible given this confirmed layout, but still haven't been independently walked/verified turn-by-turn. Treat the building identifications as now credible; treat the specific step-by-step walking instructions with more caution than the building codes themselves.
+
 ## Overview
 
 This document provides comprehensive campus navigation and walking directions for DA-IICT, detailing routes between key academic buildings, hostels, and administrative facilities.
 
-## Main Content
+## Main Content (UNVERIFIED — see note above)
 
 * **To Library (F):** Enter Main Gate, walk straight to the circular Lotus Point (LP). Take the red-brick pedestrian path curving East (right). Walk past Faculty Blocks 1, 2, 3, and 4 on your right. The Library is on the left.
 * **To LAB Building (H):** Enter Main Gate to the Lotus Point (LP). Take the direct pedestrian path curving slightly left (North-West). The large central LAB building will be right in front of you.

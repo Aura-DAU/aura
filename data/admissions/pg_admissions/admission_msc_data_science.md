@@ -18,14 +18,14 @@ Data science integrates Mathematics, Statistics, and Machine Learning to compreh
 |  |  |
 | --- | --- |
 | The online application website opens | **24 March 2026** |
-| Last date for submission of online applications **(Revised)** | **05 June 2026** |
+| Last date for submission of online applications **(Closed)** | **05 June 2026** |
 | Entrance test | 26 June 2026 |
-| Announcement of Merit List | TBD |
-| Fees payment window for shortlisted candidates | TBD |
-| Announcement of Admission Status | TBD |
-| Registration and document verification at the DAU campus for confirmed candidates (**Tentative**) | 14 July 2026 |
-| Orientation Program (**Tentative**) | 15-17 July 2026 |
-| Commencement of classes (**Tentative**) | 20 July 2026 |
+| Announcement of Merit List for **FIRST round** | **02 July 2026** |
+| Fees payment window for shortlisted candidates in **FIRST round** | **02 – 08 July 2026** |
+| Announcement of Admission Status for **FIRST round** | **10 / 13 July 2026** |
+| Registration and document verification at the DAU campus for confirmed candidates | 20 July 2026 |
+| Orientation Program | 21-23 July 2026 |
+| Commencement of classes | 22 July 2026 |
 
 ## Program Overview
 
@@ -60,9 +60,11 @@ The primary goal of the M.Sc. in Data Science program is to cultivate a competen
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-****
+![Details_of_M.Tech.-ICT_placed_students](https://www.daiict.ac.in/sites/default/files/other-images/Placement_Statistics_PG-2026.png)
 
 ### **Top Recruiters:**
+
+![Top_Recruiters_M.Tech](https://www.daiict.ac.in/sites/default/files/other-images/Placement-2025.jpg)
 
 
 

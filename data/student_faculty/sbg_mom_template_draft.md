@@ -78,45 +78,25 @@ Dhirubhai Ambani University
 
 This document is an official record of the proceedings held on <date>
 
-### Table 1: Document Data
+> Reformatted (2026-08-09): the source document's tables had merged cells that didn't survive text extraction as valid markdown tables — reconstructed as field lists below. This is a blank fillable template; content unchanged.
 
-### Table Section 1 of 2
+## Header Fields
 
-| Date  |
-| --- | --- |
-| Time  |
-| Venue  |
+- **Date:**
+- **Time:**
+- **Venue:**
+- **Agenda:**
 
-### Table Section 2 of 2
+## Attendees
 
-| Date  |
-| --- | --- |
-| Agenda  |
+- **Authority 1:** [Name of authority]
+- **Authority 2:** [Name of authority]
+- **Club/Committee Name 1:** [Member 1 Name], [Designation], [Student ID]; [Member 2 Name], [Designation], [Student ID]
+- **Club/Committee Name 2:** [Member 1 Name], [Designation], [Student ID]; [Member 2 Name], [Designation], [Student ID]
 
-### Table 2: Document Data
+## Action Items
 
-### Table Section 1 of 2
-
-| Authority 1 | [Name of authority] |
-| --- | --- |
-| Authority 2 | [Name of authority] |
-| Club/Committee Name 1 | [Member 1 Name], [Designation], [Student Id] [Member 2 Name], [Designation], [Student Id] |
-
-### Table Section 2 of 2
-
-| Authority 1 | [Name of authority] |
-| --- | --- |
-| Club/Committee Name 2 | [Member 1 Name], [Designation], [Student Id] [Member 2 Name], [Designation], [Student Id] |
-
-### Table 3: Document Data
-
-### Table 4: Document Data
-
-### Table 5: Document Data
-
-### Table 6: Document Data
-
-| # | Action Item | Responsibity |
-| --- | --- | --- |
-| 1 | [Name of 1st task to be done] | Authority of Responsibility |
-| 2 | [Name of 2nd task to be done] | Authority of Responsibility |
+| # | Action Item | Responsibility |
+|---|---|---|
+| 1 | [Name of 1st task to be done] | [Authority of Responsibility] |
+| 2 | [Name of 2nd task to be done] | [Authority of Responsibility] |

@@ -66,4 +66,6 @@ authorisation: ["student", "faculty"]
 
 ## Research Club (Student)
 
-Dean (Research) is Faculty Convenor. Student Convener: Gulafsha Bhatti | research_club@dau.ac.in
+Dean (Research) is Faculty Convenor. Student Convener: Devdutt Dinesh | Deputy Convener: Praneel Sharma | research_club@dau.ac.in
+
+*(Updated 2026-08-12 to the 2026-27 tenure, per `student_faculty/sbg_club_committee_c_dcs_information_2026_27.md`.)*

@@ -5,35 +5,29 @@ category: "Infrastructure"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+reverified_date: "2026-08-06"
+reverification_status: "CONTENT NOT VERIFIABLE — see note"
 ---
 
 # Overview
 
-The Lecture Complex at Dhirubhai Ambani University (DAU) houses three state-of-the-art, air-cooled lecture theatres. These rooms serve as the primary venues for classroom instruction, guest lectures, student seminars, and university events.
+The Lecture Complex is a page on the DAU website (https://www.daiict.ac.in/lecture-complex) under Infrastructure.
 
 # Main Content
 
-The Lecture Complex is a crucial component of DAU’s physical infrastructure, designed to provide a highly interactive and comfortable learning environment for students.
+> **⚠️ Re-scrape verification note (2026-08-06):** The live page at https://www.daiict.ac.in/lecture-complex currently contains **no body text** — only a photo gallery (9 images) with no captions or descriptive copy. It does **not** contain any of the specific claims in the previous version of this file (seating capacities of 390/320/280 for LT-1/2/3, AV equipment lists, wheelchair accessibility statement, etc.). Third-party sources (e.g. campus-facilities aggregator sites) mention "three air-cooled lecture theatres," with capacities described inconsistently elsewhere as "two theatres of 200+ and one of 250," which does not match this file's figures either. **None of the specific numbers/claims below could be confirmed against the official source and should be treated as unverified** until confirmed with DA-IICT's facilities office or a fresh authoritative document. Known, generally-cited facts are kept below with reduced confidence; unverifiable specifics have been removed.
 
-### Seating Capacity & Layout
-The complex features three air-cooled lecture theatres with staggered seating capacities to accommodate different batch sizes:
-- **Lecture Theatre 1 (LT-1)**: Seating capacity of 390 students.
-- **Lecture Theatre 2 (LT-2)**: Seating capacity of 320 students.
-- **Lecture Theatre 3 (LT-3)**: Seating capacity of 280 students.
+### What can be said with reasonable confidence
+- DAU's Lecture Complex houses multiple air-cooled lecture theatres used for classroom instruction and university events.
+- The complex is adjacent to the Laboratory building.
+- The complex is used for regular timetabled lectures, tutorials, and events (see photo gallery on the live page).
 
-Each theatre is designed with tiered seating arrangements ensuring unobstructed visibility of the main podium and projection screens from all seats.
+### Removed as unverifiable in this pass
+- Exact seating capacities per theatre (390 / 320 / 280) — not found on the live page or any verifiable official source.
+- Specific AV equipment list (document cameras, wireless collar mics, hybrid streaming, etc.) — not found on the live page.
+- Wheelchair-accessibility claim — not found on the live page.
 
-### Audio-Visual & ICT Infrastructure
-Recently upgraded to support modern pedagogy, the lecture theatres feature:
-- High-definition overhead projectors and large motorized projection screens.
-- Desktop PCs at each podium and digital writing pads/tablets for interactive lecturing.
-- Document cameras to project physical documents, diagrams, and textbook sections.
-- High-fidelity sound systems with wireless collar mics, handheld mics, and podium microphones.
-- Hybrid learning facilities to capture lectures and stream classes to online or remote participants.
-
-### Accessibility & Surrounding Amenities
-- **Wheelchair Accessibility**: The Lecture Complex is fully wheelchair accessible with ramps and wide doorways.
-- **Laboratory Building Proximity**: The main teaching and research laboratory complex is situated directly adjacent to the Lecture Complex for convenient transitions between lectures and hands-on lab sessions.
+**Recommendation:** This page should be re-scraped once DA-IICT publishes descriptive text on this URL, or verified against a campus infrastructure brochure/document if one exists.
 
 
 

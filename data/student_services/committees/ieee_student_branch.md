@@ -1,23 +1,25 @@
 ---
 title: "Students / IEEE Student Branch"
 url: "https://www.daiict.ac.in/ieee-student-branch"
-category: "Student_services"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-05-31"
+category: "Committees"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 
 # Overview
 
-The Institute of Electrical and Electronic Engineers Student Branch at DA-IICT endeavors to promote student awareness among students on the opportunities that exist in the field of electronics and electrical engineering. Our objective is to bridge the gap between industry and students studying in technology-related fields while promoting and providing an intellectually stimulating university environment for the student body.
+The Institute of Electrical and Electronics Engineers (IEEE) Student Branch at DA-IICT/DAU, Gandhinagar.
 
 # Main Content
 
-The Institute of Electrical and Electronic Engineers Student Branch at DA-IICT endeavors to promote student awareness among students on the opportunities that exist in the field of electronics and electrical engineering. Our objective is to bridge the gap between industry and students studying in technology-related fields while promoting and providing an intellectually stimulating university environment for the student body. IEEE Student Branch, DA-IICT aims to provide an interactive platform for students to develop professional and technical abilities. Since the inception, it is successful in organizing various events with well-defined objectives.
+The IEEE Student Branch aims to promote student awareness of opportunities in electronics and electrical engineering, bridge the gap between industry and technology students, and provide an intellectually stimulating environment. It offers an interactive platform for developing professional and technical abilities and has organized various events with well-defined objectives since its inception.
 
-[Members](http://ieee.daiict.ac.in/ieee2018/members.html)
+Member roster is maintained on a separate page: http://ieee.daiict.ac.in/ieee2018/members.html
 
 # Related Links
 
-- [Members](http://ieee.daiict.ac.in/ieee2018/members.html)
-
+- [Original Page](https://www.daiict.ac.in/ieee-student-branch)
+- [Members List](http://ieee.daiict.ac.in/ieee2018/members.html)
+- [Dean of Students' Office](https://www.daiict.ac.in/dean-students)
+- [DAU Website](https://www.daiict.ac.in)

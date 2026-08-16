@@ -15,13 +15,15 @@ DA-IICT launched the unique four-year B. Tech in Electronics and VLSI Design (EV
 
 ## Program Overview
 
+**Under revision for AY 2026-27**
+
 ## Bachelor of Technology (B. Tech.) in Electronics and VLSI Design (EVD)
 
 DA-IICT launched the unique four-year B. Tech in Electronics and VLSI Design (EVD) from the Academic Year 2023-24 with an objective to create industry ready undergraduate manpower for VLSI industry. The main objective of the BTech (EVD) program is to equip students with necessary core competency to succeed long-term in engineering/ entrepreneurship careers and preparing them for higher studies and research as career options. The curriculum offers a strong foundation in the first two years and then provides the student opportunity to specialise in VLSI System Design and Electronics System Design that trains them both the technical and entrepreneurial skills needed to become a leader in this industry.
 
 Students will learn to use industry ~ standard software such as Cadence, Synopsys, OrCad, MATLAB, Xilinx, etc. and hardware boards viz. FPGA, CPLD, etc. to design Integrated Circuits. For some students, the student design project may culminate as a scientific paper that will help immensely in their career and will open up future study options in their particular field of specialization. Students will also gain direct industry experience through internships. The rural internship during their course will enable the students to appreciate the socio ~ cultural aspect of their course. The program includes compulsory Summer Research Internships to be taken up at various research organizations within and abroad.
 
-The program brochure can be found **here**.
+The program brochure can be found [**here**](https://www.daiict.ac.in/sites/default/files/other-files/BTech_EVD_2026.pdf).
 
 ### Program Outcomes (POs)
 

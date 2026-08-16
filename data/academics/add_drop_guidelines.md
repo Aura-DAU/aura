@@ -18,14 +18,14 @@ The **Add/Drop window** is a short period after the start of classes during whic
 ## Important Dates
 
 | Semester | Add/Drop Window |
-|---|---|
+| :--- | :--- |
 | Autumn 2026–27 | 23 July 2026 – 28 July 2026 |
 | Winter 2026–27 | 5 January 2027 – 8 January 2027 (tentative) |
 
 ## Rules and Conditions
 
 | Condition | Detail |
-|---|---|
+| :--- | :--- |
 | Normal students | May add or drop courses freely within the window |
 | Students on Academic Probation | Separate drop-only window applies (see Academic Calendar for dates) |
 | Drops after the window | Require special permission from the Dean (Academic Programs) |
@@ -39,14 +39,14 @@ Course additions and drops are processed through the **eCampus / ERP Portal**:
 
 - Dropping a course outside the Add/Drop window may result in a grade record on the transcript.
 - Students on Academic Probation should contact the Dean AP office before attempting any add/drop.
-- Contact: dean-ap_office@dau.ac.in | Phone: (+91) 079-68261733
+- Contact: [dean-ap_office@dau.ac.in](mailto:dean-ap_office@dau.ac.in) \| Phone: (+91) 079-68261733
 
 ---
 
 ## Document Metadata
 
 | Field | Value |
-|---|---|
+| :--- | :--- |
 | **Source File** | Add_Drop Guidelines.docx |
 | **Scraped Date** | 2026-07-06 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |

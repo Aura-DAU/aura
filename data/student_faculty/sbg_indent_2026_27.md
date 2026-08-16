@@ -1,5 +1,5 @@
 ---
-title: "Indent 2026 27"
+title: "Indent 2026-27"
 url: "#"
 category: "SBG & Clubs - Budget"
 scraped_by: "Madhav Thesiya"
@@ -10,7 +10,7 @@ original_name: "Indent_2026-27 .docx"
 authorization: ["student", "faculty"]
 ---
 
-# Indent 2026 27
+# Indent 2026-27
 
 Dhirubhai Ambani University
 
@@ -36,12 +36,11 @@ Please [reimburse/grant] us an amount of Rs. [ ] as [clearance/advance].
 
 Thank you.
 
-Convenor’s Name    						                 Prof. [ ]
+| Signatory | Role |
+|---|---|
+| Convenor's Name | Convener, [Club/Committee] |
+| Madhav Bhatt | Treasurer, SBG |
+| Prof. [ ] | Faculty Mentor, [ ] |
+| Prof. Kalyan Sasidhar | Dean (Students) |
 
-(Convener, [Club / Committee])		                                            (Faculty Mentor,  [ ])
-
-Madhav Bhatt                                                                                     Prof. Kalyan Sasidhar
-
-(Treasurer, SBG)                                                                                      (Dean Students)
-
-### Table 1: Document Data
+*(The source document references a "Table 1: Document Data" that wasn't captured in this extraction — likely an embedded object/table the text-only scrape couldn't pull. Flag for re-scrape if the itemized indent table is needed.)*

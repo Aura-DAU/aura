@@ -1,6 +1,6 @@
 ---
 title: "Institutional Review Board (IRB) - DA-IICT"
-url: "https://www.daiict.ac.in/index.ph%70/institutional-review-board-irb-da-iict"
+url: "https://www.daiict.ac.in/institutional-review-board-irb-da-iict"
 category: "Research"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"

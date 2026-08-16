@@ -8,116 +8,42 @@ team: "Madhav Thesiya"
 source_type: "DOCX"
 original_name: "Slot Booking Policy.docx"
 authorization: ["student", "faculty"]
+reorganized_date: "2026-08-09"
 ---
 
 # Slot Booking Policy
 
-## Slot Booking Policy
+> Reformatted (2026-08-09): converted flat run-on paragraphs into a numbered policy list and turned the club-groups appendix into tables. Content otherwise unchanged.
 
-Club/Committee Division: All clubs/ committees are divided into 3 groups. (See Appendix)
+## Policy
 
-Slot Booking Timelines and Prioritization: Slots for all events can be booked as early as deemed necessary by the organizers, with no specified earliest booking date. However, the following deadlines and conditions must be adhered to:
+1. **Club/Committee Division:** All clubs/committees are divided into 3 groups (see Appendix).
 
-Events with Co-curricular Attendance: Slots for events that include co-curricular attendance must be booked at least one (1) month prior to the event date.
+2. **Slot Booking Timelines and Prioritization:** Slots for all events can be booked as early as deemed necessary by organizers, with no specified earliest booking date. The following deadlines/conditions apply:
+   - **(a) Events with Co-curricular Attendance:** must be booked at least **1 month** prior to the event date.
+   - **(b) Open-for-All Events:** open to all students but without co-curricular attendance — must be booked at least **20 days** prior.
+   - **(c) Closed Club Events:** internal events (meetings, interviews, etc.) not requiring a general email notification — can be requested as late as **1 day** prior, subject to venue availability and the Deputy Convener's discretion.
 
-Open-for-All Events: Events that are open to all students but do not have co-curricular attendance must have their slots booked at least twenty (20) days prior to the event date.
+3. **Prioritization:** In case of conflicting requests, "Open-for-All Events" (2.b) take priority over "Closed Club Events" (2.c).
 
-Closed Club Events: Internal club events, such as meetings, interviews, etc. where a general email notification to all students is not required, can be requested as late as one (1) day prior to the event. The approval of these slots is subject to the availability of venues and the sole discretion of the Deputy Convener.
+4. **Requests After the Deadline:** Consideration of late requests (after 2.a/2.b/2.c deadlines) is at the sole discretion of the Deputy Convener (and SBG) — SBG is not obligated to entertain late requests.
 
-Prioritization: In the event of conflicting slot requests, "Open-for-All Events" (as defined in 2.b) will be given priority over "Closed Club Events" (as defined in 2.c).
+5. **Event Report Submission:** The event report form must be submitted, preferably within **1 week** after the event. If unavoidable circumstances prevent this, email an explanation to `secretary_student_government@dau.ac.in`, cc `sbg@dau.ac.in`.
 
-Requests After the Deadline: Consideration of Slot Booking requests made after the respective deadlines (as in 2.a, 2.b and 2.c) will be at the sole discretion of the Deputy Convener (and the SBG), and the SBG should NOT be deemed responsible to entertain requests after the deadline.
+6. **Indent Submission:** The indent (with original bills and payment screenshots) must be submitted within **1 week** after the event. If delayed, email an explanation to `treasurer_student_government@dau.ac.in`, cc `sbg@dau.ac.in`.
 
-Event Report Submission: The event report form must be filled out and submitted, preferably within 1 week after the conclusion of the event. If, due to unavoidable circumstances, the report cannot be submitted within this timeframe, an email explaining the reason for the delay must be sent to secretary_student_government@dau.ac.in, with a copy (CC) to sbg@dau.ac.in.
+7. **Parallel Event Bookings:** Effective from 1st August, two distinct events by different organizers may be booked at the same time, subject to:
+   - A maximum of **2 parallel events** per time slot.
+   - Organizing clubs/committees must belong to **different groups** (see Appendix) and be held in **different venues**. (E.g., a Group A club and a Group C club may run simultaneous events, but two Group B clubs may not.)
+   - If two clubs from the **same** group request the same slot, a discussion is facilitated between them; if both agree, parallel booking is allowed — otherwise the slot goes by first-come-first-served (point 8).
+   - Orientations for new batches are scheduled serially by default — no parallel slots for orientations.
 
-Indent Submission: The indent for the event must be submitted along with the original bills of all expenses and screenshots of the payments made, within 1 week after the conclusion of the event. If, due to unavoidable circumstances, the report cannot be submitted within this timeframe, an email explaining the reason for the delay must be sent to treasurer_student_government@dau.ac.in, with a copy (CC) to sbg@dau.ac.in.
+8. **Basis of Slot Allocation:** All event slots are booked on a **first-come, first-served** basis.
 
-Parallel Event Bookings: Effective from 1st August, parallel bookings for two distinct events by different organizers to be held at the same time will be permitted, subject to the following conditions:
+## Appendix: Club/Committee Groups
 
-A maximum of two parallel events can be booked for any given time slot.
+**Group A — Academic/Technical:** AI Club, Academic Committee, Business Club, Debate Club, Developers Student Club, Electronics Hobby Club, Headrush, IEEE SB, Microsoft Students Technical Club, Muse, Programming Club, Research Club, Student Placement Cell, Tech Support Committee, Cyber Information and Network Security Club
 
-Parallel events can only be scheduled if the organizing clubs or committees belong to different groups (as specified in the appendix) and are held in different venues.
+**Group B — Cultural:** Annual Festival Committee, Cafeteria Management Committee, Cultural Committee, DTG, Election Commission, Film Club, Hostel Management Committee, Heritage Club, Khelaiya Club, Music Club, Press Club, PMMC, Radio Club, Sambhav
 
-For example, a club from Group A and a club from Group C may conduct events simultaneously, but two clubs from Group B may not.
-
-In the event that two clubs or committees from the same group request the same time slot, a discussion will be facilitated between them. If both parties agree, the parallel booking will be allowed. Otherwise, the slot will be allocated based on the "first come, first served" principle as outlined in point 6.
-
-Orientations for new batches will, by default, be scheduled in a serial order. No parallel slots will be booked for orientations.
-
-Basis of Slot Allocation: All event slots will be booked on a first-come, first-served basis.
-
-## Appendix:
-
-### Club-Committee Groups:
-
-Group A- Academic/Technical
-
-AI Club
-
-Academic Committee
-
-Business Club
-
-Debate Club
-
-Developers Student Club
-
-Electronics Hobby Club
-
-Headrush
-
-IEEE SB
-
-Microsoft Students Technical Club
-
-Muse
-
-Programming Club
-
-Research Club
-
-Student Placement Cell
-
-Tech Support Committee
-
-Cyber Information and Network Security Club
-
-Group B- Cultural
-
-Annual Festival Committee
-
-Cafeteria Management Committee
-
-Cultural Committee
-
-DADC
-
-DTG
-
-Election Commission
-
-Film Club
-
-Hostel Management Committee
-
-Heritage Club
-
-Khelaiya Club
-
-Music Club
-
-Press Club
-
-PMMC
-
-Radio Club
-
-Sambhav
-
-Group C- Sports
-
-Cubing Club
-
-Chess Club
-
-Sports Committee
+**Group C — Sports:** Cubing Club, Chess Club, Sports Committee

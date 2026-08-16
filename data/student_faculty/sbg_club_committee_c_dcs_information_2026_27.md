@@ -12,70 +12,41 @@ authorization: ["student", "faculty"]
 
 # Club Committee C_DCs Information 2026-27
 
-- **Email Address:** cultural@dau.ac.in | **Club/Committee Name:** Cultural Committee | **Convener Name:** Meet Jain | **Convener Student ID:** 202301073 | **Dy.  Convener Name:** Het Ladani | **Dy.  Convener Student ID:** 202301102 | **Faculty Mentor Name:** Sreeja Rajendran
+> Reformatted (2026-08-09): converted 34 pipe-separated bullet entries into a table for readability. Content unchanged.
 
-- **Email Address:** cmc@dau.ac.in | **Club/Committee Name:** CMC- Cafeteria Management Committee | **Convener Name:** Prince Sojitra | **Convener Student ID:** 202301126 | **Dy.  Convener Name:** Varshil Shah | **Dy.  Convener Student ID:** 202401194 | **Faculty Mentor Name:** Pankaj Kumar
-
-- **Email Address:** research_club@dau.ac.in | **Club/Committee Name:** Research Club | **Convener Name:** Devdutt Dinesh | **Convener Student ID:** 202403007 | **Dy.  Convener Name:** Praneel Sharma | **Dy.  Convener Student ID:** 202401166 | **Faculty Mentor Name:** Prof. Yash Vasavada
-
-- **Email Address:** elections@dau.ac.in | **Club/Committee Name:** Election Commission | **Convener Name:** Jainesh Patel (Chief Election Commissioner) | **Convener Student ID:** 202301446 | **Dy.  Convener Name:** N/A | **Dy.  Convener Student ID:** N/A | **Faculty Mentor Name:** Prof. Kalyan Sasidhar (Dean Students)
-
-- **Email Address:** heritage@dau.ac.in | **Club/Committee Name:** Heritage Club | **Convener Name:** Virat Shrimali | **Convener Student ID:** 202303061 | **Dy.  Convener Name:** Tirth Kansagra | **Dy.  Convener Student ID:** 202303055 | **Faculty Mentor Name:** Prof. Nandini Banerjee
-
-- **Email Address:** dsc@dau.ac.in | **Club/Committee Name:** Google Developer Groups | **Convener Name:** Aditya Vaish | **Convener Student ID:** 202401401 | **Dy.  Convener Name:** Zalak Thakkar | **Dy.  Convener Student ID:** 202401482 | **Faculty Mentor Name:** Prof. Ankush Chander
-
-- **Email Address:** film_club@dau.ac.in | **Club/Committee Name:** Film Club | **Convener Name:** Vatsal Mori | **Convener Student ID:** 202401436 | **Dy.  Convener Name:** Shrey Patel | **Dy.  Convener Student ID:** 202401449 | **Faculty Mentor Name:** Jenson Joseph
-
-- **Email Address:** cubing_club@dau.ac.in | **Club/Committee Name:** Cubing Club | **Convener Name:** Vatsal Mori | **Convener Student ID:** 202401436 | **Dy.  Convener Name:** Yashvi Pachani | **Dy.  Convener Student ID:** 202403062 | **Faculty Mentor Name:** V Sunitha
-
-- **Email Address:** quizzing@dau.ac.in | **Club/Committee Name:** Headrush | **Convener Name:** Prithviraj Nalvaya | **Convener Student ID:** 202401169 | **Dy.  Convener Name:** Nikhil Gupta | **Dy.  Convener Student ID:** 202404023 | **Faculty Mentor Name:** Rachit Chhaya
-
-- **Email Address:** sambhav@dau.ac.in | **Club/Committee Name:** SAMBHAV | **Convener Name:** JOGADIYA DHARA R. | **Convener Student ID:** 202301195 | **Dy.  Convener Name:** TANDEL DHRUVINEE D. | **Dy.  Convener Student ID:** 202301203 | **Faculty Mentor Name:** PROF. YASH VASAVADA
-
-- **Email Address:** music_club@dau.ac.in | **Club/Committee Name:** The Music Club | **Convener Name:** Rishabh Jalu | **Convener Student ID:** 202301265 | **Dy.  Convener Name:** Pal Kaneria | **Dy.  Convener Student ID:** 202301021 | **Faculty Mentor Name:** Prof. P.S.Kalyan Sasidhar
-
-- **Email Address:** muse@dau.ac.in | **Club/Committee Name:** Muse - The Design Club | **Convener Name:** Diya Bhuva | **Convener Student ID:** 202401410 | **Dy.  Convener Name:** Yashvi Patel | **Dy.  Convener Student ID:** 202403035 | **Faculty Mentor Name:** Anupam Rana Sir
-
-- **Email Address:** business_club@dau.ac.in | **Club/Committee Name:** Business club | **Convener Name:** Satvik parihar | **Convener Student ID:** 202401189 | **Dy.  Convener Name:** - | **Dy.  Convener Student ID:** - | **Faculty Mentor Name:** Dr Pankaj Kumar
-
-- **Email Address:** pressclub@dau.ac.in | **Club/Committee Name:** Press Club | **Convener Name:** Devdutt Dinesh | **Convener Student ID:** 202403007 | **Dy.  Convener Name:** Prakriti Pandey | **Dy.  Convener Student ID:** 202401164 | **Faculty Mentor Name:** Prof Amishal Modi
-
-- **Email Address:** khelaiya_club@dau.ac.in | **Club/Committee Name:** Khelaiya Club | **Convener Name:** Prince Kapadiya | **Convener Student ID:** 202403021 | **Dy.  Convener Name:** Divya Patel | **Dy.  Convener Student ID:** 202401446 | **Faculty Mentor Name:** Prof. Sreeja Rajendran
-
-- **Email Address:** chess_club@dau.ac.in | **Club/Committee Name:** Chess Club | **Convener Name:** Vishwam Thaker | **Convener Student ID:** 202401244 | **Dy.  Convener Name:** Tirth Patel | **Dy.  Convener Student ID:** 202401227 | **Faculty Mentor Name:** Prof. Rahul Muthu
-
-- **Email Address:** pmmc@dau.ac.in | **Club/Committee Name:** Photography & Movie Making Club | **Convener Name:** Yash Ravat | **Convener Student ID:** 202401182 | **Dy.  Convener Name:** Khanjan Shah | **Dy.  Convener Student ID:** 202401092 | **Faculty Mentor Name:** Prof. Mukesh Tiwari
-
-- **Email Address:** sbg_academics@dau.ac.in | **Club/Committee Name:** Academic Committee | **Convener Name:** Hari Sharma | **Convener Student ID:** 202401195 | **Dy.  Convener Name:** Pranamya Sanghvi | **Dy.  Convener Student ID:** 202401165 | **Faculty Mentor Name:** Prof. Bhaskar Chaudhary
-
-- **Email Address:** ehc@dau.ac.in | **Club/Committee Name:** Electronics Hobby Club (EHC) | **Convener Name:** Shyam Bhuva | **Convener Student ID:** 202401034 | **Dy.  Convener Name:** Vyom Patel | **Dy.  Convener Student ID:** 202401245 | **Faculty Mentor Name:** Prof. Sujay Kadam
-
-- **Email Address:** sports@dau.ac.in | **Club/Committee Name:** Sports Committee | **Convener Name:** Neeti Gunsai | **Convener Student ID:** 202401423 | **Dy.  Convener Name:** Kush Patel | **Dy.  Convener Student ID:** 202401448 | **Faculty Mentor Name:** Prof. Pritam Anand
-
-- **Email Address:** programming-club@dau.ac.in | **Club/Committee Name:** Programming Club | **Convener Name:** Mahek Kanani | **Convener Student ID:** 202403019 | **Dy.  Convener Name:** Raj Patel | **Dy.  Convener Student ID:** 202401152 | **Faculty Mentor Name:** Prof. PM jat
-
-- **Email Address:** hmc@dau.ac.in | **Club/Committee Name:** Hostel management committee | **Convener Name:** Gauswami Sumit | **Convener Student ID:** 202401055 | **Dy.  Convener Name:** Manali Malani | **Dy.  Convener Student ID:** 202401111 | **Faculty Mentor Name:** Proff.Madhukant Sharma
-
-- **Email Address:** ieee@dau.ac.in | **Club/Committee Name:** IEEE SB DAIICT | **Convener Name:** Jeet Modi | **Convener Student ID:** 202301412 | **Dy. Convener Name:** Parthiv Bhesaniya | **Dy. Convener Student ID:** 202303037 | **Faculty Mentor Name:** Pankaj Kumar
-
-- **Email Address:** spc@dau.ac.in | **Club/Committee Name:** Student Placement Cell | **Convener Name:** Jevik Rakholiya | **Convener Student ID:** 202301276 | **Dy.  Convener Name:** Chaitanya Vats | **Dy.  Convener Student ID:** 202301419 | **Faculty Mentor Name:** NA
-
-- **Email Address:** tech_support@dau.ac.in | **Club/Committee Name:** Tech support comittee | **Convener Name:** Devarshi Dave | **Convener Student ID:** 202404007 | **Dy.  Convener Name:** Hemin Siddhapura | **Dy.  Convener Student ID:** 202404055 | **Faculty Mentor Name:** Dr. Yash Agarwal
-
-- **Email Address:** theatres@dau.ac.in | **Club/Committee Name:** Khoj Theatres (DTG) | **Convener Name:** Pooja Makwana | **Convener Student ID:** 202404020 | **Dy.  Convener Name:** Neel Shah | **Dy.  Convener Student ID:** 202501028 | **Faculty Mentor Name:** Shefali Jha
-
-- **Email Address:** debate_club@dau.ac.in | **Club/Committee Name:** The Debating Society | **Convener Name:** Prachita Maiti | **Convener Student ID:** 202403036 | **Dy.  Convener Name:** Madhavan Dinesh | **Dy.  Convener Student ID:** 202403026 | **Faculty Mentor Name:** Purbhasha Das
-
-- **Email Address:** radio@dau.ac.in | **Club/Committee Name:** Radio Club | **Convener Name:** Prayag Kachhia | **Convener Student ID:** 202401168 | **Dy.  Convener Name:** Yagnik Patel | **Dy.  Convener Student ID:** 202401160 | **Faculty Mentor Name:** Amishal Modi
-
-- **Email Address:** ai_club@dau.ac.in | **Club/Committee Name:** AI Club | **Convener Name:** Vedant Shah | **Convener Student ID:** 202401475 | **Dy.  Convener Name:** Aaditya Kaushik | **Dy.  Convener Student ID:** 202401001 | **Faculty Mentor Name:** Arpit Rana
-
-- **Email Address:** cins_club@dau.ac.in | **Club/Committee Name:** Cyber Information and Network Security club | **Convener Name:** Krit Shah | **Convener Student ID:** 202503021 | **Dy.  Convener Name:** Tanvi Dayani | **Dy.  Convener Student ID:** 202501154 | **Faculty Mentor Name:** Abhishek Jindal
-
-- **Email Address:** microsoftclub@dau.ac.in | **Club/Committee Name:** Microsoft Student Technical Club | **Convener Name:** Mohammadjunaid S. Kureshi | **Convener Student ID:** 202401102 | **Dy.  Convener Name:** Tirth Patel | **Dy.  Convener Student ID:** 202401157 | **Faculty Mentor Name:** Pm Jat
-
-- **Email Address:** synapse@dau.ac.in | **Club/Committee Name:** Synapse Committee | **Convener Name:** Om Santoki | **Convener Student ID:** 202301019 | **Dy.  Convener Name:** Sujal Mohapatra | **Dy.  Convener Student ID:** 202301428 | **Faculty Mentor Name:** Prof. Sreeja Rajendran
-
-- **Email Address:** danceclub@dau.ac.in | **Club/Committee Name:** DADC | **Convener Name:** Vedant Sanjaykumar Shah | **Convener Student ID:** 202401475 | **Dy.  Convener Name:** Diya Pitroda | **Dy.  Convener Student ID:** 202404009 | **Faculty Mentor Name:** Sreeja Rajendran
-
-- **Email Address:** readers_society@dau.ac.in | **Club/Committee Name:** Readers' Society | **Convener Name:** Affan Riyaz Shaikh | **Convener Student ID:** 202401009 | **Dy.  Convener Name:** Prithviraj Nalvaya | **Dy.  Convener Student ID:** 202401169 | **Faculty Mentor Name:** Amishal Modi
+| Club/Committee | Convener | Dy. Convener | Faculty Mentor | Email |
+|---|---|---|---|---|
+| Cultural Committee | Meet Jain (202301073) | Het Ladani (202301102) | Sreeja Rajendran | cultural@dau.ac.in |
+| CMC- Cafeteria Management Committee | Prince Sojitra (202301126) | Varshil Shah (202401194) | Pankaj Kumar | cmc@dau.ac.in |
+| Research Club | Devdutt Dinesh (202403007) | Praneel Sharma (202401166) | Prof. Yash Vasavada | research_club@dau.ac.in |
+| Election Commission | Jainesh Patel (Chief Election Commissioner) (202301446) | N/A (N/A) | Prof. Kalyan Sasidhar (Dean Students) | elections@dau.ac.in |
+| Heritage Club | Virat Shrimali (202303061) | Tirth Kansagra (202303055) | Prof. Nandini Banerjee | heritage@dau.ac.in |
+| Google Developer Groups | Aditya Vaish (202401401) | Zalak Thakkar (202401482) | Prof. Ankush Chander | dsc@dau.ac.in |
+| Film Club | Vatsal Mori (202401436) | Shrey Patel (202401449) | Jenson Joseph | film_club@dau.ac.in |
+| Cubing Club | Vatsal Mori (202401436) | Yashvi Pachani (202403062) | V Sunitha | cubing_club@dau.ac.in |
+| Headrush | Prithviraj Nalvaya (202401169) | Nikhil Gupta (202404023) | Rachit Chhaya | quizzing@dau.ac.in |
+| SAMBHAV | JOGADIYA DHARA R. (202301195) | TANDEL DHRUVINEE D. (202301203) | PROF. YASH VASAVADA | sambhav@dau.ac.in |
+| The Music Club | Rishabh Jalu (202301265) | Pal Kaneria (202301021) | Prof. P.S.Kalyan Sasidhar | music_club@dau.ac.in |
+| Muse - The Design Club | Diya Bhuva (202401410) | Yashvi Patel (202403035) | Anupam Rana Sir | muse@dau.ac.in |
+| Business club | Satvik parihar (202401189) | - (-) | Dr Pankaj Kumar | business_club@dau.ac.in |
+| Press Club | Devdutt Dinesh (202403007) | Prakriti Pandey (202401164) | Prof Amishal Modi | pressclub@dau.ac.in |
+| Khelaiya Club | Prince Kapadiya (202403021) | Divya Patel (202401446) | Prof. Sreeja Rajendran | khelaiya_club@dau.ac.in |
+| Chess Club | Vishwam Thaker (202401244) | Tirth Patel (202401227) | Prof. Rahul Muthu | chess_club@dau.ac.in |
+| Photography & Movie Making Club | Yash Ravat (202401182) | Khanjan Shah (202401092) | Prof. Mukesh Tiwari | pmmc@dau.ac.in |
+| Academic Committee | Hari Sharma (202401195) | Pranamya Sanghvi (202401165) | Prof. Bhaskar Chaudhary | sbg_academics@dau.ac.in |
+| Electronics Hobby Club (EHC) | Shyam Bhuva (202401034) | Vyom Patel (202401245) | Prof. Sujay Kadam | ehc@dau.ac.in |
+| Sports Committee | Neeti Gunsai (202401423) | Kush Patel (202401448) | Prof. Pritam Anand | sports@dau.ac.in |
+| Programming Club | Mahek Kanani (202403019) | Raj Patel (202401152) | Prof. PM jat | programming-club@dau.ac.in |
+| Hostel management committee | Gauswami Sumit (202401055) | Manali Malani (202401111) | Proff.Madhukant Sharma | hmc@dau.ac.in |
+| IEEE SB DAIICT | Jeet Modi (202301412) | Parthiv Bhesaniya (202303037) | Pankaj Kumar | ieee@dau.ac.in |
+| Student Placement Cell | Jevik Rakholiya (202301276) | Chaitanya Vats (202301419) | NA | spc@dau.ac.in |
+| Tech support comittee | Devarshi Dave (202404007) | Hemin Siddhapura (202404055) | Dr. Yash Agarwal | tech_support@dau.ac.in |
+| Khoj Theatres (DTG) | Pooja Makwana (202404020) | Neel Shah (202501028) | Shefali Jha | theatres@dau.ac.in |
+| The Debating Society | Prachita Maiti (202403036) | Madhavan Dinesh (202403026) | Purbhasha Das | debate_club@dau.ac.in |
+| Radio Club | Prayag Kachhia (202401168) | Yagnik Patel (202401160) | Amishal Modi | radio@dau.ac.in |
+| AI Club | Vedant Shah (202401475) | Aaditya Kaushik (202401001) | Arpit Rana | ai_club@dau.ac.in |
+| Cyber Information and Network Security club | Krit Shah (202503021) | Tanvi Dayani (202501154) | Abhishek Jindal | cins_club@dau.ac.in |
+| Microsoft Student Technical Club | Mohammadjunaid S. Kureshi (202401102) | Tirth Patel (202401157) | Pm Jat | microsoftclub@dau.ac.in |
+| Synapse Committee | Om Santoki (202301019) | Sujal Mohapatra (202301428) | Prof. Sreeja Rajendran | synapse@dau.ac.in |
+| DADC | Vedant Sanjaykumar Shah (202401475) | Diya Pitroda (202404009) | Sreeja Rajendran | danceclub@dau.ac.in |
+| Readers' Society | Affan Riyaz Shaikh (202401009) | Prithviraj Nalvaya (202401169) | Amishal Modi | readers_society@dau.ac.in |

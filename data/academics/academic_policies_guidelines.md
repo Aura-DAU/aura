@@ -19,14 +19,15 @@ Academic policies and guidelines at Dhirubhai Ambani University (DA-IICT) are go
 
 | Source | Description |
 |---|---|
-| Programs of Study | UG, PG, and Dual Degree program regulations, credit requirements, and academic rules |
-| Policies Page (DAU Official) | Official academic policy page on the DAU website |
-| Academic Council | Resolutions, regulations, and governance documents |
-| Dean's Office (Academic Programs) | Circulars, advisories, and procedural guidelines |
+| **Programs of Study** | UG, PG, and Dual Degree program regulations, credit requirements, and academic rules. |
+| **Policies Page** | Official academic policy page on the DAU website. |
+| **Academic Council** | Resolutions, regulations, and governance documents. |
+| **Dean's Office (Academic Programs)** | Circulars, advisories, and procedural guidelines. |
 
 ## Topics Covered
 
 Academic policies at DAU include but are not limited to:
+
 - Credit requirements and program structure (UG, PG, Dual Degree)
 - Course registration and add/drop rules
 - Grading system and grade point calculation
@@ -39,12 +40,16 @@ Academic policies at DAU include but are not limited to:
 ## Access
 
 All official policy documents are accessible via:
+
 - [DAU Academics Page](https://www.daiict.ac.in/academics)
 - [DA-IICT Intranet Portal](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) (for registered students and faculty)
 
+> [!NOTE]
+> The source URL provided (`https://ecampus.daiict.ac.in/webapp/intranet/index.jsp`) points to the DA-IICT Intranet login portal. Accessing the official policy documents from this source requires a valid UserID and Password.
+
 ## Additional Notes
 
-For program-specific regulations, course credit requirements, and academic rules, refer to the relevant program pages on the DAU website. Contact the Dean AP office for queries not resolved through the above links.
+For program-specific regulations, course credit requirements, and academic rules, refer to the relevant program pages on the DAU website. Contact the Dean (Academic Programs) office for queries not resolved through the above links.
 
 ---
 
@@ -52,7 +57,7 @@ For program-specific regulations, course credit requirements, and academic rules
 
 | Field | Value |
 |---|---|
-| **Source File** | Academic Policies & Guidelines.docx |
+| **Source File** | `Academic Policies & Guidelines.docx` |
 | **Scraped Date** | 2026-07-06 |
 | **Intranet Portal** | [DA-IICT Intranet](https://ecampus.daiict.ac.in/webapp/intranet/index.jsp) |
 | **DAU Website** | [daiict.ac.in](https://www.daiict.ac.in) |

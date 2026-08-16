@@ -1,4 +1,4 @@
-﻿---
+---
 title: "DAU Alumni Reconnect and Reunion"
 url: "https://www.daiict.ac.in/events/6731"
 category: "Events"

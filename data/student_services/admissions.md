@@ -1,228 +1,59 @@
-﻿---
+---
 title: "Admissions"
 url: "https://daiict.ac.in/admissions"
-category: "Academic"
-scraped_by: "Madhav Thesiya"
-scraped_date: "2026-05-30"
+category: "Admissions"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 
 # Overview
 
-Admissions page at Dhirubhai Ambani University (DAU), Gandhinagar.
+Central admissions hub for Dhirubhai Ambani University (DAU, formerly DA-IICT), Gandhinagar, covering Undergraduate, Dual-Degree (BS-MS), Postgraduate, and Ph.D. admissions.
 
 # Main Content
 
-Newly Launched Programs
-Admission Enquiry
-Admissions to the UG, Dual Degree, PG, and PhD Programs for 2026-27 Announced
-Top Right Side Menu
-DCEI
-CEP
-NAAC
-NIRF
-NEP 2020
-Alumni
-Convocation
-Grievance Redressal
-ICC
-Policies
-Tenders
-Contact
-Admissions
-Breadcrumb
-Home  Admissions
-Scholarships
-Notice Board
-Please note that in the academic year AY-2026-27, admissions in the M.Des. Programme are being offered only for the IUxD specialization.
-Newly launched dual degree BS-MS programs 2026-27 admission announced
-Admissions to the UG, Dual Degree, PG, and PhD Programs for 2026-27 Announced
-View All    
-Undergraduate Admissions
- 
-Dual Degree Admissions
- 
-Postgraduate Admissions
- 
-Ph.D. Admissions
-B.Tech. (ICT)
-B.Tech. (Honours) in ICT with minor in Computational Science
-B.Tech. (MnC)
-B.Tech. (EVD)
-B.Tech. (CS and AI)
-B.Tech. (ECE-AI)
-Contact Us
+## Notice Board (as of scrape date)
+- Admission Announcement for ACPC Vacant Quota Seats 2026-27
+- Admissions 2026: Merit Lists Announced for UG and Dual Degree (BS-MS) Programs (see https://onlineadmission.dau.ac.in/)
+- PG 2026 Admissions Closed
+- For AY 2026-27, the M.Des. Programme is offered only for the IUxD specialization
 
-DA-IICT, DA-IICT Road,
-Gandhinagar 382 007, Gujarat (India)
+## Undergraduate Admissions (B.Tech.)
+- B.Tech. (ICT)
+- B.Tech. (Honours) in ICT with minor in Computational Science
+- B.Tech. (MnC) — Mathematics and Computing
+- B.Tech. (EVD) — Environment Design
+- B.Tech. (CS and AI)
+- B.Tech. (ECE-AI)
 
-(+91) 079 - 6826 1700
+## Dual Degree Admissions (BS-MS)
+- BS-MS in Information Technology
+- BS-MS in Data Science & Artificial Intelligence
 
-(+91) 079 - 6826 1710
+## Postgraduate Admissions
+- M.Tech. (ICT)
+- M.Sc. (IT)
+- M.Sc. (Agriculture Analytics)
+- M.Sc. (Data Science)
+- M.Des. (IUxD)
 
-info[at]dau[dot]ac[dot]in
+## Ph.D. Admissions
+- Ph.D. (Regular & Part-Time)
+- Visvesvaraya Ph.D. Scheme
 
-For Admissions
-
-Voice Call: 
-079 69 08 08 08
-
-WhatsApp Number: 
-7984809418
-(for WhatsApp messages only and not for calling)
-
-Campus Visit
-
-Follow Us On
- 
- 
- 
- 
- 
-Admissions
- Undergraduate
- Dual Degree
- Postgraduate
- Doctoral Program
- Scholarships
-Research
- Research Overview
-Deans Office
- Areas
- Sponsored Projects
-Noteworthy Contributions
- Publications
- Theses and Reports
-Academics
- Undergraduate
- Dual Degree
-Postgraduate
-Doctoral
-Stakeholder Feedback
-People
-Faculty
- Staff
- Doctoral Scholars
-NAAC
-NAAC Cycle 2 SSR Submitted: 2023
-CoE, Government of Gujarat
- CoE, GoG application submitted
- Audited Accounts
-NIRF
- INDIA Ranking 2026 DCS Submitted
-Other Links
- UGC proforma/Mandatory disclosure 
- e-Procurement 
- Prof. S.C. Sahasrabudhe - A Memoir
- Holidays 2026 
- Ecampus 
- Intranet 
- Courses 
- Capacity Development and Skills Enhancement Initiatives
- Parents
- CEP
- DCEI 
- Committees 
- Anti-Ragging Committee 
- DA-IICT Lecture Series
- Synapse 
- Concours 
- Tree Survey
- Newsletter
- Directory
- Photo Gallery
-Group Website
-
------------ Group Websites ------------
-Reliance Group
--------------------------------------
-Reliance Communications
-Reliance Digital TV
-Global Cloud Xchange
-Reliance Globalcall
--------------------------------------
-Reliance Capital
-RARCL
-Reliance Securities
-Reliance PMS
-Reliance General Insurance
-Reliance Life Insurance
-Reliance Commercial Finance
-Reliance Mutual Fund
--------------------------------------
-Reliance Infrastructure
-Reliance Energy
-Reliance Power
-Reliance Roads
-Reliance Cements
-Reliance Energy Trading
-Mumbai Metro One
-Nanded Airport
-CGRF
-BSES Delhi
--------------------------------------
-Reliance Entertainment
-Reliance Big Entertainment
-Reliance Broadcast Network
-BIG Productions
-Reliance Home Video & Games
-Reliance Animation
-Reliance Synergy
-BIG 92.7 FM
-BIG ADDA
-BIG Flix
-Talent House
-Reliance Games
-Zapak
--------------------------------------
-Kokilaben Hospital
-KDA Nursing College
-Harmony
-DAIICT
-
-Footer Menu 3
-Feedback
- 
-Website Privacy Policy
- 
-Privacy Policy for Mobile App & ERP System
- 
-Disclaimer
- 
-Sitemap
-
-Copyright Â© 2021 DA-IICT, Gandhinagar, Gujarat, India
-
-Visitors: 
-
- 
-
-Last Updated: 30-05-2026
-
-Share it
-About Us
-Governance
- 
-Academics
- 
-Research
- 
-People
- 
-Students
- 
-Admissions
- 
-Infrastructure
- 
-Placements
- 
-Careers
- 
-Navigation
+## Contact / Admission Enquiries
+- DA-IICT, DA-IICT Road, Gandhinagar 382 007, Gujarat (India)
+- (+91) 079 - 6826 1700 / (+91) 079 - 6826 1710
+- Admissions Voice Call: 079 69 08 08 08
+- Admissions WhatsApp (messages only): 7984809418
+- Email: info[at]dau[dot]ac[dot]in
+- Support ticket portal: https://cbexams.com/daiictstudentqueryportal2024/candidate_queries.aspx
 
 # Related Links
 
 - [Original Page](https://daiict.ac.in/admissions)
-- [Parents](https://daiict.ac.in/parents)
+- [Scholarships](https://www.daiict.ac.in/scholarships-admission-programs-of-study)
+- [Why choose DAU?](https://www.daiict.ac.in/why-choose-da-iict)
+- [Programs of Study](https://daiict.ac.in/programs-of-study)
 - [DAU Website](https://www.daiict.ac.in)

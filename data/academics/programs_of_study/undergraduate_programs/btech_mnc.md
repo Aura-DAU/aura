@@ -15,13 +15,15 @@ Mathematics and Computing (MnC) is a fusion of Mathematics and Computer Science 
 
 ## Program Overview
 
+**Under revision for AY 2026-27**
+
 ### B. Tech in Mathematics and Computing - B.Tech. (MnC)
 
 Mathematics and Computing (MnC) is a fusion of Mathematics and Computer Science that has obtained wide acceptance as a distinct discipline over the past few years. It arises out of dealing with Mathematics as a fundamental tool in computing and with Computing as a primary component of mathematical problem solving. The program has been specially designed to meet the increasing needs of professionals who would be able to respond to the convergence between mathematical and computational problem solving. The program aims at expanding the mathematical, algorithmic and computational thinking of students and at providing sufficient and solid foundation for skill development in MnC. A strong mathematical foundation would enable the study and analysis of abstract concepts and to model many real life problems mathematically, algorithmic thinking would provide ways to solve these mathematical problems in an automated way and computational thinking would allow for evaluating the efficiency of these solutions.
 
 The program aims to provide exposure to the students who wish to build a professional career in MnC, working at the cutting edge of technology, research and development. On successful completion of the program, the students would have acquired essential theoretical, technical and practical knowledge for solving real-world problems, and will have the ability to demonstrate excellent analytical, logical and problem solving skills. The students would have also acquired social and ethical attributes that would enable them in applying their skills for societal needs with effective communication – orally, in writing and on multi-media platforms.
 
-The program brochure can be found **here**.
+The program brochure can be found [**here**](https://www.daiict.ac.in/sites/default/files/other-files/BTech_MnC_2026.pdf).
 
 ### Program Outcomes (POs)
 

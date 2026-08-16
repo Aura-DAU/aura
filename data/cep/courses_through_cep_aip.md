@@ -180,7 +180,7 @@ Gandhinagar Gujarat, India
 - [Workshop on “Speech and Audio Signal Processing using FPGA”](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Speech-and-Audio-Signal-Processing-using-FPGA_Course-Outline_2025.pdf) (PDF)
 - [Workshop on “Device Modeling and Circuit Simulation for Integrated Circuit Designs"](https://www.daiict.ac.in/sites/default/files/other-files/Workshop-on-Device-Modeling-and-Circuit_Course-Outline_2025.pdf) (PDF)
 - [Arduino Based Embedded System Design](https://www.daiict.ac.in/sites/default/files/other-files/Arduino-Based-Embedded-System-Design.pdf) (PDF)
-- [Human Experiences through Interaction Design](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline_Human-Experiences-through-Interaction%2520-Design.pdf) (PDF)
+- [Human Experiences through Interaction Design](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline_Human-Experiences-through-Interaction%20-Design.pdf) (PDF) — *corrected 2026-08-06: was double-URL-encoded (%2520) and 404'd; fixed to single-encoded (%20).*
 - [Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python.pdf) (PDF)
 - [Online certificate course on Advance Data Science and Analytics: A Comprehensive Hands-on](https://www.daiict.ac.in/sites/default/files/other-files/Advance-Data-Science-and-Analytics.pdf) (PDF)
 - [Workshop on Data Analysis using Python](https://www.daiict.ac.in/sites/default/files/other-files/Course-Outline-Python_June24.pdf) (PDF)

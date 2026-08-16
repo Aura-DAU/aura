@@ -1,121 +1,63 @@
 ---
 title: "ICC"
 url: "https://www.daiict.ac.in/internal-complaint-committee"
-category: "Student_services"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-05-31"
+category: "Committees"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 
 # Overview
 
-DAU aims to provide safe working and learning campus life for faculty, staff and students free from gender discrimination and sexual harassment. It further cultivates the atmosphere where men and women work together towards the growth and prosperity of the institution in a safe and healthy academic environment.
+Internal Complaints Committee (ICC) at DAU (formerly DA-IICT), responsible for redressing complaints of gender discrimination and sexual harassment under the POSH Act and UGC guidelines. Reconstituted effective **June 5, 2024**.
 
 # Main Content
 
-# Internal Complaints Committee
+## Purpose
+DAU aims to provide a safe working and learning environment free from gender discrimination and sexual harassment. The ICC receives complaints, conducts inquiries, and recommends disciplinary action per the Prevention of Sexual Harassment in the Workplace (POSH) Act.
 
-DAU aims to provide safe working and learning campus life for faculty, staff and students free from gender discrimination and sexual harassment. It further cultivates the atmosphere where men and women work together towards the growth and prosperity of the institution in a safe and healthy academic environment.
+## How to File a Complaint
+- Email a written complaint directly to icc[at]dau[dot]ac[dot]in.
+- Complaints should normally be filed within **3 months** of the incident (or of the last incident, for a series of incidents) — exceptions are described in the [official policy PDF](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf).
+- The ICC is legally bound to maintain confidentiality.
 
-The Internal Complaints Committee (ICC) shall be responsible for Redressal of formal complaints on gender discrimination and sexual harassment and to redress it. It shall receive complaints, conduct inquiries and recommend disciplinary action, if any, in accordance with the provisions of the Prevention of Sexual Harassment in the Workplace (POSH) Act and UGC guidelines deriving from the same.
+## Current Committee Members (effective June 5, 2024)
+- **Convenor**: Prof. Minal Bhise — icc[at]dau[dot]ac[dot]in, (+91) 079-68261548
+- **Co-Convenor**: Prof. Shefali Jha — shefali_jha[at]dau[dot]ac[dot]in, (+91) 079-68261709
+- **Faculty Members**: Prof. Sreeja Rajendran (Asst. Professor), Prof. Yash Agrawal (Assoc. Professor)
+- **Staff Members**: Ms. Geeta Nair (Asst. Manager, Faculty Block 4), Mr. Jaydeep Panchal (Sr. Executive, Accounts & Finance)
+- **External Member**: Ms. Prita Jha (Legal expert)
+- **Student Members**: Harita Rathod (UG Rep, Female), Hemal Chavda (UG Rep, Male), Nishka Shah (PG Rep, Female)
 
-Any written complaint of sexual harassment by the aggrieved women shall be submitted directly to the Internal Complaints Committee by sending an email to **[icc[at]dau[dot]ac[dot]in](mailto:icc\[at\]dau\[dot\]ac\[dot\]in)**. Any aggrieved woman may make, in writing, a complaint of sexual harassment to the ICC within a period of three months from the date of incident and in case of a series of incidents, within a period of three months from the date of last incident. Exceptions to this timeline may apply: please refer to the **[policy](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf)** for more details.
+## Terms of Reference
+The ICC provides policy guidelines, advises the university on sexual-harassment matters, defines what constitutes harassment, handles complaints, conducts inquiries with recommendations to the Director General, recommends preventive measures, and runs gender-sensitization orientation sessions for students and staff.
 
-The ICC is bound by law to maintain confidentiality and committed to ensuring the safety and well-being of complainants.
+## DAU Policy against Sexual Harassment (PDF — full text verified)
+https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf
 
-**The Institute has reconstituted the Internal Complaints Committee effective from June 5, 2024**.
+**Definition (per the POSH Act 2013 / Vishaka judgment):** unwelcome sexually determined behavior including physical contact/advances, demands for sexual favours, sexually coloured remarks, showing pornography, or any other unwelcome physical/verbal/non-verbal conduct of a sexual nature. The policy lists 20 illustrative examples, from unwanted advances and sexual gestures to doxing, non-consensual recording, and quid-pro-quo threats tied to grades/promotion.
 
-The Committee consists of the following members:
+**ICC Composition (min. 10 members):** 1 senior faculty Convenor (female), 3 faculty (1M/2F), 2 non-teaching staff (≥1 female), 2 B.Tech student reps (M/F), 1 PG student rep (female), 1 external member (NGO/legal background). Terms: 3 years for non-student members; 1–2 years for student members (selected via written test + interview). Quorum: 5 of 10 members.
 
-#### Internal Complaints Committee
+**Complaints process:**
+- File within 3 months of the incident (extendable by the ICC for good cause) — in person to the Convenor or via icc@dau.ac.in.
+- ICC determines prima facie case; if none found, reasons are given in writing to the Complainant.
+- Respondent gets a copy within 7 days and must respond within 10 days (max 15 days in any scenario except documented medical emergency).
+- Strict confidentiality required from both parties and all ICC members.
+- **Interim measures** available during inquiry: reassigning examiners/supervisors, hostel relocation, temporary suspension (without loss of pay/stipend), campus entry bans for outsiders.
+- **Informal (conciliation) process** available only at the Complainant's written request, with no monetary compensation as a basis for conciliation.
+- **Formal inquiry** must complete within 90 days of the written complaint; report due within 10 days of inquiry completion.
 
-  * ### Prof. Minal Bhise, **Convenor**
+**Penalties (illustrative range):**
+- *Students:* warning, counselling/community service, written/public apology, exam debarment, fines, club/SBG position debarment, semester(s) suspension, degree withholding, expulsion (up to lifetime ban).
+- *Employees:* warning, apology, salary cuts (up to 12 months), unpaid suspension (2–6 months), adverse record entry, fine, termination.
+- *Service providers/outsiders:* warning, permanent campus ban, complaint to their organization's equivalent body, contract termination.
 
-[icc[at]dau[dot]ac[dot]in](mailto:icc\[at\]dau\[dot\]ac\[dot\]in) (+91) 079-68261548
-
-  * ### Prof. Shefali Jha, **Co-Convenor**
-
-[shefali_jha[at]dau[dot]ac[dot]in](mailto:shefali_jha\[at\]dau\[dot\]ac\[dot\]in) (+91) 079-68261709
-
-#### **Faculty Members**
-
-  * ### Prof. Sreeja Rajendran  
-Assistant Professor
-
-[sreeja_rajendran[at]dau[dot]ac[dot]in](mailto:sreeja_rajendran\[at\]dau\[dot\]ac\[dot\]in) (+91) 079-68261707
-
-  * ### Prof. Yash Agrawal  
-Associate Professor
-
-[yash_agrawal[at]dau[dot]ac[dot]in](mailto:yash_agrawal\[at\]dau\[dot\]ac\[dot\]in) (+91) 079-68261629
-
-#### **Staff Members**
-
-  * ### Ms. Geeta Nair, Assistant Manager - Faculty Block 4
-
-[nair_geeta[at]dau[dot]ac[dot]in](mailto:nair_geeta\[at\]dau\[dot\]ac\[dot\]in) (+91) 079-68261573
-
-  * ### Mr. Jaydeep Panchal, Sr. Executive - Accounts & Finance
-
-[jaydeep_panchal[at]dau[dot]ac[dot]in](mailto:jaydeep_panchal\[at\]dau\[dot\]ac\[dot\]in) (+91) 079-68261706
-
-#### **External Member**
-
-  * ### Ms. Prita Jha  
-(Legal expert)
-
-#### **Student Members**
-
-  * ### Harita Rathod - 202301211  
-UG Representative (Female)
-
-  * ### Hemal Chavda - 202301451  
-UG Representative (Male)
-
-  * ### Nishka Shah - 202512035  
-PG Representative (Female)
-
-#### _Terms of Reference:_
-
-**The Internal Complaints Committee will be responsible for policy guidelines and implementation strategies**.
-
-The Internal Complaints Committee will:
-
-  * Provide guidelines for protection from sexual harassment.
-  * Advise DAU from time to time in matters of sexual harassment.
-  * For dealing with complaints, prepare detailed guidelines relating to what would constitute harassment and other acts that affect the dignity of a person.
-  * Deal with complaints received or referred to the cell in respect of all kinds of sexual harassment to a person.
-  * Conduct inquiry and send recommendations to the Director General.
-  * Recommend to the competent authority (the Director General) of the Institute from time to time measures that should be taken to deter any kind of sexual harassment.
-  * Deal with such other matters and issues connected with sexual harassment to a person.
-  * Arrange orientation sessions for students and staff in the matters of gender sensitization.
-
-**DAU Policy against Sexual Harassment**
-
-[Click here](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf)
-
-# Contact Information
-
-- **Phone:** 079-68261629
-- **Phone:** 079-68261709
-- **Phone:** 079-68261707
-- **Phone:** 079-68261706
-- **Phone:** 079-68261548
-- **Phone:** 079-68261573
+**Appeals:** directed to the Authority (not the ICC) within 30 days of the Report; Respondent gets a show-cause notice and 30 days to reply; Authority decides within 30 days after that and its decision is final.
 
 # Related Links
 
-- [icc[at]dau[dot]ac[dot]in](mailto:icc[at]dau[dot]ac[dot]in)
-- [policy](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf)
-- [shefali_jha[at]dau[dot]ac[dot]in](mailto:shefali_jha[at]dau[dot]ac[dot]in)
-- [sreeja_rajendran[at]dau[dot]ac[dot]in](mailto:sreeja_rajendran[at]dau[dot]ac[dot]in)
-- [yash_agrawal[at]dau[dot]ac[dot]in](mailto:yash_agrawal[at]dau[dot]ac[dot]in)
-- [nair_geeta[at]dau[dot]ac[dot]in](mailto:nair_geeta[at]dau[dot]ac[dot]in)
-- [jaydeep_panchal[at]dau[dot]ac[dot]in](mailto:jaydeep_panchal[at]dau[dot]ac[dot]in)
-
-# Downloadable Resources
-
-| Resource | Type |
-| --- | --- |
-| [policy](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf) | PDF |
-
+- [Original Page](https://www.daiict.ac.in/internal-complaint-committee)
+- [DAU Policy against Sexual Harassment (PDF)](https://www.daiict.ac.in/sites/default/files/other-files/DAU-Policy-against-Sexual-Harassment_2026.pdf)
+- [Grievance Redressal Cell](https://daiict.ac.in/grievance-redressal-cell)
+- [DAU Website](https://www.daiict.ac.in)

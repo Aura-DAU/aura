@@ -18,13 +18,13 @@ Undergraduate Admissions – All India Category
 |  |  |
 | --- | --- |
 | Filling of online Application Forms commences on | **24 March 2026** |
-| On-line application closes on | **01 June 2026** |
-| Announcement of Merit List | TBD |
-| Fees Payment window for shortlisted candidates | TBD |
-| Announcement of Admission Status | TBD |
-| Registration and document verification at DAU campus for confirmed candidates (**Tentative**) | 20 July 2026 |
-| Orientation Program (**Tentative**) | 21-24 July 2026 |
-| Commencement of Classes (**Tentative**) | 27 July 2026 |
+| On-line application closes on **(Closed)** | **22 June 2026** |
+| Announcement of Merit List for **FIRST round** | **02 July 2026** |
+| Fees payment window for shortlisted candidates in **FIRST round** | **02 – 08 July 2026** |
+| Announcement of Admission Status for **FIRST round** | **10 / 13 July 2026** |
+| Registration and document verification at DAU campus for confirmed candidates | **01 August 2026** |
+| Orientation Program | 03-07 August 2026 |
+| Commencement of Classes | 10 August 2026 |
 
 ## Intake
 
@@ -90,9 +90,11 @@ For more details of the program, **click**
 
 ### **Placement Statistics for the Last Three Years - Undergraduate Programs:**
 
-
+![Details_of_B.Tech-UG_placed_students](https://www.daiict.ac.in/sites/default/files/other-images/Placement_Statistics_UG-2026.png)
 
 ### **Prominent Recruiters:**
+
+![Top_Recruiters_B.Tech-UG_01](https://www.daiict.ac.in/sites/default/files/other-images/Prominent-Recruiters_2025_v1.png)
 
 
 

@@ -1,6 +1,6 @@
 ---
 title: "ACM India Summer School 2026 on Competitive Programming"
-url: ""
+url: "https://www.daiict.ac.in/events/7101"
 category: "Events"
 scraped_by: "madhav thesiya"
 scraped_date: "2026-06-25"
