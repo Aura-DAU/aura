@@ -1,0 +1,256 @@
+AURA SOURCE-AVAILABLE LICENSE
+Version 1.0
+
+Copyright (c) 2026 Dhirubhai Ambani University. All Rights Reserved.
+
+Project: DAU PWA — AURA (the "Software")
+Canonical repository: https://github.com/Aura-DAU/aura
+
+===============================================================================
+NOTICE
+===============================================================================
+
+This Software is SOURCE-AVAILABLE, NOT OPEN SOURCE.
+
+The source code is published publicly so that it can be read, studied, audited,
+and improved by contributors to this project. Publication does NOT grant you a
+licence to use, run, deploy, copy, modify, or redistribute the Software.
+
+Every right not expressly granted in Section 2 below is reserved by the
+Licensor. If a right you want is not listed in Section 2, you do not have it.
+
+===============================================================================
+1. DEFINITIONS
+===============================================================================
+
+1.1  "Licensor" means Dhirubhai Ambani University, Gandhinagar, Gujarat, India,
+     acting through the maintainers of the Project.
+
+1.2  "Software" means the source code, object code, configuration, prompts,
+     documentation, deployment manifests, datasets, designs, logos, and all
+     other content contained in the Project repository, in whole or in part,
+     together with all modified and derivative versions of any of them.
+
+1.3  "You" (or "Your") means any individual or legal entity accessing the
+     Software.
+
+1.4  "Authorised Person" means:
+     (a) Dhirubhai Ambani University and its constituent departments;
+     (b) currently enrolled students, faculty, and staff of the University
+         acting as members of GDG On Campus DAU or the AI Club of DAU, or
+         otherwise acting under the written direction of the Project's
+         supervising faculty; and
+     (c) any other person or entity holding a current, signed, written
+         authorisation from the Licensor.
+
+1.5  "Contribution" means any work you intentionally submit to the Project,
+     including code, documentation, prompts, configuration, designs, or data.
+
+1.6  "Production Use" means any use of the Software to provide a service to,
+     or otherwise operate on behalf of, any person other than Yourself,
+     whether or not for a fee.
+
+===============================================================================
+2. GRANT OF LIMITED PERMISSION
+===============================================================================
+
+Subject to Your full and continuing compliance with this Licence, the Licensor
+grants You a worldwide, royalty-free, non-exclusive, non-transferable,
+non-sublicensable, and revocable permission to:
+
+2.1  VIEW AND STUDY the publicly published source code of the Software for the
+     sole purposes of reading it, evaluating it, learning from it, reviewing it
+     for security or correctness, and reporting issues.
+
+2.2  FORK AND MODIFY the repository through the hosting platform's own
+     mechanisms, and run the Software locally on Your own machine, SOLELY AND
+     EXCLUSIVELY for the purpose of preparing and submitting a Contribution
+     back to the canonical repository identified above.
+
+     This permission terminates automatically for any copy once You cease to
+     pursue such a Contribution. It does not permit You to publish, host,
+     distribute, or operate that fork or modification for any other purpose.
+
+2.3  QUOTE short excerpts of the source code in academic writing, coursework,
+     technical articles, or conference talks, provided that (a) the excerpt is
+     no longer than reasonably necessary, (b) it is not a substantial portion
+     of the Software, and (c) the Project and the Licensor are clearly
+     attributed.
+
+2.4  AUTHORISED PERSONS additionally may use, run, deploy, modify, and operate
+     the Software for the purposes of the University, including Production Use
+     for the University community, in accordance with any policies the Licensor
+     may set. This permission ends when a person ceases to be an Authorised
+     Person.
+
+===============================================================================
+3. RESTRICTIONS
+===============================================================================
+
+Except as expressly and unambiguously permitted by Section 2, You MUST NOT,
+without the prior written permission of the Licensor:
+
+3.1  use, execute, run, host, or deploy the Software, in whole or in part, for
+     any purpose, including Production Use;
+
+3.2  copy, reproduce, or store the Software other than as strictly necessary to
+     exercise a permission granted in Section 2;
+
+3.3  modify, adapt, translate, port, or create derivative works of the
+     Software;
+
+3.4  distribute, publish, transmit, sell, rent, lease, lend, sublicense, or
+     otherwise make the Software available to any third party;
+
+3.5  use the Software, or any part of it, for any commercial purpose, or in any
+     product, service, or offering that generates revenue, directly or
+     indirectly;
+
+3.6  operate the Software, a fork of it, or a derivative of it as a hosted or
+     network-accessible service, including any software-as-a-service offering;
+
+3.7  deploy the Software for, or adapt it to, any other institution,
+     university, college, school, organisation, or community;
+
+3.8  remove, obscure, or alter any copyright, trademark, attribution, or
+     licence notice contained in the Software;
+
+3.9  use the Software, or any output derived from it, to train, fine-tune,
+     evaluate, or otherwise develop any machine learning or artificial
+     intelligence model, dataset, or benchmark;
+
+3.10 use the Software in any manner that violates applicable law, the policies
+     of the University, or the privacy or data-protection rights of any person;
+     or
+
+3.11 assist, enable, or induce any third party to do any of the above.
+
+===============================================================================
+4. NAMES, MARKS, AND IDENTITY
+===============================================================================
+
+4.1  This Licence grants no rights in the names, logos, wordmarks, crests, or
+     other identifying marks of Dhirubhai Ambani University, DAU, DA-IICT,
+     AURA, GDG On Campus, Google Developer Groups, or the AI Club of DAU.
+
+4.2  You must not use any of those names or marks to name, brand, promote, or
+     imply endorsement of any product, service, deployment, fork, or
+     publication, and must not represent any copy of the Software as being
+     official, endorsed by, or affiliated with the University.
+
+===============================================================================
+5. CONTRIBUTIONS
+===============================================================================
+
+5.1  By submitting a Contribution to the Project, You represent that You have
+     the right to do so and that the Contribution is Your original work or that
+     You have secured all necessary rights to it.
+
+5.2  You grant the Licensor a perpetual, worldwide, irrevocable, royalty-free,
+     non-exclusive licence, with the right to sublicense, to use, reproduce,
+     modify, prepare derivative works of, publicly display, distribute, and
+     relicense Your Contribution as part of the Software, including under
+     different licence terms should the Licensor later choose to relicense the
+     Project.
+
+5.3  Your Contribution is licensed back to You, and to everyone else, only on
+     the terms of this Licence. Contributing does not grant You any additional
+     right to use, deploy, or redistribute the Software.
+
+5.4  You waive, to the extent permitted by law, any moral rights in Your
+     Contribution that would otherwise prevent the Licensor from exercising the
+     rights granted in Section 5.2.
+
+===============================================================================
+6. THIRD-PARTY COMPONENTS
+===============================================================================
+
+6.1  This Licence applies only to the Software as authored for this Project. It
+     does not apply to, and does not purport to relicense, any third-party
+     dependency, library, model, font, icon set, or dataset that the Software
+     references, imports, installs, or bundles.
+
+6.2  Each such third-party component remains governed by its own licence.
+     Nothing in this Licence limits any right You have under those licences, or
+     any right You have under mandatory applicable law, including any statutory
+     right of fair dealing, fair use, decompilation, or interoperability.
+
+===============================================================================
+7. TERM AND TERMINATION
+===============================================================================
+
+7.1  The permissions in Section 2 terminate automatically and immediately, with
+     no notice required, upon any breach by You of any term of this Licence.
+
+7.2  The Licensor may revoke the permissions in Section 2 in respect of any
+     person at any time, at its sole discretion, by written notice.
+
+7.3  Upon termination You must immediately cease all use of the Software and
+     permanently delete every copy of it in Your possession or control,
+     including forks, clones, backups, container images, and deployments.
+
+7.4  Sections 3 through 10 survive termination.
+
+===============================================================================
+8. NO WARRANTY
+===============================================================================
+
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, ACCURACY, AND
+NON-INFRINGEMENT.
+
+THE SOFTWARE INCLUDES ARTIFICIAL-INTELLIGENCE COMPONENTS WHOSE OUTPUT MAY BE
+INACCURATE, INCOMPLETE, OR MISLEADING. NO OUTPUT OF THE SOFTWARE CONSTITUTES
+OFFICIAL INFORMATION, ADVICE, OR A STATEMENT OF THE UNIVERSITY.
+
+===============================================================================
+9. LIMITATION OF LIABILITY
+===============================================================================
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE
+LICENSOR, THE UNIVERSITY, ITS FACULTY, ITS STUDENTS, OR ANY CONTRIBUTOR BE
+LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT,
+OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OF OR OTHER DEALINGS IN THE SOFTWARE, INCLUDING ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES, AND INCLUDING ANY
+LOSS OF DATA, REVENUE, OR GOODWILL.
+
+===============================================================================
+10. GENERAL
+===============================================================================
+
+10.1 GOVERNING LAW. This Licence is governed by the laws of India. The courts
+     at Gandhinagar, Gujarat, India have exclusive jurisdiction over any
+     dispute arising out of or relating to this Licence.
+
+10.2 SEVERABILITY. If any provision of this Licence is held unenforceable, that
+     provision shall be modified to the minimum extent necessary to make it
+     enforceable, and the remaining provisions shall remain in full force.
+
+10.3 NO WAIVER. A failure by the Licensor to enforce any provision is not a
+     waiver of its right to do so later.
+
+10.4 ENTIRE AGREEMENT. This Licence is the entire agreement between You and the
+     Licensor regarding the Software, and supersedes any prior understanding.
+
+10.5 UPDATES. The Licensor may publish revised versions of this Licence. The
+     version distributed with a given release of the Software governs that
+     release.
+
+===============================================================================
+11. REQUESTING PERMISSION
+===============================================================================
+
+Permissions beyond the scope of this Licence — including any use, deployment,
+redistribution, commercial use, or adaptation for another institution — may be
+requested in writing from the Project maintainers via the canonical repository:
+
+    https://github.com/Aura-DAU/aura
+
+Requests are granted only in writing and signed on behalf of the University.
+Silence is not consent.
+
+===============================================================================
+
+ALL RIGHTS NOT EXPRESSLY GRANTED ARE RESERVED.
