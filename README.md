@@ -1,38 +1,4 @@
-<div align="center">
-    <img width="250" alt="AURA_Logo" src="https://github.com/user-attachments/assets/591dad76-42ae-473b-ab30-be8c951bbc07" />
-   <h1>DAU PWA — AURA</h1>
-   
-   <h3> A Progressive Web App for <strong>Dhirubhai Ambani University</strong>, enriched with AI. </h3>
-   
-   <p>
-       <a href="#architecture-overview"><img src="https://img.shields.io/badge/Agentic_RAG-LangGraph-0A66C2?style=for-the-badge&logo=openai&logoColor=white" alt="Agentic RAG" /></a>
-       <a href="#architecture-overview"><img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" /></a>
-       <a href="#getting-started"><img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
-       <img src="https://img.shields.io/badge/vLLM-NVIDIA-76B900?style=for-the-badge&logo=nvidia&logoColor=white" alt="NVIDIA GPU" />
-     </p>
-</div>
-
-> [!IMPORTANT]
-> This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
-
-> [!WARNING]
-> **A note for future GDG On Campus & AI Club members and contributers:** please take care of this project and keep it alive. Do not delete this file or the project — maintain it, hand it over cleanly to the next batch, and keep the ownership, setup, and contribution notes above up to date.
----
-
-## Overview
-
-DAU PWA (codename **AURA**) is a monorepo with two parts:
-
-| Directory | What it is | Stack |
-|-----------|------------|-------|
-| [`aura/`](./aura) | The installable PWA frontend | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, shadcn/ui, Serwist (service worker), NextAuth |
-| [`server/`](./server) | API gateway + AI/RAG backend | FastAPI, PostgreSQL, RAG pipeline (Qdrant + HF) |
-
-See [`server/README.md`](./server/README.md) for backend-specific setup.
-
----
-
-## Architecture Overview
+##  Aura Architecture Overview
 
 AURA is an agentic RAG system: the PWA talks to a FastAPI gateway, LangGraph orchestrates retrieval and inference, and GPU nodes serve the LLM.
 
