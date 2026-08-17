@@ -26,6 +26,7 @@ interface SessionWithUser {
     currentYear?: number | null
     currentSem?: number | null
     currentSec?: string | null
+    currentLabGroup?: string | null
   }
 }
 
