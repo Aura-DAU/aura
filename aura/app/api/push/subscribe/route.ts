@@ -39,6 +39,7 @@ function buildToken(session: SessionWithUser) {
     currentYear: session.user.currentYear ?? undefined,
     currentSem: session.user.currentSem ?? undefined,
     currentSec: session.user.currentSec ?? undefined,
+    currentLabGroup: session.user.currentLabGroup ?? undefined,
   })
 }
 

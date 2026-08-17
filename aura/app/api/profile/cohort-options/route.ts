@@ -18,6 +18,7 @@ export async function GET() {
     currentYear: session.user.currentYear,
     currentSem: session.user.currentSem,
     currentSec: session.user.currentSec,
+    currentLabGroup: session.user.currentLabGroup,
   })
 
   try {
