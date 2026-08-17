@@ -60,7 +60,7 @@ services:
   nginx-log-exporter:
     image: quay.io/martinhelmich/prometheus-nginxlog-exporter:v1.11.0
     restart: unless-stopped
-    command: ["-config-file", "/etc/nginxlog-exporter.hcl"]
+    command: [ "-config-file", "/etc/nginxlog-exporter.hcl" ]
     ports:
       - "${NODE1_METRICS_BIND:-10.100.97.71}:9113:9113"
     volumes:
@@ -136,6 +136,11 @@ services:
       ECAMPUS_VAULT_KEY: ${ECAMPUS_VAULT_KEY}
       ECAMPUS_VAULT_DB: /var/lib/aura/ecampus_credentials.db
       ECAMPUS_TIMETABLE_POOL_DB: /var/lib/aura/timetable_pool.db
+      # Active semester label — must exactly match the --semester string
+      # used with import_timetable_xlsx.py. Filters timetable_master reads
+      # so stale/other-semester/demo-seed rows never surface. See
+      # server/rag/pipeline/timetable/service.py CURRENT_SEMESTER_LABEL.
+      CURRENT_SEMESTER_LABEL: ${CURRENT_SEMESTER_LABEL:-}
       AURA_AUDIT_LOG: /var/log/aura/personal_data_audit.log
       # OBS-01: every gunicorn worker writes its samples here so /metrics
       # aggregates instead of reporting whichever worker answered the scrape.
