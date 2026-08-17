@@ -9,11 +9,15 @@
        <a href="#architecture-overview"><img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" /></a>
        <a href="#getting-started"><img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
        <img src="https://img.shields.io/badge/vLLM-NVIDIA-76B900?style=for-the-badge&logo=nvidia&logoColor=white" alt="NVIDIA GPU" />
+       <a href="#license"><img src="https://img.shields.io/badge/License-Source_Available-B91C1C?style=for-the-badge" alt="Source Available — All Rights Reserved" /></a>
      </p>
 </div>
 
 > [!IMPORTANT]
 > This project is built by **GDG On Campus** and the **AI Club** of Dhirubhai Ambani University, under the supervision of **[Prof. Arpit Rana](https://www.linkedin.com/in/arpitrana/)**.
+
+> [!CAUTION]
+> **This project is source-available, not open source.** The code is public so it can be read, audited, and contributed to — publishing it grants you no right to use, run, deploy, or redistribute it. See [License](#license) before you do anything with this repository.
 
 > [!WARNING]
 > **A note for future GDG On Campus & AI Club members:** please take care of this project and keep it alive. Do not delete this file or the project — maintain it, hand it over cleanly to the next batch, and keep the ownership, setup, and contribution notes above up to date.
@@ -193,6 +197,48 @@ PRs are **squash-merged** into `main`. Direct pushes to `main` are blocked.
 
 - [`CLAUDE.md`](./CLAUDE.md) — full coding rules and conventions
 - [`AGENTS.md`](./AGENTS.md) — guidelines for AI coding agents on this project
+- [`LICENSE`](./LICENSE) — the AURA Source-Available License, in full
+
+---
+
+## License
+
+Copyright © 2026 **Dhirubhai Ambani University**. All rights reserved.
+
+AURA is released under the [AURA Source-Available License](./LICENSE). The source
+is public, but **this is not an open-source licence** — every right not listed
+below is reserved.
+
+**You may:**
+
+- read, study, and audit the source code
+- fork it and run it locally **for the purpose of preparing a contribution** back
+  to this repository (this is what the [Getting Started](#getting-started) steps are for)
+- quote short excerpts in academic work or talks, with attribution
+- report issues and open pull requests
+
+**You may not, without written permission from the University:**
+
+- run, host, or deploy AURA, or any fork or derivative of it
+- redistribute, publish, sell, or sublicense it
+- use it commercially, or as part of any revenue-generating product or service
+- adapt or deploy it for another university, college, school, or organisation
+- use the AURA, DAU, GDG On Campus, or AI Club names, logos, or marks
+- use the code or its outputs to train or evaluate AI/ML models
+
+Members of DAU — students, faculty, and staff working on this project through GDG
+On Campus or the AI Club — are authorised to use and deploy AURA for University
+purposes. That authorisation ends when you are no longer part of the University.
+
+Third-party dependencies keep their own licences; this licence does not cover
+them. See [`LICENSE`](./LICENSE) §6.
+
+**By opening a pull request**, you grant the University a perpetual, worldwide,
+royalty-free licence to use and relicense your contribution as part of AURA
+([`LICENSE`](./LICENSE) §5).
+
+To request permission beyond the above, contact the project maintainers through
+this repository.
 
 ---
 
