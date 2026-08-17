@@ -1,3 +1,18 @@
+-- ============================================================
+-- DEV / DEMO SEED ONLY -- DO NOT RUN AGAINST PRODUCTION.
+--
+-- This is the confirmed source of the "MTech"/"BS-IT"/"BS-DS-AI" junk
+-- found sitting in production timetable_master (18 rows with sec='MTech'
+-- for Year 1 Sem 1, matching this file's demo inserts exactly). It also
+-- never sets semester_label, and it unconditionally wipes the ENTIRE
+-- table on every run (see DELETE below with no WHERE clause) -- running
+-- this again would erase all real imported timetable data.
+--
+-- If you need to re-seed a local/dev DB, run this file there only, then
+-- run cleanup_legacy_timetable_rows.sql's Step 1 SELECT to confirm what
+-- landed. Real timetable data belongs in
+-- server/scripts/import_timetable_xlsx.py --semester "<label>" instead.
+-- ============================================================
 BEGIN;
 DELETE FROM timetable_master;
 
