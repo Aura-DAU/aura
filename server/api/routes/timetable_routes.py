@@ -47,14 +47,27 @@ push_router = APIRouter(prefix="/push", tags=["push"])
 
 @router.get("/me")
 def get_my_timetable(identity: Identity = Depends(require_identity)):
-    """Student's own effective timetable — cohort master merged with their
-    personal overrides. Used by the dashboard's timetable card."""
-    if identity.role != "student":
-        raise HTTPException(status_code=403, detail="Only students have a personal timetable.")
-    try:
-        return service.get_effective_timetable(identity)
-    except TimetableError as e:
-        raise HTTPException(status_code=e.status_code, detail=str(e))
+    """The caller's own timetable, used by the dashboard's timetable card.
+
+    Students get their cohort master merged with their personal overrides
+    (service.get_effective_timetable). Faculty get their full teaching
+    schedule aggregated across every batch/section they appear in
+    (service.get_faculty_timetable) — read-only, no personal overrides,
+    since a faculty schedule isn't student-editable the way a cohort
+    timetable is.
+    """
+    if identity.role == "student":
+        try:
+            return service.get_effective_timetable(identity)
+        except TimetableError as e:
+            raise HTTPException(status_code=e.status_code, detail=str(e))
+    elif identity.role == "faculty":
+        try:
+            return service.get_faculty_timetable(identity)
+        except TimetableError as e:
+            raise HTTPException(status_code=e.status_code, detail=str(e))
+    else:
+        raise HTTPException(status_code=403, detail="Only students and faculty have a personal timetable.")
 
 
 class TimetableChangeIn(BaseModel):

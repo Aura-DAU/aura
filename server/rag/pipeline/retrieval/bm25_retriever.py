@@ -45,6 +45,7 @@ class BM25Retriever:
             chunks = json.load(f)
 
         corpus = []
+        chunk_texts_lower = []
 
         for chunk in chunks:
 
@@ -56,7 +57,12 @@ class BM25Retriever:
                 self._tokenize(text)
             )
 
+            # Cached for phrase-adjacency boosting in retrieve() below, so
+            # we don't rebuild/lower this string on every single query.
+            chunk_texts_lower.append(text.lower())
+
         self.chunks = chunks
+        self._chunk_texts_lower = chunk_texts_lower
         self.bm25 = BM25Okapi(
             corpus
         )
@@ -212,6 +218,98 @@ class BM25Retriever:
             if token not in self.STOPWORDS
         ]
 
+    # Fix BM-PHRASE: plain BM25 treats "sports officer" as two independent
+    # bag-of-words tokens with no notion that they belong together, so a
+    # chunk that just happens to score well on "sports" alone (e.g. Sports
+    # Committee docs) can outrank the one chunk that actually contains the
+    # adjacent phrase "Sports Officer". We never want a multi-word query
+    # phrase silently split into independent terms UNLESS the user actually
+    # joined two separate asks with "and"/"or" (e.g. "sports and cultural
+    # committee" — genuinely two different lookups). Everything else (a
+    # compound noun phrase like "sports officer") should stay together and
+    # get priority for chunks containing it as an adjacent phrase, then
+    # fall back to individual-word credit only when no phrase match exists.
+    _CONJUNCTIONS = {"and", "or"}
+
+    # Phrase-match bonus is expressed as a fraction of the query's own top
+    # raw BM25 score (computed per-query in retrieve()) rather than a fixed
+    # constant, so it scales sensibly regardless of corpus size or a given
+    # query's overall term rarity/frequency.
+    _PHRASE_MATCH_BONUS_FRAC = 0.35
+    _WORD_MATCH_BONUS_FRAC = 0.08
+
+    def _phrase_segments(
+        self,
+        query
+    ):
+        """
+        Split the raw query into segments only at an explicit conjunction
+        word ("and"/"or"). Each segment keeps its content words in their
+        original left-to-right order — this is what lets a segment like
+        ["sports", "officer"] be checked as one adjacent phrase, not two
+        independently-splittable terms.
+        """
+
+        raw_tokens = re.findall(
+            r"[A-Za-z0-9_-]+",
+            (query or "").lower()
+        )
+
+        segments = []
+        current = []
+
+        for tok in raw_tokens:
+            if tok in self._CONJUNCTIONS:
+                if current:
+                    segments.append(current)
+                current = []
+            else:
+                current.append(tok)
+
+        if current:
+            segments.append(current)
+
+        return segments
+
+    def _phrase_boost(
+        self,
+        chunk_text_lower,
+        segments,
+        bonus_unit,
+    ):
+        """
+        Additive ranking nudge (not a replacement for the real BM25 score):
+        for each conjunction-delimited segment, priority is —
+          1. the full segment as one adjacent phrase ("sports officer")
+          2. only if that phrase is absent, smaller credit per individual
+             content word in the segment that the chunk does contain
+        so a chunk containing the aligned phrase is always preferred over
+        one that only contains the words scattered independently.
+        """
+
+        bonus = 0.0
+
+        for seg in segments:
+
+            content_words = [
+                w for w in seg if w not in self.STOPWORDS
+            ]
+
+            if not content_words:
+                continue
+
+            if len(content_words) >= 2:
+                phrase = " ".join(content_words)
+                if phrase in chunk_text_lower:
+                    bonus += bonus_unit * self._PHRASE_MATCH_BONUS_FRAC
+                    continue  # phrase match already covers these words
+
+            for w in content_words:
+                if re.search(rf"\b{re.escape(w)}\b", chunk_text_lower):
+                    bonus += bonus_unit * self._WORD_MATCH_BONUS_FRAC
+
+        return bonus
+
     
     def _matches_filter(
         self,
@@ -340,6 +438,30 @@ class BM25Retriever:
                 query_tokens
             )
         )
+
+        # Fix BM-PHRASE: nudge ranking toward chunks that contain the
+        # query's words together as an adjacent phrase (e.g. "sports
+        # officer") over chunks that only match the words independently —
+        # see _phrase_boost/_phrase_segments docstrings. Only bother when
+        # the query actually has a real multi-word segment; a single-word
+        # query gets no boost since there's no phrase to prioritize.
+        segments = self._phrase_segments(query)
+        has_multiword_segment = any(
+            len([w for w in seg if w not in self.STOPWORDS]) >= 2
+            for seg in segments
+        )
+
+        if has_multiword_segment:
+            raw_max = float(scores.max()) if len(scores) else 0.0
+            if raw_max > 0.0:
+                for idx in candidate_indices:
+                    bonus = self._phrase_boost(
+                        self._chunk_texts_lower[idx],
+                        segments,
+                        raw_max,
+                    )
+                    if bonus:
+                        scores[idx] += bonus
 
         # nlargest is O(n log k) vs O(n log n) for a full sort, and matches
         # sorted(..., reverse=True)[:k] exactly (including tie order).

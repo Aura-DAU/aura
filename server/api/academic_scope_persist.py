@@ -35,10 +35,14 @@ _DEPT_TO_PROGRAMME: dict[str, tuple[str, str]] = {
     "ICTCS": ("btech-ict", "undergraduate"),  # prefer btech-ict until CS corpus exists
     "MnC": ("btech-mnc", "undergraduate"),
     "EVD": ("btech-evd", "undergraduate"),
+    "CSAI": ("btech-csai", "undergraduate"),
+    "ECEAI": ("btech-ece-ai", "undergraduate"),
     "MTech": ("mtech-ict", "postgraduate"),
     "MScIT": ("msc-it", "postgraduate"),
     "MScDS": ("msc-ds", "postgraduate"),
     "PhD": ("phd", "doctoral"),
+    "BSMSDS": ("bs-ms-dsai", "undergraduate"),
+    "BSMSIT": ("bs-ms-it", "undergraduate"),
 }
 
 _DEGREE_DURATION_YEARS = {

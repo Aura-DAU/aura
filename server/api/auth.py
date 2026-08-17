@@ -72,6 +72,11 @@ class Identity:
     current_year: Optional[int] = None
     current_sem:  Optional[int] = None
     current_sec:  Optional[str] = None
+    # Faculty counterpart of the cohort fields above — the short code (e.g.
+    # "AM1") that timetable_master.faculty_name is matched against in
+    # pipeline/timetable/service.get_faculty_rows(). Display/lookup only,
+    # never used for authz. Only populated when role == "faculty".
+    faculty_initials: Optional[str] = None
 
     @property
     def user_id(self) -> str:
@@ -88,6 +93,7 @@ class Identity:
             "current_year": self.current_year,
             "current_sem": self.current_sem,
             "current_sec": self.current_sec,
+            "faculty_initials": self.faculty_initials,
         }
 
 
@@ -150,6 +156,7 @@ def require_identity(
         current_year=claims.get("currentYear") if isinstance(claims.get("currentYear"), int) else None,
         current_sem=claims.get("currentSem") if isinstance(claims.get("currentSem"), int) else None,
         current_sec=claims.get("currentSec") if isinstance(claims.get("currentSec"), str) else None,
+        faculty_initials=claims.get("facultyInitials") if isinstance(claims.get("facultyInitials"), str) else None,
     )
 
 
