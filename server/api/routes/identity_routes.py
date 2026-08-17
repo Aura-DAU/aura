@@ -241,7 +241,7 @@ def resolve_identity(
 
     rows = db_conn.query(
         """SELECT erp_id, role, dept, full_name, current_year, current_sem, current_sec,
-                  faculty_initials
+                  current_lab_group, faculty_initials
            FROM user_identity_map
            WHERE email = %s AND is_active = TRUE""",
         (email.lower().strip(),),
@@ -282,6 +282,7 @@ def resolve_identity(
             "current_year": yr,
             "current_sem": sem,
             "current_sec": sec,
+            "current_lab_group": row.get("current_lab_group"),
             "faculty_initials": fac_initials,
         }
 
@@ -327,6 +328,7 @@ def resolve_identity(
         "current_year": current_year,
         "current_sem": current_sem,
         "current_sec": current_sec,
+        "current_lab_group": None,
         "faculty_initials": faculty_initials,
     }
 

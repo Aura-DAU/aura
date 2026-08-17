@@ -20,6 +20,7 @@ export async function GET(req: NextRequest) {
     currentYear: session.user.currentYear,
     currentSem: session.user.currentSem,
     currentSec: session.user.currentSec,
+    currentLabGroup: session.user.currentLabGroup,
   })
 
   const requested = req.nextUrl.searchParams.get("return_to") ?? "/dashboard"

@@ -31,6 +31,7 @@ export interface InternalJwtPayload {
   currentYear?: number
   currentSem?: number
   currentSec?: string
+  currentLabGroup?: string
   // Faculty counterpart of the cohort fields above — read by the FastAPI
   // backend's Identity dataclass purely to resolve which timetable_master
   // rows belong to this faculty member. Never used for authz.
@@ -54,6 +55,7 @@ export function signInternalJwt(payload: InternalJwtPayload): string {
       currentYear: payload.currentYear,
       currentSem: payload.currentSem,
       currentSec: payload.currentSec,
+      currentLabGroup: payload.currentLabGroup,
       facultyInitials: payload.facultyInitials,
     },
     getJwtSecret(),

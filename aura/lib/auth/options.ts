@@ -22,6 +22,7 @@ declare module "next-auth" {
       currentYear?: number
       currentSem?: number
       currentSec?: string
+      currentLabGroup?: string
       facultyInitials?: string
     } & DefaultSession["user"]
   }
@@ -34,6 +35,7 @@ declare module "next-auth" {
     currentYear?: number
     currentSem?: number
     currentSec?: string
+    currentLabGroup?: string
     facultyInitials?: string
   }
 }
@@ -47,6 +49,7 @@ declare module "next-auth/jwt" {
     currentYear?: number
     currentSem?: number
     currentSec?: string
+    currentLabGroup?: string
     facultyInitials?: string
   }
 }
@@ -59,6 +62,7 @@ interface ErpIdentity {
   currentYear?: number
   currentSem?: number
   currentSec?: string
+  currentLabGroup?: string
   facultyInitials?: string
 }
 
@@ -92,6 +96,7 @@ async function lookupErpIdentity(email: string): Promise<ErpIdentity | null> {
       currentYear: data.current_year ?? data.currentYear ?? undefined,
       currentSem: data.current_sem ?? data.currentSem ?? undefined,
       currentSec: data.current_sec ?? data.currentSec ?? undefined,
+      currentLabGroup: data.current_lab_group ?? data.currentLabGroup ?? undefined,
       facultyInitials: data.faculty_initials ?? data.facultyInitials ?? undefined,
     }
   } catch (error) {
@@ -237,6 +242,7 @@ export const authOptions: NextAuthOptions = {
           user.currentYear = data.current_year ?? data.currentYear ?? undefined
           user.currentSem = data.current_sem ?? data.currentSem ?? undefined
           user.currentSec = data.current_sec ?? data.currentSec ?? undefined
+          user.currentLabGroup = data.current_lab_group ?? data.currentLabGroup ?? undefined
           user.facultyInitials = data.faculty_initials ?? data.facultyInitials ?? undefined
           return true
         } catch (err) {
@@ -277,6 +283,7 @@ export const authOptions: NextAuthOptions = {
           token.currentYear = user.currentYear
           token.currentSem = user.currentSem
           token.currentSec = user.currentSec
+          token.currentLabGroup = user.currentLabGroup
         } else {
           const erpData = await lookupErpIdentity(user.email)
           if (erpData) {
@@ -287,6 +294,7 @@ export const authOptions: NextAuthOptions = {
             token.currentYear = erpData.currentYear
             token.currentSem = erpData.currentSem
             token.currentSec = erpData.currentSec
+            token.currentLabGroup = erpData.currentLabGroup
           }
         }
       }
@@ -302,6 +310,7 @@ export const authOptions: NextAuthOptions = {
         session.user.currentYear = token.currentYear as number | undefined
         session.user.currentSem = token.currentSem as number | undefined
         session.user.currentSec = token.currentSec as string | undefined
+        session.user.currentLabGroup = token.currentLabGroup as string | undefined
       }
       return session
     },

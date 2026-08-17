@@ -14,6 +14,7 @@ function buildToken(session: Session | null) {
     currentYear: session.user.currentYear,
     currentSem: session.user.currentSem,
     currentSec: session.user.currentSec,
+    currentLabGroup: session.user.currentLabGroup,
   })
 }
 
