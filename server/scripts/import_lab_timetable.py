@@ -120,7 +120,28 @@ def extract_tables_from_md(filepath, base_lab_group):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument(
+        "--semester",
+        required=False,
+        default=None,
+        help=(
+            "Semester label to stamp on every lab row, e.g. 'Autumn 2026-27'. "
+            "Must exactly match CURRENT_SEMESTER_LABEL in the backend's .env, "
+            "or service.py's semester filter will silently exclude every lab "
+            "session this script inserts (NULL != 'Autumn 2026-27' in SQL)."
+        ),
+    )
     args = ap.parse_args()
+
+    if not args.dry_run and not args.semester:
+        print(
+            "ERROR: --semester is required (except with --dry-run). Labs "
+            "inserted without it get semester_label=NULL and will not appear "
+            "for any student once CURRENT_SEMESTER_LABEL is set. "
+            "Example: --semester 'Autumn 2026-27'"
+        )
+        sys.exit(1)
+
     
     env_file = SERVER_DIR.parent / ".env"
     if env_file.exists():
@@ -154,14 +175,20 @@ def main():
     
     # We DO NOT clear timetable_master here, we just insert labs
     # However, to avoid duplicate inserts on re-runs, we delete existing labs
-    print("Clearing old lab sessions (where lab_group is not null or course_name contains lab/tutorial)...")
-    dbc.execute("DELETE FROM timetable_master WHERE lab_group IS NOT NULL OR session_type IN ('lab', 'tutorial')")
-    
+    # -- scoped to this semester only, so re-running for a new semester
+    # doesn't wipe out a previous semester's still-relevant lab rows.
+    print(f"Clearing old lab sessions for semester '{args.semester}'...")
+    dbc.execute(
+        "DELETE FROM timetable_master WHERE (lab_group IS NOT NULL OR session_type IN ('lab', 'tutorial')) "
+        "AND semester_label = %s",
+        (args.semester,),
+    )
+
     SQL = (
         "INSERT INTO timetable_master "
         "(year,sem,sec,day_of_week,start_time,end_time,"
-        "course_code,course_name,session_type,room,faculty_name,course_type,program,branch,lab_group) "
-        "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        "course_code,course_name,session_type,room,faculty_name,course_type,program,branch,lab_group,semester_label) "
+        "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     )
     
     insert_data = []
@@ -170,7 +197,7 @@ def main():
         insert_data.append((
             r["year"], r["sem"], r["sec"], r["day_of_week"], r["start_time"], r["end_time"],
             r["course_code"], r["course_name"], session_type, r["room"], r["faculty_name"],
-            "Core", r["program"], r["branch"], r["lab_group"]
+            "Core", r["program"], r["branch"], r["lab_group"], args.semester
         ))
         
     dbc.executemany(SQL, insert_data)
