@@ -781,18 +781,32 @@ class RetrievalPipeline:
                     "(Score: %.2f): first name does not match closely enough",
                     name, cleaned, self.faculty_names_map[best_match[0]], s1,
                 )
-                return name
-            if len(matches) == 1:
-                corrected = self.faculty_names_map[best_match[0]]
-                logger.info("Fuzzy matched faculty name '%s' (cleaned: '%s') to '%s' (Score: %.2f)", name, cleaned, corrected, s1)
-                return corrected
-            s2 = matches[1][1]
-            if s1 == 100.0 or (s1 - s2) >= 8.0:
-                corrected = self.faculty_names_map[best_match[0]]
-                logger.info("Fuzzy matched faculty name '%s' (cleaned: '%s') to '%s' (Score: %.2f)", name, cleaned, corrected, s1)
-                return corrected
-                
-        return name
+                return result
+
+        scored_candidates = []
+        for m in matches:
+            m_name = m[0]
+            corrected = self.faculty_names_map[m_name]
+            score = self._smart_score(cleaned, m_name)
+            scored_candidates.append({"name": corrected, "score": score})
+
+        # Sort by smart score descending
+        scored_candidates.sort(key=lambda x: x["score"], reverse=True)
+
+        highest_score = scored_candidates[0]["score"]
+
+        if highest_score >= 90.0:
+            result["matches"] = scored_candidates[:1]
+            corrected = scored_candidates[0]["name"]
+            logger.info("Fuzzy matched faculty name '%s' (cleaned: '%s') to '%s' (Score: %.2f)", name, cleaned, corrected, highest_score)
+        elif highest_score >= 60.0:
+            result["matches"] = scored_candidates[:3]
+        else:
+            result["matches"] = scored_candidates[:5]
+
+        result["confidence"] = highest_score
+
+        return result
 
     @staticmethod
     def _first_name_agrees(query_lower: str, candidate_lower: str, threshold: float = 60.0) -> bool:
