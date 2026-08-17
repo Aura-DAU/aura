@@ -627,8 +627,12 @@ def _parse_v2_3col(
                 # We'll use just the course code as course_name for now
                 course_name = course_code
 
-                # Infer session type from name
-                session_type = "lab" if "lab" in course_code.lower() else "lecture"
+                # Infer session type. V2 sheets don't put "lab" in the course
+                # code (e.g. "IT314") -- labs are identified by room name
+                # instead (e.g. "LAB A-SF"). Checking course_code alone here
+                # tagged 0/402 records as "lab" against the real Autumn
+                # 2026-27 file; checking room fixes all 18 real lab sessions.
+                session_type = "lab" if ("lab" in course_code.lower() or "lab" in room.lower()) else "lecture"
 
                 record = TimetableRecord(
                     batch_raw=current_batch_raw,

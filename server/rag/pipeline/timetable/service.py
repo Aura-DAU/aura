@@ -11,11 +11,34 @@ arguments — a student can only ever change their own timetable.
 from __future__ import annotations
 
 import datetime
+import logging
+import os
 import re
 from dataclasses import dataclass
 from typing import Optional
 
 import db.connection as db_conn
+
+logger = logging.getLogger("aura.timetable.service")
+
+# The active semester's timetable_master.semester_label. Every real import
+# (import_timetable_xlsx.py --semester "...") stamps this on every row it
+# writes; historical/other-semester imports and legacy seed data
+# (server/scripts/load_timetable.sql never sets semester_label at all, so
+# those rows are NULL) are excluded by the exact-match filter this enables.
+#
+# Without this, get_master_rows/get_effective_timetable/get_all_elective_rows
+# match purely on (year, sem, sec) and silently merge every semester's data
+# ever imported for that cohort into one view -- this is what caused Section
+# A and B (and stale/demo rows) to show up mixed together. Must be set in
+# the backend's .env on every deploy where the semester changes.
+CURRENT_SEMESTER_LABEL = os.getenv("CURRENT_SEMESTER_LABEL", "").strip()
+if not CURRENT_SEMESTER_LABEL:
+    logger.warning(
+        "CURRENT_SEMESTER_LABEL is not set - timetable queries will NOT filter "
+        "by semester_label and may return rows from stale/demo imports. Set it "
+        "in the backend's .env to e.g. 'Autumn 2026-27'."
+    )
 
 DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 VALID_SESSION_TYPES = {"lecture", "lab", "tutorial"}
@@ -355,16 +378,29 @@ def _require_cohort(identity) -> tuple[int, int, str]:
 
 
 def get_master_rows(year: int, sem: int, sec: str, dept: Optional[str] = None, lab_group: Optional[str] = None) -> list[dict]:
-    rows = db_conn.query(
-        """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
-                  course_code, course_name, session_type, room, faculty_name,
-                  course_type, branch, program
-           FROM timetable_master
-           WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = %s)
-             AND (lab_group IS NULL OR lab_group = '' OR lab_group = %s)
-           ORDER BY day_of_week, start_time""",
-        (year, sem, sec, lab_group or ""),
-    )
+    if CURRENT_SEMESTER_LABEL:
+        rows = db_conn.query(
+            """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                      course_code, course_name, session_type, room, faculty_name,
+                      course_type, branch, program
+               FROM timetable_master
+               WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = %s)
+                 AND (lab_group IS NULL OR lab_group = '' OR lab_group = %s)
+                 AND semester_label = %s
+               ORDER BY day_of_week, start_time""",
+            (year, sem, sec, lab_group or "", CURRENT_SEMESTER_LABEL),
+        )
+    else:
+        rows = db_conn.query(
+            """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                      course_code, course_name, session_type, room, faculty_name,
+                      course_type, branch, program
+               FROM timetable_master
+               WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = %s)
+                 AND (lab_group IS NULL OR lab_group = '' OR lab_group = %s)
+               ORDER BY day_of_week, start_time""",
+            (year, sem, sec, lab_group or ""),
+        )
     return _narrow_by_dept(rows, dept)
 
 
@@ -439,6 +475,18 @@ def get_all_elective_rows(year: int, sem: int) -> list[dict]:
     resolve to a master row belonging to a completely different cohort
     (different year/semester), and get_effective_timetable would then
     merge that unrelated class straight into their own timetable."""
+    if CURRENT_SEMESTER_LABEL:
+        return db_conn.query(
+            """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                      course_code, course_name, session_type, room, faculty_name,
+                      course_type
+               FROM timetable_master
+               WHERE (course_type ILIKE '%%Elective%%' OR program ILIKE '%%Elective%%')
+                 AND year = 0 AND sem = 0
+                 AND semester_label = %s
+               ORDER BY course_code, day_of_week, start_time""",
+            (CURRENT_SEMESTER_LABEL,),
+        )
     return db_conn.query(
         """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
                   course_code, course_name, session_type, room, faculty_name,
@@ -497,16 +545,29 @@ def get_effective_timetable(identity) -> dict:
         # Fetch common courses (where sec is null/empty or default to 'A' as representative).
         # Narrowed by dept (when known) so e.g. an ICT student doesn't also get
         # MnC's classes just because both cohorts happen to use section 'A'.
-        common_rows = db_conn.query(
-            """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
-                      course_code, course_name, session_type, room, faculty_name,
-                      course_type, branch, program
-               FROM timetable_master
-               WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = 'A')
-                 AND (lab_group IS NULL OR lab_group = '' OR lab_group = %s)
-               ORDER BY day_of_week, start_time""",
-            (year, sem, lab_group or ""),
-        )
+        if CURRENT_SEMESTER_LABEL:
+            common_rows = db_conn.query(
+                """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                          course_code, course_name, session_type, room, faculty_name,
+                          course_type, branch, program
+                   FROM timetable_master
+                   WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = 'A')
+                     AND (lab_group IS NULL OR lab_group = '' OR lab_group = %s)
+                     AND semester_label = %s
+                   ORDER BY day_of_week, start_time""",
+                (year, sem, lab_group or "", CURRENT_SEMESTER_LABEL),
+            )
+        else:
+            common_rows = db_conn.query(
+                """SELECT id, year, sem, sec, day_of_week, start_time, end_time,
+                          course_code, course_name, session_type, room, faculty_name,
+                          course_type, branch, program
+                   FROM timetable_master
+                   WHERE year = %s AND sem = %s AND (sec IS NULL OR sec = '' OR sec = 'A')
+                     AND (lab_group IS NULL OR lab_group = '' OR lab_group = %s)
+                   ORDER BY day_of_week, start_time""",
+                (year, sem, lab_group or ""),
+            )
         common_rows = _narrow_by_dept(common_rows, dept)
         common_rows = _narrow_by_course_branch_map(common_rows, dept)
         common_rows = _exclude_electives(common_rows)
@@ -1029,10 +1090,17 @@ def update_student_cohort(
 
     # Validate against timetable_master
     # Note: we don't strictly require lab_group to match because they might not have a lab group selected yet
-    check = db_conn.query(
-        "SELECT 1 FROM timetable_master WHERE year = %s AND sem = %s AND sec = %s LIMIT 1",
-        (new_year, new_sem, new_sec),
-    )
+    if CURRENT_SEMESTER_LABEL:
+        check = db_conn.query(
+            "SELECT 1 FROM timetable_master WHERE year = %s AND sem = %s AND sec = %s "
+            "AND semester_label = %s LIMIT 1",
+            (new_year, new_sem, new_sec, CURRENT_SEMESTER_LABEL),
+        )
+    else:
+        check = db_conn.query(
+            "SELECT 1 FROM timetable_master WHERE year = %s AND sem = %s AND sec = %s LIMIT 1",
+            (new_year, new_sem, new_sec),
+        )
     if not check:
         raise TimetableError(
             f"No timetable found for Year {new_year}, Semester {new_sem}, Section '{new_sec}'.",
