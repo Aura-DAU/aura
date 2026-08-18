@@ -238,11 +238,23 @@ def _narrow_by_dept(rows: list[dict], dept: Optional[str]) -> list[dict]:
     needle = (dept or "").strip().lower()
     if not needle or not rows:
         return rows
-    narrowed = [
-        r for r in rows
-        if needle in (r.get("branch") or "").lower() or needle in (r.get("program") or "").lower()
-    ]
-    return narrowed if narrowed else rows
+    out = []
+    for r in rows:
+        branch = (r.get("branch") or "").strip()
+        program = (r.get("program") or "").strip()
+        if not branch and not program:
+            # Untagged rows (e.g. the 2nd/3rd-year Core batches called out
+            # above) are ambiguous by design, never confirmed to belong to a
+            # different dept — always keep them regardless of whether other
+            # rows in this set happen to match `dept`. Previously this used
+            # "narrowed if narrowed else rows", which only guarded the
+            # all-empty case: a single matching row anywhere in the set was
+            # enough to silently drop every untagged Core row alongside it.
+            out.append(r)
+            continue
+        if needle in branch.lower() or needle in program.lower():
+            out.append(r)
+    return out
 
 
 def _normalize_dept(value: Optional[str]) -> str:
