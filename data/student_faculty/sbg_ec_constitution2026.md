@@ -1,5 +1,5 @@
 ---
-title: "EC Constitution2026"
+title: "EC Constitution 2026"
 url: "#"
 category: "SBG & Clubs - Policies And Guidelines"
 scraped_by: "Madhav Thesiya"
@@ -10,83 +10,50 @@ original_name: "EC_Constitution2026.pdf"
 authorization: ["student", "faculty"]
 ---
 
-# EC Constitution2026
+# EC Constitution 2026
 
-Contents
+> Reformatted (2026-08-09): Table of Contents had dot-leader page numbers merged into every entry (PDF-extraction artifact) — cleaned up below. Body content unchanged.
 
-1. The Election Commission .................................................................... 1
+## Contents
 
-1.1 Roles and Responsibilities ................................................................................. 1
+- 1. The Election Commission
+- 1.1 Roles and Responsibilities
+- 1.2 Composition of the Election Commission
+- 1.3 Eligibility Criteria for the Post of Election Commissioner / Election Officer
+- 1.4 Appointment of the Election Commissioner / Election Officer
+- 1.5 Tenure of the Election Commissioner / Election Officer
+- 1.6 Resignation of the Election Commissioner / Election Officer
+- 1.7 Impeachment of the Election Commissioner / Election Officer
+- 1.8 Voting by the Members of the EC
+- 1.9 Members of the EC in the Elections
+- 1.10 Autonomy of the Election Commission
+- 1.11 Discretionary Powers
+- 2. The General Elections
+- 2.1 Eligibility to Vote
+- 2.2 Eligibility to Contest
+- 2.3 Outline
+- 2.4 Candidate Manifesto
+- 2.5 Opening of Nominations
+- 2.6 Address by the Previous Committees
+- 2.7 Nomination Withdrawal Period
+- 2.8 Janta Ki Adalat
+- 2.9 Polling Day
+- 3. SBG Core Elections
+- 3.1 Elected Officials
+- 3.2 Election Format
+- 3.3 Election Process
+- 4. Autumn Semester Elections
+- 5. By-Elections
+- 6. Voting System
+- 6.1 Preferential Voting
+- 6.2 Evaluation Algorithm
+- 6.3 Tie-Breakers
+- 6.4 Voting Method
+- 7. Code of Conduct
+- 8. Referendums
+- 9. Grievances Committee
+- 10. Amendments to the Constitution
 
-1.2 Composition of the Election Commission ........................................................ 1
-
-1.3 Eligibility Criteria for the Post of Election Commissioner / Election Officer .. 3
-
-1.4 Appointment of the Election Commissioner / Election Officer ....................... 3
-
-1.5 Tenure of the Election Commissioner / Election Officer ................................. 4
-
-1.6 Resignation of the Election Commissioner / Election Officer ......................... 4
-
-1.7 Impeachment of the Election Commissioner / Election Officer ...................... 4
-
-1.8 Voting by the Members of the EC ..................................................................... 5
-
-1.9 Members of the EC in the Elections .................................................................. 5
-
-1.10 Autonomy of the Election Commission .......................................................... 5
-
-1.11 Discretionary Powers ....................................................................................... 5
-
-2. The General Elections ........................................................................ 7
-
-2.1 Eligibility to Vote ............................................................................................... 7
-
-2.2 Eligibility to Contest ......................................................................................... 7
-
-2.3 Outline ............................................................................................................... 8
-
-2.4 Candidate Manifesto ......................................................................................... 8
-
-2.5 Opening of Nominations ................................................................................... 8
-
-2.6 Address by the Previous Committees ............................................................... 9
-
-2.7 Nomination Withdrawal Period ..................................................................... 10
-
-2.8 Janta Ki Adalat................................................................................................ 10
-
-2.9 Polling Day ....................................................................................................... 11
-
-3. SBG Core Elections ............................................................................ 12
-
-3.1 Elected Officials ............................................................................................... 12
-
-3.2 Election Format .............................................................................................. 12
-
-3.3 Election Process .............................................................................................. 12
-
-4. Autumn Semester Elections .............................................................. 14
-
-5. By-Elections ...................................................................................... 15
-
-6. Voting System ................................................................................... 16
-
-6.1 Preferential Voting .......................................................................................... 16
-
-6.2 Evaluation Algorithm...................................................................................... 16
-
-6.3 Tie-Breakers .................................................................................................... 16
-
-6.4 Voting Method ................................................................................................. 17
-
-7. Code of Conduct ................................................................................ 18
-
-8. Referendums ................................................................................... 20
-
-9. Grievances Committee ...................................................................... 21
-
-10. Amendments to the Constitution .................................................... 22
 
 ### 1 The Election Commission
 

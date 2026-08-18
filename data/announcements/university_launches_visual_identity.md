@@ -1,13 +1,17 @@
 ---
-title: "About us / Message from president"
-url: "https://daiict.ac.in/dhirubhai-ambani-university-launches-its-visual-identity"
+title: "Dhirubhai Ambani University Launches Its Visual Identity"
+url: "https://www.daiict.ac.in/dhirubhai-ambani-university-launches-its-visual-identity"
 category: "Announcements"
 scraped_by: "Meet Virugama"
 scraped_date: "2026-05-31"
 team: "Team D"
+reverified_date: "2026-08-16"
+correction_note: "Title was previously 'About us / Message from president' — a generic nav-breadcrumb label that didn't reflect the actual content (the President's message on DAU's new visual identity launch). Corrected. URL also normalized to include www."
 ---
 
 # Overview
+
+President's message from Tina Ambani (President, Dhirubhai Ambani University) announcing the launch of DAU's new visual identity, marking the institution's transition from DA-IICT to a multidisciplinary university.
 
 # Main Content
 

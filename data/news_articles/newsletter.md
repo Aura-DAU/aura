@@ -13,6 +13,8 @@ This page contains downloadable volumes of the DA-IICT newsletter.
 
 # Main Content
 
+> **Update (2026-08-16):** Full curated content for 5 of these 6 newsletter volumes has now been scraped into `announcements/` as separate files: `da_iict_newsletter_jan_jun_2020.md`, `da_iict_newsletter_july_december_2020.md`, `da_iict_newsletter_jan_jun_2021.md`, `da_iict_newsletter_jul_dec_2022.md`, `da_iict_newsletter_jan_sept_2023.md`. Only "Newsletter Vol-4 (July 2021 – June 2022)" below remains link-only — its full content hasn't been captured yet.
+
 This page contains downloadable volumes of the DA-IICT newsletter.
 
 # Downloadable Resources

@@ -21,12 +21,8 @@ Using massively parallel 2D-3V Particle-In-Cell Monte Carlo Collisions (PIC-MCC)
 # Important Information
 
 - Date of Announcement: 01/12/2023
-- Phone: 41598-023
 
 # Related Links
 
 - [http://www.nature.com/articles/s41598-023-45656-5](http://www.nature.com/articles/s41598-023-45656-5)
 
-# Contact Information
-
-Phone: 41598-023

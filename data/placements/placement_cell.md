@@ -149,11 +149,35 @@ Students undergo continuous hands-on learning through summer, winter, and rural 
 
 ## Placement Cell: Team
 
+> **Correction note (re-scrape, 2026-08-06):** The original scrape captured only the section headers below with no member data — the live page's Team/Student Placement Cell sections use rendering the original scraper didn't capture. Filled in from a fresh fetch of https://www.daiict.ac.in/placements.
+
+| Name | Role | Contact |
+|---|---|---|
+| Prof. Yash Agrawal | Placement Convener | pc_convenor[at]dau[dot]ac[dot]in, (+91) 079-68261629 |
+| Prof. Saurabh Tiwari | Jt. Placement Convener | pc_jtconvenor[at]dau[dot]ac[dot]in, (+91) 079-68261618 |
+| Mr. Souvik Sarkar | Head - Career Planning, Placement & Marketing | head_cpm[at]dau[dot]ac[dot]in, (+91) 9320301228 |
+| Ms. Deepali Sharma | Assistant Manager - Placement | deepali_sharma[at]dau[dot]ac[dot]in, (+91) 8160567370 / (+91) 079-68261616 |
+| Ms. Anuradha Srivastava | Assistant Manager - Placement | placement_office[at]dau[dot]ac[dot]in, (+91) 9328994143 / (+91) 079-68261646 |
+
+> **⚠️ Important — this supersedes the Placement Brochure PDF and older KB records:** As of this re-scrape, the live page names **Prof. Yash Agrawal** as Placement Convener (not Prof. Hemant A. Patil, who is named as Convener in the Placement Brochure 2025-26 PDF and in `iprs_report_2023_24_v2.md` — that PDF appears to predate this change and hasn't been reprinted). Contact emails have also migrated from the `@daiict.ac.in` domain (used in the Brochure PDF) to `@dau.ac.in` (used on the live site). If asked "who is the placement convener," answer with **Prof. Yash Agrawal** as the current name, and note Prof. Saurabh Tiwari remains Jt. Convener.
+>
+> **Independent corroboration (2026-08-06):** `data/student_faculty/sbg_club_committee_information_2026_27_responses.md` records a Student Body Government committee-info submission dated **2026-07-03** naming the Student Placement Cell's faculty mentors as **"Prof. Yash Agarwal and Prof. Saurabh Tiwari."** The equivalent 2025-26 submission (`sbg_club_committee_c_dcs_information_2025_26.md`) instead names **"Prof. Hemant patil, Prof. Saurabh tiwari."** This independently confirms the Patil → Agrawal handover happened sometime between the 2025-26 and 2026-27 tenures, consistent with the live-page finding above.
+
 ## Student Placement Cell
 
-Student Placement Cell - 2026
+> **Correction note (re-scrape, 2026-08-06):** Cross-checked against `data/student_faculty/sbg_tenure_25_26_core_members_name.md` (the SBG's own official roster) — more authoritative than the website scrape and includes one member (Zenil Rupapareliya) the website's public bios list omitted. Merged below. Phone numbers appear in the SBG source files but are deliberately excluded here as personal contact info.
 
-Student Placement Cell - 2025
+**Student Placement Cell (2025-26 tenure)** — per SBG official roster: Convener Jevik Rakholiya (handover from outgoing Convener Rishit Unadkat), Dy. Convener Chaitanya Vats (handover from outgoing Dy. Convener Kartavya Akabari). Members: Aarsh Adhvaryu, Abhishekh Abbi, Aditya Desai, Akshada Modak, Ansh Pandya, Devrajsinh Gohil, Digvijaysinh Dodiya, Dushyant Varshney, Heet Shah, Jay Limbasiya, Jay Shah, Jay Unadkat, Jeet Sadaria, Jevik Bhalodia, Kathan Shah, Krish Bhingradiya, Kshitij Purohit, Madhavan Dinesh, Maharshi Patel, Mahir Shah, Manjiri Bhosale, Meet Gandhi, Meet Vaghasiya, Mrunali Parmar, Neel Vasoya, Shubham Varmora, Yash Agarwal, Yash Judal, **Zenil Rupapareliya**.
+
+**Student Placement Cell (2026-27 tenure, confirmed 2026-07-03):** Convener Jevik Rakholiya, Dy. Convener Chaitanya Vats — email `spc@dau.ac.in`. Faculty mentors: Prof. Yash Agarwal and Prof. Saurabh Tiwari.
+
+*(Website-scraped 2026 and 2025 rosters with LinkedIn profile links remain below for reference, but the SBG roster above is the more authoritative source for current committee membership.)*
+
+**Student Placement Cell - 2026** (Convener: Jevik Rakholiya, Deputy Convener: Chaitanya Vats), members: Heet Shah, Dushyant Varshney, Shubham Varmora, Modak Akshada Rajesh, Maharshi Patel, Jevik Bhalodia, Mahir Shah, Mrunali Parmar, Yash Agarwal, Jay Limbasiya, Kshitij Purohit, Madhavan Dinesh, Yash Judal, Devrajsinh Gohil, Jeet Sadaria, Meet Vaghasiya, Kathan Ravi Shah, Digvijaysinh Dodiya, Jay Shah, Jay Unadkat, Anchita Menon, Manjiri Bhosale, Meet Gandhi, Aarsh Adhvaryu, Ankur Jaglan.
+
+**Student Placement Cell - 2025** (Convener: Rishit Unadkat, Deputy Convener: Kartavya Akabari), members: Pari Chauhan, Ansh Pandya, Abhishek Abbi, Vasoya Neel, Desai Aditya Veeral, Krish Bhingradiya, Heet Shah, Jevik Rakholiya, Dushyant Varshney, Chaitanya Vats, Shubham Varmora, Modak Akshada Rajesh, Maharshi Patel, Jevik Bhalodia, Mahir Shah, Mrunali Parmar, Yash Agarwal, Jay Limbasiya, Kshitij Purohit, Madhavan Dinesh, Yash Judal, Arya Joshi, Nischay Agrawal, Harsh Thakkar, Mohammed Ammar Karimi, Kathan Shah, Rahul Tiwari, Meet Baxi, Tanya Mehra, Hardik Bharvada, Heer Chokshi.
+
+*(Full profiles with LinkedIn links are on the live page; only names/roles captured here to keep the KB entry compact.)*
 
 ## Contact
 

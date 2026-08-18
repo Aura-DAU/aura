@@ -55,9 +55,11 @@ The **Cafeteria Management Committee (CMC)** is an official student committee un
 | Detail | Information |
 |--------|-------------|
 | **Role** | Addresses cafeteria-related issues, conducts regular inspections, ensures proper hygienic standards, acts as intermediary between students and administration |
-| **Convener** | Yug Tejani |
-| **Deputy Convener** | Prince Sojitra |
+| **Convener** | Prince Sojitra |
+| **Deputy Convener** | Varshil Shah |
 | **Email** | cmc@dau.ac.in |
+
+*(Updated 2026-08-12 to the 2026-27 tenure, per `student_faculty/sbg_club_committee_c_dcs_information_2026_27.md`.)*
 
 ---
 

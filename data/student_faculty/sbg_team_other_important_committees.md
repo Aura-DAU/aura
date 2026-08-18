@@ -12,76 +12,67 @@ authorization: ["student", "faculty"]
 
 # SBG Team and Other Important Committees
 
+> Reformatted (2026-08-09): converted redundant pipe-separated bullet rows into tables; phone numbers excluded as personal contact info (PII) not appropriate for this KB. Content otherwise unchanged.
+
 ## SBG Core Team
 
-- **Club/Committee:** SBG Core Team | **Name:** Yash Judal | **Role:** Convener
-
-- **Club/Committee:** SBG Core Team | **Name:** Dev Sanghani | **Role:** Deputy Convener
-
-- **Club/Committee:** SBG Core Team | **Name:** Madhav Bhatt | **Role:** Treasurer
-
-- **Club/Committee:** SBG Core Team | **Name:** Siddh Shah | **Role:** Secretary
+| Name | Role |
+|---|---|
+| Yash Judal | Convener |
+| Dev Sanghani | Deputy Convener |
+| Madhav Bhatt | Treasurer |
+| Siddh Shah | Secretary |
 
 ### Tenure 25-26
 
-- **Club/Committee:** SBG Core Team - Tenure 25-26 | **Name:** Parshv Joshi | **Role:** Convener
-
-- **Club/Committee:** SBG Core Team - Tenure 25-26 | **Name:** Pratham Lakhani | **Role:** Deputy Convener
-
-- **Club/Committee:** SBG Core Team - Tenure 25-26 | **Name:** Bhavya Boda | **Role:** Treasurer
-
-- **Club/Committee:** SBG Core Team - Tenure 25-26 | **Name:** Jayansh Gaadhe | **Role:** Secretary
+| Name | Role |
+|---|---|
+| Parshv Joshi | Convener |
+| Pratham Lakhani | Deputy Convener |
+| Bhavya Boda | Treasurer |
+| Jayansh Gaadhe | Secretary |
 
 ### Tenure 24-25
 
-- **Club/Committee:** SBG Core Team - Tenure 24-25 | **Name:** Siddhant Gupta | **Role:** Convener
-
-- **Club/Committee:** SBG Core Team - Tenure 24-25 | **Name:** Vivek Chaudhari | **Role:** Deputy Convener
-
-- **Club/Committee:** SBG Core Team - Tenure 24-25 | **Name:** Yash Tarpara | **Role:** Treasurer
-
-- **Club/Committee:** SBG Core Team - Tenure 24-25 | **Name:** Pari Chauhan | **Role:** Secretary
+| Name | Role |
+|---|---|
+| Siddhant Gupta | Convener |
+| Vivek Chaudhari | Deputy Convener |
+| Yash Tarpara | Treasurer |
+| Pari Chauhan | Secretary |
 
 ## Anti Ragging Committee
 
 ### Student Body Government Core Members
 
-- **Club/Committee:** Anti Ragging Committee - Student Body Government Core Members | **Name:** Yash Judal (Convener) | **Student ID:** 202404014 | **Phone Number:** 9427636175
-
-- **Club/Committee:** Anti Ragging Committee - Student Body Government Core Members | **Name:** Dev Sanghani (Dy. Convener) | **Student ID:** 202401047 | **Phone Number:** 9909655638
-
-- **Club/Committee:** Anti Ragging Committee - Student Body Government Core Members | **Name:** Madhav Bhatt (Treasurer) | **Student ID:** 202401030 | **Phone Number:** 9227013499
-
-- **Club/Committee:** Anti Ragging Committee - Student Body Government Core Members | **Name:** Siddh Shah (Secretary) | **Student ID:** 202401473 | **Phone Number:** 9586629207
+| Name | Student ID |
+|---|---|
+| Yash Judal (Convener) | 202404014 |
+| Dev Sanghani (Dy. Convener) | 202401047 |
+| Madhav Bhatt (Treasurer) | 202401030 |
+| Siddh Shah (Secretary) | 202401473 |
 
 ### Student Committee Members
 
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Rishank Dudhat | **Student ID:** 202301068 | **Phone Number:** 8866077883
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Yug Malaviya | **Student ID:** 202401256 | **Phone Number:** 9974248373
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Shubham Chavda | **Student ID:** 202404005 | **Phone Number:** 6352323901
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Solanki Tanish Mehulbhai | **Student ID:** 202401264 | **Phone Number:** 9537414015
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Madhavan Dinesh | **Student ID:** 202403026 | **Phone Number:** 6353910047
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Shubham Patel | **Student ID:** 202403043 | **Phone Number:** 9313240959
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Rensi Vaghasiya | **Student ID:** 202501473 | **Phone Number:** 7435087560
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Praveen B | **Student ID:** 202501082 | **Phone Number:** 8328602348
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Kashish Chauhan | **Student ID:** 202501149 | **Phone Number:** 8077311532
-
-- **Club/Committee:** Anti Ragging Committee - Student Committee Members | **Name:** Harshrajsinh Gohil | **Student ID:** 202501090 | **Phone Number:** 9023753612
+| Name | Student ID |
+|---|---|
+| Rishank Dudhat | 202301068 |
+| Yug Malaviya | 202401256 |
+| Shubham Chavda | 202404005 |
+| Solanki Tanish Mehulbhai | 202401264 |
+| Madhavan Dinesh | 202403026 |
+| Shubham Patel | 202403043 |
+| Rensi Vaghasiya | 202501473 |
+| Praveen B | 202501082 |
+| Kashish Chauhan | 202501149 |
+| Harshrajsinh Gohil | 202501090 |
 
 ## Internal Complaints Committee
 
 ### Student Committee Members
 
-- **Club/Committee:** Internal Complaints Committee - Student Committee Members | **Name:** Hemal Chavda | **Student ID:** 202301451 | **Designation:** UG Representative (Male)
-
-- **Club/Committee:** Internal Complaints Committee - Student Committee Members | **Name:** Harita Rathod | **Student ID:** 202301211 | **Designation:** UG Representative (Female)
-
-- **Club/Committee:** Internal Complaints Committee - Student Committee Members | **Name:** Nishka Shah | **Student ID:** 202512035 | **Designation:** PG Representative (Female)
+| Name | Student ID | Designation |
+|---|---|---|
+| Hemal Chavda | 202301451 | UG Representative (Male) |
+| Harita Rathod | 202301211 | UG Representative (Female) |
+| Nishka Shah | 202512035 | PG Representative (Female) |

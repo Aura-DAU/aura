@@ -1,9 +1,9 @@
 ---
 title: "LinkedIn"
 url: "https://www.linkedin.com/school/dhirubhaiambaniuniversity/?viewAsMember=true"
-category: "Student_services"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-05-31"
+category: "Social Media"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 

@@ -5,6 +5,7 @@ category: "Academics"
 scraped_by: "Khushi Gandhi"
 scraped_date: "2026-06-01"
 team: "Team A"
+authorization: ["guest"]
 ---
 
 # Overview
@@ -23,9 +24,9 @@ I invite you to visit our campus and interact with our faculty, staff and studen
 
 The Dean (Academic Programs) has broad responsibility for the academic affairs of the Institute. He may from time to time issue instructions for carrying out the regulations relating to academic requirements of all undergraduate and postgraduate programs of the Institute. He is responsible for organizing the semester-wise academic offerings and the designation of faculty to serve as instructors and coordinators for courses and other academic components such as projects and internships. He exercises special powers relating to withdrawal from semester, constitution of examination committees, probationary students, etc. He also serves as International Students Adviser.
 
-**Contact details:** dean\_ap[at]dau[dot]ac[dot]in
+**Contact details:** dean_ap[at]dau[dot]ac[dot]in
 
-## Contact Information
+## Officials
 
 ### Mr. Jalpesh Pandya
 
@@ -44,7 +45,3 @@ Position: Executive Assistant – Dean (AP)
 Email: dean-ap_office[at]dau[dot]ac[dot]in
 
 Phone: (+91) 079-68261733
-
----
-
-

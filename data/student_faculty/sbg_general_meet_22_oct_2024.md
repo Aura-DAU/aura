@@ -8,55 +8,30 @@ team: "Madhav Thesiya"
 source_type: "PPTX"
 original_name: "General Meet_ 22 Oct 2024.pptx"
 authorization: ["student", "faculty"]
+reorganized_date: "2026-08-09"
 ---
 
-# General Meet  22 Oct 2024
+# SBG General Meet — 22/10/2024
 
-### SBG General Meet
+> Reformatted (2026-08-09): the original PPTX extraction split each slide's roman-numeral agenda label across multiple broken lines (e.g. "IV" appeared as separate "I" and "V" lines). Reconstructed as a clean numbered agenda below; content unchanged.
 
-### DATE :- 22/10/2024
+**Date:** 22/10/2024
 
-### Agenda
+## Agenda
 
-### I
+### I. Increase in Seat Matrix — Cafeteria Management Committee (CMC)
+Extend 2 selection seats due to recent developments in the cafeteria.
 
-- Increase in Seat Matrix:
-- Cafeteria Management Committee
-- To extend 2 selection seats because of the recent developments in the cafeteria.
+### II. Increase in Seat Matrix — Annual Festival Committee
+Extend 3 selection seats due to increasing workload.
 
-### Agenda
+### III. Awards for Student Clubs and Committees
+Introduce a structured reward system for student clubs and committees.
 
-### II
+### IV. Reforming the Structure of Student Placement Cell
+- Changes in the seat matrix
+- Convener & Deputy Convener for PG batches
+- Minimum CPI criteria
 
-- Increase in seat matrix:
-- Annual Festival Committee
-- To extend 3 selection seats because of increasing workload.
-
-### Agenda
-
-### III
-
-- Awards for Student Clubs and Committees
-- Initiatives:
-- Introduce a structured reward system for the student clubs and committees.
-
-### Agenda
-
-### I
-
-### V
-
-- Reforming the structure of Student Placement Cell
-- Changes in the seat matrix.
-- Convenor & Deputy Convenor for PG batches.
-- Minimum CPI Criteria.
-
-### Agenda
-
-### V
-
-- Compulsory attendance in JKA for 1st & 2nd year students
-- Will help in making informed decisions about the
-- representatives
-
-- Thank You
+### V. Compulsory Attendance in JKA (Janta Ki Adalat) for 1st & 2nd Year Students
+Will help in making informed decisions about representatives.

@@ -1,48 +1,27 @@
 ---
-title: "People / Alumini / Alumini Association"
+title: "People / Alumni / Alumni Association"
 url: "https://www.daiict.ac.in/alumni-association.html"
-category: "Student_services"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-05-31"
+category: "Alumni"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 
 # Overview
 
-The Alumni Association closely collaborates with the institute for strong alumni connect with Alma Mater.
+Page describing the DA-IICT Alumni Association, its mission, and contact channel. Note: the canonical URL now appears to be https://www.daiict.ac.in/alumni-association (without ".html"); the .html variant still resolves.
 
 # Main Content
 
-# Alumni Association
+The DA-IICT Alumni Association exists to create and maintain a life-long association between the Institute and its alumni. The Association works to connect alumni, support students, and build an extraordinary Institute experience through a diversity of events and celebrated traditions.
 
-The Alumni Association closely collaborates with the institute for strong alumni connect with Alma Mater.
+The mission of the Association is to cultivate strong bonds between alumni, students, and the Institute — keeping alumni acquainted and creating a network that lets them stay involved with their alma mater. The goal is to be an active partner in DA-IICT's success through significant alumni engagement.
 
-Our goal is to be an active partner in the success of DA-IICT through the significant engagement of its alumni. Feel free to connect with us if you have any ideas or suggestion which could help us in this goal.
-
-### Alumni Association Members
-
-Name | Designation  
----|---  
-Sh Rajiv Kumar Raju | **President** , DA-IICT Alumni Association  
-Sh Manish Mohan | **Vice President**  
-Sh Gunjan Arya | **Secretary** (Official Spokesperson)  
-Sh Gaurav Lohiya | **Treasurer**  
-Sh G Sriram | **Joint Secretary** (Nodal for Placements)  
-Sh Vishal Raj | **Joint Secretary** (Nodal for Sports/Outdoor)  
-Sh Aunindra Sinha | **Member** , Outreach  
-Sh Rajasekhar Reddi | **Member** , Coordination  
-Ms AL Prashanthi | **Member** , Fundraising  
-Ms Shradhha Menpara | **Member** , Fundraising  
-Ms Kirtana Phatnani | **Member** , SBG Coordination  
-Dr Vinod K Mall | **Member** , Special Advisor (Strategic Dialogue)  
-Sh Jyotiraditya | **Ex Officio Member** , Special Advisor (Alumni Relations)  
-Prof Anil Roy | **Faculty Representative**  
-Prof Sanjay Srivastava | **Faculty Representative**  
-  
-Alumni association can be reached on alumni_association[at]daiict[dot]ac[dot]in
+**Contact:** alumni[at]daiict[dot]ac[dot]in (representatives of the Association); the separate Alumni Association Members contact is alumni_association[at]daiict[dot]ac[dot]in.
 
 # Related Links
 
-- [People / Alumini / Alumini Association](https://www.daiict.ac.in/alumni-association.html)
-- [Dhirubhai Ambani University Website](https://www.daiict.ac.in)
-
+- [Original Page](https://www.daiict.ac.in/alumni-association.html)
+- [Current canonical page](https://www.daiict.ac.in/alumni-association)
+- [Alumni](https://www.daiict.ac.in/alumni)
+- [DAU Website](https://www.daiict.ac.in)

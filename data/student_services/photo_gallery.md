@@ -1,26 +1,26 @@
-﻿---
+---
 title: "Photo Gallery"
 url: "https://daiict.ac.in/photo-gallery"
-category: "Student Services"
-scraped_by: "Madhav Thesiya"
-scraped_date: "2026-05-30"
+category: "Campus"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 
 # Overview
 
-Photo Gallery at Dhirubhai Ambani University (DAU), Gandhinagar.
+Photo gallery landing page for Dhirubhai Ambani University (DAU), Gandhinagar, organized into 5 albums.
 
 # Main Content
 
-Birds sighted at DA-IICT
-Campus
-Nature
-Miscellaneous
-Student Activities
+- **Birds sighted at DA-IICT** — https://www.daiict.ac.in/photo-gallery/8632
+- **Campus** — https://www.daiict.ac.in/photo-gallery/1537
+- **Nature** — https://www.daiict.ac.in/photo-gallery/1814
+- **Miscellaneous** — https://www.daiict.ac.in/photo-gallery/1593
+- **Student Activities** — https://www.daiict.ac.in/photo-gallery/6
 
 # Related Links
 
 - [Original Page](https://daiict.ac.in/photo-gallery)
-- [Parents](https://daiict.ac.in/parents)
+- [Parents](https://www.daiict.ac.in/parents)
 - [DAU Website](https://www.daiict.ac.in)

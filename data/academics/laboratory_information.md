@@ -11,6 +11,9 @@ source_file: " Laboratory-Related Information.docx"
 
 # Laboratory-Related Information
 
+> [!NOTE]
+> The source for this information is located on the DA-IICT Intranet portal, which requires a valid student or faculty login to access.
+
 ## Overview
 
 Dhirubhai Ambani University (DA-IICT) maintains a dedicated Laboratory Complex housing the equipment and facilities used for practical components of courses. Lab-related information — including manuals, timings, guidelines, and safety rules — is typically provided by the **respective course instructor** or **lab in-charge** at the start of each semester.

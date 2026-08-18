@@ -18,15 +18,15 @@ The M.Des. in Intelligent User Experience Design (IUxD) at Dhirubhai Ambani Univ
 |  |  |
 | --- | --- |
 | Online application website opens | **24 March 2026** |
-| Last date for submission of online applications **(Revised)** | **05 June 2026** |
+| Last date for submission of online applications **(Closed)** | **05 June 2026** |
 | Entrance test | 26 June 2026 |
-| Date of Interview | TBD |
-| Announcement of Merit List | TBD |
-| Last date for fees payment for confirmed candidates in first round | TBD |
-| Announcement of Confirmed and Waitlisted Admissions | TBD |
-| Registration and document verification at DAIICT campus for confirmed candidates (**Tentative**) | 14 July 2026 |
-| Orientation Program **(Tentative)** | 15-17 July 2026 |
-| Commencement of classes **(Tentative)** | 20 July 2026 |
+| Date of Interview **(Online)** | 03-04 July 2026 |
+| Announcement of Merit List | **08 July 2026** |
+| Last date for fees payment for confirmed candidates in first round | 08 - 13 July 2026 |
+| Announcement of Confirmed and Waitlisted Admissions | 15 July 2026 |
+| Registration and document verification at DAIICT campus for confirmed candidates | 20 July 2026 |
+| Orientation Program | 21-23 July 2026 |
+| Commencement of classes | 22 July 2026 |
 
 ## Program Overview
 
@@ -48,15 +48,19 @@ Graduates will be equipped to work across industries like Technology, EVs, Retai
 
 The MDes (IUxD) is a full-time two-year program, which is divided into four semesters. This Program extends traditional UX, UI, and interaction design principles to enable intuitive interactions with smart and autonomous systems, ensuring that the user experience remains meaningful and effective in an increasingly intelligent technological landscape. The program also includes conversations and debates on the ethics, challenges and uses of ‘intelligent technologies’ to create sensitive designers who can visualize, leverage and integrate products and services in a socially and culturally sensitive manner.
 
-The detailed course structure consisting of both core courses and elective courses can be found **here**
+The detailed course structure consisting of both core courses and elective courses can be found [**here**](https://www.daiict.ac.in/mdes-intelligent-user-experience-design)
+
+The program brochure can be found **[here](https://www.daiict.ac.in/sites/default/files/other-files/MDes-IUxD_Brochure-25.pdf)**.
 
 ## Placement Statistics
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-****
+![Details_of_M.Tech.-ICT_placed_students](https://www.daiict.ac.in/sites/default/files/other-images/Placement_Statistics_PG-2026.png)
 
 ### **Top Recruiters:**
+
+![Top_Recruiters_M.Tech](https://www.daiict.ac.in/sites/default/files/other-images/Placement-2025.jpg)
 
 
 
@@ -199,7 +203,7 @@ Total seats: 25
 
 The MDes (IUxD) is a full-time two-year program, which is divided into four semesters. This Program extends traditional UX, UI, and interaction design principles to enable intuitive interactions with smart and autonomous systems, ensuring that the user experience remains meaningful and effective in an increasingly intelligent technological landscape. The program also includes conversations and debates on the ethics, challenges and uses of ‘intelligent technologies’ to create sensitive designers who can visualize, leverage and integrate products and services in a socially and culturally sensitive manner.
 
-The detailed course structure consisting of both core courses and elective courses can be found here
+The detailed course structure consisting of both core courses and elective courses can be found [here](https://www.daiict.ac.in/mdes-intelligent-user-experience-design)
 
 ### Is an educational loan available for the M.Des. program?
 

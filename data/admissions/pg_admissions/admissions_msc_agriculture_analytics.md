@@ -18,15 +18,15 @@ The M.Sc. (Agriculture Analytics) is Jointly offered by DAU (Formerly DA-IICT), 
 |  |  |
 | --- | --- |
 | Online application website opens | **24 March 2026** |
-| Last date for submission of online applications **(Revised)** | **05 June 2026** |
+| Last date for submission of online applications **(Closed)** | **05 June 2026** |
 | Entrance test | 26 June 2026 |
-| Date of Interview | TBD |
-| Announcement of Merit List | TBD |
-| Last date for fees payment for confirmed candidates in first round | TBD |
-| Announcement of Confirmed and Waitlisted Admissions | TBD |
-| Registration and document verification at DAU campus for confirmed candidates (**Tentative**) | 14 July 2026 |
-| Orientation Program **(Tentative)** | 15-17 July 2026 |
-| Commencement of classes **(Tentative)** | 20 July 2026 |
+| Date of Interview **(Online)** | 03-04 July 2026 |
+| Announcement of Merit List | **08 July 2026** |
+| Last date for fees payment for confirmed candidates in first round | 08 - 13 July 2026 |
+| Announcement of Confirmed and Waitlisted Admissions | 15 July 2026 |
+| Registration and document verification at DAU campus for confirmed candidates | 20 July 2026 |
+| Orientation Program | 21-23 July 2026 |
+| Commencement of classes | 22 July 2026 |
 
 ## Program Overview
 
@@ -44,7 +44,7 @@ A unique feature of this program is introduction of value added courses to be of
 
 The M.Sc. Agriculture Analytics Program follows a full time four-semester pattern and the curriculum consists of three semesters of course work followed by a one-semester project/research work on a specified topic. During summer semester, Value Added Courses (VAC) will be organized at DAU (Formerly DA-IICT) by the Industries/Academia. The VAC comes with certification after successful completion
 
-The detailed Program structure can be found here
+The detailed Program structure can be found [here](https://www.daiict.ac.in/msc-agriculture-analytics)
 
 ## Intake
 

@@ -1,9 +1,9 @@
 ---
-title: "People / Alumini / DAU Alumini Chapter Membership Drive"
+title: "People / Alumni / DAU Alumni Chapter Membership Drive"
 url: "https://www.daiict.ac.in/dau-alumni-chapter-membership-drive"
-category: "Student_services"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-05-31"
+category: "Alumni"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 

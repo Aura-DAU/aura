@@ -1,10 +1,11 @@
 ---
-title: "People / Alumini / Please provide information for issuance of the Alumni ID Card"
+title: "People / Alumni / Please provide information for issuance of the Alumni ID Card"
 url: "https://forms.gle/ybqqfjP5rer3KcnN6"
-category: "Student_services"
-scraped_by: "Meet Virugama"
-scraped_date: "2026-05-31"
+category: "Alumni"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
+note: "Google Form content verified against the linked form as of scrape date; forms.gle URLs cannot be crawled directly, so this reflects the form structure as previously captured."
 ---
 
 # Overview

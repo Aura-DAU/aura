@@ -1,89 +1,60 @@
 ---
 title: "Grievance Redressal Cell – Comprehensive Guide (v2)"
 url: "https://daiict.ac.in/grievance-redressal-cell"
-category: "Student Services"
-scraped_by: "Parth Agrawal"
-scraped_date: "2026-06-10"
-team: "Team B"
-version: "v2"
-gap_fixes:
-  - "Q243 – First step for dispute resolution at DAU"
+category: "Committees"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
+team: "Team D"
 ---
 
-# Grievance Redressal Cell – Dhirubhai Ambani University (DAU)
+# Overview
 
-## Overview
+Grievance Redressal Procedure for Students and Employees at Dhirubhai Ambani University (DAU), Gandhinagar. Explains scope, grievance types, escalation levels, and submission mechanisms. Matters covered by the Disciplinary Action Committee or Gender Cell are explicitly out of scope.
 
-The Grievance Redressal Cell (GRC) at DAU handles all dissatisfaction or disagreements by students and employees with any aspect of the Institute's activities and services — through a structured, fair, and confidential process.
+# Main Content
 
----
+## Definitions
+- **Grievance**: any student's or employee's dissatisfaction/disagreement with any aspect of the Institute's activities or services (including those involving other students/employees).
+- **Student**: anyone on the Institute's current rolls.
+- **Employee**: any faculty member, officer, or staff on the Institute's rolls.
 
-## 1. First Step for Dispute Resolution
+## 1. Scope
+Maintain an effective Grievance Redressal Handling System (GRHS) that is proactive/preventive and, where problems arise, resolves them through fair, prompt, objective, and sensitive investigation.
 
-> **Q: How should students or employees resolve disputes at DAU as a first step?**
+## 2. Nature of Grievances
+**Student grievances**: Teaching-Learning & Evaluation; Registration/Fees/Results/Transcripts; Internships & Placement; General Amenities & Services; Student-to-Student issues.
+**Employee grievances**: Faculty grievances; Staff grievances.
 
-The community of the Institute should resolve all issues through **discussions and negotiations** using the Grievance Redressal procedure of the Institute. This is always the **first step** before escalating to formal committees.
+## 3. Authority & Procedure
+Three escalation levels (Level-I to Level-III); Level-III decisions are final with no further appeal. Grievances of students are typically resolved by course instructor/mentor, Program Coordinator/Convenor, Deans' Office, Hostel Wardens, Registrar's Office, Controller of Examinations, or Placement Office as applicable. Faculty/staff grievances go to their reporting authority first.
 
-**The First Step is:**
-> Raise the grievance through the **Grievance Redressal Handling System (GRHS)** — attempt resolution through discussion and negotiation at the lowest appropriate level first.
+**Grievance Redressal Handling Committee (GRHC):**
+- Chairperson: Prof. Madhumita Mazumdar
+- Member: Dean-Academic Programs
+- Ex-officio Member: Dean-Students
+- Ex-officio Member: Director-IQAC
+- Member: Dr. Rashmi Kumbar
+- Ex-officio Member Secretary: Deputy Registrar
 
----
+Formal grievance-authority tables (Students / Faculty / Staff) are linked from the live page.
 
-## 2. Scope of the Grievance Redressal Handling System (GRHS)
+## 4. Handling & Resolution Timeline
+- Level-I authority responds within **1 week**.
+- If escalated, Level-II responds within **1 week** of receiving the appeal.
+- If escalated further, Level-III decides within **2 weeks**; its decision is final.
 
-The GRHS covers:
-- **Students:** Any student on the current rolls of the Institute
-- **Employees:** Any faculty member, officer, or staff on the rolls of the Institute
+## 5. Confidentiality & Prevention
+Confidentiality is maintained throughout. Records of handled grievances and outcomes are kept for **5 years**. There is no cost to the complainant. False/frivolous complaints may result in action against the complainant at the Designated Authority's discretion.
 
-> **Out of Scope:** Matters related to the **Disciplinary Action Committee (DAC)** and **Gender Cell** are outside the scope of the GRHS.
+## Submission Mechanism
+- Online portal: https://grc.daiict.ac.in:8443/
+- Hardcopy form (available from Deans' Office, Registrar's Office, IQAC Office, Hostel Wardens), emailed to the relevant grievance authority.
 
----
+# Related Links
 
-## 3. Grievance Redressal Procedure
-
-### Standing Operative Principles
-
-1. **Proactive functioning:** GRHS has preventive measures in place by constantly evaluating systems and processes.
-2. **Preventive focus:** Finds appropriate solutions to avoid recurrence of the same or similar problems in the future.
-3. **Fair resolution:** Where a problem still arises, seeks redressal through fair investigation and resolution.
-4. **Prompt & objective:** Any grievances are resolved promptly, objectively, and with sensitivity.
-
-### Procedure Steps
-
-| Step | Action |
-|------|--------|
-| 1 | Attempt informal resolution through discussion with the concerned person or department |
-| 2 | If unresolved, formally submit the grievance through the GRHS |
-| 3 | The grievance is taken up for fair investigation |
-| 4 | Resolution is communicated back to the aggrieved party |
-| 5 | Preventive measures are put in place to avoid recurrence |
-
----
-
-## 4. Nature of Grievances
-
-A **grievance** refers to any of the students'/employees' dissatisfaction or disagreement with any aspect of the Institute's activities and services — including those of other students or employees.
-
----
-
-## 5. Confidentiality
-
-The GRHS maintains confidentiality throughout the process to ensure that grievants feel safe raising concerns without fear of retaliation.
-
----
-
-## 6. Related Committees (Separate from GRHS)
-
-| Committee | Scope |
-|-----------|-------|
-| Disciplinary Action Committee (DAC) | Student misconduct and discipline (separate from GRHS) |
-| Internal Complaints Committee (ICC / Gender Cell) | Sexual harassment and gender-related issues (separate from GRHS) |
-
----
-
-## Related Links
-
-- [Grievance Redressal Cell – DAU Website](https://daiict.ac.in/grievance-redressal-cell)
-- [Internal Complaints Committee](https://daiict.ac.in/internal-complaints-committee)
-- [Dean (Students)](https://www.daiict.ac.in/dean-students)
+- [Original Page](https://daiict.ac.in/grievance-redressal-cell)
+- [Online Grievance Portal](https://grc.daiict.ac.in:8443/)
+- [Table 1 — Student Grievance Authority](https://www.daiict.ac.in/table-1-grievance-redressal-authority-students)
+- [Table 2 — Faculty Grievance Authority](https://www.daiict.ac.in/table-2-grievance-redressal-authority-faculty)
+- [Table 3 — Staff Grievance Authority](https://www.daiict.ac.in/table-3-grievance-redressal-authority-staff)
 - [DAU Website](https://www.daiict.ac.in)

@@ -1,11 +1,17 @@
-﻿---
+---
 title: "Post-doctoral Fellow Position for Project CSR-25/BSES/A10-PK/SELC"
 url: "https://www.daiict.ac.in/node/7076"
 category: "Announcements"
 scraped_by: "Madhav Thesiya"
 scraped_date: "2026-05-30"
 team: "Team D"
+reverified_date: "2026-08-16"
+status: "EXPIRED — application deadline (20 May 2026) has passed"
 ---
+
+# ⚠️ This job posting has expired
+
+**Application deadline was 20th May 2026 — this is now in the past (current date: August 2026).** This file is kept as a historical record of DAU's SELC (Smart Energy Learning Centre) recruitment activity, but should **not** be presented to anyone as a current opportunity. DAU regularly posts new SELC-funded positions (a related Research Fellow posting for a different SELC project, deadline 20 December 2025, was found at a different node URL during this pass — same pattern, same funder BSES Delhi) — direct anyone asking about current openings to check https://www.daiict.ac.in/careers or the SELC/Smart Energy Learning Centre page directly for live listings, rather than relying on this specific posting.
 
 # Overview
 

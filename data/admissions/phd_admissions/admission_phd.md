@@ -18,14 +18,15 @@ School of Technology, Dhirubhai Ambani University (Formerly DA-IICT) invites app
 |  |  |
 | --- | --- |
 | Submission of Online Application Form | **24 March 2026** |
-| Submission of Online Application Form closes on **(Revised)** | **05 June 2026** |
+| Submission of Online Application Form closes on **(Closed)** | **05 June 2026** |
 | Entrance Examination for Candidates not called for direct interview | 26 June 2026 |
-| Shortlisted Candidates called for Interview | TBD |
-| Date of Interview | TBD |
-| Announcement of Result | TBD |
-| Fees payment window | TBD |
-| Registration and document verification at DAIICT campus for confirmed candidates (**Tentative**) | 14 July 2026 |
-| Commencement of classes **(Tentative)** | 20 July 2026 |
+| Shortlisted Candidates called for Interview | 29 June 2026 |
+| Date of Interview **(Physical Mode)** | 06 July 2026 |
+| Announcement of Result | **08 July 2026** |
+| Fees payment window | 08-13 July 2026 |
+| Registration and document verification at DAIICT campus for confirmed candidates | 20 July 2026 |
+| Orientation Program | 21-23 July 2026 |
+| Commencement of classes | 22 July 2026 |
 | Last date to submit No Objection Certificate (NOC) for External Part-time candidates | **30 October 2026** |
 
 ## Program Overview
@@ -36,7 +37,7 @@ School of Technology, Dhirubhai Ambani University (Formerly DA-IICT) invites app
 * Mathematical, Physical & Computational Sciences,
 * Humanities, Arts, Social Sciences & Design.
 
-Candidates interested in any of these disciplines, or in interdisciplinary areas, are encouraged to apply. The details of the members of faculty and their research interests can be found here
+Candidates interested in any of these disciplines, or in interdisciplinary areas, are encouraged to apply. The details of the members of faculty and their research interests can be found [**here**](https://www.daiict.ac.in/faculty). Candidates are advised to interact and discuss their prospective research supervision with faculty members over email and/or in person.
 
 * AI, ML and Data Science
 * Algorithms and Theory of Computation
@@ -54,7 +55,7 @@ Candidates may seek admission to one of the following categories:
 
 ## Program Structure
 
-The Ph.D. program comprises of both course and research work. The amount of coursework one has to undergo depends on the candidates' educational qualification and the research one is engaged in. The research work to be undertaken for Ph.D. must include original contributions to the knowledge reserve culminating in a thesis to be submitted for the doctoral degree. The detailed program structure and graduation requirements can be found  **here**.
+The Ph.D. program comprises of both course and research work. The amount of coursework one has to undergo depends on the candidates' educational qualification and the research one is engaged in. The research work to be undertaken for Ph.D. must include original contributions to the knowledge reserve culminating in a thesis to be submitted for the doctoral degree. The detailed program structure and graduation requirements can be found [**here**](https://www.daiict.ac.in/phd).
 
 **Click Here** for details of Sponsored Projects
 
@@ -212,7 +213,7 @@ ICT and allied Engineering disciplines, Mathematical, Physical, and Computationa
 
 ### What is the program structure of Ph.D.?
 
-The PhD program comprises of both course and research work. The amount of coursework one has to undergo depends on the candidates' educational qualification and the research one is engaged in. The research work to be undertaken for PhD must include original contributions to the knowledge reserve culminating in a thesis to be submitted for the doctoral degree. The detailed program structure and graduation requirements can be found  **here**.
+The PhD program comprises of both course and research work. The amount of coursework one has to undergo depends on the candidates' educational qualification and the research one is engaged in. The research work to be undertaken for PhD must include original contributions to the knowledge reserve culminating in a thesis to be submitted for the doctoral degree. The detailed program structure and graduation requirements can be found [**here**](https://www.daiict.ac.in/phd).
 
 **Click Here** for details of Sponsored Projects
 
@@ -326,6 +327,7 @@ For candidates applying in the External Part-time category, the deadline to subm
 
 ## Downloadable Resources
 
+- [List of candidates selected for Admission](https://www.daiict.ac.in/sites/default/files/other-files/Ph_D_Regular-and-Part-Time_Autumn_2026-Selected-for-Admissions_080726.pdf)
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/template-sponsorship-letter.pdf)
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/template-noc.pdf)
 - [here](https://www.daiict.ac.in/sites/default/files/other-files/Syllabus-Entrance_Exam-ICT_and_allied_engg.pdf)

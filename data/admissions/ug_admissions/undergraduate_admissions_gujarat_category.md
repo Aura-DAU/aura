@@ -17,9 +17,9 @@ Undergraduate Admissions – Gujarat Category
 
 |  |  |
 | --- | --- |
-| Registration and document verification at DAU campus for confirmed candidates (**Tentative**) | 20 July 2026 |
-| Orientation Program (**Tentative**) | 21-24 July 2026 |
-| Commencement of classes (**Tentative**) | 27 July 2026 |
+| Registration and document verification at DAU campus for confirmed candidates | 01 August 2026 |
+| Orientation Program | 03-07 August 2026 |
+| Commencement of classes | 10 August 2026 |
 
 ## Intake
 
@@ -85,9 +85,11 @@ For more details of the program, **click**
 
 ### **Placement Statistics for the Last Three Years - Undergraduate Programs:**
 
-
+![Details_of_B.Tech-UG_placed_students](https://www.daiict.ac.in/sites/default/files/other-images/Placement_Statistics_UG-2026.png)
 
 ### **Prominent Recruiters:**
+
+![Top_Recruiters_B.Tech-UG_01](https://www.daiict.ac.in/sites/default/files/other-images/Prominent-Recruiters_2025_v1.png)
 
 
 

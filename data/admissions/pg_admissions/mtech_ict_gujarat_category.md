@@ -17,9 +17,9 @@ Master of Technology in Information and Communication Technology – MTech (ICT)
 
 |  |  |
 | --- | --- |
-| Registration and document verification at DAIICT campus for confirmed candidates (**Tentative**) | 14 July 2026 |
-| Orientation Program (**Tentative**) | 15-17 July 2026 |
-| Commencement of classes (**Tentative**) | 20 July 2026 |
+| Registration and document verification at DAIICT campus for confirmed candidates | 20 July 2026 |
+| Orientation Program | 21-23 July 2026 |
+| Commencement of classes | 22 July 2026 |
 
 ## Program Overview
 
@@ -36,15 +36,17 @@ The M.Tech. program provides students with a rigorous understanding of both fund
 
 ## Program Structure
 
-Students of the M.Tech program are required to complete a set of program core courses, general elective courses, specialization core courses and specialization elective courses. The program structure is designed to allow a wide choice of electives in desired areas of specialization. Apart from the courses, the students must complete two projects, a minor project in Semester 2 and Major project I spread over the summer semester and semester 3. The project components provide the students an opportunity to undertake directed research work under the supervision of a faculty mentor. In semester 4, a student can opt for Major project II, in continuation with Major project 1, or pursue an internship in the industry. Students interested in a thesis must enrol for Major project II in semester 4. The detailed Program structure, Program core courses, Specialization core courses, and Elective courses can be found **here**
+Students of the M.Tech program are required to complete a set of program core courses, general elective courses, specialization core courses and specialization elective courses. The program structure is designed to allow a wide choice of electives in desired areas of specialization. Apart from the courses, the students must complete two projects, a minor project in Semester 2 and Major project I spread over the summer semester and semester 3. The project components provide the students an opportunity to undertake directed research work under the supervision of a faculty mentor. In semester 4, a student can opt for Major project II, in continuation with Major project 1, or pursue an internship in the industry. Students interested in a thesis must enrol for Major project II in semester 4. The detailed Program structure, Program core courses, Specialization core courses, and Elective courses can be found [**here**](https://www.daiict.ac.in/mtech-ict)
 
 ## Placement Statistics
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-
+![Details_of_M.Tech.-ICT_placed_students](https://www.daiict.ac.in/sites/default/files/other-images/Placement_Statistics_PG-2026.png)
 
 ### **Top Recruiters:**
+
+![Top_Recruiters_M.Tech](https://www.daiict.ac.in/sites/default/files/other-images/Placement-2025.jpg)
 
 
 

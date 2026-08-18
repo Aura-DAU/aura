@@ -14,16 +14,18 @@ authorisation: ["student", "faculty"]
 
 ## 8 Student Committees
 
-| # | Committee | Convener | Email |
-|---|-----------|----------|-------|
-| 1 | Academic Committee | Zeel Ghori | sbg_academics@dau.ac.in |
-| 2 | Annual Festival Committee | Rishabh Jain | synapse@dau.ac.in |
-| 3 | Cafeteria Management Committee | Yug Tejani | cmc@dau.ac.in |
-| 4 | Cultural Committee | Ansh Garg | cultural@dau.ac.in |
-| 5 | Hostel Management Committee | Dweep Kotecha | hmc@dau.ac.in |
-| 6 | TechSupport Committee | Parshwa Modi | tech_support@dau.ac.in |
-| 7 | Sports Committee | Ishan Thakkar | sports@dau.ac.in |
-| 8 | Student Placement Cell | Rishit Unadkat | spc@dau.ac.in |
+> **Updated (2026-08-12)** to the 2026-27 tenure, per `student_faculty/sbg_club_committee_c_dcs_information_2026_27.md`. Previous conveners have been replaced below, not kept alongside — this table reflects current office-holders only.
+
+| # | Committee | Convener | Deputy Convener | Email |
+|---|-----------|----------|------------------|-------|
+| 1 | Academic Committee | Hari Sharma | Pranamya Sanghvi | sbg_academics@dau.ac.in |
+| 2 | Annual Festival Committee / Synapse Committee | Om Santoki | Sujal Mohapatra | synapse@dau.ac.in |
+| 3 | Cafeteria Management Committee | Prince Sojitra | Varshil Shah | cmc@dau.ac.in |
+| 4 | Cultural Committee | Meet Jain | Het Ladani | cultural@dau.ac.in |
+| 5 | Hostel Management Committee | Gauswami Sumit | Manali Malani | hmc@dau.ac.in |
+| 6 | TechSupport Committee | Devarshi Dave | Hemin Siddhapura | tech_support@dau.ac.in |
+| 7 | Sports Committee | Neeti Gunsai | Kush Patel | sports@dau.ac.in |
+| 8 | Student Placement Cell | Jevik Rakholiya | Chaitanya Vats | spc@dau.ac.in |
 
 ## Hostel Wardens & Supervisors
 

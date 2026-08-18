@@ -17,15 +17,20 @@ The BS–MS Dual Degree in Data Science & Artificial Intelligence is a comprehe
 
 |  |  |
 | --- | --- |
-| The online application website opens | **30 March 2026** |
-| Last date for submission of online applications **(Revised)** | **05 June 2026** |
-| Entrance test | 26 June 2026 |
-| Announcement of Merit List | TBD |
-| Fees payment window for shortlisted candidates | TBD |
-| Announcement of Admission Status | TBD |
-| Registration and document verification at the DA-IICT campus for confirmed candidates (**Tentative**) | 14 July 2026 |
-| Orientation Program **(Tentative)** | 15-17 July 2026 |
-| Commencement of classes **(Tentative)** | 20 July 2026 |
+| The online application website opens | **30 March 2026** (note: the official program brochure PDF states 23rd March 2026 — the two DAU sources disagree by one week; this field reflects the live admissions webpage) |
+| Last date for submission of online applications **(Closed)** for DAU Entrance Test channel applicants only | **05 June 2026** |
+| Last date for submission of online applications **(Closed)** for other channels applicants (National-Level Entrance Examinations, Direct Admission Category and International / NRI Category) | **05 July 2026** |
+| Entrance test | **26 June 2026** |
+| Announcement of Merit List **DAU Entrance Test Channel** | **02 July 2026** |
+| Fees payment window for shortlisted candidates **DAU Entrance Test Channel** | **02 – 08 July 2026** |
+| Announcement of Admission Status **DAU Entrance Test Channel** | **10 July 2026** |
+| **National-Level Entrance Examinations and Direct Admission Category:** | |
+| Announcement of Merit List | **13 July 2026** |
+| Fees payment window for shortlisted candidates | **13 – 19 July 2026** |
+| Announcement of Admission Status | **21/22 July 2026** |
+| Registration and document verification at the DA-IICT campus for confirmed candidates | 03 August 2026 |
+| Orientation Program | 06-07 August 2026 |
+| Commencement of classes | 10 August 2026 |
 
 ## Program Overview
 
@@ -79,13 +84,13 @@ Students learn not only how to build AI systems, but how to deploy them responsi
 
 Students gain hands-on experience in designing, evaluating, and deploying production-grade AI systems that are explainable, scalable, and human-centered.
 
-Detailed program structure can be found **here**.
+Detailed program structure can be found [**here**](https://www.daiict.ac.in/bs-ms-data-science-artificial-intelligence).
 
 ## Program Structure
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
 
-
+![Structure and Exit Options](https://www.daiict.ac.in/sites/default/files/inline-images/BS.%E2%80%93MS-Data-Science-and-Artificial-Intelligence_ver2_2026.jpg)
 
 * **After 3 Years – B.Sc. (Bachelor of Science)**  
   Strong grounding in programming, statistics, data science, and core machine learning.
@@ -95,6 +100,30 @@ The program follows a multi-exit framework aligned with the National Education P
   Expertise in autonomous and trustworthy AI, completed through a research thesis or industry-focused internship.
 
 This multi-exit framework ensures flexibility while maintaining academic rigor, allowing students to align their educational journey with career goals, entrepreneurial ambitions, or higher studies.
+
+### Curriculum Highlights (per official program brochure)
+
+This is a 200-credit, five-year program balancing theoretical depth, practical capability, and experiential learning, distributed year-wise as:
+
+| Year | Focus Area | Credits |
+| --- | --- | --- |
+| Year I | Foundations | 37 |
+| Year II | Core Modeling | 38 |
+| Year III | Machine Learning & Systems (+ 4-credit Internship) | 37 + 4 |
+| Year IV | Frontier & Applied AI | 36 |
+| Year V | Research & Translation | 34 |
+| — | Open Electives (Online) | 9 |
+| — | Co-Curricular Activities | 5 |
+
+**Core Components — 110 Credits (55%):** Computing (17.5%), Data Science & AI (16%), Mathematics (14%), Humanities & Social Sciences (7.5%).
+
+**Elective & Applied Components — 90 Credits (45%):** Program Electives (15.5%), Open Electives (4.5%), Online Open Electives (4.5%), Projects/Seminars/Internships (18%), Co-Curricular Activities (2.5%).
+
+**Program Elective Baskets:**
+* Modelling in AI & Machine Learning — advanced mathematical, statistical, and algorithmic foundations for designing intelligent models and learning systems.
+* Systems & Engineering for AI — scalable, reliable, production-ready AI system design, deployment, and infrastructure.
+* Domains & Applied Analytics — application of data science and AI techniques to real-world sectoral challenges.
+* Ethics, Governance & Emerging AI — responsible AI, policy, interpretability, and emerging trends in trustworthy intelligent systems.
 
 ## Intake
 
@@ -353,7 +382,7 @@ The Institute provides financial support in the form of scholarships to eligible
 
 * Candidates (except applying under the International / NRI Category) should submit their online applications by clicking on the provided link below. The non-refundable application fee is Rs. 1500/- plus GST at 18% (Total: Rs. 1770/-).
 * Candidates applying under the International / NRI Category should submit their online applications by clicking on the provided link below. The non-refundable application fee is (non-refundable) of US $150).
-  Click here to Apply Online
+  [View Application - Admission Status](https://admission.dau.ac.in/)
 * Candidates must meet the eligibility criteria for their application to be considered for final admission.
 * A candidate applying under the DAU Entrance Test category is required to appear for the Entrance Test conducted at selected centers nationwide. The online application procedure will guide the steps for application fee payment, entrance test registration, and test center selection.
 * A candidate applying under the National-Level Entrance Examinations is required to submit the details and relevant documents through the online application which validate that the candidate fulfils the condition(s).

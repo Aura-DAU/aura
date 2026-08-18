@@ -1,62 +1,28 @@
 ---
 title: "CALDAM 2023"
-url: "https://www.daiict.ac.in/events/5390"
+url: "https://www.daiict.ac.in/caldam-2023"
 category: "Events"
 scraped_by: "Dhruvam"
-scraped_date: "2026-06-01"
+scraped_date: "2026-08-08"
 team: "Team 2"
 ---
 
 # CALDAM 2023
 
-# Overview
+## Overview
 
-_No overview available._
+CALDAM 2023 (International Conference on Algorithms and Discrete Applied Mathematics), held at Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT), Gandhinagar.
 
-# Main Content
+## Main Content
 
-_No main content extracted._
+- **Dates:** 6–11 February 2023
+- **External conference site:** https://caldam2023.daiict.ac.in
+- **Organized by:** DA-IICT, Gandhinagar, under the aegis of the Association for Computer Science and Discrete Mathematics (ACSDM)
 
-# Important Information
+CALDAM brings together researchers working in algorithms and applied discrete mathematics, providing a forum for the dissemination and discussion of research results in these areas. It originated from ongoing efforts to promote research in Algorithms and Discrete Mathematics; the first edition was organized by IIT Kanpur in 2015.
 
-_No important information found._
+## Important Information
 
-# Related Links
-
-- [Newly Launched Programs](https://www.daiict.ac.in/programs-of-study#tab-4)
-- [Screen Reader Access](https://www.daiict.ac.in/screen-reader-access)
-- [Admissions to the UG, Dual Degree, PG, and PhD Programs for 2026-27 Announced](https://www.daiict.ac.in/admissions)
-- [PG Admissions 2023 Announced](https://www.daiict.ac.in/admissions#tab-2)
-- [Ph.D. Admissions 2023
- Announced](https://www.daiict.ac.in/admissions#tab-3)
-- [UG Admissions - All India
- Category - Admission Status Announced](https://www.daiict.ac.in/undergraduate-admissions-all-india-category)
-- [DCEI](http://ceid.daiict.ac.in/)
-- [NAAC](https://www.daiict.ac.in/naac)
-- [NIRF](https://www.daiict.ac.in/nirf-national-institutional-ranking-framework)
-- [NEP 2020](https://www.daiict.ac.in/nep-2020)
-- [Alumni](https://www.daiict.ac.in/alumni)
-- [Convocation](https://www.daiict.ac.in/dhirubhai-ambani-university-convocation-ceremonies)
-- [Grievance Redressal](https://www.daiict.ac.in/grievance-redressal-cell)
-- [Policies](https://www.daiict.ac.in/policies)
-- [Tenders](https://www.daiict.ac.in/tenders)
-- [Contact](https://www.daiict.ac.in/contact-0)
-- [Dhirubhai Ambani Institute of Information and Communication TechnologyA Private University
- Established by The State Government of Gujarat Act](https://www.daiict.ac.in/)
-- [About Us](https://www.daiict.ac.in/about-us)
-- [Founder](https://www.daiict.ac.in/founder)
-- [President](https://www.daiict.ac.in/president)
-- [Board of Governors](https://www.daiict.ac.in/board-governors)
-- [Director General](https://www.daiict.ac.in/director)
-- [Director - School of Technology](https://www.daiict.ac.in/director-school-technology)
-- [Academic Council](https://www.daiict.ac.in/academic-council)
-- [Finance Committee](https://www.daiict.ac.in/finance-committee)
-- [Dean (Faculty)](https://www.daiict.ac.in/dean-faculty)
-- [Dean (Academic Programs)](https://www.daiict.ac.in/dean-academic-programs)
-- [Dean (Research)](https://www.daiict.ac.in/dean-rd)
-- [Dean (Students)](https://www.daiict.ac.in/dean-students)
-- [Executive Registrar](https://www.daiict.ac.in/executive-registrar)
-
-# Downloadable Resources
-
-| Resource | Type | Link | | --- | --- | --- | | SSR & Evaluative Reports Addendum 2017 | PDF | [https://www.daiict.ac.in/sites/default/files/NAAC-Addendum-final.pdf](https://www.daiict.ac.in/sites/default/files/NAAC-Addendum-final.pdf) | | SSR 2015 | PDF | [https://www.daiict.ac.in/sites/default/files/NAAC-Self-Study-Report.pdf](https://www.daiict.ac.in/sites/default/files/NAAC-Self-Study-Report.pdf) | | Evaluative Report 2015 | PDF | [https://www.daiict.ac.in/sites/default/files/NAAC-Evaluative-Report.pdf](https://www.daiict.ac.in/sites/default/files/NAAC-Evaluative-Report.pdf) | | CoE, GoG application submitted | PDF | [https://www.daiict.ac.in/sites/default/files/CoE-GoG-application-submitted.pdf](https://www.daiict.ac.in/sites/default/files/CoE-GoG-application-submitted.pdf) | | Holidays 2026 | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf](https://www.daiict.ac.in/sites/default/files/other-files/DAU_Holiday-List-2026.pdf) | | Anti-Ragging Committee | PDF | [https://www.daiict.ac.in/sites/default/files/other-files/Anti-Ragging-Committee_2025-26-18082025.pdf](https://www.daiict.ac.in/sites/default/files/other-files/Anti-Ragging-Committee_2025-26-18082025.pdf) |
+- Start Date: 06/02/2023
+- End Date: 11/02/2023
+- External Link: https://caldam2023.daiict.ac.in

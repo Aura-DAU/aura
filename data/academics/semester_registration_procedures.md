@@ -11,6 +11,9 @@ source_file: "Semester Registration Procedures.docx"
 
 # Semester Registration Procedures
 
+> [!NOTE]
+> The source URL for this information (https://login.dau.ac.in) is a portal that requires active login credentials. The details below are preserved from the original scraped source.
+
 ## Overview
 
 Semester registration at Dhirubhai Ambani University (DA-IICT) is conducted through the **eCampus / ERP portal (UniRP)**. Registration must be completed within the designated window (see Academic Calendar). Each semester's window — Autumn, Winter, and Summer — opens separately.

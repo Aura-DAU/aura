@@ -15,7 +15,7 @@ B.Tech. Frequently Asked Questions (FAQ)
 
 ### What is the last date for submission of online applications?
 
-01 June 2026
+22 June 2026
 
 ### What is total intake of B.Tech. (all India category)?
 

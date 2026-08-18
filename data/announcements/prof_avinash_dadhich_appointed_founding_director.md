@@ -1,5 +1,5 @@
-﻿---
-title: "Press Release"
+---
+title: "Prof. Avinash Dadhich Appointed Founding Director to Establish Proposed School of Law"
 url: "https://www.daiict.ac.in/prof-avinash-dadhich-appointed-founding-director-establish-proposed-school-law"
 category: "Announcements"
 scraped_by: "Madhav Thesiya"
@@ -37,7 +37,7 @@ Dhirubhai Ambani University (DAU), formerly Dhirubhai Ambani Institute of Inform
 
 Over the years, DA-IICT has built a strong reputation as a leading higher education institution in Information & Communication Technology (ICT) and enjoys prestigious NAAC Grade A+ accreditation.
 
-DA-IICTâ€™s leadership in ICT higher education is evidenced by its recognition as a â€˜Centre of Excellenceâ€™ by the State Government of Gujarat and its role as a mentor to other ICT institutions in the State. Recent legislative amendments have enabled the transformation of DA-IICT into a multi-disciplinary education and research university, now known as Dhirubhai Ambani University (DAU).
+DA-IICT's leadership in ICT higher education is evidenced by its recognition as a 'Centre of Excellence' by the State Government of Gujarat and its role as a mentor to other ICT institutions in the State. Recent legislative amendments have enabled the transformation of DA-IICT into a multi-disciplinary education and research university, now known as Dhirubhai Ambani University (DAU).
 
 For further information, please write to us at: communication_office[at]daiict[dot]ac[dot]in
 

@@ -18,13 +18,15 @@ Undergraduate Admissions - NRI and Foreign National (DAFS) Category
 |  |  |
 | --- | --- |
 | Filling of online Application Forms commences on | **24 March 2026** |
-| Last date for receiving completed Application Form for First Round (**Revised**) | **3 June 2026** |
+| Last date for receiving completed Application Form for First Round **(Revised)** | 3 June 2026 |
 | Announcement of **First Round** of Admissions | 9 June 2026 |
-| Filling of online Application Forms (**second round**) commences on | TBD |
-| Last date for receiving completed Application Form for Second Round  (If the seats remain vacant after First Round) | TBD |
-| Registration and document verification at DAU campus for confirmed candidates **(Tentative)** | 20 July 2026 |
-| Orientation Program **(Tentative)** | 21-24 July 2026 |
-| Commencement of classes **(Tentative)** | 27 July 2026 |
+| Filling of online Application Forms (**second round**) commences on | **10 June 2026** |
+| Last date for receiving completed Application Form for **Second Round** | **21 June 2026** |
+| Filling of online Application Forms (**Third round**) commences on | **25 June 2026** |
+| Last date for receiving completed Application Form for **Third Round** | **15 July 2026** |
+| Registration and document verification at DAU campus for confirmed candidates | **01 August 2026** |
+| Orientation Program | 03-07 August 2026 |
+| Commencement of classes | 10 August 2026 |
 
 ## Intake
 
@@ -90,9 +92,11 @@ For more details of the program, **click**
 
 ### **Placement Statistics for the Last Three Years - Undergraduate Programs:**
 
-
+![Details_of_B.Tech-UG_placed_students](https://www.daiict.ac.in/sites/default/files/other-images/Placement_Statistics_UG-2026.png)
 
 ### **Prominent Recruiters:**
+
+![Top_Recruiters_B.Tech-UG_01](https://www.daiict.ac.in/sites/default/files/other-images/Prominent-Recruiters_2025_v1.png)
 
 
 

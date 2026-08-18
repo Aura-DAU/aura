@@ -3,108 +3,66 @@ title: "UG Admissions 2026-27: Comprehensive Guide"
 url: "https://www.daiict.ac.in/undergraduate-admissions"
 category: "Admissions"
 scraped_by: "Pushkar"
-scraped_date: "2026-07-01"
+scraped_date: "2026-08-09"
 team: "Team A"
+note: "This file was substantially rewritten during audit (2026-08-09). The prior version contained fabricated data (invented staff contacts, incorrect seat counts, incorrect fees, and unverifiable JEE cutoff figures) that did not match any real DA-IICT/DAU source page. Content below is cross-verified against the corresponding scraped admissions pages in this same dataset (undergraduate_admissions_all_india_category.md, undergraduate_admissions_gujarat_category.md, undergraduate_admissions_nri_and_foreign_national_category.md, and the BS-MS admissions files)."
 ---
 
 # UG Admissions 2026-27: Comprehensive Data & Guidelines
 
 ## 1. New Programs for 2026-27
-### 1.1 B.Tech (Electronics and Communication Engineering with specialization in Artificial Intelligence - ECE-AI)
-- **Program Overview**: A new B.Tech program for the academic year 2026-27.
-- **Eligibility**: 10+2 with Physics, Mathematics, and Chemistry/Computer Science/Biology.
-- **Seat Matrix**: (See Seat Counts table below)
+
+### 1.1 B.Tech (Electronics and Communication Engineering – Artificial Intelligence, ECE-AI)
+New B.Tech program for the academic year 2026-27. See [Undergraduate Admissions – All India Category](../ug_admissions/undergraduate_admissions_all_india_category.md) for eligibility and program details.
 
 ### 1.2 BS-MS (Information Technology)
-- **Program Overview**: Dual degree program introduced for 2026-27.
-- **Eligibility**: 10+2 with Physics, Mathematics, and Chemistry.
-- **Seat Matrix**: (See Seat Counts table below)
+Dual-degree program introduced for 2026-27, with multi-exit options (B.Sc. after 3 years, BS Honours after 4 years, MS after 5 years). See `dual_degree_admissions/bs_ms_information_technology_admissions.md`.
 
 ### 1.3 BS-MS (Data Science & Artificial Intelligence)
-- **Program Overview**: Dual degree program introduced for 2026-27.
-- **Eligibility**: 10+2 with Physics, Mathematics, and Chemistry.
-- **Seat Matrix**: (See Seat Counts table below)
+Dual-degree program introduced for 2026-27, same multi-exit framework. See `dual_degree_admissions/bs_ms_data_science_artificial_intelligence_admissions.md`.
 
-## 2. B.Tech and BS-MS Seat Counts per Program per Category (2026-27)
-*This is the current and official seat matrix for 2026-27 admissions, overriding any previous Annual Report data.*
+## 2. B.Tech Seat Counts per Program per Category (2026-27)
 
-| Program | All-India (ACPC/JOSAA) | Gujarat (ACPC) | NRI / NRI Sponsored | DAFS (Dhirubhai Ambani Foundation Scholar) | Total Seats |
-| --- | --- | --- | --- | --- | --- |
-| B.Tech (ICT) | 137 | 137 | 45 | 1 | 320 |
-| B.Tech (Honours in ICT with CS) | 65 | 65 | 20 | 0 | 150 |
-| B.Tech (Mathematics and Computing - MnC) | **54** | 54 | 12 | 0 | 120 |
-| B.Tech (EVD) | 26 | 26 | 8 | 0 | 60 |
-| B.Tech (ECE-AI) - *NEW* | 26 | 26 | 8 | 0 | 60 |
-| BS-MS (IT) - *NEW* | 15 | 15 | 0 | 0 | 30 |
-| BS-MS (DS & AI) - *NEW* | 15 | 15 | 0 | 0 | 30 |
+Verified from the official Important Dates / Intake sections of each category's admissions page.
 
-*(Note: B.Tech MnC All-India seats are strictly 54 as per current regulations).*
+| Program | All-India | Gujarat (ACPC) | NRI / Foreign National (DAFS) |
+| --- | --- | --- | --- |
+| B.Tech (ICT) | 72 | 30 | 18 |
+| B.Tech (Honours in ICT with minor in Computational Science) | 54 | 22 | 14 |
+| B.Tech (Mathematics and Computing – MnC) | 54 | 22 | 14 |
+| B.Tech (Electronics and VLSI Design – EVD) | 24 | 10 | 06 |
+| B.Tech (Computer Science and Artificial Intelligence – CS and AI) | 72 | 30 | 18 |
+| B.Tech (ECE-AI) | 36 | 15 | 09 |
+| **Category Total** | **312** | **129** | **79** |
+
+Note: **DAFS** stands for **Direct Admission of Foreign and NRI Students** — it is the NRI/Foreign National admission category, not a named foundation scholarship.
+
+BS-MS (IT) and BS-MS (Data Science & AI) do not publish a single fixed seat count; admission instead runs through percentage-based channel ceilings (DAU Entrance Test, JEE Main/CUET, Direct Admission, International/NRI). See the respective BS-MS admissions files for the channel breakdown.
 
 ## 3. Step-by-Step UG Admissions Procedure (2026-27)
-1. **Application**: Candidates must apply online through the official DAU admissions portal (DAU-PWA).
-2. **Merit List**: Based on JEE Main scores (for All-India) or GUJCET (for Gujarat category), a merit list is published.
-3. **Counselling**: Shortlisted candidates are called for online/offline counselling rounds.
-4. **Fee Payment**: Upon seat allocation, candidates must pay the initial tuition fee to confirm the seat.
-5. **Document Verification**: Original documents (10th/12th marksheets, JEE scorecard, category certificates) are verified on campus.
-6. **Enrollment**: Final enrollment and registration for the first-semester courses.
+1. **Application**: Candidates apply online through the official DAU admissions portal ([admission.dau.ac.in](https://admission.dau.ac.in/)).
+2. **Merit List**: Based on JEE (Main) All India Rank (All-India category) or the ACPC process (Gujarat category).
+3. **Counselling**: Done online; shortlisted candidates are informed via email.
+4. **Fee Payment**: Upon seat allocation, candidates pay the initial tuition fee within the announced fee-payment window to confirm the seat.
+5. **Document Verification**: Original documents (10th/12th marksheets, JEE scorecard, category certificates) are verified on campus at registration.
+6. **Enrollment**: Registration, followed by Orientation Program and commencement of classes.
 
-## 4. Contact Details: Specific Admission Officers and Roles
-For targeted queries, contact the following UG Admission Officers:
-- **Prof. Anoop Mathur** (Dean of Admissions)
-  - Role: Overall admission policies and grievance redressal.
-  - Contact: anoop_mathur@dau.edu.in | +91-79-6831-7001
-- **Dr. Neha Sharma** (UG Admissions Coordinator)
-  - Role: B.Tech All-India and Gujarat category counselling.
-  - Contact: neha_sharma@dau.edu.in | +91-79-6831-7002
-- **Mr. Rajesh Patel** (NRI & International Admissions Officer)
-  - Role: NRI/DAFS category applications and visa processing.
-  - Contact: rajesh_patel@dau.edu.in | +91-79-6831-7003
-- **Ms. Priya Desai** (Document Verification Head)
-  - Role: Post-allocation document verification.
-  - Contact: priya_desai@dau.edu.in | +91-79-6831-7004
+## 4. Fee Structure (2026-27)
 
-## 5. JEE Main Cutoff Ranks (Past Years Reference)
-The following tables detail the JEE Main cutoff ranks (Closing Ranks) for previous years to guide 2026-27 applicants:
+Verified from the official Fee Structure section of each program's admissions page.
 
-### All-India Category Cutoffs (JEE Main CRL)
-| Program | 2023 | 2024 | 2025 |
+| Program | Tuition Fee (per semester) | Registration Fee | Caution Deposit |
 | --- | --- | --- | --- |
-| B.Tech (ICT) | 14000 | 13500 | 12800 |
-| B.Tech (Honours in ICT with CS) | 9000 | 8500 | 8200 |
-| B.Tech (MnC) | 11000 | 10500 | 10100 |
-| B.Tech (EVD) | 20000 | 19000 | 18500 |
+| B.Tech (All-India / Gujarat category) | Rs. 1,92,500 | Rs. 2,500 | Rs. 25,000 (refundable) |
+| B.Tech (NRI / Foreign National – DAFS) | US $6,000 | US $100 | US $1,000 (refundable) |
+| BS-MS (IT) | Rs. 1,50,000 | Rs. 2,500 | Rs. 25,000 (refundable) |
+| BS-MS (Data Science & AI) | Rs. 1,50,000 | Rs. 2,500 | Rs. 25,000 (refundable) |
 
-### Gujarat Category Cutoffs (GUJCET State Rank)
-| Program | 2023 | 2024 | 2025 |
-| --- | --- | --- | --- |
-| B.Tech (ICT) | 250 | 220 | 190 |
-| B.Tech (Honours in ICT with CS) | 80 | 75 | 60 |
-| B.Tech (MnC) | 150 | 140 | 120 |
-| B.Tech (EVD) | 400 | 380 | 350 |
+Hostel rent, food, and any program-specific value-added course fees (e.g. for B.Tech EVD) are additional — see the individual program pages for full breakdowns. Fees are subject to revision each academic year (typically 8–10%).
 
-*(Note: Cutoffs for new programs ECE-AI, BS-MS IT, and BS-MS DS&AI will be established in the 2026-27 cycle).*
+## 5. For Inquiries
 
-## 6. NRI/DAFS Category Seat Counts and Fee Structure
-### 6.1 Seat Counts
-- NRI/NRI Sponsored seats are available as per the table in Section 2.
-- DAFS (Dhirubhai Ambani Foundation Scholar) seats are exclusively available for B.Tech ICT (1 seat).
+**Voice Call:** 079 69 08 08 08
+**Email:** ug_admissions[at]dau[dot]ac[dot]in
 
-### 6.2 Fee Structure
-- **B.Tech (All Programs except NRI/DAFS)**: INR 1,10,000 per semester.
-- **BS-MS (All Programs)**: INR 1,20,000 per semester.
-- **NRI / NRI Sponsored Category**: USD 4,000 per semester (for all B.Tech programs).
-- **DAFS Category**: Fee waiver applicable as per foundation norms (approx 100% tuition waiver).
-*Additional one-time registration and hostel fees apply.*
-
-## 7. B.Tech and BS-MS Program Eligibility Differences
-| Program | Minimum Age | 10+2 Subjects Required | Minimum 10+2 Aggregate | Qualifying Exam |
-| --- | --- | --- | --- | --- |
-| **B.Tech (ICT)** | No limit | Physics, Maths, (Chem/Bio/CS) | 60% | JEE Main / GUJCET |
-| **B.Tech (CS&AI - Honours)** | No limit | Physics, Maths, (Chem/Bio/CS) | 60% | JEE Main / GUJCET |
-| **B.Tech (MnC)** | No limit | Physics, Maths, Chemistry | 65% | JEE Main / GUJCET |
-| **B.Tech (ECE-AI)** | No limit | Physics, Maths, (Chem/Bio/CS) | 60% | JEE Main / GUJCET |
-| **B.Tech (EVD)** | No limit | Physics, Maths, (Chem/Bio/CS) | 60% | JEE Main / GUJCET |
-| **BS-MS (IT)** | No limit | Physics, Maths, Chemistry | 65% | JEE Main |
-| **BS-MS (DS & AI)** | No limit | Physics, Maths, Chemistry | 65% | JEE Main |
-
-*(Key difference: MnC, BS-MS IT, and BS-MS DS&AI strictly require Chemistry, whereas other B.Tech programs allow Biology or Computer Science as the third subject. MnC and BS-MS require a 65% aggregate compared to 60% for others.)*
+(The previous version of this file listed named admission officers with `@dau.edu.in` addresses; these could not be verified against any real DAU source and have been removed. `dau.edu.in` is not a real DAU domain.)

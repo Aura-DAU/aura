@@ -18,14 +18,14 @@ The Master of Science (Information Technology) is an intensive two year post-gra
 |  |  |
 | --- | --- |
 | Online application website opens | **24 March 2026** |
-| Last date for submission of online applications **(Revised)** | **05 June 2026** |
+| Last date for submission of online applications **(Closed)** | **05 June 2026** |
 | Entrance test | 26 June 2026 |
-| Announcement of Merit List | TBD |
-| Fees payment window for shortlisted candidates | TBD |
-| Announcement of Admission Status | TBD |
-| Registration and document verification at DAIICT campus for confirmed candidates (**Tentative**) | 14 July 2026 |
-| Orientation Program **(Tentative)** | 15-17 July 2026 |
-| Commencement of classes **(Tentative)** | 20 July 2026 |
+| Announcement of Merit List for **FIRST round** | **02 July 2026** |
+| Fees payment window for shortlisted candidates in **FIRST round** | **02 – 08 July 2026** |
+| Announcement of Admission Status for **FIRST round** | **10 / 13 July 2026** |
+| Registration and document verification at DAIICT campus for confirmed candidates | 20 July 2026 |
+| Orientation Program | 21-23 July 2026 |
+| Commencement of classes | 22 July 2026 |
 
 ## Program Overview
 
@@ -35,15 +35,17 @@ The Master of Science (Information Technology) is an intensive two year post-gra
 
 The M.Sc. (IT) Program follows a full time four-semester pattern and the curriculum consists of three semesters of course work followed by a one-semester project work on a specified topic. There is also a summer internship of duration of four weeks that students need to take up after the second semester and before the start of third semester.
 
-The detailed Program structure can be found **here**.
+The detailed Program structure can be found [**here**](https://www.daiict.ac.in/msc-it).
 
 ## Placement Statistics
 
 ### **Placement Statistics for the Last Three Years - Postgraduate Programs:**
 
-
+![Details_of_M.Tech.-ICT_placed_students](https://www.daiict.ac.in/sites/default/files/other-images/Placement_Statistics_PG-2026.png)
 
 ### **Top Recruiters:**
+
+![Top_Recruiters_M.Tech](https://www.daiict.ac.in/sites/default/files/other-images/Placement-2025.jpg)
 
 
 
@@ -166,7 +168,7 @@ No. The M.Sc. (IT) is a single-stream, general Information Technology program. I
 
 The M.Sc. (IT) program follows a full time four-semester pattern and the curriculum consists of three semesters of course work followed by a one-semester project work on a specified topic. There is also a summer internship of duration of four weeks that students need to take up after the second semester and before the start of third semester.
 
-The detailed Program structure can be found **here**
+The detailed Program structure can be found [**here**](https://www.daiict.ac.in/msc-it)
 
 ### What is the selection criteria for M.Sc. (IT)?
 

@@ -1,36 +1,31 @@
-﻿---
+---
 title: "DA-IICT proudly celebrated the 78th Independence Day with a flag-hoisting ceremony"
 url: "https://www.daiict.ac.in/events/6508"
 category: "Events"
 scraped_by: "Dhruvam"
-scraped_date: "2026-06-01"
+scraped_date: "2026-08-08"
 team: "Team 2"
 ---
 
 # DA-IICT proudly celebrated the 78th Independence Day with a flag-hoisting ceremony
 
-# Overview
+## Overview
 
-DA-IICT Gandhinagar proudly celebrated the 78th Independence Day with a flag-hoisting ceremony . The tri-colour was hoisted by our Director, Professor Tathagata Bandyopadhyay, and Executive Registrar, Mr. Siddharth Swaminarayan. The Deans, Faculty members, students and staff also attended the flag hoisting ceremony.
+DA-IICT Gandhinagar proudly celebrated the 78th Independence Day with a flag-hoisting ceremony. The tri-colour was hoisted by Director Professor Tathagata Bandyopadhyay and Executive Registrar Mr. Siddharth Swaminarayan. Deans, faculty members, students, and staff also attended.
 
-# Main Content
+## Main Content
 
-# DA-IICT proudly celebrated the 78th Independence Day with a flag-hoisting ceremony
+In his speech, Professor Bandyopadhyay highlighted the importance of fostering students' overall development and empowering them to become changemakers in the future.
 
-DA-IICT Gandhinagar proudly celebrated the 78th Independence Day with a flag-hoisting ceremony . The tri-colour was hoisted by our Director, Professor Tathagata Bandyopadhyay, and Executive Registrar, Mr. Siddharth Swaminarayan. The Deans, Faculty members, students and staff also attended the flag hoisting ceremony.
+The DA-IICT community extended its best wishes to all fellow Indians on the occasion.
 
-In his inspiring speech, Professor Bandyopadhyay highlighted the importance of fostering students' overall development and empowering them to become change makers in the future.
+## Important Information
 
-On this momentous day, as we celebrate the spirit of unity, diversity, and freedom that defines our great country, let’s also remember the sacrifices of our heroes and commit to building an even brighter future for India.
+- Date: 15/08/2024
+- Flag hoisted by: Prof. Tathagata Bandyopadhyay (Director) and Mr. Siddharth Swaminarayan (Executive Registrar)
 
-The DA-IICT community extends its best wishes to all fellow Indians. May our nation continue to prosper and shine on the global stage. Jai Hind!
+## Related Links
 
-# Important Information
-
-_No important information found._
-
-# Related Links
-
-- [78th Independence Day](https://www.daiict.ac.in/sites/default/files/other-images/78th-Independence%20Day_1.jpg)
-- [78th Independence Day](https://www.daiict.ac.in/sites/default/files/other-images/78th-Independence%20Day-2.jpg)
-- [78th Independence Day](https://www.daiict.ac.in/sites/default/files/other-images/78th-Independence%20Day-3.jpg)
+- [Photo 1](https://www.daiict.ac.in/sites/default/files/other-images/78th-Independence%20Day_1.jpg)
+- [Photo 2](https://www.daiict.ac.in/sites/default/files/other-images/78th-Independence%20Day-2.jpg)
+- [Photo 3](https://www.daiict.ac.in/sites/default/files/other-images/78th-Independence%20Day-3.jpg)

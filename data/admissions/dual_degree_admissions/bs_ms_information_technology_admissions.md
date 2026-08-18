@@ -18,14 +18,19 @@ The BS–MS Dual Degree in Information Technology is a comprehensive five-year p
 |  |  |
 | --- | --- |
 | The online application website opens | **30 March 2026** |
-| Last date for submission of online applications **(Revised)** | **05 June 2026** |
-| Entrance test | 26 June 2026 |
-| Announcement of Merit List | TBD |
-| Fees payment window for shortlisted candidates | TBD |
-| Announcement of Admission Status | TBD |
-| Registration and document verification at the DA-IICT campus for confirmed candidates (**Tentative**) | 14 July 2026 |
-| Orientation Program **(Tentative)** | 15-17 July 2026 |
-| Commencement of classes **(Tentative)** | 20 July 2026 |
+| Last date for submission of online applications **(Closed)** for DAU Entrance Test channel applicants only | **05 June 2026** |
+| Last date for submission of online applications **(Closed)** for other channels applicants (National-Level Entrance Examinations, Direct Admission Category and International / NRI Category) | **05 July 2026** |
+| Entrance test | **26 June 2026** |
+| Announcement of Merit List **DAU Entrance Test Channel** | **02 July 2026** |
+| Fees payment window for shortlisted candidates **DAU Entrance Test Channel** | **02 – 08 July 2026** |
+| Announcement of Admission Status **DAU Entrance Test Channel** | **10 July 2026** |
+| **National-Level Entrance Examinations and Direct Admission Category:** | |
+| Announcement of Merit List | **13 July 2026** |
+| Fees payment window for shortlisted candidates | **13 – 19 July 2026** |
+| Announcement of Admission Status | **21/22 July 2026** |
+| Registration and document verification at the DA-IICT campus for confirmed candidates | 03 August 2026 |
+| Orientation Program | 06-07 August 2026 |
+| Commencement of classes | 10 August 2026 |
 
 ## Program Overview
 
@@ -80,13 +85,13 @@ This prepares students to work effectively in professional and multidisciplinary
 
 Students graduate with experience in building and deploying real systems using modern technologies.
 
-Detailed program structure can be found **here**.
+Detailed program structure can be found [**here**](https://www.daiict.ac.in/bs-ms-information-technology).
 
 ## Program Structure
 
 The program follows a multi-exit framework aligned with the National Education Policy (NEP 2020), providing academic flexibility and lifelong learning opportunities:
 
-
+![Structure and Exit Options](https://www.daiict.ac.in/sites/default/files/inline-images/BS-MS_Information-Technolog_2026.jpg)
 
 * **After 3 Years – B.Sc. (Bachelor of Science) in Information Technology**  
   Strong foundations in programming, data structures and algorithms, databases, operating systems, computer networks, and full-stack development, along with hands-on projects and practical system-building experience.
@@ -354,7 +359,7 @@ The Institute provides financial support in the form of scholarships to eligible
 
 * Candidates (except applying under the International / NRI Category) should submit their online applications by clicking on the provided link below. The non-refundable application fee is Rs. 1500/- plus GST at 18% (Total: Rs. 1770/-).
 * Candidates applying under the International / NRI Category should submit their online applications by clicking on the provided link below. The non-refundable application fee is (non-refundable) of US $150).
-  Click here to Apply Online
+  [View Application - Admission Status](https://admission.dau.ac.in/)
 * Candidates must meet the eligibility criteria for their application to be considered for final admission.
 * A candidate applying under the DAU Entrance Test category is required to appear for the Entrance Test conducted at selected centers nationwide. The online application procedure will guide the steps for application fee payment, entrance test registration, and test center selection.
 * A candidate applying under the National-Level Entrance Examinations is required to submit the details and relevant documents through the online application which validate that the candidate fulfils the condition(s).

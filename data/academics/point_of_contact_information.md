@@ -11,6 +11,9 @@ source_file: "Information regarding the POCs.docx"
 
 # Point of Contact (POC) Information
 
+> [!NOTE]
+> The source URL for this information is an Intranet portal that requires authentication.
+
 ## Overview
 
 This document lists the key Points of Contact (POCs) at Dhirubhai Ambani University (DA-IICT) for academic, examination, and general enquiry purposes.

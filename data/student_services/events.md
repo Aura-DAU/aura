@@ -1,56 +1,33 @@
-﻿---
+---
 title: "Events"
 url: "https://daiict.ac.in/events"
-category: "Student Services"
-scraped_by: "Madhav Thesiya"
-scraped_date: "2026-05-30"
+category: "Events"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-06"
 team: "Team D"
 ---
 
 # Overview
 
-Events page at Dhirubhai Ambani University (DAU), Gandhinagar.
+Events listing page for Dhirubhai Ambani University (DAU), Gandhinagar — a paginated feed (14 pages) of institute events, workshops, and summer schools.
 
 # Main Content
 
-Artificial Intelligence in Internet of Things (AIoT): Concepts, Architectures, and Hands-oâ€¦
-15/06/2026 - 20/06/2026
-Two-Day Workshop on AI Engineering Bootcamp 2026
-16/05/2026 - 17/05/2026
-Coffee and Connect with Alumni Mr. Bhavesh Manglani, Co-Founder of Delhivery
-23/04/2026 - 23/04/2026
-Workshop on RTL to GDS-II: VLSI Design and Hardware Security for Trusted Memory Systems
-06/07/2026 - 10/07/2026
-DAU to organise Alumni Meet 2026 â€“ Gandhinagar-Ahmedabad Chapter
-18/04/2026 - 18/04/2026
-Workshop on Deep Learning and Artificial Intelligence: Principles & Practice at DAU
-09/03/2026 - 13/03/2026
-Pagination
-Current page
-1 
-Page
-2 
-Page
-3 
-Page
-4 
-Page
-5 
-Page
-6 
-Page
-7 
-Page
-8 
-Page
-9 â€¦ 
-Next page
-Next â€º 
-Last page
-Last Â»
+Most recent entries (page 1 of 14):
+
+- **Conference on Technology and Geopolitics** — 04/08/2026–04/08/2026 — https://www.daiict.ac.in/events/7147
+- **Silver Jubilee Closing Ceremony** — 05/08/2026–05/08/2026 — https://www.daiict.ac.in/events/7146
+- **DAU Alumni Chapter Membership Drive** — 30/06/2026–31/07/2026 — https://www.daiict.ac.in/events/7119
+- **ACM India Summer School 2026 on Competitive Programming** — 09/06/2026–17/06/2026 — https://www.daiict.ac.in/events/7101
+- **Artificial Intelligence in Internet of Things (AIoT): Concepts, Architectures, and Hands-on** — 15/06/2026–20/06/2026 — https://www.daiict.ac.in/events/7078
+- **Two-Day Workshop on AI Engineering Bootcamp 2026** — 16/05/2026–17/05/2026 — https://www.daiict.ac.in/events/7069
+
+Older events are on pages 2–14 (`https://www.daiict.ac.in/events?page=1` through `?page=13`).
 
 # Related Links
 
 - [Original Page](https://daiict.ac.in/events)
-- [Parents](https://daiict.ac.in/parents)
+- [Page 2](https://www.daiict.ac.in/events?page=1)
+- [Last Page (14)](https://www.daiict.ac.in/events?page=13)
+- [Achievements](https://www.daiict.ac.in/achievements)
 - [DAU Website](https://www.daiict.ac.in)

@@ -1,182 +1,113 @@
-﻿---
-title: "SOP - Healthcare Facilities and Medical Emergencies"
-url: "https://daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf"
-category: "Student Services"
-scraped_by: "Madhav Thesiya"
-scraped_date: "2026-05-30"
+---
+title: "Student Healthcare Facilities & SOP for Medical Emergencies"
+url: "https://www.daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf"
+category: "Parents"
+scraped_by: "Claude (rescrape)"
+scraped_date: "2026-08-07"
 team: "Team D"
 source_type: "PDF"
 pdf_name: "SOP-Healthcare-Facilities-and-Medical-Emergencies"
+note: "Full text verified directly from user-provided PDF upload (Ref. No. DAU/Dean(S)Off./2025-26/03, dated 16/01/2026)."
 ---
 
 # Overview
 
-Standard Operating Procedure (SOP) for Student Healthcare Facilities and Medical Emergencies at Dhirubhai Ambani University (DAU), Gandhinagar. Reference: DAU/Dean(S)Off./2025-26/03.
+Official document outlining medical facilities available to Dhirubhai Ambani University (DAU) students and the Standard Operating Procedure (SOP) for medical emergencies on campus, including off-hours, weekends, and holidays.
 
 # Main Content
 
-### 1. Medical Facilities at the Institute
+## 1. Medical Facilities at the Institute
 
-#### 1.1 Medical Centre
+### 1.1 Medical Centre
+The University operates a Medical Centre on campus with three visiting doctors and two qualified nurses. Consultations are free of charge. Contact: medical@dau.ac.in
 
-The University operates a Medical Centre on campus with the services of three visiting doctors and two qualified nurses. Students may avail consultation services free of charge.
+### 1.2 Visiting Doctors
+| Name | Visiting Hours | Contact | Residence |
+|---|---|---|---|
+| Dr. Arvindsinh Vaghela | 09:00 AM–10:00 AM (Mon–Sat) | 94266 08600 | Plot No 628/1, Sector 6A, Gandhinagar |
+| Dr. Charulata Harshe | 12:45 PM–01:45 PM (Mon–Sat) | 94276 00923 | Plot 35/1, Sector 2A, Gandhinagar |
+| Dr. Anjana Ved | 05:45 PM–06:45 PM (Mon–Sat) | 94294 59829 | 719/2, Panchshil Park, Sector 21, Gandhinagar |
 
-- **Email:** medical@dau.ac.in
-
-#### 1.2 Visiting Doctors
-
-| Name | Visiting Hours | Contact | Residence Address |
-|------|---------------|---------|-------------------|
-| Dr. Arvindsinh Vaghela | 09:00 AM - 10:00 AM (Mon-Sat) | 9426008600 | Plot No 628/1, Sector 6A, Gandhinagar |
-| Dr. Charulata Harshe | 12:45 PM - 01:45 PM (Mon-Sat) | 9427600923 | Plot 35/1, Sector 2A, Gandhinagar |
-| Dr. Anjana Ved | 05:45 PM - 06:45 PM (Mon-Sat) | 9429459829 | 719/2, Panchshil Park, Sector 21, Gandhinagar |
-
-#### 1.3 Nursing Staff
-
+### 1.3 Nursing Staff
 | Name | Visiting Hours | Contact |
-|------|---------------|---------|
-| Ms. Shivani Vala (Female Nurse) | 08:00 AM - 04:30 PM (Mon-Fri) | 6355 761 083 |
-| Mr. Chirag Patni (Male Nurse) | 03:30 PM - 12:00 AM (Mon-Fri) | 9601846889 |
+|---|---|---|
+| Ms. Shivani Vala (Female Nurse) | 08:00 AM–04:30 PM (Mon–Fri) | 6355 761 083 |
+| Mr. Chirag Patni (Male Nurse) | 03:30 PM–12:00 AM (Mon–Fri) | 9601846889 |
 
-**Weekend Provision:** On Saturdays and Sundays, one nurse shall be available at the Medical Centre during official working hours, i.e., from 9:00 AM to 6:30 PM.
+**Weekend:** One nurse available Sat/Sun, 9:00 AM–6:30 PM.
 
-#### 1.4 Emergency Medical Support
+### 1.4 Emergency Medical Support
+- 24×7 ambulance facility on campus.
+- Access via **Intercom: 566** or **Landline: 079-68261566**.
 
-- The University provides a **24x7 ambulance facility** on campus
-- **Intercom:** 566
-- **Landline:** 079-68261566
+### 1.5 Beyond Medical Centre Hours
+Report directly to Hostel Supervisors or Security Supervisors, who facilitate immediate assistance and hospital transfer. "Hostel Supervisor" refers collectively to the Assistant Manager (Hostel) and Senior Executive (Hostel).
 
-#### 1.5 Availability Beyond Working Hours
+## 2. Group Mediclaim Insurance Coverage
+- **Coverage:** ₹4,00,000/- per student
+- **Facility:** Cashless hospitalisation (subject to hospital tie-up), via Reliance General Insurance
+- Medi-claim cards: https://www.reliancegeneral.co.in/insurance/self-help/online-r-card.aspx
+- Reimbursement claims (if cashless unavailable) submitted to DAU via email with valid bills/documents.
 
-In medical emergencies outside the Medical Centre's official working hours, students may report the matter directly to the Hostel Supervisors or Security Supervisors, who shall facilitate immediate assistance and hospital transfer, as required.
-
-### 2. Group Mediclaim Insurance Coverage
-
-All students of DAU are covered under the Group Mediclaim Insurance Policy:
-
-- **Coverage Amount:** â‚¹40,000/- per student
-- **Facility:** Cashless hospitalisation (subject to hospital tie-up)
-- **Medi-claim cards:** [Generate online](https://www.reliancegeneral.co.in/insurance/self-help/online-ecard.aspx)
-
-In cases where cashless treatment is not available, reimbursement claims may be submitted to DAU via email along with valid bills and authorised documents.
-
-### 3. Empanelled Hospitals
-
+## 3. Empanelled Hospitals (no advance deposit, concessional rates)
 | Hospital | Address | Contact |
-|----------|---------|---------|
-| SGVNS Swaminarayan Hospital | Beside Swaminarayan Dham, Koba-Gandhinagar Highway, Gandhinagar-382007 | Emergency: +91 73737 33907, Operator: +91 73737 33904/05, Ambulance: +91 95374 74444 |
-| Apollo Hospital | Gandhinagar-Ahmedabad Road, GIDC Bhat, Gandhinagar, Ahmedabad-382428 | Emergency: +91 80690 49761, +91 84018 01066 |
-| Kashka Hospital | Sargasan & Reliance Cross Road, Gandhinagar | Appointments: +91 7575006000 / +91 7575009366, Reception: +91 9879752777, Emergency: +91 7575007707, Patient Coordinator: +91 7575007705 |
+|---|---|---|
+| SMVS Swaminarayan Hospital | Beside Swaminarayan Dham, Koba-Gandhinagar Highway, Gandhinagar 382007 | Emergency: +91 73737 33907; Operator: +91 73737 33904 / 33905; Ambulance: +91 95374 74444 |
+| Apollo Hospital | Gandhinagar-Ahmedabad Road, GIDC Bhat, Gandhinagar, Ahmedabad 382428 | Emergency: +91 8069049761 / +91 8401801066 |
+| Aashka Hospital | Sargasan & Reliance Cross Road, Gandhinagar | Booking: +91 7575006000 / 7575009366; Main Reception: +91 9879752777; Emergency: +91 7575007707; Patient Coordinator: +91 7575007705 |
 
-### 4. Stress Management & Counselling Services
-
-The University has a Stress Management Centre that offers free confidential counselling services to students.
-
-#### Counsellors
-
+## 4. Stress Management & Counselling Services
+Free confidential counselling via the Stress Management Centre.
 | Name | Availability | Venue |
-|------|-------------|-------|
-| Dr. Nandini Banerjee | Mon-Fri (9:30 AM to 6 PM) | Room No. 2110, Faculty Block-2, DAU Campus |
-| Ms. Nitu Singh Bhadouria | Thursday, Friday & Saturday (9:30 AM to 6 PM) | Room No. 4160, Faculty Block-4, DAU Campus |
+|---|---|---|
+| Dr. Nandini Banerjee | Mon–Fri, 9:30 AM–6 PM — Ph: +91 079-6826 1620 — nandini_banerjee@dau.ac.in | Room 2110, Faculty Block-2 |
+| Ms. Nitu Singh Bhadouria | Thu/Fri/Sat, 9:30 AM–6 PM — Mob: 9723611689 — nitusingh_b@dau.ac.in | Room 4160, Faculty Block-4 |
 
-**Contact:**
-- Dr. Nandini Banerjee: +91 079-6826 1620, nandini_banerjee@dau.ac.in
-- Ms. Nitu Singh Bhadouria: 9723611689, nitusingh_b@dau.ac.in
+Additionally, DAU partners with **YourDOST** (https://yourdost.com/) — an online platform offering confidential, stigma-free, anonymous counselling via chat/voice/video, available 24×7, connecting students with psychologists, counsellors, and coaches.
 
-**YourDOST Partnership:** The University has partnered with YourDOST, an online platform for emotional wellness and mental health support. Available 24x7 via chat, voice, or video at [yourdost.com](https://yourdost.com/).
-
-### 5. Key Emergency Contact Numbers
-
+## 5. Key Emergency Contact Numbers
 | Name | Tel. No. |
-|------|----------|
+|---|---|
 | Security Supervisor, Main Gate | (+91) 079-68261566 |
-| Security | (+91) 079-68261544 / 9328994140 |
-| Hostel Supervisors | (+91) 079-68261545 / 9328994142 |
+| Hostel Supervisors | (+91) 079-68261544 / 9328994140; (+91) 079-68261545 / 9328994142 |
 | Prof. Madhukant Sharma, Resident Warden (HOR Men) | (+91) 079-68261554 |
 | Ms. Minalben Patel, Resident Warden (HOR Women) | (+91) 079-68261667 / 9727540450 |
 | Prof. Rutu Parekh, Warden (HOR Women) | (+91) 079-68261553 |
 | Prof. Kalyan Sasidhar, Dean (Students) | (+91) 079-68261560 |
-| Dr. Krutika Raval, Head- HR & Administration | (+91) 079-68261591 |
+| Dr. Krutika Raval, Head - HR & Administration | (+91) 079-68261591 |
 | Shri Siddharth Swaminarayan, Executive Registrar | (+91) 079-68261567 |
 
-### 6. SOP for Medical Emergencies
+## 6. SOP for Medical Emergencies
+**6.1 Initial Medical Assistance** — Students approach the on-campus nurse(s) for primary assessment and initial treatment.
 
-#### 6.1 Initial Medical Assistance
-In the event of any medical issue or emergency, students may directly approach the on-campus nurse(s) for primary medical assessment and initial treatment.
+**6.2 Medical Decision & Referral** — The nurse determines whether a doctor consultation is needed or the student should be transferred to an empanelled hospital.
 
-#### 6.2 Medical Decision & Referral
-Based on the initial assessment, the on-campus nurse shall determine:
-- Whether consultation with the visiting doctor is required, or
-- Whether the student needs to be referred and transferred to a nearby empanelled hospital for urgent care, further investigation, or specialised treatment.
+**6.3 Emergency Transfer** — For conditions needing attention beyond on-campus facilities, the nurse (with the Security Supervisor) initiates ambulance services immediately. In critical cases, the student is accompanied by the nurse and/or Hostel Supervisor/Warden; the receiving hospital is informed in advance.
 
-#### 6.3 Emergency Transfer
-- If the condition warrants immediate medical attention beyond on-campus facilities, the on-campus nurse, in coordination with the Security Supervisor, shall initiate ambulance services without delay.
-- In critical cases, the student shall be accompanied by the on-campus nurse and/or the Hostel Supervisor/Warden. The receiving hospital shall be informed in advance.
+**6.4 Cases Outside Nurse Duty Schedule** — Matter reported immediately to the Hostel Supervisor/Warden, who arranges first response and coordinates ambulance/hospital transfer with security.
 
-#### 6.4 Cases Outside Nurse Duty Schedule
-The matter shall be reported immediately to the Hostel Supervisor/Warden, who shall:
-- Arrange necessary first response
-- Coordinate with security personnel for ambulance services and hospital transfer
+**6.5 Reporting to Authorities** — The Security Supervisor and/or Hostel Supervisor ensures the incident is reported promptly to the concerned Warden, Manager (Administration), and Dean (Students).
 
-#### 6.5 Reporting to Authorities
-The Security Supervisor and/or Hostel Supervisor shall ensure that the incident is promptly reported to the concerned Warden, Manager (Administration), and the Dean (Students).
+## 7. Definition of Medical Emergency
+Any illness or injury posing an immediate risk to life or health requiring urgent intervention — e.g. electric shock, road accidents, poisoning, drug overdose, severe burns, haemorrhage, chest pain, snake/animal bite, food poisoning, asphyxia, hyperthermia, bone fractures.
 
-### 7. Definition of Medical Emergency
+## 8. First Aid Advisory (Annexure-1)
+Basic first aid may be administered **only by persons trained in first aid** from a recognised institution — incorrect intervention may cause serious harm. Summary of covered topics: respiration (artificial respiration if failing), bleeding (pressure/dressing/elevation), fractures (immobilise with padded support), burns/scalds (cool water 15 min, don't break blisters), nosebleeds (sit upright, pinch nose), bee stings (remove sting, cold/ammonia), animal bites (wash, bandage, seek aid), snake bites (stay calm, wash, constrictive bandage on heart side max 20 min — do NOT incise/suck the wound), fainting (lay down, loosen clothing, raise legs — no food/drink). *(Courtesy: St. John Ambulance Association, India)*
 
-A medical emergency refers to any illness or injury posing an immediate risk to life or health, requiring urgent medical intervention.
+## Annexure-2: Insurance Claim Process (Reliance General Insurance — RCare Health Solutions)
+**Cashless claim flow:** Doctor advises hospitalization → intimate claim → visit network hospital → hospital's TPA desk contacts RGI for cashless authorization → RGI reviews and sends pre-auth approval (within 4 hours of complete document receipt) or a query/denial letter.
 
-Examples include (but are not limited to): Electric shock, road accidents, poisoning, drug overdose, severe burns, haemorrhage, chest pain, snake/animal bite, food poisoning, asphyxia, hyperthermia, bone fractures, etc.
+**Reimbursement claim flow:** Undergo treatment and pay → submit all original/scanned documents to RCare within **7 days** of discharge → RGI reviews → settlement via NEFT within **30 days** of receiving complete documents, or a query/denial letter.
 
-### 8. First Aid Advisory
+**Documents needed (cashless):** Pre-Auth Form, photo ID, Health Card copy, NEFT details, KYC (if claim >₹1 lakh), PAN card copy, other hospital-requested documents.
 
-Basic first aid steps may be administered only by persons trained in first aid from a recognised institution. Incorrect intervention may cause serious harm.
+**Documents needed (reimbursement):** Claim form, photo ID, original itemized bills, payment receipts, discharge summary, investigation/diagnostic reports, NEFT details + cancelled cheque, KYC (if >₹1 lakh), PAN/Form 60 (if >₹1 lakh), legal heir certificate (if applicable). COVID-19 claims additionally need an ICMR-authorized test report, home-care prescription certificate, and home quarantine summary.
 
-**Signatories:**
-- Prof. Madhukant Sharma, Resident Warden
-- Krutika Raval, Head- HR & Administration
-- Prof. Rutu Parekh, Non-resident Warden, HoR (Women)
-- Dr. P. S. Kalyan Sasidhar, Dean (Students)
-- Kirit Pandya, Manager - Administration
-- Sh. Siddharth Swaminarayan, Executive Registrar
-
-### Annexure-1: First Aid Tips in Case of Emergency
-
-*(To be done only by a person who has undergone first-aid training course of an approved institution)*
-
-1. **Respiration** â€“ If failing, give artificial respiration (mouth-to-mouth or mouth-to-nose)
-2. **Bleeding** â€“ Arrest bleeding, apply pressure, dressing, pad and firm bandage. Elevate and keep at rest
-3. **Fractures** â€“ Immobilise with padded stiff support covering joints on either side
-4. **Burns and Scalds** â€“ Cool with cold water for 15 minutes. Do not break blisters or apply substances. Cover with clean cloth
-5. **Nose Bleeding** â€“ Sit upright, lean forward, pinch soft part of nose for 10 minutes, apply cold compress
-6. **Bee Sting** â€“ Remove sting using forceps. Apply cold or weak ammonia
-7. **Animal Bites** â€“ Wash with soap and water. Apply loose bandage. Seek medical aid
-8. **Snake Bites** â€“ Keep calm. Wash with soap and water. Apply constrictive bandage on heart side (not more than 20 minutes). Do not incise or suck wound
-9. **Fainting** â€“ Lay down, loosen clothing, raise legs slightly. Do not give food or drink
-10. **General** â€“ If in doubt, do nothing. Wrong action may cause harm
-
-*(Courtesy: St. John Ambulance Association, India)*
-
-### Annexure-2: Insurance Claim Process
-
-#### Cashless Claims
-- Present Medi-claim card at empanelled hospital
-- Hospital processes cashless authorization with Reliance General Insurance
-
-#### Reimbursement Claims
-- Submit valid bills and authorised documents to DAU via email
-- Claims processed through Reliance General Insurance
-
-#### Claim Assistance Channels
-- **Self-service:** Reliance General Insurance portal
-- **BroBot:** Automated claim assistance
-- **Website:** Online claim submission
-- **WhatsApp:** Claim support via WhatsApp
-- **Call Centre:** Phone-based claim assistance
-- **Webmail:** Email-based claim support
+**Claim channels:** Reliance Selfi app, BroBot chatbot (via reliancegeneral.co.in), website (reliancegeneral.co.in → Claims → Health Claims), WhatsApp (7400422200), Call Centre (Toll-free 1800 3009), or email (rgicl.rcarehealth@relianceada.com). Emergency hospitalization must be intimated within 24 hours; planned hospitalization 48 hours prior.
 
 # Related Links
 
-- [Medical SOP (PDF)](https://daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf)
+- [SOP PDF](https://www.daiict.ac.in/sites/default/files/other-files/SOP-Healthcare-Facilities-and-Medical-Emergencies.pdf)
 - [Emergency Contact Details](https://daiict.ac.in/emergency-contact-details)
-- [Parents](https://daiict.ac.in/parents)
+- [Dean (Students)](https://www.daiict.ac.in/dean-students)
 - [DAU Website](https://www.daiict.ac.in)

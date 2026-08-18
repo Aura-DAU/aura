@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Dr. G. Venkatesh Joins as the Director, School of Technology, DAU"
 url: "https://www.daiict.ac.in/dr-g-venkatesh-joins-director-school-technology-dau"
 category: "Announcements"
