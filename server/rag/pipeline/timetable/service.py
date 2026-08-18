@@ -228,31 +228,27 @@ def _resolve_dept(identity) -> Optional[str]:
 
 
 def _narrow_by_dept(rows: list[dict], dept: Optional[str]) -> list[dict]:
-    """Soft-filters master rows down to just this student's branch/programme,
-    e.g. so an ICT student doesn't see MnC's classes mixed into their own
-    timetable just because both cohorts share the same (year, sem, sec)
-    label. Mirrors get_timetable_for_cohort's branch narrowing: only applies
-    when it's known AND actually narrows to a non-empty set, so rows with
-    NULL branch/program (not backfilled yet, see migration 007) keep showing
-    everything rather than being filtered down to nothing."""
+    """Soft-filters master rows down to just this student's branch, e.g. so
+    an ICT student doesn't see MnC's classes mixed into their own timetable
+    just because both cohorts share the same (year, sem, sec) label.
+
+    Only `branch` (e.g. 'MnC') carries department info — `program` is the
+    degree level ('BTech'/'MTech') and is set on essentially every row
+    regardless of department, so it must NOT be treated as a dept tag or
+    matched against `dept`. Rows with an empty `branch` (the untagged
+    2nd/3rd-year Core batches called out in migration 007) are ambiguous by
+    design and always kept, regardless of whether other rows in this set
+    happen to match `dept`."""
     needle = (dept or "").strip().lower()
     if not needle or not rows:
         return rows
     out = []
     for r in rows:
         branch = (r.get("branch") or "").strip()
-        program = (r.get("program") or "").strip()
-        if not branch and not program:
-            # Untagged rows (e.g. the 2nd/3rd-year Core batches called out
-            # above) are ambiguous by design, never confirmed to belong to a
-            # different dept — always keep them regardless of whether other
-            # rows in this set happen to match `dept`. Previously this used
-            # "narrowed if narrowed else rows", which only guarded the
-            # all-empty case: a single matching row anywhere in the set was
-            # enough to silently drop every untagged Core row alongside it.
+        if not branch:
             out.append(r)
             continue
-        if needle in branch.lower() or needle in program.lower():
+        if needle in branch.lower():
             out.append(r)
     return out
 
