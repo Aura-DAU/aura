@@ -186,10 +186,11 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
-    // Bound session lifetime so stolen cookies expire without waiting for
-    // Google account recovery. Sliding refresh still renews while active.
-    maxAge: 8 * 60 * 60, // 8 hours
-    updateAge: 60 * 60, // refresh JWT at most once per hour
+    // 30-day persistent login. The sliding updateAge means the JWT is only
+    // re-signed when it's older than 24 h — reducing unnecessary re-fetches
+    // while keeping the 30-day window alive for active users.
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // refresh JWT at most once per day
   },
   // Force Secure cookies in production (NextAuth also sets httpOnly + SameSite=lax).
   useSecureCookies: process.env.NODE_ENV === "production",
@@ -204,6 +205,10 @@ export const authOptions: NextAuthOptions = {
         sameSite: "lax",
         path: "/",
         secure: process.env.NODE_ENV === "production",
+        // Explicit maxAge makes this a persistent cookie (not a session cookie).
+        // Without this the browser discards it on close even if maxAge is set
+        // in the NextAuth session config above.
+        maxAge: 30 * 24 * 60 * 60, // 30 days in seconds
       },
     },
   },
