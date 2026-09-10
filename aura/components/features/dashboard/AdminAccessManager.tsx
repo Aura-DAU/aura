@@ -43,6 +43,7 @@ export function AdminAccessManager() {
   }, [])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchAdmins()
   }, [fetchAdmins])
 

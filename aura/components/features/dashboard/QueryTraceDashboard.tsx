@@ -1,32 +1,27 @@
 "use client"
 
-import React, { useState, useEffect, useCallback, useMemo } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import {
   Search,
-  Filter,
   RefreshCw,
   Clock,
   CheckCircle2,
   XCircle,
-  AlertTriangle,
   ShieldAlert,
   HelpCircle,
   ChevronLeft,
   ChevronRight,
-  ExternalLink,
   Copy,
   Check,
   X,
   FileText,
   Activity,
-  Layers,
   Database,
-  Lock,
   User,
   Zap,
   Info,
 } from "lucide-react"
-import { toastError, toastSuccess } from "@/lib/toast"
+import { getErrorMessage, toastError, toastSuccess } from "@/lib/toast"
 import { MarkdownContent } from "@/components/ui/markdown-content"
 
 export interface QueryTraceItem {
@@ -47,7 +42,7 @@ export interface QueryTraceItem {
     start_line?: number
     end_line?: number
     path?: string
-    [key: string]: any
+    [key: string]: unknown
   }>
   sources_count: number
   answer_preview: string | null
@@ -131,8 +126,8 @@ export function QueryTraceDashboard() {
       }
       const data: QueryStats = await res.json()
       setStats(data)
-    } catch (err: any) {
-      toastError(err?.message || "Failed to load query stats")
+    } catch (err: unknown) {
+      toastError(getErrorMessage(err, "Failed to load query stats"))
     } finally {
       setStatsLoading(false)
     }
@@ -158,18 +153,20 @@ export function QueryTraceDashboard() {
       setItems(data.items || [])
       setTotalItems(data.total || 0)
       setTotalPages(data.pages || 1)
-    } catch (err: any) {
-      toastError(err?.message || "Failed to load query traces")
+    } catch (err: unknown) {
+      toastError(getErrorMessage(err, "Failed to load query traces"))
     } finally {
       setLoading(false)
     }
   }, [hours, page, pageSize, statusFilter, stageFilter, debouncedSearch])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchStats()
   }, [fetchStats])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTraces()
   }, [fetchTraces])
 
@@ -591,6 +588,20 @@ export function QueryTraceDashboard() {
           </div>
 
           <div className="flex items-center gap-2">
+            <select
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value))
+                setPage(1)
+              }}
+              className="rounded-lg border border-theme-gray-lighter bg-theme-gray-light px-2 py-1 text-xs text-neutral-300 outline-none"
+            >
+              <option value={10}>10 / page</option>
+              <option value={20}>20 / page</option>
+              <option value={50}>50 / page</option>
+              <option value={100}>100 / page</option>
+            </select>
+
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page <= 1 || loading}
