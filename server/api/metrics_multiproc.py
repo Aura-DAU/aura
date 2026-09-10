@@ -1,3 +1,4 @@
+from __future__ import annotations
 # metrics_multiproc.py — prometheus_client multiprocess-mode plumbing (OBS-01).
 #
 # The backend serves under gunicorn with N uvicorn workers (server/Dockerfile

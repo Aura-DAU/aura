@@ -105,7 +105,6 @@ export function useGoogleCalendarSync() {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setJustConnected(true)
     } else if (takePendingAutoSync()) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setJustConnected(true)
     }
     void checkStatus()

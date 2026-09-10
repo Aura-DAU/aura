@@ -26,6 +26,10 @@ Example admin workflow:
      DELETE /admin/bindings/{binding_id}
 """
 
+from __future__ import annotations
+
+import json
+import math
 import re
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field, field_validator
@@ -572,3 +576,234 @@ def get_latency_stats(hours: int = 24, admin: Identity = Depends(_require_admin)
         })
 
     return {"segments": segments, "total_requests": count}
+
+
+# ── Query Traceability & Failure Telemetry Endpoints ─────────────────────────
+
+
+@router.get("/queries")
+def list_query_traces(
+    status: Optional[str] = None,
+    stage: Optional[str] = None,
+    role: Optional[str] = None,
+    search: Optional[str] = None,
+    hours: int = 24,
+    page: int = 1,
+    page_size: int = 20,
+    admin: Identity = Depends(_require_admin),
+):
+    if hours <= 0 or hours > 720:
+        raise HTTPException(
+            status_code=400,
+            detail="Hours parameter must be between 1 and 720 (30 days)."
+        )
+    if page < 1:
+        page = 1
+    if page_size < 1:
+        page_size = 20
+    if page_size > 100:
+        page_size = 100
+
+    where_clauses = ["created_at >= NOW() - %s * INTERVAL '1 hour'"]
+    params: list = [hours]
+
+    if status and status.lower() not in ("all", ""):
+        where_clauses.append("status = %s")
+        params.append(status.lower())
+
+    if stage and stage.lower() not in ("all", ""):
+        where_clauses.append("failure_stage = %s")
+        params.append(stage.lower())
+
+    if role and role.lower() not in ("all", ""):
+        where_clauses.append("user_role = %s")
+        params.append(role.lower())
+
+    if search and search.strip():
+        term = f"%{search.strip()}%"
+        where_clauses.append("(query_text ILIKE %s OR erp_id ILIKE %s)")
+        params.extend([term, term])
+
+    where_sql = " AND ".join(where_clauses)
+
+    count_rows = db_conn.query(
+        f"SELECT COUNT(*) AS total FROM query_trace_logs WHERE {where_sql}",
+        tuple(params),
+    )
+    total = count_rows[0]["total"] if count_rows else 0
+
+    offset = (page - 1) * page_size
+    query_params = list(params)
+    query_params.extend([page_size, offset])
+
+    items_rows = db_conn.query(
+        f"""SELECT
+            id, created_at, erp_id, user_role, user_dept,
+            query_text, query_type, status, failure_stage, failure_reason,
+            sources_fetched, sources_count, answer_preview,
+            latency_total_ms, latency_guardrail_ms, latency_retrieval_ms, latency_generation_ms,
+            is_personal_data
+        FROM query_trace_logs
+        WHERE {where_sql}
+        ORDER BY created_at DESC
+        LIMIT %s OFFSET %s""",
+        tuple(query_params),
+    )
+
+    items = []
+    for r in items_rows:
+        item = dict(r)
+        if item.get("id"):
+            item["id"] = str(item["id"])
+        if item.get("created_at") and hasattr(item["created_at"], "isoformat"):
+            item["created_at"] = item["created_at"].isoformat()
+        sf = item.get("sources_fetched")
+        if isinstance(sf, str):
+            try:
+                item["sources_fetched"] = json.loads(sf)
+            except Exception:
+                item["sources_fetched"] = []
+        elif sf is None:
+            item["sources_fetched"] = []
+        items.append(item)
+
+    pages = (total + page_size - 1) // page_size if total > 0 else 1
+
+    return {
+        "items": items,
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+        "pages": pages,
+    }
+
+
+@router.get("/queries/stats")
+def get_query_trace_stats(
+    hours: int = 24,
+    admin: Identity = Depends(_require_admin),
+):
+    if hours <= 0 or hours > 720:
+        raise HTTPException(
+            status_code=400,
+            detail="Hours parameter must be between 1 and 720 (30 days)."
+        )
+
+    # 1. Total counts by status
+    status_rows = db_conn.query(
+        """SELECT status, COUNT(*) AS count
+        FROM query_trace_logs
+        WHERE created_at >= NOW() - %s * INTERVAL '1 hour'
+        GROUP BY status""",
+        (hours,),
+    )
+    status_counts = {
+        "passed": 0,
+        "failed": 0,
+        "flagged": 0,
+        "fallback": 0,
+    }
+    total_queries = 0
+    for r in status_rows:
+        st = (r["status"] or "").lower()
+        cnt = int(r["count"])
+        status_counts[st] = cnt
+        total_queries += cnt
+
+    passed_count = status_counts.get("passed", 0)
+    failed_count = status_counts.get("failed", 0)
+    flagged_count = status_counts.get("flagged", 0)
+    fallback_count = status_counts.get("fallback", 0)
+
+    pass_rate = round((passed_count / total_queries * 100.0), 1) if total_queries > 0 else 100.0
+
+    # 2. Failure breakdown by failure_stage (excluding 'none')
+    failure_rows = db_conn.query(
+        """SELECT failure_stage, COUNT(*) AS count
+        FROM query_trace_logs
+        WHERE created_at >= NOW() - %s * INTERVAL '1 hour'
+          AND failure_stage != 'none'
+        GROUP BY failure_stage
+        ORDER BY count DESC""",
+        (hours,),
+    )
+    failure_breakdown = []
+    total_failures = sum(r["count"] for r in failure_rows)
+    for r in failure_rows:
+        stage = r["failure_stage"]
+        count = int(r["count"])
+        percentage = round((count / total_failures * 100.0), 1) if total_failures > 0 else 0.0
+        failure_breakdown.append({
+            "stage": stage,
+            "count": count,
+            "percentage": percentage,
+        })
+
+    top_failure_cause = failure_breakdown[0]["stage"] if failure_breakdown else None
+
+    # 3. Latency summary
+    latency_rows = db_conn.query(
+        """SELECT
+            AVG(latency_total_ms) AS avg_total,
+            AVG(latency_guardrail_ms) AS avg_guardrail,
+            AVG(latency_retrieval_ms) AS avg_retrieval,
+            AVG(latency_generation_ms) AS avg_generation
+        FROM query_trace_logs
+        WHERE created_at >= NOW() - %s * INTERVAL '1 hour'""",
+        (hours,),
+    )
+    avg_latency = 0
+    if latency_rows and latency_rows[0]["avg_total"] is not None:
+        avg_latency = round(float(latency_rows[0]["avg_total"]))
+
+    return {
+        "total_queries": total_queries,
+        "passed_count": passed_count,
+        "failed_count": failed_count,
+        "flagged_count": flagged_count,
+        "fallback_count": fallback_count,
+        "pass_rate": pass_rate,
+        "top_failure_cause": top_failure_cause,
+        "failure_breakdown": failure_breakdown,
+        "status_counts": status_counts,
+        "avg_latency_ms": avg_latency,
+        "window_hours": hours,
+    }
+
+
+@router.get("/queries/{id}")
+def get_query_trace_detail(
+    id: str,
+    admin: Identity = Depends(_require_admin),
+):
+    rows = db_conn.query(
+        """SELECT
+            id, created_at, erp_id, user_role, user_dept,
+            query_text, query_type, status, failure_stage, failure_reason,
+            sources_fetched, sources_count, answer_preview,
+            latency_total_ms, latency_guardrail_ms, latency_retrieval_ms, latency_generation_ms,
+            is_personal_data
+        FROM query_trace_logs
+        WHERE id = %s""",
+        (id,),
+    )
+    if not rows:
+        raise HTTPException(status_code=404, detail="Query trace not found")
+
+    r = dict(rows[0])
+    if r.get("id"):
+        r["id"] = str(r["id"])
+    if r.get("created_at") and hasattr(r["created_at"], "isoformat"):
+        r["created_at"] = r["created_at"].isoformat()
+
+    sf = r.get("sources_fetched")
+    if isinstance(sf, str):
+        try:
+            r["sources_fetched"] = json.loads(sf)
+        except Exception:
+            r["sources_fetched"] = []
+    elif sf is None:
+        r["sources_fetched"] = []
+
+    return r
+
