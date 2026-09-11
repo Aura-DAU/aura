@@ -190,9 +190,50 @@ class ContextBuilder:
             # encodes a real roster year (24-25, 2025-26, 2026-27).
             title_str = metadata.get("title", "")
             doc_rule_year = self._rule_year_from_metadata(metadata)
+            url = metadata.get("url")
+            relative_path = metadata.get("relative_path")
 
             start_line_val = metadata.get("start_line", "")
             end_line_val = metadata.get("end_line", "")
+
+            if (not start_line_val or start_line_val == end_line_val) and relative_path:
+                try:
+                    import pathlib
+                    import re
+                    repo_root = pathlib.Path(__file__).resolve().parents[4]
+                    norm_path = relative_path.replace("\\", "/").lstrip("/")
+                    if norm_path.startswith("data/"):
+                        full_path = repo_root / norm_path
+                    else:
+                        full_path = repo_root / "data" / norm_path
+
+                    if full_path.exists():
+                        raw_text = metadata.get("text", "")
+                        if raw_text:
+                            with open(full_path, "r", encoding="utf-8") as f:
+                                file_lines = f.read().splitlines()
+                            matching = []
+                            for raw_line in raw_text.splitlines():
+                                if raw_line.strip().startswith(("H1:", "H2:", "H3:", "H4:", "Faculty Name:", "Document Title:", "Course Name:", "Course Code:", "Semester:", "Credits:")):
+                                    continue
+                                clean = re.sub(r"^:\s*", "", raw_line)
+                                clean = re.sub(r"[*_`#]", "", clean).strip()
+                                if len(clean) >= 12:
+                                    probe = clean[:30]
+                                    for l_idx, fl in enumerate(file_lines):
+                                        if probe in fl or (len(fl.strip()) >= 12 and fl.strip() in clean):
+                                            matching.append(l_idx)
+                            if matching:
+                                s_line = min(matching) + 1
+                                e_line = max(matching) + 1
+                                if s_line > 1 and re.match(r"^#{1,6}\s", file_lines[s_line - 2]):
+                                    s_line = s_line - 1
+                                elif s_line > 2 and re.match(r"^#{1,6}\s", file_lines[s_line - 3]) and not file_lines[s_line - 2].strip():
+                                    s_line = s_line - 2
+                                start_line_val = s_line
+                                end_line_val = e_line
+                except Exception as e:
+                    logger.debug(f"Failed to dynamically compute lines for {relative_path}: {e}")
 
             document = f"""
 <doc
@@ -217,9 +258,6 @@ scraped_date="{metadata.get('scraped_date', '')}"
 </doc>
 """
             documents.append(document)
-
-            url = metadata.get("url")
-            relative_path = metadata.get("relative_path")
 
             # Fix CB6 (Phase C): previously a chunk was only ever cited if it
             # had a public "url" — internal-only markdown (no website URL)
