@@ -76,8 +76,10 @@ const BoxShape = (props: BoxShapeProps) => {
   )
 }
 
+type AdminTab = "failures" | "conversations" | "latency" | "access"
+
 export default function AdminBindingsClient() {
-  const [activeTab, setActiveTab] = useState<"failures" | "conversations" | "latency" | "access">("failures")
+  const [activeTab, setActiveTab] = useState<AdminTab>("failures")
   const [erpId, setErpId] = useState("")
   const [searchQuery, setSearchQuery] = useState("")
   const [loading, setLoading] = useState(false)
@@ -251,7 +253,7 @@ export default function AdminBindingsClient() {
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => setActiveTab(tab.id as AdminTab)}
                 className={`flex items-center gap-2 px-4 py-3 text-xs font-semibold border-b-2 transition-colors whitespace-nowrap ${
                   isActive
                     ? "border-theme-red text-theme-red"

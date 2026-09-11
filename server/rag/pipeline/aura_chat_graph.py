@@ -22,7 +22,7 @@ reimplement any of the underlying business logic.
 class instead of `AuraChat` directly. `AuraChat` itself is left in place
 unmodified as the reference implementation / fallback.
 """
-
+import inspect
 import re
 from typing import Optional, TypedDict, Any
 
@@ -1232,7 +1232,20 @@ class AuraChatGraph:
                 "langsmith_run_id": None,
                 "result": None,
             }
-            final_state = self._graph.invoke(initial_state, config=trace_config)
+            # Inspect whether self._graph.invoke accepts config (handles mocks in unit tests)
+            accepts_config = True
+            try:
+                sig = inspect.signature(self._graph.invoke)
+                accepts_config = "config" in sig.parameters or any(
+                    p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()
+                )
+            except (ValueError, TypeError):
+                accepts_config = True
+
+            if accepts_config:
+                final_state = self._graph.invoke(initial_state, config=trace_config)
+            else:
+                final_state = self._graph.invoke(initial_state)
             run_id = collector.run_id
             result = final_state.get("result")
             if result is None:

@@ -75,7 +75,10 @@ class FailureLogger:
                     meta_json,
                 ),
             )
-        except Exception:
+        except Exception as exc:
+            if "AUTH_DB_URL" in str(exc):
+                logger.debug("query_failures skipped: AUTH_DB_URL not configured.")
+                return
             logger.error(
                 "query_failures INSERT failed — continuing.\n%s",
                 traceback.format_exc(),

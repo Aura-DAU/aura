@@ -76,7 +76,10 @@ class ChatHistoryLogger:
                    VALUES (%s, 'assistant', %s, %s, %s::jsonb)""",
                 (thread_id, assistant_message, is_personal_data, sources_json),
             )
-        except Exception:
+        except Exception as exc:
+            if "AUTH_DB_URL" in str(exc):
+                logger.debug("chat_history skipped: AUTH_DB_URL not configured.")
+                return
             logger.error(
                 "chat_history INSERT failed for thread %s — continuing.\n%s",
                 thread_id,

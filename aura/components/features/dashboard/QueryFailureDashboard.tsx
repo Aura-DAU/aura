@@ -1,16 +1,14 @@
 "use client"
 
-import React, { useState, useEffect, useTransition } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import {
   AlertTriangle,
   ExternalLink,
   CheckCircle2,
-  Filter,
   Search,
   RefreshCw,
   Loader2,
   AlertCircle,
-  Clock,
   Activity,
   Layers,
   Code,
@@ -94,8 +92,6 @@ export function QueryFailureDashboard() {
   const [loadingSummary, setLoadingSummary] = useState(false)
   const [loadingList, setLoadingList] = useState(false)
   const [selectedFailure, setSelectedFailure] = useState<FailureItem | null>(null)
-  const [failureDetailContext, setFailureDetailContext] = useState<any | null>(null)
-  const [loadingDetail, setLoadingDetail] = useState(false)
 
   // Filters
   const [selectedStage, setSelectedStage] = useState<string>("")
@@ -104,7 +100,7 @@ export function QueryFailureDashboard() {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [resolvingId, setResolvingId] = useState<number | null>(null)
 
-  const fetchSummary = async () => {
+  const fetchSummary = useCallback(async () => {
     setLoadingSummary(true)
     try {
       const res = await fetch(`/api/admin/failures/summary?days=${days}`)
@@ -119,9 +115,9 @@ export function QueryFailureDashboard() {
     } finally {
       setLoadingSummary(false)
     }
-  }
+  }, [days])
 
-  const fetchFailures = async () => {
+  const fetchFailures = useCallback(async () => {
     setLoadingList(true)
     try {
       const params = new URLSearchParams()
@@ -146,15 +142,15 @@ export function QueryFailureDashboard() {
     } finally {
       setLoadingList(false)
     }
-  }
+  }, [days, selectedStage, selectedCode, resolvedFilter, searchQuery])
 
   useEffect(() => {
     fetchSummary()
-  }, [days])
+  }, [fetchSummary])
 
   useEffect(() => {
     fetchFailures()
-  }, [days, selectedStage, selectedCode, resolvedFilter])
+  }, [fetchFailures])
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -189,22 +185,8 @@ export function QueryFailureDashboard() {
     }
   }
 
-  const openDetail = async (item: FailureItem) => {
+  const openDetail = (item: FailureItem) => {
     setSelectedFailure(item)
-    setFailureDetailContext(null)
-    setLoadingDetail(true)
-    try {
-      const res = await fetch(`/api/admin/failures?search=${encodeURIComponent(item.id.toString())}&limit=1`)
-      // Or fetch from /api/admin/failures by searching ID
-      const data = await res.json()
-      if (data.items && data.items.length > 0) {
-        // detail
-      }
-    } catch {
-      // noop
-    } finally {
-      setLoadingDetail(false)
-    }
   }
 
   const stageChartData = (summary?.by_stage || []).map((s) => ({

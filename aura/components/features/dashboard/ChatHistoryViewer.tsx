@@ -1,20 +1,16 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import {
   MessageSquare,
   Search,
   User,
   Bot,
-  Calendar,
-  Clock,
   ExternalLink,
   ShieldAlert,
   FileText,
   Loader2,
-  CheckCircle2,
   RefreshCw,
-  Hash,
 } from "lucide-react"
 import { getErrorMessage, toastError } from "@/lib/toast"
 
@@ -33,7 +29,7 @@ interface MessageItem {
   thread_id: string
   role: string
   content: string
-  sources: any
+  sources: Array<Record<string, unknown>> | null
   is_personal_data: boolean
   langsmith_run_id: string | null
   langsmith_url: string | null
@@ -57,7 +53,7 @@ export function ChatHistoryViewer() {
   const [searchQuery, setSearchQuery] = useState("")
   const [roleFilter, setRoleFilter] = useState("")
 
-  const fetchThreads = async () => {
+  const fetchThreads = useCallback(async () => {
     setLoadingThreads(true)
     try {
       const params = new URLSearchParams()
@@ -75,17 +71,17 @@ export function ChatHistoryViewer() {
       setTotalThreads(data.total || 0)
 
       // Auto-select first thread if none selected
-      if (!selectedThreadId && data.items && data.items.length > 0) {
-        setSelectedThreadId(data.items[0].thread_id)
-      }
+      setSelectedThreadId((prev) =>
+        !prev && data.items && data.items.length > 0 ? data.items[0].thread_id : prev
+      )
     } catch (err) {
       toastError(getErrorMessage(err, "Failed to load conversations"))
     } finally {
       setLoadingThreads(false)
     }
-  }
+  }, [roleFilter, searchQuery])
 
-  const fetchThreadDetail = async (threadId: string) => {
+  const fetchThreadDetail = useCallback(async (threadId: string) => {
     setLoadingMessages(true)
     try {
       const res = await fetch(`/api/admin/conversations/${encodeURIComponent(threadId)}`)
@@ -100,17 +96,17 @@ export function ChatHistoryViewer() {
     } finally {
       setLoadingMessages(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     fetchThreads()
-  }, [roleFilter])
+  }, [fetchThreads])
 
   useEffect(() => {
     if (selectedThreadId) {
       fetchThreadDetail(selectedThreadId)
     }
-  }, [selectedThreadId])
+  }, [selectedThreadId, fetchThreadDetail])
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -172,7 +168,7 @@ export function ChatHistoryViewer() {
               </select>
 
               <span className="text-[11px] text-neutral-500">
-                {threads.length} threads loaded
+                {threads.length} of {totalThreads} loaded
               </span>
             </div>
           </div>
