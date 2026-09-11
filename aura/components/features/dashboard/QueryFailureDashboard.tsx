@@ -356,7 +356,10 @@ export function QueryFailureDashboard() {
                 <Bar
                   dataKey="count"
                   radius={[0, 4, 4, 0]}
-                  onClick={(entry) => setSelectedStage(entry.name === selectedStage ? "" : entry.name)}
+                  onClick={(entry) => {
+                    const stage = entry?.name || ""
+                    setSelectedStage(stage === selectedStage ? "" : stage)
+                  }}
                   cursor="pointer"
                 >
                   {stageChartData.map((entry, index) => (
