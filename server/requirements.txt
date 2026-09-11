@@ -20,6 +20,7 @@ groq
 qdrant-client
 pinecone
 langgraph
+langsmith>=0.1.0
 sentence-transformers
 torch
 openai-whisper

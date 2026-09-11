@@ -48,6 +48,8 @@ from erp_context_builder import ERPContextBuilder
 from access_control import AccessControlGate, AccessDecision, resolve_effective_role
 from audit_log import AuditLog
 from personal_query_classifier import PersonalQueryClassifier
+from pipeline.langsmith_tracer import create_trace_config
+from pipeline.failure_logger import record_query_failure
 
 from pipeline.aura_chat import (
     GENERIC_DENIAL,
@@ -225,6 +227,8 @@ class AuraState(TypedDict, total=False):
     on_delta: Any  # token-streaming callback, threaded straight to the generator
     on_profile_update: Any  # name extraction callback
     summary: Optional[str]  # rolling conversation memory (pipeline.memory)
+    thread_id: Optional[str]
+    langsmith_run_id: Optional[str]
 
     query_type: Optional[str]
     classification: dict
@@ -342,6 +346,16 @@ class AuraChatGraph:
         # matching is_safe(); the personal-data path re-checks with
         # is_safe_strict() further down the graph, which fails closed.
         if verdict is Verdict.UNSAFE:
+            record_query_failure(
+                query_text=state["query"],
+                failure_stage="guardrail",
+                failure_code="GUARDRAIL_UNSAFE",
+                error_message="Query violated safety, privacy, or security boundaries.",
+                user_role=getattr(state.get("identity"), "role", "guest"),
+                erp_id=getattr(state.get("identity"), "erp_id", None),
+                thread_id=state.get("thread_id"),
+                langsmith_run_id=state.get("langsmith_run_id"),
+            )
             state["result"] = {
                 "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                 "sources": [],
@@ -349,6 +363,16 @@ class AuraChatGraph:
             }
             state["is_guardrail"] = True
         elif verdict is Verdict.OFF_TOPIC:
+            record_query_failure(
+                query_text=state["query"],
+                failure_stage="guardrail",
+                failure_code="GUARDRAIL_OFF_TOPIC",
+                error_message="Query deemed off-topic for university assistant.",
+                user_role=getattr(state.get("identity"), "role", "guest"),
+                erp_id=getattr(state.get("identity"), "erp_id", None),
+                thread_id=state.get("thread_id"),
+                langsmith_run_id=state.get("langsmith_run_id"),
+            )
             state["result"] = {
                 "answer": OFF_TOPIC_RESPONSE,
                 "sources": [],
@@ -596,6 +620,16 @@ class AuraChatGraph:
                 exc=exc,
                 degraded_to="public_rag",
             )
+            record_query_failure(
+                query_text=state["query"],
+                failure_stage="tool_execution",
+                failure_code="AURA-GRAPH-003",
+                error_message=f"Community orchestrator error, degraded to public RAG: {exc}",
+                user_role=getattr(identity, "role", None),
+                erp_id=getattr(identity, "erp_id", None),
+                thread_id=state.get("thread_id"),
+                langsmith_run_id=state.get("langsmith_run_id"),
+            )
             return state
 
         answer = (result.get("answer") or "").strip()
@@ -766,6 +800,15 @@ class AuraChatGraph:
             request_context = state.get("request_context")
             user_role = request_context.effective_role if request_context else "guest"
             if user_role == "guest":
+                record_query_failure(
+                    query_text=state["query"],
+                    failure_stage="access_control",
+                    failure_code="GUEST_ACCESS_DENIED",
+                    error_message="Guest attempted to access personal data path.",
+                    user_role="guest",
+                    thread_id=state.get("thread_id"),
+                    langsmith_run_id=state.get("langsmith_run_id"),
+                )
                 state["result"] = {
                     "answer": GENERIC_DENIAL,
                     "sources": [],
@@ -782,6 +825,16 @@ class AuraChatGraph:
             with track_segment("guardrail_time"):
                 is_safe_strict = self.guardrail.is_safe_strict(state["query"])
             if not is_safe_strict:
+                record_query_failure(
+                    query_text=state["query"],
+                    failure_stage="guardrail",
+                    failure_code="STRICT_GUARDRAIL_BLOCKED",
+                    error_message="Strict guardrail failed on personal data path.",
+                    user_role=getattr(identity, "role", None),
+                    erp_id=getattr(identity, "erp_id", None),
+                    thread_id=state.get("thread_id"),
+                    langsmith_run_id=state.get("langsmith_run_id"),
+                )
                 state["result"] = {
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                     "sources": [],
@@ -824,6 +877,16 @@ class AuraChatGraph:
         )
 
         if access_result.decision == AccessDecision.DENIED:
+            record_query_failure(
+                query_text=state["query"],
+                failure_stage="access_control",
+                failure_code="ACCESS_DENIED",
+                error_message=access_result.reason or "Access denied by access gate.",
+                user_role=getattr(identity, "role", None),
+                erp_id=getattr(identity, "erp_id", None),
+                thread_id=state.get("thread_id"),
+                langsmith_run_id=state.get("langsmith_run_id"),
+            )
             state["result"] = {"answer": GENERIC_DENIAL, "sources": [], "is_personal_data": False, "is_guardrail": True}
             state["is_guardrail"] = True
             return state
@@ -832,8 +895,18 @@ class AuraChatGraph:
             course_code = (access_result.course_codes[0] if access_result.course_codes else None)
             try:
                 erp_data = {"aggregate": self.erp_connector.get_class_aggregate(course_code) if course_code else {}}
-            except Exception:
+            except Exception as exc:
                 import traceback; traceback.print_exc()
+                record_query_failure(
+                    query_text=state["query"],
+                    failure_stage="database",
+                    failure_code="ERP_AGGREGATE_FETCH_ERROR",
+                    error_message=str(exc),
+                    user_role=getattr(identity, "role", None),
+                    erp_id=getattr(identity, "erp_id", None),
+                    thread_id=state.get("thread_id"),
+                    langsmith_run_id=state.get("langsmith_run_id"),
+                )
                 state["result"] = {
                     "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
                     "sources": [], "is_personal_data": False, "is_guardrail": True,
@@ -859,8 +932,18 @@ class AuraChatGraph:
                     access_result,
                     requester_erp_id=identity.erp_id,
                 )
-            except Exception:
+            except Exception as exc:
                 import traceback; traceback.print_exc()
+                record_query_failure(
+                    query_text=state["query"],
+                    failure_stage="database",
+                    failure_code="ERP_DATA_FETCH_ERROR",
+                    error_message=str(exc),
+                    user_role=getattr(identity, "role", None),
+                    erp_id=getattr(identity, "erp_id", None),
+                    thread_id=state.get("thread_id"),
+                    langsmith_run_id=state.get("langsmith_run_id"),
+                )
                 state["result"] = {
                     "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
                     "sources": [], "is_personal_data": False, "is_guardrail": True,
@@ -931,6 +1014,17 @@ class AuraChatGraph:
                 ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE
                 if reason == "academic_scope_unavailable"
                 else RETRIEVAL_FAILURE_RESPONSE
+            )
+            fail_code = "ACADEMIC_SCOPE_UNAVAILABLE" if reason == "academic_scope_unavailable" else "RETRIEVAL_EMPTY"
+            record_query_failure(
+                query_text=state["query"],
+                failure_stage="retrieval",
+                failure_code=fail_code,
+                error_message=f"No chunks retrieved (reason={reason}).",
+                user_role=user_role,
+                erp_id=getattr(state.get("identity"), "erp_id", None),
+                thread_id=state.get("thread_id"),
+                langsmith_run_id=state.get("langsmith_run_id"),
             )
             state["result"] = {
                 "answer": answer,
@@ -1087,7 +1181,18 @@ class AuraChatGraph:
             profile["branch"] = scope.branch_id
         return profile
 
-    def chat(self, query, history=None, identity=None, display_profile=None, on_delta=None, on_profile_update=None, summary=None, request_context=None):
+    def chat(
+        self,
+        query,
+        history=None,
+        identity=None,
+        display_profile=None,
+        on_delta=None,
+        on_profile_update=None,
+        summary=None,
+        request_context=None,
+        thread_id=None,
+    ):
         if request_context is not None:
             identity = request_context.identity
         if isinstance(identity, dict):
@@ -1096,6 +1201,21 @@ class AuraChatGraph:
                 role=identity.get("role"),
                 dept=identity.get("dept"),
             )
+
+        role = getattr(identity, "role", "guest") if identity else "guest"
+        erp_id = getattr(identity, "erp_id", None) if identity else None
+
+        trace_meta = {
+            "role": role,
+            "erp_id": erp_id,
+            "thread_id": thread_id,
+        }
+        trace_tags = ["aura", role]
+        trace_config, collector = create_trace_config(
+            run_name="aura_chat_graph",
+            metadata=trace_meta,
+            tags=trace_tags,
+        )
 
         try:
             initial_state: AuraState = {
@@ -1108,9 +1228,12 @@ class AuraChatGraph:
                 "on_delta": on_delta,
                 "on_profile_update": on_profile_update,
                 "summary": summary or "",
+                "thread_id": thread_id,
+                "langsmith_run_id": None,
                 "result": None,
             }
-            final_state = self._graph.invoke(initial_state)
+            final_state = self._graph.invoke(initial_state, config=trace_config)
+            run_id = collector.run_id
             result = final_state.get("result")
             if result is None:
                 # Should be unreachable — every path sets "result" before
@@ -1121,19 +1244,54 @@ class AuraChatGraph:
                     detail="graph reached END without setting result",
                     visited=",".join(sorted(k for k in final_state if final_state.get(k) is not None)),
                 )
-                return {"answer": "Sorry, I encountered an error while generating a response. Please try again.", "sources": [], "is_personal_data": False}
+                record_query_failure(
+                    query_text=query,
+                    failure_stage="llm_generation",
+                    failure_code="AURA-GRAPH-001",
+                    error_message="Graph reached END without setting result",
+                    user_role=role,
+                    erp_id=erp_id,
+                    thread_id=thread_id,
+                    langsmith_run_id=run_id,
+                )
+                return {
+                    "answer": "Sorry, I encountered an error while generating a response. Please try again.",
+                    "sources": [],
+                    "is_personal_data": False,
+                    "langsmith_run_id": run_id,
+                }
+            if isinstance(result, dict) and run_id:
+                result["langsmith_run_id"] = run_id
             return result
 
         except Exception as e:
+            run_id = collector.run_id
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
+                fail_code = "VLLM_TIMEOUT"
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+                fail_code = "AURA-GRAPH-002"
             log_soft_failure(
                 "AURA-GRAPH-002",
                 "graph.invoke",
                 exc=e,
                 user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
             )
-            return {"answer": msg, "sources": [], "is_personal_data": False}
+            record_query_failure(
+                query_text=query,
+                failure_stage="llm_generation",
+                failure_code=fail_code,
+                error_message=str(e),
+                user_role=role,
+                erp_id=erp_id,
+                thread_id=thread_id,
+                langsmith_run_id=run_id,
+            )
+            return {
+                "answer": msg,
+                "sources": [],
+                "is_personal_data": False,
+                "langsmith_run_id": run_id,
+            }

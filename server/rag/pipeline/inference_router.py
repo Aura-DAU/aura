@@ -17,6 +17,7 @@ import threading
 import httpx
 from openai import OpenAI, RateLimitError, APIStatusError, APIConnectionError
 from pipeline.exceptions import RAGPipelineError
+from pipeline.langsmith_tracer import wrap_openai_client
 
 
 def _env_float(name: str, default: float) -> float:
@@ -475,8 +476,8 @@ class InferenceRouter:
                     max_retries=0,
                     http_client=http_client,
                 )
-                cls._clients[node] = client
-            return client
+                cls._clients[node] = wrap_openai_client(client)
+            return cls._clients[node]
 
     @classmethod
     def get_client(cls) -> OpenAI:

@@ -22,6 +22,7 @@ class AURA:
         summary=None,
         request_context=None,
         on_profile_update=None,
+        thread_id=None,
     ):
         return self.chatbot.chat(
             query=question,
@@ -32,4 +33,5 @@ class AURA:
             summary=summary,
             request_context=request_context,
             on_profile_update=on_profile_update,
+            thread_id=thread_id,
         )
