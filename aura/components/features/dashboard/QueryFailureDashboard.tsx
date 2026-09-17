@@ -45,6 +45,8 @@ interface FailureItem {
   thread_id: string | null
   erp_id: string
   role: string
+  trace_id?: string | null
+  trace_url?: string | null
   langsmith_run_id: string | null
   langsmith_url: string | null
   created_at: string
@@ -517,9 +519,9 @@ export function QueryFailureDashboard() {
                       </span>
                     </td>
                     <td className="py-3 px-4 whitespace-nowrap">
-                      {item.langsmith_url ? (
+                      {item.trace_url || item.langsmith_url ? (
                         <a
-                          href={item.langsmith_url}
+                          href={(item.trace_url || item.langsmith_url)!}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
@@ -626,19 +628,19 @@ export function QueryFailureDashboard() {
                 </div>
               </div>
 
-              {selectedFailure.langsmith_url && (
+              {(selectedFailure.trace_url || selectedFailure.langsmith_url) && (
                 <div>
                   <label className="text-[10px] uppercase font-semibold text-neutral-500">
-                    LangSmith Trace
+                    Execution Trace
                   </label>
                   <div className="mt-1">
                     <a
-                      href={selectedFailure.langsmith_url}
+                      href={(selectedFailure.trace_url || selectedFailure.langsmith_url)!}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-3 py-2 text-emerald-400 hover:bg-emerald-500/20 font-medium transition-colors"
                     >
-                      <span>Open Full Trace in LangSmith</span>
+                      <span>Open Full Trace</span>
                       <ExternalLink className="size-3.5" />
                     </a>
                   </div>

@@ -292,6 +292,7 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
         assistant_message=result.get("answer", "") if isinstance(result, dict) else str(result),
         sources=result.get("sources") if isinstance(result, dict) else [],
         is_personal_data=bool(isinstance(result, dict) and result.get("is_personal_data")),
+        trace_id=result.get("trace_id") or result.get("langsmith_run_id") if isinstance(result, dict) else None,
     )
     # Persist EVERY conversation (not just compacted ones), keyed by thread id so
     # this chat's block updates in place across turns. Guests no-op in the store.
@@ -557,6 +558,7 @@ async def chat_stream(
                         assistant_message=answer,
                         sources=citations,
                         is_personal_data=bool(result.get("is_personal_data")),
+                        trace_id=result.get("trace_id") or result.get("langsmith_run_id"),
                     )
 
                     # Cache write: guest public standalone queries only (exclude error/rejection responses)

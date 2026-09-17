@@ -53,8 +53,22 @@ class FailureLogger:
             stage = failure_stage if failure_stage is not None else kwargs.get("stage", "pipeline")
             code = failure_code if failure_code is not None else kwargs.get("error_code", "UNKNOWN")
             role = user_role if user_role is not None else kwargs.get("role")
-            meta = metadata if metadata is not None else kwargs.get("context", {})
-            meta_json = json.dumps(meta or {})
+            
+            trace_id = kwargs.get("trace_id") or langsmith_run_id
+            trace_url = kwargs.get("trace_url")
+            if not trace_url and trace_id:
+                try:
+                    from pipeline.tracer import get_trace_url
+                    trace_url = get_trace_url(trace_id)
+                except Exception:
+                    pass
+
+            meta = dict(metadata or kwargs.get("context", {}) or {})
+            if trace_url:
+                meta["trace_url"] = trace_url
+            if trace_id:
+                meta["trace_id"] = trace_id
+            meta_json = json.dumps(meta)
 
             self._db.execute(
                 """INSERT INTO query_failures
@@ -70,7 +84,7 @@ class FailureLogger:
                     str(role)[:32] if role else None,
                     str(erp_id)[:64] if erp_id else None,
                     str(thread_id)[:64] if thread_id else None,
-                    str(langsmith_run_id)[:128] if langsmith_run_id else None,
+                    str(trace_id)[:128] if trace_id else None,
                     latency_ms,
                     meta_json,
                 ),

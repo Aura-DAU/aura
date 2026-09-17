@@ -35,6 +35,8 @@ class ChatHistoryLogger:
         assistant_message: str,
         sources: Optional[list[Any]] = None,
         is_personal_data: bool = False,
+        trace_id: Optional[str] = None,
+        **kwargs: Any,
     ) -> None:
         """
         Record a completed conversation turn (both user query and assistant reply).
@@ -42,6 +44,8 @@ class ChatHistoryLogger:
         """
         if not thread_id:
             return
+
+        run_id = trace_id or kwargs.get("langsmith_run_id")
 
         try:
             # Generate a helpful thread title from the initial user query (first 60 chars)
@@ -72,9 +76,9 @@ class ChatHistoryLogger:
             # 3. Insert assistant message
             sources_json = json.dumps(sources or [])
             self._db.execute(
-                """INSERT INTO chat_messages (thread_id, role, content, is_personal_data, sources)
-                   VALUES (%s, 'assistant', %s, %s, %s::jsonb)""",
-                (thread_id, assistant_message, is_personal_data, sources_json),
+                """INSERT INTO chat_messages (thread_id, role, content, is_personal_data, sources, langsmith_run_id)
+                   VALUES (%s, 'assistant', %s, %s, %s::jsonb, %s)""",
+                (thread_id, assistant_message, is_personal_data, sources_json, run_id),
             )
         except Exception as exc:
             if "AUTH_DB_URL" in str(exc):
@@ -105,6 +109,8 @@ def record_chat_turn(
     assistant_message: str,
     sources: Optional[list[Any]] = None,
     is_personal_data: bool = False,
+    trace_id: Optional[str] = None,
+    **kwargs: Any,
 ) -> None:
     """Convenience helper to record a completed chat turn."""
     if not thread_id:
@@ -118,6 +124,8 @@ def record_chat_turn(
             assistant_message=assistant_message,
             sources=sources,
             is_personal_data=is_personal_data,
+            trace_id=trace_id,
+            **kwargs,
         )
     except Exception:
         pass

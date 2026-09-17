@@ -35,7 +35,7 @@ from typing import Literal, Optional
 import db.connection as db_conn
 from api.auth import require_identity, Identity
 from access_control import resolve_effective_role
-from pipeline.langsmith_tracer import get_langsmith_run_url
+from pipeline.tracer import get_trace_url, get_langsmith_run_url
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -693,8 +693,16 @@ def list_failures(
         rows = db_conn.query(select_sql, tuple(fetch_params))
 
         for r in rows:
-            if not r.get("langsmith_url") and r.get("langsmith_run_id"):
-                r["langsmith_url"] = get_langsmith_run_url(r["langsmith_run_id"])
+            trace_id = r.get("langsmith_run_id") or r.get("trace_id")
+            resolved_url = (
+                r.get("trace_url")
+                or r.get("langsmith_url")
+                or get_trace_url(trace_id)
+                or (get_langsmith_run_url(trace_id) if trace_id else None)
+            )
+            r["trace_id"] = trace_id
+            r["trace_url"] = resolved_url
+            r["langsmith_url"] = resolved_url
 
         return {
             "total": total,
@@ -721,8 +729,16 @@ def get_failure_detail(failure_id: int, admin: Identity = Depends(_require_admin
         if not rows:
             raise HTTPException(status_code=404, detail="Failure record not found.")
         row = rows[0]
-        if not row.get("langsmith_url") and row.get("langsmith_run_id"):
-            row["langsmith_url"] = get_langsmith_run_url(row["langsmith_run_id"])
+        trace_id = row.get("langsmith_run_id") or row.get("trace_id")
+        resolved_url = (
+            row.get("trace_url")
+            or row.get("langsmith_url")
+            or get_trace_url(trace_id)
+            or (get_langsmith_run_url(trace_id) if trace_id else None)
+        )
+        row["trace_id"] = trace_id
+        row["trace_url"] = resolved_url
+        row["langsmith_url"] = resolved_url
         return row
     except HTTPException:
         raise
@@ -821,8 +837,16 @@ def get_conversation_detail(thread_id: str, admin: Identity = Depends(_require_a
         )
 
         for msg in message_rows:
-            if msg.get("langsmith_run_id"):
-                msg["langsmith_url"] = get_langsmith_run_url(msg["langsmith_run_id"])
+            trace_id = msg.get("langsmith_run_id") or msg.get("trace_id")
+            resolved_url = (
+                msg.get("trace_url")
+                or msg.get("langsmith_url")
+                or get_trace_url(trace_id)
+                or (get_langsmith_run_url(trace_id) if trace_id else None)
+            )
+            msg["trace_id"] = trace_id
+            msg["trace_url"] = resolved_url
+            msg["langsmith_url"] = resolved_url
 
         return {
             "thread": thread,

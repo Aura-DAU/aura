@@ -17,7 +17,7 @@ import threading
 import httpx
 from openai import OpenAI, RateLimitError, APIStatusError, APIConnectionError
 from pipeline.exceptions import RAGPipelineError
-from pipeline.langsmith_tracer import wrap_openai_client
+from pipeline.tracer import wrap_openai_client
 
 
 def _env_float(name: str, default: float) -> float:

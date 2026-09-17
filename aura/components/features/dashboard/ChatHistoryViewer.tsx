@@ -31,6 +31,8 @@ interface MessageItem {
   content: string
   sources: Array<Record<string, unknown>> | null
   is_personal_data: boolean
+  trace_id?: string | null
+  trace_url?: string | null
   langsmith_run_id: string | null
   langsmith_url: string | null
   created_at: string
@@ -326,9 +328,9 @@ export function ChatHistoryViewer() {
                                 )}
                               </div>
 
-                              {msg.langsmith_url && (
+                              {(msg.trace_url || msg.langsmith_url) && (
                                 <a
-                                  href={msg.langsmith_url}
+                                  href={(msg.trace_url || msg.langsmith_url)!}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="inline-flex items-center gap-1 text-[10px] font-medium text-emerald-400 hover:text-emerald-300 underline underline-offset-2"

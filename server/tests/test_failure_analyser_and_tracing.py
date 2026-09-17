@@ -19,10 +19,13 @@ os.environ["INTERNAL_JWT_SECRET"] = SECRET
 
 from api.auth import INTERNAL_JWT_AUDIENCE, INTERNAL_JWT_ISSUER
 from api.routes import admin_routes
-from pipeline.langsmith_tracer import (
+from pipeline.tracer import (
     is_tracing_enabled,
     create_trace_config,
     get_langsmith_run_url,
+    get_langfuse_trace_url,
+    get_trace_url,
+    get_active_provider,
     wrap_openai_client,
 )
 from pipeline.failure_logger import record_query_failure
@@ -49,16 +52,30 @@ def auth_headers(token: str | None = None) -> dict[str, str]:
     return {"Authorization": f"Bearer {token or make_token()}"}
 
 
-# ── 1. LangSmith Tracer Tests ─────────────────────────────────────────────────
+# ── 1. Unified Tracer & Provider Tests ────────────────────────────────────────
 
-def test_langsmith_tracer_disabled_by_default(monkeypatch):
+def test_tracer_disabled_by_default(monkeypatch):
+    monkeypatch.delenv("LANGFUSE_PUBLIC_KEY", raising=False)
+    monkeypatch.delenv("LANGFUSE_SECRET_KEY", raising=False)
     monkeypatch.delenv("LANGCHAIN_API_KEY", raising=False)
+    monkeypatch.delenv("LANGSMITH_API_KEY", raising=False)
+    assert get_active_provider() == "none"
     assert not is_tracing_enabled()
 
 
-def test_langsmith_tracer_enabled_with_key(monkeypatch):
+def test_tracer_langfuse_enabled(monkeypatch):
+    monkeypatch.setenv("LANGFUSE_PUBLIC_KEY", "pk-lf-test-1234")
+    monkeypatch.setenv("LANGFUSE_SECRET_KEY", "sk-lf-test-5678")
+    assert get_active_provider() == "langfuse"
+    assert is_tracing_enabled()
+
+
+def test_tracer_langsmith_fallback_enabled(monkeypatch):
+    monkeypatch.delenv("LANGFUSE_PUBLIC_KEY", raising=False)
+    monkeypatch.delenv("LANGFUSE_SECRET_KEY", raising=False)
     monkeypatch.setenv("LANGCHAIN_API_KEY", "ls__test_key_12345")
     monkeypatch.setenv("LANGCHAIN_TRACING_V2", "true")
+    assert get_active_provider() == "langsmith"
     assert is_tracing_enabled()
 
 
@@ -79,6 +96,19 @@ def test_create_trace_config():
     assert "student" in config["tags"]
 
 
+def test_get_langfuse_trace_url(monkeypatch):
+    monkeypatch.setenv("LANGFUSE_HOST", "https://cloud.langfuse.com")
+    monkeypatch.delenv("LANGFUSE_PROJECT_ID", raising=False)
+    url = get_langfuse_trace_url("tr_abc123")
+    assert url == "https://cloud.langfuse.com/trace/tr_abc123"
+
+    monkeypatch.setenv("LANGFUSE_PROJECT_ID", "p_dau42")
+    url_with_proj = get_langfuse_trace_url("tr_abc123")
+    assert url_with_proj == "https://cloud.langfuse.com/project/p_dau42/traces/tr_abc123"
+
+    assert get_langfuse_trace_url(None) is None
+
+
 def test_get_langsmith_run_url(monkeypatch):
     monkeypatch.setenv("LANGCHAIN_PROJECT", "test-aura-project")
     url = get_langsmith_run_url("run_123456")
@@ -88,6 +118,19 @@ def test_get_langsmith_run_url(monkeypatch):
 
     # None if run_id is None
     assert get_langsmith_run_url(None) is None
+
+
+def test_get_trace_url_dynamic(monkeypatch):
+    monkeypatch.delenv("LANGFUSE_PUBLIC_KEY", raising=False)
+    monkeypatch.delenv("LANGFUSE_SECRET_KEY", raising=False)
+    monkeypatch.delenv("LANGCHAIN_API_KEY", raising=False)
+    monkeypatch.delenv("LANGSMITH_API_KEY", raising=False)
+    assert get_trace_url("trace_999") is None
+
+    monkeypatch.setenv("LANGFUSE_PUBLIC_KEY", "pk-lf-1")
+    monkeypatch.setenv("LANGFUSE_SECRET_KEY", "sk-lf-1")
+    monkeypatch.setenv("LANGFUSE_HOST", "https://cloud.langfuse.com")
+    assert get_trace_url("trace_999") == "https://cloud.langfuse.com/trace/trace_999"
 
 
 def test_wrap_openai_client_graceful():
@@ -207,8 +250,10 @@ def test_admin_failures_list_and_resolve(monkeypatch):
     data = res.json()
     assert data["total"] == 1
     assert len(data["items"]) == 1
-    # Check that langsmith_url was populated from run_id
+    # Check that langsmith_url and trace_id/trace_url were populated from run_id
     assert data["items"][0]["langsmith_url"] is not None
+    assert data["items"][0]["trace_id"] == "run_999"
+    assert "trace_url" in data["items"][0]
 
     resolve_res = client.post("/admin/failures/1/resolve", headers=admin_headers)
     assert resolve_res.status_code == 200
@@ -276,3 +321,5 @@ def test_admin_conversations_list_and_detail(monkeypatch):
     assert detail["thread"]["thread_id"] == "t_1001"
     assert len(detail["messages"]) == 2
     assert detail["messages"][1]["langsmith_url"] is not None
+    assert detail["messages"][1]["trace_id"] == "run_msg_1"
+    assert "trace_url" in detail["messages"][1]

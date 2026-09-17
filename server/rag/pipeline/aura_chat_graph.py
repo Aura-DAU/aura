@@ -48,7 +48,7 @@ from erp_context_builder import ERPContextBuilder
 from access_control import AccessControlGate, AccessDecision, resolve_effective_role
 from audit_log import AuditLog
 from personal_query_classifier import PersonalQueryClassifier
-from pipeline.langsmith_tracer import create_trace_config
+from pipeline.tracer import create_trace_config, get_trace_url
 from pipeline.failure_logger import record_query_failure
 
 from pipeline.aura_chat import (
@@ -1257,6 +1257,7 @@ class AuraChatGraph:
                     detail="graph reached END without setting result",
                     visited=",".join(sorted(k for k in final_state if final_state.get(k) is not None)),
                 )
+                trace_url = get_trace_url(run_id)
                 record_query_failure(
                     query_text=query,
                     failure_stage="llm_generation",
@@ -1266,19 +1267,25 @@ class AuraChatGraph:
                     erp_id=erp_id,
                     thread_id=thread_id,
                     langsmith_run_id=run_id,
+                    trace_url=trace_url,
                 )
                 return {
                     "answer": "Sorry, I encountered an error while generating a response. Please try again.",
                     "sources": [],
                     "is_personal_data": False,
                     "langsmith_run_id": run_id,
+                    "trace_id": run_id,
+                    "trace_url": trace_url,
                 }
             if isinstance(result, dict) and run_id:
                 result["langsmith_run_id"] = run_id
+                result["trace_id"] = run_id
+                result["trace_url"] = get_trace_url(run_id)
             return result
 
         except Exception as e:
             run_id = collector.run_id
+            trace_url = get_trace_url(run_id)
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
@@ -1301,10 +1308,13 @@ class AuraChatGraph:
                 erp_id=erp_id,
                 thread_id=thread_id,
                 langsmith_run_id=run_id,
+                trace_url=trace_url,
             )
             return {
                 "answer": msg,
                 "sources": [],
                 "is_personal_data": False,
                 "langsmith_run_id": run_id,
+                "trace_id": run_id,
+                "trace_url": trace_url,
             }
