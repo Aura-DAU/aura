@@ -959,7 +959,7 @@ class RetrievalPipeline:
             original_query, standalone_query, query,
         )
 
-        future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
+        future_plan = self.executor.submit(self.planner.plan, query, academic_scope)
 
         # Scope-derived programme names are soft retrieval signals. Keeping them
         # separate from planner entities lets the entity path use them without
