@@ -1,5 +1,5 @@
 -- ============================================================
--- 012_query_failures_and_chat_history.sql
+-- 013_query_failures_and_chat_history.sql
 --
 -- Adds:
 -- 1. query_failures — captures failed, rejected, or degraded queries across
