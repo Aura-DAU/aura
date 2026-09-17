@@ -241,6 +241,7 @@ class AuraState(TypedDict, total=False):
     # of what earlier nodes wrote to state["sources"] — prevents source bleed
     # from a prior tool-node run into a guardrail reply.
     is_guardrail: bool
+    safety_verdict: Any  # QueryGuardrail verdict for this query, or None
 
 
 class AuraChatGraph:
@@ -319,11 +320,22 @@ class AuraChatGraph:
             state["query"], state.get("history") or []
         ):
             return state
+        previous_question = next(
+            (
+                str(turn.get("content") or "")
+                for turn in reversed(state.get("history") or [])
+                if turn.get("role") == "user"
+            ),
+            None,
+        )
         with track_segment("guardrail_time"):
-            verdict = self.guardrail.classify(state["query"])
+            verdict = self.guardrail.classify(
+                state["query"], previous_question=previous_question
+            )
         # None = classifier unreachable. Fails OPEN on the public RAG path,
-        # matching is_safe(); the personal-data path re-checks with
-        # is_safe_strict() further down the graph, which fails closed.
+        # matching is_safe(); the personal-data path fails closed on None in
+        # _n_strict_guardrail, which reuses this verdict.
+        state["safety_verdict"] = verdict
         if verdict is Verdict.UNSAFE:
             state["result"] = {
                 "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
@@ -737,8 +749,15 @@ class AuraChatGraph:
         query_type = state["query_type"]
         identity = state.get("identity")
         if query_type in ("PERSONAL", "MIXED", "AGGREGATE") and identity:
-            with track_segment("guardrail_time"):
-                is_safe_strict = self.guardrail.is_safe_strict(state["query"])
+            # Reuse the safety node's verdict for the same query: a second
+            # classifier call costs latency and can disagree with the first.
+            # No verdict (skipped or unreachable) → ask again, failing closed.
+            verdict = state.get("safety_verdict")
+            if verdict is not None:
+                is_safe_strict = verdict is not Verdict.UNSAFE
+            else:
+                with track_segment("guardrail_time"):
+                    is_safe_strict = self.guardrail.is_safe_strict(state["query"])
             if not is_safe_strict:
                 state["result"] = {
                     "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",

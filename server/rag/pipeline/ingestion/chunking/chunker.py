@@ -70,8 +70,12 @@ def split_section(text):
         else:
             end = len(tokens)
 
-        chunk_tokens = tokens[start:end]
-        chunk_text = tokenizer.decode(chunk_tokens, skip_special_tokens=True)
+        # Slice the original text by character offsets. Decoding the tokens
+        # would go through the uncased BGE tokenizer: lowercase text, lost
+        # line breaks, and "1,85,000" rendered as "1, 85, 000".
+        char_start = offsets[start][0]
+        char_end = offsets[end - 1][1] if end < len(tokens) else len(text)
+        chunk_text = text[char_start:char_end].strip()
         chunks.append(chunk_text)
 
         if end >= len(tokens):

@@ -100,7 +100,7 @@ def test_low_risk_sync_turn_does_not_call_general_guardrail():
     calls = []
     fake = types.SimpleNamespace(
         guardrail=types.SimpleNamespace(
-            classify=lambda query: calls.append(query)
+            classify=lambda query, **_: calls.append(query)
         )
     )
     state = _student_state("sync my time table")
@@ -182,7 +182,7 @@ def test_wellness_and_safety_bypass_calendar_connect_and_sync():
             get_response=lambda: "WELLNESS_BLOCK",
         ),
         guardrail=types.SimpleNamespace(
-            classify=lambda query: calls.__setitem__("safety", calls["safety"] + 1) or "UNSAFE",
+            classify=lambda query, **_: calls.__setitem__("safety", calls["safety"] + 1) or "UNSAFE",
         ),
     )
     for query in (

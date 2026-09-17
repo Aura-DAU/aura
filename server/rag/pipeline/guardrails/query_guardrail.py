@@ -100,7 +100,12 @@ These are ON-TOPIC and must NOT be marked OFF_TOPIC:
 - Short follow-ups and references to the previous turn ("what about the
   second one?", "tell me more", "and for M.Tech?"). These carry no topic of
   their own and are always ON-TOPIC.
-- Questions asking for explanations of general academic concepts (e.g. algorithms, programming, mathematics, physics, essay writing, homework solutions) are OFF_TOPIC unless they explicitly ask how the concept relates to DAU curriculum, courses, policies, or university information.
+- University academic terms such as CGPA, SPI, credits, grades, backlogs,
+  electives or semester registration.
+
+Subject-matter help is OFF_TOPIC: explaining or solving algorithms,
+programming, mathematics, physics, essays or homework, unless the question
+asks how that topic appears in a DAU course, curriculum or policy.
 
 If a query is both harmful and off-topic, answer UNSAFE — UNSAFE wins.
 
@@ -200,10 +205,14 @@ Return exactly one token: SAFE, UNSAFE, or OFF_TOPIC.
 No explanation, no punctuation, no JSON, no additional text.
 """
 
-    def _classify(self, query: str) -> "Verdict":
+    def _classify(self, query: str, previous_question: str | None = None) -> "Verdict":
         model = self.model
         system = self.system_prompt.strip()
         user = f"Query to evaluate:\n{query}"
+        if previous_question:
+            # Context for follow-ups like "what about him?"; only the latest
+            # query is classified.
+            user = f"Previous user question (context only):\n{previous_question}\n\n{user}"
 
         def _execute(client):
             return client.chat.completions.create(
@@ -234,12 +243,12 @@ No explanation, no punctuation, no JSON, no additional text.
             return Verdict.OFF_TOPIC
         return Verdict.SAFE
 
-    def classify(self, query: str):
+    def classify(self, query: str, previous_question: str | None = None):
         # Single classification attempt. Returns a Verdict, or None when the
         # guardrail LLM is unreachable — callers apply their own fail-open /
         # fail-closed policy without paying a second identical LLM round-trip.
         try:
-            return self._classify(query)
+            return self._classify(query, previous_question=previous_question)
         except Exception as e:
             print(f"[Guardrail] Error evaluating query: {e}")
             return None

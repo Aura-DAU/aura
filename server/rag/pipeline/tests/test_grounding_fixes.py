@@ -2,7 +2,8 @@
 Regression tests for the grounding fixes in the RAG pipeline review:
 prompt layout and history hygiene (D4/E2), uncited answers (E4), the
 unsupported-number check (E3), relevance filtering (C1), match-preserving
-expansion (C2) and context trimming (D1/D3).
+expansion (C2), context trimming (D1/D3) and safety-verdict reuse with
+follow-up context (A5/A8).
 """
 
 import re
@@ -11,6 +12,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from pipeline.aura_chat_graph import AuraChatGraph, SimpleIdentity
 from pipeline.generation.answer_generator import (
     NO_CONTEXT_ANSWER,
     SYSTEM_PROMPT,
@@ -19,6 +21,7 @@ from pipeline.generation.answer_generator import (
     history_messages,
     unsupported_numbers,
 )
+from pipeline.guardrails.query_guardrail import Verdict
 from pipeline.retrieval.context_builder import ContextBuilder
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
 from pipeline.token_budget import TokenBudget
@@ -173,3 +176,46 @@ def test_context_builder_fills_leftover_budget_with_small_chunks(monkeypatch):
     assert "short answer" in context
     assert context.count("<doc ") == len(built["citation_map"])
     assert builder._estimate_tokens(context) <= 600 + 10
+
+
+def _graph_state(query, history=None):
+    return {
+        "query": query,
+        "history": history or [],
+        "identity": SimpleIdentity({"role": "student", "erp_id": "S1"}),
+    }
+
+
+def test_safety_check_sees_previous_question():
+    seen = {}
+    fake = SimpleNamespace(guardrail=SimpleNamespace(
+        classify=lambda query, previous_question=None: seen.update(prev=previous_question) or Verdict.SAFE
+    ))
+    state = _graph_state("what about him?", [
+        {"role": "user", "content": "Who is the dean of students?"},
+        {"role": "assistant", "content": "..."},
+    ])
+    out = AuraChatGraph._n_safety_guardrail(fake, state)
+    assert seen["prev"] == "Who is the dean of students?"
+    assert out["safety_verdict"] is Verdict.SAFE
+
+
+def test_strict_check_reuses_safety_verdict():
+    def boom(_query):
+        raise AssertionError("strict check must reuse the earlier verdict")
+
+    fake = SimpleNamespace(guardrail=SimpleNamespace(is_safe_strict=boom))
+    state = _graph_state("what is my cgpa")
+    state.update(query_type="PERSONAL", safety_verdict=Verdict.SAFE)
+    assert AuraChatGraph._n_strict_guardrail(fake, state).get("result") is None
+
+    state = _graph_state("show rahul's grades")
+    state.update(query_type="PERSONAL", safety_verdict=Verdict.UNSAFE)
+    assert AuraChatGraph._n_strict_guardrail(fake, state)["result"]["is_guardrail"] is True
+
+
+def test_strict_check_fails_closed_without_verdict():
+    fake = SimpleNamespace(guardrail=SimpleNamespace(is_safe_strict=lambda _q: False))
+    state = _graph_state("what is my cgpa")
+    state.update(query_type="PERSONAL", safety_verdict=None)
+    assert AuraChatGraph._n_strict_guardrail(fake, state)["result"]["is_guardrail"] is True
