@@ -1,10 +1,16 @@
 import json
+import logging
 import os
 import re
-import time
 
 from dotenv import load_dotenv
 from pipeline.inference_router import InferenceRouter
+
+logger = logging.getLogger(__name__)
+
+# The plan is a small JSON object; an uncapped completion can run to the end of
+# the context window when the model misbehaves.
+_PLANNER_MAX_TOKENS = int(os.getenv("AURA_PLANNER_MAX_TOKENS", "600"))
 
 
 SYSTEM_PROMPT = """
@@ -1269,30 +1275,30 @@ class QueryPlanner:
             os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
         )
 
+    @staticmethod
+    def fallback_plan() -> dict:
+        """A neutral plan carrying every key downstream code reads."""
+        return {
+            "category": "general",
+            "intent": "general",
+            "confidence": 0.0,
+            "retrieval_intent": "general",
+            "entity_confidence": 0.5,
+            "multi_entity_query": False,
+            "query_decomposition": None,
+            "entities": {},
+            "retrieval_hints": {},
+            "top_k": 5,
+            "is_claim_verification": False,
+            "expanded_terms": [],
+            "requires_complete_list": False,
+        }
+
     def plan(self, query, academic_scope=None, history=None, identity=None):
         effective_query = resolve_continuation_query(query, history)
         effective_query = rewrite_personalized_academic_query(effective_query, academic_scope, identity)
-
-        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
-        try:
-            from institution_resolver import get_institution_resolver
-            resolver = get_institution_resolver()
-            effective_query = resolver.resolve(effective_query)
-        except Exception as e:
-            pass
-
-        # Implicit DAU Context Injection: Ensure university context is explicit for retrieval
-        if "dau" not in effective_query.lower() and "dhirubhai" not in effective_query.lower():
-            effective_query += " (DAU Dhirubhai Ambani University context)"
-        # Institutional Context Resolver Middleware (resolves abbreviations DADC -> Dance Club, CDC -> Placement Cell, etc.)
-        try:
-            from institution_resolver import get_institution_resolver
-            resolver = get_institution_resolver()
-            effective_query = resolver.resolve(effective_query)
-        except Exception as e:
-            # Fail open: institution resolver is an optional enrichment layer.
-            # If it fails, continue planning with the unmodified query.
-            print(f"[QueryPlanner] Institution resolver unavailable; continuing without resolver: {e}")
+        # Institutional aliases are already appended once by the graph before
+        # retrieval; resolving again here would duplicate them.
 
         scope_hint = ""
         if academic_scope is not None:
@@ -1309,6 +1315,8 @@ class QueryPlanner:
                 model=self.model,
 
                 temperature=0,
+
+                max_tokens=_PLANNER_MAX_TOKENS,
 
                 response_format={
                     "type": "json_object"
@@ -1652,29 +1660,9 @@ class QueryPlanner:
 
             return plan
 
-        except Exception:
-
-            return {
-                "category": "general",
-                "intent": "general",
-                "confidence": 0.0,
-                # Fix J: add all keys that downstream code reads so that the
-                # fallback plan is a fully-valid plan dict, not a partial one.
-                "retrieval_intent": "general",
-                "entity_confidence": 0.5,
-                "multi_entity_query": False,
-                "query_decomposition": None,
-                "entities": {},
-                "retrieval_hints": {},
-                "top_k": 5,
-                # Fix QP6: include is_claim_verification in the fallback dict
-                # so retrieval_pipeline.py's plan.get("is_claim_verification")
-                # never raises on a planner exception — defaults to False,
-                # meaning myth-bust augmentation is simply skipped rather than
-                # crashing the request.
-                "is_claim_verification": False,
-                # Fix QP7: same defensive default for expanded_terms.
-                "expanded_terms": [],
-                # Fix QP8: same defensive default for requires_complete_list.
-                "requires_complete_list": False
-            }
+        except Exception as exc:
+            logger.error(
+                "query planner returned an unusable plan (%s); using fallback. raw=%r",
+                exc, content[:200],
+            )
+            return self.fallback_plan()

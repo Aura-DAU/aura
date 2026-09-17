@@ -292,7 +292,8 @@ class Reranker:
 
         reranked = []
 
-        boost_sections = (
+        # Copied: extending the plan's own list would grow it on every call.
+        boost_sections = list(
             plan
             .get(
                 "retrieval_hints",
@@ -459,6 +460,11 @@ class Reranker:
 
         explicit_rule_year = entities.get("rule_year")
         current_year = datetime.now().year
+        # Recency decides the ranking only when the question is about the
+        # latest/current version of something. Otherwise it is a small
+        # tie-breaker between near-identical yearly versions, so a recent
+        # notice cannot outrank the undated policy that answers the question.
+        temporal_weight = 0.15 if plan.get("temporal_intent") else 0.03
 
         # ── Generic entity/qualifier disambiguation ─────────────────────
         # DAU's corpus is full of near-duplicate structured entries that
@@ -670,49 +676,7 @@ class Reranker:
                     elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
                         temporal_boost = 0.6
 
-            # Fix #4 / Fix RR-RECENCY: all components on comparable scales
-            # [0, 1]. recency_boost's weight raised 0.05 → 0.15 (taken from
-            # dense_score, 0.15 → 0.05) so that among documents the
-            # cross-encoder scores as similarly relevant — which is exactly
-            # what happens across several yearly versions of the same roster
-            # — the newest one reliably wins instead of the tie effectively
-            # being broken by noise.
-            answerability_boost = 0.0
-            lookup_keywords = [
-                "who", "who is", "name", "convener", "convenor", "coordinator",
-                "faculty advisor", "faculty adviser", "advisor", "mentor", "chair",
-                "chairperson", "contact", "contact information", "email", "email id",
-                "phone", "phone number", "mobile", "mobile number", "student id",
-                "erp", "credits", "credit", "credit structure", "prerequisite",
-                "prerequisites", "fee", "fees", "fee structure", "duration",
-                "office", "policy", "syllabus"
-            ]
-            structured_fields = {
-                "convener", "convenor", "coordinator", "faculty advisor", "faculty adviser",
-                "advisor", "mentor", "chair", "chairperson", "student id", "erp",
-                "email", "phone", "mobile", "contact", "credits", "credit",
-                "prerequisite", "fee", "fees", "duration", "office", "policy", "syllabus"
-            }
-            query_lower = query.lower()
-            keyword_pattern = r"\b(" + "|".join(re.escape(k) for k in lookup_keywords) + r")\b"
-            if re.search(keyword_pattern, query_lower):
-                chunk_full_text = "\n".join(
-                    filter(
-                        None,
-                        [
-                            metadata.get("title"),
-                            metadata.get("category"),
-                            metadata.get("cluster"),
-                            metadata.get("h1"),
-                            metadata.get("h2"),
-                            metadata.get("h3"),
-                            metadata.get("text"),
-                        ]
-                    )
-                ).lower()
-                if any(field in chunk_full_text for field in structured_fields):
-                    answerability_boost = 1.0
-
+            # All components are on comparable [0, 1] scales.
             final_score = (
                 (0.60 * norm_cross)
                 +
@@ -726,9 +690,7 @@ class Reranker:
                 +
                 (0.05 * course_match_boost)
                 +
-                (0.15 * temporal_boost)
-                +
-                (0.05 * answerability_boost)
+                (temporal_weight * temporal_boost)
                 +
                 (semester_penalty * norm_cross)
                 +
@@ -755,17 +717,15 @@ class Reranker:
             reverse=True
         )
 
-        print("\n" + "=" * 60)
-        print("===== CROSS-ENCODER RERANK RESULTS =====")
-        print(f"Query: {query}")
-        for rank, item in enumerate(reranked, start=1):
-            meta = item.get("metadata", {})
-            h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
-            print(f"{rank}. reranked_score={item.get('reranked_score', 0.0):.4f} (cross_logit={item.get('cross_score', 0.0):.4f}) | chunk={item.get('id')}")
-            print(f"   title={meta.get('title', 'N/A')}")
-            print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
-            if h_str:
-                print(f"   headers={h_str}")
-        print("=" * 60)
+        if logger.isEnabledFor(logging.DEBUG):
+            for rank, item in enumerate(reranked[:10], start=1):
+                logger.debug(
+                    "rerank %d score=%.4f logit=%.4f chunk=%s title=%r",
+                    rank,
+                    item.get("reranked_score", 0.0),
+                    item.get("cross_score", 0.0),
+                    item.get("id"),
+                    item.get("metadata", {}).get("title"),
+                )
 
         return reranked

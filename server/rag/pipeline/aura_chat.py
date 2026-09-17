@@ -82,36 +82,41 @@ real-time data from DAU's ERP system for the logged-in user.
 """
 
 
+_GREETING_PHRASES = (
+    "have a nice day", "have a good day", "introduce yourself", "what can you do",
+    "good afternoon", "good morning", "good evening", "good night", "how are you",
+    "who are you", "who is aura", "what is aura", "thank you", "thanks aura",
+    "see you", "greetings", "goodbye", "cheers", "hello", "thanks", "hola",
+    "menu", "intro", "help", "hey", "bye", "cya", "hi",
+)
+_GREETING_FILLER = {"aura", "there", "so", "much", "a", "lot", "again", "ok", "okay", "please"}
+_GREETING_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(p) for p in _GREETING_PHRASES) + r")\b"
+)
+
+
 def is_greeting_or_meta(query):
-    q = re.sub(r'[?.!,]+$', '', query.strip()).lower().strip()
-    greetings = {
-        "hi", "hello", "hey", "hola", "greetings", "good morning",
-        "good afternoon", "good evening", "how are you", "who are you",
-        "who is aura", "what is aura", "what can you do", "help", "menu",
-        "intro", "introduce yourself", "thank you", "thanks", "bye",
-        "goodbye", "see you", "good night", "have a nice day", "have a good day",
-        "cya", "cheers", "thanks aura"
-    }
-    if q in greetings:
-        return True
-    words = q.split()
-    if len(words) <= 4 and any(w in greetings for w in words):
-        return True
-    return False
+    # A greeting only when nothing but greeting words remain: "hi what is the
+    # fee" or "help with hostel fees" are real questions, not small talk.
+    q = re.sub(r"[^\w\s']", " ", query.lower())
+    remainder = _GREETING_RE.sub(" ", q).split()
+    if len(remainder) == len(q.split()):
+        return False
+    return all(word in _GREETING_FILLER for word in remainder)
 
 
 class SimpleIdentity:
     def __init__(self, d):
         self.erp_id = d.get("erp_id") or d.get("erpId")
         self.role = d.get("role", "student")
-        self.dept = d.get("dept") or d.get("department") or d.get("branch") or "ICT"
+        self.dept = d.get("dept") or d.get("department") or d.get("branch")
         self.email = d.get("email")
         self.full_name = d.get("full_name") or d.get("fullName") or d.get("name")
         self.roll_number = d.get("roll_number") or d.get("rollNumber") or self.erp_id
-        self.program = d.get("program") or d.get("programme") or "B.Tech. (ICT)"
+        self.program = d.get("program") or d.get("programme")
         self.branch = d.get("branch") or self.dept
-        self.current_year = d.get("current_year") or d.get("currentYear") or 3
-        self.current_sem = d.get("current_sem") or d.get("currentSem") or 5
+        self.current_year = d.get("current_year") or d.get("currentYear")
+        self.current_sem = d.get("current_sem") or d.get("currentSem")
 
 
 class AuraChat:
@@ -215,8 +220,8 @@ class AuraChat:
                         )
                     return {"answer": ans, "sources": [], "is_personal_data": True}
 
-                prog = getattr(identity, "program", None) or "B.Tech. (ICT)"
-                sem = getattr(identity, "current_sem", None) or 5
+                prog = getattr(identity, "program", None) or "your programme"
+                sem = getattr(identity, "current_sem", None)
                 if "name" in q_lower or "who am i" in q_lower:
                     ans = f"You are **{name}** (Roll Number: `{roll}`)."
                 elif "roll" in q_lower or "id" in q_lower:

@@ -186,14 +186,14 @@ class SimpleIdentity:
         if isinstance(d, dict):
             self.erp_id = d.get("erp_id") or d.get("erpId")
             self.role = d.get("role", "student")
-            self.dept = d.get("dept") or d.get("department") or d.get("branch") or "ICT"
+            self.dept = d.get("dept") or d.get("department") or d.get("branch")
             self.email = d.get("email")
             self.full_name = d.get("full_name") or d.get("fullName") or d.get("name")
             self.roll_number = d.get("roll_number") or d.get("rollNumber") or self.erp_id
-            self.program = d.get("program") or d.get("programme") or "B.Tech. (ICT)"
+            self.program = d.get("program") or d.get("programme")
             self.branch = d.get("branch") or self.dept
-            self.current_year = d.get("current_year") or d.get("currentYear") or 3
-            self.current_sem = d.get("current_sem") or d.get("currentSem") or 5
+            self.current_year = d.get("current_year") or d.get("currentYear")
+            self.current_sem = d.get("current_sem") or d.get("currentSem")
         else:
             self.erp_id = getattr(d, "erp_id", None)
             self.role = getattr(d, "role", "student")
@@ -241,13 +241,6 @@ class AuraState(TypedDict, total=False):
     # of what earlier nodes wrote to state["sources"] — prevents source bleed
     # from a prior tool-node run into a guardrail reply.
     is_guardrail: bool
-
-    # Fix A (source_match_analysis Root Cause 2): Stores the sources + citation_map
-    # from the most recent successful RAG retrieval. When a follow-up turn answers
-    # from LLM memory (no new RAG call), these are forwarded so sources[] is never
-    # empty due to the absence of a fresh retrieval.
-    last_rag_sources: list
-    last_rag_citation_map: dict
 
 
 class AuraChatGraph:
@@ -880,13 +873,12 @@ class AuraChatGraph:
         if _m:
             _title_hint = _m.group(1).strip()
 
-        # Resolve institutional abbreviations (DADC -> Dance Club (DADC) at DAU)
-        from institution_resolver import get_institution_resolver
-        resolved_query = get_institution_resolver().resolve(state["query"])
-
+        # Institutional aliases are resolved inside get_context, after the
+        # follow-up rewrite, so they never leak into the question the answer
+        # model sees.
         with track_segment("retrieval_time"):
             retrieval_result = self.pipeline.get_context(
-                resolved_query,
+                state["query"],
                 state["history"],
                 user_role=user_role,
                 academic_scope=state.get("academic_scope"),
@@ -897,13 +889,6 @@ class AuraChatGraph:
         state["chunks"] = retrieval_result.get("chunks", [])
         state["rag_context"] = retrieval_result.get("context", "")
         state["sources"] = retrieval_result.get("sources", [])
-
-        # Fix A (source_match_analysis Root Cause 2): Persist the sources from
-        # every successful RAG retrieval so follow-up turns that re-use the LLM
-        # memory can still return the same citation cards.
-        if state["sources"]:
-            state["last_rag_sources"] = retrieval_result.get("sources", [])
-            state["last_rag_citation_map"] = retrieval_result.get("citation_map", {})
 
         if not state["chunks"] and query_type == "PUBLIC":
             reason = retrieval_result.get("abstention_reason")
@@ -951,8 +936,13 @@ class AuraChatGraph:
             # rolling conversation digest never reaches the generator (so the
             # token budget under-counts what the prompt would include once
             # memory is wired).
+            # The standalone (follow-up-resolved) question, never the
+            # retrieval string with appended aliases and search terms.
             answer = self.generator.generate(
-                query=retrieval_result.get("corrected_query", state["query"]) if has_rag else state["query"],
+                query=(
+                    (retrieval_result.get("standalone_query") or state["query"])
+                    if has_rag else state["query"]
+                ),
                 context=combined_context,
                 plan=retrieval_result.get("plan") if has_rag else None,
                 history=state.get("history") or [],
@@ -968,25 +958,9 @@ class AuraChatGraph:
         # Apply post-generation privacy filter
         answer = privacy_filter.filter_response_text(answer, query=state["query"])
 
-        # Resolve which sources and citation_map to use for this turn.
-        # Fix A (source_match_analysis Root Cause 2): Multi-turn follow-up turns
-        # often answer from the LLM's memory of the prior conversation summary
-        # rather than triggering a new RAG retrieval. In those cases
-        # retrieval_result is empty and sources would be []. Instead of returning
-        # an empty source list (which fails the evaluator's source_matched check),
-        # forward the sources from the last successful RAG call. This mirrors
-        # what the user experience should be: if AURA answers about document X
-        # in Turn 1 and references the same content in Turn 3, the citation card
-        # for document X should still appear.
-        effective_sources = state.get("sources", [])
-        effective_citation_map = retrieval_result.get("citation_map", {})
-        if not effective_sources and state.get("last_rag_sources"):
-            effective_sources = state["last_rag_sources"]
-            effective_citation_map = state.get("last_rag_citation_map", {})
-
         cited_sources = filter_sources_by_citations(
-            effective_sources,
-            effective_citation_map,
+            state.get("sources", []),
+            retrieval_result.get("citation_map", {}),
             answer,
         )
 

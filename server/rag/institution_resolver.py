@@ -107,47 +107,50 @@ class InstitutionResolver:
             compiled = re.compile(pattern_str, re.IGNORECASE)
             self.patterns.append((compiled, entity))
 
-    def resolve(self, query: str) -> str:
-        """
-        Resolve institutional abbreviations and synonyms in the query text.
-        Example: "Who is the convenor of DADC?" -> "Who is the convenor of Dance Club (DADC) at DAU?"
-        Returns the enhanced internal query string for Query Planner & Retriever.
-        """
+    def expansions(self, query: str) -> List[str]:
+        """Canonical names of the institutional entities the query mentions,
+        excluding any whose canonical name the query already contains."""
         if not query:
-            return query
+            return []
 
-        resolved_query = query
-        matched_entities = set()
+        query_lower = query.lower()
+        found: List[str] = []
 
-        # Step 1: Exact Regex Match & Expansion
         for compiled_pat, entity in self.patterns:
             canonical = entity.get("canonical_name", "")
-            abbrev = entity.get("abbreviation", "")
-            replacement = f"{canonical} at DAU" if "at DAU" not in canonical else canonical
+            if canonical and compiled_pat.search(query) and canonical not in found:
+                found.append(canonical)
 
-            def _replace_match(m):
-                matched_entities.add(canonical)
-                return replacement
-
-            # Perform replacement if pattern matches
-            if compiled_pat.search(resolved_query):
-                resolved_query = compiled_pat.sub(_replace_match, resolved_query)
-
-        # Step 2: Fuzzy Matching Fallback (if no regex patterns matched)
-        if not matched_entities:
-            words = query.split()
-            for word in words:
+        # Fuzzy fallback for typos in abbreviations ("DADCC"), only when no
+        # exact alias matched.
+        if not found:
+            for word in query.split():
                 clean_word = re.sub(r"[^\w]", "", word).upper()
-                if len(clean_word) >= 3:
-                    for abbrev, entity in self.abbrev_map.items():
-                        ratio = difflib.SequenceMatcher(None, clean_word, abbrev).ratio()
-                        if ratio >= 0.85: # High confidence fuzzy match
-                            canonical = entity.get("canonical_name", "")
-                            replacement = f"{canonical} at DAU"
-                            resolved_query = re.sub(r"\b" + re.escape(word) + r"\b", replacement, resolved_query, flags=re.IGNORECASE)
-                            break
+                if len(clean_word) < 3:
+                    continue
+                for abbrev, entity in self.abbrev_map.items():
+                    if difflib.SequenceMatcher(None, clean_word, abbrev).ratio() >= 0.85:
+                        canonical = entity.get("canonical_name", "")
+                        if canonical and canonical not in found:
+                            found.append(canonical)
+                        break
 
-        return resolved_query
+        return [c for c in found if c.lower() not in query_lower]
+
+    def resolve(self, query: str) -> str:
+        """
+        Append the canonical names of institutional abbreviations and synonyms
+        as a retrieval hint, leaving the user's own words untouched.
+        Example: "Who is the convenor of DADC?" ->
+        "Who is the convenor of DADC? (Dance Club (DADC))"
+
+        Idempotent: resolving an already-resolved query returns it unchanged,
+        because canonical names already present are not appended again.
+        """
+        extra = self.expansions(query)
+        if not extra:
+            return query
+        return f"{query} ({'; '.join(extra)})"
 
     def get_entity_info(self, term: str) -> Optional[Dict[str, Any]]:
         """Look up institutional entity info by abbreviation or synonym."""
