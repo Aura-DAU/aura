@@ -11,6 +11,21 @@ MAX_AUDIO_BYTES = 25 * 1024 * 1024
 ALLOWED_IMAGE = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
 
+# Bug-report categories (see db/migrations/012_bug_reports_admin.sql CHECK
+# constraint — keep this set in sync with that migration). Display labels
+# live in the frontend; this is the canonical set of DB values.
+BUG_CATEGORIES = {
+    "chat_ai",
+    "timetable",
+    "calendar",
+    "login_auth",
+    "performance",
+    "ui_ux",
+    "other",
+}
+
+BUG_STATUSES = {"open", "in_progress", "resolved"}
+
 
 class HistoryTurn(BaseModel):
     role: str = Field(..., max_length=32)
