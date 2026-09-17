@@ -104,7 +104,7 @@ class TimetableForbiddenError(TimetableError):
 def _field(identity, name: str):
     """Reads a field off `identity` whether it's the api.auth.Identity
     dataclass (attribute access, used by FastAPI routes) or a plain dict
-    (used by the ecampus-style agent orchestrator tool-calling convention)."""
+    (used by the timetable agent's tool-calling convention)."""
     if isinstance(identity, dict):
         return identity.get(name)
     return getattr(identity, name, None)

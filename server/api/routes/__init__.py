@@ -1,1 +1,1 @@
-# Route modules: admin, calendar, chat, ecampus, health, identity, speech
+# Route modules: admin, calendar, chat, health, identity, speech

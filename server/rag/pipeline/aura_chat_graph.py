@@ -56,14 +56,18 @@ from pipeline.aura_chat import (
     PERSONAL_DATA_SYSTEM_ADDENDUM,
     is_greeting_or_meta,
 )
-from pipeline.ecampus.intent_router import PersonalDataIntentRouter
-from pipeline.ecampus.orchestrator import (
-    EcampusOrchestrator,
+from pipeline.timetable.agent import (
+    SCOPE_PERSONAL,
+    SCOPE_PERSONAL_ACTIONS,
+    SCOPE_PUBLIC_TIMETABLE,
+    TimetableAgent,
     _required_calendar_tool,
     _is_calendar_unsync_intent,
     _is_timetable_edit_confirmation,
     _is_timetable_edit_intent,
     _CALENDAR_SYNC_FOLLOWUP_RE,
+    is_cohort_timetable_query,
+    is_own_timetable_query,
 )
 from api.request_context import RequestContext
 
@@ -115,13 +119,12 @@ _CALENDAR_CONNECT_RE = re.compile(
     r"|\b(?:log|sign)\s+in\s+(?:to\s+)?(?:my\s+)?(?:google\s+)?calendar\b",
     re.IGNORECASE,
 )
-_CLUB_OFFICE_BEARER_RE = re.compile(
-    r"\b(conven(?:er|or)|coordinator|office[ -]?bearer|"
-    r"deputy[ -]?conven(?:er|or)|dy\.?[ -]?conven(?:er|or)|"
-    r"faculty mentor|club email)\b",
-    re.IGNORECASE,
+
+PERSONAL_RECORDS_UNAVAILABLE_RESPONSE = (
+    "I can't load your academic records (CGPA, grades, attendance, fees) right now. "
+    "Please check them on the university ERP portal. I can still help with your "
+    "timetable and with university rules, programmes and policies."
 )
-_CLUB_CONTEXT_RE = re.compile(r"\b(club|sbg|committee)\b", re.IGNORECASE)
 
 
 def _is_calendar_sync_intent(query: str) -> bool:
@@ -176,17 +179,6 @@ def _is_low_risk_timetable_sync_turn(query: str, history: list[dict]) -> bool:
     return False
 
 
-def _is_club_office_bearer_intent(query: str) -> bool:
-    """Route published club contacts to the C_DCs-aware lookup path.
-
-    This is intentionally narrower than all club requests: only questions that
-    ask for office-bearers bypass the general-purpose intent classifier, whose
-    unavailable/invalid fallback is GENERAL and otherwise sends the request to
-    the legacy RAG path.
-    """
-    return bool(_CLUB_CONTEXT_RE.search(query) and _CLUB_OFFICE_BEARER_RE.search(query))
-
-
 class SimpleIdentity:
     def __init__(self, d=None, **kwargs):
         if d is None:
@@ -229,7 +221,6 @@ class AuraState(TypedDict, total=False):
     query_type: Optional[str]
     classification: dict
     user_role: str
-    ecampus_intent: Optional[str]  # PersonalDataIntentRouter verdict, computed once
 
     target_erp_id: Optional[str]
     access_result: Any
@@ -248,7 +239,7 @@ class AuraState(TypedDict, total=False):
     # from static/predefined handlers (safety, wellness, greeting, guest gate,
     # strict guardrail, ERP errors). When True, sources must be [] regardless
     # of what earlier nodes wrote to state["sources"] — prevents source bleed
-    # from a prior _n_community_tools run into a guardrail reply.
+    # from a prior tool-node run into a guardrail reply.
     is_guardrail: bool
 
     # Fix A (source_match_analysis Root Cause 2): Stores the sources + citation_map
@@ -275,8 +266,7 @@ class AuraChatGraph:
         self.context_builder = ERPContextBuilder()
         self.access_gate = AccessControlGate(erp)
         self.audit_log = AuditLog()
-        self.intent_router = PersonalDataIntentRouter()
-        self.ecampus_orchestrator = EcampusOrchestrator()
+        self.timetable_agent = TimetableAgent()
 
         self._graph = self._build_graph()
 
@@ -289,7 +279,7 @@ class AuraChatGraph:
         graph.add_node("wellness_check", self._n_wellness_check)
         graph.add_node("greeting_check", self._n_greeting_check)
         graph.add_node("profile_fast_path", self._n_profile_fast_path)
-        graph.add_node("community_tools", self._n_community_tools)
+        graph.add_node("timetable_read", self._n_timetable_read)
         graph.add_node("personal_tools", self._n_personal_tools)
         graph.add_node("classify", self._n_classify)
         graph.add_node("guest_gate", self._n_guest_gate)
@@ -312,8 +302,8 @@ class AuraChatGraph:
         graph.add_conditional_edges("safety_guardrail", route_or("wellness_check"))
         graph.add_conditional_edges("wellness_check", route_or("greeting_check"))
         graph.add_conditional_edges("greeting_check", route_or("profile_fast_path"))
-        graph.add_conditional_edges("profile_fast_path", route_or("community_tools"))
-        graph.add_conditional_edges("community_tools", route_or("personal_tools"))
+        graph.add_conditional_edges("profile_fast_path", route_or("timetable_read"))
+        graph.add_conditional_edges("timetable_read", route_or("personal_tools"))
         graph.add_conditional_edges("personal_tools", route_or("classify"))
         graph.add_conditional_edges("classify", route_or("guest_gate"))
         graph.add_conditional_edges("guest_gate", route_or("strict_guardrail"))
@@ -500,76 +490,52 @@ class AuraChatGraph:
         state["is_guardrail"] = True
         return state
 
-    def _n_community_tools(self, state: AuraState) -> AuraState:
-        # Clubs / SBG / faculty ToR / domain KB skills → EcampusOrchestrator
-        # with public KB tools only, OR a student/faculty's own live eCampus
-        # data (attendance, grades, CGPA, timetable, fees, hostel, teaching
-        # schedule, ...) → the same EcampusOrchestrator with tool_scope=
-        # "personal". Guests and GENERAL queries fall through to
-        # classify → public RAG (or the legacy ERP-connector path in
-        # _n_personal_data, which now only serves as a fallback for erp
-        # categories the tool registry doesn't cover, e.g. AGGREGATE stats).
-        #
-        # Bug fix (see RAG eval reports Aug 2026 -- 34/40 personalized queries
-        # failing with "AURA failed to invoke external tools"): PERSONAL_DATA
-        # queries used to be routed exclusively to _n_personal_data, which
-        # calls self.erp_connector directly. erp_connector has no student-
-        # facing timetable/attendance-detail methods (those live in
-        # pipeline.ecampus's tool registry, added later) -- for a student
-        # asking "do I have labs tomorrow" the old path fetched an empty
-        # erp_context and the model had nothing to answer from. Routing
-        # PERSONAL_DATA through the tool-calling orchestrator first (same as
-        # COMMUNITY already was) fixes this: the LLM actually calls
-        # get_my_timetable / get_academic_snapshot / get_result / get_cgpa /
-        # etc. and answers from real data, or surfaces the correct
-        # "link_ecampus_account" prompt instead of a generic failure message.
+    @staticmethod
+    def _tool_role(identity, request_context) -> Optional[str]:
+        role = getattr(identity, "role", None)
+        if role in ("student", "faculty"):
+            return role
+        # Broad JWT role is student|faculty|admin; map elevated faculty
+        # effective roles if present on request_context.
+        effective = getattr(request_context, "effective_role", None) or ""
+        if effective.startswith("faculty") or effective in (
+            "dean_faculty", "dean_academic", "dean_students", "superadmin",
+        ):
+            return "faculty"
+        if effective == "student":
+            return "student"
+        return None
+
+    def _n_timetable_read(self, state: AuraState) -> AuraState:
+        # The only tool-backed read path: the requester's own timetable, or a
+        # named cohort's published timetable. Everything else (clubs, faculty,
+        # policies, fees, admissions) goes through grounded RAG. Decided by
+        # deterministic patterns, so no classifier call is spent here.
         identity = state.get("identity")
         if not identity or getattr(identity, "role", None) in (None, "guest"):
             return state
 
-        # Google Calendar actions belong to the personal MCP path, not the
-        # public academic-calendar KB path or the personal ERP fetch path.
-        # This node runs first; without the short-circuit the intent model can
-        # end the graph with public-KB prose or a student-records error before
-        # _n_personal_tools gets a chance to call MCP.
+        query = state["query"]
         history = state.get("history") or []
+        # Calendar actions and timetable edits belong to _n_personal_tools.
         if getattr(identity, "role", None) == "student" and (
-            _is_calendar_workflow_turn(state["query"], history)
-            or _is_timetable_edit_intent(state["query"])
-            or _is_timetable_edit_confirmation(state["query"], history)
+            _is_calendar_workflow_turn(query, history)
+            or _is_timetable_edit_intent(query)
+            or _is_timetable_edit_confirmation(query, history)
         ):
-            state["ecampus_intent"] = "PERSONAL_DATA"
             return state
 
-        if _is_club_office_bearer_intent(state["query"]):
-            intent = "COMMUNITY"
-        else:
-            with track_segment("community_intent_time"):
-                intent = self.intent_router.classify(state["query"])
-        # Stash the verdict so _n_personal_tools can reuse it without a second
-        # classifier round-trip.
-        state["ecampus_intent"] = intent
-        if intent == "COMMUNITY":
-            tool_scope = "public_kb"
-        elif intent == "PERSONAL_DATA":
-            tool_scope = "personal"
+        if is_own_timetable_query(query):
+            tool_scope = SCOPE_PERSONAL
+        elif is_cohort_timetable_query(query):
+            tool_scope = SCOPE_PUBLIC_TIMETABLE
         else:
             return state
 
-        tool_role = identity.role if identity.role in ("student", "faculty") else None
+        request_context = state.get("request_context")
+        tool_role = self._tool_role(identity, request_context)
         if tool_role is None:
-            # Broad JWT role is student|faculty|admin; map elevated faculty
-            # effective roles if present on request_context.
-            request_context = state.get("request_context")
-            effective = getattr(request_context, "effective_role", None) or ""
-            if effective.startswith("faculty") or effective in (
-                "dean_faculty", "dean_academic", "dean_students", "superadmin",
-            ):
-                tool_role = "faculty"
-            elif effective == "student":
-                tool_role = "student"
-            else:
-                return state
+            return state
 
         identity_payload = {
             "erp_id": identity.erp_id,
@@ -577,41 +543,40 @@ class AuraChatGraph:
             "dept": getattr(identity, "dept", None),
         }
         try:
-            with track_segment("community_orchestrator_time"):
-                result = self.ecampus_orchestrator.run(
-                    query=state["query"],
+            with track_segment("timetable_agent_time"):
+                result = self.timetable_agent.run(
+                    query=query,
                     identity=identity_payload,
-                    history=state.get("history") or [],
-                    request_context=state.get("request_context"),
+                    history=history,
+                    request_context=request_context,
                     tool_scope=tool_scope,
                 )
         except Exception as exc:
-            # Orchestrator/LLM failure must not kill the request — fall through
-            # to classify → public RAG, which has its own error handling. This
-            # is not itself a soft error, but it silently degrades a COMMUNITY
-            # query to generic RAG, so it has to be attributable too.
             log_soft_failure(
                 "AURA-GRAPH-003",
-                "community_orchestrator",
+                "timetable_agent",
                 exc=exc,
                 degraded_to="public_rag",
             )
             return state
 
         answer = (result.get("answer") or "").strip()
-        if not answer:
-            # Empty tool answer → for PERSONAL_DATA let the legacy
-            # _n_personal_data node (AGGREGATE / erp_connector-only fields)
-            # have a shot instead of returning a blank SSE; for public_kb,
-            # let public RAG try.
+        # Only a tool-backed answer is shown. A published cohort timetable that
+        # the tool could not load may still exist as an ingested document, so
+        # that case falls through to RAG.
+        if not result.get("used_tools") or not answer:
+            return state
+        if tool_scope == SCOPE_PUBLIC_TIMETABLE and not result.get("tool_succeeded"):
             return state
 
         state["result"] = {
             "answer": answer,
-            "sources": result.get("sources") or [],
-            "is_personal_data": tool_scope == "personal",
+            "sources": [],
+            "is_personal_data": tool_scope == SCOPE_PERSONAL,
         }
-        if tool_scope == "personal":
+        if result.get("timetable_changed"):
+            state["result"]["timetable_changed"] = True
+        if tool_scope == SCOPE_PERSONAL:
             state["is_personal"] = True
         return state
 
@@ -713,16 +678,16 @@ class AuraChatGraph:
         }
         try:
             with track_segment("personal_tools_time"):
-                result = self.ecampus_orchestrator.run(
+                result = self.timetable_agent.run(
                     query=state["query"],
                     identity=identity_payload,
                     history=history,
                     request_context=state.get("request_context"),
-                    tool_scope="personal_actions",
+                    tool_scope=SCOPE_PERSONAL_ACTIONS,
                 )
         except Exception as exc:
             # Never kill the request — degrade to the ERP/RAG path, but keep it
-            # attributable (same policy as _n_community_tools).
+            # attributable (same policy as _n_timetable_read).
             log_soft_failure(
                 "AURA-GRAPH-004",
                 "personal_tools_orchestrator",
@@ -825,6 +790,21 @@ class AuraChatGraph:
 
         if access_result.decision == AccessDecision.DENIED:
             state["result"] = {"answer": GENERIC_DENIAL, "sources": [], "is_personal_data": False, "is_guardrail": True}
+            state["is_guardrail"] = True
+            return state
+
+        # Without a direct ERP connection there is no personal data to ground
+        # an answer in; a PERSONAL answer generated from nothing is a
+        # hallucination. MIXED queries still get the public half from RAG.
+        if classification.get("erp_fields") and not getattr(self.erp_connector, "available", True):
+            if query_type == "MIXED":
+                return state
+            state["result"] = {
+                "answer": PERSONAL_RECORDS_UNAVAILABLE_RESPONSE,
+                "sources": [],
+                "is_personal_data": True,
+                "is_guardrail": True,
+            }
             state["is_guardrail"] = True
             return state
 
@@ -942,7 +922,7 @@ class AuraChatGraph:
     def _n_generate(self, state: AuraState) -> AuraState:
         # Fix P0 (rag_debug_report Issue 2 + Root Cause E): If a guardrail node
         # already finalised the answer, enforce zero sources and return.
-        # Without this, sources accumulated by a prior _n_community_tools run
+        # Without this, sources accumulated by a prior tool-node run
         # persist in state and bleed into the guardrail reply (graph state bleed).
         if state.get("is_guardrail") or (state.get("result") or {}).get("is_guardrail"):
             if state.get("result") is not None:

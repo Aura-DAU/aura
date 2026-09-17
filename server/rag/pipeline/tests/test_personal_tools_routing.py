@@ -6,9 +6,9 @@ stay fast and free of the full graph's heavy collaborators.
 Guarantees:
   1. the gates match calendar syncs and timetable edits, not ordinary lookups;
   2. the node surfaces a connect action for a student calendar-sync request;
-  3. it never fires for non-student or unrelated queries (the orchestrator is
+  3. it never fires for non-student or unrelated queries (the agent is
      not invoked), so the ERP path stays untouched;
-  4. a no-tool orchestrator run falls through instead of committing prose.
+  4. a no-tool agent run falls through instead of committing prose.
 """
 
 import types
@@ -21,7 +21,7 @@ from pipeline.aura_chat_graph import (
     _is_calendar_workflow_turn,
     _is_low_risk_timetable_sync_turn,
 )
-from pipeline.ecampus.orchestrator import (
+from pipeline.timetable.agent import (
     _is_timetable_edit_confirmation,
     _is_timetable_edit_intent,
     _required_calendar_tool,
@@ -124,14 +124,16 @@ def _fake_self(run_return, counter=None):
         if counter is not None:
             counter["n"] += 1
         return run_return
-    return types.SimpleNamespace(ecampus_orchestrator=types.SimpleNamespace(run=run))
+    return types.SimpleNamespace(
+        timetable_agent=types.SimpleNamespace(run=run),
+        _tool_role=AuraChatGraph._tool_role,
+    )
 
 
-def _student_state(query, intent="PERSONAL_DATA", role="student"):
+def _student_state(query, role="student"):
     return {
         "query": query,
         "identity": SimpleIdentity({"role": role, "erp_id": "S1"}),
-        "ecampus_intent": intent,
         "history": [],
     }
 
@@ -234,13 +236,9 @@ def test_user_reported_calendar_prompts_recognized_as_workflow():
         state["history"] = list(history)
         assert AuraChatGraph._n_wellness_check(wellness_fake, state).get("result") is None, query
 
-        community_fake = types.SimpleNamespace(
-            intent_router=types.SimpleNamespace(
-                classify=lambda _q: (_ for _ in ()).throw(
-                    AssertionError(f"ERP/public classifier saw: {query!r}")
-                )
-            ),
-            ecampus_orchestrator=types.SimpleNamespace(
+        read_fake = types.SimpleNamespace(
+            _tool_role=AuraChatGraph._tool_role,
+        timetable_agent=types.SimpleNamespace(
                 run=lambda **kwargs: {
                     "used_tools": True,
                     "answer": "SYNC_OK",
@@ -248,20 +246,19 @@ def test_user_reported_calendar_prompts_recognized_as_workflow():
                 }
             ),
         )
-        after_community = AuraChatGraph._n_community_tools(community_fake, state)
-        assert after_community["ecampus_intent"] == "PERSONAL_DATA", query
-        assert after_community.get("result") is None, query
+        after_read = AuraChatGraph._n_timetable_read(read_fake, state)
+        assert after_read.get("result") is None, query
 
         if expect_connect:
-            out = AuraChatGraph._n_personal_tools(community_fake, after_community)
+            out = AuraChatGraph._n_personal_tools(read_fake, after_read)
             assert out["result"]["action_required"]["type"] == "connect_required", query
             assert "automatically" in out["result"]["action_required"]["message"].lower(), query
         else:
-            out = AuraChatGraph._n_personal_tools(community_fake, after_community)
+            out = AuraChatGraph._n_personal_tools(read_fake, after_read)
             assert out["result"]["answer"] == "SYNC_OK", query
 
 
-def test_node_skips_non_calendar_query_without_calling_orchestrator():
+def test_node_skips_non_calendar_query_without_calling_agent():
     counter = {"n": 0}
     fake = _fake_self({"used_tools": True, "answer": "x"}, counter)
     out = AuraChatGraph._n_personal_tools(fake, _student_state("what is my cgpa"))
@@ -279,14 +276,13 @@ def test_node_skips_non_student():
     assert counter["n"] == 0
 
 
-def test_node_routes_calendar_request_when_intent_classifier_falls_back_to_general():
-    """Calendar actions have their own deterministic gate, so an unavailable
-    intent classifier cannot make the MCP tools unreachable from chat."""
+def test_node_routes_calendar_status_request():
+    """Calendar actions have their own deterministic gate."""
     counter = {"n": 0}
     fake = _fake_self({"used_tools": True, "answer": "Calendar status checked."}, counter)
     out = AuraChatGraph._n_personal_tools(
         fake,
-        _student_state("show my Google Calendar status", intent="GENERAL"),
+        _student_state("show my Google Calendar status"),
     )
     assert out["result"]["answer"] == "Calendar status checked."
     assert counter["n"] == 1
@@ -305,7 +301,7 @@ def test_node_routes_timetable_edit_to_personal_actions():
         "answer": "I can move that class. Confirm to apply the timetable change.",
         "sources": [],
     })
-    fake.ecampus_orchestrator.run = lambda **kwargs: calls.append(kwargs) or {
+    fake.timetable_agent.run = lambda **kwargs: calls.append(kwargs) or {
         "used_tools": True,
         "answer": "I can move that class. Confirm to apply the timetable change.",
         "sources": [],
@@ -323,7 +319,7 @@ def test_node_routes_timetable_edit_to_personal_actions():
 def test_node_routes_timetable_edit_confirmation_with_history():
     counter = {"n": 0}
     fake = _fake_self({"used_tools": True, "answer": "Your timetable was updated."}, counter)
-    state = _student_state("confirm", intent="GENERAL")
+    state = _student_state("confirm")
     state["history"] = [{
         "role": "assistant",
         "content": "I'll move your Monday lecture to 3 PM. Confirm to apply this timetable change.",
@@ -351,15 +347,12 @@ def test_node_routes_confirmation_after_calendar_preview():
     assert counter["n"] == 1
 
 
-def test_google_calendar_sync_bypasses_public_kb_and_reaches_personal_tools():
+def test_google_calendar_sync_skips_timetable_read_and_reaches_personal_tools():
     calls = []
 
-    def fail_public_route(_query):
-        raise AssertionError("Google Calendar action reached the public-KB classifier")
-
     fake = types.SimpleNamespace(
-        intent_router=types.SimpleNamespace(classify=fail_public_route),
-        ecampus_orchestrator=types.SimpleNamespace(
+        _tool_role=AuraChatGraph._tool_role,
+        timetable_agent=types.SimpleNamespace(
             run=lambda **kwargs: calls.append(kwargs) or {
                 "used_tools": True,
                 "answer": "Timetable synced to Google Calendar.",
@@ -369,10 +362,8 @@ def test_google_calendar_sync_bypasses_public_kb_and_reaches_personal_tools():
     )
     state = _student_state("sync my google calendar")
 
-    after_community = AuraChatGraph._n_community_tools(fake, state)
-    out = AuraChatGraph._n_personal_tools(fake, after_community)
-
-    assert after_community["ecampus_intent"] == "PERSONAL_DATA"
+    after_read = AuraChatGraph._n_timetable_read(fake, state)
+    out = AuraChatGraph._n_personal_tools(fake, after_read)
     assert out["result"]["answer"] == "Timetable synced to Google Calendar."
     assert calls[0]["tool_scope"] == "personal_actions"
 
@@ -380,12 +371,8 @@ def test_google_calendar_sync_bypasses_public_kb_and_reaches_personal_tools():
 def test_timetable_sync_fetch_follow_up_reaches_personal_tools():
     calls = []
     fake = types.SimpleNamespace(
-        intent_router=types.SimpleNamespace(
-            classify=lambda _query: (_ for _ in ()).throw(
-                AssertionError("sync recovery reached the public-KB classifier")
-            )
-        ),
-        ecampus_orchestrator=types.SimpleNamespace(
+        _tool_role=AuraChatGraph._tool_role,
+        timetable_agent=types.SimpleNamespace(
             run=lambda **kwargs: calls.append(kwargs) or {
                 "used_tools": True,
                 "answer": "Calendar sync preview ready.",
@@ -401,8 +388,8 @@ def test_timetable_sync_fetch_follow_up_reaches_personal_tools():
         ),
     }]
 
-    after_community = AuraChatGraph._n_community_tools(fake, state)
-    out = AuraChatGraph._n_personal_tools(fake, after_community)
+    after_read = AuraChatGraph._n_timetable_read(fake, state)
+    out = AuraChatGraph._n_personal_tools(fake, after_read)
 
     assert out["result"]["answer"] == "Calendar sync preview ready."
     assert calls[0]["tool_scope"] == "personal_actions"
@@ -422,7 +409,7 @@ def test_guest_calendar_sync_gets_sign_in_guidance_without_tool_call():
 
 def test_first_unsync_request_asks_for_confirmation_without_tool_call():
     # A remove/unsync request is a write, so the node returns a deterministic
-    # confirmation prompt and never calls the orchestrator (the model is never
+    # confirmation prompt and never calls the agent (the model is never
     # asked to delete). The prompt carries the phrasing the confirmation gate
     # keys on so the follow-up "yes" reaches the unsync tool.
     counter = {"n": 0}
@@ -465,12 +452,8 @@ def test_sync_with_timetable_phrase_routes_to_personal_tools():
     """User phrasing that previously fell through to the ERP student-records path."""
     calls = []
     fake = types.SimpleNamespace(
-        intent_router=types.SimpleNamespace(
-            classify=lambda _query: (_ for _ in ()).throw(
-                AssertionError("calendar sync reached the public-KB classifier")
-            )
-        ),
-        ecampus_orchestrator=types.SimpleNamespace(
+        _tool_role=AuraChatGraph._tool_role,
+        timetable_agent=types.SimpleNamespace(
             run=lambda **kwargs: calls.append(kwargs) or {
                 "used_tools": True,
                 "answer": "Timetable synced to Google Calendar.",
@@ -487,13 +470,12 @@ def test_sync_with_timetable_phrase_routes_to_personal_tools():
         calls.clear()
         state = _student_state(query)
 
-        after_community = AuraChatGraph._n_community_tools(fake, state)
-        assert after_community["ecampus_intent"] == "PERSONAL_DATA", query
-        # Community must short-circuit without committing an answer (same state
+        after_read = AuraChatGraph._n_timetable_read(fake, state)
+        # The read node must short-circuit without committing an answer (same state
         # dict is reused by personal_tools, so check before that node runs).
-        assert after_community.get("result") is None, query
+        assert after_read.get("result") is None, query
 
-        out = AuraChatGraph._n_personal_tools(fake, after_community)
+        out = AuraChatGraph._n_personal_tools(fake, after_read)
         assert out["result"]["answer"] == "Timetable synced to Google Calendar.", query
         assert calls[0]["tool_scope"] == "personal_actions", query
 
@@ -575,16 +557,12 @@ def test_sync_followup_is_low_risk_and_skips_general_guardrail():
 
 def test_post_connect_sync_followup_reaches_personal_tools():
     """End-to-end through the graph nodes: the follow-up must bypass the LLM
-    intent classifier in _n_community_tools and run the deterministic
+    timetable read node and run the deterministic
     personal-actions path in _n_personal_tools."""
     calls = []
     fake = types.SimpleNamespace(
-        intent_router=types.SimpleNamespace(
-            classify=lambda _query: (_ for _ in ()).throw(
-                AssertionError("sync follow-up reached the public-KB classifier")
-            )
-        ),
-        ecampus_orchestrator=types.SimpleNamespace(
+        _tool_role=AuraChatGraph._tool_role,
+        timetable_agent=types.SimpleNamespace(
             run=lambda **kwargs: calls.append(kwargs) or {
                 "used_tools": True,
                 "answer": "Done — your timetable is synced to Google Calendar.",
@@ -595,16 +573,14 @@ def test_post_connect_sync_followup_reaches_personal_tools():
     state = _student_state("it's not synced")
     state["history"] = list(_POST_CONNECT_HISTORY)
 
-    after_community = AuraChatGraph._n_community_tools(fake, state)
-    out = AuraChatGraph._n_personal_tools(fake, after_community)
-
-    assert after_community["ecampus_intent"] == "PERSONAL_DATA"
+    after_read = AuraChatGraph._n_timetable_read(fake, state)
+    out = AuraChatGraph._n_personal_tools(fake, after_read)
     assert out["result"]["answer"] == "Done — your timetable is synced to Google Calendar."
     assert calls[0]["tool_scope"] == "personal_actions"
 
 
-def test_unsync_confirmation_reaches_orchestrator():
-    # After the removal prompt, "yes" routes to the orchestrator's unsync tool.
+def test_unsync_confirmation_reaches_agent():
+    # After the removal prompt, "yes" routes to the agent's unsync tool.
     counter = {"n": 0}
     fake = _fake_self({"used_tools": True, "answer": "Removed 7 events."}, counter)
     state = _student_state("yes")

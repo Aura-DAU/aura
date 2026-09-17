@@ -261,7 +261,7 @@ No explanation, no punctuation, no JSON, no additional text.
     def is_safe_strict(self, query: str) -> bool:
         # Like is_safe() but fails CLOSED on any exception.
         # Use this before routing to personal-data paths: if the guardrail LLM
-        # through to the ERP/ecampus pipeline.
+        # through to the ERP pipeline.
         verdict = self.evaluate(query)
         if verdict is None:
             print("[Guardrail] Strict check unavailable, denying query.")
