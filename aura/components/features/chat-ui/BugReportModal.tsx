@@ -19,6 +19,17 @@ interface BugReportModalProps {
   onClose: () => void
 }
 
+// Keep in sync with server/api/schemas.py BUG_CATEGORIES.
+const BUG_CATEGORIES: { value: string; label: string }[] = [
+  { value: "chat_ai", label: "AURA Chat / AI answers" },
+  { value: "timetable", label: "Timetable" },
+  { value: "calendar", label: "Calendar" },
+  { value: "login_auth", label: "Login / Authentication" },
+  { value: "performance", label: "Performance / Slow loading" },
+  { value: "ui_ux", label: "UI / Design" },
+  { value: "other", label: "Other" },
+]
+
 export function BugReportModal({ open, onClose }: BugReportModalProps) {
   return (
     <AnimatePresence>
@@ -32,6 +43,7 @@ export function BugReportModal({ open, onClose }: BugReportModalProps) {
 function BugReportDialog({ onClose }: { onClose: () => void }) {
   const { data: session } = useSession()
   const [queryText, setQueryText] = useState("")
+  const [category, setCategory] = useState("other")
   const [image, setImage] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
@@ -90,6 +102,7 @@ function BugReportDialog({ onClose }: { onClose: () => void }) {
     try {
       const fd = new FormData()
       fd.append("query_text", queryText.trim())
+      fd.append("category", category)
       if (image) fd.append("image", image, image.name)
 
       const res = await fetch("/api/bug-report", { method: "POST", body: fd })
@@ -195,6 +208,28 @@ function BugReportDialog({ onClose }: { onClose: () => void }) {
             <span className="self-end text-[11px] text-neutral-600">
               {queryText.length}/5000
             </span>
+          </div>
+
+          {/* Category */}
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="bug-category"
+              className="text-xs font-medium text-neutral-400"
+            >
+              Category
+            </label>
+            <select
+              id="bug-category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="rounded-xl border border-theme-gray-light bg-theme-black px-3 py-2.5 text-sm text-neutral-100 outline-none transition-colors focus:border-theme-gray-lighter"
+            >
+              {BUG_CATEGORIES.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Image upload */}

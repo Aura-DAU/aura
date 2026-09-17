@@ -37,6 +37,12 @@ export async function POST(req: Request) {
   const forwarded = new FormData()
   forwarded.append("query_text", queryText.trim())
 
+  const category = formData.get("category")
+  forwarded.append(
+    "category",
+    typeof category === "string" && category.trim() ? category.trim() : "other",
+  )
+
   const image = formData.get("image")
   if (image instanceof Blob && image.size > 0) {
     const filename =

@@ -8,6 +8,7 @@ import { AdminAccessManager } from "@/components/features/dashboard/AdminAccessM
 import { UserActivityStats } from "@/components/features/dashboard/UserActivityStats"
 import { QueryFailureDashboard } from "@/components/features/dashboard/QueryFailureDashboard"
 import { ChatHistoryViewer } from "@/components/features/dashboard/ChatHistoryViewer"
+import { BugReportsDashboard } from "@/components/features/dashboard/BugReportsDashboard"
 
 interface Binding {
   id: string
@@ -283,6 +284,9 @@ export default function AdminBindingsClient() {
           <div className="space-y-6">
             <UserActivityStats />
             <AdminAccessManager />
+
+        {/* Bug Reports resolver dashboard */}
+        <BugReportsDashboard />
 
         {/* Search Card */}
         <div className="rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 mb-6">

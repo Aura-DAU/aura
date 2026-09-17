@@ -35,6 +35,7 @@ from api.routes.identity_routes import router as identity_router
 from api.routes.memory_routes import router as memory_router
 from api.routes.speech_routes import router as speech_router
 from api.routes.timetable_routes import router as timetable_router, push_router, profile_router
+from api.routes.bug_report_routes import router as bug_report_router
 
 
 def _is_production() -> bool:
@@ -122,6 +123,7 @@ def create_app() -> FastAPI:
     application.include_router(speech_router)
     application.include_router(ecampus_router)
     application.include_router(health_router)
+    application.include_router(bug_report_router)
 
     ffmpeg_path = os.getenv("FFMPEG_BINARY_PATH")
     if ffmpeg_path and os.path.exists(ffmpeg_path):
