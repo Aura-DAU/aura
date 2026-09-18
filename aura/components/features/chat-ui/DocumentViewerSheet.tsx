@@ -84,14 +84,46 @@ function DocumentViewerPanel({
       }
     }
 
+    const strippedLines = rawLines.slice(offset)
+    let sLine = target.startLine ? Math.max(1, target.startLine - offset) : undefined
+    let eLine = target.endLine
+      ? Math.max(1, target.endLine - offset)
+      : sLine
+
+    // Snap blank lines to actual adjacent content so AST highlight never targets an empty line
+    if (sLine !== undefined && strippedLines.length > 0) {
+      const idx = sLine - 1
+      if (idx >= 0 && idx < strippedLines.length && !strippedLines[idx].trim()) {
+        // If the preceding line is a heading, snap to that heading
+        if (idx > 0 && /^#{1,6}\s/.test(strippedLines[idx - 1])) {
+          sLine = idx // 1-based: (idx - 1) + 1 = idx
+        } else if (idx + 1 < strippedLines.length && strippedLines[idx + 1].trim()) {
+          // Otherwise snap to the following content line
+          sLine = idx + 2
+        }
+      }
+
+      // If eLine is missing or equal to sLine, expand to encompass the section/block
+      if (eLine === undefined || eLine <= sLine) {
+        let scan = sLine
+        while (scan < strippedLines.length) {
+          const line = strippedLines[scan]
+          // Stop at the next major heading (H1-H3)
+          if (/^#{1,3}\s/.test(line) && scan >= sLine) {
+            break
+          }
+          scan++
+          // Bound expansion to a reasonable section length
+          if (scan - sLine >= 35) break
+        }
+        eLine = Math.max(sLine, scan)
+      }
+    }
+
     return {
-      strippedContent: rawLines.slice(offset).join("\n"),
-      startLine: target.startLine ? Math.max(1, target.startLine - offset) : undefined,
-      endLine: target.endLine
-        ? Math.max(1, target.endLine - offset)
-        : target.startLine
-          ? Math.max(1, target.startLine - offset)
-          : undefined,
+      strippedContent: strippedLines.join("\n"),
+      startLine: sLine,
+      endLine: eLine,
     }
   }, [state.content, target.startLine, target.endLine])
 
