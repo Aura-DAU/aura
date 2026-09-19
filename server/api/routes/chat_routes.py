@@ -27,6 +27,8 @@ from pipeline.memory.response_cache import get_response_cache
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota, _day_start
 from pipeline.token_budget import is_context_length_error
 from access_control import resolve_effective_role
+from pipeline.failure_logger import record_query_failure
+from pipeline.chat_history_logger import record_chat_turn
 
 router = APIRouter(tags=["chat"])
 _scope_resolver = AcademicScopeResolver()
@@ -50,8 +52,24 @@ PIPELINE_ERROR_DETAIL = (
 )
 
 
-def _pipeline_error_response(exc: Exception) -> JSONResponse:
-    if is_context_length_error(exc):
+def _pipeline_error_response(
+    exc: Exception,
+    question: str = "",
+    identity: Identity | None = None,
+    thread_id: str | None = None,
+) -> JSONResponse:
+    is_ctx = is_context_length_error(exc)
+    code = "AURA-CTX-001" if is_ctx else "RAG_PIPELINE_ERROR"
+    record_query_failure(
+        query_text=question,
+        failure_stage="context_budget" if is_ctx else "pipeline",
+        failure_code=code,
+        error_message=str(exc),
+        user_role=identity.role if identity else None,
+        erp_id=identity.erp_id if identity else None,
+        thread_id=thread_id,
+    )
+    if is_ctx:
         logger.error(
             "chat_pipeline_error code=AURA-CTX-001 status=413 exc_type=%s: %s",
             type(exc).__name__,
@@ -225,14 +243,14 @@ async def chat(
                 _ask_with_memory, body, identity, history, display_profile, request_context
             )
     except RAGPipelineError as exc:
-        return _pipeline_error_response(exc)
+        return _pipeline_error_response(exc, question=body.question, identity=identity, thread_id=body.threadId)
     except Exception as exc:
         # An SDK BadRequestError reaches here unwrapped whenever the 400 is
         # raised outside inference_router's rotation wrapper; everything else
         # keeps its existing 500 so genuine bugs stay loud.
         if not is_context_length_error(exc):
             raise
-        return _pipeline_error_response(exc)
+        return _pipeline_error_response(exc, question=body.question, identity=identity, thread_id=body.threadId)
     if isinstance(result, dict):
         result["quota_remaining"] = remaining
         # Cache write: guest public standalone queries only (exclude error/rejection responses)
@@ -263,6 +281,18 @@ def _ask_with_memory(request, identity, history, display_profile, request_contex
         display_profile=display_profile,
         summary=_summary_for_generation(user_memory, mem_result.summary),
         request_context=request_context,
+        thread_id=request.threadId,
+    )
+    # Persist to database conversation store
+    record_chat_turn(
+        thread_id=request.threadId,
+        erp_id=identity.erp_id,
+        role=identity.role,
+        user_message=request.question,
+        assistant_message=result.get("answer", "") if isinstance(result, dict) else str(result),
+        sources=result.get("sources") if isinstance(result, dict) else [],
+        is_personal_data=bool(isinstance(result, dict) and result.get("is_personal_data")),
+        trace_id=result.get("trace_id") or result.get("langsmith_run_id") if isinstance(result, dict) else None,
     )
     # Persist EVERY conversation (not just compacted ones), keyed by thread id so
     # this chat's block updates in place across turns. Guests no-op in the store.
@@ -373,6 +403,7 @@ async def chat_stream(
                 on_profile_update=on_profile_update,
                 summary=_summary_for_generation(user_memory, mem_result.summary),
                 request_context=request_context,
+                thread_id=body.threadId,
             )
             # Persist every conversation, keyed by thread id (see _ask_with_memory).
             capture = _conversation_capture(mem_result.summary, mem_result.history, body.question)
@@ -445,6 +476,17 @@ async def chat_stream(
                             else "Sorry, I encountered an error while processing your request. Please try again in a few moments."
                         )
 
+                        record_query_failure(
+                            stage="llm_generation" if error_code == "VLLM_TIMEOUT" else "pipeline",
+                            error_code=error_code,
+                            error_message=err_str,
+                            query=body.question,
+                            thread_id=body.threadId,
+                            erp_id=identity.erp_id,
+                            role=identity.role,
+                            context={"stream": True, "error_code": error_code},
+                        )
+
                         yield _sse({
                             "type": "error",
                             "code": error_code,
@@ -508,6 +550,18 @@ async def chat_stream(
                             "summary": mem_result.summary,
                         })
                     yield _sse({"type": "quota", "remaining": remaining})
+
+                    # Record chat turn to database conversation store
+                    record_chat_turn(
+                        thread_id=body.threadId,
+                        erp_id=identity.erp_id,
+                        role=identity.role,
+                        user_message=body.question,
+                        assistant_message=answer,
+                        sources=citations,
+                        is_personal_data=bool(result.get("is_personal_data")),
+                        trace_id=result.get("trace_id") or result.get("langsmith_run_id"),
+                    )
 
                     # Cache write: guest public standalone queries only (exclude error/rejection responses)
                     if is_guest_public and answer and "error" not in result:

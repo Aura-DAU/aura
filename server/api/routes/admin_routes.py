@@ -26,6 +26,7 @@ Example admin workflow:
      DELETE /admin/bindings/{binding_id}
 """
 
+import logging
 import re
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field, field_validator
@@ -34,7 +35,9 @@ from typing import Literal, Optional
 import db.connection as db_conn
 from api.auth import require_identity, Identity
 from access_control import resolve_effective_role
+from pipeline.tracer import get_trace_url, get_langsmith_run_url
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/admin", tags=["admin"])
 
 _DAU_EMAIL_DOMAIN = "dau.ac.in"
@@ -572,3 +575,286 @@ def get_latency_stats(hours: int = 24, admin: Identity = Depends(_require_admin)
         })
 
     return {"segments": segments, "total_requests": count}
+
+
+# ── Query Failure Analyser Endpoints ──────────────────────────────────────────
+
+
+@router.get("/failures/summary")
+def get_failure_summary(days: int = 7, admin: Identity = Depends(_require_admin)):
+    if days <= 0 or days > 90:
+        raise HTTPException(status_code=400, detail="Days parameter must be between 1 and 90.")
+    try:
+        by_stage = db_conn.query(
+            """SELECT stage, count(*) as count
+               FROM query_failures
+               WHERE created_at >= NOW() - %s * INTERVAL '1 day'
+               GROUP BY stage ORDER BY count DESC""",
+            (days,)
+        )
+        by_code = db_conn.query(
+            """SELECT error_code, count(*) as count
+               FROM query_failures
+               WHERE created_at >= NOW() - %s * INTERVAL '1 day'
+               GROUP BY error_code ORDER BY count DESC""",
+            (days,)
+        )
+        daily_trend = db_conn.query(
+            """SELECT TO_CHAR(created_at, 'YYYY-MM-DD') as date, count(*) as count
+               FROM query_failures
+               WHERE created_at >= NOW() - %s * INTERVAL '1 day'
+               GROUP BY TO_CHAR(created_at, 'YYYY-MM-DD')
+               ORDER BY date ASC""",
+            (days,)
+        )
+        total_failures_row = db_conn.query(
+            """SELECT count(*) as count
+               FROM query_failures
+               WHERE created_at >= NOW() - %s * INTERVAL '1 day'""",
+            (days,)
+        )
+        total_failures = total_failures_row[0]["count"] if total_failures_row else 0
+
+        total_queries_row = db_conn.query(
+            """SELECT count(*) as count
+               FROM latency_logs
+               WHERE created_at >= NOW() - %s * INTERVAL '1 day'""",
+            (days,)
+        )
+        total_queries = total_queries_row[0]["count"] if total_queries_row else 0
+        failure_rate = (total_failures / total_queries * 100) if total_queries > 0 else 0.0
+
+        return {
+            "total_failures": total_failures,
+            "total_queries": total_queries,
+            "failure_rate": round(failure_rate, 2),
+            "window_days": days,
+            "by_stage": by_stage or [],
+            "by_code": by_code or [],
+            "daily_trend": daily_trend or [],
+        }
+    except Exception as exc:
+        logger.exception("Failed to fetch failure summary: %s", exc)
+        raise HTTPException(status_code=500, detail=f"Database query failed: {exc}") from exc
+
+
+@router.get("/failures")
+def list_failures(
+    days: int = 7,
+    stage: Optional[str] = None,
+    code: Optional[str] = None,
+    resolved: Optional[bool] = None,
+    search: Optional[str] = None,
+    limit: int = 50,
+    offset: int = 0,
+    admin: Identity = Depends(_require_admin),
+):
+    if days <= 0 or days > 90:
+        raise HTTPException(status_code=400, detail="Days parameter must be between 1 and 90.")
+    limit = min(max(1, limit), 200)
+    offset = max(0, offset)
+
+    conditions = ["created_at >= NOW() - %s * INTERVAL '1 day'"]
+    params: list = [days]
+
+    if stage:
+        conditions.append("stage = %s")
+        params.append(stage)
+    if code:
+        conditions.append("error_code = %s")
+        params.append(code)
+    if resolved is not None:
+        if resolved:
+            conditions.append("resolved_at IS NOT NULL")
+        else:
+            conditions.append("resolved_at IS NULL")
+    if search:
+        conditions.append("(query ILIKE %s OR error_message ILIKE %s OR erp_id ILIKE %s)")
+        wildcard = f"%{search}%"
+        params.extend([wildcard, wildcard, wildcard])
+
+    where_clause = " WHERE " + " AND ".join(conditions)
+
+    count_sql = f"SELECT count(*) as count FROM query_failures{where_clause}"
+    select_sql = f"""
+        SELECT id, stage, error_code, error_message, query, thread_id,
+               erp_id, role, langsmith_run_id, langsmith_url,
+               created_at, resolved_at, resolved_by
+        FROM query_failures
+        {where_clause}
+        ORDER BY created_at DESC
+        LIMIT %s OFFSET %s
+    """
+    try:
+        count_rows = db_conn.query(count_sql, tuple(params))
+        total = count_rows[0]["count"] if count_rows else 0
+
+        fetch_params = list(params) + [limit, offset]
+        rows = db_conn.query(select_sql, tuple(fetch_params))
+
+        for r in rows:
+            trace_id = r.get("langsmith_run_id") or r.get("trace_id")
+            resolved_url = (
+                r.get("trace_url")
+                or r.get("langsmith_url")
+                or get_trace_url(trace_id)
+                or (get_langsmith_run_url(trace_id) if trace_id else None)
+            )
+            r["trace_id"] = trace_id
+            r["trace_url"] = resolved_url
+            r["langsmith_url"] = resolved_url
+
+        return {
+            "total": total,
+            "limit": limit,
+            "offset": offset,
+            "items": rows or [],
+        }
+    except Exception as exc:
+        logger.exception("Failed to list failures: %s", exc)
+        raise HTTPException(status_code=500, detail=f"Database query failed: {exc}") from exc
+
+
+@router.get("/failures/{failure_id}")
+def get_failure_detail(failure_id: int, admin: Identity = Depends(_require_admin)):
+    try:
+        rows = db_conn.query(
+            """SELECT id, stage, error_code, error_message, query, thread_id,
+                      erp_id, role, langsmith_run_id, langsmith_url, context,
+                      created_at, resolved_at, resolved_by
+               FROM query_failures
+               WHERE id = %s""",
+            (failure_id,)
+        )
+        if not rows:
+            raise HTTPException(status_code=404, detail="Failure record not found.")
+        row = rows[0]
+        trace_id = row.get("langsmith_run_id") or row.get("trace_id")
+        resolved_url = (
+            row.get("trace_url")
+            or row.get("langsmith_url")
+            or get_trace_url(trace_id)
+            or (get_langsmith_run_url(trace_id) if trace_id else None)
+        )
+        row["trace_id"] = trace_id
+        row["trace_url"] = resolved_url
+        row["langsmith_url"] = resolved_url
+        return row
+    except HTTPException:
+        raise
+    except Exception as exc:
+        logger.exception("Failed to get failure detail: %s", exc)
+        raise HTTPException(status_code=500, detail=f"Database query failed: {exc}") from exc
+
+
+@router.post("/failures/{failure_id}/resolve")
+def resolve_failure(failure_id: int, admin: Identity = Depends(_require_admin)):
+    try:
+        db_conn.execute(
+            """UPDATE query_failures
+               SET resolved_at = NOW(), resolved_by = %s
+               WHERE id = %s""",
+            (admin.erp_id, failure_id)
+        )
+        return {"status": "ok", "resolved_id": failure_id, "resolved_by": admin.erp_id}
+    except Exception as exc:
+        logger.exception("Failed to resolve failure: %s", exc)
+        raise HTTPException(status_code=500, detail=f"Database update failed: {exc}") from exc
+
+
+# ── Conversation History Endpoints ─────────────────────────────────────────────
+
+
+@router.get("/conversations")
+def list_conversations(
+    limit: int = 20,
+    offset: int = 0,
+    role: Optional[str] = None,
+    search: Optional[str] = None,
+    admin: Identity = Depends(_require_admin),
+):
+    limit = min(max(1, limit), 100)
+    offset = max(0, offset)
+
+    conditions = []
+    params: list = []
+
+    if role:
+        conditions.append("role = %s")
+        params.append(role)
+    if search:
+        conditions.append("(erp_id ILIKE %s OR title ILIKE %s OR thread_id ILIKE %s)")
+        wildcard = f"%{search}%"
+        params.extend([wildcard, wildcard, wildcard])
+
+    where_clause = (" WHERE " + " AND ".join(conditions)) if conditions else ""
+
+    count_sql = f"SELECT count(*) as count FROM chat_threads{where_clause}"
+    select_sql = f"""
+        SELECT thread_id, erp_id, role, title, turn_count, created_at, last_active_at
+        FROM chat_threads
+        {where_clause}
+        ORDER BY last_active_at DESC
+        LIMIT %s OFFSET %s
+    """
+    try:
+        count_rows = db_conn.query(count_sql, tuple(params))
+        total = count_rows[0]["count"] if count_rows else 0
+
+        fetch_params = list(params) + [limit, offset]
+        rows = db_conn.query(select_sql, tuple(fetch_params))
+
+        return {
+            "total": total,
+            "limit": limit,
+            "offset": offset,
+            "items": rows or [],
+        }
+    except Exception as exc:
+        logger.exception("Failed to list conversations: %s", exc)
+        raise HTTPException(status_code=500, detail=f"Database query failed: {exc}") from exc
+
+
+@router.get("/conversations/{thread_id}")
+def get_conversation_detail(thread_id: str, admin: Identity = Depends(_require_admin)):
+    try:
+        thread_rows = db_conn.query(
+            """SELECT thread_id, erp_id, role, title, turn_count, created_at, last_active_at
+               FROM chat_threads
+               WHERE thread_id = %s""",
+            (thread_id,)
+        )
+        if not thread_rows:
+            raise HTTPException(status_code=404, detail="Conversation thread not found.")
+        thread = thread_rows[0]
+
+        message_rows = db_conn.query(
+            """SELECT id, thread_id, role, content, sources, is_personal_data, langsmith_run_id, created_at
+               FROM chat_messages
+               WHERE thread_id = %s
+               ORDER BY created_at ASC""",
+            (thread_id,)
+        )
+
+        for msg in message_rows:
+            trace_id = msg.get("langsmith_run_id") or msg.get("trace_id")
+            resolved_url = (
+                msg.get("trace_url")
+                or msg.get("langsmith_url")
+                or get_trace_url(trace_id)
+                or (get_langsmith_run_url(trace_id) if trace_id else None)
+            )
+            msg["trace_id"] = trace_id
+            msg["trace_url"] = resolved_url
+            msg["langsmith_url"] = resolved_url
+
+        return {
+            "thread": thread,
+            "messages": message_rows or [],
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        logger.exception("Failed to get conversation detail: %s", exc)
+        raise HTTPException(status_code=500, detail=f"Database query failed: {exc}") from exc
+

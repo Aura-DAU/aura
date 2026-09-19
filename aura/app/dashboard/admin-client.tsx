@@ -1,11 +1,13 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { Search, Plus, Trash2, Shield, Calendar, Loader2, CheckCircle2, AlertCircle, Activity, Clock } from "lucide-react"
+import { Search, Plus, Trash2, Shield, Calendar, Loader2, CheckCircle2, AlertCircle, Activity, Clock, AlertTriangle, MessageSquare } from "lucide-react"
 import { ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { getErrorMessage, toastError, toastSuccess } from "@/lib/toast"
 import { AdminAccessManager } from "@/components/features/dashboard/AdminAccessManager"
 import { UserActivityStats } from "@/components/features/dashboard/UserActivityStats"
+import { QueryFailureDashboard } from "@/components/features/dashboard/QueryFailureDashboard"
+import { ChatHistoryViewer } from "@/components/features/dashboard/ChatHistoryViewer"
 import { BugReportsDashboard } from "@/components/features/dashboard/BugReportsDashboard"
 
 interface Binding {
@@ -75,7 +77,10 @@ const BoxShape = (props: BoxShapeProps) => {
   )
 }
 
+type AdminTab = "failures" | "conversations" | "latency" | "access"
+
 export default function AdminBindingsClient() {
+  const [activeTab, setActiveTab] = useState<AdminTab>("failures")
   const [erpId, setErpId] = useState("")
   const [searchQuery, setSearchQuery] = useState("")
   const [loading, setLoading] = useState(false)
@@ -220,7 +225,7 @@ export default function AdminBindingsClient() {
 
   return (
     <div className="min-h-screen bg-theme-black text-neutral-100 px-4 py-12 md:px-8 font-sans">
-      <div className="mx-auto max-w-4xl animate-in fade-in duration-200 text-left">
+      <div className="mx-auto max-w-5xl md:max-w-6xl animate-in fade-in duration-200 text-left">
         {/* Header */}
         <div className="mb-8 flex items-center gap-3">
           <div className="flex size-10 items-center justify-center rounded-xl bg-theme-red/10 border border-theme-red/20 text-theme-red">
@@ -231,16 +236,54 @@ export default function AdminBindingsClient() {
               Admin Dashboard
             </h1>
             <p className="text-xs text-neutral-400 mt-0.5 font-sans">
-              Manage scope bindings, admin access, and monitor system latency metrics.
+              Manage scope bindings, inspect query failures, trace conversations, and monitor system latency metrics.
             </p>
           </div>
         </div>
 
-        {/* User Activity Stats */}
-        <UserActivityStats />
+        {/* Tab Navigation */}
+        <div className="flex border-b border-theme-gray-light mb-8 gap-2 overflow-x-auto">
+          {[
+            { id: "failures", label: "Query Failures", icon: AlertTriangle, badge: "New" },
+            { id: "conversations", label: "Conversation Explorer", icon: MessageSquare, badge: "New" },
+            { id: "access", label: "Access & Scopes", icon: Shield },
+            { id: "latency", label: "Latency Metrics", icon: Activity },
+          ].map((tab) => {
+            const Icon = tab.icon
+            const isActive = activeTab === tab.id
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as AdminTab)}
+                className={`flex items-center gap-2 px-4 py-3 text-xs font-semibold border-b-2 transition-colors whitespace-nowrap ${
+                  isActive
+                    ? "border-theme-red text-theme-red"
+                    : "border-transparent text-neutral-400 hover:text-neutral-200 hover:border-neutral-700"
+                }`}
+              >
+                <Icon className="size-4" />
+                <span>{tab.label}</span>
+                {tab.badge && (
+                  <span className="rounded bg-theme-red/10 text-theme-red border border-theme-red/30 px-1.5 py-0.2 text-[9px] font-bold">
+                    {tab.badge}
+                  </span>
+                )}
+              </button>
+            )
+          })}
+        </div>
 
-        {/* Dashboard Admin Access */}
-        <AdminAccessManager />
+        {/* Tab 1: Query Failures */}
+        {activeTab === "failures" && <QueryFailureDashboard />}
+
+        {/* Tab 2: Conversations */}
+        {activeTab === "conversations" && <ChatHistoryViewer />}
+
+        {/* Tab 3: Access & Scopes */}
+        {activeTab === "access" && (
+          <div className="space-y-6">
+            <UserActivityStats />
+            <AdminAccessManager />
 
         {/* Bug Reports resolver dashboard */}
         <BugReportsDashboard />
@@ -393,119 +436,123 @@ export default function AdminBindingsClient() {
             </div>
           </div>
         )}
-
-        {/* Latency Dashboard Section */}
-        <div className="mt-8 rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-neutral-200 flex items-center gap-2 font-sans">
-              <Activity className="size-5 text-theme-red" />
-              System Latency Metrics
-            </h2>
-            <div className="flex items-center gap-2">
-              <Clock className="size-4 text-neutral-500" />
-              <select
-                value={latencyHours}
-                onChange={(e) => setLatencyHours(Number(e.target.value))}
-                className="bg-theme-gray-light border border-theme-gray-lighter text-xs text-neutral-300 rounded-lg px-2 py-1 outline-none focus:border-theme-red/50"
-              >
-                <option value={1}>Last 1 Hour</option>
-                <option value={12}>Last 12 Hours</option>
-                <option value={24}>Last 24 Hours</option>
-                <option value={168}>Last 7 Days</option>
-                <option value={720}>Last 30 Days</option>
-              </select>
-            </div>
-          </div>
-
-          {latencyError && (
-            <div className="flex items-center gap-2 rounded-xl border border-theme-red/20 bg-theme-red/5 p-3 text-xs text-theme-red mb-4">
-              <AlertCircle className="size-4 shrink-0" />
-              <span>{latencyError}</span>
-            </div>
-          )}
-
-          {latencyLoading ? (
-            <div className="flex items-center justify-center py-20 text-neutral-500">
-              <Loader2 className="size-6 animate-spin" />
-            </div>
-          ) : latencyStats && latencyStats.total_requests > 0 ? (
-            <div className="space-y-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {latencyStats.segments.map((seg) => (
-                  <div key={seg.name} className="rounded-xl bg-theme-gray-light/30 border border-theme-gray-light/50 p-4">
-                    <div className="text-xs text-neutral-400 capitalize mb-1">{seg.name} Latency</div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold text-neutral-100">{seg.median.toFixed(2)}s</span>
-                      <span className="text-[10px] text-neutral-500">median</span>
-                    </div>
-                    <div className="mt-2 text-[10px] text-neutral-500 flex justify-between">
-                      <span>Max: {seg.max.toFixed(2)}s</span>
-                      <span>Mean: {seg.mean.toFixed(2)}s</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="h-[400px] w-full pt-4">
-                <ResponsiveContainer width="100%" height="100%">
-                  <ComposedChart
-                    data={latencyStats.segments.map(s => ({
-                      ...s,
-                      box: [s.q1, s.q3],
-                    }))}
-                    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
-                    <XAxis dataKey="name" stroke="#666" tick={{ fill: '#888', fontSize: 12 }} textAnchor="middle" />
-                    <YAxis
-                      stroke="#666"
-                      tick={{ fill: '#888', fontSize: 12 }}
-                      unit="s"
-                      width={40}
-                    />
-                    <Tooltip
-                      cursor={{ fill: 'rgba(255,255,255,0.05)' }}
-                      content={({ active, payload }: { active?: boolean; payload?: readonly { payload?: LatencySegment }[] }) => {
-                        if (active && payload && payload.length && payload[0].payload) {
-                          const data = payload[0].payload
-                          return (
-                            <div className="bg-theme-black border border-theme-gray-light p-3 rounded-lg shadow-xl text-xs space-y-1">
-                              <div className="font-semibold text-neutral-200 capitalize mb-2 border-b border-theme-gray-light pb-1">
-                                {data.name} Phase
-                              </div>
-                              <div className="flex justify-between gap-4"><span className="text-neutral-400">Max:</span> <span className="text-theme-red font-mono">{data.max.toFixed(3)}s</span></div>
-                              <div className="flex justify-between gap-4"><span className="text-neutral-400">Q3 (75%):</span> <span className="text-neutral-200 font-mono">{data.q3.toFixed(3)}s</span></div>
-                              <div className="flex justify-between gap-4"><span className="text-neutral-400">Median:</span> <span className="text-theme-yellow font-mono">{data.median.toFixed(3)}s</span></div>
-                              <div className="flex justify-between gap-4"><span className="text-neutral-400">Q1 (25%):</span> <span className="text-neutral-200 font-mono">{data.q1.toFixed(3)}s</span></div>
-                              <div className="flex justify-between gap-4"><span className="text-neutral-400">Min:</span> <span className="text-neutral-500 font-mono">{data.min.toFixed(3)}s</span></div>
-                              <div className="border-t border-theme-gray-light mt-2 pt-1 flex justify-between gap-4">
-                                <span className="text-neutral-400">Mean:</span> <span className="text-neutral-300 font-mono">{data.mean.toFixed(3)}s</span>
-                              </div>
-                            </div>
-                          )
-                        }
-                        return null
-                      }}
-                    />
-                    <Bar
-                      dataKey="box"
-                      fill="#e53e3e"
-                      shape={(props: BoxShapeProps) => <BoxShape {...props} />}
-                      barSize={40}
-                    />
-                  </ComposedChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="text-center text-[10px] text-neutral-500 font-sans">
-                Based on {latencyStats.total_requests} requests
-              </div>
-            </div>
-          ) : (
-            <div className="text-center py-10 rounded-xl bg-theme-gray-light/20 border border-theme-gray-light">
-              <p className="text-xs text-neutral-500 font-sans">No latency data available for the selected time range.</p>
-            </div>
-          )}
         </div>
+      )}
+
+        {/* Tab 4: Latency Dashboard Section */}
+        {activeTab === "latency" && (
+          <div className="rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-semibold text-neutral-200 flex items-center gap-2 font-sans">
+                <Activity className="size-5 text-theme-red" />
+                System Latency Metrics
+              </h2>
+              <div className="flex items-center gap-2">
+                <Clock className="size-4 text-neutral-500" />
+                <select
+                  value={latencyHours}
+                  onChange={(e) => setLatencyHours(Number(e.target.value))}
+                  className="bg-theme-gray-light border border-theme-gray-lighter text-xs text-neutral-300 rounded-lg px-2 py-1 outline-none focus:border-theme-red/50"
+                >
+                  <option value={1}>Last 1 Hour</option>
+                  <option value={12}>Last 12 Hours</option>
+                  <option value={24}>Last 24 Hours</option>
+                  <option value={168}>Last 7 Days</option>
+                  <option value={720}>Last 30 Days</option>
+                </select>
+              </div>
+            </div>
+
+            {latencyError && (
+              <div className="flex items-center gap-2 rounded-xl border border-theme-red/20 bg-theme-red/5 p-3 text-xs text-theme-red mb-4">
+                <AlertCircle className="size-4 shrink-0" />
+                <span>{latencyError}</span>
+              </div>
+            )}
+
+            {latencyLoading ? (
+              <div className="flex items-center justify-center py-20 text-neutral-500">
+                <Loader2 className="size-6 animate-spin" />
+              </div>
+            ) : latencyStats && latencyStats.total_requests > 0 ? (
+              <div className="space-y-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {latencyStats.segments.map((seg) => (
+                    <div key={seg.name} className="rounded-xl bg-theme-gray-light/30 border border-theme-gray-light/50 p-4">
+                      <div className="text-xs text-neutral-400 capitalize mb-1">{seg.name} Latency</div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xl font-bold text-neutral-100">{seg.median.toFixed(2)}s</span>
+                        <span className="text-[10px] text-neutral-500">median</span>
+                      </div>
+                      <div className="mt-2 text-[10px] text-neutral-500 flex justify-between">
+                        <span>Max: {seg.max.toFixed(2)}s</span>
+                        <span>Mean: {seg.mean.toFixed(2)}s</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="h-[400px] w-full pt-4">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <ComposedChart
+                      data={latencyStats.segments.map(s => ({
+                        ...s,
+                        box: [s.q1, s.q3],
+                      }))}
+                      margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
+                      <XAxis dataKey="name" stroke="#666" tick={{ fill: '#888', fontSize: 12 }} textAnchor="middle" />
+                      <YAxis
+                        stroke="#666"
+                        tick={{ fill: '#888', fontSize: 12 }}
+                        unit="s"
+                        width={40}
+                      />
+                      <Tooltip
+                        cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                        content={({ active, payload }: { active?: boolean; payload?: readonly { payload?: LatencySegment }[] }) => {
+                          if (active && payload && payload.length && payload[0].payload) {
+                            const data = payload[0].payload
+                            return (
+                              <div className="bg-theme-black border border-theme-gray-light p-3 rounded-lg shadow-xl text-xs space-y-1">
+                                <div className="font-semibold text-neutral-200 capitalize mb-2 border-b border-theme-gray-light pb-1">
+                                  {data.name} Phase
+                                </div>
+                                <div className="flex justify-between gap-4"><span className="text-neutral-400">Max:</span> <span className="text-theme-red font-mono">{data.max.toFixed(3)}s</span></div>
+                                <div className="flex justify-between gap-4"><span className="text-neutral-400">Q3 (75%):</span> <span className="text-neutral-200 font-mono">{data.q3.toFixed(3)}s</span></div>
+                                <div className="flex justify-between gap-4"><span className="text-neutral-400">Median:</span> <span className="text-theme-yellow font-mono">{data.median.toFixed(3)}s</span></div>
+                                <div className="flex justify-between gap-4"><span className="text-neutral-400">Q1 (25%):</span> <span className="text-neutral-200 font-mono">{data.q1.toFixed(3)}s</span></div>
+                                <div className="flex justify-between gap-4"><span className="text-neutral-400">Min:</span> <span className="text-neutral-500 font-mono">{data.min.toFixed(3)}s</span></div>
+                                <div className="border-t border-theme-gray-light mt-2 pt-1 flex justify-between gap-4">
+                                  <span className="text-neutral-400">Mean:</span> <span className="text-neutral-300 font-mono">{data.mean.toFixed(3)}s</span>
+                                </div>
+                              </div>
+                            )
+                          }
+                          return null
+                        }}
+                      />
+                      <Bar
+                        dataKey="box"
+                        fill="#e53e3e"
+                        shape={(props: BoxShapeProps) => <BoxShape {...props} />}
+                        barSize={40}
+                      />
+                    </ComposedChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="text-center text-[10px] text-neutral-500 font-sans">
+                  Based on {latencyStats.total_requests} requests
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-10 rounded-xl bg-theme-gray-light/20 border border-theme-gray-light">
+                <p className="text-xs text-neutral-500 font-sans">No latency data available for the selected time range.</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )
