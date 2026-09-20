@@ -127,5 +127,6 @@ def record_chat_turn(
             trace_id=trace_id,
             **kwargs,
         )
-    except Exception:
-        pass
+    except Exception as exc:
+        # Chat history recording must never interrupt or crash active chat streaming
+        logger.debug("Failed to record chat turn: %s", exc)

@@ -60,8 +60,9 @@ class FailureLogger:
                 try:
                     from pipeline.tracer import get_trace_url
                     trace_url = get_trace_url(trace_id)
-                except Exception:
-                    pass
+                except Exception as exc:
+                    # Trace URL resolution failure must not disrupt failure logging
+                    logger.debug("Trace URL resolution skipped: %s", exc)
 
             meta = dict(metadata or kwargs.get("context", {}) or {})
             if trace_url:
@@ -123,5 +124,6 @@ def record_query_failure(
             failure_code=failure_code,
             **kwargs,
         )
-    except Exception:
-        pass
+    except Exception as exc:
+        # Failure logging must never crash or block response delivery
+        logger.debug("Failed to record query failure: %s", exc)

@@ -17,7 +17,6 @@ from __future__ import annotations
 import datetime
 import os
 import sys
-import uuid
 from pathlib import Path
 from unittest.mock import MagicMock
 
@@ -44,7 +43,6 @@ from pipeline.tracer import (
     is_tracing_enabled,
     get_trace_url,
     get_langfuse_trace_url,
-    get_langsmith_run_url,
     create_trace_config,
     wrap_openai_client,
     RootRunCollector,

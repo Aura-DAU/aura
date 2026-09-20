@@ -1,6 +1,4 @@
-import os
 from unittest.mock import MagicMock
-import pytest
 
 from pipeline.tracer import (
     is_tracing_enabled,
