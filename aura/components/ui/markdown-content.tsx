@@ -38,6 +38,10 @@ function shouldHighlight(node: any, highlightStart?: number, highlightEnd?: numb
   const end = node.position.end.line;
   const targetEnd = highlightEnd ?? highlightStart;
   if (start <= targetEnd && end >= highlightStart) return "true";
+  // Proximity fallback for single-line targets that sit right beside a block
+  if (targetEnd === highlightStart && start - 1 <= highlightStart && end + 1 >= highlightStart) {
+    return "true";
+  }
   return undefined;
 }
 
@@ -102,14 +106,14 @@ function MarkdownContentInner({ content, citations, highlightStart, highlightEnd
 
   React.useEffect(() => {
     if (highlightStart) {
-      // A small timeout ensures the DOM has updated and layout is calculated
-      const id = requestAnimationFrame(() => {
+      // Small timeout ensures the DOM has rendered and slide-in sheet transition is underway
+      const timer = setTimeout(() => {
         const el = containerRef.current?.querySelector("[data-highlighted='true']")
         if (el) {
           el.scrollIntoView({ block: "center", behavior: "smooth" })
         }
-      })
-      return () => cancelAnimationFrame(id)
+      }, 120)
+      return () => clearTimeout(timer)
     }
   }, [highlightStart, highlightEnd, content])
 

@@ -7,6 +7,7 @@ import { getErrorMessage, toastError, toastSuccess } from "@/lib/toast"
 import { AdminAccessManager } from "@/components/features/dashboard/AdminAccessManager"
 import { UserActivityStats } from "@/components/features/dashboard/UserActivityStats"
 import { QueryTraceDashboard } from "@/components/features/dashboard/QueryTraceDashboard"
+import { BugReportsDashboard } from "@/components/features/dashboard/BugReportsDashboard"
 
 interface Binding {
   id: string
@@ -283,6 +284,9 @@ export default function AdminBindingsClient() {
 
             {/* Dashboard Admin Access */}
             <AdminAccessManager />
+
+            {/* Bug Reports resolver dashboard */}
+            <BugReportsDashboard />
 
             {/* Search Card */}
             <div className="rounded-2xl border border-theme-gray-light bg-theme-gray/80 p-5 mb-6">

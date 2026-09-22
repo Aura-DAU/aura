@@ -1,5 +1,5 @@
 -- ============================================================
--- 012_query_trace_logs.sql — AURA V2 Query Traceability & Failure Telemetry
+-- 013_query_trace_logs.sql — AURA V2 Query Traceability & Failure Telemetry
 --
 -- Records a structured trace for every query processed by the AURA chat
 -- pipeline (both streaming and non-streaming): query text, user identity,
