@@ -265,7 +265,7 @@ Yes.
 
 URL of Public Self-Diselosure at website:
 
-https://dau.ac.infuge-proforma
+https://www.daiict.ac.in/ugc-proforma
 
 We now have bwe schools.
 
@@ -318,7 +318,7 @@ universily Number of part-time: 12
 
 Annexure-13 provides the details,
 Website link (507): https://dau.ac.in/faculty
-Website link (SoL): https://sol.dau.ac,in/ meet:
+Website link (SoL): https://sol.dau.ac.in/ meet:
 
 iv. Total number of teachers in
 1
@@ -657,7 +657,7 @@ e Also, refer to the Audited placement
 Annexure-G and Annexure-H,
 respectively.
 
-e Refer to http://placement.dau.ac.in/ for
+e Refer to https://www.daiict.ac.in/placement for
 
 more information related to placement
 activities.
@@ -8328,7 +8328,7 @@ harvesting technology to provide water to birds. It overcomes the constraints of
 traditional, manually refilled feeders, demonstrating a fusion of environmental
 sonsitivity and technological innovation.
 
-Website link: http://ceid.dau.ac.in/
+Website link: https://www.daiict.ac.in/dcei
 
 a
 

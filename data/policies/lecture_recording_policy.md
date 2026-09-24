@@ -10,6 +10,9 @@ team: "Team E"
 source_type: "Web"
 ---
 
+> [!WARNING]
+> **Synthetic / Unverified Policy:** No official DAU / DA-IICT policy document currently exists for this topic. The contents below represent synthesized guidelines and must not be cited as official university policy.
+
 # Policy on Recording of Lectures and Academic Sessions
 
 ## Overview

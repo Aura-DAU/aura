@@ -48,3 +48,11 @@ Tender for Wi-Fi set-up as part of refurbishing CEP Classrooms at DAU, Gandhinag
 
 - **Tender No.:** Tender/DAU/26-27/005
 - Contains 3 Annexures: Terms & Conditions, Bidder Info, Bill of Materials (BOM)
+
+### Auxiliary Bill of Quantities (BOM Annexure 3 Notes)
+In addition to the primary active switching and routing components, the complete tender BoQ includes:
+- **Cat6 UTP Cable:** 1,700 rmtr (Running Meters)
+- **Casing & Capping (25x16mm):** 1,000 rmtr
+- **10G SFP+ Optical Transceiver Modules:** 7 units
+- **BirdFins Protection:** 2 boxes
+- **Comprehensive Turnkey Scope:** Complete laying, termination, structured labeling, testing, and commissioning charges.

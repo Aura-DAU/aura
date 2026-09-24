@@ -58,7 +58,7 @@ Accreditation/Ranking status
 https://www.dau.ac.in/about-us  
 (See 'Accreditations and Recognitions' section) 
  
-https://www.dau.ac.in/nirf-national-institutional-
+https://www.daiict.ac.in/nirf-national-institutional-ranking-framework
 ranking-framework   
  
 Recognition/Approval (2(f), 
@@ -102,7 +102,7 @@ Director - School of Technology
 Name: Dr. G. Venkatesh 
 Email: director_sot@dau.ac.in 
 Mobile: 079-68261565, 079-68261700 
-Profile: https://www.dau.ac.in/director-school-
+Profile: https://www.daiict.ac.in/director-school-of-law
 technology  
  
 Director - School of Law 
@@ -145,7 +145,7 @@ Not Applicable
 Ombudsperson 
 Name: Prof. Kiran Parmar 
 Email: ombudsperson@dau.ac.in  
-Webpage:  https://www.dau.ac.in/table-1-
+Webpage:  https://www.daiict.ac.in/table-1-grievance-redressal-authority-students
 grievance-redressal-authority-students  
 Executive 
 Council/Board 
@@ -158,19 +158,19 @@ composition
 and 
 members 
 with particulars 
-Board of Governors: https://www.dau.ac.in/board-
+Board of Governors: https://www.daiict.ac.in/board-of-governors
 governors  
  
 Academic Council: 
 https://www.dau.ac.in/academic-council  
  
-Board of Studies: https://www.dau.ac.in/board-
+Board of Studies: https://www.daiict.ac.in/board-of-governors
 studies    
  
 Finance Committee: 
 https://www.dau.ac.in/finance-committee   
 Internal Complaint Committee 
-https://www.dau.ac.in/internal-complaint-
+https://www.daiict.ac.in/internal-complaints-committee
 committee
 
 Academic 
@@ -189,7 +189,7 @@ https://www.dau.ac.in/dean-rd
 Dean (Students): 
 https://www.dau.ac.in/dean-students 
 Dean (Alumni & External Relations): 
-https://www.dau.ac.in/dean-alumni-external-
+https://www.daiict.ac.in/dean-alumni-external-relations
 relations      
 c) 
 Academics 
@@ -207,21 +207,21 @@ https://www.dau.ac.in/programs-of-study#tab-3
 School of Law (SoL) 
  
 Executive Education Programmes: 
-https://sol.dau.ac.in/edp/  
+https://sol.dau.ac.in/executive-education/  
  
-Master of Laws (LL.M.): https://sol.dau.ac.in/llm/  
+Master of Laws (LL.M.): https://sol.dau.ac.in/programs/  
 AI, Data Protection and Technology Law 
-https://sol.dau.ac.in/ai-data-protection-and-
+https://sol.dau.ac.in/ai-data-protection-and-cyber-law/
 technology-law/ 
 Construction Law, Contracts & Arbitration 
-https://sol.dau.ac.in/ll-m-in-construction-law-
+https://sol.dau.ac.in/ll-m-in-construction-law-and-arbitration/
 contracts-arbitration/ 
 Aviation Law 
-https://sol.dau.ac.in/aviation-law/   
+https://sol.dau.ac.in/programs/   
  
-PhD in Law: https://sol.dau.ac.in/phd-in-law/ 
+PhD in Law: https://sol.dau.ac.in/phd/ 
  
-https://sol.dau.ac.in/phd-in-law/program-
+https://sol.dau.ac.in/phd/program-structure/
 overview/ 
 Academic Calendar 
 https://www.dau.ac.in/academic-calendar  
@@ -239,7 +239,7 @@ School of Technology (SoT): https://www.dau.ac.in/
 School of Law (SoL): https://sol.dau.ac.in/ 
  
 DAU Centre for Entrepreneurship and Incubation 
-(DCEI): http://ceid.dau.ac.in/
+(DCEI): https://www.daiict.ac.in/dcei
 
 Schools/Departments/Centres 
 faculty wise/staff details with 
@@ -251,7 +251,7 @@ Staff Details:
 https://www.dau.ac.in/staff 
  
 School of Law (SoL) - Faculty & Staff Details: 
-https://sol.dau.ac.in/meet-the-team/  
+https://sol.dau.ac.in/faculty/  
 List of UGC-recognized 
 ODL/Online programs, if any 
 Not Applicable 
@@ -261,7 +261,7 @@ https://www.dau.ac.in/iqac
 Library 
 https://www.dau.ac.in/resource-centre 
  
-Website: https://rc.dau.ac.in/     
+Website: https://www.daiict.ac.in/research     
 Academic collaboration 
 https://www.dau.ac.in/about-us (See 
 ‘Collaboration & MoUs’ section) 
@@ -285,13 +285,13 @@ the respective programs)
 School of Law (SoL) 
  
 Executive Education Programmes: 
-https://sol.dau.ac.in/edp/    
+https://sol.dau.ac.in/executive-education/    
  
 Master of Laws (LL.M.): 
-https://sol.dau.ac.in/llm/ 
+https://sol.dau.ac.in/programs/ 
  
 PhD in Law: 
-https://sol.dau.ac.in/phd-in-law/  
+https://sol.dau.ac.in/phd/  
 Admission process and 
 guidelines 
 Undergraduate Admissions:  
@@ -322,7 +322,7 @@ Consultancy Projects, Foreign
 Collaboration Industry 
 Collaborations) 
 Research Overview: 
-https://www.dau.ac.in/research-overview    
+https://www.daiict.ac.in/researchoverview    
  
 Sponsored Projects: 
 https://www.dau.ac.in/sponsored-projects    
@@ -330,27 +330,27 @@ https://www.dau.ac.in/sponsored-projects
 https://www.dau.ac.in/about-us (See 
 ‘Collaboration & MoUs’ section) 
  
-Research Areas: https://www.dau.ac.in/research-
+Research Areas: https://www.daiict.ac.in/research
 areas  
 AI, ML and Data Science 
 https://www.dau.ac.in/ai-ml-and-data-science 
 Algorithms and Theory of Computation 
-https://www.dau.ac.in/algorithms-and-theory-of-
+https://www.daiict.ac.in/research/algorithms-and-theory-of-computation
 omputation  
 Communications and Signal Processing 
-https://www.dau.ac.in/communications-and-
+https://www.daiict.ac.in/research/communications-and-signal-processing
 signal-processing  
 Humanities, Social Sciences and Design 
-https://www.dau.ac.in/humanities-social-sciences-
+https://www.daiict.ac.in/research/humanities-social-sciences
 and-design  
 Physics and Mathematical Sciences 
-https://www.dau.ac.in/physics-and-mathematical-
+https://www.daiict.ac.in/research/physics-and-mathematical-sciences
 sciences  
 Software Systems and Networking 
-https://www.dau.ac.in/software-systems-and-
+https://www.daiict.ac.in/research/software-systems-and-networks
 networking-0  
 VLSI & Embedded Systems 
-https://www.dau.ac.in/vlsi-and-embedded-
+https://www.daiict.ac.in/research/vlsi-and-embedded-systems
 systems  
  
 Available under 'Policies' page: 
@@ -378,7 +378,7 @@ Laboratory Complex:
 https://www.dau.ac.in/laboratory-complex 
  
 Laboratory website: 
-https://lab.dau.ac.in 
+https://www.daiict.ac.in/facilities 
  
 ICT Infrastructure 
 https://www.dau.ac.in/ict-infrastructure   
@@ -405,7 +405,7 @@ Placement Cell and its
 activities 
 https://www.dau.ac.in/placements  
  
-Placement website: http://placement.dau.ac.in/  
+Placement website: https://www.daiict.ac.in/placement  
  
 Student Committees 
 https://www.dau.ac.in/dean-students#tab-1  
@@ -419,7 +419,7 @@ Redressal Committee (SGRC)
 and Ombudsperson 
 Link: https://dau.ac.in/grievance-redressal-cell  
  
-Webpage: https://www.dau.ac.in/table-1-
+Webpage: https://www.daiict.ac.in/table-1-grievance-redressal-authority-students
 grievance-redressal-authority-students 
  
 Name: Prof. Kiran Parmar 
@@ -431,7 +431,7 @@ https://www.dau.ac.in/medical-facility
  
  
 Internal Complaint Committee 
-https://www.dau.ac.in/internal-complaint-
+https://www.daiict.ac.in/internal-complaints-committee
 committee  
  
  
@@ -528,7 +528,7 @@ https://www.dau.ac.in/faculty-tenure
 Postdoc Positions:  
 https://www.dau.ac.in/postdoc-positions  
 Staff:  
-https://www.dau.ac.in/non-teaching-staff-
+https://www.daiict.ac.in/non-teaching-staff
 positions  
 Project Positions: 
 https://www.dau.ac.in/project-positions
@@ -547,7 +547,7 @@ facilities provided to
 International Students 
 UG Admissions - NRI and Foreign National (DAFS) 
 Category: 
-https://www.dau.ac.in/undergraduate-admissions-
+https://www.daiict.ac.in/undergraduate-admissions
 nri-and-foreign-national-category  
 i) 
 Picture Gallery 

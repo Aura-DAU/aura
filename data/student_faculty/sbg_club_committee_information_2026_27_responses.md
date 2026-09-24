@@ -1,6 +1,6 @@
 ---
 title: "Club Committee Information 2026-27 Responses"
-url: "#"
+url: "https://www.daiict.ac.in/student-life/clubs"
 category: "SBG & Clubs - Clubs And Committees"
 scraped_by: "Om Patel"
 scraped_date: "2026-07-31"

@@ -20,6 +20,8 @@ DA-IICT / DAU requires a minimum attendance level in each course for students to
 
 ### Minimum Attendance Requirement
 
+Attendance policies and evaluation criteria are established per course by individual instructors.
+
 | Requirement | Value |
 |---|---|
 | Minimum Attendance Required | **80% in each course** |
@@ -27,8 +29,8 @@ DA-IICT / DAU requires a minimum attendance level in each course for students to
 
 ### Key Rules
 
-- **Per-course basis:** Attendance is tracked individually for each course, not as an overall average.
-- **Instructor discretion:** Some instructors may set stricter attendance requirements or include attendance as part of the grade. This is communicated at the start of each semester.
+- **Per-course basis:** Attendance is tracked individually for each course, not as an overall average. Attendance policies and evaluation criteria are established per course by individual instructors.
+- **Instructor discretion:** Individual instructors establish attendance policies and evaluation criteria for their courses. Some instructors may set stricter attendance requirements or include attendance as part of the grade. This is communicated at the start of each semester.
 - **DX Grade:** Awarded when attendance falls below the threshold; requires the student to repeat the course in a future semester.
 - **F Grade:** Failure due to non-completion of course requirements including attendance.
 
@@ -36,8 +38,10 @@ DA-IICT / DAU requires a minimum attendance level in each course for students to
 
 | Program | Minimum Credits to Graduate |
 |---|---|
-| BTech (ICT) | 129 credits (approx.) |
+| BTech (ICT) | 154 credits |
 | BTech Honours | Additional minor credits required |
+
+*Note: 129 credits represents the foundational & elective coursework subtotal (90 core + 39 elective). The complete graduation requirement is 154 credits, including 19 credits of mandatory internships & BTP/ITP and 6 credits of co-curricular & exploratory projects.*
 
 ### Registration Requirements
 

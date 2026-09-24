@@ -2725,7 +2725,7 @@ Cloth collection and distribution etc.
 These events are participated by a large number of students with good number of faculty members
 involved to motivate the students.  Sambhav organizes Blood Donation Camp every year in association
 with Civil Hospital, Ahmedabad. Donations are held in our Faculty mess and the donors are provided food
-and all the necessary care. For more details, please see : https://www.facebook.com/wemakeitsambhav.
+and all the necessary care. For more details, please see : https://www.facebook.com/wemakeitsambhav
 Our students arrange extension activities in the neighbourhood community sensitizing them to social issues
 and holistic development. They undertake the Plastic Free Campus drive to keep the environment neat and
 clean on a regular intervals. Every year, our Director visits the community science center under GUJCOST
@@ -3705,7 +3705,7 @@ their orientation. Similarly, another group belonging to MTech, MSc(IT), MDes an
 interacted with the 2018 batch of PG students at their orientation on 23rd July 2018. A special alumni meet
 was organized on campus before the Convocation on 20th January 2018 and this meeting facilitated the
 alumni to interact with the graduating class.
-Link: https://www.daiict.ac.in/alumni-board
+Link: https://www.daiict.ac.in/alumni
 File Description
 Document
 Any additional information

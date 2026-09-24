@@ -775,7 +775,7 @@ they?”, Journal of Software: Evolution and Process, Volume 32, January 2020,
 Pages 1-23, https://doi.org/10.1002/smr.2218
 2)	 Saurabh Tiwari and Atul Gupta, “Investigating comprehension and learnability 
 aspects of use cases for software specification problems”, Information and Software 
-Technology, Volume 91, November 2017, Pages 22-43, https://doi.org/10.1016/j.
+Technology, Volume 91, November 2017, Pages 22-43, https://doi.org/10.1016/j.infsof.2017.06.003
 infsof.2017.06.003
 3)	 Saurabh Tiwari, Santosh Singh Rathore, Shreya Sagar, and Yash Mirani, Identifying 
 Use Case Elements from Textual Specification: A Preliminary Study, In 28th 

@@ -758,7 +758,7 @@ UG Program APPS attached as Annexure Vil
 PG Program APPS attached as Annexure Vill
 4.17 | Whether any grievance redressal| Yes.
 mechanism is available in the University? If | Refer website link:
-yes, please provide details about the | https://dau.ac.in/grievance-redr al-cell for
+yes, please provide details about the | https://www.daiict.ac.in/grievance-redressal-cell al-cell for
 complaints received against malpractices, | the grievance redressal mechanism details.
 etc in the University in the following
 formiat:- Details provided in Appendix-XIl for the
