@@ -1,3 +1,4 @@
+from __future__ import annotations
 # Wellness guardrail — detects signs of distress in a query BEFORE it reaches
 # answer_generator / the RAG pipeline, and routes to a fixed, human-reviewed
 # this class; that hunk was intentionally NOT applied — see review notes.)
