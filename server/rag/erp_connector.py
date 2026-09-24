@@ -1,4 +1,6 @@
-# ERP connector — read-only SQL or eCampus scrape for personal student/faculty data.
+# ERP connector — read-only SQL access to personal student/faculty data.
+# Without ERP_DB_HOST the connector is unavailable: every read returns empty
+# and callers must tell the user their records can't be loaded.
 
 import os
 import psycopg2
@@ -32,7 +34,11 @@ class ERPConnector:
     # Public interface — all callers use this class regardless of transport mode.
 
     def __init__(self):
-        self._mode = "sql" if os.environ.get("ERP_DB_HOST") else "scrape"
+        self._mode = "sql" if os.environ.get("ERP_DB_HOST") else "unavailable"
+
+    @property
+    def available(self) -> bool:
+        return self._mode == "sql"
 
     # ── Internal SQL helper ───────────────────────────────────────────────
 
@@ -54,12 +60,6 @@ class ERPConnector:
         finally:
             p.putconn(conn)
 
-    # ── Scrape-mode helpers ───────────────────────────────────────────────
-
-    def _scrape_client(self, erp_id: str):
-        from pipeline.ecampus.client import ECampusClient
-        return ECampusClient(erp_id=erp_id)
-
     # ── Student identity ──────────────────────────────────────────────────
 
     def get_student_profile(self, roll_number: str) -> Optional[dict]:
@@ -72,10 +72,7 @@ class ERPConnector:
                 (roll_number,),
             )
             return rows[0] if rows else None
-        # Scrape mode
-        client = self._scrape_client(roll_number)
-        raw = client.get_student_detail()
-        return raw or None
+        return None
 
     # ── Academic performance ──────────────────────────────────────────────
 
@@ -90,8 +87,7 @@ class ERPConnector:
                 (roll_number,),
             )
             return rows[0] if rows else None
-        client = self._scrape_client(roll_number)
-        return client.get_cgpa()
+        return None
 
     def get_semester_performance(self, roll_number: str, semester: Optional[int] = None) -> list[dict]:
         if self._mode == "sql":
@@ -104,9 +100,7 @@ class ERPConnector:
                 "SELECT semester, spi, cpi FROM academic_record WHERE roll_number=%s ORDER BY semester",
                 (roll_number,),
             )
-        client = self._scrape_client(roll_number)
-        result = client.get_result()
-        return result.get("grades", [])
+        return []
 
     def get_grades(self, roll_number: str, semester: Optional[int] = None,
                    course_code: Optional[str] = None) -> list[dict]:
@@ -125,12 +119,7 @@ class ERPConnector:
                 "SELECT course_code, course_name, semester, grade, grade_points FROM course_grades WHERE roll_number=%s ORDER BY semester, course_code",
                 (roll_number,),
             )
-        client = self._scrape_client(roll_number)
-        result = client.get_result()
-        grades = result.get("grades", [])
-        if course_code:
-            grades = [g for g in grades if g.get("course_code") == course_code]
-        return grades
+        return []
 
     # ── Attendance ────────────────────────────────────────────────────────
 
@@ -153,11 +142,7 @@ class ERPConnector:
                    ORDER BY semester, course_code""",
                 (roll_number, semester, semester),
             )
-        client = self._scrape_client(roll_number)
-        rows = client.get_attendance()
-        if course_code:
-            rows = [r for r in rows if r.get("course_code") == course_code]
-        return rows
+        return []
 
     # ── Faculty / advisor relationship checks ─────────────────────────────
 
@@ -264,7 +249,7 @@ class ERPConnector:
         # Scrape mode: not implementable without individual student data
         return {
             "course_code": course_code,
-            "note": "Aggregate data unavailable in scrape mode — requires direct ERP DB access.",
+            "note": "Aggregate data unavailable — requires direct ERP DB access.",
         }
 
     # ── B2-AUTH-5: Program Coordinator level methods ──────────────────────
@@ -594,8 +579,4 @@ class ERPConnector:
                    ORDER BY ts.day, ts.start_time""",
                 (faculty_erp_id,),
             )
-        # Scrape mode: use pooled timetable data
-        from pipeline.ecampus.timetable_pool import load_all_entries
-        from pipeline.ecampus.faculty_schedule import build_faculty_schedule
-        entries = load_all_entries()
-        return [build_faculty_schedule(entries, faculty_erp_id)]
+        return []

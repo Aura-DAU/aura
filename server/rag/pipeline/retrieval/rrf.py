@@ -1,3 +1,11 @@
+import logging
+
+_dbg_logger = logging.getLogger(__name__)
+
+
+def _dbg(*args):
+    _dbg_logger.debug(" ".join(str(a) for a in args))
+
 def fuse(
     dense_results,
     bm25_results,
@@ -75,17 +83,17 @@ def fuse(
             r["cosine_score"] = 0.0
         results.append(r)
 
-    print("\n" + "=" * 60)
-    print("===== RRF (RECIPROCAL RANK FUSION) RESULTS =====")
+    _dbg("\n" + "=" * 60)
+    _dbg("===== RRF (RECIPROCAL RANK FUSION) RESULTS =====")
     for rank, r in enumerate(results, start=1):
         cid = r["id"]
         meta = r.get("metadata", {})
         d_rank = dense_ranks.get(cid, "N/A")
         b_rank = bm25_ranks.get(cid, "N/A")
-        print(f"{rank}. rrf_score={r.get('rrf_score', 0.0):.6f} | Dense Rank: {d_rank} | BM25 Rank: {b_rank}")
-        print(f"   chunk={cid}")
-        print(f"   title={meta.get('title', 'N/A')}")
-        print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
-    print("=" * 60)
+        _dbg(f"{rank}. rrf_score={r.get('rrf_score', 0.0):.6f} | Dense Rank: {d_rank} | BM25 Rank: {b_rank}")
+        _dbg(f"   chunk={cid}")
+        _dbg(f"   title={meta.get('title', 'N/A')}")
+        _dbg(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
+    _dbg("=" * 60)
 
     return results

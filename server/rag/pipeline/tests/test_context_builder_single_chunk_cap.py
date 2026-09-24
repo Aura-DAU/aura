@@ -7,7 +7,7 @@ how large it was. A single oversized top chunk could consume the entire
 context budget and leave literally zero room for any other retrieved
 evidence, even though 19 other relevant chunks were available.
 
-The fix caps any single chunk's contribution to roughly a third of the
+The fix caps any single chunk's contribution to half of the
 effective budget, trimming its tail instead of excluding it, so the budget
 loop always has room left over for lower-ranked chunks.
 """

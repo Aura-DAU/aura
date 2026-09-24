@@ -1,5 +1,6 @@
 import os
 import logging
+import threading
 from pathlib import Path
 from typing import Optional
 from dotenv import load_dotenv
@@ -12,6 +13,13 @@ from pipeline.retrieval.bm25_retriever import BM25Retriever
 from pipeline.retrieval.rrf import fuse
 from pipeline.retrieval.qdrant_client import build_index_adapter
 
+_dbg_logger = logging.getLogger(__name__)
+
+
+def _dbg(*args):
+    _dbg_logger.debug(" ".join(str(a) for a in args))
+
+
 logger = logging.getLogger(__name__)
 TOP_K = 3
 
@@ -20,6 +28,37 @@ TOP_K = 3
 # runs on CPU and may pay a first-time model load.
 EMBED_REMOTE_ATTEMPTS = max(1, int(os.getenv("EMBED_REMOTE_ATTEMPTS", "2")))
 EMBED_REMOTE_BACKOFF_S = max(0.0, float(os.getenv("EMBED_REMOTE_BACKOFF_S", "0.3")))
+
+# Fix LOAD-1: embed_query used a bare `requests.post` per call, paying a full
+# TCP (+TLS) handshake on every single embedding round trip. Under concurrent
+# load — every retrieval, and now potentially one per sub-question of a
+# compound message — that overhead compounds fast. One process-wide Session
+# with a pooled HTTPAdapter keeps connections alive and reused, mirroring the
+# same keep-alive-pool approach inference_router.py already uses for vLLM.
+# Retry semantics are unchanged: this pools the SOCKET only, at max_retries=0
+# on the adapter, so the existing EMBED_REMOTE_ATTEMPTS loop below is still
+# the only retry layer (stacking urllib3-level retries under it would extend
+# tail latency and double-count failures against the same budget).
+EMBED_HTTP_POOL_SIZE = max(1, int(os.getenv("EMBED_HTTP_POOL_SIZE", "32")))
+_embed_session_lock = threading.Lock()
+_embed_session = None
+
+
+def _get_embed_session():
+    global _embed_session
+    if _embed_session is None:
+        with _embed_session_lock:
+            if _embed_session is None:
+                import requests
+                session = requests.Session()
+                adapter = requests.adapters.HTTPAdapter(
+                    pool_connections=EMBED_HTTP_POOL_SIZE,
+                    pool_maxsize=EMBED_HTTP_POOL_SIZE,
+                )
+                session.mount("http://", adapter)
+                session.mount("https://", adapter)
+                _embed_session = session
+    return _embed_session
 
 
 class Retriever:
@@ -58,10 +97,22 @@ class Retriever:
         # needed to change.
         self.index = build_index_adapter()
 
+    # Fix LOAD-2: _local_model had no lock. A burst of concurrent requests
+    # arriving while the remote embedding service is down (the only time this
+    # fallback is reached, at the moment the system is already most stressed)
+    # would each pass the `if self.model is None` check before any of them
+    # finished loading, racing to construct several multi-hundred-MB
+    # SentenceTransformer instances at once. Double-checked locking, same
+    # pattern as api/deps.py::get_aura(): the fast (already-loaded) path
+    # never touches the lock.
+    _local_model_lock = threading.Lock()
+
     def _local_model(self):
         if self.model is None:
-            from sentence_transformers import SentenceTransformer
-            self.model = SentenceTransformer(MODEL_NAME)
+            with self._local_model_lock:
+                if self.model is None:
+                    from sentence_transformers import SentenceTransformer
+                    self.model = SentenceTransformer(MODEL_NAME)
         return self.model
 
     def embed_query(self, query: str) -> Optional[list[float]]:
@@ -75,10 +126,10 @@ class Retriever:
         embedding = None
 
         if embedding_service_url:
-            import requests
+            session = _get_embed_session()
             for attempt in range(1, EMBED_REMOTE_ATTEMPTS + 1):
                 try:
-                    resp = requests.post(
+                    resp = session.post(
                         f"{embedding_service_url.rstrip('/')}/embed",
                         json={"texts": [query_text], "normalize": True},
                         timeout=5
@@ -123,7 +174,7 @@ class Retriever:
 
         t_elapsed = time.time() - t0
         dim = len(embedding) if embedding else 0
-        print(f"\n===== QUERY EMBEDDING =====\nDimension: {dim} | Time: {t_elapsed:.4f}s")
+        _dbg(f"\n===== QUERY EMBEDDING =====\nDimension: {dim} | Time: {t_elapsed:.4f}s")
         return embedding
 
     def retrieve(
@@ -172,20 +223,20 @@ class Retriever:
             except Exception as e:
                 logger.warning("Pinecone query failed: %s", e)
 
-        print("\n" + "=" * 60)
-        print("===== DENSE RESULTS (QDRANT) =====")
+        _dbg("\n" + "=" * 60)
+        _dbg("===== DENSE RESULTS (QDRANT) =====")
         if dense_results:
             for rank, item in enumerate(dense_results, start=1):
                 meta = item.get("metadata", {})
                 h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
-                print(f"{rank}. score={item.get('score', 0.0):.4f} | chunk={item.get('id')}")
-                print(f"   title={meta.get('title', 'N/A')}")
-                print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
+                _dbg(f"{rank}. score={item.get('score', 0.0):.4f} | chunk={item.get('id')}")
+                _dbg(f"   title={meta.get('title', 'N/A')}")
+                _dbg(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
                 if h_str:
-                    print(f"   headers={h_str}")
+                    _dbg(f"   headers={h_str}")
         else:
-            print("   (No dense results returned)")
-        print("=" * 60)
+            _dbg("   (No dense results returned)")
+        _dbg("=" * 60)
 
         if not self.bm25:
             return dense_results
@@ -197,20 +248,20 @@ class Retriever:
             allowed_roles=allowed_roles
         )
 
-        print("\n" + "=" * 60)
-        print("===== BM25 RESULTS =====")
+        _dbg("\n" + "=" * 60)
+        _dbg("===== BM25 RESULTS =====")
         if bm25_results:
             for rank, item in enumerate(bm25_results, start=1):
                 meta = item.get("metadata", {})
                 h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
-                print(f"{rank}. score={item.get('score', 0.0):.4f} | chunk={item.get('id')}")
-                print(f"   title={meta.get('title', 'N/A')}")
-                print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
+                _dbg(f"{rank}. score={item.get('score', 0.0):.4f} | chunk={item.get('id')}")
+                _dbg(f"   title={meta.get('title', 'N/A')}")
+                _dbg(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
                 if h_str:
-                    print(f"   headers={h_str}")
+                    _dbg(f"   headers={h_str}")
         else:
-            print("   (No BM25 results returned)")
-        print("=" * 60)
+            _dbg("   (No BM25 results returned)")
+        _dbg("=" * 60)
 
         fused_results = fuse(
             dense_results,

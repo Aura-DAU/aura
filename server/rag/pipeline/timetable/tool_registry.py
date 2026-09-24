@@ -1,11 +1,9 @@
 """
-tool_registry.py -- timetable tools exposed to the agent orchestrator.
+tool_registry.py -- timetable tools exposed to the timetable agent
+(pipeline.timetable.agent).
 
-Kept as a separate registry from pipeline.ecampus.tool_registry (which is
-read-only against the ERP) because update_my_timetable is a genuine, and
-deliberate, write tool: it lets a student change their own AURA-side
-timetable view. It is merged into the same orchestrator tool-calling loop
-in pipeline.ecampus.orchestrator -- see MERGED_TOOL_REGISTRIES there.
+update_my_timetable is a genuine, deliberate write tool: it lets a student
+change their own AURA-side timetable view.
 
 Every handler receives `identity` from the verified internal JWT and NEVER
 accepts a student_id/erp_id argument from the model -- a student can only
@@ -364,10 +362,8 @@ TOOL_REGISTRY: dict[str, Tool] = {
     ]
 }
 
-# Exposed on the public-KB / COMMUNITY orchestrator path too (see
-# pipeline.ecampus.orchestrator) -- looking up another cohort's published
-# timetable isn't the requester's own private data, so a student should be
-# able to ask for it even when the query doesn't classify as PERSONAL_DATA.
+# Exposed on the agent's public-timetable scope too -- looking up another
+# cohort's published timetable isn't the requester's own private data.
 PUBLIC_TOOL_NAMES: frozenset[str] = frozenset({"get_cohort_timetable"})
 
 

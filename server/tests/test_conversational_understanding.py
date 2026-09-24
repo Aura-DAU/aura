@@ -11,7 +11,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../r
 from personal_query_classifier import PersonalQueryClassifier, is_pure_profile_query
 from pipeline.guardrails.query_guardrail import QueryGuardrail, Verdict, IMPLICIT_DAU_PAT
 from pipeline.guardrails.wellness_guardrail import WellnessGuardrail
-from pipeline.retrieval.query_planner import QueryPlanner, resolve_continuation_query, rewrite_personalized_academic_query
+from pipeline.retrieval.query_planner import QueryPlanner, rewrite_personalized_academic_query
+from pipeline.retrieval.query_rewriter import QueryRewriter
 from pipeline.aura_chat import AuraChat, SimpleIdentity, is_greeting_or_meta
 
 
@@ -87,9 +88,22 @@ class TestConversationalUnderstanding(unittest.TestCase):
             {"role": "assistant", "content": "DAU has over 20 active student clubs."}
         ]
         followup = "Which one is the biggest?"
-        resolved = resolve_continuation_query(followup, history)
-        self.assertIn("Tell me about DAU clubs.", resolved)
-        self.assertIn("Which one is the biggest?", resolved)
+        rewritten = SimpleNamespace(choices=[SimpleNamespace(
+            message=SimpleNamespace(content="Which DAU student club is the biggest?")
+        )])
+        with patch(
+            "pipeline.retrieval.query_rewriter.InferenceRouter.call_with_rotation",
+            return_value=rewritten,
+        ):
+            self.assertEqual(
+                QueryRewriter().rewrite(followup, history),
+                "Which DAU student club is the biggest?",
+            )
+        with patch(
+            "pipeline.retrieval.query_rewriter.InferenceRouter.call_with_rotation",
+            side_effect=RuntimeError("inference down"),
+        ):
+            self.assertEqual(QueryRewriter().rewrite(followup, history), followup)
 
     # 4. Greetings Test
     def test_greetings_fast_path(self):

@@ -25,7 +25,19 @@ class TestInstitutionResolverAndPrivacy(unittest.TestCase):
         query = "Who is the convenor of DADC?"
         resolved = self.resolver.resolve(query)
         self.assertIn("Dance Club (DADC)", resolved)
-        self.assertIn("at DAU", resolved)
+        self.assertTrue(resolved.startswith(query))
+
+    def test_institution_resolver_is_idempotent(self):
+        for query, canonical in (
+            ("what is the mess timing", "University Dining Services (Mess)"),
+            ("Who is the convenor of DADC?", "Dance Club (DADC)"),
+        ):
+            once = self.resolver.resolve(query)
+            self.assertEqual(once.count(canonical), 1)
+            self.assertEqual(self.resolver.resolve(once), once)
+
+    def test_canteen_is_not_resolved_to_mess(self):
+        self.assertNotIn("Mess", self.resolver.resolve("where is the canteen"))
 
     def test_institution_resolver_dance_club(self):
         query = "Tell me about the Dance Club"

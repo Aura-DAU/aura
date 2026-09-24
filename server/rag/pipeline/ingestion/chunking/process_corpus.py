@@ -27,7 +27,7 @@ if "metadata_extractors" not in sys.modules:
 
 from parser import extract_frontmatter
 from section_extracter import extract_sections
-from chunker import split_section
+from chunker import split_section, tokenizer as _embed_tokenizer
 from chunk_id_generator import generate_deterministic_chunk_id
 from metadata_extractors import (
     extract_academic_applicability,
@@ -524,12 +524,39 @@ def _split_bold_entity_blocks(content):
     return [content]
 
 
+# bge-base-en-v1.5 embeds at most 512 tokens and silently drops the rest.
+# Leave headroom for the query instruction and special tokens.
+_EMBED_TOKEN_LIMIT = 480
+
+
+def _embed_token_len(text):
+    return len(_embed_tokenizer(text, add_special_tokens=False, truncation=False)["input_ids"])
+
+
+def _enforce_embed_limit(chunks):
+    """Re-split any chunk the embedding model would truncate. max_tokens in
+    this module counts words, which can exceed the model limit on tables,
+    URLs and code."""
+    out = []
+    for chunk in chunks:
+        if _embed_token_len(chunk) > _EMBED_TOKEN_LIMIT:
+            out.extend(split_section(chunk))
+        else:
+            out.append(chunk)
+    return out
+
+
 def _adaptive_split_entity(entity_text, max_tokens=256):
     """
-    Adaptive Chunking:
-    - If entity <= 256 tokens -> Return exactly 1 chunk.
-    - If entity > 256 tokens -> Split semantically preserving structure (Paragraphs -> Bullets -> Lines -> Token fallback).
+    Adaptive Chunking (max_tokens is a word budget):
+    - If entity <= max_tokens words -> Return exactly 1 chunk.
+    - Else split semantically preserving structure (Paragraphs -> Bullets -> Lines -> Token fallback).
+    Every chunk is finally held under the embedding model's token limit.
     """
+    return _enforce_embed_limit(_split_entity_by_words(entity_text, max_tokens))
+
+
+def _split_entity_by_words(entity_text, max_tokens):
     words = entity_text.split()
     if len(words) <= max_tokens:
         return [entity_text]
@@ -650,7 +677,10 @@ def extract_faculty_from_text(text):
         m = re.search(pattern, line, re.IGNORECASE)
         if m:
             advisor_str = m.group(1)
-            parts = re.split(r",|and", advisor_str, flags=re.IGNORECASE)
+            # Whole-word "and" only: a bare "and" split names like "Anand"
+            # and "Chandran" into fragments that then fuzzy-matched other
+            # faculty.
+            parts = re.split(r",|&|\band\b", advisor_str, flags=re.IGNORECASE)
             for part in parts:
                 part_cleaned = re.sub(
                     r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*",

@@ -1,6 +1,6 @@
 import { DashboardSkeleton } from "@/components/features/dashboard/DashboardSkeleton"
 
-/** Loading UI shown by Next.js while the dashboard page fetches eCampus data. */
+/** Loading UI shown by Next.js while the dashboard page fetches timetable data. */
 export default function DashboardLoading() {
   return (
     <div className="min-h-screen bg-theme-black px-4 py-8 md:px-8">

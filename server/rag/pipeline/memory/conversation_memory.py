@@ -150,19 +150,16 @@ class ConversationMemory:
         # whatever the running pool actually accepts.
         # Defaults mirror pipeline/token_budget.py (TokenBudget.from_env) so the
         # memory budget and the generation budget cannot drift apart — they read
-        # the same env names and must agree on what they reserve. Sized for the
-        # 4096 cutover: the old 8192/768/3000/2200/512 set went *negative* at
-        # 4096 (4096-768-3000-2200-512 = -2384), collapsing _raw_budget to 0 and
-        # leaving no room for a summary or a verbatim tail. AURA_MAX_CONTEXT_TOKENS
-        # was nudged 1400 → 1600 alongside token_budget.py's default (see that
-        # module for why) — still leaves _raw_budget barely positive (~116) if
-        # max_model_len is ever truly 4096; comfortably positive at today's live
-        # 8192. Not imported from
+        # the same env names and must agree on what they reserve. At 8192 the
+        # defaults leave ~2.8k tokens for summary + verbatim tail; at 4096
+        # _raw_budget reaches 0 and history_budget falls back to its floor
+        # (summary + last exchange), while token_budget.py clamps the retrieved
+        # context to what the window leaves. Not imported from
         # token_budget on purpose: that module pulls httpx and does network
         # discovery, and this one must stay importable without either.
         self.model_context_tokens = _env_int("MAX_MODEL_LEN", 4096)
         self.reserved_answer = _env_int("AURA_MAX_ANSWER_TOKENS", 1024)
-        self.reserved_context = _env_int("AURA_MAX_CONTEXT_TOKENS", 1600)
+        self.reserved_context = _env_int("AURA_MAX_CONTEXT_TOKENS", 3000)
         # The system prompt (answer_generator.SYSTEM_PROMPT) is a large, static
         # prefix; reserve a flat estimate rather than importing/measuring it here.
         self.reserved_system = _env_int("AURA_RESERVED_SYSTEM_TOKENS", 1100)
@@ -190,10 +187,22 @@ class ConversationMemory:
         """Tokens left for (summary + verbatim tail) once the answer, retrieved
         context, system prompt and safety margin are reserved. Computed from the
         live attributes so tests (and future runtime tuning) can adjust knobs."""
+        # Same clamp as TokenBudget.from_env: on a small window the retrieved
+        # context shrinks first so history keeps a share.
+        affordable_context = max(
+            self.model_context_tokens
+            - self.reserved_answer
+            - self.reserved_system
+            - 64    # TokenBudget safety margin
+            - 256   # minimum history / summary allowance
+            - 64,   # user-question pad
+            0,
+        )
+        reserved_context = min(self.reserved_context, affordable_context)
         return max(
             self.model_context_tokens
             - self.reserved_answer
-            - self.reserved_context
+            - reserved_context
             - self.reserved_system
             - self.safety_margin,
             0,
