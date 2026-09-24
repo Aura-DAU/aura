@@ -4542,7 +4542,7 @@ of
 the 
 Tutorial 
 Series: 
-https://youtube.com/playlist?list=PLl0RnqkwWCub-
+https://www.youtube.com/@DAIICTOfficial
 BYDibCQEaIpak6K6hNGN
 Dance 
 Tutorial 
@@ -4595,16 +4595,16 @@ Supporting Documents:
 Student 
 Body 
 Government:
-http://sbg.daiict.ac.in/?_ga=2.210963541.1103190090.1675660862-461871614.1675332219#/
+https://www.daiict.ac.in/dean-students#tab-1
 Gender Cell Information: https://www.daiict.ac.in/internal-complaint-committee
 DAC 
 Guidelines 
 : 
-https://www.daiict.ac.in/sites/default/files/other-files/DA-
+https://www.daiict.ac.in/sites/default/files/other-files/DA-IICT-SSR-Cycle-2.pdf
 IICT_Student_Code_of_ConductandDAC_Guidelines.pdf
 Antiragging 
 Guidelines: 
-https://www.daiict.ac.in/sites/default/files/other-files/Anti-
+https://www.daiict.ac.in/sites/default/files/other-files/Anti-Ragging-Committee_2025-26-18082025.pdf
 Ragging_Vigilance-Committee_Faculty-and-Staff_2022-23.pdf
 Q/A 
 session 
@@ -4787,7 +4787,7 @@ cannot be planned. A minimum of 1-day buffer needs to be kept so that no hiccups
 organizing an event.
 Supporting 
 Document:
-http://sbg.daiict.ac.in/?_ga=2.33976994.289402180.1676373259-1960945136.1676373259#/
+https://www.daiict.ac.in/dean-students#tab-1
 File Description
 Document
 Best practices in the Institutional web site

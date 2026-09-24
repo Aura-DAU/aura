@@ -229,7 +229,7 @@ As esteemed members of the Dhirubhai Ambani University community, you are our gr
 encourage you to share this exciting news and the relevant links with your professional networks, prospective
 students, and anyone who might be interested in joining our vibrant academic community.
 Thank you for your continued dedication to the university's growth and success.
-https://www.daiict.ac.in/schola
+https://www.daiict.ac.in/scholarships-admission-programs-of-study
 rships-admission-programs-of-
 study
 Scholarships

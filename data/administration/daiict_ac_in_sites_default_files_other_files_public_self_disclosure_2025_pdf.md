@@ -37,7 +37,7 @@ https://sol.dau.ac.in/about-us/
 Act and Statutes or MoA 
 https://www.dau.ac.in/about-us  
 (See 'Accreditations and Recognitions' section) 
-Institutional Development Plan https://www.dau.ac.in/sites/default/files/other-
+Institutional Development Plan https://www.daiict.ac.in/sites/default/files/other-files/
 files/6.1.1_Vision-Mission-Strategic-Plan.pdf 
 (Available on 'Policies' page:  
 https://dau.ac.in/policies) 
@@ -102,7 +102,7 @@ Director - School of Technology
 Name: Dr. G. Venkatesh 
 Email: director_sot@dau.ac.in 
 Mobile: 079-68261565, 079-68261700 
-Profile: https://www.daiict.ac.in/director-school-of-law
+Profile: https://sol.dau.ac.in/leadership/
 technology  
  
 Director - School of Law 
@@ -158,19 +158,19 @@ composition
 and 
 members 
 with particulars 
-Board of Governors: https://www.daiict.ac.in/board-of-governors
+Board of Governors: https://www.daiict.ac.in/governance
 governors  
  
 Academic Council: 
 https://www.dau.ac.in/academic-council  
  
-Board of Studies: https://www.daiict.ac.in/board-of-governors
+Board of Studies: https://www.daiict.ac.in/governance
 studies    
  
 Finance Committee: 
 https://www.dau.ac.in/finance-committee   
 Internal Complaint Committee 
-https://www.daiict.ac.in/internal-complaints-committee
+https://www.daiict.ac.in/policies
 committee
 
 Academic 
@@ -322,7 +322,7 @@ Consultancy Projects, Foreign
 Collaboration Industry 
 Collaborations) 
 Research Overview: 
-https://www.daiict.ac.in/researchoverview    
+https://www.daiict.ac.in/research    
  
 Sponsored Projects: 
 https://www.dau.ac.in/sponsored-projects    
@@ -335,42 +335,42 @@ areas
 AI, ML and Data Science 
 https://www.dau.ac.in/ai-ml-and-data-science 
 Algorithms and Theory of Computation 
-https://www.daiict.ac.in/research/algorithms-and-theory-of-computation
+https://www.daiict.ac.in/research
 omputation  
 Communications and Signal Processing 
-https://www.daiict.ac.in/research/communications-and-signal-processing
+https://www.daiict.ac.in/research
 signal-processing  
 Humanities, Social Sciences and Design 
-https://www.daiict.ac.in/research/humanities-social-sciences
+https://www.daiict.ac.in/research
 and-design  
 Physics and Mathematical Sciences 
-https://www.daiict.ac.in/research/physics-and-mathematical-sciences
+https://www.daiict.ac.in/research
 sciences  
 Software Systems and Networking 
-https://www.daiict.ac.in/research/software-systems-and-networks
+https://www.daiict.ac.in/research
 networking-0  
 VLSI & Embedded Systems 
-https://www.daiict.ac.in/research/vlsi-and-embedded-systems
+https://www.daiict.ac.in/research
 systems  
  
 Available under 'Policies' page: 
 https://www.dau.ac.in/policies  
  
 Research Policy: 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/RESEARCH_POLICY.pdf  
  
 Consultancy Policy: 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/Consultancy-Policy.pdf
 
 Incubation Centre/Start- ups 
 /Entrepreneurship Cell 
 DAU Centre for Entrepreneurship and Incubation: 
-http://ceid.dau.ac.in 
+https://www.daiict.ac.in/dcei 
  
 Faculty Entrepreneurship Policy: 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/Faculty-Entrepreneurship-Policy.pdf 
  
 Central facilities 
@@ -378,7 +378,7 @@ Laboratory Complex:
 https://www.dau.ac.in/laboratory-complex 
  
 Laboratory website: 
-https://www.daiict.ac.in/facilities 
+https://www.daiict.ac.in/infrastructure 
  
 ICT Infrastructure 
 https://www.dau.ac.in/ict-infrastructure   
@@ -431,17 +431,17 @@ https://www.dau.ac.in/medical-facility
  
  
 Internal Complaint Committee 
-https://www.daiict.ac.in/internal-complaints-committee
+https://www.daiict.ac.in/policies
 committee  
  
  
 Anti-Ragging Cell 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/Anti-Ragging-Committee_2025-26-
 18082025.pdf   
  
 DAC:  
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/Punishment-for-act-of-indiscipline_2024.pdf  
  
  
@@ -458,23 +458,23 @@ Facilities for differently-abled
 (e.g., barrier-free 
 environment) 
 Website with WCAG 2.0 AA Guidelines: 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/Disabled-friendly-website-screenshot.pdf 
  
 Ramps for easy access to classrooms and hostel: 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/7.1.7-Ramps.pdf 
  
 Divyangjan friendly washrooms: 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/7.1.7-Disabled-friendly-washrooms_v1.pdf  
  
 Scribe Policy: 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 files/7.1.7-Scribe-policy.pdf  
  
 Kindle for reading assistant: 
-https://www.dau.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/
 images/IMG-5819.JPG  
 g)  
 Alumni 
@@ -528,7 +528,7 @@ https://www.dau.ac.in/faculty-tenure
 Postdoc Positions:  
 https://www.dau.ac.in/postdoc-positions  
 Staff:  
-https://www.daiict.ac.in/non-teaching-staff
+https://www.daiict.ac.in/staff
 positions  
 Project Positions: 
 https://www.dau.ac.in/project-positions
