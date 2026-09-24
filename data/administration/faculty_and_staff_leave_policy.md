@@ -1,6 +1,6 @@
 ---
 title: "Faculty and Staff Leave Policy"
-url: "https://www.daiict.ac.in/administration"
+url: "https://www.daiict.ac.in/policies"
 category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-06-10"

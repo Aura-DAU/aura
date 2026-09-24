@@ -300,10 +300,10 @@ DAU has a dedicated alumni office, headed by the Dean (Alumni & external Relatio
 - ABC is a bank for academic purposes on the pattern of commercial banks for financial purposes with students as academic account holders to whom ABC shall provide a variety of services including credit verification, credit accumulation, credit transfer or redemption and authentication of academic awards.
 - The Procedure of Registration in Academic Bank of Credits is explained below:
 
-  - Visit **[https://www.abc.gov.in/](https://www.abc.gov.in/)**
+  - Visit **[[ABC Portal](https://www.abc.gov.in/)**
   - Click on My Account => Student
   - If you already have a digilocker account, sign in using mobile/user name and PIN.
-  - For new user, click **[https://digilocker.meripehchaan.gov.in/signup/](https://digilocker.meripehchaan.gov.in/signup/)**
+  - For new user, click **[[DigiLocker Portal](https://digilocker.meripehchaan.gov.in/signup/)**
   - Enter mobile number, and click “Generate OTP”. Submit the OTP and click on Verify.
   - Fill all necessary details and then click on Verify.
   - You will get your ABC ID. Get these details for college & university records when required.

@@ -1,6 +1,6 @@
 ---
 title: "International Students Policy — DAFS Category"
-url: "https://www.daiict.ac.in/admissions/international"
+url: "https://www.daiict.ac.in/undergraduate-admissions"
 category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-06-10"

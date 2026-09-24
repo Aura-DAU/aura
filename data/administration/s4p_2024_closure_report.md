@@ -1,12 +1,12 @@
 ---
 title: "S4P 2024 Closure Report"
-url: "https://www.daiict.ac.in/sites/default/files/other-files/S4P-2024_Final_Closure-Report.pdf"
+url: "https://www.daiict.ac.in/sites/default/files/other-files/S4P-2024_Final%20_Closure-Report.pdf"
 category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
 team: "Team E"
 source_type: PDF
-pdf_source: "https://www.daiict.ac.in/sites/default/files/other-files/S4P-2024_Final_Closure-Report.pdf"
+pdf_source: "https://www.daiict.ac.in/sites/default/files/other-files/S4P-2024_Final%20_Closure-Report.pdf"
 ---
 
 # S4P 2024 Closure Report

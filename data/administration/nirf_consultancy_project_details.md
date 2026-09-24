@@ -7,7 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: Excel
 pdf_name: "N.I.R.F. / Consultancy Project details"
+academic_years: "2013-2016"
+nirf_cycle: "2016"
+temporal_note: "Historical dataset covering 2013-2016 academic years from the 2016 NIRF submission. For current audited statistics, refer to 2023-2024 placement reports."
 ---
+
 
 # N.I.R.F. / Consultancy Project details
 

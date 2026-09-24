@@ -2,7 +2,7 @@
 title: "Cultural Committee - DAU Overview"
 url: "https://drive.google.com/file/d/1i4ZriQra0_G55irFNM8IxYsCBdixcqZF/view"
 category: "Committees"
-scraped_by: "OmPatel"
+scraped_by: "Om Patel"
 scraped_date: "2026-07-04"
 team: "Scraping Team"
 authorisation: ["student", "faculty"]
