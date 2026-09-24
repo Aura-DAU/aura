@@ -3,6 +3,7 @@ import math
 import re
 import time
 import logging
+import threading
 from datetime import datetime
 from typing import Optional
 
@@ -17,6 +18,68 @@ RERANKER_REMOTE_BACKOFF_S = max(0.0, float(os.getenv("RERANKER_REMOTE_BACKOFF_S"
 # Local-fallback mini-batch size: one giant padded batch over the whole pool
 # makes every pair pay the longest pair's token length and spikes memory.
 RERANKER_LOCAL_BATCH_SIZE = max(1, int(os.getenv("RERANKER_LOCAL_BATCH_SIZE", "8")))
+
+# Fix LOAD-1 (mirrors retriever.py): the remote-reranker call used a bare
+# `requests.post` per call — a fresh TCP(+TLS) handshake every rerank. One
+# process-wide pooled Session keeps sockets warm across calls, which matters
+# more now that a compound message reranks once per sub-question in
+# parallel. max_retries stays 0 on the adapter: pool the socket only, and
+# leave the existing RERANKER_REMOTE_ATTEMPTS loop as the single retry layer.
+RERANKER_HTTP_POOL_SIZE = max(1, int(os.getenv("RERANKER_HTTP_POOL_SIZE", "32")))
+_rerank_session_lock = threading.Lock()
+_rerank_session = None
+
+
+def _get_rerank_session():
+    global _rerank_session
+    if _rerank_session is None:
+        with _rerank_session_lock:
+            if _rerank_session is None:
+                import requests
+                session = requests.Session()
+                adapter = requests.adapters.HTTPAdapter(
+                    pool_connections=RERANKER_HTTP_POOL_SIZE,
+                    pool_maxsize=RERANKER_HTTP_POOL_SIZE,
+                )
+                session.mount("http://", adapter)
+                session.mount("https://", adapter)
+                _rerank_session = session
+    return _rerank_session
+
+_ROMAN_OR_WORD_SEM = {
+    "i": 1, "ii": 2, "iii": 3, "iv": 4, "v": 5, "vi": 6, "vii": 7, "viii": 8,
+    "first": 1, "second": 2, "third": 3, "fourth": 4,
+    "fifth": 5, "sixth": 6, "seventh": 7, "eighth": 8,
+}
+_SEM_TOKEN_RE = re.compile(
+    r"\b(\d{1,2})(?:st|nd|rd|th)?\b|"
+    r"\b(viii|vii|vi|iv|iii|ii|v|i|first|second|third|fourth|fifth|sixth|seventh|eighth)\b"
+)
+
+
+def semester_numbers(value) -> set:
+    """Normalise any semester spelling to a set of ints.
+
+    The planner emits ints (3) while chunk metadata stores roman numerals
+    ("III"); comparing them with != made the wrong-semester penalty fire on
+    every curriculum chunk, i.e. it never discriminated. Accepts "III",
+    "Semester 3", "3rd sem", 3, or a list of those.
+    """
+    items = value if isinstance(value, (list, tuple, set)) else [value]
+    found = set()
+    for item in items:
+        if item is None or item == "":
+            continue
+        if isinstance(item, int) and not isinstance(item, bool):
+            if 1 <= item <= 12:
+                found.add(item)
+            continue
+        text = re.sub(r"\b(?:semester|sem)\b\.?", " ", str(item).lower())
+        for num, word in _SEM_TOKEN_RE.findall(text):
+            n = int(num) if num else _ROMAN_OR_WORD_SEM.get(word)
+            if n and 1 <= n <= 12:
+                found.add(n)
+    return found
 
 def extract_latest_year(metadata: dict) -> Optional[int]:
     """Extract a document's version year from its authoritative metadata.
@@ -65,34 +128,46 @@ class Reranker:
         if not (os.getenv("RERANKER_SERVICE_URL") or "").strip():
             self._ensure_local_model()
 
+    # Fix LOAD-2 (mirrors retriever.py): unlocked lazy load. A burst of
+    # concurrent rerank() calls arriving while the remote reranker is down
+    # (the only time this runs when RERANKER_SERVICE_URL is set) would each
+    # pass the `is None` check before any finished, racing to construct
+    # several copies of bge-reranker-v2-m3 at once — exactly when the system
+    # is already most stressed. Double-checked locking, same pattern as
+    # api/deps.py::get_aura(): the fast (already-loaded) path never blocks.
+    _local_model_lock = threading.Lock()
+
     def _ensure_local_model(self):
         if self.model is not None and self.tokenizer is not None:
             return
+        with self._local_model_lock:
+            if self.model is not None and self.tokenizer is not None:
+                return
 
-        import torch
-        from transformers import (
-            AutoTokenizer,
-            AutoModelForSequenceClassification
-        )
+            import torch
+            from transformers import (
+                AutoTokenizer,
+                AutoModelForSequenceClassification
+            )
 
-        env_device = os.getenv("RERANKER_DEVICE")
-        if env_device:
-            self.device = torch.device(env_device)
-        elif torch.cuda.is_available():
-            self.device = torch.device("cuda")
-        elif torch.backends.mps.is_available():
-            self.device = torch.device("mps")
-        else:
-            self.device = torch.device("cpu")
+            env_device = os.getenv("RERANKER_DEVICE")
+            if env_device:
+                self.device = torch.device(env_device)
+            elif torch.cuda.is_available():
+                self.device = torch.device("cuda")
+            elif torch.backends.mps.is_available():
+                self.device = torch.device("mps")
+            else:
+                self.device = torch.device("cpu")
 
-        self.tokenizer = AutoTokenizer.from_pretrained(
-            "BAAI/bge-reranker-v2-m3"
-        )
-        self.model = (
-            AutoModelForSequenceClassification
-            .from_pretrained("BAAI/bge-reranker-v2-m3")
-        ).to(self.device)
-        self.model.eval()
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                "BAAI/bge-reranker-v2-m3"
+            )
+            self.model = (
+                AutoModelForSequenceClassification
+                .from_pretrained("BAAI/bge-reranker-v2-m3")
+            ).to(self.device)
+            self.model.eval()
 
     # Matches a trailing "(Qualifier)" or a dash-separated short capitalized
     # tail, e.g. "Dean (Students)", "Hall of Residence (Men)",
@@ -213,10 +288,10 @@ class Reranker:
         cross_scores = None
 
         if reranker_service_url:
-            import requests
+            session = _get_rerank_session()
             for attempt in range(1, RERANKER_REMOTE_ATTEMPTS + 1):
                 try:
-                    resp = requests.post(
+                    resp = session.post(
                         f"{reranker_service_url.rstrip('/')}/rerank",
                         json={"pairs": pairs},
                         timeout=10
@@ -499,31 +574,23 @@ class Reranker:
 
             section_type = metadata.get("section_type", "general")
 
-            query_semester = entities.get(
-                "semester"
-            )
-
-            if isinstance(query_semester, list):
-                query_semester = (
-                    query_semester[0]
-                    if query_semester
-                    else None
-                )
+            query_semesters = semester_numbers(entities.get("semester"))
 
             semester_penalty = 0.0
 
             if (
                 section_type == "curriculum"
-                and query_semester
+                and query_semesters
             ):
 
                 chunk_semester = metadata.get(
                     "semester"
                 )
 
+                chunk_semesters = semester_numbers(chunk_semester)
                 if (
-                    chunk_semester
-                    and chunk_semester != query_semester
+                    chunk_semesters
+                    and query_semesters.isdisjoint(chunk_semesters)
                 ):
                     # Fix #13: use a proportional penalty (10 % reduction of
                     # the normalised cross-score) instead of a hard -0.20 that

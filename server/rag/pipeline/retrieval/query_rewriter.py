@@ -5,8 +5,9 @@ from pipeline.inference_router import InferenceRouter
 
 logger = logging.getLogger(__name__)
 
-_ASSISTANT_TURN_CHARS = 400
-_REWRITE_MAX_TOKENS = 120
+_ASSISTANT_TURN_CHARS = 800
+# Room for several questions; 120 tokens truncated multi-question rewrites.
+_REWRITE_MAX_TOKENS = 300
 
 
 class QueryRewriter:
@@ -98,5 +99,9 @@ Latest Question:
             logger.warning("query rewrite failed; using original question: %s", exc)
             return query
 
-        rewritten = rewritten.splitlines()[0].strip() if rewritten else ""
+        # Keep every line: a follow-up holding several questions is rewritten
+        # as several lines, and taking only the first silently dropped the rest.
+        rewritten = " ".join(
+            line.strip() for line in rewritten.splitlines() if line.strip()
+        )[:1200]
         return rewritten or query

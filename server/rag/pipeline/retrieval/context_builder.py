@@ -151,7 +151,7 @@ class ContextBuilder:
     def _attr(value) -> str:
         return html.escape(str(value), quote=True)
 
-    def _render_doc(self, doc_id: int, metadata: dict, text: str) -> str:
+    def _render_doc(self, doc_id: int, metadata: dict, text: str, questions=None) -> str:
         section = " > ".join(
             str(metadata.get(k)) for k in ("h1", "h2", "h3") if metadata.get(k)
         )
@@ -164,11 +164,23 @@ class ContextBuilder:
             ("category", metadata.get("category")),
             ("url", metadata.get("url") or metadata.get("relative_path")),
             ("scraped_date", metadata.get("scraped_date")),
+            # Which question(s) of a multi-question message this doc serves.
+            ("q", ",".join(str(i) for i in sorted(questions)) if questions else None),
         ]
         attr_text = " ".join(f'{k}="{self._attr(v)}"' for k, v in attrs if v not in (None, ""))
         return f"<doc {attr_text}>\n{text}\n</doc>"
 
-    def build(self, chunks, retrieval_intent="general", requires_complete_list=False):
+    def build(
+        self,
+        chunks,
+        retrieval_intent="general",
+        requires_complete_list=False,
+        widen=False,
+        n_questions=1,
+    ):
+        """``widen`` gives the modest 25% budget bump (used when one message
+        holds several questions); ``n_questions`` shrinks the per-document cap
+        so one question's oversized chunk cannot crowd out the others."""
 
         documents = []
 
@@ -186,7 +198,7 @@ class ContextBuilder:
 
         # policy_version / complete-list queries get a modest 25% bump, still
         # clamped to what the live window leaves.
-        if retrieval_intent == "policy_version" or requires_complete_list:
+        if retrieval_intent == "policy_version" or requires_complete_list or widen:
             effective_max_tokens = min(
                 int(base_cap * 1.25),
                 max(base_cap, budget.config.max_input_tokens // 2),
@@ -196,15 +208,21 @@ class ContextBuilder:
 
         # One document may use at most half the budget, so a single oversized
         # chunk can never crowd out every other piece of evidence.
-        max_single_chunk_tokens = max(effective_max_tokens // 2, _MIN_USEFUL_CHUNK_TOKENS)
+        max_single_chunk_tokens = max(
+            effective_max_tokens // max(2, int(n_questions or 1)), _MIN_USEFUL_CHUNK_TOKENS
+        )
+        included = []
 
-        for chunk in chunks:
+        for chunk_index, chunk in enumerate(chunks):
             metadata = chunk["metadata"]
             doc_id = len(documents) + 1
+            chunk_questions = chunk.get("questions")
 
             remaining = effective_max_tokens - context_tokens_used
             # +2 covers the separator and the estimate's rounding.
-            header_tokens = self._estimate_tokens(self._render_doc(doc_id, metadata, "")) + 2
+            header_tokens = self._estimate_tokens(
+                self._render_doc(doc_id, metadata, "", chunk_questions)
+            ) + 2
             allowance = min(max_single_chunk_tokens, remaining) - header_tokens
             full_tokens = self._estimate_tokens(metadata.get("text", ""))
             if allowance < min(full_tokens, _MIN_USEFUL_CHUNK_TOKENS):
@@ -216,9 +234,10 @@ class ContextBuilder:
             if not chunk_text.strip():
                 continue
 
-            document = self._render_doc(doc_id, metadata, chunk_text)
+            document = self._render_doc(doc_id, metadata, chunk_text, chunk_questions)
             context_tokens_used += self._estimate_tokens(document)
             documents.append(document)
+            included.append(chunk_index)
 
             url = metadata.get("url")
             relative_path = metadata.get("relative_path")
@@ -262,5 +281,7 @@ class ContextBuilder:
         return {
             "context": context,
             "sources": sources,
-            "citation_map": citation_map
+            "citation_map": citation_map,
+            # indices into `chunks` that actually made it into the context
+            "included": included,
         }

@@ -251,8 +251,6 @@ export function FacultyDashboard({
     }
   }, [])
 
-  // Attendance card is intentionally absent:
-  // eCampus attendance data is unavailable. Revisit when UniRP exposes this endpoint.
 
   const quickPrompts = [
     "What is my class schedule today?",

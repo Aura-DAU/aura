@@ -4,6 +4,7 @@
 
 import os
 import time
+import threading
 import psycopg2
 import psycopg2.pool
 import psycopg2.extras
@@ -11,6 +12,16 @@ from contextlib import contextmanager
 from typing import Optional
 
 _pool: Optional[psycopg2.pool.ThreadedConnectionPool] = None
+# Fix LOAD-3: _init_pool had no lock, so concurrent first callers could each
+# pass `if _pool is None` before either finished constructing a pool —
+# racing to open several ThreadedConnectionPools (each eagerly opening
+# `minconn` live connections) against the same DB at once. Double-checked
+# locking, same pattern as api/deps.py::get_aura(). Pool size is now
+# env-tunable (defaults unchanged) so it can be scaled with traffic without
+# a code change, consistent with every other capacity knob in this codebase.
+_pool_lock = threading.Lock()
+AUTH_DB_POOL_MIN = int(os.environ.get("AUTH_DB_POOL_MIN", "2"))
+AUTH_DB_POOL_MAX = int(os.environ.get("AUTH_DB_POOL_MAX", "10"))
 
 # Fix DB-RETRY: query()/execute() previously had zero retry tolerance — any
 # transient connection-level hiccup (pool momentarily exhausted, a stale
@@ -62,7 +73,7 @@ def _init_pool() -> psycopg2.pool.ThreadedConnectionPool:
             "postgresql://aura_app:pass@localhost:5432/aura_auth"
         )
     return psycopg2.pool.ThreadedConnectionPool(
-        minconn=2, maxconn=10, dsn=url,
+        minconn=AUTH_DB_POOL_MIN, maxconn=AUTH_DB_POOL_MAX, dsn=url,
         cursor_factory=psycopg2.extras.RealDictCursor,
     )
 
@@ -70,7 +81,9 @@ def _init_pool() -> psycopg2.pool.ThreadedConnectionPool:
 def pool() -> psycopg2.pool.ThreadedConnectionPool:
     global _pool
     if _pool is None:
-        _pool = _init_pool()
+        with _pool_lock:
+            if _pool is None:
+                _pool = _init_pool()
     return _pool
 
 

@@ -29,6 +29,18 @@ from typing import Optional, TypedDict, Any
 from langgraph.graph import StateGraph, END
 
 from pipeline.retrieval.retrieval_pipeline import RetrievalPipeline
+from pipeline.retrieval.query_understanding import (
+    FOLLOWUP_TRANSFORM,
+    QueryUnderstanding,
+    heuristic_split,
+    looks_compound,
+)
+from pipeline.multi_question import (
+    compose_answer,
+    merge_classifications,
+    merge_extras,
+    previous_assistant_answer,
+)
 from pipeline.generation.answer_generator import (
     AnswerGenerator,
     filter_sources_by_citations,
@@ -243,6 +255,19 @@ class AuraState(TypedDict, total=False):
     is_guardrail: bool
     safety_verdict: Any  # QueryGuardrail verdict for this query, or None
 
+    # Conversation understanding (see pipeline.retrieval.query_understanding).
+    # `query` stays the user's exact words (regex gates for calendar writes and
+    # confirmations key on it); everything else works on the resolved questions.
+    standalone_query: str
+    standalone_resolved: bool  # True when history/summary were applied by the LLM step
+    questions: list  # standalone questions still to be answered, in the user's order
+    rag_questions: list  # the subset that needs document retrieval (compound only)
+    followup_type: str  # new | follow_up | transform_previous
+    scope_recheck: bool  # OFF_TOPIC verdict on a compound message: decide per question
+    sub_classifications: list
+    prefix_parts: list  # answer fragments already produced (tools, notes), shown first
+    result_extras: dict  # action_required / timetable_changed carried from tool answers
+
 
 class AuraChatGraph:
     """Drop-in replacement for AuraChat.chat() — same call signature and
@@ -253,6 +278,7 @@ class AuraChatGraph:
         self.generator = AnswerGenerator()
         self.guardrail = QueryGuardrail()
         self.wellness = WellnessGuardrail()
+        self.understander = QueryUnderstanding()
 
         erp = ERPConnector()
         self.classifier = PersonalQueryClassifier()
@@ -272,6 +298,7 @@ class AuraChatGraph:
         graph.add_node("safety_guardrail", self._n_safety_guardrail)
         graph.add_node("wellness_check", self._n_wellness_check)
         graph.add_node("greeting_check", self._n_greeting_check)
+        graph.add_node("understand", self._n_understand)
         graph.add_node("profile_fast_path", self._n_profile_fast_path)
         graph.add_node("timetable_read", self._n_timetable_read)
         graph.add_node("personal_tools", self._n_personal_tools)
@@ -295,7 +322,8 @@ class AuraChatGraph:
 
         graph.add_conditional_edges("safety_guardrail", route_or("wellness_check"))
         graph.add_conditional_edges("wellness_check", route_or("greeting_check"))
-        graph.add_conditional_edges("greeting_check", route_or("profile_fast_path"))
+        graph.add_conditional_edges("greeting_check", route_or("understand"))
+        graph.add_conditional_edges("understand", route_or("profile_fast_path"))
         graph.add_conditional_edges("profile_fast_path", route_or("timetable_read"))
         graph.add_conditional_edges("timetable_read", route_or("personal_tools"))
         graph.add_conditional_edges("personal_tools", route_or("classify"))
@@ -344,12 +372,18 @@ class AuraChatGraph:
             }
             state["is_guardrail"] = True
         elif verdict is Verdict.OFF_TOPIC:
-            state["result"] = {
-                "answer": OFF_TOPIC_RESPONSE,
-                "sources": [],
-                "is_guardrail": True,
-            }
-            state["is_guardrail"] = True
+            if looks_compound(state["query"]):
+                # Part of a multi-question message may be about DAU. Decide
+                # per question once the message is split (_n_understand)
+                # instead of refusing the in-scope questions too.
+                state["scope_recheck"] = True
+            else:
+                state["result"] = {
+                    "answer": OFF_TOPIC_RESPONSE,
+                    "sources": [],
+                    "is_guardrail": True,
+                }
+                state["is_guardrail"] = True
         return state
 
     def _n_wellness_check(self, state: AuraState) -> AuraState:
@@ -404,13 +438,242 @@ class AuraChatGraph:
         state["is_guardrail"] = True
         return state
 
+    # ── Conversation understanding + multi-question lanes ───────────────
+
+    @staticmethod
+    def _is_personal_action_turn(query, history) -> bool:
+        return bool(
+            _is_calendar_workflow_turn(query, history)
+            or _is_timetable_edit_intent(query)
+            or _is_timetable_edit_confirmation(query, history)
+        )
+
+    @staticmethod
+    def _has_personal_action_signal(query, history) -> bool:
+        # Mirrors the gates inside _personal_tools_single, evaluated on the
+        # user's own words: the LLM-derived sub-questions never widen what may
+        # trigger a calendar/timetable write.
+        return bool(
+            _required_calendar_tool(query, history)
+            or _is_calendar_connect_intent(query)
+            or _is_calendar_unsync_intent(query)
+            or _is_calendar_sync_intent(query)
+            or _is_timetable_edit_intent(query)
+            or _is_timetable_edit_confirmation(query, history)
+        )
+
+    def _n_understand(self, state: AuraState) -> AuraState:
+        """Resolve the message against the conversation and split it.
+
+        One LLM call (skipped for a history-less single question) replaces the
+        old pronoun/length-gated rewrite that made context use inconsistent.
+        """
+        query = state["query"]
+        history = state.get("history") or []
+        state["questions"] = [query]
+        state["standalone_query"] = query
+        state["standalone_resolved"] = False
+        state["followup_type"] = "new"
+        state.setdefault("prefix_parts", [])
+        state.setdefault("result_extras", {})
+
+        understander = getattr(self, "understander", None)
+        # Calendar syncs, timetable edits and "yes" confirmations are matched
+        # on the user's exact words by deterministic gates, so they are not
+        # rewritten. A compound message is the exception: it is still split so
+        # its other questions are answered.
+        skip = understander is None or (
+            AuraChatGraph._is_personal_action_turn(query, history)
+            and not looks_compound(query)
+        )
+        und = None
+        if not skip:
+            try:
+                with track_segment("understand_time"):
+                    und = understander.understand(
+                        query,
+                        history=history,
+                        summary=state.get("summary"),
+                        academic_scope=state.get("academic_scope"),
+                    )
+            except Exception as exc:
+                log_soft_failure(
+                    "AURA-GRAPH-005", "query_understanding", exc=exc,
+                    degraded_to="legacy_rewrite",
+                )
+
+        if und is not None:
+            questions = [q for q in und.questions if q] or [query]
+            state["followup_type"] = und.followup_type
+            state["standalone_resolved"] = bool(und.resolved)
+        else:
+            questions = heuristic_split(query) if state.get("scope_recheck") else [query]
+
+        if state.get("scope_recheck"):
+            questions = AuraChatGraph._filter_off_topic(self, state, questions)
+            if state.get("result") is not None:
+                return state
+
+        state["questions"] = questions
+        state["standalone_query"] = questions[0] if len(questions) == 1 else " ".join(questions)
+        return state
+
+    def _filter_off_topic(self, state: AuraState, questions: list) -> list:
+        """Per-question scope check for a compound message the whole-message
+        guardrail called OFF_TOPIC: answer the DAU questions, say which parts
+        were skipped. UNSAFE in any part blocks the whole message."""
+        previous_question = next(
+            (
+                str(turn.get("content") or "")
+                for turn in reversed(state.get("history") or [])
+                if turn.get("role") == "user"
+            ),
+            None,
+        )
+        if len(questions) == 1:
+            verdicts = [state.get("safety_verdict")]
+        else:
+            from concurrent.futures import ThreadPoolExecutor
+
+            def _verdict(q):
+                try:
+                    return self.guardrail.classify(q, previous_question=previous_question)
+                except Exception:
+                    return None  # unreachable classifier fails open, as elsewhere
+
+            with track_segment("guardrail_time"):
+                with ThreadPoolExecutor(max_workers=min(4, len(questions))) as ex:
+                    verdicts = list(ex.map(_verdict, questions))
+
+        if any(v is Verdict.UNSAFE for v in verdicts):
+            state["result"] = {
+                "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
+                "sources": [],
+                "is_guardrail": True,
+            }
+            state["is_guardrail"] = True
+            return questions
+
+        kept = [q for q, v in zip(questions, verdicts) if v is not Verdict.OFF_TOPIC]
+        skipped = [q for q, v in zip(questions, verdicts) if v is Verdict.OFF_TOPIC]
+        if not kept:
+            state["result"] = {
+                "answer": OFF_TOPIC_RESPONSE,
+                "sources": [],
+                "is_guardrail": True,
+            }
+            state["is_guardrail"] = True
+            return questions
+        if skipped:
+            listed = "; ".join(f'"{q}"' for q in skipped)
+            state.setdefault("prefix_parts", []).append(
+                "I can only help with questions about Dhirubhai Ambani University, "
+                f"so I did not answer: {listed}."
+            )
+        state["safety_verdict"] = Verdict.SAFE
+        return kept
+
+    def _classify_many(self, questions: list, history) -> list:
+        from concurrent.futures import ThreadPoolExecutor
+        import logging as _logging
+
+        def _one(q):
+            try:
+                return self.classifier.classify(q, history=history)
+            except Exception as exc:
+                _logging.getLogger(__name__).warning("sub-question classify failed: %s", exc)
+                return {"type": "PUBLIC", "target": None, "erp_fields": [], "intent": "RAG"}
+
+        with ThreadPoolExecutor(max_workers=max(1, min(4, len(questions)))) as ex:
+            return list(ex.map(_one, questions))
+
+    @staticmethod
+    def _tool_lane(state: AuraState, single_fn, questions: list) -> AuraState:
+        """Run a tool node once per sub-question so a tool answer no longer
+        replaces the whole reply. Tool answers become the answer's prefix; the
+        remaining questions continue down the pipeline."""
+        remaining, parts = [], []
+        extras = state.setdefault("result_extras", {})
+        for q in questions:
+            sub = dict(state)
+            sub["query"] = q
+            sub["result"] = None
+            sub = single_fn(sub)
+            res = sub.get("result")
+            if res is None:
+                remaining.append(q)
+                continue
+            answer = (res.get("answer") or "").strip()
+            if answer:
+                parts.append(answer)
+            merge_extras(extras, res)
+            if sub.get("is_personal"):
+                state["is_personal"] = True
+        if not parts and not extras.get("action_required"):
+            return state
+        state.setdefault("prefix_parts", []).extend(parts)
+        if not remaining:
+            state["result"] = AuraChatGraph._with_prefix(
+                state, {"answer": "", "sources": [], "is_personal_data": False}
+            )
+        else:
+            state["questions"] = remaining
+            state["standalone_query"] = " ".join(remaining)
+        return state
+
+    @staticmethod
+    def _with_prefix(state: AuraState, result: dict) -> dict:
+        """Prepend tool/denial fragments and carry tool-result flags."""
+        parts = state.get("prefix_parts") or []
+        if parts:
+            result["answer"] = compose_answer(parts, result.get("answer"))
+        for key, value in (state.get("result_extras") or {}).items():
+            if key == "is_personal_data":
+                result[key] = bool(result.get(key)) or bool(value)
+            elif value and key not in result:
+                result[key] = value
+        return result
+
+    @staticmethod
+    def _title_hint(text):
+        m = AuraChatGraph._TITLE_EXTRACT_RE.search(text or "")
+        return m.group(1).strip() if m else None
+
+    # Fix C (source_match_analysis Root Cause 4): an explicit document title in
+    # 'According to \'Title\'' phrasing is injected as a retrieval hint so the
+    # exact-title document is boosted to the top of the candidate pool.
+    _TITLE_EXTRACT_RE = re.compile(
+        r"according\s+to\s+(?:the\s+document\s+)?['\"]([^'\"]+)['\"]\s*,",
+        re.IGNORECASE,
+    )
+
+    @staticmethod
+    def _load_previous_answer_context(state: AuraState) -> bool:
+        """"Shorten/translate that": the previous reply is the source, no retrieval."""
+        prev = previous_assistant_answer(state.get("history"))
+        if not prev:
+            return False
+        state["rag_context"] = (
+            "<context>\n<previous_answer>\n" + prev + "\n</previous_answer>\n</context>"
+        )
+        state["sources"] = []
+        state["chunks"] = []
+        state["retrieval_result"] = {}
+        return True
+
     def _n_profile_fast_path(self, state: AuraState) -> AuraState:
         """Answer pure identity questions without RAG/ERP (mirrors AuraChat)."""
         from personal_query_classifier import is_pure_profile_query
 
         query = state["query"]
         identity = state.get("identity")
-        if not identity or not is_pure_profile_query(query):
+        # A compound message must reach the classifier so its other questions
+        # are answered; the fast path would reply to the profile part only.
+        if (
+            not identity
+            or len(state.get("questions") or []) > 1
+            or not is_pure_profile_query(query)
+        ):
             return state
         role = getattr(identity, "role", None)
         if role in (None, "guest"):
@@ -512,6 +775,37 @@ class AuraChatGraph:
         return None
 
     def _n_timetable_read(self, state: AuraState) -> AuraState:
+        questions = [q for q in (state.get("questions") or []) if q]
+        if len(questions) > 1:
+            return AuraChatGraph._tool_lane(
+                state, lambda s: AuraChatGraph._timetable_read_single(self, s), questions
+            )
+        state = AuraChatGraph._timetable_read_single(self, state)
+        if state.get("result") is not None:
+            return state
+        # "what about tomorrow?" after a timetable answer only becomes a
+        # timetable question once resolved. Read-only, so the resolved text is
+        # safe here (unlike writes, which stay on the user's exact words).
+        resolved = state.get("standalone_query")
+        if (
+            state.get("standalone_resolved")
+            and resolved
+            and resolved != state["query"]
+            and not AuraChatGraph._is_personal_action_turn(
+                state["query"], state.get("history") or []
+            )
+        ):
+            sub = dict(state)
+            sub["query"] = resolved
+            sub["result"] = None
+            sub = AuraChatGraph._timetable_read_single(self, sub)
+            if sub.get("result") is not None:
+                state["result"] = sub["result"]
+                if sub.get("is_personal"):
+                    state["is_personal"] = True
+        return state
+
+    def _timetable_read_single(self, state: AuraState) -> AuraState:
         # The only tool-backed read path: the requester's own timetable, or a
         # named cohort's published timetable. Everything else (clubs, faculty,
         # policies, fees, admissions) goes through grounded RAG. Decided by
@@ -586,6 +880,20 @@ class AuraChatGraph:
         return state
 
     def _n_personal_tools(self, state: AuraState) -> AuraState:
+        questions = [q for q in (state.get("questions") or []) if q]
+        if len(questions) > 1:
+            # Double gate: the user's own message must carry the action signal,
+            # so an LLM-derived sub-question can never create a write request.
+            if not AuraChatGraph._has_personal_action_signal(
+                state["query"], state.get("history") or []
+            ):
+                return state
+            return AuraChatGraph._tool_lane(
+                state, lambda s: AuraChatGraph._personal_tools_single(self, s), questions
+            )
+        return AuraChatGraph._personal_tools_single(self, state)
+
+    def _personal_tools_single(self, state: AuraState) -> AuraState:
         # Signed-in students reach personal timetable writes and Google Calendar
         # actions here; guests get sign-in guidance. The actions scope exposes
         # only the student's timetable + calendar tools, never ERP reads.
@@ -725,9 +1033,40 @@ class AuraChatGraph:
         return state
 
     def _n_classify(self, state: AuraState) -> AuraState:
-        classification = self.classifier.classify(state["query"], history=state.get("history"))
-        state["classification"] = classification
-        state["query_type"] = classification["type"]
+        questions = [q for q in (state.get("questions") or []) if q]
+        history = state.get("history")
+
+        if state.get("followup_type") == FOLLOWUP_TRANSFORM and len(questions) <= 1:
+            # Reworking the previous reply: no records lookup, no retrieval.
+            state["classification"] = {
+                "type": "PUBLIC", "target": None, "erp_fields": [], "intent": "REWORK",
+            }
+            state["query_type"] = "PUBLIC"
+            return state
+
+        if len(questions) <= 1:
+            # The resolved question when history was applied, so a follow-up
+            # like "and last semester?" is classified for what it means.
+            classification = self.classifier.classify(
+                state.get("standalone_query") or state["query"], history=history
+            )
+            state["classification"] = classification
+            state["query_type"] = classification["type"]
+            return state
+
+        request_context = state.get("request_context")
+        role = request_context.effective_role if request_context else "guest"
+        classifications = AuraChatGraph._classify_many(self, questions, history)
+        lanes = merge_classifications(
+            questions, classifications, guest=(role == "guest"), denial_text=GENERIC_DENIAL
+        )
+        state["sub_classifications"] = classifications
+        state["classification"] = lanes.classification
+        state["query_type"] = lanes.classification["type"]
+        state["questions"] = [questions[i] for i in lanes.keep]
+        state["rag_questions"] = [questions[i] for i in lanes.rag]
+        state.setdefault("prefix_parts", []).extend(lanes.notes)
+        state["standalone_query"] = " ".join(state["questions"])
         return state
 
     def _n_guest_gate(self, state: AuraState) -> AuraState:
@@ -873,37 +1212,53 @@ class AuraChatGraph:
         if query_type not in ("PUBLIC", "MIXED", "AGGREGATE"):
             return state
 
+        if (
+            state.get("followup_type") == FOLLOWUP_TRANSFORM
+            and AuraChatGraph._load_previous_answer_context(state)
+        ):
+            return state
+
         request_context = state.get("request_context")
         user_role = request_context.effective_role if request_context else "public"
 
-        # Fix C (source_match_analysis Root Cause 4): Extract an explicit
-        # document title from 'According to \'Title\'' phrasing and inject it
-        # as a retrieval hint so the exact-title document is boosted to the
-        # top of the candidate pool. Without this, explicit-title queries like
-        # 'According to the document \'Director General\', ...' retrieved a
-        # thematically related but wrong document (e.g. Organogram) because
-        # the query plan had no signal that a specific title was requested.
-        _TITLE_EXTRACT_RE = re.compile(
-            r"according\s+to\s+(?:the\s+document\s+)?['\"]([^'\"]+)['\"]\s*,",
-            re.IGNORECASE,
-        )
-        _title_hint: Optional[str] = None
-        _m = _TITLE_EXTRACT_RE.search(state["query"])
-        if _m:
-            _title_hint = _m.group(1).strip()
+        resolved = bool(state.get("standalone_resolved"))
+        rag_questions = [q for q in (state.get("rag_questions") or []) if q]
+        if not rag_questions:
+            rag_questions = [
+                (state.get("standalone_query") or state["query"]) if resolved else state["query"]
+            ]
+        # An explicit document title is read from the user's own words first.
+        hints = [
+            AuraChatGraph._title_hint(q)
+            or (AuraChatGraph._title_hint(state["query"]) if len(rag_questions) == 1 else None)
+            for q in rag_questions
+        ]
 
         # Institutional aliases are resolved inside get_context, after the
         # follow-up rewrite, so they never leak into the question the answer
         # model sees.
         with track_segment("retrieval_time"):
-            retrieval_result = self.pipeline.get_context(
-                state["query"],
-                state["history"],
-                user_role=user_role,
-                academic_scope=state.get("academic_scope"),
-                identity=state.get("identity"),
-                title_hint=_title_hint,
-            )
+            if len(rag_questions) > 1:
+                retrieval_result = self.pipeline.get_multi_context(
+                    rag_questions,
+                    state["history"],
+                    user_role=user_role,
+                    academic_scope=state.get("academic_scope"),
+                    identity=state.get("identity"),
+                    title_hints=hints,
+                    standalone=resolved,
+                )
+            else:
+                extra = {"standalone": True} if resolved else {}
+                retrieval_result = self.pipeline.get_context(
+                    rag_questions[0],
+                    state["history"],
+                    user_role=user_role,
+                    academic_scope=state.get("academic_scope"),
+                    identity=state.get("identity"),
+                    title_hint=hints[0],
+                    **extra,
+                )
         state["retrieval_result"] = retrieval_result
         state["chunks"] = retrieval_result.get("chunks", [])
         state["rag_context"] = retrieval_result.get("context", "")
@@ -916,11 +1271,10 @@ class AuraChatGraph:
                 if reason == "academic_scope_unavailable"
                 else RETRIEVAL_FAILURE_RESPONSE
             )
-            state["result"] = {
-                "answer": answer,
-                "sources": [],
-                "is_personal_data": False,
-            }
+            state["result"] = AuraChatGraph._with_prefix(
+                state,
+                {"answer": answer, "sources": [], "is_personal_data": False},
+            )
         return state
 
     def _n_generate(self, state: AuraState) -> AuraState:
@@ -949,29 +1303,52 @@ class AuraChatGraph:
 
         has_rag = query_type in ("PUBLIC", "MIXED") and bool(rag_context)
 
+        questions = [q for q in (state.get("questions") or []) if q]
+        is_multi = len(questions) > 1
+        followup_type = state.get("followup_type")
+        resolved_query = state.get("standalone_query") or state["query"]
+        if is_multi:
+            gen_query = " ".join(questions)
+        elif has_rag:
+            # The standalone (follow-up-resolved) question, never the
+            # retrieval string with appended aliases and search terms.
+            gen_query = retrieval_result.get("standalone_query") or resolved_query
+        else:
+            # Personal-data answers see the resolved question too, so a
+            # follow-up keeps its context.
+            gen_query = resolved_query
+
+        gen_kwargs = {}
+        if is_multi:
+            gen_kwargs["questions"] = questions
+        if followup_type == FOLLOWUP_TRANSFORM:
+            gen_kwargs["followup_type"] = followup_type
+
+        on_delta = state.get("on_delta")
+        prefix_parts = state.get("prefix_parts") or []
+        if prefix_parts and on_delta is not None:
+            # Tool answers were produced before generation; show them at once.
+            on_delta(compose_answer(prefix_parts, "") + "\n\n")
+
         with track_segment("generation_time"):
             # on_delta / summary are stored on state by chat() and must be
             # forwarded — without them /chat/stream silently buffers, and the
             # rolling conversation digest never reaches the generator (so the
             # token budget under-counts what the prompt would include once
             # memory is wired).
-            # The standalone (follow-up-resolved) question, never the
-            # retrieval string with appended aliases and search terms.
             answer = self.generator.generate(
-                query=(
-                    (retrieval_result.get("standalone_query") or state["query"])
-                    if has_rag else state["query"]
-                ),
+                query=gen_query,
                 context=combined_context,
                 plan=retrieval_result.get("plan") if has_rag else None,
                 history=state.get("history") or [],
                 profile=state.get("display_profile"),
                 system_addendum=PERSONAL_DATA_SYSTEM_ADDENDUM if is_personal else None,
-                on_delta=state.get("on_delta"),
+                on_delta=on_delta,
                 on_profile_update=state.get("on_profile_update"),
                 profile_erp_id=state.get("identity").erp_id if state.get("identity") else None,
                 summary=(state.get("summary") or None),
                 tracking_flags=request_context.tracking_flags if request_context else None,
+                **gen_kwargs,
             )
 
         # Apply post-generation privacy filter
@@ -983,15 +1360,18 @@ class AuraChatGraph:
             answer,
         )
 
-        state["result"] = {
-            # Extract citations from `answer` (above) BEFORE stripping the
-            # "[Sources: N, M]" marker — the marker is internal bookkeeping,
-            # never meant to reach the user as literal text. Sources render
-            # as citation pills from the `sources` field, not raw brackets.
-            "answer": strip_sources_marker(answer),
-            "sources": cited_sources,
-            "is_personal_data": is_personal,
-        }
+        # Extract citations from `answer` (above) BEFORE stripping the
+        # "[Sources: N, M]" marker — the marker is internal bookkeeping,
+        # never meant to reach the user as literal text. Sources render
+        # as citation pills from the `sources` field, not raw brackets.
+        state["result"] = AuraChatGraph._with_prefix(
+            state,
+            {
+                "answer": strip_sources_marker(answer),
+                "sources": cited_sources,
+                "is_personal_data": is_personal,
+            },
+        )
         return state
 
     # ── Helpers (ported unchanged from AuraChat) ────────────────────────

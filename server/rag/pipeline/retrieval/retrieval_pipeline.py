@@ -47,6 +47,21 @@ STAGE1_RERANK_POOL_CAP = max(1, int(os.getenv("STAGE1_RERANK_POOL_CAP", "30")))
 # not find the information instead of answering from unrelated text.
 MIN_RELEVANCE_SCORE = float(os.getenv("AURA_MIN_RELEVANCE_SCORE", "0.02"))
 
+# Relative cut: after the absolute floor, a chunk must also reach this fraction
+# of the BEST chunk's relevance probability. A lone strong match (p=0.95) then
+# no longer drags four barely-related chunks (p=0.03) into the prompt, which is
+# what caused wrong-document citations and blended answers. Complete-list
+# queries legitimately need many moderately-scored chunks, so they use a much
+# looser ratio. Set to 0 to restore the old absolute-only behaviour.
+RELATIVE_RELEVANCE_RATIO = float(os.getenv("AURA_RELATIVE_RELEVANCE_RATIO", "0.08"))
+LIST_RELATIVE_RELEVANCE_RATIO = float(os.getenv("AURA_LIST_RELATIVE_RELEVANCE_RATIO", "0.03"))
+
+# Chunks handed to the answer model for an ordinary single question.
+FINAL_TOP_K = int(os.getenv("AURA_FINAL_TOP_K", "5"))
+# Per-question chunk cap when one message carries several questions. The token
+# budget is shared, so this stays small; complete-list questions are exempt.
+MULTI_PER_QUESTION_TOP_K = int(os.getenv("AURA_MULTI_PER_QUESTION_TOP_K", "4"))
+
 # Retrieval intents for which the student's own programme is a useful
 # retrieval signal.
 PROGRAMME_INTENTS = frozenset({"program_curriculum", "program_overview", "program_eligibility"})
@@ -80,7 +95,21 @@ class RetrievalPipeline:
         self.rewriter = QueryRewriter()
 
         from concurrent.futures import ThreadPoolExecutor
-        self.executor = ThreadPoolExecutor(max_workers=2)
+        # planner + speculative retrieval per question. Sized for several
+        # concurrent questions; the tasks are I/O bound (HTTP to vLLM/Qdrant).
+        #
+        # This pool and _multi_executor() (below) MUST stay separate. Each
+        # worker thread of _multi_executor() runs one question's whole
+        # _search_context() end to end, which itself submits to THIS pool
+        # and blocks on the result (see the planner/speculative-retrieval
+        # calls further down). If both used the same bounded pool, enough
+        # concurrent questions would fill it entirely with workers that are
+        # each waiting on a sub-task with no free worker left to run it —
+        # a self-deadlock. Give each its own env-tunable size instead of
+        # "simplifying" this into one shared pool.
+        self.executor = ThreadPoolExecutor(
+            max_workers=max(2, int(os.getenv("AURA_RETRIEVAL_WORKERS", "4")))
+        )
 
         # Shared: load metadata.json once for both faculty fuzzy-matching
         # and entity-based retrieval (professor's algorithm).
@@ -896,7 +925,37 @@ class RetrievalPipeline:
         academic_scope=None,
         identity=None,
         title_hint: str = None,
+        standalone: bool = False,
     ):
+        """Retrieve evidence for ONE question.
+
+        ``standalone=True`` means the caller already resolved the question
+        against the conversation (see QueryUnderstanding), so the legacy
+        pronoun-gated rewrite is skipped.
+        """
+        search = self._search_context(
+            query, history, user_role, academic_scope, identity, title_hint, standalone
+        )
+        if search.get("final") is not None:
+            return search["final"]
+        return self._assemble_context(search, academic_scope=academic_scope)
+
+    def _search_context(
+        self,
+        query,
+        history=None,
+        user_role: str = "public",
+        academic_scope=None,
+        identity=None,
+        title_hint: str = None,
+        standalone: bool = False,
+    ):
+        """Plan, retrieve and rerank for one question.
+
+        Returns ``{"final": <abstention result>}`` when retrieval cannot
+        proceed, otherwise ``{"search": {...}}`` holding the relevant, ranked
+        chunks for _select_final_chunks / _assemble_context.
+        """
         allowed_roles = get_allowed_roles(user_role)
         original_query = query
 
@@ -939,7 +998,11 @@ class RetrievalPipeline:
             and any(query_lower.startswith(p) for p in SHORT_PRONOUN_STARTERS)
         )
         is_short_followup = len(query.split()) <= SHORT_FOLLOWUP_WORD_LIMIT
-        needs_rewrite = bool(history) and (has_pronoun or is_short_fragment or is_short_followup)
+        needs_rewrite = (
+            bool(history)
+            and not standalone
+            and (has_pronoun or is_short_fragment or is_short_followup)
+        )
 
         if needs_rewrite:
             query = self.rewriter.rewrite(
@@ -1062,7 +1125,7 @@ class RetrievalPipeline:
             and not self._has_explicit_programme_context(plan)
             and not _explicit_prog_in_query
         ):
-            return {
+            return {"final": {
                 "query": original_query,
                 "corrected_query": query,
                 "standalone_query": standalone_query,
@@ -1073,7 +1136,7 @@ class RetrievalPipeline:
                 "top_k_before_rerank": 0,
                 "top_k_after_rerank": 0,
                 "abstention_reason": "academic_scope_unavailable",
-            }
+            }}
 
         if use_speculative:
             if future_speculative is not None:
@@ -1425,7 +1488,9 @@ class RetrievalPipeline:
                 deduped.append(result)
                 seen.add(chunk_id)
 
-        results = self._eligible_results(deduped, academic_scope)
+        # Copies: the reranker annotates chunk dicts in place, and several
+        # questions of one message rerank concurrently.
+        results = [dict(r) for r in self._eligible_results(deduped, academic_scope)]
         pool_size = len(results)
 
         # Trim the pool before the cross-encoder pass — see
@@ -1443,7 +1508,7 @@ class RetrievalPipeline:
             results=results,
             plan=plan,
         )
-        relevant = self._drop_irrelevant(reranked)
+        relevant = self._drop_irrelevant(reranked, requires_complete_list=requires_complete_list)
         logger.info(
             "rerank pool=%d scored=%d relevant=%d top=%s",
             pool_size,
@@ -1456,7 +1521,7 @@ class RetrievalPipeline:
         )
 
         if not relevant:
-            return {
+            return {"final": {
                 "query": original_query,
                 "corrected_query": corrected_query,
                 "standalone_query": standalone_query,
@@ -1468,18 +1533,39 @@ class RetrievalPipeline:
                 "top_k_before_rerank": pool_size,
                 "top_k_after_rerank": 0,
                 "abstention_reason": "no_relevant_documents",
-            }
-        reranked = relevant
+            }}
+
+        return {"search": {
+            "original_query": original_query,
+            "corrected_query": corrected_query,
+            "standalone_query": standalone_query,
+            "plan": plan,
+            "relevant": relevant,
+            "pool_size": pool_size,
+            "requires_complete_list": requires_complete_list,
+            "retrieval_intent": retrieval_intent,
+            "title_hint": title_hint,
+        }}
+
+    def _select_final_chunks(self, s, academic_scope=None, top_k_cap=None, expand_window=None):
+        """Pick, order and neighbour-expand the chunks the answer model sees."""
+        reranked = s["relevant"]
+        plan = s["plan"]
+        requires_complete_list = s["requires_complete_list"]
+        retrieval_intent = s["retrieval_intent"]
+        title_hint = s.get("title_hint")
 
         # Fix TK1/TK2: comparison and complete-list queries need more chunks
-        # than the default 5; ContextBuilder widens its budget to match.
+        # than the default; ContextBuilder widens its budget to match.
         if requires_complete_list:
             max_final = 15
         elif plan.get("multi_entity_query"):
             max_final = 8
         else:
-            max_final = 5
-        final_top_k = min(plan.get("top_k", 5), max_final)
+            max_final = FINAL_TOP_K
+        final_top_k = min(plan.get("top_k", FINAL_TOP_K), max_final)
+        if top_k_cap:
+            final_top_k = min(final_top_k, top_k_cap)
 
         # Fix C (source_match_analysis Root Cause 4): an explicitly named
         # document ("According to 'Director General', ...") is lifted to the
@@ -1507,70 +1593,259 @@ class RetrievalPipeline:
                 reranked = _title_match + _rest
 
         final_chunks = reranked[:final_top_k]
-        expand_window = 2 if retrieval_intent == "policy_version" else 1
-        final_chunks = self._eligible_results(
+        if expand_window is None:
+            expand_window = 2 if retrieval_intent == "policy_version" else 1
+        return self._eligible_results(
             self._expand_adjacent_chunks(final_chunks, window=expand_window),
             academic_scope,
         )
 
-        built = (
-            self.builder.build(
-                final_chunks,
-                retrieval_intent=retrieval_intent,
-                requires_complete_list=requires_complete_list,
-            )
+    def _assemble_context(self, s, academic_scope=None):
+        final_chunks = self._select_final_chunks(s, academic_scope)
+        built = self.builder.build(
+            final_chunks,
+            retrieval_intent=s["retrieval_intent"],
+            requires_complete_list=s["requires_complete_list"],
         )
-
         return {
-            "query":
-                original_query,
-
-            "corrected_query":
-                corrected_query,
-
-            "standalone_query":
-                standalone_query,
-
-            "plan":
-                plan,
-
-            "chunks":
-                final_chunks,
-
-            "context":
-                built["context"],
-
-            "sources":
-                built["sources"],
-
-            "citation_map":
-                built.get("citation_map", {}),
-
-            "top_k_before_rerank":
-                pool_size,
-
-            "top_k_after_rerank":
-                len(final_chunks)
+            "query": s["original_query"],
+            "corrected_query": s["corrected_query"],
+            "standalone_query": s["standalone_query"],
+            "plan": s["plan"],
+            "chunks": final_chunks,
+            "context": built["context"],
+            "sources": built["sources"],
+            "citation_map": built.get("citation_map", {}),
+            "top_k_before_rerank": s["pool_size"],
+            "top_k_after_rerank": len(final_chunks),
         }
 
-    @staticmethod
-    def _drop_irrelevant(reranked):
-        """Keep only chunks the cross-encoder considers relevant at all.
+    # ── Several questions in one message ────────────────────────────────
 
-        The threshold is on the sigmoid of the raw cross-encoder logit, not on
-        the blended reranked_score, so recency or section boosts can never
-        rescue an unrelated chunk. The default is deliberately low (it removes
-        clearly unrelated text only); calibrate MIN_RELEVANCE_SCORE on the
-        golden set."""
-        kept = []
+    def _multi_executor(self):
+        pool = getattr(self, "_multi_pool", None)
+        if pool is None:
+            from concurrent.futures import ThreadPoolExecutor
+            pool = ThreadPoolExecutor(
+                max_workers=max(1, int(os.getenv("AURA_MULTI_RETRIEVAL_WORKERS", "4"))),
+                thread_name_prefix="aura-multi-rag",
+            )
+            self._multi_pool = pool
+        return pool
+
+    def _search_many(self, questions, history, user_role, academic_scope, identity, title_hints, standalone):
+        def _one(q, hint):
+            try:
+                return self._search_context(
+                    q, history, user_role, academic_scope, identity, hint, standalone
+                )
+            except Exception as exc:  # one failing question must not sink the rest
+                logger.warning("multi-question retrieval failed for %r: %s", q, exc)
+                return {"error": exc}
+
+        pool = self._multi_executor()
+        futures = [pool.submit(_one, q, h) for q, h in zip(questions, title_hints)]
+        results = [f.result() for f in futures]
+        if results and all("error" in r for r in results):
+            raise results[0]["error"]
+        return results
+
+    @staticmethod
+    def _chunk_key(chunk):
+        meta = chunk.get("metadata") or {}
+        if chunk.get("id") is not None:
+            return ("id", chunk["id"])
+        if meta.get("document_id") is not None and meta.get("chunk_index") is not None:
+            return ("coord", meta["document_id"], meta["chunk_index"])
+        return ("obj", id(chunk))
+
+    @classmethod
+    def _merge_question_chunks(cls, selected):
+        """Round-robin merge of per-question chunk lists.
+
+        Rank-major order (every question's best chunk, then every question's
+        second-best, ...) so the shared token budget trims ALL questions
+        evenly instead of starving the later ones. A chunk chosen for several
+        questions appears once, tagged with every question it serves.
+        """
+        merged, index = [], {}
+        depth = max((len(lst) for lst in selected), default=0)
+        for rank in range(depth):
+            for qi, lst in enumerate(selected, start=1):
+                if rank >= len(lst):
+                    continue
+                chunk = lst[rank]
+                key = cls._chunk_key(chunk)
+                if key in index:
+                    merged[index[key]]["questions"].append(qi)
+                    continue
+                copy = dict(chunk)
+                copy["questions"] = [qi]
+                index[key] = len(merged)
+                merged.append(copy)
+        return merged
+
+    @staticmethod
+    def _no_evidence_notes(per_question):
+        notes = []
+        for entry in per_question:
+            if entry["in_context"]:
+                continue
+            reason = entry.get("abstention_reason") or "no_relevant_documents"
+            note = (
+                "The verified programme details needed to answer this are not on file."
+                if reason == "academic_scope_unavailable"
+                else "No relevant university document was retrieved for this question."
+            )
+            notes.append(f'<no_documents q="{entry["index"]}">{note}</no_documents>')
+        return notes
+
+    def get_multi_context(
+        self,
+        questions,
+        history=None,
+        user_role: str = "public",
+        academic_scope=None,
+        identity=None,
+        title_hints=None,
+        standalone: bool = True,
+    ):
+        """Retrieve evidence for several questions and merge it into ONE context.
+
+        Each question is planned, retrieved and reranked on its own, so a
+        strong hit for question 1 can never mask a weak-scoring question 2 (a
+        single cross-encoder query holding both questions scored every chunk
+        against a blend that matched neither).
+        """
+        questions = [q.strip() for q in (questions or []) if q and q.strip()]
+        title_hints = list(title_hints or [])
+        title_hints += [None] * (len(questions) - len(title_hints))
+
+        if len(questions) <= 1:
+            q = questions[0] if questions else ""
+            result = self.get_context(
+                q, history, user_role=user_role, academic_scope=academic_scope,
+                identity=identity, title_hint=title_hints[0] if title_hints else None,
+                standalone=standalone,
+            )
+            result["questions"] = questions
+            result["per_question"] = [{
+                "index": 1, "question": q, "chunks": len(result.get("chunks", [])),
+                "in_context": bool(result.get("chunks")),
+                "abstention_reason": result.get("abstention_reason"),
+            }]
+            return result
+
+        searches = self._search_many(
+            questions, history, user_role, academic_scope, identity, title_hints, standalone
+        )
+
+        selected, per_question, plan, pool_total = [], [], {}, 0
+        for qi, (q, s) in enumerate(zip(questions, searches), start=1):
+            chunks, reason = [], None
+            if "error" in s:
+                reason = "retrieval_error"
+            elif s.get("final") is not None:
+                reason = s["final"].get("abstention_reason")
+                pool_total += s["final"].get("top_k_before_rerank", 0)
+            else:
+                info = s["search"]
+                pool_total += info["pool_size"]
+                plan = plan or info["plan"]
+                chunks = self._select_final_chunks(
+                    info,
+                    academic_scope,
+                    top_k_cap=None if info["requires_complete_list"] else MULTI_PER_QUESTION_TOP_K,
+                    expand_window=1,
+                )
+            selected.append(chunks)
+            per_question.append({
+                "index": qi, "question": q, "chunks": len(chunks),
+                "in_context": False, "abstention_reason": reason,
+            })
+
+        merged = self._merge_question_chunks(selected)
+        any_list = any(
+            "search" in s and s["search"]["requires_complete_list"] for s in searches
+        )
+        built = self.builder.build(
+            merged,
+            retrieval_intent="general",
+            requires_complete_list=any_list,
+            widen=True,
+            n_questions=len(questions),
+        )
+
+        included = [merged[i] for i in built.get("included", range(len(merged)))]
+        for entry in per_question:
+            entry["in_context"] = any(entry["index"] in c["questions"] for c in included)
+
+        context = built["context"]
+        notes = self._no_evidence_notes(per_question)
+        if notes:
+            context = context[: -len("\n</context>")] + "\n" + "\n".join(notes) + "\n</context>"
+
+        reasons = [e["abstention_reason"] for e in per_question if not e["in_context"]]
+        abstention = None
+        if not included:
+            abstention = (
+                "academic_scope_unavailable"
+                if reasons and all(r == "academic_scope_unavailable" for r in reasons)
+                else "no_relevant_documents"
+            )
+
+        result = {
+            "query": " | ".join(questions),
+            "corrected_query": " | ".join(questions),
+            "standalone_query": " ".join(questions),
+            "plan": plan,
+            "chunks": included,
+            "context": context,
+            "sources": built["sources"],
+            "citation_map": built.get("citation_map", {}),
+            "top_k_before_rerank": pool_total,
+            "top_k_after_rerank": len(included),
+            "questions": questions,
+            "per_question": per_question,
+        }
+        if abstention:
+            result["abstention_reason"] = abstention
+        return result
+
+    @staticmethod
+    def _sigmoid(logit) -> float:
+        x = float(logit)
+        if x >= 0:
+            return 1.0 / (1.0 + math.exp(-x))
+        e = math.exp(x)  # x is negative: no overflow, unlike exp(-x)
+        return e / (1.0 + e)
+
+    @staticmethod
+    def _drop_irrelevant(reranked, requires_complete_list: bool = False):
+        """Keep only chunks the cross-encoder considers relevant.
+
+        Two gates, both on the sigmoid of the raw cross-encoder logit (not the
+        blended reranked_score, so recency or section boosts can never rescue
+        an unrelated chunk):
+
+        1. absolute floor MIN_RELEVANCE_SCORE - nothing clears it means the
+           corpus does not answer the question, and AURA abstains;
+        2. relative floor - a chunk must reach RELATIVE_RELEVANCE_RATIO of the
+           best chunk's probability. Complete-list queries use a looser ratio.
+
+        Chunks without a cross-encoder score (reranker down) are kept.
+        Calibrate both thresholds on the golden set."""
+        probs = []
         for chunk in reranked:
             logit = chunk.get("cross_score")
-            if logit is None:
-                kept.append(chunk)
-                continue
-            if 1.0 / (1.0 + math.exp(-float(logit))) >= MIN_RELEVANCE_SCORE:
-                kept.append(chunk)
-        return kept
+            probs.append(None if logit is None else RetrievalPipeline._sigmoid(logit))
+        scored = [p for p in probs if p is not None]
+        best = max(scored) if scored else 0.0
+        ratio = LIST_RELATIVE_RELEVANCE_RATIO if requires_complete_list else RELATIVE_RELEVANCE_RATIO
+        floor = MIN_RELEVANCE_SCORE
+        if best >= MIN_RELEVANCE_SCORE:
+            floor = max(floor, ratio * best)
+        return [c for c, p in zip(reranked, probs) if p is None or p >= floor]
 
     def _expand_adjacent_chunks(self, candidates, window=1):
         """
@@ -1654,13 +1929,24 @@ class RetrievalPipeline:
                     continue
                 
                 metadata_key = entity_type
+                if metadata_key == "semester_roman":
+                    # Duplicate of "semester"; a bare "III" query only matches
+                    # roman numerals everywhere in the corpus.
+                    continue
                 if metadata_key == "program_name":
                     canonical_val = self._canonical_program_name(val_str)
                     if canonical_val:
                         entity_queries.append((val_str, {metadata_key: {"$eq": canonical_val}}))
                     else:
                         entity_queries.append((val_str, None))
-                elif metadata_key in ["faculty_name", "event_name", "course_code", "course_name", "semester"]:
+                elif metadata_key == "semester":
+                    # The planner stores an int (3) but chunks store the roman
+                    # numeral ("III"), so an exact-match filter never matched.
+                    variants = self._canonical_semester_values(val_str)
+                    entity_queries.append(
+                        (val_str, {"semester": {"$in": variants}} if variants else None)
+                    )
+                elif metadata_key in ["faculty_name", "event_name", "course_code", "course_name"]:
                     entity_queries.append((val_str, {metadata_key: {"$eq": val_str}}))
                 else:
                     entity_queries.append((val_str, None))
