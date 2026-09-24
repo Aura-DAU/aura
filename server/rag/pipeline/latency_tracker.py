@@ -40,3 +40,6 @@ def init_tracker():
 
 def reset_tracker(token):
     _latency_data.reset(token)
+
+def get_tracker_data():
+    return _latency_data.get()

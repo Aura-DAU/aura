@@ -369,6 +369,9 @@ class AuraChatGraph:
                 "answer": "I am sorry, but I cannot fulfill this request as it violates safety, privacy, or security boundaries.",
                 "sources": [],
                 "is_guardrail": True,
+                "status": "flagged",
+                "failure_stage": "safety_guardrail",
+                "failure_reason": "UNSAFE_QUERY",
             }
             state["is_guardrail"] = True
         elif verdict is Verdict.OFF_TOPIC:
@@ -382,6 +385,9 @@ class AuraChatGraph:
                     "answer": OFF_TOPIC_RESPONSE,
                     "sources": [],
                     "is_guardrail": True,
+                    "status": "flagged",
+                    "failure_stage": "safety_guardrail",
+                    "failure_reason": "OFF_TOPIC",
                 }
                 state["is_guardrail"] = True
         return state
@@ -399,6 +405,9 @@ class AuraChatGraph:
                 "sources": [],
                 "is_personal_data": False,
                 "is_guardrail": True,
+                "status": "flagged",
+                "failure_stage": "wellness_guardrail",
+                "failure_reason": "WELLNESS_CRISIS",
             }
             state["is_guardrail"] = True
         return state
@@ -1080,6 +1089,9 @@ class AuraChatGraph:
                     "sources": [],
                     "is_personal_data": False,
                     "is_guardrail": True,
+                    "status": "failed",
+                    "failure_stage": "guest_gate",
+                    "failure_reason": "GUEST_PERSONAL_ACCESS_DENIED",
                 }
                 state["is_guardrail"] = True
         return state
@@ -1103,6 +1115,9 @@ class AuraChatGraph:
                     "sources": [],
                     "is_personal_data": False,
                     "is_guardrail": True,
+                    "status": "flagged",
+                    "failure_stage": "strict_guardrail",
+                    "failure_reason": "STRICT_GUARDRAIL_BLOCKED",
                 }
                 state["is_guardrail"] = True
         return state
@@ -1140,7 +1155,15 @@ class AuraChatGraph:
         )
 
         if access_result.decision == AccessDecision.DENIED:
-            state["result"] = {"answer": GENERIC_DENIAL, "sources": [], "is_personal_data": False, "is_guardrail": True}
+            state["result"] = {
+                "answer": GENERIC_DENIAL,
+                "sources": [],
+                "is_personal_data": False,
+                "is_guardrail": True,
+                "status": "failed",
+                "failure_stage": "access_denied",
+                "failure_reason": access_result.reason or "ACCESS_CONTROL_DENIED",
+            }
             state["is_guardrail"] = True
             return state
 
@@ -1167,7 +1190,12 @@ class AuraChatGraph:
                 import traceback; traceback.print_exc()
                 state["result"] = {
                     "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
-                    "sources": [], "is_personal_data": False, "is_guardrail": True,
+                    "sources": [],
+                    "is_personal_data": False,
+                    "is_guardrail": True,
+                    "status": "failed",
+                    "failure_stage": "generation_error",
+                    "failure_reason": "ERP_FETCH_FAILED",
                 }
                 state["is_guardrail"] = True
                 return state
@@ -1194,7 +1222,12 @@ class AuraChatGraph:
                 import traceback; traceback.print_exc()
                 state["result"] = {
                     "answer": "I'm having trouble reaching the student records system right now. Please try again in a moment.",
-                    "sources": [], "is_personal_data": False, "is_guardrail": True,
+                    "sources": [],
+                    "is_personal_data": False,
+                    "is_guardrail": True,
+                    "status": "failed",
+                    "failure_stage": "generation_error",
+                    "failure_reason": "ERP_FETCH_FAILED",
                 }
                 state["is_guardrail"] = True
                 return state
@@ -1266,14 +1299,22 @@ class AuraChatGraph:
 
         if not state["chunks"] and query_type == "PUBLIC":
             reason = retrieval_result.get("abstention_reason")
+            is_scope = (reason == "academic_scope_unavailable")
             answer = (
                 ACADEMIC_SCOPE_UNAVAILABLE_RESPONSE
-                if reason == "academic_scope_unavailable"
+                if is_scope
                 else RETRIEVAL_FAILURE_RESPONSE
             )
             state["result"] = AuraChatGraph._with_prefix(
                 state,
-                {"answer": answer, "sources": [], "is_personal_data": False},
+                {
+                    "answer": answer,
+                    "sources": [],
+                    "is_personal_data": False,
+                    "status": "failed",
+                    "failure_stage": "academic_scope_missing" if is_scope else "retrieval_empty",
+                    "failure_reason": "ACADEMIC_SCOPE_UNAVAILABLE" if is_scope else "RETRIEVAL_EMPTY",
+                }
             )
         return state
 
@@ -1360,16 +1401,24 @@ class AuraChatGraph:
             answer,
         )
 
-        # Extract citations from `answer` (above) BEFORE stripping the
-        # "[Sources: N, M]" marker — the marker is internal bookkeeping,
-        # never meant to reach the user as literal text. Sources render
-        # as citation pills from the `sources` field, not raw brackets.
+        cleaned_answer = strip_sources_marker(answer)
+        is_soft_fail = (
+            "Sorry, I encountered an error while generating a response" in cleaned_answer
+            or "I'm having trouble reaching" in cleaned_answer
+        )
         state["result"] = AuraChatGraph._with_prefix(
             state,
             {
-                "answer": strip_sources_marker(answer),
+                # Extract citations from nswer (above) BEFORE stripping the
+                # "[Sources: N, M]" marker - the marker is internal bookkeeping,
+                # never meant to reach the user as literal text. Sources render
+                # as citation pills from the sources field, not raw brackets.
+                "answer": cleaned_answer,
                 "sources": cited_sources,
                 "is_personal_data": is_personal,
+                "status": "failed" if is_soft_fail else "passed",
+                "failure_stage": "generation_error" if is_soft_fail else "none",
+                "failure_reason": "SOFT_FAILURE_ANSWER" if is_soft_fail else None,
             },
         )
         return state
@@ -1474,19 +1523,37 @@ class AuraChatGraph:
                     detail="graph reached END without setting result",
                     visited=",".join(sorted(k for k in final_state if final_state.get(k) is not None)),
                 )
-                return {"answer": "Sorry, I encountered an error while generating a response. Please try again.", "sources": [], "is_personal_data": False}
+                return {
+                    "answer": "Sorry, I encountered an error while generating a response. Please try again.",
+                    "sources": [],
+                    "is_personal_data": False,
+                    "status": "failed",
+                    "failure_stage": "generation_error",
+                    "failure_reason": "GRAPH_REACHED_END_WITHOUT_RESULT",
+                }
             return result
 
         except Exception as e:
             err_str = str(e).lower()
             if any(kw in err_str for kw in ["timeout", "timed out", "rate limit", "429", "connection"]):
                 msg = "I'm experiencing a temporary connection issue. Please try again in a few seconds."
+                stage = "vllm_timeout"
+                reason = "VLLM_TIMEOUT"
             else:
                 msg = "Sorry, I encountered an error while generating a response. Please try again."
+                stage = "generation_error"
+                reason = type(e).__name__
             log_soft_failure(
                 "AURA-GRAPH-002",
                 "graph.invoke",
                 exc=e,
                 user_facing="connection" if msg.startswith("I'm experiencing") else "soft_error",
             )
-            return {"answer": msg, "sources": [], "is_personal_data": False}
+            return {
+                "answer": msg,
+                "sources": [],
+                "is_personal_data": False,
+                "status": "failed",
+                "failure_stage": stage,
+                "failure_reason": reason,
+            }

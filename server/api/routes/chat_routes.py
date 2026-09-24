@@ -26,6 +26,7 @@ from pipeline.memory.user_memory import get_user_memory_store
 from pipeline.memory.response_cache import get_response_cache
 from pipeline.rate_limiter import QuotaExceeded, enforce_quota, _day_start
 from pipeline.token_budget import is_context_length_error
+from pipeline.query_logger import record_query_trace_async, classify_query_outcome
 from access_control import resolve_effective_role
 
 router = APIRouter(tags=["chat"])
@@ -208,6 +209,7 @@ async def chat(
     body: ChatRequest,
     identity: Identity = Depends(require_identity),
 ):
+    t0 = time.time()
     history, display_profile, request_context, remaining = _resolve_request(body, identity, req)
 
     # Cache lookup: guest public standalone queries only
@@ -217,6 +219,20 @@ async def chat(
         cached = cache.get(body.question)
         if cached:
             cached["quota_remaining"] = remaining
+            record_query_trace_async(
+                query_text=body.question,
+                user_role=identity.role,
+                erp_id=identity.erp_id,
+                user_dept=getattr(identity, "dept", None),
+                query_type="PUBLIC",
+                status="passed",
+                failure_stage="none",
+                failure_reason=None,
+                sources_fetched=cached.get("sources") or [],
+                answer_preview=cached.get("answer"),
+                latency_total_ms=int((time.time() - t0) * 1000),
+                is_personal_data=False,
+            )
             return cached
 
     try:
@@ -224,17 +240,47 @@ async def chat(
             result = await run_in_threadpool(
                 _ask_with_memory, body, identity, history, display_profile, request_context
             )
-    except RAGPipelineError as exc:
-        return _pipeline_error_response(exc)
-    except Exception as exc:
-        # An SDK BadRequestError reaches here unwrapped whenever the 400 is
-        # raised outside inference_router's rotation wrapper; everything else
-        # keeps its existing 500 so genuine bugs stay loud.
+    except (RAGPipelineError, Exception) as exc:
+        status, stage, reason = classify_query_outcome(exc=exc, user_role=identity.role)
+        total_ms = int((time.time() - t0) * 1000)
+        record_query_trace_async(
+            query_text=body.question,
+            user_role=identity.role,
+            erp_id=identity.erp_id,
+            user_dept=getattr(identity, "dept", None),
+            query_type="PUBLIC",
+            status=status,
+            failure_stage=stage,
+            failure_reason=reason,
+            sources_fetched=[],
+            answer_preview=str(exc),
+            latency_total_ms=total_ms,
+            is_personal_data=False,
+        )
+        if isinstance(exc, RAGPipelineError):
+            return _pipeline_error_response(exc)
         if not is_context_length_error(exc):
             raise
         return _pipeline_error_response(exc)
+
     if isinstance(result, dict):
         result["quota_remaining"] = remaining
+        status, stage, reason = classify_query_outcome(result=result, user_role=identity.role)
+        total_ms = int((time.time() - t0) * 1000)
+        record_query_trace_async(
+            query_text=body.question,
+            user_role=identity.role,
+            erp_id=identity.erp_id,
+            user_dept=getattr(identity, "dept", None),
+            query_type=result.get("query_type") or "PUBLIC",
+            status=status,
+            failure_stage=stage,
+            failure_reason=reason,
+            sources_fetched=result.get("sources") or [],
+            answer_preview=result.get("answer"),
+            latency_total_ms=total_ms,
+            is_personal_data=bool(result.get("is_personal_data")),
+        )
         # Cache write: guest public standalone queries only (exclude error/rejection responses)
         if is_guest_public and "answer" in result and "error" not in result:
             ans = result["answer"]
@@ -316,6 +362,7 @@ async def chat_stream(
     body: ChatRequest,
     identity: Identity = Depends(require_identity),
 ):
+    t0 = time.time()
     # Emits the SSE event shapes the Next.js client already parses
     # (text-delta / citations / personal-data-flag / [DONE]), so the frontend
     # proxy route can pipe the body through untouched. Quota and auth errors
@@ -329,6 +376,20 @@ async def chat_stream(
         cache = get_response_cache()
         cached = cache.get(body.question)
         if cached:
+            record_query_trace_async(
+                query_text=body.question,
+                user_role=identity.role,
+                erp_id=identity.erp_id,
+                user_dept=getattr(identity, "dept", None),
+                query_type="PUBLIC",
+                status="passed",
+                failure_stage="none",
+                failure_reason=None,
+                sources_fetched=cached.get("sources") or [],
+                answer_preview=cached.get("answer"),
+                latency_total_ms=int((time.time() - t0) * 1000),
+                is_personal_data=False,
+            )
             async def cached_stream():
                 yield _sse({"type": "quota", "remaining": remaining})
                 yield _sse({"type": "text-delta", "delta": cached["answer"]})
@@ -445,6 +506,25 @@ async def chat_stream(
                             else "Sorry, I encountered an error while processing your request. Please try again in a few moments."
                         )
 
+                        # Record query trace telemetry for streaming error
+                        status, stage, reason = classify_query_outcome(exc=exc, user_role=identity.role)
+                        if reason is None:
+                            reason = err_str[:500] if err_str else error_code
+                        record_query_trace_async(
+                            query_text=body.question,
+                            user_role=identity.role,
+                            erp_id=identity.erp_id,
+                            user_dept=getattr(identity, "dept", None),
+                            query_type="PUBLIC",
+                            status=status,
+                            failure_stage=stage,
+                            failure_reason=reason,
+                            sources_fetched=[],
+                            answer_preview=user_msg,
+                            latency_total_ms=int((time.time() - t0) * 1000),
+                            is_personal_data=False,
+                        )
+
                         yield _sse({
                             "type": "error",
                             "code": error_code,
@@ -479,6 +559,8 @@ async def chat_stream(
                                     "path": source.get("path"),
                                     "startLine": source.get("start_line"),
                                     "endLine": source.get("end_line"),
+                                    "start_line": source.get("start_line"),
+                                    "end_line": source.get("end_line"),
                                     "visibility": source.get("visibility"),
                                     "authorization": source.get("authorization"),
                                 }
@@ -514,6 +596,23 @@ async def chat_stream(
                                 "answer": answer,
                                 "sources": citations
                             })
+
+                    # Record query trace telemetry for streaming success/early-exit
+                    status, stage, reason = classify_query_outcome(result=result, user_role=identity.role)
+                    record_query_trace_async(
+                        query_text=body.question,
+                        user_role=identity.role,
+                        erp_id=identity.erp_id,
+                        user_dept=getattr(identity, "dept", None),
+                        query_type=result.get("query_type") or "PUBLIC",
+                        status=status,
+                        failure_stage=stage,
+                        failure_reason=reason,
+                        sources_fetched=result.get("sources") or citations or [],
+                        answer_preview=answer,
+                        latency_total_ms=int((time.time() - t0) * 1000),
+                        is_personal_data=bool(result.get("is_personal_data")),
+                    )
 
                     yield "data: [DONE]\n\n"
                     break

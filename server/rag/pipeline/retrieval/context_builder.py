@@ -234,19 +234,84 @@ class ContextBuilder:
             if not chunk_text.strip():
                 continue
 
+            title_str = metadata.get("title", "")
+            url = metadata.get("url")
+            relative_path = metadata.get("relative_path")
+            start_line_val = metadata.get("start_line", "")
+            end_line_val = metadata.get("end_line", "")
+
+            if (not start_line_val or start_line_val == end_line_val) and relative_path:
+                try:
+                    import pathlib
+                    import re
+                    repo_root = pathlib.Path(__file__).resolve().parents[4]
+                    norm_path = relative_path.replace("\\", "/").lstrip("/")
+                    if norm_path.startswith("data/"):
+                        full_path = repo_root / norm_path
+                    else:
+                        full_path = repo_root / "data" / norm_path
+
+                    if full_path.exists():
+                        raw_text = metadata.get("text", "")
+                        if raw_text:
+                            with open(full_path, "r", encoding="utf-8") as f:
+                                file_lines = f.read().splitlines()
+                            matching = []
+                            for raw_line in raw_text.splitlines():
+                                if raw_line.strip().startswith(("H1:", "H2:", "H3:", "H4:", "Faculty Name:", "Document Title:", "Course Name:", "Course Code:", "Semester:", "Credits:")):
+                                    continue
+                                clean = re.sub(r"^:\s*", "", raw_line)
+                                clean = re.sub(r"[*_`#]", "", clean).strip()
+                                if len(clean) >= 12:
+                                    probe = clean[:30]
+                                    for l_idx, fl in enumerate(file_lines):
+                                        if probe in fl or (len(fl.strip()) >= 12 and fl.strip() in clean):
+                                            matching.append(l_idx)
+                            if matching:
+                                s_line = min(matching) + 1
+                                e_line = max(matching) + 1
+                                if s_line > 1 and re.match(r"^#{1,6}\s", file_lines[s_line - 2]):
+                                    s_line = s_line - 1
+                                elif s_line > 2 and re.match(r"^#{1,6}\s", file_lines[s_line - 3]) and not file_lines[s_line - 2].strip():
+                                    s_line = s_line - 2
+                                start_line_val = s_line
+                                end_line_val = e_line
+                except Exception as e:
+                    logger.debug(f"Failed to dynamically compute lines for {relative_path}: {e}")
+            metadata["start_line"] = start_line_val
+            metadata["end_line"] = end_line_val
+
             document = self._render_doc(doc_id, metadata, chunk_text, chunk_questions)
             context_tokens_used += self._estimate_tokens(document)
             documents.append(document)
             included.append(chunk_index)
 
-            url = metadata.get("url")
-            relative_path = metadata.get("relative_path")
-            title_str = metadata.get("title", "")
-            start_line_val = metadata.get("start_line", "")
-            end_line_val = metadata.get("end_line", "")
 
-            # Dedup key: public url, else file + line range, else title + doc
-            # position, so every distinct chunk location gets its own card.
+            # Fix CB6 (Phase C): previously a chunk was only ever cited if it
+            # had a public "url" - internal-only markdown (no website URL)
+            # silently produced no citation card at all. Dedup key now falls
+            # back to relative_path, then title, so every retrieved chunk is
+            # citeable. relative_path/start_line/end_line let the frontend
+            # side-drawer open the exact source file and highlight the lines
+            # this chunk was drawn from.
+            #
+            # Fix P1 (rag_debug_report Root Cause C): The old dedup_key fell
+            # back to bare title_str. Two chunks from entirely different
+            # sections that share the same section heading (e.g. both titled
+            # "Programme Overview") would dedup to ONE citation card even
+            # though the answer drew from BOTH. The user saw one source but
+            # the answer referenced content from two distinct chunks.
+            # Fix: include chunk-position coordinates in the fallback so each
+            # distinct chunk location always gets its own citation card.
+            if url:
+                dedup_key = url
+            elif relative_path:
+                dedup_key = f"{relative_path}:{start_line_val}-{end_line_val}"
+            elif title_str:
+                dedup_key = f"{title_str}:idx{doc_id}"
+            else:
+                dedup_key = None
+
             if url:
                 dedup_key = url
             elif relative_path:

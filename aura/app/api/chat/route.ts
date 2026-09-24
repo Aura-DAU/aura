@@ -64,6 +64,8 @@ function normaliseSource(
         path?: string
         start_line?: number | string | null
         end_line?: number | string | null
+        startLine?: number | string | null
+        endLine?: number | string | null
         visibility?: string
         authorization?: string[]
       },
@@ -84,8 +86,8 @@ function normaliseSource(
         file,
         title: s.title,
         path: s.path || undefined,
-        startLine: toLineNumber(s.start_line),
-        endLine: toLineNumber(s.end_line),
+        startLine: toLineNumber(s.startLine ?? s.start_line),
+        endLine: toLineNumber(s.endLine ?? s.end_line),
         visibility: s.visibility,
         authorization: s.authorization,
       }
