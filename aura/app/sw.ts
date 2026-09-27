@@ -18,7 +18,6 @@ const SENSITIVE_API_PREFIXES = [
   "/api/auth",
   "/api/chat",
   "/api/timetable",
-  "/api/ecampus",
   "/api/admin",
   "/api/documents",
   "/api/speech",

@@ -6,9 +6,13 @@ import csv
 import json
 import argparse
 import requests
+import os
 import time
 import sys
 from typing import List, Dict, Any
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from answer_quality import consistency, score_answer  # noqa: E402
 
 
 def clean_url(u: str) -> str:
@@ -90,6 +94,9 @@ def run_evaluation(
     k: int = 3,
     min_accuracy: float = 0.0,
     min_precision_at_k: float = 0.0,
+    min_answer_accuracy: float = 0.0,
+    repeat: int = 1,
+    auth_token: str = "",
 ) -> bool:
     # Run the full evaluation and write results to output_path.
     # Parameters
@@ -120,14 +127,21 @@ def run_evaluation(
         print(f"[{i}/{total}] Testing: {question_text[:50]}...")
 
         payload = {"question": question_text}
+        headers = {"Authorization": f"Bearer {auth_token}"} if auth_token else {}
 
         try:
-            response = requests.post(api_url, json=payload, timeout=400)
+            response = requests.post(api_url, json=payload, headers=headers, timeout=400)
             latency = response.elapsed.total_seconds()
 
             if response.status_code == 200:
                 data = response.json()
                 answer = data.get("answer", "")
+                quality = score_answer(expected_answer, answer)
+                repeats = [answer]
+                for _ in range(max(repeat, 1) - 1):
+                    again = requests.post(api_url, json=payload, headers=headers, timeout=400)
+                    if again.status_code == 200:
+                        repeats.append(again.json().get("answer", ""))
                 raw_sources = data.get("sources", [])  # kept for precision@k
 
                 # Normalise sources for display / source-match
@@ -177,6 +191,11 @@ def run_evaluation(
                     "precision_at_k": p_at_k,
                     "latency_sec": latency,
                     "status": status,
+                    "answer_correct": quality["correct"],
+                    "numbers_ok": quality["numbers_ok"],
+                    "answer_f1": quality["f1"],
+                    "abstained": quality["abstained"],
+                    "consistency": round(consistency(repeats), 3),
                     "error": None,
                 })
             else:
@@ -212,7 +231,7 @@ def run_evaluation(
                 "error": str(e),
             })
 
-        # Space out requests to stay under Groq API TPM rate limits
+        # Space out requests so the eval does not saturate the inference pool.
         time.sleep(1.0)
 
     total_time = time.time() - start_time
@@ -220,6 +239,12 @@ def run_evaluation(
     avg_latency = sum(r["latency_sec"] for r in results) / len(results) if results else 0.0
     mean_p_at_k = compute_precision_at_k(results, k)
     cat_breakdown = per_category_breakdown(results)
+    scored = [r for r in results if r.get("answer_correct") is not None]
+    answer_accuracy = (
+        100 * sum(1 for r in scored if r["answer_correct"]) / len(scored) if scored else 0.0
+    )
+    consistencies = [r["consistency"] for r in results if r.get("consistency") is not None]
+    mean_consistency = sum(consistencies) / len(consistencies) if consistencies else 1.0
 
     summary = {
         "metrics": {
@@ -228,12 +253,16 @@ def run_evaluation(
             "failed": failed,
             "accuracy_percent": round(accuracy, 2),
             "precision_at_k": round(mean_p_at_k, 4),
+            "answer_accuracy_percent": round(answer_accuracy, 2),
+            "answers_scored": len(scored),
+            "mean_consistency": round(mean_consistency, 3),
             "k": k,
             "total_time_sec": round(total_time, 2),
             "avg_latency_sec": round(avg_latency, 3),
             "regression_gate": {
                 "min_accuracy": min_accuracy,
                 "min_precision_at_k": min_precision_at_k,
+                "min_answer_accuracy": min_answer_accuracy,
             },
         },
         "per_category": cat_breakdown,
@@ -251,6 +280,8 @@ def run_evaluation(
     print(f"Failed: {failed}")
     print(f"Accuracy: {accuracy:.2f}%")
     print(f"Precision@{k}: {mean_p_at_k:.4f}")
+    print(f"Answer accuracy: {answer_accuracy:.2f}% of {len(scored)} scored answers")
+    print(f"Mean consistency over {max(repeat, 1)} run(s): {mean_consistency:.3f}")
     print(f"Avg Latency: {avg_latency:.3f} seconds")
     print(f"Results saved to: {output_path}")
     print("=" * 50)
@@ -270,6 +301,13 @@ def run_evaluation(
         print(
             f"\n[REGRESSION GATE FAILED] precision@{k} {mean_p_at_k:.4f} "
             f"< required {min_precision_at_k:.4f}"
+        )
+        gate_passed = False
+
+    if min_answer_accuracy > 0.0 and answer_accuracy < min_answer_accuracy:
+        print(
+            f"\n[REGRESSION GATE FAILED] answer accuracy {answer_accuracy:.2f}% "
+            f"< required {min_answer_accuracy:.2f}%"
         )
         gate_passed = False
 
@@ -306,6 +344,19 @@ if __name__ == "__main__":
         help="Regression gate: minimum required precision@k 0-1 (0=disabled)",
     )
 
+    parser.add_argument(
+        "--min-answer-accuracy", type=float, default=0.0,
+        help="Regression gate: minimum answer accuracy %% over rows with an expected answer (0=disabled)",
+    )
+    parser.add_argument(
+        "--repeat", type=int, default=1,
+        help="Ask each question N times and report answer consistency",
+    )
+    parser.add_argument(
+        "--auth-token", default=os.getenv("AURA_EVAL_TOKEN", ""),
+        help="Bearer token for the chat API (default: $AURA_EVAL_TOKEN)",
+    )
+
     args = parser.parse_args()
     gate_ok = run_evaluation(
         api_url=args.api_url,
@@ -314,5 +365,8 @@ if __name__ == "__main__":
         k=args.k,
         min_accuracy=args.min_accuracy,
         min_precision_at_k=args.min_precision_at_k,
+        min_answer_accuracy=args.min_answer_accuracy,
+        repeat=args.repeat,
+        auth_token=args.auth_token,
     )
     sys.exit(0 if gate_ok else 1)

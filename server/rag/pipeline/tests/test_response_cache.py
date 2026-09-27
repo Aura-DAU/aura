@@ -31,7 +31,15 @@ def test_response_cache_normalizes_and_hashes_keys():
         assert k1 == k2
         
         assert k1.startswith("aura:public-cache:")
-        assert len(k1) == len("aura:public-cache:") + 64
+        assert len(k1) == len(cache._prefix) + 64
+
+
+def test_response_cache_key_changes_with_corpus_version(monkeypatch):
+    monkeypatch.setenv("AURA_CORPUS_VERSION", "1")
+    old = ResponseCache()._key("hostel rules")
+    monkeypatch.setenv("AURA_CORPUS_VERSION", "2")
+    new = ResponseCache()._key("hostel rules")
+    assert old != new
 
 def test_response_cache_get_hit_and_miss():
     client = MagicMock()
@@ -56,7 +64,7 @@ def test_response_cache_set():
         cache.redis_url = "redis://localhost:6379/0"
         cache._r = client
         
-        payload = {"answer": "A2", "sources": []}
+        payload = {"answer": "A2", "sources": [{"title": "Fees"}]}
         cache.set("test query", payload)
         client.set.assert_called_once()
         args, kwargs = client.set.call_args
@@ -79,3 +87,12 @@ def test_response_cache_fails_gracefully_when_redis_is_down():
             cache.set("test query", {"answer": "A"})
         except Exception:
             pytest.fail("set() raised an error when Redis was down")
+
+
+def test_response_cache_skips_uncited_answers():
+    client = MagicMock()
+    with patch("redis.Redis.from_url", return_value=client):
+        cache = ResponseCache()
+        cache._r = client
+        cache.set("test query", {"answer": "I could not find that.", "sources": []})
+        client.set.assert_not_called()

@@ -3,9 +3,8 @@ Covers the in-chat "connect & authenticate" prompt wiring (the GPT/Claude
 connector pattern) for Google Calendar:
 
   1. the narrow `personal_actions` tool scope exposes ONLY the student's own
-     timetable + calendar MCP tools -- never the ecampus ERP read tools, so a
-     calendar/schedule request routed here can't bypass the curated ERP path;
-  2. when a calendar tool reports `calendar_not_connected`, the orchestrator
+     timetable + calendar MCP tools, and nothing else;
+  2. when a calendar tool reports `calendar_not_connected`, the agent
      surfaces a structured `action_required: connect_required` (not just prose);
   3. a normal tool run and a no-tool run set `used_tools` correctly and carry
      no connect action.
@@ -15,10 +14,10 @@ The LLM is stubbed; tool dispatch runs through the real in-process MCP server.
 
 import types
 
-from pipeline.ecampus import orchestrator as orch_mod
-from pipeline.ecampus.orchestrator import (
-    EcampusOrchestrator,
-    _ECAMPUS_TOOL_REGISTRY,
+from pipeline.timetable.agent import (
+    TimetableAgent,
+    TIMETABLE_TOOL_REGISTRY,
+    calendar_mcp_registry,
     _required_calendar_tool,
     _is_calendar_unsync_intent,
     _is_timetable_edit_intent,
@@ -42,7 +41,7 @@ def _msg(content=None, tool_calls=None):
 
 
 def _orch_with_llm(monkeypatch, first_message, follow_up="Here's what I did."):
-    orch = EcampusOrchestrator()
+    orch = TimetableAgent()
     calls = {"n": 0}
 
     def fake_call_llm(messages, tools=None, tool_choice=None):
@@ -54,12 +53,12 @@ def _orch_with_llm(monkeypatch, first_message, follow_up="Here's what I did."):
 
 
 def test_personal_actions_scope_excludes_erp_read_tools():
-    orch = EcampusOrchestrator()
+    orch = TimetableAgent()
     schemas = orch._tool_schemas("student", tool_scope="personal_actions")
     names = {s["function"]["name"] for s in schemas}
     assert "sync_timetable_to_calendar" in names
-    # The ecampus ERP read tools must NOT be reachable on this scope.
-    assert names.isdisjoint(set(_ECAMPUS_TOOL_REGISTRY.keys()))
+    # Only the student's own timetable and calendar tools are reachable.
+    assert names <= set(TIMETABLE_TOOL_REGISTRY) | set(calendar_mcp_registry())
 
 
 def _no_llm_orch(monkeypatch):
@@ -67,7 +66,7 @@ def _no_llm_orch(monkeypatch):
     path runs the decided tool itself, so a supported calendar request must
     never reach the model -- that is exactly what keeps it working when a
     self-hosted model won't emit a forced tool call."""
-    orch = EcampusOrchestrator()
+    orch = TimetableAgent()
 
     def _boom(*_a, **_k):
         raise AssertionError("deterministic calendar path must not call the LLM")

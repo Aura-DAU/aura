@@ -45,6 +45,24 @@ An evaluation row is graded as a **PASS** if and only if both of the following c
 1. **Source Grounding (Recall):** The returned list of `sources` contains the `Expected Source` URL or file path specified in the CSV.
 2. **Safe Answer Generation:** The answer is non-empty, coherent, and adheres to the citation rules (free from hallucinated links).
 
+Source matching does not show whether the answer is right, so `run_eval.py` also scores the answer itself (`answer_quality.py`):
+
+| Metric | How it is computed |
+|---|---|
+| `answer_correct` | Every number in `Expected Answer` appears in the answer, the answer is not an abstention, and token F1 ≥ 0.3 |
+| Abstention | Rows whose `Expected Answer` is `NOT_FOUND` pass only if AURA says it could not find the information (`abstention_dataset.csv`) |
+| `mean_consistency` | With `--repeat N`, mean pairwise word overlap of the N answers to the same question (1.0 = identical) |
+
+Run against a signed-in API (the chat routes require a token) and gate on answer accuracy:
+
+```bash
+AURA_EVAL_TOKEN=<internal JWT> python3 server/rag/eval/run_eval.py \
+  --csv server/rag/eval/representative_dataset.csv --repeat 3 --min-answer-accuracy 80
+python3 server/rag/eval/run_eval.py --csv server/rag/eval/abstention_dataset.csv
+```
+
+Rows need a verified `Expected Answer` to be scored; rows without one only count toward source matching.
+
 ---
 
 ## ❌ Failure Classification Guidelines

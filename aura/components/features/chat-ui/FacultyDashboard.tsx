@@ -57,7 +57,6 @@ export function FacultyDashboard({
           </div>
           <p className="mt-2 text-[10px] leading-relaxed text-neutral-600">
             AURA derives faculty schedule from linked student timetable data.
-            Coverage improves as more students connect eCampus.
           </p>
         </div>
 

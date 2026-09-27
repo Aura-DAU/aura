@@ -1,6 +1,14 @@
+import logging
 import os
 from dotenv import load_dotenv
 from pipeline.inference_router import InferenceRouter
+
+logger = logging.getLogger(__name__)
+
+_ASSISTANT_TURN_CHARS = 800
+# Room for several questions; 120 tokens truncated multi-question rewrites.
+_REWRITE_MAX_TOKENS = 300
+
 
 class QueryRewriter:
 
@@ -8,7 +16,7 @@ class QueryRewriter:
         load_dotenv()
         self.model = os.getenv(
             "VLLM_MODEL",
-            os.getenv("GROQ_MODEL", "Qwen/Qwen3-32B-AWQ")
+            "Qwen/Qwen3-32B-AWQ"
         )
 
     def rewrite(
@@ -21,76 +29,50 @@ class QueryRewriter:
         if not history:
             return query
 
-        history_text = ""
+        history_lines = []
 
-        # Fix #10: aligned to 6 turns (was 8) so the rewriter uses the same
-        # history window as the answer generator, preventing context mismatch.
+        # Same 6-turn window as the answer generator. Long assistant answers
+        # are cut: only their topic is needed to resolve a reference, and a
+        # full (possibly wrong) answer invites the rewriter to copy facts.
         for turn in history[-6:]:
-
-            history_text += (
-                f"{turn['role']}: "
-                f"{turn['content']}\n"
-            )
+            content = str(turn.get("content") or "")
+            if turn.get("role") == "assistant" and len(content) > _ASSISTANT_TURN_CHARS:
+                content = content[:_ASSISTANT_TURN_CHARS] + " ..."
+            history_lines.append(f"{turn.get('role', 'user')}: {content}")
+        history_text = "\n".join(history_lines)
 
         scope_hint = ""
         if academic_scope is not None:
             scope_hint = (
-                "Verified student context (use only to resolve references such as 'my curriculum'; "
-                "do not add new facts): "
-                f"programme={academic_scope.programme_id}, admission_year={academic_scope.admission_year}, "
-                f"semester={academic_scope.current_semester}.\n"
+                "Verified student context (use only to resolve references such as "
+                "'my curriculum'; do not add it otherwise): "
+                f"programme={academic_scope.programme_id}, "
+                f"admission_year={academic_scope.admission_year}, "
+                f"semester={academic_scope.current_semester}.\n\n"
             )
 
         prompt = f"""
 You are the query rewriting component for AURA, the AI assistant for Dhirubhai Ambani University (DAU).
 
-Your task is to rewrite the latest user question so it is fully self-contained.
-
-Use the conversation history to resolve references such as:
-- he
-- she
-- they
-- him
-- her
-- them
-- it
-- its
-- this faculty member
-- that professor
-- this program
-- that course
-- this event
-- the first one
-- the second one
-- the latter
-- the former
-- the same one
-- the same
-- that one
+Rewrite the latest user question so it is fully self-contained.
 
 Rules
 
-- Preserve the original intent exactly.
-- Resolve references using only the provided conversation history.
-- Do not add, remove, or infer information.
+- Resolve pronouns and references ("he", "it", "that program", "the second one",
+  "what about M.Tech?") using only the conversation history.
+- If the latest question starts a new topic, return it unchanged. Do not carry
+  programmes, people or years from earlier turns into an unrelated question.
+- Preserve the original intent exactly. Do not add, remove, or infer facts.
 - Do not answer the question.
-- Do not rewrite unnecessarily.
-- If the latest question is already self-contained, return it unchanged.
 
-Output Requirements
+Output only the rewritten question, with no quotes, explanations or extra text.
 
-- Return only the rewritten question.
-- Do not include quotation marks.
-- Do not include explanations.
-- Do not include any additional text.
-
-Conversation History:
+{scope_hint}Conversation History:
 
 {history_text}
 
 Latest Question:
 
-{scope_hint}
 {query}
 """
 
@@ -98,6 +80,7 @@ Latest Question:
             return client.chat.completions.create(
                 model=self.model,
                 temperature=0,
+                max_tokens=_REWRITE_MAX_TOKENS,
                 messages=[
                     {
                         "role": "user",
@@ -107,16 +90,18 @@ Latest Question:
                 extra_body=InferenceRouter.no_think_extra_body(),
             )
 
-        response = InferenceRouter.call_with_rotation(_execute_rewrite, max_retries=5)
+        try:
+            response = InferenceRouter.call_with_rotation(_execute_rewrite, max_retries=3)
+            rewritten = (response.choices[0].message.content or "").strip().strip('"')
+        except Exception as exc:
+            # A rewriter outage must not fail the request; the original
+            # question still retrieves reasonably for most follow-ups.
+            logger.warning("query rewrite failed; using original question: %s", exc)
+            return query
 
-        # Fix QR1: if the LLM returns an empty string (hallucination or API
-        # edge case), fall back to the original query rather than passing ""
-        # to the retrieval pipeline (which would destroy BM25 term matching).
-        rewritten = (
-            response
-            .choices[0]
-            .message
-            .content
-            .strip()
-        )
-        return rewritten if rewritten else query
+        # Keep every line: a follow-up holding several questions is rewritten
+        # as several lines, and taking only the first silently dropped the rest.
+        rewritten = " ".join(
+            line.strip() for line in rewritten.splitlines() if line.strip()
+        )[:1200]
+        return rewritten or query

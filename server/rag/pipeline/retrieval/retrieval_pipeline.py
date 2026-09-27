@@ -4,9 +4,11 @@ from pipeline.retrieval.reranker import Reranker
 from pipeline.retrieval.context_builder import ContextBuilder
 from pipeline.retrieval.entity_retriever import EntityRetriever
 from pipeline.retrieval.rbac import get_allowed_roles
+from institution_resolver import get_institution_resolver
 
 import os
 import re
+import math
 import logging
 import datetime
 
@@ -40,6 +42,30 @@ BRANCH_PROGRAM_NAMES = {
 # the top ~18. See _trim_stage1_pool for how entity-matched chunks are kept.
 STAGE1_RERANK_POOL_CAP = max(1, int(os.getenv("STAGE1_RERANK_POOL_CAP", "30")))
 
+# Minimum cross-encoder relevance (sigmoid of the bge-reranker logit) for a
+# chunk to reach the answer model. When nothing clears it, AURA says it could
+# not find the information instead of answering from unrelated text.
+MIN_RELEVANCE_SCORE = float(os.getenv("AURA_MIN_RELEVANCE_SCORE", "0.02"))
+
+# Relative cut: after the absolute floor, a chunk must also reach this fraction
+# of the BEST chunk's relevance probability. A lone strong match (p=0.95) then
+# no longer drags four barely-related chunks (p=0.03) into the prompt, which is
+# what caused wrong-document citations and blended answers. Complete-list
+# queries legitimately need many moderately-scored chunks, so they use a much
+# looser ratio. Set to 0 to restore the old absolute-only behaviour.
+RELATIVE_RELEVANCE_RATIO = float(os.getenv("AURA_RELATIVE_RELEVANCE_RATIO", "0.08"))
+LIST_RELATIVE_RELEVANCE_RATIO = float(os.getenv("AURA_LIST_RELATIVE_RELEVANCE_RATIO", "0.03"))
+
+# Chunks handed to the answer model for an ordinary single question.
+FINAL_TOP_K = int(os.getenv("AURA_FINAL_TOP_K", "5"))
+# Per-question chunk cap when one message carries several questions. The token
+# budget is shared, so this stays small; complete-list questions are exempt.
+MULTI_PER_QUESTION_TOP_K = int(os.getenv("AURA_MULTI_PER_QUESTION_TOP_K", "4"))
+
+# Retrieval intents for which the student's own programme is a useful
+# retrieval signal.
+PROGRAMME_INTENTS = frozenset({"program_curriculum", "program_overview", "program_eligibility"})
+
 # Speculative-retrieval gate: the plan fields that decide use_speculative
 # aren't known until the planner LLM returns, so this is a conservative
 # upper-bound heuristic. Long or comparison/enumeration queries almost always
@@ -69,7 +95,21 @@ class RetrievalPipeline:
         self.rewriter = QueryRewriter()
 
         from concurrent.futures import ThreadPoolExecutor
-        self.executor = ThreadPoolExecutor(max_workers=2)
+        # planner + speculative retrieval per question. Sized for several
+        # concurrent questions; the tasks are I/O bound (HTTP to vLLM/Qdrant).
+        #
+        # This pool and _multi_executor() (below) MUST stay separate. Each
+        # worker thread of _multi_executor() runs one question's whole
+        # _search_context() end to end, which itself submits to THIS pool
+        # and blocks on the result (see the planner/speculative-retrieval
+        # calls further down). If both used the same bounded pool, enough
+        # concurrent questions would fill it entirely with workers that are
+        # each waiting on a sub-task with no free worker left to run it —
+        # a self-deadlock. Give each its own env-tunable size instead of
+        # "simplifying" this into one shared pool.
+        self.executor = ThreadPoolExecutor(
+            max_workers=max(2, int(os.getenv("AURA_RETRIEVAL_WORKERS", "4")))
+        )
 
         # Shared: load metadata.json once for both faculty fuzzy-matching
         # and entity-based retrieval (professor's algorithm).
@@ -885,7 +925,37 @@ class RetrievalPipeline:
         academic_scope=None,
         identity=None,
         title_hint: str = None,
+        standalone: bool = False,
     ):
+        """Retrieve evidence for ONE question.
+
+        ``standalone=True`` means the caller already resolved the question
+        against the conversation (see QueryUnderstanding), so the legacy
+        pronoun-gated rewrite is skipped.
+        """
+        search = self._search_context(
+            query, history, user_role, academic_scope, identity, title_hint, standalone
+        )
+        if search.get("final") is not None:
+            return search["final"]
+        return self._assemble_context(search, academic_scope=academic_scope)
+
+    def _search_context(
+        self,
+        query,
+        history=None,
+        user_role: str = "public",
+        academic_scope=None,
+        identity=None,
+        title_hint: str = None,
+        standalone: bool = False,
+    ):
+        """Plan, retrieve and rerank for one question.
+
+        Returns ``{"final": <abstention result>}`` when retrieval cannot
+        proceed, otherwise ``{"search": {...}}`` holding the relevant, ranked
+        chunks for _select_final_chunks / _assemble_context.
+        """
         allowed_roles = get_allowed_roles(user_role)
         original_query = query
 
@@ -928,27 +998,31 @@ class RetrievalPipeline:
             and any(query_lower.startswith(p) for p in SHORT_PRONOUN_STARTERS)
         )
         is_short_followup = len(query.split()) <= SHORT_FOLLOWUP_WORD_LIMIT
-        needs_rewrite = bool(history) and (has_pronoun or is_short_fragment or is_short_followup)
+        needs_rewrite = (
+            bool(history)
+            and not standalone
+            and (has_pronoun or is_short_fragment or is_short_followup)
+        )
 
-        rewritten_query = query
         if needs_rewrite:
-            query = (
-                self.rewriter.rewrite(
-                    query,
-                    history,
-                    academic_scope=academic_scope,
-                )
+            query = self.rewriter.rewrite(
+                query,
+                history,
+                academic_scope=academic_scope,
             )
-            rewritten_query = query
+        # The clean, self-contained question the answer model sees. Everything
+        # appended below (aliases, section names, expanded terms) is for
+        # retrieval only.
+        standalone_query = query
 
-        print("\n" + "=" * 60)
-        print("===== QUERY =====")
-        print(f"Original Query: {original_query}")
-        print(f"Rewritten Query (QueryRewriter): {rewritten_query}")
-        print("=" * 60)
+        query = get_institution_resolver().resolve(query)
 
-        # Submit the planning LLM call to executor
-        future_plan = self.executor.submit(self.planner.plan, query, academic_scope, history)
+        logger.info(
+            "retrieval_query original=%r standalone=%r search=%r",
+            original_query, standalone_query, query,
+        )
+
+        future_plan = self.executor.submit(self.planner.plan, query, academic_scope)
 
         # Scope-derived programme names are soft retrieval signals. Keeping them
         # separate from planner entities lets the entity path use them without
@@ -980,7 +1054,19 @@ class RetrievalPipeline:
                 academic_scope,
             )
 
-        plan = future_plan.result()
+        try:
+            plan = future_plan.result()
+        except Exception as exc:
+            # A planner outage must degrade retrieval quality, not fail the
+            # whole request.
+            logger.error("query planner failed; using fallback plan: %s", exc)
+            plan = self.planner.fallback_plan()
+
+        plan["temporal_intent"] = bool(
+            RECENCY_INTENT_RE.search(standalone_query)
+            or plan.get("retrieval_intent") in ("policy_version", "event_version")
+            or plan.get("entities", {}).get("rule_year")
+        )
 
         entities = plan.setdefault("entities", {})
         if scope_entities and not entities.get("program_name"):
@@ -1039,9 +1125,10 @@ class RetrievalPipeline:
             and not self._has_explicit_programme_context(plan)
             and not _explicit_prog_in_query
         ):
-            return {
+            return {"final": {
                 "query": original_query,
                 "corrected_query": query,
+                "standalone_query": standalone_query,
                 "plan": plan,
                 "chunks": [],
                 "context": "<context>\n</context>",
@@ -1049,7 +1136,7 @@ class RetrievalPipeline:
                 "top_k_before_rerank": 0,
                 "top_k_after_rerank": 0,
                 "abstention_reason": "academic_scope_unavailable",
-            }
+            }}
 
         if use_speculative:
             if future_speculative is not None:
@@ -1367,31 +1454,20 @@ class RetrievalPipeline:
         # (before dedup). Collapsed into a single unconditional block so
         # entity retrieval runs exactly once for all query types.
         if self.entity_retriever:
-            soft_entities = dict(plan.get("scope_entities") or {})
-            soft_entities.update(entities)
-            entity_chunks = (
-                self.entity_retriever.retrieve_by_entities(
-                    soft_entities,
-                    allowed_roles=allowed_roles,
-                    academic_scope=academic_scope,
-                )
+            # The student's own programme is a useful signal only for
+            # programme questions; for fees, hostel or clubs it would crowd the
+            # pool with that programme's curriculum chunks.
+            soft_entities = (
+                dict(plan.get("scope_entities") or {})
+                if plan.get("retrieval_intent") in PROGRAMME_INTENTS
+                else {}
             )
-
-            print("\n" + "=" * 80)
-            print(f"ENTITY RETRIEVER RETURNED {len(entity_chunks)} CHUNKS")
-
-            for idx, chunk in enumerate(entity_chunks[:20], start=1):
-                meta = chunk.get("metadata", {})
-
-                print(f"{idx:02d}.")
-                print(f"Title      : {meta.get('title', 'N/A')}")
-                print(f"Course Code: {meta.get('course_code', 'N/A')}")
-                print(f"Program    : {meta.get('program_name', 'N/A')}")
-                print(f"H1         : {meta.get('h1', 'N/A')}")
-                print("-" * 60)
-
-            print("=" * 80)
-
+            soft_entities.update(entities)
+            entity_chunks = self.entity_retriever.retrieve_by_entities(
+                soft_entities,
+                allowed_roles=allowed_roles,
+                academic_scope=academic_scope,
+            )
             if entity_chunks:
                 logger.debug(
                     "Entity retriever added %d candidate chunks to pool.",
@@ -1412,181 +1488,88 @@ class RetrievalPipeline:
                 deduped.append(result)
                 seen.add(chunk_id)
 
-        results = self._eligible_results(deduped, academic_scope)
+        # Copies: the reranker annotates chunk dicts in place, and several
+        # questions of one message rerank concurrently.
+        results = [dict(r) for r in self._eligible_results(deduped, academic_scope)]
+        pool_size = len(results)
 
-        # Diagnostic 4: Verify whether IE402 course policy exists anywhere in retrieval pool
-        found_ie402 = []
-        for cand in results:
-            meta = cand.get("metadata", {}) if isinstance(cand, dict) else {}
-            sf = str(meta.get("source_file") or meta.get("path") or meta.get("file") or "")
-            t_val = str(meta.get("title") or "")
-            h1_val = str(meta.get("h1") or "")
-            if "IE402" in sf.upper() or "IE402" in t_val.upper() or "IE402" in h1_val.upper():
-                found_ie402.append((cand, sf, t_val, h1_val))
-
-        print("\n" + "=" * 80)
-        if found_ie402:
-            print("FOUND COURSE DOCUMENT:")
-            for cand, sf, t_val, h1_val in found_ie402:
-                meta = cand.get("metadata", {})
-                print(f"ID          : {cand.get('id')}")
-                print(f"Title       : {meta.get('title', 'N/A')}")
-                print(f"Source File : {meta.get('source_file') or meta.get('path') or meta.get('file')}")
-                print(f"H1          : {meta.get('h1', 'N/A')}")
-                print(f"Course Code : {meta.get('course_code', 'N/A')}")
-                print(f"Program     : {meta.get('program_name', 'N/A')}")
-                print(f"Chunk Index : {meta.get('chunk_index', 'N/A')}")
-                print("-" * 60)
-        else:
-            print("NO IE402 COURSE DOCUMENT FOUND IN RETRIEVAL POOL")
-        print("=" * 80 + "\n")
-
-        # Diagnostic 5: Log retrieval pool composition grouped by source file
-        counts = {}
-        for cand in results:
-            meta = cand.get("metadata", {}) if isinstance(cand, dict) else {}
-            sf = meta.get("source_file") or meta.get("path") or meta.get("file") or "Unknown"
-            sf_name = os.path.basename(str(sf))
-            counts[sf_name] = counts.get(sf_name, 0) + 1
-
-        if "IE402.md" not in counts:
-            counts["IE402.md"] = 0
-
-        print("\n" + "=" * 80)
-        print("RETRIEVAL POOL COMPOSITION BY SOURCE FILE")
-        for src, count in sorted(counts.items(), key=lambda x: x[1], reverse=True):
-            print(f"{src} : {count} chunks")
-        print("=" * 80 + "\n")
-
-        def _log_candidates(title_header, candidates):
-            print("\n" + "=" * 80)
-            print(title_header)
-            print()
-            top20 = candidates[:20] if candidates else []
-            for idx, item in enumerate(top20, start=1):
-                meta = item.get("metadata", {}) if isinstance(item, dict) else {}
-                cc = meta.get("course_code") or "N/A"
-                t_val = meta.get("title") or "N/A"
-                h1_val = meta.get("h1") or "N/A"
-                s_val = item.get("fusion_score")
-                if s_val is None:
-                    s_val = item.get("rerank_score")
-                if s_val is None:
-                    s_val = item.get("score")
-                if s_val is None:
-                    s_val = item.get("cosine_score")
-                if s_val is None:
-                    s_val = 0.0
-                print(f"{idx:02d}. Course: {cc}")
-                print(f"    Title: {t_val}")
-                print(f"    H1: {h1_val}")
-                print(f"    Score: {float(s_val):.4f}")
-                print()
-            print("=" * 80)
-
-        _log_candidates("RETRIEVAL RESULTS BEFORE RERANK", results)
-
-        # Trim the pool before the stage-1 cross-encoder pass (both branches
-        # below) — see STAGE1_RERANK_POOL_CAP / _trim_stage1_pool.
+        # Trim the pool before the cross-encoder pass — see
+        # STAGE1_RERANK_POOL_CAP / _trim_stage1_pool.
         results = self._trim_stage1_pool(results)
 
-        if decomposed_queries:
-            # Fix A: run a final joint cross-encoder rerank over the merged
-            # pool using the original user query (not a sub-query string).
-            # Previously, sub-results were merged raw with no joint scoring,
-            # so poorly-scored chunks from one sub-query could displace
-            # high-quality chunks from another.
-            #
-            # Issue 1 fix #4: chunk-window expansion previously only ran on
-            # the non-decomposed path below, so multi-part/comparison
-            # queries never got adjacent-chunk context even when the real
-            # answer for one leg of the comparison spanned two chunks.
-            # Mirror the same two-stage expand+rerank here.
-            stage1_reranked = (
-                self.reranker.rerank(
-                    query=original_query,
-                    results=results,
-                    plan=plan
-                )
-            )
-            # Bug fix: this used to call _log_candidates("FINAL RERANK",
-            # reranked) here, before `reranked` was assigned — a NameError on
-            # every decomposed query. Mirror the non-decomposed branch: log
-            # stage 1 here, log FINAL RERANK after the stage-2 rerank below.
-            _log_candidates("AFTER STAGE-1 RERANK", stage1_reranked)
+        # One cross-encoder pass over the matched (unexpanded) chunks, scored
+        # against the clean standalone question plus alias hints — never the
+        # retrieval string with appended section names and expanded terms.
+        # Neighbouring chunks are attached only after ranking, so the chunk
+        # that matched is the one that gets scored and kept.
+        rerank_query = get_institution_resolver().resolve(standalone_query)
+        reranked = self.reranker.rerank(
+            query=rerank_query,
+            results=results,
+            plan=plan,
+        )
+        relevant = self._drop_irrelevant(reranked, requires_complete_list=requires_complete_list)
+        logger.info(
+            "rerank pool=%d scored=%d relevant=%d top=%s",
+            pool_size,
+            len(reranked),
+            len(relevant),
+            [
+                (c.get("metadata", {}).get("title"), round(c.get("reranked_score", 0.0), 3))
+                for c in relevant[:5]
+            ],
+        )
 
-            top_candidates = stage1_reranked[:12]
-            expand_window = 2 if retrieval_intent == "policy_version" else 1
-            expanded_candidates = self._eligible_results(
-                self._expand_adjacent_chunks(top_candidates, window=expand_window), academic_scope
-            )
+        if not relevant:
+            return {"final": {
+                "query": original_query,
+                "corrected_query": corrected_query,
+                "standalone_query": standalone_query,
+                "plan": plan,
+                "chunks": [],
+                "context": "<context>\n</context>",
+                "sources": [],
+                "citation_map": {},
+                "top_k_before_rerank": pool_size,
+                "top_k_after_rerank": 0,
+                "abstention_reason": "no_relevant_documents",
+            }}
 
-            reranked = (
-                self.reranker.rerank(
-                    query=original_query,
-                    results=expanded_candidates,
-                    plan=plan
-                )
-            )
-            _log_candidates("FINAL RERANK", reranked)
+        return {"search": {
+            "original_query": original_query,
+            "corrected_query": corrected_query,
+            "standalone_query": standalone_query,
+            "plan": plan,
+            "relevant": relevant,
+            "pool_size": pool_size,
+            "requires_complete_list": requires_complete_list,
+            "retrieval_intent": retrieval_intent,
+            "title_hint": title_hint,
+        }}
 
-        else:
-            # ── TWO-STAGE RERANKING ──
-            # Stage 1: Fast rerank on unexpanded chunks
-            stage1_reranked = self.reranker.rerank(
-                query=query,
-                results=results,
-                plan=plan
-            )
-            _log_candidates("AFTER STAGE-1 RERANK", stage1_reranked)
-            
-            # Select top 18 candidates
-            top_candidates = stage1_reranked[:18]
-            
-            # Expand only the top 18 candidates
-            expand_window = 2 if retrieval_intent == "policy_version" else 1
-            expanded_candidates = self._eligible_results(
-                self._expand_adjacent_chunks(top_candidates, window=expand_window), academic_scope
-            )
-            
-            # Stage 2: Final precise rerank on expanded top 18 chunks
-            reranked = self.reranker.rerank(
-                query=query,
-                results=expanded_candidates,
-                plan=plan
-            )
-            _log_candidates("FINAL RERANK", reranked)
+    def _select_final_chunks(self, s, academic_scope=None, top_k_cap=None, expand_window=None):
+        """Pick, order and neighbour-expand the chunks the answer model sees."""
+        reranked = s["relevant"]
+        plan = s["plan"]
+        requires_complete_list = s["requires_complete_list"]
+        retrieval_intent = s["retrieval_intent"]
+        title_hint = s.get("title_hint")
 
-        # Fix TK1: previously capped at min(plan["top_k"], 5) which destroyed
-        # the multi-entity boost (num_entities*3 was always clamped back to 5).
-        # For multi-entity queries 2 entities need at least 3 chunks each = 6.
-        # Cap raised to 8 to give comparison queries enough chunks while staying
-        # within the context token budget (3000 tokens ≈ 8-9 chunks).
-        #
-        # Fix TK2: this cap was silently undoing the requires_complete_list
-        # top_k=12 boost set above — "which clubs does DAU have" and similar
-        # enumeration queries got plan["top_k"]=12 but then
-        # min(12, 5)=5 threw 7 of those chunks away before they ever reached
-        # the LLM, producing partial lists (e.g. "top 10 clubs" out of 30+).
-        # requires_complete_list queries now get the same higher ceiling as
-        # multi_entity_query, and the effective context-token budget is
-        # widened to match (see ContextBuilder.build's retrieval_intent
-        # handling) so those extra chunks aren't cut again downstream.
+        # Fix TK1/TK2: comparison and complete-list queries need more chunks
+        # than the default; ContextBuilder widens its budget to match.
         if requires_complete_list:
             max_final = 15
         elif plan.get("multi_entity_query"):
             max_final = 8
         else:
-            max_final = 5
-        final_top_k = min(plan.get("top_k", 5), max_final)
+            max_final = FINAL_TOP_K
+        final_top_k = min(plan.get("top_k", FINAL_TOP_K), max_final)
+        if top_k_cap:
+            final_top_k = min(final_top_k, top_k_cap)
 
-        # Fix C (source_match_analysis Root Cause 4): Apply title_hint boost.
-        # When the original query contains an explicit document title like
-        # "According to 'Director General', ..." we lift any chunks from that
-        # exact document to the front of the reranked list before slicing.
-        # This prevents a thematically similar but wrong document (e.g. the
-        # Organogram page) from displacing the explicitly-named one when both
-        # receive similar reranker scores.
+        # Fix C (source_match_analysis Root Cause 4): an explicitly named
+        # document ("According to 'Director General', ...") is lifted to the
+        # front so a thematically similar document can't displace it.
         if title_hint:
             _hint_lower = title_hint.lower()
             _title_match = []
@@ -1610,54 +1593,278 @@ class RetrievalPipeline:
                 reranked = _title_match + _rest
 
         final_chunks = reranked[:final_top_k]
-
-        built = (
-            self.builder.build(
-                final_chunks,
-                retrieval_intent=retrieval_intent,
-                requires_complete_list=requires_complete_list,
-            )
+        if expand_window is None:
+            expand_window = 2 if retrieval_intent == "policy_version" else 1
+        return self._eligible_results(
+            self._expand_adjacent_chunks(final_chunks, window=expand_window),
+            academic_scope,
         )
 
+    def _assemble_context(self, s, academic_scope=None):
+        final_chunks = self._select_final_chunks(s, academic_scope)
+        built = self.builder.build(
+            final_chunks,
+            retrieval_intent=s["retrieval_intent"],
+            requires_complete_list=s["requires_complete_list"],
+        )
         return {
-            "query":
-                original_query,
-
-            "corrected_query":
-                corrected_query,
-
-            "plan":
-                plan,
-
-            "chunks":
-                final_chunks,
-
-            "context":
-                built["context"],
-
-            "sources":
-                built["sources"],
-
-            "citation_map":
-                built.get("citation_map", {}),
-
-            "top_k_before_rerank":
-                len(results),
-
-            "top_k_after_rerank":
-                len(final_chunks)
+            "query": s["original_query"],
+            "corrected_query": s["corrected_query"],
+            "standalone_query": s["standalone_query"],
+            "plan": s["plan"],
+            "chunks": final_chunks,
+            "context": built["context"],
+            "sources": built["sources"],
+            "citation_map": built.get("citation_map", {}),
+            "top_k_before_rerank": s["pool_size"],
+            "top_k_after_rerank": len(final_chunks),
         }
+
+    # ── Several questions in one message ────────────────────────────────
+
+    def _multi_executor(self):
+        pool = getattr(self, "_multi_pool", None)
+        if pool is None:
+            from concurrent.futures import ThreadPoolExecutor
+            pool = ThreadPoolExecutor(
+                max_workers=max(1, int(os.getenv("AURA_MULTI_RETRIEVAL_WORKERS", "4"))),
+                thread_name_prefix="aura-multi-rag",
+            )
+            self._multi_pool = pool
+        return pool
+
+    def _search_many(self, questions, history, user_role, academic_scope, identity, title_hints, standalone):
+        def _one(q, hint):
+            try:
+                return self._search_context(
+                    q, history, user_role, academic_scope, identity, hint, standalone
+                )
+            except Exception as exc:  # one failing question must not sink the rest
+                logger.warning("multi-question retrieval failed for %r: %s", q, exc)
+                return {"error": exc}
+
+        pool = self._multi_executor()
+        futures = [pool.submit(_one, q, h) for q, h in zip(questions, title_hints)]
+        results = [f.result() for f in futures]
+        if results and all("error" in r for r in results):
+            raise results[0]["error"]
+        return results
+
+    @staticmethod
+    def _chunk_key(chunk):
+        meta = chunk.get("metadata") or {}
+        if chunk.get("id") is not None:
+            return ("id", chunk["id"])
+        if meta.get("document_id") is not None and meta.get("chunk_index") is not None:
+            return ("coord", meta["document_id"], meta["chunk_index"])
+        return ("obj", id(chunk))
+
+    @classmethod
+    def _merge_question_chunks(cls, selected):
+        """Round-robin merge of per-question chunk lists.
+
+        Rank-major order (every question's best chunk, then every question's
+        second-best, ...) so the shared token budget trims ALL questions
+        evenly instead of starving the later ones. A chunk chosen for several
+        questions appears once, tagged with every question it serves.
+        """
+        merged, index = [], {}
+        depth = max((len(lst) for lst in selected), default=0)
+        for rank in range(depth):
+            for qi, lst in enumerate(selected, start=1):
+                if rank >= len(lst):
+                    continue
+                chunk = lst[rank]
+                key = cls._chunk_key(chunk)
+                if key in index:
+                    merged[index[key]]["questions"].append(qi)
+                    continue
+                copy = dict(chunk)
+                copy["questions"] = [qi]
+                index[key] = len(merged)
+                merged.append(copy)
+        return merged
+
+    @staticmethod
+    def _no_evidence_notes(per_question):
+        notes = []
+        for entry in per_question:
+            if entry["in_context"]:
+                continue
+            reason = entry.get("abstention_reason") or "no_relevant_documents"
+            note = (
+                "The verified programme details needed to answer this are not on file."
+                if reason == "academic_scope_unavailable"
+                else "No relevant university document was retrieved for this question."
+            )
+            notes.append(f'<no_documents q="{entry["index"]}">{note}</no_documents>')
+        return notes
+
+    def get_multi_context(
+        self,
+        questions,
+        history=None,
+        user_role: str = "public",
+        academic_scope=None,
+        identity=None,
+        title_hints=None,
+        standalone: bool = True,
+    ):
+        """Retrieve evidence for several questions and merge it into ONE context.
+
+        Each question is planned, retrieved and reranked on its own, so a
+        strong hit for question 1 can never mask a weak-scoring question 2 (a
+        single cross-encoder query holding both questions scored every chunk
+        against a blend that matched neither).
+        """
+        questions = [q.strip() for q in (questions or []) if q and q.strip()]
+        title_hints = list(title_hints or [])
+        title_hints += [None] * (len(questions) - len(title_hints))
+
+        if len(questions) <= 1:
+            q = questions[0] if questions else ""
+            result = self.get_context(
+                q, history, user_role=user_role, academic_scope=academic_scope,
+                identity=identity, title_hint=title_hints[0] if title_hints else None,
+                standalone=standalone,
+            )
+            result["questions"] = questions
+            result["per_question"] = [{
+                "index": 1, "question": q, "chunks": len(result.get("chunks", [])),
+                "in_context": bool(result.get("chunks")),
+                "abstention_reason": result.get("abstention_reason"),
+            }]
+            return result
+
+        searches = self._search_many(
+            questions, history, user_role, academic_scope, identity, title_hints, standalone
+        )
+
+        selected, per_question, plan, pool_total = [], [], {}, 0
+        for qi, (q, s) in enumerate(zip(questions, searches), start=1):
+            chunks, reason = [], None
+            if "error" in s:
+                reason = "retrieval_error"
+            elif s.get("final") is not None:
+                reason = s["final"].get("abstention_reason")
+                pool_total += s["final"].get("top_k_before_rerank", 0)
+            else:
+                info = s["search"]
+                pool_total += info["pool_size"]
+                plan = plan or info["plan"]
+                chunks = self._select_final_chunks(
+                    info,
+                    academic_scope,
+                    top_k_cap=None if info["requires_complete_list"] else MULTI_PER_QUESTION_TOP_K,
+                    expand_window=1,
+                )
+            selected.append(chunks)
+            per_question.append({
+                "index": qi, "question": q, "chunks": len(chunks),
+                "in_context": False, "abstention_reason": reason,
+            })
+
+        merged = self._merge_question_chunks(selected)
+        any_list = any(
+            "search" in s and s["search"]["requires_complete_list"] for s in searches
+        )
+        built = self.builder.build(
+            merged,
+            retrieval_intent="general",
+            requires_complete_list=any_list,
+            widen=True,
+            n_questions=len(questions),
+        )
+
+        included = [merged[i] for i in built.get("included", range(len(merged)))]
+        for entry in per_question:
+            entry["in_context"] = any(entry["index"] in c["questions"] for c in included)
+
+        context = built["context"]
+        notes = self._no_evidence_notes(per_question)
+        if notes:
+            context = context[: -len("\n</context>")] + "\n" + "\n".join(notes) + "\n</context>"
+
+        reasons = [e["abstention_reason"] for e in per_question if not e["in_context"]]
+        abstention = None
+        if not included:
+            abstention = (
+                "academic_scope_unavailable"
+                if reasons and all(r == "academic_scope_unavailable" for r in reasons)
+                else "no_relevant_documents"
+            )
+
+        result = {
+            "query": " | ".join(questions),
+            "corrected_query": " | ".join(questions),
+            "standalone_query": " ".join(questions),
+            "plan": plan,
+            "chunks": included,
+            "context": context,
+            "sources": built["sources"],
+            "citation_map": built.get("citation_map", {}),
+            "top_k_before_rerank": pool_total,
+            "top_k_after_rerank": len(included),
+            "questions": questions,
+            "per_question": per_question,
+        }
+        if abstention:
+            result["abstention_reason"] = abstention
+        return result
+
+    @staticmethod
+    def _sigmoid(logit) -> float:
+        x = float(logit)
+        if x >= 0:
+            return 1.0 / (1.0 + math.exp(-x))
+        e = math.exp(x)  # x is negative: no overflow, unlike exp(-x)
+        return e / (1.0 + e)
+
+    @staticmethod
+    def _drop_irrelevant(reranked, requires_complete_list: bool = False):
+        """Keep only chunks the cross-encoder considers relevant.
+
+        Two gates, both on the sigmoid of the raw cross-encoder logit (not the
+        blended reranked_score, so recency or section boosts can never rescue
+        an unrelated chunk):
+
+        1. absolute floor MIN_RELEVANCE_SCORE - nothing clears it means the
+           corpus does not answer the question, and AURA abstains;
+        2. relative floor - a chunk must reach RELATIVE_RELEVANCE_RATIO of the
+           best chunk's probability. Complete-list queries use a looser ratio.
+
+        Chunks without a cross-encoder score (reranker down) are kept.
+        Calibrate both thresholds on the golden set."""
+        probs = []
+        for chunk in reranked:
+            logit = chunk.get("cross_score")
+            probs.append(None if logit is None else RetrievalPipeline._sigmoid(logit))
+        scored = [p for p in probs if p is not None]
+        best = max(scored) if scored else 0.0
+        ratio = LIST_RELATIVE_RELEVANCE_RATIO if requires_complete_list else RELATIVE_RELEVANCE_RATIO
+        floor = MIN_RELEVANCE_SCORE
+        if best >= MIN_RELEVANCE_SCORE:
+            floor = max(floor, ratio * best)
+        return [c for c, p in zip(reranked, probs) if p is None or p >= floor]
 
     def _expand_adjacent_chunks(self, candidates, window=1):
         """
-        Retrieves neighboring chunks (window chunks before and after) for each
-        candidate to preserve context. window=1 is the default; use window=2
-        for policy_version queries to capture version history sections that may
-        be one or two chunks away from the main policy chunk.
+        Attach neighbouring chunks (window before and after) to each final
+        candidate so an answer that spans a chunk boundary stays intact.
+        window=2 is used for policy_version queries, whose version-history
+        section is often one or two chunks away.
+
+        The matched chunk is kept separately in metadata["core_text"] (with
+        "context_before"/"context_after"), so ContextBuilder can trim the
+        neighbours first and never cut the text that actually matched.
+        Neighbours that are themselves final candidates are skipped to avoid
+        sending the same text twice.
         """
+        selected = {
+            (c.get("metadata", {}).get("document_id"), c.get("metadata", {}).get("chunk_index"))
+            for c in candidates
+        }
         expanded_candidates = []
-        print("\n" + "=" * 60)
-        print("===== ADJACENT CHUNK EXPANSION =====")
         for cand in candidates:
             metadata = cand.get("metadata", {})
             doc_id = metadata.get("document_id")
@@ -1667,38 +1874,27 @@ class RetrievalPipeline:
                 continue
 
             chunk_idx = int(chunk_idx)
-            parts = []
-            added_adjacent = []
-
-            # Collect preceding chunks within window
+            before = []
+            after = []
             for offset in range(window, 0, -1):
-                prev_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx - offset))
-                if prev_chunk:
-                    parts.append(prev_chunk.get("text", ""))
-                    added_adjacent.append(f"prev (-{offset}): {prev_chunk.get('chunk_id')}")
-
-            parts.append(metadata.get("text", ""))
-
-            # Collect following chunks within window
+                key = (doc_id, chunk_idx - offset)
+                prev_chunk = self.chunk_by_coordinate.get(key)
+                if prev_chunk and key not in selected:
+                    before.append(prev_chunk.get("text", ""))
             for offset in range(1, window + 1):
-                next_chunk = self.chunk_by_coordinate.get((doc_id, chunk_idx + offset))
-                if next_chunk:
-                    parts.append(next_chunk.get("text", ""))
-                    added_adjacent.append(f"next (+{offset}): {next_chunk.get('chunk_id')}")
+                key = (doc_id, chunk_idx + offset)
+                next_chunk = self.chunk_by_coordinate.get(key)
+                if next_chunk and key not in selected:
+                    after.append(next_chunk.get("text", ""))
 
-            expanded_text = "\n\n".join(filter(None, parts))
-
+            core = metadata.get("text", "")
             new_cand = dict(cand)
             new_cand["metadata"] = dict(metadata)
-            new_cand["metadata"]["text"] = expanded_text
+            new_cand["metadata"]["core_text"] = core
+            new_cand["metadata"]["context_before"] = "\n\n".join(filter(None, before))
+            new_cand["metadata"]["context_after"] = "\n\n".join(filter(None, after))
+            new_cand["metadata"]["text"] = "\n\n".join(filter(None, before + [core] + after))
             expanded_candidates.append(new_cand)
-
-            print(f"Triggering Chunk: {cand.get('id')} ({metadata.get('title')})")
-            if added_adjacent:
-                print("   Added Neighbor Chunks: " + ", ".join(added_adjacent))
-            else:
-                print("   (No adjacent chunks found in store)")
-        print("=" * 60)
 
         return expanded_candidates
 
@@ -1712,13 +1908,15 @@ class RetrievalPipeline:
         # filter applied to both paths below, not just a reranker-side boost.
         recency_filter = None if _skip_recency else self._recency_filter(plan, query)
         if recency_filter:
-            print("\n" + "=" * 60)
-            print("===== RECENCY HARD FILTER =====")
-            print(f"Query: {query!r} -> {recency_filter}")
-            print("=" * 60)
+            logger.info("recency hard filter for %r: %s", query, recency_filter)
 
-        # 1. Entity Path
-        entities = dict(plan.get("scope_entities") or {})
+        # 1. Entity Path. The student's own programme is added only for
+        # programme questions (see PROGRAMME_INTENTS).
+        entities = (
+            dict(plan.get("scope_entities") or {})
+            if plan.get("retrieval_intent") in PROGRAMME_INTENTS
+            else {}
+        )
         entities.update(plan.get("entities", {}))
         entity_queries = []
         for entity_type, entity_val in entities.items():
@@ -1731,13 +1929,24 @@ class RetrievalPipeline:
                     continue
                 
                 metadata_key = entity_type
+                if metadata_key == "semester_roman":
+                    # Duplicate of "semester"; a bare "III" query only matches
+                    # roman numerals everywhere in the corpus.
+                    continue
                 if metadata_key == "program_name":
                     canonical_val = self._canonical_program_name(val_str)
                     if canonical_val:
                         entity_queries.append((val_str, {metadata_key: {"$eq": canonical_val}}))
                     else:
                         entity_queries.append((val_str, None))
-                elif metadata_key in ["faculty_name", "event_name", "course_code", "course_name", "semester"]:
+                elif metadata_key == "semester":
+                    # The planner stores an int (3) but chunks store the roman
+                    # numeral ("III"), so an exact-match filter never matched.
+                    variants = self._canonical_semester_values(val_str)
+                    entity_queries.append(
+                        (val_str, {"semester": {"$in": variants}} if variants else None)
+                    )
+                elif metadata_key in ["faculty_name", "event_name", "course_code", "course_name"]:
                     entity_queries.append((val_str, {metadata_key: {"$eq": val_str}}))
                 else:
                     entity_queries.append((val_str, None))
@@ -1819,25 +2028,6 @@ class RetrievalPipeline:
             chunk_item["entity_score"] = info["rrf_score"]
             entity_list.append(chunk_item)
 
-        # Diagnostic 2: Log raw BM25 / Entity results
-        print("\n" + "=" * 80)
-        print("===== RAW BM25 / ENTITY RESULTS (TOP 20) =====")
-        if not entity_list:
-            print("BM25 returned 0 documents.")
-        else:
-            for idx, item in enumerate(entity_list[:20], start=1):
-                meta = item.get("metadata", {})
-                src_file = meta.get("source_file") or meta.get("path") or meta.get("file") or "N/A"
-                print(f"{idx:02d}. ID         : {item.get('id')}")
-                print(f"    Score      : {item.get('entity_score', 0.0):.4f}")
-                print(f"    Title      : {meta.get('title', 'N/A')}")
-                print(f"    Source File: {src_file}")
-                print(f"    H1         : {meta.get('h1', 'N/A')}")
-                print(f"    Course Code: {meta.get('course_code', 'N/A')}")
-                print(f"    Program    : {meta.get('program_name', 'N/A')}")
-                print("-" * 40)
-        print("=" * 80)
-
         # Min-Max normalize entity path scores
         if entity_list:
             scores = [c["entity_score"] for c in entity_list]
@@ -1859,28 +2049,7 @@ class RetrievalPipeline:
                 
                 entity_filter = self._build_metadata_filter(plan)
                 
-                print("\n" + "=" * 60)
-                print("===== METADATA FILTER =====")
-                if not entity_filter:
-                    print("None")
-                else:
-                    def _parse(clause):
-                        if not isinstance(clause, dict):
-                            return
-                        for k, v in clause.items():
-                            if k == "$and" and isinstance(v, list):
-                                for item in v:
-                                    _parse(item)
-                            elif not k.startswith("$"):
-                                if isinstance(v, dict) and "$in" in v:
-                                    val_str = ", ".join(str(x) for x in v["$in"])
-                                    print(f"{k} = {val_str}")
-                                elif isinstance(v, dict) and "$eq" in v:
-                                    print(f"{k} = {v['$eq']}")
-                                else:
-                                    print(f"{k} = {v}")
-                    _parse(entity_filter)
-                print("=" * 60)
+                logger.debug("semantic metadata filter: %s", entity_filter)
 
                 scatter_filter = self._scatter_gather_filter(plan, query)
 
@@ -1941,11 +2110,9 @@ class RetrievalPipeline:
             for c in semantic_list:
                 c["normalized_score"] = (c["semantic_score"] - min_val) / val_range if val_range > 0 else 1.0
 
-        # Diagnostic 3 (Part A): Log RRF inputs before fusion
-        print("\n" + "=" * 80)
-        print(f"Dense candidates: {len(semantic_list)}")
-        print(f"BM25 candidates: {len(entity_list)}")
-        print("=" * 80)
+        logger.debug(
+            "fusion inputs dense=%d lexical=%d", len(semantic_list), len(entity_list)
+        )
 
         # 3. Global 50/50 Fusion
         # Fix RP2 (cont.): cosine_score is tracked through the fused pool
@@ -1988,11 +2155,6 @@ class RetrievalPipeline:
                 "fusion_score": final_score
             }
             final_candidates.append(cand)
-
-        # Diagnostic 3 (Part B): Log RRF candidates after fusion
-        print("\n" + "=" * 80)
-        print(f"Merged candidates: {len(final_candidates)}")
-        print("=" * 80 + "\n")
 
         # Sort candidates by final fusion score descending
         final_candidates.sort(key=lambda x: x["fusion_score"], reverse=True)

@@ -3,6 +3,7 @@ import math
 import re
 import time
 import logging
+import threading
 from datetime import datetime
 from typing import Optional
 
@@ -17,6 +18,68 @@ RERANKER_REMOTE_BACKOFF_S = max(0.0, float(os.getenv("RERANKER_REMOTE_BACKOFF_S"
 # Local-fallback mini-batch size: one giant padded batch over the whole pool
 # makes every pair pay the longest pair's token length and spikes memory.
 RERANKER_LOCAL_BATCH_SIZE = max(1, int(os.getenv("RERANKER_LOCAL_BATCH_SIZE", "8")))
+
+# Fix LOAD-1 (mirrors retriever.py): the remote-reranker call used a bare
+# `requests.post` per call — a fresh TCP(+TLS) handshake every rerank. One
+# process-wide pooled Session keeps sockets warm across calls, which matters
+# more now that a compound message reranks once per sub-question in
+# parallel. max_retries stays 0 on the adapter: pool the socket only, and
+# leave the existing RERANKER_REMOTE_ATTEMPTS loop as the single retry layer.
+RERANKER_HTTP_POOL_SIZE = max(1, int(os.getenv("RERANKER_HTTP_POOL_SIZE", "32")))
+_rerank_session_lock = threading.Lock()
+_rerank_session = None
+
+
+def _get_rerank_session():
+    global _rerank_session
+    if _rerank_session is None:
+        with _rerank_session_lock:
+            if _rerank_session is None:
+                import requests
+                session = requests.Session()
+                adapter = requests.adapters.HTTPAdapter(
+                    pool_connections=RERANKER_HTTP_POOL_SIZE,
+                    pool_maxsize=RERANKER_HTTP_POOL_SIZE,
+                )
+                session.mount("http://", adapter)
+                session.mount("https://", adapter)
+                _rerank_session = session
+    return _rerank_session
+
+_ROMAN_OR_WORD_SEM = {
+    "i": 1, "ii": 2, "iii": 3, "iv": 4, "v": 5, "vi": 6, "vii": 7, "viii": 8,
+    "first": 1, "second": 2, "third": 3, "fourth": 4,
+    "fifth": 5, "sixth": 6, "seventh": 7, "eighth": 8,
+}
+_SEM_TOKEN_RE = re.compile(
+    r"\b(\d{1,2})(?:st|nd|rd|th)?\b|"
+    r"\b(viii|vii|vi|iv|iii|ii|v|i|first|second|third|fourth|fifth|sixth|seventh|eighth)\b"
+)
+
+
+def semester_numbers(value) -> set:
+    """Normalise any semester spelling to a set of ints.
+
+    The planner emits ints (3) while chunk metadata stores roman numerals
+    ("III"); comparing them with != made the wrong-semester penalty fire on
+    every curriculum chunk, i.e. it never discriminated. Accepts "III",
+    "Semester 3", "3rd sem", 3, or a list of those.
+    """
+    items = value if isinstance(value, (list, tuple, set)) else [value]
+    found = set()
+    for item in items:
+        if item is None or item == "":
+            continue
+        if isinstance(item, int) and not isinstance(item, bool):
+            if 1 <= item <= 12:
+                found.add(item)
+            continue
+        text = re.sub(r"\b(?:semester|sem)\b\.?", " ", str(item).lower())
+        for num, word in _SEM_TOKEN_RE.findall(text):
+            n = int(num) if num else _ROMAN_OR_WORD_SEM.get(word)
+            if n and 1 <= n <= 12:
+                found.add(n)
+    return found
 
 def extract_latest_year(metadata: dict) -> Optional[int]:
     """Extract a document's version year from its authoritative metadata.
@@ -65,34 +128,46 @@ class Reranker:
         if not (os.getenv("RERANKER_SERVICE_URL") or "").strip():
             self._ensure_local_model()
 
+    # Fix LOAD-2 (mirrors retriever.py): unlocked lazy load. A burst of
+    # concurrent rerank() calls arriving while the remote reranker is down
+    # (the only time this runs when RERANKER_SERVICE_URL is set) would each
+    # pass the `is None` check before any finished, racing to construct
+    # several copies of bge-reranker-v2-m3 at once — exactly when the system
+    # is already most stressed. Double-checked locking, same pattern as
+    # api/deps.py::get_aura(): the fast (already-loaded) path never blocks.
+    _local_model_lock = threading.Lock()
+
     def _ensure_local_model(self):
         if self.model is not None and self.tokenizer is not None:
             return
+        with self._local_model_lock:
+            if self.model is not None and self.tokenizer is not None:
+                return
 
-        import torch
-        from transformers import (
-            AutoTokenizer,
-            AutoModelForSequenceClassification
-        )
+            import torch
+            from transformers import (
+                AutoTokenizer,
+                AutoModelForSequenceClassification
+            )
 
-        env_device = os.getenv("RERANKER_DEVICE")
-        if env_device:
-            self.device = torch.device(env_device)
-        elif torch.cuda.is_available():
-            self.device = torch.device("cuda")
-        elif torch.backends.mps.is_available():
-            self.device = torch.device("mps")
-        else:
-            self.device = torch.device("cpu")
+            env_device = os.getenv("RERANKER_DEVICE")
+            if env_device:
+                self.device = torch.device(env_device)
+            elif torch.cuda.is_available():
+                self.device = torch.device("cuda")
+            elif torch.backends.mps.is_available():
+                self.device = torch.device("mps")
+            else:
+                self.device = torch.device("cpu")
 
-        self.tokenizer = AutoTokenizer.from_pretrained(
-            "BAAI/bge-reranker-v2-m3"
-        )
-        self.model = (
-            AutoModelForSequenceClassification
-            .from_pretrained("BAAI/bge-reranker-v2-m3")
-        ).to(self.device)
-        self.model.eval()
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                "BAAI/bge-reranker-v2-m3"
+            )
+            self.model = (
+                AutoModelForSequenceClassification
+                .from_pretrained("BAAI/bge-reranker-v2-m3")
+            ).to(self.device)
+            self.model.eval()
 
     # Matches a trailing "(Qualifier)" or a dash-separated short capitalized
     # tail, e.g. "Dean (Students)", "Hall of Residence (Men)",
@@ -213,10 +288,10 @@ class Reranker:
         cross_scores = None
 
         if reranker_service_url:
-            import requests
+            session = _get_rerank_session()
             for attempt in range(1, RERANKER_REMOTE_ATTEMPTS + 1):
                 try:
-                    resp = requests.post(
+                    resp = session.post(
                         f"{reranker_service_url.rstrip('/')}/rerank",
                         json={"pairs": pairs},
                         timeout=10
@@ -292,7 +367,8 @@ class Reranker:
 
         reranked = []
 
-        boost_sections = (
+        # Copied: extending the plan's own list would grow it on every call.
+        boost_sections = list(
             plan
             .get(
                 "retrieval_hints",
@@ -459,6 +535,11 @@ class Reranker:
 
         explicit_rule_year = entities.get("rule_year")
         current_year = datetime.now().year
+        # Recency decides the ranking only when the question is about the
+        # latest/current version of something. Otherwise it is a small
+        # tie-breaker between near-identical yearly versions, so a recent
+        # notice cannot outrank the undated policy that answers the question.
+        temporal_weight = 0.15 if plan.get("temporal_intent") else 0.03
 
         # ── Generic entity/qualifier disambiguation ─────────────────────
         # DAU's corpus is full of near-duplicate structured entries that
@@ -493,31 +574,23 @@ class Reranker:
 
             section_type = metadata.get("section_type", "general")
 
-            query_semester = entities.get(
-                "semester"
-            )
-
-            if isinstance(query_semester, list):
-                query_semester = (
-                    query_semester[0]
-                    if query_semester
-                    else None
-                )
+            query_semesters = semester_numbers(entities.get("semester"))
 
             semester_penalty = 0.0
 
             if (
                 section_type == "curriculum"
-                and query_semester
+                and query_semesters
             ):
 
                 chunk_semester = metadata.get(
                     "semester"
                 )
 
+                chunk_semesters = semester_numbers(chunk_semester)
                 if (
-                    chunk_semester
-                    and chunk_semester != query_semester
+                    chunk_semesters
+                    and query_semesters.isdisjoint(chunk_semesters)
                 ):
                     # Fix #13: use a proportional penalty (10 % reduction of
                     # the normalised cross-score) instead of a hard -0.20 that
@@ -670,49 +743,7 @@ class Reranker:
                     elif str(metadata.get("title") or "").lower().find("c_dcs") >= 0:
                         temporal_boost = 0.6
 
-            # Fix #4 / Fix RR-RECENCY: all components on comparable scales
-            # [0, 1]. recency_boost's weight raised 0.05 → 0.15 (taken from
-            # dense_score, 0.15 → 0.05) so that among documents the
-            # cross-encoder scores as similarly relevant — which is exactly
-            # what happens across several yearly versions of the same roster
-            # — the newest one reliably wins instead of the tie effectively
-            # being broken by noise.
-            answerability_boost = 0.0
-            lookup_keywords = [
-                "who", "who is", "name", "convener", "convenor", "coordinator",
-                "faculty advisor", "faculty adviser", "advisor", "mentor", "chair",
-                "chairperson", "contact", "contact information", "email", "email id",
-                "phone", "phone number", "mobile", "mobile number", "student id",
-                "erp", "credits", "credit", "credit structure", "prerequisite",
-                "prerequisites", "fee", "fees", "fee structure", "duration",
-                "office", "policy", "syllabus"
-            ]
-            structured_fields = {
-                "convener", "convenor", "coordinator", "faculty advisor", "faculty adviser",
-                "advisor", "mentor", "chair", "chairperson", "student id", "erp",
-                "email", "phone", "mobile", "contact", "credits", "credit",
-                "prerequisite", "fee", "fees", "duration", "office", "policy", "syllabus"
-            }
-            query_lower = query.lower()
-            keyword_pattern = r"\b(" + "|".join(re.escape(k) for k in lookup_keywords) + r")\b"
-            if re.search(keyword_pattern, query_lower):
-                chunk_full_text = "\n".join(
-                    filter(
-                        None,
-                        [
-                            metadata.get("title"),
-                            metadata.get("category"),
-                            metadata.get("cluster"),
-                            metadata.get("h1"),
-                            metadata.get("h2"),
-                            metadata.get("h3"),
-                            metadata.get("text"),
-                        ]
-                    )
-                ).lower()
-                if any(field in chunk_full_text for field in structured_fields):
-                    answerability_boost = 1.0
-
+            # All components are on comparable [0, 1] scales.
             final_score = (
                 (0.60 * norm_cross)
                 +
@@ -726,9 +757,7 @@ class Reranker:
                 +
                 (0.05 * course_match_boost)
                 +
-                (0.15 * temporal_boost)
-                +
-                (0.05 * answerability_boost)
+                (temporal_weight * temporal_boost)
                 +
                 (semester_penalty * norm_cross)
                 +
@@ -755,17 +784,15 @@ class Reranker:
             reverse=True
         )
 
-        print("\n" + "=" * 60)
-        print("===== CROSS-ENCODER RERANK RESULTS =====")
-        print(f"Query: {query}")
-        for rank, item in enumerate(reranked, start=1):
-            meta = item.get("metadata", {})
-            h_str = " / ".join(filter(None, [meta.get("h1"), meta.get("h2"), meta.get("h3")]))
-            print(f"{rank}. reranked_score={item.get('reranked_score', 0.0):.4f} (cross_logit={item.get('cross_score', 0.0):.4f}) | chunk={item.get('id')}")
-            print(f"   title={meta.get('title', 'N/A')}")
-            print(f"   file={meta.get('source_file') or meta.get('relative_path', 'N/A')}")
-            if h_str:
-                print(f"   headers={h_str}")
-        print("=" * 60)
+        if logger.isEnabledFor(logging.DEBUG):
+            for rank, item in enumerate(reranked[:10], start=1):
+                logger.debug(
+                    "rerank %d score=%.4f logit=%.4f chunk=%s title=%r",
+                    rank,
+                    item.get("reranked_score", 0.0),
+                    item.get("cross_score", 0.0),
+                    item.get("id"),
+                    item.get("metadata", {}).get("title"),
+                )
 
         return reranked

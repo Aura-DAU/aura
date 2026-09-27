@@ -37,9 +37,6 @@ from api.routes.timetable_routes import router as timetable_router, push_router,
 from api.routes.chat_routes import router as chat_router
 from api.routes.memory_routes import router as memory_router
 from api.routes.bug_report_routes import router as bug_report_router
-from pipeline.ecampus.credentials_vault import (
-    store_credentials, unlink_credentials, is_linked
-)
 
 app = FastAPI(title="AURA API")
 
@@ -204,8 +201,6 @@ async def _start_timetable_scheduler():
             missing.append("INTERNAL_RESOLVE_SECRET")
         if not os.getenv("REDIS_URL", "").strip():
             missing.append("REDIS_URL")
-        if not os.getenv("ERP_DB_HOST") and not os.getenv("ECAMPUS_VAULT_KEY"):
-            missing.append("ECAMPUS_VAULT_KEY (required when ERP_DB_HOST is unset)")
         if missing:
             raise RuntimeError(
                 "Production config incomplete — set: " + ", ".join(missing)
@@ -279,40 +274,8 @@ class ChatRequest(BaseModel):
     def resolved_profile(self) -> Optional[UserProfile]:
         return self.studentProfile or self.userProfile
 
-class LinkEcampusRequest(BaseModel):
-    ecampus_username: str = Field(..., min_length=1, max_length=200)
-    ecampus_password: str = Field(..., min_length=1, max_length=500)
-
 ALLOWED_AUDIO   = {".wav", ".mp3", ".m4a", ".webm", ".ogg", ".flac"}
 MAX_AUDIO_BYTES = 25 * 1024 * 1024
-
-# ── eCampus account linking ───────────────────────────────────────────────
-# These three endpoints handle optional eCampus credential storage for the
-# scraper path. They are NOT auth endpoints — they manage the vault that
-# lets AURA log into ecampus.daiict.ac.in on a student's behalf to scrape
-# personal data (when direct ERP DB access is unavailable).
-@app.post("/ecampus/link")
-def link_ecampus(
-    request:  LinkEcampusRequest,
-    identity: Identity = Depends(require_identity),
-):
-    if identity.role != "student":
-        raise HTTPException(status_code=403, detail="Only students can link an eCampus account.")
-    store_credentials(identity.erp_id, request.ecampus_username, request.ecampus_password)
-    return {"status": "linked"}
-
-@app.delete("/ecampus/link")
-def unlink_ecampus(identity: Identity = Depends(require_identity)):
-    if identity.role != "student":
-        raise HTTPException(status_code=403, detail="Only students can unlink.")
-    unlink_credentials(identity.erp_id)
-    return {"status": "unlinked"}
-
-@app.get("/ecampus/link")
-def ecampus_link_status(identity: Identity = Depends(require_identity)):
-    if identity.role != "student":
-        raise HTTPException(status_code=403, detail="Only students have a link status.")
-    return {"linked": is_linked(identity.erp_id)}
 
 # ── /speech ───────────────────────────────────────────────────────────────
 @app.post("/speech")

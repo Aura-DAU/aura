@@ -244,15 +244,7 @@ def run_rbac_test_suite():
 
             # Instantiate and invoke AuraChat
             bot = AuraChat()
-            response = None
-            try:
-                response = bot.chat(case['query'], identity=identity)
-            except Exception as e:
-                # Catch eCampus CredentialsNotLinked as expected / ALLOWED response path
-                if "No eCampus credentials linked" in str(e):
-                    response = {"answer": "Mocked LLM Response"}
-                else:
-                    raise
+            response = bot.chat(case['query'], identity=identity)
 
             # Verify actual result against expectations
             actual_answer = response.get("answer", "")

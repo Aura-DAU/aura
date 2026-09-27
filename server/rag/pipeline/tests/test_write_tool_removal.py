@@ -14,50 +14,18 @@
 #     instead of silently re-opening a hole for a future write.
 
 import ast
-import sys
 from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-
-from pipeline.ecampus.tool_registry import TOOL_REGISTRY
-
-REMOVED_TOOL_NAMES = {
-    "refresh_my_data",
-    "share_data_with_advisor",
-    "revoke_advisor_access",
-    "get_attendance",
-    "check_exam_eligibility",
-}
 
 WRITE_INDICATOR_CALLS = {
     "post", "put", "patch", "delete",  # requests.post / .put / .patch / .delete
     "insert", "update", "write",       # generic write-ish method names
 }
 
-# Tools that are allowed to carry category="write". Name -> why.
-ALLOWED_WRITE_TOOLS = {
-    "update_tracking_flags": (
-        "Persists personal profile facts the user volunteered in conversation "
-        "(DOB, age, interests) to AURA's own tracking store. Writes only to "
-        "AURA-owned storage for the calling user — never to the ERP, and "
-        "never to another user's data. Added in 0011a0a (#247)."
-    ),
-}
-
-# Modules under pipeline/ecampus/ and pipeline/google_calendar/ allowed to
+# Modules under pipeline/google_calendar/ allowed to
 # contain write-indicator call sites, narrowed to the specific method names
 # each one legitimately needs. A method not listed here still fails the guard,
-# so e.g. a new requests.delete() in session.py would be caught.
+# so e.g. a new requests.delete() in client.py would be caught.
 ALLOWED_HTTP_WRITE_MODULES = {
-    "session.py": {
-        "methods": {"update", "post"},
-        "reason": (
-            "The eCampus scraping session client. `.update()` is dict "
-            "mutation on the request headers, and `.post()` submits the ERP "
-            "login form and subsequent ASP.NET postbacks — the only way to "
-            "read a page behind that form. No ERP record is created."
-        ),
-    },
     "client.py": {
         "methods": {"post"},
         "reason": (
@@ -95,7 +63,7 @@ ALLOWED_HTTP_WRITE_MODULES = {
     },
 }
 
-GUARDED_DIRS = ("ecampus", "google_calendar")
+GUARDED_DIRS = ("google_calendar",)
 
 
 def _write_indicator_call_sites() -> list[tuple[str, int, str]]:
@@ -118,46 +86,11 @@ def _write_indicator_call_sites() -> list[tuple[str, int, str]]:
     return sites
 
 
-def test_removed_tools_absent_from_registry():
-    for name in REMOVED_TOOL_NAMES:
-        assert name not in TOOL_REGISTRY, f"{name} should have been removed from TOOL_REGISTRY"
-
-
-def test_no_undocumented_write_category_tools():
-    for tool in TOOL_REGISTRY.values():
-        if tool.category in ("read", "derived"):
-            continue
-        assert tool.category == "write", (
-            f"{tool.name} has unexpected category={tool.category!r} — "
-            "tools must be 'read', 'derived', or an allowlisted 'write'"
-        )
-        assert tool.name in ALLOWED_WRITE_TOOLS, (
-            f"{tool.name} has category='write' but is not in "
-            "ALLOWED_WRITE_TOOLS. AURA is read-only by default; a new write "
-            "tool needs an explicit, reviewed carve-out in this test "
-            "explaining what it writes and why."
-        )
-
-
-def test_allowed_write_tools_are_not_stale():
-    # If a carve-out's tool is gone (or is no longer a write), delete the entry
-    # rather than leaving a standing exception a future write could slip into.
-    for name in ALLOWED_WRITE_TOOLS:
-        assert name in TOOL_REGISTRY, (
-            f"{name} is allowlisted in ALLOWED_WRITE_TOOLS but no longer "
-            "exists in TOOL_REGISTRY — remove the stale carve-out"
-        )
-        assert TOOL_REGISTRY[name].category == "write", (
-            f"{name} is allowlisted in ALLOWED_WRITE_TOOLS but its category "
-            f"is {TOOL_REGISTRY[name].category!r} — remove the stale carve-out"
-        )
-
-
 def _allowed_methods(filename: str) -> set:
     return ALLOWED_HTTP_WRITE_MODULES.get(filename, {}).get("methods", set())
 
 
-def test_ecampus_package_has_no_undocumented_http_write_calls():
+def test_google_calendar_package_has_no_undocumented_http_write_calls():
     offending = [
         f"{filename}:{lineno} -> .{attr}("
         for filename, lineno, attr in _write_indicator_call_sites()

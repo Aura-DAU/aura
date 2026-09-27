@@ -1,5 +1,5 @@
 """
-Covers EcampusOrchestrator.run()'s "timetable_changed" flag -- set when a
+Covers TimetableAgent.run()'s "timetable_changed" flag -- set when a
 timetable-mutating tool (update_my_timetable, undo_timetable_change,
 set_my_cohort, save_my_elective_selections) actually applied this turn, as
 opposed to just previewing a change or erroring. This flag is what lets
@@ -17,7 +17,7 @@ from unittest.mock import MagicMock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from pipeline.ecampus.orchestrator import EcampusOrchestrator
+from pipeline.timetable.agent import TimetableAgent
 
 IDENTITY = {"erp_id": "202301234", "role": "student", "dept": "ICT"}
 
@@ -40,7 +40,7 @@ def _llm_response(tool_calls=None, content=""):
 
 
 def _run_with_tool_call(monkeypatch, tool_name, tool_result, arguments="{}"):
-    orch = EcampusOrchestrator()
+    orch = TimetableAgent()
     tool_msg_response = _llm_response(
         tool_calls=[_tool_call("call_1", tool_name, arguments)]
     )
@@ -52,9 +52,9 @@ def _run_with_tool_call(monkeypatch, tool_name, tool_result, arguments="{}"):
         call_count["n"] += 1
         return tool_msg_response if call_count["n"] == 1 else follow_up_response
 
-    with patch.object(EcampusOrchestrator, "_call_llm", fake_call_llm), \
+    with patch.object(TimetableAgent, "_call_llm", fake_call_llm), \
          patch(
-             "pipeline.ecampus.orchestrator.MERGED_TOOL_REGISTRY",
+             "pipeline.timetable.agent.TIMETABLE_TOOL_REGISTRY",
              {tool_name: MagicMock(allowed_roles=["student"], handler=lambda identity, **kw: tool_result)},
          ), \
          patch.object(orch, "_tool_schemas", return_value=[{"type": "function", "function": {"name": tool_name}}]):

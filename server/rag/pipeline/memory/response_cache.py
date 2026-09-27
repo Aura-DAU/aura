@@ -1,17 +1,36 @@
-import os
+import hashlib
 import json
 import logging
+import os
+import re
 from typing import Optional
 
 logger = logging.getLogger(__name__)
 
+
+def _cache_version() -> str:
+    """Namespace for cached answers.
+
+    AURA_CORPUS_VERSION must be bumped after every re-index; the prompt
+    fingerprint changes automatically when the answer prompt does. Either
+    change makes old answers unreachable, so a stale or wrong answer cannot
+    outlive the data or prompt that produced it."""
+    corpus = (os.getenv("AURA_CORPUS_VERSION") or "0").strip()
+    try:
+        from pipeline.generation.answer_generator import SYSTEM_PROMPT
+        prompt = hashlib.sha256(SYSTEM_PROMPT.encode()).hexdigest()[:8]
+    except Exception:
+        prompt = "noprompt"
+    return f"{corpus}-{prompt}"
+
+
 class ResponseCache:
     def __init__(self):
         self.redis_url = os.environ.get("REDIS_URL", "").strip()
-        self._prefix = "aura:public-cache:"
+        self._prefix = f"aura:public-cache:{_cache_version()}:"
         self._ttl_seconds = 86400  # Default 24 hours (automatic expiration)
         self._r = None
-        
+
         if self.redis_url:
             try:
                 import redis
@@ -20,8 +39,6 @@ class ResponseCache:
                 logger.warning("Failed to initialize Redis for response cache: %s", e)
 
     def _key(self, query: str) -> str:
-        import hashlib
-        import re
         # Collapse whitespace + casefold, then strip trailing sentence punctuation
         # so "hostel rules?" and "hostel rules" share a cache entry. Guests are
         # the highest-volume path and the only consumers of this cache; do not
@@ -45,6 +62,10 @@ class ResponseCache:
 
     def set(self, query: str, payload: dict) -> None:
         if not self._r:
+            return
+        # Only grounded answers are shared across guests: an answer that cites
+        # no source is a refusal, a clarification or unverified text.
+        if not payload.get("sources"):
             return
         key = self._key(query)
         try:

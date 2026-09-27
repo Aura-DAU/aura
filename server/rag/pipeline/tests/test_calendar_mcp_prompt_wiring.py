@@ -5,20 +5,20 @@ from pipeline.prompt_loader import load_calendar_mcp_system_prompt
 
 RAG_DIR = Path(__file__).resolve().parents[2]
 PROMPT_PATH = RAG_DIR / "p&q" / "calendar_mcp_system_prompt.md"
-ORCHESTRATOR_PATH = RAG_DIR / "pipeline" / "ecampus" / "orchestrator.py"
+AGENT_PATH = RAG_DIR / "pipeline" / "timetable" / "agent.py"
 MCP_SERVER_PATH = RAG_DIR / "mcp_servers" / "gcal_server.py"
 
 
-def test_calendar_mcp_prompt_is_loaded_by_the_orchestrator():
+def test_calendar_mcp_prompt_is_loaded_by_the_timetable_agent():
     prompt = PROMPT_PATH.read_text(encoding="utf-8")
-    orchestrator = ORCHESTRATOR_PATH.read_text(encoding="utf-8")
+    agent = AGENT_PATH.read_text(encoding="utf-8")
     mcp_server = MCP_SERVER_PATH.read_text(encoding="utf-8")
 
     assert load_calendar_mcp_system_prompt() == prompt.strip()
     assert "preview_timetable_sync" in prompt
     assert "sync_timetable_to_calendar" in prompt
-    assert "CALENDAR_MCP_SYSTEM_PROMPT" in orchestrator
-    assert "load_calendar_mcp_system_prompt" in orchestrator
+    assert "CALENDAR_MCP_SYSTEM_PROMPT" in agent
+    assert "load_calendar_mcp_system_prompt" in agent
     assert "instructions=load_calendar_mcp_system_prompt()" in mcp_server
 
 

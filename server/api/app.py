@@ -29,7 +29,6 @@ from api.middleware.security_headers import SecurityHeadersMiddleware
 from api.routes.admin_routes import router as admin_router
 from api.routes.calendar_routes import router as calendar_router
 from api.routes.chat_routes import router as chat_router
-from api.routes.ecampus_routes import router as ecampus_router
 from api.routes.health_routes import router as health_router
 from api.routes.identity_routes import router as identity_router
 from api.routes.memory_routes import router as memory_router
@@ -59,9 +58,6 @@ def _validate_production_config() -> None:
     # worker-local and lets a botnet burn daily limits N×workers times.
     if not os.getenv("REDIS_URL", "").strip():
         missing.append("REDIS_URL")
-    # eCampus scrape mode stores credentials — require vault key in prod.
-    if not os.getenv("ERP_DB_HOST") and not os.getenv("ECAMPUS_VAULT_KEY"):
-        missing.append("ECAMPUS_VAULT_KEY (required when ERP_DB_HOST is unset)")
     if missing:
         raise RuntimeError(
             "Production config incomplete — set: " + ", ".join(missing)
@@ -121,7 +117,6 @@ def create_app() -> FastAPI:
     application.include_router(chat_router)
     application.include_router(memory_router)
     application.include_router(speech_router)
-    application.include_router(ecampus_router)
     application.include_router(health_router)
     application.include_router(bug_report_router)
 

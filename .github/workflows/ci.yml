@@ -86,8 +86,6 @@ jobs:
           --tb=short
           --ignore=pipeline/tests/test_dls_pipeline.py
           --ignore=pipeline/tests/test_ingestion_metadata.py
-          --ignore=pipeline/tests/test_composite_tools.py
-          --ignore=pipeline/tests/test_scholarship_tools.py
           --ignore=pipeline/tests/test_write_tool_removal.py
         env:
           INTERNAL_JWT_SECRET: test-internal-secret-for-auth-middleware

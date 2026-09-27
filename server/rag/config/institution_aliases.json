@@ -40,7 +40,7 @@
     {
       "canonical_name": "University Dining Services (Mess)",
       "abbreviation": "Mess",
-      "synonyms": ["Mess", "Dining Hall", "Canteen", "Cafeteria", "Student Mess", "DAU Mess"],
+      "synonyms": ["Mess", "Dining Hall", "Student Mess", "DAU Mess"],
       "category": "Facility",
       "description": "Campus Dining and Meal Service Operations"
     },

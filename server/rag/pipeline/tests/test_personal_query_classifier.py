@@ -31,7 +31,6 @@ PERSONAL_QUERIES = [
     "How much fee do I still owe?",
     "Can you show me my semester-wise SGPA trend?",
     "What is my enrollment status?",
-    "Link my eCampus account.",
     "Show me my timetable for this week.",
 ]
 
