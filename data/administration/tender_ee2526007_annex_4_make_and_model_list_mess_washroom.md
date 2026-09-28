@@ -33,7 +33,6 @@ Approved make/model list for civil and electrical materials — Student's Mess W
 | Paint | Asian Paint |
 
 **Electrical materials:**
-| Item | Approved Make |
 |---|---|
 | Switches/Sockets | Hi-Fi Modular |
 | FRLS Copper Wires | Finolex / Havells |

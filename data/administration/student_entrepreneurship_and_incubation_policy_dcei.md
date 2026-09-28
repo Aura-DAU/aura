@@ -60,7 +60,7 @@ DAU's **Dhirubhai Ambani Centre for Entrepreneurship and Incubation (DCEI)** is 
 ## Related Links
 
 - [DCEI Page](https://www.daiict.ac.in/dcei)
-- [Faculty Entrepreneurship Policy](https://www.daiict.ac.in/sites/default/files/other-files/Faculty_Entrepreneurship_Policy.pdf)
+- [Faculty Entrepreneurship Policy](https://www.daiict.ac.in/sites/default/files/other-files/Faculty-Entrepreneurship-Policy.pdf)
 
 ## Contact Information
 

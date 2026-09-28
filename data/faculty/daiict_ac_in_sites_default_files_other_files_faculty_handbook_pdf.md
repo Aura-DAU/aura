@@ -1862,7 +1862,7 @@ available the property acquired out of any research
 project, for the benefit of the entire DA-IICT community. 
 Patents filing at national and international level is 
 encouraged. DA-IICT has a well-defined policy IPR
-(https://www.daiict.ac.in/themes/daiict/images/IPR-
+(
 Policy.pdf)
 All members of a research project shall comply with 
 the patent and copyright obligations as required by the 
@@ -1878,7 +1878,7 @@ sponsor shall be submitted by the Institute. The PI shall
 conduct periodical review of the project and assess 
 the progress and initiate corrective steps wherever 
 required.
-(https://www.daiict.ac.in/themes/daiict/images/DA-
+(
 IICT-Consultancy-Policy-31Aug2018.pdf ).
 5. Financial and Reporting Aspects 
 of Research Projects
@@ -2031,7 +2031,7 @@ Conduct for Faculty
 Annexure 1
 ORGANOGRAM*
 *Please see Governance page of our website for details
-(https://www.daiict.ac.in/governance)
+(https://www.daiict.ac.in/leadership)
 
 Dhirubhai Ambani
 Institute of Information and Communication Technology

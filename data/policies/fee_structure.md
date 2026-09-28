@@ -55,7 +55,7 @@ This document outlines the fee structure for undergraduate (BTech) and postgradu
 ## Related Links
 
 - [DAU Admissions Page](https://www.daiict.ac.in/admissions)
-- [Scholarships Page](https://www.daiict.ac.in/scholarships)
+- [Scholarships Page](https://www.daiict.ac.in/scholarships-admission-programs-of-study)
 
 ## Contact Information
 

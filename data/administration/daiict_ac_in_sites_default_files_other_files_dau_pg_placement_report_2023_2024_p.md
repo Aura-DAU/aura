@@ -240,13 +240,14 @@ Total 111
 Note: The entries in the ‘Data’ column specify the data points for which the minimum, maximum,
 mean and median are specified.
 
-4.1 I Head — Domestic Offers (INR
-Salary Min Max Median Mean Data
-A. Fixed Yearly Cash Component 2,95,720 18,00,000 5,85,564 6,76,095 111
-B. One-time Cash Payment 14,436  1,00,000  1,00,000 63,886 28
-C. Total Guaranteed Cash
-Component - 2,95,720 19,00,000 6,00,000 6,92,210 121
-D. Maximum Earning Potential 3,53,728 19,00,000 7,02,400 $17,170 Lat
+### 4.1 Salary Head — Domestic Offers (INR)
+
+| Salary Head | Min | Max | Median | Mean | Data Points |
+|---|---|---|---|---|---|
+| A. Fixed Yearly Cash Component | 2,95,720 | 18,00,000 | 5,85,564 | 6,76,095 | 111 |
+| B. One-time Cash Payment | 14,436 | 1,00,000 | 1,00,000 | 63,886 | 28 |
+| C. Total Guaranteed Cash Component | 2,95,720 | 19,00,000 | 6,00,000 | 6,92,210 | 121 |
+| D. Maximum Earning Potential | 3,53,728 | 19,00,000 | 7,02,400 | 8,17,170 | 121 |
 
 Description of Salary Heads
 

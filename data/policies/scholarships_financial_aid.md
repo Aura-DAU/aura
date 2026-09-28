@@ -57,7 +57,7 @@ DAU (formerly DA-IICT) offers a range of merit-based and merit-cum-means scholar
 
 ## Related Links
 
-- [DAU Scholarships Page](https://www.daiict.ac.in/scholarships)
+- [DAU Scholarships Page](https://www.daiict.ac.in/scholarships-admission-programs-of-study)
 - [Admissions Page](https://www.daiict.ac.in/admissions)
 
 ## Contact Information

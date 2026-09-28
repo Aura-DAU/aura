@@ -34,7 +34,7 @@ Faculty Mentors
 •     5raocJi]dTn¥egnuti°dr&%ree ar£&Ps°unps:#:si:i :8Y£:;£Sjtnegm¥.e internship positions available with them, and
 Internship Structure and Duration
 •     Z#t:sse¥cEr;g:rafi#.££]e¥gt£:fi#ynFdnbfy°raafapceui&d£:netf8rTt weeks between May and July. Specific
-•i:treeTds£:eo:Xfietit:#et£::a°cE::|tyft±°efto¥:n]mumof40hoursperweektotheirresearchproject,as
+The internship has a standard duration of 8 weeks during the summer vacation. Selected students are expected to devote a minimum of 40 hours per week to their research project under the designated faculty supervisor.
 •     Frhoec :3§:8Lcchhparsoj[Pt::awj[r]et¥epj:ea#dr:tqau!roe[]tehcet£So¥,d3gttat:nean[;gigs: £:%r:?eunstfaas,i;cis£::€:£5: search
 preparation or presentation.
 Stipend and Housing

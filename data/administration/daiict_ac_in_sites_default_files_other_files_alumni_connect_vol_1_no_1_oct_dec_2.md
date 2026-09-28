@@ -1,6 +1,6 @@
 ---
 title: "People / Alumini / Alumini Newsletter Vol1 No1"
-url: "https://www.daiict.ac.in/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf"
+url: "https://www.daiict.ac.in/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdffiles/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf"
 category: "administration"
 scraped_by: "Om Patel"
 scraped_date: "2026-05-31"
@@ -212,12 +212,12 @@ multidisciplinary and interdisciplinary programs.
 Necessary changes have been made to the UGC
 records. UGC Notification for the change in the name
 can be accessed at:
-https://www.daiict.ac.in/sites/default/files/other-
+https://www.daiict.ac.in/sites/default/files/other-files/Alumni-Connect_Vol-1_No-1_Oct-Dec_2025.pdf
 files/UGC-Notification-Change-of-
 name_DAU_2F_25-June-2024.pdf 
 New visual identity/logo has been introduced, design
 concept of the new visual identity can be accessed at:
-https://www.daiict.ac.in/dhirubhai-ambani-
+https://www.daiict.ac.in/
 university-launches-its-visual-identity
 4
 I

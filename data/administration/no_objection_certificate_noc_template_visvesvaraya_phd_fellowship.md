@@ -40,4 +40,4 @@ A candidate applying under the **External Part-Time category** must:
 - **Applicable to:** External Part-Time PhD candidates under the Visvesvaraya PhD Scheme
 - **Funding body:** Ministry of Electronics and Information Technology (MeitY), Government of India
 - **Nodal Officer (DAU):** Prof. Jyoti Prakash Mishra
-- **Related webpage:** [https://www.daiict.ac.in/visvesvaraya-phd-scheme](https://www.daiict.ac.in/visvesvaraya-phd-scheme)
+- **Related webpage:** [[Visvesvaraya PhD Scheme](https://www.daiict.ac.in/visvesvaraya-phd-scheme)

@@ -7,7 +7,11 @@ scraped_date: "2026-05-31"
 team: "Team E"
 source_type: Excel
 pdf_name: "N.I.R.F. / UG campus Placement"
+academic_years: "2013-2016"
+nirf_cycle: "2016"
+temporal_note: "Historical dataset covering 2013-2016 academic years from the 2016 NIRF submission. For current audited statistics, refer to 2023-2024 placement reports."
 ---
+
 
 # N.I.R.F. / UG campus Placement
 
@@ -120,5 +124,5 @@ This document is a Excel resource from DA-IICT / DAU. Content below has been ext
 |  |  | Success Factors | 1 | 800000 | 800000 | 800000 | 800000 |
 |  |  | TCS | 20 | 330000 | 330000 | 330000 | 330000 |
 |  |  | WIPRO | 5 | 330000 | 330000 | 330000 | 330000 |
-|  |  | Yahoo | 5 | 1030000.0000000001 | 1030000.0000000001 | 1030000.0000000001 | 1030000.0000000001 |
+|  |  | Yahoo | 5 | 1030000 | 1030000 | 1030000 | 1030000 |
 |  |  | ZS Associates | 4 | 634000 | 634000 | 634000 | 634000 |

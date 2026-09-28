@@ -2721,7 +2721,7 @@ with
 proportional delays, Mathematics and 
 Computers in Simulation, ISSN 0378-4754, 
 Vol. 240, Jul. 2025, Pp. 367-380, DOI: 
-https://doi.org/10.1016/j.matcom.2025.0
+https://doi.org/10.1016/j.matcom.2025.07.035
 7.035. 
 27. Harsh Panara, Naitik Thakor, Nisarg Jadav, 
 and Rutu 
@@ -2795,7 +2795,7 @@ Communication,
 Apr 
 2025, 
 DOI: 
-https://doi.org/10.1016/j.image.2025.117
+https://doi.org/10.1016/j.image.2025.117321
 321 
 33. Sudip Bera, "On the strong domination 
 number of proper enhanced power graphs 
@@ -2846,7 +2846,7 @@ International Journal of Foundations of
 Computer Science, World Scientific, April 
 2025, 
 DOI: 
-https://doi.org/10.1016/j.tcs.2025.11508
+https://doi.org/10.1016/j.tcs.2025.115089
 9
 
 47 
@@ -3176,7 +3176,7 @@ Artifact Corrections in X-ray MicroCT
 images, 11th International Conference on 
 Mathematics and Computing, ICMC, IIT 
 Bhilai, 2025, 1st January 2025, DOI: 
-https://link.springer.com/book/97898196
+https://link.springer.com/book/9789819663507
 63507 
 9. Miral Shah, Libin Varghese, Bhaskar 
 Chaudhury, 
@@ -3191,7 +3191,7 @@ held in HYBRID MODE, Barcelona, Spain,
 Nov. 
 2024, 
 DOI: 
-https://hpcfusion.bsc.es/wordpress/wp-
+https://hpcfusion.bsc.es/
 content/uploads/2024/10/ 
 10. Kalp Pandya, and Bhaskar Chaudhury, "A 
 Hybrid Approach using Deep Learning and 
