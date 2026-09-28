@@ -938,7 +938,7 @@ class RetrievalPipeline:
         )
         if search.get("final") is not None:
             return search["final"]
-        return self._assemble_context(search, academic_scope=academic_scope)
+        return self._assemble_context(search["search"], academic_scope=academic_scope)
 
     def _search_context(
         self,
