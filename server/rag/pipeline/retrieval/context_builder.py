@@ -304,16 +304,10 @@ class ContextBuilder:
             # Fix: include chunk-position coordinates in the fallback so each
             # distinct chunk location always gets its own citation card.
             if url:
-                dedup_key = url
-            elif relative_path:
-                dedup_key = f"{relative_path}:{start_line_val}-{end_line_val}"
-            elif title_str:
-                dedup_key = f"{title_str}:idx{doc_id}"
-            else:
-                dedup_key = None
-
-            if url:
-                dedup_key = url
+                if start_line_val or end_line_val:
+                    dedup_key = f"{url}#{start_line_val}-{end_line_val}"
+                else:
+                    dedup_key = f"{url}:idx{doc_id}"
             elif relative_path:
                 dedup_key = f"{relative_path}:{start_line_val}-{end_line_val}"
             elif title_str:

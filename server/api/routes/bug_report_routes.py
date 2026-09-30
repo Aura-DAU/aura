@@ -21,6 +21,7 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, field_validator
 
+from access_control import resolve_effective_role
 from api.auth import Identity, require_identity
 from api.schemas import ALLOWED_IMAGE, BUG_CATEGORIES, BUG_STATUSES, MAX_IMAGE_BYTES
 from db.connection import get_conn
@@ -28,6 +29,8 @@ from db.connection import get_conn
 logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["bug-report"])
+
+ADMIN_LEVEL_ROLES = {"admin_staff", "superadmin"}
 
 # Directory bug-report screenshots are written to. Configurable so deploys
 # can point it at a mounted volume; falls back to a local dir in dev.
@@ -45,7 +48,8 @@ _IMAGE_MEDIA_TYPES = {
 
 
 def _require_admin(identity: Identity = Depends(require_identity)) -> Identity:
-    if identity.role != "admin":
+    effective_role = resolve_effective_role(identity)
+    if effective_role not in ADMIN_LEVEL_ROLES:
         raise HTTPException(status_code=403, detail="Admin access required.")
     return identity
 
