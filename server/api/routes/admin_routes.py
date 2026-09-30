@@ -31,6 +31,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import uuid
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field, field_validator
 from typing import Literal, Optional
@@ -776,6 +777,11 @@ def get_query_trace_detail(
     id: str,
     admin: Identity = Depends(_require_admin),
 ):
+    try:
+        uuid.UUID(id)
+    except (ValueError, AttributeError):
+        raise HTTPException(status_code=400, detail="Invalid query trace UUID format")
+
     rows = db_conn.query(
         """SELECT
             id, created_at, erp_id, user_role, user_dept,

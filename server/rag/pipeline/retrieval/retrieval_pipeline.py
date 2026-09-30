@@ -125,6 +125,7 @@ class RetrievalPipeline:
         self.faculty_names = []
         self.faculty_names_lower = []
         self.faculty_names_map = {}
+        self.faculty_initials_map = {}
         if metadata_path.exists():
             try:
                 with open(metadata_path, "r", encoding="utf-8") as f:
@@ -145,7 +146,54 @@ class RetrievalPipeline:
             except Exception as e:
                 logger.warning("Failed to load faculty names from metadata.json: %s", e)
         else:
-            logger.warning("metadata.json not found at %s. Fuzzy faculty matching disabled.", metadata_path)
+            logger.warning("metadata.json not found at %s. Checking fallback config.", metadata_path)
+
+        if not self.faculty_names:
+            config_path = Path(__file__).resolve().parent.parent / "config.json"
+            if config_path.exists():
+                try:
+                    with open(config_path, "r", encoding="utf-8") as f:
+                        cfg = json.load(f)
+                    fl = cfg.get("faculty_list", [])
+                    if fl:
+                        self.faculty_names = sorted(list(set(f.strip() for f in fl if isinstance(f, str) and f.strip())))
+                        self.faculty_names_lower = [n.lower() for n in self.faculty_names]
+                        self.faculty_names_map = {n.lower(): n for n in self.faculty_names}
+                        logger.info("Loaded %d faculty names from config.json fallback.", len(self.faculty_names))
+                except Exception as e:
+                    logger.warning("Failed to load faculty from config.json: %s", e)
+
+        # Build faculty initials mapping from abbreviations file and names
+        try:
+            abbrev_path = Path(__file__).resolve().parents[4] / "data" / "faculty" / "faculty_name_abbreviations_raw.txt"
+            if abbrev_path.exists():
+                with open(abbrev_path, "r", encoding="utf-8") as f:
+                    for line in f:
+                        m = re.search(r"^(.+?)\s*\(([A-Za-z0-9]+)\)", line.strip())
+                        if m:
+                            raw_n, init = m.group(1).strip().lstrip("\x0c"), m.group(2).strip().upper()
+                            if init and init != "VF":
+                                self.faculty_initials_map[init] = raw_n
+
+            for fn in self.faculty_names:
+                tokens = [w for w in re.split(r"[\s\-]+", fn) if w and w[0].isalpha()]
+                if len(tokens) >= 2:
+                    i2 = (tokens[0][0] + tokens[-1][0]).upper()
+                    if i2 not in self.faculty_initials_map:
+                        self.faculty_initials_map[i2] = fn
+                    if len(tokens) >= 3:
+                        i3 = "".join(w[0] for w in tokens).upper()
+                        if i3 not in self.faculty_initials_map:
+                            self.faculty_initials_map[i3] = fn
+
+            # Known canonical initials
+            WELL_KNOWN_INITIALS = {
+                "PM": "Prasenjit Majumder",
+            }
+            for k, v in WELL_KNOWN_INITIALS.items():
+                self.faculty_initials_map[k] = v
+        except Exception as e:
+            logger.warning("Failed to build faculty initials map: %s", e)
 
         # ── Entity-based retrieval (professor's algorithm) ─────────────────
         # Chunks → Triples → Entity → Chunk Pool
@@ -765,8 +813,13 @@ class RetrievalPipeline:
         token_score = fuzz.token_sort_ratio(query, candidate)
         
         if len(q_parts) == 1:
-            # Query is a single name. Fallback weights: Full Name 90%, Token 10%
-            return (full_score * 0.90) + (token_score * 0.10)
+            q_token = q_parts[0]
+            c_first = c_parts[0]
+            c_last = c_parts[-1] if len(c_parts) > 1 else ""
+            first_score = fuzz.ratio(q_token, c_first)
+            last_score = fuzz.ratio(q_token, c_last) if c_last else 0.0
+            name_part_score = max(first_score, last_score)
+            return (name_part_score * 0.70) + (full_score * 0.25) + (token_score * 0.05)
             
         q_first = q_parts[0]
         q_last = q_parts[-1]
@@ -795,8 +848,20 @@ class RetrievalPipeline:
         
         # Strip common titles before fuzzy matching
         cleaned = re.sub(r"^(prof\b\.?|professor\b|dr\b\.?|mr\b\.?|ms\b\.?|mrs\b\.?)\s*", "", name, flags=re.IGNORECASE).strip()
+        cleaned = re.sub(r"\s*(sir|madam|ma'am|dr|prof)$", "", cleaned, flags=re.IGNORECASE).strip()
+
+        # Check initials mapping (e.g. "PM", "AJ", "AMM", "PD", "AT", "PM sir")
+        cleaned_initials = re.sub(r"[.\s]+", "", cleaned.upper())
+        if hasattr(self, "faculty_initials_map") and cleaned_initials in self.faculty_initials_map:
+            resolved_name = self.faculty_initials_map[cleaned_initials]
+            logger.info("Resolved faculty initials '%s' -> '%s'", cleaned_initials, resolved_name)
+            return {
+                "original": name,
+                "matches": [{"name": resolved_name, "score": 100.0}],
+                "confidence": 100.0,
+            }
         
-        # Avoid matching short, generic terms
+        # Avoid matching short, generic terms unless recognized as initials above
         if len(cleaned) < 3:
             return result
             
@@ -806,25 +871,25 @@ class RetrievalPipeline:
         if not matches:
             return result
             
-        best_match = matches[0]
-        s1 = best_match[1]
-        if s1 >= 80.0:
-            if not self._first_name_agrees(cleaned.lower(), best_match[0]):
-                # WRatio rewards partial/substring overlap, so a query like
-                # "hari sharma" can score ~85 against "madhu kant sharma"
-                # purely because the surname matches — even though it's a
-                # completely different person. Don't silently swap in the
-                # wrong faculty member just because the surname matched;
-                # require the first name to be reasonably close too.
+        # Filter out candidates where surname might match but first name diverges strongly
+        filtered_matches = []
+        for m in matches:
+            cand_lower = m[0]
+            cand_score = m[1]
+            if cand_score >= 80.0 and not self._first_name_agrees(cleaned.lower(), cand_lower):
                 logger.info(
                     "Rejected fuzzy faculty match '%s' (cleaned: '%s') -> '%s' "
                     "(Score: %.2f): first name does not match closely enough",
-                    name, cleaned, self.faculty_names_map[best_match[0]], s1,
+                    name, cleaned, self.faculty_names_map.get(cand_lower, cand_lower), cand_score,
                 )
-                return result
+                continue
+            filtered_matches.append(m)
+
+        if not filtered_matches:
+            return result
 
         scored_candidates = []
-        for m in matches:
+        for m in filtered_matches:
             m_name = m[0]
             corrected = self.faculty_names_map[m_name]
             score = self._smart_score(cleaned, m_name)
@@ -832,6 +897,8 @@ class RetrievalPipeline:
 
         # Sort by smart score descending
         scored_candidates.sort(key=lambda x: x["score"], reverse=True)
+        if not scored_candidates:
+            return result
 
         highest_score = scored_candidates[0]["score"]
 
@@ -842,7 +909,7 @@ class RetrievalPipeline:
         elif highest_score >= 60.0:
             result["matches"] = scored_candidates[:3]
         else:
-            result["matches"] = scored_candidates[:5]
+            result["matches"] = []
 
         result["confidence"] = highest_score
 
